@@ -79,8 +79,6 @@ import java.util.zip.DataFormatException;
 
 import junit.framework.TestCase;
 
-import org.cip4.jdflib.core.JDFException;
-
 public class JDFDateTest extends TestCase
 {
     public void testBadDate()
@@ -88,8 +86,7 @@ public class JDFDateTest extends TestCase
         try
         {
             JDFDate date = new JDFDate("1999+09-26T11:43:10+03:00");
-            assertNotNull(date); // dummy to fool compiler
-            fail("date exception");
+            fail("date exception: "+date);
         }
         catch(DataFormatException dfe)
         {
@@ -98,10 +95,7 @@ public class JDFDateTest extends TestCase
         try
         {
             JDFDate date = new JDFDate("1999");
-            String strDate = date.getDateTimeISO();
-            assertTrue("Bug "+strDate+" is not equal to 1999-09-26T11:43:10+03:00", 
-                    strDate.equals("1999-09-26T11:43:10+03:00"));
-            fail("date exception");
+            fail("date exception: "+date);
         }
         catch(DataFormatException dfe)
         {
@@ -110,15 +104,52 @@ public class JDFDateTest extends TestCase
         try
         {
             JDFDate date = new JDFDate(null);
-            String strDate = date.getDateTimeISO();
-            assertTrue("Bug "+strDate+" is not equal to 1999-09-26T11:43:10+03:00", 
-                    strDate.equals("1999-09-26T11:43:10+03:00"));
-            fail("date exception");
+            fail("date exception: "+date);
         }
         catch(DataFormatException dfe)
         {
 //
         }
+        try
+        {
+            JDFDate date = new JDFDate("1975-01-01T20:00:10.5");
+            fail("date exception: "+date);
+        }
+        catch(DataFormatException dfe)
+        {
+//
+        }
+        try
+        {
+            JDFDate date = new JDFDate("2004-11-26T11:43:10.33-03");
+            fail("date exception: "+date);
+        }
+        catch(DataFormatException dfe)
+        {
+//
+        }
+        try
+        {
+            JDFDate date = new JDFDate("2004-11-26T11:43:10.-0300");
+            fail("date exception: "+date);
+        }
+        catch(DataFormatException dfe)
+        {
+//
+        }
+                
+    }
+    /**
+     * Method testdateTimeISO.
+     */
+    public void testdateOnly() throws Exception
+    {
+        JDFDate date = new JDFDate();
+        String strDate = date.getDateTimeISO();
+        date = new JDFDate("2006-11-26");
+        strDate = date.getDateTimeISO();
+        assertEquals("Bug "+strDate,strDate,"2006-11-26T00:00:00+00:00");
+
     }
     /**
      * Method testdateTimeISO.
@@ -205,8 +236,8 @@ public class JDFDateTest extends TestCase
             strDate = date.getDateTimeISO();
             assertTrue("Bug "+strDate+" is not equal to 2004-11-26T11:43:10-03:00", 
                        strDate.equals("2004-11-26T11:43:10-03:00"));
-
-        }
+            
+         }
         catch(DataFormatException dfe)
         {
         	System.out.println(dfe.getMessage());
@@ -217,7 +248,28 @@ public class JDFDateTest extends TestCase
     
     //////////////////////////////////////////////////////////
     
-    public void testMyDateLong() 
+    public void testEquals() throws Exception
+    {
+        JDFDate date1=new JDFDate();
+        JDFDate date2=new JDFDate();
+        assertEquals(date1, date2);
+        assertTrue(date1.equals(date2));
+    }    
+    //////////////////////////////////////////////////////////
+    
+    public void testCompare2() throws Exception
+    {
+        JDFDate date1=new JDFDate();
+        JDFDate date2=new JDFDate();
+        assertEquals(date1.compareTo(date2), 0);
+        date2.setOffset(10000); // it is now later
+        assertTrue(date1.compareTo(date2)<0);
+        assertTrue(date2.compareTo(date1)>0);
+    }    
+    
+    //////////////////////////////////////////////////////////
+
+    public void testMyDateLong() throws Exception
     {
         long timeMilli = 1008745211300L;        // 2001-12-19T07:00:11+00:00
         
@@ -225,18 +277,18 @@ public class JDFDateTest extends TestCase
         assertTrue("Bug " + date.getTimeInMillis() + " is not equal to 1008745211000L", date.getTimeInMillis() == timeMilli);
 
         String strDate = date.getDateTimeISO();
-        JDFDate date2 = null;
-        try
-        {
-            date2 = new JDFDate("2001-12-19T07:00:11.300+00:00");
-        }
-        catch (DataFormatException e)
-        {
-            throw new JDFException("Error in JDFDateTest.testMyDateLong()");
-        }
+        JDFDate date2 = new JDFDate("2001-12-19T07:00:11.300+00:00");
+        
         String strDate2 = date2.getDateTimeISO();
-        assertTrue("Bug "+strDate+" is not equal to "+strDate2, 
-                   date.equals(date2)/*strDate.equals("2001-12-19T07:00:11+00:00")*/);
+        assertEquals("Bug "+strDate+" is not equal to "+strDate2,date, date2);
+       
+        JDFDate date3 = new JDFDate("2001-12-19T07:00:11.300-00:00");        
+        String strDate3 = date3.getDateTimeISO();
+        assertEquals("Bug "+strDate+" is not equal to "+strDate3, date,date3);
+        
+        JDFDate date4 = new JDFDate("2001-12-19T07:00:11.300Z");
+        String strDate4 = date4.getDateTimeISO();
+        assertEquals("Bug "+strDate+" is not equal to "+strDate4, date,date4);
     }
 
     ///////////////////////////////////////////////////////

@@ -108,15 +108,5 @@ public class JDFEnumerationSpanTest extends JDFTestCaseBase
         bl.setRange(v);
         Vector v2=bl.getRange();
         assertEquals("Range",v,v2);
-        v.add(EnumSpanBindingSide.Bottom);
-        try
-        {
-            bl.setRange(v);
-            fail("bad - mixed vector data");
-        }
-        catch (JDFException ex)
-        {
-            // ok
-        }
      }  
 }

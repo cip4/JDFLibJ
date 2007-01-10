@@ -69,9 +69,12 @@
  */
 package org.cip4.jdflib;
 
+import java.io.File;
+
 import junit.framework.TestCase;
 
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 
 /**
@@ -82,10 +85,13 @@ import org.cip4.jdflib.datatypes.JDFIntegerRange;
  */
 public abstract class JDFTestCaseBase extends TestCase
 {
-    static protected final String fileSeparator      = System.getProperty("file.separator");
-    static protected final String sm_dirTestSchema   = "test" + fileSeparator + "Schema" + fileSeparator;
-    static protected final String sm_dirTestData     = "test" + fileSeparator + "data" + fileSeparator;
-    static protected final String sm_dirTestDataTemp = sm_dirTestData + "temp" + fileSeparator;
+    /**
+     * @deprecated use File.seseparator
+     */
+    static protected final String fileSeparator      = File.separator;
+    static protected final String sm_dirTestSchema   = "test" + File.separator + "Schema" + File.separator;
+    static protected final String sm_dirTestData     = "test" + File.separator + "data" + File.separator;
+    static protected final String sm_dirTestDataTemp = sm_dirTestData + "temp" + File.separator;
     
     
 /////////////////////////////////////////////////////////////////////////////
@@ -93,10 +99,21 @@ public abstract class JDFTestCaseBase extends TestCase
     protected void setUp() throws Exception
     {
         super.setUp();
-        JDFElement.setLongID(true);
         JDFElement.uniqueID(1);
         JDFIntegerRange.setDefaultDef(0);
     }
+    
+    /* (non-Javadoc)
+     * @see junit.framework.TestCase#tearDown()
+     */
+    protected void tearDown() throws Exception
+    {
+        super.tearDown();
+        JDFElement.setLongID(true);
+        JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_3);
+
+    }
+    
 }
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////

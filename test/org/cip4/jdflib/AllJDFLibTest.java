@@ -75,6 +75,7 @@ import org.cip4.jdflib.auto.AutoTest;
 import org.cip4.jdflib.auto.JDFClassInstantiationTest;
 import org.cip4.jdflib.core.AttrInfoTest;
 import org.cip4.jdflib.core.ContentCreationTest;
+import org.cip4.jdflib.core.DigiPrintTest;
 import org.cip4.jdflib.core.DocumentJDFImplTest;
 import org.cip4.jdflib.core.ElemInfoTest;
 import org.cip4.jdflib.core.FactoryTest;
@@ -85,6 +86,7 @@ import org.cip4.jdflib.core.JDFCustomerInfoTest;
 import org.cip4.jdflib.core.JDFDocTest;
 import org.cip4.jdflib.core.JDFElementTest;
 import org.cip4.jdflib.core.JDFExampleDocTest;
+import org.cip4.jdflib.core.JDFNodeInfoTest;
 import org.cip4.jdflib.core.JDFRefElementTest;
 import org.cip4.jdflib.core.JDFResourceLinkTest;
 import org.cip4.jdflib.core.JDFSourceResourceTest;
@@ -93,10 +95,12 @@ import org.cip4.jdflib.core.MISFinTest;
 import org.cip4.jdflib.core.NColorTest;
 import org.cip4.jdflib.core.VElementTest;
 import org.cip4.jdflib.core.VStringTest;
+import org.cip4.jdflib.core.WebTest;
 import org.cip4.jdflib.core.XMLDocTest;
 import org.cip4.jdflib.datatypes.JDFAttributeMapTest;
 import org.cip4.jdflib.datatypes.JDFDateTimeRangeTest;
 import org.cip4.jdflib.datatypes.JDFDurationRangeTest;
+import org.cip4.jdflib.datatypes.JDFEnumerationTest;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeListTest;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeTest;
 import org.cip4.jdflib.datatypes.JDFNumListTest;
@@ -109,6 +113,7 @@ import org.cip4.jdflib.datatypes.JDFShapeRangeListTest;
 import org.cip4.jdflib.datatypes.JDFURLTest;
 import org.cip4.jdflib.datatypes.JDFXYPairRangeListTest;
 import org.cip4.jdflib.datatypes.JDFXYPairTest;
+import org.cip4.jdflib.datatypes.VJDFAttributeMapTest;
 import org.cip4.jdflib.devicecapability.JDFActionPoolTest;
 import org.cip4.jdflib.devicecapability.JDFDevCapTest;
 import org.cip4.jdflib.devicecapability.JDFDeviceCapTest;
@@ -116,6 +121,8 @@ import org.cip4.jdflib.devicecapability.JDFEvaluationTest;
 import org.cip4.jdflib.devicecapability.JDFStateBaseTest;
 import org.cip4.jdflib.devicecapability.JDFTestTest;
 import org.cip4.jdflib.jmf.JDFMessageTest;
+import org.cip4.jdflib.jmf.JMFResourceTest;
+import org.cip4.jdflib.jmf.JMFStatusTest;
 import org.cip4.jdflib.jmf.JMFTest;
 import org.cip4.jdflib.jmf.QueueTest;
 import org.cip4.jdflib.node.JDFNodeProductTest;
@@ -124,16 +131,24 @@ import org.cip4.jdflib.pool.JDFAmountPoolTest;
 import org.cip4.jdflib.pool.JDFAuditPoolTest;
 import org.cip4.jdflib.pool.JDFColorPoolTest;
 import org.cip4.jdflib.pool.JDFResourceLinkPoolTest;
+import org.cip4.jdflib.pool.JDFResourcePoolTest;
+import org.cip4.jdflib.resource.JDFAssemblySectionTest;
 import org.cip4.jdflib.resource.JDFAutoResourceTest;
 import org.cip4.jdflib.resource.JDFFilespecTest;
+import org.cip4.jdflib.resource.JDFLayerListTest;
 import org.cip4.jdflib.resource.JDFLayoutTest;
 import org.cip4.jdflib.resource.JDFMediaColorTest;
 import org.cip4.jdflib.resource.JDFResourceTest;
+import org.cip4.jdflib.resource.PhaseTimeTest;
+import org.cip4.jdflib.resource.ProcessRunTest;
 import org.cip4.jdflib.resource.process.JDFColorConversionParamsTest;
 import org.cip4.jdflib.resource.process.JDFColorantControlTest;
+import org.cip4.jdflib.resource.process.JDFCutBlockTest;
 import org.cip4.jdflib.resource.process.JDFMediaTest;
+import org.cip4.jdflib.resource.process.JDFPRItemTest;
 import org.cip4.jdflib.resource.process.JDFRunListTest;
 import org.cip4.jdflib.resource.process.JDFTileTest;
+import org.cip4.jdflib.resource.process.JDFUsageCounterTest;
 import org.cip4.jdflib.span.JDFEnumerationSpanTest;
 import org.cip4.jdflib.util.HashUtilTest;
 import org.cip4.jdflib.util.JDFDateTest;
@@ -162,6 +177,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         // core
         suite.addTestSuite(AttrInfoTest.class);
         suite.addTestSuite(ContentCreationTest.class);
+        suite.addTestSuite(DigiPrintTest.class);
         suite.addTestSuite(DocumentJDFImplTest.class);
         suite.addTestSuite(ElemInfoTest.class);
         suite.addTestSuite(FactoryTest.class);
@@ -172,6 +188,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JDFDocTest.class);
         suite.addTestSuite(JDFElementTest.class);
         suite.addTestSuite(JDFExampleDocTest.class);
+        suite.addTestSuite(JDFNodeInfoTest.class);
         suite.addTestSuite(JDFResourceLinkTest.class);
         suite.addTestSuite(JDFRefElementTest.class);
         suite.addTestSuite(JDFSourceResourceTest.class);
@@ -180,12 +197,14 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(NColorTest.class);
         suite.addTestSuite(VElementTest.class);
         suite.addTestSuite(VStringTest.class);
+        suite.addTestSuite(WebTest.class);
         suite.addTestSuite(XMLDocTest.class);
         
         // datatype
         suite.addTestSuite(JDFAttributeMapTest.class);
         suite.addTestSuite(JDFDateTimeRangeTest.class);
         suite.addTestSuite(JDFDurationRangeTest.class);
+        suite.addTestSuite(JDFEnumerationTest.class);
         suite.addTestSuite(JDFIntegerRangeTest.class);
         suite.addTestSuite(JDFIntegerRangeListTest.class);
         suite.addTestSuite(JDFNumberRangeListTest.class);
@@ -198,6 +217,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JDFShapeRangeListTest.class);
         suite.addTestSuite(JDFXYPairRangeListTest.class);
         suite.addTestSuite(JDFXYPairTest.class);
+        suite.addTestSuite(VJDFAttributeMapTest.class);
         
         // capabilities and preflight
         suite.addTestSuite(JDFActionPoolTest.class);
@@ -209,6 +229,8 @@ public class AllJDFLibTest extends JDFTestCaseBase
         
         // JMF
         suite.addTestSuite(JDFMessageTest.class);
+        suite.addTestSuite(JMFResourceTest.class);
+        suite.addTestSuite(JMFStatusTest.class);
         suite.addTestSuite(JMFTest.class);
         suite.addTestSuite(QueueTest.class);
         
@@ -221,20 +243,28 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JDFAuditPoolTest.class);
         suite.addTestSuite(JDFColorPoolTest.class);
         suite.addTestSuite(JDFResourceLinkPoolTest.class);
+        suite.addTestSuite(JDFResourcePoolTest.class);
         
         //resource
+        suite.addTestSuite(ProcessRunTest.class);
+        suite.addTestSuite(PhaseTimeTest.class);
         suite.addTestSuite(JDFAutoResourceTest.class);
         suite.addTestSuite(JDFFilespecTest.class);
+        suite.addTestSuite(JDFAssemblySectionTest.class);
+        suite.addTestSuite(JDFLayerListTest.class);
         suite.addTestSuite(JDFLayoutTest.class);
         suite.addTestSuite(JDFMediaColorTest.class);
         suite.addTestSuite(JDFResourceTest.class);
  
         // resource.process
         suite.addTestSuite(JDFColorantControlTest.class);
+        suite.addTestSuite(JDFColorConversionParamsTest.class);
+        suite.addTestSuite(JDFCutBlockTest.class);
         suite.addTestSuite(JDFMediaTest.class);
+        suite.addTestSuite(JDFPRItemTest.class);
         suite.addTestSuite(JDFRunListTest.class);
         suite.addTestSuite(JDFTileTest.class);
-        suite.addTestSuite(JDFColorConversionParamsTest.class);
+        suite.addTestSuite(JDFUsageCounterTest.class);
         
         // util
         suite.addTestSuite(MimeUtilTest.class);

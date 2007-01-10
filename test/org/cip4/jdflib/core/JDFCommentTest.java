@@ -70,6 +70,8 @@
  */
 package org.cip4.jdflib.core;
 
+import java.io.File;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
@@ -108,7 +110,7 @@ public class JDFCommentTest extends JDFTestCaseBase
         c21.setText(txt2);
         assertEquals("text is equal in DOM",txt,c11.getText());
         assertEquals("text is equal in DOM",txt2,c21.getText());
-        final String commentFile = sm_dirTestDataTemp+fileSeparator+"CommentTest.JDF";
+        final String commentFile = sm_dirTestDataTemp+File.separator+"CommentTest.JDF";
         doc.write2File(commentFile,2,true);
         JDFParser p=new JDFParser();
         JDFDoc doc2 = p.parseFile(commentFile);
@@ -120,5 +122,16 @@ public class JDFCommentTest extends JDFTestCaseBase
      }     
  
     /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    public void testEraseEmptyNodes()
+    {
+        JDFDoc doc = new JDFDoc(ElementName.JDF);
+        JDFNode root = doc.getJDFRoot();
+        JDFComment c11 = root.appendComment();
+        String txt = "      \n\n";
+        c11.setText(txt);
+        root.eraseEmptyNodes(true);
+        assertEquals("whitespace is not removed",txt,c11.getText());
+    }
 
 }

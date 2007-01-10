@@ -117,6 +117,13 @@ public class QueueTest extends TestCase
         assertEquals("date",d.getTimeInMillis(),new JDFDate().getTimeInMillis(),1000);        
     }
     
+    public void testEndTime()
+    {
+        JDFQueueEntry _qe = (JDFQueueEntry) new JDFDoc(ElementName.QUEUEENTRY).getRoot();
+        JDFDate date = _qe.getEndTime();
+        int i=0;
+    }
+
 /////////////////////////////////////////////////////////////////////////////
     
 }

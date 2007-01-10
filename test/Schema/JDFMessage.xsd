@@ -1354,10 +1354,15 @@
 		<xs:annotation>
 			<xs:appinfo>
 				<Version Path="@ActualAmount" First="1.2"/>
+				<Version Path="@ModuleIndex" First="1.3"/>
+				<Version Path="@ModuleID" First="1.3"/>
 				<Version Path="@ProductID" First="1.2"/>
 				<Version Path="@Status" First="1.2"/>
+				<Version Path="@Usage" First="1.3"/>
+				<Version Path="AmountPool" First="1.3"/>
 				<Version Path="MISDetails" First="1.2"/>
 				<Version Path="Part" First="1.2"/>
+				<Constraint Path="AmountPool" minOccurs="0" maxOccurs="1"/>
 				<Constraint Path="CostCenter" minOccurs="0" maxOccurs="1"/>
 				<Constraint Path="MISDetails" minOccurs="0" maxOccurs="1"/>
 				<Constraint Path="Part" minOccurs="0" maxOccurs="unbounded"/>
@@ -1374,7 +1379,6 @@
 				<Version Path="@Status" First="1.2"/>
 				<Version Path="@UpdateIDs" First="1.1"/>
 				<Version Path="MISDetails" First="1.2"/>
-				<Version Path="MISDerailsRef" First="1.2"/>
 				<Version Path="Part" First="1.2"/>
 				<Constraint Path="MISDetails" minOccurs="0" maxOccurs="1"/>
 				<Constraint Path="Part" minOccurs="0" maxOccurs="unbounded"/>
@@ -1419,11 +1423,14 @@
 				<xs:attribute name="Level" type="jdftyp:eResourceInfo_m_Level_" default="OK"/>
 				<xs:attribute name="Location" type="jdftyp:string" use="optional"/>
 				<xs:attribute name="ModuleID" type="jdftyp:string" use="optional"/>
-				<xs:attribute name="ResourceName" type="jdftyp:NMTOKEN" use="optional"/>
+				<xs:attribute name="ModuleIndex" type="jdftyp:IntegerRangeList" use="optional"/>
 				<xs:attribute name="ProcessUsage" type="jdftyp:NMTOKEN" use="optional"/>
 				<xs:attribute name="ProductID" type="jdftyp:shortString" use="optional"/>
+				<xs:attribute name="ResourceID" type="jdftyp:NMTOKEN" use="optional"/>
+				<xs:attribute name="ResourceName" type="jdftyp:NMTOKEN" use="optional"/>
 				<xs:attribute name="Status" type="jdftyp:eResourceStatus_" use="optional"/>
 				<xs:attribute name="Unit" type="jdftyp:string" use="optional"/>
+				<xs:attribute name="Usage" type="jdftyp:eUsage_" use="optional"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>

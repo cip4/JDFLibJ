@@ -38,7 +38,7 @@
  *
  * Usage of this software in commercial products is subject to restrictions. For
  * details please consult info@cip4.org.
- *
+  *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -78,7 +78,6 @@
 package org.cip4.jdflib.devicecapability;
 
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import junit.framework.TestCase;
 
@@ -122,76 +121,76 @@ public class JDFStateBaseTest extends TestCase
         JDFResponse resp =(JDFResponse) jmf.appendMessageElement(EnumFamily.Response,JDFMessage.EnumType.KnownDevices);
         deviceCap=resp.appendDeviceList().appendDeviceInfo().appendDevice().appendDeviceCap();
     }
-
+    
     ////////////////////////////////////////////////////
-
+    
     public final void testGetNamePath()
     {
         JDFParser p = new JDFParser();
         String strNode =
             "<DevCaps Name=\"RenderingParams\" LinkUsage=\"Input\">" +
-            "<DevCap>"+
-            "<DevCap Name=\"AutomatedOverprintParams\">" +
-            "<BooleanState Name=\"OverPrintBlackText\" DefaultValue=\"true\" AllowedValueList=\"true false\"/>" +
-            "<BooleanState Name=\"OverPrintBlackLineArt\" DefaultValue=\"true\" AllowedValueList=\"true false\"/>" +
-            "</DevCap>" +
-            "</DevCap>" +
+              "<DevCap>"+
+                "<DevCap Name=\"AutomatedOverprintParams\">" +
+                   "<BooleanState Name=\"OverPrintBlackText\" DefaultValue=\"true\" AllowedValueList=\"true false\"/>" +
+                   "<BooleanState Name=\"OverPrintBlackLineArt\" DefaultValue=\"true\" AllowedValueList=\"true false\"/>" +
+                "</DevCap>" +
+              "</DevCap>" +
             "</DevCaps>";
-
+            
         JDFDoc jdfDoc = p.parseString(strNode);
 
         JDFDevCaps devCaps = (JDFDevCaps) jdfDoc.getRoot();
 
         JDFBooleanState  state = (JDFBooleanState) devCaps.getChildByTagName(ElementName.BOOLEANSTATE, null, 0, null, false, true);
-
+        System.out.println(state.getNamePath());
         assertEquals("", state.getNamePath(),"RenderingParams/AutomatedOverprintParams/@OverPrintBlackText");
     }
-
+    
     public final void testFitsListType_IntegerState()
     {
         JDFIntegerRangeList list = new JDFIntegerRangeList();
         list.append(1);
         list.append(8);
         list.append(12);
-
-
+        
+        
         //System.out.println(state.fitsCompleteList(value, list));
         //System.out.println(state.fitsCompleteOrderedList(value, list));
         //System.out.println(state.fitsContainedList(value, list));
-
+        
         //state.setListType(EnumListType.List);
         //System.out.println(state.fitsListType(list.toString()));
         //System.out.println(state.getListType());
-
+        
     }
-
+    
     public final void testFitsValue_IntegerState()
     {
         JDFParser p = new JDFParser();
         String strNode = 
             "<IntegerState Name=\"BitDepth\" DefaultValue=\"1\" AllowedValueList=\"1 8 12\"/>";
-
+            
         JDFDoc jdfDoc = p.parseString(strNode);
         JDFIntegerState state = (JDFIntegerState) jdfDoc.getRoot();
 
         JDFIntegerRangeList list = new JDFIntegerRangeList();
         list.append(new JDFIntegerRange(1,12)); // 1~12
         //list.append(12);
-
+        
         state.setListType(EnumListType.RangeList);
         assertFalse("ListType=RangeList",state.fitsValue(list.toString(),JDFBaseDataTypes.EnumFitsValue.Allowed));
-
+        
         JDFIntegerRangeList list2 = new JDFIntegerRangeList();
         list2.append(new JDFIntegerRange(1,-2)); // 1~-2
-
+        
         JDFIntegerRangeList allowedVL= new JDFIntegerRangeList();
         allowedVL.append(new JDFIntegerRange(1,32)); // 1~32
-
+        
         state.setAllowedValueList(allowedVL); // new AllowedVlaueList
-
+        
         assertTrue("xDef is wrong", state.fitsValue(list2.toString(),JDFBaseDataTypes.EnumFitsValue.Allowed));
-
-
+        
+        
         list.erase(list.size()-1); // erase "1~12"
         list.append(2);
         list.append(12);
@@ -199,84 +198,84 @@ public class JDFStateBaseTest extends TestCase
         state.setListType(EnumListType.List);
         state.setAllowedValueMod(new JDFXYPair(10,2));
         assertTrue("ListType=List, ValueMod="+state.getAllowedValueMod(),
-                state.fitsValue(list.toString(),JDFBaseDataTypes.EnumFitsValue.Allowed));
-
-
+                   state.fitsValue(list.toString(),JDFBaseDataTypes.EnumFitsValue.Allowed));
+        
+        
     }
-
-
+    
+    
     public final void testFitsValue_MatrixState() throws Exception
     {
         JDFDoc jdfDoc = new JDFDoc(ElementName.JDF); 
         JDFNode root = jdfDoc.getJDFRoot();
-
-        JDFMatrix matrix1 = new JDFMatrix("1 0 0 1 3.14 21631.3");
-        JDFMatrix matrix2 = new JDFMatrix("0 1 1 0 2 21000");
-
-        Vector transforms = new Vector();
-        transforms.add(EnumOrientation.Rotate0);
-        transforms.add(EnumOrientation.Rotate270);
-        transforms.add(EnumOrientation.Flip0);
-        JDFRectangle shift = new JDFRectangle("2 4 20000 23000");
-
-        String value1 = "1 0 0 1 3.14 21631.3";
-
-        JDFMatrixState k = (JDFMatrixState) root.appendElement("MatrixState"); 
-        k.appendValue();
-        //k.setValueValueUsage(0, EnumFitsValue.Allowed);
-        k.setValueAllowedValue(0, matrix2);
-
-        k.appendValue();
-        //k.setValueValueUsage(1, EnumFitsValue.Present);
-        k.setValueAllowedValue(1, matrix1);
-
-
-        k.setAllowedTransforms(transforms);
-        k.setAllowedShift(shift);
-        k.setAllowedRotateMod(15); 
-
-
-        EnumListType lt = EnumListType.UniqueList; 
-        //JDFAbstractState.EnumListType lt = EnumListType.ListType.Unknown; 
-        //JDFAbstractState.EnumListType lt = EnumListType.ListType.List; 
-        k.setListType(lt);
-        //               EnumListType listType = k.getListType();
-
-        assertTrue("Matrix OK",k.fitsValue(value1,EnumFitsValue.Allowed));
-
-
-        String value="1 2 3 4 5 6 7 8 9 10 11 12 3 4 5 6 7 8";
-
-        VString vs = new VString(value, JDFConstants.BLANK);
-        int siz = vs.size();
+        
+                JDFMatrix matrix1 = new JDFMatrix("1 0 0 1 3.14 21631.3");
+                JDFMatrix matrix2 = new JDFMatrix("0 1 1 0 2 21000");
+        
+                Vector transforms = new Vector();
+                transforms.add(EnumOrientation.Rotate0);
+                transforms.add(EnumOrientation.Rotate270);
+                transforms.add(EnumOrientation.Flip0);
+                JDFRectangle shift = new JDFRectangle("2 4 20000 23000");
+    
+                String value1 = "1 0 0 1 3.14 21631.3";
+    
+                JDFMatrixState k = (JDFMatrixState) root.appendElement("MatrixState"); 
+                k.appendValue();
+                //k.setValueValueUsage(0, EnumFitsValue.Allowed);
+                k.setValueAllowedValue(0, matrix2);
+                
+                k.appendValue();
+                //k.setValueValueUsage(1, EnumFitsValue.Present);
+                k.setValueAllowedValue(1, matrix1);
+    
+    
+                k.setAllowedTransforms(transforms);
+                k.setAllowedShift(shift);
+                k.setAllowedRotateMod(15); 
+      
+        
+                EnumListType lt = EnumListType.UniqueList; 
+                //JDFAbstractState.EnumListType lt = EnumListType.ListType.Unknown; 
+                //JDFAbstractState.EnumListType lt = EnumListType.ListType.List; 
+                k.setListType(lt);
+ //               EnumListType listType = k.getListType();
+      
+                assertTrue("Matrix OK",k.fitsValue(value1,EnumFitsValue.Allowed));
+                
+      
+            String value="1 2 3 4 5 6 7 8 9 10 11 12 3 4 5 6 7 8";
+                                               
+            VString vs = new VString(value, JDFConstants.BLANK);
+            int siz = vs.size();
         assertEquals("It is not a Matrix",siz%6,0);
-        VString matrixList = new VString();
-        int i=0;
-        StringBuffer sb = new StringBuffer(250);
-        sb.append((String) vs.elementAt(i));
-        while ((i+1)<siz)
-        {
-            do  {
-                sb.append(JDFConstants.BLANK);
-                i++;
-                sb.append((String) vs.elementAt(i));
-            }
-            while ((i+1)%6!=0);
+            VString matrixList = new VString();
+            int i=0;
+            StringBuffer sb = new StringBuffer(250);
+            sb.append((String) vs.elementAt(i));
+            while ((i+1)<siz)
+            {
+                do  {
+                    sb.append(JDFConstants.BLANK);
+                    i++;
+                    sb.append((String) vs.elementAt(i));
+                }
+                while ((i+1)%6!=0);
             matrixList.add(sb.toString());
-            if ((i+1)<siz)
-            { 
-                i++;
-                sb = new StringBuffer(250);
-                sb.append((String) vs.elementAt(i));
+                if ((i+1)<siz)
+                { 
+                    i++;
+                    sb = new StringBuffer(250);
+                    sb.append((String) vs.elementAt(i));
+                }
             }
-        }
-        for (int z=0; z<matrixList.size(); z++)
-        {
+            for (int z=0; z<matrixList.size(); z++)
+            {
             JDFMatrix matrix3 = new JDFMatrix(matrixList.stringAt(z));
             matrix3.getA();
+            }
+            
         }
-
-    }
 
     ////////////////////////////////////////////////////////////
 
@@ -298,7 +297,7 @@ public class JDFStateBaseTest extends TestCase
         assertEquals(is.getAttribute(AttributeName.MAXOCCURS),"3");
     }
     ////////////////////////////////////////////////////////////
-
+    
     /**
      * tests defaults and handling of "unbounded"
      */
@@ -314,7 +313,7 @@ public class JDFStateBaseTest extends TestCase
         assertTrue("correctly parsed unbounded for legacy support",is.getMaxOccurs()>999);
     }
     ////////////////////////////////////////////////////////////
-
+    
     /**
      * tests defaults 
      */
@@ -323,7 +322,7 @@ public class JDFStateBaseTest extends TestCase
         JDFDevCap dc=deviceCap.appendDevCaps().appendDevCap();
         JDFIntegerState is=dc.appendIntegerState();
         assertEquals("default=1",is.getMinOccurs(),1);
-    }
+     }
 
     ////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////

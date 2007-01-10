@@ -7,10 +7,28 @@
  */
 package org.cip4.jdflib.core;
 
+import java.util.Vector;
+
 import junit.framework.TestCase;
 
 public class VElementTest extends TestCase
 {
+    public void testAddAll()
+    {
+        XMLDoc d=new XMLDoc("doc",null);
+        KElement e=d.getRoot();
+        VElement v=new VElement();
+        v.addAll((VElement)null);
+        assertEquals(v.size(), 0);
+        v.add(e);
+        assertEquals(v.size(), 1);
+        v.addAll(v);
+        assertEquals(v.size(), 2);
+        v.addAll(v);
+        assertEquals(v.size(), 4);
+        
+    }
+    
     public void testContainsElement()
     {
         XMLDoc d=new XMLDoc("doc",null);

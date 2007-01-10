@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.XMLDocUserData.EnumDirtyPolicy;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResourceTest;
+import org.cip4.jdflib.util.JDFSpawn;
 import org.w3c.dom.Attr;
 
 /**
@@ -148,9 +149,9 @@ public class XMLDocTest extends JDFTestCaseBase
             vRWResources.addElement("RunList");
 
             VJDFAttributeMap vSpawnParts = new VJDFAttributeMap();
+            final JDFSpawn spawn=new JDFSpawn(nodeToSpawn);
 
-            JDFNode node = nodeToSpawn.spawn(xmlFile, outFile, vRWResources, vSpawnParts, false,
-                    false, false, false);
+            JDFNode node = spawn.spawn(xmlFile,outFile,vRWResources,vSpawnParts,false,false,false,false);
 
             // neu gespawntes File rausschreiben
             JDFNode rootOut = node;
@@ -173,8 +174,44 @@ public class XMLDocTest extends JDFTestCaseBase
             assertTrue(vstrDirtyIDs.contains("r0018")); // SizeIntent added
         }
     }
+    public void testCreateElement() throws Exception
+    {
+        XMLDoc d=new XMLDoc("TEST",null);
+        KElement e=(KElement) d.createElement("foo:bar");
+//        e.appendElement("bar:foo");
+        e.setAttribute("foo:at", "1");
+        e.appendElement("bar2");
+        d.getRoot().appendChild(e);
+        assertEquals(e.getAttribute("foo:at"),"1");
+        
+    }
+    public void testCreateElementNoNS() throws Exception
+    {
+        XMLDoc d=new XMLDoc("TEST",null);
+        d.getMemberDocument().setIgnoreNSDefault(true);
+        KElement e=(KElement) d.createElement("bar");
+        assertNull(e.getNamespaceURI());
+        
+    }
 
-    public void testcreateElement() throws Exception
+    public void testParseNoNS() throws Exception
+    {
+        XMLDoc d=new XMLDoc("TEST",null);
+        final String fn = sm_dirTestDataTemp+"testParseNoNS.xml";
+        d.write2File(fn, 2, true);
+        JDFParser p=new JDFParser();
+        JDFDoc d2=p.parseFile(fn);
+        KElement root=d2.getRoot();
+//        assertNull(root.getNamespaceURI());
+        assertFalse(d2.toString().indexOf("xmlns=\"\"")>=0);
+        assertFalse(d.toString().indexOf("xmlns=\"\"")>=0);
+        assertFalse(root.toString().indexOf("xmlns=\"\"")>=0);
+        KElement foo=root.appendElement("foo");
+        assertNull(foo.getNamespaceURI());
+        
+    }
+    
+    public void testCreateAttribute() throws Exception
     {
         XMLDoc d=new XMLDoc("TEST",null);
         Attr a=d.createAttribute("dom1");
@@ -234,7 +271,7 @@ public class XMLDocTest extends JDFTestCaseBase
     {
         XMLDoc d=new XMLDoc("JDF:foo",null);
         KElement e=d.getRoot();
-        assertTrue("E K",e instanceof JDFElement);
+        assertFalse("E K",e instanceof JDFElement);
 
 
         d=new XMLDoc("a:foo","bar");
@@ -243,7 +280,7 @@ public class XMLDocTest extends JDFTestCaseBase
 
         d=new XMLDoc("_foo",null);
         e=d.getRoot();
-        assertTrue("E K",e instanceof JDFElement);
+        assertFalse("E K",e instanceof JDFElement);
 
         d=new XMLDoc("bar:foo",JDFConstants.JDFNAMESPACE);
         e=d.getRoot();
@@ -259,7 +296,7 @@ public class XMLDocTest extends JDFTestCaseBase
 
         d=new XMLDoc("Myfoo",null);
         e=d.getRoot();
-        assertTrue("E K",e instanceof JDFElement);
+        assertFalse("E K",e instanceof JDFElement);
     }
 
     public void testClone() throws Exception

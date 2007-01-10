@@ -8445,6 +8445,7 @@
 				<Version Path="@OCGIntent" First="1.3"/>
 				<Version Path="@OCGProcess" First="1.3"/>
 				<Version Path="@OCGZoom" First="1.3"/>
+				<Version Path="@PrintTrapAnnotations" First="1.3"/>
 				<Version Path="OCGControl" First="1.3"/>
 				<Constraint Path="OCGControl" minOccurs="0" maxOccurs="unbounded"/>
 			</xs:appinfo>
@@ -8466,6 +8467,7 @@
 				<xs:attribute name="OCGProcess" type="jdftyp:eOCGProcess_" use="optional"/>
 				<xs:attribute name="OCGZoom" type="jdftyp:double" default="1.0"/>
 				<xs:attribute name="PrintPDFAnnotations" type="jdftyp:boolean" default="false"/>
+				<xs:attribute name="PrintTrapAnnotations" type="jdftyp:boolean" default="false"/>
 				<xs:attribute name="TransparencyRenderingQuality" type="jdftyp:double" use="optional"/>
 			</xs:extension>
 		</xs:complexContent>
@@ -11737,6 +11739,7 @@
 			<xs:extension base="jdf:BaseElement_">
 				<xs:sequence minOccurs="0" maxOccurs="unbounded">
 					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					<xs:element ref="jdf:Test" minOccurs="0"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -11867,16 +11870,16 @@
 	<xs:element name="PreflightReportRef" type="jdf:ResourceRef" substitutionGroup="jdf:ResourceRef"/>
 	<xs:element name="PreflightReportLink" type="jdf:ParameterLink" substitutionGroup="jdf:ResourceLink"/>
 	<xs:attributeGroup name="PreflightReportAttribs_c">
-		<xs:attribute name="ErrorCount" type="jdftyp:Integer" use="optional"/>
+		<xs:attribute name="ErrorState" type="jdftyp:eErrorState_" use="optional"/>
 	</xs:attributeGroup>
 	<xs:attributeGroup name="PreflightReportAttribs_u">
 		<xs:attributeGroup ref="jdf:PreflightReportAttribs_c"/>
-		<xs:attribute name="ErrorState" type="jdftyp:eErrorState_" use="optional"/>
+		<xs:attribute name="ErrorCount" type="jdftyp:Integer" use="optional"/>
 		<xs:attribute name="WarningCount" type="jdftyp:Integer" use="optional"/>
 	</xs:attributeGroup>
 	<xs:attributeGroup name="PreflightReportAttribs_r">
 		<xs:attributeGroup ref="jdf:PreflightReportAttribs_c"/>
-		<xs:attribute name="ErrorState" type="jdftyp:eErrorState_" use="required"/>
+		<xs:attribute name="ErrorCount" type="jdftyp:Integer" use="required"/>
 		<xs:attribute name="WarningCount" type="jdftyp:Integer" use="required"/>
 	</xs:attributeGroup>
 	<xs:complexType name="PreflightReport_PRItem_lr" mixed="false">
@@ -12049,11 +12052,9 @@
 	</xs:attributeGroup>
 	<xs:attributeGroup name="PreflightReportRulePoolAttribs_u">
 		<xs:attributeGroup ref="jdf:PreflightReportRulePoolAttribs_c"/>
-		<xs:attribute name="ActionPools" type="jdftyp:IDREFS" use="optional"/>
 	</xs:attributeGroup>
 	<xs:attributeGroup name="PreflightReportRulePoolAttribs_r">
 		<xs:attributeGroup ref="jdf:PreflightReportRulePoolAttribs_c"/>
-		<xs:attribute name="ActionPools" type="jdftyp:IDREFS" use="required"/>
 	</xs:attributeGroup>
 	<xs:complexType name="PRRP_PRRule_lr" mixed="false">
 		<xs:complexContent mixed="false">

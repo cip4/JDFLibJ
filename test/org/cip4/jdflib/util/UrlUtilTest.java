@@ -103,14 +103,56 @@ public class UrlUtilTest extends JDFTestCaseBase
         assertFalse(UrlUtil.isHttp("foo.bar.com"));
     }
     ///////////////////////////////////////////////////////////////////////////
+    public void testIsIRL() throws Exception
+    {
+        assertTrue(UrlUtil.isIRL("file://blöd€.txt"));
+        assertTrue(UrlUtil.isIRL("http://foo.com/blöd€.txt"));
+        assertFalse("3 ///",UrlUtil.isIRL("http:///blöd€.txt"));
+        assertFalse("blank is bad",UrlUtil.isIRL("file://a blöd€.txt"));
+        assertTrue("blank %20 is good",UrlUtil.isIRL("file://a%20blöd€.txt"));
+        assertTrue(UrlUtil.isIRL("file:C:/a/b.txt"));
+        assertTrue("relative url",UrlUtil.isIRL("./3€.txt"));
+        assertFalse("invalid char: @",UrlUtil.isIRL("http://@"));
+        assertTrue(UrlUtil.isIRL("HTTP://€/€"));
+        assertTrue(UrlUtil.isIRL("file:///C:/Documents%20and%20Settings/Israel/My%20Documents/Vio%20Production/Results/TIME_H8789/TIME_H8789.pdf"));
+    }
+    public void testIsURL() throws Exception
+    {
+        assertTrue(UrlUtil.isURL("file://bl.txt"));
+        assertTrue(UrlUtil.isURL("http://foo.com/bl.txt"));
+        assertFalse("3 ///",UrlUtil.isURL("http:///bl.txt"));
+        assertFalse("blank is bad",UrlUtil.isURL("file://a b.txt"));
+        assertTrue("blank %20 is good",UrlUtil.isURL("file://a%20bl.txt"));
+        assertTrue(UrlUtil.isURL("file:C:/a/b.txt"));
+        assertTrue("relative url",UrlUtil.isURL("./3.txt"));
+        assertFalse("invalid char: @",UrlUtil.isURL("http://@"));
+        assertTrue(UrlUtil.isURL("HTTP://a/b?c"));
+    }
+    ///////////////////////////////////////////////////////////////////////////
     
     public void testStringToURL() throws Exception
     {
-        assertEquals(UrlUtil.StringToURL("c:\\temp\\").getPath(), new URL("File:/c:/temp/").getPath());
-//        assertEquals(UrlUtil.StringToURL("\\\\c\\temp\\").getPath(), new URL("File:/c/temp/").getPath());
-        assertEquals(UrlUtil.StringToURL("File:/c:/temp/").getPath(), new URL("File:/c:/temp/").getPath());
-//        assertEquals(UrlUtil.StringToURL("File:/c/temp/").getPath(), new URL("File:/c/temp/").getPath());
-//        assertEquals(UrlUtil.StringToURL("cid:foo"), new URL("cid:foo"));
+
+        // test for an existing directory (a trailing slash is appended by StringToURL)
+        assertTrue(UrlUtil.StringToURL("c:\\temp\\").getPath().startsWith(new URL("File:/c:/temp").getPath()));
+        assertTrue(UrlUtil.StringToURL("File:/c:/temp/").getPath().startsWith(new URL("File:/c:/temp").getPath()));
+        assertTrue(UrlUtil.StringToURL("c:\\temp").getPath().startsWith( new URL("File:/c:/temp").getPath()));
+        assertTrue(UrlUtil.StringToURL("File:/c:/temp").getPath().startsWith( new URL("File:/c:/temp").getPath()));
+
+
+        // test a non existing file
+        File file = File.createTempFile("Testfile", "");
+        if (file.isFile())
+        {
+            // test for a file or a non existing object (trailing slash is removed by StringToURL)
+            assertEquals(UrlUtil.StringToURL("c:\\xyz\\").getPath(), new URL("File:/c:/xyz").getPath());
+            assertEquals(UrlUtil.StringToURL("File:/c:/xyz/").getPath(), new URL("File:/c:/xyz").getPath());
+            assertEquals(UrlUtil.StringToURL("c:\\xyz").getPath(), new URL("File:/c:/xyz").getPath());
+            assertEquals(UrlUtil.StringToURL("File:/c:/xyz").getPath(), new URL("File:/c:/xyz").getPath());
+            
+            file.delete();
+        }
+
         assertEquals(UrlUtil.StringToURL("http://foo"), new URL("http://foo"));
     }
     ///////////////////////////////////////////////////////////////////////////
@@ -148,7 +190,6 @@ public class UrlUtilTest extends JDFTestCaseBase
         assertFalse(UrlUtil.isUNC("c/d/e.f"));
         assertFalse(UrlUtil.isUNC("/c/d/e.f"));
     }   
-
     
     public void testGetRelativeURI()
     {
@@ -159,8 +200,62 @@ public class UrlUtilTest extends JDFTestCaseBase
         assertEquals("unescaped but utf8",StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, false),'\\',"/",0),new String(StringUtil.setUTF8String("../a.ä")));
     }
     
-    
-
     ///////////////////////////////////////////////////////////////////////////
+    public void testGetRelativeURL()
+    {
+        File file=new File("c:\\a\\b\\c.txt");
+        File cwd=new File("c:\\a\\b1");
+        assertEquals(UrlUtil.getRelativeURL(file, cwd, true),"../b/c.txt");   
+        file=new File("c:\\a\\b1\\c.txt");
+        assertEquals(UrlUtil.getRelativeURL(file, cwd, true),"./c.txt");   
+        file=new File("a\\..\\b\\c.txt");
+        assertEquals(UrlUtil.getRelativeURL(file, null, true),"./b/c.txt");   
+        file=cwd;
+        assertEquals(UrlUtil.getRelativeURL(file, cwd, true),".");   
+    }
+    
+    ///////////////////////////////////////////////////////////////////////////
+   
+    public void testGetURLWithDirectory()
+    {
+        String url="File://a.b";
+        assertEquals("test nulls",url, UrlUtil.getURLWithDirectory(null, url));
+        assertEquals("test nulls",url, UrlUtil.getURLWithDirectory("", url));
+        assertEquals("test nulls",url, UrlUtil.getURLWithDirectory("File:/dir", url));
+        
+        url="a.b";
+        assertEquals("relative url","File://dir/a.b", UrlUtil.getURLWithDirectory("File://dir/", url));
+        assertEquals("relative url","File://dir/a.b", UrlUtil.getURLWithDirectory("File://dir", url));
+        
+        url="/a.b";
+        assertEquals("absolute url no host","File://a.b", UrlUtil.getURLWithDirectory("File://dir/", url));
+        assertEquals("absolute url no host","File://a.b", UrlUtil.getURLWithDirectory("File://dir", url));
+        
+        url="//a.b";
+        assertEquals("absolute url with default host","File://a.b", UrlUtil.getURLWithDirectory("File://dir/", url));
+        assertEquals("absolute url with default host","File://a.b", UrlUtil.getURLWithDirectory("File://dir", url));
+
+        url="//boo/a.b";
+        assertEquals("absolute url with new host","File://boo/a.b", UrlUtil.getURLWithDirectory("File://dir/", url));
+        assertEquals("absolute url with new host","File://boo/a.b", UrlUtil.getURLWithDirectory("File://dir", url));
+        
+        url="//boo/./gg/../a.b";
+        assertEquals("absolute url with new host and cleandots","File://boo/a.b", UrlUtil.getURLWithDirectory("File://dir/", url));
+        assertEquals("absolute url with new host and cleandots","File://boo/a.b", UrlUtil.getURLWithDirectory("File://dir", url));
+    }
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    
+    public void testCleanDots()
+    {
+        assertEquals(UrlUtil.cleanDots("."), ".");
+        assertEquals(UrlUtil.cleanDots(".."), "..");
+        assertEquals(UrlUtil.cleanDots("a/.."), ".");
+        assertEquals(UrlUtil.cleanDots("../../c.pdf"), "../../c.pdf");
+        assertEquals(UrlUtil.cleanDots(".././../c.pdf"), "../../c.pdf");
+        assertEquals(UrlUtil.cleanDots("File://a/../b"), "File://b");
+        assertEquals(UrlUtil.cleanDots("File://a/.././c/../b.pdf"), "File://b.pdf");
+        assertEquals(UrlUtil.cleanDots("/."), "/.");
+    }
 
 }   

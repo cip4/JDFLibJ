@@ -86,27 +86,20 @@ import org.cip4.jdflib.JDFTestCaseBase;
 public class JDFIntegerRangeListTest extends JDFTestCaseBase
 {
     
-    public final void testJDFIntegerRangeListString()
+    public final void testJDFIntegerRangeListString() throws Exception
     {
         
         JDFIntegerRangeList rangeList = new JDFIntegerRangeList();
-        try
-        {
-            rangeList = new JDFIntegerRangeList(" 0 1 ~ 2 3 ~ 6 INF ");
-        }
-        catch (DataFormatException dfe)
-        {
-            fail("DataFormatException");
-        }
-        
+        rangeList = new JDFIntegerRangeList(" 0 1 ~ 2 3 ~ 6 INF ");
+        assertEquals(new JDFIntegerRangeList("   1   "), new JDFIntegerRangeList("1~1"));
         // rangeList is not empty
         assertEquals("Bad Constructor from a given String", rangeList.size(),4);
-        // must be trasformed into the string "0 1~2 3~6"
+        // must be transformed into the string "0 1~2 3~6"
         assertEquals("Bad Constructor from a given String",rangeList.toString(),"0 1 ~ 2 3 ~ 6 INF"); 
         
     }
     
-    public final void testJDFIntegerRangeListXDef()
+    public final void testJDFIntegerRangeListXDef() throws Exception
     {
         JDFIntegerRange r = new JDFIntegerRange(1,2);
         JDFIntegerRange r2 = new JDFIntegerRange(3,-1,16); // 16 elements element(-1) = 15, range = 3~15
@@ -116,15 +109,7 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
         assertTrue("Bad construction of ranges with setDef: Range:"+ r.toString(),
                 r2.getElementCount()==13 );
         
-        JDFIntegerRangeList r3 = new JDFIntegerRangeList();
-        try
-        {
-            r3 = new JDFIntegerRangeList(" 1 ~ 2 3 ~ -1 ", 16);
-        }
-        catch (DataFormatException dfe)
-        {
-            fail("DataFormatException");
-        }
+        JDFIntegerRangeList r3 = new JDFIntegerRangeList(" 1 ~ 2 3 ~ -1 ", 16);
         assertTrue("Bad construction of ranges with setDef: Range:"+ r.toString(),
                 r3.getElementCount()==15 );
     }
@@ -146,12 +131,23 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
             fail("snafu");
         }
     }
-        /////////////////////////////////////////////////////////////////////////
-        
-        public final void testDef()
-        {
-            JDFIntegerRangeList rangeList = null;
-        try
+    /////////////////////////////////////////////////////////////////////////
+    
+    public final void testNormalize() throws Exception
+    {
+        JDFIntegerRangeList rangeList = new JDFIntegerRangeList("1 3 5 2 4 6 ~ 22");
+        rangeList.normalize(true);
+        assertEquals(rangeList.toString(),"1 ~ 22");
+        rangeList = new JDFIntegerRangeList("1 3 2 1 4 5 6 ~ 22");
+        rangeList.normalize(false);
+        assertEquals(rangeList.toString(),"1 3 ~ 1 4 ~ 22");
+    }
+    /////////////////////////////////////////////////////////////////////////
+    
+    public final void testDef()
+    {
+        JDFIntegerRangeList rangeList = null;
+    try
         {
             rangeList = new JDFIntegerRangeList("0 ~-1");
             rangeList.setDef(20);
@@ -168,8 +164,11 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
             rangeList.setDef(10);
 
             assertEquals(rangeList.toString(),"2 ~ 4 7 8 9");
-            rangeList.normalize();
+            rangeList.normalize(false);
             assertEquals(rangeList.toString(),"2 ~ 4 7 ~ 9");
+            rangeList = new JDFIntegerRangeList("1 3 5 2 4 6 ~ 22");
+            rangeList.normalize(true);
+            assertEquals(rangeList.toString(),"1 ~ 22");
         }
         catch (DataFormatException dfe)
         {
@@ -281,105 +280,65 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
  
     ////////////////////////////////////////////////////////////////////
     
-    public final void testIsUnique()
+    public final void testIsUnique() throws Exception
     {
-        JDFIntegerRangeList rangelist=null;
-        try {
-            rangelist= new JDFIntegerRangeList("0 3~5");
-            rangelist.append(4);
-            
-            assertFalse("Bad isUnique", rangelist.isUnique());
-        }
-        catch (DataFormatException dfe) {
-            fail("DataFormatException");
-        }
+        JDFIntegerRangeList rangelist= new JDFIntegerRangeList("0 3~5");
+        rangelist.append(4);
+        assertFalse("Bad isUnique", rangelist.isUnique());
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    
+    public final void testIsOrdered_False() throws Exception
+    {
+        JDFIntegerRangeList rangelist = new JDFIntegerRangeList("0~8");
+        rangelist.append(5);
+        rangelist.append(new JDFIntegerRange("6~7"));
+        rangelist.append(9);
+
+        assertFalse("Bad isOrdered", rangelist.isOrdered());
     }
     
     ///////////////////////////////////////////////////////////////////
     
-    public final void testIsOrdered_False()
+
+    public final void testIsOrdered_Reverse_True() throws Exception
     {
-        JDFIntegerRangeList rangelist=null;
-        try {
-            rangelist= new JDFIntegerRangeList("0~8");
-            rangelist.append(5);
-            rangelist.append(new JDFIntegerRange("6~7"));
-            rangelist.append(9);
-            
-            assertFalse("Bad isOrdered", rangelist.isOrdered());
-        }
-        catch (DataFormatException dfe) {
-            fail("DataFormatException");
-        }
+        JDFIntegerRangeList rangelist=new JDFIntegerRangeList("21 ~ 10 6");
+        rangelist.append(5);
+        rangelist.append(4,3);
+
+       assertTrue("Bad isOrdered", rangelist.isOrdered());
     }
-    
-    ///////////////////////////////////////////////////////////////////
-    
-    
-    public final void testIsOrdered_Reverse_True()
+
+    public final void testIsUniqueOrdered_Reverse_False() throws Exception
     {
-        JDFIntegerRangeList rangelist=null;
-        try {
-            rangelist= new JDFIntegerRangeList("21 ~ 10 6");
-            rangelist.append(5);
-            rangelist.append(4,3);
-        }
-        catch (DataFormatException dfe) {
-            fail("DataFormatException");
-        }
-        
-        if (rangelist != null)
-            assertTrue("Bad isOrdered", rangelist.isOrdered());
+        JDFIntegerRangeList rangelist=new JDFIntegerRangeList("7 4");
+        rangelist.append(10);
+        rangelist.append(3,1);
+
+        assertFalse("Bad isUniqueOrdered", rangelist.isUniqueOrdered());
     }
-    
-    public final void testIsUniqueOrdered_Reverse_False()
+
+    public final void testIsUniqueOrdered_False() throws Exception
     {
-        JDFIntegerRangeList rangelist=null;
-        try {
-            rangelist= new JDFIntegerRangeList("7 4");
-            rangelist.append(10);
-            rangelist.append(3,1);
-        }
-        catch (DataFormatException dfe) {
-            fail("DataFormatException");
-        }
-        
-        if (rangelist != null)
-            assertFalse("Bad isUniqueOrdered", rangelist.isUniqueOrdered());
+        JDFIntegerRangeList rangelist= new JDFIntegerRangeList("0 2 4");
+        rangelist.append(6);
+        rangelist.append(new JDFIntegerRange("6~8"));
+        rangelist.append(10);
+
+        assertFalse("Bad isUniqueOrdered", rangelist.isUniqueOrdered());
     }
-    
-    public final void testIsUniqueOrdered_False()
+
+    public final void testIsUniqueOrdered_True() throws Exception
     {
-        JDFIntegerRangeList rangelist=null;
-        try {
-            rangelist= new JDFIntegerRangeList("0 2 4");
-            rangelist.append(6);
-            rangelist.append(new JDFIntegerRange("6~8"));
-            rangelist.append(10);
-        }
-        catch (DataFormatException dfe) {
-            fail("DataFormatException");
-        }
-        
-        if (rangelist != null)
-            assertFalse("Bad isUniqueOrdered", rangelist.isUniqueOrdered());
+        JDFIntegerRangeList rangelist= new JDFIntegerRangeList("0 2 5");
+        rangelist.append(6,8);
+        rangelist.append(10);
+
+        assertTrue("Bad isUniqueOrdered" + rangelist.toString(), rangelist.isUniqueOrdered());
     }
-    
-    public final void testIsUniqueOrdered_True()
-    {
-        JDFIntegerRangeList rangelist=null;
-        try {
-            rangelist= new JDFIntegerRangeList("0 2 5");
-            rangelist.append(6,8);
-            rangelist.append(10);
-        }
-        catch (DataFormatException dfe) {
-            fail("DataFormatException");
-        }
-        if (rangelist != null)
-            assertTrue("Bad isUniqueOrdered" + rangelist.toString(), rangelist.isUniqueOrdered());
-    }
-    
+
     public void testJDFIntegerRangeList1()
     {
         final JDFIntegerRangeList integerRangeList = new JDFIntegerRangeList();
@@ -460,46 +419,24 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 
   
     ///////////////////////////////////////////////////////////////////
-    
-    public void testgetElementCount()
+
+    public void testgetElementCount() throws Exception
     {
-        JDFIntegerRangeList irl=null;
-        try
-        {
-            irl=new JDFIntegerRangeList("0 ~ 5");
-            assertEquals(6,irl.getElementCount());    
-        }
-        catch (DataFormatException e)
-        {
-            fail("DataFormatException");
-        }
-        
-        try
-        {
-            irl=new JDFIntegerRangeList("0 ~ INF");
-            assertTrue(irl.getElementCount()<0);            
-        }
-        catch (DataFormatException e)
-        {
-            fail("DataFormatException");
-        }
+        JDFIntegerRangeList irl=new JDFIntegerRangeList("0 ~ 5");
+        assertEquals(6,irl.getElementCount());    
+        irl=new JDFIntegerRangeList("0 ~ -1");
+        assertEquals(irl.getElementCount(),0);            
+        irl=new JDFIntegerRangeList("0 ~ INF");
+        assertTrue(irl.getElementCount()<0);            
     }
-   
-    
+
+
     ///////////////////////////////////////////////////////////////////
-    
-    public void testgetElement()
+
+    public void testgetElement() throws Exception
     {
-        JDFIntegerRangeList irl=null;
-        try
-        {
-            irl=new JDFIntegerRangeList("5 ~ 8");
-            assertEquals(6,irl.getElement(1));        
-        }
-        catch (DataFormatException e)
-        {
-            fail("DataFormatException");
-        }
+        JDFIntegerRangeList irl=new JDFIntegerRangeList("5 ~ 8");
+        assertEquals(6,irl.getElement(1));        
     }
 
     ///////////////////////////////////////////////////////////////////

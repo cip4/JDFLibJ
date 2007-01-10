@@ -1,5 +1,7 @@
 package org.cip4.jdflib.jmf;
 
+import java.io.File;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceCondition;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
@@ -38,7 +40,7 @@ public class JMFStatusTest extends JDFTestCaseBase
         
         
         
-        doc.write2File(sm_dirTestDataTemp+fileSeparator+"JMFStatusSignal.jmf", 2, false);
+        doc.write2File(sm_dirTestDataTemp+File.separator+"JMFStatusSignal.jmf", 2, false);
         assertTrue(jmf.isValid(EnumValidationLevel.Complete));
     }
 

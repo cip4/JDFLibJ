@@ -88,6 +88,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumType;
 
 
 /**
@@ -118,9 +119,9 @@ public class CheckJDFTest extends JDFTestCaseBase
         
     public void testCmdLineChecker() 
     {
-        String checkSavePath = sm_dirTestData+fileSeparator+"NarrowWeb.jdf";
-        String checkSavePathResult = sm_dirTestDataTemp+fileSeparator+"NarrowWeb.out.xml";
-        String schemaLocator = sm_dirTestSchema+fileSeparator+"JDF.xsd";//.toURL().toExternalForm();
+        String checkSavePath = sm_dirTestData+File.separator+"NarrowWeb.jdf";
+        String checkSavePathResult = sm_dirTestDataTemp+File.separator+"NarrowWeb.out.xml";
+        String schemaLocator = sm_dirTestSchema+File.separator+"JDF.xsd";//.toURL().toExternalForm();
         
         String checkSaveLocator = checkSavePathResult;
         
@@ -231,7 +232,7 @@ public class CheckJDFTest extends JDFTestCaseBase
     public void testValidateZip() throws Exception
     {
    
-        File zip=new File(sm_dirTestData+fileSeparator+"checkjdf.zip");
+        File zip=new File(sm_dirTestData+File.separator+"checkjdf.zip");
         CheckJDF checker = new CheckJDF();
         XMLDoc d=checker.processZipFile(zip);
         KElement root=d.getRoot();
@@ -240,7 +241,7 @@ public class CheckJDFTest extends JDFTestCaseBase
     public void testValidateMime() throws Exception
     {
    
-        File mim=new File(sm_dirTestData+fileSeparator+"checkjdf.mjm");
+        File mim=new File(sm_dirTestData+File.separator+"checkjdf.mjm");
         CheckJDF checker = new CheckJDF();
         FileInputStream is=new FileInputStream(mim);
         XMLDoc d=checker.processMimeStream(is);
@@ -375,6 +376,37 @@ public class CheckJDFTest extends JDFTestCaseBase
         }
     }
     
+    /**
+     * tests validation of a document that is passed by reference to a document
+     */
+    public void testValidateCombined() 
+    {
+        JDFDoc doc=new JDFDoc("JDF");
+        CheckJDF checkJDF=new CheckJDF();
+        checkJDF.setPrint(false);
+        checkJDF.bQuiet = true;
+        JDFNode n=doc.getJDFRoot();
+        n.setType(EnumType.Combined);
+        int v=0;
+        while(true)
+        {
+            checkJDF.level = EnumValidationLevel.getEnum(v);
+            if(checkJDF.level==null)
+                break;
+            for(int i=0;i<3;i++)
+            {
+                if(i>=1)
+                    doc=null;
+                XMLDoc schemaValidationResult = checkJDF.processSingleDocument(doc);
+                KElement root = schemaValidationResult.getRoot();
+                assertNotNull(root.getXPathElement("TestFile/SchemaValidationOutput"));
+                assertNotNull(root.getXPathElement("TestFile/CheckJDFOutput"));
+                assertEquals(root.getXPathAttribute("TestFile/CheckJDFOutput/@IsValid","booboo"),"true");
+            }
+            v++;
+        }
+    }
+    
     ////////////////////////////////////////////////////////////////////////////
 
     public void testSamples()
@@ -393,9 +425,9 @@ public class CheckJDFTest extends JDFTestCaseBase
             if (file.getPath().endsWith(".xsd"))
                 continue;
 
-            System.out.println("Parsing: " + file.getPath());
+            System.out.println(i+" Parsing: " + file.getPath());
             processSingleFile(file.getPath(), true,null);
-            System.out.println("Parsing: " + file.getPath());
+            System.out.println(i+" Parsing: " + file.getPath());
             processSingleFile(file.getPath(), true,EnumValidationLevel.RecursiveComplete);
         }
     }

@@ -84,6 +84,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFElement.EnumOrientation;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 
 
 /**
@@ -130,6 +131,14 @@ public class StringUtilTest extends JDFTestCaseBase
         assertEquals("Input and Output string are not equal", strTestString,strResultString);
     }
     
+    public void testSetVStringEnum()
+    {
+        Vector v=new Vector();
+        v.add(EnumUsage.Input);
+        v.add(EnumUsage.Output);
+        assertEquals(StringUtil.setvString(v, " ", null, null), "Input Output");
+    }
+    
     public void testSetVString()
     {
         VString v=new VString();
@@ -167,8 +176,8 @@ public class StringUtilTest extends JDFTestCaseBase
     public void testExtension()
     {
         String iri="file://my.Host/a.n/c%20‰ˆ¸%25&?.txtﬂ";
-        assertEquals(StringUtil.extension(iri),"txtﬂ");
-        assertNull(StringUtil.extension("abc"));
+        assertEquals(UrlUtil.extension(iri),"txtﬂ");
+        assertNull(UrlUtil.extension("abc"));
     }
     /**
      * test regexp matching utility
@@ -176,7 +185,18 @@ public class StringUtilTest extends JDFTestCaseBase
      */
     public void testMatches()
     {
+        assertTrue(StringUtil.matches("a bb c","(.+ )*(bb)( .+)*"));
+        assertTrue(StringUtil.matches("b bb c","(.* )*(bb)( .+)*"));
+        assertTrue(StringUtil.matches("a bb","(.+ )*(bb)( .+)*"));
+        assertTrue(StringUtil.matches("bb","(.+ )*(bb)( .+)*"));
+        assertFalse(StringUtil.matches(" bb","(.+ )*(bb)( .+)*"));
+        assertFalse(StringUtil.matches("bb ","(.+ )*(bb)( .+)*"));
+        assertFalse(StringUtil.matches("a","(.+ )*(bb)( .+)*"));
+        assertFalse(StringUtil.matches("a c","(.+ )*(bb)( .+)*"));
+        assertFalse(StringUtil.matches("a b c","(.+ )*(bb)( .+)*"));
         assertTrue(StringUtil.matches("abc","*"));
+        assertTrue(StringUtil.matches("abc",".*"));
+        assertTrue(StringUtil.matches("abc",".+"));
         assertTrue(StringUtil.matches("abc",""));
         assertTrue(StringUtil.matches("‰bc","..."));
         assertTrue(StringUtil.matches("‰bc",null));
@@ -326,7 +346,7 @@ public class StringUtilTest extends JDFTestCaseBase
     {
         VString v=StringUtil.tokenize("a b c"," ",false);
         StringUtil.concatStrings(v,"_foo");
-        assertEquals("a_foo b_foo c_foo",v.getString(" ",null,null));
+        assertEquals("a_foo b_foo c_foo",StringUtil.setvString(v," ",null,null));
     }   
    ///////////////////////////////////////////////////////////////////////////
     

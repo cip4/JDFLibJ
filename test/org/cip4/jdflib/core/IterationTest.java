@@ -5,10 +5,12 @@
  */
 package org.cip4.jdflib.core;
 
+import java.io.File;
 import java.net.MalformedURLException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.resource.JDFPhaseTime;
@@ -28,6 +30,7 @@ public class IterationTest extends JDFTestCaseBase
     private JDFLayoutElementProductionParams iterLepp;
     private JDFApprovalParams iterApp;
     private JDFRunList iterRuli;
+    private JDFRunList inRuli;
     private JDFNode iterNode;
     private JDFDoc iterDoc;
     private JDFApprovalSuccess iterAppSuccess;
@@ -65,16 +68,23 @@ public class IterationTest extends JDFTestCaseBase
         iterAppSuccess.setResStatus(EnumResStatus.Unavailable,true);
         iterRuli = (JDFRunList) iterNode.appendMatchingResource(ElementName.RUNLIST,EnumProcessUsage.AnyOutput,null);
         iterRuli.setResStatus(EnumResStatus.Unavailable,true);
+        inRuli = (JDFRunList) iterNode.addResource(ElementName.RUNLIST,null, EnumUsage.Input,null,null,null,null);
+        inRuli.setResStatus(EnumResStatus.Available,true);
+        
         try
         {
-            iterRuli.setFileURL(StringUtil.uncToUrl("C:\\local\\Myinput.pdf",false));
+            iterRuli.addPDF(StringUtil.uncToUrl("C:\\local\\Myinput.pdf",true), 0, 3);
+            iterRuli.setDescriptiveName("save in place - input equals output");
+            inRuli.addPDF(StringUtil.uncToUrl("C:\\local\\Myinput.pdf",true), 0, 3);
+            inRuli.addPDF(StringUtil.uncToUrl("C:\\local\\Image1.pdf",true), 0, 0);
+            inRuli.addPDF(StringUtil.uncToUrl("C:\\local\\Image2.pdf",true), 0, 0);
         }
-        catch (MalformedURLException e)
+        catch (MalformedURLException x)
         {
-            fail("malformed URL");
+            fail("bad url");
         }
         iterDoc.write2File(getIteration(0),2,false);
-    }
+     }
     
 ///////////////////////////////////////////////////////////////////
     
@@ -185,7 +195,7 @@ public class IterationTest extends JDFTestCaseBase
     
     private String getIteration(int i)
     {
-        return sm_dirTestDataTemp+fileSeparator+"Interation_"+String.valueOf(i)+".jdf";
+        return sm_dirTestDataTemp+File.separator+"Interation_"+String.valueOf(i)+".jdf";
     }
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////

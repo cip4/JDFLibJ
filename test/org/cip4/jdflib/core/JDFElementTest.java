@@ -71,6 +71,7 @@
 package org.cip4.jdflib.core;
 
 import java.io.File;
+import java.util.Vector;
 
 import junit.framework.TestCase;
 
@@ -81,6 +82,7 @@ import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumSettingsPolicy;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFElement.EnumXYRelation;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFAcknowledge;
@@ -105,6 +107,7 @@ import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
+import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.JDFComChannel;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
@@ -129,6 +132,68 @@ public class JDFElementTest extends TestCase
     private JDFElement m_jdfElement;
     
     
+    public void testAppendElement()
+    {
+        JDFDoc d=new JDFDoc("JDF");
+        KElement r=d.getRoot();
+        KElement e=r.appendElement("e");
+        assertEquals(e.getNamespaceURI(),JDFElement.getSchemaURL());
+        KElement foo=e.appendElement("pt:foo", "www.pt.com");
+        assertEquals(foo.getNamespaceURI(), "www.pt.com");
+        KElement bar=foo.appendElement("bar");
+        assertNotNull(bar.getNamespaceURI());
+        KElement foo2=bar.appendElement("pt:foo", "www.pt.com");
+        assertEquals(foo2.getNamespaceURI(), "www.pt.com");              
+    }    
+    
+    public void testCopyElement()
+    {
+        JDFDoc d=new JDFDoc("d1");
+        JDFElement e=(JDFElement)d.getRoot();
+        JDFDoc d2=new JDFDoc("d2");
+        JDFElement e2=(JDFElement)d2.getRoot();
+        KElement e3=e.copyElement(e2,null);
+        JDFParser p=new JDFParser();
+        JDFDoc dp=p.parseString("<Device xmlns=\"www.CIP4.org/JDFSchema_1_1\"/>");
+        KElement ep=dp.getRoot();
+//        assertFalse(ep.hasAttribute("xmlns"));
+        KElement e4=e.copyElement(ep,null);
+//        assertFalse(e4.hasAttribute("xmlns"));
+        assertEquals(e3.getNamespaceURI(), e.getNamespaceURI());
+        assertFalse(d.toString().indexOf("xmlns=\"\"")>=0);
+
+    }
+    
+   /**
+     * 
+     *
+     */
+    public void testGetElement_KElement()
+    {
+        JDFDoc d=new JDFDoc("JDF");
+        JDFNode root=d.getJDFRoot();
+        JDFExposedMedia xm=(JDFExposedMedia)root.addResource("ExposedMedia", null, EnumUsage.Input, null, null, null, null);
+        JDFMedia m=xm.appendMedia();
+        m.makeRootResource(null, null, true);
+        assertNull(xm.getElement_KElement("Media", null, 0));
+        assertNotNull(xm.getElement_JDFElement("Media", null, 0));
+     }    
+    /**
+     * 
+    *
+    */
+   public void testGetChildElementVector_KElement()
+   {
+       JDFDoc d=new JDFDoc("JDF");
+       JDFNode root=d.getJDFRoot();
+       JDFExposedMedia xm=(JDFExposedMedia)root.addResource("ExposedMedia", null, EnumUsage.Input, null, null, null, null);
+       JDFMedia m=xm.appendMedia();
+       m.makeRootResource(null, null, true);
+       assertEquals(xm.getChildElementVector_KElement("Media", null,null,true,-1).size(),0);
+       assertEquals(xm.getChildElementVector_JDFElement("Media", null,null,true,-1,true).size(),1);
+    }
+    
+    
     private void _setUp()
     {
         // setup the fixture
@@ -147,6 +212,19 @@ public class JDFElementTest extends TestCase
         
     }
     
+    public void testNameSpaceElement()
+    {
+        JDFDoc doc = new JDFDoc(ElementName.JDF);
+        JDFNode root = doc.getJDFRoot();
+        root.setType("foo:bar", false);
+        root.addNameSpace("foo", "www.foo.com");
+        JDFResource r=root.addResource("foo:res", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
+        JDFResourceLink rl=root.getLink(r, null);
+        rl.setPartMap(new JDFAttributeMap("Side","Front"));
+        assertEquals(rl.toString().indexOf("xmlns=\"\""), -1);
+        assertEquals(rl.getPart(0).toString().indexOf("xmlns=\"\""), -1);
+    }
+
     public void testRemoveChild()
     {
         JDFDoc d=new JDFDoc("JDF");
@@ -324,16 +402,32 @@ public class JDFElementTest extends TestCase
      * Method testChildElementVector.
      * @throws Exception
      */
-    public void testChildElementVector() throws Exception
+    public void testGetChildElementVector() throws Exception
     {
         _setUp();
-        VElement velem = m_jdfRoot.getChildElementVector("*", "", new JDFAttributeMap(), true, 0, false);
+        VElement velem = m_jdfRoot.getChildElementVector(null,null,null, true, 0, false);
+        assertEquals(velem.size(),5);
         KElement elem = (KElement)velem.elementAt(0);
-        assertTrue (velem.size()== 5);
-        assertTrue (elem.getNodeName().equals("AuditPool"));
-        
-        
-        
+        assertEquals (elem.getNodeName(),"AuditPool");
+        velem = m_jdfRoot.getChildElementVector(null,null,null, true, 3, false);
+        assertEquals(velem.size(),3);
+    }
+    /**
+     * Method testChildElementVector.
+     * @throws Exception
+     */
+    public void testGetParentJDFStatic() throws Exception
+    {
+        JDFDoc d=new JDFDoc("JDF");
+        JDFElement root=d.getJDFRoot();
+        assertNull(JDFElement.getParentJDF(root));
+        assertNull(JDFElement.getParentJDF(null));
+        KElement k=root.appendElement("NodeInfo");
+        assertEquals(root, JDFElement.getParentJDF(k));
+        k=k.appendElement("foo:Bar","www.foo.com");
+        assertEquals(root, JDFElement.getParentJDF(k));
+        k=root.appendElement("JDF");
+        assertEquals(root, JDFElement.getParentJDF(k));
     }
 
     ///////////////////////////////////////////////////7
@@ -367,6 +461,7 @@ public class JDFElementTest extends TestCase
         
         
     }
+ 
     /**
      * Method testGetElementByID.
      * @throws Exception
@@ -398,40 +493,7 @@ public class JDFElementTest extends TestCase
         KElement kelem4 = m_jdfRoot.getChildWithAttribute ("*","Preferred", "*","198", 0, true);
         assertTrue ("kelem4!=null",kelem4==null);
     }
-    
-    /**
-     * Method testGetElementByIDNew2_0.
-     * @throws Exception
-     */
-    public void testGetElementByIDNew2_0 () throws Exception
-    {
-        _setUp();
-        KElement kelem = m_jdfRoot.getChildWithAttribute ("*","ID", "*","n0006", 0, true);
-        assertTrue ("kelem==null",kelem!=null);
-        if (kelem == null) return;     // soothe findbugs ;)
-        String strAtrib = kelem.getAttribute("ID", "", "");
-        assertTrue ("ID!=n0006", strAtrib.equals("n0006"));
-        
-        // second try
-        KElement kelem2 = m_jdfRoot.getTarget("n0006", "ID");
-        assertTrue ("kelem2==null",kelem2!=null);
-        if (kelem2 == null) return;     // soothe findbugs ;)
-        String strAtrib2 = kelem2.getAttribute("ID", "", "");
-        assertTrue ("ID!=n0006", strAtrib2.equals("n0006"));
-        
-        // third try
-        KElement kelem3 = m_jdfRoot.getTarget("198", "Preferred");
-        assertTrue ("kelem3==null",kelem3!=null);
-        if (kelem3 == null) return;     // soothe findbugs ;)
-        String strAtrib3 = kelem3.getAttribute("Preferred", "", "");
-        assertTrue ("Preferred!=198", strAtrib3.equals("198"));
-        
-        // fourth try: GetChildWithAttribute does only find direct children but no deep children
-        KElement kelem4 = m_jdfRoot.getChildWithAttribute ("*","Preferred", "*","198", 0, true);
-        assertTrue ("kelem4!=null",kelem4==null);
-    }
-    
-    
+     
 //  public void testGetDueLevel ()
 //  {
 //  JDFNodeInfo info = new JDFNodeInfo(m_kElement);
@@ -602,8 +664,7 @@ public class JDFElementTest extends TestCase
             if (jdfDoc != null)
             {
                 e = jdfDoc.getRoot();
-                assertTrue("valid doc: " + file.getPath(), e
-                        .isValid(EnumValidationLevel.RecursiveComplete));
+                assertTrue("valid doc: " + file.getPath(), e.isValid(EnumValidationLevel.RecursiveComplete));
             }
             
             // now with schema validation
@@ -671,6 +732,19 @@ public class JDFElementTest extends TestCase
         assertEquals(JDFVersions.getTheOffset(EnumVersion.Version_1_0),0);
         assertEquals(JDFVersions.getTheOffset(EnumVersion.Version_1_2),8);
     }
+///////////////////////////////////////////////////////////////////////////    
+    public void testSetEnumerationsAttribute()
+    {
+        JDFDoc d=new JDFDoc("JDF");
+        JDFElement root=d.getJDFRoot();
+        root.setEnumerationsAttribute("dummy", null, null);
+        assertNull(root.getEnumerationsAttribute("dummy", null, EnumNodeStatus.Aborted, false));
+        Vector v=new Vector();
+        v.add(EnumNodeStatus.Cleanup);
+        v.add(EnumNodeStatus.Completed);
+        root.setEnumerationsAttribute("dummy", v, null);
+        assertEquals("round trip enumerations",root.getEnumerationsAttribute("dummy", null, EnumNodeStatus.Aborted, false),v);
+     }
 ///////////////////////////////////////////////////////////////////////////    
         
         public void testStatusEquals()

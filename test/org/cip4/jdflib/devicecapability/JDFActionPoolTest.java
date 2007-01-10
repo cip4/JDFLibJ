@@ -77,6 +77,8 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.resource.devicecapability.JDFAction;
 import org.cip4.jdflib.resource.devicecapability.JDFActionPool;
 import org.cip4.jdflib.resource.devicecapability.JDFTest;
+import org.cip4.jdflib.resource.devicecapability.JDFand;
+import org.cip4.jdflib.resource.devicecapability.JDFnot;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 
 
@@ -86,10 +88,18 @@ public class JDFActionPoolTest extends JDFTestCaseBase
     {
         JDFDoc d=new JDFDoc(ElementName.PREFLIGHTPARAMS);
         JDFActionPool ap=(JDFActionPool)d.getRoot().appendElement(ElementName.ACTIONPOOL);
-        JDFAction a=ap.appendActionTest(EnumTerm.and);
-        final JDFTest test = a.getTest();
+        JDFAction a=ap.appendActionTest(EnumTerm.and,true);
+        JDFTest test = a.getTest();
         assertNotNull(test);
         assertNotNull(test.getTerm());
+        assertTrue(test.getTerm() instanceof JDFand);
+        
+        a=ap.appendActionTest(EnumTerm.and,false);
+        test = a.getTest();
+        assertNotNull(test);
+        assertNotNull(test.getTerm());
+        assertTrue(test.getTerm() instanceof JDFnot);
+        assertTrue(((JDFnot)test.getTerm()).getTerm(null, 0) instanceof JDFand);
     }
 
 //////////////////////////////////////////////////////////////////////////////////  

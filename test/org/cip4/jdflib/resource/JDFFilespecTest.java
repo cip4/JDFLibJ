@@ -93,6 +93,7 @@ import org.cip4.jdflib.util.MimeUtil;
 import org.cip4.jdflib.util.MimeUtilTest;
 import org.cip4.jdflib.util.StringUtil;
 
+////////////////////////////////////////////////////////////////
 
 
 public class JDFFilespecTest extends JDFTestCaseBase
@@ -116,11 +117,12 @@ public class JDFFilespecTest extends JDFTestCaseBase
         assertEquals(fs2.getURL(),"file:/C:/ist%20bl%c3%b6d/fnord%20is%20%e2%82%ac");
     }
     
-    
+    ////////////////////////////////////////////////////////////////
+   
     public void testGetURLCidStream() throws Exception
     {
         new MimeUtilTest().testBuildMimePackageDocJMF();
-        Multipart mp=MimeUtil.getMultiPart(sm_dirTestDataTemp+fileSeparator+"testMimePackageDoc.mjm");
+        Multipart mp=MimeUtil.getMultiPart(sm_dirTestDataTemp+File.separator+"testMimePackageDoc.mjm");
         BodyPart bp=MimeUtil.getPartByCID(mp, "TheJDF");
         JDFDoc d=MimeUtil.getJDFDoc(bp);
         JDFNode n=d.getJDFRoot();
@@ -137,5 +139,26 @@ public class JDFFilespecTest extends JDFTestCaseBase
     
     }
     
- 
+    ////////////////////////////////////////////////////////////////
+    
+    public void testGetMimeTypeFromURL() throws Exception
+    {
+        assertNull(JDFFileSpec.getMimeTypeFromURL(null));
+        assertNull(JDFFileSpec.getMimeTypeFromURL("burp"));
+        assertEquals("application/pdf",JDFFileSpec.getMimeTypeFromURL("file://a/b/./testtif.foo.PDF"));
+        assertEquals("image/tiff",JDFFileSpec.getMimeTypeFromURL("http://a/b/./testtif.foo.tiff"));
+    }
+    
+    ////////////////////////////////////////////////////////////////
+    public void testSetMimeURL() throws Exception
+    {
+        JDFDoc d=new JDFDoc("FileSpec");
+        JDFFileSpec fs=(JDFFileSpec)d.getRoot();
+        fs.setMimeURL("file:/c/test.pdf");
+        assertEquals(fs.getMimeType(), "application/pdf");
+        assertEquals(fs.getURL(), "file:/c/test.pdf");
+       
+    }
+    ////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////
 }

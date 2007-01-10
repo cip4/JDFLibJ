@@ -22,7 +22,7 @@ public class JDFMediaColorTest extends TestCase
         JDFParser p = new JDFParser();
         
         String strNode =
-            "<MediaIntent ID=\"MI100000\" Class=\"Intent\" Status=\"Available\">" +
+            "<MediaIntent xmlns=\"http://www.CIP4.org/JDFSchema_1_1\" ID=\"MI100000\" Class=\"Intent\" Status=\"Available\">" +
                 "<Dimensions DataType=\"XYPairSpan\" Preferred=\"2040.945 2891.339\" Actual=\"2040.945 2891.339\"/>" +
                 "<StockBrand DataType=\"StringSpan\" Preferred=\"Nopacoat Scaldia SC488961\"/>" +
                 "<MediaColor DataType=\"EnumerationSpan\" Preferred=\"White\" Actual=\"White\"/>" +

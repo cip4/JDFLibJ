@@ -80,14 +80,38 @@ package org.cip4.jdflib.datatypes;
 import java.util.HashSet;
 import java.util.Vector;
 
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 
-import junit.framework.TestCase;
 
-
-public class JDFAttributeMapTest extends TestCase
+public class JDFAttributeMapTest extends JDFTestCaseBase
 {
+    public void testClone()
+    {
+        JDFAttributeMap m1=new JDFAttributeMap("a1","v1");
+        m1.put("a2","v2");
+        JDFAttributeMap m2=new JDFAttributeMap(m1);
+        assertEquals(m1,m2);
+        m2.put("a2","v3");
+        assertNotSame(m1,m2);
+        assertEquals(m1.get("a2"), "v2");
+        assertEquals(m2.get("a2"), "v3");
+    }
+    
+    public void testCloneNull()
+    {
+        JDFAttributeMap m1=new JDFAttributeMap(null);
+        m1.put("a2","v2");
+        JDFAttributeMap m2=new JDFAttributeMap(m1);
+        assertEquals(m1,m2);
+        m2.put("a2","v3");
+        assertNotSame(m1,m2);
+        assertEquals(m1.get("a2"), "v2");
+        assertEquals(m2.get("a2"), "v3");
+    }
+    
     public void testEquals()
     {
         JDFAttributeMap m1=new JDFAttributeMap("a1","v1");
@@ -107,6 +131,8 @@ public class JDFAttributeMapTest extends TestCase
         assertEquals(m1.get("SignatureName"), "v1");
         m1.put(EnumPartIDKey.SheetName, "s1");
         assertEquals(m1.get("SheetName"), "s1");
+        m1.put(EnumPartIDKey.Side, EnumSide.Front);
+        assertEquals(m1.get("Side"), "Front");
         m1.put("Usage",EnumUsage.Input);
         assertEquals(m1.get("Usage"), "Input");
     }

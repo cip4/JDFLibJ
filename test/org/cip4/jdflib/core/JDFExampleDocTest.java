@@ -5,6 +5,7 @@
  */
 package org.cip4.jdflib.core;
 
+import java.io.File;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
 
@@ -19,7 +20,6 @@ import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
-import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFDeviceFilter;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -565,19 +565,17 @@ public class JDFExampleDocTest extends JDFTestCaseBase
         auditPool.setPhase(JDFElement.EnumNodeStatus.Cleanup, null,null);
         assertEquals(auditPool.getPoolChildren("PhaseTime",null).size(),3);
         // get the input runlist
-        JDFRunList rl = (JDFRunList)
-        root
-        .getResourceLinkPool().getInOutLinks(true?EnumUsage.Input:EnumUsage.Output, false, "RunList",null)
+        JDFRunList rl = (JDFRunList) root.getResourceLinkPool().getInOutLinks(EnumUsage.Input, false, "RunList",null)
         .elementAt(0);
         
         // pretend that cleanup modifies a resource and create a ResourceAudit
         JDFResourceAudit resourceAudit = auditPool.addResourceAudit("");
         resourceAudit.addNewOldLink(true, rl, EnumUsage.Input);
         resourceAudit.setContentsModified(true);
-        auditPool.setPhase(JDFElement.EnumNodeStatus.Completed, "", new VJDFAttributeMap());
+        auditPool.setPhase(JDFElement.EnumNodeStatus.Completed, null, null);
         
         /// fill the processrun
-        auditPool.addProcessRun(JDFElement.EnumNodeStatus.Completed, JDFConstants.EMPTYSTRING, new VJDFAttributeMap());
+        auditPool.addProcessRun(JDFElement.EnumNodeStatus.Completed, null, null);
         
         
         return 0;
@@ -1176,7 +1174,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
         JDFNode impNode=createImposition(pgNode);
         impNode.linkMatchingResource(rl,EnumProcessUsage.Document,null);
         
-        d.write2File(sm_dirTestDataTemp+fileSeparator+"DigitalDelivery.jdf",2,false);
+        d.write2File(sm_dirTestDataTemp+File.separator+"DigitalDelivery.jdf",2,false);
         
     }
     
@@ -1225,9 +1223,9 @@ public class JDFExampleDocTest extends JDFTestCaseBase
         pgNI.appendGeneralID("GangChildID",delNode1.getJobID(true));
         pgNI.appendGeneralID("GangChildID",delNode2.getJobID(true));
      
-        delDoc1.write2File(sm_dirTestDataTemp+fileSeparator+"GangDelivery1.jdf",2,false);
-        delDoc2.write2File(sm_dirTestDataTemp+fileSeparator+"GangDelivery2.jdf",2,false);
-        dGang.write2File(sm_dirTestDataTemp+fileSeparator+"GangImpose.jdf",2,false);
+        delDoc1.write2File(sm_dirTestDataTemp+File.separator+"GangDelivery1.jdf",2,false);
+        delDoc2.write2File(sm_dirTestDataTemp+File.separator+"GangDelivery2.jdf",2,false);
+        dGang.write2File(sm_dirTestDataTemp+File.separator+"GangImpose.jdf",2,false);
         
     }
     
@@ -1351,7 +1349,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
         {
             fail("rectangle");
         }
-        d.write2File(sm_dirTestDataTemp+fileSeparator+"StrippingGang.jdf",2,false);        
+        d.write2File(sm_dirTestDataTemp+File.separator+"StrippingGang.jdf",2,false);        
         return 0;
     }
     

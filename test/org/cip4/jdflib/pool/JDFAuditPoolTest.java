@@ -75,7 +75,9 @@ import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFSpawned;
 import org.cip4.jdflib.resource.JDFCreated;
+import org.cip4.jdflib.resource.JDFMerged;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
@@ -85,49 +87,76 @@ import org.cip4.jdflib.resource.JDFResource;
  */
 public class JDFAuditPoolTest extends JDFTestCaseBase
 {
-     
+    private JDFDoc jdfDoc;        
+    private JDFNode jdfRoot;
+    private JDFAuditPool myAuditPool;
+
     /**
      * Method testIncludesAttribute.
      * @throws Exception
      */
     public void testAddCreated() throws Exception
     {
-        JDFAuditPool myAuditPool = null;
-
-        JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);        
-        JDFNode jdfRoot = (JDFNode) jdfDoc.getRoot();
-        assertTrue("No Root found", jdfRoot != null);
-        if (jdfRoot == null) 
-            return;     // soothe findbugs ;)
-
-        myAuditPool = jdfRoot.getCreateAuditPool();
-
-        String myText = "";
-         
-        // Test AddCreated with one parameter
+         // Test AddCreated with one parameter
         myAuditPool.addCreated("A_Test_Author", null);
         JDFAudit myAudit = 
-            myAuditPool.getAudit(1, JDFAudit.EnumAuditType.Created, new JDFAttributeMap());                  
-        myText  = myAudit.getAuthor();
+            myAuditPool.getAudit(1, JDFAudit.EnumAuditType.Created, new JDFAttributeMap(),null);                  
+        String myText  = myAudit.getAuthor();
         assertEquals("Error: Author should be \"A_Test_Author\"", myText, "A_Test_Author");
         // Test AddCreate with two Parameter
                         
         // Get Create a ResourcePool
         JDFResourcePool myResourcePool = jdfRoot.getCreateResourcePool();
-                
         //Append a ResoureElement
         myResourcePool.appendElement("BindingIntent", "");
                 
         //Get that element back
         JDFResource e = (JDFResource) myResourcePool.getElement("BindingIntent", "", 0);
-                  
         myAuditPool.addCreated("A Test Author for JUnitTest 2", e);
                 
-        String strResourceID = e.getID();
+        String strResourceID = e.buildXPath("/JDF");
         JDFCreated kResourceAudit = 
-            (JDFCreated) myAuditPool.getChildWithAttribute(null, "ref", null, strResourceID, 0, true);
+            (JDFCreated) myAuditPool.getChildWithAttribute(null, "XPath", null, strResourceID, 0, true);
 
         assertNotNull("Error: Audit not found ", kResourceAudit);                
+    }
+
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+     */
+    protected void setUp() throws Exception
+    {
+        // TODO Auto-generated method stub
+        super.setUp();
+ 
+        jdfDoc = new JDFDoc(ElementName.JDF);        
+        jdfRoot = (JDFNode) jdfDoc.getRoot();
+        assertNotNull("No Root found", jdfRoot);
+
+        myAuditPool =  jdfRoot.getCreateAuditPool();
+
     }    
+    
+    public void testAddMerged() throws Exception
+    {
+         // Test AddCreated with one parameter
+        JDFDoc doc2=new JDFDoc("JDF");
+        JDFNode node2=doc2.getJDFRoot();
+        
+        JDFMerged m1=myAuditPool.addMerged(node2, null, null, null);
+        assertNotNull(m1);
+    }
+        
+    public void testAddSpawned() throws Exception
+    {
+         // Test AddCreated with one parameter
+        JDFDoc doc2=new JDFDoc("JDF");
+        JDFNode node2=doc2.getJDFRoot();
+        
+        JDFSpawned m1=myAuditPool.addSpawned(node2, null, null, null, null);
+        assertNotNull(m1);
+    }
+        
+    
     
 }

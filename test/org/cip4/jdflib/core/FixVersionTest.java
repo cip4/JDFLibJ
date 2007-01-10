@@ -144,7 +144,7 @@ public class FixVersionTest extends TestCase
     {
         JDFAuditPool ap=n.getAuditPool();
         assertNotNull(ap);
-        JDFCreated crea=(JDFCreated) ap.getAudit(0,EnumAuditType.Created,null);
+        JDFCreated crea=(JDFCreated) ap.getAudit(0, EnumAuditType.Created, null,null);
         String agent=crea.getAgentName();
         assertNotNull(agent);
         String author=crea.getAuthor();

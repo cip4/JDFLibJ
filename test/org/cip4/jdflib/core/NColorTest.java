@@ -5,6 +5,8 @@
  */
 package org.cip4.jdflib.core;
 
+import java.io.File;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
@@ -20,6 +22,8 @@ import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.util.StatusUtil;
+import org.cip4.jdflib.util.StatusUtil.AmountBag;
 
 
 public class NColorTest extends JDFTestCaseBase
@@ -54,15 +58,15 @@ public class NColorTest extends JDFTestCaseBase
         nodeInfo.setIdentical(vMap);
         exposedMedia.setIdentical(vMap);
 
-        doc.write2File(sm_dirTestDataTemp+fileSeparator+"FrontBackIdentSetup.jdf",2,false);
+        doc.write2File(sm_dirTestDataTemp+File.separator+"FrontBackIdentSetup.jdf",2,false);
         run2Seps("Sheet0", EnumSide.Front, null, null, 550, 100,"press0", EnumNodeStatus.Stopped); 
-        doc.write2File(sm_dirTestDataTemp+fileSeparator+"FrontBackIdent_Front0.jdf",2,false);
+        doc.write2File(sm_dirTestDataTemp+File.separator+"FrontBackIdent_Front0.jdf",2,false);
         run2Seps("Sheet1", EnumSide.Back, null, null, 550, 100,"press1",EnumNodeStatus.Completed); 
-        doc.write2File(sm_dirTestDataTemp+fileSeparator+"FrontBackIdent_Back1.jdf",2,false);
+        doc.write2File(sm_dirTestDataTemp+File.separator+"FrontBackIdent_Back1.jdf",2,false);
         run2Seps("Sheet1", EnumSide.Front, null, null, 1000, 150,"press0",EnumNodeStatus.Completed); 
-        doc.write2File(sm_dirTestDataTemp+fileSeparator+"FrontBackIdent_Front1.jdf",2,false);
+        doc.write2File(sm_dirTestDataTemp+File.separator+"FrontBackIdent_Front1.jdf",2,false);
         run2Seps("Sheet0", EnumSide.Back, null, null, 1000, 150,"press1",EnumNodeStatus.Completed); 
-        doc.write2File(sm_dirTestDataTemp+fileSeparator+"FrontBackIdent_Back0.jdf",2,false);
+        doc.write2File(sm_dirTestDataTemp+File.separator+"FrontBackIdent_Back0.jdf",2,false);
     }
 
     /**
@@ -73,20 +77,20 @@ public class NColorTest extends JDFTestCaseBase
         JDFElement.setLongID(false);
         setup(false,1);
 
-        doc.write2File(sm_dirTestDataTemp+fileSeparator+"FrontBackSetup.jdf",2,false);
+        doc.write2File(sm_dirTestDataTemp+File.separator+"FrontBackSetup.jdf",2,false);
         run2Seps("Sheet0", EnumSide.Front, null, null, 550, 100,"press0",EnumNodeStatus.Stopped); 
-        doc.write2File(sm_dirTestDataTemp+fileSeparator+"FrontBack_Front0.jdf",2,false);
+        doc.write2File(sm_dirTestDataTemp+File.separator+"FrontBack_Front0.jdf",2,false);
         run2Seps("Sheet0", EnumSide.Back, null, null, 550, 100,"press1",EnumNodeStatus.Stopped); 
-        doc.write2File(sm_dirTestDataTemp+fileSeparator+"FrontBack_Back0.jdf",2,false);
+        doc.write2File(sm_dirTestDataTemp+File.separator+"FrontBack_Back0.jdf",2,false);
 
         run2Seps("Sheet0", EnumSide.Front, null, null, 1000, 150,"press0",EnumNodeStatus.Completed); 
         final JDFAttributeMap attributeMapS0 = new JDFAttributeMap("SheetName","Sheet0");
         node.getLink(component, null).setAmountPoolAttribute("ActualAmount", String.valueOf(500), null, attributeMapS0);
-        doc.write2File(sm_dirTestDataTemp+fileSeparator+"FrontBack_Front1.jdf",2,false);
+        doc.write2File(sm_dirTestDataTemp+File.separator+"FrontBack_Front1.jdf",2,false);
         run2Seps("Sheet0", EnumSide.Back, null, null, 1000, 150,"press1",EnumNodeStatus.Completed); 
         node.getLink(component, null).setAmountPoolAttribute("ActualAmount", String.valueOf(1000), null, attributeMapS0);
         node.setPartStatus(attributeMapS0, EnumNodeStatus.Completed);
-        doc.write2File(sm_dirTestDataTemp+fileSeparator+"FrontBack_Back1.jdf",2,false);
+        doc.write2File(sm_dirTestDataTemp+File.separator+"FrontBack_Back1.jdf",2,false);
     }
     /**
      * test iteration using Identical in  NodeInfo
@@ -96,44 +100,43 @@ public class NColorTest extends JDFTestCaseBase
 
         JDFElement.setLongID(false);
         setup(true,2);
-        doc.write2File(sm_dirTestDataTemp+fileSeparator+"NColorSetup.jdf",2,false);
+        doc.write2File(sm_dirTestDataTemp+File.separator+"NColorSetup.jdf",2,false);
 
         run2Seps("Sheet0", EnumSide.Front, "Cyan", "Magenta",510,55,"press",EnumNodeStatus.Completed);
         JDFResourceLink rl=node.getLink(media,null);
         final JDFAttributeMap sheetNameMap0 = new JDFAttributeMap(EnumPartIDKey.SheetName.getName(),"Sheet0");
         final JDFAttributeMap sheetNameMap1 = new JDFAttributeMap(EnumPartIDKey.SheetName.getName(),"Sheet1");
         rl.setActualAmount(560,sheetNameMap0);
-
-        doc.write2File(sm_dirTestDataTemp+fileSeparator+"NColor_S0_F_CM.jdf",2,false);
+        doc.write2File(sm_dirTestDataTemp+File.separator+"NColor_S0_F_CM.jdf",2,false);
 
         run2Seps("Sheet0", EnumSide.Back, "Cyan", "Magenta",450,60,"press",EnumNodeStatus.Completed);
-        doc.write2File(sm_dirTestDataTemp+fileSeparator+"NColor_S0_B_CM.jdf",2,false);
+        doc.write2File(sm_dirTestDataTemp+File.separator+"NColor_S0_B_CM.jdf",2,false);
 
         run2Seps("Sheet1", EnumSide.Front, "Cyan", "Magenta",500,55,"press",EnumNodeStatus.Completed);
         rl.setActualAmount(560,sheetNameMap1);
-        doc.write2File(sm_dirTestDataTemp+fileSeparator+"NColor_S1_F_KY.jdf",2,false);
-        doc.write2File(sm_dirTestDataTemp+fileSeparator+"NColor_S1_F_CM.jdf",2,false);
+        doc.write2File(sm_dirTestDataTemp+File.separator+"NColor_S1_F_CM.jdf",2,false);
 
         run2Seps("Sheet1", EnumSide.Back, "Cyan", "Magenta",450,50,"press",EnumNodeStatus.Completed);
-        doc.write2File(sm_dirTestDataTemp+fileSeparator+"NColor_S1_B_CM.jdf",2,false);
+        doc.write2File(sm_dirTestDataTemp+File.separator+"NColor_S1_B_CM.jdf",2,false);
 
         run2Seps("Sheet0", EnumSide.Front, "Black", "Yellow",400,50,"press",EnumNodeStatus.Completed);
-        doc.write2File(sm_dirTestDataTemp+fileSeparator+"NColor_S0_F_KY.jdf",2,false);
+        doc.write2File(sm_dirTestDataTemp+File.separator+"NColor_S0_F_KY.jdf",2,false);
 
         run2Seps("Sheet0", EnumSide.Back, "Black", "Yellow",350,50,"press",EnumNodeStatus.Completed);
         // now the sheet is actually available
         component.getPartition(sheetNameMap0,null).setResStatus(EnumResStatus.Available,true);
         rl=node.getLink(component,null);
         rl.setActualAmount(350,sheetNameMap0);
-        doc.write2File(sm_dirTestDataTemp+fileSeparator+"NColor_S0_B_KY.jdf",2,false);
+        doc.write2File(sm_dirTestDataTemp+File.separator+"NColor_S0_B_KY.jdf",2,false);
 
         run2Seps("Sheet1", EnumSide.Front, "Black", "Yellow",400,50,"press",EnumNodeStatus.Completed);
+        doc.write2File(sm_dirTestDataTemp+File.separator+"NColor_S1_F_KY.jdf",2,false);
 
-        run2Seps("Sheet1", EnumSide.Back, "Black", "Yellow",350,50,"press",EnumNodeStatus.Completed);
-        doc.write2File(sm_dirTestDataTemp+fileSeparator+"NColor_S0_B_KY.jdf",2,false);
+        run2Seps("Sheet1", EnumSide.Back, "Black", "Yellow",360,40,"press",EnumNodeStatus.Completed);
         component.getPartition(sheetNameMap1,null).setResStatus(EnumResStatus.Available,true);
         rl=node.getLink(component,null);
-        rl.setActualAmount(350,sheetNameMap1);
+        rl.setActualAmount(360,sheetNameMap1);
+        doc.write2File(sm_dirTestDataTemp+File.separator+"NColor_S1_B_KY.jdf",2,false);
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -143,30 +146,39 @@ public class NColorTest extends JDFTestCaseBase
      */
     private void run2Seps(String sheet, EnumSide side, String sep1, String sep2, int good, int waste, String deviceID, EnumNodeStatus endStatus)
     {
+        String jmfFile=sm_dirTestDataTemp+File.separator+"NColorStatus";
         JDFAttributeMap[] map=new JDFAttributeMap[sep1==null ? 1 : 2];
-        map[0]=new JDFAttributeMap(EnumPartIDKey.SheetName.getName(),sheet);
-        map[0].put(EnumPartIDKey.Side.getName(),side.getName());
+        map[0]=new JDFAttributeMap(EnumPartIDKey.SheetName,sheet);
+        map[0].put(EnumPartIDKey.Side,side);
+       jmfFile+=sheet+"_"+side.getName();
         if(sep1!=null)
         {
 
             map[1]=new JDFAttributeMap(map[0]);
-            map[0].put(EnumPartIDKey.Separation.getName(),sep1);
-            map[1].put(EnumPartIDKey.Separation.getName(),sep2);
+            map[0].put(EnumPartIDKey.Separation,sep1);
+            map[1].put(EnumPartIDKey.Separation,sep2);
+            jmfFile+="_"+sep1+"_"+sep2;
         }
         VJDFAttributeMap vMap=new VJDFAttributeMap(map);  
 
         if(sep1!=null)
             nodeInfo.setIdentical(vMap);
 
-        node.setPhase(EnumNodeStatus.InProgress,"dummy",deviceID,EnumDeviceStatus.Running,null,vMap);
-        node.setPhase(endStatus,"dummy",deviceID,EnumDeviceStatus.Idle,null,vMap);
-
         JDFResourceLink rl=node.getLink(component,null);
-        //   rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT,String.valueOf(good+waste),null,vMap);
-        vMap.put("Condition","Good");
-        rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT,String.valueOf(good),null,vMap);
-        vMap.put("Condition","Waste");
-        rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT,String.valueOf(waste),null,vMap);
+        VElement vRL=new VElement();
+        vRL.add(rl);
+        StatusUtil su=new StatusUtil(node,vMap,vRL);
+        AmountBag[] bags=new AmountBag[1];
+        bags[0]=su.new AmountBag(rl.getrRef());
+        bags[0].addPhase(good, waste, false);
+        su.setDeviceID("myDevice");
+        su.setPhase(EnumNodeStatus.InProgress,"dummy",EnumDeviceStatus.Running,null,bags);
+        bags[0].addPhase(0, 0, true);
+        su.setPhase(endStatus,"dummy",EnumDeviceStatus.Idle,null,bags);
+        JDFDoc jmfStatus=su.getDocJMFPhaseTime();
+        jmfStatus.write2File(jmfFile+"_status.jmf", 2,false);
+        JDFDoc jmfRes=su.getDocJMFResource();
+        jmfRes.write2File(jmfFile+"_resource.jmf", 2,false);
     }
 
     ///////////////////////////////////////////////////////////////////

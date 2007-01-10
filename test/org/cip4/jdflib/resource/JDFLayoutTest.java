@@ -70,6 +70,8 @@
 
 package org.cip4.jdflib.resource;
 
+import java.io.File;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.core.AttributeName;
@@ -79,6 +81,7 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
@@ -223,16 +226,12 @@ public class JDFLayoutTest extends JDFTestCaseBase
         assertEquals("num surfaces",2,sh.numSurfaces());
         assertEquals("sheet name",su.getLocalName(),ElementName.LAYOUT);
         
-        boolean bCatch=false;
         try{
-            sh.appendBackSurface();            
+            sh.appendBackSurface();   
+            fail("no two back surfaces");
         }
         catch (JDFException e)
-        {
-            bCatch=true;
-            
-        }
-        assertTrue(bCatch);
+        {/* nop */}
         
         si=lo.getCreateSignature(4);
         assertEquals("num sigs",3,lo.numSignatures());
@@ -335,17 +334,59 @@ public class JDFLayoutTest extends JDFTestCaseBase
         
      }
     /////////////////////////////////////////////////////
-    
+    public void testGetLayoutLeaves()
+    {
+        testBuildOldLayout();
+        JDFLayout lo=(JDFLayout) n.getMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null,0);
+        VElement leaves=lo.getLayoutLeaves(false);
+        assertEquals(leaves.size(), 2);
+        JDFSignature si=lo.getSignature(1);
+        leaves=si.getLayoutLeaves(false);
+        assertEquals(leaves.size(), 2);
+        JDFSheet sh=si.getSheet(2);
+        leaves=sh.getLayoutLeaves(false);
+        assertEquals(leaves.size(), 2);
+ 
+     }
+   
     public void testFixVersionProblem()
     {
         JDFParser p=new JDFParser();
-        JDFDoc d=p.parseFile(sm_dirTestData+fileSeparator+"FixVersionProblem.jdf");
+        JDFDoc d=p.parseFile(sm_dirTestData+File.separator+"FixVersionProblem.jdf");
         assertNotNull("FixVersionProblem exists",d);
         n=d.getJDFRoot();
         n.fixVersion(EnumVersion.Version_1_2);
-        JDFLayout lo=(JDFLayout) n.getResourcePool().getElement(ElementName.LAYOUT);
-        assertEquals(lo.numChildElements("Signature",null),1);
+        JDFLayout lo=(JDFLayout) n.getResourcePool().getElement(ElementName.LAYOUT, null, 0);
+        assertEquals(lo.numChildElements("Signature",null),1);       
+    }
+    /////////////////////////////////////////////////////
+    
+    
+    /*
+     * GeneratedObject
 
+CTM or Position
+Position: See ImageShift PositionX and PositionY, Shift (Margins) – See ShiftFront RelativeShift?
+
+Anchor Point (same as position ll, ul, cc, spine…) (if CTM is given)
+Orientation (rotation, matrix or ll, ul, …)
+Contents  Format/Template
+JobField (Replace, DynamicField?)
+SeparationList
+Mark References (FoldMark, CIE, …)
+
+     */
+    public void testGeneratedObject()
+    {
+        JDFDoc d=new JDFDoc("JDF");
+        n=d.getJDFRoot();
+        JDFLayout lo=(JDFLayout) n.addResource("Layout",null,EnumUsage.Input, null, null, null,null);
+        
+        JDFMarkObject mark=lo.appendMarkObject();
+        JDFJobField jf=mark.appendJobField();
+        
+        
+        d.write2File(sm_dirTestDataTemp+"generatedObject.jdf", 2, false);
         
     }
     /////////////////////////////////////////////////////

@@ -74,9 +74,15 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResourceTest;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.process.JDFComponent;
 
 /**
  * @author RP
@@ -88,14 +94,78 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
      
     ///////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////
-    
     /**
-     * Method testGetMatchingPartAmountVector.
+     * Method testVirtualAmounts.
      * @throws Exception
      */
-    public void testGetMatchingPartAmountVector() throws Exception
+    public void testReducePartAmounts() throws Exception
     {
+        JDFDoc d=new JDFDoc("JDF");
+        JDFNode n=d.getJDFRoot();
+        n.setType(EnumType.ConventionalPrinting);
+        JDFComponent comp=(JDFComponent) n.addResource("Component", null, EnumUsage.Output, null, null, null, null);
+        JDFAttributeMap map=new JDFAttributeMap(EnumPartIDKey.SignatureName,"Sig1");
+        JDFResourceLink rl=n.getLink(comp, null);
+        for(int i=0;i<5;i++)
+        {
+            map.put(EnumPartIDKey.SheetName, "Sheet"+i);
+            comp.getCreatePartition(map, new VString("SignatureName SheetName"," "));
+            rl.setAmount(500+i, map);
+            JDFAttributeMap map2=new JDFAttributeMap(map);
+            map2.put("Condition", "Good");
+            rl.setActualAmount(500+i, map2);
+            map2.put("Condition", "Waste");
+            rl.setActualAmount(50+i, map2);
+        }
+        VJDFAttributeMap v=new VJDFAttributeMap();
+        JDFAttributeMap testMap=new JDFAttributeMap(EnumPartIDKey.Condition,"Good");
+        v.add(testMap);
+        JDFAmountPool ap=rl.getAmountPool();
+        assertEquals("15 pa entries",ap.numChildElements(ElementName.PARTAMOUNT,null), 15);
+        ap.reducePartAmounts(v);
+        assertEquals("5 pa entries",ap.numChildElements(ElementName.PARTAMOUNT,null), 5);
+        testMap.put("SheetName","Sheet3");
+        ap.reducePartAmounts(v);
+        assertEquals("1 pa entries",ap.numChildElements(ElementName.PARTAMOUNT,null), 1);
+    }  ///////////////////////////////////////////////////////
+    
+    /**
+     * Method testVirtualAmounts.
+     * @throws Exception
+     */
+    public void testVirtualAmounts() throws Exception
+    {
+        JDFDoc d=new JDFDoc("JDF");
+        JDFNode n=d.getJDFRoot();
+        n.setType(EnumType.ConventionalPrinting);
+        JDFComponent comp=(JDFComponent) n.addResource("Component", null, EnumUsage.Output, null, null, null, null);
+        JDFAttributeMap map=new JDFAttributeMap(EnumPartIDKey.SignatureName,"Sig1");
+        JDFResourceLink rl=n.getLink(comp, null);
+        for(int i=0;i<5;i++)
+        {
+            map.put(EnumPartIDKey.SheetName, "Sheet"+i);
+            comp.getCreatePartition(map, new VString("SignatureName SheetName"," "));
+            rl.setAmount(500+i, map);
+            JDFAttributeMap map2=new JDFAttributeMap(map);
+            map2.put("Condition", "Good");
+            rl.setActualAmount(500+i, map2);
+            map2.put("Condition", "Waste");
+            rl.setActualAmount(50+i, map2);
+
+            map2.put("Condition", "Good");
+            assertEquals(rl.getActualAmount(map2), 500+i,0.01);
+            map2.put("Condition", "Waste");
+            assertEquals(rl.getActualAmount(map2), 50+i,0.01);
+        }
+    }
+    ///////////////////////////////////////////////////////
+        
+        /**
+         * Method testGetMatchingPartAmountVector.
+         * @throws Exception
+         */
+        public void testGetMatchingPartAmountVector() throws Exception
+        {
         JDFDoc d=JDFResourceTest.creatXMDoc();
         JDFNode n=d.getJDFRoot();
         JDFResourceLink xmLink=n.getLink(0,ElementName.EXPOSEDMEDIA,null,null);

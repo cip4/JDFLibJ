@@ -5,6 +5,8 @@
  */
 package org.cip4.jdflib.core;
 
+import java.io.File;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoBundle.EnumBundleType;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -59,7 +61,7 @@ public class MISFinTest extends JDFTestCaseBase
         
         JDFBundle bundleBrochure=compBrochure.appendBundle();
         bundleBrochure.setDescriptiveName("Dummy Bundle to inhibit inheritence of the box Bundle");
-        d.write2File(sm_dirTestDataTemp+fileSeparator+"MISFinAmount.jdf",2,false);
+        d.write2File(sm_dirTestDataTemp+File.separator+"MISFinAmount.jdf",2,false);
     }
     
     /////////////////////////////////////////////////////////////////////////
@@ -85,7 +87,7 @@ public class MISFinTest extends JDFTestCaseBase
         for(int i=0;i<2;i++)
         {
             // create a pallet partition - may also use the root
-            JDFComponent compPallet=(JDFComponent) comp.addPartition(EnumPartIDKey.DeliveryUnit0,"Pallet");
+            JDFComponent compPallet=(JDFComponent) comp.addPartition(EnumPartIDKey.DeliveryUnit0,"Pallet"+i);
             compPallet.setProductID("Pallet_"+i);
             
             JDFBundle bundlePallet=compPallet.getCreateBundle();
@@ -109,7 +111,7 @@ public class MISFinTest extends JDFTestCaseBase
             biBrochures.setAmount(50);
         }
         
-        d.write2File(sm_dirTestDataTemp+fileSeparator+"MISFinAmountManifest.jdf",2,false);
+        d.write2File(sm_dirTestDataTemp+File.separator+"MISFinAmountManifest.jdf",2,false);
     }
     
     /////////////////////////////////////////////////////////////////////////
@@ -136,7 +138,7 @@ public class MISFinTest extends JDFTestCaseBase
         for(int i=0;i<2;i++)
         {
             // create a pallet partition - may also use the root
-            JDFComponent compPallet=(JDFComponent) comp.addPartition(EnumPartIDKey.DeliveryUnit0,"Pallet");
+            JDFComponent compPallet=(JDFComponent) comp.addPartition(EnumPartIDKey.DeliveryUnit0,"Pallet"+i);
             compPallet.setProductID("Pallet_"+i);
             
             JDFBundle bundlePallet=compPallet.getCreateBundle();
@@ -164,7 +166,7 @@ public class MISFinTest extends JDFTestCaseBase
             }
         }
         
-        d.write2File(sm_dirTestDataTemp+fileSeparator+"MISFinAmountCompleteManifest.jdf",2,false);
+        d.write2File(sm_dirTestDataTemp+File.separator+"MISFinAmountCompleteManifest.jdf",2,false);
     }
     
     /////////////////////////////////////////////////////////////////////////

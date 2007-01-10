@@ -47,6 +47,11 @@ public class JDFNumberRangeListTest extends TestCase
         assertTrue("Bad inRange", rangeList.inRange(0.4));
         assertTrue("Bad inRange", rangeList.inRange(12345.));
     }
+    public final void testInitRange() throws Exception
+    {
+        JDFNumberRange range = new JDFNumberRange("0.0");
+        assertEquals(range.getLeft(),0.0,0.0);
+    }
     
     public final void testIsPartOfRange()
     {

@@ -86,24 +86,19 @@ import org.cip4.jdflib.JDFTestCaseBase;
 public class JDFIntegerRangeTest extends JDFTestCaseBase
 {
     
-    public final void testJDFIntegerRangeString()
+    public final void testJDFIntegerRangeString() throws Exception
     {
         
         JDFIntegerRange range = new JDFIntegerRange();
-        try
-        {
-            range = new JDFIntegerRange(" 0 ~ 1 ");
-        }
-        catch (DataFormatException dfe)
-        {
-            fail("DataFormatException");
-        }
-        
+        range = new JDFIntegerRange(" 0 ~ 1 ");
+         
         // rangeList is not empty
         assertFalse("Bad Constructor from a given String", range.toString().length()==0);
         // must be trasformed into the string "0~1"
         assertEquals("Bad Constructor from a given String",range.toString(),"0 ~ 1"); 
-        
+        range = new JDFIntegerRange(" 1 ~ 1 ");
+        assertEquals("Bad Constructor from a given String",range.toString(),"1"); 
+               
     }  
 
     ///////////////////////////////////////////////////////////////////
@@ -133,7 +128,7 @@ public class JDFIntegerRangeTest extends JDFTestCaseBase
         assertEquals("Bad Constructor from a given String",range.toString(),"0 ~ 2"); 
         assertFalse(range.append(1));
         assertEquals("Bad Constructor from a given String",range.toString(),"0 ~ 2");         
-    }
+}
     
     ///////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////

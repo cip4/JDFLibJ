@@ -81,8 +81,10 @@ import junit.framework.TestCase;
 
 import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFElement.EnumBoolean;
+import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFNumberRangeList;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
@@ -125,6 +127,7 @@ public class JDFDevCapTest extends TestCase
         JDFIntegerState is=(JDFIntegerState) d.getRoot();
         JDFIntegerRangeList irl = new JDFIntegerRangeList("12~15");
         is.setAllowedValueList(irl);
+        is.setListType(EnumListType.RangeList);
         assertTrue(is.fitsValue("12~15", EnumFitsValue.Allowed));
         assertFalse(is.fitsValue("19~33", EnumFitsValue.Allowed));
         irl = new JDFIntegerRangeList("12~15 19~33");
@@ -139,7 +142,9 @@ public class JDFDevCapTest extends TestCase
         JDFNumberState ns=(JDFNumberState) d.getRoot();
         JDFNumberRangeList nrl = new JDFNumberRangeList("12.45~15.88");
         ns.setAllowedValueList(nrl);
+        ns.setListType(EnumListType.RangeList);
         assertTrue(ns.fitsValue("12.45~15.88", EnumFitsValue.Allowed));
+        assertTrue(ns.fitsValue("12.45~13.0", EnumFitsValue.Allowed));
         assertFalse(ns.fitsValue("19.0~33.234", EnumFitsValue.Allowed));
         nrl = new JDFNumberRangeList("12.45~15.88 19.0~33.234");
         ns.setAllowedValueList(nrl);
@@ -173,6 +178,8 @@ public class JDFDevCapTest extends TestCase
         assertTrue(es.fitsValue("bar foo", EnumFitsValue.Allowed));
         assertFalse(es.fitsValue("foo bar foo", EnumFitsValue.Allowed));
         assertFalse(es.fitsValue("foo bar fnarf", EnumFitsValue.Allowed));
+        
+          
 //TODO implement more list types        
 //        es.setListType(EnumListType.OrderedList);
 //        assertFalse(es.fitsValue("foo", EnumFitsValue.Allowed));
@@ -181,6 +188,27 @@ public class JDFDevCapTest extends TestCase
 //        assertFalse(es.fitsValue("foo bar foo", EnumFitsValue.Allowed));
 //        assertFalse(es.fitsValue("foo bar fnarf", EnumFitsValue.Allowed));
     }
+
+    public void testRegExp()
+    {
+        for(int i=0;i<2;i++)
+        {
+            JDFDoc d=new JDFDoc("EnumerationState");
+            JDFEnumerationState es=(JDFEnumerationState) d.getRoot();
+
+            es.setListType(EnumListType.List);
+            es.setAllowedRegExp("a b( c)?( d)*");
+            if(i==1)
+                es.setAllowedValueList(new VString("a b c d"," "));
+            assertTrue(es.fitsValue("a b", EnumFitsValue.Allowed));
+            assertTrue(es.fitsValue("a b c", EnumFitsValue.Allowed));
+            assertTrue(es.fitsValue("a b c d d", EnumFitsValue.Allowed));
+            assertFalse(es.fitsValue("a b c c", EnumFitsValue.Allowed));
+            assertFalse(es.fitsValue("a c b", EnumFitsValue.Allowed));        
+            assertFalse(es.fitsValue("abc", EnumFitsValue.Allowed));        
+            assertFalse(es.fitsValue("A b c", EnumFitsValue.Allowed));
+        }
+    }    
     
     public void testNameState() throws Exception
     {
@@ -189,12 +217,19 @@ public class JDFDevCapTest extends TestCase
         VString nl = new VString();
         nl.add("anna~berta");
         ns.setAllowedValueList(nl);
+        ns.setListType(EnumListType.RangeList);
         assertTrue(ns.fitsValue("anna~berta", EnumFitsValue.Allowed));
         assertFalse(ns.fitsValue("hans~otto", EnumFitsValue.Allowed));
         nl.add("anna~berta hans~otto");
         ns.setAllowedValueList(nl);
         assertTrue(ns.fitsValue("anna~berta", EnumFitsValue.Allowed));
         assertTrue(ns.fitsValue("hans~otto", EnumFitsValue.Allowed));
+        ns.setAllowedValueList(null);
+        ns.setAllowedRegExp("*");
+        assertTrue(ns.fitsValue("hans~otto", EnumFitsValue.Allowed));
+        ns.setAllowedRegExp("[ab].*");
+        assertTrue(ns.fitsValue("al", EnumFitsValue.Allowed));
+        assertFalse(ns.fitsValue("cl", EnumFitsValue.Allowed));
     }
     
     
@@ -418,7 +453,28 @@ public class JDFDevCapTest extends TestCase
         assertEquals(rs.getName(), "bar");
         rs=dc.getRectangleState("bar");
         assertNotNull(rs);
-        assertEquals(rs.getName(), "bar");
-       
+        assertEquals(rs.getName(), "bar");      
+    }
+    
+    public void testStateReportRequired() throws Exception
+    {
+        JDFDoc d=new JDFDoc("DevCap");
+        JDFDevCap dc=(JDFDevCap) d.getRoot();
+        dc.setName("foo");
+        JDFIntegerState is=dc.appendIntegerState();
+        is.setName("bar1");
+        is.setRequired(true);
+        JDFIntegerState is2=dc.appendIntegerState();
+        is2.setName("bar2");
+        is2.setRequired(false);
+        
+        JDFDoc d2=new JDFDoc("foo");
+        KElement foo=d2.getRoot();
+        
+        JDFDoc d3=new JDFDoc("parent");
+        KElement parent=d3.getRoot();
+        dc.stateReport(foo, EnumFitsValue.Allowed, EnumValidationLevel.Complete, false, true, parent);
+        assertTrue(parent.toString().indexOf("bar1")>=0);
+        assertFalse(parent.toString().indexOf("bar2")>=0);
     }
 }

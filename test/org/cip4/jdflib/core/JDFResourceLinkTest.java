@@ -191,9 +191,42 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
         map.put("SheetName","b");
         rl.setActualAmount(26,map);
         assertEquals(rl.getMinAmountPoolAttribute("ActualAmount",null,new JDFAttributeMap("SignatureName","3"),42),24.,0.);
-        
+    }
+    
+    public void testExpandAmountPool()
+    {
+        JDFDoc d=new JDFDoc(ElementName.JDF);
+        JDFNode n=d.getJDFRoot();
+        n.setVersion(JDFElement.EnumVersion.Version_1_3);
+        n.setType("ConventionalPrinting",true);
+        JDFComponent comp=(JDFComponent)n.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, null, null, null);
+        comp.addPartitions(EnumPartIDKey.SheetName, new VString("S1 S2 S3",null));
+        JDFResourceLink rl=n.getLink(comp,null);
+        rl.setAmount(42, null);
+        rl.setPipeProtocol("JDF");
+        assertEquals(rl.getAmount(null), 42.,0.1);
+        assertNull(rl.getAmountPool());
+        rl.expandAmountPool();
+        assertNull(rl.getAttribute("Amount",null,null));
+        assertEquals(rl.getAmount(new JDFAttributeMap(EnumPartIDKey.SheetName,"S2")), 42.,0.1);
+        assertNotNull(rl.getAmountPool());
+        assertEquals(rl.getPipeProtocol(),"JDF");
         
     }
+    
+    public void testGetAmountPoolDouble()
+    {
+        JDFDoc d=new JDFDoc("TestLink");
+        JDFResourceLink rl=(JDFResourceLink) d.getRoot();
+        rl.setActualAmount(12,new JDFAttributeMap("SignatureName","1"));
+        rl.setActualAmount(14,new JDFAttributeMap("SignatureName","2"));
+        assertEquals(rl.getActualAmount(null),26.,0.1);
+        rl.setAmount(42., null);
+        assertEquals("root attribute is incorrectly retrieved",rl.getAmount(new JDFAttributeMap("SignatureName","2")),42.,0.1);
+        rl.removeChild(ElementName.AMOUNTPOOL, null, 0);
+        rl.setActualAmount(33, null);
+        assertEquals(rl.getActualAmount(null),33.,0.1);
+     }
     
 	/**
 	 * tests whether the convoluted inheritence of partAmount and ResourceLink function correctly
@@ -268,6 +301,23 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
     }
     
+    public void testSetAmountPoolAttribute() throws Exception
+    {
+        JDFDoc d=new JDFDoc("ResourceLinkPool");
+        JDFResourceLinkPool rlp=(JDFResourceLinkPool)d.getRoot();
+        JDFResourceLink foo=(JDFResourceLink) rlp.appendElement("FooLink");
+        VJDFAttributeMap vPart=new VJDFAttributeMap();
+        vPart.add(new JDFAttributeMap());
+        foo.setAmountPoolAttribute("blub", "123", null, vPart );
+        assertEquals(foo.getAttribute("blub"), "123");
+        vPart=new VJDFAttributeMap();
+        final JDFAttributeMap map = new JDFAttributeMap("SheetName","b");
+        vPart.add(map);
+        foo.setAmountPoolAttribute("blub", "123", null, vPart );
+        assertNull(foo.getAttribute("blub",null,null));
+        assertEquals(foo.getAmountPoolAttribute("blub", null, map, 0), "123");
+    
+    }
     /**
      * Method testGetLinkRoot.
      * @throws Exception
