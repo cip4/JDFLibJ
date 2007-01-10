@@ -305,7 +305,7 @@ public class CheckJDF
          if(xmlParent != null)
          {
              testElement = xmlParent.appendElement("TestElement");
-             testElement.setAttribute("XPath",kElement.buildXPath());
+             testElement.setAttribute("XPath",kElement.buildXPath(null));
              testElement.setAttribute("NodeName",kElement.getNodeName());
              String strID = kElement.getAttribute(AttributeName.ID,null,null);
              if (strID!=null)
@@ -373,11 +373,11 @@ public class CheckJDF
          
          VString privateAttributes = new VString(jdfElement.getUnknownAttributes(false, 9999999));
          VString unknownAttributes = new VString(jdfElement.getUnknownAttributes(true, 9999999));
-         privateAttributes.removeStrings(unknownAttributes);
+         privateAttributes.removeStrings(unknownAttributes, Integer.MAX_VALUE);
          
          VString privateElements = new VString(jdfElement.getUnknownElements(false, 9999999));
          VString unknownElements = new VString(jdfElement.getUnknownElements(true, 9999999));
-         privateElements.removeStrings(unknownElements);
+         privateElements.removeStrings(unknownElements, Integer.MAX_VALUE);
          
          if (bPrintNameSpace)
          {
@@ -478,7 +478,7 @@ public class CheckJDF
              if (!bQuiet)
              {
                  sysOut.println(indent(indent)
-                         + "--- Valid:"+ jdfElement.buildXPath() + " " + id);
+                         + "--- Valid:"+ jdfElement.buildXPath(null) + " " + id);
              }
              if(testElement!=null)
                  testElement.setAttribute("IsValid", true, null);
@@ -493,7 +493,7 @@ public class CheckJDF
              if (bIsOK) // for the case "Logic is not OK", we printed this line already.
              {
                  sysOut.println(indent(indent)
-                         + "!!! InValid Element: "+ kElement.buildXPath()+ " " + id + " !!! ");
+                         + "!!! InValid Element: "+ kElement.buildXPath(null)+ " " + id + " !!! ");
              }
              if(testElement!=null)
                  testElement.setAttribute("IsValid", false, null);
@@ -509,7 +509,7 @@ public class CheckJDF
                  setErrorType(e,"MultipleID", "Multiply defined ID = " + id,indent);
                  e.setAttribute("NodeName", "ID");
                  e.setAttribute("Value", id);
-                 e.setAttribute("XPath", jdfElement.buildXPath()+ "/@ID");
+                 e.setAttribute("XPath", jdfElement.buildXPath(null)+ "/@ID");
              }
                           
              boolean printMissElms=true;
@@ -562,33 +562,33 @@ public class CheckJDF
              VString prereleaseElements = new VString(jdfElement.getPrereleaseElements( 9999999));
              
              // unknown attributes are also invalid -> remove them from the print list
-             invalidAttributes.removeStrings(unknownAttributes);
-             invalidAttributes.removeStrings(deprecatedAttributes);
-             invalidAttributes.removeStrings(prereleaseAttributes);
-             unknownAttributes.removeStrings(prereleaseAttributes);
-             unknownAttributes.removeStrings(deprecatedAttributes);
+             invalidAttributes.removeStrings(unknownAttributes,99999);
+             invalidAttributes.removeStrings(deprecatedAttributes,99999);
+             invalidAttributes.removeStrings(prereleaseAttributes,99999);
+             unknownAttributes.removeStrings(prereleaseAttributes,99999);
+             unknownAttributes.removeStrings(deprecatedAttributes,99999);
              
              // unknown elements are also invalid -> remove them from the print list
-             invalidElements.removeStrings(unknownElements);
-             invalidElements.removeStrings(deprecatedElements);
-             invalidElements.removeStrings(prereleaseElements);
-             unknownElements.removeStrings(deprecatedElements);
-             unknownElements.removeStrings(prereleaseElements);
+             invalidElements.removeStrings(unknownElements,99999);
+             invalidElements.removeStrings(deprecatedElements,99999);
+             invalidElements.removeStrings(prereleaseElements,99999);
+             unknownElements.removeStrings(deprecatedElements,99999);
+             unknownElements.removeStrings(prereleaseElements,99999);
              
              // swapped elements are also invalid -> remove them from the print list
-             unknownElements.removeStrings(swapElem);
+             unknownElements.removeStrings(swapElem,99999);
              // swapped attributes are also invalid -> remove them from the print list
-             unknownAttributes.removeStrings(swapAtt);
+             unknownAttributes.removeStrings(swapAtt,99999);
              
              // find missing elements and attributes
              if (level.getValue()>= EnumValidationLevel.Complete.getValue())
              {
                  missingAttributes = new VString(jdfElement.getMissingAttributes(9999999));
                  // missing attributes are also invalid -> remove them from the print list
-                 invalidAttributes.removeStrings(missingAttributes);
+                 invalidAttributes.removeStrings(missingAttributes,99999);
                  missingElements = new VString(jdfElement.getMissingElements(9999999));
                  // missing elements are also invalid -> remove them from the print list
-                 invalidElements.removeStrings(missingElements);
+                 invalidElements.removeStrings(missingElements,99999);
              }
              
              // remove all double entries before printing
@@ -612,7 +612,7 @@ public class CheckJDF
              }
              if (swapElem.size()>0)
              {
-                 testElement.setAttribute("SwapElements",swapElem.getString(JDFConstants.BLANK,null,null));
+                 testElement.setAttribute("SwapElements",StringUtil.setvString(swapElem,JDFConstants.BLANK,null,null));
              }
              
              
@@ -628,13 +628,13 @@ public class CheckJDF
                      {
                          KElement e = testElement.appendElement("TestElement");
                          setErrorType(e, "MissingElement","Missing Element "+missEl);
-                         e.setAttribute("XPath", jdfElement.buildXPath() + "/" + missEl + "[1]");
+                         e.setAttribute("XPath", jdfElement.buildXPath(null) + "/" + missEl + "[1]");
                          e.setAttribute("NodeName", missEl);
                      }
                  }
                  if (testElement != null && missingElements.size()>0)
                  {
-                     testElement.setAttribute("MissingElements",missingElements.getString(JDFConstants.BLANK,null,null));
+                     testElement.setAttribute("MissingElements",StringUtil.setvString(missingElements,JDFConstants.BLANK,null,null));
                  }
              }
              for (j = 0; j < unknownElements.size(); j++)
@@ -645,7 +645,7 @@ public class CheckJDF
              }
              if (testElement != null && unknownElements.size()>0)
              {
-                 testElement.setAttribute("UnknownElements",unknownElements.getString(JDFConstants.BLANK,null,null));
+                 testElement.setAttribute("UnknownElements",StringUtil.setvString(unknownElements,JDFConstants.BLANK,null,null));
              }
              
              printElementList(indent, testElement, jdfElement, invalidElements, "Invalid");
@@ -697,7 +697,7 @@ public class CheckJDF
              setErrorType(e,"DanglingURL", "Dangling URL points to Nirvana: "+url,indent);                           
              e.setAttribute("NodeName", "URL");
              e.setAttribute("Value", url);
-             e.setAttribute("XPath", element.buildXPath()+ "/@URL");
+             e.setAttribute("XPath", element.buildXPath(null)+ "/@URL");
          }
      }
 
@@ -724,10 +724,10 @@ public class CheckJDF
                          + invalidElem);
              }
              KElement ePart = part;
-             KElement eInv = ePart.getElement(invalidElem);
+             KElement eInv = ePart.getElement(invalidElem, null, 0);
              if(eInv==null)
              {
-                 eInv=ePart.getElement(invalidElem + "Ref");
+                 eInv=ePart.getElement(invalidElem + "Ref", null, 0);
                  if(eInv!=null)
                      sysOut.println(
                              indent(indent+2) + whatType 
@@ -737,7 +737,7 @@ public class CheckJDF
          }
          if (testElement != null && elementVector.size()>0)
          {
-             testElement.setAttribute(whatType+"Elements",elementVector.getString(JDFConstants.BLANK,null,null));
+             testElement.setAttribute(whatType+"Elements",StringUtil.setvString(elementVector,JDFConstants.BLANK,null,null));
          }
     }
 
@@ -762,7 +762,7 @@ public class CheckJDF
                              KElement e = testElement.appendElement("TestAttribute");
                              setErrorType(e,"MissingAttribute","Missing Partition key: "+invalidAt, indent+2);
                              e.setAttribute("NodeName", invalidAt);
-                             e.setAttribute("XPath", part.buildXPath()+ "/@" + invalidAt);
+                             e.setAttribute("XPath", part.buildXPath(null)+ "/@" + invalidAt);
                          }
                      }
                      else
@@ -770,7 +770,7 @@ public class CheckJDF
                          KElement e = testElement.appendElement("TestAttribute");
                          setErrorType(e,"InvalidAttribute","Incorrectly placed Partition key: "+invalidAt, indent+2);
                          e.setAttribute("NodeName", invalidAt);
-                         e.setAttribute("XPath", part.buildXPath()+ "/@" + invalidAt);                         
+                         e.setAttribute("XPath", part.buildXPath(null)+ "/@" + invalidAt);                         
                      }
                  }
                  else if (!part.hasAttribute(invalidAt, null, false)) // if the resourceRoot doesn`t have it as well
@@ -780,7 +780,7 @@ public class CheckJDF
                          KElement e = testElement.appendElement("TestAttribute");
                          setErrorType(e,"MissingAttribute","Missing required attribute: "+invalidAt,indent+2);
                          e.setAttribute("NodeName", invalidAt);
-                         e.setAttribute("XPath", part.buildXPath()+ "/@" + invalidAt);
+                         e.setAttribute("XPath", part.buildXPath(null)+ "/@" + invalidAt);
                      }
                  }
              }
@@ -808,14 +808,14 @@ public class CheckJDF
                      }
                      setErrorType(e,whatType+"Attribute",invalidAt+" "+message);
                      e.setAttribute("NodeName", invalidAt);
-                     e.setAttribute("XPath", part.buildXPath()+ "/@" + invalidAt);
+                     e.setAttribute("XPath", part.buildXPath(null)+ "/@" + invalidAt);
                      e.setAttribute("Value", part.getAttribute(invalidAt));
                      
                  }
              }
          if (attributeVector.size()>0)
          {
-             testElement.setAttribute(whatType+"Attributes",attributeVector.getString(JDFConstants.BLANK,null,null));
+             testElement.setAttribute(whatType+"Attributes",StringUtil.setvString(attributeVector,JDFConstants.BLANK,null,null));
          }
     }
 
@@ -862,8 +862,9 @@ public class CheckJDF
              JDFResourceLinkPool rlp=n.getResourceLinkPool();
              if (rlp!=null) 
              {  
-                 VElement vLinks = rlp.getPoolChildren(null, null, null);
-                 for(j = vLinks.size() - 1; j >= 0; j--)
+                 final VElement vLinks = rlp.getPoolChildren(null, null, null);
+                 final int size2 = vLinks==null ? 0 : vLinks.size();
+                 for(j = size2 - 1; j >= 0; j--)
                  {
                      JDFResourceLink rl = (JDFResourceLink) vLinks.elementAt(j);
                      if (!n.isValidLink(level, rl, null, null))
@@ -969,14 +970,14 @@ public class CheckJDF
          {
              sysOut.println(indent(indent)
                      + "Element with private contents:   " 
-                     + jdfElement.buildXPath() + " " + jdfElement.getAttribute(AttributeName.ID,null,""));
+                     + jdfElement.buildXPath(null) + " " + jdfElement.getAttribute(AttributeName.ID,null,""));
              
              if(testElement != null)
              {
                  setErrorType(testElement,"PrivateContents", "Element with private contents");
                  if (privateElements.size()>0)
                  {
-                     testElement.setAttribute("PrivateElements", privateElements.getString(JDFConstants.BLANK,null,null));
+                     testElement.setAttribute("PrivateElements", StringUtil.setvString(privateElements,JDFConstants.BLANK,null,null));
                  }
              }
          }
@@ -1020,7 +1021,7 @@ public class CheckJDF
                      e.setAttribute("ErrorType","PrivateAttribute");
                      e.setAttribute("NodeName",privateAttribute);
                      e.setAttribute("Value",jdfElement.getAttribute(privateAttribute));
-                     e.setAttribute("XPath", jdfElement.buildXPath()+ "/@" + privateAttribute);                    
+                     e.setAttribute("XPath", jdfElement.buildXPath(null)+ "/@" + privateAttribute);                    
                  }                 
             }
          }
@@ -1064,7 +1065,7 @@ public class CheckJDF
                  e.setAttribute("Value", jobPartID);
              }
              e.setAttribute("NodeName", AttributeName.JOBPARTID);
-             e.setAttribute("XPath", jdfNode.buildXPath()+ "/@JobPartID");
+             e.setAttribute("XPath", jdfNode.buildXPath(null)+ "/@JobPartID");
          }
          else
          {
@@ -1078,13 +1079,13 @@ public class CheckJDF
              if (testElement != null &&
                      level.getValue()>= KElement.EnumValidationLevel.Complete.getValue())
              {                 
-                 if(jdfNode.getElement(ElementName.RESOURCELINKPOOL)==null)  
+                 if(jdfNode.getElement(ElementName.RESOURCELINKPOOL, null, 0)==null)  
                  {
                      KElement pool = testElement.appendElement("TestElement");
                      setErrorType(pool,"MissingElement","Missing ResourceLinkPool");
                      pool.setAttribute("NodeName", "ResourceLinkPool");
                  }
-                 printResourceLinkPool(jdfNode.buildXPath()+ "/ResourceLinkPool[1]",testElement,vMissingLinks);
+                 printResourceLinkPool(jdfNode.buildXPath(null)+ "/ResourceLinkPool[1]",testElement,vMissingLinks);
              }
          }
          
@@ -1094,7 +1095,7 @@ public class CheckJDF
     private boolean checkType(final JDFNode jdfNode, int indent, KElement testElement, boolean isValid)
     {
         String errMessage = indent(indent)+ "!!! InValid Element: "+ 
-                             jdfNode.buildXPath()+ " " + jdfNode.getID() + " !!! ";
+                             jdfNode.buildXPath(null)+ " " + jdfNode.getID() + " !!! ";
          if(jdfNode.hasAttribute(AttributeName.TYPE))
          {
              final String typeString = jdfNode.getType();
@@ -1129,7 +1130,7 @@ public class CheckJDF
                      {
                          KElement e = testElement.appendElement("TestAttribute");
                          setErrorType(e,"ExtensionType","JDF/@Types contains extension types: "+msg,indent+2);
-                         e.setAttribute("XPath", jdfNode.buildXPath()+"/@Types");
+                         e.setAttribute("XPath", jdfNode.buildXPath(null)+"/@Types");
                          e.setAttribute("NodeName", "Types");
                          e.setAttribute("Value", msg);
                      }
@@ -1142,7 +1143,7 @@ public class CheckJDF
              {
                  KElement e = testElement.appendElement("TestAttribute");
                  setErrorType(e,"ExtensionType","Type is an extension type: "+typeString,indent+2);
-                 e.setAttribute("XPath", jdfNode.buildXPath()+"/@Type");
+                 e.setAttribute("XPath", jdfNode.buildXPath(null)+"/@Type");
                  e.setAttribute("NodeName", "Type");
                  e.setAttribute("Value", typeString);
                  
@@ -1163,7 +1164,7 @@ public class CheckJDF
 
                          setErrorType(testElement,"InvalidParentForProduct","Invalid Parent for JDF Product: Type = " + n.getType());
                          testElement.setAttribute("NodeName", "JDF");
-                         testElement.setAttribute("XPath", n.buildXPath());
+                         testElement.setAttribute("XPath", n.buildXPath(null));
                      }
                  }
              }
@@ -1233,7 +1234,7 @@ public class CheckJDF
          String rRef = re.getrRef();
          String refName = re.getNodeName();
 
-         String errMessage = indent(indent)+ "!!! InValid Element: "+ re.buildXPath()+ " !!! ";
+         String errMessage = indent(indent)+ "!!! InValid Element: "+ re.buildXPath(null)+ " !!! ";
          
          if(testElement != null)
          {
@@ -1324,7 +1325,7 @@ public class CheckJDF
              {
                  isValid = false;
                  sysOut.println(indent(indent) + "!!! InValid Element: " + 
-                                    r.buildXPath() + " " + r.getID() + " !!! ");
+                                    r.buildXPath(null) + " " + r.getID() + " !!! ");
                  
                  sysOut.println(indent(indent) + 
                                     "Unlinked Resource: " + 
@@ -1361,7 +1362,7 @@ public class CheckJDF
              String procUsage = (rl.hasAttribute(AttributeName.PROCESSUSAGE) && !rl.getProcessUsage().equals(JDFConstants.EMPTYSTRING))
              ?  "(ProcessUsage:" + rl.getProcessUsage() + ")"  : JDFConstants.EMPTYSTRING;
              
-             String errMessage = indent(indent)+ "!!! InValid Element: "+ rl.buildXPath()+ " !!! ";
+             String errMessage = indent(indent)+ "!!! InValid Element: "+ rl.buildXPath(null)+ " !!! ";
              
              if(testElement != null)
              {
@@ -1545,7 +1546,7 @@ public class CheckJDF
          KElement execRoot = testElement.appendElement("ExecutableNodes");     
          
          final VElement vExecNodes = deviceCap.getExecutableJDF(jdfNode, testlists, level);
-         if (!vExecNodes.isEmpty())
+         if (vExecNodes!=null)
          {
              sysOut.println("\nExecutable Nodes are:");
              for (int j = 0; j < vExecNodes.size(); j++)
@@ -1553,7 +1554,7 @@ public class CheckJDF
                  final JDFNode node = (JDFNode) vExecNodes.elementAt(j);
                  final String id = node.getAttribute(AttributeName.ID);
                  final String descrName = node.getAttribute(AttributeName.DESCRIPTIVENAME);
-                 final String xPath = node.buildXPath();
+                 final String xPath = node.buildXPath(null);
                  sysOut.println( xPath + " ID= " + id + " " + descrName);
                  
                  if (execRoot != null) 
@@ -1775,7 +1776,7 @@ public class CheckJDF
                  sysOut.println("error in schema location: format is \"NameSpaceURI1,Location1,NameSpaceURI2,Location2\"\n" + usage);
                  System.exit(3);
              }
-             schemaLocation0 = vs.getString(JDFConstants.BLANK, JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING);
+             schemaLocation0 = StringUtil.setvString(vs,JDFConstants.BLANK,JDFConstants.EMPTYSTRING,JDFConstants.EMPTYSTRING);
              schemaLocation += schemaLocation0;
          }
          
@@ -1828,7 +1829,7 @@ public class CheckJDF
             final String fileToUrl;
             try
             {
-                fileToUrl = StringUtil.fileToUrl(_schemaLocation,false);
+                fileToUrl = UrlUtil.fileToUrl(_schemaLocation, false);
                 schemaLocation="http://www.CIP4.org/JDFSchema_1_1 " + fileToUrl;
             }
             catch (MalformedURLException e)
@@ -2167,7 +2168,7 @@ public class CheckJDF
                  else 
                  {
                      testFileRoot.copyElement(schemaValOutput.getRoot(), null);
-                     schemaValRoot = testFileRoot.getElement("SchemaValidationOutput");
+                     schemaValRoot = testFileRoot.getElement("SchemaValidationOutput", null, 0);
                  }
                  
                  if(bTiming)
@@ -2282,8 +2283,8 @@ public class CheckJDF
                          }
                          
                          vSeparations2 = new VString(vSeparations);
-                         vSeparations.removeStrings(vColorPoolSeparations);
-                         vColorPoolSeparations.removeStrings(vSeparations2);
+                         vSeparations.removeStrings(vColorPoolSeparations, Integer.MAX_VALUE);
+                         vColorPoolSeparations.removeStrings(vSeparations2, Integer.MAX_VALUE);
                          
                          printBad(root,  0, checkJDFxmlRoot, true);
                         

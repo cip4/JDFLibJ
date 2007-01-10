@@ -20,6 +20,7 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.util.JDFSpawn;
 import org.cip4.jdflib.util.MyArgs;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -132,9 +133,9 @@ public class SpawnJDF
                 }
                 
                 vSpawnParts.add(part1);
+                final JDFSpawn spawn=new JDFSpawn(pCut);
 
-                JDFNode node = pCut.spawn(
-                        xmlFile, outFile, vRWResources, vSpawnParts, false, true, true, true);
+                JDFNode node = spawn.spawn(xmlFile,outFile,vRWResources,vSpawnParts,false,true,true,true);
 
                 // neu gespawntes File rausschreiben
                 JDFNode rootOut = node;

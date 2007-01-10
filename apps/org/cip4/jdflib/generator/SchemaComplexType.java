@@ -177,11 +177,6 @@ public class SchemaComplexType implements Serializable
         return strFileName;
     }
 
-    public String getStrSchemaComplexTypeName()
-    {
-        return m_SchemaComplexTypeName;
-    }
-
     public void setStrAutoCppCoreFileNameCPP()
     {
         strAutoCppCoreFileNameCPP = "JDFAuto" + m_SchemaComplexTypeName + ".cpp";
@@ -286,210 +281,170 @@ public class SchemaComplexType implements Serializable
     {
         return strAutoJavaMessageFileName;
     }
+    
     /**
      *
      */
     private void setStrExtendsName()
     {
-        if(isResource && !isPool)
+        if (isResource && !isPool)
         {
             strExtendsName = "JDFResource";
         }
+
+        if (!isResource && isResourceElement)
+        {
+            strExtendsName = "JDFElement";
+        }
         
-        if(getStrSchemaComplexTypeName().endsWith("Intent") && !"DropIntent".equals(getStrSchemaComplexTypeName()))
+        if (m_SchemaComplexTypeName.endsWith("Intent") && !"DropIntent".equals(m_SchemaComplexTypeName))
         {
             strExtendsName = "JDFIntentResource";
         }
-        
-        if(isResourceElement && !isResource)
+
+        if ("PRGroupOccurrenceBase".equals(m_ExtendOff))
+        {
+            strExtendsName = "JDFElement";
+        } 
+        else if ("QueryTypeObj".equals(m_ExtendOff))
         {
             strExtendsName = "JDFElement";
         }
-        
-        if("QueryTypeObj".equals(m_ExtendOff))
+        else if ("CommandTypeObj".equals(m_ExtendOff))
         {
             strExtendsName = "JDFElement";
         }
-        
-        if("CommandTypeObj".equals(m_ExtendOff))
+        else if ("CommandOrQueryTypeObj".equals(m_ExtendOff))
         {
             strExtendsName = "JDFElement";
         }
-        
-        if("CommandOrQueryTypeObj".equals(m_ExtendOff))
+        else if ("ResponseTypeObj".equals(m_ExtendOff))
         {
             strExtendsName = "JDFElement";
         }
-        
-        if("ResponseTypeObj".equals(m_ExtendOff))
+        else if ("BaseElement".equals(m_ExtendOff))
         {
             strExtendsName = "JDFElement";
         }
-        
-        if("BaseElement".equals(m_ExtendOff))
+        else if ("ResourceElement".equals(m_ExtendOff))
         {
             strExtendsName = "JDFElement";
         }
-        
-        if("ResourceElement".equals(m_ExtendOff))
+        else if ("Message".equals(m_ExtendOff))
         {
-            strExtendsName = "JDFElement";
+            strExtendsName = "JDFMessage";
         }
-        
-        if("Part".equals(getStrSchemaComplexTypeName()))
+
+        if ("Part".equals(m_SchemaComplexTypeName))
         {
             strExtendsName = "JDFElement";
             isPool = true;
         }
-        
-        if("MarkObject".equals(getStrSchemaComplexTypeName()))
+
+        if ("MarkObject".equals(m_SchemaComplexTypeName))
         {
             strExtendsName = "JDFElement";
         }
-        if("ContentObject".equals(getStrSchemaComplexTypeName()))
-        {
-            strExtendsName = "JDFElement";
-        }
-        
-        if("Audit".equals(getStrSchemaComplexTypeName()))
-        {
-            strExtendsName = "JDFElement";
-        }
-        
-        if("Comment".equals(getStrSchemaComplexTypeName()))
-        {
-            strExtendsName = "JDFElement";
-        }
-        
-        if("AncestorPool".equals(getStrSchemaComplexTypeName())) 
-        {
-            strExtendsName = "JDFPool";
-            isElementOnly = true;
-        }
-        
-        if("StatusPool".equals(getStrSchemaComplexTypeName()))
-        {
-            strExtendsName = "JDFPool";
-            isPool = true;
-        }
-        
-        if(isAudit)
-        {
-            strExtendsName = "JDFAudit";
-        }
-                
-        
-        if("Query".equals(getStrSchemaComplexTypeName()))
-        {
-            strExtendsName = "JDFMessage";
-        }
-        if("Acknowledge".equals(getStrSchemaComplexTypeName()))
-        {
-            strExtendsName = "JDFMessage";
-        }
-        if("Command".equals(getStrSchemaComplexTypeName()))
-        {
-            strExtendsName = "JDFMessage";
-        }
-        if("Signal".equals(getStrSchemaComplexTypeName()))
-        {
-            strExtendsName = "JDFMessage";
-        }
-        if("Response".equals(getStrSchemaComplexTypeName()))
-        {
-            strExtendsName = "JDFMessage";
-        }
-        if("Registration".equals(getStrSchemaComplexTypeName()))
-        {
-            strExtendsName = "JDFMessage";
-        }
-        
-        if("NodeInfo".equals(getStrSchemaComplexTypeName()))
-        {
-            strExtendsName = "JDFResource";
-        }
-        if("CustomerInfo".equals(getStrSchemaComplexTypeName()))
-        {
-            strExtendsName = "JDFResource";
-        }
-        
-        //isPartitionalResource
-        if(isElementOnly && !("AncestorPool".equals(getStrSchemaComplexTypeName()))) 
+        if ("ContentObject".equals(m_SchemaComplexTypeName))
         {
             strExtendsName = "JDFElement";
         }
 
-        if(isAcknowledge)
+        if ("Comment".equals(m_SchemaComplexTypeName))
+        {
+            strExtendsName = "JDFElement";
+        }
+
+        if ("AncestorPool".equals(m_SchemaComplexTypeName))
+        {
+            strExtendsName = "JDFPool";
+            isElementOnly = true;
+        }
+
+        if ("StatusPool".equals(m_SchemaComplexTypeName))
+        {
+            strExtendsName = "JDFPool";
+            isPool = true;
+        }
+
+        if (isAudit)
+        {
+            strExtendsName = "JDFAudit";
+        }
+
+        // isPartitionalResource
+        if (isElementOnly && !("AncestorPool".equals(m_SchemaComplexTypeName)))
+        {
+            strExtendsName = "JDFElement";
+        }
+
+        if (isAcknowledge)
         {
             setStrIdentifier("A");
             strExtendsName = "JDFAcknowledge";
         }
-        if(isCommand)
+        if (isCommand)
         {
             setStrIdentifier("C");
             strExtendsName = "JDFCommand";
         }
-        if(isResponse)
+        if (isResponse)
         {
             setStrIdentifier("R");
             strExtendsName = "JDFResponse";
         }
 
-        if(isSignal)
+        if (isSignal)
         {
             setStrIdentifier("S");
             strExtendsName = "JDFSignal";
         }
 
-        if(isQuery)
+        if (isQuery)
         {
             setStrIdentifier("Q");
             strExtendsName = "JDFQuery";
         }
-        
-        if("Spawned".equals(getStrSchemaComplexTypeName()))
+
+        if ("Spawned".equals(m_SchemaComplexTypeName))
         {
-            strExtendsName = "JDFAudit";  
+            strExtendsName = "JDFAudit";
         }
-        
-        if("ResourceAudit".equals(getStrSchemaComplexTypeName()))
+
+        if ("ResourceAudit".equals(m_SchemaComplexTypeName))
         {
-            strExtendsName = "JDFAudit";  
+            strExtendsName = "JDFAudit";
         }
-        
-        if("PhaseTime".equals(getStrSchemaComplexTypeName())) 
+
+        if ("PhaseTime".equals(m_SchemaComplexTypeName))
         {
-            strExtendsName = "JDFAudit";  
+            strExtendsName = "JDFAudit";
         }
-        
-        if("ProcessRun".equals(getStrSchemaComplexTypeName()))
+
+        if ("ProcessRun".equals(m_SchemaComplexTypeName))
         {
-            strExtendsName = "JDFAudit";  
+            strExtendsName = "JDFAudit";
         }
-        
-        if("Notification".equals(getStrSchemaComplexTypeName()))
+
+        if ("Notification".equals(m_SchemaComplexTypeName))
         {
-            strExtendsName = "JDFAudit";  
+            strExtendsName = "JDFAudit";
         }
-       
-        if("JMF".equals(getStrSchemaComplexTypeName()))
+
+        if ("JMF".equals(m_SchemaComplexTypeName))
         {
-            strExtendsName = "JDFPool"; 
+            strExtendsName = "JDFPool";
         }
-        
-        if("AmountPool".equals(getStrSchemaComplexTypeName()))
+
+        if ("AmountPool".equals(m_SchemaComplexTypeName))
         {
-            strExtendsName = "JDFPool"; 
+            strExtendsName = "JDFPool";
         }
-        if("Message".equals(getStrSchemaComplexTypeName())) 
+
+        if (isNode)
         {
-            strExtendsName = "JDFElement";  
-        }
-        
-        if(isNode)
-        {
-                    
-            if(m_SchemaComplexTypeName.endsWith("Product"))
+
+            if (m_SchemaComplexTypeName.endsWith("Product"))
             {
                 strExtendsName = "JDFNodeProcessGroup";
             }
@@ -497,11 +452,6 @@ public class SchemaComplexType implements Serializable
             {
                 strExtendsName = "JDFNode";
             }
-        }
-        
-        if("DropIntent".equals(getStrSchemaComplexTypeName()))
-        {
-            strExtendsName = "JDFElement";
         }
     }
 

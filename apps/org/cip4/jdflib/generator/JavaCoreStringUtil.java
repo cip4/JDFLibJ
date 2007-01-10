@@ -276,8 +276,12 @@ public class JavaCoreStringUtil
                     enumType = "JDFResource.EnumResStatus";
                 else if ("LinkUsage".equals(attributeName))
                     enumType = "JDFResourceLink.EnumUsage";
+                else if ("Usage".equals(attributeName) && "ResourceInfo".equals(complexTypeName))
+                    enumType = "JDFResourceLink.EnumUsage";
                 else if ("Usage".equals(attributeName) && "ResourceQuParams".equals(complexTypeName))
                     enumType = "JDFResourceLink.EnumUsage";
+                else if ("Classes".equals(attributeName) && "ResourceQuParams".equals(complexTypeName))
+                    enumType = "JDFResource.EnumResourceClass";
                 else if ("Usage".equals(attributeName) && "InsertSheet".equals(complexTypeName))
                     enumType = "EnumSheetUsage";
                 else if ("DeviceStatus".equals(attributeName) && "ModulePhase".equals(complexTypeName))
@@ -574,7 +578,9 @@ public class JavaCoreStringUtil
                     && !"MaxVersion".equals(attributeName)
                     && !"UpdatedStatus".equals(attributeName)
                     && !"LinkUsage".equals(attributeName)
+                    && !("Usage".equals(attributeName) && "ResourceInfo".equals(complexTypeName))
                     && !("Usage".equals(attributeName) && "ResourceQuParams".equals(complexTypeName))
+                    && !("Classes".equals(attributeName) && "ResourceQuParams".equals(complexTypeName))
                     && !("Usage".equals(attributeName) && "InsertSheet".equals(complexTypeName))
                     && !("DeviceStatus".equals(attributeName) && "ModulePhase".equals(complexTypeName))
                     && !("DeviceStatus".equals(attributeName) && "ModuleStatus".equals(complexTypeName))
@@ -749,9 +755,17 @@ public class JavaCoreStringUtil
                 {
                     modifiedAttributeTypeName = "JDFResourceLink.EnumUsage";
                 }
+                else if ("Usage".equals(attributeName) && "ResourceInfo".equals(complexTypeName))
+                {
+                    modifiedAttributeTypeName = "JDFResourceLink.EnumUsage";
+                }
                 else if ("Usage".equals(attributeName) && "ResourceQuParams".equals(complexTypeName))
                 {
                     modifiedAttributeTypeName = "JDFResourceLink.EnumUsage";
+                }
+                else if ("Classes".equals(attributeName) && "ResourceQuParams".equals(complexTypeName))
+                {
+                    modifiedAttributeTypeName = "JDFResource.EnumResourceClass";
                 }
                 else if ("Usage".equals(attributeName) && "InsertSheet".equals(complexTypeName))
                 {

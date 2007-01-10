@@ -153,9 +153,9 @@ public class GeneratorUtil
         // attributes also. All OptionalAttribute methods in auto classes call super.optionalAttrbutes
         // so in the end you will get them all
 
-        // Table 3-26: Part element, JDFSpec 1.3
+        // Table 3-25: Partitionable resource element, JDFSpec 1.3
         if (!"Part".equals (strComplexTypeName)
-                && ("BinderySignatureName".equals (strAttributeName) 
+                && (       "BinderySignatureName".equals (strAttributeName) 
                         || "BlockName".equals (strAttributeName) 
                         || "BundleItemIndex".equals (strAttributeName)
                         || "CellIndex".equals (strAttributeName) 
@@ -203,6 +203,8 @@ public class GeneratorUtil
                         || "TileID".equals (strAttributeName) 
                         || "WebName".equals (strAttributeName)
                         || "WebProduct".equals (strAttributeName)
+                        || "NoOp".equals (strAttributeName)
+                        || "WebSetup".equals (strAttributeName)
                    )
            )
         {
@@ -257,6 +259,16 @@ public class GeneratorUtil
             {
                 isValid = false;
             }
+        }
+
+        // Separation is a PartIDKey and a normal attribut, so fix it here
+        if ("Separation".equals (strAttributeName) && 
+                (  "DensityMeasuringField".equals (strComplexTypeName)
+                || "ScreenSelector".equals (strComplexTypeName)
+                || "TransferCurve".equals (strComplexTypeName)
+                ))
+        {
+            isValid = true;
         }
 
         return isValid;

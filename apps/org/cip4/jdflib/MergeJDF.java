@@ -17,6 +17,8 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.JDFMerge;
+import org.cip4.jdflib.util.JDFSpawn;
 import org.cip4.jdflib.util.MyArgs;
 
 
@@ -89,7 +91,7 @@ public class MergeJDF
 
         if (!unspawn.equals(""))
         {
-            root.unSpawn(unspawn);
+            new JDFSpawn(root).unSpawn(unspawn);
         }
         else
         {
@@ -109,7 +111,7 @@ public class MergeJDF
 
             try
             {
-                root.mergeJDF(root2, xmlFile2, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.UpdateLink); 
+                new JDFMerge(root).mergeJDF(root2, xmlFile2, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.UpdateLink); 
             }
             catch (JDFException toCatch)
             {

@@ -30,8 +30,8 @@ import javax.swing.table.DefaultTableModel;
 import org.cip4.jdflib.core.DocumentJDFImpl;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFParser;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.generator.Generator;
 import org.cip4.jdflib.generator.SchemaComplexType;
 import org.cip4.jdflib.generator.SchemaDoc;
@@ -517,7 +517,7 @@ public class ListButtonPanel extends JPanel implements  ActionListener,
 
                 m_docs.add(buffdoc);
 
-                JDFElement n = (JDFElement)buffdoc.getRoot();
+                KElement n = (KElement) buffdoc.getRoot();
                 Vector vElem = n.getChildElementVector(null, null, null, true, 0,false);
                 for (int j = 0; j < vElem.size(); j++)
                 {
