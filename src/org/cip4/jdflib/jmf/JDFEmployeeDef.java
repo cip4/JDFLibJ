@@ -27,21 +27,20 @@ import org.cip4.jdflib.auto.JDFAutoEmployeeDef;
 
     /**
      * Constructor for JDFEmployeeDef
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFEmployeeDef(
+    public JDFEmployeeDef(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFEmployeeDef
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFEmployeeDef(
@@ -54,10 +53,10 @@ import org.cip4.jdflib.auto.JDFAutoEmployeeDef;
 
     /**
      * Constructor for JDFEmployeeDef
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFEmployeeDef(
         CoreDocumentImpl myOwnerDocument,
@@ -68,6 +67,10 @@ import org.cip4.jdflib.auto.JDFAutoEmployeeDef;
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
 
+    /**
+     * toString()
+     * @see org.cip4.jdflib.auto.JDFAutoEmployeeDef#toString()
+     */
     public String toString()
     {
         return "JDFEmployeeDef[  --> " + super.toString() + " ]";

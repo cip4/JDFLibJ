@@ -100,7 +100,7 @@ public class JDFPreflightResultsPool extends JDFPool
 
     /**
      * Constructor for JDFPreflightResultsPool
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFPreflightResultsPool(
@@ -112,8 +112,8 @@ public class JDFPreflightResultsPool extends JDFPool
 
     /**
      * Constructor for JDFPreflightResultsPool
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFPreflightResultsPool(
@@ -126,10 +126,10 @@ public class JDFPreflightResultsPool extends JDFPool
 
     /**
      * Constructor for JDFPreflightResultsPool
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFPreflightResultsPool(
         CoreDocumentImpl myOwnerDocument,
@@ -150,12 +150,14 @@ public class JDFPreflightResultsPool extends JDFPool
     // Element Getter / Setter
     **************************************************************** */
 
-    /** Get Element PreflightInstance
-    * @param int iSkip number of elements to skip
-    * @return JDFPreflightInstance The element
-    * 
-    * default: GetCreatePreflightInstance(0)
-    */
+    /**
+	 * Get Element PreflightInstance
+	 * <p>
+	 * default: GetCreatePreflightInstance(0)
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFPreflightInstance: the element
+	 */
     JDFPreflightInstance getCreatePreflightInstance(int iSkip)
     {
         return (JDFPreflightInstance) 
@@ -163,64 +165,70 @@ public class JDFPreflightResultsPool extends JDFPool
     }
 
     /**
-    * Remove element PreflightInstance
-    * @param int iSkip number of elements to skip
-    * 
-    * default: RemovePreflightInstance(0)
-    */
+	 * Remove element PreflightInstance
+	 * <p>
+	 * default: RemovePreflightInstance(0)
+	 * 
+	 * @param iSkip
+	 *            number of elements to skip
+	 */
     public void removePreflightInstance(int iSkip)
     {
         removeChild("PreflightInstance", JDFConstants.EMPTYSTRING, iSkip);
     }
 
     /**
-    * Append element PreflightInstance
-    */
+	 * Append element PreflightInstance
+	 * 
+	 * @return JDFPreflightInstance: the element
+	 */
     JDFPreflightInstance appendPreflightInstance()
     {
         return (JDFPreflightInstance) appendElement(ElementName.PREFLIGHTINSTANCE, null);
      }
 
     /**
-        * get element PreflightInstance
-        * @param int iSkip number of elements to skip
-        * @return  JDFPreflightInstance the element. Null if not found.
-        *
-        * default: GetPreflightInstance(0)
-        */
+	 * get element PreflightInstance
+	 * <p>
+	 * default: GetPreflightInstance(0)
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFPreflightInstance: the element. Null if not found.
+	 */
     JDFPreflightInstance getPreflightInstance(int iSkip)
     {
         return (JDFPreflightInstance) getElement(ElementName.PREFLIGHTINSTANCE, null, iSkip);
     }
-
  
- 
-    /** Get Element PreflightDetail
-    * @param int iSkip number of elements to skip
-    * @return JDFPreflightDetail The element
-    * 
-    * default: GetCreatePreflightDetail(0)
-    */
+    /**
+	 * Get Element PreflightDetail
+	 * <p>
+	 * default: GetCreatePreflightDetail(0)
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFPreflightInstance: the element
+	 */
     public JDFPreflightDetail getCreatePreflightDetail(int iSkip)
     {
         return (JDFPreflightDetail) getCreateElement_KElement(ElementName.PREFLIGHTDETAIL, null, iSkip);
     }
 
-
     /**
-    * Append element PreflightDetail
-    */
+	 * Append element PreflightDetail
+	 * @return JDFPreflightInstance: the element
+	 */
     JDFPreflightDetail appendPreflightDetail()
     {
        return (JDFPreflightDetail) appendElement(ElementName.PREFLIGHTDETAIL, null);
     }
 
     /**
-    * const get first element PreflightDetail
-    * @return  JDFPreflightDetail The element
-    *
-    * default: GetPreflightDetail(0)
-    */
+	 * get first element PreflightDetail
+	 * <p>
+	 * default: GetPreflightDetail(0)
+	 * 
+	 * @return JDFPreflightInstance: the element
+	 */
     JDFPreflightDetail getPreflightDetail(int iSkip)
     {
         return (JDFPreflightDetail) getElement(ElementName.PREFLIGHTDETAIL, null, iSkip);

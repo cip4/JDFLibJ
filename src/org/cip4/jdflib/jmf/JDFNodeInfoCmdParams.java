@@ -17,29 +17,27 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 
 /**
- *
+ * JDFNodeInfoCmdParams: optional attributes for the NodeInfo command
  */
 public class JDFNodeInfoCmdParams extends JDFAutoNodeInfoCmdParams
 {
     private static final long serialVersionUID = 1L;
-
     /**
      * Constructor for JDFNodeInfoCmdParams
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFNodeInfoCmdParams(
+    public JDFNodeInfoCmdParams(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFNodeInfoCmdParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFNodeInfoCmdParams(
@@ -52,10 +50,10 @@ public class JDFNodeInfoCmdParams extends JDFAutoNodeInfoCmdParams
 
     /**
      * Constructor for JDFNodeInfoCmdParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFNodeInfoCmdParams(
         CoreDocumentImpl myOwnerDocument,
@@ -88,8 +86,8 @@ public class JDFNodeInfoCmdParams extends JDFAutoNodeInfoCmdParams
    }
 
    /**
-    * set all parts to those define in vParts
-    * @param VJDFAttributeMap vParts: vector of attribute maps for the parts
+    * set all parts to those defined in vParts
+    * @param vParts vector of attribute maps for the parts
     */
    public void setPartMapVector(VJDFAttributeMap vParts)
    {
@@ -97,8 +95,8 @@ public class JDFNodeInfoCmdParams extends JDFAutoNodeInfoCmdParams
    }
 
    /**
-    * set all parts to those define in vParts
-    * @param JDFAttributeMap mPart: attribute map for the part to set
+    * set all parts to those defined in vParts
+    * @param mPart attribute map for the part to set
     */
    public void setPartMap(JDFAttributeMap mPart)
    {
@@ -107,7 +105,7 @@ public class JDFNodeInfoCmdParams extends JDFAutoNodeInfoCmdParams
 
    /**
     * remove the part defined in mPart
-    * @param JDFAttributeMap mPart: attribute map for the part to remove
+    * @param mPart attribute map for the part to remove
     */
    public void removePartMap(JDFAttributeMap mPart)
    {
@@ -116,7 +114,7 @@ public class JDFNodeInfoCmdParams extends JDFAutoNodeInfoCmdParams
 
    /**
     * check whether the part defined in mPart is included
-    * @param JDFAttributeMap mPart: attribute map for the part to remove
+    * @param mPart attribute map to check for
     * @return boolean - returns true if the part exists
     */
    public boolean hasPartMap(JDFAttributeMap mPart)

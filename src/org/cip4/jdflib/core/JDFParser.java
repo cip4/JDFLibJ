@@ -28,6 +28,10 @@ public class JDFParser extends DOMParser
     public String m_SchemaLocation=null;
     public String m_DocumentClass=DocumentJDFImpl.class.getName();
     public Exception lastExcept=null;
+    /**
+     * if true, empty pools and whitespace are removed when parsing
+     */
+    public boolean m_eraseEmpty=true;
 
     public JDFParser()
     {
@@ -40,7 +44,7 @@ public class JDFParser extends DOMParser
      */
     public JDFParser(String strDocType)
     {
-        super();
+        this();
     }
 
     public Element createElementNode(QName element)
@@ -50,17 +54,16 @@ public class JDFParser extends DOMParser
             ((DocumentJDFImpl) (this.fDocument)).setParentNode(fCurrentNode);
         }
 
-        return super.createElementNode(element);
+        Element e= super.createElementNode(element);
+        ((DocumentJDFImpl) (this.fDocument)).setParentNode(null);
+        return e;
+        
     }
 
     /**
      * parseFile - parse a file specified by strFile
-     * 
-     * @param String  strFile
-     * 
+     * @param strFile link to the document to parse
      * @return JDFDoc or null if File not found
-     * 
-     * default: parseFile(strFile)
      */
     public JDFDoc parseFile(String strFile)
     {
@@ -93,17 +96,16 @@ public class JDFParser extends DOMParser
                 return null;
             }
         }
-        
+
         return doc;
     }
-    
+
     /**
      * parseFile - parse a file specified by strFile
      * 
-     * @param String  strFile
-     * 
+     * @param strFile        link to the document to parse
+     * @param schemaLocation link to the schema to use, null if no validation required
      * @return JDFDoc or null if File not found
-     * 
      * default: parseFile(strFile,null)
      * @deprecated set the parser members instead
      */
@@ -112,20 +114,18 @@ public class JDFParser extends DOMParser
         m_SchemaLocation=schemaLocation;
         return parseFile(strFile);
     }
+
     
     /**
      * parseString - parse a string specified by stringInput
-     * 
-     * @param String  stringInput
-     * 
-     * @return JDFDoc or null if File not found
-     * 
+     * @param stringInput string to parse
+     * @return JDFDoc or null if parse failed
      * default: parseString(stringInput)
      */
     public JDFDoc parseString(String stringInput)
     {
         InputSource inSource = new InputSource(new StringReader(stringInput));
-        
+
         JDFDoc doc= parseInputSource(inSource);
         if(doc==null)
         {            
@@ -134,15 +134,12 @@ public class JDFParser extends DOMParser
             doc= parseInputSource(inSource);
         }
         return doc;
-   }
+    }
 
     /**
      * parseStream - parse a stream specified by inStream
-     * 
-     * @param String  inStream
-     * 
-     * @return JDFDoc or null if File not found or error
-     * 
+     * @param inStream stream to parse
+     * @return JDFDoc or null if parse failed
      * default: parseStream(inStream)
      */
     public JDFDoc parseStream(InputStream inStream)
@@ -153,28 +150,45 @@ public class JDFParser extends DOMParser
         final InputSource inSource = new InputSource(inStream);        
         return parseInputSource(inSource);
     }
+    
+    /**
+     * parse an input source
+     * @param inSource the InputSource to parse
+     */
+    public void parse(InputSource inSource)
+    {
+        parseInputSource(inSource);
+    }
 
+    /**
+     * parse an input source
+     * @param inSource the InputSource to parse
+     * @return JDFDoc the newly parsed doc
+     */
     public JDFDoc parseInputSource(InputSource inSource)
     {
-        JDFDoc doc = null;
-        if(inSource==null)
-            return null;
-        initParser(m_SchemaLocation, m_DocumentClass, m_ErrorHandler);
-        doc = runParser(inSource, true);
-        return doc;       
+        JDFDoc jdfDoc = null;
+        
+        if (inSource != null)
+        {
+            initParser(m_SchemaLocation, m_DocumentClass, m_ErrorHandler);
+            jdfDoc = runParser(inSource, m_eraseEmpty);
+        }
+        
+        return jdfDoc;
     }
-   /**
+    
+    /**
      * This is the sophisticated parse function, 
      * where validation, error handlers et al. can be set
      * 
-     * @param InputSource   inSource
-     * @param String        schemaLocation, null if no validation required
-     * @param String        documentClassName
-     * @param ErrorHandler  errorHandler
-     * @param boolean       bEraseEmpty   if true empty nodes are erased
-     *                                    after parsing
-     * @param boolean       bDoNamespaces if false a second parse is done,
-     *                                    where namespaces are ignored
+     * @param inSource
+     * @param schemaLocation schema location, null if no validation required
+     * @param documentClassName
+     * @param errorHandler
+     * @param bEraseEmpty   if true empty nodes are erased after parsing
+     * @param bDoNamespaces if false a second parse is done, 
+     *                      	where namespaces are ignored
      * 
      * @return JDFDoc
      * 
@@ -183,12 +197,12 @@ public class JDFParser extends DOMParser
      * @deprecated set the parser members instead
      */
     public JDFDoc parseInputSource(
-                        InputSource inSource,
-                        String schemaLocation,
-                        String documentClassName,
-                        ErrorHandler errorHandler,
-                        boolean bEraseEmpty,
-                        boolean bDoNamespaces)
+            InputSource inSource,
+            String schemaLocation,
+            String documentClassName,
+            ErrorHandler errorHandler,
+            boolean bEraseEmpty,
+            boolean bDoNamespaces)
     {
         JDFDoc doc = null;
         if(errorHandler instanceof XMLErrorHandler)
@@ -222,13 +236,13 @@ public class JDFParser extends DOMParser
      * default: initParser(null, DocumentJDFImpl.class.getName(), null);
      */
     private void initParser( String schemaLocation, 
-                            String documentClassName,
-                            XMLErrorHandler errorHandler)
+            String documentClassName,
+            XMLErrorHandler errorHandler)
     {
         m_SchemaLocation=schemaLocation;
         m_ErrorHandler=errorHandler;
         m_DocumentClass=documentClassName;
-        
+
         try
         {
             if (schemaLocation == null || schemaLocation.equals(JDFConstants.EMPTYSTRING))
@@ -242,10 +256,10 @@ public class JDFParser extends DOMParser
                     schemaLocation=JDFElement.getSchemaURL()+" "+schemaLocation;
                 this.setFeature("http://xml.org/sax/features/validation", true);
                 this.setFeature("http://apache.org/xml/features/validation/schema", true);
-//                this.setFeature("http://apache.org/xml/features/validation/schema/element-default", false);
-//                this.setFeature("http://apache.org/xml/features/validation/schema/normalized-value", false);
+//              this.setFeature("http://apache.org/xml/features/validation/schema/element-default", false);
+//              this.setFeature("http://apache.org/xml/features/validation/schema/normalized-value", false);
                 this.setProperty("http://apache.org/xml/properties/schema/external-schemaLocation", schemaLocation);
-             }
+            }
 
             // use our own JDF document for creating JDF elements
             this.setProperty("http://apache.org/xml/properties/dom/document-class-name", documentClassName);
@@ -264,12 +278,12 @@ public class JDFParser extends DOMParser
             lastExcept=e;
         }
     }
- 
+
     public void setErrorHandler(ErrorHandler handler)
     {
         m_ErrorHandler = handler!= null && (handler instanceof XMLErrorHandler) ? 
                 (XMLErrorHandler) handler : new XMLErrorHandler();
-        super.setErrorHandler(m_ErrorHandler);
+                super.setErrorHandler(m_ErrorHandler);
     }
     /**
      * @param parser
@@ -279,12 +293,10 @@ public class JDFParser extends DOMParser
      */
     private JDFDoc runParser(InputSource inSource, boolean bEraseEmpty)
     {
-        JDFDoc doc=new JDFDoc();
-//        m_JDFDoc.setMemberDoc(null);
-
+        JDFDoc doc = new JDFDoc();
         try
         {
-            parse(inSource);
+            super.parse(inSource);
 
             doc.setMemberDoc((DocumentJDFImpl) getDocument());
 
@@ -295,31 +307,40 @@ public class JDFParser extends DOMParser
         }
         catch (SAXException e)
         {
-            lastExcept=e;
-            return null;
+            lastExcept = e;
+            doc = null;
         }
         catch (IOException e)
         {
-            lastExcept=e;
-            return null;
+            lastExcept = e;
+            doc = null;
         }
         catch (JDFException e)
         {
-            lastExcept=e;
-            return null;
+            lastExcept = e;
+            doc = null;
         }
-        if(m_ErrorHandler!=null)
+
+        if (doc != null && m_ErrorHandler != null)
         {
             doc.setValidationResult(m_ErrorHandler.getXMLOutput());
             m_ErrorHandler.cleanXML(m_SchemaLocation);
+        }
+
+        if(doc!=null)
+        {
+            KElement root=doc.getRoot();
+            if(root.getNamespaceURI()!=JDFElement.getSchemaURL())
+            {
+                final DocumentJDFImpl memberDocument = doc.getMemberDocument();
+                memberDocument.bKElementOnly=true;
+                memberDocument.setIgnoreNSDefault(true);               
+            }
         }
         return doc;
     }
 
 
-    /**
-     * @param parser
-     */
     private void setIgnoreNamespace()
     {
         try

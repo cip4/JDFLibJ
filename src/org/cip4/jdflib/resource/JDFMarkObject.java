@@ -91,10 +91,10 @@ import org.cip4.jdflib.ifaces.IPlacedObject;
 public class JDFMarkObject extends JDFAutoMarkObject implements IPlacedObject
 {
     private static final long serialVersionUID = 1L;
-    
+
     /**
      * Constructor for JDFMarkObject
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFMarkObject(
@@ -103,12 +103,10 @@ public class JDFMarkObject extends JDFAutoMarkObject implements IPlacedObject
     {
         super(myOwnerDocument, qualifiedName);
     }
-    
-    
+
     /**
-     * Constructor for JDFMarkObject
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFMarkObject(
@@ -118,13 +116,13 @@ public class JDFMarkObject extends JDFAutoMarkObject implements IPlacedObject
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
-    
+
     /**
      * Constructor for JDFMarkObject
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFMarkObject(
             CoreDocumentImpl myOwnerDocument,
@@ -135,6 +133,10 @@ public class JDFMarkObject extends JDFAutoMarkObject implements IPlacedObject
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
     
+    /**
+     * toString()
+     * @return String
+     */
     public String toString()
     {
         return "JDFMarkObject[  --> " + super.toString() + " ]";
@@ -143,7 +145,7 @@ public class JDFMarkObject extends JDFAutoMarkObject implements IPlacedObject
     /**
      * set attribute Ord
      * 
-     * @param int value: the value to set the attribute to
+     * @param value the value to set the attribute to
      * @throws JDFException with stack trace if value < 0
      */
     public void setOrd(int value)
@@ -159,7 +161,7 @@ public class JDFMarkObject extends JDFAutoMarkObject implements IPlacedObject
     
     /**
      * get int attribute Ord
-     * @return int the value of the attribute
+     * @return int: the value of the attribute
      * @throws JDFException with stack trace if result < 0
      */
     public int getOrd()

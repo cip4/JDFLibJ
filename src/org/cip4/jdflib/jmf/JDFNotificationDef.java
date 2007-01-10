@@ -24,10 +24,10 @@ import org.cip4.jdflib.auto.JDFAutoNotificationDef;
 public class JDFNotificationDef extends JDFAutoNotificationDef
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Constructor for JDFNotificationDef
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
 	public JDFNotificationDef(
@@ -36,12 +36,11 @@ public class JDFNotificationDef extends JDFAutoNotificationDef
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
-	
-	
+
 	/**
 	 * Constructor for JDFNotificationDef
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
 	public JDFNotificationDef(
@@ -51,13 +50,13 @@ public class JDFNotificationDef extends JDFAutoNotificationDef
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
-	
+
 	/**
 	 * Constructor for JDFNotificationDef
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @param localName
+	 * @param myLocalName
 	 */
 	public JDFNotificationDef(
 			CoreDocumentImpl myOwnerDocument,
@@ -68,6 +67,10 @@ public class JDFNotificationDef extends JDFAutoNotificationDef
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 	
+	/**
+	 * toString()
+	 * @return String
+	 */
 	public String toString()
 	{
 		return "JDFNotificationDef[  --> " + super.toString() + " ]";

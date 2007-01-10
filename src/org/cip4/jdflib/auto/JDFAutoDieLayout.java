@@ -93,7 +93,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
     private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
     static
     {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x55555111);
+        elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x66666111);
         elemInfoTable[1] = new ElemInfoTable(ElementName.STATION, 0x33333111);
     }
     

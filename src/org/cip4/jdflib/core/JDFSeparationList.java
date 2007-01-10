@@ -95,7 +95,7 @@ public class JDFSeparationList extends JDFAutoSeparationList
     
     /**
      * Constructor for JDFSeparationList
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFSeparationList(
@@ -104,11 +104,11 @@ public class JDFSeparationList extends JDFAutoSeparationList
     {
         super(myOwnerDocument, qualifiedName);
     }
-    
+
     /**
      * Constructor for JDFSeparationList
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFSeparationList(
@@ -118,13 +118,13 @@ public class JDFSeparationList extends JDFAutoSeparationList
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
-    
+
     /**
      * Constructor for JDFSeparationList
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFSeparationList(
             CoreDocumentImpl myOwnerDocument,
@@ -167,10 +167,10 @@ public class JDFSeparationList extends JDFAutoSeparationList
     }  
     
     /**
-     * set all separation names in the SeparationSpec elements
+     * set all separation names in the SeparationSpec elements,
      * remove any prior elements
      * 
-     * @param the vector of separation names to set
+     * @param vSeps the vector of separation names to set
      */
     public void setSeparations(VString vSeps) 
     {
@@ -207,6 +207,7 @@ public class JDFSeparationList extends JDFAutoSeparationList
             getSeparationSpec(index).deleteNode();
         return index;
     }   
+    
     /**
      * Get the n'th separation name in the SeparationSpec elements
      * @param iSkip the index of the SeparationSpec

@@ -33,6 +33,7 @@ public class XMLDocUserData
      * vKString vDirtyID the vector of dirty IDs
      */
     private VString m_vDirtyID;
+    
     /** 
      * map of ID KElement pairs
      */
@@ -62,9 +63,10 @@ public class XMLDocUserData
     {
         useIDCache=bCache;
     }
+
     /**
-     * switch on or off the caching method for ids
-     * @param bCache if true, the ids will be cached
+     * get the status of the caching method for ids
+     * @return if true, the ids will be cached
      */
     public boolean getIDCache()
     {
@@ -72,8 +74,8 @@ public class XMLDocUserData
     }
     
     /**
-     * is target cahing enabled
-     * @return true if cacheing is enabled
+     * is target cashing enabled
+     * @return true if cashing is enabled
      */
     public boolean hasTargetCache(){
         return m_mapTarget!=null;
@@ -93,8 +95,9 @@ public class XMLDocUserData
         }
         
         /**
-         * @param   enumName the name of the enum object to return    
-         * @return  the enum object if enumName is valid. Otherwise null
+         * EnumDirtyPolicy
+         * @param enumName the name of the enum object to return    
+         * @return the enum object if enumName is valid. Otherwise null.
          */
         public static EnumDirtyPolicy getEnum(String enumName)
         {
@@ -102,7 +105,8 @@ public class XMLDocUserData
         }
         
         /**
-         * @param  enumValue the value of the enum object to return
+         * EnumDirtyPolicy
+         * @param enumValue the value of the enum object to return
          * @return the enum object if enumName is valid. Otherwise null
          */
         public static EnumDirtyPolicy getEnum(int enumValue)
@@ -111,6 +115,7 @@ public class XMLDocUserData
         }
         
         /**
+         * get a map of all orientation enums
          * @return a map of all orientation enums
          */
         public static Map getEnumMap()
@@ -119,6 +124,7 @@ public class XMLDocUserData
         }
         
         /**
+         * get a list of all orientation enums
          * @return a list of all orientation enums
          */
         public static List getEnumList()
@@ -127,6 +133,7 @@ public class XMLDocUserData
         }
         
         /**
+         * get an iterator over the enum objects
          * @return an iterator over the enum objects
          */
         public static Iterator iterator()
@@ -144,6 +151,7 @@ public class XMLDocUserData
     
     /**
      * Set the dirty policy to dirtPol
+     * @param dirtPol the dirtyPolicy to set
      */
     public void setDirtyPolicy(EnumDirtyPolicy dirtPol)
     {
@@ -151,11 +159,11 @@ public class XMLDocUserData
     }
     
     /**
-     * Return the documents user data pointer.
-     *
+     * Return the documents user data pointer.<br>
      * User data allows application programs
      * to attach extra data to JDF Documents and can be set using the
      * function <code>JDFDoc::SetUserData(p)</code>.
+     * 
      * @return The user data pointer.
      */
     public Object getUserData()
@@ -164,7 +172,7 @@ public class XMLDocUserData
     }
     
     /**
-     * Set the user data for a document.
+     * Set the user data for a document.<br>
      *
      * User data allows application programs
      * to attach extra data to DOM nodes, and can be retrieved using the
@@ -175,10 +183,10 @@ public class XMLDocUserData
      * the nodes themselves are reclaimed.
      *
      * <p> Because DOM_Node is not designed to be subclassed, userdata
-     * provides an alternative means for extending the the information
+     * provides an alternative means for extending the information
      * kept with nodes by an application program.
      *
-     * @param p The pointer to be kept with the node.
+     * @param p the pointer to be kept with the node.
      */
     public void setUserData (Object objUserData)
     {
@@ -187,7 +195,7 @@ public class XMLDocUserData
     
     /**
      * get a vector of all IDs of elements that are dirty
-     * @return vKString the vector of element IDs
+     * @return vKString - the vector of element IDs
      */
     public VString getDirtyIDs()
     {
@@ -199,6 +207,10 @@ public class XMLDocUserData
         return null;
     }
     
+    /**
+     * get the vector of dirty XPaths
+     * @return VString - vector of dirty XPaths
+     */
     public VString getDirtyXPaths()
     {
         if(dirtyPolicy == EnumDirtyPolicy.XPath)
@@ -211,7 +223,6 @@ public class XMLDocUserData
     
     /**
      * clear the vector of all IDs of elements that are dirty
-     * @return void
      */
     public void clearDirtyIDs()
     {
@@ -226,13 +237,11 @@ public class XMLDocUserData
         }
     }
     
-  
-    
     /**
      * add string id uniquely to the vector of dirty ids
-     * @param KElement * pE the element to be added to the dirty list
-     * @param bool bAttribute if true, only attributes are dirty, else also sub-elements
-     * @return vWString the vector of element IDs after appending id
+     * @param e          the element to be added to the dirty list
+     * @param bAttribute if true, only attributes are dirty, else also sub-elements
+     * @return VString - the vector of element IDs after appending id
      */
     VString setDirty(KElement e, boolean bAttribute)
     {
@@ -240,7 +249,7 @@ public class XMLDocUserData
         globalDirty=true;
         if(dirtyPolicy == EnumDirtyPolicy.XPath)
         {
-            String x = e.buildXPath();
+            String x = e.buildXPath(null);
             
             if(bAttribute)
             {
@@ -280,6 +289,11 @@ public class XMLDocUserData
         return m_vDirtyID;
     }
     
+    /**
+     * checks if <code>element</code> is dirty
+     * @param element element to check
+     * @return true, if <code>element</code> is dirty
+     */
     public boolean isDirty(KElement element)
     {
         if(element==null)
@@ -295,15 +309,16 @@ public class XMLDocUserData
        }
        else if(dirtyPolicy==EnumDirtyPolicy.XPath)
        {
-           String xPath=element.buildXPath();
+           String xPath=element.buildXPath(null);
            return isDirty(xPath);
        }
        return false;
     }
+    
     /**
-     * is the node with ID dirty?
-     * @param KString id the id to be checked
-     * @return bool true if the node with ID=id is dirty
+     * checks wheter the node with <code>strID</code> is dirty
+     * @param strID the id of the node to be checked
+     * @return bool true if the node with ID=<code>strID</code> is dirty
      */
     public boolean isDirty (String strID)
     {
@@ -336,7 +351,8 @@ public class XMLDocUserData
     
     /**
      * Set the target  to target
-     * @param target the target element
+     * @param targetElement the target element
+     * @param id
      */
     public void setTarget (KElement targetElement, String id)
     {
@@ -352,8 +368,8 @@ public class XMLDocUserData
     }
     
     /**
-     * Remove the target from the target list
-     * @param target the target element
+     * remove the KElement from the target list
+     * @param target the element to remove
      */
     public void removeTarget (KElement targetElement)
     {
@@ -372,7 +388,7 @@ public class XMLDocUserData
     }
     
     /**
-     * Remove the target id from the target list
+     * remove the target id from the target list
      * @param id the target element id
      */
     public void removeTarget (String id)
@@ -382,8 +398,8 @@ public class XMLDocUserData
     }
     
     /**
-     * Get the target with ID=id
-     * @param KString id the id of the target to search 
+     * Get the target with ID=<code>strID</code>
+     * @param strID the id of the target to search 
      * @return KElement target the target element
      */
     public KElement getTarget (String strID)
@@ -408,7 +424,6 @@ public class XMLDocUserData
     
     /**
      * clear the map of all targets
-     * @return void
      */
     public void clearTargets ()
     {

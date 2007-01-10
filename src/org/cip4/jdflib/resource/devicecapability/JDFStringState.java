@@ -93,7 +93,6 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.resource.JDFValue;
 import org.cip4.jdflib.resource.JDFValue.EnumValueUsage;
-import org.cip4.jdflib.util.StringUtil;
 
 public class JDFStringState extends JDFAbstractState
 {
@@ -127,10 +126,9 @@ public class JDFStringState extends JDFAbstractState
         return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
     }
 
-
     /**
      * constructor for JDFStringState
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFStringState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
@@ -140,8 +138,8 @@ public class JDFStringState extends JDFAbstractState
 
     /**
      * constructor for JDFStringState
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFStringState(
@@ -154,10 +152,10 @@ public class JDFStringState extends JDFAbstractState
 
     /**
      * constructor for JDFStringState
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFStringState(
         CoreDocumentImpl myOwnerDocument,
@@ -259,12 +257,13 @@ public class JDFStringState extends JDFAbstractState
     **************************************************************** */
 
     /**
-    * Gets the j-th element Loc of the i-th element Value
+    * Gets the jSkip'th element <code>Loc</code> of the iSkip'th element <code>Value</code>
     *
-    * @param int iSkip: number of Value elements to skip 
-    * ( iSkip=0 - first Value element)
-    * @param int jSkip: number of Loc subelements of i-th Value element to skip,
-    * ( jSkip=0 - first Loc element)
+    * @param iSkip number of <code>Value</code> elements to skip 
+    *              (iSkip=0 -> first <code>Value</code> element)
+    * @param jSkip number of <code>Loc</code> subelements of iSkip'th <code>Value</code> 
+    *              element to skip
+    *              (jSkip=0 -> first <code>Loc</code> element)
     * @return JDFLoc: the matching Loc element
     */
     public JDFLoc getValueLocLoc(int iSkip, int jSkip)
@@ -276,11 +275,11 @@ public class JDFStringState extends JDFAbstractState
     
     
     /**
-    * Appends element Loc to the end of the i-th subelement Value
+    * Appends element <code>Loc</code> to the end of the iSkip'th subelement <code>Value</code>
     *
-    * @param int iSkip: number of Value elements to skip 
-    * ( iSkip=0 - first Value element)
-    * @return JDFLoc: newly created Loc element
+    * @param iSkip number of <code>Value</code> elements to skip 
+    *              (iSkip=0 -> first <code>Value</code> element)
+    * @return JDFLoc: newly created <code>Loc</code> element
     */
     public JDFLoc appendValueLocLoc(int iSkip)
     {
@@ -291,10 +290,10 @@ public class JDFStringState extends JDFAbstractState
      }
     
     /** 
-     * Sets the AllowedValue attribute of the i-th subelement Value
+     * Sets the <code>AllowedValue</code> attribute of the iSkip'th subelement <code>Value</code>
      *
-     * @param int iSkip: the number of Value elements to skip
-     * @param String value: value to set the attribute to
+     * @param iSkip the number of <code>Value</code> elements to skip
+     * @param value value to set the attribute to
      */
     public void setValueAllowedValue(int iSkip, String value)
     {
@@ -303,9 +302,9 @@ public class JDFStringState extends JDFAbstractState
     }
     
     /**
-     * Gets the AllowedValue attribute of the i-th subelement Value
+     * Gets the <code>AllowedValue</code> attribute of the iSkip'th subelement <code>Value</code>
      *
-     * @param int iSkip: the number of Value elements to skip
+     * @param iSkip the number of <code>Value</code> elements to skip
      * @return String: the attribute value
      */
     public final String getValueAllowedValue(int iSkip) 
@@ -328,9 +327,9 @@ public class JDFStringState extends JDFAbstractState
     }
     
     /**
-    * Gets the value of attribute ValueUsage of the i-th subelement Value
+    * Gets the value of attribute <code>ValueUsage</code> of the iSkip'th subelement <code>Value</code>
     *
-    * @param int iSkip: the number of Value elements to skip
+    * @param iSkip the number of <code>Value</code> elements to skip
     * @return EnumFitsValue: the attribute value
     */
     public final EnumFitsValue getValueValueUsage(int iSkip) 
@@ -345,15 +344,16 @@ public class JDFStringState extends JDFAbstractState
     **************************************************************** */
     
     /**
-     * fitsValue - tests, if the defined value matches Allowed test lists or
-     * Present test lists, specified for this State
+     * fitsValue - checks whether <code>value</code> matches the Allowed/Present test lists
+     * specified for this State
      *
-     * @param String value - value to test
-     * @param EnumFitsValue testlists - test lists, that the value has to match.
-     * In this State the test lists are ValueList, RegExp. 
+     * @param value     value to test
+     * @param testlists the test lists the value has to match.
+     * In this State the test lists are ValueList AND ValueMod.<br> 
      * Choose one of two values: FitsValue_Allowed or FitsValue_Present. (Defaults to Allowed)
      * 
-     * @return boolean - true, if the value matches all test lists or if Allowed test lists are not specified
+     * @return boolean - true, if <code>value</code> matches testlists or 
+     *         if AllowedValueList and AllowedValueMod are not specified
      */
     public final boolean fitsValue(String value, EnumFitsValue testlists)
     {
@@ -363,41 +363,15 @@ public class JDFStringState extends JDFAbstractState
     }
     
     /**
-     * fitsRegExp - tests, if the defined string 'str' matches
-     * AllowedRegExp or the PresentRegExp, specified for this State
+     * fitsValueElem - checks whether <code>str</code> matches the 
+     * subelement <code>Value</code> specified for this State
      *
-     * @param String str - string to test
-     * @param EnumFitsValue regexp - Switches between AllowedRegExp and PresentRegExp.
-     * @return boolean - true, if 'str' matches RegExp or if AllowedRegExp is not specified
-     */
-    private final boolean fitsRegExp(String str, EnumFitsValue fitsValueType) 
-    {
-        String rExp;
-        if (fitsValueType.equals(EnumFitsValue.Allowed)) 
-        {
-            rExp = getAllowedRegExp();
-        } 
-        else 
-        {
-            rExp = getPresentRegExp();
-        }
-        if(rExp.length()==0)
-            return true; // if AllowedRegExp is not specified return true 
-
-        return StringUtil.matches(str,rExp); 
-    }
-
-
-    /**
-     * fitsValueElem - tests, if the defined string 'str' matches 
-     * subelement Value, specified for this State
-     *
-     * @param String str - string to test
-     * @param EnumFitsValue valueusage - Switches between 
-     * Allowed and Present configuration in subelement Value.
+     * @param str         string to test
+     * @param valueusage  switches between Allowed and Present configuration 
+     *                    in subelement <code>Value</code>
      * 
-     * @return boolean - true, if 'str' matches subelement Value or no corresponding
-     * value elements exist
+     * @return boolean - true, if <code>str</code> matches subelement Value or no 
+     *                   corresponding value elements exist
      */
     private final boolean fitsValueElem(String str, EnumFitsValue valuelist) 
     {

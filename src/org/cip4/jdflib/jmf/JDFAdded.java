@@ -17,23 +17,22 @@ public class JDFAdded extends JDFAutoAdded
 {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFChangedAttribute
-     * @param ownerDocument
+     /**
+      * Constructor for JDFChangedAttribute
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFAdded(
+    public JDFAdded(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFChangedAttribute
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFAdded(
@@ -46,10 +45,10 @@ public class JDFAdded extends JDFAutoAdded
 
     /**
      * Constructor for JDFChangedAttribute
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFAdded(
         CoreDocumentImpl myOwnerDocument,

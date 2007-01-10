@@ -17,23 +17,22 @@ public class JDFCustomerMessage extends JDFAutoCustomerMessage
 {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFCustomerMessage
-     * @param ownerDocument
+     /**
+      * Constructor for JDFCustomerMessage
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFCustomerMessage(
+    public JDFCustomerMessage(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFCustomerMessage
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFCustomerMessage(
@@ -46,10 +45,10 @@ public class JDFCustomerMessage extends JDFAutoCustomerMessage
 
     /**
      * Constructor for JDFCustomerMessage
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFCustomerMessage(
         CoreDocumentImpl myOwnerDocument,

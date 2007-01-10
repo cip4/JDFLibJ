@@ -97,21 +97,20 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 
     /**
      * Constructor for JDFStopPersChParams
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFStopPersChParams(
+    public JDFStopPersChParams(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFStopPersChParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFStopPersChParams(
@@ -123,11 +122,10 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
     }
 
     /**
-     * Constructor for JDFStopPersChParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFStopPersChParams(
         CoreDocumentImpl myOwnerDocument,
@@ -138,6 +136,10 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
 
+    /**
+     * toString()
+     * @return String
+     */
     public String toString()
     {
         return "JDFStopPersChParams[  --> " + super.toString() + " ]";
@@ -153,8 +155,8 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
    }
 
    /**
-    * set all parts to those define in vParts
-    * @param VJDFAttributeMap vParts: vector of attribute maps for the parts
+    * set all parts to those defined in vParts
+    * @param vParts vector of attribute maps for the parts
     */
    public void setPartMapVector(VJDFAttributeMap vParts)
    {
@@ -162,8 +164,8 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
    }
 
    /**
-    * set all parts to those define in vParts
-    * @param JDFAttributeMap mPart: attribute map for the part to set
+    * set all parts to those defined by mPart
+    * @param mPart attribute map for the part to set
     */
    public void setPartMap(JDFAttributeMap mPart)
    {
@@ -171,8 +173,8 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
    }
 
    /**
-    * remove the part defined in mPart
-    * @param JDFAttributeMap mPart: attribute map for the part to remove
+    * remove the part defined by mPart
+    * @param mPart attribute map for the part to remove
     */
    public void removePartMap(JDFAttributeMap mPart)
    {
@@ -181,7 +183,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 
    /**
     * check whether the part defined in mPart is included
-    * @param JDFAttributeMap mPart: attribute map for the part to remove
+    * @param mPart attribute map to look for
     * @return boolean - returns true if the part exists
     */
    public boolean hasPartMap(JDFAttributeMap mPart)

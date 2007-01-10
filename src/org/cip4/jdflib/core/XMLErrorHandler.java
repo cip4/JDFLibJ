@@ -114,7 +114,7 @@ public class XMLErrorHandler implements ErrorHandler {
     }
     
     /**
-     * @param exception - SAXParseException
+     * @param exception SAXParseException
      * @throws JDFException - if fatal error occurs
      */
     public void fatalError(final SAXParseException exception)

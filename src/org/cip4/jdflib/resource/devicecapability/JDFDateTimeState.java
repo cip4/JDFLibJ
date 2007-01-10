@@ -133,24 +133,22 @@ public class JDFDateTimeState extends JDFAbstractState
         return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
     }
 
-
     /**
      * Constructor for JDFDateTimeState
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFDateTimeState(
+    public JDFDateTimeState(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFDateTimeState
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFDateTimeState(
@@ -163,10 +161,10 @@ public class JDFDateTimeState extends JDFAbstractState
 
     /**
      * Constructor for JDFDateTimeState
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFDateTimeState(
         CoreDocumentImpl myOwnerDocument,
@@ -176,7 +174,6 @@ public class JDFDateTimeState extends JDFAbstractState
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
-
 	
     /**
      * toString
@@ -191,12 +188,20 @@ public class JDFDateTimeState extends JDFAbstractState
 	// Attribute getter/ setter
 	**************************************************************** */	
 	
+    /**
+     * set attribute <code>CurrentValue</code>
+     * @param value the value to set the attribute to
+     */
     public void setCurrentValue(JDFDate value)
     {
         setAttribute(AttributeName.CURRENTVALUE, value.getDateTimeISO(), JDFConstants.EMPTYSTRING);
     }
 
   
+    /**
+     * get attribute <code>CurrentValue</code>
+     * @return the value of the attribute
+     */
     public JDFDate getCurrentValue()
     {
         JDFDate currentValue = null;
@@ -216,11 +221,19 @@ public class JDFDateTimeState extends JDFAbstractState
     }
 
 
+    /**
+     * set attribute <code>DefaultValue</code>
+     * @param value the value to set the attribute to
+     */
     public void setDefaultValue(JDFDate value)
     {
         setAttribute(AttributeName.DEFAULTVALUE, value.getDateTimeISO(), JDFConstants.EMPTYSTRING);
     }
 
+    /**
+     * get attribute <code>DefaultValue</code>
+     * @return the value of the attribute
+     */
     public JDFDate getDefaultValue()
     {
         JDFDate defaultValue = null;
@@ -239,12 +252,19 @@ public class JDFDateTimeState extends JDFAbstractState
         return defaultValue;
     }
 
+    /**
+     * set attribute <code>AllowedValueList</code>
+     * @param value the value to set the attribute to
+     */
     public void setAllowedValueList(JDFDateTimeRangeList value)
     {
 		setAttribute(AttributeName.ALLOWEDVALUELIST, value.toString());
 	}
-	
 
+    /**
+     * get attribute <code>AllowedValueList</code>
+     * @return the value of the attribute
+     */
     public JDFDateTimeRangeList getAllowedValueList()  
     {
         try
@@ -261,12 +281,19 @@ public class JDFDateTimeState extends JDFAbstractState
 	}
 	
 
+    /**
+     * set attribute <code>PresentValueList</code>
+     * @param value the value to set the attribute to
+     */
     public void setPresentValueList(JDFDateTimeRangeList value)
     {
 		setAttribute(AttributeName.PRESENTVALUELIST, value.toString());
 	}
 
-	
+	/**
+	 * get attribute <code>PresentValueList</code>
+	 * @return the value of the attribute
+	 */
 	public JDFDateTimeRangeList getPresentValueList()  
     {
 		if (hasAttribute(AttributeName.PRESENTVALUELIST)) 
@@ -284,14 +311,20 @@ public class JDFDateTimeState extends JDFAbstractState
 		}
 		return getAllowedValueList();
 	}
-
 	
+	/**
+	 * set attribute <code>AllowedValueDurationList</code>
+	 * @param value the value of the attribute
+	 */
 	public void setAllowedValueDurationList(JDFDurationRangeList value)
     {
 		setAttribute(AttributeName.ALLOWEDVALUEDURATIONLIST, value.toString());
 	}
-
     
+	/**
+	 * get attribute <code>AllowedValueDurationList</code>
+	 * @return the value of the attribute
+	 */
 	public JDFDurationRangeList getAllowedValueDurationList()  
 	{
 	    JDFDurationRangeList r = null;
@@ -312,12 +345,20 @@ public class JDFDateTimeState extends JDFAbstractState
 	}
 
     
+	/**
+	 * set attribute <code>PresentValueDurationList</code>
+	 * @param value the value to set the attribute to
+	 */
 	public void setPresentValueDurationList(JDFDurationRangeList value)
     {
 		setAttribute(AttributeName.PRESENTVALUEDURATIONLIST, value.toString());
 	}
 	
     
+	/**
+	 * get attribute <code>PresentValueDurationList</code>
+	 * @return the value of the attribute
+	 */
 	public JDFDurationRangeList getPresentValueDurationList()  
     {
 		if (hasAttribute(AttributeName.PRESENTVALUEDURATIONLIST)) 
@@ -346,9 +387,9 @@ public class JDFDateTimeState extends JDFAbstractState
     * fitsValue - tests, if the defined value matches Allowed test lists 
     * or Present test lists, specified for this State
     *
-    * @param String value - value to test
-    * @param EnumFitsValue tetlists - test lists, that the value has to match.
-    * In this State the test lists are ValueList and ValueDurationList.
+    * @param value     value to test
+    * @param testlists the test lists the value has to match.
+    * In this State the test lists are ValueList and ValueDurationList.<br>
     * Choose one of two values: FitsValue_Allowed or FitsValue_Present. (Defaults to Allowed)
     * 
     * @return boolean - true, if the value matches test list or if AllowedValueList is not specified
@@ -377,10 +418,10 @@ public class JDFDateTimeState extends JDFAbstractState
      * fitsValueList - tests, if the defined 'rangelist' matches 
      * the AllowedValueList or in the PresentValueList, specified for this State
      *
-     * @param JDFDateTimeRangeList rangelist - range list to test
-     * @param EnumFitsValue valuelist - Switches between AllowedValueList and PresentValueList.
+     * @param rangelist range list to test
+     * @param valuelist switches between AllowedValueList and PresentValueList
      * 
-     * @return boolean - true, if 'rangelist' matches the valuelist or if AllowedValueList is not specified
+     * @return boolean - true, if <code>rangelist</code> matches the valuelist or if AllowedValueList is not specified
      */
     private final boolean fitsValueList(JDFDateTimeRangeList rangelist, EnumFitsValue valuelist)
     {
@@ -414,12 +455,13 @@ public class JDFDateTimeState extends JDFAbstractState
     }
     
     /**
-     * fitsValueDurationList - tests, if the duration of the defined 'rangelist' value
-     * matches ValueDurationList, specified for this State
+     * fitsValueDurationList - tests, if the duration of the defined 
+     * <code>rangelist</code> value matchest the ValueDurationList, specified for this State
      *
-     * @param JDFDateTimeRangeList rangelist - range list to test
-     * @return boolean - true, if the duration of the defined 'rangelist' 
-     * is in the ValueList or if ValueDurationList is not specified
+     * @param rangelist range list to test
+     * @param valuelist switches between AllowedValueList and PresentValueList
+     * @return boolean - true, if the duration of the defined rangelist 
+     * is in <code>valueList</code> or if ValueDurationList is not specified
      */
     private final boolean fitsValueDurationList(JDFDateTimeRangeList rangelist, EnumFitsValue valuelist)
     {
@@ -451,13 +493,13 @@ public class JDFDateTimeState extends JDFAbstractState
 
     /**
      * fitsCompleteList - tests for the case, when ListType=CompleteList,
-     * if the defined 'value' matches AllowedValueList or PresentValueList,
+     * if <code>value</code> matches AllowedValueList or PresentValueList,
      * specified for this State
      *
-     * @param JDFDateTimeRangeList value - value to test
-     * @param JDFDateTimeRangeList list - testlist are either AllowedValueList or PresentValueList.
+     * @param value value to test
+     * @param list  testlists are either AllowedValueList or PresentValueList
      * 
-     * @return boolean - true, if 'value' matches testlist
+     * @return boolean - true, if <code>value</code> matches testlist
      */
     private final boolean fitsCompleteList(JDFDateTimeRangeList value, JDFDateTimeRangeList list)
     {
@@ -493,15 +535,15 @@ public class JDFDateTimeState extends JDFAbstractState
         return true;
     }
 
-    /**
+   /**
     * fitsCompleteOrderedList - tests for the case, when ListType=CompleteOrderedList,
     * if the defined 'value' matches AllowedValueList or PresentValueList,
     * specified for this State
     *
-    * @param JDFDateTimeRangeList value - value to test
-    * @param JDFDateTimeRangeList list - testlist are either AllowedValueList or PresentValueList.
+    * @param value value to test
+    * @param list  testlists are either AllowedValueList or PresentValueList
     * 
-    * @return boolean - true, if 'value' matches testlist
+    * @return boolean - true, if <code>value</code> matches testlist
     */
     private final boolean fitsCompleteOrderedList(JDFDateTimeRangeList value, JDFDateTimeRangeList list)
     {
@@ -524,15 +566,15 @@ public class JDFDateTimeState extends JDFAbstractState
         return true;        
     }
 
-    /**
+   /**
     * fitsContainedList - tests for the case, when ListType=ContainedList,
-    * if the defined 'value' matches AllowedValueList or PresentValueList,
+    * if the defined <code>value</code> matches AllowedValueList or PresentValueList,
     * specified for this State
     *
-    * @param JDFDateTimeRangeList value - value to test
-    * @param JDFDateTimeRangeList list - testlist are either AllowedValueList or PresentValueList.
+    * @param value to test
+    * @param testlists are either AllowedValueList or PresentValueList
     * 
-    * @return boolean - true, if 'value' matches testlist
+    * @return boolean - true, if <code>value</code> matches testlist
     */
     private final boolean fitsContainedList(JDFDateTimeRangeList value, JDFDateTimeRangeList list)
     {

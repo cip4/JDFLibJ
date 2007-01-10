@@ -118,7 +118,7 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 
     /**
      * Constructor for JDFAncestorPool
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFAncestorPool(
@@ -130,8 +130,8 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 
     /**
      * Constructor for JDFAncestorPool
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFAncestorPool(
@@ -144,10 +144,10 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 
     /**
      * Constructor for JDFAncestorPool
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFAncestorPool(
         CoreDocumentImpl myOwnerDocument,
@@ -158,32 +158,15 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
 
-    /**
-     * Comes from JDFAutoAncestorPool
-     */
-    public JDFAncestor appendAncestor()
-    {
-        final JDFAncestor e = (JDFAncestor) appendElement(ElementName.ANCESTOR, JDFConstants.EMPTYSTRING);
-        // Does not exist ...: e.init();
-        /*      C++:
-                JDFAncestor e = (JDFAncestor)AppendElement("Ancestor");
-                e.init();
-                return e;
-        */
-
-        return e;
-    }
-
- 
-   
+    
     /**
      * searches for the first attribute occurence in the ancestor elements
      *
-     * @param KString attrib: the attribute name
-     * @param KString nameSpaceURI: the XML-namespace
-     * @param KString def: the default if it does not exist
+     * @param attrib       the attribute name
+     * @param nameSpaceURI the XML-namespace
+     * @param def          the default if it does not exist
      * @since 180502 
-     * @return KString: value of attribute found, value of def if not available
+     * @return value of attribute found, value of def if not available
      */
     public String getAncestorAttribute(
         String attrib,
@@ -216,14 +199,15 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
     {
         return getAncestorElement(element, nameSpaceURI, null);
     }
+    
     /**
      * searches for the first element occurence in the ancestor elements
      *
-     * @param  attrib: the element name
-     * @param  nameSpaceURI: the XML-namespace of the element
-     * @param xPath the xpath of a required attribute
+     * @param  element      the element name
+     * @param  nameSpaceURI the XML-namespace of the element
+     * @param xPath         the xpath of a required attribute
      * @since 290502 
-     * @return KString: value of attribute found, empty string if not available
+     * @return value of attribute found, empty string if not available
      */
     public KElement getAncestorElement(String element, String nameSpaceURI, String xPath)
     {
@@ -244,11 +228,10 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
     /**
      * true id a non default occurence in the ancestor elements exists
      *
-     * @param KString attrib: the attribute name
-     * @param KString nameSpaceURI: the XML-namespace
-     * @param KString def: the default if it does not exist
+     * @param attrib       the attribute name
+     * @param nameSpaceURI the XML-namespace
      * @since 180502 
-     * @return KString: value of attribute found, empty string if not available
+     * @return value of attribute found, empty string if not available
      */
     public boolean hasAncestorElement(String attrib, String nameSpaceURI)
     {
@@ -258,8 +241,8 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
     /**
      * Get the linked resources matching some conditions
      *
-     * @param JDFAttributeMap mLinkAtt    map of Resource attributes to search for
-     * @param boolean         bFollowRefs true if internal references shall be followed
+     * @param mResAtt     map of Resource attributes to search for
+     * @param bFollowRefs true if internal references shall be followed
      *
      * @return vResource: vector with all elements matching the conditions
      * 
@@ -279,8 +262,8 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
  
 
     /**
-     * Copy all data from rotNode into the Ancestor elements of this
-     * @param JDFNode rootNode the closest parent Node that contains the information to be copied
+     * Copy all data from rootNode into the Ancestor elements of this
+     * @param parentNode the closest parent Node that contains the information to be copied
      * @deprecated use public void copyNodeData (JDFNode parentNode, false, false) instead
      */
     public void copyNodeData(JDFNode parentNode)
@@ -290,16 +273,13 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 
     /**
     * Copy all data from parentNode into the ancestor elements of this
-    * @param JDFNode parentNode the closest parent Node that contains the information to be copied
-    * @param boolean bCopyNodeInfo if true, also copy the NodeInfo into the ancestor
-    * @param boolean bCopyCustomerInfo if true, also copy the CustomerInfo into the ancestor
+    * @param parentNode        the closest parent Node that contains the information to be copied
+    * @param bCopyNodeInfo     if true, also copy the NodeInfo into the ancestor
+    * @param bCopyCustomerInfo if true, also copy the CustomerInfo into the ancestor
+    * @param bCopyComments     if true, also copy the comments into the ancestor
     * @default copyNodeData(parentNode, false, false, false);
     */
-    public void copyNodeData(
-        JDFNode parentNode,
-        boolean bCopyNodeInfo,
-        boolean bCopyCustomerInfo,
-        boolean bCopyComments)
+    public void copyNodeData(JDFNode parentNode, boolean bCopyNodeInfo, boolean bCopyCustomerInfo, boolean bCopyComments)
     {
         final VElement vAncestors = getPoolChildren(null);
         JDFNode node = parentNode;
@@ -416,8 +396,8 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
     }
 
     /**
-     * Gets all children with the attribute name,mAttrib, nameSpaceURI out of the pool
-     * @param mAttribute mAttrib: a attribute to search for
+     * Gets all children with the attribute out of the pool
+     * @param mAttrib the attribute to search for
      * @return VElement: a vector with all elements in the pool matching the conditions
      * 
      * default: GetPoolChildren(null)
@@ -429,8 +409,8 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
     
     /**
      * get a child from the pool matching the parameters
-     * @param int i: the index of the child or -1 to make a new one.
-     * @param JDFAttributeMap mAttrib: an attribute to search for
+     * @param i       the index of the child or -1 to make a new one.
+     * @param mAttrib an attribute to search for
      * @return JDFAncestor: the pool child matching the above conditions
      * 
      * default: GetPoolChild(i, null)
@@ -451,7 +431,7 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 
     /**
      * set all parts to those define in vParts
-     * @param VJDFAttributeMap vParts: vector of attribute maps for the parts
+     * @param vParts vector of attribute maps for the parts
      */
     public void setPartMapVector(VJDFAttributeMap vParts)
     {
@@ -460,7 +440,7 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 
     /**
      * set all parts to those define in vParts
-     * @param JDFAttributeMap mPart: attribute map for the part to set
+     * @param mPart attribute map for the part to set
      */
     public void setPartMap(JDFAttributeMap mPart)
     {
@@ -469,7 +449,7 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 
     /**
      * remove the part defined in mPart
-     * @param JDFAttributeMap mPart: attribute map for the part to remove
+     * @param mPart attribute map for the part to remove
      */
     public void removePartMap(JDFAttributeMap mPart)
     {
@@ -478,8 +458,8 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 
     /**
      * check whether the part defined in mPart is included
-     * @param JDFAttributeMap mPart: attribute map for the part to remove
-     * @return boolean - returns true if the part exists
+     * @param mPart attribute map for the part to remove
+     * @return true if the part exists
      */
     public boolean hasPartMap(JDFAttributeMap mPart)
     {
@@ -487,13 +467,12 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
     }
 
     /**
-     * true id a non default occurence in the ancestor elements exists
+     * check whether a defined attribute exists in the ancestor elements
      *
-     * @param KString attrib: the attribute name
-     * @param KString nameSpaceURI: the XML-namespace
-     * @param KString def: the default if it does not exist
+     * @param attrib       the attribute name to look for
+     * @param nameSpaceURI the XML-namespace to search in 
      * @since 180502 
-     * @return KString: value of attribute found, empty string if not available
+     * @return value of attribute found, empty string if not available
      */
     public boolean hasAncestorAttribute(String attrib, String nameSpaceURI)
     {
@@ -505,11 +484,12 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
     * searches for the first attribute occurence in the ancestor elements subelements<br>
     * e.g. the JobPriority in NodeInfo
     *
-    * @param WString attrib: the attribute name
-    * @param WString nameSpaceURI: the XML-namespace
-    * @param WString def: the default if it does not exist
+    * @param element      node name to look in
+    * @param attrib       the attribute name
+    * @param nameSpaceURI the XML-namespace
+    * @param def          the default if it does not exist
     * @since 200503 
-    * @return WString: value of attribute found, empty string if not available
+    * @return value of attribute found, empty string if not available
     */
     public String getAncestorElementAttribute(
         String element,
@@ -534,7 +514,7 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
     
     /**
      * check whether the Ancestor pool contains any part elements
-     * @return bool true if the pool comtains part elements 
+     * @return true if the pool comtains part elements 
      */
     public boolean isPartitioned()
     {

@@ -87,10 +87,10 @@ import org.cip4.jdflib.auto.JDFAutoWakeUpCmdParams;
 public class JDFWakeUpCmdParams extends JDFAutoWakeUpCmdParams
 {
     private static final long serialVersionUID = 1L;
-    
+
     /**
      * Constructor for JDFWakeUpCmdParams
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFWakeUpCmdParams(
@@ -99,12 +99,11 @@ public class JDFWakeUpCmdParams extends JDFAutoWakeUpCmdParams
     {
         super(myOwnerDocument, qualifiedName);
     }
-    
-    
+
     /**
      * Constructor for JDFWakeUpCmdParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFWakeUpCmdParams(
@@ -114,13 +113,13 @@ public class JDFWakeUpCmdParams extends JDFAutoWakeUpCmdParams
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
-    
+
     /**
      * Constructor for JDFWakeUpCmdParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFWakeUpCmdParams(
             CoreDocumentImpl myOwnerDocument,

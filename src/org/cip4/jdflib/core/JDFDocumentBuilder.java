@@ -37,6 +37,9 @@ public class JDFDocumentBuilder extends DocumentBuilder
      * 
      */
     
+    /**
+     * constructor
+     */
     public JDFDocumentBuilder ()
     {
         init (new JDFParser ());
@@ -58,8 +61,7 @@ public class JDFDocumentBuilder extends DocumentBuilder
      * Method getParser
      * 
      * @return
-     */
-    
+     */    
     public JDFParser getParser ()
     {
         return (m_parser);
@@ -71,8 +73,7 @@ public class JDFDocumentBuilder extends DocumentBuilder
      * @see javax.xml.parsers.DocumentBuilder#isNamespaceAware()
      * 
      * @return
-     */
-    
+     */    
     public boolean isNamespaceAware ()
     {
         return (true);
@@ -84,8 +85,7 @@ public class JDFDocumentBuilder extends DocumentBuilder
      * @see javax.xml.parsers.DocumentBuilder#isValidating()
      * 
      * @return
-     */
-    
+     */    
     public boolean isValidating ()
     {
         boolean isValidating = false;
@@ -114,8 +114,7 @@ public class JDFDocumentBuilder extends DocumentBuilder
      * @see javax.xml.parsers.DocumentBuilder#getDOMImplementation()
      * 
      * @return
-     */
-    
+     */    
     public DOMImplementation getDOMImplementation ()
     {
         throw new JDFException ("JDFDocumentBuilder.getDOMImplementation is not implemented");
@@ -127,8 +126,7 @@ public class JDFDocumentBuilder extends DocumentBuilder
      * @see javax.xml.parsers.DocumentBuilder#newDocument()
      * 
      * @return
-     */
-    
+     */    
     public Document newDocument()
     {
         return (new DocumentJDFImpl ());
@@ -141,7 +139,6 @@ public class JDFDocumentBuilder extends DocumentBuilder
      * 
      * @param er
      */
-    
     public void setEntityResolver (EntityResolver er)
     {
         m_parser.setEntityResolver (er);
@@ -154,7 +151,6 @@ public class JDFDocumentBuilder extends DocumentBuilder
      * 
      * @param eh
      */
-    
     public void setErrorHandler (ErrorHandler eh)
     {
         m_parser.setErrorHandler (eh);
@@ -172,7 +168,6 @@ public class JDFDocumentBuilder extends DocumentBuilder
      * @throws SAXException
      * @throws IOException
      */
-    
     public Document parse (InputSource is)
         throws SAXException, IOException
     {

@@ -33,6 +33,11 @@ public class VJDFNode
     {
         //default super constructor
     }
+    
+    /**
+     * constructor
+     * @param v
+     */
     public VJDFNode(Vector v)
     {
         m_vec = v;
@@ -48,9 +53,9 @@ public class VJDFNode
     }
 
     /**
-     * Method elementAt.
-     * @param index
-     * @return JDFNode
+     * Method elementAt: get JDFNode at <code>index</code>
+     * @param index the index
+     * @return JDFNode: the JDFNode
      */
     public JDFNode elementAt(int index)
     {
@@ -58,8 +63,8 @@ public class VJDFNode
     }
 
     /**
-     * Method addElement.
-     * @param node
+     * add a JDFNode
+     * @param node the node to add
      */
     public void addElement(JDFNode node)
     {

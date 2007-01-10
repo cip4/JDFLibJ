@@ -82,6 +82,7 @@ package org.cip4.jdflib.jmf;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoQueueFilter;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 
 /**
  *
@@ -89,10 +90,10 @@ import org.cip4.jdflib.auto.JDFAutoQueueFilter;
 public class JDFQueueFilter extends JDFAutoQueueFilter
 {
     private static final long serialVersionUID = 1L;
-    
+
     /**
      * Constructor for JDFQueueFilter
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFQueueFilter(
@@ -101,12 +102,11 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
     {
         super(myOwnerDocument, qualifiedName);
     }
-    
-    
+
     /**
      * Constructor for JDFQueueFilter
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFQueueFilter(
@@ -116,13 +116,13 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
-    
+
     /**
      * Constructor for JDFQueueFilter
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFQueueFilter(
             CoreDocumentImpl myOwnerDocument,
@@ -142,5 +142,25 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
     public String toString()
     {
         return "JDFQueueFilter[  --> " + super.toString() + " ]";
+    }
+    
+    /**
+     * GetPartMapVector returns a vector of partmaps, null if no parts are present
+     *
+     * @return VJDFAttributeMap
+     */
+    public VJDFAttributeMap getPartMapVector()
+    {
+        return super.getPartMapVector();
+    }
+    
+    /**
+     * SetPartMapVector
+     *
+     * @param vPart
+     */
+    public void setPartMapVector(VJDFAttributeMap vPart)
+    {
+        super.setPartMapVector(vPart);
     }
 }

@@ -91,10 +91,10 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams
 {
     private static final long serialVersionUID = 1L;
-    
+
     /**
      * Constructor for JDFRequestQueueEntryParams
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFRequestQueueEntryParams(
@@ -103,12 +103,11 @@ public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams
     {
         super(myOwnerDocument, qualifiedName);
     }
-    
-    
+
     /**
      * Constructor for JDFRequestQueueEntryParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFRequestQueueEntryParams(
@@ -118,13 +117,13 @@ public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
-    
+
     /**
      * Constructor for JDFRequestQueueEntryParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFRequestQueueEntryParams(
             CoreDocumentImpl myOwnerDocument,
@@ -136,6 +135,7 @@ public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams
     }
     
     //**************************************** Methods *********************************************
+
     /**
      * toString
      *
@@ -157,8 +157,8 @@ public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams
     }
     
     /**
-     * set all parts to those define in vParts
-     * @param VJDFAttributeMap vParts: vector of attribute maps for the parts
+     * set all parts to those defined by vParts
+     * @param vParts vector of attribute maps for the parts
      */
     public void setPartMapVector(VJDFAttributeMap vParts)
     {
@@ -166,8 +166,8 @@ public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams
     }
     
     /**
-     * set all parts to those define in vParts
-     * @param JDFAttributeMap mPart: attribute map for the part to set
+     * set all parts to those defined by mPart
+     * @param mPart attribute map for the part to set
      */
     public void setPartMap(JDFAttributeMap mPart)
     {
@@ -175,8 +175,8 @@ public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams
     }
     
     /**
-     * remove the part defined in mPart
-     * @param JDFAttributeMap mPart: attribute map for the part to remove
+     * remove the part defined by mPart
+     * @param mPart attribute map for the part to remove
      */
     public void removePartMap(JDFAttributeMap mPart)
     {
@@ -184,8 +184,8 @@ public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams
     }
     
     /**
-     * check whether the part defined in mPart is included
-     * @param JDFAttributeMap mPart: attribute map for the part to remove
+     * check whether the part defined by mPart is included
+     * @param mPartattribute map to look for
      * @return boolean - returns true if the part exists
      */
     public boolean hasPartMap(JDFAttributeMap mPart)

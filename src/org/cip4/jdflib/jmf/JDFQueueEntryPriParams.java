@@ -28,21 +28,20 @@ import org.cip4.jdflib.core.AttributeName;
 
     /**
      * Constructor for JDFQueueEntryPriParams
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFQueueEntryPriParams(
+    public JDFQueueEntryPriParams(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFQueueEntryPriParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFQueueEntryPriParams(
@@ -55,10 +54,10 @@ import org.cip4.jdflib.core.AttributeName;
 
     /**
      * Constructor for JDFQueueEntryPriParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFQueueEntryPriParams(
         CoreDocumentImpl myOwnerDocument,
@@ -69,6 +68,10 @@ import org.cip4.jdflib.core.AttributeName;
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
 
+    /**
+     * toString()
+     * @return String
+     */
     public String toString()
     {
         return "JDFQueueEntryPriParams[  --> " + super.toString() + " ]";
@@ -76,7 +79,7 @@ import org.cip4.jdflib.core.AttributeName;
     
     /**
      * Method setQueueEntryID.
-     * @param strID
+     * @param strID the ID to set
      */
     public void setQueueEntryID(String strID)
     {
@@ -85,7 +88,7 @@ import org.cip4.jdflib.core.AttributeName;
     
     /**
      * Method setPriority.
-     * @param nPrio
+     * @param nPrio the priority to set
      */
     public void setPriority(int nPrio)
     {

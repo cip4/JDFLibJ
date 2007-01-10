@@ -104,10 +104,10 @@ import org.cip4.jdflib.resource.JDFResource;
 public class JDFPipeParams extends JDFAutoPipeParams
 {
     private static final long serialVersionUID = 1L;
-    
+
     /**
      * Constructor for JDFPipeParams
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFPipeParams(
@@ -116,12 +116,11 @@ public class JDFPipeParams extends JDFAutoPipeParams
     {
         super(myOwnerDocument, qualifiedName);
     }
-    
-    
+
     /**
      * Constructor for JDFPipeParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFPipeParams(
@@ -131,13 +130,13 @@ public class JDFPipeParams extends JDFAutoPipeParams
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
-    
+
     /**
      * Constructor for JDFPipeParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFPipeParams(
             CoreDocumentImpl myOwnerDocument,
@@ -152,13 +151,11 @@ public class JDFPipeParams extends JDFAutoPipeParams
     {
         return "JDFPipeParams[  --> " + super.toString() + " ]";
     }
-    
-    
-    
+
     /**
-     * Gets all ResourceLink children with the attribute name, mAttrib, nameSpaceURI out of the pool
-     * @param String name: name of the Child
-     * @param JDFAttributeMap mAttrib: a attribute to search for
+     * Gets all ResourceLink children with the attribute name, mAttrib, nameSpaceURI from the pool
+     * @param name name of the Child
+     * @param mAttrib a attribute to search for
      * @return VElement: a vector with all resource links in the pool matching the conditions
      * @deprecated use getResourceLink()
      */
@@ -177,7 +174,7 @@ public class JDFPipeParams extends JDFAutoPipeParams
     }
     
     /**
-     * Gets the ResourceLink out of the pool
+     * Gets the ResourceLink from the pool
      * @return VElement: a vector with all resource links in the pool matching the conditions
      */
     final public JDFResourceLink getResourceLink()
@@ -194,15 +191,14 @@ public class JDFPipeParams extends JDFAutoPipeParams
         return null;
     }
     
-    
     /**
-     * return a vector of unknown element nodenames
-     * @param boolean bIgnorePrivate - used by JDFElement during the validation
-     * !!! Do not change the signature of this method
-     * @param int nMax - maximum size of the returned vector
-     * @return Vector - vector of unknown element nodenames
-     * 
+     * get the vector of unknown element nodenames
+     * <p>
      * default: GetUnknownElements(true, 999999)
+     * @param  bIgnorePrivate used by JDFElement during the validation
+     * !!! Do not change the signature of this method
+     * @param nMax maximum size of the returned vector
+     * @return Vector - vector of unknown element nodenames
      */
     
     public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
@@ -214,9 +210,9 @@ public class JDFPipeParams extends JDFAutoPipeParams
     }
     
     /** 
-     * 
-     * @param WString resName, name of the resource to get/create
-     * @return JDFCostCenter The element
+     * get resource defined by <code>resName</code>, create if it doesn't exist
+     * @param resName name of the resource to get/create
+     * @return JDFResource: the element
      */
     public JDFResource getCreateResource(String resName)
     {
@@ -236,9 +232,9 @@ public class JDFPipeParams extends JDFAutoPipeParams
     }
     
     /**
-     * const get Resource
-     * @param WString resName, name of the resource to get/create
-     * @return JDFResource The element
+     * get resource defined by <code>resName</code>
+     * @param resName name of the resource to get
+     * @return JDFResource: the element
      */
     public JDFResource getResource(String resName)
     {
@@ -256,8 +252,8 @@ public class JDFPipeParams extends JDFAutoPipeParams
     }
     
     /**
-     * Append  Resource
-     * @param WString resName, name of the resource to get/create
+     * append  Resource
+     * @param resName name of the resource to append
      */
     public JDFResource appendResource(String resName)
     {
@@ -277,9 +273,10 @@ public class JDFPipeParams extends JDFAutoPipeParams
     }
     
     /**
-     * Append  Resource
-     * @param WString linkName, name of the resourcelin to append a link for
-     * @param bInput if true, the link is an input link 
+     * append  ResourceLink
+     * @param linkName name of the ResourceLink to append a link for
+     * @param bInput if true, the link is an input link
+     * @return JDFResourceLink: the appended element 
      */
     public JDFResourceLink appendResourceLink(String linkName, boolean bInput)
     {

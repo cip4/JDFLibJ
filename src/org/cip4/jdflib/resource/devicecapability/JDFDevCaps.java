@@ -89,13 +89,11 @@ import org.cip4.jdflib.auto.JDFAutoDevCaps;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
@@ -109,10 +107,10 @@ import org.cip4.jdflib.resource.JDFResource;
 public class JDFDevCaps extends JDFAutoDevCaps
 {
     private static final long serialVersionUID = 1L;
-    
+
     /**
      * Constructor for JDFDevCaps
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFDevCaps(
@@ -121,12 +119,11 @@ public class JDFDevCaps extends JDFAutoDevCaps
     {
         super(myOwnerDocument, qualifiedName);
     }
-    
-    
+
     /**
      * Constructor for JDFDevCaps
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFDevCaps(
@@ -136,13 +133,13 @@ public class JDFDevCaps extends JDFAutoDevCaps
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
-    
+
     /**
      * Constructor for JDFDevCaps
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFDevCaps(
             CoreDocumentImpl myOwnerDocument,
@@ -152,24 +149,25 @@ public class JDFDevCaps extends JDFAutoDevCaps
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
-    
+
     public String toString()
     {
         return "JDFDevCaps[  --> " + super.toString() + " ]";
     }
-    
-    
+
+
     /**
-     * set attribute DevCapRef
-     * @param String value: the value to set the attribute to
+     * set attribute <code>DevCapRef</code>
+     * @param value the value to set the attribute to
      */
     public void setDevCapRef(String value)
     {
         setAttribute(AttributeName.DEVCAPREF, value, null);
     }
+
     /**
      * set rRef to the value of devCap/@ID
-     * @param dc the devCap to set
+     * @param dc the DevCap to set
      */
     public void setDevCapRef(JDFDevCap dc)
     {
@@ -177,38 +175,39 @@ public class JDFDevCaps extends JDFAutoDevCaps
         final String id2 = dc.getID();
         setDevCapRef(id2);       
     }
-    
+
     /**
-     * get IDREF attribute DevCapRef
+     * get IDREF attribute <code>DevCapRef</code>
      * @return String the value of the attribute
      */
     public String getDevCapRef()
     {
         return getAttribute(AttributeName.DEVCAPREF, null, JDFConstants.EMPTYSTRING);
     }
-    
+
     /**
-     * set attribute ModuleRefs
-     * @param VString value: the value to set the attribute to
+     * set attribute <code>ModuleRefs</code>
+     * @param value the value to set the attribute to
      */
     public void setModuleRefs(VString value)
     {
         setAttribute(AttributeName.MODULEREFS, value, null);
     }
-    
+
     /**
-     * get IDREFS attribute ModuleRefs
-     * @return VString the value of the attribute
+     * get IDREFS attribute <code>ModuleRefs</code>
+     * @return VString - the value of the attribute
      */
     public VString getModuleRefs()
     {
         return new VString (getAttribute(AttributeName.MODULEREFS, null, JDFConstants.EMPTYSTRING), null);
     }
-    
+
     /**
-     * get the one and only devCap - note that the spec allows * but recommends only one + additional actions
-     * also search devCapPool for a matching element to DevCapRef
-     * @return the devCap
+     * get the one and only devCap - note that the spec allows <code>*</code>, 
+     * but recommends only one <code>+</code> additional actions.<br>
+     * Also search devCapPool for a matching element to DevCapRef.
+     * @return the DevCap
      */
     public JDFDevCap getDevCap()
     {
@@ -221,20 +220,21 @@ public class JDFDevCaps extends JDFAutoDevCaps
         }
         return getDevCap(0);
     }
-    
+
     /* ******************************************************
      // FitsValue Methods
-      **************************************************************** */
-    
-    
+     **************************************************************** */
+
+
     /**
      * getNamePath - gets the NamePath of this DevCaps in form 
      * "DevCapsName[Context=bbb, LinkUsage=ccc]/"
-     *
-     * @param boolean onlyNames - if true, returns only DevCapsName. Default=false
+     * <p>
+     * default: getNamePath(false)
+     * 
+     * @param onlyNames if true, returns only DevCapsName. Default=false
      * @return String - NamePath of this DevCaps
      * 
-     * default: getNamePath(false) 
      * @deprecated use getNamePathVector 
      */
     public final String getNamePath(boolean onlyNames)
@@ -247,18 +247,18 @@ public class JDFDevCaps extends JDFAutoDevCaps
         }
         return xPath.toString();
     }
-    
+
     /**
      * Gets the NamePath of this DevCap in form 
-     * "DevCapsName/SubelemName1/SubelemName2/..."
-     * If this DevCap is located in DevCapPool and not in a DevCaps - it describes the reusable resource 
-     * and DevCap root will have the attribute "Name" = value of DevCaps/@Name 
-     * but will have no info about DevCaps/@Context or DevCaps/@LinkUsage 
+     * "<code>DevCapsName/SubelemName1/SubelemName2/...</code>"<br>
+     * If this DevCap is located in DevCapPool and not in a DevCaps, it describes the reusable resource. 
+     * In this case DevCap root will have the attribute "Name" = value of DevCaps/@Name, 
+     * but will have no info about <code>DevCaps/@Context</code> or <code>DevCaps/@LinkUsage</code>.
+     * <p>
+     * default: getNamePath(false)
      *
-     * @param bRecurse - if true, returns "DevCapsName/SubelemName1/SubelemName2/..."
+     * @param bRecurse if true, returns "<code>DevCapsName/SubelemName1/SubelemName2/...</code>"
      * @return String - NamePath of this DevCap
-     * 
-     * default: getNamePath(false)  
      */
     public final VString getNamePathVector()
     {
@@ -286,7 +286,11 @@ public class JDFDevCaps extends JDFAutoDevCaps
         }
         return nam; // default is nam for resources
     }
-    
+
+    /**
+     * getDevCapVector()
+     * @return VElement
+     */
     public final VElement getDevCapVector()
     {
         VElement vDevCap = getChildElementVector(ElementName.DEVCAP, null, null, true, 0, false);
@@ -302,82 +306,65 @@ public class JDFDevCaps extends JDFAutoDevCaps
         }
         return vDevCap;
     }
-    
+
     /**
      * devCapReport - tests if the elements in vElem fit any (logical OR) DevCap element 
-     * that DevCaps consists of. Composes a detailed report in XML form of the found errors.
-     * If XMLDoc equals null - there are no errors.
+     * that DevCaps consists of. Composes a detailed report in XML form of the errors found.
+     * If XMLDoc is null there are no errors.<br>
      * 
-     * DevCap that will be checked are direct children of this and referenced DevCap in DevCapPool.
+     * DevCaps will be checked if they are direct children of <code>this</code> and 
+     * referenced in DevCapPool.
      * 
-     * @param VElement vElem - vector of the elements to test
-     * @param EnumFitsValue testlists - FitsValue_Allowed or FitsValue_Present testlists 
-     * that are specified for the State elements. (Will be used in fitsValue method of the State element)
-     * @param EnumValidationLevel level - validation level
-     * @return XMLDoc - XMLDoc output of the error messages.
-     * If XMLDoc equals null - there are no errors, every element of vElem fits any DevCap element of this DevCaps
+     * @param vElem     vector of the elements to test
+     * @param testlists testlists that are specified for the State elements 
+     *                  (FitsValue_Allowed or FitsValue_Present)<br> 
+     *                  Will be used in fitsValue method of the State element.
+     * @param level     validation level
+     * @return XMLDoc - XMLDoc output of the error messages.<br>
+     * If XMLDoc is null there are no errors, every element of vElem fits any DevCap element of <code>this</code>.
      * @throws JDFException if DevCaps/@DevCapRef refers to the DevCap elements in a non-existent DevCapPool
      * @throws JDFException if DevCaps/@DevCapRef refers to the non-existent DevCap 
      */
-    public final XMLDoc devCapReport(VElement vElem, EnumFitsValue testlists, EnumValidationLevel level)
+    public final KElement devCapReport(KElement elem, EnumFitsValue testlists, EnumValidationLevel level, boolean ignoreExtensions, KElement parentReport)
     {
-        if(vElem==null)
+        if(elem==null)
             return null;
-        
-        XMLDoc testResult = new XMLDoc("Temp", null); // temporary root for XML output
-        KElement tempRoot = testResult.getRoot();
-        
+
         final VElement dcV = getDevCapVector();
         if ( dcV== null || dcV.size()==0) 
         {
             throw new JDFException("JDFDevCaps.devCapReport: Invalid DeviceCap: DevCaps/@DevCapRef refers to the non-existent DevCap: "+getDevCapRef());
         }
-        
-        final int size = vElem.size();
-        
+
+        KElement r = parentReport.appendElement("InvalidResource");
         for (int i=0;i<dcV.size();i++)
         {
             final JDFDevCap dc=(JDFDevCap)dcV.elementAt(i);
-            for (int j = 0; j < size; j++)
-        {
-            KElement e = (JDFElement)vElem.elementAt(j);
-            XMLDoc stateTestResult = null;
-            
-                KElement r = tempRoot.appendElement("InvalidResource");
-                    stateTestResult = dc.stateReport(e,testlists,level);
-                    if (stateTestResult==null) 
-                    {
-                        tempRoot.removeChild(r);// first DevCap that fits found -> erase all error messages
-                    return null;
-                    }
-                    r.setAttribute("XPath", e.buildXPath());
-                    r.setAttribute("Name", getName());
-                    r.setAttribute("CapXPath", dc.getName());
-                    moveChildElementVector_Static(r,stateTestResult.getRoot());
-                }
+
+            KElement stateTestResult = dc.stateReport(elem,testlists,level, ignoreExtensions,true,r);
+            if (stateTestResult==null) 
+            {
+                r.deleteNode();
+                return null;// first DevCap that fits found -> erase all error messages
             }
-        
-        if (!tempRoot.hasChildElements()) 
-        {
-            testResult = null;
-        }
-        
-        if (testResult != null) 
-        {
-            correction_Static(testResult.getRoot());
-        }
-        
-        return testResult;
+            r.setAttribute("XPath", elem.buildXPath(null));
+            r.setAttribute("Name", getName());
+            r.setAttribute("CapXPath", dc.getName());
+         }
+
+        correction_Static(r);
+        return r;
     }
-    
+
     /**
-     * For every one InvalidResource element of the given XMLDoc checks CapXPath-s 
-     * of all chidren (of arbitrary depth) and if CapXPath is not complete appends the right ancestors.
-     * The point is that in original XMLDoc the CapXPaths are built using geNamePath() method,
-     * where the root element is DevCaps element. But from JDF1.3 DevCap can be located in DevCapPool and 
-     * can be called from any DevCaps. So to set the right source of calling we correct CapXPaths in XMLDoc doc. 
+     * Checks XPaths for every InvalidResource element of the given XMLDoc and 
+     * all chidren (of arbitrary depth). Appends right ancestors if CapXPath is not complete.<br>
+     * The point is that that the CapXPath's are created by using getNamePath() method,
+     * where the root element is a DevCaps element. But starting with JDF 1.3, DevCap can be located in DevCapPool and 
+     * can be called from any DevCaps. So the CapXPaths in XMLDoc doc are being fixed by setting 
+     * the right source of calling. 
      *  
-     * @param KElement root - root of the XMLDoc document where the CapXPath-s must be corrected
+     * @param root root of the XMLDoc document where the CapXPaths must be corrected
      */
     private final static void correction_Static(KElement root)
     {
@@ -394,7 +381,7 @@ public class JDFDevCaps extends JDFAutoDevCaps
         }
         return;
     }
-    
+
     private final static void removePoolElements_Static(KElement root)
     {
         Vector v = root.getChildElementVector(null, null, null, true, 0,false);
@@ -410,7 +397,7 @@ public class JDFDevCaps extends JDFAutoDevCaps
                 if (!el.hasChildElements()&&!el.hasAttributes())
                     root.removeChild(el);
             }
-            
+
         }
         Vector vv = root.getChildElementVector(null, null, null, true, 0,false);
         for (int i = vv.size()-1; i >= 0; i--) 
@@ -419,28 +406,28 @@ public class JDFDevCaps extends JDFAutoDevCaps
         }
         return;
     }
-    
+
     /**
      * For KElement 'elem' takes information from parent and children about original and corrected CapXPaths,
-     * compare them and sets CapXPath as a comlete path to this element.
-     * For every one InvalidResource element of the given XMLDoc checks CapXPath-s 
-     * of all children (of arbitrary depth) and if CapXPath is not complete appends the right ancestors.
+     * compare them and set CapXPath as a complete path to this element.<br>
+     * Checks CapXPath's for every InvalidResource element of the given XMLDoc and 
+     * all children (of arbitrary depth). Appends right ancestors if CapXPath is not complete.<br>
      *  
-     * @param KElement elem - "pool" element like "InvalidElements" or "InvalidAttributes".
-     * From this element we have access to its parent and children and can compare their CapXPath-s
-     * @param String originalPath - parent CapXPath before correction.
+     * @param elem "pool" element like "InvalidElements" or "InvalidAttributes".<br>
+     * From this element we have access to its parent and children and can compare their CapXPath's
+     * @param originalPath parent CapXPath before correction.
      */
     private final static void capXPathCorrection_Static(KElement elem, String originalPath)
     {
         String parentPath = elem.getParentNode_KElement().getAttribute("CapXPath");
-        
+
         Vector vEl = elem.getChildElementVector(null, null, null, true, 0,false);
-        
+
         for (int i = 0; i < vEl.size(); i++) 
         {
             KElement child = (KElement)vEl.elementAt(i);
             String childPath = child.getAttribute("CapXPath");
-            
+
             if (!parentPath.equals(JDFConstants.EMPTYSTRING) && !childPath.equals(JDFConstants.EMPTYSTRING))
             {
                 String childPathPart = childPath;
@@ -449,7 +436,7 @@ public class JDFDevCaps extends JDFAutoDevCaps
                     childPathPart = childPath.substring(originalPath.length()+1); // +1 removes "/"
                 }
                 child.setAttribute("CapXPath", parentPath + "/" + childPathPart);
-                
+
                 // recursion to set everywhere the right CapXPath
                 Vector vSubEl = child.getChildElementVector(null, null, null, true, 0,false);
                 for (int j = 0; j < vSubEl.size(); j++) 
@@ -460,13 +447,13 @@ public class JDFDevCaps extends JDFAutoDevCaps
         }
         return;
     }
-    
-    
+
+
     /**
-     * Moves ChildElementVector of the second element into the first
+     * Moves the ChildElementVector of the second element into the first
      * 
-     * @param moveToElement - the first element - new parent for the children of the second element
-     * @param moveFromElement -  the second element - element whose children will be removed
+     * @param moveToElement   the first element - new parent for the children of the second element
+     * @param moveFromElement the second element - element whose children will be removed
      */
     private final static void moveChildElementVector_Static(KElement moveToElement, KElement moveFromElement) 
     {
@@ -480,14 +467,14 @@ public class JDFDevCaps extends JDFAutoDevCaps
         }
         return;
     }
-    
-    
+
+
     /**
      * gets the matching elements in node that match this devcap
      * 
      * @param node the node to search in
-     * @return VElement the element vector of matching elements, 
-     * null if none were found
+     * @return VElement - the element vector of matching elements, 
+     *                    <code>null</code> if none were found
      */
     public VElement getMatchingElementsFromNode(JDFNode node)
     {
@@ -495,7 +482,7 @@ public class JDFDevCaps extends JDFAutoDevCaps
         final String nam = getName();
         final EnumContext context = getContext();
         JDFResourceLinkPool resLinkPool=node.getResourceLinkPool();
-        
+
         if (context.equals(EnumContext.Element)) 
         { // vElem - for a common return type in all cases
             if(nam.equals(ElementName.JDF))
@@ -511,13 +498,13 @@ public class JDFDevCaps extends JDFAutoDevCaps
         {
             if (resLinkPool != null)
             {
-                VElement vElemLinks;
                 final EnumUsage linkUsage = getLinkUsage();
                 final String procUsage=getProcessUsage();
                 boolean bLink=context.equals(EnumContext.Link);
-                vElemLinks = resLinkPool.getInOutLinks(linkUsage, true, nam,null); 
-                 
-                for(int j=vElemLinks.size()-1;j>=0;j--)
+                VElement vElemLinks = resLinkPool.getInOutLinks(linkUsage, true, nam,null); 
+
+                final int linkSize = vElemLinks==null ? -1 : vElemLinks.size()-1;
+                for(int j=linkSize;j>=0;j--)
                 {
                     JDFResourceLink rl=(JDFResourceLink) vElemLinks.elementAt(j);
                     final String rlProcessUsage = rl.getProcessUsage();
@@ -525,13 +512,17 @@ public class JDFDevCaps extends JDFAutoDevCaps
                         vElemLinks.remove(j);
                     }
                 }
-                
+
                 if (!bLink)
                 {
                     vElem = JDFResourceLinkPool.resourceVector(vElemLinks, null);
                 }
-            }
+                else
+                {
+                    vElem = vElemLinks;
                 }
+            }
+        }
         else if (context.equals(EnumContext.JMF)) 
         {
             // TODO __Lena__ ...
@@ -540,20 +531,20 @@ public class JDFDevCaps extends JDFAutoDevCaps
         {// Context_Unknown
             throw new JDFException("JDFDevCaps wrong attribute Context value");
         }
-        
+
         if(vElem!=null && vElem.size()==0)
             vElem=null;
-        
+
         return vElem;
     }
-    
-    
+
+
     /**
-     * append elements that match this devCap to node, if they do not yet exist
+     * append elements to the node that match this DevCap, if they do not exist yet
      * 
      * @param node the node to append the elements to
      * 
-     * @return KElement the last element that was appended
+     * @return KElement - the last element that was appended
      */
     public KElement appendMatchingElementsToNode(JDFNode node)
     {
@@ -563,7 +554,7 @@ public class JDFDevCaps extends JDFAutoDevCaps
         if(devCap==null)
             return null;
         final int minOcc=devCap.getMinOccurs();
-        
+
         KElement e=null;
         for(int i=0;i<minOcc;i++)
         {
@@ -584,7 +575,7 @@ public class JDFDevCaps extends JDFAutoDevCaps
                 final String procUsage=getProcessUsage();
                 JDFAttributeMap map=new JDFAttributeMap();
                 EnumProcessUsage pu=null;
-                
+
                 if(procUsage!=null&&procUsage.length()>0)
                 {
                     map.put(AttributeName.PROCESSUSAGE,procUsage);
@@ -594,7 +585,7 @@ public class JDFDevCaps extends JDFAutoDevCaps
                 {
                     map.put(AttributeName.USAGE,linkUsage.getName());
                 }
-                VElement links=node.getLinks(nam,map,null);
+                VElement links=node.getResourceLinks(nam, map, null);
                 if(links==null || links.size()<=i)
                 {
                     JDFResource r=node.addResource(nam, null, linkUsage, pu, null, getDevNS(), null);
@@ -608,10 +599,12 @@ public class JDFDevCaps extends JDFAutoDevCaps
         }
         return e;
     }
-    
+
 
     /**
-     * sets default elements and adds them if therw are less than minorrurs
+     * sets default elements and adds them, if there are less than minorrurs
+     * @param node
+     * @return boolean
      */
     public boolean setDefaultsFromCaps(JDFNode node)
     {
@@ -626,14 +619,14 @@ public class JDFDevCaps extends JDFAutoDevCaps
                 modified = dc.setDefaultsFromCaps((KElement) v.elementAt(i)) || modified;
             }
         }
-        
+
         return modified;    
     }
-        
+
 
     /**
      * return the highest maxOccurs of all devCap elements
-     * @return int the highest maxOccurs of all devCap elements
+     * @return int - the highest maxOccurs of all devCap elements
      */
     public int getMaxOccurs()
     {
@@ -647,14 +640,14 @@ public class JDFDevCaps extends JDFAutoDevCaps
                 m=dc.getMaxOccurs();
         }
         return m;
- 
+
     }
 
     /**
      * return the lowest minOccurs of all devCap elements
-     * @return int the lowest minOccurs of all devCap elements
+     * @return int - the lowest minOccurs of all devCap elements
      */
-   public int getMinOccurs()
+    public int getMinOccurs()
     {
         int m=Integer.MAX_VALUE;
         VElement vDC=getDevCapVector();
@@ -668,12 +661,12 @@ public class JDFDevCaps extends JDFAutoDevCaps
         if(m<=0&&getRequired())
             m=1;
         return m;
- 
+
     }
 
-//////////////////////////////////////////////
-//////////////////////////////////////////////
-    
+
+
+
 }
 
 

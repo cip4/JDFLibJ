@@ -28,21 +28,20 @@ import org.cip4.jdflib.auto.JDFAutoDeviceFilter;
 
     /**
      * Constructor for JDFDeviceFilter
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFDeviceFilter(
+    public JDFDeviceFilter(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFDeviceFilter
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFDeviceFilter(
@@ -55,10 +54,10 @@ import org.cip4.jdflib.auto.JDFAutoDeviceFilter;
 
     /**
      * Constructor for JDFDeviceFilter
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFDeviceFilter(
         CoreDocumentImpl myOwnerDocument,
@@ -69,6 +68,10 @@ import org.cip4.jdflib.auto.JDFAutoDeviceFilter;
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
 
+    /**
+     * toString()
+     * @see org.cip4.jdflib.auto.JDFAutoDeviceFilter#toString()
+     */
     public String toString()
     {
         return "JDFDeviceFilter[  --> " + super.toString() + " ]";

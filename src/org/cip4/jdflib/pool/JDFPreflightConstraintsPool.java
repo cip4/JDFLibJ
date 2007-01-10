@@ -95,9 +95,10 @@ import org.cip4.jdflib.resource.process.prepress.JDFPreflightConstraint;
 public class JDFPreflightConstraintsPool extends JDFPool
 {
     private static final long serialVersionUID = 1L;
+
     /**
      * Constructor for JDFPreflightConstraintsPool
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFPreflightConstraintsPool(
@@ -109,8 +110,8 @@ public class JDFPreflightConstraintsPool extends JDFPool
 
     /**
      * Constructor for JDFPreflightConstraintsPool
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFPreflightConstraintsPool(
@@ -123,10 +124,10 @@ public class JDFPreflightConstraintsPool extends JDFPool
 
     /**
      * Constructor for JDFPreflightConstraintsPool
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFPreflightConstraintsPool(
         CoreDocumentImpl myOwnerDocument,
@@ -148,12 +149,14 @@ public class JDFPreflightConstraintsPool extends JDFPool
     // Element Getter / Setter
     **************************************************************** */
 
-    /** Get Element PreflightConstraint
-    * @param int iSkip number of elements to skip
-    * @return JDFPreflightConstraint The element
-    * 
-    * default: GetCreatePreflightConstraint(0)
-    */
+    /**
+	 * Get Element PreflightConstraint
+	 * <p>
+	 * default: GetCreatePreflightConstraint(0)
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFPreflightConstraint: the element
+	 */
     public JDFPreflightConstraint getCreatePreflightConstraint(int iSkip)
     {
         return (JDFPreflightConstraint) 
@@ -162,8 +165,9 @@ public class JDFPreflightConstraintsPool extends JDFPool
 
  
     /**
-    * Append element PreflightConstraint
-    */
+	 * Append element PreflightConstraint
+	 * @return JDFPreflightConstraint: the element
+	 */
     public JDFPreflightConstraint appendPreflightConstraint()
     {
         return (JDFPreflightConstraint) 
@@ -173,7 +177,7 @@ public class JDFPreflightConstraintsPool extends JDFPool
     /**
     * const get  element PreflightConstraint
     * @param int iSkip number of elements to skip
-    *@return  JDFPreflightConstraint The element
+    * @return JDFPreflightConstraint: the element
     */
     public JDFPreflightConstraint getPreflightConstraint(int iSkip)
     {

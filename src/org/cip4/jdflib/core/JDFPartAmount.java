@@ -121,10 +121,10 @@ public class JDFPartAmount extends JDFResourceLink
     {
         return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
     }
-    
+
     /**
      * Constructor for JDFPartAmount
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFPartAmount(CoreDocumentImpl myOwnerDocument, String qualifiedName)
@@ -134,8 +134,8 @@ public class JDFPartAmount extends JDFResourceLink
 
     /**
      * Constructor for JDFPartAmount
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFPartAmount(
@@ -145,13 +145,13 @@ public class JDFPartAmount extends JDFResourceLink
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
-
+    
     /**
      * Constructor for JDFPartAmount
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFPartAmount(
         CoreDocumentImpl myOwnerDocument,
@@ -183,6 +183,7 @@ public class JDFPartAmount extends JDFResourceLink
      {
          return super.getPartMap();
      }
+     
      /**
       * gets part map vector
       *

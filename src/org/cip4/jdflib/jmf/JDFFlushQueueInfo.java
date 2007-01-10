@@ -24,10 +24,10 @@ import org.cip4.jdflib.auto.JDFAutoFlushQueueInfo;
 public class JDFFlushQueueInfo extends JDFAutoFlushQueueInfo
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Constructor for JDFFlushQueueInfo
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
 	public JDFFlushQueueInfo(
@@ -36,12 +36,11 @@ public class JDFFlushQueueInfo extends JDFAutoFlushQueueInfo
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
-	
-	
+
 	/**
 	 * Constructor for JDFFlushQueueInfo
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
 	public JDFFlushQueueInfo(
@@ -51,13 +50,13 @@ public class JDFFlushQueueInfo extends JDFAutoFlushQueueInfo
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
-	
+
 	/**
 	 * Constructor for JDFFlushQueueInfo
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @param localName
+	 * @param myLocalName
 	 */
 	public JDFFlushQueueInfo(
 			CoreDocumentImpl myOwnerDocument,
@@ -68,6 +67,11 @@ public class JDFFlushQueueInfo extends JDFAutoFlushQueueInfo
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 	
+	/**
+	 * toString
+	 * @see org.cip4.jdflib.auto.JDFAutoFlushQueueInfo#toString()
+	 * @return String
+	 */
 	public String toString()
 	{
 		return "JDFFlushQueueInfo[  --> " + super.toString() + " ]";

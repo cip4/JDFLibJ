@@ -89,10 +89,10 @@ import org.w3c.dom.DOMException;
 public class JDFAction extends JDFAutoAction
 {
     private static final long serialVersionUID = 1L;
-    
+
     /**
      * Constructor for JDFAction
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      * @throws DOMException
      */
@@ -103,12 +103,11 @@ public class JDFAction extends JDFAutoAction
     {
         super(myOwnerDocument, qualifiedName);
     }
-    
-    
+
     /**
      * Constructor for JDFAction
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      * @throws DOMException
      */
@@ -120,13 +119,13 @@ public class JDFAction extends JDFAutoAction
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
-    
+
     /**
      * Constructor for JDFAction
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      * @throws DOMException
      */
     public JDFAction(
@@ -151,7 +150,7 @@ public class JDFAction extends JDFAutoAction
     
     /**
      * get the Test element in the TestPool that is referenced by this action
-     * @return JDFTest the referenced test, null if none exists
+     * @return JDFTest: the referenced test, null if none exists
      */
     public JDFTest getTest()
     {
@@ -162,8 +161,8 @@ public class JDFAction extends JDFAutoAction
     }
     
     /**
-     * get the testPool that all IDRefs in this action  refer to
-     * @return JDFTestPool the neighboring TestPool
+     * get the testPool that all IDRefs in this action refer to
+     * @return JDFTestPool: the neighboring TestPool
      */
     public JDFTestPool getTestPool()
     {
@@ -175,10 +174,9 @@ public class JDFAction extends JDFAutoAction
         return testPool;
     }
 
-
     /**
      * get the root Term of the Test element in the TestPool that is referenced by this action
-     * @return JDFTerm the referenced term, null if none exists
+     * @return JDFTerm: the referenced term, null if none exists
      */
     public JDFTerm getTestTerm()
     {
@@ -189,8 +187,8 @@ public class JDFAction extends JDFAutoAction
     }
     
     /**
-     * 
-     * @return the actionpool that this resides in
+     * get the action pool <code>this</code> resides in
+     * @return JDFActionPool - the actionpool
      */
     public JDFActionPool getActionPool()
     {        
@@ -198,6 +196,10 @@ public class JDFAction extends JDFAutoAction
     }
     
     
+    /**
+     * init()
+     * @see org.cip4.jdflib.core.KElement#init()
+     */
     public boolean init()
     {
         appendAnchor(null);
@@ -207,7 +209,7 @@ public class JDFAction extends JDFAutoAction
     /**
      * getIDPrefix
      *
-     * @return the default ID prefix of non-overwritten JDF elements
+     * @return String: the default ID prefix of non-overwritten JDF elements
      */
     protected String getIDPrefix()
     {
@@ -216,7 +218,7 @@ public class JDFAction extends JDFAutoAction
     
     /**
      * set testRef to the value of test/@ID
-     * @param test
+     * @param test the value to set testRef to
      */
     public void setTest(JDFTest test)
     {
@@ -238,7 +240,7 @@ public class JDFAction extends JDFAutoAction
     
     /**
      * get the test defined by PreflightAction/@SetRef 
-     * @return JDFTest the test to use
+     * @return JDFTest: the test to use
      */
     public JDFTest getPreflightActionSetRef()
     {
@@ -254,7 +256,7 @@ public class JDFAction extends JDFAutoAction
     
     /**
      * get the term defined by PreflightAction/@SetRef 
-     * @return JDFTerm the term to use
+     * @return JDFTerm: the term to use
      */
     public JDFTerm getPreflightActionSetTerm()
     {

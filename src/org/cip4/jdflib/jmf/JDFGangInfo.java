@@ -21,13 +21,17 @@ import org.cip4.jdflib.auto.JDFAutoGangInfo;
 
 
 //----------------------------------
+/**
+ * GangInfo is a placeholder for future gang related information <br>
+ * that only returns the gang names in JDF 1.3
+ */
 public class JDFGangInfo extends JDFAutoGangInfo
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Constructor for JDFGangInfo
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
 	public JDFGangInfo(
@@ -36,12 +40,11 @@ public class JDFGangInfo extends JDFAutoGangInfo
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
-	
-	
+
 	/**
 	 * Constructor for JDFGangInfo
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
 	public JDFGangInfo(
@@ -51,13 +54,13 @@ public class JDFGangInfo extends JDFAutoGangInfo
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
-	
+
 	/**
 	 * Constructor for JDFGangInfo
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @param localName
+	 * @param myLocalName
 	 */
 	public JDFGangInfo(
 			CoreDocumentImpl myOwnerDocument,
@@ -68,6 +71,11 @@ public class JDFGangInfo extends JDFAutoGangInfo
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 	
+	/**
+	 * toString()
+	 * @see org.cip4.jdflib.auto.JDFAutoGangInfo#toString()
+	 * @return String
+	 */
 	public String toString()
 	{
 		return "JDFGangInfo[  --> " + super.toString() + " ]";

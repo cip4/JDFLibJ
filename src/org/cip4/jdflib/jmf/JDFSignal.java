@@ -93,10 +93,10 @@ import org.cip4.jdflib.core.VElement;
 public class JDFSignal extends JDFAutoSignal
 {
     private static final long serialVersionUID = 1L;
-    
+
     /**
      * Constructor for JDFSignal
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFSignal(
@@ -105,12 +105,11 @@ public class JDFSignal extends JDFAutoSignal
     {
         super(myOwnerDocument, qualifiedName);
     }
-    
-    
+
     /**
      * Constructor for JDFSignal
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFSignal(
@@ -120,13 +119,13 @@ public class JDFSignal extends JDFAutoSignal
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
-    
+
     /**
      * Constructor for JDFSignal
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFSignal(
             CoreDocumentImpl myOwnerDocument,
@@ -150,8 +149,9 @@ public class JDFSignal extends JDFAutoSignal
     
     /**
      * converts a response to a signal that can be sent individually
-     * @param response the response to convert
      * 
+     * @param response the response to convert
+     * @return true if successful
      */
     public boolean convertResponse(JDFResponse response){
         if(response==null) 

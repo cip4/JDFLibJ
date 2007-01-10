@@ -425,6 +425,6 @@ public class JDFSheet extends JDFSignature
             throw new JDFException("refSheet: attempting to reference a partition");
         refElement(refTarget);
     }
-    
+
 } 
 //==========================================================================

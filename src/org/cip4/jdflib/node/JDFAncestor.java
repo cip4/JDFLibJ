@@ -100,10 +100,9 @@ public class JDFAncestor extends JDFAutoAncestor
 {
     private static final long serialVersionUID = 1L;
     
-    
     /**
      * Constructor for JDFAncestor
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFAncestor(
@@ -116,8 +115,8 @@ public class JDFAncestor extends JDFAutoAncestor
     
     /**
      * Constructor for JDFAncestor
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFAncestor(
@@ -130,10 +129,10 @@ public class JDFAncestor extends JDFAutoAncestor
     
     /**
      * Constructor for JDFAncestor
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFAncestor(
             CoreDocumentImpl myOwnerDocument,
@@ -163,7 +162,7 @@ public class JDFAncestor extends JDFAutoAncestor
      * in general, it will be able to move from low to high versions but potentially fail 
      * when attempting to move from higher to lower versions
      *
-     * @param version: version that the resulting element should correspond to
+     * @param version version that the resulting element should correspond to
      * @return true if successful
      */
     public boolean fixVersion(EnumVersion version)
@@ -191,14 +190,12 @@ public class JDFAncestor extends JDFAutoAncestor
     {
         return getAttribute(AttributeName.CATEGORY);
     }
+    
     /**
      * Get the linked resources matching some conditions
-     *
-     * @param JDFAttributeMap mLinkAtt    map of Resource attributes to search for
-     * @param boolean         bFollowRefs true if internal references shall be followed
-     *
-     * @return vResource: vector with all elements matching the conditions
-     * 
+     * @param mResAtt     map of Resource attributes to search for
+     * @param bFollowRefs true if internal references shall be followed
+     * @return vector with all elements matching the conditions
      * default: GetLinkedResources(new JDFAttributeMap(), false)
      */
     public VElement getLinkedResources(JDFAttributeMap mResAtt, boolean bFollowRefs)

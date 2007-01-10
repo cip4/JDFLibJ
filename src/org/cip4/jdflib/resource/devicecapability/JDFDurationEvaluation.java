@@ -106,10 +106,9 @@ public class JDFDurationEvaluation extends JDFEvaluation
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
 
-
     /**
      * constructor for JDFDurationEvaluation
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFDurationEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
@@ -119,8 +118,8 @@ public class JDFDurationEvaluation extends JDFEvaluation
 
     /**
      * constructor for JDFDurationEvaluation
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFDurationEvaluation(
@@ -133,10 +132,10 @@ public class JDFDurationEvaluation extends JDFEvaluation
 
     /**
      * constructor for JDFDurationEvaluation
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFDurationEvaluation(
         CoreDocumentImpl myOwnerDocument,
@@ -162,12 +161,20 @@ public class JDFDurationEvaluation extends JDFEvaluation
 	// Attribute getter/ Setter
 	**************************************************************** */	
 
+    /**
+     * set attribute <code>ValueList</code>
+     * @param value the value to set
+     */
     public void setValueList( JDFDurationRangeList value)
     {
 		setAttribute(AttributeName.VALUELIST, value.toString());
 	}
     
  
+    /**
+     * get attribute <code>ValueList</code>
+     * @return JDFDurationRangeList - the value
+     */
     public JDFDurationRangeList getValueList()
     {
         try
@@ -189,7 +196,7 @@ public class JDFDurationEvaluation extends JDFEvaluation
      * fitsValue - tests, if the defined value matches ValueList,
      * specified for this Evaluation
      *
-     * @param String value - value to test
+     * @param value value to test
      * @return boolean - true, if the value matches ValueList or if ValueList is not specified
      */
     public final boolean fitsValue(String value)
@@ -213,7 +220,7 @@ public class JDFDurationEvaluation extends JDFEvaluation
      * fitsListType - tests, if the defined 'value' matches value of ListType attribute,
      * specified for this Evaluation
      *
-     * @param String value - value to test
+     * @param value value to test
      * @return boolean - true, if 'value' matches specified ListType
      */
     private final boolean fitsListType(String value)
@@ -298,7 +305,7 @@ public class JDFDurationEvaluation extends JDFEvaluation
      * fitsValueList - tests, if the defined 'rangelist' matches ValueList
      * specified for this Evaluation
      *
-     * @param JDFDurationRangeList rangelist - range list to test
+     * @param rangelist range list to test
      * 
      * @return boolean - true, if 'rangelist' matches the valuelist or 
      * if ValueList is not specified

@@ -80,7 +80,9 @@
  */
 package org.cip4.jdflib.resource.devicecapability;
 
-import java.util.Vector;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.HashSet;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDevCap;
@@ -93,16 +95,15 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.span.JDFSpanBase;
 import org.cip4.jdflib.util.StringUtil;
@@ -146,11 +147,10 @@ public class JDFDevCap extends JDFAutoDevCap
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
-   
-    
+
     /**
      * Constructor for JDFDevCap
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFDevCap(
@@ -159,12 +159,11 @@ public class JDFDevCap extends JDFAutoDevCap
     {
         super(myOwnerDocument, qualifiedName);
     }
-    
-    
+
     /**
      * Constructor for JDFDevCap
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFDevCap(
@@ -174,13 +173,13 @@ public class JDFDevCap extends JDFAutoDevCap
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
-    
+
     /**
      * Constructor for JDFDevCap
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFDevCap(
             CoreDocumentImpl myOwnerDocument,
@@ -191,17 +190,18 @@ public class JDFDevCap extends JDFAutoDevCap
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
     
+    /**
+     * toString()
+     * @return String
+     */
     public String toString()
     {
         return "JDFDevCap[  --> " + super.toString() + " ]";
     }
-    
-    
-    
-    
+
     /**
-     * set attribute DevCapRefs
-     * @param VString value: the value to set the attribute to
+     * set attribute <code>DevCapRefs</code>
+     * @param value the value to set the attribute to
      */
     public void setDevCapRefs(VString value)
     {
@@ -209,19 +209,17 @@ public class JDFDevCap extends JDFAutoDevCap
     }
     
     /**
-     * get IDREFS attribute DevCapRefs
-     * @return VString the value of the attribute
+     * get IDREFS attribute <code>DevCapRefs</code>
+     * @return VString: the value of the attribute
      */
     public VString getDevCapRefs()
     {
         return new VString (getAttribute(AttributeName.DEVCAPREFS, null, JDFConstants.EMPTYSTRING), null);
     }
-    
-    
-    
+
     /**
-     * set attribute ID
-     * @param String value: the value to set the attribute to
+     * set attribute <code>ID</code>
+     * @param value the value to set the attribute to
      */
     public void setID(String value)
     {
@@ -229,18 +227,16 @@ public class JDFDevCap extends JDFAutoDevCap
     }
     
     /**
-     * get String attribute ID
-     * @return String the value of the attribute
+     * get String attribute <code>ID</code>
+     * @return String: the value of the attribute
      */
     public String getID()
     {
         return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
     }
-    
-    
-    
+
     /**
-     * getAvailability - gets typesafe enumerated attribute Availability
+     * getAvailability - gets typesafe enumerated attribute <code>Availability</code>
      *
      * @return EnumAvailability: the enumeration value of the attribute
      */
@@ -269,6 +265,11 @@ public class JDFDevCap extends JDFAutoDevCap
     
     //  ///////////////////////////////////////////////////////////////////
     
+    /**
+     * get iSkip'th element <code>DevCap</code>
+     * @param iSkip number of elements to skip (0 -> get first element)
+     * @return the value of the attribute
+     */
     public JDFDevCap getDevCap(int iSkip) 
     {
         return (JDFDevCap)getElement(ElementName.DEVCAP, JDFConstants.EMPTYSTRING, iSkip);
@@ -276,6 +277,11 @@ public class JDFDevCap extends JDFAutoDevCap
     
     //  ///////////////////////////////////////////////////////////////////
     
+    /**
+     * get iSkip'th element <code>DevCap</code>, create if it doesn't exist 
+     * @param iSkip number of elements to skip
+     * @return the value of the attribute
+     */
     public JDFDevCap getCreateDevCap(int iSkip)
     {
         return (JDFDevCap)getCreateElement(ElementName.DEVCAP, JDFConstants.EMPTYSTRING , iSkip);
@@ -283,6 +289,10 @@ public class JDFDevCap extends JDFAutoDevCap
     
     //  ///////////////////////////////////////////////////////////////////
     
+    /**
+     * append element <code>DevCap</code>
+     * @return the appended element
+     */
     public JDFDevCap appendDevCap()
     {
         return (JDFDevCap)appendElement(ElementName.DEVCAP, null);
@@ -317,9 +327,9 @@ public class JDFDevCap extends JDFAutoDevCap
     //  ///////////////////////////////////////////////////////////////////
     
     /**
-     * gets the i'th existing BooleanState 
-     * @param iSkip 
-     * @return JDFBooleanState the existing BooleanState
+     * gets the iSkip'th existing BooleanState 
+     * @param iSkip number of elements to skip (0 -> get first element)
+     * @return JDFBooleanState: the existing BooleanState
      */
     public JDFBooleanState getBooleanState(int iSkip) 
     {
@@ -329,9 +339,9 @@ public class JDFDevCap extends JDFAutoDevCap
     //  ///////////////////////////////////////////////////////////////////
     
     /**
-     * gets an existing  BooleanState with @Name="name"
-     * @param name the Name attribute of the newly appended BooleanState
-     * @return JDFBooleanState the existing BooleanState
+     * gets an existing BooleanState with @Name="name"
+     * @param nam the Name attribute of the newly appended BooleanState
+     * @return JDFBooleanState: the existing BooleanState
      */
     public JDFBooleanState getBooleanState(String nam)
     {
@@ -352,9 +362,9 @@ public class JDFDevCap extends JDFAutoDevCap
     //  ///////////////////////////////////////////////////////////////////
     
     /**
-     * gets a NumberState with @Name="name", appends it if it does not yet exist
-     * @param name the Name attribute of the newly appended NumberState
-     * @return JDFNumberState the existing or newly appended NumberState
+     * gets a NumberState with @Name="name", appends it if it does not exist
+     * @param name the name attribute of the newly appended NumberState
+     * @return JDFNumberState: the existing or newly appended NumberState
      */
     public JDFBooleanState getCreateBooleanState(String nam)
     {
@@ -377,8 +387,8 @@ public class JDFDevCap extends JDFAutoDevCap
     
     /**
      * appends a BooleanState with @Name="name"
-     * @param name the Name attribute of the newly appended BooleanState
-     * @return JDFBooleanState the newly appended BooleanState
+     * @param nam the name attribute of the newly appended BooleanState
+     * @return JDFBooleanState: the newly appended BooleanState
      */
     public JDFBooleanState appendBooleanState(String nam)
     {
@@ -391,9 +401,9 @@ public class JDFDevCap extends JDFAutoDevCap
     //  ///////////////////////////////////////////////////////////////////
     
     /**
-     * gets the i'th existing IntegerState 
-     * @param iSkip 
-     * @return JDFIntegerState the existing IntegerState
+     * gets the iSkip'th existing IntegerState 
+     * @param iSkip number of elements to skip (0 -> get first element)
+     * @return JDFIntegerState: the existing IntegerState
      */
     public JDFIntegerState getIntegerState(int iSkip)
     {
@@ -405,8 +415,8 @@ public class JDFDevCap extends JDFAutoDevCap
     
     /**
      * gets an existing IntegerState with @Name="name"
-     * @param name the Name attribute of the newly appended IntegerState
-     * @return JDFIntegerState the existing IntegerState
+     * @param nam the name attribute of the newly appended IntegerState
+     * @return JDFIntegerState: the existing IntegerState
      */
     public JDFIntegerState getIntegerState(String nam)
     {
@@ -425,9 +435,9 @@ public class JDFDevCap extends JDFAutoDevCap
     }
     
     /**
-     * gets a IntegerState with @Name="name", appends it if it does not yet exist
-     * @param name the Name attribute of the newly appended IntegerState
-     * @return JDFIntegerState the existing or newly appended IntegerState
+     * gets an IntegerState with @Name="name", appends it if it does not yet exist
+     * @param nam the name attribute of the newly appended IntegerState
+     * @return JDFIntegerState: the existing or newly appended IntegerState
      */
     public JDFIntegerState getCreateIntegerState(String nam)
     {
@@ -439,6 +449,10 @@ public class JDFDevCap extends JDFAutoDevCap
     
     //  ///////////////////////////////////////////////////////////////////
     
+    /**
+     * append an IntegerState with no name set
+     * @return JDFIntegerState: the newly appended IntegerState
+     */
     public JDFIntegerState appendIntegerState()
     {
         return (JDFIntegerState)appendElement(ElementName.INTEGERSTATE, null);
@@ -447,9 +461,9 @@ public class JDFDevCap extends JDFAutoDevCap
     //  ///////////////////////////////////////////////////////////////////
     
     /**
-     * appends a IntegerState with @Name="name"
+     * appends an IntegerState with @Name="name"
      * @param name the Name attribute of the newly appended IntegerState
-     * @return JDFIntegerState the newly appended IntegerState
+     * @return JDFIntegerState: the newly appended IntegerState
      */
     public JDFIntegerState appendIntegerState(String nam)
     {
@@ -462,9 +476,9 @@ public class JDFDevCap extends JDFAutoDevCap
     //  ///////////////////////////////////////////////////////////////////
     
     /**
-     * gets the i'th existing  NumberState 
-     * @param iSkip 
-     * @return JDFNumberState the existing NumberState
+     * gets the iSkip'th existing NumberState 
+     * @param iSkip number of elements to skip
+     * @return JDFNumberState: the existing NumberState
      */
     public JDFNumberState getNumberState(int iSkip)
     {
@@ -474,8 +488,8 @@ public class JDFDevCap extends JDFAutoDevCap
     //  ///////////////////////////////////////////////////////////////////
     /**
      * gets an existing  NumberState with @Name="name"
-     * @param name the Name attribute of the newly appended NumberState
-     * @return JDFNumberState the existing NumberState
+     * @param nam the Name attribute of the newly appended NumberState
+     * @return JDFNumberState: the existing NumberState
      */
     public JDFNumberState getNumberState(String nam)
     {
@@ -493,10 +507,11 @@ public class JDFDevCap extends JDFAutoDevCap
         return (JDFNumberState)getCreateElement(ElementName.NUMBERSTATE, null, iSkip);       
     }
     //  ///////////////////////////////////////////////////////////////////
+    
     /**
      * gets a NumberState with @Name="name", appends it if it does not yet exist
-     * @param name the Name attribute of the newly appended NumberState
-     * @return JDFNumberState the existing or newly appended NumberState
+     * @param nam the Name attribute of the newly appended NumberState
+     * @return JDFNumberState: the existing or newly appended NumberState
      */
     public JDFNumberState getCreateNumberState(String nam)
     {
@@ -508,8 +523,8 @@ public class JDFDevCap extends JDFAutoDevCap
     //  ///////////////////////////////////////////////////////////////////
     /**
      * appends a NumberState with @Name="name"
-     * @param name the Name attribute of the newly appended NumberState
-     * @return JDFNumberState the newly appended NumberState
+     * @param nam the Name attribute of the newly appended NumberState
+     * @return JDFNumberState: the newly appended NumberState
      */
     public JDFNumberState appendNumberState(String nam)
     {
@@ -529,6 +544,11 @@ public class JDFDevCap extends JDFAutoDevCap
     //  ///////////////////////////////////////////////////////////////////
     //  ///////////////////////////////////////////////////////////////////
     
+    /**
+     * gets the iSkip'th existing EnumerationState
+     * @param iSkip number of elements to skip (0 -> get first element)
+     * @return JDFEnumerationState: the existing EnumerationState
+     */
     public JDFEnumerationState getEnumerationState(int iSkip)
     {
         return (JDFEnumerationState)getElement(ElementName.ENUMERATIONSTATE, null, iSkip);
@@ -539,7 +559,7 @@ public class JDFDevCap extends JDFAutoDevCap
     /**
      * gets an existing  EnumerationState with @Name="name"
      * @param name the Name attribute of the newly appended EnumerationState
-     * @return JDFEnumerationState the existing EnumerationState
+     * @return JDFEnumerationState: the existing EnumerationState
      */
     public JDFEnumerationState getEnumerationState(String nam)
     {
@@ -548,6 +568,11 @@ public class JDFDevCap extends JDFAutoDevCap
     
     //  ///////////////////////////////////////////////////////////////////
     
+    /**
+     * gets the iSkip'th existing EnumerationState, creates it if it doesn't exist
+     * @param iSkip number of elements to skip (0 -> get first element)
+     * @return JDFEnumerationState: the existing EnumerationState
+     */
     public JDFEnumerationState getCreateEnumerationState(int iSkip)
     {
         return (JDFEnumerationState)getCreateElement(ElementName.ENUMERATIONSTATE, null, iSkip);
@@ -556,8 +581,8 @@ public class JDFDevCap extends JDFAutoDevCap
     //  ///////////////////////////////////////////////////////////////////
     
     /**
-     * gets a EnumerationState with @Name="name", appends it if it does not yet exist
-     * @param name the Name attribute of the newly appended EnumerationState
+     * gets a EnumerationState with @Name="name", appends it if it does not exist
+     * @param nam the name attribute of the newly appended EnumerationState
      * @return JDFEnumerationState the existing or newly appended EnumerationState
      */
     public JDFEnumerationState getCreateEnumerationState(String nam)
@@ -583,8 +608,8 @@ public class JDFDevCap extends JDFAutoDevCap
     
     /**
      * appends a NumberState with @Name="name"
-     * @param name the Name attribute of the newly appended NumberState
-     * @return JDFNumberState the newly appended NumberState
+     * @param nam   the name attribute of the newly appended NumberState
+     * @return JDFNumberState: the newly appended NumberState
      */
     public JDFEnumerationState appendEnumerationState(String nam)
     {
@@ -597,9 +622,9 @@ public class JDFDevCap extends JDFAutoDevCap
     //  ///////////////////////////////////////////////////////////////////
     
     /**
-     * gets the i'th existing NameState 
-     * @param iSkip 
-     * @return JDFNameState the existing NameState
+     * gets the iSkip'th existing NameState 
+     * @param iSkip number of elements to skip
+     * @return JDFNameState: the existing NameState
      */
     public JDFNameState getNameState(int iSkip)
     {
@@ -609,9 +634,9 @@ public class JDFDevCap extends JDFAutoDevCap
     //  ///////////////////////////////////////////////////////////////////
     
     /**
-     * gets an existing  NameState with @Name="name"
-     * @param name the Name attribute of the newly appended NameState
-     * @return JDFNameState the existing NameState
+     * gets an existing NameState with @Name="name"
+     * @param nam the Name attribute of the newly appended NameState
+     * @return JDFNameState: the existing NameState
      */
     public JDFNameState getNameState(String nam)
     {
@@ -632,9 +657,9 @@ public class JDFDevCap extends JDFAutoDevCap
     //  ///////////////////////////////////////////////////////////////////
     
     /**
-     * gets a NameState with @Name="name", appends it if it does not yet exist
-     * @param name the Name attribute of the newly appended NameState
-     * @return JDFNameState the existing or newly appended NameState
+     * gets a NameState with @Name="name", appends it if it does not exist
+     * @param nam the name attribute of the newly appended NameState
+     * @return JDFNameState: the existing or newly appended NameState
      */
     public JDFNameState getCreateNameState(String nam)
     {
@@ -659,8 +684,8 @@ public class JDFDevCap extends JDFAutoDevCap
     
     /**
      * appends a NameState with @Name="name"
-     * @param name the Name attribute of the newly appended NameState
-     * @return JDFNameState the newly appended NameState
+     * @param nam the name attribute of the newly appended NameState
+     * @return JDFNameState: the newly appended NameState
      */
     public JDFNameState appendNameState(String nam)
     {
@@ -673,9 +698,9 @@ public class JDFDevCap extends JDFAutoDevCap
     //  ///////////////////////////////////////////////////////////////////
     
     /**
-     * gets the i'th existing StringState 
-     * @param iSkip 
-     * @return JDFStringState the existing StringState
+     * gets the iSkip'th existing StringState 
+     * @param iSkip number of elements to skip
+     * @return JDFStringState: the existing StringState
      */
     public JDFStringState getStringState(int iSkip)
     {
@@ -686,8 +711,8 @@ public class JDFDevCap extends JDFAutoDevCap
     
     /**
      * gets an existing  StringState with @Name="name"
-     * @param name the Name attribute of the newly appended StringState
-     * @return JDFStringState the existing StringState
+     * @param nam the Name attribute of the newly appended StringState
+     * @return JDFStringState: the existing StringState
      */
     public JDFStringState getStringState(String nam)
     {
@@ -709,8 +734,8 @@ public class JDFDevCap extends JDFAutoDevCap
 
     /**
      * gets a StringState with @Name="name", appends it if it does not yet exist
-     * @param name the Name attribute of the newly appended StringState
-     * @return JDFStringState the existing or newly appended StringState
+     * @param nam the Name attribute of the newly appended StringState
+     * @return JDFStringState: the existing or newly appended StringState
      */
     public JDFStringState getCreateStringState(String nam)
     {
@@ -735,8 +760,8 @@ public class JDFDevCap extends JDFAutoDevCap
 
     /**
      * appends a StringState with @Name="name"
-     * @param name the Name attribute of the newly appended StringState
-     * @return JDFStringState the newly appended StringState
+     * @param nam the Name attribute of the newly appended StringState
+     * @return JDFStringState: the newly appended StringState
      */
     public JDFStringState appendStringState(String nam)
     {
@@ -749,9 +774,9 @@ public class JDFDevCap extends JDFAutoDevCap
     //  ///////////////////////////////////////////////////////////////////
     
     /**
-     * gets the i'th existing XYPairState 
-     * @param iSkip 
-     * @return JDFXYPairState the existing XYPairState
+     * gets the iSkip'th existing XYPairState 
+     * @param iSkip number of elements to skip
+     * @return JDFXYPairState: the existing XYPairState
      */
     public JDFXYPairState getXYPairState(int iSkip)
     {
@@ -761,9 +786,9 @@ public class JDFDevCap extends JDFAutoDevCap
     //  ///////////////////////////////////////////////////////////////////
 
     /**
-     * gets an existing  XYPairState with @Name="name"
-     * @param name the Name attribute of the newly appended XYPairState
-     * @return JDFXYPairState the existing XYPairState
+     * gets an existing XYPairState with @Name="name"
+     * @param nam the Name attribute of the newly appended XYPairState
+     * @return JDFXYPairState: the existing XYPairState
      */
     public JDFXYPairState getXYPairState(String nam)
     {
@@ -785,8 +810,8 @@ public class JDFDevCap extends JDFAutoDevCap
 
     /**
      * gets a XYPairState with @Name="name", appends it if it does not yet exist
-     * @param name the Name attribute of the newly appended XYPairState
-     * @return JDFXYPairState the existing or newly appended XYPairState
+     * @param nam the Name attribute of the newly appended XYPairState
+     * @return JDFXYPairState: the existing or newly appended XYPairState
      */
     public JDFXYPairState getCreateXYPairState(String nam)
     {
@@ -811,8 +836,8 @@ public class JDFDevCap extends JDFAutoDevCap
 
     /**
      * appends a XYPairState with @Name="name"
-     * @param name the Name attribute of the newly appended XYPairState
-     * @return JDFXYPairState the newly appended XYPairState
+     * @param nam the Name attribute of the newly appended XYPairState
+     * @return JDFXYPairState: the newly appended XYPairState
      */
     public JDFXYPairState appendXYPairState(String nam)
     {
@@ -825,8 +850,8 @@ public class JDFDevCap extends JDFAutoDevCap
     //  ///////////////////////////////////////////////////////////////////
     
     /**
-     * gets the i'th existing ShapeState 
-     * @param iSkip 
+     * gets the iSkip'th existing ShapeState 
+     * @param iSkip number of elements to skip (0 -> get first element)
      * @return JDFShapeState the existing ShapeState
      */
     public JDFShapeState getShapeState(int iSkip)
@@ -837,9 +862,9 @@ public class JDFDevCap extends JDFAutoDevCap
     //  ///////////////////////////////////////////////////////////////////
 
     /**
-     * gets an existing  ShapeState with @Name="name"
-     * @param name the Name attribute of the newly appended ShapeState
-     * @return JDFShapeState the existing ShapeState
+     * gets an existing ShapeState with @Name="name"
+     * @param nam the Name attribute of the newly appended ShapeState
+     * @return JDFShapeState: the existing ShapeState
      */
     public JDFShapeState getShapeState(String nam)
     {
@@ -861,8 +886,8 @@ public class JDFDevCap extends JDFAutoDevCap
 
     /**
      * gets a ShapeState with @Name="name", appends it if it does not yet exist
-     * @param name the Name attribute of the newly appended ShapeState
-     * @return JDFShapeState the existing or newly appended ShapeState
+     * @param nam the Name attribute of the newly appended ShapeState
+     * @return JDFShapeState: the existing or newly appended ShapeState
      */
     public JDFShapeState getCreateShapeState(String nam)
     {
@@ -887,8 +912,8 @@ public class JDFDevCap extends JDFAutoDevCap
 
     /**
      * appends a ShapeState with @Name="name"
-     * @param name the Name attribute of the newly appended ShapeState
-     * @return JDFShapeState the newly appended ShapeState
+     * @param nam the Name attribute of the newly appended ShapeState
+     * @return JDFShapeState: the newly appended ShapeState
      */
     public JDFShapeState appendShapeState(String nam)
     {
@@ -901,8 +926,8 @@ public class JDFDevCap extends JDFAutoDevCap
     //  ///////////////////////////////////////////////////////////////////
     
     /**
-     * gets the i'th existing MatrixState 
-     * @param iSkip 
+     * gets the iSkip'th existing MatrixState 
+     * @param iSkip number of elements to skip (0 -> get first element)
      * @return JDFMatrixState the existing MatrixState
      */
     public JDFMatrixState getMatrixState(int iSkip)
@@ -913,9 +938,9 @@ public class JDFDevCap extends JDFAutoDevCap
     //  ///////////////////////////////////////////////////////////////////
 
     /**
-     * gets an existing  MatrixState with @Name="name"
-     * @param name the Name attribute of the newly appended MatrixState
-     * @return JDFMatrixState the existing MatrixState
+     * gets an existing MatrixState with @Name="name"
+     * @param nam the Name attribute of the newly appended MatrixState
+     * @return JDFMatrixState: the existing MatrixState
      */
     public JDFMatrixState getMatrixState(String nam)
     {
@@ -935,8 +960,8 @@ public class JDFDevCap extends JDFAutoDevCap
     
     /**
      * gets a MatrixState with @Name="name", appends it if it does not yet exist
-     * @param name the Name attribute of the newly appended MatrixState
-     * @return JDFMatrixState the existing or newly appended MatrixState
+     * @param nam the Name attribute of the newly appended MatrixState
+     * @return JDFMatrixState: the existing or newly appended MatrixState
      */
     public JDFMatrixState getCreateMatrixState(String nam)
     {
@@ -961,8 +986,8 @@ public class JDFDevCap extends JDFAutoDevCap
 
     /**
      * appends a MatrixState with @Name="name"
-     * @param name the Name attribute of the newly appended MatrixState
-     * @return JDFMatrixState the newly appended MatrixState
+     * @param nam the Name attribute of the newly appended MatrixState
+     * @return JDFMatrixState: the newly appended MatrixState
      */
     public JDFMatrixState appendMatrixState(String nam)
     {
@@ -975,8 +1000,8 @@ public class JDFDevCap extends JDFAutoDevCap
     //  ///////////////////////////////////////////////////////////////////
     
     /**
-     * gets the i'th existing DateTimeState 
-     * @param iSkip 
+     * gets the iSkip'th existing DateTimeState 
+     * @param iSkip number of elements to skip (0 -> get first element)
      * @return JDFDateTimeState the existing DateTimeState
      */    
     public JDFDateTimeState getDateTimeState(int iSkip)
@@ -987,9 +1012,9 @@ public class JDFDevCap extends JDFAutoDevCap
     //  ///////////////////////////////////////////////////////////////////
 
     /**
-     * gets an existing  DateTimeState with @Name="name"
-     * @param name the Name attribute of the newly appended DateTimeState
-     * @return JDFDateTimeState the existing DateTimeState
+     * gets an existing DateTimeState with @Name="name"
+     * @param nam the Name attribute of the newly appended DateTimeState
+     * @return JDFDateTimeState: the existing DateTimeState
      */
     public JDFDateTimeState getDateTimeState(String nam)
     {
@@ -1011,8 +1036,8 @@ public class JDFDevCap extends JDFAutoDevCap
 
     /**
      * gets a DateTimeState with @Name="name", appends it if it does not yet exist
-     * @param name the Name attribute of the newly appended DateTimeState
-     * @return JDFDateTimeState the existing or newly appended DateTimeState
+     * @param nam the Name attribute of the newly appended DateTimeState
+     * @return JDFDateTimeState: the existing or newly appended DateTimeState
      */
     public JDFDateTimeState getCreateDateTimeState(String nam)
     {
@@ -1037,8 +1062,8 @@ public class JDFDevCap extends JDFAutoDevCap
 
     /**
      * appends a DateTimeState with @Name="name"
-     * @param name the Name attribute of the newly appended DateTimeState
-     * @return JDFDateTimeState the newly appended DateTimeState
+     * @param nam the Name attribute of the newly appended DateTimeState
+     * @return JDFDateTimeState: the newly appended DateTimeState
      */
     public JDFDateTimeState appendDateTimeState(String nam)
     {
@@ -1051,8 +1076,8 @@ public class JDFDevCap extends JDFAutoDevCap
     //  ///////////////////////////////////////////////////////////////////
     
     /**
-     * gets the i'th existing DurationState 
-     * @param iSkip 
+     * gets the iSkip'th existing DurationState 
+     * @param iSkip number of elements to skip (0 -> get first element)
      * @return JDFDurationState the existing DurationState
      */
     public JDFDurationState getDurationState(int iSkip)
@@ -1063,9 +1088,9 @@ public class JDFDevCap extends JDFAutoDevCap
     //  ///////////////////////////////////////////////////////////////////
 
     /**
-     * gets an existing  DurationState with @Name="name"
-     * @param name the Name attribute of the newly appended DurationState
-     * @return JDFDurationState the existing DurationState
+     * gets an existing DurationState with @Name="name"
+     * @param nam the Name attribute of the newly appended DurationState
+     * @return JDFDurationState: the existing DurationState
      */
     public JDFDurationState getDurationState(String nam)
     {
@@ -1087,8 +1112,8 @@ public class JDFDevCap extends JDFAutoDevCap
 
     /**
      * gets a DurationState with @Name="name", appends it if it does not yet exist
-     * @param name the Name attribute of the newly appended DurationState
-     * @return JDFDurationState the existing or newly appended DurationState
+     * @param nam the Name attribute of the newly appended DurationState
+     * @return JDFDurationState: the existing or newly appended DurationState
      */
     public JDFDurationState getCreateDurationState(String nam)
     {
@@ -1113,8 +1138,8 @@ public class JDFDevCap extends JDFAutoDevCap
 
     /**
      * appends a DurationState with @Name="name"
-     * @param name the Name attribute of the newly appended DurationState
-     * @return JDFDurationState the newly appended DurationState
+     * @param nam the Name attribute of the newly appended DurationState
+     * @return JDFDurationState: the newly appended DurationState
      */
     public JDFDurationState appendDurationState(String nam)
     {
@@ -1126,9 +1151,9 @@ public class JDFDevCap extends JDFAutoDevCap
     //  ///////////////////////////////////////////////////////////////////
     
     /**
-     * gets the i'th existing PDFPathState 
-     * @param iSkip 
-     * @return JDFPDFPathState the existing PDFPathState
+     * gets the iSkip'th existing PDFPathState 
+     * @param iSkip number of elements to skip (0 -> get first element)
+     * @return JDFPDFPathState: the existing PDFPathState
      */
     public JDFPDFPathState getPDFPathState(int iSkip)
     {
@@ -1138,9 +1163,9 @@ public class JDFDevCap extends JDFAutoDevCap
     //  ///////////////////////////////////////////////////////////////////
 
     /**
-     * gets an existing  PDFPathState with @Name="name"
-     * @param name the Name attribute of the newly appended PDFPathState
-     * @return JDFPDFPathState the existing PDFPathState
+     * gets an existing PDFPathState with @Name="name"
+     * @param nam the Name attribute of the newly appended PDFPathState
+     * @return JDFPDFPathState: the existing PDFPathState
      */
     public JDFPDFPathState getPDFPathState(String nam)
     {
@@ -1162,8 +1187,8 @@ public class JDFDevCap extends JDFAutoDevCap
 
     /**
      * gets a PDFPathState with @Name="name", appends it if it does not yet exist
-     * @param name the Name attribute of the newly appended PDFPathState
-     * @return JDFPDFPathState the existing or newly appended PDFPathState
+     * @param nam the Name attribute of the newly appended PDFPathState
+     * @return JDFPDFPathState: the existing or newly appended PDFPathState
      */
     public JDFPDFPathState getCreatePDFPathState(String nam)
     {
@@ -1188,8 +1213,8 @@ public class JDFDevCap extends JDFAutoDevCap
 
     /**
      * appends a PDFPathState with @Name="name"
-     * @param name the Name attribute of the newly appended PDFPathState
-     * @return JDFPDFPathState the newly appended PDFPathState
+     * @param nam the Name attribute of the newly appended PDFPathState
+     * @return JDFPDFPathState: the newly appended PDFPathState
      */
     public JDFPDFPathState appendPDFPathState(String nam)
     {
@@ -1202,9 +1227,9 @@ public class JDFDevCap extends JDFAutoDevCap
     //  ///////////////////////////////////////////////////////////////////
     
     /**
-     * gets the i'th existing RectangleState 
-     * @param iSkip 
-     * @return JDFRectangleState the existing RectangleState
+     * gets the iSkip'th existing RectangleState 
+     * @param iSkip number of elements to skip (0 -> get first element)
+     * @return JDFRectangleState: the existing RectangleState
      */
     public JDFRectangleState getRectangleState(int iSkip)
     {
@@ -1214,9 +1239,9 @@ public class JDFDevCap extends JDFAutoDevCap
     //  ///////////////////////////////////////////////////////////////////
 
     /**
-     * gets an existing  RectangleState with @Name="name"
-     * @param name the Name attribute of the newly appended RectangleState
-     * @return JDFRectangleState the existing RectangleState
+     * gets an existing RectangleState with @Name="name"
+     * @param nam the Name attribute of the newly appended RectangleState
+     * @return JDFRectangleState: the existing RectangleState
      */
     public JDFRectangleState getRectangleState(String nam)
     {
@@ -1238,8 +1263,8 @@ public class JDFDevCap extends JDFAutoDevCap
 
     /**
      * gets a RectangleState with @Name="name", appends it if it does not yet exist
-     * @param name the Name attribute of the newly appended RectangleState
-     * @return JDFRectangleState the existing or newly appended RectangleState
+     * @param nam the Name attribute of the newly appended RectangleState
+     * @return JDFRectangleState: the existing or newly appended RectangleState
      */
     public JDFRectangleState getCreateRectangleState(String nam)
     {
@@ -1264,8 +1289,8 @@ public class JDFDevCap extends JDFAutoDevCap
 
     /**
      * appends a RectangleState with @Name="name"
-     * @param name the Name attribute of the newly appended RectangleState
-     * @return JDFRectangleState the newly appended RectangleState
+     * @param nam the Name attribute of the newly appended RectangleState
+     * @return JDFRectangleState: the newly appended RectangleState
      */
     public JDFRectangleState appendRectangleState(String nam)
     {
@@ -1283,6 +1308,9 @@ public class JDFDevCap extends JDFAutoDevCap
      * Gets of this the Vector of all direct child DevCap elements plus 
      * the referenced (by attribute DevCapRefs) reusable DevCap elements, 
      * that are located in DevCapPool
+     * 
+     * @param devCaps
+     * @param bDirect
      * 
      * @return VElement - vector of all direct child DevCap elements plus 
      * the referenced reusable DevCap elements, that are located in DevCapPool. 
@@ -1340,106 +1368,108 @@ public class JDFDevCap extends JDFAutoDevCap
     
     /**
      * Tests if the attributes and subelements of the given element
-     * match the corresponding States and DevCap subelements of this DevCap
+     * match the corresponding States and DevCap subelements of this DevCap.<br>
      * Composes a detailed report of the found errors in XML form. 
      * If XMLDoc equals null - there are no errors
      * 
-     * @param KElement e - element to test
-     * @param EnumFitsValue testlists - FitsValue_Allowed or FitsValue_Present testlists
+     * @param e         element to test
+     * @param testlists FitsValue_Allowed or FitsValue_Present testlists
      * that are specified for the State elements. (Will be used in fitsValue method of the State element)
-     * @param EnumValidationLevel level - validation level
-     * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc equals null - there are no errors,
-     * element 'e' fits the corresponding States and DevCap subelements of this DevCap
+     * @param level     validation level
+     * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc is <code>null</code> 
+     * there are no errors.<br>
+     * Element <code>e</code> fits the corresponding States and DevCap subelements of this DevCap.
      */
-    public final XMLDoc stateReport(KElement e, EnumFitsValue testlists, EnumValidationLevel level)
-    {
-        XMLDoc testResult = new XMLDoc("Temp", null);
-        KElement root = testResult.getRoot();
-        
+    public final KElement stateReport(KElement e, EnumFitsValue testlists, EnumValidationLevel level, boolean ignoreExtensions, boolean bRecurse, KElement parentReport)
+    {        
         // 'e' in DeviceCapabilities is described by this DevCap
         
         // first test if there are any subelements of 'e' that are not described by DevCap
-        XMLDoc temp=null;
-        if(!(e instanceof JDFNode))
+        if(!(e instanceof JDFNode) && !ignoreExtensions)
         {
-            temp = missingDevCap(e);
-        }
-        if (temp != null) 
-        {
-            root.copyElement(temp.getRoot(), null);
+            missingDevCap(e,parentReport);
         }
         
         // DevCap contains: (1) description of parts; 
         // (2) description of subelements; 
         // (3) description of attributes
         
-        // (1) Test Partition Leaves: 'e' - is a root of partition, its leaves must be described by 'this' DevCap
-        if ((e instanceof JDFResource) && 
-                e.hasAttribute_KElement(AttributeName.PARTIDKEYS, null, false)) 
+        // (1) Test Partition Leaves: 'e' - is partitioned, its leaves must be described by 'this' DevCap
+        if (e instanceof JDFResource && bRecurse) 
         {
             JDFResource res = (JDFResource) e;
-            final VElement vLeaves = res.getLeaves(false);
-            
-            final int size = vLeaves.size();
-            for (int i=0; i < size; i++)
+            final JDFResource resourceRoot = res.getResourceRoot();
+            if(resourceRoot.hasAttribute_KElement(AttributeName.PARTIDKEYS, null, false)) 
             {
-                JDFResource leaf = (JDFResource) vLeaves.elementAt(i);
-                XMLDoc partTestResult = stateReport(leaf,testlists,level);
-                if(partTestResult != null) 
+                final VElement vLeaves = res.getLeaves(!EnumPartUsage.Explicit.equals(resourceRoot.getPartUsage()));
+
+                final int size = vLeaves.size();
+                for (int i=0; i < size; i++)
                 {
-                    KElement p = root.appendElement("InvalidPartitionLeaf");
-                    String path = leaf.buildXPath();
-                    p.setAttribute("XPath",path);
-                    String leafPath = path.substring(res.buildXPath().length());
-                    p.setAttribute("LeafXPath",res.getNodeName()+leafPath);
-                    moveChildElementVector_Static(p,partTestResult.getRoot());
+                    JDFResource leaf = (JDFResource) vLeaves.elementAt(i);
+                    KElement p = parentReport.appendElement("InvalidPartitionLeaf");
+                    KElement partTestResult = stateReport(leaf,testlists,level,ignoreExtensions,false,p);
+                    if(partTestResult != null) 
+                    {
+                        String path = leaf.buildXPath(null);
+                        p.setAttribute("XPath",path);
+                        String leafPath = path.substring(res.buildXPath(null).length());
+                        p.setAttribute("LeafXPath",res.getNodeName()+leafPath);
+                    }
+                    else
+                    {
+                        p.deleteNode();
+                    }
                 }
             }
+            else
+            {
+                bRecurse=false; // not partitioned - just pass through e
+            }
         }
-        
-        // (2) Test Subelements - described by DevCap that 'this' DevCap consists of
-        XMLDoc subelemTestResult = subelementsTest(e,testlists,level);
-        if(subelemTestResult!=null) 
+        else
         {
-            root.copyElement(subelemTestResult.getRoot(),null);
-        }   
-        
-        // (3) Test Attributes, Spans and Comments - described by States
-        XMLDoc attrTestResult = spanAndAttributesTest(e,testlists,level);
-        if(attrTestResult!=null) 
-        {
-            moveChildElementVector_Static(root,attrTestResult.getRoot());
+            bRecurse=false;
         }
+
+        if(!bRecurse)            
+        {
+            subelementsTest(e,testlists,level,ignoreExtensions,parentReport);
  
-        if (!root.hasChildElements())
-            testResult = null;
-        
-        return testResult;
+            // (3) Test Attributes, Spans and Comments - described by States
+            spanAndAttributesTest(e,testlists,level, ignoreExtensions,parentReport);
+        }
+        if (!parentReport.hasChildElements())
+        {
+            parentReport = null;
+        }
+         return parentReport;
     }
     
     
     
     /**
-     * Tests subelements of the element 'e'
-     * whether they fit the corresponding DevCap elements of 'this' DevCap.
-     * ! Recursive returns to stateReport to test the attributes of the subelements.
-     * Composes a detailed report of the found errors in XML form. 
-     * If XMLDoc equals null - there are no errors
+     * Tests subelements of the element <code>e</code>
+     * whether they fit the corresponding DevCap elements of <code>this</code>.<br>
+     * ! Recursively returns to stateReport to test the attributes of the subelements.<br>
+     * Composes a detailed report of the found errors in XML form. <br>
+     * If XMLDoc is <code>null</code> there are no errors.
      * 
-     * @param e - element to test
-     * @param EnumFitsValue testlists - FitsValue_Allowed or FitsValue_Present testlists
-     * that are specified for the State elements. (Will be used in fitsValue method of the State element)
-     * @param EnumValidationLevel level - validation level
+     * @param e         element to test
+     * @param testlists FitsValue_Allowed or FitsValue_Present testlists
+     *                  that are specified for the State elements. 
+     *                  (Will be used in fitsValue method of the State element.)
+     * @param level     validation level
      * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc equals null - there are no errors,
      * 'e' fits the corresponding DevCap elements of 'this' DevCap
      */
-    private final XMLDoc subelementsTest(KElement e, EnumFitsValue testlists, EnumValidationLevel level)
-    {
-        XMLDoc testResult = new XMLDoc("InvalidSubelements", null);
-        KElement root = testResult.getRoot();
-        
+    private final KElement subelementsTest(KElement e, EnumFitsValue testlists, EnumValidationLevel level, boolean ignoreExtensions, KElement parentReport)
+    {        
         VElement vDevCap = getDevCapVector(null,true); // vDevCap - contains DevCap elements of this DevCap
         
+        HashSet goodElems=new HashSet();
+        HashMap badElems=new HashMap();
+
         for (int k=0; k < vDevCap.size(); k++) 
         { // if there are any DevCap subelements in this DavCap
             // then element e must have subelements, and we are going to check them first
@@ -1458,97 +1488,96 @@ public class JDFDevCap extends JDFAutoDevCap
                 for (int j = 0; j < occurs; j++)
                 {
                     KElement subEl = vElem.item(j);
-                    r = root.appendElement("InvalidSubelement");
+                    r = parentReport.appendElement("InvalidSubelement");
                     r.setAttribute("CapXPath", dc.getNamePath(true));
-                    r.setAttribute("XPath", subEl.buildXPath());
+                    r.setAttribute("XPath", subEl.buildXPath(null));
                     r.setAttribute("Name", dcName);
                     r.setAttribute("Message", "Element occurrence exceeds value of MaxOccurs");
                     r.setAttribute("MaxOccurs", maxOccurs, null); // MaxOccurs
                     r.setAttribute("FoundElements", occurs, null);
-                    XMLDoc recursionResult = dc.stateReport(subEl,testlists,level); 
-                    if(recursionResult != null) 
-                    {
-                        moveChildElementVector_Static(r,recursionResult.getRoot());
-                    }
                 }
             }
             else if(occurs < minOccurs && requiredLevel(level)) 
             {
-                for (int j = 0; j < occurs; j++)
-                {
-                    KElement subEl = vElem.item(j);
-                    r = root.appendElement("InvalidSubelement");
-                    r.setAttribute("CapXPath", dc.getNamePath(true));
-                    r.setAttribute("XPath", subEl.buildXPath());
-                    r.setAttribute("Name", dcName);
-                    r.setAttribute("Message", "Element occurrence is less than value of MinOccurs");
-                    r.setAttribute("MinOccurs", minOccurs, null); // MinOccurs
-                    r.setAttribute("FoundElements", occurs, null);
-                    XMLDoc recursionResult = dc.stateReport(subEl,testlists,level); 
-                    if(recursionResult != null) 
-                    {
-                        moveChildElementVector_Static(r,recursionResult.getRoot());
-                    }
-                }
-                for (int m = occurs; m < minOccurs; m++) // the rest are missing elements
-                {
-                    r = root.appendElement("MissingSubelement");
-                    r.setAttribute("CapXPath", dc.getNamePath(true));
-                    r.setAttribute("XPath", e.buildXPath() + "/" + dcName);
-                    r.setAttribute("Name", dcName);
-                    r.setAttribute("Message", "Element occurrence is less than value of MinOccurs");
-                    r.setAttribute("MinOccurs", minOccurs, null);
-                    r.setAttribute("FoundElements", occurs, null);
-                }
+                r = parentReport.appendElement("MissingSubelement");
+                r.setAttribute("CapXPath", dc.getNamePath(true));
+                r.setAttribute("XPath", e.buildXPath(null) + "/" + dcName);
+                r.setAttribute("Name", dcName);
+                r.setAttribute("Message", "Element occurrence is less than value of MinOccurs");
+                r.setAttribute("MinOccurs", minOccurs, null);
+                r.setAttribute("FoundElements", occurs, null);
             }
-            else
+            for (int j = 0; j < occurs; j++)
             {
-                for (int j = 0; j < occurs; j++)
+                KElement subEl = (KElement)vElem.elementAt(j);
+                if(goodElems.contains(subEl))
+                    continue;
+                r = parentReport.appendElement("InvalidSubelement");
+                KElement recursionResult = dc.stateReport(subEl,testlists,level,ignoreExtensions,true,r); 
+
+                if(recursionResult==null)
                 {
-                    JDFElement subEl = (JDFElement)vElem.elementAt(j);
-                    XMLDoc recursionResult = dc.stateReport(subEl,testlists,level); 
-                    if(recursionResult != null) 
-                    {
-                        r = root.appendElement("InvalidSubelement");
-                        r.setAttribute("CapXPath", dc.getNamePath(true));
-                        r.setAttribute("XPath", subEl.buildXPath());
-                        r.setAttribute("Name", dcName);
-                        moveChildElementVector_Static(r,recursionResult.getRoot());
-                    }
+                    goodElems.add(subEl);
+                    KElement badReport=(KElement)badElems.get(subEl);
+                    if(badReport!=null)
+                        badReport.deleteNode();
+                }
+                else
+                {
+                    badElems.put(subEl,recursionResult);
+                }
+                 
+                if(recursionResult != null) 
+                {
+                    r.setAttribute("CapXPath", dc.getNamePath(true));
+                    r.setAttribute("XPath", subEl.buildXPath(null));
+                    r.setAttribute("Name", dcName);
+                }
+                else
+                {
+                    r.deleteNode();
                 }
             }
         }
         
-        if (!root.hasChildElements())
-            testResult = null;
+        if (!parentReport.hasChildElements())
+        {
+             parentReport = null;
+        }
         
-        return testResult;
+        return parentReport;
     }
     
     /**
-     * Tests attributes and span elements (if 'e' is a intent resource) of the element 'e'.
-     * Checks, whether they fit the corresponding State elements of 'this' DevCap.
-     * Composes a detailed report of the found errors in XML form. If XMLDoc equals null - there are no errors.
+     * Tests attributes and span elements (if <code>e</code> is a intent resource) 
+     * of the element <code>e</code>.<br>
+     * Checks whether they fit the corresponding State elements of <code>this</code>.<br>
+     * Composes a detailed report of the errors found in XML form. 
+     * If XMLDoc is <code>null</code> there are no errors.
      * 
-     * @param e - element to test
-     * @param testlists - FitsValue_Allowed or FitsValue_Present testlists
-     * that are specified for the State elements. (Will be used in fitsValue method of the State element)
-     * @param level - validation level
-     * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc equals null - there are no errors, 
-     * 'e' fits the corresponding State elements of 'this' DevCap
+     * @param e         element to test
+     * @param testlists FitsValue_Allowed or FitsValue_Present testlists
+     *                  that are specified for the State elements. 
+     *                  (Will be used in fitsValue method of the State element.)
+     * @param level     validation level
+     * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc is <code>null</code> 
+     *                  there are no errors, <code>e</code> fits the corresponding State 
+     *                  elements of <code>this</code>
      */
-    private final XMLDoc spanAndAttributesTest(KElement e, EnumFitsValue testlists, EnumValidationLevel level)
+    private final KElement spanAndAttributesTest(KElement e, EnumFitsValue testlists, EnumValidationLevel level, boolean ignoreExtensions, KElement parentReport)
     {
-        XMLDoc testResult = new XMLDoc("Temp", null);
-        KElement root = testResult.getRoot();
-        KElement msp = root.appendElement("UnknownAttributes");
-        KElement map = root.appendElement("MissingAttributes");
-        KElement iap = root.appendElement("InvalidAttributes");
+        KElement msp = parentReport.appendElement("UnknownAttributes");
+        KElement map = parentReport.appendElement("MissingAttributes");
+        KElement iap = parentReport.appendElement("InvalidAttributes");
         
         //  vSubElem - contains all subelements of this DevCap
         VElement vStates = getStates(true,null); 
+        JDFAttributeMap missMap=new JDFAttributeMap();
+        JDFAttributeMap capMap=new JDFAttributeMap();
         
-        JDFAttributeMap am = e.getAttributeMap(); // only attribute map of 'e'   
+        final JDFAttributeMap defMap = e.getDefaultAttributeMap();
+        JDFAttributeMap am = new JDFAttributeMap(defMap);
+        am.putAll(e.getAttributeMap()); // only attribute map of 'e'   
         JDFAttributeMap m = getSpanAndAttributesMap(e); // get of 'e' as a map of attributes: (1) all attributes, 
         //(2) span key-values (in case of intent resource), (3) comments 
         VString vKeys = m.getKeys(); //we'll use "keys" to find the appropriate State elements in DevCap
@@ -1560,8 +1589,7 @@ public class JDFDevCap extends JDFAutoDevCap
             String nam = state.getName();
             
             int size=vKeys.size();
-            boolean bExit = false;
-            for (int i=size-1; i>=0 && !bExit; i--) 
+            for (int i=size-1; i>=0; i--) 
             {  
                 String key = (String) vKeys.elementAt(i);
                 if (nam.equals(key) ||(key.equals("CommentText")&& nam.length()==0)) // if name is absent - state describes a Comment
@@ -1574,19 +1602,19 @@ public class JDFDevCap extends JDFAutoDevCap
                         if (!am.containsKey(key) && !key.equals("CommentText")) // it is Span but not Attribute
                         {
                             r = iap.appendElement("InvalidSpan");
-                            r.setAttribute("XPath", e.buildXPath()+ "/"+ key);
+                            r.setAttribute("XPath", e.buildXPath(null)+ "/"+ key);
                             r.setAttribute("Message", "Span value doesn't fit this State description");
                         }
                         else if (key.equals("CommentText"))
                         {
                             r = iap.appendElement("InvalidComment");
-                            r.setAttribute("XPath", e.buildXPath()+ "/"+ key);
+                            r.setAttribute("XPath", e.buildXPath(null)+ "/"+ key);
                             r.setAttribute("Message", "Comment doesn't fit this State description");
                         }
                         else 
                         {
                             r = iap.appendElement("InvalidAttribute");
-                            r.setAttribute("XPath", e.buildXPath()+ "/@"+ key);
+                            r.setAttribute("XPath", e.buildXPath(null)+ "/@"+ key);
                             r.setAttribute("Message", "Attribute value doesn't fit this State description");
                         }
                         r.setAttribute("Name", key);
@@ -1596,80 +1624,116 @@ public class JDFDevCap extends JDFAutoDevCap
                         
                     }
                     vKeys.removeElementAt(i); // The attribute/span was found, checked, so we don't need it any more in vKeys
-                    bExit = true; // go to another State
+                    break; // go to next State
                 }
             }
             
-            if ((size==vKeys.size()) && (state.getRequired()) && requiredLevel(level)) 
+            if ((size==vKeys.size()) && state.getRequired() && requiredLevel(level)) 
             { // No attribute/span found but state is required
-                KElement ms;
+                
                 if (state.getListType().equals(EnumListType.Span)) 
                 {
-                    ms = map.appendElement("MissingSpan");
-                    ms.setAttribute("Message", "Missing Span");
+                    missMap.put(nam, "Span");
                 }
                 else 
                 {
-                    ms = map.appendElement("MissingAttribute");
-                    ms.setAttribute("Message", "Missing Attribute");
+                    missMap.put(nam, "Attribute");
                 }
-                ms.setAttribute("XPath", e.buildXPath()+ "/@"+ nam);
-                ms.setAttribute("CapXPath", state.getNamePath());
-                ms.setAttribute("Name", nam);
+                capMap.put(nam, state.getNamePath());
             }
         }
-        for (int x=0; x<vKeys.size(); x++) 
-        { // if there are in vKeys still some attibutes, they must be generic attributes
-            String key = (String) vKeys.elementAt(x);
-            
-            if (!isGenericAttribute(key)) 
-            { // if the rest attributes are not generic -> Node is rejected
-                KElement us;
-                if(!am.containsKey(key) && !key.equals("CommentText")) 
-                {
-                    us = msp.appendElement("UnknownSpan");
-                    us.setAttribute("XPath", e.buildXPath()+"/"+key);
-                    us.setAttribute("CapXPath", getNamePath(true)+"/"+key);
+        if(requiredLevel(level))
+        {
+            VString missAts=e.getMissingAttributes(9999999);
+            for(int i=0;i<missAts.size();i++)
+                missMap.put(missAts.stringAt(i), "Attribute");
+            missAts=e.getMissingElements(99999);
+            for(int i=0;i<missAts.size();i++)
+            {
+                final String stringAt = missAts.stringAt(i);
+                if(stringAt.endsWith("Span"))
+                    missMap.put(stringAt, "Span");
+            }
+        }
+        
+        Enumeration missIt=missMap.keys();
+        while (missIt.hasMoreElements())
+        { // No attribute/span found but state is required
+            String nam=(String)missIt.nextElement();
+            String typ=missMap.get(nam);
+
+            KElement ms = map.appendElement("Missing"+typ);
+            ms.setAttribute("Message", "Missing "+typ);
+            ms.setAttribute("XPath", e.buildXPath(null)+ "/@"+ nam);
+            String capNamePath=capMap.get(nam);
+            if(capNamePath!=null)
+            ms.setAttribute("CapXPath", capNamePath);
+            ms.setAttribute("Name", nam);
+        }
+
+        
+        
+        if(!ignoreExtensions)
+        {
+            for (int x=0; x<vKeys.size(); x++) 
+            { // if there are in vKeys still some attibutes, they must be generic attributes
+                String key = (String) vKeys.elementAt(x);
+
+                if (!isGenericAttribute(key)&&(defMap==null || !defMap.containsKey(key))) 
+                { // if the rest attributes are not generic -> Node is rejected
+                    KElement us;
+                    if(!am.containsKey(key) && !key.equals("CommentText")) 
+                    {
+                        us = msp.appendElement("UnknownSpan");
+                        us.setAttribute("XPath", e.buildXPath(null)+"/"+key);
+                        us.setAttribute("CapXPath", getNamePath(true)+"/"+key);
+                    }
+                    else 
+                    {
+                        us = msp.appendElement("UnknownAttribute");
+                        us.setAttribute("XPath", e.buildXPath(null)+ "/@"+ key);
+                        us.setAttribute("CapXPath", getNamePath(true)+"/@"+key);
+                    }
+                    us.setAttribute("Name", key);
+                    us.setAttribute("Message", "No State description for "+key);
                 }
-                else 
-                {
-                    us = msp.appendElement("UnknownAttribute");
-                    us.setAttribute("XPath", e.buildXPath()+ "/@"+ key);
-                    us.setAttribute("CapXPath", getNamePath(true)+"/@"+key);
-                }
-                us.setAttribute("Name", key);
-                us.setAttribute("Message", "No State description for "+key);
             }
         }
         
         if (!map.hasChildElements())
-            root.removeChild(map);
+            parentReport.removeChild(map);
         
         if (!iap.hasChildElements())
-            root.removeChild(iap);
+            parentReport.removeChild(iap);
         
         if (!msp.hasChildElements())
-            root.removeChild(msp);
+            parentReport.removeChild(msp);
         
-        if (!root.hasChildElements())
-            testResult = null;
+        if (!parentReport.hasChildElements())
+        {
+            parentReport = null;
+        }
         
-        return testResult;
+        return parentReport;
     }
     
     
     
     /**
-     * Gets of the element 'e' a map of Attributes, Comments and Span key-value pairs.
-     * All of them must be described as State elements
+     * Gets a map of Attributes, Comments and Span key-value pairs for <code>e</code>.
+     * All of them must be described as State elements.
      * 
-     * @param e - element to get the attribute map of
+     * @param e element to get the attribute map for
      * @return JDFAttributeMap - a map of Attributes, Comments and Span key-value pairs
      */
     private final JDFAttributeMap getSpanAndAttributesMap(KElement e)
     {
-        JDFAttributeMap m = e.getAttributeMap(); // get all attributes of 'e' as a map of attributes
-        
+        JDFAttributeMap m = e.getDefaultAttributeMap();
+        if(m!=null)
+            m.putAll(e.getAttributeMap()); // get all attributes of 'e' as a map of attributes
+        else
+            m=e.getAttributeMap();
+       
         if (e instanceof JDFResource)
         {
             JDFResource r = (JDFResource) e; // if 'e' is an Intent Resource
@@ -1696,10 +1760,11 @@ public class JDFDevCap extends JDFAutoDevCap
     
     
     /**
-     * Gets of the intent resource 'r' a map of key-value pairs, where key is a Span NodeName
-     * and value is a combiantion of actual, preferred and range values
+     * Gets a map of key-value pairs for the intent resource <code>r</code>. 
+     * The key of the map is a Span NodeName, 
+     * the value is a combination of actual, preferred and range values
      * 
-     * @param r - intent resource to get the SpanValueMap of
+     * @param r intent resource to get the SpanValueMap of
      * @return JDFAttributeMap - SpanValueMap
      */
     private final JDFAttributeMap getSpanValueMap(JDFResource r)
@@ -1729,17 +1794,17 @@ public class JDFDevCap extends JDFAutoDevCap
     
     
     /**
-     * Tests if there are any subelements of the element elem that are not described by DevCap
-     * Composes a detailed report of the found errors in XML form. If XMLDoc equals null - there are no errors.
+     * Tests if there are any subelements of the element elem that are not described by DevCap.<br>
+     * Composes a detailed report of the found errors in XML form. 
+     * If XMLDoc is <code>null</code> there are no errors.
      *  
-     * @param elem - element we test
-     * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc equals null - there are no errors
+     * @param elem element to test
+     * @return KElement - output of the error messages. 
+     *                  If XMLDoc is <code>null</code> there are no errors.
      */ 
-    private final XMLDoc missingDevCap(KElement elem)
+    private final KElement missingDevCap(KElement elem, KElement parentReport)
     {
-        XMLDoc testResult = new XMLDoc("UnknownSubelements", null); // temporary root
-        KElement root = testResult.getRoot();
-        
+        KElement root = parentReport.appendElement("UnknownSubelements");        
         VElement vDevCap = getDevCapVector(null,true);
         
         VElement vSubElem = elem.getChildElementVector(null, null, null, true, 0, true); // follows the refelements
@@ -1769,7 +1834,7 @@ public class JDFDevCap extends JDFAutoDevCap
                 if (!bFound) 
                 {    
                     KElement us = root.appendElement("UnknownSubelement");
-                    us.setAttribute("XPath", e.buildXPath());
+                    us.setAttribute("XPath", e.buildXPath(null));
                     us.setAttribute("CapXPath", getNamePath(false)+ JDFConstants.SLASH + nam);
                     us.setAttribute("Name", nam);
                     us.setAttribute("Message", "Found no DevCap description for this element");
@@ -1778,9 +1843,11 @@ public class JDFDevCap extends JDFAutoDevCap
         }
         
         if (!root.hasChildElements())
-            testResult = null;
-        
-        return testResult;
+        {
+            root.deleteNode();
+            root = null;
+        }        
+        return root;
     }
     
     
@@ -1788,11 +1855,16 @@ public class JDFDevCap extends JDFAutoDevCap
      * Checks if the attributes key of the tested element is 
      * a generic attribute. (Gets this attribute of DeviceCap element)
      * 
-     * @param String key - attribute key to test
+     * @param key attribute key to test
      * @return boolean - true if the key is a generic attribute
      */        
     private final boolean isGenericAttribute(String key)
     {
+        if(key==null)
+            return true;
+        if(key.startsWith(AttributeName.XMLNS))
+            return true;
+        
         JDFDeviceCap deviceCap = (JDFDeviceCap)getDeepParent(ElementName.DEVICECAP,0);
         VString s = deviceCap.getGenericAttributes();
         return s.contains(key) || s.contains("*");
@@ -1801,15 +1873,15 @@ public class JDFDevCap extends JDFAutoDevCap
     
     /**
      * Gets the NamePath of this DevCap in form 
-     * "DevCapsName/SubelemName1/SubelemName2/..."
+     * "DevCapsName/SubelemName1/SubelemName2/..."<br>
      * If this DevCap is located in DevCapPool and not in a DevCaps - it describes the reusable resource 
-     * and DevCap root will have the attribute "Name" = value of DevCaps/@Name 
+     * and DevCap root will have the attribute "Name" = value of DevCaps/@Name, 
      * but will have no info about DevCaps/@Context or DevCaps/@LinkUsage 
+     * <p>
+     * default: getNamePath(false)
      *
-     * @param bRecurse - if true, returns "DevCapsName/SubelemName1/SubelemName2/..."
-     * @return String - NamePath of this DevCap
-     * 
-     * default: getNamePath(false)  
+     * @param bRecurse if true, returns "DevCapsName/SubelemName1/SubelemName2/..."
+     * @return String - NamePath of this DevCap   
      */
     public final String getNamePath(boolean bRecurse)
     {
@@ -1822,13 +1894,13 @@ public class JDFDevCap extends JDFAutoDevCap
     
     /**
      * Gets the NamePath of this DevCap in form 
-     * "DevCapsName/SubelemName1/SubelemName2/..."
+     * "DevCapsName/SubelemName1/SubelemName2/..."<br>
      * If this DevCap is located in DevCapPool and not in a DevCaps - it describes the reusable resource 
-     * and DevCap root will have the attribute "Name" = value of DevCaps/@Name 
+     * and DevCap root will have the attribute "Name" = value of DevCaps/@Name, 
      * but will have no info about DevCaps/@Context or DevCaps/@LinkUsage 
      *
-     * @param bRecurse - if true, returns "DevCapsName/SubelemName1/SubelemName2/..."
-     * @return String - NamePath of this DevCap
+     * @param bRecurse if true, returns "DevCapsName/SubelemName1/SubelemName2/..."
+     * @return String - NamePath of this DevCap, null if no name is specified
      * 
      * default: getNamePath(false)  
      */
@@ -1836,6 +1908,8 @@ public class JDFDevCap extends JDFAutoDevCap
     {
         String result = getName();    
         VString vResult=null;
+        if(result==null)
+            return null;
         
         final KElement parentNode = getParentNode_KElement();
         
@@ -1908,9 +1982,9 @@ public class JDFDevCap extends JDFAutoDevCap
 ////////////////////////////////////////////////////////////////////////////////////////
     
     /**
-     * gets String attribute Name inherits from devcap or devcaps if necessary
+     * gets String attribute Name, inherits from devcap or devcaps if necessary
      * 
-     * @return String the value of the attribute
+     * @return String - the value of the attribute
      */
     public String getName()
     {
@@ -1943,31 +2017,12 @@ public class JDFDevCap extends JDFAutoDevCap
         }
          return s;
     }
-    
-    /**
-     * Moves ChildElementVector of the second element into the first
-     * 
-     * @param moveToElement - the first element - new parent for the children of the second element
-     * @param moveFromElement -  the second element - element whose children will be removed
-     */
-    private final static void moveChildElementVector_Static(KElement moveToElement, KElement moveFromElement) 
-    {
-        if (moveToElement != null && moveFromElement != null)
-        {
-            Vector v = moveFromElement.getChildElementVector(null, null, null, true, 0,false);
-            for (int i = 0; i < v.size(); i++) 
-            {
-                moveToElement.moveElement((KElement)v.elementAt(i), null);
-            }
-        }
-        return;
-    }
-    
+        
     /**
      * return the vector of all states
      * @param bDirect if false, recurse into child elements, else return only direct child states
-     * @param id ID attribute of the requested string
-     * @return
+     * @param id      ID attribute of the requested string
+     * @return VElement
      */
     public VElement getStates(boolean bDirect, String id)
     {
@@ -1998,11 +2053,12 @@ public class JDFDevCap extends JDFAutoDevCap
         } 
         return v;
     }
+    
     /**
-     * Sets attribute MaxOccurs, 
+     * Sets attribute <code>MaxOccurs</code>, 
      * also handles unbounded
      *
-     * @param int value: the value to set the attribute to
+     * @param value the value to set the attribute to
      */
      public void setMaxOccurs(int value)
      {
@@ -2017,7 +2073,7 @@ public class JDFDevCap extends JDFAutoDevCap
      }
 
      /**
-     * Gets integer attribute MaxOccurs
+     * Gets integer attribute <code>MaxOccurs</code>,
      * also handles unbounded
      *
      * @return int: the attribute value 
@@ -2032,11 +2088,11 @@ public class JDFDevCap extends JDFAutoDevCap
 
 
      /**
-      * gets the matching elements in node that match this devcap
+      * gets the matching elements in the node that match <code>this</code>
       * 
       * @param node the node to search in
-      * @return VElement the element vector of matching elements, 
-      * null if none were found
+      * @return VElement - the element vector of matching elements, 
+      * <code>null</code> if none were found
       */
      public VElement getMatchingElementsFromParent(KElement parent)
      {
@@ -2044,11 +2100,13 @@ public class JDFDevCap extends JDFAutoDevCap
          VElement subElems=parent.getChildElementVector(nam,null,null,true,999999,true);
          return subElems.size()==0 ? null : subElems;
      }
-  /**
-      * sets the element and attribute defaults
-      * @param element
-      * @return
-      */
+     
+    /**
+	 * sets the element and attribute defaults
+	 * 
+	 * @param element
+	 * @return
+	 */
     public boolean setDefaultsFromCaps(KElement element)
     {
         boolean success=false;

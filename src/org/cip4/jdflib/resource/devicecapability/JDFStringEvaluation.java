@@ -122,12 +122,12 @@ public class JDFStringEvaluation extends JDFEvaluation
 
     protected ElementInfo getTheElementInfo()
     {
-        return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
+        return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
 
     /**
      * constructor for JDFStringEvaluation
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      * @throws DOMException
      */
@@ -139,8 +139,8 @@ public class JDFStringEvaluation extends JDFEvaluation
 
     /**
      * constructor for JDFStringEvaluation
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      * @throws DOMException
      */
@@ -154,11 +154,10 @@ public class JDFStringEvaluation extends JDFEvaluation
     }
 
     /**
-     * constructor for JDFStringEvaluation
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      * @throws DOMException
      */
     public JDFStringEvaluation(
@@ -229,18 +228,18 @@ public class JDFStringEvaluation extends JDFEvaluation
     }
 
     /**
-     * append a value element
-     * @return the newly created value element
+     * append a <code>Value</code> element
+     * @return JDFValue - the newly created element
      */
     public JDFValue appendValue()
     {
         return (JDFValue)appendElement(ElementName.VALUE, null);
     }   
     /**
-     * append a value element and set Value/@Value to value
+     * append a <code>Value</code> element and set Value/@Value to value
      * @param value the value string to set
      * 
-     * @return the newly created value element
+     * @return JDFValue - the newly created element
      */
     public JDFValue appendValueValue(String value)
     {
@@ -254,10 +253,10 @@ public class JDFStringEvaluation extends JDFEvaluation
     **************************************************************** */
 
     /** 
-     * Sets the Value attribute of the i-th subelement Value
+     * Sets the <code>Value</code> attribute of the iSkip'th subelement <code>Value</code>
      *
-     * @param int iSkip: the number of Value elements to skip
-     * @param String value: value to set the attribute to
+     * @param iSkip the number of <code>Value</code> elements to skip
+     * @param value value to set the attribute to
      */
     public void setValueValue(int iSkip, String value)
     {
@@ -266,10 +265,11 @@ public class JDFStringEvaluation extends JDFEvaluation
     }
     
     /**
-     * Gets the Value attribute of the i-th subelement Value
+     * Gets the <code>Value</code> attribute of the iSkip'th subelement <code>Value</code>
      *
-     * @param int iSkip: the number of Value elements to skip
-     * @return String: the attribute value, null if no matching value element element exists
+     * @param iSkip the number of <code>Value</code> elements to skip
+     * @return String: the attribute value, <code>null</code> if no matching value element 
+     *                 exists
      */
     public final String getValueValue(int iSkip) 
     {
@@ -285,11 +285,11 @@ public class JDFStringEvaluation extends JDFEvaluation
     **************************************************************** */
     
     /**
-     * fitsValue - tests, if the defined 'value' matches testlists, 
+     * fitsValue - checks whether <code>value</code> matches the testlists 
      * specified for this Evaluation
      *
-     * @param String value -  value to test
-     * @return boolean - true, if 'value' matches testlists or 
+     * @param value value to test
+     * @return boolean - true, if <code>value</code> matches the testlists or 
      * if testlists are not specified
      */
     public final boolean fitsValue(String value)
@@ -299,11 +299,12 @@ public class JDFStringEvaluation extends JDFEvaluation
     
 
     /**
-     * fitsLength - tests, if the defined string 'str' matches Length,
+     * fitsLength - checks whether <code>str</code> matches the attribute <code>Length</code>
      * specified for this Evaluation
      *
-     * @param String str - string to test
-     * @return boolean - true, if 'str' matches Length or if Length is not specified
+     * @param str string to test
+     * @return boolean - true, if <code>str</code> matches <code>Length</code>
+     *                   or if <code>Length</code> is not specified
      */
     private final boolean fitsLength(String str)
     {
@@ -317,11 +318,11 @@ public class JDFStringEvaluation extends JDFEvaluation
 
 
     /**
-     * fitsRegExp - tests, if the defined string 'str' matches RegExp,
+     * fitsRegExp - checks whether <code>str</code> matches the RegExp
      * specified for this Evaluation
      *
-     * @param String str - string to test
-     * @return boolean - true, if 'str' matches RegExp or if RegExp is not specified
+     * @param str string to test
+     * @return boolean - true, if <code>str</code> matches RegExp or if RegExp is not specified
      */
     private final boolean fitsRegExp(String str) 
     {
@@ -333,11 +334,11 @@ public class JDFStringEvaluation extends JDFEvaluation
 
 
     /**
-     * fitsValueElem - tests, if the defined string 'str' value matches 
-     * subelement Value, specified for this Evaluation
+     * fitsValueElem - checks whether <code>str</code> matches the 
+     * subelement <code>Value</code> specified for this Evaluation
      *
-     * @param String str - string to test
-     * @return boolean - true, if 'str' matches subelement Value 
+     * @param str string to test
+     * @return boolean - true, if <code>str</code> matches subelement <code>Value</code> 
      */
     private final boolean fitsValueElem(String str) 
     {

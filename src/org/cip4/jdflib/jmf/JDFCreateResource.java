@@ -24,10 +24,10 @@ import org.cip4.jdflib.auto.JDFAutoCreateResource;
 public class JDFCreateResource extends JDFAutoCreateResource
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Constructor for JDFCreateResource
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
 	public JDFCreateResource(
@@ -36,12 +36,11 @@ public class JDFCreateResource extends JDFAutoCreateResource
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
-	
-	
+
 	/**
 	 * Constructor for JDFCreateResource
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
 	public JDFCreateResource(
@@ -51,13 +50,13 @@ public class JDFCreateResource extends JDFAutoCreateResource
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
-	
+
 	/**
 	 * Constructor for JDFCreateResource
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @param localName
+	 * @param myLocalName
 	 */
 	public JDFCreateResource(
 			CoreDocumentImpl myOwnerDocument,
@@ -68,6 +67,10 @@ public class JDFCreateResource extends JDFAutoCreateResource
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 	
+	/**
+	 * toString()
+	 * @see org.cip4.jdflib.auto.JDFAutoCreateResource#toString()
+	 */
 	public String toString()
 	{
 		return "JDFCreateResource[  --> " + super.toString() + " ]";

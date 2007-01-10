@@ -91,21 +91,20 @@ public class JDFDevCapPool extends JDFAutoDevCapPool
 
     /**
      * Constructor for JDFDevCapPool
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFDevCapPool(
+    public JDFDevCapPool(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFDevCapPool
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFDevCapPool(
@@ -118,10 +117,10 @@ public class JDFDevCapPool extends JDFAutoDevCapPool
 
     /**
      * Constructor for JDFDevCapPool
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFDevCapPool(
         CoreDocumentImpl myOwnerDocument,
@@ -144,10 +143,10 @@ public class JDFDevCapPool extends JDFAutoDevCapPool
     
     
     /** 
-     * getCreateDevCap
+     * get iSkip'th element <code>DevCap</code>, create if it doesn't exist
      * 
-     * @param int iSkip number of elements to skip
-     * @return JDFDevCap 
+     * @param iSkip number of elements to skip
+     * @return JDFDevCap - the element 
      */
     public JDFDevCap getCreateDevCap(int iSkip)
     {
@@ -156,10 +155,12 @@ public class JDFDevCapPool extends JDFAutoDevCapPool
 
 
     /**
-     * get element DevCap
-     * @param int iSkip - number of elements to skip
-     * @return JDFDevCap 
-     * default is getDevCap(0)     
+     * get iSkip'th element DevCap
+     * <p>
+     * default: getDevCap(0)
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFDevCap - the element
      */
     public JDFDevCap getDevCap(int iSkip)
     {
@@ -168,8 +169,8 @@ public class JDFDevCapPool extends JDFAutoDevCapPool
     
     /**
      * get element DevCap by ID
-     * @param String id the id of the DevCap
-     * @return JDFDevCap 
+     * @param id the ID of the DevCap
+     * @return JDFDevCap - the element 
      */
     public JDFDevCap getDevCap(String id)
     {
@@ -177,10 +178,10 @@ public class JDFDevCapPool extends JDFAutoDevCapPool
     }
     
     /**
-     * get element DevCap by ID
+     * get element DevCap by name, create if it doesn't exist
      * @param  dcName the Name of the DevCap
-     * @param  newId the new id of the DevCap to create, ignored if the devCap already exists
-     * @return JDFDevCap 
+     * @param  newId  the new ID of the DevCap to create, ignored if the DevCap already exists
+     * @return JDFDevCap - the element
      */
     public JDFDevCap getCreateDevCapByName(String dcName,String newID)
     {
@@ -194,6 +195,7 @@ public class JDFDevCapPool extends JDFAutoDevCapPool
         }
         return dc;
     }
+    
     /**
      * append new DevCap element
      * 

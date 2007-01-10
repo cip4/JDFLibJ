@@ -27,21 +27,20 @@ import org.cip4.jdflib.auto.JDFAutoTrigger;
 
     /**
      * Constructor for JDFTrigger
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFTrigger(
+    public JDFTrigger(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFTrigger
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFTrigger(
@@ -54,10 +53,10 @@ import org.cip4.jdflib.auto.JDFAutoTrigger;
 
     /**
      * Constructor for JDFTrigger
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFTrigger(
         CoreDocumentImpl myOwnerDocument,
@@ -68,6 +67,10 @@ import org.cip4.jdflib.auto.JDFAutoTrigger;
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
 
+    /**
+     * toString
+     * String
+     */
     public String toString()
     {
         return "JDFTrigger[  --> " + super.toString() + " ]";

@@ -24,10 +24,10 @@ import org.cip4.jdflib.auto.JDFAutoRegistration;
 public class JDFRegistration extends JDFAutoRegistration
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Constructor for JDFRegistration
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
 	public JDFRegistration(
@@ -36,12 +36,11 @@ public class JDFRegistration extends JDFAutoRegistration
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
-	
-	
+
 	/**
 	 * Constructor for JDFRegistration
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
 	public JDFRegistration(
@@ -51,13 +50,13 @@ public class JDFRegistration extends JDFAutoRegistration
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
-	
+
 	/**
 	 * Constructor for JDFRegistration
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @param localName
+	 * @param myLocalName
 	 */
 	public JDFRegistration(
 			CoreDocumentImpl myOwnerDocument,
@@ -68,6 +67,10 @@ public class JDFRegistration extends JDFAutoRegistration
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 	
+	/**
+	 * toString()
+	 * @return String
+	 */
 	public String toString()
 	{
 		return "JDFRegistration[  --> " + super.toString() + " ]";

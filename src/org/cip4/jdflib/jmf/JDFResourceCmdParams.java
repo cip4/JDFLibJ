@@ -83,15 +83,19 @@ import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoResourceCmdParams;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.resource.JDFResource;
-
-
+import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 
 //----------------------------------
     public class JDFResourceCmdParams extends JDFAutoResourceCmdParams
@@ -100,21 +104,20 @@ import org.cip4.jdflib.resource.JDFResource;
 
     /**
      * Constructor for JDFResourceCmdParams
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFResourceCmdParams(
+    public JDFResourceCmdParams(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFResourceCmdParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFResourceCmdParams(
@@ -127,10 +130,10 @@ import org.cip4.jdflib.resource.JDFResource;
 
     /**
      * Constructor for JDFResourceCmdParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFResourceCmdParams(
         CoreDocumentImpl myOwnerDocument,
@@ -141,16 +144,19 @@ import org.cip4.jdflib.resource.JDFResource;
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
 
+    /**
+     * toString()
+     * @return String
+     */
     public String toString()
     {
         return "JDFResourceCmdParams[  --> " + super.toString() + " ]";
     }
 
-
     /** 
-     * 
-     * @param WString resName, name of the resource to get/create
-     * @return JDFCostCenter The element
+     * get resource defined by <code>resName</code>, create if it doesn't exist 
+     * @param resName name of the resource to get/create
+     * @return JDFResource the element
      */
     public JDFResource getCreateResource(String resName)
     {
@@ -165,56 +171,61 @@ import org.cip4.jdflib.resource.JDFResource;
     }
 
     /**
-     * const get Resource
-     * @param WString resName, name of the resource to get/create
-     * @return JDFResource The element
+     * get resource defined by <code>resNam</code>
+     * @param resName name of the resource to get, if null get the one and only resource
+     * @return JDFResource the element, null if none exists
      */
     public JDFResource getResource(String resName)
     {
-        JDFResource r = null;
-        KElement e = getElement(resName, JDFConstants.EMPTYSTRING, 0);
-        if(e instanceof JDFResource)
-        { 
-            r = (JDFResource) e;
+        if(resName!=null)
+        {
+            KElement e = getElement(resName, null, 0);
+            if(e instanceof JDFResource)
+            { 
+                return (JDFResource) e;
+            }
         }
         else
         {
-           throw new JDFException(
-                "JDFResourceCMDParams.getResource tried to return a JDFElement instead of a JDFResource"); 
+            String resName2=getResourceName();
+            if(resName2!=null && !resName2.equals(""))
+                return getResource(resName2);
+            KElement e2=getFirstChildElement();
+            while(e2!=null)
+            {
+                if(e2 instanceof JDFResource)
+                    return(JDFResource)e2;
+                e2=e2.getNextSiblingElement();
+            }
         }
-        return r;
+        return null;
     }
+
     /**
      * Append  Resource
-     * @param WString resName, name of the resource to get/create
+     * @param resName name of the resource to append
+     * @return JDFResource the element
      */
     public JDFResource appendResource(String resName)
     {
-        JDFResource r = null;
         KElement   e = appendElement(resName, null);
-        if(e instanceof JDFResource)
+        if(!(e instanceof JDFResource))
         {
-            r = (JDFResource) e;
-            r.init();
+            throw new JDFException("JDFResourceCMDParams.appendResource tried to return a JDFElement instead of a JDFResource"); 
         }
-        else
-        {
-           throw new JDFException(
-                "JDFResourceCMDParams.appendResource tried to return a JDFElement instead of a JDFResource"); 
-        }
-        return r;
-
+        return (JDFResource)e;
     }
 
-
     /**
-     * return a vector of unknown element nodenames
-     * @param boolean bIgnorePrivate - used by JDFElement during the validation
+     * return the vector of unknown element nodenames
+     * <p>
+     * default: GetInvalidElements(true, 999999)<br>
      * !!! Do not change the signature of this method
-     * @param int nMax - maximum size of the returned vector
-     * @return Vector - vector of unknown element nodenames
      * 
-     * default: GetInvalidElements(true, 999999)
+     * @param bIgnorePrivate used by JDFElement during the validation
+     * @param nMax maximum number of elements to get
+     * 
+     * @return Vector - vector of unknown element nodenames
      */
     public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
     {
@@ -222,8 +233,7 @@ import org.cip4.jdflib.resource.JDFResource;
             bIgnorePrivate=false; // dummy to fool compiler
         return getUnknownPoolElements(JDFElement.EnumPoolType.ResourcePool, nMax);
     }
-    
-    
+
     /**
      * get part map vector
      * @return VJDFAttributeMap: vector of attribute maps, one for each part
@@ -234,8 +244,8 @@ import org.cip4.jdflib.resource.JDFResource;
     }
 
     /**
-     * set all parts to those define in vParts
-     * @param VJDFAttributeMap vParts: vector of attribute maps for the parts
+     * set all parts to those defined by vParts
+     * @param vParts vector of attribute maps for the parts
      */
     public void setPartMapVector(VJDFAttributeMap vParts)
     {
@@ -243,8 +253,8 @@ import org.cip4.jdflib.resource.JDFResource;
     }
 
     /**
-     * set all parts to those define in vParts
-     * @param JDFAttributeMap mPart: attribute map for the part to set
+     * set all parts to those define by mPart
+     * @param mPart attribute map for the part to set
      */
     public void setPartMap(JDFAttributeMap mPart)
     {
@@ -252,8 +262,8 @@ import org.cip4.jdflib.resource.JDFResource;
     }
 
     /**
-     * remove the part defined in mPart
-     * @param JDFAttributeMap mPart: attribute map for the part to remove
+     * remove the part defined by mPart
+     * @param mPart attribute map for the part to remove
      */
     public void removePartMap(JDFAttributeMap mPart)
     {
@@ -262,12 +272,115 @@ import org.cip4.jdflib.resource.JDFResource;
 
     /**
      * check whether the part defined in mPart is included
-     * @param JDFAttributeMap mPart: attribute map for the part to remove
+     * @param mPart attribute map to look for
      * @return boolean - returns true if the part exists
      */
     public boolean hasPartMap(JDFAttributeMap mPart)
     {
         return super.hasPartMap(mPart);
+    }
+    
+    /**
+     * apply the parameters in this to all appropriate resources in parentNode or one of parentNode's children
+     * @param parentNode the node to search in
+     */
+    public void applyResourceCommand (JDFNode parentNode)
+    {
+        if(parentNode==null)
+            return;
+        Vector vNodes=parentNode.getvJDFNode(null,null,false);
+        
+        final int size = vNodes.size();
+        for(int i=0;i<size;i++)
+        {
+            final JDFNode node=(JDFNode) vNodes.elementAt(i);
+            if(!matchesNode(node))
+                continue;
+            JDFResource resCmd=getResource(null);
+            if(resCmd==null)
+                continue;
+
+            final boolean isIncremental = (getUpdateMethod () == EnumUpdateMethod.Incremental);
+            double dAmount = -1.0;
+            if (hasAttribute (AttributeName.PRODUCTIONAMOUNT))
+            {
+                dAmount = getProductionAmount ();  // TODO: set ProductionAmount
+            }
+            final String strProcessUsage = getProcessUsage();    // TODO: use ProcessUsage
+            final JDFElement.EnumNodeStatus status = getStatus(); // TODO: set Status
+            final VJDFAttributeMap vamParts = getPartMapVector();            
+            JDFResource resTarget = getTargetResource(node); 
+            if (resTarget == null)
+                continue;
+            
+            final VString vsPartIDKeys = resTarget.getPartIDKeys();
+            final int sizeParts = vamParts==null ? 1 : vamParts.size ();
+            for (int j = 0; j < sizeParts; j++)
+            {
+                JDFAttributeMap amParts = vamParts==null ? null : vamParts.elementAt (j);
+                JDFResource resTargetPart = resTarget.getPartition (amParts, null);
+                if(resTargetPart==null)
+                    continue;
+                final String id=resTargetPart.getID();
+                if (!isIncremental)
+                {              
+                    final JDFAttributeMap map=resTargetPart.getPartMap();
+                    resTargetPart.flush();
+                    resTargetPart.setAttributes(map);
+                }
+                resTargetPart = resTarget.getCreatePartition (amParts, vsPartIDKeys);
+                JDFResource resCmdPart=resCmd.getPartition(amParts, EnumPartUsage.Implicit);
+                resTargetPart.mergeElement(resCmdPart, false);
+                resTarget.setID(id);
+            }
+        }
+    }
+
+    /**
+     * @param node
+     * @return
+     */
+    private JDFResource getTargetResource(JDFNode node)
+    {
+        if(node==null)
+            return null;
+        JDFResourceLinkPool rlp=node.getResourceLinkPool();
+        if(rlp==null)
+            return null;
+        String resID=getResourceID();
+        if(resID!=null && !resID.equals(""))
+        {
+            VElement vRes=rlp.getLinkedResources(null,null,new JDFAttributeMap(AttributeName.ID,resID),false);
+            if(vRes.size()>0)
+                return (JDFResource)vRes.elementAt(0);
+        }
+
+        String resName=getResourceName();
+        if(resName!=null && !resName.equals(""))
+        {
+            VElement vRes=rlp.getLinkedResources(resName,null,null,false);
+            if(vRes.size()>0)
+                return (JDFResource)vRes.elementAt(0);
+            
+            //TODO link usage, process usage etc.
+           
+        }    
+        return null;
+    }
+
+    /**
+     * @param node
+     * @return
+     */
+    private boolean matchesNode(JDFNode node)
+    {
+        if(node==null)
+            return false;
+        if(hasAttribute(AttributeName.JOBID) && !getJobID().equals(node.getJobID(true)))
+            return false;
+        if(hasAttribute(AttributeName.JOBPARTID) && !getJobPartID().equals(node.getJobPartID(false)))
+            return false;
+        return true;
     }
 }
 

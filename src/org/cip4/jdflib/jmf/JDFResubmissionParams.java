@@ -25,21 +25,20 @@ import org.cip4.jdflib.auto.JDFAutoResubmissionParams;
 
     /**
      * Constructor for JDFResubmissionParams
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFResubmissionParams(
+    public JDFResubmissionParams(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFResubmissionParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFResubmissionParams(
@@ -52,10 +51,10 @@ import org.cip4.jdflib.auto.JDFAutoResubmissionParams;
 
     /**
      * Constructor for JDFResubmissionParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFResubmissionParams(
         CoreDocumentImpl myOwnerDocument,
@@ -66,6 +65,10 @@ import org.cip4.jdflib.auto.JDFAutoResubmissionParams;
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
 
+    /**
+     * toString()
+     * @return String
+     */
     public String toString()
     {
         return "JDFResubmissionParams[  --> " + super.toString() + " ]";

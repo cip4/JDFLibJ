@@ -179,7 +179,7 @@ public class MimeUtil {
          }
         catch (MessagingException x)
         {
-            s=null;
+           // nop
         }
         // TODO handle extensions here
         s=getContentID(bp);

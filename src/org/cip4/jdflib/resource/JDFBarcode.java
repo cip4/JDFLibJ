@@ -18,11 +18,11 @@ public class JDFBarcode extends JDFAutoBarcode
 
     /**
      * Constructor for JDFBarcode
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      * @throws DOMException
      */
-     public JDFBarcode(
+    public JDFBarcode(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
         throws DOMException
@@ -30,11 +30,10 @@ public class JDFBarcode extends JDFAutoBarcode
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFBarcode
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      * @throws DOMException
      */
@@ -49,10 +48,10 @@ public class JDFBarcode extends JDFAutoBarcode
 
     /**
      * Constructor for JDFBarcode
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      * @throws DOMException
      */
     public JDFBarcode(

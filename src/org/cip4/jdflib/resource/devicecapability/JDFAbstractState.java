@@ -152,35 +152,34 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
-    
-    
+
     /**
      * constructor for JDFAbstractState
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFAbstractState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
-    
+
     /**
      * constructor for JDFAbstractState
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFAbstractState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
-    
+
     /**
      * constructor for JDFAbstractState
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFAbstractState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName,
             String myLocalName)
@@ -242,22 +241,21 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     
     
     /**
-     * Tests, if the defined value matches Allowed test lists or Present test lists,
-     * specified for this State
+     * Tests wheterh the defined value matches the Allowed test lists or the Present test lists
+     * specified for this state
      *
-     * @param String value - value to test
-     * @param EnumFitsValue valuelist - Switches between Allowed test lists and Present test lists.
-     * Has two values: Allowed and Present.
-     * @return boolean - true, if the value matches test lists or if Allowed testlists are not specified
+     * @param value     value to test
+     * @param valuelist switches between Allowed test lists and Present test lists. 
+     *                  Has two values: Allowed and Present.
+     * @return boolean - true, if the value matches the test lists or if Allowed testlists are not specified
      */
     public abstract boolean fitsValue(String value, EnumFitsValue testlists);
     
     /**
      * Gets the NamePath of this State in form 
-     * "DevCapsName[Context=aaa, LinkUsage=ccc]/DevCapName1/DevCapName2../@StateName"
-     * 
-     * @param boolean onlyNames - if true returns "DevCapsName/SubelemName1/SubelemName2/../@StateName". 
-     * default getNamePath(false)
+     * "<code>DevCapsName[Context=aaa, LinkUsage=ccc]/DevCapName1/DevCapName2../@StateName</code>"
+     * <p>
+     *  default getNamePath(false)
      * 
      * @return String - NamePath of this State
      */
@@ -279,10 +277,11 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     
     /**
      * Gets the NamePath of this State in form 
-     * "DevCapsName[Context=aaa, LinkUsage=ccc]/DevCapName1/DevCapName2../@StateName"
-     * 
-     * @param boolean onlyNames - if true returns "DevCapsName/SubelemName1/SubelemName2/../@StateName". 
+     * "<code>DevCapsName[Context=aaa, LinkUsage=ccc]/DevCapName1/DevCapName2../@StateName</code>"
+     * <p>
      * default getNamePath(false)
+     * 
+     * @param bRecurse if true returns "<code>DevCapsName/SubelemName1/SubelemName2/../@StateName</code>" 
      * 
      * @return String - NamePath of this State
      */
@@ -312,8 +311,8 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     
     
     /**
-     * get the ancestor devCaps, null if this resides in a devcappool
-     * @return
+     * get the ancestor devCaps, null if this resides in a DevCapPool
+     * @return JDFDevCaps
      */
     public JDFDevCaps getParentDevCaps(){
         return (JDFDevCaps) getDeepParent(ElementName.DEVCAPS,0);
@@ -325,7 +324,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     /**
      * Sets attribute Availability
      *
-     * @param EnumAvailability value: the value to set the attribute to
+     * @param value the value to set the attribute to
      */
     public void setAvailability(JDFDevCaps.EnumAvailability value)
     {
@@ -353,7 +352,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     /**
      * Sets attribute DevNS
      *
-     * @param String value: the value to set the attribute to
+     * @param value the value to set the attribute to
      */
     public void setDevNS(String value)
     {
@@ -373,7 +372,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     /**
      * Sets attribute HasDefault, default=true
      *
-     * @param boolean value: the value to set the attribute to
+     * @param value the value to set the attribute to
      */
     public void setHasDefault(boolean value)
     {
@@ -383,7 +382,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     /**
      * Gets boolean attribute HasDefault
      *
-     * @return bool: the attribute value
+     * @return boolean: the attribute value
      */
     public boolean getHasDefault()
     {
@@ -393,7 +392,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     /**
      * Sets attribute MaxOccurs, 
      *
-     * @param int value: the value to set the attribute to
+     * @param value the value to set the attribute to
      */
     public void setMaxOccurs(int value)
     {
@@ -416,7 +415,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     /**
      * Sets attribute MinOccurs, default=1
      *
-     * @param int value: the value to set the attribute to
+     * @param value the value to set the attribute to
      */
     public void setMinOccurs(int value)
     {
@@ -426,7 +425,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     /**
      * Get integer attribute MinOccurs
      *
-     * @return bool: the attribute value 
+     * @return int: the attribute value 
      */
     public int getMinOccurs()
     {
@@ -434,10 +433,10 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     }
     
     /**
-     * Sets String attribute Name
+     * Sets String attribute Name<br>
      * Since name is independent of the data type of the State element, the setter is defined here
      *
-     * @param String value: the value to set the attribute to
+     * @param value the value to set the attribute to
      */
     public void setName(String value)
     {
@@ -445,10 +444,10 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     }
     
     /**
-     * Gets String attribute Name
+     * Gets String attribute Name<br>
      * Since name is independent of the data type of the State element,the getter is defined here
      *
-     * @return bool: the attribute value
+     * @return String: the attribute value
      */
     public String getName()
     {
@@ -458,7 +457,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     /**
      * Sets attribute Required
      *
-     * @param boolean value: the value to set the attribute to
+     * @param value the value to set the attribute to
      */
     public void setRequired(boolean value)
     {
@@ -468,7 +467,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     /**
      * Gets boolean attribute Required
      *
-     * @return bool: the attribute value 
+     * @return boolean: the attribute value 
      */
     public boolean getRequired()
     {
@@ -478,7 +477,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     /**
      * Sets attribute ListType, default=SingleValue
      *
-     * @param EnumListType value: the value to set the attribute to
+     * @param value the value to set the attribute to
      */
     public void setListType(EnumListType value)
     {
@@ -498,7 +497,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     /**
      * Sets attribute ActionRefs
      *
-     * @param VString value: vector of ActionRefs
+     * @param value vector of ActionRefs
      */
     public void setActionRefs(VString value)
     {
@@ -513,7 +512,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     /**
      * Gets NMTOKENS attribute ActionRefs
      *
-     * @return vString: the attribute value
+     * @return VString: the attribute value
      */
     public VString getActionRefs()
     {
@@ -526,7 +525,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     /**
      * Sets attribute Editable
      *
-     * @param boolean value: the value to set the attribute to
+     * @param value the value to set the attribute to
      */
     public void setEditable(boolean value)
     {
@@ -536,7 +535,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     /**
      * Gets boolean attribute Editable
      *
-     * @return bool: the attribute value 
+     * @return boolean: the attribute value 
      */
     public boolean getEditable()
     {
@@ -546,7 +545,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     /**
      * Sets attribute MacroRefs
      *
-     * @param VString value: vector of MacroRefs
+     * @param value vector of MacroRefs
      */
     public void setMacroRefs(VString value)
     {
@@ -561,7 +560,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     /**
      * Get NMTOKENS attribute MacroRefs
      *
-     * @return vString: the attribute value
+     * @return VString: the attribute value
      */
     public VString getMacroRefs()
     {
@@ -573,7 +572,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     /**
      * Sets attribute DependentMacroRef
      *
-     * @param String& value: vector of DependentMacroRef
+     * @param value vector of DependentMacroRef
      */
     public void setDependentMacroRef(String value)
     {
@@ -593,7 +592,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     /**
      * Sets attribute UserDisplay, default=Display
      *
-     * @param EnumUserDisplay value: the value to set the attribute to
+     * @param value the value to set the attribute to
      */
     public void setUserDisplay(EnumUserDisplay value)
     {
@@ -615,11 +614,12 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
       **************************************************************** */
     //@{
     /**
-     * Gets the iSkip-th element Loc. If doesn't exist, creates it
-     *
-     * @param int iSkip: number of elements to skip
+     * Gets the iSkip-th element Loc. If doesn't exist, it is created.
+     * <p>
+     * default: getCreateLoc(0)
+     * 
+     * @param iSkip number of elements to skip
      * @return JDFLoc: the matching element
-     * @default getCreateLoc(0);
      */
     public JDFLoc getCreateLoc(int iSkip)
     {
@@ -628,10 +628,11 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     
     /**
      * Gets the iSkip-th element Loc
+     * <p>
+     * default: getCreateLoc(0)
      *
-     * @param int iSkip: number of elements to skip
+     * @param iSkip number of elements to skip
      * @return JDFLoc: the matching element
-     * @default getLoc(0)
      */
     public JDFLoc getLoc(int iSkip)
     {
@@ -640,7 +641,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     }
     
     /**
-     * Appends element Loc to the end of 'this'
+     * Appends element Loc to the end of <code>this</code>
      *
      * @return JDFLoc: newly created Loc element
      */
@@ -649,18 +650,29 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
         return (JDFLoc) appendElement(ElementName.LOC, null);
     }
     
+    /**
+     * set attribute ID
+     * @param sid the value to set the attribute to
+     */
     public void setID(String sid)
     {
         setAttribute(AttributeName.ID,sid,null);        
     }
     
     
+    /**
+     * set attribute AllowedLength
+     * @param value the value to set the attribute to
+     */
     protected void setAllowedLength(JDFIntegerRange value)
     {
         setAttribute(AttributeName.ALLOWEDLENGTH, value.toString());
     }
-    
-    
+
+    /**
+     * get attribute AllowedLength
+     * @return JDFIntegerRange: the attribute value
+     */
     protected JDFIntegerRange getAllowedLength()
     {
         try
@@ -704,12 +716,12 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     
     /**
      * Mother of all version fixing routines
+     * <br>
+     * Uses heuristics to modify this element and its children to be compatible with a given version.
+     * In general, it will be able to move from low to high versions, but potentially fail 
+     * when attempting to move from higher to lower versions.
      *
-     * uses heuristics to modify this element and its children to be compatible with a given version
-     * in general, it will be able to move from low to high versions but potentially fail 
-     * when attempting to move from higher to lower versions
-     *
-     * @param version: version that the resulting element should correspond to
+     * @param version version that the resulting element should correspond to
      * @return true if successful
      */
     public boolean fixVersion(EnumVersion version){
@@ -719,11 +731,11 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     }
 
     /**
-     * fitsLength - tests, if the defined string 'str' matches 
+     * fitsLength - tests, if the defined String <code>str</code> matches 
      * AllowedLength or the PresentLength, specified for this State
      *
-     * @param String str - string to test
-     * @param EnumFitsValue length - Switches between AllowedLength and PresentLength.
+     * @param str    string to test
+     * @param length switches between AllowedLength and PresentLength.
      * @return boolean - true, if 'str' matches Length or if AllowedLength is not specified
      */
     protected final boolean fitsLength(String str, EnumFitsValue length)
@@ -752,7 +764,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
      * depending on the type of the state
      * 
      * @param element the parent in which to search
-     * @return Object either a String or AbstractSpan
+     * @return Object: either a String or AbstractSpan
      */
     public Object getMatchingObjectInNode(KElement element)
     {
@@ -798,10 +810,10 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     
     
     /**
-     * fitsListType - tests, if the defined 'value' matches value of ListType attribute,
+     * fitsListType - tests, if the defined <code>value</code> matches value of ListType attribute,
      * specified for this State
      *
-     * @param String value - value to test
+     * @param value value to test
      * 
      * @return boolean - true, if 'value' matches specified ListType
      */
@@ -873,10 +885,10 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     /**
     * Gets the j-th element Loc of the i-th element Value
     *
-    * @param int iSkip: number of Value elements to skip 
-    * ( iSkip=0 - first Value element)
-    * @param int jSkip: number of Loc subelements of i-th Value element to skip,
-    * ( jSkip=0 - first Loc element)
+    * @param iSkip number of Value elements to skip 
+    *              (iSkip=0 - first Value element)
+    * @param jSkip number of Loc subelements of i-th Value element to skip,
+    *              (jSkip=0 - first Loc element)
     * @return JDFLoc: the matching Loc element
     */
     public JDFLoc getValueLocLoc(int iSkip, int jSkip)
@@ -888,21 +900,20 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     }
 
     /**
-     * Appends element Loc to the end of the i-th subelement Value
+     * get iSkip'th element Loc
      *
-     * @param int iSkip: number of Value elements to skip 
-     * ( iSkip=0 - first Value element)
-     * @return JDFLoc: newly created Loc element
+     * @param iSkip number of Value elements to skip (iSkip=0 - get first element)
+     * @return JDFValueLoc: the element
      */
      final public JDFValueLoc getValueLoc(int iSkip)
      {
          return (JDFValueLoc) getElement(ElementName.VALUELOC,null,iSkip); 
      }
+     
     /**
-     * Appends element Loc to the end of the i-th subelement Value
+     * appends element Loc to the end of the i-th subelement Value
      *
-     * @param int iSkip: number of Value elements to skip 
-     * ( iSkip=0 - first Value element)
+     * @param iSkip number of Value elements to skip (iSkip=0 - first Value element)
      * @return JDFLoc: newly created Loc element
      */
      public JDFLoc appendValueLocLoc(int iSkip)
@@ -912,16 +923,62 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
              return null;
          return val.appendLoc();
      }
+     
      /**
       * Appends element ValueLoc 
       *
-      * @param int iSkip: number of Value elements to skip 
-        * @return JDFLoc: newly created Loc element
+      * @param iSkip number of Value elements to skip 
+      * @return JDFLoc: newly created Loc element
       */
       final public JDFValueLoc appendValueLoc()
       {
           return (JDFValueLoc) appendElement(ElementName.VALUELOC,null);
       }
+
+    /**
+     * fitsRegExp - checks whether <code>str</code> matches the
+     * AllowedRegExp/PresentRegExp specified for this State
+     *
+     * @param str    string to test
+     * @param regexp switches between AllowedRegExp and PresentRegExp.
+     * @return boolean - true, if <code>str</code> matches the RegExp or if AllowedRegExp is not specified
+     */
+    protected final boolean fitsRegExp(String str, EnumFitsValue regexp)
+    {
+        String rExp;
+        if (regexp.equals(EnumFitsValue.Allowed)) 
+        {
+            rExp = getAllowedRegExp();
+        } 
+        else 
+        {
+            rExp = getPresentRegExp();
+        }
+        if(rExp.length()==0)
+            return true; // if AllowedRegExp is not specified return true 
+
+        if (!StringUtil.matches(str,rExp))
+            return false;
+        return true;
+    }
+
+    /**
+     * @return
+     */
+    protected String getPresentRegExp()
+    {
+       // dummy - never used
+        return null;
+    }
+
+    /**
+     * @return
+     */
+    protected String getAllowedRegExp()
+    {
+        // dummy - never used
+        return null;
+    }
     
     /////////////////////////////////////////////
 }

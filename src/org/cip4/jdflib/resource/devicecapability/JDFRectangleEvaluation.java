@@ -102,7 +102,7 @@ public class JDFRectangleEvaluation extends JDFEvaluation
     static 
     {
         atrInfoTable[0]  = new AtrInfoTable(AttributeName.HWRELATION, 0x33333333, AttributeInfo.EnumAttributeType.XYRelation, null, null);
-        atrInfoTable[1]  = new AtrInfoTable(AttributeName.TOLERANCE,  0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
+        atrInfoTable[1]  = new AtrInfoTable(AttributeName.TOLERANCE,  0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
         atrInfoTable[2]  = new AtrInfoTable(AttributeName.VALUELIST,  0x33333333, AttributeInfo.EnumAttributeType.RectangleRangeList, null, null);
     }
 
@@ -113,8 +113,8 @@ public class JDFRectangleEvaluation extends JDFEvaluation
 
 
     /**
-     * constructor for JDFEvaluation
-     * @param ownerDocument
+     * JDFRectangleEvaluation
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFRectangleEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
@@ -123,9 +123,9 @@ public class JDFRectangleEvaluation extends JDFEvaluation
     }
 
     /**
-     * constructor for JDFEvaluation
-     * @param ownerDocument
-     * @param namespaceURI
+     * JDFRectangleEvaluation
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFRectangleEvaluation(
@@ -137,11 +137,11 @@ public class JDFRectangleEvaluation extends JDFEvaluation
     }
 
     /**
-     * constructor for JDFEvaluation
-     * @param ownerDocument
-     * @param namespaceURI
+     * JDFRectangleEvaluation
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFRectangleEvaluation(
         CoreDocumentImpl myOwnerDocument,
@@ -228,11 +228,11 @@ public class JDFRectangleEvaluation extends JDFEvaluation
     **************************************************************** */
     
     /**
-     * fitsValue - tests, if the defined 'value' matches testlists, 
+     * fitsValue - checks whether <code>value</code> matches the testlists 
      * specified for this Evaluation
      *
-     * @param String value - value to test
-     * @return boolean - true, if 'value' matches testlists or 
+     * @param value value to test
+     * @return boolean - true, if <code>value</code> matches the testlists or 
      * if testlists are not specified
      */
     public final boolean fitsValue(String value)
@@ -278,11 +278,11 @@ public class JDFRectangleEvaluation extends JDFEvaluation
     }
     
     /**
-     * fitsListType - tests, if the defined 'value' matches ListType attribute,
-     * specified for this Evaluation
+     * fitsListType - checks whether <code>value</code> matches the value of the 
+     * ListType attribute specified for this Evaluation
      *
-     * @param String value - value to test
-     * @return boolean - true, if 'value' matches specified value of ListType
+     * @param value value to test
+     * @return boolean - true, if <code>value</code> matches the specified value of ListType
      */
     private final boolean fitsListType(String value)
     {
@@ -357,11 +357,11 @@ public class JDFRectangleEvaluation extends JDFEvaluation
     }
     
     /**
-     * fitsValueList - tests, if the defined 'range' is in the ValueList, 
+     * fitsValueList - checks whether <code>range</code> is in the ValueList  
      * specified for this Evaluation
      *
-     * @param JDFRectangleRange range - range to test
-     * @return boolean - true, if 'range' is in the ValueList or 
+     * @param range range to test
+     * @return boolean - true, if <code>range</code> is in the ValueList or 
      * if ValueList is not specified
      */
     private final boolean fitsValueList(JDFRectangleRange range)
@@ -378,12 +378,12 @@ public class JDFRectangleEvaluation extends JDFEvaluation
     }
     
     /**
-     * fitsTolerance - tests, if this Evaluation has specified Tolerance 
-     * that it is not equal "0 0" and
-     * expands original range to the range, that fits Tolerance.
+     * fitsTolerance - checks whether this Evaluation has a specified Tolerance 
+     * that it is not equal to "0 0", and expands original the rangelist
+     * to the rangelist that fits Tolerance.
      *
-     * @param JDFRectangleRangeList rangeList - original range
-     * @return JDFRectangleRangeList -  expanded range, if Tolerance="0 0" returns original range
+     * @param rangeList original rangelist
+     * @return NumberRangeList - expanded rangelist, returns original range if Tolerance=="0 0" 
      */
     private JDFRectangleRangeList fitsTolerance(JDFRectangleRangeList origRangeList)
     {
@@ -437,11 +437,11 @@ public class JDFRectangleEvaluation extends JDFEvaluation
     }
     
     /**
-    * fitsHWRelation - tests, if the defined 'rect' value matches HWRelation,
+    * fitsHWRelation - checks whether <code>rect</code> value matches the HWRelation
     * specified for this Evaluation
     *
-    * @param JDFRectangle rect - rectangle value to test
-    * @return boolean - true, if 'rect' matches HWRelation or 
+    * @param rect rectangle value to test
+    * @return boolean - true, if <code>rect</code> matches HWRelation or 
     * if HWRelation is not specified
     */
      private final boolean fitsHWRelation(JDFRectangle rect)

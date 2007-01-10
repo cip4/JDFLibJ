@@ -982,7 +982,6 @@ public final class AttributeName
     public static final String OBLIGATED = "Obligated";
     public static final String OBSERVATIONPATH = "ObservationPath";
     public static final String OBSERVER = "Observer";
-    public static final String OCCURENCES = "Occurences";
     public static final String OCGDEFAULT = "OCGDefault";
     public static final String OCGINTENT = "OCGIntent";
     public static final String OCGPROCESS = "OCGProcess";
@@ -1031,10 +1030,10 @@ public final class AttributeName
     public static final String OVERFOLD = "Overfold";
     public static final String OVERFOLDSIDE = "OverfoldSide";
     public static final String OVERLAP = "Overlap";
-    public static final String OVERPRINTBLACKLINEART = "OverprintBlackLineArt";
-    public static final String OVERPRINTBLACKTEXT = "OverprintBlackText";
+    public static final String OVERPRINTBLACKLINEART = "OverPrintBlackLineArt";
+    public static final String OVERPRINTBLACKTEXT = "OverPrintBlackText";
     public static final String OVERPRINTFLAG = "OverprintFlag";
-    public static final String OVERPRINTMODE = "OverprintMode";
+    public static final String OVERPRINTMODE = "OverPrintMode";
     public static final String OVERWRITEPOLICY = "OverwritePolicy";
     public static final String OWNERSHIP = "Ownership";
     public static final String PACKAGING = "Packaging";
@@ -1703,4 +1702,5 @@ public final class AttributeName
     public static final String RESEND = "Resend";
     public static final String OCCURRENCES = "Occurrences";
     public static final String IMPLICITGUTTERMINIMUMLIMIT = "ImplicitGutterMinimumLimit";
+    public static final String PRINTTRAPANNOTATIONS = "PrintTrapAnnotations";
 }

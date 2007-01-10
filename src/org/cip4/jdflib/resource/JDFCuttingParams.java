@@ -22,11 +22,11 @@ public class JDFCuttingParams extends JDFAutoCuttingParams
 
     /**
      * Constructor for JDFCuttingParams
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      * @throws DOMException
      */
-     public JDFCuttingParams(
+    public JDFCuttingParams(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
         throws DOMException
@@ -34,11 +34,10 @@ public class JDFCuttingParams extends JDFAutoCuttingParams
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFCuttingParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      * @throws DOMException
      */
@@ -53,10 +52,10 @@ public class JDFCuttingParams extends JDFAutoCuttingParams
 
     /**
      * Constructor for JDFCuttingParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      * @throws DOMException
      */
     public JDFCuttingParams(
@@ -80,7 +79,7 @@ public class JDFCuttingParams extends JDFAutoCuttingParams
     }
     
     /**
-     * get the vector of implicitly define partition keys that MUST NOT be used in the resource
+     * get the vector of implicitly defined partition keys that MUST NOT be used in the resource
      */
     public Vector getImplicitPartitions()
     {

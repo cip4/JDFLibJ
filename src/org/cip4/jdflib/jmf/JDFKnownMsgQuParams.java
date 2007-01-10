@@ -21,27 +21,30 @@ import org.cip4.jdflib.auto.JDFAutoKnownMsgQuParams;
 
 
 //----------------------------------
+    /**
+     * specifies the message families to include in the response list
+     * of a KnownMessage query
+     */
     public class JDFKnownMsgQuParams extends JDFAutoKnownMsgQuParams
 {
     private static final long serialVersionUID = 1L;
 
     /**
      * Constructor for JDFKnownMsgQuParams
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFKnownMsgQuParams(
+    public JDFKnownMsgQuParams(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFKnownMsgQuParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFKnownMsgQuParams(
@@ -54,10 +57,10 @@ import org.cip4.jdflib.auto.JDFAutoKnownMsgQuParams;
 
     /**
      * Constructor for JDFKnownMsgQuParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFKnownMsgQuParams(
         CoreDocumentImpl myOwnerDocument,
@@ -68,6 +71,11 @@ import org.cip4.jdflib.auto.JDFAutoKnownMsgQuParams;
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
 
+    /**
+     * toString()
+     * @see org.cip4.jdflib.auto.JDFAutoKnownMsgQuParams#toString()
+     * @return String
+     */
     public String toString()
     {
         return "JDFKnownMsgQuParams[  --> " + super.toString() + " ]";

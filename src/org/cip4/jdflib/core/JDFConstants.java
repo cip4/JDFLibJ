@@ -108,7 +108,7 @@ public abstract class JDFConstants
     public static final String XMLNS                = "xmlns";
     public static final String XSI                  = "xsi";
     
-    public static final String NULL                 = "null";
+    /** @deprecated use null (not "null") */  public static final String NULL = "null";
     public static final String TRUE                 = "true";
     public static final String FALSE                = "false";
     
@@ -422,6 +422,7 @@ public abstract class JDFConstants
     public static final String TYPE_COLORSPACECONVERSION    = "ColorSpaceConversion";
     public static final String TYPE_CONTACTCOPYING          = "ContactCopying";
     public static final String TYPE_CONTONECALIBRATION      = "ContoneCalibration";
+    public static final String TYPE_CYLINDERLAYOUTPREPARATION = "CylinderLayoutPreparation";
     public static final String TYPE_DBDOCTEMPLATELAYOUT     = "DBDocTemplateLayout";
     public static final String TYPE_DBTEMPLATEMERGING       = "DBTemplateMerging";
     public static final String TYPE_DIGITALDELIVERY         = "DigitalDelivery";
@@ -435,10 +436,12 @@ public abstract class JDFConstants
     public static final String TYPE_LAYOUTELEMENTPRODUCTION = "LayoutElementProduction";
     public static final String TYPE_LAYOUTPREPARATION       = "LayoutPreparation";
     public static final String TYPE_PDFTOPSCONVERSION       = "PDFToPSConversion";
+    public static final String TYPE_PDLCREATION             = "PDLCreation";
     public static final String TYPE_PREFLIGHT               = "Preflight";
     public static final String TYPE_PREVIEWGENERATION       = "PreviewGeneration";
     public static final String TYPE_PROOFING                = "Proofing";
     public static final String TYPE_PSTOPDFCONVERSION       = "PSToPDFConversion";
+    public static final String TYPE_RASTERREADING           = "RasterReading";
     public static final String TYPE_RENDERING               = "Rendering";
     public static final String TYPE_SCANNING                = "Scanning";
     public static final String TYPE_SCREENING               = "Screening";
@@ -496,6 +499,7 @@ public abstract class JDFConstants
     public static final String TYPE_THREADSEALING           = "ThreadSealing";
     public static final String TYPE_THREADSEWING            = "ThreadSewing";
     public static final String TYPE_TRIMMING                = "Trimming";
+    public static final String TYPE_WEBINLINEFINISHING      = "WebInlineFinishing";
     public static final String TYPE_WIRECOMBBINDING         = "WireCombBinding";
     public static final String TYPE_WRAPPING                = "Wrapping";
     public static final String TYPE_COMBINED                = "Combined";

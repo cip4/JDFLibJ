@@ -134,10 +134,9 @@ public class JDFMatrixState extends JDFAbstractState
         return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
     }
 
-
     /**
      * constructor for JDFMatrixState
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFMatrixState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
@@ -147,8 +146,8 @@ public class JDFMatrixState extends JDFAbstractState
 
     /**
      * constructor for JDFMatrixState
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFMatrixState(
@@ -160,11 +159,10 @@ public class JDFMatrixState extends JDFAbstractState
     }
 
     /**
-     * constructor for JDFMatrixState
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFMatrixState(
         CoreDocumentImpl myOwnerDocument,
@@ -352,10 +350,10 @@ public class JDFMatrixState extends JDFAbstractState
     }
     
     /**
-    * Appends element Loc to the end of the i-th subelement Value
+    * Appends element Loc to the end of the iSkip'th subelement Value
     *
-    * @param int iSkip: number of Value elements to skip 
-    * ( iSkip=0 - first Value element)
+    * @param iSkip number of Value elements to skip 
+    *              (iSkip=0 - first Value element)
     * @return JDFLoc: newly created Loc element
     */
     public JDFLoc appendValueLocLoc(int iSkip)
@@ -371,10 +369,10 @@ public class JDFMatrixState extends JDFAbstractState
     **************************************************************** */
 
     /** 
-     * Sets the AllowedValue attribute of the i-th subelement Value
+     * Sets the AllowedValue attribute of the iSkip'th subelement Value
      *
-     * @param int iSkip: the number of Value elements to skip
-     * @param JDFMatrix value: value to set the attribute to
+     * @param iSkip the number of Value elements to skip
+     * @param value value to set the attribute to
      */
     public void setValueAllowedValue(int iSkip, JDFMatrix value)
     {
@@ -383,9 +381,9 @@ public class JDFMatrixState extends JDFAbstractState
     }
     
     /**
-     * Gets the AllowedValue attribute of the i-th subelement Value
+     * Gets the AllowedValue attribute of the iSkip'th subelement Value
      *
-     * @param int iSkip: the number of Value elements to skip
+     * @param iSkip the number of Value elements to skip
      * @return JDFMatrix: the attribute value
      */
     public final JDFMatrix getValueAllowedValue(int iSkip) 
@@ -405,10 +403,10 @@ public class JDFMatrixState extends JDFAbstractState
     
     
     /**
-    * Sets the ValueUsage attribute of the i-th subelement Value
+    * Sets the ValueUsage attribute of the iSkip'th subelement Value
     *
-    * @param int iSkip: the number of Value elements to skip
-    * @param EnumFitsValue value: value to set the attribute to
+    * @param iSkip the number of Value elements to skip
+    * @param value value to set the attribute to
     */
     public void setValueValueUsage(int iSkip, EnumFitsValue value)
     {
@@ -417,9 +415,9 @@ public class JDFMatrixState extends JDFAbstractState
     }
     
     /**
-    * Gets the value of attribute ValueUsage of the i-th subelement Value
+    * Gets the value of attribute ValueUsage of the iSkip'th subelement Value
     *
-    * @param int iSkip: the number of Value elements to skip
+    * @param iSkip the number of Value elements to skip
     * @return EnumFitsValue: the attribute value
     */
     public final EnumFitsValue getValueValueUsage(int iSkip) 
@@ -434,12 +432,12 @@ public class JDFMatrixState extends JDFAbstractState
     **************************************************************** */
     
     /**
-     * fitsValue - tests, if the defined value matches Allowed test lists or Present test lists,
+     * fitsValue - checks whether <code>value</code> matches the Allowed test lists or Present test lists
      * specified for this State
      *
-     * @param String value - value to test
-     * @param EnumFitsValue tetlists - test lists, that the value has to match.
-     * In this State the test lists are RotateMod, Shift, Transforms and ValueElem. 
+     * @param value     value to test
+     * @param testlists the test lists the value has to match.
+     * In this State the test lists are RotateMod, Shift, Transforms and ValueElem.<br> 
      * Choose one of two values: FitsValue_Allowed or FitsValue_Present. (Defaults to Allowed)
      * 
      * @return boolean - true, if the value matches all test lists or if Allowed test lists are not specified
@@ -497,10 +495,10 @@ public class JDFMatrixState extends JDFAbstractState
     }
         
     /**
-     * fitsListType - tests, if the defined 'value' matches value of ListType attribute,
-     * specified for this State
+     * fitsListType - checks whether <code>matrixList</code> matches the value of the ListType 
+     * attribute specified for this State
      *
-     * @param VString value - vector of matrices to test
+     * @param matrixList vector of matrices to test
      * 
      * @return boolean - true, if 'value' matches specified ListType
      */
@@ -558,14 +556,13 @@ public class JDFMatrixState extends JDFAbstractState
     
     
     /**
-     * fitsValueElem - tests, if the defined JDFMatrix 'matrix' matches 
+     * fitsValueElem - tests, if JDFMatrix <code>matrix</code> matches 
      * subelement Value, specified for this State
      *
-     * @param JDFMatrix matrix - JDFMatrix to test
-     * @param EnumFitsValue valueusage - Switches between 
-     * Allowed and Present configuration in subelement Value.
+     * @param matrix    JDFMatrix to test
+     * @param valuelist switches between Allowed and Present configuration in subelement Value.
      * 
-     * @return boolean - true, if 'matrix' matches subelement Value 
+     * @return boolean - true, if <code>matrix</code> matches subelement Value 
      */
     private final boolean fitsValueElem(JDFMatrix matrix, EnumFitsValue valuelist)
     {
@@ -599,12 +596,12 @@ public class JDFMatrixState extends JDFAbstractState
     }
     
     /**
-     * fitsRotateMod - tests, if the defined 'matrix' matches 
+     * fitsRotateMod - checks whether matrix matches 
      * the AllowedRotateMod or PresentRotateMod, specified for this State
      *
-     * @param JDFMatrix matrix - matrix to test
-     * @param EnumFitsValue rotatemod - Switches between AllowedRotateMod and PresentRotateMod.
-     * @return boolean - true, if 'matrix' matches the RotateMod or if AllowedRotateMod is not specified
+     * @param matrix    matrix to test
+     * @param rotatemod switches between AllowedRotateMod and PresentRotateMod.
+     * @return boolean - true, if <code>matrix</code> matches the RotateMod or if AllowedRotateMod is not specified
      */
     private final boolean fitsRotateMod(JDFMatrix matrix, EnumFitsValue rotatemod)
     {
@@ -662,12 +659,12 @@ public class JDFMatrixState extends JDFAbstractState
     
 
     /**
-     * fitsShift - tests, if the defined 'matrix' matches 
-     * the AllowedShift or PresentShift, specified for this State
+     * fitsShift - checks whether <code>matrix</code> matches 
+     * the AllowedShift or PresentShift specified for this State
      *
-     * @param JDFMatrix matrix - matrix to test
-     * @param EnumFitsValue shift - Switches between AllowedShift and PresentShift.
-     * @return boolean - true, if 'matrix' matches the Shift or if AllowedShift is not specified
+     * @param matrix matrix to test
+     * @param shift  switches between AllowedShift and PresentShift.
+     * @return boolean - true, if <code>matrix</code> matches the Shift or if AllowedShift is not specified
      */
     private final boolean fitsShift(JDFMatrix matrix, EnumFitsValue shift)
     {
@@ -708,12 +705,12 @@ public class JDFMatrixState extends JDFAbstractState
     //////////////////////////////////////////////////////////////////////
     
     /**
-     * fitsTransforms - tests, if the defined 'matrix' matches 
+     * fitsTransforms - checks whether <code>matrix</code> matches 
      * the AllowedTransforms or PresentTransforms, specified for this State
      *
-     * @param JDFMatrix matrix - matrix to test
-     * @param EnumFitsValue transforms - Switches between AllowedTransforms and PresentTransforms.
-     * @return boolean - true, if 'matrix' matches the Transforms or if AllowedTransforms is not specified
+     * @param matrix     matrix to test
+     * @param transforms switches between AllowedTransforms and PresentTransforms.
+     * @return boolean - true, if <code>matrix</code> matches the Transforms or if AllowedTransforms is not specified
      */
     private final boolean fitsTransforms(JDFMatrix matrix, EnumFitsValue transforms)
     {

@@ -89,22 +89,21 @@ public class JDFModulePool extends JDFElement
     private static final long serialVersionUID = 1L;
 
     /**
-     * Constructor for JDFModulePool
-     * @param ownerDocument
+     * Constructor for JDFModulePool 
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFModulePool(
+    public JDFModulePool(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFModulePool
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFModulePool(
@@ -117,10 +116,10 @@ public class JDFModulePool extends JDFElement
 
     /**
      * Constructor for JDFModulePool
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFModulePool(
         CoreDocumentImpl myOwnerDocument,
@@ -143,10 +142,10 @@ public class JDFModulePool extends JDFElement
     
     
     /** 
-     * getCreateModule
+     * get iSkip'th element <code>Module</code>, create if it doesn't exist
      * 
-     * @param int iSkip number of elements to skip
-     * @return JDFModule 
+     * @param iSkip number of elements to skip (0 -> get first Module)
+     * @return JDFModule - the element
      */
     public JDFModule getCreateModule(int iSkip)
     {
@@ -155,10 +154,12 @@ public class JDFModulePool extends JDFElement
 
 
     /**
-     * get element Module
-     * @param int iSkip - number of elements to skip
-     * @return JDFModule 
-     * default is getModule(0)     
+     * get iSkip'th element Module
+     * <p>
+     * default: getModule(0)
+     *      
+     * @param iSkip number of elements to skip (0 -> get first module)
+     * @return JDFModule
      */
     public JDFModule getModule(int iSkip)
     {

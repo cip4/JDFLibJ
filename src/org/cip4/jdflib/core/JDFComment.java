@@ -87,7 +87,7 @@ public class JDFComment extends JDFAutoComment
     
     /**
      * Constructor for JDFComment
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFComment(
@@ -110,8 +110,8 @@ public class JDFComment extends JDFAutoComment
     
     /**
      * Constructor for JDFComment
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFComment(
@@ -124,10 +124,10 @@ public class JDFComment extends JDFAutoComment
     
     /**
      * Constructor for JDFComment
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFComment(
             CoreDocumentImpl myOwnerDocument,
@@ -167,11 +167,11 @@ public class JDFComment extends JDFAutoComment
     /**
      * version fixing routine for JDF
      *
-     * uses heuristics to modify this element and its children to be compatible with a given version
+     * uses heuristics to modify this element and its children to be compatible with a given version<br>
      * in general, it will be able to move from low to high versions but potentially fail 
      * when attempting to move from higher to lower versions
      *
-     * @param version: version that the resulting element should correspond to
+     * @param version version that the resulting element should correspond to
      * @return true if successful
      */
     public boolean fixVersion(EnumVersion version)
@@ -193,4 +193,17 @@ public class JDFComment extends JDFAutoComment
         }
         return super.fixVersion(version);
     }
+    /**
+     * Erases all empty text nodes in 'this' and its subelements 
+     * If there any empty text nodes removes them.
+     * If bTrimWhite is true, then trims white spaces from both 
+     * ends of a text node and only then, if it is empty, removes it
+     *
+     * @param bTrimWhite trims whitespace of text, default = true
+     * @return int       the number of removed nodes  
+     */
+    public int eraseEmptyNodes(boolean bTrimWhite)
+    {
+        return bTrimWhite ? 0 : 0; //retain whitespace in comments
+    }    
 }

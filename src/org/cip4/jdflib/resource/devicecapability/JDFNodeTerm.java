@@ -138,16 +138,16 @@ abstract public class JDFNodeTerm extends JDFTerm
     ////////////////////////////////////////////////////////////////////////////////
 
     /**
-     * get the iSkipth Term of type term, do not create it if it does not exist
-     * @param term type of term to append
+     * get the iSkip'th Term of type term, do not create it if it does not exist
+     * @param term  type of term to append
      * @param iSkip number of terms to skip, 0 is the first
-     * @return JDFTerm the requested term, null if none exists
+     * @return JDFTerm - the requested term, <code>null</code> if none exists
      */
     public JDFTerm getTerm(EnumTerm term, int iSkip)
     {
         if(term!=null)
         {
-            return (JDFNameEvaluation)getElement(term.getName(), null, iSkip);
+            return (JDFTerm)getElement(term.getName(), null, iSkip);
         }
         Node e=getFirstChild();
         int n=0;
@@ -165,10 +165,10 @@ abstract public class JDFNodeTerm extends JDFTerm
     }
 
     /**
-     * get the iSkipth Term of type term, create it if it does not exist
-     * @param term type of term to append
+     * get the iSkip'th Term of type <code>term</code>, create it if it does not exist
+     * @param term  type of term to append
      * @param iSkip number of terms to skip, 0 is the first
-     * @return JDFTerm the requested term
+     * @return JDFTerm - the requested term
      */
     public JDFTerm getCreateTerm(EnumTerm term, int iSkip)
     {
@@ -177,7 +177,7 @@ abstract public class JDFNodeTerm extends JDFTerm
     }
 
     /**
-     * append a Term as defeined by term
+     * append a Term as defined by <code>term</code>
      * @param term type of term to append
      * @return JDFTerm the appended term
      */
@@ -189,7 +189,7 @@ abstract public class JDFNodeTerm extends JDFTerm
 
     /**
      * check whether the boolean logic defined by a Test and a test's subelements
-     * makes sense in the context of the tested element jdf
+     * make sense in the context of the tested element jdf
      */
     public boolean fitsContext(KElement testElement)
     {
@@ -222,7 +222,7 @@ abstract public class JDFNodeTerm extends JDFTerm
     }
     /**
      * gets a vector of all terms
-     * @return
+     * @return VElement - vector of JDFTerm
      */
     public VElement getTermVector(EnumTerm term)
     {
@@ -245,9 +245,9 @@ abstract public class JDFNodeTerm extends JDFTerm
     }
     
     /**
-     * gets the nTh term
-     * @param int iSkip the number of terms tos skip
-     * @return JDFTerm the nTh Term
+     * gets the iSkip'th term
+     * @param iSkip the number of terms tos skip
+     * @return JDFTerm - the iSkip'th Term
      * @deprecated
      */
     public JDFTerm getTerm(int iSkip)

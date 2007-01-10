@@ -21,27 +21,29 @@ import org.cip4.jdflib.auto.JDFAutoJDFService;
 
 
 //----------------------------------
+    /**
+     * JDFService elements define the node types that can be processed by the controller
+     */
     public class JDFJDFService extends JDFAutoJDFService
 {
     private static final long serialVersionUID = 1L;
 
     /**
      * Constructor for JDFJDFService
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFJDFService(
+    public JDFJDFService(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFJDFService
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFJDFService(
@@ -54,10 +56,10 @@ import org.cip4.jdflib.auto.JDFAutoJDFService;
 
     /**
      * Constructor for JDFJDFService
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFJDFService(
         CoreDocumentImpl myOwnerDocument,
@@ -68,6 +70,11 @@ import org.cip4.jdflib.auto.JDFAutoJDFService;
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
 
+    /**
+     * toString()
+     * @see org.cip4.jdflib.auto.JDFAutoJDFService#toString()
+     * return String
+     */
     public String toString()
     {
         return "JDFJDFService[  --> " + super.toString() + " ]";

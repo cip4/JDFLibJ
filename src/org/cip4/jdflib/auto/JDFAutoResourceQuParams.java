@@ -70,12 +70,8 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -87,6 +83,7 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.resource.JDFPart;
+import org.cip4.jdflib.resource.JDFResource;
     /*
     *****************************************************************************
     class JDFAutoResourceQuParams : public JDFElement
@@ -102,7 +99,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
     private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[10];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CLASSES, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumClasses.getEnum(0), null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.CLASSES, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, JDFResource.EnumResourceClass.getEnum(0), null);
         atrInfoTable[1] = new AtrInfoTable(AttributeName.EXACT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
         atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
         atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
@@ -182,56 +179,6 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
     }
 
 
-        /**
-        * Enumeration strings for Classes
-        */
-
-        public static class EnumClasses extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
-
-            private EnumClasses(String name)
-            {
-                super(name, m_startValue++);
-            }
-
-            public static EnumClasses getEnum(String enumName)
-            {
-                return (EnumClasses) getEnum(EnumClasses.class, enumName);
-            }
-
-            public static EnumClasses getEnum(int enumValue)
-            {
-                return (EnumClasses) getEnum(EnumClasses.class, enumValue);
-            }
-
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumClasses.class);
-            }
-
-            public static List getEnumList()
-            {
-                return getEnumList(EnumClasses.class);
-            }
-
-            public static Iterator iterator()
-            {
-                return iterator(EnumClasses.class);
-            }
-
-            public static final EnumClasses Consumable = new EnumClasses("Consumable");
-            public static final EnumClasses Handling = new EnumClasses("Handling");
-            public static final EnumClasses Implementation = new EnumClasses("Implementation");
-            public static final EnumClasses Intent = new EnumClasses("Intent");
-            public static final EnumClasses Parameter = new EnumClasses("Parameter");
-            public static final EnumClasses PlaceHolder = new EnumClasses("PlaceHolder");
-            public static final EnumClasses Quantity = new EnumClasses("Quantity");
-        }      
-
-
-
 /* ************************************************************************
  * Attribute getter / setter
  * ************************************************************************
@@ -257,7 +204,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
           */
         public Vector getClasses()
         {
-            return getEnumerationsAttribute(AttributeName.CLASSES, null, EnumClasses.getEnum(0), false);
+            return getEnumerationsAttribute(AttributeName.CLASSES, null, JDFResource.EnumResourceClass.getEnum(0), false);
         }
 
 

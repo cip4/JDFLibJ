@@ -93,7 +93,7 @@ public abstract class JDFTerm extends JDFElement
     private static final long serialVersionUID = 6785589345368148259L;
     
     /**
-     * Constructor for JDFand
+     * Constructor for JDFTerm
      * @param myOwnerDocument
      * @param qualifiedName
      * @throws DOMException
@@ -107,7 +107,7 @@ public abstract class JDFTerm extends JDFElement
     }
     
     /**
-     * Constructor for JDFand
+     * Constructor for JDFTerm
      * @param myOwnerDocument
      * @param myNamespaceURI
      * @param qualifiedName
@@ -123,7 +123,7 @@ public abstract class JDFTerm extends JDFElement
     }
     
     /**
-     * Constructor for JDFand
+     * Constructor for JDFTerm
      * @param myOwnerDocument
      * @param myNamespaceURI
      * @param qualifiedName
@@ -141,31 +141,32 @@ public abstract class JDFTerm extends JDFElement
     }
     
     /**
-     * Evaluates the boolean expression (child Term element) if it fits the JDFNode 'jdf'
+     * Evaluates the boolean expression (child Term element): 
+     * checks whether it fits <code>jdf</code>
      *
-     * @param  jdf - JDFNode we test to know if the Device can accept it
-     * @param reportRoot the report to generate; set to null if no report is requested
+     * @param jdf        JDFNode to test to know if the Device can accept it
+     * @param reportRoot the report to generate; set to <code>null</code> if no report is requested
      * @return boolean - true, if boolean expression (child Term element) evaluates to “true”
      */
     public abstract boolean fitsJDF(KElement jdf, KElement reportRoot); // const JDFNode
     
     /**
      * checks the xpath whether this term applies
-     * @param jdf
-     * @return
+     * @param jdf the KElement to check
+     * @return boolean
      */
     public abstract boolean fitsContext(KElement jdf);
     
     /**
-     * Tests whether this Term is compatible with the attribute map m 
-     * (and, or, xor, not, Evaluation, TestRef)
+     * Tests whether this Term is compatible with the attribute map <code>m</code> 
+     * (and, or, xor, not, Evaluation, TestRef).<br>
      * To determine the state of Term tests Evaluations that “not” consists of, 
-     * checks if attribute map 'm' has a key, 
+     * this method checks if attribute map <code>m</code> has a key. 
      * specified by Evaluation/BasicPreflightTest/@Name
-     * and if 'm' has such key, checks if its value fits testlists,
-     * specified for matching Evaluation (uses FitsValue(value))
+     * If <code>m</code> has such key, it checks whether the value of <code>m#</code> 
+     * fits the testlists specified for matching Evaluation (uses FitsValue(value))
      *
-     * @param JDFAttributeMap m -  key-value pair attribute map
+     * @param m key-value pair attribute map
      * @return boolean - true, if boolean “not” expression evaluates to “true”
      */
     public abstract boolean fitsMap(JDFAttributeMap m); 

@@ -83,6 +83,7 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.util.StringUtil;
 
 
 public class JDFNameSpan extends JDFSpanBase
@@ -213,7 +214,7 @@ public class JDFNameSpan extends JDFSpanBase
      */
     public void setRange( VString vs)
     {
-		setAttribute(AttributeName.RANGE, vs.getString(" ",null,null), null);
+		setAttribute(AttributeName.RANGE, StringUtil.setvString(vs," ",null,null), null);
 	}
     
     /**

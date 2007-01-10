@@ -99,7 +99,7 @@ public abstract class JDFPool extends JDFElement
 
     /**
      * Constructor for JDFPool
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFPool(
@@ -111,8 +111,8 @@ public abstract class JDFPool extends JDFElement
 
     /**
      * Constructor for JDFPool
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFPool(
@@ -125,10 +125,10 @@ public abstract class JDFPool extends JDFElement
 
     /**
      * Constructor for JDFPool
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFPool(
         CoreDocumentImpl myOwnerDocument,
@@ -152,13 +152,14 @@ public abstract class JDFPool extends JDFElement
     }
 
   /**
-    * Gets all children with the attribute name,mAttrib, nameSpaceURI out of the pool
-    * @param String name: name of the Child
-    * @param JDFAttributeMap mAttrib: a attribute to search for
-    * @param String nameSpaceURI: in which nameSpaceURI you want to search
-    * @return VElement: a vector with all elements in the pool matching the conditions
-    * 
+    * Gets all children with the attributes <code>name, mAttrib, nameSpaceURI</code> from the pool
+    * <p>
     * default: GetPoolChildrenGeneric (JDFConstants.EMPTYSTRING, new JDFAttributeMap(), JDFConstants.EMPTYSTRING)
+    * 
+    * @param name         name of the Child
+    * @param mAttrib      the attribute to search for
+    * @param nameSpaceURI nameSpaceURI to search in
+    * @return VElement: a vector with all elements in the pool matching the conditions
     */
     protected VElement getPoolChildrenGeneric (String strName, JDFAttributeMap mAttrib, String nameSpaceURI)
     {
@@ -178,10 +179,10 @@ public abstract class JDFPool extends JDFElement
    /**
     * get a child from the pool matching the parameters
     *
-    * @param int i: the index of the child or -1 to make a new one.
-    * @param KString name: the name of the element
-    * @param mAttribute mAttrib: the attribute of the element
-    * @param String nameSpaceURI: the namespace to search in
+    * @param i            the index of the child, or -1 to make a new one.
+    * @param name         the name of the element
+    * @param mAttrib      the attribute of the element
+    * @param nameSpaceURI the namespace to search in
     * @return JDFElement: the pool child matching the above conditions
     * 
     * default: GetPoolChildGeneric (i, JDFConstants.EMPTYSTRING, null, JDFConstants.EMPTYSTRING)
@@ -206,7 +207,7 @@ public abstract class JDFPool extends JDFElement
         
     /**
     * Append a new child if no identical child exists
-    * @param JDFElement p: the Child to add to the element
+    * @param p the Child to add to the element
     */
     protected void appendUniqueGeneric(JDFElement p)
     {
@@ -218,7 +219,7 @@ public abstract class JDFPool extends JDFElement
 
    /**
     * Append all children of p for which no identical child exists
-    * @param JDFPool p: the Child to add to the element
+    * @param p the Child to add to the element
     */
     protected void appendUniqueGeneric(JDFPool p)
     {

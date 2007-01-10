@@ -158,7 +158,7 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo
 	
 	/**
 	 * Constructor for JDFCustomerInfo
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
 	public JDFCustomerInfo(
@@ -167,11 +167,11 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
-	
+
 	/**
 	 * Constructor for JDFCustomerInfo
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
 	public JDFCustomerInfo(
@@ -181,13 +181,13 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
-	
+
 	/**
 	 * Constructor for JDFCustomerInfo
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @param localName
+	 * @param myLocalName
 	 */
 	public JDFCustomerInfo(
 			CoreDocumentImpl myOwnerDocument,
@@ -218,10 +218,10 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo
 	
 	/**
 	 * Get the linked resources matching some conditions
-	 * @param JDFAttributeMap mResAtt   map of Resource attributes to search for
-	 * @param boolean bFollowRefs       true if internal references shall be followed
+	 * @param mResAtt     map of Resource attributes to search for
+	 * @param bFollowRefs true if internal references shall be followed
 	 * 
-	 * @return VResource                vector with all elements matching the conditions
+	 * @return VResource - vector with all elements matching the conditions
 	 * 
 	 * default: GetLinkedResources(new JDFAttributeMap(), false)
 	 */
@@ -258,7 +258,7 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo
     /**
      * get a Contact with at least one contacttype set
      * @param contactType the contatcttype string
-     * @param iSkip, number of occurrences to skip - if 0 take the first
+     * @param iSkip       number of occurrences to skip - if 0 take the first
      * @return a matching JDFContact, null if none are found
      */
     public JDFContact getContactWithContactType(String contactType,int iSkip)
@@ -268,8 +268,8 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo
     
     ///////////////////////////////////////////////////////////////////////////////////
     /**
-     * get a list of Contacts with at least one contacttype set
-     * @param contactType the contatcttype string
+     * get a list of contacts with at least one contacttype set
+     * @param contactType the contatcttype to look for
      * @return VElement the vector of matching JDFContacts, null if none are found
      */
     public VElement getContactVectorWithContactType(String contactType)
@@ -297,7 +297,7 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo
      * in general, it will be able to move from low to high versions but potentially fail 
      * when attempting to move from higher to lower versions
      *
-     * @param version: version that the resulting element should correspond to
+     * @param version version that the resulting element should correspond to
      * @return true if successful
      */
     public boolean fixVersion(EnumVersion version)

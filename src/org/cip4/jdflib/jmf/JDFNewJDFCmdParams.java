@@ -92,21 +92,20 @@ public class JDFNewJDFCmdParams extends JDFAutoNewJDFCmdParams
 
     /**
      * Constructor for JDFNewJDFCmdParams
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFNewJDFCmdParams(
+    public JDFNewJDFCmdParams(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFNewJDFCmdParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFNewJDFCmdParams(
@@ -118,11 +117,10 @@ public class JDFNewJDFCmdParams extends JDFAutoNewJDFCmdParams
     }
 
     /**
-     * Constructor for JDFNewJDFCmdParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFNewJDFCmdParams(
         CoreDocumentImpl myOwnerDocument,

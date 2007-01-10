@@ -24,10 +24,10 @@ import org.cip4.jdflib.auto.JDFAutoModifyNodeCmdParams;
 public class JDFModifyNodeCmdParams extends JDFAutoModifyNodeCmdParams
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Constructor for JDFModifyNodeCmdParams
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
 	public JDFModifyNodeCmdParams(
@@ -36,12 +36,11 @@ public class JDFModifyNodeCmdParams extends JDFAutoModifyNodeCmdParams
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
-	
-	
+
 	/**
 	 * Constructor for JDFModifyNodeCmdParams
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
 	public JDFModifyNodeCmdParams(
@@ -51,13 +50,13 @@ public class JDFModifyNodeCmdParams extends JDFAutoModifyNodeCmdParams
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
-	
+
 	/**
 	 * Constructor for JDFModifyNodeCmdParams
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @param localName
+	 * @param myLocalName
 	 */
 	public JDFModifyNodeCmdParams(
 			CoreDocumentImpl myOwnerDocument,
@@ -68,6 +67,9 @@ public class JDFModifyNodeCmdParams extends JDFAutoModifyNodeCmdParams
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.cip4.jdflib.auto.JDFAutoModifyNodeCmdParams#toString()
+	 */
 	public String toString()
 	{
 		return "JDFModifyNodeCmdParams[  --> " + super.toString() + " ]";

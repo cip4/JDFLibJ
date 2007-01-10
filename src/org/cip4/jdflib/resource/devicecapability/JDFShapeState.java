@@ -137,10 +137,9 @@ public class JDFShapeState extends JDFAbstractState
         return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
     }
 
-
     /**
      * constructor for JDFShapeState
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFShapeState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
@@ -150,8 +149,8 @@ public class JDFShapeState extends JDFAbstractState
 
     /**
      * constructor for JDFShapeState
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFShapeState(
@@ -164,10 +163,10 @@ public class JDFShapeState extends JDFAbstractState
 
     /**
      * constructor for JDFShapeState
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFShapeState(
         CoreDocumentImpl myOwnerDocument,
@@ -487,16 +486,16 @@ public class JDFShapeState extends JDFAbstractState
     **************************************************************** */
 
     /**
-     * fitsValue - tests, if the defined value matches Allowed test lists or Present test lists,
+     * fitsValue - checks whether <code>value</code> matches the Allowed/Present test lists
      * specified for this State
      *
-     * @param String value - value to test
-     * @param EnumFitsValue testlists - test lists, that the value has to match.
-     * In this State the test lists are ValueList, X, Y, Z. 
+     * @param value     value to test
+     * @param testlists the test lists the value has to match.
+     * In this State the test lists are ValueList AND ValueMod.<br> 
      * Choose one of two values: FitsValue_Allowed or FitsValue_Present. (Defaults to Allowed)
      * 
-     * @return boolean - true, if the value matches testlists or if 
-     * AllowedValueList, AllowedX, AllowedY and AllowedZ are not specified
+     * @return boolean - true, if <code>value</code> matches testlists or 
+     *         if AllowedValueList and AllowedValueMod are not specified
      */
     public boolean fitsValue(String value, EnumFitsValue testlists)
     {
@@ -518,13 +517,14 @@ public class JDFShapeState extends JDFAbstractState
     }
     
     /**
-     * fitsValueList - tests, if the defined 'rangelist' matches 
-     * the AllowedValueList or in the PresentValueList, specified for this State
+     * fitsValueList - checks whether <code>rangelist</code> matches 
+     * the AllowedValueList/PresentValueList specified for this State
      *
-     * @param JDFShapeRangeList rangelist - range list to test
-     * @param EnumFitsValue valuelist - Switches between AllowedValueList and PresentValueList.
+     * @param rangelist range list to test
+     * @param valuelist switches between AllowedValueList and PresentValueList.
      * 
-     * @return boolean - true, if 'rangelist' matches the valuelist or if AllowedValueList is not specified
+     * @return boolean - true, if <code>rangelist</code> matches the valuelist or 
+     *         if AllowedValueList is not specified
      */
     private final boolean fitsValueList(JDFShapeRangeList rangelist, EnumFitsValue valuelist)
     {
@@ -566,13 +566,13 @@ public class JDFShapeState extends JDFAbstractState
     }
     
     /**
-     * fitsXYZ - tests, if the defined 'rangelist' matches the 
-     * AllowedX, AllowedY, AllowedZ or the PresentX, PresentY, PresentZ,
+     * fitsXYZ - checks whether <code>rangelist</code> matches the 
+     * (AllowedX, AllowedY, AllowedZ) or (PresentX, PresentY, PresentZ) values 
      * specified for this State
      *
-     * @param JDFShapeRangeList rangelist - range list to test
-     * @param EnumFitsValue xyzlist - Switches between AllowedX, AllowedY, AllowedZ 
-     * and PresentX, PresentY, PresentZ.
+     * @param rangelist range list to test
+     * @param xyzlist   switches between (AllowedX, AllowedY, AllowedZ) 
+     *                  and (PresentX, PresentY, PresentZ).
      * @return boolean - true, if the 'rangelist' matches xyzlist or if AllowedX, AllowedY, AllowedZ are not specified
      */
      private boolean fitsXYZ (JDFShapeRangeList rangelist, EnumFitsValue xyzlist) 
@@ -639,14 +639,12 @@ public class JDFShapeState extends JDFAbstractState
     }
      
     /**
-     * fitsCompleteList - tests for the case, when ListType=CompleteList,
-     * if the defined 'value' matches AllowedValueList or PresentValueList,
-     * specified for this State
+     * fitsCompleteList - tests whether <code>value</code> matches the given testlist
+     * (ListType=fitsCompleteList)
      *
-     * @param JDFShapeRangeList value - value to test
-     * @param JDFShapeRangeList list - testlist are either AllowedValueList or PresentValueList.
+     * @param value value to test
+     * @param list  testlist, either AllowedValueList or PresentValueList.
      * 
-     * @return boolean - true, if 'value' matches testlist
      */
     private final boolean fitsCompleteList(JDFShapeRangeList value, JDFShapeRangeList list)
     {
@@ -683,15 +681,14 @@ public class JDFShapeState extends JDFAbstractState
     }
 
     /**
-    * fitsCompleteOrderedList - tests for the case, when ListType=CompleteOrderedList,
-    * if the defined 'value' matches AllowedValueList or PresentValueList,
-    * specified for this State
-    *
-    * @param JDFShapeRangeList value - value to test
-    * @param JDFShapeRangeList list - testlist are either AllowedValueList or PresentValueList.
-    * 
-    * @return boolean - true, if 'value' matches testlist
-    */
+     * fitsCompleteOrderedList - tests whether <code>value</code> matches the given testlist
+     * (ListType=CompleteOrderedList)
+     *
+     * @param value value to test
+     * @param list  testlist, either AllowedValueList or PresentValueList.
+     * 
+     * @return boolean - true, if <code>value</code> matches the testlist
+     */
     private final boolean fitsCompleteOrderedList(JDFShapeRangeList value, JDFShapeRangeList list)
     {
         int v_size = value.size();
@@ -714,15 +711,14 @@ public class JDFShapeState extends JDFAbstractState
     }
 
     /**
-    * fitsContainedList - tests for the case, when ListType=ContainedList,
-    * if the defined 'value' matches AllowedValueList or PresentValueList,
-    * specified for this State
-    *
-    * @param JDFShapeRangeList value - value to test
-    * @param JDFShapeRangeList list - testlist are either AllowedValueList or PresentValueList.
-    * 
-    * @return boolean - true, if 'value' matches testlist
-    */
+     * fitsContainedList - tests whether <code>value</code> matches the given testlist
+     * (ListType=ContainedList)
+     *
+     * @param value value to test
+     * @param list  testlist, either AllowedValueList or PresentValueList.
+     * 
+     * @return boolean - true, if <code>value</code> matches testlist
+     */
     private final boolean fitsContainedList(JDFShapeRangeList value, JDFShapeRangeList list)
     {
         int v_size = value.size();

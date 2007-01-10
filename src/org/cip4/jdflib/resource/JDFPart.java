@@ -91,24 +91,22 @@ public class JDFPart extends JDFAutoPart
 {
     private static final long serialVersionUID = 1L;
 
-
     /**
      * Constructor for JDFPart
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFPart(
+    public JDFPart(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFPart
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFPart(
@@ -121,10 +119,10 @@ public class JDFPart extends JDFAutoPart
 
     /**
      * Constructor for JDFPart
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFPart(
         CoreDocumentImpl myOwnerDocument,
@@ -135,6 +133,10 @@ public class JDFPart extends JDFAutoPart
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
 
+    /**
+     * toString()
+     * @return String
+     */
     public String toString()
     {
         return "JDFPart[  --> " + super.toString() + " ]";
@@ -142,7 +144,7 @@ public class JDFPart extends JDFAutoPart
     
     /**
      * gets a map of all Partition key value pairs, empty if no partition keys exist
-     * @return
+     * @return JDFAttributeMap
      */
     public JDFAttributeMap getPartMap()
     {
@@ -157,14 +159,14 @@ public class JDFPart extends JDFAutoPart
         }
         return retMap;
     }
+    
     /**
-     * check whether the partition value match
-     * clode to .equals but also handles inclusion in lists
+     * check whether the partition values match
      * 
-     * @param key the partition key
+     * @param key           the partition key
      * @param resourceValue the value of key in the resource
-     * @param linkValue the value of key in the part element or ref
-     * @return boolean true if linkValue matches the value or list in resourceValue
+     * @param linkValue     the value of key in the part element or ref
+     * @return boolean: true if linkValue matches the value or list in resourceValue
      * 
      */
     public static boolean matchesPart(String key, String resourceValue, String linkValue)
@@ -210,11 +212,11 @@ public class JDFPart extends JDFAutoPart
     }
     
     /**
-     * overlapMap - identical keys must have the same values in both maps
-     * similar to JDFAttribute.overlapMap but uses matchesPart instead of equals for the comparison
-     * @param JDFAttributeMap subMap - the map to compare
+     * overlapMap - identical keys must have the same values in both maps<br>
+     * similar to JDFAttribute.overlapMap, but uses matchesPart instead of equals for the comparison
+     * @param subMap the map to compare
      *
-     * @return boolean - true if identical keys have the same values in both maps
+     * @return boolean: true if identical keys have the same values in both maps
      */
     public static boolean overlapPartMap(JDFAttributeMap resourceMap,JDFAttributeMap linkMap)
     {

@@ -27,23 +27,22 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFMsgFilter
-     * @param ownerDocument
+     /**
+      * Constructor for JDFMsgFilter
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFMsgFilter(
+    public JDFMsgFilter(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFMsgFilter
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFMsgFilter(
@@ -56,10 +55,10 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 
     /**
      * Constructor for JDFMsgFilter
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFMsgFilter(
         CoreDocumentImpl myOwnerDocument,
@@ -86,7 +85,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 
    /**
     * set all parts to those define in vParts
-    * @param VJDFAttributeMap vParts: vector of attribute maps for the parts
+    * @param vParts vector of attribute maps for the parts
     */
    public void setPartMapVector(VJDFAttributeMap vParts)
    {
@@ -95,7 +94,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 
    /**
     * set all parts to those define in vParts
-    * @param JDFAttributeMap mPart: attribute map for the part to set
+    * @param mPart attribute map for the part to set
     */
    public void setPartMap(JDFAttributeMap mPart)
    {
@@ -104,7 +103,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 
    /**
     * remove the part defined in mPart
-    * @param JDFAttributeMap mPart: attribute map for the part to remove
+    * @param mPart attribute map for the part to remove
     */
    public void removePartMap(JDFAttributeMap mPart)
    {
@@ -113,7 +112,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 
    /**
     * check whether the part defined in mPart is included
-    * @param JDFAttributeMap mPart: attribute map for the part to remove
+    * @param mPart attribute map to look for
     * @return boolean - returns true if the part exists
     */
    public boolean hasPartMap(JDFAttributeMap mPart)

@@ -96,7 +96,7 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[10];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.ANGLE, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
@@ -105,9 +105,10 @@ public abstract class JDFAutoScreenSelector extends JDFElement
         atrInfoTable[3] = new AtrInfoTable(AttributeName.FREQUENCY, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
         atrInfoTable[4] = new AtrInfoTable(AttributeName.SCREENINGFAMILY, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable[5] = new AtrInfoTable(AttributeName.SCREENINGTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumScreeningType.getEnum(0), null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.SOURCEFREQUENCY, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumSourceObjects.getEnum(0), "All");
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.SPOTFUNCTION, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.SEPARATION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, "All");
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.SOURCEFREQUENCY, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumSourceObjects.getEnum(0), "All");
+        atrInfoTable[9] = new AtrInfoTable(AttributeName.SPOTFUNCTION, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
     }
     
     protected AttributeInfo getTheAttributeInfo()
@@ -420,6 +421,32 @@ public abstract class JDFAutoScreenSelector extends JDFElement
         public EnumScreeningType getScreeningType()
         {
             return EnumScreeningType.getEnum(getAttribute(AttributeName.SCREENINGTYPE, null, null));
+        }
+
+
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute Separation
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute Separation
+          * @param value: the value to set the attribute to
+          */
+        public void setSeparation(String value)
+        {
+            setAttribute(AttributeName.SEPARATION, value, null);
+        }
+
+
+
+        /**
+          * (23) get String attribute Separation
+          * @return the value of the attribute
+          */
+        public String getSeparation()
+        {
+            return getAttribute(AttributeName.SEPARATION, null, "All");
         }
 
 

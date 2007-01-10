@@ -61,9 +61,9 @@ public class XMLstrm
     //static boolean doEscapes;
 
     /**
-        the routines defined here serialize dom to xml
-        mainly copied from xerces
-        */
+     * the routines defined here serialize dom to xml<br>
+     * mainly copied from xerces
+     */
 
     //  public KString DOM2String(/*DOM*/String name){ return new KString( name.rawBuffer(),name.length());};
 

@@ -89,10 +89,10 @@ import org.cip4.jdflib.auto.JDFAutoIDInfo;
 public class JDFIDInfo extends JDFAutoIDInfo
 {
     private static final long serialVersionUID = 1L;
-    
+
     /**
      * Constructor for JDFIDInfo
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFIDInfo(
@@ -101,12 +101,11 @@ public class JDFIDInfo extends JDFAutoIDInfo
     {
         super(myOwnerDocument, qualifiedName);
     }
-    
-    
+
     /**
      * Constructor for JDFIDInfo
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFIDInfo(
@@ -116,13 +115,13 @@ public class JDFIDInfo extends JDFAutoIDInfo
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
-    
+
     /**
      * Constructor for JDFIDInfo
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFIDInfo(
             CoreDocumentImpl myOwnerDocument,

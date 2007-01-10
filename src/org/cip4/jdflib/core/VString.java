@@ -11,10 +11,11 @@ package org.cip4.jdflib.core;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.Vector;
-
-import javax.swing.RootPaneContainer;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.util.StringUtil;
@@ -39,7 +40,7 @@ public class VString extends Vector
     /**
      * constructor
      *
-     * @param Vector m
+     * @param m
      */
     public VString (Vector m)
     {
@@ -61,7 +62,7 @@ public class VString extends Vector
     /**
      * 
      * constructs a VString by tokenizing a string
-     * @param strIn the string to tokenize
+     * @param strIn  the string to tokenize
      * @param strSep the separator character
      */
     public VString (String strIn, String strSep)
@@ -115,28 +116,27 @@ public class VString extends Vector
      * Method getAllStrings - returns all strings concatenated together
      * @param strSep separation between the strings
      * @return String
-     * @deprecated use getString(JDFConstants.BLANK,null,null)
+     * @deprecated use getString(strSep,null,null)
      */
     public String getAllStrings (String strSep)
     {
-        return getString(strSep,null,null);
+        return StringUtil.setvString(this,strSep,null,null);
     }
 
     /**
-     * 
      * @return all strings separated by a blank
-    * @deprecated use getString(JDFConstants.BLANK,null,null)
+     * @deprecated use getString(JDFConstants.BLANK,null,null)
      */
     public String getAllStrings()
     {
-        return getString(JDFConstants.BLANK,null,null);
+        return StringUtil.setvString(this,JDFConstants.BLANK,null,null);
     }
     
     /**
-     * Method setAllStrings - put a separated string into the vString
+     * Method setAllStrings - put a separated string into the vString<br>
      *                        e.g.  "asdf asdf asdf asdf"
-     * @param strIn  - separated string
-     * @param strSep - string separator
+     * @param strIn  separated string
+     * @param strSep string separator
      */
     public void setAllStrings (String strIn, String strSep)
     {
@@ -175,11 +175,11 @@ public class VString extends Vector
     }
 
     /**
-    * hasString - is 's' a member of this?
+    * hasString - is 's' a member of <code>this</code>?
     * 
-    * @param String s - string to find
+    * @param s string to find
     * 
-    * @return boolean - true, if 's' is included in this
+    * @return boolean - true, if 's' is included in <code>this</code>
     * @deprecated 2005-02-14 use contains ...
     */
     public boolean hasString(String s)
@@ -190,7 +190,7 @@ public class VString extends Vector
     /**
      * AppendUnique - append a string but ignore multiple entries
      *
-     * @param String v
+     * @param v the string to append
      */
     public void appendUnique(String v)
     {
@@ -206,7 +206,7 @@ public class VString extends Vector
     /**
      * AppendUnique - append a vector but ignore multiple entries
      *
-     * @param VString v
+     * @param v the vector to append
      */
     public void appendUnique(VString v)
     {
@@ -222,7 +222,8 @@ public class VString extends Vector
     /**
      * removeStrings - remove all occurrences of a string
      *
-     * @param VString v
+     * @param v
+     * @deprecated use removeStrings(v, Integer.MAX_VALUE);
      */
     public void removeStrings(VString v)
     {
@@ -233,7 +234,8 @@ public class VString extends Vector
     /**
      * removeStrings - remove all occurrences of a string
      *
-     * @param VString v
+     * @param v    the vector of strings to remove from <code>this</code>
+     * @param nMax the max number of strings to remove
      */
     public void removeStrings(VString v, int nMax)
     {
@@ -250,11 +252,11 @@ public class VString extends Vector
         }
     }
 
-
     /**
      * removeStrings - remove all occurrences of a string
      *
      * @param String s
+     * @deprecated use removeStrings(s, Integer.MAX_VALUE);
      */
     public void removeStrings(String s)
     {
@@ -262,9 +264,10 @@ public class VString extends Vector
     }
     
     /**
-     * removeStrings - remove all occurrences of a string
+     * removeStrings - remove nMax occurrences of a string
      *
-     * @param String s
+     * @param s    the string to remove
+     * @param nMax remove s max. nMax times
      */
     public void removeStrings(String s, int nMax)
     {
@@ -280,26 +283,25 @@ public class VString extends Vector
     
     /**
     * serialize to a string
-    * @param WString sep separator between strings
-    * @param String front string before the first entry
-    * @param String back string after the last entry
+    * @param sep   separator between strings
+    * @param front string before the first entry
+    * @param back  string after the last entry
     * 
     * @return a tokenized string
-    * @deprected use StringUtil setVString
+    * @deprecated use StringUtil setVString
     * default: GetString(sep, JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING)
     */
     public String getString(String sep, String front, String back)
     {
-        
         return StringUtil.setvString(this,sep,front,back);
     }
 
     /**
      * create a string from a vector of tokens
-     * @param VString v vector of tokens
-     * @param String sep separator between tokens
-     * @param String front prefix to string (before the first token)
-     * @param String end suffix to string (after the last token)
+     * @param v     vector of tokens
+     * @param sep   separator between tokens
+     * @param front prefix to string (before the first token)
+     * @param end   suffix to string (after the last token)
      * @return condensed string of tokens separated by sep
      * @deprecated use getString
      */
@@ -319,7 +321,6 @@ public class VString extends Vector
         	s += end;
         return s;
     }
-
 
     /**
      * unify - make VString unique, retaining initial order
@@ -345,9 +346,9 @@ public class VString extends Vector
     }
     
     /**
-     * 
+     * get a string from <code>this</code> 
      * @param s the String you are looking for
-     * @return the String if found or null if this does not contain s
+     * @return the String if found or null if <code>this</code> does not contain s
      */
     public String get(String s)
     {
@@ -359,10 +360,23 @@ public class VString extends Vector
         
         return null;
     }
+    
+    /** 
+     * gets a set with all entries of the Vstring
+     * @return
+     */
+    public Set getSet()
+    {
+        HashSet set = new LinkedHashSet();
+        Iterator it=iterator();
+        while(it.hasNext())
+            set.add(it.next());
+        
+        return set;
+    }
 
     /**
-     * sort this lexically
-     *
+     * sort <code>this</code> lexically
      */
     public void sort()
     {
@@ -371,8 +385,8 @@ public class VString extends Vector
     }
 
     /**
-     * appends all strings of an array to this
-     * @param strings
+     * appends all strings of an array to <code>this</code>
+     * @param strings the array of strings to append to <code>this</code>
      */
     public void addAll(String[] strings)
     {
@@ -382,8 +396,8 @@ public class VString extends Vector
     }
     
     /**
-     * appends o to this
-     * if o is a String, o is appended directly
+     * appends o to <code>this</code><br>
+     * if o is a String, o is appended directly<br>
      * if o is a ValuedEnum, the name is appended
      * 
      * @param o the object to append
@@ -399,9 +413,11 @@ public class VString extends Vector
     }
 
     /**
-     * true if one of rootPartIDKeys is in this
+     * checks whether at least one of a given vector of strings is contained 
+     * in <code>this</code>
+     * 
      * @param other the VSTring of values to test
-     * @return true if at least one String in other is in this
+     * @return true if at least one String in other is in <code>this</code>
      */
     public boolean containsAny(VString other)
     {

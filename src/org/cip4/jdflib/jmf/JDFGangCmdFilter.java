@@ -84,10 +84,10 @@ import org.cip4.jdflib.auto.JDFAutoGangCmdFilter;
 public class JDFGangCmdFilter extends JDFAutoGangCmdFilter
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Constructor for JDFGangCmdFilter
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
 	public JDFGangCmdFilter(
@@ -96,12 +96,11 @@ public class JDFGangCmdFilter extends JDFAutoGangCmdFilter
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
-	
-	
+
 	/**
 	 * Constructor for JDFGangCmdFilter
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
 	public JDFGangCmdFilter(
@@ -114,10 +113,10 @@ public class JDFGangCmdFilter extends JDFAutoGangCmdFilter
 	
 	/**
 	 * Constructor for JDFGangCmdFilter
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @param localName
+	 * @param myLocalName
 	 */
 	public JDFGangCmdFilter(
 			CoreDocumentImpl myOwnerDocument,
@@ -128,6 +127,11 @@ public class JDFGangCmdFilter extends JDFAutoGangCmdFilter
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 	
+	/**
+	 * toString()
+	 * @see org.cip4.jdflib.auto.JDFAutoGangCmdFilter#toString()
+	 * @return String
+	 */
 	public String toString()
 	{
 		return "JDFGangCmdFilter[  --> " + super.toString() + " ]";

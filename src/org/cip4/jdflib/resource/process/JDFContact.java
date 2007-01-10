@@ -16,6 +16,7 @@ import org.cip4.jdflib.auto.JDFAutoContact;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 
 
@@ -89,7 +90,7 @@ public class JDFContact extends JDFAutoContact
     */
     public void setExtendedContactTypes (VString value)
     {
-        setAttribute (AttributeName.CONTACTTYPES, value.getString(JDFConstants.BLANK,null,null), JDFConstants.EMPTYSTRING);
+        setAttribute (AttributeName.CONTACTTYPES, StringUtil.setvString(value,JDFConstants.BLANK,null,null), JDFConstants.EMPTYSTRING);
     }
 
    /**

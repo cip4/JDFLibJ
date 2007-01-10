@@ -97,7 +97,7 @@ public abstract class JDFAutoUsageCounter extends JDFResource
     private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.COUNTERID, 0x22222111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.COUNTERID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable[1] = new AtrInfoTable(AttributeName.SCOPE, 0x22222111, AttributeInfo.EnumAttributeType.enumeration, EnumScope.getEnum(0), null);
         atrInfoTable[2] = new AtrInfoTable(AttributeName.COUNTERTYPES, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
     }

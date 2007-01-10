@@ -103,9 +103,9 @@ public abstract class JDFAutoPreflightReport extends JDFResource
     private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ERRORSTATE, 0x22222211, AttributeInfo.EnumAttributeType.enumeration, EnumErrorState.getEnum(0), null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.ERRORCOUNT, 0x22222211, AttributeInfo.EnumAttributeType.integer, null, null);
         atrInfoTable[1] = new AtrInfoTable(AttributeName.WARNINGCOUNT, 0x22222211, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.ERRORCOUNT, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.ERRORSTATE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumErrorState.getEnum(0), null);
     }
     
     protected AttributeInfo getTheAttributeInfo()
@@ -244,26 +244,26 @@ public abstract class JDFAutoPreflightReport extends JDFResource
  */
         
         /* ---------------------------------------------------------------------
-        Methods for Attribute ErrorState
+        Methods for Attribute ErrorCount
         --------------------------------------------------------------------- */
         /**
-          * (5) set attribute ErrorState
-          * @param enumVar: the enumVar to set the attribute to
+          * (36) set attribute ErrorCount
+          * @param value: the value to set the attribute to
           */
-        public void setErrorState(EnumErrorState enumVar)
+        public void setErrorCount(int value)
         {
-            setAttribute(AttributeName.ERRORSTATE, enumVar.getName(), null);
+            setAttribute(AttributeName.ERRORCOUNT, value, null);
         }
 
 
 
         /**
-          * (9) get attribute ErrorState
-          * @return the value of the attribute
+          * (15) get int attribute ErrorCount
+          * @return int the value of the attribute
           */
-        public EnumErrorState getErrorState()
+        public int getErrorCount()
         {
-            return EnumErrorState.getEnum(getAttribute(AttributeName.ERRORSTATE, null, null));
+            return getIntAttribute(AttributeName.ERRORCOUNT, null, 0);
         }
 
 
@@ -296,26 +296,26 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 
         
         /* ---------------------------------------------------------------------
-        Methods for Attribute ErrorCount
+        Methods for Attribute ErrorState
         --------------------------------------------------------------------- */
         /**
-          * (36) set attribute ErrorCount
-          * @param value: the value to set the attribute to
+          * (5) set attribute ErrorState
+          * @param enumVar: the enumVar to set the attribute to
           */
-        public void setErrorCount(int value)
+        public void setErrorState(EnumErrorState enumVar)
         {
-            setAttribute(AttributeName.ERRORCOUNT, value, null);
+            setAttribute(AttributeName.ERRORSTATE, enumVar.getName(), null);
         }
 
 
 
         /**
-          * (15) get int attribute ErrorCount
-          * @return int the value of the attribute
+          * (9) get attribute ErrorState
+          * @return the value of the attribute
           */
-        public int getErrorCount()
+        public EnumErrorState getErrorState()
         {
-            return getIntAttribute(AttributeName.ERRORCOUNT, null, 0);
+            return EnumErrorState.getEnum(getAttribute(AttributeName.ERRORSTATE, null, null));
         }
 
 

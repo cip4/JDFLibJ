@@ -90,11 +90,11 @@ public class JDFTool extends JDFAutoTool
 
     /**
      * Constructor for JDFTool
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      * @throws DOMException
      */
-     public JDFTool(
+    public JDFTool(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
         throws DOMException
@@ -102,11 +102,10 @@ public class JDFTool extends JDFAutoTool
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFTool
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      * @throws DOMException
      */
@@ -121,10 +120,10 @@ public class JDFTool extends JDFAutoTool
 
     /**
      * Constructor for JDFTool
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      * @throws DOMException
      */
     public JDFTool(

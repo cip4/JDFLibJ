@@ -28,21 +28,20 @@ public class JDFNotification extends JDFAutoNotification
 
     /**
      * Constructor for JDFNotification
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFNotification(
+    public JDFNotification(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFNotification
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFNotification(
@@ -55,10 +54,10 @@ public class JDFNotification extends JDFAutoNotification
 
     /**
      * Constructor for JDFNotification
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFNotification(
         CoreDocumentImpl myOwnerDocument,
@@ -69,6 +68,10 @@ public class JDFNotification extends JDFAutoNotification
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
 
+    /**
+     * toString()
+     * @return String
+     */
     public String toString()
     {
         return "JDFNotification[  --> " + super.toString() + " ]";
@@ -103,8 +106,8 @@ public class JDFNotification extends JDFAutoNotification
     }
 
     /**
-     * set all parts to those define in vParts
-     * @param VJDFAttributeMap vParts: vector of attribute maps for the parts
+     * set all parts to those defined in vParts
+     * @param vParts vector of attribute maps for the parts
      */
     public void setPartMapVector(VJDFAttributeMap vParts)
     {
@@ -112,8 +115,8 @@ public class JDFNotification extends JDFAutoNotification
     }
 
     /**
-     * set all parts to those define in vParts
-     * @param JDFAttributeMap mPart: attribute map for the part to set
+     * set all parts to those defined by mPart
+     * @param mPart attribute map for the part to set
      */
     public void setPartMap(JDFAttributeMap mPart)
     {
@@ -121,8 +124,8 @@ public class JDFNotification extends JDFAutoNotification
     }
 
     /**
-     * remove the part defined in mPart
-     * @param JDFAttributeMap mPart: attribute map for the part to remove
+     * remove the part defined by mPart
+     * @param mPart attribute map for the part to remove
      */
     public void removePartMap(JDFAttributeMap mPart)
     {
@@ -131,7 +134,7 @@ public class JDFNotification extends JDFAutoNotification
 
     /**
      * check whether the part defined in mPart is included
-     * @param JDFAttributeMap mPart: attribute map for the part to remove
+     * @param mPart attribute map for the part to remove
      * @return boolean - returns true if the part exists
      */
     public boolean hasPartMap(JDFAttributeMap mPart)
@@ -139,101 +142,157 @@ public class JDFNotification extends JDFAutoNotification
         return super.hasPartMap(mPart);
     }   
    
-   public JDFBarcode getCreateBarcode()
-   {
-       return  (JDFBarcode)getCreateElement_KElement(ElementName.BARCODE, null, 0);
-   }
+   /**
+    * get element <code>Barcode</code>, create if it doesn't exist
+	* @return JDFBarcode: the element
+	*/
+	public JDFBarcode getCreateBarcode() {
+		return (JDFBarcode) getCreateElement_KElement(ElementName.BARCODE,
+				null, 0);
+	}
 
-   public JDFBarcode appendBarcode()
-   {
-       return (JDFBarcode)appendElementN(ElementName.BARCODE, 1, null);
-   }
-   
-   public JDFBarcode getBarcode()
-   {
-       return (JDFBarcode) getElement(ElementName.BARCODE, null, 0);
-   }
-   
-   
-   
-   public JDFFCNKey getCreateFCNKey()
-   {
-       return (JDFFCNKey)getCreateElement_KElement(ElementName.FCNKEY, null, 0);
-    }
+	/**
+	 * append element <code>Barcode</code>
+	 * @return JDFBarcode: the element 
+	 */
+	public JDFBarcode appendBarcode() {
+		return (JDFBarcode) appendElementN(ElementName.BARCODE, 1, null);
+	}
 
-   public JDFFCNKey appendFCNKey()
-   {
-       return (JDFFCNKey)appendElementN(ElementName.FCNKEY, 1, null);
-   }
-   
-   public JDFFCNKey getFCNKey()
-   {
-       return (JDFFCNKey) getElement(ElementName.FCNKEY, null, 0);
-   }
+	/**
+	 * get element <code>Barcode</code>
+	 * @return JDFBarcode: the element
+	 */
+	public JDFBarcode getBarcode() {
+		return (JDFBarcode) getElement(ElementName.BARCODE, null, 0);
+	}
    
    
-   public JDFSystemTimeSet getCreateSystemTimeSet()
-   {
-       return (JDFSystemTimeSet)getCreateElement_KElement(ElementName.SYSTEMTIMESET, null, 0);
-   }
+   
+   /**
+    * get element <code>FCNKey</code>, create if it doesn't exist
+	* @return JDFFCNKey: the element
+	*/
+	public JDFFCNKey getCreateFCNKey() {
+		return (JDFFCNKey) getCreateElement_KElement(ElementName.FCNKEY, null,
+				0);
+	}
 
-   public JDFSystemTimeSet appendSystemTimeSet()
-   {
-       return (JDFSystemTimeSet)appendElementN(ElementName.SYSTEMTIMESET, 1, null);
-   }
-   
-   public JDFSystemTimeSet getSystemTimeSet()
-   {
-       return (JDFSystemTimeSet) getElement(ElementName.SYSTEMTIMESET, null, 0);
-   }
-   
-   
-   public JDFCounterReset getCreateCounterReset()
-   {
-       return (JDFCounterReset)getCreateElement_KElement(ElementName.COUNTERRESET, null, 0);
-   }
+	/**
+	 * append element <code>FCNKey</code>
+     * @return JDFFCNKey: the element
+	 */
+	public JDFFCNKey appendFCNKey() {
+		return (JDFFCNKey) appendElementN(ElementName.FCNKEY, 1, null);
+	}
 
-   public JDFCounterReset appendCounterReset()
-   {
-       return (JDFCounterReset)appendElementN(ElementName.COUNTERRESET, 1, null);
-   }
-   
-   public JDFCounterReset getCounterReset()
-   {
-       return (JDFCounterReset) getElement(ElementName.COUNTERRESET, null, 0);
-   }
-   
-   
-   public JDFError getCreateError()
-   {
-       return (JDFError)getCreateElement_KElement(ElementName.ERROR, null, 0);
-   }
+	/**
+	 * get element <code>FCNKey</code>
+     * @return JDFFCNKey: the element
+	 */
+	public JDFFCNKey getFCNKey() {
+		return (JDFFCNKey) getElement(ElementName.FCNKEY, null, 0);
+	}
 
-   public JDFError appendError()
-   {
-       return (JDFError)appendElementN(ElementName.ERROR, 1, null);
-   }
-   
-   public JDFError getError()
-   {
-       return (JDFError) getElement(ElementName.ERROR, null, 0);
-   }
-   
-   
-   public JDFEvent getCreateEvent()
-   {
-       return (JDFEvent)getCreateElement_KElement(ElementName.EVENT, null, 0);
-   }
+	/**
+	 * get element <code>SystemTimeSet</code>, create if it doesn't exist
+     * @return JDFSystemTimeSet: the element
+	 */
+	public JDFSystemTimeSet getCreateSystemTimeSet() {
+		return (JDFSystemTimeSet) getCreateElement_KElement(
+				ElementName.SYSTEMTIMESET, null, 0);
+	}
 
-   public JDFEvent appendEvent()
-   {
-       return (JDFEvent)appendElementN(ElementName.EVENT, 1, null);
-   }
-   
-   public JDFEvent getEvent()
-   {
-       return (JDFEvent) getElement(ElementName.EVENT, null, 0);
-   }
+	/**
+	 * append element <code>SystemTimeSet</code>
+     * @return JDFSystemTimeSet: the element
+	 */
+	public JDFSystemTimeSet appendSystemTimeSet() {
+		return (JDFSystemTimeSet) appendElementN(ElementName.SYSTEMTIMESET, 1,
+				null);
+	}
+
+	/**
+	 * get element <code>SystemTimeSet</code>
+     * @return JDFSystemTimeSet: the element
+	 */
+	public JDFSystemTimeSet getSystemTimeSet() {
+		return (JDFSystemTimeSet) getElement(ElementName.SYSTEMTIMESET, null, 0);
+	}
+
+	/**
+	 * get element <code>CreateCounterReset</code>, create if it doesn't exist
+     * @return JDFCreateCounterReset: the element
+	 */
+	public JDFCounterReset getCreateCounterReset() {
+		return (JDFCounterReset) getCreateElement_KElement(
+				ElementName.COUNTERRESET, null, 0);
+	}
+
+	/**
+	 * append element <code>CreateCounterReset</code>
+     * @return JDFCreateCounterReset: the element
+	 */
+	public JDFCounterReset appendCounterReset() {
+		return (JDFCounterReset) appendElementN(ElementName.COUNTERRESET, 1,
+				null);
+	}
+
+	/**
+	 * get element <code>CreateCounterReset</code>
+     * @return JDFCreateCounterReset: the element
+	 */
+	public JDFCounterReset getCounterReset() {
+		return (JDFCounterReset) getElement(ElementName.COUNTERRESET, null, 0);
+	}
+
+	/**
+	 * get element <code>Error</code>, create if it doesn't exist
+     * @return JDFError: the element
+	 */
+	public JDFError getCreateError() {
+		return (JDFError) getCreateElement_KElement(ElementName.ERROR, null, 0);
+	}
+
+	/**
+	 * append element <code>Error</code>
+     * @return JDFError: the element
+	 */
+	public JDFError appendError() {
+		return (JDFError) appendElementN(ElementName.ERROR, 1, null);
+	}
+
+	/**
+	 * get element <code>Error</code>
+     * @return JDFError: the element
+	 */
+	public JDFError getError() {
+		return (JDFError) getElement(ElementName.ERROR, null, 0);
+	}
+
+	/**
+	 * get element <code>Event</code>, create if it doesn't exist
+     * @return JDFEvent: the element
+	 */
+	public JDFEvent getCreateEvent() {
+		return (JDFEvent) getCreateElement_KElement(ElementName.EVENT, null, 0);
+	}
+
+	/**
+	 * append element <code>Event</code>
+     * @return JDFEvent: the element
+	 */
+	public JDFEvent appendEvent() {
+		return (JDFEvent) appendElementN(ElementName.EVENT, 1, null);
+	}
+
+	/**
+	 * get element <code>Event</code>
+     * @return JDFEvent: the element
+	 */
+	public JDFEvent getEvent() {
+		return (JDFEvent) getElement(ElementName.EVENT, null, 0);
+	}
    
 } // class JDFNotification
 // ==========================================================================

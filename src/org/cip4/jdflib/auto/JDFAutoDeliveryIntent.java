@@ -112,7 +112,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
     private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ACCEPTED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.ACCEPTED, 0x44444333, AttributeInfo.EnumAttributeType.boolean_, null, null);
         atrInfoTable[1] = new AtrInfoTable(AttributeName.ADDITIONALAMOUNT, 0x44444311, AttributeInfo.EnumAttributeType.integer, null, null);
         atrInfoTable[2] = new AtrInfoTable(AttributeName.OWNERSHIP, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumOwnership.getEnum(0), "Origin");
         atrInfoTable[3] = new AtrInfoTable(AttributeName.BUYERACCOUNT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);

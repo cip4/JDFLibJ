@@ -77,9 +77,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFPRRule;
 import org.cip4.jdflib.resource.process.JDFPRRuleAttr;
@@ -95,11 +93,10 @@ public abstract class JDFAutoPreflightReportRulePool extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIONPOOLS, 0x22222211, AttributeInfo.EnumAttributeType.IDREFS, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.MAXOCCURRENCES, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.MAXOCCURRENCES, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
     }
     
     protected AttributeInfo getTheAttributeInfo()
@@ -189,35 +186,6 @@ public abstract class JDFAutoPreflightReportRulePool extends JDFResource
  * Attribute getter / setter
  * ************************************************************************
  */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ActionPools
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ActionPools
-          * @param value: the value to set the attribute to
-          */
-        public void setActionPools(VString value)
-        {
-            setAttribute(AttributeName.ACTIONPOOLS, value, null);
-        }
-
-
-
-        /**
-          * (21) get VString attribute ActionPools
-          * @return VString the value of the attribute
-          */
-        public VString getActionPools()
-        {
-            VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.ACTIONPOOLS, null, JDFConstants.EMPTYSTRING);
-            vStrAttrib.setAllStrings(s, " ");
-            return vStrAttrib;
-        }
-
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute MaxOccurrences

@@ -213,8 +213,9 @@ public final class ElementName
     public static final String COLORSTANDARD = "ColorStandard";
     public static final String COLORSUSED = "ColorsUsed";
     public static final String COLORTYPE = "ColorType";
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx.getName()*/
     public static final String COMBINE = "Combine";
+    /** @deprecated use EnumType.xxx.getName()*/
     public static final String COMBINED = "Combined";
     public static final String COMCHANNEL = "ComChannel";
     public static final String COMMAND = "Command";
@@ -223,7 +224,7 @@ public final class ElementName
     public static final String COMPONENT = "Component";
     public static final String CONSTRAINTVALUE = "ConstraintValue";
     public static final String CONTACT = "Contact";
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx.getName()*/
     public static final String CONTACTCOPYING = "ContactCopying";
     public static final String CONTACTCOPYPARAMS = "ContactCopyParams";
     public static final String CONTAINER = "Container";
@@ -622,9 +623,11 @@ public final class ElementName
     public static final String PRINTROLLINGPARAMS = "PrintRollingParams";
     public static final String PRITEM = "PRItem";
     public static final String PROCCURRENCE = "PROccurrence";
+    /** @deprecated use EnumType.xxx.getName()*/
     public static final String PROCESSGROUP = "ProcessGroup";
     public static final String PROCESSRUN = "ProcessRun";
     public static final String PROCESSTYPE_UNKNOWN = "Unknown";
+    /** @deprecated use EnumType.xxx.getName()*/
     public static final String PRODUCT = "Product";
     public static final String PRODUCTIONINTENT = "ProductionIntent";
     public static final String PROOFING = "Proofing";

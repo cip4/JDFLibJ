@@ -93,7 +93,7 @@ import org.apache.commons.lang.time.FastDateFormat;
 import org.cip4.jdflib.core.JDFConstants;
 
 
-public class JDFDate 
+public class JDFDate implements Comparable
 {
     private static final long serialVersionUID  = 1L;
     static final int MILLISECONDS_PER_HOUR      = 3600 * 1000;
@@ -117,7 +117,7 @@ public class JDFDate
      * it represents the time point, expressed in milliseconds 
      * after January 1, 1970, 0:00:00 GMT.
      * 
-     * @param long iTime   current time in milliseconds after January 1, 1970, 0:00:00 GMT.
+     * @param iTime   current time in milliseconds after January 1, 1970, 0:00:00 GMT.
      * Use JDFDuration instead. This class will be modified to handle only JDFDate objects
      */
     public JDFDate(long iTime)
@@ -130,14 +130,18 @@ public class JDFDate
     /**
      * Allocates a <code>JDFDate</code> object and initializes it so that
      * the JDFDate represents a date set by <code>strDateTime</code>
-     * Format of <code>strDateTime</code>
+     * Format of <code>strDateTime</code><p>
      * Valid DataTime Strings are:
-     * "yyyy-mm-ddThh:mm:ss.sss+hh:00"  
-     * "yyyy-mm-ddThh:mm:ss+hh:00"  
-     * "yyyy-mm-ddThh:mm:ss-hh:00"
-     * "yyyy-mm-ddThh:mm:ssZ"
+     * <li>"yyyy-mm-ddThh:mm:ss.sss+hh:00"</li>  
+     * <li>"yyyy-mm-ddThh:mm:ss+hh:00"</li>
+     * <li>"yyyy-mm-ddThh:mm:ss-hh:00"</li>
+     * <li>"yyyy-mm-ddThh:mm:ssZ"</li>
+     * <p>
+     * Attention!<br>
+     * you can enter milliseconds, but <code>getDateTimeISO()</code> still returns the time rounded to full seconds.
+     * Only <code>long getTimeInMillis()</code> returns the exact time
      *
-     * @param String strDateTime - formatted date and time
+     * @param strDateTime formatted date and time
      * @throws DataFormatException if strDateTime is not a valid DateTime
      * 
      * Attention!
@@ -163,21 +167,22 @@ public class JDFDate
     
     
     /**
-     * init - initializes a JDFDate object with a formatted ISO DateTime value
-     * Method init handles Strings of type: 
-     * yyyy-mm-ddThh:mm:ss+hh:00 
-     * yyyy-mm-ddThh:mm:ss-hh:00
-     * yyyy-mm-ddThh:mm:ssZ 
-     * The values for month time etc must be valid time values (e.g. 27 hours or 87 sec are invalid)
-     * 
-     * 
-     * @param strDateTime - formatted date and time
-     * 
+     * init - initializes a JDFDate object with a formatted ISO DateTime value<br>
+     * Method init handles Strings of type: <br>
+     * <li>yyyy-mm-ddThh:mm:ss+hh:00</li> 
+     * <li>yyyy-mm-ddThh:mm:ss-hh:00</li>
+     * <li>yyyy-mm-ddThh:mm:ssZ </li>
+     * <li>yyyy-mm-dd</li>
+     * <p>
+     * The values for month, time etc must be valid time values (e.g. 27 hours or 87 sec are invalid)
+     * <p>
      * Use JDFDuration instead. This class will be modified to handle only JDFDate objects
      * Deprecated are strings of the following type (express duration): 
-     * "P1Y2M3DT10H30M"
-     * "PM8T12M"
-     * "PT30M"
+     * <li>"P1Y2M3DT10H30M"</li>
+     * <li>"PM8T12M"</li>
+     * <li>"PT30M"</li>
+     * 
+     * @param strDateTime formatted date and time
      */
     private void init(String strDateTime) throws DataFormatException
     {
@@ -190,6 +195,9 @@ public class JDFDate
         {
             gregcal = new GregorianCalendar();
             
+            if(strDateTime.indexOf("T")==-1)
+                strDateTime+="T00:00:00Z";
+            
             // check for zulu style time zone
             final int length = strDateTime.length();
             String lastChar=strDateTime.substring(length-1);
@@ -201,8 +209,9 @@ public class JDFDate
             }
             
             int iCmp=lastChar.compareTo("A");
+            final boolean bZulu = (iCmp>=0) && (iCmp<=25);
             // The last character is a ZULU style timezone
-            if((iCmp>=0) && (iCmp<=25))
+            if(bZulu)
             {
                 String strBuffer    = strDateTime.substring(0, length - 1);
                 String bias=null;
@@ -282,7 +291,8 @@ public class JDFDate
                     !strDateTime.substring(7,8).equals("-") ||    
                     !strDateTime.substring(10,11).equals("T") ||    
                     !strDateTime.substring(13,14).equals(":") ||    
-                    !strDateTime.substring(16,17).equals(":") )
+                    !strDateTime.substring(16,17).equals(":") ||
+                    strDateTime.length()-decimalLength!=25) // 6 digit tz
             {
                 throw new DataFormatException("JDFDate.init: invalid date String " +  strDateTime);
             }
@@ -321,7 +331,7 @@ public class JDFDate
     
     /**
      * returns the date and time of this in none ISO pattern 'yyyyMMddHHmmss'
-     * @return String the date in pattern yyyyMMddHHmmss
+     * @return String - the date in pattern yyyyMMddHHmmss
      */
     public String getDateTime()
     {
@@ -332,7 +342,7 @@ public class JDFDate
     
     
     /**
-     * setOffset set the offset to this time. Note: The time stored in this is not resetted
+     * setOffset: set the offset to this time. Note: The time stored in this is not resetted
      * if you want an offset based on current time use 'public MyDate(int iOffset)'
      *  
      * @param iOffset   offset time in seconds
@@ -359,7 +369,7 @@ public class JDFDate
     /**
      * the date formated as defined in ISO 8601
      * 
-     * @return String   the date of this of form yyyy-mm-dd   
+     * @return String: the date of this of form yyyy-mm-dd   
      */
     public String  getDateISO()
     {
@@ -369,7 +379,7 @@ public class JDFDate
     /**
      * format the time into a ISO conform String 
      * 
-     * @return String   the time of this ISO 8601 in format hh:mm:ss
+     * @return String: the time of this ISO 8601 in format hh:mm:ss
      */
     public String getTimeISO() 
     {
@@ -378,7 +388,7 @@ public class JDFDate
     
     /**
      * the TimeZone as spezified in ISO 8601 +/-10:00 for example
-     * @return String   the timezone
+     * @return String: the timezone
      */
     public String getTimeZoneISO() 
     {
@@ -388,7 +398,7 @@ public class JDFDate
     /**
      * Tests if this date is after the specified date. 
      * 
-     * @param x the date you wish to know if it is later then this
+     * @param x the date you wish to know if it is later than this
      * @return true if and only if the instant represented by this 
      * Date object is strictly later than the instant represented by x; false otherwise.
      */
@@ -400,7 +410,7 @@ public class JDFDate
     /**
      * Tests if this date is before the specified date.
      * 
-     * @param x the date you wish to know if it is eariler then this 
+     * @param x the date you wish to know if it is eariler than this 
      * @return true if and only if the instant of time represented by this 
      * Date object is strictly earlier than the instant represented by x; false otherwise. 
      */
@@ -410,8 +420,8 @@ public class JDFDate
     }
     
     /**
-     * 
-     * @return the time in milliseconds
+     * get the time in milliseconds 
+     * @return long - the time in milliseconds
      */
     public long getTimeInMillis()
     {
@@ -420,7 +430,7 @@ public class JDFDate
 
     /**
      * set this time milliseconds
-     * @return
+     * @param l time in milliseconds
      */
     public void setTimeInMillis(long l)
     {
@@ -443,13 +453,27 @@ public class JDFDate
         return gregcal;
     }
 
-    public boolean before( JDFDate other )
+    /**
+     * true, if this is before other, also true if other==null
+     * @param other JDFDate to compare
+     * @return
+     */
+    public boolean before(JDFDate other )
     {
+        if(other==null)
+            return true;
         return lTimeInMillis < other.lTimeInMillis;
     }
 
+    /**
+     * true, if this is after other, also true if other==null
+     * @param other
+     * @return
+     */
     public boolean after( JDFDate other )
     {
+        if(other==null)
+            return true;
         return lTimeInMillis > other.lTimeInMillis;
     }
 
@@ -464,7 +488,7 @@ public class JDFDate
     }
 
     /**
-    * Compares two JDFDates for equality.
+    * Compares two JDFDates for equality.<br>
     * The result is <code>true</code> if and only if the argument is 
     * not <code>null</code> and is a <code>JDFDate</code> object that 
     * represents the same point in time, to the millisecond, as this object.
@@ -482,7 +506,7 @@ public class JDFDate
         if (other.getClass() != getClass())
             return false;
 
-        return (this.getTimeInMillis() == ((JDFDate) other).getTimeInMillis()); 
+        return (this.getTimeInMillis()/1000 == ((JDFDate) other).getTimeInMillis()/1000); 
     }
     
     /**
@@ -491,6 +515,17 @@ public class JDFDate
     public int hashCode()
     {
         return HashUtil.hashCode(super.hashCode(), m_TimeZoneOffsetInMillis);
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     * the value 0 if the argument is a Date equal to this Date; 
+     * a value less than 0 if the argument is a Date after this Date; 
+     * and a value greater than 0 if the argument is a Date before this Date.
+     */
+    public int compareTo(Object arg0)
+    {        
+        return (int)(getTimeInMillis()/1000)-(int)(((JDFDate)arg0).getTimeInMillis()/1000);
     }
 
     

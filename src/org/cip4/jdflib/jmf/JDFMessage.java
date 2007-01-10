@@ -85,6 +85,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoMessage;
@@ -104,21 +105,21 @@ import org.cip4.jdflib.resource.process.JDFNotificationFilter;
 public class JDFMessage extends JDFAutoMessage
 {
     private static final long serialVersionUID = 1L;
-    
+
     /**
      * Constructor for JDFMessage
-     * @param ownerDocument     
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFMessage(CoreDocumentImpl myOwnerDocument, String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
-    
+
     /**
      * Constructor for JDFMessage
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFMessage(
@@ -128,13 +129,13 @@ public class JDFMessage extends JDFAutoMessage
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
-    
+
     /**
      * Constructor for JDFMessage
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFMessage(
             CoreDocumentImpl myOwnerDocument,
@@ -329,10 +330,10 @@ public class JDFMessage extends JDFAutoMessage
     }
     
     /**
-     * getFamily
+     * getFamily: get the enum family type
      *
-     * @return EnumFamily - the enum family type Family_Unknown, Family_Query, Family_Signal,
-     *                      Family_Command, Family_Response, Family_Acknowledge
+     * @return EnumFamily - type Family_Unknown, Family_Query, Family_Signal,
+     *                      Family_Command, Family_Response or Family_Acknowledge
      */
     public EnumFamily getFamily()
     {
@@ -340,7 +341,7 @@ public class JDFMessage extends JDFAutoMessage
     }
     
     /**
-     * getType
+     * getType: get attribute <code>Type</code>
      *
      * @return String
      */
@@ -350,7 +351,7 @@ public class JDFMessage extends JDFAutoMessage
     }
     
     /**
-     * Set attribute Type and xsi:type 
+     * Set attribute <code>Type</code> and <code>xsi:type</code> 
      *
      * @param typ the type
      */
@@ -366,9 +367,7 @@ public class JDFMessage extends JDFAutoMessage
     /**
      * SetQuery - sets the initiating query to q
      *
-     * @param JDFQuery q
-     *
-     * @return boolean
+     * @param q
      */
     public void setQuery(JDFQuery q)
     {
@@ -387,7 +386,7 @@ public class JDFMessage extends JDFAutoMessage
     }
     
     /**
-     * isValid the default is EnumValidationLevel.Complete
+     * isValid
      * @deprecated
      * @return boolean
      */
@@ -426,16 +425,17 @@ public class JDFMessage extends JDFAutoMessage
     
     /**
      * Set attribute Type
-     * @param EnumType value the value to set the attribute to
+     * @param value the value to set the attribute to
      * @deprecated use setType()
      */
     public void setEnumType(EnumType value)
     {
         setType(value);
     }
+    
     /**
      * Set attribute Type
-     * @param EnumType value the value to set the attribute to
+     * @param value the value to set the attribute to
      */
     public void setType(EnumType value)
     {
@@ -444,7 +444,9 @@ public class JDFMessage extends JDFAutoMessage
     }
     
     /**
+     * fixVersion()<br>
      * adds xsi:Type if it doesn't exist
+     * @param version
      */
     public boolean fixVersion(EnumVersion version)
     {
@@ -456,10 +458,11 @@ public class JDFMessage extends JDFAutoMessage
         }
         return true;
     }
+    
     /**
      * checks whether the type of messageElement is valid for this message
-     * @param KString elementName the name of the element to be tested
-     * @return boolean true if valid; true always if not in JDFNameSpace
+     * @param elementName the name of the element to be tested
+     * @return boolean: true if valid; always true if not in JDFNameSpace
      */
     public boolean isValidMessageElement(String elementName, int iSkip)
     {
@@ -479,8 +482,8 @@ public class JDFMessage extends JDFAutoMessage
         }
         
         // it aint even valid for any family
-        final VString familyTypeObj = familyTypeObj();
-        boolean isFamilyTypeString = (familyTypeObj==null) ? false : familyTypeObj.contains(elementName);
+        final String[] familyTypeObj = familyTypeObj();
+        boolean isFamilyTypeString = (familyTypeObj==null) ? false : ArrayUtils.contains(familyTypeObj,elementName);
         if (!isFamilyTypeString)
         {
             return false;
@@ -500,12 +503,12 @@ public class JDFMessage extends JDFAutoMessage
     /**
      * returns a vector of valid messageElement types for this element
      * @param elementName the name of the element to be tested
-     * @return vEnumType vector of valid EnumTypes; empty if all are invalid
+     * @return vector of valid EnumTypes; empty if all are invalid
      * @default getValidTypeVector(elementName, 0)
      */
-    //  typedef std::vector<EnumType> vEnumType;        
     private Vector getValidTypeVector(String elementName, int iSkip)
     {
+        //  typedef std::vector<EnumType> vEnumType;
         Vector validList = new Vector();
         
         // Commands
@@ -915,10 +918,9 @@ public class JDFMessage extends JDFAutoMessage
         return validList;
     }
     
-    
     /**
      * Typesafe enumerated attribute Type
-     * @return EnumTypethe enumeration value of the attribute
+     * @return EnumType: the enumeration value of the attribute
      */
     public EnumType getEnumType()
     {
@@ -926,10 +928,10 @@ public class JDFMessage extends JDFAutoMessage
     }
     
     /**
-     * return a vector of valid object names for this family type 
+     * get a vector of valid object names for this family type 
      * @return String comma separated valid object types for this family type
      */
-    public VString familyTypeObj()
+    private String[] familyTypeObj()
     {
         EnumFamily family = getFamily();
         if(family==null)
@@ -937,29 +939,33 @@ public class JDFMessage extends JDFAutoMessage
         
         if (family.equals(EnumFamily.Command))
         {
-            return new VString(commandTypeObjString());
+            return commandTypeObjString;
         }
         if (family.equals(EnumFamily.Registration))
         {
-            return new VString(registrationTypeObjString());
+            return registrationTypeObjString;
         }
         
         if (family.equals(EnumFamily.Query))
         {
-            return new VString(queryTypeObjString());
+            return queryTypeObjString;
         }
         
         if (family.equals(EnumFamily.Response)|| family.equals(EnumFamily.Acknowledge))
         {
-            return new VString( responseTypeObjString());
+            return responseTypeObjString;
         }
         
         if (family.equals(EnumFamily.Signal))
         {
-            VString v=new VString(queryTypeObjString());
-            v.addAll(responseTypeObjString());
-            v.unify();
-            return v;
+            if(signalTypeObjString==null)
+            {
+                VString v=new VString(queryTypeObjString);
+                v.addAll(responseTypeObjString);
+                v.unify();
+                signalTypeObjString=(String[])v.toArray(new String[v.size()]);
+            }
+            return signalTypeObjString;
         }
         
         return null;
@@ -969,110 +975,101 @@ public class JDFMessage extends JDFAutoMessage
      * Enumeration strings for list of CommandTypeObj
      * @returnString comma separated list of enumerated string values 
      */
-    private static String[] commandTypeObjString()
+    private static String[] commandTypeObjString =
     {
-        
-        final String[] enums =
-            {
-                ElementName.FLUSHQUEUEPARAMS,
-                ElementName.FLUSHRESOURCEPARAMS,
-                ElementName.MODIFYNODECMDPARAMS,
-                ElementName.NEWJDFCMDPARAMS,
-                ElementName.NODEINFOCMDPARAMS,
-                ElementName.PIPEPARAMS,
-                ElementName.QUEUEENTRYDEF,
-                ElementName.QUEUEENTRYPRIPARAMS,
-                ElementName.QUEUEENTRYPOSPARAMS,
-                ElementName.QUEUEFILTER,
-                ElementName.QUEUESUBMISSIONPARAMS,
-                ElementName.REQUESTQUEUEENTRYPARAMS,
-                ElementName.RESOURCECMDPARAMS,
-                ElementName.RESOURCEPULLPARAMS,
-                ElementName.RESUBMISSIONPARAMS,
-                ElementName.RETURNQUEUEENTRYPARAMS,
-                ElementName.SHUTDOWNCMDPARAMS,
-                ElementName.STOPPERSCHPARAMS,
-                ElementName.UPDATEJDFCMDPARAMS,
-                ElementName.WAKEUPCMDPARAMS
-            };
-            
-        return enums;
-    }
+        ElementName.FLUSHQUEUEPARAMS,
+        ElementName.FLUSHRESOURCEPARAMS,
+        ElementName.MODIFYNODECMDPARAMS,
+        ElementName.NEWJDFCMDPARAMS,
+        ElementName.NODEINFOCMDPARAMS,
+        ElementName.PIPEPARAMS,
+        ElementName.QUEUEENTRYDEF,
+        ElementName.QUEUEENTRYPRIPARAMS,
+        ElementName.QUEUEENTRYPOSPARAMS,
+        ElementName.QUEUEFILTER,
+        ElementName.QUEUESUBMISSIONPARAMS,
+        ElementName.REQUESTQUEUEENTRYPARAMS,
+        ElementName.RESOURCECMDPARAMS,
+        ElementName.RESOURCEPULLPARAMS,
+        ElementName.RESUBMISSIONPARAMS,
+        ElementName.RETURNQUEUEENTRYPARAMS,
+        ElementName.SHUTDOWNCMDPARAMS,
+        ElementName.STOPPERSCHPARAMS,
+        ElementName.UPDATEJDFCMDPARAMS,
+        ElementName.WAKEUPCMDPARAMS
+    };
+    
     /**
      * Enumeration strings for list of CommandTypeObj
      * @returnString comma separated list of enumerated string values 
      */
-    private static String[] registrationTypeObjString()
+    private static String[] registrationTypeObjString=
     {
-        
-        final String[] enums =
-            {
-                ElementName.PIPEPARAMS,
-                ElementName.RESOURCECMDPARAMS,
-                ElementName.RESOURCEPULLPARAMS,
-            };
-            
-        return enums;
-    }    
+        ElementName.PIPEPARAMS,
+        ElementName.RESOURCECMDPARAMS,
+        ElementName.RESOURCEPULLPARAMS,           
+    };
+    
     /**
      * Enumeration strings for list of QueryTypeObj
      * @returnString comma separated list of enumerated string values 
      */
-    private static String[] queryTypeObjString()
+    private static String[] queryTypeObjString=
     {
-        final String[] enums =
-        {
-                ElementName.DEVICEFILTER,
-                ElementName.EMPLOYEEDEF,
-                ElementName.KNOWNMSGQUPARAMS,
-                ElementName.MSGFILTER,
-                ElementName.MODIFYNODECMDPARAMS,
-                ElementName.NEWJDFQUPARAMS,
-                ElementName.NODEINFOQUPARAMS,
-                ElementName.NOTIFICATIONFILTER,
-                ElementName.QUEUEENTRYDEFLIST,
-                ElementName.QUEUEFILTER,
-                ElementName.RESOURCEQUPARAMS,
-                ElementName.STATUSQUPARAMS,
-                ElementName.TRACKFILTER,
-                ElementName.UPDATEJDFCMDPARAMS
-        };
-        return enums;
-    }
+        ElementName.DEVICEFILTER,
+        ElementName.EMPLOYEEDEF,
+        ElementName.KNOWNMSGQUPARAMS,
+        ElementName.MSGFILTER,
+        ElementName.MODIFYNODECMDPARAMS,
+        ElementName.NEWJDFQUPARAMS,
+        ElementName.NODEINFOQUPARAMS,
+        ElementName.NOTIFICATIONFILTER,
+        ElementName.QUEUEENTRYDEFLIST,
+        ElementName.QUEUEFILTER,
+        ElementName.RESOURCEQUPARAMS,
+        ElementName.STATUSQUPARAMS,
+        ElementName.TRACKFILTER,
+        ElementName.UPDATEJDFCMDPARAMS
+    };
     
     /**
      * Enumeration strings for list of ResponseTypeObj
      * @returnString comma separated list of enumerated string values 
      */
-    private static String[]responseTypeObjString()
+    private static String[]responseTypeObjString=
     {
-        final String[] enums = {
-                ElementName.DEVICELIST,
-                ElementName.DEVICEINFO,
-                ElementName.FLUSHEDRESOURCES,
-                ElementName.IDINFO,
-                ElementName.JDFCONTROLLER,
-                ElementName.JDFSERVICE,
-                ElementName.JOBPHASE,
-                ElementName.MESSAGESERVICE,
-                ElementName.NODEINFORESP,
-                ElementName.NOTIFICATIONDEF,
-                ElementName.OCCUPATION,
-                ElementName.QUEUE,
-                ElementName.QUEUEENTRY,
-                ElementName.RESOURCEINFO,
-                ElementName.SUBMISSIONMETHODS,
-                ElementName.TRACKRESULT,
-                ElementName.COMMAND,
-                ElementName.QUERY,
-                ElementName.ACKNOWLEDGE,
-                ElementName.RESPONSE,
-                ElementName.SIGNAL,
-                ElementName.REGISTRATION
-                };
-        return enums;
-    }
-    
+        ElementName.DEVICELIST,
+        ElementName.DEVICEINFO,
+        ElementName.FLUSHEDRESOURCES,
+        ElementName.IDINFO,
+        ElementName.JDFCONTROLLER,
+        ElementName.JDFSERVICE,
+        ElementName.JOBPHASE,
+        ElementName.MESSAGESERVICE,
+        ElementName.NODEINFORESP,
+        ElementName.NOTIFICATIONDEF,
+        ElementName.OCCUPATION,
+        ElementName.QUEUE,
+        ElementName.QUEUEENTRY,
+        ElementName.RESOURCEINFO,
+        ElementName.SUBMISSIONMETHODS,
+        ElementName.TRACKRESULT,
+        ElementName.COMMAND,
+        ElementName.QUERY,
+        ElementName.ACKNOWLEDGE,
+        ElementName.RESPONSE,
+        ElementName.SIGNAL,
+        ElementName.REGISTRATION
+    };
+    private static String[] signalTypeObjString=null;
+     
+    /**
+     * append an element<br>
+     * throws an JDFException, if <code>elementName</code> is not legal
+     * @param elementName  name of the element to append
+     * @param nameSpaceURI namespace URI of the element to append
+     * @return the appended element
+     */
     public KElement appendValidElement(String elementName, String nameSpaceURI)
     {
         int iSkip = numChildElements(elementName, nameSpaceURI);
@@ -1093,6 +1090,14 @@ public class JDFMessage extends JDFAutoMessage
         return appendValidElement(elementName, null);
     }
     
+    /**
+     * get a (valid) element<br>
+     * throws <code>JDFException</code> if the element is not valid
+     * @param nodeName     name of the element to get
+     * @param nameSpaceURI namespace URI of the element to get
+     * @param iSkip        number of elements to skip
+     * @return             the element
+     */
     public KElement getValidElement(
             String nodeName,
             String nameSpaceURI,
@@ -1100,13 +1105,21 @@ public class JDFMessage extends JDFAutoMessage
     {
         if (!isValidMessageElement(nodeName, iSkip))
         {
-            throw new JDFException("AppendValidElement: illegal element :" + nodeName);
+            throw new JDFException("getValidElement: illegal element :" + nodeName);
         }
         
         return getElement_JDFElement(nodeName, nameSpaceURI, iSkip);
     }
     
     //////////////////////////////////////////////////////////////////////
+    /**
+     * get a (valid) element, create if it doesn't exist<br>
+     * throws <code>JDFException</code> if the element is not valid
+     * @param nodeName     name of the element to get
+     * @param nameSpaceURI namespace URI of the element to get
+     * @param iSkip        number of elements to skip
+     * @return             KElement
+     */
     public KElement getCreateValidElement(
             String nodeName,
             String nameSpaceURI,
@@ -1114,7 +1127,7 @@ public class JDFMessage extends JDFAutoMessage
     {
         if (!isValidMessageElement(nodeName, iSkip))
         {
-            throw new JDFException("AppendValidElement: illegal element :" + nodeName);
+            throw new JDFException("getCreateValidElement: illegal element :" + nodeName);
         }
         
         return getCreateElement_KElement(nodeName, nameSpaceURI, iSkip);
@@ -1124,6 +1137,11 @@ public class JDFMessage extends JDFAutoMessage
      // Element getter / Setter
       **************************************************************** */
     
+    /**
+     * get device, create if it doesn't exist
+     * @param iSkip number of elements to skip
+     * @return JDFDevice
+     */
     public JDFDevice getCreateDevice(int iSkip)
     {
         JDFDevice e = (JDFDevice) getCreateValidElement(ElementName.DEVICE, JDFConstants.EMPTYSTRING, iSkip);
@@ -1131,6 +1149,10 @@ public class JDFMessage extends JDFAutoMessage
         return e;
     }
     /////////////////////////////////////////////////////////////////////
+    /**
+     * append element <code>Device</code>
+     * @return JDFDevice: the element
+     */
     public JDFDevice appendDevice()
     {
         JDFDevice e = (JDFDevice) appendValidElement(ElementName.DEVICE, null);
@@ -1138,8 +1160,10 @@ public class JDFMessage extends JDFAutoMessage
         return e;
     }
     /////////////////////////////////////////////////////////////////////
-    /*
-     get first element 
+    /**
+     * get the iSkip'th device 
+     * @param iSkip number of elements to skip
+     * @return JDFDevice: the element
      */
     public JDFDevice getDevice(int iSkip)
     {
@@ -1148,6 +1172,11 @@ public class JDFMessage extends JDFAutoMessage
     //////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////
+    /**
+     * get iSkip'th element <code>DeviceFilter</code>, create if it doesn't exist
+     * @param iSkip number of elements to skip
+     * @return JDFDeviceFilter: the element
+     */
     public JDFDeviceFilter getCreateDeviceFilter(int iSkip)
     {
         JDFDeviceFilter e =
@@ -1156,13 +1185,19 @@ public class JDFMessage extends JDFAutoMessage
         return e;
     }
     /////////////////////////////////////////////////////////////////////
+    /**
+     * append element <code>DeviceFilter</code>
+     * @return JDFDeviceFilter: the element
+     */
     public JDFDeviceFilter appendDeviceFilter()
     {
         return (JDFDeviceFilter) appendValidElement(ElementName.DEVICEFILTER, null);
     }
     /////////////////////////////////////////////////////////////////////
-    /*
-     get first element 
+    /**
+     * get iSkip'th element <code>DeviceFilter</code>
+     * @param iSkip number of elements to skip
+     * @return JDFDeviceFilter: the element
      */
     public JDFDeviceFilter getDeviceFilter(int iSkip)
     {
@@ -1171,20 +1206,31 @@ public class JDFMessage extends JDFAutoMessage
     //////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////
+    /**
+     * get element <code>DeviceInfo</code>, create if it doesn't exist
+     * @param iSkip number of elements to skip
+     * @return JDFDeviceInfo: the element
+     */
     public JDFDeviceInfo getCreateDeviceInfo(int iSkip)
     {
         return (JDFDeviceInfo) 
         getCreateValidElement(ElementName.DEVICEINFO, JDFConstants.EMPTYSTRING, iSkip);
     }
     /////////////////////////////////////////////////////////////////////
+    /**
+     * append element <code>DeviceInfo</code>
+     * @return JDFDeviceInfo: the element
+     */
     public JDFDeviceInfo appendDeviceInfo()
     {
         return (JDFDeviceInfo) appendValidElement(ElementName.DEVICEINFO, null);
     }
     /////////////////////////////////////////////////////////////////////
     
-    /*
-     get first element 
+    /**
+     * get iSkip'th element <code>DeviceInfo</code>
+     * @param iSkip number of elements to skip
+     * @return JDFDeviceInfo: the elment
      */
     public JDFDeviceInfo getDeviceInfo(int iSkip)
     {
@@ -1193,9 +1239,9 @@ public class JDFMessage extends JDFAutoMessage
     
     //////////////////////////////////////////////////////////////////////
     
-    /** get Element DeviceList
-     * @param int iSkip number of elements to skip
-     * @return JDFDeviceList The element
+    /** get Element <code>DeviceList</code>, create if it doesn't exist
+     * @param iSkip number of elements to skip
+     * @return JDFDeviceList: the element
      */
     public JDFDeviceList getCreateDeviceList(int iSkip)
     {
@@ -1206,7 +1252,8 @@ public class JDFMessage extends JDFAutoMessage
     /////////////////////////////////////////////////////////////////////
     
     /**
-     * Append element DeviceList
+     * Append element <code>DeviceList</code>
+     * @return JDFDeviceList the element
      */
     public JDFDeviceList appendDeviceList()
     {
@@ -1215,7 +1262,9 @@ public class JDFMessage extends JDFAutoMessage
     
     /////////////////////////////////////////////////////////////////////
     /**
-     *get first element 
+     * get iSkip'th DeviceList element
+     * @param iSkip number of elements to skip 
+     * @return JDFDeviceList: the element
      */
     public JDFDeviceList getDeviceList(int iSkip)
     {
@@ -1224,9 +1273,9 @@ public class JDFMessage extends JDFAutoMessage
     
     //////////////////////////////////////////////////////////////////////
     
-    /** get Element EmployeeDef
-     * @param int iSkip number of elements to skip
-     * @return JDFEmployeeDef The element
+    /** get element <code>EmployeeDef</code>, create if it doesn't exist
+     * @param iSkip number of elements to skip
+     * @return JDFEmployeeDef: the element
      */
     public JDFEmployeeDef getCreateEmployeeDef(int iSkip)
     {
@@ -1236,7 +1285,8 @@ public class JDFMessage extends JDFAutoMessage
     /////////////////////////////////////////////////////////////////////
     
     /**
-     * Append element EmployeeDef
+     * Append element <code>EmployeeDef</code>
+     * @return JDFEmployeeDef: the element
      */
     public JDFEmployeeDef appendEmployeeDef()
     {
@@ -1245,7 +1295,9 @@ public class JDFMessage extends JDFAutoMessage
     /////////////////////////////////////////////////////////////////////
     
     /**
-     *const get first element 
+     * get iSkip'th element <code>EmployeeDef</code>
+     * @param iSkip number of elements to skip
+     * @return JDFEmployeeDef: the element
      */
     public JDFEmployeeDef getEmployeeDef(int iSkip)
     {
@@ -1255,9 +1307,9 @@ public class JDFMessage extends JDFAutoMessage
     //////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////
     
-    /** get Element JDFController
-     * @param int iSkip number of elements to skip
-     * @return JDFJDFController The element
+    /** get Element <code>JDFController</code>, create if it doesn't exist
+     * @param iSkip number of elements to skip
+     * @return JDFJDFController: the element
      */
     public JDFJDFController getCreateJDFController(int iSkip)
     {
@@ -1268,7 +1320,8 @@ public class JDFMessage extends JDFAutoMessage
     /////////////////////////////////////////////////////////////////////
     
     /**
-     * Append element JDFController
+     * Append element <code>JDFController</code>
+     * @return JDFJDFController: the element
      */
     public JDFJDFController appendJDFController()
     {
@@ -1276,7 +1329,9 @@ public class JDFMessage extends JDFAutoMessage
     }
     /////////////////////////////////////////////////////////////////////
     /**
-     *get first element 
+     * get iSkip'th JDFController element
+     * @param iSkip number of elemts to skip
+     * @return JDFJDFController: the element 
      */
     public JDFJDFController getJDFController(int iSkip)
     {
@@ -1286,9 +1341,9 @@ public class JDFMessage extends JDFAutoMessage
     //////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////
     
-    /** get Element JDFService
-     * @param int iSkip number of elements to skip
-     * @return JDFJDFService The element
+    /** get iSkip'th element <code>JDFService</code>, create if it doesn't exist
+     * @param iSkip number of elements to skip
+     * @return JDFJDFService: the element
      */
     public JDFJDFService getCreateJDFService(int iSkip)
     {
@@ -1298,7 +1353,8 @@ public class JDFMessage extends JDFAutoMessage
     /////////////////////////////////////////////////////////////////////
     
     /**
-     * Append element JDFService
+     * Append element <code>JDFService</code>
+     * @return JDFJDFService the element
      */
     public JDFJDFService appendJDFService()
     {
@@ -1307,7 +1363,9 @@ public class JDFMessage extends JDFAutoMessage
     
     /////////////////////////////////////////////////////////////////////
     /**
-     *get first element 
+     * get iSkip'th <code>JDFService</code> element
+     * @param iSkip number of elements to skip
+     * @return JDFJDFService: the element 
      */
     public JDFJDFService getJDFService(int iSkip)
     {
@@ -1318,9 +1376,9 @@ public class JDFMessage extends JDFAutoMessage
     //////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////
     
-    /** get Element JobPhase
-     * @param int iSkip number of elements to skip
-     * @return JDFJobPhase The element
+    /** get Element <code>JobPhase</code>, create if it doesn't exist
+     * @param iSkip number of elements to skip
+     * @return JDFJobPhase: the element
      */
     public JDFJobPhase getCreateJobPhase(int iSkip)
     {
@@ -1329,15 +1387,18 @@ public class JDFMessage extends JDFAutoMessage
     /////////////////////////////////////////////////////////////////////
     
     /**
-     * Append element JobPhase
+     * append element <code>JobPhase</code>
+     * @return JDFJobPhase: the element
      */
     public JDFJobPhase appendJobPhase()
     {
         return  (JDFJobPhase) appendValidElement(ElementName.JOBPHASE, null);
     }
     /////////////////////////////////////////////////////////////////////
-    /*
-     get first element 
+    /**
+     * get iSkip'th <code>JobPhase</code> element
+     * @param iSkip elements to skip
+     * @return JDFJobPhase: the element
      */
     public JDFJobPhase getJobPhase(int iSkip)
     {
@@ -1347,9 +1408,9 @@ public class JDFMessage extends JDFAutoMessage
     //////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////
     
-    /** get Element KnownMsgQuParams
-     * @param int iSkip number of elements to skip
-     * @return JDFKnownMsgQuParams The element
+    /** get iSkip'th <code>KnownMsgQuParams</code> element, create if it doesn't exist
+     * @param iSkip number of elements to skip
+     * @return JDFKnownMsgQuParams the element
      */
     public JDFKnownMsgQuParams getCreateKnownMsgQuParams(int iSkip)
     {
@@ -1359,7 +1420,8 @@ public class JDFMessage extends JDFAutoMessage
     /////////////////////////////////////////////////////////////////////
     
     /**
-     * Append element KnownMsgQuParams
+     * append element <code>KnownMsgQuParams</code>
+     * @return JDFKnownMsgQuParams: the element
      */
     public JDFKnownMsgQuParams appendKnownMsgQuParams()
     {
@@ -1367,8 +1429,11 @@ public class JDFMessage extends JDFAutoMessage
     }
     
     /////////////////////////////////////////////////////////////////////
+
     /**
-     *get first element 
+     * get iSkip'th <code>KnownMsgQuParams</code> 
+     * @param iSkip number of elements to skip
+     * @return JDFKnownMsgQuParams: the element
      */
     public JDFKnownMsgQuParams getKnownMsgQuParams(int iSkip)
     {
@@ -1379,9 +1444,9 @@ public class JDFMessage extends JDFAutoMessage
     
     //////////////////////////////////////////////////////////////////////
     
-    /** get Element MessageService
-     * @param int iSkip number of elements to skip
-     * @return JDFMessageService The element
+    /** get iSkip'th element <code>MessageService</code>, create if it doesn't exist
+     * @param iSkip number of elements to skip
+     * @return JDFMessageService: the element
      */
     public JDFMessageService getCreateMessageService(int iSkip)
     {
@@ -1392,7 +1457,7 @@ public class JDFMessage extends JDFAutoMessage
     /////////////////////////////////////////////////////////////////////
     
     /**
-     * Append element MessageService
+     * append element <code>MessageService</code>
      */
     public JDFMessageService appendMessageService()
     {
@@ -1400,7 +1465,9 @@ public class JDFMessage extends JDFAutoMessage
     }
     /////////////////////////////////////////////////////////////////////
     /**
-     *get first element 
+     * get iSkip'th element <code>MessageService</code>
+     * @param iSkip number of elements to skip
+     * @return JDFMessageService: the element
      */
     public JDFMessageService getMessageService(int iSkip)
     {
@@ -1411,9 +1478,10 @@ public class JDFMessage extends JDFAutoMessage
     
     //////////////////////////////////////////////////////////////////////
     
-    /** get Element MsgFilter
-     * @param int iSkip number of elements to skip
-     * @return JDFMsgFilter The element
+    /** 
+     * get element <code>MsgFilter</code>, create if it doesn't exist
+     * @param iSkip number of elements to skip
+     * @return JDFMsgFilter: the element
      */
     public JDFMsgFilter getCreateMsgFilter(int iSkip)
     {
@@ -1423,16 +1491,19 @@ public class JDFMessage extends JDFAutoMessage
     /////////////////////////////////////////////////////////////////////
     
     /**
-     * Append element MsgFilter
+     * append element <code>MsgFilter</code>
+     * @return JDFMsgFilter: the element
      */
     public JDFMsgFilter appendMsgFilter()
     {
         return  (JDFMsgFilter) appendValidElement(ElementName.MSGFILTER, null);
     }
     /////////////////////////////////////////////////////////////////////
-    
+
     /**
-     *get first element 
+     * get iSkip'th element <code>MsgFilter</code>
+     * @param iSkip number of elements to skip
+     * @return JDFMsgFilter: the element
      */
     public JDFMsgFilter getMsgFilter(int iSkip)
     {
@@ -1442,9 +1513,9 @@ public class JDFMessage extends JDFAutoMessage
     
     //////////////////////////////////////////////////////////////////////
     
-    /** get Element NotificationDef
-     * @param int iSkip number of elements to skip
-     * @return JDFNotificationDef The element
+    /** get element <code>NotificationDef</code>, create if it doesn't exist
+     * @param iSkip number of elements to skip
+     * @return JDFNotificationDef: the element
      */
     public JDFNotificationDef getCreateNotificationDef(int iSkip)
     {
@@ -1454,15 +1525,19 @@ public class JDFMessage extends JDFAutoMessage
     /////////////////////////////////////////////////////////////////////
     
     /**
-     * Append element NotificationDef
+     * append element <code>NotificationDef</code>
+     * @return JDFNotificationDef: the element
      */
     public JDFNotificationDef appendNotificationDef()
     {
         return (JDFNotificationDef) appendValidElement(ElementName.NOTIFICATIONDEF, null);
     }
     /////////////////////////////////////////////////////////////////////
+
     /**
-     *get first element 
+     * get iSkip'th element <code>NotificationDef</code>
+     * @param iSkip number of elements to skip
+     * @return JDFNotificationDef: the element
      */
     public JDFNotificationDef getNotificationDef(int iSkip)
     {
@@ -1473,9 +1548,10 @@ public class JDFMessage extends JDFAutoMessage
     
     //////////////////////////////////////////////////////////////////////
     
-    /** get Element NotificationFilter
-     * @param int iSkip number of elements to skip
-     * @return JDFNotificationFilter The element
+    /** 
+     * get element <code>NotificationFilter</code>, create if it doesn't exist
+     * @param iSkip number of elements to skip
+     * @return JDFNotificationFilter: the element
      */
     public JDFNotificationFilter getCreateNotificationFilter(int iSkip)
     {
@@ -1486,7 +1562,8 @@ public class JDFMessage extends JDFAutoMessage
     /////////////////////////////////////////////////////////////////////
     
     /**
-     * Append element NotificationFilter
+     * append element <code>NotificationFilter</code>
+     * @return JDFNotificationFilter: the element
      */
     public JDFNotificationFilter appendNotificationFilter()
     {
@@ -1495,7 +1572,9 @@ public class JDFMessage extends JDFAutoMessage
     
     /////////////////////////////////////////////////////////////////////
     /**
-     *get first element 
+     * get iSkip'th <code>NotificationFilter</code> element
+     * @param iSkip number of elements to skip
+     * @return JDFNotificationFilter: the element
      */
     public JDFNotificationFilter getNotificationFilter(int iSkip)
     {
@@ -1505,9 +1584,10 @@ public class JDFMessage extends JDFAutoMessage
     
     //////////////////////////////////////////////////////////////////////
     
-    /** get Element Occupation
-     * @param int iSkip number of elements to skip
-     * @return JDFOccupation The element
+    /** 
+     * get iSkip'th <code>Occupation</code> element
+     * @param iSkip number of elements to skip
+     * @return JDFOccupation: the element
      */
     public JDFOccupation getCreateOccupation(int iSkip)
     {
@@ -1517,7 +1597,8 @@ public class JDFMessage extends JDFAutoMessage
     /////////////////////////////////////////////////////////////////////
     
     /**
-     * Append element Occupation
+     * append element <code>Occupation</code>
+     * @return JDFOccupation: the element
      */
     public JDFOccupation appendOccupation()
     {
@@ -1525,7 +1606,9 @@ public class JDFMessage extends JDFAutoMessage
     }
     /////////////////////////////////////////////////////////////////////
     /**
-     *get first element 
+     * get iSkip'th element <code>Occupation</code>
+     * @param iSkip number of elements to skip
+     * @return JDFOccupation: the element
      */
     public JDFOccupation getOccupation(int iSkip)
     {
@@ -1535,9 +1618,10 @@ public class JDFMessage extends JDFAutoMessage
     
     //////////////////////////////////////////////////////////////////////
     
-    /** get Element PipeParams
-     * @param int iSkip number of elements to skip
-     * @return JDFPipeParams The element
+    /** 
+     * get iSkip'th element <code>PipeParams</code>
+     * @param iSkip number of elements to skip
+     * @return JDFPipeParams: the element
      */
     public JDFPipeParams getCreatePipeParams(int iSkip)
     {
@@ -1547,15 +1631,18 @@ public class JDFMessage extends JDFAutoMessage
     /////////////////////////////////////////////////////////////////////
     
     /**
-     * Append element PipeParams
+     * append element <code>PipeParams</code>
+     * @return JDFPipeParams: the element
      */
     public JDFPipeParams appendPipeParams()
     {
         return  (JDFPipeParams) appendValidElement(ElementName.PIPEPARAMS, null);
     }
     /////////////////////////////////////////////////////////////////////
-    /*
-     get first element 
+    /**
+     * get iSkip'th element <code>PipeParams</code>
+     * @param iSkip number of elements to skip
+     * @return JDFPipeParams: the element
      */
     public JDFPipeParams getPipeParams(int iSkip)
     {
@@ -1565,9 +1652,9 @@ public class JDFMessage extends JDFAutoMessage
     
     //////////////////////////////////////////////////////////////////////
     
-    /** get Element Queue
-     * @param int iSkip number of elements to skip
-     * @return JDFQueue The element
+    /** get iSkip'th element <code>Queue</code>
+     * @param iSkip number of elements to skip
+     * @return JDFQueue: the element
      */
     public JDFQueue getCreateQueue(int iSkip)
     {
@@ -1577,7 +1664,8 @@ public class JDFMessage extends JDFAutoMessage
     /////////////////////////////////////////////////////////////////////
     
     /**
-     * Append element Queue
+     * append element <code>Queue</code>
+     * @return JDFQueue: the element
      */
     public JDFQueue appendQueue()
     {
@@ -1586,7 +1674,9 @@ public class JDFMessage extends JDFAutoMessage
     
     /////////////////////////////////////////////////////////////////////
     /**
-     *get first element 
+     * get iSkip'th element <code>Queue</code>
+     * @param iSkip number of elements to skip
+     * @return JDFQueue: the element
      */
     public JDFQueue getQueue(int iSkip)
     {
@@ -1595,6 +1685,11 @@ public class JDFMessage extends JDFAutoMessage
     //////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////
+    /**
+     * get iSkip'th element <code>QueueEntry</code>, create if it doesn't exist
+     * @param iSkip number of elements to skip
+     * @return JDFQueueEntry: the element
+     */
     public JDFQueueEntry getCreateQueueEntry(int iSkip)
     {
         return  (JDFQueueEntry) 
@@ -1602,15 +1697,18 @@ public class JDFMessage extends JDFAutoMessage
     }
     /////////////////////////////////////////////////////////////////////
     /**
-     * Append element QueueEntry
+     * append element <code>QueueEntry</code>
+     * @return JDFQueueEntry: the element
      */
     public JDFQueueEntry appendQueueEntry()
     {
         return  (JDFQueueEntry) appendValidElement(ElementName.QUEUEENTRY, null);
     }
     /////////////////////////////////////////////////////////////////////
-    /*
-     get first element 
+    /**
+     * get iSkip'th element <code>QueueEntry</code>
+     * @param iSkip number of elements to skip
+     * @return JDFQueueEntry: the element
      */
     public JDFQueueEntry getQueueEntry(int iSkip)
     {
@@ -1621,9 +1719,10 @@ public class JDFMessage extends JDFAutoMessage
     
     //////////////////////////////////////////////////////////////////////
     
-    /** get Element QueueEntryDef
-     * @param int iSkip number of elements to skip
-     * @return JDFQueueEntryDef The element
+    /** 
+     * get iSkip'th element <code>QueueEntryDef</code>, create if it doesn't exist
+     * @param iSkip number of elements to skip
+     * @return JDFQueueEntryDef: the element
      */
     public JDFQueueEntryDef getCreateQueueEntryDef(int iSkip)
     {
@@ -1633,7 +1732,8 @@ public class JDFMessage extends JDFAutoMessage
     /////////////////////////////////////////////////////////////////////
     
     /**
-     * Append element QueueEntryDef
+     * append element <code>QueueEntryDef</code>
+     * @return JDFQueueEntryDef: the element
      */
     public JDFQueueEntryDef appendQueueEntryDef()
     {
@@ -1641,7 +1741,9 @@ public class JDFMessage extends JDFAutoMessage
     }
     /////////////////////////////////////////////////////////////////////
     /**
-     *get first element 
+     * get iSkip'th element <code>QueueEntryDef</code>
+     * @param iSkip number of elements to skip
+     * @return JDFQueueEntryDef: the element
      */
     public JDFQueueEntryDef getQueueEntryDef(int iSkip)
     {
@@ -1650,6 +1752,11 @@ public class JDFMessage extends JDFAutoMessage
     
     //////////////////////////////////////////////////////////////////////
     
+    /**
+     * get iSkip'th element QueueEntryDefList, create if it doesn't exist
+     * @param iSkip number of elements to skip
+     * @return JDFQueueEntryDefList: the element
+     */
     public JDFQueueEntryDefList getCreateQueueEntryDefList(int iSkip)
     {
         return (JDFQueueEntryDefList) 
@@ -1657,13 +1764,19 @@ public class JDFMessage extends JDFAutoMessage
     }
     /////////////////////////////////////////////////////////////////////
     
+    /**
+     * append element <code>QueueEntryDefList</code>
+     * @return JDFQueueEntryDefList: the element
+     */
     public JDFQueueEntryDefList appendQueueEntryDefList()
     {
         return  (JDFQueueEntryDefList) appendValidElement(ElementName.QUEUEENTRYDEFLIST, null);
     }
     /////////////////////////////////////////////////////////////////////
-    /*
-     get first element 
+    /**
+     * get iSkip'th element <code>QueueEntryDefList</code>
+     * @param iSkip number of elements to skip
+     * @return JDFQueueEntryDefList: the element
      */
     public JDFQueueEntryDefList getQueueEntryDefList(int iSkip)
     {
@@ -1674,9 +1787,10 @@ public class JDFMessage extends JDFAutoMessage
     
     //////////////////////////////////////////////////////////////////////
     
-    /** get Element QueueEntryPriParams
-     * @param int iSkip number of elements to skip
-     * @return JDFQueueEntryPriParams The element
+    /** 
+     * get iSkip'th element <code>QueueEntryPriParams</code>
+     * @param iSkip number of elements to skip
+     * @return JDFQueueEntryPriParams: the element
      */
     public JDFQueueEntryPriParams getCreateQueueEntryPriParams(int iSkip)
     {
@@ -1685,7 +1799,8 @@ public class JDFMessage extends JDFAutoMessage
     }
     
     /**
-     * Append element QueueEntryPriParams
+     * append element <code>QueueEntryPriParams</code>
+     * @return JDFQueueEntryPriParams: the element
      */
     public JDFQueueEntryPriParams appendQueueEntryPriParams()
     {
@@ -1693,9 +1808,9 @@ public class JDFMessage extends JDFAutoMessage
     }
     
     /**
-     *get first element QueueEntryPriParams
-     * @param int iSkip number of elements to skip
-     *@return  JDFQueueEntryPriParams The element
+     * get iSkip'th element <code>QueueEntryPriParams</code>
+     * @param iSkip number of elements to skip
+     * @return JDFQueueEntryPriParams: the element
      */
     public JDFQueueEntryPriParams getQueueEntryPriParams(int iSkip)
     {
@@ -1706,9 +1821,10 @@ public class JDFMessage extends JDFAutoMessage
     
     //////////////////////////////////////////////////////////////////////
     
-    /** get Element QueueEntryPosParams
-     * @param int iSkip number of elements to skip
-     * @return JDFQueueEntryPosParams The element
+    /** 
+     * get iSkip'th element QueueEntryPosParams, create if it doesn't exist
+     * @param iSkip number of elements to skip
+     * @return JDFQueueEntryPosParams: the element
      */
     public JDFQueueEntryPosParams getCreateQueueEntryPosParams(int iSkip)
     {
@@ -1718,7 +1834,8 @@ public class JDFMessage extends JDFAutoMessage
     /////////////////////////////////////////////////////////////////////
     
     /**
-     * Append element QueueEntryPosParams
+     * append element <code>QueueEntryPosParams</code>
+     * @return JDFQueueEntryPosParams: the element
      */
     public JDFQueueEntryPosParams appendQueueEntryPosParams()
     {
@@ -1727,7 +1844,9 @@ public class JDFMessage extends JDFAutoMessage
     
     /////////////////////////////////////////////////////////////////////
     /**
-     *get first element 
+     * get iSkip'th element <code>QeueEntryPosParams</code>
+     * @param iSkip number of elements to skip
+     * @return JDFQueueEntryPosParams: the element
      */
     public JDFQueueEntryPosParams getQueueEntryPosParams(int iSkip)
     {
@@ -1738,9 +1857,9 @@ public class JDFMessage extends JDFAutoMessage
     
     //////////////////////////////////////////////////////////////////////
     
-    /** get Element QueueSubmissionParams
+    /** get iSkip'th element <code>QueueSubmissionParams</code>
      * @param int iSkip number of elements to skip
-     * @return JDFQueueSubmissionParams The element
+     * @return JDFQueueSubmissionParams: the element
      */
     public JDFQueueSubmissionParams getCreateQueueSubmissionParams(int iSkip)
     {
@@ -1750,7 +1869,8 @@ public class JDFMessage extends JDFAutoMessage
     /////////////////////////////////////////////////////////////////////
     
     /**
-     * Append element QueueSubmissionParams
+     * append element <code>QueueSubmissionParams</code>
+     * @return JDFQueueSubmissionParams: the element
      */
     public JDFQueueSubmissionParams appendQueueSubmissionParams()
     {
@@ -1758,7 +1878,9 @@ public class JDFMessage extends JDFAutoMessage
     }
     /////////////////////////////////////////////////////////////////////
     /**
-     *get first element 
+     * get iSkip'th element <code>QueueSubmissionParams</code>
+     * @param iSkip number of elements to skip
+     * @return JDFQueueSubmissionParams: the element
      */
     public JDFQueueSubmissionParams getQueueSubmissionParams(int iSkip)
     {
@@ -1769,9 +1891,9 @@ public class JDFMessage extends JDFAutoMessage
     
     //////////////////////////////////////////////////////////////////////
     
-    /** get Element ResourceCmdParams
-     * @param int iSkip number of elements to skip
-     * @return JDFResourceCmdParams The element
+    /** get iSkip'th element <code>ResourceCmdParams</code>
+     * @param iSkip number of elements to skip
+     * @return JDFResourceCmdParams: the element
      */
     public JDFResourceCmdParams getCreateResourceCmdParams(int iSkip)
     {
@@ -1781,7 +1903,8 @@ public class JDFMessage extends JDFAutoMessage
     /////////////////////////////////////////////////////////////////////
     
     /**
-     * Append element ResourceCmdParams
+     * append element <code>ResourceCmdParams</code>
+     * @return JDFResourceCmdParams: the element
      */
     public JDFResourceCmdParams appendResourceCmdParams()
     {
@@ -1789,7 +1912,9 @@ public class JDFMessage extends JDFAutoMessage
     }
     /////////////////////////////////////////////////////////////////////
     /**
-     *get first element 
+     * get iSkip'th element <code>ResourceCmdParams</code>
+     * @param iSkip number of elements to skip
+     * @return JDFResourceCmdParams: the element
      */
     public JDFResourceCmdParams getResourceCmdParams(int iSkip)
     {
@@ -1799,9 +1924,10 @@ public class JDFMessage extends JDFAutoMessage
     
     //////////////////////////////////////////////////////////////////////
     
-    /** get Element ResourceQuParams
-     * @param int iSkip number of elements to skip
-     * @return JDFResourceQuParams The element
+    /** 
+     * get iSkip'th element <code>ResourceQuParams</code>
+     * @param iSkip number of elements to skip
+     * @return JDFResourceQuParams: the element
      */
     public JDFResourceQuParams getCreateResourceQuParams(int iSkip)
     {
@@ -1811,7 +1937,8 @@ public class JDFMessage extends JDFAutoMessage
     /////////////////////////////////////////////////////////////////////
     
     /**
-     * Append element ResourceQuParams
+     * append element <code>ResourceQuParams</code>
+     * @return JDFResourceQuParams: the element
      */
     public JDFResourceQuParams appendResourceQuParams()
     {
@@ -1819,7 +1946,9 @@ public class JDFMessage extends JDFAutoMessage
     }
     /////////////////////////////////////////////////////////////////////
     /**
-     *get first element 
+     * get iSkip'th element <code>ResourceQuParams</code>
+     * @param iSkip number of elements to skip
+     * @return JDFResourceQuParams: the element
      */
     public JDFResourceQuParams getResourceQuParams(int iSkip)
     {
@@ -1829,9 +1958,10 @@ public class JDFMessage extends JDFAutoMessage
     
     //////////////////////////////////////////////////////////////////////
     
-    /** get Element ResourceInfo
-     * @param int iSkip number of elements to skip
-     * @return JDFResourceInfo The element
+    /** 
+     * get iSkip'th element <code>ResourceInfo</code>
+     * @param iSkip number of elements to skip
+     * @return JDFResourceInfo: the element
      */
     public JDFResourceInfo getCreateResourceInfo(int iSkip)
     {
@@ -1841,7 +1971,8 @@ public class JDFMessage extends JDFAutoMessage
     /////////////////////////////////////////////////////////////////////
     
     /**
-     * Append element ResourceInfo
+     * append element <code>ResourceInfo</code>
+     * @return JDFResourceInfo: the element
      */
     public JDFResourceInfo appendResourceInfo()
     {
@@ -1849,7 +1980,9 @@ public class JDFMessage extends JDFAutoMessage
     }
     /////////////////////////////////////////////////////////////////////
     /**
-     *get first element 
+     * get iSkip'th element <code>ResourceInfo</code>
+     * @param iSkip number of elements to skip
+     * @return JDFResourceInfo: the element
      */
     public JDFResourceInfo getResourceInfo(int iSkip)
     {
@@ -1859,9 +1992,9 @@ public class JDFMessage extends JDFAutoMessage
     
     //////////////////////////////////////////////////////////////////////
     
-    /** get Element StatusQuParams
-     * @param int iSkip number of elements to skip
-     * @return JDFStatusQuParams The element
+    /** get iSkip'th element <code>StatusQuParams</code>, create if it doesn't exist
+     * @param iSkip number of elements to skip
+     * @return JDFStatusQuParams: the element
      */
     public JDFStatusQuParams getCreateStatusQuParams(int iSkip)
     {
@@ -1871,7 +2004,8 @@ public class JDFMessage extends JDFAutoMessage
     /////////////////////////////////////////////////////////////////////
     
     /**
-     * Append element StatusQuParams
+     * append element <code>StatusQuParams</code>
+     * @return JDFStatusQuParams: the element
      */
     public JDFStatusQuParams appendStatusQuParams()
     {
@@ -1880,9 +2014,9 @@ public class JDFMessage extends JDFAutoMessage
     /////////////////////////////////////////////////////////////////////
     
     /**
-     *get first element StatusQuParams
-     * @param int iSkip number of elements to skip
-     * @return  JDFStatusQuParams The element
+     * get iSkip'th element StatusQuParams
+     * @param iSkip number of elements to skip
+     * @return JDFStatusQuParams: the element
      */
     public JDFStatusQuParams getStatusQuParams(int iSkip)
     {
@@ -1892,9 +2026,10 @@ public class JDFMessage extends JDFAutoMessage
     //////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////
     
-    /** get Element StopPersChParams
+    /** 
+     * get iSkip'th element StopPersChParams
      * @param int iSkip number of elements to skip
-     * @return JDFStopPersChParams The element
+     * @return JDFStopPersChParams: the element
      */
     public JDFStopPersChParams getCreateStopPersChParams(int iSkip)
     {
@@ -1904,7 +2039,8 @@ public class JDFMessage extends JDFAutoMessage
     /////////////////////////////////////////////////////////////////////
     
     /**
-     * Append element StopPersChParams
+     * append element <code>StopPersChParams</code>
+     * @return JDFStopPersChParams: the element
      */
     public JDFStopPersChParams appendStopPersChParams()
     {
@@ -1913,8 +2049,9 @@ public class JDFMessage extends JDFAutoMessage
     /////////////////////////////////////////////////////////////////////
     
     /**
-     *get first element StopPersChParams
-     *@return  JDFStopPersChParams The element
+     * get iSkip'th element <code>StopPersChParams</code>
+     * @param iSkip number of elements to skip
+     * @return  JDFStopPersChParams: the element
      */
     public JDFStopPersChParams getStopPersChParams(int iSkip)
     {
@@ -1925,9 +2062,10 @@ public class JDFMessage extends JDFAutoMessage
     
     //////////////////////////////////////////////////////////////////////
     
-    /** get Element SubmissionMethods
-     * @param int iSkip number of elements to skip
-     * @return JDFSubmissionMethods The element
+    /** 
+     * get iSkip'th element <code>SubmissionMethods</code>
+     * @param iSkip number of elements to skip
+     * @return JDFSubmissionMethods: the element
      */
     public JDFSubmissionMethods getCreateSubmissionMethods(int iSkip)
     {
@@ -1937,7 +2075,8 @@ public class JDFMessage extends JDFAutoMessage
     /////////////////////////////////////////////////////////////////////
     
     /**
-     * Append element SubmissionMethods
+     * append element <code>SubmissionMethods</code>
+     * @return JDFSubmissionMethods: the element
      */
     public JDFSubmissionMethods appendSubmissionMethods()
     {
@@ -1945,7 +2084,9 @@ public class JDFMessage extends JDFAutoMessage
     }
     /////////////////////////////////////////////////////////////////////
     /**
-     *get first element 
+     * get iSkip'th element <code>SubMissionMethods</code>
+     * @param iSkip number of elements to skip
+     * @return JDFSubmissionMethods: the element
      */
     public JDFSubmissionMethods getSubmissionMethods(int iSkip)
     {
@@ -1955,9 +2096,10 @@ public class JDFMessage extends JDFAutoMessage
     
     //////////////////////////////////////////////////////////////////////
     
-    /** get Element TrackFilter
-     * @param int iSkip number of elements to skip
-     * @return JDFTrackFilter The element
+    /** 
+     * get iSkip'th element <code>TrackFilter</code>
+     * @param iSkip number of elements to skip
+     * @return JDFTrackFilter: the element
      */
     public JDFTrackFilter getCreateTrackFilter(int iSkip)
     {
@@ -1967,7 +2109,8 @@ public class JDFMessage extends JDFAutoMessage
     /////////////////////////////////////////////////////////////////////
     
     /**
-     * Append element TrackFilter
+     * append element <code>TrackFilter</code>
+     * @return JDFTrackFilter: the element
      */
     public JDFTrackFilter appendTrackFilter()
     {
@@ -1976,7 +2119,9 @@ public class JDFMessage extends JDFAutoMessage
     
     /////////////////////////////////////////////////////////////////////
     /**
-     *get first element 
+     * get iSkip'th element <code>TrackFilter</code>
+     * @param iSkip number of elements to skip
+     * @return JDFTrackFilter: the element
      */
     public JDFTrackFilter getTrackFilter(int iSkip)
     {
@@ -1986,9 +2131,9 @@ public class JDFMessage extends JDFAutoMessage
     
     //////////////////////////////////////////////////////////////////////
     
-    /** get Element TrackResult
-     * @param int iSkip number of elements to skip
-     * @return JDFTrackResult The element
+    /** get iSkip'th element <code>TrackResult</code>
+     * @param iSkip number of elements to skip
+     * @return JDFTrackResult: the element
      */
     public JDFTrackResult getCreateTrackResult(int iSkip)
     {
@@ -1999,7 +2144,8 @@ public class JDFMessage extends JDFAutoMessage
     /////////////////////////////////////////////////////////////////////
     
     /**
-     * Append element TrackResult
+     * append element <code>TrackResult</code>
+     * @return JDFTrackResult: the element
      */
     public JDFTrackResult appendTrackResult()
     {
@@ -2007,7 +2153,9 @@ public class JDFMessage extends JDFAutoMessage
     }
     /////////////////////////////////////////////////////////////////////
     /**
-     *get first element 
+     * get the iSkip'th element <code>TrackResult</code>
+     * @param iSkip the number of elements to skip
+     * @return JDFTrackResult: the element
      */
     public JDFTrackResult getTrackResult(int iSkip)
     {
@@ -2027,26 +2175,49 @@ public class JDFMessage extends JDFAutoMessage
     }
     
     
+    /**
+     * get iSkip'th element <code>IDInfo</code>, create if it doesn't exist
+     * @param iSkip number of elements to skip
+     * @return JDFIDInfo: the element
+     */
     public JDFIDInfo getCreateIDInfo(int iSkip)
     {
         return (JDFIDInfo)getCreateValidElement(ElementName.IDINFO, null, iSkip);
     }
     
+    /**
+     * append element <code>IDInfo</code>
+     * JDFIDInfo: the element
+     */
     public  JDFIDInfo appendIDInfo()
     {
         return (JDFIDInfo)appendValidElement(ElementName.IDINFO, null);
     }
     
+    /**
+     * get iSkip'th element <code>IDInfo</code>
+     * @param iSkip number of elements to skip
+     * JDFIDInfo: the element
+     */
     public JDFIDInfo getIDInfo(int iSkip)
     {
         return (JDFIDInfo)getValidElement(ElementName.IDINFO, null, iSkip);
     }
     
+    /**
+     * get iSkip'th element FlushedResources
+     * @param iSkip number of elements to skip
+     * @return JDFFlushedResources: the element
+     */
     public JDFFlushedResources getCreateFlushedResources(int iSkip)
     {
         return (JDFFlushedResources)getCreateValidElement(ElementName.FLUSHEDRESOURCES, null, iSkip);
     }
     
+    /**
+     * append element <code>FlushedResources</code>
+     * @return JDFFlushedResources: the element
+     */
     public JDFFlushedResources appendFlushedResources()
     {
         return (JDFFlushedResources)appendValidElement(ElementName.FLUSHEDRESOURCES, null);
@@ -2312,11 +2483,17 @@ public class JDFMessage extends JDFAutoMessage
         return getAttribute(AttributeName.REFID);
     }
     
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.auto.JDFAutoMessage#getID()
+     */
     public String getID()
     {
         return this.getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
     }
     
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.core.JDFElement#getInvalidElements(org.cip4.jdflib.core.KElement.EnumValidationLevel, boolean, int)
+     */
     public VString getInvalidElements(
             EnumValidationLevel level,
             boolean bIgnorePrivate,
@@ -3443,23 +3620,26 @@ public class JDFMessage extends JDFAutoMessage
      definition of optional elements in the JDF namespace
      */
     // TODO move to elemeInfoTable creation
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.core.KElement#optionalElements()
+     */
     public VString optionalElements()
     {
         VString s = super.optionalElements();
         EnumType t = getEnumType();
         // loop over all valid potential elements for this family
-        VString vObjs = familyTypeObj();
+        String[] vObjs = familyTypeObj();
         // for each object, check whether it is compatible with the type of this
-        for (int i = 0; i < vObjs.size(); i++)
+        for (int i = 0; i < vObjs.length; i++)
         {
-            Vector vt = getValidTypeVector((String) vObjs.elementAt(i), 0);
+            Vector vt = getValidTypeVector(vObjs[i], 0);
             // is it there ?
             for (int j = 0; j < vt.size(); j++)
             {
                 if (vt.elementAt(j).equals(t))
                 {
                     // obj x is compatible with this -> add it to the list of elements
-                    s.appendUnique(vObjs.stringAt(i));
+                    s.appendUnique(vObjs[i]);
                     break;
                 }
             }

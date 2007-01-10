@@ -85,6 +85,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -98,24 +100,24 @@ import org.cip4.jdflib.core.VString;
 
 
 /**
- * collection of helper routines to conver urls
+ * collection of helper routines to convert urls
  * @author prosirai
  *
  */
 public class UrlUtil
 {
-//    public static final String m_URIEscape = "%?:@&=+$,[]";
+//  public static final String m_URIEscape = "%?:@&=+$,[]";
     public static final String m_URIEscape = "%?@&=+$,[]";
-    
+
     /**
-     * returns the relative URL of a file relative to the current workin directory
-     * @param f the file to get the relative url for
-     * @param baseDir the file that describes cwd, if null cwd is calculated
-     * @param bEscape128 if true, escape > 128 (URL) else retain (IRL)
+     * returns the relative URL of a file relative to the current working directory
+     * @param f       the file to get the relative url for
+     * @param baseDir the file that describes cwd, if <code>null</code> cwd is calculated
+     * @param bEscape128 if true, escape > 128 (URL), else retain (IRL)
      * @return
      */
-       public static String getRelativeURL(File f, File baseDir, boolean bEscape128)
-        {
+    public static String getRelativeURL(File f, File baseDir, boolean bEscape128)
+    {
         String relPath=getRelativePath(f,baseDir);
         if(relPath==null)
         {
@@ -128,27 +130,27 @@ public class UrlUtil
                 return null;
             }
         }
-        
+
         relPath=StringUtil.replaceChar(relPath,'\\',"/",0);
         byte[] utf8=StringUtil.setUTF8String(relPath);
         relPath=new String(utf8);
         relPath=StringUtil.escape(relPath,m_URIEscape,"%",16,2,0x21,bEscape128 ? 128 : -1);  
         return relPath;
     }    
-    
+
     /**
-     * returns the relative URL of a file relative to the current workin directory
+     * returns the relative URL of a file relative to the current working directory<br>
      * this includes escaping of %20 etc.
      * 
-     * @param f the file to get the relative path for
-     * @param fCWD the file that describes cwd, if null cwd is calculated
+     * @param f    the file to get the relative path for
+     * @param fCWD the file that describes cwd, if <code>null</code> cwd is calculated
      * @return
      */
     public static String getRelativePath(File f, File fCWD)
     {
         if(fCWD==null)
             fCWD=new File(System.getProperty("user.dir"));
-        
+
         String cPath=null;
         String cwd=null;
         try{            
@@ -157,7 +159,7 @@ public class UrlUtil
             cwd=fCWD.getCanonicalPath();
             if(cPath.charAt(0)!= cwd.charAt(0))
                 return null; // incompatible abs paths
-                    
+
         }
         catch (IOException e)
         {
@@ -165,7 +167,7 @@ public class UrlUtil
         }
         VString vCwd=StringUtil.tokenize(cwd,File.separator,false);
         VString vPath=StringUtil.tokenize(cPath,File.separator,false);
-        
+
         int lenPath=vPath.size();
         int siz=vCwd.size();
         if(lenPath<siz)
@@ -185,21 +187,22 @@ public class UrlUtil
         lenPath=vPath.size();
         siz=vCwd.size();
         String prefix= (siz==0) ? "." : "..";
-        
+
         for(int i=1;i<siz;i++)
             prefix+="/..";
-        
-        return lenPath==0 ? prefix : StringUtil.setvString(vPath,File.separator,prefix+File.separator,null);        
+
+        String s= lenPath==0 ? prefix : StringUtil.setvString(vPath,File.separator,prefix+File.separator,null);
+        return cleanDots(s);
     }
-    
+
     /**
      * get a readable inputstream from the CID url
      * 
-     * @param url the url to get a stream for
+     * @param url       the url to get a stream for
      * @param multipart the multipart mime to which the cid refers
      * 
-     * @return InputStream the readable input stream that this filespec refers to
-     * null if broken or non existant
+     * @return InputStream - the readable input stream that this filespec refers to,
+     *                  <code>null</code> if broken or non-existent
      * 
      */
     public static InputStream getCidURLStream(String url, Multipart multipart)
@@ -209,7 +212,7 @@ public class UrlUtil
         BodyPart bp= MimeUtil.getPartByCID(multipart, url);
         if(bp==null)
             return null;
-        
+
         try
         {
             return bp.getInputStream();
@@ -221,6 +224,20 @@ public class UrlUtil
         return null; // snafu exit
     }
     ///////////////////////////////////////////////////////////////////
+
+    /**
+     * get the filename extension of pathName
+     * @param pathName the pathName to get the extension for
+     * @return String - the filename extension
+     */
+    public static String extension(String pathName)
+    {
+        if(pathName==null)
+            return null;
+
+        int index = pathName.lastIndexOf(".");
+        return (index == -1) ? null : pathName.substring(index + 1);
+    }
 
     /**
      * get the opened input stream for a given url string
@@ -235,7 +252,7 @@ public class UrlUtil
         {
             if(bodyPart==null)
                 return  null; // want a cid but have no body part
-            
+
             Multipart multipart=bodyPart.getParent();
             return getCidURLStream(urlString, multipart);
         }
@@ -246,7 +263,7 @@ public class UrlUtil
                 URL url=new URL(urlString);
                 URLConnection urlConnection=url.openConnection();
                 return urlConnection.getInputStream();
-             }
+            }
             catch (MalformedURLException x)
             {
                 return null;
@@ -269,24 +286,24 @@ public class UrlUtil
             }
             catch (FileNotFoundException x)
             {
-               return null;
+                return null;
             }
         }
-           
+
     }
-    
+
     /**
-     * Convert a File to a valid file URL or IRL
+     * Convert a File to a valid file URL or IRL<br>
      * note that some internal functions use network protocol and therefor performance may be non-optimal
      * 
-     * @param f The File to parse,
+     * @param f          the File to parse,
      * @param bEscape128 if true, escape non -ascii chars (URI), if false, don't (IRI)
      * @return the URL string
      * @throws MalformedURLException 
      */
     public static String fileToUrl(File f, boolean bEscape128) throws MalformedURLException
     {
-        
+
         try
         {
             f=f.getCanonicalFile();
@@ -295,9 +312,9 @@ public class UrlUtil
         {
             throw new MalformedURLException();
         }
-        
-//        URL u=f.toURL();
-//        String s=u.toExternalForm().substring(5); // remove "file:"
+
+//      URL u=f.toURL();
+//      String s=u.toExternalForm().substring(5); // remove "file:"
         String s=f.getAbsolutePath();
         s=StringUtil.replaceChar(s,'\\',"/",0);
         s=new String(StringUtil.setUTF8String(s));
@@ -311,9 +328,10 @@ public class UrlUtil
         }
         if(s.charAt(0)!='/')
             s="/"+s;
-            
+
         return "file:"+s;
     }
+    
     /**
      * Retrieve a file for a relative or absolute file url
      * @param urlString the file url to retrieve a file for
@@ -325,14 +343,15 @@ public class UrlUtil
             return null;
         if(isCID(urlString) || isHttp(urlString))
             return null;
-        
+
         if(urlString.toLowerCase().startsWith("file:"))
             urlString=urlString.substring(5); // remove "file:"
         urlString= StringUtil.unEscape(urlString, "%", 16, 2);
         urlString=StringUtil.getUTF8String(urlString.getBytes());
-        
+
         return new File(urlString);
     }
+    
     /**
      * Retrieve a file for a relative or absolute file url
      * @param urlString the file url to retrieve a file for
@@ -360,6 +379,7 @@ public class UrlUtil
         }
         return null;
     }
+    
     /**
      * test whether a given url is a cid
      * @param url the url to test
@@ -369,9 +389,9 @@ public class UrlUtil
     {
         if(url==null)
             return false;
-       if(url.startsWith("<"))
-           url=url.substring(1);
-       return url.toLowerCase().startsWith("cid:");
+        if(url.startsWith("<"))
+            url=url.substring(1);
+        return url.toLowerCase().startsWith("cid:");
     }
 
     public static boolean isWindowsLocalPath(String pathName)
@@ -381,7 +401,7 @@ public class UrlUtil
         return StringUtils.isAlpha(pathName.substring(0,1)) 
         && pathName.substring(1,2).equals(":") 
         || StringUtils.countMatches(pathName,"\\")>StringUtils.countMatches(pathName,"/");
-        
+
     }
 
 /////////////////////////////////////////////////////////////////    
@@ -393,11 +413,11 @@ public class UrlUtil
      */
     public static boolean isHttp(String url)
     {
-       if(url==null)
-           return false;
-       return url.toLowerCase().startsWith("http://");
+        if(url==null)
+            return false;
+        return url.toLowerCase().startsWith("http://");
     }
-    
+
     public static boolean isUNC(String pathName)
     {
         if(pathName==null || pathName.length()==0)
@@ -405,7 +425,132 @@ public class UrlUtil
         return pathName.startsWith("\\\\");
     }
 
-    
-    //////////////////////////////////////////////////////////////////////////////////
-    
+    /**
+     * @param val
+     * @return
+     */
+    public static boolean isIRL(String val)
+    {
+        char c[]=val.toCharArray();
+        boolean bFix=false;
+        for(int i=0;i<c.length;i++)
+            if(c[i] > 127)
+            {
+                c[i]='a'; // any valid char
+                bFix=true;
+            }
+
+        return isURL(bFix ? new String(c): val);
+    }
+    /**
+     * @param val
+     * @return
+     */
+    public static boolean isURL(String val)
+    {
+        try
+        {
+            URI uri=new URI(val);
+            String scheme=uri.getScheme();
+            if(scheme!=null && scheme.toLowerCase().startsWith("http"))
+            {
+                if(uri.getHost()==null)
+                    return false;
+            }
+            // add any other exceptions here
+        }
+        catch (URISyntaxException x)
+        {
+            return false;
+        }
+        return val.length()<4096;
+    }
+
+    /**
+     * concatenate directory and url to a single path 
+     * IF and only IF url is a relative url<br>
+     * relative urls MUST NOT have a scheme (e.g. file:)
+     * 
+     * @param directory the url of the directory
+     * @param url       the realtive url of the file
+     * @return String - the concatenated URL of the directory + file
+     */
+    public static String getURLWithDirectory(String directory, String url)
+    {
+        if(directory==null || JDFConstants.EMPTYSTRING.equals(directory))
+            return url;
+        if(url==null)
+            return directory;
+
+        if(url.toLowerCase().startsWith("file:"))
+            return url;
+        if(url.startsWith("/"))
+        {
+            try
+            {
+                URI dirURI=new URI(directory);
+                directory=dirURI.getScheme()+":";
+                if(!url.startsWith("//"))
+                    url="/"+url;
+            }
+            catch (URISyntaxException x)
+            {
+                //nop
+            }
+        }
+
+        if(!directory.endsWith("/")&&!url.startsWith("/"))
+            directory+="/";
+
+
+        return cleanDots(directory+url);
+    }
+
+    /**
+     * remove any internal "../" "./" and "//" from a url
+     * 
+     * @param url the url to clean
+     * @return String - the clean path
+     */
+    public static String cleanDots(String url)
+    {
+        if(url==null)
+            return null;
+        String dummy=url;
+        int posDouble=url.indexOf("//");
+        String prefix=url.startsWith("/") ? "/" : "";
+        if(posDouble>=0)
+        {
+            prefix=url.substring(0,posDouble+2);
+            dummy=url.substring(posDouble+2);
+        }
+        VString vs=StringUtil.tokenize(dummy, "/", false);
+        for(int i=vs.size()-1;i>0;i--)
+        {
+            if (vs.stringAt(i).equals("")||vs.stringAt(i).equals("."))
+            {
+                vs.remove(i);
+            }
+        }
+        for(int i=vs.size()-1;i>0;i--)
+        {
+            if(vs.stringAt(i).equals(".."))
+            {
+                for(int j=i-1;j>=0;j--)
+                {
+                    if(!vs.stringAt(j).equals(".."))
+                    {
+                        vs.remove(i--);
+                        vs.remove(j);
+                        break;                       
+                    }                        
+                }
+            }
+        }
+       
+        return prefix + (vs.isEmpty() ? "." : StringUtil.setvString(vs ,"/",null,null));
+    }
+
+//////////////////////////////////////////////////////////////////////////////////
+
 }

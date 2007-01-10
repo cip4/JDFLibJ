@@ -28,21 +28,20 @@ public class JDFResponse extends JDFAutoResponse //JDFMessage
 
     /**
      * Constructor for JDFResponse
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFResponse(
+    public JDFResponse(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFResponse
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFResponse(
@@ -55,10 +54,10 @@ public class JDFResponse extends JDFAutoResponse //JDFMessage
 
     /**
      * Constructor for JDFResponse
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFResponse(
         CoreDocumentImpl myOwnerDocument,
@@ -148,7 +147,7 @@ public class JDFResponse extends JDFAutoResponse //JDFMessage
     /**
      * SetErrorText
      *
-     * @param String et
+     * @param et new error text
      */
     public JDFNotification setErrorText(String et)
     {

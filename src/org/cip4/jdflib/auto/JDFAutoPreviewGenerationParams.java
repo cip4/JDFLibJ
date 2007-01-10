@@ -100,7 +100,7 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.ASPECTRATIO, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumAspectRatio.getEnum(0), "Ignore");
@@ -109,8 +109,6 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
         atrInfoTable[3] = new AtrInfoTable(AttributeName.COMPENSATION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumCompensation.getEnum(0), null);
         atrInfoTable[4] = new AtrInfoTable(AttributeName.RESOLUTION, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
         atrInfoTable[5] = new AtrInfoTable(AttributeName.SIZE, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.NOOP, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.WEBSETUP, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
     }
     
     protected AttributeInfo getTheAttributeInfo()
@@ -509,7 +507,7 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 
         /**
           * (20) get JDFXYPair attribute Resolution
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getResolution()
@@ -547,7 +545,7 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 
         /**
           * (20) get JDFXYPair attribute Size
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getSize()
@@ -564,58 +562,6 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
                 return null;
             }
             return nPlaceHolder;
-        }
-
-
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute NoOp
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute NoOp
-          * @param value: the value to set the attribute to
-          */
-        public void setNoOp(boolean value)
-        {
-            setAttribute(AttributeName.NOOP, value, null);
-        }
-
-
-
-        /**
-          * (18) get boolean attribute NoOp
-          * @return boolean the value of the attribute
-          */
-        public boolean getNoOp()
-        {
-            return getBoolAttribute(AttributeName.NOOP, null, false);
-        }
-
-
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute WebSetup
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute WebSetup
-          * @param value: the value to set the attribute to
-          */
-        public void setWebSetup(String value)
-        {
-            setAttribute(AttributeName.WEBSETUP, value, null);
-        }
-
-
-
-        /**
-          * (23) get String attribute WebSetup
-          * @return the value of the attribute
-          */
-        public String getWebSetup()
-        {
-            return getAttribute(AttributeName.WEBSETUP, null, JDFConstants.EMPTYSTRING);
         }
 
 

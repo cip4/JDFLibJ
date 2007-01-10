@@ -21,23 +21,22 @@ public class JDFPartStatus extends JDFAutoPartStatus
 {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFPartStatus
-     * @param ownerDocument
+     /**
+      * Constructor for JDFPartStatus
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFPartStatus(
+    public JDFPartStatus(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFPartStatus
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFPartStatus(
@@ -50,10 +49,10 @@ public class JDFPartStatus extends JDFAutoPartStatus
 
     /**
      * Constructor for JDFPartStatus
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFPartStatus(
         CoreDocumentImpl myOwnerDocument,
@@ -86,7 +85,7 @@ public class JDFPartStatus extends JDFAutoPartStatus
    /**
      * SetPartMap - set all parts to those define in vParts
      *
-     * @param JDFAttributeMap mPart - attribute map for the part to set
+     * @param mPart attribute map for the part to set
      */
     public void setPartMap(JDFAttributeMap mPart)
     {
@@ -126,8 +125,4 @@ public class JDFPartStatus extends JDFAutoPartStatus
         final JDFStatusPool pool = (JDFStatusPool)getParentNode();
         return pool.getStatus();
     }
-    
-
-    
-    
 }

@@ -149,16 +149,17 @@ public class JDFand extends JDFNodeTerm
     }
     
     /**
-     * Evaluates two or more Term elements (and, or, xor, not, Evaluation, TestRef) 
+     * Evaluates two or more Term elements (<code>and, or, xor, not, Evaluation, TestRef</code>) 
      * to determine if, as a set, they evaluate to “true” 
      * when combined in a boolean “and” function.
-     * 
-     * Looks for Evaluations, that “and” consists of, and tests the status of every Evaluation, 
-     * till the result of a whole boolean expression will be determinated - tests if attribute map 'm' has a key,
-     * specified by Evaluation/BasicPreflightTest/@Name and if 'm' has such key, checks
-     * if its value fits testlists, specified for matching Evaluation (uses FitsValue(value))
+     * <br>
+     * Looks for evaluations which contain <code>and</code>. Tests the status of every evaluation found, 
+     * until the result of a whole boolean expression will is determinated. <br>
+     * Tests if attribute map <code>m</code> has a key,
+     * specified by Evaluation/BasicPreflightTest/@Name and if <code>m</code> has such key, 
+     * checks if its value fits testlists, specified for matching Evaluation (uses <code>FitsValue(value)</code>)
      *
-     * @param JDFAttributeMap m -  key-value pair attribute map
+     * @param m key-value pair attribute map
      * @return boolean - true, if boolean “and” expression evaluates to “true”
      */
     public boolean fitsMap(JDFAttributeMap m) 
@@ -175,11 +176,11 @@ public class JDFand extends JDFNodeTerm
     }
 
     /**
-     * Evaluates two or more Term elements (and, or, xor, not, Evaluation, TestRef) 
+     * Evaluates two or more term elements (<code>and, or, xor, not, Evaluation, TestRef</code>) 
      * to determine if, as a set, they evaluate to “true” 
      * when combined in a boolean “and” function.
      *
-     * @param jdf - JDFNode we test to know if the Device can accept it 
+     * @param jdf the JDFNode to be checked iot find out if the device can accept it 
      * @return boolean - true, if boolean “and” expression evaluates to “true”
      */
     public boolean fitsJDF(KElement jdf, KElement reportRoot) // const JDFNode

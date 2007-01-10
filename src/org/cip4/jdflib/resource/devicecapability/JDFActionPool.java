@@ -158,31 +158,43 @@ public class JDFActionPool extends JDFAutoActionPool
         return (JDFDeviceCap) getParentNode_KElement();
     }
     /**
-     * append an action to this that references a Testwith a term of type term in the parallel TestPool
+     * append an action to this that references a Test with a term of type term in the parallel TestPool
      * @param term the type of term in the test
+     * @param bActionFailsOnTestTrue if true the term is linked directly, 
+     * if false a the term is inverted by enclosing it in a <not> term 
      */
-    public JDFAction appendActionTest(EnumTerm term)
+    public JDFAction appendActionTest(EnumTerm term,boolean bActionFailsOnTestTrue)
     {
         JDFAction action=appendAction();
         JDFTestPool testPool=(JDFTestPool)getParentNode_KElement().getCreateElement(ElementName.TESTPOOL);
-        JDFTest test=testPool.appendTest();
+        JDFTest test=null;
+        if(bActionFailsOnTestTrue)
+        {
+            test=testPool.appendTestTerm(term);
+        }
+        else
+        {
+            test=testPool.appendTest();
+            ((JDFnot)test.appendTerm(EnumTerm.not)).appendTerm(term);
+        }
         action.setTest(test);
-        test.appendTerm(term);
         return action;
     }
     
     /**
-     * append an action to this that references a Testwith a term of type term in the parallel TestPool
+     * append an action to this that references a Test with a term of type term in the parallel TestPool
      * @param term the type of term in the test
      * @param setTerm the term referenced by PreflightAction@SetRef
+     * @param bActionFailsOnTestTrue if true the term is linked directly, 
+     * if false a the term is inverted by enclosing it in a <not> term 
+     * note that the setTest always MUST be true to evaluate.
+     * 
      * @return the newly created action
      */
-    public JDFAction appendActionSetTest(EnumTerm term, EnumTerm setTerm)
+    public JDFAction appendActionSetTest(EnumTerm term, EnumTerm setTerm, boolean bActionFailsOnTestTrue)
     {
-        JDFAction action=appendAction();
+        JDFAction action=appendActionTest(term,bActionFailsOnTestTrue);
         JDFTestPool testPool=(JDFTestPool)getParentNode_KElement().getCreateElement(ElementName.TESTPOOL);
-        JDFTest test=testPool.appendTestTerm(term);
-        action.setTest(test);
         JDFTest setTest =testPool.appendTestTerm(setTerm);
         action.setPreflightActionSetRef(setTest);
         return action;

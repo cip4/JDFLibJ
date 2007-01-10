@@ -11,6 +11,9 @@ import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoCutBlock;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
 import org.w3c.dom.DOMException;
 
 
@@ -18,6 +21,16 @@ public class JDFCutBlock extends JDFAutoCutBlock
 {
     private static final long serialVersionUID = 1L;
 
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+    static
+    {
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.BLOCKNAME, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+    }
+    
+    protected AttributeInfo getTheAttributeInfo()
+    {
+        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+    }
     /**
      * Constructor for JDFCutBlock
      * @param ownerDocument

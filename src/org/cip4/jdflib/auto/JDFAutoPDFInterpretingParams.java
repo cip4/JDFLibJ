@@ -97,7 +97,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[12];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[13];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.EMITPDFBG, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "true");
@@ -111,7 +111,8 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
         atrInfoTable[8] = new AtrInfoTable(AttributeName.OCGPROCESS, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumOCGProcess.getEnum(0), null);
         atrInfoTable[9] = new AtrInfoTable(AttributeName.OCGZOOM, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, "1.0");
         atrInfoTable[10] = new AtrInfoTable(AttributeName.PRINTPDFANNOTATIONS, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[11] = new AtrInfoTable(AttributeName.TRANSPARENCYRENDERINGQUALITY, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[11] = new AtrInfoTable(AttributeName.PRINTTRAPANNOTATIONS, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+        atrInfoTable[12] = new AtrInfoTable(AttributeName.TRANSPARENCYRENDERINGQUALITY, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
     protected AttributeInfo getTheAttributeInfo()
@@ -560,6 +561,32 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
         public boolean getPrintPDFAnnotations()
         {
             return getBoolAttribute(AttributeName.PRINTPDFANNOTATIONS, null, false);
+        }
+
+
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute PrintTrapAnnotations
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute PrintTrapAnnotations
+          * @param value: the value to set the attribute to
+          */
+        public void setPrintTrapAnnotations(boolean value)
+        {
+            setAttribute(AttributeName.PRINTTRAPANNOTATIONS, value, null);
+        }
+
+
+
+        /**
+          * (18) get boolean attribute PrintTrapAnnotations
+          * @return boolean the value of the attribute
+          */
+        public boolean getPrintTrapAnnotations()
+        {
+            return getBoolAttribute(AttributeName.PRINTTRAPANNOTATIONS, null, false);
         }
 
 

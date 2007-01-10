@@ -76,7 +76,7 @@ public class JDFDuration implements Duration
     
     /**
      * Allocates a <code>JDFDuration</code> object and initializes it with 's'
-     * @param int s: seconds of duration
+     * @param s duration in seconds
      */
     public JDFDuration(int s)
     {
@@ -85,13 +85,13 @@ public class JDFDuration implements Duration
     
     /**
      * Allocates a <code>JDFDuration</code> object and initializes it with a
-     * value of <code>strDuration</code>, represented as a formatted duration string 
-     * DurationExamples: 
-     * "P1Y2M3DT10H30M"
-     * "PM8T12M"
+     * value of <code>strDuration</code>, represented as a formatted duration string. <br>
+     * Duration examples: 
+     * <li>"P1Y2M3DT10H30M"</li>
+     * <li>"PM8T12M"</li>
      *
      * @param strDuration - formatted duration
-     * @throws DataFormatException - if strDuration is not a valid string 
+     * @throws DataFormatException if strDuration is not a valid string 
      * representation of JDFDuration
      */
     public JDFDuration(String strDuration) throws DataFormatException
@@ -101,7 +101,7 @@ public class JDFDuration implements Duration
 
     
     
-    /** for debug purpose  
+    /** for debug purposes
      * 
      * @return  Object informations
      */
@@ -112,12 +112,13 @@ public class JDFDuration implements Duration
 
    
     /**
-     * Method init handles Strings of type: 
-     * "P1Y2M3DT10H30M"
-     * "PM8T12M"
-     * "PT30M"
+     * Method init handles Strings of type: <br>
+     * <li>"P1Y2M3DT10H30M"</li>
+     * <li>"PM8T12M"</li>
+     * <li>"PT30M"</li>
      * 
      * @param strDuration 
+     * @throws DataFormatException
      */
     private void init(String strDuration) throws DataFormatException
     {
@@ -139,10 +140,10 @@ public class JDFDuration implements Duration
     
     /**
      * Format and return the duration set by 'setDuration(int i)' or
-     * 'setDurationString(String a_aDuration)' as an ISO conforming String.
-     * For Exmaple: 'P1Y2M3DT10H30M'
+     * 'setDurationString(String a_aDuration)' as an ISO conforming String.<br>
+     * For example: 'P1Y2M3DT10H30M'
      * 
-     * @return String   the duration formatted as an ISO 8601 conforming String
+     * @return String - the duration formatted as an ISO 8601 conforming String
      *                  if duration is '0' return value is 'PT00M'
      */
     public String getDurationISO()
@@ -205,8 +206,8 @@ public class JDFDuration implements Duration
     /**
      * Set a duration. Durations are not bound to time or date and can be set independently
      * 
-     * @return true   the duration was set
-     *         false  the duration was not set, because a NumberFormatException was thrown (-> parseInt())
+     * @return true  - the duration was set<br>
+     *         false - the duration was not set, because a NumberFormatException was thrown (-> parseInt())
      *  
      * @param a_aDuration formatted duration string 'P1Y2M3DT10H30M' 
      */
@@ -315,8 +316,8 @@ public class JDFDuration implements Duration
     }
     
     /**
-     * setDuration sets a duration for this in seconds. This duration is used in  
-     * multiple classes of the jdf. Heating time for example.  
+     * setDuration: sets a duration for <code>this</code> in seconds. 
+     * This duration is used in multiple classes of the JDF (e.g. Heating time).  
      * 
      * @param i the duration in seconds. Values below '0' are set to '0'
      */
@@ -329,7 +330,7 @@ public class JDFDuration implements Duration
     /**
      * the duration in seconds
      * 
-     * @return int   the duration in seconds; '0' default
+     * @return int - the duration in seconds; '0' default
      */
     public int getDuration()
     {
@@ -337,11 +338,11 @@ public class JDFDuration implements Duration
     }
     
     /**
-     * isLess - tests if the duration of this JDFDuration is longer then
+     * isLess - tests if the duration of this JDFDuration is longer than
      * the duration of the specified JDFDuration. 
      * 
-     * @param x - the JDFDuration object you whant to compare with 'this' JDFDuration object
-     * @return boolean - true if the duration of this JDFDuration is longer then
+     * @param x the JDFDuration object to compare to <code>this</code>
+     * @return boolean - true if the duration of this JDFDuration is longer than
      * the duration of the JDFDuration 'x'. 
      */
     public boolean isLonger(Duration x)
@@ -351,12 +352,11 @@ public class JDFDuration implements Duration
     
        
     /**
-     * isShorter - tests if the duration of this JDFDuration is less then
+     * isShorter - tests if the duration of this JDFDuration is less than
      * the duration of the specified JDFDuration. 
      * 
-     * @param x - the JDFDuration object that duration you whant  
-     * to compare with duration of 'this' JDFDuration object 
-     * @return boolean - true if the duration of this JDFDuration is shorter then
+     * @param x the JDFDuration object to compare to <code>this</code>
+     * @return boolean - true if the duration of this JDFDuration is shorter than
      * the duration of the JDFDuration 'x'. 
      */
     public boolean isShorter(Duration x)
@@ -366,7 +366,7 @@ public class JDFDuration implements Duration
     
   
    /**
-    * Compares two JDFDuration objects for equality.
+    * Compares two JDFDuration objects for equality.<br>
     * The result is <code>true</code> if and only if the argument is 
     * not <code>null</code> and is a <code>JDFDuration</code> object that 
     * represents the same duration, as this object.
@@ -385,7 +385,7 @@ public class JDFDuration implements Duration
     }
     
     /**
-     * hashCode complements equals() to fulfill the equals/hashCode contract
+     * hashCode: complements equals() to fulfill the equals/hashCode contract
      */
     public int hashCode()
     {

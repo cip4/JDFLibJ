@@ -97,7 +97,7 @@ public abstract class JDFAutoCutBlock extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.BLOCKSIZE, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
@@ -107,8 +107,6 @@ public abstract class JDFAutoCutBlock extends JDFResource
         atrInfoTable[4] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
         atrInfoTable[5] = new AtrInfoTable(AttributeName.BLOCKELEMENTSIZE, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
         atrInfoTable[6] = new AtrInfoTable(AttributeName.BLOCKELEMENTTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumBlockElementType.getEnum(0), null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.NOOP, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.WEBSETUP, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
     }
     
     protected AttributeInfo getTheAttributeInfo()
@@ -294,7 +292,7 @@ public abstract class JDFAutoCutBlock extends JDFResource
 
         /**
           * (20) get JDFXYPair attribute BlockSize
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getBlockSize()
@@ -332,7 +330,7 @@ public abstract class JDFAutoCutBlock extends JDFResource
 
         /**
           * (20) get JDFXYPair attribute BlockSubdivision
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getBlockSubdivision()
@@ -370,7 +368,7 @@ public abstract class JDFAutoCutBlock extends JDFResource
 
         /**
           * (20) get JDFMatrix attribute BlockTrf
-          * @return JDFMatrixthe value of the attribute, null if a the
+          * @return JDFMatrix the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFMatrix
           */
         public JDFMatrix getBlockTrf()
@@ -463,7 +461,7 @@ public abstract class JDFAutoCutBlock extends JDFResource
 
         /**
           * (20) get JDFXYPair attribute BlockElementSize
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getBlockElementSize()
@@ -506,58 +504,6 @@ public abstract class JDFAutoCutBlock extends JDFResource
         public EnumBlockElementType getBlockElementType()
         {
             return EnumBlockElementType.getEnum(getAttribute(AttributeName.BLOCKELEMENTTYPE, null, null));
-        }
-
-
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute NoOp
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute NoOp
-          * @param value: the value to set the attribute to
-          */
-        public void setNoOp(boolean value)
-        {
-            setAttribute(AttributeName.NOOP, value, null);
-        }
-
-
-
-        /**
-          * (18) get boolean attribute NoOp
-          * @return boolean the value of the attribute
-          */
-        public boolean getNoOp()
-        {
-            return getBoolAttribute(AttributeName.NOOP, null, false);
-        }
-
-
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute WebSetup
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute WebSetup
-          * @param value: the value to set the attribute to
-          */
-        public void setWebSetup(String value)
-        {
-            setAttribute(AttributeName.WEBSETUP, value, null);
-        }
-
-
-
-        /**
-          * (23) get String attribute WebSetup
-          * @return the value of the attribute
-          */
-        public String getWebSetup()
-        {
-            return getAttribute(AttributeName.WEBSETUP, null, JDFConstants.EMPTYSTRING);
         }
 
 

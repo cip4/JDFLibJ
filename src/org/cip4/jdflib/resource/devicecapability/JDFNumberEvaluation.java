@@ -101,7 +101,7 @@ public class JDFNumberEvaluation extends JDFEvaluation
     private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
     static 
     {
-        atrInfoTable[0]  = new AtrInfoTable(AttributeName.TOLERANCE, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
+        atrInfoTable[0]  = new AtrInfoTable(AttributeName.TOLERANCE, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
         atrInfoTable[1]  = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333, AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
         atrInfoTable[2]  = new AtrInfoTable(AttributeName.VALUEMOD,  0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
     }
@@ -111,10 +111,9 @@ public class JDFNumberEvaluation extends JDFEvaluation
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
 
-
     /**
      * constructor for JDFNumberEvaluation
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFNumberEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
@@ -124,8 +123,8 @@ public class JDFNumberEvaluation extends JDFEvaluation
 
     /**
      * constructor for JDFNumberEvaluation
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFNumberEvaluation(
@@ -138,10 +137,10 @@ public class JDFNumberEvaluation extends JDFEvaluation
 
     /**
      * constructor for JDFNumberEvaluation
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFNumberEvaluation(
         CoreDocumentImpl myOwnerDocument,
@@ -229,12 +228,13 @@ public class JDFNumberEvaluation extends JDFEvaluation
     **************************************************************** */
     
     /**
-    * fitsValue - tests, if the defined 'value' matches testlists, 
-    * specified for this Evaluation
-    *
-    * @param String value - value to test
-    * @return boolean - true, if 'value' matches testlists or if testlists are not specified
-    */
+     * fitsValue - checks whether <code>value</code> matches the testlists 
+     * specified for this Evaluation
+     *
+     * @param value value to test
+     * @return boolean - true, if <code>value</code> matches the testlists or 
+     * if testlists are not specified
+     */
     public boolean fitsValue(String value)
     {
         if (!fitsListType(value))
@@ -261,11 +261,11 @@ public class JDFNumberEvaluation extends JDFEvaluation
 
     
     /**
-     * fitsListType - tests, if the defined 'value' matches ListType attribute,
-     * specified for this Evaluation
+     * fitsListType - checks whether <code>value</code> matches the value of the 
+     * ListType attribute specified for this Evaluation
      *
-     * @param String value - value to test
-     * @return boolean - true, if 'value' matches specified value of ListType
+     * @param value value to test
+     * @return boolean - true, if <code>value</code> matches the specified value of ListType
      */
     private final boolean fitsListType(String value)
     {
@@ -332,13 +332,13 @@ public class JDFNumberEvaluation extends JDFEvaluation
     }
     
     /**
-    * fitsValueList - tests, if the defined 'rangelist' matches the ValueList,
-    * specified for this Evaluation
-    *
-    * @param JDFNumberRangeList rangelist - rangelist to test
-    * @return boolean - true, if 'rangelist' matches the ValueList or 
-    * if ValueList is not specified
-    */
+     * fitsValueList - checks whether <code>rangelist</code> matches 
+     * the AllowedValueList or the PresentValueList specified for this Evaluation
+     *
+     * @param rangelist nmtokens to test
+     * @return boolean - true, if <code>value</code> matches <code>valuelist</code> or 
+     * if AllowedValueList is not specified
+     */
     private final boolean fitsValueList(JDFNumberRangeList rangelist)
     {
         if (!hasAttribute(AttributeName.VALUELIST)) 
@@ -370,14 +370,14 @@ public class JDFNumberEvaluation extends JDFEvaluation
 
     
     /**
-    * fitsValueMod - tests, if the defined 'range' matches ValueMod, 
-    * specified for this Evaluation. But if ValueMod is specified 
-    * only single value can be tested, otherwise return false
-    *
-    * @param NumberRange range - range to test
-    * @return boolean - true, if 'range' matches the ValueMod or 
-    * if ValueMod is not specified
-    */
+     * fitsValueMod - checks whether <code>range</code> matches the <code>ValueMod</code> 
+     * specified for this Evaluation. If ValueMod is specified, 
+     * only a single value can be tested, otherwise <code>false</code> is returned.
+     *
+     * @param range range to test
+     * @return boolean - true, if <code>range</code> matches the ValueMod or 
+     * if ValueMod is not specified
+     */
     private final boolean fitsValueMod(JDFNumberRange range) 
     {
         if (!hasAttribute(AttributeName.VALUEMOD)) 
@@ -423,12 +423,12 @@ public class JDFNumberEvaluation extends JDFEvaluation
     }
 
     /**
-     * fitsTolerance - tests, if this Evaluation has specified Tolerance 
-     * that it is not equal "0 0" and expands original rangelist
-     * to the rangelist, that fits Tolerance.
+     * fitsTolerance - checks whether this Evaluation has a specified Tolerance 
+     * that it is not equal to "0 0", and expands original the rangelist
+     * to the rangelist that fits Tolerance.
      *
-     * @param NumberRangeList rangeList - original rangelist
-     * @return NumberRangeList - expanded rangelist, if Tolerance="0 0" returns original range
+     * @param origRangeList original rangelist
+     * @return NumberRangeList - expanded rangelist, returns original range if Tolerance=="0 0" 
      */
     public final JDFNumberRangeList fitsTolerance(JDFNumberRangeList origRangeList) 
     {
@@ -457,12 +457,12 @@ public class JDFNumberEvaluation extends JDFEvaluation
     }
     
     /**
-    * fitsContainedList - tests for the case, when ListType=CompleteList,
-    * does the defined 'value' match ValueList, specified for this Evaluation
+    * fitsCompleteList - tests whether <code>value</code> matches the given ValueList
+    * (ListType=fitsCompleteList)
     *
-    * @param JDFNumberRangeList value - value to test
-    * @param JDFNumberRangeList list - specified ValueList
-    * @return boolean - true, if 'value' matches testlist
+    * @param value value to test
+    * @param list  ValueList
+    * @return boolean - true, if <code>value</code> matches the ValueList
     */
     private final boolean fitsCompleteList(JDFNumberRangeList value, JDFNumberRangeList list)
     {
@@ -499,13 +499,13 @@ public class JDFNumberEvaluation extends JDFEvaluation
     }
 
     /**
-    * fitsCompleteOrderedList - tests for the case, when ListType=CompleteOrderedList,
-    * does the defined 'value' match ValueList, specified for this Evaluation
-    *
-    * @param JDFNumberRangeList value - value to test
-    * @param JDFNumberRangeList list - specified ValueList
-    * @return boolean - true, if 'value' matches testlist
-    */
+     * fitsCompleteOrderedList - tests whether <code>value</code> matches the given ValueList
+     * (ListType=CompleteOrderedList)
+     *
+     * @param value value to test
+     * @param list  ValueList
+     * @return boolean - true, if <code>value</code> matches the ValueList
+     */
     private final boolean fitsCompleteOrderedList(JDFNumberRangeList value, JDFNumberRangeList list)
     {
         int v_size = value.size();
@@ -529,13 +529,13 @@ public class JDFNumberEvaluation extends JDFEvaluation
 
     
     /**
-    * fitsContainedList - tests for the case, when ListType=ContainedList,
-    * does the defined 'value' match ValueList, specified for this Evaluation
-    *
-    * @param JDFNumberRangeList value - value to test
-    * @param JDFNumberRangeList list -  specified ValueList
-    * @return boolean - true, if 'value' matches testlist
-    */
+     * fitsContainedList - tests whether <code>value</code> matches the given ValueList
+     * (ListType=ContainedList)
+     *
+     * @param value value to test
+     * @param list  ValueList
+     * @return boolean - true, if <code>value</code> matches the ValueList
+     */
     private final boolean fitsContainedList(JDFNumberRangeList value, JDFNumberRangeList list)
     {
         int v_size = value.size();

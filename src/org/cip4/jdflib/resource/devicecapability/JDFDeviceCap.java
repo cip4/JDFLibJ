@@ -80,12 +80,13 @@
  */
 package org.cip4.jdflib.resource.devicecapability;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDeviceCap;
 import org.cip4.jdflib.auto.JDFAutoDevCaps.EnumContext;
-import org.cip4.jdflib.auto.JDFAutoDeviceCap.EnumCombinedMethod;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
@@ -107,24 +108,21 @@ import org.cip4.jdflib.util.StringUtil;
 public class JDFDeviceCap extends JDFAutoDeviceCap 
 {
     private static final long serialVersionUID = 1L;
-    
+    private boolean ignoreExtensions=false;
     /**
      * Constructor for JDFDeviceCap
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-    public JDFDeviceCap(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
+    public JDFDeviceCap(CoreDocumentImpl myOwnerDocument,String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
-    
-    
+
     /**
      * Constructor for JDFDeviceCap
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFDeviceCap(
@@ -134,13 +132,13 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
-    
+
     /**
      * Constructor for JDFDeviceCap
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFDeviceCap(
             CoreDocumentImpl myOwnerDocument,
@@ -162,9 +160,8 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
         return "JDFDeviceCap[  --> " + super.toString() + " ]";
     }
     
-    
     /**
-     * Gets of this string attribute TypeExpression if it exists,
+     * Gets of this string attribute <code>TypeExpression</code> if it exists,
      * otherwise returns the literal string defined in Types
      *
      * @return String - TypeExpression attribute value
@@ -179,7 +176,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
     }
     
     /**
-     * (9.2) get CombinedMethod attribute CombinedMethod
+     * (9.2) get CombinedMethod attribute <code>CombinedMethod</code>
      * @return Vector of the enumerations
      */
    public Vector getCombinedMethod()
@@ -201,146 +198,87 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
     
     /**
      * Gets of jdfRoot a vector of all executable nodes  
-     * (jdf root or children nodes - that this Device may execute)
+     * (jdf root or children nodes that this Device may execute)
      *
-     * @param jdfRoot - the node we test
-     * @param testlists - FitsValue_Allowed or FitsValue_Present testlists
-     * that are specified for the State elements (Will be used in fitsValue method of the State class)
-     * @param level - validation level
-     * @return VElement - vector of executable JDFNodes
+     * @param jdfRoot   the node we test
+     * @param testlists testlists that are specified for the State elements 
+     *                  (FitsValue_Allowed or FitsValue_Present)<br>
+     *                  Will be used in fitsValue method of the State class.
+     * @param level     validation level
+     * @return VElement - vector of executable JDFNodes, null if none found
      */
-    public final VElement getExecutableJDF(final JDFNode jdfRoot, EnumFitsValue testlists, EnumValidationLevel level)
-    {
-        VElement execNodes = new VElement();
-        String typeNode = jdfRoot.getType();
-        EnumExecutionPolicy execPolicy = getExecutionPolicy();
-        boolean bExit = false;
-        if (execPolicy.equals(EnumExecutionPolicy.RootNode))	
-        {
-            if (!typeNode.equals("Product")) 
-            {
-                XMLDoc doc = null;
-                boolean bException = false;
-                try 
-                {
-                    doc = report(jdfRoot,testlists, level); // if report throws exception - jdfRoot is non-executable Node 
-                }
-                catch (JDFException jdfe)
-                {
-                    bException = true;
-                }
-                if (doc == null && !bException)
-                {
-                    if (typeNode.equals("ProcessGroup")) 
-                    {
-                        Vector vNodes =jdfRoot.getvJDFNode(null, null,  false);
-                        for (int i=0; i<vNodes.size()-1 && !bExit; i++) 
-                        { // test if all children of ProcessGroup fit DevCaps. Type was already tested for a whole Node
-                            if (devCapsReport((JDFNode)vNodes.elementAt(i), testlists, level)!=null)
-                            {
-                                bExit = true;
-                            }
-                        }
-                    }
-                    if (!bExit)
-                        execNodes.addElement(jdfRoot);
-                }
-            }
-        }
-        else
-        {
-            // here vNodes is jdfRoot + all children
-            Vector vNodes = jdfRoot.getvJDFNode(null, null,false);
-            for (int i=0; i<vNodes.size(); i++) 
-            {
-                JDFNode n = (JDFNode)vNodes.elementAt(i);
-                typeNode = n.getType();
-                XMLDoc nOutput = null;
-                boolean bException = false;
-                try 
-                {
-                    nOutput = report(n,testlists,level); // if report throws exception - n is non-executable Node 
-                }
-                catch (JDFException jdfe)
-                {
-                    bException = true;
-                }
-                if (nOutput == null && !bException)
-                {
-                    if (typeNode.equals("Product") || typeNode.equals("ProcessGroup")) 
-                    { // to the executable add only the "highest" executable product/processGroup node
-                        JDFNode parent = n.getParentJDF();
-                        if (parent==null || !parent.getType().equals(typeNode))
-                        {    // 'n' is already the highest product/processGroup node
-                            execNodes.addElement(n); 
-                        }
-                        else 
-                        {
-                            XMLDoc parentOutput = null;
-                            boolean bCaughtException = false;
-                            try 
-                            {
-                                parentOutput = report(parent, testlists, level);
-                            }
-                            catch (JDFException jdfe) 
-                            {
-                                bCaughtException = true;
-                            }
-                            if (parentOutput != null || bCaughtException) 
-                            {// 'n' is executable, 'parent' is not - append 'n' to execNodes
-                                execNodes.addElement(n);
-                            }
-                        }
-                    }
-                    else 
-                    {
-                        execNodes.addElement(n);
-                    }
-                }
-            }
-        }
-        return execNodes;
-    }
+   public final VElement getExecutableJDF(final JDFNode jdfRoot, EnumFitsValue testlists, EnumValidationLevel level)
+   {
+       VElement execNodes = new VElement();
+       EnumExecutionPolicy execPolicy = getExecutionPolicy();
+      
+       // here vNodes is jdfRoot + all children
+       VElement vNodes = null;
+       if(execPolicy.equals(EnumExecutionPolicy.RootNode))
+       {
+           vNodes=new VElement();
+           vNodes.add(jdfRoot);
+       }
+       else
+       {
+           vNodes=jdfRoot.getvJDFNode(null, null,false);
+       }
+       XMLDoc d=new XMLDoc("dummy",null);
+       for (int i=0; i<vNodes.size(); i++) 
+       {
+           JDFNode n = (JDFNode)vNodes.elementAt(i);
+           final KElement root = d.getRoot();
+
+           try 
+           {
+               KElement nOutput = report(n,testlists,level,root); // if report throws exception - n is non-executable Node
+               if (nOutput == null)
+               {
+                   execNodes.addElement(n);
+               }
+           }
+           catch (JDFException jdfe)
+           {
+               // nop
+           } 
+       }
+       return execNodes.isEmpty() ? null : execNodes;
+   }
     
     
     /**
-     * For the given JDFNode 'jdfRoot' composes a BugReport in XML form. 
-     * For 'jdfRoot' and every child rejected Node gives a list of error messages
-     * If there are no errors - returns null !
+     * Composes a BugReport in XML form for the given JDFNode 'jdfRoot'. 
+     * Gives a list of error messages for 'jdfRoot' and every child rejected Node.<br> 
+     * Returns <code>null</code> if there are no errors.
      *
-     * @param JDFNode jdfRoot - the node we test
-     * @param EnumFitsValue testlists - FitsValue_Allowed or FitsValue_Present testlists
-     * that are specified for the State elements. (Will be used in fitsValue method of the State element)
-     * @param EnumValidationLevel level - validation level
-     * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc equals null - there are no errors
+     * @param jdfRoot   the node to test
+     * @param testlists testlists that are specified for the State elements 
+     *                  (FitsValue_Allowed or FitsValue_Present)<br>
+     *                  Will be used in fitsValue method of the State class.
+     * @param level     validation level
+     * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc is null there are no errors.
      */
-    public final XMLDoc getBadJDFInfo(final JDFNode jdfRoot, final EnumFitsValue testlists, 
-            final EnumValidationLevel level)
+    public final XMLDoc getBadJDFInfo(final JDFNode jdfRoot, final EnumFitsValue testlists, final EnumValidationLevel level)
     {
         XMLDoc bugReport = new XMLDoc("BugReport", null);
-        KElement outputRoot = bugReport.getRoot();
-        
-        Vector vNodes = jdfRoot.getvJDFNode(null, null, false);
+        KElement outputRoot = bugReport.getRoot();        
+        VElement vNodes = jdfRoot.getvJDFNode(null, null, false);
         
         final int size = vNodes.size();
         for (int i=0; i < size; i++) 
         {
             JDFNode n = (JDFNode)vNodes.elementAt(i);
-            XMLDoc rejectedNodeReport = null;
+            KElement report=null;
             try
             {
-                rejectedNodeReport = report(n, testlists, level);
+                report = report(n, testlists, level,outputRoot);
             }
             catch (JDFException jdfe)
             {
-                KElement e = outputRoot.appendElement("RejectedNode");
-                e.setAttribute("CaughtException", jdfe.getMessage());
-                e.setAttribute("ID", n.getID());
-                e.setAttribute("XPath", n.buildXPath());
-            }
-            if (rejectedNodeReport!=null)
-            {
-                outputRoot.copyElement(rejectedNodeReport.getRoot(), null);
+                report = outputRoot.appendElement("RejectedNode");
+                report.setAttribute("CaughtException", jdfe.getMessage());
+                report.setAttribute("ID", n.getID());
+                report.setAttribute("XPath", n.buildXPath(null));
             }
         }
         
@@ -353,32 +291,34 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
     
     
     /**
-     * Checks if Device can execute the given JDFNode 'jdfRoot'.
+     * Checks if Device can execute the given JDFNode 'jdfRoot'.<br>
      * First validates 'jdfRoot' and checks if its Type/Types attributes  
      * fit the values of DeviceCap/@Types and DeviceCap/@CombinedMethod.
-     * If Node is invalid or Type/Types don't fit - doesn't check it more detailed.
-     * If Type/Types fit, tests a whole JDFNode - all elements and attributes - to define if Device can accept it.
-     * Composes a detailed report in XML form of the found errors if JDFNode was rejected.
-     * If XMLDoc equals null - there are no errors and 'jdfRoot' is accepted
+     * If Node is invalid or Type/Types don't fit it doesn't check it more detailed.<br>
+     * If Type/Types fit, the whole JDFNode - all elements and attributes - will 
+     * be tested iot check if a Device can accept it.<br>
+     * This method composes a detailed report of the found errors in XML form, if jdfRoot is rejected.<br>
+     * If XMLDoc is null, there are no errors and 'jdfRoot' is accepted
      * 
-     * @param JDFNode jdfRoot - the node we test
-     * @param EnumFitsValue testlists - FitsValue_Allowed or FitsValue_Present testlists
-     * that are specified for the State elements. (Will be used in fitsValue method of the State element)
-     * @param EnumValidationLevel level - validation level
+     * @param jdfRoot   the node to test
+     * @param fitsValue testlists that are specified for the State elements 
+     *                  (FitsValue_Allowed or FitsValue_Present)<br>
+     *                  Will be used in fitsValue method of the State class.
+     * @param level     validation level
      * @return XMLDoc - XMLDoc output of the error messages.
-     * If XMLDoc equals null - there are no errors, 'jdfRoot' is accepted
+     * If XMLDoc is <code>null</code> there are no errors, 'jdfRoot' is accepted
      * 
      * @throws JDFException if DeviceCapabilities file is invalid: illegal value of Types(TypeExpression) attribute
      * (if CombinedMethod is None and Types contains more than 1 process)
      * @throws JDFException if DeviceCapabilities file is invalid: illegal value of CombinedMethod attribute
      */
-    private final XMLDoc report(final JDFNode jdfRoot, EnumFitsValue testlists, EnumValidationLevel level)
+    private final KElement report(final JDFNode jdfRoot, EnumFitsValue fitsValue, EnumValidationLevel level, KElement parentRoot)
     {
-        XMLDoc testResult = new XMLDoc("RejectedNode", null);
-        KElement root = testResult.getRoot();
-        root.setAttribute("XPath", jdfRoot.buildXPath());
+        KElement root = parentRoot.appendElement("RejectedNode");
+        root.setAttribute("XPath", jdfRoot.buildXPath(null));
         root.setAttribute("ID", jdfRoot.getID());
-        
+        String typeExp = getTypeExpression();
+       
         if (!jdfRoot.isValid(level)) 
         {
             root.setAttribute("IsValid", false, null);
@@ -386,78 +326,29 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
         if(!matchesType(jdfRoot,false))
         {
             String typeNode = jdfRoot.getType();
-            String typeExp = getTypeExpression();
             reportTypeMatch(root,false,typeNode,typeExp);
-            return testResult;            
+            return root;            
         }
-        String typeNode = jdfRoot.getType();
-        
-        Vector vCombMethod = getCombinedMethod();
-        for(int combi=0;combi<vCombMethod.size();combi++)
-        {
-            EnumCombinedMethod combMethod=(EnumCombinedMethod)vCombMethod.elementAt(combi);
-            String typeExp = getTypeExpression();
-            if (combMethod.equals(EnumCombinedMethod.None))  // node is an individual process
-            {
-                
-                if (typeNode.equals("Product"))
-                {
-                    testResult = productReport(jdfRoot, testlists, level);
-                }
-                else
-                {
-                    XMLDoc devCapsTestResult = devCapsReport(jdfRoot,testlists,level);
-                    if (devCapsTestResult != null) 
-                    {
-                        reportTypeMatch(root,true,typeNode,typeExp);
-                        moveChildElementVector_Static(root,devCapsTestResult.getRoot());
-                    }
-                }
-            }
-            else if (combMethod.equals(EnumCombinedMethod.Combined))
-            {
-                testResult = combinedNodeReport(jdfRoot, testlists, level);
-            }
-            else if (combMethod.equals(EnumCombinedMethod.ProcessGroup))
-            {
-                testResult = processGroupReport(jdfRoot, testlists, level);
-            } 
-            else if (combMethod.equals(EnumCombinedMethod.CombinedProcessGroup))
-            {
-                if (typeNode.equals("ProcessGroup")) 
-                {
-                    testResult = processGroupReport(jdfRoot, testlists, level);
-                }
-                else 
-                {
-                    testResult = combinedNodeReport(jdfRoot, testlists, level);
-                }
-            }
-            // __Lena__ if CombinedMethod_GrayBox: {return true;}
-            else 
-            {
-                throw new JDFException ("JDFDeviceCap.report: Invalid DeviceCap: illegal value of CombinedMethod attribute"); 
-            }
-            if (testResult!=null)
-                root = testResult.getRoot();
-        }
-        
+
+        root = groupReport(jdfRoot, fitsValue, level,root);
         //TODO ???
-        if (!root.hasChildElements() && !root.hasAttribute("FitsType"))
-            testResult = null;
-        
-        return testResult;
+        if (!root.hasChildElements() && root.getBoolAttribute("FitsType",null,true))
+        {
+            root.deleteNode();
+            root= null;
+        }
+        return root;
     }
     
 //////////////////////////////////////////////////////////////////////////    
     
     /**
-     * test whether agiven node has the coreect Types and Type Attribute
+     * test whether a given node has the corect Types and Type Attribute
      * 
      * @param testRoot the JDF or JMF to test
-     * @param bLocal if true, only check the root of this, else also check children
+     * @param bLocal   if true, only check the root of this, else check children as well
      * 
-     * @return boolean true if this DeviceCaps TypeExpression fits the testRoot/@Type and testRoot/@Types
+     * @return boolean - true if this DeviceCaps TypeExpression fits testRoot/@Type and testRoot/@Types
      * 
      */
     public boolean matchesType(JDFNode testRoot, boolean bLocal)
@@ -467,15 +358,15 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
             return false;
         if(bLocal)
             return v.contains(testRoot);
-        return true;
-        
+        return true;        
     }
+    
     /**
-     * test whether a given node has the coreect Types and Type Attribute
+     * test whether a given node has the corect Types and Type Attribute
      * 
      * @param testRoot the JDF or JMF to test
      * 
-     * @return boolean true if this DeviceCaps TypeExpression fits the testRoot/@Type and testRoot/@Types
+     * @return VElement - the list of matching JDF nodes, null if none found
      * 
      */
     public VElement getMatchingTypeNodeVector(JDFNode testRoot)
@@ -496,50 +387,50 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
                     v.add(testRoot);
                 }
             }
-            else if (combMethod.equals(EnumCombinedMethod.Combined))
+            else if (combMethod.equals(EnumCombinedMethod.Combined) ||
+                    combMethod.equals(EnumCombinedMethod.CombinedProcessGroup)&&typeNode.equals("Combined"))
             {
-                if (fitsTypes(testRoot.getTypes()))
+                if (fitsTypes(testRoot.getAllTypes(),false))
                 {
                     v.add(testRoot);
                 }
             }
-            else if (combMethod.equals(EnumCombinedMethod.ProcessGroup))
+            else if (combMethod.equals(EnumCombinedMethod.GrayBox)|| 
+                    combMethod.equals(EnumCombinedMethod.CombinedProcessGroup)&&typeNode.equals("ProcessGroup")&&!testRoot.isGroupNode())
+            {
+                if (fitsTypes(testRoot.getAllTypes(),true))
+                {
+                    v.add(testRoot);
+                }
+            }
+            else if (combMethod.equals(EnumCombinedMethod.ProcessGroup)||
+                    combMethod.equals(EnumCombinedMethod.CombinedProcessGroup)&&typeNode.equals("ProcessGroup"))           
             {
                 VElement vNodes=testRoot.getvJDFNode(null,null,false);
                 final int size = vNodes.size();
                 for(int i=0;i<size-1;i++) // note the 1 which skips this
                 {
                     JDFNode node=(JDFNode) vNodes.elementAt(i);
-                    if(StringUtil.matches(node.getType(),typeExp))
-                        v.add(node);                    
+                    if(node.isGroupNode())
+                    {
+                        final VElement matchingTypeNodeVector = getMatchingTypeNodeVector(node);
+                        if(matchingTypeNodeVector!=null)
+                            v.addAll(matchingTypeNodeVector);
+                    }
+                    else if (fitsTypes(node.getAllTypes(),true))
+                    {
+                        v.add(node);
+                    }
                 } 
-                if(v.size()>0 && ! v.contains(testRoot))
+                if(v.size()>0)
                     v.add(testRoot);
             }
-            else if (combMethod.equals(EnumCombinedMethod.CombinedProcessGroup))
-            {
-                if (typeNode.equals("ProcessGroup")) 
-                {
-                    if(fitsTypes(testRoot.getAllTypes()))
-                        v.add(testRoot);                    
-                        
-                }
-                else if (typeNode.equals("Combined"))
-                {
-                    if( fitsTypes(testRoot.getTypes()))
-                        v.add(testRoot);
-                }            
-                else
-                {
- //                   return false;
-                }
-            }
-            // TODO __Lena__ if CombinedMethod_GrayBox: {return true;}
             else 
             {
                 throw new JDFException ("JDFDeviceCap.report: Invalid DeviceCap: illegal value of CombinedMethod attribute"); 
             }
         }
+        v.unify();
         return v.size()==0 ? null : v;
     }
 
@@ -556,299 +447,161 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
 
 
     /**
-     * Checks if Device can execute the given Product JDFNode 'jdfRoot' (JDFNode/@Type=Product) .
-     * If JDFNode/@Types fits DeviceCap/@Types tests a whole JDFNode and all children Product Nodes 
-     * to define if Device can accept it.
-     * Composes a detailed report in XML form of the found errors if JDFNode is rejected.  
-     *
-     * @param JDFNode jdfRoot - the node we test
-     * @param EnumFitsValue testlists - FitsValue_Allowed or FitsValue_Present testlists
-     * that are specified for the State elements (Will be used in fitsValue method of the State element)
-     * @param EnumValidationLevel level - validation level
-     * 
-     * @return XMLDoc - XMLDoc output of the error messages. 
-     * If XMLDoc equals null - there are no errors, 'jdfRoot' is accepted 
-     */
-    private final XMLDoc productReport(final JDFNode jdfRoot, EnumFitsValue testlists, EnumValidationLevel level) 
-    {
-        XMLDoc testResult = new XMLDoc("RejectedNode", null);
-        KElement root = testResult.getRoot();
-        root.setAttribute("XPath", jdfRoot.buildXPath());
-        root.setAttribute("ID", jdfRoot.getID());
-        root.setAttribute("FitsType", true, null);
-        
-        XMLDoc devCapsTestResult = null;
-        
-        // check the status of all child jdf intent product nodes
-        Vector vNodes= jdfRoot.getvJDFNode("Product", null, false);
-        for (int i=0; i < vNodes.size()-1; i++) 
-        {
-            JDFNode n = (JDFNode)vNodes.elementAt(i);
-            devCapsTestResult = devCapsReport(n, testlists, level);
-            if (devCapsTestResult != null) 
-            {
-                KElement childRoot = root.appendElement("RejectedChildNode");
-                childRoot.setAttribute("XPath", n.buildXPath());
-                childRoot.setAttribute("ID", n.getID());
-                moveChildElementVector_Static(childRoot,devCapsTestResult.getRoot());
-            }
-        }
-        
-        devCapsTestResult = devCapsReport(jdfRoot,testlists,level);
-        if (devCapsTestResult != null) 
-        {
-            moveChildElementVector_Static(root,devCapsTestResult.getRoot());
-        }
-        
-        if (!root.hasChildElements())
-            testResult = null;
-        
-        return testResult;
-    }
-    
-    
-    /**
-     * Checks if Device can execute the given Combined JDFNode 'jdfRoot' (JDFNode/@Type=Combined).
-     * If JDFNode/@Types fits DeviceCap/@Types tests a whole JDFNode - all elements and attributes 
-     * to define if Device can accept it.
-     * Composes a detailed report in XML form of the found errors if JDFNode is rejected.  
-     *
-     * @param JDFNode jdfRoot - the node we test
-     * @param EnumFitsValue testlists - FitsValue_Allowed or FitsValue_Present testlists
-     * that are specified for the State elements (Will be used in FitsValue method of the State element)
-     * @param EnumValidationLevel level - validation level
-     * 
-     * @return XMLDoc - XMLDoc output of the error messages. 
-     * If XMLDoc equals null - there are no errors, 'jdfRoot' is accepted 
-     */
-    private final XMLDoc combinedNodeReport(final JDFNode jdfRoot, EnumFitsValue testlists, EnumValidationLevel level)
-    {
-        XMLDoc testResult = new XMLDoc("RejectedNode", null);
-        KElement root = testResult.getRoot();
-        root.setAttribute("XPath", jdfRoot.buildXPath());
-        root.setAttribute("ID", jdfRoot.getID());
-        
-        VString typesNode = jdfRoot.getTypes();
-        boolean bWrongType = !fitsTypes(typesNode);
-        if (bWrongType) 
-        {
-            root.setAttribute("FitsType", false, null);
-        }
-        else 
-        {
-            root.setAttribute("FitsType", true, null);
-            
-            XMLDoc devCapsTestResult = devCapsReport(jdfRoot,testlists,level);
-            if (devCapsTestResult != null) 
-            {
-                moveChildElementVector_Static(root,devCapsTestResult.getRoot());
-            }
-        }
-        
-        if (!root.hasChildElements() && root.getBoolAttribute("FitsType", null, true))
-            testResult = null;
-        
-        return testResult;
-    }
-    
-    
-    
-    /**
-     * Tests JDFNode/@Types (or equivalent of Types in the ProcessGroupNodes - 
+     * Tests JDFNode/@Types (or its equivalent of Types in the ProcessGroupNodes - 
      * the concatenated string of all Type attributes in the children Nodes) 
-     * to define if it matches DeviceCap/@Types or DeviceCap/@TypeExpression  
+     * iot check whether it matches DeviceCap/@Types or DeviceCap/@TypeExpression  
      *
-     * @param VString typesNode - attribute Types of the tested JDFNode
+     * @param typesNode attribute Types of the tested JDFNode
+     * @param bSubset if true, a match is sufficient if a subset is specified
      * @return boolean - true if JDFNode/@Types fits DeviceCap/@Types or DeviceCap/@TypeExpression
      * @throws JDFException if DeviceCap is invalid: both @Types and @TypeExpression are missing
      */
-    private final boolean fitsTypes(VString typesNode)
+    private final boolean fitsTypes(VString typesNode, boolean bSubset)
     {
         if(typesNode==null || typesNode.isEmpty())
             return false;
-        
-        String typesNodeStr = typesNode.getString(JDFConstants.BLANK, JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING);
-        String typeExp = getTypeExpression();
-        if (typeExp.length()==0) 
+        if(!bSubset)
         {
-            throw new JDFException ("JDFDeviceCap.fitsTypes: Invalid DeviceCap - missing attributes Types and TypeExpression");
-        }
-        if (hasAttribute(AttributeName.TYPEEXPRESSION)) 
-        {
-            if (!StringUtil.matches(typesNodeStr,typeExp))
-                return false;
-        }
-        else 
-        {
-            VString dcTypes = getTypes();
-            for (int i=0; i < typesNode.size(); i++) 
+            if (hasAttribute(AttributeName.TYPEEXPRESSION)) 
             {
-                String type = (String) typesNode.elementAt(i);
-                
-                if (!dcTypes.contains(type)) 
-                    return false;
+                final String typeExp = getTypeExpression();
+                final String typesNodeStr = StringUtil.setvString(typesNode,JDFConstants.BLANK,null,null);
+                return StringUtil.matches(typesNodeStr,typeExp);
             }
+            return typesNode.equals(getTypes());
+        }
+
+        final VString dcTypes = getTypes();
+        for (int i=0; i < typesNode.size(); i++) 
+        {
+            final String type = typesNode.stringAt(i);                
+            if (!dcTypes.contains(type)) 
+                return false;
         }
         return true;
     }
-    
-    
+
+
     /**
-     * Checks if Device can execute the given ProcessGroup JDFNode 'jdfRoot' (JDFNode/@Type=ProcessGroup).
-     * If JDFNode/@Types fits DeviceCap/@Types tests a whole JDFNode - all elements and attributes 
-     * to define if Device can accept it.
-     * Composes a detailed report in XML form of the found errors if JDFNode is rejected. 
+     * Checks whether a device can execute the given ProcessGroup JDFNode 'jdfRoot' (JDFNode/@Type=ProcessGroup).
+     * If JDFNode/@Types fits DeviceCap/@Types, the whole JDFNode - all elements and attributes - is tested
+     * iot check whether a device can accept it.<br>
+     * Composes a detailed report of the found errors in XML form, if JDFNode is rejected. 
      *
-     * @param JDFNode jdfRoot - the node we test
-     * @param EnumFitsValue testlists - FitsValue_Allowed or FitsValue_Present testlists
-     * that are specified for the State elements. (Will be used in FitsValue method of the State element)
-     * @param EnumValidationLevel level - validation level
+     * @param jdfRoot   the node to test
+     * @param testlists testlists that are specified for the State elements 
+     *                  (FitsValue_Allowed or FitsValue_Present)<br>
+     *                  Will be used in fitsValue method of the State class.
+     * @param level     validation level
      * 
-     * @return XMLDoc - XMLDoc output of the error messages. 
-     * If XMLDoc equals null - there are no errors, 'jdfRoot' is accepted 
+     * @return XMLDoc - XMLDoc output of the error messages. <br>
+     * If XMLDoc is <code>null</code> there are no errors, 'jdfRoot' is accepted 
      */
-    private final XMLDoc processGroupReport(final JDFNode jdfRoot, EnumFitsValue testlists, EnumValidationLevel level)
+    private final KElement groupReport(final JDFNode jdfRoot, EnumFitsValue testlists, EnumValidationLevel level, KElement parentRoot)
     {
-        XMLDoc testResult = new XMLDoc("RejectedNode", null);
-        KElement root = testResult.getRoot();
-        root.setAttribute("XPath", jdfRoot.buildXPath());
-        root.setAttribute("ID", jdfRoot.getID());
-        
-        VString typesNode;
-        try 
+        parentRoot.setAttribute("XPath", jdfRoot.buildXPath(null));
+        parentRoot.setAttribute("ID", jdfRoot.getID());
+                
+        VElement vNodes= getMatchingTypeNodeVector(jdfRoot);
+        if (vNodes==null)  
         {
-            typesNode = jdfRoot.getAllTypes();
-        }
-        catch (JDFException jdfe)
-        {
-            root.setAttribute("FitsType", false, null);
-            root.setAttribute("Message", jdfe.getMessage());
-            return testResult;
-        }
-        
-        boolean bWrongType = !fitsTypes(typesNode);
-        if (bWrongType)  
-        {
-            root.setAttribute("FitsType", false, null);
+            parentRoot.setAttribute("FitsType", false, null);
         }
         else 
         {
-            root.setAttribute("FitsType", true, null);
-            XMLDoc devCapsTestResult = null;
+            parentRoot.setAttribute("FitsType", true, null);
             
             // check the status of all child nodes
-            Vector vNodes= jdfRoot.getvJDFNode(null, null, false);
             for (int i=0; i < vNodes.size()-1; i++) 
             {
                 JDFNode n = (JDFNode)vNodes.elementAt(i);
-                devCapsTestResult = devCapsReport(n, testlists, level);
-                if (devCapsTestResult != null) 
+                KElement childRoot = devCapsReport(n, testlists, level,parentRoot);
+                if (childRoot != null) 
                 {
-                    KElement childRoot = root.appendElement("RejectedChildNode");
-                    childRoot.setAttribute("XPath", n.buildXPath());
+                    childRoot.setAttribute("XPath", n.buildXPath(null));
                     childRoot.setAttribute("ID", n.getID());
-                    moveChildElementVector_Static(childRoot,devCapsTestResult.getRoot());
                 }
             }
-            
-            devCapsTestResult = devCapsReport(jdfRoot,testlists,level);
-            if (devCapsTestResult != null) 
-            {
-                moveChildElementVector_Static(root,devCapsTestResult.getRoot());
-            }
-            
-            if (!root.hasChildElements() && root.getBoolAttribute("FitsType", null, true))
-                testResult = null;
-            
+            devCapsReport(jdfRoot,testlists,level,parentRoot);
         }
-        return testResult;
-        
+        return parentRoot;        
     }
     
     
     
     /**
-     * devCapsReport - for every DevCaps element that DeviceCap consists of, 
-     * looks for appropriate elements in JDFNode and tests them.
-     * Composes a detailed report of the found errors in XML form. 
-     * If XMLDoc equals null - there are no errors
+     * devCapsReport - searches in JDFNode for appropriate elements for every DevCaps element 
+     * that DeviceCap consists of, and tests them.<br>
+     * Composes a detailed report of the found errors in XML form.<br> 
+     * If XMLDoc is <code>null</code> there are no errors
      * 
-     * @param JDFNode jdfRoot - the node we test
-     * @param EnumFitsValue testlists - FitsValue_Allowed or FitsValue_Present testlists
-     * that are specified for the State elements. (Will be used in fitsValue method of the State element)
-     * @param EnumValidationLevel level - validation level
+     * @param jdfRoot   the node we test
+     * @param testlists testlists that are specified for the State elements 
+     *                  (FitsValue_Allowed or FitsValue_Present)<br>
+     *                  Will be used in fitsValue method of the State class.
+     * @param level     validation level
      * @return XMLDoc - XMLDoc output of the error messages. 
-     * If XMLDoc equals null - there are no errors, 'jdfRoot' is accepted 
+     *                  If XMLDoc is <code>null</code> there are no errors, 'jdfRoot' is accepted 
      */
-    private final XMLDoc devCapsReport(final JDFNode jdfRoot, EnumFitsValue testlists, EnumValidationLevel level)
-    {
-        XMLDoc testResult = new XMLDoc("Temp", null); // root is a temporary Node
-        KElement root = testResult.getRoot();
-        
+    private final KElement devCapsReport(final JDFNode jdfRoot, EnumFitsValue testlists, EnumValidationLevel level, KElement parentRoot)
+    {        
         // first test if there are in the JDFNode any ResourceLink or NodeInfo/CustomerInfo 
         // that are not described by DevCaps
-        XMLDoc temp = missingDevCaps(jdfRoot);
-        if (temp != null) 
-        {
-            root.copyElement(temp.getRoot(), null);
-        }
-        
+        KElement root = parentRoot.appendElement("RejectedChildNode");
+
+        if(!ignoreExtensions)
+            missingDevCaps(jdfRoot,root);
+            
         // if all resourceLinks and NodeInfo/CustomerInfo elements (optional) 
         // are specified as DevCaps, we may test them. 
-        temp = invalidDevCaps(jdfRoot, testlists, level);
-        
-        if (temp != null)
+        invalidDevCaps(jdfRoot, testlists, level, root);
+        actionPoolReport(jdfRoot,root);
+        if(!root.hasChildElements())
         {
-            moveChildElementVector_Static(root,temp.getRoot());
+            root.deleteNode();
+            root=null;
         }
-        
-        temp = actionPoolReport(jdfRoot);
-        if (temp != null)
-        {
-            root.copyElement(temp.getRoot(), null);
-        }
-        
-        if (!root.hasChildElements())
-            testResult = null;
-        
-        return testResult;
+        return root;
     }
     
     
     
     
     /**
-     * invalidDevCaps - tests if there are in the JDFNode any invalid or missing Resources 
-     * or NodeInfo/CustomerInfo elements. Composes a detailed report of the found errors in XML form. 
-     * If XMLDoc equals null - there are no errors
+     * invalidDevCaps - tests if there are any invalid or missing Resources 
+     * or NodeInfo/CustomerInfo elements in the JDFNode.<br> 
+     * Composes a detailed report of the found errors in XML form. 
+     * If XMLDoc is <code>null</code> there are no errors.
      * 
-     * @param JDFNode jdfRoot - node we test
-     * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc equals null - there are no errors
+     * @param jdfRoot node we test
+     * @return boolean - true if invalid devcaps were found 
      * @throws JDFException if DeviceCap is invalid: has a wrong attribute Context value 
      */
-    private final XMLDoc invalidDevCaps(final JDFNode jdfRoot, EnumFitsValue testlists, EnumValidationLevel level)
+    private boolean invalidDevCaps(final JDFNode jdfRoot, EnumFitsValue testlists, EnumValidationLevel level, KElement parentReport)
     {
-        XMLDoc testResult = new XMLDoc("Temp", null); // root is a temporary Node
-        KElement root = testResult.getRoot();
-        KElement mrp = root.appendElement("MissingResources");
-        KElement irp = root.appendElement("InvalidResources");
+        KElement mrp = parentReport.appendElement("MissingResources");
+        KElement irp = parentReport.appendElement("InvalidResources");
         
         JDFElement resLinkPool = jdfRoot.getResourceLinkPool();
         VElement vDevCaps = getChildElementVector(ElementName.DEVCAPS, null, null, true, 0, false);
-        for (int i=0; i < vDevCaps.size(); i++) 
+        final int size = vDevCaps.size();
+        HashSet goodElems=new HashSet();
+        HashMap badElems=new HashMap();
+        
+        for (int i=0; i < size; i++) 
         {
             JDFDevCaps devCaps = (JDFDevCaps) vDevCaps.elementAt(i);
             VElement vElemResources = devCaps.getMatchingElementsFromNode(jdfRoot);
             int svElemResources = vElemResources==null ? 0 : vElemResources.size();
             
             final EnumContext context = devCaps.getContext();
-            KElement r;
+            KElement r=null;
             if (requiredLevel(level) && svElemResources<devCaps.getMinOccurs())
             {
                  if (context.equals(EnumContext.Element)) 
                 {
                     r = mrp.appendElement("MissingElement");
-                    r.setAttribute("XPath", jdfRoot.buildXPath()+ "/" + devCaps.getName());
+                    r.setAttribute("XPath", jdfRoot.buildXPath(null)+ "/" + devCaps.getName());
                 }
                 else 
                 {
@@ -865,7 +618,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
                     }
                     if(resLinkPool==null)
                         resLinkPool=jdfRoot; // fudge against npe in next line
-                    r.setAttribute("XPath", resLinkPool.buildXPath()+ "/" + devCaps.getName());
+                    r.setAttribute("XPath", resLinkPool.buildXPath(null)+ "/" + devCaps.getName());
                 }                    
                 r.setAttribute("Name", devCaps.getName());
                 r.setAttribute("CapXPath", devCaps.getName());                    
@@ -877,7 +630,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
                 if (context.equals(EnumContext.Element)) 
                 {
                     r = irp.appendElement("ManyElement");
-                    r.setAttribute("XPath", jdfRoot.buildXPath()+ "/" + devCaps.getName());
+                    r.setAttribute("XPath", jdfRoot.buildXPath(null)+ "/" + devCaps.getName());
                 }
                 else 
                 {
@@ -894,7 +647,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
                     }
                     if(resLinkPool==null)
                         resLinkPool=jdfRoot; // fudge against npe in next line
-                    r.setAttribute("XPath", resLinkPool.buildXPath()+ "/" + devCaps.getName());
+                    r.setAttribute("XPath", resLinkPool.buildXPath(null)+ "/" + devCaps.getName());
                 }                    
                 r.setAttribute("Name", devCaps.getName());
                 r.setAttribute("CapXPath", devCaps.getName()); 
@@ -902,106 +655,114 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
                 r.setAttribute("MaxOccurrs", devCaps.getMaxOccurs(),null);
             }
  
-            XMLDoc devCapTestResult = devCaps.devCapReport(vElemResources,testlists,level); // InvalidResources
-            if (devCapTestResult != null) 
+            for(int j=0;j<svElemResources;j++)
             {
-                moveChildElementVector_Static(irp,devCapTestResult.getRoot());
+                final KElement elem = (KElement)vElemResources.elementAt(j);
+                if(!goodElems.contains(elem))
+                {
+                    KElement report=devCaps.devCapReport(elem,testlists,level,ignoreExtensions,irp); // InvalidResources
+                    if(report==null)
+                    {
+                        goodElems.add(elem);
+                        KElement badReport=(KElement)badElems.get(elem);
+                        if(badReport!=null)
+                            badReport.deleteNode();
+                    }
+                    else
+                    {
+                        badElems.put(elem,report);
+                    }
+                }
             }
         }
+
+        boolean bRet=mrp.hasChildElements() || irp.hasChildElements();
+        if (!mrp.hasChildElements())
+            mrp.deleteNode();
         
-        if (!mrp.hasChildElements() && !irp.hasChildElements()) // XML output stuff
-        { 
-            testResult = null;
-        } 
-        else 
-        {
-            if (!mrp.hasChildElements())
-                root.removeChild(mrp);
-            
-            if (!irp.hasChildElements())
-                root.removeChild(irp);
-        }
+
+        if (!irp.hasChildElements())
+            irp.deleteNode();
         
-        return testResult;
+        return bRet;
     }
 
 
     
     /**
-     * missingDevCaps - tests if there are in the JDFNode any Resources 
-     * or NodeInfo/CustomerInfo elements that are not described by DevCaps.
-     * If missing DevCaps are found it means that Node has unknown for this Devide resources or elements.
-     * Composes a detailed report of the found errors in XML form. If XMLDoc equals null - there are no errors
+     * missingDevCaps - tests if there are any Resources or NodeInfo/CustomerInfo elements 
+     * in the JDFNode, which are not described by DevCaps.<br>
+     * If missing DevCaps are found, jdfRoot has elements unknown for this Device resources or elements.<br>
+     * Composes a detailed report of the found errors in XML form. If XMLDoc is <code>null</code>  there are no errors.
      * 
-     * @param JDFNode jdfRoot - node we test
-     * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc equals null - there are no errors 
+     * @param jdfRoot node to test
+     * @return XMLDoc - XMLDoc output of the error messages. 
+     *         If XMLDoc is <code>null</code> there are no errors 
      */
-    private final XMLDoc missingDevCaps(final JDFNode jdfRoot)
+    private final KElement missingDevCaps(final JDFNode jdfRoot, KElement parentReport)
     {
-        XMLDoc testResult = new XMLDoc("UnknownResources", null);
-        KElement root = testResult.getRoot();
+        KElement root = parentReport.appendElement("UnknownResources");
+        VElement vLinks = jdfRoot.getResourceLinks(null);
         
-        JDFResourceLinkPool resLinkPool = jdfRoot.getResourceLinkPool();
-        if ((resLinkPool != null))
+        final int linkSize = vLinks==null ? 0 : vLinks.size() ;
+        for (int j=0; j < linkSize; j++) 
         {
-            VElement vLinks = resLinkPool.getChildElementVector(null, null, null, true, 0, false);
-            
-            for (int j=0; j < vLinks.size(); j++) 
+            JDFResourceLink link = (JDFResourceLink) vLinks.elementAt(j);
+            final String resName = link.getLinkedResourceName();
+            final String processUsage=link.getProcessUsage();
+
+            JDFAttributeMap map = new JDFAttributeMap(AttributeName.NAME,resName);
+            VElement vDevCaps = getChildElementVector(ElementName.DEVCAPS,
+                    null, map, true, 0, false);
+
+            boolean bFound=false;
+            final int size = vDevCaps.size();
+            for (int k=0; k < size && !bFound; k++) 
             {
-                JDFResourceLink link = (JDFResourceLink) vLinks.elementAt(j);
-                final String resName = link.getLinkedResourceName();
-                final String processUsage=link.getProcessUsage();
-                
-                JDFAttributeMap map = new JDFAttributeMap(AttributeName.NAME,resName);
-                VElement vDevCaps = getChildElementVector(ElementName.DEVCAPS,
-                        null, map, true, 0, false);
-                
-                boolean bFound=false;
-                final int size = vDevCaps.size();
-                for (int k=0; k < size && !bFound; k++) 
+                JDFDevCaps dc = (JDFDevCaps) vDevCaps.elementAt(k);
+                if ((!dc.hasAttribute(AttributeName.LINKUSAGE)||
+                        dc.getLinkUsage().getName().equals(link.getUsage().getName()))
+                        &&(dc.getProcessUsage().equals(processUsage)))
                 {
-                    JDFDevCaps dc = (JDFDevCaps) vDevCaps.elementAt(k);
-                    if ((!dc.hasAttribute(AttributeName.LINKUSAGE)||
-                            dc.getLinkUsage().getName().equals(link.getUsage().getName()))
-                            &&(dc.getProcessUsage().equals(processUsage)))
-                    {
-                        bFound=true;
-                    }
-                }
-                if (!bFound) 
-                { // no DevCaps with Name=resName and the corresponding LinkUsage were found
-                    KElement r = root.appendElement("UnknownResource");
-                    r.setAttribute("XPath", link.buildXPath());
-                    r.setAttribute("Name", resName);
-                    if (link.hasAttribute(AttributeName.USAGE, null, false) 
-                            && !link.getUsage().getName().equals("Unknown"))
-                    {
-                        r.setAttribute("Usage", link.getUsage().getName());
-                    }
-                    r.setAttribute("Message", "Found no DevCaps description for this resource");
+                    bFound=true;
                 }
             }
+            if (!bFound) 
+            { // no DevCaps with Name=resName and the corresponding LinkUsage were found
+                KElement r = root.appendElement("UnknownResource");
+                r.setAttribute("XPath", link.buildXPath(null));
+                r.setAttribute("Name", resName);
+                if (link.hasAttribute(AttributeName.USAGE, null, false) 
+                        && !link.getUsage().getName().equals("Unknown"))
+                {
+                    r.setAttribute("Usage", link.getUsage().getName());
+                }
+                r.setAttribute("Message", "Found no DevCaps description for this resource");
+            }
         }
-        
+
         checkNodeInfoCustomerInfo(jdfRoot, root, ElementName.NODEINFO);
         checkNodeInfoCustomerInfo(jdfRoot, root, ElementName.CUSTOMERINFO);
         checkNodeInfoCustomerInfo(jdfRoot, root, ElementName.STATUSPOOL);
-//        checkNodeInfoCustomerInfo(jdfRoot, root, ElementName.AUDITPOOL);
-        
+//      checkNodeInfoCustomerInfo(jdfRoot, root, ElementName.AUDITPOOL);
+
         if (!root.hasChildElements())
-            testResult = null;
+        {
+            root.deleteNode();
+            root= null;
+        }
         
-        return testResult;
+        return root;
     }
     
     /**
      * checkNodeInfoCustomerInfo - tests if there are JDFNode/NodeInfo or JDFNode/CustomerInfo 
-     * that are not described by DevCaps.
-     * If missing DevCaps are found = Node has unknown for this Devide resources or elements
+     * elements that are not described by DevCaps.
+     * If missing DevCaps are found, jdfRoot has elements unknown for this Device resources or elements
      * 
-     * @param JDFNode jdfRoot - node we test
-     * @param KElement root - root of the XMLDoc output
-     * @param String elementName - "NodeInfo" or "CustomerInfo" or "StatusPool"
+     * @param jdfRoot      node to test
+     * @param root         root of the XMLDoc output
+     * @param elementName "NodeInfo" or "CustomerInfo" or "StatusPool"
      */
     private final void checkNodeInfoCustomerInfo(final JDFNode jdfRoot, KElement root, String elementName)
     {
@@ -1009,11 +770,11 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
         map.put(AttributeName.CONTEXT,EnumContext.Element.getName());
         map.put(AttributeName.NAME,elementName);
         final KElement devCaps = getChildByTagName(ElementName.DEVCAPS,null,0,map,true, true);
-        if ((jdfRoot.getElement(elementName) != null) && 
+        if ((jdfRoot.getElement(elementName, null, 0) != null) && 
             (devCaps  == null)) 
         {
             KElement ue = root.appendElement("UnknownElement");
-            ue.setAttribute("XPath", jdfRoot.getElement(elementName).buildXPath());
+            ue.setAttribute("XPath", jdfRoot.getElement(elementName, null, 0).buildXPath(null));
             ue.setAttribute("Name", elementName);
             ue.setAttribute("Message", "Found no DevCaps description with Context=\"Element\" for: "+elementName);
         }
@@ -1023,20 +784,19 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
     
     
     /**
-     * actionPoolReport - tests if the JDFNode fits Actions from ActionPool of this DeviceCap
-     * Composes a detailed report of the found errors in XML form. If XMLDoc equals null - there are no errors 
+     * actionPoolReport - tests if the JDFNode fits Actions from ActionPool of this DeviceCap.<br>
+     * Composes a detailed report of the found errors in XML form. If XMLDoc is <code>null</code> - there are no errors 
      *
-     * @param jdfRoot - node we test
-     * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc equals null - there are no errors,
-     * JDFNode fits ActionPool of this DeviceCap and will be accepted by Device
+     * @param jdfRoot node to test
+     * @return KElement - KElement output of the error messages. 
+     *         If KElement is <code>null</code> there are no errors, 
+     *         JDFNode fits the ActionPool of this DeviceCap and will be accepted by the device.
      * @throws JDFException if DeviceCap is invalid: ActionPool refers to the non-existent TestPool
      * @throws JDFException if DeviceCap is invalid: Action refers to the non-existent Test
      */
-    public final XMLDoc actionPoolReport(final JDFNode jdfRoot)
+    public final KElement actionPoolReport(final JDFNode jdfRoot, KElement parentReport)
     {
-        XMLDoc testResult = new XMLDoc("ActionPoolReport", null);
-        KElement root = testResult.getRoot();
-        
+        KElement root = parentReport.appendElement("ActionPoolReport");    
         JDFActionPool actionPool = getActionPool();
         if (actionPool != null) 
         {
@@ -1049,10 +809,11 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
             VElement allElms=jdfRoot.getChildrenByTagName(null,null,null,false,true,0);
             allElms.add(jdfRoot); // needed for local JDF test
             final int elmSize = allElms.size();
+            final int actionSize = vActions.size();
             for(int i=0;i<elmSize;i++)
             {
-                KElement e=(KElement)allElms.elementAt(i);
-                for (int j=0; j < vActions.size(); j++) 
+                KElement e=allElms.item(i);
+                for (int j=0; j < actionSize; j++) 
                 {
                     JDFAction action = (JDFAction) vActions.elementAt(j); 
                     JDFTest test = action.getTest();
@@ -1067,7 +828,6 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
                         continue;
                     
                     KElement ar = root.appendElement("ActionReport");
-                    
                     if (test.fitsJDF(e,ar)) // If the Test referenced by TestRef evaluates to “true” the combination 
                     {                           // of processes and attribute values described is not allowed
                         KElement arl = root.getChildWithAttribute("ActionReportList","ID",null,action.getID(),0,true);
@@ -1079,7 +839,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
                         }
                         
                         arl.moveElement(ar,null);
-                        ar.setAttribute("XPath",e.buildXPath());
+                        ar.setAttribute("XPath",e.buildXPath(null));
                         
                         // __Lena__ TBD choose Loc element according to the language settings
                         final JDFLoc loc = action.getLoc(0);
@@ -1100,18 +860,17 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
                 }
             }
         }
-        testResult=cleanActionPoolReport(testResult);
-        
-        return testResult;
+        root=cleanActionPoolReport(root);        
+        return root;
     }
     
     /**
      * remove duplicate entries that are parents of lower level entries
-     * 
+     * @param testResult XMLDoc to clean
+     * @return XMLDoc - the cleaned doc
      */ 
-    private XMLDoc cleanActionPoolReport(XMLDoc testResult)
+    private KElement cleanActionPoolReport(KElement actionPoolReport)
     {
-        KElement actionPoolReport = testResult.getRoot();
         if (actionPoolReport != null)
         {
             VElement vARL = actionPoolReport.getChildElementVector("ActionReportList", null, null, true, 0, false);
@@ -1141,37 +900,19 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
             }
 
             if (!actionPoolReport.hasChildElements())
-                return null;
-        }
-
-        return testResult;
-    }
-
-
-    /**
-     * Moves ChildElementVector of the second element into the first
-     * 
-     * @param moveToElement - the first element - new parent for the children of the second element
-     * @param moveFromElement -  the second element - element whose children will be removed
-     */
-    private final static void moveChildElementVector_Static(KElement moveToElement, KElement moveFromElement) 
-    {
-        if (moveToElement != null && moveFromElement != null)
-        {
-            Vector v = moveFromElement.getChildElementVector(null, null, null, true, 0,false);
-            for (int i = 0; i < v.size(); i++) 
             {
-                moveToElement.moveElement((KElement)v.elementAt(i), null);
+                actionPoolReport.deleteNode();
+                actionPoolReport=null;
             }
         }
-        return;
+        return actionPoolReport;
     }
-    
-    ////////////////////////////////////////////////////
+
+   ////////////////////////////////////////////////////
     
     /**
      * set the defaults of node to the values defined in the child DevCap and State elements
-     * @param node the JDFNode in which to set defults
+     * @param node   the JDFNode in which to set defaults
      * @param bLocal if true, set only in the local node, else recurse children
      */
     public boolean setDefaultsFromCaps(JDFNode node, boolean bLocal)
@@ -1223,13 +964,13 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
 
     /**
      * get a DevCaps element by name and further restrictions.
-     * if an Enumerative restriction is null, the restriction is not checked
+     * If an Enumerative restriction is null, the restriction is not checked.
      * 
-     * @param devCapsName the Name attribute of the DevCaps
-     * @param context the Context attribute of the DevCaps
-     * @param linkUsage the LinkUsage attribute of the DevCaps
+     * @param devCapsName  the Name attribute of the DevCaps
+     * @param context      the Context attribute of the DevCaps
+     * @param linkUsage    the LinkUsage attribute of the DevCaps
      * @param processUsage the ProcessUsage attribute of the DevCaps
-     * @param iSkip the iSkipth matching DevCaps
+     * @param iSkip        the iSkip'th matching DevCaps
      * @return JDFDevCaps the matching DevCaps, null if not there
      */
     public JDFDevCaps getDevCapsByName(String devCapsName, EnumContext context, EnumUsage linkUsage, EnumProcessUsage processUsage, int iSkip)
@@ -1245,13 +986,40 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
     }
     
     /**
-     * set attribute CombinedMethod to an individual method
+     * set attribute <code>CombinedMethod</code> to an individual method
      * 
      * @param method the individual combined method to set
      */
     public void setCombinedMethod(EnumCombinedMethod method)
     {
         setAttribute(AttributeName.COMBINEDMETHOD, method.getName(), null);
+    }
+
+    /**
+     * set attribute <code>CombinedMethod</code> to an individual method
+     * 
+     * @param method the individual combined method to set
+     */
+    public void setCombinedMethod(Vector vMethod)
+    {
+        setEnumerationsAttribute(AttributeName.COMBINEDMETHOD, vMethod, null);
+    }
+
+    /**
+     * @return the ignoreExtensions
+     */
+    public boolean isIgnoreExtensions()
+    {
+        return ignoreExtensions;
+    }
+
+
+    /**
+     * @param ignoreExtensions the ignoreExtensions to set
+     */
+    public void setIgnoreExtensions(boolean _ignoreExtensions)
+    {
+        this.ignoreExtensions = _ignoreExtensions;
     }
     
 }

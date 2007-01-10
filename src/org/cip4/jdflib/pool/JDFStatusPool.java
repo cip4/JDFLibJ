@@ -27,7 +27,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 
 /**
- * This class represents a JDF-Status Pool. THe status pool discribes ths status of a JDF node
+ * This class represents a JDF-Status Pool. THe status pool describes the status of a JDF node
  * that processes partitioned resources. StatusPool elements are only valid if the nodes
  * Status="Pool", otherwise the nodes status is valid for all parts, regardless of the contents
  * of StatusPool.
@@ -38,7 +38,7 @@ public class JDFStatusPool extends JDFAutoStatusPool
 
     /**
      * Constructor for JDFStatusPool
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFStatusPool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
@@ -48,8 +48,8 @@ public class JDFStatusPool extends JDFAutoStatusPool
 
     /**
      * Constructor for JDFStatusPool
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFStatusPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
@@ -59,10 +59,10 @@ public class JDFStatusPool extends JDFAutoStatusPool
 
     /**
      * Constructor for JDFStatusPool
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFStatusPool(CoreDocumentImpl myOwnerDocument, 
                          String myNamespaceURI, 
@@ -97,7 +97,7 @@ public class JDFStatusPool extends JDFAutoStatusPool
     /**
      * getElementStatus - get the status of a part defined in StatusPool
      *
-     * @param JDFAttributeMap mPart - filter for the part to get the status
+     * @param mPart filter for the part to get the status
      *
      * @return EnumNodeStatus - the status for the filter defined in mPart
      */
@@ -124,7 +124,7 @@ public class JDFStatusPool extends JDFAutoStatusPool
     /**
      * getPartStatus - get a PartStatus that fits to the filter defined by mPart
      *
-     * @param JDFAttributeMap mPart - the filter for the part to set the status
+     * @param mPart the filter for the part to set the status
      *
      * @return JDFPartStatus - the PartStatus that fits
      */
@@ -157,7 +157,7 @@ public class JDFStatusPool extends JDFAutoStatusPool
      * getCreatePartStatus - get a PartStatus that fits to the filter defined by mPart<br>
      * create it if it does not exist
      *
-     * @param JDFAttributeMap mPart   - the filter for the part to set the status
+     * @param mPart the filter for the part to set the status
     
      *
      * @return JDFPartStatus - the PartStatus that fits
@@ -178,12 +178,15 @@ public class JDFStatusPool extends JDFAutoStatusPool
     /**
      * getPartStatusVector - get a vector of PartStatus that fits to the filter defined by mPart
      *
-     * @param Vector mPart - the filter vector for the part to set the status
+     * @param mPart the filter vector for the part to set the status.If null, return all.
      *
-     * @return VElement - the PartStatus that fits
+     * @return VElement - the vector of PartStatus that fit
      */
     public VElement getPartStatusVector(Vector vmPart)
     {
+        if(vmPart==null)
+            return getChildElementVector(ElementName.PARTSTATUS, null, null, true, -1, false);
+        
         final VElement vPartStatus = new VElement();
 
         for (int i = 0; i < vmPart.size(); i++)
@@ -195,19 +198,17 @@ public class JDFStatusPool extends JDFAutoStatusPool
                 vPartStatus.add(ps);
             }
         }
-
         return vPartStatus;
     }
 
     /**
+     * get matching part status vector
      * @param JDFAttributeMap mPart
-     * @return VElement
+     * @return VElement - vector of JDFPartStatus
      */
     public VElement getMatchingPartStatusVector(JDFAttributeMap mPart)
     {
-        final VElement vPartStatus = getChildElementVector(
-                ElementName.PARTSTATUS, null, null, true, 0, false);
-        
+        final VElement vPartStatus = getChildElementVector(ElementName.PARTSTATUS, null, null, true, 0, false);      
         final VElement vPS = new VElement();
         
         for (int i=0;i<vPartStatus.size();i++)
@@ -219,17 +220,16 @@ public class JDFStatusPool extends JDFAutoStatusPool
             {
                 vPS.add(ps); // mPart is a subset of  of mapPart
             }
-        }
-        
+        }        
         return vPS;
     }
 
     /**
      * getCreatePartStatusVector - get a vector of PartStatus that fits to the filter defined by mPart
      *
-     * @param Vector  mPart   - the filter vector for the part to set the status
+     * @param mPart the filter vector for the part to set the status
      *
-     * @return VElement - the PartStatus that fits
+     * @return VElement - vector of JDFPartStatus
      */
     public VElement getCreatePartStatusVector(Vector vmPart)
     {
@@ -248,14 +248,24 @@ public class JDFStatusPool extends JDFAutoStatusPool
         return vPartStatus;
     }
 
+    /**
+     * get pool children with attributes definded by <code>mAttrib</code>
+     * @param mAttrib attribute map 
+     * @return VElement
+     */
     public VElement getPoolChildren(JDFAttributeMap mAttrib)
     {
-        final VElement v = getPoolChildrenGeneric(ElementName.PARTSTATUS, mAttrib, JDFConstants.EMPTYSTRING);
-        return v;
+        return getPoolChildrenGeneric(ElementName.PARTSTATUS, mAttrib, JDFConstants.EMPTYSTRING);
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////
 
+    /**
+     * get pool child
+     * @param i       the index of the child, or <code>-1</code> to create a new one
+     * @param mAttrib the attribute of the child
+     * @return JDFPartStatus: the pool child matching the given conditions
+     */
     public JDFPartStatus getPoolChild(int i, JDFAttributeMap mAttrib)
     {
         return (JDFPartStatus) getPoolChildGeneric(i, ElementName.PARTSTATUS, mAttrib, JDFConstants.EMPTYSTRING);
@@ -263,7 +273,7 @@ public class JDFStatusPool extends JDFAutoStatusPool
 
     /**
      * Set the status of the entire StatusPool
-     * @param EnumNodeStatus s the status for the filter defined in mPart
+     * @param s the status to set
      */
     public void setStatus(JDFElement.EnumNodeStatus s)
     {
@@ -275,7 +285,12 @@ public class JDFStatusPool extends JDFAutoStatusPool
     //////////////////////////////////////////////////////////////////////
     /**
      * Set the status of a part defined in StatusPool
-     * @default setStatus(vmPart, s, JDFConstants.EMPTYSTRING)
+     * <p>
+     * default setStatus(vmPart, s, JDFConstants.EMPTYSTRING)
+     * 
+     * @param vmPart
+     * @param s
+     * @param statusDetails
      */
     public void setStatus(VJDFAttributeMap vmPart, 
                           JDFElement.EnumNodeStatus s, String statusDetails)
@@ -290,7 +305,12 @@ public class JDFStatusPool extends JDFAutoStatusPool
 
     /**
      * Set the status of a part defined in StatusPool
-     * @default setStatus(mPart, s, JDFConstants.EMPTYSTRING)
+     * <p>
+     * default setStatus(mPart, s, JDFConstants.EMPTYSTRING)
+     *
+     * @param mPart
+     * @param s
+     * @param statusDetails
      */
     public void setStatus(JDFAttributeMap mPart, 
                           JDFElement.EnumNodeStatus s, String statusDetails)
@@ -314,7 +334,8 @@ public class JDFStatusPool extends JDFAutoStatusPool
     }
 
     /**
-     * @see org.cip4.jdflib.core.JDFElement#ValidStatus(EnumValidationLevel)
+     * check whether the status is valid
+     * @return true if status is valid
      */
     public boolean validStatus()
     {

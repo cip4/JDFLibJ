@@ -31,12 +31,12 @@ public class JDFSpawned extends JDFAutoSpawned
 {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFSpawned
-     * @param ownerDocument
+     /**
+      * Constructor for JDFSpawned
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFSpawned(
+    public JDFSpawned(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
@@ -45,8 +45,8 @@ public class JDFSpawned extends JDFAutoSpawned
 
     /**
      * Constructor for JDFSpawned
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFSpawned(
@@ -59,10 +59,10 @@ public class JDFSpawned extends JDFAutoSpawned
 
     /**
      * Constructor for JDFSpawned
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFSpawned(
         CoreDocumentImpl myOwnerDocument,
@@ -86,7 +86,7 @@ public class JDFSpawned extends JDFAutoSpawned
 
     /**
      * set all parts to those define in vParts
-     * @param VJDFAttributeMap vParts: vector of attribute maps for the parts
+     * @param vParts vector of attribute maps for the parts
      */
     public void setPartMapVector(VJDFAttributeMap vParts)
     {
@@ -95,7 +95,7 @@ public class JDFSpawned extends JDFAutoSpawned
 
     /**
      * set all parts to those define in vParts
-     * @param JDFAttributeMap mPart: attribute map for the part to set
+     * @param mPart attribute map for the part to set
      */
     public void setPartMap(JDFAttributeMap mPart)
     {
@@ -104,7 +104,7 @@ public class JDFSpawned extends JDFAutoSpawned
 
     /**
      * remove the part defined in mPart
-     * @param JDFAttributeMap mPart: attribute map for the part to remove
+     * @param mPart attribute map for the part to remove
      */
     public void removePartMap(JDFAttributeMap mPart)
     {
@@ -113,7 +113,7 @@ public class JDFSpawned extends JDFAutoSpawned
 
     /**
      * check whether the part defined in mPart is included
-     * @param JDFAttributeMap mPart: attribute map for the part to remove
+     * @param mPart attribute map for the part to remove
      * @return boolean - returns true if the part exists
      */
     public boolean hasPartMap(JDFAttributeMap mPart)
@@ -123,7 +123,7 @@ public class JDFSpawned extends JDFAutoSpawned
     
    /**
     * Typesafe attribute adder of rRefsROCopied
-    * @param KString& rRefs the reference list
+    * @param rRefs the reference list
     */
     public void appendrRefsROCopied (String rRefs)
     {

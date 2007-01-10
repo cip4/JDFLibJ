@@ -25,21 +25,20 @@ public class JDFQuery extends JDFAutoQuery
 
     /**
      * Constructor for JDFQuery
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFQuery(
+    public JDFQuery(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFQuery
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFQuery(
@@ -52,10 +51,10 @@ public class JDFQuery extends JDFAutoQuery
 
     /**
      * Constructor for JDFQuery
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFQuery(
         CoreDocumentImpl myOwnerDocument,

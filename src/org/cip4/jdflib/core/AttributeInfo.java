@@ -103,6 +103,7 @@ import org.cip4.jdflib.datatypes.JDFXYPairRangeList;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.UrlUtil;
 
 /**
  * The maintainer of version-specific attribute information:
@@ -797,8 +798,8 @@ public class AttributeInfo
 			if ((iType == AttributeInfo.EnumAttributeType.URI) 
                ||(iType == AttributeInfo.EnumAttributeType.URL) )
             {
-                return val.length()<4096;
-            }
+                return UrlUtil.isIRL(val);
+             }
             else if (iType == AttributeInfo.EnumAttributeType.RegExp)              {return true;}                        
 			
             else if ((iType == AttributeInfo.EnumAttributeType.enumeration)        ||

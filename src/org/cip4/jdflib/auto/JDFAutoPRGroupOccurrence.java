@@ -74,17 +74,17 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.JDFArgumentValue;
 import org.cip4.jdflib.resource.process.JDFStringListValue;
     /*
     *****************************************************************************
-    class JDFAutoPRGroupOccurrence : public JDFResource
+    class JDFAutoPRGroupOccurrence : public JDFElement
 
     *****************************************************************************
     */
 
-public abstract class JDFAutoPRGroupOccurrence extends JDFResource
+public abstract class JDFAutoPRGroupOccurrence extends JDFElement
 {
 
     private static final long serialVersionUID = 1L;
@@ -149,14 +149,6 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFResource
     public String toString()
     {
         return " JDFAutoPRGroupOccurrence[  --> " + super.toString() + " ]";
-    }
-
-
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
     }
 
 

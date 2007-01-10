@@ -124,10 +124,9 @@ public class JDFPDFPathState extends JDFAbstractState
         return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
     }
 
-
     /**
      * constructor for JDFPDFPathState
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFPDFPathState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
@@ -137,8 +136,8 @@ public class JDFPDFPathState extends JDFAbstractState
 
     /**
      * constructor for JDFPDFPathState
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFPDFPathState(
@@ -151,10 +150,10 @@ public class JDFPDFPathState extends JDFAbstractState
 
     /**
      * constructor for JDFPDFPathState
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFPDFPathState(
         CoreDocumentImpl myOwnerDocument,
@@ -220,13 +219,14 @@ public class JDFPDFPathState extends JDFAbstractState
     **************************************************************** */
 
     /**
-    * Gets the j-th element Loc of the i-th element Value
+    * Gets the jSkip'th element <code>Loc</code> of the iSkip'th element <code>Value</code>
     *
-    * @param int iSkip: number of Value elements to skip 
-    * ( iSkip=0 - first Value element)
-    * @param int jSkip: number of Loc subelements of i-th Value element to skip,
-    * ( jSkip=0 - first Loc element)
-    * @return JDFLoc: the matching Loc element
+    * @param iSkip: number of <code>Value</code> elements to skip 
+    *               (iSkip=0 -> first <code>Value</code> element)
+    * @param int jSkip: number of <code>Loc</code> subelements of the 
+    *               iSkip'th <code>Value</code> element to skip,
+    *            (jSkip=0 -> first <code>Loc</code> element)
+    * @return JDFLoc: the matching <code>Loc</code> element
     */
     public final JDFLoc getValueLoc(int iSkip, int jSkip)
     {
@@ -237,11 +237,11 @@ public class JDFPDFPathState extends JDFAbstractState
     }
     
     /**
-    * Appends element Loc to the end of the i-th subelement Value
+    * Appends element <code>Loc</code> to the end of the iSkip'th subelement <code>Value</code>
     *
-    * @param int iSkip: number of Value elements to skip 
-    * ( iSkip=0 - first Value element)
-    * @return JDFLoc: newly created Loc element
+    * @param iSkip number of <code>Value</code> elements to skip 
+    *              (iSkip=0 -> first Value element)
+    * @return JDFLoc: newly created <code>Loc</code> element
     */
     public JDFLoc appendValueLocLoc(int iSkip)
     {
@@ -252,10 +252,10 @@ public class JDFPDFPathState extends JDFAbstractState
      }
     
     /** 
-     * Sets the AllowedValue attribute of the i-th subelement Value
+     * Sets the AllowedValue attribute of the i-th subelement <code>Value</code>
      *
-     * @param int iSkip: the number of Value elements to skip
-     * @param String value: value to set the attribute to
+     * @param iSkip the number of <code>Value</code> elements to skip
+     * @param value value to set the attribute to
      */
     public void setValueAllowedValue(int iSkip, String value)
     {
@@ -264,9 +264,9 @@ public class JDFPDFPathState extends JDFAbstractState
     }
     
     /**
-     * Gets the AllowedValue attribute of the i-th subelement Value
+     * Gets the AllowedValue attribute of the iSkip'th subelement <code>Value</code>
      *
-     * @param int iSkip: the number of Value elements to skip
+     * @param iSkip the number of <code>Value</code> elements to skip
      * @return String: the attribute value
      */
     public final String getValueAllowedValue(int iSkip) 
@@ -277,10 +277,10 @@ public class JDFPDFPathState extends JDFAbstractState
     
     
     /**
-    * Sets the ValueUsage attribute of the i-th subelement Value
+    * Sets the ValueUsage attribute of the iSkip'th subelement <code>Value</code>
     *
-    * @param int iSkip: the number of Value elements to skip
-    * @param EnumFitsValue value: value to set the attribute to
+    * @param iSkip the number of <code>Value</code> elements to skip
+    * @param value value to set the attribute to
     */
     public void setValueValueUsage(int iSkip, EnumFitsValue value)
     {
@@ -289,9 +289,9 @@ public class JDFPDFPathState extends JDFAbstractState
     }
     
     /**
-    * Gets the value of attribute ValueUsage of the i-th subelement Value
+    * Gets the value of attribute ValueUsage of the iSkip'th subelement <code>Value</code>
     *
-    * @param int iSkip: the number of Value elements to skip
+    * @param iSkip the number of <code>Value</code> elements to skip
     * @return EnumFitsValue: the attribute value
     */
     public final EnumFitsValue getValueValueUsage(int iSkip) 
@@ -306,15 +306,16 @@ public class JDFPDFPathState extends JDFAbstractState
     **************************************************************** */
     
     /**
-     * fitsValue - tests, if the defined value matches Allowed test lists 
-     * or Present test lists, specified for this State
+     * fitsValue - checks whether <code>value</code> matches the Allowed/Present test lists
+     * specified for this State
      *
-     * @param String value - value to test
-     * @param EnumFitsValue tetlists - test lists, that the value has to match.
-     * In this State the test lists are Length, ValueElem. 
+     * @param value     value to test
+     * @param testlists the test lists the value has to match.
+     * In this State the test lists are ValueList AND ValueMod.<br> 
      * Choose one of two values: FitsValue_Allowed or FitsValue_Present. (Defaults to Allowed)
      * 
-     * @return boolean - true, if the value matches all test lists or if Allowed test lists are not specified
+     * @return boolean - true, if <code>value</code> matches testlists or 
+     *         if AllowedValueList and AllowedValueMod are not specified
      */
     public final boolean fitsValue(String value, EnumFitsValue testlists)
     {
@@ -322,14 +323,14 @@ public class JDFPDFPathState extends JDFAbstractState
     }
     
     /**
-     * fitsValueElem - tests, if the defined PDFPath matches 
-     * subelement Value, specified for this State
+     * fitsValueElem - checks whether <code>pdfPath</code> matches the 
+     * subelement <code>Value</code> specified for this State
      *
-     * @param String pdfPath - PDFPath to test
-     * @param EnumFitsValue valueusage - Switches between 
-     * Allowed and Present configuration in subelement Value.
+     * @param pdfPath    PDFPath to test
+     * @param valueusage switches between Allowed and Present configuration 
+     *                   in subelement <code>Value</code>.
      * 
-     * @return boolean - true, if 'pdfPath' matches subelement Value 
+     * @return boolean - true, if <code>pdfPath</code> matches subelement <code>Value</code> 
      */
     private final boolean fitsValueElem(String pdfPath, EnumFitsValue valuelist) 
     {

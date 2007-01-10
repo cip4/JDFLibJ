@@ -155,6 +155,10 @@ public class JDFTest extends JDFNodeTerm
     
     ////////////////////////////////////////////////////////////////////////
     
+    /**
+     * set attribute <code>ID</code>
+     * @param value value to set the attribute to
+     */
     public void setID(String value)
     {
         setAttribute(AttributeName.ID, value, null);
@@ -171,7 +175,7 @@ public class JDFTest extends JDFNodeTerm
      * Evaluates the boolean expression (child Term element) if it fits 
      * the attribute map 'm'
      *
-     * @param JDFAttributeMap m -  key-value pair attribute map
+     * @param m key-value pair attribute map
      * @return boolean - true, if the boolean expression (child Term element)
      * evaluates to “true”
      */
@@ -185,8 +189,10 @@ public class JDFTest extends JDFNodeTerm
 
     /**
      * Evaluates the boolean expression (child Term element) if it fits the JDFNode 'jdf'
+     * a value of true corresponds to a failed test, i.e. the test describes INVALID states for the jdf
      *
-     * @param  jdf - JDFNode we test to know if the Device can accept it 
+     * @param jdf        JDFNode to test to know if the Device can accept it
+     * @param reportRoot the report to generate. Set to <code>null</code> if no report is requested.
      * @return boolean - true, if boolean expression (child Term element) evaluates to “true”
      */
     public boolean fitsJDF(KElement jdf, KElement reportRoot) 
@@ -213,8 +219,8 @@ public class JDFTest extends JDFNodeTerm
  
     /**
      * gets the term from a test
-     * @return JDFTerm the term that defines this test;
-     * null if no term is there
+     * @return JDFTerm the term that defines this test, 
+     * <code>null</code> if there is no term
      */
     public JDFTerm getTerm() 
     {
@@ -280,12 +286,24 @@ public class JDFTest extends JDFNodeTerm
     //////////////////////////////////////////////////////////////////
 
     /**
-     * get the Context attribute of this Test element
+     * get attribute <code>Context</code>  of this Test element
      * 
-     * @return String the Context attribute of this test
+     * @return String - the value of the <code>Context</code> attribute of this test
      */
     public String getContext()
     {
         return getAttribute(AttributeName.CONTEXT,null,null);
+    }    
+
+    //////////////////////////////////////////////////////////////////
+    
+    /**
+     * set attribute <code>Context</code>  of this Test element
+     * 
+     * @param context the value of the <code>Context</code> attribute of this test
+     */
+    public void setContext(String context)
+    {
+        setAttribute(AttributeName.CONTEXT,context);
     }    
 }

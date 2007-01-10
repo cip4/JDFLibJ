@@ -132,10 +132,9 @@ public class JDFNumberState extends JDFAbstractState
         return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
     }
 
-
     /**
      * constructor for JDFNumberState
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFNumberState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
@@ -145,8 +144,8 @@ public class JDFNumberState extends JDFAbstractState
 
     /**
      * constructor for JDFNumberState
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFNumberState(
@@ -159,10 +158,10 @@ public class JDFNumberState extends JDFAbstractState
 
     /**
      * constructor for JDFNumberState
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFNumberState(
         CoreDocumentImpl myOwnerDocument,
@@ -369,15 +368,16 @@ public class JDFNumberState extends JDFAbstractState
     **************************************************************** */
 
     /**
-     * fitsValue - tests, if the defined 'value' matches Allowed test lists or Present test lists,
+     * fitsValue - checks whether <code>value</code> matches the Allowed/Present test lists
      * specified for this State
      *
-     * @param String value - value to test
-     * @param EnumFitsValue testlists - test lists, that the value has to match.
-     * In this State the test lists are ValueList AND VaslueMod. 
+     * @param value     value to test
+     * @param testlists the test lists the value has to match.
+     * In this State the test lists are ValueList AND ValueMod.<br> 
      * Choose one of two values: FitsValue_Allowed or FitsValue_Present. (Defaults to Allowed)
      * 
-     * @return boolean - true, if 'value' matches testlists or if AllowedValueList and AllowedValueMod are not specified
+     * @return boolean - true, if <code>value</code> matches testlists or 
+     *         if AllowedValueList and AllowedValueMod are not specified
      */
     public boolean fitsValue(String value, EnumFitsValue testlists)
     {
@@ -399,13 +399,14 @@ public class JDFNumberState extends JDFAbstractState
     }
     
     /**
-     * fitsValueList - tests, if the defined 'rangelist' matches 
-     * the AllowedValueList or in the PresentValueList, specified for this State
+     * fitsValueList - checks whether <code>rangelist</code> matches 
+     * the AllowedValueList/PresentValueList specified for this State
      *
-     * @param JDFNumberRangeList rangelist - range list to test
-     * @param EnumFitsValue valuelist - Switches between AllowedValueList and PresentValueList.
+     * @param rangelist range list to test
+     * @param valuelist switches between AllowedValueList and PresentValueList.
      * 
-     * @return boolean - true, if 'rangelist' matches the valuelist or if AllowedValueList is not specified
+     * @return boolean - true, if <code>rangelist</code> matches the valuelist or 
+     *         if AllowedValueList is not specified
      */
     private final boolean fitsValueList(JDFNumberRangeList rangelist, EnumFitsValue valuelist)
     {
@@ -447,13 +448,14 @@ public class JDFNumberState extends JDFAbstractState
     }
 
     /**
-     * fitsValueMod - tests, if the defined 'rangelist' matches 
-     * the AllowedValueMod or the PresentValueMod, specified for this State
+     * fitsValueMod - checks whether <code>range</code> matches the <code>ValueMod</code> 
+     * specified for this State.
      *
-     * @param JDFIntegerRangeList rangelist - range list to test
-     * @param EnumFitsValue valuemod - Switches between AllowedValueMod and PresentValueMod.
+     * @param rangelist range list to test
+     * @param valuemod  switches between AllowedValueMod and PresentValueMod.
      * 
-     * @return boolean - true, if 'rangelist' matches the valuemod or if AllowedValueMod is not specified
+     * @return boolean - true, if <code>rangelist</code> matches the valuemod or 
+     *         if AllowedValueMod is not specified
      */
     private final boolean fitsValueMod(JDFNumberRangeList rangelist, EnumFitsValue valuemod) 
     {
@@ -514,14 +516,13 @@ public class JDFNumberState extends JDFAbstractState
     }
 
     /**
-     * fitsCompleteList - tests for the case, when ListType=CompleteList,
-     * if the defined 'value' matches AllowedValueList or PresentValueList,
-     * specified for this State
+     * fitsCompleteList - tests whether <code>value</code> matches the given testlist
+     * (ListType=fitsCompleteList)
      *
-     * @param JDFNumberRangeList value - value to test
-     * @param JDFNumberRangeList list - testlist are either AllowedValueList or PresentValueList.
+     * @param value value to test
+     * @param list  testlist, either AllowedValueList or PresentValueList.
      * 
-     * @return boolean - true, if 'value' matches testlist
+     * @return boolean - true, if <code>value</code> matches the testlist
      */
     private final boolean fitsCompleteList(JDFNumberRangeList value, JDFNumberRangeList list)
     {
@@ -558,15 +559,14 @@ public class JDFNumberState extends JDFAbstractState
     }
 
     /**
-    * fitsCompleteOrderedList - tests for the case, when ListType=CompleteOrderedList,
-    * if the defined 'value' matches AllowedValueList or PresentValueList,
-    * specified for this State
-    *
-    * @param JDFNumberRangeList value - value to test
-    * @param JDFNumberRangeList list - testlist are either AllowedValueList or PresentValueList.
-    * 
-    * @return boolean - true, if 'value' matches testlist
-    */
+     * fitsCompleteOrderedList - tests whether <code>value</code> matches the given testlist
+     * (ListType=CompleteOrderedList)
+     *
+     * @param value value to test
+     * @param list  testlist, either AllowedValueList or PresentValueList.
+     * 
+     * @return boolean - true, if <code>value</code> matches the testlist
+     */
     private final boolean fitsCompleteOrderedList(JDFNumberRangeList value, JDFNumberRangeList list)
     {
         int v_size = value.size();
@@ -589,15 +589,14 @@ public class JDFNumberState extends JDFAbstractState
     }
 
     /**
-    * fitsContainedList - tests for the case, when ListType=ContainedList,
-    * if the defined 'value' matches AllowedValueList or PresentValueList,
-    * specified for this State
-    *
-    * @param JDFNumberRangeList value - value to test
-    * @param JDFNumberRangeList list - testlist are either AllowedValueList or PresentValueList.
-    * 
-    * @return boolean - true, if 'value' matches testlist
-    */
+     * fitsContainedList - tests whether <code>value</code> matches the given testlist
+     * (ListType=ContainedList)
+     *
+     * @param value value to test
+     * @param list  testlist, either AllowedValueList or PresentValueList.
+     * 
+     * @return boolean - true, if <code>value</code> matches testlist
+     */
     private final boolean fitsContainedList(JDFNumberRangeList value, JDFNumberRangeList list)
     {
         int v_size = value.size();

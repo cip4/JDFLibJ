@@ -82,6 +82,7 @@ import java.util.Map;
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
@@ -95,11 +96,11 @@ public class JDFAudit extends JDFElement
     
     private static final long serialVersionUID = 1L;
     final private static String m_libAgentName    = "CIP4 JDF Writer Java";
-    final private static String m_libAgentVersion = "1.3 BLD 35";
+    final private static String m_libAgentVersion = "1.3 BLD 38";
     // use reasonable defaults
     private static String m_strAgentName    = m_libAgentName;
     private static String m_strAgentVersion = m_libAgentVersion;
-    private static String m_strAuthor = null;
+    private static String m_strAuthor = software();
     
     private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
     static {
@@ -199,6 +200,7 @@ public class JDFAudit extends JDFElement
         
         public static final EnumAuditType Created           = new EnumAuditType("Created");
         public static final EnumAuditType Modified          = new EnumAuditType("Modified");
+        public static final EnumAuditType Deleted           = new EnumAuditType("Deleted");
         public static final EnumAuditType Spawned           = new EnumAuditType("Spawned");
         public static final EnumAuditType Merged            = new EnumAuditType("Merged");
         public static final EnumAuditType Notification      = new EnumAuditType("Notification");
@@ -353,6 +355,15 @@ public class JDFAudit extends JDFElement
         super.setPartMap(m);
     }
     
+    /**
+     * get part map vector
+     * @return VJDFAttributeMap: vector of mAttribute, one for each part
+     */
+    public VJDFAttributeMap getPartMapVector()
+    {
+        return super.getPartMapVector();
+    }
+   
     
     /**
      * Set attribute SpawnID

@@ -27,21 +27,20 @@ import org.cip4.jdflib.auto.JDFAutoSubmissionMethods;
 
     /**
      * Constructor for JDFSubmissionMethods
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFSubmissionMethods(
+    public JDFSubmissionMethods(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFSubmissionMethods
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFSubmissionMethods(
@@ -54,10 +53,10 @@ import org.cip4.jdflib.auto.JDFAutoSubmissionMethods;
 
     /**
      * Constructor for JDFSubmissionMethods
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFSubmissionMethods(
         CoreDocumentImpl myOwnerDocument,
@@ -68,6 +67,10 @@ import org.cip4.jdflib.auto.JDFAutoSubmissionMethods;
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
 
+    /**
+     * toString()
+     * @return String
+     */
     public String toString()
     {
         return "JDFSubmissionMethods[  --> " + super.toString() + " ]";

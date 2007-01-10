@@ -110,8 +110,6 @@ public class StringUtil
 {
     //**************************************** Constants *******************************************
     private static final String m_sep   = JDFConstants.BLANK;
-    private static final String m_front = JDFConstants.EMPTYSTRING;
-    private static final String m_end   = JDFConstants.EMPTYSTRING;
     /**
      * @deprecated use {@link UrlUtil}.m_URIEscape
      */
@@ -122,14 +120,14 @@ public class StringUtil
      
     /**
      * Returns a string with deleted whitespaces near 'delim'
-     * and from the both ends of the string (if they were there)
+     * and from the both ends of the string (if they were there)<br>
      * 
      * tokenizes a given string 'str' into tokens without separators.
      * Trims every token from both sides to remove the whitespaces 
      * and builds a new string from these tokens separated by 'delim'.
      * 
-     * @param String str - working string
-     * @param String delim - the delimiter
+     * @param str   working string
+     * @param delim the delimiter
      *
      * @return String - the modified string
      */
@@ -157,7 +155,7 @@ public class StringUtil
     /**
      * create a string from an array of tokens
      * 
-     * @param v - the token array
+     * @param v     the token array
      * @param sep   the separator between the tokens
      * @param front the front end of the string
      * @param back  the back  end of the string
@@ -170,24 +168,25 @@ public class StringUtil
         VString v=new VString(a);
         return setvString(v, sep, front, back);
     }
+    
     /**
      * create a string from a vector of tokens
-     * 
-     * @param Vector v - the token vector
-      * 
-     * @return String - the vector as String
-     * 
+     * <p>
      * default: setvString(v, JDFConstants.BLANK, null, null)
+      * 
+     * @param v the token vector
+     * 
+     * @return String - the vector as String
      */
     public static String setvString(Vector v)
     {
-        return setvString(v, m_sep, m_front, m_end);
+        return setvString(v, m_sep, null, null);
     }
     
     /**
      * create a string from a vector of tokens
      * 
-     * @param v - the token vector
+     * @param v     the token vector
      * @param sep   the separator between the tokens
      * @param front the front end of the string
      * @param back  the back  end of the string
@@ -213,7 +212,19 @@ public class StringUtil
             {
                 buf.append(sep);
             }
-            buf.append( (String) v.elementAt(i));
+            final Object elementAt = v.elementAt(i);
+            if(elementAt instanceof String)
+            {
+                buf.append( (String) elementAt);
+            }
+            else if(elementAt instanceof ValuedEnum)
+            {
+                buf.append(((ValuedEnum)elementAt).getName());
+            }
+            else
+                throw new IllegalArgumentException("illegal vector contents");
+
+                
         }
         
         if (back != null)
@@ -268,12 +279,15 @@ public class StringUtil
     }
     
     /**
-     * @param strWork the string to tokenize
-     * @param delim the delimitor
-     * @param delim2token should a deleimeter be a token?
-     * @return the vector of strings
+     * return a vector of individual tokens<br>
+     * Multiple consequtive delimitors are treated as one (similar to whitespace handling). 
+     * <p>
+     * default: tokenize(strWork, delim, false)
      * 
-     * default: Tokenize(strWork, delim, false)
+     * @param strWork the string to tokenize
+     * @param delim       the delimiter
+     * @param delim2token should a delimiter be a token?
+     * @return the vector of strings
      */
     public static VString tokenize(String strWork, String delim, boolean delim2token)
     {
@@ -291,13 +305,15 @@ public class StringUtil
     }
     
     /**
-     * @param strWork the string to work on
-     * @param token the token to search for
-     * @param delim the delimiter for tokens
-     * @param iSkip the number of matching tokens to skip before returning true
-     * @return number of Tokens to skip before returning true
-     * 
+     * check whether a String contains a given token
+     * <p>
      * default: hasToken(strWork, token, delim, 0)
+     * 
+     * @param strWork the string to work on
+     * @param token   the token to search for
+     * @param delim   the delimiter of the tokens
+     * @param iSkip   the number of matching tokens to skip before returning true
+     * @return boolean - true if <code>strWork</code> contains <code>token</code>
      */
     public static boolean hasToken(String strWork, String token, String delim, int iSkip)
     {
@@ -323,13 +339,14 @@ public class StringUtil
     }
     
     /**
-     * @param strWork the string to work on
-     * @param token the token to search for
-     * @param delim the delimiter for tokens
-     * @param iSkip the number of matching tokens to skip before returning true
-     * @return number of Tokens to skip before returning true
+     * check whether a vector of Strings contains a given token
+     * <p>
+     * default: hasToken(strWork, token, 0)
      * 
-     * default: hasToken(strWork, token, delim, 0)
+     * @param strWork the vector of strings string to work on
+     * @param token   the token to search for
+     * @param iSkip   the number of matching tokens to skip before returning true
+     * @return true, if <code>strWork</code> contains <code>token</code>
      */
     public static boolean hasToken(String strWork[], String token, int iSkip)
     {
@@ -348,13 +365,15 @@ public class StringUtil
         return false;
     }
     /**
-     * @param strWork
-     * @param index number of the token to return, if<0 return from end
-     *          e.g. -1 is the last token
-     * @param delim
-     * @return
-     * 
+     * get a single token from a String
+     * <p>
      * default: Token(strWork, index," \t\n")
+     * 
+     * @param strWork the String to work on
+     * @param index   index of the token to return<br>
+     *                if<0 return from end (e.g. -1 is the last token)
+     * @param delim   the delimiter
+     * @return the single token (<code>null</code> if no token found)
      */
     public static String token(String strWork, int index, String delim)
     {        
@@ -381,13 +400,15 @@ public class StringUtil
     }
     
     /**
-     * @param strWork
-     * @param c
-     * @param s
-     * @param offset
-     * @return
-     * 
+     * recplace a character in a given String
+     * <p>
      * default: replaceChar(strWork, c, s, 0)
+     * 
+     * @param strWork String to work on
+     * @param c       character to replace
+     * @param s       String to insert for c
+     * @param offset
+     * @return the String with replaced characters
      */
     public static String replaceChar(String strWork, char c, String s, int offset)
     {
@@ -423,19 +444,16 @@ public class StringUtil
      * the filename extension of pathName
      * @param pathName
      * @return
+     * @deprecated use URLUtil.extension
      */
     public static String extension(String pathName)
     {
-        if(pathName==null)
-            return null;
-        
-        int index = pathName.lastIndexOf(".");
-        return (index == -1) ? null : pathName.substring(index + 1);
+        return UrlUtil.extension(pathName);
     }
     
     public static String prefix(String strWork)
     {
-        String ext = StringUtil.extension(strWork);
+        String ext = UrlUtil.extension(strWork);
         if(ext==null)
             return strWork;
 
@@ -444,7 +462,7 @@ public class StringUtil
     
     /**
      * replace the .extension of a file name
-     * @param strWork the fiile path
+     * @param strWork the file path
      * @param newExt the new extension (works with or without the initial "."
      * @return the strWork with a replaced extension
      */
@@ -461,7 +479,7 @@ public class StringUtil
     /**
      * @deprecated 060314 use KElement.xmlnsprefix
      * @param strWork
-     * @return
+     * @return String
      */
     public static String xmlNameSpace(String strWork)
     {
@@ -472,10 +490,11 @@ public class StringUtil
     
     /**
      * get the mime type for a given extension
+     * @param strWork String to work in
      */
     public static String mime(String strWork)
     {
-        String extension =extension(strWork);
+        String extension =UrlUtil.extension(strWork);
         if(extension==null)
             return JDFConstants.MIME_TEXTUNKNOWN;
 
@@ -516,9 +535,9 @@ public class StringUtil
     }
     
     /**
-     * checks whether a string is matches an NMTOKEN
+     * checks whether a string is a NMTOKEN
      * @param strWork the string to check
-     * @return boolean true if strWork is an NMTOKEN
+     * @return boolean - true if strWork is a NMTOKEN
      */    
     public static boolean isNMTOKEN(String strWork)
     {
@@ -531,9 +550,9 @@ public class StringUtil
     }
     
     /**
-     * checks whether a string is matches an ID
+     * checks whether a string is an ID
      * @param strWork the string to check
-     * @return boolean true if strWork is an ID
+     * @return boolean - true if strWork is an ID
      */    
     public static boolean isID(String strWork)
     {
@@ -547,7 +566,7 @@ public class StringUtil
     /**
      * checks whether a string is matches an NMTOKENS list
      * @param strWork the string to check
-     * @return boolean true if strWork is an NMTOKENS list
+     * @return boolean - true if strWork is an NMTOKENS list
      * @deprecated 060309 use isNMTOKENS(strWork,false)
      */    
     public static boolean isNMTOKENS(String strWork)
@@ -556,10 +575,10 @@ public class StringUtil
     }
 
     /**
-     * checks whether a string is matches an NMTOKENS list
+     * checks whether a string is a NMTOKENS list
      * @param strWork the string to check
      * @param bID if true, also check that each individual token matches the pattern for an ID
-     * @return boolean true if strWork is an NMTOKENS list
+     * @return boolean true if strWork is a NMTOKENS list
      */    
     public static boolean isNMTOKENS(String strWork, boolean bID)
     {
@@ -585,9 +604,9 @@ public class StringUtil
     /////////////////////////////////////////////////////////////////////
     
     /**
-     * checks whether a string is matches the boolean values "true" or "false"
+     * checks whether a string matches the boolean values "true" or "false"
      * @param strWork the string to check
-     * @return boolean true if strWork is a boolean
+     * @return boolean true if strWork is represents boolean value
      */
     public static boolean isBoolean(String strWork)
     {
@@ -595,7 +614,7 @@ public class StringUtil
     }
     
     /**
-     * checks whether a string is matches a number
+     * checks whether a string is a number
      * @param strWork the string to check
      * @return boolean true if strWork is a number
      */    
@@ -641,13 +660,14 @@ public class StringUtil
     }
     
     /**
-     * returns the position of the token if it is in this string
+     * returns the position of the token, if it is in the String.<br>
      * The separator is excluded from the tokens. 
-     * multiple consequtive separators are treeted as one (similar to whitespace handling)
-     * @param String name - the token to search
-     * @param String separator - separator
-     * @param int iSkip - number of tokens to skip before accepting, if 0 take the first etc. -1 - first as well
-     * @return int 0 based position if the token exists, else -1
+     * Multiple consecutive separators are treated as one (similar to whitespace handling).
+     * @param name      the token to search
+     * @param separator separator
+     * @param iSkip     number of tokens to skip before accepting 
+     *                  (if 0 -> take the first etc., -1 -> first as well)
+     * @return int - 0 based position if the token exists, else -1
      */
     public static int posOfToken(String strWork, String name, String separator, int iSkip)
     {
@@ -684,14 +704,14 @@ public class StringUtil
     
     /**
      * check whether a string contains a complete token 
+     * <p>
+     * default: hasToken(strWork, token, delim)
      * 
      * @param strWork the string to work on
-     * @param token the token to search for
-     * @param delim the delimiter for tokens
-     * @return number of Tokens to skip before returning true
+     * @param typ     the token to search for
+     * @param delim   the delimiter of the tokens
+     * @return boolean - 
      * @deprecated 060420 use hasToken(strWork, token, delim, 0)
-     * 
-     * default: hasToken(strWork, token, delim)
      */
     public static boolean hasToken(String strWork, String typ, String delim)
     {
@@ -702,7 +722,8 @@ public class StringUtil
     
     /**
      * set this to the raw bytes specified in buffer, bypassing all transcoders
-     * @param char* buffer the buffer to assign to this
+     * @param buffer the buffer to assign to <code>this</code>
+     * @param len
      */
     public static String setRawBytes(byte[] buffer, int len)
     {
@@ -739,9 +760,9 @@ public class StringUtil
     }
     
     /**
-     * get the raw bytes specified in strUnicode, bypassing all transcoders
-     * any character values above 255 are truncated (c=c&0xff)
-     * @return char array the raw bytes assigned to this
+     * get the raw bytes specified in strUnicode, bypassing all transcoders<br>
+     * any character values above 255 is truncated (c=c&0xff)
+     * @return char array of the raw bytes assigned to this
      */
     public static byte[] getRawBytes(String strUnicode)
     {
@@ -759,10 +780,11 @@ public class StringUtil
     }
     
     /**
-     * set buffer to hexBinary any character values above 255 are truncated
-     * @param char[] buffer, the String which you want to encode to HexBinary
-     * @param int len the length of the buffer. if<0, default is -1. 
-     *                In this case the lenght of the char array will be used
+     * get buffer as HexBinary <br>
+     * any character values above 255 is truncated
+     * @param buffer  the String which you want to encode to HexBinary
+     * @param len     the length of the buffer. <br>
+     *                If<0, default is -1. In this case the lenght of the char array will be used.
      */
     
     public static String setHexBinaryBytes(byte[] buffer, int len)
@@ -801,8 +823,8 @@ public class StringUtil
     
     /**
      * Decode a HexBinary encoded byte array back to Unicode
-     * @param char array which stores the HexBinary
-     * @return char array holding the unicode chars 
+     * @param unicodeArray array which stores the HexBinary
+     * @return array of byte holding the unicode chars 
      */
     public static byte[] getHexBinaryBytes(byte[]  unicodeArray)
     {
@@ -885,9 +907,10 @@ public class StringUtil
     
     
     /**
-     * set the Unicode String to the  byte array in utf8 specified in strUnicode
-     * @param String strUnicode the unicode string to transcode to utf8
-     * @return byte[] a byte array[] representing the utf-8 code of the input string null if an error occurred
+     * return the UTF8 String <code>strUnicode</code> as Unicode byte array
+     * @param strUnicode the unicode string to transcode to utf8
+     * @return a byte array[] representing the utf-8 code of the input string, 
+     *         <code>null</code> if an error occurred
      */
     public static byte[] setUTF8String(String strUnicode)
     {
@@ -909,7 +932,8 @@ public class StringUtil
     /**
      * get the unicode string representing the UTF8 representation of the byte buffer
      *
-     * @return String the unicode string representation of the utf8 bytes assigned to this, null if an error occurrred
+     * @return String - the unicode string representation of the utf8 bytes assigned to this, 
+     *         <code>null</code> if an error occurrred
      */
     public static String getUTF8String(byte utf8[])
     {
@@ -929,9 +953,10 @@ public class StringUtil
     }
     
     /**
-     * returns a formatted double that has any .0 stripped in case the double is representable
-     * as an integer
-     * truncates to 8 digits after the "."
+     * returns a formatted double. 
+     * Truncates to 8 digits after the "." <br>
+     * If the double is representable as an integer, any ".0" is stripped.
+     * 
      * @param d the double to format
      * @return the formatted string that represents d
      * TBD handle exp format
@@ -973,7 +998,7 @@ public class StringUtil
     
     /**
      * returns a formatted integer, 
-     * replaces string consts with according int const
+     * replaces string constants with according int constants
      * @param i the integer to format
      * @return the formatted string that represents i
      * TBD handle exp format
@@ -997,6 +1022,11 @@ public class StringUtil
         return s;
     }    
     
+    /**
+     * checks whether <code>str</code> reprents an integer
+     * @param str the String to check
+     * @return boolean - true if the string represents an integer number
+     */
     public static boolean isInteger(String str)
     {
         String intStr = str.trim();
@@ -1024,29 +1054,30 @@ public class StringUtil
     }
     
     /**
-     * escape a string by prepending escapeChar and a numerical representation of the string
-     * characters to be escaped are defined by toEscape, escapeBelow and escapeAbove
-     * 
-     * @param String strCharSet the set of characters that should be escaped eg "‹÷ƒ¸ˆ‰"
-     * 
-     * @param String strEscapeChar the character sequence that marks an escape sequence. If null "\\" is used
-     * 
-     * @param int radix the numerical representation base of the escaped chars, e.g. 8 for octal, 16 for hex
-     *        if radix == 0 the escape char is merely inserted
-     *        if radix <0 the escape char is replaced by the prefix
-     *        valid radix: -1,0,2,8,10,16
-     * 
-     * @param escapeLen the number of digits per escaped char, not including escapeChar
-     * 
-     * @param int escapeBelow all characters with an encoding below escapeBelow should also be escaped
-     * 
-     * @param int escapeAbove all characters with an encoding above escapeAbove should also be escaped
-     * 
-     * 
-     * @return the string where all illegal sequences have been replaced by their escaped representation
-     * 
+     * escape a string by prepending escapeChar and a numerical representation of the string.
+     * Characters to be escaped are defined by toEscape, escapeBelow and escapeAbove
+     * <p>
      * default: escape(String toEscape, null, 0, 0, 0, 256); //Note that an escaped character can't be 
      *          unescaped without the knowledge of the escapelength   
+     * 
+     * @param strToEscape the String to escape
+     * @param strCharSet the set of characters that should be escaped eg "‹÷ƒ¸ˆ‰"
+     * @param strEscapeChar the character sequence that marks an escape sequence. 
+     *                    If <code>null</code>, "\\" is used
+     * 
+     * @param iRadix      the numerical representation base of the escaped chars, 
+     *                    e.g. 8 for octal, 16 for hex<br>
+     *                    if radix == 0 the escape char is merely inserted<br>
+     *                    if radix <0 the escape char is replaced by the prefix<br>
+     *        valid radix: -1,0,2,8,10,16
+     * 
+     * @param iEscapeLen  the number of digits per escaped char, not including escapeChar
+     * 
+     * @param iEscapeBelow all characters with an encoding below escapeBelow should also be escaped
+     * 
+     * @param iEscapeAbove all characters with an encoding above escapeAbove should also be escaped
+     * 
+     * @return the string where all illegal sequences have been replaced by their escaped representation
      */
     public static String escape(String strToEscape, String strCharSet, String strEscapeChar, int iRadix, int iEscapeLen, int iEscapeBelow, int iEscapeAbove)
     {
@@ -1151,11 +1182,12 @@ public class StringUtil
     /**
      * unescape a String which was escaped with the Java StringUtil.escape method
      * 
-     * @param strToUnescape the String to unescape. For example zz\d6\zzz\c4\\dc\z\d6\\24\\3f\zz‰z
+     * @param strToUnescape the String to unescape. For example <code>zz\d6\zzz\c4\\dc\z\d6\\24\\3f\zz‰z</code>
      * @param strEscapeChar the char which indicates a escape sequenze "\\" in this case (thats also the default)
-     * @param iRadix the radix of the escape sequenze. 16 in this example
+     * @param iRadix        the radix of the escape sequenze. 16 in this example.
+     * @param escapeLen     the number of digits per escaped char, not including strEscapeChar
      * 
-     * @return the unescaped String. zz÷zzzƒ‹z÷$?zz‰z in this example
+     * @return the unescaped String. <code>zz÷zzzƒ‹z÷$?zz‰z</code> in this example
      */
     public static String unEscape(String strToUnescape, String strEscapeChar, int iRadix, int escapeLen)
     {
@@ -1196,11 +1228,11 @@ public class StringUtil
     /**
      * converts a VString to a single string represents all members of the VString concatenated together
      * @deprecated use vs.getString(" ",null,null)
-     * @return String the unicode string representation of the utf8 bytes assigned to this, null if an error occurrred
+     * @return String - the unicode string representation of the utf8 bytes assigned to this, null if an error occurrred
      */
     public static String vStringToString(VString vs)
     {
-        return vs.getString(" ",null,null);
+        return StringUtil.setvString(vs," ",null,null);
     }
     
     /**
@@ -1502,13 +1534,13 @@ public class StringUtil
     }
 
 /**
- * match a regular expression using String.matches()
- * but also catch exceptions and handle simplified regexp
- * the null expression is assumed to match anything
+	 * match a regular expression using String.matches(), but also catch
+	 * exceptions and handle simplified regexp.
+	 * The <code>null</code> expression is assumed to match anything.
  * 
  * @param str the string to match 
  * @param regExp the expression to match against
- * @return true if str matches regExp or regexp is empty
+	 * @return true, if str matches regExp or regexp is empty
  */
     public static boolean matches(String str, String regExp)
     {
@@ -1553,7 +1585,7 @@ public class StringUtil
  ////////////////////////////////////////////////////////////////////////
     
     /**
-     * returns the relative URL of a file relative to the current workin directory
+     * returns the relative URL of a file relative to the current working directory
      * @param f the file to get the relative url for
      * @param baseDir the file that describes cwd, if null cwd is calculated
      * @return
@@ -1578,11 +1610,11 @@ public class StringUtil
     }
 
     /**
-     * returns the relative URL of a file relative to the current workin directory
+     * returns the relative URL of a file relative to the current working directory<br>
      * this includes escaping of %20 etc.
      * 
      * @param f the file to get the relative path for
-     * @param fCWD the file that describes cwd, if null cwd is calculated
+     * @param fCWD the file that describes cwd, if <code>null</code> cwd is calculated
      * @return
      * @deprecated use URLUtil.getRelativePath(f, fCWD);
      */
@@ -1594,7 +1626,7 @@ public class StringUtil
     /**
      * get a vector of names in an iteration
      * @param e any member of the enum to iterate over
-     * @return VString the vector of enum names
+     * @return VString - the vector of enum names
      */
     public static VString getNamesVector(Class e)
     {
@@ -1613,7 +1645,7 @@ public class StringUtil
     /**
      * get a vector of elements in an iteration
      * @param e any member of the enum to iterate over
-     * @return Vector the vector of enum instances
+     * @return Vector - the vector of enum instances
      */
     public static Vector getEnumsVector(Class e)
     {

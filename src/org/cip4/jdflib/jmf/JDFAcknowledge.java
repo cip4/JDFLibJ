@@ -1,15 +1,10 @@
 /**
  *
- * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
  *
- * JDFAcknowledge.java
- *
- * -------------------------------------------------------------------------------------------------
- *
- * The CIP4 Software License, Version 0.1
+ * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2006 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,7 +66,11 @@
  * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
+ * * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
  *
+ * JDFAcknowledge.java
+ *
+ * -------------------------------------------------------------------------------------------------
  */
 package org.cip4.jdflib.jmf;
 
@@ -79,30 +78,30 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoAcknowledge;
 
 /**
- * Typesafe resource wrapper class JDFAcknowledge this file is hand edited and will not be
- * regenerated
+ * Typesafe resource wrapper class JDFAcknowledge.<br> 
+ * This file is hand edited and will not be regenerated
  */
 public class JDFAcknowledge extends JDFAutoAcknowledge
 {
     private static final long serialVersionUID = 1L;
 
+
     /**
      * Constructor for JDFAcknowledge
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFAcknowledge(
+    public JDFAcknowledge(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFAcknowledge
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFAcknowledge(
@@ -115,10 +114,10 @@ public class JDFAcknowledge extends JDFAutoAcknowledge
 
     /**
      * Constructor for JDFAcknowledge
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFAcknowledge(
         CoreDocumentImpl myOwnerDocument,

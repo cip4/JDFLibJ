@@ -89,10 +89,10 @@ import org.cip4.jdflib.auto.JDFAutoShutDownCmdParams;
 public class JDFShutDownCmdParams extends JDFAutoShutDownCmdParams
 {
     private static final long serialVersionUID = 1L;
-    
+
     /**
      * Constructor for JDFShutDownCmdParams
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFShutDownCmdParams(
@@ -101,12 +101,11 @@ public class JDFShutDownCmdParams extends JDFAutoShutDownCmdParams
     {
         super(myOwnerDocument, qualifiedName);
     }
-    
-    
+
     /**
      * Constructor for JDFShutDownCmdParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFShutDownCmdParams(
@@ -116,13 +115,13 @@ public class JDFShutDownCmdParams extends JDFAutoShutDownCmdParams
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
-    
+
     /**
      * Constructor for JDFShutDownCmdParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFShutDownCmdParams(
             CoreDocumentImpl myOwnerDocument,

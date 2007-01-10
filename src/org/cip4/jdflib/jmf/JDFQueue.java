@@ -94,7 +94,7 @@ public class JDFQueue extends JDFAutoQueue
     
     /**
      * Constructor for JDFQueue
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFQueue(
@@ -103,12 +103,11 @@ public class JDFQueue extends JDFAutoQueue
     {
         super(myOwnerDocument, qualifiedName);
     }
-    
-    
+
     /**
      * Constructor for JDFQueue
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFQueue(
@@ -118,13 +117,13 @@ public class JDFQueue extends JDFAutoQueue
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
-    
+
     /**
      * Constructor for JDFQueue
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFQueue(
             CoreDocumentImpl myOwnerDocument,
@@ -135,6 +134,10 @@ public class JDFQueue extends JDFAutoQueue
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
     
+    /**
+     * toString()
+     * @return String
+     */
     public String toString()
     {
         return "JDFQueue[  --> " + super.toString() + " ]";
@@ -144,15 +147,16 @@ public class JDFQueue extends JDFAutoQueue
     
     /**
      * Method getEntryCount.
-     * @return int
+     * @return int quantity of QueueEntry children
      */
     public int getEntryCount()
     {
         return getChildrenByTagName(ElementName.QUEUEENTRY,null,null, false, true,0).size();
     }
+    
     /**
      * Get a vector of all queueentry elements
-     * @return VElement the vector of queue entries
+     * @return VElement: the vector of queue entries
      */
     public VElement getQueueEntryVector()
     {
@@ -160,7 +164,7 @@ public class JDFQueue extends JDFAutoQueue
     }
     
     /**
-     * Method getEntry. find a queuentry by position
+     * Method getEntry: find a queuentry by position
      * @param i the index of the queueentry
      * @return JDFQueueEntry
      */
@@ -171,15 +175,15 @@ public class JDFQueue extends JDFAutoQueue
     
     /**
      * Method findQueueEntries
-     * 
-     * @param strJobID     - Job ID.
-     * @param strJobPartID - Job part ID.
-     * @param vamParts     - Partition to execute, may not be null
-     * @param status       - Queue Entry Status, null means any status.
-     * 
-     * @return
-     * 
+     * <p>
      * default: findQueueEntries(jobID, jobPartID, new VJDFAttributeMap(), null)
+     * 
+     * @param strJobID     Job ID.
+     * @param strJobPartID Job part ID.
+     * @param vamParts     Partition to execute, may not be null
+     * @param status       Queue Entry Status, null means any status.
+     * 
+     * @return VString: vector of QueueEntry IDs
      */
     public VString findQueueEntries (String strJobID, String strJobPartID, 
             VJDFAttributeMap vamParts, EnumQueueEntryStatus status)
@@ -212,12 +216,13 @@ public class JDFQueue extends JDFAutoQueue
     }
     
     /**
-     * Find a queueEntry by QueueEntryID
+     * Find a queueEntry by QueueEntryID<br>
      * 
-     * note that you may want to use the generic getChildByTagName with the appropriate attribute map if you have more information available
+     * note that you may want to use the generic getChildByTagName with the appropriate 
+     * attribute map, if you have more information available
      * 
      * @param strQEntryID the QueueEntryID of the requeste QueueEntry
-     * @return the QueueEntry with the QueueEntryID=strQEntryID
+     * @return the QueueEntry with QueueEntryID=strQEntryID
      */
     public JDFQueueEntry getEntry (String strQEntryID)
     {

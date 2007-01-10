@@ -103,7 +103,7 @@ public class JDFShapeEvaluation extends JDFEvaluation
     private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
     static  
     {
-        atrInfoTable[0]  = new AtrInfoTable(AttributeName.TOLERANCE, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
+        atrInfoTable[0]  = new AtrInfoTable(AttributeName.TOLERANCE, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
         atrInfoTable[1]  = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333, AttributeInfo.EnumAttributeType.ShapeRangeList, null, null);
         atrInfoTable[2]  = new AtrInfoTable(AttributeName.X,         0x33333333, AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
         atrInfoTable[3]  = new AtrInfoTable(AttributeName.Y,         0x33333333, AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
@@ -115,10 +115,9 @@ public class JDFShapeEvaluation extends JDFEvaluation
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
 
-
     /**
      * constructor for JDFShapeEvaluation
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      * @throws DOMException
      */
@@ -130,8 +129,8 @@ public class JDFShapeEvaluation extends JDFEvaluation
 
     /**
      * constructor for JDFShapeEvaluation
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      * @throws DOMException
      */
@@ -146,10 +145,10 @@ public class JDFShapeEvaluation extends JDFEvaluation
 
     /**
      * constructor for JDFShapeEvaluation
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      * @throws DOMException
      */
     public JDFShapeEvaluation(
@@ -275,13 +274,13 @@ public class JDFShapeEvaluation extends JDFEvaluation
     **************************************************************** */
     
     /**
-    * fitsValue - tests, if the defined 'value' matches testlists, 
-    * specified for this Evaluation
-    *
-    * @param String value - value to test
-    * @return boolean - true, if 'value' matches testlists or 
-    * if testlists are not specified
-    */
+     * fitsValue - checks whether <code>value</code> matches the testlists 
+     * specified for this Evaluation
+     *
+     * @param value value to test
+     * @return boolean - true, if <code>value</code> matches the testlists or 
+     * if testlists are not specified
+     */
     public boolean fitsValue(String value)
     {
         if (!fitsListType(value))
@@ -312,11 +311,11 @@ public class JDFShapeEvaluation extends JDFEvaluation
     }
     
     /**
-     * fitsListType - tests, if the defined 'value' matches ListType attribute,
-     * specified for this Evaluation
+     * fitsListType - checks whether <code>value</code> matches the value of the 
+     * ListType attribute specified for this Evaluation
      *
-     * @param String value - value to test
-     * @return boolean - true, if 'value' matches specified value of ListType
+     * @param value value to test
+     * @return boolean - true, if <code>value</code> matches the specified value of ListType
      */
     private final boolean fitsListType(String value)
     {
@@ -393,13 +392,13 @@ public class JDFShapeEvaluation extends JDFEvaluation
     }
     
     /**
-    * fitsValueList - tests, if the defined 'range' is in the ValueList, 
-    * specified for this Evaluation
-    *
-    * @param JDFShapeRange range - range to test
-    * @return boolean - true, if 'range' is in the ValueList or 
-    * if ValueList is not specified
-    */
+     * fitsValueList - checks whether <code>rangelist</code> matches 
+     * the AllowedValueList or the PresentValueList specified for this Evaluation
+     *
+     * @param rangelist nmtokens to test
+     * @return boolean - true, if <code>value</code> matches <code>valuelist</code> or 
+     * if AllowedValueList is not specified
+     */
     private final boolean fitsValueList(JDFShapeRange range)
     {
         if (!hasAttribute(AttributeName.VALUELIST))
@@ -413,12 +412,12 @@ public class JDFShapeEvaluation extends JDFEvaluation
     }
     
     /**
-     * fitsTolerance - tests, if this Evaluation has specified Tolerance 
-     * that it is not equal "0 0" and
-     * expands original range to the range, that fits Tolerance.
+     * fitsTolerance - checks whether this Evaluation has a specified Tolerance 
+     * that it is not equal to "0 0", and expands the original rangelist
+     * to the rangelist that fits Tolerance.
      *
-     * @param JDFShapeRangeList rangeList - original range
-     * @return JDFShapeRangeList -  expanded range, if Tolerance="0 0" returns original range
+     * @param origRangeList original rangelist
+     * @return NumberRangeList - expanded rangelist, returns original range if Tolerance=="0 0" 
      */
     private JDFShapeRangeList fitsTolerance(JDFShapeRangeList origRangeList)
     {
@@ -465,11 +464,11 @@ public class JDFShapeEvaluation extends JDFEvaluation
     }
     
     /**
-     * fitsXYZ - tests, if the defined 'range' matches the test lists X, Y, Z,
+     * fitsXYZ - checks wheterh <code>range</code> matches the test lists X, Y, Z,
      * specified for this Evaluation
      *
-     * @param JDFShapeRange range - range to test
-     * @return boolean - true, if the 'range' matches xyzlist or 
+     * @param range range to test
+     * @return boolean - true, if <code>range</code> matches test lists X, Y, Z or 
      * if X, Y, Z are not specified
      */
     private boolean fitsXYZ (JDFShapeRange range) 
@@ -527,13 +526,13 @@ public class JDFShapeEvaluation extends JDFEvaluation
      
     
    /**
-    * fitsXYZTolerance - tests, if this Evaluation has specified Tolerance 
-    * that it is not equal "0 0" and
-    * expands original rangelist to the rangelist, that fits Tolerance.
+    * fitsXYZTolerance - checks whether this Evaluation has a specified Tolerance 
+    * that it is not equal "0 0", and expands the original rangelist to the 
+    * rangelist that fits the Tolerance.
     *
-    * @param JDFNumberRangeList rangeList - original rangelist
+    * @param rangeList original rangelist
     * @return JDFNumberRangeList - expanded rangelist, 
-    * if Tolerance="0 0" returns original range
+    *         returns original range if Tolerance=="0 0" 
     */
     public JDFNumberRangeList fitsXYZTolerance(JDFNumberRangeList origRangeList)
     {

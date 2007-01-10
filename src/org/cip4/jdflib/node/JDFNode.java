@@ -113,14 +113,17 @@
  * 18-06-2002   JG  - addSpawnedResources() bug fix for appending to rRefsRO / rRefsRW, 
  *                    remove call to setLocked for root of partitioned resource
  * 10-09-2002   RP  - MapEnumToInfo >= --> > bug fix
+ * 27-09-2006   NB  - finished mapPut(), fixed TypeLinkInfo(), TypeLinksNames() [16x]
  *
  */
 package org.cip4.jdflib.node;
 
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -129,7 +132,6 @@ import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
-import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -144,33 +146,23 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFNodeInfo;
-import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFPartStatus;
-import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDocUserData;
-import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
-import org.cip4.jdflib.jmf.JDFMessage;
-import org.cip4.jdflib.jmf.JDFSignal;
-import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.pool.JDFAncestorPool;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.pool.JDFStatusPool;
-import org.cip4.jdflib.resource.JDFMerged;
-import org.cip4.jdflib.resource.JDFNotification;
-import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
@@ -185,7 +177,9 @@ import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.resource.process.JDFNotificationFilter;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
+import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.JDFSpawn;
+import org.cip4.jdflib.util.StatusUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.Node;
 
@@ -238,7 +232,7 @@ public class JDFNode extends JDFElement
         atrInfoTable_PG[0] = new AtrInfoTable(AttributeName.TYPES, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
     }   
 
-    /**
+     /**
      * definition of optional attributes in the JDF namespace
      * @return comma separated list of optional attributes for JDF nodes
      */
@@ -312,7 +306,7 @@ public class JDFNode extends JDFElement
 
     /**
      * Constructor for JDFNode
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFNode(CoreDocumentImpl myOwnerDocument, String qualifiedName)
@@ -322,8 +316,8 @@ public class JDFNode extends JDFElement
 
     /**
      * Constructor for JDFNode
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFNode(
@@ -336,10 +330,10 @@ public class JDFNode extends JDFElement
 
     /**
      * Constructor for JDFNode
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFNode(
             CoreDocumentImpl myOwnerDocument,
@@ -400,6 +394,9 @@ public class JDFNode extends JDFElement
     public static final int exMultiSpawnRW=JDFSpawn.exMultiSpawnRW;
 
 
+    /**
+     * Enumeration for the policy of cleaning up the Spawn and Merge audits
+     */
     public static final class EnumCleanUpMerge extends ValuedEnum
     {
         private static final long serialVersionUID = 1L;
@@ -444,7 +441,7 @@ public class JDFNode extends JDFElement
 
         /**
          * @deprecated
-         * @return
+         * @return Vector
          */
          public static Vector getNamesVector()
          {
@@ -467,7 +464,8 @@ public class JDFNode extends JDFElement
     }
 
     /**
-     * inner class EnumActivation
+     * inner class EnumActivation:<br>
+     * Enumeration for attribute Activation
      */
     public static final class EnumActivation extends ValuedEnum
     {
@@ -507,7 +505,7 @@ public class JDFNode extends JDFElement
 
         /**
          * @deprecated
-         * @return
+         * @return Vector
          */
         public static Vector getNamesVector()
         {
@@ -525,9 +523,10 @@ public class JDFNode extends JDFElement
          * Constants EnumActivation
          */
         /**
-         * @deprectated
+         * @deprectated (only null is deprecated)
          */
         public static final EnumActivation Unknown = null;
+        
         public static final EnumActivation Inactive = new EnumActivation(JDFConstants.ACTIVATION_INACTIVE);
         public static final EnumActivation Informative = new EnumActivation(JDFConstants.ACTIVATION_INFORMATIVE);
         public static final EnumActivation Held = new EnumActivation(JDFConstants.ACTIVATION_HELD);
@@ -540,21 +539,22 @@ public class JDFNode extends JDFElement
      * use EnumActivation.xxx instead of the deprecated constants EnumActivation.Activation_xxx
      */
 
-    /** @deprecated */
+    /** @deprecated use EnumActivation.Inactive */
     public static final EnumActivation Activation_Inactive      = EnumActivation.Inactive;  
-    /** @deprecated */
+    /** @deprecated use EnumActivation.EnumActivation.Informative */
     public static final EnumActivation Activation_Informative   = EnumActivation.Informative;
-    /** @deprecated */
+    /** @deprecated use EnumActivation.Held */
     public static final EnumActivation Activation_Held          = EnumActivation.Held;
-    /** @deprecated */
+    /** @deprecated use EnumActivation.TestRun */
     public static final EnumActivation Activation_TestRun       = EnumActivation.TestRun;
-    /** @deprecated */
+    /** @deprecated use EnumActivation.TestRunAndGo */
     public static final EnumActivation Activation_TestRunAndGo  = EnumActivation.TestRunAndGo;
-    /** @deprecated */
+    /** @deprecated use EnumActivation.Active */
     public static final EnumActivation Activation_Active        = EnumActivation.Active;
 
     /**
-     * inner class EnumType
+     * inner class EnumType:
+     * Enumeration for accessing typesafe node types 
      */
     public static final class EnumType extends ValuedEnum
     {
@@ -595,7 +595,7 @@ public class JDFNode extends JDFElement
 
         /**
          * @deprecated
-         * @return
+         * @return Vector
          */
         public static Vector getNamesVector()
         {
@@ -632,6 +632,7 @@ public class JDFNode extends JDFElement
         public static final EnumType ColorSpaceConversion = new EnumType(JDFConstants.TYPE_COLORSPACECONVERSION);
         public static final EnumType ContactCopying = new EnumType(JDFConstants.TYPE_CONTACTCOPYING);
         public static final EnumType ContoneCalibration = new EnumType(JDFConstants.TYPE_CONTONECALIBRATION);
+        public static final EnumType CylinderLayoutPreparation = new EnumType(JDFConstants.TYPE_CYLINDERLAYOUTPREPARATION);
         public static final EnumType DBDocTemplateLayout = new EnumType(JDFConstants.TYPE_DBDOCTEMPLATELAYOUT);
         public static final EnumType DBTemplateMerging = new EnumType(JDFConstants.TYPE_DBTEMPLATEMERGING);
         public static final EnumType DigitalDelivery = new EnumType(JDFConstants.TYPE_DIGITALDELIVERY);
@@ -645,11 +646,14 @@ public class JDFNode extends JDFElement
         public static final EnumType LayoutElementProduction = new EnumType(JDFConstants.TYPE_LAYOUTELEMENTPRODUCTION);
         public static final EnumType LayoutPreparation = new EnumType(JDFConstants.TYPE_LAYOUTPREPARATION);
         public static final EnumType PDFToPSConversion = new EnumType(JDFConstants.TYPE_PDFTOPSCONVERSION);
+        public static final EnumType PDLCreation = new EnumType(JDFConstants.TYPE_PDLCREATION);
         public static final EnumType Preflight = new EnumType(JDFConstants.TYPE_PREFLIGHT);
         public static final EnumType PreviewGeneration = new EnumType(JDFConstants.TYPE_PREVIEWGENERATION);
         public static final EnumType Proofing = new EnumType(JDFConstants.TYPE_PROOFING);
         public static final EnumType PSToPDFConversion = new EnumType(JDFConstants.TYPE_PSTOPDFCONVERSION);
+        public static final EnumType RasterReading = new EnumType(JDFConstants.TYPE_RASTERREADING);
         public static final EnumType Rendering = new EnumType(JDFConstants.TYPE_RENDERING);
+        public static final EnumType RIPing = new EnumType("RIPing");
         public static final EnumType Scanning = new EnumType(JDFConstants.TYPE_SCANNING);
         public static final EnumType Screening = new EnumType(JDFConstants.TYPE_SCREENING);
         public static final EnumType Separation = new EnumType(JDFConstants.TYPE_SEPARATION);
@@ -710,6 +714,7 @@ public class JDFNode extends JDFElement
         public static final EnumType ThreadSealing = new EnumType(JDFConstants.TYPE_THREADSEALING);
         public static final EnumType ThreadSewing = new EnumType(JDFConstants.TYPE_THREADSEWING);
         public static final EnumType Trimming = new EnumType(JDFConstants.TYPE_TRIMMING);
+        public static final EnumType WebInlineFinishing = new EnumType(JDFConstants.TYPE_WEBINLINEFINISHING);
         public static final EnumType WireCombBinding = new EnumType(JDFConstants.TYPE_WIRECOMBBINDING);
         public static final EnumType Wrapping = new EnumType(JDFConstants.TYPE_WRAPPING);
     }
@@ -718,198 +723,204 @@ public class JDFNode extends JDFElement
      * Constants EnumType
      * use EnumType.xxx instead of the deprecated constants EnumType.Type_xxx
      */
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_ProcessGroup = EnumType.ProcessGroup;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Combined = EnumType.Combined;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Product = EnumType.Product;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Approval = EnumType.Approval;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Buffer = EnumType.Buffer;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Combine = EnumType.Combine;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Delivery = EnumType.Delivery;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_ManualLabor = EnumType.ManualLabor;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Ordering = EnumType.Ordering;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Packing = EnumType.Packing;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_QualityControl = EnumType.QualityControl;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_ResourceDefinition = EnumType.ResourceDefinition;
-    /** @deprecated */
+    /** @deprecated use EnumType.Type_xxx x*/
     public static final EnumType Type_Split = EnumType.Split;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Verification = EnumType.Verification;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_AssetListCreation = EnumType.AssetListCreation;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_ColorCorrection = EnumType.ColorCorrection;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_ColorSpaceConversion = EnumType.ColorSpaceConversion;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_ContactCopying = EnumType.ContactCopying;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_ContoneCalibration = EnumType.ContoneCalibration;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_DBDocTemplateLayout = EnumType.DBDocTemplateLayout;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_DBTemplateMerging = EnumType.DBTemplateMerging;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_DigitalDelivery = EnumType.DigitalDelivery;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_FilmToPlateCopying = EnumType.FilmToPlateCopying;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_FormatConversion = EnumType.FormatConversion;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_ImageReplacement = EnumType.ImageReplacement;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_ImageSetting = EnumType.ImageSetting;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Imposition = EnumType.Imposition;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_InkZoneCalculation = EnumType.InkZoneCalculation;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Interpreting = EnumType.Interpreting;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_LayoutElementProduction = EnumType.LayoutElementProduction;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_LayoutPreparation = EnumType.LayoutPreparation;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_PDFToPSConversion = EnumType.PDFToPSConversion;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Preflight = EnumType.Preflight;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_PreviewGeneration = EnumType.PreviewGeneration;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Proofing = EnumType.Proofing;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_PSToPDFConversion = EnumType.PSToPDFConversion;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Rendering = EnumType.Rendering;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Scanning = EnumType.Scanning;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Screening = EnumType.Screening;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Separation = EnumType.Separation;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_SoftProofing = EnumType.SoftProofing;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Stripping = EnumType.Stripping;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Tiling = EnumType.Tiling;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Trapping = EnumType.Trapping;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_ConventionalPrinting = EnumType.ConventionalPrinting;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_DigitalPrinting = EnumType.DigitalPrinting;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_IDPrinting = EnumType.IDPrinting;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_AdhesiveBinding = EnumType.AdhesiveBinding;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_BlockPreparation = EnumType.BlockPreparation;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_BoxPacking = EnumType.BoxPacking;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Bundling = EnumType.Bundling;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_CaseMaking = EnumType.CaseMaking ;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_CasingIn = EnumType.CasingIn ;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_ChannelBinding = EnumType.ChannelBinding ;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_CoilBinding = EnumType.CoilBinding;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Collecting = EnumType.Collecting;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_CoverApplication = EnumType.CoverApplication ;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Creasing = EnumType.Creasing;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Cutting = EnumType.Cutting;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Dividing = EnumType.Dividing;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Embossing = EnumType.Embossing;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_EndSheetGluing = EnumType.EndSheetGluing;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Feeding = EnumType.Feeding;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Folding = EnumType.Folding;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Gathering = EnumType.Gathering;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Gluing = EnumType.Gluing;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_HeadBandApplication = EnumType.HeadBandApplication;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_HoleMaking = EnumType.HoleMaking;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Inserting = EnumType.Inserting;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Jacketing = EnumType.Jacketing;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Labeling = EnumType.Labeling;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Laminating = EnumType.Laminating;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_LongitudinalRibbonOperations = EnumType.LongitudinalRibbonOperations;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Numbering = EnumType.Numbering;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Palletizing = EnumType.Palletizing;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Perforating = EnumType.Perforating;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_PlasticCombBinding = EnumType.PlasticCombBinding;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_PrintRolling = EnumType.PrintRolling;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_RingBinding = EnumType.RingBinding;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_SaddleStitching = EnumType.SaddleStitching;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_ShapeCutting = EnumType.ShapeCutting;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Shrinking = EnumType.Shrinking;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_SideSewing = EnumType.SideSewing;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_SpinePreparation = EnumType.SpinePreparation;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_SpineTaping = EnumType.SpineTaping;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Stacking = EnumType.Stacking;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Stitching = EnumType.Stitching;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Strapping = EnumType.Strapping;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_StripBinding = EnumType.StripBinding;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_ThreadSealing = EnumType.ThreadSealing;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_ThreadSewing = EnumType.ThreadSewing;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Trimming = EnumType.Trimming;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_WireCombBinding = EnumType.WireCombBinding;
-    /** @deprecated */
+    /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Wrapping = EnumType.Wrapping;
 
 
 
-
+    /**
+     * add entries to a HashMap
+     * @param key    key for the new entry
+     * @param addon  
+     * @param mMaps
+     * @param hm     HashMap to add the new entry to
+     */
     private static void nameMapPut(String key, String addon, String[] mMaps, HashMap hm)
     {
         VString vs=StringUtil.tokenize(addon,JDFConstants.COMMA,false);
@@ -926,15 +937,12 @@ public class JDFNode extends JDFElement
         hm.put(key,v);
     }
 
-    private static void linkNamemapPut(String key, String addon)
-    {
-        nameMapPut(key,addon,m_strGenericLinkNames, m_LinkNamesMap);
-    }
-    private static void infomapPut(String key, String addon)
-    {
-        nameMapPut(key,addon,m_GenericLinkInfo, m_LinkInfoMap);
-    }
-
+    /**
+     * add new entries to m_strGenericLinkNames and m_GenericLinkInfo
+     * @param key        key for the new entry
+     * @param nameAddon  value of the new entry in m_strGenericLinkNames 
+     * @param linkAddon  value of the new entry in m_GenericLinkInfo
+     */
     private static void mapPut(String key, String nameAddon, String linkAddon)
     {
         nameMapPut(key,nameAddon,m_strGenericLinkNames, m_LinkNamesMap);
@@ -951,117 +959,318 @@ public class JDFNode extends JDFElement
                 // links
                 , ",o+ i* i*Cover i?Jacket i?Parent i*EndSheet,i?,i?,i?,i?,i?,i?,"+
                 "i?,i?,i?,i?,i?,i?,"+
-        "i?,i?,i?,i?,i?,i?");
+                "i?,i?,i?,i?,i?,i?"
+        );
 
 
         mapPut(EnumType.ProcessGroup.getName(),
                 ",*",
                 // links
-        ",i* o*");
+                 ",i* o*"
+        );
 
         mapPut(EnumType.Combined.getName(),
                 ",",
                 //links
-        ",");
-
-        linkNamemapPut(EnumType.Approval.getName(),
-        ",*,ApprovalSuccess,ApprovalParams");
-        linkNamemapPut(EnumType.Buffer.getName(),
-        ",*,BufferParams");
-        linkNamemapPut(EnumType.Combine.getName(),
-        ",*");
-        linkNamemapPut(EnumType.Delivery.getName(),
-        ",*,DeliveryParams");
-        linkNamemapPut(EnumType.ManualLabor.getName(),
-        ",*,ManualLaborParams");
-        linkNamemapPut(EnumType.Ordering.getName(),
-        ",*,OrderingParams");
-        linkNamemapPut(EnumType.Packing.getName(),
-        ",*,PackingParams");
-        linkNamemapPut(EnumType.QualityControl.getName(),
-        ",*,QualityControlResult,QualityControlParams");
-        linkNamemapPut(EnumType.ResourceDefinition.getName(),
-        ",*,ResourceDefinitionParams");
-        linkNamemapPut(EnumType.Split.getName(),
-        ",*");
-        linkNamemapPut(EnumType.Verification.getName(),
-        ",*,DBSelection,ApprovalSuccess,VerificationParams,IdentificationField,DBSchema");
-
-        // prepress
-        linkNamemapPut(EnumType.AssetListCreation.getName(),
-        ",AssetListCreationParams,RunList");
-        linkNamemapPut(EnumType.Bending.getName(),
-        ",BendingParams,ExposedMedia,Media");
-        linkNamemapPut(EnumType.ColorCorrection.getName(),
-        ",ColorantControl,ColorCorrectionParams,RunList");
-        linkNamemapPut(EnumType.ColorSpaceConversion.getName(),
-        ",ColorantControl,ColorSpaceConversionParams,RunList");
-        linkNamemapPut(EnumType.ContactCopying.getName(),
-        ",ContactCopyParams,DevelopingParams,ExposedMedia,Media,TransferCurvePool");
-        linkNamemapPut(EnumType.ContoneCalibration.getName(),
-        ",RunList,ScreeningParams,TransferFunctionControl");
-        linkNamemapPut(EnumType.DBDocTemplateLayout.getName(),
-        ",DBRules,DBSchema,LayoutElement");
-        linkNamemapPut(EnumType.DBTemplateMerging.getName(),
-        ",DBMergeParams,DBSelection,LayoutElement,RunList");
-        linkNamemapPut(EnumType.DigitalDelivery.getName(),
-        ",DigitalDeliveryParams,RunList");
-        linkNamemapPut(EnumType.FilmToPlateCopying.getName(),
-        ",DevelopingParams,ExposedMedia,Media,PlateCopyParams");
-        linkNamemapPut(EnumType.FormatConversion.getName(),
-        ",FormatConversionParams,RunList");
-        linkNamemapPut(EnumType.ImageReplacement.getName(),
-        ",ImageCompressionParams,ImageReplacementParams,RunList");
-        linkNamemapPut(EnumType.ImageSetting.getName(),
-                ",ColorantControl,DevelopingParams,ImageSetterParams,Media" +
-        ",RunList,TransferCurvePool,ExposedMedia");
-        linkNamemapPut(EnumType.Imposition.getName(),
-        ",Layout,RunList");
-        linkNamemapPut(EnumType.InkZoneCalculation.getName(),
-                ",InkZoneCalculationParams,InkZoneProfile,Layout" +
-        ",TransferCurvePool,Sheet,Preview");
-        linkNamemapPut(EnumType.Interpreting.getName(),
+                 ","
+        );
+        
+        // ----- general -----
+        mapPut(EnumType.Approval.getName(),
+        		",*,ApprovalSuccess,ApprovalParams",
+        		// links
+        		",o*Rejected o*Accepted i*,o_,i_"
+        );
+        
+        mapPut(EnumType.Buffer.getName(),
+        		",*,BufferParams",
+        		// links
+        		",o_ i_,i_"
+        );
+        
+        mapPut(EnumType.Combine.getName(),
+                ",*",
+         		// links
+                ",o_ i+"
+        );
+        
+        mapPut(EnumType.Delivery.getName(),
+        		",*,DeliveryParams",
+        		// links
+        		",o+ i?,i_"
+        );
+        
+        mapPut(EnumType.ManualLabor.getName(),
+        		",*,ManualLaborParams",
+        		// links
+        		",o_ i*,i_"
+        );
+        
+        mapPut(EnumType.Ordering.getName(),
+        		",*,OrderingParams",
+        		// links
+        		",o+,i_"
+        );
+        		
+        mapPut(EnumType.Packing.getName(),
+        		",*,PackingParams",
+        		// links
+        		",o_ i_,i_"
+        );
+        		
+        mapPut(EnumType.QualityControl.getName(),
+        		",*,QualityControlResult,QualityControlParams",
+        		// links
+        		",o_ i_,o_,i_"
+        );
+        
+        mapPut(EnumType.ResourceDefinition.getName(),
+        		",*,ResourceDefinitionParams",
+        		// links
+        		",o+ i*,i?"
+        );
+        
+        mapPut(EnumType.Split.getName(),
+        		",*",
+        		// links
+        		",o+ i_"
+        );
+        
+        mapPut(EnumType.Verification.getName(),
+        		",*,DBSelection,ApprovalSuccess,VerificationParams,IdentificationField,DBSchema",
+        		// links
+        		",o? i?,o? i?,o?,i_,i*,i?"
+        );
+                
+        // ----- prepress -----
+        mapPut(EnumType.AssetListCreation.getName(),
+        		",AssetListCreationParams,RunList",
+        		// links
+        		",i_,i_ o_"
+        );
+        
+        mapPut(EnumType.Bending.getName(),
+        		",BendingParams,ExposedMedia,Media",
+        		// links
+        		",i_,i? o_,i?"
+        );
+        
+        mapPut(EnumType.ColorCorrection.getName(),
+        		",ColorantControl,ColorCorrectionParams,RunList",
+        		// links
+        		",i?,i_,o_ i_"
+        );
+        		
+        mapPut(EnumType.ColorSpaceConversion.getName(),
+        		",ColorantControl,ColorSpaceConversionParams,RunList",
+        		// links
+        		",i?,i_,o_ i_"
+        );
+        
+        mapPut(EnumType.ContactCopying.getName(),
+        		",ContactCopyParams,DevelopingParams,ExposedMedia,Media,PlateCopyParams",
+        		// links
+        		",i_,i?,o_ i+,i_,i?"
+        );
+        
+        mapPut(EnumType.ContoneCalibration.getName(),
+        		",RunList,ScreeningParams,TransferFunctionControl",
+        		// links
+        		",o_ i_,i?,i?"
+        );
+        
+        mapPut(EnumType.CylinderLayoutPreparation.getName(),
+        		",CylinderLayoutPreparationParams,Layout,Runlist,CylinderLayout",
+        		// links
+        		",i?,i_,i_,o_"
+        );
+        
+        mapPut(EnumType.DBDocTemplateLayout.getName(),
+        		",DBRules,DBSchema,LayoutElement",
+        		// links
+        		",i_,i_,o* i*"
+        );
+        
+        mapPut(EnumType.DBTemplateMerging.getName(),
+        		",DBMergeParams,DBSelection,LayoutElement,RunList",
+        		// links
+        		",i_,i_,i*,o_"
+        );
+        
+        mapPut(EnumType.DigitalDelivery.getName(),
+        		",DigitalDeliveryParams,RunList",
+        		// links
+        		",i_,o+ i*"
+        );
+        		
+        mapPut(EnumType.FilmToPlateCopying.getName(),
+        		",DevelopingParams,ExposedMedia,Media,PlateCopyParams",
+        		// links
+        		",i?,o_ i_,i_,i_"
+        );
+        
+        mapPut(EnumType.FormatConversion.getName(),
+        		",FormatConversionParams,RunList",
+        		// links
+        		",i_,o_ i_"
+        );
+        
+        mapPut(EnumType.ImageReplacement.getName(),
+        		",ImageCompressionParams,ImageReplacementParams,RunList",
+        		// links
+        		",i?,i_,o_ i_"
+        );
+        
+        mapPut(EnumType.ImageSetting.getName(),
+        		",ColorantControl,DevelopingParams,ImageSetterParams,Media," +
+                "RunList,TransferCurvePool,ExposedMedia",
+                // links
+        		",i?,i?,i?,i?,"+
+        		"i_,i?,o_ i?"
+        );
+        
+        mapPut(EnumType.Imposition.getName(),
+        		",Layout,RunList",
+                // links
+        		",i_,o_ i?Marks i_Document"
+        );
+        
+        mapPut(EnumType.InkZoneCalculation.getName(),
+        		",InkZoneCalculationParams,InkZoneProfile,Layout," + 
+        		"TransferCurvePool,Sheet,Preview",
+                // links
+        		",i?,o_,i?," +
+        		"i?,i?,i_"
+        );
+        		
+        mapPut(EnumType.Interpreting.getName(),        		
                 ",ColorantControl,FontPolicy,InterpretedPDLData" +
-        ",InterpretingParams,PDLResourceAlias,RunList");
-        linkNamemapPut(EnumType.LayoutElementProduction.getName(),
-        ",LayoutElement,RunList,LayoutElementProductionParams");
-        linkNamemapPut(EnumType.LayoutPreparation.getName(),
-        ",LayoutPreparationParams,RunList,Layout,TransferCurvePool");
-        linkNamemapPut(EnumType.PDFToPSConversion.getName(),
-        ",PDFToPSConversionParams,RunList");
-        linkNamemapPut(EnumType.Preflight.getName(),
-                ",PreflightParams,PreflightReportRulePool,RunList" +
-        ",PreflightReport");
-        linkNamemapPut(EnumType.PreviewGeneration.getName(),
+                ",InterpretingParams,PDLResourceAlias,RunList",
+                // links
+                ",i?,i?,o?" +
+                ",i_,i*,o? i_"
+        );
+        
+        mapPut(EnumType.LayoutElementProduction.getName(),
+        		",LayoutElement,RunList,LayoutElementProductionParams",
+                // links
+        		",o? i*,o?,i?"
+        );
+        		
+        mapPut(EnumType.LayoutPreparation.getName(),
+        		",LayoutPreparationParams,RunList,Layout,TransferCurvePool",
+                // links
+        		",i_,o?Marks i?Marks i?Document,o_,o?"
+        );
+
+        mapPut(EnumType.PDFToPSConversion.getName(),
+        		",PDFToPSConversionParams,RunList",
+                // links
+        		",i_,o_ i_"
+        );
+        
+        mapPut(EnumType.PDLCreation.getName(),
+        		",ImageCompressionParams,PDLCreationParams,RunList",
+                // links
+        		",i?,i?,o_ i_"
+        );
+
+        mapPut(EnumType.Preflight.getName(),
+                ",PreflightParams,PreflightReportRulePool,RunList,PreflightReport",
+        		// links
+                ",i_,i_,i_,o_"
+                );
+
+        mapPut(EnumType.PreviewGeneration.getName(),
                 ",ColorantControl,ExposedMedia,PreviewGenerationParams" +
-        ",RunList,TransferCurvePool,Preview");
-        linkNamemapPut(EnumType.Proofing.getName(),
+                ",RunList,TransferCurvePool,Preview",
+                // links
+                ",i?,i?,i_" +
+                ",i?,i?,o_ i?"
+        );
+                
+        mapPut(EnumType.Proofing.getName(),
                 ",ColorantControl,ColorSpaceConversionParams" +
-        ",ExposedMedia,Layout,Media,ProofingParams,RunList");
-        linkNamemapPut(EnumType.PSToPDFConversion.getName(),
+        		",ExposedMedia,Layout,Media,ProofingParams,RunList",
+        		// links
+        		",i?,i?" +
+        		",o_,i?,i_,i_,i?Marks i_Document"
+        );
+
+        mapPut(EnumType.PSToPDFConversion.getName(),
                 ",FontParams,ImageCompressionParams" +
-        ",PSToPDFConversionParams,RunList");
-        linkNamemapPut(EnumType.Rendering.getName(),
-        ",InterpretedPDLData,Media,RenderingParams,RunList");
-        linkNamemapPut(EnumType.Scanning.getName(),
-        ",ExposedMedia,ScanParams,RunList");
-        linkNamemapPut(EnumType.Screening.getName(),
-        ",RunList,ScreeningParams");
-        linkNamemapPut(EnumType.Separation.getName(),
-        ",ColorantControl,RunList,SeparationControlParams");
-        linkNamemapPut(EnumType.SoftProofing.getName(),
+                ",PSToPDFConversionParams,RunList",
+        		// links
+                ",i?,i?" +
+                ",i?,o_ i_"
+        );
+        
+        mapPut(EnumType.RasterReading.getName(),
+        		",RasterReadingParams,RunList",
+        		// links
+        		",i?,o_ i_"
+        );
+        
+        mapPut(EnumType.Rendering.getName(),
+        		",InterpretedPDLData,Media,RenderingParams,RunList",
+        		// links
+        		",i?,i?,i?,o_ i?"
+        );
+        		
+        mapPut(EnumType.Scanning.getName(),
+                ",ExposedMedia,ScanParams,RunList",
+                // links                 
+                ",i_,i_,o_"
+        );
+                
+        mapPut(EnumType.Screening.getName(),
+                ",RunList,ScreeningParams",
+                // links
+                ",o_ i_,i_"
+        );
+        
+        mapPut(EnumType.Separation.getName(),        		
+                ",ColorantControl,RunList,SeparationControlParams",
+                // links
+                ",i?,o_ i_,i_"
+        );
+        
+        mapPut(EnumType.SoftProofing.getName(),
                 ",ColorantControl,ColorSpaceConversionParams,Layout" +
-        ",ProofingParams,RunList");
-        linkNamemapPut(EnumType.Stripping.getName(),
-        ",RunList,Layout,Assembly,TransferCurvePool,StrippingParams");
-        linkNamemapPut(EnumType.Tiling.getName(),
-        ",RunList,Tile");
-        linkNamemapPut(EnumType.Trapping.getName(),
-        ",ColorantControl,RunList,TrappingDetails,FontPolicy");
-        linkNamemapPut(EnumType.ConventionalPrinting.getName(),
+                ",ProofingParams,RunList",
+                // links                 
+                ",i?,i?,i?" +
+                ",i_,i?Marks i_Document"
+        );
+        
+        mapPut(EnumType.Stripping.getName(),
+        		",RunList,Layout,Assembly,TransferCurvePool,StrippingParams,ColorantControl",
+                // links
+        		",o?Marks o?Document i?Document,o_,i+,i?,i_,i?"
+        );
+        
+        mapPut(EnumType.Tiling.getName(),
+    		    ",RunList,Tile",
+                // links
+    		    ",o_ i?Marks i_Surface,i_"
+        );
+        
+        mapPut(EnumType.Trapping.getName(),
+                ",ColorantControl,RunList,TrappingDetails,FontPolicy",
+                // links
+                ",i?,o_ i_,i_,i?"
+        );
+
+        // ----- press -----
+        mapPut(EnumType.ConventionalPrinting.getName(),
                 ",ColorantControl,Component,ConventionalPrintingParams" +
                 ",ExposedMedia,Ink,InkZoneProfile,Layout,Media" +
-        ",PrintCondition,Sheet,TransferCurvePool");
+                ",PrintCondition,Sheet,TransferCurvePool",
+                // link info
+                ",i?,o?Waste o_ i?Proof i?Input,i_,"+
+                "i?Plate i?Cylinder i?Proof,i?,i?,i?,i?,"+
+                "i?,i?,i?"
+        );
 
         mapPut(EnumType.DigitalPrinting.getName(),
                 ",ColorantControl,Component,DigitalPrintingParams" +
@@ -1070,291 +1279,331 @@ public class JDFNode extends JDFElement
                 //links
                 ",i?,o?Waste o_ i?Proof i*Input,i_"+
                 ",i?,i?,i?,i*,i_"+
-        ",i?,i?,i?");
+                ",i?,i?,i?"
+        );
 
-        linkNamemapPut(EnumType.IDPrinting.getName(),
+        mapPut(EnumType.IDPrinting.getName(),
                 ",ColorantControl,Component,ExposedMedia,FontPolicy" +
                 ",Ink,InterpretingParams,IDPrintingParams,Media" +
                 ",RenderingParams,RunList,ScreeningParams" +
-        ",TransferFunctionControl");
-        linkNamemapPut(EnumType.AdhesiveBinding.getName(),
-        ",AdhesiveBindingParams,Component");
-        linkNamemapPut(EnumType.BlockPreparation.getName(),
-        ",Component,BlockPreparationParams");
-        linkNamemapPut(EnumType.BoxFolding.getName(),
-        ",Component,BoxFoldingParams");
-        linkNamemapPut(EnumType.BoxPacking.getName(),
-        ",Component,BoxPackingParams");
-        linkNamemapPut(EnumType.Bundling.getName(),
-        ",Component,BundlingParams,Media");
-        linkNamemapPut(EnumType.CaseMaking.getName(),
-        ",Component,CaseMakingParams,Media");
-        linkNamemapPut(EnumType.CasingIn.getName(),
-        ",Component,CasingInParams");
-        linkNamemapPut(EnumType.ChannelBinding.getName(),
-        ",ChannelBindingParams,Component");
-        linkNamemapPut(EnumType.CoilBinding.getName(),
-        ",CoilBindingParams,Component");
-        linkNamemapPut(EnumType.Collecting.getName(),
+                ",TransferFunctionControl",
+                //links
+                ",i?,o?Waste o_Good i?Proof i?Input i?Cover,i?,i?" +
+                ",i?,i*,i?,i?" +
+                ",i?,i_,i?" +
+                ",i?"
+        );
+        
+        // ----- postpress -----
+        mapPut(EnumType.AdhesiveBinding.getName(),
+                 ",AdhesiveBindingParams,Component",
+                 //links
+                 ",i_,o_ i?Cover i_BookBlock"
+        );
+        
+        mapPut(EnumType.BlockPreparation.getName(),
+                ",Component,BlockPreparationParams",
+                //links
+                ",o_ i_,i_");
+        
+        mapPut(EnumType.BoxFolding.getName(),
+        		",Component,BoxFoldingParams",
+                //links
+        		",o_ i*Application i_,i_"
+        );
+        
+        mapPut(EnumType.BoxPacking.getName(),
+        		",Component,BoxPackingParams",
+                //links
+        		",o_ i?Box i_,i_"
+        );
+        
+        mapPut(EnumType.Bundling.getName(),
+                ",Component,BundlingParams,Media",
+                //links
+                ",o_ i_,i_,i?"
+        );
+        
+        mapPut(EnumType.CaseMaking.getName(),
+                ",Component,CaseMakingParams,Media",
+                //links
+                ",o_ i?CoverMaterial,i_,i?SpineBoard i_CoverBoard i?CoverMaterial"
+        );
+        
+        mapPut(EnumType.CasingIn.getName(),
+        		",Component,CasingInParams",
+                 //links
+        		",o_ i_Case i_,i_"        		
+        );
+        
+        mapPut(EnumType.ChannelBinding.getName(),
+        		",ChannelBindingParams,Component",
+                //links
+        		",i_,o_ i?Cover i_BookBlock"
+        );
+        
+        mapPut(EnumType.CoilBinding.getName(),
+                ",CoilBindingParams,Component",
+                //links
+                ",i_,o_ i_"
+        );
+        
+        mapPut(EnumType.Collecting.getName(),
                 ",CollectingParams,Component,DBRules,DBSelection" +
-        ",IdentificationField");
-        linkNamemapPut(EnumType.CoverApplication.getName(),
-        ",Component,CoverApplicationParams");
-        linkNamemapPut(EnumType.Creasing.getName(),
-        ",CreasingParams,Component");
-        linkNamemapPut(EnumType.Cutting.getName(),
-        ",Component,CutBlock,CutMark,CuttingParams,Media");
-        linkNamemapPut(EnumType.Dividing.getName(),
-        ",Component,DividingParams");
-        linkNamemapPut(EnumType.Embossing.getName(),
-        ",Component,EmbossingParams,Media,Tool");
-        linkNamemapPut(EnumType.EndSheetGluing.getName(),
-        ",Component,EndSheetGluingParams");
-        linkNamemapPut(EnumType.Feeding.getName(),
-        ",Component,FeedingParams,Media");
-        linkNamemapPut(EnumType.Folding.getName(),
-        ",Component,FoldingParams");
-        linkNamemapPut(EnumType.Gathering.getName(),
-                ",Component,DBRules,DBSelection,GatheringParams" +
-        ",IdentificationField");
-        linkNamemapPut(EnumType.Gluing.getName(),
-        ",Component,GluingParams");
-        linkNamemapPut(EnumType.HeadBandApplication.getName(),
-        ",Component,HeadBandApplicationParams");
-        linkNamemapPut(EnumType.HoleMaking.getName(),
-        ",Component,HoleMakingParams");
-        linkNamemapPut(EnumType.Inserting.getName(),
-                ",Component,DBRules,DBSelection,IdentificationField" +
-        ",InsertingParams");
-        linkNamemapPut(EnumType.Jacketing.getName(),
-        ",Component,JacketingParams");
-        linkNamemapPut(EnumType.Labeling.getName(),
-        ",Component,LabelingParams");
-        linkNamemapPut(EnumType.Laminating.getName(),
-        ",Component,LaminatingParams,Media");
-        linkNamemapPut(EnumType.LongitudinalRibbonOperations.getName(),
-        ",Component,LongitudinalRibbonOperationParams");
-        linkNamemapPut(EnumType.Numbering.getName(),
-        ",Component,NumberingParams");
-        linkNamemapPut(EnumType.Palletizing.getName(),
-        ",Component,PalletizingParams,Pallet");
-        linkNamemapPut(EnumType.Perforating.getName(),
-        ",PerforatingParams,Component");
-        linkNamemapPut(EnumType.PlasticCombBinding.getName(),
-        ",Component,PlasticCombBindingParams");
-        linkNamemapPut(EnumType.PrintRolling.getName(),
-        ",Component,PrintRollingParams,RollStand");
-        linkNamemapPut(EnumType.RingBinding.getName(),
-        ",Component,RingBindingParams");
-        linkNamemapPut(EnumType.SaddleStitching.getName(),
-        ",Component,SaddleStitchingParams");
-        linkNamemapPut(EnumType.ShapeCutting.getName(),
-        ",Component,ShapeCuttingParams,Tool");
-        linkNamemapPut(EnumType.Shrinking.getName(),
-        ",Component,ShrinkingParams");
-        linkNamemapPut(EnumType.SideSewing.getName(),
-        ",Component,SideSewingParams");
-        linkNamemapPut(EnumType.SpinePreparation.getName(),
-        ",Component,SpinePreparationParams");
-        linkNamemapPut(EnumType.SpineTaping.getName(),
-        ",Component,SpineTapingParams");
-        linkNamemapPut(EnumType.Stacking.getName(),
-        ",Component,StackingParams");
-        linkNamemapPut(EnumType.Stitching.getName(),
-        ",Component,StitchingParams");
-        linkNamemapPut(EnumType.Strapping.getName(),
-        ",Component,StrappingParams,Strap");
-        linkNamemapPut(EnumType.StripBinding.getName(),
-        ",Component,StripBindingParams");
-        linkNamemapPut(EnumType.ThreadSealing.getName(),
-        ",Component,ThreadSealingParams");
-        linkNamemapPut(EnumType.ThreadSewing.getName(),
-        ",Component,ThreadSewingParams");
-        linkNamemapPut(EnumType.Trimming.getName(),
-        ",Component,TrimmingParams");
-        linkNamemapPut(EnumType.WireCombBinding.getName(),
-        ",Component,WireCombBindingParams");
-        linkNamemapPut(EnumType.Wrapping.getName(),
-        ",Component,WrappingParams,Media");
+        		",IdentificationField,Assembly",
+                //links
+        		",i?,o_ i+,i*,i?" +
+        		",i?,i?"
+        );
+        
+        mapPut(EnumType.CoverApplication.getName(),
+                ",Component,CoverApplicationParams",
+                //links
+                ",o_ i_Cover i_,i_"
+        );
+        
+        mapPut(EnumType.Creasing.getName(),
+                ",CreasingParams,Component",
+                //links
+                ",i_,o_ i_"
+        );
+        
+        mapPut(EnumType.Cutting.getName(),
+        		",Component,CutBlock,CutMark,CuttingParams,Media",
+                //links
+                ",o* i?,i*,i*,i_,o* i?"
+        );
+        
+        mapPut(EnumType.Dividing.getName(),
+                ",Component,DividingParams",
+                //links
+                ",o_ i_,i_"
+        );
+        
+        mapPut(EnumType.Embossing.getName(),
+                ",Component,EmbossingParams,Media,Tool",
+                //links
+                ",o_ i_,i_,i?,i?"
+        );
+        
+        mapPut(EnumType.EndSheetGluing.getName(),
+                ",Component,EndSheetGluingParams",
+                //links
+                ",o_ i_FrontEndSheet i_BookBlock i_BackEndSheet,i_"
+        );
+        
+        mapPut(EnumType.Feeding.getName(),
+        		",Component,FeedingParams,Media",
+                //links
+        		",o* i*,i_,o* i*"
+        );
+        
+        mapPut(EnumType.Folding.getName(),
+                ",Component,FoldingParams",
+                //links
+                ",o_ i_,i_"
+        );
+        
+        mapPut(EnumType.Gathering.getName(),
+                ",Assembly,Component,DBRules,DBSelection" +
+                ",GatheringParams,IdentificationField",
+                //links
+        		",i?,o_ i+,i*,i?" +
+        		",i_,i?"
+        );
+        
+        mapPut(EnumType.Gluing.getName(),
+                ",Component,GluingParams",
+                //links
+                ",o_ i_,i_"
+        );
+        
+        mapPut(EnumType.HeadBandApplication.getName(),
+        		",Component,HeadBandApplicationParams",
+                //links
+        		",o_ i_,i_"
+        );
+        
+        mapPut(EnumType.HoleMaking.getName(),
+        		",Component,HoleMakingParams",
+                //links
+        		",o_ i_,i_"
+        );
+        
+        mapPut(EnumType.Inserting.getName(),
+                ",Component,DBRules,DBSelection" +
+                ",IdentificationField,InsertingParams",
+                //links
+                ",o_ i_Child i_Mother,i?,i?" +
+                ",i?,i_"
+        );
+        
+        mapPut(EnumType.Jacketing.getName(),
+                ",Component,JacketingParams",
+                //links
+                ",o_ i_Jacket i_Book,i_"
+        );
+        
+        mapPut(EnumType.Labeling.getName(),
+                ",Component,LabelingParams",
+                //links
+                ",o_ i?Label i_,i_"
+        );
+        
+        mapPut(EnumType.Laminating.getName(),
+                 ",Component,LaminatingParams,Media",
+                 //links
+                 ",o_ i_,i_,i?"
+        );
+        
+        mapPut(EnumType.LongitudinalRibbonOperations.getName(),
+                 ",Component,LongitudinalRibbonOperationParams",
+                 //links
+                 ",o+ i_,i_"
+        );
+        
+        mapPut(EnumType.Numbering.getName(),
+                 ",Component,NumberingParams",
+                 //links
+                 ",o_ i_,i_"
+        );
+        
+        mapPut(EnumType.Palletizing.getName(),
+                 ",Component,PalletizingParams,Pallet",
+                 //links
+                 ",o_ i_,i_,i_"
+        );
+        
+        mapPut(EnumType.Perforating.getName(),
+                 ",PerforatingParams,Component",
+                 //links
+                 ",i_,o_ i_"
+        );
+        
+        mapPut(EnumType.PlasticCombBinding.getName(),
+                 ",Component,PlasticCombBindingParams",
+                 //links
+                 ",o_ i_,i_"
+        );
+        
+        mapPut(EnumType.PrintRolling.getName(),
+                 ",Component,PrintRollingParams,RollStand",
+                 //links
+                 ",o_ i_,i?,i?"
+        );
+        
+        mapPut(EnumType.RingBinding.getName(),
+                 ",Component,RingBindingParams",
+                 //links
+                 ",o_ i?RingBinder i_BookBlock,i_"
+        );
+        
+        mapPut(EnumType.SaddleStitching.getName(),
+                 ",Component,SaddleStitchingParams",
+                 //links
+                 ",o_ i_,i_"
+        );
+        
+        mapPut(EnumType.ShapeCutting.getName(),
+                 ",Component,ShapeCuttingParams,Tool",
+                 //links
+                 ",o+ i_,i?,i*"
+        );
+        
+        mapPut(EnumType.Shrinking.getName(),
+                 ",Component,ShrinkingParams",
+                 //links
+                 ",o_ i_,i_"
+        );
+        
+        mapPut(EnumType.SideSewing.getName(),
+                 ",Component,SideSewingParams",
+                 //links
+                 ",o_ i_,i_"
+        );
+        
+        mapPut(EnumType.SpinePreparation.getName(),
+                 ",Component,SpinePreparationParams",
+                 //links
+                 ",o_ i_,i_"
+        );
+        
+        mapPut(EnumType.SpineTaping.getName(),
+                 ",Component,SpineTapingParams",
+                 //links
+                 ",o_ i_,i_"
+        );
+        
+        mapPut(EnumType.Stacking.getName(),
+                 ",Component,StackingParams",
+                 //links
+                 ",o_ i_,i_"
+        );
+        
+        mapPut(EnumType.Stitching.getName(),
+                 ",Component,StitchingParams",
+                 //links
+                 ",o_ i_,i_"
+        );
+        
+        mapPut(EnumType.Strapping.getName(),
+                 ",Component,StrappingParams,Strap",
+                 //links
+                 ",o_ i_,i_,i?"
+        );
+        
+        mapPut(EnumType.StripBinding.getName(),
+                 ",Component,StripBindingParams",
+                 //links
+                 ",o_ i_,i_"
+        );
+        
+        mapPut(EnumType.ThreadSealing.getName(),
+                 ",Component,ThreadSealingParams",
+                 //links
+                 ",o_ i_,i_"
+        );
+        
+        mapPut(EnumType.ThreadSewing.getName(),
+                 ",Component,ThreadSewingParams",
+                 //links
+                 ",o_ i_,i_"
+        );
+        
+        mapPut(EnumType.Trimming.getName(),
+                 ",Component,TrimmingParams",
+                 //links
+                 ",o_ i_,i_"
+        );
+        
+        mapPut(EnumType.WebInlineFinishing.getName(),
+        		",Assembly,Component,ProductionPath" +
+        		",StrippingParams,WebInlineFinishingParams",
+                //links
+        		",i?,o_ i_,i?" +
+        		",i?,i?"
+        );
+        
+        mapPut(EnumType.WireCombBinding.getName(),
+                 ",Component,WireCombBindingParams",
+                 //links
+                 ",o_ i_,i_"
+        );
+        
+        mapPut(EnumType.Wrapping.getName(),
+                 ",Component,WrappingParams,Media",
+                 //links
+                 ",o_ i_,i_,i?"
+        );
     }
-
-
-    static 
-    {
-        infomapPut(EnumType.Approval.getName(),",o*Rejected o*Accepted i*,o_ i*,i_");
-        infomapPut(EnumType.Buffer.getName(),",o_ i_,i_");
-        infomapPut(EnumType.Combine.getName(),",o_ i+");
-        infomapPut(EnumType.Delivery.getName(), ",o+ i?,i_");
-        infomapPut(EnumType.ManualLabor.getName(), ",o_ i*,i_");
-        infomapPut(EnumType.Ordering.getName(), ",o+,i_");
-        infomapPut(EnumType.Packing.getName(),",o_ i_,i_");
-        infomapPut(EnumType.QualityControl.getName(),",o_ i_,o_,i_");
-        infomapPut(EnumType.ResourceDefinition.getName(), ",o+ i*,i?");
-        infomapPut(EnumType.Split.getName(),",o+ i_");
-        infomapPut(EnumType.Verification.getName(),",o? i?,o? i*,i_,i*,i?");
-        infomapPut(EnumType.AssetListCreation.getName(), ",i_,i_ o_");
-        infomapPut(EnumType.ColorCorrection.getName(),",i?,i_,o_ i_");
-        infomapPut(EnumType.Bending.getName(),
-        ",i_,i? o,i?");
-        infomapPut(EnumType.ColorSpaceConversion.getName(),",o? i?,i_,o_ i_");
-        infomapPut(EnumType.ContactCopying.getName(),",i_,i?,o_ i+,i_,i?");
-        infomapPut(EnumType.ContoneCalibration.getName(),
-        ",o_ i_,i?,i?");
-        infomapPut(EnumType.DBDocTemplateLayout.getName(),
-        ",i_,i_,o* i*");
-        infomapPut(EnumType.DBTemplateMerging.getName(),
-        ",i_,i_,i*,o_");
-        infomapPut(EnumType.DigitalDelivery.getName(),
-        ",i_,o_ i_");
-        infomapPut(EnumType.FilmToPlateCopying.getName(),
-        ",i?,o_ i_,i_,i_");
-        infomapPut(EnumType.FormatConversion.getName(),
-        ",i_,o_ i_");
-        infomapPut(EnumType.ImageReplacement.getName(),
-        ",i?,i_,o_ i_");
-        infomapPut(EnumType.ImageSetting.getName(),
-        ",i?,i?,i?,i_,i_,i?,o_");
-        infomapPut(EnumType.Imposition.getName(),
-        ",i_,o_ i?Marks i_Document");
-        infomapPut(EnumType.InkZoneCalculation.getName(),
-        ",i_,o_,i?,i?,i?,i_");
-        infomapPut(EnumType.Interpreting.getName(),
-        ",i?,i?,o?,i_,i*,o? i_");
-        infomapPut(EnumType.LayoutElementProduction.getName(),
-        ",o? i*,o?,i?");  
-        infomapPut(EnumType.LayoutPreparation.getName(),
-        ",i_,o?Marks i?Marks i?Document,o_,o?");
-        infomapPut(EnumType.PDFToPSConversion.getName(),
-        ",i_,o_ i_");
-        infomapPut(EnumType.Preflight.getName(),
-        ",i_,i_,i_,o_");
-        infomapPut(EnumType.PreviewGeneration.getName(),
-        ",i?,i?,i_,i?,i?,i? o_");
-        infomapPut(EnumType.Proofing.getName(),
-        ",i?,i?,o_,i?,i_,i_,i?Marks i_Document");
-        infomapPut(EnumType.PSToPDFConversion.getName(),
-        ",i?,i?,i?,o_ i_");
-        infomapPut(EnumType.Rendering.getName(),
-        ",i?,i?,i?,o_ i?");
-        infomapPut(EnumType.Scanning.getName(),
-        ",i_,i_,o_");
-        infomapPut(EnumType.Screening.getName(),
-        ",o_ i_,i_");
-        infomapPut(EnumType.Separation.getName(),
-        ",i?,o_ i_,i_");
-        infomapPut(EnumType.SoftProofing.getName(),
-        ",i?,i?,i?,i_,i?Marks i_Document");
-        infomapPut(EnumType.Stripping.getName(),
-        ",o?Marks o?Document i?Document,o_,i+,i?,i_");
-        infomapPut(EnumType.Tiling.getName(),
-        ",o_ i?Marks i_Surface,i_");
-        infomapPut(EnumType.Trapping.getName(),
-        ",i?,o_ i_,i_,i?");
-        infomapPut(EnumType.ConventionalPrinting.getName(),
-        ",i?,o?Waste o?Good o_ i?Proof i?Input,i_,i_Plate i?Proof,i?,i?,i?,i?,i?,i?,i?");
-        infomapPut(EnumType.IDPrinting.getName(),
-        ",i?,o?Waste o_Good i?Proof i?Input i?Cover,i?,i?,i?,i*,i?,i?,i?,i_,i?,i?");
-        infomapPut(EnumType.AdhesiveBinding.getName(),
-        ",i_,o_ i?Cover i_BookBlock");
-        infomapPut(EnumType.BlockPreparation.getName(),
-        ",o_ i_,i_");
-        infomapPut(EnumType.BoxPacking.getName(),
-        ",o_ i?Box i_,i_");
-        infomapPut(EnumType.BoxFolding.getName(),
-        ",o_ i*Application i_,i_");
-        infomapPut(EnumType.Bundling.getName(),
-        ",o_ i_,i_,i?");
-        infomapPut(EnumType.CaseMaking.getName(),
-        ",o_ i?CoverMaterial,i_,i?SpineBoard i_CoverBoard i?CoverMaterial");
-        infomapPut(EnumType.CasingIn.getName(),
-        ",o_ i_infomapPut(i_,i_");
-        infomapPut(EnumType.ChannelBinding.getName(),
-        ",i_,o_ i?Cover i_BookBlock");
-        infomapPut(EnumType.CoilBinding.getName(),
-        ",i_,o_ i_");
-        infomapPut(EnumType.Collecting.getName(),
-        ",i?,o_ i+,i*,i?,i?");
-        infomapPut(EnumType.CoverApplication.getName(),
-        ",o_ i_Cover i_,i_");
-        infomapPut(EnumType.Creasing.getName(),
-        ",i_,o_ i_");
-        infomapPut(EnumType.Cutting.getName(),
-        ",o* i?,i*,i*,i_,o* i?");
-        infomapPut(EnumType.Dividing.getName(),
-        ",o_ i_,i_");
-        infomapPut(EnumType.Embossing.getName(),
-        ",o_ i_,i_,i?,i?");
-        infomapPut(EnumType.EndSheetGluing.getName(),
-        ",o_ i_FrontEndSheet i_BookBlock i_BackEndSheet,i_");
-        infomapPut(EnumType.Feeding.getName(),
-        ",o* i*,i_,o* i*");
-        infomapPut(EnumType.Folding.getName(),
-        ",o_ i_,i_");
-        infomapPut(EnumType.Gathering.getName(),
-        ",o_ i+,i*,i?,i_,i?");
-        infomapPut(EnumType.Gluing.getName(),
-        ",o_ i_,i_");
-        infomapPut(EnumType.HeadBandApplication.getName(),
-        ",o_ i_,i_");
-        infomapPut(EnumType.HoleMaking.getName(),
-        ",o_ i_,i_");
-        infomapPut(EnumType.Inserting.getName(),
-        ",o_ i_Child i_Mother,i?,i?,i?,i_");
-        infomapPut(EnumType.Jacketing.getName(),
-        ",o_ i_Jacket i_Book,i_");
-        infomapPut(EnumType.Labeling.getName(),
-        ",o_ i?Label i_,i_");
-        infomapPut(EnumType.Laminating.getName(),
-        ",o_ i_,i_,i?");
-        infomapPut(EnumType.LongitudinalRibbonOperations.getName(),
-        ",o+ i_,i_");
-        infomapPut(EnumType.Numbering.getName(),
-        ",o_ i_,i_");
-        infomapPut(EnumType.Palletizing.getName(),
-        ",o_ i_,i_,i_");
-        infomapPut(EnumType.Perforating.getName(),
-        ",i_,o_ i_");
-        infomapPut(EnumType.PlasticCombBinding.getName(),
-        ",o_ i_,i_");
-        infomapPut(EnumType.PrintRolling.getName(),
-        ",o_ i_,i?,i?");
-        infomapPut(EnumType.RingBinding.getName(),
-        ",o_ i?RingBinder i_BookBlock,i_");
-        infomapPut(EnumType.SaddleStitching.getName(),
-        ",o_ i_,i_");
-        infomapPut(EnumType.ShapeCutting.getName(),
-        ",o_ i_,i?,i*");
-        infomapPut(EnumType.Shrinking.getName(),
-        ",o_ i_,i_");
-        infomapPut(EnumType.SideSewing.getName(),
-        ",o_ i_,i_");
-        infomapPut(EnumType.SpinePreparation.getName(),
-        ",o_ i_,i_");
-        infomapPut(EnumType.SpineTaping.getName(),
-        ",o_ i_,i_");
-        infomapPut(EnumType.Stacking.getName(),
-        ",o_ i_,i_");
-        infomapPut(EnumType.Stitching.getName(),
-        ",o_ i_,i_");
-        infomapPut(EnumType.Strapping.getName(),
-        ",o_ i_,i_,i?");
-        infomapPut(EnumType.StripBinding.getName(),
-        ",o_ i_,i_");
-        infomapPut(EnumType.ThreadSealing.getName(),
-        ",o_ i_,i_");
-        infomapPut(EnumType.ThreadSewing.getName(),
-        ",o_ i_,i_");
-        infomapPut(EnumType.Trimming.getName(),
-        ",o_ i_,i_");
-        infomapPut(EnumType.WireCombBinding.getName(),
-        ",o_ i_,i_");
-        infomapPut(EnumType.Wrapping.getName(),
-        ",o_ i_,i_,i?");
-
-    }
+   
+    
     //**************************************** Constructors ****************************************
     //NEWWWW
 
+    /**
+     * Enumeration for accessing typesafe nodes 
+     */
     public static final class EnumProcessUsage extends ValuedEnum
     {
         private static final long serialVersionUID = 1L;
@@ -1393,7 +1642,7 @@ public class JDFNode extends JDFElement
 
         /**
          * @deprecated
-         * @return
+         * @return Vector
          */
         public static Vector getNamesVector()
         {
@@ -1410,6 +1659,9 @@ public class JDFNode extends JDFElement
 
         public static final EnumProcessUsage AnyInput = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_ANYINPUT);
         public static final EnumProcessUsage AnyOutput = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_ANYOUTPUT);
+        /**
+         * @deprecated use null instead
+         */
         public static final EnumProcessUsage Any = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_ANY);
         public static final EnumProcessUsage Rejected = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_REJECTED);
         public static final EnumProcessUsage Accepted = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_ACCEPTED);
@@ -1421,6 +1673,7 @@ public class JDFNode extends JDFElement
         public static final EnumProcessUsage Proof = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_PROOF);
         public static final EnumProcessUsage Input = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_INPUT);
         public static final EnumProcessUsage Plate = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_PLATE);
+        public static final EnumProcessUsage Cylinder = new EnumProcessUsage("Cylinder");
         public static final EnumProcessUsage Good = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_GOOD);
         public static final EnumProcessUsage Cover = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_COVER);
         public static final EnumProcessUsage BookBlock = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_BOOKBLOCK);
@@ -1444,63 +1697,63 @@ public class JDFNode extends JDFElement
      * constants EnumProcessUsage
      * use EnumProcessUsage.xxx instead of the deprecated constants EnumProcessUsage.ProcessUsage_xxx
      */
-    /** @deprecated */
+    /** @deprecated use EnumProcessUsage.xxx */
     public static final EnumProcessUsage ProcessUsage_AnyInput= EnumProcessUsage.AnyInput;
-    /** @deprecated */
+    /** @deprecated use EnumProcessUsage.xxx */
     public static final EnumProcessUsage ProcessUsage_AnyOutput = EnumProcessUsage.AnyOutput;
-    /** @deprecated */
+    /** @deprecated use EnumProcessUsage.xxx */
     public static final EnumProcessUsage ProcessUsage_Any = EnumProcessUsage.Any;
-    /** @deprecated */
+    /** @deprecated use EnumProcessUsage.xxx */
     public static final EnumProcessUsage ProcessUsage_Rejected = EnumProcessUsage.Rejected;
-    /** @deprecated */
+    /** @deprecated use EnumProcessUsage.xxx */
     public static final EnumProcessUsage ProcessUsage_Accepted = EnumProcessUsage.Accepted;
-    /** @deprecated */
+    /** @deprecated use EnumProcessUsage.xxx */
     public static final EnumProcessUsage ProcessUsage_Marks = EnumProcessUsage.Marks;
-    /** @deprecated */
+    /** @deprecated use EnumProcessUsage.xxx */
     public static final EnumProcessUsage ProcessUsage_Document = EnumProcessUsage.Document;
-    /** @deprecated */
+    /** @deprecated use EnumProcessUsage.xxx */
     public static final EnumProcessUsage ProcessUsage_Surface = EnumProcessUsage.Surface;
-    /** @deprecated */
+    /** @deprecated use EnumProcessUsage.xxx */
     public static final EnumProcessUsage ProcessUsage_Waste = EnumProcessUsage.Waste;
-    /** @deprecated */
+    /** @deprecated use EnumProcessUsage.xxx */
     public static final EnumProcessUsage ProcessUsage_Proof = EnumProcessUsage.Proof;
-    /** @deprecated */
+    /** @deprecated use EnumProcessUsage.xxx */
     public static final EnumProcessUsage ProcessUsage_Input = EnumProcessUsage.Input;
-    /** @deprecated */
+    /** @deprecated use EnumProcessUsage.xxx */
     public static final EnumProcessUsage ProcessUsage_Plate = EnumProcessUsage.Plate;
-    /** @deprecated */
+    /** @deprecated use EnumProcessUsage.xxx */
     public static final EnumProcessUsage ProcessUsage_Good = EnumProcessUsage.Good;
-    /** @deprecated */
+    /** @deprecated use EnumProcessUsage.xxx */
     public static final EnumProcessUsage ProcessUsage_Cover = EnumProcessUsage.Cover;
-    /** @deprecated */
+    /** @deprecated use EnumProcessUsage.xxx */
     public static final EnumProcessUsage ProcessUsage_BookBlock = EnumProcessUsage.BookBlock;
-    /** @deprecated */
+    /** @deprecated use EnumProcessUsage.xxx */
     public static final EnumProcessUsage ProcessUsage_Box = EnumProcessUsage.Box;
-    /** @deprecated */
+    /** @deprecated use EnumProcessUsage.xxx */
     public static final EnumProcessUsage ProcessUsage_CoverMaterial = EnumProcessUsage.CoverMaterial;
-    /** @deprecated */
+    /** @deprecated use EnumProcessUsage.xxx */
     public static final EnumProcessUsage ProcessUsage_SpineBoard = EnumProcessUsage.SpineBoard;
-    /** @deprecated */
+    /** @deprecated use EnumProcessUsage.xxx */
     public static final EnumProcessUsage ProcessUsage_CoverBoard = EnumProcessUsage.CoverBoard;
-    /** @deprecated */
+    /** @deprecated use EnumProcessUsage.xxx */
     public static final EnumProcessUsage ProcessUsage_Case = EnumProcessUsage.Case;
-    /** @deprecated */
+    /** @deprecated use EnumProcessUsage.xxx */
     public static final EnumProcessUsage ProcessUsage_FrontEndSheet = EnumProcessUsage.FrontEndSheet;
-    /** @deprecated */
+    /** @deprecated use EnumProcessUsage.xxx */
     public static final EnumProcessUsage ProcessUsage_BackEndSheet = EnumProcessUsage.BackEndSheet;
-    /** @deprecated */
+    /** @deprecated use EnumProcessUsage.xxx */
     public static final EnumProcessUsage ProcessUsage_Child = EnumProcessUsage.Child;
-    /** @deprecated */
+    /** @deprecated use EnumProcessUsage.xxx */
     public static final EnumProcessUsage ProcessUsage_Mother = EnumProcessUsage.Mother;
-    /** @deprecated */
+    /** @deprecated use EnumProcessUsage.xxx */
     public static final EnumProcessUsage ProcessUsage_Jacket = EnumProcessUsage.Jacket;
-    /** @deprecated */
+    /** @deprecated use EnumProcessUsage.xxx */
     public static final EnumProcessUsage ProcessUsage_Book = EnumProcessUsage.Book;
-    /** @deprecated */
+    /** @deprecated use EnumProcessUsage.xxx */
     public static final EnumProcessUsage ProcessUsage_Label = EnumProcessUsage.Label;
-    /** @deprecated */
+    /** @deprecated use EnumProcessUsage.xxx */
     public static final EnumProcessUsage ProcessUsage_RingBinder = EnumProcessUsage.RingBinder;
-    /** @deprecated */
+    /** @deprecated use EnumProcessUsage.xxx */
     public static final EnumProcessUsage ProcessUsage_Ancestor = EnumProcessUsage.Ancestor;
 
 
@@ -1519,10 +1772,12 @@ public class JDFNode extends JDFElement
     /**
      * init - init the node
      *
-     * @return boolean: true always
+     * @return boolean: always true
      */
     public boolean init()
     {
+        if(hasAttribute(AttributeName.ID))
+            return false; // has previously been initialized
 
         String id=appendAnchor(null);
         if (isJDFRoot())
@@ -1536,7 +1791,7 @@ public class JDFNode extends JDFElement
             appendXMLComment(comment);
 
             final JDFAuditPool h = getCreateAuditPool();
-            h.addCreated(JDFAudit.software(), null);
+            h.addCreated(JDFAudit.getStaticAuthor(), null);
 
             // set an initial jobpartid
             if(!hasAttribute(AttributeName.JOBPARTID))
@@ -1558,6 +1813,10 @@ public class JDFNode extends JDFElement
 
     //////////////////////////////////////////////////////////////////////
 
+    /**
+     * is this the JDF root element, i.e. it has no JDF above it
+     * @return true, if this is a root
+     */
     public boolean isJDFRoot()
     {
         final KElement e = getParentNode_KElement();
@@ -1592,8 +1851,12 @@ public class JDFNode extends JDFElement
         if (typ.equals(EnumType.Combined) || (typ==EnumType.ProcessGroup && hasAttribute(AttributeName.TYPES)))
         {
             final VString v = new VString(m_strGenericLinkNames);
-            final VString vTypes = getTypes();
-            for (int i = 0; i < vTypes.size(); i++)
+            VString vTypes = getTypes();
+            vTypes=expandGrayBoxTypes(vTypes);
+            if(vTypes==null)
+                return null;
+            final int size = vTypes==null ? 0 :vTypes.size();
+            for (int i = 0; i < size; i++)
             {
                 final EnumType t = EnumType.getEnum(vTypes.stringAt(i));
                 final String[] typeLinkNames = typeLinkNames(t);
@@ -1614,6 +1877,41 @@ public class JDFNode extends JDFElement
         return new VString(typeLinkNames);
     }
 
+    /**
+     * Expand abstract types that are only valid in gray boxes to the respective explicit types
+     * @param types
+     */
+    private VString expandGrayBoxTypes(VString types)
+    {
+        if(types==null)
+            return null;
+        VString vNew=new VString();
+        for(int i=0;i<types.size();i++)
+        {
+            final String typ = types.stringAt(i);
+            if(typ.equals("RIPing"))
+            {
+                vNew.add(EnumType.Imposition.getName());
+                vNew.add(EnumType.Interpreting.getName());
+                vNew.add(EnumType.ColorSpaceConversion.getName());
+                vNew.add(EnumType.Trapping.getName());
+                vNew.add(EnumType.Rendering.getName());
+                vNew.add(EnumType.Screening.getName());
+            }
+            else
+            {
+                vNew.add(typ);
+            }
+        }
+        return vNew;   
+    }
+
+
+
+    /**
+     * definition of resource link usage, cardinality and ProcessUsage in the JDF namespace
+     * @return String list of resource information usages that may be linked
+     */
     public VString linkInfo()
     {
         final EnumType typ = EnumType.getEnum(getType());
@@ -1625,7 +1923,10 @@ public class JDFNode extends JDFElement
             final VString vLinkInfo = new VString(m_GenericLinkInfo);
             final VString vNames = new VString(m_strGenericLinkNames);
 
-            final VString vTypes = getTypes();
+            VString vTypes = getTypes();
+            vTypes=expandGrayBoxTypes(vTypes);
+            if(vTypes==null)
+                return null;
             int i = 0;
             for (i = 0; i < vTypes.size(); i++)
             {
@@ -1691,8 +1992,7 @@ public class JDFNode extends JDFElement
                                 if (bGotOne)
                                 {
                                     // replace input link entry
-                                    vLinkInfo.set(j, typeList2.getString(JDFConstants.BLANK, 
-                                            null, null));
+                                    vLinkInfo.set(j, StringUtil.setvString(typeList2,JDFConstants.BLANK,null,null));
                                     if (strTyp.charAt(1) == '_')
                                     {
                                         final char[] c_strTyp = strTyp.toCharArray();
@@ -1711,7 +2011,7 @@ public class JDFNode extends JDFElement
                         }
                     }
                 }
-                vLinkInfo.set(i, typeList.getString(JDFConstants.BLANK, null, null));
+                vLinkInfo.set(i, StringUtil.setvString(typeList,JDFConstants.BLANK,null,null));
             }
             return vLinkInfo;
         }
@@ -1731,6 +2031,12 @@ public class JDFNode extends JDFElement
 
     //////////////////////////////////////////////////////////////////////
 
+    /**
+     * definition of resource link usage, cardinality and ProcessUsage in the JDF namespace
+     * for a given EnumType
+     * @param typeNum EnumType to get LinkInfo for
+     * @return String list of resource information usages that may be linked for this EnumType
+     */
     private String[] typeLinkInfo(EnumType typeNum)
     {
         final String[] strValueOfEnum = (String[]) m_LinkInfoMap.get(typeNum.getName());
@@ -1741,7 +2047,10 @@ public class JDFNode extends JDFElement
 
 
     /**
-     * sets node's partition status
+     * sets the node's partition status
+     * @param vmattr vector Attribute maps of partition 
+     * @param status Status to set
+     * @return boolean: success or not
      */
     public boolean setPartStatus (VJDFAttributeMap vmattr, EnumNodeStatus status)
     {
@@ -1765,8 +2074,8 @@ public class JDFNode extends JDFElement
     /**
      * set the node's partition status
      * if nodeinfo is partitioned, all leaves NodeStati below part are removed
-     * @param mAttribute mattr: Attribute map of partition
-     * @param EnumNodeStatus status: Status to set
+     * @param mattr   Attribute map of partition
+     * @param status  Status to set
      * @return boolean: success or not
      */
     public boolean setPartStatus(JDFAttributeMap mattr, JDFElement.EnumNodeStatus status)
@@ -1819,7 +2128,7 @@ public class JDFNode extends JDFElement
                 ni.setNodeStatus(getStatus());
             }
 
-            ni.setPartUsage(JDFResource.EnumPartUsage.Implicit);
+            ni.getResourceRoot().setPartUsage(JDFResource.EnumPartUsage.Implicit);
             ni=(JDFNodeInfo) ni.getCreatePartition(mattr, null);
             ni.removeAttributeFromLeaves(AttributeName.NODESTATUS,null);
             ni.setNodeStatus(status);
@@ -1832,7 +2141,7 @@ public class JDFNode extends JDFElement
     /**
      * get the node's partition status
      * 
-     * @param JDFAttributeMap mattr: Attribute map of partition
+     * @param mattr Attribute map of partition
      * 
      * @return JDFElement.EnumNodeStatus: Status of the partition, null if no Status exists
      */
@@ -1888,53 +2197,11 @@ public class JDFNode extends JDFElement
      */
     public JDFDoc setPhase(EnumNodeStatus nodeStatus, String nodeStatusDetails, EnumDeviceStatus deviceStatus, String deviceStatusDetails, VJDFAttributeMap vPartMap)
     {
-        return setPhase(nodeStatus, nodeStatusDetails, null, deviceStatus, deviceStatusDetails, vPartMap);
+        StatusUtil su=new StatusUtil(this,vPartMap,null);
+        su.setPhase(nodeStatus, nodeStatusDetails, deviceStatus, deviceStatusDetails,null);
+        return su.getDocJMFPhaseTime();
     }
-    /**
-     * Set the Status and StatusDetails of this node
-     * update the PhaseTime audit or append a new phasetime as appropriate  
-     * also generate a status JMF
-     * 
-     * @param nodeStatus the new status of the node
-     * @param nodeStatusDetails the new statusDetails of the node
-     * @param deviceStatus the new status of the device
-     * @param deviceStatusDetails the new statusDetails of the device
-     * @param vPartMap the vector of parts to that should be set
-     * 
-     * @return The root element representing the PhaseTime JMF
-     */
-    public JDFDoc setPhase(EnumNodeStatus nodeStatus, String nodeStatusDetails, String deviceID, EnumDeviceStatus deviceStatus, String deviceStatusDetails, VJDFAttributeMap vPartMap)
-    {
-        JDFDoc jmfDoc=new JDFDoc(ElementName.JMF);
-        JDFJMF jmf=jmfDoc.getJMFRoot();
-        if(vPartMap==null)
-        {
-            vPartMap = getPartMapVector();
-        }
-
-        JDFAuditPool ap=getCreateAuditPool();
-        JDFPhaseTime pt1=(JDFPhaseTime) ap.getAudit(-1,EnumAuditType.PhaseTime,null);
-        JDFPhaseTime pt2=ap.setPhase(nodeStatus,nodeStatusDetails,vPartMap);
-        if(pt1!=null && pt2!=pt1) // we explicitly added a new phasetime audit, thus we need to add a closing JMF for the original jobPhase
-        {
-            JDFSignal s=(JDFSignal)jmf.appendMessageElement(JDFMessage.EnumFamily.Signal,JDFMessage.EnumType.Status);
-            JDFDeviceInfo deviceInfo = s.appendDeviceInfo();
-            deviceInfo.createJobPhaseFromPhaseTime(pt1);           
-            if(deviceID!=null)
-                pt2.appendDevice().setDeviceID(deviceID);
-        }
-        JDFSignal s=(JDFSignal)jmf.appendMessageElement(JDFMessage.EnumFamily.Signal,JDFMessage.EnumType.Status);
-        JDFDeviceInfo deviceInfo = s.appendDeviceInfo();
-        deviceInfo.createJobPhaseFromPhaseTime(pt2);           
-        deviceInfo.setDeviceStatus(deviceStatus);
-        deviceInfo.setStatusDetails(deviceStatusDetails);
-        deviceInfo.setDeviceID(deviceID);
-        setPartStatus(vPartMap,nodeStatus);
-        // cleanup!
-        jmf.eraseEmptyAttributes(true);
-        pt2.eraseEmptyAttributes(true);
-        return jmfDoc;
-    }
+ 
 
     /**
      * return the partMapVector defined in AncestorPool, 
@@ -1951,7 +2218,6 @@ public class JDFNode extends JDFElement
     /**
      * getActivation
      *
-     * @param EnumActivation bActive
      * @deprecated 060406 use getActivation(false)
      * @return EnumActivation
      */
@@ -1961,11 +2227,11 @@ public class JDFNode extends JDFElement
     }
 
     /**
-     * getActivation
+     * get attribute Activation; defaults to Active
      *
-     * @param EnumActivation bActive
+     * @param bWalkThroughAnchestors if true, walks through all anchestors which may overwrite the local activation state 
      *
-     * @return EnumActivation
+     * @return the enumeration value of the attribute
      */
     public JDFNode.EnumActivation getActivation(boolean bWalkThroughAnchestors)
     {
@@ -1979,25 +2245,27 @@ public class JDFNode extends JDFElement
                 // walk through through all anchestors, to parent to grandparent to grandgrandparent 
                 // and so on until root and compare the Activation state
                 EnumActivation a = EnumActivation.getEnum(p.getAttribute(AttributeName.ACTIVATION, null, null));
-
-                if ((a.getValue() <= EnumActivation.TestRun.getValue()) || (res.getValue() < EnumActivation.Active.getValue()))
+                if(a!=null)
                 {
-                    res = (a.getValue() < res.getValue()) ? a : res; // smaller enums are inherited to all descendants
-                }
-                else
-                { // special case for non-linear test run / test run and go
-                    if (res.equals(EnumActivation.TestRunAndGo))
+                    final int value = a.getValue();
+                    if ((value <= EnumActivation.TestRun.getValue()) || (res.getValue() < EnumActivation.Active.getValue()))
                     {
-                        res = a; // either TRG or TR
+                        res = (value < res.getValue()) ? a : res; // smaller enums are inherited to all descendants
                     }
                     else
-                    {
-                        // nop it remains TestRun
+                    { // special case for non-linear test run / test run and go
+                        if (res.equals(EnumActivation.TestRunAndGo))
+                        {
+                            res = a; // either TRG or TR
+                        }
+                        else
+                        {
+                            // nop it remains TestRun
+                        }
                     }
                 }
-
                 p = (JDFNode) p.getParentNode_KElement();
-            }
+             }// end while
         }
         else
         {
@@ -2008,9 +2276,9 @@ public class JDFNode extends JDFElement
 
 
     /**
-     * setActivation
+     * Set attribute Activation
      *
-     * @param EnumActivation bActive
+     * @param bActive the value to set the attribute to
      */
     public void setActivation(EnumActivation bActive)
     {
@@ -2020,7 +2288,7 @@ public class JDFNode extends JDFElement
     /**
      * addModified
      *
-     * @param String by
+     * @param by
      *
      * @return JDFAudit
      */
@@ -2032,7 +2300,7 @@ public class JDFNode extends JDFElement
     /**
      * addResource - add a resource to resroot and link it to this process
      *
-     * @param name      the localname of the resource
+     * @param strName   the localname of the resource
      * @param resClass  the JFD/@Class of the resource; if null, find from factory
      * @param bInput    if true, the resource is linked as input, else output
      * @param resRoot   the node where to add the Resource, if null defaults to this. Note that the link is always in this
@@ -2041,7 +2309,7 @@ public class JDFNode extends JDFElement
      *
      * @return JDFResource
      * @deprecated use addResource(String strName,  JDFResource.EnumResourceClass resClass, EnumUsage usage, EnumProcessUsage processUsage, JDFNode resRoot, String nameSpaceURI)    
-     * default: addResource(name, null, bInput, null, true, null)
+     * @default addResource(name, null, bInput, null, true, null)
      */
     public JDFResource addResource(
             String strName,
@@ -2059,25 +2327,21 @@ public class JDFNode extends JDFElement
     /**
      * addResource - add a resource to resroot and link it to this process
      *
-     * @param name      the localname of the resource
+     * @param strName   the localname of the resource
      * @param resClass  the JFD/@Class of the resource; if null, find the resource class from factory
-     * @param usage    the Usage attrinute of the ResourceLink. if null, ther resource is not linked
-     * @param processUsage     The processUsage attribute of the link to the resource
-     * @param resRoot   the node where to add the Resource, if null defaults to this. Note that the link is always in this
+     * @param usage     the Usage attribute of the ResourceLink. If null, the resource is not linked
+     * @param processUsage     the processUsage attribute of the link to the resource
+     * @param resRoot   the node to add the Resource to, defaults to 'this' if null. Note that the link is always in 'this'
      * @param nameSpaceURI the nsURI of the resource, if null take the default ns
      * @param toReplace the resource to replace by this - also add a resource audit
      * @return JDFResource
      * 
-     * default: addResource(name, null, usage, null, null, null,null)
+     * @default addResource(name, null, usage, null, null, null,null)
      */
-    public JDFResource addResource(
-            String strName,
-            JDFResource.EnumResourceClass resClass,
-            EnumUsage usage,
-            EnumProcessUsage processUsage,
-            JDFNode resRoot,
-            String nameSpaceURI,
-            JDFResource toReplace)    
+    public JDFResource addResource(String strName,
+            JDFResource.EnumResourceClass resClass, EnumUsage usage,
+            EnumProcessUsage processUsage, JDFNode resRoot,
+            String nameSpaceURI, JDFResource toReplace)    
     {
         if (resRoot == null)
         {
@@ -2145,11 +2409,11 @@ public class JDFNode extends JDFElement
      *
      * @return JDFResourceLink the new link
      * @deprecated use linkResource(enum)
-     * default: LinkResource(r, true, false)
+     * @default LinkResource(r, true, false)
      */
     public JDFResourceLink linkResource(JDFResource jdfResource, boolean input,boolean bForce)
     {
-        if(bForce)
+        if(bForce) // fool compiler
             bForce=true;
         return linkResource(jdfResource,input ? EnumUsage.Input : EnumUsage.Output,null);
     }
@@ -2165,7 +2429,7 @@ public class JDFNode extends JDFElement
      *
      * @return JDFResourceLink the new link
      * 
-     * default: LinkResource(r, usage, null)
+     * @default LinkResource(r, usage, null)
      */
     public JDFResourceLink linkResource(JDFResource jdfResource, EnumUsage usage, EnumProcessUsage processUsage)
     {
@@ -2178,82 +2442,132 @@ public class JDFNode extends JDFElement
         // generate 
         if(types!=null) 
         {
-            JDFIntegerList cpi=new JDFIntegerList();
-            final String resName=jdfResource.getLocalName();
-            final int typSize = types.size();
-            int lastGot=-2; // not -1!!!
-            String typeLinkNamesLast[]=null;
-            for(int i=0;i<typSize;i++)
-            {
-                boolean bAddCPI=true;
-                final EnumType t = EnumType.getEnum(types.stringAt(i));
-                final String[] typeLinkNames = typeLinkNames(t);
-                if(typeLinkNames!=null && ArrayUtils.contains(typeLinkNames,resName))
-                {
-                    // if we already added a cpi, but this is an exchange resource, only set cpi for the last one
-                    if(lastGot==i-1)
-                    {
-                        int iPos = ArrayUtils.indexOf(typeLinkNames,resName);
-                        int iPosLast = ArrayUtils.indexOf(typeLinkNamesLast,resName);
-                        // the i* i?pu ... list of this
-                        final VString typeInfo = StringUtil.tokenize(typeLinkInfo(t)[iPos]," ",false);
-                        // the o* i?pu ... list of the previous type
-                        final VString typeInfoLast = StringUtil.tokenize(typeLinkInfo(EnumType.getEnum(types.stringAt(lastGot)))[iPosLast]," ",false);
-                        boolean bOut=false;
-
-                        for(int ii=0;ii<typeInfoLast.size();ii++)
-                        {
-                            if(typeInfoLast.stringAt(ii).startsWith("o"))
-                            {
-                                bOut=true; // we found a matching output
-                                break;
-                            }
-                        }
-                        if(bOut)
-                        {
-                            boolean bIn=false;
-                            bOut=false;
-                            for(int ii=0;ii<typeInfo.size();ii++)
-                            {
-                                if(!bIn && typeInfo.stringAt(ii).startsWith("i"))
-                                {
-                                    bIn=true; // after finding a matching output in last, we find an input here
-                                }
-                                if(!bOut && typeInfo.stringAt(ii).startsWith("o"))
-                                {
-                                    bOut=true; // after finding a matching output in last, we find an input here
-                                }
-                            }
-                            if(bIn && bOut)
-                            { // remove the last output if we found a pass through
-                                if(EnumUsage.Input.equals(usage))
-                                {
-                                    bAddCPI=false;
-                                }
-                                else
-                                {
-                                    cpi.removeElementAt(-1);
-                                    bAddCPI=true;
-                                }
-                            }
-                            else
-                            {
-                                //not continuuos - reset
-                                bAddCPI=true;
-                            }
-                        }
-                    }
-                    if(bAddCPI)
-                        cpi.add(i);
-
-                    lastGot=i;
-                    typeLinkNamesLast=typeLinkNames;
-                }                               
-            }
-            if(cpi.size()>0)
-                resourceLink.setCombinedProcessIndex(cpi);
+            generateCombinedProcessIndex(jdfResource, usage, processUsage, resourceLink, types);
         }
         return resourceLink;
+    }
+
+
+
+    /**
+     * @param jdfResource
+     * @param usage
+     * @param processUsage
+     * @param resourceLink
+     * @param types
+     */
+    private void generateCombinedProcessIndex(JDFResource jdfResource, EnumUsage usage, EnumProcessUsage processUsage, JDFResourceLink resourceLink, final VString types)
+    {
+        JDFIntegerList cpi=new JDFIntegerList();
+        final String resName=jdfResource.getLocalName();
+        final int typSize = types.size();
+        int lastGot=-2; // not -1!!!
+        String typeLinkNamesLast[]=null;
+        for(int i=0;i<typSize;i++)
+        {
+            boolean bAddCPI=false;
+            final EnumType t = EnumType.getEnum(types.stringAt(i));
+            final String[] typeLinkNames = typeLinkNames(t);
+            if(typeLinkNames!=null && ArrayUtils.contains(typeLinkNames,resName))
+            {
+                // if we already added a cpi, but this is an exchange resource, only set cpi for the last one
+                int iPos = ArrayUtils.indexOf(typeLinkNames,resName);
+                final VString typeInfo = StringUtil.tokenize(typeLinkInfo(t)[iPos]," ",false);
+                boolean bMatchUsage=false;
+                String inOut=null;
+                if(usage!=null)
+                    inOut=usage==EnumUsage.Input ? "i" : "o";
+                
+                for(int ti=0;ti<typeInfo.size();ti++)
+                {
+                    String sti=typeInfo.stringAt(ti);
+                    if(inOut==null || sti.startsWith(inOut))
+                    {
+                        if(processUsage==null || processUsage.getName().equals(sti.substring(2)))
+                        {
+                            bMatchUsage=true;
+                            bAddCPI=true;
+                            break; // one match is enough!
+                        }
+                    }
+                }
+                if(bMatchUsage && lastGot==i-1)
+                {
+                    bAddCPI = cleanCombinedProcessIndex(usage, types, cpi, resName, lastGot, typeLinkNamesLast, bAddCPI, typeInfo);
+                }
+                if(bAddCPI)
+                    cpi.add(i);
+                lastGot=i;
+                typeLinkNamesLast=typeLinkNames;
+            }                               
+        }
+        if(cpi.size()>0)
+            resourceLink.setCombinedProcessIndex(cpi);
+    }
+
+
+/**
+ * remove any duplicate combinedprocessusages
+ * @param usage
+ * @param types
+ * @param cpi
+ * @param resName
+ * @param lastGot
+ * @param typeLinkNamesLast
+ * @param bAddCPI
+ * @param typeInfo
+ * @return boolean
+ */
+    private boolean cleanCombinedProcessIndex(EnumUsage usage, final VString types, JDFIntegerList cpi, final String resName, int lastGot, String[] typeLinkNamesLast, boolean bAddCPI, final VString typeInfo)
+    {
+        int iPosLast = ArrayUtils.indexOf(typeLinkNamesLast,resName);
+        // the i* i?pu ... list of this
+        // the o* i?pu ... list of the previous type
+        final VString typeInfoLast = StringUtil.tokenize(typeLinkInfo(EnumType.getEnum(types.stringAt(lastGot)))[iPosLast]," ",false);
+        boolean bOut=false;
+
+        for(int ii=0;ii<typeInfoLast.size();ii++)
+        {
+            if(typeInfoLast.stringAt(ii).startsWith("o"))
+            {
+                bOut=true; // we found a matching output
+                break;
+            }
+        }
+        if(bOut)
+        {
+            boolean bIn=false;
+            bOut=false;
+            for(int ii=0;ii<typeInfo.size();ii++)
+            {
+                if(!bIn && typeInfo.stringAt(ii).startsWith("i"))
+                {
+                    bIn=true; // after finding a matching output in last, we find an input here
+                }
+                if(!bOut && typeInfo.stringAt(ii).startsWith("o"))
+                {
+                    bOut=true; // after finding a matching output in last, we find an input here
+                }
+            }
+            if(bIn && bOut)
+            { // remove the last output if we found a pass through
+                if(EnumUsage.Input.equals(usage))
+                {
+                    bAddCPI=false;
+                }
+                else
+                {
+                    cpi.removeElementAt(-1);
+                    bAddCPI=true;
+                }
+            }
+            else
+            {
+                //not continuous - reset
+                bAddCPI=true;
+            }
+        }
+        return bAddCPI;
     }
 
     /**
@@ -2270,17 +2584,16 @@ public class JDFNode extends JDFElement
     /**
      * get the resourcelinks in the resourcepool of this node
      * 
-     * @param Attributes mLinkAtt   the map of attributes
+     * @param mLinkAtt   the map of attributes
      * 
-     * @return VElement             the vector of ResorceLinks:
+     * @return VElement - the vector of ResourceLinks, null if none exist:
      */
     public VElement getResourceLinks(JDFAttributeMap mLinkAtt)
     {
         final JDFResourceLinkPool resList = getResourceLinkPool();
-
         if (resList == null)
         {
-            return new VElement();
+            return null;
         }
 
         // return contents as vector
@@ -2288,15 +2601,15 @@ public class JDFNode extends JDFElement
     }
 
     /**
-     * get the linked resources matching some conditions<br>
+     * get the linked resources matching certain conditions<br>
      * combines all linked resources from ResourceLinkPool, CustomerInfo, NodeInfo and AuditPool
      *
-     * @param mAttribute mResAtt: map of Resource attributes to search for
-     * @param boolean bFollowRefs true if internal references shall be followed
+     * @param mResAtt     map of Resource attributes to search for
+     * @param bFollowRefs true if internal references shall be followed
      * 
      * @return vResource: vector with all elements matching the conditions
      * 
-     * default: getLinkedResources(null, false)
+     * @default getLinkedResources(null, false)
      */
     public VElement getLinkedResources(JDFAttributeMap mResAtt, boolean bFollowRefs)
     {
@@ -2337,41 +2650,84 @@ public class JDFNode extends JDFElement
     }
 
     /**
-     * getPredecessors - get a vector of all direct predecessor or following nodes depending on bPre
+     * get all the unlinked resources in this node<br>
+     * TODO: also include resources that are only linked by other unlinked resources
+     * @boolean bLocal if true, only in the local resourcepool, else also recurse into children
+     * 
+     * @return vElement vector with all 
+     * 
+     */
+    public VElement getUnlinkedResources(boolean bLocal)
+    {
+        final JDFResourcePool resourcePool = getResourcePool();
+        if (resourcePool == null)
+            return null;
+        VElement vUnlinkedResources = resourcePool.getUnlinkedResources();
+        if(bLocal)
+            return vUnlinkedResources;
+        if(vUnlinkedResources==null)
+            vUnlinkedResources= new VElement();
+        VElement children=getvJDFNode(null, null, true);
+        for(int i=0;i<children.size();i++)
+        {
+            vUnlinkedResources.addAll(((JDFNode)children.elementAt(i)).getUnlinkedResources(bLocal));
+        }
+        return vUnlinkedResources.size()==0 ? null : vUnlinkedResources;
+    }
+
+    /**
+     * get a vector of all direct predecessor or following nodes, depending on bPre
      *
-     * @param boolean bPre
+     * @param bPre if true get predecessors, if false get following nodes
      *
-     * @return Vector
-     *
+     * @return Vector of pre / post decessor nodes
+     *@deprecated use getPredecessors(bPre,false);
      */
     public Vector getPredecessors(boolean bPre)
     {
-        final Vector v = new Vector();
-        final JDFResourceLinkPool rp = getResourceLinkPool();
+        return getPredecessors(bPre,false);
+    }
+        /**
+         * get a vector of all direct predecessor or following nodes, depending on bPre
+         *
+         * @param bPre if true get predecessors, if false get following nodes
+         * @param bDirect if true, only return the direct condidates
+         *
+         * @return Vector of pre / post decessor nodes
+         */
+    public VElement getPredecessors(boolean bPre, boolean bDirect)
+    {
+        final VElement v = new VElement();
+        final JDFResourceLinkPool rlp = getResourceLinkPool();
 
         // get either all input or output resources, depending on bPre
-        final Vector vLoc = rp.getInOutLinks(bPre?EnumUsage.Input:EnumUsage.Output, false, null,null);
+        final Vector vLoc = rlp==null ? null : rlp.getInOutLinks(bPre?EnumUsage.Input:EnumUsage.Output, false, null,null);
 
-        for (int i = 0; i < vLoc.size(); i++)
+        final int size = vLoc==null ? 0 : vLoc.size();
+        for (int i = 0; i < size; i++)
         {
             final JDFResource r = (JDFResource) vLoc.elementAt(i);
             // get all creator or consumer processes
             final Vector vc = r.getCreator(bPre);
 
+            final int size2 = vc==null ? 0 : vc.size();
             // recurse for these
-            for (int j = 0; j < vc.size(); j++)
+            for (int j = 0; j < size2; j++)
             {
                 final JDFNode p = (JDFNode) vc.elementAt(j);
                 v.addElement(p);
-                final Vector vRec = p.getPredecessors(bPre);
-
-                if (!vRec.isEmpty())
+                if(!bDirect)
                 {
-                    v.addAll(vRec);
+                    final Vector vRec = p.getPredecessors(bPre,bDirect);
+                    if (!vRec.isEmpty())
+                    {
+                        v.addAll(vRec);
+                    }
                 }
             }
         }
 
+        v.unify();
         return v;
     }
 
@@ -2379,8 +2735,8 @@ public class JDFNode extends JDFElement
      * isExecutable - checks whether a node is executable by checking the resources linked by the
      * resourcelinkpool and @Status or NodeInfo/@NodeStatus
      *
-     * @param JDFAttributeMap partMap - the Attribute to check
-     * @param boolean bCheckChildren 
+     * @param partMap    the Attribute to check
+     * @param bCheckChildren 
      *                   if true, calculates the availability Status of a resource from all child partition leaves, 
      *                   else the Status is taken from the appropriate leaf itself
      *
@@ -2410,11 +2766,10 @@ public class JDFNode extends JDFElement
     }
 
     /**
-     *
-     * getProcessStatus
-     *
      * gets the status of a certain partition of the node. The partition is given by a map of
      * partition attributes or by a JDFResource object containing such a map.
+     * 
+     * @param mattr
      * @deprecated use getPartStatus()
      */
 
@@ -2440,18 +2795,23 @@ public class JDFNode extends JDFElement
 
     /**
      *
-     * ResourceTypeEqual
+
      *
+     */
+    
+    /**
+     * ResourceTypeEqual<br>
      * Checks whether the given resources are of the same type. Resources are considered equal by
      * this method if they have identical Class attributes and their resource type is equal.
-     * Basically the resource type is the node name.
-     *
+     * Basically the resource type is the node name.<br>
      * Two resources with different node names are considered equal if their Type attributes from
      * the ToolConfig.xml file are equal. This is not implemented yet. Instead of it is hard-coded
      * that "RunList" and "HDM:ReportList" are of the same type.
      *
+     * @param res1 first resource
+     * @param res2 second resource
+     * @return boolean
      */
-
     static public boolean resourceTypeEqual(JDFResource res1, JDFResource res2)
     {
         final JDFResource.EnumResourceClass res1_class = res1.getResourceClass();
@@ -2462,8 +2822,8 @@ public class JDFNode extends JDFElement
             return false;
         }
 
-        String res1_type = res1.getResourceType();
-        String res2_type = res2.getResourceType();
+        String res1_type = res1.getNodeName();
+        String res2_type = res2.getNodeName();
 
         if (res1_type.compareTo("HDM:ReportList") == 0)
         {
@@ -2487,13 +2847,24 @@ public class JDFNode extends JDFElement
      * Get a vector of all JDF children with type nodeType 
      * @param nodeType: node Type attribute
      * @param active:  Activation of the requesetd nodes, if null ignore activation
-     * @param bDirect: if true, only direct children, 
+     * @param bDirect: if true, get direct children only,
      * else recurse down the tree and include this, i.e. return a complete tree starting at this 
      * 
      * @return: VElement of JDF nodes
      * 
      * default: getvJDFNode(null, JDFNode.EnumActivation.Unknown, false)
      */  
+    
+    /**
+     * Get a vector of all JDF children with type nodeType
+     * @param task    node type
+     * @param active  Activation of the requested nodes, if null ignore activation
+     * @param bDirect if true, get direct children only,
+     * else recurse down the tree and include this, i.e. return a complete tree starting at this
+     * 
+     * @return VElement of JDF nodes
+     * @default getvJDFNode(null, JDFNode.EnumActivation.Unknown, false)
+     */
     public VElement getvJDFNode(String task, EnumActivation active, boolean bDirect)
     {
 
@@ -2520,12 +2891,12 @@ public class JDFNode extends JDFElement
     /**
      * getvJDFNode
      *
-     * @param String  task
-     * @param boolean active
+     * @param task
+     * @param active
      *
      * @return Vector of JDFNodes
      * 
-     * default: getvJDFNode(null, false)
+     * @default getvJDFNode(null, false)
      * @deprecated use     public Vector getvJDFNode(task, JDFNode.EnumActivation.Unknown, false)
      */
     public Vector getvJDFNode(String task, boolean active)
@@ -2547,7 +2918,7 @@ public class JDFNode extends JDFElement
     /**
      * @deprecated use fitsActivation
      * @param bWalkThroughAnchestors
-     * @return
+     * @return boolean
      */
     public boolean isActive(boolean bWalkThroughAnchestors)
     {
@@ -2556,6 +2927,12 @@ public class JDFNode extends JDFElement
 
     //    ////////////////////////////////////////////////////////////////////
 
+    /**
+     * the activation state of this node
+     * @param active
+     * @param bWalkThroughAnchestors if true, walks through all anchestors which may overwrite the local activation state
+     * @return boolean
+     */
     public boolean fitsActivation(EnumActivation active, boolean bWalkThroughAnchestors)
     {
         if(active==null)
@@ -2581,9 +2958,9 @@ public class JDFNode extends JDFElement
      * removeNode - remove a node. If bLeaveSubmit is true, leave a stub with the id and status
      * field
      *
-     * @param boolean bLeaveSubmit - if true, leave a stub with id and status field
+     * @param bLeaveSubmit if true, leave a stub with id and status field
      * 
-     * default: removeNode(true)
+     * @default removeNode(true)
      * @deprecated
      */
     public void removeNode(boolean bLeaveSubmit)
@@ -2605,9 +2982,9 @@ public class JDFNode extends JDFElement
     /**
      * addTask
      *
-     * @param String task
-     * @param Vector tasks
-     * @deprecated - use addJDFNode
+     * @param task
+     * @param tasks
+     * @deprecated use addJDFNode
      * @return JDFNode
      */
     public JDFNode addTask(String task, VString tasks)
@@ -2637,10 +3014,10 @@ public class JDFNode extends JDFElement
     /**
      * addTask
      *
-     * @param String task
+     * @param task
      *
      * @return JDFNode
-     * @deprecated - use addJDFNode
+     * @deprecated use addJDFNode
      */
     public JDFNode addTask(String task)
     {
@@ -2651,9 +3028,7 @@ public class JDFNode extends JDFElement
     /**
      * setType set the type attribute to the enumeration type
      *
-     * @param newType the new type to set this to
-     * 
-     * default: setType(newType, false)
+     * @param typ the new type to set this to
      */
     public void setType(EnumType typ)
     {
@@ -2668,7 +3043,7 @@ public class JDFNode extends JDFElement
      *
      * @return ignore,  always true
      * @throws JDFException if type is not a known JDF type
-     * default: setType(newType, false)
+     * @default setType(newType, false)
      */
     public boolean setType(String newType, boolean checkName)
     {
@@ -2704,7 +3079,7 @@ public class JDFNode extends JDFElement
      * in general, it will be able to move from low to high versions but potentially fail 
      * when attempting to move from higher to lower versions
      *
-     * @param version: version that the resulting element should correspond to
+     * @param version version that the resulting element should correspond to
      * @return true if successful
      */
     public boolean fixVersion(EnumVersion version)
@@ -2727,6 +3102,11 @@ public class JDFNode extends JDFElement
 
 ///////////////////////////////////////////////////////////////
 
+    /** 
+     * fix NodeInfo and CustomerInfo
+     * @param version target version
+     * @return
+     */
     private boolean fixNiCi(EnumVersion version)
     {
         boolean bRet=true;
@@ -2863,8 +3243,9 @@ public class JDFNode extends JDFElement
     }
 
     /**
-     * typesafe validator
+    * typesafe validator,
      * checks whether all resource links are ok
+    * @param level validation level
      * @return true if this node is valid
      */
     public boolean isValid(EnumValidationLevel level)
@@ -2887,9 +3268,8 @@ public class JDFNode extends JDFElement
     /**
      * true if invalid Links are in this element
      *
-     * @param vKString& vInNameSpace list of namespaces where unknown Links are searched for. 
-     *                               if empty, all namespaces are searched
-     * @return boolean true if unknown Links are in this element
+     * @param level validation level
+     * @return boolean - true if unknown Links are in this element
      * 
      * @default public boolean hasInvalidLinks (ValidationLevel_Complete)
      */
@@ -2900,10 +3280,9 @@ public class JDFNode extends JDFElement
 
     /**
      * typesafe validator utility
-     * @param EnumValidationLevel level validation level
-     * @param bool bIgnorePrivate ignore objects in foreign namespaces
-     * @param int nMax size of the returned vector
-     * @return vKString vector of invalid Link names
+     * @param level validation level
+     * @param nMax  max. size of the returned vector
+     * @return vector of invalid Link names
      * 
      * @default getInvalidLinks (ValidationLevel_Complete, Integer.MAX_VALUE)
      */
@@ -2979,120 +3358,55 @@ public class JDFNode extends JDFElement
     /**
      * getJobPart - get a child node with a given jobpartid
      *
-     * @param String jobPartID - the ID of the part job
-     * @param String jobID     - the ID of the job
+     * @param jobPartID the ID of the part job
+     * @param jobID     the ID of the job
      *
      * @return JDFNode
      * 
-     * default: getJobPart(jobPartID, JDFConstants.EMPTYSTRING)
+     * @default getJobPart(jobPartID, JDFConstants.EMPTYSTRING)
      */
     public JDFNode getJobPart(String jobPartID, String jobID)
     {
-        if (includesAttribute(AttributeName.JOBPARTID, jobPartID))
-        {
-            return this;
-        }
-
         final JDFAttributeMap jobPartIDMap = new JDFAttributeMap(AttributeName.JOBPARTID, jobPartID);
-
         if (jobID!=null && !jobID.equals(JDFConstants.EMPTYSTRING))
         {
             jobPartIDMap.put(AttributeName.JOBID, jobID);
         }
-
-        //        System.out.println("JDFNode.getJobPart: " + getNodeName());
-        final KElement child = getChildByTagName(getNodeName(), null, 0, jobPartIDMap, false, true);
-
-        return (JDFNode) child;
+        return(JDFNode) getTreeElement(getNodeName(), null, jobPartIDMap, false, true);
     }
 
     /**
      * add any resources that live in ancestor nodes to this node
-     * @param VString vRWResourceUsage: vector of resource names and Usage / ProcessUsage that are spawned as rw <br>
+     * @param vRWResources vector of resource names and Usage / ProcessUsage that are spawned as rw <br>
      *       the format is one of:<br>
-     *                     ResName<br>
-     *                     ResName:Input<br>
-     *                     ResName:Output<br>
-     *                     ResName:ProcessUsage<br>
-     *                     ID<br>
-     * @param VJDFAttributeMap vParts: vector of JDFAttributeMaps that describe the parts to spawn
+     *                     <li>ResName</li><br>
+     *                     <li>ResName:Input</li><br>
+     *                     <li>ResName:Output</li><br>
+     *                     <li>ResName:ProcessUsage</li><br>
+     *                     <li>ID<br>
+     * @param vSpawnParts vector of JDFAttributeMaps that describe the parts to spawn
      * 
-     * @return VElement: vector of resources or resource partitions that would be spawned rw multiple times
+     * @return HashSet of resources or resource partitions that would be spawned rw multiple times
      */
-    public HashSet checkSpawnedResources(VString  vRWResources, VJDFAttributeMap vSpawnParts)
+    public Collection checkSpawnedResources(VString  vRWResources, VJDFAttributeMap vSpawnParts)
     {
-        HashSet v = new HashSet();
-        // grab the root node and all it's children
-        HashSet vRootLinks = getAllRefs(null,true);
-        Iterator iter=vRootLinks.iterator();
-        while(iter.hasNext())
-        {
-            JDFElement liRoot = (JDFElement)iter.next();
-
-            boolean  bResRW = false;
-            if(liRoot instanceof JDFResourceLink)
-            {
-                bResRW = linkFitsRWRes((JDFResourceLink)liRoot, vRWResources);
-                if(bResRW)
-                {
-                    JDFResourceLink rl = (JDFResourceLink)liRoot;
-                    JDFResource r      = rl.getTarget();
-                    if(r!=null)
-                    {
-                        VElement vRes      = new VElement();
-                        if(vSpawnParts==null || vSpawnParts.isEmpty())
-                        {
-                            vRes = r.getLeaves(false);
-                        }
-                        else
-                        {
-                            for(int j = 0; j < vSpawnParts.size(); j++)
-                            { 
-                                vRes.appendUnique(r.getPartitionVector(vSpawnParts.elementAt(j), null));
-                            }
-                        }
-                        for(int k = 0; k < vRes.size(); k++)
-                        {
-                            JDFResource rTarget = (JDFResource)vRes.elementAt(k);
-                            if(rTarget.getSpawnStatus() == JDFResource.EnumSpawnStatus.SpawnedRW)
-                            {
-                                if(!v.contains(rTarget))
-                                    v.add(rTarget);
-                            }
-                        }
-                    }
-                }
-            }
-            else if(liRoot instanceof JDFRefElement)
-            {
-                JDFRefElement re = (JDFRefElement)liRoot;
-                JDFResource r    = re.getTarget();
-                if(r!=null){
-                    bResRW = resFitsRWRes(r,vRWResources);
-                    if(bResRW)
-                    {
-                        if(r.getSpawnStatus() == JDFResource.EnumSpawnStatus.SpawnedRW)
-                            if(!v.contains(r))
-                                v.add(r);
-                    }
-                }
-            }
-        }
-        // empty if all is well
-        return v;
+        JDFSpawn spawn=new JDFSpawn(this);
+        spawn.vSpawnParts=vSpawnParts;
+        spawn.vRWResources_in=new VString(vRWResources);
+        return spawn.checkSpawnedResources();
     }
 
 
     /**
      * get inter-resource linked resource refs and resourcs links
-     * @param VString vDoneRefs:
-     * @param bool bRecurse if true, also return references linked from the resource pool directly
+     * @param vDoneRefs
+     * @param bRecurse if true, also return references linked from the resource pool directly
      * 
-     * @return velement: the vector of referenced resource refs and links
+     * @return HashSet of referenced resource refs and links
      */
     public HashSet getAllRefs(HashSet vDoneRefs, boolean bRecurse)
     {
-        HashSet v1 = vDoneRefs!=null ? vDoneRefs : new HashSet();
+        HashSet v1 = vDoneRefs!=null ? vDoneRefs : new LinkedHashSet();
 
         JDFResourcePool rp = getResourcePool();
         if(rp != null && bRecurse)
@@ -3102,11 +3416,13 @@ public class JDFNode extends JDFElement
         if(rlp != null)
             v1 = rlp.getAllRefs(v1, bRecurse);
 
-        JDFCustomerInfo ci = getCustomerInfo();
+        // only 1.2 direct element - resources are retrieved from the ResourcePool
+        JDFCustomerInfo ci = (JDFCustomerInfo)getElement(ElementName.CUSTOMERINFO);
         if(ci != null)
             v1 = ci.getAllRefs(v1, bRecurse);
 
-        JDFNodeInfo ni = getNodeInfo();
+        // only 1.2 direct element - resources are retrieved from the ResourcePool
+        JDFNodeInfo ni = (JDFNodeInfo)getElement(ElementName.NODEINFO);
         if(ni != null)
             v1 = ni.getAllRefs(v1, bRecurse);
 
@@ -3115,7 +3431,8 @@ public class JDFNode extends JDFElement
             v1 = ap.getAllRefs(v1, true);
 
         Vector vNodes = getvJDFNode(null, null, true);
-        for(int i = 0; i < vNodes.size(); i++)
+        final int size = vNodes.size();
+        for(int i = 0; i < size; i++)
             v1 = ((JDFNode) vNodes.elementAt(i)).getAllRefs(v1,bRecurse);
 
         return v1;
@@ -3125,7 +3442,7 @@ public class JDFNode extends JDFElement
     /**
      * setCombined - set the combined node types to the values in vCombiNodes
      *
-     * @param Vector vCombiNodes
+     * @param vCombiNodes
      */
     public void setCombined(VString vCombiNodes)
     {
@@ -3152,14 +3469,14 @@ public class JDFNode extends JDFElement
     /**
      * addComponent - add a component resource to resroot and link it to this process
      *
-     * @param String  cType
-     * @param boolean bInput
-     * @param JDFNode resRoot
-     * @param boolean bLink
+     * @param cType
+     * @param bInput
+     * @param resRoot
+     * @param bLink
      *
      * @return JDFComponent
-     * @deprecated - use standard addResource
-     * default: addComponent(cType, bInput, null, true)
+     * @deprecated use standard addResource
+     * @default addComponent(cType, bInput, null, true)
      */
     public JDFComponent addComponent(
             String cType,
@@ -3186,7 +3503,8 @@ public class JDFNode extends JDFElement
     }
 
     /**
-     *
+     * Set attribute SpawnID
+     * @param value the value to set the attribute to
      */
     public void setSpawnID(String value)
     {
@@ -3202,13 +3520,13 @@ public class JDFNode extends JDFElement
      * defaults to no part, i.e. the whole thing
      * 
      * @param parentURL
-     * @param spawnURL: URL of the spawned JDF file
-     * @param vRWResources: vector of resource names and Usage / ProcessUsage that are spawned as rw <br>
+     * @param spawnURL URL of the spawned JDF file
+     * @param vRWResources_in vector of resource names and Usage / ProcessUsage that are spawned as rw <br>
      *       the format is one of:<br>
      *                     ResName:Input<br>
      *                     ResName:Output<br>
      *                     ResName:ProcessUsage<br>
-     * @param VJDFAttributeMap vSpawnParts: vector of mAttributes that describe the parts to spawn, only 
+     * @param vSpawnParts vector of mAttributes that describe the parts to spawn, only 
      *        valid PartIDKeys are allowed
      * @param bSpawnROPartsOnly if true, only the parts of RO resources that are specified in vParts are 
      *                                  spawned, else the complete resource is spawned
@@ -3218,9 +3536,9 @@ public class JDFNode extends JDFElement
      * 
      * @return The spawned node
      * @since 050831 added bCopyComments
-     * @ tbd enhance nested spawning of partitioned nodes
+     * @tbd enhance nested spawning of partitioned nodes
      * @deprecated - use JDFSpawn class ( see code below) 
-     * default: spawn(parentURL, null, null, null, false, false, false, false)
+     * @default spawn(parentURL, null, null, null, false, false, false, false)
      */
     public JDFNode spawn(
             String parentURL,
@@ -3232,18 +3550,8 @@ public class JDFNode extends JDFElement
             boolean bCopyCustomerInfo,
             boolean bCopyComments)
     {
-        JDFSpawn spawn=new JDFSpawn(this);
-        spawn.bCopyComments=bCopyComments;
-        spawn.bCopyCustomerInfo=bCopyCustomerInfo;
-        spawn.bCopyNodeInfo=bCopyNodeInfo;
-        spawn.bSpawnROPartsOnly=bSpawnROPartsOnly;
-        spawn.vSpawnParts=vSpawnParts;
-        spawn.vRWResources_in=new VString(vRWResources_in);
-        spawn.spawnURL=spawnURL;
-        spawn.parentURL=parentURL;
-        return spawn.spawn();
-        
-
+        final JDFSpawn spawn=new JDFSpawn(this);
+        return spawn.spawn(parentURL,spawnURL,vRWResources_in,vSpawnParts,bSpawnROPartsOnly,bCopyNodeInfo,bCopyCustomerInfo,bCopyComments);
     }
 
 /////////////////////////////////////////////////////////////////////////
@@ -3257,13 +3565,13 @@ public class JDFNode extends JDFElement
      * vParts is the vector of part maps that are to be spawned,
      * defaults to no part, i.e. the whole thing
      *
-     * @param spawnURL: URL of the spawned JDF file
-     * @param vParts: vector of mAttributes that describe the parts to spawn
+     * @param spawnURL URL of the spawned JDF file
+     * @param vSpawnParts vector of mAttributes that describe the parts to spawn
      * @param bSpawnROPartsOnly if true, only the parts of RO resources that are specified in vParts are spawned, else the complete resource is spawned
      * @param bCopyNodeInfo copy the NodeInfo elements into the Ancestors
      * @param bCopyCustomerInfo copy the CustomerInfo elements into the Ancestors
      * @param bCopyComments copy the Comment elements into the Ancestors
-     * @return JDFDoc: The spawned node's owner document.
+     * @return JDFDoc - the spawned node's owner document.
      * 
      * @default spawnInformative(parentURL, 
      *                           null, 
@@ -3272,7 +3580,7 @@ public class JDFNode extends JDFElement
      *                           false, 
      *                           false, 
      *                           false); 
-     *@deprecated USE JDFSpawn.spawnInformative()
+     * @deprecated use JDFSpawn.spawnInformative()
      */
     public JDFNode spawnInformative(String parentURL, 
             String spawnURL, 
@@ -3282,7 +3590,7 @@ public class JDFNode extends JDFElement
             boolean bCopyCustomerInfo,
             boolean bCopyComments)
     {
-        JDFSpawn _spawn=new JDFSpawn(this);
+        final JDFSpawn _spawn=new JDFSpawn(this);
         return _spawn.spawnInformative(parentURL, spawnURL, vSpawnParts, bSpawnROPartsOnly, bCopyNodeInfo, bCopyCustomerInfo, bCopyComments);
     }   
 
@@ -3302,10 +3610,10 @@ public class JDFNode extends JDFElement
 
 
     /**
-     * merge nodes in a way that no duplicate elements are created
+     * merge nodes in a way that no duplicate elements are created<br>
      * attention !! this kills pools !!
-     * @param JDFNode e: the node element to merge with the current node
-     * @param boolean bDelete: if true KElement e will be deleted
+     * @param e       the node element to merge with the current node
+     * @param bDelete if true KElement e will be deleted
      * @return JDFNode: the merged node element
      */
     //JDFNode MergeNode(JDFNode e,bool bDelete);
@@ -3358,25 +3666,26 @@ public class JDFNode extends JDFElement
      * getLink - get the resourcelink that resides in the ResourceLinkPool of this node and references
      * the resource r
      *
-     * @param r      - the resource you are searching a link for
+     * @param r      the resource you are searching a link for
      * @param bInput
      *
      * @return JDFResourceLink - the resource link you was searching for or if not found, a new
      *                            empty JDFResource Link
      * 
-     * default: getLink(r, true)
+     * @default getLink(r, true)
      * @deprecated use getLink(resource, EnumUsage)
      */
     public JDFResourceLink getLink(JDFResource r, boolean bInput)
     {
         return getLink(r,bInput ? EnumUsage.Input : EnumUsage.Output);
     }
+    
     /**
      * getLink - get the resourcelink that resides in the ResourceLinkPool of this node and references
      * the resource r
      *
-     * @param r      - the resource you are searching a link for
-     * @param usage  - the usage attribute of the link. If null, both input and output resourelinks will be returned
+     * @param r      the resource you are searching a link for
+     * @param usage  the usage attribute of the link. If null, both input and output resourelinks will be returned
      *
      * @return JDFResourceLink - the resource link you was searching for or if not found, null
      * 
@@ -3402,7 +3711,7 @@ public class JDFNode extends JDFElement
 
             if (resLink != null && 
                     resLink.getrRef().equals(r.getID()) && 
-                    resLink.getLocalName().equals(r.getLinkString()))
+                    resLink.getNodeName().equals(r.getLinkString()))
             {
                 return resLink;
             }
@@ -3423,9 +3732,11 @@ public class JDFNode extends JDFElement
     }
 
     /**
-     * getAncestorIDs
+     * Get an ordered list of all Parents ID attributes:<br>
+     * the last entry is the direct parent, the last-1 entry is the grandparent etc.<br>
+     * This is analog to the definition of JDFAncestorPool
      *
-     * @return Vector
+     * @return vector of strings representing the node IDs
      */
     public VString getAncestorIDs()
     {
@@ -3464,8 +3775,8 @@ public class JDFNode extends JDFElement
     /**
      * getAncestorNode - return the ancestor node
      *
-     * @param int nSkip
-     * @deprecated - use getParentJDF
+     * @param nSkip
+     * @deprecated use getParentJDF()
      * @return JDFNode - the ancestor node
      */
     public JDFNode getAncestorNode(int nSkip)
@@ -3494,30 +3805,28 @@ public class JDFNode extends JDFElement
      * searches for the first element occurence in the parent nodes 
      * and then the ancestor elements of the root ancestorpool
      *
-     * @param String element: the element name
-     * @param String nameSpaceURI: the XML-namespace
-     * @param String def: the default if it does not exist
+     * @param attrib       the element name
+     * @param nameSpaceURI the XML-namespace
+     * @param def          the default value, if there is no ancestor attribute
      * 
-     * @return String: value of attribute found, value of def if not available
+     * @return String - value of attribute found, value of def if not available
      * 
-     * default: getAncestorAttribute(attrib, null, "")
+     * @default getAncestorAttribute(attrib, null, null)
      */
-    public String getAncestorAttribute(
-            String attrib,
-            String nameSpaceURI,
-            String def)
+    public String getAncestorAttribute(String attrib,String nameSpaceURI, String def)
     {
-        String s=getInheritedAttribute(attrib, nameSpaceURI, def);
-        if((s==null && def==null)||(s!=null && !s.equals(def)))
+        String s=getInheritedAttribute(attrib, nameSpaceURI, null);
+        if(s!=null)
         {
             return s;
         }
+        final JDFNode root = getJDFRoot();
+        if (root == null)
+            return def;
         // not in the inherited nodes, check the root node's AncestorPool
-        final JDFAncestorPool ap = getJDFRoot().getAncestorPool();
+        final JDFAncestorPool ap = root.getAncestorPool();
         if (ap == null)
-        {
-            return JDFConstants.EMPTYSTRING;
-        }
+             return def;
         return ap.getAncestorAttribute(attrib, nameSpaceURI, def);
     }
 
@@ -3525,22 +3834,22 @@ public class JDFNode extends JDFElement
      * true if a non default attribute occurence in the parent nodes 
      * and then the ancestor elements of the root ancestorpool exists
      *
-     * @param String attrib: the attribute name
-     * @param String nameSpaceURI: the XML-namespace
+     * @param attrib the attribute name
+     * @param nameSpaceURI the XML-namespace
      * 
-     * @return boolean: true if the attribute exists
+     * @return true if the attribute exists
      * 
-     * default: hasAncestorAttribute(attrib, "")
+     * @default hasAncestorAttribute(attrib, null)
      */
     public boolean hasAncestorAttribute(String attrib, String nameSpaceURI)
     {
-        return getAncestorAttribute(attrib, nameSpaceURI, "\"").compareTo("\"") != 0;
+        return getAncestorAttribute(attrib, nameSpaceURI, null)!=null;
     }
 
     /**
      * Check existance of attribute Activation
-     * @param bool bInherit recurse through ancestors and Ancestor elements of the AncestorPool when searching
-     * @return bool true if attribute Activation exists
+     * @param bInherit recurse through ancestors and Ancestor elements of the AncestorPool when searching
+     * @return true if attribute Activation exists
      */
     //bool hasActivation(bool bInherit=false) ;
     public boolean hasActivation(boolean bInherit)
@@ -3553,12 +3862,11 @@ public class JDFNode extends JDFElement
     }
 
     /**
-     * Check existance of attribute JobID
-     * @param bool bInherit recurse through ancestors and Ancestor elements of the AncestorPool when searching
-     * @return bool true if attribute JobID exists
+     * Check existence of attribute JobID
+     * @param bInherit recurse through ancestors and Ancestor elements of the AncestorPool when searching
+     * @return true if attribute JobID exists
      * @deprecated
      */
-    //bool hasJobID(bool bInherit=false) ;
     public boolean hasJobID(boolean bInherit)
     {
         if (bInherit)
@@ -3570,10 +3878,10 @@ public class JDFNode extends JDFElement
 
     /**
      * searches for the first element occurence in the ancestor elements
-     * @param KString attrib: the attribute name
-     * @param KString nameSpaceURI: the XML-namespace
+     * @param element the attribute name
+     * @param nameSpaceURI the XML-namespace
      * @since 180502 
-     * @return KString: value of attribute found, empty string if not available
+     * @return the KElement found
      */
     public KElement getAncestorElement(String element, String nameSpaceURI)
     {
@@ -3581,8 +3889,11 @@ public class JDFNode extends JDFElement
         if(e!=null)
             return e;
 
+        final JDFNode root = getJDFRoot();
+        if(root==null)
+            return null;
         // not in the inherited nodes, check the root node's AncestorPool
-        JDFAncestorPool ap=getJDFRoot().getAncestorPool();
+        JDFAncestorPool ap=root.getAncestorPool();
         if(ap==null)
             return null;
 
@@ -3590,14 +3901,14 @@ public class JDFNode extends JDFElement
     }
 
     /**
-     * true if a non default attribute occurence in the parent nodes 
+     * true if a non default attribute occurs in the parent nodes 
      * and then the ancestor elements of the root ancestorpool exists
      *
      *@deprecated
-     * @param KString attrib: the attribute name
-     * @param KString nameSpaceURI: the XML-namespace
+     * @param element the attribute name
+     * @param nameSpaceURI the XML-namespace
      * @since 180502 
-     * @return bool: true if the attribute exists
+     * @return boolean - true if the attribute exists
      */
     public boolean hasAncestorElement(String element, String nameSpaceURI)
     {
@@ -3608,10 +3919,10 @@ public class JDFNode extends JDFElement
     /**
      * addParameter - add a parameter resource to resroot and link it to this process
      *
-     * @param String  strName
-     * @param boolean bInput
-     * @param JDFNode resRoot
-     * @param boolean bLink
+     * @param strName
+     * @param bInput
+     * @param resRoot
+     * @param bLink
      *
      * @return JDFResource
      * @deprecated use addResource(strName, JDFResource.EnumClass.Parameter, bInput, resRoot, bLink, null)
@@ -3634,15 +3945,15 @@ public class JDFNode extends JDFElement
     /**
      * addConsumable - add a consumable resource to resroot and link it to this process
      *
-     * @param String  name
-     * @param boolean bInput
-     * @param JDFNode resRoot
-     * @param boolean bLink
+     * @param strName
+     * @param bInput
+     * @param resRoot
+     * @param bLink
      *
      * @deprecated use addResource(name, null, true, null, true)
      * @return JDFResource
      * 
-     * default: addResource(name, null, true, null, true)
+     * @default addResource(name, null, true, null, true)
      */
     public JDFResource addConsumable(
             String strName,
@@ -3662,15 +3973,15 @@ public class JDFNode extends JDFElement
     /**
      * addHandling - add a handling resource to resroot and link it to this process
      *
-     * @param String  name
-     * @param boolena bInput
-     * @param JDFNode resRoot
-     * @param boolean bLink
+     * @param strName
+     * @param bInput
+     * @param resRoot
+     * @param bLink
      *
      * @deprecated use addResource(name, null, true, null, true)
      * @return JDFResource
      * 
-     * default: addResource(name, JDFResource.EnumClass.Handling, true, null, true)
+     * @default addResource(name, JDFResource.EnumClass.Handling, true, null, true)
      */
     public JDFResource addHandling(
             String strName,
@@ -3691,7 +4002,7 @@ public class JDFNode extends JDFElement
     /**
      * isCombined - is this a Combined resource type ?
      *
-     * return boolean - true if it is, otherwise false
+     * @return boolean - true if it is, otherwise false
      * @deprecated use JDFConstants.COMBINED.equals(getType());
      */
     public boolean isCombined()
@@ -3701,7 +4012,7 @@ public class JDFNode extends JDFElement
 
     /**
      * Is this a Combined node type ?
-     * return boolean: true if this is a product node
+     * @return boolean - true if this is a product node
      * @deprecated use JDFConstants.PRODUCT.equals(getType());
      */
     public boolean isProduct()
@@ -3711,7 +4022,7 @@ public class JDFNode extends JDFElement
 
     /**
      * Is this a Combined node type ?
-     * @return boolean: true if this is a combined node
+     * @return boolean - true if this is a combined node
      * @deprecated use JDFConstants.PROCESSGROUP.equals(getType());
      */
     public boolean isProcessGroup()
@@ -3721,12 +4032,12 @@ public class JDFNode extends JDFElement
 
     /**
      * Is this a group node type (ProcessGroup or Product)?
-     * return boolean: true if this is a combined node
+     * @return boolean - true if this is a combined node
      */
     public boolean isGroupNode()
     {
         final String type2 = getType();
-        return JDFConstants.PROCESSGROUP.equals(type2) || JDFConstants.PRODUCT.equals(type2);
+        return JDFConstants.PROCESSGROUP.equals(type2) && !hasAttribute(AttributeName.TYPES)|| JDFConstants.PRODUCT.equals(type2);
     }
 
     /**
@@ -3741,7 +4052,7 @@ public class JDFNode extends JDFElement
 
     /**
      * get string attribute JobID
-     * @param boolean bInherit - recurse through ancestors when searching
+     * @param bInherit recurse through ancestors when searching
      * @return String - attribute value  
      */
     public String getJobID(boolean bInherit)
@@ -3755,7 +4066,7 @@ public class JDFNode extends JDFElement
 
     /**
      * get string attribute JobID
-     * @return String - attribute value  
+     * @return attribute value  
      * @deprecated use getJobPartID(false);
      */
     public String getJobPartID()
@@ -3765,10 +4076,10 @@ public class JDFNode extends JDFElement
 
     /**
      * get string attribute JobID
-     * @param boolean bInherit - if true recurse through ancestors when searching
+     * @param bInherit if true recurse through ancestors when searching
      * @return String - attribute value
      * 
-     * default - getJobPartID(flase)
+     * @default getJobPartID(flase)
      */
     public String getJobPartID(boolean bInherit)
     {
@@ -3780,9 +4091,9 @@ public class JDFNode extends JDFElement
     }
 
     /**
-     * setJobPartID
+     * Set attribute JobPartID
      *
-     * @param String jobPartID
+     * @param jobPartID the value to set the attribute to
      */
     public void setJobPartID(String jobPartID)
     {
@@ -3791,7 +4102,7 @@ public class JDFNode extends JDFElement
 
     /**
      * set attribute JobID
-     *@param String value: the value to set the attribute to
+     *@param value the value to set the attribute to
      */
     public void setJobID(String value)
     {
@@ -3799,8 +4110,8 @@ public class JDFNode extends JDFElement
     }
 
     /**
-     * test element StatusPool existance
-     * @return bool true if a matching element exists 
+     * test element StatusPool existence
+     * @return boolean - true if a matching element exists 
      * @deprecated
      */
     public boolean hasStatusPool()
@@ -3811,6 +4122,7 @@ public class JDFNode extends JDFElement
     /**
      * get string attribute SpawnID
      * @return String - attribute value
+     * @deprecated use getSpawnID(boolean)
      */
     public String getSpawnID()
     {
@@ -3819,17 +4131,16 @@ public class JDFNode extends JDFElement
 
     /**
      * get string attribute SpawnID
-     * @param boolean bInherit - if true recurse through ancestors when searching
+     * @param bInherit if true recurse through ancestors when searching
      * @return String - attribute value
      * 
-     * default - getSpawnID(flase)
+     * @default getSpawnID(false)
      */
     public String getSpawnID(boolean bInherit)
     {
         if(bInherit)
         {
-            return getAncestorAttribute(AttributeName.SPAWNID, 
-                    null, JDFConstants.EMPTYSTRING);
+            return getAncestorAttribute(AttributeName.SPAWNID, null, JDFConstants.EMPTYSTRING);
         }
         return getAttribute(AttributeName.SPAWNID);
     }
@@ -3878,6 +4189,11 @@ public class JDFNode extends JDFElement
         return null;
     }
 
+    /**
+     * definition of resource link usage, cardinality and ProcessUsage in the JDF namespace for one index
+     * @param namIndex index of the named list, if<0 tokenize all
+     * @return list of resource process usages that may be linked
+     */
     private VString vLinkInfo(int namIndex)
     {
 
@@ -3908,8 +4224,8 @@ public class JDFNode extends JDFElement
 
     /**
      * Get the index in Linknames of the ResourceLink described by rl
-     * @param JDFResourceLink rl
-     * @param int nOccur for looping over combined nodes
+     * @param rl
+     * @param nOccur for looping over combined nodes
      * @return -1 if it does not fit
      */
     private int[] getMatchingNamIndex(JDFResourceLink rl, int nOccur)
@@ -3986,8 +4302,8 @@ public class JDFNode extends JDFElement
 
 
     /**
-     * Check existance of attribute Type
-     * @return bool true if attribute Type exists
+     * Check existence of attribute Type
+     * @return boolean - true if attribute Type exists
      * @deprecated use inline hasAttribute
      */
     public boolean hasType()
@@ -3996,7 +4312,10 @@ public class JDFNode extends JDFElement
     }
 
     /**
-     typesafe validator
+     * get a vector of Link names that may be inserted in this element
+     * if the links need a processusage, the format is LinkName:ProcessUsage
+     * @param nMax maximum size of the returned vector
+     * @return vector of strings that contains insertable link names
      */
     public VString getInsertLinkVector(int nMax) 
     {
@@ -4019,7 +4338,7 @@ public class JDFNode extends JDFElement
                 }
 
                 String s = (String)names.elementAt(i) + "Link";
-                if (!pu.equals(EnumProcessUsage.Any))
+                if (pu!=null)
                 {
                     s += JDFConstants.COLON + pu.getName();
                 }
@@ -4035,13 +4354,19 @@ public class JDFNode extends JDFElement
 
     //////////////////////////////////////////////////////////////////////
 
-    //default for int i = 0
+    /**
+     * get the resource that matches the typesafe link described by i
+     * @param info  the LinkInfo string for this name
+     * @param i     the index of the pu to find 
+     * @return the enumerated process usage of this checked link
+     * @default getEnumProcessUsage(info, 0)
+     */
     public EnumProcessUsage getEnumProcessUsage(String info, int i)
     {
         String iToken = StringUtil.token(info,i,JDFConstants.BLANK);
         if(iToken.equals(JDFConstants.EMPTYSTRING))
         {
-            return EnumProcessUsage.Any;
+            return null;
         }
 
         if(iToken.length() > 2)
@@ -4076,8 +4401,8 @@ public class JDFNode extends JDFElement
 
     /**
      * Check existance of attribute ProjectID
-     * @param bool bInherit recurse through ancestors when searching
-     * @return bool true if attribute ProjectID exists
+     * @param bInherit recurse through ancestors when searching
+     * @return true if attribute ProjectID exists
      * @deprecated
      */
     public boolean hasProjectID(boolean bInherit)
@@ -4090,8 +4415,8 @@ public class JDFNode extends JDFElement
     }
 
     /**
-     * Check existance of attribute ProjectID
-     * @return bool true if attribute ProjectID exists
+     * Check existence of attribute ProjectID
+     * @return true if attribute ProjectID exists
      * @deprecated
      */
     public boolean hasProjectID()
@@ -4102,7 +4427,7 @@ public class JDFNode extends JDFElement
 
     /**
      * set attribute ProjectID
-     *@param String value: the value to set the attribute to
+     * @param strValue the value to set the attribute to
      */
     public void setProjectID(String strValue)
     {
@@ -4111,8 +4436,8 @@ public class JDFNode extends JDFElement
 
     /**
      * get string attribute ProjectID
-     * @param bool bInherit recurse through ancestors when searching
-     * @return String the value of the attribute 
+     * @param bInherit recurse through ancestors when searching
+     * @return the value of the attribute 
      */
     public String getProjectID(boolean bInherit)
     {
@@ -4125,7 +4450,7 @@ public class JDFNode extends JDFElement
 
     /**
      * get string attribute ProjectID
-     * @return String the value of the attribute 
+     * @return the value of the attribute 
      * @deprecated use getProjectID(boolean bInherit)
      */
     public String getProjectID()
@@ -4135,7 +4460,7 @@ public class JDFNode extends JDFElement
 
     /**
      * definition of the length of LinkNames, LinkInfo for generic JDF nodes
-     * @return int length of the generic () link string functions,
+     * @return int - length of the generic () link string functions,
      * @deprecated use m_strGenericLinkNames.length;
      */
     public int getGenericLinksLength()
@@ -4149,9 +4474,8 @@ public class JDFNode extends JDFElement
      * @param        rl the JDFResourceLink to check
      * @param        doneNameList    Vector of Integer
      * @param        doneIndexList   Vector of Integer
-     * @return boolean true if valid
+     * @return true if valid
      */
-
     public boolean isValidLink(EnumValidationLevel level, JDFResourceLink rl, Vector doneNameList, Vector doneIndexList)
     {
         if (rl == null)
@@ -4187,11 +4511,8 @@ public class JDFNode extends JDFElement
             // not found -> check whether this node is known yet
             if (namIndex < 0)
             {
-                if (!hasAttribute(AttributeName.TYPE, null, false))
-                {
-                    return true;
-                }
-                if (getType().equals(ElementName.PROCESSGROUP))
+                final EnumType enumType = getEnumType();
+                if (enumType==null || enumType.equals(EnumType.ProcessGroup))
                 {
                     return true;
                 }
@@ -4240,7 +4561,7 @@ public class JDFNode extends JDFElement
     /**
      * @deprecated use getMissingLinkVector
      * @param nMax
-     * @return
+     * @return VString
      */
     public VString getMissingLinks(int nMax)
     {
@@ -4255,7 +4576,7 @@ public class JDFNode extends JDFElement
      * see chapter 6 JDFSpec, then the links are ignored
      *
      * @param resName of the resource to remove
-     * @param bLink: if false, returns the linked resources, else if true, returns the ResourceLink elements
+    * @param bLink   if false, returns the linked resources, else if true, returns the ResourceLink elements
      * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
      * @return vector of resourcelink elements
      */
@@ -4288,7 +4609,7 @@ public class JDFNode extends JDFElement
         final VString vInfo = vLinkInfo(namIndex);
 
 
-        if (processUsage!=null && processUsage.getValue() > EnumProcessUsage.Any.getValue())
+        if (processUsage!=null && processUsage.getValue() > EnumProcessUsage.AnyOutput.getValue())
         {
             final String pu=processUsage.getName();
             for (int i = 0; i < vInfo.size(); i++)
@@ -4314,7 +4635,7 @@ public class JDFNode extends JDFElement
             }
             else if (processUsage == EnumProcessUsage.AnyInput)
             {
-                vE = rlp.getInOutLinks(true?EnumUsage.Input:EnumUsage.Output, bLink, resName,null);
+                vE = rlp.getInOutLinks(EnumUsage.Input, bLink, resName,null);
                 int vEsize = vE==null ? 0 : vE.size();
                 // 170205 RP remove internal pipes from all inputs
                 // TODO ideally we would check if they are connected, but this is a sufficient 98% solution
@@ -4356,7 +4677,7 @@ public class JDFNode extends JDFElement
      * get a vector of Link names that are missing in this element<br>
      * if the links need a processusage, the format is LinkName:ProcessUsage
      *
-     * @param int nMax maximum size of the returned vector
+     * @param nMax maximum size of the returned vector
      * @return  VString vector of strings that contains missing Link names
      */
     public VString getMissingLinkVector(int nMax)
@@ -4372,8 +4693,20 @@ public class JDFNode extends JDFElement
         final int nameSize = names.size();
         for (int i = 0; i < nameSize; i++)
         {
+            String nam=names.stringAt(i);
+            boolean namDone=false;
+            for(int k=0;k<i;k++)
+            {
+                if(names.stringAt(k).equals(nam))
+                {
+                    namDone=true;
+                    break;
+                }
+            }
+            if(namDone)
+                continue; // already tested this name - vLinkInfo collects all data
             final VString types = vLinkInfo(i);
-            final int size = types.size();
+            final int size = types==null ? 0 : types.size();
             for (int j = 0; j < size; j++)
             {
                 final String typesAt = (String) types.elementAt(j);
@@ -4385,7 +4718,7 @@ public class JDFNode extends JDFElement
                     {
                         String s = names.elementAt(i) + "Link";
 
-                        if(pu != EnumProcessUsage.Any)
+                        if(pu != null)
                         {
                             s += JDFConstants.COLON + pu.getName();
                         }
@@ -4409,8 +4742,8 @@ public class JDFNode extends JDFElement
      * @param processUsage
      * @param partMap
      * @param pos
-     * @deprecated
-     * @return
+     * @deprecated use getMatchingResource(String resName, EnumProcessUsage processUsage, JDFAttributeMap partMap, int pos))
+     * @return JDFResource
      */
     public JDFResource getMatchingResource(String resName, int processUsage, JDFAttributeMap partMap, int pos)
     {
@@ -4437,8 +4770,9 @@ public class JDFNode extends JDFElement
      * 
      * @param resName of the resource to remove
      * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
-     * @param pos the position of the link if multiple matching links exist
-     * @return the resourcelink element
+     * @param partMap
+     * @param pos          the position of the link if multiple matching links exist
+     * @return JDFResource - the resourcelink element
      */
     public JDFResource getMatchingResource(String resName, EnumProcessUsage processUsage, JDFAttributeMap partMap, int pos)
     {
@@ -4459,14 +4793,14 @@ public class JDFNode extends JDFElement
     }
 
     /**
-     * get the link that matches the typesafe resource name
-     * if the Resource type is not defined for the process represented by this node
-     * see chapter 6 JDFSpec, then the link is ignored
+    * get the link that matches the typesafe resource name<br>
+    * if the Resource type is not defined for the process represented by this node,
+    * the link is ignored (see JDF Spec Chapter 6)
      *
-     * @param resName of the resource to remove
-     * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
-     * @param pos the position of the link if multiple matching links exist
-     * @return JDFResourceLink the resourcelink
+    * @param resName      name of the resource to remove
+    * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
+    * @param pos          the position of the link (if multiple matching links exist)
+    * @return JDFResourceLink - the resourcelink
      */    
     public JDFResourceLink getMatchingLink(String resName, EnumProcessUsage processUsage, int pos)
     {
@@ -4486,24 +4820,25 @@ public class JDFNode extends JDFElement
      * also creates the matching resource link in this
      * 
      * @param resName the name of the resource to add
-     * @param processUsage the processUsage of the resourcelink of the resource to add,
-     * null EnumProcessUsage.AnyOutput for input but no processUsage 
-     * EnumProcessUsage.AnyOutput for output but no processUsage
+     * @param processUsage the processUsage of the resourcelink of the resource to add:
+     * <li>null EnumProcessUsage.AnyOutput - for input but no processUsage </li>
+     * <li>EnumProcessUsage.AnyOutput - for output but no processUsage</li>
      * 
-     * @param resourceRoot the root JDF node that is the parent of the resourcepool where the resource should be added
-     * if null, this node is assumed
+     * @param resourceRoot the root JDF node, that is the parent of the resourcepool where the resource should be added.
+     * If null, this node is assumed.
      * 
      * @return JDFResource the newly created resource
      */
     public JDFResource appendMatchingResource(String resName, EnumProcessUsage processUsage, JDFNode resourceRoot)
     {
+    	// TODO check comment for processUsage
         final VString vtyp = getMatchType(resName, processUsage);
         if (vtyp==null) // anything goes
         {
             boolean bInput=!EnumProcessUsage.AnyOutput.equals(processUsage);
             JDFResource r=addResource(resName, null, bInput, resourceRoot, true, null);
             JDFResourceLink rl=getLink(r,null);
-            if(processUsage!=null && processUsage.getValue()>EnumProcessUsage.Any.getValue())
+            if(processUsage!=null && processUsage.getValue()>EnumProcessUsage.AnyOutput.getValue())
             {
                 rl.setProcessUsage(processUsage);
             }
@@ -4563,6 +4898,12 @@ public class JDFNode extends JDFElement
     }
 
 
+    /**
+     * get the matching types for a given resource
+     * @param resName
+     * @param processUsage
+     * @return null if anything goes, an empty list if nothing goes, else the list of valid entries
+     */
     private VString getMatchType(String resName, EnumProcessUsage processUsage)
     {
         final VString vRet = new VString();
@@ -4584,7 +4925,7 @@ public class JDFNode extends JDFElement
         if(vInfo==null)
             return null;
 
-        if ((processUsage == null) || (processUsage == EnumProcessUsage.Any))
+        if ((processUsage == null))
             return vInfo; // no filtering required
 
         String infoTemp = null;
@@ -4594,7 +4935,7 @@ public class JDFNode extends JDFElement
         {
             infoTemp = (String) vInfo.elementAt(i);
 
-            if (processUsage.getValue() > EnumProcessUsage.Any.getValue())
+            if (processUsage.getValue() > EnumProcessUsage.AnyOutput.getValue())
             {
                 if (infoTemp.endsWith(pu))
                 {
@@ -4616,17 +4957,18 @@ public class JDFNode extends JDFElement
             }
         }
 
-        return vRet.isEmpty() ? null : vRet;
+        return vRet;
     }
 
     /**
-     * @param resName
-     * @param processUsage
-     * @param bRemoveResource
-     * @param pos
-     * @return
+     * remove the link that matches the typesafe link resource name
+     * @param resName         name of the resource to remove
+     * @param processUsage    enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
+     * @param bRemoveResource also remove the resource, if it is not linked by any other process
+     * @param pos             the position of the link, if multiple matching links exist
+     * @return true if successful
      * 
-     * default: removeMatchingLink(resName, processUsage, false, 0)
+     * @default removeMatchingLink(resName, processUsage, false, 0)
      */
     public boolean removeMatchingLink(String resName, int processUsage, boolean bRemoveResource, int pos)
     {
@@ -4648,7 +4990,15 @@ public class JDFNode extends JDFElement
         return true;
     }
 
-
+    /**
+     * remove the link that matches the typesafe link resource name
+     * @param resName         name of the resource to remove
+     * @param processUsage    enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
+     * @param bRemoveResource also remove the resource, if it is not linked by any other process
+     * @return true if successful
+     * 
+     * @default removeMatchingLink(resName, processUsage, false, 0)
+     */
     public boolean removeMatchingLinks(String resName, EnumProcessUsage processUsage, boolean bRemoveResource)
     {
         final VElement v = getMatchingLinks(resName, true, processUsage);
@@ -4669,12 +5019,13 @@ public class JDFNode extends JDFElement
     }
 
     /**
-     * @param resource
-     * @param processUsage
-     * @param partMap
-     * @return
+     * Append a resource that matches the typesafe link described by resource name
+     * @param resource     the resource to link
+     * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
+     * @param partMap      the Attribute map of parts
+     * @return the new link, null if failure
      * 
-     * default: LinkMatchingResource(resource, processUsage, null)
+     * @default linkMatchingResource(resource, processUsage, null)
      */
     public JDFResourceLink 
     linkMatchingResource(JDFResource resource, EnumProcessUsage processUsage, JDFAttributeMap partMap) 
@@ -4684,7 +5035,8 @@ public class JDFNode extends JDFElement
         final String resName = resource.getLocalName();
         final VString vtyp   = getMatchType(resName, processUsage);
 
-        for (int i = 0; i < vtyp.size(); i++)
+        final int size = vtyp==null ? 0 : vtyp.size();
+        for (int i = 0; i < size; i++)
         {
             final String typ = (String)vtyp.elementAt(i);
             if ((typ.charAt(1) == '?') || (typ.charAt(1) == '_'))
@@ -4711,12 +5063,13 @@ public class JDFNode extends JDFElement
     }
 
     /**
-     * @param resName
-     * @param bLink
-     * @param processUsage
-     * @return
+     * get the number of links that match the typesafe link resource name 
+     * @param resName      name of the resources to match
+     * @param bLink        if false: returns the linked resources, if true: returns the ResourceLink elements
+     * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
+     * @return int - the number of resourcelink elements
      * 
-     * default: NumMatchingLinks(resName, true, ProcessUsage_Any.getValue())
+     * @default numMatchingLinks(resName, true, ProcessUsage_Any.getValue())
      */
     public int numMatchingLinks(String resName, boolean bLink, EnumProcessUsage processUsage)
     {
@@ -4798,8 +5151,10 @@ public class JDFNode extends JDFElement
 
     /**
      * gets the existing inherited CustomerInfo or NodeInfo from parents including ancestorpool
-     * 
-     * @return the existing CustomerInfo or NodeInfo.
+     * @param elementName name of the element to look for
+     * @param bInherit    if true: recurse into parents
+     * @param xPath
+     * @return the existing CustomerInfo or NodeInfo
      */
     private KElement getNiCi(String elementName, boolean bInherit, String xPath)
     {       
@@ -4850,9 +5205,9 @@ public class JDFNode extends JDFElement
     }
     /**
      * gets the existing NodeInfo or creates a new one if none exists
-     * this method will check if a NodeInfo exists, 
+     * this method will check if a NodeInfo/CustomerInfo exists, 
      * 
-     * @return the found or created nodeinfo.
+     * @return the found or created NodeInfo/CustomerInfo 
      */
     private KElement getCreateNiCi(String s)
     {
@@ -4863,7 +5218,7 @@ public class JDFNode extends JDFElement
             EnumVersion eVer = getVersion(true);
             if (eVer.getValue() >= EnumVersion.Version_1_3.getValue())
             {
-                nici = addParameter(s, true, this, true);
+                nici = addResource( s, null, EnumUsage.Input,null,this,null,null);
             }
             else
             {
@@ -4888,7 +5243,7 @@ public class JDFNode extends JDFElement
     }  
 
     /**
-     * gets the existing local NodeInfo whether it is a resource or an element
+     * gets the existing local NodeInfo if it is a resource or an element
      * 
      * @return the existing NodeInfo.
      */
@@ -4901,7 +5256,7 @@ public class JDFNode extends JDFElement
 
     /**
      * get first NodeInfo element from child list or child list of any ancestor
-     * @param xPath the the xPath to an element or attribute that must exist in the queried CustomerInfo
+     * @param xPath the xPath to an element or attribute that must exist in the queried CustomerInfo<br>
      * note that attributes must be marked with an "@", 
      * if xPath=null, simply return the next in line
      * 
@@ -4913,7 +5268,7 @@ public class JDFNode extends JDFElement
     }
     /**
      * get first NodeInfo element from child list or child list of any ancestor
-     * @return  JDFNodeInfo The element
+     * @return JDFNodeInfo - the element
      * @deprecated 060221 use getInheritedNodeInfo(String xPath)
      */
     public JDFNodeInfo getInheritedNodeInfo()
@@ -4932,15 +5287,14 @@ public class JDFNode extends JDFElement
     }
     /**
      * remove element Customerinfo whether it is an element or a resource
-     * 
      */
     public void removeCustomerInfo()
     {
         removeNiCi(ElementName.CUSTOMERINFO);
     }
     /**
-     * remove element NodeInfo or CustomerInfo whether it is an element or a resource
-     * 
+     * remove element NodeInfo or CustomerInfo, no matter whether it is an element or a resource
+     * @param elmName name of the element to remove
      */
     private void removeNiCi(String elmName)
     {
@@ -4952,7 +5306,6 @@ public class JDFNode extends JDFElement
     /**
      * removes all NodeInfo elements 
      * @deprecated removes only 1 NodeInfo. In Version 1.3 the cardinality of NodeInfo 
-     *
      */
     public void removeNodeInfos()
     {
@@ -4961,7 +5314,7 @@ public class JDFNode extends JDFElement
             KElement remRes = removeResource(ElementName.NODEINFO, 0);
             if(remRes == null)
             {
-                //remove all in the resource pool
+                //removed all in the resource pool
                 break;
             }
         }
@@ -4978,7 +5331,7 @@ public class JDFNode extends JDFElement
     /**
      * removes all CustomerInfo elements whether it is an element or a resource
      *
-     *@deprecated 060220 use removeCustomerInfo
+     * @deprecated 060220 use removeCustomerInfo
      */
     public void removeCustomerInfos()
     {
@@ -5003,17 +5356,32 @@ public class JDFNode extends JDFElement
         }
     }
 
+    /**
+     * removes all unlinked resources  
+     */
+    public void eraseUnlinkedResources()
+    {
+        VElement v=getUnlinkedResources(false);
+        while(v!=null)
+        {
+            for(int i=0;i<v.size();i++)
+            {
+                ((JDFResource)v.elementAt(i)).deleteNode();
+            }
+            v=getUnlinkedResources(false); // repeat until no unlinked are found
+        }
+    }
 
     /**
      * removes a Resource from this ResourceLinkPool and from the resourcePool if it is 
      * no longer linked to any other process
      * 
      * @param nodeName  the Nodename of the Resource "NodeInfo" for example
-     * @param iSkip     number to skip before deleating
-     * @return KElement the removed resource, null if nothing was found or deleated e.g. 4 found 
-     *                  and the 5th is the one to deleate. The link is not returned. 
-     *                  If the link is deleated and the resource is still linked to another 
-     *                  process null is returned. 
+     * @param iSkip     number to skip before deleting
+     * @return KElement the removed resource, null if nothing was found or deleted (e.g. 4 found 
+     *                  and the 5th is the one to delete). The link is not returned<br> 
+     *                  If the link is deleted and the resource is still linked to another 
+     *                  process, null is returned. 
      */
     public JDFResource removeResource(String nodeName, int iSkip)
     {
@@ -5057,7 +5425,7 @@ public class JDFNode extends JDFElement
 
     /**
      * Number of NodeInfo elements
-     * @return int number of matching elements
+     * @return int - number of matching elements
      * @deprecated must never be more than one...
      */
     public int numCustomerInfos()
@@ -5074,9 +5442,8 @@ public class JDFNode extends JDFElement
     }
 
     /**
-     * test whether either an element NodeInfo exists
-     * or a JDF 1.3 NodeInfo Resource exists
-     * @return bool true if at least one matching element exists 
+     * test whether either an element NodeInfo or a JDF 1.3 NodeInfo Resource exists
+     * @return true if at least one matching element exists 
      * @deprecated use getNodeInfo()!=null 
      */
     public boolean hasNodeInfo()
@@ -5087,8 +5454,7 @@ public class JDFNode extends JDFElement
 
 
     /**
-     * test whether either an element CustomerInfo exists
-     * or a JDF 1.3 CustomerInfo Resource exists
+     * test whether either an element CustomerInfo or a JDF 1.3 CustomerInfo Resource exists
      * @return bool true if at least one matching element exists
      * @deprecated use getCustomerInfo()!=null 
      */
@@ -5099,15 +5465,30 @@ public class JDFNode extends JDFElement
 
     //////////////////////////////////////////////////////////////////////
 
+    /**
+     * Get element ResourceLinkPool, create if it doesn't exist 
+     * @return the found/created element
+     */
     public JDFResourceLinkPool getCreateResourceLinkPool()
     {
         return (JDFResourceLinkPool) 
         getCreateElement_KElement(ElementName.RESOURCELINKPOOL, null, 0);
     }
+    
+    
+    /**
+     * Append a ResourceLinkPool element, return existing element if one already exist
+     * @return the ResourceLinkPool element
+     */
     public JDFResourceLinkPool appendResourceLinkPool()
     {
         return (JDFResourceLinkPool) appendElementN(ElementName.RESOURCELINKPOOL, 1, null);
     }
+
+    /**
+     * get the first ResourceLinkPool element
+     * @return the element
+     */
     public JDFResourceLinkPool getResourceLinkPool()
     {
         return (JDFResourceLinkPool) getElement(ElementName.RESOURCELINKPOOL, null, 0);
@@ -5115,14 +5496,28 @@ public class JDFNode extends JDFElement
 
     //////////////////////////////////////////////////////////////////////
 
+    /**
+     * Get element ResourcePool, create if it doesn't exist
+     * @return the found/created element
+     */
     public JDFResourcePool getCreateResourcePool()
     {
         return (JDFResourcePool) getCreateElement_KElement(ElementName.RESOURCEPOOL, null, 0);
     }
+    
+    /**
+     * append a ResourcePool element, return existing element if one already exist
+     * @return the ResourcePool element
+     */
     public JDFResourcePool appendResourcePool()
     {
         return (JDFResourcePool) appendElementN(ElementName.RESOURCEPOOL, 1, null);
     }
+    
+    /**
+     * get the first ResourcePool element
+     * @return the element
+     */
     public JDFResourcePool getResourcePool()
     {
         return (JDFResourcePool) getElement(ElementName.RESOURCEPOOL, null, 0);
@@ -5130,18 +5525,30 @@ public class JDFNode extends JDFElement
 
     //////////////////////////////////////////////////////////////////////
 
+    /**
+     * Get element StatusPool, create if it doesn't exist
+     * @return the found/created element
+     */
     public JDFStatusPool getCreateStatusPool()
     {
         setStatus(JDFElement.EnumNodeStatus.Pool);
         return (JDFStatusPool) getCreateElement_KElement(ElementName.STATUSPOOL, null, 0);
     }
 
+    /**
+     * append a StatusPool element, return existing element if one already exist
+     * @return the StatusPool element
+     */
     public JDFStatusPool appendStatusPool()
     {
         setStatus(JDFElement.EnumNodeStatus.Pool);
         return (JDFStatusPool) appendElementN(ElementName.STATUSPOOL, 1, null);
     }
 
+    /**
+     * get the first StatusPool element
+     * @return the element
+     */
     public JDFStatusPool getStatusPool()
     {
         return (JDFStatusPool) getElement(ElementName.STATUSPOOL, null, 0);
@@ -5150,30 +5557,25 @@ public class JDFNode extends JDFElement
     /**
      * get a Child JDFNode with a given ID attribute
      *
-     * @param String id the id of the child
-     * @param boolean bDirect: if true, only direct children, else recurse down the tree
+     * @param id      the id of the child
+     * @param bDirect if true, only direct children, else recurse down the tree
      *
-     * @return JDFNode: the parent JDF, null if this is the root JDF
+     * @return JDFNode - the parent JDF, null if this is the root JDF
      * 
-     * default: getChildJDFNode(id, false)
+     * @default getChildJDFNode(id, false)
      */
     public JDFNode getChildJDFNode(String id, boolean bDirect)
     {
-        if(getID().equals(id))
-        {
-            return this;
-        }
-
         final JDFAttributeMap m = new JDFAttributeMap(AttributeName.ID, id);
         return (JDFNode)getTreeElement(ElementName.JDF,null, m, bDirect, true);
     }
 
     /**
-     * Check existance of attribute Version
-     * @param bool bInherit recurse through ancestors and Ancestor elements of the AncestorPool when searching
-     * @return bool true if attribute Version exists
+     * Check existence of attribute "version"
+     * @param bInherit recurse through ancestors and Ancestor elements of the AncestorPool when searching
+     * @return true if attribute Version exists
      * 
-     * default: hasVersion(false)
+     * @default hasVersion(false)
      */
     public boolean hasVersion(boolean bInherit)
     {
@@ -5186,9 +5588,9 @@ public class JDFNode extends JDFElement
 
 
     /**
-     * set attribute Version
-     *@param KString value: the value to set the attribute to
-     *@deprecated use JDFElement.setVersion(EnumVersion.getEnum(value))
+     * set attribute "version"
+     * @param value the value to set the attribute to
+     * @deprecated use JDFElement.setVersion(EnumVersion.getEnum(value))
      */
     public void setVersion(String value)
     {
@@ -5197,11 +5599,11 @@ public class JDFNode extends JDFElement
 
 
     /**
-     * get EnumVersion attribute Version
-     * @param boolean bInherit - recurse through ancestors when searching
+     * get enum attribute "version"
+     * @param bInherit recurse through ancestors when searching
      * @return EnumVersion - attribute value
      * 
-     * default - getVersion(false)
+     * @default getVersion(false)
      * 
      * this method replaces the C++ methods GetVersion and GetEnumVersion
      */
@@ -5221,10 +5623,10 @@ public class JDFNode extends JDFElement
     }
 
     /** 
-     * clone the target resource of this and generate a ResourceAudit in the parent node's AuditPool
-     * both resourcelinks of the ResourceAudit are filled in<br>
-     * the resource selected by this may now be modified. <br>
-     * the cloned copy has a new Id in the format: (thisID)_old_nnn 
+     * clone the target resource of this and generate a ResourceAudit in the parent node's AuditPool.
+     * Both resourcelinks of the ResourceAudit are filled in.<br>
+     * The resource selected by this may now be modified. <br>
+     * The cloned copy has a new Id in the format: (thisID)_old_nnn 
      *
      * @return the ResourceAudit that was created
      */
@@ -5277,7 +5679,7 @@ public class JDFNode extends JDFElement
 
     /**
      * get the Types as a vector of strings
-     * @return VString The vector of Strings in Types, null if this may not contain multiple types
+     * @return vector of Strings in Types, null if this may not contain multiple types
      */
     public VString getTypes()
     {
@@ -5289,9 +5691,10 @@ public class JDFNode extends JDFElement
         final String types = getAttribute(AttributeName.TYPES, null, null);
         return types==null ? null : new VString(types,null);
     }
+    
     /**
      * get the Types as a vector of EnumType
-     * @return Vector The vector of enumerated types, null if extensions exist that hinder us from generating a complete vector
+     * @return vector of enumerated types, null if extensions exist that hinder us from generating a complete vector<br>
      * e.g. extension types or gray box names
      */
     public Vector getEnumTypes()
@@ -5318,12 +5721,11 @@ public class JDFNode extends JDFElement
 
     /**
      * Gets the vector of the string Type/Types attribute values of the given JDFNode by 
-     * recursively traversing the tree
+     * recursively traversing the tree<br>
      * returns exactly one element="Product" if the tested node's type is product
      *
-     * @param JDFNode jdfRoot - the ProcessGroup JDFNode
      * @return VString - vector of Type/Types attributes of the tested ProcessGroup JDFNode
-     * @throws JDFException if the testen JDFNode has illegal combination of attribute 'Types' and child JDFNodes
+     * @throws JDFException if the tested JDFNode has an illegal combination of attribute 'Types' and child JDFNodes
      */
     public VString getAllTypes()
     {
@@ -5380,6 +5782,10 @@ public class JDFNode extends JDFElement
      * Attribute Types must be defined in Combined Nodes (Type="Combined")
      * and may be defined in ProcessGroup Nodes (Type="ProcessGroup") 
      */
+    /**
+     * set node Types , also set Type to Combined
+     * @param vCombiNodes vector of types
+     */
     public void setTypes(VString vCombiNodes)
     {
         EnumType type = EnumType.getEnum(getType());
@@ -5394,13 +5800,13 @@ public class JDFNode extends JDFElement
     }
 
     /**
-     * get the links that are selected by a given CombinedProcessIndex
+     * get the links that are selected by a given CombinedProcessIndex<br>
      * all links with no CombinedProcessIndex are included in the list
      * 
-     * @param combinedProcessIndex the process type for which to get the links
-     * @param nType the nTh occurence of the Type field, -1 if all valid positions are ok
+     * @param combinedProcessIndex the nTh occurence of the CombinedProcessIndex 
+     * field, -1 if all valid positions are ok
      * 
-     * @default getLinksForType(type, -1)
+     * @default getLinksForCombinedProcessIndex(-1)
      */
     public VElement getLinksForCombinedProcessIndex(int combinedProcessIndex)
     {
@@ -5409,7 +5815,7 @@ public class JDFNode extends JDFElement
             return null;
 
 
-        VElement vLinks=getLinks(null,null,null);
+        VElement vLinks=getResourceLinks(null, null, null);
         if(vLinks==null)
             return null;
 
@@ -5427,7 +5833,7 @@ public class JDFNode extends JDFElement
         return vLinks;
     }
     /**
-     * get the links that are selected by a given CombinedProcessIndex
+     * get the links that are selected by a given CombinedProcessIndex<br>
      * all links with no CombinedProcessIndex are included in the list
      * 
      * @param type the process type for which to get the links
@@ -5443,7 +5849,7 @@ public class JDFNode extends JDFElement
         // not combined, simpy get links from entire node 
         if(typ.equals(type))
         {
-            return getLinks(null,null,null);
+            return getResourceLinks(null, null, null);
         }
 
         // nasty - mismatching type attribute
@@ -5457,7 +5863,7 @@ public class JDFNode extends JDFElement
         final int typSize=vTypes.size();
 
         // no links here at all
-        VElement vLinks=getLinks(null,null,null);
+        VElement vLinks=getResourceLinks(null, null, null);
         if(vLinks==null)
             return null;
 
@@ -5543,7 +5949,7 @@ public class JDFNode extends JDFElement
 
         if(beforePos<=typeSize) // insert somehwere within the list
         {
-            VElement vResLinks=getLinks(null,new JDFAttributeMap(AttributeName.COMBINEDPROCESSINDEX,""),null);
+            VElement vResLinks=getResourceLinks(null, new JDFAttributeMap(AttributeName.COMBINEDPROCESSINDEX,""), null);
             if(vResLinks!=null)
             {
                 for(int i=0;i<vResLinks.size();i++)
@@ -5570,6 +5976,12 @@ public class JDFNode extends JDFElement
     }
 
 
+    /**
+     * Get an ordered list of the ids of the parents of this node<br>
+     * the last element in the pool is the direct parent, the second to last is the grandparent etc. 
+     * The first element is the original root element.
+     * @return the list of ids in the order parent, grandparent...
+     */
     public VString getParentIds()
     {
         final VString vs = new VString();
@@ -5588,561 +6000,34 @@ public class JDFNode extends JDFElement
 
     /**
      * merge a previously spawned JDF into a node that is a child of, or this root 
-     * @param JDFNode toMerge the previosly spawned jdf node
-     * @param String urlMerge the url of the ???
-     * @param EnumCleanUpMerge policy how to clean up the spawn and merge audits after merging
-     * @param EnumAmountMerge policy how to clean up the Resource amounts after merging
-     * @return JDFNode the merged node in the new document
-     * note that the return value used to be boolean. The boolean value is now replaced by exceptions. This corresponds to <true> always.
+     * @param toMerge      the previosly spawned jdf node
+     * @param urlMerge     the url of the ???
+     * @param cleanPolicy  how to clean up the spawn and merge audits after merging
+     * @param amountPolicy how to clean up the Resource amounts after merging
+     * @return JDFNode - the merged node in the new document<br>
+     * note that the return value used to be boolean. The boolean value is now replaced by exceptions. This always corresponds to <code>true</code>.
      *
      * @throws JDFException if toMerge has already been merged 
      * @throws JDFException if toMerge was not spawned from this
      * @throws JDFException if toMerge has no AncestorPool
      * 
-     * default:  mergeJDF(toMerge, null, 
+     * @default mergeJDF(toMerge, null, 
      *              JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None)
+     *              @deprecated use JDFMerge class
      */
-
-
     public JDFNode mergeJDF(JDFNode toMerge, String urlMerge, EnumCleanUpMerge cleanPolicy, JDFResource.EnumAmountMerge amountPolicy)
     {
-        if (!toMerge.hasParent(this))
-        {
-            throw new JDFException("JDFNode.MergeJDF no matching parent found");
-        }
-
-        final String idm      = toMerge.getID();
-        JDFNode overWriteNode  = (JDFNode) getTarget(idm, AttributeName.ID);
-
-        if (overWriteNode == null)
-        {
-            throw new JDFException("JDFNode.MergeJDF no Node with ID: " + idm);
-        }
-
-        //tbd multiple ancestor handling
-        final JDFAncestorPool ancestorPool = toMerge.getAncestorPool();
-        if (ancestorPool==null)
-        {
-            throw new JDFException("JDFNode.MergeJDF no Ancestor Pool in Node: " + idm);
-        }
-        final int numAncestors             = ancestorPool.numChildElements(ElementName.ANCESTOR, null);
-
-        if (numAncestors <= 0)
-        {
-            throw new JDFException("JDFNode.MergeJDF no Ancestors in AncestorPool found. Node: " + idm);
-        }
-
-        String spawnID              = JDFConstants.EMPTYSTRING;
-        boolean bSnafu              = true;
-        JDFSpawned spawnAudit       = null;
-        final VString previousMergeIDs    = new VString(); // list of merges in the ancestors
-        int iFound                  = 0;
-
-        for (int whereToLook = 1; whereToLook <= numAncestors; whereToLook++)
-        {
-            // the last ancestor has the id!
-            final String idParent = ancestorPool.getAncestor(numAncestors - whereToLook).getNodeID();
-            final KElement k = getTarget(idParent, AttributeName.ID);
-            if (k == null)
-            {
-                break;
-            }
-
-            JDFNode op = (JDFNode)k;
-            final JDFAuditPool ap = op.getCreateAuditPool();
-
-            // find all ids of previous merge operations for reverse merge cleanup
-            final VElement vMergeAudit = ap.getAudits(EnumAuditType.Merged, null);
-            for (int nMerged = 0; nMerged < vMergeAudit.size(); nMerged++)
-            {
-                final JDFMerged merged = (JDFMerged)vMergeAudit.elementAt(nMerged);
-                previousMergeIDs.appendUnique(merged.getMergeID());
-            }
-
-            if (iFound != 0) // we've already found a spawned Audit, just looping for previous merges
-            {
-                continue;
-            }
-
-            // get appropriate spawned element
-            final VElement vSpawnAudit = ap.getChildrenByTagName(ElementName.SPAWNED, null, new JDFAttributeMap(AttributeName.JREF, idm), 
-                    true, true, 0);
-            spawnID = toMerge.getSpawnID();
-
-            for (int isp = vSpawnAudit.size() - 1; isp >= 0; isp--)
-            { // loop backwards because the latest is assumed correct
-                JDFSpawned testSpawn = (JDFSpawned)vSpawnAudit.elementAt(isp);
-                if (testSpawn.getNewSpawnID().equals(spawnID))
-                {
-                    // tbd check for matching merged...
-                    spawnAudit = testSpawn;
-                    final JDFMerged matchingMerged = 
-                        (JDFMerged) ap.getChildWithAttribute(ElementName.MERGED, AttributeName.MERGEID, null, spawnID, 0, true);
-
-                    if (matchingMerged != null)
-                    {
-                        throw new JDFException("JDFNode.MergeJDF Spawn Audit already merged, SpawnID: " + spawnID, JDFSpawn.exAlreadyMerged);
-                    }
-                    break;
-                }
-            }
-            // found an audit that fits, 
-            if (spawnAudit != null)
-            {
-                iFound = whereToLook;
-            }
-        }
-
-        // if the spawn Audit is not found at the first attempt, something went badly wrong
-        // we will insert a error audit later but continue limping along!
-        bSnafu = iFound != 1;
-
-        if (spawnAudit == null)
-        {
-            throw new JDFException("JDFNode.MergeJDF no matching Spawn Audit, SpawnID: " + spawnID);
-        }
-
-        // get parts from audit
-        final VJDFAttributeMap parts = spawnAudit.getPartMapVector();
-
-        // merge copied readOnly resources
-        final VString vsRO = spawnAudit.getrRefsROCopied();
-        final VString vsRW = spawnAudit.getrRefsRWCopied();
-
-        String preSpawn = mergeCheckPrespawn(toMerge, spawnAudit, vsRO, vsRW);
-
-        overWriteNode.mergeLocalLinks(toMerge, parts);
-
-        overWriteNode.cleanROResources(toMerge, previousMergeIDs, vsRO, spawnID);
-        overWriteNode.mergeRWResources(toMerge, previousMergeIDs, vsRW, spawnID, amountPolicy);
-
-        overWriteNode.mergeLocalNodes(toMerge, previousMergeIDs, spawnID, amountPolicy, parts);
-        JDFMerged mergeAudit=overWriteNode.mergeMainPools(toMerge, parts, vsRW, spawnID, preSpawn, urlMerge, bSnafu);
-        // an empty spawnID should never happen here, but check just in case
-        // since an empty spawnID in CleanUpMerge removes all Spawned audits
-        if (spawnID != null)
-        {
-            JDFNode overWriteParent=mergeAudit.getParentJDF(); // since all links get screwed up, let's relink here
-            overWriteParent.cleanUpMerge(cleanPolicy, spawnID, false);
-        }
-
-        // now burn it in!
-        overWriteNode=(JDFNode)overWriteNode.replaceElement(toMerge);
-        overWriteNode.eraseEmptyNodes(true);
-
-        return overWriteNode;
+        return new JDFMerge(this).mergeJDF(toMerge, urlMerge, cleanPolicy, amountPolicy);
     }
 
 
     ///////////////////////////////////////////////////////////////////
 
-    private String mergeCheckPrespawn(JDFNode toMerge, JDFSpawned spawnAudit, final VString vsRO, final VString vsRW)
-    {
-        String preSpawn = spawnAudit.getSpawnID();
-        // check all recursive previous spawns
-        while (preSpawn!=null && !preSpawn.equals(JDFConstants.EMPTYSTRING))
-        {
-            final JDFMerged preMerge = (JDFMerged)getTarget(preSpawn, AttributeName.MERGEID);
-            if (preMerge != null)
-            {
-                final JDFSpawned preSpawnAudit = (JDFSpawned)getTarget(preSpawn, AttributeName.NEWSPAWNID);
-                vsRO.appendUnique(preSpawnAudit.getrRefsROCopied());
-                vsRW.appendUnique(preSpawnAudit.getrRefsRWCopied());
-                preSpawn = preSpawnAudit.getSpawnID();
-            }
-            else
-            {
-                toMerge.setSpawnID(preSpawn);
-                break;                
-            }
-        }
-        return preSpawn;
-    }
-
-    /////////////////////////////////////////////////////////////////////////////////////
-
-    private void mergeLocalNodes(JDFNode toMerge, final VString previousMergeIDs, String spawnID, JDFResource.EnumAmountMerge amountPolicy, final VJDFAttributeMap parts)
-    {
-        // merge local (internal) partitioned resources
-        final Vector vn = getvJDFNode(null, null, false);
-        for (int nod = 0; nod < vn.size(); nod++)
-        {
-            final JDFNode overwriteLocalNode = (JDFNode)vn.elementAt(nod);
-
-            final JDFNode toMergeLocalNode = (JDFNode)toMerge.getTarget(overwriteLocalNode.getID(), AttributeName.ID);
-            final JDFResourcePool poolOverWrite = overwriteLocalNode.getResourcePool();
-            final JDFResourcePool poolToMerge = toMergeLocalNode.getResourcePool();
-
-            if (poolOverWrite != null)
-            {
-                final VElement resOverWrite = 
-                    poolOverWrite.getPoolChildren(null, null, "");
-
-                final int size = resOverWrite.size();
-                for (int i = 0; i < size; i++)
-                {
-                    final JDFResource res1 = (JDFResource)resOverWrite.elementAt(i);
-                    mergeLocalResource(previousMergeIDs, spawnID, amountPolicy, poolToMerge, res1);
-                }
-            }
-
-            //retain all other elements of the original (non spawned) JDF Node if the spawn is partitioned¬
-            final JDFAncestorPool ancestorPool = toMerge.getAncestorPool();
-            if (ancestorPool!=null && ancestorPool.isPartitioned())
-            {
-                final VElement localChildren = overwriteLocalNode.getChildElementVector(null, null, null, true, 0, false);
-
-                final int siz = localChildren.size();
-                for (int i = 0; i < siz; i++)
-                {
-                    final KElement e = (KElement) localChildren.elementAt(i);
-                    //          skip all pools
-                    final String nodeName = e.getLocalName();
-                    if (nodeName.endsWith("Pool"))
-                    {
-                        if (nodeName.equals(ElementName.RESOURCELINKPOOL))
-                        {
-                            continue;
-                        }
-                        if (nodeName.equals(ElementName.RESOURCEPOOL))
-                        {
-                            continue;
-                        }
-                        if (nodeName.equals(ElementName.AUDITPOOL))
-                        {
-                            overwriteLocalNode.mergeAuditPool(toMergeLocalNode);
-                            continue;
-                        }
-                        if (nodeName.equals(ElementName.STATUSPOOL))
-                        {
-                            overwriteLocalNode.mergeStatusPool(toMergeLocalNode,parts);
-                            continue;
-                        }
-                        if (nodeName.equals(ElementName.ANCESTORPOOL))
-                        {
-                            continue;
-                        }
-                    }
-
-                    // 131204 RP also skip all sub-JDF nodes!!!
-                    if(nodeName.equals(ElementName.JDF))
-                    {
-                        continue;
-                    }
-                    //050708 RP special handling for comments
-                    if(nodeName==ElementName.COMMENT){
-                        overwriteLocalNode.mergeComments(toMergeLocalNode);
-                        continue;
-                    }
-
-                    toMergeLocalNode.removeChildren(nodeName, null, null);
-                    toMergeLocalNode.moveElement(e, null);
-
-                    // repeat in case of multiple identical elements (e.g. comments)
-                    for (int j = i + 1; j < siz; j++)
-                    {
-                        final JDFElement localChild = (JDFElement) localChildren.elementAt(j);
-                        if ( localChild != null )
-                        {
-                            if ( localChild.getNodeName().equals(nodeName) )
-                            {
-                                toMergeLocalNode.moveElement(localChild, null);
-                                localChildren.set(j, null);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-
-
-    private void mergeLocalResource(final VString previousMergeIDs, String spawnID, JDFResource.EnumAmountMerge amountPolicy, final JDFResourcePool poolToMerge, JDFResource res1)
-    {
-        final String resID = res1.getID();
-        final JDFResource res2 = poolToMerge.getResourceByID(resID);
-
-        if (res2 != null)
-        {
-            res2.mergeSpawnIDs(res1, previousMergeIDs);
-            res1.mergePartition(res2, spawnID, amountPolicy, true); // esp. deletes res2 from toMerge node
-        }
-        // copy resource from orig to spawned node
-        poolToMerge.copyElement(res1, null);
-        res1 = poolToMerge.getResourceByID(resID);
-        final VElement resLeafsSpawned = res1.getNodesWithSpawnID(spawnID);
-        for (int leaf = 0; leaf < resLeafsSpawned.size(); leaf++)
-        {
-            final JDFResource leafRes = (JDFResource)resLeafsSpawned.elementAt(leaf);
-            leafRes.removeFromSpawnIDs(spawnID);
-            final VString spawnIDs = leafRes.getSpawnIDs(false);
-            spawnIDs.removeAll(previousMergeIDs);
-            if(spawnIDs.isEmpty())
-            {
-                leafRes.removeAttribute(AttributeName.SPAWNIDS);
-                leafRes.removeAttribute(AttributeName.SPAWNSTATUS);
-                leafRes.removeAttribute(AttributeName.LOCKED);
-
-            }
-            else
-            {
-                leafRes.setSpawnIDs(spawnIDs);
-            }
-        }
-    }
-
-/////////////////////////////////////////////////////////////////////
-
-    private JDFMerged mergeMainPools(JDFNode toMerge, final VJDFAttributeMap parts, final VString vsRW, String spawnID, String preSpawn, String urlMerge, boolean bSnafu)
-    {
-        // add the merged audit - maintain sychronicity of spawned and merged
-        JDFNode overWriteParent=null;
-        JDFAuditPool ap=toMerge.getAuditPool();
-        JDFSpawned sa=null;
-
-        if(ap!=null)
-        {
-            sa=(JDFSpawned) ap.getChildWithAttribute(ElementName.SPAWNED,AttributeName.NEWSPAWNID,null,spawnID,0,true);
-            overWriteParent=this;
-        }
-
-        if(sa==null)
-        {
-            overWriteParent=getParentJDF();
-            if(overWriteParent==null)
-            {
-                throw new JDFException("mergeMainPools - corrupt audit structure");
-            }
-
-            ap=overWriteParent.getAuditPool();
-            if(ap!=null)
-                sa=(JDFSpawned) ap.getChildWithAttribute(ElementName.SPAWNED,AttributeName.NEWSPAWNID,null,spawnID,0,true);
-        }
-
-        if(sa==null)
-        {
-            //????
-            throw new JDFException("mergeMainPools - corrupt audit structure");
-        }
-
-//      JDFNode overWriteParent=ap.getParentJDF();
-        final JDFMerged mergeAudit = (JDFMerged) ap.addMerged(toMerge,vsRW, null, parts);
-
-        if (urlMerge!=null && !urlMerge.equals(JDFConstants.EMPTYSTRING))
-        {
-            String url = urlMerge;
-            // 300802 RP added check for preexisting file prefix
-            if (url.indexOf("://") == -1)
-            {
-                url = "File://" + url;
-            }
-            mergeAudit.setURL(url);
-        }
-        mergeAudit.setMergeID(spawnID);
-
-        // if something went wrong, also add a notification
-        if (bSnafu)
-        {
-            final JDFNotification notification = ap.addNotification(EnumClass.Error, "JDFNode.MergeJDF ", parts);
-            notification.setType("Error");
-            notification.appendComment().appendText("The Ancestor list was incorrectly ordered for merging in the spawned JDF");
-        }
-
-        // cleanup
-        toMerge.removeChild(ElementName.ANCESTORPOOL, null, 0);
-        if (parts!=null && parts.size() >= 1){
-            mergeStatusPool(toMerge,parts);
-            // handle ancestor pools only in partitioned spawns
-            final JDFAncestorPool ancPool=overWriteParent.getAncestorPool();
-            if(ancPool!=null){
-                toMerge.copyElement(ancPool,null);
-            }
-        }
-
-        final String jid = overWriteParent.getJobID(true);
-        if (toMerge.getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING).equals(jid))
-        {
-            toMerge.removeAttribute(AttributeName.JOBID, null);
-        }
-        if(preSpawn==null || preSpawn.equals(JDFConstants.EMPTYSTRING))
-        {
-            toMerge.removeAttribute(AttributeName.SPAWNID, null);
-        }
-        else
-        {
-            toMerge.setSpawnID(preSpawn);
-        }
-        return mergeAudit;
-    }
-
     /**
-     * merge the RW resources of the main JDF
-     * @param toMerge the source node of the status pool to merge into this
-     * @param previousMergeIDs SpawnIDs of previously merged 
-     * @param vsRW Resource IDs of non-local spawned resources 
-     * @param spawnID the original spawnID 
-     * @param amountPolicy  
+     * check whether a node with the same ID as one in p's ancestorpool exists in this document
+     * @param p the node to check
+     * @return true if a node with the same ID as one in p's ancestorpool exists
      */
-    private void mergeRWResources(JDFNode toMerge, final VString previousMergeIDs, final VString vsRW, String spawnID, JDFResource.EnumAmountMerge amountPolicy)
-    {
-        // merge rw resources
-        for (int i = 0; i < vsRW.size(); i++)
-        {
-            JDFResource oldRes = getLinkRoot((String)vsRW.elementAt(i));
-            if(oldRes == null) // also check in tree below
-            {
-                oldRes = getTargetResource((String)vsRW.elementAt(i));
-                if(oldRes == null) // also check in entire tree below root
-                {
-                    oldRes = getTargetResource((String)vsRW.elementAt(i));
-                }
-            }
-            if(oldRes == null)
-            {
-                continue;
-            }
-
-
-            final JDFResource newRes = toMerge.getTargetResource((String)vsRW.elementAt(i));
-
-            // merge all potential new spawnIds from this to toMerge before merging them
-            oldRes.mergeSpawnIDs(newRes, previousMergeIDs);
-            // do both, since some leaves may be RO
-            newRes.mergeSpawnIDs(oldRes, previousMergeIDs);
-
-            try
-            {
-                // merge the resource from the spawned node into the lower level resourcepool
-                oldRes.mergePartition(newRes, spawnID, amountPolicy, false);
-            }
-            catch (Exception e)
-            {
-                throw new JDFException("JDFNode:mergeJDF, error in mergePartition: ID="+oldRes.getID()+" SpawnID="+spawnID);
-            }
-
-            final String oldID        = oldRes.getID();
-            final JDFResource myRes   = (JDFResource)getTarget(oldID, AttributeName.ID);
-            if (myRes == null)
-            {
-                throw new JDFException("JDFNode.mergeJDF: Merged Resource not found! Cant remove SpawnIDs");
-            }
-            final VElement oldResLeafsSpawned = myRes.getNodesWithSpawnID(spawnID);
-            for (int leaf = 0; leaf < oldResLeafsSpawned.size(); leaf++)
-            {
-                final JDFResource leafRes = (JDFResource)oldResLeafsSpawned.elementAt(leaf);
-                leafRes.removeFromSpawnIDs(spawnID);
-                final KElement leafElem = leafRes;
-                if (!leafElem.hasAttribute(AttributeName.SPAWNIDS, null, false))
-                {
-                    leafRes.removeAttribute(AttributeName.SPAWNSTATUS, null);
-                    leafRes.removeAttribute(AttributeName.LOCKED, null);
-                }
-            }
-        }
-    }
-
-    /**
-     * merge the RO resources of the main JDF
-     * @param toMerge the source node of the status pool to merge into this
-     * @param previousMergeIDs SpawnIDs of previously merged 
-     * @param vsRO Resource IDs of non-local spawned resources 
-     * @param spawnID the original spawnID 
-     */
-    private void cleanROResources(JDFNode toMerge, final VString previousMergeIDs, final VString vsRO, String spawnID)
-    {
-        for (int i = 0; i < vsRO.size(); i++)
-        {
-            final JDFResource newRes = toMerge.getTargetResource((String)vsRO.elementAt(i));
-            final JDFResource oldRes = (JDFResource) getTarget((String)vsRO.elementAt(i), AttributeName.ID);
-
-            // merge all potential new spawnIds from toMerge to this
-            oldRes.mergeSpawnIDs(newRes, previousMergeIDs);
-            final VElement oldResLeafsSpawned = oldRes.getNodesWithSpawnID(spawnID);
-            for (int leaf = 0; leaf < oldResLeafsSpawned.size(); leaf++)
-            {
-                final JDFResource leafRes = (JDFResource)oldResLeafsSpawned.elementAt(leaf);
-                //  handle multiple spawns (reference count of spawned audits!)
-                leafRes.removeFromSpawnIDs(spawnID);
-
-                if (!leafRes.hasAttribute(AttributeName.SPAWNIDS, null, false))
-                {
-                    leafRes.removeAttribute(AttributeName.SPAWNSTATUS);
-                }
-
-            }
-            if(!newRes.getParentJDF().getID().equals(oldRes.getParentJDF().getID()))
-            {
-                // this has been copied from lower down up and MUST be deleted...
-                newRes.deleteNode();
-            }
-            else
-            {
-                // don't use a simple for because deleting a parent may invalidate later resources!
-                VElement newResLeafsSpawned = newRes.getNodesWithSpawnID(spawnID);
-                // just in case: if no SpawnID exists assume the whole thing 
-                if (newResLeafsSpawned.size() == 0)
-                {
-                    newResLeafsSpawned.add(newRes);
-                }
-                while (newResLeafsSpawned.size() > 0)
-                {
-                    // use the last because it is potentially the root...
-                    final JDFResource leafRes = (JDFResource)newResLeafsSpawned.elementAt(newResLeafsSpawned.size() - 1);
-                    final boolean bZappRoot = leafRes.equals(newRes);
-                    leafRes.deleteNode();
-                    // we killed the root, nothing can be left...
-                    if (bZappRoot)
-                    {
-                        break;
-                    }
-                    // regenerate the list
-                    newResLeafsSpawned = newRes.getNodesWithSpawnID(spawnID);
-                }
-            }
-        }
-    }
-
-    private void mergeLocalLinks(JDFNode toMerge, final VJDFAttributeMap parts)
-    {
-        int numParts = parts==null ? 0 : parts.size();
-        final Vector vn = getvJDFNode(null, null, false);
-        int nod = 0;
-        // merge local (internal) partitioned resource links
-        for (nod = 0; nod < vn.size(); nod++)
-        {
-            final JDFNode overwriteLocalNode  = (JDFNode)vn.elementAt(nod);
-            final JDFNode toMergeLocalNode    = toMerge.getChildJDFNode(overwriteLocalNode.getID(), false);
-            overwriteLocalNode.mergeResourceLinkPool(toMergeLocalNode, parts);
-
-            final EnumVersion version = toMergeLocalNode.getVersion(true);
-            if ((version!=null)&&(version.getValue() >= EnumVersion.Version_1_3.getValue()))
-            {
-                final JDFNode.EnumNodeStatus stat=toMergeLocalNode.getStatus();
-                if (stat!=null && !stat.equals(JDFElement.EnumNodeStatus.Part) &&
-                        !stat.equals(JDFElement.EnumNodeStatus.Pool) &&
-                        numParts > 0)
-                {
-                    toMergeLocalNode.setPartStatus(parts,stat);
-                }
-            }
-        }
-    }
-
-    //////////////////////////////////////////////////////////////////////
-
-    private void mergeComments(JDFNode toMerge){
-        VElement v=getChildElementVector(ElementName.COMMENT,null,null,false,0,false);
-        VElement vToMerge=toMerge.getChildElementVector(ElementName.COMMENT,null,null,false,0,false);
-        final int siz=vToMerge.size(); // size prior to appending
-        vToMerge.appendUnique(v);
-        for(int i=siz;i<vToMerge.size();i++){
-            toMerge.moveElement((KElement)vToMerge.elementAt(i),null);
-        }
-    }
-
-    //    ////////////////////////////////////////////////////////////////////
-
     public boolean hasParent(JDFNode p)
     {
         final VString vpa = p.getAncestorIDs();
@@ -6170,6 +6055,10 @@ public class JDFNode extends JDFElement
 
     //    ////////////////////////////////////////////////////////////////////
 
+    /**
+     * loop over all IDs and find the min ID that will create unique new IDs
+     * @return the new minimum ID that will generate unique IDs
+     */
     public int getMinID()
     {
         final VElement v = getChildrenByTagName(null, null,null, false, true, 0);
@@ -6247,6 +6136,11 @@ public class JDFNode extends JDFElement
     }
 
     //    ////////////////////////////////////////////////////////////////////
+    /**
+     * gets the maximum job part id; note that this assumes integer job part ids return
+     * @param idPrefix
+     * @return int
+     */
     public int getMaxJobPartId(String idPrefix)
     {
         final Vector v = getvJDFNode(null, null, false);
@@ -6287,6 +6181,13 @@ public class JDFNode extends JDFElement
 
     ///////////////////////////////////////////////////////////////////////////////////////////   
 
+    /**
+     * add a JDFNode
+     * remove @Types to avoid inconsistent JDF
+     * 
+     * @param typ type of JDFNode to add
+     * @return JDFNodethe added JDFNode
+     */
     public JDFNode addJDFNode(String typ)
     {
         final EnumType t = EnumType.getEnum(getType());
@@ -6301,11 +6202,17 @@ public class JDFNode extends JDFElement
         {
             p.setType(typ, false);
         }
+        removeAttribute(AttributeName.TYPES); // otherwise we have an illegal combination
         return p;
     }
 
     //    ////////////////////////////////////////////////////////////////////
 
+    /**
+     * add a JDFNode
+     * @param typ enum type of JDFNode to add
+     * @return the added JDFNode
+     */
     public JDFNode addJDFNode(EnumType typ)
     {
         final JDFNode p = addJDFNode((String)null);
@@ -6327,10 +6234,11 @@ public class JDFNode extends JDFElement
     //    ////////////////////////////////////////////////////////////////////
 
     /**
-     * @param tasks
-     * @return
+     * Add a process group node
+     * @param tasks types of the processgroup
+     * @return the added JDFNode
      * 
-     * default: addProcessGroup(null)
+     * @default addProcessGroup(null)
      */
     public JDFNode addProcessGroup(VString tasks)
     {
@@ -6343,6 +6251,11 @@ public class JDFNode extends JDFElement
 
     //    /////////////////////////////////////////////////////////////
 
+    /**
+     * add a combined node
+     * @param tasks types of the node to add
+     * @return the added node
+     */
     public JDFNode addCombined(VString tasks)
     {
         final JDFNode cNode = addJDFNode(EnumType.Combined);
@@ -6382,6 +6295,10 @@ public class JDFNode extends JDFElement
     }
 
     //    ////////////////////////////////////////////////////////////////////
+    /**
+     * get a vector with all nodes
+     * @return vector with all nodes
+     */
     public Vector getCompleted()
     {
         final Vector v = getvJDFNode(null,null, false);
@@ -6448,17 +6365,14 @@ public class JDFNode extends JDFElement
     /**
      * searches for the first attribute occurence in the ancestor elements subelements
      *
-     * @param String attrib: the attribute name
-     * @param String nameSpaceURI: the XML-namespace
-     * @param String def: the default if it does not exist
+     * @param attrib       the attribute name
+     * @param nameSpaceURI the XML-namespace
+     * @param def          default value, if no matching attribute is found
      * @since 180502 
-     * @return String: value of attribute found, empty string if not available
+     * @return String - value of attribute found, empty string if not available
      */
-    public String getAncestorElementAttribute(
-            String element,
-            String attrib,
-            String nameSpaceURI,
-            String def)
+    public String getAncestorElementAttribute(String element, String attrib,
+            String nameSpaceURI, String def)
     {
         JDFNode n = this;
         while (n != null)
@@ -6467,34 +6381,35 @@ public class JDFNode extends JDFElement
 
             if ((e != null) && (e.hasAttribute(attrib, nameSpaceURI, false)))
             {
-                return e.getAttribute(attrib, nameSpaceURI, "");
+                return e.getAttribute(attrib, nameSpaceURI, null);
             }
 
             n = getParentJDF();
         }
 
-        // not in the inherited nodes, check the root node's AncestorPool
-        return getJDFRoot().getAncestorPool().getAncestorElementAttribute(
-                element,
-                attrib,
-                nameSpaceURI,
-                def);
+        JDFNode root = getJDFRoot();
+        if (root == null)
+            return def;
+            JDFAncestorPool ancestorPool = root.getAncestorPool();
+        if (ancestorPool == null)
+            return def;
+        return ancestorPool.getAncestorElementAttribute(element, attrib,nameSpaceURI,def);
+
     }
 
     /**
-     * true if a non default attribute occurence in the parent nodes 
-     * and then the ancestor elements subelements of the root ancestorpool exists
+     * true if a non default attribute occurs in the parent nodes 
+     * and the ancestor elements subelements of the root ancestorpool exists
      *
-     * @param String attrib: the attribute name
-     * @param String nameSpaceURI: the XML-namespace
-     * @param String def: the default if it does not exist
+     * @param element       
+     * @param attrib        the attribute name
+     * @param nameSpaceURI  the XML-namespace
      * @since 180502 
-     * @return bool: true if the attribute exists
+     * @return true if the attribute exists
      */
     public boolean hasAncestorElementAttribute(String element, String attrib, String nameSpaceURI)
     {
-        return 
-        getAncestorElementAttribute(element, attrib, nameSpaceURI, JDFConstants.QUOTE).equals(JDFConstants.QUOTE);
+        return getAncestorElementAttribute(element, attrib, nameSpaceURI, null)!=null;
     }
 
 
@@ -6522,18 +6437,18 @@ public class JDFNode extends JDFElement
     /**
      * get a vector of ResourceLink elements that exist but are unknown by this element
      *
-     * @param VString vInNameSpace list of namespaces where unknown Links are searched for. 
+     * @param vInNameSpace list of namespaces where unknown Links are searched for<br> 
      *                             if null, all namespaces are searched
      * @param nMax maximum size of the returned vector
      * @return  VElement vector of unknown elements
-     * @since 060730 returntype changed to VElement - but since the routine was utterly broken, we should be ok
+     * @since 060730 return type changed to VElement - but since the routine was utterly broken, we should be ok
      */
     public VElement getUnknownLinkVector(VString vInNameSpace, int nMax)
     {
         VElement vUnknown = null;
 
         final VString names   = linkNames();
-        final VElement ve    = getLinks(null,null,null);
+        final VElement ve    = getResourceLinks(null, null, null);
         final boolean bAllNS = vInNameSpace==null || vInNameSpace.isEmpty();
 
         if(vInNameSpace!=null)
@@ -6573,265 +6488,18 @@ public class JDFNode extends JDFElement
     }
 
     /**
-     * clean up the spawn and merge audits in this Node
-     * @param EnumCleanUpMerge policy how to clean up the spawn and merge audits after merging
-     * 
-     * @param String spawnID the SpawnID of the spawn and MergeID of the merge to clean up
-     *        if not specified all spawns will be cleaned up
-     * 
-     * @param boolean bRecurse if true also recurse into all child JDF nodes; default=false
-     * 
-     * @default CleanUpMerge(EnumCleanUpMerge cleanPolicy, JDFConstants.EMPTYSTRING, false);
-     * */
-
-    private void cleanUpMerge(EnumCleanUpMerge cleanPolicy, String spawnID, boolean bRecurse)
-    {
-        if(!cleanPolicy.equals(EnumCleanUpMerge.None))
-        {
-            if(bRecurse)
-            {
-                final Vector v = getvJDFNode(null, null, false);
-                for(int i = v.size(); i >= 0; i--)
-                {
-                    ((JDFNode)v.elementAt(i)).cleanUpMerge(cleanPolicy, spawnID, false);
-                }
-
-            }
-            else
-            {
-                JDFAuditPool auditPool = getAuditPool();
-                if (auditPool != null)
-                    auditPool.cleanUpMerge(cleanPolicy, spawnID);
-            }
-        }
-    }
-
-    /**
-     * merge the audit pools
-     * @param JDFNode& toMerge the source node of the audit pool to merge into this
+     * set attribute Category
+     * @param value the value to set the attribute to
      */
-    private void mergeAuditPool(JDFNode toMerge)
-    {
-        //      merge audit pool
-        final JDFAuditPool overWriteAuditPool = getAuditPool();
-        final JDFAuditPool toMergeAuditPool = toMerge.getAuditPool();
-
-        // the node that is overwritten has an audit pool that must be merged
-        if (overWriteAuditPool != null)
-        {
-            // the overwriting node node is empty, just copy the previous pool
-            if (toMergeAuditPool == null)
-            {
-                toMerge.copyElement(overWriteAuditPool, null);
-            }
-            else
-            {
-                // must merge the old node into the overwriting node
-                overWriteAuditPool.appendUnique(toMergeAuditPool);
-                toMergeAuditPool.replaceElement(overWriteAuditPool);
-            }
-        }
-    }
-
-    /**
-     * merge the status pools
-     * @param JDFNode& toMerge the source node of the status pool to merge into this
-     * @param mAttribute parts the partitions to merge
-     */
-    private void mergeStatusPool(JDFNode toMerge, VJDFAttributeMap parts)
-    {
-        if (toMerge.hasChildElement(ElementName.STATUSPOOL, null) || 
-                hasChildElement(ElementName.STATUSPOOL, null))
-        {
-            final JDFStatusPool overWriteStatusPool = getCreateStatusPool();
-            if (!getStatus().equals(JDFElement.EnumNodeStatus.Pool))
-            {
-                overWriteStatusPool.setStatus(getStatus());
-                setStatus(JDFElement.EnumNodeStatus.Pool);
-            }
-
-            final JDFStatusPool toMergeStatusPool = toMerge.getStatusPool();
-            if (toMerge.getStatus() == JDFElement.EnumNodeStatus.Pool)
-            {
-                for (int i = 0; i < parts.size(); i++)
-                {
-                    int j;
-                    // clean up the pool to overwrite
-                    final VElement vpso = overWriteStatusPool.getMatchingPartStatusVector(parts.elementAt(i));
-                    for (j=0;j<vpso.size();j++)
-                    {
-                        // remove all matching partstatus elements in case they were expanded in the spawned node
-                        ((JDFPartStatus) vpso.elementAt(j)).deleteNode(); 
-                    }
-
-                    // extract data from spawned node
-                    final VElement vps=toMergeStatusPool.getMatchingPartStatusVector(parts.elementAt(i));
-                    for (j=0; j<vps.size(); j++)
-                    {
-                        final JDFPartStatus ps = (JDFPartStatus) vps.elementAt(j);
-                        final JDFAttributeMap m = ps.getPartMap();
-                        overWriteStatusPool.setStatus(m, ps.getStatus(), ps.getStatusDetails());
-                    }
-
-                    //100305 RP the following lines cause problems with nested spawn and therefore are commented out
-//                  final JDFPartStatus ps=overWriteStatusPool.getPartStatus(parts.elementAt(i));
-                    // just in case someone updated detailed partstatus elements
-//                  if (ps != null && ps.getStatus() == EnumNodeStatus.Spawned)
-//                  ps.deleteNode();
-                }
-                toMergeStatusPool.replaceElement(overWriteStatusPool);
-            }
-            else
-            {
-                // this part of the program will probably never be executed, but...
-                for (int i = 0; i < parts.size(); i++)
-                    overWriteStatusPool.setStatus(parts.elementAt(i), 
-                            toMerge.getStatus(), null);
-                if (toMergeStatusPool != null)
-                    toMergeStatusPool.deleteNode();
-                toMerge.setStatus(JDFElement.EnumNodeStatus.Pool);
-                toMerge.moveElement(overWriteStatusPool, null);
-            }
-        }
-
-    }
-
-    /**
-     * merge the resource link pools
-     * @param oMerge the source node of the status pool to merge into this
-     * @param parts the partitions to merge
-     */
-    private void mergeResourceLinkPool(JDFNode toMerge, VJDFAttributeMap parts)
-    {
-        final JDFResourceLinkPool resourceLinkPool = toMerge.getResourceLinkPool();
-        if(resourceLinkPool!=null)
-        {
-            final VElement links=resourceLinkPool.getPoolChildren(null, null, null);
-            for(int i=0;i<links.size();i++){
-                JDFResourceLink rl=(JDFResourceLink) links.elementAt(i);
-                rl.expandTarget(false);
-            }
-        }
-
-        if (parts!=null && !parts.isEmpty())
-        {
-            final JDFResourceLinkPool overWriteRLP = getResourceLinkPool();
-            final JDFResourceLinkPool toMergeRLP = resourceLinkPool;
-            final VElement overWriteLinks = 
-                overWriteRLP.getPoolChildren(null, null, null);
-            final VElement toMergeLinks = 
-                toMergeRLP.getPoolChildren(null, null, null);
-
-            for (int rl = 0; rl < toMergeLinks.size(); rl++)
-            {
-                JDFResourceLink overWriteLink = null;
-                final JDFResourceLink toMergeLink = (JDFResourceLink)toMergeLinks.elementAt(rl);
-                final String rRef = toMergeLink.getAttribute(AttributeName.RREF);
-                for (int k = 0; k < overWriteLinks.size(); k++)
-                {
-                    if (((JDFResourceLink)overWriteLinks.elementAt(k)).getAttribute(AttributeName.RREF).equals(rRef))
-                    {
-                        overWriteLink = (JDFResourceLink)overWriteLinks.elementAt(k);
-                        overWriteLinks.remove(overWriteLinks.elementAt(k));
-                        break;
-                    }
-                }
-
-                final JDFAmountPool jdfAmountPool = toMergeLink.getAmountPool();
-
-                if (overWriteLink != null)
-                {
-                    if (toMergeLink.hasChildElement(ElementName.PART, null))
-                    {
-                        for (int i = 0; i < parts.size(); i++)
-                        {
-                            final boolean hasAP     = 
-                                overWriteLink.hasChildElement(ElementName.AMOUNTPOOL, null);
-                            JDFAttributeMap mpaMap  = null;
-                            VElement vPartAmounts = null;
-                            if(jdfAmountPool!=null)
-                                vPartAmounts=jdfAmountPool.getMatchingPartAmountVector(parts.elementAt(i));
-
-                            if (vPartAmounts == null)
-                            {
-                                mpaMap = toMergeLink.getAttributeMap();
-                                // remove generic link stuff
-                                mpaMap.remove(AttributeName.COMBINEDPROCESSINDEX);
-                                mpaMap.remove(AttributeName.COMBINEDPROCESSTYPE);
-                                //tbd opa.RemoveAttribute(atr_PipePartIDKeys);
-                                mpaMap.remove(AttributeName.PIPEPROTOCOL);
-                                mpaMap.remove(AttributeName.PROCESSUSAGE);
-                                mpaMap.remove(AttributeName.RREF);
-                                mpaMap.remove(AttributeName.RSUBREF);
-                                mpaMap.remove(AttributeName.USAGE);
-                                if(!hasAP){
-                                    JDFAttributeMap opaMap=overWriteLink.getAttributeMap();
-                                    if(opaMap.subMap(mpaMap))
-                                    {
-                                        mpaMap.clear();
-                                    }
-                                }
-                                // only add something if partmap contains real information
-                                if(hasAP || (!mpaMap.isEmpty()&&!mpaMap.equals(parts.elementAt(i))))
-                                {
-                                    JDFPartAmount opa=overWriteLink.getCreateAmountPool().getCreatePartAmount(parts.elementAt(i));
-                                    opa.setAttributes(mpaMap);
-                                    overWriteLink.removeAttributes(mpaMap.getKeys());
-                                }                           
-                            }
-                            else
-                            {
-                                // loop over all fitting part amounts and blast them in
-                                for(int j=0;j<vPartAmounts.size();j++)
-                                {
-                                    JDFPartAmount mpa= (JDFPartAmount)vPartAmounts.elementAt(j);                              
-                                    JDFAttributeMap amountMap=mpa.getAttributeMap();
-                                    JDFAttributeMap partMap=mpa.getPartMap();
-                                    JDFPartAmount opa=overWriteLink.getCreateAmountPool().getCreatePartAmount(partMap);
-                                    opa.setAttributes(amountMap);
-                                    overWriteLink.removeAttributes(amountMap.getKeys());                                
-                                }
-                            }
-                            if(mpaMap!=null)
-                            {
-                                // dont add ap if mpa link only has copies of the original link
-                                if(!hasAP)
-                                {
-                                    final JDFAttributeMap opaMap = overWriteLink.getAttributeMap();
-                                    if(opaMap.subMap(mpaMap))   
-                                    {
-                                        mpaMap.clear();
-                                    }
-                                }
-
-                                // only add something if partmap contains real information
-                                if((!mpaMap.isEmpty() && !mpaMap.equals(parts.elementAt(i))))
-                                {
-                                    final JDFPartAmount opa = 
-                                        overWriteLink.getCreateAmountPool().getCreatePartAmount(parts.elementAt(i));
-                                    opa.setAttributes(mpaMap);
-                                }
-                            }
-                            // nothing has changed --> leave as is
-                        }
-                    }
-                    else
-                    {
-                        // blast the spawned link into the overWritePool completely
-                        overWriteLink.replaceElement(toMergeLink);
-                    }
-                }
-            }
-            toMergeRLP.deleteNode();
-            toMerge.copyElement(overWriteRLP, null);
-        }
-    }
-
     public void setCategory(String value)
     {
         setAttribute(AttributeName.CATEGORY, value);
     }
 
+    /**
+     * get string attribute Category
+     * @return the attribute value
+     */
     public String getCategory()
     {
         return getAttribute(AttributeName.CATEGORY);
@@ -6849,6 +6517,10 @@ public class JDFNode extends JDFElement
         return getAttribute(AttributeName.CATEGORY);
     }
 
+    /**
+     * set attribute ICSVersions
+     * @param value the value to set the attribute to
+     */ 
     public void setICSVersions(VString value)
     {
         setAttribute(AttributeName.ICSVERSIONS, value, null);
@@ -6856,10 +6528,10 @@ public class JDFNode extends JDFElement
 
     /**
      * get NMTOKENS attribute ICSVersions
-     * @param boolean bInherit - if true recurse through ancestors when searching
+     * @param bInherit if true recurse through ancestors when searching
      * @return VString - attribute value
      * 
-     * default - getICSVersions(flase)
+     * @default getICSVersions(false)
      */
     public VString getICSVersions(boolean bInherit) 
     {
@@ -6872,11 +6544,18 @@ public class JDFNode extends JDFElement
     }
 
 
+    /**
+     * set attribute ID
+     * @param value the value to set the attribute to
+     */
     public void setID(String value)
     {
         setAttribute(AttributeName.ID, value);
     }
 
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.core.JDFElement#getID()
+     */
     public String getID()
     {
         return this.getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
@@ -6903,10 +6582,10 @@ public class JDFNode extends JDFElement
 
     /**
      * get attribute MaxVersion
-     * @param boolean bInherit - if true recurse through ancestors when searching
+     * @param bInherit if true recurse through ancestors when searching
      * @return EnumVersion - attribute value
      * 
-     * default - getMaxVersion(flase)
+     * default - getMaxVersion(false)
      */
     public EnumVersion getMaxVersion(boolean bInherit) 
     {
@@ -6927,6 +6606,10 @@ public class JDFNode extends JDFElement
         return EnumVersion.getEnum(version);
     }
 
+    /**
+     * set attribute NamedFeatures
+     * @param value the value to set the attribute to
+     */
     public void setNamedFeatures(VString value)
     {
         final StringBuffer strbuff = new StringBuffer(100);
@@ -6938,6 +6621,10 @@ public class JDFNode extends JDFElement
     }
 
 
+    /**
+     * Get NMTOKENS attribute NamedFeatures
+     * @return the attribute value
+     */
     public VString getNamedFeatures() 
     {
         return new VString(getAttribute(AttributeName.NAMEDFEATURES, null, JDFConstants.EMPTYSTRING),null);
@@ -6963,12 +6650,21 @@ public class JDFNode extends JDFElement
         return v;
     }
 
+    /**
+     * set attribute ProjectID
+     * @param value the value to set the attribute to
+     */
     public void setRelatedJobID(String value)
     {
         setAttribute(AttributeName.RELATEDJOBID, value);
     }
 
 
+    /**
+     * get string attribute RelatedJobID
+     * @param bInherit recurse through ancestors when searching
+     * @return the attribute value
+     */
     public String getRelatedJobID(boolean bInherit)
     {
         if(bInherit)
@@ -6978,11 +6674,20 @@ public class JDFNode extends JDFElement
         return getAttribute(AttributeName.RELATEDJOBID);
     }
 
+    /**
+     * set attribute RelatedJobPartID
+     * @param value the value to set the attribute to
+     */
     public void setRelatedJobPartID(String value)
     {
         setAttribute(AttributeName.RELATEDJOBPARTID,value);
     }
 
+    /**
+     * get string attribute RelatedJobPartID
+     * @param bInherit recurse through ancestors when searching
+     * @return the attribute value
+     */
     public String getRelatedJobPartID(boolean bInherit) 
     {
         if(bInherit)
@@ -6993,11 +6698,19 @@ public class JDFNode extends JDFElement
         return getAttribute(AttributeName.RELATEDJOBPARTID);
     }
 
+    /**
+     * set attribute StatusDetails
+     * @param value the value to set the attribute to
+     */
     public void setStatusDetails(String value)
     {
         setAttribute(AttributeName.STATUSDETAILS, value);
     }
 
+    /**
+     * get string attribute StatusDetails
+     * @return the attribute value
+     */
     public String getStatusDetails()
     {
         return getAttribute(AttributeName.STATUSDETAILS);
@@ -7016,23 +6729,39 @@ public class JDFNode extends JDFElement
         return getAttribute(AttributeName.STATUSDETAILS);
     }
 
+    /**
+     * set attribute Template
+     * @param value the value to set the attribute to
+     */
     public void setTemplate(boolean value)
     {
         setAttribute(AttributeName.TEMPLATE, value, null);
     }
 
-
+    /**
+     * get boolean attribute Template, default=false
+     * @return the attribute value
+     */ 
     public boolean getTemplate()
     {
         return getBoolAttribute(AttributeName.TEMPLATE, null, false);
     }
 
 
+    /**
+     * set attribute TemplateID
+     * @param value the value to set the attribute to
+     */
     public void setTemplateID(String value)
     {
         setAttribute(AttributeName.TEMPLATEID, value);
     }
 
+    /**
+     * get string attribute TemplateID
+     * @param bInherit recurse through ancestors when searching
+     * @return the attribute value
+     */
     public String getTemplateID(boolean bInherit)
     {
         if(bInherit)
@@ -7042,11 +6771,20 @@ public class JDFNode extends JDFElement
         return getAttribute(AttributeName.TEMPLATEID);
     }
 
+    /**
+     * set attribute TemplateVersion
+     * @param value the value to set the attribute to
+     */
     public void setTemplateVersion(String value)
     {
         setAttribute(AttributeName.TEMPLATEVERSION, value);
     }
 
+    /**
+     * get string attribute TemplateVersion
+     * @param bInherit recurse through ancestors when searching
+     * @return the attribute value
+     */
     public String getTemplateVersion(boolean bInherit)
     {
         if(bInherit)
@@ -7060,7 +6798,7 @@ public class JDFNode extends JDFElement
 
     /**
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
-     * @return
+     * @return JDFDuration
      */
     public JDFDuration getNodeInfoCleanupDuration()
     {
@@ -7069,7 +6807,7 @@ public class JDFNode extends JDFElement
 
     /**
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
-     * @return
+     * @return JDFMISDetails.EnumCostType
      */
     public JDFMISDetails.EnumCostType getNodeInfoCostType()
     {
@@ -7083,8 +6821,7 @@ public class JDFNode extends JDFElement
     }
 
     /**
-     *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
-     * @return
+     * @deprecated 06ß221 use getInheritedNodeInfo(String attName)
      */
     public JDFNodeInfo.EnumDueLevel getNodeInfoDueLevel()
     {
@@ -7096,7 +6833,6 @@ public class JDFNode extends JDFElement
 
     /**
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
-     * @return
      */
     public JDFDate getNodeInfoEnd()
     {
@@ -7108,7 +6844,6 @@ public class JDFNode extends JDFElement
 
     /**
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
-     * @return
      */
     public JDFDate getNodeInfoFirstEnd()
     {
@@ -7120,7 +6855,6 @@ public class JDFNode extends JDFElement
 
     /**
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
-     * @return
      */
     public JDFDate getNodeInfoFirstStart()
     {
@@ -7132,7 +6866,6 @@ public class JDFNode extends JDFElement
 
     /**
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
-     * @return
      */
     public JDFXYPair getNodeInfoIPPVersion()
     {
@@ -7144,7 +6877,6 @@ public class JDFNode extends JDFElement
 
     /**
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
-     * @return
      */
     public int getNodeInfoJobPriority()
     {
@@ -7156,7 +6888,6 @@ public class JDFNode extends JDFElement
 
     /**
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
-     * @return
      */
     public JDFDate getNodeInfoLastEnd()
     {
@@ -7168,7 +6899,6 @@ public class JDFNode extends JDFElement
 
     /**
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
-     * @return
      */
     public JDFDate getNodeInfoLastStart()
     {
@@ -7180,7 +6910,6 @@ public class JDFNode extends JDFElement
 
     /**
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
-     * @return
      */
     public String getNodeInfoNaturalLang()
     {
@@ -7192,7 +6921,6 @@ public class JDFNode extends JDFElement
 
     /**
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
-     * @return
      */
     public String getNodeInfoRoute()
     {
@@ -7204,7 +6932,6 @@ public class JDFNode extends JDFElement
 
     /**
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
-     * @return
      */
     public JDFDuration getNodeInfoSetupDuration()
     {
@@ -7216,7 +6943,6 @@ public class JDFNode extends JDFElement
 
     /**
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
-     * @return
      */
     public JDFDate getNodeInfoStart()
     {
@@ -7228,7 +6954,6 @@ public class JDFNode extends JDFElement
 
     /**
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
-     * @return
      */
     public String getNodeInfoTargetRoute(){
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
@@ -7239,7 +6964,6 @@ public class JDFNode extends JDFElement
 
     /**
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
-     * @return
      */
     public JDFDuration getNodeInfoTotalDuration()
     {
@@ -7251,7 +6975,6 @@ public class JDFNode extends JDFElement
 
     /**
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
-     * @return
      */
     public JDFMISDetails.EnumWorkType getNodeInfoWorkType()
     {
@@ -7266,7 +6989,6 @@ public class JDFNode extends JDFElement
 
     /**
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
-     * @return
      */
     public String getNodeInfoWorkTypeDetails()
     {
@@ -7281,7 +7003,6 @@ public class JDFNode extends JDFElement
 
     /**
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
-     * @return
      */
     public JDFBusinessInfo getNodeInfoBusinessInfo()
     {
@@ -7293,7 +7014,6 @@ public class JDFNode extends JDFElement
 
     /**
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
-     * @return
      */
     public JDFEmployee getNodeInfoEmployee()
     {
@@ -7305,7 +7025,6 @@ public class JDFNode extends JDFElement
 
     /**
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
-     * @return
      */
     public JDFJMF getNodeInfoJMF(int iSkip)
     {
@@ -7317,7 +7036,6 @@ public class JDFNode extends JDFElement
 
     /**
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
-     * @return
      */
     public JDFNotificationFilter getNodeInfoNotificationFilter(int iSkip)
     {
@@ -7330,11 +7048,11 @@ public class JDFNode extends JDFElement
     /**
      * get first CustomerInfo element from child list or child list of any ancestor
      * 
-     * @param xPath the the xPath to an element or attribute that must exist in the queried CustomerInfo
+     * @param xPath the the xPath to an element or attribute that must exist in the queried CustomerInfo<br>
      * note that attributes must be marked with an "@", 
      * if xPath=null, simply return the next in line
      * 
-     * @return  CustomerInfo The matching CustomerInfo element
+     * @return the matching CustomerInfo element
      */
     public JDFCustomerInfo getInheritedCustomerInfo(String xPath)
     {
@@ -7354,7 +7072,6 @@ public class JDFNode extends JDFElement
 
     /**
      *@deprecated 06ß221 use getInheritedCustomerInfo(String attName)
-     * @return
      */
     public String getCustomerInfoBillingCode() 
     {
@@ -7366,7 +7083,6 @@ public class JDFNode extends JDFElement
 
     /**
      *@deprecated 06ß221 use getInheritedCustomerInfo(String attName)
-     * @return
      */
     public String getCustomerInfoCustomerID() 
     {
@@ -7377,7 +7093,6 @@ public class JDFNode extends JDFElement
     }
     /**
      *@deprecated 06ß221 use getInheritedCustomerInfo(String attName)
-     * @return
      */   
     public String getCustomerInfoCustomerJobName() 
     {
@@ -7388,7 +7103,6 @@ public class JDFNode extends JDFElement
     }
     /**
      *@deprecated 06ß221 use getInheritedCustomerInfo(String attName)
-     * @return
      */    
     public String getCustomerInfoCustomerOrderID() 
     {
@@ -7399,7 +7113,6 @@ public class JDFNode extends JDFElement
     }
     /**
      *@deprecated 06ß221 use getInheritedCustomerInfo(String attName)
-     * @return
      */    
     public String getCustomerInfoCustomerProjectID() 
     {
@@ -7410,7 +7123,6 @@ public class JDFNode extends JDFElement
     }
     /**
      *@deprecated 06ß221 use getInheritedCustomerInfo(String attName)
-     * @return
      */    
     public JDFCompany getCustomerInfoCompany() 
     {
@@ -7421,7 +7133,6 @@ public class JDFNode extends JDFElement
     }
     /**
      *@deprecated 06ß221 use getInheritedCustomerInfo(String attName)
-     * @return
      */    
     public JDFContact getCustomerInfoContact(int iSkip) 
     {
@@ -7432,7 +7143,6 @@ public class JDFNode extends JDFElement
     }
     /**
      *@deprecated 06ß221 use getInheritedCustomerInfo(String attName)
-     * @return
      */    
     public JDFCustomerMessage getCustomerInfoCustomerMessage(int iSkip) 
     {
@@ -7447,7 +7157,7 @@ public class JDFNode extends JDFElement
     /**
      * Checks if this process is the successor of the given process node.
      * 
-     * @param  proc
+     * @param proc node to check against
      * 
      * @return boolean - <code>true</code> if this process is successor of given process
      */
@@ -7474,12 +7184,11 @@ public class JDFNode extends JDFElement
     /**
      * Returns the input or output resource IDs of this process node.
      * 
-     * @param isInput - <code>true</code> to get input resource IDs.
-     *                  <code>false</code> to get output resource IDs.
+     * @param isInput <li><code>true</code> to get input resource IDs.</li>
+     *                <li><code>false</code> to get output resource IDs.</li>
      * 
      * @return VString - Vector containing resource IDs.
      */
-
     public VString getResourceIDs(boolean isInput)
     {
         final VString vsLinks = new VString();        
@@ -7497,21 +7206,21 @@ public class JDFNode extends JDFElement
         }
         return vsLinks;
     }
+    
     /**
      * Gets the executable partitions of the resource in this node (with corresponding
      * resource link). The part maps returned may be nested. If the empty part map
-     * is contained the whole resource is executable.
+     * is contained, the whole resource is executable.<br>
      *
      * Availability of a resource depends on the status, the availability of refered
      * sub-partitions and the part usage.
      *
-     * @param link              - The resource link.
-     * @param res               - The resource.
-     * @param minStatus   - Minimum resource status to include.
+     * @param link      the resource link.
+     * @param res       the resource.
+     * @param minStatus minimum resource status to include.
      *
      * @return VJDFAttributeMap - A part map vector containing the executable partitions.
      */
-
     public VJDFAttributeMap getExecutablePartitions (JDFResourceLink link, JDFResource res, JDFResource.EnumResStatus minStatus)
     {
         final VJDFAttributeMap vp = new VJDFAttributeMap ();
@@ -7540,14 +7249,13 @@ public class JDFNode extends JDFElement
      * clear the vector before calling this method.
      *
      * 
-     * @param link              - The resource link.
-     * @param res               - May be the root node or any partition.
-     * @param vamPartMaps       - The vector to which the found part maps will be added.
-     * @param minStatus   - Minimum resource status to include.
+     * @param link        the resource link.
+     * @param res         may be the root node or any partition.
+     * @param vamPartMaps the vector to which the found part maps will be added.
+     * @param minStatus   minimum resource status to include.
      * 
      * @return ExecPartFlags - The flags <code>isAvailable</code> and <code>isProcStatOK</code>.
      */
-
     private ExecPartFlags addExecutablePartitions(
             JDFResourceLink link, JDFResource res, VJDFAttributeMap vamPartMaps, JDFResource.EnumResStatus minStatus)
     {
@@ -7653,13 +7361,13 @@ public class JDFNode extends JDFElement
 
         return new ExecPartFlags (isAvailable, isProcStatOK);
     }
+    
     /**
      * Class ExecPartFlags
      * 
      * Returned by <code>addExecutablePartitions</code>
      *
      */
-
     private static final class ExecPartFlags
     {
         private boolean m_isAvailable;
@@ -7720,69 +7428,9 @@ public class JDFNode extends JDFElement
      * 
      * @return boolean - <code>true</code> if this is a process node.
      */
-
     public boolean isProcessNode()
     {
         return !isGroupNode();        
-    }
-
-
-    /**
-     * calculate whether a link should be RW or RO
-     * 
-     * @param    JDFResourceLink li the link to check
-     * @param    VString vRWResources the list of resource ids, process usages, usages, names. 
-     *           If any match, the referenced resource is considered rw
-     * @return   boolean true if rw
-     */
-    private boolean linkFitsRWRes(JDFResourceLink li,  VString vRWResources)
-    {
-        boolean bResRW = vRWResources.contains(li.getNamedProcessUsage());
-        // 200602 RP added fix
-        if(!bResRW)
-        {
-            bResRW = vRWResources.contains(li.getLinkedResourceName());
-        }
-
-        // 230802 RP added check for ID in vRWResources
-        if(!bResRW)
-        {
-            bResRW = vRWResources.contains(li.getrRef());
-        }
-
-        // 040902 RP added check for Usage in vRWResources
-        if(!bResRW)
-        {
-            bResRW = vRWResources.contains(li.getAttribute(AttributeName.USAGE));
-        }
-        return bResRW;
-    }
-
-    /**
-     * calculate whether a link should be RW or RO
-     * 
-     * @param    JDFResourceLink li the link to check
-     * @param    VString vRWResources the list of resource ids, process usages, usages, names. 
-     *           If any match, the referenced resource is considered rw
-     * @return   boolean true if rw
-     */
-    private boolean resFitsRWRes(JDFResource r, VString vRWResources)
-    {
-
-        boolean bResRW = vRWResources.contains(r.getLocalName());
-        // 200602 RP added fix
-        if(!bResRW)
-        {
-            bResRW = vRWResources.contains(JDFConstants.STAR);
-        }
-
-        // 230802 RP added check for ID in vRWResources
-        if(!bResRW)
-        {
-            bResRW = vRWResources.contains(r.getID());
-        }
-
-        return bResRW;
     }
 
 
@@ -7792,7 +7440,7 @@ public class JDFNode extends JDFElement
      * @param resourceName The name of the reource to create
      * @param indexOutput the CombinedProcessIndex of the output ResourceLink to the internal pipe
      * @param indexInput the CombinedProcessIndex of the input ResourceLink to the internal pipe
-     * @return JDFResource the newly created resource
+     * @return JDFResource - the newly created resource
      */
     public JDFResource addInternalPipe(String resourceName, int indexOutput, int indexInput)
     {
@@ -7818,7 +7466,7 @@ public class JDFNode extends JDFElement
     /**
      * get a heuristic partidkey vector from the partitons of the linked resources
      * 
-     * @param JDFAttributeMap partMap the partmap to order. If not specified, use the output link
+     * @param partMap the partmap to order. If not specified, use the output link
      * 
      * @return the ordered vector of partIDKeys
      */
@@ -7876,7 +7524,7 @@ public class JDFNode extends JDFElement
     /**
      * prepare the nodeinfo for a partitioned spawn
      * 
-     * @param VJDFAttributeMap vSpawnParts the list of parts to spawn
+     * @param vSpawnParts the list of parts to spawn
      * 
      * @return the vector of nodeinfo leaves
      */
@@ -7928,14 +7576,12 @@ public class JDFNode extends JDFElement
     }
 
     /**
-     * Erases all empty text nodes in 'this' and its subelements
-     * If there any empty text nodes removes them.
-     * the JDF node version also removes empty pools
+     * Erases all empty text nodes in 'this' and its subelements.<br>
      * If bTrimWhite is true, then trims white spaces from both
      * ends of a text node and only then, if it is empty, removes it
      *
      * @param bTrimWhite trims whitespace of text, default = true
-     * @return int       the number of removed nodes
+     * @return int - the number of removed nodes
      */
     public int eraseEmptyNodes(boolean bTrimWhite)
     {
@@ -7959,15 +7605,31 @@ public class JDFNode extends JDFElement
     /**
      * getLinks - get the links matching mLinkAtt out of the resource link pool
      *
-     * @param linkName - the name of the link including or excluding the "Link", 
+     * @param linkName the name of the link including or excluding the "Link", 
      * If it is omitted, it will be added
-     * @param mLinkAtt - the attributes to search for
-     * @param linkNS - the namespace of the link
+     * @param mLinkAtt the attributes to search for
+     * @param linkNS the namespace of the link
      *
      * @return VElement - all elements matching the condition mLinkAtt
-     * default: getLinks(null,null,null)
+     * @default getLinks(null,null,null)
+     * @deprecated - use getResourceLinks
      */
     public VElement getLinks(String linkName, JDFAttributeMap mLinkAtt, String linkNS)
+    {
+        return getResourceLinks(linkName, mLinkAtt, linkNS);
+    }
+    /**
+     * getLinks - get the links matching mLinkAtt out of the resource link pool
+     *
+     * @param linkName the name of the link including or excluding the "Link", 
+     * If it is omitted, it will be added
+     * @param mLinkAtt the attributes to search for
+     * @param linkNS the namespace of the link
+     *
+     * @return VElement - all elements matching the condition mLinkAtt, 
+     * @default getLinks(null,null,null)
+     */
+    public VElement getResourceLinks(String linkName, JDFAttributeMap mLinkAtt, String linkNS)
     {
         JDFResourceLinkPool rlp=getResourceLinkPool();
         if(rlp==null)
@@ -7981,14 +7643,14 @@ public class JDFNode extends JDFElement
     /**
      * getLink - get the n'th link matching mLinkAtt out of the resource link pool
      *
-     * @param index - the index of the matching link
-     * @param linkName - the name of the link including or excluding the "Link", 
-     * If it is omitted, it will be added
-     * @param mLinkAtt - the attributes to search for
-     * @param linkNS - the namespace of the link
+     * @param index the index of the matching link
+     * @param linkName the name of the link including or excluding the "Link". 
+     * If it is omitted, it will be added.
+     * @param mLinkAtt the attributes to search for
+     * @param linkNS the namespace of the link
      *
      * @return JDFResourceLink - the ResourceLink matching the condition mLinkAtt
-     * default: getLinks(null,null,null)
+     * @default getLinks(null,null,null)
      */
     public JDFResourceLink getLink(int index, String linkName, JDFAttributeMap mLinkAtt, String linkNS)
     {
@@ -8009,12 +7671,28 @@ public class JDFNode extends JDFElement
      * 
      * @return VElement vector of all found elements
      * @deprecated this routine does not belong here at all!
-     * default: getLinks(null, null)
+     * @default getLinks(null, null)
      */
     public VElement getLinks(String linkName, String nameSpaceURI)
     {
         final JDFAttributeMap m = new JDFAttributeMap(AttributeName.RREF, getID());
         return getDocRoot().getChildrenByTagName(linkName, nameSpaceURI, m, false, false, 0);
+    }
+    /**
+     * sorts all elements alphabeically
+     * also recurses into the resourcepool and the sub JDF Node
+     * NO other sub-elemets are sorted
+     * @see org.cip4.jdflib.core.KElement#sortChildren()
+     */
+    public void sortChildren()
+    {
+        super.sortChildren(); // KElement.sortChildren is NOT recursive
+        JDFResourcePool rp=getResourcePool();
+        if(rp!=null)
+            rp.sortChildren();
+        VElement vNode=getvJDFNode(null, null, true);
+        for(int i=0;i<vNode.size();i++)
+            vNode.item(i).sortChildren();
     }   
 
 

@@ -24,10 +24,10 @@ import org.cip4.jdflib.auto.JDFAutoNewComment;
 public class JDFNewComment extends JDFAutoNewComment
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Constructor for JDFNewComment
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
 	public JDFNewComment(
@@ -36,12 +36,11 @@ public class JDFNewComment extends JDFAutoNewComment
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
-	
-	
+
 	/**
 	 * Constructor for JDFNewComment
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
 	public JDFNewComment(
@@ -51,13 +50,13 @@ public class JDFNewComment extends JDFAutoNewComment
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
-	
+
 	/**
 	 * Constructor for JDFNewComment
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @param localName
+	 * @param myLocalName
 	 */
 	public JDFNewComment(
 			CoreDocumentImpl myOwnerDocument,

@@ -28,27 +28,29 @@ import org.cip4.jdflib.node.JDFNode;
 
 
 //----------------------------------
+    /**
+     * describes the actual status of jobs in a device
+     */
     public class JDFJobPhase extends JDFAutoJobPhase
 {
     private static final long serialVersionUID = 1L;
 
     /**
      * Constructor for JDFJobPhase
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFJobPhase(
+    public JDFJobPhase(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFJobPhase
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFJobPhase(
@@ -61,10 +63,10 @@ import org.cip4.jdflib.node.JDFNode;
 
     /**
      * Constructor for JDFJobPhase
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFJobPhase(
         CoreDocumentImpl myOwnerDocument,
@@ -75,6 +77,11 @@ import org.cip4.jdflib.node.JDFNode;
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
 
+    /**
+     * toString()
+     * @see org.cip4.jdflib.auto.JDFAutoJobPhase#toString()
+     * @return String
+     */
     public String toString()
     {
         return "JDFJobPhase[  --> " + super.toString() + " ]";
@@ -128,8 +135,8 @@ import org.cip4.jdflib.node.JDFNode;
     }
 
     /**
-     * set all parts to those define in vParts
-     * @param VJDFAttributeMap vParts: vector of attribute maps for the parts
+     * set all parts to those defined in vParts
+     * @param vParts vector of attribute maps for the parts
      */
     public void setPartMapVector(VJDFAttributeMap vParts)
     {
@@ -137,8 +144,8 @@ import org.cip4.jdflib.node.JDFNode;
     }
 
     /**
-     * set all parts to those define in vParts
-     * @param JDFAttributeMap mPart: attribute map for the part to set
+     * set part to the one defined in mPart
+     * @param mPart attribute map for the part to set
      */
     public void setPartMap(JDFAttributeMap mPart)
     {
@@ -147,7 +154,7 @@ import org.cip4.jdflib.node.JDFNode;
 
     /**
      * remove the part defined in mPart
-     * @param JDFAttributeMap mPart: attribute map for the part to remove
+     * @param mPart attribute map for the part to remove
      */
     public void removePartMap(JDFAttributeMap mPart)
     {
@@ -156,7 +163,7 @@ import org.cip4.jdflib.node.JDFNode;
 
     /**
      * check whether the part defined in mPart is included
-     * @param JDFAttributeMap mPart: attribute map for the part to remove
+     * @param mPart attribute map for the part to remove
      * @return boolean - returns true if the part exists
      */
     public boolean hasPartMap(JDFAttributeMap mPart)
@@ -164,24 +171,32 @@ import org.cip4.jdflib.node.JDFNode;
         return super.hasPartMap(mPart);
     }
     
-    public JDFNode getCreateNode()
-   {
-       return (JDFNode)getCreateElement_KElement(ElementName.JDF, null, 0);
-   }
+    /**
+     * get a node, create if it doesn't exist
+	 * @return the node
+	 */
+	public JDFNode getCreateNode() 
+	{
+		return (JDFNode) getCreateElement_KElement(ElementName.JDF, null, 0);
+	}
 
-   public JDFNode appendNode()
-   {
-       return  (JDFNode)appendElementN(ElementName.JDF, 1, null);
-    }
-   
-   public JDFNode getNode()
-   {
-       return (JDFNode) getElement(ElementName.JDF, null, 0);
-   }
+	/**
+	 * append a node
+	 * @return the appended node
+	 */
+	public JDFNode appendNode() 
+	{
+		return (JDFNode) appendElementN(ElementName.JDF, 1, null);
+	}
 
+	/**
+	 * get node
+	 * @return the node
+	 */
+	public JDFNode getNode() {
+		return (JDFNode) getElement(ElementName.JDF, null, 0);
+	}
 
-
-   
 }
 
 

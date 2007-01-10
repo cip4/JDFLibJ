@@ -201,14 +201,15 @@ public class JDFTestRef extends JDFTerm
     } 
 /////////////////////////////////////////////////////////////
     /**
-     * (and, or, xor, not, Evaluation, TestRef)
+     * Tests whether this Term is compatible with the attribute map <code>m</code> 
+     * (and, or, xor, not, Evaluation, TestRef).<br>
      * To determine the state of Term tests Evaluations that “not” consists of, 
-     * checks if attribute map 'm' has a key, 
+     * this method checks if attribute map <code>m</code> has a key. 
      * specified by Evaluation/BasicPreflightTest/@Name
-     * and if 'm' has such key, checks if its value fits testlists,
-     * specified for matching Evaluation (uses FitsValue(value))
+     * If <code>m</code> has such key, it checks whether the value of <code>m#</code> 
+     * fits the testlists specified for matching Evaluation (uses FitsValue(value))
      *
-     * @param JDFAttributeMap m -  key-value pair attribute map
+     * @param m key-value pair attribute map
      * @return boolean - true, if boolean “not” expression evaluates to “true”
      */
     public boolean fitsMap(JDFAttributeMap m) 

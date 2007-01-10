@@ -20,11 +20,11 @@ public class JDFBand extends JDFAutoBand
 
     /**
      * Constructor for JDFBand
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      * @throws DOMException
      */
-     public JDFBand(
+    public JDFBand(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
         throws DOMException
@@ -32,11 +32,10 @@ public class JDFBand extends JDFAutoBand
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFBand
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      * @throws DOMException
      */
@@ -51,10 +50,10 @@ public class JDFBand extends JDFAutoBand
 
     /**
      * Constructor for JDFBand
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      * @throws DOMException
      */
     public JDFBand(

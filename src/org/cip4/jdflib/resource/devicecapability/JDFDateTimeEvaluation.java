@@ -110,10 +110,9 @@ public class JDFDateTimeEvaluation extends JDFEvaluation
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
 
-
     /**
      * constructor for JDFDateTimeEvaluation
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFDateTimeEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
@@ -123,8 +122,8 @@ public class JDFDateTimeEvaluation extends JDFEvaluation
 
     /**
      * constructor for JDFDateTimeEvaluation
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFDateTimeEvaluation(
@@ -137,10 +136,10 @@ public class JDFDateTimeEvaluation extends JDFEvaluation
 
     /**
      * constructor for JDFDateTimeEvaluation
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFDateTimeEvaluation(
         CoreDocumentImpl myOwnerDocument,
@@ -166,12 +165,19 @@ public class JDFDateTimeEvaluation extends JDFEvaluation
 	// Attribute getter/ Setter
 	**************************************************************** */	
 
+    /**
+     * set attribute <code>ValueList</code>
+     * @param value the value to set the attribute to
+     */
     public void setValueList( JDFDateTimeRangeList value)
     {
 		setAttribute(AttributeName.VALUELIST, value.toString());
 	}
-    
- 
+
+    /**
+     * get attribute <code>ValueList</code>
+     * @return the value of the attribute
+     */
     public JDFDateTimeRangeList getValueList()
     {
         try
@@ -187,12 +193,19 @@ public class JDFDateTimeEvaluation extends JDFEvaluation
     }
     
 
+    /**
+     * set attribute <code>ValueDurationList</code>
+     * @param value the value to set the attribute to
+     */
     public void setValueDurationList( JDFDurationRangeList value)
     {
         setAttribute(AttributeName.VALUEDURATIONLIST, value.toString());
     }
-    
- 
+
+    /**
+     * get attribute <code>ValueDurationList</code>
+     * @return the value of the attribute
+     */
     public JDFDurationRangeList getValueDurationList()
     {
         try
@@ -214,7 +227,7 @@ public class JDFDateTimeEvaluation extends JDFEvaluation
      * fitsValue - tests, if the defined value matches ValueList,
      * specified for this Evaluation
      *
-     * @param String value - value to test
+     * @param value value to test
      * @return boolean - true, if the value matches ValueList or if ValueList is not specified
      */
     public final boolean fitsValue(String value)
@@ -235,11 +248,11 @@ public class JDFDateTimeEvaluation extends JDFEvaluation
     }
 
     /**
-     * fitsListType - tests, if the defined 'value' matches value of ListType attribute,
-     * specified for this Evaluation
+     * fitsListType - tests, if the defined <code>value</code> matches the value of 
+     * the ListType attribute, specified for this Evaluation
      *
-     * @param String value - value to test
-     * @return boolean - true, if 'value' matches specified ListType
+     * @param value value to test
+     * @return boolean - true, if <code>value</code> matches specified ListType
      */
     private final boolean fitsListType(String value)
     {
@@ -319,12 +332,12 @@ public class JDFDateTimeEvaluation extends JDFEvaluation
     }
 
     /**
-     * fitsValueList - tests, if the defined 'rangelist' matches ValueList
+     * fitsValueList - tests, if the defined <code>rangelist</code> matches the ValueList
      * specified for this Evaluation
      *
-     * @param JDFDateTimeRangeList rangelist - range list to test
+     * @param rangelist range list to test
      * 
-     * @return boolean - true, if 'rangelist' matches the valuelist or 
+     * @return boolean - true, if <code>rangelist</code> matches the valuelist or 
      * if ValueList is not specified
      */
     private final boolean fitsValueList(JDFDateTimeRangeList rangelist)
@@ -338,8 +351,8 @@ public class JDFDateTimeEvaluation extends JDFEvaluation
      * fitsValueDurationList - tests, if the duration of the defined 'rangelist' value
      * matches ValueDurationList, specified for this State
      *
-     * @param JDFDateTimeRangeList rangelist - range list to test
-     * @return boolean - true, if the duration of the defined 'rangelist' 
+     * @param rangelist range list to test
+     * @return boolean - true, if the duration of the defined <code>rangelist</code> 
      * is in the ValueList or if ValueDurationList is not specified
      */
     private final boolean fitsValueDurationList(JDFDateTimeRangeList rangelist)

@@ -29,11 +29,11 @@ public class JDFImageCompression extends JDFAutoImageCompression
 
     /**
      * Constructor for JDFImageCompression
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      * @throws DOMException
      */
-     public JDFImageCompression(
+    public JDFImageCompression(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
         throws DOMException
@@ -41,11 +41,10 @@ public class JDFImageCompression extends JDFAutoImageCompression
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFImageCompression
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      * @throws DOMException
      */
@@ -60,10 +59,10 @@ public class JDFImageCompression extends JDFAutoImageCompression
 
     /**
      * Constructor for JDFImageCompression
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      * @throws DOMException
      */
     public JDFImageCompression(
@@ -76,6 +75,10 @@ public class JDFImageCompression extends JDFAutoImageCompression
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
 
+    /**
+     * toString()
+     * @return String
+     */
     public String toString()
     {
         return "JDFImageCompression[  --> " + super.toString() + " ]";
@@ -146,12 +149,20 @@ public class JDFImageCompression extends JDFAutoImageCompression
     }
 
     
+    /**
+     * set attribute ImageFilter
+     * @param value enum value to set the attribute to
+     */
     public void setEnumImageFilter(EnumImageFilter value)
     {
         setAttribute(AttributeName.IMAGEFILTER, value.getName(),null);
     }
 
     //    /////////////////////////////////////////////////////////////////////
+    /**
+     * get enum attribute ImageFilter
+     * @return the enum value
+     */
     public EnumImageFilter getEnumImageFilter() 
     {
         return EnumImageFilter.getEnum(getAttribute(AttributeName.IMAGEFILTER, null, null));

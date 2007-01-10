@@ -105,7 +105,7 @@ public class VElement extends Vector
 	/**
 	 * constructor
 	 *
-	 * @param Vector m
+	 * @param m
 	 */
 	public VElement(Vector m)
 	{
@@ -116,7 +116,7 @@ public class VElement extends Vector
 	/**
 	 * constructor
 	 *
-	 * @param Vector m
+	 * @param n
 	 */
 	public VElement(NodeList n)
 	{
@@ -151,9 +151,9 @@ public class VElement extends Vector
 	/**
 	 * index - get the index of s in the vector
 	 *
-	 * @param KElement s
+	 * @param s KElement to search for
 	 *
-	 * @return int
+	 * @return int - the index of s in the vector
 	 */
 	public int index(KElement s)
 	{
@@ -172,9 +172,9 @@ public class VElement extends Vector
 	 * hasElement - checks if kElem is in the vector
      * in contrast to contains, this uses the isEquals method
 	 *
-	 * @param KElement kElem
+	 * @param kElem the element to look for
 	 * @deprecated 060216 use containsElement
-	 * @return boolean
+	 * @return true if s is contained in this
 	 */
 	public boolean hasElement (KElement kElem)
 	{
@@ -182,7 +182,7 @@ public class VElement extends Vector
 	}
 	
 	/**
-	 * AppendUniqueNotNull - append a string but ignore multiple entries
+	 * appendUniqueNotNull - append a string but ignore multiple entries
 	 *
 	 * @param KElement v
 	 * @deprecated simply use appendUnique
@@ -212,25 +212,37 @@ public class VElement extends Vector
 		}
 	}
 	
-	/**
-	 * AppendUnique - append a string but ignore multiple entries
-	 *
-	 * @param KElement v
-	 */
-	public void appendUnique(KElement elem)
-	{
-		if(elem==null)
-			return;
-		if (!(index(elem) >= 0))
-		{
-			addElement(elem);
-		}
-	}
+    /**
+     * AppendUnique - append a string but ignore multiple entries
+     *
+     * @param v the element to append
+     */
+    public void appendUnique(KElement elem)
+    {
+        if(elem==null)
+            return;
+        if (!(index(elem) >= 0))
+        {
+            addElement(elem);
+        }
+    }
+    /**
+     * AppendUnique - append a string but ignore multiple entries
+     *
+     * @param v the element to append
+     */
+    public void addAll(VElement elem)
+    {
+        if(elem==null)
+            return;
+        super.addAll(elem);
+ 
+    }
 	/**
      * does this contain an equivalent element 
-     * similar to contains but uses isEqual() instaed of equals()
-     * @param v
-     * @return
+     * similar to contains but uses isEqual() instead of equals()
+     * @param v the element to look for
+     * @return true, if v is contained in this
 	 */
 	public boolean containsElement(KElement elem)
     {
@@ -247,7 +259,7 @@ public class VElement extends Vector
     /**
 	 * AppendUnique - append a vector but ignore multiple entries
 	 *
-	 * @param VElement v
+	 * @param v the vector of elements to append
 	 */
 	public void appendUnique(VElement v)
 	{
@@ -262,13 +274,13 @@ public class VElement extends Vector
 	}
 	
     /**
-     * SetAttributes
+     * set the attribute key to the values defined in vValue
      *
-     * @param String key
-     * @param Vector vValue
-     * @param String nameSpaceURI
+     * @param key           key the attribute name
+     * @param vValue        vValue the vector of values
+     * @param nameSpaceURI  nameSpace of the attribute to set
      * 
-     * default: SetAttributes(key, vValue, null)
+     * @default setAttributes(key, vValue, null)
      */
     public void setAttributes(String key, Vector vValue, String nameSpaceURI)
     {
@@ -283,14 +295,15 @@ public class VElement extends Vector
             k.setAttribute(key, (String)vValue.elementAt(i), nameSpaceURI);
         }
     }
+    
     /**
      * SetAttribute in all elements of this
      *
-     * @param key
-     * @param value
-     * @param nameSpaceURI
+     * @param key          key the attribute name
+     * @param value        the value
+     * @param nameSpaceURI nameSpace of the attribute to set
      * 
-     * default: SetAttributes(key, value, null)
+     * @default SetAttributes(key, value, null)
      */
     public void setAttribute(String key, String value, String nameSpaceURI)
     {
@@ -304,10 +317,10 @@ public class VElement extends Vector
     /**
      * Remove Attribute in all elements of this
      *
-     * @param key
-     * @param nameSpaceURI
+     * @param key          key the attribute name
+     * @param nameSpaceURI nameSpace of the attribute to set
      * 
-     * default: removeAttributes(key, null)
+     * @default removeAttributes(key, null)
      */
     public void removeAttribute(String key, String nameSpaceURI)
     {
@@ -320,10 +333,10 @@ public class VElement extends Vector
     }
 	
 	/**
-	 * RemoveElements
+	 * Remove elements listed in v from this
 	 *
-	 * @param VElement v
-	 */
+	 * @param v elements to remove
+	 */ 
 	public void removeElements(VElement v)
 	{
 		for (int i = size() - 1; i >= 0; i--)
@@ -338,10 +351,10 @@ public class VElement extends Vector
 	/**
 	 * RemoveElements
 	 *
-	 * @param Element e
-	 * @param int     nMax
+	 * @param e    the element to remove
+	 * @param nMax maximum number of dulicate elements to remove
 	 * 
-	 * default: RemoveElements(e, 0)
+	 * @default RemoveElements(e, 0)
 	 */
 	public void removeElements(KElement e, int nMax)
 	{
@@ -365,10 +378,10 @@ public class VElement extends Vector
 	 * ToVector - parse a node list for elements spezified through parameters
 	 * note that the vector is static - i.e. the elements are NOT modified by operations to
 	 * the nodeList. This behavior is different than that of the actual nodelist!
-	 * @param String          element      - name of the element typ you want
-	 * @param JDFAttributeMap mAttrib      - a attribute typ you want
-	 * @param boolean         bAnd         - true, if you want to add the element if mAttrib was found in the element
-	 * @param String          nameSpaceURI - the namespace to search in
+	 * @param element      name of the element typ you want
+	 * @param mAttrib      a attribute typ you want
+	 * @param bAnd         true, if you want to add the element if mAttrib was found in the element
+	 * @param nameSpaceURI the namespace to search in
 	 * @return VElement - vector of all elements matching the conditions above
 	 */
 	public VElement toVector(
@@ -416,8 +429,8 @@ public class VElement extends Vector
 	}
 	
 	/**
-	 * Item - returns null if index is out of bounds or the requested item is not an ELEMENT_NODE !
-	 * @param int index - vector index of the element you want
+	 * item - returns null if index is out of bounds or the requested item is not an ELEMENT_NODE !
+	 * @param index vector index of the element you want
 	 * @return KElement - the requested item or null, if index is out of bounds
 	 */
 	public KElement item(int index)

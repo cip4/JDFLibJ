@@ -27,21 +27,20 @@ import org.cip4.jdflib.auto.JDFAutoJDFController;
 
     /**
      * Constructor for JDFJDFController
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFJDFController(
+    public JDFJDFController(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFJDFController
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFJDFController(
@@ -54,10 +53,10 @@ import org.cip4.jdflib.auto.JDFAutoJDFController;
 
     /**
      * Constructor for JDFJDFController
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFJDFController(
         CoreDocumentImpl myOwnerDocument,
@@ -68,6 +67,11 @@ import org.cip4.jdflib.auto.JDFAutoJDFController;
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
 
+    /**
+     * toString()
+     * @see org.cip4.jdflib.auto.JDFAutoJDFController#toString()
+     * @return String
+     */
     public String toString()
     {
         return "JDFJDFController[  --> " + super.toString() + " ]";

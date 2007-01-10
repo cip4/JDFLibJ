@@ -133,10 +133,9 @@ public class JDFXYPairState extends JDFAbstractState
         return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
     }
 
-
     /**
      * constructor for JDFXYPairState
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFXYPairState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
@@ -146,8 +145,8 @@ public class JDFXYPairState extends JDFAbstractState
 
     /**
      * constructor for JDFXYPairState
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFXYPairState(
@@ -160,10 +159,10 @@ public class JDFXYPairState extends JDFAbstractState
 
     /**
      * constructor for JDFXYPairState
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFXYPairState(
         CoreDocumentImpl myOwnerDocument,
@@ -396,13 +395,14 @@ public class JDFXYPairState extends JDFAbstractState
     **************************************************************** */
 
     /**
-    * fitsValue - tests, if the defined value matches Allowed or Present testlists,
-    * specified for this State
+    * fitsValue - checks whether <code>value</code> matches the Allowed/Present test lists
+    * specified for this State.
+    * In this State the test lists are ValueList AND XYRelation.
     *
-    * @param String value - value to test
-    * @param EnumFitsValue valuelist - test lists, that the value has to match.
-    * In this State the test lists are ValueList AND XYRelation. 
-    * Choose one of two values:  FitsValue_Allowed and FitsValue_Present. (Defaults to Allowed)
+    * @param value     value to test
+    * @param valuelist the test lists the value has to match.<br>
+    *                  Choose one of two values:  
+    *                  FitsValue_Allowed and FitsValue_Present. (Defaults to Allowed)
     * 
     * @return boolean - true, if the value is in the valuelist or if AllowedValueList is not specified
     */
@@ -448,13 +448,14 @@ public class JDFXYPairState extends JDFAbstractState
     
     
     /**
-     * fitsValueList - tests, if the defined 'rangelist' matches 
-     * the AllowedValueList or in the PresentValueList, specified for this State
+     * fitsValueList - checks whether <code>rangelist</code> matches 
+     * the AllowedValueList/PresentValueList specified for this State
      *
-     * @param JDFXYPairRangeList rangelist - range list to test
-     * @param EnumFitsValue valuelist - Switches between AllowedValueList and PresentValueList.
+     * @param rangelist range list to test
+     * @param valuelist switches between AllowedValueList and PresentValueList.
      * 
-     * @return boolean - true, if 'rangelist' matches the valuelist or if AllowedValueList is not specified
+     * @return boolean - true, if <code>rangelist</code> matches the valuelist or 
+     *         if AllowedValueList is not specified
      */
     private final boolean fitsValueList(JDFXYPairRangeList rangelist, EnumFitsValue valuelist)
     {
@@ -496,12 +497,13 @@ public class JDFXYPairState extends JDFAbstractState
     }
     
     /**
-    * fitsXYRelation - tests, if the defined 'xypair' value matches AllowedXYRelation or PresentXYRelation,
-    * specified for this State
+    * fitsXYRelation - checks whether <code>xypair</code> value matches the 
+    * AllowedXYRelation/PresentXYRelation specified for this State
     *
-    * @param JDFXYPair xypair - xypair to test
-    * @param EnumFitsValue xyrelation - Switches between AllowedXYRelation and PresentXYRelation.
-    * @return boolean - true, if the 'xypair' matches hwrelation or if AllowedXYRelation is not specified
+    * @param xypair     xypair to test
+    * @param xyrelation switches between AllowedXYRelation and PresentXYRelation.
+    * @return boolean - true, if the <code>xypair</code> matches xyrelation or 
+    *                   if AllowedXYRelation is not specified
     */
     private final boolean fitsXYRelation(JDFXYPair xypair, EnumFitsValue xyrelation)
     { 
@@ -527,14 +529,13 @@ public class JDFXYPairState extends JDFAbstractState
     
     
     /**
-     * fitsCompleteList - tests for the case, when ListType=CompleteList,
-     * if the defined 'value' matches AllowedValueList or PresentValueList,
-     * specified for this State
+     * fitsCompleteList - tests whether <code>value</code> matches the given testlist
+     * (ListType=fitsCompleteList)
      *
-     * @param JDFXYPairRangeList value - value to test
-     * @param JDFXYPairRangeList list - testlist are either AllowedValueList or PresentValueList.
+     * @param value value to test
+     * @param list  testlist, either AllowedValueList or PresentValueList.
      * 
-     * @return boolean - true, if 'value' matches testlist
+     * @return boolean - true, if <code>value</code> matches the testlist
      */
     private final boolean fitsCompleteList(JDFXYPairRangeList value, JDFXYPairRangeList list)
     {
@@ -572,15 +573,14 @@ public class JDFXYPairState extends JDFAbstractState
 
         
     /**
-    * fitsCompleteOrderedList - tests for the case, when ListType=CompleteOrderedList,
-    * if the defined 'value' matches AllowedValueList or PresentValueList,
-    * specified for this State
-    *
-    * @param JDFXYPairRangeList value - value to test
-    * @param JDFXYPairRangeList list - testlist are either AllowedValueList or PresentValueList.
-    * 
-    * @return boolean - true, if 'value' matches testlist
-    */
+     * fitsCompleteOrderedList - tests whether <code>value</code> matches the given testlist
+     * (ListType=CompleteOrderedList)
+     *
+     * @param value value to test
+     * @param list  testlist, either AllowedValueList or PresentValueList.
+     * 
+     * @return boolean - true, if <code>value</code> matches the testlist
+     */
     private final boolean fitsCompleteOrderedList(JDFXYPairRangeList value, JDFXYPairRangeList list)
     {
         int v_size = value.size();
@@ -603,15 +603,13 @@ public class JDFXYPairState extends JDFAbstractState
     }
 
     /**
-    * fitsContainedList - tests for the case, when ListType=ContainedList,
-    * if the defined 'value' matches AllowedValueList or PresentValueList,
-    * specified for this State
-    *
-    * @param JDFXYPairRangeList value - value to test
-    * @param JDFXYPairRangeList list - testlist are either AllowedValueList or PresentValueList.
-    * 
-    * @return boolean - true, if 'value' matches testlist
-    */
+     * fitsContainedList - tests whether <code>value</code> matches the given ValueList
+     * (ListType=ContainedList)
+     *
+     * @param value value to test
+     * @param list  ValueList
+     * @return boolean - true, if <code>value</code> matches the ValueList
+     */
     private final boolean fitsContainedList(JDFXYPairRangeList value, JDFXYPairRangeList list)
     {
         int v_size = value.size();

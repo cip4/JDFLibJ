@@ -108,7 +108,7 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
 
     /**
      * Constructor for JDFResourceAudit
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFResourceAudit(
@@ -118,11 +118,10 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFResourceAudit
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFResourceAudit(
@@ -135,10 +134,10 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
 
     /**
      * Constructor for JDFResourceAudit
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFResourceAudit(
             CoreDocumentImpl myOwnerDocument,
@@ -150,9 +149,9 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
     }
 
     /**
-     * add  a link to the new resource
-     * @param JDFResource r the resource that is valid after modification
-     * if r is not specified, return the link that already exists
+     * add a link to the new resource
+     * @param r the resource that is valid after modification<br>
+     *          if r is not specified, return the link that already exists
      * @return the ResourceLink object in the ResourceAudit that points to r
      * @deprecated use addNewOldLink(true,...)
      */
@@ -162,9 +161,9 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
     }
 
     /**
-     * add  a link to the original resource
-     * @param JDFResource r the resource that was valid before modification
-     * if r is not specified, return the link that already exists
+     * add a link to the new resource
+     * @param r the resource that is valid after modification<br>
+     *          if r is not specified, return the link that already exists
      * @return the ResourceLink object in the ResourceAudit that points to r
      * @deprecated use addNewOldLink(false,...)
      *
@@ -176,8 +175,8 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
 
     /**
      * add  a link to one of the resources 
-     * @param bool bNew - new or original?
-     * @param JDFResource r the resource that was valid before modification
+     * @param bNew   new or original?
+     * @param r      the resource that was valid before modification
      * @param bInput usage of the resource
      * @return the ResourceLink object in the ResourceAudit that points to r
      * @deprecated use addNewOldLink(bNew, r, bInput ? EnumUsage.Input : EnumUsage.Output);
@@ -189,9 +188,9 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
     }
     /**
      * add  a link to one of the resources 
-     * @param bool bNew - new or original?
-     * @param JDFResource r the resource that was valid before modification
-     * @param bInput usage of the resource
+     * @param bNew  true - new link, false - original link
+     * @param r     the resource that was valid before modification
+     * @param usage usage of the resource
      * @return the ResourceLink object in the ResourceAudit that points to r
      */
 
@@ -235,9 +234,9 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
 
     /**
      * add  a link to one of the resources 
-     * @param bool bNew - new or original?
-     * @param JDFResource r the resource that was valid before modification
-     * if r is not specified, return the link that already exists
+     * @param bNew new or original?
+     * @param r    the resource that was valid before modification<br>
+     *             if r is not specified, return the link that already exists
      * @return the ResourceLink object in the ResourceAudit that points to r
      */
     public JDFResourceLink getNewOldLink(boolean bNew)
@@ -259,7 +258,9 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
     }
 
     /**
-     * replace 
+     * replace
+     * @param newLink node to insert
+     * @return the updated element
      */
     public JDFResourceLink updateLink(JDFResourceLink newLink)
     {
@@ -290,7 +291,7 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
 
     /**
      * Get the vector of ResourceLinks
-     * @return VElement the resource links in this
+     * @return VElement: the resource links in this
      */
     public VElement getResourceLinkVector()
     {
@@ -309,12 +310,14 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
 
     /**
      * return a vector of unknown element nodenames
-     * @param boolean bIgnorePrivate - used by JDFElement during the validation
-     * !!! Do not change the signature of this method
-     * @param int nMax - maximum size of the returned vector
+     * <p>
+     * default: getUnknownElements(true, 999999)
+     * 
+     * @param bIgnorePrivate used by JDFElement during the validation
+     * @param nMax           maximum size of the returned vector
      * @return Vector - vector of unknown element nodenames
      * 
-     * default: getUnknownElements(true, 999999)
+     * !!! Do not change the signature of this method
      */
     public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
     {

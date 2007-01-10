@@ -94,7 +94,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
     /**
      * Constructor for JDFAmountPool
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFAmountPool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
@@ -104,8 +104,8 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
     /**
      * Constructor for JDFAmountPool
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFAmountPool(
@@ -118,10 +118,10 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
     /**
      * Constructor for JDFAmountPool
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFAmountPool(
         CoreDocumentImpl myOwnerDocument,
@@ -130,6 +130,14 @@ public class JDFAmountPool extends JDFAutoAmountPool
         String myLocalName)
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+    }
+
+    /**
+     * @param mPart
+     */
+    public void removePartAmount(JDFAttributeMap mPart)
+    {
+        getPartAmount(mPart).deleteNode();
     }
 
     //**************************************** Methods *********************************************
@@ -143,22 +151,21 @@ public class JDFAmountPool extends JDFAutoAmountPool
         return "JDFAmountPool[ -->" + super.toString() + "]";
     }
 
- 
     /**
      * Get a PartAmount that fits to the filter defined by mPart
-     * @param mAttribute&mPart filter for the part to set the status
+     * @param mPart filter for the part to set the status
      * @return the PartAmount that fits
      */
     public JDFPartAmount getPartAmount(JDFAttributeMap mPart)
     {
         final VElement vPartAmount = 
             getChildElementVector(ElementName.PARTAMOUNT, null,null, true, 0, false);
-        for (int i = vPartAmount.size() - 1; i >= 0; i--)
+         for (int i = vPartAmount.size() - 1; i >= 0; i--)
         {
             final JDFPartAmount partAmount = (JDFPartAmount) vPartAmount.elementAt(i);
-            final VJDFAttributeMap mapPart = partAmount.getPartMapVector();
+            final VJDFAttributeMap vMapPart = partAmount.getPartMapVector();
 
-            if (mapPart.contains(mPart))
+            if (vMapPart.contains(mPart))
             {
                 return partAmount; // exact match
             }
@@ -168,13 +175,38 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
     /**
      * Get a PartAmount that fits to the filter defined by mPart
-     * @param mAttribute&mPart filter for the part to set the status
+     * @param mPart filter for the part to set the status
+     * @param iSkip the iSkip'th element to get
      * @return the PartAmount that fits
-     * @deprecated ude either getPartAmount or getCreatePartAmount
+     */
+    public JDFPartAmount getPartAmount(JDFAttributeMap mPart,int iSkip)
+    {
+        final VElement vPartAmount = 
+            getChildElementVector(ElementName.PARTAMOUNT, null,null, true, 0, false);
+        int n=0;
+        for (int i = vPartAmount.size() - 1; i >= 0; i--)
+        {
+            final JDFPartAmount partAmount = (JDFPartAmount) vPartAmount.elementAt(i);
+            final VJDFAttributeMap vMapPart = partAmount.getPartMapVector();
+
+            if (vMapPart.subMap(mPart) && ++n>iSkip)
+            {
+                return partAmount; // exact match
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Get a PartAmount that fits to the filter defined by mPart
+     * @param mPart filter for the part to set the status
+     * @param bCreate
+     * @return the PartAmount that fits
+     * @deprecated use either getPartAmount or getCreatePartAmount
      */
     public JDFPartAmount getPartAmount(JDFAttributeMap mPart, boolean bCreate)
     {
-        JDFPartAmount p = getPartAmount(mPart);
+        JDFPartAmount p = getPartAmount(mPart,0);
         if (bCreate && p == null)
         {
             p = (JDFPartAmount) appendElement("PartAmount", JDFConstants.EMPTYSTRING);
@@ -185,7 +217,8 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
     /**
      * Get a vector of PartAmount that fits to the filter defined by mPart
-     * @param vmAttribute mPart filter vector for the part to set the status
+     * @param mPart filter vector for the part to set the status
+     * @param bCreate
      * @return the PartAmount that fits
      * @deprecated use getMatchingPartAmountVector
      * default: GetPartAmountVector(VJDFAttributeMap vmPart, false)
@@ -205,18 +238,35 @@ public class JDFAmountPool extends JDFAutoAmountPool
     }
 
     /**
-     * const get first element PartAmount
-     * @return  JDFPartAmount The element
-     *
-     * default: GetPartAmount(0)
+     * remove all partAmounts that are not specified in keepList
+     * @param keepList partAmounts to keep
      */
-    public JDFPartAmount getPartAmount(int iSkip)
+    public void reducePartAmounts(VJDFAttributeMap keepList)
     {
-        return super.getPartAmount(iSkip);
+        if(keepList==null)
+            return;
+        
+        final VElement v=getChildElementVector(ElementName.PARTAMOUNT, null, null, true, -1, true);
+        for(int i=0;i<v.size();i++)
+        {
+            final JDFPartAmount pa=(JDFPartAmount)v.elementAt(i);
+            final JDFAttributeMap map=pa.getPartMap();
+            boolean ciao=true;
+            for(int j=0;j<keepList.size();j++)
+            {
+                if(map.subMap(keepList.elementAt(j)))
+                {
+                    ciao=false;
+                    break;
+                }
+            }
+            if(ciao)
+                pa.deleteNode();
+        }
     }
-
     /**
-     * Append element PartAmount
+     * Append JDFPartAmount element
+     * @param mPart JDFAttributeMap to append
      */
     public JDFPartAmount appendPartAmount(JDFAttributeMap mPart)
     {
@@ -224,8 +274,10 @@ public class JDFAmountPool extends JDFAutoAmountPool
         p.setPartMap(mPart);
         return p;
     }
+    
     /**
-     * Append element PartAmount
+     * Append JDFPartAmount elements
+     * @param vPArt vector of partAmounts to append
      */
     public JDFPartAmount appendPartAmount(VJDFAttributeMap vPart)
     {
@@ -234,12 +286,12 @@ public class JDFAmountPool extends JDFAutoAmountPool
         return p;
     }
 
-    public void removePartAmount(JDFAttributeMap mPart)
-    {
-        getPartAmount(mPart).deleteNode();
-    }
-    
-    
+    /**
+     * get JDFPartAmount specified by mPart, create a new one if it 
+     * doesn't exist
+     * @param mPart JDFPartAmount to get/create
+     * @return
+     */
     public JDFPartAmount getCreatePartAmount(JDFAttributeMap mPart)
     {
         JDFPartAmount p = getPartAmount(mPart);
@@ -252,12 +304,12 @@ public class JDFAmountPool extends JDFAutoAmountPool
     }
     
     /**
-    * Get a vector of PartAmount that are supersets of the filter defined by mPart
+    * Get a vector of PartAmounts which are supersets of the filter defined by mPart<br>
     * i.e. mPart is a submap of all returned elements
     * 
-    * @param JDFAttributeMap mPart filter vector for the part to set the status
+    * @param mPart filter vector for the part to set the status
     * 
-    * @return VElement the vector of PartAmount elements that fit, null if nothing matches
+    * @return VElement - the vector of PartAmount elements that fit, null if nothing matches
     */
     public VElement getMatchingPartAmountVector(JDFAttributeMap mPart)
     {

@@ -95,7 +95,7 @@ public abstract class JDFAutoPreview extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.PREVIEWFILETYPE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumPreviewFileType.getEnum(0), "PNG");
@@ -104,8 +104,6 @@ public abstract class JDFAutoPreview extends JDFResource
         atrInfoTable[3] = new AtrInfoTable(AttributeName.COMPENSATION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumCompensation.getEnum(0), null);
         atrInfoTable[4] = new AtrInfoTable(AttributeName.CTM, 0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
         atrInfoTable[5] = new AtrInfoTable(AttributeName.DIRECTORY, 0x33333331, AttributeInfo.EnumAttributeType.URL, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.NOOP, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.WEBSETUP, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
     }
     
     protected AttributeInfo getTheAttributeInfo()
@@ -445,7 +443,7 @@ public abstract class JDFAutoPreview extends JDFResource
 
         /**
           * (20) get JDFMatrix attribute CTM
-          * @return JDFMatrixthe value of the attribute, null if a the
+          * @return JDFMatrix the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFMatrix
           */
         public JDFMatrix getCTM()
@@ -488,58 +486,6 @@ public abstract class JDFAutoPreview extends JDFResource
         public String getDirectory()
         {
             return getAttribute(AttributeName.DIRECTORY, null, JDFConstants.EMPTYSTRING);
-        }
-
-
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute NoOp
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute NoOp
-          * @param value: the value to set the attribute to
-          */
-        public void setNoOp(boolean value)
-        {
-            setAttribute(AttributeName.NOOP, value, null);
-        }
-
-
-
-        /**
-          * (18) get boolean attribute NoOp
-          * @return boolean the value of the attribute
-          */
-        public boolean getNoOp()
-        {
-            return getBoolAttribute(AttributeName.NOOP, null, false);
-        }
-
-
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute WebSetup
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute WebSetup
-          * @param value: the value to set the attribute to
-          */
-        public void setWebSetup(String value)
-        {
-            setAttribute(AttributeName.WEBSETUP, value, null);
-        }
-
-
-
-        /**
-          * (23) get String attribute WebSetup
-          * @return the value of the attribute
-          */
-        public String getWebSetup()
-        {
-            return getAttribute(AttributeName.WEBSETUP, null, JDFConstants.EMPTYSTRING);
         }
 
 

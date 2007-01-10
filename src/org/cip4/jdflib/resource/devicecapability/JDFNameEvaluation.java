@@ -108,10 +108,9 @@ public class JDFNameEvaluation extends JDFEvaluation
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
 
-
     /**
      * constructor for JDFNameEvaluation
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFNameEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
@@ -121,8 +120,8 @@ public class JDFNameEvaluation extends JDFEvaluation
 
     /**
      * constructor for JDFNameEvaluation
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFNameEvaluation(
@@ -135,10 +134,10 @@ public class JDFNameEvaluation extends JDFEvaluation
 
     /**
      * constructor for JDFNameEvaluation
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFNameEvaluation(
         CoreDocumentImpl myOwnerDocument,
@@ -163,6 +162,10 @@ public class JDFNameEvaluation extends JDFEvaluation
     // Attribute getter/ setter
     **************************************************************** */
 
+    /**
+     * get attribute <code>ValueList</code>
+     * @return VString - the attribute
+     */
     public VString getValueList()
     {
         Vector v = StringUtil.tokenize(AttributeName.VALUELIST, JDFConstants.BLANK, false);
@@ -170,16 +173,28 @@ public class JDFNameEvaluation extends JDFEvaluation
         return vs;
     }
 
+    /**
+     * set attribute <code>ValueList</code>
+     * @param vs the value to set the attribute to
+     */
     public void setValueList(VString vs)
     {
-        setAttribute(AttributeName.VALUELIST, vs.getString(" ",null,null), null);
+        setAttribute(AttributeName.VALUELIST, StringUtil.setvString(vs," ",null,null), null);
     }
 
+    /**
+     * set attribute <code>RegExp</code>
+     * @param value the value to set the attribute to
+     */
     public void setRegExp(String value)
     {
         setAttribute(AttributeName.REGEXP, value);
     }
 
+    /**
+     * get attribute <code>RegExp</code>
+     * @return String - the value of the attribute
+     */
     public String getRegExp()
     {
         return getAttribute(AttributeName.REGEXP, null, JDFConstants.EMPTYSTRING);
@@ -191,11 +206,11 @@ public class JDFNameEvaluation extends JDFEvaluation
     **************************************************************** */
     
     /**
-     * fitsValue - tests, if the defined 'value' matches testlists, 
+     * fitsValue - checks whether <code>value</code> matches the testlists 
      * specified for this Evaluation
      *
-     * @param String value - value to test
-     * @return boolean - true, if 'value' matches testlists or 
+     * @param value value to test
+     * @return boolean - true, if <code>value</code> matches the testlists or 
      * if testlists are not specified
      */
     public boolean fitsValue(String value)
@@ -206,12 +221,12 @@ public class JDFNameEvaluation extends JDFEvaluation
     }
     
     /**
-     * fitsValueList - tests, if the defined 'value' matches 
-     * the AllowedValueList or the PresentValueList, specified for this Evaluation
+     * fitsValueList - checks whether <code>value</code> matches 
+     * the AllowedValueList or the PresentValueList specified for this Evaluation
      *
-     * @param String value - nmtokens to test
-     * @param EnumFitsValue valuelist - Switches between AllowedValueList and PresentValueList.
-     * @return boolean - true, if 'value' matches valuelist or if AllowedValueList is not specified
+     * @param value nmtokens to test
+     * @return boolean - true, if <code>value</code> matches <code>valuelist</code> or 
+     * if AllowedValueList is not specified
      */
     private final boolean fitsValueList(String value)
     {
@@ -259,36 +274,25 @@ public class JDFNameEvaluation extends JDFEvaluation
     }
     
     /**
-     * fitsRegExp - tests, if the defined string 'str' matches RegExp,
+     * fitsRegExp - checks whether <code>str</code> matches the RegExp
      * specified for this Evaluation
      *
-     * @param String str - string to test
-     * @return boolean - true, if 'str' matches RegExp or if RegExp is not specified
+     * @param str string to test
+     * @return boolean - true, if <code>str</code> matches the RegExp or if no RegExp is specified
      */
     private final boolean fitsRegExp(String str) 
     {
         if (!hasAttribute(AttributeName.REGEXP))
             return true; // if RegExp is not specified return true 
-        
-        String rExp = getRegExp();
-
-        VString v = new VString(str, null);
-        int size=v.size();
-
-        for (int i=0; i<size; i++) // tests every token, that 'str' consists of
-        {
-            if (!StringUtil.matches(v.stringAt(i),rExp))
-                return false;
-        }
-        return true;
+        return StringUtil.matches(str,getRegExp());
     }
     
     /**
-     * fitsListType - tests, if the defined 'value' matches value of 
-     * ListType attribute, specified for this Evaluation
+     * fitsListType - checks whether <code>value</code> matches the value of the 
+     * ListType attribute specified for this Evaluation
      *
-     * @param String value - value to test
-     * @return boolean - true, if 'value' matches specified value of ListType
+     * @param value value to test
+     * @return boolean - true, if <code>value</code> matches the specified value of ListType
      */
     private final boolean fitsListType(String value)
     {
@@ -296,6 +300,8 @@ public class JDFNameEvaluation extends JDFEvaluation
             return false;
         
         EnumListType listType = getListType();
+        if(listType==null)
+            return true;
 
         if (listType.equals(EnumListType.SingleValue) || listType.equals(EnumListType.getEnum(0))) 
         {// default ListType = SingleValue
@@ -322,12 +328,12 @@ public class JDFNameEvaluation extends JDFEvaluation
     
         
     /**
-     * fitsContainedList - tests for the case, when ListType=CompleteList,
-     * does the defined 'value' match ValueList, specified for this Evaluation
+     * fitsCompleteList - tests whether <code>value</code> matches the given ValueList
+     * (ListType=CompleteList)
      *
-     * @param VString value - value to test
-     * @param VString list - specified ValueList
-     * @return boolean - true, if 'value' matches testlist
+     * @param value value to test
+     * @param list  ValueList
+     * @return boolean - true, if <code>value</code> matches the ValueList
      */
     private final boolean fitsCompleteList(VString value, VString list)
     {
@@ -365,12 +371,12 @@ public class JDFNameEvaluation extends JDFEvaluation
 
     
     /**
-     * fitsCompleteOrderedList - tests for the case, when ListType=CompleteOrderedList,
-     * does the defined 'value' match ValueList, specified for this Evaluation
+     * fitsCompleteOrderedList - tests whether <code>value</code> matches the given ValueList
+     * (ListType=CompleteOrderedList)
      *
-     * @param VString value - value to test
-     * @param VString list - specified ValueList
-     * @return boolean - true, if 'value' matches testlist
+     * @param value value to test
+     * @param list  ValueList
+     * @return boolean - true, if <code>value</code> matches the ValueList
      */
      private final boolean fitsCompleteOrderedList(VString value, VString list)
      {
@@ -394,12 +400,12 @@ public class JDFNameEvaluation extends JDFEvaluation
      }
      
      /**
-      * fitsContainedList - tests for the case, when ListType=ContainedList,
-      * does the defined 'value' match ValueList, specified for this Evaluation
+      * fitsContainedList - tests whether <code>value</code> matches the given ValueList
+      * (ListType=ContainedList)
       *
-      * @param VString value - value to test
-      * @param VString list -  specified ValueList
-      * @return boolean - true, if 'value' matches testlist
+      * @param value value to test
+      * @param list  ValueList
+      * @return boolean - true, if <code>value</code> matches the ValueList
       */
      private final boolean fitsContainedList(VString value, VString list)
      {
@@ -420,10 +426,10 @@ public class JDFNameEvaluation extends JDFEvaluation
      }
     
     /**
-     * isUnique - tests, if 'value' string has only unique tokens
+     * isUnique - tests whether <code>value</code> string has unique tokens only
      *
-     * @param VString value - value to test
-     * @return boolean - true, if 'value' has only unique tokens
+     * @param value value to test
+     * @return boolean - true, if <code>value</code> has unique tokens only
      */ 
     private final boolean isUnique(VString v)
     {

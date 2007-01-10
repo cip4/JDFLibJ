@@ -24,10 +24,10 @@ import org.cip4.jdflib.auto.JDFAutoGangQuFilter;
 public class JDFGangQuFilter extends JDFAutoGangQuFilter
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Constructor for JDFGangQuFilter
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
 	public JDFGangQuFilter(
@@ -36,12 +36,11 @@ public class JDFGangQuFilter extends JDFAutoGangQuFilter
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
-	
-	
+
 	/**
 	 * Constructor for JDFGangQuFilter
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
 	public JDFGangQuFilter(
@@ -51,13 +50,13 @@ public class JDFGangQuFilter extends JDFAutoGangQuFilter
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
-	
+
 	/**
 	 * Constructor for JDFGangQuFilter
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @param localName
+	 * @param myLocalName
 	 */
 	public JDFGangQuFilter(
 			CoreDocumentImpl myOwnerDocument,
@@ -68,6 +67,11 @@ public class JDFGangQuFilter extends JDFAutoGangQuFilter
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 	
+	/**
+	 * toString()
+	 * @see org.cip4.jdflib.auto.JDFAutoGangQuFilter#toString()
+	 * @return String
+	 */
 	public String toString()
 	{
 		return "JDFGangQuFilter[  --> " + super.toString() + " ]";

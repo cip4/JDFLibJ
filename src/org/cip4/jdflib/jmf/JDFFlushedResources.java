@@ -89,10 +89,10 @@ import org.cip4.jdflib.auto.JDFAutoFlushedResources;
 public class JDFFlushedResources extends JDFAutoFlushedResources
 {
     private static final long serialVersionUID = 1L;
-    
+
     /**
      * Constructor for JDFFlushedResources
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFFlushedResources(
@@ -101,12 +101,11 @@ public class JDFFlushedResources extends JDFAutoFlushedResources
     {
         super(myOwnerDocument, qualifiedName);
     }
-    
-    
+
     /**
      * Constructor for JDFFlushedResources
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFFlushedResources(
@@ -116,13 +115,13 @@ public class JDFFlushedResources extends JDFAutoFlushedResources
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
-    
+
     /**
      * Constructor for JDFFlushedResources
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFFlushedResources(
             CoreDocumentImpl myOwnerDocument,
@@ -137,6 +136,7 @@ public class JDFFlushedResources extends JDFAutoFlushedResources
     /**
      * toString
      *
+     * @see org.cip4.jdflib.auto.JDFAutoFlushedResources#toString()
      * @return String
      */
     public String toString()

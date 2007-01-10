@@ -133,6 +133,7 @@ public class JDFVersions {
     /**
      * sets the JDF version that all checks are forced to.
      *
+     * @param b 
      * @return String: JDF version string
      */
     public static void setForceVersion(boolean b)
@@ -141,6 +142,8 @@ public class JDFVersions {
     }
     
     /**
+     * getTheMask
+     * @param v the version to look for
      * @return Returns the bit mask for isolating the appropriate
      * validity bits.
      */
@@ -148,7 +151,10 @@ public class JDFVersions {
     {
         return jdfVersions[getIndexFromVersion(v)].validityMask;
     }
+    
     /**
+     * getTheOffset
+     * @param v
      * @return Returns the theOffset.
      */
     public static long getTheOffset(EnumVersion v) 
@@ -156,6 +162,11 @@ public class JDFVersions {
         return jdfVersions[getIndexFromVersion(v)].validityOffset;
     }
     
+    /**
+     * getIndexFromVersion
+     * @param v
+     * @return
+     */
     private static int getIndexFromVersion(EnumVersion v){
         int i=v.getValue();
         if(forceVersion || (i<=0) || (i>jdfVersions.length))

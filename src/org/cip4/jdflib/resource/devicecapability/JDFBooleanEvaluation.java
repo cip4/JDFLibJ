@@ -110,24 +110,22 @@ public class JDFBooleanEvaluation extends JDFEvaluation
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
 
-
     /**
      * Constructor for JDFBooleanEvaluation
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFBooleanEvaluation(
+    public JDFBooleanEvaluation(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFBooleanEvaluation
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFBooleanEvaluation(
@@ -140,10 +138,10 @@ public class JDFBooleanEvaluation extends JDFEvaluation
 
     /**
      * Constructor for JDFBooleanEvaluation
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFBooleanEvaluation(
         CoreDocumentImpl myOwnerDocument,
@@ -171,6 +169,7 @@ public class JDFBooleanEvaluation extends JDFEvaluation
     // Attribute Getter / Setter
     **************************************************************** */
  /**
+  * getValueList
   * @return Vector of Boolean objects
   */  
     public Vector getValueList()
@@ -194,30 +193,40 @@ public class JDFBooleanEvaluation extends JDFEvaluation
 
         return vRet;
     }
- /**
-  * 
-  * @param value vector of Boolean values
-  */   
-    public void setValueList(Vector value)
-    {
-        String s = JDFConstants.EMPTYSTRING;
-        for (int i = 0; i < value.size(); i++)
-        {
-            Boolean b = (Boolean) value.elementAt(i);
-            if (b.booleanValue())
-            {
-                s += JDFConstants.TRUE;
-            }
-            else
-            {
-                s += JDFConstants.FALSE;
-            }
-            if (i > 0)
-                s += JDFConstants.BLANK;
-        }
-        setAttribute(AttributeName.VALUELIST, s, null);
+    
+    /**
+     * set ValueList
+     * @param value vector of Boolean values
+     */   
+       public void setValueList(Vector value)
+       {
+           String s = JDFConstants.EMPTYSTRING;
+           for (int i = 0; i < value.size(); i++)
+           {
+               Boolean b = (Boolean) value.elementAt(i);
+               if (b.booleanValue())
+               {
+                   s += JDFConstants.TRUE;
+               }
+               else
+               {
+                   s += JDFConstants.FALSE;
+               }
+               if (i > 0)
+                   s += JDFConstants.BLANK;
+           }
+           setAttribute(AttributeName.VALUELIST, s, null);
 
-    }
+       }
+       
+       /**
+        * convenience method for single valued boolean lists
+        * @param value the single boolean to set ValueList to
+        */   
+       public void setValueList(boolean value)
+       {
+           setAttribute(AttributeName.VALUELIST, value, null);
+       }
     
       
     /* ******************************************************
@@ -229,8 +238,8 @@ public class JDFBooleanEvaluation extends JDFEvaluation
      * fitsValue - tests, if the defined value matches ValueList, 
      * specified for this Evaluation
      *
-     * @param String value - value to test
-     * @return boolean - true, if 'value' matches testlists or 
+     * @param valueStr value to test
+     * @return boolean - true, if <code>value</code> matches testlists or 
      * if ValueList is not specified
      */
     public final boolean fitsValue(String valueStr)
@@ -253,8 +262,8 @@ public class JDFBooleanEvaluation extends JDFEvaluation
     /**
      * fitsValueList - tests, if the defined 'value' matches ValueList,
      *
-     * @param String value - token to test
-     * @return boolean - true, if 'value' matches valuelist or 
+     * @param value token to test
+     * @return boolean - true, if <code>value</code> matches valuelist or 
      * if ValueList is not specified
      */
     private final boolean fitsValueList(String value) 
@@ -280,7 +289,7 @@ public class JDFBooleanEvaluation extends JDFEvaluation
      * fitsListType - tests, if the defined 'value' matches value of 
      * ListType attribute, specified for this Evaluation
      *
-     * @param String valueStr - value to test
+     * @param value value to test
      * @return boolean - true, if 'value' matches specified value of ListType
      */
     private final boolean fitsListType(String value)

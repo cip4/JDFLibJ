@@ -144,11 +144,11 @@ public class JDFor extends JDFNodeTerm
      * when combined in a boolean “or” function.
      * 
      * Looks for Evaluations, that “or” consists of, and tests the status of every Evaluation, 
-     * till the result of a whole boolean expression will be determinated - tests if attribute map 'm' has a key,
-     * specified by Evaluation/BasicPreflightTest/@Name and if 'm' has such key, checks
-     * if its value fits testlists, specified for matching Evaluation (uses FitsValue(value))
+     * until the result of a whole boolean expression is determinated. Then tests if attribute map 'm' has a key
+     * specified by Evaluation/BasicPreflightTest/@Name. If 'm' has such key, it checks
+     * whether its value fits the testlists specified for matching Evaluation (uses FitsValue(value))
      *
-     * @param JDFAttributeMap m -  key-value pair attribute map
+     * @param m key-value pair attribute map
      * @return boolean - true, if boolean “or” expression evaluates to “true”
      */
     public boolean fitsMap(JDFAttributeMap m) 
@@ -172,7 +172,7 @@ public class JDFor extends JDFNodeTerm
      * to determine if, as a set, they evaluate to “true” 
      * when combined in a boolean “or” function.
      *
-     * @param jdf - JDFNode we test to know if the Device can accept it 
+     * @param jdf JDFNode we test iot know if the Device can accept it 
      * @return boolean - true, if boolean “or” expression evaluates to “true”
      */
     public boolean fitsJDF(KElement jdf, KElement reportRoot) 

@@ -125,10 +125,9 @@ public class JDFDurationState extends JDFAbstractState
         return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
     }
 
-
     /**
      * constructor for JDFDurationState
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFDurationState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
@@ -138,8 +137,8 @@ public class JDFDurationState extends JDFAbstractState
 
     /**
      * constructor for JDFDurationState
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFDurationState(
@@ -152,10 +151,10 @@ public class JDFDurationState extends JDFAbstractState
 
     /**
      * constructor for JDFDurationState
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFDurationState(
         CoreDocumentImpl myOwnerDocument,
@@ -292,9 +291,9 @@ public class JDFDurationState extends JDFAbstractState
      * fitsValue - tests, if the defined value matches Allowed test lists or Present test lists,
      * specified for this State
      *
-     * @param String value - value to test
-     * @param EnumFitsValue tetlists - test lists, that the value has to match.
-     * In this State the test list is ValueList. 
+     * @param value value to test
+     * @param testlists test lists, that the value has to match.
+     * In this State the test list is ValueList.<br> 
      * Choose one of two values: FitsValue_Allowed or FitsValue_Present. (Defaults to Allowed)
      * 
      * @return boolean - true, if the value matches test list or if AllowedValueList is not specified
@@ -323,8 +322,8 @@ public class JDFDurationState extends JDFAbstractState
      * fitsValueList - tests, if the defined 'rangelist' matches 
      * the AllowedValueList or in the PresentValueList, specified for this State
      *
-     * @param JDFDurationRangeList rangelist - range list to test
-     * @param EnumFitsValue valuelist - Switches between AllowedValueList and PresentValueList.
+     * @param rangelist range list to test
+     * @param valuelist switches between AllowedValueList and PresentValueList.
      * 
      * @return boolean - true, if 'rangelist' matches the valuelist or if AllowedValueList is not specified
      */
@@ -366,8 +365,8 @@ public class JDFDurationState extends JDFAbstractState
      * if the defined 'value' matches AllowedValueList or PresentValueList,
      * specified for this State
      *
-     * @param JDFDurationRangeList value - value to test
-     * @param JDFDurationRangeList list - testlist are either AllowedValueList or PresentValueList.
+     * @param value value to test
+     * @param list  testlists are either AllowedValueList or PresentValueList.
      * 
      * @return boolean - true, if 'value' matches testlist
      */
@@ -410,8 +409,8 @@ public class JDFDurationState extends JDFAbstractState
     * if the defined 'value' matches AllowedValueList or PresentValueList,
     * specified for this State
     *
-    * @param JDFDurationRangeList value - value to test
-    * @param JDFDurationRangeList list - testlist are either AllowedValueList or PresentValueList.
+    * @param value value to test
+    * @param list  testlists are either AllowedValueList or PresentValueList.
     * 
     * @return boolean - true, if 'value' matches testlist
     */
@@ -441,8 +440,8 @@ public class JDFDurationState extends JDFAbstractState
     * if the defined 'value' matches AllowedValueList or PresentValueList,
     * specified for this State
     *
-    * @param JDFDurationRangeList value - value to test
-    * @param JDFDurationRangeList list - testlist are either AllowedValueList or PresentValueList.
+    * @param value value to test
+    * @param list  testlists are either AllowedValueList or PresentValueList.
     * 
     * @return boolean - true, if 'value' matches testlist
     */

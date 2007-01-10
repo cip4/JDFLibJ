@@ -176,7 +176,7 @@ public class JDFIntentResource extends JDFResource
         VString vKeys = new VString();
         if (KElement.isWildCard(key))
         {
-            VElement v = getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.DATATYPE, null), 
+            VElement v = getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.DATATYPE, (String)null), 
             true, true, 0);
             for (int i = 0; i < v.size(); i++)
             {

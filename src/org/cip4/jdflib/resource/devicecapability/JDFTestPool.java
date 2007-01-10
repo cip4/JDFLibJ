@@ -104,11 +104,10 @@ public class JDFTestPool extends JDFAutoTestPool
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFTestPool
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      * @throws DOMException
      */
@@ -123,10 +122,10 @@ public class JDFTestPool extends JDFAutoTestPool
 
     /**
      * Constructor for JDFTestPool
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      * @throws DOMException
      */
     public JDFTestPool(
@@ -150,9 +149,9 @@ public class JDFTestPool extends JDFAutoTestPool
     }
     
     /**
-     *  get element Test with id idTest
+     * get element <code>Test</code> with ID idTest
      * @param idTest ID attribute of the test element
-     * @return JDFTest the element
+     * @return JDFTest - the element
      * 
     */
     public JDFTest getTest(String idTest)
@@ -161,9 +160,9 @@ public class JDFTestPool extends JDFAutoTestPool
     }
 
     /**
-     *  get element Test with id idTest
+     * append element <code>Test</code>
      * @param term type of term to append to this test
-     * @return JDFTest the element
+     * @return JDFTest - the appended element
      * 
     */
     public JDFTest appendTestTerm(EnumTerm term)

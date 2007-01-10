@@ -29,21 +29,20 @@ import org.cip4.jdflib.core.JDFConstants;
 
     /**
      * Constructor for JDFMessageService
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFMessageService(
+    public JDFMessageService(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFMessageService
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFMessageService(
@@ -56,10 +55,10 @@ import org.cip4.jdflib.core.JDFConstants;
 
     /**
      * Constructor for JDFMessageService
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFMessageService(
         CoreDocumentImpl myOwnerDocument,
@@ -70,6 +69,9 @@ import org.cip4.jdflib.core.JDFConstants;
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
 
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.auto.JDFAutoMessageService#toString()
+     */
     public String toString()
     {
         return "JDFMessageService[  --> " + super.toString() + " ]";

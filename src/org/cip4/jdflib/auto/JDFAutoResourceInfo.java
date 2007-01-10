@@ -73,6 +73,7 @@ package org.cip4.jdflib.auto;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,6 +86,8 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
@@ -102,19 +105,22 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[10];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[13];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUALAMOUNT, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
         atrInfoTable[1] = new AtrInfoTable(AttributeName.AMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
         atrInfoTable[2] = new AtrInfoTable(AttributeName.AVAILABLEAMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
         atrInfoTable[3] = new AtrInfoTable(AttributeName.LEVEL, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumLevel.getEnum(0), "OK");
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.MODULEID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.RESOURCENAME, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.MODULEID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x33333111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
         atrInfoTable[6] = new AtrInfoTable(AttributeName.PROCESSUSAGE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
         atrInfoTable[7] = new AtrInfoTable(AttributeName.PRODUCTID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.STATUS, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, JDFResource.EnumResStatus.getEnum(0), null);
-        atrInfoTable[9] = new AtrInfoTable(AttributeName.UNIT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.RESOURCEID, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[9] = new AtrInfoTable(AttributeName.RESOURCENAME, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[10] = new AtrInfoTable(AttributeName.STATUS, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, JDFResource.EnumResStatus.getEnum(0), null);
+        atrInfoTable[11] = new AtrInfoTable(AttributeName.UNIT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[12] = new AtrInfoTable(AttributeName.USAGE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, JDFResourceLink.EnumUsage.getEnum(0), null);
     }
     
     protected AttributeInfo getTheAttributeInfo()
@@ -126,7 +132,7 @@ public abstract class JDFAutoResourceInfo extends JDFElement
     private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[5];
     static
     {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.AMOUNTPOOL, 0x33333333);
+        elemInfoTable[0] = new ElemInfoTable(ElementName.AMOUNTPOOL, 0x66666111);
         elemInfoTable[1] = new ElemInfoTable(ElementName.COSTCENTER, 0x66666666);
         elemInfoTable[2] = new ElemInfoTable(ElementName.MISDETAILS, 0x66666611);
         elemInfoTable[3] = new ElemInfoTable(ElementName.PART, 0x33333311);
@@ -371,26 +377,38 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 
         
         /* ---------------------------------------------------------------------
-        Methods for Attribute ResourceName
+        Methods for Attribute ModuleIndex
         --------------------------------------------------------------------- */
         /**
-          * (36) set attribute ResourceName
+          * (36) set attribute ModuleIndex
           * @param value: the value to set the attribute to
           */
-        public void setResourceName(String value)
+        public void setModuleIndex(JDFIntegerRangeList value)
         {
-            setAttribute(AttributeName.RESOURCENAME, value, null);
+            setAttribute(AttributeName.MODULEINDEX, value, null);
         }
 
 
 
         /**
-          * (23) get String attribute ResourceName
-          * @return the value of the attribute
+          * (20) get JDFIntegerRangeList attribute ModuleIndex
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFIntegerRangeList
           */
-        public String getResourceName()
+        public JDFIntegerRangeList getModuleIndex()
         {
-            return getAttribute(AttributeName.RESOURCENAME, null, JDFConstants.EMPTYSTRING);
+            String strAttrName = "";
+            JDFIntegerRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.MODULEINDEX, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
         }
 
 
@@ -449,6 +467,58 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 
         
         /* ---------------------------------------------------------------------
+        Methods for Attribute ResourceID
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute ResourceID
+          * @param value: the value to set the attribute to
+          */
+        public void setResourceID(String value)
+        {
+            setAttribute(AttributeName.RESOURCEID, value, null);
+        }
+
+
+
+        /**
+          * (23) get String attribute ResourceID
+          * @return the value of the attribute
+          */
+        public String getResourceID()
+        {
+            return getAttribute(AttributeName.RESOURCEID, null, JDFConstants.EMPTYSTRING);
+        }
+
+
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ResourceName
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute ResourceName
+          * @param value: the value to set the attribute to
+          */
+        public void setResourceName(String value)
+        {
+            setAttribute(AttributeName.RESOURCENAME, value, null);
+        }
+
+
+
+        /**
+          * (23) get String attribute ResourceName
+          * @return the value of the attribute
+          */
+        public String getResourceName()
+        {
+            return getAttribute(AttributeName.RESOURCENAME, null, JDFConstants.EMPTYSTRING);
+        }
+
+
+
+        
+        /* ---------------------------------------------------------------------
         Methods for Attribute Status
         --------------------------------------------------------------------- */
         /**
@@ -499,40 +569,68 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 
 
 
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute Usage
+        --------------------------------------------------------------------- */
+        /**
+          * (5) set attribute Usage
+          * @param enumVar: the enumVar to set the attribute to
+          */
+        public void setUsage(JDFResourceLink.EnumUsage enumVar)
+        {
+            setAttribute(AttributeName.USAGE, enumVar.getName(), null);
+        }
+
+
+
+        /**
+          * (9) get attribute Usage
+          * @return the value of the attribute
+          */
+        public JDFResourceLink.EnumUsage getUsage()
+        {
+            return JDFResourceLink.EnumUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
+        }
+
+
+
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
  */
 
-    /** (26) getCreateAmountPool
-     * 
-     * @param iSkip number of elements to skip
+    /**
+     * (24) const get element AmountPool
      * @return JDFAmountPool the element
      */
-    public JDFAmountPool getCreateAmountPool(int iSkip)
+    public JDFAmountPool getAmountPool()
     {
-        return (JDFAmountPool)getCreateElement_KElement(ElementName.AMOUNTPOOL, null, iSkip);
+        return (JDFAmountPool) getElement(ElementName.AMOUNTPOOL, null, 0);
     }
+
+
+
+    /** (25) getCreateAmountPool
+     * 
+     * @return JDFAmountPool the element
+     */
+    public JDFAmountPool getCreateAmountPool()
+    {
+        return (JDFAmountPool) getCreateElement_KElement(ElementName.AMOUNTPOOL, null, 0);
+    }
+
+
 
 
 
     /**
-     * (27) const get element AmountPool
-     * @param iSkip number of elements to skip
-     * @return JDFAmountPool the element
-     * default is getAmountPool(0)     */
-    public JDFAmountPool getAmountPool(int iSkip)
+     * (29) append elementAmountPool
+     */
+    public JDFAmountPool appendAmountPool() throws JDFException
     {
-        return (JDFAmountPool) getElement(ElementName.AMOUNTPOOL, null, iSkip);
+        return (JDFAmountPool) appendElementN(ElementName.AMOUNTPOOL, 1, null);
     }
-
-
-
-    public JDFAmountPool appendAmountPool()
-    {
-        return (JDFAmountPool) appendElement(ElementName.AMOUNTPOOL, null);
-    }
-
     /**
      * (24) const get element CostCenter
      * @return JDFCostCenter the element

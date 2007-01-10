@@ -75,15 +75,20 @@ ALL RIGHTS RESERVED
 @Author: sabjon@topmail.de   using a code generator
 Warning! very preliminary test version. Interface subject to change without prior notice!
 Revision history:    ...
-**/
+ **/
 
 
 package org.cip4.jdflib.jmf;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoResourceQuParams;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
+import org.cip4.jdflib.resource.JDFResource;
 
 
 public class JDFResourceQuParams extends JDFAutoResourceQuParams
@@ -92,97 +97,148 @@ public class JDFResourceQuParams extends JDFAutoResourceQuParams
 
     /**
      * Constructor for JDFResourceQuParams
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFResourceQuParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
+    public JDFResourceQuParams(
+            CoreDocumentImpl myOwnerDocument,
+            String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFResourceQuParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFResourceQuParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
+            CoreDocumentImpl myOwnerDocument,
+            String myNamespaceURI,
+            String qualifiedName)
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
 
     /**
      * Constructor for JDFResourceQuParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFResourceQuParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
+            CoreDocumentImpl myOwnerDocument,
+            String myNamespaceURI,
+            String qualifiedName,
+            String myLocalName)
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
 
+    /**
+     * toString()
+     * @return String
+     */
     public String toString()
     {
         return "JDFResourceQuParams[  --> " + super.toString() + " ]";
     }
+
+    /**
+     * get part map vector
+     * @return VJDFAttributeMap: vector of attribute maps, one for each part
+     */
+    public VJDFAttributeMap getPartMapVector()
+    {
+        return super.getPartMapVector();
+    }
+
+    /**
+     * set all parts to those defined by vParts
+     * @param vParts vector of attribute maps for the parts
+     */
+    public void setPartMapVector(VJDFAttributeMap vParts)
+    {
+        super.setPartMapVector(vParts);
+    }
+
+    /**
+     * set all parts to those defined by mPart
+     * @param mPart attribute map for the part to set
+     */
+    public void setPartMap(JDFAttributeMap mPart)
+    {
+        super.setPartMap(mPart);
+    }
+
+    /**
+     * remove the part defined by mPart
+     * @param mPart attribute map for the part to remove
+     */
+    public void removePartMap(JDFAttributeMap mPart)
+    {
+        super.removePartMap(mPart);
+    }
+
+    /**
+     * check whether the part defined in mPart is included
+     * @param mPart attribute map to look for
+     * @return boolean - returns true if the part exists
+     */
+    public boolean hasPartMap(JDFAttributeMap mPart)
+    {
+        return super.hasPartMap(mPart);
+    }
+
+    /**
+     * sets all relevant parameters of <code>this</code> to the values specified 
+     * in resourceLink or its linked resource or JDF node
+     * 
+     * @param resourceLink the resourceLink to extract the information from
+     */
+    public void setLink(JDFResourceLink resourceLink)
+    {
+        if(resourceLink==null)
+            return;
+        final JDFResource r=resourceLink.getTarget();
+
+        final JDFNode parentJDF = resourceLink.getParentJDF();
+        setJDF(parentJDF);
+        setProcessUsage(resourceLink.getEnumProcessUsage());
+        
+        if(r.hasAttribute(AttributeName.PRODUCTID))
+            setProductID(r.getProductID());
+        setResourceID(r.getID());
+        setResourceName(r.getLocalName());
+        setUsage(resourceLink.getUsage());
+        setPartMapVector(resourceLink.getPartMapVector());
+
+    }
+
+    /**
+     * sets all relevant parameters of this to the values specified 
+     * in the JDF node
+     * @param parentJDF
+     */
+    public void setJDF(final JDFNode parentJDF)
+    {
+        if(parentJDF==null)
+            return;
+        setJobID(parentJDF.getJobID(true));
+        setJobPartID(parentJDF.getJobPartID(true));
+    }
     
     /**
-    * get part map vector
-    * @return VJDFAttributeMap: vector of attribute maps, one for each part
-    */
-   public VJDFAttributeMap getPartMapVector()
-   {
-       return super.getPartMapVector();
-   }
-
-   /**
-    * set all parts to those define in vParts
-    * @param VJDFAttributeMap vParts: vector of attribute maps for the parts
-    */
-   public void setPartMapVector(VJDFAttributeMap vParts)
-   {
-       super.setPartMapVector(vParts);
-   }
-
-   /**
-    * set all parts to those define in vParts
-    * @param JDFAttributeMap mPart: attribute map for the part to set
-    */
-   public void setPartMap(JDFAttributeMap mPart)
-   {
-       super.setPartMap(mPart);
-   }
-
-   /**
-    * remove the part defined in mPart
-    * @param JDFAttributeMap mPart: attribute map for the part to remove
-    */
-   public void removePartMap(JDFAttributeMap mPart)
-   {
-       super.removePartMap(mPart);
-   }
-
-   /**
-    * check whether the part defined in mPart is included
-    * @param JDFAttributeMap mPart: attribute map for the part to remove
-    * @return boolean - returns true if the part exists
-    */
-   public boolean hasPartMap(JDFAttributeMap mPart)
-   {
-       return super.hasPartMap(mPart);
-   }
+     * set ProcessUsage to the enum processusage
+     *
+     * @param processUsage
+     */
+    public void setProcessUsage(EnumProcessUsage processUsage)
+    {
+        setAttribute(AttributeName.PROCESSUSAGE, processUsage==null ? null : processUsage.getName(), null);
+    }    
 }
 
 

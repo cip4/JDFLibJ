@@ -90,7 +90,9 @@ import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoJMF;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -106,10 +108,8 @@ public class JDFJMF extends JDFAutoJMF
 
     /**
      * Constructor for JDFJMF
-     * 
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
-
      */
     public JDFJMF (CoreDocumentImpl myOwnerDocument, String qualifiedName)
     {
@@ -119,28 +119,26 @@ public class JDFJMF extends JDFAutoJMF
 
     /**
      * Constructor for JDFJMF
-     * 
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFJMF (CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
     {
-        super (myOwnerDocument, myNamespaceURI, qualifiedName);
+        super (myOwnerDocument, myNamespaceURI==null ? getSchemaURL() : myNamespaceURI, qualifiedName);
         init ();
     }
 
     /**
      * Constructor for JDFJMF
-     * 
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFJMF (CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
     {
-        super (myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+        super (myOwnerDocument, myNamespaceURI==null ? getSchemaURL() : myNamespaceURI, qualifiedName, myLocalName);
         init ();
     }
 
@@ -164,19 +162,18 @@ public class JDFJMF extends JDFAutoJMF
     {
         super.init ();
         setTimeStamp(null);
-        addNameSpace (JDFConstants.EMPTYSTRING, getSchemaURL ());
         setVersion (getDefaultJDFVersion());
         return true;
     }
 
     /**
      * version fixing routine for JMF
-     *
-     * uses heuristics to modify this element and its children to be compatible with a given version
-     * in general, it will be able to move from low to high versions but potentially fail 
+     *<p>
+     * Uses heuristics to modify this element and its children to be compatible with a given version.<br>
+     * In general, it will be able to move from low to high versions, but potentially fail 
      * when attempting to move from higher to lower versions
      *
-     * @param version: version that the resulting element should correspond to
+     * @param version version that the resulting element should correspond to
      * @return true if successful
      */
     public boolean fixVersion(EnumVersion version)
@@ -341,8 +338,7 @@ public class JDFJMF extends JDFAutoJMF
     /**
      * GetMessage - get the ith message, regardless of type
      * 
-     * @param int
-     *            i - messge index
+     * @param i messge index
      * 
      * @return JDFMessage - the ith message
      * @deprecated use getMessageElement(null)
@@ -353,13 +349,11 @@ public class JDFJMF extends JDFAutoJMF
     }
 
     /**
-     * Get the ith command,
+     * Get the ith command
      * 
-     * @param int
-     *            i index of the message
-     * @param bool
-     *            bCreate if true, create one, if it does not exist
-     * @return JDFCommand the message element
+     * @param i index of the message
+     * @param bCreate if true, create one, if it does not exist
+     * @return JDFCommand: the message element
      * @deprecated use getMessageElement
      */
     // JDFCommand GetCommand(int i=0,bool bCreate=false);
@@ -385,10 +379,8 @@ public class JDFJMF extends JDFAutoJMF
     /**
      * Get the ith query,
      * 
-     * @param int
-     *            i index of the message
-     * @param bool
-     *            bCreate if true, create one, if it does not exist
+     * @param i index of the message
+     * @param bCreate if true, create one, if it does not exist
      * @return JDFQuery the message element
      *     
      * @deprecated use getMessageElement
@@ -415,12 +407,7 @@ public class JDFJMF extends JDFAutoJMF
     }
 
     /**
-     * Get the ith response,
-     * 
-     * @param int
-     *            i index of the message
-     * @param bool
-     *            bCreate if true, create one, if it does not exist
+     * getResponse()
      * @return JDFResponse the message element
      * @deprecated use getMessageElement
      */
@@ -431,7 +418,7 @@ public class JDFJMF extends JDFAutoJMF
     }
 
     /**
-     * 
+     * getResponse() 
      * @param i
      * @param bCreate
      * @return
@@ -447,10 +434,8 @@ public class JDFJMF extends JDFAutoJMF
     /**
      * Get the ith signal,
      * 
-     * @param int
-     *            i index of the message
-     * @param bool
-     *            bCreate if true, create one, if it does not exist
+     * @param i index of the message
+     * @param bCreate if true, create one, if it does not exist
      * @return JDFSignal the message element
      * @deprecated use getMessageElement
      */
@@ -475,9 +460,9 @@ public class JDFJMF extends JDFAutoJMF
     }
 
     /**
-     * get an existing message element or create it if it is not yet there
+     * get an existing message element, create it if it doesn't exist
      * @param family the Message family - Query, Acknowledge, Command, Response, Registration or Signal
-     * @param get the ith element
+     * @param i get the ith element
      * @return the newly created message
      */
     public JDFMessage getCreateMessageElement (JDFMessage.EnumFamily family, int i)
@@ -507,14 +492,30 @@ public class JDFJMF extends JDFAutoJMF
     }
 
     /**
-     * append a message element to this
+     * create a new JMF with one Message Element of family <code>family</code> and type <code>typ</code>
+     * @param family the Message family - Query, Acknowledge, Command, Response, Registration or Signal
+     * @param typ the messages @Type value, null if unknown
+     * @return the newly created message
+     */    
+    public static JDFJMF createJMF (JDFMessage.EnumFamily family, JDFMessage.EnumType typ)
+    {
+        if (family==null)
+            throw new JDFException ("createJMF: creating undefined message family");
+
+        JDFDoc d=new JDFDoc(ElementName.JMF);
+        JDFJMF jmf=d.getJMFRoot();
+        jmf.appendMessageElement(family, typ);
+        return jmf;
+    }
+    
+    /**
+     * append a message element to <code>this</code>
      * @param family the Message family - Query, Acknowledge, Command, Response, Registration or Signal
      * @param typ the messages @Type value, null if unknown
      * @return the newly created message
      */    
     public JDFMessage appendMessageElement (JDFMessage.EnumFamily family, JDFMessage.EnumType typ)
     {
-
         if (family==null)
             throw new JDFException ("appendMessageElement: creating undefined message family");
 
@@ -531,7 +532,7 @@ public class JDFJMF extends JDFAutoJMF
      * @param family
      * @param i
      * @return
-     * @deprecated since 060619 use  getMessageElement (JDFMessage.EnumFamily family, JDFMessage.EnumType typ, int i)
+     * @deprecated since 060619, use  getMessageElement (JDFMessage.EnumFamily family, JDFMessage.EnumType typ, int i)
      */
     public JDFMessage getMessageElement (JDFMessage.EnumFamily family, int i)
     {
@@ -540,9 +541,9 @@ public class JDFJMF extends JDFAutoJMF
     
     /**
      * get the ith message element of family type family
-     * @param family - the
-     * @param typ
-     * @param i
+     * @param family the Message family - Query, Acknowledge, Command, Response, Registration or Signal
+     * @param typ    the messages @Type value, null if unknown
+     * @param i      the i'th message element to get
      * @return the matching message, null if none are found
      */
     public JDFMessage getMessageElement (JDFMessage.EnumFamily family, JDFMessage.EnumType typ, int i)
@@ -579,12 +580,11 @@ public class JDFJMF extends JDFAutoJMF
     {
         return getMessageVector (null, null);
     }
+    
     /**
-     * 
      * get a vector of all messages in this JMF
      * 
-     * @param JDFMessage::EnumFamily
-     *            family requested message family
+     * @param family requested message family
      * @return VElement all message elements
      * @deprecated use getMessageVector (family, null)
      */
@@ -596,10 +596,8 @@ public class JDFJMF extends JDFAutoJMF
     /**
      * get a vector of all messages in this JMF
      * 
-     * @param JDFMessage::EnumFamily
-     *            family requested message family
-     * @param JDFMessage::EnumType
-     *            typ requested message type
+     * @param family requested message family
+     * @param typ    requested message type
      * @return VElement all message elements
      * 
      */
@@ -629,11 +627,9 @@ public class JDFJMF extends JDFAutoJMF
     /**
      * Get the ith acknowledge,
      * 
-     * @param int
-     *            i index of the message
-     * @param bool
-     *            bCreate if true, create one, if it does not exist
-     * @return JDFAcknowledge the message element
+     * @param i       index of the message
+     * @param bCreate if true, create one, if it does not exist
+     * @return JDFAcknowledge: the message element
      * @deprecated use getMessageElement
      */
     public JDFAcknowledge getAcknowledge ()
@@ -656,12 +652,10 @@ public class JDFJMF extends JDFAutoJMF
     }
 
     /**
-     * Append a Command,
+     * Append a Command
      * 
-     * @param JDFMessage::EnumTyp
-     *            typ the type attribute of the appended message
+     * @param typ the type attribute of the appended message
      * @return JDFQuery the newly created message element
-     * @deprecated use appendMessageElement
      */
     public JDFCommand appendCommand (JDFMessage.EnumType typ)
     {
@@ -669,12 +663,10 @@ public class JDFJMF extends JDFAutoJMF
     }
 
     /**
-     * Append a query,
+     * Append a query
      * 
-     * @param JDFMessage::EnumTyp
-     *            typ the type attribute of the appended message
-     * @return JDFQuery the newly created message element
-     * @deprecated use AppendMessageElement
+     * @param typ the type attribute of the appended message
+     * @return JDFQuery: the newly created message element
      */
     public JDFQuery appendQuery (JDFMessage.EnumType typ)
     {
@@ -683,14 +675,11 @@ public class JDFJMF extends JDFAutoJMF
     }
 
     /**
-     * Append a Signal,
+     * Append a Signal
      * 
-     * @param JDFMessage::EnumTyp
-     *            typ the type attribute of the appended message
-     * @return JDFQuery the newly created message element
-     * @deprecated use AppendMessageElement
+     * @param typ the type attribute of the appended message
+     * @return JDFSignal: the newly created message element
      */
-    // JDFSignal AppendSignal(JDFMessage::EnumType typ);
     public JDFSignal appendSignal (JDFMessage.EnumType typ)
     {
         return (JDFSignal) appendMessageElement (JDFMessage.EnumFamily.Signal, typ);
@@ -698,12 +687,10 @@ public class JDFJMF extends JDFAutoJMF
     }
 
     /**
-     * Append a Response,
+     * Append a Response
      * 
-     * @param JDFMessage::EnumTyp
-     *            typ the type attribute of the appended message
-     * @return JDFQuery the newly created message element
-     * @deprecated use AppendMessageElement
+     * @param typ the type attribute of the appended message
+     * @return JDFResponse the newly created message element
      */
     public JDFResponse appendResponse (JDFMessage.EnumType typ)
     {
@@ -712,12 +699,10 @@ public class JDFJMF extends JDFAutoJMF
     }
 
     /**
-     * Append an Acknowledge,
+     * Append an Acknowledge
      * 
-     * @param JDFMessage::EnumTyp
-     *            typ the type attribute of the appended message
-     * @return JDFQuery the newly created message element
-     * @deprecated use AppendMessageElement
+     * @param typ the type attribute of the appended message
+     * @return JDFAcknowledge the newly created message element
      */
     public JDFAcknowledge appendAcknowledge (JDFMessage.EnumType typ)
     {

@@ -89,10 +89,10 @@ import org.cip4.jdflib.auto.JDFAutoFlushQueueParams;
 public class JDFFlushQueueParams extends JDFAutoFlushQueueParams
 {
     private static final long serialVersionUID = 1L;
-    
+
     /**
-     * Constructor for JDFFlushQueueParams
-     * @param ownerDocument
+     * JDFFlushQueueParams
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFFlushQueueParams(
@@ -101,12 +101,11 @@ public class JDFFlushQueueParams extends JDFAutoFlushQueueParams
     {
         super(myOwnerDocument, qualifiedName);
     }
-    
-    
+
     /**
-     * Constructor for JDFFlushQueueParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * JDFFlushQueueParams
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFFlushQueueParams(
@@ -116,13 +115,13 @@ public class JDFFlushQueueParams extends JDFAutoFlushQueueParams
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
-    
+
     /**
-     * Constructor for JDFFlushQueueParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * JDFFlushQueueParams
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFFlushQueueParams(
             CoreDocumentImpl myOwnerDocument,
@@ -136,7 +135,7 @@ public class JDFFlushQueueParams extends JDFAutoFlushQueueParams
     //**************************************** Methods *********************************************
     /**
      * toString
-     *
+     * @see org.cip4.jdflib.auto.JDFAutoFlushQueueParams#toString()
      * @return String
      */
     public String toString()

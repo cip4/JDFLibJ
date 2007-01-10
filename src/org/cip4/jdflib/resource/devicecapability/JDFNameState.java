@@ -124,10 +124,9 @@ public class JDFNameState extends JDFAbstractState
         return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
     }
 
-
     /**
      * constructor for JDFNameState
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFNameState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
@@ -137,8 +136,8 @@ public class JDFNameState extends JDFAbstractState
 
     /**
      * constructor for JDFNameState
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFNameState(
@@ -151,10 +150,10 @@ public class JDFNameState extends JDFAbstractState
 
     /**
      * constructor for JDFNameState
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFNameState(
         CoreDocumentImpl myOwnerDocument,
@@ -208,21 +207,21 @@ public class JDFNameState extends JDFAbstractState
 
     public void setAllowedValueList(VString vs)
     {
-        setAttribute(AttributeName.ALLOWEDVALUELIST, vs.getString(" ",null,null), null);
+        setAttribute(AttributeName.ALLOWEDVALUELIST, StringUtil.setvString(vs," ",null,null), null);
     }
 
     public VString getPresentValueList()
     {
         if (hasAttribute(AttributeName.PRESENTVALUELIST))
         {
-            return new VString(getAttribute(AttributeName.PRESENTVALUELIST, null, JDFConstants.EMPTYSTRING), null);
+            return new VString(getAttribute(AttributeName.PRESENTVALUELIST, null, null), null);
         }
         return getAllowedValueList();
     }
 
     public void setPresentValueList(VString vs)
     {
-        setAttribute(AttributeName.PRESENTVALUELIST, vs.getString(" ",null,null), null);
+        setAttribute(AttributeName.PRESENTVALUELIST, StringUtil.setvString(vs," ",null,null), null);
     }
 
     public void setAllowedRegExp(String value)
@@ -255,15 +254,15 @@ public class JDFNameState extends JDFAbstractState
     **************************************************************** */
 
     /**
-     * fitsValue - tests, if the defined value matches Allowed test lists or
-     * Present test lists, specified for this State
+     * fitsValue - checks whether <code>value</code> matches the testlists 
+     * specified for this State
      *
-     * @param String value - value to test
-     * @param EnumFitsValue tetlists - test lists, that the value has to match.
-     * In this State the test lists are ValueList, RegExp. 
+     * @param value     value to test
+     * @param testlists the test lists the value has to match.
+     * In this State the test lists are ValueList, RegExp.<br> 
      * Choose one of two values: FitsValue_Allowed or FitsValue_Present. (Defaults to Allowed)
      * 
-     * @return boolean - true, if the value matches all test lists or if Allowed test lists are not specified
+     * @return boolean - true, if the <code>value</code> matches all test lists or if Allowed test lists are not specified
      */
     public boolean fitsValue(String value, EnumFitsValue testlists)
     {
@@ -273,12 +272,12 @@ public class JDFNameState extends JDFAbstractState
     }
     
     /**
-     * fitsValueList - tests, if the defined 'value' matches 
-     * the AllowedValueList or the PresentValueList, specified for this State
+     * fitsValueList - checks whether <code>value</code> matches  
+     * the AllowedValueList/PresentValueList specified for this State
      *
-     * @param String value - nmtokens to test
-     * @param EnumFitsValue valuelist - Switches between AllowedValueList and PresentValueList.
-     * @return boolean - true, if 'value' matches valuelist or if AllowedValueList is not specified
+     * @param value     nmtokens to test
+     * @param valuelist switches between AllowedValueList and PresentValueList.
+     * @return boolean - true, if <code>value</code> matches <code>valuelist</code> or if AllowedValueList is not specified
      */
     private final boolean fitsValueList(String value, EnumFitsValue valuelist)
     {
@@ -333,47 +332,13 @@ public class JDFNameState extends JDFAbstractState
     }
     
     /**
-     * fitsRegExp - tests, if the defined string 'str' matches
-     * AllowedRegExp or the PresentRegExp, specified for this State
+     * fitsCompleteList - tests whether <code>value</code> matches the 
+     * AllowedValueList/PresentValueList specified for this State
+     * (ListType=CompleteList)
      *
-     * @param String str - string to test
-     * @param EnumFitsValue regexp - Switches between AllowedRegExp and PresentRegExp.
-     * @return boolean - true, if 'str' matches RegExp or if AllowedRegExp is not specified
-     */
-    private final boolean fitsRegExp(String str, EnumFitsValue regexp) 
-    {
-        String rExp;
-        if (regexp.equals(EnumFitsValue.Allowed)) 
-        {
-            rExp = getAllowedRegExp();
-        } 
-        else 
-        {
-            rExp = getPresentRegExp();
-        }
-        if(rExp.length()==0)
-            return true; // if AllowedRegExp is not specified return true 
-
-        VString v = new VString(str, null);
-        int size=v.size();
-
-        for (int i=0; i<size; i++) // tests every token, that 'value' consists of
-        {
-            if (!StringUtil.matches(v.stringAt(i),rExp))
-                return false;
-        }
-        return true;
-    }
-    
-    /**
-     * fitsCompleteList - tests for the case, when ListType=CompleteList,
-     * if the defined 'value' matches AllowedValueList or PresentValueList,
-     * specified for this State
-     *
-     * @param JDFRectangleRangeList value - value to test
-     * @param JDFRectangleRangeList list - testlist are either AllowedValueList or PresentValueList.
-     * 
-     * @return boolean - true, if 'value' matches testlist
+     * @param value value to test
+     * @param list  ValueList
+     * @return boolean - true, if <code>value</code> matches the ValueList
      */
     private final boolean fitsCompleteList(VString value, VString list)
     {
@@ -411,14 +376,13 @@ public class JDFNameState extends JDFAbstractState
 
     
     /**
-     * fitsCompleteOrderedList - tests for the case, when ListType=CompleteOrderedList,
-     * if the defined 'value' matches AllowedValueList or PresentValueList,
-     * specified for this State
+     * fitsCompleteOrderedList - tests whether <code>value</code> matches the 
+     * AllowedValueList/PresentValueList specified for this State
+     * (ListType=CompleteOrderedList)
      *
-     * @param VString value - value to test
-     * @param VString list - testlist are either AllowedValueList or PresentValueList.
-     * 
-     * @return boolean - true, if 'value' matches testlist
+     * @param value value to test
+     * @param list  testlist
+     * @return boolean - true, if <code>value</code> matches the testlist
      */
      private final boolean fitsCompleteOrderedList(VString value, VString list)
      {
@@ -442,14 +406,13 @@ public class JDFNameState extends JDFAbstractState
      }
      
     /**
-     * fitsContainedList - tests for the case, when ListType=ContainedList,
-     * if the defined 'value' matches AllowedValueList or PresentValueList,
-     * specified for this State
+     * fitsContainedList - tests whether <code>value</code> matches the 
+     * AllowedValueList/PresentValueList specified for this State
+     * (ListType=ContainedList)
      *
-     * @param VString value - value to test
-     * @param VString list - testlist is either AllowedValueList or PresentValueList.
-     * 
-     * @return boolean - true, if 'value' matches testlist
+     * @param value value to test
+     * @param list  testlist
+     * @return boolean - true, if <code>value</code> matches the testlist
      */
      private final boolean fitsContainedList(VString value, VString list)
      {
@@ -470,10 +433,10 @@ public class JDFNameState extends JDFAbstractState
      }
     
     /**
-     * isUnique - tests, if 'value' string has only unique tokens
+     * isUnique - tests whether <code>value</code> string has unique tokens only
      *
-     * @param VString value - value to test
-     * @return boolean - true, if 'value' has only unique tokens
+     * @param value value to test
+     * @return boolean - true, if <code>value</code> has unique tokens only
      */ 
     private final boolean isUnique(VString v)
     {

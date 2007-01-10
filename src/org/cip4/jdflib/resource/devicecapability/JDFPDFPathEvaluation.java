@@ -122,10 +122,9 @@ public class JDFPDFPathEvaluation extends JDFEvaluation
         return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
     }
 
-
     /**
      * constructor for JDFPDFPathEvaluation
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFPDFPathEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
@@ -135,8 +134,8 @@ public class JDFPDFPathEvaluation extends JDFEvaluation
 
     /**
      * constructor for JDFPDFPathEvaluation
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFPDFPathEvaluation(
@@ -149,10 +148,10 @@ public class JDFPDFPathEvaluation extends JDFEvaluation
 
     /**
      * constructor for JDFPDFPathEvaluation
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFPDFPathEvaluation(
         CoreDocumentImpl myOwnerDocument,
@@ -217,10 +216,10 @@ public class JDFPDFPathEvaluation extends JDFEvaluation
     **************************************************************** */
 
     /** 
-     * Sets the Value attribute of the i-th subelement Value
+     * Set the value of the iSkip'th element <code>Value</code>
      *
-     * @param int iSkip: the number of Value elements to skip
-     * @param String value: value to set the attribute to
+     * @param iSkip the number of <code>Value</code> elements to skip
+     * @param value value to set the element to
      */
     public void setValueValue(int iSkip, String value)
     {
@@ -229,10 +228,10 @@ public class JDFPDFPathEvaluation extends JDFEvaluation
     }
     
     /**
-     * Gets the Value attribute of the i-th subelement Value
+     * Get the value of the iSkip'th subelement <code>Value</code>
      *
-     * @param int iSkip: the number of Value elements to skip
-     * @return String: the attribute value
+     * @param iSkip the number of <code>Value</code> elements to skip
+     * @return String: the value
      */
     public final String getValueValue(int iSkip) 
     {
@@ -246,11 +245,11 @@ public class JDFPDFPathEvaluation extends JDFEvaluation
     **************************************************************** */
     
     /**
-     * fitsValue - tests, if the defined 'value' matches testlists, 
+     * fitsValue - checks whether <code>value</code> matches the testlists 
      * specified for this Evaluation
      *
-     * @param String value -  value to test
-     * @return boolean - true, if 'value' matches testlists or 
+     * @param value value to test
+     * @return boolean - true, if <code>value</code> matches the testlists or 
      * if testlists are not specified
      */
     public final boolean fitsValue(String value)
@@ -261,11 +260,11 @@ public class JDFPDFPathEvaluation extends JDFEvaluation
     }
     
     /**
-     * fitsLength - tests, if the defined pfdPath matches Length, 
+     * fitsLength - checks whether <code>pfdPath</code> matches the Length 
      * specified for this Evaluation
      *
-     * @param String pdfPath - PDFPath to test
-     * @return boolean - true, if 'pdfPath' matches Length or 
+     * @param pdfPath PDFPath to test
+     * @return boolean - true, if <code>pdfPath</code> matches the Length or 
      * if Length is not specified
      */
     private final boolean fitsLength(String pdfPath)
@@ -279,12 +278,12 @@ public class JDFPDFPathEvaluation extends JDFEvaluation
     }
     
     /**
-     * fitsValueElem - tests, if the defined PDFPath matches 
-     * subelement Value, specified for this Evaluation
+     * fitsValueElem - checks whether <code>pdfPath</code> matches 
+     * the subelement Value specified for this Evaluation
      *
-     * @param String pdfPath - PDFPath to test
+     * @param pdfPath PDFPath to test
      *
-     * @return boolean - true, if 'pdfPath' matches subelement Value 
+     * @return boolean - true, if <code>pdfPath</code> matches subelement Value 
      */
     private final boolean fitsValueElem(String pdfPath) 
     {

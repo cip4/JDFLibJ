@@ -3,7 +3,7 @@
 * The CIP4 Software License, Version 1.0
 *
 *
-* Copyright (c) 2001-2004 The International Cooperation for the Integration of 
+* Copyright (c) 2001-2006 The International Cooperation for the Integration of 
 * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
 * reserved.
 *
@@ -90,20 +90,21 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.util.StringUtil;
 
 public class JDFEnumerationState extends JDFAbstractState
 {
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
     static 
     {
-        // TODO Vorbelegung mit null - unsauber
         atrInfoTable[0]  = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST,  0x33333331, AttributeInfo.EnumAttributeType.enumerations, null, null);
         atrInfoTable[1]  = new AtrInfoTable(AttributeName.CURRENTVALUE,      0x33333331, AttributeInfo.EnumAttributeType.enumeration, null, null);
         atrInfoTable[2]  = new AtrInfoTable(AttributeName.DEFAULTVALUE,      0x33333331, AttributeInfo.EnumAttributeType.enumeration, null, null);
-        // TODO Vorbelegung mit null - unsauber
         atrInfoTable[3]  = new AtrInfoTable(AttributeName.PRESENTVALUELIST,  0x33333331, AttributeInfo.EnumAttributeType.enumerations, null, null);
+        atrInfoTable[4]  = new AtrInfoTable(AttributeName.ALLOWEDREGEXP,     0x33331111, AttributeInfo.EnumAttributeType.RegExp, null, null);
+        atrInfoTable[5]  = new AtrInfoTable(AttributeName.PRESENTREGEXP,     0x33331111, AttributeInfo.EnumAttributeType.RegExp, null, null);
     }
 
     protected AttributeInfo getTheAttributeInfo() 
@@ -123,10 +124,9 @@ public class JDFEnumerationState extends JDFAbstractState
         return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
     }
 
-
     /**
      * constructor for JDFEnumerationState
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFEnumerationState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
@@ -136,8 +136,8 @@ public class JDFEnumerationState extends JDFAbstractState
 
     /**
      * constructor for JDFEnumerationState
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFEnumerationState(
@@ -150,10 +150,10 @@ public class JDFEnumerationState extends JDFAbstractState
 
     /**
      * constructor for JDFEnumerationState
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFEnumerationState(
         CoreDocumentImpl myOwnerDocument,
@@ -207,7 +207,7 @@ public class JDFEnumerationState extends JDFAbstractState
 	
     public void setAllowedValueList( VString vs)
     {
-		setAttribute(AttributeName.ALLOWEDVALUELIST, vs.getString(" ",null,null), null);
+		setAttribute(AttributeName.ALLOWEDVALUELIST, StringUtil.setvString(vs," ",null,null), null);
 	}
 
     public VString getPresentValueList()
@@ -224,7 +224,7 @@ public class JDFEnumerationState extends JDFAbstractState
 		String s = JDFConstants.EMPTYSTRING;
         if(vs != null)
         {
-            s = vs.getString(" ",null,null);
+            s = StringUtil.setvString(vs," ",null,null);
         }
         setAttribute(AttributeName.PRESENTVALUELIST, s);
 	}
@@ -234,30 +234,30 @@ public class JDFEnumerationState extends JDFAbstractState
 	**************************************************************** */
 
 	/**
-     * fitsValue - tests, if the defined value matches the Allowed test lists
+     * fitsValue - tests whether <code>value</code> matches the Allowed test lists
      * or Present test lists, specified for this State
      *
-     * @param String value - value to test
-     * @param EnumFitsValue testlist - test lists, that the value has to match.
-     * In this State there is only one test list - ValueList. 
-     * Choose one of two values: FitsValue_Allowed or FitsValue_Present. (Defaults to Allowed)
+     * @param value    value to test
+     * @param testlist the test lists the value has to match.
+     *                 In this State there is only one test list - ValueList. <br>
+     *                 Choose one of two values: FitsValue_Allowed or FitsValue_Present (Defaults to Allowed).
      * 
      * @return boolean - true, if 'value' matches testlists or if AllowedValueList is not specified
      */    
     public boolean fitsValue(String value, EnumFitsValue testlists)
     {
         if (fitsListType(value))
-            return (fitsValueList(value,testlists));
+            return (fitsValueList(value,testlists) && fitsRegExp(value,testlists));
         return false;
     }
     
     /**
-     * fitsValueList - tests, if the defined 'value' matches 
+     * fitsValueList - tests whether <code>value</code> matches 
      * the AllowedValueList or the PresentValueList, specified for this State
      *
-     * @param String value - nmtokens to test
-     * @param EnumFitsValue valuelist - Switches between AllowedValueList and PresentValueList.
-     * @return boolean - true, if 'value' matches valuelist or if AllowedValueList is not specified
+     * @param value     nmtokens to test
+     * @param valuelist switches between AllowedValueList and PresentValueList.
+     * @return boolean - true, if <code>value</code> matches valuelist or if AllowedValueList is not specified
      */
     private final boolean fitsValueList(String value, EnumFitsValue valuelist)
     {
@@ -313,14 +313,13 @@ public class JDFEnumerationState extends JDFAbstractState
     
     
     /**
-     * fitsCompleteList - tests for the case, when ListType=CompleteList,
-     * if the defined 'value' matches AllowedValueList or PresentValueList,
-     * specified for this State
+     * fitsCompleteList - tests whether <code>value</code> matches AllowedValueList or PresentValueList
+     * (ListType=CompleteList)
      *
-     * @param JDFRectangleRangeList value - value to test
-     * @param JDFRectangleRangeList list - testlist are either AllowedValueList or PresentValueList.
+     * @param value value to test
+     * @param list testlist, either AllowedValueList or PresentValueList.
      * 
-     * @return boolean - true, if 'value' matches testlist
+     * @return boolean - true, if <code>value</code> matches testlist
      */
     private final boolean fitsCompleteList(VString value, VString list)
     {
@@ -358,12 +357,11 @@ public class JDFEnumerationState extends JDFAbstractState
 
     
     /**
-     * fitsCompleteOrderedList - tests for the case, when ListType=CompleteOrderedList,
-     * if the defined 'value' matches AllowedValueList or PresentValueList,
-     * specified for this State
+     * fitsCompleteOrderedList - tests whether <code>value</code> matches AllowedValueList or PresentValueList
+     * (ListType=CompleteOrderedList)
      *
-     * @param VString value - value to test
-     * @param VString list - testlist are either AllowedValueList or PresentValueList.
+     * @param value value to test
+     * @param list  testlist, either AllowedValueList or PresentValueList.
      * 
      * @return boolean - true, if 'value' matches testlist
      */
@@ -389,12 +387,11 @@ public class JDFEnumerationState extends JDFAbstractState
      }
      
     /**
-     * fitsContainedList - tests for the case, when ListType=ContainedList,
-     * if the defined 'value' matches AllowedValueList or PresentValueList,
-     * specified for this State
+     * fitsContainedList - tests whether <code>value</code> matches AllowedValueList or PresentValueList
+     * (ListType=ContainedList)
      *
-     * @param VString value - value to test
-     * @param VString list - testlist is either AllowedValueList or PresentValueList.
+     * @param value value to test
+     * @param list  testlist, either AllowedValueList or PresentValueList.
      * 
      * @return boolean - true, if 'value' matches testlist
      */
@@ -417,10 +414,10 @@ public class JDFEnumerationState extends JDFAbstractState
      }
     
     /**
-     * isUnique - tests, if 'value' string has only unique tokens
+     * isUnique - tests, if 'value' string has unique tokens only
      *
-     * @param VString value - value to test
-     * @return boolean - true, if 'value' has only unique tokens
+     * @param value value to test
+     * @return boolean - true, if <code>value</code> has unique tokens only
      */ 
     private final boolean isUnique(VString v)
     {
@@ -439,6 +436,30 @@ public class JDFEnumerationState extends JDFAbstractState
             }
         }
         return true;
+    }
+
+    public String getAllowedRegExp()
+    {
+        return getAttribute(AttributeName.ALLOWEDREGEXP, null, JDFConstants.EMPTYSTRING);
+    }
+
+    public String getPresentRegExp()
+    {
+        if (hasAttribute(AttributeName.PRESENTREGEXP))
+        {
+            return getAttribute(AttributeName.PRESENTREGEXP);
+        }
+        return getAllowedRegExp();
+    }
+
+    public void setAllowedRegExp(String value)
+    {
+        setAttribute(AttributeName.ALLOWEDREGEXP, value);
+    }
+
+    public void setPresentRegExp(String value)
+    {
+        setAttribute(AttributeName.PRESENTREGEXP, value);
     }
     
     

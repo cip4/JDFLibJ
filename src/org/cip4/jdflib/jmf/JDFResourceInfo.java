@@ -85,24 +85,29 @@ import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoResourceInfo;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
+import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.JDFResource;
 
 
 public class JDFResourceInfo extends JDFAutoResourceInfo
 {
     private static final long serialVersionUID = 1L;
-    
+
     /**
      * Constructor for JDFResourceInfo
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFResourceInfo(
@@ -111,12 +116,11 @@ public class JDFResourceInfo extends JDFAutoResourceInfo
     {
         super(myOwnerDocument, qualifiedName);
     }
-    
-    
+
     /**
      * Constructor for JDFResourceInfo
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFResourceInfo(
@@ -126,13 +130,13 @@ public class JDFResourceInfo extends JDFAutoResourceInfo
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
-    
+
     /**
      * Constructor for JDFResourceInfo
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFResourceInfo(
             CoreDocumentImpl myOwnerDocument,
@@ -143,15 +147,18 @@ public class JDFResourceInfo extends JDFAutoResourceInfo
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
     
+    /**
+     * toString()
+     * @return String
+     */
     public String toString()
     {
         return "JDFResourceInfo[  --> " + super.toString() + " ]";
     }
-    
-    
+
     /** 
-     * 
-     * @param WString resName, name of the resource to get/create
+     * get the resource defined by <code>resName</code>
+     * @param resName name of the resource to get/create
      * @return JDFCostCenter The element
      */
     public JDFResource getCreateResource(String resName)
@@ -166,9 +173,9 @@ public class JDFResourceInfo extends JDFAutoResourceInfo
     }
     
     /**
-     * const get Resource
-     * @param WString resName, name of the resource to get/create
-     * @return JDFResource The element
+     * get resource defined by <code>resName</code>
+     * @param resName name of the resource to get
+     * @return JDFResource: the element
      */
     public JDFResource getResource(String resName)
     {
@@ -187,8 +194,8 @@ public class JDFResourceInfo extends JDFAutoResourceInfo
     }
     
     /**
-     * Append  Resource
-     * @param WString resName, name of the resource to get/create
+     * append resource
+     * @param resName name of the resource to append
      */
     public JDFResource appendResource(String resName)
     {
@@ -204,27 +211,31 @@ public class JDFResourceInfo extends JDFAutoResourceInfo
     
     /**
      * return a vector of unknown element nodenames
-     * @param boolean bIgnorePrivate - used by JDFElement during the validation
-     * !!! Do not change the signature of this method
-     * @param int nMax - maximum size of the returned vector
-     * @return Vector - vector of unknown element nodenames
-     * 
+     * <p>
      * default: getUnknownElements(true, 999999)
+     * 
+     * @param bIgnorePrivate used by JDFElement during the validation
+     * @param nMax           maximum number of elements to get
+     * 
+     * @return Vector - vector of unknown element nodenames
      */
     public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
     {
+    	/* !!! Do not change the signature of this method */
         if(bIgnorePrivate)
             bIgnorePrivate=false; // dummy to fool compiler
         return getUnknownPoolElements(JDFElement.EnumPoolType.ResourcePool, nMax);
     }
+    
     /**
-     * Method GetInvalidElements.
-     * @param level
-     * @param bIgnorePrivate
-     * @param nMax
-     * @return Vector
-     * 
+     * Method getInvalidElements
+     * <p>
      * default: GetInvalidElements(level, true, 999999)
+     * @param level          validation level
+     * @param bIgnorePrivate
+     * @param nMax           maximum number of elements to get
+     * 
+     * @return VString - vector of names of invalid elements
      */
     public VString getInvalidElements(EnumValidationLevel level,
             boolean bIgnorePrivate, int nMax)
@@ -246,7 +257,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo
                 }                   
             }
             size = v.size(); // must refresh size due to removes
-            // more tahn one resource --> evil!
+            // more than one resource --> evil!
             if(size>1)
             {                
                 for(int j=0;j<size;j++)
@@ -268,8 +279,8 @@ public class JDFResourceInfo extends JDFAutoResourceInfo
     }
     
     /**
-     * set all parts to those define in vParts
-     * @param VJDFAttributeMap vParts: vector of attribute maps for the parts
+     * set all parts to those defined by vParts
+     * @param vParts vector of attribute maps for the parts
      */
     public void setPartMapVector(VJDFAttributeMap vParts)
     {
@@ -277,8 +288,8 @@ public class JDFResourceInfo extends JDFAutoResourceInfo
     }
     
     /**
-     * set all parts to those define in vParts
-     * @param JDFAttributeMap mPart: attribute map for the part to set
+     * set all parts to those defined by mPart
+     * @param mPart attribute map for the part to set
      */
     public void setPartMap(JDFAttributeMap mPart)
     {
@@ -287,7 +298,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo
     
     /**
      * remove the part defined in mPart
-     * @param JDFAttributeMap mPart: attribute map for the part to remove
+     * @param mPart attribute map for the part to remove
      */
     public void removePartMap(JDFAttributeMap mPart)
     {
@@ -296,13 +307,76 @@ public class JDFResourceInfo extends JDFAutoResourceInfo
     
     /**
      * check whether the part defined in mPart is included
-     * @param JDFAttributeMap mPart: attribute map for the part to remove
+     * @param mPart attribute map to look for
      * @return boolean - returns true if the part exists
      */
     public boolean hasPartMap(JDFAttributeMap mPart)
     {
         return super.hasPartMap(mPart);
     }
+
+    /**
+     * sets all relevant parameters of this to the values specified 
+     * in resourceLink or its linked resource or JDF node
+     * 
+     * @param resourceLink the resourceLink to extract the information from
+     * @param rqp          parameters
+     */
+    public void setLink(JDFResourceLink resourceLink, JDFResourceQuParams rqp)
+    {
+        if(resourceLink==null)
+            return;
+        JDFAmountPool ap=resourceLink.getAmountPool();
+        if(ap!=null)
+        {
+            copyElement(ap, null);
+        }
+        else
+        {
+            if(resourceLink.hasAttribute(AttributeName.ACTUALAMOUNT))
+                setActualAmount(resourceLink.getActualAmount(null));
+            if(resourceLink.hasAttribute(AttributeName.AMOUNT))
+                setAmount(resourceLink.getAmount(null));
+        }
+        setProcessUsage(resourceLink.getEnumProcessUsage());
+        
+        final JDFResource r=resourceLink.getTarget();
+        if(r==null && rqp!=null)
+        {
+            rqp.setExact(false);
+        }
+        
+        boolean bExact= rqp==null ? false : rqp.getExact();
+        if(!bExact)
+        {
+            setResourceName(resourceLink.getLinkedResourceName());
+            setAttribute(AttributeName.RESOURCEID,resourceLink.getrRef());
+            final EnumUsage usage = resourceLink.getUsage();
+            if(usage!=null)
+                setAttribute(AttributeName.USAGE,usage.getName());
+            if(r!=null && r.hasAttribute(AttributeName.PRODUCTID))
+                setProductID(r.getProductID());
+        }
+        else if(r!=null)
+        {
+            // create a copy of the resource in the original jdf
+            JDFResource rr=(JDFResource)r.getParentNode_KElement().copyElement(r, null);
+            rr.inlineRefElements(null, null, true);
+            // move resource copy from the original node into this document
+            moveElement(rr, null);
+        }
+    }
+    
+    /**
+     * set ProcessUsage to the enum processusage
+     *
+     * @param processUsage
+     */
+    public void setProcessUsage(EnumProcessUsage processUsage)
+    {
+        setAttribute(AttributeName.PROCESSUSAGE, processUsage==null ? null : processUsage.getName(), null);
+    }    
+
 }
 
 

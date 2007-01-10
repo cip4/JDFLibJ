@@ -169,25 +169,23 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
         }
         return ei;
     }
-    
-    
+     
     /**
      * Constructor for JDFNodeInfo
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFNodeInfo(
+    public JDFNodeInfo(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFNodeInfo
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFNodeInfo(
@@ -200,10 +198,10 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 
     /**
      * Constructor for JDFNodeInfo
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFNodeInfo(
         CoreDocumentImpl myOwnerDocument,
@@ -329,14 +327,9 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
     
     /**
      * UpdateBusiness
-     *
-     * @param EnumBusinessObject businessObject
-     * @param String             newID
-     *
-     * @return boolean
-     * @deprecated
-     * 
-     * default: UpdateBusiness(businessObject, JDFConstants.EMPTYSTRING)
+     * @param businessObject
+     * @param newID
+     * @return
      */
     public boolean updateBusiness(EnumBusinessObject businessObject, String newID)
     {
@@ -367,15 +360,11 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
         return true;
     }
 
-
     /**
      * Get the linked resources matching some conditions
-     *
-     * @param JDFAttributeMap mLinkAtt    map of Resource attributes to search for
-     * @param boolean         bFollowRefs true if internal references shall be followed
-     *
+     * @param mResAtt     map of Resource attributes to search for
+     * @param bFollowRefs true if internal references shall be followed
      * @return vResource: vector with all elements matching the conditions
-     * 
      * default: GetLinkedResources(new JDFAttributeMap(), false)
      */
     public VElement getLinkedResources(JDFAttributeMap mResAtt, boolean bFollowRefs)

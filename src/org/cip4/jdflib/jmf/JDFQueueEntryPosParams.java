@@ -27,21 +27,20 @@ import org.cip4.jdflib.auto.JDFAutoQueueEntryPosParams;
 
     /**
      * Constructor for JDFQueueEntryPosParams
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFQueueEntryPosParams(
+    public JDFQueueEntryPosParams(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFQueueEntryPosParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFQueueEntryPosParams(
@@ -54,10 +53,10 @@ import org.cip4.jdflib.auto.JDFAutoQueueEntryPosParams;
 
     /**
      * Constructor for JDFQueueEntryPosParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFQueueEntryPosParams(
         CoreDocumentImpl myOwnerDocument,
@@ -68,6 +67,10 @@ import org.cip4.jdflib.auto.JDFAutoQueueEntryPosParams;
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
 
+    /**
+     * toString()
+     * return String
+     */
     public String toString()
     {
         return "JDFQueueEntryPosParams[  --> " + super.toString() + " ]";

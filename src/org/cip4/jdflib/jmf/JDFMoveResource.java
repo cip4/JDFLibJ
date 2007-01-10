@@ -24,10 +24,9 @@ import org.cip4.jdflib.auto.JDFAutoMoveResource;
 public class JDFMoveResource extends JDFAutoMoveResource
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
-	 * Constructor for JDFMoveResource
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
 	public JDFMoveResource(
@@ -36,12 +35,11 @@ public class JDFMoveResource extends JDFAutoMoveResource
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
-	
-	
+
 	/**
 	 * Constructor for JDFMoveResource
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
 	public JDFMoveResource(
@@ -51,13 +49,13 @@ public class JDFMoveResource extends JDFAutoMoveResource
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
-	
+
 	/**
 	 * Constructor for JDFMoveResource
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @param localName
+	 * @param myLocalName
 	 */
 	public JDFMoveResource(
 			CoreDocumentImpl myOwnerDocument,
@@ -68,6 +66,10 @@ public class JDFMoveResource extends JDFAutoMoveResource
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 	
+	/**
+	 * toString()
+	 * @return string
+	 */
 	public String toString()
 	{
 		return "JDFMoveResource[  --> " + super.toString() + " ]";

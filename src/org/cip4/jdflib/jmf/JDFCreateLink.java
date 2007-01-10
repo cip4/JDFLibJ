@@ -85,10 +85,10 @@ import org.cip4.jdflib.auto.JDFAutoCreateLink;
 public class JDFCreateLink extends JDFAutoCreateLink
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Constructor for JDFCreateLink
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
 	public JDFCreateLink(
@@ -97,12 +97,11 @@ public class JDFCreateLink extends JDFAutoCreateLink
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
-	
-	
+
 	/**
 	 * Constructor for JDFCreateLink
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
 	public JDFCreateLink(
@@ -112,13 +111,13 @@ public class JDFCreateLink extends JDFAutoCreateLink
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
-	
+
 	/**
 	 * Constructor for JDFCreateLink
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @param localName
+	 * @param myLocalName
 	 */
 	public JDFCreateLink(
 			CoreDocumentImpl myOwnerDocument,
@@ -129,6 +128,10 @@ public class JDFCreateLink extends JDFAutoCreateLink
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 	
+	/**
+	 * toString()
+	 * @see org.cip4.jdflib.auto.JDFAutoCreateLink#toString()
+	 */
 	public String toString()
 	{
 		return "JDFCreateLink[  --> " + super.toString() + " ]";

@@ -110,7 +110,7 @@ public class JDFMatrixEvaluation extends JDFEvaluation
     {
         atrInfoTable[0]  = new AtrInfoTable(AttributeName.ROTATEMOD,  0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
         atrInfoTable[1]  = new AtrInfoTable(AttributeName.SHIFT,      0x33333333, AttributeInfo.EnumAttributeType.NumberList, null, null);
-        atrInfoTable[2]  = new AtrInfoTable(AttributeName.TOLERANCE,  0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
+        atrInfoTable[2]  = new AtrInfoTable(AttributeName.TOLERANCE,  0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
         atrInfoTable[3]  = new AtrInfoTable(AttributeName.TRANSFORMS, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumOrientation.getEnum(0), null);
     }
 
@@ -131,10 +131,9 @@ public class JDFMatrixEvaluation extends JDFEvaluation
         return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
     }
 
-
     /**
      * constructor for JDFMatrixEvaluation
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFMatrixEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
@@ -144,8 +143,8 @@ public class JDFMatrixEvaluation extends JDFEvaluation
 
     /**
      * constructor for JDFMatrixEvaluation
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFMatrixEvaluation(
@@ -158,10 +157,10 @@ public class JDFMatrixEvaluation extends JDFEvaluation
 
     /**
      * constructor for JDFMatrixEvaluation
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFMatrixEvaluation(
         CoreDocumentImpl myOwnerDocument,
@@ -275,10 +274,10 @@ public class JDFMatrixEvaluation extends JDFEvaluation
     **************************************************************** */
 
     /** 
-     * Sets the Value attribute of the i-th subelement Value
+     * Sets the <code>Value</code> attribute of the i-th subelement Value
      *
-     * @param int iSkip: the number of Value elements to skip
-     * @param JDFMatrix value: value to set the attribute to
+     * @param iSkip the number of Value elements to skip
+     * @param value value to set the attribute to
      */
     public void setValueValue(int iSkip, JDFMatrix value)
     {
@@ -287,9 +286,9 @@ public class JDFMatrixEvaluation extends JDFEvaluation
     }
     
     /**
-     * Gets the Value attribute of the i-th subelement Value
+     * Gets the <code>Value</code> attribute of the i-th subelement Value
      *
-     * @param int iSkip: the number of Value elements to skip
+     * @param iSkipthe number of Value elements to skip
      * @return JDFMatrix: the attribute value
      */
     public final JDFMatrix getValueValue(int iSkip) 
@@ -373,11 +372,11 @@ public class JDFMatrixEvaluation extends JDFEvaluation
     
   
     /**
-     * fitsListType - tests, if the defined 'value' matches ListType attribute,
+     * fitsListType - checks whether <code>matrixList</code> matches the ListType attribute
      * specified for this Evaluation
      *
-     * @param String value - value to test
-     * @return boolean - true, if 'value' matches specified value of ListType
+     * @param matrixList value to test
+     * @return boolean - true, if <code>matrixList</code> matches specified value of ListType
      */
     private final boolean fitsListType(VString matrixList)
     {
@@ -433,12 +432,10 @@ public class JDFMatrixEvaluation extends JDFEvaluation
     
     
     /**
-     * fitsValueElem - tests, if the defined JDFMatrix 'matrix' matches 
+     * fitsValueElem - checks whether <code>matrix</code> matches 
      * subelement Value, specified for this Evaluation
      *
-     * @param JDFMatrix matrix - JDFMatrix to test
-     * @param EnumFitsValue valueusage - Switches between 
-     *  and Present configuration in subelement Value.
+     * @param matrix JDFMatrix to test
      * 
      * @return boolean - true, if 'matrix' matches subelement Value 
      */
@@ -461,11 +458,11 @@ public class JDFMatrixEvaluation extends JDFEvaluation
     }
     
     /**
-     * fitsRotateMod - tests, if the defined 'matrix' matches RotateMod,
+     * fitsRotateMod - checks whether <code>matrix</code> matches the <code>RotateMod</code> attribute
      * specified for this Evaluation
      *
-     * @param JDFMatrix matrix - matrix to test
-     * @return boolean - true, if 'matrix' matches the RotateMod or 
+     * @param matrix matrix to test
+     * @return boolean - true, if <code>matrix</code> matches the RotateMod or 
      * if RotateMod is not specified
      */
     private final boolean fitsRotateMod(JDFMatrix matrix)
@@ -519,10 +516,10 @@ public class JDFMatrixEvaluation extends JDFEvaluation
     }
     
     /**
-     * fitsShift - tests, if the defined 'matrix' matches Shift, 
+     * fitsShift - checks whether <code>matrix</code> matches the <code>Shift</code> attribute 
      * specified for this Evaluation
      *
-     * @param JDFMatrix matrix - matrix to test
+     * @param matrix matrix to test
      * @return boolean - true, if 'matrix' matches the Shift or 
      * if Shift is not specified
      */
@@ -554,11 +551,11 @@ public class JDFMatrixEvaluation extends JDFEvaluation
     //////////////////////////////////////////////////////////////////////
     
     /**
-     * fitsTransforms - tests, if the defined 'matrix' matches Transforms,
-     * specified for this Evaluation
+     * fitsTransforms - checks whether <code>matrix</code> matches the <code>Transforms</code>
+     * attribute specified for this Evaluation
      *
-     * @param JDFMatrix matrix - matrix to test
-     * @return boolean - true, if 'matrix' matches the Transforms or 
+     * @param matrix matrix to test
+     * @return boolean - true, if <code>matrix</code> matches the Transforms or 
      * if Transforms is not specified
      */
     private final boolean fitsTransforms(JDFMatrix matrix)

@@ -98,11 +98,11 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 {
     private static final long serialVersionUID = 1L;
     
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
     static 
     {
         atrInfoTable[0]  = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-        atrInfoTable[0]  = new AtrInfoTable(AttributeName.VALUEMOD,  0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
+        atrInfoTable[1]  = new AtrInfoTable(AttributeName.VALUEMOD,  0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
     }
 
     protected AttributeInfo getTheAttributeInfo() 
@@ -110,10 +110,9 @@ public class JDFIntegerEvaluation extends JDFEvaluation
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
 
-
     /**
      * constructor for JDFIntegerEvaluation
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFIntegerEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
@@ -123,8 +122,8 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 
     /**
      * constructor for JDFIntegerEvaluation
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFIntegerEvaluation(
@@ -137,10 +136,10 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 
     /**
      * constructor for JDFIntegerEvaluation
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFIntegerEvaluation(
         CoreDocumentImpl myOwnerDocument,
@@ -167,6 +166,10 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 	**************************************************************** */	
 	
     
+    /**
+     * set attribute <code>ValueList</code>
+     * @param value the value to set the attribute to
+     */
     public void setValueList( JDFIntegerRangeList value)
     {
         setAttribute(AttributeName.VALUELIST, value.toString(), null);
@@ -183,6 +186,10 @@ public class JDFIntegerEvaluation extends JDFEvaluation
         setValueList(irl);
     }
 
+    /**
+     * get attribute <code>ValueList</code>
+     * @return JDFIntegerRangeList - the value of the attribute
+     */
     public JDFIntegerRangeList getValueList()  
     {
         try
@@ -195,11 +202,19 @@ public class JDFIntegerEvaluation extends JDFEvaluation
         }
 	}
 
+    /**
+     * set attribute <code>ValueMod</code>
+     * @param value the value to set the attribute to
+     */
     public void setValueMod(JDFXYPair value)
     {
 		setAttribute(AttributeName.VALUEMOD, value.toString());
 	}
 
+	/**
+	 * get attribute ValueMod
+	 * @return JDFXYPair - the value of the attribute
+	 */
 	public JDFXYPair getValueMod()  
     {
         try
@@ -218,10 +233,10 @@ public class JDFIntegerEvaluation extends JDFEvaluation
     **************************************************************** */
     
     /**
-    * fitsValue - tests, if the defined 'value' matches testlists,
+    * fitsValue - tests if the defined 'value' matches testlists,
     *  specified for this Evaluation
     *
-    * @param String value - value to test
+    * @param value value to test
     * @return boolean - true, if 'value' matches testlists or if testlists are not specified
     */
     public boolean fitsValue(String value)
@@ -245,10 +260,10 @@ public class JDFIntegerEvaluation extends JDFEvaluation
     
     
     /**
-     * fitsListType - tests, if the defined 'value' matches ListType attribute,
+     * fitsListType - tests if the defined 'value' matches ListType attribute,
      * specified for this Evaluation
      *
-     * @param String value - value to test
+     * @param value value to test
      * @return boolean - true, if 'value' matches specified value of ListType
      */
     private final boolean fitsListType(String value)
@@ -317,10 +332,10 @@ public class JDFIntegerEvaluation extends JDFEvaluation
     
     
     /**
-    * fitsValueList - tests, if the defined 'rangelist' matches the ValueList,
+    * fitsValueList - tests if the defined 'rangelist' matches the ValueList,
     * specified for this Evaluation
     *
-    * @param JDFIntegerRangeList rangelist - range list to test
+    * @param rangelist range list to test
     * @return boolean - true, if 'rangelist' matches the ValueList or 
     * if ValueList is not specified
     */
@@ -356,10 +371,10 @@ public class JDFIntegerEvaluation extends JDFEvaluation
     }
 
     /**
-    * fitsValueMod - tests, if the defined 'rangelist' matches the ValueMod, 
+    * fitsValueMod - tests if the defined 'rangelist' matches the ValueMod, 
     * specified for this Evaluation
     *
-    * @param JDFIntegerRangeList rangelist -  range list to test
+    * @param rangelist range list to test
     * @return boolean - true, if 'rangelist' matches the ValueMod or 
     * if ValueMod is not specified
     */
@@ -394,8 +409,8 @@ public class JDFIntegerEvaluation extends JDFEvaluation
      * fitsContainedList - tests for the case, when ListType=CompleteList,
      * does the defined 'value' match ValueList, specified for this Evaluation
      *
-     * @param JDFIntegerRangeList value - value to test
-     * @param JDFIntegerRangeList list - specified ValueList
+     * @param value value to test
+     * @param list  specified ValueList
      * @return boolean - true, if 'value' matches testlist
      */
     private final boolean fitsCompleteList(JDFIntegerRangeList value, JDFIntegerRangeList list)
@@ -433,11 +448,11 @@ public class JDFIntegerEvaluation extends JDFEvaluation
     }
 
     /**
-     * fitsCompleteOrderedList - tests for the case, when ListType=CompleteOrderedList,
-     * does the defined 'value' match ValueList, specified for this Evaluation
+     * fitsCompleteOrderedList - tests whether <code>value</code> matches the given ValueList
+     * (ListType=CompleteOrderedList)
      *
-     * @param JDFIntegerRangeList value - value to test
-     * @param JDFIntegerRangeList list - specified ValueList
+     * @param value value to test
+     * @param list  specified ValueList
      * @return boolean - true, if 'value' matches testlist
      */
     private final boolean fitsCompleteOrderedList(JDFIntegerRangeList value, JDFIntegerRangeList list)
@@ -462,12 +477,12 @@ public class JDFIntegerEvaluation extends JDFEvaluation
     }
 
     /**
-     * fitsContainedList - tests for the case, when ListType=ContainedList,
-     * does the defined 'value' match ValueList, specified for this Evaluation
+     * fitsContainedList - tests whether <code>value</code> matches the given ValueList
+     * (ListType=ContainedList)
      *
-     * @param JDFIntegerRangeList value - value to test
-     * @param JDFIntegerRangeList list -  specified ValueList
-     * @return boolean - true, if 'value' matches testlist
+     * @param value value to test
+     * @param list  specified ValueList
+     * @return boolean - true, if <code>value</code> matches testlist
      */
     private final boolean fitsContainedList(JDFIntegerRangeList value, JDFIntegerRangeList list)
     {

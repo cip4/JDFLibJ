@@ -81,8 +81,6 @@
 
 package org.cip4.jdflib.resource.process;
 
-import java.util.Vector;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -222,24 +220,6 @@ public class JDFSurface extends JDFSheet
             n=n.getNextSibling();
         }
         return v.isEmpty() ? null : v;
-     }
-    
-    /**
-     * get the vector of implicitly define partition keys that MUST NOT be used in the resource
-     */
-    public Vector getImplicitPartitions()
-    {
-        if (JDFLayout.isNewLayout(this))
-        {
-            return super.getImplicitPartitions();
-        }
-        Vector v = super.getImplicitPartitions();
-        if(v==null)
-            v=new Vector();
-        v.add(EnumPartIDKey.Side);
-        return v;
-    }
-
-    
+     }   
 }
 

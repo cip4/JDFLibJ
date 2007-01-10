@@ -84,10 +84,10 @@ import org.cip4.jdflib.auto.JDFAutoRemoveLink;
 public class JDFRemoveLink extends JDFAutoRemoveLink
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Constructor for JDFRemoveLink
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
 	public JDFRemoveLink(
@@ -96,12 +96,11 @@ public class JDFRemoveLink extends JDFAutoRemoveLink
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
-	
-	
+
 	/**
 	 * Constructor for JDFRemoveLink
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
 	public JDFRemoveLink(
@@ -111,13 +110,13 @@ public class JDFRemoveLink extends JDFAutoRemoveLink
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
-	
+
 	/**
 	 * Constructor for JDFRemoveLink
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @param localName
+	 * @param myLocalName
 	 */
 	public JDFRemoveLink(
 			CoreDocumentImpl myOwnerDocument,
@@ -128,6 +127,10 @@ public class JDFRemoveLink extends JDFAutoRemoveLink
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 	
+	/**
+	 * toString()
+	 * @return String
+	 */
 	public String toString()
 	{
 		return "JDFRemoveLink[  --> " + super.toString() + " ]";

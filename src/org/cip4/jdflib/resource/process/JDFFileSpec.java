@@ -82,10 +82,12 @@ package org.cip4.jdflib.resource.process;
 import java.io.File;
 import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.util.HashMap;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoFileSpec;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.w3c.dom.DOMException;
 
@@ -93,6 +95,7 @@ import org.w3c.dom.DOMException;
 public class JDFFileSpec extends JDFAutoFileSpec
 {
     private static final long serialVersionUID = 1L;
+    private static HashMap mimeMap=null;
 
     /**
      * Constructor for JDFFileSpec
@@ -158,7 +161,7 @@ public class JDFFileSpec extends JDFAutoFileSpec
     public void setAbsoluteFileURL(File f, boolean bEscape128) throws MalformedURLException
     {
         final String s=UrlUtil.fileToUrl(f, bEscape128);
-        setURL(s);
+        setMimeURL(s);
     }
     
     /**
@@ -171,7 +174,7 @@ public class JDFFileSpec extends JDFAutoFileSpec
     public void setRelativeURL(File f, File baseDir, boolean bEscape128)
     {
         final String s=UrlUtil.getRelativeURL(f, baseDir, bEscape128);
-        setURL(s);
+        setMimeURL(s);
     }
     ///////////////////////////////////////////////////////////////////
 
@@ -186,4 +189,44 @@ public class JDFFileSpec extends JDFAutoFileSpec
             return null;
         return UrlUtil.getURLInputStream(getURL(),getOwnerDocument_KElement().getBodyPart());
     }
+
+
+    /**
+     * sets URL and MimeType by matching the extensions
+     * @param url the url to set URL
+     */
+    public void setMimeURL(String url)
+    {
+        setURL(url);
+        setMimeType(getMimeTypeFromURL(url));        
+    }
+
+
+    /**
+     * generates the correct MIMEType for a given URL and sets it
+     * @param url
+     */
+    public static String getMimeTypeFromURL(String url)
+    {
+        if(mimeMap==null)
+        {
+            mimeMap=new HashMap();
+            mimeMap.put("pdf", "application/pdf");
+            mimeMap.put("ps", "application/postscript");
+            
+            mimeMap.put("ppf", "application/vnd.cip3-ppf");
+            mimeMap.put("ppml", "application/vnd.podi-ppml+xml");
+            mimeMap.put("jdf", "application/vnd.cip4-jdf+xml");
+            mimeMap.put("jmf", "application/vnd.cip4-jmf+xml");
+            
+            mimeMap.put("xml", "text/xml");
+            
+            mimeMap.put("jpg", "image/jpeg");
+            mimeMap.put("jpeg", "image/jpeg");
+            mimeMap.put("tif", "image/tiff");
+            mimeMap.put("tiff", "image/tiff");
+        }
+        String extension=UrlUtil.extension(url);
+        return extension==null ? null : (String) mimeMap.get(extension.toLowerCase());
+     }
 }

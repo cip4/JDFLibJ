@@ -23,21 +23,20 @@ public class JDFReturnQueueEntryParams extends JDFAutoReturnQueueEntryParams
 
     /**
      * Constructor for JDFReturnQueueEntryParams
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFReturnQueueEntryParams(
+    public JDFReturnQueueEntryParams(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFReturnQueueEntryParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFReturnQueueEntryParams(
@@ -50,10 +49,10 @@ public class JDFReturnQueueEntryParams extends JDFAutoReturnQueueEntryParams
 
     /**
      * Constructor for JDFReturnQueueEntryParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFReturnQueueEntryParams(
         CoreDocumentImpl myOwnerDocument,

@@ -10,9 +10,6 @@ Revision history:    ...
 **/
 
 
-
-
-
 package org.cip4.jdflib.jmf;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -27,21 +24,19 @@ import org.cip4.jdflib.auto.JDFAutoQueueSubmissionParams;
 
     /**
      * Constructor for JDFQueueSubmissionParams
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFQueueSubmissionParams(
+    public JDFQueueSubmissionParams(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
-     * Constructor for JDFQueueSubmissionParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFQueueSubmissionParams(
@@ -53,11 +48,10 @@ import org.cip4.jdflib.auto.JDFAutoQueueSubmissionParams;
     }
 
     /**
-     * Constructor for JDFQueueSubmissionParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFQueueSubmissionParams(
         CoreDocumentImpl myOwnerDocument,
@@ -68,6 +62,10 @@ import org.cip4.jdflib.auto.JDFAutoQueueSubmissionParams;
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
 
+    /**
+     * toString()
+     * return String
+     */
     public String toString()
     {
         return "JDFQueueSubmissionParams[  --> " + super.toString() + " ]";

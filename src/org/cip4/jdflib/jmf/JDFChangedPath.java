@@ -89,10 +89,10 @@ import org.cip4.jdflib.auto.JDFAutoChangedPath;
 public class JDFChangedPath extends JDFAutoChangedPath
 {
     private static final long serialVersionUID = 1L;
-    
+
     /**
      * Constructor for JDFChangedPath
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFChangedPath(
@@ -101,12 +101,11 @@ public class JDFChangedPath extends JDFAutoChangedPath
     {
         super(myOwnerDocument, qualifiedName);
     }
-    
-    
+
     /**
      * Constructor for JDFChangedPath
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFChangedPath(
@@ -116,13 +115,13 @@ public class JDFChangedPath extends JDFAutoChangedPath
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
-    
+
     /**
      * Constructor for JDFChangedPath
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFChangedPath(
             CoreDocumentImpl myOwnerDocument,

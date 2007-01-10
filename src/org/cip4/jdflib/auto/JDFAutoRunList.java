@@ -107,7 +107,7 @@ public abstract class JDFAutoRunList extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[25];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[23];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.COMPONENTGRANULARITY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumComponentGranularity.getEnum(0), "Document");
@@ -133,8 +133,6 @@ public abstract class JDFAutoRunList extends JDFResource
         atrInfoTable[20] = new AtrInfoTable(AttributeName.SETS, 0x33333331, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
         atrInfoTable[21] = new AtrInfoTable(AttributeName.SKIPPAGE, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
         atrInfoTable[22] = new AtrInfoTable(AttributeName.SORTED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[23] = new AtrInfoTable(AttributeName.NOOP, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[24] = new AtrInfoTable(AttributeName.WEBSETUP, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
     }
     
     protected AttributeInfo getTheAttributeInfo()
@@ -424,7 +422,7 @@ public abstract class JDFAutoRunList extends JDFResource
 
         /**
           * (20) get JDFNameRangeList attribute DocNames
-          * @return JDFNameRangeListthe value of the attribute, null if a the
+          * @return JDFNameRangeList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFNameRangeList
           */
         public JDFNameRangeList getDocNames()
@@ -462,7 +460,7 @@ public abstract class JDFAutoRunList extends JDFResource
 
         /**
           * (20) get JDFIntegerRangeList attribute Docs
-          * @return JDFIntegerRangeListthe value of the attribute, null if a the
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerRangeList
           */
         public JDFIntegerRangeList getDocs()
@@ -708,7 +706,7 @@ public abstract class JDFAutoRunList extends JDFResource
 
         /**
           * (20) get JDFIntegerRangeList attribute PageListIndex
-          * @return JDFIntegerRangeListthe value of the attribute, null if a the
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerRangeList
           */
         public JDFIntegerRangeList getPageListIndex()
@@ -746,7 +744,7 @@ public abstract class JDFAutoRunList extends JDFResource
 
         /**
           * (20) get JDFNameRangeList attribute PageNames
-          * @return JDFNameRangeListthe value of the attribute, null if a the
+          * @return JDFNameRangeList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFNameRangeList
           */
         public JDFNameRangeList getPageNames()
@@ -784,7 +782,7 @@ public abstract class JDFAutoRunList extends JDFResource
 
         /**
           * (20) get JDFIntegerRangeList attribute Pages
-          * @return JDFIntegerRangeListthe value of the attribute, null if a the
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerRangeList
           */
         public JDFIntegerRangeList getPages()
@@ -848,7 +846,7 @@ public abstract class JDFAutoRunList extends JDFResource
 
         /**
           * (20) get JDFNameRangeList attribute SetNames
-          * @return JDFNameRangeListthe value of the attribute, null if a the
+          * @return JDFNameRangeList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFNameRangeList
           */
         public JDFNameRangeList getSetNames()
@@ -886,7 +884,7 @@ public abstract class JDFAutoRunList extends JDFResource
 
         /**
           * (20) get JDFIntegerRangeList attribute Sets
-          * @return JDFIntegerRangeListthe value of the attribute, null if a the
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerRangeList
           */
         public JDFIntegerRangeList getSets()
@@ -955,58 +953,6 @@ public abstract class JDFAutoRunList extends JDFResource
         public boolean getSorted()
         {
             return getBoolAttribute(AttributeName.SORTED, null, false);
-        }
-
-
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute NoOp
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute NoOp
-          * @param value: the value to set the attribute to
-          */
-        public void setNoOp(boolean value)
-        {
-            setAttribute(AttributeName.NOOP, value, null);
-        }
-
-
-
-        /**
-          * (18) get boolean attribute NoOp
-          * @return boolean the value of the attribute
-          */
-        public boolean getNoOp()
-        {
-            return getBoolAttribute(AttributeName.NOOP, null, false);
-        }
-
-
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute WebSetup
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute WebSetup
-          * @param value: the value to set the attribute to
-          */
-        public void setWebSetup(String value)
-        {
-            setAttribute(AttributeName.WEBSETUP, value, null);
-        }
-
-
-
-        /**
-          * (23) get String attribute WebSetup
-          * @return the value of the attribute
-          */
-        public String getWebSetup()
-        {
-            return getAttribute(AttributeName.WEBSETUP, null, JDFConstants.EMPTYSTRING);
         }
 
 

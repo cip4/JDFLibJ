@@ -23,11 +23,11 @@ public class JDFBindItem extends JDFAutoBindItem
 
     /**
      * Constructor for JDFBindItem
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      * @throws DOMException
      */
-     public JDFBindItem(
+    public JDFBindItem(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
         throws DOMException
@@ -35,11 +35,10 @@ public class JDFBindItem extends JDFAutoBindItem
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFBindItem
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      * @throws DOMException
      */
@@ -54,10 +53,10 @@ public class JDFBindItem extends JDFAutoBindItem
 
     /**
      * Constructor for JDFBindItem
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      * @throws DOMException
      */
     public JDFBindItem(
@@ -81,18 +80,20 @@ public class JDFBindItem extends JDFAutoBindItem
     }
     
     /**
-    * Get parent node of 'this' - node BindingIntent
-    * @return JDFBindingIntent: BindingIntent node
-    */
+	 * get parent node of <code>this</code> - node BindingIntent
+	 * 
+	 * @return JDFBindingIntent: BindingIntent node
+	 */
     public JDFBindingIntent getParentBindingIntent()
     {
        return (JDFBindingIntent)getParentNode();
     }
 
     /**
-    * Get of 'this' the value of BindingType element.
-    * If not specified, defaults to the value of BindingType,
-    * that is specified in it's parent element (node BindingIntent)
+    * Get the value of the BindingType element of <code>this</code>.<br>
+    * If not specified, defaults to the value of the BindingType
+    * which is specified in its parent element (node BindingIntent).
+    * 
     * @return JDFSpanBindingType: BindingType value
     */
     public JDFSpanBindingType getBindingType()

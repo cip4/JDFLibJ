@@ -77,16 +77,16 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.JDFPRGroup;
     /*
     *****************************************************************************
-    class JDFAutoPROccurrence : public JDFResource
+    class JDFAutoPROccurrence : public JDFElement
 
     *****************************************************************************
     */
 
-public abstract class JDFAutoPROccurrence extends JDFResource
+public abstract class JDFAutoPROccurrence extends JDFElement
 {
 
     private static final long serialVersionUID = 1L;
@@ -162,14 +162,6 @@ public abstract class JDFAutoPROccurrence extends JDFResource
     public String toString()
     {
         return " JDFAutoPROccurrence[  --> " + super.toString() + " ]";
-    }
-
-
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
     }
 
 

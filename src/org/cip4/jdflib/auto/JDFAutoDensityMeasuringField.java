@@ -97,7 +97,7 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[14];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[13];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
@@ -106,14 +106,13 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
         atrInfoTable[3] = new AtrInfoTable(AttributeName.DOTGAIN, 0x22222222, AttributeInfo.EnumAttributeType.double_, null, null);
         atrInfoTable[4] = new AtrInfoTable(AttributeName.PERCENTAGE, 0x22222222, AttributeInfo.EnumAttributeType.double_, null, null);
         atrInfoTable[5] = new AtrInfoTable(AttributeName.SCREEN, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.TOLERANCECYAN, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.TOLERANCEMAGENTA, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.TOLERANCEYELLOW, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[9] = new AtrInfoTable(AttributeName.TOLERANCEBLACK, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[10] = new AtrInfoTable(AttributeName.TOLERANCEDOTGAIN, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[11] = new AtrInfoTable(AttributeName.SETUP, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[12] = new AtrInfoTable(AttributeName.NOOP, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[13] = new AtrInfoTable(AttributeName.WEBSETUP, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.SEPARATION, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.TOLERANCECYAN, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.TOLERANCEMAGENTA, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
+        atrInfoTable[9] = new AtrInfoTable(AttributeName.TOLERANCEYELLOW, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
+        atrInfoTable[10] = new AtrInfoTable(AttributeName.TOLERANCEBLACK, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
+        atrInfoTable[11] = new AtrInfoTable(AttributeName.TOLERANCEDOTGAIN, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
+        atrInfoTable[12] = new AtrInfoTable(AttributeName.SETUP, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
     protected AttributeInfo getTheAttributeInfo()
@@ -384,6 +383,32 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 
         
         /* ---------------------------------------------------------------------
+        Methods for Attribute Separation
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute Separation
+          * @param value: the value to set the attribute to
+          */
+        public void setSeparation(String value)
+        {
+            setAttribute(AttributeName.SEPARATION, value, null);
+        }
+
+
+
+        /**
+          * (23) get String attribute Separation
+          * @return the value of the attribute
+          */
+        public String getSeparation()
+        {
+            return getAttribute(AttributeName.SEPARATION, null, JDFConstants.EMPTYSTRING);
+        }
+
+
+
+        
+        /* ---------------------------------------------------------------------
         Methods for Attribute ToleranceCyan
         --------------------------------------------------------------------- */
         /**
@@ -594,58 +619,6 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
         public String getSetup()
         {
             return getAttribute(AttributeName.SETUP, null, JDFConstants.EMPTYSTRING);
-        }
-
-
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute NoOp
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute NoOp
-          * @param value: the value to set the attribute to
-          */
-        public void setNoOp(boolean value)
-        {
-            setAttribute(AttributeName.NOOP, value, null);
-        }
-
-
-
-        /**
-          * (18) get boolean attribute NoOp
-          * @return boolean the value of the attribute
-          */
-        public boolean getNoOp()
-        {
-            return getBoolAttribute(AttributeName.NOOP, null, false);
-        }
-
-
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute WebSetup
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute WebSetup
-          * @param value: the value to set the attribute to
-          */
-        public void setWebSetup(String value)
-        {
-            setAttribute(AttributeName.WEBSETUP, value, null);
-        }
-
-
-
-        /**
-          * (23) get String attribute WebSetup
-          * @return the value of the attribute
-          */
-        public String getWebSetup()
-        {
-            return getAttribute(AttributeName.WEBSETUP, null, JDFConstants.EMPTYSTRING);
         }
 
 

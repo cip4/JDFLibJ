@@ -90,10 +90,10 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 public class JDFResourcePullParams extends JDFAutoResourcePullParams
 {
     private static final long serialVersionUID = 1L;
-    
+
     /**
      * Constructor for JDFResourcePullParams
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFResourcePullParams(
@@ -102,12 +102,11 @@ public class JDFResourcePullParams extends JDFAutoResourcePullParams
     {
         super(myOwnerDocument, qualifiedName);
     }
-    
-    
+
     /**
      * Constructor for JDFResourcePullParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFResourcePullParams(
@@ -117,13 +116,13 @@ public class JDFResourcePullParams extends JDFAutoResourcePullParams
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
-    
+
     /**
      * Constructor for JDFResourcePullParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFResourcePullParams(
             CoreDocumentImpl myOwnerDocument,
@@ -156,8 +155,8 @@ public class JDFResourcePullParams extends JDFAutoResourcePullParams
     }
     
     /**
-     * set all parts to those define in vParts
-     * @param VJDFAttributeMap vParts: vector of attribute maps for the parts
+     * set all parts to those defined by vParts
+     * @param vParts vector of attribute maps for the parts
      */
     public void setPartMapVector(VJDFAttributeMap vParts)
     {
@@ -165,8 +164,8 @@ public class JDFResourcePullParams extends JDFAutoResourcePullParams
     }
     
     /**
-     * set all parts to those define in vParts
-     * @param JDFAttributeMap mPart: attribute map for the part to set
+     * set all parts to those define by vParts
+     * @param mPart attribute map for the part to set
      */
     public void setPartMap(JDFAttributeMap mPart)
     {
@@ -174,8 +173,8 @@ public class JDFResourcePullParams extends JDFAutoResourcePullParams
     }
     
     /**
-     * remove the part defined in mPart
-     * @param JDFAttributeMap mPart: attribute map for the part to remove
+     * remove the part defined by mPart
+     * @param mPart attribute map for the part to remove
      */
     public void removePartMap(JDFAttributeMap mPart)
     {
@@ -183,8 +182,8 @@ public class JDFResourcePullParams extends JDFAutoResourcePullParams
     }
     
     /**
-     * check whether the part defined in mPart is included
-     * @param JDFAttributeMap mPart: attribute map for the part to remove
+     * check whether the part defined by mPart is included
+     * @param mPart attribute map to look for
      * @return boolean - returns true if the part exists
      */
     public boolean hasPartMap(JDFAttributeMap mPart)

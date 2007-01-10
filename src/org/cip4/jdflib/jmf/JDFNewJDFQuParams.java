@@ -90,10 +90,10 @@ import org.cip4.jdflib.auto.JDFAutoNewJDFQuParams;
 public class JDFNewJDFQuParams extends JDFAutoNewJDFQuParams
 {
     private static final long serialVersionUID = 1L;
-    
+
     /**
      * Constructor for JDFNewJDFQuParams
-     * @param ownerDocument
+     * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFNewJDFQuParams(
@@ -102,12 +102,11 @@ public class JDFNewJDFQuParams extends JDFAutoNewJDFQuParams
     {
         super(myOwnerDocument, qualifiedName);
     }
-    
-    
+
     /**
      * Constructor for JDFNewJDFQuParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFNewJDFQuParams(
@@ -117,13 +116,13 @@ public class JDFNewJDFQuParams extends JDFAutoNewJDFQuParams
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
-    
+
     /**
      * Constructor for JDFNewJDFQuParams
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFNewJDFQuParams(
             CoreDocumentImpl myOwnerDocument,

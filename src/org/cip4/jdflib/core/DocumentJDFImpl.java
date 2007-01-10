@@ -20,6 +20,8 @@ import javax.mail.BodyPart;
 import org.apache.xerces.dom.DocumentImpl;
 import org.apache.xerces.dom.ElementImpl;
 import org.apache.xerces.dom.ParentNode;
+import org.cip4.jdflib.pool.JDFResourcePool;
+import org.cip4.jdflib.resource.JDFResource;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -28,7 +30,10 @@ import org.w3c.dom.Node;
 public class DocumentJDFImpl extends DocumentImpl implements Serializable
 {
     private static final long serialVersionUID = 1L;
-
+    public boolean bKElementOnly=false;
+    private boolean ignoreNSDefault=false;
+    private boolean bInJDFJMF=false;
+ 
     /** Caches default package name classes of files. */
     private static HashMap  sm_PackageNames = new HashMap();
     
@@ -161,6 +166,7 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
     {
         ownerDoc.setParentNode(parent); // set the parent in the factory for private Elements
         return (KElement) ownerDoc.createElementNS(namespaceURI, qualifiedName, localpart);
+        
     }
 
 
@@ -173,6 +179,7 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
         super();
         final Runtime rt = Runtime.getRuntime();
         initialMem = rt.totalMemory() - rt.freeMemory();
+        
     }
 
 
@@ -191,7 +198,7 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
      */
     public Element createElement(String qualifiedName)
     {
-        String namespaceURI = JDFConstants.EMPTYSTRING;
+        String namespaceURI = null;
         String localPart = KElement.xmlnsLocalName(qualifiedName);
         
         return createElementNS(namespaceURI, qualifiedName, localPart);
@@ -203,7 +210,6 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
     public Element createElementNS(String namespaceURI, String qualifiedName)
     {
         String localPart = KElement.xmlnsLocalName(qualifiedName);
-        
         return createElementNS(namespaceURI, qualifiedName, localPart);
     }
 
@@ -214,6 +220,11 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
     {
         Constructor constructi;
         Class classOfConstructor = null;
+        // we are not yet in a JDF or JMF
+        if(!bInJDFJMF && (jdfNSURI.equals(namespaceURI) || ElementName.JDF.equals(localPart) || ElementName.JMF.equals(localPart)))
+        {
+            bInJDFJMF=true;
+        }
 
         synchronized (sm_hashCtorElementNS)
         {
@@ -271,17 +282,30 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
         // only put the constructor into the map if its not a Resource or an element
         // there are a couple of nodes which can be both resource and element 
         // depending on the occurrence  
-        final String s = constructi.getDeclaringClass().getName();
-        if ( !s.endsWith("JDFResource")        &&
-             !s.endsWith("JDFElement")         &&
-             !qualifiedName.equals("HoleType") &&
-             !qualifiedName.equals("Method")   &&
-             !qualifiedName.equals("Shape")    &&
-             !qualifiedName.equals("Position") &&
-             !qualifiedName.equals("Surface") )
+        final String className = constructi.getDeclaringClass().getName();
+        final boolean bSpecialClass = isSpecialClass(qualifiedName, className);
+        if ( bSpecialClass )
         {   
             hashCtorElement.put(qualifiedName, constructi);
         }
+    }
+
+    /**
+     * @param qualifiedName
+     * @param className
+     * @return
+     */
+    private boolean isSpecialClass(String qualifiedName, final String className)
+    {
+        final boolean bSpecialClass = !className.endsWith("JDFResource")        &&
+                        !className.endsWith("JDFElement")         &&
+                        !className.endsWith("KElement")         &&
+                        !qualifiedName.equals("HoleType") &&
+                        !qualifiedName.equals("Method")   &&
+                        !qualifiedName.equals("Shape")    &&
+                        !qualifiedName.equals("Position") &&
+                        !qualifiedName.equals("Surface");
+        return bSpecialClass;
     }
 
     /**
@@ -360,7 +384,6 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
     
     private Class getFactoryClass(String strNameSpaceURI, String qualifiedName, String localPart) throws ClassNotFoundException
     {
-        // for strName=="Device", packageNameClass will be de.hdpp.pt.QC.JDF.JdfDevice.class
         Class packageNameClass = (Class) sm_ClassAlreadyInstantiated.get(qualifiedName);
 
         if (packageNameClass == null)
@@ -375,6 +398,10 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
                     normalElement = false;
                     strClassPath  = getSpecialClassPath(strNameSpaceURI, qualifiedName);
                 }
+                else
+                {
+                    normalElement=isSpecialClass(qualifiedName, strClassPath);
+                }
                 
                 // assert strClassPath != null
                 packageNameClass = Class.forName(strClassPath);
@@ -385,7 +412,6 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
                 }
             }
         }
-
         return packageNameClass;
     }
     
@@ -398,6 +424,13 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
      */
     private String getFactoryClassPath (String strNameSpaceURI, String qualifiedName, String localPart)
     {
+        if(bKElementOnly)
+            return "org.cip4.jdflib.core.KElement";
+        
+        // we are not yet in a JDF or JMF - it must be a KElement
+        if(!bInJDFJMF)
+            return "org.cip4.jdflib.core.KElement";
+
         String strClassPath = null;
         
         if (qualifiedName.endsWith(JDFConstants.LINK))
@@ -419,7 +452,6 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
                 strClassPath = (String) sm_PackageNames.get(localPart);
             }
         }
-        
         return strClassPath;
     }
     
@@ -436,9 +468,9 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
         String strParentNodeClass = null;
         if (m_ParentNode != null)
         {
-  //          strParentNodeClass = m_ParentNode.getClass().getCanonicalName();
+            //          strParentNodeClass = m_ParentNode.getClass().getCanonicalName();
             strParentNodeClass = m_ParentNode.getClass().getName();
-                  }
+        }
         
         if (ElementName.HOLETYPE.equals(strName))
         {
@@ -504,7 +536,7 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
             }
             else
             {
-                strClassPath = (nameSpaceURI == null || nameSpaceURI.equals(JDFConstants.JDFNAMESPACE))
+                strClassPath = (nameSpaceURI == null && bInJDFJMF || JDFConstants.JDFNAMESPACE.equals(nameSpaceURI))
                                     ? (String) sm_PackageNames.get("EleDefault") 
                                     : (String) sm_PackageNames.get("OtherNSDefault");
             }
@@ -534,45 +566,29 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
 
     private boolean isDeepResource(String strName)
     {
-        boolean bIsDeepresource = false;
-
-        while (m_ParentNode != null)
+        if(m_ParentNode==null)
+            return false;
+        if (m_ParentNode instanceof JDFResourcePool) // direct child of an rp
+            return true;
+        if (m_ParentNode instanceof JDFResource) // partitioned resource leaf
         {
-            // check if m_ParentNode is the resourcepool
-            if (m_ParentNode.getNodeName().equals(ElementName.RESOURCEPOOL))
-            {
-                bIsDeepresource = true;
-                break;
-            }
-            //if the parent is not the resourcepool check if if the parentelement has the same name as strName
-            //it could be a partitioned resource in the resource pool
-            else if (m_ParentNode.getNodeName().equals(strName))
-            {
-                // if both (strName and parent) have the same name, 
-                // get the parent of m_ParentNode to check if it is the resourcePool
-                m_ParentNode = m_ParentNode.getParentNode();
-            }
-
-            //its not a resource
-            else
-            {
-                bIsDeepresource = false;
-                break;
-            }
+             return m_ParentNode.getLocalName().equals(strName);
         }
-        
-        return bIsDeepresource; 
+        return false; 
     }
     
-    
+    /*
+     * Attention! this only sets the initial parent for deep=true
+     *
+     * (non-Javadoc)
+     * @see org.apache.xerces.dom.CoreDocumentImpl#importNode(org.w3c.dom.Node, boolean)
+     */
+    //TODO revisit setting parent nodes when importing
     public Node importNode(Node importedNode, boolean deep)
     {
         setParentNode(importedNode.getParentNode());
         return super.importNode(importedNode, deep);
     }
-    
-    
-    
     
     /**
      * register all default classes in the factory
@@ -588,12 +604,6 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
 // root elements
         sm_PackageNames.put("JDF",                               "org.cip4.jdflib.node.JDFNode");
         sm_PackageNames.put("JMF",                               "org.cip4.jdflib.jmf.JDFJMF");
-        sm_PackageNames.put("xs:schema",                         "org.cip4.jdflib.node.JDFNode");
-        sm_PackageNames.put("Config",                            "org.cip4.jdflib.node.JDFNode");
-
-// generated entries, which are never used:        
-//      sm_PackageNames.put("Element",                           "org.cip4.jdflib.core.JDFElement");
-//      sm_PackageNames.put("KElement",                          "org.cip4.jdflib.core.KElement");
 
         sm_PackageNames.put("Acknowledge",                       "org.cip4.jdflib.jmf.JDFAcknowledge");
         sm_PackageNames.put("Action",                            "org.cip4.jdflib.resource.devicecapability.JDFAction");
@@ -1276,15 +1286,18 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
         sm_PackageNames.put("TrapRegion",                        "org.cip4.jdflib.resource.process.JDFTrapRegion");
         sm_PackageNames.put("Trigger",                           "org.cip4.jdflib.jmf.JDFTrigger");
         sm_PackageNames.put("TrimmingParams",                    "org.cip4.jdflib.resource.process.postpress.JDFTrimmingParams");
+
         sm_PackageNames.put("Underage",                          "org.cip4.jdflib.span.JDFNumberSpan");
         sm_PackageNames.put("UpdateJDFCmdParams",                "org.cip4.jdflib.jmf.JDFUpdateJDFCmdParams");
         sm_PackageNames.put("UsageCounter",                      "org.cip4.jdflib.resource.process.JDFUsageCounter");
         sm_PackageNames.put("USWeight",                          "org.cip4.jdflib.span.JDFNumberSpan");
+
         sm_PackageNames.put("Value",                             "org.cip4.jdflib.resource.JDFValue");
         sm_PackageNames.put("ValueLoc",                          "org.cip4.jdflib.resource.devicecapability.JDFValueLoc");
         sm_PackageNames.put("VeloBinding",                       "org.cip4.jdflib.resource.process.postpress.JDFVeloBinding");
         sm_PackageNames.put("VerificationParams",                "org.cip4.jdflib.resource.JDFVerificationParams");
         sm_PackageNames.put("ViewBinder",                        "org.cip4.jdflib.span.JDFNameSpan");
+
         sm_PackageNames.put("WakeUpCmdParams",                   "org.cip4.jdflib.jmf.JDFWakeUpCmdParams");
         sm_PackageNames.put("WebInlineFinishingParams",          "org.cip4.jdflib.resource.process.postpress.JDFWebInlineFinishingParams");
         sm_PackageNames.put("Weight",                            "org.cip4.jdflib.span.JDFNumberSpan");
@@ -1296,6 +1309,7 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
         sm_PackageNames.put("WrappedQuantity",                   "org.cip4.jdflib.span.JDFIntegerSpan");
         sm_PackageNames.put("WrappingMaterial",                  "org.cip4.jdflib.span.JDFNameSpan");
         sm_PackageNames.put("WrappingParams",                    "org.cip4.jdflib.resource.JDFWrappingParams");
+
         sm_PackageNames.put("xor",                               "org.cip4.jdflib.resource.devicecapability.JDFxor");
         sm_PackageNames.put("XPosition",                         "org.cip4.jdflib.span.JDFNumberSpan");
         sm_PackageNames.put("XYPair",                            "org.cip4.jdflib.datatypes.JDFXYPair");
@@ -1304,7 +1318,6 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
         sm_PackageNames.put("XYPairSpan",                        "org.cip4.jdflib.span.JDFXYPairSpan");
         sm_PackageNames.put("XYPairState",                       "org.cip4.jdflib.resource.devicecapability.JDFXYPairState");
 
-//TODO        sm_PackageNames.put("XYRelation",                        "JDFXYRelation");
         sm_PackageNames.put("YPosition",                         "org.cip4.jdflib.span.JDFNumberSpan");
     }
     
@@ -1332,6 +1345,23 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
         if(ud!=null)
             ud.clearTargets();
         return super.replaceChild(arg0,arg1);
+    }
+
+    /**
+     * @return the setIgnoreNSDefault; if true no namespaces are heuristically gathered
+     */
+    public boolean isIgnoreNSDefault()
+    {
+        return ignoreNSDefault;
+    }
+
+    /**
+     * if true no namespaces are heuristically gathered
+     * @param ignoreNSDefault the setIgnoreNSDefault to set
+     */
+    public void setIgnoreNSDefault(boolean _setIgnoreNSDefault)
+    {
+        this.ignoreNSDefault = _setIgnoreNSDefault;
     }
     
 

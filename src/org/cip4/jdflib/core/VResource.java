@@ -32,7 +32,7 @@ public class VResource extends VElement
     /**
      * constructor
      *
-     * @param Vector m
+     * @param m
      */
     public VResource(Vector m)
     {

@@ -26,22 +26,21 @@ import org.cip4.jdflib.auto.JDFAutoSubscription;
     private static final long serialVersionUID = 1L;
 
     /**
-     * Constructor for JDFSubscription
-     * @param ownerDocument
+     * JDFSubscription.java
+     * @param myOwnerDocument
      * @param qualifiedName
      */
-     public JDFSubscription(
+    public JDFSubscription(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
 
-
     /**
      * Constructor for JDFSubscription
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
      */
     public JDFSubscription(
@@ -54,10 +53,10 @@ import org.cip4.jdflib.auto.JDFAutoSubscription;
 
     /**
      * Constructor for JDFSubscription
-     * @param ownerDocument
-     * @param namespaceURI
+     * @param myOwnerDocument
+     * @param myNamespaceURI
      * @param qualifiedName
-     * @param localName
+     * @param myLocalName
      */
     public JDFSubscription(
         CoreDocumentImpl myOwnerDocument,
@@ -68,6 +67,10 @@ import org.cip4.jdflib.auto.JDFAutoSubscription;
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
 
+    /**
+     * toString()
+     * @return String
+     */
     public String toString()
     {
         return "JDFSubscription[  --> " + super.toString() + " ]";

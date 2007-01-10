@@ -140,14 +140,14 @@ public class JDFnot extends JDFNodeTerm
 	
 	/**
 	 * Inverts the boolean state of a Term element 
-	 * (and, or, xor, not, Evaluation, TestRef)
+	 * (and, or, xor, not, Evaluation, TestRef).<br>
 	 * To determine the state of Term tests Evaluations that “not” consists of, 
-	 * checks if attribute map 'm' has a key, 
-	 * specified by Evaluation/BasicPreflightTest/@Name
-	 * and if 'm' has such key, checks if its value fits testlists,
-	 * specified for matching Evaluation (uses FitsValue(value))
+	 * it checks whether attribute map 'm' has a key, 
+	 * specified by Evaluation/BasicPreflightTest/@Name.
+	 * If 'm' has such key, it checks whether its value fits the testlists
+	 * specified for matching the Evaluation (uses FitsValue(value))
 	 *
-	 * @param JDFAttributeMap m -  key-value pair attribute map
+	 * @param m key-value pair attribute map
 	 * @return boolean - true, if boolean “not” expression evaluates to “true”
 	 */
 	public boolean fitsMap(JDFAttributeMap m) 
@@ -164,7 +164,9 @@ public class JDFnot extends JDFNodeTerm
 	 * Inverts the boolean state of a Term child element 
 	 * (and, or, xor, not, Evaluation, TestRef)
 	 *
-	 * @param jdf - JDFNode we test to know if the Device can accept it 
+	 * @param jdf        JDFNode we test to know if the Device can accept it
+	 * @param reportRoot the report to generate. 
+	 *                   Set to <code>null</code> if no report is requested. 
 	 * @return boolean - true, if boolean “not” expression evaluates to “true”
 	 */
 	public boolean fitsJDF(KElement jdf,KElement reportRoot) 
