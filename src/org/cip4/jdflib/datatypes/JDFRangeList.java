@@ -112,6 +112,7 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
     /**
      * getElementAt - returns the element at the ith position
      *
+     * @param i the position of the element to be retrieved
      * @return Object - the range object at the given position
      */
     public final Object elementAt(int i)
@@ -123,7 +124,7 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
     /**
      * remove - removes an object from the vector
      *
-     * @param int i - the index of the element to remove
+     * @param i the index of the element to remove
      */
     public final void remove(int i)
     {
@@ -134,7 +135,7 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
     /**
     * isPartOfRange - check whether range 'x' is in the range defined by 'this'
     * 
-    * @param JDFDateTimeRange x - JDFDateTimeRange to test
+    * @param x JDFRange to test
     * @return boolean - true if 'x' is in the range defined by 'this'
     */
     public final boolean isPartOfRange(JDFRange x)
@@ -153,9 +154,9 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
     }
 
     /**
-     * isPartOfRange - check whether DateTimeRangeList 'x' is within this range list
+     * isPartOfRange - check whether JDFRangeList 'x' is within this range list
      * 
-     * @param JDFDateTimeRangeList x - the range list to test
+     * @param x the range list to test
      * @return boolean - true if range list 'x' is within 'this' range list, else false
      */
     public final boolean isPartOfRange(JDFRangeList x)
@@ -204,7 +205,7 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
 
     /**
     * number of Duration range elements
-    * @return int the number of Duration ranges in the list
+    * @return int - the number of Duration ranges in the list
     */
     public final int size()
     {
@@ -222,9 +223,9 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
     /**
     * at(i) - get the i-th range element
     * 
-    * @param int i - index of the range to retrieve
+    * @param i index of the range to retrieve
     * 
-    * @return JDFDateTimeRange - JDFDateTimeRange at the position i
+    * @return JDFRange - JDFDateTimeRange at the position i
     */
     public final JDFRange at(int i)
     {
@@ -236,7 +237,7 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
     /**
     * begin() - returns the first JDFDateTimeRange of the JDFDateTimeRangeList
     *
-    * @return JDFDateTimeRange: the first JDFDateTimeRange of the JDFDateTimeRangeList
+    * @return JDFRange: the first JDFDateTimeRange of the JDFDateTimeRangeList
     */
     public final JDFRange begin()
     {
@@ -246,7 +247,7 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
     /**
     * begin() - returns the last JDFDateTimeRange of the JDFDateTimeRangeList
     *
-    * @return JDFDateTimeRange: the last JDFDateTimeRange of the JDFDateTimeRangeList
+    * @return JDFRange: the last JDFDateTimeRange of the JDFDateTimeRangeList
     */
     public final JDFRange end()
     {
@@ -256,7 +257,7 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
     /**
      * erase(i) - Removes the i-th element of the range list
      * 
-     * @param int i: index of element (range) to remove
+     * @param i index of element (range) to remove
      */
     public final void erase(int i)
     {
@@ -329,7 +330,14 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
         return HashUtil.hashCode(0, this.toString());
     }
 
+    /**
+     * isUniqueOrdered - tests if <code>this</this> has only unique values and if 
+     * the values are ordered
+     * 
+     * @return true if values are unique and ordered, otherwise false
+     */
     public abstract boolean isUniqueOrdered();
+    
     /**
      * isUnique - tests if 'this' has only unique values
      * 

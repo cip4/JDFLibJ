@@ -99,9 +99,10 @@ public class JDFShapeRangeList extends JDFRangeList
     }
     
     /**
+     * copy constructor<br>
      * constructs a JDFShapeRangeList with the given JDFShapeRangeList
      * 
-     * @param JDFShapeRangeList rl
+     * @param rl
      */
     public JDFShapeRangeList(JDFShapeRangeList rl)
     {
@@ -109,9 +110,9 @@ public class JDFShapeRangeList extends JDFRangeList
     }
 
     /**
-     * constructs a JDFShapeRangeList
+     * constructs a JDFShapeRangeList from the values of a given String
      * 
-     * @param String s - the given string
+     * @param s the given String
      * 
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -128,7 +129,7 @@ public class JDFShapeRangeList extends JDFRangeList
     /**
      * inRange - check whether shape 'x' is in the shape range defined by 'this'
      * 
-     * @param JDFShape x - shape value to test
+     * @param x shape value to test
      * @return boolean - true if 'x' is in the range defined by 'this'
      */
     public boolean inRange(JDFShape x)
@@ -149,7 +150,7 @@ public class JDFShapeRangeList extends JDFRangeList
      * setString - deserialize a string Reads the string, which represents
      * JDFShapeRangeList, and converts it into real JDFShapeRangeList
      * 
-     * @param String s - string to read
+     * @param s string to read
      * 
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -194,7 +195,7 @@ public class JDFShapeRangeList extends JDFRangeList
     /**
      * isValid - validate the given String
      *
-     * @param String s - the given string
+     * @param s the given string
      *
      * @return boolean - false if the String has not a valid format 
      */
@@ -216,7 +217,7 @@ public class JDFShapeRangeList extends JDFRangeList
     /**
      * append - adds an element defined by a JDFShapeRange
      * 
-     * @param JDFShapeRange x - the range to append to the list
+     * @param x the range to append to the list
      */
     public void append(JDFShapeRange x)
     {
@@ -226,7 +227,7 @@ public class JDFShapeRangeList extends JDFRangeList
     /**
      * append - adds an individual JDFShape element
      * 
-     * @param JDFShape x - the left and right value of the range to append to the list
+     * @param x the left and right value of the range to append to the list
      */
     public void append(JDFShape x)
     {
@@ -234,10 +235,10 @@ public class JDFShapeRangeList extends JDFRangeList
     }
 
     /**
-     * append - adds an element defined by two JDFShapes xMin~xMax
+     * append - adds an element defined by two JDFShapes: xMin~xMax
      * 
-     * @param JDFShape xMin - the left value of the range to append to the list
-     * @param JDFShape xMax - the right value of the range to append to the list
+     * @param xMin the left value of the range to append to the list
+     * @param xMax the right value of the range to append to the list
      */
     public void append(JDFShape xMin, JDFShape xMax)
     {

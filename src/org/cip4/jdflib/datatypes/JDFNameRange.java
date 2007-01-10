@@ -37,7 +37,7 @@ public class JDFNameRange extends JDFRange
     /**
      * constructs a JDFNameRange with the given string
      *
-     * @param String s - the given string
+     * @param s the given string
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -49,8 +49,8 @@ public class JDFNameRange extends JDFRange
     /**
      * constructs a JDFNameRange with two given strings the left and the right name
      *
-     * @param String p_left  - the given left string
-     * @param String p_right - the given right string
+     * @param p_left  the given left string
+     * @param p_right the given right string
      */
     public JDFNameRange(String p_left, String p_right)
     {
@@ -98,7 +98,7 @@ public class JDFNameRange extends JDFRange
     /**
      * inRange - returns true if (left string >= x <= right string), it is a lexicographical compare
      *
-     * @param String x - comparison string
+     * @param x comparison string
      *
      * @return boolean - true if x in range otherwise false
      */
@@ -110,7 +110,7 @@ public class JDFNameRange extends JDFRange
     /**
      * equals - returns true if both JDFNameRange are equal otherwise false
      *
-     * @return boolean - true if equal otherwise false
+     * @return boolean - true if equal, otherwise false
      */
     public boolean equals(Object other)
     {
@@ -161,7 +161,7 @@ public class JDFNameRange extends JDFRange
     /**
      * isValid - validates the given String
      *
-     * @param String s - the given string
+     * @param s the given string
      *
      * @throws DataFormatException - if the String has not a valid format
      */

@@ -36,7 +36,7 @@ public class JDFIntegerList extends JDFNumList
     /**
      * constructs an integer list with all values set via a String
      *
-     * @param s - the given String
+     * @param s the given String
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -48,7 +48,7 @@ public class JDFIntegerList extends JDFNumList
     /**
      * constructs an integer list with all values set via a Vector of Intger objects
      *
-     * @param v - the given vector
+     * @param v the given vector
      *
      * @throws DataFormatException - if the Vector has not a valid format
      */
@@ -60,7 +60,7 @@ public class JDFIntegerList extends JDFNumList
     /**
      * constructs an integer list with all values set via a JDFIntegerList
      *
-     * @param il - the given integer list
+     * @param il the given integer list
      *
      * @throws DataFormatException - if the JDFIntegerList has not a valid format
      */
@@ -82,7 +82,7 @@ public class JDFIntegerList extends JDFNumList
     /**
      * constructs an integer list with all values set via an int
      *
-     * @param i - the given integer 
+     * @param i the given integer 
      */
     public JDFIntegerList(int i)
     {
@@ -141,7 +141,7 @@ public class JDFIntegerList extends JDFNumList
     /**
      * addIntegerList - adds an integer list to this integer list
      *
-     * @param JDFIntegerList il - the given integer list
+     * @param il the given integer list
      */
     public void addIntegerList(JDFIntegerList il)
     {
@@ -156,7 +156,7 @@ public class JDFIntegerList extends JDFNumList
     /**
      * add - add an int to the vector
      *
-     * @param int x - the int value
+     * @param x the int value
      */
     public void add(int x)
     {
@@ -166,7 +166,7 @@ public class JDFIntegerList extends JDFNumList
     /**
      * add - add an Integer object to the vector
      *
-     * @param Integer x - the Integer object
+     * @param x the Integer object
      */
     public void add(Integer x)
     {
@@ -176,7 +176,7 @@ public class JDFIntegerList extends JDFNumList
     /**
      * add - adds a complete integer list to the vector
      *
-     * @param JDFIntegerList il - the given integer list
+     * @param il the given integer list
      */
     public void add(JDFIntegerList il)
     {
@@ -186,7 +186,7 @@ public class JDFIntegerList extends JDFNumList
     /**
      * add - adds a integer list string to the existing integer list
      *
-     * @param String s - the given string
+     * @param s the given string
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -211,9 +211,12 @@ public class JDFIntegerList extends JDFNumList
     }
 
     /**
-     * getInt - returns this integer list as an int array
+     * getInt - returns the integer at 'pos' from the list.<br>
+     * Note: if pos is negative, getInt returns the pos'th integer counting from the end.
      *
-     * @return int - the int array
+     * @param pos index of the integer to get
+     *
+     * @return int - the pos'th int
      */
     public int getInt(int pos)
     {
@@ -224,6 +227,7 @@ public class JDFIntegerList extends JDFNumList
             throw new JDFException("JDFIntegerList:getInt invalid index");
         return i.intValue();
     }
+    
     /**
      * getIntArray - returns this integer list as an int array
      *
@@ -245,9 +249,10 @@ public class JDFIntegerList extends JDFNumList
     }
 
     /**
-     * setIntArray - sets this integer list to an int array
+     * setIntArray - sets this integer list to an int array<br>
+     * the RangeList is emptied, then the values of iArray are added
      *
-     * @param iArray - the int array
+     * @param iArray the int array
      */
     public void setIntArray(int[] iArray)
     {
@@ -258,9 +263,10 @@ public class JDFIntegerList extends JDFNumList
     }
 
     /**
-     * setIntArray - sets this integer list to an int 
+     * setIntArray - sets this integer list to an int<br>
+     * the RangeList is empied, then the single value i is added 
      *
-     * @param iArray - the int array
+     * @param i the value
      */
     public void setInt(int i)
     {

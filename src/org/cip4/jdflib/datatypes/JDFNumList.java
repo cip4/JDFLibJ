@@ -108,7 +108,7 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
      * constructor - constructs a number list with the given size and sets all values set to
      * 0.0 Double
      *
-     * @param int size - the given size
+     * @param size the given size
      */
     public JDFNumList(int size)
     {
@@ -119,17 +119,18 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
     }
     
     /**
-     * same as Vector.clear() --> just scrub the damn thing clean
+     * same as Vector.clear()
      *
      */
     public void clear()
     {
         m_numList.clear();
     }
+    
     /**
      * constructor - constructs a number list with the given vector
      *
-     * @param Vector v - a vector with number list objects
+     * @param v a vector with number list objects
      *
      * @throws DataFormatException - if the Vector has not a valid format
      */
@@ -143,7 +144,7 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
      * constructor - constructs a number list with the given String; if the sub class is of type
      * JDFIntegerList all object will be Integer in all other cases the object will be a Double
      *
-     * @param String s - the given String
+     * @param s the given String
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -178,7 +179,7 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
     /**
      * constructor - constructs a number list with a given JDFNumList
      *
-     * @param JDFNumList nl - the given number list
+     * @param nl the given number list
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -365,10 +366,9 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
     
     
     /**
-     * replaceElementAt - replaces the element at the given position with the given object
-     *
-     * @param Object - the object
-     * @param i      - the given position
+     * removeElementAt - removes the element at the given position
+     * 
+     * @param i the position from where to remove the element
      *
      * @return boolean - true if successfull otherwise false
      */
@@ -389,8 +389,8 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
     /**
      * replaceElementAt - replaces the element at the given position with the given object
      *
-     * @param Object - the object
-     * @param i      - the given position
+     * @param obj the object
+     * @param i   the given position
      * @return boolean - true if successfull otherwise false
      */
     public boolean replaceElementAt(Object obj, int i)

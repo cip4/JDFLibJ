@@ -102,7 +102,7 @@ public class JDFXYPair extends JDFNumList
     /**
      * constructs a xy pair with all values set via a Vector of Double objects
      *
-     * @param Vector v
+     * @param v Vector of Double
      *
      * @throws DataFormatException - if the Vector has not a valid format
      */
@@ -114,7 +114,7 @@ public class JDFXYPair extends JDFNumList
     /**
      * constructs a xy pair with all values set via a String
      *
-     * @param String s - the given String
+     * @param s the given String
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -126,7 +126,7 @@ public class JDFXYPair extends JDFNumList
     /**
      * constructs a xy pair with all values set via a JDFXYPair
      *
-     * @param JDFXYPair xy - the given xy pair
+     * @param xy the given xy pair
      *
      * @throws DataFormatException - if the JDFXYPair has not a valid format
      */
@@ -140,7 +140,7 @@ public class JDFXYPair extends JDFNumList
     /**
      * constructs a xy pair with all values set via a JDFNumberList
      *
-     * @param JDFNumberList nl - the given number list
+     * @param nl the given number list
      *
      * @throws DataFormatException - if the JDFNumberList has not a valid format
      */
@@ -156,8 +156,8 @@ public class JDFXYPair extends JDFNumList
     /**
      * constructs a new JDFXYPair with the given double values
      *
-     * @param double x - the x coordinate
-     * @param double y - the y coordinate
+     * @param x the x coordinate
+     * @param y the y coordinate
      */
     public JDFXYPair(double x, double y)
     {
@@ -201,7 +201,7 @@ public class JDFXYPair extends JDFNumList
     /**
      * setX - sets the x coordinate
      *
-     * @param double x - the x coordinate
+     * @param x the x coordinate
      */
     public void setX(double x)
     {
@@ -221,7 +221,7 @@ public class JDFXYPair extends JDFNumList
     /**
      * setY - sets the y coordinate
      *
-     * @param double y - the y coordinate
+     * @param y the y coordinate
      */
     public void setY(double y)
     {
@@ -267,7 +267,7 @@ public class JDFXYPair extends JDFNumList
    /**
    * isGreaterOrEqual - equality operator >=
    * 
-   * @param JDFXYPair x - the JDFXYPair object to compare to
+   * @param x the JDFXYPair object to compare to
    * @return boolean - true if this >= x  
    */
    public boolean isGreaterOrEqual(JDFXYPair x)
@@ -278,7 +278,7 @@ public class JDFXYPair extends JDFNumList
    /**
    * isLessOrEqual - equality operator <=
    * 
-   * @param JDFXYPair x - the JDFXYPair object to compare to
+   * @param x the JDFXYPair object to compare to
    * @return boolean - true if this <= x  
    */
    public boolean isLessOrEqual(JDFXYPair x)
@@ -289,7 +289,7 @@ public class JDFXYPair extends JDFNumList
    /**
    * isGreater - equality operator >
    * 
-   * @param JDFXYPair x - the JDFXYPair object to compare to
+   * @param x the JDFXYPair object to compare to
    * @return boolean - true if this > x  
    */
    public boolean isGreater(JDFXYPair x)
@@ -300,7 +300,7 @@ public class JDFXYPair extends JDFNumList
    /**
    * isLess - equality operator <
    * 
-   * @param JDFXYPair x - the JDFXYPair object to compare to
+   * @param x the JDFXYPair object to compare to
    * @return boolean - true if this < x  
    */
    public boolean isLess(JDFXYPair x)

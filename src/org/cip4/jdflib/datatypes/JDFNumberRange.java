@@ -105,9 +105,9 @@ public class JDFNumberRange extends JDFRange
     }
 
     /**
-     * constructs a JDFNumberRange both values are equal
+     * constructs a JDFNumberRange, both values are equal ("from x to x")
      *
-     * @param double x - the given double
+     * @param x the given double
      */
     public JDFNumberRange(double x)
     {
@@ -115,10 +115,10 @@ public class JDFNumberRange extends JDFRange
     }
 
     /**
-     * constructor a JDFNumberRange with two double values
+     * constructor, creates a JDFNumberRange bounded by two double values ("from xmin to xmax")
      *
-     * @param double xmin - the given min value
-     * @param double xmax - the given max value
+     * @param xmin the given min value
+     * @param xmax the given max value
      */
     public JDFNumberRange(double xmin, double xmax)
     {
@@ -126,9 +126,9 @@ public class JDFNumberRange extends JDFRange
     }
 
     /**
-     * constructs a JDFNumberRange with the given JDFNumberRange
+     * copy constructor, creates a JDFNumberRange with the given JDFNumberRange
      *
-     * @param JDFNumberRange nr
+     * @param nr 
      */
     public JDFNumberRange(JDFNumberRange nr)
     {
@@ -137,8 +137,11 @@ public class JDFNumberRange extends JDFRange
     }
     
     /**
-    * Initialization 
-    */
+     * Initialization 
+     * 
+     * @param xmin left value
+     * @param xmax right value
+     */
     protected void init(double xmin, double xmax)
     {
         m_left  = xmin;
@@ -148,7 +151,7 @@ public class JDFNumberRange extends JDFRange
     /**
     * constructs a JDFNumberRange with the values of the given string
     *
-    * @param String s - the given string
+    * @param s the given string
     *
     * @throws DataFormatException - if the String has not a valid format
     */
@@ -165,7 +168,7 @@ public class JDFNumberRange extends JDFRange
             if (strArray.length == 1)
             {
                 m_left = StringUtil.parseDouble(strArray[0],0.0);
-                if(m_left==0.0 && !StringUtil.isInteger(strArray[0]))
+                if(m_left==0.0 && !StringUtil.isNumber(strArray[0]))
                     throw new DataFormatException("JDFIntegerRange illegal string: " + s);
                 m_right = m_left;
             }
@@ -173,10 +176,10 @@ public class JDFNumberRange extends JDFRange
             else
             {
                 m_left = StringUtil.parseDouble(strArray[0],0.0);
-                if(m_left==0.0 && !StringUtil.isInteger(strArray[0]))
+                if(m_left==0.0 && !StringUtil.isNumber(strArray[0]))
                     throw new DataFormatException("JDFIntegerRange illegal string: " + s);
                 m_right = StringUtil.parseDouble(strArray[1],0.0);
-                if(m_right==0.0 && !StringUtil.isInteger(strArray[1]))
+                if(m_right==0.0 && !StringUtil.isNumber(strArray[1]))
                     throw new DataFormatException("JDFIntegerRange illegal string: " + s);
             }
         }
@@ -215,7 +218,7 @@ public class JDFNumberRange extends JDFRange
     /**
     * isValid - validate the given String
     *
-    * @param String s - the given string
+    * @param s the given string to validate
     *
     * @return boolean - false if the String has not a valid format 
     */
@@ -237,6 +240,7 @@ public class JDFNumberRange extends JDFRange
      * equals - returns true if both JDFNumberRange are equal otherwise false, the difference must
      * be smaller than EPSILON
      *
+     * @param other the object to compare with <code>this</code>
      * @return boolean - true if equal otherwise false
      */
     public boolean equals(Object other)
@@ -262,6 +266,7 @@ public class JDFNumberRange extends JDFRange
 
     /**
      * hashCode complements equals() to fulfill the equals/hashCode contract
+     * @return int - hash code of <code>this</this>
      */
     public int hashCode()
     {
@@ -271,7 +276,7 @@ public class JDFNumberRange extends JDFRange
     /**
      * returns the string representation of the left value of the range
      *
-     * @return  the left value of the range
+     * @return the left value of the range
      */
     public String getLeftString()
     {
@@ -310,7 +315,7 @@ public class JDFNumberRange extends JDFRange
     /**
      * setLeft - sets the left double object
      *
-     * @param double x - the left double object
+     * @param x the left double object
      */
     public void setLeft(double x)
     {
@@ -320,7 +325,7 @@ public class JDFNumberRange extends JDFRange
     /**
      * setRight - sets the right double object
      *
-     * @param double x - the right double object
+     * @param x the right double object
      */
     public void setRight(double x)
     {
@@ -328,8 +333,9 @@ public class JDFNumberRange extends JDFRange
     }
     
     /**
-     * getLowerValue - returns the lower value of the bounds for example 4.5~6.3 return 4.5,
-     * 7.0~5.9 return 5.9
+     * getLowerValue - returns the lower value of the bounds<br>
+     *  for example 4.5~6.3 returns 4.5,
+     * 7.0~5.9 returns 5.9
      *
      * @return double - the lower value of the range
      */
@@ -339,8 +345,9 @@ public class JDFNumberRange extends JDFRange
     }
 
     /**
-     * getUpperValue - return the upper value of the bounds for example 4.5~6.3 return 6.3,
-     * 7.0~5.9 return 7.0
+     * getUpperValue - return the upper value of the bounds<br>
+     * for example 4.5~6.3 returns 6.3,
+     * 7.0~5.9 returns 7.0
      *
      * @return double - the upper value of the range
      */
@@ -352,7 +359,7 @@ public class JDFNumberRange extends JDFRange
     /**
      * inRange - returns true if (lower value >= x <= upper value)
      *
-     * @param double x - comparison value
+     * @param x comparison value
      *
      * @return boolean - true if x in range
      */
@@ -364,7 +371,7 @@ public class JDFNumberRange extends JDFRange
     /**
      * isPartOfRange - is range 'r' within this range?
      * 
-     * @param JDFNumberRange r - the range to test
+     * @param r the range to test
      * 
      * @return boolean - true if range 'r' is within this range, else false
      */

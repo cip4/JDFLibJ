@@ -106,7 +106,7 @@ public class JDFDateTimeRangeList extends JDFRangeList
     /**
      * constructs a JDFDateTimeRangeList from a given string
      *
-     * @param String s - the given string
+     * @param s the given string
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -121,7 +121,7 @@ public class JDFDateTimeRangeList extends JDFRangeList
     /**
      * constructs a JDFDateTimeRangeList from the given JDFDateTimeRangeList 
      *
-     * @param JDFDateTimeRangeList rl - the given JDFDateTimeRangeList
+     * @param rl the given JDFDateTimeRangeList
      */
     public JDFDateTimeRangeList(JDFDateTimeRangeList rl)
     {
@@ -135,7 +135,7 @@ public class JDFDateTimeRangeList extends JDFRangeList
     *  inRange - returns true if the given JDFDate value is in one of the ranges
     *  of the range list
     *
-    * @param JDFDate x - the given JDFDate (duration) value to compare
+    * @param x the given JDFDate (duration) value to compare
     *
     * @return boolean - true if in range otherwise false
     */
@@ -158,7 +158,7 @@ public class JDFDateTimeRangeList extends JDFRangeList
     /**
      * setString - parse the given string and set the duration range list
      *
-     * @param String s - the given string
+     * @param s the given string
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -188,7 +188,7 @@ public class JDFDateTimeRangeList extends JDFRangeList
     /**
     * isValid - validate the given String
     *
-    * @param String s - the given string
+    * @param s the given string
     *
     * @return boolean - false if the String has not a valid format 
     */
@@ -207,7 +207,7 @@ public class JDFDateTimeRangeList extends JDFRangeList
         
     /**
     * Add a Duration range r =rMin~rMax
-    * @param JDFDateTimeRange r the Duration range to append to the list
+    * @param r the Duration range to append to the list
     */
     public void append(JDFDateTimeRange r)
     {
@@ -215,9 +215,9 @@ public class JDFDateTimeRangeList extends JDFRangeList
     }
     
     /**
-    * Add a Duration range defined by two MyDates xMin~xMax
-    * @param JDFDate xMin the left value of the Duration range to append to the list
-    * @param JDFDate xMax the right value of the Duration range to append to the list
+    * Add a Duration range defined by two dates xMin~xMax
+    * @param xMin the left value of the Duration range to append to the list
+    * @param xMax the right value of the Duration range to append to the list
     */
     public void append(JDFDate xMin, JDFDate xMax)
     {
@@ -226,7 +226,7 @@ public class JDFDateTimeRangeList extends JDFRangeList
     
     /**
     * Add an individual JDFDate element
-    * @param JDFDate x the left and right value of the Duration range to append to the list
+    * @param x the left and right value of the Duration range to append to the list
     */
     public void append(JDFDate x)
     {
@@ -235,9 +235,9 @@ public class JDFDateTimeRangeList extends JDFRangeList
     
      
     /**
-     * isOrdered - tests if 'this' is OrderedRangeList
+     * isOrdered - tests if 'this' is an OrderedRangeList
      * 
-     * @return boolean - true if 'this' is a OrdneredRangeList
+     * @return boolean - true if 'this' is an OrdneredRangeList
      */
      public boolean isOrdered()
      {
@@ -277,9 +277,9 @@ public class JDFDateTimeRangeList extends JDFRangeList
     }
     
     /**
-    * isUniqueOrdered - tests if 'this' is UniqueOrdered RangeList
+    * isUniqueOrdered - tests if 'this' is an UniqueOrdered RangeList
     * 
-    * @return boolean - true if 'this' is UniqueOrdered RangeList
+    * @return boolean - true if 'this' is an UniqueOrdered RangeList
     */
     public boolean isUniqueOrdered() {
         

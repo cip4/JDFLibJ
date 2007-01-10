@@ -103,9 +103,10 @@ public class JDFXYPairRangeList extends JDFRangeList
     }
     
     /**
+     * copy constructor<br>
      * constructs a JDFXYPairRangeList with the given JDFXYPairRangeList
      * 
-     * @param JDFXYPairRangeList rl
+     * @param rl the JDFXYPairRangeList to copy
      */
     public JDFXYPairRangeList(JDFXYPairRangeList rl)
     {
@@ -114,7 +115,7 @@ public class JDFXYPairRangeList extends JDFRangeList
     /**
      * constructs a JDFXYPairRangeList with the given JDFXYPairRange
      * 
-     * @param JDFXYPairRangeList rl
+     * @param r the given JDFXYPairRange
      */
     public JDFXYPairRangeList(JDFXYPairRange r)
     {
@@ -123,9 +124,9 @@ public class JDFXYPairRangeList extends JDFRangeList
     }
     
     /**
-     * constructs a JDFXYPairRangeList with the given string
+     * constructs a JDFXYPairRangeList with values from a given string
      *
-     * @param String s - the given string
+     * @param s the given string
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -143,7 +144,7 @@ public class JDFXYPairRangeList extends JDFRangeList
      *  inRange - returns true if the given JDFXYPair value is in one
      *  of the ranges of this range list
      *
-     * @param JDFXYPair x - the given double value to compare
+     * @param x the given double value to compare
      *
      * @return boolean - true if in range otherwise false
      */
@@ -163,6 +164,23 @@ public class JDFXYPairRangeList extends JDFRangeList
     }
     
     
+    /**
+     * setString<br>
+     * Parse the string and set the single ranges or pairs and put them into a vector.<br>
+     * The first and the last positions in the vector are special, because they contain only a half
+     * range: the first can start with a pair and the last can end with a pair. The elements in
+     * the middle (position 2 - (n-1)) start and end with a half range, but can have pairs in
+     * the middle.
+     *<p>
+     * For example, if the string looks like this:     *
+     * "1 2 ~ 4 5 6 7 ~ 8 9 10 11 ~ 1 1" <br>
+     * it is the representation of 3 ranges:<br>
+     *  range 1: "1 2 ~ 4 5", range 2: "6 7 ~ 8 9" and range 3: "10 11 ~ 1 1"
+     *
+     * @param s the given string to cut in seperate xy pair ranges
+     *
+     * @throws DataFormatException
+     */
     public void setString(String s) throws DataFormatException
     {
         if (s.indexOf(JDFConstants.TILDE)==0 || s.lastIndexOf(JDFConstants.TILDE)==(s.length()-1))
@@ -452,7 +470,7 @@ public class JDFXYPairRangeList extends JDFRangeList
     /**
      * isValid - validate the given String
      *
-     * @param String s - the given string
+     * @param s the given string
      *
      * @return boolean - false if the String has not a valid format 
      */
@@ -474,7 +492,7 @@ public class JDFXYPairRangeList extends JDFRangeList
     /**
      * append - appends a JDFXYPairRange to this number range
      *
-     * @param JDFXYPairRange r - the given number range
+     * @param r the JDFXYPairRange range to append
      */
     public void append(JDFXYPairRange r)
     {
@@ -484,8 +502,8 @@ public class JDFXYPairRangeList extends JDFRangeList
     /**
      * append - appends a new range to the range list
      *
-     * @param JDFXYPair xMin - the min value of the new range
-     * @param JDFXYPair xMax - the max value of the new range
+     * @param xMin the min value of the new range
+     * @param xMax the max value of the new range
      */
     public void append(JDFXYPair xMin, JDFXYPair xMax)
     {
@@ -493,9 +511,9 @@ public class JDFXYPairRangeList extends JDFRangeList
     }
     
     /**
-     * append - appends a new range to the range list
+     * append - appends a new range to the range list, based on a single JDFXYPair
      *
-     * @param JDFXYPair x - the min and the max value of the new range
+     * @param x both the min and the max value of the new range
      */
     public void append(JDFXYPair x)
     {

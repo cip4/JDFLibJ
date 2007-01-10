@@ -30,7 +30,7 @@ public class JDFLabColor extends JDFNumList
     /**
      * constructs a Lab color with all values set via a Vector of Double objects
      *
-     * @param Vector v - the given vector
+     * @param v the given vector
      *
      * @throws DataFormatException - if the Vector has not a valid format
      */
@@ -42,7 +42,7 @@ public class JDFLabColor extends JDFNumList
     /**
      * constructs a Lab color with all values set via a String
      *
-     * @param String s - the given String
+     * @param s the given String
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -54,7 +54,7 @@ public class JDFLabColor extends JDFNumList
     /**
      * constructs a Lab color with all values set via a JDFLabColor
      *
-     * @param JDFLabColor lab - the given Lab colors
+     * @param lab the given Lab colors
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -66,9 +66,9 @@ public class JDFLabColor extends JDFNumList
     /**
      * constructs a Lab color with all values set via a JDFNumberList
      *
-     * @param JDFNumberList nl - the given number list
+     * @param nl the given number list
      *
-     * @throws DataFormatException - if the String has not a valid format
+     * @throws DataFormatException - if the String does not have a valid format
      */
     public JDFLabColor(JDFNumberList nl) throws DataFormatException
     {
@@ -78,9 +78,9 @@ public class JDFLabColor extends JDFNumList
     /**
      * constructs a new Lab color with the given double values
      *
-     * @param double l - the value L
-     * @param double a - the value a
-     * @param double b - the value b
+     * @param l the value L
+     * @param a the value a
+     * @param b the value b
      */
     public JDFLabColor(double l, double a, double b)
     {
@@ -125,7 +125,7 @@ public class JDFLabColor extends JDFNumList
     /**
      * setL - sets the value L of the Lab color
      *
-     * @param double l - the value L of the Lab color
+     * @param l the value L of the Lab color
      */
     public void setL(double l)
     {
@@ -145,7 +145,7 @@ public class JDFLabColor extends JDFNumList
     /**
      * setA - sets the value a of the Lab color
      *
-     * @param double a - the value a of the Lab color
+     * @param a the value a of the Lab color
      */
     public void setA(double a)
     {
@@ -165,7 +165,7 @@ public class JDFLabColor extends JDFNumList
     /**
      * setB - sets the value b of the Lab color
      *
-     * @param double b - the value b of the Lab color
+     * @param b the value b of the Lab color
      */
     public void setB(double b)
     {

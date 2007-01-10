@@ -107,16 +107,19 @@ public class JDFDateTimeRange extends JDFRange
     }
 
     /**
-    * Constructor - creates a DateTime range defined by x
-    */
+     * Constructor - creates a DateTime range defined by x ("from x to x")
+     * @param x boundary of the date/time range
+     */
     public JDFDateTimeRange(JDFDate x)
     {
         init(x, x);
     }
     
     /**
-    * Constructor - creates a DateTime range defined by xmin to xmax
-    */
+     * Constructor - creates a DateTime range defined by xmin and xmax
+     * @param xmin 
+     * @param xmax
+     */
     public JDFDateTimeRange(JDFDate xmin, JDFDate xmax)
     {
         init(xmin, xmax);
@@ -191,7 +194,7 @@ public class JDFDateTimeRange extends JDFRange
     /**
     * isValid - validate the given String
     *
-    * @param String s - the given string
+    * @param s the given string
     *
     * @return boolean - false if the String has not a valid format 
     */
@@ -219,7 +222,7 @@ public class JDFDateTimeRange extends JDFRange
     /**
     * inRange - returns true if 'x' is within the range defined by 'this'
     * 
-    * @param JDFDate x - JDFDate that is to be compared with 'this'
+    * @param x JDFDate that is to be compared with 'this'
     * @return boolean - true if 'x' is within the range defined by 'this'
     */
     public boolean inRange(JDFDate x)
@@ -233,7 +236,7 @@ public class JDFDateTimeRange extends JDFRange
     /**
     * isPartOfRange - is range 'r' within this range?
     * 
-    * @param JDFDateTimeRange r - the range to test
+    * @param r the range to test
     * 
     * @return boolean - true if range 'r' is within this range, else false
     */
@@ -270,7 +273,7 @@ public class JDFDateTimeRange extends JDFRange
     /**
     * setLeft - sets the left JDFDate object of the range
     *
-    * @param JDFDate x - the left JDFDate object of the range
+    * @param x the left JDFDate object of the range
     */
     public void setLeft(JDFDate x) 
     {
@@ -280,7 +283,7 @@ public class JDFDateTimeRange extends JDFRange
     /**
     * setRight - sets the right JDFDate object of the range
     *
-    * @param JDFDate x - the right JDFDate object of the range
+    * @param x the right JDFDate object of the range
     */
     public void setRight(JDFDate x) 
     {

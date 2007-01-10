@@ -250,8 +250,8 @@ public class JDFPath
 
     /**
      * Method addValues.
-     * @param Type
-     * @param ParamNum
+     * @param type
+     * @param paramNum
      * @param s
      * @return boolean
      */
@@ -464,7 +464,8 @@ public class JDFPath
      * @param buffer
      * @param formatter
      * @param seg
-     * @param order
+     * @param nLength
+     * @param strOrder
      */
     private void appendSegment(
             final StringBuffer  buffer, 

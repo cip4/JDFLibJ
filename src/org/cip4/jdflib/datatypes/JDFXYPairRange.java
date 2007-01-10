@@ -107,9 +107,9 @@ public class JDFXYPairRange extends JDFRange
     }
     
     /**
-     * constructs a xy pair range with both values equal
+     * constructs a xy pair range with both values equal ("from x to x")
      *
-     * @param JDFXYPair x
+     * @param x left/right pair
      */
     public JDFXYPairRange(JDFXYPair x)
     {
@@ -119,8 +119,8 @@ public class JDFXYPairRange extends JDFRange
     /**
      * constructs a xy pair range with the given left and right xy pair
      *
-     * @param JDFXYPair min  - the given left xy pair
-     * @param JDFXYPair max - the given right xy pair
+     * @param min the given left xy pair
+     * @param max the given right xy pair
      */
     public JDFXYPairRange(JDFXYPair min, JDFXYPair max)
     {
@@ -138,7 +138,9 @@ public class JDFXYPairRange extends JDFRange
     }
     
     /**
-     * Initialization 
+     * Initialization
+     * @param min
+     * @param max 
      */
     protected void init(JDFXYPair min, JDFXYPair max)
     {
@@ -149,7 +151,7 @@ public class JDFXYPairRange extends JDFRange
     /**
      * constructs a xy pair range with all values set via a string
      *
-     * @param String s - the given string
+     * @param s the given string
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -211,7 +213,7 @@ public class JDFXYPairRange extends JDFRange
     /**
      * isValid - validate the given String
      *
-     * @param String s - the given string
+     * @param s the given string
      *
      * @return boolean - false if the String has not a valid format 
      */
@@ -256,6 +258,7 @@ public class JDFXYPairRange extends JDFRange
     
     /**
      * hashCode complements equals() to fulfill the equals/hashCode contract
+     * @return int
      */
     public int hashCode()
     {
@@ -285,7 +288,7 @@ public class JDFXYPairRange extends JDFRange
     /**
      * sets the left JDFXYPair object of the range
      *
-     * @param JDFXYPair xy - the left JDFXYPair object of the range
+     * @param xy the left JDFXYPair object of the range
      */
     public void setLeft(JDFXYPair xy) 
     {
@@ -295,7 +298,7 @@ public class JDFXYPairRange extends JDFRange
     /**
      * sets the right JDFXYPair object of the range
      *
-     * @param JDFXYPair xy - the right JDFXYPair object of the range
+     * @param xy the right JDFXYPair object of the range
      */
     public void setRight(JDFXYPair xy) 
     {
@@ -379,9 +382,9 @@ public class JDFXYPairRange extends JDFRange
     }
     
     /**
-     * inRange - returns true if
+     * inRange - returns true if <code>this</code> contains <code>xypair</code>
      *
-     * @param JDFXYPair xypair - comparison pair
+     * @param xypair comparison pair
      *
      * @return boolean - true if xy in range
      */
@@ -395,7 +398,7 @@ public class JDFXYPairRange extends JDFRange
     /**
      * isPartOfRange - is range 'r' within this range?
      * 
-     * @param JDFXYPairRange r - the range to test
+     * @param ra the range to test
      * 
      * @return boolean - true if range 'r' is within this range, else false
      */

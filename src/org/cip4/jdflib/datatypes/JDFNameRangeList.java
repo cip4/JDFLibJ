@@ -33,7 +33,7 @@ public class JDFNameRangeList extends JDFRangeList
     /**
      * constructs a JDFNameRangeList from a given string
      *
-     * @param String s - the given string
+     * @param s the given string
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -48,7 +48,7 @@ public class JDFNameRangeList extends JDFRangeList
     /**
      * constructs a JDFNameRangeList from the given JDFNameRangeList 
      *
-     * @param JDFNameRangeList rl - the given JDFNameRangeList
+     * @param rl the given JDFNameRangeList
      */
     public JDFNameRangeList(JDFNameRangeList rl)
     {
@@ -60,9 +60,9 @@ public class JDFNameRangeList extends JDFRangeList
     
      
     /**
-     * setString - parse the String and separate all single ranges
+     * setString - parse the string and separate all single ranges
      *
-     * @param String s - the given string
+     * @param s the given string
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -83,12 +83,12 @@ public class JDFNameRangeList extends JDFRangeList
     }
 
     /**
-     * inRange - returns true if the given string is in ranges with one of the ranges in the range
-     * list
+     * inRange - returns true if the given string is in range with one of the ranges in the range
+     * list (<code
      *
-     * @return String x - the given string
+     * @param x the given string
      *
-     * @return boolean - true if in range otherwise false
+     * @return boolean - true if in range, otherwise false
      */
     public boolean inRange(String x)
     {
@@ -106,7 +106,7 @@ public class JDFNameRangeList extends JDFRangeList
     /**
      * append - appends a name range to the range list
      *
-     * @param JDFNameRange r - the given name range
+     * @param r the given name range
      */
     public void append(JDFNameRange r)
     {

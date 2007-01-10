@@ -128,7 +128,7 @@ public class JDFCMYKColor extends JDFNumList
     /**
      * setC - sets the value C of the CMYK color
      *
-     * @param double c - the value C of the CMYK color
+     * @param c the value C of the CMYK color
      */
     public void setC(double c)
     {
@@ -148,7 +148,7 @@ public class JDFCMYKColor extends JDFNumList
     /**
      * setM - sets the value M of the CMYK color
      *
-     * @param double m - the value M of the CMYK color
+     * @param m the value M of the CMYK color
      */
     public void setM(double m)
     {
@@ -168,7 +168,7 @@ public class JDFCMYKColor extends JDFNumList
     /**
      * setY - sets the value Y of the CMYK color
      *
-     * @param double y - the value Y of the CMYK color
+     * @param y the value Y of the CMYK color
      */
     public void setY(double y)
     {
@@ -188,7 +188,7 @@ public class JDFCMYKColor extends JDFNumList
     /**
      * setK - sets the value K of the CMYK color
      *
-     * @param double k - the value K of the CMYK color
+     * @param k the value K of the CMYK color
      */
     public void setK(double k)
     {

@@ -112,28 +112,37 @@ public class JDFAttributeMap implements Map
 
     /**
      * utility constructor to construct a single value map
-     * @param key the key of the single value map
+     * @param key   the key of the single value map
      * @param value the value of the single value map
-     * 
      */
     public JDFAttributeMap(String key, String value)
     {
         put(key,value);
     }
-
     /**
-     * Method JDFAttributeMap clone the content of the input map
-     * @param inputMap to clone
+     * utility constructor to construct a single value map
+     * @param key   the key of the single value map
+     * @param value the value of the single value map
      */
-    public JDFAttributeMap (JDFAttributeMap inputMap)
+    public JDFAttributeMap(String key, ValuedEnum value)
     {
-        m_hashTable = (Hashtable)inputMap.m_hashTable.clone();
+        put(key,value.getName());
     }
 
     /**
-     * create a new map with one entry that is defined by partIDKey, value
+     * Method JDFAttributeMap clone the content of the input map
+     * @param inputMap map to clone
+     */
+    public JDFAttributeMap (JDFAttributeMap inputMap)
+    {
+        if(inputMap!=null)
+            m_hashTable = (Hashtable)inputMap.m_hashTable.clone();
+    }
+
+    /**
+     * constructor: create a new map with one entry that is defined by partIDKey, value
      * @param partIDKey the enumerated partIDKey
-     * @param value the partition key value
+     * @param value     the partition key value
      */
     public JDFAttributeMap(EnumPartIDKey partIDKey, String value)
     {
@@ -187,7 +196,7 @@ public class JDFAttributeMap implements Map
     /**
      * get - returns the value to which the specified key is mapped in this hashtable.
      *
-     * @param String key
+     * @param key the key of the value to get
      *
      * @return String - the String to which the key is mapped in this hashtable; null if the key
      *                  is not mapped to any value in this hashtable.
@@ -203,14 +212,14 @@ public class JDFAttributeMap implements Map
      * 
      * Note: This method is the equivalent to AddPair in C++
      *
-     * @param String key
-     * @param String value
+     * @param key   unique key of the pair to add. Must not be "" or null.
+     * @param value value of the pair to add. Must not be "" or null.
      *
-     * @return boolean - false if one Inputparamter is invalid (empty String and null are not alowed)
-     *                    true  if the new Key was inserted
-     * 
-     *                    NOTE: It is NOT possible to enter to identical keys. If you enter a key to a
-     *                          Attribute Map which already exists, the value will be replaced. 
+     * @return boolean - false if one Inputparamter is invalid (empty String and null are not alowed)<br>
+     *                   true  if the new Key was inserted
+     *                   <p>
+     *                   NOTE: It is NOT possible to enter to identical keys. If you enter a key to a
+     *                         Attribute Map which already exists, the value will be replaced. 
      */
     public boolean put(String key, String value)
     {  
@@ -226,7 +235,6 @@ public class JDFAttributeMap implements Map
         m_hashTable.put(key, value);
         return true;
     }
-
 
     /**
      * entrySet - Returns a Set view of the entries contained in this Hashtable. Each element in
@@ -246,7 +254,7 @@ public class JDFAttributeMap implements Map
      * and they must have the same value<br>
      * if subMap is null, the function returns true
      *
-     * @param JDFAttributeMap subMap - the map to compare
+     * @param subMap the map to compare
      *
      * @return boolean - true if map contains subMap
      */
@@ -271,7 +279,7 @@ public class JDFAttributeMap implements Map
     /**
      * overlapMap - identical keys must have the same values in both maps
      *
-     * @param JDFAttributeMap subMap - the map to compare
+     * @param subMap the map to compare with <code>this</this>
      *
      * @return boolean - true if identical keys have the same values in both maps
      */
@@ -304,7 +312,7 @@ public class JDFAttributeMap implements Map
      * orMap - put all key/value pairs which are not in this map to this map. Clear this, if both
      * maps have the same keys with different values.
      *
-     * @param JDFAttributeMap subMap
+     * @param subMap the map to compare with <code>this</this>
      */
     public JDFAttributeMap orMap(JDFAttributeMap subMap)
     {
@@ -336,7 +344,7 @@ public class JDFAttributeMap implements Map
     /**
      * andMap - builds a new map with identical pairs of both maps
      *
-     * @param JDFAttributeMap subMap - the given map
+     * @param subMap the given map
      */
     public void andMap(JDFAttributeMap subMap)
     {
@@ -364,12 +372,18 @@ public class JDFAttributeMap implements Map
 
     /**
      * reduceKey - reduces the map, only valid map entries with the given key vector will be copied
-     * to the new hashtable
+     * to the new hashtable; if null, clear this map
+     * 
      *
-     * @param Vector keys - the given keys
+     * @param keySet the collection of given keys
      */
-    public void reduceMap(Set keySet)
+    public void reduceMap(Collection keySet)
     {
+        if(keySet==null)
+        {
+            clear();
+            return;
+        }
         Iterator it=keySet.iterator();
         Hashtable ht=new Hashtable();
         while(it.hasNext())
@@ -385,8 +399,8 @@ public class JDFAttributeMap implements Map
     /**
      * reduceKey - reduces the map, only valid map entries with the given key vector will be copied
      * to the new hashtable
-     *
-     * @param Vector keys - the given keys
+     * @deprecated use reduceMap(set) (VString.getSet() returns a set)
+     * @param keys the given keys
      */
     public void reduceMap(Vector keys)
     {
@@ -403,7 +417,7 @@ public class JDFAttributeMap implements Map
     }
 
     /**
-     * reduceKey - the same like reduceMap but with a badder name
+     * reduceKey - the same as reduceMap but with a worse name
      * @deprecated use reduceMap
      */
     public void reduceKey(Vector keys)
@@ -412,11 +426,11 @@ public class JDFAttributeMap implements Map
     }
 
     /**
-     * equals - Compares two maps, returns true if content equal, otherwise false.
-     *          If input is not of type JDFAttributeMap, result of superclasses
+     * equals - Compares two maps, returns true if content equal, otherwise false.<br>
+     *          If input is not of type JDFAttributeMap, the result of the superclasses'
      *          equals method is returned.
      *
-     * @param Object obj - in this case JDFAttributeMap to compare
+     * @param obj JDFAttributeMap to compare with <code>this</code>
      *
      * @return boolean - true if the maps are equal, otherwise false
      */
@@ -435,6 +449,7 @@ public class JDFAttributeMap implements Map
 
     /**
      * hashCode complements equals() to fulfill the equals/hashCode contract
+     * @return int
      */
     public int hashCode()
     {
@@ -445,7 +460,7 @@ public class JDFAttributeMap implements Map
      * containsKey - looks for the given key in the hashtable, returns true if the hashtable
      * contains the key otherwise false
      *
-     * @param String key - the key
+     * @param key the key to look for
      *
      * @return boolean - true if the hashtable contains the given key otherwise false
      */
@@ -477,7 +492,7 @@ public class JDFAttributeMap implements Map
     }
 
     /**
-     * remove - Removes the key (and its corresponding value) from this hashtable.
+     * remove - removes the key (and its corresponding value) from this hashtable.<br>
      * This method does nothing if the key is not in the hashtable
      *
      * @return Object - the value to which the key had been mapped in this hashtable, or null if
@@ -552,8 +567,8 @@ public class JDFAttributeMap implements Map
         return m_hashTable.get(key);
     }
 
-    /** (non-Javadoc)
-     * @see java.util.Map#put(java.lang.Object, java.lang.Object)
+    /* (non-Javadoc)
+     * @see java.util.Map#put(K, V)
      */
     public Object put(Object key, Object value)
     {
@@ -583,10 +598,12 @@ public class JDFAttributeMap implements Map
 
     /**
      * remove all keys defined by set from this
-     * @param set the set of keys
+     * @param set the set of keys ot remove
      */
-    public void removeKeys(Set set)
+    public void removeKeys(Collection set)
     {
+        if(set==null)
+            return;
         Iterator it=set.iterator();
         while(it.hasNext())
         {

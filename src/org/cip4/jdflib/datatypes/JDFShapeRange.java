@@ -102,9 +102,9 @@ public class JDFShapeRange extends JDFRange
     }
     
     /**
-     * constructs a JDFShapeRange both values are equal
+     * constructs a JDFShapeRange, both values are equal ("from x to x")
      *
-     * @param JDFShape x - the given JDFShape
+     * @param x the given JDFShape
      */
     public JDFShapeRange(JDFShape x) 
     {
@@ -112,10 +112,10 @@ public class JDFShapeRange extends JDFRange
     }
     
     /**
-     * constructor a JDFShapeRange with two JDFShape values
+     * constructor a JDFShapeRange with two JDFShape values ("from xmin to xmax")
      *
-     * @param JDFShape xmin - the given min value
-     * @param JDFShape xmax - the given max value
+     * @param xmin the given min value
+     * @param xmax the given max value
      */
     public JDFShapeRange(JDFShape xmin, JDFShape xmax)  
     {
@@ -123,9 +123,10 @@ public class JDFShapeRange extends JDFRange
     }
     
     /**
+     * copy constructor<br>
      * constructs a JDFShapeRange with the given JDFShapeRange
      *
-     * @param JDFShapeRange r
+     * @param r
      */
     public JDFShapeRange(JDFShapeRange r)
     {
@@ -133,7 +134,9 @@ public class JDFShapeRange extends JDFRange
     }
     
     /**
-     * Initialization 
+     * Initialization
+     * @param x left boundary
+     * @param y right boundary
      */
     protected void init(JDFShape x, JDFShape y)
     {
@@ -142,9 +145,9 @@ public class JDFShapeRange extends JDFRange
     }
     
     /**
-     * constructs a JDFShapeRange with the values of the given string
+     * constructs a JDFShapeRange with the values of the given String
      *
-     * @param String s - the given string representation of the range
+     * @param s the given string representation of the range
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -206,7 +209,7 @@ public class JDFShapeRange extends JDFRange
     /**
      * isValid - validate the given String
      *
-     * @param String s - the given string
+     * @param s the given string
      *
      * @return boolean - false if the String has not a valid format 
      */
@@ -251,6 +254,7 @@ public class JDFShapeRange extends JDFRange
     
     /**
      * hashCode complements equals() to fulfill the equals/hashCode contract
+     * @return int
      */
     public int hashCode()
     {
@@ -260,7 +264,7 @@ public class JDFShapeRange extends JDFRange
     /**
      * inRange - tests if the given x inside of this range 
      *
-     * @param JDFShape x - comparison value
+     * @param x comparison value
      *
      * @return boolean - true if x in range
      */
@@ -274,7 +278,7 @@ public class JDFShapeRange extends JDFRange
     /**
      * isPartOfRange - is range 'r' within this range?
      * 
-     * @param JDFShapeRange r - the range to test
+     * @param r the range to test
      * 
      * @return boolean - true if range 'r' is within this range, else false
      */
@@ -311,7 +315,7 @@ public class JDFShapeRange extends JDFRange
     /**
      * sets the left JDFShape object of the range
      *
-     * @param JDFShape x - the left JDFShape object of the range
+     * @param x the left JDFShape object of the range
      */
     public void setLeft(JDFShape x) 
     {
@@ -321,7 +325,7 @@ public class JDFShapeRange extends JDFRange
     /**
      * sets the right JDFShape object of the range
      *
-     * @param JDFShape x - the right JDFShape object of the range
+     * @param x the right JDFShape object of the range
      */
     public void setRight(JDFShape x) 
     {

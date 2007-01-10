@@ -25,7 +25,7 @@ public class JDFNumberList extends JDFNumList
     /**
      * constructs a number list with the given string
      *
-     * @param String s - the given String
+     * @param s the given String
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -37,7 +37,7 @@ public class JDFNumberList extends JDFNumList
     /**
      * constructs a number list with the given vector
      *
-     * @param Vector v - the given vector
+     * @param v the given vector
      *
      * @throws DataFormatException - if the Vector has not a valid format
      */
@@ -66,7 +66,7 @@ public class JDFNumberList extends JDFNumList
     /**
      * add - add a double value to the vector
      *
-     * @param double x - the double value
+     * @param x the double value
      */
     public void add(double x)
     {
@@ -76,7 +76,7 @@ public class JDFNumberList extends JDFNumList
     /**
      * add - adds a Double object to the vector
      *
-     * @param Double x - the Double object
+     * @param x the Double object
      */
     public void add(Double x)
     {
@@ -86,7 +86,7 @@ public class JDFNumberList extends JDFNumList
     /**
      * add - adds a complete number list to the vector
      *
-     * @param JDFNumberList nl - the given JDFNumberList
+     * @param nl the given JDFNumberList
      */
     public void add(JDFNumberList nl)
     {
@@ -96,7 +96,7 @@ public class JDFNumberList extends JDFNumList
     /**
      * add - adds a number list to the already existing number list
      *
-     * @param String s - the given string
+     * @param s the given string
      *
      * @throws DataFormatException - if the String has not a valid format
      */

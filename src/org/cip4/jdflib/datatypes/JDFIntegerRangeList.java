@@ -79,6 +79,7 @@
  */
 package org.cip4.jdflib.datatypes;
 
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
@@ -136,7 +137,7 @@ public class JDFIntegerRangeList extends JDFRangeList
      * constructs a JDFIntegerRangeList with the given JDFIntegerRangeList and sets the number of
      * items
      *
-     * @param irl - the given JDFIntegerRangeList
+     * @param irl the given JDFIntegerRangeList
      */
     public JDFIntegerRangeList(JDFIntegerRangeList irl)
     {
@@ -147,7 +148,7 @@ public class JDFIntegerRangeList extends JDFRangeList
     /**
      * constructs a JDFIntegerRangeList with the given JDFIntegerRange and sets xDef
      *
-     * @param ir - the given JDFIntegerRange
+     * @param ir the given JDFIntegerRange
      */
     public JDFIntegerRangeList(JDFIntegerRange ir)
     {
@@ -162,7 +163,7 @@ public class JDFIntegerRangeList extends JDFRangeList
      * inRange - returns true if the given int value is in one of the ranges 
      * of the range list
      *
-     * @param x - the given int value to compare
+     * @param x the given int value to compare
      *
      * @return boolean - true if in range otherwise false
      */
@@ -185,7 +186,7 @@ public class JDFIntegerRangeList extends JDFRangeList
      /**
       * setString - parse the given string and set the integer ranges
       *
-      * @param s - the given string
+      * @param s the given string
       *
       * @throws DataFormatException - if the String has not a valid format
       */
@@ -217,7 +218,7 @@ public class JDFIntegerRangeList extends JDFRangeList
      /**
       * isValid - validate the given String
       *
-      * @param s - the given string
+      * @param s the given string
       *
       * @return boolean - false if the String has not a valid format 
       */
@@ -236,11 +237,11 @@ public class JDFIntegerRangeList extends JDFRangeList
       
      
     /**
-     * getElementCount - returns the number of elements in the list, on the C++ side of the JDF
-     * library this method is called NElements, for example the following list has 14 elements
-     * "1~5 10~15 20~22"
+     * getElementCount - returns the number of elements in the list. On the C++ side of the JDF
+     * library this method is called NElements. <br>
+     * E.g. the following list has 14 elements: "1~5 10~15 20~22"
      *
-     * @return int - the number of elements in the list
+     * @return int the number of elements in the list
      */
     public int getElementCount()
     {
@@ -257,14 +258,14 @@ public class JDFIntegerRangeList extends JDFRangeList
     }
 
     /**
-     * Element - value of the ith element in the range if the index is negativ the position is
-     * from the end of the range.
+     * Element - value of the ith element in the range. If the index is negative, the position is
+     * counted from the end of the range.<br>
      * For example the range is 3~7, the 2nd element is 5 and the -2nd element is 6.
-     * 
-     * performace warning: don't loop over getElement for potentially large lists with many individual elements
-     * preferable call getIntegerList() and loop over the list
+     * <p>
+     * performace warning: don't loop over getElement for potentially large lists with many individual elements.<br>
+     * Prefer to  call getIntegerList() and loop over the list.
      *
-     * @param i - the position, if it is a negativ value start counting from the right side +1
+     * @param i the position, if it is a negative value start counting from the right side +1
      *
      * @return int - the value at the ith position
      *
@@ -308,7 +309,7 @@ public class JDFIntegerRangeList extends JDFRangeList
     /**
      * append - appends a new IntegerRange to the IntegerRangeList
      *
-     * @param JDFIntegerRange r - the given JDFIntegerRange
+     * @param r the given JDFIntegerRange
      */
     public void append(JDFIntegerRange r)
     {
@@ -319,8 +320,8 @@ public class JDFIntegerRangeList extends JDFRangeList
     /**
      * append - appends a new IntegerRange to the IntegerRangeList
      *
-     * @param int xMin - the left value of the new range
-     * @param int xMax - the right value of the new range
+     * @param xMin the left value of the new range
+     * @param xMax the right value of the new range
      */
     public void append(int xMin, int xMax)
     {
@@ -340,9 +341,9 @@ public class JDFIntegerRangeList extends JDFRangeList
      * "3~7 5~7"    append(18)  -> "3~7 5~7 18"
      * </pre>
      *
-     *note that lists are not preserved. If you want to gaurantee individual entries
-     *use append(x,x);
-     * @param int x - the given int x
+     * note that lists are not preserved. If you want to guarantee individual entries
+     * use append(x,x);
+     * @param x the given int x
      */
     public void append(int x)
     {
@@ -381,11 +382,11 @@ public class JDFIntegerRangeList extends JDFRangeList
     
     
     /**
-     * setDef - sets xDef, the default value which is used for negative numbers
-     * if xdef==0 (the default) the neg numbers themselves are used
+     * setDef - sets xDef, the default value which is used for negative numbers<br>
+     * if xdef==0 (the default), the neg numbers themselves are used<br>
      * the value represents the index that is one past the end of the list
      *
-     * @param  xdef - one above the value that -1 will represent in this range
+     * @param  xdef one above the value that -1 will represent in this range
      * i.e. the value that -0, were it possible to specify, would represent
      */
     public void setDef(int xdef)
@@ -398,7 +399,7 @@ public class JDFIntegerRangeList extends JDFRangeList
     /**
      * getDef - gets xDef, the default value which is used for negative numbers
      *
-     * @return int - one above the value that -1 will represent in this range
+     * @return int - one above the value that -1 will represent in this range<br>
      * i.e. the value that -0, were it possible to specify, would represent
      */
     public int getDef()
@@ -511,16 +512,17 @@ public class JDFIntegerRangeList extends JDFRangeList
     /**
      * isOverlapping
      *
-     * @param newRange - the range to check, if is overlapping one of the ranges in  the list
-     * x: x.upper < y.lower,
-     * z: z.lower > y.upper,
+     * @param newRange the range to check, if is overlapping one of the ranges in  the list
+     * <p>
+     * x: x.upper < y.lower,<br>
+     * z: z.lower > y.upper,<br>
      * one of these situation, means there is no overlapping
      *
-     * @param JDFIntegerRange newRange -
-     * @param JDFIntegerRange oldRange - the JDFRangeList removed from the RangeList, before check
-     *                                   for overlap. If null, the oldRange ignored
+     * @param newRange 
+     * @param oldRange the JDFRangeList removed from the RangeList, before check
+     *                                   for overlap. If null, the oldRange is ignored
      *
-     * @return boolean - true if there is an overlapping otherwise false
+     * @return boolean - true if there is an overlapping, otherwise false
      */
     public boolean isOverlapping(JDFIntegerRange newRange, JDFIntegerRange oldRange)
     {
@@ -536,11 +538,11 @@ public class JDFIntegerRangeList extends JDFRangeList
     }        
 
     /**
-     * checkOverlap - checks if the newRange overlap one of the JDFIntegerRanges in the
+     * checkOverlap - checks if the newRange overlaps one of the JDFIntegerRanges in the
      * rangeList
      *
-     * @param   rangeList   the JDFIntegerRanges check for overlap
-     * @param   newRange    the JDFIntergerRange check overlap with rangeList
+     * @param rangeList the JDFIntegerRanges to check for overlap
+     * @param newRange  the JDFIntergeRange to check against
      *
      * @return boolean - true if overlapping otherwise false
      */
@@ -564,18 +566,20 @@ public class JDFIntegerRangeList extends JDFRangeList
     
     /**
      * normalize this range by removing any consecutive entries and creating ranges instead
+     * @param bSort if true, sort the rangelist prior to normalizing
      *
      */
-    public void normalize()
+    public void normalize(boolean bSort)
     {
         int[] l=getIntegerList().getIntArray();
+        if(bSort)
+            Arrays.sort(l);
+        
         clear();
         int lSiz=l.length;
         for(int i=0;i<lSiz;i++)
         {
             append(l[i]);
-        }
-        
+        }        
     }
-
 }

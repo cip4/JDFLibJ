@@ -33,7 +33,7 @@ public class JDFShape extends JDFNumList
     /**
      * constructor - constructs a shape with all values set via a Vector of Double objects
      *
-     * @param Vector v - the given vector
+     * @param v the given vector
      *
      * @throws DataFormatException - if the Vector has not a valid format
      */
@@ -45,7 +45,7 @@ public class JDFShape extends JDFNumList
     /**
      * constructor - constructs a shape with all values set via a String
      *
-     * @param String s - the given String
+     * @param s the given String
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -57,7 +57,7 @@ public class JDFShape extends JDFNumList
     /**
      * constructor - constructs a shape with all values set via a JDFShape
      *
-     * @param JDFShape shape - the given shape
+     * @param shape the given shape
      *
      * @throws DataFormatException - if the JDFShape has not a valid format
      */
@@ -72,7 +72,7 @@ public class JDFShape extends JDFNumList
     /**
      * constructor - constructs a shape with all values set via a JDFNumberList
      *
-     * @param JDFNumberList nl - the given number list
+     * @param nl the given number list
      *
      * @throws DataFormatException - if the JDFNumberList has not a valid format
      */
@@ -89,9 +89,9 @@ public class JDFShape extends JDFNumList
     /**
      * constructor - constructs a new JDFShape with the given double values
      *
-     * @param double height - the height
-     * @param double width  - the width
-     * @param double length - the length
+     * @param height the height
+     * @param width  the width
+     * @param length the length
      */
     public JDFShape(double height, double width, double length)
     {
@@ -105,9 +105,9 @@ public class JDFShape extends JDFNumList
      * constructor - constructs a new JDFShape with the given 2 double values
      * third is default = 0. 
      *
-     * @param double height - the height
-     * @param double width  - the width
-     * @param double length - the length  = 0.0
+     * @param height the height
+     * @param width  the width
+     * @param length the length  = 0.0
      */
     public JDFShape(double height, double width)
     {
@@ -180,7 +180,7 @@ public class JDFShape extends JDFNumList
     /**
     * isGreaterOrEqual - equality operator >=
     * 
-    * @param JDFShape x - the JDFShape object to compare to
+    * @param x the JDFShape object to compare to
     * @return boolean - true if this >= x  
     */
     public boolean isGreaterOrEqual(JDFShape x)
@@ -191,7 +191,7 @@ public class JDFShape extends JDFNumList
     /**
     * isLessOrEqual - equality operator <=
     * 
-    * @param JDFShape x - the JDFShape object to compare to
+    * @param x the JDFShape object to compare to
     * @return boolean - true if this <= x  
     */
     public boolean isLessOrEqual(JDFShape x)
@@ -202,7 +202,7 @@ public class JDFShape extends JDFNumList
     /**
     * isGreater - equality operator >
     * 
-    * @param JDFShape x - the JDFShape object to compare to
+    * @param x the JDFShape object to compare to
     * @return boolean - true if this > x  
     */
     public boolean isGreater(JDFShape x)
@@ -213,7 +213,7 @@ public class JDFShape extends JDFNumList
     /**
     * isLess - equality operator <
     * 
-    * @param JDFShape x - the JDFShape object to compare to
+    * @param x the JDFShape object to compare to
     * @return boolean - true if this < x  
     */
     public boolean isLess(JDFShape x)
@@ -235,7 +235,7 @@ public class JDFShape extends JDFNumList
     /**
      * setHeight - sets the height
      *
-     * @param double height - the height
+     * @param height the height
      */
     public void setHeight(double height)
     {
@@ -255,7 +255,7 @@ public class JDFShape extends JDFNumList
     /**
      * setWidth - sets the width
      *
-     * @param double width - the width
+     * @param width the width
      */
     public void setWidth(double width)
     {
@@ -275,7 +275,7 @@ public class JDFShape extends JDFNumList
     /**
      * setLength - sets the length
      *
-     * @param double length - the length
+     * @param length the length
      */
     public void setLength(double length)
     {

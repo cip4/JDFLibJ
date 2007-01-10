@@ -194,7 +194,7 @@ public class JDFDurationRange extends JDFRange
     /**
      * isValid - validate the given String
      *
-     * @param String s - the given string
+     * @param s the given string
      *
      * @return boolean - false if the String has not a valid format 
      */
@@ -216,7 +216,7 @@ public class JDFDurationRange extends JDFRange
     /**
      * inRange - returns true if 'x' is within the range defined by 'this'
      * 
-     * @param JDFDuration x - JDFDuration that is to be compared with 'this'
+     * @param x JDFDuration that is to be compared with 'this'
      * @return boolean - true if 'x' is within the range defined by 'this'
      */
     public boolean inRange(JDFDuration x)
@@ -231,7 +231,7 @@ public class JDFDurationRange extends JDFRange
     /**
      * isPartOfRange - is range 'r' within this range?
      * 
-     * @param JDFDurationRange r - the range to test
+     * @param r the range to test
      * 
      * @return boolean - true if range 'r' is within this range, else false
      */
@@ -270,7 +270,7 @@ public class JDFDurationRange extends JDFRange
     /**
      * setLeft - sets the left JDFDuration object of the range
      *
-     * @param JDFDuration x - the left JDFDuration object of the range
+     * @param x the left JDFDuration object of the range
      */
     public void setLeft(JDFDuration x) 
     {
@@ -280,7 +280,7 @@ public class JDFDurationRange extends JDFRange
     /**
      * setRight - sets the right JDFDuration object of the range
      *
-     * @param JDFDuration x - the right JDFDuration object of the range
+     * @param x the right JDFDuration object of the range
      */
     public void setRight(JDFDuration x) 
     {

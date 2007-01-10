@@ -89,9 +89,9 @@ public abstract class JDFRange implements JDFBaseDataTypes
 
      
     /**
-     * isPartOfRange - is range 'r' within this range?
+     * isPartOfRange - is range 'ra' within this range?
      * 
-     * @param JDFDateTimeRange r - the range to test
+     * @param ra the range to test
      * 
      * @return boolean - true if range 'r' is within this range, else false
      */
@@ -121,9 +121,9 @@ public abstract class JDFRange implements JDFBaseDataTypes
     
 
     /**
-     * equals - returns true if both JDFDateTimeRange are equal otherwise false
-     *
-     * @return boolean - true if equal otherwise false
+     * equals - returns true if both JDFDateTimeRange are equal, otherwise false
+     * @param other Object to compare
+     * @return boolean - true if equal, otherwise false
      */
     public boolean equals(Object other)
     {
@@ -145,7 +145,8 @@ public abstract class JDFRange implements JDFBaseDataTypes
 
 
     /**
-     * hashCode complements equals() to fulfill the equals/hashCode contract
+     * hashCode: complements equals() to fulfill the equals/hashCode contract
+     * @return int
      */
     public int hashCode()
     {

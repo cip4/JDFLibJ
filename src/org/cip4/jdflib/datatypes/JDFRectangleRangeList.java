@@ -101,9 +101,10 @@ public class JDFRectangleRangeList extends JDFRangeList
      }
      
      /**
+      * copy constructor<br>
       * constructs a JDFRectangleRangeList with the given JDFRectangleRangeList
       * 
-      * @param JDFRectangleRangeList rl
+      * @param rl
       */
      public JDFRectangleRangeList(JDFRectangleRangeList rl)
      {
@@ -111,9 +112,9 @@ public class JDFRectangleRangeList extends JDFRangeList
      }
      
      /**
-      * constructs a JDFRectangleRangeList
+      * constructs a JDFRectangleRangeList from a given string
       * 
-      * @param String s - the given string
+      * @param s the given string
       * 
       * @throws DataFormatException - if the String has not a valid format
       */
@@ -132,7 +133,7 @@ public class JDFRectangleRangeList extends JDFRangeList
      /**
      * inRange - check whether rectangle 'x' is in the rectangle range defined by 'this'
      * 
-     * @param JDFRectangle x - rectangle value to test
+     * @param x rectangle value to test
      * @return boolean - true if 'x' is in the range defined by 'this'
      */
      public boolean inRange(JDFRectangle x)
@@ -153,7 +154,7 @@ public class JDFRectangleRangeList extends JDFRangeList
       * setString - deserialize a string Reads the string, which represents
       * JDFRectangleRangeList, and converts it into real JDFRectangleRangeList
       * 
-      * @param String s - string to read
+      * @param s string to read
       * 
       * @throws DataFormatException - if the String has not a valid format
       */
@@ -200,7 +201,7 @@ public class JDFRectangleRangeList extends JDFRangeList
      /**
       * isValid - validate the given String
       *
-      * @param String s - the given string
+      * @param s the given string
       *
       * @return boolean - false if the String has not a valid format 
       */
@@ -222,7 +223,7 @@ public class JDFRectangleRangeList extends JDFRangeList
      /**
       * append - adds an element defined by a JDFRectangleRange
       * 
-      * @param JDFRectangleRange x - the range to append to the list
+      * @param x the range to append to the list
       */
      public void append(JDFRectangleRange x)
      {
@@ -232,7 +233,7 @@ public class JDFRectangleRangeList extends JDFRangeList
      /**
       * append - adds an individual JDFRectangle element
       * 
-      * @param JDFRectangle x - the left and right value of the range to append to the list
+      * @param x the left and right value of the range to append to the list
       */
      public void append(JDFRectangle x)
      {
@@ -242,8 +243,8 @@ public class JDFRectangleRangeList extends JDFRangeList
      /**
       * append - adds an element defined by two JDFRectangles xMin~xMax
       * 
-      * @param JDFRectangle xMin - the left value of the range to append to the list
-      * @param JDFRectangle xMax - the right value of the range to append to the list
+      * @param xMin the left value of the range to append to the list
+      * @param xMax the right value of the range to append to the list
       */
      public void append(JDFRectangle xMin, JDFRectangle xMax)
      {
@@ -254,7 +255,7 @@ public class JDFRectangleRangeList extends JDFRangeList
 
 
        /**
-       * isOrdered - tests if 'this' is OrderedRangeList
+       * isOrdered - tests if 'this' is an OrderedRangeList
        * 
        * @return boolean - true if 'this' is a OrdneredRangeList
        */
@@ -296,9 +297,9 @@ public class JDFRectangleRangeList extends JDFRangeList
       }
       
       /**
-      * isUniqueOrdered - tests if 'this' is UniqueOrdered RangeList
+      * isUniqueOrdered - tests if 'this' is an UniqueOrdered RangeList
       * 
-      * @return boolean - true if 'this' is UniqueOrdered RangeList
+      * @return boolean - true if 'this' is an UniqueOrdered RangeList
       */
      public boolean isUniqueOrdered() {
           

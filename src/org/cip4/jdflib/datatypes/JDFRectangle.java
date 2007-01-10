@@ -33,7 +33,7 @@ public class JDFRectangle extends JDFNumList
     /**
      * constructs a rectangle with all values set via a Vector of Double objects
      *
-     * @param vector v - the given Vector with MAX_RECTANGLE_DIMENSION objects of type Double
+     * @param v the given Vector with MAX_RECTANGLE_DIMENSION objects of type Double
      *
      * @throws DataFormatException - if the Vector has not a valid format
      */
@@ -45,7 +45,7 @@ public class JDFRectangle extends JDFNumList
     /**
      * constructs a rectangle with all values set via a String
      *
-     * @param String s - the given String, blank separated numbers
+     * @param s the given String, blank separated numbers
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -57,7 +57,7 @@ public class JDFRectangle extends JDFNumList
     /**
      * constructs a rectangle with all values set via a JDFRectangle
      *
-     * @param JDFRectangle rec - the given rectangle
+     * @param rec the given rectangle
      */
     public JDFRectangle(JDFRectangle rec)
     {
@@ -71,7 +71,7 @@ public class JDFRectangle extends JDFNumList
     /**
      * constructs a rectangle with all values set via a JDFNumberList
      *
-     * @param JDFNumberList nl - the given number list
+     * @param nl the given number list
      *
      * @throws DataFormatException - if the JDFNumberList has not a valid format
      */
@@ -89,10 +89,10 @@ public class JDFRectangle extends JDFNumList
     /**
      * constructs a new JDFRectangle with the given double values
      *
-     * @param double llx - lower left x coordinate
-     * @param double lly - lower left y coordinate
-     * @param double urx - lower left x coordinate
-     * @param double ury - lower left y coordinate
+     * @param llx lower left x coordinate
+     * @param lly lower left y coordinate
+     * @param urx lower left x coordinate
+     * @param ury lower left y coordinate
      */
     public JDFRectangle(double llx, double lly, double urx, double ury)
     {
@@ -128,6 +128,7 @@ public class JDFRectangle extends JDFNumList
     /**
      * equals - returns true if both JDFRectangles are equal, otherwise false
      *
+     * @param other Object to compare
      * @return boolean - true if equal otherwise false
      */
     public boolean equals(Object other)
@@ -155,6 +156,7 @@ public class JDFRectangle extends JDFNumList
     
     /**
      * hashCode complements equals() to fulfill the equals/hashCode contract
+     * @return int
      */
     public int hashCode()
     {
@@ -164,8 +166,8 @@ public class JDFRectangle extends JDFNumList
     /**
     * isGreaterOrEqual - equality operator >=
     * 
-    * @param JDFRectangle r - the JDFRectangle object to compare to
-    * @return boolean - true if this >= r  
+    * @param r the JDFRectangle object to compare to
+    * @return boolean - true if <code>this</this> >= r  
     */
     public boolean isGreaterOrEqual(JDFRectangle r)
     {
@@ -175,8 +177,8 @@ public class JDFRectangle extends JDFNumList
     /**
     * isLessOrEqual - equality operator <=
     * 
-    * @param JDFRectangle r - the JDFRectangle object to compare to
-    * @return boolean - true if this <= r  
+    * @param r the JDFRectangle object to compare to
+    * @return boolean - true if <code>this</this> <= r  
     */
     public boolean isLessOrEqual(JDFRectangle r)
     {
@@ -186,8 +188,8 @@ public class JDFRectangle extends JDFNumList
     /**
     * isGreater - equality operator >
     * 
-    * @param JDFRectangle r - the JDFRectangle object to compare to
-    * @return boolean - true if this > r  
+    * @param r the JDFRectangle object to compare to
+    * @return boolean - true if <code>this</this> > r  
     */
     public boolean isGreater(JDFRectangle r)
     {
@@ -197,8 +199,8 @@ public class JDFRectangle extends JDFNumList
     /**
     * isLess - equality operator <
     * 
-    * @param JDFRectangle r - the JDFRectangle object to compare to
-    * @return boolean - true if this < r  
+    * @param r the JDFRectangle object to compare to
+    * @return boolean - true if <code>this</this> < r  
     */
     public boolean isLess(JDFRectangle r)
     {
@@ -219,7 +221,7 @@ public class JDFRectangle extends JDFNumList
     /**
      * setLlx - sets the lower left x coordinate
      *
-     * @param double x - the lower left x coordinate
+     * @param x the lower left x coordinate
      */
     public void setLlx(double x)
     {
@@ -239,7 +241,7 @@ public class JDFRectangle extends JDFNumList
     /**
      * setLly - sets the lower left y coordinate
      *
-     * @param double y - the lower left y coordinate
+     * @param y the lower left y coordinate
      */
     public void setLly(double y)
     {
@@ -259,7 +261,7 @@ public class JDFRectangle extends JDFNumList
     /**
      * setUrx - sets the upper right x coordinate
      *
-     * @param double x - the upper right x coordinate
+     * @param x the upper right x coordinate
      */
     public void setUrx(double x)
     {
@@ -279,7 +281,7 @@ public class JDFRectangle extends JDFNumList
     /**
      * setUry - sets the upper right y coordinate
      *
-     * @param double y - the upper right y coordinate
+     * @param y the upper right y coordinate
      */
     public void setUry(double y)
     {

@@ -105,9 +105,9 @@ public class JDFRectangleRange extends JDFRange
     }
 
     /**
-     * constructs a JDFRectangleRange both values are equal
+     * constructs a JDFRectangleRange, both values are equal ("from x to x")
      *
-     * @param JDFRectangle x - the given JDFRectangle
+     * @param x - the given JDFRectangle
      */
     public JDFRectangleRange(JDFRectangle x)
     {
@@ -115,10 +115,10 @@ public class JDFRectangleRange extends JDFRange
     }
     
     /**
-     * constructor a JDFRectangleRange with two JDFRectangle values
+     * constructor a JDFRectangleRange with two JDFRectangle values/bounds ("from xmin to xmax")
      *
-     * @param JDFRectangle xmin - the given min value
-     * @param JDFRectangle xmax - the given max value
+     * @param xmin the given min value
+     * @param xmax the given max value
      */
     public JDFRectangleRange(JDFRectangle xmin, JDFRectangle xmax)  
     {
@@ -126,9 +126,9 @@ public class JDFRectangleRange extends JDFRange
     }
     
     /**
-     * constructs a JDFRectangleRange with the given JDFRectangleRange
+     * copy constructor - constructs a JDFRectangleRange with the given JDFRectangleRange
      *
-     * @param JDFRectangleRange r
+     * @param r the JDFRectangleRange to copy
      */
     public JDFRectangleRange(JDFRectangleRange r)
     {
@@ -137,6 +137,8 @@ public class JDFRectangleRange extends JDFRange
     
     /**
     * Initialization 
+    * @param x left value
+    * @param y right value
     */
     protected void init(JDFRectangle x, JDFRectangle y)
     {
@@ -147,7 +149,7 @@ public class JDFRectangleRange extends JDFRange
     /**
      * Constructs a JDFRectangleRange with the values of the given string
      *
-     * @param String s - the given string representation of the range
+     * @param s the given string representation of the range
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -196,7 +198,7 @@ public class JDFRectangleRange extends JDFRange
     }
     
     /**
-    * toString
+    * getString
     *
     * @return String
     * @deprecated 060414 use toString
@@ -209,7 +211,7 @@ public class JDFRectangleRange extends JDFRange
     /**
     * isValid - validate the given String
     *
-    * @param String s - the given string
+    * @param s the given string
     *
     * @return boolean - false if the String has not a valid format 
     */
@@ -229,7 +231,8 @@ public class JDFRectangleRange extends JDFRange
     /**
      * equals - returns true if both JDFRectangleRanges are equal otherwise false
      *
-     * @return boolean - true if equal otherwise false
+     *@param other the JDFRectangleRange to compare
+     * @return boolean - true if equal, otherwise false
      */
     public boolean equals(Object other)
     {
@@ -254,6 +257,7 @@ public class JDFRectangleRange extends JDFRange
     
     /**
      * hashCode complements equals() to fulfill the equals/hashCode contract
+     * @return int
      */
     public int hashCode()
     {
@@ -263,7 +267,7 @@ public class JDFRectangleRange extends JDFRange
     /**
      * inRange - tests if the given x inside of this range 
      *
-     * @param JDFRectangle x - comparison value
+     * @param x comparison value
      *
      * @return boolean - true if x in range
      */
@@ -277,7 +281,7 @@ public class JDFRectangleRange extends JDFRange
     /**
      * isPartOfRange - is range 'r' within this range?
      * 
-     * @param JDFRectangleRange r - the range to test
+     * @param ra the range to test
      * 
      * @return boolean - true if range 'r' is within this range, else false
      */
@@ -316,7 +320,7 @@ public class JDFRectangleRange extends JDFRange
     /**
     * sets the left JDFRectangle object of the range
     *
-    * @param JDFRectangle x - the left JDFRectangle object of the range
+    * @param x the left JDFRectangle object of the range
     */
     public void setLeft(JDFRectangle x) 
     {

@@ -110,30 +110,30 @@ public class JDFIntegerRange extends JDFRange
     /**
      * constructs an integer range with the given int (both values are equal)
      *
-     * @param int x - the given min and max value
+     * @param x the given min and max value
      */
     public JDFIntegerRange(int x)
     {
-        init(x, x, 0);
+        init(x, x, m_defaultXDef);
     }
     
     /**
      * constructs an integer range with the given int values
      *
-     * @param int xmin - the given min value
-     * @param int xmax - the given max value
+     * @param xmin the given min value
+     * @param xmax the given max value
      */
     public JDFIntegerRange(int xmin, int xmax)
     {
-        init(xmin, xmax, 0);
+        init(xmin, xmax, m_defaultXDef);
     }
     
     /**
      * constructs an integer range with the given int values
      *
-     * @param int xmin - the given min value
-     * @param int xmax - the given max value
-     * @param int xdef - number of items
+     * @param xmin the given min value
+     * @param xmax the given max value
+     * @param xdef number of items
      */
     public JDFIntegerRange(int xmin, int xmax, int xdef)
     {
@@ -143,7 +143,7 @@ public class JDFIntegerRange extends JDFRange
     /**
      * constructs an integer range with a given JDFIntegerRange
      *
-     * @param JDFIntegerRange ir - the given JDFIntegerRange
+     * @param ir the given JDFIntegerRange
      */
     public JDFIntegerRange(JDFIntegerRange ir)
     {
@@ -163,7 +163,7 @@ public class JDFIntegerRange extends JDFRange
     /**
      * constructs an integer range with the given string
      *
-     * @param String s - the given string
+     * @param s the given string
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -175,9 +175,9 @@ public class JDFIntegerRange extends JDFRange
     /**
      * constructs an integer range with the given string
      *
-     * @param String s    - the given string
-     * @param int xdef    - value which is used for negative numbers
-     *                      the value that -1 will represent in this range
+     * @param s    the given string
+     * @param xdef value which is used for negative numbers
+     *             the value that -1 will represent in this range
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -252,7 +252,7 @@ public class JDFIntegerRange extends JDFRange
     /**
      * isValid - validate the given String
      *
-     * @param String s - the given string
+     * @param s the given string
      *
      * @return boolean - false if the String has not a valid format 
      */
@@ -313,7 +313,7 @@ public class JDFIntegerRange extends JDFRange
     /**
      * setLeft - sets the left int object
      *
-     * @param int x - the left int object
+     * @param x the left int object
      */
     public void setLeft(int x)
     {
@@ -333,7 +333,7 @@ public class JDFIntegerRange extends JDFRange
     /**
      * setRight - sets the right int object
      *
-     * @param int x - the right int object
+     * @param x the right int object
      */
     public void setRight(int x)
     {
@@ -355,7 +355,7 @@ public class JDFIntegerRange extends JDFRange
     /**
      * setLowerValue - sets the lower value of the bounds
      *
-     * @param int x - the new lower value of the range
+     * @param x the new lower value of the range
      */
     public void setLowerValue(int x)
     {
@@ -379,7 +379,7 @@ public class JDFIntegerRange extends JDFRange
     /**
      * getUpperValue - returns the upper value of the bounds for example 4~6 return 6, 7~5 return 7
      *
-     * @return int - the upper value of the range
+     * @return int the upper value of the range
      */
     public int getUpperValue()
     {
@@ -391,7 +391,7 @@ public class JDFIntegerRange extends JDFRange
     /**
      * setUpperValue - sets the upper value of the bounds
      *
-     * @param int x - the new upper value of the range
+     * @param x the new upper value of the range
      */
     public void setUpperValue(int x)
     {
@@ -415,7 +415,7 @@ public class JDFIntegerRange extends JDFRange
     /**
      * inRange - returns true if (lower value >= x <= upper value)
      *
-     * @param int x - comparison value
+     * @param x comparison value
      *
      * @return boolean - true if x in range
      */
@@ -427,7 +427,7 @@ public class JDFIntegerRange extends JDFRange
     /**
      * isPartOfRange - is range 'ir' within this range?
      * 
-     * @param JDFIntegerRange ir - the range to test
+     * @param ir the range to test
      * 
      * @return boolean - true if range 'ir' is within this range, else false
      */
@@ -445,6 +445,8 @@ public class JDFIntegerRange extends JDFRange
      */
     public int getElementCount()
     {
+        if(m_defaultXDef==0 && (getRight()<0 || getLeft()<0))
+            return 0;
         return 1 + Math.abs(this.getLeft() - this.getRight());
     }
     
@@ -461,7 +463,7 @@ public class JDFIntegerRange extends JDFRange
      * "7~5"        append(4)   -> "7~4"
      * </pre>
      *
-     * @param int x - the new value
+     * @param x the new value
      *
      * @return boolean - true if successful
      */
@@ -503,14 +505,14 @@ public class JDFIntegerRange extends JDFRange
     }
     
     /**
-     * Element - value of the ith element in the range if the index is negativ the position is
-     * from the end of the range.
+     * Element - value of the ith element in the range.<br> 
+     * If the index is negativ the position is counted from the end of the range.
      * For example the range is 3~7, the 2nd element is 5 and the -2nd element is 6.
      * On the C++ side of the JDF library this method is called Element.
      *
-     * @param int i - the position, if it is a negativ value start counting from the right side +1
+     * @param i the position, if it is a negativ value start counting from the right side +1
      *
-     * @return int - the value at the ith position
+     * @return int the value at the ith position
      *
      * @throws NoSuchElementException - if the index is out of range
      */
@@ -542,12 +544,11 @@ public class JDFIntegerRange extends JDFRange
     }
     
     /**
-     * setDef - sets xDef, the default value which is used for negative numbers
-     * the value represents the index that is one past the end of the list
-     * if xdef==0 (the default) the neg numbers themselves are used
+     * setDef - sets xDef, the default value which is used for negative numbers<br>
+     * the value represents the index that is one past the end of the list<br>
+     * if xdef==0 (the default), the neg numbers themselves are used
      *
-     * @param xdef - (int)1 above the value that -1 will represent in this range
-     * i.e. the value that -0, were it possible to specify, would represent
+     * @param xdef the value that will represent negative values in this range
      */
     public void setDef(int xdef)
     {
@@ -555,9 +556,9 @@ public class JDFIntegerRange extends JDFRange
     }
     
     /**
-     * setDefaultDef - sets the preset for xDef, which will be used when constructing an IntegerRange
-     * the value represents the index that is one past the end of the list
-     * if xdef==0 (the default) the neg numbers themselves are used
+     * setDefaultDef - sets the preset for xDef, which will be used when constructing an IntegerRange<br>
+     * the value represents the index that is one past the end of the list<br>
+     * if xdef==0 (the default), the neg numbers themselves are used
      *
      * @param xdef - (int)1 above the value that -1 will represent in this range
      * i.e. the value that -0, were it possible to specify, would represent
@@ -568,9 +569,9 @@ public class JDFIntegerRange extends JDFRange
     }
     
     /**
-     * getDefaultDef - gets the preset for xDef, which will be used when constructing an IntegerRange
-     * the value represents the index that is one past the end of the list
-     * if xdef==0 (the default) the neg numbers themselves are used
+     * getDefaultDef - gets the preset for xDef, which will be used when constructing an IntegerRange<br>
+     * the value represents the index that is one past the end of the list<br>
+     * if xdef==0 (the default), the neg numbers themselves are used
      *
      * @return int - (int)1 above the value that -1 will represent in this range
      * i.e. the value that -0, were it possible to specify, would represent
@@ -592,8 +593,8 @@ public class JDFIntegerRange extends JDFRange
     }
     
     /**
-     * getIntegerList - returns the integer range as an integer list for example an integer range
-     * of "5~9" will be returned as "5 6 7 8 9"
+     * getIntegerList - returns the integer range as an integer list<br>
+     *  for example an integer range of "5~9" will be returned as "5 6 7 8 9"
      *
      * @return JDFIntegerList - the integer list
      */

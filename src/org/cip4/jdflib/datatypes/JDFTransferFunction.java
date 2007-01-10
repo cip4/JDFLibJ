@@ -36,7 +36,7 @@ public class JDFTransferFunction extends JDFNumList
     /**
      * constructs a number list with the given string the number of tokens must be even
      *
-     * @param String s - the given String in number list format
+     * @param s the given String in number list format
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -48,7 +48,7 @@ public class JDFTransferFunction extends JDFNumList
     /**
      * constructs a number list with the given vector the number of elements must be even
      *
-     * @param Vector p_NumberList - the number list as a vector
+     * @param v the number list as a vector
      *
      * @throws DataFormatException - if the Vector has not a valid format
      */
@@ -60,7 +60,7 @@ public class JDFTransferFunction extends JDFNumList
     /**
      * constructs a number list with the given number list
      *
-     * @param JDFNumList nl - the given number list
+     * @param nl the given number list
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -70,9 +70,10 @@ public class JDFTransferFunction extends JDFNumList
     }
 
     /**
+     * copy constructor<br>
      * constructs a number list with the given transfer function
      *
-     * @param JDFTransferFunction tf - the given number list
+     * @param tf the given number list
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -106,7 +107,7 @@ public class JDFTransferFunction extends JDFNumList
     /**
      * add - adds a xy coordinate to the vector
      *
-     * @param JDFXYPair xy - the xy coordinate to add
+     * @param xy the xy coordinate to add
      */
     public void add(JDFXYPair xy)
     {
@@ -117,8 +118,8 @@ public class JDFTransferFunction extends JDFNumList
     /**
      * add - adds a x and a y coordinate to the vector
      *
-     * @param Double x - the x coordinate to add
-     * @param Double y - the y coordinate to add
+     * @param x the x coordinate to add
+     * @param y the y coordinate to add
      */
     public void add(Double x, Double y)
     {
@@ -129,8 +130,8 @@ public class JDFTransferFunction extends JDFNumList
     /**
      * add - adds a x and a y coordinate to the vector
      *
-     * @param double x - the x coordinate to add
-     * @param double y - the y coordinate to add
+     * @param x the x coordinate to add
+     * @param y the y coordinate to add
      */
     public void add(double x, double y)
     {
@@ -141,7 +142,7 @@ public class JDFTransferFunction extends JDFNumList
     /**
      * add - adds a x and a y coordinate to the vector
      *
-     * @param String s - a string with the x and y coordinate to add
+     * @param s a string with the x and y coordinate to add
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -172,7 +173,7 @@ public class JDFTransferFunction extends JDFNumList
     /**
      * add - adds a complete transfer function to the vector
      *
-     * @param JDFTransferFunction tf - the given transfer function to add
+     * @param tf the given transfer function to add
      */
     public void add(JDFTransferFunction tf)
     {

@@ -30,7 +30,7 @@ public class JDFRGBColor extends JDFNumList
     /**
      * constructs a RGB color with all values set via a Vector of Double objects
      *
-     * @param Vector v
+     * @param v Vector of Double
      *
      * @throws DataFormatException - if the Vector has not a valid format
      */
@@ -42,7 +42,7 @@ public class JDFRGBColor extends JDFNumList
     /**
      * constructs a RGB color with all values set via a String
      *
-     * @param String s - the given String
+     * @param s the given String
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -54,7 +54,7 @@ public class JDFRGBColor extends JDFNumList
     /**
      * constructs a RGB color with all values set via a JDFRGBColor
      *
-     * @param JDFRGBColor rgb - the given rgb colors
+     * @param rgb the given rgb colors
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -66,7 +66,7 @@ public class JDFRGBColor extends JDFNumList
     /**
      * constructs a RGB color with all values set via a JDFNumberList
      *
-     * @param JDFNumberList nl - the given number list
+     * @param nl the given number list
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -78,9 +78,9 @@ public class JDFRGBColor extends JDFNumList
     /**
      * constructs a new RGB color with the given double values
      *
-     * @param double r - the color red
-     * @param double g - the color green
-     * @param double b - the color blue
+     * @param r the color red
+     * @param g the color green
+     * @param b the color blue
      */
     public JDFRGBColor(double r, double g, double b)
     {
@@ -125,7 +125,7 @@ public class JDFRGBColor extends JDFNumList
     /**
      * setR - sets the red color
      *
-     * @param double red - the red color
+     * @param red the red color
      */
     public void setR(double red)
     {
@@ -145,7 +145,7 @@ public class JDFRGBColor extends JDFNumList
     /**
      * setGreen - sets the green color
      *
-     * @param double green - the green color
+     * @param green the green color
      */
     public void setG(double green)
     {
@@ -165,7 +165,7 @@ public class JDFRGBColor extends JDFNumList
     /**
      * setBlue - sets the blue color
      *
-     * @param double blue - the blue color
+     * @param blue the blue color
      */
     public void setB(double blue)
     {

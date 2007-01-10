@@ -104,7 +104,7 @@ public class JDFNumberRangeList extends JDFRangeList
     /**
      * constructs a JDFNumberRangeList from a given string
      *
-     * @param String s - the given string
+     * @param s the given string
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -119,11 +119,22 @@ public class JDFNumberRangeList extends JDFRangeList
     /**
      * constructs a JDFNumberRangeList from the given JDFNumberRangeList 
      *
-     * @param JDFNumberRangeList rl - the given JDFNumberRangeList
+     * @param rl the given JDFNumberRangeList
      */
     public JDFNumberRangeList(JDFNumberRangeList rl)
     {
         rangeList = new Vector(rl.rangeList);
+    }
+    
+    /**
+     * constructs a JDFNumberRangeList from the given JDFNumberRange 
+     *
+     * @param  r the given JDFNumberRange
+     */
+    public JDFNumberRangeList(JDFNumberRange r)
+    {
+        super();
+        append(r);
     }
     
     //**************************************** Methods *********************************************
@@ -132,7 +143,7 @@ public class JDFNumberRangeList extends JDFRangeList
      *  inRange - returns true if the given double value is in one of the ranges
      *  of the range list
      *
-     * @param double x - the given double value to compare
+     * @param x the given double value to compare
      *
      * @return boolean - true if in range otherwise false
      */
@@ -156,7 +167,7 @@ public class JDFNumberRangeList extends JDFRangeList
     /**
      * setString - parse the given string and set the Number ranges
      *
-     * @param String s - the given string
+     * @param s the given string
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -186,7 +197,7 @@ public class JDFNumberRangeList extends JDFRangeList
     /**
      * isValid - validate the given String
      *
-     * @param String s - the given string
+     * @param s the given string
      *
      * @return boolean - false if the String has not a valid format 
      */
@@ -208,7 +219,7 @@ public class JDFNumberRangeList extends JDFRangeList
     /**
      * append - appends a JDFNumberRange to this number range
      *
-     * @param JDFNumberRange r - the given number range
+     * @param r the given number range
      */
     public void append(JDFNumberRange r)
     {
@@ -218,8 +229,8 @@ public class JDFNumberRangeList extends JDFRangeList
     /**
      * append - appends a new range to the range list
      *
-     * @param double xMin - the min value of the new range
-     * @param double xMax - the max value of the new range
+     * @param xMin the min value of the new range
+     * @param xMax the max value of the new range
      */
     public void append(double xMin, double xMax)
     {
@@ -229,7 +240,7 @@ public class JDFNumberRangeList extends JDFRangeList
     /**
      * append - appends a new range to the range list
      *
-     * @param double x - the min and the max value of the new range
+     * @param x the min and the max value of the new range
      */
     public void append(double x)
     {

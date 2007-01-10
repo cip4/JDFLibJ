@@ -107,7 +107,7 @@ public class JDFDurationRangeList extends JDFRangeList
     /**
      * constructs a JDFDurationRangeList from a given string
      *
-     * @param String s - the given string
+     * @param s the given string
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -122,7 +122,7 @@ public class JDFDurationRangeList extends JDFRangeList
     /**
      * constructs a JDFDurationRangeList from the given JDFDurationRangeList 
      *
-     * @param JDFDurationRangeList rl - the given JDFDurationRangeList
+     * @param rl the given JDFDurationRangeList
      */
     public JDFDurationRangeList(JDFDurationRangeList rl)
     {
@@ -136,7 +136,7 @@ public class JDFDurationRangeList extends JDFRangeList
     *  inRange - returns true if the given JDFDuration value is in one of the ranges
     *  of the range list
     *
-    * @param JDFDuration x - the given JDFDuration (duration) value to compare
+    * @param x the given JDFDuration (duration) value to compare
     *
     * @return boolean - true if in range otherwise false
     */
@@ -159,7 +159,7 @@ public class JDFDurationRangeList extends JDFRangeList
 	/**
      * setString - parse the given string and set the duration range list
      *
-     * @param String s - the given string
+     * @param s the given string
      *
      * @throws DataFormatException - if the String has not a valid format
      */
@@ -189,7 +189,7 @@ public class JDFDurationRangeList extends JDFRangeList
     /**
     * isValid - validate the given String
     *
-    * @param String s - the given string
+    * @param s the given string
     *
     * @return boolean - false if the String has not a valid format 
     */
@@ -208,8 +208,8 @@ public class JDFDurationRangeList extends JDFRangeList
             
     
 	/**
-	* Add a Duration range r =rMin~rMax
-	* @param JDFDurationRange r the Duration range to append to the list
+	* add a duration range r =rMin~rMax
+	* @param r the Duration range to append to the list
 	*/
 	public void append(JDFDurationRange r)
     {
@@ -217,9 +217,9 @@ public class JDFDurationRangeList extends JDFRangeList
 	}
 	
 	/**
-	* Add a Duration range defined by two MyDates xMin~xMax
-	* @param JDFDuration xMin the left value of the Duration range to append to the list
-	* @param JDFDuration xMax the right value of the Duration range to append to the list
+	* add a duration range defined by two dates xMin~xMax
+	* @param xMin the left value of the Duration range to append to the list
+	* @param xMax the right value of the Duration range to append to the list
 	*/
 	public void append(JDFDuration xMin, JDFDuration xMax)
     {
@@ -227,8 +227,8 @@ public class JDFDurationRangeList extends JDFRangeList
 	}
 	
 	/**
-	* Add an individual JDFDuration element
-	* @param JDFDuration x the left and right value of the Duration range to append to the list
+	* add an individual JDFDuration element
+	* @param x the left and right value of the Duration range to append to the list
 	*/
 	public void append(JDFDuration x)
     {
