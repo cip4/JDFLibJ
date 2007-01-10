@@ -91,12 +91,11 @@ public abstract class JDFAutoTransferCurve extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.CURVE, 0x22222222, AttributeInfo.EnumAttributeType.TransferFunction, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.NOOP, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.WEBSETUP, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.SEPARATION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
     protected AttributeInfo getTheAttributeInfo()
@@ -213,52 +212,26 @@ public abstract class JDFAutoTransferCurve extends JDFResource
 
         
         /* ---------------------------------------------------------------------
-        Methods for Attribute NoOp
+        Methods for Attribute Separation
         --------------------------------------------------------------------- */
         /**
-          * (36) set attribute NoOp
+          * (36) set attribute Separation
           * @param value: the value to set the attribute to
           */
-        public void setNoOp(boolean value)
+        public void setSeparation(String value)
         {
-            setAttribute(AttributeName.NOOP, value, null);
+            setAttribute(AttributeName.SEPARATION, value, null);
         }
 
 
 
         /**
-          * (18) get boolean attribute NoOp
-          * @return boolean the value of the attribute
-          */
-        public boolean getNoOp()
-        {
-            return getBoolAttribute(AttributeName.NOOP, null, false);
-        }
-
-
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute WebSetup
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute WebSetup
-          * @param value: the value to set the attribute to
-          */
-        public void setWebSetup(String value)
-        {
-            setAttribute(AttributeName.WEBSETUP, value, null);
-        }
-
-
-
-        /**
-          * (23) get String attribute WebSetup
+          * (23) get String attribute Separation
           * @return the value of the attribute
           */
-        public String getWebSetup()
+        public String getSeparation()
         {
-            return getAttribute(AttributeName.WEBSETUP, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.SEPARATION, null, JDFConstants.EMPTYSTRING);
         }
 
 
