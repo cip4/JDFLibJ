@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--First message for platemaking sample, has only one side, first two previews available now
+-->
+<!-- KVDP Agfa 050311 added ResourceName, removed JobPartID, set PartUsage to Explicit 
+	KVDP 050321 added Part  (suggested by Torsten)
+	KVDP 050404 removed statuses between top and leave
+	KVDP 050815 improved ID and TimeStamp to be more realistic
+-->
+<JMF SenderID="MISPrepress" TimeStamp="2004-03-18T08:31:30+01:00" Version="1.2" xmlns="http://www.CIP4.org/JDFSchema_1_1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Command ID="m083208_0200" Type="Resource" xsi:type="CommandResource">
+		<ResourceCmdParams JobID="MISPRE-040051" ResourceName="Preview">
+			<Part SignatureName="SIG1059600001" SheetName="SHT1059600001" Side="Front" Separation="Cyan"/>
+			<Part SignatureName="SIG1059600001" SheetName="SHT1059600001" Side="Front" Separation="Magenta"/>
+			<Preview Class="Parameter" ID="Preview01" PartIDKeys="SignatureName SheetName Side Separation" PartUsage="Explicit" PreviewUsage="Separation" PreviewFileType="PNG" Compensation="Plate" Status="Unavailable">
+				<Preview SignatureName="SIG1059600001" >
+					<Preview SheetName="SHT1059600001" >
+						<Preview Side="Front" >
+							<Preview Separation="Cyan" Status="Available" URL="http://gs2136.eps.agfa.be/JDFData/SHT1059600001_01_prevCyan.png"/>
+							<Preview Separation="Magenta" Status="Available" URL="http://gs2136.eps.agfa.be/JDFData/SHT1059600001_01_prevmagenta.png"/>
+							<Preview Separation="Black" URL=""/>
+							<Preview Separation="Yellow" URL=""/>
+						</Preview>
+					</Preview>
+				</Preview>
+			</Preview>
+		</ResourceCmdParams>
+	</Command>
+</JMF>

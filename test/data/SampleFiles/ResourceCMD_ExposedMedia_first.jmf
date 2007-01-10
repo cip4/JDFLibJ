@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- first message, first two exposedMedias added -->
+<!-- KVDP Agfa 050322 derived from Preview sample -->
+<!-- KVDP 050711 added ProcessUsage -->
+<!-- KVDP 050815 improved ID and TimeStamp to be more realistic -->
+<JMF SenderID="MISPrepress" TimeStamp="2005-03-18T08:32:00+01:00" Version="1.2" xmlns="http://www.CIP4.org/JDFSchema_1_1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Command ID="m083208_0100" Type="Resource" xsi:type="CommandResource">
+		<ResourceCmdParams JobID="MISPRE-040051" ResourceName="ExposedMedia" ProcessUsage="Plate">
+			<Part SignatureName="SIG1059600001" SheetName="SHT1059600001" Side="Front" Separation="Cyan"/>
+			<Part SignatureName="SIG1059600001" SheetName="SHT1059600001" Side="Front" Separation="Magenta"/>
+			<ExposedMedia Class="Handling" ID="ExposedMedia"  PartIDKeys="SignatureName SheetName Side Separation" PartUsage="Explicit" Status="Unavailable">
+			<Media Class="Consumable" Brand="SuperPlates" DescriptiveName="Plate" MediaType="Plate" Dimension="1874 1420" Thickness="200"/>
+				<ExposedMedia SignatureName="SIG1059600001">
+					<ExposedMedia SheetName="SHT1059600001">
+						<ExposedMedia Side="Front">
+							<ExposedMedia Separation="Cyan" Status="Available" ProductID="0001"/>
+							<ExposedMedia Separation="Magenta" Status="Available" ProductID="0002"/>
+							<ExposedMedia Separation="Black" ProductID="0003"/>
+							<ExposedMedia Separation="Yellow" ProductID="0004"/>
+						</ExposedMedia>
+					</ExposedMedia>
+				</ExposedMedia>
+			</ExposedMedia>
+		</ResourceCmdParams>
+	</Command>
+</JMF>

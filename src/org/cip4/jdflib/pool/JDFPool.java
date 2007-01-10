@@ -1,0 +1,236 @@
+/*
+ *
+ * The CIP4 Software License, Version 1.0
+ *
+ *
+ * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer. 
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
+ *
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:  
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of 
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
+ *
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written 
+ *    permission, please contact info@cip4.org.
+ *
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
+ *
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
+ *
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration 
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software 
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
+ *  
+ * For more information on The International Cooperation for the 
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
+ *  
+ * 
+ */
+/**
+ *
+ * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
+ *
+ * JDFPool.java
+ *
+ * Last changes
+ *
+ * 02-07-2002  JG - remove GetPoolChildName, AddPoolElement
+ * 02-07-2002  JG - remove         AddResID, GetHRefs GetvHRefRes
+ *
+ */
+package org.cip4.jdflib.pool;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.JDFComment;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+
+/**
+ * This class represents a JDF-Pool which provides functionality for "network" containers and
+ * is the base class for JDFResourcePool and GarStepNetwork
+ */
+public abstract class JDFPool extends JDFElement
+{
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Constructor for JDFPool
+     * @param ownerDocument
+     * @param qualifiedName
+     */
+    public JDFPool(
+        CoreDocumentImpl myOwnerDocument,
+        String qualifiedName)
+    {
+        super(myOwnerDocument, qualifiedName);
+    }
+
+    /**
+     * Constructor for JDFPool
+     * @param ownerDocument
+     * @param namespaceURI
+     * @param qualifiedName
+     */
+    public JDFPool(
+        CoreDocumentImpl myOwnerDocument,
+        String myNamespaceURI,
+        String qualifiedName)
+    {
+        super(myOwnerDocument, myNamespaceURI, qualifiedName);
+    }
+
+    /**
+     * Constructor for JDFPool
+     * @param ownerDocument
+     * @param namespaceURI
+     * @param qualifiedName
+     * @param localName
+     */
+    public JDFPool(
+        CoreDocumentImpl myOwnerDocument,
+        String myNamespaceURI,
+        String qualifiedName,
+        String myLocalName)
+    {
+        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+    }
+
+
+    //**************************************** Methods *********************************************
+    /**
+     * toString
+     *
+     * @return String
+     */
+    public String toString()
+    {
+        return "JDFPool[ --> " + super.toString() + " ]";
+    }
+
+  /**
+    * Gets all children with the attribute name,mAttrib, nameSpaceURI out of the pool
+    * @param String name: name of the Child
+    * @param JDFAttributeMap mAttrib: a attribute to search for
+    * @param String nameSpaceURI: in which nameSpaceURI you want to search
+    * @return VElement: a vector with all elements in the pool matching the conditions
+    * 
+    * default: GetPoolChildrenGeneric (JDFConstants.EMPTYSTRING, new JDFAttributeMap(), JDFConstants.EMPTYSTRING)
+    */
+    protected VElement getPoolChildrenGeneric (String strName, JDFAttributeMap mAttrib, String nameSpaceURI)
+    {
+        final VElement v = getChildElementVector(strName, nameSpaceURI, mAttrib, true, 0, false);
+        for(int i=v.size()-1;i>=0;i--)
+        {
+            if (v.elementAt(i) instanceof JDFComment)
+            {
+                v.removeElementAt(i);
+            }
+        }
+        return v;
+    }
+
+
+
+   /**
+    * get a child from the pool matching the parameters
+    *
+    * @param int i: the index of the child or -1 to make a new one.
+    * @param KString name: the name of the element
+    * @param mAttribute mAttrib: the attribute of the element
+    * @param String nameSpaceURI: the namespace to search in
+    * @return JDFElement: the pool child matching the above conditions
+    * 
+    * default: GetPoolChildGeneric (i, JDFConstants.EMPTYSTRING, null, JDFConstants.EMPTYSTRING)
+    */      
+    protected JDFElement getPoolChildGeneric (int i, String strName, JDFAttributeMap mAttrib, String nameSpaceURI)
+    {
+        final VElement v = getPoolChildrenGeneric(strName,mAttrib,nameSpaceURI);
+        if(i<0)
+        {
+            i=v.size()+i;
+            if(i<0)
+            {
+                return null;
+            }
+        }
+        if (v.size()<=i) 
+        {
+            return null;
+        }            
+        return (JDFElement) v.elementAt(i);
+    }
+        
+    /**
+    * Append a new child if no identical child exists
+    * @param JDFElement p: the Child to add to the element
+    */
+    protected void appendUniqueGeneric(JDFElement p)
+    {
+        if(!((getPoolChildrenGeneric(null, null, null).index(p) >= 0)))
+        { 
+            copyElement(p, null);
+        }
+    }
+
+   /**
+    * Append all children of p for which no identical child exists
+    * @param JDFPool p: the Child to add to the element
+    */
+    protected void appendUniqueGeneric(JDFPool p)
+    {
+        final VElement vp = p.getPoolChildrenGeneric(null, null, null);
+        
+        final VElement v=getPoolChildrenGeneric(null, null, null);
+        for(int i=0;i<vp.size();i++)
+        {
+            if(!v.containsElement((KElement) vp.elementAt(i)))
+            {
+                copyElement((KElement)vp.elementAt(i), null);                
+            }
+        }
+    }
+}

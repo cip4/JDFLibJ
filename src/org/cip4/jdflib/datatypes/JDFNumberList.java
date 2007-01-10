@@ -1,0 +1,114 @@
+/**
+ *
+ * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
+ *
+ * JDFNumberList.java
+ *
+ * Last changes
+ *
+ */
+package org.cip4.jdflib.datatypes;
+
+import java.util.StringTokenizer;
+import java.util.Vector;
+import java.util.zip.DataFormatException;
+
+import org.cip4.jdflib.core.JDFConstants;
+
+/**
+ * This class is a representation of a number list (JDFNumberList). It is a whitespace separated
+ * list of double values.
+ */
+public class JDFNumberList extends JDFNumList
+{
+    //**************************************** Constructors ****************************************
+    /**
+     * constructs a number list with the given string
+     *
+     * @param String s - the given String
+     *
+     * @throws DataFormatException - if the String has not a valid format
+     */
+    public JDFNumberList(String s) throws DataFormatException
+    {
+        super(s);
+    }
+
+    /**
+     * constructs a number list with the given vector
+     *
+     * @param Vector v - the given vector
+     *
+     * @throws DataFormatException - if the Vector has not a valid format
+     */
+    public JDFNumberList(Vector v) throws DataFormatException
+    {
+        super(v);
+    }
+
+    //**************************************** Methods *********************************************
+    /**
+     * isValid - true if all instances are Double types
+     *
+     * @throws DataFormatException - if the Vector has not a valid format
+     */
+    public void isValid() throws DataFormatException
+    {
+        for (int i = 0; i < getnumList().size(); i++)
+        {
+            if (!(getnumList().elementAt(i) instanceof Double))
+            {
+                throw new DataFormatException("Data format exception!");
+            }
+        }
+    }
+
+    /**
+     * add - add a double value to the vector
+     *
+     * @param double x - the double value
+     */
+    public void add(double x)
+    {
+        getnumList().add(new Double(x));
+    }
+
+    /**
+     * add - adds a Double object to the vector
+     *
+     * @param Double x - the Double object
+     */
+    public void add(Double x)
+    {
+        getnumList().add(x);
+    }
+
+    /**
+     * add - adds a complete number list to the vector
+     *
+     * @param JDFNumberList nl - the given JDFNumberList
+     */
+    public void add(JDFNumberList nl)
+    {
+        getnumList().addAll(nl.copyNumList());
+    }
+
+    /**
+     * add - adds a number list to the already existing number list
+     *
+     * @param String s - the given string
+     *
+     * @throws DataFormatException - if the String has not a valid format
+     */
+    public void add(String s)
+    {
+        StringTokenizer sToken = new StringTokenizer(s, JDFConstants.BLANK);
+
+        while (sToken.hasMoreTokens())
+        {
+            String t = sToken.nextToken().trim();
+            getnumList().addElement(new Double(t));
+        }
+    }
+
+}
