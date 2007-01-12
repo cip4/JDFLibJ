@@ -1,0 +1,513 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<JDF ID="n20020528155314" Type="Product" xmlns="http://www.CIP4.org/JDFSchema_1" Status="Waiting" JobName="testedit2" Version="1.14" xmlns:pt="PT:Job1.0" xmlns:HDM="http://www.heidelberg.com">
+  <!--(c) Heidelberger Druckmaschinen AG 1999-2002JDFLib-J JDFWriter 27.2.2002-->
+  <NodeInfo/>
+  <ResourcePool>
+    <HDM:PagePool ID="f72:-7ffe" xmlns:HDM="http://www.heidelberg.com">
+      <HDM:PageLink rRef="Linkf72:-7feb" RunIndex="0~1">
+        <Part Run="Runf72:-7fcb"/>
+      </HDM:PageLink>
+      <HDM:PageLink rRef="Linkf72:-7feb" RunIndex="0~1">
+        <Part Run="Runf72:-7fca"/>
+      </HDM:PageLink>
+    </HDM:PagePool>
+    <HDM:PageListPool ID="f72:-7ffd" xmlns:HDM="www.heidelberg.com"/>
+    <RunList ID="Linkf72:-7ffa" Class="Parameter" Status="Unavailable" Directory="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\Hotfolders\ContentHotfolder\target" xmlns:HDM="http://www.heidelberg.com" PartIDKeys="Run" HDM:Disposition="Retain">
+      <pt:BaseLocID Name="JobHome" Attribute="Directory"/>
+      <RunList Run="Runf72:-7fcb" Pages="0~-1" Status="Available">
+        <LayoutElement
+          <FileSpec URL="file://H:\docs\harry_potter\Copy of Harry_Potter_Teil1_2up_short.pdf" Disposition="Retain"/>
+        </LayoutElement>
+      </RunList>
+      <RunList Run="Runf72:-7fca" Pages="0~-1" Status="Available">
+        <LayoutElement>
+          <FileSpec URL="file://H:\docs\harry_potter\Harry_Potter_Teil1_2up_short.pdf" Disposition="Retain"/>
+        </LayoutElement>
+      </RunList>
+    </RunList>
+    <HDM:ContentHotfolderParams ID="Linkf72:-7ff7" Class="Parameter" Modify="false" Status="Available" xmlns:pt="PT:Template1.0" xmlns:HDM="http://www.heidelberg.com" SpawnStatus="SpawnedRO" HDM:Hotfolder="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\Hotfolders\ContentHotfolder" HDM:RefOutput="Linkf72:-7ffa" HDM:ElementKind="Page" HDM:RemoveInputFile="false">
+      <pt:BaseLocID Name="JobHome" Attribute="HDM:Hotfolder"/>
+    </HDM:ContentHotfolderParams>
+    <RunList ID="Linkf72:-7ff5" Class="Parameter" Status="Unavailable" Directory="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Documents\Actual" xmlns:HDM="http://www.heidelberg.com" PartIDKeys="Run" HDM:Disposition="Delete">
+      <pt:BaseLocID Name="JobHome" Attribute="Directory"/>
+      <RunList Run="Runf72:-7fcb"/>
+      <RunList Run="Runf72:-7fca"/>
+    </RunList>
+    <RunList ID="Linkf72:-7ff4" Class="Parameter" Status="Unavailable" Directory="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Documents\Actual" xmlns:HDM="http://www.heidelberg.com" PartIDKeys="Run" HDM:Disposition="Delete">
+      <pt:BaseLocID Name="JobHome" Attribute="Directory"/>
+      <pt:BaseLocID Name="JobHome" Attribute="Directory"/>
+      <RunList Run="Runf72:-7fcb" Status="Available">
+        <LayoutElement>
+          <FileSpec URL="file://H:\docs\harry_potter\Copy of Harry_Potter_Teil1_2up_short.pdf" Disposition="Retain"/>
+        </LayoutElement>
+      </RunList>
+      <RunList Run="Runf72:-7fca" Status="Available">
+        <LayoutElement>
+          <FileSpec URL="file://H:\docs\harry_potter\Harry_Potter_Teil1_2up_short.pdf" Disposition="Retain"/>
+        </LayoutElement>
+      </RunList>
+    </RunList>
+    <RunList ID="Linkf72:-7ff3" Class="Parameter" Status="Unavailable" Directory="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Documents\Actual" xmlns:HDM="http://www.heidelberg.com" PartIDKeys="Run" HDM:Disposition="Delete">
+      <pt:BaseLocID Name="JobHome" Attribute="Directory"/>
+      <RunList Run="Runf72:-7fcb"/>
+      <RunList Run="Runf72:-7fca"/>
+    </RunList>
+    <PSToPDFConversionParams ID="Linkf72:-7ff0" Class="Parameter" Modify="false" Status="Available" Binding="Left" EndPage="-1" Optimize="false" StartPage="1" xmlns:HDM="http://www.heidelberg.com" PDFVersion="1.3" DetectBlend="true" DoThumbnails="false" CompressPages="false" HDM:PageSizeX="595.276" HDM:PageSizeY="841.89" OverPrintMode="1" AutoRotatePages="None" HDM:ResolutionX="2540.0" HDM:ResolutionY="2540.0" ASCII85EncodePages="false">
+      <AdvancedParams UsePrologue="false" EmitDSCWarnings="false" PreserveEPSInfo="true" ParseDSCComments="true" PreserveCopyPage="true" HDM:CreateJobTicket="true" LockDistillerParams="true" PreserveOPIComments="true" AutoPostitionEPSInfo="true" ParseDSCCommentsForDocInfo="true"/>
+      <ThinPDFParams FilePerPage="false" SidelineFonts="false" SidelineImages="false" HDM:SidelineEPS="false"/>
+    </PSToPDFConversionParams>
+    <ImageCompressionParams ID="Linkf72:-7fef" Class="Parameter" Modify="false" Status="Available" xmlns:HDM="http://www.heidelberg.com">
+      <ImageCompression ImageType="Monochrome" EncodeImages="false" DownsampleImages="false"/>
+      <ImageCompression ImageType="Grayscale" EncodeImages="false" DownsampleImages="false"/>
+      <ImageCompression ImageType="Color" EncodeImages="false" DownsampleImages="false" ConvertImagesToIndexed="false"/>
+    </ImageCompressionParams>
+    <FontParams ID="Linkf72:-7fee" Class="Parameter" Modify="false" Status="Available" SubsetFonts="true" MaxSubsetPct="100" EmbedAllFonts="false" CannotEmbedFontPolicy="Warning"/>
+    <FontPolicy ID="Linkf72:-7fed" Class="Parameter" Modify="false" Status="Available" UseDefaultFont="false" UseFontEmulation="false"/>
+    <RunList ID="Linkf72:-7feb" Class="Parameter" Status="Unavailable" Directory="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Pagefiles\Actual" xmlns:HDM="http://www.heidelberg.com" PartIDKeys="Run" HDM:Disposition="Delete">
+      <pt:BaseLocID Name="JobHome" Attribute="Directory"/>
+      <RunList Run="Runf72:-7fcb" Status="Available" xmlns:HDM="http://www.Heidelberg.com" LogicalPage="0" SpawnStatus="SpawnedRW" HDM:TotalPages="2" HDM:PreflightErrors="0" HDM:PreflightWarnings="6">
+        <LayoutElement Class="Parameter">
+          <FileSpec URL="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Pagefiles\Actual\Copy of Harry_Potter_Teil1_2up_short.pdf" Class="Parameter" FileSize="214070" Disposition="Delete"/>
+        </LayoutElement>
+        <HDM:FilePage Page="0">
+          <SeparationSpec Name="Cyan"/>
+          <SeparationSpec Name="Magenta"/>
+          <SeparationSpec Name="Yellow"/>
+        </HDM:FilePage>
+        <HDM:FilePageCommon TrimBox="0.00 0.00 595.00 842.00" MediaBox="0.00 0.00 595.00 842.00" Separated="false">
+          <ColorPool>
+            <Color CMYK="1 0 0 0" Name="Cyan" Class="Parameter" ColorType="Normal"/>
+            <Color CMYK="0 1 0 0" Name="Magenta" Class="Parameter" ColorType="Normal"/>
+            <Color CMYK="0 0 1 0" Name="Yellow" Class="Parameter" ColorType="Normal"/>
+            <Color CMYK="0 0 0 1" Name="Black" Class="Parameter" ColorType="Normal"/>
+          </ColorPool>
+          <HDM:CSSpec Name="DeviceRGB"/>
+          <HDM:CSSpec Name="DeviceGray"/>
+          <SeparationSpec Name="Black"/>
+        </HDM:FilePageCommon>
+        <HDM:FilePage Page="1">
+          <HDM:FontSpec Name="CHJNFI+TimesNewRomanPSMT" Subtype="Type1" Embedded="true"/>
+          <HDM:FontSpec Name="CHKDCD+TimesNewRoman,Italic" Subtype="TrueType" Embedded="true"/>
+        </HDM:FilePage>
+      </RunList>
+      <RunList Run="Runf72:-7fca" Status="Available" xmlns:HDM="http://www.Heidelberg.com" LogicalPage="2" HDM:TotalPages="2" HDM:PreflightErrors="0" HDM:PreflightWarnings="6">
+        <LayoutElement Class="Parameter">
+          <FileSpec URL="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Pagefiles\Actual\Harry_Potter_Teil1_2up_short.pdf" Class="Parameter" FileSize="214070" Disposition="Delete"/>
+        </LayoutElement>
+        <HDM:FilePage Page="0">
+          <SeparationSpec Name="Cyan"/>
+          <SeparationSpec Name="Magenta"/>
+          <SeparationSpec Name="Yellow"/>
+        </HDM:FilePage>
+        <HDM:FilePageCommon TrimBox="0.00 0.00 595.00 842.00" MediaBox="0.00 0.00 595.00 842.00" Separated="false">
+          <ColorPool>
+            <Color CMYK="1 0 0 0" Name="Cyan" Class="Parameter" ColorType="Normal"/>
+            <Color CMYK="0 1 0 0" Name="Magenta" Class="Parameter" ColorType="Normal"/>
+            <Color CMYK="0 0 1 0" Name="Yellow" Class="Parameter" ColorType="Normal"/>
+            <Color CMYK="0 0 0 1" Name="Black" Class="Parameter" ColorType="Normal"/>
+          </ColorPool>
+          <HDM:CSSpec Name="DeviceRGB"/>
+          <HDM:CSSpec Name="DeviceGray"/>
+          <SeparationSpec Name="Black"/>
+        </HDM:FilePageCommon>
+        <HDM:FilePage Page="1">
+          <HDM:FontSpec Name="CHJNFI+TimesNewRomanPSMT" Subtype="Type1" Embedded="true"/>
+          <HDM:FontSpec Name="CHKDCD+TimesNewRoman,Italic" Subtype="TrueType" Embedded="true"/>
+        </HDM:FilePage>
+      </RunList>
+    </RunList>
+    <HDM:ReportList ID="Linkf72:-7fea" Class="Parameter" Status="Unavailable" Directory="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Preflightreports\Import" xmlns:HDM="http://www.heidelberg.com" PartIDKeys="Run" HDM:Disposition="Delete">
+      <pt:BaseLocID Name="JobHome" Attribute="Directory"/>
+      <HDM:ReportList Run="Runf72:-7fcb" Status="Available">
+        <LayoutElement Class="Parameter">
+          <FileSpec URL="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Preflightreports\Import\Copy of Harry_Potter_Teil1_2up_short_rep.pdf" Class="Parameter" Disposition="Delete"/>
+        </LayoutElement>
+      </HDM:ReportList>
+      <HDM:ReportList Run="Runf72:-7fca" Status="Available">
+        <LayoutElement Class="Parameter">
+          <FileSpec URL="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Preflightreports\Import\Harry_Potter_Teil1_2up_short_rep.pdf" Class="Parameter" Disposition="Delete"/>
+        </LayoutElement>
+      </HDM:ReportList>
+    </HDM:ReportList>
+    <PreflightProfile ID="Linkf72:-7fe9" Class="Parameter" Modify="false" Status="Available" xmlns:pt="PT:Template1.0" xmlns:HDM="http://www.heidelberg.com" SpawnStatus="SpawnedRO" HDM:ThumbnailFolder="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Thumbnails" HDM:ThumbnailResolution="0.0 0.0">
+      <HDM:ActionList>
+        <FileSpec URL="PreflightProfiles\resample.eal" ResourceUsage="PitStopActionList"/>
+      </HDM:ActionList>
+      <HDM:ActionList>
+        <FileSpec URL="PreflightProfiles\thinline.eal" ResourceUsage="PitStopActionList"/>
+      </HDM:ActionList>
+      <pt:BaseLocID Name="JobHome" Attribute="HDM:ThumbnailFolder"/>
+      <HDM:Profile>
+        <FileSpec URL="PreflightProfiles/Default.ppp" ResourceUsage="PitStopPreflightProfile"/>
+      </HDM:Profile>
+    </PreflightProfile>
+    <HDM:PDFEditParams ID="Linkf72:-7fe6" Class="Parameter" Status="Available" SpawnStatus="SpawnedRO"/>
+    <RunList ID="Linkf72:-7fe4" Class="Parameter" Status="Unavailable" Directory="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\PDFEditing\Actual" xmlns:HDM="http://www.heidelberg.com" PartIDKeys="Run" HDM:Disposition="Delete">
+      <pt:BaseLocID Name="JobHome" Attribute="Directory"/>
+      <RunList Run="Runf72:-7fcb" SpawnStatus="SpawnedRW"/>
+      <RunList Run="Runf72:-7fca"/>
+    </RunList>
+    <RunList ID="Linkf72:-7fdf" Class="Parameter" Status="Unavailable" Directory="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Pagefiles\Actual" xmlns:HDM="http://www.heidelberg.com" HDM:Disposition="Delete">
+      <pt:BaseLocID Name="JobHome" Attribute="Directory"/>
+    </RunList>
+    <ImageReplacementParams ID="Linkf72:-7fde" Class="Parameter" Modify="false" Status="Available" xmlns:pt="PT:Template1.0" xmlns:HDM="http://www.heidelberg.com" MinResolution="0.0" IgnoreExtensions=".lay .e .samp .smp _place" MaxSearchRecursion="3" ImageReplacementStrategy="Replace">
+      <FileSpec URL="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Images" ResourceUsage="SearchPath">
+        <pt:BaseLocID Name="JobHome" Attribute="URL"/>
+      </FileSpec>
+    </ImageReplacementParams>
+    <RunList ID="Linkf72:-7fdc" Class="Parameter" Status="Unavailable" Directory="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Pagefiles\Actual" xmlns:HDM="http://www.heidelberg.com" HDM:Disposition="Delete">
+      <pt:BaseLocID Name="JobHome" Attribute="Directory"/>
+    </RunList>
+    <ColorSpaceConversionParams ID="Linkf72:-7fdb" Class="Parameter" Modify="false" Status="Available" xmlns:HDM="http://www.heidelberg.com" HDM:SpotColorInks="FromJob" HDM:KnockoutColors="false" HDM:OverprintBlack="false" HDM:SpotColorMapping="MapNone" ConvertDevIndepColors="true">
+      <ColorSpaceConversionOp SourceCS="RGB" Operation="Convert" RGBGray2Black="false" SourceObjects="Text LineArt SmoothShades" RenderingIntent="Perceptual" IgnoreEmbeddedICC="false">
+        <FileSpec URL="monitor/HDPP sRGB Profile.icm" ResourceUsage="SourceProfile"/>
+      </ColorSpaceConversionOp>
+      <ColorSpaceConversionOp SourceCS="RGB" Operation="Convert" RGBGray2Black="false" SourceObjects="ImagePhotographic ImageScreenShot" RenderingIntent="Perceptual" IgnoreEmbeddedICC="false">
+        <FileSpec URL="monitor/HDPP sRGB Profile.icm" ResourceUsage="SourceProfile"/>
+      </ColorSpaceConversionOp>
+      <FileSpec URL="printer/cmyk/SWOP ANSI CGATS-TR001/PO_SWOP_CGATS_TR001 U300K95.icm" ResourceUsage="FinalTargetDevice"/>
+    </ColorSpaceConversionParams>
+    <RunList ID="Linkf72:-7fd9" Class="Parameter" Status="Unavailable" Directory="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Pagefiles\Actual" xmlns:HDM="http://www.heidelberg.com" HDM:Disposition="Delete">
+      <pt:BaseLocID Name="JobHome" Attribute="Directory"/>
+    </RunList>
+    <HDM:ReportList ID="Linkf72:-7fd8" Class="Parameter" Status="Unavailable" Directory="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Preflightreports\Prepare" xmlns:HDM="http://www.heidelberg.com" HDM:Disposition="Delete">
+      <pt:BaseLocID Name="JobHome" Attribute="Directory"/>
+    </HDM:ReportList>
+    <PreflightProfile ID="Linkf72:-7fd7" Class="Parameter" Modify="false" Status="Available" xmlns:pt="PT:Template1.0" xmlns:HDM="http://www.heidelberg.com" HDM:ThumbnailFolder="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Thumbnails" HDM:ThumbnailResolution="0.0 0.0">
+      <HDM:ActionList>
+        <FileSpec URL="PreflightProfiles\resample.eal" ResourceUsage="PitStopActionList"/>
+      </HDM:ActionList>
+      <HDM:ActionList>
+        <FileSpec URL="PreflightProfiles\thinline.eal" ResourceUsage="PitStopActionList"/>
+      </HDM:ActionList>
+      <pt:BaseLocID Name="JobHome" Attribute="HDM:ThumbnailFolder"/>
+      <HDM:Profile>
+        <FileSpec URL="PreflightProfiles/Default.ppp" ResourceUsage="PitStopPreflightProfile"/>
+      </HDM:Profile>
+    </PreflightProfile>
+    <RunList ID="Linkf72:-7fd5" Class="Parameter" Status="Unavailable" Directory="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Pagefiles\Actual" xmlns:HDM="http://www.heidelberg.com" HDM:Disposition="Delete">
+      <pt:BaseLocID Name="JobHome" Attribute="Directory"/>
+    </RunList>
+    <TrappingDetails ID="Linkf72:-7fd4" Class="Parameter" Modify="false" Status="Available" Trapping="true" xmlns:HDM="http://www.heidelberg.com" TrappingType="1001" DefaultTrapping="true" IgnoreFileParams="true" HDM:TrappingRetrap="false" HDM:TrappingColorants="FromFile">
+      <TrappingParams Enabled="true" StepLimit="0.25" TrapWidth="0.25" BlackWidth="1.0" HDM:Keepaway="false" TrapEndStyle="Overlap" HDM:LineSplit="2.0" TrapJoinStyle="Bevel" HDM:TrapHeight="0.25" BlackColorLimit="0.95" ImageResolution="900.0" SlidingTrapLimit="1.0" TrapColorScaling="1.0" BlackDensityLimit="1.6" ImageMaskTrapping="true" MinimumBlackWidth="0.0" ImageTrapPlacement="Normal" ImageToImageTrapping="false" BlackOverprintStrokes="false" ImageInternalTrapping="false" ImageToObjectTrapping="true" BlackOverprintGraphics="false" HDM:CommonDensityLimit="0.5" HDM:SmallFontTrapWidth="0.75" HDM:SmallFontSizeScalingLimit="6.0" HDM:BlackFontSizeOverprintLimit="12.0"/>
+    </TrappingDetails>
+    <ColorPool ID="Linkf72:-7fd3" Class="Parameter" Status="Available">
+      <Color ID="Linkf72:-7fd1" CMYK="1.0 0.0 0.0 0.0" Name="Cyan" Class="Parameter" Status="Unavailable" ColorType="Normal" MediaType="Uncoated" NeutralDensity="0.61" UsePDLAlternateCS="false"/>
+      <Color ID="Linkf72:-7fd0" CMYK="0.0 1.0 0.0 0.0" Name="Magenta" Class="Parameter" Status="Unavailable" ColorType="Normal" MediaType="Uncoated" NeutralDensity="0.76" UsePDLAlternateCS="false"/>
+      <Color ID="Linkf72:-7fcf" CMYK="0.0 0.0 1.0 0.0" Name="Yellow" Class="Parameter" Status="Unavailable" ColorType="Normal" MediaType="Uncoated" NeutralDensity="0.16" UsePDLAlternateCS="false"/>
+      <Color ID="Linkf72:-7fce" CMYK="0.0 0.0 0.0 1.0" Name="Black" Class="Parameter" Status="Unavailable" ColorType="Normal" MediaType="Uncoated" NeutralDensity="1.7" UsePDLAlternateCS="false"/>
+    </ColorPool>
+    <ColorantControl ID="Linkf72:-7fd2" Class="Parameter" rRefs="Linkf72:-7fd3" Status="Available" ProcessColorModel="DeviceCMYK">
+      <ColorPoolRef rRef="Linkf72:-7fd3"/>
+      <ColorantOrder>
+        <SeparationSpec Name="Cyan"/>
+        <SeparationSpec Name="Magenta"/>
+        <SeparationSpec Name="Yellow"/>
+        <SeparationSpec Name="Black"/>
+      </ColorantOrder>
+    </ColorantControl>
+  </ResourcePool>
+  <ResourceLinkPool>
+    <ColorPoolLink rRef="Linkf72:-7fd3" Usage="Input">
+      <Part/>
+    </ColorPoolLink>
+    <ColorantControlLink rRef="Linkf72:-7fd2" Usage="Input">
+      <Part/>
+    </ColorantControlLink>
+  </ResourceLinkPool>
+  <AuditPool>
+    <Created Author="JDFLib-J JDFWriter 27.2.2002" TimeStamp="2002-05-28T15:53:14CEST"/>
+    <Created Author="PrintTools Job Manager" TimeStamp="2002-05-28T15:53:39CEST"/>
+    <Created Author="PrintTools Job Manager" TimeStamp="2002-05-28T15:53:41CEST"/>
+    <Created Author="PrintTools Job Manager" TimeStamp="2002-05-28T15:53:42CEST"/>
+  </AuditPool>
+  <pt:Job pt:CreationDate="1022593994590" pt:ModificationDate="1022593994590">
+    <pt:Owner/>
+    <pt:Acl/>
+    <pt:JobHome Host="SCHMIDTA-PC" Path="Jobs\Active\testedit2" Type="UNC" Share="PTConfig"/>
+  </pt:Job>
+  <JDF ID="Linkf72:-7ffc" Type="ProcessGroup" Status="Waiting" DescriptiveName="Import">
+    <NodeInfo/>
+    <ResourcePool/>
+    <ResourceLinkPool/>
+    <AuditPool>
+      <Spawned URL="file://\\SCHMIDTA-PC\PTConfig\JDFHotfolders\ContentHotfolder_1.0\Chfp1\testedit2_391808494_.jdf" jRef="Linkf72:-7ff8" TimeStamp="2002-05-28T15:53:44CEST" NewSpawnID="Spf72:-7fcc" rRefsROCopied="Linkf72:-7ff7"/>
+    </AuditPool>
+    <pt:Sequence>
+      <pt:SequenceHome URL="file://\\SCHMIDTA-PC\PTConfig\SysConfig\Resources\Templates\SequenceTemplates\Import\Import.xml"/>
+      <pt:UI_Info/>
+      <pt:GroupResource rRef="Linkf72:-7feb"/>
+    </pt:Sequence>
+    <JDF ID="Linkf72:-7ffb" Type="HDM:ManualRunlist" Status="Waiting">
+      <NodeInfo Route="pt://-internal-/-internal-/1.0/GenericProcess1"/>
+      <ResourcePool>
+        <HDM:ManualRunlistNoSpawn ID="Linkf72:-7ff9" Class="Parameter" Status="Incomplete"/>
+      </ResourcePool>
+      <ResourceLinkPool>
+        <RunListLink rRef="Linkf72:-7ffa" Usage="Output" xmlns:HDM="http://www.heidelberg.com" HDM:ElementKind="Contentfile">
+          <Part/>
+        </RunListLink>
+        <HDM:ManualRunlistNoSpawnLink rRef="Linkf72:-7ff9" Usage="Input">
+          <Part/>
+        </HDM:ManualRunlistNoSpawnLink>
+      </ResourceLinkPool>
+      <AuditPool>
+        <HDM:Audit End="2002-05-28T15:54:07CEST" File="Copy of Harry_Potter_Teil1_2up_short.pdf" Type="Add files" User="Administrator" Start="2002-05-28T15:54:07CEST" Author="Input file added by user interaction: file://H:\docs\harry_potter\Copy of Harry_Potter_Teil1_2up_short.pdf" EndStatus="Completed" xmlns:HDM="http://www.heidelberg.com"/>
+        <HDM:Audit End="2002-05-28T15:54:07CEST" File="Harry_Potter_Teil1_2up_short.pdf" Type="Add files" User="Administrator" Start="2002-05-28T15:54:07CEST" Author="Input file added by user interaction: file://H:\docs\harry_potter\Harry_Potter_Teil1_2up_short.pdf" EndStatus="Completed" xmlns:HDM="http://www.heidelberg.com"/>
+      </AuditPool>
+    </JDF>
+    <JDF ID="Linkf72:-7ff8" Type="HDM:ContentHotfolder" Status="Spawned" xmlns:HDM="http://www.heidelberg.com" HDM:Cluster="AllHotfolders" HDM:ToolType="Hotfolder" HDM:ProcessRequired="false">
+      <NodeInfo Route="pt://SCHMIDTA-PC/ContentHotfolder/1.0/CHFP1">
+        <HDM:ClusterSetting Route="pt://SCHMIDTA-PC/ContentHotfolder/1.0/CHFP1"/>
+      </NodeInfo>
+      <ResourcePool/>
+      <ResourceLinkPool>
+        <HDM:ContentHotfolderParamsLink rRef="Linkf72:-7ff7" Usage="Input">
+          <Part/>
+        </HDM:ContentHotfolderParamsLink>
+      </ResourceLinkPool>
+      <AuditPool/>
+    </JDF>
+    <JDF ID="Linkf72:-7ff6" Type="HDM:FileTypeSwitch" Status="Waiting">
+      <NodeInfo Route="pt://HDM:PrintToolsClient/ImplProcesses"/>
+      <ResourcePool>
+        <HDM:FileTypeSwitchNoSpawn ID="Linkf72:-7ff2" Class="Parameter" Status="Incomplete"/>
+      </ResourcePool>
+      <ResourceLinkPool>
+        <RunListLink rRef="Linkf72:-7ffa" Usage="Input">
+          <Part/>
+        </RunListLink>
+        <RunListLink rRef="Linkf72:-7ff5" Usage="Output" xmlns:HDM="http://www.heidelberg.com" ProcessUsage="PS" HDM:ElementKind="Page">
+          <Part/>
+        </RunListLink>
+        <RunListLink rRef="Linkf72:-7ff4" Usage="Output" xmlns:HDM="http://www.heidelberg.com" ProcessUsage="PDF" HDM:ElementKind="Page">
+          <Part/>
+        </RunListLink>
+        <RunListLink rRef="Linkf72:-7ff3" Usage="Output" xmlns:HDM="http://www.heidelberg.com" ProcessUsage="TIFF" HDM:ElementKind="Page">
+          <Part/>
+        </RunListLink>
+        <HDM:FileTypeSwitchNoSpawnLink rRef="Linkf72:-7ff2" Usage="Input">
+          <Part/>
+        </HDM:FileTypeSwitchNoSpawnLink>
+      </ResourceLinkPool>
+      <AuditPool/>
+      <StatusPool>
+        <PartStatus Status="Completed">
+          <Part Run="Runf72:-7fcb"/>
+        </PartStatus>
+        <PartStatus Status="Completed">
+          <Part Run="Runf72:-7fca"/>
+        </PartStatus>
+      </StatusPool>
+    </JDF>
+    <JDF ID="Linkf72:-7ff1" Type="PSToPDFConversion" Status="Waiting" xmlns:HDM="http://www.heidelberg.com" HDM:Cluster="AllNormalizers" HDM:ToolType="Normalizer" HDM:ProcessRequired="true">
+      <NodeInfo Route="pt://SCHMIDTA-PC/Normalizer/1.0/Normalizer1">
+        <HDM:ClusterSetting Route="pt://SCHMIDTA-PC/Normalizer/1.0/Normalizer1"/>
+      </NodeInfo>
+      <ResourcePool/>
+      <ResourceLinkPool>
+        <RunListLink rRef="Linkf72:-7ff5" Usage="Input" xmlns:HDM="http://www.heidelberg.com" HDM:ElementKind="Page">
+          <Part/>
+        </RunListLink>
+        <RunListLink rRef="Linkf72:-7ff4" Usage="Output" xmlns:HDM="http://www.heidelberg.com" HDM:ElementKind="Page">
+          <Part/>
+        </RunListLink>
+        <PSToPDFConversionParamsLink rRef="Linkf72:-7ff0" Usage="Input">
+          <Part/>
+        </PSToPDFConversionParamsLink>
+        <ImageCompressionParamsLink rRef="Linkf72:-7fef" Usage="Input">
+          <Part/>
+        </ImageCompressionParamsLink>
+        <FontParamsLink rRef="Linkf72:-7fee" Usage="Input">
+          <Part/>
+        </FontParamsLink>
+        <FontPolicyLink rRef="Linkf72:-7fed" Usage="Input">
+          <Part/>
+        </FontPolicyLink>
+      </ResourceLinkPool>
+      <AuditPool/>
+    </JDF>
+    <JDF ID="Linkf72:-7fec" Type="Preflight" xmlns="http://www.CIP4.org/JDFSchema_1" Status="Pool" Version="1.14" xmlns:pt="PT:Job1.0" xmlns:HDM="http://www.Heidelberg.com" HDM:Cluster="AllPreflights" HDM:ToolType="Preflight" HDM:ProcessRequired="true">
+      <!--(c) Heidelberger Druckmaschinen AG 1999-2002JDFLib-J JDFWriter 27.2.2002-->
+      <NodeInfo Route="pt://SCHMIDTA-PC/Preflighter/1.0/Preflight1">
+        <HDM:ClusterSetting Route="pt://SCHMIDTA-PC/Preflighter/1.0/Preflight1"/>
+      </NodeInfo>
+      <ResourcePool/>
+      <ResourceLinkPool>
+        <RunListLink rRef="Linkf72:-7ff4" Usage="Input">
+          <Part/>
+        </RunListLink>
+        <RunListLink rRef="Linkf72:-7feb" Usage="Output" xmlns:HDM="http://www.heidelberg.com" HDM:ElementKind="Page">
+          <Part/>
+        </RunListLink>
+        <HDM:ReportListLink rRef="Linkf72:-7fea" Usage="Output" xmlns:HDM="http://www.heidelberg.com" HDM:ElementKind="Unknown">
+          <Part/>
+        </HDM:ReportListLink>
+        <PreflightProfileLink rRef="Linkf72:-7fe9" Usage="Input">
+          <Part/>
+        </PreflightProfileLink>
+      </ResourceLinkPool>
+      <AuditPool>
+        <Spawned URL="file://\\SCHMIDTA-PC\PTConfig\JDFHotfolders\Preflighter_1.0\Preflight1\testedit2_391831737_.jdf" jRef="Linkf72:-7fec" TimeStamp="2002-05-28T15:54:08CEST" NewSpawnID="Spf72:-7fc8" rRefsROCopied="Linkf72:-7fe9" rRefsRWCopied="Linkf72:-7ff4 Linkf72:-7feb Linkf72:-7fea">
+          <Part Run="Runf72:-7fcb"/>
+          <Part Run="Runf72:-7fca"/>
+          <Part Run="Runf72:-7fcb"/>
+          <Part Run="Runf72:-7fca"/>
+        </Spawned>
+        <Merged URL="File://\\SCHMIDTA-PC\PTConfig\JDFHotfolders\Preflighter_1.0\Preflight1\QueueTemp\testedit2_391831737_.jdf" jRef="Linkf72:-7fec" MergeID="Spf72:-7fc8" TimeStamp="2002-05-28T15:54:18+02:00" rRefsOverwritten="Linkf72:-7ff4 Linkf72:-7feb Linkf72:-7fea">
+          <Part Run="Runf72:-7fcb"/>
+          <Part Run="Runf72:-7fca"/>
+          <Part Run="Runf72:-7fcb"/>
+          <Part Run="Runf72:-7fca"/>
+        </Merged>
+        <ProcessRun End="2002-05-28T15:54:18+02:00" Start="2002-05-28T15:54:10+02:00" SpawnID="Spf72:-7fc8" EndStatus="Completed" TimeStamp="2002-05-28T15:54:18+02:00"/>
+      </AuditPool>
+      <StatusPool Status="Waiting">
+        <PartStatus Status="Completed">
+          <Part Run="Runf72:-7fcb"/>
+        </PartStatus>
+        <PartStatus Status="Completed">
+          <Part Run="Runf72:-7fca"/>
+        </PartStatus>
+      </StatusPool>
+      <AncestorPool/>
+    </JDF>
+    <AncestorPool/>
+  </JDF>
+  <JDF ID="Linkf72:-7fe8" Type="ProcessGroup" Status="Waiting" DescriptiveName="PDFEdit">
+    <NodeInfo/>
+    <ResourcePool/>
+    <ResourceLinkPool/>
+    <AuditPool/>
+    <pt:Sequence>
+      <pt:SequenceHome URL="file://\\SCHMIDTA-PC\PTConfig\SysConfig\Resources\Templates\SequenceTemplates\PDFEdit\PDFEdit.xml"/>
+      <pt:UI_Info/>
+      <pt:GroupResource rRef="Linkf72:-7feb"/>
+      <pt:GroupResource rRef="Linkf72:-7fe4"/>
+    </pt:Sequence>
+    <JDF ID="Linkf72:-7fe7" Type="HDM:PDFEditing" Status="Pool">
+      <NodeInfo Route="pt://-internal-/-internal-/1.0/PDFEdit1"/>
+      <ResourcePool>
+        <HDM:PDFEditingNoSpawn ID="Linkf72:-7fe3" Class="Parameter" Status="Available"/>
+      </ResourcePool>
+      <ResourceLinkPool>
+        <HDM:PDFEditParamsLink rRef="Linkf72:-7fe6" Usage="Input">
+          <Part/>
+        </HDM:PDFEditParamsLink>
+        <RunListLink rRef="Linkf72:-7feb" Usage="Input" xmlns:HDM="http://www.heidelberg.com" HDM:ElementKind="Page">
+          <Part/>
+        </RunListLink>
+        <RunListLink rRef="Linkf72:-7fe4" Usage="Output" xmlns:HDM="http://www.heidelberg.com" HDM:ElementKind="Page">
+          <Part/>
+        </RunListLink>
+        <HDM:PDFEditingNoSpawnLink rRef="Linkf72:-7fe3" Usage="Input">
+          <Part/>
+        </HDM:PDFEditingNoSpawnLink>
+      </ResourceLinkPool>
+      <AuditPool>
+        <Spawned URL="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Pagefiles\Actual\Copy of Harry_Potter_Teil1_2up_short.Actual.jdf" jRef="Linkf72:-7fe7" TimeStamp="2002-05-28T16:41:52CEST" NewSpawnID="Sp629:-7fff" rRefsROCopied="Linkf72:-7fe6" rRefsRWCopied="Linkf72:-7feb Linkf72:-7fe4">
+          <Part Run="Runf72:-7fcb"/>
+        </Spawned>
+      </AuditPool>
+      <AncestorPool/>
+      <StatusPool Status="Waiting">
+        <PartStatus Status="Spawned">
+          <Part Run="Runf72:-7fcb"/>
+        </PartStatus>
+      </StatusPool>
+    </JDF>
+  </JDF>
+  <JDF ID="Linkf72:-7fe2" Type="ProcessGroup" Status="Waiting" DescriptiveName="Prepare">
+    <NodeInfo/>
+    <ResourcePool/>
+    <ResourceLinkPool/>
+    <AuditPool/>
+    <pt:Sequence>
+      <pt:SequenceHome URL="file://\\SCHMIDTA-PC\PTConfig\SysConfig\Resources\Templates\SequenceTemplates\Prepare\Prepare.xml"/>
+      <pt:UI_Info/>
+      <pt:GroupResource rRef="Linkf72:-7fe4"/>
+      <pt:GroupResource rRef="Linkf72:-7fd5"/>
+    </pt:Sequence>
+    <JDF ID="Linkf72:-7fe1" Type="ImageReplacement" Status="Waiting" xmlns:HDM="http://www.heidelberg.com" HDM:Cluster="AllImageReplacers" HDM:ToolType="ImageReplacer" HDM:ProcessRequired="false">
+      <NodeInfo Route="pt://SCHMIDTA-PC/ImageHandler/1.0/ImHdl1">
+        <HDM:ClusterSetting Route="pt://SCHMIDTA-PC/ImageHandler/1.0/ImHdl1"/>
+      </NodeInfo>
+      <ResourcePool/>
+      <ResourceLinkPool>
+        <RunListLink rRef="Linkf72:-7fe4" Usage="Input" xmlns:HDM="http://www.heidelberg.com" HDM:ElementKind="Page">
+          <Part/>
+        </RunListLink>
+        <RunListLink rRef="Linkf72:-7fdf" Usage="Output" xmlns:HDM="http://www.heidelberg.com" HDM:ElementKind="Page">
+          <Part/>
+        </RunListLink>
+        <ImageReplacementParamsLink rRef="Linkf72:-7fde" Usage="Input">
+          <Part/>
+        </ImageReplacementParamsLink>
+      </ResourceLinkPool>
+      <AuditPool/>
+    </JDF>
+    <JDF ID="Linkf72:-7fdd" Type="ColorSpaceConversion" Status="Waiting" xmlns:HDM="http://www.heidelberg.com" HDM:Cluster="AllColorCarvers" HDM:ToolType="ColorCarver" HDM:ProcessRequired="false">
+      <NodeInfo Route="pt://SCHMIDTA-PC/ColorCarver/1.0/ColM1">
+        <HDM:ClusterSetting Route="pt://SCHMIDTA-PC/ColorCarver/1.0/ColM1"/>
+      </NodeInfo>
+      <ResourcePool/>
+      <ResourceLinkPool>
+        <RunListLink rRef="Linkf72:-7fdf" Usage="Input" xmlns:HDM="http://www.heidelberg.com" HDM:ElementKind="Page">
+          <Part/>
+        </RunListLink>
+        <RunListLink rRef="Linkf72:-7fdc" Usage="Output" xmlns:HDM="http://www.heidelberg.com" HDM:ElementKind="Page">
+          <Part/>
+        </RunListLink>
+        <ColorSpaceConversionParamsLink rRef="Linkf72:-7fdb" Usage="Input">
+          <Part/>
+        </ColorSpaceConversionParamsLink>
+        <ColorantControlLink rRef="Linkf72:-7fd2" Usage="Input">
+          <Part/>
+        </ColorantControlLink>
+      </ResourceLinkPool>
+      <AuditPool/>
+    </JDF>
+    <JDF ID="Linkf72:-7fda" Type="Preflight" Status="Waiting" xmlns:HDM="http://www.heidelberg.com" HDM:Cluster="AllPreflights" HDM:ToolType="Preflight" HDM:ProcessRequired="false">
+      <NodeInfo Route="pt://SCHMIDTA-PC/Preflighter/1.0/Preflight1">
+        <HDM:ClusterSetting Route="pt://SCHMIDTA-PC/Preflighter/1.0/Preflight1"/>
+      </NodeInfo>
+      <ResourcePool/>
+      <ResourceLinkPool>
+        <RunListLink rRef="Linkf72:-7fdc" Usage="Input" xmlns:HDM="http://www.heidelberg.com" HDM:ElementKind="Page">
+          <Part/>
+        </RunListLink>
+        <RunListLink rRef="Linkf72:-7fd9" Usage="Output" xmlns:HDM="http://www.heidelberg.com" HDM:ElementKind="Page">
+          <Part/>
+        </RunListLink>
+        <HDM:ReportListLink rRef="Linkf72:-7fd8" Usage="Output" xmlns:HDM="http://www.heidelberg.com" HDM:ElementKind="Unknown">
+          <Part/>
+        </HDM:ReportListLink>
+        <PreflightProfileLink rRef="Linkf72:-7fd7" Usage="Input">
+          <Part/>
+        </PreflightProfileLink>
+      </ResourceLinkPool>
+      <AuditPool/>
+    </JDF>
+    <JDF ID="Linkf72:-7fd6" Type="Trapping" Status="Waiting" xmlns:HDM="http://www.heidelberg.com" HDM:Cluster="AllTrappers" HDM:ToolType="Trapper" HDM:ProcessRequired="false">
+      <NodeInfo Route="pt://SCHMIDTA-PC/Trapper/1.0/Trap1">
+        <HDM:ClusterSetting Route="pt://SCHMIDTA-PC/Trapper/1.0/Trap1"/>
+      </NodeInfo>
+      <ResourcePool/>
+      <ResourceLinkPool>
+        <RunListLink rRef="Linkf72:-7fd9" Usage="Input" xmlns:HDM="http://www.heidelberg.com" HDM:ElementKind="Page">
+          <Part/>
+        </RunListLink>
+        <RunListLink rRef="Linkf72:-7fd5" Usage="Output" xmlns:HDM="http://www.heidelberg.com" HDM:ElementKind="Page">
+          <Part/>
+        </RunListLink>
+        <TrappingDetailsLink rRef="Linkf72:-7fd4" Usage="Input">
+          <Part/>
+        </TrappingDetailsLink>
+        <ColorantControlLink rRef="Linkf72:-7fd2" Usage="Input">
+          <Part/>
+        </ColorantControlLink>
+      </ResourceLinkPool>
+      <AuditPool/>
+    </JDF>
+  </JDF>
+</JDF>
