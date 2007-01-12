@@ -95,6 +95,7 @@ import org.cip4.jdflib.core.MISFinTest;
 import org.cip4.jdflib.core.NColorTest;
 import org.cip4.jdflib.core.VElementTest;
 import org.cip4.jdflib.core.VStringTest;
+import org.cip4.jdflib.core.VarnishTest;
 import org.cip4.jdflib.core.WebTest;
 import org.cip4.jdflib.core.XMLDocTest;
 import org.cip4.jdflib.datatypes.JDFAttributeMapTest;
@@ -195,6 +196,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(KElementTest.class);
         suite.addTestSuite(MISFinTest.class);
         suite.addTestSuite(NColorTest.class);
+        suite.addTestSuite(VarnishTest.class);
         suite.addTestSuite(VElementTest.class);
         suite.addTestSuite(VStringTest.class);
         suite.addTestSuite(WebTest.class);
