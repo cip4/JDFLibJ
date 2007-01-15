@@ -13,7 +13,7 @@
 	<target name="-init" description="Initializes the build. This target is automatically run before building.">
 		<echo>Initializing. Using build settings...</echo>
 		<!-- Sets properties -->
-		<echo>Make sure you have a directory named 'lib' containing the JAR files of the library dependencies (see Readme.txt).</echo>
+		<echo>Make sure you have a directory named 'lib' containing the JAR files of the library dependencies (see lib/DEPENDENCIES.txt).</echo>
 		<property name="lib.dir" value="./lib" />
 		<tstamp />
 		<property file="version.properties"/>

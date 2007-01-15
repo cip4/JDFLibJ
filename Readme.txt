@@ -1,3 +1,9 @@
+How to find in JIRA the JDFLib-J issues which were fixed in a specific version ?
+
+1. http://www.cip4.org/jira/  (no account needed)
+2. on the left side look for section "Project: JDFLib-J" and click on "Filter Issues: All"
+3. click on column header "Fix Version/s" to get a list sorted by version number
+
 ___________________________________________________________
 
 Label JDFLIBJ_2.1.2BLD033 (xx.03.2006)
