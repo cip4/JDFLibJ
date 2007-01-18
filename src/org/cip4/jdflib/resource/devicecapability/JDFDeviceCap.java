@@ -88,6 +88,8 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDeviceCap;
 import org.cip4.jdflib.auto.JDFAutoDevCaps.EnumContext;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
@@ -147,6 +149,28 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
             String myLocalName)
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+    }
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[13];
+    static
+    {
+        elemInfoTable[0] = new ElemInfoTable(ElementName.BOOLEANSTATE, 0x33333111);
+        elemInfoTable[1] = new ElemInfoTable(ElementName.DATETIMESTATE, 0x33333111);
+        elemInfoTable[2] = new ElemInfoTable(ElementName.DURATIONSTATE, 0x33333111);
+        elemInfoTable[3] = new ElemInfoTable(ElementName.ENUMERATIONSTATE, 0x33333111);
+        elemInfoTable[4] = new ElemInfoTable(ElementName.INTEGERSTATE, 0x33333111);
+        elemInfoTable[5] = new ElemInfoTable(ElementName.MATRIXSTATE, 0x33333111);
+        elemInfoTable[6] = new ElemInfoTable(ElementName.NAMESTATE, 0x33333111);
+        elemInfoTable[7] = new ElemInfoTable(ElementName.NUMBERSTATE, 0x33333111);
+        elemInfoTable[8] = new ElemInfoTable(ElementName.PDFPATHSTATE, 0x33333111);
+        elemInfoTable[9] = new ElemInfoTable(ElementName.RECTANGLESTATE, 0x33333111);
+        elemInfoTable[10] = new ElemInfoTable(ElementName.SHAPESTATE, 0x33333111);
+        elemInfoTable[11] = new ElemInfoTable(ElementName.STRINGSTATE, 0x33333111);
+        elemInfoTable[12] = new ElemInfoTable(ElementName.XYPAIRSTATE, 0x33333111);
+    }
+    
+    protected ElementInfo getTheElementInfo()
+    {
+        return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
     
     //**************************************** Methods *********************************************

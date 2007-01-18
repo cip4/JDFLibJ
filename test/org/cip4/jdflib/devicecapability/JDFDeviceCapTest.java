@@ -387,18 +387,9 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 
     ///////////////////////////////////////////////////////
 
-    public void testGetExecutableJDF ()
+    public void testGetExecutableJDF () throws Exception
     {
-        // String docTest = "NodeTest_1BadNode_New";
-        // String docDevCap = "DevCaps_test_Neg";
-
-        // String docTest = "p5541";
-        // String docDevCap = "p551";
-        // String docDevCap = "p549";
-
-        // String docTest = "Bad_MISPrepress_ICS_Minimal";
-        // String docDevCap = "DevCaps_Bad_MISPrepress_ICS_Minimal";
-
+ 
         String docTest = "MISPrepress_ICS_Minimal.jdf";
         String docDevCap = "DevCaps_Product_MISPrepress_ICS_Minimal.jdf";
 
@@ -406,63 +397,43 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
         JDFParser p = new JDFParser();
         JDFDoc jmfDevCap = p.parseFile(sm_dirTestData + docDevCap);
         JDFJMF jmfRoot = null;
-        assertTrue("Parse of file " + docDevCap + " failed", jmfDevCap != null);
-        if (jmfDevCap != null)
+        assertNotNull("Parse of file " + docDevCap + " failed", jmfDevCap);
+        jmfRoot = jmfDevCap.getJMFRoot();
+        assertNotNull("jmfRoot == null Can't start Test", jmfRoot);
+        XMLDoc docOutDevCap = jmfRoot.getOwnerDocument_KElement();
+        docOutDevCap.write2File(sm_dirTestDataTemp + "_" + docDevCap, 0, true);
+
+        JDFDoc jdfTest = p.parseFile(sm_dirTestData + docTest);
+        JDFNode jdfRoot = jdfTest.getJDFRoot();
+        assertTrue("jdfRoot is null", jdfRoot != null);
+        XMLDoc docOutTest = jdfRoot.getOwnerDocument_KElement();
+        JDFDeviceCap deviceCap = (JDFDeviceCap) jmfRoot.getChildByTagName("DeviceCap", null, 0,
+                null, false, true);
+
+        EnumFitsValue testlists = EnumFitsValue.Allowed;
+        EnumValidationLevel level = KElement.EnumValidationLevel.Complete;
+        VElement vExecNodes = deviceCap.getExecutableJDF(jdfRoot, testlists, level);
+        if (vExecNodes==null)
         {
-            jmfRoot = jmfDevCap.getJMFRoot();
-            assertTrue("jmfRoot == null Can't start Test", jmfRoot != null);
-            if (jmfRoot != null)
+            System.out.println(docDevCap + ": found No matching JDFNode");
+        }
+        else
+        {
+            for (int n = 0; n < vExecNodes.size(); n++)
             {
-                XMLDoc docOutDevCap = jmfRoot.getOwnerDocument_KElement();
-                docOutDevCap.write2File(sm_dirTestDataTemp + "_" + docDevCap, 0, true);
+                // XMLDoc docExecNodes = ((JDFNode)
+                // vExecNodes.elementAt(n)).getOwnerDocument_KElement();
+                // docExecNodes.write2File ("temp\\" + "_" + docTest +"_ExecNode" + (n+1) +
+                // ".jdf", 0);
+                System.out.println(vExecNodes.elementAt(n));
+
             }
         }
 
-        JDFParser p2 = new JDFParser();
-        JDFDoc jdfTest = p2.parseFile(sm_dirTestData + docTest);
-        JDFNode jdfRoot = null;
-        assertTrue("Parse of file " + sm_dirTestData + docTest + " failed", jdfTest != null);
-        if (jdfTest != null)
+        XMLDoc testResult = deviceCap.getBadJDFInfo(jdfRoot, testlists, level);
+        if (testResult != null)
         {
-            jdfRoot = jdfTest.getJDFRoot();
-            assertTrue("jdfRoot is null", jdfRoot != null);
-            if (jdfRoot != null)
-            {
-                XMLDoc docOutTest = jdfRoot.getOwnerDocument_KElement();
-                docOutTest.write2File(sm_dirTestDataTemp + "_" + docTest, 0, true);
-            }
-        }
-        if (jdfRoot != null && jmfRoot != null)
-        {
-
-            JDFDeviceCap deviceCap = (JDFDeviceCap) jmfRoot.getChildByTagName("DeviceCap", "", 0,
-                    null, false, true);
-
-            EnumFitsValue testlists = EnumFitsValue.Allowed;
-            EnumValidationLevel level = KElement.EnumValidationLevel.Complete;
-            VElement vExecNodes = deviceCap.getExecutableJDF(jdfRoot, testlists, level);
-            if (vExecNodes==null)
-            {
-                System.out.println(docDevCap + ": found No matching JDFNode");
-            }
-            else
-            {
-                for (int n = 0; n < vExecNodes.size(); n++)
-                {
-                    // XMLDoc docExecNodes = ((JDFNode)
-                    // vExecNodes.elementAt(n)).getOwnerDocument_KElement();
-                    // docExecNodes.write2File ("temp\\" + "_" + docTest +"_ExecNode" + (n+1) +
-                    // ".jdf", 0);
-                    System.out.println(vExecNodes.elementAt(n));
-
-                }
-            }
-
-            XMLDoc testResult = deviceCap.getBadJDFInfo(jdfRoot, testlists, level);
-            if (testResult != null)
-            {
-                testResult.write2File(sm_dirTestDataTemp + "_BugReport.xml", 0, true);
-            }
+            testResult.write2File(sm_dirTestDataTemp + "_BugReport.xml", 0, true);
         }
     }
 

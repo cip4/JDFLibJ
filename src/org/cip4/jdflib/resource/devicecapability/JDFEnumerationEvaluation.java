@@ -80,17 +80,7 @@
 
 package org.cip4.jdflib.resource.devicecapability;
 
-import java.util.Vector;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
-import org.cip4.jdflib.core.AtrInfoTable;
-import org.cip4.jdflib.core.AttributeInfo;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFEnumerationEvaluation extends JDFNameEvaluation

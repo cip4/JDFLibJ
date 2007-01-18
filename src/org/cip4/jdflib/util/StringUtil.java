@@ -620,6 +620,8 @@ public class StringUtil
      */    
     public static boolean isNumber(String str)
     {
+        if(str==null)
+            return false;
         String dStr = str.trim();
         if (dStr.length()==0)
             return false;
@@ -1029,6 +1031,8 @@ public class StringUtil
      */
     public static boolean isInteger(String str)
     {
+        if(str==null)
+            return false;
         String intStr = str.trim();
         if (intStr.length()==0)
             return false;
