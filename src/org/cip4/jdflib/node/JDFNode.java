@@ -2387,12 +2387,15 @@ public class JDFNode extends JDFElement
             resourceAudit.addNewOldLink(true, r, usage);
             resourceAudit.addNewOldLink(false,toReplace,usage);
             VElement vRL=getResourceLinkPool().getInOutLinks(usage,true,null,null);
-            for(int i=0;i<vRL.size();i++){
-                JDFResourceLink l=(JDFResourceLink) vRL.elementAt(i);
-                if(l.getTarget()==toReplace){
-                    l.deleteNode();
-                }
-            }           
+            if (vRL != null)
+            {
+                for(int i=0;i<vRL.size();i++){
+                    JDFResourceLink l=(JDFResourceLink) vRL.elementAt(i);
+                    if(l.getTarget()==toReplace){
+                        l.deleteNode();
+                    }
+                } 
+            }
         }    
         return r;
     }
@@ -2701,9 +2704,9 @@ public class JDFNode extends JDFElement
         final JDFResourceLinkPool rlp = getResourceLinkPool();
 
         // get either all input or output resources, depending on bPre
-        final Vector vLoc = rlp==null ? null : rlp.getInOutLinks(bPre?EnumUsage.Input:EnumUsage.Output, false, null,null);
+        final Vector vLoc = (rlp == null) ? null : rlp.getInOutLinks(bPre?EnumUsage.Input:EnumUsage.Output, false, null,null);
 
-        final int size = vLoc==null ? 0 : vLoc.size();
+        final int size = (vLoc == null) ? 0 : vLoc.size();
         for (int i = 0; i < size; i++)
         {
             final JDFResource r = (JDFResource) vLoc.elementAt(i);
@@ -2752,13 +2755,16 @@ public class JDFNode extends JDFElement
         if((status!=EnumNodeStatus.Waiting)&&(status!=EnumNodeStatus.Ready))
             return false;
 
-        for (int i = 0; i < v.size(); i++)
+        if (v != null)
         {
-            final JDFResourceLink rl = (JDFResourceLink) v.elementAt(i);
-
-            if (rl != null && !rl.isExecutable(partMap, bCheckChildren))
+            for (int i = 0; i < v.size(); i++)
             {
-                return false;
+                final JDFResourceLink rl = (JDFResourceLink) v.elementAt(i);
+    
+                if (rl != null && !rl.isExecutable(partMap, bCheckChildren))
+                {
+                    return false;
+                }
             }
         }
 
@@ -3296,12 +3302,15 @@ public class JDFNode extends JDFElement
         if (linkPool != null)
         {
             final VElement vLinks = linkPool.getPoolChildren(null, null, null);
-            for (int i = vLinks.size() - 1; i >= 0; i--)
+            if (vLinks != null)
             {
-                final JDFResourceLink rl = (JDFResourceLink) vLinks.elementAt(i);
-                if(!isValidLink(level, rl, foundSingleLinks, foundSingleLinks2))
+                for (int i = vLinks.size() - 1; i >= 0; i--)
                 {
-                    vElem.appendUnique(rl.getLinkedResourceName());
+                    final JDFResourceLink rl = (JDFResourceLink) vLinks.elementAt(i);
+                    if(!isValidLink(level, rl, foundSingleLinks, foundSingleLinks2))
+                    {
+                        vElem.appendUnique(rl.getLinkedResourceName());
+                    }
                 }
             }
         }
@@ -3321,17 +3330,16 @@ public class JDFNode extends JDFElement
     public void upDateStatus()
     {
         final JDFResourceLinkPool resourceLinkPool = getResourceLinkPool();
-        if(resourceLinkPool==null)
+        if (resourceLinkPool == null)
             return;
 
         final VElement vOut = resourceLinkPool.getInOutLinks(EnumUsage.Output, false, null,null);
-        boolean bReady = true;
-
-        if (vOut.isEmpty())
+        if (vOut == null || vOut.isEmpty())
         {
             return;
         }
 
+        boolean bReady = true;
         for (int i = 0; i < vOut.size(); i++)
         {
             final JDFResource g = (JDFResource) vOut.elementAt(i);
@@ -3703,17 +3711,20 @@ public class JDFNode extends JDFElement
         // get any possible links
         final VElement v = p.getInOutLinks(usage, true, null,null);
 
-        // is it the right one?
-        final int vSize = v.size();
-        for (int i = 0; i < vSize; i++)
+        if (v != null)
         {
-            final JDFResourceLink resLink = (JDFResourceLink) v.elementAt(i);
-
-            if (resLink != null && 
-                    resLink.getrRef().equals(r.getID()) && 
-                    resLink.getNodeName().equals(r.getLinkString()))
+            // is it the right one?
+            final int vSize = v.size();
+            for (int i = 0; i < vSize; i++)
             {
-                return resLink;
+                final JDFResourceLink resLink = (JDFResourceLink) v.elementAt(i);
+    
+                if (resLink != null && 
+                        resLink.getrRef().equals(r.getID()) && 
+                        resLink.getNodeName().equals(r.getLinkString()))
+                {
+                    return resLink;
+                }
             }
         }
 
@@ -4591,7 +4602,7 @@ public class JDFNode extends JDFElement
         }
 
         final VString linkNames = linkNames();
-        if(linkNames==null)
+        if (linkNames == null)
         {
             return rlp.getInOutLinks(null, bLink, resName,null);
         }
@@ -4636,7 +4647,7 @@ public class JDFNode extends JDFElement
             else if (processUsage == EnumProcessUsage.AnyInput)
             {
                 vE = rlp.getInOutLinks(EnumUsage.Input, bLink, resName,null);
-                int vEsize = vE==null ? 0 : vE.size();
+                int vEsize = (vE==null) ? 0 : vE.size();
                 // 170205 RP remove internal pipes from all inputs
                 // TODO ideally we would check if they are connected, but this is a sufficient 98% solution
                 if(bLink)
@@ -5416,7 +5427,11 @@ public class JDFNode extends JDFElement
         JDFResourceLinkPool rlp = getResourceLinkPool();
         if (rlp != null)
         {
-            i += rlp.getPoolChildren("NodeInfoLink", null, null).size();
+            final VElement poolChildren = rlp.getPoolChildren("NodeInfoLink", null, null);
+            if (poolChildren != null)
+            {
+                i += poolChildren.size();
+            }
         }
 
         return i;
@@ -5435,7 +5450,11 @@ public class JDFNode extends JDFElement
         JDFResourceLinkPool rlp = getResourceLinkPool();
         if (rlp != null)
         {
-            i += rlp.getPoolChildren("CustomerInfoLink", null, null).size();
+            final VElement poolChildren = rlp.getPoolChildren("CustomerInfoLink", null, null);
+            if (poolChildren != null)
+            {
+                i += poolChildren.size();
+            }
         }
 
         return i;
@@ -7196,14 +7215,17 @@ public class JDFNode extends JDFElement
         if (linkPool != null)
         {
             final VElement vInOutLinks = linkPool.getInOutLinks(isInput?EnumUsage.Input:EnumUsage.Output, true, null,null);
-            final int nInOutLinks = vInOutLinks.size();
-            for (int i = 0; i < nInOutLinks; i++)
+            if (vInOutLinks != null)
             {
-                final JDFResourceLink link = (JDFResourceLink) vInOutLinks.get(i);
-
-                vsLinks.add(link.getrRef());
+                final int nInOutLinks = vInOutLinks.size();
+                for (int i = 0; i < nInOutLinks; i++)
+                {
+                    final JDFResourceLink link = (JDFResourceLink) vInOutLinks.get(i);
+                    vsLinks.add(link.getrRef());
+                }
             }
         }
+
         return vsLinks;
     }
     
@@ -7503,10 +7525,10 @@ public class JDFNode extends JDFElement
             VElement vRes = null;
             JDFResourceLinkPool rp=getResourceLinkPool();
             if(rp!=null)
-                vRes=rp.getInOutLinks(EnumUsage.Output, false, null,null);
+                vRes = rp.getInOutLinks(EnumUsage.Output, false, null,null);
 
             // get heuristic list of partidkeys from the output
-            if(vRes!=null && vRes.size() > 0)
+            if (vRes != null && vRes.size() > 0)
             {
                 JDFResource r       = (JDFResource)vRes.elementAt(0);
                 JDFResource resRoot = r.getResourceRoot();

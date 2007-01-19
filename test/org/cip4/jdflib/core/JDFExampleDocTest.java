@@ -564,18 +564,22 @@ public class JDFExampleDocTest extends JDFTestCaseBase
         auditPool.setPhase(JDFElement.EnumNodeStatus.InProgress, null,null);
         auditPool.setPhase(JDFElement.EnumNodeStatus.Cleanup, null,null);
         assertEquals(auditPool.getPoolChildren("PhaseTime",null).size(),3);
+
         // get the input runlist
-        JDFRunList rl = (JDFRunList) root.getResourceLinkPool().getInOutLinks(EnumUsage.Input, false, "RunList",null)
-        .elementAt(0);
-        
-        // pretend that cleanup modifies a resource and create a ResourceAudit
-        JDFResourceAudit resourceAudit = auditPool.addResourceAudit("");
-        resourceAudit.addNewOldLink(true, rl, EnumUsage.Input);
-        resourceAudit.setContentsModified(true);
-        auditPool.setPhase(JDFElement.EnumNodeStatus.Completed, null, null);
-        
-        /// fill the processrun
-        auditPool.addProcessRun(JDFElement.EnumNodeStatus.Completed, null, null);
+        final VElement inOutLinks = root.getResourceLinkPool().getInOutLinks(EnumUsage.Input, false, "RunList",null);
+        if (inOutLinks != null)
+        {
+            JDFRunList rl = (JDFRunList) inOutLinks.elementAt(0);
+            
+            // pretend that cleanup modifies a resource and create a ResourceAudit
+            JDFResourceAudit resourceAudit = auditPool.addResourceAudit("");
+            resourceAudit.addNewOldLink(true, rl, EnumUsage.Input);
+            resourceAudit.setContentsModified(true);
+            auditPool.setPhase(JDFElement.EnumNodeStatus.Completed, null, null);
+            
+            /// fill the processrun
+            auditPool.addProcessRun(JDFElement.EnumNodeStatus.Completed, null, null);
+        }
         
         
         return 0;
@@ -596,44 +600,47 @@ public class JDFExampleDocTest extends JDFTestCaseBase
         // set up the root process
         JDFNode root = (JDFNode) m_doc.getRoot();
         
-        // get the input runlist
-        JDFRunList rl = (JDFRunList)
-        root.getResourceLinkPool().getInOutLinks(EnumUsage.Input, false, "RunList",null).elementAt(0);
-        
-        //is the Runlist Valid?
-        boolean bValid = rl.isValid(KElement.EnumValidationLevel.Complete);
-        
-        // print out validity information
-        System.out.println("DoValid runlist is " + (bValid ? "" : "in") + "valid !");
-        
-        // cross check with an artificially invalidated runlist
-        rl.setAttribute("InvalidAttribute", "Something really Invalid", "");
-        
-        // recheck
-        bValid = rl.isValid(KElement.EnumValidationLevel.Complete);
-        
-        // print out new validity information
-        System.out.println("DoValid runlist is " + (bValid ? "" : "in") + "valid !");
-        System.out.println("the following attributes are inValid: ");
-        
-        // get the vector of invalid attributes
-        Vector vInvalidAttributes =
-            rl.getInvalidAttributes(
-                    KElement.EnumValidationLevel.Complete,
-                    true,
-                    9999999);
-        
-        // print out the details
-        for (int i = 0; i < vInvalidAttributes.size(); i++)
+        final VElement inOutLinks = root.getResourceLinkPool().getInOutLinks(EnumUsage.Input, false, "RunList",null);
+        if (inOutLinks != null)
         {
-            System.out.println(
-                    "key: "
-                    + vInvalidAttributes.elementAt(i)
-                    + " value: "
-                    + rl.getAttribute((String) vInvalidAttributes.elementAt(i), "", ""));
+            // get the input runlist
+            JDFRunList rl = (JDFRunList) inOutLinks.elementAt(0);
+            
+            //is the Runlist Valid?
+            boolean bValid = rl.isValid(KElement.EnumValidationLevel.Complete);
+            
+            // print out validity information
+            System.out.println("DoValid runlist is " + (bValid ? "" : "in") + "valid !");
+            
+            // cross check with an artificially invalidated runlist
+            rl.setAttribute("InvalidAttribute", "Something really Invalid", "");
+            
+            // recheck
+            bValid = rl.isValid(KElement.EnumValidationLevel.Complete);
+            
+            // print out new validity information
+            System.out.println("DoValid runlist is " + (bValid ? "" : "in") + "valid !");
+            System.out.println("the following attributes are inValid: ");
+            
+            // get the vector of invalid attributes
+            Vector vInvalidAttributes =
+                rl.getInvalidAttributes(
+                        KElement.EnumValidationLevel.Complete,
+                        true,
+                        9999999);
+            
+            // print out the details
+            for (int i = 0; i < vInvalidAttributes.size(); i++)
+            {
+                System.out.println(
+                        "key: "
+                        + vInvalidAttributes.elementAt(i)
+                        + " value: "
+                        + rl.getAttribute((String) vInvalidAttributes.elementAt(i), "", ""));
+            }
+            
+            System.out.println("end DoValid");
         }
-        
-        System.out.println("end DoValid");
         
         return 0;
     }

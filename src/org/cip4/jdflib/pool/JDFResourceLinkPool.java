@@ -217,12 +217,12 @@ public class JDFResourceLinkPool extends JDFPool
             JDFAttributeMap mResAtt,
             boolean bFollowRefs)
     {
-        final VElement v = getPoolChildren(null, mLinkAtt, null);
+        final VElement v  = getPoolChildren(null, mLinkAtt, null);
         final VElement vL = new VElement();
-        if(resName!=null && resName.endsWith(JDFConstants.LINK))
+        if (resName!=null && resName.endsWith(JDFConstants.LINK))
             resName=resName.substring(0,resName.length()-4); // remove link
         
-        final int size = v==null ? 0 : v.size();
+        final int size = (v==null) ? 0 : v.size();
         for (int i = 0; i < size; i++)
         {
             final JDFResourceLink l = (JDFResourceLink) v.elementAt(i);
@@ -258,7 +258,7 @@ public class JDFResourceLinkPool extends JDFPool
      */
     public VElement getInOutLinks(boolean bInOut, boolean bLink, String resName,String resProcUsage)
     {
-        return getInOutLinks(bInOut?EnumUsage.Input:EnumUsage.Output, bLink, resName,EnumProcessUsage.getEnum(resProcUsage));
+        return getInOutLinks(bInOut ? EnumUsage.Input : EnumUsage.Output, bLink, resName,EnumProcessUsage.getEnum(resProcUsage));
     }
     
     /**
@@ -280,7 +280,7 @@ public class JDFResourceLinkPool extends JDFPool
     		mA=new JDFAttributeMap(AttributeName.USAGE,usage.getName());
 
     	VElement v = getPoolChildren(null, mA, null);
-    	final int size = v==null ? 0 : v.size();
+    	final int size = (v==null) ? 0 : v.size();
     	for (int i = size - 1; i >= 0; i--)
     	{
     		final JDFResourceLink li = (JDFResourceLink) v.elementAt(i);
@@ -301,10 +301,12 @@ public class JDFResourceLinkPool extends JDFPool
     			}
     		}
     	}
+        
     	if (!bLink)
     	{
     		v = resourceVector(v, resName);
     	}
+        
     	return v;
     }
     
@@ -388,7 +390,7 @@ public class JDFResourceLinkPool extends JDFPool
         final VElement v = getInOutLinks(usage, true, null,processUsage);
         
         // is it the right one?
-        final int vSize = v.size();
+        final int vSize = (v == null) ? 0 : v.size();
         for (int i = 0; i < vSize; i++)
         {
             final JDFResourceLink resLink = (JDFResourceLink) v.elementAt(i);
@@ -525,47 +527,49 @@ public class JDFResourceLinkPool extends JDFPool
         else
         {
             final VElement links = getPoolChildren(null, null, null);
-            
-            for (int l = 0; l < links.size(); l++)
+            if (links != null)
             {
-                final JDFResourceLink link = (JDFResourceLink) links.elementAt(l);
-                final VJDFAttributeMap tempMap = link.getPartMapVector();
-                
-                for (int i = 0; i < tempMap.size(); i++)
+                for (int l = 0; l < links.size(); l++)
                 {
-                    final JDFAttributeMap mTmp = tempMap.elementAt(i);
-                    boolean bFound = false;
-                    boolean bReplace = false;
+                    final JDFResourceLink link = (JDFResourceLink) links.elementAt(l);
+                    final VJDFAttributeMap tempMap = link.getPartMapVector();
                     
-                    for (int j = vMap.size() - 1; j >= 0; j--)
+                    for (int i = 0; i < tempMap.size(); i++)
                     {
-                        // backwards because of potential erasing
-                        final JDFAttributeMap mAtt = vMap.elementAt(j);
+                        final JDFAttributeMap mTmp = tempMap.elementAt(i);
+                        boolean bFound = false;
+                        boolean bReplace = false;
                         
-                        if (!bReplace && mAtt.subMap(mTmp))
+                        for (int j = vMap.size() - 1; j >= 0; j--)
                         {
-                            bFound = true;
-                            break;
-                        }
-                        
-                        if (mTmp.subMap( mAtt))
-                        {
-                            if (bReplace)
+                            // backwards because of potential erasing
+                            final JDFAttributeMap mAtt = vMap.elementAt(j);
+                            
+                            if (!bReplace && mAtt.subMap(mTmp))
                             {
-                                vMap.setElementAt(mTmp, j);
-                            }
-                            else
-                            { // already replaced one, clear all other matches
-                                vMap.clear();
+                                bFound = true;
+                                break;
                             }
                             
-                            bReplace = true;
+                            if (mTmp.subMap( mAtt))
+                            {
+                                if (bReplace)
+                                {
+                                    vMap.setElementAt(mTmp, j);
+                                }
+                                else
+                                { // already replaced one, clear all other matches
+                                    vMap.clear();
+                                }
+                                
+                                bReplace = true;
+                            }
                         }
-                    }
-                    
-                    if (!bFound)
-                    {
-                        vMap.add(mTmp);
+                        
+                        if (!bFound)
+                        {
+                            vMap.add(mTmp);
+                        }
                     }
                 }
             }
@@ -583,17 +587,19 @@ public class JDFResourceLinkPool extends JDFPool
     {
         final Vector vs = new Vector();
         final VElement links = getPoolChildren(null, null, null);
-        
-        for (int i = 0; i < links.size(); i++)
+        if (links != null)
         {
-            final JDFResourceLink link = (JDFResourceLink) links.elementAt(i);
-            final VString keys = link.getLinkRoot().getPartIDKeys();
-            
-            for (int j = 0; j < keys.size(); j++)
+            for (int i = 0; i < links.size(); i++)
             {
-                if (!vs.contains(keys.elementAt(j)))
+                final JDFResourceLink link = (JDFResourceLink) links.elementAt(i);
+                final VString keys = link.getLinkRoot().getPartIDKeys();
+                
+                for (int j = 0; j < keys.size(); j++)
                 {
-                    vs.addElement(keys.elementAt(j));
+                    if (!vs.contains(keys.elementAt(j)))
+                    {
+                        vs.addElement(keys.elementAt(j));
+                    }
                 }
             }
         }
@@ -613,17 +619,19 @@ public class JDFResourceLinkPool extends JDFPool
     {
         final Vector vs = new Vector();
         final VElement links = getPoolChildren(null, null, null);
-        
-        for (int i = 0; i < links.size(); i++)
+        if (links != null)
         {
-            final JDFResourceLink link = (JDFResourceLink) links.elementAt(i);
-            final Vector keys = link.getLinkRoot().getPartValues(partType);
-            
-            for (int j = 0; j < keys.size(); j++)
+            for (int i = 0; i < links.size(); i++)
             {
-                if (!vs.contains(keys.elementAt(j)))
+                final JDFResourceLink link = (JDFResourceLink) links.elementAt(i);
+                final Vector keys = link.getLinkRoot().getPartValues(partType);
+                
+                for (int j = 0; j < keys.size(); j++)
                 {
-                    vs.addElement(keys.elementAt(j));
+                    if (!vs.contains(keys.elementAt(j)))
+                    {
+                        vs.addElement(keys.elementAt(j));
+                    }
                 }
             }
         }
@@ -674,7 +682,7 @@ public class JDFResourceLinkPool extends JDFPool
             String nameSpaceURI)
     {
         final VElement v = getPoolChildren(strName, mAttrib, nameSpaceURI);
-        final int size = v==null ? 0 : v.size();
+        final int size = (v==null) ? 0 : v.size();
         if (i < 0)
         {
             i = size + i;
@@ -683,6 +691,7 @@ public class JDFResourceLinkPool extends JDFPool
                 return null;
             }
         }
+        
         if (size <= i)
         {
             return null;
@@ -717,10 +726,10 @@ public class JDFResourceLinkPool extends JDFPool
     public HashSet getAllRefs(HashSet vDoneRefs, boolean bRecurse)
     {
         VElement vResourceLinks = getPoolChildren(null, null, null);
-        final int size = vResourceLinks.size();
-        for(int i = 0;i < size; i++)
+        final int size = (vResourceLinks == null) ? 0 : vResourceLinks.size();
+        for (int i = 0; i < size; i++)
         {
-            JDFResourceLink rl = (JDFResourceLink)vResourceLinks.elementAt(i);
+            JDFResourceLink rl = (JDFResourceLink) vResourceLinks.elementAt(i);
             if(!vDoneRefs.contains(rl))
             {
                 vDoneRefs.add(rl);
@@ -734,8 +743,8 @@ public class JDFResourceLinkPool extends JDFPool
                 }
             }
         }
-        return vDoneRefs;
         
+        return vDoneRefs;
     }
     
 }

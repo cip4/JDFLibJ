@@ -713,26 +713,28 @@ public class JDFNodeTest extends JDFTestCaseBase
         final JDFResourceLinkPool linkPool = nodeProc.getResourceLinkPool ();
 
         final VElement vRunListLinks = linkPool.getPoolChildren("RunListLink", null, null);
-
-        JDFResourceLink link = (JDFResourceLink) vRunListLinks.get (0);
-
-        JDFResource res = link.getLinkRoot ();
-
-        VJDFAttributeMap vamExec = nodeProc.getExecutablePartitions (link, res, JDFResource.EnumResStatus.Draft);
-
-        assertTrue ("Size of vamExec must be 2", vamExec.size() == 2);
-
-        JDFAttributeMap am0 = vamExec.elementAt (0);
-
-        assertTrue ("Size of vamExec[0] must be 1", am0.size() == 1);
-        assertTrue (am0.containsKey   ("Run"));
-        assertTrue (am0.containsValue ("Chf06181149500001"));
-
-        JDFAttributeMap am1 = vamExec.elementAt (1);
-
-        assertTrue ("Size of vamExec[1] must be 1", am1.size() == 1);
-        assertTrue (am1.containsKey   ("Run"));
-        assertTrue (am1.containsValue ("Chf06181154470000"));
+        if (vRunListLinks != null)
+        {
+            JDFResourceLink link = (JDFResourceLink) vRunListLinks.get (0);
+    
+            JDFResource res = link.getLinkRoot ();
+    
+            VJDFAttributeMap vamExec = nodeProc.getExecutablePartitions (link, res, JDFResource.EnumResStatus.Draft);
+    
+            assertTrue ("Size of vamExec must be 2", vamExec.size() == 2);
+    
+            JDFAttributeMap am0 = vamExec.elementAt (0);
+    
+            assertTrue ("Size of vamExec[0] must be 1", am0.size() == 1);
+            assertTrue (am0.containsKey   ("Run"));
+            assertTrue (am0.containsValue ("Chf06181149500001"));
+    
+            JDFAttributeMap am1 = vamExec.elementAt (1);
+    
+            assertTrue ("Size of vamExec[1] must be 1", am1.size() == 1);
+            assertTrue (am1.containsKey   ("Run"));
+            assertTrue (am1.containsValue ("Chf06181154470000"));
+        }
     }
 
     /**
@@ -755,24 +757,26 @@ public class JDFNodeTest extends JDFTestCaseBase
         final JDFResourceLinkPool linkPool = nodeProc.getResourceLinkPool ();
 
         final VElement vRunListLinks = linkPool.getPoolChildren("RunListLink", null, null);
-
-        JDFResourceLink link = (JDFResourceLink) vRunListLinks.get (0);
-
-        JDFResource res = link.getLinkRoot ();
-
-        VJDFAttributeMap vamExec = nodeProc.getExecutablePartitions (link, res, JDFResource.EnumResStatus.Draft);
-
-        assertTrue ("Size of vamExec must be 2", vamExec.size() == 2);
-
-        JDFAttributeMap am0 = vamExec.elementAt (0);
-
-        assertTrue ("Size of vamExec[0] must be 1", am0.size() == 1);
-        assertTrue (am0.containsKey   ("Run"));
-        assertTrue (am0.containsValue ("Run93379_000255"));
-
-        JDFAttributeMap am1 = vamExec.elementAt (1);
-
-        assertTrue ("Size of vamExec[1] must be 0", am1.size() == 0);
+        if (vRunListLinks != null)
+        {
+            JDFResourceLink link = (JDFResourceLink) vRunListLinks.get (0);
+    
+            JDFResource res = link.getLinkRoot ();
+    
+            VJDFAttributeMap vamExec = nodeProc.getExecutablePartitions (link, res, JDFResource.EnumResStatus.Draft);
+    
+            assertTrue ("Size of vamExec must be 2", vamExec.size() == 2);
+    
+            JDFAttributeMap am0 = vamExec.elementAt (0);
+    
+            assertTrue ("Size of vamExec[0] must be 1", am0.size() == 1);
+            assertTrue (am0.containsKey   ("Run"));
+            assertTrue (am0.containsValue ("Run93379_000255"));
+    
+            JDFAttributeMap am1 = vamExec.elementAt (1);
+    
+            assertTrue ("Size of vamExec[1] must be 0", am1.size() == 0);
+        }
     }
 
 

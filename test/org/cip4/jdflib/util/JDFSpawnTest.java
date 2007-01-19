@@ -385,10 +385,12 @@ public class JDFSpawnTest extends JDFTestCaseBase
             }
             JDFNode mergedNode=new JDFMerge(n).mergeJDF(spawnedNode, "merged", JDFNode.EnumCleanUpMerge.None, EnumAmountMerge.UpdateLink);
             xmRL=mergedNode.getMatchingLink(ElementName.EXPOSEDMEDIA,EnumProcessUsage.AnyOutput,0);  
-            assertEquals("no spurious ni added",mergedNode.getResourceLinkPool().getPoolChildren("NodeInfoLink", null, null).size(), 1);
+            final VElement poolChildren = mergedNode.getResourceLinkPool().getPoolChildren("NodeInfoLink", null, null);
+            assertNotNull("poolChildren", poolChildren);
+            assertEquals("no spurious ni added",poolChildren.size(), 1);
             assertEquals("Comment size",mergedNode.getChildElementVector(ElementName.COMMENT, null, null, true, 99,false).size(),3);
             assertEquals("merged amount ok",xmRL.getAmount(map),40.0,0.);
-             assertEquals("did not overwrite rl attribute",xmRL.getAttribute("foo:bar","www.foobar.com",null),"a");
+            assertEquals("did not overwrite rl attribute",xmRL.getAttribute("foo:bar","www.foobar.com",null),"a");
             assertTrue(xmRL.hasAttribute(AttributeName.RREF));
             
             JDFExposedMedia xm=(JDFExposedMedia) n.getMatchingResource(ElementName.EXPOSEDMEDIA,EnumProcessUsage.AnyOutput,null,0);

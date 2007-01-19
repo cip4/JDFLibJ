@@ -1,6 +1,22 @@
 
 ___________________________________________________________
 
+Label JDFLIBJ_2.1.2BLD391 (18.01.2007)
+
+
+Bug fixes due to API change in Build 390 :	
+	JDFResourceLinkPool.getPoolChildren and JDFResourceLinkPool.getInOutLinks can return null
+
+Changed files:
+ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD391) && !lbtype(JDFLIBJ_2.1.3BLD390)}" -print
+
+.\jdflib\node\JDFNode.java@@\main\235
+.\jdflib\pool\JDFResourceLinkPool.java@@\main\78
+.\jdflib\resource\devicecapability\JDFDevCaps.java@@\main\29
+.\jdflib\util\JDFMerge.java@@\main\8
+
+___________________________________________________________
+
 Label JDFLIBJ_2.1.2BLD390 (15.01.2007)
 
 
@@ -11,7 +27,7 @@ Bug 		JDFJ-83 	Device capabilities test does not always look for attributes in l
 
 
 Changed files:
-ct find . -version "{version(main\LATEST) && !lbtype(JDFLIBJ_2.1.3BLD381)}" -print
+ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD390) && !lbtype(JDFLIBJ_2.1.3BLD381)}" -print
 
 .\src\org\cip4\jdflib\auto\JDFAutoDensityMeasuringField.java@@\main\67
 .\src\org\cip4\jdflib\auto\JDFAutoScreenSelector.java@@\main\64

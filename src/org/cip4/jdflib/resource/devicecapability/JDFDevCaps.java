@@ -503,10 +503,10 @@ public class JDFDevCaps extends JDFAutoDevCaps
                 boolean bLink=context.equals(EnumContext.Link);
                 VElement vElemLinks = resLinkPool.getInOutLinks(linkUsage, true, nam,null); 
 
-                final int linkSize = vElemLinks==null ? -1 : vElemLinks.size()-1;
-                for(int j=linkSize;j>=0;j--)
+                final int linkSize = (vElemLinks==null) ? -1 : vElemLinks.size()-1;
+                for (int j=linkSize; j>=0; j--)
                 {
-                    JDFResourceLink rl=(JDFResourceLink) vElemLinks.elementAt(j);
+                    JDFResourceLink rl = (JDFResourceLink) vElemLinks.elementAt(j);
                     final String rlProcessUsage = rl.getProcessUsage();
                     if(!rlProcessUsage.equals(procUsage)){
                         vElemLinks.remove(j);

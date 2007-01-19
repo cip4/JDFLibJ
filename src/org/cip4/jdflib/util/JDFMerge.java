@@ -515,39 +515,45 @@ public class JDFMerge
         if (parts!=null && !parts.isEmpty())
         {
             final JDFResourceLinkPool overWriteRLP = overWriteNode.getResourceLinkPool();
-            final JDFResourceLinkPool toMergeRLP = resourceLinkPool;
+            final JDFResourceLinkPool toMergeRLP   = resourceLinkPool;
             final VElement overWriteLinks = overWriteRLP.getPoolChildren(null, null, null);
-            final VElement toMergeLinks = toMergeRLP.getPoolChildren(null, null, null);
+            final VElement toMergeLinks   = toMergeRLP.getPoolChildren(null, null, null);
 
-            for (int rl = 0; rl < toMergeLinks.size(); rl++)
+            if (toMergeLinks != null && overWriteLinks != null)
             {
-                JDFResourceLink overWriteLink = null;
-                final JDFResourceLink toMergeLink = (JDFResourceLink)toMergeLinks.elementAt(rl);
-                final String rRef = toMergeLink.getAttribute(AttributeName.RREF);
-                for (int k = 0; k < overWriteLinks.size(); k++)
+                for (int rl = 0; rl < toMergeLinks.size(); rl++)
                 {
-                    if (((JDFResourceLink)overWriteLinks.elementAt(k)).getAttribute(AttributeName.RREF).equals(rRef))
+                    JDFResourceLink overWriteLink = null;
+                    final JDFResourceLink toMergeLink = 
+                                    (JDFResourceLink) toMergeLinks.elementAt(rl);
+                    final String rRef = toMergeLink.getAttribute(AttributeName.RREF);
+                    
+                    for (int k = 0; k < overWriteLinks.size(); k++)
                     {
-                        overWriteLink = (JDFResourceLink)overWriteLinks.elementAt(k);
-                        overWriteLinks.remove(overWriteLinks.elementAt(k));
-                        break;
+                        if (((JDFResourceLink) overWriteLinks.elementAt(k)).getAttribute(
+                                AttributeName.RREF).equals(rRef))
+                        {
+                            overWriteLink = (JDFResourceLink) overWriteLinks.elementAt(k);
+                            overWriteLinks.remove(overWriteLinks.elementAt(k));
+                            break;
+                        }
                     }
-                }
 
-
-                if (overWriteLink != null)
-                {
-                    if (toMergeLink.hasChildElement(ElementName.PART, null))
+                    if (overWriteLink != null)
                     {
-                        fixPartAmountAttributes(parts, overWriteLink, toMergeLink);
-                    }
-                    else
-                    {
-                        // blast the spawned link into the overWritePool completely
-                        overWriteLink.replaceElement(toMergeLink);
+                        if (toMergeLink.hasChildElement(ElementName.PART, null))
+                        {
+                            fixPartAmountAttributes(parts, overWriteLink, toMergeLink);
+                        }
+                        else
+                        {
+                            // blast the spawned link into the overWritePool completely
+                            overWriteLink.replaceElement(toMergeLink);
+                        }
                     }
                 }
             }
+            
             toMergeRLP.deleteNode();
             toMerge.copyElement(overWriteRLP, null);
         }
@@ -628,12 +634,13 @@ public class JDFMerge
      */
     private static void expandLinkedResources(final JDFResourceLinkPool resourceLinkPool)
     {
-        if(resourceLinkPool!=null)
+        if (resourceLinkPool != null)
         {
-            final VElement links=resourceLinkPool.getPoolChildren(null, null, null);
-            final int size = links.size();
-            for(int i=0;i<size;i++){
-                JDFResourceLink rl=(JDFResourceLink) links.elementAt(i);
+            final VElement links = resourceLinkPool.getPoolChildren(null, null, null);
+            final int size = (links == null) ? 0 : links.size();
+            for (int i = 0; i < size; i++)
+            {
+                JDFResourceLink rl = (JDFResourceLink) links.elementAt(i);
                 rl.expandTarget(false);
             }
         }

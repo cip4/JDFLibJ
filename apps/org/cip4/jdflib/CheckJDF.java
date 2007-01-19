@@ -863,7 +863,7 @@ public class CheckJDF
              if (rlp!=null) 
              {  
                  final VElement vLinks = rlp.getPoolChildren(null, null, null);
-                 final int size2 = vLinks==null ? 0 : vLinks.size();
+                 final int size2 = (vLinks==null) ? 0 : vLinks.size();
                  for(j = size2 - 1; j >= 0; j--)
                  {
                      JDFResourceLink rl = (JDFResourceLink) vLinks.elementAt(j);
