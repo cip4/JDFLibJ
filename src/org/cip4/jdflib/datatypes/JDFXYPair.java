@@ -272,7 +272,7 @@ public class JDFXYPair extends JDFNumList
    */
    public boolean isGreaterOrEqual(JDFXYPair x)
    {
-       return (( getX()>=x.getX())&&(getY()>=x.getY())); 
+       return (equals(x) || ((getX()>=x.getX()) && (getY()>=x.getY())));
    }
 
    /**
@@ -283,7 +283,7 @@ public class JDFXYPair extends JDFNumList
    */
    public boolean isLessOrEqual(JDFXYPair x)
    {
-       return (( getX()<=x.getX())&&(getY()<=x.getY()));
+       return (equals(x) || ((getX()<=x.getX()) && (getY()<=x.getY())));
    }
     
    /**
@@ -294,7 +294,7 @@ public class JDFXYPair extends JDFNumList
    */
    public boolean isGreater(JDFXYPair x)
    {
-       return (!equals(x)&&(getX()>=x.getX())&&(getY()>=x.getY()));   
+       return (!isLessOrEqual(x));   
    }
 
    /**
@@ -305,6 +305,6 @@ public class JDFXYPair extends JDFNumList
    */
    public boolean isLess(JDFXYPair x)
    {
-       return (!equals(x)&&(getX()<=x.getX())&&(getY()<=x.getY()));
+       return (!isGreaterOrEqual(x));
    }
 }
