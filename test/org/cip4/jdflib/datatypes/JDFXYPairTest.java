@@ -24,6 +24,7 @@ public class JDFXYPairTest extends TestCase
         JDFNode n=doc.getJDFRoot();
         
         JDFXYPair xy = new JDFXYPair();
+        
         try
         {
             xy = new JDFXYPair("1 2");
@@ -55,5 +56,29 @@ public class JDFXYPairTest extends TestCase
         {
             assertTrue("exception 123 caught", true);
         }
+    }
+
+    public final void testIsGreaterOrEqual()
+    {
+        JDFXYPair xy = new JDFXYPair();
+        
+        JDFXYPair ab = new JDFXYPair(1.0, 2.0);
+        xy = new JDFXYPair(1.0+JDFBaseDataTypes.EPSILON/2.0, 2.0+JDFBaseDataTypes.EPSILON/2.0);
+        
+        assertTrue(ab.equals(xy));
+        assertTrue(ab.isLessOrEqual(xy));
+        assertTrue(ab.isGreaterOrEqual(xy));
+    }
+
+    public final void testIsLessOrEqual()
+    {
+        JDFXYPair xy = new JDFXYPair();
+        
+        JDFXYPair ab = new JDFXYPair(1.0, 2.0);
+        xy = new JDFXYPair(1.0-JDFBaseDataTypes.EPSILON/2.0, 2.0-JDFBaseDataTypes.EPSILON/2.0);
+        
+        assertTrue(ab.equals(xy));
+        assertTrue(ab.isLessOrEqual(xy));
+        assertTrue(ab.isGreaterOrEqual(xy));
     }
 }
