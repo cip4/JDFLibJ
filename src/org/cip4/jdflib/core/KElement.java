@@ -5708,9 +5708,23 @@ public class KElement extends ElementNSImpl
     {
           String attVal=getAttribute(attName,attNS,null);
           if(attVal!=null)
+          {
+              if(preFill.contains(attVal))
+                  return; // been here already: break
               preFill.add(attVal);
-          VElement v=getChildElementVector(null,null,null,true,0,false);
-          final int siz=v.size();
+          }
+          
+          // get all subnodes, INCLUDING partition leaves
+          VElement v=getChildElementVector_KElement(null,null,null,true,0);
+          int siz=v.size();
+          for(int i=0;i<siz;i++)
+          {
+              v.item(i).fillHashSet(attName,attNS,preFill);
+          }
+          
+          // also get all lower level parent partition refs
+          v=getChildElementVector(null,null,null,true,0,false);
+          siz=v.size();
           for(int i=0;i<siz;i++)
           {
               v.item(i).fillHashSet(attName,attNS,preFill);

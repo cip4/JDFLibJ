@@ -111,6 +111,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFContact;
+import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.w3c.dom.Node;
@@ -188,37 +189,51 @@ public class JDFSpawnTest extends JDFTestCaseBase
     {
         for(int i=0;i<2;i++)
         {
-            JDFDoc d=new JDFDoc("JDF");
-            JDFNode root=d.getJDFRoot();
-            root.setType(EnumType.ProcessGroup);
-            JDFNode cp=root.addJDFNode(EnumType.ConventionalPrinting);
-            JDFComponent comp=(JDFComponent) cp.addResource("Component", null, EnumUsage.Output, null, root, null, null);
-            JDFAttributeMap cMap=new JDFAttributeMap();
-            cMap.put(EnumPartIDKey.SignatureName, "Sig1");
-            cMap.put(EnumPartIDKey.SheetName, "S1");
-            comp.getCreatePartition(cMap, new VString("SignatureName SheetName"," "));
-            comp.getCreatePartition(cMap, null);
-            comp.setResStatus(EnumResStatus.Available, true);
+            for(int j=0;j<2;j++)
+            {
+                JDFDoc d=new JDFDoc("JDF");
+                JDFNode root=d.getJDFRoot();
+                root.setType(EnumType.ProcessGroup);
+                JDFNode cp=root.addJDFNode(EnumType.ConventionalPrinting);
+                JDFComponent comp=(JDFComponent) cp.addResource("Component", null, EnumUsage.Output, null, null, null, null);
+                JDFAttributeMap cMap=new JDFAttributeMap();
+                cMap.put(EnumPartIDKey.SignatureName, "Sig1");
+                cMap.put(EnumPartIDKey.SheetName, "S1");
+                comp.getCreatePartition(cMap, new VString("SignatureName SheetName"," "));
+                comp.getCreatePartition(cMap, null);
+                comp.setResStatus(EnumResStatus.Available, true);
 
-            cMap.put(EnumPartIDKey.Side, "Front");
-            VJDFAttributeMap v=new VJDFAttributeMap();
-            v.add(cMap);
-            VString vRW=new VString("Output",null);
+                cMap.put(EnumPartIDKey.Side, "Front");
+                VJDFAttributeMap v=new VJDFAttributeMap();
+                v.add(cMap);
+                VString vRW=new VString("Output",null);
 
-            JDFNodeInfo ni=cp.appendNodeInfo();
-            ni.getCreatePartition(cMap,new VString("SignatureName SheetName Side"," "));
-            JDFSpawn spawn=new JDFSpawn(cp);
-            if(i==0)
-                spawn.bFixResources=false;
-            JDFNode spawned=spawn.spawn(null, null, vRW, v, true, true, true, true);
+                JDFNodeInfo ni=cp.appendNodeInfo();
+                JDFNodeInfo ni2=(JDFNodeInfo)ni.getCreatePartition(cMap,new VString("SignatureName SheetName Side"," "));
+                JDFEmployee emp=ni2.appendEmployee();
+                emp.makeRootResource(null, null, true);
+                assertNull(root.getResourcePool());
+                if(j==1)
+                {
+                    root.moveElement(cp.getResourcePool(), null);
+                    assertNotNull(root.getResourcePool());
+                }
 
-            JDFComponent spCompOut=(JDFComponent) spawned.getMatchingLink("Component", EnumProcessUsage.AnyOutput, 0).getLinkRoot();
-            if(i==0)
-                assertNull("partition structure is zapped",spCompOut.getPartition(cMap, null));
-            else
-                assertNotNull("partition structure is notzapped",spCompOut.getPartition(cMap, null));
-            cMap.remove(EnumPartIDKey.Side);
-            assertNotNull("partition structure is zapped",spCompOut.getPartition(cMap, null));
+                JDFSpawn spawn=new JDFSpawn(cp);
+                if(i==0)
+                    spawn.bFixResources=false;
+                JDFNode spawned=spawn.spawn(null, null, vRW, v, true, true, true, true);
+
+                JDFComponent spCompOut=(JDFComponent) spawned.getMatchingLink("Component", EnumProcessUsage.AnyOutput, 0).getLinkRoot();
+                if(i==0)
+                    assertNull("partition structure is zapped",spCompOut.getPartition(cMap, null));
+                else
+                    assertNotNull("partition structure is notzapped",spCompOut.getPartition(cMap, null));
+                cMap.remove(EnumPartIDKey.Side);
+                assertNotNull("partition structure is zapped",spCompOut.getPartition(cMap, null));
+                
+                assertNotNull("The Employee that was referenced by a partition was correctly spawned",spawned.getResourcePool().getElement("Employee"));
+            }
         }
     }
 
