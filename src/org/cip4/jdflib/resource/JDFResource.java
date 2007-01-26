@@ -1865,6 +1865,8 @@ public class JDFResource extends JDFElement
         if(!isResourceRootRoot())
         {
             removeAttribute(AttributeName.STATUS);
+            if(!isResourceElement())
+                removeAttribute(AttributeName.CLASS);
         }
         else
         {
@@ -1882,10 +1884,10 @@ public class JDFResource extends JDFElement
                 }
             }
             else
-            {
-                
+            {                
                 if(version.getValue()<=EnumVersion.Version_1_2.getValue()){
-                    if(getPartUsage()==EnumPartUsage.Sparse){
+                    if(getPartUsage()==EnumPartUsage.Sparse)
+                    {
                         setPartUsage(EnumPartUsage.Implicit);
                     }
                 }
@@ -2383,8 +2385,7 @@ public class JDFResource extends JDFElement
      * @default getLeaves(false)
      */
     public VElement getLeaves(boolean bAll)
-    {
-        
+    {        
         // want possibly intermediate nodes, check the kids
         VElement vAllChildren = getChildElementVector_KElement(getNodeName(), null, null, true, 0);
         
@@ -2399,10 +2400,11 @@ public class JDFResource extends JDFElement
             // recurse parts tree and sum up the results
             if (bAll)
             {
-                vLeaves.appendUnique(this);
+                vLeaves.add(this);
             }
             
-            for (int i = 0; i < vAllChildren.size(); i++)
+            final int size = vAllChildren.size();
+            for (int i = 0; i < size; i++)
             {
                 final JDFResource pi = (JDFResource) vAllChildren.elementAt(i);
                 final VElement v = pi.getLeaves(bAll);
@@ -6794,7 +6796,8 @@ public class JDFResource extends JDFElement
             {
                 return false;
             }
-            final VElement v = getLeaves(false);
+ //           final VElement v = getLeaves(false);
+            final VElement v = getChildElementVector_KElement(getNodeName(), null, null, true, 0);
             for (int i = 0; i < v.size(); i++)
             {
                 if (!((JDFResource)v.elementAt(i)).isValid(level))

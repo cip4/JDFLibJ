@@ -102,8 +102,10 @@ import java.util.Map;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFDateTimeRangeList;
 import org.cip4.jdflib.datatypes.JDFDurationRangeList;
@@ -1150,10 +1152,12 @@ public class JDFElement extends KElement
         // replace all "~" with " ~ "
         JDFAttributeMap m=getAttributeMap();
         final Iterator it = m.getKeyIterator();
+        AttributeInfo ai=getTheAttributeInfo();
         while (it.hasNext())
         {
             String key = (String)it.next();
             String value = m.get(key);
+            
             if(value.indexOf(JDFConstants.TILDE)>=0){
                 try{
                     JDFNumberRangeList nrl=new JDFNumberRangeList(value);
@@ -1162,6 +1166,32 @@ public class JDFElement extends KElement
                     // do nothing
                 }catch (DataFormatException e) {
                     // do nothing
+                }
+            } 
+            if(bFixVersionIDFix && value.length()>0 && StringUtils.isNumeric(value.substring(0,1)))
+            {
+                EnumAttributeType atType=ai.getAttributeType(key);
+                if(atType!=null) 
+                {
+                    if(atType.equals(EnumAttributeType.ID) || atType.equals(EnumAttributeType.IDREF))
+                    {
+                        value="_"+value;
+                        setAttribute(key, value);
+                    }
+                    else if(atType.equals(EnumAttributeType.IDREFS))
+                    {
+                        VString vvalues=new VString(value," ");
+                        for(int i=0;i<vvalues.size();i++)
+                        {
+                            String s=vvalues.stringAt(i);
+                            if(s.length()>0 && StringUtils.isNumeric(s.substring(0,1)))
+                            {
+                                s="_"+s;
+                                vvalues.setElementAt(s, i);
+                            }
+                        }
+                        setAttribute(key, vvalues,null);
+                    }
                 }
             }
         }
@@ -2637,6 +2667,7 @@ public class JDFElement extends KElement
     
     private static int m_lStoreID = 0;
     private static boolean bIDDate=true;
+    private static boolean bFixVersionIDFix=false;
     
     /**
      * UniqueID - create a unique id with 12 digits<br>
@@ -4106,6 +4137,26 @@ public class JDFElement extends KElement
         if(path.startsWith("/"))
             return e==null || path.startsWith("//"); // must be root
         return true; // any location
+    }
+
+    /**
+     * @return the bFixVersionIDFix 
+     * if true then invalid, i.e. numeric ID, IDREF and IDREFS are prefixed with an '_'
+     * when calling fixVersion
+     */
+    public static boolean isFixVersionIDFix()
+    {
+        return bFixVersionIDFix;
+    }
+
+    /**
+     * @param fixVersionIDFix the bFixVersionIDFix to set
+     * if true then invalid, i.e. numeric ID, IDREF and IDREFS are prefixed with an '_'
+     * when calling fixVersion
+     */
+    public static void setFixVersionIDFix(boolean fixVersionIDFix)
+    {
+        bFixVersionIDFix = fixVersionIDFix;
     }
    
     

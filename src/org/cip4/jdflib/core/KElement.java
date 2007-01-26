@@ -3797,11 +3797,11 @@ public class KElement extends ElementNSImpl
     /**
      * append a DOM comment <code>&lt;!-- XMLComment --&gt;</code> 
      *
-     * @param commentName  the comment to append
+     * @param commentText  the comment to append
      */
-    public void appendXMLComment(String commentName)
+    public void appendXMLComment(String commentText)
     {
-        final Comment newChild = getOwnerDocument().createComment(commentName);
+        final Comment newChild = getOwnerDocument().createComment(commentText);
         appendChild(newChild);
     }
     

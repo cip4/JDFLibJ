@@ -8,6 +8,7 @@ package org.cip4.jdflib.core;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
@@ -32,10 +33,13 @@ public class VarnishTest extends PreflightTest
         JDFDoc d=new JDFDoc("JDF");
         n=d.getJDFRoot();
         VString vCombiNodes=new VString("ConventionalPrinting Varnishing"," ");
-        VString vSeparations=new VString("PreVarnish Cyan Magenta Yellow Black Varnish Varnish2"," ");
+        VString vSeparations=new VString("Cyan Magenta Yellow Black Varnish"," ");
         n.setCombined(vCombiNodes);
         
         JDFConventionalPrintingParams cpp=(JDFConventionalPrintingParams)n.addResource(ElementName.CONVENTIONALPRINTINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+        cpp.setModuleAvailableIndex(new JDFIntegerRangeList("1 ~ 6"));
+        cpp.setModuleIndex(new JDFIntegerRangeList("1 ~ 4 6"));
+        cpp.appendXMLComment("Module 0 and 7 are varnishing modules, 1-4 are process colors and 6 is the ink module used to varnish");
         JDFComponent comp=(JDFComponent)n.appendMatchingResource("Component",JDFNode.EnumProcessUsage.AnyOutput,null);
         JDFExposedMedia xm=(JDFExposedMedia)n.appendMatchingResource("ExposedMedia",JDFNode.EnumProcessUsage.Plate,null);
         JDFNodeInfo ni=n.appendNodeInfo();
@@ -50,8 +54,11 @@ public class VarnishTest extends PreflightTest
         
         JDFResourceLink rl=n.getLink(xmVarnish, null);
         JDFColorantControl cc=(JDFColorantControl)n.appendMatchingResource(ElementName.COLORANTCONTROL,JDFNode.EnumProcessUsage.AnyInput,null);
-        cc.appendDeviceColorantOrder().setSeparations(vSeparations);
+        cc.getCreateDeviceColorantOrder().appendXMLComment("Should the VarnishingParams seps be excluded, as is shown here?");
+        cc.getCreateDeviceColorantOrder().setSeparations(vSeparations);
+        
         rl.setCombinedProcessIndex(new JDFIntegerList("1"));
+        vSeparations.addAll(new VString("PreVarnish Varnish2"," "));
         
         for(int i=0;i<vSeparations.size();i++)
         {
@@ -64,10 +71,13 @@ public class VarnishTest extends PreflightTest
             else if(sep.equals("Varnish2"))
             {
                 xmVarnish.addPartition(EnumPartIDKey.Separation, sep);
+                vp.setXPathAttribute("SpotVarnish/SeparationSpec/@Name", sep);
+                vp.setXPathAttribute("SpotVarnish/@ModuleIndex", "7");
             }
             else if(sep.equals("PreVarnish"))
             {
                 vp.setXPathAttribute("FullVarnish/SeparationSpec/@Name", sep);
+                vp.setXPathAttribute("FullVarnish/@ModuleIndex", "0");
             }
         }
        

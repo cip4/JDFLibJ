@@ -1272,6 +1272,23 @@ public class JDFResourceTest extends JDFTestCaseBase
     /**
      * test expand and collapse methods
      */
+    public void testFixVersion()
+    { 
+        JDFDoc doc=creatXMDoc();
+        JDFNode n=doc.getJDFRoot();
+        JDFExposedMedia xm=(JDFExposedMedia)n.getMatchingResource("ExposedMedia",JDFNode.EnumProcessUsage.AnyInput,null,0);
+        JDFExposedMedia xm2=(JDFExposedMedia)xm.getPartition(new JDFAttributeMap(EnumPartIDKey.SignatureName, "Sig1"), null);
+        assertTrue(xm.isValid(EnumValidationLevel.Complete));
+        xm2.setAttribute("Class",EnumResourceClass.Handling.getName());
+        assertFalse(xm.isValid(EnumValidationLevel.Complete));
+        xm.fixVersion(null);
+        assertNull(xm2.getAttribute_KElement("Class", null, null));
+        assertTrue(xm.isValid(EnumValidationLevel.Complete));
+    }
+    ////////////////////////////////////////////////////////////////////
+    /**
+     * test expand and collapse methods
+     */
     public void testExpand()
     {        
         JDFDoc doc=creatXMDoc();
