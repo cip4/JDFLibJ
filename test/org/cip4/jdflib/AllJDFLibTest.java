@@ -74,7 +74,6 @@ import junit.framework.TestSuite;
 import org.cip4.jdflib.auto.AutoTest;
 import org.cip4.jdflib.auto.JDFClassInstantiationTest;
 import org.cip4.jdflib.core.AttrInfoTest;
-import org.cip4.jdflib.core.ContentCreationTest;
 import org.cip4.jdflib.core.DigiPrintTest;
 import org.cip4.jdflib.core.DocumentJDFImplTest;
 import org.cip4.jdflib.core.ElemInfoTest;
@@ -85,18 +84,13 @@ import org.cip4.jdflib.core.JDFAuditTest;
 import org.cip4.jdflib.core.JDFCustomerInfoTest;
 import org.cip4.jdflib.core.JDFDocTest;
 import org.cip4.jdflib.core.JDFElementTest;
-import org.cip4.jdflib.core.JDFExampleDocTest;
 import org.cip4.jdflib.core.JDFNodeInfoTest;
 import org.cip4.jdflib.core.JDFRefElementTest;
 import org.cip4.jdflib.core.JDFResourceLinkTest;
 import org.cip4.jdflib.core.JDFSourceResourceTest;
 import org.cip4.jdflib.core.KElementTest;
-import org.cip4.jdflib.core.MISFinTest;
-import org.cip4.jdflib.core.NColorTest;
 import org.cip4.jdflib.core.VElementTest;
 import org.cip4.jdflib.core.VStringTest;
-import org.cip4.jdflib.core.VarnishTest;
-import org.cip4.jdflib.core.WebTest;
 import org.cip4.jdflib.core.XMLDocTest;
 import org.cip4.jdflib.datatypes.JDFAttributeMapTest;
 import org.cip4.jdflib.datatypes.JDFDateTimeRangeTest;
@@ -121,6 +115,12 @@ import org.cip4.jdflib.devicecapability.JDFDeviceCapTest;
 import org.cip4.jdflib.devicecapability.JDFEvaluationTest;
 import org.cip4.jdflib.devicecapability.JDFStateBaseTest;
 import org.cip4.jdflib.devicecapability.JDFTestTest;
+import org.cip4.jdflib.examples.ContentCreationTest;
+import org.cip4.jdflib.examples.JDFExampleDocTest;
+import org.cip4.jdflib.examples.MISFinTest;
+import org.cip4.jdflib.examples.NColorTest;
+import org.cip4.jdflib.examples.VarnishTest;
+import org.cip4.jdflib.examples.WebTest;
 import org.cip4.jdflib.jmf.JDFMessageTest;
 import org.cip4.jdflib.jmf.JMFResourceTest;
 import org.cip4.jdflib.jmf.JMFStatusTest;
@@ -177,7 +177,6 @@ public class AllJDFLibTest extends JDFTestCaseBase
  
         // core
         suite.addTestSuite(AttrInfoTest.class);
-        suite.addTestSuite(ContentCreationTest.class);
         suite.addTestSuite(DigiPrintTest.class);
         suite.addTestSuite(DocumentJDFImplTest.class);
         suite.addTestSuite(ElemInfoTest.class);
@@ -188,18 +187,13 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JDFCustomerInfoTest.class);
         suite.addTestSuite(JDFDocTest.class);
         suite.addTestSuite(JDFElementTest.class);
-        suite.addTestSuite(JDFExampleDocTest.class);
         suite.addTestSuite(JDFNodeInfoTest.class);
         suite.addTestSuite(JDFResourceLinkTest.class);
         suite.addTestSuite(JDFRefElementTest.class);
         suite.addTestSuite(JDFSourceResourceTest.class);
         suite.addTestSuite(KElementTest.class);
-        suite.addTestSuite(MISFinTest.class);
-        suite.addTestSuite(NColorTest.class);
-        suite.addTestSuite(VarnishTest.class);
         suite.addTestSuite(VElementTest.class);
         suite.addTestSuite(VStringTest.class);
-        suite.addTestSuite(WebTest.class);
         suite.addTestSuite(XMLDocTest.class);
         
         // datatype
@@ -229,6 +223,14 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JDFStateBaseTest.class);
         suite.addTestSuite(JDFTestTest.class);
         
+        //examples
+        suite.addTestSuite(ContentCreationTest.class);
+        suite.addTestSuite(JDFExampleDocTest.class);
+        suite.addTestSuite(MISFinTest.class);
+        suite.addTestSuite(NColorTest.class);
+        suite.addTestSuite(VarnishTest.class);
+        suite.addTestSuite(WebTest.class);
+
         // JMF
         suite.addTestSuite(JDFMessageTest.class);
         suite.addTestSuite(JMFResourceTest.class);

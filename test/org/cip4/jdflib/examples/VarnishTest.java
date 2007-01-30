@@ -3,9 +3,15 @@
  * 
  * @author muchadie
  */
-package org.cip4.jdflib.core;
+package org.cip4.jdflib.examples;
 
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFNodeInfo;
+import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
