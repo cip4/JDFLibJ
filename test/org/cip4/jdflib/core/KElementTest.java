@@ -972,6 +972,24 @@ public class KElementTest extends JDFTestCaseBase
         assertEquals("minf",e.getRealAttribute("minf",null,0),-Double.MAX_VALUE,0.0);
     }
 
+    public void testSetAttribute_LongAttValue()
+    {
+        JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
+        JDFNode root  = (JDFNode) jdfDoc.getRoot();
+        String longString="";
+        for(int i=0;i<13;i++)
+            longString+=longString+"0 123456789abcdefghijklmnopqrstuvwxyz";
+ 
+        root.setAttribute("long", longString);
+        assertEquals(root.getAttribute("long"), longString);
+        jdfDoc.write2File(sm_dirTestDataTemp+"longAtt.jdf", 2, false);
+        jdfDoc=new JDFDoc();
+        jdfDoc=JDFDoc.parseFile(sm_dirTestDataTemp+"longAtt.jdf");
+        root=jdfDoc.getJDFRoot();
+        assertEquals(root.getAttribute("long"), longString);        
+        
+    }
+    
     public void testSetAttribute()
     {
         JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
