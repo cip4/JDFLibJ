@@ -1,4 +1,0 @@
-DEPENDENCIES
-
-Commons Lang 2.1, commons-lang-2.1.jar
-Xerces 2.7.1, xercesImpl-2.7.1.jar, xml-apis-2.0.2.jar
