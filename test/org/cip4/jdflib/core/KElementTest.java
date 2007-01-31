@@ -301,6 +301,9 @@ public class KElementTest extends JDFTestCaseBase
         e.removeAttribute("foo",null);
         assertFalse("has foo",e.hasAttribute("foo"));
         assertFalse("has foo",e.hasAttribute("foo",null,false));
+        e.removeAttribute("foo",null);
+        e.removeAttribute("foo"); // make sure we have no npe for removing non existing attrbutes
+        e.removeAttribute(""); // make sure we have no npe for removing non existing attrbutes
 
         e.setAttribute("foo","bar","");
         assertTrue("has foo",e.hasAttribute("foo"));
@@ -1356,7 +1359,35 @@ public class KElementTest extends JDFTestCaseBase
         assertNull(bar3.getNamespaceURI());              
         KElement bar4=bar2.appendElement("bar");
         assertNull(bar4.getNamespaceURI());              
- 
+    }
+    
+    public void testAppendElement_SingleNS()
+    {
+        final String wwwECom = "www.e.com";
+        XMLDoc d=new XMLDoc("e",wwwECom);
+        KElement e=d.getRoot();
+        assertEquals(e.getNamespaceURI(),wwwECom);
+        KElement foo=e.appendElement("f", null);
+        assertEquals(foo.getNamespaceURI(), wwwECom);      
+    }
+
+    public void testParse_SingleNS()
+    {
+        final String wwwECom = "www.e.com";
+        XMLDoc d=new XMLDoc("e",wwwECom);
+        KElement e=d.getRoot();
+        assertEquals(e.getNamespaceURI(),wwwECom);
+        KElement foo=e.appendElement("f", null);
+        assertEquals(foo.getNamespaceURI(), wwwECom);  
+        String s=d.write2String(2);
+        JDFParser p=new JDFParser();
+        JDFDoc d2=p.parseString(s);
+        KElement e2=d2.getRoot();
+        assertEquals(e2.getNamespaceURI(),wwwECom);
+        KElement foo2=e.appendElement("f", null);
+        assertEquals(foo2.getNamespaceURI(), wwwECom);  
+        assertEquals(-1,d2.write2String(2).indexOf("jdf"));
+        
     }
 
     public void testAppendAttribute()
