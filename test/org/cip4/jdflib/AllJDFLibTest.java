@@ -115,6 +115,7 @@ import org.cip4.jdflib.devicecapability.JDFDeviceCapTest;
 import org.cip4.jdflib.devicecapability.JDFEvaluationTest;
 import org.cip4.jdflib.devicecapability.JDFStateBaseTest;
 import org.cip4.jdflib.devicecapability.JDFTestTest;
+import org.cip4.jdflib.examples.AmountTest;
 import org.cip4.jdflib.examples.ContentCreationTest;
 import org.cip4.jdflib.examples.JDFExampleDocTest;
 import org.cip4.jdflib.examples.MISFinTest;
@@ -224,6 +225,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JDFTestTest.class);
         
         //examples
+        suite.addTestSuite(AmountTest.class);
         suite.addTestSuite(ContentCreationTest.class);
         suite.addTestSuite(JDFExampleDocTest.class);
         suite.addTestSuite(MISFinTest.class);

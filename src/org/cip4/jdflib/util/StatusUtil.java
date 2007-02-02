@@ -75,15 +75,13 @@
  */
 package org.cip4.jdflib.util;
 
-import java.util.HashSet;
-
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
+import org.cip4.jdflib.auto.JDFAutoResourceAudit.EnumReason;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFResourceLink;
-import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
@@ -101,8 +99,10 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.JDFProcessRun;
+import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 
+//TODO add time related metadata
 
 /**
  * Utility class for status JDF and JMF
@@ -115,7 +115,7 @@ public class StatusUtil {
     private JDFNode m_Node;
     private JDFDoc docJMFPhaseTime;
     private JDFDoc docJMFResource;
-    private VJDFAttributeMap m_vPartMap;
+    protected VJDFAttributeMap m_vPartMap;
     private String m_deviceID=null;
     private LinkAmount[] vLinkAmount=null;
 
@@ -430,11 +430,27 @@ public class StatusUtil {
 
         /**
          * 
+         * @param rl resourceLink to the resource that is being counted
+         */
+        public AmountBag(JDFResourceLink rl)
+        {
+           this(rl.getrRef());
+        }
+        /**
+         * 
          * @param _refID refID of the resource that is being counted
          */
         public AmountBag(String _refID)
         {
             refID=_refID;
+            reset();
+        }
+
+        /**
+         * 
+         */
+        public void reset()
+        {
             totalAmount=0;
             phaseAmount=0;
             totalWaste=0;
@@ -500,8 +516,12 @@ public class StatusUtil {
                 map=new JDFAttributeMap(map);
                 map.put(EnumPartIDKey.Condition, "Good");
                 startAmount=rl.getAmount(map);
+                if(startAmount==-1)
+                    startAmount=0;
                 map.put(EnumPartIDKey.Condition, "Waste");
                 startWaste=rl.getAmount(map);
+                if(startWaste==-1)
+                    startWaste=0;
             }
         }
 
@@ -568,7 +588,43 @@ public class StatusUtil {
                 }
             }
             return rl;
-        }    /**
+        }    
+        
+        /**
+         * @return
+         */
+        public JDFResourceLink getResourceAuditLink(AmountBag bag)
+        {
+            cleanAmounts();
+            if(bag!=null)
+            {
+                VJDFAttributeMap vMap=new VJDFAttributeMap(m_vPartMap);
+                if(vMap.size()==0)
+                    vMap.add(new JDFAttributeMap());
+                if(bTrackWaste)
+                {
+                    vMap.put(EnumPartIDKey.Condition, "Good");
+                    if(bag.totalAmount!=0)
+                        rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(bag.totalAmount), null, vMap);
+                    if(startAmount!=0)
+                        rl.setAmountPoolAttribute(AttributeName.AMOUNT, StringUtil.formatDouble(startAmount), null, vMap);
+                    vMap.put(EnumPartIDKey.Condition, "Waste");
+                    if(bag.totalWaste!=0)
+                        rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(bag.totalWaste), null, vMap);
+                    if(startWaste!=0)
+                        rl.setAmountPoolAttribute(AttributeName.AMOUNT, StringUtil.formatDouble(startWaste), null, vMap);
+                }
+                else
+                {
+                    if(bag.totalAmount + bag.totalWaste !=0)
+                        rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(bag.totalAmount+bag.totalWaste), null, vMap);
+                    if(startAmount+startWaste!=0)
+                        rl.setAmountPoolAttribute(AttributeName.AMOUNT, StringUtil.formatDouble(startAmount+startWaste), null, vMap);                    
+                }
+            }
+            return rl;
+        }  
+        /**
          * @return
          */
         public JDFResourceLink getResourceInfoLink(AmountBag bag)
@@ -653,6 +709,35 @@ public class StatusUtil {
         LinkAmount la=getLinkAmount(rl.getrRef());
         if(la!=null)
             la.bCopyResInfo=b;        
+    }
+
+    /**
+     * @param bag
+     * @return JDFResourceAudit the generated audit
+     */
+    public JDFResourceAudit setResourceAudit(AmountBag bag, EnumReason reason)
+    {
+        JDFAuditPool ap=m_Node.getCreateAuditPool();
+
+       JDFResourceAudit ra=ap.addResourceAudit(null);
+       ra.setContentsModified(false);
+       ra.setReason(reason);
+       
+       final LinkAmount la=getLinkAmount(bag.refID);
+       ra.copyElement(la.getResourceAuditLink(bag), null);
+       return ra;
+    }
+
+    /**
+     * 
+     */
+    public JDFProcessRun setProcessResult(EnumNodeStatus endStatus)
+    {
+        JDFAuditPool ap=m_Node.getCreateAuditPool();
+
+        JDFProcessRun pr=ap.addProcessRun(endStatus, null, m_vPartMap);
+        return pr;
+        
     }
 
  

@@ -1363,12 +1363,41 @@ public class KElementTest extends JDFTestCaseBase
     
     public void testAppendElement_SingleNS()
     {
-        final String wwwECom = "www.e.com";
-        XMLDoc d=new XMLDoc("e",wwwECom);
-        KElement e=d.getRoot();
-        assertEquals(e.getNamespaceURI(),wwwECom);
-        KElement foo=e.appendElement("f", null);
-        assertEquals(foo.getNamespaceURI(), wwwECom);      
+        for(int i=0;i<2;i++)
+        {
+            final String wwwECom = "www.e.com";
+            final XMLDoc d =i==0 ? new XMLDoc() : new JDFDoc();
+            d.setRoot("e", wwwECom);
+            KElement e=d.getRoot();
+            e.addNameSpace(null, wwwECom);
+            assertEquals(e.getNamespaceURI(),wwwECom);
+            KElement foo=e.appendElement("f", null);
+            assertEquals(foo.getNamespaceURI(), wwwECom); 
+            foo=e.appendElement("f", "");
+            assertEquals(foo.getNamespaceURI(), wwwECom); 
+         }
+
+    }
+    
+    public void testCreateElement_NoNS()
+    {
+        for(int i=0;i<2;i++)
+        {
+            final String wwwECom = "www.e.com";
+            final XMLDoc d =i==0 ? new XMLDoc() : new JDFDoc();
+            d.setRoot("e", wwwECom);
+            KElement e=d.getRoot();
+            assertEquals(e.getNamespaceURI(),wwwECom);
+            Element eFoo=d.createElement("f");
+            e.appendChild(eFoo);
+            Element eBar=d.createElement("b");
+            eFoo.appendChild(eBar);
+            assertEquals(eBar.getNamespaceURI(), wwwECom); 
+            assertEquals(eFoo.getNamespaceURI(), wwwECom); 
+            eFoo=d.createElementNS(wwwECom,"f");
+            e.appendChild(eFoo);
+            assertEquals(eFoo.getNamespaceURI(), wwwECom); 
+        }
     }
 
     public void testParse_SingleNS()

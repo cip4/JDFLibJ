@@ -94,6 +94,8 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
         v.add(m2);
         VJDFAttributeMap v2=new VJDFAttributeMap(v);
         assertEquals(v, v2);
+        m1.put("a3", "a4");
+        assertNotSame("modification did not migrate!",v, v2);
         
     }
     public void testSubMap()

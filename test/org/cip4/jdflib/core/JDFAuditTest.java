@@ -72,12 +72,14 @@ package org.cip4.jdflib.core;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFCreated;
 import org.cip4.jdflib.resource.JDFModified;
+import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
@@ -116,6 +118,21 @@ public class JDFAuditTest extends JDFTestCaseBase
         n.fixVersion(JDFElement.EnumVersion.Version_1_2);
         assertFalse(crea.hasAttribute("ID"));        
      }
+    
+    /////////////////////////////////////////////////////////////////////
+    public void testSetRef() throws Exception
+    {
+        JDFDoc d=new JDFDoc(ElementName.JDF);
+        JDFNode n=d.getJDFRoot();
+        n.setType("ConventionalPrinting",true);
+        JDFAuditPool ap=n.getAuditPool();
+        assertNotNull(ap);
+        JDFPhaseTime pt=ap.setPhase(EnumNodeStatus.Stopped, null, null);
+        JDFPhaseTime pt2=ap.setPhase(EnumNodeStatus.Aborted, null, null);
+        pt2.setRef(pt);
+        assertEquals(pt.getID(), pt2.getrefID());
+     }
+
     /////////////////////////////////////////////////////////////////////
     public void testCreated() throws Exception
     {

@@ -66,13 +66,20 @@ public class VJDFAttributeMap
     }
 
     /**
-     * copy constructor - clones the vector
+     * copy constructor - clones the vector including the contents!
      * @param v the VJDFAttributeMap to copy
      */
     public VJDFAttributeMap(VJDFAttributeMap v)
     {
         if(v!=null)
-            setVector((Vector)v.getVector().clone());
+        {
+            clear();
+            final int size = v.size();
+            for(int i=0;i<size;i++)
+            {
+                add(new JDFAttributeMap(v.elementAt(i)));
+            }
+        }
     }
 
     //**************************************** Methods *********************************************

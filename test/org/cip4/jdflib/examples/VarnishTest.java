@@ -5,6 +5,7 @@
  */
 package org.cip4.jdflib.examples;
 
+import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -27,7 +28,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.prepress.JDFInk;
 
 
-public class VarnishTest extends PreflightTest
+public class VarnishTest extends JDFTestCaseBase
 {
     /**
      * test iteration
@@ -37,7 +38,7 @@ public class VarnishTest extends PreflightTest
     {
         JDFElement.setLongID(false);
         JDFDoc d=new JDFDoc("JDF");
-        n=d.getJDFRoot();
+        JDFNode n=d.getJDFRoot();
         VString vCombiNodes=new VString("ConventionalPrinting Varnishing"," ");
         VString vSeparations=new VString("Cyan Magenta Yellow Black Varnish"," ");
         n.setCombined(vCombiNodes);
@@ -74,16 +75,32 @@ public class VarnishTest extends PreflightTest
             {
                 xm.addPartition(EnumPartIDKey.Separation, sep);
             }
-            else if(sep.equals("Varnish2"))
+            if(sep.equals("Varnish2"))
             {
+                vp.appendXMLComment("full varnishing in a varnishing module with or wihtout a sleeve. Full varnishing means to cover the complete media surface.");
                 xmVarnish.addPartition(EnumPartIDKey.Separation, sep);
-                vp.setXPathAttribute("SpotVarnish/SeparationSpec/@Name", sep);
-                vp.setXPathAttribute("SpotVarnish/@ModuleIndex", "7");
+                JDFResource varnishPart=vp.addPartition(EnumPartIDKey.Separation, sep);
+                varnishPart.setAttribute("ModuleIndex", "7");
+                varnishPart.setAttribute("VarnishMethod", "Sleeve");
+                varnishPart.setAttribute("VarnishArea", "Spot");
+            }
+            else if(sep.equals("Varnish"))
+            {
+                vp.appendXMLComment("varnishing in a printing module only  with a mandatory plate. The plate may be exposed or not, for example,  for full varnihing. ");
+                //xmVarnish.addPartition(EnumPartIDKey.Separation, sep);
+                JDFResource varnishPart=vp.addPartition(EnumPartIDKey.Separation, sep);
+                varnishPart.setAttribute("ModuleIndex", "6");
+                varnishPart.setAttribute("VarnishMethod", "Plate");
+                varnishPart.setAttribute("VarnishArea", "Full");
             }
             else if(sep.equals("PreVarnish"))
             {
-                vp.setXPathAttribute("FullVarnish/SeparationSpec/@Name", sep);
-                vp.setXPathAttribute("FullVarnish/@ModuleIndex", "0");
+                vp.appendXMLComment("varnishing in a varnishing module only with a mandatory prepared sleeve ");
+                xmVarnish.addPartition(EnumPartIDKey.Separation, sep);
+                JDFResource varnishPart=vp.addPartition(EnumPartIDKey.Separation, sep);
+                varnishPart.setAttribute("ModuleIndex", "0");
+                varnishPart.setAttribute("VarnishMethod", "Sleeve");
+                varnishPart.setAttribute("VarnishArea", "Full");
             }
         }
        

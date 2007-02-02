@@ -380,6 +380,17 @@ public class JDFAudit extends JDFElement
     {
         setAttribute (AttributeName.REFID, value, null);
     }
+    /**
+     * Set attribute refID to the ID of previous
+     */
+    public void setRef (JDFAudit previous)
+    {
+        if(previous!=null)
+        {
+            String id=previous.appendAnchor(null); // ensure that previos has an id
+            setrefID(id);
+        }
+    }
     
     /**
      * SetAuthor

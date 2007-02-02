@@ -13,7 +13,7 @@ import java.io.UnsupportedEncodingException;
 
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.node.JDFNode;
 
 
@@ -37,19 +37,16 @@ public class TestJDF
         }
 
         JDFParser p=new JDFParser();
-        JDFDoc d=p.parseFile("tgmrg.jdf");
+        JDFDoc d=p.parseFile("big.jdf");
         long ii=d.getDocMemoryUsed();
         JDFNode n=d.getJDFRoot();
-        JDFAttributeMap m=new JDFAttributeMap();
-        m.put("SignatureName","Sig#1");
-        m.put("SheetName","Sig#1Sheet#1");
-        m.put("Side","Front");
-        System.out.println(ii+" "+n.isExecutable(m,false));
-
-    
-        d=p.parseFile("Claes_ConventionalPrinting.jdf");
-        n=d.getJDFRoot();
-        System.out.println(n.isExecutable(m,false));
-
+        n.eraseEmptyNodes(true);
+        d.write2File("big2.jdf", 0, false);
+        VElement v=n.getChildrenByTagName("AuditPool", null, null, false, true, 0);
+        for(int i=0;i<v.size();i++)
+            v.item(i).deleteNode();
+        n.eraseEmptyNodes(true);
+        d.write2File("big3.jdf", 0, false);
+  
     }
 }

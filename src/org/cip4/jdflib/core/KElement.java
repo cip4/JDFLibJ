@@ -1213,12 +1213,39 @@ public class KElement extends ElementNSImpl
         }
         
         s = getPrefix();
+        
+        KElement parent=getParentNode_KElement();
+        while(parent!=null)
+        {
+            String prefix=KElement.xmlnsPrefix(parent.getNodeName());
+            if(prefix==null && s==null || prefix!=null && prefix.equals(s))
+            {
+                final String nsuri=parent.getNamespaceURI();
+                if(nsuri!=null) // we found a valid nsuri so we might as well set it for this
+                {
+                    namespaceURI=nsuri;
+                    return nsuri;
+                }
+            }
+            parent=parent.getParentNode_KElement();
+        }
+       
+        final String nsuri;
+        
         if (s != null)
         {
-            return getInheritedAttribute(JDFConstants.XMLNS + JDFConstants.COLON + s, null,null);
+            nsuri= getInheritedAttribute(JDFConstants.XMLNS + JDFConstants.COLON + s, null,null);
         }
-        return getInheritedAttribute(JDFConstants.XMLNS, null, null);
-    }
+        else
+        {
+            nsuri= getInheritedAttribute(JDFConstants.XMLNS, null, null);
+        }
+        if(nsuri!=null) // we found a valid nsuri so we might as well set it for this
+        {
+            namespaceURI=nsuri;
+         }
+        return nsuri;
+   }
     
     /**
      * Parses pc for it's namespace prefix
