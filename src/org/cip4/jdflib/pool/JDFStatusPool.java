@@ -72,17 +72,6 @@ public class JDFStatusPool extends JDFAutoStatusPool
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.PARTSTATUS, 0x44444222);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
-
     //**************************************** Methods *********************************************
     /**
      * toString
