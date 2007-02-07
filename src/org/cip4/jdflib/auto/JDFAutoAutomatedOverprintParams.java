@@ -77,12 +77,12 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.resource.JDFResource;
     /*
     *****************************************************************************
-    class JDFAutoAutomatedOverprintParams : public JDFResource
+    class JDFAutoAutomatedOverPrintParams : public JDFResource
 
     *****************************************************************************
     */
 
-public abstract class JDFAutoAutomatedOverprintParams extends JDFResource
+public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
 {
 
     private static final long serialVersionUID = 1L;
@@ -106,11 +106,11 @@ public abstract class JDFAutoAutomatedOverprintParams extends JDFResource
 
 
     /**
-     * Constructor for JDFAutoAutomatedOverprintParams
+     * Constructor for JDFAutoAutomatedOverPrintParams
      * @param myOwnerDocument
      * @param qualifiedName
      */
-    protected JDFAutoAutomatedOverprintParams(
+    protected JDFAutoAutomatedOverPrintParams(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
@@ -118,12 +118,12 @@ public abstract class JDFAutoAutomatedOverprintParams extends JDFResource
     }
 
     /**
-     * Constructor for JDFAutoAutomatedOverprintParams
+     * Constructor for JDFAutoAutomatedOverPrintParams
      * @param myOwnerDocument
      * @param myNamespaceURI
      * @param qualifiedName
      */
-    protected JDFAutoAutomatedOverprintParams(
+    protected JDFAutoAutomatedOverPrintParams(
         CoreDocumentImpl myOwnerDocument,
         String myNamespaceURI,
         String qualifiedName)
@@ -132,13 +132,13 @@ public abstract class JDFAutoAutomatedOverprintParams extends JDFResource
     }
 
     /**
-     * Constructor for JDFAutoAutomatedOverprintParams
+     * Constructor for JDFAutoAutomatedOverPrintParams
      * @param myOwnerDocument
      * @param myNamespaceURI
      * @param qualifiedName
      * @param myLocalName
      */
-    protected JDFAutoAutomatedOverprintParams(
+    protected JDFAutoAutomatedOverPrintParams(
         CoreDocumentImpl myOwnerDocument,
         String myNamespaceURI,
         String qualifiedName,
@@ -150,7 +150,7 @@ public abstract class JDFAutoAutomatedOverprintParams extends JDFResource
 
     public String toString()
     {
-        return " JDFAutoAutomatedOverprintParams[  --> " + super.toString() + " ]";
+        return " JDFAutoAutomatedOverPrintParams[  --> " + super.toString() + " ]";
     }
 
 

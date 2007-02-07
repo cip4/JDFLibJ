@@ -81,6 +81,7 @@ import java.io.FileFilter;
 
 import junit.framework.TestCase;
 
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
 import org.w3c.dom.DOMException;
 
@@ -113,7 +114,11 @@ public class JDFClassInstantiationTest extends TestCase
                     VString ignoreList = new VString("JDFConstants.java JDFDoc.java JDFDocumentBuilder.java " +
                             "JDFException.java JDFParser.java JDFVersions.java JDFAbstractState.java " +
                             "JDFEvaluation.java JDFNodeTerm.java JDFTerm.java JDFEnumerationSpan.java " +
-                            "JDFSpan.java JDFSpanBase.java JDFPool.java", null);
+                            "JDFSpan.java JDFSpanBase.java " + 
+                            "JDFDurationSpan.java JDFIntegerSpan.java JDFNameSpan.java JDFNumberSpan.java " +
+                            "JDFOptionSpan.java JDFShapeSpan.java JDFSpanNamedColor.java " +
+                            "JDFStringSpan.java JDFTimeSpan.java JDFXYPairSpan.java " +
+                            "JDFPool.java", null);
                     
                     acceptFile = !ignoreList.contains(name) &&
                                  name.startsWith("JDF") &&  
@@ -139,6 +144,22 @@ public class JDFClassInstantiationTest extends TestCase
         visitor.leaveDirectory(dir);
     }
     
+    /**
+     * get the fileName for every class JDFxxx below "./src/org/cip4/jdflib"
+     * which is not in ignoreList and extract from it elementName (=xxx)
+     * With elementName instantiate the corresponding class 
+     * (using jdfRoot.appendElement(elementName) and factory DocumentJDFImpl.java)
+     * 
+     * Then createdClass+".java" should be equal to fileName,
+     * i.e. the factory DocumentJDFImpl creates a class at the correct point
+     * in the hierarchy
+     * 
+        result = fileName.equals(createdClass + ".java")
+                || (fileName.startsWith("JDFAuto") && createdClass.equals(JDFConstants.JDFELEMENT))
+                || fileName.equals(JDFConstants.JDFNODE)
+                || !createdClass.equals(JDFConstants.JDFELEMENT);
+     *
+     */
     public void testDirectoryInstantiateVisitor()
     {
         String[] args = { "./src/org/cip4/jdflib" };

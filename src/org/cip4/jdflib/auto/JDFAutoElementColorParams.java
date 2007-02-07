@@ -85,16 +85,10 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.resource.process.JDFAutomatedOverprintParams;
+import org.cip4.jdflib.resource.process.JDFAutomatedOverPrintParams;
 import org.cip4.jdflib.resource.process.JDFColorantAlias;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionOp;
-    /*
-    *****************************************************************************
-    class JDFAutoElementColorParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoElementColorParams extends JDFResource
 {
@@ -301,23 +295,23 @@ public abstract class JDFAutoElementColorParams extends JDFResource
  */
 
     /**
-     * (24) const get element AutomatedOverprintParams
-     * @return JDFAutomatedOverprintParams the element
+     * (24) const get element AutomatedOverPrintParams
+     * @return JDFAutomatedOverPrintParams the element
      */
-    public JDFAutomatedOverprintParams getAutomatedOverprintParams()
+    public JDFAutomatedOverPrintParams getAutomatedOverPrintParams()
     {
-        return (JDFAutomatedOverprintParams) getElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, 0);
+        return (JDFAutomatedOverPrintParams) getElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, 0);
     }
 
 
 
-    /** (25) getCreateAutomatedOverprintParams
+    /** (25) getCreateAutomatedOverPrintParams
      * 
-     * @return JDFAutomatedOverprintParams the element
+     * @return JDFAutomatedOverPrintParams the element
      */
-    public JDFAutomatedOverprintParams getCreateAutomatedOverprintParams()
+    public JDFAutomatedOverPrintParams getCreateAutomatedOverPrintParams()
     {
-        return (JDFAutomatedOverprintParams) getCreateElement_KElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, 0);
+        return (JDFAutomatedOverPrintParams) getCreateElement_KElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, 0);
     }
 
 
@@ -325,17 +319,17 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
 
     /**
-     * (29) append elementAutomatedOverprintParams
+     * (29) append elementAutomatedOverPrintParams
      */
-    public JDFAutomatedOverprintParams appendAutomatedOverprintParams() throws JDFException
+    public JDFAutomatedOverPrintParams appendAutomatedOverPrintParams() throws JDFException
     {
-        return (JDFAutomatedOverprintParams) appendElementN(ElementName.AUTOMATEDOVERPRINTPARAMS, 1, null);
+        return (JDFAutomatedOverPrintParams) appendElementN(ElementName.AUTOMATEDOVERPRINTPARAMS, 1, null);
     }
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
       */
-    public void refAutomatedOverprintParams(JDFAutomatedOverprintParams refTarget)
+    public void refAutomatedOverPrintParams(JDFAutomatedOverPrintParams refTarget)
     {
         refElement(refTarget);
     }

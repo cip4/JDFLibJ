@@ -1,6 +1,28 @@
 
 ___________________________________________________________
 
+Label JDFLIBJ_2.1.2BLD392 (05.02.2007)
+
+
+API change due to schema bug :	
+	rename AutomatedOverprintParams to AutomatedOverPrintParams etc.
+
+bug fix for heuristics in KElement.getNamespaceURI()
+
+added some sec examples to the example tests
+
+
+Changed files:
+ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD392) && !lbtype(JDFLIBJ_2.1.3BLD391)}" -print
+
+.\jdflib\node\JDFNode.java@@\main\235
+.\jdflib\pool\JDFResourceLinkPool.java@@\main\78
+.\jdflib\resource\devicecapability\JDFDevCaps.java@@\main\29
+.\jdflib\util\JDFMerge.java@@\main\8
+
+
+___________________________________________________________
+
 Label JDFLIBJ_2.1.2BLD391 (18.01.2007)
 
 

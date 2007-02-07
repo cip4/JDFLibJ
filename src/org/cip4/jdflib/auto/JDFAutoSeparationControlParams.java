@@ -76,13 +76,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFTransferFunctionControl;
-import org.cip4.jdflib.resource.process.JDFAutomatedOverprintParams;
-    /*
-    *****************************************************************************
-    class JDFAutoSeparationControlParams : public JDFResource
-
-    *****************************************************************************
-    */
+import org.cip4.jdflib.resource.process.JDFAutomatedOverPrintParams;
 
 public abstract class JDFAutoSeparationControlParams extends JDFResource
 {
@@ -171,40 +165,40 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
  * ***********************************************************************
  */
 
-    /** (26) getCreateAutomatedOverprintParams
+    /** (26) getCreateAutomatedOverPrintParams
      * 
      * @param iSkip number of elements to skip
-     * @return JDFAutomatedOverprintParams the element
+     * @return JDFAutomatedOverPrintParams the element
      */
-    public JDFAutomatedOverprintParams getCreateAutomatedOverprintParams(int iSkip)
+    public JDFAutomatedOverPrintParams getCreateAutomatedOverPrintParams(int iSkip)
     {
-        return (JDFAutomatedOverprintParams)getCreateElement_KElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, iSkip);
+        return (JDFAutomatedOverPrintParams)getCreateElement_KElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, iSkip);
     }
 
 
 
     /**
-     * (27) const get element AutomatedOverprintParams
+     * (27) const get element AutomatedOverPrintParams
      * @param iSkip number of elements to skip
-     * @return JDFAutomatedOverprintParams the element
-     * default is getAutomatedOverprintParams(0)     */
-    public JDFAutomatedOverprintParams getAutomatedOverprintParams(int iSkip)
+     * @return JDFAutomatedOverPrintParams the element
+     * default is getAutomatedOverPrintParams(0)     */
+    public JDFAutomatedOverPrintParams getAutomatedOverPrintParams(int iSkip)
     {
-        return (JDFAutomatedOverprintParams) getElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, iSkip);
+        return (JDFAutomatedOverPrintParams) getElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, iSkip);
     }
 
 
 
-    public JDFAutomatedOverprintParams appendAutomatedOverprintParams()
+    public JDFAutomatedOverPrintParams appendAutomatedOverPrintParams()
     {
-        return (JDFAutomatedOverprintParams) appendElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null);
+        return (JDFAutomatedOverPrintParams) appendElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null);
     }
 
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
       */
-    public void refAutomatedOverprintParams(JDFAutomatedOverprintParams refTarget)
+    public void refAutomatedOverPrintParams(JDFAutomatedOverPrintParams refTarget)
     {
         refElement(refTarget);
     }
