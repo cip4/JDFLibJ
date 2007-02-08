@@ -23,18 +23,18 @@ ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD400) && !lbtype(JDFLIBJ_2.1.3BLD391)
 .\core\ElementName.java@@\main\40
 .\core\JDFAudit.java@@\main\81
 .\core\JDFElement.java@@\main\226
-.\core\KElement.java@@\main\231
+.\core\KElement.java@@\main\232
 .\datatypes\JDFXYPair.java@@\main\17
 .\datatypes\VJDFAttributeMap.java@@\main\23
+.\jmf\JDFPipeParams.java@@\main\17
 .\pool\JDFStatusPool.java@@\main\44
 .\resource\devicecapability\JDFDeviceCap.java@@\main\41
 .\resource\devicecapability\JDFEnumerationEvaluation.java@@\main\17
-.\resource\JDFResource.java@@\main\206
+.\resource\JDFResource.java@@\main\207
 .\resource\process@@\main\24
 .\resource\process\JDFAutomatedOverPrintParams.java@@\main\15
 .\util\StatusUtil.java@@\main\4
 .\util\StringUtil.java@@\main\56
-
 
 ___________________________________________________________
 
