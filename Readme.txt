@@ -1,7 +1,7 @@
 
 ___________________________________________________________
 
-Label JDFLIBJ_2.1.2BLD392 (05.02.2007)
+Label JDFLIBJ_2.1.2BLD400 (08.02.2007)
 
 
 API change due to schema bug :	
@@ -13,12 +13,27 @@ added some sec examples to the example tests
 
 
 Changed files:
-ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD392) && !lbtype(JDFLIBJ_2.1.3BLD391)}" -print
-
-.\jdflib\node\JDFNode.java@@\main\235
-.\jdflib\pool\JDFResourceLinkPool.java@@\main\78
-.\jdflib\resource\devicecapability\JDFDevCaps.java@@\main\29
-.\jdflib\util\JDFMerge.java@@\main\8
+ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD400) && !lbtype(JDFLIBJ_2.1.3BLD391)}" -print
+.\auto@@\main\42
+.\auto\JDFAutoAutomatedOverPrintParams.java@@\main\61
+.\auto\JDFAutoElementColorParams.java@@\main\31
+.\auto\JDFAutoRenderingParams.java@@\main\69
+.\auto\JDFAutoSeparationControlParams.java@@\main\43
+.\core\DocumentJDFImpl.java@@\main\88
+.\core\ElementName.java@@\main\40
+.\core\JDFAudit.java@@\main\81
+.\core\JDFElement.java@@\main\226
+.\core\KElement.java@@\main\231
+.\datatypes\JDFXYPair.java@@\main\17
+.\datatypes\VJDFAttributeMap.java@@\main\23
+.\pool\JDFStatusPool.java@@\main\44
+.\resource\devicecapability\JDFDeviceCap.java@@\main\41
+.\resource\devicecapability\JDFEnumerationEvaluation.java@@\main\17
+.\resource\JDFResource.java@@\main\206
+.\resource\process@@\main\24
+.\resource\process\JDFAutomatedOverPrintParams.java@@\main\15
+.\util\StatusUtil.java@@\main\4
+.\util\StringUtil.java@@\main\56
 
 
 ___________________________________________________________
