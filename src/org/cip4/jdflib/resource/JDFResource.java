@@ -2321,7 +2321,7 @@ public class JDFResource extends JDFElement
                 }
                 
                 e = (JDFResource)e.getParentNode();
-                while(e != this)
+                do // if more than one, loop at leas once
                 {
                     int i = 0;
                     for(i = siz-1; i > 0; i--) //e is always an ancestor of vElm[i]; 
@@ -2339,13 +2339,17 @@ public class JDFResource extends JDFElement
                         retRes = e;
                         break; // while e!=this
                     }
-                }
+                }while(e != this);
+                
                 if(e.isResourceRoot())
                 {
                     return e; // the root is always ok 
                 }
             }
         }
+        
+        if(retRes==null)
+            return null;
         
         int retSize=-1;
         JDFResource loopRes=retRes;

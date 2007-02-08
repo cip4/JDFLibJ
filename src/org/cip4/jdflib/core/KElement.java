@@ -3620,9 +3620,12 @@ public class KElement extends ElementNSImpl
      */
     public KElement replaceElement(KElement src)
     {
+        if(src == this)
+            return this; // nop
+        
         KElement kRet = src;
         
-        if (src != null && src != this)
+        if (src != null)
         {
             // workaround for the document element  
             //TBD: there must be a better way

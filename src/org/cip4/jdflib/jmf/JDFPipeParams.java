@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2005 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,15 +88,21 @@ import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPipeParams;
+import org.cip4.jdflib.auto.JDFAutoResourceCmdParams.EnumUpdateMethod;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 
 
 
@@ -257,19 +263,12 @@ public class JDFPipeParams extends JDFAutoPipeParams
      */
     public JDFResource appendResource(String resName)
     {
-        JDFResource r = null;
         KElement   e = appendElement(resName, null);
-        if(e instanceof JDFResource)
+        if(!(e instanceof JDFResource))
         {
-            r = (JDFResource) e;
-            r.init();
+            throw new JDFException("JDFpipeParams.appendResource tried to return a JDFElement instead of a JDFResource: "+resName); 
         }
-        else
-        {
-            throw new JDFException(
-            "JDFpipeParams.appendResource tried to return a JDFElement instead of a JDFResource"); 
-        }
-        return r;
+        return (JDFResource)e;
     }
     
     /**
@@ -280,6 +279,9 @@ public class JDFPipeParams extends JDFAutoPipeParams
      */
     public JDFResourceLink appendResourceLink(String linkName, boolean bInput)
     {
+        if(!linkName.endsWith("Link"))
+            linkName+="Link";
+        
         JDFResourceLink rl = null;
         if(getResourceLink()!=null)
             throw new JDFException("JDFpipeParams.appendResourceLink tried to append an additional link"); 
@@ -292,10 +294,72 @@ public class JDFPipeParams extends JDFAutoPipeParams
         }
         else
         {
-            throw new JDFException(
-            "JDFpipeParams.appendResourceLink tried to return a JDFElement instead of a JDFResourceLink"); 
+            throw new JDFException("JDFpipeParams.appendResourceLink tried to return a JDFElement instead of a JDFResourceLink: "+linkName); 
         }
         return rl;
     }
+    
+    /**
+     * apply the parameters in this to all appropriate resources in parentNode or one of parentNode's children
+     * @param parentNode the node to search in
+     * TODO implement resource handling
+     */
+    public void applyPipeToNode(JDFNode parentNode)
+    {
+        if(parentNode==null)
+            return;
+        Vector vNodes=parentNode.getvJDFNode(null,null,false);
+        
+        final int size = vNodes.size();
+        for(int i=0;i<size;i++)
+        {
+            final JDFNode node=(JDFNode) vNodes.elementAt(i);
+            if(!matchesNode(node))
+                continue;
+            final JDFElement.EnumNodeStatus status = getStatus(); // TODO: set Status
+            node.setStatus(status);
+            
+
+//            final boolean isIncremental = (getUpdateMethod () == EnumUpdateMethod.Incremental);
+            double dAmount = -1.0;
+            JDFResourceLink rl=getResourceLink();
+            
+            if(rl!=null)
+            {        
+                JDFResourceLink rlNode=node.getLink(0,rl.getNodeName(),new JDFAttributeMap(AttributeName.RREF,rl.getrRef()),null);
+                if(rlNode==null)
+                    throw new JDFException("Applying pipeparams to inconsistent node: missing resourcelink: "+rl.getNodeName());
+
+                VJDFAttributeMap vMap=rl.getPartMapVector();
+                if(vMap==null)
+                {
+                    vMap=new VJDFAttributeMap();
+                    vMap.add(null);
+                }
+                for(int j=0;j<vMap.size();j++)
+                {
+                    JDFAttributeMap map=vMap.elementAt(j);
+                    dAmount = rl.getActualAmount(map);
+                    rlNode.setActualAmount(dAmount, map);
+                }
+            }
+        }
+    }
+    
+    /**
+     * @param node
+     * @return
+     */
+    private boolean matchesNode(JDFNode node)
+    {
+        if(node==null)
+            return false;
+        if(hasAttribute(AttributeName.JOBID) && !getJobID().equals(node.getJobID(true)))
+            return false;
+        if(hasAttribute(AttributeName.JOBPARTID) && !getJobPartID().equals(node.getJobPartID(false)))
+            return false;
+        return true;
+    }
+    
 }
 
