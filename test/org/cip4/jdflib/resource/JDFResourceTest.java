@@ -126,6 +126,7 @@ import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 import org.cip4.jdflib.resource.process.JDFStripCellParams;
+import org.cip4.jdflib.resource.process.postpress.JDFFoldingParams;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionOp;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.StringUtil;
@@ -834,6 +835,30 @@ public class JDFResourceTest extends JDFTestCaseBase
 
     }
 
+    //////////////////////////////////////////////////////////////
+
+    /**
+     * test whether getpartition works for when inconsistently called
+     */
+    public void testGetPartition()
+    {   
+        JDFDoc doc=new JDFDoc("JDF");
+        JDFNode n=doc.getJDFRoot();
+        n.setType(EnumType.Folding);
+        JDFFoldingParams fp=(JDFFoldingParams) n.addResource(ElementName.FOLDINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+        JDFAttributeMap m=new JDFAttributeMap("SignatureName","Sig1");
+        m.put("SheetName","Sheet1");
+        JDFResource rSheet=fp.getCreatePartition(m, new VString("SignatureName SheetName"," "));
+        m.put("BlockName","Block1");
+        JDFResource r=fp.getCreatePartition(m, new VString("SignatureName SheetName BlockName"," "));
+        JDFAttributeMap m2=new JDFAttributeMap("SignatureName","Sig1");
+        m2.put("SheetName","Sheet1");
+        m2.put("Side","Front");
+        r=fp.getPartition(m2, EnumPartUsage.Implicit);
+        assertEquals(r,rSheet);
+        r=fp.getPartition(m2, EnumPartUsage.Explicit);
+        assertNull(r);
+    }
     //////////////////////////////////////////////////////////////
 
     /**
