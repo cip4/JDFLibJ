@@ -207,7 +207,10 @@ public class KElementTest extends JDFTestCaseBase
         assertNull("no sibling",ec1.getPreviousSibling());
         assertEquals("parent ok",ec2.getParentNode_KElement(),e);
         assertNull("ec1 no parent",ec1.getParentNode());
-
+        KElement ec33=ec3.replaceElement(ec3);
+        assertEquals("replace of this is a nop",ec3,ec33);
+        
+        
         // now cross document
         KElement e2=d2.getRoot();
         e2.appendElement("e22");
@@ -217,6 +220,7 @@ public class KElementTest extends JDFTestCaseBase
         assertEquals("c4 is next",ec1,ec4.getPreviousSibling());
         assertEquals("c4 is next",ec1.getNextSibling(),ec4);
         assertEquals("root",ec1.getParentNode(),e);
+        
     }
 
     ////////////////////////////////////////////////////////////////
