@@ -108,12 +108,14 @@ import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.JDFResourceTest;
 import org.cip4.jdflib.resource.JDFResource.EnumAmountMerge;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.postpress.JDFFoldingParams;
 import org.w3c.dom.Node;
 
 
@@ -343,6 +345,40 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
     }
 
+    /**
+     * test whether getpartition works for when inconsistently called
+     */
+    public void testSpawnInconsistentPart()
+    {   
+        JDFDoc doc=new JDFDoc("JDF");
+        JDFNode n=doc.getJDFRoot();
+        n.setType(EnumType.Folding);
+        JDFFoldingParams fp=(JDFFoldingParams) n.addResource(ElementName.FOLDINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+        JDFAttributeMap m=new JDFAttributeMap("SignatureName","Sig1");
+        JDFNodeInfo ni=(JDFNodeInfo) n.addResource(ElementName.NODEINFO, null, EnumUsage.Input, null, null, null, null);
+        m.put("SheetName","Sheet1");
+        JDFResource rSheet=fp.getCreatePartition(m, new VString("SignatureName SheetName"," "));
+        JDFResourceLink rl=n.getLink(fp, null);
+        rl.setPartMap(m);
+        m.put("BlockName","Block1");
+        JDFResource r=fp.getCreatePartition(m, new VString("SignatureName SheetName BlockName"," "));
+        m.put("BlockName","Block2");
+        r=fp.getCreatePartition(m, new VString("SignatureName SheetName BlockName"," "));
+        JDFAttributeMap m2=new JDFAttributeMap("SignatureName","Sig1");
+        m2.put("SheetName","Sheet1");
+        m2.put("Side","Front");
+        ni.getCreatePartition(m2, new VString("SignatureName SheetName Side"," "));
+        r=fp.getPartition(m2, EnumPartUsage.Implicit);
+        assertEquals(r,rSheet);
+        r=fp.getPartition(m2, EnumPartUsage.Explicit);
+        assertNull(r);
+        final JDFSpawn spawn=new JDFSpawn(n); // fudge to test output counting
+        VJDFAttributeMap vMap=new VJDFAttributeMap();
+        vMap.add(m2);
+        JDFNode spawnedNode=spawn.spawn("thisUrl","newURL",null,vMap,true,true,true,true);
+
+    }
+    //////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////
 
     public void testSpawnPart()
@@ -558,8 +594,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
             }
         }
     }
-
-
+    
     public void testSpawn3()
     {
         String fileNameIn            = "km2";
