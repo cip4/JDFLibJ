@@ -89,6 +89,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.process.JDFLayout;
@@ -352,6 +353,36 @@ public class JDFSignature extends JDFAutoLayout
         if(JDFLayout.isNewLayout(this))
              return getLeaves(bAll);
         return getChildrenByTagName(ElementName.SURFACE, null, null, false, true, -1);
+    }
+    
+    /**
+     * if this is a new layout, return the partition key signaturename
+     * else return Signature/@Name of this or its appropriate parent
+     * @return the name of the signature
+     */
+    public String getSignatureName()
+    {
+        if(getLocalName().equals(ElementName.SIGNATURE))
+            return getName();
+        if(getLocalName().equals(ElementName.SHEET))
+        {
+            final KElement parentNode = getParentNode_KElement();
+            if(parentNode instanceof JDFSignature)
+            {
+                JDFSignature sig=(JDFSignature)parentNode;
+                return sig.getSignatureName();
+            }
+        }
+        else if(getLocalName().equals(ElementName.SURFACE))
+        {
+            final KElement parentNode = getParentNode_KElement().getParentNode_KElement();
+            if(parentNode instanceof JDFSignature)
+            {
+                JDFSignature sig=(JDFSignature)parentNode;
+                return sig.getSignatureName();
+            }
+        }
+        return super.getSignatureName();
     }
 } // class JDFSignature
 //==========================================================================

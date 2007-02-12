@@ -74,6 +74,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -577,6 +578,64 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
         n2.moveElement(n.getResourcePool(),null);
         assertFalse((rl.isValid(null)));
         assertFalse((rl.validResourcePosition()));
+    }
+
+    /////////////////////////////////////////////////////////////////////
+    /**
+     * test that the position checking algorithm works
+     *     
+     */
+    public void testValidCombinedProcessIndex() throws Exception
+    {        
+        JDFDoc d=new JDFDoc(ElementName.JDF);
+        JDFNode n=d.getJDFRoot();
+        n.setType(EnumType.Strapping);
+        JDFResource rBar=n.addResource("Bar", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
+        JDFResourceLink rl=n.getLink(rBar,null);
+        assertTrue(rl.validCombinedProcessIndex());
+        rl.setCombinedProcessIndex(null);
+        assertTrue(rl.validCombinedProcessIndex());
+        JDFIntegerList il=new JDFIntegerList();
+        rl.setCombinedProcessIndex(il);
+        assertTrue(rl.validCombinedProcessIndex());
+        il.add(0);
+        rl.setCombinedProcessIndex(il);
+        assertFalse(rl.validCombinedProcessIndex());
+        n.setCombined(new VString("Approval ImageSetting"," "));
+        assertTrue(rl.validCombinedProcessIndex());
+        il.add(1);
+        rl.setCombinedProcessIndex(il);
+        assertTrue(rl.validCombinedProcessIndex());
+        il.add(1);
+        rl.setCombinedProcessIndex(il);
+        assertTrue(rl.validCombinedProcessIndex());
+        assertTrue(n.isValid(EnumValidationLevel.Incomplete));
+        il.add(2);
+        rl.setCombinedProcessIndex(il);
+        assertFalse(rl.validCombinedProcessIndex());
+        assertFalse(n.isValid(EnumValidationLevel.Incomplete));
+        assertTrue(rl.getInvalidAttributes(EnumValidationLevel.Incomplete, true, -1).contains(AttributeName.COMBINEDPROCESSINDEX));
+
+    }    /////////////////////////////////////////////////////////////////////
+    /**
+     * test that the position checking algorithm works
+     *     
+     */
+    public void testSetCombinedProcessIndex() throws Exception
+    {        
+        JDFDoc d=new JDFDoc(ElementName.JDF);
+        JDFNode n=d.getJDFRoot();
+        n.setType(EnumType.Strapping);
+        JDFResource rBar=n.addResource("Bar", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
+        JDFResourceLink rl=n.getLink(rBar,null);
+        rl.setCombinedProcessIndex(null);
+        assertFalse(rl.hasAttribute(AttributeName.COMBINEDPROCESSINDEX));
+        JDFIntegerList il=new JDFIntegerList();
+        rl.setCombinedProcessIndex(il);
+        assertFalse(rl.hasAttribute(AttributeName.COMBINEDPROCESSINDEX));
+        il.add(0);
+        rl.setCombinedProcessIndex(il);
+        assertEquals(rl.getCombinedProcessIndex(),il);
     }
 
 }

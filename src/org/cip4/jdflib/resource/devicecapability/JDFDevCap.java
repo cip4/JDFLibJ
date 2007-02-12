@@ -2064,7 +2064,7 @@ public class JDFDevCap extends JDFAutoDevCap
      {
          if(value==Integer.MAX_VALUE)
          {
-             setAttribute(AttributeName.MAXOCCURS, JDFConstants.UNBOUNDED, null);
+             setAttribute(AttributeName.MAXOCCURS, JDFConstants.POSINF, null);
          }
          else
          {

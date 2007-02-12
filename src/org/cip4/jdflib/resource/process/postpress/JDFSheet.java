@@ -245,6 +245,24 @@ public class JDFSheet extends JDFSignature
             e.deleteNode();
         }
     }
+    /**
+     * if this is a new layout, return the partition key signaturename
+     * else return Signature/@Name of this or its appropriate parent
+     * @return the name of the signature
+     */
+    public String getSheetName()
+    {
+        if(getLocalName().equals(ElementName.SHEET))
+        {
+            return getName();
+        }
+        if(getLocalName().equals(ElementName.SURFACE))
+        {
+            JDFSheet sh=(JDFSheet)getParentNode_KElement();
+            return sh.getSheetName();
+        }
+        return super.getSheetName();
+    }
     
     /**
      * test element Surface existance

@@ -142,15 +142,19 @@ public class JDFLayoutTest extends JDFTestCaseBase
         JDFLayout lo=(JDFLayout) n.appendMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null);
         assertFalse("lo 1.3",JDFLayout.isNewLayout(lo));
         JDFSignature si=lo.appendSignature();
+        si.setName("Sig1");
         assertEquals("signature name",si.getLocalName(),ElementName.SIGNATURE);
         assertFalse(si.hasAttribute(AttributeName.CLASS));
         si=lo.appendSignature();
+        si.setName("Sig2");
         assertEquals("num sigs",2,lo.numSignatures());
         assertEquals("signature name",si.getLocalName(),ElementName.SIGNATURE);
         
         JDFSheet sh=si.appendSheet();
+        sh.setName("Sheet2_1");
         sh.makeRootResource(null,null,true); // see what happens with refelements
         sh=si.appendSheet();
+        sh.setName("Sheet2_2");
         assertEquals("num sheets",2,si.numSheets());
         assertEquals("sheet name",sh.getLocalName(),ElementName.SHEET);
         sh=si.getCreateSheet(4);
@@ -259,6 +263,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
         JDFLayout lo=(JDFLayout) n.getMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null,0);
         assertTrue(JDFLayout.isNewLayout(lo));
         JDFSignature si=lo.getSignature(0);
+        assertEquals(si.getSignatureName(), "Sig1");
         assertFalse(si.hasAttribute(AttributeName.CLASS));
     }
     /////////////////////////////////////////////////////
@@ -354,7 +359,44 @@ public class JDFLayoutTest extends JDFTestCaseBase
         assertEquals(leaves.size(), 2);
  
      }
+    /////////////////////////////////////////////////////
+    public void testGetSignatureName_Old()
+    {
+        testBuildOldLayout();
+        JDFLayout lo=(JDFLayout) n.getMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null,0);
+        JDFSignature sig=lo.getSignature(0);
+        assertEquals(sig.getSignatureName(), sig.getName());
+        assertEquals(sig.getSignatureName(), "Sig1");
+        JDFSignature sig2=lo.getSignature(1);
+        assertEquals(sig2.getSignatureName(), sig2.getName());
+        assertEquals(sig2.getSignatureName(), "Sig2");
+        JDFSheet s1=sig2.getSheet(1); // don't try 0 it will fail because it is referenced...
+        assertEquals(s1.getSignatureName(), "Sig2");
+        assertEquals(s1.getSheetName(), "Sheet2_2");
+        JDFSurface su=s1.getCreateBackSurface();
+        assertEquals(su.getSignatureName(), "Sig2");
+        assertEquals(su.getSheetName(), "Sheet2_2");
+        
+     }
+    /////////////////////////////////////////////////////
+    public void testGetSignatureName_New()
+    {
+        testBuildNewLayout();
+        JDFLayout lo=(JDFLayout) n.getMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null,0);
+        JDFSignature sig=lo.getSignature(0);
+        assertEquals(sig.getSignatureName(), "SignatureName1");
+        JDFSignature sig2=lo.getSignature(1);
+         assertEquals(sig2.getSignatureName(), "SignatureName2");
+        JDFSheet s1=sig2.getSheet(1); // don't try 0 it will fail because it is referenced...
+        assertEquals(s1.getSignatureName(), "SignatureName2");
+        assertEquals(s1.getSheetName(), "SheetName2");
+        JDFSurface su=s1.getCreateBackSurface();
+        assertEquals(su.getSignatureName(), "SignatureName2");
+        assertEquals(su.getSheetName(), "SheetName2");        
+     }
    
+    /////////////////////////////////////////////////////
+
     public void testFixVersionProblem()
     {
         JDFParser p=new JDFParser();

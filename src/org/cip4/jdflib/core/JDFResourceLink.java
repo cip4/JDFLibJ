@@ -88,6 +88,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.pool.JDFPool;
@@ -103,6 +104,58 @@ import org.cip4.jdflib.util.StringUtil;
 
 public class JDFResourceLink extends JDFElement
 {
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib.core.KElement.EnumValidationLevel, boolean, int)
+     */
+    public VString getInvalidAttributes(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
+    {
+        // TODO Auto-generated method stub
+        VString v= super.getInvalidAttributes(level, bIgnorePrivate, nMax);
+        if(!v.contains(AttributeName.COMBINEDPROCESSINDEX) && !validCombinedProcessIndex())
+            v.add(AttributeName.COMBINEDPROCESSINDEX);
+        return v;
+    }
+
+    /**
+     * @param v
+     */
+    public boolean validCombinedProcessIndex()
+    {
+        JDFIntegerList vCombined=getCombinedProcessIndex();
+        if(vCombined==null)
+            return true;
+        final JDFNode parentJDF = getParentJDF();
+        if(parentJDF==null)
+        {
+            return false;
+        }
+        VString types=parentJDF.getTypes();
+        if(types==null)
+        {
+            return false;
+        }
+        final int typSize=types.size();
+        final int size = vCombined.size();
+        for(int i=0;i<size;i++)
+        {
+            final int combinedIndex = vCombined.getInt(i);
+            if(combinedIndex<0 || combinedIndex>=typSize)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#clone()
+     */
+    protected Object clone() throws CloneNotSupportedException
+    {
+        // TODO Auto-generated method stub
+        return super.clone();
+    }
+
     private static final long serialVersionUID = 1L;
     
     private static AtrInfoTable[] atrInfoTable_Abstract = new AtrInfoTable[12];
@@ -1227,6 +1280,7 @@ public class JDFResourceLink extends JDFElement
         boolean b=super.isValid(level);
         if(!b) 
             return false;
+        
         if(this instanceof JDFPartAmount)
             return true;
         
@@ -1806,6 +1860,8 @@ public class JDFResourceLink extends JDFElement
      */
     public void setCombinedProcessIndex(JDFIntegerList value)
     {
+        if(value!=null && value.size()==0)
+            value=null;
         setAttribute(AttributeName.COMBINEDPROCESSINDEX, value, null);
     }
     

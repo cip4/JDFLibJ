@@ -1330,7 +1330,10 @@ public class JDFElement extends KElement
      */
     public void setAttribute(String key, JDFDuration value, String nameSpaceURI)
     {
-        super.setAttribute(key, value.getDurationISO(), nameSpaceURI);
+        if(value==null)
+            removeAttribute(key,nameSpaceURI);
+        else
+            super.setAttribute(key, value.getDurationISO(), nameSpaceURI);
     }
     
     /**
@@ -1344,7 +1347,10 @@ public class JDFElement extends KElement
      */
     public void setAttribute(String key, JDFDurationRangeList value, String nameSpaceURI)
     {
-        super.setAttribute(key, value.toString(), nameSpaceURI);
+        if(value==null)
+            removeAttribute(key,nameSpaceURI);
+        else
+            super.setAttribute(key, value.toString(), nameSpaceURI);
     }
     
     /**
@@ -1358,7 +1364,10 @@ public class JDFElement extends KElement
      */
     public void setAttribute(String key, JDFDateTimeRangeList value, String nameSpaceURI)
     {
-        super.setAttribute(key, value.toString(), nameSpaceURI);
+        if(value==null)
+            removeAttribute(key,nameSpaceURI);
+        else
+            super.setAttribute(key, value.toString(), nameSpaceURI);
     }
     
     /**
@@ -1372,7 +1381,10 @@ public class JDFElement extends KElement
      */
     public void setAttribute(String key, JDFRectangleRangeList value, String nameSpaceURI)
     {
-        super.setAttribute(key, value.toString(), nameSpaceURI);
+        if(value==null)
+            removeAttribute(key,nameSpaceURI);
+        else
+            super.setAttribute(key, value.toString(), nameSpaceURI);
     }
     
     /**
@@ -1386,7 +1398,10 @@ public class JDFElement extends KElement
      */
     public void setAttribute(String key, JDFShapeRangeList value, String nameSpaceURI)
     {
-        super.setAttribute(key, value.toString(), nameSpaceURI);
+        if(value==null)
+            removeAttribute(key,nameSpaceURI);
+        else
+            super.setAttribute(key, value.toString(), nameSpaceURI);
     }
     
     /**
@@ -1400,7 +1415,10 @@ public class JDFElement extends KElement
      */
     public void setAttribute(String key, JDFNumList value, String nameSpaceURI)
     {
-        super.setAttribute(key, value.toString(), nameSpaceURI);
+        if(value==null)
+            removeAttribute(key,nameSpaceURI);
+        else
+            super.setAttribute(key, value.toString(), nameSpaceURI);
     }
     
     /**
@@ -1414,7 +1432,10 @@ public class JDFElement extends KElement
      */
     public void setAttribute(String key, JDFNumberRange value, String nameSpaceURI)
     {
-        super.setAttribute(key, value.toString(), nameSpaceURI);
+        if(value==null)
+            removeAttribute(key,nameSpaceURI);
+        else
+            super.setAttribute(key, value.toString(), nameSpaceURI);
     }
     
     /**
@@ -1428,7 +1449,10 @@ public class JDFElement extends KElement
      */
     public void setAttribute(String key, JDFIntegerRange value, String nameSpaceURI)
     {
-        super.setAttribute(key, value.toString(), nameSpaceURI);
+        if(value==null)
+            removeAttribute(key,nameSpaceURI);
+        else
+            super.setAttribute(key, value.toString(), nameSpaceURI);
     }
     
     
@@ -1443,7 +1467,10 @@ public class JDFElement extends KElement
      */
     public void setAttribute(String key, JDFNameRangeList value, String nameSpaceURI)
     {
-        super.setAttribute(key,value.toString(),nameSpaceURI);
+        if(value==null)
+            removeAttribute(key,nameSpaceURI);
+        else
+            super.setAttribute(key,value.toString(),nameSpaceURI);
     }
     
     /**
@@ -1457,7 +1484,10 @@ public class JDFElement extends KElement
      */
     public void setAttribute(String key, JDFNameRange value, String nameSpaceURI)
     {
-        super.setAttribute(key,value.toString(),nameSpaceURI);
+        if(value==null)
+            removeAttribute(key,nameSpaceURI);
+        else
+            super.setAttribute(key,value.toString(),nameSpaceURI);
     }   
     
     /**
@@ -1471,7 +1501,10 @@ public class JDFElement extends KElement
      */
     public void setAttribute(String key, JDFNumberRangeList value, String nameSpaceURI)
     {
-        super.setAttribute(key,value.toString(),nameSpaceURI);
+        if(value==null)
+            removeAttribute(key,nameSpaceURI);
+        else
+            super.setAttribute(key,value.toString(),nameSpaceURI);
     }
     
     /**
@@ -1485,7 +1518,10 @@ public class JDFElement extends KElement
      */
     public void setAttribute(String key, JDFIntegerRangeList value, String nameSpaceURI)
     {
-        super.setAttribute(key,value.toString(),nameSpaceURI);
+        if(value==null)
+            removeAttribute(key,nameSpaceURI);
+        else
+            super.setAttribute(key,value.toString(),nameSpaceURI);
     }
     
     /**
@@ -1499,7 +1535,10 @@ public class JDFElement extends KElement
      */
     public void setAttribute(String key, JDFXYPairRange value, String nameSpaceURI)
     {
-        super.setAttribute(key,value.toString(),nameSpaceURI);
+        if(value==null)
+            removeAttribute(key,nameSpaceURI);
+        else
+            super.setAttribute(key,value.toString(),nameSpaceURI);
     }
     
     /**
@@ -1513,7 +1552,10 @@ public class JDFElement extends KElement
      */
     public void setAttribute(String key, JDFXYPairRangeList value, String nameSpaceURI)
     {
-        super.setAttribute(key,value.toString(),nameSpaceURI);
+        if(value==null)
+            removeAttribute(key,nameSpaceURI);
+        else
+            super.setAttribute(key,value.toString(),nameSpaceURI);
     }
     
     /**
