@@ -74,7 +74,6 @@ import junit.framework.TestSuite;
 import org.cip4.jdflib.auto.AutoTest;
 import org.cip4.jdflib.auto.JDFClassInstantiationTest;
 import org.cip4.jdflib.core.AttrInfoTest;
-import org.cip4.jdflib.core.DigiPrintTest;
 import org.cip4.jdflib.core.DocumentJDFImplTest;
 import org.cip4.jdflib.core.ElemInfoTest;
 import org.cip4.jdflib.core.FactoryTest;
@@ -117,13 +116,13 @@ import org.cip4.jdflib.devicecapability.JDFStateBaseTest;
 import org.cip4.jdflib.devicecapability.JDFTestTest;
 import org.cip4.jdflib.examples.AmountTest;
 import org.cip4.jdflib.examples.ContentCreationTest;
+import org.cip4.jdflib.examples.DigiPrintTest;
 import org.cip4.jdflib.examples.JDFExampleDocTest;
 import org.cip4.jdflib.examples.MISFinTest;
 import org.cip4.jdflib.examples.NColorTest;
 import org.cip4.jdflib.examples.VarnishTest;
 import org.cip4.jdflib.examples.WebTest;
 import org.cip4.jdflib.jmf.JDFMessageTest;
-import org.cip4.jdflib.jmf.JDFPipeParams;
 import org.cip4.jdflib.jmf.JDFPipeParamsTest;
 import org.cip4.jdflib.jmf.JMFResourceTest;
 import org.cip4.jdflib.jmf.JMFStatusTest;
@@ -180,8 +179,6 @@ public class AllJDFLibTest extends JDFTestCaseBase
  
         // core
         suite.addTestSuite(AttrInfoTest.class);
-        suite.addTestSuite(DigiPrintTest.class);
-        suite.addTestSuite(DocumentJDFImplTest.class);
         suite.addTestSuite(ElemInfoTest.class);
         suite.addTestSuite(FactoryTest.class);
         suite.addTestSuite(FixVersionTest.class);
@@ -229,6 +226,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         //examples
         suite.addTestSuite(AmountTest.class);
         suite.addTestSuite(ContentCreationTest.class);
+        suite.addTestSuite(DigiPrintTest.class);
         suite.addTestSuite(JDFExampleDocTest.class);
         suite.addTestSuite(MISFinTest.class);
         suite.addTestSuite(NColorTest.class);

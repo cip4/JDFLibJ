@@ -97,6 +97,10 @@ public class AmountTest extends JDFTestCaseBase
         vRL.add(rlMedia);
         
  
+        for(int j=1;j<2;j++) // TODO think about a minimalist example
+        {
+            boolean bMinimal=j==0;
+        
         for(int i=0;i<vs.size();i++)
         {
             String sheet=vs.stringAt(i);
@@ -126,7 +130,7 @@ public class AmountTest extends JDFTestCaseBase
                 bags[0].totalAmount=50;
                 JDFResourceAudit ra2=stUtil.setResourceAudit(bags[0],EnumReason.OperatorInput);
                 ra2.setRef(ra);
-                ra2.setDescriptiveName("manual reset to using only 50 sheets because 100 initially were  wates");
+                ra2.setDescriptiveName("manual reset to using only 50 sheets because 100 initially were wastes");
 
             }
             bags[0].addPhase(2000, 0, true);
@@ -141,8 +145,8 @@ public class AmountTest extends JDFTestCaseBase
             bags[1].addPhase(0, 40, true);
             stUtil.setPhase(EnumNodeStatus.InProgress, "Waste", EnumDeviceStatus.Running, null ,bags);
 
-            bags[0].addPhase(4000, 0, true);
-            bags[1].addPhase(4000, 0, true);
+            bags[0].addPhase(3000, 0, true);
+            bags[1].addPhase(3000, 0, true);
             stUtil.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, null ,bags);
             
             JDFResourceAudit ra=stUtil.setResourceAudit(bags[0],EnumReason.ProcessResult);
@@ -153,12 +157,12 @@ public class AmountTest extends JDFTestCaseBase
             bags[0].totalAmount=i==0 ? 5100 : 5050;
             JDFResourceAudit ra2=stUtil.setResourceAudit(bags[0],EnumReason.OperatorInput);
             ra2.setRef(ra);
-            ra2.setDescriptiveName("manual reset to using only 2100 sheets because 100 initially were  wates");
+            ra2.setDescriptiveName("manual reset to using only 5100 sheets because 100 initially were  wates");
             
             JDFProcessRun pr=stUtil.setProcessResult(EnumNodeStatus.Completed);
             pr.setDescriptiveName("we even have the utterly useless ProcessRun");
          }
-        d.write2File(sm_dirTestDataTemp+File.separator+"ConvPrintAmount_final.jdf",2,false);
-
+        d.write2File(sm_dirTestDataTemp+File.separator+"ConvPrintAmount_"+ (bMinimal ? "min":"full") +".jdf",2,false);
+        }
     }
 }

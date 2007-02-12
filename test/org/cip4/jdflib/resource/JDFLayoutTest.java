@@ -74,20 +74,26 @@ import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
+import org.cip4.jdflib.auto.JDFAutoRegisterMark.EnumMarkUsage;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
+import org.cip4.jdflib.datatypes.JDFMatrix;
+import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
+import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFLayout;
+import org.cip4.jdflib.resource.process.JDFRegisterMark;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.JDFSurface;
 import org.cip4.jdflib.resource.process.postpress.JDFSheet;
@@ -376,16 +382,55 @@ SeparationList
 Mark References (FoldMark, CIE, …)
 
      */
-    public void testGeneratedObject()
+    public void testGeneratedObject() throws Exception
     {
         JDFDoc d=new JDFDoc("JDF");
         n=d.getJDFRoot();
+        n.setType(EnumType.Imposition);
         JDFLayout lo=(JDFLayout) n.addResource("Layout",null,EnumUsage.Input, null, null, null,null);
+        JDFRunList rlo=(JDFRunList) n.addResource("RunList",null,EnumUsage.Output, null, null, null,null);
+        rlo.setFileURL("output.pdf");
         
+        lo.appendXMLComment("This is a simple horizontal slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes error and endtime in the lower left corner of the scb");
         JDFMarkObject mark=lo.appendMarkObject();
+        mark.setCTM(new JDFMatrix("1 0 0 1 0 0"));
         JDFJobField jf=mark.appendJobField();
+        jf.setShowList(new VString("Error EndTime"," "));
         
+        lo.appendXMLComment("This is a simple vertical slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes the operator name along the right side of the sheet text from top to bottom\nthe slug line (top right of the slug cs) is anchored in the bottom right of the sheet.\nNote that the coordinates in the ctm are guess work. the real coordinates are left as an exercise for the reader;-)");
+        mark=lo.appendMarkObject();
+        mark.setCTM(new JDFMatrix("0 1 -1 0 555 444"));
+        jf=mark.appendJobField();
+        jf.setShowList(new VString("Operator"," "));
+        JDFDeviceMark dm=jf.appendDeviceMark();
+        dm.setAttribute("Anchor", "TopRight");
+        dm.setFont("Arial");
+        dm.setFontSize(10);
         
+        lo.appendXMLComment("This is a formatted vertical slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes a formatted line along the left side of the sheet text from top to bottom\nthe slug line (top left) is anchored in the bottom left of the sheet.\nThe text is defined in @Format with the sequence in ShowList defining the 5 placeholders marked by %s or %i\nAn example instance would be: \"This Cyan plate of Sheet1 was proudly produced by Joe Cool! Resolution: 600 x 600\"\nNote that the coordinates in the ctm are guess work. the real coordinates are left as an exercise for the reader;-)");
+        mark=lo.appendMarkObject();
+        mark.setCTM(new JDFMatrix("0 1 -1 0 0 0"));
+        jf=mark.appendJobField();
+        jf.setShowList(new VString("Separation SheetName Operator ResolutionX ResolutionY"," "));
+        jf.setAttribute("Format", "This %s plate of %s was proudly produced by %s!\nResolution: %i x %i");
+        dm=jf.appendDeviceMark();
+        dm.setAttribute("Anchor", "TopLeft");
+        dm.setFont("Arial");
+        dm.setFontSize(10);
+        
+        lo.appendXMLComment("This is a positioned registermark\nthe center of the mark is translated by 666 999\n the JobField is empty and serves aa a Marker that no external Content is requested");
+        mark=lo.appendMarkObject();
+        mark.setCTM(new JDFMatrix("1 0 0 1 666 999"));
+        jf=mark.appendJobField();
+        mark.appendXMLComment("The coordinate system origin is defined by the anchor in the center, i.e. 0 0\n the separartions are excluding black");
+        JDFRegisterMark rm=mark.appendRegisterMark();
+        rm.setMarkType("Arc Cross");
+        rm.setMarkUsage(EnumMarkUsage.Color);
+        rm.setCenter(new JDFXYPair("0 0"));
+        rm.setSeparations(new VString("Cyan Magent Yellow"," "));
+        dm=jf.appendDeviceMark();
+        dm.setAttribute("Anchor", "CenterCenter");
+       
         d.write2File(sm_dirTestDataTemp+"generatedObject.jdf", 2, false);
         
     }

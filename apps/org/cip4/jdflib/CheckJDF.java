@@ -171,7 +171,7 @@ public class CheckJDF
     public boolean bWarnDanglingURL=false;
     public KElement.EnumValidationLevel level=EnumValidationLevel.Incomplete;
     public VString allFiles=null;
-
+    
     public String proxyHost = null;
     public String proxyPort = null;
 
@@ -182,7 +182,7 @@ public class CheckJDF
     public EnumFitsValue testlists=EnumFitsValue.Allowed;
     
     final private static String version =
-        "CheckJDF: JDF validator; -- (c) 2001-2006 CIP4"
+        "CheckJDF: JDF validator; -- (c) 2001-2007 CIP4"
             + "\nJDF 1.3 compatible version\n"
             + "\nCode based on schema JDF_1.3.xsd Release Candidate 001\n"
             + "Build version " + JDFAudit.software();
@@ -1540,6 +1540,7 @@ public class CheckJDF
              return;
          }
 
+         deviceCap.setIgnoreExtensions(!bPrintNameSpace);
          sysOut.println("\n**********************************************************");
          sysOut.println("\nOutput of DeviceCapability test result follows:\n");
          
@@ -1553,18 +1554,16 @@ public class CheckJDF
              {
                  final JDFNode node = (JDFNode) vExecNodes.elementAt(j);
                  final String id = node.getAttribute(AttributeName.ID);
-                 final String descrName = node.getAttribute(AttributeName.DESCRIPTIVENAME);
+                 final String descrName = node.getAttribute(AttributeName.DESCRIPTIVENAME,null,null);
                  final String xPath = node.buildXPath(null);
                  sysOut.println( xPath + " ID= " + id + " " + descrName);
                  
                  if (execRoot != null) 
                  {
-                      final KElement exNode = execRoot.appendElement("JDF");
+                      final KElement exNode = execRoot.appendElement("ExecutableNode");
                       exNode.setAttribute("XPath",xPath);
-                      exNode.setAttribute("ID",id);
-                                      
-                      if (!descrName.equals(JDFConstants.EMPTYSTRING))
-                          exNode.setAttribute("DescriptiveName",descrName);
+                      exNode.setAttribute("ID",id);                        
+                      exNode.setAttribute("DescriptiveName",descrName);
                  }
              }
              sysOut.println();
@@ -1587,7 +1586,6 @@ public class CheckJDF
          }
          else 
          { 
-             testResult.write2File ("temp" + java.io.File.separator + "_BugReport.xml", 2, false);
              testElement.copyElement(testResult.getRoot(), null);
          }
      }
@@ -1733,13 +1731,14 @@ public class CheckJDF
          this.setPrint(!args.boolParameter('Q', false));         
          XMLOutputName = args.parameterString('x');         
          pOut = new XMLDoc("CheckOutput", null);                 
+         KElement xmlRoot=pOut.getRoot();
+         xmlRoot.setAttribute("Language", "EN"); 
          
          boolean bVersion=!bQuiet||args.boolParameter('V',false);         
          if(bVersion)
          {
              sysOut.println('\n' + version + '\n');
              sysOut.println(args.toString());
-             KElement xmlRoot=pOut.getRoot();
              xmlRoot.setAttribute("Arguments",StringUtil.setvString(commandLineArgs," ",null,null));
          }
          
@@ -2041,7 +2040,7 @@ public class CheckJDF
     public XMLDoc processSingleFile(String fileName)
     {
         theDoc=null;
-        return processSingleFile(null,null,fileName);
+        return processSingleFile(null,null,fileName,null);
     }
    
     /**
@@ -2400,7 +2399,7 @@ public class CheckJDF
                      KElement xmlRoot =pOut.getRoot();
                      KElement testFileRoot = xmlRoot.appendElement("TestFile");
                      testFileRoot.setAttribute("FileName", xmlFile);
-                     testFileRoot.setAttribute("Message", "Could not finf file: "+xmlFile);                     }
+                     testFileRoot.setAttribute("Message", "Could not find file: "+xmlFile);                     }
              }
          }
     }
@@ -2426,8 +2425,7 @@ public class CheckJDF
         {
             if (!wannaPrint)
                 return;
-            System.out.println(string);
-            
+            System.out.println(string);            
         }
         public void println()
         {
@@ -2440,8 +2438,7 @@ public class CheckJDF
         {
             if (!wannaPrint)
                 return;
-            System.out.println(string);
-            
+            System.out.println(string);            
         }    
     }
     //////////////////////////////////////////////////////////////////   
