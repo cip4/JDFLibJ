@@ -415,7 +415,9 @@ public class JDFSpawnTest extends JDFTestCaseBase
             JDFResourceAudit ra=spawnedNode.cloneResourceToModify(rl);
             String clonedResID=ra.getOldLink().getrRef();
 
-
+            JDFResourceLink loRL=spawnedNode.getMatchingLink(ElementName.LAYOUT,EnumProcessUsage.AnyInput,0);
+            assertNull(loRL.getPartMapVector());
+            
             n=d.getJDFRoot();
             JDFComment comment2=n.appendComment();
             comment2.setText("Comment 2 after");

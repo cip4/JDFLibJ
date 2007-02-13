@@ -120,6 +120,7 @@ import org.cip4.jdflib.resource.process.JDFDigitalPrintingParams;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
+import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPreview;
@@ -1076,6 +1077,7 @@ public class JDFResourceTest extends JDFTestCaseBase
         n.setType("ConventionalPrinting",true);
         n.appendElement("NS:Foobar","www.foobar.com");
 
+        JDFLayout lo=(JDFLayout)n.appendMatchingResource("Layout",JDFNode.EnumProcessUsage.AnyInput,null);
         JDFComponent comp=(JDFComponent)n.appendMatchingResource("Component",JDFNode.EnumProcessUsage.AnyOutput,null);
         JDFExposedMedia xm=(JDFExposedMedia)n.appendMatchingResource("ExposedMedia",JDFNode.EnumProcessUsage.Plate,null);
         JDFNodeInfo ni=n.appendNodeInfo();

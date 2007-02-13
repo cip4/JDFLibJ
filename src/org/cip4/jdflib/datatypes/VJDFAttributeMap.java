@@ -347,7 +347,7 @@ public class VJDFAttributeMap
     {
         for (int i=0; i<map.size(); i++)
         {
-            appendUnique (map.elementAt(i));
+            appendUnique (new JDFAttributeMap(map.elementAt(i)));
         }
     }
 

@@ -637,7 +637,7 @@ public class JDFSpawn
                     continue;
                 }
     
-                VJDFAttributeMap vPartMap = new VJDFAttributeMap(vLocalSpawnParts.getVector());
+                VJDFAttributeMap vPartMap = new VJDFAttributeMap(vLocalSpawnParts);
     
                 // 160802 RP leave implied resource link parts if PartUsage=implicit
                 if (!r.getPartUsage().equals(JDFResource.EnumPartUsage.Implicit))
@@ -651,9 +651,8 @@ public class JDFSpawn
                             final JDFResource.EnumPartIDKey e = (JDFResource.EnumPartIDKey) vImplicitPartitions.elementAt(ii);
                             vPartKeys.add(e.getName());
                         }
-    
-                        vPartMap.reduceMap(vPartKeys.getSet());
                     }
+                    vPartMap.reduceMap(vPartKeys.getSet());
                 }
     
                 if (!vPartMap.isEmpty())

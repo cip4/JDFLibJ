@@ -71,6 +71,7 @@
 package org.cip4.jdflib.core;
 
 import java.io.File;
+import java.util.HashSet;
 import java.util.Vector;
 
 import junit.framework.TestCase;
@@ -722,6 +723,37 @@ public class JDFElementTest extends TestCase
                 assertFalse("valid doc: " + file.getPath(), e
                         .isValid(EnumValidationLevel.RecursiveComplete));
             }
+        }
+    }
+    
+///////////////////////////////////////////////////////////////////////////    
+
+    public void testUniqueID()
+    {
+        HashSet m=new HashSet();
+        for(int i=0;i<200000;i++)
+        {
+            String s=JDFElement.uniqueID(0);
+            if(m.contains(s))
+                fail("oops");
+            m.add(s);
+        }
+    }
+///////////////////////////////////////////////////////////////////////////    
+
+    public void testAppendAnchor()
+    {
+        JDFDoc doc=new JDFDoc("JDF");
+        JDFElement e=doc.getJDFRoot();
+        HashSet m=new HashSet();
+        for(int i=0;i<10000;i++)
+        {           
+            final JDFElement appendElement = (JDFElement)e.appendElement("FooBar");
+            String s=appendElement.appendAnchor(null);
+            if(m.contains(s))
+                fail("oops");
+            assertEquals(s, appendElement.getID());
+            m.add(s);
         }
     }
     

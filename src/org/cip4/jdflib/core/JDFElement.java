@@ -2715,8 +2715,9 @@ public class JDFElement extends KElement
      * UniqueID - create a unique id with 12 digits<br>
      *            6 digits are calculated via time,
      *            the other 6 digits are taken from id
+     * Normally this should only be used internally, @see JDFElement.appendAnchor() for details.
      *
-     * @param id the starting id of the ID
+     * @param id the starting id of the ID - should normally be 0 in order to increment
      *
      * @return the ID string value
      * 
