@@ -7246,38 +7246,10 @@ public class JDFNode extends JDFElement
     public VJDFAttributeMap getExecutablePartitions (JDFResourceLink link, JDFResource res, JDFResource.EnumResStatus minStatus)
     {
         final VJDFAttributeMap vp = new VJDFAttributeMap ();
-
         addExecutablePartitions (link, res, vp, minStatus);
-
         return vp;
     }
 
-    /**
-     * Adds the executable partitions of the resource in the node (with corresponding
-     * resource link). The part maps returned may be nested.
-     *
-     * isAvailable will become true, if the given resource is available. Availability
-     * depends on the status, the availability of refered sub-partitions and the part
-     * usage.
-     *
-     * isProcStatOK will become true, if the process states of the given resource and all
-     * its sub-partitions are "Waiting".
-     *
-     * The method may be applied to the root or sub-parts. If it is applied to the root
-     * a returned empty part map (in the vector of part maps) indicates that the whole
-     * resource is executable. 
-     *
-     * NOTE: The method only adds partitions to vamPartMaps. Therefore, the caller has to
-     * clear the vector before calling this method.
-     *
-     * 
-     * @param link        the resource link.
-     * @param res         may be the root node or any partition.
-     * @param vamPartMaps the vector to which the found part maps will be added.
-     * @param minStatus   minimum resource status to include.
-     * 
-     * @return ExecPartFlags - The flags <code>isAvailable</code> and <code>isProcStatOK</code>.
-     */
     private ExecPartFlags addExecutablePartitions(
             JDFResourceLink link, JDFResource res, VJDFAttributeMap vamPartMaps, JDFResource.EnumResStatus minStatus)
     {
@@ -7338,9 +7310,7 @@ public class JDFNode extends JDFElement
         //
 
         final JDFResource.EnumResStatus statRes = res.getResStatus (false);
-        final JDFResource.EnumSpawnStatus statSpawn = res.getSpawnStatus ();
-        boolean isAvailable = ((statRes.getValue () >= minStatus.getValue ())
-                && (statSpawn != JDFResource.EnumSpawnStatus.SpawnedRW));
+        boolean isAvailable = (statRes.getValue () >= minStatus.getValue ());
 
         if (nChildPartitions > 0)   // Non leaf
         {
@@ -7357,7 +7327,7 @@ public class JDFNode extends JDFElement
             else
             {
                 if ((partUsage == JDFResource.EnumPartUsage.Explicit)
-                        || (link.hasChildElement (ElementName.PART, JDFConstants.EMPTYSTRING)))
+                        || (link.hasChildElement (ElementName.PART, null)))
                 {
                     isAvailable = true;
                 }

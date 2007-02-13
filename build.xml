@@ -18,6 +18,7 @@
 		<tstamp />
 		<property file="version.properties"/>
 		<property name="base.filename" value="JDFLibJ-${major.version}.${minor.version}" />		
+		<property name="major.filename" value="JDFLibJ-${major.version}" />		
 		<property name="jdflib.src.dir" value="./src" />
 		<property name="apps.src.dir" value="./apps" />
 		<property name="test.src.dir" value="./test" />
@@ -92,6 +93,10 @@
 			</manifest>
 		</jar>
 	</target>
+	
+	<target name="major_jar" depends="jar" description="Builds a JAR archive containing the JDFLib-J binaries.">
+		<copy file="${dist.dir}/${base.filename}.jar" tofile="${dist.dir}/${major.filename}.jar"/>
+	</target>
 
 	<!--  ==================================================================================  -->
 	<!--  ==================================================================================  -->
@@ -115,11 +120,12 @@
 	<!--  i.e. JAR, JavaDoc, and all manually written documentation                           -->
 	<!--  ==================================================================================  -->
 	<!-- <target name="pack-bin" depends="common-prepare,jar,doc" description="Bundles a distribution of JDFLib-J binaries and Javadoc in a ZIP file"> -->
-	<target name="pack-bin" depends="common-prepare,jar" description="Bundles a distribution of JDFLib-J binaries and Javadoc in a ZIP file">
+	<target name="pack-bin" depends="common-prepare,jar,major_jar" description="Bundles a distribution of JDFLib-J binaries and Javadoc in a ZIP file">
 		<echo message="Building ${base.filename}-bin.zip" />
 		<zip destfile="${dist.dir}/${base.filename}-bin.zip">
 			<zipfileset dir="${doc.dir}" prefix="docs" />
 			<zipfileset dir="${dist.dir}" includes="${base.filename}.jar" />
+			<zipfileset dir="${dist.dir}" includes="${major.filename}.jar" />
 			<zipfileset dir="${dist.dir}" includes="Readme.txt,Version.rtf" />
 		</zip>
 	</target>

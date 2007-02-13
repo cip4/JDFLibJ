@@ -45,22 +45,33 @@ public class JDFSpawn
 {
     
     private JDFNode node;
+    
     /**
      * if true, reduce read only partitions, else retain entire resource
      */
     public boolean bSpawnROPartsOnly=true;
+    
+    /**
+     * if true, allow multiple rw spawning of resources
+     * note that this feature causes race conditions when merging
+     */
+    public boolean bSpawnRWPartsMultiple=false;
+   
     /**
      * if true, copy node info
      */
     public boolean bCopyNodeInfo=true; 
+    
     /**
      * if true, copy customer info
      */
     public boolean bCopyCustomerInfo=true;
+    
     /**
      * if true, copy comments
      */
     public boolean bCopyComments=false;
+    
     /**
      * if true, ensure sufficient partitioning of rw resources, else do not add missing partitions
      */
@@ -123,22 +134,10 @@ public class JDFSpawn
     {
         // need copy in order to fix up 1.3 NodeInfo spawn
         Vector vRWResources = vRWResources_in==null ? new Vector() : vRWResources_in;
-
         VJDFAttributeMap vLocalSpawnParts = vSpawnParts;
 
-        Collection vCheck = checkSpawnedResources();
-        if(vCheck!=null)
-        {
-            String strIDs = "JDFNode.spawn: multiply spawned rw resources: ";
-            VString vBad=new VString();
-            Iterator iterCheck=vCheck.iterator();
-            while(iterCheck.hasNext())
-            {
-                vBad.appendUnique(((JDFResource)iterCheck.next()).getAttribute(AttributeName.ID));
-            }
-            strIDs += StringUtil.setvString(vBad,JDFConstants.BLANK,null,null);
-            throw new JDFException(strIDs,exMultiSpawnRW);
-        }
+        if(!bSpawnRWPartsMultiple) 
+            checkMultipleRWRes();
 
         //create a new jdf document that contains the node to be spawned
         final JDFDoc docOut = new JDFDoc(ElementName.JDF);
@@ -215,11 +214,31 @@ public class JDFSpawn
 
         // find resources that must be copied
         addSpawnedResources(rootOut,spawnAudit);
-
         finalizeSpawn(vLocalSpawnParts, outLinks, spawnAudit);
 
         // return the spawned node
         return rootOut;
+    }
+
+    /**
+     *  check for multiple rw resources and throw a JDFException if an rw resource 
+     */
+    private void checkMultipleRWRes()
+    {
+        // only check if not explicitly requested not to check
+        Collection vCheck = checkSpawnedResources();
+        if(vCheck!=null)
+        {
+            String strIDs = "JDFNode.spawn: multiply spawned rw resources: ";
+            VString vBad=new VString();
+            Iterator iterCheck=vCheck.iterator();
+            while(iterCheck.hasNext())
+            {
+                vBad.appendUnique(((JDFResource)iterCheck.next()).getAttribute(AttributeName.ID));
+            }
+            strIDs += StringUtil.setvString(vBad,JDFConstants.BLANK,null,null);
+            throw new JDFException(strIDs,exMultiSpawnRW);
+        }
     }
     
     /**

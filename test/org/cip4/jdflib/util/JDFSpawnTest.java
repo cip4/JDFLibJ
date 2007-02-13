@@ -82,6 +82,7 @@ import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.JDFResourceLink;
@@ -880,9 +881,27 @@ public class JDFSpawnTest extends JDFTestCaseBase
         vsRWResourceIDs.add ("Link84847227_000309");
         vsRWResourceIDs.add ("r85326439_027691");
 
-        JDFNode nodeProc = jdfDoc.getJDFRoot ().getJobPart ("IPD0.I", JDFConstants.EMPTYSTRING);
+        JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart ("IPD0.I", null);
         final Collection vSpawned = nodeProc.checkSpawnedResources (vsRWResourceIDs, vamParts);
         assertNull(vSpawned);
+        JDFSpawn spawn=new JDFSpawn(nodeProc);
+        spawn.vRWResources_in=vsRWResourceIDs;
+        spawn.vSpawnParts=vamParts;
+        JDFNode s2=spawn.spawn();
+        assertNotNull(spawn.checkSpawnedResources());
+
+        try
+        {
+            spawn.spawn();
+            fail("multi rw spawn");
+        }
+        catch(JDFException x)
+        {     // nop
+        }
+        spawn.bSpawnRWPartsMultiple=true;
+        assertNotNull(spawn.checkSpawnedResources());
+        JDFNode s3=spawn.spawn();
+        
     }
 
 
