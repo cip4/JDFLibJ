@@ -16,6 +16,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -23,6 +24,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAmountPool;
+import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFProcessRun;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
@@ -97,7 +99,7 @@ public class AmountTest extends JDFTestCaseBase
         vRL.add(rlMedia);
         
  
-        for(int j=1;j<2;j++) // TODO think about a minimalist example
+        for(int j=0;j<2;j++) // TODO think about a minimalist example
         {
             boolean bMinimal=j==0;
         
@@ -120,7 +122,7 @@ public class AmountTest extends JDFTestCaseBase
             bags[1].addPhase(0, 200, true);
             stUtil.setPhase(EnumNodeStatus.Setup, "FormChange", EnumDeviceStatus.Setup, "FormChange" ,bags);
  
-            if(i==1)
+            if(i==1 &&!bMinimal)
             {
                 JDFResourceAudit ra=stUtil.setResourceAudit(bags[0],EnumReason.ProcessResult);
                 
@@ -141,8 +143,8 @@ public class AmountTest extends JDFTestCaseBase
             bags[1].addPhase(0, 0, true);
             stUtil.setPhase(EnumNodeStatus.Cleanup, "Washup during processing", EnumDeviceStatus.Cleanup, "Washup" ,bags);
 
-            bags[0].addPhase(0, 40, true);
-            bags[1].addPhase(0, 40, true);
+            bags[0].addPhase(0, i==0 ? 40 : 30, true);
+            bags[1].addPhase(0, i==0 ? 40 : 30, true);
             stUtil.setPhase(EnumNodeStatus.InProgress, "Waste", EnumDeviceStatus.Running, null ,bags);
 
             bags[0].addPhase(3000, 0, true);
@@ -151,17 +153,28 @@ public class AmountTest extends JDFTestCaseBase
             
             JDFResourceAudit ra=stUtil.setResourceAudit(bags[0],EnumReason.ProcessResult);
             
-            stUtil.setResourceAudit(bags[1],EnumReason.ProcessResult);
+            if(!bMinimal)
+            {
+                stUtil.setResourceAudit(bags[1],EnumReason.ProcessResult);
 
-            bags[0].reset();
-            bags[0].totalAmount=i==0 ? 5100 : 5050;
-            JDFResourceAudit ra2=stUtil.setResourceAudit(bags[0],EnumReason.OperatorInput);
-            ra2.setRef(ra);
-            ra2.setDescriptiveName("manual reset to using only 5100 sheets because 100 initially were  wates");
-            
+                bags[0].reset();
+                bags[0].totalAmount=i==0 ? 5100 : 5050;
+                JDFResourceAudit ra2=stUtil.setResourceAudit(bags[0],EnumReason.OperatorInput);
+                ra2.setRef(ra);
+                ra2.setDescriptiveName("manual reset to using only 5100 sheets because 100 initially were  wates");
+            }
             JDFProcessRun pr=stUtil.setProcessResult(EnumNodeStatus.Completed);
             pr.setDescriptiveName("we even have the utterly useless ProcessRun");
          }
+        if(bMinimal)
+        {
+            JDFAuditPool ap=n.getAuditPool();
+            VElement audits=ap.getAudits(EnumAuditType.PhaseTime, null, null);
+            for(int i=0;i<audits.size();i++)
+            {
+                audits.item(i).deleteNode();
+            }
+        }
         d.write2File(sm_dirTestDataTemp+File.separator+"ConvPrintAmount_"+ (bMinimal ? "min":"full") +".jdf",2,false);
         }
     }

@@ -85,8 +85,6 @@
  */
 package org.cip4.jdflib.pool;
 
-import java.util.Enumeration;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoAncestorPool;
 import org.cip4.jdflib.core.AttributeName;
@@ -295,27 +293,9 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
                 throw new JDFException("JDFAncestorPool::CopyNodeData: Invalid pairing");
             }
 
-            // copy any namespace declarations that are defined in the parents
-            final JDFAttributeMap nodeMap = node.getAttributeMap();
-
-            final Enumeration nodeMapEnum = nodeMap.keys();
-            while (nodeMapEnum.hasMoreElements())
-            {
-                final String nodeMapKey = (String) nodeMapEnum.nextElement();
-                final String nodeMapVal = nodeMap.get(nodeMapKey);
-
-                if (nodeMapKey.startsWith("xmlns") && 
-                    nodeMapKey.length() > (JDFConstants.XMLNS+"=").length())
-                {
-                    thisParentNode.addNameSpace(
-                        nodeMapKey.substring((JDFConstants.XMLNS+"=").length()),
-                        nodeMapVal);
-                }
-            }
-
-            nodeMap.remove(AttributeName.XSITYPE); // ancestors obviously dont have the respective JDF Node type as their xsi Type...
-            ancestor.setAttributes(nodeMap);
-            
+ 
+            ancestor.setAttributes(node);
+            ancestor.removeAttribute(AttributeName.XSITYPE);
             ancestor.renameAttribute(AttributeName.ID, AttributeName.NODEID, null, null);
             //only copy nodeinfo and customerinfo in real parent nodes, not in this of partitioned spawns
             if(!thisParentNode.getID().equals(node.getID()))

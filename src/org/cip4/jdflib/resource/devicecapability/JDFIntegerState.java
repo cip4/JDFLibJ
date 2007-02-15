@@ -92,6 +92,8 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
@@ -108,8 +110,8 @@ public class JDFIntegerState extends JDFAbstractState
         atrInfoTable[1]  = new AtrInfoTable(AttributeName.ALLOWEDVALUEMAX,  0x44444431, AttributeInfo.EnumAttributeType.integer, null, null);
         atrInfoTable[2]  = new AtrInfoTable(AttributeName.ALLOWEDVALUEMIN,  0x44444431, AttributeInfo.EnumAttributeType.integer, null, null);
         atrInfoTable[3]  = new AtrInfoTable(AttributeName.ALLOWEDVALUEMOD,  0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[4]  = new AtrInfoTable(AttributeName.CURRENTVALUE,     0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[5]  = new AtrInfoTable(AttributeName.DEFAULTVALUE,     0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[4]  = new AtrInfoTable(AttributeName.CURRENTVALUE,     0x33333331, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+        atrInfoTable[5]  = new AtrInfoTable(AttributeName.DEFAULTVALUE,     0x33333331, AttributeInfo.EnumAttributeType.IntegerList, null, null);
         atrInfoTable[6]  = new AtrInfoTable(AttributeName.PRESENTVALUELIST, 0x33333331, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
         atrInfoTable[7]  = new AtrInfoTable(AttributeName.PRESENTVALUEMAX,  0x44444431, AttributeInfo.EnumAttributeType.integer, null, null);
         atrInfoTable[8]  = new AtrInfoTable(AttributeName.PRESENTVALUEMIN,  0x44444431, AttributeInfo.EnumAttributeType.integer, null, null);
@@ -193,10 +195,18 @@ public class JDFIntegerState extends JDFAbstractState
     {
         setAttribute(AttributeName.DEFAULTVALUE, value, null);
     }
-
-    public int getDefaultValue()  
+    public void setDefaultValue(JDFIntegerList value)
     {
-        return getIntAttribute(AttributeName.DEFAULTVALUE, null, 0);
+        setAttribute(AttributeName.DEFAULTVALUE, value, null);
+    }
+    public void setCurrentValue(JDFIntegerList value)
+    {
+        setAttribute(AttributeName.CURRENTVALUE, value, null);
+    }
+
+    public  JDFIntegerList getDefaultValue()  
+    {
+        return getIntegerList(AttributeName.DEFAULTVALUE);
     }
 
     public void setCurrentValue(int value)
@@ -204,9 +214,9 @@ public class JDFIntegerState extends JDFAbstractState
         setAttribute(AttributeName.CURRENTVALUE, value, null);
     }
 
-    public int getCurrentValue()  
+    public  JDFIntegerList getCurrentValue()  
     {
-        return getIntAttribute(AttributeName.CURRENTVALUE, null, 0);
+        return getIntegerList(AttributeName.CURRENTVALUE);
     }
         
     public void setAllowedValueList( JDFIntegerRangeList value)
@@ -220,17 +230,7 @@ public class JDFIntegerState extends JDFAbstractState
      */
     public JDFIntegerRangeList getAllowedValueList()  
     {
-        try
-        {
-            final String listString = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
-            if(listString==null)
-                return null;
-            return new JDFIntegerRangeList(listString);
-        }
-        catch (DataFormatException e)
-        {
-            throw new JDFException("JDFIntegerState.getAllowedValueList: Unable to create JDFIntegerRangeList from Attribute value \"AllowedValueList\"");
-        }
+        return getIntegerRangeList(AttributeName.ALLOWEDVALUELIST);
 	}
 
     public void setPresentValueList( JDFIntegerRangeList value)
@@ -240,19 +240,46 @@ public class JDFIntegerState extends JDFAbstractState
 	
     public JDFIntegerRangeList getPresentValueList()  
     {
-		try
+		JDFIntegerRangeList il=getIntegerRangeList(AttributeName.PRESENTVALUELIST);
+        return (il==null) ? getAllowedValueList() : il;            
+	}
+
+    /**
+     * @param listName
+     * @return
+     */
+    private JDFIntegerRangeList getIntegerRangeList(final String listName)
+    {
+        try
         {
-            if (hasAttribute(AttributeName.PRESENTVALUELIST)) 
-            {
-                return new JDFIntegerRangeList(getAttribute(AttributeName.PRESENTVALUELIST, null, JDFConstants.EMPTYSTRING));
-      		}
-            return getAllowedValueList();
+            final String attribute = getAttribute(listName, null, null);
+            if(attribute==null)
+                return null;
+            return new JDFIntegerRangeList(attribute);
         }
         catch (DataFormatException e)
         {
-            throw new JDFException("JDFIntegerState.getPresentValueList: Unable to create JDFIntegerRangeList from Attribute value \"PresentValueList\"");
+            throw new JDFException("JDFIntegerState.getIntegerRangeList, Unable to create JDFIntegerRangeList from Attribute value: "+listName);
         }
-	}
+    }
+    /**
+     * @param listName
+     * @return
+     */
+    private JDFIntegerList getIntegerList(final String listName)
+    {
+        try
+        {
+            final String attribute = getAttribute(listName, null, null);
+            if(attribute==null)
+                return null;
+            return new JDFIntegerList(attribute);
+        }
+        catch (DataFormatException e)
+        {
+            throw new JDFException("JDFIntegerState.getIntegerList, Unable to create JDFIntegerRangeList from Attribute value: "+listName);
+        }
+    }
 
     public void setAllowedValueMax(int value)
     {
@@ -603,6 +630,20 @@ public class JDFIntegerState extends JDFAbstractState
             }
         }
         return false;
+    }
+
+    public VString getInvalidAttributes(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
+    {
+        return getInvalidAttributesImpl(level, bIgnorePrivate, nMax);
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#clone()
+     */
+    protected Object clone() throws CloneNotSupportedException
+    {
+        // TODO Auto-generated method stub
+        return super.clone();
     }
     
     

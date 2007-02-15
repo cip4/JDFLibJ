@@ -91,6 +91,11 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.KElement.EnumValidationLevel;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
+import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.datatypes.JDFNumberRange;
 import org.cip4.jdflib.datatypes.JDFNumberRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
@@ -106,8 +111,8 @@ public class JDFNumberState extends JDFAbstractState
         atrInfoTable[1]  = new AtrInfoTable(AttributeName.ALLOWEDVALUEMAX,  0x44444431, AttributeInfo.EnumAttributeType.double_, null, null);
         atrInfoTable[2]  = new AtrInfoTable(AttributeName.ALLOWEDVALUEMIN,  0x44444431, AttributeInfo.EnumAttributeType.double_, null, null);
         atrInfoTable[3]  = new AtrInfoTable(AttributeName.ALLOWEDVALUEMOD,  0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[4]  = new AtrInfoTable(AttributeName.CURRENTVALUE,     0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[5]  = new AtrInfoTable(AttributeName.DEFAULTVALUE,     0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[4]  = new AtrInfoTable(AttributeName.CURRENTVALUE,     0x33333331, AttributeInfo.EnumAttributeType.NumberList, null, null);
+        atrInfoTable[5]  = new AtrInfoTable(AttributeName.DEFAULTVALUE,     0x33333331, AttributeInfo.EnumAttributeType.NumberList, null, null);
         atrInfoTable[6]  = new AtrInfoTable(AttributeName.PRESENTVALUELIST, 0x33333331, AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
         atrInfoTable[7]  = new AtrInfoTable(AttributeName.PRESENTVALUEMAX,  0x44444431, AttributeInfo.EnumAttributeType.double_, null, null);
         atrInfoTable[8]  = new AtrInfoTable(AttributeName.PRESENTVALUEMIN,  0x44444431, AttributeInfo.EnumAttributeType.double_, null, null);
@@ -191,10 +196,19 @@ public class JDFNumberState extends JDFAbstractState
     {
         setAttribute(AttributeName.DEFAULTVALUE, value, null);
     }
-
-    public double getDefaultValue()  
+    public void setDefaultValue(JDFNumberList value)
     {
-        return getRealAttribute(AttributeName.DEFAULTVALUE, null, 0.0);
+        setAttribute(AttributeName.DEFAULTVALUE, value, null);
+    }
+    
+    public void setCurrentValue(JDFNumberList value)
+    {
+        setAttribute(AttributeName.CURRENTVALUE, value, null);
+    }
+
+    public  JDFNumberList getDefaultValue()  
+    {
+        return getNumberList(AttributeName.DEFAULTVALUE);
     }
 
     public void setCurrentValue(double value)
@@ -202,9 +216,9 @@ public class JDFNumberState extends JDFAbstractState
         setAttribute(AttributeName.CURRENTVALUE, value, null);
     }
 
-    public double getCurrentValue()  
+    public  JDFNumberList getCurrentValue()  
     {
-        return getRealAttribute(AttributeName.CURRENTVALUE, null, 0.0);
+        return getNumberList(AttributeName.CURRENTVALUE);
     }
         
     public void setAllowedValueList(JDFNumberRangeList value)
@@ -214,16 +228,7 @@ public class JDFNumberState extends JDFAbstractState
 
     public JDFNumberRangeList getAllowedValueList()
     {
-        try
-        {
-            final String attribute = getAttribute(AttributeName.ALLOWEDVALUELIST,null,null);
-            return attribute==null ? null : new JDFNumberRangeList(attribute);
-
-        }
-        catch (DataFormatException e)
-        {
-            throw new JDFException("JDFNumberState.setAllowedValueList: Attribute ALLOWEDVALUELIST not applicable to create a JDFNumberRangeList");
-        }       
+        return getNumberRangeList(AttributeName.ALLOWEDVALUELIST);
     }
 
     public void setPresentValueList(JDFNumberRangeList value)
@@ -231,21 +236,10 @@ public class JDFNumberState extends JDFAbstractState
         setAttribute(AttributeName.PRESENTVALUELIST, value.toString(), null);
     }
 
-    public JDFNumberRangeList getPresentValueList()
+    public JDFNumberRangeList getPresentValueList()  
     {
-        if (hasAttribute(AttributeName.PRESENTVALUELIST))
-        {
-            try
-            {
-                final String attribute = getAttribute(AttributeName.PRESENTVALUELIST,null,null);
-                return attribute==null ? null : new JDFNumberRangeList(attribute);
-            }
-            catch (DataFormatException e)
-            {
-                throw new JDFException("JDFNumberState.setPresentValueList: Attribute PRESENTVALUELIST not applicable to create a JDFNumberRangeList");
-            }
-        }
-        return getAllowedValueList();
+        JDFNumberRangeList nl=getNumberRangeList(AttributeName.PRESENTVALUELIST);
+        return (nl==null) ? getAllowedValueList() : nl;            
     }
 
     /////////////////////////////////////////////////////////////////
@@ -614,5 +608,49 @@ public class JDFNumberState extends JDFAbstractState
         }
         return false;
     }
+
+    /**
+     * @param listName
+     * @return
+     */
+    private JDFNumberList getNumberList(final String listName)
+    {
+        try
+        {
+            final String attribute = getAttribute(listName, null, null);
+            if(attribute==null)
+                return null;
+            return new JDFNumberList(attribute);
+        }
+        catch (DataFormatException e)
+        {
+            throw new JDFException("JDFNumberState.getNumberList, Unable to create JDFIntegerRangeList from Attribute value: "+listName);
+        }
+    }
+
+    /**
+     * @param listName
+     * @return
+     */
+    private JDFNumberRangeList getNumberRangeList(final String listName)
+    {
+        try
+        {
+            final String attribute = getAttribute(listName, null, null);
+            if(attribute==null)
+                return null;
+            return new JDFNumberRangeList(attribute);
+        }
+        catch (DataFormatException e)
+        {
+            throw new JDFException("JDFIntegerState.getIntegerRangeList, Unable to create JDFIntegerRangeList from Attribute value: "+listName);
+        }
+    }
+    
+    public VString getInvalidAttributes(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
+    {
+        return getInvalidAttributesImpl(level, bIgnorePrivate, nMax);
+    }
+
     
 }

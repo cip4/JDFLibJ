@@ -82,6 +82,8 @@ package org.cip4.jdflib.resource.devicecapability;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -92,7 +94,6 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
@@ -574,7 +575,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
         KElement root = parentRoot.appendElement("RejectedChildNode");
 
         if(!ignoreExtensions)
-            missingDevCaps(jdfRoot,root);
+            noFoundDevCaps(jdfRoot,root);
             
         // if all resourceLinks and NodeInfo/CustomerInfo elements (optional) 
         // are specified as DevCaps, we may test them. 
@@ -606,7 +607,9 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
         KElement mrp = parentReport.appendElement("MissingResources");
         KElement irp = parentReport.appendElement("InvalidResources");
         
-        JDFElement resLinkPool = jdfRoot.getResourceLinkPool();
+        JDFResourceLinkPool resLinkPool = jdfRoot.getResourceLinkPool();
+        KElement badElem=resLinkPool;
+         
         VElement vDevCaps = getChildElementVector(ElementName.DEVCAPS, null, null, true, 0, false);
         final int size = vDevCaps.size();
         HashSet goodElems=new HashSet();
@@ -641,8 +644,8 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
                         r.setAttribute("ProcessUsage", procUsage);
                     }
                     if(resLinkPool==null)
-                        resLinkPool=jdfRoot; // fudge against npe in next line
-                    r.setAttribute("XPath", resLinkPool.buildXPath(null)+ "/" + devCaps.getName());
+                        badElem=jdfRoot; // fudge against npe in next line
+                    r.setAttribute("XPath", badElem.buildXPath(null)+ "/" + devCaps.getName());
                 }                    
                 r.setAttribute("Name", devCaps.getName());
                 r.setAttribute("CapXPath", devCaps.getName());                    
@@ -670,8 +673,8 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
                         r.setAttribute("ProcessUsage", procUsage);
                     }
                     if(resLinkPool==null)
-                        resLinkPool=jdfRoot; // fudge against npe in next line
-                    r.setAttribute("XPath", resLinkPool.buildXPath(null)+ "/" + devCaps.getName());
+                        badElem=jdfRoot; // fudge against npe in next line
+                    r.setAttribute("XPath", badElem.buildXPath(null)+ "/" + devCaps.getName());
                 }                    
                 r.setAttribute("Name", devCaps.getName());
                 r.setAttribute("CapXPath", devCaps.getName()); 
@@ -699,19 +702,17 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
                 }
             }
         }
-
+        
+ 
         boolean bRet=mrp.hasChildElements() || irp.hasChildElements();
         if (!mrp.hasChildElements())
             mrp.deleteNode();
         
-
         if (!irp.hasChildElements())
             irp.deleteNode();
         
         return bRet;
     }
-
-
     
     /**
      * missingDevCaps - tests if there are any Resources or NodeInfo/CustomerInfo elements 
@@ -723,7 +724,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
      * @return XMLDoc - XMLDoc output of the error messages. 
      *         If XMLDoc is <code>null</code> there are no errors 
      */
-    private final KElement missingDevCaps(final JDFNode jdfRoot, KElement parentReport)
+    private final KElement noFoundDevCaps(final JDFNode jdfRoot, KElement parentReport)
     {
         KElement root = parentReport.appendElement("UnknownResources");
         VElement vLinks = jdfRoot.getResourceLinks(null);

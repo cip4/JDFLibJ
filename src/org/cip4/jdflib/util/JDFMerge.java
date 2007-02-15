@@ -43,10 +43,14 @@ import org.cip4.jdflib.resource.JDFResource;
 public class JDFMerge
 {
 
-    private JDFNode node;
-    public JDFMerge (JDFNode n)
+    private JDFNode m_ParentNode;
+    /**
+     * 
+     * @param parentNode the parent node to merge into. MAY be the actual node to be replace or any Parent thereof
+     */
+    public JDFMerge (JDFNode parentNode)
     {
-        node=n;
+        m_ParentNode=parentNode;
     }
 
     /**
@@ -73,13 +77,13 @@ public class JDFMerge
 
     public JDFNode mergeJDF(JDFNode toMerge, String urlMerge, EnumCleanUpMerge cleanPolicy, JDFResource.EnumAmountMerge amountPolicy)
     {
-        if (!toMerge.hasParent(node))
+        if (!toMerge.hasParent(m_ParentNode))
         {
             throw new JDFException("JDFNode.MergeJDF no matching parent found");
         }
 
         final String idm      = toMerge.getID();
-        JDFNode overWriteNode  = (JDFNode) node.getTarget(idm, AttributeName.ID);
+        JDFNode overWriteNode  = (JDFNode) m_ParentNode.getTarget(idm, AttributeName.ID);
 
         if (overWriteNode == null)
         {
@@ -109,7 +113,7 @@ public class JDFMerge
         {
             // the last ancestor has the id!
             final String idParent = ancestorPool.getAncestor(numAncestors - whereToLook).getNodeID();
-            final KElement k = node.getTarget(idParent, AttributeName.ID);
+            final KElement k = m_ParentNode.getTarget(idParent, AttributeName.ID);
             if (k == null)
             {
                 break;
@@ -235,10 +239,10 @@ public class JDFMerge
         // check all recursive previous spawns
         while (preSpawn!=null && !preSpawn.equals(JDFConstants.EMPTYSTRING))
         {
-            final JDFMerged preMerge = (JDFMerged)node.getTarget(preSpawn, AttributeName.MERGEID);
+            final JDFMerged preMerge = (JDFMerged)m_ParentNode.getTarget(preSpawn, AttributeName.MERGEID);
             if (preMerge != null)
             {
-                final JDFSpawned preSpawnAudit = (JDFSpawned)node.getTarget(preSpawn, AttributeName.NEWSPAWNID);
+                final JDFSpawned preSpawnAudit = (JDFSpawned)m_ParentNode.getTarget(preSpawn, AttributeName.NEWSPAWNID);
                 vsRO.appendUnique(preSpawnAudit.getrRefsROCopied());
                 vsRW.appendUnique(preSpawnAudit.getrRefsRWCopied());
                 preSpawn = preSpawnAudit.getSpawnID();
@@ -448,7 +452,7 @@ public class JDFMerge
         if(sa==null)
         {
             //????
-            throw new JDFException("mergeMainPools - corrupt audit structure");
+            throw new JDFException("mergeMainPools - corrupt audit structure; no Spawn Audit found");
         }
 
         //      JDFNode overWriteParent=ap.getParentJDF();
@@ -785,11 +789,14 @@ public class JDFMerge
      */
     private static void cleanROResources(JDFNode overWriteNode,JDFNode toMerge, final VString previousMergeIDs, final VString vsRO, String spawnID)
     {
-        for (int i = 0; i < vsRO.size(); i++)
+        final int roSize = vsRO.size();
+        for (int i = 0; i < roSize; i++)
         {
             final JDFResource newRes = toMerge.getTargetResource((String)vsRO.elementAt(i));
             final JDFResource oldRes = (JDFResource) overWriteNode.getTarget((String)vsRO.elementAt(i), AttributeName.ID);
-
+            if(oldRes==null || newRes==null)
+                continue; // snafu, lets just ignore the rest and limp along
+            
             // merge all potential new spawnIds from toMerge to this
             oldRes.mergeSpawnIDs(newRes, previousMergeIDs);
             final VElement oldResLeafsSpawned = oldRes.getNodesWithSpawnID(spawnID);
@@ -859,7 +866,6 @@ public class JDFMerge
                 {
                     cleanUpMerge((JDFNode)v.elementAt(i),cleanPolicy, spawnID, false);
                 }
-
             }
             else
             {

@@ -336,11 +336,10 @@ public class JDFDevCaps extends JDFAutoDevCaps
             throw new JDFException("JDFDevCaps.devCapReport: Invalid DeviceCap: DevCaps/@DevCapRef refers to the non-existent DevCap: "+getDevCapRef());
         }
 
-        KElement r = parentReport.appendElement("InvalidResource");
+        KElement r = parentReport.appendElement("Invalid"+getContext().getName());
         for (int i=0;i<dcV.size();i++)
         {
             final JDFDevCap dc=(JDFDevCap)dcV.elementAt(i);
-
             KElement stateTestResult = dc.stateReport(elem,testlists,level, ignoreExtensions,true,r);
             if (stateTestResult==null) 
             {
@@ -348,12 +347,27 @@ public class JDFDevCaps extends JDFAutoDevCaps
                 return null;// first DevCap that fits found -> erase all error messages
             }
             r.setAttribute("XPath", elem.buildXPath(null));
-            r.setAttribute("Name", getName());
+            r.setAttribute("Name", getContextName());
             r.setAttribute("CapXPath", dc.getName());
          }
 
         correction_Static(r);
         return r;
+    }
+
+    /**
+     * same as getName, except that "Link" is appended in case of @Context="Link"
+     * @return the element name mangled by context
+     */
+    public String getContextName()
+    {
+        String s=getName();
+        if(s==null)
+            return null;
+        EnumContext context=getContext();
+        if(EnumContext.Link.equals(context))
+            s+=JDFConstants.LINK;
+        return s;
     }
 
     /**

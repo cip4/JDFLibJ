@@ -191,6 +191,7 @@ public class ContentCreationTest extends PreflightTest
             sm1_1.setAttribute("Position", "-5 5");
             sm1_1.appendElement(ElementName.CUTMARK).appendXMLComment("The various explicit mark elements should be allowed here for their associated metatdata");
         } 
+// TODO page cs vs. cell cs
         spBS1.appendXMLComment("The following describes a 4 back marks, one on each pair of Strip Cells (page) (see new Attribute: MarkContext)\n@Anchor defines the cs origin of the mark, @NextAnchor defines the cs origin of the container, in this case the spine of a pair of Page cells.\nThus the center of the bar code is positioned 0 pts right and 5 point up from the bottom spine of the cell page.\n Position is applied prior to rotating the mark.");
         {
             JDFStripMark sm1_2=spBS1.appendStripMark();
@@ -214,6 +215,7 @@ public class ContentCreationTest extends PreflightTest
             sm1_3.setAttribute("Anchor", "BottomCenter");
             sm1_3.setAttribute("NextAnchor", "BottomCenter");
             sm1_3.setAttribute("Position", "0 5");
+            sm1_3.setAttribute("Size", "20 10");
             sm1_3.appendElement(ElementName.IDENTIFICATIONFIELD).appendXMLComment("The various explicit mark elements should be allowed here for their associated metatdata");
         } 
 

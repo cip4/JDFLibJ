@@ -102,6 +102,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.datatypes.JDFNameRangeList;
@@ -881,6 +882,20 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
         }
     }
 
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib.core.KElement.EnumValidationLevel, boolean, int)
+     */
+    protected VString getInvalidAttributesImpl(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
+    {        
+        VString v= super.getInvalidAttributes(level, bIgnorePrivate, nMax);
+        if(nMax>0 && v.size()>=nMax)
+            return v;
+        if(!fitsListType(getAttribute(AttributeName.DEFAULTVALUE)))
+            v.appendUnique(AttributeName.DEFAULTVALUE);
+        if(!fitsListType(getAttribute(AttributeName.CURRENTVALUE)))
+            v.appendUnique(AttributeName.CURRENTVALUE);
+        return v;
+    }
 
     /**
     * Gets the j-th element Loc of the i-th element Value

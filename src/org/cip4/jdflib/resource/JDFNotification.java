@@ -86,7 +86,6 @@ public class JDFNotification extends JDFAutoNotification
         elemInfoTable[4] = new ElemInfoTable(ElementName.ERROR, 0x33333333);
         elemInfoTable[5] = new ElemInfoTable(ElementName.EVENT, 0x33333333);
         elemInfoTable[6] = new ElemInfoTable(ElementName.MILESTONE, 0x33333333);
-        elemInfoTable[6] = new ElemInfoTable(ElementName.PART, 0x33333333);
     }
     
 

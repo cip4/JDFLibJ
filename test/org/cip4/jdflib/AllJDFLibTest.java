@@ -74,7 +74,6 @@ import junit.framework.TestSuite;
 import org.cip4.jdflib.auto.AutoTest;
 import org.cip4.jdflib.auto.JDFClassInstantiationTest;
 import org.cip4.jdflib.core.AttrInfoTest;
-import org.cip4.jdflib.core.DocumentJDFImplTest;
 import org.cip4.jdflib.core.ElemInfoTest;
 import org.cip4.jdflib.core.FactoryTest;
 import org.cip4.jdflib.core.FixVersionTest;
@@ -110,8 +109,11 @@ import org.cip4.jdflib.datatypes.JDFXYPairTest;
 import org.cip4.jdflib.datatypes.VJDFAttributeMapTest;
 import org.cip4.jdflib.devicecapability.JDFActionPoolTest;
 import org.cip4.jdflib.devicecapability.JDFDevCapTest;
+import org.cip4.jdflib.devicecapability.JDFDevCapsTest;
 import org.cip4.jdflib.devicecapability.JDFDeviceCapTest;
 import org.cip4.jdflib.devicecapability.JDFEvaluationTest;
+import org.cip4.jdflib.devicecapability.JDFIntegerStateTest;
+import org.cip4.jdflib.devicecapability.JDFNumberStateTest;
 import org.cip4.jdflib.devicecapability.JDFStateBaseTest;
 import org.cip4.jdflib.devicecapability.JDFTestTest;
 import org.cip4.jdflib.examples.AmountTest;
@@ -131,6 +133,7 @@ import org.cip4.jdflib.jmf.QueueTest;
 import org.cip4.jdflib.node.JDFNodeProductTest;
 import org.cip4.jdflib.node.JDFNodeTest;
 import org.cip4.jdflib.pool.JDFAmountPoolTest;
+import org.cip4.jdflib.pool.JDFAncestorPoolTest;
 import org.cip4.jdflib.pool.JDFAuditPoolTest;
 import org.cip4.jdflib.pool.JDFColorPoolTest;
 import org.cip4.jdflib.pool.JDFResourceLinkPoolTest;
@@ -219,7 +222,10 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JDFActionPoolTest.class);
         suite.addTestSuite(JDFDeviceCapTest.class);
         suite.addTestSuite(JDFDevCapTest.class);
+        suite.addTestSuite(JDFDevCapsTest.class);
         suite.addTestSuite(JDFEvaluationTest.class);
+        suite.addTestSuite(JDFIntegerStateTest.class);
+        suite.addTestSuite(JDFNumberStateTest.class);
         suite.addTestSuite(JDFStateBaseTest.class);
         suite.addTestSuite(JDFTestTest.class);
         
@@ -247,6 +253,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         
         // pool
         suite.addTestSuite(JDFAmountPoolTest.class);
+        suite.addTestSuite(JDFAncestorPoolTest.class);
         suite.addTestSuite(JDFAuditPoolTest.class);
         suite.addTestSuite(JDFColorPoolTest.class);
         suite.addTestSuite(JDFResourceLinkPoolTest.class);

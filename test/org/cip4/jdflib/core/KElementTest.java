@@ -997,30 +997,44 @@ public class KElementTest extends JDFTestCaseBase
         
     }
     
-    public void testSetAttribute()
+    public void testSetAttributes() throws Exception
+    {
+        XMLDoc jdfDoc = new XMLDoc("Foo",null);
+        KElement root=jdfDoc.getRoot();
+        KElement a=root.appendElement("a");
+        a.setAttribute("a", "1",null);
+        a.setAttribute("b:b", "2","www.b.com");
+        XMLDoc jdfDoc2 = new XMLDoc("Foo",null);
+        KElement root2=jdfDoc2.getRoot();
+        KElement a2=root2.appendElement("a");
+        a2.setAttributes(a);
+        assertEquals(a2.getAttribute("a"), "1");
+        assertEquals(a2.getAttribute("b","www.b.com",null), "2");
+
+    }
+    
+    
+    public void testSetAttribute() throws Exception
     {
         JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
         JDFNode root  = (JDFNode) jdfDoc.getRoot();
 
         String nodeName = "Created";
         KElement kElem  = root.getXPathElement("AuditPool/" + nodeName);
-        if (kElem != null)
-        {
-            assertTrue("", kElem.getNodeName().equals(nodeName));
+        assertTrue("", kElem.getNodeName().equals(nodeName));
 
-            // does setAttribute really set an empty value?
-            kElem.setAttribute("Author", "");
-            assertTrue("", kElem.getAttribute("Author", null, null).equals(""));
+        // does setAttribute really set an empty value?
+        kElem.setAttribute("Author", "");
+        assertTrue("", kElem.getAttribute("Author", null, null).equals(""));
 
-            assertTrue("", kElem.hasAttribute("Author", "", false));
-            assertFalse("", kElem.hasAttribute("NewAttribute", "", false));
+        assertTrue("", kElem.hasAttribute("Author", "", false));
+        assertFalse("", kElem.hasAttribute("NewAttribute", "", false));
 
-            kElem.setAttribute("Author", "", AttributeName.XMLNSURI);
-            kElem.setAttribute("NewAttribute", "");
-            assertTrue("", kElem.getAttribute("NewAttribute", null, null).equals(""));
-            kElem.setAttribute("foo","הצü\"\'");
-            assertEquals("special characters", kElem.getAttribute("foo", null, null), "הצü\"\'");
-        }
+        kElem.setAttribute("Author", "", AttributeName.XMLNSURI);
+        kElem.setAttribute("NewAttribute", "");
+        assertTrue("", kElem.getAttribute("NewAttribute", null, null).equals(""));
+        kElem.setAttribute("foo","הצü\"\'");
+        assertEquals("special characters", kElem.getAttribute("foo", null, null), "הצü\"\'");
     }
 
     public void testCache()

@@ -624,7 +624,8 @@ public class JDFSpawn
         // add parts to resource links if necessary
         if (vLocalSpawnParts!=null && !vLocalSpawnParts.isEmpty())
         {
-            for (int i = 0; i < outLinks.size(); i++)
+            final int outLinkSize = outLinks.size();
+            for (int i = 0; i < outLinkSize; i++)
             {
                 final JDFResourceLink link = (JDFResourceLink) outLinks.elementAt(i);
                 final JDFResource r = link.getLinkRoot();
@@ -632,70 +633,79 @@ public class JDFSpawn
                 //2005-03-11 KM if the link is null continue, the JDF ist invalid but in
                 //the best case only an audit is missing and the JDF is still operable
                 //in the worst caste the spawned JDF is not executable at all
-                if(r == null)
+                if(r != null)
                 {
-                    continue;
-                }
-    
-                VJDFAttributeMap vPartMap = new VJDFAttributeMap(vLocalSpawnParts);
-    
-                // 160802 RP leave implied resource link parts if PartUsage=implicit
-                if (!r.getPartUsage().equals(JDFResource.EnumPartUsage.Implicit))
-                {
-                    final VString vPartKeys = r.getPartIDKeys();
-                    final Vector vImplicitPartitions = r.getImplicitPartitions();
-                    if(vImplicitPartitions!=null)
+                    VJDFAttributeMap vPartMap = getSpawnLinkMap(vLocalSpawnParts, r);
+                    if (!vPartMap.isEmpty())
                     {
-                        for (int ii = 0; ii < vImplicitPartitions.size(); ii++)
-                        {
-                            final JDFResource.EnumPartIDKey e = (JDFResource.EnumPartIDKey) vImplicitPartitions.elementAt(ii);
-                            vPartKeys.add(e.getName());
-                        }
-                    }
-                    vPartMap.reduceMap(vPartKeys.getSet());
-                }
-    
-                if (!vPartMap.isEmpty())
-                {
-                    final VJDFAttributeMap vLinkMap = link.getPartMapVector();
-                    VJDFAttributeMap vNewMap  = new VJDFAttributeMap();
-    
-                    if (vLinkMap==null)
-                    {
-                        vNewMap = vPartMap;
-                    }
-                    else
-                    {
-                        for (int l = 0; l < vLinkMap.size(); l++)
-                        {
-                            for (int k = 0; k < vPartMap.size(); k++)
-                            {
-                                JDFAttributeMap m = new JDFAttributeMap(vPartMap.elementAt(k));
-                                m = m.orMap(vLinkMap.elementAt(l));
-    
-                                if (!m.isEmpty())
-                                {
-                                    vNewMap.appendUnique(m);
-                                }
-                            }
-                        }
-                    }
-    
-                    link.setPartMapVector(vNewMap);
-                    VElement vRes = link.getTargetVector(-1);
-                    for(int t = 0; t < vRes.size(); t++)
-                    {
-                        JDFResource res = (JDFResource)vRes.elementAt(t);
-                        // only fix those local resources that haven't been fixed along the way...
-                        if(!res.includesMatchingAttribute(AttributeName.SPAWNIDS,spawnID,EnumAttributeType.NMTOKENS))
-                        {
-                            res.appendSpawnIDs(spawnID);
-                            res.setLocked(false);
-                        }
+                        VJDFAttributeMap vNewMap = getSpawnedLinkPartMap(link, vPartMap);    
+                        link.setPartMapVector(vNewMap);                   
+                        updateSpawnIDs(spawnID, link);
                     }
                 }
             }
         }
+        finalizeStatusAndAudits(vLocalSpawnParts, spawnAudit);
+    }
+
+    /**
+     * @param link
+     * @param vPartMap
+     * @return
+     */
+    private VJDFAttributeMap getSpawnedLinkPartMap(final JDFResourceLink link, VJDFAttributeMap vPartMap)
+    {
+        final VJDFAttributeMap vLinkMap = link.getPartMapVector();
+        VJDFAttributeMap vNewMap  = new VJDFAttributeMap();
+   
+        if (vLinkMap==null)
+        {
+            vNewMap = vPartMap;
+        }
+        else
+        {
+            for (int l = 0; l < vLinkMap.size(); l++)
+            {
+                for (int k = 0; k < vPartMap.size(); k++)
+                {
+                    JDFAttributeMap m = new JDFAttributeMap(vPartMap.elementAt(k));
+                    m = m.orMap(vLinkMap.elementAt(l));
+   
+                    if (!m.isEmpty())
+                    {
+                        vNewMap.appendUnique(m);
+                    }
+                }
+            }
+        }
+        return vNewMap;
+    }
+
+    /**
+     * @param spawnID
+     * @param link
+     */
+    private void updateSpawnIDs(String spawnID, final JDFResourceLink link)
+    {
+        VElement vRes = link.getTargetVector(-1);
+        for(int t = 0; t < vRes.size(); t++)
+        {
+            JDFResource res = (JDFResource)vRes.elementAt(t);
+            // only fix those local resources that haven't been fixed along the way...
+            if(!res.includesMatchingAttribute(AttributeName.SPAWNIDS,spawnID,EnumAttributeType.NMTOKENS))
+            {
+                res.appendSpawnIDs(spawnID);
+                res.setLocked(false);
+            }
+        }
+    }
+
+    /**
+     * @param vLocalSpawnParts
+     * @param spawnAudit
+     */
+    private void finalizeStatusAndAudits(VJDFAttributeMap vLocalSpawnParts, final JDFSpawned spawnAudit)
+    {
         // add partition information to the audits and StatusPool or NodeInfo
         // 050906 RP move to the back so that it occurs after any global resources have been copied
         if (vLocalSpawnParts!=null && !vLocalSpawnParts.isEmpty())
@@ -714,6 +724,33 @@ public class JDFSpawn
                 spawnAudit.setStatus(status);
             node.setStatus(JDFElement.EnumNodeStatus.Spawned);
         }
+    }
+
+    /**
+     * @param vLocalSpawnParts
+     * @param r
+     * @return
+     */
+    private VJDFAttributeMap getSpawnLinkMap(VJDFAttributeMap vLocalSpawnParts, final JDFResource r)
+    {
+        VJDFAttributeMap vPartMap = new VJDFAttributeMap(vLocalSpawnParts);
+   
+        // 160802 RP leave implied resource link parts if PartUsage=implicit
+        if (!r.getPartUsage().equals(JDFResource.EnumPartUsage.Implicit))
+        {
+            final VString vPartKeys = r.getPartIDKeys();
+            final Vector vImplicitPartitions = r.getImplicitPartitions();
+            if(vImplicitPartitions!=null)
+            {
+                for (int ii = 0; ii < vImplicitPartitions.size(); ii++)
+                {
+                    final JDFResource.EnumPartIDKey e = (JDFResource.EnumPartIDKey) vImplicitPartitions.elementAt(ii);
+                    vPartKeys.add(e.getName());
+                }
+            }
+            vPartMap.reduceMap(vPartKeys.getSet());
+        }
+        return vPartMap;
     }
 
     /**

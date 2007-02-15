@@ -1317,7 +1317,17 @@ public class KElement extends ElementNSImpl
      */
     public int setAttributes(KElement kElem)
     {
-        return setAttributes(kElem.getAttributeMap());
+        final NamedNodeMap nm = kElem.getAttributes();
+
+        final int siz = (nm == null) ? 0 : nm.getLength();
+        
+        for (int i = 0; i < siz; i++)
+        {
+            final Node a = nm.item(i);
+            setAttribute(a.getNodeName(), a.getNodeValue(), a.getNamespaceURI());
+        }
+
+        return siz;
     }
     
     /**

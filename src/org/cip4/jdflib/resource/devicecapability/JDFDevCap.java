@@ -1936,8 +1936,8 @@ public class JDFDevCap extends JDFAutoDevCap
                         {
                             if(vResult==null)
                                 vResult=new VString();
-                            String dcID=dc.getID();
-                            JDFDevCaps dcs=(JDFDevCaps) deviceCap.getChildWithAttribute(ElementName.DEVCAPS,AttributeName.DEVCAPREF,null,dcID,0,true);
+                            final String dcID=dc.getAttribute(AttributeName.ID,null,null);
+                            JDFDevCaps dcs=(JDFDevCaps) (dcID==null ? null : deviceCap.getChildWithAttribute(ElementName.DEVCAPS,AttributeName.DEVCAPREF,null,dcID,0,true));
                             if(dcs!=null)
                             {
                                 vResult.appendUnique(dcs.getNamePathVector());                                

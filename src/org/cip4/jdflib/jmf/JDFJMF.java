@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,7 +91,6 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoJMF;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
@@ -520,7 +519,7 @@ public class JDFJMF extends JDFAutoJMF
             throw new JDFException ("appendMessageElement: creating undefined message family");
 
         String sFamily = family.getName ();
-        JDFMessage m = (JDFMessage) appendElement (sFamily, JDFConstants.EMPTYSTRING);
+        JDFMessage m = (JDFMessage) appendElement (sFamily, null);
         if (typ != null)
             m.setType(typ);
 

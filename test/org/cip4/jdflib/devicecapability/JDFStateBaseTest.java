@@ -79,8 +79,7 @@ package org.cip4.jdflib.devicecapability;
 
 import java.util.Vector;
 
-import junit.framework.TestCase;
-
+import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -109,7 +108,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFIntegerState;
 import org.cip4.jdflib.resource.devicecapability.JDFMatrixState;
 
 
-public class JDFStateBaseTest extends TestCase
+public class JDFStateBaseTest extends JDFTestCaseBase
 {
 
     private JDFDeviceCap deviceCap; 
@@ -164,44 +163,7 @@ public class JDFStateBaseTest extends TestCase
         
     }
     
-    public final void testFitsValue_IntegerState()
-    {
-        JDFParser p = new JDFParser();
-        String strNode = 
-            "<IntegerState Name=\"BitDepth\" DefaultValue=\"1\" AllowedValueList=\"1 8 12\"/>";
-            
-        JDFDoc jdfDoc = p.parseString(strNode);
-        JDFIntegerState state = (JDFIntegerState) jdfDoc.getRoot();
 
-        JDFIntegerRangeList list = new JDFIntegerRangeList();
-        list.append(new JDFIntegerRange(1,12)); // 1~12
-        //list.append(12);
-        
-        state.setListType(EnumListType.RangeList);
-        assertFalse("ListType=RangeList",state.fitsValue(list.toString(),JDFBaseDataTypes.EnumFitsValue.Allowed));
-        
-        JDFIntegerRangeList list2 = new JDFIntegerRangeList();
-        list2.append(new JDFIntegerRange(1,-2)); // 1~-2
-        
-        JDFIntegerRangeList allowedVL= new JDFIntegerRangeList();
-        allowedVL.append(new JDFIntegerRange(1,32)); // 1~32
-        
-        state.setAllowedValueList(allowedVL); // new AllowedVlaueList
-        
-        assertTrue("xDef is wrong", state.fitsValue(list2.toString(),JDFBaseDataTypes.EnumFitsValue.Allowed));
-        
-        
-        list.erase(list.size()-1); // erase "1~12"
-        list.append(2);
-        list.append(12);
-        list.append(22);
-        state.setListType(EnumListType.List);
-        state.setAllowedValueMod(new JDFXYPair(10,2));
-        assertTrue("ListType=List, ValueMod="+state.getAllowedValueMod(),
-                   state.fitsValue(list.toString(),JDFBaseDataTypes.EnumFitsValue.Allowed));
-        
-        
-    }
     
     
     public final void testFitsValue_MatrixState() throws Exception
