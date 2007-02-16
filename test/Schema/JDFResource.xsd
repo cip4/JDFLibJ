@@ -13783,7 +13783,6 @@
 					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
 				</xs:sequence>
 				<xs:attribute name="Name" type="jdftyp:string" use="optional"/>
-				<xs:anyAttribute namespace="##other" processContents="strict"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>

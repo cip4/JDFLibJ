@@ -25,7 +25,7 @@
 				<xs:attribute name="Name" type="jdftyp:NMTOKEN" default="Description"/>
 				<xs:attribute name="Path" type="jdftyp:PDFPath" use="optional"/>
 				<xs:attribute name="TimeStamp" type="jdftyp:dateTime" use="optional"/>
-				<xs:anyAttribute namespace="##other"/>
+				<xs:anyAttribute namespace="##other" processContents="lax"/>
 			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>
@@ -44,7 +44,7 @@
 		<xs:attribute name="MustHonorExceptions" type="jdftyp:NMTOKENS" use="optional"/>
 		<xs:attribute name="OperatorInterventionExceptions" type="jdftyp:NMTOKENS" use="optional"/>
 		<xs:attribute name="SettingsPolicy" type="jdftyp:eSettingsPolicy_" use="optional"/>
-		<xs:anyAttribute namespace="##other" processContents="strict"/>
+		<xs:anyAttribute namespace="##other" processContents="lax"/>
 	</xs:complexType>
 	<xs:complexType name="telem">
 		<xs:simpleContent>
@@ -2039,7 +2039,7 @@
 				<xs:attribute name="Type" type="jdftyp:NMTOKEN" use="required"/>
 				<xs:attribute name="Types" type="jdftyp:NMTOKENS" use="optional"/>
 				<xs:attribute name="Version" type="jdftyp:JDFJMFVersion" use="optional"/>
-				<xs:anyAttribute namespace="##other" processContents="strict"/>		
+				<xs:anyAttribute namespace="##other" processContents="lax"/>		
 			</xs:restriction>
 		</xs:complexContent>
 	</xs:complexType>
