@@ -74,18 +74,8 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElemInfoTable;
-import org.cip4.jdflib.core.ElementInfo;
-import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFResourceLink;
-    /*
-    *****************************************************************************
-    class JDFAutoRemoveLink : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoRemoveLink extends JDFElement
 {
@@ -102,18 +92,6 @@ public abstract class JDFAutoRemoveLink extends JDFElement
     protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
-
-
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.RESOURCELINK, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
 
 
@@ -222,39 +200,5 @@ public abstract class JDFAutoRemoveLink extends JDFElement
         }
 
 
-
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /** (26) getCreateResourceLink
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFResourceLink the element
-     */
-    public JDFResourceLink getCreateResourceLink(int iSkip)
-    {
-        return (JDFResourceLink)getCreateElement_KElement(ElementName.RESOURCELINK, null, iSkip);
-    }
-
-
-
-    /**
-     * (27) const get element ResourceLink
-     * @param iSkip number of elements to skip
-     * @return JDFResourceLink the element
-     * default is getResourceLink(0)     */
-    public JDFResourceLink getResourceLink(int iSkip)
-    {
-        return (JDFResourceLink) getElement(ElementName.RESOURCELINK, null, iSkip);
-    }
-
-
-
-    public JDFResourceLink appendResourceLink()
-    {
-        return (JDFResourceLink) appendElement(ElementName.RESOURCELINK, null);
-    }
 
 }// end namespace JDF

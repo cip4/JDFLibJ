@@ -139,6 +139,15 @@ public class JavaCoreStringUtil
 
         StringBuffer strbufResult   = new StringBuffer(100000);
 
+        
+		// remove unwanted abstract ResourceLink elements
+		for (int i = vElements.size() - 1; i >= 0; i--) {
+			final SchemaElement element = (SchemaElement) vElements.elementAt(i);
+			final String strName = element.getStrElementName();
+			if ("ResourceLink".equals(strName))
+				vElements.remove(i);
+		}
+
         appendImportAndStartOfClass(strJDFAutoFileName, strExtends, strbufResult);
 
         if (!strComplexTypeName.equals("NodeInfo") && !strComplexTypeName.equals("CustomerInfo"))
@@ -376,52 +385,59 @@ public class JavaCoreStringUtil
      */
     private static void appendElemInfoTable(Vector vElements, StringBuffer strbufResult)
     {
-        // vElements.size() > 0 !!!
-        Vector elementsForVersion = new Vector(vElements);
+		// vElements.size() > 0 !!!
+		Vector elementsForVersion = new Vector(vElements);
 
-        for (int i = elementsForVersion.size() - 1; i >= 0; i--)
-        {
-            SchemaElement element = (SchemaElement) elementsForVersion.elementAt(i);
-            String strName = element.getStrElementName();
-            if (strName.endsWith("Ref") && !strName.equals("TestRef"))
-                elementsForVersion.remove(i);
-        }
+		for (int i = elementsForVersion.size() - 1; i >= 0; i--) {
+			SchemaElement element = (SchemaElement) elementsForVersion.elementAt(i);
+			String strName = element.getStrElementName();
+			if ((strName.endsWith("Ref") && !strName.equals("TestRef")))
+				elementsForVersion.remove(i);
+		}
 
-        int siz2 = elementsForVersion.size();
+		int siz2 = elementsForVersion.size();
+		if (siz2 > 0) {
+			strbufResult
+					.append(strDepth1)
+					.append("private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[")
+					.append(siz2).append("];").append(strLineEnd);
+			strbufResult.append(strDepth1).append("static").append(strLineEnd);
+			strbufResult.append(strDepth1).append("{").append(strLineEnd);
 
-        strbufResult.append(strDepth1).
-            append("private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[").
-            append(siz2).append("];").append(strLineEnd);
-        strbufResult.append(strDepth1).append("static").append(strLineEnd);
-        strbufResult.append(strDepth1).append("{").append(strLineEnd);
+			for (int i = 0; i < siz2; i++) {
+				SchemaElement element = (SchemaElement) elementsForVersion.elementAt(i);
+				String elemName = element.getStrElementName().toUpperCase();
+				
+				String versionInfo = GeneratorUtil.getVersionInfoElements(
+						element.getIsOptionalElement(), element.getFirstVersion(), 
+						element.getLastVersion(), element.getStrMaxOccurs());
 
-        for (int i = 0; i < siz2; i++)
-        {
-            SchemaElement element = (SchemaElement) elementsForVersion.elementAt(i);
+				strbufResult.append(strDepth2).append("elemInfoTable[")
+						.append(i).append("] = new ElemInfoTable(ElementName.")
+						.append(elemName).append(", 0x").append(versionInfo)
+						.append(");").append(strLineEnd);
+			}
 
-            String elemName    = element.getStrElementName().toUpperCase();
-            String versionInfo = GeneratorUtil.getVersionInfoElements(element.getIsOptionalElement(),
-                    element.getFirstVersion(), element.getLastVersion(), element.getStrMaxOccurs());
+			strbufResult.append(strDepth1).append("}").append(strLineEnd);
+			strbufResult.append(strDepth1).append(strLineEnd);
 
-            strbufResult.append(strDepth2).append("elemInfoTable[").append(i).append(
-                    "] = new ElemInfoTable(ElementName.").append(elemName).append(", 0x")
-                    .append(versionInfo).append(");").append(strLineEnd);
-        }
-
-        strbufResult.append(strDepth1).append("}").append(strLineEnd);
-        strbufResult.append(strDepth1).append(strLineEnd);
-
-        strbufResult.append(strDepth1).append("protected ElementInfo getTheElementInfo()").append(strLineEnd);
-        strbufResult.append(strDepth1).append("{").append(strLineEnd);
-        strbufResult.append(strDepth2).append(
-                "return super.getTheElementInfo().updateReplace(elemInfoTable);").append(strLineEnd);
-        strbufResult.append(strDepth1).append("}").append(strLineEnd).append(strLineEnd).append(strLineEnd);
-    }
+			strbufResult.append(strDepth1)
+					.append("protected ElementInfo getTheElementInfo()")
+					.append(strLineEnd);
+			strbufResult.append(strDepth1).append("{").append(strLineEnd);
+			strbufResult
+					.append(strDepth2)
+					.append("return super.getTheElementInfo().updateReplace(elemInfoTable);")
+					.append(strLineEnd);
+			strbufResult.append(strDepth1).append("}").append(strLineEnd)
+					.append(strLineEnd).append(strLineEnd);
+		}
+	}
 
 
     /**
-     * @param strbufResult
-     */
+	 * @param strbufResult
+	 */
     private static void appendConstructorsAndToString(String strJDFAutoFileName, StringBuffer strbufResult)
     {
         strbufResult.append(strLineEnd);

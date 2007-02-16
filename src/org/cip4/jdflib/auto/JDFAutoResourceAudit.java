@@ -84,14 +84,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
-    /*
-    *****************************************************************************
-    class JDFAutoResourceAudit : public JDFAudit
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoResourceAudit extends JDFAudit
 {
@@ -111,11 +104,10 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
     }
 
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
     static
     {
         elemInfoTable[0] = new ElemInfoTable(ElementName.MISDETAILS, 0x66666111);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.RESOURCELINK, 0x22222222);
     }
     
     protected ElementInfo getTheElementInfo()
@@ -312,33 +304,4 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
     {
         return (JDFMISDetails) appendElementN(ElementName.MISDETAILS, 1, null);
     }
-    /** (26) getCreateResourceLink
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFResourceLink the element
-     */
-    public JDFResourceLink getCreateResourceLink(int iSkip)
-    {
-        return (JDFResourceLink)getCreateElement_KElement(ElementName.RESOURCELINK, null, iSkip);
-    }
-
-
-
-    /**
-     * (27) const get element ResourceLink
-     * @param iSkip number of elements to skip
-     * @return JDFResourceLink the element
-     * default is getResourceLink(0)     */
-    public JDFResourceLink getResourceLink(int iSkip)
-    {
-        return (JDFResourceLink) getElement(ElementName.RESOURCELINK, null, iSkip);
-    }
-
-
-
-    public JDFResourceLink appendResourceLink()
-    {
-        return (JDFResourceLink) appendElement(ElementName.RESOURCELINK, null);
-    }
-
 }// end namespace JDF

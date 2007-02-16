@@ -82,19 +82,12 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFModulePhase;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.util.JDFDate;
-    /*
-    *****************************************************************************
-    class JDFAutoPhaseTime : public JDFAudit
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPhaseTime extends JDFAudit
 {
@@ -116,7 +109,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
     }
 
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[6];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[5];
     static
     {
         elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICE, 0x33333333);
@@ -124,7 +117,6 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
         elemInfoTable[2] = new ElemInfoTable(ElementName.MISDETAILS, 0x66666611);
         elemInfoTable[3] = new ElemInfoTable(ElementName.MODULEPHASE, 0x33333333);
         elemInfoTable[4] = new ElemInfoTable(ElementName.PART, 0x33333333);
-        elemInfoTable[5] = new ElemInfoTable(ElementName.RESOURCELINK, 0x33333331);
     }
     
     protected ElementInfo getTheElementInfo()
@@ -483,35 +475,6 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
     public JDFPart appendPart()
     {
         return (JDFPart) appendElement(ElementName.PART, null);
-    }
-
-    /** (26) getCreateResourceLink
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFResourceLink the element
-     */
-    public JDFResourceLink getCreateResourceLink(int iSkip)
-    {
-        return (JDFResourceLink)getCreateElement_KElement(ElementName.RESOURCELINK, null, iSkip);
-    }
-
-
-
-    /**
-     * (27) const get element ResourceLink
-     * @param iSkip number of elements to skip
-     * @return JDFResourceLink the element
-     * default is getResourceLink(0)     */
-    public JDFResourceLink getResourceLink(int iSkip)
-    {
-        return (JDFResourceLink) getElement(ElementName.RESOURCELINK, null, iSkip);
-    }
-
-
-
-    public JDFResourceLink appendResourceLink()
-    {
-        return (JDFResourceLink) appendElement(ElementName.RESOURCELINK, null);
     }
 
 }// end namespace JDF

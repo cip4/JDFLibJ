@@ -433,7 +433,10 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
 
         String strClassPath = null;
         
-        if (qualifiedName.endsWith(JDFConstants.LINK))
+        if (qualifiedName.endsWith(JDFConstants.LINK) 
+        		// CreateLink and RemoveLink are messages, no links
+        		&& !ElementName.CREATELINK.equals(qualifiedName) && !ElementName.REMOVELINK.equals(qualifiedName)
+           )
         {
             strClassPath = (String) sm_PackageNames.get(ElementName.RESOURCELINK);
         }
@@ -741,6 +744,7 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
         sm_PackageNames.put(ElementName.CREASE,                            "org.cip4.jdflib.resource.process.postpress.JDFCrease");
         sm_PackageNames.put(ElementName.CREASINGPARAMS,                    "org.cip4.jdflib.resource.JDFCreasingParams");
         sm_PackageNames.put(ElementName.CREATED,                           "org.cip4.jdflib.resource.JDFCreated");
+        sm_PackageNames.put(ElementName.CREATELINK,                        "org.cip4.jdflib.jmf.JDFCreateLink");
         sm_PackageNames.put(ElementName.CREATERESOURCE,                    "org.cip4.jdflib.jmf.JDFCreateResource");
         sm_PackageNames.put(ElementName.CREDITCARD,                        "org.cip4.jdflib.resource.JDFCreditCard");
         sm_PackageNames.put(ElementName.CUSTOMERINFO,                      "org.cip4.jdflib.core.JDFCustomerInfo");
@@ -1116,6 +1120,7 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
         sm_PackageNames.put(ElementName.REGISTERRIBBON,                    "org.cip4.jdflib.resource.JDFRegisterRibbon");
         sm_PackageNames.put(ElementName.REGISTRATION,                      "org.cip4.jdflib.jmf.JDFRegistration");
         sm_PackageNames.put(ElementName.REMOVED,                           "org.cip4.jdflib.resource.JDFRemoved");
+        sm_PackageNames.put(ElementName.REMOVELINK,                        "org.cip4.jdflib.jmf.JDFRemoveLink");
         sm_PackageNames.put(ElementName.RENDERINGPARAMS,                   "org.cip4.jdflib.resource.process.prepress.JDFRenderingParams");
         sm_PackageNames.put(ElementName.REQUESTQUEUEENTRYPARAMS,           "org.cip4.jdflib.jmf.JDFRequestQueueEntryParams");
         sm_PackageNames.put(ElementName.REQUIRED,                          "org.cip4.jdflib.span.JDFTimeSpan");
