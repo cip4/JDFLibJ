@@ -82,8 +82,6 @@ package org.cip4.jdflib.resource.devicecapability;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
 import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;

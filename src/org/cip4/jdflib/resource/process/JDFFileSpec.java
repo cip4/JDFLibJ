@@ -87,7 +87,6 @@ import java.util.HashMap;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoFileSpec;
 import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.w3c.dom.DOMException;
 

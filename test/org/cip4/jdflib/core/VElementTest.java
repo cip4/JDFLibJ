@@ -7,8 +7,6 @@
  */
 package org.cip4.jdflib.core;
 
-import java.util.Vector;
-
 import junit.framework.TestCase;
 
 public class VElementTest extends TestCase

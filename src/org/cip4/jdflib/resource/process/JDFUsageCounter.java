@@ -82,11 +82,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
-import org.apache.commons.lang.enums.EnumUtils;
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoUsageCounter;
-import org.cip4.jdflib.auto.JDFAutoQuery.EnumAcknowledgeType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;

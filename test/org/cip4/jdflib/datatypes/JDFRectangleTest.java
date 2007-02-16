@@ -11,9 +11,9 @@ package org.cip4.jdflib.datatypes;
 import java.util.Iterator;
 import java.util.Vector;
 
-import org.cip4.jdflib.core.JDFConstants;
-
 import junit.framework.TestCase;
+
+import org.cip4.jdflib.core.JDFConstants;
 
 
 public class JDFRectangleTest extends TestCase {

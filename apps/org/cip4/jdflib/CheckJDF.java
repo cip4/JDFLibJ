@@ -176,7 +176,8 @@ public class CheckJDF
     public String proxyPort = null;
 
     public String schemaLocation=null;
-    public String XMLOutputName=null;
+    public String xmlOutputName=null;
+    public String xslStyleSheet=null;
 
     public  String devCapFile=null;
     public EnumFitsValue testlists=EnumFitsValue.Allowed;
@@ -212,7 +213,8 @@ public class CheckJDF
               "except that multiple schema and schema/namespace pairs are separated by commas ',' not blanks ' '\n   " +
               "The JDF schema specified in the -L switch should not be included in this list\n"
             + "-t print out Timing information\n"
-            + "-x output filename that contains an xml formatted error report\n";
+            + "-x output filename that contains an xml formatted error report\n"
+            + "-X XSL stylesheet to apply to the xml formatted error report as specified in -x\n";
     
     public CheckJDF()
     {
@@ -1715,9 +1717,7 @@ public class CheckJDF
       */
      public XMLDoc validate(String commandLineArgs[], InputStream inStream)
      {
-
-
-         MyArgs args = new MyArgs(commandLineArgs, "?cqQvVntPU", "dlfLuhpx",null);
+         MyArgs args = new MyArgs(commandLineArgs, "?cqQvVntPU", "dlfLuhpxX",null);
          
          if (args.boolParameter('?', false))
          {
@@ -1729,7 +1729,8 @@ public class CheckJDF
          bWarnDanglingURL = args.boolParameter('U', false);
          
          this.setPrint(!args.boolParameter('Q', false));         
-         XMLOutputName = args.parameterString('x');         
+         xmlOutputName = args.parameterString('x');         
+         xslStyleSheet = args.parameterString('X');         
          pOut = new XMLDoc("CheckOutput", null);                 
          KElement xmlRoot=pOut.getRoot();
          xmlRoot.setAttribute("Language", "EN"); 
@@ -1762,12 +1763,14 @@ public class CheckJDF
              }
          }
 
-         setJDFSchemaLocation(new File(args.parameterString('L')));
+         final String parameterString = args.parameterString('L');
+         if(parameterString!=null)
+             setJDFSchemaLocation(new File(parameterString));
          
          String schemaLocation0=args.parameterString('l');
          
          // convert "," to blank
-         if(schemaLocation0.length()!=0)
+         if(schemaLocation0!=null)
          {
              VString vs = new VString(schemaLocation0,JDFConstants.COMMA);
              if(vs.size()%2!=0)
@@ -1784,7 +1787,7 @@ public class CheckJDF
          
          bValidate=(args.boolParameter('v',false))||(schemaLocation!=null);
          String jdfVersion=args.parameterString('f');
-         if(!jdfVersion.equals(JDFConstants.EMPTYSTRING))
+         if(jdfVersion!=null)
          {
         	 EnumVersion v=EnumVersion.getEnum(jdfVersion);
         	 JDFElement.setDefaultJDFVersion(v);
@@ -1804,7 +1807,7 @@ public class CheckJDF
          
          setAllFiles(args);
          // for all files do
-         if(inStream!=null || !url.equals(""))
+         if(inStream!=null || url==null)
          {
              return processSingleURLStream(inStream,url);
          }
@@ -1893,10 +1896,11 @@ public class CheckJDF
                  processSingleFile(xmlFile);
              }
          }
-        if (pOut != null && XMLOutputName != null && XMLOutputName.length()>0 ) 
+        if (pOut != null && xmlOutputName != null && xmlOutputName.length()>0 ) 
         {
-            pOut.setXSLTURL("./checkjdf.xsl");
-            pOut.write2File(XMLOutputName, 2, false);
+            if(xslStyleSheet!=null)
+                pOut.setXSLTURL(xslStyleSheet);
+            pOut.write2File(xmlOutputName, 2, false);
         }
         return pOut;
 

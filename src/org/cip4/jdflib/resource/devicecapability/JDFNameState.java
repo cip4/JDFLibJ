@@ -90,6 +90,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.util.StringUtil;
 
 public class JDFNameState extends JDFAbstractState
@@ -101,8 +102,8 @@ public class JDFNameState extends JDFAbstractState
     {
         atrInfoTable[0]  = new AtrInfoTable(AttributeName.ALLOWEDREGEXP,     0x33333311, AttributeInfo.EnumAttributeType.RegExp, null, null);
         atrInfoTable[1]  = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST,  0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-        atrInfoTable[2]  = new AtrInfoTable(AttributeName.CURRENTVALUE,      0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[3]  = new AtrInfoTable(AttributeName.DEFAULTVALUE,      0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[2]  = new AtrInfoTable(AttributeName.CURRENTVALUE,      0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+        atrInfoTable[3]  = new AtrInfoTable(AttributeName.DEFAULTVALUE,      0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
         atrInfoTable[4]  = new AtrInfoTable(AttributeName.PRESENTREGEXP,     0x33333311, AttributeInfo.EnumAttributeType.RegExp, null, null);
         atrInfoTable[5]  = new AtrInfoTable(AttributeName.PRESENTVALUELIST,  0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
     }
@@ -183,20 +184,31 @@ public class JDFNameState extends JDFAbstractState
     {
         setAttribute(AttributeName.CURRENTVALUE, value);
     }
-    
-    public String getCurrentValue()
+    public void setCurrentValue(VString value)
     {
-        return getAttribute(AttributeName.CURRENTVALUE, null, JDFConstants.EMPTYSTRING);
+        setAttribute(AttributeName.CURRENTVALUE, value,null);
+    }
+    
+    public VString getCurrentValue()
+    {
+        final String attribute = getAttribute(AttributeName.CURRENTVALUE, null, null);
+        return attribute==null ? null : new VString(attribute, null);
     }
     
     public void setDefaultValue(String value)
     {
         setAttribute(AttributeName.DEFAULTVALUE, value);
     }
-
-    public String getDefaultValue()
+    
+    public void setDefaultValue(VString value)
     {
-        return getAttribute(AttributeName.DEFAULTVALUE, null, JDFConstants.EMPTYSTRING);
+        setAttribute(AttributeName.DEFAULTVALUE, value,null);
+    }
+
+    public VString getDefaultValue()
+    {
+        final String attribute = getAttribute(AttributeName.DEFAULTVALUE, null, null);
+        return attribute==null ? null : new VString(attribute, null);
     }
          
     public VString getAllowedValueList()
@@ -207,7 +219,7 @@ public class JDFNameState extends JDFAbstractState
 
     public void setAllowedValueList(VString vs)
     {
-        setAttribute(AttributeName.ALLOWEDVALUELIST, StringUtil.setvString(vs," ",null,null), null);
+        setAttribute(AttributeName.ALLOWEDVALUELIST, vs, null);
     }
 
     public VString getPresentValueList()
@@ -221,7 +233,7 @@ public class JDFNameState extends JDFAbstractState
 
     public void setPresentValueList(VString vs)
     {
-        setAttribute(AttributeName.PRESENTVALUELIST, StringUtil.setvString(vs," ",null,null), null);
+        setAttribute(AttributeName.PRESENTVALUELIST, vs, null);
     }
 
     public void setAllowedRegExp(String value)
@@ -457,5 +469,9 @@ public class JDFNameState extends JDFAbstractState
         return true;
     }
     
+    public VString getInvalidAttributes(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
+    {
+        return getInvalidAttributesImpl(level, bIgnorePrivate, nMax);
+    }
 
 }

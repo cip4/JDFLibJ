@@ -94,7 +94,6 @@ import org.apache.xml.serialize.XMLSerializer;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;

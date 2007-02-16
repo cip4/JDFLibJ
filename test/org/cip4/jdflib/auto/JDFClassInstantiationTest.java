@@ -81,7 +81,6 @@ import java.io.FileFilter;
 
 import junit.framework.TestCase;
 
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
 import org.w3c.dom.DOMException;
 

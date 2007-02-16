@@ -271,7 +271,7 @@ public class MyArgs
             }
         }
 
-        return JDFConstants.EMPTYSTRING;
+        return null;
     }
 
     //.........................................................

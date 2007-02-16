@@ -102,7 +102,6 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.datatypes.JDFNameRangeList;

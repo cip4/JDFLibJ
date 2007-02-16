@@ -14,8 +14,6 @@ import java.util.Vector;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoStatusPool;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElemInfoTable;
-import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;

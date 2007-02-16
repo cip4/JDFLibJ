@@ -16,8 +16,6 @@ import junit.framework.TestCase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.XMLDoc;
 
 public class EmptyNamespace extends TestCase
 {

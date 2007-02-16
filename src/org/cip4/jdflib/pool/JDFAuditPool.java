@@ -86,8 +86,6 @@
  */
 package org.cip4.jdflib.pool;
 
-import java.util.Vector;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;

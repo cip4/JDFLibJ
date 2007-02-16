@@ -73,7 +73,6 @@ package org.cip4.jdflib.resource.process;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.resource.process.JDFPRItem;
 
 /**
  * all kinds of fun tests around JDF 1.2 vs JDF 1.3 Layouts

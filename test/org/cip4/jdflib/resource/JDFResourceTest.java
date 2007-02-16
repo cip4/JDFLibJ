@@ -118,7 +118,6 @@ import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFCutBlock;
 import org.cip4.jdflib.resource.process.JDFDigitalPrintingParams;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
-import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;

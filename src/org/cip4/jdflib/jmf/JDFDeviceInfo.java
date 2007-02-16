@@ -20,7 +20,6 @@ import org.cip4.jdflib.auto.JDFAutoDeviceInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFPhaseTime;

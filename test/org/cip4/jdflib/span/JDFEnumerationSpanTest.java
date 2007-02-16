@@ -81,10 +81,8 @@ import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.span.JDFSpanBindingLength.EnumSpanBindingLength;
-import org.cip4.jdflib.span.JDFSpanBindingSide.EnumSpanBindingSide;
 
 public class JDFEnumerationSpanTest extends JDFTestCaseBase
 {
