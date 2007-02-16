@@ -1,4 +1,24 @@
 
+Label JDFLIBJ_2.1.2BLD401 (14.02.2007)
+
+devcap for editor
+Updates for partitioned layout
+npe catch for setAttribute of object types
+some new example tests
+
+Changed files:
+ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD401) && !lbtype(JDFLIBJ_2.1.3BLD400)}" -print
+.\core\JDFElement.java@@\main\227
+.\core\JDFResourceLink.java@@\main\125
+.\datatypes\VJDFAttributeMap.java@@\main\24
+.\jmf\JDFJobPhase.java@@\main\20
+.\node\JDFNode.java@@\main\236
+.\resource\devicecapability\JDFDevCap.java@@\main\42
+.\resource\JDFSignature.java@@\main\20
+.\resource\process\JDFRegisterMark.java@@\main\17
+.\resource\process\postpress\JDFSheet.java@@\main\41
+.\util\JDFSpawn.java@@\main\10
+
 ___________________________________________________________
 
 Label JDFLIBJ_2.1.2BLD400 (08.02.2007)
