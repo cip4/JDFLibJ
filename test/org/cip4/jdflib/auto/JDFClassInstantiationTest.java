@@ -117,6 +117,7 @@ public class JDFClassInstantiationTest extends TestCase
                             "JDFDurationSpan.java JDFIntegerSpan.java JDFNameSpan.java JDFNumberSpan.java " +
                             "JDFOptionSpan.java JDFShapeSpan.java JDFSpanNamedColor.java " +
                             "JDFStringSpan.java JDFTimeSpan.java JDFXYPairSpan.java " +
+                            "JDFResourceLink.java " +
                             "JDFPool.java", null);
                     
                     acceptFile = !ignoreList.contains(name) &&
