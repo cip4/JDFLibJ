@@ -1810,7 +1810,7 @@ public class CheckJDF
          
          setAllFiles(args);
          // for all files do
-         if(inStream!=null || url==null)
+         if(inStream!=null || url!=null)
          {
              return processSingleURLStream(inStream,url);
          }
