@@ -1793,16 +1793,19 @@ public class CheckJDF
         	 JDFElement.setDefaultJDFVersion(v);
         	 JDFVersions.setForceVersion(true);
          }
+         
          if (args.nargs() == 0)
          {
              sysOut.println(args.usage(usage));
              System.exit(2);
          }
+         
          testlists = EnumFitsValue.Allowed;
          if(args.boolParameter('P',false)) 
           {
               testlists = EnumFitsValue.Present;
           }
+         
          String url = args.parameterString('u');
          
          setAllFiles(args);

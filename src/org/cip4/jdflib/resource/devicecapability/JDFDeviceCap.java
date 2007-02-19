@@ -103,6 +103,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
+import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.util.StringUtil;
 
 public class JDFDeviceCap extends JDFAutoDeviceCap 

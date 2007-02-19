@@ -85,10 +85,6 @@ import org.cip4.jdflib.datatypes.JDFIntegerRange;
  */
 public abstract class JDFTestCaseBase extends TestCase
 {
-    /**
-     * @deprecated use File.seseparator
-     */
-    static protected final String fileSeparator      = File.separator;
     static protected final String sm_dirTestSchema   = "test" + File.separator + "Schema" + File.separator;
     static protected final String sm_dirTestData     = "test" + File.separator + "data" + File.separator;
     static protected final String sm_dirTestDataTemp = sm_dirTestData + "temp" + File.separator;

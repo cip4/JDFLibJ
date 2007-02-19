@@ -1368,7 +1368,7 @@ public class JDFResourceLink extends JDFElement
         if (this instanceof JDFPartAmount)
         {
             throw new JDFException(
-                    "JDFResourceLinkPool.getCreateAmountPool: calling method on PartAmount object");
+                    "JDFResourceLink.getCreateAmountPool: calling method on PartAmount object");
         }
         return (JDFAmountPool) getCreateElement_KElement(ElementName.AMOUNTPOOL,null, 0);
     }
@@ -1379,7 +1379,7 @@ public class JDFResourceLink extends JDFElement
         if (this instanceof JDFPartAmount)
         {
             throw new JDFException(
-                    "JDFResourceLinkPool.appendAmountPool: calling method on PartAmount object");
+                    "JDFResourceLink.appendAmountPool: calling method on PartAmount object");
         }
         return (JDFAmountPool) appendElementN(ElementName.AMOUNTPOOL, 1, null);
     }
@@ -1503,7 +1503,7 @@ public class JDFResourceLink extends JDFElement
         if (this instanceof JDFPartAmount)
         {
             if(mPart!=null || iSkip>1)
-                throw new JDFException("JDFResourceLinkPool.getAmountPoolAttribute: calling method on PartAmount object");
+                throw new JDFException("JDFResourceLink.getAmountPoolAttribute: calling method on PartAmount object");
             return iSkip==0 ? getAttribute(attrib, nameSpaceURI, null) : null;
         }
         // default to attribute if no amountpool
@@ -1600,7 +1600,7 @@ public class JDFResourceLink extends JDFElement
         if (this instanceof JDFPartAmount)
         {
             throw new JDFException(
-                    "JDFResourceLinkPool.setAmountPoolAttribute: calling method on PartAmount object");
+                    "JDFResourceLink.setAmountPoolAttribute: calling method on PartAmount object");
         }
         final VJDFAttributeMap v=new VJDFAttributeMap();
         v.add(mPart);

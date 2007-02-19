@@ -90,8 +90,6 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.core.KElement.EnumValidationLevel;
-import org.cip4.jdflib.util.StringUtil;
 
 public class JDFNameState extends JDFAbstractState
 {
