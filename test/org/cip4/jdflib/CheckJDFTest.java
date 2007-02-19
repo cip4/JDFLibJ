@@ -101,11 +101,7 @@ public class CheckJDFTest extends JDFTestCaseBase
 
     public void testValidate() throws Exception
     {
-        // Gets a JDF file from the 'data' directory. By using the class loader
-        // we don't need to now the absolute path to the file as long as the
-        // data directory is in the class path.
-        URI jdfUri = new URI(this.getClass().getClassLoader().getResource("data/job.jdf").toExternalForm());
-        File jdfFile = new File(jdfUri);
+        File jdfFile = new File(sm_dirTestData+"job.jdf");
         System.out.println("Checking JDF: " + jdfFile.getAbsolutePath());
         // TODO There is a bug in MyArgs that prevents command line arguments
         // containing hyphens from being parsed correctly
@@ -121,9 +117,9 @@ public class CheckJDFTest extends JDFTestCaseBase
         
     public void testCmdLineChecker() 
     {
-        String checkSavePath = sm_dirTestData+File.separator+"NarrowWeb.jdf";
-        String checkSavePathResult = sm_dirTestDataTemp+File.separator+"NarrowWeb.out.xml";
-        String schemaLocator = sm_dirTestSchema+File.separator+"JDF.xsd";//.toURL().toExternalForm();
+        String checkSavePath = sm_dirTestData+"NarrowWeb.jdf";
+        String checkSavePathResult = sm_dirTestDataTemp+"NarrowWeb.out.xml";
+        String schemaLocator = sm_dirTestSchema+"JDF.xsd";//.toURL().toExternalForm();
         
         String checkSaveLocator = checkSavePathResult;
         
@@ -216,11 +212,7 @@ public class CheckJDFTest extends JDFTestCaseBase
 
     public void testValidateStream() throws Exception
     {
-        // Gets a JDF file from the 'data' directory. By using the class loader
-        // we don't need to now the absolute path to the file as long as the
-        // data directory is in the class path.
-        URI jdfUri = new URI(this.getClass().getClassLoader().getResource("data/job.jdf").toExternalForm());
-        File jdfFile = new File(jdfUri);
+        File jdfFile = new File(sm_dirTestData+"job.jdf");
         FileInputStream ins = new FileInputStream(jdfFile);
         System.out.println("Checking JDF: " + jdfFile.getAbsolutePath());
         // TODO There is a bug in MyArgs that prevents command line arguments
@@ -234,7 +226,7 @@ public class CheckJDFTest extends JDFTestCaseBase
     public void testValidateZip() throws Exception
     {
    
-        File zip=new File(sm_dirTestData+File.separator+"checkjdf.zip");
+        File zip=new File(sm_dirTestData+"checkjdf.zip");
         CheckJDF checker = new CheckJDF();
         XMLDoc d=checker.processZipFile(zip);
         KElement root=d.getRoot();
@@ -243,7 +235,7 @@ public class CheckJDFTest extends JDFTestCaseBase
     public void testValidateMime() throws Exception
     {
    
-        File mim=new File(sm_dirTestData+File.separator+"checkjdf.mjm");
+        File mim=new File(sm_dirTestData+"checkjdf.mjm");
         CheckJDF checker = new CheckJDF();
         FileInputStream is=new FileInputStream(mim);
         XMLDoc d=checker.processMimeStream(is);
@@ -253,12 +245,7 @@ public class CheckJDFTest extends JDFTestCaseBase
     
     public void testMainQuietComplete() throws Exception
     {
-
-        // Gets a JDF file from the 'data' directory. By using the class loader
-        // we don't need to now the absolute path to the file as long as the
-        // data directory is in the class path.
-        URI jdfUri = new URI(this.getClass().getClassLoader().getResource("data/job.jdf").toExternalForm());
-        File jdfFile = new File(jdfUri);
+        File jdfFile = new File(sm_dirTestData+"job.jdf");
         System.out.println("Checking JDF: " + jdfFile.getAbsolutePath());
         // TODO There is a bug in MyArgs that prevents command line arguments
         // containing hyphens from being parsed correctly
@@ -269,11 +256,7 @@ public class CheckJDFTest extends JDFTestCaseBase
 
     public void testMainQuietCompleteXMLReport() throws Exception
     {
-        // Gets a JDF file from the 'data' directory. By using the class loader
-        // we don't need to now the absolute path to the file as long as the
-        // data directory is in the class path.
-        URI jdfUri = new URI(this.getClass().getClassLoader().getResource("data/job.jdf").toExternalForm());
-        File jdfFile = new File(jdfUri);
+        File jdfFile = new File(sm_dirTestData+"job.jdf");
         System.out.println("Checking JDF: " + jdfFile.getAbsolutePath());
         // TODO There is a bug in MyArgs that prevents command line arguments
         // containing hyphens from being parsed correctly
