@@ -86,9 +86,11 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.process.JDFMedia;
 
 
 /**
@@ -308,6 +310,48 @@ public class CheckJDFTest extends JDFTestCaseBase
         assertTrue(reportFile.exists());
     }
 
+    // //////////////////////////////////////////////////////////////////////////
+    /**
+     * tests validation of a document that is passed by reference to a document
+     */
+    public void testValidateExtensionschema() 
+    {
+        JDFDoc doc=new JDFDoc("JDF");
+        CheckJDF checkJDF=new CheckJDF();
+        checkJDF.setPrint(false);
+        checkJDF.bQuiet = true;
+        checkJDF.level = EnumValidationLevel.Incomplete;
+        checkJDF.setJDFSchemaLocation(new File(sm_dirTestSchema + "JDF.xsd"));
+        JDFNode n=doc.getJDFRoot();
+        n.setType(EnumType.ConventionalPrinting);
+        JDFMedia med=(JDFMedia) n.addResource("Media", null, EnumUsage.Input, null, null, null, null);
+        checkJDF.setIgnorePrivate(false);
+        doc.write2File(sm_dirTestDataTemp+"extension.jdf", 0,true);
+        XMLDoc out=checkJDF.processSingleFile(sm_dirTestDataTemp+"extension.jdf");
+        assertEquals(out.getRoot().getXPathAttribute("TestFile/SchemaValidationOutput/@ValidationResult", null), "Valid");
+        
+        checkJDF.schemaLocation+=" http://www.extension.com "+sm_dirTestSchema + "extension.xsd";
+        med.setAttribute("ext:ExtensionAtt", "a","http://www.extension.com");
+        KElement fooBar=med.appendElement("ext:FooBar", "http://www.extension.com");
+        fooBar.setAttribute("ID", "f1");
+        fooBar.setAttribute("Fnarf", "4");
+
+        doc.write2File(sm_dirTestDataTemp+"extension.jdf", 0,true);
+        out=checkJDF.processSingleFile(sm_dirTestDataTemp+"extension.jdf");        
+        assertEquals(out.getRoot().getXPathAttribute("TestFile[2]/SchemaValidationOutput/@ValidationResult", null), "Error");
+        
+        med.setAttribute("ext:ExtensionAtt", "3","http://www.extension.com");
+        doc.write2File(sm_dirTestDataTemp+"extension.jdf", 0,true);
+        out=checkJDF.processSingleFile(sm_dirTestDataTemp+"extension.jdf");        
+        assertEquals(out.getRoot().getXPathAttribute("TestFile[3]/SchemaValidationOutput/@ValidationResult", null), "Valid");
+        
+        fooBar.setAttribute("Fnarf", "bad");
+        doc.write2File(sm_dirTestDataTemp+"extension.jdf", 0,true);
+        out=checkJDF.processSingleFile(sm_dirTestDataTemp+"extension.jdf");        
+        assertEquals(out.getRoot().getXPathAttribute("TestFile[4]/SchemaValidationOutput/@ValidationResult", null), "Error");
+        
+    }
+    
     // //////////////////////////////////////////////////////////////////////////
     /**
      * tests validation of a document that is passed by reference to a document
