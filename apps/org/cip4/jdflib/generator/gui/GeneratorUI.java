@@ -563,9 +563,10 @@ public class GeneratorUI extends JFrame implements ActionListener, MouseListener
             tempProp.load(propsFile);
 
             m_defaultSchemaLocation    = (String) tempProp.get("SchemaPath");
-            m_defaultOutputLocation    = (String) tempProp.get("OutputPath") + fileSep;
-            Generator.m_strJdfCoreJava = m_defaultOutputLocation + "Java" + fileSep + "auto";
-            Generator.m_strJdfCoreCpp  = m_defaultOutputLocation + "Cpp"  + fileSep + "auto"; 
+            m_defaultOutputLocation    = (String) tempProp.get("OutputPath");
+            	
+            Generator.m_strJdfCoreJava = m_defaultOutputLocation + fileSep + "Java" + fileSep + "auto";
+            Generator.m_strJdfCoreCpp  = m_defaultOutputLocation + fileSep + "Cpp"  + fileSep + "auto"; 
             
             m_defaultSerialLocation    = (String) tempProp.get("SerializePath");
             m_defaultFileListPath      = (String) tempProp.get("FileListPath");
