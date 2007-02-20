@@ -309,8 +309,9 @@ public class ListButtonPanel extends JPanel implements  ActionListener,
                         com_OutputField.setText(strOutputPath);
                         com_OutputField.setToolTipText(strOutputPath);
                         com_OutputField.setCaretPosition(0);
-                        Generator.m_strJdfCoreJava     = strOutputPath  + fileSep + "JDFLibGeneratorOutput" + fileSep + "Java" + fileSep + "src" + fileSep + "com" + fileSep + "heidelberg" + fileSep +  "JDFLib" + fileSep + "Auto";
-                        Generator.m_strJdfCoreCpp      = strOutputPath  + fileSep + "JDFLibGeneratorOutput" + fileSep + "Cpp"  + fileSep + "src" + fileSep + "com" + fileSep + "heidelberg" + fileSep +  "JDFLib" + fileSep + "Auto";
+                        
+                        Generator.m_strJdfCoreJava 	   = strOutputPath + fileSep + "Java" + fileSep + "auto";
+                        Generator.m_strJdfCoreCpp	   = strOutputPath + fileSep + "Cpp"  + fileSep + "auto"; 
                         Generator.m_strJdfLostAndFound = strOutputPath  + fileSep + "JDFLibGeneratorOutput" + fileSep + "LostAndFound";
                         
                         bOutputPathSet = true;
