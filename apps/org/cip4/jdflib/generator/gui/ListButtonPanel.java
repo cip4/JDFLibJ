@@ -407,7 +407,7 @@ public class ListButtonPanel extends JPanel implements  ActionListener,
                     
                     // generate the file
                     SchemaDoc.toCoreJava(m_vBuffer, true);
-                    SchemaDoc.toCoreCpp (m_vBuffer, true);
+//                    SchemaDoc.toCoreCpp (m_vBuffer, true);
                     
                     int iIndex2 = dtm.getRowCount();
                     try
