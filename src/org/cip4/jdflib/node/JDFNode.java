@@ -7567,32 +7567,6 @@ public class JDFNode extends JDFElement
         return vni;
     }
 
-    /**
-     * Erases all empty text nodes in 'this' and its subelements.<br>
-     * If bTrimWhite is true, then trims white spaces from both
-     * ends of a text node and only then, if it is empty, removes it
-     *
-     * @param bTrimWhite trims whitespace of text, default = true
-     * @return int - the number of removed nodes
-     */
-    public int eraseEmptyNodes(boolean bTrimWhite)
-    {
-        int nRemove = super.eraseEmptyNodes(bTrimWhite);
-
-        KElement n = getFirstChildElement();
-        while (n != null)
-        {
-            KElement nNext=n.getNextSiblingElement();
-            if(n.getLocalName().endsWith("Pool")){
-                if(!n.hasAttributes()&&!n.hasChildElements()){
-                    n.deleteNode();
-                }
-            }
-            n = nNext;      
-        }
-
-        return nRemove;
-    }   
 
     /**
      * getLinks - get the links matching mLinkAtt out of the resource link pool
