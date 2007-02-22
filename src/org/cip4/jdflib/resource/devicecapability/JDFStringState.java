@@ -243,7 +243,7 @@ public class JDFStringState extends JDFAbstractState
     
     public JDFValue getValue(int iSkip)
     {
-        JDFValue e = (JDFValue)getElement(ElementName.VALUE, JDFConstants.EMPTYSTRING, iSkip);
+        JDFValue e = (JDFValue)getElement(ElementName.VALUE, null, iSkip);
         return e;
     }
 
@@ -292,12 +292,11 @@ public class JDFStringState extends JDFAbstractState
     /** 
      * Sets the <code>AllowedValue</code> attribute of the iSkip'th subelement <code>Value</code>
      *
-     * @param iSkip the number of <code>Value</code> elements to skip
      * @param value value to set the attribute to
      */
-    public void setValueAllowedValue(int iSkip, String value)
+    public void appendValueAllowedValue(String value)
     {
-        JDFValue e = (JDFValue) getElement(ElementName.VALUE,null,iSkip);
+        JDFValue e = (JDFValue) appendElement(ElementName.VALUE,null);
         e.setAllowedValue(value);
     }
     
@@ -310,6 +309,8 @@ public class JDFStringState extends JDFAbstractState
     public final String getValueAllowedValue(int iSkip) 
     {
         JDFValue e = (JDFValue) getElement(ElementName.VALUE,null,iSkip);
+        if(e==null)
+            return null;
         return e.getAllowedValue();
     }
     

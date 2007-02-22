@@ -1865,9 +1865,14 @@ public class JDFDevCap extends JDFAutoDevCap
         if(key.startsWith(AttributeName.XMLNS))
             return true;
         
-        JDFDeviceCap deviceCap = (JDFDeviceCap)getDeepParent(ElementName.DEVICECAP,0);
-        VString s = deviceCap.getGenericAttributes();
-        return s.contains(key) || s.contains("*");
+        KElement deviceCap = getDeepParent(ElementName.DEVICECAP,0);
+        if(deviceCap==null)
+            deviceCap = getDeepParent(ElementName.MESSAGESERVICE,0);
+        if(deviceCap==null)
+            return false;
+        
+        VString s = StringUtil.tokenize(deviceCap.getAttribute(AttributeName.GENERICATTRIBUTES)," ",false);
+        return s!=null && (s.contains(key) || s.contains("*"));
     }
     
     
@@ -1926,7 +1931,7 @@ public class JDFDevCap extends JDFAutoDevCap
                 if(!id.equals(""))
                 {
                     VElement v=parentNode.getChildrenByTagName("DevCap",null,null,false,true,0);
-                    JDFDeviceCap deviceCap=(JDFDeviceCap) parentNode.getParentNode_KElement();
+                    KElement deviceCap= parentNode.getParentNode_KElement();
  
                     for(int i=0;i<v.size();i++)
                     {

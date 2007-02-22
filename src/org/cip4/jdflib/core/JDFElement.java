@@ -2005,7 +2005,7 @@ public class JDFElement extends KElement
                 re.inlineRef();
             }
         }
-        
+
         // now loop over all (!) children, to see if any descendants match
         if (!bDirect)
         {
@@ -2015,11 +2015,11 @@ public class JDFElement extends KElement
             {           
                 if(v.elementAt(i) instanceof JDFElement)
                 {
-                JDFElement e=(JDFElement)v.elementAt(i);
-                e.inlineRefElements(nodeName, nameSpaceURI, bDirect);
+                    JDFElement e=(JDFElement)v.elementAt(i);
+                    e.inlineRefElements(nodeName, nameSpaceURI, bDirect);
+                }
             }
         }
-    }
     }
     
     /** 
@@ -2655,7 +2655,7 @@ public class JDFElement extends KElement
         if (p == null)
             return idPrefix+uniqueID(0);
         
-        return generateDotID(AttributeName.ID, JDFConstants.EMPTYSTRING);
+        return generateDotID(AttributeName.ID, null);
     }
     
     /**
@@ -2984,7 +2984,7 @@ public class JDFElement extends KElement
         {
             return !bRequired;
         }
-        final String val = getAttribute(key, nameSpaceURI, JDFConstants.EMPTYSTRING);
+        final String val = getAttribute(key, nameSpaceURI, null);
         return AttributeInfo.validStringForType(val,iType,null);
     }
     

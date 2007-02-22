@@ -1042,6 +1042,9 @@ public class KElement extends ElementNSImpl
      */
     public void appendAttribute(String key, String value, String nameSpaceURI, String sep, boolean bUnique)
     {
+        if(value==null)
+            return;
+        
         final String oldVal = getAttribute_KElement(key, nameSpaceURI, null);        
         if (oldVal==null)
         {

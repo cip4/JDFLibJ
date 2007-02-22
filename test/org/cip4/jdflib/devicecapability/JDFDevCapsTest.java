@@ -79,7 +79,10 @@ import junit.framework.TestCase;
 
 import org.cip4.jdflib.auto.JDFAutoDevCaps.EnumContext;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.jmf.JDFMessageService;
+import org.cip4.jdflib.resource.devicecapability.JDFDevCap;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCaps;
+import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 
 
 public class JDFDevCapsTest extends TestCase
@@ -98,5 +101,29 @@ public class JDFDevCapsTest extends TestCase
         assertEquals(dcs.getContextName(), "foo");
         dcs.setContext(EnumContext.Resource);
         assertEquals(dcs.getContextName(), "foo");
+    }
+    
+    public void testAppendDevCapInPool_DeviceCap()
+    {
+        
+        JDFDoc doc=new JDFDoc("DeviceCap");
+        JDFDeviceCap ms=(JDFDeviceCap)doc.getRoot();
+        JDFDevCaps dcs=ms.appendDevCaps();
+        dcs.setName("foo");
+        JDFDevCap dc=dcs.appendDevCapInPool();
+        assertEquals(dc,dcs.getDevCap());
+        assertEquals(dc.getName(),dcs.getName());
+    }
+    
+    public void testAppendDevCapInPool_JMF()
+    {
+        
+        JDFDoc doc=new JDFDoc("MessageService");
+        JDFMessageService ms=(JDFMessageService)doc.getRoot();
+        JDFDevCaps dcs=ms.appendDevCaps();
+        dcs.setName("foo");
+        JDFDevCap dc=dcs.appendDevCapInPool();
+        assertEquals(dc,dcs.getDevCap());
+        assertEquals(dc.getName(),dcs.getName());
     }
 }

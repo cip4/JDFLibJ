@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -82,6 +82,8 @@
 
 package org.cip4.jdflib.resource.devicecapability;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -97,6 +99,9 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.jmf.JDFMessageService;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.pool.JDFResourceLinkPool;
@@ -175,6 +180,58 @@ public class JDFDevCaps extends JDFAutoDevCaps
         final String id2 = dc.getID();
         setDevCapRef(id2);       
     }
+    /**
+     * set rRef to the value of devCap/@ID
+     * @param dc the DevCap to set
+     */
+    public JDFDevCap appendDevCap()
+    {
+        JDFDevCap dc=super.appendDevCap();
+        if(hasAttribute(AttributeName.NAME))
+            dc.setName(getName());
+        return dc;
+    }
+    /**
+     * set rRef to the value of devCap/@ID
+     * @param dc the DevCap to set
+     */
+    public JDFDevCap appendDevCapInPool()
+    {
+        JDFDevCapPool dcp = getCreateDevCapPool();
+        JDFDevCap dc=dcp.appendDevCap();
+        dc.appendAnchor(null); // just in case it is missing
+        final String id2 = dc.getID();
+        setDevCapRef(id2);      
+        if(hasAttribute(AttributeName.NAME))
+            dc.setName(getName());
+        return dc;
+    }
+
+    /**
+     * get the DEvCapPool that contains devcap elements referenced by this
+     * @return JDFDevCapPool the pool
+     */
+    public JDFDevCapPool getDevCapPool()
+    {
+        KElement parent=getParentNode_KElement();
+        if(!(parent instanceof JDFDeviceCap)&&!(parent instanceof JDFMessageService))
+            throw new JDFException("JDFDevCap.getDevCapPoll - invalid parent context");
+        JDFDevCapPool dcp=(JDFDevCapPool) parent.getElement(ElementName.DEVCAPPOOL);
+        return dcp;
+    }
+    /**
+     * get the DEvCapPool that contains devcap elements referenced by this
+     * create one if it does not exist
+     * @return JDFDevCapPool the pool
+     */
+    public JDFDevCapPool getCreateDevCapPool()
+    {
+        KElement parent=getParentNode_KElement();
+        if(!(parent instanceof JDFDeviceCap)&&!(parent instanceof JDFMessageService))
+            throw new JDFException("JDFDevCap.getCreateDevCapPoll - invalid parent context");
+        JDFDevCapPool dcp=(JDFDevCapPool) parent.getCreateElement(ElementName.DEVCAPPOOL);
+        return dcp;
+    }
 
     /**
      * get IDREF attribute <code>DevCapRef</code>
@@ -213,7 +270,7 @@ public class JDFDevCaps extends JDFAutoDevCaps
     {
         final String dcr=getAttribute(AttributeName.DEVCAPREF,null,null);
         if(dcr!=null){
-            final JDFDevCapPool dcp=((JDFDeviceCap)getParentNode_KElement()).getDevCapPool();
+            final JDFDevCapPool dcp=getDevCapPool();
             if(dcp==null)
                 return null;
             return (JDFDevCap) dcp.getChildWithAttribute(ElementName.DEVCAP,AttributeName.ID,null,dcr,0,true);
@@ -297,7 +354,7 @@ public class JDFDevCaps extends JDFAutoDevCaps
         final String dcr=getAttribute(AttributeName.DEVCAPREF,null,null);
         if(dcr!=null)
         {
-            final JDFDevCapPool dcp=((JDFDeviceCap)getParentNode_KElement()).getDevCapPool();
+            final JDFDevCapPool dcp=getDevCapPool();
             if(dcp!=null)
             {
                 final KElement dcre= dcp.getChildWithAttribute(ElementName.DEVCAP,AttributeName.ID,null,dcr,0,true);
@@ -490,7 +547,7 @@ public class JDFDevCaps extends JDFAutoDevCaps
      * @return VElement - the element vector of matching elements, 
      *                    <code>null</code> if none were found
      */
-    public VElement getMatchingElementsFromNode(JDFNode node)
+    private VElement getMatchingElementsFromNode(JDFNode node)
     {
         VElement vElem = new VElement();
         final String nam = getName();
@@ -545,6 +602,30 @@ public class JDFDevCaps extends JDFAutoDevCaps
         {// Context_Unknown
             throw new JDFException("JDFDevCaps wrong attribute Context value");
         }
+
+        if(vElem!=null && vElem.size()==0)
+            vElem=null;
+
+        return vElem;
+    }
+
+    /**
+     * gets the matching elements in node that match this devcaps
+     * 
+     * @param node the node to search in
+     * @return VElement - the element vector of matching elements, 
+     *                    <code>null</code> if none were found
+     */
+    public VElement getMatchingElementsFromJMF(JDFMessage jmf)
+    {
+        final String nam = getName();
+        final EnumContext context = getContext();
+
+        if (!context.equals(EnumContext.JMF)) 
+        { // vElem - for a common return type in all cases
+           return null;
+        }
+        VElement vElem = jmf.getChildElementVector(nam, null, null, true, 0, false);
 
         if(vElem!=null && vElem.size()==0)
             vElem=null;
@@ -676,6 +757,116 @@ public class JDFDevCaps extends JDFAutoDevCaps
             m=1;
         return m;
 
+    }
+
+    /**
+     * @param jdfRoot
+     * @param testlists
+     * @param level
+     * @param mrp
+     * @param irp
+     * @param resLinkPool
+     * @param badElem
+     * @param goodElems
+     * @param badElems
+     * @param devCaps
+     * @return
+     */
+    public KElement analyzeDevCaps(final KElement jdfRoot, EnumFitsValue testlists, EnumValidationLevel level, KElement mrp, KElement irp, KElement badElem, HashSet goodElems, HashMap badElems, boolean ignoreExtensions)
+    {
+        
+        VElement vElemResources = null;
+        if(jdfRoot instanceof JDFNode)
+        {
+            vElemResources=getMatchingElementsFromNode((JDFNode)jdfRoot);
+        }
+        else
+        {
+            vElemResources = getMatchingElementsFromJMF((JDFMessage)jdfRoot);
+        }
+        int svElemResources = vElemResources==null ? 0 : vElemResources.size();
+        
+        final EnumContext context = getContext();
+        KElement r=null;
+        if (requiredLevel(level) && svElemResources<getMinOccurs())
+        {
+             if (context.equals(EnumContext.Element)) 
+            {
+                r = mrp.appendElement("MissingElement");
+                r.setAttribute("XPath", jdfRoot.buildXPath(null)+ "/" + getName());
+            }
+            else 
+            {
+                final EnumUsage linkUsage = getLinkUsage();
+                final String procUsage=getProcessUsage();
+                r = mrp.appendElement("MissingResourceLink");
+                if (linkUsage!=null)
+                {
+                    r.setAttribute("Usage", linkUsage.getName());
+                }
+                if (procUsage!=null && procUsage.length()>0)
+                {
+                    r.setAttribute("ProcessUsage", procUsage);
+                }
+                if(badElem==null)
+                    badElem=jdfRoot; // fudge against npe in next line
+                r.setAttribute("XPath", badElem.buildXPath(null)+ "/" + getName());
+            }                    
+            r.setAttribute("Name", getName());
+            r.setAttribute("CapXPath", getName());                    
+            r.setAttribute("Occurrences", svElemResources,null);
+            r.setAttribute("MinOccurrs", getMinOccurs(),null);
+        }
+        else if (svElemResources>getMaxOccurs())
+        {
+            if (context.equals(EnumContext.Element) || context.equals(EnumContext.JMF)) 
+            {
+                r = irp.appendElement("ManyElement");
+                r.setAttribute("XPath", jdfRoot.buildXPath(null)+ "/" + getName());
+            }
+            else 
+            {
+                final EnumUsage linkUsage = getLinkUsage();
+                final String procUsage=getProcessUsage();
+                r = irp.appendElement("ManyResourceLink");
+                if (linkUsage!=null)
+                {
+                    r.setAttribute("Usage", linkUsage.getName());
+                }
+                if (procUsage!=null && procUsage.length()>0)
+                {
+                    r.setAttribute("ProcessUsage", procUsage);
+                }
+                if(badElem==null)
+                    badElem=jdfRoot; // fudge against npe in next line
+                r.setAttribute("XPath", badElem.buildXPath(null)+ "/" + getName());
+            }                    
+            r.setAttribute("Name", getName());
+            r.setAttribute("CapXPath", getName()); 
+            r.setAttribute("Occurrences", svElemResources,null);
+            r.setAttribute("MaxOccurrs", getMaxOccurs(),null);
+        }
+    
+        for(int j=0;j<svElemResources;j++)
+        {
+            final KElement elem = (KElement)vElemResources.elementAt(j);
+            if(!goodElems.contains(elem))
+            {
+                KElement report=devCapReport(elem,testlists,level,ignoreExtensions,irp); // InvalidResources
+                if(report==null)
+                {
+                    goodElems.add(elem);
+                    KElement badReport=(KElement)badElems.get(elem);
+                    if(badReport!=null)
+                        badReport.deleteNode();
+                }
+                else
+                {
+                    badElems.put(elem,report);
+                }
+            }
+        }
+        return badElem;
     }
 
 

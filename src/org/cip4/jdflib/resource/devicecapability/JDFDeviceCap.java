@@ -101,6 +101,10 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.jmf.JDFMessageService;
+import org.cip4.jdflib.jmf.JDFResponse;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.pool.JDFResourceLinkPool;
@@ -269,51 +273,124 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
    }
     
     
-    /**
-     * Composes a BugReport in XML form for the given JDFNode 'jdfRoot'. 
-     * Gives a list of error messages for 'jdfRoot' and every child rejected Node.<br> 
-     * Returns <code>null</code> if there are no errors.
-     *
-     * @param jdfRoot   the node to test
-     * @param testlists testlists that are specified for the State elements 
-     *                  (FitsValue_Allowed or FitsValue_Present)<br>
-     *                  Will be used in fitsValue method of the State class.
-     * @param level     validation level
-     * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc is null there are no errors.
-     */
-    public final XMLDoc getBadJDFInfo(final JDFNode jdfRoot, final EnumFitsValue testlists, final EnumValidationLevel level)
-    {
-        XMLDoc bugReport = new XMLDoc("BugReport", null);
-        KElement outputRoot = bugReport.getRoot();        
-        VElement vNodes = jdfRoot.getvJDFNode(null, null, false);
-        
-        final int size = vNodes.size();
-        for (int i=0; i < size; i++) 
-        {
-            JDFNode n = (JDFNode)vNodes.elementAt(i);
-            KElement report=null;
-            try
-            {
-                report = report(n, testlists, level,outputRoot);
-            }
-            catch (JDFException jdfe)
-            {
-                report = outputRoot.appendElement("RejectedNode");
-                report.setAttribute("CaughtException", jdfe.getMessage());
-                report.setAttribute("ID", n.getID());
-                report.setAttribute("XPath", n.buildXPath(null));
-            }
-        }
-        
-        if (!outputRoot.hasChildNodes())
-            bugReport = null;
-        
+   /**
+    * Composes a BugReport in XML form for the given JDFNode 'jdfRoot'. 
+    * Gives a list of error messages for 'jdfRoot' and every child rejected Node.<br> 
+    * Returns <code>null</code> if there are no errors.
+    *
+    * @param jdfRoot   the node to test
+    * @param testlists testlists that are specified for the State elements 
+    *                  (FitsValue_Allowed or FitsValue_Present)<br>
+    *                  Will be used in fitsValue method of the State class.
+    * @param level     validation level
+    * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc is null there are no errors.
+    */
+   public final XMLDoc getBadJDFInfo(final JDFNode jdfRoot, final EnumFitsValue testlists, final EnumValidationLevel level)
+   {
+       XMLDoc bugReport = new XMLDoc("BugReport", null);
+       KElement outputRoot = bugReport.getRoot();        
+       VElement vNodes = jdfRoot.getvJDFNode(null, null, false);
+       
+       final int size = vNodes.size();
+       for (int i=0; i < size; i++) 
+       {
+           JDFNode n = (JDFNode)vNodes.elementAt(i);
+           KElement report=null;
+           try
+           {
+               report = report(n, testlists, level,outputRoot);
+           }
+           catch (JDFException jdfe)
+           {
+               report = outputRoot.appendElement("RejectedNode");
+               report.setAttribute("CaughtException", jdfe.getMessage());
+               report.setAttribute("ID", n.getID());
+               report.setAttribute("XPath", n.buildXPath(null));
+           }
+       }
+       
+       if (!outputRoot.hasChildNodes())
+           bugReport = null;
+       
+       return bugReport;
+   }
+   /**
+    * Composes a BugReport in XML form for the given JDFNode 'jdfRoot'. 
+    * Gives a list of error messages for 'jdfRoot' and every child rejected Node.<br> 
+    * Returns <code>null</code> if there are no errors.
+    *
+    * @param jdfRoot   the node to test
+    * @param testlists testlists that are specified for the State elements 
+    *                  (FitsValue_Allowed or FitsValue_Present)<br>
+    *                  Will be used in fitsValue method of the State class.
+    * @param level     validation level
+    * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc is null there are no errors.
+    */
+   static public XMLDoc getJMFInfo(final JDFJMF jmfRoot, final JDFResponse knownMessagesResp, final EnumFitsValue testlists, final EnumValidationLevel level,boolean ignoreExtensions)
+   {
+       XMLDoc bugReport = new XMLDoc("JMFReport", null);
+       KElement parentRoot = bugReport.getRoot();        
+
+       int nBad=0;
+       if (!jmfRoot.isValid(level)) 
+       {
+           parentRoot.setAttribute("IsValid", false, null);
+       }
+       VElement messages=jmfRoot.getMessageVector(null,null);
+
+       for(int i=0;i<messages.size();i++)
+       {
+           KElement messageReport=parentRoot.appendElement("InvalidMessage");
+           JDFMessage m=(JDFMessage) messages.elementAt(i);
+           String typeJMF = m.getType();
+           messageReport.setAttribute("MessageType",typeJMF);
+           messageReport.setAttribute("XPath", m.buildXPath(null));
+           messageReport.setAttribute("ID", m.getID());
+           JDFMessageService ms=getMessageServiceForJMFType(m,knownMessagesResp);
+           if(ms!=null)
+           {
+               messageReport.setAttribute("FitsType", true, null);
+               invalidDevCaps(ms,m, testlists, level, parentRoot,ignoreExtensions);
+           }
+           else
+           {
+               messageReport.setAttribute("FitsType", false, null);
+//             TODO           root.setAttribute("CapsType",typeExp);
+               messageReport.setAttribute("Message","JMF  Type: "+typeJMF+" does not match capabilities type: ");
+           }
+
+
+           if (!messageReport.hasChildElements() && messageReport.getBoolAttribute("FitsType",null,true))
+           {
+               messageReport.renameElement("ValidMessage", null);
+           }
+           else
+           {
+               nBad++;
+           }
+       }
+       if(nBad==0)
+           parentRoot.setAttribute("IsValid", "true");
         return bugReport;
-    }
-    
-    
-    
-    /**
+   }
+
+
+
+   /**
+ * @param m
+ * @param knownMessagesResp
+ * @return
+ */
+public static JDFMessageService getMessageServiceForJMFType(JDFMessage m, JDFResponse knownMessagesResp)
+{
+   if(knownMessagesResp==null || !knownMessagesResp.getType().equals("KnownMessages") || m==null || m.getType().equals("") )
+       return null;
+   JDFMessageService ms=(JDFMessageService)knownMessagesResp.getChildWithAttribute(ElementName.MESSAGESERVICE, AttributeName.TYPE, null, m.getType(), 0, true);
+   return ms;
+  
+}
+
+/**
      * Checks if Device can execute the given JDFNode 'jdfRoot'.<br>
      * First validates 'jdfRoot' and checks if its Type/Types attributes  
      * fit the values of DeviceCap/@Types and DeviceCap/@CombinedMethod.
@@ -459,7 +536,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    private void reportTypeMatch(KElement report, boolean matches, String typeNode, String typeExp)
+    private static void reportTypeMatch(KElement report, boolean matches, String typeNode, String typeExp)
     {
         report.setAttribute("FitsType", matches, null);
         report.setAttribute("NodeType",typeNode);
@@ -577,7 +654,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
             
         // if all resourceLinks and NodeInfo/CustomerInfo elements (optional) 
         // are specified as DevCaps, we may test them. 
-        invalidDevCaps(jdfRoot, testlists, level, root);
+        invalidDevCaps(this,jdfRoot, testlists, level, root,ignoreExtensions);
         actionPoolReport(jdfRoot,root);
         if(!root.hasChildElements())
         {
@@ -600,15 +677,24 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
      * @return boolean - true if invalid devcaps were found 
      * @throws JDFException if DeviceCap is invalid: has a wrong attribute Context value 
      */
-    private boolean invalidDevCaps(final JDFNode jdfRoot, EnumFitsValue testlists, EnumValidationLevel level, KElement parentReport)
+    private static boolean invalidDevCaps(KElement parent, final KElement jdfRoot, EnumFitsValue testlists, EnumValidationLevel level, KElement parentReport, boolean ignoreExtensions)
     {
         KElement mrp = parentReport.appendElement("MissingResources");
         KElement irp = parentReport.appendElement("InvalidResources");
-        
-        JDFResourceLinkPool resLinkPool = jdfRoot.getResourceLinkPool();
-        KElement badElem=resLinkPool;
-         
-        VElement vDevCaps = getChildElementVector(ElementName.DEVCAPS, null, null, true, 0, false);
+        KElement badElem=null;
+        if(parent instanceof JDFDeviceCap)
+        {
+            badElem = ((JDFNode)jdfRoot).getResourceLinkPool();
+        } 
+        else if(parent instanceof JDFMessageService)
+        {
+            badElem=jdfRoot;
+        }
+        else
+        {
+            throw new JDFException("illegal arguments in invaliddevcaps");
+        }
+        VElement vDevCaps = parent.getChildElementVector(ElementName.DEVCAPS, null, null, true, 0, false);
         final int size = vDevCaps.size();
         HashSet goodElems=new HashSet();
         HashMap badElems=new HashMap();
@@ -616,89 +702,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
         for (int i=0; i < size; i++) 
         {
             JDFDevCaps devCaps = (JDFDevCaps) vDevCaps.elementAt(i);
-            VElement vElemResources = devCaps.getMatchingElementsFromNode(jdfRoot);
-            int svElemResources = vElemResources==null ? 0 : vElemResources.size();
-            
-            final EnumContext context = devCaps.getContext();
-            KElement r=null;
-            if (requiredLevel(level) && svElemResources<devCaps.getMinOccurs())
-            {
-                 if (context.equals(EnumContext.Element)) 
-                {
-                    r = mrp.appendElement("MissingElement");
-                    r.setAttribute("XPath", jdfRoot.buildXPath(null)+ "/" + devCaps.getName());
-                }
-                else 
-                {
-                    final EnumUsage linkUsage = devCaps.getLinkUsage();
-                    final String procUsage=devCaps.getProcessUsage();
-                    r = mrp.appendElement("MissingResourceLink");
-                    if (linkUsage!=null)
-                    {
-                        r.setAttribute("Usage", linkUsage.getName());
-                    }
-                    if (procUsage!=null && procUsage.length()>0)
-                    {
-                        r.setAttribute("ProcessUsage", procUsage);
-                    }
-                    if(resLinkPool==null)
-                        badElem=jdfRoot; // fudge against npe in next line
-                    r.setAttribute("XPath", badElem.buildXPath(null)+ "/" + devCaps.getName());
-                }                    
-                r.setAttribute("Name", devCaps.getName());
-                r.setAttribute("CapXPath", devCaps.getName());                    
-                r.setAttribute("Occurrences", svElemResources,null);
-                r.setAttribute("MinOccurrs", devCaps.getMinOccurs(),null);
-            }
-            else if (svElemResources>devCaps.getMaxOccurs())
-            {
-                if (context.equals(EnumContext.Element)) 
-                {
-                    r = irp.appendElement("ManyElement");
-                    r.setAttribute("XPath", jdfRoot.buildXPath(null)+ "/" + devCaps.getName());
-                }
-                else 
-                {
-                    final EnumUsage linkUsage = devCaps.getLinkUsage();
-                    final String procUsage=devCaps.getProcessUsage();
-                    r = irp.appendElement("ManyResourceLink");
-                    if (linkUsage!=null)
-                    {
-                        r.setAttribute("Usage", linkUsage.getName());
-                    }
-                    if (procUsage!=null && procUsage.length()>0)
-                    {
-                        r.setAttribute("ProcessUsage", procUsage);
-                    }
-                    if(resLinkPool==null)
-                        badElem=jdfRoot; // fudge against npe in next line
-                    r.setAttribute("XPath", badElem.buildXPath(null)+ "/" + devCaps.getName());
-                }                    
-                r.setAttribute("Name", devCaps.getName());
-                r.setAttribute("CapXPath", devCaps.getName()); 
-                r.setAttribute("Occurrences", svElemResources,null);
-                r.setAttribute("MaxOccurrs", devCaps.getMaxOccurs(),null);
-            }
- 
-            for(int j=0;j<svElemResources;j++)
-            {
-                final KElement elem = (KElement)vElemResources.elementAt(j);
-                if(!goodElems.contains(elem))
-                {
-                    KElement report=devCaps.devCapReport(elem,testlists,level,ignoreExtensions,irp); // InvalidResources
-                    if(report==null)
-                    {
-                        goodElems.add(elem);
-                        KElement badReport=(KElement)badElems.get(elem);
-                        if(badReport!=null)
-                            badReport.deleteNode();
-                    }
-                    else
-                    {
-                        badElems.put(elem,report);
-                    }
-                }
-            }
+            badElem = devCaps.analyzeDevCaps(jdfRoot, testlists, level, mrp, irp, badElem, goodElems, badElems, ignoreExtensions);
         }
         
  
@@ -711,7 +715,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
         
         return bRet;
     }
-    
+
     /**
      * missingDevCaps - tests if there are any Resources or NodeInfo/CustomerInfo elements 
      * in the JDFNode, which are not described by DevCaps.<br>

@@ -102,6 +102,7 @@ import org.cip4.jdflib.node.JDFAncestor;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFSpawned;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
+import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFPhaseTime;
@@ -412,6 +413,29 @@ public class JDFElementTest extends TestCase
         assertEquals (elem.getNodeName(),"AuditPool");
         velem = m_jdfRoot.getChildElementVector(null,null,null, true, 3, false);
         assertEquals(velem.size(),3);
+    }
+    /**
+     * Method testChildElementVector.
+     * @throws Exception
+     */
+    public void testGetChildElementVector_or() throws Exception
+    {
+       JDFDoc d=new JDFDoc("AmountPool");
+       JDFAmountPool ap=(JDFAmountPool) d.getRoot();
+       JDFAttributeMap partMap=new JDFAttributeMap("a","a1");
+       partMap.put("b", "b1");
+       JDFPartAmount pa1=ap.appendPartAmount();
+       pa1.setAttributes(partMap);
+       partMap.put("a", "a2");
+       partMap.put("b", "b2");
+       JDFPartAmount pa2=ap.appendPartAmount();
+       pa2.setAttributes(partMap);
+       VElement v=ap.getChildElementVector(ElementName.PARTAMOUNT, null, partMap, false, 0,false);
+       assertEquals(v.size(), 1);
+       partMap.put("b", "b1");
+       v=ap.getChildElementVector(ElementName.PARTAMOUNT, null, partMap, false, 0,false);
+       assertEquals(v.size(), 2);
+       
     }
     /**
      * Method testChildElementVector.

@@ -273,7 +273,6 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
             dc.setID("dc_JDF");
             dcs.setDevCapRef(dc);
         }
-
     }
 
     /////////////////////////////////////////////////////////////////    
