@@ -119,7 +119,7 @@ import org.w3c.dom.Node;
 public class JDFResource extends JDFElement
 {
     private static final long serialVersionUID = 1L;
-//  private EnumResourceClass enumClass=null;
+    private static boolean autoAgent=true;
     
     private static AtrInfoTable[] atrInfoTable_Abstract = new AtrInfoTable[17];
     static 
@@ -1091,7 +1091,7 @@ public class JDFResource extends JDFElement
             if(!hasAttribute(AttributeName.STATUS))
                 setResStatus(EnumResStatus.Unavailable,false);
             EnumVersion v=getVersion(true);
-            if(v==null || v.getValue()>=EnumVersion.Version_1_2.getValue())
+            if(v==null || v.getValue()>=EnumVersion.Version_1_2.getValue()&&autoAgent)
             {
                 setAgentName(JDFAudit.getStaticAgentName());
                 setAgentVersion(JDFAudit.getStaticAgentVersion());
@@ -6913,6 +6913,24 @@ public class JDFResource extends JDFElement
             bRet=true;
         }
         return bRet;        
+    }
+
+
+    /**
+     * @return the autoAgent
+     */
+    public static boolean getAutoAgent()
+    {
+        return autoAgent;
+    }
+
+
+    /**
+     * @param autoAgent the autoAgent to set
+     */
+    public static void setAutoAgent(boolean autoAgent)
+    {
+        JDFResource.autoAgent = autoAgent;
     }
     
 }
