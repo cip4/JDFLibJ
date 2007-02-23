@@ -146,9 +146,11 @@ import org.cip4.jdflib.resource.JDFFilespecTest;
 import org.cip4.jdflib.resource.JDFLayerListTest;
 import org.cip4.jdflib.resource.JDFLayoutTest;
 import org.cip4.jdflib.resource.JDFMediaColorTest;
+import org.cip4.jdflib.resource.JDFPartTest;
 import org.cip4.jdflib.resource.JDFResourceTest;
 import org.cip4.jdflib.resource.PhaseTimeTest;
 import org.cip4.jdflib.resource.ProcessRunTest;
+import org.cip4.jdflib.resource.process.JDFAddressTest;
 import org.cip4.jdflib.resource.process.JDFColorConversionParamsTest;
 import org.cip4.jdflib.resource.process.JDFColorantControlTest;
 import org.cip4.jdflib.resource.process.JDFCutBlockTest;
@@ -272,9 +274,11 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JDFLayerListTest.class);
         suite.addTestSuite(JDFLayoutTest.class);
         suite.addTestSuite(JDFMediaColorTest.class);
+        suite.addTestSuite(JDFPartTest.class);
         suite.addTestSuite(JDFResourceTest.class);
- 
+        
         // resource.process
+        suite.addTestSuite(JDFAddressTest.class);
         suite.addTestSuite(JDFColorantControlTest.class);
         suite.addTestSuite(JDFColorConversionParamsTest.class);
         suite.addTestSuite(JDFCutBlockTest.class);

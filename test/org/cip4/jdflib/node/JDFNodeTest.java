@@ -414,9 +414,10 @@ public class JDFNodeTest extends JDFTestCaseBase
         JDFResource r = n.addResource("_foo", EnumResourceClass.Consumable, EnumUsage.Input, EnumProcessUsage.AnyInput, null, "", null);
         n.removeResource("_foo", 0);
         n.eraseEmptyNodes(true);       
-        assertNull(n.getResourcePool());
-        assertNull(n.getResourceLinkPool());
+        assertNotNull(n.getResourcePool());
+        assertNotNull(n.getResourceLinkPool());
     }  
+    
     public void testEraseUnlinkedResources()
     {
         JDFDoc d=new JDFDoc("JDF");

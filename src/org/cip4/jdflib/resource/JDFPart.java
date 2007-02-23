@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -160,6 +160,17 @@ public class JDFPart extends JDFAutoPart
         return retMap;
     }
     
+    /**
+     * sets the attributes of this to partmap
+     * removes all other attributes
+     * @param mPart attribute map for the part to set
+     */
+    public void setPartMap(JDFAttributeMap mPart)
+    {
+        removeAttributes(null);
+        setAttributes(mPart);
+    }
+
     /**
      * check whether the partition values match
      * 

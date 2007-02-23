@@ -1542,13 +1542,15 @@ public class JDFResourceLink extends JDFElement
     }
 
     /** 
-     * sets  the  attribute occurence in PartAmount 
+     * sets  the  attribute occurence in the appropriate PartAmount when called for a resourceLink
+     * and creates the AmountPool and/or PartAmount(s) if they are not yet there
      * 
      * @param attrib        the attribute name
      * @param value         value to set in string form.
      * @param nameSpaceURI  the XML-namespace
      * @param vPart         defines which part of this ResourceLink the Amount belongs to, 
      *                      if empty set the ResourceLink root attribute.
+     * @throws JDFException when called directly on a PartAmount
      * @since 060630
      */
     public void setAmountPoolAttribute(String attrib, String value, String nameSpaceURI, VJDFAttributeMap vPart)
@@ -1579,13 +1581,15 @@ public class JDFResourceLink extends JDFElement
         pa0.setAttribute(attrib, value, nameSpaceURI);
     }
     /** 
-     * sets  the  attribute occurence in PartAmount 
+     * sets  the  attribute occurence in the appropriate PartAmount when called for a resourceLink
+     * and creates the AmountPool and/or PartAmount if it is not yet there
      * 
      * @param attrib       the attribute name
      * @param value        value to set in string form.
      * @param nameSpaceURI the XML-namespace
      * @param mPart        defines which part of this ResourceLink the Amount belongs to, 
      *                     if empty set the ResourceLink root attribute
+     * @throws JDFException when called directly on a PartAmount
      * @since 071103
      */
     public void setAmountPoolAttribute(String attrib, String value, String nameSpaceURI,

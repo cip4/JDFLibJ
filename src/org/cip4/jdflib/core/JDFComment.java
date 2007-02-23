@@ -80,7 +80,13 @@ package org.cip4.jdflib.core;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoComment;
 
-
+/**
+ * this is the class for all text elements, obviously including <Comment>
+ * but also others, e.g ExtendedAddress
+ * 
+ * @author prosirai
+ *
+ */
 public class JDFComment extends JDFAutoComment
 {
     private static final long serialVersionUID = 1L;
@@ -157,7 +163,7 @@ public class JDFComment extends JDFAutoComment
     public boolean init()
     {
         EnumVersion v=getVersion(true);
-        if(v.getValue()>=EnumVersion.Version_1_3.getValue())
+        if(v.getValue()>=EnumVersion.Version_1_3.getValue()&&getLocalName().equals(ElementName.COMMENT))
         {
             appendAnchor(null);
         }
@@ -178,7 +184,7 @@ public class JDFComment extends JDFAutoComment
     {
         if(version!=null)
         {
-            if(version.getValue()>=EnumVersion.Version_1_3.getValue())
+            if(version.getValue()>=EnumVersion.Version_1_3.getValue()&&getLocalName().equals(ElementName.COMMENT))
             {
                 appendAnchor(null);
             }
@@ -196,14 +202,13 @@ public class JDFComment extends JDFAutoComment
     /**
      * Erases all empty text nodes in 'this' and its subelements 
      * If there any empty text nodes removes them.
-     * If bTrimWhite is true, then trims white spaces from both 
-     * ends of a text node and only then, if it is empty, removes it
+     * Does nothing in text nodes so that whitespace in comments, addresses etc. is always preserved
      *
      * @param bTrimWhite trims whitespace of text, default = true
      * @return int       the number of removed nodes  
      */
     public int eraseEmptyNodes(boolean bTrimWhite)
     {
-        return bTrimWhite ? 0 : 0; //retain whitespace in comments
+        return bTrimWhite ? 0 : 0; //NOP to fool compiler. also retain whitespace in comments
     }    
 }

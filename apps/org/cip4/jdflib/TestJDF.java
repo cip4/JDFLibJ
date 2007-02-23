@@ -13,8 +13,6 @@ import java.io.UnsupportedEncodingException;
 
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.node.JDFNode;
 
 
 public class TestJDF
@@ -37,16 +35,8 @@ public class TestJDF
         }
 
         JDFParser p=new JDFParser();
-        JDFDoc d=p.parseFile("big.jdf");
-        long ii=d.getDocMemoryUsed();
-        JDFNode n=d.getJDFRoot();
-        n.eraseEmptyNodes(true);
-        d.write2File("big2.jdf", 0, false);
-        VElement v=n.getChildrenByTagName("AuditPool", null, null, false, true, 0);
-        for(int i=0;i<v.size();i++)
-            v.item(i).deleteNode();
-        n.eraseEmptyNodes(true);
-        d.write2File("big3.jdf", 0, false);
+        JDFDoc d=p.parseFile("0.xml");
+        d.write2File("big2.jdf", 2, false);
   
     }
 }
