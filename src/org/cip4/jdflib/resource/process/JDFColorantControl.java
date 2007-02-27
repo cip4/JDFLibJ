@@ -82,6 +82,8 @@ import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoColorantControl;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.VString;
 import org.w3c.dom.DOMException;
@@ -167,9 +169,29 @@ public class JDFColorantControl extends JDFAutoColorantControl
         return v;
     }
     
+    public VString getDeviceColorantOrderSeparations()
+    {
+        if(hasChildElement(ElementName.DEVICECOLORANTORDER,null))
+            return super.getDeviceColorantOrder().getSeparations();
+        return getColorantOrderSeparations();
+    }
+    
     /**
-     * get the list of separations that this colorantcontrol
+     * 
      * @return
+     */
+    public VString getColorantOrderSeparations()
+    {
+        if(hasChildElement(ElementName.COLORANTORDER,null))
+            return super.getColorantOrder().getSeparations();
+        return getSeparations();
+    }
+
+    /**
+     * get the list of separations that this colorantcontrol describes
+     * adds the separations that are implied by ProcessColorModel
+     * 
+     * @return VString the complete list of process and spot colors
      */
     public VString getSeparations()
     {
@@ -207,7 +229,8 @@ public class JDFColorantControl extends JDFAutoColorantControl
         if(colpar!=null)
         {
             vName.appendUnique(colpar.getSeparations());
-        }       
+        } 
+        vName.unify();
         return vName;
     }   
 }

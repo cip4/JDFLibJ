@@ -99,6 +99,8 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 
 
@@ -325,4 +327,45 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
             bIgnorePrivate=false; // dummy to fool compiler
         return getUnknownPoolElements(EnumPoolType.ResourceLinkPool,nMax);
     }
+
+    // the following are prerelease errata in JDF 1.3
+    
+    /**
+     * set all parts to those defined in vParts
+     * @param vParts vector of attribute maps for the parts
+     */
+    public void setPartMapVector(VJDFAttributeMap vParts)
+    {
+        super.setPartMapVector(vParts);
+    }
+
+    /**
+     * set all parts to those defined by mPart
+     * @param mPart attribute map for the part to set
+     */
+    public void setPartMap(JDFAttributeMap mPart)
+    {
+        super.setPartMap(mPart);
+    }
+
+    /**
+     * remove the part defined by mPart
+     * @param mPart attribute map for the part to remove
+     */
+    public void removePartMap(JDFAttributeMap mPart)
+    {
+        super.removePartMap(mPart);
+    }
+
+    /**
+     * check whether the part defined in mPart is included
+     * @param mPart attribute map to look for
+     * @return boolean - returns true if the part exists
+     */
+    public boolean hasPartMap(JDFAttributeMap mPart)
+    {
+        return super.hasPartMap(mPart);
+    }
+ 
+    
 }

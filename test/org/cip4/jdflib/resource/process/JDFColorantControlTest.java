@@ -14,6 +14,10 @@ import org.cip4.jdflib.util.StringUtil;
 
 public class JDFColorantControlTest extends TestCase
 {
+    private JDFNode elem;
+    private JDFColorantControl colControl;
+    private JDFSeparationList colParams;
+
     /**
      * tests the separationlist class
      *
@@ -28,10 +32,10 @@ public class JDFColorantControlTest extends TestCase
         JDFColorantControl cc = ((JDFColorantControl) kElem);
         JDFSeparationList co=cc.appendColorantOrder();
         final VString seps=StringUtil.tokenize("Cyan Magenta Yellow Black"," ",false);
-        
+
         co.setSeparations(seps);
         assertEquals( co.getSeparations(),seps);
-        
+
         assertEquals(co.getSeparation(0),"Cyan");
         co.removeSeparation("Magenta");
         assertEquals(co.getSeparation(0),"Cyan");
@@ -39,8 +43,8 @@ public class JDFColorantControlTest extends TestCase
         assertEquals(co.getSeparation(2),"Black");
         assertNull(co.getSeparation(3));
     }
-    
-////////////////////////////////////////////////////////////////////////
+
+
     /**
      * tests the separationlist class
      *
@@ -57,22 +61,58 @@ public class JDFColorantControlTest extends TestCase
         assertTrue(cc.getSeparations().contains("Cyan"));
         cc.appendColorantParams().appendSeparation("Snarf Blue");
         assertTrue(cc.getSeparations().contains("Snarf Blue"));
-    }    
-////////////////////////////////////////////////////////////////////////
+    } 
+
+
+    ////////////////////////////////////////////////////////////////////////
+
     public void testColorantParams()
     {
-        // Jira EDITOR-58 ColorantParams does not need a SeparationSpec element (optional)
-        JDFDoc doc = new JDFDoc(ElementName.JDF);
-        JDFNode elem = doc.getJDFRoot();
-        JDFResourcePool rpool = elem.appendResourcePool();
-        JDFColorantControl colControl = (JDFColorantControl) 
-            rpool.appendResource(ElementName.COLORANTCONTROL, EnumResourceClass.Parameter, null);
-        JDFSeparationList colParams = colControl.appendColorantParams();
-        
         assertTrue(colParams.isValid(KElement.EnumValidationLevel.RecursiveComplete));
     }
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+
+    ////////////////////////////////////////////////////////////////////////
+
+    public void testGetDeviceColorantOrderSeparations()
+    {
+        colParams.appendSeparation("Black");
+        assertEquals(colControl.getDeviceColorantOrderSeparations(),colControl.getSeparations());
+        assertEquals(colControl.getDeviceColorantOrderSeparations().size(),4);
+        colParams.appendSeparation("Green");
+        assertEquals(colControl.getDeviceColorantOrderSeparations(),colControl.getSeparations());
+        assertEquals(colControl.getDeviceColorantOrderSeparations().size(),5);
+        colControl.appendColorantOrder().appendSeparation("Green");
+        assertEquals(colControl.getDeviceColorantOrderSeparations().size(),1);
+        assertEquals(colControl.getDeviceColorantOrderSeparations().stringAt(0),"Green");
+    }
+    
+    ////////////////////////////////////////////////////////////////////////
+
+    public void testGetColorantOrderSeparations()
+    {
+        colParams.appendSeparation("Black");
+        assertEquals(colControl.getColorantOrderSeparations(),colControl.getSeparations());
+        assertEquals(colControl.getColorantOrderSeparations().size(),4);
+        colParams.appendSeparation("Green");
+        assertEquals(colControl.getColorantOrderSeparations(),colControl.getSeparations());
+        assertEquals(colControl.getColorantOrderSeparations().size(),5);
+    }
+
+    /**
+     * @return
+     */
+    protected void setUp() throws Exception
+    {
+        super.setUp();
+        JDFDoc doc = new JDFDoc(ElementName.JDF);
+        elem = doc.getJDFRoot();
+        JDFResourcePool rpool = elem.appendResourcePool();
+        colControl = (JDFColorantControl) rpool.appendResource(ElementName.COLORANTCONTROL, EnumResourceClass.Parameter, null);
+        colControl.setProcessColorModel("DeviceCMYK");
+        colParams = colControl.appendColorantParams();
+    }
+
+
+
+
 }

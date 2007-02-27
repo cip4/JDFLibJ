@@ -107,7 +107,6 @@ import org.cip4.jdflib.jmf.JDFMessageService;
 import org.cip4.jdflib.jmf.JDFResponse;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
-import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.util.StringUtil;
 
 public class JDFDeviceCap extends JDFAutoDeviceCap 

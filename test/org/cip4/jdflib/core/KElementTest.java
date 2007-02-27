@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -105,7 +105,7 @@ public class KElementTest extends JDFTestCaseBase
         boolean before = kElem.hasAttribute("Author", null, false);
         assertTrue("The Attribute 'Author' does not exist", before);
 
-        if (before)
+        if (before) 
         {
             kElem.removeAttribute("Author", "");
             boolean after = kElem.hasAttribute("Author", "", false);
@@ -1355,6 +1355,42 @@ public class KElementTest extends JDFTestCaseBase
         assertNull("no local name",  KElement.xmlnsLocalName("abc:"));
         assertNull("no local name",  KElement.xmlnsLocalName(null));
     }
+    
+    public void testAppendChild()
+    {
+        XMLDoc d=new XMLDoc("e",null);
+        KElement e=d.getRoot();
+        e.setAttribute("xmlns:foo", "www.foo.com");
+        KElement e2=(KElement) d.createElement("e2");
+        e.appendChild(e2);
+        assertEquals(e.getFirstChild(), e2);
+        KElement e3=(KElement) d.createElement("foo:e3");
+        assertNull(e3.getNamespaceURI());                  
+        e.appendChild(e3);
+        assertEquals(e2.getNextSibling(), e3);                  
+        assertEquals(e3.getNamespaceURI(), "www.foo.com");                  
+    }
+    public void testParseAppendChild()
+    {
+        String s="<e xmlns:foo=\"www.foo.com\"><e2/></e>";
+        JDFParser p=new JDFParser();
+        p.bKElementOnly=true;
+        p.ignoreNSDefault=true;
+        
+        XMLDoc d=p.parseString(s);
+        KElement e=d.getRoot();
+        KElement e3=(KElement) d.createElement("foo:e3");
+        assertNull(e3.getNamespaceURI());                  
+        e.appendChild(e3);
+        KElement e2 = (KElement) e.getFirstChild();
+        assertEquals(e2.getNextSibling(), e3);                  
+        assertEquals(e3.getNamespaceURI(), "www.foo.com");                  
+        KElement e4=(KElement) d.createElement("foo:e3");
+        assertNull(e4.getNamespaceURI());                  
+        e.appendChild(e4);
+        assertEquals(e4.getNamespaceURI(), "www.foo.com");                  
+    }
+    
 
     public void testAppendElement()
     {
@@ -1378,6 +1414,57 @@ public class KElementTest extends JDFTestCaseBase
         KElement bar4=bar2.appendElement("bar");
         assertNull(bar4.getNamespaceURI());              
     }
+    
+    public void testAppendElement_NSAtt()
+    {
+        XMLDoc d=new XMLDoc("e",null);
+        KElement e=d.getRoot();
+        assertNull(e.getNamespaceURI());
+        e.setAttribute("xmlns:pt", "www.pt.com");
+        KElement foo=e.appendElement("foo", null);
+        assertNull(foo.getNamespaceURI());
+        KElement bar=foo.appendElement("bar");
+        assertNull(bar.getNamespaceURI());
+        KElement bar2=foo.appendElement("pt:bar");
+        assertEquals(bar2.getNamespaceURI(), "www.pt.com");              
+    }
+    
+    public void testAppendElement_NSAttJDFDoc()
+    {
+        JDFDoc d=new JDFDoc("e");
+        d.getMemberDocument().setIgnoreNSDefault(true);
+        final String url = JDFElement.getSchemaURL();
+        {
+            KElement e=d.getRoot();
+            assertEquals(e.getNamespaceURI(),url);
+            e.setAttribute("xmlns:pt", "www.pt.com");
+            KElement foo=e.appendElement("foo", null);
+            assertEquals(foo.getNamespaceURI(),url);
+            KElement bar=foo.appendElement("bar");
+            assertEquals(bar.getNamespaceURI(),url);
+            KElement bar2=foo.appendElement("pt:bar");
+            assertEquals(bar2.getNamespaceURI(), "www.pt.com");     
+        }
+        String s=d.write2String(0);
+        
+        // now check for parsed document with no default xmlns declaration
+        JDFParser p=new JDFParser();
+        int pos=s.indexOf(url);
+        s=s.substring(0, pos-7)+s.substring(pos+url.length()+1); // +/- for xmlns=" and "
+        d=p.parseString(s);
+        d.getMemberDocument().setIgnoreNSDefault(true);
+        {
+            KElement e=d.getRoot();
+            assertNull(e.getNamespaceURI());
+            e.setAttribute("xmlns:pt", "www.pt.com");
+            KElement foo=e.appendElement("foo", null);
+            assertNull(foo.getNamespaceURI());
+            KElement bar=foo.appendElement("bar");
+            assertNull(bar.getNamespaceURI());
+            KElement bar2=foo.appendElement("pt:bar");
+            assertEquals(bar2.getNamespaceURI(), "www.pt.com");     
+        }
+     }
     
     public void testAppendElement_SingleNS()
     {

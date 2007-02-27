@@ -1367,7 +1367,7 @@ public class KElement extends ElementNSImpl
      * 
      * @param elementName   the elementname with namespace prefix "xyz:abc"
      * @param nameSpaceURI  the namespace of the element "null" is valid
-     *                      if the namespace was specified already above. The method will lockup
+     *                      if the namespace was specified already above. The method will lookup
      *                      the namespace for you. Performance wise its better to add it nevertheless.
      *                      
      * @return KElement     the appended element or null
@@ -1399,7 +1399,7 @@ public class KElement extends ElementNSImpl
         {   ///////////////// DOM Level 1 ////////////////
             final String xmlnsPrefix = xmlnsPrefix(elementName);
            
-            final String namespaceURI2 = ownerDoc.isIgnoreNSDefault() ? nameSpaceURI : getNamespaceURIFromPrefix(xmlnsPrefix);
+            final String namespaceURI2 = ownerDoc.isIgnoreNSDefault() && xmlnsPrefix==null ? nameSpaceURI : getNamespaceURIFromPrefix(xmlnsPrefix);
             if (xmlnsPrefix!=null && (namespaceURI2==null || JDFConstants.EMPTYSTRING.equals(namespaceURI2)))
             {
                 throw new JDFException("You tried to add an element \"" + elementName + "\" in an unspecified Namespace");
@@ -5615,8 +5615,7 @@ public class KElement extends ElementNSImpl
     
     public Node appendChild(Node arg0) throws DOMException
     {
-        setDirty(false); 
-        return super.appendChild(arg0);
+       return insertBefore(arg0, null);
     }
     
     public Node removeChild(Node arg0) throws DOMException

@@ -35,7 +35,7 @@ public class TestJDF
         }
 
         JDFParser p=new JDFParser();
-        JDFDoc d=p.parseFile("0.xml");
+        JDFDoc d=p.parseFile("00.xml");
         d.write2File("big2.jdf", 2, false);
   
     }

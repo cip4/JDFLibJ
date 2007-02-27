@@ -725,6 +725,8 @@ public class StatusUtil {
        
        final LinkAmount la=getLinkAmount(bag.refID);
        ra.copyElement(la.getResourceAuditLink(bag), null);
+       ra.setPartMapVector(m_vPartMap);
+
        return ra;
     }
 
