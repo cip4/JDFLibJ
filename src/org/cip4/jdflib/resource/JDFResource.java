@@ -3982,7 +3982,7 @@ public class JDFResource extends JDFElement
      */
     public void updateAmounts(double previousAmount)
     {
-        double amount = 0;
+        double amount = getAmount();
         double amountProduced = 0;
         double amountRequired = 0;
         double deltaAmount = previousAmount;

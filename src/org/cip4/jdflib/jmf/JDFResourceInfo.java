@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -180,7 +180,9 @@ public class JDFResourceInfo extends JDFAutoResourceInfo
     public JDFResource getResource(String resName)
     {
         JDFResource r = null;
-        KElement e = getElement(resName, JDFConstants.EMPTYSTRING, 0);
+        KElement e = getElement(resName, null, 0);
+        if(e==null)
+            return null;
         if(e instanceof JDFResource)
         {
             r = (JDFResource) e;

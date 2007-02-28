@@ -977,15 +977,14 @@ public class JDFResourceLink extends JDFElement
         {
             vmParts.reduceMap(resRoot.getPartIDKeys().getSet());
         }
-        if (vmParts==null || vmParts.isEmpty())
+        if (vmParts.isEmpty())
         {
             v.addElement(resRoot);
             return v;
         }
         
-        
-        
-        for (int i = 0; i < vmParts.size(); i++)
+        final int partSize = vmParts.size();
+        for (int i = 0; i < partSize; i++)
         {
             final VElement vr = resRoot.getPartitionVector(vmParts.elementAt(i), partUsage);
             if (vr != null && !vr.isEmpty())
@@ -1623,22 +1622,22 @@ public class JDFResourceLink extends JDFElement
     private double getAmountPoolDouble(String attName, JDFAttributeMap mPart, double def)
     {
         double d = 0;
-		int n = 0;
-		while (true) {
-			final String w = getAmountPoolAttribute(attName, null, mPart, n++);
-			if (w == null) {
-				return n == 1 ? def : d;
+        int n = 0;
+        while (true) 
+        {
+            final String w = getAmountPoolAttribute(attName, null, mPart, n++);
+            if (w == null) {
+                return n == 1 ? def : d;
             }
             def = StringUtil.parseDouble(w, -1.234567);
-			if (def == -1.234567) {
-				throw new JDFException(
-						"JDFResourceLink.getAmountPoolDouble: Attribute "
-								+ attName + " has an invalid value");
+            if (def == -1.234567) 
+            {
+                throw new JDFException("JDFResourceLink.getAmountPoolDouble: Attribute "+ attName + " has an invalid value");
+            }
+            d += def;
         }
-			d += def;
-		}
     }
-    
+
     /**
 	 * Set attribute ActualAmount in the AmountPool or in the link, depending on
 	 * the value of mPart

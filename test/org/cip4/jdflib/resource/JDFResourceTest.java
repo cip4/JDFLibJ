@@ -535,6 +535,45 @@ public class JDFResourceTest extends JDFTestCaseBase
         assertTrue(select.getDeviceColorantOrder().getSeparations().contains("dragon red"));        
     }    
 
+    /**
+     * tests updateAmounts()
+     *
+     */
+    public void testUpdateAmounts()
+    {
+        JDFDoc doc = new JDFDoc(ElementName.JDF);
+        JDFNode root = doc.getJDFRoot();
+        root.setType(JDFNode.EnumType.ConventionalPrinting.getName(),true);
+        JDFMedia media=(JDFMedia) root.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, null, null, null);
+        media.setAmount(100);
+        JDFComponent comp=(JDFComponent) root.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, null, null, null);
+        JDFResourceLink rlMedia=root.getLink(media, null);
+        JDFResourceLink rlComp=root.getLink(comp, null);
+        JDFComponent c1=(JDFComponent) comp.addPartition(EnumPartIDKey.SheetName, "S1");
+        
+        JDFAttributeMap m1=new JDFAttributeMap(EnumPartIDKey.SheetName,"S1");
+        rlComp.setActualAmount(42, m1);
+        comp.updateAmounts(10);
+        assertEquals(c1.getAmount(), 42.,0.1);
+        assertEquals(c1.getAmountProduced(), 42.,0.1);
+        rlMedia.setActualAmount(21, m1);
+        media.updateAmounts(0);
+        assertEquals("amount=100, - the 21 actual",media.getAmount(), 100-21,0.1);
+        assertEquals(media.getAmountRequired(), 100.,0.1);
+        
+
+        
+        rlComp.removeChild(ElementName.AMOUNTPOOL, null, 0);
+        m1.put(EnumPartIDKey.Condition, "Good");
+        comp.removeAttribute(AttributeName.AMOUNTPRODUCED);
+        rlComp.setActualAmount(42, m1);
+        
+        m1.put(EnumPartIDKey.Condition, "Waste");
+        comp.removeAttribute(AttributeName.AMOUNTPRODUCED);
+        rlComp.setActualAmount(10, m1);
+        comp.updateAmounts(0);
+        assertEquals(c1.getAmountProduced(), 52.,0.1);
+    }    
 
     /////////////////////////////////////////////////////////////
     public void testCreatePartitions()
