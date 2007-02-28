@@ -1855,7 +1855,8 @@ public class JDFNode extends JDFElement
             vTypes=expandGrayBoxTypes(vTypes);
             if(vTypes==null)
                 return null;
-            final int size = vTypes==null ? 0 :vTypes.size();
+            
+            final int size=vTypes.size();
             for (int i = 0; i < size; i++)
             {
                 final EnumType t = EnumType.getEnum(vTypes.stringAt(i));

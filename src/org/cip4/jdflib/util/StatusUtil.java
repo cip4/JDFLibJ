@@ -336,6 +336,9 @@ public class StatusUtil {
 
         
         LinkAmount la=getLinkAmount(lastAb.refID);
+        if(la==null)
+            return;
+        
         if(la.bTrackWaste)
         {
             if(lastAb.phaseAmount!=0)
@@ -356,9 +359,8 @@ public class StatusUtil {
             
         }
         double total=0;
-        if(la!=null)
-            total=la.startAmount;
 
+        total=la.startAmount;
         if(total!=0)
         {
             jp.setTotalAmount(total);

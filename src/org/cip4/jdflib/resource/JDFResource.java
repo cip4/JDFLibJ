@@ -1987,7 +1987,7 @@ public class JDFResource extends JDFElement
             partUsage = getPartUsage();
         }
         
-        if (m == null || m.isEmpty())
+        if (m.isEmpty())
         {
             vReturn.add(this);
             return vReturn;
