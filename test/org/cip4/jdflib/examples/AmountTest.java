@@ -51,10 +51,10 @@ public class AmountTest extends JDFTestCaseBase
     {
         JDFElement.setLongID(false);
         d = new JDFDoc("JDF");
-        JDFNode n=d.getJDFRoot();
+        n=d.getJDFRoot();
         n.setType(EnumType.ConventionalPrinting);
-        JDFComponent out=(JDFComponent) n.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, null, null, null);
-        JDFResourceLink rl=n.getLink(out, null);
+        out=(JDFComponent) n.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, null, null, null);
+        rl=n.getLink(out, null);
         JDFAmountPool ap=rl.getCreateAmountPool();
 
         JDFComponent cover=(JDFComponent) out.addPartition(EnumPartIDKey.SheetName, "Cover");
