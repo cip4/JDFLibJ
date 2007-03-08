@@ -181,6 +181,7 @@ public class JDFDate implements Comparable
      * <li>"P1Y2M3DT10H30M"</li>
      * <li>"PM8T12M"</li>
      * <li>"PT30M"</li>
+     * If null or empty is passed as argument, uses the current time.
      * 
      * @param strDateTime formatted date and time
      */
@@ -188,7 +189,8 @@ public class JDFDate implements Comparable
     {
         if(strDateTime == null || strDateTime.equals(JDFConstants.EMPTYSTRING))
         {
-            throw new DataFormatException("strDateTime empty or null");
+            lTimeInMillis = System.currentTimeMillis();
+            return;
         }
         
         try
@@ -346,12 +348,25 @@ public class JDFDate implements Comparable
      * if you want an offset based on current time use 'public MyDate(int iOffset)'
      *  
      * @param iOffset   offset time in seconds
+     * @deprecated use addOffset
      */
     public void setOffset(int iOffset)
     {
-        createCalendar();
-        gregcal.add(Calendar.SECOND, iOffset);        //add the offset to the seconds field
-        setTimeInMillis(gregcal.getTimeInMillis());
+        addOffset(iOffset, 0, 0, 0);
+    }
+
+    /**
+     * add a given offset to this
+     * multiple calls stack
+     * 
+     * @param seconds seconds to add to this
+     * @param minutes minutes to add to this
+     * @param hours hours to add to this
+     * @param days days to add to this
+     */
+    public void addOffset(int seconds, int minutes, int hours, int days)
+    {
+        lTimeInMillis += 1000*(seconds + 60*minutes +3600* hours +3600*24*days);
     }
 
     
@@ -363,7 +378,7 @@ public class JDFDate implements Comparable
      */
     public String  getDateTimeISO()
     {
-        return FastDateFormat.getInstance("yyyy'-'MM'-'dd'T'HH:mm:ssZZ").format(createCalendar());
+        return FastDateFormat.getInstance("yyyy'-'MM'-'dd'T'HH:mm:ssZZ").format(updateCalendar());
     }
     
     /**
@@ -373,7 +388,7 @@ public class JDFDate implements Comparable
      */
     public String  getDateISO()
     {
-        return FastDateFormat.getInstance("yyyy'-'MM'-'dd").format(createCalendar());
+        return FastDateFormat.getInstance("yyyy'-'MM'-'dd").format(updateCalendar());
     }
     
     /**
@@ -383,7 +398,7 @@ public class JDFDate implements Comparable
      */
     public String getTimeISO() 
     {
-        return FastDateFormat.getInstance("HH:mm:ss").format(createCalendar());
+        return FastDateFormat.getInstance("HH:mm:ss").format(updateCalendar());
     }
     
     /**
@@ -392,7 +407,7 @@ public class JDFDate implements Comparable
      */
     public String getTimeZoneISO() 
     {
-        return FastDateFormat.getInstance("ZZ").format(createCalendar());
+        return FastDateFormat.getInstance("ZZ").format(updateCalendar());
     }
 
     /**
@@ -437,19 +452,27 @@ public class JDFDate implements Comparable
         lTimeInMillis = l;
     }
 
-    public GregorianCalendar getCalendar()
+    /**
+     * get the internally used calendar object
+     * use the internal calendar if you want to update any times and dates
+     * @return Calendar the internal calendar
+     */
+    public Calendar getCalendar()
     {
-        return gregcal;
+        return updateCalendar();
     }
 
-    private GregorianCalendar createCalendar()
+    /**
+     * create and update the calander with the value of lTimeInMillis
+     * @return
+     */
+    private GregorianCalendar updateCalendar()
     {
         if(gregcal == null)
         {
             gregcal = new GregorianCalendar();
-            gregcal.setTimeInMillis(lTimeInMillis);
         }
-    
+        gregcal.setTimeInMillis(lTimeInMillis);    
         return gregcal;
     }
 
@@ -503,7 +526,7 @@ public class JDFDate implements Comparable
             return true;
         if (other == null)
             return false;
-        if (other.getClass() != getClass())
+        if (!(other instanceof JDFDate))
             return false;
 
         return (this.getTimeInMillis()/1000 == ((JDFDate) other).getTimeInMillis()/1000); 

@@ -1455,22 +1455,19 @@ public class KElement extends ElementNSImpl
      */
     public KElement[] getChildElementArray()
     {
-        final KElement[] children = new KElement[numChildNodes(Node.ELEMENT_NODE)];
-        final NodeList allNodes = getChildNodes();
-
-        final int cnt = allNodes.getLength();
-        int runner = 0;
-
-        for (int i = 0; i < cnt; i++)
-        {
-            final Node node = allNodes.item(i);
-            if (node.getNodeType() == Node.ELEMENT_NODE)
-            {
-                children[runner++] = (KElement) node;
-            }
+        VElement v=new VElement();
+        v.ensureCapacity(10); // good guess to avoid resizing too often
+        Node n=getFirstChild();
+        while(n!=null){
+            if(n.getNodeType()==Node.ELEMENT_NODE)
+                v.add(n);
+            n=n.getNextSibling();
         }
-        return children;
+        final int size = v.size();
+        KElement[] a=new KElement[size];
+        return (KElement[])v.toArray(a);
     }   
+    
     /**
      * Get all children from the actual element matching the given conditions<br>
      * does NOT get refElement targets although the attributes are checked 

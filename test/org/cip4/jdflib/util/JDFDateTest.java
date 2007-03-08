@@ -75,6 +75,7 @@
  */
 package org.cip4.jdflib.util;
 
+import java.util.Calendar;
 import java.util.zip.DataFormatException;
 
 import junit.framework.TestCase;
@@ -83,9 +84,10 @@ public class JDFDateTest extends TestCase
 {
     public void testBadDate()
     {
+        JDFDate date;
         try
         {
-            JDFDate date = new JDFDate("1999+09-26T11:43:10+03:00");
+            date = new JDFDate("1999+09-26T11:43:10+03:00");
             fail("date exception: "+date);
         }
         catch(DataFormatException dfe)
@@ -94,7 +96,7 @@ public class JDFDateTest extends TestCase
         }
         try
         {
-            JDFDate date = new JDFDate("1999");
+            date = new JDFDate("1999");
             fail("date exception: "+date);
         }
         catch(DataFormatException dfe)
@@ -103,7 +105,15 @@ public class JDFDateTest extends TestCase
         }
         try
         {
-            JDFDate date = new JDFDate(null);
+            date = new JDFDate(null);
+        }
+        catch(DataFormatException dfe)
+        {
+            fail("date exception: ");
+        }
+        try
+        {
+            date = new JDFDate("1975-01-01T20:00:10.5");
             fail("date exception: "+date);
         }
         catch(DataFormatException dfe)
@@ -112,7 +122,7 @@ public class JDFDateTest extends TestCase
         }
         try
         {
-            JDFDate date = new JDFDate("1975-01-01T20:00:10.5");
+            date = new JDFDate("2004-11-26T11:43:10.33-03");
             fail("date exception: "+date);
         }
         catch(DataFormatException dfe)
@@ -121,16 +131,7 @@ public class JDFDateTest extends TestCase
         }
         try
         {
-            JDFDate date = new JDFDate("2004-11-26T11:43:10.33-03");
-            fail("date exception: "+date);
-        }
-        catch(DataFormatException dfe)
-        {
-//
-        }
-        try
-        {
-            JDFDate date = new JDFDate("2004-11-26T11:43:10.-0300");
+            date = new JDFDate("2004-11-26T11:43:10.-0300");
             fail("date exception: "+date);
         }
         catch(DataFormatException dfe)
@@ -151,6 +152,7 @@ public class JDFDateTest extends TestCase
         assertEquals("Bug "+strDate,strDate,"2006-11-26T00:00:00+00:00");
 
     }
+
     /**
      * Method testdateTimeISO.
      */
@@ -262,11 +264,44 @@ public class JDFDateTest extends TestCase
         JDFDate date1=new JDFDate();
         JDFDate date2=new JDFDate();
         assertEquals(date1.compareTo(date2), 0);
-        date2.setOffset(10000); // it is now later
+        date2.addOffset(0,0,0,1); // it is now later
         assertTrue(date1.compareTo(date2)<0);
         assertTrue(date2.compareTo(date1)>0);
     }    
     
+   //////////////////////////////////////////////////////////
+    
+    public void testAddOffset() throws Exception
+    {
+        JDFDate date1=new JDFDate();
+        JDFDate date2=new JDFDate();
+        assertEquals(date1.compareTo(date2), 0);
+        date2.addOffset(0,0,0,1); // it is now later
+        assertEquals(date1.toString().compareTo(date2.toString()), -1);
+        date1.addOffset(0,0,24,0); // it is now later
+        assertEquals(date1.toString().compareTo(date2.toString()), 0);
+        assertEquals(date1.compareTo(date2), 0);
+        date2.addOffset(60,0,0,1); // it is now later
+        date1.addOffset(0,1,24,0); // it is now later
+        assertEquals(date1.compareTo(date2), 0);
+        date2.addOffset(0,60,0,1); // it is now later
+        date1.addOffset(0,0,25,0); // it is now later
+        assertEquals(date1.compareTo(date2), 0);
+        
+        
+        JDFDate date = new JDFDate("2007-09-26T11:43:10+03:00");
+        date.addOffset(0,0,0,1); // it is now later
+        assertEquals(date.getDateTimeISO(),"2007-09-27T11:43:10+03:00");
+        date.addOffset(0,0,0,1); // it is now later
+        assertEquals(date.getDateTimeISO(),"2007-09-28T11:43:10+03:00");
+        date.addOffset(2,0,0,0); // it is now later
+        assertEquals(date.getDateTimeISO(),"2007-09-28T11:43:12+03:00");
+        assertEquals(date.getDateISO(),"2007-09-28");
+        date.addOffset(0,0,0,4); // it is now later
+        assertEquals(date.getDateISO(),"2007-10-02");
+        
+
+    }    
     //////////////////////////////////////////////////////////
 
     public void testMyDateLong() throws Exception

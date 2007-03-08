@@ -17,6 +17,7 @@ import java.util.HashMap;
 
 import javax.mail.BodyPart;
 
+import org.apache.xerces.dom.CoreDocumentImpl;
 import org.apache.xerces.dom.DocumentImpl;
 import org.apache.xerces.dom.ElementImpl;
 import org.apache.xerces.dom.ParentNode;
@@ -221,6 +222,11 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
         Constructor constructi;
         Class classOfConstructor = null;
         // we are not yet in a JDF or JMF
+        if(bKElementOnly)
+        {
+            return new KElement(this, namespaceURI, qualifiedName,localPart);
+        }
+        
         if(!bInJDFJMF && (jdfNSURI.equals(namespaceURI) || ElementName.JDF.equals(localPart) || ElementName.JMF.equals(localPart)))
         {
             bInJDFJMF=true;
@@ -228,7 +234,7 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
 
         synchronized (sm_hashCtorElementNS)
         {
-            constructi = (Constructor) sm_hashCtorElementNS.get(qualifiedName);
+            constructi =  (Constructor) sm_hashCtorElementNS.get(qualifiedName);
 
             // it has to be 1 coreDocImpl plus 3 String Parameters
             // otherwhise don't use hashtableentry
@@ -423,10 +429,7 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
      * @return
      */
     private String getFactoryClassPath (String strNameSpaceURI, String qualifiedName, String localPart)
-    {
-        if(bKElementOnly)
-            return "org.cip4.jdflib.core.KElement";
-        
+    {        
         // we are not yet in a JDF or JMF - it must be a KElement
         if(!bInJDFJMF)
             return "org.cip4.jdflib.core.KElement";

@@ -3626,27 +3626,11 @@ public class JDFElement extends KElement
      * @return JDFElement[]
      * @deprecated use {@link KElement#getChildElementArray KElement.getChildElementArray()}<br>
      * not typesafe in case of elements in foreign namespaces
+     * note that this method previously returned JDFElement[]
      */
-    public JDFElement[] getChildElements()
+    public KElement[] getChildElements()
     {
-        final JDFElement[] children = new JDFElement[getChildElementCount()];
-        
-        final NodeList allNodes = getChildNodes();
-        
-        final int cnt = allNodes.getLength();
-        int runner = 0;
-        
-        for (int i = 0; i < cnt; i++)
-        {
-            final Node node = allNodes.item(i);
-            
-            if (node.getNodeType() == Node.ELEMENT_NODE)
-            {
-                children[runner++] = (JDFElement) node;
-            }
-        }
-        
-        return children;
+        return getChildElementArray();
     }    
     
     /**

@@ -193,6 +193,15 @@ public class XMLDocTest extends JDFTestCaseBase
         assertNull(e.getNamespaceURI());
         
     }
+    public void testCreateElementThreads() throws Exception
+    {
+        XMLDoc d1=new XMLDoc("JDF",null);
+        assertEquals("XMLDoc only creates KElement",d1.getRoot().getClass(), KElement.class);
+        JDFDoc jd=new JDFDoc("JDF");
+        assertEquals("JDFDoc creates typesafe elements",jd.getRoot().getClass(), JDFNode.class);
+        XMLDoc d2=new XMLDoc("JDF",null);
+        assertEquals("XMLDoc only creates KElement - Hasmap must not be applied",d2.getRoot().getClass(), KElement.class);         
+    }
 
     public void testParseNoNS() throws Exception
     {

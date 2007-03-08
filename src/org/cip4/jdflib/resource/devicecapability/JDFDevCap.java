@@ -99,6 +99,7 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.node.JDFNode;
@@ -2101,14 +2102,42 @@ public class JDFDevCap extends JDFAutoDevCap
       */
      public VElement getMatchingElementsFromParent(KElement parent)
      {
+         VElement v= getAllMatchingElementsFromParent(parent);
+         if(v==null)
+             return null;
+         
+         XMLDoc doc=new XMLDoc("dummy",null);
+         KElement repRootDummy=doc.getRoot();
+         for(int i=v.size()-1;i>=0;i--)
+         {
+             KElement e=v.item(i);
+             repRootDummy.flush();
+             if(spanAndAttributesTest(e, EnumFitsValue.Allowed, EnumValidationLevel.Incomplete, true, repRootDummy)!=null || 
+                     subelementsTest(e, EnumFitsValue.Allowed, EnumValidationLevel.Incomplete, true, repRootDummy) !=null)
+             {
+                 v.remove(i);
+             }
+         }
+         return v.size()!=0 ? v : null;
+     }
+
+     /**
+      * gets the matching elements in the node that match the nodename of this
+      * 
+      * @param node the node to search in
+      * @return VElement - the element vector of matching elements, 
+      * <code>null</code> if none were found
+      */
+     public VElement getAllMatchingElementsFromParent(KElement parent)
+     {
          String nam=getName();
          VElement subElems=parent.getChildElementVector(nam,null,null,true,999999,true);
          return subElems.size()==0 ? null : subElems;
      }
-     
-    /**
-	 * sets the element and attribute defaults
-	 * 
+
+     /**
+      * sets the element and attribute defaults
+      * 
 	 * @param element
 	 * @return
 	 */

@@ -72,8 +72,11 @@ package org.cip4.jdflib.examples;
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink;
@@ -84,34 +87,169 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.pool.JDFAuditPool;
+import org.cip4.jdflib.resource.JDFModulePhase;
+import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
+import org.cip4.jdflib.resource.devicecapability.JDFDevCap;
+import org.cip4.jdflib.resource.devicecapability.JDFDevCaps;
+import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
+import org.cip4.jdflib.resource.devicecapability.JDFNameState;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFMiscConsumable;
 import org.cip4.jdflib.resource.process.JDFUsageCounter;
+import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StatusUtil;
 import org.cip4.jdflib.util.StatusUtil.AmountBag;
 
 
 public class DigiPrintTest extends JDFTestCaseBase
 {
+    private JDFDoc doc;
+    private JDFNode n;
+    private JDFComponent comp;
+    private JDFResourceLink rlComp;
+
     /**
-     * test MIS to Finishing ICS
+     * test amount handling
+     * @return
+     */
+    public void testModules() throws Exception
+    {
+        JDFAuditPool ap=n.getCreateAuditPool();
+        ap.appendXMLComment("JDF 1.3 compatible auditing of module phases - note that modulephase start and end times are set outside of the phasetime start and end times");
+        JDFPhaseTime pt=ap.addPhaseTime(EnumNodeStatus.Setup, null, null);
+        JDFPhaseTime pt2=ap.addPhaseTime(EnumNodeStatus.InProgress, null, null);        
+        final JDFDate date = new JDFDate();
+        JDFModulePhase mpRIP=pt.appendModulePhase();
+        JDFModulePhase mpRIP2=pt2.appendModulePhase();
+        mpRIP.setStatus(EnumNodeStatus.InProgress);
+        mpRIP2.setStatus(EnumNodeStatus.InProgress);
+        mpRIP2.setDescriptiveName("This ModulePhase is actually the same as the initial ModulePhase in the setup PhaseTime");
+        mpRIP.setModuleType("Imaging");
+        mpRIP2.setModuleType("Imaging");
+        pt.setStart(date);
+        mpRIP.setStart(date);
+        mpRIP2.setStart(date);
+        date.addOffset(0,5,0,0);
+        pt.setEnd(date);
+        
+        JDFModulePhase mpPrint=pt2.appendModulePhase();
+        mpPrint.setStatus(EnumNodeStatus.InProgress);
+        pt2.setStart(date);
+        mpPrint.setStart(date);
+        date.addOffset(0,30,0,0);
+        mpRIP.setEnd(date);
+        mpRIP2.setEnd(date);
+        
+        date.addOffset(0,70,0,0);
+        pt2.setEnd(date);
+        mpPrint.setEnd(date);
+        mpPrint.setModuleType("Printer");
+        doc.write2File(sm_dirTestDataTemp+"DigiPrintModule1.jdf", 2, false);
+    }
+    
+    /**
+     * test amount handling
+     * @return
+     */
+    public void testModules14() throws Exception
+    {
+        JDFAuditPool ap=n.getCreateAuditPool();
+        ap.appendXMLComment("JDF 1.3 incompatible auditing of module phases the REQUIRED time attributes are not set in the ModulePhase elements\n"+
+                "- note that phases may now arbitrarily overlap\n"+
+                "The modulePhase elements now only specify which modules are involved, times are all defined by the phasetime proper");
+        ap.appendXMLComment("The following phaseTime is executed by one module - the RIP,which executes two process steps (Interpreting and Rendering)");
+        JDFPhaseTime ptRIP=ap.addPhaseTime(EnumNodeStatus.Setup, null, null);
+        final JDFDate date = new JDFDate();
+        ptRIP.setStart(date);
+        date.addOffset(0,5,0,0);
+        ptRIP.setEnd(date);
+        JDFModulePhase mpRIP=ptRIP.appendModulePhase();
+        mpRIP.setAttribute("CombinedProcessIndex","0 1");
+        mpRIP.setAttribute("ModuleType","Imaging");
+        mpRIP.setAttribute("ModuleID","ID_Imaging");
+        
+        ap.appendXMLComment("The following phaseTime is executed by two modules - sticher and printer");
+        JDFPhaseTime ptPrint=ap.addPhaseTime(EnumNodeStatus.InProgress, null, null);        
+        JDFModulePhase mpPrint=ptPrint.appendModulePhase();
+        mpPrint.setAttribute("ModuleType","Printer");
+        mpPrint.setAttribute("ModuleID","ID_Printer");
+        mpPrint.setAttribute("CombinedProcessIndex","2");
+        ptPrint.setStart(date);
+        
+        JDFModulePhase mpStitch=ptPrint.appendModulePhase();
+        mpStitch.setAttribute("ModuleType","Stitcher");
+        mpStitch.setAttribute("ModuleID","ID_Stitcher");
+        mpStitch.setAttribute("CombinedProcessIndex","3");
+        date.addOffset(0,30,0,0);
+        ptRIP.setEnd(date);
+        
+        date.addOffset(0,70,0,0);
+        ptPrint.setEnd(date);
+        doc.write2File(sm_dirTestDataTemp+"DigiPrintModule.1.4.jdf", 2, false);
+    }
+    
+    /**
+     * test module handling
+     * @return
+     */
+    public void testModules14b() throws Exception
+    {
+        JDFAuditPool ap=n.getCreateAuditPool();
+        ap.appendXMLComment("JDF 1.3 incompatible auditing of module phases - note that phases may now arbitrarily overlap");
+        JDFPhaseTime ptRIP=ap.addPhaseTime(EnumNodeStatus.Setup, null, null);
+        final JDFDate date = new JDFDate();
+        ptRIP.setStart(date);
+        date.addOffset(0,5,0,0);
+        ptRIP.setEnd(date);
+        
+        ptRIP.setAttribute("CombinedProcessIndex","0 1");
+        ptRIP.setAttribute("ModuleType","Imaging");
+        ptRIP.setAttribute("ModuleID","ID_Imaging");
+        
+        JDFPhaseTime ptPrint=ap.addPhaseTime(EnumNodeStatus.InProgress, null, null);        
+        ptPrint.setAttribute("ModuleType","Printer");
+        ptPrint.setAttribute("ModuleID","ID_Printer");
+        ptPrint.setStart(date);
+        date.addOffset(0,30,0,0);
+        ptRIP.setEnd(date);
+        
+        date.addOffset(0,70,0,0);
+        ptPrint.setEnd(date);
+        doc.write2File(sm_dirTestDataTemp+"DigiPrintModule2.1.4.jdf", 2, false);
+    }
+    
+    /**
+     * test devcaps for usagecounters
+     * @return
+     */
+    public void testUsageCounterDevCaps() throws Exception
+    {
+        JDFDoc duc=new JDFDoc("DeviceCap");
+        JDFDeviceCap devicecap=(JDFDeviceCap)duc.getRoot();
+        JDFDevCaps dcs=devicecap.appendDevCaps();
+        dcs.setName(ElementName.USAGECOUNTER);
+        JDFDevCap dc=dcs.appendDevCapInPool();
+        dc.setMinOccurs(3);
+        dc.setMaxOccurs(3);
+        JDFNameState counterID=dc.appendNameState(AttributeName.COUNTERID);
+        counterID.setAllowedValueList(new VString("ID_Black ID_Color ID_Total",null));
+        counterID.setListType(EnumListType.SingleValue);
+        duc.write2File(sm_dirTestDataTemp+"DevCapUsageCounter.jdf", 2, false);
+    }
+    
+    /**
+     * test amount handling
      * @return
      */
     public void testAmount() throws Exception
     {
-        JDFElement.setLongID(false);
-        JDFDoc d=new JDFDoc("JDF");
-        JDFNode n=d.getJDFRoot();
-        n.setJobID("JobID");
-        n.setType(EnumType.Combined);
-        n.setTypes(new VString("Interpreting Rendering DigitalPrinting Stitching"," "));
-        JDFComponent comp=(JDFComponent) n.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, null, null, null);
-        JDFResourceLink rlc=n.getLink(comp,null);
-        rlc.setAmount(20,null);
-        rlc.setDescriptiveName("The link points to 20 planned and 20 good + 2 Waste brochures");
-        
+
+        rlComp.setAmount(20,null);
+        rlComp.setDescriptiveName("The link points to 20 planned and 20 good + 2 Waste brochures");
+
         JDFMiscConsumable mc=(JDFMiscConsumable) n.appendMatchingResource(ElementName.MISCCONSUMABLE, EnumProcessUsage.AnyInput, null);
         mc.setResStatus(EnumResStatus.Available, false);
         mc.setConsumableType("FooBar");
@@ -139,20 +277,20 @@ public class DigiPrintTest extends JDFTestCaseBase
 
         
         VElement vRL=new VElement();
-        vRL.add(rlc);
+        vRL.add(rlComp);
         vRL.add(rlu);
         vRL.add(rlm);
         vRL.add(rlmc);
         StatusUtil stUtil=new StatusUtil(n,null,vRL);
         stUtil.setDeviceID("MyDevice");
         stUtil.setTrackWaste(rlm,true);
-        stUtil.setTrackWaste(rlc,true);
+        stUtil.setTrackWaste(rlComp,true);
         stUtil.setCopyResInResInfo(rlu,true);
         
-        d.write2File(sm_dirTestDataTemp+File.separator+"DigiPrintAmount_initial.jdf",2,false);
+        doc.write2File(sm_dirTestDataTemp+File.separator+"DigiPrintAmount_initial.jdf",2,false);
         
         AmountBag[] bags=new AmountBag[vRL.size()];
-        bags[0]=stUtil.new AmountBag(rlc.getrRef());
+        bags[0]=stUtil.new AmountBag(rlComp.getrRef());
         bags[1]=stUtil.new AmountBag(rlu.getrRef());
         bags[2]=stUtil.new AmountBag(rlm.getrRef());
         bags[3]=stUtil.new AmountBag(rlmc.getrRef());
@@ -202,8 +340,29 @@ public class DigiPrintTest extends JDFTestCaseBase
         docResJMF=stUtil.getDocJMFResource();
         docResJMF.write2File(sm_dirTestDataTemp+File.separator+"DigiPrintAmountResource4.jmf",2,false);
        
-        d.write2File(sm_dirTestDataTemp+File.separator+"DigiPrintAmount_final.jdf",2,false);
+        doc.write2File(sm_dirTestDataTemp+File.separator+"DigiPrintAmount_final.jdf",2,false);
      }
+    
+
+    /**
+     * 
+     */
+    protected void setUp()
+    {
+        JDFElement.setLongID(false);
+        JDFAudit.setStaticAgentName(null);
+        JDFAudit.setStaticAgentVersion(null);
+        JDFAudit.setStaticAuthor(null);
+
+        doc = new JDFDoc("JDF");
+        n = doc.getJDFRoot();
+        n.setJobID("JobID");
+        n.setType(EnumType.Combined);
+        n.setTypes(new VString("Interpreting Rendering DigitalPrinting Stitching"," "));
+        comp = (JDFComponent) n.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, null, null, null);
+        rlComp=n.getLink(comp,null);
+ 
+    }
     
     /////////////////////////////////////////////////////////////////////////
 }

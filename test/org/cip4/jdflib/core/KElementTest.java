@@ -81,10 +81,12 @@ import java.io.File;
 import java.util.HashSet;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.w3c.dom.Element;
 
@@ -1184,6 +1186,21 @@ public class KElementTest extends JDFTestCaseBase
     }
 
 
+    public void testGetChildElementVector_KElement()
+    {
+        JDFDoc doc=new JDFDoc("JDF");
+        JDFNode n=doc.getJDFRoot();
+        JDFResource r=n.addResource(ElementName.EXPOSEDMEDIA, null, null, null, null, null, null);
+        JDFResource rp=r.addPartition(EnumPartIDKey.Side, EnumSide.Front.getName());
+        VElement v = r.getChildElementVector_KElement(ElementName.EXPOSEDMEDIA, null, null, true, 0);
+        assertEquals(v.elementAt(0), rp);
+        assertEquals(v.size(),1);
+        rp.addPartition(EnumPartIDKey.SheetName, "s2");
+        v = r.getChildElementVector_KElement(ElementName.EXPOSEDMEDIA, null, null, true, 0);
+        assertEquals(v.elementAt(0), rp);
+        assertEquals(v.size(),1);
+    }
+    
     public void testGetChildElementArray()
     {
         XMLDoc doc=new XMLDoc("Foo",null);
