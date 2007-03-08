@@ -2726,6 +2726,18 @@ public class JDFResource extends JDFElement
         
         return v;
     }
+    /**
+     * Adds a new part to this node, also handles PartIDKeys in the root etc.
+     * convenience method to allow for partIDKey enums rather than strings
+     * @param partType part type of a new part
+     * @param value    its value
+     * 
+     * @return JDFResource - the newly created part
+     */
+    public JDFResource addPartition(EnumPartIDKey partType, ValuedEnum enumPart)
+    {
+        return addPartition(partType, enumPart.getName());
+    }
     
     /**
      * Adds a new part to this node, also handles PartIDKeys in the root etc.

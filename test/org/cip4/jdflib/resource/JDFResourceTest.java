@@ -82,6 +82,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoColorSpaceConversionOp.EnumSourceObjects;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumPreviewType;
+import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
@@ -1598,9 +1599,21 @@ public class JDFResourceTest extends JDFTestCaseBase
             // nop
         }
     }
+    
     /////////////////////////////////////////////////////////////////////////////
 
-    public void testAddpartition()
+    public void testAddpartitionEnum() throws Exception
+    {
+        JDFDoc doc =new JDFDoc(ElementName.JDF);
+        JDFNode n=doc.getJDFRoot();
+        JDFResource media=n.addResource("Media", null, EnumUsage.Input, null, null, null, null);
+        media=media.addPartition(EnumPartIDKey.Side, EnumSide.Front);
+        assertEquals(media.getSide(), EnumSide.Front);
+    }
+    
+    /////////////////////////////////////////////////////////////////////////////
+
+    public void testAddpartition() throws Exception
     {
         JDFDoc doc =new JDFDoc(ElementName.JDF);
         JDFNode n=doc.getJDFRoot();
