@@ -1,4 +1,73 @@
 
+Label JDFLIBJ_2.1.2BLD410 (28.02.2007)
+
+remove minor warnings
+Jira JDFJ-91 exception when a resource is missing
+correctly update amounts of a resource when merging
+add parameters to parser for factory configuration of non-JDF files
+add some high level functions for seapartion access in colorantcomtrol
+fix id for extendedaddress (don't add)
+added filter for automatically generating AgentName and AgentVersion in JDFResource.java; default is now off.
+remove eraseemptynodes for pools
+editor devcap display
+editor jmf capabilities check
+ + additional unit tests
+remove cpp header files from generator output (not implemented yet)
+changed eclipse project name to "JDFLib-J (cip4)"
+CheckJDFTest: fixed file locations
+added extension schema test
+fix processing of single streams from the command line
+changed the needed libs to relative path instead of class path variable
+fix processing of single streams from the command line
+remove ResourceLink from auto files
+Capabilities fixes for DefaultValue and CurrentValue Lists
+Better namespace handling in KElement.setAttributes(KElement src)
+Milestone added to valid subelements of JDFNotification
+npe catch in Merge
+
+Changed files:
+ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD410) && !lbtype(JDFLIBJ_2.1.3BLD401)}" -print
+.\auto\JDFAutoCreateLink.java@@\main\12
+.\auto\JDFAutoPhaseTime.java@@\main\57
+.\auto\JDFAutoPipeParams.java@@\main\49
+.\auto\JDFAutoRemoveLink.java@@\main\12
+.\auto\JDFAutoResourceAudit.java@@\main\47
+.\core\DocumentJDFImpl.java@@\main\89
+.\core\JDFComment.java@@\main\28
+.\core\JDFElement.java@@\main\228
+.\core\JDFParser.java@@\main\40
+.\core\JDFResourceLink.java@@\main\127
+.\core\KElement.java@@\main\234
+.\jmf\JDFDeviceInfo.java@@\main\20
+.\jmf\JDFJMF.java@@\main\61
+.\jmf\JDFMessageService.java@@\main\13
+.\jmf\JDFPipeParams.java@@\main\18
+.\jmf\JDFResourceInfo.java@@\main\29
+.\node\JDFNode.java@@\main\239
+.\pool\JDFAncestorPool.java@@\main\46
+.\pool\JDFAuditPool.java@@\main\91
+.\pool\JDFStatusPool.java@@\main\45
+.\resource\devicecapability\JDFAbstractState.java@@\main\46
+.\resource\devicecapability\JDFDevCap.java@@\main\44
+.\resource\devicecapability\JDFDevCaps.java@@\main\31
+.\resource\devicecapability\JDFDeviceCap.java@@\main\43
+.\resource\devicecapability\JDFIntegerState.java@@\main\27
+.\resource\devicecapability\JDFNameState.java@@\main\30
+.\resource\devicecapability\JDFNumberState.java@@\main\28
+.\resource\devicecapability\JDFStringState.java@@\main\24
+.\resource\JDFNotification.java@@\main\17
+.\resource\JDFPart.java@@\main\27
+.\resource\JDFResource.java@@\main\208
+.\resource\JDFResourceAudit.java@@\main\31
+.\resource\process\JDFColorantControl.java@@\main\22
+.\resource\process\JDFFileSpec.java@@\main\31
+.\resource\process\JDFUsageCounter.java@@\main\3
+.\util\JDFMerge.java@@\main\9
+.\util\JDFSpawn.java@@\main\11
+.\util\MyArgs.java@@\main\22
+.\util\StatusUtil.java@@\main\5
+___________________________________________________________
+
 Label JDFLIBJ_2.1.2BLD401 (14.02.2007)
 
 devcap for editor

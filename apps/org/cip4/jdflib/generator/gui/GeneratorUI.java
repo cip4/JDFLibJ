@@ -568,6 +568,7 @@ public class GeneratorUI extends JFrame implements ActionListener, MouseListener
             Generator.m_strJdfCoreJava = m_defaultOutputLocation + fileSep + "Java" + fileSep + "auto";
             Generator.m_strJdfCoreCpp  = m_defaultOutputLocation + fileSep + "Cpp"  + fileSep + "auto"; 
             
+            
             m_defaultSerialLocation    = (String) tempProp.get("SerializePath");
             m_defaultFileListPath      = (String) tempProp.get("FileListPath");
             m_serializedSchemaFileName = (String) tempProp.get("Version");
@@ -604,9 +605,25 @@ public class GeneratorUI extends JFrame implements ActionListener, MouseListener
                 }
             }
         }
-        catch (IOException ioe)
+        catch (FileNotFoundException ioe)
+        {
+            m_defaultSchemaLocation = "..\\schema\\Version_1_3";
+            File schema = new File(m_defaultSchemaLocation);
+            try {
+            	m_defaultSchemaLocation = schema.getCanonicalPath();
+			} catch (IOException e) {
+	            m_defaultSchemaLocation = "..\\schema";
+			}
+			
+            m_defaultOutputLocation    = "\\JDFLibGenerator";
+            Generator.m_strJdfCoreJava = m_defaultOutputLocation + fileSep + "Java" + fileSep + "auto";
+            Generator.m_strJdfCoreCpp  = m_defaultOutputLocation + fileSep + "Cpp"  + fileSep + "auto"; 
+        } 
+        catch (IOException e) 
         {/*do nothing*/
-        }
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         finally
         {
             if (propsFile != null)

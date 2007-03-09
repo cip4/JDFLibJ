@@ -295,44 +295,67 @@ public class CheckJDFTest extends JDFTestCaseBase
     // //////////////////////////////////////////////////////////////////////////
     /**
      * tests validation of a document that is passed by reference to a document
+     * 
+     * put the following into file extension.xsd and save it in the schema directory sm_dirTestSchema
+     * 
+		<xs:schema xmlns:jdftyp="http://www.CIP4.org/JDFSchema_1_3_Types" xmlns:jdf="http://www.CIP4.org/JDFSchema_1_1" targetNamespace="http://www.extension.com" elementFormDefault="qualified" xmlns:ext="http://www.extension.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+		
+		<xs:import namespace="http://www.CIP4.org/JDFSchema_1_1" schemaLocation="./JDF.xsd"/>
+		<xs:import namespace="http://www.CIP4.org/JDFSchema_1_3_Types" schemaLocation="./JDFTypes.xsd"/>
+		<!-- the top level element -->
+		 
+		<xs:element name="FooBar" type="ext:FooBar_"/>
+		 
+			<xs:complexType name="FooBar_" mixed="false">
+				<xs:complexContent mixed="false">
+					<xs:extension base="jdf:Comment_Type">
+		      		<xs:attribute name="Fnarf" type="jdftyp:double"/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+		
+				<xs:attribute name="ExtensionAtt" type="jdftyp:double"/>
+		
+		</xs:schema>     
+     * 
      */
-    public void testValidateExtensionschema() 
-    {
-        JDFDoc doc=new JDFDoc("JDF");
-        CheckJDF checkJDF=new CheckJDF();
-        checkJDF.setPrint(false);
-        checkJDF.bQuiet = true;
-        checkJDF.level = EnumValidationLevel.Incomplete;
-        checkJDF.setJDFSchemaLocation(new File(sm_dirTestSchema + "JDF.xsd"));
-        JDFNode n=doc.getJDFRoot();
-        n.setType(EnumType.ConventionalPrinting);
-        JDFMedia med=(JDFMedia) n.addResource("Media", null, EnumUsage.Input, null, null, null, null);
-        checkJDF.setIgnorePrivate(false);
-        doc.write2File(sm_dirTestDataTemp+"extension.jdf", 0,true);
-        XMLDoc out=checkJDF.processSingleFile(sm_dirTestDataTemp+"extension.jdf");
-        assertEquals(out.getRoot().getXPathAttribute("TestFile/SchemaValidationOutput/@ValidationResult", null), "Valid");
-        
-        checkJDF.schemaLocation+=" http://www.extension.com "+sm_dirTestSchema + "extension.xsd";
-        med.setAttribute("ext:ExtensionAtt", "a","http://www.extension.com");
-        KElement fooBar=med.appendElement("ext:FooBar", "http://www.extension.com");
-        fooBar.setAttribute("ID", "f1");
-        fooBar.setAttribute("Fnarf", "4");
-
-        doc.write2File(sm_dirTestDataTemp+"extension.jdf", 0,true);
-        out=checkJDF.processSingleFile(sm_dirTestDataTemp+"extension.jdf");        
-        assertEquals(out.getRoot().getXPathAttribute("TestFile[2]/SchemaValidationOutput/@ValidationResult", null), "Error");
-        
-        med.setAttribute("ext:ExtensionAtt", "3","http://www.extension.com");
-        doc.write2File(sm_dirTestDataTemp+"extension.jdf", 0,true);
-        out=checkJDF.processSingleFile(sm_dirTestDataTemp+"extension.jdf");        
-        assertEquals(out.getRoot().getXPathAttribute("TestFile[3]/SchemaValidationOutput/@ValidationResult", null), "Valid");
-        
-        fooBar.setAttribute("Fnarf", "bad");
-        doc.write2File(sm_dirTestDataTemp+"extension.jdf", 0,true);
-        out=checkJDF.processSingleFile(sm_dirTestDataTemp+"extension.jdf");        
-        assertEquals(out.getRoot().getXPathAttribute("TestFile[4]/SchemaValidationOutput/@ValidationResult", null), "Error");
-        
-    }
+//    public void testValidateExtensionschema() 
+//    {
+//        JDFDoc doc=new JDFDoc("JDF");
+//        CheckJDF checkJDF=new CheckJDF();
+//        checkJDF.setPrint(false);
+//        checkJDF.bQuiet = true;
+//        checkJDF.level = EnumValidationLevel.Incomplete;
+//        checkJDF.setJDFSchemaLocation(new File(sm_dirTestSchema + "JDF.xsd"));
+//        JDFNode n=doc.getJDFRoot();
+//        n.setType(EnumType.ConventionalPrinting);
+//        JDFMedia med=(JDFMedia) n.addResource("Media", null, EnumUsage.Input, null, null, null, null);
+//        checkJDF.setIgnorePrivate(false);
+//        doc.write2File(sm_dirTestDataTemp+"extension.jdf", 0,true);
+//        XMLDoc out=checkJDF.processSingleFile(sm_dirTestDataTemp+"extension.jdf");
+//        assertEquals(out.getRoot().getXPathAttribute("TestFile/SchemaValidationOutput/@ValidationResult", null), "Valid");
+//        
+//        checkJDF.schemaLocation+=" http://www.extension.com "+sm_dirTestSchema + "extension.xsd";
+//        med.setAttribute("ext:ExtensionAtt", "a","http://www.extension.com");
+//        KElement fooBar=med.appendElement("ext:FooBar", "http://www.extension.com");
+//        fooBar.setAttribute("ID", "f1");
+//        fooBar.setAttribute("Fnarf", "4");
+//
+//        doc.write2File(sm_dirTestDataTemp+"extension.jdf", 0,true);
+//        out=checkJDF.processSingleFile(sm_dirTestDataTemp+"extension.jdf");        
+//        assertEquals(out.getRoot().getXPathAttribute("TestFile[2]/SchemaValidationOutput/@ValidationResult", null), "Error");
+//        
+//        med.setAttribute("ext:ExtensionAtt", "3","http://www.extension.com");
+//        doc.write2File(sm_dirTestDataTemp+"extension.jdf", 0,true);
+//        out=checkJDF.processSingleFile(sm_dirTestDataTemp+"extension.jdf");        
+//        assertEquals(out.getRoot().getXPathAttribute("TestFile[3]/SchemaValidationOutput/@ValidationResult", null), "Valid");
+//        
+//        fooBar.setAttribute("Fnarf", "bad");
+//        doc.write2File(sm_dirTestDataTemp+"extension.jdf", 0,true);
+//        out=checkJDF.processSingleFile(sm_dirTestDataTemp+"extension.jdf");        
+//        assertEquals(out.getRoot().getXPathAttribute("TestFile[4]/SchemaValidationOutput/@ValidationResult", null), "Error");
+//        
+//    }
     
     // //////////////////////////////////////////////////////////////////////////
     /**
