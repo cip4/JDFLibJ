@@ -1489,7 +1489,7 @@ public class JDFDevCap extends JDFAutoDevCap
                 for (int j = 0; j < occurs; j++)
                 {
                     KElement subEl = vElem.item(j);
-                    r = parentReport.appendElement("InvalidSubelement");
+                    r = parentReport.appendElement("InvalidElement");
                     r.setAttribute("CapXPath", dc.getNamePath(true));
                     r.setAttribute("XPath", subEl.buildXPath(null));
                     r.setAttribute("Name", dcName);
@@ -1500,7 +1500,7 @@ public class JDFDevCap extends JDFAutoDevCap
             }
             else if(occurs < minOccurs && requiredLevel(level)) 
             {
-                r = parentReport.appendElement("MissingSubelement");
+                r = parentReport.appendElement("MissingElement");
                 r.setAttribute("CapXPath", dc.getNamePath(true));
                 r.setAttribute("XPath", e.buildXPath(null) + "/" + dcName);
                 r.setAttribute("Name", dcName);
@@ -1513,7 +1513,7 @@ public class JDFDevCap extends JDFAutoDevCap
                 KElement subEl = (KElement)vElem.elementAt(j);
                 if(goodElems.contains(subEl))
                     continue;
-                r = parentReport.appendElement("InvalidSubelement");
+                r = parentReport.appendElement("InvalidElement");
                 KElement recursionResult = dc.stateReport(subEl,testlists,level,ignoreExtensions,true,r); 
 
                 if(recursionResult==null)
@@ -1805,7 +1805,7 @@ public class JDFDevCap extends JDFAutoDevCap
      */ 
     private final KElement missingDevCap(KElement elem, KElement parentReport)
     {
-        KElement root = parentReport.appendElement("UnknownSubelements");        
+        KElement root = parentReport.appendElement("UnknownElements");        
         VElement vDevCap = getDevCapVector(null,true);
         
         VElement vSubElem = elem.getChildElementVector(null, null, null, true, 0, true); // follows the refelements
@@ -1834,7 +1834,7 @@ public class JDFDevCap extends JDFAutoDevCap
                 }       
                 if (!bFound) 
                 {    
-                    KElement us = root.appendElement("UnknownSubelement");
+                    KElement us = root.appendElement("UnknownElement");
                     us.setAttribute("XPath", e.buildXPath(null));
                     us.setAttribute("CapXPath", getNamePath(false)+ JDFConstants.SLASH + nam);
                     us.setAttribute("Name", nam);

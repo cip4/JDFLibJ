@@ -459,8 +459,8 @@ public class JDFDevCaps extends JDFAutoDevCaps
         {
             KElement el = (KElement)v.elementAt(j);
             String nam = el.getNodeName();
-            if (nam.equals("InvalidAttributes") || nam.equals("InvalidSubelements") ||
-                    nam.equals("UnknownAttributes") || nam.equals("UnknownSubelements") || 
+            if (nam.equals("InvalidAttributes") || nam.equals("InvalidElements") ||
+                    nam.equals("UnknownAttributes") || nam.equals("UnknownElements") || 
                     nam.equals("MissingAttributes"))
             {
                 moveChildElementVector_Static(root,el);

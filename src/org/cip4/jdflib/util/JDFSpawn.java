@@ -96,9 +96,13 @@ public class JDFSpawn
      */
     public static final int exMultiSpawnRW=10002;
 
-    public JDFSpawn (JDFNode n)
+    /**
+     * 
+     * @param nodeToSpawn the node to be spawned
+     */
+    public JDFSpawn (JDFNode nodeToSpawn)
     {
-        node=n;
+        node=nodeToSpawn;
     }
     
     /**

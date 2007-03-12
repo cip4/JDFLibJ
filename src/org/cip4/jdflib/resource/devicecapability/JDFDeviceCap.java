@@ -914,6 +914,7 @@ public static JDFMessageService getMessageServiceForJMFType(JDFMessage m, JDFRes
                         if (e2.getAttribute("XPath").startsWith(e1.getAttribute("XPath")))
                         {
                             e1.deleteNode();
+                            actionReportList.setElementAt(null, j);
                             break;
                         }
                         else if (e1.getAttribute("XPath").startsWith(e2.getAttribute("XPath")))
