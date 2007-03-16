@@ -611,6 +611,56 @@ Mark References (FoldMark, CIE, …)
         doc.write2File(sm_dirTestDataTemp+"AutomatedLayout3.jdf", 2, false);
     }
     /////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////
+
+    public void testAutomateLayout4() throws Exception
+    {
+        n.getAuditPool().appendXMLComment("This is a simple example of an automated layout that positions multiple instance documents onto one sheet\n"+
+                "The structure is aligned as closely as possible with a static Layout\n"+
+        "note that the actual processes and outputs have been omitted for brevity");
+
+        setUpAutomatedInputRunList();
+        rl.setDescriptiveName("This is a RunList specifiying 100 instance documents of 14 pages each in a ppml file.\n"+
+                "DocCopies requests a repeat of 50 copies per document");
+        rl.setAttribute("DocCopies",50,null);
+        JDFLayout lo=(JDFLayout) n.appendMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null);
+        lo.setResStatus(EnumResStatus.Available, true);
+
+        lo.setMaxOrd(1);
+        lo.setMaxDocOrd(4);
+        lo.setAutomated(true);
+        lo.appendXMLComment("Layout for 4stacks on a sheet\n The number of pages per instance document is fixed\n"+
+              "\n");
+        JDFLayout cover=(JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Stack");
+        cover.setDescriptiveName("one sided 4 up stack back side is empty");
+        JDFLayout coverFront=(JDFLayout) cover.addPartition(EnumPartIDKey.Side, EnumSide.Front);
+        JDFContentObject co=coverFront.appendContentObject();
+        co.setCTM(new JDFMatrix(1,0,0,1,0,0));
+        co.setOrd(0);
+        co.setDocOrd(0);
+        co.setDescriptiveName("Front Cover Page, document 0,4,...");
+
+        co=coverFront.appendContentObject();
+        co.setCTM(new JDFMatrix(1,0,0,1,8.5*72,0));
+        co.setOrd(0);
+        co.setDocOrd(1);
+        co.setDescriptiveName("Front Cover Page, document 1,5,...");
+
+        co=coverFront.appendContentObject();
+        co.setCTM(new JDFMatrix(1,0,0,1,0,11*72));
+        co.setOrd(0);
+        co.setDocOrd(2);
+        co.setDescriptiveName("Front Cover Page, document 2,6,...");
+
+        co=coverFront.appendContentObject();
+        co.setCTM(new JDFMatrix(1,0,0,1,8.5*72,11*72));
+        co.setOrd(0);
+        co.setDocOrd(3);
+        co.setDescriptiveName("Front Cover Page, document 3,7,...");
+      
+        doc.write2File(sm_dirTestDataTemp+"AutomatedLayout4.jdf", 2, false);
+    }
+    /////////////////////////////////////////////////////
 
     public void testAutomateLayout2() throws Exception
     {

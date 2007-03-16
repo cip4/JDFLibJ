@@ -43,6 +43,7 @@ public class ContentCreationTest extends PreflightTest
      */
     public void testLayoutElementPositioning() throws Exception
     {
+        // TBD: Fuzzy, Sizes, literal text via comments
         JDFElement.setLongID(false);
         JDFDoc d=new JDFDoc("JDF");
         n=d.getJDFRoot();
@@ -151,6 +152,7 @@ public class ContentCreationTest extends PreflightTest
      */
     public void testStripMarks() throws Exception
     {
+        //TODO relativeSize AbsoluteSize NextPosition
         JDFElement.setLongID(false);
         JDFDoc d=new JDFDoc("JDF");
         n=d.getJDFRoot();
