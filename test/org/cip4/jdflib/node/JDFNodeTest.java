@@ -203,7 +203,32 @@ public class JDFNodeTest extends JDFTestCaseBase
         try
         {
             n.setType("badTypeName",true);
-            assertFalse("bad type",true);
+            fail("bad type");
+        }
+        catch(JDFException e)
+        {
+            assertNotNull("bad type",e);
+        }
+        n.setType("foo:bar",false);
+        assertEquals(n.getType(),"foo:bar");
+        assertNull(n.getXSIType());
+        final VString types = new VString("Interpreting Rendering"," ");
+        n.setCombined(types);
+        assertEquals(n.getTypes(),types);
+        n.setType(EnumType.ContactCopying);
+        assertNull(n.getAttribute("Types",null,null));
+    }
+    
+    public void testSetEnum()
+    {
+        JDFDoc d=new JDFDoc("JDF");
+        JDFNode n=d.getJDFRoot();
+        assertTrue("good Type",n.setType(JDFNode.EnumType.ConventionalPrinting.getName(),true));
+        assertEquals("xsiType",n.getXSIType(),JDFNode.EnumType.ConventionalPrinting.getName());
+        try
+        {
+            n.setType("badTypeName",true);
+            fail("bad type");
         }
         catch(JDFException e)
         {

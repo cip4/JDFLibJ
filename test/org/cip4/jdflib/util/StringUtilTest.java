@@ -218,8 +218,8 @@ public class StringUtilTest extends JDFTestCaseBase
         assertEquals(StringUtil.mime(null), JDFConstants.MIME_TEXTUNKNOWN);
         assertEquals(StringUtil.mime("foo.PDF"), JDFConstants.MIME_PDF);
     }
-//////////////////////////////////////////////////////////////
-    
+
+
     public void testNewExtension()
     {
         assertEquals(StringUtil.newExtension("a.b","c"), "a.c");
@@ -227,11 +227,25 @@ public class StringUtilTest extends JDFTestCaseBase
         assertEquals(StringUtil.newExtension("a.b",null), "a");
         assertEquals(StringUtil.newExtension("a.b",".c"), "a.c");
         assertEquals(StringUtil.newExtension(".b",".c"), ".c");
-     }
+    }
+
+//////////////////////////////////////////////////////////////
     
+    
+    public void testReplaceString()
+    {
+        assertEquals(StringUtil.replaceString("abbcc", "a", "_"), "_bbcc");
+        assertEquals(StringUtil.replaceString("abbcc", "aa", "_"), "abbcc");
+        assertEquals(StringUtil.replaceString("abbcc", "b", "_"), "a__cc");
+        assertEquals(StringUtil.replaceString("abbcc", "bb", "_"), "a_cc");
+        assertEquals(StringUtil.replaceString("abbcc", "c", "_"), "abb__");
+        assertEquals(StringUtil.replaceString("abbcc", "cc", "_"), "abb_");
+    }
+
 //////////////////////////////////////////////////////////////
 
-        public void testParseDouble()
+
+    public void testParseDouble()
     {
         String s="123.45e3";
         assertEquals(StringUtil.parseDouble(s,0),123450.,0.);

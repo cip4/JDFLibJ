@@ -400,7 +400,7 @@ public class StringUtil
     }
     
     /**
-     * recplace a character in a given String
+     * replace a character in a given String
      * <p>
      * default: replaceChar(strWork, c, s, 0)
      * 
@@ -431,6 +431,38 @@ public class StringUtil
         
         strWork = r;
         return JDFConstants.EMPTYSTRING.equals(strWork) ? null : strWork;
+    }
+    /**
+     * replace a character in a given String
+     * <p>
+     * default: replaceChar(strWork, c, s, 0)
+     * 
+     * @param strWork String to work on
+     * @param toReplace       character to replace
+     * @param replaceBy       String to insert for c
+      * @return the String with replaced characters
+     */
+    public static String replaceString(String strWork, String toReplace, String replaceBy)
+    {
+         if(strWork==null)
+            return strWork;
+         int indexOf = strWork.indexOf(toReplace);
+         if( indexOf<0)
+             return strWork;
+
+         int len = toReplace.length();
+         String r="";
+         do
+         {
+             r+=strWork.substring(0,indexOf);
+             r+=replaceBy;
+             strWork=strWork.substring(indexOf+len);
+             indexOf = strWork.indexOf(toReplace);
+         }
+         while(indexOf>=0);
+         r+=strWork;
+         
+         return r;
     }
     
     public static String xmlNameEscape(String strWork)

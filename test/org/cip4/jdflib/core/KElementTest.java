@@ -88,6 +88,7 @@ import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.Element;
 
 public class KElementTest extends JDFTestCaseBase
@@ -1537,10 +1538,28 @@ public class KElementTest extends JDFTestCaseBase
         assertEquals(e2.getNamespaceURI(),wwwECom);
         KElement foo2=e.appendElement("f", null);
         assertEquals(foo2.getNamespaceURI(), wwwECom);  
-        assertEquals(-1,d2.write2String(2).indexOf("jdf"));
-        
+        assertEquals(-1,d2.write2String(2).indexOf("jdf"));   
     }
-
+    
+    public void testAppendXMLComment()
+    {
+        XMLDoc d=new XMLDoc("e",null);
+        KElement e=d.getRoot(); 
+        VString v=new VString("a . - . -- . -->.<!--",".");
+        for(int i=0;i<v.size();i++)
+        {
+            String s = v.stringAt(i);
+            e.appendXMLComment(s);
+            d.write2File(sm_dirTestDataTemp+"xmlComment.jdf", 2, false);
+            XMLDoc d2=new JDFParser().parseFile(sm_dirTestDataTemp+"xmlComment.jdf");
+            KElement e2=d2.getRoot();
+            s=StringUtil.replaceString(s, "--", "__");
+            assertEquals(e.getXMLComment(i),s);
+            assertEquals(e2.getXMLComment(i),s);
+        }
+     }
+    
+    
     public void testAppendAttribute()
     {
         XMLDoc d=new XMLDoc("e",null);

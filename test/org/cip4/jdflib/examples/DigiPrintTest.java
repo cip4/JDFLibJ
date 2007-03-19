@@ -84,12 +84,20 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.jmf.JDFDeviceInfo;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFJobPhase;
+import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.jmf.JDFSignal;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFModulePhase;
+import org.cip4.jdflib.resource.JDFModuleStatus;
 import org.cip4.jdflib.resource.JDFPhaseTime;
+import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCap;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCaps;
@@ -109,6 +117,7 @@ public class DigiPrintTest extends JDFTestCaseBase
     private JDFDoc doc;
     private JDFNode n;
     private JDFComponent comp;
+    private JDFStrippingParams stripParams;
     private JDFResourceLink rlComp;
 
     /**
@@ -156,70 +165,125 @@ public class DigiPrintTest extends JDFTestCaseBase
      */
     public void testModules14() throws Exception
     {
-        JDFAuditPool ap=n.getCreateAuditPool();
-        ap.appendXMLComment("JDF 1.3 incompatible auditing of module phases the REQUIRED time attributes are not set in the ModulePhase elements\n"+
-                "- note that phases may now arbitrarily overlap\n"+
-                "The modulePhase elements now only specify which modules are involved, times are all defined by the phasetime proper");
-        ap.appendXMLComment("The following phaseTime is executed by one module - the RIP,which executes two process steps (Interpreting and Rendering)");
-        JDFPhaseTime ptRIP=ap.addPhaseTime(EnumNodeStatus.Setup, null, null);
-        final JDFDate date = new JDFDate();
-        ptRIP.setStart(date);
-        date.addOffset(0,5,0,0);
-        ptRIP.setEnd(date);
-        JDFModulePhase mpRIP=ptRIP.appendModulePhase();
-        mpRIP.setAttribute("CombinedProcessIndex","0 1");
-        mpRIP.setAttribute("ModuleType","Imaging");
-        mpRIP.setAttribute("ModuleID","ID_Imaging");
-        
-        ap.appendXMLComment("The following phaseTime is executed by two modules - sticher and printer");
-        JDFPhaseTime ptPrint=ap.addPhaseTime(EnumNodeStatus.InProgress, null, null);        
-        JDFModulePhase mpPrint=ptPrint.appendModulePhase();
-        mpPrint.setAttribute("ModuleType","Printer");
-        mpPrint.setAttribute("ModuleID","ID_Printer");
-        mpPrint.setAttribute("CombinedProcessIndex","2");
-        ptPrint.setStart(date);
-        
-        JDFModulePhase mpStitch=ptPrint.appendModulePhase();
-        mpStitch.setAttribute("ModuleType","Stitcher");
-        mpStitch.setAttribute("ModuleID","ID_Stitcher");
-        mpStitch.setAttribute("CombinedProcessIndex","3");
-        date.addOffset(0,30,0,0);
-        ptRIP.setEnd(date);
-        
-        date.addOffset(0,70,0,0);
-        ptPrint.setEnd(date);
-        doc.write2File(sm_dirTestDataTemp+"DigiPrintModule.1.4.jdf", 2, false);
-    }
-    
-    /**
-     * test module handling
-     * @return
-     * //TODO add JMF
-     */
-    public void testModules14b() throws Exception
-    {
-        JDFAuditPool ap=n.getCreateAuditPool();
-        ap.appendXMLComment("JDF 1.3 incompatible auditing of module phases - note that phases may now arbitrarily overlap");
-        JDFPhaseTime ptRIP=ap.addPhaseTime(EnumNodeStatus.Setup, null, null);
-        final JDFDate date = new JDFDate();
-        ptRIP.setStart(date);
-        date.addOffset(0,5,0,0);
-        ptRIP.setEnd(date);
-        
-        ptRIP.setAttribute("CombinedProcessIndex","0 1");
-        ptRIP.setAttribute("ModuleType","Imaging");
-        ptRIP.setAttribute("ModuleID","ID_Imaging");
-        
-        JDFPhaseTime ptPrint=ap.addPhaseTime(EnumNodeStatus.InProgress, null, null);        
-        ptPrint.setAttribute("ModuleType","Printer");
-        ptPrint.setAttribute("ModuleID","ID_Printer");
-        ptPrint.setStart(date);
-        date.addOffset(0,30,0,0);
-        ptRIP.setEnd(date);
-        
-        date.addOffset(0,70,0,0);
-        ptPrint.setEnd(date);
-        doc.write2File(sm_dirTestDataTemp+"DigiPrintModule2.1.4.jdf", 2, false);
+        VString v=new VString("orig fullList end",null);
+        for(int i=0;i<v.size();i++)
+        {
+            String testType=v.stringAt(i);
+            JDFAuditPool ap=n.getCreateAuditPool();
+            ap.appendXMLComment("JDF 1.3 incompatible auditing of module phases the REQUIRED time attributes are not set in the ModulePhase elements\n"+
+                    "- note that phases may now arbitrarily overlap\n"+
+            "The modulePhase elements now only specify which modules are involved, times are all defined by the phasetime proper");
+            ap.appendXMLComment("The following phaseTime is executed by one module - the RIP,which executes two process steps (Interpreting and Rendering)");
+            JDFPhaseTime ptRIP=ap.addPhaseTime(EnumNodeStatus.Setup, null, null);
+            final JDFDate date = new JDFDate();
+            ptRIP.setStart(date);
+
+            JDFDoc jmfDoc = new JDFDoc("JMF");
+            JDFJMF jmf=jmfDoc.getJMFRoot();
+            jmf.setDescriptiveName("Initial phase when the RIP starts up");
+            JDFSignal signal=jmf.appendSignal(JDFMessage.EnumType.Status);
+            JDFDeviceInfo di=signal.appendDeviceInfo();
+
+
+            JDFJobPhase jpRIP=di.appendJobPhase();
+            di.setDeviceStatus(EnumDeviceStatus.Setup);
+            jpRIP.setStartTime(date);
+            jpRIP.setStatus(EnumNodeStatus.Setup);
+            jpRIP.setJobID(n.getJobID(true));
+            jpRIP.setJobPartID(n.getJobPartID(true));
+
+            JDFModuleStatus msRIP=jpRIP.appendModuleStatus();
+            msRIP.setCombinedProcessIndex(new JDFIntegerList("0 1"));
+            msRIP.setModuleType("Imaging");
+            msRIP.setModuleID("ID_Imaging");
+
+            JDFModulePhase mpRIP=ptRIP.appendModulePhase();
+            mpRIP.setCombinedProcessIndex(new JDFIntegerList("0 1"));
+            mpRIP.setModuleType("Imaging");
+            mpRIP.setModuleID("ID_Imaging");
+            jmfDoc.write2File(sm_dirTestDataTemp+"moduleStatus"+testType+"0.jmf", 2, false);
+            date.addOffset(0,5,0,0);
+            jmf.setTimeStamp(date);
+
+            JDFJobPhase jpPrint=di.appendJobPhase();
+            di.setDeviceStatus(EnumDeviceStatus.Running);
+            jpPrint.setStatus(EnumNodeStatus.InProgress);
+            jpPrint.setStartTime(date);
+            jpPrint.setJobID(n.getJobID(true));
+            jpPrint.setJobPartID(n.getJobPartID(true));
+
+            JDFModuleStatus msPrint=jpPrint.appendModuleStatus();
+            msPrint.setCombinedProcessIndex(new JDFIntegerList("2"));
+            msPrint.setModuleType("Printer");
+            msPrint.setModuleID("ID_Printer");
+
+            JDFModuleStatus msStitch=jpPrint.appendModuleStatus();
+            msStitch.setCombinedProcessIndex(new JDFIntegerList("3"));
+            msStitch.setModuleType("Stitcher");
+            msStitch.setModuleID("ID_Stitcher");
+
+            jmf.setDescriptiveName("Phase when the Printer and Finisher start up; RIP is still RIPping");
+            jmfDoc.write2File(sm_dirTestDataTemp+"moduleStatus"+testType+"1.jmf", 2, false);
+
+
+            ap.appendXMLComment("The following phaseTime is executed by two modules - sticher and printer");
+            JDFPhaseTime ptPrint=ap.addPhaseTime(EnumNodeStatus.InProgress, null, null);        
+            JDFModulePhase mpPrint=ptPrint.appendModulePhase();
+            mpPrint.setCombinedProcessIndex(new JDFIntegerList("2"));
+            mpPrint.setModuleType("Printer");
+            mpPrint.setModuleID("ID_Printer");
+            ptPrint.setStart(date);
+
+            JDFModulePhase mpStitch=ptPrint.appendModulePhase();
+            mpStitch.setCombinedProcessIndex(new JDFIntegerList("3"));
+            mpStitch.setModuleType("Stitcher");
+            mpStitch.setModuleID("ID_Stitcher");
+            date.addOffset(0,30,0,0);
+            ptRIP.setEnd(date);
+
+            JDFDeviceInfo di2=null;
+            if(i<2)
+            {
+                JDFSignal signal2=jmf.appendSignal(JDFMessage.EnumType.Status);
+                di2=(JDFDeviceInfo) signal2.copyElement(di, null);
+                di2.removeChild(ElementName.JOBPHASE, null, 0);
+                if(i==1)
+                {
+                    JDFModuleStatus directMSRip=(JDFModuleStatus) di2.copyElement(msRIP, null);
+                    directMSRip.setDeviceStatus(EnumDeviceStatus.Idle);
+                }
+            }
+            else
+            {
+                jpRIP.setAttribute("EndTime", date.getDateTimeISO());
+                jpRIP.setDescriptiveName("Added ne EndTime to explicitly close phase");
+            }
+            jmf.setTimeStamp(date);
+            jmf.setDescriptiveName("Phase when the RIP has completed, Printer and Finisher are still RIPping");
+            jmfDoc.write2File(sm_dirTestDataTemp+"moduleStatus"+testType+"2.jmf", 2, false);
+
+            date.addOffset(0,70,0,0);
+            ptPrint.setEnd(date);
+            jmf.setTimeStamp(date);
+            
+            if(i<2)
+            {
+                signal.deleteNode();
+                signal=jmf.appendSignal(JDFMessage.EnumType.Status);
+                di=(JDFDeviceInfo) signal.copyElement(di2, null);
+                di.removeChild(ElementName.JOBPHASE, null, 0);
+                di.setDeviceStatus(EnumDeviceStatus.Idle);
+            }
+            else
+            {
+                jpRIP.deleteNode();
+                jpPrint.setAttribute("EndTime", date.getDateTimeISO());
+                jpPrint.setDescriptiveName("Added ne EndTime to explicitly close phase");
+            }
+            jmf.setDescriptiveName("Phase when the Printer and Finisher have completed");
+            jmfDoc.write2File(sm_dirTestDataTemp+"moduleStatus"+testType+"3.jmf", 2, false);
+            doc.write2File(sm_dirTestDataTemp+"DigiPrintModule.1.4.jdf", 2, false);
+        }
     }
     
     /**
@@ -245,10 +309,17 @@ public class DigiPrintTest extends JDFTestCaseBase
      * test amount handling
      * @return
      */
-    public void testAmount() throws Exception
+    public void testAutomatedStripping() throws Exception
     {
-
-        rlComp.setAmount(20,null);
+        n.setType(EnumType.Stripping);
+    }
+    /**
+     * test amount handling
+     * @return
+     */
+    public void testAmount() throws Exception
+        {
+            rlComp.setAmount(20,null);
         rlComp.setDescriptiveName("The link points to 20 planned and 20 good + 2 Waste brochures");
 
         JDFMiscConsumable mc=(JDFMiscConsumable) n.appendMatchingResource(ElementName.MISCCONSUMABLE, EnumProcessUsage.AnyInput, null);

@@ -3054,13 +3054,17 @@ public class JDFNode extends JDFElement
      */
     public boolean setType(String newType, boolean checkName)
     {
-        final EnumType eTyp = EnumType.getEnum(newType);
+        final EnumType eTyp = checkName ? EnumType.getEnum(newType): null;
         if (!checkName || eTyp!=null)
         {
             removeAttribute("type",AttributeName.XSIURI);
             setAttribute(AttributeName.TYPE, newType, null);
             if(eTyp!=null)
+            {
                 setXSIType(newType);
+                if(!eTyp.equals(EnumType.Combined)&&!eTyp.equals(EnumType.ProcessGroup))
+                    removeAttribute(AttributeName.TYPES);
+            }
         }
         else
         {
@@ -4048,8 +4052,8 @@ public class JDFNode extends JDFElement
      */
     public boolean isGroupNode()
     {
-        final String type2 = getType();
-        return JDFConstants.PROCESSGROUP.equals(type2) && !hasAttribute(AttributeName.TYPES)|| JDFConstants.PRODUCT.equals(type2);
+        final EnumType type2 = getEnumType();
+        return EnumType.ProcessGroup.equals(type2) && !hasAttribute(AttributeName.TYPES)|| EnumType.Product.equals(type2);
     }
 
     /**

@@ -56,18 +56,20 @@ public class ContentCreationTest extends PreflightTest
         lep.appendXMLComment("This is a \"well placed\" CTM defined mark\nThe anchor defines the 0,0 point to be transformed\nThe element to be placed is referenced by LayoutElement/FileSpec/URL");
         JDFLayoutElementPart lePart=lep.appendLayoutElementPart();
         lePart.setAttribute("PageRange", "0");
-        KElement dynamicObj=lePart.appendElement("PositionObject");
-        dynamicObj.setAttribute("CTM", "1 0 0 1 0 0");
-        dynamicObj.setAttribute("Anchor", "LowLeft");
+        KElement positionObj=lePart.appendElement("PositionObject");
+        positionObj.setAttribute("CTM", "1 0 0 1 0 0");
+        positionObj.setAttribute("Anchor", "LowLeft");
+        positionObj.setAttribute("PositionPolicy", "Exact");
         final JDFLayoutElement bkg = (JDFLayoutElement)lePart.appendElement("LayoutElement");
         bkg.setMimeURL("bkg.pdf");
 
         lep.appendXMLComment("This is a \"roughly placed\" reservation in the middle of the page");
         lePart=lep.appendLayoutElementPart();
         lePart.setAttribute("PageRange", "0");
-        dynamicObj=lePart.appendElement("PositionObject");
-        dynamicObj.setAttribute("Position", "0.5 0.5");
-        dynamicObj.setAttribute("Anchor", "CenterCenter");
+        positionObj=lePart.appendElement("PositionObject");
+        positionObj.setAttribute("Position", "0.5 0.5");
+        positionObj.setAttribute("Anchor", "CenterCenter");
+        positionObj.setAttribute("PositionPolicy", "Free");
         String id=lePart.appendAnchor(null);
 
         JDFLayoutElement image = (JDFLayoutElement)lePart.appendElement("LayoutElement");
@@ -77,11 +79,11 @@ public class ContentCreationTest extends PreflightTest
         lep.appendXMLComment("This is a \"roughly placed\" reservation 36 points below the previous image;\n NextPosition points from Anchor on this to NextAnchor on next,\n i.e. a positive vector specifies that next is shifted in the positive direction in the parent (in this case page) coordinate system");
         lePart=lep.appendLayoutElementPart();
         lePart.setAttribute("PageRange", "0");
-        dynamicObj=lePart.appendElement("PositionObject");
-        dynamicObj.setAttribute("Anchor", "TopCenter");
-        dynamicObj.setAttribute("NextAnchor", "BottomCenter");
-        dynamicObj.setAttribute("NextPosition", "0 36");
-        dynamicObj.setAttribute("NextRef",id);
+        positionObj=lePart.appendElement("PositionObject");
+        positionObj.setAttribute("Anchor", "TopCenter");
+        positionObj.setAttribute("NextAnchor", "BottomCenter");
+        positionObj.setAttribute("NextPosition", "0 36");
+        positionObj.setAttribute("NextRef",id);
 
         image = (JDFLayoutElement)lePart.appendElement("LayoutElement");
         image.setElementType(EnumElementType.Image);
@@ -92,58 +94,73 @@ public class ContentCreationTest extends PreflightTest
         lep.appendXMLComment("This is a \"well placed\" CTM defined mark\nThe anchor defines the 0,0 point to be transformed");
         lePart=lep.appendLayoutElementPart();
         lePart.setAttribute("PageRange", "0");
-        dynamicObj=lePart.appendElement("PositionObject");
-        dynamicObj.setAttribute("CTM", "1 0 0 1 2 3");
-        dynamicObj.setAttribute("Anchor", "LowLeft");
+        positionObj=lePart.appendElement("PositionObject");
+        positionObj.setAttribute("CTM", "1 0 0 1 2 3");
+        positionObj.setAttribute("Anchor", "LowLeft");
         lePart.appendBarcodeProductionParams().appendXMLComment("barcode details here");
 
         lePart=lep.appendLayoutElementPart();
         lePart.setAttribute("PageRange", "0");
-        dynamicObj=lePart.appendElement("PositionObject");
-        dynamicObj.setAttribute("Position", "1.0 1.0");
-        dynamicObj.setAttribute("Anchor", "TopRight");
-        dynamicObj.appendXMLComment("This is a \"roughly placed\"  mark\nThe anchor at top right is placed at the right (=1.0) top(=1.0) position of the page.\nNo rotation is specified");
+        positionObj=lePart.appendElement("PositionObject");
+        positionObj.setAttribute("Position", "1.0 1.0");
+        positionObj.setAttribute("Anchor", "TopRight");
+        positionObj.appendXMLComment("This is a \"roughly placed\"  mark\nThe anchor at top right is placed at the right (=1.0) top(=1.0) position of the page.\nNo rotation is specified");
         lePart.appendBarcodeProductionParams().appendXMLComment("barcode details here");
 
         lep.appendXMLComment("This is a \"roughly placed\"  container for marks\nThe anchor at top left is defined in the !Unrotated! orientation.\n It is placed at the left (=0.0) bottom(=0.0) position of the page.\nThe text flows bottom to top (=Rotate 90 = counterclockwise)\n do we need margins?");
         lePart=lep.appendLayoutElementPart();
         String idParent=lePart.appendAnchor(null);
         lePart.setAttribute("PageRange", "1");
-        dynamicObj=lePart.appendElement("PositionObject");
-        dynamicObj.setAttribute("Position", "0.0 0.0");
-        dynamicObj.setAttribute("Anchor", "TopLeft");
-        dynamicObj.setAttribute("Orientation", "Rotate90");
+        positionObj=lePart.appendElement("PositionObject");
+        positionObj.setAttribute("Position", "0.0 0.0");
+        positionObj.setAttribute("Anchor", "TopLeft");
+        positionObj.setAttribute("Orientation", "Rotate90");
 
         lep.appendXMLComment("This is a  barcode inside the previous container\nThe anchor at bottom left is defined in the !Unrotated! orientation.\n It is placed at the left (=0.0) bottom(=0.0) position of the container.");
         lePart=lep.appendLayoutElementPart();
         id=lePart.appendAnchor(null);
-        dynamicObj=lePart.appendElement("PositionObject");
-        dynamicObj.setAttribute("Position", "0.0 0.0");
-        dynamicObj.setAttribute("Anchor", "BottomLeft");
-        dynamicObj.setAttribute("ParentRef", idParent);
+        positionObj=lePart.appendElement("PositionObject");
+        positionObj.setAttribute("Position", "0.0 0.0");
+        positionObj.setAttribute("Anchor", "BottomLeft");
+        positionObj.setAttribute("ParentRef", idParent);
         lePart.appendBarcodeProductionParams().appendXMLComment("barcode details here");
 
-        lep.appendXMLComment("This is a disclaimer text inside the previous container\nThe anchor at top left is defined in the !Unrotated! orientation.\n The barcode and text are justified with their top margins and spaced by 72 points\n which corresponds to the left of the page because the container is rotated 90°");
+        lep.appendXMLComment("This is a disclaimer text inside the previous container\nThe anchor at top left is defined in the !Unrotated! orientation.\n The barcode and text are justified with their top margins and spaced by 72 points\n which corresponds to the left of the page because the container is rotated 90°\n"+
+                "AbsoluteSize specifies the size of the object in points");
         lePart=lep.appendLayoutElementPart();
-        dynamicObj=lePart.appendElement("PositionObject");
-        dynamicObj.setAttribute("NextAnchor", "TopRight");
-        dynamicObj.setAttribute("NextPosition", "-72 0");
-        dynamicObj.setAttribute("NextRef",id);
-        dynamicObj.setAttribute("Anchor", "TopLeft");
-        dynamicObj.setAttribute("ParentRef", idParent);
+        positionObj=lePart.appendElement("PositionObject");
+        positionObj.setAttribute("NextAnchor", "TopRight");
+        positionObj.setAttribute("NextPosition", "-72 0");
+        positionObj.setAttribute("NextRef",id);
+        positionObj.setAttribute("Anchor", "TopLeft");
+        positionObj.setAttribute("ParentRef", idParent);
+        positionObj.setAttribute("AbsoluteSize", "300 200");
         JDFLayoutElement text = (JDFLayoutElement)lePart.appendElement("LayoutElement");
         text.setElementType(EnumElementType.Text);
         text.setMimeURL("file://myServer/disclaimers/de/aspirin.txt");
 
 
-        lep.appendXMLComment("This is a \"VERY roughly placed\" piece of text somewhere on pages 2-3");
+        lep.appendXMLComment("This is a \"VERY roughly placed\" piece of text somewhere on pages 2-3\n"+
+    "RelativeSize specifies the size of the object as a ratio of the size of the container");
+        lePart=lep.appendLayoutElementPart();
+        lePart.setAttribute("PageRange", "1 ~ 2");
+        positionObj=lePart.appendElement("PositionObject");
+        positionObj.setAttribute("RelativeSize", "0.8 0.5");
+        text = (JDFLayoutElement)lePart.appendElement("LayoutElement");
+        text.setElementType(EnumElementType.Text);
+        text.appendComment().setText("Please add some text about the image of a palm tree on a beach here!");
+         
+        lep.appendXMLComment("This is another \"VERY roughly placed\" piece of text somewhere on pages 2-3; the text source is the JDF");
         lePart=lep.appendLayoutElementPart();
         lePart.setAttribute("PageRange", "1 ~ 2");
         text = (JDFLayoutElement)lePart.appendElement("LayoutElement");
         text.setElementType(EnumElementType.Text);
-        text.appendComment().setText("Please add some text about the image of a palm tree on a beach here!");
 
-        d.write2File(sm_dirTestDataTemp+File.separator+"LayoutDynamicObj.jdf",2,false);
+        JDFComment textSrc=text.appendComment();
+        textSrc.setText("Laurum Ipsum Blah blah blah!\n btw. this is unformatted plain text and nothing else!");
+
+
+        d.write2File(sm_dirTestDataTemp+File.separator+"LayoutPositionObj.jdf",2,false);
     }
 
     /**

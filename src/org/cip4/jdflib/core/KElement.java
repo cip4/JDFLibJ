@@ -3835,11 +3835,13 @@ public class KElement extends ElementNSImpl
     
     /**
      * append a DOM comment <code>&lt;!-- XMLComment --&gt;</code> 
-     *
+     * The double minus sign '--' is escaped with an underscore '_' in order to ensure valid xml
+     * 
      * @param commentText  the comment to append
      */
     public void appendXMLComment(String commentText)
     {
+        commentText=StringUtil.replaceString(commentText, "--", "__");
         final Comment newChild = getOwnerDocument().createComment(commentText);
         appendChild(newChild);
     }
