@@ -447,6 +447,14 @@ public class JDFLayout extends JDFSurface
         return getLayoutElement(this,ElementName.SIGNATURE,AttributeName.SIGNATURENAME,iSkip);
     }
 
+    /**
+     * get the vector of sheets in this signature
+     * @return {@link VElement} the vector of signatures in this
+     */
+    public VElement getSignatureVector()
+    {
+        return getLayoutElementVector(this,ElementName.SIGNATURE,AttributeName.SIGNATURENAME);
+    }
 
    
      

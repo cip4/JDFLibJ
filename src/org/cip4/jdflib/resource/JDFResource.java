@@ -4796,13 +4796,19 @@ public class JDFResource extends JDFElement
     {
         return getRealAttribute(AttributeName.AMOUNTPRODUCED, null, 0.0);
     }
+    
+    /**
+     * append an empty GeneralID 
+     * 
+     * @return the newly created GeneralID
+     */
     public JDFGeneralID appendGeneralID()
     {
         return (JDFGeneralID) appendElement(ElementName.GENERALID,null);
     }
     
     /**
-     * append a GeneralID with idValue
+     * append a GeneralID with idValue, duplicate entries are retained
      * 
      * @param idUsage the IDUsage attribute of the generalID
      * @param idValue the IDValue attribute of the generalID
@@ -4872,14 +4878,14 @@ public class JDFResource extends JDFElement
     
     /**
      * Gets IDValue of the GeneralID with IDUsage=idUsage
-     *
+     * null, if none exists
      * @return double the attribute value
      */
     public String getGeneralID(String idUsage)
     {
         VElement v=getChildElementVector(ElementName.GENERALID,null,new JDFAttributeMap(AttributeName.IDUSAGE,idUsage),true,0,true);
         if(v.size()==0)
-            return JDFConstants.EMPTYSTRING;
+            return null;
         JDFGeneralID gid=(JDFGeneralID)v.elementAt(0);
         return gid.getIDValue();
     }

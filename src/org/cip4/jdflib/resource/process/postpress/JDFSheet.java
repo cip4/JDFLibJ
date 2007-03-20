@@ -425,11 +425,12 @@ public class JDFSheet extends JDFSignature
     }
     
     /**
-     * @deprecated use getChildElementVector() instead
+     * get the vector of surfaces in this sheet
+     * @return {@link VElement} the vector of surfaces in this
      */
     public VElement getSurfaceVector()
     {
-        return getSurfaceVector(null, true);
+        return getLayoutElementVector(this,ElementName.SURFACE,AttributeName.SIDE);
     }
     
     

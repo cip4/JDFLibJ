@@ -99,14 +99,14 @@ import org.cip4.jdflib.resource.process.postpress.JDFSheet;
 public class JDFSignature extends JDFAutoLayout
 {
     private static final long serialVersionUID = 1L;
-    
+
     // Handle partitioned layouts
     private static ElemInfoTable[] elemInfoTable_Sheet = new ElemInfoTable[1];
     static
     {
         elemInfoTable_Sheet[0] = new ElemInfoTable(ElementName.SHEET, 0x33333333);
     }
-    
+
     protected ElementInfo getTheElementInfo()
     {
         return new ElementInfo(super.getTheElementInfo(), elemInfoTable_Sheet);
@@ -117,7 +117,7 @@ public class JDFSignature extends JDFAutoLayout
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.NAME, 0x44444333, AttributeInfo.EnumAttributeType.string, null, null);
     }
-    
+
     protected AttributeInfo getTheAttributeInfo()
     {
         AttributeInfo ai=super.getTheAttributeInfo();
@@ -167,8 +167,8 @@ public class JDFSignature extends JDFAutoLayout
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
-    
-    
+
+
     /**
      * toString()
      * @return String
@@ -178,7 +178,7 @@ public class JDFSignature extends JDFAutoLayout
         return "JDFSignature[  --> " + super.toString() + " ]";
     }
     ///////////////////////////////////////////////////////////////////
-    
+
     public boolean init()
     {
         boolean bRet = super.init();
@@ -203,8 +203,8 @@ public class JDFSignature extends JDFAutoLayout
         }
         return s;
     }
-    
-    
+
+
     /**
      * gets a Sheet in both old and new Layouts
      * <li>if old: a <code>Sheet</code> element
@@ -216,7 +216,7 @@ public class JDFSignature extends JDFAutoLayout
     {
         return getLayoutElement(this,ElementName.SHEET,AttributeName.SHEETNAME,iSkip);
     }
-    
+
     /**
      * counts the number of Sheets in both old and new Layouts
      * <li>if old: a <code>Sheet</code> element
@@ -227,8 +227,8 @@ public class JDFSignature extends JDFAutoLayout
     {
         return numLayoutElements(this,ElementName.SHEET, AttributeName.SHEETNAME);
     }
-    
-    
+
+
     /**
      * (28) get vector of all direct child elements Sheet
      * @param mAttrib the map of attributes to select
@@ -247,19 +247,20 @@ public class JDFSignature extends JDFAutoLayout
         }
         return myResource;
     }
-    
-    
-    
+
+
+
     /**
-     * @deprecated use getChildElementVector() instead
+     * get the vector of sheets in this signature
+     * @return {@link VElement} the vector of signatures in this
      */
     public VElement getSheetVector()
     {
-        return getSheetVector(new JDFAttributeMap(), true);
+        return getLayoutElementVector(this,ElementName.SHEET,AttributeName.SHEETNAME);
     }
-    
-    
-    
+
+
+
     /**
      * appends a Sheet in both old and new Layouts
      * <li>if old: a <code>Sheet</code> element
@@ -269,7 +270,7 @@ public class JDFSignature extends JDFAutoLayout
     {
         return appendLayoutElement(this,ElementName.SHEET,AttributeName.SHEETNAME);
     }
-    
+
     /**
      * (31) create inter-resource link to refTarget
      * @param refTarget the element that is referenced
@@ -280,7 +281,7 @@ public class JDFSignature extends JDFAutoLayout
             throw new JDFException("refSheet: attempting to reference a partition");
         refElement(refTarget);
     }     
-    
+
     /**
      * appends a signature in both old and new Layouts
      * if old: a <code>< Signature></code> element
@@ -300,7 +301,7 @@ public class JDFSignature extends JDFAutoLayout
         }
         return s;
     }
-    
+
     /**
      * get the number of layout elements
      * @param layout
@@ -310,16 +311,8 @@ public class JDFSignature extends JDFAutoLayout
      */
     protected static int numLayoutElements(JDFResource layout, String elementName, String partitionKeyName)
     {
-        int n=0;
-        if(JDFLayout.isNewLayout(layout))
-        {
-            n= layout.getChildElementVector_KElement(ElementName.LAYOUT,null,new JDFAttributeMap(partitionKeyName,(String)null),true,0).size();
-        }
-        else
-        {
-            n= layout.numChildElements_JDFElement(elementName,null);
-        }
-        return n;
+        VElement v=getLayoutElementVector(layout, elementName, partitionKeyName);
+        return v==null ? 0 : v.size();
     }
     /**
      * get a specific layout element
@@ -339,11 +332,27 @@ public class JDFSignature extends JDFAutoLayout
         }
         else{
             s=(JDFLayout) layout.getElement(elementName, null, iSkip);
-            
+
         }
         return s;
     }    
- 
+
+    /**
+     * get a vector of specific layout elements
+     * @param layout
+     * @param elementName
+     * @param partitionKeyName
+     * @return VElement: the vector of elements
+     */
+    protected static VElement getLayoutElementVector(JDFResource layout, String elementName, String partitionKeyName)
+    {
+        if(JDFLayout.isNewLayout(layout))
+        {
+            return layout.getChildElementVector_JDFElement(ElementName.LAYOUT,null,new JDFAttributeMap(partitionKeyName,(String)null),true,0,true);
+        }
+        return layout.getChildElementVector_JDFElement(elementName,null,null,true,0,true);            
+    }    
+
     /**
      * get the leaves of a layout, either pre 1.2 or post 1.3
      * @return VElement the layout leaves, i.e. partition leaves(1.3+) or explicit surfaces(1.2-)
@@ -351,10 +360,10 @@ public class JDFSignature extends JDFAutoLayout
     public VElement getLayoutLeaves(boolean bAll)
     {
         if(JDFLayout.isNewLayout(this))
-             return getLeaves(bAll);
+            return getLeaves(bAll);
         return getChildrenByTagName(ElementName.SURFACE, null, null, false, true, -1);
     }
-    
+
     /**
      * if this is a new layout, return the partition key signaturename
      * else return Signature/@Name of this or its appropriate parent

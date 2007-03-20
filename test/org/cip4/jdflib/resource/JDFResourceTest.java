@@ -1456,7 +1456,7 @@ public class JDFResourceTest extends JDFTestCaseBase
         assertEquals("",xm.getGeneralID("foo2"),"bar3");
         assertEquals("",xm.numChildElements(ElementName.GENERALID,null),2);
         xm.removeGeneralID("foo");
-        assertEquals("",xm.getGeneralID("foo"),"");
+        assertNull("",xm.getGeneralID("foo"));
         assertEquals("",xm.getGeneralID("foo2"),"bar3");
         assertEquals("",xm.numChildElements(ElementName.GENERALID,null),1);  
         xm.setGeneralID("foo3","bar33");
