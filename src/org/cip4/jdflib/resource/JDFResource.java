@@ -6946,9 +6946,9 @@ public class JDFResource extends JDFElement
     /**
      * @param autoAgent the autoAgent to set
      */
-    public static void setAutoAgent(boolean autoAgent)
+    public static void setAutoAgent(boolean _autoAgent)
     {
-        JDFResource.autoAgent = autoAgent;
+        JDFResource.autoAgent = _autoAgent;
     }
     
 }
