@@ -91,6 +91,7 @@ import java.util.zip.DataFormatException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.enums.EnumUtils;
 import org.apache.commons.lang.enums.ValuedEnum;
+import org.cip4.jdflib.cformat.PrintfFormat;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
@@ -149,8 +150,80 @@ public class StringUtil
         }
         return s;
     }
-    
-    
+
+    /**
+     * format a string using C++ sprintf functionality
+     * 
+     * @param format the format to print, see C++ spec for details
+     * @param template - comma separated string - the values are parsed and the appropriate objects are created 
+     *  more objects exist in template than the number of '%' tokens in format, the remainder of objects is ignored
+     *  duplicate '\\,' is taken as literal ','
+     * @return String the formatted string
+     * @throws IllegalArgumentException in case format and o do not match, i.e. not eough objects are passed to fill format 
+     */
+    public static String sprintf(String format,String template)
+    {
+        if(template==null || format==null)
+            return null;
+        template=StringUtil.replaceString(template, "\\,", "__comma__€ß-eher selten"); // quick hack ;-)
+
+        VString vTemplate=tokenize(template, ",", false);
+        Object[] vObj=new Object[vTemplate.size()];
+        for(int i=0;i<vObj.length;i++)
+        {
+            String s=vTemplate.stringAt(i);
+            if (isInteger(s))
+                vObj[i]=new Integer(parseInt(s, 0));
+            else if (isNumber(s))
+            {
+                vObj[i]=new Double(parseDouble(s, 0));
+            }
+            else 
+            {
+                vObj[i]= StringUtil.replaceString(s,"__comma__€ß-eher selten",","); // quick hack ;-)
+            }
+        }
+        return sprintf(format, vObj);
+    }
+    /**
+     * format a string using C++ sprintf functionality
+     * 
+     * @param format the format to print, see C++ spec for details
+     * @param objects the array of objects, either String, Double, Integer or ValuedEnum, 
+     *  if objects is longer than the number of '%' tokens in format, the remainder of objects is ignored
+     * @return String the formatted string
+     * @throws IllegalArgumentException in case format and o do not match, i.e. not eough objects are passed to fill format 
+     */
+    public static String sprintf(String format,Object[] objects)
+    {
+        if(objects==null || format==null)
+            return null;
+        format=StringUtil.replaceString(format, "%%", "__percent__€ß-eher selten"); // quick hack ;-)
+        boolean bStart=format.startsWith("%");
+        VString tokens=tokenize(format, "%", false);
+        final int nStart = (bStart ? 0 : 1);
+        if(tokens.size()>objects.length + nStart)
+            throw new IllegalArgumentException("token size mismatch");
+        
+        // tokenize does not return an empty token if we start with %
+        String s=bStart ? "" : tokens.stringAt(0);
+        
+        for(int i=bStart ? 0 : 1;i<tokens.size();i++)
+        {
+            PrintfFormat f=new PrintfFormat("%"+tokens.stringAt(i));
+            Object ob=objects[i-nStart];
+            if(ob instanceof String)
+                s+=f.tostr((String)ob);
+            else if(ob instanceof Integer)
+                s+=f.tostr((Integer)ob);
+            else if(ob instanceof Double)
+                s+=f.tostr((Double)ob);
+            else if(ob instanceof ValuedEnum)
+                s+=f.tostr(((ValuedEnum)ob).getName());
+            
+        }
+        return replaceString(s,"__percent__€ß-eher selten","%"); // undo quick hack ;-)
+    }
     
     /**
      * create a string from an array of tokens

@@ -109,6 +109,54 @@ public class StringUtilTest extends JDFTestCaseBase
         assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, f),'\\',"/",0),".");
     }
     
+    
+    public void testSprintfString()
+    {
+        assertEquals(StringUtil.sprintf("abc%03idef","5"), "abc005def");
+        assertEquals(StringUtil.sprintf("abc%03idef","5.0"), "abc005def");
+        assertEquals(StringUtil.sprintf("abc%03i%02idef","5.0,5"), "abc00505def");
+        assertEquals(StringUtil.sprintf("abc%03i%02idef%%%s","5.0,5,abcdefghi"), "abc00505def%abcdefghi");
+        assertEquals(StringUtil.sprintf("%2x","12"), " c");
+        assertEquals(StringUtil.sprintf("%2x","18"), "12");
+        assertEquals(StringUtil.sprintf("%s","\\,"), ",");
+        assertEquals(StringUtil.sprintf("%s","\\\\,"), "\\,");
+        assertEquals(StringUtil.sprintf("%s_%s","\\\\,,a"), "\\,_a");
+               
+    }
+    
+    public void testSprintf()
+       {
+        Object[] o=new Object[1];
+        o[0]=new Integer(5);
+        assertEquals(StringUtil.sprintf("abc%03idef",o), "abc005def");
+        o[0]="foobar";
+        assertEquals(StringUtil.sprintf("abc%7sdef",o), "abc foobardef");
+        assertEquals(StringUtil.sprintf("abc%7s7def",o), "abc foobar7def");
+        assertEquals(StringUtil.sprintf("%7sdef",o), " foobardef");
+        assertEquals(StringUtil.sprintf("%7s",o), " foobar");
+        assertEquals(StringUtil.sprintf("%%_%7s",o), "%_ foobar");
+        assertEquals(StringUtil.sprintf("%%",o), "%");
+        assertEquals(StringUtil.sprintf("765",o), "765");
+        try
+        {
+            StringUtil.sprintf("abc%7idef",o);
+            fail("???");
+        }
+        catch (Exception x)
+        {
+            //
+        }
+        
+        o=new Object[2];
+        o[0]=new Integer(5);
+        o[1]="foobar";
+        assertEquals(StringUtil.sprintf("abc %02i%7sdef",o), "abc 05 foobardef");
+        assertEquals(StringUtil.sprintf("%02i%7sdef",o), "05 foobardef");
+               
+
+        
+   }
+    
     public void testSetHexBinaryBytes()
     {
         String strTestString = "ABCDEFGHIJKLMNOPQESTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ÖÄÜöäü€";

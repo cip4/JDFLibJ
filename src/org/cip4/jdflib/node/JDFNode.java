@@ -5054,7 +5054,7 @@ public class JDFNode extends JDFElement
         final int size = vtyp==null ? 0 : vtyp.size();
         for (int i = 0; i < size; i++)
         {
-            final String typ = (String)vtyp.elementAt(i);
+            final String typ = vtyp.stringAt(i);
             if ((typ.charAt(1) == '?') || (typ.charAt(1) == '_'))
             {
                 if (numMatchingLinks(resName, false, processUsage) > 0)

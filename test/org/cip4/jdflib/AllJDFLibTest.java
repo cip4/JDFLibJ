@@ -73,6 +73,8 @@ import junit.framework.TestSuite;
 
 import org.cip4.jdflib.auto.AutoTest;
 import org.cip4.jdflib.auto.JDFClassInstantiationTest;
+import org.cip4.jdflib.cformat.PrintfFormat;
+import org.cip4.jdflib.cformat.PrintfFormatTest;
 import org.cip4.jdflib.core.AttrInfoTest;
 import org.cip4.jdflib.core.ElemInfoTest;
 import org.cip4.jdflib.core.FactoryTest;
@@ -203,6 +205,8 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(VElementTest.class);
         suite.addTestSuite(VStringTest.class);
         suite.addTestSuite(XMLDocTest.class);
+        // cformat
+        suite.addTestSuite(PrintfFormatTest.class);
         
         // datatype
         suite.addTestSuite(JDFAttributeMapTest.class);
