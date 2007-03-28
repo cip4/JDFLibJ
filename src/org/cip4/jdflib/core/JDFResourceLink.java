@@ -1413,8 +1413,11 @@ public class JDFResourceLink extends JDFElement
     public void expandTarget(boolean bForce) 
     {
         JDFResource r = getLinkRoot();
+        if(r==null)
+            return; // bail out!
+        
         //  loop over parts for partusage explicit
-        if (r.getPartUsage() == JDFResource.EnumPartUsage.Explicit || bForce)
+        if(r.getPartUsage() == JDFResource.EnumPartUsage.Explicit || bForce)
         {
             VJDFAttributeMap apParts = getPartMapVector();
             if(apParts!=null)

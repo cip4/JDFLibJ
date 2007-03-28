@@ -483,13 +483,13 @@ Mark References (FoldMark, CIE, …)
         JDFRunList rlo=(JDFRunList) n.addResource("RunList",null,EnumUsage.Output, null, null, null,null);
         rlo.setFileURL("output.pdf");
 
-        lo.appendXMLComment("This is a simple horizontal slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes error and endtime in the lower left corner of the scb");
+        lo.appendXMLComment("This is a simple horizontal slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes error and endtime in the lower left corner of the scb", null);
         JDFMarkObject mark=lo.appendMarkObject();
         mark.setCTM(new JDFMatrix("1 0 0 1 0 0"));
         JDFJobField jf=mark.appendJobField();
         jf.setShowList(new VString("Error EndTime"," "));
 
-        lo.appendXMLComment("This is a simple vertical slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes the operator name along the right side of the sheet text from top to bottom\nthe slug line (top right of the slug cs) is anchored in the bottom right of the sheet.\nNote that the coordinates in the ctm are guess work. the real coordinates are left as an exercise for the reader;-)");
+        lo.appendXMLComment("This is a simple vertical slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes the operator name along the right side of the sheet text from top to bottom\nthe slug line (top right of the slug cs) is anchored in the bottom right of the sheet.\nNote that the coordinates in the ctm are guess work. the real coordinates are left as an exercise for the reader;-)", null);
         mark=lo.appendMarkObject();
         mark.setCTM(new JDFMatrix("0 1 -1 0 555 444"));
         jf=mark.appendJobField();
@@ -499,7 +499,7 @@ Mark References (FoldMark, CIE, …)
         dm.setFont("Arial");
         dm.setFontSize(10);
 
-        lo.appendXMLComment("This is a formatted vertical slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes a formatted line along the left side of the sheet text from top to bottom\nthe slug line (top left) is anchored in the bottom left of the sheet.\nThe text is defined in @Format with the sequence in ShowList defining the 5 placeholders marked by %s or %i\nAn example instance would be: \"This Cyan plate of Sheet1 was proudly produced by Joe Cool! Resolution: 600 x 600\"\nNote that the coordinates in the ctm are guess work. the real coordinates are left as an exercise for the reader;-)");
+        lo.appendXMLComment("This is a formatted vertical slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes a formatted line along the left side of the sheet text from top to bottom\nthe slug line (top left) is anchored in the bottom left of the sheet.\nThe text is defined in @Format with the sequence in ShowList defining the 5 placeholders marked by %s or %i\nAn example instance would be: \"This Cyan plate of Sheet1 was proudly produced by Joe Cool! Resolution: 600 x 600\"\nNote that the coordinates in the ctm are guess work. the real coordinates are left as an exercise for the reader;-)", null);
         mark=lo.appendMarkObject();
         mark.setCTM(new JDFMatrix("0 1 -1 0 0 0"));
         jf=mark.appendJobField();
@@ -510,11 +510,11 @@ Mark References (FoldMark, CIE, …)
         dm.setFont("Arial");
         dm.setFontSize(10);
 
-        lo.appendXMLComment("This is a positioned registermark\nthe center of the mark is translated by 666 999\n the JobField is empty and serves aa a Marker that no external Content is requested");
+        lo.appendXMLComment("This is a positioned registermark\nthe center of the mark is translated by 666 999\n the JobField is empty and serves aa a Marker that no external Content is requested", null);
         mark=lo.appendMarkObject();
         mark.setCTM(new JDFMatrix("1 0 0 1 666 999"));
         jf=mark.appendJobField();
-        mark.appendXMLComment("The coordinate system origin is defined by the anchor in the center, i.e. 0 0\n the separartions are excluding black");
+        mark.appendXMLComment("The coordinate system origin is defined by the anchor in the center, i.e. 0 0\n the separartions are excluding black", null);
         JDFRegisterMark rm=mark.appendRegisterMark();
         rm.setMarkType("Arc Cross");
         rm.setMarkUsage(EnumMarkUsage.Color);
@@ -526,357 +526,6 @@ Mark References (FoldMark, CIE, …)
         doc.write2File(sm_dirTestDataTemp+"generatedObject.jdf", 2, false);
 
     }
-    /////////////////////////////////////////////////////
-
-    public void testAutomateLayout1() throws Exception
-    {
-        n.getAuditPool().appendXMLComment("This is the simplest example of an automated layout\n"+
-                "The structure is aligned as closely as possible with a static Layout\n"+
-        "note that the actual processes and outputs have been omitted for brevity");
-
-        setUpAutomatedInputRunList();
-        rl.setDescriptiveName("This is a RunList specifiying 100 instance documents of 14 pages each in a ppml file");
-
-        JDFLayout lo=(JDFLayout) n.appendMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null);
-        lo.setResStatus(EnumResStatus.Available, true);
-
-        lo.setMaxOrd(14);
-        lo.setMaxDocOrd(1);
-        lo.setAutomated(true);
-        lo.appendXMLComment("Layout for 2 Cover pages and 12 2 up two sided body pages\n The number of pages per instance document is fixed\n"+
-                "This Layout is an example of an 'almost conventional' automated layout\n"+
-                "MaxDocOrd is set to 1. This is redundant since 1 is the default.\n"+
-        "A value of 1 explicitly resets all counters at a Document break.");
-        JDFLayout cover=(JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Cover");
-        cover.setDescriptiveName("one sided cover - the inner = back side is empty");
-        JDFLayout coverFront=(JDFLayout) cover.addPartition(EnumPartIDKey.Side, EnumSide.Front);
-        JDFContentObject co=coverFront.appendContentObject();
-        co.setCTM(new JDFMatrix(1,0,0,1,0,0));
-        co.setOrd(13);
-        co.setDescriptiveName("Front Cover Page");
-        co=coverFront.appendContentObject();
-        co.setCTM(new JDFMatrix(1,0,0,1,8.5*72,0));
-        co.setOrd(0);
-        co.setDescriptiveName("Back Cover Page - (back of brochure but front of sheet)");
-
-        for(int i=0;i<3;i++)
-        {
-            JDFLayout body=(JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Body"+(i+1));
-            body.setDescriptiveName("sheet "+(i+1)+" of 3 of the insert");
-            JDFLayout bodySide=(JDFLayout) body.addPartition(EnumPartIDKey.Side, EnumSide.Front);
-
-            co=bodySide.appendContentObject();
-            co.setCTM(new JDFMatrix(1,0,0,1,0,0));
-            co.setOrd(8 + 2*(2-i));
-            co.setDescriptiveName("Left Front Sheet Body Page");
-            co=bodySide.appendContentObject();
-            co.setCTM(new JDFMatrix(1,0,0,1,8.5*72,0));
-            co.setOrd(1+(2*i));
-            co.setDescriptiveName("Right Front Sheet Body Page");
-
-            bodySide=(JDFLayout) body.addPartition(EnumPartIDKey.Side, EnumSide.Back);
-
-            co=bodySide.appendContentObject();
-            co.setCTM(new JDFMatrix(1,0,0,1,0,0));
-            co.setOrd(2+(2*i));
-            co.setDescriptiveName("Left Back Sheet Body Page");
-            co=bodySide.appendContentObject();
-            co.setCTM(new JDFMatrix(1,0,0,1,8.5*72,0));
-            co.setOrd(7 + 2*(2-i));
-            co.setDescriptiveName("Right Back Sheet Body Page");
-        }
-        doc.write2File(sm_dirTestDataTemp+"AutomatedLayout1.jdf", 2, false);
-    }
-    /////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////
-
-    public void testAutomateLayout3() throws Exception
-    {
-        n.getAuditPool().appendXMLComment("This is a simple example of an automated layout that positions multiple instance documents onto one sheet\n"+
-                "The structure is aligned as closely as possible with a static Layout\n"+
-        "note that the actual processes and outputs have been omitted for brevity");
-
-        setUpAutomatedInputRunList();
-        rl.setDescriptiveName("This is a RunList specifiying 100 instance documents of 14 pages each in a ppml file");
-
-        JDFLayout lo=(JDFLayout) n.appendMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null);
-        lo.setResStatus(EnumResStatus.Available, true);
-
-        lo.setMaxOrd(7);
-        lo.setMaxDocOrd(2);
-        lo.setAutomated(true);
-        lo.appendXMLComment("Layout for 2*1 Cover page and 2*6 2 up two sided body pages\n The number of pages per instance document is fixed\n"+
-                "This Layout is an example of an 'almost conventional' automated layout\n"+
-        "MaxDocOrd is set to 2. Thus 2 documents are positioned on each sheet.\n");
-        JDFLayout cover=(JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Cover");
-        cover.setDescriptiveName("one sided cover - the inner = back side is empty");
-        JDFLayout coverFront=(JDFLayout) cover.addPartition(EnumPartIDKey.Side, EnumSide.Front);
-        JDFContentObject co=coverFront.appendContentObject();
-        co.setCTM(new JDFMatrix(1,0,0,1,0,0));
-        co.setOrd(0);
-        co.setDocOrd(0);
-        co.setDescriptiveName("Front Cover Page, document 0,2,4,...");
-        co=coverFront.appendContentObject();
-        co.setCTM(new JDFMatrix(1,0,0,1,8.5*72,0));
-        co.setOrd(0);
-        co.setDocOrd(1);
-        co.setDescriptiveName("Front Cover Page, document 1,3,5,...");
-
-        for(int i=0;i<3;i++)
-        {
-            JDFLayout body=(JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Body"+(i+1));
-            body.setDescriptiveName("sheet "+(i+1)+" of 3 of the insert");
-            JDFLayout bodySide=(JDFLayout) body.addPartition(EnumPartIDKey.Side, EnumSide.Front);
-
-            co=bodySide.appendContentObject();
-            co.setCTM(new JDFMatrix(1,0,0,1,0,0));
-            co.setOrd(1+i);
-            co.setDocOrd(0);
-            co.setDescriptiveName("Front Sheet Body Page, document 0,2,4,...");
-            co=bodySide.appendContentObject();
-            co.setCTM(new JDFMatrix(1,0,0,1,8.5*72,0));
-            co.setOrd(1+(2*i));
-            co.setDocOrd(1);
-            co.setDescriptiveName("Front Sheet Body Page, document 1,3,5,...");
-
-            bodySide=(JDFLayout) body.addPartition(EnumPartIDKey.Side, EnumSide.Back);
-
-            co=bodySide.appendContentObject();
-            co.setCTM(new JDFMatrix(1,0,0,1,0,0));
-            co.setOrd(2+(2*i));
-            co.setDocOrd(0);
-            co.setDescriptiveName("Back Sheet Body Page, document 0,2,4,...");
-            co=bodySide.appendContentObject();
-            co.setCTM(new JDFMatrix(1,0,0,1,8.5*72,0));
-            co.setOrd(2+(2*i));
-            co.setDocOrd(1);
-
-            co.setDescriptiveName("Back Sheet Body Page, document 1,3,5,...");
-        }
-        doc.write2File(sm_dirTestDataTemp+"AutomatedLayout3.jdf", 2, false);
-    }
-    /////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////
-
-    public void testAutomateLayout4() throws Exception
-    {
-        n.getAuditPool().appendXMLComment("This is a simple example of an automated layout that positions multiple instance documents onto one sheet\n"+
-                "The structure is aligned as closely as possible with a static Layout\n"+
-        "note that the actual processes and outputs have been omitted for brevity");
-
-        setUpAutomatedInputRunList();
-        rl.setDescriptiveName("This is a RunList specifiying 100 instance documents of 14 pages each in a ppml file.\n"+
-        "DocCopies requests a repeat of 50 copies per document");
-        rl.setAttribute("DocCopies",50,null);
-        JDFLayout lo=(JDFLayout) n.appendMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null);
-        lo.setResStatus(EnumResStatus.Available, true);
-
-        lo.setMaxOrd(1);
-        lo.setMaxDocOrd(4);
-        lo.setAutomated(true);
-        lo.appendXMLComment("Layout for 4stacks on a sheet\n The number of pages per instance document is fixed\n"+
-        "\n");
-        JDFLayout cover=(JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Stack");
-        cover.setDescriptiveName("one sided 4 up stack back side is empty");
-        JDFLayout coverFront=(JDFLayout) cover.addPartition(EnumPartIDKey.Side, EnumSide.Front);
-        JDFContentObject co=coverFront.appendContentObject();
-        co.setCTM(new JDFMatrix(1,0,0,1,0,0));
-        co.setOrd(0);
-        co.setDocOrd(0);
-        co.setDescriptiveName("Front Cover Page, document 0,4,...");
-
-        co=coverFront.appendContentObject();
-        co.setCTM(new JDFMatrix(1,0,0,1,8.5*72,0));
-        co.setOrd(0);
-        co.setDocOrd(1);
-        co.setDescriptiveName("Front Cover Page, document 1,5,...");
-
-        co=coverFront.appendContentObject();
-        co.setCTM(new JDFMatrix(1,0,0,1,0,11*72));
-        co.setOrd(0);
-        co.setDocOrd(2);
-        co.setDescriptiveName("Front Cover Page, document 2,6,...");
-
-        co=coverFront.appendContentObject();
-        co.setCTM(new JDFMatrix(1,0,0,1,8.5*72,11*72));
-        co.setOrd(0);
-        co.setDocOrd(3);
-        co.setDescriptiveName("Front Cover Page, document 3,7,...");
-
-        doc.write2File(sm_dirTestDataTemp+"AutomatedLayout4.jdf", 2, false);
-    }
-    /////////////////////////////////////////////////////
-
-    public void testAutomateLayout2() throws Exception
-    {
-        n.getAuditPool().appendXMLComment("This another example of an automated layout\n"+
-                "The structure is aligned close to a static Layout but additionally uses OrdExpression and allows for varying numbers of pages in the runlist\n"+
-        "note that the actual processes and outputs have been omitted for brevity");
-
-        setUpAutomatedInputRunList();
-        rl.setDescriptiveName("This is a RunList specifiying 100 instance documents of varying pages each in a ppml file");
-
-        JDFLayout lo=(JDFLayout) n.appendMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null);
-        lo.setResStatus(EnumResStatus.Available, true);
-
-        lo.setMaxDocOrd(1);
-        lo.setAutomated(true);
-        lo.appendXMLComment("Layout for 2 Cover pages and varying numbers of 2 up two sided body pages\n"+
-                "The number of pages per instance document varies\n"+
-                "MaxDocOrd is set to 1. This is redundant since 1 is the default.\n"+
-        "A value of 1 explicitly resets all counters at a Document break.");
-        JDFLayout cover=(JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Cover");
-        cover.appendXMLComment("In this example, the cover is assumed to be the first two pages of each runlist\n"+
-                "\n!!! We unfortunately have an issue here:\n"+
-                "we cannot differentiate whether the cover should be repeated of not, i.e. whether the cover is executed once (the correct choice) or repeated between each body sheet.\n"
-                +"Note that no MaxOrd is not set, as it varies between documents");
-        cover.setDescriptiveName("one sided cover - the inner = back side is empty");
-        JDFLayout coverFront=(JDFLayout) cover.addPartition(EnumPartIDKey.Side, EnumSide.Front);
-        JDFContentObject co=coverFront.appendContentObject();
-        co.setCTM(new JDFMatrix(1,0,0,1,0,0));
-        co.setOrdExpression("1");
-        co.setDescriptiveName("Front Cover Page");
-        co=coverFront.appendContentObject();
-        co.setCTM(new JDFMatrix(1,0,0,1,8.5*72,0));
-        co.setOrdExpression("0");
-        co.setDescriptiveName("Back Cover Page - (back of brochure but front of sheet)");
-
-        JDFLayout body=(JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Body");
-        body.setDescriptiveName("abstract description of multiple body sheets");
-        JDFLayout bodySide=(JDFLayout) body.addPartition(EnumPartIDKey.Side, EnumSide.Front);
-
-        co=bodySide.appendContentObject();
-        co.setCTM(new JDFMatrix(1,0,0,1,0,0));
-        co.setOrdExpression("4 * (n+3)/4 - s*2 +1");
-        co.setDescriptiveName("Left Front Sheet Body Page");
-        co=bodySide.appendContentObject();
-        co.setCTM(new JDFMatrix(1,0,0,1,8.5*72,0));
-        co.setOrdExpression("2*s +2");
-        co.setDescriptiveName("Right Front Sheet Body Page");
-
-        bodySide=(JDFLayout) body.addPartition(EnumPartIDKey.Side, EnumSide.Back);
-
-        co=bodySide.appendContentObject();
-        co.setCTM(new JDFMatrix(1,0,0,1,0,0));
-        co.setOrdExpression("2*s +3");
-        co.setDescriptiveName("Left Back Sheet Body Page");
-        co=bodySide.appendContentObject();
-        co.setCTM(new JDFMatrix(1,0,0,1,8.5*72,0));
-        co.setOrdExpression("4 * (n+3)/4 - s*2 +0");
-        co.setDescriptiveName("Right Back Sheet Body Page");
-
-        doc.write2File(sm_dirTestDataTemp+"AutomatedLayout2.jdf", 2, false);
-    }    
-
-    /////////////////////////////////////////////////////
-
-    public void testAutomateLayout_PlateSet() throws Exception
-    {
-        for(int loop=0;loop<3;loop++)
-        {
-
-            n.getAuditPool().appendXMLComment("This is a simple example of an automated layout used for conventional prepress\n"+
-            "The structure is aligned as closely as possible with a static Layout");
-
-            JDFRunList run=rl.addRun("file://host/data/test.pdf", 0, -1);
-            run.setNPage(128);
-            rl.setResStatus(EnumResStatus.Available, true);
-            rl.setDescriptiveName("This is a RunList specifiying 128 pages each in a pdf file.");
-
-            JDFLayout lo=(JDFLayout) n.appendMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null);
-            lo.setResStatus(EnumResStatus.Available, true);
-
-            lo.setMaxOrd(4);
-            lo.setAutomated(true);
-            final String format = "Sheet%02i";
-            lo.setAttribute("NameFormat", format);
-            lo.setAttribute("NameTemplate", "SheetNum");
-            lo.appendXMLComment("Simple automated Layout with exactly one sheet\n");
-            JDFLayout sheet=(JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Sheet");
-            sheet.setDescriptiveName("two sided 2 up sheet");
-            JDFLayout sheetFront=(JDFLayout) sheet.addPartition(EnumPartIDKey.Side, EnumSide.Front);
-            JDFContentObject co=sheetFront.appendContentObject();
-            co.setCTM(new JDFMatrix(1,0,0,1,0,0));
-            co.setOrd(0);
-            co.setDescriptiveName("Front 1st, 5th, 9th... Page");
-
-            co=sheetFront.appendContentObject();
-            co.setCTM(new JDFMatrix(1,0,0,1,8.5*72,0));
-            co.setOrd(1);
-            co.setDescriptiveName("Front 2nd, 6th, 10th... page");
-
-            JDFLayout sheetBack=(JDFLayout) sheet.addPartition(EnumPartIDKey.Side, EnumSide.Back);
-            co=sheetBack.appendContentObject();
-            co.setCTM(new JDFMatrix(1,0,0,1,0,0));
-            co.setOrd(2);
-            co.setDescriptiveName("Back 3rd, 7th, 11th... Page");
-
-            co=sheetBack.appendContentObject();
-            co.setCTM(new JDFMatrix(1,0,0,1,8.5*72,0));
-            co.setOrd(3);
-            co.setDescriptiveName("Back 4th, 8th, 12th... page");
-
-            JDFRunList rlSheet=(JDFRunList) n.appendMatchingResource(ElementName.RUNLIST,EnumProcessUsage.AnyOutput,null);
-            rlSheet.setDirectory("file://host/out/");
-            if(loop==0) // instantiate individually
-            {
-                PrintfFormat fmt=new PrintfFormat(format);
-                for(int i=0;i<128;i+=4)
-                {
-                    final String sheetName = fmt.tostr(1+i/4);
-                    JDFRunList rlp=(JDFRunList) rlSheet.addPartition(EnumPartIDKey.SheetName, sheetName);
-                    JDFRunList rlF=(JDFRunList)rlp.addPartition(EnumPartIDKey.Side, EnumSide.Front);
-                    rlF.appendLayoutElement().setMimeURL(sheetName+"Front.pdf");
-                    JDFRunList rlB=(JDFRunList)rlp.addPartition(EnumPartIDKey.Side, EnumSide.Back);
-                    rlB.appendLayoutElement().setMimeURL(sheetName+"Back.pdf");
-                }
-            }
-            if(loop==1) // instantiate individually
-            {
-                rlSheet.appendLayoutElement().setMimeURL("AllSheets.pdf");
-                PrintfFormat fmt=new PrintfFormat(format);
-                final JDFIntegerRangeList integerRangeList = new JDFIntegerRangeList();
-                for(int i=0;i<128;i+=4)
-                {
-                    final String sheetName = fmt.tostr(1+i/4);
-                    JDFRunList rlp=(JDFRunList) rlSheet.addPartition(EnumPartIDKey.SheetName, sheetName);
-                    JDFRunList rlF=(JDFRunList)rlp.addPartition(EnumPartIDKey.Side, EnumSide.Front);
-                    integerRangeList.clear();
-                    integerRangeList.append(i/2);
-                    rlF.setPages(integerRangeList);
-                    JDFRunList rlB=(JDFRunList)rlp.addPartition(EnumPartIDKey.Side, EnumSide.Back);
-                    integerRangeList.clear();
-                    integerRangeList.append(1+i/2);
-                    rlB.setPages(integerRangeList);
-                }           
-            }
-            else // instantiate by template
-            {
-                JDFFileSpec fs=rlSheet.appendLayoutElement().appendFileSpec();
-                fs.setMimeType("application/pdf");
-                fs.setFileFormat(format+"%s.pdf");
-                fs.setFileTemplate("SheetNum,Surface");
-            }
-
-            doc.write2File(sm_dirTestDataTemp+"AutomatedLayout_Plateset"+loop+".jdf", 2, false);
-            n.getResourceLinkPool().deleteNode();
-            n.getResourcePool().deleteNode();
-        }
-    }
-    /////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////
-    /**
-     * @throws DataFormatException
-     */
-    private void setUpAutomatedInputRunList() throws DataFormatException
-    {
-        JDFRunList run=rl.addRun("file://host/data/test.ppml", 0, -1);
-        assertEquals(run.getLayoutElement().getFileSpec().getMimeType(),JDFFileSpec.getMimeTypeFromURL(".ppml"));
-        run.setDocs(new JDFIntegerRangeList("0~99"));
-        rl.setResStatus(EnumResStatus.Available, true);
-    }
-    /////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////
     /////////////////////////////////////////////////////
 
 

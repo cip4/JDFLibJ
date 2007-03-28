@@ -185,12 +185,15 @@ public class StringUtil
         }
         return sprintf(format, vObj);
     }
+    
     /**
      * format a string using C++ sprintf functionality
      * 
      * @param format the format to print, see C++ spec for details
      * @param objects the array of objects, either String, Double, Integer or ValuedEnum, 
-     *  if objects is longer than the number of '%' tokens in format, the remainder of objects is ignored
+     * if objects is longer than the number of '%' tokens in format, the remainder of objects is ignored
+     * The method works fairly loosely typed, thus doubles are printed as integers, Strings are converted to numbers, if possible etc.
+     *  
      * @return String the formatted string
      * @throws IllegalArgumentException in case format and o do not match, i.e. not eough objects are passed to fill format 
      */
@@ -203,14 +206,15 @@ public class StringUtil
         VString tokens=tokenize(format, "%", false);
         final int nStart = (bStart ? 0 : 1);
         if(tokens.size()>objects.length + nStart)
-            throw new IllegalArgumentException("token size mismatch");
+            throw new IllegalArgumentException("not enough tokens to satisfy format");
         
         // tokenize does not return an empty token if we start with %
         String s=bStart ? "" : tokens.stringAt(0);
-        
-        for(int i=bStart ? 0 : 1;i<tokens.size();i++)
+        PrintfFormat f=new PrintfFormat("");
+
+        for(int i=nStart; i<tokens.size(); i++)
         {
-            PrintfFormat f=new PrintfFormat("%"+tokens.stringAt(i));
+            f.set("%"+tokens.stringAt(i));
             Object ob=objects[i-nStart];
             if(ob instanceof String)
                 s+=f.tostr((String)ob);
@@ -506,13 +510,13 @@ public class StringUtil
         return JDFConstants.EMPTYSTRING.equals(strWork) ? null : strWork;
     }
     /**
-     * replace a character in a given String
+     * replace a string in a given String
      * <p>
-     * default: replaceChar(strWork, c, s, 0)
+     * default: replaceChar(strWork, c, s)
      * 
      * @param strWork String to work on
-     * @param toReplace       character to replace
-     * @param replaceBy       String to insert for c
+     * @param toReplace       String to replace
+     * @param replaceBy       String to insert for toReplace
       * @return the String with replaced characters
      */
     public static String replaceString(String strWork, String toReplace, String replaceBy)

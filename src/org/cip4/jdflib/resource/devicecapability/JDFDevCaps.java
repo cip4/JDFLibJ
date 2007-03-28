@@ -792,7 +792,7 @@ public class JDFDevCaps extends JDFAutoDevCaps
              if (context.equals(EnumContext.Element)) 
             {
                 r = mrp.appendElement("MissingElement");
-                r.setAttribute("XPath", jdfRoot.buildXPath(null)+ "/" + getName());
+                r.setAttribute("XPath", jdfRoot.buildXPath(null,true)+ "/" + getName());
             }
             else 
             {

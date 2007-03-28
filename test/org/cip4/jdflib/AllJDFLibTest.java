@@ -120,6 +120,7 @@ import org.cip4.jdflib.devicecapability.JDFNumberStateTest;
 import org.cip4.jdflib.devicecapability.JDFStateBaseTest;
 import org.cip4.jdflib.devicecapability.JDFTestTest;
 import org.cip4.jdflib.examples.AmountTest;
+import org.cip4.jdflib.examples.AutomatedLayoutTest;
 import org.cip4.jdflib.examples.ContentCreationTest;
 import org.cip4.jdflib.examples.DigiPrintTest;
 import org.cip4.jdflib.examples.JDFExampleDocTest;
@@ -241,6 +242,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         
         //examples
         suite.addTestSuite(AmountTest.class);
+        suite.addTestSuite(AutomatedLayoutTest.class);
         suite.addTestSuite(ContentCreationTest.class);
         suite.addTestSuite(DigiPrintTest.class);
         suite.addTestSuite(JDFExampleDocTest.class);

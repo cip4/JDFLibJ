@@ -98,6 +98,7 @@ import org.cip4.jdflib.resource.JDFModulePhase;
 import org.cip4.jdflib.resource.JDFModuleStatus;
 import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCap;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCaps;
@@ -127,7 +128,7 @@ public class DigiPrintTest extends JDFTestCaseBase
     public void testModules() throws Exception
     {
         JDFAuditPool ap=n.getCreateAuditPool();
-        ap.appendXMLComment("JDF 1.3 compatible auditing of module phases - note that modulephase start and end times are set outside of the phasetime start and end times");
+        ap.appendXMLComment("JDF 1.3 compatible auditing of module phases - note that modulephase start and end times are set outside of the phasetime start and end times", null);
         JDFPhaseTime pt=ap.addPhaseTime(EnumNodeStatus.Setup, null, null);
         JDFPhaseTime pt2=ap.addPhaseTime(EnumNodeStatus.InProgress, null, null);        
         final JDFDate date = new JDFDate();
@@ -172,8 +173,8 @@ public class DigiPrintTest extends JDFTestCaseBase
             JDFAuditPool ap=n.getCreateAuditPool();
             ap.appendXMLComment("JDF 1.3 incompatible auditing of module phases the REQUIRED time attributes are not set in the ModulePhase elements\n"+
                     "- note that phases may now arbitrarily overlap\n"+
-            "The modulePhase elements now only specify which modules are involved, times are all defined by the phasetime proper");
-            ap.appendXMLComment("The following phaseTime is executed by one module - the RIP,which executes two process steps (Interpreting and Rendering)");
+            "The modulePhase elements now only specify which modules are involved, times are all defined by the phasetime proper", null);
+            ap.appendXMLComment("The following phaseTime is executed by one module - the RIP,which executes two process steps (Interpreting and Rendering)", null);
             JDFPhaseTime ptRIP=ap.addPhaseTime(EnumNodeStatus.Setup, null, null);
             final JDFDate date = new JDFDate();
             ptRIP.setStart(date);
@@ -201,6 +202,17 @@ public class DigiPrintTest extends JDFTestCaseBase
             mpRIP.setCombinedProcessIndex(new JDFIntegerList("0 1"));
             mpRIP.setModuleType("Imaging");
             mpRIP.setModuleID("ID_Imaging");
+            
+            JDFModuleStatus msPrint=di.appendModuleStatus();
+            msPrint.setCombinedProcessIndex(new JDFIntegerList("2"));
+            msPrint.setModuleType("Printer");
+            msPrint.setModuleID("ID_Printer");
+
+            JDFModuleStatus msStitch=di.appendModuleStatus();
+            msStitch.setCombinedProcessIndex(new JDFIntegerList("3"));
+            msStitch.setModuleType("Stitcher");
+            msStitch.setModuleID("ID_Stitcher");
+           
             jmfDoc.write2File(sm_dirTestDataTemp+"moduleStatus"+testType+"0.jmf", 2, false);
             date.addOffset(0,5,0,0);
             jmf.setTimeStamp(date);
@@ -212,21 +224,22 @@ public class DigiPrintTest extends JDFTestCaseBase
             jpPrint.setJobID(n.getJobID(true));
             jpPrint.setJobPartID(n.getJobPartID(true));
 
-            JDFModuleStatus msPrint=jpPrint.appendModuleStatus();
+            msPrint=jpPrint.appendModuleStatus();
             msPrint.setCombinedProcessIndex(new JDFIntegerList("2"));
             msPrint.setModuleType("Printer");
             msPrint.setModuleID("ID_Printer");
 
-            JDFModuleStatus msStitch=jpPrint.appendModuleStatus();
+            msStitch=jpPrint.appendModuleStatus();
             msStitch.setCombinedProcessIndex(new JDFIntegerList("3"));
             msStitch.setModuleType("Stitcher");
             msStitch.setModuleID("ID_Stitcher");
 
+            di.removeChildren(ElementName.MODULESTATUS, null, null);
             jmf.setDescriptiveName("Phase when the Printer and Finisher start up; RIP is still RIPping");
             jmfDoc.write2File(sm_dirTestDataTemp+"moduleStatus"+testType+"1.jmf", 2, false);
 
 
-            ap.appendXMLComment("The following phaseTime is executed by two modules - sticher and printer");
+            ap.appendXMLComment("The following phaseTime is executed by two modules - sticher and printer", null);
             JDFPhaseTime ptPrint=ap.addPhaseTime(EnumNodeStatus.InProgress, null, null);        
             JDFModulePhase mpPrint=ptPrint.appendModulePhase();
             mpPrint.setCombinedProcessIndex(new JDFIntegerList("2"));
@@ -256,7 +269,7 @@ public class DigiPrintTest extends JDFTestCaseBase
             else
             {
                 jpRIP.setAttribute("EndTime", date.getDateTimeISO());
-                jpRIP.setDescriptiveName("Added ne EndTime to explicitly close phase");
+                jpRIP.setDescriptiveName("Added EndTime to explicitly close phase");
             }
             jmf.setTimeStamp(date);
             jmf.setDescriptiveName("Phase when the RIP has completed, Printer and Finisher are still RIPping");
@@ -272,7 +285,9 @@ public class DigiPrintTest extends JDFTestCaseBase
                 signal=jmf.appendSignal(JDFMessage.EnumType.Status);
                 di=(JDFDeviceInfo) signal.copyElement(di2, null);
                 di.removeChild(ElementName.JOBPHASE, null, 0);
+                di.removeChild(ElementName.MODULESTATUS, null, 0);
                 di.setDeviceStatus(EnumDeviceStatus.Idle);
+                signal.appendXMLComment("Or should the complete list of modules also be specified here?", di);
             }
             else
             {
@@ -305,15 +320,7 @@ public class DigiPrintTest extends JDFTestCaseBase
         duc.write2File(sm_dirTestDataTemp+"DevCapUsageCounter.jdf", 2, false);
     }
     
-    /**
-     * test amount handling
-     * @return
-     */
-    public void testAutomatedStripping() throws Exception
-    {
-        n.setType(EnumType.Stripping);
-    }
-    /**
+     /**
      * test amount handling
      * @return
      */

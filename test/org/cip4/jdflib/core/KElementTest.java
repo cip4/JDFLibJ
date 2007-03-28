@@ -734,13 +734,40 @@ public class KElementTest extends JDFTestCaseBase
         assertTrue(f.length()>1.1*f2.length());
     }
 
+    public void testRemoveXPathElement()
+    {
+        XMLDoc d=new XMLDoc("doc",null);
+        KElement root=d.getRoot();
+        root.setXPathAttribute("a/b[2]/@att", "foo");
+        assertEquals(root.getXPathAttribute("a/b[2]/@att", null), "foo");
+        assertEquals(root.getXPathAttribute("a/b[@att=\"foo\"]/@att", null), "foo");
+        assertTrue(root.hasXPathNode("a/b[@att=\"foo\"]/@att"));
+        assertTrue(root.hasXPathNode("a/b[@att=\"foo\"]"));
+        root.removeXPathAttribute("a/b[2]/@att");
+        assertFalse(root.hasXPathNode("a/b[@att=\"foo\"]/@att"));
+        assertFalse(root.hasXPathNode("a/b[@att=\"foo\"]"));
+        assertTrue(root.hasXPathNode("a/b[2]"));
+        root.setXPathAttribute("a/b[2]/@att", "foo");
+        root.removeXPathAttribute("a/b[@att=\"foo\"]/@att");
+        assertFalse(root.hasXPathNode("a/b[@att=\"foo\"]/@att"));
+        assertFalse(root.hasXPathNode("a/b[@att=\"foo\"]"));
+        assertTrue(root.hasXPathNode("a/b[2]"));
+    }
     ///////////////////////////////////////////////////////////////////
 
     public void testGetXPathElement()
     {
+        
+        
+        
         JDFDoc  jdfDoc = new JDFDoc(ElementName.JDF);
         JDFNode root   = (JDFNode) jdfDoc.getRoot();
 
+        root.setXPathAttribute("/JDF/a[2]/@foo", "v2");
+        root.setXPathAttribute("/JDF/a[3]/@foo", "v3");
+        assertEquals(root.getXPathElement("/JDF/a[2]"), root.getXPathElement("/JDF/a[@foo=\"v2\"]"));
+        assertEquals(root.getXPathElement("/JDF/a[3]"), root.getXPathElement("/JDF/a[@foo=\"v3\"]"));
+        
         String nodeName = "Created";
         KElement kElem = root.getXPathElement("AuditPool/"+nodeName);
         assertEquals(kElem.getNodeName(),nodeName);
@@ -758,7 +785,14 @@ public class KElementTest extends JDFTestCaseBase
         {
             KElement e=root2.appendElement("e");
             assertEquals(root2.getXPathElement("e["+(i+1)+"]"), e);
+            assertEquals(root2, e.getXPathElement("../"));
+            assertEquals(root2, e.getXPathElement(".."));
+            assertEquals(root2, e.getXPathElement(".././."));
         }
+        KElement e=root2.getCreateElement("foo.bar");
+        assertEquals(e.getNodeName(), "foo.bar");
+        assertEquals(root2.getXPathElement("foo.bar"), e);
+        assertEquals(root2.getCreateXPathElement("foo.bar"), e);
 
     }
     ///////////////////////////////////////////////////////////////////
@@ -803,6 +837,7 @@ public class KElementTest extends JDFTestCaseBase
         assertEquals("",root.getElement("foo").numChildElements("bar",null),2);
         assertEquals("",root.getElement("foo").getElement("bar").numChildElements("fnarf",null),0);
         assertEquals("",root.getElement("foo").getElement("bar").getNextSiblingElement("bar",null).numChildElements("fnarf",null),3);
+        assertEquals("",root.getCreateXPathElement("."),root);
     }
 
     public void testBuildXPath()
@@ -829,11 +864,16 @@ public class KElementTest extends JDFTestCaseBase
         String nodeName  = "Created";
         String attribute = "Author";
         String attValue  = root.getXPathAttribute("AuditPool/"+nodeName+"@"+attribute, "dummydefault");
-        assertTrue( attValue.equals(JDFAudit.software()));
+        assertEquals( attValue,JDFAudit.software());
 
         attribute = "notExistingAttribute";
         attValue  = root.getXPathAttribute("AuditPool/"+nodeName+"@"+attribute, "dummydefault");
-        assertTrue("", attValue.equals("dummydefault"));        
+        assertEquals( attValue,"dummydefault");        
+        assertNull(root.getXPathAttribute("AuditPool/"+nodeName+"@"+attribute, null));     
+        root.setXPathAttribute("foo/bar[2]/@a","b2");
+        root.setXPathAttribute("foo/bar[2]/sub/@c","d2");
+        assertEquals(root.getXPathAttribute("foo/bar[@a=\"b2\"]/sub/@c", null), "d2");
+        
     }
 
     public void testGetDOMAttr()
@@ -1549,7 +1589,7 @@ public class KElementTest extends JDFTestCaseBase
         for(int i=0;i<v.size();i++)
         {
             String s = v.stringAt(i);
-            e.appendXMLComment(s);
+            e.appendXMLComment(s, null);
             d.write2File(sm_dirTestDataTemp+"xmlComment.jdf", 2, false);
             XMLDoc d2=new JDFParser().parseFile(sm_dirTestDataTemp+"xmlComment.jdf");
             KElement e2=d2.getRoot();

@@ -46,7 +46,7 @@ public class VarnishTest extends JDFTestCaseBase
         JDFConventionalPrintingParams cpp=(JDFConventionalPrintingParams)n.addResource(ElementName.CONVENTIONALPRINTINGPARAMS, null, EnumUsage.Input, null, null, null, null);
         cpp.setModuleAvailableIndex(new JDFIntegerRangeList("1 ~ 6"));
         cpp.setModuleIndex(new JDFIntegerRangeList("1 ~ 4 6"));
-        cpp.appendXMLComment("Module 0 and 7 are varnishing modules, 1-4 are process colors and 6 is the ink module used to varnish");
+        cpp.appendXMLComment("Module 0 and 7 are varnishing modules, 1-4 are process colors and 6 is the ink module used to varnish", null);
         JDFComponent comp=(JDFComponent)n.appendMatchingResource("Component",JDFNode.EnumProcessUsage.AnyOutput,null);
         JDFExposedMedia xm=(JDFExposedMedia)n.appendMatchingResource("ExposedMedia",JDFNode.EnumProcessUsage.Plate,null);
         JDFNodeInfo ni=n.appendNodeInfo();
@@ -61,7 +61,7 @@ public class VarnishTest extends JDFTestCaseBase
         
         JDFResourceLink rl=n.getLink(xmVarnish, null);
         JDFColorantControl cc=(JDFColorantControl)n.appendMatchingResource(ElementName.COLORANTCONTROL,JDFNode.EnumProcessUsage.AnyInput,null);
-        cc.getCreateDeviceColorantOrder().appendXMLComment("Should the VarnishingParams seps be excluded, as is shown here?");
+        cc.getCreateDeviceColorantOrder().appendXMLComment("Should the VarnishingParams seps be excluded, as is shown here?", null);
         cc.getCreateDeviceColorantOrder().setSeparations(vSeparations);
         
         rl.setCombinedProcessIndex(new JDFIntegerList("1"));
@@ -77,7 +77,7 @@ public class VarnishTest extends JDFTestCaseBase
             }
             if(sep.equals("Varnish2"))
             {
-                vp.appendXMLComment("full varnishing in a varnishing module with or wihtout a sleeve. Full varnishing means to cover the complete media surface.");
+                vp.appendXMLComment("full varnishing in a varnishing module with or wihtout a sleeve. Full varnishing means to cover the complete media surface.", null);
                 xmVarnish.addPartition(EnumPartIDKey.Separation, sep);
                 JDFResource varnishPart=vp.addPartition(EnumPartIDKey.Separation, sep);
                 varnishPart.setAttribute("ModuleIndex", "7");
@@ -86,7 +86,7 @@ public class VarnishTest extends JDFTestCaseBase
             }
             else if(sep.equals("Varnish"))
             {
-                vp.appendXMLComment("varnishing in a printing module only  with a mandatory plate. The plate may be exposed or not, for example,  for full varnihing. ");
+                vp.appendXMLComment("varnishing in a printing module only  with a mandatory plate. The plate may be exposed or not, for example,  for full varnihing. ", null);
                 //xmVarnish.addPartition(EnumPartIDKey.Separation, sep);
                 JDFResource varnishPart=vp.addPartition(EnumPartIDKey.Separation, sep);
                 varnishPart.setAttribute("ModuleIndex", "6");
@@ -95,7 +95,7 @@ public class VarnishTest extends JDFTestCaseBase
             }
             else if(sep.equals("PreVarnish"))
             {
-                vp.appendXMLComment("varnishing in a varnishing module only with a mandatory prepared sleeve ");
+                vp.appendXMLComment("varnishing in a varnishing module only with a mandatory prepared sleeve ", null);
                 xmVarnish.addPartition(EnumPartIDKey.Separation, sep);
                 JDFResource varnishPart=vp.addPartition(EnumPartIDKey.Separation, sep);
                 varnishPart.setAttribute("ModuleIndex", "0");

@@ -263,7 +263,7 @@ public class JDFAuditPool extends JDFPool
                
         if (createdElem != null)
         {
-            final String xpath=createdElem.buildXPath(getParentJDF().buildXPath(null));
+            final String xpath=createdElem.buildXPath(getParentJDF().buildXPath(null,true),true);
             created.setXPath(xpath);
         }
         
@@ -282,7 +282,7 @@ public class JDFAuditPool extends JDFPool
         final JDFModified modified = (JDFModified) addAudit(JDFAudit.EnumAuditType.Modified, by);
         if (modifiedElem != null)
         {
-            final String xpath=modifiedElem.buildXPath(getParentJDF().buildXPath(null));
+            final String xpath=modifiedElem.buildXPath(getParentJDF().buildXPath(null,true),true);
             modified.setXPath(xpath);
         }
 
@@ -300,7 +300,7 @@ public class JDFAuditPool extends JDFPool
         final JDFDeleted deleted = (JDFDeleted) addAudit(JDFAudit.EnumAuditType.Deleted, by);
         if (deletedElem != null)
         {
-            final String xpath=deletedElem.buildXPath(getParentJDF().buildXPath(null));
+            final String xpath=deletedElem.buildXPath(getParentJDF().buildXPath(null,true),true);
             deleted.setXPath(xpath);
         }
 

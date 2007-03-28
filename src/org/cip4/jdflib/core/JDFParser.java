@@ -131,6 +131,17 @@ public class JDFParser extends DOMParser
             strDocType=null;
     }
 
+    /**
+     * @param parser
+     */
+    public JDFParser(JDFParser parser)
+    {
+        this();
+        bKElementOnly=parser.bKElementOnly;
+        m_eraseEmpty=parser.m_eraseEmpty;
+        initParser(m_SchemaLocation, m_DocumentClass, (XMLErrorHandler) parser.getErrorHandler());
+    }
+
     public Element createElementNode(QName element)
     {
         if (fCurrentNode.getLocalName() != null)
@@ -394,21 +405,17 @@ public class JDFParser extends DOMParser
                 doc.getRoot().eraseEmptyNodes(true); // cleanup the XML
             }
         }
-        catch (SAXException e)
+        catch (Exception e)
         {
             lastExcept = e;
             doc = null;
         }
-        catch (IOException e)
+        catch (StackOverflowError e)
         {
-            lastExcept = e;
+            lastExcept = null;
             doc = null;
-        }
-        catch (JDFException e)
-        {
-            lastExcept = e;
-            doc = null;
-        }
+        } 
+        
 
         if (doc != null && m_ErrorHandler != null)
         {

@@ -278,9 +278,7 @@ public class JDFResourceTest extends JDFTestCaseBase
         // isResourceStatic((JDFElement) parentNode)
         // Rekursion : !(parentName != null && !parentName.equals(JDFConstants.EMPTYSTRING)
         resRoot = resource.getResourceRoot();
-        assertTrue(resRoot == null);
-
-
+        assertNull(resRoot);
 
         // set up a test document
         jdfDoc = new JDFDoc(ElementName.RESOURCEPOOL);
@@ -291,8 +289,6 @@ public class JDFResourceTest extends JDFTestCaseBase
         // StringUtil.hasToken(validParentNodeNames(), parentName, JDFConstants.COMMA)
         resRoot = resource.getResourceRoot();
         assertTrue(resRoot == resource);
-
-
 
         // set up a test document
         JDFDoc jdfDoc2 = new JDFDoc(ElementName.JDF);
@@ -324,6 +320,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 
         JDFColorantControl cc=(JDFColorantControl) rootNode.addResource("ColorantControl", null, EnumUsage.Input, null, null, null, null);
         JDFSeparationSpec ss=cc.appendColorantParams().appendSeparationSpec();
+        assertFalse(ss.hasAttribute(AttributeName.CLASS));
     }
 
 

@@ -13,6 +13,8 @@
  */
 package org.cip4.jdflib.cformat;
 
+import org.cip4.jdflib.util.StringUtil;
+
 /**
  * Object for formatting output in the same way as the
  * C <tt>printf</tt> methodName.
@@ -717,6 +719,11 @@ public class PrintfFormat
     {
         if (type != 's')
         {
+            if(StringUtil.isInteger(x))
+                return tostr(StringUtil.parseInt(x, 0));
+            if(StringUtil.isNumber(x))
+                return tostr(StringUtil.parseDouble(x, 0));
+            // no more choices, gotta go..
             throw new java.lang.IllegalArgumentException();
         }
 

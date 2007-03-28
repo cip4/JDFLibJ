@@ -95,9 +95,11 @@ import org.cip4.jdflib.auto.JDFAutoResourceAudit;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -327,7 +329,26 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
             bIgnorePrivate=false; // dummy to fool compiler
         return getUnknownPoolElements(EnumPoolType.ResourceLinkPool,nMax);
     }
+    /**
+     * get list of missing elements
+     * @param nMax maximum size of the returned vector
+     */
+    public VString getMissingElements(int nMax)
+    {
+        VString vs = getTheElementInfo().requiredElements();
+        vs = getMissingElementVector(vs, nMax);
+        Vector v2=getChildElementVector_KElement(null,null,null,true,0);
+        int n=0;
+        for(int i=0;i<v2.size();i++)
+        {
+            if(v2.elementAt(i) instanceof JDFResourceLink)
+                n++;
+        }
+        if(n==0)
+            vs.add("ResourceLink");
 
+        return vs;
+    }
     // the following are prerelease errata in JDF 1.3
     
     /**

@@ -86,6 +86,7 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
@@ -103,6 +104,8 @@ import org.cip4.jdflib.node.JDFNode.EnumCleanUpMerge;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAuditPool;
+import org.cip4.jdflib.pool.JDFResourceLinkPool;
+import org.cip4.jdflib.resource.JDFBufferParams;
 import org.cip4.jdflib.resource.JDFMerged;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResourceAudit;
@@ -410,6 +413,9 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
             final JDFSpawn spawn=new JDFSpawn(n); // fudge to test output counting
             JDFNode spawnedNode=spawn.spawn("thisUrl","newURL",v,vMap,false,true,true,true);
+            String spawnID=spawnedNode.getSpawnID(false);
+            assertNotSame(spawnID,"");
+  
             assertTrue("no spawnStatus",spawnedNode.toString().indexOf(AttributeName.SPAWNSTATUS)<0);
             JDFResourceLink rl = spawnedNode.getMatchingLink(ElementName.EXPOSEDMEDIA,EnumProcessUsage.AnyOutput,0);
             JDFResourceAudit ra=spawnedNode.cloneResourceToModify(rl);
@@ -1047,6 +1053,37 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
         String strSpawnID = spawn(fileNameIn, fileNameOut, spawnNodeID, vRWResources, vSpawnParts);
         unSpawn(fileNameIn, strSpawnID);
+    }
+
+
+    ///////////////////////////////////////////////////////////////////////////
+
+    public void testPartitionedSpawnNI()
+    {
+        for(int i=0;i<2;i++)
+        {
+            JDFDoc d=new JDFDoc("JDF");
+            JDFNode nRoot=d.getJDFRoot();
+            nRoot.setType(EnumType.ProcessGroup);
+            JDFNode n2=nRoot.addJDFNode(EnumType.Buffer);
+            JDFAttributeMap map=new JDFAttributeMap(EnumPartIDKey.SheetName, "s1");
+            JDFNodeInfo ni=(JDFNodeInfo) n2.addResource(ElementName.NODEINFO, null, EnumUsage.Input, null, null, null, null);
+            JDFBufferParams bp=(JDFBufferParams) n2.addResource(ElementName.BUFFERPARAMS, null, EnumUsage.Input, null, nRoot, null, null);
+            bp.addPartition(EnumPartIDKey.SheetName, "s1");
+            JDFComponent comp=(JDFComponent)n2.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, nRoot, null, null);
+            comp.addPartition(EnumPartIDKey.SheetName, "s1");
+            JDFSpawn spawn=new JDFSpawn(n2);
+            spawn.vRWResources_in=new VString("Output NodeInfo"," ");
+            spawn.vSpawnParts=new VJDFAttributeMap();
+            spawn.vSpawnParts.add(map);
+            if(i==0)
+                spawn.bFixResources=false;
+            JDFNode spawnedNode=spawn.spawn();
+            assertTrue(ni.toString().indexOf(AttributeName.SPAWNIDS)>0);
+            JDFNodeInfo ni2=spawnedNode.getNodeInfo();
+            assertTrue(ni2.toString().indexOf(AttributeName.SPAWNIDS)>0);
+        }
+
     }
 
 

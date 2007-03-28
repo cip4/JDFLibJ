@@ -140,21 +140,19 @@ public class StringUtilTest extends JDFTestCaseBase
         try
         {
             StringUtil.sprintf("abc%7idef",o);
-            fail("???");
+            fail("foobar is an int?");
         }
         catch (Exception x)
         {
             //
         }
         
-        o=new Object[2];
-        o[0]=new Integer(5);
-        o[1]="foobar";
+        o=new Object[]{new Integer(5),"foobar"};
         assertEquals(StringUtil.sprintf("abc %02i%7sdef",o), "abc 05 foobardef");
         assertEquals(StringUtil.sprintf("%02i%7sdef",o), "05 foobardef");
-               
-
-        
+        o=new Object[]{"5","foobar"};
+        assertEquals(StringUtil.sprintf("abc %02i%7sdef",o), "abc 05 foobardef");
+        assertEquals(StringUtil.sprintf("%02i%7sdef",o), "05 foobardef");
    }
     
     public void testSetHexBinaryBytes()
@@ -166,6 +164,7 @@ public class StringUtilTest extends JDFTestCaseBase
         String strResultString  = new String(tempBuffer); 
         assertEquals("Input and Outputstring are not equal", strTestString,strResultString);
     }
+    
     public void testSetUTF8Bytes()
     {
         //String strTestString = "€";

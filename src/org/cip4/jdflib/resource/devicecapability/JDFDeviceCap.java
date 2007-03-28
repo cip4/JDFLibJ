@@ -800,7 +800,7 @@ public static JDFMessageService getMessageServiceForJMFType(JDFMessage m, JDFRes
             (devCaps  == null)) 
         {
             KElement ue = root.appendElement("UnknownElement");
-            ue.setAttribute("XPath", jdfRoot.getElement(elementName, null, 0).buildXPath(null));
+            ue.setAttribute("XPath", jdfRoot.getElement(elementName, null, 0).buildXPath(null,true));
             ue.setAttribute("Name", elementName);
             ue.setAttribute("Message", "Found no DevCaps description with Context=\"Element\" for: "+elementName);
         }
@@ -865,7 +865,7 @@ public static JDFMessageService getMessageServiceForJMFType(JDFMessage m, JDFRes
                         }
                         
                         arl.moveElement(ar,null);
-                        ar.setAttribute("XPath",e.buildXPath(null));
+                        ar.setAttribute("XPath",e.buildXPath(null,true));
                         
                         // __Lena__ TBD choose Loc element according to the language settings
                         final JDFLoc loc = action.getLoc(0);

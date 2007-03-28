@@ -1014,7 +1014,8 @@ public class JDFResource extends JDFElement
                     }
                     else 
                     {
-                        while (!(parentNode instanceof JDFResource) 
+                        while (parentNode!=null 
+                                && !(parentNode instanceof JDFResource) 
                                 && !(parentNode instanceof JDFNode)
                                 && !(parentNode instanceof JDFJMF))
                         {
@@ -1205,7 +1206,7 @@ public class JDFResource extends JDFElement
                 }
             }
         }
-        
+        vv.unify();
         return vv.size()>0 ? vv : null;
     }
     
@@ -2705,7 +2706,7 @@ public class JDFResource extends JDFElement
     {
         if(isResourceElement())
         {
-            throw new JDFException("Attempting to add partition to resource element: " + buildXPath(null));
+            throw new JDFException("Attempting to add partition to resource element: " + buildXPath(null,true));
         }
         
         final VElement v = new VElement();
@@ -2751,11 +2752,11 @@ public class JDFResource extends JDFElement
     {
         if(isResourceElement())
         {
-            throw new JDFException("Attempting to add partition to resource element: " + buildXPath(null));
+            throw new JDFException("Attempting to add partition to resource element: " + buildXPath(null,true));
         }
         if(partType==null)
         {
-            throw new JDFException("Attempting to add null partition to resource: " + buildXPath(null));            
+            throw new JDFException("Attempting to add null partition to resource: " + buildXPath(null,true));            
         }
         
         

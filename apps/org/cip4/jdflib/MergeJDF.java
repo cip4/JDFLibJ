@@ -89,7 +89,7 @@ public class MergeJDF
             root  = (JDFNode) gd.getRoot();
         }
 
-        if (!unspawn.equals(""))
+        if (unspawn!=null)
         {
             new JDFSpawn(root).unSpawn(unspawn);
         }

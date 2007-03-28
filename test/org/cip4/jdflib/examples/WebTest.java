@@ -53,25 +53,24 @@ public class WebTest extends JDFTestCaseBase
             doc = new JDFDoc("JDF");
             JDFNode n=doc.getJDFRoot();
             final JDFResourcePool rp = n.getCreateResourcePool();
-            rp.appendXMLComment(
-                    "We actually have a problem if we separate LayoutShift and Layout.\n"+
+            rp.appendXMLComment("We actually have a problem if we separate LayoutShift and Layout.\n"+
                     "Ord is not a unique Reference, because you MAY have multiple placed objects at completely different locations on the spread, e.g. in a multi-up binderysignature environment.\n"+
-            "Therefore I suggest referencing PlacedObject/@OrdID instead.");
+            "Therefore I suggest referencing PlacedObject/@OrdID instead.", null);
             JDFResource lo=n.addResource("Layout", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
             JDFLayout losh=(JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Sheet1");
             JDFLayout lofr=(JDFLayout) losh.addPartition(EnumPartIDKey.Side, EnumSide.Front.getName());
 
-            rp.appendXMLComment("LayoutShift MAY but NEED Not be partitioned, although at least Side will make sense\n");
+            rp.appendXMLComment("LayoutShift MAY but NEED Not be partitioned, although at least Side will make sense\n", null);
 
             JDFResource los=n.addResource("LayoutShift", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
             if(k==1)
                 los=los.addPartition(EnumPartIDKey.SheetName, "Sheet1");
 
             if(k==1)
-                los.appendXMLComment("Note that the shiftObject MAY reference multiple OrdIDs for brevity");
+                los.appendXMLComment("Note that the shiftObject MAY reference multiple OrdIDs for brevity", null);
             else
                 los.appendXMLComment("Note that the interpolation algorithm between positions is implementation dependent\n"
-                        +"Another option would be to specify boxes of validity, but that allows inconsistent overlap");
+                +"Another option would be to specify boxes of validity, but that allows inconsistent overlap", null);
 
             los=los.addPartition(EnumPartIDKey.Side, "Front");
 

@@ -59,14 +59,14 @@ public class AmountTest extends JDFTestCaseBase
 
         JDFComponent cover=(JDFComponent) out.addPartition(EnumPartIDKey.SheetName, "Cover");
         JDFAttributeMap map=cover.getPartMap();
-        ap.appendXMLComment("Want 10000-10500 good cover sheets and allow for 500 waste cover sheets");
+        ap.appendXMLComment("Want 10000-10500 good cover sheets and allow for 500 waste cover sheets", null);
         map.put(EnumPartIDKey.Condition, "Good");
         rl.setAmount(10000, map);
         rl.setMaxAmount(10500, map);
         map.put(EnumPartIDKey.Condition, "Waste");
         rl.setMaxAmount(500, map);
 
-        ap.appendXMLComment("Want 20000 good first insert sheets and allow for 200 waste insert sheets");
+        ap.appendXMLComment("Want 20000 good first insert sheets and allow for 200 waste insert sheets", null);
         JDFComponent sheet1=(JDFComponent) out.addPartition(EnumPartIDKey.SheetName, "Sheet1");
         map=sheet1.getPartMap();
         map.put(EnumPartIDKey.Condition, "Good");
@@ -74,7 +74,7 @@ public class AmountTest extends JDFTestCaseBase
         map.put(EnumPartIDKey.Condition, "Waste");
         rl.setMaxAmount(200, map);
 
-        ap.appendXMLComment("Want 20000 good second insert sheets and allow for 200 waste insert sheets");
+        ap.appendXMLComment("Want 20000 good second insert sheets and allow for 200 waste insert sheets", null);
         JDFComponent sheet2=(JDFComponent) out.addPartition(EnumPartIDKey.SheetName, "Sheet2");
         map=sheet2.getPartMap();
         map.put(EnumPartIDKey.Condition, "Good");
@@ -96,18 +96,18 @@ public class AmountTest extends JDFTestCaseBase
 
         JDFComponent cover=(JDFComponent) out.addPartition(EnumPartIDKey.SheetName, "Cover");
         JDFAttributeMap map=cover.getPartMap();
-        ap.appendXMLComment("Want 10000-10400 good cover sheets and allow for 500 waste cover sheets");
+        ap.appendXMLComment("Want 10000-10400 good cover sheets and allow for 500 waste cover sheets", null);
         map.put(EnumPartIDKey.Condition, "Good");
         rl.setAmount(10000, map);
         rl.setMaxAmount(10400, map);
         apIn.appendXMLComment("Amount[Good]: planned consumption for good production\n"+
                 "MaxAmount[Good]: planned maximum consumption for good production\n"+
-        "MaxAmount[Waste]: planned Media for waste");
+        "MaxAmount[Waste]: planned Media for waste", null);
         rlIn.setAmount(10500, map);
         map.put(EnumPartIDKey.Condition, "Waste");
         rlIn.setMaxAmount(500, map);
 
-        ap.appendXMLComment("Want 20000 good first insert sheets and allow for 200 waste insert sheets");
+        ap.appendXMLComment("Want 20000 good first insert sheets and allow for 200 waste insert sheets", null);
         JDFComponent sheet1=(JDFComponent) out.addPartition(EnumPartIDKey.SheetName, "Sheet1");
         map=sheet1.getPartMap();
         map.put(EnumPartIDKey.Condition, "Good");
@@ -117,7 +117,7 @@ public class AmountTest extends JDFTestCaseBase
         map.put(EnumPartIDKey.Condition, "Waste");
         rlIn.setMaxAmount(200, map);
 
-        ap.appendXMLComment("Want 20000 good second insert sheets and allow for 100 waste insert sheets");
+        ap.appendXMLComment("Want 20000 good second insert sheets and allow for 100 waste insert sheets", null);
         JDFComponent sheet2=(JDFComponent) out.addPartition(EnumPartIDKey.SheetName, "Sheet2");
         map=sheet2.getPartMap();
         map.put(EnumPartIDKey.Condition, "Good");
@@ -153,7 +153,7 @@ public class AmountTest extends JDFTestCaseBase
         d=new JDFDoc("JDF");
 
         n = d.getJDFRoot();
-        n.appendXMLComment("Example to illustrate JDF 1.3 Base and MIS compatible amount handling");
+        n.appendXMLComment("Example to illustrate JDF 1.3 Base and MIS compatible amount handling", null);
         n.setType(EnumType.ConventionalPrinting);
         out = (JDFComponent) n.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, null, null, null);
         in = (JDFMedia) n.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, null, null, null);

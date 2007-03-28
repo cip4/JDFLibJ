@@ -1097,7 +1097,7 @@ public class CheckJDF
     private boolean checkType(final JDFNode jdfNode, int indent, KElement testElement, boolean isValid)
     {
         String errMessage = indent(indent)+ "!!! InValid Element: "+ 
-                             jdfNode.buildXPath(null)+ " " + jdfNode.getID() + " !!! ";
+                             jdfNode.buildXPath(null,true)+ " " + jdfNode.getID() + " !!! ";
          if(jdfNode.hasAttribute(AttributeName.TYPE))
          {
              final String typeString = jdfNode.getType();

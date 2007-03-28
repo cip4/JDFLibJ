@@ -1735,7 +1735,7 @@ public class KElement extends ElementNSImpl
      *
      * @return boolean true if present
      * 
-     * @default includesAttribute(attName, JDFConstants.WILDCARD)
+     * @default includesAttribute(attName, null)
      */
     public boolean includesAttribute(String attName, String attValue)
     {
@@ -3838,12 +3838,39 @@ public class KElement extends ElementNSImpl
      * The double minus sign '--' is escaped with an underscore '_' in order to ensure valid xml
      * 
      * @param commentText  the comment to append
+     * @deprecated use appendXMLComment(commentText, null);
      */
     public void appendXMLComment(String commentText)
     {
+        appendXMLComment(commentText, null);
+    }
+    
+    /**
+     * append a DOM comment <code>&lt;!-- XMLComment --&gt;</code> 
+     * The double minus sign '--' is escaped with an underscore '_' in order to ensure valid xml
+     * 
+     * @param commentText  the comment to append
+     * @param beforeChild the child of this that the Comment should be appended before. if null, append the Comment
+     */
+    public void appendXMLComment(String commentText, KElement beforeChild)
+    {
         commentText=StringUtil.replaceString(commentText, "--", "__");
         final Comment newChild = getOwnerDocument().createComment(commentText);
-        appendChild(newChild);
+        insertBefore(newChild,beforeChild);
+    }
+    /**
+     * append a DOM comment <code>&lt;!-- XMLComment --&gt;</code> in front of <code>this</code>
+     * The double minus sign '--' is escaped with an underscore '_' in order to ensure valid xml
+     * 
+     * @param commentText  the comment to append
+     */
+    public void setXMLComment(String commentText)
+    {
+        KElement e=getParentNode_KElement();
+        if(e==null)
+            appendXMLComment(commentText, getFirstChildElement());
+        else
+            e.appendXMLComment(commentText, this);
     }
     
     /** 
@@ -4397,22 +4424,38 @@ public class KElement extends ElementNSImpl
      *                   <code>/root/parent/element</code><br>
      *                   <code>null</code> if parent of this is null 
      *                   (e.g. called on rootnode)
-     *                   @deprecated use buildXPath(null);
+     *                   @deprecated use buildXPath(null,true);
      */
     public String buildXPath()
     {
-        return buildXPath(null);
+        return buildXPath(null,true);
     }
     /**
      * Gets the XPath full tree representation of 'this'
-     *@param relativeTo  relative path to which to create an xpath
+     * @param relativeTo  relative path to which to create an xpath
      * @return String    the XPath representation of 'this' e.g. 
      *                   <code>/root/parent/element</code><br>
      *                   <code>null</code> if parent of this is null 
      *                   (e.g. called on rootnode)
+     *                   @deprecated use buildXPath(relativeTo,true);
      */
     public String buildXPath(String relativeTo)
     {
+        return buildXPath(relativeTo,true);
+    }
+    
+        /**
+         * Gets the XPath full tree representation of 'this'
+         * @param relativeTo  relative path to which to create an xpath
+         * @param boolean bCountSiblings, if true count siblings, i.e. add '[n]'
+         *                                if false, only specify the path of parents
+         * @return String    the XPath representation of 'this' e.g. 
+         *                   <code>/root/parent/element</code><br>
+         *                   <code>null</code> if parent of this is null 
+         *                   (e.g. called on rootnode)
+         */
+        public String buildXPath(String relativeTo, boolean bCountSiblings)
+        {
         String path = null; // tbd handle namespaces
        
         KElement parent = this;
@@ -4423,24 +4466,27 @@ public class KElement extends ElementNSImpl
             StringBuffer pathBuf = new StringBuffer(1024); // we probably wont need more than 13 digits for the number of sibling nodes -> this is really safe!
             StringBuffer buf     = new StringBuffer(16);
             
-            KElement e = (p != null) ? p.getElement(lastNodeName, null, 0) : null;
-            int i = 1;
-            while (e != null)
+            if(bCountSiblings)
             {
-                if (e.equals(parent))
+                KElement e = (p != null) ? p.getElement(lastNodeName, null, 0) : null;
+                int i = 1;
+                while (e != null)
                 {
-                    buf.append('[');
-                    buf.append(Integer.toString(i));
-                    buf.append(']');
-                    break;
+                    if (e.equals(parent))
+                    {
+                        buf.append('[');
+                        buf.append(Integer.toString(i));
+                        buf.append(']');
+                        break;
+                    }
+
+                    do
+                    {
+                        e = e.getNextSiblingElement();
+                    } while (e != null && !e.fitsName_KElement(lastNodeName, null));
+
+                    i++;
                 }
-                
-                do
-                {
-                    e = e.getNextSiblingElement();
-                } while (e != null && !e.fitsName_KElement(lastNodeName, null));
-                
-                i++;
             }
             
             pathBuf.append('/');
@@ -4515,15 +4561,17 @@ public class KElement extends ElementNSImpl
      * @tbd enhance the subsets of allowed XPaths, 
      * now only .,..,/,@ are supported
      * 
-     * @param path   XPath abbreviated syntax representation of the attribute, 
-     *               e.g <code>parentElement/thisElement@thisAtt</code>
-     * @param value  string to be appended
+     * @param path   XPath abbreviated syntax representation of the attribute, e.g.:
+     *               <code>parentElement/thisElement@thisAtt</code>
+     *               <code>parentElement/thisElement[2]/@thisAtt</code>
+     *               <code>parentElement/thisElement[@foo=\"bar\"]/@thisAtt</code>
+     * @param value  string to be set as attribute value
      *
      * @throws       JDFException if the defined path is a bad attribute path
      */
     public void setXPathAttribute(String path, String value)
     {
-        final int pos = path.indexOf(JDFConstants.AET);
+        final int pos = path.lastIndexOf(JDFConstants.AET);
         if (pos == -1)
         {
             throw new JDFException("SetXPathAttribute - bad attribute path: " + path);
@@ -4531,7 +4579,9 @@ public class KElement extends ElementNSImpl
         
         final String att = path.substring(pos + 1);
         final String strAttrPath = path.substring(0, pos);
-        final KElement kEle = getCreateXPathElement(strAttrPath);
+        KElement kEle = getXPathElement(strAttrPath);
+        if(kEle==null)
+            kEle = getCreateXPathElement(strAttrPath);
         kEle.setAttribute(att, value, null);
     }
     
@@ -4543,7 +4593,8 @@ public class KElement extends ElementNSImpl
      */
     public boolean hasXPathNode(String path)
     {
-        final int pos = path.indexOf(JDFConstants.AET);        
+        String path2=StringUtil.replaceString(path,"[@", "");
+        final int pos = path2.indexOf(JDFConstants.AET);        
         if (pos >= 0)
         {
             return getXPathAttribute(path,null)!=null;
@@ -4559,7 +4610,9 @@ public class KElement extends ElementNSImpl
      *      now only .,..,/,@ are supported
      * 
      * @param path XPath abbreviated syntax representation of the attribute, 
-     *        e.g <code>parentElement/thisElement@thisAtt</code>
+     *              <code>parentElement/thisElement/@thisAtt</code>
+     *              <code>parentElement/thisElement[2]/@thisAtt</code>
+     *              <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
      * @param def default value if it doesn't exist
      * 
      * @return String the String value of the attribute
@@ -4569,19 +4622,14 @@ public class KElement extends ElementNSImpl
      */
     public String getXPathAttribute(String path, String def)
     {
-        final int pos = path.indexOf(JDFConstants.AET);
-        
+        final int pos = path.lastIndexOf(JDFConstants.AET);        
         if (pos == -1)
         {
             throw new JDFException("GetXPathAttribute - bad attribute path: " + path);
         }
-        
-        final String att = path.substring(pos + 1);
-        final String strAttribPath = path.substring(0, pos);
-        final KElement kEle = getXPathElement(strAttribPath);
-        
+        final KElement kEle = getXPathElement(path.substring(0, pos));
         return kEle == null ? def // xpath element does not exist
-                : kEle.getAttribute(att, null, def);
+                : kEle.getAttribute(path.substring(pos + 1), null, def);
     }
     
 //    public Node getXPathNode(String path)
@@ -4600,84 +4648,87 @@ public class KElement extends ElementNSImpl
      *      now only .,..,/,@ are supported
      * 
      * @param path XPath abbreviated syntax representation of the 
-     *             attribute, e.g parentElement/thisElement@thisAtt
+     *             attribute, e.g  
+     *              <code>parentElement/thisElement</code>
+     *              <code>parentElement/thisElement[2]</code>
+     *              <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
      * 
      * @return KElement the specified element
      */
     public KElement getXPathElement(String path)
     {
-        KElement kRet = null;
-        
+        path=StringUtil.replaceString(path, "[@", "|||");
         if (JDFConstants.EMPTYSTRING.equals(path))
-            kRet = this;
+            return this;
+        if (path == null)
+            return null;
         
-        else if (path != null)
+        if (path.startsWith(JDFConstants.SLASH))
         {
-            if (JDFConstants.SLASH.equals(path.substring(0, 1)))
+            KElement r = getDocRoot();
+            int nextPos = path.indexOf("/", 2);
+            if ((path.substring(1, nextPos)).equals(r.getNodeName()))
             {
-                KElement r = getDocRoot();
-                int nextPos = path.indexOf("/", 2);
-                if ((path.substring(1, nextPos)).equals(r.getNodeName()))
+                if (nextPos == -1)
                 {
-                    if (nextPos == -1)
-                    {
-                        kRet = this;
-                    }
-                    else
-                    {
-                        kRet = r.getXPathElement(path.substring(nextPos + 1));
-                    }
+                    return this;
                 }
+                return r.getXPathElement(path.substring(nextPos + 1));
             }
-            else if (path.startsWith(JDFConstants.DOTSLASH))
-            {
-                kRet = getXPathElement(path.substring(JDFConstants.DOTSLASH.length()));
-            }
-            else if (path.startsWith(JDFConstants.DOTDOTSLASH))
+        }
+        else if (path.startsWith(JDFConstants.DOT))
+        {
+            if (path.startsWith(JDFConstants.DOTSLASH))
+                 return getXPathElement(path.substring(JDFConstants.DOTSLASH.length()));
+            if (path.startsWith(JDFConstants.DOTDOTSLASH))
             {
                 final KElement parent = getParentNode_KElement();
-                kRet = parent.getXPathElement(path.substring(JDFConstants.DOTDOTSLASH.length()));
+                if(parent==null)
+                    return null;
+                return parent.getXPathElement(path.substring(JDFConstants.DOTDOTSLASH.length()));
             }
-            else
+            else if (path.equals(JDFConstants.DOT))
             {
-                int posB0 = path.indexOf("[");
-                int iSkip = 0;
-                String newPath = path;
-                int pos = newPath.indexOf(JDFConstants.SLASH);
-                if (posB0 != -1 && (posB0<pos || pos==-1))
-                {
-                    int posB1 = path.indexOf("]");
-                    String n = path.substring(posB0 + 1, posB1);
-                    iSkip = new Integer(n).intValue();
-                    iSkip--;
-                    newPath = path.substring(0, posB0) + path.substring(posB1 + 1);
-                    pos = newPath.indexOf(JDFConstants.SLASH);                   
-                }
-                final int posAet = path.indexOf(JDFConstants.AET);
-                if (pos != -1)
-                {
-                    final KElement parent = getElement(newPath.substring(0, pos), null, iSkip);
-                    if (parent != null)
-                    {
-                        kRet = parent.getXPathElement(newPath.substring(pos + 1));
-                    }
-                }
-                else if (posAet != -1)
-                {
-                    if(posAet==0)
-                        return this;
-                    kRet = getElement(newPath.substring(0, posAet), null, iSkip);
-                }
-                else
-                {
-                    kRet = getElement(newPath, null, iSkip);
-                }
-                
+                return this;
             }
-            
+            else if (path.equals(".."))
+            {
+                return getParentNode_KElement();
+            }
         }
+        int posB0 = path.indexOf("[");
+        int posBAt=path.indexOf("|||");
+        int iSkip = 0;
+        String newPath = path;
+        int pos = newPath.indexOf(JDFConstants.SLASH);
+        JDFAttributeMap map=null;
         
-        return kRet;
+        if (posB0 != -1 && (posB0<pos || pos==-1)) // parse for [n]
+        {
+            int posB1 = path.indexOf("]");
+            String n = path.substring(posB0 + 1, posB1);
+            iSkip = StringUtil.parseInt(n, 0);
+            iSkip--;
+            newPath = path.substring(0, posB0) + path.substring(posB1 + 1);
+            pos = newPath.indexOf(JDFConstants.SLASH);                   
+        }
+        else  if (posBAt != -1 && (posBAt<pos || pos==-1)) // parse for [@a="b"]
+        {
+            int posB1 = path.indexOf("]");
+            String attEqVal = path.substring(posBAt + 3, posB1);
+            String attName=StringUtil.token(attEqVal, 0, "=");
+            String attVal=attEqVal.substring(attName.length()+2,attEqVal.length()-1);
+            map=new JDFAttributeMap(attName,attVal);
+            newPath = path.substring(0, posBAt) + path.substring(posB1 + 1);
+            pos = newPath.indexOf(JDFConstants.SLASH);                   
+        }
+
+        if (pos != -1) // have another element
+        {
+            final KElement ee = getChildByTagName(newPath.substring(0, pos), null, iSkip, map, true, true);            
+            return (ee == null) ? null : ee.getXPathElement(newPath.substring(pos + 1));
+        }
+        return getChildByTagName(newPath, null, iSkip, map, true, true);
     }
     
     /**
@@ -4687,7 +4738,9 @@ public class KElement extends ElementNSImpl
      * now only .,..,/,@ are supported
      * 
      * @param path XPath abbreviated syntax representation of the attribute, 
-     *        e.g parentElement/thisElement@thisAtt
+     *              <code>parentElement/thisElement</code>
+     *              <code>parentElement/thisElement[2]</code>
+     *              <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
      * 
      * @return KElement the specified element
      */
@@ -4695,8 +4748,7 @@ public class KElement extends ElementNSImpl
     {
         if(path==null || path.length()==0) 
             return this;
-        String path0=path.substring(0,1);
-        if(path0.equals(JDFConstants.SLASH)) 
+        if (path.startsWith(JDFConstants.SLASH))
         {
             KElement r=getDocRoot();
             int nextPos=path.indexOf(JDFConstants.SLASH,2);
@@ -4708,12 +4760,16 @@ public class KElement extends ElementNSImpl
             
             return r.getCreateXPathElement(path.substring(nextPos+1));
         }
-        if(path0.equals(JDFConstants.DOT)){
+        if(path.startsWith(JDFConstants.DOT)){
             if(path.startsWith(JDFConstants.DOTSLASH)) 
                 return getCreateXPathElement(path.substring(2));
             if(path.startsWith(JDFConstants.DOTDOTSLASH)) 
                 return getParentNode_KElement().getCreateXPathElement(path.substring(3));
-        }
+            if (path.equals(JDFConstants.DOT))
+                return this;
+            if (path.equals(".."))
+                 return getParentNode_KElement();
+        }        
         int posB0=path.indexOf("[");
         int iSkip=0;
         String newPath=path;
@@ -4733,19 +4789,11 @@ public class KElement extends ElementNSImpl
             KElement e=getCreateElement(newPath.substring(0,pos),null,iSkip);
             return e.getCreateXPathElement(newPath.substring(pos+1));
         }
-        int posA=newPath.indexOf(JDFConstants.AET);
-        if(posA!=-1){ 
-            int n=numChildElements(newPath.substring(0,posA),null);
-            for(int i=n;i<iSkip;i++)
-                appendElement(newPath.substring(0,posA),null);
-            return getCreateElement(newPath.substring(0,posA),null,iSkip);
-        }
         int n=numChildElements(newPath,null);
         for(int i=n;i<iSkip;i++)
             appendElement(newPath,null);
         return getCreateElement(newPath,null,iSkip);   
     }
-    
     
     
     
@@ -5681,19 +5729,16 @@ public class KElement extends ElementNSImpl
      */
     public void removeXPathAttribute(String path)
     {
-        final int pos = path.indexOf(JDFConstants.AET);
+        final int pos = path.lastIndexOf(JDFConstants.AET);
         if (pos == -1)
         {
             throw new JDFException("RemoveXPathAttribute - bad attribute path: " + path);
         }
-        
-        final String att = path.substring(pos + 1);
-        final String strAttrPath = path.substring(0, pos);
-        final KElement kEle = getXPathElement(strAttrPath);
+        final KElement kEle = getXPathElement(path.substring(0, pos));
         if(kEle!=null)
-            kEle.removeAttribute(att, null);
+            kEle.removeAttribute(path.substring(pos + 1), null);
     }
-    
+
     /**
      * check whether this matches a simple xpath
      * @param path
