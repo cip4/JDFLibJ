@@ -73,12 +73,21 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.jmf.JDFDeviceInfo;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFJobPhase;
+import org.cip4.jdflib.jmf.JDFSignal;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFSpawned;
 import org.cip4.jdflib.resource.JDFCreated;
 import org.cip4.jdflib.resource.JDFMerged;
+import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.JDFDate;
 
 /**
  * @author MuchaD
@@ -114,7 +123,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
         JDFResource e = (JDFResource) myResourcePool.getElement("BindingIntent", "", 0);
         myAuditPool.addCreated("A Test Author for JUnitTest 2", e);
                 
-        String strResourceID = e.buildXPath("/JDF");
+        String strResourceID = e.buildXPath("/JDF",true);
         JDFCreated kResourceAudit = 
             (JDFCreated) myAuditPool.getChildWithAttribute(null, "XPath", null, strResourceID, 0, true);
 
@@ -131,8 +140,8 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
  
         jdfDoc = new JDFDoc(ElementName.JDF);        
         jdfRoot = (JDFNode) jdfDoc.getRoot();
-        assertNotNull("No Root found", jdfRoot);
-
+        jdfRoot.setJobID("jobID");
+        
         myAuditPool =  jdfRoot.getCreateAuditPool();
 
     }    
@@ -156,7 +165,58 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
         JDFSpawned m1=myAuditPool.addSpawned(node2, null, null, null, null);
         assertNotNull(m1);
     }
-        
     
+    public void testSetPhase() throws Exception
+    {        
+        JDFPhaseTime p1=myAuditPool.setPhase(EnumNodeStatus.Setup, null, null);
+        assertNotNull(p1);
+        assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true).size(), 1);
+        JDFPhaseTime p2=myAuditPool.setPhase(EnumNodeStatus.Setup, "foobar", null);
+        assertNotNull(p2);
+        assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true).size(), 2);
+        p2=myAuditPool.setPhase(EnumNodeStatus.Setup, "foobar", null);
+        assertNotNull(p2);
+        assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true).size(), 2);
+        p2=myAuditPool.setPhase(EnumNodeStatus.Ready, "foobar", null);
+        assertNotNull(p2);
+        assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true).size(), 3);
+        p2=myAuditPool.setPhase(EnumNodeStatus.InProgress, null, null);
+        assertNotNull(p2);
+        assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true).size(), 4);
+        p2=myAuditPool.setPhase(EnumNodeStatus.InProgress, null, null);
+        assertNotNull(p2);
+        assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true).size(), 4);
+    }
+        
+    public void testSetPhaseJMF() throws Exception
+    {        
+        
+        JDFDoc docJMF=new JDFDoc("JMF");
+        JDFJMF jmf=docJMF.getJMFRoot();
+        JDFSignal sig=jmf.appendSignal(EnumType.Status);
+        JDFDeviceInfo di=sig.appendDeviceInfo();
+        JDFJobPhase phase=di.appendJobPhase();
+        phase.setPhaseStartTime(new JDFDate());
+        phase.setStatus(EnumNodeStatus.Setup);
+        phase.setJobID(jdfRoot.getJobID(true));
+        phase.setJobPartID(jdfRoot.getJobPartID(true));
+        
+        VElement el=myAuditPool.setPhase(jmf);
+        assertNotNull(el);
+        assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true).size(), 1);
+        assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true),el);
+        
+        el=myAuditPool.setPhase(jmf);
+        assertNotNull(el);
+        assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true).size(), 1);
+        assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true),el);
+       
+        phase.setStatus(EnumNodeStatus.Aborted);
+        el=myAuditPool.setPhase(jmf);
+        assertNotNull(el);
+        assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true).size(), 2);
+        assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true).elementAt(1),el.elementAt(0));
+        
+    }    
     
 }

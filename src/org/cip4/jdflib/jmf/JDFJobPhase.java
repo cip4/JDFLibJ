@@ -86,6 +86,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
@@ -178,7 +179,7 @@ public class JDFJobPhase extends JDFAutoJobPhase
      */
     public String getQueueEntryID()
     {
-        return getAttribute(AttributeName.QUEUEENTRYID);
+        return getInheritedStatusQuParamsAttribute(AttributeName.QUEUEENTRYID,null);
     }
 
     /**
@@ -187,7 +188,15 @@ public class JDFJobPhase extends JDFAutoJobPhase
      */
     public String getJobID()
     {
-        return getAttribute(AttributeName.JOBID);
+        return getInheritedStatusQuParamsAttribute(AttributeName.JOBID,null);
+    }
+    /**
+     * Method getJobID.
+     * @return String
+     */
+    public String getJobPartID()
+    {
+        return getInheritedStatusQuParamsAttribute(AttributeName.JOBPARTID,null);
     }
 
     /**
@@ -262,6 +271,32 @@ public class JDFJobPhase extends JDFAutoJobPhase
         return (JDFNode) getElement(ElementName.JDF, null, 0);
     }
 
+    /**
+     * get the {@link JDFStatusQuParams} that apply to the jobphase
+     * @return
+     */
+    public JDFStatusQuParams getStatusQuParams()
+    {
+        KElement parent=getParentNode_KElement();
+        if(!(parent instanceof JDFDeviceInfo))
+            return null;
+        parent=parent.getParentNode_KElement();
+        if(!(parent instanceof JDFMessage))
+            return null;
+        return ((JDFMessage)parent).getStatusQuParams();
+        
+    }
+    
+    private String getInheritedStatusQuParamsAttribute(String key,String nameSpaceURI)
+    {
+        String val=getAttribute(key, nameSpaceURI, null);
+        if(val!=null)
+            return val;
+        JDFStatusQuParams sqp=getStatusQuParams();
+        if(sqp==null)
+            return null;
+        return sqp.getAttribute(key, nameSpaceURI, null);
+    }
 }
 
 

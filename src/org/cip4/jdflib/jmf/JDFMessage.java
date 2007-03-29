@@ -2017,10 +2017,20 @@ public class JDFMessage extends JDFAutoMessage
      * get iSkip'th element StatusQuParams
      * @param iSkip number of elements to skip
      * @return JDFStatusQuParams: the element
+     * @deprecated - use 0 parameter version
      */
     public JDFStatusQuParams getStatusQuParams(int iSkip)
     {
         return (JDFStatusQuParams) getValidElement(ElementName.STATUSQUPARAMS, JDFConstants.EMPTYSTRING, iSkip);
+    }
+    /**
+     * get iSkip'th element StatusQuParams
+     * @param iSkip number of elements to skip
+     * @return JDFStatusQuParams: the element
+     */
+    public JDFStatusQuParams getStatusQuParams()
+    {
+        return (JDFStatusQuParams) getValidElement(ElementName.STATUSQUPARAMS, JDFConstants.EMPTYSTRING, 0);
     }
     //////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////

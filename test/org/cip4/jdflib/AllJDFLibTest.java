@@ -73,7 +73,6 @@ import junit.framework.TestSuite;
 
 import org.cip4.jdflib.auto.AutoTest;
 import org.cip4.jdflib.auto.JDFClassInstantiationTest;
-import org.cip4.jdflib.cformat.PrintfFormat;
 import org.cip4.jdflib.cformat.PrintfFormatTest;
 import org.cip4.jdflib.core.AttrInfoTest;
 import org.cip4.jdflib.core.ElemInfoTest;
@@ -128,6 +127,7 @@ import org.cip4.jdflib.examples.MISFinTest;
 import org.cip4.jdflib.examples.NColorTest;
 import org.cip4.jdflib.examples.VarnishTest;
 import org.cip4.jdflib.examples.WebTest;
+import org.cip4.jdflib.jmf.JDFJMFTest;
 import org.cip4.jdflib.jmf.JDFMessageTest;
 import org.cip4.jdflib.jmf.JDFPipeParamsTest;
 import org.cip4.jdflib.jmf.JMFKnownMessagesTest;
@@ -252,6 +252,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(WebTest.class);
 
         // JMF
+        suite.addTestSuite(JDFJMFTest.class);
         suite.addTestSuite(JDFMessageTest.class);
         suite.addTestSuite(JDFPipeParamsTest.class);
         suite.addTestSuite(JMFKnownMessagesTest.class);
