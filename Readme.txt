@@ -1,4 +1,56 @@
 
+Label JDFLIBJ_2.1.2BLD420 (29.03.2007)
+
+fix for JDFDate memory
+added jmf to audit conversion to JDFAuditPool.html
+some editor capabilities work
+printf for java/org
+some layout tests
+fixes for GeneralID
+layout high level 1.2 1.3 indifferent vector getters
+automated layout tests
+fixed smoothed JDFEditor.exe for windows
+updated version ids
+Fix for http://www.cip4.org/jira/browse/JDFJ-93 and http://www.cip4.org/jira/browse/EDITOR-110
+minor bug fixes for the editor -
+
+Changed files:
+ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD420) && !lbtype(JDFLIBJ_2.1.3BLD410)}" -print
+.@@\main\23
+.\cformat@@\main\1
+.\cformat\package.html@@\main\1
+.\cformat\PrintfFormat.java@@\main\2
+.\cformat\PrintfStream.java@@\main\1
+.\cformat\PrintfWriter.java@@\main\1
+.\cformat\ScanfFormat.java@@\main\1
+.\cformat\ScanfMatchException.java@@\main\1
+.\cformat\ScanfReader.java@@\main\1
+.\core\DocumentJDFImpl.java@@\main\90
+.\core\JDFAudit.java@@\main\82
+.\core\JDFDoc.java@@\main\69
+.\core\JDFElement.java@@\main\229
+.\core\JDFParser.java@@\main\41
+.\core\JDFResourceLink.java@@\main\128
+.\core\KElement.java@@\main\237
+.\jmf\JDFJobPhase.java@@\main\21
+.\jmf\JDFMessage.java@@\main\66
+.\node\JDFNode.java@@\main\241
+.\pool\JDFAuditPool.java@@\main\92
+.\resource\devicecapability\JDFDevCap.java@@\main\46
+.\resource\devicecapability\JDFDevCaps.java@@\main\33
+.\resource\devicecapability\JDFDeviceCap.java@@\main\45
+.\resource\JDFResource.java@@\main\211
+.\resource\JDFResourceAudit.java@@\main\32
+.\resource\JDFSignature.java@@\main\21
+.\resource\process\JDFColorantAlias.java@@\main\16
+.\resource\process\JDFLayout.java@@\main\21
+.\resource\process\postpress\JDFSheet.java@@\main\42
+.\util\JDFDate.java@@\main\44
+.\util\JDFSpawn.java@@\main\12
+.\util\StringUtil.java@@\main\58
+___________________________________________________________
+
+
 Label JDFLIBJ_2.1.2BLD410 (28.02.2007)
 
 remove minor warnings
