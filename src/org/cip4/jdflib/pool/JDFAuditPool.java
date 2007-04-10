@@ -394,7 +394,7 @@ public class JDFAuditPool extends JDFPool
             a.setAttribute(AttributeName.RREFSRWCOPIED, ms, null);
         }
 
-        setPartMapVector(vmParts);
+        a.setPartMapVector(vmParts);
 
         return a;
     }
@@ -418,7 +418,7 @@ public class JDFAuditPool extends JDFPool
             rRefsOverwritten=null;
         mergedAudit.setrRefsOverwritten(rRefsOverwritten);
 
-        setPartMapVector(vmParts);
+        mergedAudit.setPartMapVector(vmParts);
         return mergedAudit;
     }
 

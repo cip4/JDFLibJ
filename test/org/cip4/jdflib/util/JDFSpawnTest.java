@@ -399,8 +399,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
 //          ni.addPartition(JDFResource.EnumPartIDKey.SignatureName,"Sig1");
             JDFResourceLink l=n.getMatchingLink(ElementName.NODEINFO,EnumProcessUsage.AnyInput,0);
             l.setPart("SignatureName","Sig1");
-            Vector v=new Vector();
-            v.add(ElementName.EXPOSEDMEDIA);
+            Vector vRWRes=new Vector();
+            vRWRes.add(ElementName.EXPOSEDMEDIA);
             VJDFAttributeMap vMap=new VJDFAttributeMap();
             JDFAttributeMap map=new JDFAttributeMap();
             map.put("SignatureName","Sig1");
@@ -412,7 +412,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
             xmRL.setAttribute("foo:bar", "a","www.foobar.com");
 
             final JDFSpawn spawn=new JDFSpawn(n); // fudge to test output counting
-            JDFNode spawnedNode=spawn.spawn("thisUrl","newURL",v,vMap,false,true,true,true);
+            JDFNode spawnedNode=spawn.spawn("thisUrl","newURL",vRWRes,vMap,false,true,true,true);
             String spawnID=spawnedNode.getSpawnID(false);
             assertNotSame(spawnID,"");
   
@@ -420,6 +420,13 @@ public class JDFSpawnTest extends JDFTestCaseBase
             JDFResourceLink rl = spawnedNode.getMatchingLink(ElementName.EXPOSEDMEDIA,EnumProcessUsage.AnyOutput,0);
             JDFResourceAudit ra=spawnedNode.cloneResourceToModify(rl);
             String clonedResID=ra.getOldLink().getrRef();
+            JDFExposedMedia xmSpawn=(JDFExposedMedia) rl.getTarget();
+            assertNotNull(xmSpawn);
+            JDFExposedMedia xmSpawnFront=(JDFExposedMedia) xmSpawn.getPartition(new JDFAttributeMap("Side","Front"), null);
+            assertNotNull(xmSpawnFront);
+            JDFExposedMedia xmSpawnFrontEn=(JDFExposedMedia) xmSpawnFront.addPartition(EnumPartIDKey.PartVersion, "En");
+            assertNotNull(xmSpawnFrontEn);
+            
 
             JDFResourceLink loRL=spawnedNode.getMatchingLink(ElementName.LAYOUT,EnumProcessUsage.AnyInput,0);
             assertNull(loRL.getPartMapVector());
@@ -443,7 +450,15 @@ public class JDFSpawnTest extends JDFTestCaseBase
                 assertEquals(xmRLspawn.getAmountPool().getPartAmount(map, 0).getAttributeMap().size(), 0);
                 xmRLspawn.setActualAmount(42,null);
             }
+            
+            // merge here
             JDFNode mergedNode=new JDFMerge(n).mergeJDF(spawnedNode, "merged", JDFNode.EnumCleanUpMerge.None, EnumAmountMerge.UpdateLink);
+            JDFAuditPool ap=mergedNode.getAuditPool();
+            assertNotNull(ap);
+            JDFMerged merged=(JDFMerged) ap.getAudit(0, EnumAuditType.Merged, null, null);
+            assertNotNull(merged);
+            assertEquals(vMap, merged.getPartMapVector());
+            assertNull(ap.getElement(ElementName.PART));
             xmRL=mergedNode.getMatchingLink(ElementName.EXPOSEDMEDIA,EnumProcessUsage.AnyOutput,0);  
             final VElement poolChildren = mergedNode.getResourceLinkPool().getPoolChildren("NodeInfoLink", null, null);
             assertNotNull("poolChildren", poolChildren);
@@ -453,7 +468,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
             assertEquals("did not overwrite rl attribute",xmRL.getAttribute("foo:bar","www.foobar.com",null),"a");
             assertTrue(xmRL.hasAttribute(AttributeName.RREF));
             
-            JDFExposedMedia xm=(JDFExposedMedia) n.getMatchingResource(ElementName.EXPOSEDMEDIA,EnumProcessUsage.AnyOutput,null,0);
+            JDFExposedMedia xm=(JDFExposedMedia) mergedNode.getMatchingResource(ElementName.EXPOSEDMEDIA,EnumProcessUsage.AnyOutput,null,0);
+            assertTrue("PartVersion was added in spawned node",xm.getPartIDKeys().contains("PartVersion"));
             xm=(JDFExposedMedia) xm.getPartition(map,null);
             if(i<2)
             {
@@ -462,8 +478,9 @@ public class JDFSpawnTest extends JDFTestCaseBase
                 assertTrue("merged res amountproduced ok",xm.getAmountProduced()==42);
             }
 
-            // test whether anythin modified and tracked in a resource audit got correctly merged
-            JDFResourceAudit raMerge=(JDFResourceAudit) n.getAuditPool().getAudit(0, EnumAuditType.ResourceAudit, null,null);
+           
+            // test whether anything modified and tracked in a resource audit got correctly merged
+            JDFResourceAudit raMerge=(JDFResourceAudit) ap.getAudit(0, EnumAuditType.ResourceAudit, null,null);
             assertNotNull("res audit merged",raMerge);
             JDFResource rOld=raMerge.getOldLink().getTarget();
             assertNotNull("old res  merged",rOld);
@@ -519,8 +536,18 @@ public class JDFSpawnTest extends JDFTestCaseBase
             assertTrue("no spawnStatus",spawnedNode.toString().indexOf(AttributeName.SPAWNSTATUS)<0);
 
             JDFResourceLink xmRLspawn=spawnedNode.getMatchingLink(ElementName.EXPOSEDMEDIA,EnumProcessUsage.AnyOutput,0);
+            JDFNodeInfo ni2=(JDFNodeInfo) spawnedNode.getMatchingResource(ElementName.NODEINFO,EnumProcessUsage.AnyInput,null,0);
             JDFExposedMedia xm=(JDFExposedMedia)xmRLspawn.getTarget();
+            assertFalse("PartVersion was added in spawned node",xm.getPartIDKeys().contains("PartVersion"));
+            assertFalse("PartVersion was added in spawned node",ni2.getPartIDKeys().contains("PartVersion"));
             assertNotNull(xm);
+            JDFExposedMedia xmSpawnFront=(JDFExposedMedia) xm.getPartition(new JDFAttributeMap("Side","Front"), null);
+            assertNotNull(xmSpawnFront);
+            JDFExposedMedia xmSpawnFrontEn=(JDFExposedMedia) xmSpawnFront.addPartition(EnumPartIDKey.PartVersion, "En");
+            assertNotNull(xmSpawnFrontEn);
+            ni2.addPartition(EnumPartIDKey.PartVersion, "En");
+            
+            
             JDFExposedMedia xmRoot=(JDFExposedMedia) xm.getResourceRoot();
             assertNotSame(xm, xmRoot);
             
@@ -550,8 +577,12 @@ public class JDFSpawnTest extends JDFTestCaseBase
                 n=(JDFNode)n.getElement("JDF");
             JDFNode mergedNode=new JDFMerge(n).mergeJDF(spawnedNode, "merged", JDFNode.EnumCleanUpMerge.None, EnumAmountMerge.UpdateLink);
             xmRL=mergedNode.getMatchingLink(ElementName.EXPOSEDMEDIA,EnumProcessUsage.AnyOutput,0);  
- 
             JDFExposedMedia xmMRoot=(JDFExposedMedia) mergedNode.getMatchingResource(ElementName.EXPOSEDMEDIA,EnumProcessUsage.AnyOutput,null,0);
+            assertTrue("PartVersion was added in spawned node",xmMRoot.getPartIDKeys().contains("PartVersion"));
+            ni2=(JDFNodeInfo) mergedNode.getMatchingResource(ElementName.NODEINFO,EnumProcessUsage.AnyInput,null,0);
+            assertTrue("PartVersion was added in spawned node",ni2.getPartIDKeys().contains("PartVersion"));
+
+            
             JDFExposedMedia xmM1=(JDFExposedMedia) xmMRoot.getPartition(mapNew1,null);
             assertEquals("Merged xm1",xmNew1.getDescriptiveName(), xmM1.getDescriptiveName());
             

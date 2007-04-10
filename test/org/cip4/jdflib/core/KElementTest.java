@@ -844,12 +844,16 @@ public class KElementTest extends JDFTestCaseBase
     {
           XMLDoc d=new XMLDoc("d",null);
           KElement root=d.getRoot();
-          assertEquals(root.buildXPath(null), "/d");
-          assertEquals(root.buildXPath("/d"), ".");
+          assertEquals(root.buildXPath(null,true), "/d");
+          assertEquals(root.buildXPath("/d",true), ".");
+          assertEquals(root.buildXPath(null,false), "/d");
+          assertEquals(root.buildXPath("/d",false), ".");
           root.appendElement("e");
           KElement e=root.appendElement("e");
-          assertEquals(e.buildXPath(null), "/d/e[2]");
-          assertEquals(e.buildXPath("/d"), "./e[2]");
+          assertEquals(e.buildXPath(null,true), "/d/e[2]");
+          assertEquals(e.buildXPath(null,false), "/d/e");
+          assertEquals(e.buildXPath("/d",true), "./e[2]");
+          assertEquals(e.buildXPath("/d",false), "./e");
           
     }
     
@@ -1003,6 +1007,18 @@ public class KElementTest extends JDFTestCaseBase
 
     }
 
+    public void testHasAttributeNS()
+    {
+        XMLDoc  jdfDoc = new XMLDoc("a:Test","www.a.com");
+        KElement e=jdfDoc.getRoot();
+        e.setAttribute("a:foo", "bar");
+        e.setAttribute("bar", "bar2");
+        assertTrue(e.hasAttribute("foo"));
+        assertTrue("",e.hasAttribute("a:foo"));
+        assertTrue(e.hasAttribute("bar"));
+        assertTrue("",e.hasAttribute("a:bar"));
+    }
+    
     public void testInfinity()
     {
         XMLDoc  jdfDoc = new XMLDoc("Test","www.test.com");

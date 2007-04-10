@@ -76,6 +76,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFJobPhase;
@@ -151,8 +152,14 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
          // Test AddCreated with one parameter
         JDFDoc doc2=new JDFDoc("JDF");
         JDFNode node2=doc2.getJDFRoot();
-        
+        VJDFAttributeMap vMap=new VJDFAttributeMap();
+        vMap.add(new JDFAttributeMap("SheetName","s1"));
+       
         JDFMerged m1=myAuditPool.addMerged(node2, null, null, null);
+        JDFMerged m2=myAuditPool.addMerged(node2, null, null, vMap);
+        assertNotNull(m2);
+        assertEquals(m2.getPartMapVector(), vMap);
+        assertNull(myAuditPool.getElement(ElementName.PART));
         assertNotNull(m1);
     }
         
@@ -161,9 +168,15 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
          // Test AddCreated with one parameter
         JDFDoc doc2=new JDFDoc("JDF");
         JDFNode node2=doc2.getJDFRoot();
+        VJDFAttributeMap vMap=new VJDFAttributeMap();
+        vMap.add(new JDFAttributeMap("SheetName","s1"));
         
         JDFSpawned m1=myAuditPool.addSpawned(node2, null, null, null, null);
         assertNotNull(m1);
+        JDFSpawned m2=myAuditPool.addSpawned(node2, null, null, null, vMap);
+        assertNotNull(m2);
+        assertEquals(m2.getPartMapVector(), vMap);
+        assertNull(myAuditPool.getElement(ElementName.PART));
     }
     
     public void testSetPhase() throws Exception
