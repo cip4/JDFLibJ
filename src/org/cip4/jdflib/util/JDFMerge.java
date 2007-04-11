@@ -34,6 +34,9 @@ import org.cip4.jdflib.pool.JDFStatusPool;
 import org.cip4.jdflib.resource.JDFMerged;
 import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EnumAmountMerge;
+import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
+import org.cip4.jdflib.resource.JDFResource.EnumSpawnStatus;
 
 /**
  * @author Rainer Prosi
@@ -388,6 +391,137 @@ public class JDFMerge
             }
         }
     }
+    
+    /**
+     * Merges partitioned resources into this resource
+     * uses PartIDKey to identify the correct resources
+     *
+     * @param resToMerge the resource leaf to merge into this
+     * @param spawnID the spawnID of the spawning that will now be merged
+     * @param amountPolicy how to clean up the Resource amounts after merging
+     * @param bLocalResource must be true for the local resources in a spawned node and its subnodes, which default to RW
+     *
+     * @throws JDFException if here is an attempt to merge incompatible resources 
+     * @throws JDFException if here is an attempt to merge incompatible partitions
+     * 
+     * @default mergePartition (resToMerge, spawnID, EnumAmountMerge.None, false);
+     */
+    static public JDFResource mergePartition(JDFResource targetRes,JDFResource resToMerge, String spawnID, EnumAmountMerge amountPolicy, boolean bLocalResource)
+    {
+        if (!targetRes.getID().equals(resToMerge.getID()))
+        {
+            throw new JDFException("JDFResource.mergePartition  merging incompatible resources ID="
+                    + targetRes.getID()+ " IDMerge=" + resToMerge.getID());
+        }
+        
+        /// TBD RP SpawnStatus Handling!!!!
+        final JDFResource toMerge  = resToMerge;
+        JDFResource root=targetRes.getResourceRoot();
+        final VString partIDKeys      = root.getPartIDKeys();
+        final VString mergeIDKeys     = toMerge.getPartIDKeys();
+        final VElement allChildren   = resToMerge.getNodesWithSpawnID(spawnID);
+        
+        // No spawntargets take all
+        if (allChildren.isEmpty())
+        {
+            allChildren.addElement(toMerge);
+        }
+        
+        boolean bTargetGone = false;
+        
+        for (int i = 0; i < allChildren.size(); i++)
+        {
+            final JDFResource src = (JDFResource) allChildren.elementAt(i);
+            final JDFAttributeMap srcMap = src.getPartMap();
+            JDFResource trg = targetRes.getPartition(srcMap, EnumPartUsage.Implicit);
+            
+            if (trg == null)
+            {
+                trg = targetRes;
+            }
+            JDFAttributeMap trgMap=trg.getPartMap();
+            
+            // RP 220605 - not puristic, but pragmatic
+            // found only a root or high level partition for an rw resource partition
+            // try to create the new partition and pray that it will not be subsequently completely overwritten
+            // this is still better than throwing an exception or silently ignoring the rw resource
+            if((src.getLocked()==false)&&(trgMap.getKeys().size()<srcMap.getKeys().size())){
+                trg=targetRes.getCreatePartition(srcMap,partIDKeys);
+                // fool the algorithm to think that the new partition is rw (which it probably was)
+                trg.setSpawnStatus(EnumSpawnStatus.SpawnedRW);
+                trgMap=trg.getPartMap(); // 061114 fix!
+            }
+            
+            if (bLocalResource || trg.getSpawnStatus() == JDFResource.EnumSpawnStatus.SpawnedRW)
+            {
+                
+                if (srcMap.equals(trgMap))
+                {
+                    if (trgMap.isEmpty())
+                    { // we actually replaced the root nothing left to do
+                        bTargetGone = true;
+                        trg=(JDFResource)targetRes.replaceElement(src);
+                        root=trg.getResourceRoot();
+                    }
+                    else
+                    {
+                        KElement copyElement = targetRes.getParentNode_KElement().copyElement(src, null);
+                        trg = (JDFResource) trg.replaceElement(copyElement);                       
+                    }
+                }
+                else if (srcMap.subMap(trgMap))
+                {
+                    // potential check for very deep src
+                    trg.copyElement(src, null);
+                }
+                else
+                { // oops
+                    throw new JDFException("JDFResource.mergePartition attempting to merge incompatible partitions");
+                }
+            }
+            //update the partitions amounts
+            if ((amountPolicy != EnumAmountMerge.None) && targetRes.isPhysical())
+            {
+                JDFResource trgKeep=trg;
+                trg = root.getPartition(srcMap, EnumPartUsage.Implicit); // must repeat since replaceelement does not modify itself
+                if (trg == null)
+                {
+                    trg = trgKeep;
+                }
+                VElement vr = trg.getLeaves(true);
+                for(int l = 0; l < vr.size(); l++)
+                {
+                    double amo = 0;
+                    JDFResource r = (JDFResource)vr.elementAt(l);
+                    if(amountPolicy != EnumAmountMerge.LinkOnly)
+                    {
+                        amo = r.getAmount();
+                    }
+                    r.updateAmounts(amo);
+                }
+            }
+        }
+        
+        // some crap is left - remove it
+        if (!bTargetGone)
+        {
+            toMerge.deleteNode();
+        }
+        
+        partIDKeys.appendUnique(mergeIDKeys);
+        
+        if (partIDKeys.isEmpty())
+        {
+            root.removeAttribute(AttributeName.PARTIDKEYS);
+        }
+        else
+        {
+            root.setPartIDKeys(partIDKeys);
+        }
+        return root;
+    }
+        
+    
     private static void mergeLocalResource(final VString previousMergeIDs, String spawnID, JDFResource.EnumAmountMerge amountPolicy, final JDFResourcePool poolToMerge, JDFResource res1)
     {
         final String resID = res1.getID();
@@ -396,7 +530,7 @@ public class JDFMerge
         if (res2 != null)
         {
             res2.mergeSpawnIDs(res1, previousMergeIDs);
-            res1.mergePartition(res2, spawnID, amountPolicy, true); // esp. deletes res2 from toMerge node
+            res1=mergePartition(res1,res2, spawnID, amountPolicy, true); // esp. deletes res2 from toMerge node
         }
         // copy resource from orig to spawned node
         poolToMerge.copyElement(res1, null);
@@ -689,7 +823,7 @@ public class JDFMerge
             try
             {
                 // merge the resource from the spawned node into the lower level resourcepool
-                oldRes.mergePartition(newRes, spawnID, amountPolicy, false);
+                oldRes=mergePartition(oldRes,newRes, spawnID, amountPolicy, false);
             }
             catch (Exception e)
             {

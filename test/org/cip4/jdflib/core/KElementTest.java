@@ -201,6 +201,7 @@ public class KElementTest extends JDFTestCaseBase
         KElement e=d.getRoot();
         KElement ec1=e.appendElement("c1");
         KElement ec2=e.appendElement("c2");
+        ec2.setAttribute("foo", "ec2");
         KElement ec4=e.appendElement("c4");
         KElement ec3=ec1.replaceElement(ec2);
         assertEquals("c1=c2",ec3,ec2);

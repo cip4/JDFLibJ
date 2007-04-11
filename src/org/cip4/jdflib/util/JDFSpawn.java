@@ -147,6 +147,9 @@ public class JDFSpawn
         final JDFDoc docOut = new JDFDoc(ElementName.JDF);
         final JDFNode rootOut = (JDFNode) docOut.getRoot();
 
+        // prepare the nodeinfos in main prior to spawning
+        prepareNodeInfos();
+
         // merge this node into it
         rootOut.mergeNode(node, false);                 //"copy" this node into the new created document
         final String spawnID = "Sp" + JDFElement.uniqueID(0);      //create a spawn id for this transaction
@@ -222,6 +225,23 @@ public class JDFSpawn
 
         // return the spawned node
         return rootOut;
+    }
+
+    /**
+     * prepare all nodeInfos of node for partitioned spawn
+     */
+    private void prepareNodeInfos()
+    {
+        if(vSpawnParts==null)
+            return;
+        final Vector vn = node.getvJDFNode(null, null, false);
+        final int size = vn.size();
+        // fill all resources and all links of all children into vResPool and links
+        for (int i = 0; i < size; i++)
+        {
+            final JDFNode vnNode_i = (JDFNode) vn.elementAt(i);
+            vnNode_i.prepareNodeInfo(vSpawnParts); // make sure we have a nodeinfo in all spawned nodes of main in case we have to merge stati 
+        }
     }
 
     /**
@@ -326,29 +346,16 @@ public class JDFSpawn
     /////////////////////////////////////////////////////////////////////////
     
     private VElement prepareSpawnLinks(final JDFNode rootOut)
-    {
-        Vector vn = node.getvJDFNode(null, null, false);
+    {    
+        VElement vn = rootOut.getvJDFNode(null, null, false);
         int size = vn.size();
-        // fill all resources and all links of all children into vResPool and links
-        for (int i = 0; i < size; i++)
-        {
-            final JDFNode vnNode_i = (JDFNode) (vn.elementAt(i));
-            vnNode_i.prepareNodeInfo(vSpawnParts); // make sure we have a nodeinfo in all spawned nodes in case we have to merge stati 
-        }
-    
-        vn = rootOut.getvJDFNode(null, null, false);
-        size = vn.size();
         final VElement outLinks = new VElement();
     
         // fill all links of all children of rootOut into vOutRes and outLinks
         for (int i = 0; i < size; i++)
         {
-            final JDFNode vnNode_i = (JDFNode) (vn.elementAt(i));
-            final JDFResourceLinkPool outLinkPool = vnNode_i.getResourceLinkPool();
-            if (outLinkPool != null)
-            {
-                outLinks.appendUnique(outLinkPool.getPoolChildren(null, null, null));
-            }
+            final JDFNode vnNode_i = (JDFNode) vn.elementAt(i);
+            outLinks.appendUnique(vnNode_i.getResourceLinks(null));
         }
         return outLinks;
     }
