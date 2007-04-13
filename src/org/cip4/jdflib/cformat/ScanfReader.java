@@ -91,7 +91,7 @@ public class ScanfReader extends Reader
     //~ Instance fields ////////////////////////////////////////////////////////
 
     private int bcnt;
-    private char[] buffer;
+    private final char[] buffer;
     private int charCnt = 0;
     private int curChar;
     private boolean curCharValid = false;
@@ -1420,7 +1420,7 @@ public class ScanfReader extends Reader
             }
             else
             {
-                if (curChar != (int) c)
+                if (curChar != c)
                 {
                     throw new ScanfMatchException("Char '" + (char) curChar +
                         "' does not match char '" + c + "' in format");

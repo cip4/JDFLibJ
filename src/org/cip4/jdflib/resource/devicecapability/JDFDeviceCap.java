@@ -304,7 +304,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
                report = outputRoot.appendElement("RejectedNode");
                report.setAttribute("CaughtException", jdfe.getMessage());
                report.setAttribute("ID", n.getID());
-               report.setAttribute("XPath", n.buildXPath(null));
+               report.setAttribute("XPath", n.buildXPath(null,true));
            }
        }
        
@@ -343,7 +343,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
            JDFMessage m=(JDFMessage) messages.elementAt(i);
            String typeJMF = m.getType();
            messageReport.setAttribute("MessageType",typeJMF);
-           messageReport.setAttribute("XPath", m.buildXPath(null));
+           messageReport.setAttribute("XPath", m.buildXPath(null,true));
            messageReport.setAttribute("ID", m.getID());
            JDFMessageService ms=getMessageServiceForJMFType(m,knownMessagesResp);
            if(ms!=null)
@@ -414,7 +414,7 @@ public static JDFMessageService getMessageServiceForJMFType(JDFMessage m, JDFRes
     private final KElement report(final JDFNode jdfRoot, EnumFitsValue fitsValue, EnumValidationLevel level, KElement parentRoot)
     {
         KElement root = parentRoot.appendElement("RejectedNode");
-        root.setAttribute("XPath", jdfRoot.buildXPath(null));
+        root.setAttribute("XPath", jdfRoot.buildXPath(null,true));
         root.setAttribute("ID", jdfRoot.getID());
         String typeExp = getTypeExpression();
        
@@ -598,7 +598,7 @@ public static JDFMessageService getMessageServiceForJMFType(JDFMessage m, JDFRes
      */
     private final KElement groupReport(final JDFNode jdfRoot, EnumFitsValue testlists, EnumValidationLevel level, KElement parentRoot)
     {
-        parentRoot.setAttribute("XPath", jdfRoot.buildXPath(null));
+        parentRoot.setAttribute("XPath", jdfRoot.buildXPath(null,true));
         parentRoot.setAttribute("ID", jdfRoot.getID());
                 
         VElement vNodes= getMatchingTypeNodeVector(jdfRoot);
@@ -617,7 +617,7 @@ public static JDFMessageService getMessageServiceForJMFType(JDFMessage m, JDFRes
                 KElement childRoot = devCapsReport(n, testlists, level,parentRoot);
                 if (childRoot != null) 
                 {
-                    childRoot.setAttribute("XPath", n.buildXPath(null));
+                    childRoot.setAttribute("XPath", n.buildXPath(null,true));
                     childRoot.setAttribute("ID", n.getID());
                 }
             }
@@ -756,7 +756,7 @@ public static JDFMessageService getMessageServiceForJMFType(JDFMessage m, JDFRes
             if (!bFound) 
             { // no DevCaps with Name=resName and the corresponding LinkUsage were found
                 KElement r = root.appendElement("UnknownResource");
-                r.setAttribute("XPath", link.buildXPath(null));
+                r.setAttribute("XPath", link.buildXPath(null,true));
                 r.setAttribute("Name", resName);
                 if (link.hasAttribute(AttributeName.USAGE, null, false) 
                         && !link.getUsage().getName().equals("Unknown"))

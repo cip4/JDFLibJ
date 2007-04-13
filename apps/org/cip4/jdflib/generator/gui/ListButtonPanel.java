@@ -48,7 +48,7 @@ public class ListButtonPanel extends JPanel implements  ActionListener,
                                                         MouseListener
 {
     private static final long serialVersionUID  = 1L;
-    private     ComplexTypeList m_motherComp;
+    private final     ComplexTypeList m_motherComp;
     private     JButton com_selectAll;
     private     JButton com_deSelectAll;
     protected   JButton com_Generate;
@@ -471,7 +471,7 @@ public class ListButtonPanel extends JPanel implements  ActionListener,
     class LoadThread extends Thread
     {
         private boolean bCollect = false;
-        private Object[] m_schemaFiles;
+        private final Object[] m_schemaFiles;
 
         public LoadThread(Object[] files, boolean bCollectInfos)
         {
@@ -518,7 +518,7 @@ public class ListButtonPanel extends JPanel implements  ActionListener,
 
                 m_docs.add(buffdoc);
 
-                KElement n = (KElement) buffdoc.getRoot();
+                KElement n = buffdoc.getRoot();
                 Vector vElem = n.getChildElementVector(null, null, null, true, 0,false);
                 for (int j = 0; j < vElem.size(); j++)
                 {

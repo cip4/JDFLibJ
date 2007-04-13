@@ -250,7 +250,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
                 if(reportRoot!=null)
                 {
                     if(pathElement!=null)
-                        newPath=pathElement.buildXPath(null);
+                        newPath=pathElement.buildXPath(null,true);
                     attr = reportRoot.appendElement("TestedElement");
                     attr.setAttribute("Name", StringUtil.token(xPath,-1,"/"));
                 }
@@ -283,7 +283,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
                         }
                         pathElement=r;
                     }
-                    newPath=pathElement.buildXPath(null)+"/@"+attName;
+                    newPath=pathElement.buildXPath(null,true)+"/@"+attName;
                    
                 }
                 attr = reportRoot.appendElement("TestedAttribute");

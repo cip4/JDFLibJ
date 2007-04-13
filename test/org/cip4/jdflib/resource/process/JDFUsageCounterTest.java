@@ -134,6 +134,7 @@ public class JDFUsageCounterTest extends JDFTestCaseBase
         rl=root.getLink(uc4, null);
         rl.setActualAmount(40, null);             
         
-        doc.write2File(sm_dirTestDataTemp+"UCList.jdf", 2, false);        
+        doc.write2File(sm_dirTestDataTemp+"UCList.jdf", 2, false);
+        
     }
 }

@@ -80,8 +80,8 @@ public class PrintfFormat
     boolean zeropad = false;
     private DecDouble dd;
     private int idx;
-    private OutBuffer output;
-    private String validTypes = "diouxXeEfFgGaAcs";
+    private final OutBuffer output;
+    private final String validTypes = "diouxXeEfFgGaAcs";
 
     //~ Constructors ///////////////////////////////////////////////////////////
 
@@ -1029,7 +1029,7 @@ public class PrintfFormat
                 }
             }
 
-            buf[n++] = (char) c;
+            buf[n++] = c;
         }
 
         return n;

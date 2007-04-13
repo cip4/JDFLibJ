@@ -75,7 +75,6 @@
  */
 package org.cip4.jdflib.util;
 
-import java.util.GregorianCalendar;
 import java.util.zip.DataFormatException;
 
 import junit.framework.TestCase;
@@ -92,8 +91,9 @@ public class JDFDateTest extends TestCase
         }
         catch(DataFormatException dfe)
         {
-
+        	//
         }
+        
         try
         {
             date = new JDFDate("1999");
@@ -101,8 +101,9 @@ public class JDFDateTest extends TestCase
         }
         catch(DataFormatException dfe)
         {
-
+        	//
         }
+        
         try
         {
             date = new JDFDate(null);
@@ -111,6 +112,7 @@ public class JDFDateTest extends TestCase
         {
             fail("date exception: ");
         }
+        
         try
         {
             date = new JDFDate("1975-01-01T20:00:10.5");
@@ -118,8 +120,9 @@ public class JDFDateTest extends TestCase
         }
         catch(DataFormatException dfe)
         {
-
+        	//
         }
+        
         try
         {
             date = new JDFDate("2004-11-26T11:43:10.33-03");
@@ -127,8 +130,9 @@ public class JDFDateTest extends TestCase
         }
         catch(DataFormatException dfe)
         {
-
+        	//
         }
+        
         try
         {
             date = new JDFDate("2004-11-26T11:43:10.-0300");
@@ -136,7 +140,7 @@ public class JDFDateTest extends TestCase
         }
         catch(DataFormatException dfe)
         {
-
+        	//
         }
 
     }

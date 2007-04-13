@@ -249,7 +249,7 @@ public class XMLDocUserData
         globalDirty=true;
         if(dirtyPolicy == EnumDirtyPolicy.XPath)
         {
-            String x = e.buildXPath(null);
+            String x = e.buildXPath(null,true);
             
             if(bAttribute)
             {
@@ -309,7 +309,7 @@ public class XMLDocUserData
        }
        else if(dirtyPolicy==EnumDirtyPolicy.XPath)
        {
-           String xPath=element.buildXPath(null);
+           String xPath=element.buildXPath(null,true);
            return isDirty(xPath);
        }
        return false;

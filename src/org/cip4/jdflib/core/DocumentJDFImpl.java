@@ -17,7 +17,6 @@ import java.util.HashMap;
 
 import javax.mail.BodyPart;
 
-import org.apache.xerces.dom.CoreDocumentImpl;
 import org.apache.xerces.dom.DocumentImpl;
 import org.apache.xerces.dom.ElementImpl;
 import org.apache.xerces.dom.ParentNode;

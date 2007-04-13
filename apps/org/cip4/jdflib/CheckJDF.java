@@ -307,7 +307,7 @@ public class CheckJDF
          if(xmlParent != null)
          {
              testElement = xmlParent.appendElement("TestElement");
-             testElement.setAttribute("XPath",kElement.buildXPath(null));
+             testElement.setAttribute("XPath",kElement.buildXPath(null,true));
              testElement.setAttribute("NodeName",kElement.getNodeName());
              String strID = kElement.getAttribute(AttributeName.ID,null,null);
              if (strID!=null)
@@ -480,7 +480,7 @@ public class CheckJDF
              if (!bQuiet)
              {
                  sysOut.println(indent(indent)
-                         + "--- Valid:"+ jdfElement.buildXPath(null) + " " + id);
+                         + "--- Valid:"+ jdfElement.buildXPath(null,true) + " " + id);
              }
              if(testElement!=null)
                  testElement.setAttribute("IsValid", true, null);
@@ -495,7 +495,7 @@ public class CheckJDF
              if (bIsOK) // for the case "Logic is not OK", we printed this line already.
              {
                  sysOut.println(indent(indent)
-                         + "!!! InValid Element: "+ kElement.buildXPath(null)+ " " + id + " !!! ");
+                         + "!!! InValid Element: "+ kElement.buildXPath(null,true)+ " " + id + " !!! ");
              }
              if(testElement!=null)
                  testElement.setAttribute("IsValid", false, null);
@@ -511,7 +511,7 @@ public class CheckJDF
                  setErrorType(e,"MultipleID", "Multiply defined ID = " + id,indent);
                  e.setAttribute("NodeName", "ID");
                  e.setAttribute("Value", id);
-                 e.setAttribute("XPath", jdfElement.buildXPath(null)+ "/@ID");
+                 e.setAttribute("XPath", jdfElement.buildXPath(null,true)+ "/@ID");
              }
                           
              boolean printMissElms=true;
@@ -630,7 +630,7 @@ public class CheckJDF
                      {
                          KElement e = testElement.appendElement("TestElement");
                          setErrorType(e, "MissingElement","Missing Element "+missEl);
-                         e.setAttribute("XPath", jdfElement.buildXPath(null) + "/" + missEl + "[1]");
+                         e.setAttribute("XPath", jdfElement.buildXPath(null,true) + "/" + missEl + "[1]");
                          e.setAttribute("NodeName", missEl);
                      }
                  }
@@ -699,7 +699,7 @@ public class CheckJDF
              setErrorType(e,"DanglingURL", "Dangling URL points to Nirvana: "+url,indent);                           
              e.setAttribute("NodeName", "URL");
              e.setAttribute("Value", url);
-             e.setAttribute("XPath", element.buildXPath(null)+ "/@URL");
+             e.setAttribute("XPath", element.buildXPath(null,true)+ "/@URL");
          }
      }
 
@@ -764,7 +764,7 @@ public class CheckJDF
                              KElement e = testElement.appendElement("TestAttribute");
                              setErrorType(e,"MissingAttribute","Missing Partition key: "+invalidAt, indent+2);
                              e.setAttribute("NodeName", invalidAt);
-                             e.setAttribute("XPath", part.buildXPath(null)+ "/@" + invalidAt);
+                             e.setAttribute("XPath", part.buildXPath(null,true)+ "/@" + invalidAt);
                          }
                      }
                      else
@@ -772,7 +772,7 @@ public class CheckJDF
                          KElement e = testElement.appendElement("TestAttribute");
                          setErrorType(e,"InvalidAttribute","Incorrectly placed Partition key: "+invalidAt, indent+2);
                          e.setAttribute("NodeName", invalidAt);
-                         e.setAttribute("XPath", part.buildXPath(null)+ "/@" + invalidAt);                         
+                         e.setAttribute("XPath", part.buildXPath(null,true)+ "/@" + invalidAt);                         
                      }
                  }
                  else if (!part.hasAttribute(invalidAt, null, false)) // if the resourceRoot doesn`t have it as well
@@ -782,7 +782,7 @@ public class CheckJDF
                          KElement e = testElement.appendElement("TestAttribute");
                          setErrorType(e,"MissingAttribute","Missing required attribute: "+invalidAt,indent+2);
                          e.setAttribute("NodeName", invalidAt);
-                         e.setAttribute("XPath", part.buildXPath(null)+ "/@" + invalidAt);
+                         e.setAttribute("XPath", part.buildXPath(null,true)+ "/@" + invalidAt);
                      }
                  }
              }
@@ -810,7 +810,7 @@ public class CheckJDF
                      }
                      setErrorType(e,whatType+"Attribute",invalidAt+" "+message);
                      e.setAttribute("NodeName", invalidAt);
-                     e.setAttribute("XPath", part.buildXPath(null)+ "/@" + invalidAt);
+                     e.setAttribute("XPath", part.buildXPath(null,true)+ "/@" + invalidAt);
                      e.setAttribute("Value", part.getAttribute(invalidAt));
                      
                  }
@@ -972,7 +972,7 @@ public class CheckJDF
          {
              sysOut.println(indent(indent)
                      + "Element with private contents:   " 
-                     + jdfElement.buildXPath(null) + " " + jdfElement.getAttribute(AttributeName.ID,null,""));
+                     + jdfElement.buildXPath(null,true) + " " + jdfElement.getAttribute(AttributeName.ID,null,""));
              
              if(testElement != null)
              {
@@ -1023,7 +1023,7 @@ public class CheckJDF
                      e.setAttribute("ErrorType","PrivateAttribute");
                      e.setAttribute("NodeName",privateAttribute);
                      e.setAttribute("Value",jdfElement.getAttribute(privateAttribute));
-                     e.setAttribute("XPath", jdfElement.buildXPath(null)+ "/@" + privateAttribute);                    
+                     e.setAttribute("XPath", jdfElement.buildXPath(null,true)+ "/@" + privateAttribute);                    
                  }                 
             }
          }
@@ -1067,7 +1067,7 @@ public class CheckJDF
                  e.setAttribute("Value", jobPartID);
              }
              e.setAttribute("NodeName", AttributeName.JOBPARTID);
-             e.setAttribute("XPath", jdfNode.buildXPath(null)+ "/@JobPartID");
+             e.setAttribute("XPath", jdfNode.buildXPath(null,true)+ "/@JobPartID");
          }
          else
          {
@@ -1087,7 +1087,7 @@ public class CheckJDF
                      setErrorType(pool,"MissingElement","Missing ResourceLinkPool");
                      pool.setAttribute("NodeName", "ResourceLinkPool");
                  }
-                 printResourceLinkPool(jdfNode.buildXPath(null)+ "/ResourceLinkPool[1]",testElement,vMissingLinks);
+                 printResourceLinkPool(jdfNode.buildXPath(null,true)+ "/ResourceLinkPool[1]",testElement,vMissingLinks);
              }
          }
          
@@ -1132,7 +1132,7 @@ public class CheckJDF
                      {
                          KElement e = testElement.appendElement("TestAttribute");
                          setErrorType(e,"ExtensionType","JDF/@Types contains extension types: "+msg,indent+2);
-                         e.setAttribute("XPath", jdfNode.buildXPath(null)+"/@Types");
+                         e.setAttribute("XPath", jdfNode.buildXPath(null,true)+"/@Types");
                          e.setAttribute("NodeName", "Types");
                          e.setAttribute("Value", msg);
                      }
@@ -1145,7 +1145,7 @@ public class CheckJDF
              {
                  KElement e = testElement.appendElement("TestAttribute");
                  setErrorType(e,"ExtensionType","Type is an extension type: "+typeString,indent+2);
-                 e.setAttribute("XPath", jdfNode.buildXPath(null)+"/@Type");
+                 e.setAttribute("XPath", jdfNode.buildXPath(null,true)+"/@Type");
                  e.setAttribute("NodeName", "Type");
                  e.setAttribute("Value", typeString);
                  
@@ -1166,7 +1166,7 @@ public class CheckJDF
 
                          setErrorType(testElement,"InvalidParentForProduct","Invalid Parent for JDF Product: Type = " + n.getType());
                          testElement.setAttribute("NodeName", "JDF");
-                         testElement.setAttribute("XPath", n.buildXPath(null));
+                         testElement.setAttribute("XPath", n.buildXPath(null,true));
                      }
                  }
              }
@@ -1236,7 +1236,7 @@ public class CheckJDF
          String rRef = re.getrRef();
          String refName = re.getNodeName();
 
-         String errMessage = indent(indent)+ "!!! InValid Element: "+ re.buildXPath(null)+ " !!! ";
+         String errMessage = indent(indent)+ "!!! InValid Element: "+ re.buildXPath(null,true)+ " !!! ";
          
          if(testElement != null)
          {
@@ -1327,7 +1327,7 @@ public class CheckJDF
              {
                  isValid = false;
                  sysOut.println(indent(indent) + "!!! InValid Element: " + 
-                                    r.buildXPath(null) + " " + r.getID() + " !!! ");
+                                    r.buildXPath(null,true) + " " + r.getID() + " !!! ");
                  
                  sysOut.println(indent(indent) + 
                                     "Unlinked Resource: " + 
@@ -1364,7 +1364,7 @@ public class CheckJDF
              String procUsage = (rl.hasAttribute(AttributeName.PROCESSUSAGE) && !rl.getProcessUsage().equals(JDFConstants.EMPTYSTRING))
              ?  "(ProcessUsage:" + rl.getProcessUsage() + ")"  : JDFConstants.EMPTYSTRING;
              
-             String errMessage = indent(indent)+ "!!! InValid Element: "+ rl.buildXPath(null)+ " !!! ";
+             String errMessage = indent(indent)+ "!!! InValid Element: "+ rl.buildXPath(null,true)+ " !!! ";
              
              if(testElement != null)
              {
@@ -1557,7 +1557,7 @@ public class CheckJDF
                  final JDFNode node = (JDFNode) vExecNodes.elementAt(j);
                  final String id = node.getAttribute(AttributeName.ID);
                  final String descrName = node.getAttribute(AttributeName.DESCRIPTIVENAME,null,null);
-                 final String xPath = node.buildXPath(null);
+                 final String xPath = node.buildXPath(null,true);
                  sysOut.println( xPath + " ID= " + id + " " + descrName);
                  
                  if (execRoot != null) 
