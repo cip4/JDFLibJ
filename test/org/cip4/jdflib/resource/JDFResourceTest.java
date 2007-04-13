@@ -135,14 +135,15 @@ import org.cip4.jdflib.util.StringUtil;
 public class JDFResourceTest extends JDFTestCaseBase
 {
 
-    
+    private boolean b;
+
     public void testGetCreator()
     {
         JDFDoc doc=creatXMDoc();
         JDFNode n=doc.getJDFRoot();
         JDFExposedMedia xm=(JDFExposedMedia)n.getMatchingResource("ExposedMedia",JDFNode.EnumProcessUsage.AnyInput,null,0);
         assertTrue(xm.getCreator(false).contains(n));
-        
+
     }    
     public void testGetAttributeVector()
     {
@@ -163,21 +164,21 @@ public class JDFResourceTest extends JDFTestCaseBase
         assertTrue("contains inherited attributes",partVector.contains("AgentName"));
         assertTrue("contains inherited attributes",partVector.contains("foo:bar"));
     }   
-    
+
     /**
      * test the the generalized partition matching
      *
      */
     public void testGetAttributeMap()
     {
-          JDFDoc doc = new JDFDoc(ElementName.JDF);
+        JDFDoc doc = new JDFDoc(ElementName.JDF);
         JDFNode root = doc.getJDFRoot();
         root.setType(JDFNode.EnumType.ConventionalPrinting.getName(),true);
         JDFExposedMedia xm=(JDFExposedMedia)root.appendMatchingResource(ElementName.EXPOSEDMEDIA,JDFNode.EnumProcessUsage.AnyInput,null);
         xm.setResolution(new JDFXYPair(300,300));
         xm.setPolarity(true);
         xm.setProofType(JDFExposedMedia.EnumProofType.Page);
- 
+
         JDFMedia m=xm.appendMedia();
         m.setDimension(new JDFXYPair(200,300));
         JDFExposedMedia xm2=(JDFExposedMedia) xm.addPartition(EnumPartIDKey.SheetName,"S1");
@@ -189,7 +190,7 @@ public class JDFResourceTest extends JDFTestCaseBase
         assertEquals(am.get("foo:bar"), "foobar");
         am=xm2.getAttributeMap();
         assertEquals(am.get("foo:bar"), "foobar");
-       
+
     }
 
 
@@ -207,21 +208,26 @@ public class JDFResourceTest extends JDFTestCaseBase
         assertTrue(JDFPart.overlapPartMap(m1,m2));
     }
     /**
-     * test the the generalized partition matching
-     *
+     * test initialization and setAutoAgent
      */
     public void testInit()
     {
-        JDFAudit.setStaticAgentName(JDFAudit.software());
-        JDFAudit.setStaticAgentVersion(JDFAudit.getDefaultJDFVersion().getName());
-        JDFDoc doc=creatXMDoc();
-        JDFNode n=doc.getJDFRoot();
-        JDFExposedMedia xm=(JDFExposedMedia)n.getMatchingResource("ExposedMedia",JDFNode.EnumProcessUsage.AnyInput,null,0);
-        assertTrue(xm.hasAttribute(AttributeName.AGENTNAME)); 
-        assertTrue(xm.hasAttribute(AttributeName.AGENTVERSION)); 
-        JDFAudit.setStaticAgentName("foo");
-        xm.init();
-        assertEquals(xm.getAgentName(),"foo");
+        for(int i=0;i<2;i++)
+        {
+            boolean bb=i==0;
+            JDFResource.setAutoAgent(bb);
+            JDFAudit.setStaticAgentName(JDFAudit.software());
+            JDFAudit.setStaticAgentVersion(JDFAudit.getDefaultJDFVersion().getName());
+            JDFDoc doc=creatXMDoc();
+            JDFNode n=doc.getJDFRoot();
+            JDFExposedMedia xm=(JDFExposedMedia)n.getMatchingResource("ExposedMedia",JDFNode.EnumProcessUsage.AnyInput,null,0);
+            assertTrue(xm.hasAttribute(AttributeName.AGENTNAME)==bb); 
+            assertTrue(xm.hasAttribute(AttributeName.AGENTVERSION)==bb); 
+            JDFAudit.setStaticAgentName("foo");
+            xm.init();
+            if(bb)
+                assertEquals(xm.getAgentName(),"foo");
+        }
     }
 
     /**
@@ -548,7 +554,7 @@ public class JDFResourceTest extends JDFTestCaseBase
         JDFResourceLink rlMedia=root.getLink(media, null);
         JDFResourceLink rlComp=root.getLink(comp, null);
         JDFComponent c1=(JDFComponent) comp.addPartition(EnumPartIDKey.SheetName, "S1");
-        
+
         JDFAttributeMap m1=new JDFAttributeMap(EnumPartIDKey.SheetName,"S1");
         rlComp.setActualAmount(42, m1);
         comp.updateAmounts(10);
@@ -558,14 +564,14 @@ public class JDFResourceTest extends JDFTestCaseBase
         media.updateAmounts(0);
         assertEquals("amount=100, - the 21 actual",media.getAmount(), 100-21,0.1);
         assertEquals(media.getAmountRequired(), 100.,0.1);
-        
 
-        
+
+
         rlComp.removeChild(ElementName.AMOUNTPOOL, null, 0);
         m1.put(EnumPartIDKey.Condition, "Good");
         comp.removeAttribute(AttributeName.AMOUNTPRODUCED);
         rlComp.setActualAmount(42, m1);
-        
+
         m1.put(EnumPartIDKey.Condition, "Waste");
         comp.removeAttribute(AttributeName.AMOUNTPRODUCED);
         rlComp.setActualAmount(10, m1);
@@ -1024,11 +1030,11 @@ public class JDFResourceTest extends JDFTestCaseBase
         v=m.getLinksAndRefs(true,false);
         assertEquals(v.size(),1);
         assertTrue(v.contains(rl));
-        
+
         v=m.getLinksAndRefs(true,true);
         assertEquals(v.size(),2);
         assertTrue(v.contains(rl));
-               
+
         JDFMedia mPart=(JDFMedia) m.addPartition(EnumPartIDKey.SignatureName,"Sig1");
         v=mPart.getLinksAndRefs(true,true);
         assertEquals("partitioned resource has no links",v.size(),2);
@@ -1062,7 +1068,7 @@ public class JDFResourceTest extends JDFTestCaseBase
     public void testGetLeaves()
     {              
         JDFDoc doc=creatXMDoc();
-            JDFNode n=doc.getJDFRoot();
+        JDFNode n=doc.getJDFRoot();
         JDFExposedMedia xm=(JDFExposedMedia)n.getMatchingResource("ExposedMedia",JDFNode.EnumProcessUsage.AnyInput,null,0);
 
         VElement vL=xm.getLeaves(false);
@@ -1596,7 +1602,7 @@ public class JDFResourceTest extends JDFTestCaseBase
             // nop
         }
     }
-    
+
     /////////////////////////////////////////////////////////////////////////////
 
     public void testAddpartitionEnum() throws Exception
@@ -1607,7 +1613,7 @@ public class JDFResourceTest extends JDFTestCaseBase
         media=media.addPartition(EnumPartIDKey.Side, EnumSide.Front);
         assertEquals(media.getSide(), EnumSide.Front);
     }
-    
+
     /////////////////////////////////////////////////////////////////////////////
 
     public void testAddpartition() throws Exception
@@ -1627,7 +1633,7 @@ public class JDFResourceTest extends JDFTestCaseBase
         {
             // nop
         }
-        
+
         try
         {
             media.addPartition(EnumPartIDKey.SheetName, "sh11");
@@ -1723,5 +1729,27 @@ public class JDFResourceTest extends JDFTestCaseBase
         pv.setURL("http://somehost/pvExposedMedia.png");
         pv.setPreviewType(EnumPreviewType.ThumbNail);
         doc.write2File(sm_dirTestDataTemp+"pv14.jdf", 2,false);
+    }
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
+     */
+    protected void tearDown() throws Exception
+    {
+        // TODO Auto-generated method stub
+        super.tearDown();
+        JDFResource.setAutoAgent(b);
+
+    }
+
+
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+     */
+    protected void setUp() throws Exception
+    {
+        // TODO Auto-generated method stub
+        super.setUp();
+        b=JDFResource.getAutoAgent();
+
     }
 }

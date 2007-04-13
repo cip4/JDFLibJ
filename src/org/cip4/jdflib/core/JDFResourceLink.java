@@ -851,28 +851,7 @@ public class JDFResourceLink extends JDFElement
                 return false;
             }
             
-            // TODO MinStatus stuff 
-            if (getUsage().equals(EnumUsage.Input))
-            {
-                if (getDraftOK())
-                {
-                    bExec = status.equals(JDFResource.EnumResStatus.Available)
-                    || status.equals(JDFResource.EnumResStatus.Draft);
-                }
-                else
-                {
-                    bExec = status.equals(JDFResource.EnumResStatus.Available);
-                }
-                if (!bExec)
-                {
-                    // tbd pipe handling
-                }
-            }
-            else
-            {
-                bExec = status.getValue() > JDFResource.EnumResStatus.Incomplete.getValue();
-            }
-            
+            bExec=getMinStatus().getValue()<=status.getValue();
             // any leaf not executable --> the whole thing is not executable
             if (!bExec)
             {

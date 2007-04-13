@@ -89,6 +89,7 @@ import org.cip4.jdflib.resource.JDFResource;
  */
 public class JDFAuditTest extends JDFTestCaseBase
 {
+    private boolean b;
     public void testInit() throws Exception
     {
         JDFDoc d=new JDFDoc(ElementName.JDF);
@@ -163,6 +164,8 @@ public class JDFAuditTest extends JDFTestCaseBase
         JDFCreated crea=(JDFCreated) ap.getAudit(0, EnumAuditType.Created, null,null);
         assertEquals(crea.getAgentName(),JDFAudit.getStaticAgentName());
 
+        boolean b=JDFResource.getAutoAgent();
+        JDFResource.setAutoAgent(true);
         JDFResource r=n.appendMatchingResource(ElementName.CONVENTIONALPRINTINGPARAMS, null, null);
         assertEquals(r.getAgentName(), JDFAudit.getStaticAgentName());
         assertEquals(r.getAgentVersion(), JDFAudit.getStaticAgentVersion());
@@ -181,11 +184,35 @@ public class JDFAuditTest extends JDFTestCaseBase
         r=n.appendMatchingResource(ElementName.CONVENTIONALPRINTINGPARAMS, null, null);
         assertFalse(r.hasAttribute(AttributeName.AGENTNAME));
         assertFalse(r.hasAttribute(AttributeName.AGENTVERSION));
- 
+        
         
      }
+
+
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
+     */
+    protected void tearDown() throws Exception
+    {
+        // TODO Auto-generated method stub
+        super.tearDown();
+        JDFResource.setAutoAgent(b);
+
+    }
+
+
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+     */
+    protected void setUp() throws Exception
+    {
+        // TODO Auto-generated method stub
+        super.setUp();
+        b=JDFResource.getAutoAgent();
+
+    }
     
- 
+    
     /////////////////////////////////////////////////////////////////////
 
 }

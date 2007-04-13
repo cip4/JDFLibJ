@@ -67,6 +67,7 @@ public class ContentCreationTest extends PreflightTest
         lePart=lep.appendLayoutElementPart();
         positionObj=lePart.appendElement("PositionObject");
         positionObj.setAttribute("PageRange", "0");
+        //TODO discuss individual positions
         positionObj.setAttribute("Position", "0.5 0.5");
         positionObj.setAttribute("Anchor", "CenterCenter");
         positionObj.setAttribute("PositionPolicy", "Free");
@@ -127,7 +128,7 @@ public class ContentCreationTest extends PreflightTest
         lePart.appendBarcodeProductionParams().appendXMLComment("barcode details here", null);
 
         lep.appendXMLComment("This is a disclaimer text inside the previous container\nThe anchor at top left is defined in the !Unrotated! orientation.\n The barcode and text are justified with their top margins and spaced by 72 points\n which corresponds to the left of the page because the container is rotated 90°\n"+
-        "AbsoluteSize specifies the size of the object in points", null);
+                "AbsoluteSize specifies the size of the object in points", null);
         lePart=lep.appendLayoutElementPart();
         positionObj=lePart.appendElement("PositionObject");
         nextAnchor=positionObj.appendElement("NextAnchor");
@@ -143,7 +144,7 @@ public class ContentCreationTest extends PreflightTest
 
 
         lep.appendXMLComment("This is a \"VERY roughly placed\" piece of text somewhere on pages 2-3\n"+
-        "RelativeSize specifies the size of the object as a ratio of the size of the container", null);
+                "RelativeSize specifies the size of the object as a ratio of the size of the container", null);
         lePart=lep.appendLayoutElementPart();
         positionObj=lePart.appendElement("PositionObject");
         positionObj.setAttribute("PageRange", "1 ~ 2");
@@ -153,7 +154,7 @@ public class ContentCreationTest extends PreflightTest
         final JDFComment instructionComment = text.appendComment();
         instructionComment.setName("Instructions");
         instructionComment.setText("Please add some text about the image of a palm tree on a beach here!");
-         
+
         lep.appendXMLComment("This is another \"VERY roughly placed\" piece of text somewhere on pages 2-3; the text source is the JDF", null);
         lePart=lep.appendLayoutElementPart();
         positionObj=lePart.appendElement("PositionObject");
@@ -186,9 +187,9 @@ public class ContentCreationTest extends PreflightTest
         media.setDimensionCM(new JDFXYPair(100,70));
 
         JDFStrippingParams spS1=(JDFStrippingParams) stripParams.addPartition(EnumPartIDKey.SheetName, "Sheet_1");
-        spS1.appendXMLComment("The following mark is on the press sheet (see new Attribute: MarkContext)\n@Anchor defines the cs origin of the mark, @NextAnchor defines the cs origin of the container, in this case the sheet\nThus the top center of the mark is rotated by 90° and placed exactly on (Position=0 0) the center right of the sheet\nNote that position is defined in absolute coordinates so that it alligns with Margin\nI propose deprecating StripMark/Position because the box paradigm does not fit well with resizeable marks.", null);
         {
             JDFStripMark sm1=spS1.appendStripMark();
+            sm1.setXMLComment("The following mark is on the press sheet (see new Attribute: MarkContext)\n@Anchor defines the cs origin of the mark, @NextAnchor defines the cs origin of the container, in this case the sheet\nThus the top center of the mark is rotated by 90° and placed exactly on (Position=0 0) the center right of the sheet\nNote that position is defined in absolute coordinates so that it alligns with Margin\nI propose deprecating StripMark/Position because the box paradigm does not fit well with resizeable marks.");
             sm1.setAttribute("MarkContext","Sheet");
             sm1.setMarkName("ColorControlStrip");
             sm1.setMarkSide(EnumMarkSide.TwoSidedIndependent);
@@ -196,7 +197,7 @@ public class ContentCreationTest extends PreflightTest
             sm1.setAttribute("Anchor", "TopCenter");
             sm1.setAttribute("NextAnchor", "CenterRight");
             sm1.setAttribute("Position", "0 0");
-            sm1.appendElement(ElementName.COLORCONTROLSTRIP).appendXMLComment("The various explicit mark elements should be allowed here for their associated metatdata", null);
+            sm1.appendElement(ElementName.COLORCONTROLSTRIP).setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata");
         }
 
         JDFStrippingParams spBS1=(JDFStrippingParams) spS1.addPartition(EnumPartIDKey.BinderySignatureName, "BS_1");
@@ -204,9 +205,9 @@ public class ContentCreationTest extends PreflightTest
         bs1.setNumberUp(new JDFXYPair(2,4));
         JDFPosition posBS1_1=spBS1.appendPosition();
         posBS1_1.setRelativeBox(new JDFRectangle(0,0,0.5,1));
-        spBS1.appendXMLComment("The following describes a back to back mark on the folding signature (see new Attribute: MarkContext)\n@Anchor defines the cs origin of the mark, @NextAnchor defines the cs origin of the container, in this case the bindery signature.\nThus the center of the cutmark is positioned 5 pts left(-5) and 5 pts up(+5) from the bottom right of the bindery Signature", null);
         {
             JDFStripMark sm1_1=spBS1.appendStripMark();
+            sm1_1.setXMLComment("The following describes a back to back mark on the folding signature (see new Attribute: MarkContext)\n@Anchor defines the cs origin of the mark, @NextAnchor defines the cs origin of the container, in this case the bindery signature.\nThus the center of the cutmark is positioned 5 pts left(-5) and 5 pts up(+5) from the bottom right of the bindery Signature");
             sm1_1.setAttribute("MarkContext","BinderySignature");
             sm1_1.setMarkName("CutMark");
             sm1_1.setMarkSide(EnumMarkSide.TwoSidedBackToBack);
@@ -214,12 +215,12 @@ public class ContentCreationTest extends PreflightTest
             sm1_1.setAttribute("Anchor", "CenterCenter");
             sm1_1.setAttribute("NextAnchor", "BottomRight");
             sm1_1.setAttribute("Position", "-5 5");
-            sm1_1.appendElement(ElementName.CUTMARK).appendXMLComment("The various explicit mark elements should be allowed here for their associated metatdata", null);
+            sm1_1.appendElement(ElementName.CUTMARK).setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata");
         } 
-// TODO page cs vs. cell cs
-        spBS1.appendXMLComment("The following describes a 4 back marks, one on each pair of Strip Cells (page) (see new Attribute: MarkContext)\n@Anchor defines the cs origin of the mark, @NextAnchor defines the cs origin of the container, in this case the spine of a pair of Page cells.\nThus the center of the bar code is positioned 0 pts right and 5 point up from the bottom spine of the cell page.\n Position is applied prior to rotating the mark.", null);
+//      TODO page cs vs. cell cs
         {
             JDFStripMark sm1_2=spBS1.appendStripMark();
+            sm1_2.setXMLComment("The following describes a 4 back marks, one on each pair of Strip Cells (page) (see new Attribute: MarkContext)\n@Anchor defines the cs origin of the mark, @NextAnchor defines the cs origin of the container, in this case the spine of a pair of Page cells.\nThus the center of the bar code is positioned 0 pts right and 5 point up from the bottom spine of the cell page.\n Position is applied prior to rotating the mark.");
             sm1_2.setAttribute("MarkContext","StripCellPair");
             sm1_2.setMarkName("IdentificationField");
             sm1_2.setMarkSide(EnumMarkSide.Back);
@@ -227,12 +228,12 @@ public class ContentCreationTest extends PreflightTest
             sm1_2.setAttribute("Anchor", "CenterLeft");
             sm1_2.setAttribute("NextAnchor", "BottomSpine");
             sm1_2.setAttribute("Position", "5 0");
-            sm1_2.appendElement(ElementName.IDENTIFICATIONFIELD).appendXMLComment("The various explicit mark elements should be allowed here for their associated metatdata", null);
+            sm1_2.appendElement(ElementName.IDENTIFICATIONFIELD).setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata");
         } 
-        
-        spBS1.appendXMLComment("The following describes a back mark on each of the 8 Strip Cells (page) (see new Attribute: MarkContext)\n@Anchor defines the cs origin of the mark, @NextAnchor defines the cs origin of the container, in this case the bottom center of a Page cell.\nThus the center of the bar code is positioned 0 pts right and 5 point up from the bottom cell page.", null);
+
         {
             JDFStripMark sm1_3=spBS1.appendStripMark();
+            sm1_3.setXMLComment("The following describes a back mark on each of the 8 Strip Cells (page) (see new Attribute: MarkContext)\n@Anchor defines the cs origin of the mark, @NextAnchor defines the cs origin of the container, in this case the bottom center of a Page cell.\nThus the center of the bar code is positioned 0 pts right and 5 point up from the bottom cell page.");
             sm1_3.setAttribute("MarkContext","StripCell");
             sm1_3.setMarkName("IdentificationField");
             sm1_3.setMarkSide(EnumMarkSide.Back);
@@ -241,7 +242,7 @@ public class ContentCreationTest extends PreflightTest
             sm1_3.setAttribute("NextAnchor", "BottomCenter");
             sm1_3.setAttribute("Position", "0 5");
             sm1_3.setAttribute("Size", "20 10");
-            sm1_3.appendElement(ElementName.IDENTIFICATIONFIELD).appendXMLComment("The various explicit mark elements should be allowed here for their associated metatdata", null);
+            sm1_3.appendElement(ElementName.IDENTIFICATIONFIELD).setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata");
         } 
 
         JDFStrippingParams spBS2=(JDFStrippingParams) spS1.addPartition(EnumPartIDKey.BinderySignatureName, "BS_2");
@@ -254,9 +255,9 @@ public class ContentCreationTest extends PreflightTest
         posBS2_2.setRelativeBox(new JDFRectangle(0.5,0.5,1,1));
         posBS2_2.setOrientation(EnumOrientation.Flip90);
 
-        spBS2.appendXMLComment("The following describes single sided barcode on the two folding signatures (see new Attribute: MarkContext)\n@Anchor defines the cs origin of the mark, @NextAnchor defines the cs origin of the container, in this case the 2 bindery signatures.\nThus the top left of the barcode is positioned 3 pts right(+3) and 3 pts below(-3) from the top left of the front side of the bindery Signature.\nSince ther are two position elements, this results in two marks:\nPosition one is rotated by 90 degrees so that the barcode remains on the front of the sheet. Due to the Position/@Rotation, the mark is also rotated by 90° on the press sheet\n Position 2 is also flipped so that the barcode eventually ends up on the back of the press sheet.", null);
         {
             JDFStripMark sm2_1=spBS2.appendStripMark();
+            sm2_1.setXMLComment("The following describes single sided barcode on the two folding signatures (see new Attribute: MarkContext)\n@Anchor defines the cs origin of the mark, @NextAnchor defines the cs origin of the container, in this case the 2 bindery signatures.\nThus the top left of the barcode is positioned 3 pts right(+3) and 3 pts below(-3) from the top left of the front side of the bindery Signature.\nSince ther are two position elements, this results in two marks:\nPosition one is rotated by 90 degrees so that the barcode remains on the front of the sheet. Due to the Position/@Rotation, the mark is also rotated by 90° on the press sheet\n Position 2 is also flipped so that the barcode eventually ends up on the back of the press sheet.");
             sm2_1.setAttribute("MarkContext","BinderySignature");
             sm2_1.setMarkName("IdentificationField");
             sm2_1.setMarkSide(EnumMarkSide.Front);
@@ -264,9 +265,30 @@ public class ContentCreationTest extends PreflightTest
             sm2_1.setAttribute("Anchor", "TopLeft");
             sm2_1.setAttribute("NextAnchor", "TopLeft");
             sm2_1.setAttribute("Position", "3 -3");
-            sm2_1.appendElement(ElementName.IDENTIFICATIONFIELD).appendXMLComment("The various explicit mark elements should be allowed here for their associated metatdata", null);
+            String idAnchor=sm2_1.appendAnchor(null);
+            sm2_1.appendElement(ElementName.IDENTIFICATIONFIELD).setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata");
+            
+            
+            JDFStripMark sm2_2=spBS2.appendStripMark();
+            sm2_2.setXMLComment("The following is a relatively positioned stripmark.");
+            sm2_2.setAttribute("MarkContext","BinderySignature");
+            sm2_1.setAttribute("Anchor", "BottomLeft");
+            sm2_2.setMarkName("RegisterMark");
+            sm2_2.setMarkSide(EnumMarkSide.Front);
+            sm2_2.setAttribute("Orientation", "Rotate0");
+            sm2_2.appendElement(ElementName.REGISTERMARK).setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata");
+            KElement nextAnchor=sm2_2.appendElement("NextAnchor");
+            nextAnchor.setAttribute("Anchor", "BottomRight");
+            nextAnchor.setAttribute("AbsolutePosition", "3 0");
+            nextAnchor.setAttribute("rRef",idAnchor);  
+            nextAnchor.setXMLComment("This NextAnchor element refers to the previous barcode. the lower left of this is 3 points tothe right of the lower right of the referenced barcode.");
+                 
         } 
 
+        
+      
+        
+        
         d.write2File(sm_dirTestDataTemp+File.separator+"StripMarks.jdf",2,false);
 
     }

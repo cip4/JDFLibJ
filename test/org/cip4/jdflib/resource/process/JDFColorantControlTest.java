@@ -22,6 +22,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
     private JDFNode elem;
     private JDFColorantControl colControl;
     private JDFSeparationList colParams;
+    private JDFColorPool colPool;
     private JDFDoc d;
 
     /**
@@ -49,8 +50,38 @@ public class JDFColorantControlTest extends JDFTestCaseBase
         ca.setSeparations(new VString("Acme Aqua",","));
         assertTrue(ca.isValid(EnumValidationLevel.Complete));
         
-        d.write2File(sm_dirTestDataTemp+"ColorantAlias.jdf",2,false);
+        d.write2File(sm_dirTestDataTemp+"ColorantAlias.jdf",2,false);        
+    }
+    
+    /**
+     * tests the proposed Color/@PDLName attribute  
+     *
+     */
+    public final void testNoColorantAlias()
+    {
+        JDFColor co=colPool.appendColorWithName("Black", null);
+        co.setXMLComment("Color that maps the predefined separation Black\n"
+        +"PDLName is the new attribute that replaces ExposedMedia/@DescriptiveName as the \"Main\" PDL color");
+        assertTrue(co.isValid(EnumValidationLevel.Incomplete));
+        co.setAttribute("PDLName","Schwarz");
+        co=colPool.appendColorWithName("Yellow", null);
+        co.setAttribute("PDLName","Gelb");
+        colPool.appendColorWithName("Cyan", null).setXMLComment("PDLName defaults to Name if not specified");
+        co=colPool.appendColorWithName("Magenta", null);
+        JDFColorantAlias ca=colControl.appendColorantAlias();
+        ca.setXMLComment("ColorantAlias that maps the additional representation (schwarz) to the predefined separation Black");
+        ca.setReplacementColorantName("Black");
+        assertTrue(ca.isValid(EnumValidationLevel.Incomplete));
+        assertFalse(ca.isValid(EnumValidationLevel.Complete));
+        ca.setSeparations(new VString("schwarz",null));
+        assertTrue(ca.isValid(EnumValidationLevel.Complete));
         
+        colParams.setXMLComment("Note that all Strings in ColorantParams etc. use Color/@Name, NOT Color/@PDLName");
+        colParams.setSeparations(new VString("Spot1",","));
+        co=colPool.appendColorWithName("Spot1", null);
+        co.setAttribute("PDLName","Acme Aqua");
+        
+        d.write2File(sm_dirTestDataTemp+"PDLName.jdf",2,false);        
     }
 
     /**
@@ -154,6 +185,8 @@ public class JDFColorantControlTest extends JDFTestCaseBase
         colControl.setProcessColorModel("DeviceCMYK");
         colControl.setResStatus(EnumResStatus.Available, true);
         colParams = colControl.appendColorantParams();
+        colPool=colControl.appendColorPool();
+        colPool.makeRootResource(null, null, true);
     }
 
 }

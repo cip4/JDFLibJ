@@ -925,17 +925,32 @@ public class JDFNodeTest extends JDFTestCaseBase
         node.setStatus(EnumNodeStatus.Completed);
         exec=node.isExecutable(null,false);
         assertFalse("exec",exec);
+        node.setStatus(EnumNodeStatus.Waiting);
+        xm.setResStatus(EnumResStatus.Unavailable,true);
+        JDFResourceLink rl=node.getLink(xm, null);
+        exec=node.isExecutable(null,false);
+        assertFalse("exec",exec);
+        rl.setDraftOK(true);
+        exec=node.isExecutable(null,false);
+        assertFalse("exec",exec);
+        
+        
+        xm.setResStatus(EnumResStatus.Draft,true);
+        exec=node.isExecutable(null,false);
+        assertTrue("exec",exec);
+        xm.setResStatus(EnumResStatus.Available,true);
+        
 
         // now a partition
         convPrintParams.setPartUsage(EnumPartUsage.Implicit);
         media.setPartUsage(EnumPartUsage.Implicit);
         xm=(JDFExposedMedia) xm.addPartition(EnumPartIDKey.SignatureName,"sig1");
         xm.setResStatus(EnumResStatus.Unavailable,true);
-        exec=node.isExecutable(null,false);
+        exec=node.isExecutable(null,true);
         assertFalse("part not exec",exec);
         xm.setResStatus(EnumResStatus.Available,true);
-        exec=node.isExecutable(null,false);
-        assertFalse("part exec",exec);
+        exec=node.isExecutable(null,true);
+        assertTrue("part exec",exec);
         final JDFAttributeMap partMap = new JDFAttributeMap("SignatureName","sig1");
         node.setPartStatus(partMap,EnumNodeStatus.Waiting);
 
@@ -943,6 +958,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         exec=node.isExecutable(partMap,false);
         assertTrue("part exec",exec);
 
+        node.setPartStatus((JDFAttributeMap)null,EnumNodeStatus.Completed);
 
         // the root is set to completed --> must fail
         exec=node.isExecutable(null,false);

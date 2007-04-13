@@ -87,6 +87,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResourceTest;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
+import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
@@ -542,6 +543,37 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
         JDFResourceLinkPool rlp=n.appendResourceLinkPool();
         JDFResourceLink rl=(JDFResourceLink) rlp.appendElement("FooLink");
         assertNull(rl.getUsage());
+    }
+    /**
+     * Method testIncludesMatchingAttribute.
+     * @throws Exception
+     */
+    public void testIsExecutable() throws Exception
+    {        
+        JDFDoc d=new JDFDoc(ElementName.JDF);
+        JDFNode n=d.getJDFRoot();
+        JDFResource r=n.addResource(ElementName.SCREENINGINTENT, null, EnumUsage.Input, null, null, null, null);
+        JDFResourceLink rl=n.getLink(r, null);
+    
+        r.setResStatus(EnumResStatus.Available, true);
+        assertTrue(rl.isExecutable(null, true));
+        r.setResStatus(EnumResStatus.Unavailable, true);
+        assertFalse(rl.isExecutable(null, true));
+        r.setResStatus(EnumResStatus.Draft, true);
+        assertFalse(rl.isExecutable(null, true));
+        rl.setDraftOK(true);
+        assertTrue(rl.isExecutable(null, true));
+        
+        rl.setUsage(EnumUsage.Output);
+        r.setResStatus(EnumResStatus.Available, true);
+        assertTrue(rl.isExecutable(null, true));
+        r.setResStatus(EnumResStatus.Unavailable, true);
+        assertFalse(rl.isExecutable(null, true));
+        r.setResStatus(EnumResStatus.Draft, true);
+        assertTrue(rl.isExecutable(null, true));
+        rl.setDraftOK(true);
+        assertTrue(rl.isExecutable(null, true));
+       
     }
     /////////////////////////////////////////////////////////////////////
     /**

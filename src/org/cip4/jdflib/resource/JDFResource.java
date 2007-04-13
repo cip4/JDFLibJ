@@ -120,7 +120,7 @@ import org.w3c.dom.Node;
 public class JDFResource extends JDFElement
 {
     private static final long serialVersionUID = 1L;
-    private static boolean autoAgent=true;
+    private static boolean autoAgent=false;
     
     private static AtrInfoTable[] atrInfoTable_Abstract = new AtrInfoTable[17];
     static 

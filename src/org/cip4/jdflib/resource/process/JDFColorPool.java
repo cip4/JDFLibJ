@@ -317,7 +317,8 @@ public class JDFColorPool extends JDFAutoColorPool
         if(col == null)
         {
             col = appendColor();
-            col.set8BitNames(rawName.getBytes());
+            if(rawName!=null)
+                col.set8BitNames(rawName.getBytes());
             col.setName(colorName);
         }
         else
