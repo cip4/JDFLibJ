@@ -144,10 +144,10 @@ public class JDFAuditTest extends JDFTestCaseBase
         assertNotNull(ap);
         JDFNode n2=n.addJDFNode(EnumType.CaseMaking);
         JDFCreated c1=ap.addCreated("foo", n2);
-        assertEquals(n2.buildXPath(ap.getParentJDF().buildXPath(null)), c1.getXPath());
+        assertEquals(n2.buildXPath(ap.getParentJDF().buildXPath(null,true),true), c1.getXPath());
         JDFResource r=n2.addResource("CaseMakingParams", null, EnumUsage.Input, null, null, null, null);
         JDFCreated c2=ap.addCreated("foo", r);
-        assertEquals(r.buildXPath(ap.getParentJDF().buildXPath(null)), c2.getXPath());
+        assertEquals(r.buildXPath(ap.getParentJDF().buildXPath(null,true),true), c2.getXPath());
         
         d.write2File(sm_dirTestDataTemp+"createdTest.jdf", 0, false);
         

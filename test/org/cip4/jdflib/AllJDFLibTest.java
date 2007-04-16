@@ -193,7 +193,6 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(ElemInfoTest.class);
         suite.addTestSuite(FactoryTest.class);
         suite.addTestSuite(FixVersionTest.class);
-        suite.addTestSuite(IterationTest.class);
         suite.addTestSuite(JDFAuditTest.class);
         suite.addTestSuite(JDFCustomerInfoTest.class);
         suite.addTestSuite(JDFDocTest.class);
@@ -245,6 +244,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(AutomatedLayoutTest.class);
         suite.addTestSuite(ContentCreationTest.class);
         suite.addTestSuite(DigiPrintTest.class);
+        suite.addTestSuite(IterationTest.class);
         suite.addTestSuite(JDFExampleDocTest.class);
         suite.addTestSuite(MISFinTest.class);
         suite.addTestSuite(NColorTest.class);

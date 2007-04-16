@@ -82,6 +82,7 @@ import junit.framework.TestCase;
 import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFElement.EnumBoolean;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
@@ -102,6 +103,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFRectangleState;
 import org.cip4.jdflib.resource.devicecapability.JDFShapeState;
 import org.cip4.jdflib.resource.devicecapability.JDFStringState;
 import org.cip4.jdflib.resource.devicecapability.JDFXYPairState;
+import org.cip4.jdflib.resource.process.JDFLayout;
 
 
 public class JDFDevCapTest extends TestCase
@@ -136,6 +138,62 @@ public class JDFDevCapTest extends TestCase
         assertTrue(is.fitsValue("19~33", EnumFitsValue.Allowed));
     }
     
+    public void tetgetMatchingElementsFromParentSingle()
+    {
+        JDFDoc ddc=new JDFDoc("DevCap");
+        JDFDoc dde=new JDFDoc("Layout");
+        JDFDevCap dc=(JDFDevCap)ddc.getRoot();
+        JDFLayout e=(JDFLayout) dde.getRoot();
+
+        JDFDevCap dc1=dc.appendDevCap();
+        dc1.setName("Media");
+        dc1.setMaxOccurs(1);
+        dc1.setMinOccurs(1);
+
+        for(int i=0;i<2;i++)
+        {
+            final String mediaType = i==0 ? "Paper" : "Plate";
+            e.appendElement("Media").setAttribute("MediaType",mediaType);
+
+        }
+        final VElement devCapVector = dc.getDevCapVector(null, true);
+        VElement vMatch=((JDFDevCap)devCapVector.item(0)).getMatchingElementsFromParent(e, devCapVector);
+        assertEquals(vMatch.size(), 2);
+        assertEquals(vMatch.item(0), e.getElement("Media", null, 0));            
+        assertEquals(vMatch.item(1), e.getElement("Media", null, 1));            
+    }
+    
+    
+    
+    public void tetgetMatchingElementsFromParentMulti()
+    {
+        JDFDoc ddc=new JDFDoc("DevCap");
+        JDFDoc dde=new JDFDoc("Layout");
+        JDFDevCap dc=(JDFDevCap)ddc.getRoot();
+        JDFLayout e=(JDFLayout) dde.getRoot();
+        
+        
+        for(int i=0;i<2;i++)
+        {
+            JDFDevCap dc1=dc.appendDevCap();
+            dc1.setName("Media");
+            dc1.setMaxOccurs(1);
+            dc1.setMinOccurs(1);
+            JDFEnumerationState es=dc1.appendEnumerationState("MediaType");
+            final String mediaType = i==0 ? "Paper" : "Plate";
+            es.setAllowedValueList(new VString(mediaType,null));
+            
+            e.appendElement("Media").setAttribute("MediaType",mediaType);
+            
+        }
+        final VElement devCapVector = dc.getDevCapVector(null, true);
+        for(int i=0;i<2;i++)
+        {
+            VElement vMatch=((JDFDevCap)devCapVector.item(i)).getMatchingElementsFromParent(e, devCapVector);
+            assertEquals(vMatch.size(), 1);
+            assertEquals(vMatch.item(0), e.getElement("Media", null, i));            
+        }
+    }
     public void testNumberState() throws Exception
     {
         JDFDoc d=new JDFDoc("NumberState");

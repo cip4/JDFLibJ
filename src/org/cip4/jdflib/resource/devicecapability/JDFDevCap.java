@@ -1479,8 +1479,8 @@ public class JDFDevCap extends JDFAutoDevCap
             
             // vElem - direct children of the Node. 
             // If 'dcName' is a partition Leaf - gets only children of the Leaf.
-            VElement vElem = dc.getMatchingElementsFromParent(e);
-            final int occurs = vElem==null ? 0 : vElem.size();
+            VElement vElem = dc.getMatchingElementsFromParent(e,vDevCap);
+            int occurs = vElem==null ? 0 : vElem.size();
             KElement r;
             final int minOccurs = dc.getMinOccurs();
             final int maxOccurs = dc.getMaxOccurs();
@@ -1508,6 +1508,7 @@ public class JDFDevCap extends JDFAutoDevCap
                 r.setAttribute("MinOccurs", minOccurs, null);
                 r.setAttribute("FoundElements", occurs, null);
             }
+            // there were elements that didn't pass some of the tests - assume that these are actually invalid and report on them
             for (int j = 0; j < occurs; j++)
             {
                 KElement subEl = (KElement)vElem.elementAt(j);
@@ -2097,14 +2098,35 @@ public class JDFDevCap extends JDFAutoDevCap
       * gets the matching elements in the node that match <code>this</code>
       * 
       * @param node the node to search in
+      * @param testValidity if true, recusively check for validity of the elements, 
+      * else only get children by name
+      * 
       * @return VElement - the element vector of matching elements, 
       * <code>null</code> if none were found
       */
-     public VElement getMatchingElementsFromParent(KElement parent)
+     public VElement getMatchingElementsFromParent(KElement parent, VElement vDevCap)
      {
          VElement v= getAllMatchingElementsFromParent(parent);
          if(v==null)
              return null;
+
+         final String _name=getName();
+         VElement vOther=new VElement();
+         if(vDevCap!=null)
+         {
+             for(int i=0;i<vDevCap.size();i++)
+             {
+                 JDFDevCap dcOther=(JDFDevCap) vDevCap.elementAt(i);
+                 if(dcOther==this)
+                     continue;
+                 if(!_name.equals(dcOther.getName()))
+                     continue;
+                 vOther.add(dcOther);
+              }
+         }
+         if(vOther.size()==0) // no other elements that we have to worry about
+             return v;
+         
          
          XMLDoc doc=new XMLDoc("dummy",null);
          KElement repRootDummy=doc.getRoot();
@@ -2115,7 +2137,18 @@ public class JDFDevCap extends JDFAutoDevCap
              if(spanAndAttributesTest(e, EnumFitsValue.Allowed, EnumValidationLevel.Incomplete, true, repRootDummy)!=null || 
                      subelementsTest(e, EnumFitsValue.Allowed, EnumValidationLevel.Incomplete, true, repRootDummy) !=null)
              {
-                 v.remove(i);
+                 // check if an element fits to a different devcap in this, if so remove it from the check
+                 for(int j=0;j<vOther.size();j++)
+                 {
+                     repRootDummy.flush();
+                     JDFDevCap dcOther=(JDFDevCap) vOther.elementAt(j);
+                     if(dcOther.spanAndAttributesTest(e, EnumFitsValue.Allowed, EnumValidationLevel.Incomplete, true, repRootDummy)==null && 
+                             dcOther.subelementsTest(e, EnumFitsValue.Allowed, EnumValidationLevel.Incomplete, true, repRootDummy) ==null)
+                     {
+                         v.remove(i);
+                         break;   // j                      
+                     }
+                 }                 
              }
          }
          return v.size()!=0 ? v : null;
@@ -2164,7 +2197,7 @@ public class JDFDevCap extends JDFAutoDevCap
         {
             JDFDevCap subDevCap=(JDFDevCap) vSubDevCap.elementAt(i);
             final int minOccurs = subDevCap.getMinOccurs();
-            VElement subElms=subDevCap.getMatchingElementsFromParent(element);
+            VElement subElms=subDevCap.getMatchingElementsFromParent(element,vSubDevCap);
             if(minOccurs>0)
             {
                 int occurs=subElms==null ? 0 : subElms.size();

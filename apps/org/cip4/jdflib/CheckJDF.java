@@ -1830,11 +1830,9 @@ public class CheckJDF
      {
          if(_schemaLocation!=null && _schemaLocation.length()!=0)
          {
-             
-            final String fileToUrl;
             try
             {
-                fileToUrl = UrlUtil.fileToUrl(_schemaLocation, false);
+                final String fileToUrl = UrlUtil.fileToUrl(_schemaLocation, false);
                 schemaLocation="http://www.CIP4.org/JDFSchema_1_1 " + fileToUrl;
             }
             catch (MalformedURLException e)

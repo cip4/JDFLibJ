@@ -194,9 +194,8 @@ public class ContentCreationTest extends PreflightTest
             sm1.setMarkName("ColorControlStrip");
             sm1.setMarkSide(EnumMarkSide.TwoSidedIndependent);
             sm1.setAttribute("Orientation", "Rotate90");
+            setNextAnchor(sm1, null, "CenterRight", "0 0", null);
             sm1.setAttribute("Anchor", "TopCenter");
-            sm1.setAttribute("NextAnchor", "CenterRight");
-            sm1.setAttribute("Position", "0 0");
             sm1.appendElement(ElementName.COLORCONTROLSTRIP).setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata");
         }
 
@@ -213,8 +212,7 @@ public class ContentCreationTest extends PreflightTest
             sm1_1.setMarkSide(EnumMarkSide.TwoSidedBackToBack);
             sm1_1.setAttribute("Orientation", "Rotate0");
             sm1_1.setAttribute("Anchor", "CenterCenter");
-            sm1_1.setAttribute("NextAnchor", "BottomRight");
-            sm1_1.setAttribute("Position", "-5 5");
+            setNextAnchor(sm1_1, null, "BottomRight", "-5 5", null);
             sm1_1.appendElement(ElementName.CUTMARK).setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata");
         } 
 //      TODO page cs vs. cell cs
@@ -226,8 +224,7 @@ public class ContentCreationTest extends PreflightTest
             sm1_2.setMarkSide(EnumMarkSide.Back);
             sm1_2.setAttribute("Orientation", "Rotate90");
             sm1_2.setAttribute("Anchor", "CenterLeft");
-            sm1_2.setAttribute("NextAnchor", "BottomSpine");
-            sm1_2.setAttribute("Position", "5 0");
+            setNextAnchor(sm1_2, null, "BottomCenter", "5 0", null);
             sm1_2.appendElement(ElementName.IDENTIFICATIONFIELD).setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata");
         } 
 
@@ -239,9 +236,9 @@ public class ContentCreationTest extends PreflightTest
             sm1_3.setMarkSide(EnumMarkSide.Back);
             sm1_3.setAttribute("Orientation", "Rotate0");
             sm1_3.setAttribute("Anchor", "BottomCenter");
-            sm1_3.setAttribute("NextAnchor", "BottomCenter");
-            sm1_3.setAttribute("Position", "0 5");
-            sm1_3.setAttribute("Size", "20 10");
+            setNextAnchor(sm1_3, null, "BottomCenter", "0 5", null);
+            sm1_3.setAttribute("AbsoluteWidth", "20");
+            sm1_3.setAttribute("AbsoluteHeight", "10");
             sm1_3.appendElement(ElementName.IDENTIFICATIONFIELD).setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata");
         } 
 
@@ -263,8 +260,7 @@ public class ContentCreationTest extends PreflightTest
             sm2_1.setMarkSide(EnumMarkSide.Front);
             sm2_1.setAttribute("Orientation", "Rotate0");
             sm2_1.setAttribute("Anchor", "TopLeft");
-            sm2_1.setAttribute("NextAnchor", "TopLeft");
-            sm2_1.setAttribute("Position", "3 -3");
+            setNextAnchor(sm2_1, null, "TopLeft", "2 -3", null);
             String idAnchor=sm2_1.appendAnchor(null);
             sm2_1.appendElement(ElementName.IDENTIFICATIONFIELD).setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata");
             
@@ -277,20 +273,26 @@ public class ContentCreationTest extends PreflightTest
             sm2_2.setMarkSide(EnumMarkSide.Front);
             sm2_2.setAttribute("Orientation", "Rotate0");
             sm2_2.appendElement(ElementName.REGISTERMARK).setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata");
-            KElement nextAnchor=sm2_2.appendElement("NextAnchor");
-            nextAnchor.setAttribute("Anchor", "BottomRight");
-            nextAnchor.setAttribute("AbsolutePosition", "3 0");
-            nextAnchor.setAttribute("rRef",idAnchor);  
-            nextAnchor.setXMLComment("This NextAnchor element refers to the previous barcode. the lower left of this is 3 points tothe right of the lower right of the referenced barcode.");
+            setNextAnchor(sm2_2, idAnchor, "BottomRight","3 0",
+                    "This NextAnchor element refers to the previous barcode. the lower left of this is 3 points tothe right of the lower right of the referenced barcode.");
                  
         } 
-
-        
-      
-        
         
         d.write2File(sm_dirTestDataTemp+File.separator+"StripMarks.jdf",2,false);
 
+    }
+
+    /**
+     * @param sm2_2
+     * @param idAnchor
+     */
+    private void setNextAnchor(JDFStripMark sm2_2, String idAnchor, String anchor, String absolutePosition,String xmlComment)
+    {
+        KElement nextAnchor=sm2_2.appendElement("RefAnchor");
+        nextAnchor.setAttribute("Anchor",anchor);
+        nextAnchor.setAttribute("MarkOffset", absolutePosition);
+        nextAnchor.setAttribute("rRef",idAnchor);  
+        nextAnchor.setXMLComment(xmlComment);
     }
 
     /**

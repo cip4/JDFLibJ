@@ -573,7 +573,7 @@ public class JDFAuditPool extends JDFPool
     }
 
     /**
-     * finds all staus messages in a jmf and fills the phaseTime with the appropriate data
+     * finds all status messages in a jmf and fills the phaseTime with the appropriate data
      * @param jmf
      * @return vector the vector of all modified phasetime elements
      */
@@ -585,19 +585,19 @@ public class JDFAuditPool extends JDFPool
         VElement vRet=new VElement();
         for(int i=0;i<vMessages.size();i++)
         {
-            JDFMessage status=(JDFMessage)vMessages.elementAt(i);
-            VElement devInfos=status.getChildElementVector(ElementName.DEVICEINFO, null, null, true, 0,true);
+            final JDFMessage status=(JDFMessage)vMessages.elementAt(i);
+            final VElement devInfos=status.getChildElementVector(ElementName.DEVICEINFO, null, null, true, 0,true);
             for(int j=0;j<devInfos.size();j++)
             {
-                JDFDeviceInfo devInfo=(JDFDeviceInfo)devInfos.elementAt(j);
-                VElement phases=devInfo.getChildElementVector(ElementName.JOBPHASE, null, null, true, 0,true);
+                final JDFDeviceInfo devInfo=(JDFDeviceInfo)devInfos.elementAt(j);
+                final VElement phases=devInfo.getChildElementVector(ElementName.JOBPHASE, null, null, true, 0,true);
                 for(int k=0;k<phases.size();k++)
                 {
-                    JDFJobPhase phase=(JDFJobPhase)phases.elementAt(k);
-                    String jobID=phase.getJobID();
+                    final JDFJobPhase phase=(JDFJobPhase)phases.elementAt(k);
+                    final String jobID=phase.getJobID();
                     if(!jobID.equals(getParentJDF().getJobID(true)))
                         continue;
-                    String jobPartID=phase.getJobPartID();
+                    final String jobPartID=phase.getJobPartID();
                     if(!jobPartID.equals(getParentJDF().getJobPartID(true)))
                         continue;
 
