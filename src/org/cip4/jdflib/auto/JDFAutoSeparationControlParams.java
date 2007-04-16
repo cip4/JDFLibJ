@@ -77,6 +77,12 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFTransferFunctionControl;
 import org.cip4.jdflib.resource.process.JDFAutomatedOverPrintParams;
+    /*
+    *****************************************************************************
+    class JDFAutoSeparationControlParams : public JDFResource
+
+    *****************************************************************************
+    */
 
 public abstract class JDFAutoSeparationControlParams extends JDFResource
 {

@@ -89,6 +89,12 @@ import org.cip4.jdflib.resource.process.JDFAutomatedOverPrintParams;
 import org.cip4.jdflib.resource.process.JDFColorantAlias;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionOp;
+    /*
+    *****************************************************************************
+    class JDFAutoElementColorParams : public JDFResource
+
+    *****************************************************************************
+    */
 
 public abstract class JDFAutoElementColorParams extends JDFResource
 {

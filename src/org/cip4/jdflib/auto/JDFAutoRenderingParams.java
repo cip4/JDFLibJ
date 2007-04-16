@@ -87,6 +87,12 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFAutomatedOverPrintParams;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFObjectResolution;
+    /*
+    *****************************************************************************
+    class JDFAutoRenderingParams : public JDFResource
+
+    *****************************************************************************
+    */
 
 public abstract class JDFAutoRenderingParams extends JDFResource
 {

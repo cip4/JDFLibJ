@@ -80,6 +80,12 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.JDFResource;
+    /*
+    *****************************************************************************
+    class JDFAutoPipeParams : public JDFElement
+
+    *****************************************************************************
+    */
 
 public abstract class JDFAutoPipeParams extends JDFElement
 {

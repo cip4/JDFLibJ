@@ -88,6 +88,12 @@ import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.util.JDFDate;
+    /*
+    *****************************************************************************
+    class JDFAutoPhaseTime : public JDFAudit
+
+    *****************************************************************************
+    */
 
 public abstract class JDFAutoPhaseTime extends JDFAudit
 {

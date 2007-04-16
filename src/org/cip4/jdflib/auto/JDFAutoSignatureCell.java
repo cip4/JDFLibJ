@@ -95,7 +95,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.BACKFACEPAGES, 0x33333311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
@@ -105,7 +105,8 @@ public abstract class JDFAutoSignatureCell extends JDFElement
         atrInfoTable[4] = new AtrInfoTable(AttributeName.FRONTFACEPAGES, 0x33333311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
         atrInfoTable[5] = new AtrInfoTable(AttributeName.FRONTPAGES, 0x33333311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
         atrInfoTable[6] = new AtrInfoTable(AttributeName.ORIENTATION, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0), "Up");
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.STATIONNAME, 0x33333111, AttributeInfo.EnumAttributeType.string, null, "0");
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.SECTIONINDEX, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, "0");
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.STATIONNAME, 0x33333111, AttributeInfo.EnumAttributeType.string, null, "0");
     }
     
     protected AttributeInfo getTheAttributeInfo()
@@ -279,7 +280,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 
         /**
           * (20) get JDFIntegerList attribute BackFacePages
-          * @return JDFIntegerListthe value of the attribute, null if a the
+          * @return JDFIntegerList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerList
           */
         public JDFIntegerList getBackFacePages()
@@ -317,7 +318,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 
         /**
           * (20) get JDFIntegerList attribute BackPages
-          * @return JDFIntegerListthe value of the attribute, null if a the
+          * @return JDFIntegerList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerList
           */
         public JDFIntegerList getBackPages()
@@ -407,7 +408,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 
         /**
           * (20) get JDFIntegerList attribute FrontFacePages
-          * @return JDFIntegerListthe value of the attribute, null if a the
+          * @return JDFIntegerList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerList
           */
         public JDFIntegerList getFrontFacePages()
@@ -445,7 +446,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 
         /**
           * (20) get JDFIntegerList attribute FrontPages
-          * @return JDFIntegerListthe value of the attribute, null if a the
+          * @return JDFIntegerList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerList
           */
         public JDFIntegerList getFrontPages()
@@ -488,6 +489,32 @@ public abstract class JDFAutoSignatureCell extends JDFElement
         public EnumOrientation getOrientation()
         {
             return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, "Up"));
+        }
+
+
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute SectionIndex
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute SectionIndex
+          * @param value: the value to set the attribute to
+          */
+        public void setSectionIndex(int value)
+        {
+            setAttribute(AttributeName.SECTIONINDEX, value, null);
+        }
+
+
+
+        /**
+          * (15) get int attribute SectionIndex
+          * @return int the value of the attribute
+          */
+        public int getSectionIndex()
+        {
+            return getIntAttribute(AttributeName.SECTIONINDEX, null, 0);
         }
 
 

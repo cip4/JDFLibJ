@@ -85,6 +85,12 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
+    /*
+    *****************************************************************************
+    class JDFAutoResourceAudit : public JDFAudit
+
+    *****************************************************************************
+    */
 
 public abstract class JDFAutoResourceAudit extends JDFAudit
 {

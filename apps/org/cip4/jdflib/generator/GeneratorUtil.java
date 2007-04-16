@@ -271,6 +271,13 @@ public class GeneratorUtil
             isValid = true;
         }
 
+        // SectionIndex is a PartIDKey and a normal attribut, so fix it here
+        if ("SectionIndex".equals (strAttributeName) && 
+            "SignatureCell".equals (strComplexTypeName))
+        {
+            isValid = true;
+        }
+
         return isValid;
     }
 
