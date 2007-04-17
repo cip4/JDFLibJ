@@ -133,7 +133,7 @@ public abstract class JDFAutoLayout extends JDFResource
         elemInfoTable[1] = new ElemInfoTable(ElementName.INSERTSHEET, 0x33333333);
         elemInfoTable[2] = new ElemInfoTable(ElementName.LAYERLIST, 0x66666661);
         elemInfoTable[3] = new ElemInfoTable(ElementName.MARKOBJECT, 0x33333333);
-        elemInfoTable[4] = new ElemInfoTable(ElementName.MEDIA, 0x66666661);
+        elemInfoTable[4] = new ElemInfoTable(ElementName.MEDIA, 0x33333331);
         elemInfoTable[5] = new ElemInfoTable(ElementName.MEDIASOURCE, 0x77777776);
         elemInfoTable[6] = new ElemInfoTable(ElementName.SIGNATURE, 0x44444333);
         elemInfoTable[7] = new ElemInfoTable(ElementName.TRANSFERCURVEPOOL, 0x66666661);
@@ -461,7 +461,7 @@ public abstract class JDFAutoLayout extends JDFResource
 
         /**
           * (20) get JDFRectangle attribute SurfaceContentsBox
-          * @return JDFRectanglethe value of the attribute, null if a the
+          * @return JDFRectangle the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFRectangle
           */
         public JDFRectangle getSurfaceContentsBox()
@@ -511,7 +511,12 @@ public abstract class JDFAutoLayout extends JDFResource
 
 
 
-    public JDFContentObject appendContentObject()
+
+
+    /**
+     * (30) append element ContentObject
+     */
+    public JDFContentObject appendContentObject() throws JDFException
     {
         return (JDFContentObject) appendElement(ElementName.CONTENTOBJECT, null);
     }
@@ -540,7 +545,12 @@ public abstract class JDFAutoLayout extends JDFResource
 
 
 
-    public JDFInsertSheet appendInsertSheet()
+
+
+    /**
+     * (30) append element InsertSheet
+     */
+    public JDFInsertSheet appendInsertSheet() throws JDFException
     {
         return (JDFInsertSheet) appendElement(ElementName.INSERTSHEET, null);
     }
@@ -578,12 +588,13 @@ public abstract class JDFAutoLayout extends JDFResource
 
 
     /**
-     * (29) append elementLayerList
+     * (29) append element LayerList
      */
     public JDFLayerList appendLayerList() throws JDFException
     {
         return (JDFLayerList) appendElementN(ElementName.LAYERLIST, 1, null);
     }
+
     /** (26) getCreateMarkObject
      * 
      * @param iSkip number of elements to skip
@@ -608,7 +619,12 @@ public abstract class JDFAutoLayout extends JDFResource
 
 
 
-    public JDFMarkObject appendMarkObject()
+
+
+    /**
+     * (30) append element MarkObject
+     */
+    public JDFMarkObject appendMarkObject() throws JDFException
     {
         return (JDFMarkObject) appendElement(ElementName.MARKOBJECT, null);
     }
@@ -638,12 +654,13 @@ public abstract class JDFAutoLayout extends JDFResource
 
 
     /**
-     * (29) append elementMedia
+     * (30) append element Media
      */
     public JDFMedia appendMedia() throws JDFException
     {
-        return (JDFMedia) appendElementN(ElementName.MEDIA, 1, null);
+        return (JDFMedia) appendElement(ElementName.MEDIA, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -677,12 +694,13 @@ public abstract class JDFAutoLayout extends JDFResource
 
 
     /**
-     * (29) append elementMediaSource
+     * (29) append element MediaSource
      */
     public JDFMediaSource appendMediaSource() throws JDFException
     {
         return (JDFMediaSource) appendElementN(ElementName.MEDIASOURCE, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -718,12 +736,13 @@ public abstract class JDFAutoLayout extends JDFResource
 
 
     /**
-     * (30) append element strElementName
+     * (30) append element Signature
      */
     public JDFSignature appendSignature() throws JDFException
     {
         return (JDFSignature) appendElement(ElementName.SIGNATURE, null);
     }
+
     /**
      * (24) const get element TransferCurvePool
      * @return JDFTransferCurvePool the element
@@ -749,12 +768,13 @@ public abstract class JDFAutoLayout extends JDFResource
 
 
     /**
-     * (29) append elementTransferCurvePool
+     * (29) append element TransferCurvePool
      */
     public JDFTransferCurvePool appendTransferCurvePool() throws JDFException
     {
         return (JDFTransferCurvePool) appendElementN(ElementName.TRANSFERCURVEPOOL, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
