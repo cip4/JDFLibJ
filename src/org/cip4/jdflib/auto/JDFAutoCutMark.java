@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
@@ -259,8 +260,6 @@ public abstract class JDFAutoCutMark extends JDFResource
             setAttribute(AttributeName.MARKTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute MarkType
           * @return the value of the attribute
@@ -269,8 +268,6 @@ public abstract class JDFAutoCutMark extends JDFResource
         {
             return EnumMarkType.getEnum(getAttribute(AttributeName.MARKTYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -285,11 +282,9 @@ public abstract class JDFAutoCutMark extends JDFResource
             setAttribute(AttributeName.POSITION, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute Position
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getPosition()
@@ -308,8 +303,6 @@ public abstract class JDFAutoCutMark extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Blocks
@@ -323,8 +316,6 @@ public abstract class JDFAutoCutMark extends JDFResource
             setAttribute(AttributeName.BLOCKS, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute Blocks
           * @return VString the value of the attribute
@@ -336,8 +327,6 @@ public abstract class JDFAutoCutMark extends JDFResource
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -354,8 +343,6 @@ public abstract class JDFAutoCutMark extends JDFResource
         return (JDFAssembly)getCreateElement_KElement(ElementName.ASSEMBLY, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Assembly
      * @param iSkip number of elements to skip
@@ -366,9 +353,10 @@ public abstract class JDFAutoCutMark extends JDFResource
         return (JDFAssembly) getElement(ElementName.ASSEMBLY, null, iSkip);
     }
 
-
-
-    public JDFAssembly appendAssembly()
+    /**
+     * (30) append element Assembly
+     */
+    public JDFAssembly appendAssembly() throws JDFException
     {
         return (JDFAssembly) appendElement(ElementName.ASSEMBLY, null);
     }
@@ -381,4 +369,5 @@ public abstract class JDFAutoCutMark extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

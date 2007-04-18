@@ -210,8 +210,6 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
             setAttribute(AttributeName.ADDITIONALAMOUNT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute AdditionalAmount
           * @return int the value of the attribute
@@ -220,8 +218,6 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
         {
             return getIntAttribute(AttributeName.ADDITIONALAMOUNT, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -236,8 +232,6 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
             setAttribute(AttributeName.AMOUNT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Amount
           * @return int the value of the attribute
@@ -246,8 +240,6 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
         {
             return getIntAttribute(AttributeName.AMOUNT, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -262,8 +254,6 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
             setAttribute(AttributeName.ORDEREDAMOUNT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute OrderedAmount
           * @return int the value of the attribute
@@ -272,8 +262,6 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
         {
             return getIntAttribute(AttributeName.ORDEREDAMOUNT, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -288,8 +276,6 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
             setAttribute(AttributeName.PROOF, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Proof
           * @return the value of the attribute
@@ -298,8 +284,6 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
         {
             return getAttribute(AttributeName.PROOF, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -314,8 +298,6 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
             setAttribute(AttributeName.UNIT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Unit
           * @return the value of the attribute
@@ -324,8 +306,6 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
         {
             return getAttribute(AttributeName.UNIT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -341,8 +321,6 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
         return (JDFPricing) getElement(ElementName.PRICING, null, 0);
     }
 
-
-
     /** (25) getCreatePricing
      * 
      * @return JDFPricing the element
@@ -352,17 +330,14 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
         return (JDFPricing) getCreateElement_KElement(ElementName.PRICING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPricing
+     * (29) append element Pricing
      */
     public JDFPricing appendPricing() throws JDFException
     {
         return (JDFPricing) appendElementN(ElementName.PRICING, 1, null);
     }
+
     /**
      * (24) const get element Component
      * @return JDFComponent the element
@@ -371,8 +346,6 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
     {
         return (JDFComponent) getElement(ElementName.COMPONENT, null, 0);
     }
-
-
 
     /** (25) getCreateComponent
      * 
@@ -383,17 +356,14 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
         return (JDFComponent) getCreateElement_KElement(ElementName.COMPONENT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementComponent
+     * (29) append element Component
      */
     public JDFComponent appendComponent() throws JDFException
     {
         return (JDFComponent) appendElementN(ElementName.COMPONENT, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -402,6 +372,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element ExposedMedia
      * @return JDFExposedMedia the element
@@ -410,8 +381,6 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
     {
         return (JDFExposedMedia) getElement(ElementName.EXPOSEDMEDIA, null, 0);
     }
-
-
 
     /** (25) getCreateExposedMedia
      * 
@@ -422,17 +391,14 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
         return (JDFExposedMedia) getCreateElement_KElement(ElementName.EXPOSEDMEDIA, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementExposedMedia
+     * (29) append element ExposedMedia
      */
     public JDFExposedMedia appendExposedMedia() throws JDFException
     {
         return (JDFExposedMedia) appendElementN(ElementName.EXPOSEDMEDIA, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -441,6 +407,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element Ink
      * @return JDFInk the element
@@ -449,8 +416,6 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
     {
         return (JDFInk) getElement(ElementName.INK, null, 0);
     }
-
-
 
     /** (25) getCreateInk
      * 
@@ -461,17 +426,14 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
         return (JDFInk) getCreateElement_KElement(ElementName.INK, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementInk
+     * (29) append element Ink
      */
     public JDFInk appendInk() throws JDFException
     {
         return (JDFInk) appendElementN(ElementName.INK, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -480,6 +442,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element Media
      * @return JDFMedia the element
@@ -488,8 +451,6 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
     {
         return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
     }
-
-
 
     /** (25) getCreateMedia
      * 
@@ -500,17 +461,14 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
         return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMedia
+     * (29) append element Media
      */
     public JDFMedia appendMedia() throws JDFException
     {
         return (JDFMedia) appendElementN(ElementName.MEDIA, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -519,6 +477,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element Pallet
      * @return JDFPallet the element
@@ -527,8 +486,6 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
     {
         return (JDFPallet) getElement(ElementName.PALLET, null, 0);
     }
-
-
 
     /** (25) getCreatePallet
      * 
@@ -539,17 +496,14 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
         return (JDFPallet) getCreateElement_KElement(ElementName.PALLET, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPallet
+     * (29) append element Pallet
      */
     public JDFPallet appendPallet() throws JDFException
     {
         return (JDFPallet) appendElementN(ElementName.PALLET, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -558,6 +512,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element RegisterRibbon
      * @return JDFRegisterRibbon the element
@@ -566,8 +521,6 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
     {
         return (JDFRegisterRibbon) getElement(ElementName.REGISTERRIBBON, null, 0);
     }
-
-
 
     /** (25) getCreateRegisterRibbon
      * 
@@ -578,17 +531,14 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
         return (JDFRegisterRibbon) getCreateElement_KElement(ElementName.REGISTERRIBBON, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementRegisterRibbon
+     * (29) append element RegisterRibbon
      */
     public JDFRegisterRibbon appendRegisterRibbon() throws JDFException
     {
         return (JDFRegisterRibbon) appendElementN(ElementName.REGISTERRIBBON, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -597,6 +547,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element Strap
      * @return JDFStrap the element
@@ -605,8 +556,6 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
     {
         return (JDFStrap) getElement(ElementName.STRAP, null, 0);
     }
-
-
 
     /** (25) getCreateStrap
      * 
@@ -617,17 +566,14 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
         return (JDFStrap) getCreateElement_KElement(ElementName.STRAP, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementStrap
+     * (29) append element Strap
      */
     public JDFStrap appendStrap() throws JDFException
     {
         return (JDFStrap) appendElementN(ElementName.STRAP, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -636,6 +582,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element Bundle
      * @return JDFBundle the element
@@ -644,8 +591,6 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
     {
         return (JDFBundle) getElement(ElementName.BUNDLE, null, 0);
     }
-
-
 
     /** (25) getCreateBundle
      * 
@@ -656,17 +601,14 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
         return (JDFBundle) getCreateElement_KElement(ElementName.BUNDLE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementBundle
+     * (29) append element Bundle
      */
     public JDFBundle appendBundle() throws JDFException
     {
         return (JDFBundle) appendElementN(ElementName.BUNDLE, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -675,6 +617,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element DigitalMedia
      * @return JDFDigitalMedia the element
@@ -683,8 +626,6 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
     {
         return (JDFDigitalMedia) getElement(ElementName.DIGITALMEDIA, null, 0);
     }
-
-
 
     /** (25) getCreateDigitalMedia
      * 
@@ -695,17 +636,14 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
         return (JDFDigitalMedia) getCreateElement_KElement(ElementName.DIGITALMEDIA, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDigitalMedia
+     * (29) append element DigitalMedia
      */
     public JDFDigitalMedia appendDigitalMedia() throws JDFException
     {
         return (JDFDigitalMedia) appendElementN(ElementName.DIGITALMEDIA, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -714,6 +652,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element RollStand
      * @return JDFRollStand the element
@@ -722,8 +661,6 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
     {
         return (JDFRollStand) getElement(ElementName.ROLLSTAND, null, 0);
     }
-
-
 
     /** (25) getCreateRollStand
      * 
@@ -734,17 +671,14 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
         return (JDFRollStand) getCreateElement_KElement(ElementName.ROLLSTAND, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementRollStand
+     * (29) append element RollStand
      */
     public JDFRollStand appendRollStand() throws JDFException
     {
         return (JDFRollStand) appendElementN(ElementName.ROLLSTAND, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -753,6 +687,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element Tool
      * @return JDFTool the element
@@ -761,8 +696,6 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
     {
         return (JDFTool) getElement(ElementName.TOOL, null, 0);
     }
-
-
 
     /** (25) getCreateTool
      * 
@@ -773,17 +706,14 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
         return (JDFTool) getCreateElement_KElement(ElementName.TOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementTool
+     * (29) append element Tool
      */
     public JDFTool appendTool() throws JDFException
     {
         return (JDFTool) appendElementN(ElementName.TOOL, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -792,4 +722,5 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

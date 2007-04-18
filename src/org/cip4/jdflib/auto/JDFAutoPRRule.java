@@ -79,6 +79,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFPRRuleAttr;
     /*
@@ -184,8 +185,6 @@ public abstract class JDFAutoPRRule extends JDFElement
             setAttribute(AttributeName.ACTIONREFS, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute ActionRefs
           * @return VString the value of the attribute
@@ -197,8 +196,6 @@ public abstract class JDFAutoPRRule extends JDFElement
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -215,8 +212,6 @@ public abstract class JDFAutoPRRule extends JDFElement
         return (JDFPRRuleAttr)getCreateElement_KElement(ElementName.PRRULEATTR, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element PRRuleAttr
      * @param iSkip number of elements to skip
@@ -227,9 +222,10 @@ public abstract class JDFAutoPRRule extends JDFElement
         return (JDFPRRuleAttr) getElement(ElementName.PRRULEATTR, null, iSkip);
     }
 
-
-
-    public JDFPRRuleAttr appendPRRuleAttr()
+    /**
+     * (30) append element PRRuleAttr
+     */
+    public JDFPRRuleAttr appendPRRuleAttr() throws JDFException
     {
         return (JDFPRRuleAttr) appendElement(ElementName.PRRULEATTR, null);
     }

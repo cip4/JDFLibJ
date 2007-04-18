@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.postpress.JDFFoldingParams;
     /*
     *****************************************************************************
@@ -165,8 +166,6 @@ public abstract class JDFAutoIDPFolding extends JDFElement
         return (JDFFoldingParams)getCreateElement_KElement(ElementName.FOLDINGPARAMS, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element FoldingParams
      * @param iSkip number of elements to skip
@@ -177,9 +176,10 @@ public abstract class JDFAutoIDPFolding extends JDFElement
         return (JDFFoldingParams) getElement(ElementName.FOLDINGPARAMS, null, iSkip);
     }
 
-
-
-    public JDFFoldingParams appendFoldingParams()
+    /**
+     * (30) append element FoldingParams
+     */
+    public JDFFoldingParams appendFoldingParams() throws JDFException
     {
         return (JDFFoldingParams) appendElement(ElementName.FOLDINGPARAMS, null);
     }
@@ -192,4 +192,5 @@ public abstract class JDFAutoIDPFolding extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

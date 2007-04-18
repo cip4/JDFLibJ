@@ -167,8 +167,6 @@ public abstract class JDFAutocall extends JDFElement
             setAttribute(AttributeName.RREF, value, null);
         }
 
-
-
         /**
           * (23) get String attribute rRef
           * @return the value of the attribute
@@ -177,7 +175,5 @@ public abstract class JDFAutocall extends JDFElement
         {
             return getAttribute(AttributeName.RREF, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

@@ -74,6 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.node.JDFAncestor;
 import org.cip4.jdflib.pool.JDFPool;
 import org.cip4.jdflib.resource.JDFPart;
@@ -167,8 +168,6 @@ public abstract class JDFAutoAncestorPool extends JDFPool
         return (JDFAncestor)getCreateElement_KElement(ElementName.ANCESTOR, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Ancestor
      * @param iSkip number of elements to skip
@@ -179,9 +178,10 @@ public abstract class JDFAutoAncestorPool extends JDFPool
         return (JDFAncestor) getElement(ElementName.ANCESTOR, null, iSkip);
     }
 
-
-
-    public JDFAncestor appendAncestor()
+    /**
+     * (30) append element Ancestor
+     */
+    public JDFAncestor appendAncestor() throws JDFException
     {
         return (JDFAncestor) appendElement(ElementName.ANCESTOR, null);
     }
@@ -196,8 +196,6 @@ public abstract class JDFAutoAncestorPool extends JDFPool
         return (JDFPart)getCreateElement_KElement(ElementName.PART, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Part
      * @param iSkip number of elements to skip
@@ -208,9 +206,10 @@ public abstract class JDFAutoAncestorPool extends JDFPool
         return (JDFPart) getElement(ElementName.PART, null, iSkip);
     }
 
-
-
-    public JDFPart appendPart()
+    /**
+     * (30) append element Part
+     */
+    public JDFPart appendPart() throws JDFException
     {
         return (JDFPart) appendElement(ElementName.PART, null);
     }

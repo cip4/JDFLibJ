@@ -169,8 +169,6 @@ public abstract class JDFAutoNewJDFQuParams extends JDFElement
             setAttribute(AttributeName.JOBID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobID
           * @return the value of the attribute
@@ -179,8 +177,6 @@ public abstract class JDFAutoNewJDFQuParams extends JDFElement
         {
             return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -195,8 +191,6 @@ public abstract class JDFAutoNewJDFQuParams extends JDFElement
             setAttribute(AttributeName.JOBPARTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobPartID
           * @return the value of the attribute
@@ -205,8 +199,6 @@ public abstract class JDFAutoNewJDFQuParams extends JDFElement
         {
             return getAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -221,8 +213,6 @@ public abstract class JDFAutoNewJDFQuParams extends JDFElement
             setAttribute(AttributeName.QUEUEENTRYID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute QueueEntryID
           * @return the value of the attribute
@@ -231,7 +221,5 @@ public abstract class JDFAutoNewJDFQuParams extends JDFElement
         {
             return getAttribute(AttributeName.QUEUEENTRYID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

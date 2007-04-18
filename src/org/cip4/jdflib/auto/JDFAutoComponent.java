@@ -338,8 +338,6 @@ public abstract class JDFAutoComponent extends JDFResource
             setEnumerationsAttribute(AttributeName.COMPONENTTYPE, v, null);
         }
 
-
-
         /**
           * (9.2) get ComponentType attribute ComponentType
           * @return Vector of the enumerations
@@ -348,8 +346,6 @@ public abstract class JDFAutoComponent extends JDFResource
         {
             return getEnumerationsAttribute(AttributeName.COMPONENTTYPE, null, EnumComponentType.getEnum(0), false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -364,8 +360,6 @@ public abstract class JDFAutoComponent extends JDFResource
             setAttribute(AttributeName.ISWASTE, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IsWaste
           * @return boolean the value of the attribute
@@ -374,8 +368,6 @@ public abstract class JDFAutoComponent extends JDFResource
         {
             return getBoolAttribute(AttributeName.ISWASTE, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -390,8 +382,6 @@ public abstract class JDFAutoComponent extends JDFResource
             setAttribute(AttributeName.ASSEMBLYIDS, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute AssemblyIDs
           * @return VString the value of the attribute
@@ -403,8 +393,6 @@ public abstract class JDFAutoComponent extends JDFResource
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -419,11 +407,9 @@ public abstract class JDFAutoComponent extends JDFResource
             setAttribute(AttributeName.CARTONTOPFLAPS, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute CartonTopFlaps
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getCartonTopFlaps()
@@ -442,8 +428,6 @@ public abstract class JDFAutoComponent extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Dimensions
@@ -457,11 +441,9 @@ public abstract class JDFAutoComponent extends JDFResource
             setAttribute(AttributeName.DIMENSIONS, value, null);
         }
 
-
-
         /**
           * (20) get JDFShape attribute Dimensions
-          * @return JDFShapethe value of the attribute, null if a the
+          * @return JDFShape the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFShape
           */
         public JDFShape getDimensions()
@@ -480,8 +462,6 @@ public abstract class JDFAutoComponent extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute MaxHeat
@@ -495,8 +475,6 @@ public abstract class JDFAutoComponent extends JDFResource
             setAttribute(AttributeName.MAXHEAT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute MaxHeat
           * @return double the value of the attribute
@@ -505,8 +483,6 @@ public abstract class JDFAutoComponent extends JDFResource
         {
             return getRealAttribute(AttributeName.MAXHEAT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -521,8 +497,6 @@ public abstract class JDFAutoComponent extends JDFResource
             setAttribute(AttributeName.OVERFOLD, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Overfold
           * @return double the value of the attribute
@@ -531,8 +505,6 @@ public abstract class JDFAutoComponent extends JDFResource
         {
             return getRealAttribute(AttributeName.OVERFOLD, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -547,8 +519,6 @@ public abstract class JDFAutoComponent extends JDFResource
             setAttribute(AttributeName.OVERFOLDSIDE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute OverfoldSide
           * @return the value of the attribute
@@ -557,8 +527,6 @@ public abstract class JDFAutoComponent extends JDFResource
         {
             return EnumOverfoldSide.getEnum(getAttribute(AttributeName.OVERFOLDSIDE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -573,11 +541,9 @@ public abstract class JDFAutoComponent extends JDFResource
             setAttribute(AttributeName.PAGELISTINDEX, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerRangeList attribute PageListIndex
-          * @return JDFIntegerRangeListthe value of the attribute, null if a the
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerRangeList
           */
         public JDFIntegerRangeList getPageListIndex()
@@ -596,8 +562,6 @@ public abstract class JDFAutoComponent extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ProductType
@@ -611,8 +575,6 @@ public abstract class JDFAutoComponent extends JDFResource
             setAttribute(AttributeName.PRODUCTTYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ProductType
           * @return the value of the attribute
@@ -621,8 +583,6 @@ public abstract class JDFAutoComponent extends JDFResource
         {
             return getAttribute(AttributeName.PRODUCTTYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -637,8 +597,6 @@ public abstract class JDFAutoComponent extends JDFResource
             setAttribute(AttributeName.PRODUCTTYPEDETAILS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ProductTypeDetails
           * @return the value of the attribute
@@ -647,8 +605,6 @@ public abstract class JDFAutoComponent extends JDFResource
         {
             return getAttribute(AttributeName.PRODUCTTYPEDETAILS, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -663,8 +619,6 @@ public abstract class JDFAutoComponent extends JDFResource
             setAttribute(AttributeName.READERPAGECOUNT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute ReaderPageCount
           * @return int the value of the attribute
@@ -673,8 +627,6 @@ public abstract class JDFAutoComponent extends JDFResource
         {
             return getIntAttribute(AttributeName.READERPAGECOUNT, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -689,11 +641,9 @@ public abstract class JDFAutoComponent extends JDFResource
             setAttribute(AttributeName.SHEETPART, value, null);
         }
 
-
-
         /**
           * (20) get JDFRectangle attribute SheetPart
-          * @return JDFRectanglethe value of the attribute, null if a the
+          * @return JDFRectangle the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFRectangle
           */
         public JDFRectangle getSheetPart()
@@ -712,8 +662,6 @@ public abstract class JDFAutoComponent extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute SourceRibbon
@@ -727,8 +675,6 @@ public abstract class JDFAutoComponent extends JDFResource
             setAttribute(AttributeName.SOURCERIBBON, value, null);
         }
 
-
-
         /**
           * (23) get String attribute SourceRibbon
           * @return the value of the attribute
@@ -737,8 +683,6 @@ public abstract class JDFAutoComponent extends JDFResource
         {
             return getAttribute(AttributeName.SOURCERIBBON, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -753,8 +697,6 @@ public abstract class JDFAutoComponent extends JDFResource
             setAttribute(AttributeName.SOURCESHEET, value, null);
         }
 
-
-
         /**
           * (23) get String attribute SourceSheet
           * @return the value of the attribute
@@ -763,8 +705,6 @@ public abstract class JDFAutoComponent extends JDFResource
         {
             return getAttribute(AttributeName.SOURCESHEET, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -779,8 +719,6 @@ public abstract class JDFAutoComponent extends JDFResource
             setAttribute(AttributeName.SOURCEWEB, value, null);
         }
 
-
-
         /**
           * (23) get String attribute SourceWeb
           * @return the value of the attribute
@@ -789,8 +727,6 @@ public abstract class JDFAutoComponent extends JDFResource
         {
             return getAttribute(AttributeName.SOURCEWEB, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -805,8 +741,6 @@ public abstract class JDFAutoComponent extends JDFResource
             setAttribute(AttributeName.SURFACECOUNT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute SurfaceCount
           * @return int the value of the attribute
@@ -815,8 +749,6 @@ public abstract class JDFAutoComponent extends JDFResource
         {
             return getIntAttribute(AttributeName.SURFACECOUNT, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -831,11 +763,9 @@ public abstract class JDFAutoComponent extends JDFResource
             setAttribute(AttributeName.TRANSFORMATION, value, null);
         }
 
-
-
         /**
           * (20) get JDFMatrix attribute Transformation
-          * @return JDFMatrixthe value of the attribute, null if a the
+          * @return JDFMatrix the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFMatrix
           */
         public JDFMatrix getTransformation()
@@ -854,8 +784,6 @@ public abstract class JDFAutoComponent extends JDFResource
             return nPlaceHolder;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -870,8 +798,6 @@ public abstract class JDFAutoComponent extends JDFResource
         return (JDFAssembly) getElement(ElementName.ASSEMBLY, null, 0);
     }
 
-
-
     /** (25) getCreateAssembly
      * 
      * @return JDFAssembly the element
@@ -881,17 +807,14 @@ public abstract class JDFAutoComponent extends JDFResource
         return (JDFAssembly) getCreateElement_KElement(ElementName.ASSEMBLY, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementAssembly
+     * (29) append element Assembly
      */
     public JDFAssembly appendAssembly() throws JDFException
     {
         return (JDFAssembly) appendElementN(ElementName.ASSEMBLY, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -900,6 +823,7 @@ public abstract class JDFAutoComponent extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element Bundle
      * @return JDFBundle the element
@@ -908,8 +832,6 @@ public abstract class JDFAutoComponent extends JDFResource
     {
         return (JDFBundle) getElement(ElementName.BUNDLE, null, 0);
     }
-
-
 
     /** (25) getCreateBundle
      * 
@@ -920,17 +842,14 @@ public abstract class JDFAutoComponent extends JDFResource
         return (JDFBundle) getCreateElement_KElement(ElementName.BUNDLE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementBundle
+     * (29) append element Bundle
      */
     public JDFBundle appendBundle() throws JDFException
     {
         return (JDFBundle) appendElementN(ElementName.BUNDLE, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -939,6 +858,7 @@ public abstract class JDFAutoComponent extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element Disjointing
      * @return JDFDisjointing the element
@@ -947,8 +867,6 @@ public abstract class JDFAutoComponent extends JDFResource
     {
         return (JDFDisjointing) getElement(ElementName.DISJOINTING, null, 0);
     }
-
-
 
     /** (25) getCreateDisjointing
      * 
@@ -959,17 +877,14 @@ public abstract class JDFAutoComponent extends JDFResource
         return (JDFDisjointing) getCreateElement_KElement(ElementName.DISJOINTING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDisjointing
+     * (29) append element Disjointing
      */
     public JDFDisjointing appendDisjointing() throws JDFException
     {
         return (JDFDisjointing) appendElementN(ElementName.DISJOINTING, 1, null);
     }
+
     /**
      * (24) const get element Sheet
      * @return JDFSheet the element
@@ -978,8 +893,6 @@ public abstract class JDFAutoComponent extends JDFResource
     {
         return (JDFSheet) getElement(ElementName.SHEET, null, 0);
     }
-
-
 
     /** (25) getCreateSheet
      * 
@@ -990,17 +903,14 @@ public abstract class JDFAutoComponent extends JDFResource
         return (JDFSheet) getCreateElement_KElement(ElementName.SHEET, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementSheet
+     * (29) append element Sheet
      */
     public JDFSheet appendSheet() throws JDFException
     {
         return (JDFSheet) appendElementN(ElementName.SHEET, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -1009,6 +919,7 @@ public abstract class JDFAutoComponent extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element Layout
      * @return JDFLayout the element
@@ -1017,8 +928,6 @@ public abstract class JDFAutoComponent extends JDFResource
     {
         return (JDFLayout) getElement(ElementName.LAYOUT, null, 0);
     }
-
-
 
     /** (25) getCreateLayout
      * 
@@ -1029,17 +938,14 @@ public abstract class JDFAutoComponent extends JDFResource
         return (JDFLayout) getCreateElement_KElement(ElementName.LAYOUT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementLayout
+     * (29) append element Layout
      */
     public JDFLayout appendLayout() throws JDFException
     {
         return (JDFLayout) appendElementN(ElementName.LAYOUT, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -1048,6 +954,7 @@ public abstract class JDFAutoComponent extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element PageList
      * @return JDFPageList the element
@@ -1056,8 +963,6 @@ public abstract class JDFAutoComponent extends JDFResource
     {
         return (JDFPageList) getElement(ElementName.PAGELIST, null, 0);
     }
-
-
 
     /** (25) getCreatePageList
      * 
@@ -1068,17 +973,14 @@ public abstract class JDFAutoComponent extends JDFResource
         return (JDFPageList) getCreateElement_KElement(ElementName.PAGELIST, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPageList
+     * (29) append element PageList
      */
     public JDFPageList appendPageList() throws JDFException
     {
         return (JDFPageList) appendElementN(ElementName.PAGELIST, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -1087,6 +989,7 @@ public abstract class JDFAutoComponent extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateContact
      * 
      * @param iSkip number of elements to skip
@@ -1096,8 +999,6 @@ public abstract class JDFAutoComponent extends JDFResource
     {
         return (JDFContact)getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Contact
@@ -1109,9 +1010,10 @@ public abstract class JDFAutoComponent extends JDFResource
         return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
     }
 
-
-
-    public JDFContact appendContact()
+    /**
+     * (30) append element Contact
+     */
+    public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -1124,6 +1026,7 @@ public abstract class JDFAutoComponent extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateIdentificationField
      * 
      * @param iSkip number of elements to skip
@@ -1133,8 +1036,6 @@ public abstract class JDFAutoComponent extends JDFResource
     {
         return (JDFIdentificationField)getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element IdentificationField
@@ -1146,9 +1047,10 @@ public abstract class JDFAutoComponent extends JDFResource
         return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
 
-
-
-    public JDFIdentificationField appendIdentificationField()
+    /**
+     * (30) append element IdentificationField
+     */
+    public JDFIdentificationField appendIdentificationField() throws JDFException
     {
         return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
     }
@@ -1161,4 +1063,5 @@ public abstract class JDFAutoComponent extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

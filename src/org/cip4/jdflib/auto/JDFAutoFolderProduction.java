@@ -217,8 +217,6 @@ public abstract class JDFAutoFolderProduction extends JDFElement
             setAttribute(AttributeName.FOLDERMODULEINDEX, value, null);
         }
 
-
-
         /**
           * (15) get int attribute FolderModuleIndex
           * @return int the value of the attribute
@@ -227,8 +225,6 @@ public abstract class JDFAutoFolderProduction extends JDFElement
         {
             return getIntAttribute(AttributeName.FOLDERMODULEINDEX, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -243,8 +239,6 @@ public abstract class JDFAutoFolderProduction extends JDFElement
             setAttribute(AttributeName.PRODUCTIONTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ProductionType
           * @return the value of the attribute
@@ -253,7 +247,5 @@ public abstract class JDFAutoFolderProduction extends JDFElement
         {
             return EnumProductionType.getEnum(getAttribute(AttributeName.PRODUCTIONTYPE, null, "NonCollect"));
         }
-
-
 
 }// end namespace JDF

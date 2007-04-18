@@ -201,8 +201,6 @@ public abstract class JDFAutoOrderingParams extends JDFResource
             setAttribute(AttributeName.AMOUNT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Amount
           * @return double the value of the attribute
@@ -211,8 +209,6 @@ public abstract class JDFAutoOrderingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.AMOUNT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -227,8 +223,6 @@ public abstract class JDFAutoOrderingParams extends JDFResource
             setAttribute(AttributeName.UNIT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Unit
           * @return the value of the attribute
@@ -237,8 +231,6 @@ public abstract class JDFAutoOrderingParams extends JDFResource
         {
             return getAttribute(AttributeName.UNIT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -254,8 +246,6 @@ public abstract class JDFAutoOrderingParams extends JDFResource
         return (JDFCompany) getElement(ElementName.COMPANY, null, 0);
     }
 
-
-
     /** (25) getCreateCompany
      * 
      * @return JDFCompany the element
@@ -265,17 +255,14 @@ public abstract class JDFAutoOrderingParams extends JDFResource
         return (JDFCompany) getCreateElement_KElement(ElementName.COMPANY, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementCompany
+     * (29) append element Company
      */
     public JDFCompany appendCompany() throws JDFException
     {
         return (JDFCompany) appendElementN(ElementName.COMPANY, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -284,6 +271,7 @@ public abstract class JDFAutoOrderingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateContact
      * 
      * @param iSkip number of elements to skip
@@ -293,8 +281,6 @@ public abstract class JDFAutoOrderingParams extends JDFResource
     {
         return (JDFContact)getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Contact
@@ -306,9 +292,10 @@ public abstract class JDFAutoOrderingParams extends JDFResource
         return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
     }
 
-
-
-    public JDFContact appendContact()
+    /**
+     * (30) append element Contact
+     */
+    public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -321,4 +308,5 @@ public abstract class JDFAutoOrderingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

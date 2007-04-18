@@ -83,6 +83,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
     /*
@@ -248,8 +249,6 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
             setAttribute(AttributeName.LISTPOLICY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ListPolicy
           * @return the value of the attribute
@@ -258,8 +257,6 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
         {
             return EnumListPolicy.getEnum(getAttribute(AttributeName.LISTPOLICY, null, "All"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -274,8 +271,6 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
             setAttribute(AttributeName.ASSETTYPES, value, null);
         }
 
-
-
         /**
           * (23) get String attribute AssetTypes
           * @return the value of the attribute
@@ -284,8 +279,6 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
         {
             return getAttribute(AttributeName.ASSETTYPES, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -302,8 +295,6 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
         return (JDFFileSpec)getCreateElement_KElement(ElementName.FILESPEC, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element FileSpec
      * @param iSkip number of elements to skip
@@ -314,9 +305,10 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
         return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
     }
 
-
-
-    public JDFFileSpec appendFileSpec()
+    /**
+     * (30) append element FileSpec
+     */
+    public JDFFileSpec appendFileSpec() throws JDFException
     {
         return (JDFFileSpec) appendElement(ElementName.FILESPEC, null);
     }
@@ -329,4 +321,5 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

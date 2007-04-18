@@ -190,8 +190,6 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
             setAttribute(AttributeName.COMPONENTSPERROW, value, null);
         }
 
-
-
         /**
           * (15) get int attribute ComponentsPerRow
           * @return int the value of the attribute
@@ -200,8 +198,6 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
         {
             return getIntAttribute(AttributeName.COMPONENTSPERROW, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -216,8 +212,6 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
             setAttribute(AttributeName.FILLMATERIAL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute FillMaterial
           * @return the value of the attribute
@@ -226,8 +220,6 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
         {
             return getAttribute(AttributeName.FILLMATERIAL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -242,8 +234,6 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
             setAttribute(AttributeName.LAYERS, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Layers
           * @return int the value of the attribute
@@ -252,8 +242,6 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
         {
             return getIntAttribute(AttributeName.LAYERS, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -268,8 +256,6 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
             setAttribute(AttributeName.PATTERN, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Pattern
           * @return the value of the attribute
@@ -278,8 +264,6 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
         {
             return getAttribute(AttributeName.PATTERN, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -294,8 +278,6 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
             setAttribute(AttributeName.ROWS, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Rows
           * @return int the value of the attribute
@@ -304,8 +286,6 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
         {
             return getIntAttribute(AttributeName.ROWS, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -320,11 +300,9 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
             setAttribute(AttributeName.TIES, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerList attribute Ties
-          * @return JDFIntegerListthe value of the attribute, null if a the
+          * @return JDFIntegerList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerList
           */
         public JDFIntegerList getTies()
@@ -343,8 +321,6 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute UnderLays
@@ -358,11 +334,9 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
             setAttribute(AttributeName.UNDERLAYS, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerList attribute UnderLays
-          * @return JDFIntegerListthe value of the attribute, null if a the
+          * @return JDFIntegerList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerList
           */
         public JDFIntegerList getUnderLays()
@@ -380,7 +354,5 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
             }
             return nPlaceHolder;
         }
-
-
 
 }// end namespace JDF

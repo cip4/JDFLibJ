@@ -242,8 +242,6 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
             setAttribute(AttributeName.LAMINATINGBOX, value, null);
         }
 
-
-
         /**
           * (20) get JDFRectangle attribute LaminatingBox
           * @return JDFRectangle the value of the attribute, null if a the
@@ -265,8 +263,6 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute AdhesiveType
@@ -280,8 +276,6 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
             setAttribute(AttributeName.ADHESIVETYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute AdhesiveType
           * @return the value of the attribute
@@ -290,8 +284,6 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
         {
             return getAttribute(AttributeName.ADHESIVETYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -305,8 +297,6 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
         {
             setAttribute(AttributeName.GAPLIST, value, null);
         }
-
-
 
         /**
           * (20) get JDFNumberList attribute GapList
@@ -329,8 +319,6 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute HardenerType
@@ -344,8 +332,6 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
             setAttribute(AttributeName.HARDENERTYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute HardenerType
           * @return the value of the attribute
@@ -354,8 +340,6 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
         {
             return getAttribute(AttributeName.HARDENERTYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -370,8 +354,6 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
             setAttribute(AttributeName.LAMINATINGMETHOD, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute LaminatingMethod
           * @return the value of the attribute
@@ -380,8 +362,6 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
         {
             return EnumLaminatingMethod.getEnum(getAttribute(AttributeName.LAMINATINGMETHOD, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -396,8 +376,6 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
             setAttribute(AttributeName.NIPWIDTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute NipWidth
           * @return double the value of the attribute
@@ -406,8 +384,6 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.NIPWIDTH, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -422,8 +398,6 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
             setAttribute(AttributeName.TEMPERATURE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Temperature
           * @return double the value of the attribute
@@ -432,7 +406,5 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.TEMPERATURE, null, 0.0);
         }
-
-
 
 }// end namespace JDF

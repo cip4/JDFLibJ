@@ -241,8 +241,6 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
             setAttribute(AttributeName.NUMBEROFSTITCHES, value, null);
         }
 
-
-
         /**
           * (15) get int attribute NumberOfStitches
           * @return int the value of the attribute
@@ -251,8 +249,6 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
         {
             return getIntAttribute(AttributeName.NUMBEROFSTITCHES, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -266,8 +262,6 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
         {
             setAttribute(AttributeName.STITCHPOSITIONS, value, null);
         }
-
-
 
         /**
           * (20) get JDFNumberList attribute StitchPositions
@@ -290,8 +284,6 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute StapleShape
@@ -305,8 +297,6 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
             setAttribute(AttributeName.STAPLESHAPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute StapleShape
           * @return the value of the attribute
@@ -315,8 +305,6 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
         {
             return EnumStapleShape.getEnum(getAttribute(AttributeName.STAPLESHAPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -331,8 +319,6 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
             setAttribute(AttributeName.STITCHWIDTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute StitchWidth
           * @return double the value of the attribute
@@ -341,8 +327,6 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.STITCHWIDTH, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -357,8 +341,6 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
             setAttribute(AttributeName.WIREGAUGE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute WireGauge
           * @return double the value of the attribute
@@ -367,8 +349,6 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.WIREGAUGE, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -383,8 +363,6 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
             setAttribute(AttributeName.WIREBRAND, value, null);
         }
 
-
-
         /**
           * (23) get String attribute WireBrand
           * @return the value of the attribute
@@ -393,7 +371,5 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
         {
             return getAttribute(AttributeName.WIREBRAND, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

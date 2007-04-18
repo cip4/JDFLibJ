@@ -167,8 +167,6 @@ public abstract class JDFAutoTest extends JDFElement
             setAttribute(AttributeName.ID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ID
           * @return the value of the attribute
@@ -177,7 +175,5 @@ public abstract class JDFAutoTest extends JDFElement
         {
             return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

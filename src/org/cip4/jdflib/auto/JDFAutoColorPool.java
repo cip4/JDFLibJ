@@ -78,6 +78,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFColor;
     /*
@@ -197,8 +198,6 @@ public abstract class JDFAutoColorPool extends JDFResource
             setAttribute(AttributeName.COLORANTSETNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ColorantSetName
           * @return the value of the attribute
@@ -207,8 +206,6 @@ public abstract class JDFAutoColorPool extends JDFResource
         {
             return getAttribute(AttributeName.COLORANTSETNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -225,8 +222,6 @@ public abstract class JDFAutoColorPool extends JDFResource
         return (JDFColor)getCreateElement_KElement(ElementName.COLOR, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Color
      * @param iSkip number of elements to skip
@@ -237,9 +232,10 @@ public abstract class JDFAutoColorPool extends JDFResource
         return (JDFColor) getElement(ElementName.COLOR, null, iSkip);
     }
 
-
-
-    public JDFColor appendColor()
+    /**
+     * (30) append element Color
+     */
+    public JDFColor appendColor() throws JDFException
     {
         return (JDFColor) appendElement(ElementName.COLOR, null);
     }

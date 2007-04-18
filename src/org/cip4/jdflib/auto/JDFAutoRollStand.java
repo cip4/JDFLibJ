@@ -202,8 +202,6 @@ public abstract class JDFAutoRollStand extends JDFResource
             setAttribute(AttributeName.MAXDIAMETER, value, null);
         }
 
-
-
         /**
           * (17) get double attribute MaxDiameter
           * @return double the value of the attribute
@@ -212,8 +210,6 @@ public abstract class JDFAutoRollStand extends JDFResource
         {
             return getRealAttribute(AttributeName.MAXDIAMETER, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -228,8 +224,6 @@ public abstract class JDFAutoRollStand extends JDFResource
             setAttribute(AttributeName.MAXWIDTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute MaxWidth
           * @return double the value of the attribute
@@ -238,8 +232,6 @@ public abstract class JDFAutoRollStand extends JDFResource
         {
             return getRealAttribute(AttributeName.MAXWIDTH, null, 0.0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -255,8 +247,6 @@ public abstract class JDFAutoRollStand extends JDFResource
         return (JDFDevice) getElement(ElementName.DEVICE, null, 0);
     }
 
-
-
     /** (25) getCreateDevice
      * 
      * @return JDFDevice the element
@@ -266,17 +256,14 @@ public abstract class JDFAutoRollStand extends JDFResource
         return (JDFDevice) getCreateElement_KElement(ElementName.DEVICE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDevice
+     * (29) append element Device
      */
     public JDFDevice appendDevice() throws JDFException
     {
         return (JDFDevice) appendElementN(ElementName.DEVICE, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -285,6 +272,7 @@ public abstract class JDFAutoRollStand extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateContact
      * 
      * @param iSkip number of elements to skip
@@ -294,8 +282,6 @@ public abstract class JDFAutoRollStand extends JDFResource
     {
         return (JDFContact)getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Contact
@@ -307,9 +293,10 @@ public abstract class JDFAutoRollStand extends JDFResource
         return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
     }
 
-
-
-    public JDFContact appendContact()
+    /**
+     * (30) append element Contact
+     */
+    public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -322,6 +309,7 @@ public abstract class JDFAutoRollStand extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateIdentificationField
      * 
      * @param iSkip number of elements to skip
@@ -331,8 +319,6 @@ public abstract class JDFAutoRollStand extends JDFResource
     {
         return (JDFIdentificationField)getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element IdentificationField
@@ -344,9 +330,10 @@ public abstract class JDFAutoRollStand extends JDFResource
         return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
 
-
-
-    public JDFIdentificationField appendIdentificationField()
+    /**
+     * (30) append element IdentificationField
+     */
+    public JDFIdentificationField appendIdentificationField() throws JDFException
     {
         return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
     }
@@ -359,4 +346,5 @@ public abstract class JDFAutoRollStand extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

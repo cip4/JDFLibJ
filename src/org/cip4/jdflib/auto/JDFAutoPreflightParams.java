@@ -182,8 +182,6 @@ public abstract class JDFAutoPreflightParams extends JDFResource
         return (JDFActionPool)getCreateElement_KElement(ElementName.ACTIONPOOL, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element ActionPool
      * @param iSkip number of elements to skip
@@ -194,9 +192,10 @@ public abstract class JDFAutoPreflightParams extends JDFResource
         return (JDFActionPool) getElement(ElementName.ACTIONPOOL, null, iSkip);
     }
 
-
-
-    public JDFActionPool appendActionPool()
+    /**
+     * (30) append element ActionPool
+     */
+    public JDFActionPool appendActionPool() throws JDFException
     {
         return (JDFActionPool) appendElement(ElementName.ACTIONPOOL, null);
     }
@@ -210,8 +209,6 @@ public abstract class JDFAutoPreflightParams extends JDFResource
         return (JDFTestPool) getElement(ElementName.TESTPOOL, null, 0);
     }
 
-
-
     /** (25) getCreateTestPool
      * 
      * @return JDFTestPool the element
@@ -221,15 +218,12 @@ public abstract class JDFAutoPreflightParams extends JDFResource
         return (JDFTestPool) getCreateElement_KElement(ElementName.TESTPOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementTestPool
+     * (29) append element TestPool
      */
     public JDFTestPool appendTestPool() throws JDFException
     {
         return (JDFTestPool) appendElementN(ElementName.TESTPOOL, 1, null);
     }
+
 }// end namespace JDF

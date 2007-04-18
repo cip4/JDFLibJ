@@ -167,8 +167,6 @@ public abstract class JDFAutoBindingQualityParams extends JDFElement
             setAttribute(AttributeName.FLEXVALUE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute FlexValue
           * @return double the value of the attribute
@@ -177,8 +175,6 @@ public abstract class JDFAutoBindingQualityParams extends JDFElement
         {
             return getRealAttribute(AttributeName.FLEXVALUE, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -193,8 +189,6 @@ public abstract class JDFAutoBindingQualityParams extends JDFElement
             setAttribute(AttributeName.PULLOUTVALUE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute PullOutValue
           * @return double the value of the attribute
@@ -203,7 +197,5 @@ public abstract class JDFAutoBindingQualityParams extends JDFElement
         {
             return getRealAttribute(AttributeName.PULLOUTVALUE, null, 0.0);
         }
-
-
 
 }// end namespace JDF

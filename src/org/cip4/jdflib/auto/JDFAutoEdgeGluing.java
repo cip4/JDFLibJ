@@ -165,8 +165,6 @@ public abstract class JDFAutoEdgeGluing extends JDFElement
         return (JDFSpanGlue) getElement(ElementName.EDGEGLUE, null, 0);
     }
 
-
-
     /** (25) getCreateEdgeGlue
      * 
      * @return JDFSpanGlue the element
@@ -176,15 +174,12 @@ public abstract class JDFAutoEdgeGluing extends JDFElement
         return (JDFSpanGlue) getCreateElement_KElement(ElementName.EDGEGLUE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementEdgeGlue
+     * (29) append element EdgeGlue
      */
     public JDFSpanGlue appendEdgeGlue() throws JDFException
     {
         return (JDFSpanGlue) appendElementN(ElementName.EDGEGLUE, 1, null);
     }
+
 }// end namespace JDF

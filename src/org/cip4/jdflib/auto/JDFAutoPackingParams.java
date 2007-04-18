@@ -294,8 +294,6 @@ public abstract class JDFAutoPackingParams extends JDFResource
             setAttribute(AttributeName.PALLETWRAPPING, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute PalletWrapping
           * @return the value of the attribute
@@ -304,8 +302,6 @@ public abstract class JDFAutoPackingParams extends JDFResource
         {
             return EnumPalletWrapping.getEnum(getAttribute(AttributeName.PALLETWRAPPING, null, "None"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -320,8 +316,6 @@ public abstract class JDFAutoPackingParams extends JDFResource
             setAttribute(AttributeName.WRAPPINGMATERIAL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute WrappingMaterial
           * @return the value of the attribute
@@ -330,8 +324,6 @@ public abstract class JDFAutoPackingParams extends JDFResource
         {
             return getAttribute(AttributeName.WRAPPINGMATERIAL, null, "None");
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -346,8 +338,6 @@ public abstract class JDFAutoPackingParams extends JDFResource
             setAttribute(AttributeName.BOXEDQUANTITY, value, null);
         }
 
-
-
         /**
           * (15) get int attribute BoxedQuantity
           * @return int the value of the attribute
@@ -356,8 +346,6 @@ public abstract class JDFAutoPackingParams extends JDFResource
         {
             return getIntAttribute(AttributeName.BOXEDQUANTITY, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -372,11 +360,9 @@ public abstract class JDFAutoPackingParams extends JDFResource
             setAttribute(AttributeName.BOXSHAPE, value, null);
         }
 
-
-
         /**
           * (20) get JDFShape attribute BoxShape
-          * @return JDFShapethe value of the attribute, null if a the
+          * @return JDFShape the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFShape
           */
         public JDFShape getBoxShape()
@@ -395,8 +381,6 @@ public abstract class JDFAutoPackingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute CartonQuantity
@@ -410,8 +394,6 @@ public abstract class JDFAutoPackingParams extends JDFResource
             setAttribute(AttributeName.CARTONQUANTITY, value, null);
         }
 
-
-
         /**
           * (15) get int attribute CartonQuantity
           * @return int the value of the attribute
@@ -420,8 +402,6 @@ public abstract class JDFAutoPackingParams extends JDFResource
         {
             return getIntAttribute(AttributeName.CARTONQUANTITY, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -436,11 +416,9 @@ public abstract class JDFAutoPackingParams extends JDFResource
             setAttribute(AttributeName.CARTONSHAPE, value, null);
         }
 
-
-
         /**
           * (20) get JDFShape attribute CartonShape
-          * @return JDFShapethe value of the attribute, null if a the
+          * @return JDFShape the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFShape
           */
         public JDFShape getCartonShape()
@@ -459,8 +437,6 @@ public abstract class JDFAutoPackingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute CartonMaxWeight
@@ -474,8 +450,6 @@ public abstract class JDFAutoPackingParams extends JDFResource
             setAttribute(AttributeName.CARTONMAXWEIGHT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute CartonMaxWeight
           * @return double the value of the attribute
@@ -484,8 +458,6 @@ public abstract class JDFAutoPackingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.CARTONMAXWEIGHT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -500,8 +472,6 @@ public abstract class JDFAutoPackingParams extends JDFResource
             setAttribute(AttributeName.CARTONSTRENGTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute CartonStrength
           * @return double the value of the attribute
@@ -510,8 +480,6 @@ public abstract class JDFAutoPackingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.CARTONSTRENGTH, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -526,8 +494,6 @@ public abstract class JDFAutoPackingParams extends JDFResource
             setAttribute(AttributeName.PALLETQUANTITY, value, null);
         }
 
-
-
         /**
           * (15) get int attribute PalletQuantity
           * @return int the value of the attribute
@@ -536,8 +502,6 @@ public abstract class JDFAutoPackingParams extends JDFResource
         {
             return getIntAttribute(AttributeName.PALLETQUANTITY, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -552,11 +516,9 @@ public abstract class JDFAutoPackingParams extends JDFResource
             setAttribute(AttributeName.PALLETSIZE, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute PalletSize
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getPalletSize()
@@ -575,8 +537,6 @@ public abstract class JDFAutoPackingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute PalletMaxHeight
@@ -590,8 +550,6 @@ public abstract class JDFAutoPackingParams extends JDFResource
             setAttribute(AttributeName.PALLETMAXHEIGHT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute PalletMaxHeight
           * @return double the value of the attribute
@@ -600,8 +558,6 @@ public abstract class JDFAutoPackingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.PALLETMAXHEIGHT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -616,8 +572,6 @@ public abstract class JDFAutoPackingParams extends JDFResource
             setAttribute(AttributeName.PALLETMAXWEIGHT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute PalletMaxWeight
           * @return double the value of the attribute
@@ -626,8 +580,6 @@ public abstract class JDFAutoPackingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.PALLETMAXWEIGHT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -642,8 +594,6 @@ public abstract class JDFAutoPackingParams extends JDFResource
             setAttribute(AttributeName.PALLETTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute PalletType
           * @return the value of the attribute
@@ -652,8 +602,6 @@ public abstract class JDFAutoPackingParams extends JDFResource
         {
             return EnumPalletType.getEnum(getAttribute(AttributeName.PALLETTYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -668,8 +616,6 @@ public abstract class JDFAutoPackingParams extends JDFResource
             setAttribute(AttributeName.WRAPPEDQUANTITY, value, null);
         }
 
-
-
         /**
           * (15) get int attribute WrappedQuantity
           * @return int the value of the attribute
@@ -678,7 +624,5 @@ public abstract class JDFAutoPackingParams extends JDFResource
         {
             return getIntAttribute(AttributeName.WRAPPEDQUANTITY, null, 0);
         }
-
-
 
 }// end namespace JDF

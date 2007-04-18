@@ -243,8 +243,6 @@ public abstract class JDFAutoGlueLine extends JDFResource
             setAttribute(AttributeName.AREAGLUE, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute AreaGlue
           * @return boolean the value of the attribute
@@ -253,8 +251,6 @@ public abstract class JDFAutoGlueLine extends JDFResource
         {
             return getBoolAttribute(AttributeName.AREAGLUE, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -269,8 +265,6 @@ public abstract class JDFAutoGlueLine extends JDFResource
             setAttribute(AttributeName.GLUEBRAND, value, null);
         }
 
-
-
         /**
           * (23) get String attribute GlueBrand
           * @return the value of the attribute
@@ -279,8 +273,6 @@ public abstract class JDFAutoGlueLine extends JDFResource
         {
             return getAttribute(AttributeName.GLUEBRAND, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -295,8 +287,6 @@ public abstract class JDFAutoGlueLine extends JDFResource
             setAttribute(AttributeName.GLUELINEWIDTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute GlueLineWidth
           * @return double the value of the attribute
@@ -305,8 +295,6 @@ public abstract class JDFAutoGlueLine extends JDFResource
         {
             return getRealAttribute(AttributeName.GLUELINEWIDTH, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -321,11 +309,9 @@ public abstract class JDFAutoGlueLine extends JDFResource
             setAttribute(AttributeName.GLUINGPATTERN, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute GluingPattern
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getGluingPattern()
@@ -344,8 +330,6 @@ public abstract class JDFAutoGlueLine extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute GlueType
@@ -359,8 +343,6 @@ public abstract class JDFAutoGlueLine extends JDFResource
             setAttribute(AttributeName.GLUETYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute GlueType
           * @return the value of the attribute
@@ -369,8 +351,6 @@ public abstract class JDFAutoGlueLine extends JDFResource
         {
             return EnumGlueType.getEnum(getAttribute(AttributeName.GLUETYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -385,8 +365,6 @@ public abstract class JDFAutoGlueLine extends JDFResource
             setAttribute(AttributeName.MELTINGTEMPERATURE, value, null);
         }
 
-
-
         /**
           * (15) get int attribute MeltingTemperature
           * @return int the value of the attribute
@@ -395,8 +373,6 @@ public abstract class JDFAutoGlueLine extends JDFResource
         {
             return getIntAttribute(AttributeName.MELTINGTEMPERATURE, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -411,11 +387,9 @@ public abstract class JDFAutoGlueLine extends JDFResource
             setAttribute(AttributeName.RELATIVESTARTPOSITION, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute RelativeStartPosition
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getRelativeStartPosition()
@@ -434,8 +408,6 @@ public abstract class JDFAutoGlueLine extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute RelativeWorkingPath
@@ -449,11 +421,9 @@ public abstract class JDFAutoGlueLine extends JDFResource
             setAttribute(AttributeName.RELATIVEWORKINGPATH, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute RelativeWorkingPath
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getRelativeWorkingPath()
@@ -472,8 +442,6 @@ public abstract class JDFAutoGlueLine extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute StartPosition
@@ -487,11 +455,9 @@ public abstract class JDFAutoGlueLine extends JDFResource
             setAttribute(AttributeName.STARTPOSITION, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute StartPosition
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getStartPosition()
@@ -510,8 +476,6 @@ public abstract class JDFAutoGlueLine extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute WorkingPath
@@ -525,11 +489,9 @@ public abstract class JDFAutoGlueLine extends JDFResource
             setAttribute(AttributeName.WORKINGPATH, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute WorkingPath
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getWorkingPath()
@@ -547,7 +509,5 @@ public abstract class JDFAutoGlueLine extends JDFResource
             }
             return nPlaceHolder;
         }
-
-
 
 }// end namespace JDF

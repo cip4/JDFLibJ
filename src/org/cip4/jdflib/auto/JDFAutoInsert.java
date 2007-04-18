@@ -196,11 +196,9 @@ public abstract class JDFAutoInsert extends JDFElement
             setAttribute(AttributeName.FOLIO, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerRangeList attribute Folio
-          * @return JDFIntegerRangeListthe value of the attribute, null if a the
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerRangeList
           */
         public JDFIntegerRangeList getFolio()
@@ -219,8 +217,6 @@ public abstract class JDFAutoInsert extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute SheetOffset
@@ -234,11 +230,9 @@ public abstract class JDFAutoInsert extends JDFElement
             setAttribute(AttributeName.SHEETOFFSET, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute SheetOffset
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getSheetOffset()
@@ -257,8 +251,6 @@ public abstract class JDFAutoInsert extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Transformation
@@ -272,11 +264,9 @@ public abstract class JDFAutoInsert extends JDFElement
             setAttribute(AttributeName.TRANSFORMATION, value, null);
         }
 
-
-
         /**
           * (20) get JDFMatrix attribute Transformation
-          * @return JDFMatrixthe value of the attribute, null if a the
+          * @return JDFMatrix the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFMatrix
           */
         public JDFMatrix getTransformation()
@@ -295,8 +285,6 @@ public abstract class JDFAutoInsert extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute WrapPages
@@ -310,11 +298,9 @@ public abstract class JDFAutoInsert extends JDFElement
             setAttribute(AttributeName.WRAPPAGES, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerRangeList attribute WrapPages
-          * @return JDFIntegerRangeListthe value of the attribute, null if a the
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerRangeList
           */
         public JDFIntegerRangeList getWrapPages()
@@ -333,8 +319,6 @@ public abstract class JDFAutoInsert extends JDFElement
             return nPlaceHolder;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -349,8 +333,6 @@ public abstract class JDFAutoInsert extends JDFElement
         return (JDFSpanGlueType) getElement(ElementName.GLUETYPE, null, 0);
     }
 
-
-
     /** (25) getCreateGlueType
      * 
      * @return JDFSpanGlueType the element
@@ -360,17 +342,14 @@ public abstract class JDFAutoInsert extends JDFElement
         return (JDFSpanGlueType) getCreateElement_KElement(ElementName.GLUETYPE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementGlueType
+     * (29) append element GlueType
      */
     public JDFSpanGlueType appendGlueType() throws JDFException
     {
         return (JDFSpanGlueType) appendElementN(ElementName.GLUETYPE, 1, null);
     }
+
     /**
      * (24) const get element Method
      * @return JDFSpanMethod the element
@@ -379,8 +358,6 @@ public abstract class JDFAutoInsert extends JDFElement
     {
         return (JDFSpanMethod) getElement(ElementName.METHOD, null, 0);
     }
-
-
 
     /** (25) getCreateMethod
      * 
@@ -391,17 +368,14 @@ public abstract class JDFAutoInsert extends JDFElement
         return (JDFSpanMethod) getCreateElement_KElement(ElementName.METHOD, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMethod
+     * (29) append element Method
      */
     public JDFSpanMethod appendMethod() throws JDFException
     {
         return (JDFSpanMethod) appendElementN(ElementName.METHOD, 1, null);
     }
+
     /** (26) getCreateGlueLine
      * 
      * @param iSkip number of elements to skip
@@ -411,8 +385,6 @@ public abstract class JDFAutoInsert extends JDFElement
     {
         return (JDFGlueLine)getCreateElement_KElement(ElementName.GLUELINE, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element GlueLine
@@ -424,9 +396,10 @@ public abstract class JDFAutoInsert extends JDFElement
         return (JDFGlueLine) getElement(ElementName.GLUELINE, null, iSkip);
     }
 
-
-
-    public JDFGlueLine appendGlueLine()
+    /**
+     * (30) append element GlueLine
+     */
+    public JDFGlueLine appendGlueLine() throws JDFException
     {
         return (JDFGlueLine) appendElement(ElementName.GLUELINE, null);
     }

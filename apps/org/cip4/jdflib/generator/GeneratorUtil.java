@@ -2120,7 +2120,8 @@ public class GeneratorUtil
             final KElement constraintElement = (KElement) constraintIter.next();
             String elementPath = constraintElement.getAttribute("Path", "", "");
 
-            if (isElementInParent(parentsPath, elementPath) 
+            if (!elementPath.startsWith("Signature/") && // hack to exclude the deprecated Signature/Media
+            		(isElementInParent(parentsPath, elementPath) 
                     || isElementInSchema(elementPath, elementName)
                     // I don´t want to implement [@xxx ... notation, so I use a special case for it
                     || (parentsPath.equals("EndSheet/GlueLine") && elementPath.equals("EndSheet[@Side=\"Back\"]/GlueLine"))
@@ -2128,6 +2129,7 @@ public class GeneratorUtil
                     || (elementPath.equals("SpinePreparationParams GlueApplication SpineTapingParams CoverApplicationParams")
                             && elementPath.indexOf(parentsPath) >= 0)
                     || (elementPath.equals("MarkObject/DynamicField/DeviceMark") && parentsPath.equals("DynamicField/DeviceMark"))
+                    )
                )
             {
                 // found it again, get the maxOccurs/minOccurs now

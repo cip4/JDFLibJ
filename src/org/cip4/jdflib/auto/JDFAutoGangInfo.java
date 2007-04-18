@@ -167,8 +167,6 @@ public abstract class JDFAutoGangInfo extends JDFElement
             setAttribute(AttributeName.GANGNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute GangName
           * @return the value of the attribute
@@ -177,7 +175,5 @@ public abstract class JDFAutoGangInfo extends JDFElement
         {
             return getAttribute(AttributeName.GANGNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

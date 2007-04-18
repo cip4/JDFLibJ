@@ -168,8 +168,6 @@ public abstract class JDFAutoQueueEntryPriParams extends JDFElement
             setAttribute(AttributeName.PRIORITY, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Priority
           * @return int the value of the attribute
@@ -178,8 +176,6 @@ public abstract class JDFAutoQueueEntryPriParams extends JDFElement
         {
             return getIntAttribute(AttributeName.PRIORITY, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -194,8 +190,6 @@ public abstract class JDFAutoQueueEntryPriParams extends JDFElement
             setAttribute(AttributeName.QUEUEENTRYID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute QueueEntryID
           * @return the value of the attribute
@@ -204,7 +198,5 @@ public abstract class JDFAutoQueueEntryPriParams extends JDFElement
         {
             return getAttribute(AttributeName.QUEUEENTRYID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

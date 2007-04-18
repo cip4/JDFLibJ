@@ -77,6 +77,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFScreenSelector;
     /*
@@ -197,8 +198,6 @@ public abstract class JDFAutoScreeningParams extends JDFResource
             setAttribute(AttributeName.IGNORESOURCEFILE, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IgnoreSourceFile
           * @return boolean the value of the attribute
@@ -207,8 +206,6 @@ public abstract class JDFAutoScreeningParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.IGNORESOURCEFILE, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -223,8 +220,6 @@ public abstract class JDFAutoScreeningParams extends JDFResource
             setAttribute(AttributeName.ABORTJOBWHENSCREENMATCHINGFAILS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute AbortJobWhenScreenMatchingFails
           * @return boolean the value of the attribute
@@ -233,8 +228,6 @@ public abstract class JDFAutoScreeningParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.ABORTJOBWHENSCREENMATCHINGFAILS, null, false);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -251,8 +244,6 @@ public abstract class JDFAutoScreeningParams extends JDFResource
         return (JDFScreenSelector)getCreateElement_KElement(ElementName.SCREENSELECTOR, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element ScreenSelector
      * @param iSkip number of elements to skip
@@ -263,9 +254,10 @@ public abstract class JDFAutoScreeningParams extends JDFResource
         return (JDFScreenSelector) getElement(ElementName.SCREENSELECTOR, null, iSkip);
     }
 
-
-
-    public JDFScreenSelector appendScreenSelector()
+    /**
+     * (30) append element ScreenSelector
+     */
+    public JDFScreenSelector appendScreenSelector() throws JDFException
     {
         return (JDFScreenSelector) appendElement(ElementName.SCREENSELECTOR, null);
     }

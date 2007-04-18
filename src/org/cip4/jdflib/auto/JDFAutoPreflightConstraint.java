@@ -79,6 +79,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
     /*
     *****************************************************************************
     class JDFAutoPreflightConstraint : public JDFElement
@@ -185,8 +186,6 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
             setAttribute(AttributeName.ATTEMPTFIXUPERRORS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute AttemptFixupErrors
           * @return boolean the value of the attribute
@@ -195,8 +194,6 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
         {
             return getBoolAttribute(AttributeName.ATTEMPTFIXUPERRORS, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -211,8 +208,6 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
             setAttribute(AttributeName.ATTEMPTFIXUPWARNINGS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute AttemptFixupWarnings
           * @return boolean the value of the attribute
@@ -221,8 +216,6 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
         {
             return getBoolAttribute(AttributeName.ATTEMPTFIXUPWARNINGS, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -237,8 +230,6 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
             setAttribute(AttributeName.CONSTRAINT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Constraint
           * @return the value of the attribute
@@ -247,8 +238,6 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
         {
             return getAttribute(AttributeName.CONSTRAINT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -265,8 +254,6 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
         return (JDFElement)getCreateElement_KElement(ElementName.CONSTRAINTVALUE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element ConstraintValue
      * @param iSkip number of elements to skip
@@ -277,9 +264,10 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
         return (JDFElement) getElement(ElementName.CONSTRAINTVALUE, null, iSkip);
     }
 
-
-
-    public JDFElement appendConstraintValue()
+    /**
+     * (30) append element ConstraintValue
+     */
+    public JDFElement appendConstraintValue() throws JDFException
     {
         return (JDFElement) appendElement(ElementName.CONSTRAINTVALUE, null);
     }

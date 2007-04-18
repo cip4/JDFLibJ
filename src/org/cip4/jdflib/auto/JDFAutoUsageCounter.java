@@ -235,8 +235,6 @@ public abstract class JDFAutoUsageCounter extends JDFResource
             setAttribute(AttributeName.COUNTERID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute CounterID
           * @return the value of the attribute
@@ -245,8 +243,6 @@ public abstract class JDFAutoUsageCounter extends JDFResource
         {
             return getAttribute(AttributeName.COUNTERID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -261,8 +257,6 @@ public abstract class JDFAutoUsageCounter extends JDFResource
             setAttribute(AttributeName.SCOPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Scope
           * @return the value of the attribute
@@ -271,8 +265,6 @@ public abstract class JDFAutoUsageCounter extends JDFResource
         {
             return EnumScope.getEnum(getAttribute(AttributeName.SCOPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -287,8 +279,6 @@ public abstract class JDFAutoUsageCounter extends JDFResource
             setAttribute(AttributeName.COUNTERTYPES, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute CounterTypes
           * @return VString the value of the attribute
@@ -300,7 +290,5 @@ public abstract class JDFAutoUsageCounter extends JDFResource
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
 }// end namespace JDF

@@ -170,8 +170,6 @@ public abstract class JDFAutoQueueEntryPosParams extends JDFElement
             setAttribute(AttributeName.NEXTQUEUEENTRYID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute NextQueueEntryID
           * @return the value of the attribute
@@ -180,8 +178,6 @@ public abstract class JDFAutoQueueEntryPosParams extends JDFElement
         {
             return getAttribute(AttributeName.NEXTQUEUEENTRYID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -196,8 +192,6 @@ public abstract class JDFAutoQueueEntryPosParams extends JDFElement
             setAttribute(AttributeName.QUEUEENTRYID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute QueueEntryID
           * @return the value of the attribute
@@ -206,8 +200,6 @@ public abstract class JDFAutoQueueEntryPosParams extends JDFElement
         {
             return getAttribute(AttributeName.QUEUEENTRYID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -222,8 +214,6 @@ public abstract class JDFAutoQueueEntryPosParams extends JDFElement
             setAttribute(AttributeName.PREVQUEUEENTRYID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute PrevQueueEntryID
           * @return the value of the attribute
@@ -232,8 +222,6 @@ public abstract class JDFAutoQueueEntryPosParams extends JDFElement
         {
             return getAttribute(AttributeName.PREVQUEUEENTRYID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -248,8 +236,6 @@ public abstract class JDFAutoQueueEntryPosParams extends JDFElement
             setAttribute(AttributeName.POSITION, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Position
           * @return int the value of the attribute
@@ -258,7 +244,5 @@ public abstract class JDFAutoQueueEntryPosParams extends JDFElement
         {
             return getIntAttribute(AttributeName.POSITION, null, 0);
         }
-
-
 
 }// end namespace JDF

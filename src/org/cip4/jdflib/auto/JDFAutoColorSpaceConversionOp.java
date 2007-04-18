@@ -454,8 +454,6 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
             setAttribute(AttributeName.IGNOREEMBEDDEDICC, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IgnoreEmbeddedICC
           * @return boolean the value of the attribute
@@ -464,8 +462,6 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
         {
             return getBoolAttribute(AttributeName.IGNOREEMBEDDEDICC, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -480,8 +476,6 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
             setAttribute(AttributeName.PRESERVEBLACK, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute PreserveBlack
           * @return boolean the value of the attribute
@@ -490,8 +484,6 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
         {
             return getBoolAttribute(AttributeName.PRESERVEBLACK, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -506,8 +498,6 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
             setAttribute(AttributeName.RENDERINGINTENT, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute RenderingIntent
           * @return the value of the attribute
@@ -516,8 +506,6 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
         {
             return EnumRenderingIntent.getEnum(getAttribute(AttributeName.RENDERINGINTENT, null, "ColorSpaceDependent"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -532,8 +520,6 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
             setAttribute(AttributeName.RGBGRAY2BLACK, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute RGBGray2Black
           * @return boolean the value of the attribute
@@ -542,8 +528,6 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
         {
             return getBoolAttribute(AttributeName.RGBGRAY2BLACK, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -558,8 +542,6 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
             setAttribute(AttributeName.RGBGRAY2BLACKTHRESHOLD, value, null);
         }
 
-
-
         /**
           * (17) get double attribute RGBGray2BlackThreshold
           * @return double the value of the attribute
@@ -568,8 +550,6 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
         {
             return getRealAttribute(AttributeName.RGBGRAY2BLACKTHRESHOLD, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -584,8 +564,6 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
             setEnumerationsAttribute(AttributeName.SOURCEOBJECTS, v, null);
         }
 
-
-
         /**
           * (9.2) get SourceObjects attribute SourceObjects
           * @return Vector of the enumerations
@@ -594,8 +572,6 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
         {
             return getEnumerationsAttribute(AttributeName.SOURCEOBJECTS, null, EnumSourceObjects.All, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -610,8 +586,6 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
             setAttribute(AttributeName.OPERATION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Operation
           * @return the value of the attribute
@@ -620,8 +594,6 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
         {
             return EnumOperation.getEnum(getAttribute(AttributeName.OPERATION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -636,8 +608,6 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
             setAttribute(AttributeName.SOURCECS, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute SourceCS
           * @return the value of the attribute
@@ -646,8 +616,6 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
         {
             return EnumSourceCS.getEnum(getAttribute(AttributeName.SOURCECS, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -662,8 +630,6 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
             setAttribute(AttributeName.SOURCERENDERINGINTENT, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute SourceRenderingIntent
           * @return the value of the attribute
@@ -672,8 +638,6 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
         {
             return EnumSourceRenderingIntent.getEnum(getAttribute(AttributeName.SOURCERENDERINGINTENT, null, null));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -689,8 +653,6 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
         return (JDFDeviceNSpace) getElement(ElementName.DEVICENSPACE, null, 0);
     }
 
-
-
     /** (25) getCreateDeviceNSpace
      * 
      * @return JDFDeviceNSpace the element
@@ -700,17 +662,14 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
         return (JDFDeviceNSpace) getCreateElement_KElement(ElementName.DEVICENSPACE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDeviceNSpace
+     * (29) append element DeviceNSpace
      */
     public JDFDeviceNSpace appendDeviceNSpace() throws JDFException
     {
         return (JDFDeviceNSpace) appendElementN(ElementName.DEVICENSPACE, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -719,6 +678,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element FileSpec
      * @return JDFFileSpec the element
@@ -727,8 +687,6 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
     {
         return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
     }
-
-
 
     /** (25) getCreateFileSpec
      * 
@@ -739,17 +697,14 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
         return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFileSpec
+     * (29) append element FileSpec
      */
     public JDFFileSpec appendFileSpec() throws JDFException
     {
         return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -758,6 +713,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateSeparationSpec
      * 
      * @param iSkip number of elements to skip
@@ -767,8 +723,6 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
     {
         return (JDFSeparationSpec)getCreateElement_KElement(ElementName.SEPARATIONSPEC, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element SeparationSpec
@@ -780,9 +734,10 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
         return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
     }
 
-
-
-    public JDFSeparationSpec appendSeparationSpec()
+    /**
+     * (30) append element SeparationSpec
+     */
+    public JDFSeparationSpec appendSeparationSpec() throws JDFException
     {
         return (JDFSeparationSpec) appendElement(ElementName.SEPARATIONSPEC, null);
     }

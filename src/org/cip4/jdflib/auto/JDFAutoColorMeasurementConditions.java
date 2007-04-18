@@ -471,8 +471,6 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
             setAttribute(AttributeName.DENSITYSTANDARD, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute DensityStandard
           * @return the value of the attribute
@@ -481,8 +479,6 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
         {
             return EnumDensityStandard.getEnum(getAttribute(AttributeName.DENSITYSTANDARD, null, "ANSIT"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -497,8 +493,6 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
             setAttribute(AttributeName.ILLUMINATION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Illumination
           * @return the value of the attribute
@@ -507,8 +501,6 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
         {
             return EnumIllumination.getEnum(getAttribute(AttributeName.ILLUMINATION, null, "D50"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -523,8 +515,6 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
             setAttribute(AttributeName.OBSERVER, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Observer
           * @return int the value of the attribute
@@ -533,8 +523,6 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
         {
             return getIntAttribute(AttributeName.OBSERVER, null, 2);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -549,8 +537,6 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
             setAttribute(AttributeName.INSTRUMENTATION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Instrumentation
           * @return the value of the attribute
@@ -559,8 +545,6 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
         {
             return getAttribute(AttributeName.INSTRUMENTATION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -575,8 +559,6 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
             setAttribute(AttributeName.INKSTATE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute InkState
           * @return the value of the attribute
@@ -585,8 +567,6 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
         {
             return EnumInkState.getEnum(getAttribute(AttributeName.INKSTATE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -601,8 +581,6 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
             setAttribute(AttributeName.MEASUREMENTFILTER, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute MeasurementFilter
           * @return the value of the attribute
@@ -611,8 +589,6 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
         {
             return EnumMeasurementFilter.getEnum(getAttribute(AttributeName.MEASUREMENTFILTER, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -627,8 +603,6 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
             setAttribute(AttributeName.SAMPLEBACKING, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute SampleBacking
           * @return the value of the attribute
@@ -637,8 +611,6 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
         {
             return EnumSampleBacking.getEnum(getAttribute(AttributeName.SAMPLEBACKING, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -653,8 +625,6 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
             setAttribute(AttributeName.WHITEBASE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute WhiteBase
           * @return the value of the attribute
@@ -663,7 +633,5 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
         {
             return EnumWhiteBase.getEnum(getAttribute(AttributeName.WHITEBASE, null, null));
         }
-
-
 
 }// end namespace JDF

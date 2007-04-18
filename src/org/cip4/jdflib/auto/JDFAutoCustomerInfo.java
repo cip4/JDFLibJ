@@ -172,8 +172,6 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
             setAttribute(AttributeName.BILLINGCODE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute BillingCode
           * @return the value of the attribute
@@ -182,8 +180,6 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
         {
             return getAttribute(AttributeName.BILLINGCODE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -198,8 +194,6 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
             setAttribute(AttributeName.CUSTOMERID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute CustomerID
           * @return the value of the attribute
@@ -208,8 +202,6 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
         {
             return getAttribute(AttributeName.CUSTOMERID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -224,8 +216,6 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
             setAttribute(AttributeName.CUSTOMERJOBNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute CustomerJobName
           * @return the value of the attribute
@@ -234,8 +224,6 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
         {
             return getAttribute(AttributeName.CUSTOMERJOBNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -250,8 +238,6 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
             setAttribute(AttributeName.CUSTOMERORDERID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute CustomerOrderID
           * @return the value of the attribute
@@ -260,8 +246,6 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
         {
             return getAttribute(AttributeName.CUSTOMERORDERID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -276,8 +260,6 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
             setAttribute(AttributeName.CUSTOMERPROJECTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute CustomerProjectID
           * @return the value of the attribute
@@ -286,8 +268,6 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
         {
             return getAttribute(AttributeName.CUSTOMERPROJECTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -303,8 +283,6 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
         return (JDFCompany) getElement(ElementName.COMPANY, null, 0);
     }
 
-
-
     /** (25) getCreateCompany
      * 
      * @return JDFCompany the element
@@ -314,17 +292,14 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
         return (JDFCompany) getCreateElement_KElement(ElementName.COMPANY, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementCompany
+     * (29) append element Company
      */
     public JDFCompany appendCompany() throws JDFException
     {
         return (JDFCompany) appendElementN(ElementName.COMPANY, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -333,6 +308,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateContact
      * 
      * @param iSkip number of elements to skip
@@ -342,8 +318,6 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
     {
         return (JDFContact)getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Contact
@@ -355,9 +329,10 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
         return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
     }
 
-
-
-    public JDFContact appendContact()
+    /**
+     * (30) append element Contact
+     */
+    public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -370,6 +345,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateCustomerMessage
      * 
      * @param iSkip number of elements to skip
@@ -379,8 +355,6 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
     {
         return (JDFCustomerMessage)getCreateElement_KElement(ElementName.CUSTOMERMESSAGE, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element CustomerMessage
@@ -392,9 +366,10 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
         return (JDFCustomerMessage) getElement(ElementName.CUSTOMERMESSAGE, null, iSkip);
     }
 
-
-
-    public JDFCustomerMessage appendCustomerMessage()
+    /**
+     * (30) append element CustomerMessage
+     */
+    public JDFCustomerMessage appendCustomerMessage() throws JDFException
     {
         return (JDFCustomerMessage) appendElement(ElementName.CUSTOMERMESSAGE, null);
     }

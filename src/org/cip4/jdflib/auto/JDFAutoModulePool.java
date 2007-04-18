@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.devicecapability.JDFModuleCap;
     /*
     *****************************************************************************
@@ -165,8 +166,6 @@ public abstract class JDFAutoModulePool extends JDFElement
         return (JDFModuleCap)getCreateElement_KElement(ElementName.MODULECAP, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element ModuleCap
      * @param iSkip number of elements to skip
@@ -177,9 +176,10 @@ public abstract class JDFAutoModulePool extends JDFElement
         return (JDFModuleCap) getElement(ElementName.MODULECAP, null, iSkip);
     }
 
-
-
-    public JDFModuleCap appendModuleCap()
+    /**
+     * (30) append element ModuleCap
+     */
+    public JDFModuleCap appendModuleCap() throws JDFException
     {
         return (JDFModuleCap) appendElement(ElementName.MODULECAP, null);
     }

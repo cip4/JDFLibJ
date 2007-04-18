@@ -220,8 +220,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
             setAttribute(AttributeName.PREPRINTED, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute PrePrinted
           * @return boolean the value of the attribute
@@ -230,8 +228,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         {
             return getBoolAttribute(AttributeName.PREPRINTED, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -246,8 +242,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
             setAttribute(AttributeName.MEDIASETCOUNT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute MediaSetCount
           * @return int the value of the attribute
@@ -256,8 +250,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         {
             return getIntAttribute(AttributeName.MEDIASETCOUNT, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -272,8 +264,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
             setAttribute(AttributeName.USERMEDIATYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute UserMediaType
           * @return the value of the attribute
@@ -282,8 +272,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         {
             return getAttribute(AttributeName.USERMEDIATYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -299,8 +287,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         return (JDFSpanCoatings) getElement(ElementName.BACKCOATINGS, null, 0);
     }
 
-
-
     /** (25) getCreateBackCoatings
      * 
      * @return JDFSpanCoatings the element
@@ -310,17 +296,14 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         return (JDFSpanCoatings) getCreateElement_KElement(ElementName.BACKCOATINGS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementBackCoatings
+     * (29) append element BackCoatings
      */
     public JDFSpanCoatings appendBackCoatings() throws JDFException
     {
         return (JDFSpanCoatings) appendElementN(ElementName.BACKCOATINGS, 1, null);
     }
+
     /**
      * (24) const get element Brightness
      * @return JDFNumberSpan the element
@@ -329,8 +312,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
     {
         return (JDFNumberSpan) getElement(ElementName.BRIGHTNESS, null, 0);
     }
-
-
 
     /** (25) getCreateBrightness
      * 
@@ -341,17 +322,14 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         return (JDFNumberSpan) getCreateElement_KElement(ElementName.BRIGHTNESS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementBrightness
+     * (29) append element Brightness
      */
     public JDFNumberSpan appendBrightness() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.BRIGHTNESS, 1, null);
     }
+
     /**
      * (24) const get element BuyerSupplied
      * @return JDFOptionSpan the element
@@ -360,8 +338,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
     {
         return (JDFOptionSpan) getElement(ElementName.BUYERSUPPLIED, null, 0);
     }
-
-
 
     /** (25) getCreateBuyerSupplied
      * 
@@ -372,17 +348,14 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         return (JDFOptionSpan) getCreateElement_KElement(ElementName.BUYERSUPPLIED, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementBuyerSupplied
+     * (29) append element BuyerSupplied
      */
     public JDFOptionSpan appendBuyerSupplied() throws JDFException
     {
         return (JDFOptionSpan) appendElementN(ElementName.BUYERSUPPLIED, 1, null);
     }
+
     /**
      * (24) const get element Dimensions
      * @return JDFXYPairSpan the element
@@ -391,8 +364,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
     {
         return (JDFXYPairSpan) getElement(ElementName.DIMENSIONS, null, 0);
     }
-
-
 
     /** (25) getCreateDimensions
      * 
@@ -403,17 +374,14 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         return (JDFXYPairSpan) getCreateElement_KElement(ElementName.DIMENSIONS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDimensions
+     * (29) append element Dimensions
      */
     public JDFXYPairSpan appendDimensions() throws JDFException
     {
         return (JDFXYPairSpan) appendElementN(ElementName.DIMENSIONS, 1, null);
     }
+
     /**
      * (24) const get element FrontCoatings
      * @return JDFSpanCoatings the element
@@ -422,8 +390,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
     {
         return (JDFSpanCoatings) getElement(ElementName.FRONTCOATINGS, null, 0);
     }
-
-
 
     /** (25) getCreateFrontCoatings
      * 
@@ -434,17 +400,14 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         return (JDFSpanCoatings) getCreateElement_KElement(ElementName.FRONTCOATINGS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFrontCoatings
+     * (29) append element FrontCoatings
      */
     public JDFSpanCoatings appendFrontCoatings() throws JDFException
     {
         return (JDFSpanCoatings) appendElementN(ElementName.FRONTCOATINGS, 1, null);
     }
+
     /**
      * (24) const get element Grade
      * @return JDFIntegerSpan the element
@@ -453,8 +416,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
     {
         return (JDFIntegerSpan) getElement(ElementName.GRADE, null, 0);
     }
-
-
 
     /** (25) getCreateGrade
      * 
@@ -465,17 +426,14 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         return (JDFIntegerSpan) getCreateElement_KElement(ElementName.GRADE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementGrade
+     * (29) append element Grade
      */
     public JDFIntegerSpan appendGrade() throws JDFException
     {
         return (JDFIntegerSpan) appendElementN(ElementName.GRADE, 1, null);
     }
+
     /**
      * (24) const get element GrainDirection
      * @return JDFSpanGrainDirection the element
@@ -484,8 +442,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
     {
         return (JDFSpanGrainDirection) getElement(ElementName.GRAINDIRECTION, null, 0);
     }
-
-
 
     /** (25) getCreateGrainDirection
      * 
@@ -496,17 +452,14 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         return (JDFSpanGrainDirection) getCreateElement_KElement(ElementName.GRAINDIRECTION, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementGrainDirection
+     * (29) append element GrainDirection
      */
     public JDFSpanGrainDirection appendGrainDirection() throws JDFException
     {
         return (JDFSpanGrainDirection) appendElementN(ElementName.GRAINDIRECTION, 1, null);
     }
+
     /**
      * (24) const get element HoleCount
      * @return JDFIntegerSpan the element
@@ -515,8 +468,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
     {
         return (JDFIntegerSpan) getElement(ElementName.HOLECOUNT, null, 0);
     }
-
-
 
     /** (25) getCreateHoleCount
      * 
@@ -527,17 +478,14 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         return (JDFIntegerSpan) getCreateElement_KElement(ElementName.HOLECOUNT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementHoleCount
+     * (29) append element HoleCount
      */
     public JDFIntegerSpan appendHoleCount() throws JDFException
     {
         return (JDFIntegerSpan) appendElementN(ElementName.HOLECOUNT, 1, null);
     }
+
     /**
      * (24) const get element HoleType
      * @return JDFStringSpan the element
@@ -546,8 +494,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
     {
         return (JDFStringSpan) getElement(ElementName.HOLETYPE, null, 0);
     }
-
-
 
     /** (25) getCreateHoleType
      * 
@@ -558,17 +504,14 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         return (JDFStringSpan) getCreateElement_KElement(ElementName.HOLETYPE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementHoleType
+     * (29) append element HoleType
      */
     public JDFStringSpan appendHoleType() throws JDFException
     {
         return (JDFStringSpan) appendElementN(ElementName.HOLETYPE, 1, null);
     }
+
     /**
      * (24) const get element MediaColor
      * @return JDFSpanNamedColor the element
@@ -577,8 +520,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
     {
         return (JDFSpanNamedColor) getElement(ElementName.MEDIACOLOR, null, 0);
     }
-
-
 
     /** (25) getCreateMediaColor
      * 
@@ -589,17 +530,14 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         return (JDFSpanNamedColor) getCreateElement_KElement(ElementName.MEDIACOLOR, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMediaColor
+     * (29) append element MediaColor
      */
     public JDFSpanNamedColor appendMediaColor() throws JDFException
     {
         return (JDFSpanNamedColor) appendElementN(ElementName.MEDIACOLOR, 1, null);
     }
+
     /**
      * (24) const get element MediaColorDetails
      * @return JDFStringSpan the element
@@ -608,8 +546,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
     {
         return (JDFStringSpan) getElement(ElementName.MEDIACOLORDETAILS, null, 0);
     }
-
-
 
     /** (25) getCreateMediaColorDetails
      * 
@@ -620,17 +556,14 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         return (JDFStringSpan) getCreateElement_KElement(ElementName.MEDIACOLORDETAILS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMediaColorDetails
+     * (29) append element MediaColorDetails
      */
     public JDFStringSpan appendMediaColorDetails() throws JDFException
     {
         return (JDFStringSpan) appendElementN(ElementName.MEDIACOLORDETAILS, 1, null);
     }
+
     /**
      * (24) const get element MediaType
      * @return JDFSpanMediaType the element
@@ -639,8 +572,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
     {
         return (JDFSpanMediaType) getElement(ElementName.MEDIATYPE, null, 0);
     }
-
-
 
     /** (25) getCreateMediaType
      * 
@@ -651,17 +582,14 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         return (JDFSpanMediaType) getCreateElement_KElement(ElementName.MEDIATYPE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMediaType
+     * (29) append element MediaType
      */
     public JDFSpanMediaType appendMediaType() throws JDFException
     {
         return (JDFSpanMediaType) appendElementN(ElementName.MEDIATYPE, 1, null);
     }
+
     /**
      * (24) const get element MediaTypeDetails
      * @return JDFNameSpan the element
@@ -670,8 +598,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
     {
         return (JDFNameSpan) getElement(ElementName.MEDIATYPEDETAILS, null, 0);
     }
-
-
 
     /** (25) getCreateMediaTypeDetails
      * 
@@ -682,17 +608,14 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         return (JDFNameSpan) getCreateElement_KElement(ElementName.MEDIATYPEDETAILS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMediaTypeDetails
+     * (29) append element MediaTypeDetails
      */
     public JDFNameSpan appendMediaTypeDetails() throws JDFException
     {
         return (JDFNameSpan) appendElementN(ElementName.MEDIATYPEDETAILS, 1, null);
     }
+
     /**
      * (24) const get element MediaUnit
      * @return JDFSpanMediaUnit the element
@@ -701,8 +624,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
     {
         return (JDFSpanMediaUnit) getElement(ElementName.MEDIAUNIT, null, 0);
     }
-
-
 
     /** (25) getCreateMediaUnit
      * 
@@ -713,17 +634,14 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         return (JDFSpanMediaUnit) getCreateElement_KElement(ElementName.MEDIAUNIT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMediaUnit
+     * (29) append element MediaUnit
      */
     public JDFSpanMediaUnit appendMediaUnit() throws JDFException
     {
         return (JDFSpanMediaUnit) appendElementN(ElementName.MEDIAUNIT, 1, null);
     }
+
     /**
      * (24) const get element Opacity
      * @return JDFSpanOpacity the element
@@ -732,8 +650,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
     {
         return (JDFSpanOpacity) getElement(ElementName.OPACITY, null, 0);
     }
-
-
 
     /** (25) getCreateOpacity
      * 
@@ -744,17 +660,14 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         return (JDFSpanOpacity) getCreateElement_KElement(ElementName.OPACITY, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementOpacity
+     * (29) append element Opacity
      */
     public JDFSpanOpacity appendOpacity() throws JDFException
     {
         return (JDFSpanOpacity) appendElementN(ElementName.OPACITY, 1, null);
     }
+
     /**
      * (24) const get element OpacityLevel
      * @return JDFNumberSpan the element
@@ -763,8 +676,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
     {
         return (JDFNumberSpan) getElement(ElementName.OPACITYLEVEL, null, 0);
     }
-
-
 
     /** (25) getCreateOpacityLevel
      * 
@@ -775,17 +686,14 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         return (JDFNumberSpan) getCreateElement_KElement(ElementName.OPACITYLEVEL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementOpacityLevel
+     * (29) append element OpacityLevel
      */
     public JDFNumberSpan appendOpacityLevel() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.OPACITYLEVEL, 1, null);
     }
+
     /**
      * (24) const get element Recycled
      * @return JDFOptionSpan the element
@@ -794,8 +702,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
     {
         return (JDFOptionSpan) getElement(ElementName.RECYCLED, null, 0);
     }
-
-
 
     /** (25) getCreateRecycled
      * 
@@ -806,17 +712,14 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         return (JDFOptionSpan) getCreateElement_KElement(ElementName.RECYCLED, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementRecycled
+     * (29) append element Recycled
      */
     public JDFOptionSpan appendRecycled() throws JDFException
     {
         return (JDFOptionSpan) appendElementN(ElementName.RECYCLED, 1, null);
     }
+
     /**
      * (24) const get element RecycledPercentage
      * @return JDFNumberSpan the element
@@ -825,8 +728,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
     {
         return (JDFNumberSpan) getElement(ElementName.RECYCLEDPERCENTAGE, null, 0);
     }
-
-
 
     /** (25) getCreateRecycledPercentage
      * 
@@ -837,17 +738,14 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         return (JDFNumberSpan) getCreateElement_KElement(ElementName.RECYCLEDPERCENTAGE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementRecycledPercentage
+     * (29) append element RecycledPercentage
      */
     public JDFNumberSpan appendRecycledPercentage() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.RECYCLEDPERCENTAGE, 1, null);
     }
+
     /**
      * (24) const get element StockBrand
      * @return JDFStringSpan the element
@@ -856,8 +754,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
     {
         return (JDFStringSpan) getElement(ElementName.STOCKBRAND, null, 0);
     }
-
-
 
     /** (25) getCreateStockBrand
      * 
@@ -868,17 +764,14 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         return (JDFStringSpan) getCreateElement_KElement(ElementName.STOCKBRAND, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementStockBrand
+     * (29) append element StockBrand
      */
     public JDFStringSpan appendStockBrand() throws JDFException
     {
         return (JDFStringSpan) appendElementN(ElementName.STOCKBRAND, 1, null);
     }
+
     /**
      * (24) const get element StockType
      * @return JDFNameSpan the element
@@ -887,8 +780,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
     {
         return (JDFNameSpan) getElement(ElementName.STOCKTYPE, null, 0);
     }
-
-
 
     /** (25) getCreateStockType
      * 
@@ -899,17 +790,14 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         return (JDFNameSpan) getCreateElement_KElement(ElementName.STOCKTYPE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementStockType
+     * (29) append element StockType
      */
     public JDFNameSpan appendStockType() throws JDFException
     {
         return (JDFNameSpan) appendElementN(ElementName.STOCKTYPE, 1, null);
     }
+
     /**
      * (24) const get element Texture
      * @return JDFNameSpan the element
@@ -918,8 +806,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
     {
         return (JDFNameSpan) getElement(ElementName.TEXTURE, null, 0);
     }
-
-
 
     /** (25) getCreateTexture
      * 
@@ -930,17 +816,14 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         return (JDFNameSpan) getCreateElement_KElement(ElementName.TEXTURE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementTexture
+     * (29) append element Texture
      */
     public JDFNameSpan appendTexture() throws JDFException
     {
         return (JDFNameSpan) appendElementN(ElementName.TEXTURE, 1, null);
     }
+
     /**
      * (24) const get element Thickness
      * @return JDFNumberSpan the element
@@ -949,8 +832,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
     {
         return (JDFNumberSpan) getElement(ElementName.THICKNESS, null, 0);
     }
-
-
 
     /** (25) getCreateThickness
      * 
@@ -961,17 +842,14 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         return (JDFNumberSpan) getCreateElement_KElement(ElementName.THICKNESS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementThickness
+     * (29) append element Thickness
      */
     public JDFNumberSpan appendThickness() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.THICKNESS, 1, null);
     }
+
     /**
      * (24) const get element USWeight
      * @return JDFNumberSpan the element
@@ -980,8 +858,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
     {
         return (JDFNumberSpan) getElement(ElementName.USWEIGHT, null, 0);
     }
-
-
 
     /** (25) getCreateUSWeight
      * 
@@ -992,17 +868,14 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         return (JDFNumberSpan) getCreateElement_KElement(ElementName.USWEIGHT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementUSWeight
+     * (29) append element USWeight
      */
     public JDFNumberSpan appendUSWeight() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.USWEIGHT, 1, null);
     }
+
     /**
      * (24) const get element Weight
      * @return JDFNumberSpan the element
@@ -1011,8 +884,6 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
     {
         return (JDFNumberSpan) getElement(ElementName.WEIGHT, null, 0);
     }
-
-
 
     /** (25) getCreateWeight
      * 
@@ -1023,15 +894,12 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         return (JDFNumberSpan) getCreateElement_KElement(ElementName.WEIGHT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementWeight
+     * (29) append element Weight
      */
     public JDFNumberSpan appendWeight() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.WEIGHT, 1, null);
     }
+
 }// end namespace JDF

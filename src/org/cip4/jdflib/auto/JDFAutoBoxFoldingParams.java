@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFBoxApplication;
@@ -264,8 +265,6 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
             setAttribute(AttributeName.BLANKDIMENSIONSX, value, null);
         }
 
-
-
         /**
           * (20) get JDFNumberList attribute BlankDimensionsX
           * @return JDFNumberList the value of the attribute, null if a the
@@ -287,8 +286,6 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute BlankDimensionsY
@@ -301,8 +298,6 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
         {
             setAttribute(AttributeName.BLANKDIMENSIONSY, value, null);
         }
-
-
 
         /**
           * (20) get JDFNumberList attribute BlankDimensionsY
@@ -325,8 +320,6 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute BoxFoldingType
@@ -340,8 +333,6 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
             setAttribute(AttributeName.BOXFOLDINGTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute BoxFoldingType
           * @return the value of the attribute
@@ -350,8 +341,6 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
         {
             return EnumBoxFoldingType.getEnum(getAttribute(AttributeName.BOXFOLDINGTYPE, null, null));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -368,8 +357,6 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
         return (JDFBoxFoldAction)getCreateElement_KElement(ElementName.BOXFOLDACTION, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element BoxFoldAction
      * @param iSkip number of elements to skip
@@ -380,9 +367,10 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
         return (JDFBoxFoldAction) getElement(ElementName.BOXFOLDACTION, null, iSkip);
     }
 
-
-
-    public JDFBoxFoldAction appendBoxFoldAction()
+    /**
+     * (30) append element BoxFoldAction
+     */
+    public JDFBoxFoldAction appendBoxFoldAction() throws JDFException
     {
         return (JDFBoxFoldAction) appendElement(ElementName.BOXFOLDACTION, null);
     }
@@ -397,8 +385,6 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
         return (JDFGlueLine)getCreateElement_KElement(ElementName.GLUELINE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element GlueLine
      * @param iSkip number of elements to skip
@@ -409,9 +395,10 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
         return (JDFGlueLine) getElement(ElementName.GLUELINE, null, iSkip);
     }
 
-
-
-    public JDFGlueLine appendGlueLine()
+    /**
+     * (30) append element GlueLine
+     */
+    public JDFGlueLine appendGlueLine() throws JDFException
     {
         return (JDFGlueLine) appendElement(ElementName.GLUELINE, null);
     }
@@ -424,6 +411,7 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateBoxApplication
      * 
      * @param iSkip number of elements to skip
@@ -433,8 +421,6 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
     {
         return (JDFBoxApplication)getCreateElement_KElement(ElementName.BOXAPPLICATION, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element BoxApplication
@@ -446,9 +432,10 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
         return (JDFBoxApplication) getElement(ElementName.BOXAPPLICATION, null, iSkip);
     }
 
-
-
-    public JDFBoxApplication appendBoxApplication()
+    /**
+     * (30) append element BoxApplication
+     */
+    public JDFBoxApplication appendBoxApplication() throws JDFException
     {
         return (JDFBoxApplication) appendElement(ElementName.BOXAPPLICATION, null);
     }

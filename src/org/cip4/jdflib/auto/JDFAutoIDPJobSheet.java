@@ -83,6 +83,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.intent.JDFMediaIntent;
 import org.cip4.jdflib.resource.process.JDFIDPFinishing;
 import org.cip4.jdflib.resource.process.JDFIDPLayout;
@@ -292,8 +293,6 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
             setAttribute(AttributeName.SHEETFORMAT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute SheetFormat
           * @return the value of the attribute
@@ -302,8 +301,6 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
         {
             return getAttribute(AttributeName.SHEETFORMAT, null, "Standard");
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -318,8 +315,6 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
             setAttribute(AttributeName.SHEETOCCURENCE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute SheetOccurence
           * @return the value of the attribute
@@ -328,8 +323,6 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
         {
             return EnumSheetOccurence.getEnum(getAttribute(AttributeName.SHEETOCCURENCE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -344,8 +337,6 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
             setAttribute(AttributeName.SHEETTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute SheetType
           * @return the value of the attribute
@@ -354,8 +345,6 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
         {
             return EnumSheetType.getEnum(getAttribute(AttributeName.SHEETTYPE, null, null));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -372,8 +361,6 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
         return (JDFIDPFinishing)getCreateElement_KElement(ElementName.IDPFINISHING, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element IDPFinishing
      * @param iSkip number of elements to skip
@@ -384,9 +371,10 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
         return (JDFIDPFinishing) getElement(ElementName.IDPFINISHING, null, iSkip);
     }
 
-
-
-    public JDFIDPFinishing appendIDPFinishing()
+    /**
+     * (30) append element IDPFinishing
+     */
+    public JDFIDPFinishing appendIDPFinishing() throws JDFException
     {
         return (JDFIDPFinishing) appendElement(ElementName.IDPFINISHING, null);
     }
@@ -401,8 +389,6 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
         return (JDFIDPLayout)getCreateElement_KElement(ElementName.IDPLAYOUT, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element IDPLayout
      * @param iSkip number of elements to skip
@@ -413,9 +399,10 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
         return (JDFIDPLayout) getElement(ElementName.IDPLAYOUT, null, iSkip);
     }
 
-
-
-    public JDFIDPLayout appendIDPLayout()
+    /**
+     * (30) append element IDPLayout
+     */
+    public JDFIDPLayout appendIDPLayout() throws JDFException
     {
         return (JDFIDPLayout) appendElement(ElementName.IDPLAYOUT, null);
     }
@@ -430,8 +417,6 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
         return (JDFMediaIntent)getCreateElement_KElement(ElementName.MEDIAINTENT, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element MediaIntent
      * @param iSkip number of elements to skip
@@ -442,9 +427,10 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
         return (JDFMediaIntent) getElement(ElementName.MEDIAINTENT, null, iSkip);
     }
 
-
-
-    public JDFMediaIntent appendMediaIntent()
+    /**
+     * (30) append element MediaIntent
+     */
+    public JDFMediaIntent appendMediaIntent() throws JDFException
     {
         return (JDFMediaIntent) appendElement(ElementName.MEDIAINTENT, null);
     }
@@ -457,6 +443,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateMediaSource
      * 
      * @param iSkip number of elements to skip
@@ -466,8 +453,6 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
     {
         return (JDFMediaSource)getCreateElement_KElement(ElementName.MEDIASOURCE, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element MediaSource
@@ -479,9 +464,10 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
         return (JDFMediaSource) getElement(ElementName.MEDIASOURCE, null, iSkip);
     }
 
-
-
-    public JDFMediaSource appendMediaSource()
+    /**
+     * (30) append element MediaSource
+     */
+    public JDFMediaSource appendMediaSource() throws JDFException
     {
         return (JDFMediaSource) appendElement(ElementName.MEDIASOURCE, null);
     }
@@ -494,4 +480,5 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

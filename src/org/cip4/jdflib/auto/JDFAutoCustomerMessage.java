@@ -79,6 +79,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFComChannel;
     /*
@@ -186,8 +187,6 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
             setAttribute(AttributeName.LANGUAGE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Language
           * @return the value of the attribute
@@ -196,8 +195,6 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
         {
             return getAttribute(AttributeName.LANGUAGE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -212,8 +209,6 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
             setAttribute(AttributeName.MESSAGEEVENTS, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute MessageEvents
           * @return VString the value of the attribute
@@ -225,8 +220,6 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -241,8 +234,6 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
             setAttribute(AttributeName.SHOWLIST, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute ShowList
           * @return VString the value of the attribute
@@ -254,8 +245,6 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -272,8 +261,6 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
         return (JDFComChannel)getCreateElement_KElement(ElementName.COMCHANNEL, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element ComChannel
      * @param iSkip number of elements to skip
@@ -284,9 +271,10 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
         return (JDFComChannel) getElement(ElementName.COMCHANNEL, null, iSkip);
     }
 
-
-
-    public JDFComChannel appendComChannel()
+    /**
+     * (30) append element ComChannel
+     */
+    public JDFComChannel appendComChannel() throws JDFException
     {
         return (JDFComChannel) appendElement(ElementName.COMCHANNEL, null);
     }
@@ -299,4 +287,5 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

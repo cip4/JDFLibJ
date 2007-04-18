@@ -184,8 +184,6 @@ public abstract class JDFAutoBufferParams extends JDFResource
             setAttribute(AttributeName.MINIMUMWAIT, value, null);
         }
 
-
-
         /**
           * (20) get JDFDuration attribute MinimumWait
           * @return JDFDuration the value of the attribute, null if a the
@@ -206,7 +204,5 @@ public abstract class JDFAutoBufferParams extends JDFResource
             }
             return nPlaceHolder;
         }
-
-
 
 }// end namespace JDF

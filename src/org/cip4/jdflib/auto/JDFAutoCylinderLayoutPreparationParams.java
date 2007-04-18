@@ -179,8 +179,6 @@ public abstract class JDFAutoCylinderLayoutPreparationParams extends JDFResource
         return (JDFProductionPath) getElement(ElementName.PRODUCTIONPATH, null, 0);
     }
 
-
-
     /** (25) getCreateProductionPath
      * 
      * @return JDFProductionPath the element
@@ -190,17 +188,14 @@ public abstract class JDFAutoCylinderLayoutPreparationParams extends JDFResource
         return (JDFProductionPath) getCreateElement_KElement(ElementName.PRODUCTIONPATH, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementProductionPath
+     * (29) append element ProductionPath
      */
     public JDFProductionPath appendProductionPath() throws JDFException
     {
         return (JDFProductionPath) appendElementN(ElementName.PRODUCTIONPATH, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -209,4 +204,5 @@ public abstract class JDFAutoCylinderLayoutPreparationParams extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

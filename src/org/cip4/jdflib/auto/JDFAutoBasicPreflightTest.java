@@ -250,8 +250,6 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
             setAttribute(AttributeName.DEVNS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DevNS
           * @return the value of the attribute
@@ -260,8 +258,6 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
         {
             return getAttribute(AttributeName.DEVNS, null, "http://www.CIP4.org/JDFSchema_1_1");
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -276,8 +272,6 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
             setAttribute(AttributeName.LISTTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ListType
           * @return the value of the attribute
@@ -286,8 +280,6 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
         {
             return EnumListType.getEnum(getAttribute(AttributeName.LISTTYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -302,8 +294,6 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
             setAttribute(AttributeName.MAXOCCURS, value, null);
         }
 
-
-
         /**
           * (15) get int attribute MaxOccurs
           * @return int the value of the attribute
@@ -312,8 +302,6 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
         {
             return getIntAttribute(AttributeName.MAXOCCURS, null, 1);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -328,8 +316,6 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
             setAttribute(AttributeName.MINOCCURS, value, null);
         }
 
-
-
         /**
           * (15) get int attribute MinOccurs
           * @return int the value of the attribute
@@ -338,8 +324,6 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
         {
             return getIntAttribute(AttributeName.MINOCCURS, null, 1);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -354,8 +338,6 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
             setAttribute(AttributeName.NAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Name
           * @return the value of the attribute
@@ -364,8 +346,6 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
         {
             return getAttribute(AttributeName.NAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -381,8 +361,6 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
         return (JDFPreflightArgument) getElement(ElementName.PREFLIGHTARGUMENT, null, 0);
     }
 
-
-
     /** (25) getCreatePreflightArgument
      * 
      * @return JDFPreflightArgument the element
@@ -392,15 +370,12 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
         return (JDFPreflightArgument) getCreateElement_KElement(ElementName.PREFLIGHTARGUMENT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPreflightArgument
+     * (29) append element PreflightArgument
      */
     public JDFPreflightArgument appendPreflightArgument() throws JDFException
     {
         return (JDFPreflightArgument) appendElementN(ElementName.PREFLIGHTARGUMENT, 1, null);
     }
+
 }// end namespace JDF

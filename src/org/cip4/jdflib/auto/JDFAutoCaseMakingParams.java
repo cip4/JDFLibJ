@@ -205,8 +205,6 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
             setAttribute(AttributeName.BOTTOMFOLDIN, value, null);
         }
 
-
-
         /**
           * (17) get double attribute BottomFoldIn
           * @return double the value of the attribute
@@ -215,8 +213,6 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.BOTTOMFOLDIN, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -231,8 +227,6 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
             setAttribute(AttributeName.COVERWIDTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute CoverWidth
           * @return double the value of the attribute
@@ -241,8 +235,6 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.COVERWIDTH, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -257,8 +249,6 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
             setAttribute(AttributeName.CORNERTYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute CornerType
           * @return the value of the attribute
@@ -267,8 +257,6 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
         {
             return getAttribute(AttributeName.CORNERTYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -283,8 +271,6 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
             setAttribute(AttributeName.FRONTFOLDIN, value, null);
         }
 
-
-
         /**
           * (17) get double attribute FrontFoldIn
           * @return double the value of the attribute
@@ -293,8 +279,6 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.FRONTFOLDIN, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -309,8 +293,6 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
             setAttribute(AttributeName.TOPFOLDIN, value, null);
         }
 
-
-
         /**
           * (17) get double attribute TopFoldIn
           * @return double the value of the attribute
@@ -319,8 +301,6 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.TOPFOLDIN, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -335,8 +315,6 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
             setAttribute(AttributeName.HEIGHT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Height
           * @return double the value of the attribute
@@ -345,8 +323,6 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.HEIGHT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -361,8 +337,6 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
             setAttribute(AttributeName.JOINTWIDTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute JointWidth
           * @return double the value of the attribute
@@ -371,8 +345,6 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.JOINTWIDTH, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -387,8 +359,6 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
             setAttribute(AttributeName.SPINEWIDTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute SpineWidth
           * @return double the value of the attribute
@@ -397,8 +367,6 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.SPINEWIDTH, null, 0.0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -414,8 +382,6 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
         return (JDFGlueLine) getElement(ElementName.GLUELINE, null, 0);
     }
 
-
-
     /** (25) getCreateGlueLine
      * 
      * @return JDFGlueLine the element
@@ -425,17 +391,14 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
         return (JDFGlueLine) getCreateElement_KElement(ElementName.GLUELINE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementGlueLine
+     * (29) append element GlueLine
      */
     public JDFGlueLine appendGlueLine() throws JDFException
     {
         return (JDFGlueLine) appendElementN(ElementName.GLUELINE, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -444,4 +407,5 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

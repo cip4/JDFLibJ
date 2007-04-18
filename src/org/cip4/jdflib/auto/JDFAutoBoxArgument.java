@@ -272,8 +272,6 @@ public abstract class JDFAutoBoxArgument extends JDFElement
             setAttribute(AttributeName.BOX, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Box
           * @return the value of the attribute
@@ -282,8 +280,6 @@ public abstract class JDFAutoBoxArgument extends JDFElement
         {
             return EnumBox.getEnum(getAttribute(AttributeName.BOX, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -298,8 +294,6 @@ public abstract class JDFAutoBoxArgument extends JDFElement
             setAttribute(AttributeName.MIRRORMARGINS, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute MirrorMargins
           * @return the value of the attribute
@@ -308,8 +302,6 @@ public abstract class JDFAutoBoxArgument extends JDFElement
         {
             return EnumMirrorMargins.getEnum(getAttribute(AttributeName.MIRRORMARGINS, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -324,11 +316,9 @@ public abstract class JDFAutoBoxArgument extends JDFElement
             setAttribute(AttributeName.OFFSET, value, null);
         }
 
-
-
         /**
           * (20) get JDFRectangle attribute Offset
-          * @return JDFRectanglethe value of the attribute, null if a the
+          * @return JDFRectangle the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFRectangle
           */
         public JDFRectangle getOffset()
@@ -347,8 +337,6 @@ public abstract class JDFAutoBoxArgument extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Overlap
@@ -362,8 +350,6 @@ public abstract class JDFAutoBoxArgument extends JDFElement
             setAttribute(AttributeName.OVERLAP, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Overlap
           * @return boolean the value of the attribute
@@ -372,7 +358,5 @@ public abstract class JDFAutoBoxArgument extends JDFElement
         {
             return getBoolAttribute(AttributeName.OVERLAP, null, false);
         }
-
-
 
 }// end namespace JDF

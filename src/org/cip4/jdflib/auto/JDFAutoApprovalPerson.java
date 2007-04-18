@@ -238,8 +238,6 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
             setAttribute(AttributeName.OBLIGATED, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Obligated
           * @return boolean the value of the attribute
@@ -248,8 +246,6 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
         {
             return getBoolAttribute(AttributeName.OBLIGATED, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -264,8 +260,6 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
             setAttribute(AttributeName.APPROVALROLE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ApprovalRole
           * @return the value of the attribute
@@ -274,8 +268,6 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
         {
             return EnumApprovalRole.getEnum(getAttribute(AttributeName.APPROVALROLE, null, "Obligated"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -290,8 +282,6 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
             setAttribute(AttributeName.APPROVALROLEDETAILS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ApprovalRoleDetails
           * @return the value of the attribute
@@ -300,8 +290,6 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
         {
             return getAttribute(AttributeName.APPROVALROLEDETAILS, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -317,8 +305,6 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
         return (JDFContact) getElement(ElementName.CONTACT, null, 0);
     }
 
-
-
     /** (25) getCreateContact
      * 
      * @return JDFContact the element
@@ -328,17 +314,14 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
         return (JDFContact) getCreateElement_KElement(ElementName.CONTACT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementContact
+     * (29) append element Contact
      */
     public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElementN(ElementName.CONTACT, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -347,4 +330,5 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

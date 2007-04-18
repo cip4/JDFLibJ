@@ -290,8 +290,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
             setAttribute(AttributeName.IGNOREPDLCOPIES, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IgnorePDLCopies
           * @return boolean the value of the attribute
@@ -300,8 +298,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
         {
             return getBoolAttribute(AttributeName.IGNOREPDLCOPIES, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -316,8 +312,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
             setAttribute(AttributeName.IGNOREPDLIMPOSITION, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IgnorePDLImposition
           * @return boolean the value of the attribute
@@ -326,8 +320,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
         {
             return getBoolAttribute(AttributeName.IGNOREPDLIMPOSITION, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -342,8 +334,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
             setAttribute(AttributeName.CLIPPATH, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ClipPath
           * @return the value of the attribute
@@ -352,8 +342,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
         {
             return getAttribute(AttributeName.CLIPPATH, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -368,8 +356,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
             setAttribute(AttributeName.ELEMENTTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ElementType
           * @return the value of the attribute
@@ -378,8 +364,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
         {
             return EnumElementType.getEnum(getAttribute(AttributeName.ELEMENTTYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -394,8 +378,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
             setAttribute(AttributeName.HASBLEEDS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute HasBleeds
           * @return boolean the value of the attribute
@@ -404,8 +386,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
         {
             return getBoolAttribute(AttributeName.HASBLEEDS, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -420,8 +400,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
             setAttribute(AttributeName.ISBLANK, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IsBlank
           * @return boolean the value of the attribute
@@ -430,8 +408,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
         {
             return getBoolAttribute(AttributeName.ISBLANK, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -446,8 +422,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
             setAttribute(AttributeName.ISPRINTABLE, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IsPrintable
           * @return boolean the value of the attribute
@@ -456,8 +430,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
         {
             return getBoolAttribute(AttributeName.ISPRINTABLE, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -472,8 +444,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
             setAttribute(AttributeName.ISTRAPPED, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IsTrapped
           * @return boolean the value of the attribute
@@ -482,8 +452,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
         {
             return getBoolAttribute(AttributeName.ISTRAPPED, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -498,11 +466,9 @@ public abstract class JDFAutoLayoutElement extends JDFResource
             setAttribute(AttributeName.PAGELISTINDEX, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerRangeList attribute PageListIndex
-          * @return JDFIntegerRangeListthe value of the attribute, null if a the
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerRangeList
           */
         public JDFIntegerRangeList getPageListIndex()
@@ -521,8 +487,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute SourceBleedBox
@@ -536,11 +500,9 @@ public abstract class JDFAutoLayoutElement extends JDFResource
             setAttribute(AttributeName.SOURCEBLEEDBOX, value, null);
         }
 
-
-
         /**
           * (20) get JDFRectangle attribute SourceBleedBox
-          * @return JDFRectanglethe value of the attribute, null if a the
+          * @return JDFRectangle the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFRectangle
           */
         public JDFRectangle getSourceBleedBox()
@@ -559,8 +521,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute SourceClipBox
@@ -574,11 +534,9 @@ public abstract class JDFAutoLayoutElement extends JDFResource
             setAttribute(AttributeName.SOURCECLIPBOX, value, null);
         }
 
-
-
         /**
           * (20) get JDFRectangle attribute SourceClipBox
-          * @return JDFRectanglethe value of the attribute, null if a the
+          * @return JDFRectangle the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFRectangle
           */
         public JDFRectangle getSourceClipBox()
@@ -597,8 +555,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute SourceTrimBox
@@ -612,11 +568,9 @@ public abstract class JDFAutoLayoutElement extends JDFResource
             setAttribute(AttributeName.SOURCETRIMBOX, value, null);
         }
 
-
-
         /**
           * (20) get JDFRectangle attribute SourceTrimBox
-          * @return JDFRectanglethe value of the attribute, null if a the
+          * @return JDFRectangle the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFRectangle
           */
         public JDFRectangle getSourceTrimBox()
@@ -635,8 +589,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Template
@@ -650,8 +602,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
             setAttribute(AttributeName.TEMPLATE, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Template
           * @return boolean the value of the attribute
@@ -660,8 +610,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
         {
             return getBoolAttribute(AttributeName.TEMPLATE, null, false);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -677,8 +625,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
         return (JDFColorPool) getElement(ElementName.COLORPOOL, null, 0);
     }
 
-
-
     /** (25) getCreateColorPool
      * 
      * @return JDFColorPool the element
@@ -688,17 +634,14 @@ public abstract class JDFAutoLayoutElement extends JDFResource
         return (JDFColorPool) getCreateElement_KElement(ElementName.COLORPOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementColorPool
+     * (29) append element ColorPool
      */
     public JDFColorPool appendColorPool() throws JDFException
     {
         return (JDFColorPool) appendElementN(ElementName.COLORPOOL, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -707,6 +650,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element Dependencies
      * @return JDFDependencies the element
@@ -715,8 +659,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
     {
         return (JDFDependencies) getElement(ElementName.DEPENDENCIES, null, 0);
     }
-
-
 
     /** (25) getCreateDependencies
      * 
@@ -727,17 +669,14 @@ public abstract class JDFAutoLayoutElement extends JDFResource
         return (JDFDependencies) getCreateElement_KElement(ElementName.DEPENDENCIES, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDependencies
+     * (29) append element Dependencies
      */
     public JDFDependencies appendDependencies() throws JDFException
     {
         return (JDFDependencies) appendElementN(ElementName.DEPENDENCIES, 1, null);
     }
+
     /**
      * (24) const get element ElementColorParams
      * @return JDFElementColorParams the element
@@ -746,8 +685,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
     {
         return (JDFElementColorParams) getElement(ElementName.ELEMENTCOLORPARAMS, null, 0);
     }
-
-
 
     /** (25) getCreateElementColorParams
      * 
@@ -758,17 +695,14 @@ public abstract class JDFAutoLayoutElement extends JDFResource
         return (JDFElementColorParams) getCreateElement_KElement(ElementName.ELEMENTCOLORPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementElementColorParams
+     * (29) append element ElementColorParams
      */
     public JDFElementColorParams appendElementColorParams() throws JDFException
     {
         return (JDFElementColorParams) appendElementN(ElementName.ELEMENTCOLORPARAMS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -777,6 +711,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element FileSpec
      * @return JDFFileSpec the element
@@ -785,8 +720,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
     {
         return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
     }
-
-
 
     /** (25) getCreateFileSpec
      * 
@@ -797,17 +730,14 @@ public abstract class JDFAutoLayoutElement extends JDFResource
         return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFileSpec
+     * (29) append element FileSpec
      */
     public JDFFileSpec appendFileSpec() throws JDFException
     {
         return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -816,6 +746,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element ImageCompressionParams
      * @return JDFImageCompressionParams the element
@@ -824,8 +755,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
     {
         return (JDFImageCompressionParams) getElement(ElementName.IMAGECOMPRESSIONPARAMS, null, 0);
     }
-
-
 
     /** (25) getCreateImageCompressionParams
      * 
@@ -836,17 +765,14 @@ public abstract class JDFAutoLayoutElement extends JDFResource
         return (JDFImageCompressionParams) getCreateElement_KElement(ElementName.IMAGECOMPRESSIONPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementImageCompressionParams
+     * (29) append element ImageCompressionParams
      */
     public JDFImageCompressionParams appendImageCompressionParams() throws JDFException
     {
         return (JDFImageCompressionParams) appendElementN(ElementName.IMAGECOMPRESSIONPARAMS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -855,6 +781,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element PageList
      * @return JDFPageList the element
@@ -863,8 +790,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
     {
         return (JDFPageList) getElement(ElementName.PAGELIST, null, 0);
     }
-
-
 
     /** (25) getCreatePageList
      * 
@@ -875,17 +800,14 @@ public abstract class JDFAutoLayoutElement extends JDFResource
         return (JDFPageList) getCreateElement_KElement(ElementName.PAGELIST, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPageList
+     * (29) append element PageList
      */
     public JDFPageList appendPageList() throws JDFException
     {
         return (JDFPageList) appendElementN(ElementName.PAGELIST, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -894,6 +816,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element ScreeningParams
      * @return JDFScreeningParams the element
@@ -902,8 +825,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
     {
         return (JDFScreeningParams) getElement(ElementName.SCREENINGPARAMS, null, 0);
     }
-
-
 
     /** (25) getCreateScreeningParams
      * 
@@ -914,17 +835,14 @@ public abstract class JDFAutoLayoutElement extends JDFResource
         return (JDFScreeningParams) getCreateElement_KElement(ElementName.SCREENINGPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementScreeningParams
+     * (29) append element ScreeningParams
      */
     public JDFScreeningParams appendScreeningParams() throws JDFException
     {
         return (JDFScreeningParams) appendElementN(ElementName.SCREENINGPARAMS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -933,6 +851,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateSeparationSpec
      * 
      * @param iSkip number of elements to skip
@@ -942,8 +861,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
     {
         return (JDFSeparationSpec)getCreateElement_KElement(ElementName.SEPARATIONSPEC, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element SeparationSpec
@@ -955,9 +872,10 @@ public abstract class JDFAutoLayoutElement extends JDFResource
         return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
     }
 
-
-
-    public JDFSeparationSpec appendSeparationSpec()
+    /**
+     * (30) append element SeparationSpec
+     */
+    public JDFSeparationSpec appendSeparationSpec() throws JDFException
     {
         return (JDFSeparationSpec) appendElement(ElementName.SEPARATIONSPEC, null);
     }

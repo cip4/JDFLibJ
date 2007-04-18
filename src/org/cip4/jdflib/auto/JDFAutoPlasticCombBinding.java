@@ -169,8 +169,6 @@ public abstract class JDFAutoPlasticCombBinding extends JDFElement
         return (JDFStringSpan) getElement(ElementName.COMBBRAND, null, 0);
     }
 
-
-
     /** (25) getCreateCombBrand
      * 
      * @return JDFStringSpan the element
@@ -180,17 +178,14 @@ public abstract class JDFAutoPlasticCombBinding extends JDFElement
         return (JDFStringSpan) getCreateElement_KElement(ElementName.COMBBRAND, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementCombBrand
+     * (29) append element CombBrand
      */
     public JDFStringSpan appendCombBrand() throws JDFException
     {
         return (JDFStringSpan) appendElementN(ElementName.COMBBRAND, 1, null);
     }
+
     /**
      * (24) const get element PlasticCombType
      * @return JDFNameSpan the element
@@ -199,8 +194,6 @@ public abstract class JDFAutoPlasticCombBinding extends JDFElement
     {
         return (JDFNameSpan) getElement(ElementName.PLASTICCOMBTYPE, null, 0);
     }
-
-
 
     /** (25) getCreatePlasticCombType
      * 
@@ -211,17 +204,14 @@ public abstract class JDFAutoPlasticCombBinding extends JDFElement
         return (JDFNameSpan) getCreateElement_KElement(ElementName.PLASTICCOMBTYPE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPlasticCombType
+     * (29) append element PlasticCombType
      */
     public JDFNameSpan appendPlasticCombType() throws JDFException
     {
         return (JDFNameSpan) appendElementN(ElementName.PLASTICCOMBTYPE, 1, null);
     }
+
     /**
      * (24) const get element HoleList
      * @return JDFHoleList the element
@@ -230,8 +220,6 @@ public abstract class JDFAutoPlasticCombBinding extends JDFElement
     {
         return (JDFHoleList) getElement(ElementName.HOLELIST, null, 0);
     }
-
-
 
     /** (25) getCreateHoleList
      * 
@@ -242,15 +230,12 @@ public abstract class JDFAutoPlasticCombBinding extends JDFElement
         return (JDFHoleList) getCreateElement_KElement(ElementName.HOLELIST, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementHoleList
+     * (29) append element HoleList
      */
     public JDFHoleList appendHoleList() throws JDFException
     {
         return (JDFHoleList) appendElementN(ElementName.HOLELIST, 1, null);
     }
+
 }// end namespace JDF

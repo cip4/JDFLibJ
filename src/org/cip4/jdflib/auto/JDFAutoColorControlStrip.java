@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFCIELABMeasuringField;
@@ -205,11 +206,9 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
             setAttribute(AttributeName.CENTER, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute Center
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getCenter()
@@ -228,8 +227,6 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Size
@@ -243,11 +240,9 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
             setAttribute(AttributeName.SIZE, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute Size
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getSize()
@@ -266,8 +261,6 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Rotation
@@ -281,8 +274,6 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
             setAttribute(AttributeName.ROTATION, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Rotation
           * @return double the value of the attribute
@@ -291,8 +282,6 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
         {
             return getRealAttribute(AttributeName.ROTATION, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -307,8 +296,6 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
             setAttribute(AttributeName.STRIPTYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute StripType
           * @return the value of the attribute
@@ -317,8 +304,6 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
         {
             return getAttribute(AttributeName.STRIPTYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -335,8 +320,6 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
         return (JDFCIELABMeasuringField)getCreateElement_KElement(ElementName.CIELABMEASURINGFIELD, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element CIELABMeasuringField
      * @param iSkip number of elements to skip
@@ -347,9 +330,10 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
         return (JDFCIELABMeasuringField) getElement(ElementName.CIELABMEASURINGFIELD, null, iSkip);
     }
 
-
-
-    public JDFCIELABMeasuringField appendCIELABMeasuringField()
+    /**
+     * (30) append element CIELABMeasuringField
+     */
+    public JDFCIELABMeasuringField appendCIELABMeasuringField() throws JDFException
     {
         return (JDFCIELABMeasuringField) appendElement(ElementName.CIELABMEASURINGFIELD, null);
     }
@@ -362,6 +346,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateDensityMeasuringField
      * 
      * @param iSkip number of elements to skip
@@ -371,8 +356,6 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
     {
         return (JDFDensityMeasuringField)getCreateElement_KElement(ElementName.DENSITYMEASURINGFIELD, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element DensityMeasuringField
@@ -384,9 +367,10 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
         return (JDFDensityMeasuringField) getElement(ElementName.DENSITYMEASURINGFIELD, null, iSkip);
     }
 
-
-
-    public JDFDensityMeasuringField appendDensityMeasuringField()
+    /**
+     * (30) append element DensityMeasuringField
+     */
+    public JDFDensityMeasuringField appendDensityMeasuringField() throws JDFException
     {
         return (JDFDensityMeasuringField) appendElement(ElementName.DENSITYMEASURINGFIELD, null);
     }
@@ -399,4 +383,5 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

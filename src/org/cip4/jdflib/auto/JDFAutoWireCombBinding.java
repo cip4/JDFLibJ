@@ -171,8 +171,6 @@ public abstract class JDFAutoWireCombBinding extends JDFElement
         return (JDFStringSpan) getElement(ElementName.WIRECOMBBRAND, null, 0);
     }
 
-
-
     /** (25) getCreateWireCombBrand
      * 
      * @return JDFStringSpan the element
@@ -182,17 +180,14 @@ public abstract class JDFAutoWireCombBinding extends JDFElement
         return (JDFStringSpan) getCreateElement_KElement(ElementName.WIRECOMBBRAND, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementWireCombBrand
+     * (29) append element WireCombBrand
      */
     public JDFStringSpan appendWireCombBrand() throws JDFException
     {
         return (JDFStringSpan) appendElementN(ElementName.WIRECOMBBRAND, 1, null);
     }
+
     /**
      * (24) const get element WireCombMaterial
      * @return JDFSpanWireCombMaterial the element
@@ -201,8 +196,6 @@ public abstract class JDFAutoWireCombBinding extends JDFElement
     {
         return (JDFSpanWireCombMaterial) getElement(ElementName.WIRECOMBMATERIAL, null, 0);
     }
-
-
 
     /** (25) getCreateWireCombMaterial
      * 
@@ -213,17 +206,14 @@ public abstract class JDFAutoWireCombBinding extends JDFElement
         return (JDFSpanWireCombMaterial) getCreateElement_KElement(ElementName.WIRECOMBMATERIAL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementWireCombMaterial
+     * (29) append element WireCombMaterial
      */
     public JDFSpanWireCombMaterial appendWireCombMaterial() throws JDFException
     {
         return (JDFSpanWireCombMaterial) appendElementN(ElementName.WIRECOMBMATERIAL, 1, null);
     }
+
     /**
      * (24) const get element WireCombShape
      * @return JDFSpanWireCombShape the element
@@ -232,8 +222,6 @@ public abstract class JDFAutoWireCombBinding extends JDFElement
     {
         return (JDFSpanWireCombShape) getElement(ElementName.WIRECOMBSHAPE, null, 0);
     }
-
-
 
     /** (25) getCreateWireCombShape
      * 
@@ -244,17 +232,14 @@ public abstract class JDFAutoWireCombBinding extends JDFElement
         return (JDFSpanWireCombShape) getCreateElement_KElement(ElementName.WIRECOMBSHAPE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementWireCombShape
+     * (29) append element WireCombShape
      */
     public JDFSpanWireCombShape appendWireCombShape() throws JDFException
     {
         return (JDFSpanWireCombShape) appendElementN(ElementName.WIRECOMBSHAPE, 1, null);
     }
+
     /**
      * (24) const get element HoleList
      * @return JDFHoleList the element
@@ -263,8 +248,6 @@ public abstract class JDFAutoWireCombBinding extends JDFElement
     {
         return (JDFHoleList) getElement(ElementName.HOLELIST, null, 0);
     }
-
-
 
     /** (25) getCreateHoleList
      * 
@@ -275,15 +258,12 @@ public abstract class JDFAutoWireCombBinding extends JDFElement
         return (JDFHoleList) getCreateElement_KElement(ElementName.HOLELIST, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementHoleList
+     * (29) append element HoleList
      */
     public JDFHoleList appendHoleList() throws JDFException
     {
         return (JDFHoleList) appendElementN(ElementName.HOLELIST, 1, null);
     }
+
 }// end namespace JDF

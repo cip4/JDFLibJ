@@ -173,8 +173,6 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
             setAttribute(AttributeName.BROADSHEETNUMBER, value, null);
         }
 
-
-
         /**
           * (15) get int attribute BroadsheetNumber
           * @return int the value of the attribute
@@ -183,8 +181,6 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
         {
             return getIntAttribute(AttributeName.BROADSHEETNUMBER, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -199,8 +195,6 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
             setAttribute(AttributeName.LOGICALPRINTERSECTION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute LogicalPrinterSection
           * @return the value of the attribute
@@ -209,8 +203,6 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
         {
             return getAttribute(AttributeName.LOGICALPRINTERSECTION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -225,11 +217,9 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
             setAttribute(AttributeName.PAGELISTINDEX, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerRangeList attribute PageListIndex
-          * @return JDFIntegerRangeListthe value of the attribute, null if a the
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerRangeList
           */
         public JDFIntegerRangeList getPageListIndex()
@@ -248,8 +238,6 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute PagePlacementName
@@ -263,8 +251,6 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
             setAttribute(AttributeName.PAGEPLACEMENTNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute PagePlacementName
           * @return the value of the attribute
@@ -273,7 +259,5 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
         {
             return getAttribute(AttributeName.PAGEPLACEMENTNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

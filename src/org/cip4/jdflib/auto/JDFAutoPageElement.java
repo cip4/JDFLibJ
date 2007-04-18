@@ -174,8 +174,6 @@ public abstract class JDFAutoPageElement extends JDFElement
             setAttribute(AttributeName.CONTENTLISTINDEX, value, null);
         }
 
-
-
         /**
           * (15) get int attribute ContentListIndex
           * @return int the value of the attribute
@@ -184,8 +182,6 @@ public abstract class JDFAutoPageElement extends JDFElement
         {
             return getIntAttribute(AttributeName.CONTENTLISTINDEX, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -200,11 +196,9 @@ public abstract class JDFAutoPageElement extends JDFElement
             setAttribute(AttributeName.ELEMENTPAGES, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerRangeList attribute ElementPages
-          * @return JDFIntegerRangeListthe value of the attribute, null if a the
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerRangeList
           */
         public JDFIntegerRangeList getElementPages()
@@ -223,8 +217,6 @@ public abstract class JDFAutoPageElement extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ContentType
@@ -238,8 +230,6 @@ public abstract class JDFAutoPageElement extends JDFElement
             setAttribute(AttributeName.CONTENTTYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ContentType
           * @return the value of the attribute
@@ -248,8 +238,6 @@ public abstract class JDFAutoPageElement extends JDFElement
         {
             return getAttribute(AttributeName.CONTENTTYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -264,11 +252,9 @@ public abstract class JDFAutoPageElement extends JDFElement
             setAttribute(AttributeName.RELATIVEBOX, value, null);
         }
 
-
-
         /**
           * (20) get JDFRectangle attribute RelativeBox
-          * @return JDFRectanglethe value of the attribute, null if a the
+          * @return JDFRectangle the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFRectangle
           */
         public JDFRectangle getRelativeBox()
@@ -286,7 +272,5 @@ public abstract class JDFAutoPageElement extends JDFElement
             }
             return nPlaceHolder;
         }
-
-
 
 }// end namespace JDF

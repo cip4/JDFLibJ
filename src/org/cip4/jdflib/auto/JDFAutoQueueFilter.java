@@ -299,8 +299,6 @@ public abstract class JDFAutoQueueFilter extends JDFElement
             setAttribute(AttributeName.GANGNAMES, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute GangNames
           * @return VString the value of the attribute
@@ -312,8 +310,6 @@ public abstract class JDFAutoQueueFilter extends JDFElement
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -328,8 +324,6 @@ public abstract class JDFAutoQueueFilter extends JDFElement
             setAttribute(AttributeName.MAXENTRIES, value, null);
         }
 
-
-
         /**
           * (15) get int attribute MaxEntries
           * @return int the value of the attribute
@@ -338,8 +332,6 @@ public abstract class JDFAutoQueueFilter extends JDFElement
         {
             return getIntAttribute(AttributeName.MAXENTRIES, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -354,8 +346,6 @@ public abstract class JDFAutoQueueFilter extends JDFElement
             setAttribute(AttributeName.OLDERTHAN, new JDFDate().getDateTimeISO(), null);
         }
 
-
-
         /**
           * (11) set attribute OlderThan
           * @param value: the value to set the attribute to or null
@@ -365,8 +355,6 @@ public abstract class JDFAutoQueueFilter extends JDFElement
             if (value == null) value = new JDFDate();
             setAttribute(AttributeName.OLDERTHAN, value.getDateTimeISO(), null);
         }
-
-
 
         /**
           * (12) get JDFDate attribute OlderThan
@@ -391,8 +379,6 @@ public abstract class JDFAutoQueueFilter extends JDFElement
             return nMyDate;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute NewerThan
@@ -406,8 +392,6 @@ public abstract class JDFAutoQueueFilter extends JDFElement
             setAttribute(AttributeName.NEWERTHAN, new JDFDate().getDateTimeISO(), null);
         }
 
-
-
         /**
           * (11) set attribute NewerThan
           * @param value: the value to set the attribute to or null
@@ -417,8 +401,6 @@ public abstract class JDFAutoQueueFilter extends JDFElement
             if (value == null) value = new JDFDate();
             setAttribute(AttributeName.NEWERTHAN, value.getDateTimeISO(), null);
         }
-
-
 
         /**
           * (12) get JDFDate attribute NewerThan
@@ -443,8 +425,6 @@ public abstract class JDFAutoQueueFilter extends JDFElement
             return nMyDate;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute QueueEntryDetails
@@ -458,8 +438,6 @@ public abstract class JDFAutoQueueFilter extends JDFElement
             setAttribute(AttributeName.QUEUEENTRYDETAILS, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute QueueEntryDetails
           * @return the value of the attribute
@@ -468,8 +446,6 @@ public abstract class JDFAutoQueueFilter extends JDFElement
         {
             return EnumQueueEntryDetails.getEnum(getAttribute(AttributeName.QUEUEENTRYDETAILS, null, "Brief"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -484,8 +460,6 @@ public abstract class JDFAutoQueueFilter extends JDFElement
             setEnumerationsAttribute(AttributeName.STATUSLIST, v, null);
         }
 
-
-
         /**
           * (9.2) get StatusList attribute StatusList
           * @return Vector of the enumerations
@@ -494,8 +468,6 @@ public abstract class JDFAutoQueueFilter extends JDFElement
         {
             return getEnumerationsAttribute(AttributeName.STATUSLIST, null, EnumStatusList.getEnum(0), false);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -512,8 +484,6 @@ public abstract class JDFAutoQueueFilter extends JDFElement
         return (JDFQueueEntryDef)getCreateElement_KElement(ElementName.QUEUEENTRYDEF, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element QueueEntryDef
      * @param iSkip number of elements to skip
@@ -524,9 +494,10 @@ public abstract class JDFAutoQueueFilter extends JDFElement
         return (JDFQueueEntryDef) getElement(ElementName.QUEUEENTRYDEF, null, iSkip);
     }
 
-
-
-    public JDFQueueEntryDef appendQueueEntryDef()
+    /**
+     * (30) append element QueueEntryDef
+     */
+    public JDFQueueEntryDef appendQueueEntryDef() throws JDFException
     {
         return (JDFQueueEntryDef) appendElement(ElementName.QUEUEENTRYDEF, null);
     }
@@ -541,8 +512,6 @@ public abstract class JDFAutoQueueFilter extends JDFElement
         return (JDFDevice)getCreateElement_KElement(ElementName.DEVICE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Device
      * @param iSkip number of elements to skip
@@ -553,9 +522,10 @@ public abstract class JDFAutoQueueFilter extends JDFElement
         return (JDFDevice) getElement(ElementName.DEVICE, null, iSkip);
     }
 
-
-
-    public JDFDevice appendDevice()
+    /**
+     * (30) append element Device
+     */
+    public JDFDevice appendDevice() throws JDFException
     {
         return (JDFDevice) appendElement(ElementName.DEVICE, null);
     }

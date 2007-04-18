@@ -206,8 +206,6 @@ public abstract class JDFAutoProofItem extends JDFElement
             setAttribute(AttributeName.CONTRACT, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Contract
           * @return boolean the value of the attribute
@@ -216,8 +214,6 @@ public abstract class JDFAutoProofItem extends JDFElement
         {
             return getBoolAttribute(AttributeName.CONTRACT, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -232,11 +228,9 @@ public abstract class JDFAutoProofItem extends JDFElement
             setAttribute(AttributeName.PAGEINDEX, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerRangeList attribute PageIndex
-          * @return JDFIntegerRangeListthe value of the attribute, null if a the
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerRangeList
           */
         public JDFIntegerRangeList getPageIndex()
@@ -255,8 +249,6 @@ public abstract class JDFAutoProofItem extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ProofName
@@ -270,8 +262,6 @@ public abstract class JDFAutoProofItem extends JDFElement
             setAttribute(AttributeName.PROOFNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ProofName
           * @return the value of the attribute
@@ -280,8 +270,6 @@ public abstract class JDFAutoProofItem extends JDFElement
         {
             return getAttribute(AttributeName.PROOFNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -296,8 +284,6 @@ public abstract class JDFAutoProofItem extends JDFElement
             setAttribute(AttributeName.PROOFTARGET, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ProofTarget
           * @return the value of the attribute
@@ -306,8 +292,6 @@ public abstract class JDFAutoProofItem extends JDFElement
         {
             return getAttribute(AttributeName.PROOFTARGET, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -323,8 +307,6 @@ public abstract class JDFAutoProofItem extends JDFElement
         return (JDFIntegerSpan) getElement(ElementName.AMOUNT, null, 0);
     }
 
-
-
     /** (25) getCreateAmount
      * 
      * @return JDFIntegerSpan the element
@@ -334,17 +316,14 @@ public abstract class JDFAutoProofItem extends JDFElement
         return (JDFIntegerSpan) getCreateElement_KElement(ElementName.AMOUNT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementAmount
+     * (29) append element Amount
      */
     public JDFIntegerSpan appendAmount() throws JDFException
     {
         return (JDFIntegerSpan) appendElementN(ElementName.AMOUNT, 1, null);
     }
+
     /**
      * (24) const get element BrandName
      * @return JDFStringSpan the element
@@ -353,8 +332,6 @@ public abstract class JDFAutoProofItem extends JDFElement
     {
         return (JDFStringSpan) getElement(ElementName.BRANDNAME, null, 0);
     }
-
-
 
     /** (25) getCreateBrandName
      * 
@@ -365,17 +342,14 @@ public abstract class JDFAutoProofItem extends JDFElement
         return (JDFStringSpan) getCreateElement_KElement(ElementName.BRANDNAME, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementBrandName
+     * (29) append element BrandName
      */
     public JDFStringSpan appendBrandName() throws JDFException
     {
         return (JDFStringSpan) appendElementN(ElementName.BRANDNAME, 1, null);
     }
+
     /**
      * (24) const get element ColorType
      * @return JDFSpanColorType the element
@@ -384,8 +358,6 @@ public abstract class JDFAutoProofItem extends JDFElement
     {
         return (JDFSpanColorType) getElement(ElementName.COLORTYPE, null, 0);
     }
-
-
 
     /** (25) getCreateColorType
      * 
@@ -396,17 +368,14 @@ public abstract class JDFAutoProofItem extends JDFElement
         return (JDFSpanColorType) getCreateElement_KElement(ElementName.COLORTYPE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementColorType
+     * (29) append element ColorType
      */
     public JDFSpanColorType appendColorType() throws JDFException
     {
         return (JDFSpanColorType) appendElementN(ElementName.COLORTYPE, 1, null);
     }
+
     /**
      * (24) const get element HalfTone
      * @return JDFOptionSpan the element
@@ -415,8 +384,6 @@ public abstract class JDFAutoProofItem extends JDFElement
     {
         return (JDFOptionSpan) getElement(ElementName.HALFTONE, null, 0);
     }
-
-
 
     /** (25) getCreateHalfTone
      * 
@@ -427,17 +394,14 @@ public abstract class JDFAutoProofItem extends JDFElement
         return (JDFOptionSpan) getCreateElement_KElement(ElementName.HALFTONE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementHalfTone
+     * (29) append element HalfTone
      */
     public JDFOptionSpan appendHalfTone() throws JDFException
     {
         return (JDFOptionSpan) appendElementN(ElementName.HALFTONE, 1, null);
     }
+
     /**
      * (24) const get element ImageStrategy
      * @return JDFSpanImageStrategy the element
@@ -446,8 +410,6 @@ public abstract class JDFAutoProofItem extends JDFElement
     {
         return (JDFSpanImageStrategy) getElement(ElementName.IMAGESTRATEGY, null, 0);
     }
-
-
 
     /** (25) getCreateImageStrategy
      * 
@@ -458,17 +420,14 @@ public abstract class JDFAutoProofItem extends JDFElement
         return (JDFSpanImageStrategy) getCreateElement_KElement(ElementName.IMAGESTRATEGY, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementImageStrategy
+     * (29) append element ImageStrategy
      */
     public JDFSpanImageStrategy appendImageStrategy() throws JDFException
     {
         return (JDFSpanImageStrategy) appendElementN(ElementName.IMAGESTRATEGY, 1, null);
     }
+
     /**
      * (24) const get element Technology
      * @return JDFNameSpan the element
@@ -477,8 +436,6 @@ public abstract class JDFAutoProofItem extends JDFElement
     {
         return (JDFNameSpan) getElement(ElementName.TECHNOLOGY, null, 0);
     }
-
-
 
     /** (25) getCreateTechnology
      * 
@@ -489,17 +446,14 @@ public abstract class JDFAutoProofItem extends JDFElement
         return (JDFNameSpan) getCreateElement_KElement(ElementName.TECHNOLOGY, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementTechnology
+     * (29) append element Technology
      */
     public JDFNameSpan appendTechnology() throws JDFException
     {
         return (JDFNameSpan) appendElementN(ElementName.TECHNOLOGY, 1, null);
     }
+
     /**
      * (24) const get element ProofType
      * @return JDFSpanProofType the element
@@ -508,8 +462,6 @@ public abstract class JDFAutoProofItem extends JDFElement
     {
         return (JDFSpanProofType) getElement(ElementName.PROOFTYPE, null, 0);
     }
-
-
 
     /** (25) getCreateProofType
      * 
@@ -520,17 +472,14 @@ public abstract class JDFAutoProofItem extends JDFElement
         return (JDFSpanProofType) getCreateElement_KElement(ElementName.PROOFTYPE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementProofType
+     * (29) append element ProofType
      */
     public JDFSpanProofType appendProofType() throws JDFException
     {
         return (JDFSpanProofType) appendElementN(ElementName.PROOFTYPE, 1, null);
     }
+
     /** (26) getCreateSeparationSpec
      * 
      * @param iSkip number of elements to skip
@@ -540,8 +489,6 @@ public abstract class JDFAutoProofItem extends JDFElement
     {
         return (JDFSeparationSpec)getCreateElement_KElement(ElementName.SEPARATIONSPEC, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element SeparationSpec
@@ -553,9 +500,10 @@ public abstract class JDFAutoProofItem extends JDFElement
         return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
     }
 
-
-
-    public JDFSeparationSpec appendSeparationSpec()
+    /**
+     * (30) append element SeparationSpec
+     */
+    public JDFSeparationSpec appendSeparationSpec() throws JDFException
     {
         return (JDFSeparationSpec) appendElement(ElementName.SEPARATIONSPEC, null);
     }
@@ -569,8 +517,6 @@ public abstract class JDFAutoProofItem extends JDFElement
         return (JDFApprovalParams) getElement(ElementName.APPROVALPARAMS, null, 0);
     }
 
-
-
     /** (25) getCreateApprovalParams
      * 
      * @return JDFApprovalParams the element
@@ -580,17 +526,14 @@ public abstract class JDFAutoProofItem extends JDFElement
         return (JDFApprovalParams) getCreateElement_KElement(ElementName.APPROVALPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementApprovalParams
+     * (29) append element ApprovalParams
      */
     public JDFApprovalParams appendApprovalParams() throws JDFException
     {
         return (JDFApprovalParams) appendElementN(ElementName.APPROVALPARAMS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -599,4 +542,5 @@ public abstract class JDFAutoProofItem extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

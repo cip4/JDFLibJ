@@ -183,8 +183,6 @@ public abstract class JDFAutoFontPolicy extends JDFResource
             setAttribute(AttributeName.PREFERREDFONT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute PreferredFont
           * @return the value of the attribute
@@ -193,8 +191,6 @@ public abstract class JDFAutoFontPolicy extends JDFResource
         {
             return getAttribute(AttributeName.PREFERREDFONT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -209,8 +205,6 @@ public abstract class JDFAutoFontPolicy extends JDFResource
             setAttribute(AttributeName.USEDEFAULTFONT, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute UseDefaultFont
           * @return boolean the value of the attribute
@@ -219,8 +213,6 @@ public abstract class JDFAutoFontPolicy extends JDFResource
         {
             return getBoolAttribute(AttributeName.USEDEFAULTFONT, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -235,8 +227,6 @@ public abstract class JDFAutoFontPolicy extends JDFResource
             setAttribute(AttributeName.USEFONTEMULATION, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute UseFontEmulation
           * @return boolean the value of the attribute
@@ -245,7 +235,5 @@ public abstract class JDFAutoFontPolicy extends JDFResource
         {
             return getBoolAttribute(AttributeName.USEFONTEMULATION, null, false);
         }
-
-
 
 }// end namespace JDF

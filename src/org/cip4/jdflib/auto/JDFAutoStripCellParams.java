@@ -289,8 +289,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
             setAttribute(AttributeName.BLEEDFACE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute BleedFace
           * @return double the value of the attribute
@@ -299,8 +297,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
         {
             return getRealAttribute(AttributeName.BLEEDFACE, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -315,8 +311,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
             setAttribute(AttributeName.BLEEDSPINE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute BleedSpine
           * @return double the value of the attribute
@@ -325,8 +319,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
         {
             return getRealAttribute(AttributeName.BLEEDSPINE, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -341,8 +333,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
             setAttribute(AttributeName.BLEEDHEAD, value, null);
         }
 
-
-
         /**
           * (17) get double attribute BleedHead
           * @return double the value of the attribute
@@ -351,8 +341,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
         {
             return getRealAttribute(AttributeName.BLEEDHEAD, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -367,8 +355,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
             setAttribute(AttributeName.BLEEDFOOT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute BleedFoot
           * @return double the value of the attribute
@@ -377,8 +363,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
         {
             return getRealAttribute(AttributeName.BLEEDFOOT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -393,8 +377,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
             setAttribute(AttributeName.TRIMFACE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute TrimFace
           * @return double the value of the attribute
@@ -403,8 +385,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
         {
             return getRealAttribute(AttributeName.TRIMFACE, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -419,8 +399,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
             setAttribute(AttributeName.SPINE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Spine
           * @return double the value of the attribute
@@ -429,8 +407,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
         {
             return getRealAttribute(AttributeName.SPINE, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -445,8 +421,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
             setAttribute(AttributeName.TRIMHEAD, value, null);
         }
 
-
-
         /**
           * (17) get double attribute TrimHead
           * @return double the value of the attribute
@@ -455,8 +429,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
         {
             return getRealAttribute(AttributeName.TRIMHEAD, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -471,8 +443,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
             setAttribute(AttributeName.TRIMFOOT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute TrimFoot
           * @return double the value of the attribute
@@ -481,8 +451,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
         {
             return getRealAttribute(AttributeName.TRIMFOOT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -497,8 +465,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
             setAttribute(AttributeName.FRONTOVERFOLD, value, null);
         }
 
-
-
         /**
           * (17) get double attribute FrontOverfold
           * @return double the value of the attribute
@@ -507,8 +473,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
         {
             return getRealAttribute(AttributeName.FRONTOVERFOLD, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -523,8 +487,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
             setAttribute(AttributeName.BACKOVERFOLD, value, null);
         }
 
-
-
         /**
           * (17) get double attribute BackOverfold
           * @return double the value of the attribute
@@ -533,8 +495,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
         {
             return getRealAttribute(AttributeName.BACKOVERFOLD, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -549,8 +509,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
             setAttribute(AttributeName.MILLINGDEPTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute MillingDepth
           * @return double the value of the attribute
@@ -559,8 +517,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
         {
             return getRealAttribute(AttributeName.MILLINGDEPTH, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -575,8 +531,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
             setAttribute(AttributeName.CUTWIDTHHEAD, value, null);
         }
 
-
-
         /**
           * (17) get double attribute CutWidthHead
           * @return double the value of the attribute
@@ -585,8 +539,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
         {
             return getRealAttribute(AttributeName.CUTWIDTHHEAD, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -601,8 +553,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
             setAttribute(AttributeName.CUTWIDTHFOOT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute CutWidthFoot
           * @return double the value of the attribute
@@ -611,8 +561,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
         {
             return getRealAttribute(AttributeName.CUTWIDTHFOOT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -627,11 +575,9 @@ public abstract class JDFAutoStripCellParams extends JDFElement
             setAttribute(AttributeName.TRIMSIZE, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute TrimSize
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getTrimSize()
@@ -650,8 +596,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Creep
@@ -665,11 +609,9 @@ public abstract class JDFAutoStripCellParams extends JDFElement
             setAttribute(AttributeName.CREEP, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute Creep
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getCreep()
@@ -688,8 +630,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Sides
@@ -703,8 +643,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
             setAttribute(AttributeName.SIDES, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Sides
           * @return the value of the attribute
@@ -713,8 +651,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
         {
             return EnumSides.getEnum(getAttribute(AttributeName.SIDES, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -729,8 +665,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
             setAttribute(AttributeName.MASKBLEED, value, null);
         }
 
-
-
         /**
           * (17) get double attribute MaskBleed
           * @return double the value of the attribute
@@ -739,8 +673,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
         {
             return getRealAttribute(AttributeName.MASKBLEED, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -755,8 +687,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
             setAttribute(AttributeName.MASKSEPARATION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute MaskSeparation
           * @return the value of the attribute
@@ -765,8 +695,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
         {
             return getAttribute(AttributeName.MASKSEPARATION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -781,8 +709,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
             setAttribute(AttributeName.MASK, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Mask
           * @return the value of the attribute
@@ -791,7 +717,5 @@ public abstract class JDFAutoStripCellParams extends JDFElement
         {
             return EnumMask.getEnum(getAttribute(AttributeName.MASK, null, null));
         }
-
-
 
 }// end namespace JDF

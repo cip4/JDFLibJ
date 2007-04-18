@@ -74,6 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFImageCompression;
 import org.cip4.jdflib.resource.JDFResource;
     /*
@@ -179,8 +180,6 @@ public abstract class JDFAutoImageCompressionParams extends JDFResource
         return (JDFImageCompression)getCreateElement_KElement(ElementName.IMAGECOMPRESSION, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element ImageCompression
      * @param iSkip number of elements to skip
@@ -191,9 +190,10 @@ public abstract class JDFAutoImageCompressionParams extends JDFResource
         return (JDFImageCompression) getElement(ElementName.IMAGECOMPRESSION, null, iSkip);
     }
 
-
-
-    public JDFImageCompression appendImageCompression()
+    /**
+     * (30) append element ImageCompression
+     */
+    public JDFImageCompression appendImageCompression() throws JDFException
     {
         return (JDFImageCompression) appendElement(ElementName.IMAGECOMPRESSION, null);
     }

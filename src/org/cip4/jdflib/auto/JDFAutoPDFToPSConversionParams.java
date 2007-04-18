@@ -637,8 +637,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.BINARYOK, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute BinaryOK
           * @return boolean the value of the attribute
@@ -647,8 +645,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.BINARYOK, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -663,8 +659,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.CENTERCROPBOX, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute CenterCropBox
           * @return boolean the value of the attribute
@@ -673,8 +667,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.CENTERCROPBOX, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -689,8 +681,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.GENERATEPAGESTREAMS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute GeneratePageStreams
           * @return boolean the value of the attribute
@@ -699,8 +689,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.GENERATEPAGESTREAMS, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -715,8 +703,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.IGNOREANNOTFORMS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IgnoreAnnotForms
           * @return boolean the value of the attribute
@@ -725,8 +711,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.IGNOREANNOTFORMS, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -741,8 +725,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.IGNOREBG, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IgnoreBG
           * @return boolean the value of the attribute
@@ -751,8 +733,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.IGNOREBG, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -767,8 +747,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.IGNORECOLORSEPS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IgnoreColorSeps
           * @return boolean the value of the attribute
@@ -777,8 +755,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.IGNORECOLORSEPS, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -793,8 +769,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.IGNOREDSC, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IgnoreDSC
           * @return boolean the value of the attribute
@@ -803,8 +777,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.IGNOREDSC, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -819,8 +791,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.IGNOREEXTERNSTREAMREF, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IgnoreExternStreamRef
           * @return boolean the value of the attribute
@@ -829,8 +799,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.IGNOREEXTERNSTREAMREF, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -845,8 +813,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.IGNOREHALFTONES, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IgnoreHalftones
           * @return boolean the value of the attribute
@@ -855,8 +821,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.IGNOREHALFTONES, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -871,8 +835,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.IGNOREOVERPRINT, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IgnoreOverprint
           * @return boolean the value of the attribute
@@ -881,8 +843,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.IGNOREOVERPRINT, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -897,8 +857,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.IGNOREPAGEROTATION, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IgnorePageRotation
           * @return boolean the value of the attribute
@@ -907,8 +865,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.IGNOREPAGEROTATION, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -923,8 +879,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.IGNORERAWDATA, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IgnoreRawData
           * @return boolean the value of the attribute
@@ -933,8 +887,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.IGNORERAWDATA, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -949,8 +901,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.IGNORESEPARABLEIMAGESONLY, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IgnoreSeparableImagesOnly
           * @return boolean the value of the attribute
@@ -959,8 +909,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.IGNORESEPARABLEIMAGESONLY, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -975,8 +923,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.IGNORESHOWPAGE, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IgnoreShowPage
           * @return boolean the value of the attribute
@@ -985,8 +931,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.IGNORESHOWPAGE, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1001,8 +945,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.IGNORETRANSFERS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IgnoreTransfers
           * @return boolean the value of the attribute
@@ -1011,8 +953,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.IGNORETRANSFERS, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1027,8 +967,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.IGNORETTFONTSFIRST, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IgnoreTTFontsFirst
           * @return boolean the value of the attribute
@@ -1037,8 +975,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.IGNORETTFONTSFIRST, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1053,8 +989,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.IGNOREUCR, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IgnoreUCR
           * @return boolean the value of the attribute
@@ -1063,8 +997,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.IGNOREUCR, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1079,8 +1011,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.INCLUDEBASEFONTS, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute IncludeBaseFonts
           * @return the value of the attribute
@@ -1089,8 +1019,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return EnumIncludeBaseFonts.getEnum(getAttribute(AttributeName.INCLUDEBASEFONTS, null, "IncludeNever"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1105,8 +1033,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.INCLUDECIDFONTS, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute IncludeCIDFonts
           * @return the value of the attribute
@@ -1115,8 +1041,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return EnumIncludeCIDFonts.getEnum(getAttribute(AttributeName.INCLUDECIDFONTS, null, "IncludeOncePerDoc"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1131,8 +1055,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.INCLUDEEMBEDDEDFONTS, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute IncludeEmbeddedFonts
           * @return the value of the attribute
@@ -1141,8 +1063,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return EnumIncludeEmbeddedFonts.getEnum(getAttribute(AttributeName.INCLUDEEMBEDDEDFONTS, null, "IncludeOncePerDoc"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1157,8 +1077,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.INCLUDEOTHERRESOURCES, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute IncludeOtherResources
           * @return the value of the attribute
@@ -1167,8 +1085,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return EnumIncludeOtherResources.getEnum(getAttribute(AttributeName.INCLUDEOTHERRESOURCES, null, "IncludeOncePerDoc"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1183,8 +1099,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.INCLUDEPROCSETS, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute IncludeProcSets
           * @return the value of the attribute
@@ -1193,8 +1107,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return EnumIncludeProcSets.getEnum(getAttribute(AttributeName.INCLUDEPROCSETS, null, "IncludeOncePerDoc"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1209,8 +1121,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.INCLUDETRUETYPEFONTS, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute IncludeTrueTypeFonts
           * @return the value of the attribute
@@ -1219,8 +1129,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return EnumIncludeTrueTypeFonts.getEnum(getAttribute(AttributeName.INCLUDETRUETYPEFONTS, null, "IncludeOncePerDoc"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1235,8 +1143,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.INCLUDETYPE1FONTS, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute IncludeType1Fonts
           * @return the value of the attribute
@@ -1245,8 +1151,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return EnumIncludeType1Fonts.getEnum(getAttribute(AttributeName.INCLUDETYPE1FONTS, null, "IncludeOncePerDoc"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1261,8 +1165,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.INCLUDETYPE3FONTS, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute IncludeType3Fonts
           * @return the value of the attribute
@@ -1271,8 +1173,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return EnumIncludeType3Fonts.getEnum(getAttribute(AttributeName.INCLUDETYPE3FONTS, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1287,8 +1187,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.OUTPUTTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute OutputType
           * @return the value of the attribute
@@ -1297,8 +1195,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return EnumOutputType.getEnum(getAttribute(AttributeName.OUTPUTTYPE, null, "PostScript"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1313,8 +1209,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.PSLEVEL, value, null);
         }
 
-
-
         /**
           * (15) get int attribute PSLevel
           * @return int the value of the attribute
@@ -1323,8 +1217,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return getIntAttribute(AttributeName.PSLEVEL, null, 2);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1339,8 +1231,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.SCALE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Scale
           * @return double the value of the attribute
@@ -1349,8 +1239,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return getRealAttribute(AttributeName.SCALE, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1365,8 +1253,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.SETPAGESIZE, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute SetPageSize
           * @return boolean the value of the attribute
@@ -1375,8 +1261,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.SETPAGESIZE, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1391,8 +1275,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.SETUPPROCSETS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute SetupProcsets
           * @return boolean the value of the attribute
@@ -1401,8 +1283,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.SETUPPROCSETS, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1417,8 +1297,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.SHRINKTOFIT, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute ShrinkToFit
           * @return boolean the value of the attribute
@@ -1427,8 +1305,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.SHRINKTOFIT, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1443,8 +1319,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.SUPPRESSCENTER, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute SuppressCenter
           * @return boolean the value of the attribute
@@ -1453,8 +1327,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.SUPPRESSCENTER, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1469,8 +1341,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.SUPPRESSROTATE, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute SuppressRotate
           * @return boolean the value of the attribute
@@ -1479,8 +1349,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.SUPPRESSROTATE, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1495,8 +1363,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.TTAST42, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute TTasT42
           * @return boolean the value of the attribute
@@ -1505,8 +1371,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.TTAST42, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1521,8 +1385,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.USEFONTALIASNAMES, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute UseFontAliasNames
           * @return boolean the value of the attribute
@@ -1531,8 +1393,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.USEFONTALIASNAMES, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1547,8 +1407,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.IGNOREDEVICEEXTGSTATE, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IgnoreDeviceExtGState
           * @return boolean the value of the attribute
@@ -1557,8 +1415,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.IGNOREDEVICEEXTGSTATE, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1573,11 +1429,9 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             setAttribute(AttributeName.BOUNDINGBOX, value, null);
         }
 
-
-
         /**
           * (20) get JDFRectangle attribute BoundingBox
-          * @return JDFRectanglethe value of the attribute, null if a the
+          * @return JDFRectangle the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFRectangle
           */
         public JDFRectangle getBoundingBox()
@@ -1595,7 +1449,5 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
             }
             return nPlaceHolder;
         }
-
-
 
 }// end namespace JDF

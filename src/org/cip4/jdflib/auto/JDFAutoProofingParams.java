@@ -353,8 +353,6 @@ public abstract class JDFAutoProofingParams extends JDFResource
             setAttribute(AttributeName.DISPLAYTRAPS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute DisplayTraps
           * @return boolean the value of the attribute
@@ -363,8 +361,6 @@ public abstract class JDFAutoProofingParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.DISPLAYTRAPS, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -379,8 +375,6 @@ public abstract class JDFAutoProofingParams extends JDFResource
             setAttribute(AttributeName.HALFTONE, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute HalfTone
           * @return boolean the value of the attribute
@@ -389,8 +383,6 @@ public abstract class JDFAutoProofingParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.HALFTONE, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -405,8 +397,6 @@ public abstract class JDFAutoProofingParams extends JDFResource
             setAttribute(AttributeName.IMAGEVIEWINGSTRATEGY, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ImageViewingStrategy
           * @return the value of the attribute
@@ -415,8 +405,6 @@ public abstract class JDFAutoProofingParams extends JDFResource
         {
             return getAttribute(AttributeName.IMAGEVIEWINGSTRATEGY, null, "NoImages");
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -431,8 +419,6 @@ public abstract class JDFAutoProofingParams extends JDFResource
             setAttribute(AttributeName.MANUALFEED, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute ManualFeed
           * @return boolean the value of the attribute
@@ -441,8 +427,6 @@ public abstract class JDFAutoProofingParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.MANUALFEED, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -457,8 +441,6 @@ public abstract class JDFAutoProofingParams extends JDFResource
             setAttribute(AttributeName.PROOFRENDERINGINTENT, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ProofRenderingIntent
           * @return the value of the attribute
@@ -467,8 +449,6 @@ public abstract class JDFAutoProofingParams extends JDFResource
         {
             return EnumProofRenderingIntent.getEnum(getAttribute(AttributeName.PROOFRENDERINGINTENT, null, "Perceptual"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -483,8 +463,6 @@ public abstract class JDFAutoProofingParams extends JDFResource
             setAttribute(AttributeName.PROOFTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ProofType
           * @return the value of the attribute
@@ -493,8 +471,6 @@ public abstract class JDFAutoProofingParams extends JDFResource
         {
             return EnumProofType.getEnum(getAttribute(AttributeName.PROOFTYPE, null, "None"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -509,8 +485,6 @@ public abstract class JDFAutoProofingParams extends JDFResource
             setAttribute(AttributeName.COLORTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ColorType
           * @return the value of the attribute
@@ -519,8 +493,6 @@ public abstract class JDFAutoProofingParams extends JDFResource
         {
             return EnumColorType.getEnum(getAttribute(AttributeName.COLORTYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -535,11 +507,9 @@ public abstract class JDFAutoProofingParams extends JDFResource
             setAttribute(AttributeName.RESOLUTION, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute Resolution
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getResolution()
@@ -558,8 +528,6 @@ public abstract class JDFAutoProofingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -574,8 +542,6 @@ public abstract class JDFAutoProofingParams extends JDFResource
         return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
     /** (25) getCreateFileSpec
      * 
      * @return JDFFileSpec the element
@@ -585,17 +551,14 @@ public abstract class JDFAutoProofingParams extends JDFResource
         return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFileSpec
+     * (29) append element FileSpec
      */
     public JDFFileSpec appendFileSpec() throws JDFException
     {
         return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -604,6 +567,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element Media
      * @return JDFMedia the element
@@ -612,8 +576,6 @@ public abstract class JDFAutoProofingParams extends JDFResource
     {
         return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
     }
-
-
 
     /** (25) getCreateMedia
      * 
@@ -624,17 +586,14 @@ public abstract class JDFAutoProofingParams extends JDFResource
         return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMedia
+     * (29) append element Media
      */
     public JDFMedia appendMedia() throws JDFException
     {
         return (JDFMedia) appendElementN(ElementName.MEDIA, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -643,4 +602,5 @@ public abstract class JDFAutoProofingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

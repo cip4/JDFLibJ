@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFObservationTarget;
 import org.cip4.jdflib.util.JDFDuration;
     /*
@@ -191,8 +192,6 @@ public abstract class JDFAutoSubscription extends JDFElement
             setAttribute(AttributeName.FORMAT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Format
           * @return the value of the attribute
@@ -201,8 +200,6 @@ public abstract class JDFAutoSubscription extends JDFElement
         {
             return getAttribute(AttributeName.FORMAT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -216,8 +213,6 @@ public abstract class JDFAutoSubscription extends JDFElement
         {
             setAttribute(AttributeName.MINDELAYTIME, value, null);
         }
-
-
 
         /**
           * (20) get JDFDuration attribute MinDelayTime
@@ -240,8 +235,6 @@ public abstract class JDFAutoSubscription extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Template
@@ -255,8 +248,6 @@ public abstract class JDFAutoSubscription extends JDFElement
             setAttribute(AttributeName.TEMPLATE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Template
           * @return the value of the attribute
@@ -265,8 +256,6 @@ public abstract class JDFAutoSubscription extends JDFElement
         {
             return getAttribute(AttributeName.TEMPLATE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -281,8 +270,6 @@ public abstract class JDFAutoSubscription extends JDFElement
             setAttribute(AttributeName.REPEATSTEP, value, null);
         }
 
-
-
         /**
           * (15) get int attribute RepeatStep
           * @return int the value of the attribute
@@ -291,8 +278,6 @@ public abstract class JDFAutoSubscription extends JDFElement
         {
             return getIntAttribute(AttributeName.REPEATSTEP, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -307,8 +292,6 @@ public abstract class JDFAutoSubscription extends JDFElement
             setAttribute(AttributeName.REPEATTIME, value, null);
         }
 
-
-
         /**
           * (17) get double attribute RepeatTime
           * @return double the value of the attribute
@@ -317,8 +300,6 @@ public abstract class JDFAutoSubscription extends JDFElement
         {
             return getRealAttribute(AttributeName.REPEATTIME, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -333,8 +314,6 @@ public abstract class JDFAutoSubscription extends JDFElement
             setAttribute(AttributeName.URL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute URL
           * @return the value of the attribute
@@ -343,8 +322,6 @@ public abstract class JDFAutoSubscription extends JDFElement
         {
             return getAttribute(AttributeName.URL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -361,8 +338,6 @@ public abstract class JDFAutoSubscription extends JDFElement
         return (JDFObservationTarget)getCreateElement_KElement(ElementName.OBSERVATIONTARGET, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element ObservationTarget
      * @param iSkip number of elements to skip
@@ -373,9 +348,10 @@ public abstract class JDFAutoSubscription extends JDFElement
         return (JDFObservationTarget) getElement(ElementName.OBSERVATIONTARGET, null, iSkip);
     }
 
-
-
-    public JDFObservationTarget appendObservationTarget()
+    /**
+     * (30) append element ObservationTarget
+     */
+    public JDFObservationTarget appendObservationTarget() throws JDFException
     {
         return (JDFObservationTarget) appendElement(ElementName.OBSERVATIONTARGET, null);
     }

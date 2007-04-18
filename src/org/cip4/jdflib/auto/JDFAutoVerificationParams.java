@@ -187,11 +187,9 @@ public abstract class JDFAutoVerificationParams extends JDFResource
             setAttribute(AttributeName.FIELDRANGE, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerRangeList attribute FieldRange
-          * @return JDFIntegerRangeListthe value of the attribute, null if a the
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerRangeList
           */
         public JDFIntegerRangeList getFieldRange()
@@ -210,8 +208,6 @@ public abstract class JDFAutoVerificationParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute InsertError
@@ -225,8 +221,6 @@ public abstract class JDFAutoVerificationParams extends JDFResource
             setAttribute(AttributeName.INSERTERROR, value, null);
         }
 
-
-
         /**
           * (23) get String attribute InsertError
           * @return the value of the attribute
@@ -235,8 +229,6 @@ public abstract class JDFAutoVerificationParams extends JDFResource
         {
             return getAttribute(AttributeName.INSERTERROR, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -251,8 +243,6 @@ public abstract class JDFAutoVerificationParams extends JDFResource
             setAttribute(AttributeName.INSERTOK, value, null);
         }
 
-
-
         /**
           * (23) get String attribute InsertOK
           * @return the value of the attribute
@@ -261,8 +251,6 @@ public abstract class JDFAutoVerificationParams extends JDFResource
         {
             return getAttribute(AttributeName.INSERTOK, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -277,8 +265,6 @@ public abstract class JDFAutoVerificationParams extends JDFResource
             setAttribute(AttributeName.TOLERANCE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Tolerance
           * @return double the value of the attribute
@@ -287,7 +273,5 @@ public abstract class JDFAutoVerificationParams extends JDFResource
         {
             return getRealAttribute(AttributeName.TOLERANCE, null, 0.0);
         }
-
-
 
 }// end namespace JDF

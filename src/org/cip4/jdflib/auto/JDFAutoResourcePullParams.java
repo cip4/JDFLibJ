@@ -249,8 +249,6 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
             setAttribute(AttributeName.AMOUNT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Amount
           * @return double the value of the attribute
@@ -259,8 +257,6 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
         {
             return getRealAttribute(AttributeName.AMOUNT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -275,8 +271,6 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
             setAttribute(AttributeName.HOLD, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Hold
           * @return boolean the value of the attribute
@@ -285,8 +279,6 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.HOLD, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -301,8 +293,6 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
             setAttribute(AttributeName.NEXTQUEUEENTRYID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute NextQueueEntryID
           * @return the value of the attribute
@@ -311,8 +301,6 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
         {
             return getAttribute(AttributeName.NEXTQUEUEENTRYID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -327,8 +315,6 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
             setAttribute(AttributeName.PREVQUEUEENTRYID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute PrevQueueEntryID
           * @return the value of the attribute
@@ -337,8 +323,6 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
         {
             return getAttribute(AttributeName.PREVQUEUEENTRYID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -353,8 +337,6 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
             setAttribute(AttributeName.JOBID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobID
           * @return the value of the attribute
@@ -363,8 +345,6 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
         {
             return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -379,8 +359,6 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
             setAttribute(AttributeName.PRIORITY, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Priority
           * @return int the value of the attribute
@@ -389,8 +367,6 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
         {
             return getIntAttribute(AttributeName.PRIORITY, null, 1);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -405,8 +381,6 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
             setAttribute(AttributeName.QUEUEENTRYID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute QueueEntryID
           * @return the value of the attribute
@@ -415,8 +389,6 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
         {
             return getAttribute(AttributeName.QUEUEENTRYID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -431,8 +403,6 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
             setAttribute(AttributeName.REPEATPOLICY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute RepeatPolicy
           * @return the value of the attribute
@@ -441,8 +411,6 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
         {
             return EnumRepeatPolicy.getEnum(getAttribute(AttributeName.REPEATPOLICY, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -457,8 +425,6 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
             setAttribute(AttributeName.RESOURCEID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ResourceID
           * @return the value of the attribute
@@ -467,8 +433,6 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
         {
             return getAttribute(AttributeName.RESOURCEID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -483,8 +447,6 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
             setAttribute(AttributeName.RETURNURL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ReturnURL
           * @return the value of the attribute
@@ -493,8 +455,6 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
         {
             return getAttribute(AttributeName.RETURNURL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -509,8 +469,6 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
             setAttribute(AttributeName.WATCHURL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute WatchURL
           * @return the value of the attribute
@@ -519,8 +477,6 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
         {
             return getAttribute(AttributeName.WATCHURL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -537,8 +493,6 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
         return (JDFPart)getCreateElement_KElement(ElementName.PART, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Part
      * @param iSkip number of elements to skip
@@ -549,9 +503,10 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
         return (JDFPart) getElement(ElementName.PART, null, iSkip);
     }
 
-
-
-    public JDFPart appendPart()
+    /**
+     * (30) append element Part
+     */
+    public JDFPart appendPart() throws JDFException
     {
         return (JDFPart) appendElement(ElementName.PART, null);
     }
@@ -565,8 +520,6 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
         return (JDFDisposition) getElement(ElementName.DISPOSITION, null, 0);
     }
 
-
-
     /** (25) getCreateDisposition
      * 
      * @return JDFDisposition the element
@@ -576,17 +529,14 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
         return (JDFDisposition) getCreateElement_KElement(ElementName.DISPOSITION, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDisposition
+     * (29) append element Disposition
      */
     public JDFDisposition appendDisposition() throws JDFException
     {
         return (JDFDisposition) appendElementN(ElementName.DISPOSITION, 1, null);
     }
+
     /**
      * (24) const get element MISDetails
      * @return JDFMISDetails the element
@@ -595,8 +545,6 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
     {
         return (JDFMISDetails) getElement(ElementName.MISDETAILS, null, 0);
     }
-
-
 
     /** (25) getCreateMISDetails
      * 
@@ -607,15 +555,12 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
         return (JDFMISDetails) getCreateElement_KElement(ElementName.MISDETAILS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMISDetails
+     * (29) append element MISDetails
      */
     public JDFMISDetails appendMISDetails() throws JDFException
     {
         return (JDFMISDetails) appendElementN(ElementName.MISDETAILS, 1, null);
     }
+
 }// end namespace JDF

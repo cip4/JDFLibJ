@@ -201,8 +201,6 @@ public abstract class JDFAutoJobField extends JDFResource
             setAttribute(AttributeName.SHOWLIST, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute ShowList
           * @return VString the value of the attribute
@@ -214,8 +212,6 @@ public abstract class JDFAutoJobField extends JDFResource
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -230,8 +226,6 @@ public abstract class JDFAutoJobField extends JDFResource
             setAttribute(AttributeName.OPERATORTEXT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute OperatorText
           * @return the value of the attribute
@@ -240,8 +234,6 @@ public abstract class JDFAutoJobField extends JDFResource
         {
             return getAttribute(AttributeName.OPERATORTEXT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -256,8 +248,6 @@ public abstract class JDFAutoJobField extends JDFResource
             setAttribute(AttributeName.USERTEXT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute UserText
           * @return the value of the attribute
@@ -266,8 +256,6 @@ public abstract class JDFAutoJobField extends JDFResource
         {
             return getAttribute(AttributeName.USERTEXT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -283,8 +271,6 @@ public abstract class JDFAutoJobField extends JDFResource
         return (JDFDeviceMark) getElement(ElementName.DEVICEMARK, null, 0);
     }
 
-
-
     /** (25) getCreateDeviceMark
      * 
      * @return JDFDeviceMark the element
@@ -294,17 +280,14 @@ public abstract class JDFAutoJobField extends JDFResource
         return (JDFDeviceMark) getCreateElement_KElement(ElementName.DEVICEMARK, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDeviceMark
+     * (29) append element DeviceMark
      */
     public JDFDeviceMark appendDeviceMark() throws JDFException
     {
         return (JDFDeviceMark) appendElementN(ElementName.DEVICEMARK, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -313,4 +296,5 @@ public abstract class JDFAutoJobField extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

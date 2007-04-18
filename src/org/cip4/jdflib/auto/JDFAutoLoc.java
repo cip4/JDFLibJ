@@ -170,8 +170,6 @@ public abstract class JDFAutoLoc extends JDFElement
             setAttribute(AttributeName.HELPTEXT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute HelpText
           * @return the value of the attribute
@@ -180,8 +178,6 @@ public abstract class JDFAutoLoc extends JDFElement
         {
             return getAttribute(AttributeName.HELPTEXT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -196,8 +192,6 @@ public abstract class JDFAutoLoc extends JDFElement
             setAttribute(AttributeName.LANG, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Lang
           * @return the value of the attribute
@@ -206,8 +200,6 @@ public abstract class JDFAutoLoc extends JDFElement
         {
             return getAttribute(AttributeName.LANG, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -222,8 +214,6 @@ public abstract class JDFAutoLoc extends JDFElement
             setAttribute(AttributeName.SHORTVALUE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ShortValue
           * @return the value of the attribute
@@ -232,8 +222,6 @@ public abstract class JDFAutoLoc extends JDFElement
         {
             return getAttribute(AttributeName.SHORTVALUE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -248,8 +236,6 @@ public abstract class JDFAutoLoc extends JDFElement
             setAttribute(AttributeName.VALUE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Value
           * @return the value of the attribute
@@ -258,7 +244,5 @@ public abstract class JDFAutoLoc extends JDFElement
         {
             return getAttribute(AttributeName.VALUE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

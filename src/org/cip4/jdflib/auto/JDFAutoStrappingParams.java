@@ -236,8 +236,6 @@ public abstract class JDFAutoStrappingParams extends JDFResource
             setAttribute(AttributeName.STRAPPINGTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute StrappingType
           * @return the value of the attribute
@@ -246,8 +244,6 @@ public abstract class JDFAutoStrappingParams extends JDFResource
         {
             return EnumStrappingType.getEnum(getAttribute(AttributeName.STRAPPINGTYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -261,8 +257,6 @@ public abstract class JDFAutoStrappingParams extends JDFResource
         {
             setAttribute(AttributeName.STRAPPOSITIONS, value, null);
         }
-
-
 
         /**
           * (20) get JDFNumberList attribute StrapPositions
@@ -284,7 +278,5 @@ public abstract class JDFAutoStrappingParams extends JDFResource
             }
             return nPlaceHolder;
         }
-
-
 
 }// end namespace JDF

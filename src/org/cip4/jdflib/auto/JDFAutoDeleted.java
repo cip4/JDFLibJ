@@ -167,8 +167,6 @@ public abstract class JDFAutoDeleted extends JDFAudit
             setAttribute(AttributeName.XPATH, value, null);
         }
 
-
-
         /**
           * (23) get String attribute XPath
           * @return the value of the attribute
@@ -177,7 +175,5 @@ public abstract class JDFAutoDeleted extends JDFAudit
         {
             return getAttribute(AttributeName.XPATH, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

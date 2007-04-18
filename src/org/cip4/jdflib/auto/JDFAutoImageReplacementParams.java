@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
@@ -304,8 +305,6 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
             setAttribute(AttributeName.IMAGEREPLACEMENTSTRATEGY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ImageReplacementStrategy
           * @return the value of the attribute
@@ -314,8 +313,6 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
         {
             return EnumImageReplacementStrategy.getEnum(getAttribute(AttributeName.IMAGEREPLACEMENTSTRATEGY, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -330,8 +327,6 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
             setAttribute(AttributeName.IMAGEPRESCANSTRATEGY, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ImagePreScanStrategy
           * @return the value of the attribute
@@ -340,8 +335,6 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
         {
             return getAttribute(AttributeName.IMAGEPRESCANSTRATEGY, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -356,8 +349,6 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
             setAttribute(AttributeName.MAXRESOLUTION, value, null);
         }
 
-
-
         /**
           * (17) get double attribute MaxResolution
           * @return double the value of the attribute
@@ -366,8 +357,6 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
         {
             return getRealAttribute(AttributeName.MAXRESOLUTION, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -382,8 +371,6 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
             setAttribute(AttributeName.MINRESOLUTION, value, null);
         }
 
-
-
         /**
           * (17) get double attribute MinResolution
           * @return double the value of the attribute
@@ -392,8 +379,6 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
         {
             return getRealAttribute(AttributeName.MINRESOLUTION, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -408,8 +393,6 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
             setAttribute(AttributeName.RESOLUTIONREDUCTIONSTRATEGY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ResolutionReductionStrategy
           * @return the value of the attribute
@@ -418,8 +401,6 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
         {
             return EnumResolutionReductionStrategy.getEnum(getAttribute(AttributeName.RESOLUTIONREDUCTIONSTRATEGY, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -434,8 +415,6 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
             setAttribute(AttributeName.IGNOREEXTENSIONS, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute IgnoreExtensions
           * @return VString the value of the attribute
@@ -447,8 +426,6 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -463,8 +440,6 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
             setAttribute(AttributeName.MAXSEARCHRECURSION, value, null);
         }
 
-
-
         /**
           * (15) get int attribute MaxSearchRecursion
           * @return int the value of the attribute
@@ -473,8 +448,6 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
         {
             return getIntAttribute(AttributeName.MAXSEARCHRECURSION, null, 0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -491,8 +464,6 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
         return (JDFFileSpec)getCreateElement_KElement(ElementName.FILESPEC, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element FileSpec
      * @param iSkip number of elements to skip
@@ -503,9 +474,10 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
         return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
     }
 
-
-
-    public JDFFileSpec appendFileSpec()
+    /**
+     * (30) append element FileSpec
+     */
+    public JDFFileSpec appendFileSpec() throws JDFException
     {
         return (JDFFileSpec) appendElement(ElementName.FILESPEC, null);
     }
@@ -518,6 +490,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateSearchPath
      * 
      * @param iSkip number of elements to skip
@@ -527,8 +500,6 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
     {
         return (JDFElement)getCreateElement_KElement(ElementName.SEARCHPATH, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element SearchPath
@@ -540,9 +511,10 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
         return (JDFElement) getElement(ElementName.SEARCHPATH, null, iSkip);
     }
 
-
-
-    public JDFElement appendSearchPath()
+    /**
+     * (30) append element SearchPath
+     */
+    public JDFElement appendSearchPath() throws JDFException
     {
         return (JDFElement) appendElement(ElementName.SEARCHPATH, null);
     }

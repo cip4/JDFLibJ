@@ -288,8 +288,6 @@ public abstract class JDFAutoCutBlock extends JDFResource
             setAttribute(AttributeName.BLOCKSIZE, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute BlockSize
           * @return JDFXYPair the value of the attribute, null if a the
@@ -311,8 +309,6 @@ public abstract class JDFAutoCutBlock extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute BlockSubdivision
@@ -325,8 +321,6 @@ public abstract class JDFAutoCutBlock extends JDFResource
         {
             setAttribute(AttributeName.BLOCKSUBDIVISION, value, null);
         }
-
-
 
         /**
           * (20) get JDFXYPair attribute BlockSubdivision
@@ -349,8 +343,6 @@ public abstract class JDFAutoCutBlock extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute BlockTrf
@@ -363,8 +355,6 @@ public abstract class JDFAutoCutBlock extends JDFResource
         {
             setAttribute(AttributeName.BLOCKTRF, value, null);
         }
-
-
 
         /**
           * (20) get JDFMatrix attribute BlockTrf
@@ -387,8 +377,6 @@ public abstract class JDFAutoCutBlock extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute BlockType
@@ -402,8 +390,6 @@ public abstract class JDFAutoCutBlock extends JDFResource
             setAttribute(AttributeName.BLOCKTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute BlockType
           * @return the value of the attribute
@@ -412,8 +398,6 @@ public abstract class JDFAutoCutBlock extends JDFResource
         {
             return EnumBlockType.getEnum(getAttribute(AttributeName.BLOCKTYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -428,8 +412,6 @@ public abstract class JDFAutoCutBlock extends JDFResource
             setAttribute(AttributeName.ASSEMBLYIDS, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute AssemblyIDs
           * @return VString the value of the attribute
@@ -441,8 +423,6 @@ public abstract class JDFAutoCutBlock extends JDFResource
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -456,8 +436,6 @@ public abstract class JDFAutoCutBlock extends JDFResource
         {
             setAttribute(AttributeName.BLOCKELEMENTSIZE, value, null);
         }
-
-
 
         /**
           * (20) get JDFXYPair attribute BlockElementSize
@@ -480,8 +458,6 @@ public abstract class JDFAutoCutBlock extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute BlockElementType
@@ -495,8 +471,6 @@ public abstract class JDFAutoCutBlock extends JDFResource
             setAttribute(AttributeName.BLOCKELEMENTTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute BlockElementType
           * @return the value of the attribute
@@ -505,7 +479,5 @@ public abstract class JDFAutoCutBlock extends JDFResource
         {
             return EnumBlockElementType.getEnum(getAttribute(AttributeName.BLOCKELEMENTTYPE, null, null));
         }
-
-
 
 }// end namespace JDF

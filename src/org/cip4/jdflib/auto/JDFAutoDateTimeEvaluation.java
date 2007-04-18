@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFDateTimeRangeList;
 import org.cip4.jdflib.datatypes.JDFDurationRangeList;
 import org.cip4.jdflib.resource.JDFResource;
@@ -196,8 +197,6 @@ public abstract class JDFAutoDateTimeEvaluation extends JDFResource
             setAttribute(AttributeName.VALUEDURATIONLIST, value, null);
         }
 
-
-
         /**
           * (20) get JDFDurationRangeList attribute ValueDurationList
           * @return JDFDurationRangeList the value of the attribute, null if a the
@@ -219,8 +218,6 @@ public abstract class JDFAutoDateTimeEvaluation extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ValueList
@@ -233,8 +230,6 @@ public abstract class JDFAutoDateTimeEvaluation extends JDFResource
         {
             setAttribute(AttributeName.VALUELIST, value, null);
         }
-
-
 
         /**
           * (20) get JDFDateTimeRangeList attribute ValueList
@@ -257,8 +252,6 @@ public abstract class JDFAutoDateTimeEvaluation extends JDFResource
             return nPlaceHolder;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -274,8 +267,6 @@ public abstract class JDFAutoDateTimeEvaluation extends JDFResource
         return (JDFBasicPreflightTest)getCreateElement_KElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element BasicPreflightTest
      * @param iSkip number of elements to skip
@@ -286,9 +277,10 @@ public abstract class JDFAutoDateTimeEvaluation extends JDFResource
         return (JDFBasicPreflightTest) getElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
     }
 
-
-
-    public JDFBasicPreflightTest appendBasicPreflightTest()
+    /**
+     * (30) append element BasicPreflightTest
+     */
+    public JDFBasicPreflightTest appendBasicPreflightTest() throws JDFException
     {
         return (JDFBasicPreflightTest) appendElement(ElementName.BASICPREFLIGHTTEST, null);
     }

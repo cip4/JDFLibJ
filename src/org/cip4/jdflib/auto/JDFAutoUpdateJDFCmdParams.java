@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.jmf.JDFCreateLink;
 import org.cip4.jdflib.jmf.JDFCreateResource;
 import org.cip4.jdflib.jmf.JDFMoveResource;
@@ -171,8 +172,6 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
         return (JDFCreateLink)getCreateElement_KElement(ElementName.CREATELINK, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element CreateLink
      * @param iSkip number of elements to skip
@@ -183,9 +182,10 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
         return (JDFCreateLink) getElement(ElementName.CREATELINK, null, iSkip);
     }
 
-
-
-    public JDFCreateLink appendCreateLink()
+    /**
+     * (30) append element CreateLink
+     */
+    public JDFCreateLink appendCreateLink() throws JDFException
     {
         return (JDFCreateLink) appendElement(ElementName.CREATELINK, null);
     }
@@ -200,8 +200,6 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
         return (JDFCreateResource)getCreateElement_KElement(ElementName.CREATERESOURCE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element CreateResource
      * @param iSkip number of elements to skip
@@ -212,9 +210,10 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
         return (JDFCreateResource) getElement(ElementName.CREATERESOURCE, null, iSkip);
     }
 
-
-
-    public JDFCreateResource appendCreateResource()
+    /**
+     * (30) append element CreateResource
+     */
+    public JDFCreateResource appendCreateResource() throws JDFException
     {
         return (JDFCreateResource) appendElement(ElementName.CREATERESOURCE, null);
     }
@@ -229,8 +228,6 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
         return (JDFMoveResource)getCreateElement_KElement(ElementName.MOVERESOURCE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element MoveResource
      * @param iSkip number of elements to skip
@@ -241,9 +238,10 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
         return (JDFMoveResource) getElement(ElementName.MOVERESOURCE, null, iSkip);
     }
 
-
-
-    public JDFMoveResource appendMoveResource()
+    /**
+     * (30) append element MoveResource
+     */
+    public JDFMoveResource appendMoveResource() throws JDFException
     {
         return (JDFMoveResource) appendElement(ElementName.MOVERESOURCE, null);
     }
@@ -258,8 +256,6 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
         return (JDFRemoveLink)getCreateElement_KElement(ElementName.REMOVELINK, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element RemoveLink
      * @param iSkip number of elements to skip
@@ -270,9 +266,10 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
         return (JDFRemoveLink) getElement(ElementName.REMOVELINK, null, iSkip);
     }
 
-
-
-    public JDFRemoveLink appendRemoveLink()
+    /**
+     * (30) append element RemoveLink
+     */
+    public JDFRemoveLink appendRemoveLink() throws JDFException
     {
         return (JDFRemoveLink) appendElement(ElementName.REMOVELINK, null);
     }

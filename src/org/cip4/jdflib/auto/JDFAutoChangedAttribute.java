@@ -171,8 +171,6 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
             setAttribute(AttributeName.ATTRIBUTENAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute AttributeName
           * @return the value of the attribute
@@ -181,8 +179,6 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
         {
             return getAttribute(AttributeName.ATTRIBUTENAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -197,8 +193,6 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
             setAttribute(AttributeName.ELEMENTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ElementID
           * @return the value of the attribute
@@ -207,8 +201,6 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
         {
             return getAttribute(AttributeName.ELEMENTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -223,8 +215,6 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
             setAttribute(AttributeName.ELEMENTTYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ElementType
           * @return the value of the attribute
@@ -233,8 +223,6 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
         {
             return getAttribute(AttributeName.ELEMENTTYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -249,8 +237,6 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
             setAttribute(AttributeName.OLDVALUE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute OldValue
           * @return the value of the attribute
@@ -259,8 +245,6 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
         {
             return getAttribute(AttributeName.OLDVALUE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -275,8 +259,6 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
             setAttribute(AttributeName.NEWVALUE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute NewValue
           * @return the value of the attribute
@@ -285,7 +267,5 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
         {
             return getAttribute(AttributeName.NEWVALUE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

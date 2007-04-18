@@ -272,8 +272,6 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
             setAttribute(AttributeName.POSITIONX, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute PositionX
           * @return the value of the attribute
@@ -282,8 +280,6 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
         {
             return EnumPositionX.getEnum(getAttribute(AttributeName.POSITIONX, null, "None"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -298,8 +294,6 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
             setAttribute(AttributeName.POSITIONY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute PositionY
           * @return the value of the attribute
@@ -308,8 +302,6 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
         {
             return EnumPositionY.getEnum(getAttribute(AttributeName.POSITIONY, null, "None"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -324,8 +316,6 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
             setAttribute(AttributeName.SHIFTX, value, null);
         }
 
-
-
         /**
           * (15) get int attribute ShiftX
           * @return int the value of the attribute
@@ -334,8 +324,6 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
         {
             return getIntAttribute(AttributeName.SHIFTX, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -350,8 +338,6 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
             setAttribute(AttributeName.SHIFTY, value, null);
         }
 
-
-
         /**
           * (15) get int attribute ShiftY
           * @return int the value of the attribute
@@ -360,8 +346,6 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
         {
             return getIntAttribute(AttributeName.SHIFTY, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -376,8 +360,6 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
             setAttribute(AttributeName.SHIFTXSIDE1, value, null);
         }
 
-
-
         /**
           * (15) get int attribute ShiftXSide1
           * @return int the value of the attribute
@@ -386,8 +368,6 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
         {
             return getIntAttribute(AttributeName.SHIFTXSIDE1, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -402,8 +382,6 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
             setAttribute(AttributeName.SHIFTXSIDE2, value, null);
         }
 
-
-
         /**
           * (15) get int attribute ShiftXSide2
           * @return int the value of the attribute
@@ -412,8 +390,6 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
         {
             return getIntAttribute(AttributeName.SHIFTXSIDE2, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -428,8 +404,6 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
             setAttribute(AttributeName.SHIFTYSIDE1, value, null);
         }
 
-
-
         /**
           * (15) get int attribute ShiftYSide1
           * @return int the value of the attribute
@@ -438,8 +412,6 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
         {
             return getIntAttribute(AttributeName.SHIFTYSIDE1, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -454,8 +426,6 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
             setAttribute(AttributeName.SHIFTYSIDE2, value, null);
         }
 
-
-
         /**
           * (15) get int attribute ShiftYSide2
           * @return int the value of the attribute
@@ -464,7 +434,5 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
         {
             return getIntAttribute(AttributeName.SHIFTYSIDE2, null, 0);
         }
-
-
 
 }// end namespace JDF

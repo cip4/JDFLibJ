@@ -190,8 +190,6 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
             setAttribute(AttributeName.END, new JDFDate().getDateTimeISO(), null);
         }
 
-
-
         /**
           * (11) set attribute End
           * @param value: the value to set the attribute to or null
@@ -201,8 +199,6 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
             if (value == null) value = new JDFDate();
             setAttribute(AttributeName.END, value.getDateTimeISO(), null);
         }
-
-
 
         /**
           * (12) get JDFDate attribute End
@@ -227,8 +223,6 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
             return nMyDate;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Failed
@@ -242,8 +236,6 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
             setAttribute(AttributeName.FAILED, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Failed
           * @return int the value of the attribute
@@ -252,8 +244,6 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
         {
             return getIntAttribute(AttributeName.FAILED, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -268,8 +258,6 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
             setAttribute(AttributeName.PASSED, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Passed
           * @return int the value of the attribute
@@ -278,8 +266,6 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
         {
             return getIntAttribute(AttributeName.PASSED, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -294,8 +280,6 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
             setAttribute(AttributeName.START, new JDFDate().getDateTimeISO(), null);
         }
 
-
-
         /**
           * (11) set attribute Start
           * @param value: the value to set the attribute to or null
@@ -305,8 +289,6 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
             if (value == null) value = new JDFDate();
             setAttribute(AttributeName.START, value.getDateTimeISO(), null);
         }
-
-
 
         /**
           * (12) get JDFDate attribute Start
@@ -331,8 +313,6 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
             return nMyDate;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -347,8 +327,6 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
         return (JDFBindingQualityParams) getElement(ElementName.BINDINGQUALITYMEASUREMENT, null, 0);
     }
 
-
-
     /** (25) getCreateBindingQualityMeasurement
      * 
      * @return JDFBindingQualityParams the element
@@ -358,15 +336,12 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
         return (JDFBindingQualityParams) getCreateElement_KElement(ElementName.BINDINGQUALITYMEASUREMENT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementBindingQualityMeasurement
+     * (29) append element BindingQualityMeasurement
      */
     public JDFBindingQualityParams appendBindingQualityMeasurement() throws JDFException
     {
         return (JDFBindingQualityParams) appendElementN(ElementName.BINDINGQUALITYMEASUREMENT, 1, null);
     }
+
 }// end namespace JDF

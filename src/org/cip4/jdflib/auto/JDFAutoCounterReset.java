@@ -168,8 +168,6 @@ public abstract class JDFAutoCounterReset extends JDFElement
             setAttribute(AttributeName.COUNTERID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute CounterID
           * @return the value of the attribute
@@ -178,8 +176,6 @@ public abstract class JDFAutoCounterReset extends JDFElement
         {
             return getAttribute(AttributeName.COUNTERID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -194,8 +190,6 @@ public abstract class JDFAutoCounterReset extends JDFElement
             setAttribute(AttributeName.LASTCOUNT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute LastCount
           * @return int the value of the attribute
@@ -204,7 +198,5 @@ public abstract class JDFAutoCounterReset extends JDFElement
         {
             return getIntAttribute(AttributeName.LASTCOUNT, null, 0);
         }
-
-
 
 }// end namespace JDF

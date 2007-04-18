@@ -351,8 +351,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
             setAttribute(AttributeName.COUNTERUNIT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute CounterUnit
           * @return the value of the attribute
@@ -361,8 +359,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
         {
             return getAttribute(AttributeName.COUNTERUNIT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -377,8 +373,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
             setAttribute(AttributeName.DEVICECONDITION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute DeviceCondition
           * @return the value of the attribute
@@ -387,8 +381,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
         {
             return EnumDeviceCondition.getEnum(getAttribute(AttributeName.DEVICECONDITION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -403,8 +395,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
             setAttribute(AttributeName.DEVICEID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DeviceID
           * @return the value of the attribute
@@ -413,8 +403,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
         {
             return getAttribute(AttributeName.DEVICEID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -429,8 +417,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
             setAttribute(AttributeName.DEVICEOPERATIONMODE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute DeviceOperationMode
           * @return the value of the attribute
@@ -439,8 +425,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
         {
             return EnumDeviceOperationMode.getEnum(getAttribute(AttributeName.DEVICEOPERATIONMODE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -455,8 +439,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
             setAttribute(AttributeName.DEVICESTATUS, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute DeviceStatus
           * @return the value of the attribute
@@ -465,8 +447,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
         {
             return EnumDeviceStatus.getEnum(getAttribute(AttributeName.DEVICESTATUS, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -480,8 +460,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
         {
             setAttribute(AttributeName.HOURCOUNTER, value, null);
         }
-
-
 
         /**
           * (20) get JDFDuration attribute HourCounter
@@ -504,8 +482,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute PowerOnTime
@@ -519,8 +495,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
             setAttribute(AttributeName.POWERONTIME, new JDFDate().getDateTimeISO(), null);
         }
 
-
-
         /**
           * (11) set attribute PowerOnTime
           * @param value: the value to set the attribute to or null
@@ -530,8 +504,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
             if (value == null) value = new JDFDate();
             setAttribute(AttributeName.POWERONTIME, value.getDateTimeISO(), null);
         }
-
-
 
         /**
           * (12) get JDFDate attribute PowerOnTime
@@ -556,8 +528,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
             return nMyDate;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ProductionCounter
@@ -571,8 +541,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
             setAttribute(AttributeName.PRODUCTIONCOUNTER, value, null);
         }
 
-
-
         /**
           * (17) get double attribute ProductionCounter
           * @return double the value of the attribute
@@ -581,8 +549,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
         {
             return getRealAttribute(AttributeName.PRODUCTIONCOUNTER, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -597,8 +563,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
             setAttribute(AttributeName.SPEED, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Speed
           * @return double the value of the attribute
@@ -607,8 +571,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
         {
             return getRealAttribute(AttributeName.SPEED, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -623,8 +585,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
             setAttribute(AttributeName.STATUSDETAILS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute StatusDetails
           * @return the value of the attribute
@@ -633,8 +593,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
         {
             return getAttribute(AttributeName.STATUSDETAILS, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -649,8 +607,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
             setAttribute(AttributeName.TOTALPRODUCTIONCOUNTER, value, null);
         }
 
-
-
         /**
           * (17) get double attribute TotalProductionCounter
           * @return double the value of the attribute
@@ -659,8 +615,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
         {
             return getRealAttribute(AttributeName.TOTALPRODUCTIONCOUNTER, null, 0.0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -676,8 +630,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
         return (JDFDevice) getElement(ElementName.DEVICE, null, 0);
     }
 
-
-
     /** (25) getCreateDevice
      * 
      * @return JDFDevice the element
@@ -687,17 +639,14 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
         return (JDFDevice) getCreateElement_KElement(ElementName.DEVICE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDevice
+     * (29) append element Device
      */
     public JDFDevice appendDevice() throws JDFException
     {
         return (JDFDevice) appendElementN(ElementName.DEVICE, 1, null);
     }
+
     /** (26) getCreateEmployee
      * 
      * @param iSkip number of elements to skip
@@ -707,8 +656,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
     {
         return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Employee
@@ -720,9 +667,10 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
         return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
     }
 
-
-
-    public JDFEmployee appendEmployee()
+    /**
+     * (30) append element Employee
+     */
+    public JDFEmployee appendEmployee() throws JDFException
     {
         return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
     }
@@ -737,8 +685,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
         return (JDFJobPhase)getCreateElement_KElement(ElementName.JOBPHASE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element JobPhase
      * @param iSkip number of elements to skip
@@ -749,9 +695,10 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
         return (JDFJobPhase) getElement(ElementName.JOBPHASE, null, iSkip);
     }
 
-
-
-    public JDFJobPhase appendJobPhase()
+    /**
+     * (30) append element JobPhase
+     */
+    public JDFJobPhase appendJobPhase() throws JDFException
     {
         return (JDFJobPhase) appendElement(ElementName.JOBPHASE, null);
     }
@@ -766,8 +713,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
         return (JDFModuleStatus)getCreateElement_KElement(ElementName.MODULESTATUS, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element ModuleStatus
      * @param iSkip number of elements to skip
@@ -778,9 +723,10 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
         return (JDFModuleStatus) getElement(ElementName.MODULESTATUS, null, iSkip);
     }
 
-
-
-    public JDFModuleStatus appendModuleStatus()
+    /**
+     * (30) append element ModuleStatus
+     */
+    public JDFModuleStatus appendModuleStatus() throws JDFException
     {
         return (JDFModuleStatus) appendElement(ElementName.MODULESTATUS, null);
     }

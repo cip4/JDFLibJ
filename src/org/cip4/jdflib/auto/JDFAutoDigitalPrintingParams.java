@@ -511,8 +511,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
             setAttribute(AttributeName.DIRECTPROOFAMOUNT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute DirectProofAmount
           * @return int the value of the attribute
@@ -521,8 +519,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         {
             return getIntAttribute(AttributeName.DIRECTPROOFAMOUNT, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -537,8 +533,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
             setAttribute(AttributeName.MANUALFEED, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute ManualFeed
           * @return boolean the value of the attribute
@@ -547,8 +541,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.MANUALFEED, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -563,8 +555,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
             setAttribute(AttributeName.COLLATE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Collate
           * @return the value of the attribute
@@ -573,8 +563,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         {
             return EnumCollate.getEnum(getAttribute(AttributeName.COLLATE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -589,8 +577,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
             setAttribute(AttributeName.OUTPUTBIN, value, null);
         }
 
-
-
         /**
           * (23) get String attribute OutputBin
           * @return the value of the attribute
@@ -599,8 +585,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         {
             return getAttribute(AttributeName.OUTPUTBIN, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -615,8 +599,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
             setAttribute(AttributeName.PRINTQUALITY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute PrintQuality
           * @return the value of the attribute
@@ -625,8 +607,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         {
             return EnumPrintQuality.getEnum(getAttribute(AttributeName.PRINTQUALITY, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -641,8 +621,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
             setAttribute(AttributeName.NONPRINTABLEMARGINBOTTOM, value, null);
         }
 
-
-
         /**
           * (17) get double attribute NonPrintableMarginBottom
           * @return double the value of the attribute
@@ -651,8 +629,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.NONPRINTABLEMARGINBOTTOM, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -667,8 +643,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
             setAttribute(AttributeName.NONPRINTABLEMARGINLEFT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute NonPrintableMarginLeft
           * @return double the value of the attribute
@@ -677,8 +651,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.NONPRINTABLEMARGINLEFT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -693,8 +665,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
             setAttribute(AttributeName.NONPRINTABLEMARGINRIGHT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute NonPrintableMarginRight
           * @return double the value of the attribute
@@ -703,8 +673,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.NONPRINTABLEMARGINRIGHT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -719,8 +687,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
             setAttribute(AttributeName.NONPRINTABLEMARGINTOP, value, null);
         }
 
-
-
         /**
           * (17) get double attribute NonPrintableMarginTop
           * @return double the value of the attribute
@@ -729,8 +695,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.NONPRINTABLEMARGINTOP, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -745,8 +709,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
             setAttribute(AttributeName.PAGEDELIVERY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute PageDelivery
           * @return the value of the attribute
@@ -755,8 +717,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         {
             return EnumPageDelivery.getEnum(getAttribute(AttributeName.PAGEDELIVERY, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -771,8 +731,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
             setAttribute(AttributeName.PRINTINGTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute PrintingType
           * @return the value of the attribute
@@ -781,8 +739,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         {
             return EnumPrintingType.getEnum(getAttribute(AttributeName.PRINTINGTYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -797,8 +753,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
             setAttribute(AttributeName.SHEETLAY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute SheetLay
           * @return the value of the attribute
@@ -807,8 +761,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         {
             return EnumSheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -823,8 +775,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
             setAttribute(AttributeName.SIDES, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Sides
           * @return the value of the attribute
@@ -833,8 +783,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         {
             return EnumSides.getEnum(getAttribute(AttributeName.SIDES, null, null));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -850,8 +798,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         return (JDFComponent) getElement(ElementName.COMPONENT, null, 0);
     }
 
-
-
     /** (25) getCreateComponent
      * 
      * @return JDFComponent the element
@@ -861,17 +807,14 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         return (JDFComponent) getCreateElement_KElement(ElementName.COMPONENT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementComponent
+     * (29) append element Component
      */
     public JDFComponent appendComponent() throws JDFException
     {
         return (JDFComponent) appendElementN(ElementName.COMPONENT, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -880,6 +823,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element ApprovalParams
      * @return JDFApprovalParams the element
@@ -888,8 +832,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
     {
         return (JDFApprovalParams) getElement(ElementName.APPROVALPARAMS, null, 0);
     }
-
-
 
     /** (25) getCreateApprovalParams
      * 
@@ -900,17 +842,14 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         return (JDFApprovalParams) getCreateElement_KElement(ElementName.APPROVALPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementApprovalParams
+     * (29) append element ApprovalParams
      */
     public JDFApprovalParams appendApprovalParams() throws JDFException
     {
         return (JDFApprovalParams) appendElementN(ElementName.APPROVALPARAMS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -919,6 +858,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element Disjointing
      * @return JDFDisjointing the element
@@ -927,8 +867,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
     {
         return (JDFDisjointing) getElement(ElementName.DISJOINTING, null, 0);
     }
-
-
 
     /** (25) getCreateDisjointing
      * 
@@ -939,17 +877,14 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         return (JDFDisjointing) getCreateElement_KElement(ElementName.DISJOINTING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDisjointing
+     * (29) append element Disjointing
      */
     public JDFDisjointing appendDisjointing() throws JDFException
     {
         return (JDFDisjointing) appendElementN(ElementName.DISJOINTING, 1, null);
     }
+
     /**
      * (24) const get element Ink
      * @return JDFInk the element
@@ -958,8 +893,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
     {
         return (JDFInk) getElement(ElementName.INK, null, 0);
     }
-
-
 
     /** (25) getCreateInk
      * 
@@ -970,17 +903,14 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         return (JDFInk) getCreateElement_KElement(ElementName.INK, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementInk
+     * (29) append element Ink
      */
     public JDFInk appendInk() throws JDFException
     {
         return (JDFInk) appendElementN(ElementName.INK, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -989,6 +919,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element Media
      * @return JDFMedia the element
@@ -997,8 +928,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
     {
         return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
     }
-
-
 
     /** (25) getCreateMedia
      * 
@@ -1009,17 +938,14 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMedia
+     * (29) append element Media
      */
     public JDFMedia appendMedia() throws JDFException
     {
         return (JDFMedia) appendElementN(ElementName.MEDIA, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -1028,6 +954,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element MediaSource
      * @return JDFMediaSource the element
@@ -1036,8 +963,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
     {
         return (JDFMediaSource) getElement(ElementName.MEDIASOURCE, null, 0);
     }
-
-
 
     /** (25) getCreateMediaSource
      * 
@@ -1048,17 +973,14 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         return (JDFMediaSource) getCreateElement_KElement(ElementName.MEDIASOURCE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMediaSource
+     * (29) append element MediaSource
      */
     public JDFMediaSource appendMediaSource() throws JDFException
     {
         return (JDFMediaSource) appendElementN(ElementName.MEDIASOURCE, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -1067,4 +989,5 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

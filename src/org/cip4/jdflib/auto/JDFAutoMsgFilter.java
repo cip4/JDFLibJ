@@ -249,8 +249,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
             setAttribute(AttributeName.AFTER, new JDFDate().getDateTimeISO(), null);
         }
 
-
-
         /**
           * (11) set attribute After
           * @param value: the value to set the attribute to or null
@@ -260,8 +258,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
             if (value == null) value = new JDFDate();
             setAttribute(AttributeName.AFTER, value.getDateTimeISO(), null);
         }
-
-
 
         /**
           * (12) get JDFDate attribute After
@@ -286,8 +282,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
             return nMyDate;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Before
@@ -301,8 +295,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
             setAttribute(AttributeName.BEFORE, new JDFDate().getDateTimeISO(), null);
         }
 
-
-
         /**
           * (11) set attribute Before
           * @param value: the value to set the attribute to or null
@@ -312,8 +304,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
             if (value == null) value = new JDFDate();
             setAttribute(AttributeName.BEFORE, value.getDateTimeISO(), null);
         }
-
-
 
         /**
           * (12) get JDFDate attribute Before
@@ -338,8 +328,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
             return nMyDate;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Count
@@ -353,8 +341,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
             setAttribute(AttributeName.COUNT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Count
           * @return int the value of the attribute
@@ -363,8 +349,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
         {
             return getIntAttribute(AttributeName.COUNT, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -379,8 +363,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
             setAttribute(AttributeName.DEVICEID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DeviceID
           * @return the value of the attribute
@@ -389,8 +371,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
         {
             return getAttribute(AttributeName.DEVICEID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -405,8 +385,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
             setAttribute(AttributeName.FAMILY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Family
           * @return the value of the attribute
@@ -415,8 +393,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
         {
             return EnumFamily.getEnum(getAttribute(AttributeName.FAMILY, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -431,8 +407,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
             setAttribute(AttributeName.JOBID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobID
           * @return the value of the attribute
@@ -441,8 +415,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
         {
             return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -457,8 +429,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
             setAttribute(AttributeName.JOBPARTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobPartID
           * @return the value of the attribute
@@ -467,8 +437,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
         {
             return getAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -483,8 +451,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
             setAttribute(AttributeName.MESSAGEREFID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute MessageRefID
           * @return the value of the attribute
@@ -493,8 +459,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
         {
             return getAttribute(AttributeName.MESSAGEREFID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -509,8 +473,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
             setAttribute(AttributeName.MESSAGEID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute MessageID
           * @return the value of the attribute
@@ -519,8 +481,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
         {
             return getAttribute(AttributeName.MESSAGEID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -535,8 +495,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
             setAttribute(AttributeName.MESSAGETYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute MessageType
           * @return the value of the attribute
@@ -545,8 +503,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
         {
             return getAttribute(AttributeName.MESSAGETYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -561,8 +517,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
             setAttribute(AttributeName.QUEUEENTRYID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute QueueEntryID
           * @return the value of the attribute
@@ -571,8 +525,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
         {
             return getAttribute(AttributeName.QUEUEENTRYID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -587,8 +539,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
             setAttribute(AttributeName.RECEIVERURL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ReceiverURL
           * @return the value of the attribute
@@ -597,8 +547,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
         {
             return getAttribute(AttributeName.RECEIVERURL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -615,8 +563,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
         return (JDFPart)getCreateElement_KElement(ElementName.PART, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Part
      * @param iSkip number of elements to skip
@@ -627,9 +573,10 @@ public abstract class JDFAutoMsgFilter extends JDFElement
         return (JDFPart) getElement(ElementName.PART, null, iSkip);
     }
 
-
-
-    public JDFPart appendPart()
+    /**
+     * (30) append element Part
+     */
+    public JDFPart appendPart() throws JDFException
     {
         return (JDFPart) appendElement(ElementName.PART, null);
     }

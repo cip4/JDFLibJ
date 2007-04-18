@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
@@ -193,8 +194,6 @@ public abstract class JDFAutoModuleStatus extends JDFElement
             setAttribute(AttributeName.COMBINEDPROCESSINDEX, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerList attribute CombinedProcessIndex
           * @return JDFIntegerList the value of the attribute, null if a the
@@ -216,8 +215,6 @@ public abstract class JDFAutoModuleStatus extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute DeviceStatus
@@ -231,8 +228,6 @@ public abstract class JDFAutoModuleStatus extends JDFElement
             setAttribute(AttributeName.DEVICESTATUS, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute DeviceStatus
           * @return the value of the attribute
@@ -241,8 +236,6 @@ public abstract class JDFAutoModuleStatus extends JDFElement
         {
             return JDFDeviceInfo.EnumDeviceStatus.getEnum(getAttribute(AttributeName.DEVICESTATUS, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -257,8 +250,6 @@ public abstract class JDFAutoModuleStatus extends JDFElement
             setAttribute(AttributeName.MODULEID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ModuleID
           * @return the value of the attribute
@@ -267,8 +258,6 @@ public abstract class JDFAutoModuleStatus extends JDFElement
         {
             return getAttribute(AttributeName.MODULEID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -282,8 +271,6 @@ public abstract class JDFAutoModuleStatus extends JDFElement
         {
             setAttribute(AttributeName.MODULEINDEX, value, null);
         }
-
-
 
         /**
           * (20) get JDFIntegerRangeList attribute ModuleIndex
@@ -306,8 +293,6 @@ public abstract class JDFAutoModuleStatus extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ModuleType
@@ -321,8 +306,6 @@ public abstract class JDFAutoModuleStatus extends JDFElement
             setAttribute(AttributeName.MODULETYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ModuleType
           * @return the value of the attribute
@@ -331,8 +314,6 @@ public abstract class JDFAutoModuleStatus extends JDFElement
         {
             return getAttribute(AttributeName.MODULETYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -347,8 +328,6 @@ public abstract class JDFAutoModuleStatus extends JDFElement
             setAttribute(AttributeName.STATUSDETAILS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute StatusDetails
           * @return the value of the attribute
@@ -357,8 +336,6 @@ public abstract class JDFAutoModuleStatus extends JDFElement
         {
             return getAttribute(AttributeName.STATUSDETAILS, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -375,8 +352,6 @@ public abstract class JDFAutoModuleStatus extends JDFElement
         return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Employee
      * @param iSkip number of elements to skip
@@ -387,9 +362,10 @@ public abstract class JDFAutoModuleStatus extends JDFElement
         return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
     }
 
-
-
-    public JDFEmployee appendEmployee()
+    /**
+     * (30) append element Employee
+     */
+    public JDFEmployee appendEmployee() throws JDFException
     {
         return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
     }

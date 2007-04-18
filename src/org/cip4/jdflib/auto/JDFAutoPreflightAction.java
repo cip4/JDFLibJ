@@ -219,8 +219,6 @@ public abstract class JDFAutoPreflightAction extends JDFElement
             setAttribute(AttributeName.SETSPLITBY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute SetSplitBy
           * @return the value of the attribute
@@ -229,8 +227,6 @@ public abstract class JDFAutoPreflightAction extends JDFElement
         {
             return EnumSetSplitBy.getEnum(getAttribute(AttributeName.SETSPLITBY, null, "RunList"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -245,8 +241,6 @@ public abstract class JDFAutoPreflightAction extends JDFElement
             setAttribute(AttributeName.SETREF, value, null);
         }
 
-
-
         /**
           * (23) get String attribute SetRef
           * @return the value of the attribute
@@ -255,7 +249,5 @@ public abstract class JDFAutoPreflightAction extends JDFElement
         {
             return getAttribute(AttributeName.SETREF, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

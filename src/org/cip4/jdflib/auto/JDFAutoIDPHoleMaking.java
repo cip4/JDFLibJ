@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
     /*
     *****************************************************************************
@@ -165,8 +166,6 @@ public abstract class JDFAutoIDPHoleMaking extends JDFElement
         return (JDFHoleMakingParams)getCreateElement_KElement(ElementName.HOLEMAKINGPARAMS, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element HoleMakingParams
      * @param iSkip number of elements to skip
@@ -177,9 +176,10 @@ public abstract class JDFAutoIDPHoleMaking extends JDFElement
         return (JDFHoleMakingParams) getElement(ElementName.HOLEMAKINGPARAMS, null, iSkip);
     }
 
-
-
-    public JDFHoleMakingParams appendHoleMakingParams()
+    /**
+     * (30) append element HoleMakingParams
+     */
+    public JDFHoleMakingParams appendHoleMakingParams() throws JDFException
     {
         return (JDFHoleMakingParams) appendElement(ElementName.HOLEMAKINGPARAMS, null);
     }
@@ -192,4 +192,5 @@ public abstract class JDFAutoIDPHoleMaking extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

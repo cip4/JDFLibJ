@@ -234,8 +234,6 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
             setAttribute(AttributeName.FLUSHPOLICY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute FlushPolicy
           * @return the value of the attribute
@@ -244,8 +242,6 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
         {
             return EnumFlushPolicy.getEnum(getAttribute(AttributeName.FLUSHPOLICY, null, "QueueEntry"));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -261,8 +257,6 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
         return (JDFQueueFilter) getElement(ElementName.QUEUEFILTER, null, 0);
     }
 
-
-
     /** (25) getCreateQueueFilter
      * 
      * @return JDFQueueFilter the element
@@ -272,15 +266,12 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
         return (JDFQueueFilter) getCreateElement_KElement(ElementName.QUEUEFILTER, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementQueueFilter
+     * (29) append element QueueFilter
      */
     public JDFQueueFilter appendQueueFilter() throws JDFException
     {
         return (JDFQueueFilter) appendElementN(ElementName.QUEUEFILTER, 1, null);
     }
+
 }// end namespace JDF

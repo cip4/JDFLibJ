@@ -390,8 +390,6 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
             setAttribute(AttributeName.FOLIOCOUNT, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute FolioCount
           * @return the value of the attribute
@@ -400,8 +398,6 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
         {
             return EnumFolioCount.getEnum(getAttribute(AttributeName.FOLIOCOUNT, null, "Booklet"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -416,11 +412,9 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
             setAttribute(AttributeName.NUMBERUP, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute NumberUp
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getNumberUp()
@@ -439,8 +433,6 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute FinishedPageOrientation
@@ -454,8 +446,6 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
             setAttribute(AttributeName.FINISHEDPAGEORIENTATION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute FinishedPageOrientation
           * @return the value of the attribute
@@ -464,8 +454,6 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
         {
             return EnumFinishedPageOrientation.getEnum(getAttribute(AttributeName.FINISHEDPAGEORIENTATION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -480,8 +468,6 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
             setAttribute(AttributeName.ROTATEPOLICY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute RotatePolicy
           * @return the value of the attribute
@@ -490,8 +476,6 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
         {
             return EnumRotatePolicy.getEnum(getAttribute(AttributeName.ROTATEPOLICY, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -506,8 +490,6 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
             setAttribute(AttributeName.SIDES, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Sides
           * @return the value of the attribute
@@ -516,8 +498,6 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
         {
             return EnumSides.getEnum(getAttribute(AttributeName.SIDES, null, null));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -533,8 +513,6 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
         return (JDFXYPairSpan) getElement(ElementName.DIMENSIONS, null, 0);
     }
 
-
-
     /** (25) getCreateDimensions
      * 
      * @return JDFXYPairSpan the element
@@ -544,17 +522,14 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
         return (JDFXYPairSpan) getCreateElement_KElement(ElementName.DIMENSIONS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDimensions
+     * (29) append element Dimensions
      */
     public JDFXYPairSpan appendDimensions() throws JDFException
     {
         return (JDFXYPairSpan) appendElementN(ElementName.DIMENSIONS, 1, null);
     }
+
     /**
      * (24) const get element FinishedDimensions
      * @return JDFShapeSpan the element
@@ -563,8 +538,6 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
     {
         return (JDFShapeSpan) getElement(ElementName.FINISHEDDIMENSIONS, null, 0);
     }
-
-
 
     /** (25) getCreateFinishedDimensions
      * 
@@ -575,17 +548,14 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
         return (JDFShapeSpan) getCreateElement_KElement(ElementName.FINISHEDDIMENSIONS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFinishedDimensions
+     * (29) append element FinishedDimensions
      */
     public JDFShapeSpan appendFinishedDimensions() throws JDFException
     {
         return (JDFShapeSpan) appendElementN(ElementName.FINISHEDDIMENSIONS, 1, null);
     }
+
     /**
      * (24) const get element FinishedGrainDirection
      * @return JDFSpanFinishedGrainDirection the element
@@ -594,8 +564,6 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
     {
         return (JDFSpanFinishedGrainDirection) getElement(ElementName.FINISHEDGRAINDIRECTION, null, 0);
     }
-
-
 
     /** (25) getCreateFinishedGrainDirection
      * 
@@ -606,17 +574,14 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
         return (JDFSpanFinishedGrainDirection) getCreateElement_KElement(ElementName.FINISHEDGRAINDIRECTION, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFinishedGrainDirection
+     * (29) append element FinishedGrainDirection
      */
     public JDFSpanFinishedGrainDirection appendFinishedGrainDirection() throws JDFException
     {
         return (JDFSpanFinishedGrainDirection) appendElementN(ElementName.FINISHEDGRAINDIRECTION, 1, null);
     }
+
     /**
      * (24) const get element Pages
      * @return JDFIntegerSpan the element
@@ -625,8 +590,6 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
     {
         return (JDFIntegerSpan) getElement(ElementName.PAGES, null, 0);
     }
-
-
 
     /** (25) getCreatePages
      * 
@@ -637,17 +600,14 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
         return (JDFIntegerSpan) getCreateElement_KElement(ElementName.PAGES, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPages
+     * (29) append element Pages
      */
     public JDFIntegerSpan appendPages() throws JDFException
     {
         return (JDFIntegerSpan) appendElementN(ElementName.PAGES, 1, null);
     }
+
     /**
      * (24) const get element PageVariance
      * @return JDFIntegerSpan the element
@@ -656,8 +616,6 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
     {
         return (JDFIntegerSpan) getElement(ElementName.PAGEVARIANCE, null, 0);
     }
-
-
 
     /** (25) getCreatePageVariance
      * 
@@ -668,17 +626,14 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
         return (JDFIntegerSpan) getCreateElement_KElement(ElementName.PAGEVARIANCE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPageVariance
+     * (29) append element PageVariance
      */
     public JDFIntegerSpan appendPageVariance() throws JDFException
     {
         return (JDFIntegerSpan) appendElementN(ElementName.PAGEVARIANCE, 1, null);
     }
+
     /**
      * (24) const get element Layout
      * @return JDFLayout the element
@@ -687,8 +642,6 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
     {
         return (JDFLayout) getElement(ElementName.LAYOUT, null, 0);
     }
-
-
 
     /** (25) getCreateLayout
      * 
@@ -699,17 +652,14 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
         return (JDFLayout) getCreateElement_KElement(ElementName.LAYOUT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementLayout
+     * (29) append element Layout
      */
     public JDFLayout appendLayout() throws JDFException
     {
         return (JDFLayout) appendElementN(ElementName.LAYOUT, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -718,6 +668,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element SizePolicy
      * @return JDFSpanSizePolicy the element
@@ -726,8 +677,6 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
     {
         return (JDFSpanSizePolicy) getElement(ElementName.SIZEPOLICY, null, 0);
     }
-
-
 
     /** (25) getCreateSizePolicy
      * 
@@ -738,15 +687,12 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
         return (JDFSpanSizePolicy) getCreateElement_KElement(ElementName.SIZEPOLICY, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementSizePolicy
+     * (29) append element SizePolicy
      */
     public JDFSpanSizePolicy appendSizePolicy() throws JDFException
     {
         return (JDFSpanSizePolicy) appendElementN(ElementName.SIZEPOLICY, 1, null);
     }
+
 }// end namespace JDF

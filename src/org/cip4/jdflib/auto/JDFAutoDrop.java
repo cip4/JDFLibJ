@@ -248,8 +248,6 @@ public abstract class JDFAutoDrop extends JDFElement
             setAttribute(AttributeName.EARLIEST, new JDFDate().getDateTimeISO(), null);
         }
 
-
-
         /**
           * (11) set attribute Earliest
           * @param value: the value to set the attribute to or null
@@ -259,8 +257,6 @@ public abstract class JDFAutoDrop extends JDFElement
             if (value == null) value = new JDFDate();
             setAttribute(AttributeName.EARLIEST, value.getDateTimeISO(), null);
         }
-
-
 
         /**
           * (12) get JDFDate attribute Earliest
@@ -285,8 +281,6 @@ public abstract class JDFAutoDrop extends JDFElement
             return nMyDate;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Method
@@ -300,8 +294,6 @@ public abstract class JDFAutoDrop extends JDFElement
             setAttribute(AttributeName.METHOD, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Method
           * @return the value of the attribute
@@ -310,8 +302,6 @@ public abstract class JDFAutoDrop extends JDFElement
         {
             return getAttribute(AttributeName.METHOD, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -326,8 +316,6 @@ public abstract class JDFAutoDrop extends JDFElement
             setAttribute(AttributeName.PICKUP, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Pickup
           * @return boolean the value of the attribute
@@ -336,8 +324,6 @@ public abstract class JDFAutoDrop extends JDFElement
         {
             return getBoolAttribute(AttributeName.PICKUP, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -352,8 +338,6 @@ public abstract class JDFAutoDrop extends JDFElement
             setAttribute(AttributeName.REQUIRED, new JDFDate().getDateTimeISO(), null);
         }
 
-
-
         /**
           * (11) set attribute Required
           * @param value: the value to set the attribute to or null
@@ -363,8 +347,6 @@ public abstract class JDFAutoDrop extends JDFElement
             if (value == null) value = new JDFDate();
             setAttribute(AttributeName.REQUIRED, value.getDateTimeISO(), null);
         }
-
-
 
         /**
           * (12) get JDFDate attribute Required
@@ -389,8 +371,6 @@ public abstract class JDFAutoDrop extends JDFElement
             return nMyDate;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ServiceLevel
@@ -404,8 +384,6 @@ public abstract class JDFAutoDrop extends JDFElement
             setAttribute(AttributeName.SERVICELEVEL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ServiceLevel
           * @return the value of the attribute
@@ -414,8 +392,6 @@ public abstract class JDFAutoDrop extends JDFElement
         {
             return getAttribute(AttributeName.SERVICELEVEL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -430,8 +406,6 @@ public abstract class JDFAutoDrop extends JDFElement
             setAttribute(AttributeName.TRACKINGID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute TrackingID
           * @return the value of the attribute
@@ -440,8 +414,6 @@ public abstract class JDFAutoDrop extends JDFElement
         {
             return getAttribute(AttributeName.TRACKINGID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -456,8 +428,6 @@ public abstract class JDFAutoDrop extends JDFElement
             setAttribute(AttributeName.TRANSFER, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Transfer
           * @return the value of the attribute
@@ -466,8 +436,6 @@ public abstract class JDFAutoDrop extends JDFElement
         {
             return EnumTransfer.getEnum(getAttribute(AttributeName.TRANSFER, null, null));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -483,8 +451,6 @@ public abstract class JDFAutoDrop extends JDFElement
         return (JDFCompany) getElement(ElementName.COMPANY, null, 0);
     }
 
-
-
     /** (25) getCreateCompany
      * 
      * @return JDFCompany the element
@@ -494,17 +460,14 @@ public abstract class JDFAutoDrop extends JDFElement
         return (JDFCompany) getCreateElement_KElement(ElementName.COMPANY, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementCompany
+     * (29) append element Company
      */
     public JDFCompany appendCompany() throws JDFException
     {
         return (JDFCompany) appendElementN(ElementName.COMPANY, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -513,6 +476,7 @@ public abstract class JDFAutoDrop extends JDFElement
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateContact
      * 
      * @param iSkip number of elements to skip
@@ -522,8 +486,6 @@ public abstract class JDFAutoDrop extends JDFElement
     {
         return (JDFContact)getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Contact
@@ -535,9 +497,10 @@ public abstract class JDFAutoDrop extends JDFElement
         return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
     }
 
-
-
-    public JDFContact appendContact()
+    /**
+     * (30) append element Contact
+     */
+    public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -550,6 +513,7 @@ public abstract class JDFAutoDrop extends JDFElement
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateDropItem
      * 
      * @param iSkip number of elements to skip
@@ -559,8 +523,6 @@ public abstract class JDFAutoDrop extends JDFElement
     {
         return (JDFDropItem)getCreateElement_KElement(ElementName.DROPITEM, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element DropItem
@@ -572,9 +534,10 @@ public abstract class JDFAutoDrop extends JDFElement
         return (JDFDropItem) getElement(ElementName.DROPITEM, null, iSkip);
     }
 
-
-
-    public JDFDropItem appendDropItem()
+    /**
+     * (30) append element DropItem
+     */
+    public JDFDropItem appendDropItem() throws JDFException
     {
         return (JDFDropItem) appendElement(ElementName.DROPITEM, null);
     }

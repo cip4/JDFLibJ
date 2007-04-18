@@ -270,8 +270,6 @@ public abstract class JDFAutoJDFService extends JDFElement
             setAttribute(AttributeName.COMBINEDMETHOD, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute CombinedMethod
           * @return the value of the attribute
@@ -280,8 +278,6 @@ public abstract class JDFAutoJDFService extends JDFElement
         {
             return EnumCombinedMethod.getEnum(getAttribute(AttributeName.COMBINEDMETHOD, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -296,8 +292,6 @@ public abstract class JDFAutoJDFService extends JDFElement
             setAttribute(AttributeName.TYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Type
           * @return the value of the attribute
@@ -306,8 +300,6 @@ public abstract class JDFAutoJDFService extends JDFElement
         {
             return getAttribute(AttributeName.TYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -322,8 +314,6 @@ public abstract class JDFAutoJDFService extends JDFElement
             setAttribute(AttributeName.TYPEORDER, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute TypeOrder
           * @return the value of the attribute
@@ -332,8 +322,6 @@ public abstract class JDFAutoJDFService extends JDFElement
         {
             return EnumTypeOrder.getEnum(getAttribute(AttributeName.TYPEORDER, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -348,8 +336,6 @@ public abstract class JDFAutoJDFService extends JDFElement
             setAttribute(AttributeName.TYPES, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute Types
           * @return VString the value of the attribute
@@ -361,7 +347,5 @@ public abstract class JDFAutoJDFService extends JDFElement
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
 }// end namespace JDF

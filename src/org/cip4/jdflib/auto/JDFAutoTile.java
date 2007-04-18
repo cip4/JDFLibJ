@@ -205,11 +205,9 @@ public abstract class JDFAutoTile extends JDFResource
             setAttribute(AttributeName.CLIPBOX, value, null);
         }
 
-
-
         /**
           * (20) get JDFRectangle attribute ClipBox
-          * @return JDFRectanglethe value of the attribute, null if a the
+          * @return JDFRectangle the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFRectangle
           */
         public JDFRectangle getClipBox()
@@ -228,8 +226,6 @@ public abstract class JDFAutoTile extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute CTM
@@ -243,11 +239,9 @@ public abstract class JDFAutoTile extends JDFResource
             setAttribute(AttributeName.CTM, value, null);
         }
 
-
-
         /**
           * (20) get JDFMatrix attribute CTM
-          * @return JDFMatrixthe value of the attribute, null if a the
+          * @return JDFMatrix the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFMatrix
           */
         public JDFMatrix getCTM()
@@ -266,8 +260,6 @@ public abstract class JDFAutoTile extends JDFResource
             return nPlaceHolder;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -282,8 +274,6 @@ public abstract class JDFAutoTile extends JDFResource
         return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
     }
 
-
-
     /** (25) getCreateMedia
      * 
      * @return JDFMedia the element
@@ -293,17 +283,14 @@ public abstract class JDFAutoTile extends JDFResource
         return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMedia
+     * (29) append element Media
      */
     public JDFMedia appendMedia() throws JDFException
     {
         return (JDFMedia) appendElementN(ElementName.MEDIA, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -312,6 +299,7 @@ public abstract class JDFAutoTile extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element MediaSource
      * @return JDFMediaSource the element
@@ -320,8 +308,6 @@ public abstract class JDFAutoTile extends JDFResource
     {
         return (JDFMediaSource) getElement(ElementName.MEDIASOURCE, null, 0);
     }
-
-
 
     /** (25) getCreateMediaSource
      * 
@@ -332,17 +318,14 @@ public abstract class JDFAutoTile extends JDFResource
         return (JDFMediaSource) getCreateElement_KElement(ElementName.MEDIASOURCE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMediaSource
+     * (29) append element MediaSource
      */
     public JDFMediaSource appendMediaSource() throws JDFException
     {
         return (JDFMediaSource) appendElementN(ElementName.MEDIASOURCE, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -351,4 +334,5 @@ public abstract class JDFAutoTile extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

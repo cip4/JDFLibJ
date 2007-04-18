@@ -167,8 +167,6 @@ public abstract class JDFAutoLayerDetails extends JDFElement
             setAttribute(AttributeName.NAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Name
           * @return the value of the attribute
@@ -177,7 +175,5 @@ public abstract class JDFAutoLayerDetails extends JDFElement
         {
             return getAttribute(AttributeName.NAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

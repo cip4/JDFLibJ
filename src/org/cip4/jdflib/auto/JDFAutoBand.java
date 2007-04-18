@@ -171,8 +171,6 @@ public abstract class JDFAutoBand extends JDFElement
             setAttribute(AttributeName.DATA, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Data
           * @return the value of the attribute
@@ -181,8 +179,6 @@ public abstract class JDFAutoBand extends JDFElement
         {
             return getAttribute(AttributeName.DATA, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -197,8 +193,6 @@ public abstract class JDFAutoBand extends JDFElement
             setAttribute(AttributeName.HEIGHT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Height
           * @return int the value of the attribute
@@ -207,8 +201,6 @@ public abstract class JDFAutoBand extends JDFElement
         {
             return getIntAttribute(AttributeName.HEIGHT, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -223,8 +215,6 @@ public abstract class JDFAutoBand extends JDFElement
             setAttribute(AttributeName.MASK, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Mask
           * @return the value of the attribute
@@ -233,8 +223,6 @@ public abstract class JDFAutoBand extends JDFElement
         {
             return getAttribute(AttributeName.MASK, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -249,8 +237,6 @@ public abstract class JDFAutoBand extends JDFElement
             setAttribute(AttributeName.WASMARKED, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute WasMarked
           * @return boolean the value of the attribute
@@ -259,8 +245,6 @@ public abstract class JDFAutoBand extends JDFElement
         {
             return getBoolAttribute(AttributeName.WASMARKED, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -275,8 +259,6 @@ public abstract class JDFAutoBand extends JDFElement
             setAttribute(AttributeName.WIDTH, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Width
           * @return int the value of the attribute
@@ -285,7 +267,5 @@ public abstract class JDFAutoBand extends JDFElement
         {
             return getIntAttribute(AttributeName.WIDTH, null, 0);
         }
-
-
 
 }// end namespace JDF

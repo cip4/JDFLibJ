@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFArgumentValue;
 import org.cip4.jdflib.resource.process.JDFStringListValue;
     /*
@@ -167,8 +168,6 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
         return (JDFStringListValue)getCreateElement_KElement(ElementName.STRINGLISTVALUE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element StringListValue
      * @param iSkip number of elements to skip
@@ -179,9 +178,10 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
         return (JDFStringListValue) getElement(ElementName.STRINGLISTVALUE, null, iSkip);
     }
 
-
-
-    public JDFStringListValue appendStringListValue()
+    /**
+     * (30) append element StringListValue
+     */
+    public JDFStringListValue appendStringListValue() throws JDFException
     {
         return (JDFStringListValue) appendElement(ElementName.STRINGLISTVALUE, null);
     }
@@ -196,8 +196,6 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
         return (JDFArgumentValue)getCreateElement_KElement(ElementName.ARGUMENTVALUE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element ArgumentValue
      * @param iSkip number of elements to skip
@@ -208,9 +206,10 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
         return (JDFArgumentValue) getElement(ElementName.ARGUMENTVALUE, null, iSkip);
     }
 
-
-
-    public JDFArgumentValue appendArgumentValue()
+    /**
+     * (30) append element ArgumentValue
+     */
+    public JDFArgumentValue appendArgumentValue() throws JDFException
     {
         return (JDFArgumentValue) appendElement(ElementName.ARGUMENTVALUE, null);
     }

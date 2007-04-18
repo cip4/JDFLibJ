@@ -197,8 +197,6 @@ public abstract class JDFAutoContentData extends JDFElement
             setAttribute(AttributeName.CATALOGID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute CatalogID
           * @return the value of the attribute
@@ -207,8 +205,6 @@ public abstract class JDFAutoContentData extends JDFElement
         {
             return getAttribute(AttributeName.CATALOGID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -223,8 +219,6 @@ public abstract class JDFAutoContentData extends JDFElement
             setAttribute(AttributeName.CATALOGDETAILS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute CatalogDetails
           * @return the value of the attribute
@@ -233,8 +227,6 @@ public abstract class JDFAutoContentData extends JDFElement
         {
             return getAttribute(AttributeName.CATALOGDETAILS, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -249,8 +241,6 @@ public abstract class JDFAutoContentData extends JDFElement
             setAttribute(AttributeName.CONTENTTYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ContentType
           * @return the value of the attribute
@@ -259,8 +249,6 @@ public abstract class JDFAutoContentData extends JDFElement
         {
             return getAttribute(AttributeName.CONTENTTYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -275,8 +263,6 @@ public abstract class JDFAutoContentData extends JDFElement
             setAttribute(AttributeName.HASBLEEDS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute HasBleeds
           * @return boolean the value of the attribute
@@ -285,8 +271,6 @@ public abstract class JDFAutoContentData extends JDFElement
         {
             return getBoolAttribute(AttributeName.HASBLEEDS, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -301,8 +285,6 @@ public abstract class JDFAutoContentData extends JDFElement
             setAttribute(AttributeName.ISBLANK, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IsBlank
           * @return boolean the value of the attribute
@@ -311,8 +293,6 @@ public abstract class JDFAutoContentData extends JDFElement
         {
             return getBoolAttribute(AttributeName.ISBLANK, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -327,8 +307,6 @@ public abstract class JDFAutoContentData extends JDFElement
             setAttribute(AttributeName.ISTRAPPED, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IsTrapped
           * @return boolean the value of the attribute
@@ -337,8 +315,6 @@ public abstract class JDFAutoContentData extends JDFElement
         {
             return getBoolAttribute(AttributeName.ISTRAPPED, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -353,8 +329,6 @@ public abstract class JDFAutoContentData extends JDFElement
             setAttribute(AttributeName.JOBID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobID
           * @return the value of the attribute
@@ -363,8 +337,6 @@ public abstract class JDFAutoContentData extends JDFElement
         {
             return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -379,8 +351,6 @@ public abstract class JDFAutoContentData extends JDFElement
             setAttribute(AttributeName.PRODUCTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ProductID
           * @return the value of the attribute
@@ -389,8 +359,6 @@ public abstract class JDFAutoContentData extends JDFElement
         {
             return getAttribute(AttributeName.PRODUCTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -406,8 +374,6 @@ public abstract class JDFAutoContentData extends JDFElement
         return (JDFElementColorParams) getElement(ElementName.ELEMENTCOLORPARAMS, null, 0);
     }
 
-
-
     /** (25) getCreateElementColorParams
      * 
      * @return JDFElementColorParams the element
@@ -417,17 +383,14 @@ public abstract class JDFAutoContentData extends JDFElement
         return (JDFElementColorParams) getCreateElement_KElement(ElementName.ELEMENTCOLORPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementElementColorParams
+     * (29) append element ElementColorParams
      */
     public JDFElementColorParams appendElementColorParams() throws JDFException
     {
         return (JDFElementColorParams) appendElementN(ElementName.ELEMENTCOLORPARAMS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -436,6 +399,7 @@ public abstract class JDFAutoContentData extends JDFElement
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element ImageCompressionParams
      * @return JDFImageCompressionParams the element
@@ -444,8 +408,6 @@ public abstract class JDFAutoContentData extends JDFElement
     {
         return (JDFImageCompressionParams) getElement(ElementName.IMAGECOMPRESSIONPARAMS, null, 0);
     }
-
-
 
     /** (25) getCreateImageCompressionParams
      * 
@@ -456,17 +418,14 @@ public abstract class JDFAutoContentData extends JDFElement
         return (JDFImageCompressionParams) getCreateElement_KElement(ElementName.IMAGECOMPRESSIONPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementImageCompressionParams
+     * (29) append element ImageCompressionParams
      */
     public JDFImageCompressionParams appendImageCompressionParams() throws JDFException
     {
         return (JDFImageCompressionParams) appendElementN(ElementName.IMAGECOMPRESSIONPARAMS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -475,6 +434,7 @@ public abstract class JDFAutoContentData extends JDFElement
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element ScreeningParams
      * @return JDFScreeningParams the element
@@ -483,8 +443,6 @@ public abstract class JDFAutoContentData extends JDFElement
     {
         return (JDFScreeningParams) getElement(ElementName.SCREENINGPARAMS, null, 0);
     }
-
-
 
     /** (25) getCreateScreeningParams
      * 
@@ -495,17 +453,14 @@ public abstract class JDFAutoContentData extends JDFElement
         return (JDFScreeningParams) getCreateElement_KElement(ElementName.SCREENINGPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementScreeningParams
+     * (29) append element ScreeningParams
      */
     public JDFScreeningParams appendScreeningParams() throws JDFException
     {
         return (JDFScreeningParams) appendElementN(ElementName.SCREENINGPARAMS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -514,6 +469,7 @@ public abstract class JDFAutoContentData extends JDFElement
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateSeparationSpec
      * 
      * @param iSkip number of elements to skip
@@ -523,8 +479,6 @@ public abstract class JDFAutoContentData extends JDFElement
     {
         return (JDFSeparationSpec)getCreateElement_KElement(ElementName.SEPARATIONSPEC, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element SeparationSpec
@@ -536,9 +490,10 @@ public abstract class JDFAutoContentData extends JDFElement
         return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
     }
 
-
-
-    public JDFSeparationSpec appendSeparationSpec()
+    /**
+     * (30) append element SeparationSpec
+     */
+    public JDFSeparationSpec appendSeparationSpec() throws JDFException
     {
         return (JDFSeparationSpec) appendElement(ElementName.SEPARATIONSPEC, null);
     }

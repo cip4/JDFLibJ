@@ -209,8 +209,6 @@ public abstract class JDFAutoColorantControl extends JDFResource
             setAttribute(AttributeName.FORCESEPARATIONS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute ForceSeparations
           * @return boolean the value of the attribute
@@ -219,8 +217,6 @@ public abstract class JDFAutoColorantControl extends JDFResource
         {
             return getBoolAttribute(AttributeName.FORCESEPARATIONS, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -235,8 +231,6 @@ public abstract class JDFAutoColorantControl extends JDFResource
             setAttribute(AttributeName.PROCESSCOLORMODEL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ProcessColorModel
           * @return the value of the attribute
@@ -245,8 +239,6 @@ public abstract class JDFAutoColorantControl extends JDFResource
         {
             return getAttribute(AttributeName.PROCESSCOLORMODEL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -263,8 +255,6 @@ public abstract class JDFAutoColorantControl extends JDFResource
         return (JDFColorantAlias)getCreateElement_KElement(ElementName.COLORANTALIAS, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element ColorantAlias
      * @param iSkip number of elements to skip
@@ -275,9 +265,10 @@ public abstract class JDFAutoColorantControl extends JDFResource
         return (JDFColorantAlias) getElement(ElementName.COLORANTALIAS, null, iSkip);
     }
 
-
-
-    public JDFColorantAlias appendColorantAlias()
+    /**
+     * (30) append element ColorantAlias
+     */
+    public JDFColorantAlias appendColorantAlias() throws JDFException
     {
         return (JDFColorantAlias) appendElement(ElementName.COLORANTALIAS, null);
     }
@@ -290,6 +281,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element ColorantOrder
      * @return JDFSeparationList the element
@@ -298,8 +290,6 @@ public abstract class JDFAutoColorantControl extends JDFResource
     {
         return (JDFSeparationList) getElement(ElementName.COLORANTORDER, null, 0);
     }
-
-
 
     /** (25) getCreateColorantOrder
      * 
@@ -310,17 +300,14 @@ public abstract class JDFAutoColorantControl extends JDFResource
         return (JDFSeparationList) getCreateElement_KElement(ElementName.COLORANTORDER, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementColorantOrder
+     * (29) append element ColorantOrder
      */
     public JDFSeparationList appendColorantOrder() throws JDFException
     {
         return (JDFSeparationList) appendElementN(ElementName.COLORANTORDER, 1, null);
     }
+
     /**
      * (24) const get element ColorantParams
      * @return JDFSeparationList the element
@@ -329,8 +316,6 @@ public abstract class JDFAutoColorantControl extends JDFResource
     {
         return (JDFSeparationList) getElement(ElementName.COLORANTPARAMS, null, 0);
     }
-
-
 
     /** (25) getCreateColorantParams
      * 
@@ -341,17 +326,14 @@ public abstract class JDFAutoColorantControl extends JDFResource
         return (JDFSeparationList) getCreateElement_KElement(ElementName.COLORANTPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementColorantParams
+     * (29) append element ColorantParams
      */
     public JDFSeparationList appendColorantParams() throws JDFException
     {
         return (JDFSeparationList) appendElementN(ElementName.COLORANTPARAMS, 1, null);
     }
+
     /**
      * (24) const get element ColorPool
      * @return JDFColorPool the element
@@ -360,8 +342,6 @@ public abstract class JDFAutoColorantControl extends JDFResource
     {
         return (JDFColorPool) getElement(ElementName.COLORPOOL, null, 0);
     }
-
-
 
     /** (25) getCreateColorPool
      * 
@@ -372,17 +352,14 @@ public abstract class JDFAutoColorantControl extends JDFResource
         return (JDFColorPool) getCreateElement_KElement(ElementName.COLORPOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementColorPool
+     * (29) append element ColorPool
      */
     public JDFColorPool appendColorPool() throws JDFException
     {
         return (JDFColorPool) appendElementN(ElementName.COLORPOOL, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -391,6 +368,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateColorSpaceSubstitute
      * 
      * @param iSkip number of elements to skip
@@ -400,8 +378,6 @@ public abstract class JDFAutoColorantControl extends JDFResource
     {
         return (JDFColorSpaceSubstitute)getCreateElement_KElement(ElementName.COLORSPACESUBSTITUTE, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element ColorSpaceSubstitute
@@ -413,9 +389,10 @@ public abstract class JDFAutoColorantControl extends JDFResource
         return (JDFColorSpaceSubstitute) getElement(ElementName.COLORSPACESUBSTITUTE, null, iSkip);
     }
 
-
-
-    public JDFColorSpaceSubstitute appendColorSpaceSubstitute()
+    /**
+     * (30) append element ColorSpaceSubstitute
+     */
+    public JDFColorSpaceSubstitute appendColorSpaceSubstitute() throws JDFException
     {
         return (JDFColorSpaceSubstitute) appendElement(ElementName.COLORSPACESUBSTITUTE, null);
     }
@@ -429,8 +406,6 @@ public abstract class JDFAutoColorantControl extends JDFResource
         return (JDFSeparationList) getElement(ElementName.DEVICECOLORANTORDER, null, 0);
     }
 
-
-
     /** (25) getCreateDeviceColorantOrder
      * 
      * @return JDFSeparationList the element
@@ -440,17 +415,14 @@ public abstract class JDFAutoColorantControl extends JDFResource
         return (JDFSeparationList) getCreateElement_KElement(ElementName.DEVICECOLORANTORDER, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDeviceColorantOrder
+     * (29) append element DeviceColorantOrder
      */
     public JDFSeparationList appendDeviceColorantOrder() throws JDFException
     {
         return (JDFSeparationList) appendElementN(ElementName.DEVICECOLORANTORDER, 1, null);
     }
+
     /** (26) getCreateDeviceNSpace
      * 
      * @param iSkip number of elements to skip
@@ -460,8 +432,6 @@ public abstract class JDFAutoColorantControl extends JDFResource
     {
         return (JDFDeviceNSpace)getCreateElement_KElement(ElementName.DEVICENSPACE, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element DeviceNSpace
@@ -473,9 +443,10 @@ public abstract class JDFAutoColorantControl extends JDFResource
         return (JDFDeviceNSpace) getElement(ElementName.DEVICENSPACE, null, iSkip);
     }
 
-
-
-    public JDFDeviceNSpace appendDeviceNSpace()
+    /**
+     * (30) append element DeviceNSpace
+     */
+    public JDFDeviceNSpace appendDeviceNSpace() throws JDFException
     {
         return (JDFDeviceNSpace) appendElement(ElementName.DEVICENSPACE, null);
     }
@@ -488,4 +459,5 @@ public abstract class JDFAutoColorantControl extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

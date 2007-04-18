@@ -231,8 +231,6 @@ public abstract class JDFAutoBarcodeCompParams extends JDFResource
             setAttribute(AttributeName.COMPENSATIONPROCESS, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute CompensationProcess
           * @return the value of the attribute
@@ -241,8 +239,6 @@ public abstract class JDFAutoBarcodeCompParams extends JDFResource
         {
             return EnumCompensationProcess.getEnum(getAttribute(AttributeName.COMPENSATIONPROCESS, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -257,8 +253,6 @@ public abstract class JDFAutoBarcodeCompParams extends JDFResource
             setAttribute(AttributeName.COMPENSATIONVALUE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute CompensationValue
           * @return double the value of the attribute
@@ -267,7 +261,5 @@ public abstract class JDFAutoBarcodeCompParams extends JDFResource
         {
             return getRealAttribute(AttributeName.COMPENSATIONVALUE, null, 0.0);
         }
-
-
 
 }// end namespace JDF

@@ -239,8 +239,6 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
             setAttribute(AttributeName.BLINDSTITCH, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute BlindStitch
           * @return boolean the value of the attribute
@@ -249,8 +247,6 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.BLINDSTITCH, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -265,8 +261,6 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
             setAttribute(AttributeName.THREADMATERIAL, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ThreadMaterial
           * @return the value of the attribute
@@ -275,8 +269,6 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
         {
             return EnumThreadMaterial.getEnum(getAttribute(AttributeName.THREADMATERIAL, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -290,8 +282,6 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
         {
             setAttribute(AttributeName.THREADPOSITIONS, value, null);
         }
-
-
 
         /**
           * (20) get JDFNumberList attribute ThreadPositions
@@ -314,8 +304,6 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ThreadLength
@@ -329,8 +317,6 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
             setAttribute(AttributeName.THREADLENGTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute ThreadLength
           * @return double the value of the attribute
@@ -339,8 +325,6 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.THREADLENGTH, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -355,8 +339,6 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
             setAttribute(AttributeName.THREADSTITCHWIDTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute ThreadStitchWidth
           * @return double the value of the attribute
@@ -365,8 +347,6 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.THREADSTITCHWIDTH, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -381,8 +361,6 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
             setAttribute(AttributeName.SEALINGTEMPERATURE, value, null);
         }
 
-
-
         /**
           * (15) get int attribute SealingTemperature
           * @return int the value of the attribute
@@ -391,7 +369,5 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
         {
             return getIntAttribute(AttributeName.SEALINGTEMPERATURE, null, 0);
         }
-
-
 
 }// end namespace JDF

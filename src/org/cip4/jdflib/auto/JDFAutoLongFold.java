@@ -171,8 +171,6 @@ public abstract class JDFAutoLongFold extends JDFElement
             setAttribute(AttributeName.WORKINGLIST, value, null);
         }
 
-
-
         /**
           * (20) get JDFNumberList attribute WorkingList
           * @return JDFNumberList the value of the attribute, null if a the
@@ -194,8 +192,6 @@ public abstract class JDFAutoLongFold extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute XOffset
@@ -209,8 +205,6 @@ public abstract class JDFAutoLongFold extends JDFElement
             setAttribute(AttributeName.XOFFSET, value, null);
         }
 
-
-
         /**
           * (17) get double attribute XOffset
           * @return double the value of the attribute
@@ -219,7 +213,5 @@ public abstract class JDFAutoLongFold extends JDFElement
         {
             return getRealAttribute(AttributeName.XOFFSET, null, 0.0);
         }
-
-
 
 }// end namespace JDF

@@ -255,8 +255,6 @@ public abstract class JDFAutoPreflightReport extends JDFResource
             setAttribute(AttributeName.ERRORCOUNT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute ErrorCount
           * @return int the value of the attribute
@@ -265,8 +263,6 @@ public abstract class JDFAutoPreflightReport extends JDFResource
         {
             return getIntAttribute(AttributeName.ERRORCOUNT, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -281,8 +277,6 @@ public abstract class JDFAutoPreflightReport extends JDFResource
             setAttribute(AttributeName.WARNINGCOUNT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute WarningCount
           * @return int the value of the attribute
@@ -291,8 +285,6 @@ public abstract class JDFAutoPreflightReport extends JDFResource
         {
             return getIntAttribute(AttributeName.WARNINGCOUNT, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -307,8 +299,6 @@ public abstract class JDFAutoPreflightReport extends JDFResource
             setAttribute(AttributeName.ERRORSTATE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ErrorState
           * @return the value of the attribute
@@ -317,8 +307,6 @@ public abstract class JDFAutoPreflightReport extends JDFResource
         {
             return EnumErrorState.getEnum(getAttribute(AttributeName.ERRORSTATE, null, null));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -334,8 +322,6 @@ public abstract class JDFAutoPreflightReport extends JDFResource
         return (JDFPreflightParams) getElement(ElementName.PREFLIGHTPARAMS, null, 0);
     }
 
-
-
     /** (25) getCreatePreflightParams
      * 
      * @return JDFPreflightParams the element
@@ -345,17 +331,14 @@ public abstract class JDFAutoPreflightReport extends JDFResource
         return (JDFPreflightParams) getCreateElement_KElement(ElementName.PREFLIGHTPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPreflightParams
+     * (29) append element PreflightParams
      */
     public JDFPreflightParams appendPreflightParams() throws JDFException
     {
         return (JDFPreflightParams) appendElementN(ElementName.PREFLIGHTPARAMS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -364,6 +347,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element PreflightReportRulePool
      * @return JDFPreflightReportRulePool the element
@@ -372,8 +356,6 @@ public abstract class JDFAutoPreflightReport extends JDFResource
     {
         return (JDFPreflightReportRulePool) getElement(ElementName.PREFLIGHTREPORTRULEPOOL, null, 0);
     }
-
-
 
     /** (25) getCreatePreflightReportRulePool
      * 
@@ -384,17 +366,14 @@ public abstract class JDFAutoPreflightReport extends JDFResource
         return (JDFPreflightReportRulePool) getCreateElement_KElement(ElementName.PREFLIGHTREPORTRULEPOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPreflightReportRulePool
+     * (29) append element PreflightReportRulePool
      */
     public JDFPreflightReportRulePool appendPreflightReportRulePool() throws JDFException
     {
         return (JDFPreflightReportRulePool) appendElementN(ElementName.PREFLIGHTREPORTRULEPOOL, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -403,6 +382,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element RunList
      * @return JDFRunList the element
@@ -411,8 +391,6 @@ public abstract class JDFAutoPreflightReport extends JDFResource
     {
         return (JDFRunList) getElement(ElementName.RUNLIST, null, 0);
     }
-
-
 
     /** (25) getCreateRunList
      * 
@@ -423,17 +401,14 @@ public abstract class JDFAutoPreflightReport extends JDFResource
         return (JDFRunList) getCreateElement_KElement(ElementName.RUNLIST, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementRunList
+     * (29) append element RunList
      */
     public JDFRunList appendRunList() throws JDFException
     {
         return (JDFRunList) appendElementN(ElementName.RUNLIST, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -442,6 +417,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreatePRItem
      * 
      * @param iSkip number of elements to skip
@@ -451,8 +427,6 @@ public abstract class JDFAutoPreflightReport extends JDFResource
     {
         return (JDFPRItem)getCreateElement_KElement(ElementName.PRITEM, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element PRItem
@@ -464,9 +438,10 @@ public abstract class JDFAutoPreflightReport extends JDFResource
         return (JDFPRItem) getElement(ElementName.PRITEM, null, iSkip);
     }
 
-
-
-    public JDFPRItem appendPRItem()
+    /**
+     * (30) append element PRItem
+     */
+    public JDFPRItem appendPRItem() throws JDFException
     {
         return (JDFPRItem) appendElement(ElementName.PRITEM, null);
     }

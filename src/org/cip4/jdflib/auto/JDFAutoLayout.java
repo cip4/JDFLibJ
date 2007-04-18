@@ -275,8 +275,6 @@ public abstract class JDFAutoLayout extends JDFResource
             setAttribute(AttributeName.AUTOMATED, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Automated
           * @return boolean the value of the attribute
@@ -285,8 +283,6 @@ public abstract class JDFAutoLayout extends JDFResource
         {
             return getBoolAttribute(AttributeName.AUTOMATED, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -301,8 +297,6 @@ public abstract class JDFAutoLayout extends JDFResource
             setAttribute(AttributeName.LOCKORIGINS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute LockOrigins
           * @return boolean the value of the attribute
@@ -311,8 +305,6 @@ public abstract class JDFAutoLayout extends JDFResource
         {
             return getBoolAttribute(AttributeName.LOCKORIGINS, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -327,8 +319,6 @@ public abstract class JDFAutoLayout extends JDFResource
             setAttribute(AttributeName.MAXDOCORD, value, null);
         }
 
-
-
         /**
           * (15) get int attribute MaxDocOrd
           * @return int the value of the attribute
@@ -337,8 +327,6 @@ public abstract class JDFAutoLayout extends JDFResource
         {
             return getIntAttribute(AttributeName.MAXDOCORD, null, 1);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -353,8 +341,6 @@ public abstract class JDFAutoLayout extends JDFResource
             setAttribute(AttributeName.MAXSETORD, value, null);
         }
 
-
-
         /**
           * (15) get int attribute MaxSetOrd
           * @return int the value of the attribute
@@ -363,8 +349,6 @@ public abstract class JDFAutoLayout extends JDFResource
         {
             return getIntAttribute(AttributeName.MAXSETORD, null, 1);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -379,8 +363,6 @@ public abstract class JDFAutoLayout extends JDFResource
             setAttribute(AttributeName.NAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Name
           * @return the value of the attribute
@@ -389,8 +371,6 @@ public abstract class JDFAutoLayout extends JDFResource
         {
             return getAttribute(AttributeName.NAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -405,8 +385,6 @@ public abstract class JDFAutoLayout extends JDFResource
             setAttribute(AttributeName.MAXORD, value, null);
         }
 
-
-
         /**
           * (15) get int attribute MaxOrd
           * @return int the value of the attribute
@@ -415,8 +393,6 @@ public abstract class JDFAutoLayout extends JDFResource
         {
             return getIntAttribute(AttributeName.MAXORD, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -431,8 +407,6 @@ public abstract class JDFAutoLayout extends JDFResource
             setAttribute(AttributeName.SOURCEWORKSTYLE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute SourceWorkStyle
           * @return the value of the attribute
@@ -441,8 +415,6 @@ public abstract class JDFAutoLayout extends JDFResource
         {
             return EnumSourceWorkStyle.getEnum(getAttribute(AttributeName.SOURCEWORKSTYLE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -456,8 +428,6 @@ public abstract class JDFAutoLayout extends JDFResource
         {
             setAttribute(AttributeName.SURFACECONTENTSBOX, value, null);
         }
-
-
 
         /**
           * (20) get JDFRectangle attribute SurfaceContentsBox
@@ -480,8 +450,6 @@ public abstract class JDFAutoLayout extends JDFResource
             return nPlaceHolder;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -497,8 +465,6 @@ public abstract class JDFAutoLayout extends JDFResource
         return (JDFContentObject)getCreateElement_KElement(ElementName.CONTENTOBJECT, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element ContentObject
      * @param iSkip number of elements to skip
@@ -508,10 +474,6 @@ public abstract class JDFAutoLayout extends JDFResource
     {
         return (JDFContentObject) getElement(ElementName.CONTENTOBJECT, null, iSkip);
     }
-
-
-
-
 
     /**
      * (30) append element ContentObject
@@ -531,8 +493,6 @@ public abstract class JDFAutoLayout extends JDFResource
         return (JDFInsertSheet)getCreateElement_KElement(ElementName.INSERTSHEET, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element InsertSheet
      * @param iSkip number of elements to skip
@@ -542,10 +502,6 @@ public abstract class JDFAutoLayout extends JDFResource
     {
         return (JDFInsertSheet) getElement(ElementName.INSERTSHEET, null, iSkip);
     }
-
-
-
-
 
     /**
      * (30) append element InsertSheet
@@ -563,6 +519,7 @@ public abstract class JDFAutoLayout extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element LayerList
      * @return JDFLayerList the element
@@ -572,8 +529,6 @@ public abstract class JDFAutoLayout extends JDFResource
         return (JDFLayerList) getElement(ElementName.LAYERLIST, null, 0);
     }
 
-
-
     /** (25) getCreateLayerList
      * 
      * @return JDFLayerList the element
@@ -582,10 +537,6 @@ public abstract class JDFAutoLayout extends JDFResource
     {
         return (JDFLayerList) getCreateElement_KElement(ElementName.LAYERLIST, null, 0);
     }
-
-
-
-
 
     /**
      * (29) append element LayerList
@@ -605,8 +556,6 @@ public abstract class JDFAutoLayout extends JDFResource
         return (JDFMarkObject)getCreateElement_KElement(ElementName.MARKOBJECT, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element MarkObject
      * @param iSkip number of elements to skip
@@ -617,10 +566,6 @@ public abstract class JDFAutoLayout extends JDFResource
         return (JDFMarkObject) getElement(ElementName.MARKOBJECT, null, iSkip);
     }
 
-
-
-
-
     /**
      * (30) append element MarkObject
      */
@@ -629,29 +574,25 @@ public abstract class JDFAutoLayout extends JDFResource
         return (JDFMarkObject) appendElement(ElementName.MARKOBJECT, null);
     }
 
-    /**
-     * (24) const get element Media
-     * @return JDFMedia the element
-     */
-    public JDFMedia getMedia()
-    {
-        return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
-    }
-
-
-
-    /** (25) getCreateMedia
+    /** (26) getCreateMedia
      * 
+     * @param iSkip number of elements to skip
      * @return JDFMedia the element
      */
-    public JDFMedia getCreateMedia()
+    public JDFMedia getCreateMedia(int iSkip)
     {
-        return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
+        return (JDFMedia)getCreateElement_KElement(ElementName.MEDIA, null, iSkip);
     }
 
-
-
-
+    /**
+     * (27) const get element Media
+     * @param iSkip number of elements to skip
+     * @return JDFMedia the element
+     * default is getMedia(0)     */
+    public JDFMedia getMedia(int iSkip)
+    {
+        return (JDFMedia) getElement(ElementName.MEDIA, null, iSkip);
+    }
 
     /**
      * (30) append element Media
@@ -669,6 +610,7 @@ public abstract class JDFAutoLayout extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element MediaSource
      * @return JDFMediaSource the element
@@ -678,8 +620,6 @@ public abstract class JDFAutoLayout extends JDFResource
         return (JDFMediaSource) getElement(ElementName.MEDIASOURCE, null, 0);
     }
 
-
-
     /** (25) getCreateMediaSource
      * 
      * @return JDFMediaSource the element
@@ -688,10 +628,6 @@ public abstract class JDFAutoLayout extends JDFResource
     {
         return (JDFMediaSource) getCreateElement_KElement(ElementName.MEDIASOURCE, null, 0);
     }
-
-
-
-
 
     /**
      * (29) append element MediaSource
@@ -709,6 +645,7 @@ public abstract class JDFAutoLayout extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateSignature
      * 
      * @param iSkip number of elements to skip
@@ -719,8 +656,6 @@ public abstract class JDFAutoLayout extends JDFResource
         return (JDFSignature)getCreateElement_KElement(ElementName.SIGNATURE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Signature
      * @param iSkip number of elements to skip
@@ -730,10 +665,6 @@ public abstract class JDFAutoLayout extends JDFResource
     {
         return (JDFSignature) getElement(ElementName.SIGNATURE, null, iSkip);
     }
-
-
-
-
 
     /**
      * (30) append element Signature
@@ -752,8 +683,6 @@ public abstract class JDFAutoLayout extends JDFResource
         return (JDFTransferCurvePool) getElement(ElementName.TRANSFERCURVEPOOL, null, 0);
     }
 
-
-
     /** (25) getCreateTransferCurvePool
      * 
      * @return JDFTransferCurvePool the element
@@ -762,10 +691,6 @@ public abstract class JDFAutoLayout extends JDFResource
     {
         return (JDFTransferCurvePool) getCreateElement_KElement(ElementName.TRANSFERCURVEPOOL, null, 0);
     }
-
-
-
-
 
     /**
      * (29) append element TransferCurvePool
@@ -783,4 +708,5 @@ public abstract class JDFAutoLayout extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

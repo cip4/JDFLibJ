@@ -190,8 +190,6 @@ public abstract class JDFAutoNumberItem extends JDFElement
             setAttribute(AttributeName.STARTVALUE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute StartValue
           * @return the value of the attribute
@@ -200,8 +198,6 @@ public abstract class JDFAutoNumberItem extends JDFElement
         {
             return getAttribute(AttributeName.STARTVALUE, null, "1");
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -216,8 +212,6 @@ public abstract class JDFAutoNumberItem extends JDFElement
             setAttribute(AttributeName.STEP, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Step
           * @return int the value of the attribute
@@ -226,8 +220,6 @@ public abstract class JDFAutoNumberItem extends JDFElement
         {
             return getIntAttribute(AttributeName.STEP, null, 1);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -243,8 +235,6 @@ public abstract class JDFAutoNumberItem extends JDFElement
         return (JDFSpanNamedColor) getElement(ElementName.COLORNAME, null, 0);
     }
 
-
-
     /** (25) getCreateColorName
      * 
      * @return JDFSpanNamedColor the element
@@ -254,17 +244,14 @@ public abstract class JDFAutoNumberItem extends JDFElement
         return (JDFSpanNamedColor) getCreateElement_KElement(ElementName.COLORNAME, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementColorName
+     * (29) append element ColorName
      */
     public JDFSpanNamedColor appendColorName() throws JDFException
     {
         return (JDFSpanNamedColor) appendElementN(ElementName.COLORNAME, 1, null);
     }
+
     /**
      * (24) const get element XPosition
      * @return JDFNumberSpan the element
@@ -273,8 +260,6 @@ public abstract class JDFAutoNumberItem extends JDFElement
     {
         return (JDFNumberSpan) getElement(ElementName.XPOSITION, null, 0);
     }
-
-
 
     /** (25) getCreateXPosition
      * 
@@ -285,17 +270,14 @@ public abstract class JDFAutoNumberItem extends JDFElement
         return (JDFNumberSpan) getCreateElement_KElement(ElementName.XPOSITION, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementXPosition
+     * (29) append element XPosition
      */
     public JDFNumberSpan appendXPosition() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.XPOSITION, 1, null);
     }
+
     /**
      * (24) const get element YPosition
      * @return JDFNumberSpan the element
@@ -304,8 +286,6 @@ public abstract class JDFAutoNumberItem extends JDFElement
     {
         return (JDFNumberSpan) getElement(ElementName.YPOSITION, null, 0);
     }
-
-
 
     /** (25) getCreateYPosition
      * 
@@ -316,17 +296,14 @@ public abstract class JDFAutoNumberItem extends JDFElement
         return (JDFNumberSpan) getCreateElement_KElement(ElementName.YPOSITION, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementYPosition
+     * (29) append element YPosition
      */
     public JDFNumberSpan appendYPosition() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.YPOSITION, 1, null);
     }
+
     /**
      * (24) const get element Orientation
      * @return JDFNumberSpan the element
@@ -335,8 +312,6 @@ public abstract class JDFAutoNumberItem extends JDFElement
     {
         return (JDFNumberSpan) getElement(ElementName.ORIENTATION, null, 0);
     }
-
-
 
     /** (25) getCreateOrientation
      * 
@@ -347,17 +322,14 @@ public abstract class JDFAutoNumberItem extends JDFElement
         return (JDFNumberSpan) getCreateElement_KElement(ElementName.ORIENTATION, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementOrientation
+     * (29) append element Orientation
      */
     public JDFNumberSpan appendOrientation() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.ORIENTATION, 1, null);
     }
+
     /**
      * (24) const get element SeparationSpec
      * @return JDFSeparationSpec the element
@@ -366,8 +338,6 @@ public abstract class JDFAutoNumberItem extends JDFElement
     {
         return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, 0);
     }
-
-
 
     /** (25) getCreateSeparationSpec
      * 
@@ -378,15 +348,12 @@ public abstract class JDFAutoNumberItem extends JDFElement
         return (JDFSeparationSpec) getCreateElement_KElement(ElementName.SEPARATIONSPEC, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementSeparationSpec
+     * (29) append element SeparationSpec
      */
     public JDFSeparationSpec appendSeparationSpec() throws JDFException
     {
         return (JDFSeparationSpec) appendElementN(ElementName.SEPARATIONSPEC, 1, null);
     }
+
 }// end namespace JDF

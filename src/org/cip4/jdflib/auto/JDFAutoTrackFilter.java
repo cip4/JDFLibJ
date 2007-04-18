@@ -79,6 +79,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFPart;
     /*
     *****************************************************************************
@@ -187,8 +188,6 @@ public abstract class JDFAutoTrackFilter extends JDFElement
             setAttribute(AttributeName.JOBID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobID
           * @return the value of the attribute
@@ -197,8 +196,6 @@ public abstract class JDFAutoTrackFilter extends JDFElement
         {
             return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -213,8 +210,6 @@ public abstract class JDFAutoTrackFilter extends JDFElement
             setAttribute(AttributeName.JOBPARTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobPartID
           * @return the value of the attribute
@@ -223,8 +218,6 @@ public abstract class JDFAutoTrackFilter extends JDFElement
         {
             return getAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -239,8 +232,6 @@ public abstract class JDFAutoTrackFilter extends JDFElement
             setAttribute(AttributeName.PROJECTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ProjectID
           * @return the value of the attribute
@@ -249,8 +240,6 @@ public abstract class JDFAutoTrackFilter extends JDFElement
         {
             return getAttribute(AttributeName.PROJECTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -265,8 +254,6 @@ public abstract class JDFAutoTrackFilter extends JDFElement
             setAttribute(AttributeName.QUEUEENTRYID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute QueueEntryID
           * @return the value of the attribute
@@ -275,8 +262,6 @@ public abstract class JDFAutoTrackFilter extends JDFElement
         {
             return getAttribute(AttributeName.QUEUEENTRYID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -293,8 +278,6 @@ public abstract class JDFAutoTrackFilter extends JDFElement
         return (JDFPart)getCreateElement_KElement(ElementName.PART, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Part
      * @param iSkip number of elements to skip
@@ -305,9 +288,10 @@ public abstract class JDFAutoTrackFilter extends JDFElement
         return (JDFPart) getElement(ElementName.PART, null, iSkip);
     }
 
-
-
-    public JDFPart appendPart()
+    /**
+     * (30) append element Part
+     */
+    public JDFPart appendPart() throws JDFException
     {
         return (JDFPart) appendElement(ElementName.PART, null);
     }

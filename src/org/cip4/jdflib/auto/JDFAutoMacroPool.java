@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.devicecapability.JDFmacro;
     /*
     *****************************************************************************
@@ -165,8 +166,6 @@ public abstract class JDFAutoMacroPool extends JDFElement
         return (JDFmacro)getCreateElement_KElement(ElementName.MACRO, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element macro
      * @param iSkip number of elements to skip
@@ -177,9 +176,10 @@ public abstract class JDFAutoMacroPool extends JDFElement
         return (JDFmacro) getElement(ElementName.MACRO, null, iSkip);
     }
 
-
-
-    public JDFmacro appendmacro()
+    /**
+     * (30) append element macro
+     */
+    public JDFmacro appendmacro() throws JDFException
     {
         return (JDFmacro) appendElement(ElementName.MACRO, null);
     }

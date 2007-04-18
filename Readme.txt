@@ -1,4 +1,32 @@
 
+Label JDFLIBJ_2.1.2BLD421 (13.04.2007)
+
+Fix JDFResourceLink.isexecutable to analyze minstatus
+do not write resource/AgentName by default
+bug when spawning / merging partitioned jdf1.3 nodeinfo
+bug when creating partitioned spawn and merge audits
+replace deprecated function call KElement buildXPath(null)) with buildXPath(null,true))
+fix organize imports
+
+Changed files:
+ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD421) && !lbtype(JDFLIBJ_2.1.3BLD420)}" -print
+.\cformat\PrintfFormat.java@@\main\3
+.\cformat\ScanfReader.java@@\main\2
+.\core\DocumentJDFImpl.java@@\main\91
+.\core\JDFParser.java@@\main\42
+.\core\XMLDocUserData.java@@\main\26
+.\pool\JDFAuditPool.java@@\main\93
+.\resource\devicecapability\JDFDevCap.java@@\main\47
+.\resource\devicecapability\JDFDevCaps.java@@\main\34
+.\resource\devicecapability\JDFDeviceCap.java@@\main\46
+.\resource\devicecapability\JDFEvaluation.java@@\main\22
+.\resource\JDFResource.java@@\main\212
+.\resource\JDFResourceAudit.java@@\main\33
+.\util\JDFMerge.java@@\main\10
+.\util\JDFSpawn.java@@\main\14
+___________________________________________________________
+
+
 Label JDFLIBJ_2.1.2BLD420 (29.03.2007)
 
 fix for JDFDate memory

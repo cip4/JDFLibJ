@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFLayerDetails;
     /*
     *****************************************************************************
@@ -165,8 +166,6 @@ public abstract class JDFAutoLayerList extends JDFElement
         return (JDFLayerDetails)getCreateElement_KElement(ElementName.LAYERDETAILS, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element LayerDetails
      * @param iSkip number of elements to skip
@@ -177,9 +176,10 @@ public abstract class JDFAutoLayerList extends JDFElement
         return (JDFLayerDetails) getElement(ElementName.LAYERDETAILS, null, iSkip);
     }
 
-
-
-    public JDFLayerDetails appendLayerDetails()
+    /**
+     * (30) append element LayerDetails
+     */
+    public JDFLayerDetails appendLayerDetails() throws JDFException
     {
         return (JDFLayerDetails) appendElement(ElementName.LAYERDETAILS, null);
     }

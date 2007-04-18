@@ -189,11 +189,9 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
             setAttribute(AttributeName.FOLDS, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute Folds
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getFolds()
@@ -212,8 +210,6 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
             return nPlaceHolder;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -228,8 +224,6 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
         return (JDFNameSpan) getElement(ElementName.FOLDINGCATALOG, null, 0);
     }
 
-
-
     /** (25) getCreateFoldingCatalog
      * 
      * @return JDFNameSpan the element
@@ -239,17 +233,14 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
         return (JDFNameSpan) getCreateElement_KElement(ElementName.FOLDINGCATALOG, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFoldingCatalog
+     * (29) append element FoldingCatalog
      */
     public JDFNameSpan appendFoldingCatalog() throws JDFException
     {
         return (JDFNameSpan) appendElementN(ElementName.FOLDINGCATALOG, 1, null);
     }
+
     /** (26) getCreateFold
      * 
      * @param iSkip number of elements to skip
@@ -259,8 +250,6 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
     {
         return (JDFFold)getCreateElement_KElement(ElementName.FOLD, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Fold
@@ -272,9 +261,10 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
         return (JDFFold) getElement(ElementName.FOLD, null, iSkip);
     }
 
-
-
-    public JDFFold appendFold()
+    /**
+     * (30) append element Fold
+     */
+    public JDFFold appendFold() throws JDFException
     {
         return (JDFFold) appendElement(ElementName.FOLD, null);
     }

@@ -78,6 +78,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFPRGroup;
     /*
     *****************************************************************************
@@ -182,8 +183,6 @@ public abstract class JDFAutoPROccurrence extends JDFElement
             setAttribute(AttributeName.OCCURRENCES, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Occurrences
           * @return int the value of the attribute
@@ -192,8 +191,6 @@ public abstract class JDFAutoPROccurrence extends JDFElement
         {
             return getIntAttribute(AttributeName.OCCURRENCES, null, 0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -210,8 +207,6 @@ public abstract class JDFAutoPROccurrence extends JDFElement
         return (JDFPRGroup)getCreateElement_KElement(ElementName.PRGROUP, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element PRGroup
      * @param iSkip number of elements to skip
@@ -222,9 +217,10 @@ public abstract class JDFAutoPROccurrence extends JDFElement
         return (JDFPRGroup) getElement(ElementName.PRGROUP, null, iSkip);
     }
 
-
-
-    public JDFPRGroup appendPRGroup()
+    /**
+     * (30) append element PRGroup
+     */
+    public JDFPRGroup appendPRGroup() throws JDFException
     {
         return (JDFPRGroup) appendElement(ElementName.PRGROUP, null);
     }

@@ -74,6 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFLongFold;
 import org.cip4.jdflib.resource.process.JDFLongGlue;
@@ -185,8 +186,6 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
         return (JDFLongFold)getCreateElement_KElement(ElementName.LONGFOLD, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element LongFold
      * @param iSkip number of elements to skip
@@ -197,9 +196,10 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
         return (JDFLongFold) getElement(ElementName.LONGFOLD, null, iSkip);
     }
 
-
-
-    public JDFLongFold appendLongFold()
+    /**
+     * (30) append element LongFold
+     */
+    public JDFLongFold appendLongFold() throws JDFException
     {
         return (JDFLongFold) appendElement(ElementName.LONGFOLD, null);
     }
@@ -214,8 +214,6 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
         return (JDFLongGlue)getCreateElement_KElement(ElementName.LONGGLUE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element LongGlue
      * @param iSkip number of elements to skip
@@ -226,9 +224,10 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
         return (JDFLongGlue) getElement(ElementName.LONGGLUE, null, iSkip);
     }
 
-
-
-    public JDFLongGlue appendLongGlue()
+    /**
+     * (30) append element LongGlue
+     */
+    public JDFLongGlue appendLongGlue() throws JDFException
     {
         return (JDFLongGlue) appendElement(ElementName.LONGGLUE, null);
     }
@@ -243,8 +242,6 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
         return (JDFLongPerforate)getCreateElement_KElement(ElementName.LONGPERFORATE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element LongPerforate
      * @param iSkip number of elements to skip
@@ -255,9 +252,10 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
         return (JDFLongPerforate) getElement(ElementName.LONGPERFORATE, null, iSkip);
     }
 
-
-
-    public JDFLongPerforate appendLongPerforate()
+    /**
+     * (30) append element LongPerforate
+     */
+    public JDFLongPerforate appendLongPerforate() throws JDFException
     {
         return (JDFLongPerforate) appendElement(ElementName.LONGPERFORATE, null);
     }
@@ -272,8 +270,6 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
         return (JDFLongSlit)getCreateElement_KElement(ElementName.LONGSLIT, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element LongSlit
      * @param iSkip number of elements to skip
@@ -284,9 +280,10 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
         return (JDFLongSlit) getElement(ElementName.LONGSLIT, null, iSkip);
     }
 
-
-
-    public JDFLongSlit appendLongSlit()
+    /**
+     * (30) append element LongSlit
+     */
+    public JDFLongSlit appendLongSlit() throws JDFException
     {
         return (JDFLongSlit) appendElement(ElementName.LONGSLIT, null);
     }

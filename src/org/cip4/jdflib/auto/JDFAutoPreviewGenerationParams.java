@@ -399,8 +399,6 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
             setAttribute(AttributeName.ASPECTRATIO, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute AspectRatio
           * @return the value of the attribute
@@ -409,8 +407,6 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
         {
             return EnumAspectRatio.getEnum(getAttribute(AttributeName.ASPECTRATIO, null, "Ignore"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -425,8 +421,6 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
             setAttribute(AttributeName.PREVIEWFILETYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute PreviewFileType
           * @return the value of the attribute
@@ -435,8 +429,6 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
         {
             return EnumPreviewFileType.getEnum(getAttribute(AttributeName.PREVIEWFILETYPE, null, "PNG"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -451,8 +443,6 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
             setAttribute(AttributeName.PREVIEWUSAGE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute PreviewUsage
           * @return the value of the attribute
@@ -461,8 +451,6 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
         {
             return EnumPreviewUsage.getEnum(getAttribute(AttributeName.PREVIEWUSAGE, null, "Separation"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -477,8 +465,6 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
             setAttribute(AttributeName.COMPENSATION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Compensation
           * @return the value of the attribute
@@ -487,8 +473,6 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
         {
             return EnumCompensation.getEnum(getAttribute(AttributeName.COMPENSATION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -502,8 +486,6 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
         {
             setAttribute(AttributeName.RESOLUTION, value, null);
         }
-
-
 
         /**
           * (20) get JDFXYPair attribute Resolution
@@ -526,8 +508,6 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Size
@@ -540,8 +520,6 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
         {
             setAttribute(AttributeName.SIZE, value, null);
         }
-
-
 
         /**
           * (20) get JDFXYPair attribute Size
@@ -564,8 +542,6 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -580,8 +556,6 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
         return (JDFImageSetterParams) getElement(ElementName.IMAGESETTERPARAMS, null, 0);
     }
 
-
-
     /** (25) getCreateImageSetterParams
      * 
      * @return JDFImageSetterParams the element
@@ -591,17 +565,14 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
         return (JDFImageSetterParams) getCreateElement_KElement(ElementName.IMAGESETTERPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementImageSetterParams
+     * (29) append element ImageSetterParams
      */
     public JDFImageSetterParams appendImageSetterParams() throws JDFException
     {
         return (JDFImageSetterParams) appendElementN(ElementName.IMAGESETTERPARAMS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -610,4 +581,5 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

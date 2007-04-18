@@ -74,6 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFLayoutElementPart;
     /*
@@ -179,8 +180,6 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
         return (JDFLayoutElementPart)getCreateElement_KElement(ElementName.LAYOUTELEMENTPART, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element LayoutElementPart
      * @param iSkip number of elements to skip
@@ -191,9 +190,10 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
         return (JDFLayoutElementPart) getElement(ElementName.LAYOUTELEMENTPART, null, iSkip);
     }
 
-
-
-    public JDFLayoutElementPart appendLayoutElementPart()
+    /**
+     * (30) append element LayoutElementPart
+     */
+    public JDFLayoutElementPart appendLayoutElementPart() throws JDFException
     {
         return (JDFLayoutElementPart) appendElement(ElementName.LAYOUTELEMENTPART, null);
     }

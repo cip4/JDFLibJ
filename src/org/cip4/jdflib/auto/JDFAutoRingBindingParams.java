@@ -259,8 +259,6 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
             setAttribute(AttributeName.BINDERCOLOR, value.getName(), null);
         }
 
-
-
         /**
           * (19) get EnumNamedColor attribute BinderColor
           * @return EnumNamedColor the value of the attribute
@@ -273,8 +271,6 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
             nPlaceHolder = EnumNamedColor.getEnum(strAttrName);
             return nPlaceHolder;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -289,8 +285,6 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
             setAttribute(AttributeName.BINDERMATERIAL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute BinderMaterial
           * @return the value of the attribute
@@ -299,8 +293,6 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
         {
             return getAttribute(AttributeName.BINDERMATERIAL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -315,8 +307,6 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
             setAttribute(AttributeName.BINDERNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute BinderName
           * @return the value of the attribute
@@ -325,8 +315,6 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
         {
             return getAttribute(AttributeName.BINDERNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -341,8 +329,6 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
             setAttribute(AttributeName.RINGDIAMETER, value, null);
         }
 
-
-
         /**
           * (17) get double attribute RingDiameter
           * @return double the value of the attribute
@@ -351,8 +337,6 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.RINGDIAMETER, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -367,8 +351,6 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
             setAttribute(AttributeName.RINGMECHANIC, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute RingMechanic
           * @return boolean the value of the attribute
@@ -377,8 +359,6 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.RINGMECHANIC, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -393,8 +373,6 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
             setAttribute(AttributeName.RINGSHAPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute RingShape
           * @return the value of the attribute
@@ -403,8 +381,6 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
         {
             return getAttribute(AttributeName.RINGSHAPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -419,8 +395,6 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
             setAttribute(AttributeName.RINGSYSTEM, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute RingSystem
           * @return the value of the attribute
@@ -429,8 +403,6 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
         {
             return EnumRingSystem.getEnum(getAttribute(AttributeName.RINGSYSTEM, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -445,8 +417,6 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
             setAttribute(AttributeName.RIVETSEXPOSED, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute RivetsExposed
           * @return boolean the value of the attribute
@@ -455,8 +425,6 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.RIVETSEXPOSED, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -471,8 +439,6 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
             setAttribute(AttributeName.SPINECOLOR, value.getName(), null);
         }
 
-
-
         /**
           * (19) get EnumNamedColor attribute SpineColor
           * @return EnumNamedColor the value of the attribute
@@ -485,8 +451,6 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
             nPlaceHolder = EnumNamedColor.getEnum(strAttrName);
             return nPlaceHolder;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -501,8 +465,6 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
             setAttribute(AttributeName.SPINEWIDTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute SpineWidth
           * @return double the value of the attribute
@@ -511,8 +473,6 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.SPINEWIDTH, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -527,8 +487,6 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
             setAttribute(AttributeName.VIEWBINDER, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ViewBinder
           * @return the value of the attribute
@@ -537,8 +495,6 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
         {
             return getAttribute(AttributeName.VIEWBINDER, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -554,8 +510,6 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
         return (JDFHoleMakingParams) getElement(ElementName.HOLEMAKINGPARAMS, null, 0);
     }
 
-
-
     /** (25) getCreateHoleMakingParams
      * 
      * @return JDFHoleMakingParams the element
@@ -565,17 +519,14 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
         return (JDFHoleMakingParams) getCreateElement_KElement(ElementName.HOLEMAKINGPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementHoleMakingParams
+     * (29) append element HoleMakingParams
      */
     public JDFHoleMakingParams appendHoleMakingParams() throws JDFException
     {
         return (JDFHoleMakingParams) appendElementN(ElementName.HOLEMAKINGPARAMS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -584,4 +535,5 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

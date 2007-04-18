@@ -220,8 +220,6 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
             setAttribute(AttributeName.CURRENTVALUE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute CurrentValue
           * @return the value of the attribute
@@ -230,8 +228,6 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
         {
             return getAttribute(AttributeName.CURRENTVALUE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -246,8 +242,6 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
             setAttribute(AttributeName.EDITABLE, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Editable
           * @return boolean the value of the attribute
@@ -256,8 +250,6 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
         {
             return getBoolAttribute(AttributeName.EDITABLE, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -272,8 +264,6 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
             setAttribute(AttributeName.USERDISPLAY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute UserDisplay
           * @return the value of the attribute
@@ -282,7 +272,5 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
         {
             return EnumUserDisplay.getEnum(getAttribute(AttributeName.USERDISPLAY, null, null));
         }
-
-
 
 }// end namespace JDF

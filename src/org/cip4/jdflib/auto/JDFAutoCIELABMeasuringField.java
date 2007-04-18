@@ -266,8 +266,6 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
             setAttribute(AttributeName.CENTER, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute Center
           * @return JDFXYPair the value of the attribute, null if a the
@@ -289,8 +287,6 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute CIELab
@@ -303,8 +299,6 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
         {
             setAttribute(AttributeName.CIELAB, value, null);
         }
-
-
 
         /**
           * (20) get JDFLabColor attribute CIELab
@@ -327,8 +321,6 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute DensityStandard
@@ -342,8 +334,6 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
             setAttribute(AttributeName.DENSITYSTANDARD, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute DensityStandard
           * @return the value of the attribute
@@ -352,8 +342,6 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
         {
             return EnumDensityStandard.getEnum(getAttribute(AttributeName.DENSITYSTANDARD, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -368,8 +356,6 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
             setAttribute(AttributeName.DIAMETER, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Diameter
           * @return double the value of the attribute
@@ -378,8 +364,6 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
         {
             return getRealAttribute(AttributeName.DIAMETER, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -394,8 +378,6 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
             setAttribute(AttributeName.LIGHT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Light
           * @return the value of the attribute
@@ -404,8 +386,6 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
         {
             return getAttribute(AttributeName.LIGHT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -420,8 +400,6 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
             setAttribute(AttributeName.OBSERVER, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Observer
           * @return int the value of the attribute
@@ -430,8 +408,6 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
         {
             return getIntAttribute(AttributeName.OBSERVER, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -445,8 +421,6 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
         {
             setAttribute(AttributeName.PERCENTAGES, value, null);
         }
-
-
 
         /**
           * (20) get JDFNumberList attribute Percentages
@@ -469,8 +443,6 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ScreenRuling
@@ -483,8 +455,6 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
         {
             setAttribute(AttributeName.SCREENRULING, value, null);
         }
-
-
 
         /**
           * (20) get JDFNumberList attribute ScreenRuling
@@ -507,8 +477,6 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ScreenShape
@@ -522,8 +490,6 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
             setAttribute(AttributeName.SCREENSHAPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ScreenShape
           * @return the value of the attribute
@@ -532,8 +498,6 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
         {
             return getAttribute(AttributeName.SCREENSHAPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -548,8 +512,6 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
             setAttribute(AttributeName.SETUP, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Setup
           * @return the value of the attribute
@@ -558,8 +520,6 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
         {
             return getAttribute(AttributeName.SETUP, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -574,8 +534,6 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
             setAttribute(AttributeName.TOLERANCE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Tolerance
           * @return double the value of the attribute
@@ -584,8 +542,6 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
         {
             return getRealAttribute(AttributeName.TOLERANCE, null, 0.0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -601,8 +557,6 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
         return (JDFColorMeasurementConditions) getElement(ElementName.COLORMEASUREMENTCONDITIONS, null, 0);
     }
 
-
-
     /** (25) getCreateColorMeasurementConditions
      * 
      * @return JDFColorMeasurementConditions the element
@@ -612,17 +566,14 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
         return (JDFColorMeasurementConditions) getCreateElement_KElement(ElementName.COLORMEASUREMENTCONDITIONS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementColorMeasurementConditions
+     * (29) append element ColorMeasurementConditions
      */
     public JDFColorMeasurementConditions appendColorMeasurementConditions() throws JDFException
     {
         return (JDFColorMeasurementConditions) appendElementN(ElementName.COLORMEASUREMENTCONDITIONS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -631,4 +582,5 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

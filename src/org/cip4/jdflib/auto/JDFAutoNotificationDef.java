@@ -223,8 +223,6 @@ public abstract class JDFAutoNotificationDef extends JDFElement
             setEnumerationsAttribute(AttributeName.CLASSES, v, null);
         }
 
-
-
         /**
           * (9.2) get Classes attribute Classes
           * @return Vector of the enumerations
@@ -233,8 +231,6 @@ public abstract class JDFAutoNotificationDef extends JDFElement
         {
             return getEnumerationsAttribute(AttributeName.CLASSES, null, EnumClasses.getEnum(0), false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -249,8 +245,6 @@ public abstract class JDFAutoNotificationDef extends JDFElement
             setAttribute(AttributeName.SIGNALTYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute SignalType
           * @return the value of the attribute
@@ -259,8 +253,6 @@ public abstract class JDFAutoNotificationDef extends JDFElement
         {
             return getAttribute(AttributeName.SIGNALTYPE, null, "Notification");
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -275,8 +267,6 @@ public abstract class JDFAutoNotificationDef extends JDFElement
             setAttribute(AttributeName.TYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Type
           * @return the value of the attribute
@@ -285,7 +275,5 @@ public abstract class JDFAutoNotificationDef extends JDFElement
         {
             return getAttribute(AttributeName.TYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

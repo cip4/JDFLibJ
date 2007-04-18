@@ -286,8 +286,6 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
             setAttribute(AttributeName.NUMBEROFNEEDLES, value, null);
         }
 
-
-
         /**
           * (15) get int attribute NumberOfNeedles
           * @return int the value of the attribute
@@ -296,8 +294,6 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
         {
             return getIntAttribute(AttributeName.NUMBEROFNEEDLES, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -312,8 +308,6 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
             setAttribute(AttributeName.OFFSET, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Offset
           * @return double the value of the attribute
@@ -322,8 +316,6 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.OFFSET, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -337,8 +329,6 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
         {
             setAttribute(AttributeName.NEEDLEPOSITIONS, value, null);
         }
-
-
 
         /**
           * (20) get JDFNumberList attribute NeedlePositions
@@ -361,8 +351,6 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute SewingPattern
@@ -376,8 +364,6 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
             setAttribute(AttributeName.SEWINGPATTERN, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute SewingPattern
           * @return the value of the attribute
@@ -386,8 +372,6 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
         {
             return EnumSewingPattern.getEnum(getAttribute(AttributeName.SEWINGPATTERN, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -402,8 +386,6 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
             setAttribute(AttributeName.THREADMATERIAL, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ThreadMaterial
           * @return the value of the attribute
@@ -412,8 +394,6 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
         {
             return EnumThreadMaterial.getEnum(getAttribute(AttributeName.THREADMATERIAL, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -428,8 +408,6 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
             setAttribute(AttributeName.THREADTHICKNESS, value, null);
         }
 
-
-
         /**
           * (17) get double attribute ThreadThickness
           * @return double the value of the attribute
@@ -438,8 +416,6 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.THREADTHICKNESS, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -454,8 +430,6 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
             setAttribute(AttributeName.THREADBRAND, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ThreadBrand
           * @return the value of the attribute
@@ -464,7 +438,5 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
         {
             return getAttribute(AttributeName.THREADBRAND, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

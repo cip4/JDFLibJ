@@ -357,8 +357,6 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
             setAttribute(AttributeName.CENTERREFERENCE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute CenterReference
           * @return the value of the attribute
@@ -367,8 +365,6 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
         {
             return EnumCenterReference.getEnum(getAttribute(AttributeName.CENTERREFERENCE, null, "TrailingEdge"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -383,8 +379,6 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
             setEnumerationsAttribute(AttributeName.HOLETYPE, v, null);
         }
 
-
-
         /**
           * (9.2) get HoleType attribute HoleType
           * @return Vector of the enumerations
@@ -393,8 +387,6 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
         {
             return getEnumerationsAttribute(AttributeName.HOLETYPE, null, JDFMedia.EnumHoleType.getEnum(0), false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -409,11 +401,9 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
             setAttribute(AttributeName.CENTER, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute Center
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getCenter()
@@ -432,8 +422,6 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Extent
@@ -447,11 +435,9 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
             setAttribute(AttributeName.EXTENT, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute Extent
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getExtent()
@@ -470,8 +456,6 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute HoleCount
@@ -485,11 +469,9 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
             setAttribute(AttributeName.HOLECOUNT, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerList attribute HoleCount
-          * @return JDFIntegerListthe value of the attribute, null if a the
+          * @return JDFIntegerList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerList
           */
         public JDFIntegerList getHoleCount()
@@ -508,8 +490,6 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute HoleReferenceEdge
@@ -523,8 +503,6 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
             setAttribute(AttributeName.HOLEREFERENCEEDGE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute HoleReferenceEdge
           * @return the value of the attribute
@@ -533,8 +511,6 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
         {
             return EnumHoleReferenceEdge.getEnum(getAttribute(AttributeName.HOLEREFERENCEEDGE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -549,8 +525,6 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
             setAttribute(AttributeName.SHAPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Shape
           * @return the value of the attribute
@@ -559,8 +533,6 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
         {
             return EnumShape.getEnum(getAttribute(AttributeName.SHAPE, null, null));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -577,8 +549,6 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
         return (JDFHole)getCreateElement_KElement(ElementName.HOLE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Hole
      * @param iSkip number of elements to skip
@@ -589,9 +559,10 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
         return (JDFHole) getElement(ElementName.HOLE, null, iSkip);
     }
 
-
-
-    public JDFHole appendHole()
+    /**
+     * (30) append element Hole
+     */
+    public JDFHole appendHole() throws JDFException
     {
         return (JDFHole) appendElement(ElementName.HOLE, null);
     }
@@ -606,8 +577,6 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
         return (JDFHoleLine)getCreateElement_KElement(ElementName.HOLELINE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element HoleLine
      * @param iSkip number of elements to skip
@@ -618,9 +587,10 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
         return (JDFHoleLine) getElement(ElementName.HOLELINE, null, iSkip);
     }
 
-
-
-    public JDFHoleLine appendHoleLine()
+    /**
+     * (30) append element HoleLine
+     */
+    public JDFHoleLine appendHoleLine() throws JDFException
     {
         return (JDFHoleLine) appendElement(ElementName.HOLELINE, null);
     }
@@ -634,8 +604,6 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
         return (JDFRegisterMark) getElement(ElementName.REGISTERMARK, null, 0);
     }
 
-
-
     /** (25) getCreateRegisterMark
      * 
      * @return JDFRegisterMark the element
@@ -645,17 +613,14 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
         return (JDFRegisterMark) getCreateElement_KElement(ElementName.REGISTERMARK, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementRegisterMark
+     * (29) append element RegisterMark
      */
     public JDFRegisterMark appendRegisterMark() throws JDFException
     {
         return (JDFRegisterMark) appendElementN(ElementName.REGISTERMARK, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -664,4 +629,5 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

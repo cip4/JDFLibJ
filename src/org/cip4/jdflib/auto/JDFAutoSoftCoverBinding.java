@@ -182,8 +182,6 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
         return (JDFOptionSpan) getElement(ElementName.BLOCKTHREADSEWING, null, 0);
     }
 
-
-
     /** (25) getCreateBlockThreadSewing
      * 
      * @return JDFOptionSpan the element
@@ -193,17 +191,14 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
         return (JDFOptionSpan) getCreateElement_KElement(ElementName.BLOCKTHREADSEWING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementBlockThreadSewing
+     * (29) append element BlockThreadSewing
      */
     public JDFOptionSpan appendBlockThreadSewing() throws JDFException
     {
         return (JDFOptionSpan) appendElementN(ElementName.BLOCKTHREADSEWING, 1, null);
     }
+
     /**
      * (24) const get element EndSheets
      * @return JDFOptionSpan the element
@@ -212,8 +207,6 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
     {
         return (JDFOptionSpan) getElement(ElementName.ENDSHEETS, null, 0);
     }
-
-
 
     /** (25) getCreateEndSheets
      * 
@@ -224,17 +217,14 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
         return (JDFOptionSpan) getCreateElement_KElement(ElementName.ENDSHEETS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementEndSheets
+     * (29) append element EndSheets
      */
     public JDFOptionSpan appendEndSheets() throws JDFException
     {
         return (JDFOptionSpan) appendElementN(ElementName.ENDSHEETS, 1, null);
     }
+
     /**
      * (24) const get element FoldingWidth
      * @return JDFNumberSpan the element
@@ -243,8 +233,6 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
     {
         return (JDFNumberSpan) getElement(ElementName.FOLDINGWIDTH, null, 0);
     }
-
-
 
     /** (25) getCreateFoldingWidth
      * 
@@ -255,17 +243,14 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
         return (JDFNumberSpan) getCreateElement_KElement(ElementName.FOLDINGWIDTH, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFoldingWidth
+     * (29) append element FoldingWidth
      */
     public JDFNumberSpan appendFoldingWidth() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.FOLDINGWIDTH, 1, null);
     }
+
     /**
      * (24) const get element FoldingWidthBack
      * @return JDFNumberSpan the element
@@ -274,8 +259,6 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
     {
         return (JDFNumberSpan) getElement(ElementName.FOLDINGWIDTHBACK, null, 0);
     }
-
-
 
     /** (25) getCreateFoldingWidthBack
      * 
@@ -286,17 +269,14 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
         return (JDFNumberSpan) getCreateElement_KElement(ElementName.FOLDINGWIDTHBACK, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFoldingWidthBack
+     * (29) append element FoldingWidthBack
      */
     public JDFNumberSpan appendFoldingWidthBack() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.FOLDINGWIDTHBACK, 1, null);
     }
+
     /**
      * (24) const get element GlueProcedure
      * @return JDFSpanGlueProcedure the element
@@ -305,8 +285,6 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
     {
         return (JDFSpanGlueProcedure) getElement(ElementName.GLUEPROCEDURE, null, 0);
     }
-
-
 
     /** (25) getCreateGlueProcedure
      * 
@@ -317,17 +295,14 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
         return (JDFSpanGlueProcedure) getCreateElement_KElement(ElementName.GLUEPROCEDURE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementGlueProcedure
+     * (29) append element GlueProcedure
      */
     public JDFSpanGlueProcedure appendGlueProcedure() throws JDFException
     {
         return (JDFSpanGlueProcedure) appendElementN(ElementName.GLUEPROCEDURE, 1, null);
     }
+
     /**
      * (24) const get element Scoring
      * @return JDFSpanScoring the element
@@ -336,8 +311,6 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
     {
         return (JDFSpanScoring) getElement(ElementName.SCORING, null, 0);
     }
-
-
 
     /** (25) getCreateScoring
      * 
@@ -348,17 +321,14 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
         return (JDFSpanScoring) getCreateElement_KElement(ElementName.SCORING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementScoring
+     * (29) append element Scoring
      */
     public JDFSpanScoring appendScoring() throws JDFException
     {
         return (JDFSpanScoring) appendElementN(ElementName.SCORING, 1, null);
     }
+
     /**
      * (24) const get element SpineBrushing
      * @return JDFOptionSpan the element
@@ -367,8 +337,6 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
     {
         return (JDFOptionSpan) getElement(ElementName.SPINEBRUSHING, null, 0);
     }
-
-
 
     /** (25) getCreateSpineBrushing
      * 
@@ -379,17 +347,14 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
         return (JDFOptionSpan) getCreateElement_KElement(ElementName.SPINEBRUSHING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementSpineBrushing
+     * (29) append element SpineBrushing
      */
     public JDFOptionSpan appendSpineBrushing() throws JDFException
     {
         return (JDFOptionSpan) appendElementN(ElementName.SPINEBRUSHING, 1, null);
     }
+
     /**
      * (24) const get element SpineFiberRoughing
      * @return JDFOptionSpan the element
@@ -398,8 +363,6 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
     {
         return (JDFOptionSpan) getElement(ElementName.SPINEFIBERROUGHING, null, 0);
     }
-
-
 
     /** (25) getCreateSpineFiberRoughing
      * 
@@ -410,17 +373,14 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
         return (JDFOptionSpan) getCreateElement_KElement(ElementName.SPINEFIBERROUGHING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementSpineFiberRoughing
+     * (29) append element SpineFiberRoughing
      */
     public JDFOptionSpan appendSpineFiberRoughing() throws JDFException
     {
         return (JDFOptionSpan) appendElementN(ElementName.SPINEFIBERROUGHING, 1, null);
     }
+
     /**
      * (24) const get element SpineGlue
      * @return JDFSpanGlue the element
@@ -429,8 +389,6 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
     {
         return (JDFSpanGlue) getElement(ElementName.SPINEGLUE, null, 0);
     }
-
-
 
     /** (25) getCreateSpineGlue
      * 
@@ -441,17 +399,14 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
         return (JDFSpanGlue) getCreateElement_KElement(ElementName.SPINEGLUE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementSpineGlue
+     * (29) append element SpineGlue
      */
     public JDFSpanGlue appendSpineGlue() throws JDFException
     {
         return (JDFSpanGlue) appendElementN(ElementName.SPINEGLUE, 1, null);
     }
+
     /**
      * (24) const get element SpineLevelling
      * @return JDFOptionSpan the element
@@ -460,8 +415,6 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
     {
         return (JDFOptionSpan) getElement(ElementName.SPINELEVELLING, null, 0);
     }
-
-
 
     /** (25) getCreateSpineLevelling
      * 
@@ -472,17 +425,14 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
         return (JDFOptionSpan) getCreateElement_KElement(ElementName.SPINELEVELLING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementSpineLevelling
+     * (29) append element SpineLevelling
      */
     public JDFOptionSpan appendSpineLevelling() throws JDFException
     {
         return (JDFOptionSpan) appendElementN(ElementName.SPINELEVELLING, 1, null);
     }
+
     /**
      * (24) const get element SpineMilling
      * @return JDFOptionSpan the element
@@ -491,8 +441,6 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
     {
         return (JDFOptionSpan) getElement(ElementName.SPINEMILLING, null, 0);
     }
-
-
 
     /** (25) getCreateSpineMilling
      * 
@@ -503,17 +451,14 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
         return (JDFOptionSpan) getCreateElement_KElement(ElementName.SPINEMILLING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementSpineMilling
+     * (29) append element SpineMilling
      */
     public JDFOptionSpan appendSpineMilling() throws JDFException
     {
         return (JDFOptionSpan) appendElementN(ElementName.SPINEMILLING, 1, null);
     }
+
     /**
      * (24) const get element SpineNotching
      * @return JDFOptionSpan the element
@@ -522,8 +467,6 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
     {
         return (JDFOptionSpan) getElement(ElementName.SPINENOTCHING, null, 0);
     }
-
-
 
     /** (25) getCreateSpineNotching
      * 
@@ -534,17 +477,14 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
         return (JDFOptionSpan) getCreateElement_KElement(ElementName.SPINENOTCHING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementSpineNotching
+     * (29) append element SpineNotching
      */
     public JDFOptionSpan appendSpineNotching() throws JDFException
     {
         return (JDFOptionSpan) appendElementN(ElementName.SPINENOTCHING, 1, null);
     }
+
     /**
      * (24) const get element SpineSanding
      * @return JDFOptionSpan the element
@@ -553,8 +493,6 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
     {
         return (JDFOptionSpan) getElement(ElementName.SPINESANDING, null, 0);
     }
-
-
 
     /** (25) getCreateSpineSanding
      * 
@@ -565,17 +503,14 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
         return (JDFOptionSpan) getCreateElement_KElement(ElementName.SPINESANDING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementSpineSanding
+     * (29) append element SpineSanding
      */
     public JDFOptionSpan appendSpineSanding() throws JDFException
     {
         return (JDFOptionSpan) appendElementN(ElementName.SPINESANDING, 1, null);
     }
+
     /**
      * (24) const get element SpineShredding
      * @return JDFOptionSpan the element
@@ -584,8 +519,6 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
     {
         return (JDFOptionSpan) getElement(ElementName.SPINESHREDDING, null, 0);
     }
-
-
 
     /** (25) getCreateSpineShredding
      * 
@@ -596,15 +529,12 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
         return (JDFOptionSpan) getCreateElement_KElement(ElementName.SPINESHREDDING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementSpineShredding
+     * (29) append element SpineShredding
      */
     public JDFOptionSpan appendSpineShredding() throws JDFException
     {
         return (JDFOptionSpan) appendElementN(ElementName.SPINESHREDDING, 1, null);
     }
+
 }// end namespace JDF

@@ -231,11 +231,9 @@ public abstract class JDFAutoPosition extends JDFElement
             setAttribute(AttributeName.ABSOLUTEBOX, value, null);
         }
 
-
-
         /**
           * (20) get JDFRectangle attribute AbsoluteBox
-          * @return JDFRectanglethe value of the attribute, null if a the
+          * @return JDFRectangle the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFRectangle
           */
         public JDFRectangle getAbsoluteBox()
@@ -254,8 +252,6 @@ public abstract class JDFAutoPosition extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute MarginBottom
@@ -269,8 +265,6 @@ public abstract class JDFAutoPosition extends JDFElement
             setAttribute(AttributeName.MARGINBOTTOM, value, null);
         }
 
-
-
         /**
           * (17) get double attribute MarginBottom
           * @return double the value of the attribute
@@ -279,8 +273,6 @@ public abstract class JDFAutoPosition extends JDFElement
         {
             return getRealAttribute(AttributeName.MARGINBOTTOM, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -295,8 +287,6 @@ public abstract class JDFAutoPosition extends JDFElement
             setAttribute(AttributeName.MARGINTOP, value, null);
         }
 
-
-
         /**
           * (17) get double attribute MarginTop
           * @return double the value of the attribute
@@ -305,8 +295,6 @@ public abstract class JDFAutoPosition extends JDFElement
         {
             return getRealAttribute(AttributeName.MARGINTOP, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -321,8 +309,6 @@ public abstract class JDFAutoPosition extends JDFElement
             setAttribute(AttributeName.MARGINLEFT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute MarginLeft
           * @return double the value of the attribute
@@ -331,8 +317,6 @@ public abstract class JDFAutoPosition extends JDFElement
         {
             return getRealAttribute(AttributeName.MARGINLEFT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -347,8 +331,6 @@ public abstract class JDFAutoPosition extends JDFElement
             setAttribute(AttributeName.MARGINRIGHT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute MarginRight
           * @return double the value of the attribute
@@ -357,8 +339,6 @@ public abstract class JDFAutoPosition extends JDFElement
         {
             return getRealAttribute(AttributeName.MARGINRIGHT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -373,8 +353,6 @@ public abstract class JDFAutoPosition extends JDFElement
             setAttribute(AttributeName.ORIENTATION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Orientation
           * @return the value of the attribute
@@ -383,8 +361,6 @@ public abstract class JDFAutoPosition extends JDFElement
         {
             return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -399,11 +375,9 @@ public abstract class JDFAutoPosition extends JDFElement
             setAttribute(AttributeName.RELATIVEBOX, value, null);
         }
 
-
-
         /**
           * (20) get JDFRectangle attribute RelativeBox
-          * @return JDFRectanglethe value of the attribute, null if a the
+          * @return JDFRectangle the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFRectangle
           */
         public JDFRectangle getRelativeBox()
@@ -421,7 +395,5 @@ public abstract class JDFAutoPosition extends JDFElement
             }
             return nPlaceHolder;
         }
-
-
 
 }// end namespace JDF

@@ -83,6 +83,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResourceParam;
     /*
@@ -249,8 +250,6 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
             setAttribute(AttributeName.DEFAULTPRIORITY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute DefaultPriority
           * @return the value of the attribute
@@ -259,8 +258,6 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
         {
             return EnumDefaultPriority.getEnum(getAttribute(AttributeName.DEFAULTPRIORITY, null, "DefaultJDF"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -275,8 +272,6 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
             setAttribute(AttributeName.DEFAULTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DefaultID
           * @return the value of the attribute
@@ -285,8 +280,6 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
         {
             return getAttribute(AttributeName.DEFAULTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -301,8 +294,6 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
             setAttribute(AttributeName.DEFAULTJDF, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DefaultJDF
           * @return the value of the attribute
@@ -311,8 +302,6 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
         {
             return getAttribute(AttributeName.DEFAULTJDF, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -329,8 +318,6 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
         return (JDFResourceParam)getCreateElement_KElement(ElementName.RESOURCEPARAM, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element ResourceParam
      * @param iSkip number of elements to skip
@@ -341,9 +328,10 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
         return (JDFResourceParam) getElement(ElementName.RESOURCEPARAM, null, iSkip);
     }
 
-
-
-    public JDFResourceParam appendResourceParam()
+    /**
+     * (30) append element ResourceParam
+     */
+    public JDFResourceParam appendResourceParam() throws JDFException
     {
         return (JDFResourceParam) appendElement(ElementName.RESOURCEPARAM, null);
     }

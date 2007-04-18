@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFShape;
 import org.cip4.jdflib.resource.JDFBundle;
 import org.cip4.jdflib.resource.JDFPallet;
@@ -214,8 +215,6 @@ public abstract class JDFAutoDropItem extends JDFElement
             setAttribute(AttributeName.ACTUALAMOUNT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute ActualAmount
           * @return int the value of the attribute
@@ -224,8 +223,6 @@ public abstract class JDFAutoDropItem extends JDFElement
         {
             return getIntAttribute(AttributeName.ACTUALAMOUNT, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -240,8 +237,6 @@ public abstract class JDFAutoDropItem extends JDFElement
             setAttribute(AttributeName.ACTUALTOTALAMOUNT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute ActualTotalAmount
           * @return int the value of the attribute
@@ -250,8 +245,6 @@ public abstract class JDFAutoDropItem extends JDFElement
         {
             return getIntAttribute(AttributeName.ACTUALTOTALAMOUNT, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -266,8 +259,6 @@ public abstract class JDFAutoDropItem extends JDFElement
             setAttribute(AttributeName.AMOUNT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Amount
           * @return int the value of the attribute
@@ -276,8 +267,6 @@ public abstract class JDFAutoDropItem extends JDFElement
         {
             return getIntAttribute(AttributeName.AMOUNT, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -292,8 +281,6 @@ public abstract class JDFAutoDropItem extends JDFElement
             setAttribute(AttributeName.TOTALAMOUNT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute TotalAmount
           * @return int the value of the attribute
@@ -302,8 +289,6 @@ public abstract class JDFAutoDropItem extends JDFElement
         {
             return getIntAttribute(AttributeName.TOTALAMOUNT, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -318,11 +303,9 @@ public abstract class JDFAutoDropItem extends JDFElement
             setAttribute(AttributeName.TOTALDIMENSIONS, value, null);
         }
 
-
-
         /**
           * (20) get JDFShape attribute TotalDimensions
-          * @return JDFShapethe value of the attribute, null if a the
+          * @return JDFShape the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFShape
           */
         public JDFShape getTotalDimensions()
@@ -341,8 +324,6 @@ public abstract class JDFAutoDropItem extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute TotalVolume
@@ -356,8 +337,6 @@ public abstract class JDFAutoDropItem extends JDFElement
             setAttribute(AttributeName.TOTALVOLUME, value, null);
         }
 
-
-
         /**
           * (17) get double attribute TotalVolume
           * @return double the value of the attribute
@@ -366,8 +345,6 @@ public abstract class JDFAutoDropItem extends JDFElement
         {
             return getRealAttribute(AttributeName.TOTALVOLUME, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -382,8 +359,6 @@ public abstract class JDFAutoDropItem extends JDFElement
             setAttribute(AttributeName.TOTALWEIGHT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute TotalWeight
           * @return double the value of the attribute
@@ -392,8 +367,6 @@ public abstract class JDFAutoDropItem extends JDFElement
         {
             return getRealAttribute(AttributeName.TOTALWEIGHT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -408,8 +381,6 @@ public abstract class JDFAutoDropItem extends JDFElement
             setAttribute(AttributeName.TRACKINGID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute TrackingID
           * @return the value of the attribute
@@ -418,8 +389,6 @@ public abstract class JDFAutoDropItem extends JDFElement
         {
             return getAttribute(AttributeName.TRACKINGID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -434,8 +403,6 @@ public abstract class JDFAutoDropItem extends JDFElement
             setAttribute(AttributeName.UNIT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Unit
           * @return the value of the attribute
@@ -444,8 +411,6 @@ public abstract class JDFAutoDropItem extends JDFElement
         {
             return getAttribute(AttributeName.UNIT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -462,8 +427,6 @@ public abstract class JDFAutoDropItem extends JDFElement
         return (JDFComponent)getCreateElement_KElement(ElementName.COMPONENT, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Component
      * @param iSkip number of elements to skip
@@ -474,9 +437,10 @@ public abstract class JDFAutoDropItem extends JDFElement
         return (JDFComponent) getElement(ElementName.COMPONENT, null, iSkip);
     }
 
-
-
-    public JDFComponent appendComponent()
+    /**
+     * (30) append element Component
+     */
+    public JDFComponent appendComponent() throws JDFException
     {
         return (JDFComponent) appendElement(ElementName.COMPONENT, null);
     }
@@ -489,6 +453,7 @@ public abstract class JDFAutoDropItem extends JDFElement
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateExposedMedia
      * 
      * @param iSkip number of elements to skip
@@ -498,8 +463,6 @@ public abstract class JDFAutoDropItem extends JDFElement
     {
         return (JDFExposedMedia)getCreateElement_KElement(ElementName.EXPOSEDMEDIA, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element ExposedMedia
@@ -511,9 +474,10 @@ public abstract class JDFAutoDropItem extends JDFElement
         return (JDFExposedMedia) getElement(ElementName.EXPOSEDMEDIA, null, iSkip);
     }
 
-
-
-    public JDFExposedMedia appendExposedMedia()
+    /**
+     * (30) append element ExposedMedia
+     */
+    public JDFExposedMedia appendExposedMedia() throws JDFException
     {
         return (JDFExposedMedia) appendElement(ElementName.EXPOSEDMEDIA, null);
     }
@@ -526,6 +490,7 @@ public abstract class JDFAutoDropItem extends JDFElement
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateInk
      * 
      * @param iSkip number of elements to skip
@@ -535,8 +500,6 @@ public abstract class JDFAutoDropItem extends JDFElement
     {
         return (JDFInk)getCreateElement_KElement(ElementName.INK, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Ink
@@ -548,9 +511,10 @@ public abstract class JDFAutoDropItem extends JDFElement
         return (JDFInk) getElement(ElementName.INK, null, iSkip);
     }
 
-
-
-    public JDFInk appendInk()
+    /**
+     * (30) append element Ink
+     */
+    public JDFInk appendInk() throws JDFException
     {
         return (JDFInk) appendElement(ElementName.INK, null);
     }
@@ -563,6 +527,7 @@ public abstract class JDFAutoDropItem extends JDFElement
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateMedia
      * 
      * @param iSkip number of elements to skip
@@ -572,8 +537,6 @@ public abstract class JDFAutoDropItem extends JDFElement
     {
         return (JDFMedia)getCreateElement_KElement(ElementName.MEDIA, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Media
@@ -585,9 +548,10 @@ public abstract class JDFAutoDropItem extends JDFElement
         return (JDFMedia) getElement(ElementName.MEDIA, null, iSkip);
     }
 
-
-
-    public JDFMedia appendMedia()
+    /**
+     * (30) append element Media
+     */
+    public JDFMedia appendMedia() throws JDFException
     {
         return (JDFMedia) appendElement(ElementName.MEDIA, null);
     }
@@ -600,6 +564,7 @@ public abstract class JDFAutoDropItem extends JDFElement
     {
         refElement(refTarget);
     }
+
     /** (26) getCreatePallet
      * 
      * @param iSkip number of elements to skip
@@ -609,8 +574,6 @@ public abstract class JDFAutoDropItem extends JDFElement
     {
         return (JDFPallet)getCreateElement_KElement(ElementName.PALLET, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Pallet
@@ -622,9 +585,10 @@ public abstract class JDFAutoDropItem extends JDFElement
         return (JDFPallet) getElement(ElementName.PALLET, null, iSkip);
     }
 
-
-
-    public JDFPallet appendPallet()
+    /**
+     * (30) append element Pallet
+     */
+    public JDFPallet appendPallet() throws JDFException
     {
         return (JDFPallet) appendElement(ElementName.PALLET, null);
     }
@@ -637,6 +601,7 @@ public abstract class JDFAutoDropItem extends JDFElement
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateRegisterRibbon
      * 
      * @param iSkip number of elements to skip
@@ -646,8 +611,6 @@ public abstract class JDFAutoDropItem extends JDFElement
     {
         return (JDFRegisterRibbon)getCreateElement_KElement(ElementName.REGISTERRIBBON, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element RegisterRibbon
@@ -659,9 +622,10 @@ public abstract class JDFAutoDropItem extends JDFElement
         return (JDFRegisterRibbon) getElement(ElementName.REGISTERRIBBON, null, iSkip);
     }
 
-
-
-    public JDFRegisterRibbon appendRegisterRibbon()
+    /**
+     * (30) append element RegisterRibbon
+     */
+    public JDFRegisterRibbon appendRegisterRibbon() throws JDFException
     {
         return (JDFRegisterRibbon) appendElement(ElementName.REGISTERRIBBON, null);
     }
@@ -674,6 +638,7 @@ public abstract class JDFAutoDropItem extends JDFElement
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateStrap
      * 
      * @param iSkip number of elements to skip
@@ -683,8 +648,6 @@ public abstract class JDFAutoDropItem extends JDFElement
     {
         return (JDFStrap)getCreateElement_KElement(ElementName.STRAP, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Strap
@@ -696,9 +659,10 @@ public abstract class JDFAutoDropItem extends JDFElement
         return (JDFStrap) getElement(ElementName.STRAP, null, iSkip);
     }
 
-
-
-    public JDFStrap appendStrap()
+    /**
+     * (30) append element Strap
+     */
+    public JDFStrap appendStrap() throws JDFException
     {
         return (JDFStrap) appendElement(ElementName.STRAP, null);
     }
@@ -711,6 +675,7 @@ public abstract class JDFAutoDropItem extends JDFElement
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateBundle
      * 
      * @param iSkip number of elements to skip
@@ -720,8 +685,6 @@ public abstract class JDFAutoDropItem extends JDFElement
     {
         return (JDFBundle)getCreateElement_KElement(ElementName.BUNDLE, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Bundle
@@ -733,9 +696,10 @@ public abstract class JDFAutoDropItem extends JDFElement
         return (JDFBundle) getElement(ElementName.BUNDLE, null, iSkip);
     }
 
-
-
-    public JDFBundle appendBundle()
+    /**
+     * (30) append element Bundle
+     */
+    public JDFBundle appendBundle() throws JDFException
     {
         return (JDFBundle) appendElement(ElementName.BUNDLE, null);
     }
@@ -748,6 +712,7 @@ public abstract class JDFAutoDropItem extends JDFElement
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateDigitalMedia
      * 
      * @param iSkip number of elements to skip
@@ -757,8 +722,6 @@ public abstract class JDFAutoDropItem extends JDFElement
     {
         return (JDFDigitalMedia)getCreateElement_KElement(ElementName.DIGITALMEDIA, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element DigitalMedia
@@ -770,9 +733,10 @@ public abstract class JDFAutoDropItem extends JDFElement
         return (JDFDigitalMedia) getElement(ElementName.DIGITALMEDIA, null, iSkip);
     }
 
-
-
-    public JDFDigitalMedia appendDigitalMedia()
+    /**
+     * (30) append element DigitalMedia
+     */
+    public JDFDigitalMedia appendDigitalMedia() throws JDFException
     {
         return (JDFDigitalMedia) appendElement(ElementName.DIGITALMEDIA, null);
     }
@@ -785,6 +749,7 @@ public abstract class JDFAutoDropItem extends JDFElement
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateRollStand
      * 
      * @param iSkip number of elements to skip
@@ -794,8 +759,6 @@ public abstract class JDFAutoDropItem extends JDFElement
     {
         return (JDFRollStand)getCreateElement_KElement(ElementName.ROLLSTAND, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element RollStand
@@ -807,9 +770,10 @@ public abstract class JDFAutoDropItem extends JDFElement
         return (JDFRollStand) getElement(ElementName.ROLLSTAND, null, iSkip);
     }
 
-
-
-    public JDFRollStand appendRollStand()
+    /**
+     * (30) append element RollStand
+     */
+    public JDFRollStand appendRollStand() throws JDFException
     {
         return (JDFRollStand) appendElement(ElementName.ROLLSTAND, null);
     }
@@ -822,6 +786,7 @@ public abstract class JDFAutoDropItem extends JDFElement
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateTool
      * 
      * @param iSkip number of elements to skip
@@ -831,8 +796,6 @@ public abstract class JDFAutoDropItem extends JDFElement
     {
         return (JDFTool)getCreateElement_KElement(ElementName.TOOL, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Tool
@@ -844,9 +807,10 @@ public abstract class JDFAutoDropItem extends JDFElement
         return (JDFTool) getElement(ElementName.TOOL, null, iSkip);
     }
 
-
-
-    public JDFTool appendTool()
+    /**
+     * (30) append element Tool
+     */
+    public JDFTool appendTool() throws JDFException
     {
         return (JDFTool) appendElement(ElementName.TOOL, null);
     }
@@ -859,4 +823,5 @@ public abstract class JDFAutoDropItem extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

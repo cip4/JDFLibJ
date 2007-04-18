@@ -281,8 +281,6 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
             setAttribute(AttributeName.BRAND, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Brand
           * @return the value of the attribute
@@ -291,8 +289,6 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
         {
             return getAttribute(AttributeName.BRAND, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -307,8 +303,6 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
             setAttribute(AttributeName.COLOR, value.getName(), null);
         }
 
-
-
         /**
           * (19) get EnumNamedColor attribute Color
           * @return EnumNamedColor the value of the attribute
@@ -321,8 +315,6 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
             nPlaceHolder = EnumNamedColor.getEnum(strAttrName);
             return nPlaceHolder;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -337,8 +329,6 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
             setAttribute(AttributeName.DIAMETER, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Diameter
           * @return double the value of the attribute
@@ -347,8 +337,6 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.DIAMETER, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -363,8 +351,6 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
             setAttribute(AttributeName.THICKNESS, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Thickness
           * @return double the value of the attribute
@@ -373,8 +359,6 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.THICKNESS, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -389,8 +373,6 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
             setAttribute(AttributeName.TYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Type
           * @return the value of the attribute
@@ -399,8 +381,6 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
         {
             return EnumType.getEnum(getAttribute(AttributeName.TYPE, null, null));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -416,8 +396,6 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
         return (JDFHoleMakingParams) getElement(ElementName.HOLEMAKINGPARAMS, null, 0);
     }
 
-
-
     /** (25) getCreateHoleMakingParams
      * 
      * @return JDFHoleMakingParams the element
@@ -427,17 +405,14 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
         return (JDFHoleMakingParams) getCreateElement_KElement(ElementName.HOLEMAKINGPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementHoleMakingParams
+     * (29) append element HoleMakingParams
      */
     public JDFHoleMakingParams appendHoleMakingParams() throws JDFException
     {
         return (JDFHoleMakingParams) appendElementN(ElementName.HOLEMAKINGPARAMS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -446,4 +421,5 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

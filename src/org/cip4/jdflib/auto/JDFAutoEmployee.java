@@ -203,8 +203,6 @@ public abstract class JDFAutoEmployee extends JDFResource
             setAttribute(AttributeName.PERSONALID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute PersonalID
           * @return the value of the attribute
@@ -213,8 +211,6 @@ public abstract class JDFAutoEmployee extends JDFResource
         {
             return getAttribute(AttributeName.PERSONALID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -229,8 +225,6 @@ public abstract class JDFAutoEmployee extends JDFResource
             setAttribute(AttributeName.ROLES, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute Roles
           * @return VString the value of the attribute
@@ -242,8 +236,6 @@ public abstract class JDFAutoEmployee extends JDFResource
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -258,8 +250,6 @@ public abstract class JDFAutoEmployee extends JDFResource
             setAttribute(AttributeName.SHIFT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Shift
           * @return the value of the attribute
@@ -268,8 +258,6 @@ public abstract class JDFAutoEmployee extends JDFResource
         {
             return getAttribute(AttributeName.SHIFT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -285,8 +273,6 @@ public abstract class JDFAutoEmployee extends JDFResource
         return (JDFCostCenter) getElement(ElementName.COSTCENTER, null, 0);
     }
 
-
-
     /** (25) getCreateCostCenter
      * 
      * @return JDFCostCenter the element
@@ -296,17 +282,14 @@ public abstract class JDFAutoEmployee extends JDFResource
         return (JDFCostCenter) getCreateElement_KElement(ElementName.COSTCENTER, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementCostCenter
+     * (29) append element CostCenter
      */
     public JDFCostCenter appendCostCenter() throws JDFException
     {
         return (JDFCostCenter) appendElementN(ElementName.COSTCENTER, 1, null);
     }
+
     /**
      * (24) const get element Person
      * @return JDFPerson the element
@@ -315,8 +298,6 @@ public abstract class JDFAutoEmployee extends JDFResource
     {
         return (JDFPerson) getElement(ElementName.PERSON, null, 0);
     }
-
-
 
     /** (25) getCreatePerson
      * 
@@ -327,17 +308,14 @@ public abstract class JDFAutoEmployee extends JDFResource
         return (JDFPerson) getCreateElement_KElement(ElementName.PERSON, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPerson
+     * (29) append element Person
      */
     public JDFPerson appendPerson() throws JDFException
     {
         return (JDFPerson) appendElementN(ElementName.PERSON, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -346,4 +324,5 @@ public abstract class JDFAutoEmployee extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

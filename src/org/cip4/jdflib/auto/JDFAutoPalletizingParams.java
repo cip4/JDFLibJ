@@ -183,8 +183,6 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
             setAttribute(AttributeName.PATTERN, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Pattern
           * @return the value of the attribute
@@ -193,8 +191,6 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
         {
             return getAttribute(AttributeName.PATTERN, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -209,8 +205,6 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
             setAttribute(AttributeName.MAXHEIGHT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute MaxHeight
           * @return double the value of the attribute
@@ -219,8 +213,6 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.MAXHEIGHT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -235,8 +227,6 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
             setAttribute(AttributeName.MAXWEIGHT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute MaxWeight
           * @return double the value of the attribute
@@ -245,7 +235,5 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.MAXWEIGHT, null, 0.0);
         }
-
-
 
 }// end namespace JDF

@@ -78,6 +78,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
     /*
@@ -197,8 +198,6 @@ public abstract class JDFAutoColorantAlias extends JDFResource
             setAttribute(AttributeName.REPLACEMENTCOLORANTNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ReplacementColorantName
           * @return the value of the attribute
@@ -207,8 +206,6 @@ public abstract class JDFAutoColorantAlias extends JDFResource
         {
             return getAttribute(AttributeName.REPLACEMENTCOLORANTNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -225,8 +222,6 @@ public abstract class JDFAutoColorantAlias extends JDFResource
         return (JDFSeparationSpec)getCreateElement_KElement(ElementName.SEPARATIONSPEC, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element SeparationSpec
      * @param iSkip number of elements to skip
@@ -237,9 +232,10 @@ public abstract class JDFAutoColorantAlias extends JDFResource
         return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
     }
 
-
-
-    public JDFSeparationSpec appendSeparationSpec()
+    /**
+     * (30) append element SeparationSpec
+     */
+    public JDFSeparationSpec appendSeparationSpec() throws JDFException
     {
         return (JDFSeparationSpec) appendElement(ElementName.SEPARATIONSPEC, null);
     }

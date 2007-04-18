@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
     /*
     *****************************************************************************
@@ -244,8 +245,6 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
             setEnumerationsAttribute(AttributeName.SOURCEOBJECTS, v, null);
         }
 
-
-
         /**
           * (9.2) get SourceObjects attribute SourceObjects
           * @return Vector of the enumerations
@@ -254,8 +253,6 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
         {
             return getEnumerationsAttribute(AttributeName.SOURCEOBJECTS, null, EnumSourceObjects.All, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -270,8 +267,6 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
             setAttribute(AttributeName.ADJUSTCYANRED, value, null);
         }
 
-
-
         /**
           * (17) get double attribute AdjustCyanRed
           * @return double the value of the attribute
@@ -280,8 +275,6 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
         {
             return getRealAttribute(AttributeName.ADJUSTCYANRED, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -296,8 +289,6 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
             setAttribute(AttributeName.ADJUSTMAGENTAGREEN, value, null);
         }
 
-
-
         /**
           * (17) get double attribute AdjustMagentaGreen
           * @return double the value of the attribute
@@ -306,8 +297,6 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
         {
             return getRealAttribute(AttributeName.ADJUSTMAGENTAGREEN, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -322,8 +311,6 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
             setAttribute(AttributeName.ADJUSTYELLOWBLUE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute AdjustYellowBlue
           * @return double the value of the attribute
@@ -332,8 +319,6 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
         {
             return getRealAttribute(AttributeName.ADJUSTYELLOWBLUE, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -348,8 +333,6 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
             setAttribute(AttributeName.ADJUSTCONTRAST, value, null);
         }
 
-
-
         /**
           * (17) get double attribute AdjustContrast
           * @return double the value of the attribute
@@ -358,8 +341,6 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
         {
             return getRealAttribute(AttributeName.ADJUSTCONTRAST, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -374,8 +355,6 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
             setAttribute(AttributeName.ADJUSTHUE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute AdjustHue
           * @return double the value of the attribute
@@ -384,8 +363,6 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
         {
             return getRealAttribute(AttributeName.ADJUSTHUE, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -400,8 +377,6 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
             setAttribute(AttributeName.ADJUSTLIGHTNESS, value, null);
         }
 
-
-
         /**
           * (17) get double attribute AdjustLightness
           * @return double the value of the attribute
@@ -410,8 +385,6 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
         {
             return getRealAttribute(AttributeName.ADJUSTLIGHTNESS, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -426,8 +399,6 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
             setAttribute(AttributeName.ADJUSTSATURATION, value, null);
         }
 
-
-
         /**
           * (17) get double attribute AdjustSaturation
           * @return double the value of the attribute
@@ -436,8 +407,6 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
         {
             return getRealAttribute(AttributeName.ADJUSTSATURATION, null, 0.0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -454,8 +423,6 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
         return (JDFFileSpec)getCreateElement_KElement(ElementName.FILESPEC, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element FileSpec
      * @param iSkip number of elements to skip
@@ -466,9 +433,10 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
         return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
     }
 
-
-
-    public JDFFileSpec appendFileSpec()
+    /**
+     * (30) append element FileSpec
+     */
+    public JDFFileSpec appendFileSpec() throws JDFException
     {
         return (JDFFileSpec) appendElement(ElementName.FILESPEC, null);
     }
@@ -481,4 +449,5 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

@@ -202,11 +202,9 @@ public abstract class JDFAutoTrapRegion extends JDFResource
             setAttribute(AttributeName.PAGES, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerRangeList attribute Pages
-          * @return JDFIntegerRangeListthe value of the attribute, null if a the
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerRangeList
           */
         public JDFIntegerRangeList getPages()
@@ -225,8 +223,6 @@ public abstract class JDFAutoTrapRegion extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute TrapZone
@@ -240,8 +236,6 @@ public abstract class JDFAutoTrapRegion extends JDFResource
             setAttribute(AttributeName.TRAPZONE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute TrapZone
           * @return the value of the attribute
@@ -250,8 +244,6 @@ public abstract class JDFAutoTrapRegion extends JDFResource
         {
             return getAttribute(AttributeName.TRAPZONE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -267,8 +259,6 @@ public abstract class JDFAutoTrapRegion extends JDFResource
         return (JDFTrappingParams) getElement(ElementName.TRAPPINGPARAMS, null, 0);
     }
 
-
-
     /** (25) getCreateTrappingParams
      * 
      * @return JDFTrappingParams the element
@@ -278,17 +268,14 @@ public abstract class JDFAutoTrapRegion extends JDFResource
         return (JDFTrappingParams) getCreateElement_KElement(ElementName.TRAPPINGPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementTrappingParams
+     * (29) append element TrappingParams
      */
     public JDFTrappingParams appendTrappingParams() throws JDFException
     {
         return (JDFTrappingParams) appendElementN(ElementName.TRAPPINGPARAMS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -297,4 +284,5 @@ public abstract class JDFAutoTrapRegion extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

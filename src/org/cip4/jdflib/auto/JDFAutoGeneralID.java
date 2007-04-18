@@ -168,8 +168,6 @@ public abstract class JDFAutoGeneralID extends JDFElement
             setAttribute(AttributeName.IDUSAGE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute IDUsage
           * @return the value of the attribute
@@ -178,8 +176,6 @@ public abstract class JDFAutoGeneralID extends JDFElement
         {
             return getAttribute(AttributeName.IDUSAGE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -194,8 +190,6 @@ public abstract class JDFAutoGeneralID extends JDFElement
             setAttribute(AttributeName.IDVALUE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute IDValue
           * @return the value of the attribute
@@ -204,7 +198,5 @@ public abstract class JDFAutoGeneralID extends JDFElement
         {
             return getAttribute(AttributeName.IDVALUE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

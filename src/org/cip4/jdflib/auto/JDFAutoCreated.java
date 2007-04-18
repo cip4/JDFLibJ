@@ -170,8 +170,6 @@ public abstract class JDFAutoCreated extends JDFAudit
             setAttribute(AttributeName.REF, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ref
           * @return the value of the attribute
@@ -180,8 +178,6 @@ public abstract class JDFAutoCreated extends JDFAudit
         {
             return getAttribute(AttributeName.REF, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -196,8 +192,6 @@ public abstract class JDFAutoCreated extends JDFAudit
             setAttribute(AttributeName.TEMPLATEID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute TemplateID
           * @return the value of the attribute
@@ -206,8 +200,6 @@ public abstract class JDFAutoCreated extends JDFAudit
         {
             return getAttribute(AttributeName.TEMPLATEID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -222,8 +214,6 @@ public abstract class JDFAutoCreated extends JDFAudit
             setAttribute(AttributeName.TEMPLATEVERSION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute TemplateVersion
           * @return the value of the attribute
@@ -232,8 +222,6 @@ public abstract class JDFAutoCreated extends JDFAudit
         {
             return getAttribute(AttributeName.TEMPLATEVERSION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -248,8 +236,6 @@ public abstract class JDFAutoCreated extends JDFAudit
             setAttribute(AttributeName.XPATH, value, null);
         }
 
-
-
         /**
           * (23) get String attribute XPath
           * @return the value of the attribute
@@ -258,7 +244,5 @@ public abstract class JDFAutoCreated extends JDFAudit
         {
             return getAttribute(AttributeName.XPATH, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

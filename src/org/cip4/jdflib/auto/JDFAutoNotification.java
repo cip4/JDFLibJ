@@ -244,8 +244,6 @@ public abstract class JDFAutoNotification extends JDFAudit
             setAttribute(AttributeName.CLASS, enumVar.getName(), null);
         }
 
-
-
         /**
           * (6) get EnumClass attribute Class
           * @return EnumClass the value of the attribute
@@ -254,8 +252,6 @@ public abstract class JDFAutoNotification extends JDFAudit
         {
             return EnumClass.getEnum(getAttribute(AttributeName.CLASS, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -270,8 +266,6 @@ public abstract class JDFAutoNotification extends JDFAudit
             setAttribute(AttributeName.JOBID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobID
           * @return the value of the attribute
@@ -280,8 +274,6 @@ public abstract class JDFAutoNotification extends JDFAudit
         {
             return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -296,8 +288,6 @@ public abstract class JDFAutoNotification extends JDFAudit
             setAttribute(AttributeName.JOBPARTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobPartID
           * @return the value of the attribute
@@ -306,8 +296,6 @@ public abstract class JDFAutoNotification extends JDFAudit
         {
             return getAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -322,8 +310,6 @@ public abstract class JDFAutoNotification extends JDFAudit
             setAttribute(AttributeName.TYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Type
           * @return the value of the attribute
@@ -332,8 +318,6 @@ public abstract class JDFAutoNotification extends JDFAudit
         {
             return getAttribute(AttributeName.TYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -349,8 +333,6 @@ public abstract class JDFAutoNotification extends JDFAudit
         return (JDFCostCenter) getElement(ElementName.COSTCENTER, null, 0);
     }
 
-
-
     /** (25) getCreateCostCenter
      * 
      * @return JDFCostCenter the element
@@ -360,17 +342,14 @@ public abstract class JDFAutoNotification extends JDFAudit
         return (JDFCostCenter) getCreateElement_KElement(ElementName.COSTCENTER, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementCostCenter
+     * (29) append element CostCenter
      */
     public JDFCostCenter appendCostCenter() throws JDFException
     {
         return (JDFCostCenter) appendElementN(ElementName.COSTCENTER, 1, null);
     }
+
     /** (26) getCreateEmployee
      * 
      * @param iSkip number of elements to skip
@@ -380,8 +359,6 @@ public abstract class JDFAutoNotification extends JDFAudit
     {
         return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Employee
@@ -393,9 +370,10 @@ public abstract class JDFAutoNotification extends JDFAudit
         return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
     }
 
-
-
-    public JDFEmployee appendEmployee()
+    /**
+     * (30) append element Employee
+     */
+    public JDFEmployee appendEmployee() throws JDFException
     {
         return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
     }
@@ -408,6 +386,7 @@ public abstract class JDFAutoNotification extends JDFAudit
     {
         refElement(refTarget);
     }
+
     /** (26) getCreatePart
      * 
      * @param iSkip number of elements to skip
@@ -417,8 +396,6 @@ public abstract class JDFAutoNotification extends JDFAudit
     {
         return (JDFPart)getCreateElement_KElement(ElementName.PART, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Part
@@ -430,9 +407,10 @@ public abstract class JDFAutoNotification extends JDFAudit
         return (JDFPart) getElement(ElementName.PART, null, iSkip);
     }
 
-
-
-    public JDFPart appendPart()
+    /**
+     * (30) append element Part
+     */
+    public JDFPart appendPart() throws JDFException
     {
         return (JDFPart) appendElement(ElementName.PART, null);
     }

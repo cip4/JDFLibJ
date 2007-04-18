@@ -225,8 +225,6 @@ public abstract class JDFAutoPerforate extends JDFElement
             setAttribute(AttributeName.DEPTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Depth
           * @return double the value of the attribute
@@ -235,8 +233,6 @@ public abstract class JDFAutoPerforate extends JDFElement
         {
             return getRealAttribute(AttributeName.DEPTH, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -251,11 +247,9 @@ public abstract class JDFAutoPerforate extends JDFElement
             setAttribute(AttributeName.RELATIVESTARTPOSITION, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute RelativeStartPosition
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getRelativeStartPosition()
@@ -274,8 +268,6 @@ public abstract class JDFAutoPerforate extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute RelativeWorkingPath
@@ -289,11 +281,9 @@ public abstract class JDFAutoPerforate extends JDFElement
             setAttribute(AttributeName.RELATIVEWORKINGPATH, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute RelativeWorkingPath
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getRelativeWorkingPath()
@@ -312,8 +302,6 @@ public abstract class JDFAutoPerforate extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute StartPosition
@@ -327,11 +315,9 @@ public abstract class JDFAutoPerforate extends JDFElement
             setAttribute(AttributeName.STARTPOSITION, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute StartPosition
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getStartPosition()
@@ -350,8 +336,6 @@ public abstract class JDFAutoPerforate extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute WorkingPath
@@ -365,11 +349,9 @@ public abstract class JDFAutoPerforate extends JDFElement
             setAttribute(AttributeName.WORKINGPATH, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute WorkingPath
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getWorkingPath()
@@ -388,8 +370,6 @@ public abstract class JDFAutoPerforate extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute WorkingDirection
@@ -403,8 +383,6 @@ public abstract class JDFAutoPerforate extends JDFElement
             setAttribute(AttributeName.WORKINGDIRECTION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute WorkingDirection
           * @return the value of the attribute
@@ -413,8 +391,6 @@ public abstract class JDFAutoPerforate extends JDFElement
         {
             return EnumWorkingDirection.getEnum(getAttribute(AttributeName.WORKINGDIRECTION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -429,8 +405,6 @@ public abstract class JDFAutoPerforate extends JDFElement
             setAttribute(AttributeName.TEETHPERDIMENSION, value, null);
         }
 
-
-
         /**
           * (17) get double attribute TeethPerDimension
           * @return double the value of the attribute
@@ -439,7 +413,5 @@ public abstract class JDFAutoPerforate extends JDFElement
         {
             return getRealAttribute(AttributeName.TEETHPERDIMENSION, null, 0.0);
         }
-
-
 
 }// end namespace JDF

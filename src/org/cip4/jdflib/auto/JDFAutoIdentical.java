@@ -165,8 +165,6 @@ public abstract class JDFAutoIdentical extends JDFElement
         return (JDFPart) getElement(ElementName.PART, null, 0);
     }
 
-
-
     /** (25) getCreatePart
      * 
      * @return JDFPart the element
@@ -176,15 +174,12 @@ public abstract class JDFAutoIdentical extends JDFElement
         return (JDFPart) getCreateElement_KElement(ElementName.PART, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPart
+     * (29) append element Part
      */
     public JDFPart appendPart() throws JDFException
     {
         return (JDFPart) appendElementN(ElementName.PART, 1, null);
     }
+
 }// end namespace JDF

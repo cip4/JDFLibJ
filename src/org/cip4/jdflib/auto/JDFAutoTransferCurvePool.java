@@ -74,6 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFTransferCurveSet;
     /*
@@ -179,8 +180,6 @@ public abstract class JDFAutoTransferCurvePool extends JDFResource
         return (JDFTransferCurveSet)getCreateElement_KElement(ElementName.TRANSFERCURVESET, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element TransferCurveSet
      * @param iSkip number of elements to skip
@@ -191,9 +190,10 @@ public abstract class JDFAutoTransferCurvePool extends JDFResource
         return (JDFTransferCurveSet) getElement(ElementName.TRANSFERCURVESET, null, iSkip);
     }
 
-
-
-    public JDFTransferCurveSet appendTransferCurveSet()
+    /**
+     * (30) append element TransferCurveSet
+     */
+    public JDFTransferCurveSet appendTransferCurveSet() throws JDFException
     {
         return (JDFTransferCurveSet) appendElement(ElementName.TRANSFERCURVESET, null);
     }

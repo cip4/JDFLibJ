@@ -168,8 +168,6 @@ public abstract class JDFAutoExtraValues extends JDFElement
             setAttribute(AttributeName.USAGE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Usage
           * @return the value of the attribute
@@ -178,8 +176,6 @@ public abstract class JDFAutoExtraValues extends JDFElement
         {
             return getAttribute(AttributeName.USAGE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -194,8 +190,6 @@ public abstract class JDFAutoExtraValues extends JDFElement
             setAttribute(AttributeName.VALUE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Value
           * @return the value of the attribute
@@ -204,7 +198,5 @@ public abstract class JDFAutoExtraValues extends JDFElement
         {
             return getAttribute(AttributeName.VALUE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

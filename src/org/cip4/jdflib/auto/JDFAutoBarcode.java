@@ -167,8 +167,6 @@ public abstract class JDFAutoBarcode extends JDFElement
             setAttribute(AttributeName.CODE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Code
           * @return the value of the attribute
@@ -177,7 +175,5 @@ public abstract class JDFAutoBarcode extends JDFElement
         {
             return getAttribute(AttributeName.CODE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

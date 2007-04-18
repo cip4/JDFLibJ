@@ -166,8 +166,6 @@ public abstract class JDFAutoJBIG2Params extends JDFElement
             setAttribute(AttributeName.JBIG2LOSSLESS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute JBIG2Lossless
           * @return boolean the value of the attribute
@@ -176,7 +174,5 @@ public abstract class JDFAutoJBIG2Params extends JDFElement
         {
             return getBoolAttribute(AttributeName.JBIG2LOSSLESS, null, false);
         }
-
-
 
 }// end namespace JDF

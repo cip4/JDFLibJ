@@ -168,8 +168,6 @@ public abstract class JDFAutoResubmissionParams extends JDFElement
             setAttribute(AttributeName.QUEUEENTRYID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute QueueEntryID
           * @return the value of the attribute
@@ -178,8 +176,6 @@ public abstract class JDFAutoResubmissionParams extends JDFElement
         {
             return getAttribute(AttributeName.QUEUEENTRYID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -194,8 +190,6 @@ public abstract class JDFAutoResubmissionParams extends JDFElement
             setAttribute(AttributeName.URL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute URL
           * @return the value of the attribute
@@ -204,7 +198,5 @@ public abstract class JDFAutoResubmissionParams extends JDFElement
         {
             return getAttribute(AttributeName.URL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

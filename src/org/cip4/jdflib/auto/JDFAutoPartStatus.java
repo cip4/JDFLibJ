@@ -185,8 +185,6 @@ public abstract class JDFAutoPartStatus extends JDFElement
             setAttribute(AttributeName.STATUSDETAILS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute StatusDetails
           * @return the value of the attribute
@@ -195,8 +193,6 @@ public abstract class JDFAutoPartStatus extends JDFElement
         {
             return getAttribute(AttributeName.STATUSDETAILS, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -212,8 +208,6 @@ public abstract class JDFAutoPartStatus extends JDFElement
         return (JDFPart) getElement(ElementName.PART, null, 0);
     }
 
-
-
     /** (25) getCreatePart
      * 
      * @return JDFPart the element
@@ -223,15 +217,12 @@ public abstract class JDFAutoPartStatus extends JDFElement
         return (JDFPart) getCreateElement_KElement(ElementName.PART, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPart
+     * (29) append element Part
      */
     public JDFPart appendPart() throws JDFException
     {
         return (JDFPart) appendElementN(ElementName.PART, 1, null);
     }
+
 }// end namespace JDF

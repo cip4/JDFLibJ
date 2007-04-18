@@ -252,8 +252,6 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
             setAttribute(AttributeName.ICCPROFILEUSAGE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ICCProfileUsage
           * @return the value of the attribute
@@ -262,8 +260,6 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
         {
             return EnumICCProfileUsage.getEnum(getAttribute(AttributeName.ICCPROFILEUSAGE, null, "UsePDL"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -278,8 +274,6 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
             setAttribute(AttributeName.COLORMANAGEMENTSYSTEM, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ColorManagementSystem
           * @return the value of the attribute
@@ -288,8 +282,6 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
         {
             return getAttribute(AttributeName.COLORMANAGEMENTSYSTEM, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -304,8 +296,6 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
             setAttribute(AttributeName.CONVERTDEVINDEPCOLORS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute ConvertDevIndepColors
           * @return boolean the value of the attribute
@@ -314,8 +304,6 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.CONVERTDEVINDEPCOLORS, null, false);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -331,8 +319,6 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
         return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
     /** (25) getCreateFileSpec
      * 
      * @return JDFFileSpec the element
@@ -342,17 +328,14 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
         return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFileSpec
+     * (29) append element FileSpec
      */
     public JDFFileSpec appendFileSpec() throws JDFException
     {
         return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -361,6 +344,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateColorSpaceConversionOp
      * 
      * @param iSkip number of elements to skip
@@ -370,8 +354,6 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
     {
         return (JDFColorSpaceConversionOp)getCreateElement_KElement(ElementName.COLORSPACECONVERSIONOP, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element ColorSpaceConversionOp
@@ -383,9 +365,10 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
         return (JDFColorSpaceConversionOp) getElement(ElementName.COLORSPACECONVERSIONOP, null, iSkip);
     }
 
-
-
-    public JDFColorSpaceConversionOp appendColorSpaceConversionOp()
+    /**
+     * (30) append element ColorSpaceConversionOp
+     */
+    public JDFColorSpaceConversionOp appendColorSpaceConversionOp() throws JDFException
     {
         return (JDFColorSpaceConversionOp) appendElement(ElementName.COLORSPACECONVERSIONOP, null);
     }

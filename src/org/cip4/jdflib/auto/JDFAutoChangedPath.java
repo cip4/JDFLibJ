@@ -221,8 +221,6 @@ public abstract class JDFAutoChangedPath extends JDFElement
             setAttribute(AttributeName.PATH, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Path
           * @return the value of the attribute
@@ -231,8 +229,6 @@ public abstract class JDFAutoChangedPath extends JDFElement
         {
             return getAttribute(AttributeName.PATH, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -247,8 +243,6 @@ public abstract class JDFAutoChangedPath extends JDFElement
             setAttribute(AttributeName.MODIFICATION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Modification
           * @return the value of the attribute
@@ -257,8 +251,6 @@ public abstract class JDFAutoChangedPath extends JDFElement
         {
             return EnumModification.getEnum(getAttribute(AttributeName.MODIFICATION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -273,8 +265,6 @@ public abstract class JDFAutoChangedPath extends JDFElement
             setAttribute(AttributeName.OLDVALUE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute OldValue
           * @return the value of the attribute
@@ -283,8 +273,6 @@ public abstract class JDFAutoChangedPath extends JDFElement
         {
             return getAttribute(AttributeName.OLDVALUE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -299,8 +287,6 @@ public abstract class JDFAutoChangedPath extends JDFElement
             setAttribute(AttributeName.NEWVALUE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute NewValue
           * @return the value of the attribute
@@ -309,7 +295,5 @@ public abstract class JDFAutoChangedPath extends JDFElement
         {
             return getAttribute(AttributeName.NEWVALUE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

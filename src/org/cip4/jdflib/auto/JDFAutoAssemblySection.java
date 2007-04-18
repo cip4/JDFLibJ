@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFPageAssignedList;
     /*
@@ -237,8 +238,6 @@ public abstract class JDFAutoAssemblySection extends JDFElement
             setAttribute(AttributeName.ASSEMBLYID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute AssemblyID
           * @return the value of the attribute
@@ -247,8 +246,6 @@ public abstract class JDFAutoAssemblySection extends JDFElement
         {
             return getAttribute(AttributeName.ASSEMBLYID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -263,8 +260,6 @@ public abstract class JDFAutoAssemblySection extends JDFElement
             setAttribute(AttributeName.ASSEMBLYIDS, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute AssemblyIDs
           * @return VString the value of the attribute
@@ -276,8 +271,6 @@ public abstract class JDFAutoAssemblySection extends JDFElement
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -292,8 +285,6 @@ public abstract class JDFAutoAssemblySection extends JDFElement
             setAttribute(AttributeName.JOBID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobID
           * @return the value of the attribute
@@ -302,8 +293,6 @@ public abstract class JDFAutoAssemblySection extends JDFElement
         {
             return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -318,8 +307,6 @@ public abstract class JDFAutoAssemblySection extends JDFElement
             setAttribute(AttributeName.ORDER, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Order
           * @return the value of the attribute
@@ -328,8 +315,6 @@ public abstract class JDFAutoAssemblySection extends JDFElement
         {
             return EnumOrder.getEnum(getAttribute(AttributeName.ORDER, null, "Gathering"));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -346,8 +331,6 @@ public abstract class JDFAutoAssemblySection extends JDFElement
         return (JDFPageAssignedList)getCreateElement_KElement(ElementName.PAGEASSIGNEDLIST, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element PageAssignedList
      * @param iSkip number of elements to skip
@@ -358,9 +341,10 @@ public abstract class JDFAutoAssemblySection extends JDFElement
         return (JDFPageAssignedList) getElement(ElementName.PAGEASSIGNEDLIST, null, iSkip);
     }
 
-
-
-    public JDFPageAssignedList appendPageAssignedList()
+    /**
+     * (30) append element PageAssignedList
+     */
+    public JDFPageAssignedList appendPageAssignedList() throws JDFException
     {
         return (JDFPageAssignedList) appendElement(ElementName.PAGEASSIGNEDLIST, null);
     }

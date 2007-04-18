@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.process.prepress.JDFPreflightInstanceDetail;
     /*
@@ -187,8 +188,6 @@ public abstract class JDFAutoPreflightInstance extends JDFElement
             setAttribute(AttributeName.IDENTIFIER, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Identifier
           * @return the value of the attribute
@@ -197,8 +196,6 @@ public abstract class JDFAutoPreflightInstance extends JDFElement
         {
             return getAttribute(AttributeName.IDENTIFIER, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -213,11 +210,9 @@ public abstract class JDFAutoPreflightInstance extends JDFElement
             setAttribute(AttributeName.PAGEREFS, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerRangeList attribute PageRefs
-          * @return JDFIntegerRangeListthe value of the attribute, null if a the
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerRangeList
           */
         public JDFIntegerRangeList getPageRefs()
@@ -236,8 +231,6 @@ public abstract class JDFAutoPreflightInstance extends JDFElement
             return nPlaceHolder;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -253,8 +246,6 @@ public abstract class JDFAutoPreflightInstance extends JDFElement
         return (JDFPreflightInstanceDetail)getCreateElement_KElement(ElementName.PREFLIGHTINSTANCEDETAIL, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element PreflightInstanceDetail
      * @param iSkip number of elements to skip
@@ -265,9 +256,10 @@ public abstract class JDFAutoPreflightInstance extends JDFElement
         return (JDFPreflightInstanceDetail) getElement(ElementName.PREFLIGHTINSTANCEDETAIL, null, iSkip);
     }
 
-
-
-    public JDFPreflightInstanceDetail appendPreflightInstanceDetail()
+    /**
+     * (30) append element PreflightInstanceDetail
+     */
+    public JDFPreflightInstanceDetail appendPreflightInstanceDetail() throws JDFException
     {
         return (JDFPreflightInstanceDetail) appendElement(ElementName.PREFLIGHTINSTANCEDETAIL, null);
     }

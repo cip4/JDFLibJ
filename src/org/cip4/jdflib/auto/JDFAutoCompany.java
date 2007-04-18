@@ -79,6 +79,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContact;
     /*
@@ -199,8 +200,6 @@ public abstract class JDFAutoCompany extends JDFResource
             setAttribute(AttributeName.ORGANIZATIONNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute OrganizationName
           * @return the value of the attribute
@@ -209,8 +208,6 @@ public abstract class JDFAutoCompany extends JDFResource
         {
             return getAttribute(AttributeName.ORGANIZATIONNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -227,8 +224,6 @@ public abstract class JDFAutoCompany extends JDFResource
         return (JDFContact)getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Contact
      * @param iSkip number of elements to skip
@@ -239,9 +234,10 @@ public abstract class JDFAutoCompany extends JDFResource
         return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
     }
 
-
-
-    public JDFContact appendContact()
+    /**
+     * (30) append element Contact
+     */
+    public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -254,6 +250,7 @@ public abstract class JDFAutoCompany extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateOrganizationalUnit
      * 
      * @param iSkip number of elements to skip
@@ -263,8 +260,6 @@ public abstract class JDFAutoCompany extends JDFResource
     {
         return (JDFElement)getCreateElement_KElement(ElementName.ORGANIZATIONALUNIT, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element OrganizationalUnit
@@ -276,9 +271,10 @@ public abstract class JDFAutoCompany extends JDFResource
         return (JDFElement) getElement(ElementName.ORGANIZATIONALUNIT, null, iSkip);
     }
 
-
-
-    public JDFElement appendOrganizationalUnit()
+    /**
+     * (30) append element OrganizationalUnit
+     */
+    public JDFElement appendOrganizationalUnit() throws JDFException
     {
         return (JDFElement) appendElement(ElementName.ORGANIZATIONALUNIT, null);
     }

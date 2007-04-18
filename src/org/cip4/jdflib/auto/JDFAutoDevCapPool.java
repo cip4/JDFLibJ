@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCap;
     /*
     *****************************************************************************
@@ -165,8 +166,6 @@ public abstract class JDFAutoDevCapPool extends JDFElement
         return (JDFDevCap)getCreateElement_KElement(ElementName.DEVCAP, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element DevCap
      * @param iSkip number of elements to skip
@@ -177,9 +176,10 @@ public abstract class JDFAutoDevCapPool extends JDFElement
         return (JDFDevCap) getElement(ElementName.DEVCAP, null, iSkip);
     }
 
-
-
-    public JDFDevCap appendDevCap()
+    /**
+     * (30) append element DevCap
+     */
+    public JDFDevCap appendDevCap() throws JDFException
     {
         return (JDFDevCap) appendElement(ElementName.DEVCAP, null);
     }

@@ -486,8 +486,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             setAttribute(AttributeName.FINISHINGORDER, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute FinishingOrder
           * @return the value of the attribute
@@ -496,8 +494,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
         {
             return EnumFinishingOrder.getEnum(getAttribute(AttributeName.FINISHINGORDER, null, "GatherFold"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -512,8 +508,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             setAttribute(AttributeName.FOLDCATALOGORIENTATION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute FoldCatalogOrientation
           * @return the value of the attribute
@@ -522,8 +516,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
         {
             return EnumFoldCatalogOrientation.getEnum(getAttribute(AttributeName.FOLDCATALOGORIENTATION, null, "Rotate0"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -538,8 +530,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             setAttribute(AttributeName.PAGEDISTRIBUTIONSCHEME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute PageDistributionScheme
           * @return the value of the attribute
@@ -548,8 +538,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
         {
             return getAttribute(AttributeName.PAGEDISTRIBUTIONSCHEME, null, "Sequential");
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -564,8 +552,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             setAttribute(AttributeName.PAGEORDER, value, null);
         }
 
-
-
         /**
           * (23) get String attribute PageOrder
           * @return the value of the attribute
@@ -574,8 +560,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
         {
             return getAttribute(AttributeName.PAGEORDER, null, "Reader");
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -590,8 +574,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             setAttribute(AttributeName.ROTATE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Rotate
           * @return the value of the attribute
@@ -600,8 +582,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
         {
             return EnumRotate.getEnum(getAttribute(AttributeName.ROTATE, null, "Rotate0"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -616,8 +596,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             setAttribute(AttributeName.SIDES, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Sides
           * @return the value of the attribute
@@ -626,8 +604,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
         {
             return EnumSides.getEnum(getAttribute(AttributeName.SIDES, null, "OneSidedFront"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -642,8 +618,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             setAttribute(AttributeName.BINDINGEDGE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute BindingEdge
           * @return the value of the attribute
@@ -652,8 +626,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
         {
             return EnumBindingEdge.getEnum(getAttribute(AttributeName.BINDINGEDGE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -668,8 +640,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             setAttribute(AttributeName.BACKMARKLIST, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute BackMarkList
           * @return VString the value of the attribute
@@ -681,8 +651,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -697,11 +665,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             setAttribute(AttributeName.CREEPVALUE, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute CreepValue
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getCreepValue()
@@ -720,8 +686,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute FoldCatalog
@@ -735,8 +699,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             setAttribute(AttributeName.FOLDCATALOG, value, null);
         }
 
-
-
         /**
           * (23) get String attribute FoldCatalog
           * @return the value of the attribute
@@ -745,8 +707,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
         {
             return getAttribute(AttributeName.FOLDCATALOG, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -761,8 +721,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             setAttribute(AttributeName.FRONTMARKLIST, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute FrontMarkList
           * @return VString the value of the attribute
@@ -774,8 +732,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -790,11 +746,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             setAttribute(AttributeName.GUTTER, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute Gutter
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getGutter()
@@ -813,8 +767,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute GutterMinimumLimit
@@ -828,11 +780,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             setAttribute(AttributeName.GUTTERMINIMUMLIMIT, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute GutterMinimumLimit
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getGutterMinimumLimit()
@@ -851,8 +801,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute HorizontalCreep
@@ -866,11 +814,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             setAttribute(AttributeName.HORIZONTALCREEP, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerList attribute HorizontalCreep
-          * @return JDFIntegerListthe value of the attribute, null if a the
+          * @return JDFIntegerList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerList
           */
         public JDFIntegerList getHorizontalCreep()
@@ -889,8 +835,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ImplicitGutter
@@ -904,11 +848,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             setAttribute(AttributeName.IMPLICITGUTTER, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute ImplicitGutter
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getImplicitGutter()
@@ -927,8 +869,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ImplicitGutterMinimumLimit
@@ -942,11 +882,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             setAttribute(AttributeName.IMPLICITGUTTERMINIMUMLIMIT, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute ImplicitGutterMinimumLimit
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getImplicitGutterMinimumLimit()
@@ -965,8 +903,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute NumberUp
@@ -980,11 +916,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             setAttribute(AttributeName.NUMBERUP, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute NumberUp
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getNumberUp()
@@ -1003,8 +937,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute PresentationDirection
@@ -1018,8 +950,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             setAttribute(AttributeName.PRESENTATIONDIRECTION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute PresentationDirection
           * @return the value of the attribute
@@ -1028,8 +958,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
         {
             return getAttribute(AttributeName.PRESENTATIONDIRECTION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1044,8 +972,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             setAttribute(AttributeName.STACKDEPTH, value, null);
         }
 
-
-
         /**
           * (15) get int attribute StackDepth
           * @return int the value of the attribute
@@ -1054,8 +980,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
         {
             return getIntAttribute(AttributeName.STACKDEPTH, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1070,11 +994,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             setAttribute(AttributeName.STEPDOCS, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute StepDocs
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getStepDocs()
@@ -1093,8 +1015,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute StepRepeat
@@ -1108,11 +1028,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             setAttribute(AttributeName.STEPREPEAT, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerRange attribute StepRepeat
-          * @return JDFIntegerRangethe value of the attribute, null if a the
+          * @return JDFIntegerRange the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerRange
           */
         public JDFIntegerRange getStepRepeat()
@@ -1131,8 +1049,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute SurfaceContentsBox
@@ -1146,11 +1062,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             setAttribute(AttributeName.SURFACECONTENTSBOX, value, null);
         }
 
-
-
         /**
           * (20) get JDFRectangle attribute SurfaceContentsBox
-          * @return JDFRectanglethe value of the attribute, null if a the
+          * @return JDFRectangle the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFRectangle
           */
         public JDFRectangle getSurfaceContentsBox()
@@ -1169,8 +1083,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute VerticalCreep
@@ -1184,11 +1096,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             setAttribute(AttributeName.VERTICALCREEP, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerList attribute VerticalCreep
-          * @return JDFIntegerListthe value of the attribute, null if a the
+          * @return JDFIntegerList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerList
           */
         public JDFIntegerList getVerticalCreep()
@@ -1207,8 +1117,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -1223,8 +1131,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
         return (JDFImageShift) getElement(ElementName.IMAGESHIFT, null, 0);
     }
 
-
-
     /** (25) getCreateImageShift
      * 
      * @return JDFImageShift the element
@@ -1234,17 +1140,14 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
         return (JDFImageShift) getCreateElement_KElement(ElementName.IMAGESHIFT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementImageShift
+     * (29) append element ImageShift
      */
     public JDFImageShift appendImageShift() throws JDFException
     {
         return (JDFImageShift) appendElementN(ElementName.IMAGESHIFT, 1, null);
     }
+
     /** (26) getCreateInsertSheet
      * 
      * @param iSkip number of elements to skip
@@ -1254,8 +1157,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
     {
         return (JDFInsertSheet)getCreateElement_KElement(ElementName.INSERTSHEET, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element InsertSheet
@@ -1267,9 +1168,10 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
         return (JDFInsertSheet) getElement(ElementName.INSERTSHEET, null, iSkip);
     }
 
-
-
-    public JDFInsertSheet appendInsertSheet()
+    /**
+     * (30) append element InsertSheet
+     */
+    public JDFInsertSheet appendInsertSheet() throws JDFException
     {
         return (JDFInsertSheet) appendElement(ElementName.INSERTSHEET, null);
     }
@@ -1282,6 +1184,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element DeviceMark
      * @return JDFDeviceMark the element
@@ -1290,8 +1193,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
     {
         return (JDFDeviceMark) getElement(ElementName.DEVICEMARK, null, 0);
     }
-
-
 
     /** (25) getCreateDeviceMark
      * 
@@ -1302,17 +1203,14 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
         return (JDFDeviceMark) getCreateElement_KElement(ElementName.DEVICEMARK, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDeviceMark
+     * (29) append element DeviceMark
      */
     public JDFDeviceMark appendDeviceMark() throws JDFException
     {
         return (JDFDeviceMark) appendElementN(ElementName.DEVICEMARK, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -1321,6 +1219,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element ExternalImpositionTemplate
      * @return JDFExternalImpositionTemplate the element
@@ -1329,8 +1228,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
     {
         return (JDFExternalImpositionTemplate) getElement(ElementName.EXTERNALIMPOSITIONTEMPLATE, null, 0);
     }
-
-
 
     /** (25) getCreateExternalImpositionTemplate
      * 
@@ -1341,17 +1238,14 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
         return (JDFExternalImpositionTemplate) getCreateElement_KElement(ElementName.EXTERNALIMPOSITIONTEMPLATE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementExternalImpositionTemplate
+     * (29) append element ExternalImpositionTemplate
      */
     public JDFExternalImpositionTemplate appendExternalImpositionTemplate() throws JDFException
     {
         return (JDFExternalImpositionTemplate) appendElementN(ElementName.EXTERNALIMPOSITIONTEMPLATE, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -1360,6 +1254,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element FitPolicy
      * @return JDFFitPolicy the element
@@ -1368,8 +1263,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
     {
         return (JDFFitPolicy) getElement(ElementName.FITPOLICY, null, 0);
     }
-
-
 
     /** (25) getCreateFitPolicy
      * 
@@ -1380,17 +1273,14 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
         return (JDFFitPolicy) getCreateElement_KElement(ElementName.FITPOLICY, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFitPolicy
+     * (29) append element FitPolicy
      */
     public JDFFitPolicy appendFitPolicy() throws JDFException
     {
         return (JDFFitPolicy) appendElementN(ElementName.FITPOLICY, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -1399,6 +1289,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateJobField
      * 
      * @param iSkip number of elements to skip
@@ -1408,8 +1299,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
     {
         return (JDFJobField)getCreateElement_KElement(ElementName.JOBFIELD, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element JobField
@@ -1421,9 +1310,10 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
         return (JDFJobField) getElement(ElementName.JOBFIELD, null, iSkip);
     }
 
-
-
-    public JDFJobField appendJobField()
+    /**
+     * (30) append element JobField
+     */
+    public JDFJobField appendJobField() throws JDFException
     {
         return (JDFJobField) appendElement(ElementName.JOBFIELD, null);
     }
@@ -1436,6 +1326,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element Media
      * @return JDFMedia the element
@@ -1444,8 +1335,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
     {
         return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
     }
-
-
 
     /** (25) getCreateMedia
      * 
@@ -1456,17 +1345,14 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
         return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMedia
+     * (29) append element Media
      */
     public JDFMedia appendMedia() throws JDFException
     {
         return (JDFMedia) appendElementN(ElementName.MEDIA, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -1475,6 +1361,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element PageCell
      * @return JDFPageCell the element
@@ -1483,8 +1370,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
     {
         return (JDFPageCell) getElement(ElementName.PAGECELL, null, 0);
     }
-
-
 
     /** (25) getCreatePageCell
      * 
@@ -1495,15 +1380,12 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
         return (JDFPageCell) getCreateElement_KElement(ElementName.PAGECELL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPageCell
+     * (29) append element PageCell
      */
     public JDFPageCell appendPageCell() throws JDFException
     {
         return (JDFPageCell) appendElementN(ElementName.PAGECELL, 1, null);
     }
+
 }// end namespace JDF

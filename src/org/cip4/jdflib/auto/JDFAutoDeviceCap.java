@@ -355,8 +355,6 @@ public abstract class JDFAutoDeviceCap extends JDFElement
             setEnumerationsAttribute(AttributeName.COMBINEDMETHOD, v, null);
         }
 
-
-
         /**
           * (9.2) get CombinedMethod attribute CombinedMethod
           * @return Vector of the enumerations
@@ -365,8 +363,6 @@ public abstract class JDFAutoDeviceCap extends JDFElement
         {
             return getEnumerationsAttribute(AttributeName.COMBINEDMETHOD, null, EnumCombinedMethod.None, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -381,8 +377,6 @@ public abstract class JDFAutoDeviceCap extends JDFElement
             setAttribute(AttributeName.EXECUTIONPOLICY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ExecutionPolicy
           * @return the value of the attribute
@@ -391,8 +385,6 @@ public abstract class JDFAutoDeviceCap extends JDFElement
         {
             return EnumExecutionPolicy.getEnum(getAttribute(AttributeName.EXECUTIONPOLICY, null, "AllFound"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -407,8 +399,6 @@ public abstract class JDFAutoDeviceCap extends JDFElement
             setAttribute(AttributeName.GENERICATTRIBUTES, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute GenericAttributes
           * @return VString the value of the attribute
@@ -420,8 +410,6 @@ public abstract class JDFAutoDeviceCap extends JDFElement
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -436,8 +424,6 @@ public abstract class JDFAutoDeviceCap extends JDFElement
             setAttribute(AttributeName.LANG, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute Lang
           * @return VString the value of the attribute
@@ -449,8 +435,6 @@ public abstract class JDFAutoDeviceCap extends JDFElement
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -465,8 +449,6 @@ public abstract class JDFAutoDeviceCap extends JDFElement
             setAttribute(AttributeName.OPTIONALCOMBINEDTYPES, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute OptionalCombinedTypes
           * @return VString the value of the attribute
@@ -478,8 +460,6 @@ public abstract class JDFAutoDeviceCap extends JDFElement
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -494,8 +474,6 @@ public abstract class JDFAutoDeviceCap extends JDFElement
             setAttribute(AttributeName.TYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Type
           * @return the value of the attribute
@@ -504,8 +482,6 @@ public abstract class JDFAutoDeviceCap extends JDFElement
         {
             return getAttribute(AttributeName.TYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -520,8 +496,6 @@ public abstract class JDFAutoDeviceCap extends JDFElement
             setAttribute(AttributeName.TYPEEXPRESSION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute TypeExpression
           * @return the value of the attribute
@@ -530,8 +504,6 @@ public abstract class JDFAutoDeviceCap extends JDFElement
         {
             return getAttribute(AttributeName.TYPEEXPRESSION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -546,8 +518,6 @@ public abstract class JDFAutoDeviceCap extends JDFElement
             setAttribute(AttributeName.TYPEORDER, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute TypeOrder
           * @return the value of the attribute
@@ -556,8 +526,6 @@ public abstract class JDFAutoDeviceCap extends JDFElement
         {
             return EnumTypeOrder.getEnum(getAttribute(AttributeName.TYPEORDER, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -572,8 +540,6 @@ public abstract class JDFAutoDeviceCap extends JDFElement
             setAttribute(AttributeName.TYPES, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute Types
           * @return VString the value of the attribute
@@ -585,8 +551,6 @@ public abstract class JDFAutoDeviceCap extends JDFElement
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -602,8 +566,6 @@ public abstract class JDFAutoDeviceCap extends JDFElement
         return (JDFActionPool) getElement(ElementName.ACTIONPOOL, null, 0);
     }
 
-
-
     /** (25) getCreateActionPool
      * 
      * @return JDFActionPool the element
@@ -613,17 +575,14 @@ public abstract class JDFAutoDeviceCap extends JDFElement
         return (JDFActionPool) getCreateElement_KElement(ElementName.ACTIONPOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementActionPool
+     * (29) append element ActionPool
      */
     public JDFActionPool appendActionPool() throws JDFException
     {
         return (JDFActionPool) appendElementN(ElementName.ACTIONPOOL, 1, null);
     }
+
     /**
      * (24) const get element DevCapPool
      * @return JDFDevCapPool the element
@@ -632,8 +591,6 @@ public abstract class JDFAutoDeviceCap extends JDFElement
     {
         return (JDFDevCapPool) getElement(ElementName.DEVCAPPOOL, null, 0);
     }
-
-
 
     /** (25) getCreateDevCapPool
      * 
@@ -644,17 +601,14 @@ public abstract class JDFAutoDeviceCap extends JDFElement
         return (JDFDevCapPool) getCreateElement_KElement(ElementName.DEVCAPPOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDevCapPool
+     * (29) append element DevCapPool
      */
     public JDFDevCapPool appendDevCapPool() throws JDFException
     {
         return (JDFDevCapPool) appendElementN(ElementName.DEVCAPPOOL, 1, null);
     }
+
     /** (26) getCreateDevCaps
      * 
      * @param iSkip number of elements to skip
@@ -664,8 +618,6 @@ public abstract class JDFAutoDeviceCap extends JDFElement
     {
         return (JDFDevCaps)getCreateElement_KElement(ElementName.DEVCAPS, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element DevCaps
@@ -677,9 +629,10 @@ public abstract class JDFAutoDeviceCap extends JDFElement
         return (JDFDevCaps) getElement(ElementName.DEVCAPS, null, iSkip);
     }
 
-
-
-    public JDFDevCaps appendDevCaps()
+    /**
+     * (30) append element DevCaps
+     */
+    public JDFDevCaps appendDevCaps() throws JDFException
     {
         return (JDFDevCaps) appendElement(ElementName.DEVCAPS, null);
     }
@@ -693,8 +646,6 @@ public abstract class JDFAutoDeviceCap extends JDFElement
         return (JDFDisplayGroupPool) getElement(ElementName.DISPLAYGROUPPOOL, null, 0);
     }
 
-
-
     /** (25) getCreateDisplayGroupPool
      * 
      * @return JDFDisplayGroupPool the element
@@ -704,17 +655,14 @@ public abstract class JDFAutoDeviceCap extends JDFElement
         return (JDFDisplayGroupPool) getCreateElement_KElement(ElementName.DISPLAYGROUPPOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDisplayGroupPool
+     * (29) append element DisplayGroupPool
      */
     public JDFDisplayGroupPool appendDisplayGroupPool() throws JDFException
     {
         return (JDFDisplayGroupPool) appendElementN(ElementName.DISPLAYGROUPPOOL, 1, null);
     }
+
     /**
      * (24) const get element FeaturePool
      * @return JDFFeaturePool the element
@@ -723,8 +671,6 @@ public abstract class JDFAutoDeviceCap extends JDFElement
     {
         return (JDFFeaturePool) getElement(ElementName.FEATUREPOOL, null, 0);
     }
-
-
 
     /** (25) getCreateFeaturePool
      * 
@@ -735,17 +681,14 @@ public abstract class JDFAutoDeviceCap extends JDFElement
         return (JDFFeaturePool) getCreateElement_KElement(ElementName.FEATUREPOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFeaturePool
+     * (29) append element FeaturePool
      */
     public JDFFeaturePool appendFeaturePool() throws JDFException
     {
         return (JDFFeaturePool) appendElementN(ElementName.FEATUREPOOL, 1, null);
     }
+
     /**
      * (24) const get element MacroPool
      * @return JDFMacroPool the element
@@ -754,8 +697,6 @@ public abstract class JDFAutoDeviceCap extends JDFElement
     {
         return (JDFMacroPool) getElement(ElementName.MACROPOOL, null, 0);
     }
-
-
 
     /** (25) getCreateMacroPool
      * 
@@ -766,17 +707,14 @@ public abstract class JDFAutoDeviceCap extends JDFElement
         return (JDFMacroPool) getCreateElement_KElement(ElementName.MACROPOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMacroPool
+     * (29) append element MacroPool
      */
     public JDFMacroPool appendMacroPool() throws JDFException
     {
         return (JDFMacroPool) appendElementN(ElementName.MACROPOOL, 1, null);
     }
+
     /**
      * (24) const get element ModulePool
      * @return JDFModulePool the element
@@ -785,8 +723,6 @@ public abstract class JDFAutoDeviceCap extends JDFElement
     {
         return (JDFModulePool) getElement(ElementName.MODULEPOOL, null, 0);
     }
-
-
 
     /** (25) getCreateModulePool
      * 
@@ -797,17 +733,14 @@ public abstract class JDFAutoDeviceCap extends JDFElement
         return (JDFModulePool) getCreateElement_KElement(ElementName.MODULEPOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementModulePool
+     * (29) append element ModulePool
      */
     public JDFModulePool appendModulePool() throws JDFException
     {
         return (JDFModulePool) appendElementN(ElementName.MODULEPOOL, 1, null);
     }
+
     /** (26) getCreatePerformance
      * 
      * @param iSkip number of elements to skip
@@ -817,8 +750,6 @@ public abstract class JDFAutoDeviceCap extends JDFElement
     {
         return (JDFPerformance)getCreateElement_KElement(ElementName.PERFORMANCE, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Performance
@@ -830,9 +761,10 @@ public abstract class JDFAutoDeviceCap extends JDFElement
         return (JDFPerformance) getElement(ElementName.PERFORMANCE, null, iSkip);
     }
 
-
-
-    public JDFPerformance appendPerformance()
+    /**
+     * (30) append element Performance
+     */
+    public JDFPerformance appendPerformance() throws JDFException
     {
         return (JDFPerformance) appendElement(ElementName.PERFORMANCE, null);
     }
@@ -846,8 +778,6 @@ public abstract class JDFAutoDeviceCap extends JDFElement
         return (JDFTestPool) getElement(ElementName.TESTPOOL, null, 0);
     }
 
-
-
     /** (25) getCreateTestPool
      * 
      * @return JDFTestPool the element
@@ -857,15 +787,12 @@ public abstract class JDFAutoDeviceCap extends JDFElement
         return (JDFTestPool) getCreateElement_KElement(ElementName.TESTPOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementTestPool
+     * (29) append element TestPool
      */
     public JDFTestPool appendTestPool() throws JDFException
     {
         return (JDFTestPool) appendElementN(ElementName.TESTPOOL, 1, null);
     }
+
 }// end namespace JDF

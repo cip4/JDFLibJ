@@ -166,8 +166,6 @@ public abstract class JDFAutoPayment extends JDFElement
         return (JDFElement) getElement(ElementName.PAYTERM, null, 0);
     }
 
-
-
     /** (25) getCreatePayTerm
      * 
      * @return JDFElement the element
@@ -177,17 +175,14 @@ public abstract class JDFAutoPayment extends JDFElement
         return (JDFElement) getCreateElement_KElement(ElementName.PAYTERM, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPayTerm
+     * (29) append element PayTerm
      */
     public JDFElement appendPayTerm() throws JDFException
     {
         return (JDFElement) appendElementN(ElementName.PAYTERM, 1, null);
     }
+
     /**
      * (24) const get element CreditCard
      * @return JDFCreditCard the element
@@ -196,8 +191,6 @@ public abstract class JDFAutoPayment extends JDFElement
     {
         return (JDFCreditCard) getElement(ElementName.CREDITCARD, null, 0);
     }
-
-
 
     /** (25) getCreateCreditCard
      * 
@@ -208,15 +201,12 @@ public abstract class JDFAutoPayment extends JDFElement
         return (JDFCreditCard) getCreateElement_KElement(ElementName.CREDITCARD, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementCreditCard
+     * (29) append element CreditCard
      */
     public JDFCreditCard appendCreditCard() throws JDFException
     {
         return (JDFCreditCard) appendElementN(ElementName.CREDITCARD, 1, null);
     }
+
 }// end namespace JDF

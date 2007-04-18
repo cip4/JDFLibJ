@@ -77,6 +77,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFCoverApplicationParams;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFSpinePreparationParams;
@@ -203,8 +204,6 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
             setAttribute(AttributeName.PULLOUTVALUE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute PullOutValue
           * @return double the value of the attribute
@@ -213,8 +212,6 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.PULLOUTVALUE, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -229,8 +226,6 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
             setAttribute(AttributeName.FLEXVALUE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute FlexValue
           * @return double the value of the attribute
@@ -239,8 +234,6 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.FLEXVALUE, null, 0.0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -257,8 +250,6 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
         return (JDFSpinePreparationParams)getCreateElement_KElement(ElementName.SPINEPREPARATIONPARAMS, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element SpinePreparationParams
      * @param iSkip number of elements to skip
@@ -269,9 +260,10 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
         return (JDFSpinePreparationParams) getElement(ElementName.SPINEPREPARATIONPARAMS, null, iSkip);
     }
 
-
-
-    public JDFSpinePreparationParams appendSpinePreparationParams()
+    /**
+     * (30) append element SpinePreparationParams
+     */
+    public JDFSpinePreparationParams appendSpinePreparationParams() throws JDFException
     {
         return (JDFSpinePreparationParams) appendElement(ElementName.SPINEPREPARATIONPARAMS, null);
     }
@@ -286,8 +278,6 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
         return (JDFGlueApplication)getCreateElement_KElement(ElementName.GLUEAPPLICATION, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element GlueApplication
      * @param iSkip number of elements to skip
@@ -298,9 +288,10 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
         return (JDFGlueApplication) getElement(ElementName.GLUEAPPLICATION, null, iSkip);
     }
 
-
-
-    public JDFGlueApplication appendGlueApplication()
+    /**
+     * (30) append element GlueApplication
+     */
+    public JDFGlueApplication appendGlueApplication() throws JDFException
     {
         return (JDFGlueApplication) appendElement(ElementName.GLUEAPPLICATION, null);
     }
@@ -315,8 +306,6 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
         return (JDFSpineTapingParams)getCreateElement_KElement(ElementName.SPINETAPINGPARAMS, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element SpineTapingParams
      * @param iSkip number of elements to skip
@@ -327,9 +316,10 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
         return (JDFSpineTapingParams) getElement(ElementName.SPINETAPINGPARAMS, null, iSkip);
     }
 
-
-
-    public JDFSpineTapingParams appendSpineTapingParams()
+    /**
+     * (30) append element SpineTapingParams
+     */
+    public JDFSpineTapingParams appendSpineTapingParams() throws JDFException
     {
         return (JDFSpineTapingParams) appendElement(ElementName.SPINETAPINGPARAMS, null);
     }
@@ -344,8 +334,6 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
         return (JDFCoverApplicationParams)getCreateElement_KElement(ElementName.COVERAPPLICATIONPARAMS, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element CoverApplicationParams
      * @param iSkip number of elements to skip
@@ -356,9 +344,10 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
         return (JDFCoverApplicationParams) getElement(ElementName.COVERAPPLICATIONPARAMS, null, iSkip);
     }
 
-
-
-    public JDFCoverApplicationParams appendCoverApplicationParams()
+    /**
+     * (30) append element CoverApplicationParams
+     */
+    public JDFCoverApplicationParams appendCoverApplicationParams() throws JDFException
     {
         return (JDFCoverApplicationParams) appendElement(ElementName.COVERAPPLICATIONPARAMS, null);
     }

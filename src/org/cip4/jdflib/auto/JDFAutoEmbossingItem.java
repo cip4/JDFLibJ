@@ -179,8 +179,6 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
         return (JDFSpanDirection) getElement(ElementName.DIRECTION, null, 0);
     }
 
-
-
     /** (25) getCreateDirection
      * 
      * @return JDFSpanDirection the element
@@ -190,17 +188,14 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
         return (JDFSpanDirection) getCreateElement_KElement(ElementName.DIRECTION, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDirection
+     * (29) append element Direction
      */
     public JDFSpanDirection appendDirection() throws JDFException
     {
         return (JDFSpanDirection) appendElementN(ElementName.DIRECTION, 1, null);
     }
+
     /**
      * (24) const get element EdgeAngle
      * @return JDFNumberSpan the element
@@ -209,8 +204,6 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
     {
         return (JDFNumberSpan) getElement(ElementName.EDGEANGLE, null, 0);
     }
-
-
 
     /** (25) getCreateEdgeAngle
      * 
@@ -221,17 +214,14 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
         return (JDFNumberSpan) getCreateElement_KElement(ElementName.EDGEANGLE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementEdgeAngle
+     * (29) append element EdgeAngle
      */
     public JDFNumberSpan appendEdgeAngle() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.EDGEANGLE, 1, null);
     }
+
     /**
      * (24) const get element EdgeShape
      * @return JDFSpanEdgeShape the element
@@ -240,8 +230,6 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
     {
         return (JDFSpanEdgeShape) getElement(ElementName.EDGESHAPE, null, 0);
     }
-
-
 
     /** (25) getCreateEdgeShape
      * 
@@ -252,17 +240,14 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
         return (JDFSpanEdgeShape) getCreateElement_KElement(ElementName.EDGESHAPE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementEdgeShape
+     * (29) append element EdgeShape
      */
     public JDFSpanEdgeShape appendEdgeShape() throws JDFException
     {
         return (JDFSpanEdgeShape) appendElementN(ElementName.EDGESHAPE, 1, null);
     }
+
     /**
      * (24) const get element EmbossingType
      * @return JDFStringSpan the element
@@ -271,8 +256,6 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
     {
         return (JDFStringSpan) getElement(ElementName.EMBOSSINGTYPE, null, 0);
     }
-
-
 
     /** (25) getCreateEmbossingType
      * 
@@ -283,17 +266,14 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
         return (JDFStringSpan) getCreateElement_KElement(ElementName.EMBOSSINGTYPE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementEmbossingType
+     * (29) append element EmbossingType
      */
     public JDFStringSpan appendEmbossingType() throws JDFException
     {
         return (JDFStringSpan) appendElementN(ElementName.EMBOSSINGTYPE, 1, null);
     }
+
     /**
      * (24) const get element FoilColor
      * @return JDFSpanNamedColor the element
@@ -302,8 +282,6 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
     {
         return (JDFSpanNamedColor) getElement(ElementName.FOILCOLOR, null, 0);
     }
-
-
 
     /** (25) getCreateFoilColor
      * 
@@ -314,17 +292,14 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
         return (JDFSpanNamedColor) getCreateElement_KElement(ElementName.FOILCOLOR, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFoilColor
+     * (29) append element FoilColor
      */
     public JDFSpanNamedColor appendFoilColor() throws JDFException
     {
         return (JDFSpanNamedColor) appendElementN(ElementName.FOILCOLOR, 1, null);
     }
+
     /**
      * (24) const get element Height
      * @return JDFNumberSpan the element
@@ -333,8 +308,6 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
     {
         return (JDFNumberSpan) getElement(ElementName.HEIGHT, null, 0);
     }
-
-
 
     /** (25) getCreateHeight
      * 
@@ -345,17 +318,14 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
         return (JDFNumberSpan) getCreateElement_KElement(ElementName.HEIGHT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementHeight
+     * (29) append element Height
      */
     public JDFNumberSpan appendHeight() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.HEIGHT, 1, null);
     }
+
     /**
      * (24) const get element ImageSize
      * @return JDFXYPairSpan the element
@@ -364,8 +334,6 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
     {
         return (JDFXYPairSpan) getElement(ElementName.IMAGESIZE, null, 0);
     }
-
-
 
     /** (25) getCreateImageSize
      * 
@@ -376,17 +344,14 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
         return (JDFXYPairSpan) getCreateElement_KElement(ElementName.IMAGESIZE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementImageSize
+     * (29) append element ImageSize
      */
     public JDFXYPairSpan appendImageSize() throws JDFException
     {
         return (JDFXYPairSpan) appendElementN(ElementName.IMAGESIZE, 1, null);
     }
+
     /**
      * (24) const get element Level
      * @return JDFSpanLevel the element
@@ -395,8 +360,6 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
     {
         return (JDFSpanLevel) getElement(ElementName.LEVEL, null, 0);
     }
-
-
 
     /** (25) getCreateLevel
      * 
@@ -407,17 +370,14 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
         return (JDFSpanLevel) getCreateElement_KElement(ElementName.LEVEL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementLevel
+     * (29) append element Level
      */
     public JDFSpanLevel appendLevel() throws JDFException
     {
         return (JDFSpanLevel) appendElementN(ElementName.LEVEL, 1, null);
     }
+
     /**
      * (24) const get element Position
      * @return JDFXYPairSpan the element
@@ -426,8 +386,6 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
     {
         return (JDFXYPairSpan) getElement(ElementName.POSITION, null, 0);
     }
-
-
 
     /** (25) getCreatePosition
      * 
@@ -438,15 +396,12 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
         return (JDFXYPairSpan) getCreateElement_KElement(ElementName.POSITION, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPosition
+     * (29) append element Position
      */
     public JDFXYPairSpan appendPosition() throws JDFException
     {
         return (JDFXYPairSpan) appendElementN(ElementName.POSITION, 1, null);
     }
+
 }// end namespace JDF

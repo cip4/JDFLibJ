@@ -78,6 +78,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
@@ -203,8 +204,6 @@ public abstract class JDFAutoInk extends JDFResource
             setAttribute(AttributeName.COLORNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ColorName
           * @return the value of the attribute
@@ -213,8 +212,6 @@ public abstract class JDFAutoInk extends JDFResource
         {
             return getAttribute(AttributeName.COLORNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -229,8 +226,6 @@ public abstract class JDFAutoInk extends JDFResource
             setAttribute(AttributeName.FAMILY, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Family
           * @return the value of the attribute
@@ -239,8 +234,6 @@ public abstract class JDFAutoInk extends JDFResource
         {
             return getAttribute(AttributeName.FAMILY, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -255,8 +248,6 @@ public abstract class JDFAutoInk extends JDFResource
             setAttribute(AttributeName.INKNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute InkName
           * @return the value of the attribute
@@ -265,8 +256,6 @@ public abstract class JDFAutoInk extends JDFResource
         {
             return getAttribute(AttributeName.INKNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -281,8 +270,6 @@ public abstract class JDFAutoInk extends JDFResource
             setAttribute(AttributeName.SPECIALINK, value, null);
         }
 
-
-
         /**
           * (23) get String attribute SpecialInk
           * @return the value of the attribute
@@ -291,8 +278,6 @@ public abstract class JDFAutoInk extends JDFResource
         {
             return getAttribute(AttributeName.SPECIALINK, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -307,8 +292,6 @@ public abstract class JDFAutoInk extends JDFResource
             setAttribute(AttributeName.SPECIFICYIELD, value, null);
         }
 
-
-
         /**
           * (17) get double attribute SpecificYield
           * @return double the value of the attribute
@@ -317,8 +300,6 @@ public abstract class JDFAutoInk extends JDFResource
         {
             return getRealAttribute(AttributeName.SPECIFICYIELD, null, 0.0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -335,8 +316,6 @@ public abstract class JDFAutoInk extends JDFResource
         return (JDFContact)getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Contact
      * @param iSkip number of elements to skip
@@ -347,9 +326,10 @@ public abstract class JDFAutoInk extends JDFResource
         return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
     }
 
-
-
-    public JDFContact appendContact()
+    /**
+     * (30) append element Contact
+     */
+    public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -362,6 +342,7 @@ public abstract class JDFAutoInk extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateIdentificationField
      * 
      * @param iSkip number of elements to skip
@@ -371,8 +352,6 @@ public abstract class JDFAutoInk extends JDFResource
     {
         return (JDFIdentificationField)getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element IdentificationField
@@ -384,9 +363,10 @@ public abstract class JDFAutoInk extends JDFResource
         return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
 
-
-
-    public JDFIdentificationField appendIdentificationField()
+    /**
+     * (30) append element IdentificationField
+     */
+    public JDFIdentificationField appendIdentificationField() throws JDFException
     {
         return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
     }
@@ -399,4 +379,5 @@ public abstract class JDFAutoInk extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

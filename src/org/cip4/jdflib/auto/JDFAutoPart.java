@@ -321,8 +321,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.SORTING, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Sorting
           * @return the value of the attribute
@@ -331,8 +329,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.SORTING, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -347,8 +343,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.SORTAMOUNT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute SortAmount
           * @return the value of the attribute
@@ -357,8 +351,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.SORTAMOUNT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -373,8 +365,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.BINDERYSIGNATURENAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute BinderySignatureName
           * @return the value of the attribute
@@ -383,8 +373,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.BINDERYSIGNATURENAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -399,8 +387,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.BUNDLEITEMINDEX, value, null);
         }
 
-
-
         /**
           * (23) get String attribute BundleItemIndex
           * @return the value of the attribute
@@ -409,8 +395,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.BUNDLEITEMINDEX, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -425,8 +409,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.CELLINDEX, value, null);
         }
 
-
-
         /**
           * (23) get String attribute CellIndex
           * @return the value of the attribute
@@ -435,8 +417,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.CELLINDEX, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -451,8 +431,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.CONDITION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Condition
           * @return the value of the attribute
@@ -461,8 +439,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.CONDITION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -477,8 +453,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.DELIVERYUNIT0, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DeliveryUnit0
           * @return the value of the attribute
@@ -487,8 +461,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.DELIVERYUNIT0, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -503,8 +475,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.DELIVERYUNIT1, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DeliveryUnit1
           * @return the value of the attribute
@@ -513,8 +483,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.DELIVERYUNIT1, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -529,8 +497,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.DELIVERYUNIT2, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DeliveryUnit2
           * @return the value of the attribute
@@ -539,8 +505,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.DELIVERYUNIT2, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -555,8 +519,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.DELIVERYUNIT3, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DeliveryUnit3
           * @return the value of the attribute
@@ -565,8 +527,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.DELIVERYUNIT3, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -581,8 +541,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.DELIVERYUNIT4, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DeliveryUnit4
           * @return the value of the attribute
@@ -591,8 +549,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.DELIVERYUNIT4, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -607,8 +563,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.DELIVERYUNIT5, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DeliveryUnit5
           * @return the value of the attribute
@@ -617,8 +571,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.DELIVERYUNIT5, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -633,8 +585,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.DELIVERYUNIT6, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DeliveryUnit6
           * @return the value of the attribute
@@ -643,8 +593,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.DELIVERYUNIT6, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -659,8 +607,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.DELIVERYUNIT7, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DeliveryUnit7
           * @return the value of the attribute
@@ -669,8 +615,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.DELIVERYUNIT7, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -685,8 +629,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.DELIVERYUNIT8, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DeliveryUnit8
           * @return the value of the attribute
@@ -695,8 +637,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.DELIVERYUNIT8, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -711,8 +651,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.DELIVERYUNIT9, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DeliveryUnit9
           * @return the value of the attribute
@@ -721,8 +659,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.DELIVERYUNIT9, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -737,8 +673,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.DOCINDEX, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DocIndex
           * @return the value of the attribute
@@ -747,8 +681,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.DOCINDEX, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -763,8 +695,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.DOCCOPIES, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DocCopies
           * @return the value of the attribute
@@ -773,8 +703,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.DOCCOPIES, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -789,8 +717,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.DOCRUNINDEX, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DocRunIndex
           * @return the value of the attribute
@@ -799,8 +725,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.DOCRUNINDEX, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -815,8 +739,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.DOCSHEETINDEX, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DocSheetIndex
           * @return the value of the attribute
@@ -825,8 +747,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.DOCSHEETINDEX, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -841,8 +761,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.FOUNTAINNUMBER, value, null);
         }
 
-
-
         /**
           * (23) get String attribute FountainNumber
           * @return the value of the attribute
@@ -851,8 +769,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.FOUNTAINNUMBER, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -867,8 +783,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.DOCTAGS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DocTags
           * @return the value of the attribute
@@ -877,8 +791,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.DOCTAGS, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -893,8 +805,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.EDITION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Edition
           * @return the value of the attribute
@@ -903,8 +813,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.EDITION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -919,8 +827,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.EDITIONVERSION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute EditionVersion
           * @return the value of the attribute
@@ -929,8 +835,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.EDITIONVERSION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -945,8 +849,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.ITEMNAMES, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ItemNames
           * @return the value of the attribute
@@ -955,8 +857,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.ITEMNAMES, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -971,8 +871,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.LAYERIDS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute LayerIDs
           * @return the value of the attribute
@@ -981,8 +879,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.LAYERIDS, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -997,8 +893,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.LOCATION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Location
           * @return the value of the attribute
@@ -1007,8 +901,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.LOCATION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1023,8 +915,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.OPTION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Option
           * @return the value of the attribute
@@ -1033,8 +923,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.OPTION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1049,8 +937,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.PAGENUMBER, value, null);
         }
 
-
-
         /**
           * (23) get String attribute PageNumber
           * @return the value of the attribute
@@ -1059,8 +945,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.PAGENUMBER, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1075,8 +959,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.PAGETAGS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute PageTags
           * @return the value of the attribute
@@ -1085,8 +967,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.PAGETAGS, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1101,8 +981,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.PARTVERSION, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute PartVersion
           * @return VString the value of the attribute
@@ -1114,8 +992,6 @@ public abstract class JDFAutoPart extends JDFElement
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1130,8 +1006,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.PLATELAYOUT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute PlateLayout
           * @return the value of the attribute
@@ -1140,8 +1014,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.PLATELAYOUT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1156,8 +1028,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.PREFLIGHTRULE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute PreflightRule
           * @return the value of the attribute
@@ -1166,8 +1036,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.PREFLIGHTRULE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1182,8 +1050,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.PREVIEWTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute PreviewType
           * @return the value of the attribute
@@ -1192,8 +1058,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return EnumPreviewType.getEnum(getAttribute(AttributeName.PREVIEWTYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1208,8 +1072,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.RIBBONNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute RibbonName
           * @return the value of the attribute
@@ -1218,8 +1080,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.RIBBONNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1234,8 +1094,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.RUN, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Run
           * @return the value of the attribute
@@ -1244,8 +1102,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.RUN, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1260,8 +1116,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.RUNINDEX, value, null);
         }
 
-
-
         /**
           * (23) get String attribute RunIndex
           * @return the value of the attribute
@@ -1270,8 +1124,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.RUNINDEX, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1286,8 +1138,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.RUNPAGE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute RunPage
           * @return the value of the attribute
@@ -1296,8 +1146,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.RUNPAGE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1312,8 +1160,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.RUNSET, value, null);
         }
 
-
-
         /**
           * (23) get String attribute RunSet
           * @return the value of the attribute
@@ -1322,8 +1168,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.RUNSET, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1338,8 +1182,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.RUNTAGS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute RunTags
           * @return the value of the attribute
@@ -1348,8 +1190,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.RUNTAGS, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1364,8 +1204,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.SECTIONINDEX, value, null);
         }
 
-
-
         /**
           * (23) get String attribute SectionIndex
           * @return the value of the attribute
@@ -1374,8 +1212,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.SECTIONINDEX, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1390,8 +1226,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.SEPARATION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Separation
           * @return the value of the attribute
@@ -1400,8 +1234,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.SEPARATION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1416,8 +1248,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.SETDOCINDEX, value, null);
         }
 
-
-
         /**
           * (23) get String attribute SetDocIndex
           * @return the value of the attribute
@@ -1426,8 +1256,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.SETDOCINDEX, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1442,8 +1270,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.SETRUNINDEX, value, null);
         }
 
-
-
         /**
           * (23) get String attribute SetRunIndex
           * @return the value of the attribute
@@ -1452,8 +1278,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.SETRUNINDEX, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1468,8 +1292,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.SETSHEETINDEX, value, null);
         }
 
-
-
         /**
           * (23) get String attribute SetSheetIndex
           * @return the value of the attribute
@@ -1478,8 +1300,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.SETSHEETINDEX, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1494,8 +1314,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.SETTAGS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute SetTags
           * @return the value of the attribute
@@ -1504,8 +1322,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.SETTAGS, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1520,8 +1336,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.SETINDEX, value, null);
         }
 
-
-
         /**
           * (23) get String attribute SetIndex
           * @return the value of the attribute
@@ -1530,8 +1344,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.SETINDEX, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1546,8 +1358,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.SHEETINDEX, value, null);
         }
 
-
-
         /**
           * (23) get String attribute SheetIndex
           * @return the value of the attribute
@@ -1556,8 +1366,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.SHEETINDEX, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1572,8 +1380,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.SHEETNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute SheetName
           * @return the value of the attribute
@@ -1582,8 +1388,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.SHEETNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1598,8 +1402,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.SIDE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Side
           * @return the value of the attribute
@@ -1608,8 +1410,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return EnumSide.getEnum(getAttribute(AttributeName.SIDE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1624,8 +1424,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.SIGNATURENAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute SignatureName
           * @return the value of the attribute
@@ -1634,8 +1432,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.SIGNATURENAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1650,8 +1446,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.SUBRUN, value, null);
         }
 
-
-
         /**
           * (23) get String attribute SubRun
           * @return the value of the attribute
@@ -1660,8 +1454,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.SUBRUN, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1676,8 +1468,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.TILEID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute TileID
           * @return the value of the attribute
@@ -1686,8 +1476,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.TILEID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1702,8 +1490,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.WEBNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute WebName
           * @return the value of the attribute
@@ -1712,8 +1498,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.WEBNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1728,8 +1512,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.WEBPRODUCT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute WebProduct
           * @return the value of the attribute
@@ -1738,8 +1520,6 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.WEBPRODUCT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1754,8 +1534,6 @@ public abstract class JDFAutoPart extends JDFElement
             setAttribute(AttributeName.WEBSETUP, value, null);
         }
 
-
-
         /**
           * (23) get String attribute WebSetup
           * @return the value of the attribute
@@ -1764,7 +1542,5 @@ public abstract class JDFAutoPart extends JDFElement
         {
             return getAttribute(AttributeName.WEBSETUP, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

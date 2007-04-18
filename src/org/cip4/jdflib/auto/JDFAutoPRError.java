@@ -218,8 +218,6 @@ public abstract class JDFAutoPRError extends JDFElement
             setAttribute(AttributeName.ERRORTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ErrorType
           * @return the value of the attribute
@@ -228,8 +226,6 @@ public abstract class JDFAutoPRError extends JDFElement
         {
             return EnumErrorType.getEnum(getAttribute(AttributeName.ERRORTYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -244,8 +240,6 @@ public abstract class JDFAutoPRError extends JDFElement
             setAttribute(AttributeName.VALUE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Value
           * @return the value of the attribute
@@ -254,7 +248,5 @@ public abstract class JDFAutoPRError extends JDFElement
         {
             return getAttribute(AttributeName.VALUE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

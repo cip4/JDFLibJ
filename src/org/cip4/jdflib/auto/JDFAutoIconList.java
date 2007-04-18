@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFIcon;
     /*
     *****************************************************************************
@@ -165,8 +166,6 @@ public abstract class JDFAutoIconList extends JDFElement
         return (JDFIcon)getCreateElement_KElement(ElementName.ICON, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Icon
      * @param iSkip number of elements to skip
@@ -177,9 +176,10 @@ public abstract class JDFAutoIconList extends JDFElement
         return (JDFIcon) getElement(ElementName.ICON, null, iSkip);
     }
 
-
-
-    public JDFIcon appendIcon()
+    /**
+     * (30) append element Icon
+     */
+    public JDFIcon appendIcon() throws JDFException
     {
         return (JDFIcon) appendElement(ElementName.ICON, null);
     }

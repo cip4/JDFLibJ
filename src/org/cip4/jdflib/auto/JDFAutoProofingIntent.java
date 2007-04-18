@@ -74,6 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFProofItem;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
     /*
@@ -165,8 +166,6 @@ public abstract class JDFAutoProofingIntent extends JDFIntentResource
         return (JDFProofItem)getCreateElement_KElement(ElementName.PROOFITEM, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element ProofItem
      * @param iSkip number of elements to skip
@@ -177,9 +176,10 @@ public abstract class JDFAutoProofingIntent extends JDFIntentResource
         return (JDFProofItem) getElement(ElementName.PROOFITEM, null, iSkip);
     }
 
-
-
-    public JDFProofItem appendProofItem()
+    /**
+     * (30) append element ProofItem
+     */
+    public JDFProofItem appendProofItem() throws JDFException
     {
         return (JDFProofItem) appendElement(ElementName.PROOFITEM, null);
     }

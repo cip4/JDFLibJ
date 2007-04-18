@@ -282,8 +282,6 @@ public abstract class JDFAutoScreenSelector extends JDFElement
             setAttribute(AttributeName.ANGLE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Angle
           * @return double the value of the attribute
@@ -292,8 +290,6 @@ public abstract class JDFAutoScreenSelector extends JDFElement
         {
             return getRealAttribute(AttributeName.ANGLE, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -308,8 +304,6 @@ public abstract class JDFAutoScreenSelector extends JDFElement
             setAttribute(AttributeName.ANGLEMAP, value, null);
         }
 
-
-
         /**
           * (23) get String attribute AngleMap
           * @return the value of the attribute
@@ -318,8 +312,6 @@ public abstract class JDFAutoScreenSelector extends JDFElement
         {
             return getAttribute(AttributeName.ANGLEMAP, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -334,8 +326,6 @@ public abstract class JDFAutoScreenSelector extends JDFElement
             setAttribute(AttributeName.DOTSIZE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute DotSize
           * @return double the value of the attribute
@@ -344,8 +334,6 @@ public abstract class JDFAutoScreenSelector extends JDFElement
         {
             return getRealAttribute(AttributeName.DOTSIZE, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -360,8 +348,6 @@ public abstract class JDFAutoScreenSelector extends JDFElement
             setAttribute(AttributeName.FREQUENCY, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Frequency
           * @return double the value of the attribute
@@ -370,8 +356,6 @@ public abstract class JDFAutoScreenSelector extends JDFElement
         {
             return getRealAttribute(AttributeName.FREQUENCY, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -386,8 +370,6 @@ public abstract class JDFAutoScreenSelector extends JDFElement
             setAttribute(AttributeName.SCREENINGFAMILY, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ScreeningFamily
           * @return the value of the attribute
@@ -396,8 +378,6 @@ public abstract class JDFAutoScreenSelector extends JDFElement
         {
             return getAttribute(AttributeName.SCREENINGFAMILY, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -412,8 +392,6 @@ public abstract class JDFAutoScreenSelector extends JDFElement
             setAttribute(AttributeName.SCREENINGTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ScreeningType
           * @return the value of the attribute
@@ -422,8 +400,6 @@ public abstract class JDFAutoScreenSelector extends JDFElement
         {
             return EnumScreeningType.getEnum(getAttribute(AttributeName.SCREENINGTYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -438,8 +414,6 @@ public abstract class JDFAutoScreenSelector extends JDFElement
             setAttribute(AttributeName.SEPARATION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Separation
           * @return the value of the attribute
@@ -448,8 +422,6 @@ public abstract class JDFAutoScreenSelector extends JDFElement
         {
             return getAttribute(AttributeName.SEPARATION, null, "All");
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -463,8 +435,6 @@ public abstract class JDFAutoScreenSelector extends JDFElement
         {
             setAttribute(AttributeName.SOURCEFREQUENCY, value, null);
         }
-
-
 
         /**
           * (20) get JDFNumberRange attribute SourceFrequency
@@ -487,8 +457,6 @@ public abstract class JDFAutoScreenSelector extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute SourceObjects
@@ -502,8 +470,6 @@ public abstract class JDFAutoScreenSelector extends JDFElement
             setEnumerationsAttribute(AttributeName.SOURCEOBJECTS, v, null);
         }
 
-
-
         /**
           * (9.2) get SourceObjects attribute SourceObjects
           * @return Vector of the enumerations
@@ -512,8 +478,6 @@ public abstract class JDFAutoScreenSelector extends JDFElement
         {
             return getEnumerationsAttribute(AttributeName.SOURCEOBJECTS, null, EnumSourceObjects.All, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -528,8 +492,6 @@ public abstract class JDFAutoScreenSelector extends JDFElement
             setAttribute(AttributeName.SPOTFUNCTION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute SpotFunction
           * @return the value of the attribute
@@ -538,7 +500,5 @@ public abstract class JDFAutoScreenSelector extends JDFElement
         {
             return getAttribute(AttributeName.SPOTFUNCTION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

@@ -281,8 +281,6 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
             setAttribute(AttributeName.TRIMCOVER, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute TrimCover
           * @return the value of the attribute
@@ -291,8 +289,6 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
         {
             return EnumTrimCover.getEnum(getAttribute(AttributeName.TRIMCOVER, null, "Both"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -307,8 +303,6 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
             setAttribute(AttributeName.WIDTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Width
           * @return double the value of the attribute
@@ -317,8 +311,6 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.WIDTH, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -333,8 +325,6 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
             setAttribute(AttributeName.HEIGHT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Height
           * @return double the value of the attribute
@@ -343,8 +333,6 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.HEIGHT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -359,8 +347,6 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
             setAttribute(AttributeName.TRIMMINGOFFSET, value, null);
         }
 
-
-
         /**
           * (17) get double attribute TrimmingOffset
           * @return double the value of the attribute
@@ -369,8 +355,6 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.TRIMMINGOFFSET, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -385,8 +369,6 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
             setAttribute(AttributeName.TRIMMINGTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute TrimmingType
           * @return the value of the attribute
@@ -395,7 +377,5 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
         {
             return EnumTrimmingType.getEnum(getAttribute(AttributeName.TRIMMINGTYPE, null, null));
         }
-
-
 
 }// end namespace JDF

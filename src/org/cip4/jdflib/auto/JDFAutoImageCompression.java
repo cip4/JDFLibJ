@@ -303,8 +303,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
             setAttribute(AttributeName.ANTIALIASIMAGES, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute AntiAliasImages
           * @return boolean the value of the attribute
@@ -313,8 +311,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
         {
             return getBoolAttribute(AttributeName.ANTIALIASIMAGES, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -329,8 +325,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
             setAttribute(AttributeName.AUTOFILTERIMAGES, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute AutoFilterImages
           * @return boolean the value of the attribute
@@ -339,8 +333,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
         {
             return getBoolAttribute(AttributeName.AUTOFILTERIMAGES, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -355,8 +347,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
             setAttribute(AttributeName.CONVERTIMAGESTOINDEXED, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute ConvertImagesToIndexed
           * @return boolean the value of the attribute
@@ -365,8 +355,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
         {
             return getBoolAttribute(AttributeName.CONVERTIMAGESTOINDEXED, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -381,8 +369,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
             setAttribute(AttributeName.DCTQUALITY, value, null);
         }
 
-
-
         /**
           * (17) get double attribute DCTQuality
           * @return double the value of the attribute
@@ -391,8 +377,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
         {
             return getRealAttribute(AttributeName.DCTQUALITY, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -407,8 +391,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
             setAttribute(AttributeName.DOWNSAMPLEIMAGES, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute DownsampleImages
           * @return boolean the value of the attribute
@@ -417,8 +399,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
         {
             return getBoolAttribute(AttributeName.DOWNSAMPLEIMAGES, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -433,8 +413,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
             setAttribute(AttributeName.ENCODECOLORIMAGES, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute EncodeColorImages
           * @return boolean the value of the attribute
@@ -443,8 +421,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
         {
             return getBoolAttribute(AttributeName.ENCODECOLORIMAGES, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -459,8 +435,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
             setAttribute(AttributeName.ENCODEIMAGES, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute EncodeImages
           * @return boolean the value of the attribute
@@ -469,8 +443,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
         {
             return getBoolAttribute(AttributeName.ENCODEIMAGES, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -485,8 +457,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
             setAttribute(AttributeName.IMAGEAUTOFILTERSTRATEGY, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ImageAutoFilterStrategy
           * @return the value of the attribute
@@ -495,8 +465,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
         {
             return getAttribute(AttributeName.IMAGEAUTOFILTERSTRATEGY, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -511,8 +479,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
             setAttribute(AttributeName.IMAGEDEPTH, value, null);
         }
 
-
-
         /**
           * (15) get int attribute ImageDepth
           * @return int the value of the attribute
@@ -521,8 +487,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
         {
             return getIntAttribute(AttributeName.IMAGEDEPTH, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -537,8 +501,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
             setAttribute(AttributeName.IMAGEDOWNSAMPLETHRESHOLD, value, null);
         }
 
-
-
         /**
           * (17) get double attribute ImageDownsampleThreshold
           * @return double the value of the attribute
@@ -547,8 +509,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
         {
             return getRealAttribute(AttributeName.IMAGEDOWNSAMPLETHRESHOLD, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -563,8 +523,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
             setAttribute(AttributeName.IMAGEDOWNSAMPLETYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ImageDownsampleType
           * @return the value of the attribute
@@ -573,8 +531,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
         {
             return EnumImageDownsampleType.getEnum(getAttribute(AttributeName.IMAGEDOWNSAMPLETYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -589,8 +545,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
             setAttribute(AttributeName.IMAGEFILTER, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ImageFilter
           * @return the value of the attribute
@@ -599,8 +553,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
         {
             return getAttribute(AttributeName.IMAGEFILTER, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -615,8 +567,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
             setAttribute(AttributeName.IMAGERESOLUTION, value, null);
         }
 
-
-
         /**
           * (17) get double attribute ImageResolution
           * @return double the value of the attribute
@@ -625,8 +575,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
         {
             return getRealAttribute(AttributeName.IMAGERESOLUTION, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -641,8 +589,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
             setAttribute(AttributeName.IMAGETYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ImageType
           * @return the value of the attribute
@@ -651,8 +597,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
         {
             return EnumImageType.getEnum(getAttribute(AttributeName.IMAGETYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -667,8 +611,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
             setAttribute(AttributeName.JPXQUALITY, value, null);
         }
 
-
-
         /**
           * (15) get int attribute JPXQuality
           * @return int the value of the attribute
@@ -677,8 +619,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
         {
             return getIntAttribute(AttributeName.JPXQUALITY, null, 0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -694,8 +634,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
         return (JDFCCITTFaxParams) getElement(ElementName.CCITTFAXPARAMS, null, 0);
     }
 
-
-
     /** (25) getCreateCCITTFaxParams
      * 
      * @return JDFCCITTFaxParams the element
@@ -705,17 +643,14 @@ public abstract class JDFAutoImageCompression extends JDFElement
         return (JDFCCITTFaxParams) getCreateElement_KElement(ElementName.CCITTFAXPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementCCITTFaxParams
+     * (29) append element CCITTFaxParams
      */
     public JDFCCITTFaxParams appendCCITTFaxParams() throws JDFException
     {
         return (JDFCCITTFaxParams) appendElementN(ElementName.CCITTFAXPARAMS, 1, null);
     }
+
     /**
      * (24) const get element DCTParams
      * @return JDFDCTParams the element
@@ -724,8 +659,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
     {
         return (JDFDCTParams) getElement(ElementName.DCTPARAMS, null, 0);
     }
-
-
 
     /** (25) getCreateDCTParams
      * 
@@ -736,17 +669,14 @@ public abstract class JDFAutoImageCompression extends JDFElement
         return (JDFDCTParams) getCreateElement_KElement(ElementName.DCTPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDCTParams
+     * (29) append element DCTParams
      */
     public JDFDCTParams appendDCTParams() throws JDFException
     {
         return (JDFDCTParams) appendElementN(ElementName.DCTPARAMS, 1, null);
     }
+
     /** (26) getCreateJBIG2Params
      * 
      * @param iSkip number of elements to skip
@@ -756,8 +686,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
     {
         return (JDFJBIG2Params)getCreateElement_KElement(ElementName.JBIG2PARAMS, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element JBIG2Params
@@ -769,9 +697,10 @@ public abstract class JDFAutoImageCompression extends JDFElement
         return (JDFJBIG2Params) getElement(ElementName.JBIG2PARAMS, null, iSkip);
     }
 
-
-
-    public JDFJBIG2Params appendJBIG2Params()
+    /**
+     * (30) append element JBIG2Params
+     */
+    public JDFJBIG2Params appendJBIG2Params() throws JDFException
     {
         return (JDFJBIG2Params) appendElement(ElementName.JBIG2PARAMS, null);
     }
@@ -786,8 +715,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
         return (JDFJPEG2000Params)getCreateElement_KElement(ElementName.JPEG2000PARAMS, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element JPEG2000Params
      * @param iSkip number of elements to skip
@@ -798,9 +725,10 @@ public abstract class JDFAutoImageCompression extends JDFElement
         return (JDFJPEG2000Params) getElement(ElementName.JPEG2000PARAMS, null, iSkip);
     }
 
-
-
-    public JDFJPEG2000Params appendJPEG2000Params()
+    /**
+     * (30) append element JPEG2000Params
+     */
+    public JDFJPEG2000Params appendJPEG2000Params() throws JDFException
     {
         return (JDFJPEG2000Params) appendElement(ElementName.JPEG2000PARAMS, null);
     }
@@ -814,8 +742,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
         return (JDFLZWParams) getElement(ElementName.LZWPARAMS, null, 0);
     }
 
-
-
     /** (25) getCreateLZWParams
      * 
      * @return JDFLZWParams the element
@@ -825,15 +751,12 @@ public abstract class JDFAutoImageCompression extends JDFElement
         return (JDFLZWParams) getCreateElement_KElement(ElementName.LZWPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementLZWParams
+     * (29) append element LZWParams
      */
     public JDFLZWParams appendLZWParams() throws JDFException
     {
         return (JDFLZWParams) appendElementN(ElementName.LZWPARAMS, 1, null);
     }
+
 }// end namespace JDF

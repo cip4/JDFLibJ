@@ -187,11 +187,9 @@ public abstract class JDFAutoEndSheet extends JDFElement
             setAttribute(AttributeName.OFFSET, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute Offset
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getOffset()
@@ -210,8 +208,6 @@ public abstract class JDFAutoEndSheet extends JDFElement
             return nPlaceHolder;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -226,8 +222,6 @@ public abstract class JDFAutoEndSheet extends JDFElement
         return (JDFGlueLine) getElement(ElementName.GLUELINE, null, 0);
     }
 
-
-
     /** (25) getCreateGlueLine
      * 
      * @return JDFGlueLine the element
@@ -237,15 +231,12 @@ public abstract class JDFAutoEndSheet extends JDFElement
         return (JDFGlueLine) getCreateElement_KElement(ElementName.GLUELINE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementGlueLine
+     * (29) append element GlueLine
      */
     public JDFGlueLine appendGlueLine() throws JDFException
     {
         return (JDFGlueLine) appendElementN(ElementName.GLUELINE, 1, null);
     }
+
 }// end namespace JDF

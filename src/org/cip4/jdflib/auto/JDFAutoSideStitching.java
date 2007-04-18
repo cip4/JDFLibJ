@@ -165,8 +165,6 @@ public abstract class JDFAutoSideStitching extends JDFElement
         return (JDFIntegerSpan) getElement(ElementName.STITCHNUMBER, null, 0);
     }
 
-
-
     /** (25) getCreateStitchNumber
      * 
      * @return JDFIntegerSpan the element
@@ -176,15 +174,12 @@ public abstract class JDFAutoSideStitching extends JDFElement
         return (JDFIntegerSpan) getCreateElement_KElement(ElementName.STITCHNUMBER, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementStitchNumber
+     * (29) append element StitchNumber
      */
     public JDFIntegerSpan appendStitchNumber() throws JDFException
     {
         return (JDFIntegerSpan) appendElementN(ElementName.STITCHNUMBER, 1, null);
     }
+
 }// end namespace JDF

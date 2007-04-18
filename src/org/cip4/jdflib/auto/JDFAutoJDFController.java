@@ -168,8 +168,6 @@ public abstract class JDFAutoJDFController extends JDFElement
             setAttribute(AttributeName.CONTROLLERID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ControllerID
           * @return the value of the attribute
@@ -178,8 +176,6 @@ public abstract class JDFAutoJDFController extends JDFElement
         {
             return getAttribute(AttributeName.CONTROLLERID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -194,8 +190,6 @@ public abstract class JDFAutoJDFController extends JDFElement
             setAttribute(AttributeName.URL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute URL
           * @return the value of the attribute
@@ -204,7 +198,5 @@ public abstract class JDFAutoJDFController extends JDFElement
         {
             return getAttribute(AttributeName.URL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

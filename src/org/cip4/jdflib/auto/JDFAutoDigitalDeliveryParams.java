@@ -83,6 +83,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContact;
     /*
@@ -249,8 +250,6 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
             setAttribute(AttributeName.DIGITALDELIVERYDIRECTION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute DigitalDeliveryDirection
           * @return the value of the attribute
@@ -259,8 +258,6 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
         {
             return EnumDigitalDeliveryDirection.getEnum(getAttribute(AttributeName.DIGITALDELIVERYDIRECTION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -275,8 +272,6 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
             setAttribute(AttributeName.DIGITALDELIVERYPROTOCOL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DigitalDeliveryProtocol
           * @return the value of the attribute
@@ -285,8 +280,6 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
         {
             return getAttribute(AttributeName.DIGITALDELIVERYPROTOCOL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -301,8 +294,6 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
             setAttribute(AttributeName.METHOD, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Method
           * @return the value of the attribute
@@ -311,8 +302,6 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
         {
             return getAttribute(AttributeName.METHOD, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -329,8 +318,6 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
         return (JDFContact)getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Contact
      * @param iSkip number of elements to skip
@@ -341,9 +328,10 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
         return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
     }
 
-
-
-    public JDFContact appendContact()
+    /**
+     * (30) append element Contact
+     */
+    public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -356,4 +344,5 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

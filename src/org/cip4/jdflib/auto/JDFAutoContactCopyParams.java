@@ -255,8 +255,6 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
             setAttribute(AttributeName.CONTACTSCREEN, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute ContactScreen
           * @return boolean the value of the attribute
@@ -265,8 +263,6 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.CONTACTSCREEN, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -281,8 +277,6 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
             setAttribute(AttributeName.POLARITYCHANGE, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute PolarityChange
           * @return boolean the value of the attribute
@@ -291,8 +285,6 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.POLARITYCHANGE, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -307,11 +299,9 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
             setAttribute(AttributeName.REPEATSTEP, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute RepeatStep
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getRepeatStep()
@@ -330,8 +320,6 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Cycle
@@ -345,8 +333,6 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
             setAttribute(AttributeName.CYCLE, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Cycle
           * @return int the value of the attribute
@@ -355,8 +341,6 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
         {
             return getIntAttribute(AttributeName.CYCLE, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -371,8 +355,6 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
             setAttribute(AttributeName.DIFFUSION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Diffusion
           * @return the value of the attribute
@@ -381,8 +363,6 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
         {
             return EnumDiffusion.getEnum(getAttribute(AttributeName.DIFFUSION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -397,8 +377,6 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
             setAttribute(AttributeName.VACUUM, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Vacuum
           * @return double the value of the attribute
@@ -407,8 +385,6 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
         {
             return getRealAttribute(AttributeName.VACUUM, null, 0.0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -424,8 +400,6 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
         return (JDFScreeningParams) getElement(ElementName.SCREENINGPARAMS, null, 0);
     }
 
-
-
     /** (25) getCreateScreeningParams
      * 
      * @return JDFScreeningParams the element
@@ -435,17 +409,14 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
         return (JDFScreeningParams) getCreateElement_KElement(ElementName.SCREENINGPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementScreeningParams
+     * (29) append element ScreeningParams
      */
     public JDFScreeningParams appendScreeningParams() throws JDFException
     {
         return (JDFScreeningParams) appendElementN(ElementName.SCREENINGPARAMS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -454,4 +425,5 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

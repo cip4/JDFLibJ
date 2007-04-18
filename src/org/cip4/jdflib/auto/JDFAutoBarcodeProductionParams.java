@@ -167,8 +167,6 @@ public abstract class JDFAutoBarcodeProductionParams extends JDFElement
         return (JDFBarcodeReproParams) getElement(ElementName.BARCODEREPROPARAMS, null, 0);
     }
 
-
-
     /** (25) getCreateBarcodeReproParams
      * 
      * @return JDFBarcodeReproParams the element
@@ -178,17 +176,14 @@ public abstract class JDFAutoBarcodeProductionParams extends JDFElement
         return (JDFBarcodeReproParams) getCreateElement_KElement(ElementName.BARCODEREPROPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementBarcodeReproParams
+     * (29) append element BarcodeReproParams
      */
     public JDFBarcodeReproParams appendBarcodeReproParams() throws JDFException
     {
         return (JDFBarcodeReproParams) appendElementN(ElementName.BARCODEREPROPARAMS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -197,6 +192,7 @@ public abstract class JDFAutoBarcodeProductionParams extends JDFElement
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element IdentificationField
      * @return JDFIdentificationField the element
@@ -205,8 +201,6 @@ public abstract class JDFAutoBarcodeProductionParams extends JDFElement
     {
         return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, 0);
     }
-
-
 
     /** (25) getCreateIdentificationField
      * 
@@ -217,17 +211,14 @@ public abstract class JDFAutoBarcodeProductionParams extends JDFElement
         return (JDFIdentificationField) getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementIdentificationField
+     * (29) append element IdentificationField
      */
     public JDFIdentificationField appendIdentificationField() throws JDFException
     {
         return (JDFIdentificationField) appendElementN(ElementName.IDENTIFICATIONFIELD, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -236,4 +227,5 @@ public abstract class JDFAutoBarcodeProductionParams extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

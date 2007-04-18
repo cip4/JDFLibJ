@@ -271,8 +271,6 @@ public abstract class JDFAutoStrippingParams extends JDFResource
             setAttribute(AttributeName.ASSEMBLYID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute AssemblyID
           * @return the value of the attribute
@@ -281,8 +279,6 @@ public abstract class JDFAutoStrippingParams extends JDFResource
         {
             return getAttribute(AttributeName.ASSEMBLYID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -297,8 +293,6 @@ public abstract class JDFAutoStrippingParams extends JDFResource
             setAttribute(AttributeName.ASSEMBLYIDS, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute AssemblyIDs
           * @return VString the value of the attribute
@@ -310,8 +304,6 @@ public abstract class JDFAutoStrippingParams extends JDFResource
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -326,8 +318,6 @@ public abstract class JDFAutoStrippingParams extends JDFResource
             setAttribute(AttributeName.JOBID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobID
           * @return the value of the attribute
@@ -336,8 +326,6 @@ public abstract class JDFAutoStrippingParams extends JDFResource
         {
             return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -352,11 +340,9 @@ public abstract class JDFAutoStrippingParams extends JDFResource
             setAttribute(AttributeName.SECTIONLIST, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerList attribute SectionList
-          * @return JDFIntegerListthe value of the attribute, null if a the
+          * @return JDFIntegerList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerList
           */
         public JDFIntegerList getSectionList()
@@ -375,8 +361,6 @@ public abstract class JDFAutoStrippingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute WorkStyle
@@ -390,8 +374,6 @@ public abstract class JDFAutoStrippingParams extends JDFResource
             setAttribute(AttributeName.WORKSTYLE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute WorkStyle
           * @return the value of the attribute
@@ -400,8 +382,6 @@ public abstract class JDFAutoStrippingParams extends JDFResource
         {
             return EnumWorkStyle.getEnum(getAttribute(AttributeName.WORKSTYLE, null, null));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -417,8 +397,6 @@ public abstract class JDFAutoStrippingParams extends JDFResource
         return (JDFBinderySignature) getElement(ElementName.BINDERYSIGNATURE, null, 0);
     }
 
-
-
     /** (25) getCreateBinderySignature
      * 
      * @return JDFBinderySignature the element
@@ -428,17 +406,14 @@ public abstract class JDFAutoStrippingParams extends JDFResource
         return (JDFBinderySignature) getCreateElement_KElement(ElementName.BINDERYSIGNATURE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementBinderySignature
+     * (29) append element BinderySignature
      */
     public JDFBinderySignature appendBinderySignature() throws JDFException
     {
         return (JDFBinderySignature) appendElementN(ElementName.BINDERYSIGNATURE, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -447,6 +422,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateDevice
      * 
      * @param iSkip number of elements to skip
@@ -456,8 +432,6 @@ public abstract class JDFAutoStrippingParams extends JDFResource
     {
         return (JDFDevice)getCreateElement_KElement(ElementName.DEVICE, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Device
@@ -469,9 +443,10 @@ public abstract class JDFAutoStrippingParams extends JDFResource
         return (JDFDevice) getElement(ElementName.DEVICE, null, iSkip);
     }
 
-
-
-    public JDFDevice appendDevice()
+    /**
+     * (30) append element Device
+     */
+    public JDFDevice appendDevice() throws JDFException
     {
         return (JDFDevice) appendElement(ElementName.DEVICE, null);
     }
@@ -484,6 +459,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element ExternalImpositionTemplate
      * @return JDFExternalImpositionTemplate the element
@@ -492,8 +468,6 @@ public abstract class JDFAutoStrippingParams extends JDFResource
     {
         return (JDFExternalImpositionTemplate) getElement(ElementName.EXTERNALIMPOSITIONTEMPLATE, null, 0);
     }
-
-
 
     /** (25) getCreateExternalImpositionTemplate
      * 
@@ -504,17 +478,14 @@ public abstract class JDFAutoStrippingParams extends JDFResource
         return (JDFExternalImpositionTemplate) getCreateElement_KElement(ElementName.EXTERNALIMPOSITIONTEMPLATE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementExternalImpositionTemplate
+     * (29) append element ExternalImpositionTemplate
      */
     public JDFExternalImpositionTemplate appendExternalImpositionTemplate() throws JDFException
     {
         return (JDFExternalImpositionTemplate) appendElementN(ElementName.EXTERNALIMPOSITIONTEMPLATE, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -523,6 +494,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateMedia
      * 
      * @param iSkip number of elements to skip
@@ -532,8 +504,6 @@ public abstract class JDFAutoStrippingParams extends JDFResource
     {
         return (JDFMedia)getCreateElement_KElement(ElementName.MEDIA, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Media
@@ -545,9 +515,10 @@ public abstract class JDFAutoStrippingParams extends JDFResource
         return (JDFMedia) getElement(ElementName.MEDIA, null, iSkip);
     }
 
-
-
-    public JDFMedia appendMedia()
+    /**
+     * (30) append element Media
+     */
+    public JDFMedia appendMedia() throws JDFException
     {
         return (JDFMedia) appendElement(ElementName.MEDIA, null);
     }
@@ -560,6 +531,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreatePosition
      * 
      * @param iSkip number of elements to skip
@@ -569,8 +541,6 @@ public abstract class JDFAutoStrippingParams extends JDFResource
     {
         return (JDFPosition)getCreateElement_KElement(ElementName.POSITION, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Position
@@ -582,9 +552,10 @@ public abstract class JDFAutoStrippingParams extends JDFResource
         return (JDFPosition) getElement(ElementName.POSITION, null, iSkip);
     }
 
-
-
-    public JDFPosition appendPosition()
+    /**
+     * (30) append element Position
+     */
+    public JDFPosition appendPosition() throws JDFException
     {
         return (JDFPosition) appendElement(ElementName.POSITION, null);
     }
@@ -598,8 +569,6 @@ public abstract class JDFAutoStrippingParams extends JDFResource
         return (JDFStripCellParams) getElement(ElementName.STRIPCELLPARAMS, null, 0);
     }
 
-
-
     /** (25) getCreateStripCellParams
      * 
      * @return JDFStripCellParams the element
@@ -609,17 +578,14 @@ public abstract class JDFAutoStrippingParams extends JDFResource
         return (JDFStripCellParams) getCreateElement_KElement(ElementName.STRIPCELLPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementStripCellParams
+     * (29) append element StripCellParams
      */
     public JDFStripCellParams appendStripCellParams() throws JDFException
     {
         return (JDFStripCellParams) appendElementN(ElementName.STRIPCELLPARAMS, 1, null);
     }
+
     /** (26) getCreateStripMark
      * 
      * @param iSkip number of elements to skip
@@ -629,8 +595,6 @@ public abstract class JDFAutoStrippingParams extends JDFResource
     {
         return (JDFStripMark)getCreateElement_KElement(ElementName.STRIPMARK, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element StripMark
@@ -642,9 +606,10 @@ public abstract class JDFAutoStrippingParams extends JDFResource
         return (JDFStripMark) getElement(ElementName.STRIPMARK, null, iSkip);
     }
 
-
-
-    public JDFStripMark appendStripMark()
+    /**
+     * (30) append element StripMark
+     */
+    public JDFStripMark appendStripMark() throws JDFException
     {
         return (JDFStripMark) appendElement(ElementName.STRIPMARK, null);
     }

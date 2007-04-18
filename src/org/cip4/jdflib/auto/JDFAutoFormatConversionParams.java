@@ -185,8 +185,6 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
         return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
     /** (25) getCreateFileSpec
      * 
      * @return JDFFileSpec the element
@@ -196,17 +194,14 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
         return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFileSpec
+     * (29) append element FileSpec
      */
     public JDFFileSpec appendFileSpec() throws JDFException
     {
         return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -215,6 +210,7 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element TIFFFormatParams
      * @return JDFTIFFFormatParams the element
@@ -223,8 +219,6 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
     {
         return (JDFTIFFFormatParams) getElement(ElementName.TIFFFORMATPARAMS, null, 0);
     }
-
-
 
     /** (25) getCreateTIFFFormatParams
      * 
@@ -235,17 +229,14 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
         return (JDFTIFFFormatParams) getCreateElement_KElement(ElementName.TIFFFORMATPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementTIFFFormatParams
+     * (29) append element TIFFFormatParams
      */
     public JDFTIFFFormatParams appendTIFFFormatParams() throws JDFException
     {
         return (JDFTIFFFormatParams) appendElementN(ElementName.TIFFFORMATPARAMS, 1, null);
     }
+
     /**
      * (24) const get element ImageCompressionParams
      * @return JDFImageCompressionParams the element
@@ -254,8 +245,6 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
     {
         return (JDFImageCompressionParams) getElement(ElementName.IMAGECOMPRESSIONPARAMS, null, 0);
     }
-
-
 
     /** (25) getCreateImageCompressionParams
      * 
@@ -266,17 +255,14 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
         return (JDFImageCompressionParams) getCreateElement_KElement(ElementName.IMAGECOMPRESSIONPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementImageCompressionParams
+     * (29) append element ImageCompressionParams
      */
     public JDFImageCompressionParams appendImageCompressionParams() throws JDFException
     {
         return (JDFImageCompressionParams) appendElementN(ElementName.IMAGECOMPRESSIONPARAMS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -285,6 +271,7 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element ColorPool
      * @return JDFColorPool the element
@@ -293,8 +280,6 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
     {
         return (JDFColorPool) getElement(ElementName.COLORPOOL, null, 0);
     }
-
-
 
     /** (25) getCreateColorPool
      * 
@@ -305,17 +290,14 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
         return (JDFColorPool) getCreateElement_KElement(ElementName.COLORPOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementColorPool
+     * (29) append element ColorPool
      */
     public JDFColorPool appendColorPool() throws JDFException
     {
         return (JDFColorPool) appendElementN(ElementName.COLORPOOL, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -324,4 +306,5 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

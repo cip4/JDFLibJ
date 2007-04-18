@@ -240,11 +240,9 @@ public abstract class JDFAutoObjectResolution extends JDFResource
             setAttribute(AttributeName.RESOLUTION, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute Resolution
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getResolution()
@@ -263,8 +261,6 @@ public abstract class JDFAutoObjectResolution extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute SourceObjects
@@ -278,8 +274,6 @@ public abstract class JDFAutoObjectResolution extends JDFResource
             setEnumerationsAttribute(AttributeName.SOURCEOBJECTS, v, null);
         }
 
-
-
         /**
           * (9.2) get SourceObjects attribute SourceObjects
           * @return Vector of the enumerations
@@ -288,8 +282,6 @@ public abstract class JDFAutoObjectResolution extends JDFResource
         {
             return getEnumerationsAttribute(AttributeName.SOURCEOBJECTS, null, EnumSourceObjects.All, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -304,8 +296,6 @@ public abstract class JDFAutoObjectResolution extends JDFResource
             setAttribute(AttributeName.ANTIALIASING, value, null);
         }
 
-
-
         /**
           * (23) get String attribute AntiAliasing
           * @return the value of the attribute
@@ -314,7 +304,5 @@ public abstract class JDFAutoObjectResolution extends JDFResource
         {
             return getAttribute(AttributeName.ANTIALIASING, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

@@ -200,8 +200,6 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
             setAttribute(AttributeName.MIMETYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute MimeType
           * @return the value of the attribute
@@ -210,8 +208,6 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
         {
             return getAttribute(AttributeName.MIMETYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -227,8 +223,6 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
         return (JDFPDFToPSConversionParams) getElement(ElementName.PDFTOPSCONVERSIONPARAMS, null, 0);
     }
 
-
-
     /** (25) getCreatePDFToPSConversionParams
      * 
      * @return JDFPDFToPSConversionParams the element
@@ -238,17 +232,14 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
         return (JDFPDFToPSConversionParams) getCreateElement_KElement(ElementName.PDFTOPSCONVERSIONPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPDFToPSConversionParams
+     * (29) append element PDFToPSConversionParams
      */
     public JDFPDFToPSConversionParams appendPDFToPSConversionParams() throws JDFException
     {
         return (JDFPDFToPSConversionParams) appendElementN(ElementName.PDFTOPSCONVERSIONPARAMS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -257,6 +248,7 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element PSToPDFConversionParams
      * @return JDFPSToPDFConversionParams the element
@@ -265,8 +257,6 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
     {
         return (JDFPSToPDFConversionParams) getElement(ElementName.PSTOPDFCONVERSIONPARAMS, null, 0);
     }
-
-
 
     /** (25) getCreatePSToPDFConversionParams
      * 
@@ -277,17 +267,14 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
         return (JDFPSToPDFConversionParams) getCreateElement_KElement(ElementName.PSTOPDFCONVERSIONPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPSToPDFConversionParams
+     * (29) append element PSToPDFConversionParams
      */
     public JDFPSToPDFConversionParams appendPSToPDFConversionParams() throws JDFException
     {
         return (JDFPSToPDFConversionParams) appendElementN(ElementName.PSTOPDFCONVERSIONPARAMS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -296,4 +283,5 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

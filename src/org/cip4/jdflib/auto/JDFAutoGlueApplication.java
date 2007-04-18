@@ -248,8 +248,6 @@ public abstract class JDFAutoGlueApplication extends JDFResource
             setAttribute(AttributeName.GLUINGTECHNIQUE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute GluingTechnique
           * @return the value of the attribute
@@ -258,8 +256,6 @@ public abstract class JDFAutoGlueApplication extends JDFResource
         {
             return EnumGluingTechnique.getEnum(getAttribute(AttributeName.GLUINGTECHNIQUE, null, null));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -275,8 +271,6 @@ public abstract class JDFAutoGlueApplication extends JDFResource
         return (JDFGlueLine) getElement(ElementName.GLUELINE, null, 0);
     }
 
-
-
     /** (25) getCreateGlueLine
      * 
      * @return JDFGlueLine the element
@@ -286,17 +280,14 @@ public abstract class JDFAutoGlueApplication extends JDFResource
         return (JDFGlueLine) getCreateElement_KElement(ElementName.GLUELINE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementGlueLine
+     * (29) append element GlueLine
      */
     public JDFGlueLine appendGlueLine() throws JDFException
     {
         return (JDFGlueLine) appendElementN(ElementName.GLUELINE, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -305,4 +296,5 @@ public abstract class JDFAutoGlueApplication extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

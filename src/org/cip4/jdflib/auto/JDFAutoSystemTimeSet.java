@@ -172,8 +172,6 @@ public abstract class JDFAutoSystemTimeSet extends JDFElement
             setAttribute(AttributeName.NEWTIME, new JDFDate().getDateTimeISO(), null);
         }
 
-
-
         /**
           * (11) set attribute NewTime
           * @param value: the value to set the attribute to or null
@@ -183,8 +181,6 @@ public abstract class JDFAutoSystemTimeSet extends JDFElement
             if (value == null) value = new JDFDate();
             setAttribute(AttributeName.NEWTIME, value.getDateTimeISO(), null);
         }
-
-
 
         /**
           * (12) get JDFDate attribute NewTime
@@ -209,8 +205,6 @@ public abstract class JDFAutoSystemTimeSet extends JDFElement
             return nMyDate;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute OldTime
@@ -224,8 +218,6 @@ public abstract class JDFAutoSystemTimeSet extends JDFElement
             setAttribute(AttributeName.OLDTIME, new JDFDate().getDateTimeISO(), null);
         }
 
-
-
         /**
           * (11) set attribute OldTime
           * @param value: the value to set the attribute to or null
@@ -235,8 +227,6 @@ public abstract class JDFAutoSystemTimeSet extends JDFElement
             if (value == null) value = new JDFDate();
             setAttribute(AttributeName.OLDTIME, value.getDateTimeISO(), null);
         }
-
-
 
         /**
           * (12) get JDFDate attribute OldTime
@@ -260,7 +250,5 @@ public abstract class JDFAutoSystemTimeSet extends JDFElement
             }
             return nMyDate;
         }
-
-
 
 }// end namespace JDF

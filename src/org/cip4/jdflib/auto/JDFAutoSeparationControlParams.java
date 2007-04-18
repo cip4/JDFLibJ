@@ -74,6 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFTransferFunctionControl;
 import org.cip4.jdflib.resource.process.JDFAutomatedOverPrintParams;
@@ -181,8 +182,6 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
         return (JDFAutomatedOverPrintParams)getCreateElement_KElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element AutomatedOverPrintParams
      * @param iSkip number of elements to skip
@@ -193,9 +192,10 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
         return (JDFAutomatedOverPrintParams) getElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, iSkip);
     }
 
-
-
-    public JDFAutomatedOverPrintParams appendAutomatedOverPrintParams()
+    /**
+     * (30) append element AutomatedOverPrintParams
+     */
+    public JDFAutomatedOverPrintParams appendAutomatedOverPrintParams() throws JDFException
     {
         return (JDFAutomatedOverPrintParams) appendElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null);
     }
@@ -208,6 +208,7 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateTransferFunctionControl
      * 
      * @param iSkip number of elements to skip
@@ -217,8 +218,6 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
     {
         return (JDFTransferFunctionControl)getCreateElement_KElement(ElementName.TRANSFERFUNCTIONCONTROL, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element TransferFunctionControl
@@ -230,9 +229,10 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
         return (JDFTransferFunctionControl) getElement(ElementName.TRANSFERFUNCTIONCONTROL, null, iSkip);
     }
 
-
-
-    public JDFTransferFunctionControl appendTransferFunctionControl()
+    /**
+     * (30) append element TransferFunctionControl
+     */
+    public JDFTransferFunctionControl appendTransferFunctionControl() throws JDFException
     {
         return (JDFTransferFunctionControl) appendElement(ElementName.TRANSFERFUNCTIONCONTROL, null);
     }
@@ -245,4 +245,5 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

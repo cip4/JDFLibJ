@@ -74,6 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
     /*
@@ -179,8 +180,6 @@ public abstract class JDFAutoExternalImpositionTemplate extends JDFResource
         return (JDFFileSpec)getCreateElement_KElement(ElementName.FILESPEC, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element FileSpec
      * @param iSkip number of elements to skip
@@ -191,9 +190,10 @@ public abstract class JDFAutoExternalImpositionTemplate extends JDFResource
         return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
     }
 
-
-
-    public JDFFileSpec appendFileSpec()
+    /**
+     * (30) append element FileSpec
+     */
+    public JDFFileSpec appendFileSpec() throws JDFException
     {
         return (JDFFileSpec) appendElement(ElementName.FILESPEC, null);
     }
@@ -206,4 +206,5 @@ public abstract class JDFAutoExternalImpositionTemplate extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

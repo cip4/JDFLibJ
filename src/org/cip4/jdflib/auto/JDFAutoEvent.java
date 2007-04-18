@@ -168,8 +168,6 @@ public abstract class JDFAutoEvent extends JDFElement
             setAttribute(AttributeName.EVENTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute EventID
           * @return the value of the attribute
@@ -178,8 +176,6 @@ public abstract class JDFAutoEvent extends JDFElement
         {
             return getAttribute(AttributeName.EVENTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -194,8 +190,6 @@ public abstract class JDFAutoEvent extends JDFElement
             setAttribute(AttributeName.EVENTVALUE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute EventValue
           * @return the value of the attribute
@@ -204,7 +198,5 @@ public abstract class JDFAutoEvent extends JDFElement
         {
             return getAttribute(AttributeName.EVENTVALUE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

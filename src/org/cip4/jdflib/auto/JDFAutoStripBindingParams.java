@@ -201,8 +201,6 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
             setAttribute(AttributeName.BRAND, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Brand
           * @return the value of the attribute
@@ -211,8 +209,6 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
         {
             return getAttribute(AttributeName.BRAND, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -227,8 +223,6 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
             setAttribute(AttributeName.DISTANCE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Distance
           * @return double the value of the attribute
@@ -237,8 +231,6 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.DISTANCE, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -253,8 +245,6 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
             setAttribute(AttributeName.LENGTHJDF, value, null);
         }
 
-
-
         /**
           * (17) get double attribute LengthJDF
           * @return double the value of the attribute
@@ -263,8 +253,6 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.LENGTHJDF, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -279,8 +267,6 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
             setAttribute(AttributeName.STRIPCOLOR, value.getName(), null);
         }
 
-
-
         /**
           * (19) get EnumNamedColor attribute StripColor
           * @return EnumNamedColor the value of the attribute
@@ -293,8 +279,6 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
             nPlaceHolder = EnumNamedColor.getEnum(strAttrName);
             return nPlaceHolder;
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -310,8 +294,6 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
         return (JDFHoleMakingParams) getElement(ElementName.HOLEMAKINGPARAMS, null, 0);
     }
 
-
-
     /** (25) getCreateHoleMakingParams
      * 
      * @return JDFHoleMakingParams the element
@@ -321,17 +303,14 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
         return (JDFHoleMakingParams) getCreateElement_KElement(ElementName.HOLEMAKINGPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementHoleMakingParams
+     * (29) append element HoleMakingParams
      */
     public JDFHoleMakingParams appendHoleMakingParams() throws JDFException
     {
         return (JDFHoleMakingParams) appendElementN(ElementName.HOLEMAKINGPARAMS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -340,4 +319,5 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

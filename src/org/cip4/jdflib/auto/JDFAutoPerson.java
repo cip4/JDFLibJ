@@ -205,8 +205,6 @@ public abstract class JDFAutoPerson extends JDFResource
             setAttribute(AttributeName.ADDITIONALNAMES, value, null);
         }
 
-
-
         /**
           * (23) get String attribute AdditionalNames
           * @return the value of the attribute
@@ -215,8 +213,6 @@ public abstract class JDFAutoPerson extends JDFResource
         {
             return getAttribute(AttributeName.ADDITIONALNAMES, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -231,8 +227,6 @@ public abstract class JDFAutoPerson extends JDFResource
             setAttribute(AttributeName.FAMILYNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute FamilyName
           * @return the value of the attribute
@@ -241,8 +235,6 @@ public abstract class JDFAutoPerson extends JDFResource
         {
             return getAttribute(AttributeName.FAMILYNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -257,8 +249,6 @@ public abstract class JDFAutoPerson extends JDFResource
             setAttribute(AttributeName.FIRSTNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute FirstName
           * @return the value of the attribute
@@ -267,8 +257,6 @@ public abstract class JDFAutoPerson extends JDFResource
         {
             return getAttribute(AttributeName.FIRSTNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -283,8 +271,6 @@ public abstract class JDFAutoPerson extends JDFResource
             setAttribute(AttributeName.JOBTITLE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobTitle
           * @return the value of the attribute
@@ -293,8 +279,6 @@ public abstract class JDFAutoPerson extends JDFResource
         {
             return getAttribute(AttributeName.JOBTITLE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -309,8 +293,6 @@ public abstract class JDFAutoPerson extends JDFResource
             setAttribute(AttributeName.NAMEPREFIX, value, null);
         }
 
-
-
         /**
           * (23) get String attribute NamePrefix
           * @return the value of the attribute
@@ -319,8 +301,6 @@ public abstract class JDFAutoPerson extends JDFResource
         {
             return getAttribute(AttributeName.NAMEPREFIX, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -335,8 +315,6 @@ public abstract class JDFAutoPerson extends JDFResource
             setAttribute(AttributeName.NAMESUFFIX, value, null);
         }
 
-
-
         /**
           * (23) get String attribute NameSuffix
           * @return the value of the attribute
@@ -345,8 +323,6 @@ public abstract class JDFAutoPerson extends JDFResource
         {
             return getAttribute(AttributeName.NAMESUFFIX, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -362,8 +338,6 @@ public abstract class JDFAutoPerson extends JDFResource
         return (JDFAddress) getElement(ElementName.ADDRESS, null, 0);
     }
 
-
-
     /** (25) getCreateAddress
      * 
      * @return JDFAddress the element
@@ -373,17 +347,14 @@ public abstract class JDFAutoPerson extends JDFResource
         return (JDFAddress) getCreateElement_KElement(ElementName.ADDRESS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementAddress
+     * (29) append element Address
      */
     public JDFAddress appendAddress() throws JDFException
     {
         return (JDFAddress) appendElementN(ElementName.ADDRESS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -392,6 +363,7 @@ public abstract class JDFAutoPerson extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateComChannel
      * 
      * @param iSkip number of elements to skip
@@ -401,8 +373,6 @@ public abstract class JDFAutoPerson extends JDFResource
     {
         return (JDFComChannel)getCreateElement_KElement(ElementName.COMCHANNEL, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element ComChannel
@@ -414,9 +384,10 @@ public abstract class JDFAutoPerson extends JDFResource
         return (JDFComChannel) getElement(ElementName.COMCHANNEL, null, iSkip);
     }
 
-
-
-    public JDFComChannel appendComChannel()
+    /**
+     * (30) append element ComChannel
+     */
+    public JDFComChannel appendComChannel() throws JDFException
     {
         return (JDFComChannel) appendElement(ElementName.COMCHANNEL, null);
     }
@@ -429,4 +400,5 @@ public abstract class JDFAutoPerson extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

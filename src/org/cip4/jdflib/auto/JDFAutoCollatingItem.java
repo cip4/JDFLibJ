@@ -294,8 +294,6 @@ public abstract class JDFAutoCollatingItem extends JDFElement
             setAttribute(AttributeName.AMOUNT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Amount
           * @return int the value of the attribute
@@ -304,8 +302,6 @@ public abstract class JDFAutoCollatingItem extends JDFElement
         {
             return getIntAttribute(AttributeName.AMOUNT, null, 1);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -320,8 +316,6 @@ public abstract class JDFAutoCollatingItem extends JDFElement
             setAttribute(AttributeName.BUNDLEDEPTH, value, null);
         }
 
-
-
         /**
           * (15) get int attribute BundleDepth
           * @return int the value of the attribute
@@ -330,8 +324,6 @@ public abstract class JDFAutoCollatingItem extends JDFElement
         {
             return getIntAttribute(AttributeName.BUNDLEDEPTH, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -346,8 +338,6 @@ public abstract class JDFAutoCollatingItem extends JDFElement
             setAttribute(AttributeName.ORIENTATION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Orientation
           * @return the value of the attribute
@@ -356,8 +346,6 @@ public abstract class JDFAutoCollatingItem extends JDFElement
         {
             return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -372,11 +360,9 @@ public abstract class JDFAutoCollatingItem extends JDFElement
             setAttribute(AttributeName.TRANSFORMATION, value, null);
         }
 
-
-
         /**
           * (20) get JDFMatrix attribute Transformation
-          * @return JDFMatrixthe value of the attribute, null if a the
+          * @return JDFMatrix the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFMatrix
           */
         public JDFMatrix getTransformation()
@@ -395,8 +381,6 @@ public abstract class JDFAutoCollatingItem extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute TransformationContext
@@ -410,8 +394,6 @@ public abstract class JDFAutoCollatingItem extends JDFElement
             setAttribute(AttributeName.TRANSFORMATIONCONTEXT, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute TransformationContext
           * @return the value of the attribute
@@ -420,8 +402,6 @@ public abstract class JDFAutoCollatingItem extends JDFElement
         {
             return EnumTransformationContext.getEnum(getAttribute(AttributeName.TRANSFORMATIONCONTEXT, null, "StackItem"));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -437,8 +417,6 @@ public abstract class JDFAutoCollatingItem extends JDFElement
         return (JDFComponent) getElement(ElementName.COMPONENT, null, 0);
     }
 
-
-
     /** (25) getCreateComponent
      * 
      * @return JDFComponent the element
@@ -448,17 +426,14 @@ public abstract class JDFAutoCollatingItem extends JDFElement
         return (JDFComponent) getCreateElement_KElement(ElementName.COMPONENT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementComponent
+     * (29) append element Component
      */
     public JDFComponent appendComponent() throws JDFException
     {
         return (JDFComponent) appendElementN(ElementName.COMPONENT, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -467,6 +442,7 @@ public abstract class JDFAutoCollatingItem extends JDFElement
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element Media
      * @return JDFMedia the element
@@ -475,8 +451,6 @@ public abstract class JDFAutoCollatingItem extends JDFElement
     {
         return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
     }
-
-
 
     /** (25) getCreateMedia
      * 
@@ -487,17 +461,14 @@ public abstract class JDFAutoCollatingItem extends JDFElement
         return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMedia
+     * (29) append element Media
      */
     public JDFMedia appendMedia() throws JDFException
     {
         return (JDFMedia) appendElementN(ElementName.MEDIA, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -506,4 +477,5 @@ public abstract class JDFAutoCollatingItem extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

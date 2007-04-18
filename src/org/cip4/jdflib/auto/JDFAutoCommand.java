@@ -222,8 +222,6 @@ public abstract class JDFAutoCommand extends JDFMessage
             setAttribute(AttributeName.ACKNOWLEDGEFORMAT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute AcknowledgeFormat
           * @return the value of the attribute
@@ -232,8 +230,6 @@ public abstract class JDFAutoCommand extends JDFMessage
         {
             return getAttribute(AttributeName.ACKNOWLEDGEFORMAT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -248,8 +244,6 @@ public abstract class JDFAutoCommand extends JDFMessage
             setAttribute(AttributeName.ACKNOWLEDGETEMPLATE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute AcknowledgeTemplate
           * @return the value of the attribute
@@ -258,8 +252,6 @@ public abstract class JDFAutoCommand extends JDFMessage
         {
             return getAttribute(AttributeName.ACKNOWLEDGETEMPLATE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -274,8 +266,6 @@ public abstract class JDFAutoCommand extends JDFMessage
             setAttribute(AttributeName.ACKNOWLEDGEURL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute AcknowledgeURL
           * @return the value of the attribute
@@ -284,8 +274,6 @@ public abstract class JDFAutoCommand extends JDFMessage
         {
             return getAttribute(AttributeName.ACKNOWLEDGEURL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -300,8 +288,6 @@ public abstract class JDFAutoCommand extends JDFMessage
             setEnumerationsAttribute(AttributeName.ACKNOWLEDGETYPE, v, null);
         }
 
-
-
         /**
           * (9.2) get AcknowledgeType attribute AcknowledgeType
           * @return Vector of the enumerations
@@ -310,7 +296,5 @@ public abstract class JDFAutoCommand extends JDFMessage
         {
             return getEnumerationsAttribute(AttributeName.ACKNOWLEDGETYPE, null, EnumAcknowledgeType.Completed, false);
         }
-
-
 
 }// end namespace JDF

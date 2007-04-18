@@ -276,8 +276,6 @@ public abstract class JDFAutoSignatureCell extends JDFElement
             setAttribute(AttributeName.BACKFACEPAGES, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerList attribute BackFacePages
           * @return JDFIntegerList the value of the attribute, null if a the
@@ -299,8 +297,6 @@ public abstract class JDFAutoSignatureCell extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute BackPages
@@ -313,8 +309,6 @@ public abstract class JDFAutoSignatureCell extends JDFElement
         {
             setAttribute(AttributeName.BACKPAGES, value, null);
         }
-
-
 
         /**
           * (20) get JDFIntegerList attribute BackPages
@@ -337,8 +331,6 @@ public abstract class JDFAutoSignatureCell extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute BottleAngle
@@ -352,8 +344,6 @@ public abstract class JDFAutoSignatureCell extends JDFElement
             setAttribute(AttributeName.BOTTLEANGLE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute BottleAngle
           * @return double the value of the attribute
@@ -362,8 +352,6 @@ public abstract class JDFAutoSignatureCell extends JDFElement
         {
             return getRealAttribute(AttributeName.BOTTLEANGLE, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -378,8 +366,6 @@ public abstract class JDFAutoSignatureCell extends JDFElement
             setAttribute(AttributeName.BOTTLEAXIS, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute BottleAxis
           * @return the value of the attribute
@@ -388,8 +374,6 @@ public abstract class JDFAutoSignatureCell extends JDFElement
         {
             return EnumBottleAxis.getEnum(getAttribute(AttributeName.BOTTLEAXIS, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -403,8 +387,6 @@ public abstract class JDFAutoSignatureCell extends JDFElement
         {
             setAttribute(AttributeName.FRONTFACEPAGES, value, null);
         }
-
-
 
         /**
           * (20) get JDFIntegerList attribute FrontFacePages
@@ -427,8 +409,6 @@ public abstract class JDFAutoSignatureCell extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute FrontPages
@@ -441,8 +421,6 @@ public abstract class JDFAutoSignatureCell extends JDFElement
         {
             setAttribute(AttributeName.FRONTPAGES, value, null);
         }
-
-
 
         /**
           * (20) get JDFIntegerList attribute FrontPages
@@ -465,8 +443,6 @@ public abstract class JDFAutoSignatureCell extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Orientation
@@ -480,8 +456,6 @@ public abstract class JDFAutoSignatureCell extends JDFElement
             setAttribute(AttributeName.ORIENTATION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Orientation
           * @return the value of the attribute
@@ -490,8 +464,6 @@ public abstract class JDFAutoSignatureCell extends JDFElement
         {
             return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, "Up"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -506,8 +478,6 @@ public abstract class JDFAutoSignatureCell extends JDFElement
             setAttribute(AttributeName.SECTIONINDEX, value, null);
         }
 
-
-
         /**
           * (15) get int attribute SectionIndex
           * @return int the value of the attribute
@@ -516,8 +486,6 @@ public abstract class JDFAutoSignatureCell extends JDFElement
         {
             return getIntAttribute(AttributeName.SECTIONINDEX, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -532,8 +500,6 @@ public abstract class JDFAutoSignatureCell extends JDFElement
             setAttribute(AttributeName.STATIONNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute StationName
           * @return the value of the attribute
@@ -542,7 +508,5 @@ public abstract class JDFAutoSignatureCell extends JDFElement
         {
             return getAttribute(AttributeName.STATIONNAME, null, "0");
         }
-
-
 
 }// end namespace JDF

@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.postpress.JDFTrimmingParams;
     /*
     *****************************************************************************
@@ -165,8 +166,6 @@ public abstract class JDFAutoIDPTrimming extends JDFElement
         return (JDFTrimmingParams)getCreateElement_KElement(ElementName.TRIMMINGPARAMS, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element TrimmingParams
      * @param iSkip number of elements to skip
@@ -177,9 +176,10 @@ public abstract class JDFAutoIDPTrimming extends JDFElement
         return (JDFTrimmingParams) getElement(ElementName.TRIMMINGPARAMS, null, iSkip);
     }
 
-
-
-    public JDFTrimmingParams appendTrimmingParams()
+    /**
+     * (30) append element TrimmingParams
+     */
+    public JDFTrimmingParams appendTrimmingParams() throws JDFException
     {
         return (JDFTrimmingParams) appendElement(ElementName.TRIMMINGPARAMS, null);
     }
@@ -192,4 +192,5 @@ public abstract class JDFAutoIDPTrimming extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

@@ -232,8 +232,6 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
             setAttribute(AttributeName.CYCLE, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Cycle
           * @return int the value of the attribute
@@ -242,8 +240,6 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
         {
             return getIntAttribute(AttributeName.CYCLE, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -258,8 +254,6 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
             setAttribute(AttributeName.DIFFUSION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Diffusion
           * @return the value of the attribute
@@ -268,8 +262,6 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
         {
             return EnumDiffusion.getEnum(getAttribute(AttributeName.DIFFUSION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -284,8 +276,6 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
             setAttribute(AttributeName.VACUUM, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Vacuum
           * @return double the value of the attribute
@@ -294,7 +284,5 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
         {
             return getRealAttribute(AttributeName.VACUUM, null, 0.0);
         }
-
-
 
 }// end namespace JDF

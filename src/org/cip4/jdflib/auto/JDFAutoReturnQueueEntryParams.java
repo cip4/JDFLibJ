@@ -172,8 +172,6 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
             setAttribute(AttributeName.ABORTED, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute Aborted
           * @return VString the value of the attribute
@@ -185,8 +183,6 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -201,8 +197,6 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
             setAttribute(AttributeName.COMPLETED, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute Completed
           * @return VString the value of the attribute
@@ -214,8 +208,6 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -230,8 +222,6 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
             setAttribute(AttributeName.PRIORITY, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Priority
           * @return int the value of the attribute
@@ -240,8 +230,6 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
         {
             return getIntAttribute(AttributeName.PRIORITY, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -256,8 +244,6 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
             setAttribute(AttributeName.QUEUEENTRYID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute QueueEntryID
           * @return the value of the attribute
@@ -266,8 +252,6 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
         {
             return getAttribute(AttributeName.QUEUEENTRYID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -282,8 +266,6 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
             setAttribute(AttributeName.URL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute URL
           * @return the value of the attribute
@@ -292,7 +274,5 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
         {
             return getAttribute(AttributeName.URL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

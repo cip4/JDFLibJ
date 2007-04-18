@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.jmf.JDFNewComment;
     /*
     *****************************************************************************
@@ -239,8 +240,6 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
             setAttribute(AttributeName.ACTIVATION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Activation
           * @return the value of the attribute
@@ -249,8 +248,6 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
         {
             return EnumActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -265,8 +262,6 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
             setAttribute(AttributeName.JOBID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobID
           * @return the value of the attribute
@@ -275,8 +270,6 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
         {
             return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -291,8 +284,6 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
             setAttribute(AttributeName.JOBPARTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobPartID
           * @return the value of the attribute
@@ -301,8 +292,6 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
         {
             return getAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -319,8 +308,6 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
         return (JDFNewComment)getCreateElement_KElement(ElementName.NEWCOMMENT, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element NewComment
      * @param iSkip number of elements to skip
@@ -331,9 +318,10 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
         return (JDFNewComment) getElement(ElementName.NEWCOMMENT, null, iSkip);
     }
 
-
-
-    public JDFNewComment appendNewComment()
+    /**
+     * (30) append element NewComment
+     */
+    public JDFNewComment appendNewComment() throws JDFException
     {
         return (JDFNewComment) appendElement(ElementName.NEWCOMMENT, null);
     }

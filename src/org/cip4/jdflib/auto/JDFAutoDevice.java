@@ -227,8 +227,6 @@ public abstract class JDFAutoDevice extends JDFResource
             setAttribute(AttributeName.DEVICEFAMILY, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DeviceFamily
           * @return the value of the attribute
@@ -237,8 +235,6 @@ public abstract class JDFAutoDevice extends JDFResource
         {
             return getAttribute(AttributeName.DEVICEFAMILY, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -253,8 +249,6 @@ public abstract class JDFAutoDevice extends JDFResource
             setAttribute(AttributeName.DEVICEID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DeviceID
           * @return the value of the attribute
@@ -263,8 +257,6 @@ public abstract class JDFAutoDevice extends JDFResource
         {
             return getAttribute(AttributeName.DEVICEID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -279,8 +271,6 @@ public abstract class JDFAutoDevice extends JDFResource
             setAttribute(AttributeName.DEVICETYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DeviceType
           * @return the value of the attribute
@@ -289,8 +279,6 @@ public abstract class JDFAutoDevice extends JDFResource
         {
             return getAttribute(AttributeName.DEVICETYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -305,8 +293,6 @@ public abstract class JDFAutoDevice extends JDFResource
             setAttribute(AttributeName.DIRECTORY, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Directory
           * @return the value of the attribute
@@ -315,8 +301,6 @@ public abstract class JDFAutoDevice extends JDFResource
         {
             return getAttribute(AttributeName.DIRECTORY, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -331,8 +315,6 @@ public abstract class JDFAutoDevice extends JDFResource
             setAttribute(AttributeName.FRIENDLYNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute FriendlyName
           * @return the value of the attribute
@@ -341,8 +323,6 @@ public abstract class JDFAutoDevice extends JDFResource
         {
             return getAttribute(AttributeName.FRIENDLYNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -357,8 +337,6 @@ public abstract class JDFAutoDevice extends JDFResource
             setAttribute(AttributeName.ICSVERSIONS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ICSVersions
           * @return the value of the attribute
@@ -367,8 +345,6 @@ public abstract class JDFAutoDevice extends JDFResource
         {
             return getAttribute(AttributeName.ICSVERSIONS, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -383,8 +359,6 @@ public abstract class JDFAutoDevice extends JDFResource
             setAttribute(AttributeName.JDFERRORURL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JDFErrorURL
           * @return the value of the attribute
@@ -393,8 +367,6 @@ public abstract class JDFAutoDevice extends JDFResource
         {
             return getAttribute(AttributeName.JDFERRORURL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -409,8 +381,6 @@ public abstract class JDFAutoDevice extends JDFResource
             setAttribute(AttributeName.JDFINPUTURL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JDFInputURL
           * @return the value of the attribute
@@ -419,8 +389,6 @@ public abstract class JDFAutoDevice extends JDFResource
         {
             return getAttribute(AttributeName.JDFINPUTURL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -435,8 +403,6 @@ public abstract class JDFAutoDevice extends JDFResource
             setAttribute(AttributeName.JDFOUTPUTURL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JDFOutputURL
           * @return the value of the attribute
@@ -445,8 +411,6 @@ public abstract class JDFAutoDevice extends JDFResource
         {
             return getAttribute(AttributeName.JDFOUTPUTURL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -461,8 +425,6 @@ public abstract class JDFAutoDevice extends JDFResource
             setAttribute(AttributeName.JDFVERSIONS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JDFVersions
           * @return the value of the attribute
@@ -471,8 +433,6 @@ public abstract class JDFAutoDevice extends JDFResource
         {
             return getAttribute(AttributeName.JDFVERSIONS, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -487,8 +447,6 @@ public abstract class JDFAutoDevice extends JDFResource
             setAttribute(AttributeName.JMFSENDERID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JMFSenderID
           * @return the value of the attribute
@@ -497,8 +455,6 @@ public abstract class JDFAutoDevice extends JDFResource
         {
             return getAttribute(AttributeName.JMFSENDERID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -513,8 +469,6 @@ public abstract class JDFAutoDevice extends JDFResource
             setAttribute(AttributeName.JMFURL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JMFURL
           * @return the value of the attribute
@@ -523,8 +477,6 @@ public abstract class JDFAutoDevice extends JDFResource
         {
             return getAttribute(AttributeName.JMFURL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -539,8 +491,6 @@ public abstract class JDFAutoDevice extends JDFResource
             setAttribute(AttributeName.KNOWNLOCALIZATIONS, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute KnownLocalizations
           * @return VString the value of the attribute
@@ -552,8 +502,6 @@ public abstract class JDFAutoDevice extends JDFResource
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -568,8 +516,6 @@ public abstract class JDFAutoDevice extends JDFResource
             setAttribute(AttributeName.MANUFACTURER, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Manufacturer
           * @return the value of the attribute
@@ -578,8 +524,6 @@ public abstract class JDFAutoDevice extends JDFResource
         {
             return getAttribute(AttributeName.MANUFACTURER, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -594,8 +538,6 @@ public abstract class JDFAutoDevice extends JDFResource
             setAttribute(AttributeName.MANUFACTURERURL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ManufacturerURL
           * @return the value of the attribute
@@ -604,8 +546,6 @@ public abstract class JDFAutoDevice extends JDFResource
         {
             return getAttribute(AttributeName.MANUFACTURERURL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -620,8 +560,6 @@ public abstract class JDFAutoDevice extends JDFResource
             setAttribute(AttributeName.MODELDESCRIPTION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ModelDescription
           * @return the value of the attribute
@@ -630,8 +568,6 @@ public abstract class JDFAutoDevice extends JDFResource
         {
             return getAttribute(AttributeName.MODELDESCRIPTION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -646,8 +582,6 @@ public abstract class JDFAutoDevice extends JDFResource
             setAttribute(AttributeName.MODELNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ModelName
           * @return the value of the attribute
@@ -656,8 +590,6 @@ public abstract class JDFAutoDevice extends JDFResource
         {
             return getAttribute(AttributeName.MODELNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -672,8 +604,6 @@ public abstract class JDFAutoDevice extends JDFResource
             setAttribute(AttributeName.MODELNUMBER, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ModelNumber
           * @return the value of the attribute
@@ -682,8 +612,6 @@ public abstract class JDFAutoDevice extends JDFResource
         {
             return getAttribute(AttributeName.MODELNUMBER, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -698,8 +626,6 @@ public abstract class JDFAutoDevice extends JDFResource
             setAttribute(AttributeName.MODELURL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ModelURL
           * @return the value of the attribute
@@ -708,8 +634,6 @@ public abstract class JDFAutoDevice extends JDFResource
         {
             return getAttribute(AttributeName.MODELURL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -724,8 +648,6 @@ public abstract class JDFAutoDevice extends JDFResource
             setAttribute(AttributeName.SERIALNUMBER, value, null);
         }
 
-
-
         /**
           * (23) get String attribute SerialNumber
           * @return the value of the attribute
@@ -734,8 +656,6 @@ public abstract class JDFAutoDevice extends JDFResource
         {
             return getAttribute(AttributeName.SERIALNUMBER, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -750,8 +670,6 @@ public abstract class JDFAutoDevice extends JDFResource
             setAttribute(AttributeName.PRESENTATIONURL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute PresentationURL
           * @return the value of the attribute
@@ -760,8 +678,6 @@ public abstract class JDFAutoDevice extends JDFResource
         {
             return getAttribute(AttributeName.PRESENTATIONURL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -776,8 +692,6 @@ public abstract class JDFAutoDevice extends JDFResource
             setAttribute(AttributeName.SECUREJMFURL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute SecureJMFURL
           * @return the value of the attribute
@@ -786,8 +700,6 @@ public abstract class JDFAutoDevice extends JDFResource
         {
             return getAttribute(AttributeName.SECUREJMFURL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -802,8 +714,6 @@ public abstract class JDFAutoDevice extends JDFResource
             setAttribute(AttributeName.UPC, value, null);
         }
 
-
-
         /**
           * (23) get String attribute UPC
           * @return the value of the attribute
@@ -812,8 +722,6 @@ public abstract class JDFAutoDevice extends JDFResource
         {
             return getAttribute(AttributeName.UPC, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -829,8 +737,6 @@ public abstract class JDFAutoDevice extends JDFResource
         return (JDFCostCenter) getElement(ElementName.COSTCENTER, null, 0);
     }
 
-
-
     /** (25) getCreateCostCenter
      * 
      * @return JDFCostCenter the element
@@ -840,17 +746,14 @@ public abstract class JDFAutoDevice extends JDFResource
         return (JDFCostCenter) getCreateElement_KElement(ElementName.COSTCENTER, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementCostCenter
+     * (29) append element CostCenter
      */
     public JDFCostCenter appendCostCenter() throws JDFException
     {
         return (JDFCostCenter) appendElementN(ElementName.COSTCENTER, 1, null);
     }
+
     /** (26) getCreateDeviceCap
      * 
      * @param iSkip number of elements to skip
@@ -860,8 +763,6 @@ public abstract class JDFAutoDevice extends JDFResource
     {
         return (JDFDeviceCap)getCreateElement_KElement(ElementName.DEVICECAP, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element DeviceCap
@@ -873,9 +774,10 @@ public abstract class JDFAutoDevice extends JDFResource
         return (JDFDeviceCap) getElement(ElementName.DEVICECAP, null, iSkip);
     }
 
-
-
-    public JDFDeviceCap appendDeviceCap()
+    /**
+     * (30) append element DeviceCap
+     */
+    public JDFDeviceCap appendDeviceCap() throws JDFException
     {
         return (JDFDeviceCap) appendElement(ElementName.DEVICECAP, null);
     }
@@ -889,8 +791,6 @@ public abstract class JDFAutoDevice extends JDFResource
         return (JDFIconList) getElement(ElementName.ICONLIST, null, 0);
     }
 
-
-
     /** (25) getCreateIconList
      * 
      * @return JDFIconList the element
@@ -900,17 +800,14 @@ public abstract class JDFAutoDevice extends JDFResource
         return (JDFIconList) getCreateElement_KElement(ElementName.ICONLIST, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementIconList
+     * (29) append element IconList
      */
     public JDFIconList appendIconList() throws JDFException
     {
         return (JDFIconList) appendElementN(ElementName.ICONLIST, 1, null);
     }
+
     /** (26) getCreateModule
      * 
      * @param iSkip number of elements to skip
@@ -920,8 +817,6 @@ public abstract class JDFAutoDevice extends JDFResource
     {
         return (JDFModule)getCreateElement_KElement(ElementName.MODULE, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Module
@@ -933,9 +828,10 @@ public abstract class JDFAutoDevice extends JDFResource
         return (JDFModule) getElement(ElementName.MODULE, null, iSkip);
     }
 
-
-
-    public JDFModule appendModule()
+    /**
+     * (30) append element Module
+     */
+    public JDFModule appendModule() throws JDFException
     {
         return (JDFModule) appendElement(ElementName.MODULE, null);
     }

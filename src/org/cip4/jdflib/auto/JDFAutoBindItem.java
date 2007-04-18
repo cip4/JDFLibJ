@@ -224,8 +224,6 @@ public abstract class JDFAutoBindItem extends JDFElement
             setAttribute(AttributeName.CHILDFOLIO, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute ChildFolio
           * @return JDFXYPair the value of the attribute, null if a the
@@ -247,8 +245,6 @@ public abstract class JDFAutoBindItem extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ParentFolio
@@ -261,8 +257,6 @@ public abstract class JDFAutoBindItem extends JDFElement
         {
             setAttribute(AttributeName.PARENTFOLIO, value, null);
         }
-
-
 
         /**
           * (20) get JDFXYPair attribute ParentFolio
@@ -285,8 +279,6 @@ public abstract class JDFAutoBindItem extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Transformation
@@ -299,8 +291,6 @@ public abstract class JDFAutoBindItem extends JDFElement
         {
             setAttribute(AttributeName.TRANSFORMATION, value, null);
         }
-
-
 
         /**
           * (20) get JDFMatrix attribute Transformation
@@ -323,8 +313,6 @@ public abstract class JDFAutoBindItem extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute WrapPages
@@ -337,8 +325,6 @@ public abstract class JDFAutoBindItem extends JDFElement
         {
             setAttribute(AttributeName.WRAPPAGES, value, null);
         }
-
-
 
         /**
           * (20) get JDFIntegerRangeList attribute WrapPages
@@ -361,8 +347,6 @@ public abstract class JDFAutoBindItem extends JDFElement
             return nPlaceHolder;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -377,8 +361,6 @@ public abstract class JDFAutoBindItem extends JDFElement
         return (JDFSpanBindingType) getElement(ElementName.BINDINGTYPE, null, 0);
     }
 
-
-
     /** (25) getCreateBindingType
      * 
      * @return JDFSpanBindingType the element
@@ -388,17 +370,14 @@ public abstract class JDFAutoBindItem extends JDFElement
         return (JDFSpanBindingType) getCreateElement_KElement(ElementName.BINDINGTYPE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementBindingType
+     * (29) append element BindingType
      */
     public JDFSpanBindingType appendBindingType() throws JDFException
     {
         return (JDFSpanBindingType) appendElementN(ElementName.BINDINGTYPE, 1, null);
     }
+
     /**
      * (24) const get element ChannelBinding
      * @return JDFChannelBinding the element
@@ -407,8 +386,6 @@ public abstract class JDFAutoBindItem extends JDFElement
     {
         return (JDFChannelBinding) getElement(ElementName.CHANNELBINDING, null, 0);
     }
-
-
 
     /** (25) getCreateChannelBinding
      * 
@@ -419,17 +396,14 @@ public abstract class JDFAutoBindItem extends JDFElement
         return (JDFChannelBinding) getCreateElement_KElement(ElementName.CHANNELBINDING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementChannelBinding
+     * (29) append element ChannelBinding
      */
     public JDFChannelBinding appendChannelBinding() throws JDFException
     {
         return (JDFChannelBinding) appendElementN(ElementName.CHANNELBINDING, 1, null);
     }
+
     /**
      * (24) const get element CoilBinding
      * @return JDFCoilBinding the element
@@ -438,8 +412,6 @@ public abstract class JDFAutoBindItem extends JDFElement
     {
         return (JDFCoilBinding) getElement(ElementName.COILBINDING, null, 0);
     }
-
-
 
     /** (25) getCreateCoilBinding
      * 
@@ -450,17 +422,14 @@ public abstract class JDFAutoBindItem extends JDFElement
         return (JDFCoilBinding) getCreateElement_KElement(ElementName.COILBINDING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementCoilBinding
+     * (29) append element CoilBinding
      */
     public JDFCoilBinding appendCoilBinding() throws JDFException
     {
         return (JDFCoilBinding) appendElementN(ElementName.COILBINDING, 1, null);
     }
+
     /**
      * (24) const get element EdgeGluing
      * @return JDFEdgeGluing the element
@@ -469,8 +438,6 @@ public abstract class JDFAutoBindItem extends JDFElement
     {
         return (JDFEdgeGluing) getElement(ElementName.EDGEGLUING, null, 0);
     }
-
-
 
     /** (25) getCreateEdgeGluing
      * 
@@ -481,17 +448,14 @@ public abstract class JDFAutoBindItem extends JDFElement
         return (JDFEdgeGluing) getCreateElement_KElement(ElementName.EDGEGLUING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementEdgeGluing
+     * (29) append element EdgeGluing
      */
     public JDFEdgeGluing appendEdgeGluing() throws JDFException
     {
         return (JDFEdgeGluing) appendElementN(ElementName.EDGEGLUING, 1, null);
     }
+
     /**
      * (24) const get element HardCoverBinding
      * @return JDFHardCoverBinding the element
@@ -500,8 +464,6 @@ public abstract class JDFAutoBindItem extends JDFElement
     {
         return (JDFHardCoverBinding) getElement(ElementName.HARDCOVERBINDING, null, 0);
     }
-
-
 
     /** (25) getCreateHardCoverBinding
      * 
@@ -512,17 +474,14 @@ public abstract class JDFAutoBindItem extends JDFElement
         return (JDFHardCoverBinding) getCreateElement_KElement(ElementName.HARDCOVERBINDING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementHardCoverBinding
+     * (29) append element HardCoverBinding
      */
     public JDFHardCoverBinding appendHardCoverBinding() throws JDFException
     {
         return (JDFHardCoverBinding) appendElementN(ElementName.HARDCOVERBINDING, 1, null);
     }
+
     /**
      * (24) const get element PlasticCombBinding
      * @return JDFPlasticCombBinding the element
@@ -531,8 +490,6 @@ public abstract class JDFAutoBindItem extends JDFElement
     {
         return (JDFPlasticCombBinding) getElement(ElementName.PLASTICCOMBBINDING, null, 0);
     }
-
-
 
     /** (25) getCreatePlasticCombBinding
      * 
@@ -543,17 +500,14 @@ public abstract class JDFAutoBindItem extends JDFElement
         return (JDFPlasticCombBinding) getCreateElement_KElement(ElementName.PLASTICCOMBBINDING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPlasticCombBinding
+     * (29) append element PlasticCombBinding
      */
     public JDFPlasticCombBinding appendPlasticCombBinding() throws JDFException
     {
         return (JDFPlasticCombBinding) appendElementN(ElementName.PLASTICCOMBBINDING, 1, null);
     }
+
     /**
      * (24) const get element RingBinding
      * @return JDFRingBinding the element
@@ -562,8 +516,6 @@ public abstract class JDFAutoBindItem extends JDFElement
     {
         return (JDFRingBinding) getElement(ElementName.RINGBINDING, null, 0);
     }
-
-
 
     /** (25) getCreateRingBinding
      * 
@@ -574,17 +526,14 @@ public abstract class JDFAutoBindItem extends JDFElement
         return (JDFRingBinding) getCreateElement_KElement(ElementName.RINGBINDING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementRingBinding
+     * (29) append element RingBinding
      */
     public JDFRingBinding appendRingBinding() throws JDFException
     {
         return (JDFRingBinding) appendElementN(ElementName.RINGBINDING, 1, null);
     }
+
     /**
      * (24) const get element SaddleStitching
      * @return JDFSaddleStitching the element
@@ -593,8 +542,6 @@ public abstract class JDFAutoBindItem extends JDFElement
     {
         return (JDFSaddleStitching) getElement(ElementName.SADDLESTITCHING, null, 0);
     }
-
-
 
     /** (25) getCreateSaddleStitching
      * 
@@ -605,17 +552,14 @@ public abstract class JDFAutoBindItem extends JDFElement
         return (JDFSaddleStitching) getCreateElement_KElement(ElementName.SADDLESTITCHING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementSaddleStitching
+     * (29) append element SaddleStitching
      */
     public JDFSaddleStitching appendSaddleStitching() throws JDFException
     {
         return (JDFSaddleStitching) appendElementN(ElementName.SADDLESTITCHING, 1, null);
     }
+
     /**
      * (24) const get element SideSewing
      * @return JDFSideSewing the element
@@ -624,8 +568,6 @@ public abstract class JDFAutoBindItem extends JDFElement
     {
         return (JDFSideSewing) getElement(ElementName.SIDESEWING, null, 0);
     }
-
-
 
     /** (25) getCreateSideSewing
      * 
@@ -636,17 +578,14 @@ public abstract class JDFAutoBindItem extends JDFElement
         return (JDFSideSewing) getCreateElement_KElement(ElementName.SIDESEWING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementSideSewing
+     * (29) append element SideSewing
      */
     public JDFSideSewing appendSideSewing() throws JDFException
     {
         return (JDFSideSewing) appendElementN(ElementName.SIDESEWING, 1, null);
     }
+
     /**
      * (24) const get element SideStitching
      * @return JDFSideStitching the element
@@ -655,8 +594,6 @@ public abstract class JDFAutoBindItem extends JDFElement
     {
         return (JDFSideStitching) getElement(ElementName.SIDESTITCHING, null, 0);
     }
-
-
 
     /** (25) getCreateSideStitching
      * 
@@ -667,17 +604,14 @@ public abstract class JDFAutoBindItem extends JDFElement
         return (JDFSideStitching) getCreateElement_KElement(ElementName.SIDESTITCHING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementSideStitching
+     * (29) append element SideStitching
      */
     public JDFSideStitching appendSideStitching() throws JDFException
     {
         return (JDFSideStitching) appendElementN(ElementName.SIDESTITCHING, 1, null);
     }
+
     /**
      * (24) const get element SoftCoverBinding
      * @return JDFSoftCoverBinding the element
@@ -686,8 +620,6 @@ public abstract class JDFAutoBindItem extends JDFElement
     {
         return (JDFSoftCoverBinding) getElement(ElementName.SOFTCOVERBINDING, null, 0);
     }
-
-
 
     /** (25) getCreateSoftCoverBinding
      * 
@@ -698,17 +630,14 @@ public abstract class JDFAutoBindItem extends JDFElement
         return (JDFSoftCoverBinding) getCreateElement_KElement(ElementName.SOFTCOVERBINDING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementSoftCoverBinding
+     * (29) append element SoftCoverBinding
      */
     public JDFSoftCoverBinding appendSoftCoverBinding() throws JDFException
     {
         return (JDFSoftCoverBinding) appendElementN(ElementName.SOFTCOVERBINDING, 1, null);
     }
+
     /**
      * (24) const get element Tape
      * @return JDFTape the element
@@ -717,8 +646,6 @@ public abstract class JDFAutoBindItem extends JDFElement
     {
         return (JDFTape) getElement(ElementName.TAPE, null, 0);
     }
-
-
 
     /** (25) getCreateTape
      * 
@@ -729,17 +656,14 @@ public abstract class JDFAutoBindItem extends JDFElement
         return (JDFTape) getCreateElement_KElement(ElementName.TAPE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementTape
+     * (29) append element Tape
      */
     public JDFTape appendTape() throws JDFException
     {
         return (JDFTape) appendElementN(ElementName.TAPE, 1, null);
     }
+
     /**
      * (24) const get element Tabs
      * @return JDFTabs the element
@@ -748,8 +672,6 @@ public abstract class JDFAutoBindItem extends JDFElement
     {
         return (JDFTabs) getElement(ElementName.TABS, null, 0);
     }
-
-
 
     /** (25) getCreateTabs
      * 
@@ -760,17 +682,14 @@ public abstract class JDFAutoBindItem extends JDFElement
         return (JDFTabs) getCreateElement_KElement(ElementName.TABS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementTabs
+     * (29) append element Tabs
      */
     public JDFTabs appendTabs() throws JDFException
     {
         return (JDFTabs) appendElementN(ElementName.TABS, 1, null);
     }
+
     /**
      * (24) const get element ThreadSealing
      * @return JDFThreadSealing the element
@@ -779,8 +698,6 @@ public abstract class JDFAutoBindItem extends JDFElement
     {
         return (JDFThreadSealing) getElement(ElementName.THREADSEALING, null, 0);
     }
-
-
 
     /** (25) getCreateThreadSealing
      * 
@@ -791,17 +708,14 @@ public abstract class JDFAutoBindItem extends JDFElement
         return (JDFThreadSealing) getCreateElement_KElement(ElementName.THREADSEALING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementThreadSealing
+     * (29) append element ThreadSealing
      */
     public JDFThreadSealing appendThreadSealing() throws JDFException
     {
         return (JDFThreadSealing) appendElementN(ElementName.THREADSEALING, 1, null);
     }
+
     /**
      * (24) const get element ThreadSewing
      * @return JDFThreadSewing the element
@@ -810,8 +724,6 @@ public abstract class JDFAutoBindItem extends JDFElement
     {
         return (JDFThreadSewing) getElement(ElementName.THREADSEWING, null, 0);
     }
-
-
 
     /** (25) getCreateThreadSewing
      * 
@@ -822,17 +734,14 @@ public abstract class JDFAutoBindItem extends JDFElement
         return (JDFThreadSewing) getCreateElement_KElement(ElementName.THREADSEWING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementThreadSewing
+     * (29) append element ThreadSewing
      */
     public JDFThreadSewing appendThreadSewing() throws JDFException
     {
         return (JDFThreadSewing) appendElementN(ElementName.THREADSEWING, 1, null);
     }
+
     /**
      * (24) const get element StripBinding
      * @return JDFStripBinding the element
@@ -841,8 +750,6 @@ public abstract class JDFAutoBindItem extends JDFElement
     {
         return (JDFStripBinding) getElement(ElementName.STRIPBINDING, null, 0);
     }
-
-
 
     /** (25) getCreateStripBinding
      * 
@@ -853,17 +760,14 @@ public abstract class JDFAutoBindItem extends JDFElement
         return (JDFStripBinding) getCreateElement_KElement(ElementName.STRIPBINDING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementStripBinding
+     * (29) append element StripBinding
      */
     public JDFStripBinding appendStripBinding() throws JDFException
     {
         return (JDFStripBinding) appendElementN(ElementName.STRIPBINDING, 1, null);
     }
+
     /**
      * (24) const get element WireCombBinding
      * @return JDFWireCombBinding the element
@@ -872,8 +776,6 @@ public abstract class JDFAutoBindItem extends JDFElement
     {
         return (JDFWireCombBinding) getElement(ElementName.WIRECOMBBINDING, null, 0);
     }
-
-
 
     /** (25) getCreateWireCombBinding
      * 
@@ -884,15 +786,12 @@ public abstract class JDFAutoBindItem extends JDFElement
         return (JDFWireCombBinding) getCreateElement_KElement(ElementName.WIRECOMBBINDING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementWireCombBinding
+     * (29) append element WireCombBinding
      */
     public JDFWireCombBinding appendWireCombBinding() throws JDFException
     {
         return (JDFWireCombBinding) appendElementN(ElementName.WIRECOMBBINDING, 1, null);
     }
+
 }// end namespace JDF

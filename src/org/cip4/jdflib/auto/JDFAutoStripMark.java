@@ -240,8 +240,6 @@ public abstract class JDFAutoStripMark extends JDFElement
             setAttribute(AttributeName.MARKNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute MarkName
           * @return the value of the attribute
@@ -250,8 +248,6 @@ public abstract class JDFAutoStripMark extends JDFElement
         {
             return getAttribute(AttributeName.MARKNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -266,8 +262,6 @@ public abstract class JDFAutoStripMark extends JDFElement
             setAttribute(AttributeName.MARKSIDE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute MarkSide
           * @return the value of the attribute
@@ -276,8 +270,6 @@ public abstract class JDFAutoStripMark extends JDFElement
         {
             return EnumMarkSide.getEnum(getAttribute(AttributeName.MARKSIDE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -292,8 +284,6 @@ public abstract class JDFAutoStripMark extends JDFElement
             setAttribute(AttributeName.STRIPMARKDETAILS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute StripMarkDetails
           * @return the value of the attribute
@@ -302,8 +292,6 @@ public abstract class JDFAutoStripMark extends JDFElement
         {
             return getAttribute(AttributeName.STRIPMARKDETAILS, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -319,8 +307,6 @@ public abstract class JDFAutoStripMark extends JDFElement
         return (JDFPosition) getElement(ElementName.POSITION, null, 0);
     }
 
-
-
     /** (25) getCreatePosition
      * 
      * @return JDFPosition the element
@@ -330,17 +316,14 @@ public abstract class JDFAutoStripMark extends JDFElement
         return (JDFPosition) getCreateElement_KElement(ElementName.POSITION, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPosition
+     * (29) append element Position
      */
     public JDFPosition appendPosition() throws JDFException
     {
         return (JDFPosition) appendElementN(ElementName.POSITION, 1, null);
     }
+
     /**
      * (24) const get element JobField
      * @return JDFJobField the element
@@ -349,8 +332,6 @@ public abstract class JDFAutoStripMark extends JDFElement
     {
         return (JDFJobField) getElement(ElementName.JOBFIELD, null, 0);
     }
-
-
 
     /** (25) getCreateJobField
      * 
@@ -361,17 +342,14 @@ public abstract class JDFAutoStripMark extends JDFElement
         return (JDFJobField) getCreateElement_KElement(ElementName.JOBFIELD, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementJobField
+     * (29) append element JobField
      */
     public JDFJobField appendJobField() throws JDFException
     {
         return (JDFJobField) appendElementN(ElementName.JOBFIELD, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -380,4 +358,5 @@ public abstract class JDFAutoStripMark extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

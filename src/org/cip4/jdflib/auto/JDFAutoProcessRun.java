@@ -243,8 +243,6 @@ public abstract class JDFAutoProcessRun extends JDFAudit
             setAttribute(AttributeName.DURATION, value, null);
         }
 
-
-
         /**
           * (20) get JDFDuration attribute Duration
           * @return JDFDuration the value of the attribute, null if a the
@@ -266,8 +264,6 @@ public abstract class JDFAutoProcessRun extends JDFAudit
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute End
@@ -281,8 +277,6 @@ public abstract class JDFAutoProcessRun extends JDFAudit
             setAttribute(AttributeName.END, new JDFDate().getDateTimeISO(), null);
         }
 
-
-
         /**
           * (11) set attribute End
           * @param value: the value to set the attribute to or null
@@ -292,8 +286,6 @@ public abstract class JDFAutoProcessRun extends JDFAudit
             if (value == null) value = new JDFDate();
             setAttribute(AttributeName.END, value.getDateTimeISO(), null);
         }
-
-
 
         /**
           * (12) get JDFDate attribute End
@@ -318,8 +310,6 @@ public abstract class JDFAutoProcessRun extends JDFAudit
             return nMyDate;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute EndStatus
@@ -333,8 +323,6 @@ public abstract class JDFAutoProcessRun extends JDFAudit
             setAttribute(AttributeName.ENDSTATUS, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute EndStatus
           * @return the value of the attribute
@@ -343,8 +331,6 @@ public abstract class JDFAutoProcessRun extends JDFAudit
         {
             return EnumNodeStatus.getEnum(getAttribute(AttributeName.ENDSTATUS, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -359,8 +345,6 @@ public abstract class JDFAutoProcessRun extends JDFAudit
             setAttribute(AttributeName.START, new JDFDate().getDateTimeISO(), null);
         }
 
-
-
         /**
           * (11) set attribute Start
           * @param value: the value to set the attribute to or null
@@ -370,8 +354,6 @@ public abstract class JDFAutoProcessRun extends JDFAudit
             if (value == null) value = new JDFDate();
             setAttribute(AttributeName.START, value.getDateTimeISO(), null);
         }
-
-
 
         /**
           * (12) get JDFDate attribute Start
@@ -396,8 +378,6 @@ public abstract class JDFAutoProcessRun extends JDFAudit
             return nMyDate;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -413,8 +393,6 @@ public abstract class JDFAutoProcessRun extends JDFAudit
         return (JDFPart)getCreateElement_KElement(ElementName.PART, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Part
      * @param iSkip number of elements to skip
@@ -425,9 +403,10 @@ public abstract class JDFAutoProcessRun extends JDFAudit
         return (JDFPart) getElement(ElementName.PART, null, iSkip);
     }
 
-
-
-    public JDFPart appendPart()
+    /**
+     * (30) append element Part
+     */
+    public JDFPart appendPart() throws JDFException
     {
         return (JDFPart) appendElement(ElementName.PART, null);
     }

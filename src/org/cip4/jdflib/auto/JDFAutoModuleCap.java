@@ -222,8 +222,6 @@ public abstract class JDFAutoModuleCap extends JDFElement
             setAttribute(AttributeName.AVAILABILITY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Availability
           * @return the value of the attribute
@@ -232,8 +230,6 @@ public abstract class JDFAutoModuleCap extends JDFElement
         {
             return EnumAvailability.getEnum(getAttribute(AttributeName.AVAILABILITY, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -248,8 +244,6 @@ public abstract class JDFAutoModuleCap extends JDFElement
             setAttribute(AttributeName.ID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ID
           * @return the value of the attribute
@@ -258,8 +252,6 @@ public abstract class JDFAutoModuleCap extends JDFElement
         {
             return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -274,8 +266,6 @@ public abstract class JDFAutoModuleCap extends JDFElement
             setAttribute(AttributeName.MODULEINDEX, value, null);
         }
 
-
-
         /**
           * (15) get int attribute ModuleIndex
           * @return int the value of the attribute
@@ -284,7 +274,5 @@ public abstract class JDFAutoModuleCap extends JDFElement
         {
             return getIntAttribute(AttributeName.MODULEINDEX, null, 0);
         }
-
-
 
 }// end namespace JDF

@@ -74,6 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.pool.JDFPool;
     /*
@@ -165,8 +166,6 @@ public abstract class JDFAutoAmountPool extends JDFPool
         return (JDFPartAmount)getCreateElement_KElement(ElementName.PARTAMOUNT, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element PartAmount
      * @param iSkip number of elements to skip
@@ -177,9 +176,10 @@ public abstract class JDFAutoAmountPool extends JDFPool
         return (JDFPartAmount) getElement(ElementName.PARTAMOUNT, null, iSkip);
     }
 
-
-
-    public JDFPartAmount appendPartAmount()
+    /**
+     * (30) append element PartAmount
+     */
+    public JDFPartAmount appendPartAmount() throws JDFException
     {
         return (JDFPartAmount) appendElement(ElementName.PARTAMOUNT, null);
     }

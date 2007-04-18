@@ -223,8 +223,6 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
             setAttribute(AttributeName.FILE, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute File
           * @return boolean the value of the attribute
@@ -233,8 +231,6 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
         {
             return getBoolAttribute(AttributeName.FILE, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -249,8 +245,6 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
             setAttribute(AttributeName.HOTFOLDER, value, null);
         }
 
-
-
         /**
           * (23) get String attribute HotFolder
           * @return the value of the attribute
@@ -259,8 +253,6 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
         {
             return getAttribute(AttributeName.HOTFOLDER, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -275,8 +267,6 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
             setAttribute(AttributeName.HTTPGET, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute HttpGet
           * @return boolean the value of the attribute
@@ -285,8 +275,6 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
         {
             return getBoolAttribute(AttributeName.HTTPGET, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -301,8 +289,6 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
             setEnumerationsAttribute(AttributeName.PACKAGING, v, null);
         }
 
-
-
         /**
           * (9.2) get Packaging attribute Packaging
           * @return Vector of the enumerations
@@ -311,8 +297,6 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
         {
             return getEnumerationsAttribute(AttributeName.PACKAGING, null, EnumPackaging.getEnum(0), false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -327,8 +311,6 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
             setAttribute(AttributeName.MIME, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute MIME
           * @return boolean the value of the attribute
@@ -337,8 +319,6 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
         {
             return getBoolAttribute(AttributeName.MIME, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -353,8 +333,6 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
             setAttribute(AttributeName.URLSCHEMES, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute URLSchemes
           * @return VString the value of the attribute
@@ -366,7 +344,5 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
 }// end namespace JDF

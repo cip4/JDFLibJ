@@ -188,8 +188,6 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
             setAttribute(AttributeName.CLAMPSYSTEM, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute ClampSystem
           * @return boolean the value of the attribute
@@ -198,8 +196,6 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.CLAMPSYSTEM, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -214,8 +210,6 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
             setAttribute(AttributeName.BRAND, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Brand
           * @return the value of the attribute
@@ -224,8 +218,6 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
         {
             return getAttribute(AttributeName.BRAND, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -240,8 +232,6 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
             setAttribute(AttributeName.CLAMPCOLOR, value.getName(), null);
         }
 
-
-
         /**
           * (19) get EnumNamedColor attribute ClampColor
           * @return EnumNamedColor the value of the attribute
@@ -254,8 +244,6 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
             nPlaceHolder = EnumNamedColor.getEnum(strAttrName);
             return nPlaceHolder;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -270,8 +258,6 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
             setAttribute(AttributeName.CLAMPD, value, null);
         }
 
-
-
         /**
           * (17) get double attribute ClampD
           * @return double the value of the attribute
@@ -280,8 +266,6 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.CLAMPD, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -296,11 +280,9 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
             setAttribute(AttributeName.CLAMPSIZE, value, null);
         }
 
-
-
         /**
           * (20) get JDFShape attribute ClampSize
-          * @return JDFShapethe value of the attribute, null if a the
+          * @return JDFShape the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFShape
           */
         public JDFShape getClampSize()
@@ -318,7 +300,5 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
             }
             return nPlaceHolder;
         }
-
-
 
 }// end namespace JDF

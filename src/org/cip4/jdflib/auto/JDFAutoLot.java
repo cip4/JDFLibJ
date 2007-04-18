@@ -220,8 +220,6 @@ public abstract class JDFAutoLot extends JDFElement
             setAttribute(AttributeName.ACTUALAMOUNT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute ActualAmount
           * @return double the value of the attribute
@@ -230,8 +228,6 @@ public abstract class JDFAutoLot extends JDFElement
         {
             return getRealAttribute(AttributeName.ACTUALAMOUNT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -246,8 +242,6 @@ public abstract class JDFAutoLot extends JDFElement
             setAttribute(AttributeName.AMOUNT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Amount
           * @return double the value of the attribute
@@ -256,8 +250,6 @@ public abstract class JDFAutoLot extends JDFElement
         {
             return getRealAttribute(AttributeName.AMOUNT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -272,8 +264,6 @@ public abstract class JDFAutoLot extends JDFElement
             setAttribute(AttributeName.LOTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute LotID
           * @return the value of the attribute
@@ -282,8 +272,6 @@ public abstract class JDFAutoLot extends JDFElement
         {
             return getAttribute(AttributeName.LOTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -298,8 +286,6 @@ public abstract class JDFAutoLot extends JDFElement
             setAttribute(AttributeName.CONSUMPTION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Consumption
           * @return the value of the attribute
@@ -308,7 +294,5 @@ public abstract class JDFAutoLot extends JDFElement
         {
             return EnumConsumption.getEnum(getAttribute(AttributeName.CONSUMPTION, null, null));
         }
-
-
 
 }// end namespace JDF

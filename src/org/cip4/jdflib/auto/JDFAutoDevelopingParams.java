@@ -188,8 +188,6 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
             setAttribute(AttributeName.PREHEATTEMP, value, null);
         }
 
-
-
         /**
           * (17) get double attribute PreHeatTemp
           * @return double the value of the attribute
@@ -198,8 +196,6 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.PREHEATTEMP, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -213,8 +209,6 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
         {
             setAttribute(AttributeName.PREHEATTIME, value, null);
         }
-
-
 
         /**
           * (20) get JDFDuration attribute PreHeatTime
@@ -237,8 +231,6 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute PostBakeTemp
@@ -252,8 +244,6 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
             setAttribute(AttributeName.POSTBAKETEMP, value, null);
         }
 
-
-
         /**
           * (17) get double attribute PostBakeTemp
           * @return double the value of the attribute
@@ -262,8 +252,6 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.POSTBAKETEMP, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -277,8 +265,6 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
         {
             setAttribute(AttributeName.POSTBAKETIME, value, null);
         }
-
-
 
         /**
           * (20) get JDFDuration attribute PostBakeTime
@@ -301,8 +287,6 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute PostExposeTime
@@ -315,8 +299,6 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
         {
             setAttribute(AttributeName.POSTEXPOSETIME, value, null);
         }
-
-
 
         /**
           * (20) get JDFDuration attribute PostExposeTime
@@ -338,7 +320,5 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
             }
             return nPlaceHolder;
         }
-
-
 
 }// end namespace JDF

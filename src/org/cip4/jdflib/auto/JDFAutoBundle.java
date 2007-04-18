@@ -82,6 +82,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFBundleItem;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContact;
@@ -263,8 +264,6 @@ public abstract class JDFAutoBundle extends JDFResource
             setAttribute(AttributeName.BUNDLETYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute BundleType
           * @return the value of the attribute
@@ -273,8 +272,6 @@ public abstract class JDFAutoBundle extends JDFResource
         {
             return EnumBundleType.getEnum(getAttribute(AttributeName.BUNDLETYPE, null, "Stack"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -289,8 +286,6 @@ public abstract class JDFAutoBundle extends JDFResource
             setAttribute(AttributeName.FOLIOCOUNT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute FolioCount
           * @return int the value of the attribute
@@ -299,8 +294,6 @@ public abstract class JDFAutoBundle extends JDFResource
         {
             return getIntAttribute(AttributeName.FOLIOCOUNT, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -315,8 +308,6 @@ public abstract class JDFAutoBundle extends JDFResource
             setAttribute(AttributeName.READERPAGECOUNT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute ReaderPageCount
           * @return int the value of the attribute
@@ -325,8 +316,6 @@ public abstract class JDFAutoBundle extends JDFResource
         {
             return getIntAttribute(AttributeName.READERPAGECOUNT, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -341,8 +330,6 @@ public abstract class JDFAutoBundle extends JDFResource
             setAttribute(AttributeName.TOTALAMOUNT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute TotalAmount
           * @return int the value of the attribute
@@ -351,8 +338,6 @@ public abstract class JDFAutoBundle extends JDFResource
         {
             return getIntAttribute(AttributeName.TOTALAMOUNT, null, 0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -369,8 +354,6 @@ public abstract class JDFAutoBundle extends JDFResource
         return (JDFBundleItem)getCreateElement_KElement(ElementName.BUNDLEITEM, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element BundleItem
      * @param iSkip number of elements to skip
@@ -381,9 +364,10 @@ public abstract class JDFAutoBundle extends JDFResource
         return (JDFBundleItem) getElement(ElementName.BUNDLEITEM, null, iSkip);
     }
 
-
-
-    public JDFBundleItem appendBundleItem()
+    /**
+     * (30) append element BundleItem
+     */
+    public JDFBundleItem appendBundleItem() throws JDFException
     {
         return (JDFBundleItem) appendElement(ElementName.BUNDLEITEM, null);
     }
@@ -398,8 +382,6 @@ public abstract class JDFAutoBundle extends JDFResource
         return (JDFContact)getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Contact
      * @param iSkip number of elements to skip
@@ -410,9 +392,10 @@ public abstract class JDFAutoBundle extends JDFResource
         return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
     }
 
-
-
-    public JDFContact appendContact()
+    /**
+     * (30) append element Contact
+     */
+    public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -425,6 +408,7 @@ public abstract class JDFAutoBundle extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateIdentificationField
      * 
      * @param iSkip number of elements to skip
@@ -434,8 +418,6 @@ public abstract class JDFAutoBundle extends JDFResource
     {
         return (JDFIdentificationField)getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element IdentificationField
@@ -447,9 +429,10 @@ public abstract class JDFAutoBundle extends JDFResource
         return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
 
-
-
-    public JDFIdentificationField appendIdentificationField()
+    /**
+     * (30) append element IdentificationField
+     */
+    public JDFIdentificationField appendIdentificationField() throws JDFException
     {
         return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
     }
@@ -462,4 +445,5 @@ public abstract class JDFAutoBundle extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

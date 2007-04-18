@@ -85,6 +85,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
     /*
@@ -249,11 +250,9 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
             setAttribute(AttributeName.FOLDINDEX, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute FoldIndex
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getFoldIndex()
@@ -272,8 +271,6 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Action
@@ -287,8 +284,6 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
             setAttribute(AttributeName.ACTION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Action
           * @return the value of the attribute
@@ -297,8 +292,6 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
         {
             return EnumAction.getEnum(getAttribute(AttributeName.ACTION, null, null));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -315,8 +308,6 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
         return (JDFGlueLine)getCreateElement_KElement(ElementName.GLUELINE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element GlueLine
      * @param iSkip number of elements to skip
@@ -327,9 +318,10 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
         return (JDFGlueLine) getElement(ElementName.GLUELINE, null, iSkip);
     }
 
-
-
-    public JDFGlueLine appendGlueLine()
+    /**
+     * (30) append element GlueLine
+     */
+    public JDFGlueLine appendGlueLine() throws JDFException
     {
         return (JDFGlueLine) appendElement(ElementName.GLUELINE, null);
     }
@@ -342,4 +334,5 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

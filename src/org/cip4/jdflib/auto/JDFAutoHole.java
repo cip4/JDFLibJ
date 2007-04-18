@@ -236,11 +236,9 @@ public abstract class JDFAutoHole extends JDFResource
             setAttribute(AttributeName.CENTER, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute Center
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getCenter()
@@ -259,8 +257,6 @@ public abstract class JDFAutoHole extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Extent
@@ -274,11 +270,9 @@ public abstract class JDFAutoHole extends JDFResource
             setAttribute(AttributeName.EXTENT, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute Extent
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getExtent()
@@ -297,8 +291,6 @@ public abstract class JDFAutoHole extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Shape
@@ -312,8 +304,6 @@ public abstract class JDFAutoHole extends JDFResource
             setAttribute(AttributeName.SHAPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Shape
           * @return the value of the attribute
@@ -322,7 +312,5 @@ public abstract class JDFAutoHole extends JDFResource
         {
             return EnumShape.getEnum(getAttribute(AttributeName.SHAPE, null, null));
         }
-
-
 
 }// end namespace JDF

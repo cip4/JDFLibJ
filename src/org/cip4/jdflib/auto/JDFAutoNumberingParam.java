@@ -174,8 +174,6 @@ public abstract class JDFAutoNumberingParam extends JDFElement
             setAttribute(AttributeName.STARTVALUE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute StartValue
           * @return the value of the attribute
@@ -184,8 +182,6 @@ public abstract class JDFAutoNumberingParam extends JDFElement
         {
             return getAttribute(AttributeName.STARTVALUE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -200,8 +196,6 @@ public abstract class JDFAutoNumberingParam extends JDFElement
             setAttribute(AttributeName.XPOSITION, value, null);
         }
 
-
-
         /**
           * (17) get double attribute XPosition
           * @return double the value of the attribute
@@ -210,8 +204,6 @@ public abstract class JDFAutoNumberingParam extends JDFElement
         {
             return getRealAttribute(AttributeName.XPOSITION, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -225,8 +217,6 @@ public abstract class JDFAutoNumberingParam extends JDFElement
         {
             setAttribute(AttributeName.YPOSITION, value, null);
         }
-
-
 
         /**
           * (20) get JDFNumberList attribute YPosition
@@ -249,8 +239,6 @@ public abstract class JDFAutoNumberingParam extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Orientation
@@ -264,8 +252,6 @@ public abstract class JDFAutoNumberingParam extends JDFElement
             setAttribute(AttributeName.ORIENTATION, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Orientation
           * @return double the value of the attribute
@@ -274,8 +260,6 @@ public abstract class JDFAutoNumberingParam extends JDFElement
         {
             return getRealAttribute(AttributeName.ORIENTATION, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -290,8 +274,6 @@ public abstract class JDFAutoNumberingParam extends JDFElement
             setAttribute(AttributeName.STEP, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Step
           * @return int the value of the attribute
@@ -300,7 +282,5 @@ public abstract class JDFAutoNumberingParam extends JDFElement
         {
             return getIntAttribute(AttributeName.STEP, null, 1);
         }
-
-
 
 }// end namespace JDF

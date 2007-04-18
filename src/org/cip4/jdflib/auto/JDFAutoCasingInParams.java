@@ -77,6 +77,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
     /*
@@ -196,8 +197,6 @@ public abstract class JDFAutoCasingInParams extends JDFResource
             setAttribute(AttributeName.CASERADIUS, value, null);
         }
 
-
-
         /**
           * (17) get double attribute CaseRadius
           * @return double the value of the attribute
@@ -206,8 +205,6 @@ public abstract class JDFAutoCasingInParams extends JDFResource
         {
             return getRealAttribute(AttributeName.CASERADIUS, null, 0.0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -224,8 +221,6 @@ public abstract class JDFAutoCasingInParams extends JDFResource
         return (JDFGlueLine)getCreateElement_KElement(ElementName.GLUELINE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element GlueLine
      * @param iSkip number of elements to skip
@@ -236,9 +231,10 @@ public abstract class JDFAutoCasingInParams extends JDFResource
         return (JDFGlueLine) getElement(ElementName.GLUELINE, null, iSkip);
     }
 
-
-
-    public JDFGlueLine appendGlueLine()
+    /**
+     * (30) append element GlueLine
+     */
+    public JDFGlueLine appendGlueLine() throws JDFException
     {
         return (JDFGlueLine) appendElement(ElementName.GLUELINE, null);
     }
@@ -251,4 +247,5 @@ public abstract class JDFAutoCasingInParams extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

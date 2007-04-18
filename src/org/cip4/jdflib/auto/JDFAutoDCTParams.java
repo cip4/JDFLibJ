@@ -288,8 +288,6 @@ public abstract class JDFAutoDCTParams extends JDFElement
             setEnumerationsAttribute(AttributeName.SOURCECSS, v, null);
         }
 
-
-
         /**
           * (9.2) get SourceCSs attribute SourceCSs
           * @return Vector of the enumerations
@@ -298,8 +296,6 @@ public abstract class JDFAutoDCTParams extends JDFElement
         {
             return getEnumerationsAttribute(AttributeName.SOURCECSS, null, EnumSourceCSs.getEnum(0), false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -313,8 +309,6 @@ public abstract class JDFAutoDCTParams extends JDFElement
         {
             setAttribute(AttributeName.HSAMPLES, value, null);
         }
-
-
 
         /**
           * (20) get JDFIntegerList attribute HSamples
@@ -337,8 +331,6 @@ public abstract class JDFAutoDCTParams extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute VSamples
@@ -351,8 +343,6 @@ public abstract class JDFAutoDCTParams extends JDFElement
         {
             setAttribute(AttributeName.VSAMPLES, value, null);
         }
-
-
 
         /**
           * (20) get JDFIntegerList attribute VSamples
@@ -375,8 +365,6 @@ public abstract class JDFAutoDCTParams extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute QFactor
@@ -390,8 +378,6 @@ public abstract class JDFAutoDCTParams extends JDFElement
             setAttribute(AttributeName.QFACTOR, value, null);
         }
 
-
-
         /**
           * (17) get double attribute QFactor
           * @return double the value of the attribute
@@ -400,8 +386,6 @@ public abstract class JDFAutoDCTParams extends JDFElement
         {
             return getRealAttribute(AttributeName.QFACTOR, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -415,8 +399,6 @@ public abstract class JDFAutoDCTParams extends JDFElement
         {
             setAttribute(AttributeName.QUANTTABLE, value, null);
         }
-
-
 
         /**
           * (20) get JDFNumberList attribute QuantTable
@@ -439,8 +421,6 @@ public abstract class JDFAutoDCTParams extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute HuffTable
@@ -453,8 +433,6 @@ public abstract class JDFAutoDCTParams extends JDFElement
         {
             setAttribute(AttributeName.HUFFTABLE, value, null);
         }
-
-
 
         /**
           * (20) get JDFNumberList attribute HuffTable
@@ -477,8 +455,6 @@ public abstract class JDFAutoDCTParams extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ColorTransform
@@ -492,8 +468,6 @@ public abstract class JDFAutoDCTParams extends JDFElement
             setAttribute(AttributeName.COLORTRANSFORM, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ColorTransform
           * @return the value of the attribute
@@ -502,7 +476,5 @@ public abstract class JDFAutoDCTParams extends JDFElement
         {
             return EnumColorTransform.getEnum(getAttribute(AttributeName.COLORTRANSFORM, null, "Automatic"));
         }
-
-
 
 }// end namespace JDF

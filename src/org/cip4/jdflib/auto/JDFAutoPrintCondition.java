@@ -207,8 +207,6 @@ public abstract class JDFAutoPrintCondition extends JDFResource
             setAttribute(AttributeName.NAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Name
           * @return the value of the attribute
@@ -217,8 +215,6 @@ public abstract class JDFAutoPrintCondition extends JDFResource
         {
             return getAttribute(AttributeName.NAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -232,8 +228,6 @@ public abstract class JDFAutoPrintCondition extends JDFResource
         {
             setAttribute(AttributeName.AIMCURVE, value, null);
         }
-
-
 
         /**
           * (20) get JDFTransferFunction attribute AimCurve
@@ -256,8 +250,6 @@ public abstract class JDFAutoPrintCondition extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Density
@@ -271,8 +263,6 @@ public abstract class JDFAutoPrintCondition extends JDFResource
             setAttribute(AttributeName.DENSITY, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Density
           * @return double the value of the attribute
@@ -281,8 +271,6 @@ public abstract class JDFAutoPrintCondition extends JDFResource
         {
             return getRealAttribute(AttributeName.DENSITY, null, 0.0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -298,8 +286,6 @@ public abstract class JDFAutoPrintCondition extends JDFResource
         return (JDFColorMeasurementConditions) getElement(ElementName.COLORMEASUREMENTCONDITIONS, null, 0);
     }
 
-
-
     /** (25) getCreateColorMeasurementConditions
      * 
      * @return JDFColorMeasurementConditions the element
@@ -309,17 +295,14 @@ public abstract class JDFAutoPrintCondition extends JDFResource
         return (JDFColorMeasurementConditions) getCreateElement_KElement(ElementName.COLORMEASUREMENTCONDITIONS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementColorMeasurementConditions
+     * (29) append element ColorMeasurementConditions
      */
     public JDFColorMeasurementConditions appendColorMeasurementConditions() throws JDFException
     {
         return (JDFColorMeasurementConditions) appendElementN(ElementName.COLORMEASUREMENTCONDITIONS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -328,6 +311,7 @@ public abstract class JDFAutoPrintCondition extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element Device
      * @return JDFDevice the element
@@ -336,8 +320,6 @@ public abstract class JDFAutoPrintCondition extends JDFResource
     {
         return (JDFDevice) getElement(ElementName.DEVICE, null, 0);
     }
-
-
 
     /** (25) getCreateDevice
      * 
@@ -348,17 +330,14 @@ public abstract class JDFAutoPrintCondition extends JDFResource
         return (JDFDevice) getCreateElement_KElement(ElementName.DEVICE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDevice
+     * (29) append element Device
      */
     public JDFDevice appendDevice() throws JDFException
     {
         return (JDFDevice) appendElementN(ElementName.DEVICE, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -367,6 +346,7 @@ public abstract class JDFAutoPrintCondition extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateFileSpec
      * 
      * @param iSkip number of elements to skip
@@ -376,8 +356,6 @@ public abstract class JDFAutoPrintCondition extends JDFResource
     {
         return (JDFFileSpec)getCreateElement_KElement(ElementName.FILESPEC, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element FileSpec
@@ -389,9 +367,10 @@ public abstract class JDFAutoPrintCondition extends JDFResource
         return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
     }
 
-
-
-    public JDFFileSpec appendFileSpec()
+    /**
+     * (30) append element FileSpec
+     */
+    public JDFFileSpec appendFileSpec() throws JDFException
     {
         return (JDFFileSpec) appendElement(ElementName.FILESPEC, null);
     }
@@ -404,4 +383,5 @@ public abstract class JDFAutoPrintCondition extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

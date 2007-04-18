@@ -183,8 +183,6 @@ public abstract class JDFAutoNewJDFCmdParams extends JDFElement
             setAttribute(AttributeName.JDFDETAILS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JDFDetails
           * @return the value of the attribute
@@ -193,8 +191,6 @@ public abstract class JDFAutoNewJDFCmdParams extends JDFElement
         {
             return getAttribute(AttributeName.JDFDETAILS, null, "Brief");
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -210,8 +206,6 @@ public abstract class JDFAutoNewJDFCmdParams extends JDFElement
         return (JDFIDInfo) getElement(ElementName.IDINFO, null, 0);
     }
 
-
-
     /** (25) getCreateIDInfo
      * 
      * @return JDFIDInfo the element
@@ -221,15 +215,12 @@ public abstract class JDFAutoNewJDFCmdParams extends JDFElement
         return (JDFIDInfo) getCreateElement_KElement(ElementName.IDINFO, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementIDInfo
+     * (29) append element IDInfo
      */
     public JDFIDInfo appendIDInfo() throws JDFException
     {
         return (JDFIDInfo) appendElementN(ElementName.IDINFO, 1, null);
     }
+
 }// end namespace JDF

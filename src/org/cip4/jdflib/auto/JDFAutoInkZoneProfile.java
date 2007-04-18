@@ -187,8 +187,6 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
             setAttribute(AttributeName.ZONESETTINGSX, value, null);
         }
 
-
-
         /**
           * (20) get JDFNumberList attribute ZoneSettingsX
           * @return JDFNumberList the value of the attribute, null if a the
@@ -210,8 +208,6 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ZoneWidth
@@ -225,8 +221,6 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
             setAttribute(AttributeName.ZONEWIDTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute ZoneWidth
           * @return double the value of the attribute
@@ -235,8 +229,6 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
         {
             return getRealAttribute(AttributeName.ZONEWIDTH, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -251,8 +243,6 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
             setAttribute(AttributeName.ZONEHEIGHT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute ZoneHeight
           * @return double the value of the attribute
@@ -261,8 +251,6 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
         {
             return getRealAttribute(AttributeName.ZONEHEIGHT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -276,8 +264,6 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
         {
             setAttribute(AttributeName.ZONESETTINGSY, value, null);
         }
-
-
 
         /**
           * (20) get JDFNumberList attribute ZoneSettingsY
@@ -299,7 +285,5 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
             }
             return nPlaceHolder;
         }
-
-
 
 }// end namespace JDF

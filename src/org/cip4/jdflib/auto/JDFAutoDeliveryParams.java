@@ -261,8 +261,6 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
             setAttribute(AttributeName.EARLIEST, new JDFDate().getDateTimeISO(), null);
         }
 
-
-
         /**
           * (11) set attribute Earliest
           * @param value: the value to set the attribute to or null
@@ -272,8 +270,6 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
             if (value == null) value = new JDFDate();
             setAttribute(AttributeName.EARLIEST, value.getDateTimeISO(), null);
         }
-
-
 
         /**
           * (12) get JDFDate attribute Earliest
@@ -298,8 +294,6 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
             return nMyDate;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Method
@@ -313,8 +307,6 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
             setAttribute(AttributeName.METHOD, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Method
           * @return the value of the attribute
@@ -323,8 +315,6 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
         {
             return getAttribute(AttributeName.METHOD, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -339,8 +329,6 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
             setAttribute(AttributeName.PICKUP, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Pickup
           * @return boolean the value of the attribute
@@ -349,8 +337,6 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.PICKUP, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -365,8 +351,6 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
             setAttribute(AttributeName.REQUIRED, new JDFDate().getDateTimeISO(), null);
         }
 
-
-
         /**
           * (11) set attribute Required
           * @param value: the value to set the attribute to or null
@@ -376,8 +360,6 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
             if (value == null) value = new JDFDate();
             setAttribute(AttributeName.REQUIRED, value.getDateTimeISO(), null);
         }
-
-
 
         /**
           * (12) get JDFDate attribute Required
@@ -402,8 +384,6 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
             return nMyDate;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ServiceLevel
@@ -417,8 +397,6 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
             setAttribute(AttributeName.SERVICELEVEL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ServiceLevel
           * @return the value of the attribute
@@ -427,8 +405,6 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
         {
             return getAttribute(AttributeName.SERVICELEVEL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -443,8 +419,6 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
             setAttribute(AttributeName.TRANSFER, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Transfer
           * @return the value of the attribute
@@ -453,8 +427,6 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
         {
             return EnumTransfer.getEnum(getAttribute(AttributeName.TRANSFER, null, null));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -470,8 +442,6 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
         return (JDFCompany) getElement(ElementName.COMPANY, null, 0);
     }
 
-
-
     /** (25) getCreateCompany
      * 
      * @return JDFCompany the element
@@ -481,17 +451,14 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
         return (JDFCompany) getCreateElement_KElement(ElementName.COMPANY, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementCompany
+     * (29) append element Company
      */
     public JDFCompany appendCompany() throws JDFException
     {
         return (JDFCompany) appendElementN(ElementName.COMPANY, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -500,6 +467,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateContact
      * 
      * @param iSkip number of elements to skip
@@ -509,8 +477,6 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
     {
         return (JDFContact)getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Contact
@@ -522,9 +488,10 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
         return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
     }
 
-
-
-    public JDFContact appendContact()
+    /**
+     * (30) append element Contact
+     */
+    public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -537,6 +504,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateDrop
      * 
      * @param iSkip number of elements to skip
@@ -546,8 +514,6 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
     {
         return (JDFDrop)getCreateElement_KElement(ElementName.DROP, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Drop
@@ -559,9 +525,10 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
         return (JDFDrop) getElement(ElementName.DROP, null, iSkip);
     }
 
-
-
-    public JDFDrop appendDrop()
+    /**
+     * (30) append element Drop
+     */
+    public JDFDrop appendDrop() throws JDFException
     {
         return (JDFDrop) appendElement(ElementName.DROP, null);
     }

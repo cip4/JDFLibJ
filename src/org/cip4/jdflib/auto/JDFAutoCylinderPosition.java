@@ -267,11 +267,9 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
             setAttribute(AttributeName.PLATEPOSITION, value.toString(), null);
         }
 
-
-
         /**
           * (20) get JDFXYPairRangeList attribute PlatePosition
-          * @return JDFXYPairRangeListthe value of the attribute, null if a the
+          * @return JDFXYPairRangeList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPairRangeList
           */
         public JDFXYPairRangeList getPlatePosition()
@@ -290,8 +288,6 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute PlateType
@@ -305,8 +301,6 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
             setAttribute(AttributeName.PLATETYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute PlateType
           * @return the value of the attribute
@@ -315,8 +309,6 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
         {
             return EnumPlateType.getEnum(getAttribute(AttributeName.PLATETYPE, null, "Content"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -331,8 +323,6 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
             setAttribute(AttributeName.PLATEUSAGE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute PlateUsage
           * @return the value of the attribute
@@ -341,8 +331,6 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
         {
             return EnumPlateUsage.getEnum(getAttribute(AttributeName.PLATEUSAGE, null, "Original"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -357,8 +345,6 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
             setAttribute(AttributeName.DEVICEMODULEINDEX, value, null);
         }
 
-
-
         /**
           * (15) get int attribute DeviceModuleIndex
           * @return int the value of the attribute
@@ -367,7 +353,5 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
         {
             return getIntAttribute(AttributeName.DEVICEMODULEINDEX, null, 0);
         }
-
-
 
 }// end namespace JDF

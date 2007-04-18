@@ -166,8 +166,6 @@ public abstract class JDFAutoScore extends JDFElement
             setAttribute(AttributeName.OFFSET, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Offset
           * @return double the value of the attribute
@@ -176,7 +174,5 @@ public abstract class JDFAutoScore extends JDFElement
         {
             return getRealAttribute(AttributeName.OFFSET, null, 0.0);
         }
-
-
 
 }// end namespace JDF

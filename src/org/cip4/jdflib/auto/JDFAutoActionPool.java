@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.devicecapability.JDFAction;
     /*
     *****************************************************************************
@@ -165,8 +166,6 @@ public abstract class JDFAutoActionPool extends JDFElement
         return (JDFAction)getCreateElement_KElement(ElementName.ACTION, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Action
      * @param iSkip number of elements to skip
@@ -177,9 +176,10 @@ public abstract class JDFAutoActionPool extends JDFElement
         return (JDFAction) getElement(ElementName.ACTION, null, iSkip);
     }
 
-
-
-    public JDFAction appendAction()
+    /**
+     * (30) append element Action
+     */
+    public JDFAction appendAction() throws JDFException
     {
         return (JDFAction) appendElement(ElementName.ACTION, null);
     }

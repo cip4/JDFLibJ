@@ -184,8 +184,6 @@ public abstract class JDFAutoTIFFEmbeddedFile extends JDFElement
             setAttribute(AttributeName.TAGNUMBER, value, null);
         }
 
-
-
         /**
           * (15) get int attribute TagNumber
           * @return int the value of the attribute
@@ -194,8 +192,6 @@ public abstract class JDFAutoTIFFEmbeddedFile extends JDFElement
         {
             return getIntAttribute(AttributeName.TAGNUMBER, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -210,8 +206,6 @@ public abstract class JDFAutoTIFFEmbeddedFile extends JDFElement
             setAttribute(AttributeName.TAGTYPE, value, null);
         }
 
-
-
         /**
           * (15) get int attribute TagType
           * @return int the value of the attribute
@@ -220,8 +214,6 @@ public abstract class JDFAutoTIFFEmbeddedFile extends JDFElement
         {
             return getIntAttribute(AttributeName.TAGTYPE, null, 0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -237,8 +229,6 @@ public abstract class JDFAutoTIFFEmbeddedFile extends JDFElement
         return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
     /** (25) getCreateFileSpec
      * 
      * @return JDFFileSpec the element
@@ -248,17 +238,14 @@ public abstract class JDFAutoTIFFEmbeddedFile extends JDFElement
         return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFileSpec
+     * (29) append element FileSpec
      */
     public JDFFileSpec appendFileSpec() throws JDFException
     {
         return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -267,4 +254,5 @@ public abstract class JDFAutoTIFFEmbeddedFile extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

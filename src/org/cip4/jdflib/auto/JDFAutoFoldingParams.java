@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFFold;
@@ -297,8 +298,6 @@ public abstract class JDFAutoFoldingParams extends JDFResource
             setAttribute(AttributeName.SHEETLAY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute SheetLay
           * @return the value of the attribute
@@ -307,8 +306,6 @@ public abstract class JDFAutoFoldingParams extends JDFResource
         {
             return EnumSheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, "Left"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -323,8 +320,6 @@ public abstract class JDFAutoFoldingParams extends JDFResource
             setAttribute(AttributeName.DESCRIPTIONTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute DescriptionType
           * @return the value of the attribute
@@ -333,8 +328,6 @@ public abstract class JDFAutoFoldingParams extends JDFResource
         {
             return EnumDescriptionType.getEnum(getAttribute(AttributeName.DESCRIPTIONTYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -349,8 +342,6 @@ public abstract class JDFAutoFoldingParams extends JDFResource
             setAttribute(AttributeName.FOLDCATALOG, value, null);
         }
 
-
-
         /**
           * (23) get String attribute FoldCatalog
           * @return the value of the attribute
@@ -359,8 +350,6 @@ public abstract class JDFAutoFoldingParams extends JDFResource
         {
             return getAttribute(AttributeName.FOLDCATALOG, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -375,11 +364,9 @@ public abstract class JDFAutoFoldingParams extends JDFResource
             setAttribute(AttributeName.FOLDSHEETIN, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute FoldSheetIn
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getFoldSheetIn()
@@ -398,8 +385,6 @@ public abstract class JDFAutoFoldingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -415,8 +400,6 @@ public abstract class JDFAutoFoldingParams extends JDFResource
         return (JDFFold)getCreateElement_KElement(ElementName.FOLD, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Fold
      * @param iSkip number of elements to skip
@@ -427,9 +410,10 @@ public abstract class JDFAutoFoldingParams extends JDFResource
         return (JDFFold) getElement(ElementName.FOLD, null, iSkip);
     }
 
-
-
-    public JDFFold appendFold()
+    /**
+     * (30) append element Fold
+     */
+    public JDFFold appendFold() throws JDFException
     {
         return (JDFFold) appendElement(ElementName.FOLD, null);
     }

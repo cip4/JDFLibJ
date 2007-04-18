@@ -358,8 +358,6 @@ public abstract class JDFAutoScanParams extends JDFResource
             setAttribute(AttributeName.BITDEPTH, value, null);
         }
 
-
-
         /**
           * (15) get int attribute BitDepth
           * @return int the value of the attribute
@@ -368,8 +366,6 @@ public abstract class JDFAutoScanParams extends JDFResource
         {
             return getIntAttribute(AttributeName.BITDEPTH, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -384,11 +380,9 @@ public abstract class JDFAutoScanParams extends JDFResource
             setAttribute(AttributeName.MAGNIFICATION, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute Magnification
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getMagnification()
@@ -407,8 +401,6 @@ public abstract class JDFAutoScanParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute OutputColorSpace
@@ -422,8 +414,6 @@ public abstract class JDFAutoScanParams extends JDFResource
             setAttribute(AttributeName.OUTPUTCOLORSPACE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute OutputColorSpace
           * @return the value of the attribute
@@ -432,8 +422,6 @@ public abstract class JDFAutoScanParams extends JDFResource
         {
             return EnumOutputColorSpace.getEnum(getAttribute(AttributeName.OUTPUTCOLORSPACE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -448,8 +436,6 @@ public abstract class JDFAutoScanParams extends JDFResource
             setAttribute(AttributeName.COMPRESSIONFILTER, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute CompressionFilter
           * @return the value of the attribute
@@ -458,8 +444,6 @@ public abstract class JDFAutoScanParams extends JDFResource
         {
             return EnumCompressionFilter.getEnum(getAttribute(AttributeName.COMPRESSIONFILTER, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -474,8 +458,6 @@ public abstract class JDFAutoScanParams extends JDFResource
             setAttribute(AttributeName.DCTQUALITY, value, null);
         }
 
-
-
         /**
           * (17) get double attribute DCTQuality
           * @return double the value of the attribute
@@ -484,8 +466,6 @@ public abstract class JDFAutoScanParams extends JDFResource
         {
             return getRealAttribute(AttributeName.DCTQUALITY, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -500,11 +480,9 @@ public abstract class JDFAutoScanParams extends JDFResource
             setAttribute(AttributeName.INPUTBOX, value, null);
         }
 
-
-
         /**
           * (20) get JDFRectangle attribute InputBox
-          * @return JDFRectanglethe value of the attribute, null if a the
+          * @return JDFRectangle the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFRectangle
           */
         public JDFRectangle getInputBox()
@@ -523,8 +501,6 @@ public abstract class JDFAutoScanParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute MountID
@@ -538,8 +514,6 @@ public abstract class JDFAutoScanParams extends JDFResource
             setAttribute(AttributeName.MOUNTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute MountID
           * @return the value of the attribute
@@ -548,8 +522,6 @@ public abstract class JDFAutoScanParams extends JDFResource
         {
             return getAttribute(AttributeName.MOUNTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -564,8 +536,6 @@ public abstract class JDFAutoScanParams extends JDFResource
             setAttribute(AttributeName.MOUNTING, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Mounting
           * @return the value of the attribute
@@ -574,8 +544,6 @@ public abstract class JDFAutoScanParams extends JDFResource
         {
             return EnumMounting.getEnum(getAttribute(AttributeName.MOUNTING, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -590,11 +558,9 @@ public abstract class JDFAutoScanParams extends JDFResource
             setAttribute(AttributeName.OUTPUTRESOLUTION, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute OutputResolution
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getOutputResolution()
@@ -613,8 +579,6 @@ public abstract class JDFAutoScanParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute OutputSize
@@ -628,11 +592,9 @@ public abstract class JDFAutoScanParams extends JDFResource
             setAttribute(AttributeName.OUTPUTSIZE, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute OutputSize
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getOutputSize()
@@ -651,8 +613,6 @@ public abstract class JDFAutoScanParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute SplitDocuments
@@ -666,8 +626,6 @@ public abstract class JDFAutoScanParams extends JDFResource
             setAttribute(AttributeName.SPLITDOCUMENTS, value, null);
         }
 
-
-
         /**
           * (15) get int attribute SplitDocuments
           * @return int the value of the attribute
@@ -676,8 +634,6 @@ public abstract class JDFAutoScanParams extends JDFResource
         {
             return getIntAttribute(AttributeName.SPLITDOCUMENTS, null, 0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -693,8 +649,6 @@ public abstract class JDFAutoScanParams extends JDFResource
         return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
     /** (25) getCreateFileSpec
      * 
      * @return JDFFileSpec the element
@@ -704,17 +658,14 @@ public abstract class JDFAutoScanParams extends JDFResource
         return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFileSpec
+     * (29) append element FileSpec
      */
     public JDFFileSpec appendFileSpec() throws JDFException
     {
         return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -723,4 +674,5 @@ public abstract class JDFAutoScanParams extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

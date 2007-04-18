@@ -191,8 +191,6 @@ public abstract class JDFAutoOccupation extends JDFElement
             setAttribute(AttributeName.BUSY, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Busy
           * @return double the value of the attribute
@@ -201,8 +199,6 @@ public abstract class JDFAutoOccupation extends JDFElement
         {
             return getRealAttribute(AttributeName.BUSY, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -217,8 +213,6 @@ public abstract class JDFAutoOccupation extends JDFElement
             setAttribute(AttributeName.JOBID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobID
           * @return the value of the attribute
@@ -227,8 +221,6 @@ public abstract class JDFAutoOccupation extends JDFElement
         {
             return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -243,8 +235,6 @@ public abstract class JDFAutoOccupation extends JDFElement
             setAttribute(AttributeName.JOBPARTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobPartID
           * @return the value of the attribute
@@ -253,8 +243,6 @@ public abstract class JDFAutoOccupation extends JDFElement
         {
             return getAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -269,8 +257,6 @@ public abstract class JDFAutoOccupation extends JDFElement
             setAttribute(AttributeName.QUEUEENTRYID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute QueueEntryID
           * @return the value of the attribute
@@ -279,8 +265,6 @@ public abstract class JDFAutoOccupation extends JDFElement
         {
             return getAttribute(AttributeName.QUEUEENTRYID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -297,8 +281,6 @@ public abstract class JDFAutoOccupation extends JDFElement
         return (JDFDevice)getCreateElement_KElement(ElementName.DEVICE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Device
      * @param iSkip number of elements to skip
@@ -309,9 +291,10 @@ public abstract class JDFAutoOccupation extends JDFElement
         return (JDFDevice) getElement(ElementName.DEVICE, null, iSkip);
     }
 
-
-
-    public JDFDevice appendDevice()
+    /**
+     * (30) append element Device
+     */
+    public JDFDevice appendDevice() throws JDFException
     {
         return (JDFDevice) appendElement(ElementName.DEVICE, null);
     }
@@ -325,8 +308,6 @@ public abstract class JDFAutoOccupation extends JDFElement
         return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, 0);
     }
 
-
-
     /** (25) getCreateEmployee
      * 
      * @return JDFEmployee the element
@@ -336,17 +317,14 @@ public abstract class JDFAutoOccupation extends JDFElement
         return (JDFEmployee) getCreateElement_KElement(ElementName.EMPLOYEE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementEmployee
+     * (29) append element Employee
      */
     public JDFEmployee appendEmployee() throws JDFException
     {
         return (JDFEmployee) appendElementN(ElementName.EMPLOYEE, 1, null);
     }
+
     /** (26) getCreatePart
      * 
      * @param iSkip number of elements to skip
@@ -356,8 +334,6 @@ public abstract class JDFAutoOccupation extends JDFElement
     {
         return (JDFPart)getCreateElement_KElement(ElementName.PART, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Part
@@ -369,9 +345,10 @@ public abstract class JDFAutoOccupation extends JDFElement
         return (JDFPart) getElement(ElementName.PART, null, iSkip);
     }
 
-
-
-    public JDFPart appendPart()
+    /**
+     * (30) append element Part
+     */
+    public JDFPart appendPart() throws JDFException
     {
         return (JDFPart) appendElement(ElementName.PART, null);
     }

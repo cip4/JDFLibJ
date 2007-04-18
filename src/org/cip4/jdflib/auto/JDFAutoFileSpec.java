@@ -370,8 +370,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
             setAttribute(AttributeName.COMPRESSION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Compression
           * @return the value of the attribute
@@ -380,8 +378,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
         {
             return getAttribute(AttributeName.COMPRESSION, null, "None");
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -396,8 +392,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
             setAttribute(AttributeName.APPLICATION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Application
           * @return the value of the attribute
@@ -406,8 +400,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
         {
             return getAttribute(AttributeName.APPLICATION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -422,8 +414,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
             setAttribute(AttributeName.APPOS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute AppOS
           * @return the value of the attribute
@@ -432,8 +422,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
         {
             return getAttribute(AttributeName.APPOS, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -448,8 +436,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
             setAttribute(AttributeName.APPVERSION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute AppVersion
           * @return the value of the attribute
@@ -458,8 +444,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
         {
             return getAttribute(AttributeName.APPVERSION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -474,8 +458,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
             setAttribute(AttributeName.CHECKSUM, value, null);
         }
 
-
-
         /**
           * (23) get String attribute CheckSum
           * @return the value of the attribute
@@ -484,8 +466,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
         {
             return getAttribute(AttributeName.CHECKSUM, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -500,8 +480,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
             setAttribute(AttributeName.DISPOSITION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Disposition
           * @return the value of the attribute
@@ -510,8 +488,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
         {
             return EnumDisposition.getEnum(getAttribute(AttributeName.DISPOSITION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -526,8 +502,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
             setAttribute(AttributeName.DOCUMENTNATURALLANG, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DocumentNaturalLang
           * @return the value of the attribute
@@ -536,8 +510,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
         {
             return getAttribute(AttributeName.DOCUMENTNATURALLANG, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -552,8 +524,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
             setAttribute(AttributeName.FILEFORMAT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute FileFormat
           * @return the value of the attribute
@@ -562,8 +532,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
         {
             return getAttribute(AttributeName.FILEFORMAT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -578,8 +546,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
             setAttribute(AttributeName.FILESIZE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute FileSize
           * @return the value of the attribute
@@ -588,8 +554,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
         {
             return getAttribute(AttributeName.FILESIZE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -604,8 +568,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
             setAttribute(AttributeName.FILETARGETDEVICEMODEL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute FileTargetDeviceModel
           * @return the value of the attribute
@@ -614,8 +576,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
         {
             return getAttribute(AttributeName.FILETARGETDEVICEMODEL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -630,8 +590,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
             setAttribute(AttributeName.FILETEMPLATE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute FileTemplate
           * @return the value of the attribute
@@ -640,8 +598,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
         {
             return getAttribute(AttributeName.FILETEMPLATE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -656,8 +612,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
             setAttribute(AttributeName.FILEVERSION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute FileVersion
           * @return the value of the attribute
@@ -666,8 +620,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
         {
             return getAttribute(AttributeName.FILEVERSION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -682,8 +634,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
             setAttribute(AttributeName.MIMETYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute MimeType
           * @return the value of the attribute
@@ -692,8 +642,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
         {
             return getAttribute(AttributeName.MIMETYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -708,8 +656,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
             setAttribute(AttributeName.MIMETYPEVERSION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute MimeTypeVersion
           * @return the value of the attribute
@@ -718,8 +664,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
         {
             return getAttribute(AttributeName.MIMETYPEVERSION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -734,8 +678,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
             setAttribute(AttributeName.OVERWRITEPOLICY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute OverwritePolicy
           * @return the value of the attribute
@@ -744,8 +686,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
         {
             return EnumOverwritePolicy.getEnum(getAttribute(AttributeName.OVERWRITEPOLICY, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -760,8 +700,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
             setAttribute(AttributeName.OSVERSION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute OSVersion
           * @return the value of the attribute
@@ -770,8 +708,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
         {
             return getAttribute(AttributeName.OSVERSION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -786,8 +722,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
             setAttribute(AttributeName.PAGEORDER, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute PageOrder
           * @return the value of the attribute
@@ -796,8 +730,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
         {
             return EnumPageOrder.getEnum(getAttribute(AttributeName.PAGEORDER, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -812,8 +744,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
             setAttribute(AttributeName.PASSWORD, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Password
           * @return the value of the attribute
@@ -822,8 +752,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
         {
             return getAttribute(AttributeName.PASSWORD, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -838,8 +766,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
             setAttribute(AttributeName.REQUESTQUALITY, value, null);
         }
 
-
-
         /**
           * (17) get double attribute RequestQuality
           * @return double the value of the attribute
@@ -848,8 +774,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
         {
             return getRealAttribute(AttributeName.REQUESTQUALITY, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -864,8 +788,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
             setAttribute(AttributeName.RESOURCEUSAGE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ResourceUsage
           * @return the value of the attribute
@@ -874,8 +796,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
         {
             return getAttribute(AttributeName.RESOURCEUSAGE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -890,8 +810,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
             setAttribute(AttributeName.SEARCHDEPTH, value, null);
         }
 
-
-
         /**
           * (15) get int attribute SearchDepth
           * @return int the value of the attribute
@@ -900,8 +818,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
         {
             return getIntAttribute(AttributeName.SEARCHDEPTH, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -916,8 +832,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
             setAttribute(AttributeName.UID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute UID
           * @return the value of the attribute
@@ -926,8 +840,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
         {
             return getAttribute(AttributeName.UID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -942,8 +854,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
             setAttribute(AttributeName.URL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute URL
           * @return the value of the attribute
@@ -952,8 +862,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
         {
             return getAttribute(AttributeName.URL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -968,8 +876,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
             setAttribute(AttributeName.USERFILENAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute UserFileName
           * @return the value of the attribute
@@ -978,8 +884,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
         {
             return getAttribute(AttributeName.USERFILENAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -996,8 +900,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
         return (JDFContainer) getElement(ElementName.CONTAINER, null, iSkip);
     }
 
-
-
     /** (25) getCreateContainer
      * 
      * @return JDFContainer the element
@@ -1007,17 +909,14 @@ public abstract class JDFAutoFileSpec extends JDFResource
         return (JDFContainer) getCreateElement_KElement(ElementName.CONTAINER, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementContainer
+     * (29) append element Container
      */
     public JDFContainer appendContainer() throws JDFException
     {
         return (JDFContainer) appendElementN(ElementName.CONTAINER, 1, null);
     }
+
     /**
      * (24) const get element Disposition
      * @param iSkip number of elements to skip
@@ -1028,8 +927,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
         return (JDFDisposition) getElement(ElementName.DISPOSITION, null, iSkip);
     }
 
-
-
     /** (25) getCreateDisposition
      * 
      * @return JDFDisposition the element
@@ -1039,17 +936,14 @@ public abstract class JDFAutoFileSpec extends JDFResource
         return (JDFDisposition) getCreateElement_KElement(ElementName.DISPOSITION, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDisposition
+     * (29) append element Disposition
      */
     public JDFDisposition appendDisposition() throws JDFException
     {
         return (JDFDisposition) appendElementN(ElementName.DISPOSITION, 1, null);
     }
+
     /** (26) getCreateFileAlias
      * 
      * @param iSkip number of elements to skip
@@ -1059,8 +953,6 @@ public abstract class JDFAutoFileSpec extends JDFResource
     {
         return (JDFFileAlias)getCreateElement_KElement(ElementName.FILEALIAS, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element FileAlias
@@ -1072,9 +964,10 @@ public abstract class JDFAutoFileSpec extends JDFResource
         return (JDFFileAlias) getElement(ElementName.FILEALIAS, null, iSkip);
     }
 
-
-
-    public JDFFileAlias appendFileAlias()
+    /**
+     * (30) append element FileAlias
+     */
+    public JDFFileAlias appendFileAlias() throws JDFException
     {
         return (JDFFileAlias) appendElement(ElementName.FILEALIAS, null);
     }

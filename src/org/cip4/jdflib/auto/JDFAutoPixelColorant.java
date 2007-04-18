@@ -168,8 +168,6 @@ public abstract class JDFAutoPixelColorant extends JDFElement
             setAttribute(AttributeName.COLORANTNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ColorantName
           * @return the value of the attribute
@@ -178,8 +176,6 @@ public abstract class JDFAutoPixelColorant extends JDFElement
         {
             return getAttribute(AttributeName.COLORANTNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -194,8 +190,6 @@ public abstract class JDFAutoPixelColorant extends JDFElement
             setAttribute(AttributeName.PIXELDEPTH, value, null);
         }
 
-
-
         /**
           * (15) get int attribute PixelDepth
           * @return int the value of the attribute
@@ -204,7 +198,5 @@ public abstract class JDFAutoPixelColorant extends JDFElement
         {
             return getIntAttribute(AttributeName.PIXELDEPTH, null, 0);
         }
-
-
 
 }// end namespace JDF

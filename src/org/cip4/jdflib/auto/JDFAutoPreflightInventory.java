@@ -184,8 +184,6 @@ public abstract class JDFAutoPreflightInventory extends JDFResource
         return (JDFElement) getElement(ElementName.COLORSRESULTSPOOL, null, 0);
     }
 
-
-
     /** (25) getCreateColorsResultsPool
      * 
      * @return JDFElement the element
@@ -195,17 +193,14 @@ public abstract class JDFAutoPreflightInventory extends JDFResource
         return (JDFElement) getCreateElement_KElement(ElementName.COLORSRESULTSPOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementColorsResultsPool
+     * (29) append element ColorsResultsPool
      */
     public JDFElement appendColorsResultsPool() throws JDFException
     {
         return (JDFElement) appendElementN(ElementName.COLORSRESULTSPOOL, 1, null);
     }
+
     /**
      * (24) const get element DocumentResultsPool
      * @return JDFElement the element
@@ -214,8 +209,6 @@ public abstract class JDFAutoPreflightInventory extends JDFResource
     {
         return (JDFElement) getElement(ElementName.DOCUMENTRESULTSPOOL, null, 0);
     }
-
-
 
     /** (25) getCreateDocumentResultsPool
      * 
@@ -226,17 +219,14 @@ public abstract class JDFAutoPreflightInventory extends JDFResource
         return (JDFElement) getCreateElement_KElement(ElementName.DOCUMENTRESULTSPOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDocumentResultsPool
+     * (29) append element DocumentResultsPool
      */
     public JDFElement appendDocumentResultsPool() throws JDFException
     {
         return (JDFElement) appendElementN(ElementName.DOCUMENTRESULTSPOOL, 1, null);
     }
+
     /**
      * (24) const get element FontsResultsPool
      * @return JDFElement the element
@@ -245,8 +235,6 @@ public abstract class JDFAutoPreflightInventory extends JDFResource
     {
         return (JDFElement) getElement(ElementName.FONTSRESULTSPOOL, null, 0);
     }
-
-
 
     /** (25) getCreateFontsResultsPool
      * 
@@ -257,17 +245,14 @@ public abstract class JDFAutoPreflightInventory extends JDFResource
         return (JDFElement) getCreateElement_KElement(ElementName.FONTSRESULTSPOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFontsResultsPool
+     * (29) append element FontsResultsPool
      */
     public JDFElement appendFontsResultsPool() throws JDFException
     {
         return (JDFElement) appendElementN(ElementName.FONTSRESULTSPOOL, 1, null);
     }
+
     /**
      * (24) const get element FileTypeResultsPool
      * @return JDFElement the element
@@ -276,8 +261,6 @@ public abstract class JDFAutoPreflightInventory extends JDFResource
     {
         return (JDFElement) getElement(ElementName.FILETYPERESULTSPOOL, null, 0);
     }
-
-
 
     /** (25) getCreateFileTypeResultsPool
      * 
@@ -288,17 +271,14 @@ public abstract class JDFAutoPreflightInventory extends JDFResource
         return (JDFElement) getCreateElement_KElement(ElementName.FILETYPERESULTSPOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFileTypeResultsPool
+     * (29) append element FileTypeResultsPool
      */
     public JDFElement appendFileTypeResultsPool() throws JDFException
     {
         return (JDFElement) appendElementN(ElementName.FILETYPERESULTSPOOL, 1, null);
     }
+
     /**
      * (24) const get element ImagesResultsPool
      * @return JDFElement the element
@@ -307,8 +287,6 @@ public abstract class JDFAutoPreflightInventory extends JDFResource
     {
         return (JDFElement) getElement(ElementName.IMAGESRESULTSPOOL, null, 0);
     }
-
-
 
     /** (25) getCreateImagesResultsPool
      * 
@@ -319,17 +297,14 @@ public abstract class JDFAutoPreflightInventory extends JDFResource
         return (JDFElement) getCreateElement_KElement(ElementName.IMAGESRESULTSPOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementImagesResultsPool
+     * (29) append element ImagesResultsPool
      */
     public JDFElement appendImagesResultsPool() throws JDFException
     {
         return (JDFElement) appendElementN(ElementName.IMAGESRESULTSPOOL, 1, null);
     }
+
     /**
      * (24) const get element PagesResultsPool
      * @return JDFElement the element
@@ -338,8 +313,6 @@ public abstract class JDFAutoPreflightInventory extends JDFResource
     {
         return (JDFElement) getElement(ElementName.PAGESRESULTSPOOL, null, 0);
     }
-
-
 
     /** (25) getCreatePagesResultsPool
      * 
@@ -350,15 +323,12 @@ public abstract class JDFAutoPreflightInventory extends JDFResource
         return (JDFElement) getCreateElement_KElement(ElementName.PAGESRESULTSPOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPagesResultsPool
+     * (29) append element PagesResultsPool
      */
     public JDFElement appendPagesResultsPool() throws JDFException
     {
         return (JDFElement) appendElementN(ElementName.PAGESRESULTSPOOL, 1, null);
     }
+
 }// end namespace JDF

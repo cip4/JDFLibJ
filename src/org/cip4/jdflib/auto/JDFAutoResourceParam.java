@@ -219,8 +219,6 @@ public abstract class JDFAutoResourceParam extends JDFElement
             setAttribute(AttributeName.DEFAULTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DefaultID
           * @return the value of the attribute
@@ -229,8 +227,6 @@ public abstract class JDFAutoResourceParam extends JDFElement
         {
             return getAttribute(AttributeName.DEFAULTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -245,8 +241,6 @@ public abstract class JDFAutoResourceParam extends JDFElement
             setAttribute(AttributeName.DEFAULTJDF, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DefaultJDF
           * @return the value of the attribute
@@ -255,8 +249,6 @@ public abstract class JDFAutoResourceParam extends JDFElement
         {
             return getAttribute(AttributeName.DEFAULTJDF, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -271,8 +263,6 @@ public abstract class JDFAutoResourceParam extends JDFElement
             setAttribute(AttributeName.DEFAULTPRIORITY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute DefaultPriority
           * @return the value of the attribute
@@ -281,7 +271,5 @@ public abstract class JDFAutoResourceParam extends JDFElement
         {
             return EnumDefaultPriority.getEnum(getAttribute(AttributeName.DEFAULTPRIORITY, null, null));
         }
-
-
 
 }// end namespace JDF

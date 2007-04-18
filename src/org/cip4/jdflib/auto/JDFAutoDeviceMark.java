@@ -331,8 +331,6 @@ public abstract class JDFAutoDeviceMark extends JDFResource
             setAttribute(AttributeName.FONT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Font
           * @return the value of the attribute
@@ -341,8 +339,6 @@ public abstract class JDFAutoDeviceMark extends JDFResource
         {
             return getAttribute(AttributeName.FONT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -357,8 +353,6 @@ public abstract class JDFAutoDeviceMark extends JDFResource
             setAttribute(AttributeName.FONTSIZE, value, null);
         }
 
-
-
         /**
           * (15) get int attribute FontSize
           * @return int the value of the attribute
@@ -367,8 +361,6 @@ public abstract class JDFAutoDeviceMark extends JDFResource
         {
             return getIntAttribute(AttributeName.FONTSIZE, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -383,8 +375,6 @@ public abstract class JDFAutoDeviceMark extends JDFResource
             setAttribute(AttributeName.MARKJUSTIFICATION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute MarkJustification
           * @return the value of the attribute
@@ -393,8 +383,6 @@ public abstract class JDFAutoDeviceMark extends JDFResource
         {
             return EnumMarkJustification.getEnum(getAttribute(AttributeName.MARKJUSTIFICATION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -409,11 +397,9 @@ public abstract class JDFAutoDeviceMark extends JDFResource
             setAttribute(AttributeName.MARKOFFSET, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute MarkOffset
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getMarkOffset()
@@ -432,8 +418,6 @@ public abstract class JDFAutoDeviceMark extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute MarkOrientation
@@ -447,8 +431,6 @@ public abstract class JDFAutoDeviceMark extends JDFResource
             setAttribute(AttributeName.MARKORIENTATION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute MarkOrientation
           * @return the value of the attribute
@@ -457,8 +439,6 @@ public abstract class JDFAutoDeviceMark extends JDFResource
         {
             return EnumMarkOrientation.getEnum(getAttribute(AttributeName.MARKORIENTATION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -473,8 +453,6 @@ public abstract class JDFAutoDeviceMark extends JDFResource
             setAttribute(AttributeName.MARKPOSITION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute MarkPosition
           * @return the value of the attribute
@@ -483,7 +461,5 @@ public abstract class JDFAutoDeviceMark extends JDFResource
         {
             return EnumMarkPosition.getEnum(getAttribute(AttributeName.MARKPOSITION, null, null));
         }
-
-
 
 }// end namespace JDF

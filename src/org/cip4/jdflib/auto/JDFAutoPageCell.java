@@ -250,8 +250,6 @@ public abstract class JDFAutoPageCell extends JDFElement
             setAttribute(AttributeName.BORDER, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Border
           * @return double the value of the attribute
@@ -260,8 +258,6 @@ public abstract class JDFAutoPageCell extends JDFElement
         {
             return getRealAttribute(AttributeName.BORDER, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -276,11 +272,9 @@ public abstract class JDFAutoPageCell extends JDFElement
             setAttribute(AttributeName.CLIPBOX, value, null);
         }
 
-
-
         /**
           * (20) get JDFRectangle attribute ClipBox
-          * @return JDFRectanglethe value of the attribute, null if a the
+          * @return JDFRectangle the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFRectangle
           */
         public JDFRectangle getClipBox()
@@ -299,8 +293,6 @@ public abstract class JDFAutoPageCell extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute MarkList
@@ -314,8 +306,6 @@ public abstract class JDFAutoPageCell extends JDFElement
             setAttribute(AttributeName.MARKLIST, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute MarkList
           * @return VString the value of the attribute
@@ -327,8 +317,6 @@ public abstract class JDFAutoPageCell extends JDFElement
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -343,8 +331,6 @@ public abstract class JDFAutoPageCell extends JDFElement
             setAttribute(AttributeName.ROTATE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Rotate
           * @return the value of the attribute
@@ -353,8 +339,6 @@ public abstract class JDFAutoPageCell extends JDFElement
         {
             return EnumRotate.getEnum(getAttribute(AttributeName.ROTATE, null, "Rotate0"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -369,11 +353,9 @@ public abstract class JDFAutoPageCell extends JDFElement
             setAttribute(AttributeName.TRIMSIZE, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute TrimSize
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getTrimSize()
@@ -392,8 +374,6 @@ public abstract class JDFAutoPageCell extends JDFElement
             return nPlaceHolder;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -408,8 +388,6 @@ public abstract class JDFAutoPageCell extends JDFElement
         return (JDFColor) getElement(ElementName.COLOR, null, 0);
     }
 
-
-
     /** (25) getCreateColor
      * 
      * @return JDFColor the element
@@ -419,17 +397,14 @@ public abstract class JDFAutoPageCell extends JDFElement
         return (JDFColor) getCreateElement_KElement(ElementName.COLOR, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementColor
+     * (29) append element Color
      */
     public JDFColor appendColor() throws JDFException
     {
         return (JDFColor) appendElementN(ElementName.COLOR, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -438,6 +413,7 @@ public abstract class JDFAutoPageCell extends JDFElement
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element DeviceMark
      * @return JDFDeviceMark the element
@@ -446,8 +422,6 @@ public abstract class JDFAutoPageCell extends JDFElement
     {
         return (JDFDeviceMark) getElement(ElementName.DEVICEMARK, null, 0);
     }
-
-
 
     /** (25) getCreateDeviceMark
      * 
@@ -458,17 +432,14 @@ public abstract class JDFAutoPageCell extends JDFElement
         return (JDFDeviceMark) getCreateElement_KElement(ElementName.DEVICEMARK, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDeviceMark
+     * (29) append element DeviceMark
      */
     public JDFDeviceMark appendDeviceMark() throws JDFException
     {
         return (JDFDeviceMark) appendElementN(ElementName.DEVICEMARK, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -477,6 +448,7 @@ public abstract class JDFAutoPageCell extends JDFElement
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element FitPolicy
      * @return JDFFitPolicy the element
@@ -485,8 +457,6 @@ public abstract class JDFAutoPageCell extends JDFElement
     {
         return (JDFFitPolicy) getElement(ElementName.FITPOLICY, null, 0);
     }
-
-
 
     /** (25) getCreateFitPolicy
      * 
@@ -497,17 +467,14 @@ public abstract class JDFAutoPageCell extends JDFElement
         return (JDFFitPolicy) getCreateElement_KElement(ElementName.FITPOLICY, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFitPolicy
+     * (29) append element FitPolicy
      */
     public JDFFitPolicy appendFitPolicy() throws JDFException
     {
         return (JDFFitPolicy) appendElementN(ElementName.FITPOLICY, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -516,6 +483,7 @@ public abstract class JDFAutoPageCell extends JDFElement
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element ImageShift
      * @return JDFImageShift the element
@@ -524,8 +492,6 @@ public abstract class JDFAutoPageCell extends JDFElement
     {
         return (JDFImageShift) getElement(ElementName.IMAGESHIFT, null, 0);
     }
-
-
 
     /** (25) getCreateImageShift
      * 
@@ -536,15 +502,12 @@ public abstract class JDFAutoPageCell extends JDFElement
         return (JDFImageShift) getCreateElement_KElement(ElementName.IMAGESHIFT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementImageShift
+     * (29) append element ImageShift
      */
     public JDFImageShift appendImageShift() throws JDFException
     {
         return (JDFImageShift) appendElementN(ElementName.IMAGESHIFT, 1, null);
     }
+
 }// end namespace JDF

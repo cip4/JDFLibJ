@@ -198,11 +198,9 @@ public abstract class JDFAutoShapeCut extends JDFElement
             setAttribute(AttributeName.CUTBOX, value, null);
         }
 
-
-
         /**
           * (20) get JDFRectangle attribute CutBox
-          * @return JDFRectanglethe value of the attribute, null if a the
+          * @return JDFRectangle the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFRectangle
           */
         public JDFRectangle getCutBox()
@@ -221,8 +219,6 @@ public abstract class JDFAutoShapeCut extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute CutOut
@@ -236,8 +232,6 @@ public abstract class JDFAutoShapeCut extends JDFElement
             setAttribute(AttributeName.CUTOUT, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute CutOut
           * @return boolean the value of the attribute
@@ -246,8 +240,6 @@ public abstract class JDFAutoShapeCut extends JDFElement
         {
             return getBoolAttribute(AttributeName.CUTOUT, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -262,8 +254,6 @@ public abstract class JDFAutoShapeCut extends JDFElement
             setAttribute(AttributeName.CUTPATH, value, null);
         }
 
-
-
         /**
           * (23) get String attribute CutPath
           * @return the value of the attribute
@@ -272,8 +262,6 @@ public abstract class JDFAutoShapeCut extends JDFElement
         {
             return getAttribute(AttributeName.CUTPATH, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -288,11 +276,9 @@ public abstract class JDFAutoShapeCut extends JDFElement
             setAttribute(AttributeName.PAGES, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerRangeList attribute Pages
-          * @return JDFIntegerRangeListthe value of the attribute, null if a the
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerRangeList
           */
         public JDFIntegerRangeList getPages()
@@ -311,8 +297,6 @@ public abstract class JDFAutoShapeCut extends JDFElement
             return nPlaceHolder;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -327,8 +311,6 @@ public abstract class JDFAutoShapeCut extends JDFElement
         return (JDFStringSpan) getElement(ElementName.MATERIAL, null, 0);
     }
 
-
-
     /** (25) getCreateMaterial
      * 
      * @return JDFStringSpan the element
@@ -338,17 +320,14 @@ public abstract class JDFAutoShapeCut extends JDFElement
         return (JDFStringSpan) getCreateElement_KElement(ElementName.MATERIAL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMaterial
+     * (29) append element Material
      */
     public JDFStringSpan appendMaterial() throws JDFException
     {
         return (JDFStringSpan) appendElementN(ElementName.MATERIAL, 1, null);
     }
+
     /**
      * (24) const get element CutType
      * @return JDFSpanCutType the element
@@ -357,8 +336,6 @@ public abstract class JDFAutoShapeCut extends JDFElement
     {
         return (JDFSpanCutType) getElement(ElementName.CUTTYPE, null, 0);
     }
-
-
 
     /** (25) getCreateCutType
      * 
@@ -369,17 +346,14 @@ public abstract class JDFAutoShapeCut extends JDFElement
         return (JDFSpanCutType) getCreateElement_KElement(ElementName.CUTTYPE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementCutType
+     * (29) append element CutType
      */
     public JDFSpanCutType appendCutType() throws JDFException
     {
         return (JDFSpanCutType) appendElementN(ElementName.CUTTYPE, 1, null);
     }
+
     /**
      * (24) const get element ShapeDepth
      * @return JDFNumberSpan the element
@@ -388,8 +362,6 @@ public abstract class JDFAutoShapeCut extends JDFElement
     {
         return (JDFNumberSpan) getElement(ElementName.SHAPEDEPTH, null, 0);
     }
-
-
 
     /** (25) getCreateShapeDepth
      * 
@@ -400,17 +372,14 @@ public abstract class JDFAutoShapeCut extends JDFElement
         return (JDFNumberSpan) getCreateElement_KElement(ElementName.SHAPEDEPTH, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementShapeDepth
+     * (29) append element ShapeDepth
      */
     public JDFNumberSpan appendShapeDepth() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.SHAPEDEPTH, 1, null);
     }
+
     /**
      * (24) const get element ShapeType
      * @return JDFSpanShapeType the element
@@ -419,8 +388,6 @@ public abstract class JDFAutoShapeCut extends JDFElement
     {
         return (JDFSpanShapeType) getElement(ElementName.SHAPETYPE, null, 0);
     }
-
-
 
     /** (25) getCreateShapeType
      * 
@@ -431,17 +398,14 @@ public abstract class JDFAutoShapeCut extends JDFElement
         return (JDFSpanShapeType) getCreateElement_KElement(ElementName.SHAPETYPE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementShapeType
+     * (29) append element ShapeType
      */
     public JDFSpanShapeType appendShapeType() throws JDFException
     {
         return (JDFSpanShapeType) appendElementN(ElementName.SHAPETYPE, 1, null);
     }
+
     /**
      * (24) const get element TeethPerDimension
      * @return JDFNumberSpan the element
@@ -450,8 +414,6 @@ public abstract class JDFAutoShapeCut extends JDFElement
     {
         return (JDFNumberSpan) getElement(ElementName.TEETHPERDIMENSION, null, 0);
     }
-
-
 
     /** (25) getCreateTeethPerDimension
      * 
@@ -462,15 +424,12 @@ public abstract class JDFAutoShapeCut extends JDFElement
         return (JDFNumberSpan) getCreateElement_KElement(ElementName.TEETHPERDIMENSION, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementTeethPerDimension
+     * (29) append element TeethPerDimension
      */
     public JDFNumberSpan appendTeethPerDimension() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.TEETHPERDIMENSION, 1, null);
     }
+
 }// end namespace JDF

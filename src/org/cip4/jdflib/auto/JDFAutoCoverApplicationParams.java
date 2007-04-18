@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueApplication;
@@ -202,11 +203,9 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
             setAttribute(AttributeName.COVEROFFSET, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute CoverOffset
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getCoverOffset()
@@ -225,8 +224,6 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -242,8 +239,6 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
         return (JDFGlueApplication)getCreateElement_KElement(ElementName.GLUEAPPLICATION, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element GlueApplication
      * @param iSkip number of elements to skip
@@ -254,9 +249,10 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
         return (JDFGlueApplication) getElement(ElementName.GLUEAPPLICATION, null, iSkip);
     }
 
-
-
-    public JDFGlueApplication appendGlueApplication()
+    /**
+     * (30) append element GlueApplication
+     */
+    public JDFGlueApplication appendGlueApplication() throws JDFException
     {
         return (JDFGlueApplication) appendElement(ElementName.GLUEAPPLICATION, null);
     }
@@ -269,6 +265,7 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateScore
      * 
      * @param iSkip number of elements to skip
@@ -278,8 +275,6 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
     {
         return (JDFScore)getCreateElement_KElement(ElementName.SCORE, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Score
@@ -291,9 +286,10 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
         return (JDFScore) getElement(ElementName.SCORE, null, iSkip);
     }
 
-
-
-    public JDFScore appendScore()
+    /**
+     * (30) append element Score
+     */
+    public JDFScore appendScore() throws JDFException
     {
         return (JDFScore) appendElement(ElementName.SCORE, null);
     }

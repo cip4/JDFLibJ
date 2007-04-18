@@ -269,8 +269,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
             setAttribute(AttributeName.TYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Type
           * @return the value of the attribute
@@ -279,8 +277,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
         {
             return EnumType.getEnum(getAttribute(AttributeName.TYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -295,11 +291,9 @@ public abstract class JDFAutoMarkObject extends JDFElement
             setAttribute(AttributeName.TRIMCTM, value, null);
         }
 
-
-
         /**
           * (20) get JDFMatrix attribute TrimCTM
-          * @return JDFMatrixthe value of the attribute, null if a the
+          * @return JDFMatrix the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFMatrix
           */
         public JDFMatrix getTrimCTM()
@@ -318,8 +312,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute OrdID
@@ -333,8 +325,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
             setAttribute(AttributeName.ORDID, value, null);
         }
 
-
-
         /**
           * (15) get int attribute OrdID
           * @return int the value of the attribute
@@ -343,8 +333,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
         {
             return getIntAttribute(AttributeName.ORDID, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -359,8 +347,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
             setAttribute(AttributeName.LAYOUTELEMENTPAGENUM, value, null);
         }
 
-
-
         /**
           * (15) get int attribute LayoutElementPageNum
           * @return int the value of the attribute
@@ -369,8 +355,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
         {
             return getIntAttribute(AttributeName.LAYOUTELEMENTPAGENUM, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -385,8 +369,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
             setAttribute(AttributeName.SOURCECLIPPATH, value, null);
         }
 
-
-
         /**
           * (23) get String attribute SourceClipPath
           * @return the value of the attribute
@@ -395,8 +377,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
         {
             return getAttribute(AttributeName.SOURCECLIPPATH, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -411,11 +391,9 @@ public abstract class JDFAutoMarkObject extends JDFElement
             setAttribute(AttributeName.CLIPBOX, value, null);
         }
 
-
-
         /**
           * (20) get JDFRectangle attribute ClipBox
-          * @return JDFRectanglethe value of the attribute, null if a the
+          * @return JDFRectangle the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFRectangle
           */
         public JDFRectangle getClipBox()
@@ -434,8 +412,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute LayerID
@@ -449,8 +425,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
             setAttribute(AttributeName.LAYERID, value, null);
         }
 
-
-
         /**
           * (15) get int attribute LayerID
           * @return int the value of the attribute
@@ -459,8 +433,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
         {
             return getIntAttribute(AttributeName.LAYERID, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -475,11 +447,9 @@ public abstract class JDFAutoMarkObject extends JDFElement
             setAttribute(AttributeName.CTM, value, null);
         }
 
-
-
         /**
           * (20) get JDFMatrix attribute CTM
-          * @return JDFMatrixthe value of the attribute, null if a the
+          * @return JDFMatrix the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFMatrix
           */
         public JDFMatrix getCTM()
@@ -498,8 +468,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ClipPath
@@ -513,8 +481,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
             setAttribute(AttributeName.CLIPPATH, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ClipPath
           * @return the value of the attribute
@@ -523,8 +489,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
         {
             return getAttribute(AttributeName.CLIPPATH, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -539,8 +503,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
             setAttribute(AttributeName.ORD, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Ord
           * @return int the value of the attribute
@@ -549,8 +511,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
         {
             return getIntAttribute(AttributeName.ORD, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -565,11 +525,9 @@ public abstract class JDFAutoMarkObject extends JDFElement
             setAttribute(AttributeName.TRIMSIZE, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute TrimSize
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getTrimSize()
@@ -588,8 +546,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute HalfTonePhaseOrigin
@@ -603,11 +559,9 @@ public abstract class JDFAutoMarkObject extends JDFElement
             setAttribute(AttributeName.HALFTONEPHASEORIGIN, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute HalfTonePhaseOrigin
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getHalfTonePhaseOrigin()
@@ -626,8 +580,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
             return nPlaceHolder;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -643,8 +595,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
         return (JDFCIELABMeasuringField)getCreateElement_KElement(ElementName.CIELABMEASURINGFIELD, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element CIELABMeasuringField
      * @param iSkip number of elements to skip
@@ -655,9 +605,10 @@ public abstract class JDFAutoMarkObject extends JDFElement
         return (JDFCIELABMeasuringField) getElement(ElementName.CIELABMEASURINGFIELD, null, iSkip);
     }
 
-
-
-    public JDFCIELABMeasuringField appendCIELABMeasuringField()
+    /**
+     * (30) append element CIELABMeasuringField
+     */
+    public JDFCIELABMeasuringField appendCIELABMeasuringField() throws JDFException
     {
         return (JDFCIELABMeasuringField) appendElement(ElementName.CIELABMEASURINGFIELD, null);
     }
@@ -670,6 +621,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateColorControlStrip
      * 
      * @param iSkip number of elements to skip
@@ -679,8 +631,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
     {
         return (JDFColorControlStrip)getCreateElement_KElement(ElementName.COLORCONTROLSTRIP, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element ColorControlStrip
@@ -692,9 +642,10 @@ public abstract class JDFAutoMarkObject extends JDFElement
         return (JDFColorControlStrip) getElement(ElementName.COLORCONTROLSTRIP, null, iSkip);
     }
 
-
-
-    public JDFColorControlStrip appendColorControlStrip()
+    /**
+     * (30) append element ColorControlStrip
+     */
+    public JDFColorControlStrip appendColorControlStrip() throws JDFException
     {
         return (JDFColorControlStrip) appendElement(ElementName.COLORCONTROLSTRIP, null);
     }
@@ -707,6 +658,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateCutMark
      * 
      * @param iSkip number of elements to skip
@@ -716,8 +668,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
     {
         return (JDFCutMark)getCreateElement_KElement(ElementName.CUTMARK, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element CutMark
@@ -729,9 +679,10 @@ public abstract class JDFAutoMarkObject extends JDFElement
         return (JDFCutMark) getElement(ElementName.CUTMARK, null, iSkip);
     }
 
-
-
-    public JDFCutMark appendCutMark()
+    /**
+     * (30) append element CutMark
+     */
+    public JDFCutMark appendCutMark() throws JDFException
     {
         return (JDFCutMark) appendElement(ElementName.CUTMARK, null);
     }
@@ -744,6 +695,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateDensityMeasuringField
      * 
      * @param iSkip number of elements to skip
@@ -753,8 +705,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
     {
         return (JDFDensityMeasuringField)getCreateElement_KElement(ElementName.DENSITYMEASURINGFIELD, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element DensityMeasuringField
@@ -766,9 +716,10 @@ public abstract class JDFAutoMarkObject extends JDFElement
         return (JDFDensityMeasuringField) getElement(ElementName.DENSITYMEASURINGFIELD, null, iSkip);
     }
 
-
-
-    public JDFDensityMeasuringField appendDensityMeasuringField()
+    /**
+     * (30) append element DensityMeasuringField
+     */
+    public JDFDensityMeasuringField appendDensityMeasuringField() throws JDFException
     {
         return (JDFDensityMeasuringField) appendElement(ElementName.DENSITYMEASURINGFIELD, null);
     }
@@ -781,6 +732,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element DeviceMark
      * @return JDFDeviceMark the element
@@ -789,8 +741,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
     {
         return (JDFDeviceMark) getElement(ElementName.DEVICEMARK, null, 0);
     }
-
-
 
     /** (25) getCreateDeviceMark
      * 
@@ -801,17 +751,14 @@ public abstract class JDFAutoMarkObject extends JDFElement
         return (JDFDeviceMark) getCreateElement_KElement(ElementName.DEVICEMARK, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDeviceMark
+     * (29) append element DeviceMark
      */
     public JDFDeviceMark appendDeviceMark() throws JDFException
     {
         return (JDFDeviceMark) appendElementN(ElementName.DEVICEMARK, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -820,6 +767,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateDynamicField
      * 
      * @param iSkip number of elements to skip
@@ -829,8 +777,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
     {
         return (JDFDynamicField)getCreateElement_KElement(ElementName.DYNAMICFIELD, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element DynamicField
@@ -842,9 +788,10 @@ public abstract class JDFAutoMarkObject extends JDFElement
         return (JDFDynamicField) getElement(ElementName.DYNAMICFIELD, null, iSkip);
     }
 
-
-
-    public JDFDynamicField appendDynamicField()
+    /**
+     * (30) append element DynamicField
+     */
+    public JDFDynamicField appendDynamicField() throws JDFException
     {
         return (JDFDynamicField) appendElement(ElementName.DYNAMICFIELD, null);
     }
@@ -859,8 +806,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
         return (JDFIdentificationField)getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element IdentificationField
      * @param iSkip number of elements to skip
@@ -871,9 +816,10 @@ public abstract class JDFAutoMarkObject extends JDFElement
         return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
 
-
-
-    public JDFIdentificationField appendIdentificationField()
+    /**
+     * (30) append element IdentificationField
+     */
+    public JDFIdentificationField appendIdentificationField() throws JDFException
     {
         return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
     }
@@ -886,6 +832,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateJobField
      * 
      * @param iSkip number of elements to skip
@@ -895,8 +842,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
     {
         return (JDFJobField)getCreateElement_KElement(ElementName.JOBFIELD, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element JobField
@@ -908,9 +853,10 @@ public abstract class JDFAutoMarkObject extends JDFElement
         return (JDFJobField) getElement(ElementName.JOBFIELD, null, iSkip);
     }
 
-
-
-    public JDFJobField appendJobField()
+    /**
+     * (30) append element JobField
+     */
+    public JDFJobField appendJobField() throws JDFException
     {
         return (JDFJobField) appendElement(ElementName.JOBFIELD, null);
     }
@@ -923,6 +869,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element LayoutElement
      * @return JDFLayoutElement the element
@@ -931,8 +878,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
     {
         return (JDFLayoutElement) getElement(ElementName.LAYOUTELEMENT, null, 0);
     }
-
-
 
     /** (25) getCreateLayoutElement
      * 
@@ -943,17 +888,14 @@ public abstract class JDFAutoMarkObject extends JDFElement
         return (JDFLayoutElement) getCreateElement_KElement(ElementName.LAYOUTELEMENT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementLayoutElement
+     * (29) append element LayoutElement
      */
     public JDFLayoutElement appendLayoutElement() throws JDFException
     {
         return (JDFLayoutElement) appendElementN(ElementName.LAYOUTELEMENT, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -962,6 +904,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateRegisterMark
      * 
      * @param iSkip number of elements to skip
@@ -971,8 +914,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
     {
         return (JDFRegisterMark)getCreateElement_KElement(ElementName.REGISTERMARK, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element RegisterMark
@@ -984,9 +925,10 @@ public abstract class JDFAutoMarkObject extends JDFElement
         return (JDFRegisterMark) getElement(ElementName.REGISTERMARK, null, iSkip);
     }
 
-
-
-    public JDFRegisterMark appendRegisterMark()
+    /**
+     * (30) append element RegisterMark
+     */
+    public JDFRegisterMark appendRegisterMark() throws JDFException
     {
         return (JDFRegisterMark) appendElement(ElementName.REGISTERMARK, null);
     }
@@ -999,6 +941,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateScavengerArea
      * 
      * @param iSkip number of elements to skip
@@ -1008,8 +951,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
     {
         return (JDFScavengerArea)getCreateElement_KElement(ElementName.SCAVENGERAREA, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element ScavengerArea
@@ -1021,9 +962,10 @@ public abstract class JDFAutoMarkObject extends JDFElement
         return (JDFScavengerArea) getElement(ElementName.SCAVENGERAREA, null, iSkip);
     }
 
-
-
-    public JDFScavengerArea appendScavengerArea()
+    /**
+     * (30) append element ScavengerArea
+     */
+    public JDFScavengerArea appendScavengerArea() throws JDFException
     {
         return (JDFScavengerArea) appendElement(ElementName.SCAVENGERAREA, null);
     }
@@ -1036,4 +978,5 @@ public abstract class JDFAutoMarkObject extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

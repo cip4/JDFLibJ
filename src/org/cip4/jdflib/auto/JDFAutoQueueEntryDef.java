@@ -167,8 +167,6 @@ public abstract class JDFAutoQueueEntryDef extends JDFElement
             setAttribute(AttributeName.QUEUEENTRYID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute QueueEntryID
           * @return the value of the attribute
@@ -177,7 +175,5 @@ public abstract class JDFAutoQueueEntryDef extends JDFElement
         {
             return getAttribute(AttributeName.QUEUEENTRYID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

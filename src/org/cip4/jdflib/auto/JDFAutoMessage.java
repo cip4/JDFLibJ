@@ -173,8 +173,6 @@ public abstract class JDFAutoMessage extends JDFElement
             setAttribute(AttributeName.ID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ID
           * @return the value of the attribute
@@ -183,8 +181,6 @@ public abstract class JDFAutoMessage extends JDFElement
         {
             return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -199,8 +195,6 @@ public abstract class JDFAutoMessage extends JDFElement
             setAttribute(AttributeName.TIME, new JDFDate().getDateTimeISO(), null);
         }
 
-
-
         /**
           * (11) set attribute Time
           * @param value: the value to set the attribute to or null
@@ -210,8 +204,6 @@ public abstract class JDFAutoMessage extends JDFElement
             if (value == null) value = new JDFDate();
             setAttribute(AttributeName.TIME, value.getDateTimeISO(), null);
         }
-
-
 
         /**
           * (12) get JDFDate attribute Time
@@ -236,8 +228,6 @@ public abstract class JDFAutoMessage extends JDFElement
             return nMyDate;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Type
@@ -251,8 +241,6 @@ public abstract class JDFAutoMessage extends JDFElement
             setAttribute(AttributeName.TYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Type
           * @return the value of the attribute
@@ -261,7 +249,5 @@ public abstract class JDFAutoMessage extends JDFElement
         {
             return getAttribute(AttributeName.TYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

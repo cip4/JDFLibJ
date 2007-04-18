@@ -77,6 +77,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFApprovalPerson;
     /*
@@ -196,8 +197,6 @@ public abstract class JDFAutoApprovalParams extends JDFResource
             setAttribute(AttributeName.MINAPPROVALS, value, null);
         }
 
-
-
         /**
           * (15) get int attribute MinApprovals
           * @return int the value of the attribute
@@ -206,8 +205,6 @@ public abstract class JDFAutoApprovalParams extends JDFResource
         {
             return getIntAttribute(AttributeName.MINAPPROVALS, null, 1);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -224,8 +221,6 @@ public abstract class JDFAutoApprovalParams extends JDFResource
         return (JDFApprovalPerson)getCreateElement_KElement(ElementName.APPROVALPERSON, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element ApprovalPerson
      * @param iSkip number of elements to skip
@@ -236,9 +231,10 @@ public abstract class JDFAutoApprovalParams extends JDFResource
         return (JDFApprovalPerson) getElement(ElementName.APPROVALPERSON, null, iSkip);
     }
 
-
-
-    public JDFApprovalPerson appendApprovalPerson()
+    /**
+     * (30) append element ApprovalPerson
+     */
+    public JDFApprovalPerson appendApprovalPerson() throws JDFException
     {
         return (JDFApprovalPerson) appendElement(ElementName.APPROVALPERSON, null);
     }

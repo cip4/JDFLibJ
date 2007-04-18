@@ -187,8 +187,6 @@ public abstract class JDFAutoSignal extends JDFMessage
             setAttribute(AttributeName.LASTREPEAT, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute LastRepeat
           * @return boolean the value of the attribute
@@ -197,8 +195,6 @@ public abstract class JDFAutoSignal extends JDFMessage
         {
             return getBoolAttribute(AttributeName.LASTREPEAT, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -213,8 +209,6 @@ public abstract class JDFAutoSignal extends JDFMessage
             setAttribute(AttributeName.REFID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute refID
           * @return the value of the attribute
@@ -223,8 +217,6 @@ public abstract class JDFAutoSignal extends JDFMessage
         {
             return getAttribute(AttributeName.REFID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -240,8 +232,6 @@ public abstract class JDFAutoSignal extends JDFMessage
         return (JDFNotification) getElement(ElementName.NOTIFICATION, null, 0);
     }
 
-
-
     /** (25) getCreateNotification
      * 
      * @return JDFNotification the element
@@ -251,17 +241,14 @@ public abstract class JDFAutoSignal extends JDFMessage
         return (JDFNotification) getCreateElement_KElement(ElementName.NOTIFICATION, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementNotification
+     * (29) append element Notification
      */
     public JDFNotification appendNotification() throws JDFException
     {
         return (JDFNotification) appendElementN(ElementName.NOTIFICATION, 1, null);
     }
+
     /**
      * (24) const get element Trigger
      * @return JDFTrigger the element
@@ -270,8 +257,6 @@ public abstract class JDFAutoSignal extends JDFMessage
     {
         return (JDFTrigger) getElement(ElementName.TRIGGER, null, 0);
     }
-
-
 
     /** (25) getCreateTrigger
      * 
@@ -282,15 +267,12 @@ public abstract class JDFAutoSignal extends JDFMessage
         return (JDFTrigger) getCreateElement_KElement(ElementName.TRIGGER, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementTrigger
+     * (29) append element Trigger
      */
     public JDFTrigger appendTrigger() throws JDFException
     {
         return (JDFTrigger) appendElementN(ElementName.TRIGGER, 1, null);
     }
+
 }// end namespace JDF

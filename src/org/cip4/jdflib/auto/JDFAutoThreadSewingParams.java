@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.resource.JDFResource;
@@ -354,8 +355,6 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
             setAttribute(AttributeName.BLINDSTITCH, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute BlindStitch
           * @return boolean the value of the attribute
@@ -364,8 +363,6 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.BLINDSTITCH, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -380,8 +377,6 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
             setAttribute(AttributeName.CASTINGMATERIAL, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute CastingMaterial
           * @return the value of the attribute
@@ -390,8 +385,6 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
         {
             return EnumCastingMaterial.getEnum(getAttribute(AttributeName.CASTINGMATERIAL, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -406,8 +399,6 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
             setAttribute(AttributeName.COREMATERIAL, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute CoreMaterial
           * @return the value of the attribute
@@ -416,8 +407,6 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
         {
             return EnumCoreMaterial.getEnum(getAttribute(AttributeName.COREMATERIAL, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -431,8 +420,6 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
         {
             setAttribute(AttributeName.GLUELINEREFSHEETS, value, null);
         }
-
-
 
         /**
           * (20) get JDFIntegerList attribute GlueLineRefSheets
@@ -455,8 +442,6 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Offset
@@ -470,8 +455,6 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
             setAttribute(AttributeName.OFFSET, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Offset
           * @return double the value of the attribute
@@ -480,8 +463,6 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.OFFSET, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -495,8 +476,6 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
         {
             setAttribute(AttributeName.NEEDLEPOSITIONS, value, null);
         }
-
-
 
         /**
           * (20) get JDFNumberList attribute NeedlePositions
@@ -519,8 +498,6 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute NumberOfNeedles
@@ -534,8 +511,6 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
             setAttribute(AttributeName.NUMBEROFNEEDLES, value, null);
         }
 
-
-
         /**
           * (15) get int attribute NumberOfNeedles
           * @return int the value of the attribute
@@ -544,8 +519,6 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
         {
             return getIntAttribute(AttributeName.NUMBEROFNEEDLES, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -560,8 +533,6 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
             setAttribute(AttributeName.SEALING, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Sealing
           * @return boolean the value of the attribute
@@ -570,8 +541,6 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.SEALING, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -586,8 +555,6 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
             setAttribute(AttributeName.SEWINGPATTERN, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute SewingPattern
           * @return the value of the attribute
@@ -596,8 +563,6 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
         {
             return EnumSewingPattern.getEnum(getAttribute(AttributeName.SEWINGPATTERN, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -612,8 +577,6 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
             setAttribute(AttributeName.THREADTHICKNESS, value, null);
         }
 
-
-
         /**
           * (17) get double attribute ThreadThickness
           * @return double the value of the attribute
@@ -622,8 +585,6 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.THREADTHICKNESS, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -638,8 +599,6 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
             setAttribute(AttributeName.THREADBRAND, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ThreadBrand
           * @return the value of the attribute
@@ -648,8 +607,6 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
         {
             return getAttribute(AttributeName.THREADBRAND, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -666,8 +623,6 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
         return (JDFGlueLine)getCreateElement_KElement(ElementName.GLUELINE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element GlueLine
      * @param iSkip number of elements to skip
@@ -678,9 +633,10 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
         return (JDFGlueLine) getElement(ElementName.GLUELINE, null, iSkip);
     }
 
-
-
-    public JDFGlueLine appendGlueLine()
+    /**
+     * (30) append element GlueLine
+     */
+    public JDFGlueLine appendGlueLine() throws JDFException
     {
         return (JDFGlueLine) appendElement(ElementName.GLUELINE, null);
     }

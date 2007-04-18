@@ -199,8 +199,6 @@ public abstract class JDFAutoPDLResourceAlias extends JDFResource
             setAttribute(AttributeName.RESOURCETYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ResourceType
           * @return the value of the attribute
@@ -209,8 +207,6 @@ public abstract class JDFAutoPDLResourceAlias extends JDFResource
         {
             return getAttribute(AttributeName.RESOURCETYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -225,8 +221,6 @@ public abstract class JDFAutoPDLResourceAlias extends JDFResource
             setAttribute(AttributeName.SOURCENAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute SourceName
           * @return the value of the attribute
@@ -235,8 +229,6 @@ public abstract class JDFAutoPDLResourceAlias extends JDFResource
         {
             return getAttribute(AttributeName.SOURCENAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -252,8 +244,6 @@ public abstract class JDFAutoPDLResourceAlias extends JDFResource
         return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
     /** (25) getCreateFileSpec
      * 
      * @return JDFFileSpec the element
@@ -263,17 +253,14 @@ public abstract class JDFAutoPDLResourceAlias extends JDFResource
         return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFileSpec
+     * (29) append element FileSpec
      */
     public JDFFileSpec appendFileSpec() throws JDFException
     {
         return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -282,4 +269,5 @@ public abstract class JDFAutoPDLResourceAlias extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

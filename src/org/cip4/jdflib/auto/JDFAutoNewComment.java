@@ -221,8 +221,6 @@ public abstract class JDFAutoNewComment extends JDFElement
             setAttribute(AttributeName.ACTION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Action
           * @return the value of the attribute
@@ -231,8 +229,6 @@ public abstract class JDFAutoNewComment extends JDFElement
         {
             return EnumAction.getEnum(getAttribute(AttributeName.ACTION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -247,8 +243,6 @@ public abstract class JDFAutoNewComment extends JDFElement
             setAttribute(AttributeName.COMMENTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute CommentID
           * @return the value of the attribute
@@ -257,8 +251,6 @@ public abstract class JDFAutoNewComment extends JDFElement
         {
             return getAttribute(AttributeName.COMMENTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -273,8 +265,6 @@ public abstract class JDFAutoNewComment extends JDFElement
             setAttribute(AttributeName.REFID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute refID
           * @return the value of the attribute
@@ -283,7 +273,5 @@ public abstract class JDFAutoNewComment extends JDFElement
         {
             return getAttribute(AttributeName.REFID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

@@ -238,8 +238,6 @@ public abstract class JDFAutoFontParams extends JDFResource
             setAttribute(AttributeName.EMBEDALLFONTS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute EmbedAllFonts
           * @return boolean the value of the attribute
@@ -248,8 +246,6 @@ public abstract class JDFAutoFontParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.EMBEDALLFONTS, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -264,8 +260,6 @@ public abstract class JDFAutoFontParams extends JDFResource
             setAttribute(AttributeName.CANNOTEMBEDFONTPOLICY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute CannotEmbedFontPolicy
           * @return the value of the attribute
@@ -274,8 +268,6 @@ public abstract class JDFAutoFontParams extends JDFResource
         {
             return EnumCannotEmbedFontPolicy.getEnum(getAttribute(AttributeName.CANNOTEMBEDFONTPOLICY, null, "Warning"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -290,8 +282,6 @@ public abstract class JDFAutoFontParams extends JDFResource
             setAttribute(AttributeName.ALWAYSEMBED, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute AlwaysEmbed
           * @return VString the value of the attribute
@@ -303,8 +293,6 @@ public abstract class JDFAutoFontParams extends JDFResource
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -319,8 +307,6 @@ public abstract class JDFAutoFontParams extends JDFResource
             setAttribute(AttributeName.MAXSUBSETPCT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute MaxSubsetPct
           * @return int the value of the attribute
@@ -329,8 +315,6 @@ public abstract class JDFAutoFontParams extends JDFResource
         {
             return getIntAttribute(AttributeName.MAXSUBSETPCT, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -345,8 +329,6 @@ public abstract class JDFAutoFontParams extends JDFResource
             setAttribute(AttributeName.NEVEREMBED, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute NeverEmbed
           * @return VString the value of the attribute
@@ -358,8 +340,6 @@ public abstract class JDFAutoFontParams extends JDFResource
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -374,8 +354,6 @@ public abstract class JDFAutoFontParams extends JDFResource
             setAttribute(AttributeName.SUBSETFONTS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute SubsetFonts
           * @return boolean the value of the attribute
@@ -384,7 +362,5 @@ public abstract class JDFAutoFontParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.SUBSETFONTS, null, false);
         }
-
-
 
 }// end namespace JDF

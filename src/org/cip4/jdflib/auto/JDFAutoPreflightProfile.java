@@ -184,8 +184,6 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
         return (JDFElement) getElement(ElementName.COLORSCONSTRAINTSPOOL, null, 0);
     }
 
-
-
     /** (25) getCreateColorsConstraintsPool
      * 
      * @return JDFElement the element
@@ -195,17 +193,14 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
         return (JDFElement) getCreateElement_KElement(ElementName.COLORSCONSTRAINTSPOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementColorsConstraintsPool
+     * (29) append element ColorsConstraintsPool
      */
     public JDFElement appendColorsConstraintsPool() throws JDFException
     {
         return (JDFElement) appendElementN(ElementName.COLORSCONSTRAINTSPOOL, 1, null);
     }
+
     /**
      * (24) const get element DocumentConstraintsPool
      * @return JDFElement the element
@@ -214,8 +209,6 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
     {
         return (JDFElement) getElement(ElementName.DOCUMENTCONSTRAINTSPOOL, null, 0);
     }
-
-
 
     /** (25) getCreateDocumentConstraintsPool
      * 
@@ -226,17 +219,14 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
         return (JDFElement) getCreateElement_KElement(ElementName.DOCUMENTCONSTRAINTSPOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDocumentConstraintsPool
+     * (29) append element DocumentConstraintsPool
      */
     public JDFElement appendDocumentConstraintsPool() throws JDFException
     {
         return (JDFElement) appendElementN(ElementName.DOCUMENTCONSTRAINTSPOOL, 1, null);
     }
+
     /**
      * (24) const get element FontsConstraintsPool
      * @return JDFElement the element
@@ -245,8 +235,6 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
     {
         return (JDFElement) getElement(ElementName.FONTSCONSTRAINTSPOOL, null, 0);
     }
-
-
 
     /** (25) getCreateFontsConstraintsPool
      * 
@@ -257,17 +245,14 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
         return (JDFElement) getCreateElement_KElement(ElementName.FONTSCONSTRAINTSPOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFontsConstraintsPool
+     * (29) append element FontsConstraintsPool
      */
     public JDFElement appendFontsConstraintsPool() throws JDFException
     {
         return (JDFElement) appendElementN(ElementName.FONTSCONSTRAINTSPOOL, 1, null);
     }
+
     /**
      * (24) const get element FileTypeConstraintsPool
      * @return JDFElement the element
@@ -276,8 +261,6 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
     {
         return (JDFElement) getElement(ElementName.FILETYPECONSTRAINTSPOOL, null, 0);
     }
-
-
 
     /** (25) getCreateFileTypeConstraintsPool
      * 
@@ -288,17 +271,14 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
         return (JDFElement) getCreateElement_KElement(ElementName.FILETYPECONSTRAINTSPOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFileTypeConstraintsPool
+     * (29) append element FileTypeConstraintsPool
      */
     public JDFElement appendFileTypeConstraintsPool() throws JDFException
     {
         return (JDFElement) appendElementN(ElementName.FILETYPECONSTRAINTSPOOL, 1, null);
     }
+
     /**
      * (24) const get element ImagesConstraintsPool
      * @return JDFElement the element
@@ -307,8 +287,6 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
     {
         return (JDFElement) getElement(ElementName.IMAGESCONSTRAINTSPOOL, null, 0);
     }
-
-
 
     /** (25) getCreateImagesConstraintsPool
      * 
@@ -319,17 +297,14 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
         return (JDFElement) getCreateElement_KElement(ElementName.IMAGESCONSTRAINTSPOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementImagesConstraintsPool
+     * (29) append element ImagesConstraintsPool
      */
     public JDFElement appendImagesConstraintsPool() throws JDFException
     {
         return (JDFElement) appendElementN(ElementName.IMAGESCONSTRAINTSPOOL, 1, null);
     }
+
     /**
      * (24) const get element PagesConstraintsPool
      * @return JDFElement the element
@@ -338,8 +313,6 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
     {
         return (JDFElement) getElement(ElementName.PAGESCONSTRAINTSPOOL, null, 0);
     }
-
-
 
     /** (25) getCreatePagesConstraintsPool
      * 
@@ -350,15 +323,12 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
         return (JDFElement) getCreateElement_KElement(ElementName.PAGESCONSTRAINTSPOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPagesConstraintsPool
+     * (29) append element PagesConstraintsPool
      */
     public JDFElement appendPagesConstraintsPool() throws JDFException
     {
         return (JDFElement) appendElementN(ElementName.PAGESCONSTRAINTSPOOL, 1, null);
     }
+
 }// end namespace JDF

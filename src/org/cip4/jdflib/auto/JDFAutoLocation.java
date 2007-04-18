@@ -79,6 +79,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFAddress;
     /*
     *****************************************************************************
@@ -184,8 +185,6 @@ public abstract class JDFAutoLocation extends JDFElement
             setAttribute(AttributeName.LOCATIONNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute LocationName
           * @return the value of the attribute
@@ -194,8 +193,6 @@ public abstract class JDFAutoLocation extends JDFElement
         {
             return getAttribute(AttributeName.LOCATIONNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -210,8 +207,6 @@ public abstract class JDFAutoLocation extends JDFElement
             setAttribute(AttributeName.LOCID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute LocID
           * @return the value of the attribute
@@ -220,8 +215,6 @@ public abstract class JDFAutoLocation extends JDFElement
         {
             return getAttribute(AttributeName.LOCID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -238,8 +231,6 @@ public abstract class JDFAutoLocation extends JDFElement
         return (JDFAddress)getCreateElement_KElement(ElementName.ADDRESS, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Address
      * @param iSkip number of elements to skip
@@ -250,9 +241,10 @@ public abstract class JDFAutoLocation extends JDFElement
         return (JDFAddress) getElement(ElementName.ADDRESS, null, iSkip);
     }
 
-
-
-    public JDFAddress appendAddress()
+    /**
+     * (30) append element Address
+     */
+    public JDFAddress appendAddress() throws JDFException
     {
         return (JDFAddress) appendElement(ElementName.ADDRESS, null);
     }
@@ -265,4 +257,5 @@ public abstract class JDFAutoLocation extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

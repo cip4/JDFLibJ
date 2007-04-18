@@ -78,6 +78,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFPartStatus;
 import org.cip4.jdflib.pool.JDFPool;
     /*
@@ -184,8 +185,6 @@ public abstract class JDFAutoStatusPool extends JDFPool
             setAttribute(AttributeName.STATUSDETAILS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute StatusDetails
           * @return the value of the attribute
@@ -194,8 +193,6 @@ public abstract class JDFAutoStatusPool extends JDFPool
         {
             return getAttribute(AttributeName.STATUSDETAILS, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -212,8 +209,6 @@ public abstract class JDFAutoStatusPool extends JDFPool
         return (JDFPartStatus)getCreateElement_KElement(ElementName.PARTSTATUS, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element PartStatus
      * @param iSkip number of elements to skip
@@ -224,9 +219,10 @@ public abstract class JDFAutoStatusPool extends JDFPool
         return (JDFPartStatus) getElement(ElementName.PARTSTATUS, null, iSkip);
     }
 
-
-
-    public JDFPartStatus appendPartStatus()
+    /**
+     * (30) append element PartStatus
+     */
+    public JDFPartStatus appendPartStatus() throws JDFException
     {
         return (JDFPartStatus) appendElement(ElementName.PARTSTATUS, null);
     }

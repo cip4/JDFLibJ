@@ -83,6 +83,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.intent.JDFMediaIntent;
 import org.cip4.jdflib.resource.process.JDFIDPFinishing;
 import org.cip4.jdflib.resource.process.JDFIDPLayout;
@@ -240,8 +241,6 @@ public abstract class JDFAutoIDPCover extends JDFElement
             setAttribute(AttributeName.BACKSIDE, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute BackSide
           * @return boolean the value of the attribute
@@ -250,8 +249,6 @@ public abstract class JDFAutoIDPCover extends JDFElement
         {
             return getBoolAttribute(AttributeName.BACKSIDE, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -266,8 +263,6 @@ public abstract class JDFAutoIDPCover extends JDFElement
             setAttribute(AttributeName.COVERTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute CoverType
           * @return the value of the attribute
@@ -276,8 +271,6 @@ public abstract class JDFAutoIDPCover extends JDFElement
         {
             return EnumCoverType.getEnum(getAttribute(AttributeName.COVERTYPE, null, "Front"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -292,8 +285,6 @@ public abstract class JDFAutoIDPCover extends JDFElement
             setAttribute(AttributeName.FRONTSIDE, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute FrontSide
           * @return boolean the value of the attribute
@@ -302,8 +293,6 @@ public abstract class JDFAutoIDPCover extends JDFElement
         {
             return getBoolAttribute(AttributeName.FRONTSIDE, null, false);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -320,8 +309,6 @@ public abstract class JDFAutoIDPCover extends JDFElement
         return (JDFIDPFinishing)getCreateElement_KElement(ElementName.IDPFINISHING, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element IDPFinishing
      * @param iSkip number of elements to skip
@@ -332,9 +319,10 @@ public abstract class JDFAutoIDPCover extends JDFElement
         return (JDFIDPFinishing) getElement(ElementName.IDPFINISHING, null, iSkip);
     }
 
-
-
-    public JDFIDPFinishing appendIDPFinishing()
+    /**
+     * (30) append element IDPFinishing
+     */
+    public JDFIDPFinishing appendIDPFinishing() throws JDFException
     {
         return (JDFIDPFinishing) appendElement(ElementName.IDPFINISHING, null);
     }
@@ -349,8 +337,6 @@ public abstract class JDFAutoIDPCover extends JDFElement
         return (JDFIDPLayout)getCreateElement_KElement(ElementName.IDPLAYOUT, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element IDPLayout
      * @param iSkip number of elements to skip
@@ -361,9 +347,10 @@ public abstract class JDFAutoIDPCover extends JDFElement
         return (JDFIDPLayout) getElement(ElementName.IDPLAYOUT, null, iSkip);
     }
 
-
-
-    public JDFIDPLayout appendIDPLayout()
+    /**
+     * (30) append element IDPLayout
+     */
+    public JDFIDPLayout appendIDPLayout() throws JDFException
     {
         return (JDFIDPLayout) appendElement(ElementName.IDPLAYOUT, null);
     }
@@ -378,8 +365,6 @@ public abstract class JDFAutoIDPCover extends JDFElement
         return (JDFMediaIntent)getCreateElement_KElement(ElementName.MEDIAINTENT, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element MediaIntent
      * @param iSkip number of elements to skip
@@ -390,9 +375,10 @@ public abstract class JDFAutoIDPCover extends JDFElement
         return (JDFMediaIntent) getElement(ElementName.MEDIAINTENT, null, iSkip);
     }
 
-
-
-    public JDFMediaIntent appendMediaIntent()
+    /**
+     * (30) append element MediaIntent
+     */
+    public JDFMediaIntent appendMediaIntent() throws JDFException
     {
         return (JDFMediaIntent) appendElement(ElementName.MEDIAINTENT, null);
     }
@@ -405,6 +391,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateMediaSource
      * 
      * @param iSkip number of elements to skip
@@ -414,8 +401,6 @@ public abstract class JDFAutoIDPCover extends JDFElement
     {
         return (JDFMediaSource)getCreateElement_KElement(ElementName.MEDIASOURCE, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element MediaSource
@@ -427,9 +412,10 @@ public abstract class JDFAutoIDPCover extends JDFElement
         return (JDFMediaSource) getElement(ElementName.MEDIASOURCE, null, iSkip);
     }
 
-
-
-    public JDFMediaSource appendMediaSource()
+    /**
+     * (30) append element MediaSource
+     */
+    public JDFMediaSource appendMediaSource() throws JDFException
     {
         return (JDFMediaSource) appendElement(ElementName.MEDIASOURCE, null);
     }
@@ -442,4 +428,5 @@ public abstract class JDFAutoIDPCover extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

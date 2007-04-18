@@ -262,8 +262,6 @@ public abstract class JDFAutoByteMap extends JDFResource
             setAttribute(AttributeName.FRAMEHEIGHT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute FrameHeight
           * @return int the value of the attribute
@@ -272,8 +270,6 @@ public abstract class JDFAutoByteMap extends JDFResource
         {
             return getIntAttribute(AttributeName.FRAMEHEIGHT, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -288,8 +284,6 @@ public abstract class JDFAutoByteMap extends JDFResource
             setAttribute(AttributeName.FRAMEWIDTH, value, null);
         }
 
-
-
         /**
           * (15) get int attribute FrameWidth
           * @return int the value of the attribute
@@ -298,8 +292,6 @@ public abstract class JDFAutoByteMap extends JDFResource
         {
             return getIntAttribute(AttributeName.FRAMEWIDTH, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -314,8 +306,6 @@ public abstract class JDFAutoByteMap extends JDFResource
             setAttribute(AttributeName.HALFTONED, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Halftoned
           * @return boolean the value of the attribute
@@ -324,8 +314,6 @@ public abstract class JDFAutoByteMap extends JDFResource
         {
             return getBoolAttribute(AttributeName.HALFTONED, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -340,8 +328,6 @@ public abstract class JDFAutoByteMap extends JDFResource
             setAttribute(AttributeName.INTERLEAVED, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Interleaved
           * @return boolean the value of the attribute
@@ -350,8 +336,6 @@ public abstract class JDFAutoByteMap extends JDFResource
         {
             return getBoolAttribute(AttributeName.INTERLEAVED, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -366,11 +350,9 @@ public abstract class JDFAutoByteMap extends JDFResource
             setAttribute(AttributeName.RESOLUTION, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute Resolution
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getResolution()
@@ -389,8 +371,6 @@ public abstract class JDFAutoByteMap extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute BandOrdering
@@ -404,8 +384,6 @@ public abstract class JDFAutoByteMap extends JDFResource
             setAttribute(AttributeName.BANDORDERING, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute BandOrdering
           * @return the value of the attribute
@@ -414,8 +392,6 @@ public abstract class JDFAutoByteMap extends JDFResource
         {
             return EnumBandOrdering.getEnum(getAttribute(AttributeName.BANDORDERING, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -430,8 +406,6 @@ public abstract class JDFAutoByteMap extends JDFResource
             setAttribute(AttributeName.PIXELSKIP, value, null);
         }
 
-
-
         /**
           * (15) get int attribute PixelSkip
           * @return int the value of the attribute
@@ -440,8 +414,6 @@ public abstract class JDFAutoByteMap extends JDFResource
         {
             return getIntAttribute(AttributeName.PIXELSKIP, null, 0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -458,8 +430,6 @@ public abstract class JDFAutoByteMap extends JDFResource
         return (JDFBand)getCreateElement_KElement(ElementName.BAND, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Band
      * @param iSkip number of elements to skip
@@ -470,9 +440,10 @@ public abstract class JDFAutoByteMap extends JDFResource
         return (JDFBand) getElement(ElementName.BAND, null, iSkip);
     }
 
-
-
-    public JDFBand appendBand()
+    /**
+     * (30) append element Band
+     */
+    public JDFBand appendBand() throws JDFException
     {
         return (JDFBand) appendElement(ElementName.BAND, null);
     }
@@ -486,8 +457,6 @@ public abstract class JDFAutoByteMap extends JDFResource
         return (JDFColorPool) getElement(ElementName.COLORPOOL, null, 0);
     }
 
-
-
     /** (25) getCreateColorPool
      * 
      * @return JDFColorPool the element
@@ -497,17 +466,14 @@ public abstract class JDFAutoByteMap extends JDFResource
         return (JDFColorPool) getCreateElement_KElement(ElementName.COLORPOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementColorPool
+     * (29) append element ColorPool
      */
     public JDFColorPool appendColorPool() throws JDFException
     {
         return (JDFColorPool) appendElementN(ElementName.COLORPOOL, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -516,6 +482,7 @@ public abstract class JDFAutoByteMap extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateFileSpec
      * 
      * @param iSkip number of elements to skip
@@ -525,8 +492,6 @@ public abstract class JDFAutoByteMap extends JDFResource
     {
         return (JDFFileSpec)getCreateElement_KElement(ElementName.FILESPEC, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element FileSpec
@@ -538,9 +503,10 @@ public abstract class JDFAutoByteMap extends JDFResource
         return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
     }
 
-
-
-    public JDFFileSpec appendFileSpec()
+    /**
+     * (30) append element FileSpec
+     */
+    public JDFFileSpec appendFileSpec() throws JDFException
     {
         return (JDFFileSpec) appendElement(ElementName.FILESPEC, null);
     }
@@ -553,6 +519,7 @@ public abstract class JDFAutoByteMap extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreatePixelColorant
      * 
      * @param iSkip number of elements to skip
@@ -562,8 +529,6 @@ public abstract class JDFAutoByteMap extends JDFResource
     {
         return (JDFPixelColorant)getCreateElement_KElement(ElementName.PIXELCOLORANT, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element PixelColorant
@@ -575,9 +540,10 @@ public abstract class JDFAutoByteMap extends JDFResource
         return (JDFPixelColorant) getElement(ElementName.PIXELCOLORANT, null, iSkip);
     }
 
-
-
-    public JDFPixelColorant appendPixelColorant()
+    /**
+     * (30) append element PixelColorant
+     */
+    public JDFPixelColorant appendPixelColorant() throws JDFException
     {
         return (JDFPixelColorant) appendElement(ElementName.PIXELCOLORANT, null);
     }

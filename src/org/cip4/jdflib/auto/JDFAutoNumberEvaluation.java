@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFNumberRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
@@ -197,8 +198,6 @@ public abstract class JDFAutoNumberEvaluation extends JDFResource
             setAttribute(AttributeName.TOLERANCE, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute Tolerance
           * @return JDFXYPair the value of the attribute, null if a the
@@ -220,8 +219,6 @@ public abstract class JDFAutoNumberEvaluation extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ValueList
@@ -234,8 +231,6 @@ public abstract class JDFAutoNumberEvaluation extends JDFResource
         {
             setAttribute(AttributeName.VALUELIST, value, null);
         }
-
-
 
         /**
           * (20) get JDFNumberRangeList attribute ValueList
@@ -258,8 +253,6 @@ public abstract class JDFAutoNumberEvaluation extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ValueMod
@@ -272,8 +265,6 @@ public abstract class JDFAutoNumberEvaluation extends JDFResource
         {
             setAttribute(AttributeName.VALUEMOD, value, null);
         }
-
-
 
         /**
           * (20) get JDFXYPair attribute ValueMod
@@ -296,8 +287,6 @@ public abstract class JDFAutoNumberEvaluation extends JDFResource
             return nPlaceHolder;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -313,8 +302,6 @@ public abstract class JDFAutoNumberEvaluation extends JDFResource
         return (JDFBasicPreflightTest)getCreateElement_KElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element BasicPreflightTest
      * @param iSkip number of elements to skip
@@ -325,9 +312,10 @@ public abstract class JDFAutoNumberEvaluation extends JDFResource
         return (JDFBasicPreflightTest) getElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
     }
 
-
-
-    public JDFBasicPreflightTest appendBasicPreflightTest()
+    /**
+     * (30) append element BasicPreflightTest
+     */
+    public JDFBasicPreflightTest appendBasicPreflightTest() throws JDFException
     {
         return (JDFBasicPreflightTest) appendElement(ElementName.BASICPREFLIGHTTEST, null);
     }

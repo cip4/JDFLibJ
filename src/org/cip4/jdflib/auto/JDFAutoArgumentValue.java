@@ -79,6 +79,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFPreflightArgument;
     /*
     *****************************************************************************
@@ -183,8 +184,6 @@ public abstract class JDFAutoArgumentValue extends JDFElement
             setAttribute(AttributeName.NAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Name
           * @return the value of the attribute
@@ -193,8 +192,6 @@ public abstract class JDFAutoArgumentValue extends JDFElement
         {
             return getAttribute(AttributeName.NAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -211,8 +208,6 @@ public abstract class JDFAutoArgumentValue extends JDFElement
         return (JDFPreflightArgument)getCreateElement_KElement(ElementName.PREFLIGHTARGUMENT, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element PreflightArgument
      * @param iSkip number of elements to skip
@@ -223,9 +218,10 @@ public abstract class JDFAutoArgumentValue extends JDFElement
         return (JDFPreflightArgument) getElement(ElementName.PREFLIGHTARGUMENT, null, iSkip);
     }
 
-
-
-    public JDFPreflightArgument appendPreflightArgument()
+    /**
+     * (30) append element PreflightArgument
+     */
+    public JDFPreflightArgument appendPreflightArgument() throws JDFException
     {
         return (JDFPreflightArgument) appendElement(ElementName.PREFLIGHTARGUMENT, null);
     }

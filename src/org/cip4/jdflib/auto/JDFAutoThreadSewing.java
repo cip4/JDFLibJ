@@ -165,8 +165,6 @@ public abstract class JDFAutoThreadSewing extends JDFElement
         return (JDFOptionSpan) getElement(ElementName.SEALING, null, 0);
     }
 
-
-
     /** (25) getCreateSealing
      * 
      * @return JDFOptionSpan the element
@@ -176,15 +174,12 @@ public abstract class JDFAutoThreadSewing extends JDFElement
         return (JDFOptionSpan) getCreateElement_KElement(ElementName.SEALING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementSealing
+     * (29) append element Sealing
      */
     public JDFOptionSpan appendSealing() throws JDFException
     {
         return (JDFOptionSpan) appendElementN(ElementName.SEALING, 1, null);
     }
+
 }// end namespace JDF

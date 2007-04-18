@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.devicecapability.JDFLoc;
 import org.cip4.jdflib.resource.process.JDFPreflightAction;
     /*
@@ -238,8 +239,6 @@ public abstract class JDFAutoAction extends JDFElement
             setAttribute(AttributeName.SEVERITY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Severity
           * @return the value of the attribute
@@ -248,8 +247,6 @@ public abstract class JDFAutoAction extends JDFElement
         {
             return EnumSeverity.getEnum(getAttribute(AttributeName.SEVERITY, null, "Error"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -264,8 +261,6 @@ public abstract class JDFAutoAction extends JDFElement
             setAttribute(AttributeName.ID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ID
           * @return the value of the attribute
@@ -274,8 +269,6 @@ public abstract class JDFAutoAction extends JDFElement
         {
             return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -290,8 +283,6 @@ public abstract class JDFAutoAction extends JDFElement
             setAttribute(AttributeName.TESTREF, value, null);
         }
 
-
-
         /**
           * (23) get String attribute TestRef
           * @return the value of the attribute
@@ -300,8 +291,6 @@ public abstract class JDFAutoAction extends JDFElement
         {
             return getAttribute(AttributeName.TESTREF, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -318,8 +307,6 @@ public abstract class JDFAutoAction extends JDFElement
         return (JDFLoc)getCreateElement_KElement(ElementName.LOC, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Loc
      * @param iSkip number of elements to skip
@@ -330,9 +317,10 @@ public abstract class JDFAutoAction extends JDFElement
         return (JDFLoc) getElement(ElementName.LOC, null, iSkip);
     }
 
-
-
-    public JDFLoc appendLoc()
+    /**
+     * (30) append element Loc
+     */
+    public JDFLoc appendLoc() throws JDFException
     {
         return (JDFLoc) appendElement(ElementName.LOC, null);
     }
@@ -347,8 +335,6 @@ public abstract class JDFAutoAction extends JDFElement
         return (JDFPreflightAction)getCreateElement_KElement(ElementName.PREFLIGHTACTION, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element PreflightAction
      * @param iSkip number of elements to skip
@@ -359,9 +345,10 @@ public abstract class JDFAutoAction extends JDFElement
         return (JDFPreflightAction) getElement(ElementName.PREFLIGHTACTION, null, iSkip);
     }
 
-
-
-    public JDFPreflightAction appendPreflightAction()
+    /**
+     * (30) append element PreflightAction
+     */
+    public JDFPreflightAction appendPreflightAction() throws JDFException
     {
         return (JDFPreflightAction) appendElement(ElementName.PREFLIGHTACTION, null);
     }

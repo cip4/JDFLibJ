@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.process.JDFPRGroupOccurrence;
 import org.cip4.jdflib.resource.process.JDFPROccurrence;
@@ -189,8 +190,6 @@ public abstract class JDFAutoPRGroup extends JDFElement
             setAttribute(AttributeName.OCCURRENCES, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Occurrences
           * @return int the value of the attribute
@@ -199,8 +198,6 @@ public abstract class JDFAutoPRGroup extends JDFElement
         {
             return getIntAttribute(AttributeName.OCCURRENCES, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -215,11 +212,9 @@ public abstract class JDFAutoPRGroup extends JDFElement
             setAttribute(AttributeName.PAGESET, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerRangeList attribute PageSet
-          * @return JDFIntegerRangeListthe value of the attribute, null if a the
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerRangeList
           */
         public JDFIntegerRangeList getPageSet()
@@ -238,8 +233,6 @@ public abstract class JDFAutoPRGroup extends JDFElement
             return nPlaceHolder;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -255,8 +248,6 @@ public abstract class JDFAutoPRGroup extends JDFElement
         return (JDFPRGroupOccurrence)getCreateElement_KElement(ElementName.PRGROUPOCCURRENCE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element PRGroupOccurrence
      * @param iSkip number of elements to skip
@@ -267,9 +258,10 @@ public abstract class JDFAutoPRGroup extends JDFElement
         return (JDFPRGroupOccurrence) getElement(ElementName.PRGROUPOCCURRENCE, null, iSkip);
     }
 
-
-
-    public JDFPRGroupOccurrence appendPRGroupOccurrence()
+    /**
+     * (30) append element PRGroupOccurrence
+     */
+    public JDFPRGroupOccurrence appendPRGroupOccurrence() throws JDFException
     {
         return (JDFPRGroupOccurrence) appendElement(ElementName.PRGROUPOCCURRENCE, null);
     }
@@ -284,8 +276,6 @@ public abstract class JDFAutoPRGroup extends JDFElement
         return (JDFPROccurrence)getCreateElement_KElement(ElementName.PROCCURRENCE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element PROccurrence
      * @param iSkip number of elements to skip
@@ -296,9 +286,10 @@ public abstract class JDFAutoPRGroup extends JDFElement
         return (JDFPROccurrence) getElement(ElementName.PROCCURRENCE, null, iSkip);
     }
 
-
-
-    public JDFPROccurrence appendPROccurrence()
+    /**
+     * (30) append element PROccurrence
+     */
+    public JDFPROccurrence appendPROccurrence() throws JDFException
     {
         return (JDFPROccurrence) appendElement(ElementName.PROCCURRENCE, null);
     }

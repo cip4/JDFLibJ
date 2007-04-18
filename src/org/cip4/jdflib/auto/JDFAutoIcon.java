@@ -244,11 +244,9 @@ public abstract class JDFAutoIcon extends JDFElement
             setAttribute(AttributeName.SIZE, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute Size
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getSize()
@@ -267,8 +265,6 @@ public abstract class JDFAutoIcon extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute BitDepth
@@ -282,8 +278,6 @@ public abstract class JDFAutoIcon extends JDFElement
             setAttribute(AttributeName.BITDEPTH, value, null);
         }
 
-
-
         /**
           * (15) get int attribute BitDepth
           * @return int the value of the attribute
@@ -292,8 +286,6 @@ public abstract class JDFAutoIcon extends JDFElement
         {
             return getIntAttribute(AttributeName.BITDEPTH, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -308,8 +300,6 @@ public abstract class JDFAutoIcon extends JDFElement
             setEnumerationsAttribute(AttributeName.ICONUSAGE, v, null);
         }
 
-
-
         /**
           * (9.2) get IconUsage attribute IconUsage
           * @return Vector of the enumerations
@@ -318,8 +308,6 @@ public abstract class JDFAutoIcon extends JDFElement
         {
             return getEnumerationsAttribute(AttributeName.ICONUSAGE, null, EnumIconUsage.getEnum(0), false);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -335,8 +323,6 @@ public abstract class JDFAutoIcon extends JDFElement
         return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
     /** (25) getCreateFileSpec
      * 
      * @return JDFFileSpec the element
@@ -346,15 +332,12 @@ public abstract class JDFAutoIcon extends JDFElement
         return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFileSpec
+     * (29) append element FileSpec
      */
     public JDFFileSpec appendFileSpec() throws JDFException
     {
         return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
     }
+
 }// end namespace JDF

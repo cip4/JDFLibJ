@@ -79,6 +79,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.devicecapability.JDFcall;
 import org.cip4.jdflib.resource.devicecapability.JDFchoice;
 import org.cip4.jdflib.resource.devicecapability.JDFset;
@@ -187,8 +188,6 @@ public abstract class JDFAutomacro extends JDFElement
             setAttribute(AttributeName.ID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ID
           * @return the value of the attribute
@@ -197,8 +196,6 @@ public abstract class JDFAutomacro extends JDFElement
         {
             return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -215,8 +212,6 @@ public abstract class JDFAutomacro extends JDFElement
         return (JDFchoice)getCreateElement_KElement(ElementName.CHOICE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element choice
      * @param iSkip number of elements to skip
@@ -227,9 +222,10 @@ public abstract class JDFAutomacro extends JDFElement
         return (JDFchoice) getElement(ElementName.CHOICE, null, iSkip);
     }
 
-
-
-    public JDFchoice appendchoice()
+    /**
+     * (30) append element choice
+     */
+    public JDFchoice appendchoice() throws JDFException
     {
         return (JDFchoice) appendElement(ElementName.CHOICE, null);
     }
@@ -244,8 +240,6 @@ public abstract class JDFAutomacro extends JDFElement
         return (JDFset)getCreateElement_KElement(ElementName.SET, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element set
      * @param iSkip number of elements to skip
@@ -256,9 +250,10 @@ public abstract class JDFAutomacro extends JDFElement
         return (JDFset) getElement(ElementName.SET, null, iSkip);
     }
 
-
-
-    public JDFset appendset()
+    /**
+     * (30) append element set
+     */
+    public JDFset appendset() throws JDFException
     {
         return (JDFset) appendElement(ElementName.SET, null);
     }
@@ -273,8 +268,6 @@ public abstract class JDFAutomacro extends JDFElement
         return (JDFcall)getCreateElement_KElement(ElementName.CALL, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element call
      * @param iSkip number of elements to skip
@@ -285,9 +278,10 @@ public abstract class JDFAutomacro extends JDFElement
         return (JDFcall) getElement(ElementName.CALL, null, iSkip);
     }
 
-
-
-    public JDFcall appendcall()
+    /**
+     * (30) append element call
+     */
+    public JDFcall appendcall() throws JDFException
     {
         return (JDFcall) appendElement(ElementName.CALL, null);
     }

@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;
     /*
     *****************************************************************************
@@ -165,8 +166,6 @@ public abstract class JDFAutoDependencies extends JDFElement
         return (JDFLayoutElement)getCreateElement_KElement(ElementName.LAYOUTELEMENT, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element LayoutElement
      * @param iSkip number of elements to skip
@@ -177,9 +176,10 @@ public abstract class JDFAutoDependencies extends JDFElement
         return (JDFLayoutElement) getElement(ElementName.LAYOUTELEMENT, null, iSkip);
     }
 
-
-
-    public JDFLayoutElement appendLayoutElement()
+    /**
+     * (30) append element LayoutElement
+     */
+    public JDFLayoutElement appendLayoutElement() throws JDFException
     {
         return (JDFLayoutElement) appendElement(ElementName.LAYOUTELEMENT, null);
     }
@@ -192,4 +192,5 @@ public abstract class JDFAutoDependencies extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

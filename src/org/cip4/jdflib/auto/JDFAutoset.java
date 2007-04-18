@@ -184,8 +184,6 @@ public abstract class JDFAutoset extends JDFElement
             setAttribute(AttributeName.RREF, value, null);
         }
 
-
-
         /**
           * (23) get String attribute rRef
           * @return the value of the attribute
@@ -194,8 +192,6 @@ public abstract class JDFAutoset extends JDFElement
         {
             return getAttribute(AttributeName.RREF, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -211,8 +207,6 @@ public abstract class JDFAutoset extends JDFElement
         return (JDFFeatureAttribute) getElement(ElementName.FEATUREATTRIBUTE, null, 0);
     }
 
-
-
     /** (25) getCreateFeatureAttribute
      * 
      * @return JDFFeatureAttribute the element
@@ -222,15 +216,12 @@ public abstract class JDFAutoset extends JDFElement
         return (JDFFeatureAttribute) getCreateElement_KElement(ElementName.FEATUREATTRIBUTE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFeatureAttribute
+     * (29) append element FeatureAttribute
      */
     public JDFFeatureAttribute appendFeatureAttribute() throws JDFException
     {
         return (JDFFeatureAttribute) appendElementN(ElementName.FEATUREATTRIBUTE, 1, null);
     }
+
 }// end namespace JDF

@@ -168,8 +168,6 @@ public abstract class JDFAutochoice extends JDFElement
         return (JDFwhen)getCreateElement_KElement(ElementName.WHEN, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element when
      * @param iSkip number of elements to skip
@@ -180,9 +178,10 @@ public abstract class JDFAutochoice extends JDFElement
         return (JDFwhen) getElement(ElementName.WHEN, null, iSkip);
     }
 
-
-
-    public JDFwhen appendwhen()
+    /**
+     * (30) append element when
+     */
+    public JDFwhen appendwhen() throws JDFException
     {
         return (JDFwhen) appendElement(ElementName.WHEN, null);
     }
@@ -196,8 +195,6 @@ public abstract class JDFAutochoice extends JDFElement
         return (JDFotherwise) getElement(ElementName.OTHERWISE, null, 0);
     }
 
-
-
     /** (25) getCreateotherwise
      * 
      * @return JDFotherwise the element
@@ -207,15 +204,12 @@ public abstract class JDFAutochoice extends JDFElement
         return (JDFotherwise) getCreateElement_KElement(ElementName.OTHERWISE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementotherwise
+     * (29) append element otherwise
      */
     public JDFotherwise appendotherwise() throws JDFException
     {
         return (JDFotherwise) appendElementN(ElementName.OTHERWISE, 1, null);
     }
+
 }// end namespace JDF

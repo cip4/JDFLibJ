@@ -208,8 +208,6 @@ public abstract class JDFAutoStackingParams extends JDFResource
             setAttribute(AttributeName.COMPENSATE, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Compensate
           * @return boolean the value of the attribute
@@ -218,8 +216,6 @@ public abstract class JDFAutoStackingParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.COMPENSATE, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -234,11 +230,9 @@ public abstract class JDFAutoStackingParams extends JDFResource
             setAttribute(AttributeName.LAYERAMOUNT, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerList attribute LayerAmount
-          * @return JDFIntegerListthe value of the attribute, null if a the
+          * @return JDFIntegerList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerList
           */
         public JDFIntegerList getLayerAmount()
@@ -257,8 +251,6 @@ public abstract class JDFAutoStackingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute MaxAmount
@@ -272,8 +264,6 @@ public abstract class JDFAutoStackingParams extends JDFResource
             setAttribute(AttributeName.MAXAMOUNT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute MaxAmount
           * @return int the value of the attribute
@@ -282,8 +272,6 @@ public abstract class JDFAutoStackingParams extends JDFResource
         {
             return getIntAttribute(AttributeName.MAXAMOUNT, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -298,8 +286,6 @@ public abstract class JDFAutoStackingParams extends JDFResource
             setAttribute(AttributeName.MINAMOUNT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute MinAmount
           * @return int the value of the attribute
@@ -308,8 +294,6 @@ public abstract class JDFAutoStackingParams extends JDFResource
         {
             return getIntAttribute(AttributeName.MINAMOUNT, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -324,8 +308,6 @@ public abstract class JDFAutoStackingParams extends JDFResource
             setAttribute(AttributeName.MAXWEIGHT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute MaxWeight
           * @return double the value of the attribute
@@ -334,8 +316,6 @@ public abstract class JDFAutoStackingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.MAXWEIGHT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -350,8 +330,6 @@ public abstract class JDFAutoStackingParams extends JDFResource
             setAttribute(AttributeName.OFFSET, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Offset
           * @return boolean the value of the attribute
@@ -360,8 +338,6 @@ public abstract class JDFAutoStackingParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.OFFSET, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -376,11 +352,9 @@ public abstract class JDFAutoStackingParams extends JDFResource
             setAttribute(AttributeName.UNDERLAYS, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerList attribute UnderLays
-          * @return JDFIntegerListthe value of the attribute, null if a the
+          * @return JDFIntegerList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerList
           */
         public JDFIntegerList getUnderLays()
@@ -399,8 +373,6 @@ public abstract class JDFAutoStackingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute StandardAmount
@@ -414,8 +386,6 @@ public abstract class JDFAutoStackingParams extends JDFResource
             setAttribute(AttributeName.STANDARDAMOUNT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute StandardAmount
           * @return int the value of the attribute
@@ -424,8 +394,6 @@ public abstract class JDFAutoStackingParams extends JDFResource
         {
             return getIntAttribute(AttributeName.STANDARDAMOUNT, null, 0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -441,8 +409,6 @@ public abstract class JDFAutoStackingParams extends JDFResource
         return (JDFDisjointing) getElement(ElementName.DISJOINTING, null, 0);
     }
 
-
-
     /** (25) getCreateDisjointing
      * 
      * @return JDFDisjointing the element
@@ -452,15 +418,12 @@ public abstract class JDFAutoStackingParams extends JDFResource
         return (JDFDisjointing) getCreateElement_KElement(ElementName.DISJOINTING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDisjointing
+     * (29) append element Disjointing
      */
     public JDFDisjointing appendDisjointing() throws JDFException
     {
         return (JDFDisjointing) appendElementN(ElementName.DISJOINTING, 1, null);
     }
+
 }// end namespace JDF

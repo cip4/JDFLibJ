@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFDevice;
     /*
     *****************************************************************************
@@ -239,8 +240,6 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
             setAttribute(AttributeName.DEVICEDETAILS, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute DeviceDetails
           * @return the value of the attribute
@@ -249,8 +248,6 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
         {
             return EnumDeviceDetails.getEnum(getAttribute(AttributeName.DEVICEDETAILS, null, "None"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -265,8 +262,6 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
             setAttribute(AttributeName.LOCALIZATION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Localization
           * @return the value of the attribute
@@ -275,8 +270,6 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
         {
             return getAttribute(AttributeName.LOCALIZATION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -293,8 +286,6 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
         return (JDFDevice)getCreateElement_KElement(ElementName.DEVICE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Device
      * @param iSkip number of elements to skip
@@ -305,9 +296,10 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
         return (JDFDevice) getElement(ElementName.DEVICE, null, iSkip);
     }
 
-
-
-    public JDFDevice appendDevice()
+    /**
+     * (30) append element Device
+     */
+    public JDFDevice appendDevice() throws JDFException
     {
         return (JDFDevice) appendElement(ElementName.DEVICE, null);
     }

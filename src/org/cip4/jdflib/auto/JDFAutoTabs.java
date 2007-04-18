@@ -192,8 +192,6 @@ public abstract class JDFAutoTabs extends JDFElement
             setAttribute(AttributeName.TABBANKS, value, null);
         }
 
-
-
         /**
           * (15) get int attribute TabBanks
           * @return int the value of the attribute
@@ -202,8 +200,6 @@ public abstract class JDFAutoTabs extends JDFElement
         {
             return getIntAttribute(AttributeName.TABBANKS, null, 1);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -218,8 +214,6 @@ public abstract class JDFAutoTabs extends JDFElement
             setAttribute(AttributeName.TABSPERBANK, value, null);
         }
 
-
-
         /**
           * (15) get int attribute TabsPerBank
           * @return int the value of the attribute
@@ -228,8 +222,6 @@ public abstract class JDFAutoTabs extends JDFElement
         {
             return getIntAttribute(AttributeName.TABSPERBANK, null, 0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -245,8 +237,6 @@ public abstract class JDFAutoTabs extends JDFElement
         return (JDFStringSpan) getElement(ElementName.TABBRAND, null, 0);
     }
 
-
-
     /** (25) getCreateTabBrand
      * 
      * @return JDFStringSpan the element
@@ -256,17 +246,14 @@ public abstract class JDFAutoTabs extends JDFElement
         return (JDFStringSpan) getCreateElement_KElement(ElementName.TABBRAND, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementTabBrand
+     * (29) append element TabBrand
      */
     public JDFStringSpan appendTabBrand() throws JDFException
     {
         return (JDFStringSpan) appendElementN(ElementName.TABBRAND, 1, null);
     }
+
     /**
      * (24) const get element TabExtensionDistance
      * @return JDFNumberSpan the element
@@ -275,8 +262,6 @@ public abstract class JDFAutoTabs extends JDFElement
     {
         return (JDFNumberSpan) getElement(ElementName.TABEXTENSIONDISTANCE, null, 0);
     }
-
-
 
     /** (25) getCreateTabExtensionDistance
      * 
@@ -287,17 +272,14 @@ public abstract class JDFAutoTabs extends JDFElement
         return (JDFNumberSpan) getCreateElement_KElement(ElementName.TABEXTENSIONDISTANCE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementTabExtensionDistance
+     * (29) append element TabExtensionDistance
      */
     public JDFNumberSpan appendTabExtensionDistance() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.TABEXTENSIONDISTANCE, 1, null);
     }
+
     /**
      * (24) const get element TabExtensionMylar
      * @return JDFOptionSpan the element
@@ -306,8 +288,6 @@ public abstract class JDFAutoTabs extends JDFElement
     {
         return (JDFOptionSpan) getElement(ElementName.TABEXTENSIONMYLAR, null, 0);
     }
-
-
 
     /** (25) getCreateTabExtensionMylar
      * 
@@ -318,17 +298,14 @@ public abstract class JDFAutoTabs extends JDFElement
         return (JDFOptionSpan) getCreateElement_KElement(ElementName.TABEXTENSIONMYLAR, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementTabExtensionMylar
+     * (29) append element TabExtensionMylar
      */
     public JDFOptionSpan appendTabExtensionMylar() throws JDFException
     {
         return (JDFOptionSpan) appendElementN(ElementName.TABEXTENSIONMYLAR, 1, null);
     }
+
     /**
      * (24) const get element TabBindMylar
      * @return JDFOptionSpan the element
@@ -337,8 +314,6 @@ public abstract class JDFAutoTabs extends JDFElement
     {
         return (JDFOptionSpan) getElement(ElementName.TABBINDMYLAR, null, 0);
     }
-
-
 
     /** (25) getCreateTabBindMylar
      * 
@@ -349,17 +324,14 @@ public abstract class JDFAutoTabs extends JDFElement
         return (JDFOptionSpan) getCreateElement_KElement(ElementName.TABBINDMYLAR, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementTabBindMylar
+     * (29) append element TabBindMylar
      */
     public JDFOptionSpan appendTabBindMylar() throws JDFException
     {
         return (JDFOptionSpan) appendElementN(ElementName.TABBINDMYLAR, 1, null);
     }
+
     /**
      * (24) const get element TabBodyCopy
      * @return JDFOptionSpan the element
@@ -368,8 +340,6 @@ public abstract class JDFAutoTabs extends JDFElement
     {
         return (JDFOptionSpan) getElement(ElementName.TABBODYCOPY, null, 0);
     }
-
-
 
     /** (25) getCreateTabBodyCopy
      * 
@@ -380,17 +350,14 @@ public abstract class JDFAutoTabs extends JDFElement
         return (JDFOptionSpan) getCreateElement_KElement(ElementName.TABBODYCOPY, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementTabBodyCopy
+     * (29) append element TabBodyCopy
      */
     public JDFOptionSpan appendTabBodyCopy() throws JDFException
     {
         return (JDFOptionSpan) appendElementN(ElementName.TABBODYCOPY, 1, null);
     }
+
     /**
      * (24) const get element TabMylarColor
      * @return JDFSpanNamedColor the element
@@ -399,8 +366,6 @@ public abstract class JDFAutoTabs extends JDFElement
     {
         return (JDFSpanNamedColor) getElement(ElementName.TABMYLARCOLOR, null, 0);
     }
-
-
 
     /** (25) getCreateTabMylarColor
      * 
@@ -411,15 +376,12 @@ public abstract class JDFAutoTabs extends JDFElement
         return (JDFSpanNamedColor) getCreateElement_KElement(ElementName.TABMYLARCOLOR, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementTabMylarColor
+     * (29) append element TabMylarColor
      */
     public JDFSpanNamedColor appendTabMylarColor() throws JDFException
     {
         return (JDFSpanNamedColor) appendElementN(ElementName.TABMYLARCOLOR, 1, null);
     }
+
 }// end namespace JDF

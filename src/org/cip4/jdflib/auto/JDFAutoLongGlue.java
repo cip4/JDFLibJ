@@ -225,8 +225,6 @@ public abstract class JDFAutoLongGlue extends JDFElement
             setAttribute(AttributeName.GLUEBRAND, value, null);
         }
 
-
-
         /**
           * (23) get String attribute GlueBrand
           * @return the value of the attribute
@@ -235,8 +233,6 @@ public abstract class JDFAutoLongGlue extends JDFElement
         {
             return getAttribute(AttributeName.GLUEBRAND, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -251,8 +247,6 @@ public abstract class JDFAutoLongGlue extends JDFElement
             setAttribute(AttributeName.GLUETYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute GlueType
           * @return the value of the attribute
@@ -261,8 +255,6 @@ public abstract class JDFAutoLongGlue extends JDFElement
         {
             return EnumGlueType.getEnum(getAttribute(AttributeName.GLUETYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -277,8 +269,6 @@ public abstract class JDFAutoLongGlue extends JDFElement
             setAttribute(AttributeName.LINEWIDTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute LineWidth
           * @return double the value of the attribute
@@ -287,8 +277,6 @@ public abstract class JDFAutoLongGlue extends JDFElement
         {
             return getRealAttribute(AttributeName.LINEWIDTH, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -303,8 +291,6 @@ public abstract class JDFAutoLongGlue extends JDFElement
             setAttribute(AttributeName.MELTINGTEMPERATURE, value, null);
         }
 
-
-
         /**
           * (15) get int attribute MeltingTemperature
           * @return int the value of the attribute
@@ -313,8 +299,6 @@ public abstract class JDFAutoLongGlue extends JDFElement
         {
             return getIntAttribute(AttributeName.MELTINGTEMPERATURE, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -328,8 +312,6 @@ public abstract class JDFAutoLongGlue extends JDFElement
         {
             setAttribute(AttributeName.WORKINGLIST, value, null);
         }
-
-
 
         /**
           * (20) get JDFNumberList attribute WorkingList
@@ -352,8 +334,6 @@ public abstract class JDFAutoLongGlue extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute XOffset
@@ -367,8 +347,6 @@ public abstract class JDFAutoLongGlue extends JDFElement
             setAttribute(AttributeName.XOFFSET, value, null);
         }
 
-
-
         /**
           * (17) get double attribute XOffset
           * @return double the value of the attribute
@@ -377,7 +355,5 @@ public abstract class JDFAutoLongGlue extends JDFElement
         {
             return getRealAttribute(AttributeName.XOFFSET, null, 0.0);
         }
-
-
 
 }// end namespace JDF

@@ -78,6 +78,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
@@ -203,8 +204,6 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
             setAttribute(AttributeName.LENGTHOVERALL, value, null);
         }
 
-
-
         /**
           * (17) get double attribute LengthOverall
           * @return double the value of the attribute
@@ -213,8 +212,6 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
         {
             return getRealAttribute(AttributeName.LENGTHOVERALL, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -229,8 +226,6 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
             setAttribute(AttributeName.VISIBLELENGTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute VisibleLength
           * @return double the value of the attribute
@@ -239,8 +234,6 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
         {
             return getRealAttribute(AttributeName.VISIBLELENGTH, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -255,8 +248,6 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
             setAttribute(AttributeName.MATERIAL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Material
           * @return the value of the attribute
@@ -265,8 +256,6 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
         {
             return getAttribute(AttributeName.MATERIAL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -281,8 +270,6 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
             setAttribute(AttributeName.RIBBONCOLOR, value.getName(), null);
         }
 
-
-
         /**
           * (19) get EnumNamedColor attribute RibbonColor
           * @return EnumNamedColor the value of the attribute
@@ -295,8 +282,6 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
             nPlaceHolder = EnumNamedColor.getEnum(strAttrName);
             return nPlaceHolder;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -311,8 +296,6 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
             setAttribute(AttributeName.RIBBONEND, value, null);
         }
 
-
-
         /**
           * (23) get String attribute RibbonEnd
           * @return the value of the attribute
@@ -321,8 +304,6 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
         {
             return getAttribute(AttributeName.RIBBONEND, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -339,8 +320,6 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
         return (JDFContact)getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Contact
      * @param iSkip number of elements to skip
@@ -351,9 +330,10 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
         return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
     }
 
-
-
-    public JDFContact appendContact()
+    /**
+     * (30) append element Contact
+     */
+    public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -366,6 +346,7 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateIdentificationField
      * 
      * @param iSkip number of elements to skip
@@ -375,8 +356,6 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
     {
         return (JDFIdentificationField)getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element IdentificationField
@@ -388,9 +367,10 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
         return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
 
-
-
-    public JDFIdentificationField appendIdentificationField()
+    /**
+     * (30) append element IdentificationField
+     */
+    public JDFIdentificationField appendIdentificationField() throws JDFException
     {
         return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
     }
@@ -403,4 +383,5 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

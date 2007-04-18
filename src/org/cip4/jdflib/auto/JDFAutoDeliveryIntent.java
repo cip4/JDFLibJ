@@ -264,8 +264,6 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
             setAttribute(AttributeName.ACCEPTED, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Accepted
           * @return boolean the value of the attribute
@@ -274,8 +272,6 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         {
             return getBoolAttribute(AttributeName.ACCEPTED, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -290,8 +286,6 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
             setAttribute(AttributeName.ADDITIONALAMOUNT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute AdditionalAmount
           * @return int the value of the attribute
@@ -300,8 +294,6 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         {
             return getIntAttribute(AttributeName.ADDITIONALAMOUNT, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -316,8 +308,6 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
             setAttribute(AttributeName.OWNERSHIP, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Ownership
           * @return the value of the attribute
@@ -326,8 +316,6 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         {
             return EnumOwnership.getEnum(getAttribute(AttributeName.OWNERSHIP, null, "Origin"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -342,8 +330,6 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
             setAttribute(AttributeName.BUYERACCOUNT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute BuyerAccount
           * @return the value of the attribute
@@ -352,8 +338,6 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         {
             return getAttribute(AttributeName.BUYERACCOUNT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -368,8 +352,6 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
             setAttribute(AttributeName.PICKUP, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Pickup
           * @return boolean the value of the attribute
@@ -378,8 +360,6 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         {
             return getBoolAttribute(AttributeName.PICKUP, null, false);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -395,8 +375,6 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         return (JDFSpanDeliveryCharge) getElement(ElementName.DELIVERYCHARGE, null, 0);
     }
 
-
-
     /** (25) getCreateDeliveryCharge
      * 
      * @return JDFSpanDeliveryCharge the element
@@ -406,17 +384,14 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         return (JDFSpanDeliveryCharge) getCreateElement_KElement(ElementName.DELIVERYCHARGE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDeliveryCharge
+     * (29) append element DeliveryCharge
      */
     public JDFSpanDeliveryCharge appendDeliveryCharge() throws JDFException
     {
         return (JDFSpanDeliveryCharge) appendElementN(ElementName.DELIVERYCHARGE, 1, null);
     }
+
     /**
      * (24) const get element Earliest
      * @return JDFTimeSpan the element
@@ -425,8 +400,6 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
     {
         return (JDFTimeSpan) getElement(ElementName.EARLIEST, null, 0);
     }
-
-
 
     /** (25) getCreateEarliest
      * 
@@ -437,17 +410,14 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         return (JDFTimeSpan) getCreateElement_KElement(ElementName.EARLIEST, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementEarliest
+     * (29) append element Earliest
      */
     public JDFTimeSpan appendEarliest() throws JDFException
     {
         return (JDFTimeSpan) appendElementN(ElementName.EARLIEST, 1, null);
     }
+
     /**
      * (24) const get element EarliestDuration
      * @return JDFDurationSpan the element
@@ -456,8 +426,6 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
     {
         return (JDFDurationSpan) getElement(ElementName.EARLIESTDURATION, null, 0);
     }
-
-
 
     /** (25) getCreateEarliestDuration
      * 
@@ -468,17 +436,14 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         return (JDFDurationSpan) getCreateElement_KElement(ElementName.EARLIESTDURATION, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementEarliestDuration
+     * (29) append element EarliestDuration
      */
     public JDFDurationSpan appendEarliestDuration() throws JDFException
     {
         return (JDFDurationSpan) appendElementN(ElementName.EARLIESTDURATION, 1, null);
     }
+
     /**
      * (24) const get element Method
      * @return JDFNameSpan the element
@@ -487,8 +452,6 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
     {
         return (JDFNameSpan) getElement(ElementName.METHOD, null, 0);
     }
-
-
 
     /** (25) getCreateMethod
      * 
@@ -499,17 +462,14 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         return (JDFNameSpan) getCreateElement_KElement(ElementName.METHOD, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMethod
+     * (29) append element Method
      */
     public JDFNameSpan appendMethod() throws JDFException
     {
         return (JDFNameSpan) appendElementN(ElementName.METHOD, 1, null);
     }
+
     /**
      * (24) const get element Overage
      * @return JDFNumberSpan the element
@@ -518,8 +478,6 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
     {
         return (JDFNumberSpan) getElement(ElementName.OVERAGE, null, 0);
     }
-
-
 
     /** (25) getCreateOverage
      * 
@@ -530,17 +488,14 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         return (JDFNumberSpan) getCreateElement_KElement(ElementName.OVERAGE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementOverage
+     * (29) append element Overage
      */
     public JDFNumberSpan appendOverage() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.OVERAGE, 1, null);
     }
+
     /**
      * (24) const get element Required
      * @return JDFTimeSpan the element
@@ -549,8 +504,6 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
     {
         return (JDFTimeSpan) getElement(ElementName.REQUIRED, null, 0);
     }
-
-
 
     /** (25) getCreateRequired
      * 
@@ -561,17 +514,14 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         return (JDFTimeSpan) getCreateElement_KElement(ElementName.REQUIRED, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementRequired
+     * (29) append element Required
      */
     public JDFTimeSpan appendRequired() throws JDFException
     {
         return (JDFTimeSpan) appendElementN(ElementName.REQUIRED, 1, null);
     }
+
     /**
      * (24) const get element RequiredDuration
      * @return JDFDurationSpan the element
@@ -580,8 +530,6 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
     {
         return (JDFDurationSpan) getElement(ElementName.REQUIREDDURATION, null, 0);
     }
-
-
 
     /** (25) getCreateRequiredDuration
      * 
@@ -592,17 +540,14 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         return (JDFDurationSpan) getCreateElement_KElement(ElementName.REQUIREDDURATION, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementRequiredDuration
+     * (29) append element RequiredDuration
      */
     public JDFDurationSpan appendRequiredDuration() throws JDFException
     {
         return (JDFDurationSpan) appendElementN(ElementName.REQUIREDDURATION, 1, null);
     }
+
     /**
      * (24) const get element ReturnMethod
      * @return JDFNameSpan the element
@@ -611,8 +556,6 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
     {
         return (JDFNameSpan) getElement(ElementName.RETURNMETHOD, null, 0);
     }
-
-
 
     /** (25) getCreateReturnMethod
      * 
@@ -623,17 +566,14 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         return (JDFNameSpan) getCreateElement_KElement(ElementName.RETURNMETHOD, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementReturnMethod
+     * (29) append element ReturnMethod
      */
     public JDFNameSpan appendReturnMethod() throws JDFException
     {
         return (JDFNameSpan) appendElementN(ElementName.RETURNMETHOD, 1, null);
     }
+
     /**
      * (24) const get element ServiceLevel
      * @return JDFStringSpan the element
@@ -642,8 +582,6 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
     {
         return (JDFStringSpan) getElement(ElementName.SERVICELEVEL, null, 0);
     }
-
-
 
     /** (25) getCreateServiceLevel
      * 
@@ -654,17 +592,14 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         return (JDFStringSpan) getCreateElement_KElement(ElementName.SERVICELEVEL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementServiceLevel
+     * (29) append element ServiceLevel
      */
     public JDFStringSpan appendServiceLevel() throws JDFException
     {
         return (JDFStringSpan) appendElementN(ElementName.SERVICELEVEL, 1, null);
     }
+
     /**
      * (24) const get element SurplusHandling
      * @return JDFSpanSurplusHandling the element
@@ -673,8 +608,6 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
     {
         return (JDFSpanSurplusHandling) getElement(ElementName.SURPLUSHANDLING, null, 0);
     }
-
-
 
     /** (25) getCreateSurplusHandling
      * 
@@ -685,17 +618,14 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         return (JDFSpanSurplusHandling) getCreateElement_KElement(ElementName.SURPLUSHANDLING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementSurplusHandling
+     * (29) append element SurplusHandling
      */
     public JDFSpanSurplusHandling appendSurplusHandling() throws JDFException
     {
         return (JDFSpanSurplusHandling) appendElementN(ElementName.SURPLUSHANDLING, 1, null);
     }
+
     /**
      * (24) const get element Transfer
      * @return JDFSpanTransfer the element
@@ -704,8 +634,6 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
     {
         return (JDFSpanTransfer) getElement(ElementName.TRANSFER, null, 0);
     }
-
-
 
     /** (25) getCreateTransfer
      * 
@@ -716,17 +644,14 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         return (JDFSpanTransfer) getCreateElement_KElement(ElementName.TRANSFER, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementTransfer
+     * (29) append element Transfer
      */
     public JDFSpanTransfer appendTransfer() throws JDFException
     {
         return (JDFSpanTransfer) appendElementN(ElementName.TRANSFER, 1, null);
     }
+
     /**
      * (24) const get element Underage
      * @return JDFNumberSpan the element
@@ -735,8 +660,6 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
     {
         return (JDFNumberSpan) getElement(ElementName.UNDERAGE, null, 0);
     }
-
-
 
     /** (25) getCreateUnderage
      * 
@@ -747,17 +670,14 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         return (JDFNumberSpan) getCreateElement_KElement(ElementName.UNDERAGE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementUnderage
+     * (29) append element Underage
      */
     public JDFNumberSpan appendUnderage() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.UNDERAGE, 1, null);
     }
+
     /**
      * (24) const get element Company
      * @return JDFCompany the element
@@ -766,8 +686,6 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
     {
         return (JDFCompany) getElement(ElementName.COMPANY, null, 0);
     }
-
-
 
     /** (25) getCreateCompany
      * 
@@ -778,17 +696,14 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         return (JDFCompany) getCreateElement_KElement(ElementName.COMPANY, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementCompany
+     * (29) append element Company
      */
     public JDFCompany appendCompany() throws JDFException
     {
         return (JDFCompany) appendElementN(ElementName.COMPANY, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -797,6 +712,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateContact
      * 
      * @param iSkip number of elements to skip
@@ -806,8 +722,6 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
     {
         return (JDFContact)getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Contact
@@ -819,9 +733,10 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
     }
 
-
-
-    public JDFContact appendContact()
+    /**
+     * (30) append element Contact
+     */
+    public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -834,6 +749,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateDropIntent
      * 
      * @param iSkip number of elements to skip
@@ -843,8 +759,6 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
     {
         return (JDFDropIntent)getCreateElement_KElement(ElementName.DROPINTENT, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element DropIntent
@@ -856,9 +770,10 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         return (JDFDropIntent) getElement(ElementName.DROPINTENT, null, iSkip);
     }
 
-
-
-    public JDFDropIntent appendDropIntent()
+    /**
+     * (30) append element DropIntent
+     */
+    public JDFDropIntent appendDropIntent() throws JDFException
     {
         return (JDFDropIntent) appendElement(ElementName.DROPINTENT, null);
     }
@@ -872,8 +787,6 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         return (JDFPricing) getElement(ElementName.PRICING, null, 0);
     }
 
-
-
     /** (25) getCreatePricing
      * 
      * @return JDFPricing the element
@@ -883,15 +796,12 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         return (JDFPricing) getCreateElement_KElement(ElementName.PRICING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPricing
+     * (29) append element Pricing
      */
     public JDFPricing appendPricing() throws JDFException
     {
         return (JDFPricing) appendElementN(ElementName.PRICING, 1, null);
     }
+
 }// end namespace JDF

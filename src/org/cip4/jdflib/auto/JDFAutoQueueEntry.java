@@ -255,8 +255,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
             setAttribute(AttributeName.DEVICEID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DeviceID
           * @return the value of the attribute
@@ -265,8 +263,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
         {
             return getAttribute(AttributeName.DEVICEID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -281,8 +277,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
             setAttribute(AttributeName.ENDTIME, new JDFDate().getDateTimeISO(), null);
         }
 
-
-
         /**
           * (11) set attribute EndTime
           * @param value: the value to set the attribute to or null
@@ -292,8 +286,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
             if (value == null) value = new JDFDate();
             setAttribute(AttributeName.ENDTIME, value.getDateTimeISO(), null);
         }
-
-
 
         /**
           * (12) get JDFDate attribute EndTime
@@ -318,8 +310,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
             return nMyDate;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute GangName
@@ -333,8 +323,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
             setAttribute(AttributeName.GANGNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute GangName
           * @return the value of the attribute
@@ -343,8 +331,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
         {
             return getAttribute(AttributeName.GANGNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -359,8 +345,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
             setAttribute(AttributeName.JOBID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobID
           * @return the value of the attribute
@@ -369,8 +353,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
         {
             return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -385,8 +367,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
             setAttribute(AttributeName.JOBPARTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobPartID
           * @return the value of the attribute
@@ -395,8 +375,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
         {
             return getAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -411,8 +389,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
             setAttribute(AttributeName.PRIORITY, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Priority
           * @return int the value of the attribute
@@ -421,8 +397,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
         {
             return getIntAttribute(AttributeName.PRIORITY, null, 1);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -437,8 +411,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
             setAttribute(AttributeName.QUEUEENTRYID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute QueueEntryID
           * @return the value of the attribute
@@ -447,8 +419,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
         {
             return getAttribute(AttributeName.QUEUEENTRYID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -463,8 +433,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
             setAttribute(AttributeName.STATUS, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Status
           * @return the value of the attribute
@@ -473,8 +441,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
         {
             return EnumQueueEntryStatus.getEnum(getAttribute(AttributeName.STATUS, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -489,8 +455,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
             setAttribute(AttributeName.STARTTIME, new JDFDate().getDateTimeISO(), null);
         }
 
-
-
         /**
           * (11) set attribute StartTime
           * @param value: the value to set the attribute to or null
@@ -500,8 +464,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
             if (value == null) value = new JDFDate();
             setAttribute(AttributeName.STARTTIME, value.getDateTimeISO(), null);
         }
-
-
 
         /**
           * (12) get JDFDate attribute StartTime
@@ -526,8 +488,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
             return nMyDate;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute SubmissionTime
@@ -541,8 +501,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
             setAttribute(AttributeName.SUBMISSIONTIME, new JDFDate().getDateTimeISO(), null);
         }
 
-
-
         /**
           * (11) set attribute SubmissionTime
           * @param value: the value to set the attribute to or null
@@ -552,8 +510,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
             if (value == null) value = new JDFDate();
             setAttribute(AttributeName.SUBMISSIONTIME, value.getDateTimeISO(), null);
         }
-
-
 
         /**
           * (12) get JDFDate attribute SubmissionTime
@@ -578,8 +534,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
             return nMyDate;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -594,8 +548,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
         return (JDFJobPhase) getElement(ElementName.JOBPHASE, null, 0);
     }
 
-
-
     /** (25) getCreateJobPhase
      * 
      * @return JDFJobPhase the element
@@ -605,17 +557,14 @@ public abstract class JDFAutoQueueEntry extends JDFElement
         return (JDFJobPhase) getCreateElement_KElement(ElementName.JOBPHASE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementJobPhase
+     * (29) append element JobPhase
      */
     public JDFJobPhase appendJobPhase() throws JDFException
     {
         return (JDFJobPhase) appendElementN(ElementName.JOBPHASE, 1, null);
     }
+
     /** (26) getCreatePart
      * 
      * @param iSkip number of elements to skip
@@ -625,8 +574,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
     {
         return (JDFPart)getCreateElement_KElement(ElementName.PART, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Part
@@ -638,9 +585,10 @@ public abstract class JDFAutoQueueEntry extends JDFElement
         return (JDFPart) getElement(ElementName.PART, null, iSkip);
     }
 
-
-
-    public JDFPart appendPart()
+    /**
+     * (30) append element Part
+     */
+    public JDFPart appendPart() throws JDFException
     {
         return (JDFPart) appendElement(ElementName.PART, null);
     }
@@ -655,8 +603,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
         return (JDFPreview)getCreateElement_KElement(ElementName.PREVIEW, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Preview
      * @param iSkip number of elements to skip
@@ -667,9 +613,10 @@ public abstract class JDFAutoQueueEntry extends JDFElement
         return (JDFPreview) getElement(ElementName.PREVIEW, null, iSkip);
     }
 
-
-
-    public JDFPreview appendPreview()
+    /**
+     * (30) append element Preview
+     */
+    public JDFPreview appendPreview() throws JDFException
     {
         return (JDFPreview) appendElement(ElementName.PREVIEW, null);
     }

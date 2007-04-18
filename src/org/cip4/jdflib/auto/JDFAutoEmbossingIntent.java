@@ -74,6 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFEmbossingItem;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
     /*
@@ -165,8 +166,6 @@ public abstract class JDFAutoEmbossingIntent extends JDFIntentResource
         return (JDFEmbossingItem)getCreateElement_KElement(ElementName.EMBOSSINGITEM, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element EmbossingItem
      * @param iSkip number of elements to skip
@@ -177,9 +176,10 @@ public abstract class JDFAutoEmbossingIntent extends JDFIntentResource
         return (JDFEmbossingItem) getElement(ElementName.EMBOSSINGITEM, null, iSkip);
     }
 
-
-
-    public JDFEmbossingItem appendEmbossingItem()
+    /**
+     * (30) append element EmbossingItem
+     */
+    public JDFEmbossingItem appendEmbossingItem() throws JDFException
     {
         return (JDFEmbossingItem) appendElement(ElementName.EMBOSSINGITEM, null);
     }

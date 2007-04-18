@@ -339,8 +339,6 @@ public abstract class JDFAutoStitchingParams extends JDFResource
             setAttribute(AttributeName.ANGLE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Angle
           * @return double the value of the attribute
@@ -349,8 +347,6 @@ public abstract class JDFAutoStitchingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.ANGLE, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -365,8 +361,6 @@ public abstract class JDFAutoStitchingParams extends JDFResource
             setAttribute(AttributeName.NUMBEROFSTITCHES, value, null);
         }
 
-
-
         /**
           * (15) get int attribute NumberOfStitches
           * @return int the value of the attribute
@@ -375,8 +369,6 @@ public abstract class JDFAutoStitchingParams extends JDFResource
         {
             return getIntAttribute(AttributeName.NUMBEROFSTITCHES, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -391,8 +383,6 @@ public abstract class JDFAutoStitchingParams extends JDFResource
             setAttribute(AttributeName.OFFSET, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Offset
           * @return double the value of the attribute
@@ -401,8 +391,6 @@ public abstract class JDFAutoStitchingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.OFFSET, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -417,8 +405,6 @@ public abstract class JDFAutoStitchingParams extends JDFResource
             setAttribute(AttributeName.REFERENCEEDGE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ReferenceEdge
           * @return the value of the attribute
@@ -427,8 +413,6 @@ public abstract class JDFAutoStitchingParams extends JDFResource
         {
             return EnumReferenceEdge.getEnum(getAttribute(AttributeName.REFERENCEEDGE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -443,8 +427,6 @@ public abstract class JDFAutoStitchingParams extends JDFResource
             setAttribute(AttributeName.STAPLESHAPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute StapleShape
           * @return the value of the attribute
@@ -453,8 +435,6 @@ public abstract class JDFAutoStitchingParams extends JDFResource
         {
             return EnumStapleShape.getEnum(getAttribute(AttributeName.STAPLESHAPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -469,8 +449,6 @@ public abstract class JDFAutoStitchingParams extends JDFResource
             setAttribute(AttributeName.STITCHFROMFRONT, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute StitchFromFront
           * @return boolean the value of the attribute
@@ -479,8 +457,6 @@ public abstract class JDFAutoStitchingParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.STITCHFROMFRONT, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -494,8 +470,6 @@ public abstract class JDFAutoStitchingParams extends JDFResource
         {
             setAttribute(AttributeName.STITCHPOSITIONS, value, null);
         }
-
-
 
         /**
           * (20) get JDFNumberList attribute StitchPositions
@@ -518,8 +492,6 @@ public abstract class JDFAutoStitchingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute StitchType
@@ -533,8 +505,6 @@ public abstract class JDFAutoStitchingParams extends JDFResource
             setAttribute(AttributeName.STITCHTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute StitchType
           * @return the value of the attribute
@@ -543,8 +513,6 @@ public abstract class JDFAutoStitchingParams extends JDFResource
         {
             return EnumStitchType.getEnum(getAttribute(AttributeName.STITCHTYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -559,8 +527,6 @@ public abstract class JDFAutoStitchingParams extends JDFResource
             setAttribute(AttributeName.STITCHWIDTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute StitchWidth
           * @return double the value of the attribute
@@ -569,8 +535,6 @@ public abstract class JDFAutoStitchingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.STITCHWIDTH, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -585,8 +549,6 @@ public abstract class JDFAutoStitchingParams extends JDFResource
             setAttribute(AttributeName.WIREGAUGE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute WireGauge
           * @return double the value of the attribute
@@ -595,8 +557,6 @@ public abstract class JDFAutoStitchingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.WIREGAUGE, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -611,8 +571,6 @@ public abstract class JDFAutoStitchingParams extends JDFResource
             setAttribute(AttributeName.WIREBRAND, value, null);
         }
 
-
-
         /**
           * (23) get String attribute WireBrand
           * @return the value of the attribute
@@ -621,7 +579,5 @@ public abstract class JDFAutoStitchingParams extends JDFResource
         {
             return getAttribute(AttributeName.WIREBRAND, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

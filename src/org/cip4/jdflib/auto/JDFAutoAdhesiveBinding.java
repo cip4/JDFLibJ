@@ -169,8 +169,6 @@ public abstract class JDFAutoAdhesiveBinding extends JDFElement
         return (JDFSpanScoring) getElement(ElementName.SCORING, null, 0);
     }
 
-
-
     /** (25) getCreateScoring
      * 
      * @return JDFSpanScoring the element
@@ -180,17 +178,14 @@ public abstract class JDFAutoAdhesiveBinding extends JDFElement
         return (JDFSpanScoring) getCreateElement_KElement(ElementName.SCORING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementScoring
+     * (29) append element Scoring
      */
     public JDFSpanScoring appendScoring() throws JDFException
     {
         return (JDFSpanScoring) appendElementN(ElementName.SCORING, 1, null);
     }
+
     /**
      * (24) const get element SpineGlue
      * @return JDFSpanGlue the element
@@ -199,8 +194,6 @@ public abstract class JDFAutoAdhesiveBinding extends JDFElement
     {
         return (JDFSpanGlue) getElement(ElementName.SPINEGLUE, null, 0);
     }
-
-
 
     /** (25) getCreateSpineGlue
      * 
@@ -211,17 +204,14 @@ public abstract class JDFAutoAdhesiveBinding extends JDFElement
         return (JDFSpanGlue) getCreateElement_KElement(ElementName.SPINEGLUE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementSpineGlue
+     * (29) append element SpineGlue
      */
     public JDFSpanGlue appendSpineGlue() throws JDFException
     {
         return (JDFSpanGlue) appendElementN(ElementName.SPINEGLUE, 1, null);
     }
+
     /**
      * (24) const get element TapeBinding
      * @return JDFOptionSpan the element
@@ -230,8 +220,6 @@ public abstract class JDFAutoAdhesiveBinding extends JDFElement
     {
         return (JDFOptionSpan) getElement(ElementName.TAPEBINDING, null, 0);
     }
-
-
 
     /** (25) getCreateTapeBinding
      * 
@@ -242,15 +230,12 @@ public abstract class JDFAutoAdhesiveBinding extends JDFElement
         return (JDFOptionSpan) getCreateElement_KElement(ElementName.TAPEBINDING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementTapeBinding
+     * (29) append element TapeBinding
      */
     public JDFOptionSpan appendTapeBinding() throws JDFException
     {
         return (JDFOptionSpan) appendElementN(ElementName.TAPEBINDING, 1, null);
     }
+
 }// end namespace JDF

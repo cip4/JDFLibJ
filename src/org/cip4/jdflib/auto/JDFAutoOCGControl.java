@@ -168,8 +168,6 @@ public abstract class JDFAutoOCGControl extends JDFElement
             setAttribute(AttributeName.INCLUDEOCG, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IncludeOCG
           * @return boolean the value of the attribute
@@ -178,8 +176,6 @@ public abstract class JDFAutoOCGControl extends JDFElement
         {
             return getBoolAttribute(AttributeName.INCLUDEOCG, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -194,8 +190,6 @@ public abstract class JDFAutoOCGControl extends JDFElement
             setAttribute(AttributeName.OCGNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute OCGName
           * @return the value of the attribute
@@ -204,7 +198,5 @@ public abstract class JDFAutoOCGControl extends JDFElement
         {
             return getAttribute(AttributeName.OCGNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

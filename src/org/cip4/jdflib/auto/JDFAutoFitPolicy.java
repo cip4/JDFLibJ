@@ -332,8 +332,6 @@ public abstract class JDFAutoFitPolicy extends JDFResource
             setAttribute(AttributeName.GUTTERPOLICY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute GutterPolicy
           * @return the value of the attribute
@@ -342,8 +340,6 @@ public abstract class JDFAutoFitPolicy extends JDFResource
         {
             return EnumGutterPolicy.getEnum(getAttribute(AttributeName.GUTTERPOLICY, null, "Fixed"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -358,11 +354,9 @@ public abstract class JDFAutoFitPolicy extends JDFResource
             setAttribute(AttributeName.CLIPOFFSET, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute ClipOffset
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getClipOffset()
@@ -381,8 +375,6 @@ public abstract class JDFAutoFitPolicy extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute MinGutter
@@ -396,11 +388,9 @@ public abstract class JDFAutoFitPolicy extends JDFResource
             setAttribute(AttributeName.MINGUTTER, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute MinGutter
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getMinGutter()
@@ -419,8 +409,6 @@ public abstract class JDFAutoFitPolicy extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute RotatePolicy
@@ -434,8 +422,6 @@ public abstract class JDFAutoFitPolicy extends JDFResource
             setAttribute(AttributeName.ROTATEPOLICY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute RotatePolicy
           * @return the value of the attribute
@@ -444,8 +430,6 @@ public abstract class JDFAutoFitPolicy extends JDFResource
         {
             return EnumRotatePolicy.getEnum(getAttribute(AttributeName.ROTATEPOLICY, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -460,8 +444,6 @@ public abstract class JDFAutoFitPolicy extends JDFResource
             setAttribute(AttributeName.SIZEPOLICY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute SizePolicy
           * @return the value of the attribute
@@ -470,7 +452,5 @@ public abstract class JDFAutoFitPolicy extends JDFResource
         {
             return EnumSizePolicy.getEnum(getAttribute(AttributeName.SIZEPOLICY, null, null));
         }
-
-
 
 }// end namespace JDF

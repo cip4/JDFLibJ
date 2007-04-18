@@ -171,8 +171,6 @@ public abstract class JDFAutoObservationTarget extends JDFElement
             setAttribute(AttributeName.ELEMENTTYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ElementType
           * @return the value of the attribute
@@ -181,8 +179,6 @@ public abstract class JDFAutoObservationTarget extends JDFElement
         {
             return getAttribute(AttributeName.ELEMENTTYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -197,8 +193,6 @@ public abstract class JDFAutoObservationTarget extends JDFElement
             setAttribute(AttributeName.ATTRIBUTES, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute AttributesJDF
           * @return VString the value of the attribute
@@ -210,8 +204,6 @@ public abstract class JDFAutoObservationTarget extends JDFElement
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -226,8 +218,6 @@ public abstract class JDFAutoObservationTarget extends JDFElement
             setAttribute(AttributeName.ELEMENTIDS, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute ElementIDs
           * @return VString the value of the attribute
@@ -239,8 +229,6 @@ public abstract class JDFAutoObservationTarget extends JDFElement
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -255,8 +243,6 @@ public abstract class JDFAutoObservationTarget extends JDFElement
             setAttribute(AttributeName.OBSERVATIONPATH, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ObservationPath
           * @return the value of the attribute
@@ -265,7 +251,5 @@ public abstract class JDFAutoObservationTarget extends JDFElement
         {
             return getAttribute(AttributeName.OBSERVATIONPATH, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

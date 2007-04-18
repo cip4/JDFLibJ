@@ -79,6 +79,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFPayment;
 import org.cip4.jdflib.resource.intent.JDFPricing;
     /*
@@ -189,8 +190,6 @@ public abstract class JDFAutoPricing extends JDFElement
             setAttribute(AttributeName.ADDITIONALPRICE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute AdditionalPrice
           * @return double the value of the attribute
@@ -199,8 +198,6 @@ public abstract class JDFAutoPricing extends JDFElement
         {
             return getRealAttribute(AttributeName.ADDITIONALPRICE, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -215,8 +212,6 @@ public abstract class JDFAutoPricing extends JDFElement
             setAttribute(AttributeName.CURRENCY, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Currency
           * @return the value of the attribute
@@ -225,8 +220,6 @@ public abstract class JDFAutoPricing extends JDFElement
         {
             return getAttribute(AttributeName.CURRENCY, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -241,8 +234,6 @@ public abstract class JDFAutoPricing extends JDFElement
             setAttribute(AttributeName.HASPRICE, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute HasPrice
           * @return boolean the value of the attribute
@@ -251,8 +242,6 @@ public abstract class JDFAutoPricing extends JDFElement
         {
             return getBoolAttribute(AttributeName.HASPRICE, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -267,8 +256,6 @@ public abstract class JDFAutoPricing extends JDFElement
             setAttribute(AttributeName.ITEM, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Item
           * @return the value of the attribute
@@ -277,8 +264,6 @@ public abstract class JDFAutoPricing extends JDFElement
         {
             return getAttribute(AttributeName.ITEM, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -293,8 +278,6 @@ public abstract class JDFAutoPricing extends JDFElement
             setAttribute(AttributeName.PRICE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Price
           * @return double the value of the attribute
@@ -303,8 +286,6 @@ public abstract class JDFAutoPricing extends JDFElement
         {
             return getRealAttribute(AttributeName.PRICE, null, 0.0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -321,8 +302,6 @@ public abstract class JDFAutoPricing extends JDFElement
         return (JDFPayment)getCreateElement_KElement(ElementName.PAYMENT, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Payment
      * @param iSkip number of elements to skip
@@ -333,9 +312,10 @@ public abstract class JDFAutoPricing extends JDFElement
         return (JDFPayment) getElement(ElementName.PAYMENT, null, iSkip);
     }
 
-
-
-    public JDFPayment appendPayment()
+    /**
+     * (30) append element Payment
+     */
+    public JDFPayment appendPayment() throws JDFException
     {
         return (JDFPayment) appendElement(ElementName.PAYMENT, null);
     }
@@ -350,8 +330,6 @@ public abstract class JDFAutoPricing extends JDFElement
         return (JDFPricing)getCreateElement_KElement(ElementName.PRICING, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Pricing
      * @param iSkip number of elements to skip
@@ -362,9 +340,10 @@ public abstract class JDFAutoPricing extends JDFElement
         return (JDFPricing) getElement(ElementName.PRICING, null, iSkip);
     }
 
-
-
-    public JDFPricing appendPricing()
+    /**
+     * (30) append element Pricing
+     */
+    public JDFPricing appendPricing() throws JDFException
     {
         return (JDFPricing) appendElement(ElementName.PRICING, null);
     }

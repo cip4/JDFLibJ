@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
     /*
     *****************************************************************************
@@ -165,8 +166,6 @@ public abstract class JDFAutoDeviceList extends JDFElement
         return (JDFDeviceInfo)getCreateElement_KElement(ElementName.DEVICEINFO, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element DeviceInfo
      * @param iSkip number of elements to skip
@@ -177,9 +176,10 @@ public abstract class JDFAutoDeviceList extends JDFElement
         return (JDFDeviceInfo) getElement(ElementName.DEVICEINFO, null, iSkip);
     }
 
-
-
-    public JDFDeviceInfo appendDeviceInfo()
+    /**
+     * (30) append element DeviceInfo
+     */
+    public JDFDeviceInfo appendDeviceInfo() throws JDFException
     {
         return (JDFDeviceInfo) appendElement(ElementName.DEVICEINFO, null);
     }

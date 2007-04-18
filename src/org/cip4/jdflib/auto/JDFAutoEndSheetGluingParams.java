@@ -74,6 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFEndSheet;
     /*
@@ -179,8 +180,6 @@ public abstract class JDFAutoEndSheetGluingParams extends JDFResource
         return (JDFEndSheet)getCreateElement_KElement(ElementName.ENDSHEET, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element EndSheet
      * @param iSkip number of elements to skip
@@ -191,9 +190,10 @@ public abstract class JDFAutoEndSheetGluingParams extends JDFResource
         return (JDFEndSheet) getElement(ElementName.ENDSHEET, null, iSkip);
     }
 
-
-
-    public JDFEndSheet appendEndSheet()
+    /**
+     * (30) append element EndSheet
+     */
+    public JDFEndSheet appendEndSheet() throws JDFException
     {
         return (JDFEndSheet) appendElement(ElementName.ENDSHEET, null);
     }

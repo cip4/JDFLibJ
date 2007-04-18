@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.resource.process.JDFTransferCurve;
     /*
@@ -187,11 +188,9 @@ public abstract class JDFAutoTransferCurveSet extends JDFElement
             setAttribute(AttributeName.CTM, value, null);
         }
 
-
-
         /**
           * (20) get JDFMatrix attribute CTM
-          * @return JDFMatrixthe value of the attribute, null if a the
+          * @return JDFMatrix the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFMatrix
           */
         public JDFMatrix getCTM()
@@ -210,8 +209,6 @@ public abstract class JDFAutoTransferCurveSet extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Name
@@ -225,8 +222,6 @@ public abstract class JDFAutoTransferCurveSet extends JDFElement
             setAttribute(AttributeName.NAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Name
           * @return the value of the attribute
@@ -235,8 +230,6 @@ public abstract class JDFAutoTransferCurveSet extends JDFElement
         {
             return getAttribute(AttributeName.NAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -253,8 +246,6 @@ public abstract class JDFAutoTransferCurveSet extends JDFElement
         return (JDFTransferCurve)getCreateElement_KElement(ElementName.TRANSFERCURVE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element TransferCurve
      * @param iSkip number of elements to skip
@@ -265,9 +256,10 @@ public abstract class JDFAutoTransferCurveSet extends JDFElement
         return (JDFTransferCurve) getElement(ElementName.TRANSFERCURVE, null, iSkip);
     }
 
-
-
-    public JDFTransferCurve appendTransferCurve()
+    /**
+     * (30) append element TransferCurve
+     */
+    public JDFTransferCurve appendTransferCurve() throws JDFException
     {
         return (JDFTransferCurve) appendElement(ElementName.TRANSFERCURVE, null);
     }
@@ -280,4 +272,5 @@ public abstract class JDFAutoTransferCurveSet extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

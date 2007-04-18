@@ -85,6 +85,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFPart;
     /*
@@ -244,8 +245,6 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
             setAttribute(AttributeName.DEVICEID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DeviceID
           * @return the value of the attribute
@@ -254,8 +253,6 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
         {
             return getAttribute(AttributeName.DEVICEID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -270,8 +267,6 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
             setAttribute(AttributeName.JOBID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobID
           * @return the value of the attribute
@@ -280,8 +275,6 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
         {
             return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -296,8 +289,6 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
             setAttribute(AttributeName.JOBPARTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobPartID
           * @return the value of the attribute
@@ -306,8 +297,6 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
         {
             return getAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -322,8 +311,6 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
             setAttribute(AttributeName.QUEUEENTRYID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute QueueEntryID
           * @return the value of the attribute
@@ -332,8 +319,6 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
         {
             return getAttribute(AttributeName.QUEUEENTRYID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -348,8 +333,6 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
             setAttribute(AttributeName.SIGNALTYPES, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute SignalTypes
           * @return VString the value of the attribute
@@ -361,8 +344,6 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -377,8 +358,6 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
             setAttribute(AttributeName.TYPES, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute Types
           * @return VString the value of the attribute
@@ -390,8 +369,6 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -406,8 +383,6 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
             setEnumerationsAttribute(AttributeName.CLASSES, v, null);
         }
 
-
-
         /**
           * (9.2) get Classes attribute Classes
           * @return Vector of the enumerations
@@ -416,8 +391,6 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
         {
             return getEnumerationsAttribute(AttributeName.CLASSES, null, EnumClasses.getEnum(0), false);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -434,8 +407,6 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
         return (JDFPart)getCreateElement_KElement(ElementName.PART, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Part
      * @param iSkip number of elements to skip
@@ -446,9 +417,10 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
         return (JDFPart) getElement(ElementName.PART, null, iSkip);
     }
 
-
-
-    public JDFPart appendPart()
+    /**
+     * (30) append element Part
+     */
+    public JDFPart appendPart() throws JDFException
     {
         return (JDFPart) appendElement(ElementName.PART, null);
     }

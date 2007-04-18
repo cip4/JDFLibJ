@@ -233,8 +233,6 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
             setAttribute(AttributeName.SHUTDOWNTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ShutDownType
           * @return the value of the attribute
@@ -243,8 +241,6 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
         {
             return EnumShutDownType.getEnum(getAttribute(AttributeName.SHUTDOWNTYPE, null, "StandBy"));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -260,8 +256,6 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
         return (JDFFlushQueueParams) getElement(ElementName.FLUSHQUEUEPARAMS, null, 0);
     }
 
-
-
     /** (25) getCreateFlushQueueParams
      * 
      * @return JDFFlushQueueParams the element
@@ -271,15 +265,12 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
         return (JDFFlushQueueParams) getCreateElement_KElement(ElementName.FLUSHQUEUEPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFlushQueueParams
+     * (29) append element FlushQueueParams
      */
     public JDFFlushQueueParams appendFlushQueueParams() throws JDFException
     {
         return (JDFFlushQueueParams) appendElementN(ElementName.FLUSHQUEUEPARAMS, 1, null);
     }
+
 }// end namespace JDF

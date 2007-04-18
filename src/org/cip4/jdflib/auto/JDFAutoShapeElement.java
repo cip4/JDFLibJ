@@ -274,11 +274,9 @@ public abstract class JDFAutoShapeElement extends JDFElement
             setAttribute(AttributeName.CUTBOX, value, null);
         }
 
-
-
         /**
           * (20) get JDFRectangle attribute CutBox
-          * @return JDFRectanglethe value of the attribute, null if a the
+          * @return JDFRectangle the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFRectangle
           */
         public JDFRectangle getCutBox()
@@ -297,8 +295,6 @@ public abstract class JDFAutoShapeElement extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute CutOut
@@ -312,8 +308,6 @@ public abstract class JDFAutoShapeElement extends JDFElement
             setAttribute(AttributeName.CUTOUT, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute CutOut
           * @return boolean the value of the attribute
@@ -322,8 +316,6 @@ public abstract class JDFAutoShapeElement extends JDFElement
         {
             return getBoolAttribute(AttributeName.CUTOUT, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -338,8 +330,6 @@ public abstract class JDFAutoShapeElement extends JDFElement
             setAttribute(AttributeName.CUTPATH, value, null);
         }
 
-
-
         /**
           * (23) get String attribute CutPath
           * @return the value of the attribute
@@ -348,8 +338,6 @@ public abstract class JDFAutoShapeElement extends JDFElement
         {
             return getAttribute(AttributeName.CUTPATH, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -364,8 +352,6 @@ public abstract class JDFAutoShapeElement extends JDFElement
             setAttribute(AttributeName.MATERIAL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Material
           * @return the value of the attribute
@@ -374,8 +360,6 @@ public abstract class JDFAutoShapeElement extends JDFElement
         {
             return getAttribute(AttributeName.MATERIAL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -390,8 +374,6 @@ public abstract class JDFAutoShapeElement extends JDFElement
             setAttribute(AttributeName.CUTTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute CutType
           * @return the value of the attribute
@@ -400,8 +382,6 @@ public abstract class JDFAutoShapeElement extends JDFElement
         {
             return EnumCutType.getEnum(getAttribute(AttributeName.CUTTYPE, null, "Cut"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -416,8 +396,6 @@ public abstract class JDFAutoShapeElement extends JDFElement
             setAttribute(AttributeName.SHAPEDEPTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute ShapeDepth
           * @return double the value of the attribute
@@ -426,8 +404,6 @@ public abstract class JDFAutoShapeElement extends JDFElement
         {
             return getRealAttribute(AttributeName.SHAPEDEPTH, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -442,8 +418,6 @@ public abstract class JDFAutoShapeElement extends JDFElement
             setAttribute(AttributeName.SHAPETYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ShapeType
           * @return the value of the attribute
@@ -452,8 +426,6 @@ public abstract class JDFAutoShapeElement extends JDFElement
         {
             return EnumShapeType.getEnum(getAttribute(AttributeName.SHAPETYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -468,8 +440,6 @@ public abstract class JDFAutoShapeElement extends JDFElement
             setAttribute(AttributeName.STATIONNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute StationName
           * @return the value of the attribute
@@ -478,8 +448,6 @@ public abstract class JDFAutoShapeElement extends JDFElement
         {
             return getAttribute(AttributeName.STATIONNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -494,8 +462,6 @@ public abstract class JDFAutoShapeElement extends JDFElement
             setAttribute(AttributeName.TEETHPERDIMENSION, value, null);
         }
 
-
-
         /**
           * (17) get double attribute TeethPerDimension
           * @return double the value of the attribute
@@ -504,7 +470,5 @@ public abstract class JDFAutoShapeElement extends JDFElement
         {
             return getRealAttribute(AttributeName.TEETHPERDIMENSION, null, 0.0);
         }
-
-
 
 }// end namespace JDF

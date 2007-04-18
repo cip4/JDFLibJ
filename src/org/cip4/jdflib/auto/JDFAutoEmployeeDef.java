@@ -167,8 +167,6 @@ public abstract class JDFAutoEmployeeDef extends JDFElement
             setAttribute(AttributeName.PERSONALID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute PersonalID
           * @return the value of the attribute
@@ -177,7 +175,5 @@ public abstract class JDFAutoEmployeeDef extends JDFElement
         {
             return getAttribute(AttributeName.PERSONALID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.resource.process.JDFIDPFolding;
 import org.cip4.jdflib.resource.process.JDFIDPHoleMaking;
@@ -192,8 +193,6 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
             setAttribute(AttributeName.FINISHINGS, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerList attribute Finishings
           * @return JDFIntegerList the value of the attribute, null if a the
@@ -215,8 +214,6 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
             return nPlaceHolder;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -232,8 +229,6 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
         return (JDFIDPFolding)getCreateElement_KElement(ElementName.IDPFOLDING, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element IDPFolding
      * @param iSkip number of elements to skip
@@ -244,9 +239,10 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
         return (JDFIDPFolding) getElement(ElementName.IDPFOLDING, null, iSkip);
     }
 
-
-
-    public JDFIDPFolding appendIDPFolding()
+    /**
+     * (30) append element IDPFolding
+     */
+    public JDFIDPFolding appendIDPFolding() throws JDFException
     {
         return (JDFIDPFolding) appendElement(ElementName.IDPFOLDING, null);
     }
@@ -261,8 +257,6 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
         return (JDFIDPHoleMaking)getCreateElement_KElement(ElementName.IDPHOLEMAKING, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element IDPHoleMaking
      * @param iSkip number of elements to skip
@@ -273,9 +267,10 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
         return (JDFIDPHoleMaking) getElement(ElementName.IDPHOLEMAKING, null, iSkip);
     }
 
-
-
-    public JDFIDPHoleMaking appendIDPHoleMaking()
+    /**
+     * (30) append element IDPHoleMaking
+     */
+    public JDFIDPHoleMaking appendIDPHoleMaking() throws JDFException
     {
         return (JDFIDPHoleMaking) appendElement(ElementName.IDPHOLEMAKING, null);
     }
@@ -290,8 +285,6 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
         return (JDFIDPStitching)getCreateElement_KElement(ElementName.IDPSTITCHING, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element IDPStitching
      * @param iSkip number of elements to skip
@@ -302,9 +295,10 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
         return (JDFIDPStitching) getElement(ElementName.IDPSTITCHING, null, iSkip);
     }
 
-
-
-    public JDFIDPStitching appendIDPStitching()
+    /**
+     * (30) append element IDPStitching
+     */
+    public JDFIDPStitching appendIDPStitching() throws JDFException
     {
         return (JDFIDPStitching) appendElement(ElementName.IDPSTITCHING, null);
     }
@@ -319,8 +313,6 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
         return (JDFIDPTrimming)getCreateElement_KElement(ElementName.IDPTRIMMING, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element IDPTrimming
      * @param iSkip number of elements to skip
@@ -331,9 +323,10 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
         return (JDFIDPTrimming) getElement(ElementName.IDPTRIMMING, null, iSkip);
     }
 
-
-
-    public JDFIDPTrimming appendIDPTrimming()
+    /**
+     * (30) append element IDPTrimming
+     */
+    public JDFIDPTrimming appendIDPTrimming() throws JDFException
     {
         return (JDFIDPTrimming) appendElement(ElementName.IDPTRIMMING, null);
     }

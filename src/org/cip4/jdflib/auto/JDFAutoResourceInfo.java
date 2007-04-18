@@ -258,8 +258,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
             setAttribute(AttributeName.ACTUALAMOUNT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute ActualAmount
           * @return double the value of the attribute
@@ -268,8 +266,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
         {
             return getRealAttribute(AttributeName.ACTUALAMOUNT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -284,8 +280,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
             setAttribute(AttributeName.AMOUNT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Amount
           * @return double the value of the attribute
@@ -294,8 +288,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
         {
             return getRealAttribute(AttributeName.AMOUNT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -310,8 +302,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
             setAttribute(AttributeName.AVAILABLEAMOUNT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute AvailableAmount
           * @return double the value of the attribute
@@ -320,8 +310,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
         {
             return getRealAttribute(AttributeName.AVAILABLEAMOUNT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -336,8 +324,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
             setAttribute(AttributeName.LEVEL, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Level
           * @return the value of the attribute
@@ -346,8 +332,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
         {
             return EnumLevel.getEnum(getAttribute(AttributeName.LEVEL, null, "OK"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -362,8 +346,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
             setAttribute(AttributeName.MODULEID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ModuleID
           * @return the value of the attribute
@@ -372,8 +354,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
         {
             return getAttribute(AttributeName.MODULEID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -387,8 +367,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
         {
             setAttribute(AttributeName.MODULEINDEX, value, null);
         }
-
-
 
         /**
           * (20) get JDFIntegerRangeList attribute ModuleIndex
@@ -411,8 +389,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ProcessUsage
@@ -426,8 +402,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
             setAttribute(AttributeName.PROCESSUSAGE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ProcessUsage
           * @return the value of the attribute
@@ -436,8 +410,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
         {
             return getAttribute(AttributeName.PROCESSUSAGE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -452,8 +424,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
             setAttribute(AttributeName.PRODUCTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ProductID
           * @return the value of the attribute
@@ -462,8 +432,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
         {
             return getAttribute(AttributeName.PRODUCTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -478,8 +446,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
             setAttribute(AttributeName.RESOURCEID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ResourceID
           * @return the value of the attribute
@@ -488,8 +454,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
         {
             return getAttribute(AttributeName.RESOURCEID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -504,8 +468,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
             setAttribute(AttributeName.RESOURCENAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ResourceName
           * @return the value of the attribute
@@ -514,8 +476,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
         {
             return getAttribute(AttributeName.RESOURCENAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -530,8 +490,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
             setAttribute(AttributeName.STATUS, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Status
           * @return the value of the attribute
@@ -540,8 +498,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
         {
             return JDFResource.EnumResStatus.getEnum(getAttribute(AttributeName.STATUS, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -556,8 +512,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
             setAttribute(AttributeName.UNIT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Unit
           * @return the value of the attribute
@@ -566,8 +520,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
         {
             return getAttribute(AttributeName.UNIT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -582,8 +534,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
             setAttribute(AttributeName.USAGE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Usage
           * @return the value of the attribute
@@ -592,8 +542,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
         {
             return JDFResourceLink.EnumUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -609,8 +557,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
         return (JDFAmountPool) getElement(ElementName.AMOUNTPOOL, null, 0);
     }
 
-
-
     /** (25) getCreateAmountPool
      * 
      * @return JDFAmountPool the element
@@ -620,17 +566,14 @@ public abstract class JDFAutoResourceInfo extends JDFElement
         return (JDFAmountPool) getCreateElement_KElement(ElementName.AMOUNTPOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementAmountPool
+     * (29) append element AmountPool
      */
     public JDFAmountPool appendAmountPool() throws JDFException
     {
         return (JDFAmountPool) appendElementN(ElementName.AMOUNTPOOL, 1, null);
     }
+
     /**
      * (24) const get element CostCenter
      * @return JDFCostCenter the element
@@ -639,8 +582,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
     {
         return (JDFCostCenter) getElement(ElementName.COSTCENTER, null, 0);
     }
-
-
 
     /** (25) getCreateCostCenter
      * 
@@ -651,17 +592,14 @@ public abstract class JDFAutoResourceInfo extends JDFElement
         return (JDFCostCenter) getCreateElement_KElement(ElementName.COSTCENTER, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementCostCenter
+     * (29) append element CostCenter
      */
     public JDFCostCenter appendCostCenter() throws JDFException
     {
         return (JDFCostCenter) appendElementN(ElementName.COSTCENTER, 1, null);
     }
+
     /**
      * (24) const get element MISDetails
      * @return JDFMISDetails the element
@@ -670,8 +608,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
     {
         return (JDFMISDetails) getElement(ElementName.MISDETAILS, null, 0);
     }
-
-
 
     /** (25) getCreateMISDetails
      * 
@@ -682,17 +618,14 @@ public abstract class JDFAutoResourceInfo extends JDFElement
         return (JDFMISDetails) getCreateElement_KElement(ElementName.MISDETAILS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMISDetails
+     * (29) append element MISDetails
      */
     public JDFMISDetails appendMISDetails() throws JDFException
     {
         return (JDFMISDetails) appendElementN(ElementName.MISDETAILS, 1, null);
     }
+
     /** (26) getCreatePart
      * 
      * @param iSkip number of elements to skip
@@ -702,8 +635,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
     {
         return (JDFPart)getCreateElement_KElement(ElementName.PART, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Part
@@ -715,9 +646,10 @@ public abstract class JDFAutoResourceInfo extends JDFElement
         return (JDFPart) getElement(ElementName.PART, null, iSkip);
     }
 
-
-
-    public JDFPart appendPart()
+    /**
+     * (30) append element Part
+     */
+    public JDFPart appendPart() throws JDFException
     {
         return (JDFPart) appendElement(ElementName.PART, null);
     }
@@ -732,8 +664,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
         return (JDFResource)getCreateElement_KElement(ElementName.RESOURCE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Resource
      * @param iSkip number of elements to skip
@@ -744,9 +674,10 @@ public abstract class JDFAutoResourceInfo extends JDFElement
         return (JDFResource) getElement(ElementName.RESOURCE, null, iSkip);
     }
 
-
-
-    public JDFResource appendResource()
+    /**
+     * (30) append element Resource
+     */
+    public JDFResource appendResource() throws JDFException
     {
         return (JDFResource) appendElement(ElementName.RESOURCE, null);
     }

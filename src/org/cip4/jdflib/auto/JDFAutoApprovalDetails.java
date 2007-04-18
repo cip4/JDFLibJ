@@ -238,8 +238,6 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
             setAttribute(AttributeName.APPROVALSTATE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ApprovalState
           * @return the value of the attribute
@@ -248,8 +246,6 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
         {
             return EnumApprovalState.getEnum(getAttribute(AttributeName.APPROVALSTATE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -264,8 +260,6 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
             setAttribute(AttributeName.APPROVALSTATEDETAILS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ApprovalStateDetails
           * @return the value of the attribute
@@ -274,8 +268,6 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
         {
             return getAttribute(AttributeName.APPROVALSTATEDETAILS, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -291,8 +283,6 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
         return (JDFContact) getElement(ElementName.CONTACT, null, 0);
     }
 
-
-
     /** (25) getCreateContact
      * 
      * @return JDFContact the element
@@ -302,17 +292,14 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
         return (JDFContact) getCreateElement_KElement(ElementName.CONTACT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementContact
+     * (29) append element Contact
      */
     public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElementN(ElementName.CONTACT, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -321,6 +308,7 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element FileSpec
      * @return JDFFileSpec the element
@@ -329,8 +317,6 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
     {
         return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
     }
-
-
 
     /** (25) getCreateFileSpec
      * 
@@ -341,17 +327,14 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
         return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFileSpec
+     * (29) append element FileSpec
      */
     public JDFFileSpec appendFileSpec() throws JDFException
     {
         return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -360,4 +343,5 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

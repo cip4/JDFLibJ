@@ -165,8 +165,6 @@ public abstract class JDFAutoRegistration extends JDFMessage
         return (JDFSubscription) getElement(ElementName.SUBSCRIPTION, null, 0);
     }
 
-
-
     /** (25) getCreateSubscription
      * 
      * @return JDFSubscription the element
@@ -176,15 +174,12 @@ public abstract class JDFAutoRegistration extends JDFMessage
         return (JDFSubscription) getCreateElement_KElement(ElementName.SUBSCRIPTION, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementSubscription
+     * (29) append element Subscription
      */
     public JDFSubscription appendSubscription() throws JDFException
     {
         return (JDFSubscription) appendElementN(ElementName.SUBSCRIPTION, 1, null);
     }
+
 }// end namespace JDF

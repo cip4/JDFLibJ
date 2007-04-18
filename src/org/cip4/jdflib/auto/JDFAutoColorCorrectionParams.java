@@ -200,8 +200,6 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
             setAttribute(AttributeName.COLORMANAGEMENTSYSTEM, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ColorManagementSystem
           * @return the value of the attribute
@@ -210,8 +208,6 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
         {
             return getAttribute(AttributeName.COLORMANAGEMENTSYSTEM, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -227,8 +223,6 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
         return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
     /** (25) getCreateFileSpec
      * 
      * @return JDFFileSpec the element
@@ -238,17 +232,14 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
         return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFileSpec
+     * (29) append element FileSpec
      */
     public JDFFileSpec appendFileSpec() throws JDFException
     {
         return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -257,6 +248,7 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateColorCorrectionOp
      * 
      * @param iSkip number of elements to skip
@@ -266,8 +258,6 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
     {
         return (JDFColorCorrectionOp)getCreateElement_KElement(ElementName.COLORCORRECTIONOP, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element ColorCorrectionOp
@@ -279,9 +269,10 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
         return (JDFColorCorrectionOp) getElement(ElementName.COLORCORRECTIONOP, null, iSkip);
     }
 
-
-
-    public JDFColorCorrectionOp appendColorCorrectionOp()
+    /**
+     * (30) append element ColorCorrectionOp
+     */
+    public JDFColorCorrectionOp appendColorCorrectionOp() throws JDFException
     {
         return (JDFColorCorrectionOp) appendElement(ElementName.COLORCORRECTIONOP, null);
     }

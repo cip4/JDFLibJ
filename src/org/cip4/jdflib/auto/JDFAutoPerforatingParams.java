@@ -74,6 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFPerforate;
     /*
@@ -179,8 +180,6 @@ public abstract class JDFAutoPerforatingParams extends JDFResource
         return (JDFPerforate)getCreateElement_KElement(ElementName.PERFORATE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Perforate
      * @param iSkip number of elements to skip
@@ -191,9 +190,10 @@ public abstract class JDFAutoPerforatingParams extends JDFResource
         return (JDFPerforate) getElement(ElementName.PERFORATE, null, iSkip);
     }
 
-
-
-    public JDFPerforate appendPerforate()
+    /**
+     * (30) append element Perforate
+     */
+    public JDFPerforate appendPerforate() throws JDFException
     {
         return (JDFPerforate) appendElement(ElementName.PERFORATE, null);
     }

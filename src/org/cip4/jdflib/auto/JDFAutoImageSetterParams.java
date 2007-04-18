@@ -461,8 +461,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
             setAttribute(AttributeName.MIRRORAROUND, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute MirrorAround
           * @return the value of the attribute
@@ -471,8 +469,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
         {
             return EnumMirrorAround.getEnum(getAttribute(AttributeName.MIRRORAROUND, null, "None"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -487,8 +483,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
             setAttribute(AttributeName.POLARITY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Polarity
           * @return the value of the attribute
@@ -497,8 +491,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
         {
             return EnumPolarity.getEnum(getAttribute(AttributeName.POLARITY, null, "Positive"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -513,8 +505,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
             setAttribute(AttributeName.SIDES, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Sides
           * @return the value of the attribute
@@ -523,8 +513,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
         {
             return EnumSides.getEnum(getAttribute(AttributeName.SIDES, null, "OneSidedFront"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -539,8 +527,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
             setAttribute(AttributeName.ADVANCEDISTANCE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute AdvanceDistance
           * @return double the value of the attribute
@@ -549,8 +535,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
         {
             return getRealAttribute(AttributeName.ADVANCEDISTANCE, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -564,8 +548,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
         {
             setAttribute(AttributeName.BURNOUTAREA, value, null);
         }
-
-
 
         /**
           * (20) get JDFXYPair attribute BurnOutArea
@@ -588,8 +570,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute CenterAcross
@@ -603,8 +583,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
             setAttribute(AttributeName.CENTERACROSS, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute CenterAcross
           * @return the value of the attribute
@@ -613,8 +591,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
         {
             return EnumCenterAcross.getEnum(getAttribute(AttributeName.CENTERACROSS, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -629,8 +605,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
             setAttribute(AttributeName.CUTMEDIA, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute CutMedia
           * @return boolean the value of the attribute
@@ -639,8 +613,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.CUTMEDIA, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -655,8 +627,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
             setAttribute(AttributeName.MANUALFEED, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute ManualFeed
           * @return boolean the value of the attribute
@@ -665,8 +635,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.MANUALFEED, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -681,8 +649,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
             setAttribute(AttributeName.NONPRINTABLEMARGINBOTTOM, value, null);
         }
 
-
-
         /**
           * (17) get double attribute NonPrintableMarginBottom
           * @return double the value of the attribute
@@ -691,8 +657,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
         {
             return getRealAttribute(AttributeName.NONPRINTABLEMARGINBOTTOM, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -707,8 +671,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
             setAttribute(AttributeName.NONPRINTABLEMARGINLEFT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute NonPrintableMarginLeft
           * @return double the value of the attribute
@@ -717,8 +679,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
         {
             return getRealAttribute(AttributeName.NONPRINTABLEMARGINLEFT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -733,8 +693,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
             setAttribute(AttributeName.NONPRINTABLEMARGINRIGHT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute NonPrintableMarginRight
           * @return double the value of the attribute
@@ -743,8 +701,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
         {
             return getRealAttribute(AttributeName.NONPRINTABLEMARGINRIGHT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -759,8 +715,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
             setAttribute(AttributeName.NONPRINTABLEMARGINTOP, value, null);
         }
 
-
-
         /**
           * (17) get double attribute NonPrintableMarginTop
           * @return double the value of the attribute
@@ -769,8 +723,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
         {
             return getRealAttribute(AttributeName.NONPRINTABLEMARGINTOP, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -785,8 +737,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
             setAttribute(AttributeName.PUNCH, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Punch
           * @return boolean the value of the attribute
@@ -795,8 +745,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.PUNCH, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -811,8 +759,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
             setAttribute(AttributeName.PUNCHTYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute PunchType
           * @return the value of the attribute
@@ -821,8 +767,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
         {
             return getAttribute(AttributeName.PUNCHTYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -836,8 +780,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
         {
             setAttribute(AttributeName.RESOLUTION, value, null);
         }
-
-
 
         /**
           * (20) get JDFXYPair attribute Resolution
@@ -860,8 +802,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute RollCut
@@ -875,8 +815,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
             setAttribute(AttributeName.ROLLCUT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute RollCut
           * @return double the value of the attribute
@@ -885,8 +823,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
         {
             return getRealAttribute(AttributeName.ROLLCUT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -901,8 +837,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
             setAttribute(AttributeName.SOURCEWORKSTYLE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute SourceWorkStyle
           * @return the value of the attribute
@@ -911,8 +845,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
         {
             return EnumSourceWorkStyle.getEnum(getAttribute(AttributeName.SOURCEWORKSTYLE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -926,8 +858,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
         {
             setAttribute(AttributeName.TRANSFERCURVE, value, null);
         }
-
-
 
         /**
           * (20) get JDFTransferFunction attribute TransferCurve
@@ -950,8 +880,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -966,8 +894,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
         return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
     }
 
-
-
     /** (25) getCreateMedia
      * 
      * @return JDFMedia the element
@@ -977,17 +903,14 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
         return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMedia
+     * (29) append element Media
      */
     public JDFMedia appendMedia() throws JDFException
     {
         return (JDFMedia) appendElementN(ElementName.MEDIA, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -996,6 +919,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element FitPolicy
      * @return JDFFitPolicy the element
@@ -1004,8 +928,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
     {
         return (JDFFitPolicy) getElement(ElementName.FITPOLICY, null, 0);
     }
-
-
 
     /** (25) getCreateFitPolicy
      * 
@@ -1016,17 +938,14 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
         return (JDFFitPolicy) getCreateElement_KElement(ElementName.FITPOLICY, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFitPolicy
+     * (29) append element FitPolicy
      */
     public JDFFitPolicy appendFitPolicy() throws JDFException
     {
         return (JDFFitPolicy) appendElementN(ElementName.FITPOLICY, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -1035,4 +954,5 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

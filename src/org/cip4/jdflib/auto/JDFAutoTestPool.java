@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.devicecapability.JDFTest;
     /*
     *****************************************************************************
@@ -165,8 +166,6 @@ public abstract class JDFAutoTestPool extends JDFElement
         return (JDFTest)getCreateElement_KElement(ElementName.TEST, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Test
      * @param iSkip number of elements to skip
@@ -177,9 +176,10 @@ public abstract class JDFAutoTestPool extends JDFElement
         return (JDFTest) getElement(ElementName.TEST, null, iSkip);
     }
 
-
-
-    public JDFTest appendTest()
+    /**
+     * (30) append element Test
+     */
+    public JDFTest appendTest() throws JDFException
     {
         return (JDFTest) appendElement(ElementName.TEST, null);
     }

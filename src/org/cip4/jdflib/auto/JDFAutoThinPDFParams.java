@@ -169,8 +169,6 @@ public abstract class JDFAutoThinPDFParams extends JDFElement
             setAttribute(AttributeName.FILEPERPAGE, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute FilePerPage
           * @return boolean the value of the attribute
@@ -179,8 +177,6 @@ public abstract class JDFAutoThinPDFParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.FILEPERPAGE, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -195,8 +191,6 @@ public abstract class JDFAutoThinPDFParams extends JDFElement
             setAttribute(AttributeName.SIDELINEEPS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute SidelineEPS
           * @return boolean the value of the attribute
@@ -205,8 +199,6 @@ public abstract class JDFAutoThinPDFParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.SIDELINEEPS, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -221,8 +213,6 @@ public abstract class JDFAutoThinPDFParams extends JDFElement
             setAttribute(AttributeName.SIDELINEFONTS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute SidelineFonts
           * @return boolean the value of the attribute
@@ -231,8 +221,6 @@ public abstract class JDFAutoThinPDFParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.SIDELINEFONTS, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -247,8 +235,6 @@ public abstract class JDFAutoThinPDFParams extends JDFElement
             setAttribute(AttributeName.SIDELINEIMAGES, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute SidelineImages
           * @return boolean the value of the attribute
@@ -257,7 +243,5 @@ public abstract class JDFAutoThinPDFParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.SIDELINEIMAGES, null, false);
         }
-
-
 
 }// end namespace JDF

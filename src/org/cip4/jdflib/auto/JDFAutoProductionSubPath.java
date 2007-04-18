@@ -167,8 +167,6 @@ public abstract class JDFAutoProductionSubPath extends JDFElement
             setAttribute(AttributeName.PRODUCTIONPATHID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ProductionPathID
           * @return the value of the attribute
@@ -177,7 +175,5 @@ public abstract class JDFAutoProductionSubPath extends JDFElement
         {
             return getAttribute(AttributeName.PRODUCTIONPATHID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

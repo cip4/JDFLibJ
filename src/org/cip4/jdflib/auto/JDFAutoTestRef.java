@@ -175,8 +175,6 @@ public abstract class JDFAutoTestRef extends JDFResource
             setAttribute(AttributeName.RREF, value, null);
         }
 
-
-
         /**
           * (23) get String attribute rRef
           * @return the value of the attribute
@@ -185,7 +183,5 @@ public abstract class JDFAutoTestRef extends JDFResource
         {
             return getAttribute(AttributeName.RREF, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

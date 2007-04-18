@@ -181,8 +181,6 @@ public abstract class JDFAutoBundlingParams extends JDFResource
             setAttribute(AttributeName.COPIES, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Copies
           * @return int the value of the attribute
@@ -191,8 +189,6 @@ public abstract class JDFAutoBundlingParams extends JDFResource
         {
             return getIntAttribute(AttributeName.COPIES, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -207,8 +203,6 @@ public abstract class JDFAutoBundlingParams extends JDFResource
             setAttribute(AttributeName.LENGTHJDF, value, null);
         }
 
-
-
         /**
           * (17) get double attribute LengthJDF
           * @return double the value of the attribute
@@ -217,7 +211,5 @@ public abstract class JDFAutoBundlingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.LENGTHJDF, null, 0.0);
         }
-
-
 
 }// end namespace JDF

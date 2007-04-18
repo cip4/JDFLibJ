@@ -185,8 +185,6 @@ public abstract class JDFAutoTransferCurve extends JDFResource
             setAttribute(AttributeName.CURVE, value, null);
         }
 
-
-
         /**
           * (20) get JDFTransferFunction attribute Curve
           * @return JDFTransferFunction the value of the attribute, null if a the
@@ -208,8 +206,6 @@ public abstract class JDFAutoTransferCurve extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Separation
@@ -223,8 +219,6 @@ public abstract class JDFAutoTransferCurve extends JDFResource
             setAttribute(AttributeName.SEPARATION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Separation
           * @return the value of the attribute
@@ -233,7 +227,5 @@ public abstract class JDFAutoTransferCurve extends JDFResource
         {
             return getAttribute(AttributeName.SEPARATION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

@@ -78,6 +78,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
@@ -199,8 +200,6 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
             setAttribute(AttributeName.CONSUMABLETYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ConsumableType
           * @return the value of the attribute
@@ -209,8 +208,6 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
         {
             return getAttribute(AttributeName.CONSUMABLETYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -227,8 +224,6 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
         return (JDFContact)getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Contact
      * @param iSkip number of elements to skip
@@ -239,9 +234,10 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
         return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
     }
 
-
-
-    public JDFContact appendContact()
+    /**
+     * (30) append element Contact
+     */
+    public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -254,6 +250,7 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateIdentificationField
      * 
      * @param iSkip number of elements to skip
@@ -263,8 +260,6 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
     {
         return (JDFIdentificationField)getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element IdentificationField
@@ -276,9 +271,10 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
         return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
 
-
-
-    public JDFIdentificationField appendIdentificationField()
+    /**
+     * (30) append element IdentificationField
+     */
+    public JDFIdentificationField appendIdentificationField() throws JDFException
     {
         return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
     }
@@ -291,4 +287,5 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

@@ -166,8 +166,6 @@ public abstract class JDFAutoFCNKey extends JDFElement
             setAttribute(AttributeName.KEY, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Key
           * @return int the value of the attribute
@@ -176,7 +174,5 @@ public abstract class JDFAutoFCNKey extends JDFElement
         {
             return getIntAttribute(AttributeName.KEY, null, 0);
         }
-
-
 
 }// end namespace JDF

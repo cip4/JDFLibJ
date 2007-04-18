@@ -181,8 +181,6 @@ public abstract class JDFAutoPerformance extends JDFElement
             setAttribute(AttributeName.AVERAGEAMOUNT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute AverageAmount
           * @return double the value of the attribute
@@ -191,8 +189,6 @@ public abstract class JDFAutoPerformance extends JDFElement
         {
             return getRealAttribute(AttributeName.AVERAGEAMOUNT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -206,8 +202,6 @@ public abstract class JDFAutoPerformance extends JDFElement
         {
             setAttribute(AttributeName.AVERAGECLEANUP, value, null);
         }
-
-
 
         /**
           * (20) get JDFDuration attribute AverageCleanup
@@ -230,8 +224,6 @@ public abstract class JDFAutoPerformance extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute AverageSetup
@@ -244,8 +236,6 @@ public abstract class JDFAutoPerformance extends JDFElement
         {
             setAttribute(AttributeName.AVERAGESETUP, value, null);
         }
-
-
 
         /**
           * (20) get JDFDuration attribute AverageSetup
@@ -268,8 +258,6 @@ public abstract class JDFAutoPerformance extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute MaxAmount
@@ -283,8 +271,6 @@ public abstract class JDFAutoPerformance extends JDFElement
             setAttribute(AttributeName.MAXAMOUNT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute MaxAmount
           * @return double the value of the attribute
@@ -293,8 +279,6 @@ public abstract class JDFAutoPerformance extends JDFElement
         {
             return getRealAttribute(AttributeName.MAXAMOUNT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -308,8 +292,6 @@ public abstract class JDFAutoPerformance extends JDFElement
         {
             setAttribute(AttributeName.MAXCLEANUP, value, null);
         }
-
-
 
         /**
           * (20) get JDFDuration attribute MaxCleanup
@@ -332,8 +314,6 @@ public abstract class JDFAutoPerformance extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute MaxSetup
@@ -346,8 +326,6 @@ public abstract class JDFAutoPerformance extends JDFElement
         {
             setAttribute(AttributeName.MAXSETUP, value, null);
         }
-
-
 
         /**
           * (20) get JDFDuration attribute MaxSetup
@@ -370,8 +348,6 @@ public abstract class JDFAutoPerformance extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute MinAmount
@@ -385,8 +361,6 @@ public abstract class JDFAutoPerformance extends JDFElement
             setAttribute(AttributeName.MINAMOUNT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute MinAmount
           * @return double the value of the attribute
@@ -395,8 +369,6 @@ public abstract class JDFAutoPerformance extends JDFElement
         {
             return getRealAttribute(AttributeName.MINAMOUNT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -410,8 +382,6 @@ public abstract class JDFAutoPerformance extends JDFElement
         {
             setAttribute(AttributeName.MINCLEANUP, value, null);
         }
-
-
 
         /**
           * (20) get JDFDuration attribute MinCleanup
@@ -434,8 +404,6 @@ public abstract class JDFAutoPerformance extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute MinSetup
@@ -448,8 +416,6 @@ public abstract class JDFAutoPerformance extends JDFElement
         {
             setAttribute(AttributeName.MINSETUP, value, null);
         }
-
-
 
         /**
           * (20) get JDFDuration attribute MinSetup
@@ -472,8 +438,6 @@ public abstract class JDFAutoPerformance extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Name
@@ -487,8 +451,6 @@ public abstract class JDFAutoPerformance extends JDFElement
             setAttribute(AttributeName.NAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Name
           * @return the value of the attribute
@@ -497,8 +459,6 @@ public abstract class JDFAutoPerformance extends JDFElement
         {
             return getAttribute(AttributeName.NAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -513,8 +473,6 @@ public abstract class JDFAutoPerformance extends JDFElement
             setAttribute(AttributeName.DEVCAPSREF, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DevCapsRef
           * @return the value of the attribute
@@ -523,8 +481,6 @@ public abstract class JDFAutoPerformance extends JDFElement
         {
             return getAttribute(AttributeName.DEVCAPSREF, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -539,8 +495,6 @@ public abstract class JDFAutoPerformance extends JDFElement
             setAttribute(AttributeName.UNIT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Unit
           * @return the value of the attribute
@@ -549,7 +503,5 @@ public abstract class JDFAutoPerformance extends JDFElement
         {
             return getAttribute(AttributeName.UNIT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

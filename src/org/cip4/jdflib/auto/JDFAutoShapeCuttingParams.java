@@ -297,8 +297,6 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
             setAttribute(AttributeName.DELIVERYMODE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute DeliveryMode
           * @return the value of the attribute
@@ -307,8 +305,6 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
         {
             return EnumDeliveryMode.getEnum(getAttribute(AttributeName.DELIVERYMODE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -323,8 +319,6 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
             setAttribute(AttributeName.SHEETLAY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute SheetLay
           * @return the value of the attribute
@@ -333,8 +327,6 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
         {
             return EnumSheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -350,8 +342,6 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
         return (JDFDieLayout) getElement(ElementName.DIELAYOUT, null, 0);
     }
 
-
-
     /** (25) getCreateDieLayout
      * 
      * @return JDFDieLayout the element
@@ -361,17 +351,14 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
         return (JDFDieLayout) getCreateElement_KElement(ElementName.DIELAYOUT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDieLayout
+     * (29) append element DieLayout
      */
     public JDFDieLayout appendDieLayout() throws JDFException
     {
         return (JDFDieLayout) appendElementN(ElementName.DIELAYOUT, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -380,6 +367,7 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateShape
      * 
      * @param iSkip number of elements to skip
@@ -389,8 +377,6 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
     {
         return (JDFShapeElement)getCreateElement_KElement(ElementName.SHAPE, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Shape
@@ -402,9 +388,10 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
         return (JDFShapeElement) getElement(ElementName.SHAPE, null, iSkip);
     }
 
-
-
-    public JDFShapeElement appendShape()
+    /**
+     * (30) append element Shape
+     */
+    public JDFShapeElement appendShape() throws JDFException
     {
         return (JDFShapeElement) appendElement(ElementName.SHAPE, null);
     }

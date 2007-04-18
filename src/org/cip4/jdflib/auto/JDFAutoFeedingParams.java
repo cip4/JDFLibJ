@@ -74,6 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFCollatingItem;
 import org.cip4.jdflib.resource.process.JDFFeeder;
@@ -181,8 +182,6 @@ public abstract class JDFAutoFeedingParams extends JDFResource
         return (JDFFeeder)getCreateElement_KElement(ElementName.FEEDER, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Feeder
      * @param iSkip number of elements to skip
@@ -193,9 +192,10 @@ public abstract class JDFAutoFeedingParams extends JDFResource
         return (JDFFeeder) getElement(ElementName.FEEDER, null, iSkip);
     }
 
-
-
-    public JDFFeeder appendFeeder()
+    /**
+     * (30) append element Feeder
+     */
+    public JDFFeeder appendFeeder() throws JDFException
     {
         return (JDFFeeder) appendElement(ElementName.FEEDER, null);
     }
@@ -210,8 +210,6 @@ public abstract class JDFAutoFeedingParams extends JDFResource
         return (JDFCollatingItem)getCreateElement_KElement(ElementName.COLLATINGITEM, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element CollatingItem
      * @param iSkip number of elements to skip
@@ -222,9 +220,10 @@ public abstract class JDFAutoFeedingParams extends JDFResource
         return (JDFCollatingItem) getElement(ElementName.COLLATINGITEM, null, iSkip);
     }
 
-
-
-    public JDFCollatingItem appendCollatingItem()
+    /**
+     * (30) append element CollatingItem
+     */
+    public JDFCollatingItem appendCollatingItem() throws JDFException
     {
         return (JDFCollatingItem) appendElement(ElementName.COLLATINGITEM, null);
     }

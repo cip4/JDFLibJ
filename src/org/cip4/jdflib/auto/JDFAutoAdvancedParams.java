@@ -278,8 +278,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
             setAttribute(AttributeName.ALLOWPSXOBJECTS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute AllowPSXObjects
           * @return boolean the value of the attribute
@@ -288,8 +286,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.ALLOWPSXOBJECTS, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -304,8 +300,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
             setAttribute(AttributeName.ALLOWTRANSPARENCY, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute AllowTransparency
           * @return boolean the value of the attribute
@@ -314,8 +308,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.ALLOWTRANSPARENCY, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -330,8 +322,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
             setAttribute(AttributeName.AUTOPOSITIONEPSINFO, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute AutoPositionEPSInfo
           * @return boolean the value of the attribute
@@ -340,8 +330,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.AUTOPOSITIONEPSINFO, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -356,8 +344,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
             setAttribute(AttributeName.EMBEDJOBOPTIONS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute EmbedJobOptions
           * @return boolean the value of the attribute
@@ -366,8 +352,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.EMBEDJOBOPTIONS, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -382,8 +366,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
             setAttribute(AttributeName.EMITDSCWARNINGS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute EmitDSCWarnings
           * @return boolean the value of the attribute
@@ -392,8 +374,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.EMITDSCWARNINGS, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -408,8 +388,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
             setAttribute(AttributeName.LOCKDISTILLERPARAMS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute LockDistillerParams
           * @return boolean the value of the attribute
@@ -418,8 +396,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.LOCKDISTILLERPARAMS, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -434,8 +410,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
             setAttribute(AttributeName.PARSEDSCCOMMENTS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute ParseDSCComments
           * @return boolean the value of the attribute
@@ -444,8 +418,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.PARSEDSCCOMMENTS, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -460,8 +432,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
             setAttribute(AttributeName.PARSEDSCCOMMENTSFORDOCINFO, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute ParseDSCCommentsForDocInfo
           * @return boolean the value of the attribute
@@ -470,8 +440,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.PARSEDSCCOMMENTSFORDOCINFO, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -486,8 +454,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
             setAttribute(AttributeName.PASSTHROUGHJPEGIMAGES, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute PassThroughJPEGImages
           * @return boolean the value of the attribute
@@ -496,8 +462,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.PASSTHROUGHJPEGIMAGES, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -512,8 +476,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
             setAttribute(AttributeName.PRESERVECOPYPAGE, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute PreserveCopyPage
           * @return boolean the value of the attribute
@@ -522,8 +484,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.PRESERVECOPYPAGE, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -538,8 +498,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
             setAttribute(AttributeName.PRESERVEEPSINFO, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute PreserveEPSInfo
           * @return boolean the value of the attribute
@@ -548,8 +506,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.PRESERVEEPSINFO, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -564,8 +520,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
             setAttribute(AttributeName.PRESERVEHALFTONEINFO, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute PreserveHalftoneInfo
           * @return boolean the value of the attribute
@@ -574,8 +528,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.PRESERVEHALFTONEINFO, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -590,8 +542,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
             setAttribute(AttributeName.PRESERVEOVERPRINTSETTINGS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute PreserveOverprintSettings
           * @return boolean the value of the attribute
@@ -600,8 +550,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.PRESERVEOVERPRINTSETTINGS, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -616,8 +564,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
             setAttribute(AttributeName.PRESERVEOPICOMMENTS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute PreserveOPIComments
           * @return boolean the value of the attribute
@@ -626,8 +572,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.PRESERVEOPICOMMENTS, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -642,8 +586,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
             setAttribute(AttributeName.TRANSFERFUNCTIONINFO, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute TransferFunctionInfo
           * @return the value of the attribute
@@ -652,8 +594,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         {
             return EnumTransferFunctionInfo.getEnum(getAttribute(AttributeName.TRANSFERFUNCTIONINFO, null, "Preserve"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -668,8 +608,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
             setAttribute(AttributeName.UCRANDBGINFO, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute UCRandBGInfo
           * @return the value of the attribute
@@ -678,8 +616,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         {
             return EnumUCRandBGInfo.getEnum(getAttribute(AttributeName.UCRANDBGINFO, null, "Preserve"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -694,8 +630,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
             setAttribute(AttributeName.USEPROLOGUE, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute UsePrologue
           * @return boolean the value of the attribute
@@ -704,7 +638,5 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.USEPROLOGUE, null, false);
         }
-
-
 
 }// end namespace JDF

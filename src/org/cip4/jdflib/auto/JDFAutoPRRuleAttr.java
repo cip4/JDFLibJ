@@ -172,8 +172,6 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
             setAttribute(AttributeName.GROUPBY, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute GroupBy
           * @return VString the value of the attribute
@@ -185,8 +183,6 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -201,8 +197,6 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
             setAttribute(AttributeName.REPORTATTR, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute ReportAttr
           * @return VString the value of the attribute
@@ -214,8 +208,6 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -230,8 +222,6 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
             setAttribute(AttributeName.LOGERRORS, value, null);
         }
 
-
-
         /**
           * (15) get int attribute LogErrors
           * @return int the value of the attribute
@@ -240,8 +230,6 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
         {
             return getIntAttribute(AttributeName.LOGERRORS, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -256,8 +244,6 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
             setAttribute(AttributeName.MAXGROUPS, value, null);
         }
 
-
-
         /**
           * (15) get int attribute MaxGroups
           * @return int the value of the attribute
@@ -266,8 +252,6 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
         {
             return getIntAttribute(AttributeName.MAXGROUPS, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -282,8 +266,6 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
             setAttribute(AttributeName.MAXPERGROUP, value, null);
         }
 
-
-
         /**
           * (15) get int attribute MaxPerGroup
           * @return int the value of the attribute
@@ -292,7 +274,5 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
         {
             return getIntAttribute(AttributeName.MAXPERGROUP, null, 0);
         }
-
-
 
 }// end namespace JDF

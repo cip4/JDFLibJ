@@ -408,8 +408,6 @@ public abstract class JDFAutoExposedMedia extends JDFResource
             setAttribute(AttributeName.POLARITY, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Polarity
           * @return boolean the value of the attribute
@@ -418,8 +416,6 @@ public abstract class JDFAutoExposedMedia extends JDFResource
         {
             return getBoolAttribute(AttributeName.POLARITY, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -434,8 +430,6 @@ public abstract class JDFAutoExposedMedia extends JDFResource
             setAttribute(AttributeName.COLORTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ColorType
           * @return the value of the attribute
@@ -444,8 +438,6 @@ public abstract class JDFAutoExposedMedia extends JDFResource
         {
             return EnumColorType.getEnum(getAttribute(AttributeName.COLORTYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -460,11 +452,9 @@ public abstract class JDFAutoExposedMedia extends JDFResource
             setAttribute(AttributeName.PAGELISTINDEX, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerRangeList attribute PageListIndex
-          * @return JDFIntegerRangeListthe value of the attribute, null if a the
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerRangeList
           */
         public JDFIntegerRangeList getPageListIndex()
@@ -483,8 +473,6 @@ public abstract class JDFAutoExposedMedia extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute PlateType
@@ -498,8 +486,6 @@ public abstract class JDFAutoExposedMedia extends JDFResource
             setAttribute(AttributeName.PLATETYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute PlateType
           * @return the value of the attribute
@@ -508,8 +494,6 @@ public abstract class JDFAutoExposedMedia extends JDFResource
         {
             return EnumPlateType.getEnum(getAttribute(AttributeName.PLATETYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -524,8 +508,6 @@ public abstract class JDFAutoExposedMedia extends JDFResource
             setAttribute(AttributeName.PROOFNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ProofName
           * @return the value of the attribute
@@ -534,8 +516,6 @@ public abstract class JDFAutoExposedMedia extends JDFResource
         {
             return getAttribute(AttributeName.PROOFNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -550,8 +530,6 @@ public abstract class JDFAutoExposedMedia extends JDFResource
             setAttribute(AttributeName.PROOFQUALITY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ProofQuality
           * @return the value of the attribute
@@ -560,8 +538,6 @@ public abstract class JDFAutoExposedMedia extends JDFResource
         {
             return EnumProofQuality.getEnum(getAttribute(AttributeName.PROOFQUALITY, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -576,8 +552,6 @@ public abstract class JDFAutoExposedMedia extends JDFResource
             setAttribute(AttributeName.PROOFTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ProofType
           * @return the value of the attribute
@@ -586,8 +560,6 @@ public abstract class JDFAutoExposedMedia extends JDFResource
         {
             return EnumProofType.getEnum(getAttribute(AttributeName.PROOFTYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -602,8 +574,6 @@ public abstract class JDFAutoExposedMedia extends JDFResource
             setAttribute(AttributeName.PUNCHTYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute PunchType
           * @return the value of the attribute
@@ -612,8 +582,6 @@ public abstract class JDFAutoExposedMedia extends JDFResource
         {
             return getAttribute(AttributeName.PUNCHTYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -628,11 +596,9 @@ public abstract class JDFAutoExposedMedia extends JDFResource
             setAttribute(AttributeName.RESOLUTION, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute Resolution
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getResolution()
@@ -651,8 +617,6 @@ public abstract class JDFAutoExposedMedia extends JDFResource
             return nPlaceHolder;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -667,8 +631,6 @@ public abstract class JDFAutoExposedMedia extends JDFResource
         return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
     /** (25) getCreateFileSpec
      * 
      * @return JDFFileSpec the element
@@ -678,17 +640,14 @@ public abstract class JDFAutoExposedMedia extends JDFResource
         return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFileSpec
+     * (29) append element FileSpec
      */
     public JDFFileSpec appendFileSpec() throws JDFException
     {
         return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -697,6 +656,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element Media
      * @return JDFMedia the element
@@ -705,8 +665,6 @@ public abstract class JDFAutoExposedMedia extends JDFResource
     {
         return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
     }
-
-
 
     /** (25) getCreateMedia
      * 
@@ -717,17 +675,14 @@ public abstract class JDFAutoExposedMedia extends JDFResource
         return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMedia
+     * (29) append element Media
      */
     public JDFMedia appendMedia() throws JDFException
     {
         return (JDFMedia) appendElementN(ElementName.MEDIA, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -736,6 +691,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element PageList
      * @return JDFPageList the element
@@ -744,8 +700,6 @@ public abstract class JDFAutoExposedMedia extends JDFResource
     {
         return (JDFPageList) getElement(ElementName.PAGELIST, null, 0);
     }
-
-
 
     /** (25) getCreatePageList
      * 
@@ -756,17 +710,14 @@ public abstract class JDFAutoExposedMedia extends JDFResource
         return (JDFPageList) getCreateElement_KElement(ElementName.PAGELIST, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPageList
+     * (29) append element PageList
      */
     public JDFPageList appendPageList() throws JDFException
     {
         return (JDFPageList) appendElementN(ElementName.PAGELIST, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -775,6 +726,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element ScreeningParams
      * @return JDFScreeningParams the element
@@ -783,8 +735,6 @@ public abstract class JDFAutoExposedMedia extends JDFResource
     {
         return (JDFScreeningParams) getElement(ElementName.SCREENINGPARAMS, null, 0);
     }
-
-
 
     /** (25) getCreateScreeningParams
      * 
@@ -795,17 +745,14 @@ public abstract class JDFAutoExposedMedia extends JDFResource
         return (JDFScreeningParams) getCreateElement_KElement(ElementName.SCREENINGPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementScreeningParams
+     * (29) append element ScreeningParams
      */
     public JDFScreeningParams appendScreeningParams() throws JDFException
     {
         return (JDFScreeningParams) appendElementN(ElementName.SCREENINGPARAMS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -814,6 +761,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateContact
      * 
      * @param iSkip number of elements to skip
@@ -823,8 +771,6 @@ public abstract class JDFAutoExposedMedia extends JDFResource
     {
         return (JDFContact)getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Contact
@@ -836,9 +782,10 @@ public abstract class JDFAutoExposedMedia extends JDFResource
         return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
     }
 
-
-
-    public JDFContact appendContact()
+    /**
+     * (30) append element Contact
+     */
+    public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -851,6 +798,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateIdentificationField
      * 
      * @param iSkip number of elements to skip
@@ -860,8 +808,6 @@ public abstract class JDFAutoExposedMedia extends JDFResource
     {
         return (JDFIdentificationField)getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element IdentificationField
@@ -873,9 +819,10 @@ public abstract class JDFAutoExposedMedia extends JDFResource
         return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
 
-
-
-    public JDFIdentificationField appendIdentificationField()
+    /**
+     * (30) append element IdentificationField
+     */
+    public JDFIdentificationField appendIdentificationField() throws JDFException
     {
         return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
     }
@@ -888,4 +835,5 @@ public abstract class JDFAutoExposedMedia extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

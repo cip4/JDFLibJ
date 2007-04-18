@@ -165,8 +165,6 @@ public abstract class JDFAutoStripBinding extends JDFElement
         return (JDFHoleList) getElement(ElementName.HOLELIST, null, 0);
     }
 
-
-
     /** (25) getCreateHoleList
      * 
      * @return JDFHoleList the element
@@ -176,15 +174,12 @@ public abstract class JDFAutoStripBinding extends JDFElement
         return (JDFHoleList) getCreateElement_KElement(ElementName.HOLELIST, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementHoleList
+     * (29) append element HoleList
      */
     public JDFHoleList appendHoleList() throws JDFException
     {
         return (JDFHoleList) appendElementN(ElementName.HOLELIST, 1, null);
     }
+
 }// end namespace JDF

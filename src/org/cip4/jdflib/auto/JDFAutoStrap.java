@@ -83,6 +83,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
@@ -251,8 +252,6 @@ public abstract class JDFAutoStrap extends JDFResource
             setAttribute(AttributeName.MATERIAL, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Material
           * @return the value of the attribute
@@ -261,8 +260,6 @@ public abstract class JDFAutoStrap extends JDFResource
         {
             return EnumMaterial.getEnum(getAttribute(AttributeName.MATERIAL, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -277,8 +274,6 @@ public abstract class JDFAutoStrap extends JDFResource
             setAttribute(AttributeName.STRAPCOLOR, value.getName(), null);
         }
 
-
-
         /**
           * (19) get EnumNamedColor attribute StrapColor
           * @return EnumNamedColor the value of the attribute
@@ -291,8 +286,6 @@ public abstract class JDFAutoStrap extends JDFResource
             nPlaceHolder = EnumNamedColor.getEnum(strAttrName);
             return nPlaceHolder;
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -309,8 +302,6 @@ public abstract class JDFAutoStrap extends JDFResource
         return (JDFContact)getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Contact
      * @param iSkip number of elements to skip
@@ -321,9 +312,10 @@ public abstract class JDFAutoStrap extends JDFResource
         return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
     }
 
-
-
-    public JDFContact appendContact()
+    /**
+     * (30) append element Contact
+     */
+    public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -336,6 +328,7 @@ public abstract class JDFAutoStrap extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateIdentificationField
      * 
      * @param iSkip number of elements to skip
@@ -345,8 +338,6 @@ public abstract class JDFAutoStrap extends JDFResource
     {
         return (JDFIdentificationField)getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element IdentificationField
@@ -358,9 +349,10 @@ public abstract class JDFAutoStrap extends JDFResource
         return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
 
-
-
-    public JDFIdentificationField appendIdentificationField()
+    /**
+     * (30) append element IdentificationField
+     */
+    public JDFIdentificationField appendIdentificationField() throws JDFException
     {
         return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
     }
@@ -373,4 +365,5 @@ public abstract class JDFAutoStrap extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

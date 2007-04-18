@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.devicecapability.JDFLoc;
     /*
     *****************************************************************************
@@ -165,8 +166,6 @@ public abstract class JDFAutoDisplayGroup extends JDFElement
         return (JDFLoc)getCreateElement_KElement(ElementName.LOC, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Loc
      * @param iSkip number of elements to skip
@@ -177,9 +176,10 @@ public abstract class JDFAutoDisplayGroup extends JDFElement
         return (JDFLoc) getElement(ElementName.LOC, null, iSkip);
     }
 
-
-
-    public JDFLoc appendLoc()
+    /**
+     * (30) append element Loc
+     */
+    public JDFLoc appendLoc() throws JDFException
     {
         return (JDFLoc) appendElement(ElementName.LOC, null);
     }

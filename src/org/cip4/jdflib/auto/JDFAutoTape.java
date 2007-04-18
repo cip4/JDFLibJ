@@ -165,8 +165,6 @@ public abstract class JDFAutoTape extends JDFElement
         return (JDFSpanNamedColor) getElement(ElementName.TAPECOLOR, null, 0);
     }
 
-
-
     /** (25) getCreateTapeColor
      * 
      * @return JDFSpanNamedColor the element
@@ -176,15 +174,12 @@ public abstract class JDFAutoTape extends JDFElement
         return (JDFSpanNamedColor) getCreateElement_KElement(ElementName.TAPECOLOR, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementTapeColor
+     * (29) append element TapeColor
      */
     public JDFSpanNamedColor appendTapeColor() throws JDFException
     {
         return (JDFSpanNamedColor) appendElementN(ElementName.TAPECOLOR, 1, null);
     }
+
 }// end namespace JDF

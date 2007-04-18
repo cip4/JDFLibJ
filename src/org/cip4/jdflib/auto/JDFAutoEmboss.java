@@ -367,8 +367,6 @@ public abstract class JDFAutoEmboss extends JDFElement
             setAttribute(AttributeName.DIRECTION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Direction
           * @return the value of the attribute
@@ -377,8 +375,6 @@ public abstract class JDFAutoEmboss extends JDFElement
         {
             return EnumDirection.getEnum(getAttribute(AttributeName.DIRECTION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -393,8 +389,6 @@ public abstract class JDFAutoEmboss extends JDFElement
             setAttribute(AttributeName.EDGEANGLE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute EdgeAngle
           * @return double the value of the attribute
@@ -403,8 +397,6 @@ public abstract class JDFAutoEmboss extends JDFElement
         {
             return getRealAttribute(AttributeName.EDGEANGLE, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -419,8 +411,6 @@ public abstract class JDFAutoEmboss extends JDFElement
             setAttribute(AttributeName.EDGESHAPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute EdgeShape
           * @return the value of the attribute
@@ -429,8 +419,6 @@ public abstract class JDFAutoEmboss extends JDFElement
         {
             return EnumEdgeShape.getEnum(getAttribute(AttributeName.EDGESHAPE, null, "Rounded"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -445,8 +433,6 @@ public abstract class JDFAutoEmboss extends JDFElement
             setAttribute(AttributeName.EMBOSSINGTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute EmbossingType
           * @return the value of the attribute
@@ -455,8 +441,6 @@ public abstract class JDFAutoEmboss extends JDFElement
         {
             return EnumEmbossingType.getEnum(getAttribute(AttributeName.EMBOSSINGTYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -471,8 +455,6 @@ public abstract class JDFAutoEmboss extends JDFElement
             setAttribute(AttributeName.HEIGHT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Height
           * @return double the value of the attribute
@@ -481,8 +463,6 @@ public abstract class JDFAutoEmboss extends JDFElement
         {
             return getRealAttribute(AttributeName.HEIGHT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -497,11 +477,9 @@ public abstract class JDFAutoEmboss extends JDFElement
             setAttribute(AttributeName.IMAGESIZE, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute ImageSize
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getImageSize()
@@ -520,8 +498,6 @@ public abstract class JDFAutoEmboss extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Level
@@ -535,8 +511,6 @@ public abstract class JDFAutoEmboss extends JDFElement
             setAttribute(AttributeName.LEVEL, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Level
           * @return the value of the attribute
@@ -545,8 +519,6 @@ public abstract class JDFAutoEmboss extends JDFElement
         {
             return EnumLevel.getEnum(getAttribute(AttributeName.LEVEL, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -561,11 +533,9 @@ public abstract class JDFAutoEmboss extends JDFElement
             setAttribute(AttributeName.POSITION, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute Position
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getPosition()
@@ -583,7 +553,5 @@ public abstract class JDFAutoEmboss extends JDFElement
             }
             return nPlaceHolder;
         }
-
-
 
 }// end namespace JDF

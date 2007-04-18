@@ -294,8 +294,6 @@ public abstract class JDFAutoFeeder extends JDFElement
             setAttribute(AttributeName.ALTERNATEPOSITIONS, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerList attribute AlternatePositions
           * @return JDFIntegerList the value of the attribute, null if a the
@@ -317,8 +315,6 @@ public abstract class JDFAutoFeeder extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Position
@@ -332,8 +328,6 @@ public abstract class JDFAutoFeeder extends JDFElement
             setAttribute(AttributeName.POSITION, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Position
           * @return int the value of the attribute
@@ -342,8 +336,6 @@ public abstract class JDFAutoFeeder extends JDFElement
         {
             return getIntAttribute(AttributeName.POSITION, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -358,8 +350,6 @@ public abstract class JDFAutoFeeder extends JDFElement
             setAttribute(AttributeName.FEEDERSYNCHRONIZATION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute FeederSynchronization
           * @return the value of the attribute
@@ -368,8 +358,6 @@ public abstract class JDFAutoFeeder extends JDFElement
         {
             return EnumFeederSynchronization.getEnum(getAttribute(AttributeName.FEEDERSYNCHRONIZATION, null, "Primary"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -384,8 +372,6 @@ public abstract class JDFAutoFeeder extends JDFElement
             setAttribute(AttributeName.FEEDERTYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute FeederType
           * @return the value of the attribute
@@ -394,8 +380,6 @@ public abstract class JDFAutoFeeder extends JDFElement
         {
             return getAttribute(AttributeName.FEEDERTYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -410,8 +394,6 @@ public abstract class JDFAutoFeeder extends JDFElement
             setAttribute(AttributeName.LOADING, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Loading
           * @return the value of the attribute
@@ -420,8 +402,6 @@ public abstract class JDFAutoFeeder extends JDFElement
         {
             return getAttribute(AttributeName.LOADING, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -436,8 +416,6 @@ public abstract class JDFAutoFeeder extends JDFElement
             setAttribute(AttributeName.OPENING, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Opening
           * @return the value of the attribute
@@ -446,8 +424,6 @@ public abstract class JDFAutoFeeder extends JDFElement
         {
             return EnumOpening.getEnum(getAttribute(AttributeName.OPENING, null, "None"));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -463,8 +439,6 @@ public abstract class JDFAutoFeeder extends JDFElement
         return (JDFComponent) getElement(ElementName.COMPONENT, null, 0);
     }
 
-
-
     /** (25) getCreateComponent
      * 
      * @return JDFComponent the element
@@ -474,17 +448,14 @@ public abstract class JDFAutoFeeder extends JDFElement
         return (JDFComponent) getCreateElement_KElement(ElementName.COMPONENT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementComponent
+     * (29) append element Component
      */
     public JDFComponent appendComponent() throws JDFException
     {
         return (JDFComponent) appendElementN(ElementName.COMPONENT, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -493,6 +464,7 @@ public abstract class JDFAutoFeeder extends JDFElement
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element FeederQualityParams
      * @return JDFFeederQualityParams the element
@@ -501,8 +473,6 @@ public abstract class JDFAutoFeeder extends JDFElement
     {
         return (JDFFeederQualityParams) getElement(ElementName.FEEDERQUALITYPARAMS, null, 0);
     }
-
-
 
     /** (25) getCreateFeederQualityParams
      * 
@@ -513,17 +483,14 @@ public abstract class JDFAutoFeeder extends JDFElement
         return (JDFFeederQualityParams) getCreateElement_KElement(ElementName.FEEDERQUALITYPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFeederQualityParams
+     * (29) append element FeederQualityParams
      */
     public JDFFeederQualityParams appendFeederQualityParams() throws JDFException
     {
         return (JDFFeederQualityParams) appendElementN(ElementName.FEEDERQUALITYPARAMS, 1, null);
     }
+
     /**
      * (24) const get element Media
      * @return JDFMedia the element
@@ -532,8 +499,6 @@ public abstract class JDFAutoFeeder extends JDFElement
     {
         return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
     }
-
-
 
     /** (25) getCreateMedia
      * 
@@ -544,17 +509,14 @@ public abstract class JDFAutoFeeder extends JDFElement
         return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMedia
+     * (29) append element Media
      */
     public JDFMedia appendMedia() throws JDFException
     {
         return (JDFMedia) appendElementN(ElementName.MEDIA, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -563,4 +525,5 @@ public abstract class JDFAutoFeeder extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

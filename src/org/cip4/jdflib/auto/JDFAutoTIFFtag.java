@@ -176,8 +176,6 @@ public abstract class JDFAutoTIFFtag extends JDFElement
             setAttribute(AttributeName.TAGNUMBER, value, null);
         }
 
-
-
         /**
           * (15) get int attribute TagNumber
           * @return int the value of the attribute
@@ -186,8 +184,6 @@ public abstract class JDFAutoTIFFtag extends JDFElement
         {
             return getIntAttribute(AttributeName.TAGNUMBER, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -202,8 +198,6 @@ public abstract class JDFAutoTIFFtag extends JDFElement
             setAttribute(AttributeName.TAGTYPE, value, null);
         }
 
-
-
         /**
           * (15) get int attribute TagType
           * @return int the value of the attribute
@@ -212,8 +206,6 @@ public abstract class JDFAutoTIFFtag extends JDFElement
         {
             return getIntAttribute(AttributeName.TAGTYPE, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -227,8 +219,6 @@ public abstract class JDFAutoTIFFtag extends JDFElement
         {
             setAttribute(AttributeName.INTEGERVALUE, value, null);
         }
-
-
 
         /**
           * (20) get JDFIntegerList attribute IntegerValue
@@ -251,8 +241,6 @@ public abstract class JDFAutoTIFFtag extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute NumberValue
@@ -265,8 +253,6 @@ public abstract class JDFAutoTIFFtag extends JDFElement
         {
             setAttribute(AttributeName.NUMBERVALUE, value, null);
         }
-
-
 
         /**
           * (20) get JDFNumberList attribute NumberValue
@@ -289,8 +275,6 @@ public abstract class JDFAutoTIFFtag extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute StringValue
@@ -304,8 +288,6 @@ public abstract class JDFAutoTIFFtag extends JDFElement
             setAttribute(AttributeName.STRINGVALUE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute StringValue
           * @return the value of the attribute
@@ -314,8 +296,6 @@ public abstract class JDFAutoTIFFtag extends JDFElement
         {
             return getAttribute(AttributeName.STRINGVALUE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -330,8 +310,6 @@ public abstract class JDFAutoTIFFtag extends JDFElement
             setAttribute(AttributeName.BINARYVALUE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute BinaryValue
           * @return the value of the attribute
@@ -340,7 +318,5 @@ public abstract class JDFAutoTIFFtag extends JDFElement
         {
             return getAttribute(AttributeName.BINARYVALUE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

@@ -272,8 +272,6 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
             setAttribute(AttributeName.FROMBOX, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute FromBox
           * @return the value of the attribute
@@ -282,8 +280,6 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
         {
             return EnumFromBox.getEnum(getAttribute(AttributeName.FROMBOX, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -298,8 +294,6 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
             setAttribute(AttributeName.TOBOX, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ToBox
           * @return the value of the attribute
@@ -308,7 +302,5 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
         {
             return EnumToBox.getEnum(getAttribute(AttributeName.TOBOX, null, null));
         }
-
-
 
 }// end namespace JDF

@@ -181,8 +181,6 @@ public abstract class JDFAutoManualLaborParams extends JDFResource
             setAttribute(AttributeName.LABORTYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute LaborType
           * @return the value of the attribute
@@ -191,7 +189,5 @@ public abstract class JDFAutoManualLaborParams extends JDFResource
         {
             return getAttribute(AttributeName.LABORTYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

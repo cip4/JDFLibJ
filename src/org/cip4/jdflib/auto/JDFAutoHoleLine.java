@@ -197,8 +197,6 @@ public abstract class JDFAutoHoleLine extends JDFResource
             setAttribute(AttributeName.PITCH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Pitch
           * @return double the value of the attribute
@@ -207,8 +205,6 @@ public abstract class JDFAutoHoleLine extends JDFResource
         {
             return getRealAttribute(AttributeName.PITCH, null, 0.0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -224,8 +220,6 @@ public abstract class JDFAutoHoleLine extends JDFResource
         return (JDFHole) getElement(ElementName.HOLE, null, 0);
     }
 
-
-
     /** (25) getCreateHole
      * 
      * @return JDFHole the element
@@ -235,15 +229,12 @@ public abstract class JDFAutoHoleLine extends JDFResource
         return (JDFHole) getCreateElement_KElement(ElementName.HOLE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementHole
+     * (29) append element Hole
      */
     public JDFHole appendHole() throws JDFException
     {
         return (JDFHole) appendElementN(ElementName.HOLE, 1, null);
     }
+
 }// end namespace JDF

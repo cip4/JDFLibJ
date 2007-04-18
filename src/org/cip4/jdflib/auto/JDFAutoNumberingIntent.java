@@ -169,8 +169,6 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
         return (JDFSpanNamedColor) getElement(ElementName.COLORNAME, null, 0);
     }
 
-
-
     /** (25) getCreateColorName
      * 
      * @return JDFSpanNamedColor the element
@@ -180,17 +178,14 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
         return (JDFSpanNamedColor) getCreateElement_KElement(ElementName.COLORNAME, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementColorName
+     * (29) append element ColorName
      */
     public JDFSpanNamedColor appendColorName() throws JDFException
     {
         return (JDFSpanNamedColor) appendElementN(ElementName.COLORNAME, 1, null);
     }
+
     /**
      * (24) const get element ColorPool
      * @return JDFColorPool the element
@@ -199,8 +194,6 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
     {
         return (JDFColorPool) getElement(ElementName.COLORPOOL, null, 0);
     }
-
-
 
     /** (25) getCreateColorPool
      * 
@@ -211,17 +204,14 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
         return (JDFColorPool) getCreateElement_KElement(ElementName.COLORPOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementColorPool
+     * (29) append element ColorPool
      */
     public JDFColorPool appendColorPool() throws JDFException
     {
         return (JDFColorPool) appendElementN(ElementName.COLORPOOL, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -230,6 +220,7 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateNumberItem
      * 
      * @param iSkip number of elements to skip
@@ -239,8 +230,6 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
     {
         return (JDFNumberItem)getCreateElement_KElement(ElementName.NUMBERITEM, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element NumberItem
@@ -252,9 +241,10 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
         return (JDFNumberItem) getElement(ElementName.NUMBERITEM, null, iSkip);
     }
 
-
-
-    public JDFNumberItem appendNumberItem()
+    /**
+     * (30) append element NumberItem
+     */
+    public JDFNumberItem appendNumberItem() throws JDFException
     {
         return (JDFNumberItem) appendElement(ElementName.NUMBERITEM, null);
     }

@@ -271,8 +271,6 @@ public abstract class JDFAutoCrease extends JDFElement
             setAttribute(AttributeName.DEPTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Depth
           * @return double the value of the attribute
@@ -281,8 +279,6 @@ public abstract class JDFAutoCrease extends JDFElement
         {
             return getRealAttribute(AttributeName.DEPTH, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -297,11 +293,9 @@ public abstract class JDFAutoCrease extends JDFElement
             setAttribute(AttributeName.RELATIVESTARTPOSITION, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute RelativeStartPosition
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getRelativeStartPosition()
@@ -320,8 +314,6 @@ public abstract class JDFAutoCrease extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute RelativeWorkingPath
@@ -335,11 +327,9 @@ public abstract class JDFAutoCrease extends JDFElement
             setAttribute(AttributeName.RELATIVEWORKINGPATH, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute RelativeWorkingPath
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getRelativeWorkingPath()
@@ -358,8 +348,6 @@ public abstract class JDFAutoCrease extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute StartPosition
@@ -373,11 +361,9 @@ public abstract class JDFAutoCrease extends JDFElement
             setAttribute(AttributeName.STARTPOSITION, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute StartPosition
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getStartPosition()
@@ -396,8 +382,6 @@ public abstract class JDFAutoCrease extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute WorkingPath
@@ -411,11 +395,9 @@ public abstract class JDFAutoCrease extends JDFElement
             setAttribute(AttributeName.WORKINGPATH, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute WorkingPath
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getWorkingPath()
@@ -434,8 +416,6 @@ public abstract class JDFAutoCrease extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute WorkingDirection
@@ -449,8 +429,6 @@ public abstract class JDFAutoCrease extends JDFElement
             setAttribute(AttributeName.WORKINGDIRECTION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute WorkingDirection
           * @return the value of the attribute
@@ -459,8 +437,6 @@ public abstract class JDFAutoCrease extends JDFElement
         {
             return EnumWorkingDirection.getEnum(getAttribute(AttributeName.WORKINGDIRECTION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -475,8 +451,6 @@ public abstract class JDFAutoCrease extends JDFElement
             setAttribute(AttributeName.TRAVEL, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Travel
           * @return double the value of the attribute
@@ -485,8 +459,6 @@ public abstract class JDFAutoCrease extends JDFElement
         {
             return getRealAttribute(AttributeName.TRAVEL, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -501,8 +473,6 @@ public abstract class JDFAutoCrease extends JDFElement
             setAttribute(AttributeName.RELATIVETRAVEL, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute RelativeTravel
           * @return the value of the attribute
@@ -511,7 +481,5 @@ public abstract class JDFAutoCrease extends JDFElement
         {
             return EnumRelativeTravel.getEnum(getAttribute(AttributeName.RELATIVETRAVEL, null, null));
         }
-
-
 
 }// end namespace JDF

@@ -358,8 +358,6 @@ public abstract class JDFAutoAssembly extends JDFResource
             setAttribute(AttributeName.JOGSIDE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute JogSide
           * @return the value of the attribute
@@ -368,8 +366,6 @@ public abstract class JDFAutoAssembly extends JDFResource
         {
             return EnumJogSide.getEnum(getAttribute(AttributeName.JOGSIDE, null, "Top"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -384,8 +380,6 @@ public abstract class JDFAutoAssembly extends JDFResource
             setAttribute(AttributeName.ORDER, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Order
           * @return the value of the attribute
@@ -394,8 +388,6 @@ public abstract class JDFAutoAssembly extends JDFResource
         {
             return EnumOrder.getEnum(getAttribute(AttributeName.ORDER, null, "Gathering"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -410,8 +402,6 @@ public abstract class JDFAutoAssembly extends JDFResource
             setAttribute(AttributeName.BINDINGSIDE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute BindingSide
           * @return the value of the attribute
@@ -420,8 +410,6 @@ public abstract class JDFAutoAssembly extends JDFResource
         {
             return EnumBindingSide.getEnum(getAttribute(AttributeName.BINDINGSIDE, null, "Left"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -436,8 +424,6 @@ public abstract class JDFAutoAssembly extends JDFResource
             setAttribute(AttributeName.ASSEMBLYID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute AssemblyID
           * @return the value of the attribute
@@ -446,8 +432,6 @@ public abstract class JDFAutoAssembly extends JDFResource
         {
             return getAttribute(AttributeName.ASSEMBLYID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -462,8 +446,6 @@ public abstract class JDFAutoAssembly extends JDFResource
             setAttribute(AttributeName.ASSEMBLYIDS, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute AssemblyIDs
           * @return VString the value of the attribute
@@ -475,8 +457,6 @@ public abstract class JDFAutoAssembly extends JDFResource
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -491,8 +471,6 @@ public abstract class JDFAutoAssembly extends JDFResource
             setAttribute(AttributeName.JOBID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobID
           * @return the value of the attribute
@@ -501,8 +479,6 @@ public abstract class JDFAutoAssembly extends JDFResource
         {
             return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -517,11 +493,9 @@ public abstract class JDFAutoAssembly extends JDFResource
             setAttribute(AttributeName.PHYSICALSECTION, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerList attribute PhysicalSection
-          * @return JDFIntegerListthe value of the attribute, null if a the
+          * @return JDFIntegerList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerList
           */
         public JDFIntegerList getPhysicalSection()
@@ -540,8 +514,6 @@ public abstract class JDFAutoAssembly extends JDFResource
             return nPlaceHolder;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -557,8 +529,6 @@ public abstract class JDFAutoAssembly extends JDFResource
         return (JDFAssemblySection)getCreateElement_KElement(ElementName.ASSEMBLYSECTION, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element AssemblySection
      * @param iSkip number of elements to skip
@@ -569,9 +539,10 @@ public abstract class JDFAutoAssembly extends JDFResource
         return (JDFAssemblySection) getElement(ElementName.ASSEMBLYSECTION, null, iSkip);
     }
 
-
-
-    public JDFAssemblySection appendAssemblySection()
+    /**
+     * (30) append element AssemblySection
+     */
+    public JDFAssemblySection appendAssemblySection() throws JDFException
     {
         return (JDFAssemblySection) appendElement(ElementName.ASSEMBLYSECTION, null);
     }
@@ -585,8 +556,6 @@ public abstract class JDFAutoAssembly extends JDFResource
         return (JDFPageList) getElement(ElementName.PAGELIST, null, 0);
     }
 
-
-
     /** (25) getCreatePageList
      * 
      * @return JDFPageList the element
@@ -596,17 +565,14 @@ public abstract class JDFAutoAssembly extends JDFResource
         return (JDFPageList) getCreateElement_KElement(ElementName.PAGELIST, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPageList
+     * (29) append element PageList
      */
     public JDFPageList appendPageList() throws JDFException
     {
         return (JDFPageList) appendElementN(ElementName.PAGELIST, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -615,6 +581,7 @@ public abstract class JDFAutoAssembly extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreatePageAssignedList
      * 
      * @param iSkip number of elements to skip
@@ -624,8 +591,6 @@ public abstract class JDFAutoAssembly extends JDFResource
     {
         return (JDFPageAssignedList)getCreateElement_KElement(ElementName.PAGEASSIGNEDLIST, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element PageAssignedList
@@ -637,9 +602,10 @@ public abstract class JDFAutoAssembly extends JDFResource
         return (JDFPageAssignedList) getElement(ElementName.PAGEASSIGNEDLIST, null, iSkip);
     }
 
-
-
-    public JDFPageAssignedList appendPageAssignedList()
+    /**
+     * (30) append element PageAssignedList
+     */
+    public JDFPageAssignedList appendPageAssignedList() throws JDFException
     {
         return (JDFPageAssignedList) appendElement(ElementName.PAGEASSIGNEDLIST, null);
     }

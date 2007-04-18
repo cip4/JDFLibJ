@@ -165,8 +165,6 @@ public abstract class JDFAutoContainer extends JDFElement
         return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
     /** (25) getCreateFileSpec
      * 
      * @return JDFFileSpec the element
@@ -176,17 +174,14 @@ public abstract class JDFAutoContainer extends JDFElement
         return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFileSpec
+     * (29) append element FileSpec
      */
     public JDFFileSpec appendFileSpec() throws JDFException
     {
         return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -195,4 +190,5 @@ public abstract class JDFAutoContainer extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

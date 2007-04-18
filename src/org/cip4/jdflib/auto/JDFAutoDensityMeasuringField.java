@@ -214,8 +214,6 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
             setAttribute(AttributeName.CENTER, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute Center
           * @return JDFXYPair the value of the attribute, null if a the
@@ -237,8 +235,6 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Density
@@ -251,8 +247,6 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
         {
             setAttribute(AttributeName.DENSITY, value, null);
         }
-
-
 
         /**
           * (20) get JDFNumberList attribute Density
@@ -275,8 +269,6 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Diameter
@@ -290,8 +282,6 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
             setAttribute(AttributeName.DIAMETER, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Diameter
           * @return double the value of the attribute
@@ -300,8 +290,6 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
         {
             return getRealAttribute(AttributeName.DIAMETER, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -316,8 +304,6 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
             setAttribute(AttributeName.DOTGAIN, value, null);
         }
 
-
-
         /**
           * (17) get double attribute DotGain
           * @return double the value of the attribute
@@ -326,8 +312,6 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
         {
             return getRealAttribute(AttributeName.DOTGAIN, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -342,8 +326,6 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
             setAttribute(AttributeName.PERCENTAGE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Percentage
           * @return double the value of the attribute
@@ -352,8 +334,6 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
         {
             return getRealAttribute(AttributeName.PERCENTAGE, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -368,8 +348,6 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
             setAttribute(AttributeName.SCREEN, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Screen
           * @return the value of the attribute
@@ -378,8 +356,6 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
         {
             return getAttribute(AttributeName.SCREEN, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -394,8 +370,6 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
             setAttribute(AttributeName.SEPARATION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Separation
           * @return the value of the attribute
@@ -404,8 +378,6 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
         {
             return getAttribute(AttributeName.SEPARATION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -419,8 +391,6 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
         {
             setAttribute(AttributeName.TOLERANCECYAN, value, null);
         }
-
-
 
         /**
           * (20) get JDFXYPair attribute ToleranceCyan
@@ -443,8 +413,6 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ToleranceMagenta
@@ -457,8 +425,6 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
         {
             setAttribute(AttributeName.TOLERANCEMAGENTA, value, null);
         }
-
-
 
         /**
           * (20) get JDFXYPair attribute ToleranceMagenta
@@ -481,8 +447,6 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ToleranceYellow
@@ -495,8 +459,6 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
         {
             setAttribute(AttributeName.TOLERANCEYELLOW, value, null);
         }
-
-
 
         /**
           * (20) get JDFXYPair attribute ToleranceYellow
@@ -519,8 +481,6 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ToleranceBlack
@@ -533,8 +493,6 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
         {
             setAttribute(AttributeName.TOLERANCEBLACK, value, null);
         }
-
-
 
         /**
           * (20) get JDFXYPair attribute ToleranceBlack
@@ -557,8 +515,6 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ToleranceDotGain
@@ -571,8 +527,6 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
         {
             setAttribute(AttributeName.TOLERANCEDOTGAIN, value, null);
         }
-
-
 
         /**
           * (20) get JDFXYPair attribute ToleranceDotGain
@@ -595,8 +549,6 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Setup
@@ -610,8 +562,6 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
             setAttribute(AttributeName.SETUP, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Setup
           * @return the value of the attribute
@@ -620,8 +570,6 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
         {
             return getAttribute(AttributeName.SETUP, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -637,8 +585,6 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
         return (JDFColorMeasurementConditions) getElement(ElementName.COLORMEASUREMENTCONDITIONS, null, 0);
     }
 
-
-
     /** (25) getCreateColorMeasurementConditions
      * 
      * @return JDFColorMeasurementConditions the element
@@ -648,17 +594,14 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
         return (JDFColorMeasurementConditions) getCreateElement_KElement(ElementName.COLORMEASUREMENTCONDITIONS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementColorMeasurementConditions
+     * (29) append element ColorMeasurementConditions
      */
     public JDFColorMeasurementConditions appendColorMeasurementConditions() throws JDFException
     {
         return (JDFColorMeasurementConditions) appendElementN(ElementName.COLORMEASUREMENTCONDITIONS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -667,4 +610,5 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

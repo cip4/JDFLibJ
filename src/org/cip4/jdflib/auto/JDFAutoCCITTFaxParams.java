@@ -170,8 +170,6 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
             setAttribute(AttributeName.UNCOMPRESSED, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Uncompressed
           * @return boolean the value of the attribute
@@ -180,8 +178,6 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.UNCOMPRESSED, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -196,8 +192,6 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
             setAttribute(AttributeName.K, value, null);
         }
 
-
-
         /**
           * (15) get int attribute K
           * @return int the value of the attribute
@@ -206,8 +200,6 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
         {
             return getIntAttribute(AttributeName.K, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -222,8 +214,6 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
             setAttribute(AttributeName.ENDOFLINE, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute EndOfLine
           * @return boolean the value of the attribute
@@ -232,8 +222,6 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.ENDOFLINE, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -248,8 +236,6 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
             setAttribute(AttributeName.ENCODEDBYTEALIGN, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute EncodedByteAlign
           * @return boolean the value of the attribute
@@ -258,8 +244,6 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.ENCODEDBYTEALIGN, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -274,8 +258,6 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
             setAttribute(AttributeName.ENDOFBLOCK, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute EndOfBlock
           * @return boolean the value of the attribute
@@ -284,7 +266,5 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.ENDOFBLOCK, null, false);
         }
-
-
 
 }// end namespace JDF

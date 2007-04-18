@@ -74,6 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFHoleLine;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFHole;
@@ -181,8 +182,6 @@ public abstract class JDFAutoHoleList extends JDFResource
         return (JDFHole)getCreateElement_KElement(ElementName.HOLE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Hole
      * @param iSkip number of elements to skip
@@ -193,9 +192,10 @@ public abstract class JDFAutoHoleList extends JDFResource
         return (JDFHole) getElement(ElementName.HOLE, null, iSkip);
     }
 
-
-
-    public JDFHole appendHole()
+    /**
+     * (30) append element Hole
+     */
+    public JDFHole appendHole() throws JDFException
     {
         return (JDFHole) appendElement(ElementName.HOLE, null);
     }
@@ -208,6 +208,7 @@ public abstract class JDFAutoHoleList extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateHoleLine
      * 
      * @param iSkip number of elements to skip
@@ -217,8 +218,6 @@ public abstract class JDFAutoHoleList extends JDFResource
     {
         return (JDFHoleLine)getCreateElement_KElement(ElementName.HOLELINE, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element HoleLine
@@ -230,9 +229,10 @@ public abstract class JDFAutoHoleList extends JDFResource
         return (JDFHoleLine) getElement(ElementName.HOLELINE, null, iSkip);
     }
 
-
-
-    public JDFHoleLine appendHoleLine()
+    /**
+     * (30) append element HoleLine
+     */
+    public JDFHoleLine appendHoleLine() throws JDFException
     {
         return (JDFHoleLine) appendElement(ElementName.HOLELINE, null);
     }
@@ -245,4 +245,5 @@ public abstract class JDFAutoHoleList extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFBindItem;
     /*
     *****************************************************************************
@@ -165,8 +166,6 @@ public abstract class JDFAutoBindList extends JDFElement
         return (JDFBindItem)getCreateElement_KElement(ElementName.BINDITEM, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element BindItem
      * @param iSkip number of elements to skip
@@ -177,9 +176,10 @@ public abstract class JDFAutoBindList extends JDFElement
         return (JDFBindItem) getElement(ElementName.BINDITEM, null, iSkip);
     }
 
-
-
-    public JDFBindItem appendBindItem()
+    /**
+     * (30) append element BindItem
+     */
+    public JDFBindItem appendBindItem() throws JDFException
     {
         return (JDFBindItem) appendElement(ElementName.BINDITEM, null);
     }

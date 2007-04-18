@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFInsert;
     /*
     *****************************************************************************
@@ -165,8 +166,6 @@ public abstract class JDFAutoInsertList extends JDFElement
         return (JDFInsert)getCreateElement_KElement(ElementName.INSERT, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Insert
      * @param iSkip number of elements to skip
@@ -177,9 +176,10 @@ public abstract class JDFAutoInsertList extends JDFElement
         return (JDFInsert) getElement(ElementName.INSERT, null, iSkip);
     }
 
-
-
-    public JDFInsert appendInsert()
+    /**
+     * (30) append element Insert
+     */
+    public JDFInsert appendInsert() throws JDFException
     {
         return (JDFInsert) appendElement(ElementName.INSERT, null);
     }

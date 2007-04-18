@@ -167,8 +167,6 @@ public abstract class JDFAutoLZWParams extends JDFElement
             setAttribute(AttributeName.EARLYCHANGE, value, null);
         }
 
-
-
         /**
           * (15) get int attribute EarlyChange
           * @return int the value of the attribute
@@ -177,8 +175,6 @@ public abstract class JDFAutoLZWParams extends JDFElement
         {
             return getIntAttribute(AttributeName.EARLYCHANGE, null, 1);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -193,8 +189,6 @@ public abstract class JDFAutoLZWParams extends JDFElement
             setAttribute(AttributeName.PREDICTOR, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Predictor
           * @return int the value of the attribute
@@ -203,7 +197,5 @@ public abstract class JDFAutoLZWParams extends JDFElement
         {
             return getIntAttribute(AttributeName.PREDICTOR, null, 1);
         }
-
-
 
 }// end namespace JDF

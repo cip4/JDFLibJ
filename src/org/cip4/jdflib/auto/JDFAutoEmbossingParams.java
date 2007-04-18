@@ -74,6 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFEmboss;
 import org.cip4.jdflib.resource.JDFResource;
     /*
@@ -179,8 +180,6 @@ public abstract class JDFAutoEmbossingParams extends JDFResource
         return (JDFEmboss)getCreateElement_KElement(ElementName.EMBOSS, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Emboss
      * @param iSkip number of elements to skip
@@ -191,9 +190,10 @@ public abstract class JDFAutoEmbossingParams extends JDFResource
         return (JDFEmboss) getElement(ElementName.EMBOSS, null, iSkip);
     }
 
-
-
-    public JDFEmboss appendEmboss()
+    /**
+     * (30) append element Emboss
+     */
+    public JDFEmboss appendEmboss() throws JDFException
     {
         return (JDFEmboss) appendElement(ElementName.EMBOSS, null);
     }

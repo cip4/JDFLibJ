@@ -202,8 +202,6 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
             setAttribute(AttributeName.FAILED, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Failed
           * @return int the value of the attribute
@@ -212,8 +210,6 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
         {
             return getIntAttribute(AttributeName.FAILED, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -228,8 +224,6 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
             setAttribute(AttributeName.PASSED, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Passed
           * @return int the value of the attribute
@@ -238,8 +232,6 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
         {
             return getIntAttribute(AttributeName.PASSED, null, 0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -255,8 +247,6 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
         return (JDFBindingQualityParams) getElement(ElementName.BINDINGQUALITYPARAMS, null, 0);
     }
 
-
-
     /** (25) getCreateBindingQualityParams
      * 
      * @return JDFBindingQualityParams the element
@@ -266,17 +256,14 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
         return (JDFBindingQualityParams) getCreateElement_KElement(ElementName.BINDINGQUALITYPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementBindingQualityParams
+     * (29) append element BindingQualityParams
      */
     public JDFBindingQualityParams appendBindingQualityParams() throws JDFException
     {
         return (JDFBindingQualityParams) appendElementN(ElementName.BINDINGQUALITYPARAMS, 1, null);
     }
+
     /**
      * (24) const get element FileSpec
      * @return JDFFileSpec the element
@@ -285,8 +272,6 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
     {
         return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
     }
-
-
 
     /** (25) getCreateFileSpec
      * 
@@ -297,17 +282,14 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
         return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFileSpec
+     * (29) append element FileSpec
      */
     public JDFFileSpec appendFileSpec() throws JDFException
     {
         return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -316,6 +298,7 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateQualityMeasurement
      * 
      * @param iSkip number of elements to skip
@@ -325,8 +308,6 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
     {
         return (JDFQualityMeasurement)getCreateElement_KElement(ElementName.QUALITYMEASUREMENT, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element QualityMeasurement
@@ -338,9 +319,10 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
         return (JDFQualityMeasurement) getElement(ElementName.QUALITYMEASUREMENT, null, iSkip);
     }
 
-
-
-    public JDFQualityMeasurement appendQualityMeasurement()
+    /**
+     * (30) append element QualityMeasurement
+     */
+    public JDFQualityMeasurement appendQualityMeasurement() throws JDFException
     {
         return (JDFQualityMeasurement) appendElement(ElementName.QUALITYMEASUREMENT, null);
     }

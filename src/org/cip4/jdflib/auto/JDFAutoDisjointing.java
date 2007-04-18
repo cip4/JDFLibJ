@@ -246,8 +246,6 @@ public abstract class JDFAutoDisjointing extends JDFElement
             setAttribute(AttributeName.NUMBER, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Number
           * @return int the value of the attribute
@@ -256,8 +254,6 @@ public abstract class JDFAutoDisjointing extends JDFElement
         {
             return getIntAttribute(AttributeName.NUMBER, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -272,11 +268,9 @@ public abstract class JDFAutoDisjointing extends JDFElement
             setAttribute(AttributeName.OFFSET, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute Offset
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getOffset()
@@ -295,8 +289,6 @@ public abstract class JDFAutoDisjointing extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute OffsetAmount
@@ -310,8 +302,6 @@ public abstract class JDFAutoDisjointing extends JDFElement
             setAttribute(AttributeName.OFFSETAMOUNT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute OffsetAmount
           * @return int the value of the attribute
@@ -320,8 +310,6 @@ public abstract class JDFAutoDisjointing extends JDFElement
         {
             return getIntAttribute(AttributeName.OFFSETAMOUNT, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -336,8 +324,6 @@ public abstract class JDFAutoDisjointing extends JDFElement
             setAttribute(AttributeName.OFFSETDIRECTION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute OffsetDirection
           * @return the value of the attribute
@@ -346,8 +332,6 @@ public abstract class JDFAutoDisjointing extends JDFElement
         {
             return EnumOffsetDirection.getEnum(getAttribute(AttributeName.OFFSETDIRECTION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -362,8 +346,6 @@ public abstract class JDFAutoDisjointing extends JDFElement
             setAttribute(AttributeName.OVERFOLD, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Overfold
           * @return double the value of the attribute
@@ -372,8 +354,6 @@ public abstract class JDFAutoDisjointing extends JDFElement
         {
             return getRealAttribute(AttributeName.OVERFOLD, null, 0.0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -390,8 +370,6 @@ public abstract class JDFAutoDisjointing extends JDFElement
         return (JDFIdentificationField)getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element IdentificationField
      * @param iSkip number of elements to skip
@@ -402,9 +380,10 @@ public abstract class JDFAutoDisjointing extends JDFElement
         return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
 
-
-
-    public JDFIdentificationField appendIdentificationField()
+    /**
+     * (30) append element IdentificationField
+     */
+    public JDFIdentificationField appendIdentificationField() throws JDFException
     {
         return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
     }
@@ -418,8 +397,6 @@ public abstract class JDFAutoDisjointing extends JDFElement
         return (JDFInsertSheet) getElement(ElementName.INSERTSHEET, null, 0);
     }
 
-
-
     /** (25) getCreateInsertSheet
      * 
      * @return JDFInsertSheet the element
@@ -429,17 +406,14 @@ public abstract class JDFAutoDisjointing extends JDFElement
         return (JDFInsertSheet) getCreateElement_KElement(ElementName.INSERTSHEET, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementInsertSheet
+     * (29) append element InsertSheet
      */
     public JDFInsertSheet appendInsertSheet() throws JDFException
     {
         return (JDFInsertSheet) appendElementN(ElementName.INSERTSHEET, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -448,4 +422,5 @@ public abstract class JDFAutoDisjointing extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

@@ -202,8 +202,6 @@ public abstract class JDFAutoQualityControlParams extends JDFResource
             setAttribute(AttributeName.TIMEINTERVAL, value, null);
         }
 
-
-
         /**
           * (20) get JDFDuration attribute TimeInterval
           * @return JDFDuration the value of the attribute, null if a the
@@ -225,8 +223,6 @@ public abstract class JDFAutoQualityControlParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute SampleInterval
@@ -240,8 +236,6 @@ public abstract class JDFAutoQualityControlParams extends JDFResource
             setAttribute(AttributeName.SAMPLEINTERVAL, value, null);
         }
 
-
-
         /**
           * (15) get int attribute SampleInterval
           * @return int the value of the attribute
@@ -250,8 +244,6 @@ public abstract class JDFAutoQualityControlParams extends JDFResource
         {
             return getIntAttribute(AttributeName.SAMPLEINTERVAL, null, 0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -267,8 +259,6 @@ public abstract class JDFAutoQualityControlParams extends JDFResource
         return (JDFBindingQualityParams) getElement(ElementName.BINDINGQUALITYPARAMS, null, 0);
     }
 
-
-
     /** (25) getCreateBindingQualityParams
      * 
      * @return JDFBindingQualityParams the element
@@ -278,15 +268,12 @@ public abstract class JDFAutoQualityControlParams extends JDFResource
         return (JDFBindingQualityParams) getCreateElement_KElement(ElementName.BINDINGQUALITYPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementBindingQualityParams
+     * (29) append element BindingQualityParams
      */
     public JDFBindingQualityParams appendBindingQualityParams() throws JDFException
     {
         return (JDFBindingQualityParams) appendElementN(ElementName.BINDINGQUALITYPARAMS, 1, null);
     }
+
 }// end namespace JDF

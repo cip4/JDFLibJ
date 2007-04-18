@@ -245,8 +245,6 @@ public abstract class JDFAutoBundleItem extends JDFElement
             setAttribute(AttributeName.AMOUNT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Amount
           * @return int the value of the attribute
@@ -255,8 +253,6 @@ public abstract class JDFAutoBundleItem extends JDFElement
         {
             return getIntAttribute(AttributeName.AMOUNT, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -271,8 +267,6 @@ public abstract class JDFAutoBundleItem extends JDFElement
             setAttribute(AttributeName.ITEMNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ItemName
           * @return the value of the attribute
@@ -281,8 +275,6 @@ public abstract class JDFAutoBundleItem extends JDFElement
         {
             return getAttribute(AttributeName.ITEMNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -297,8 +289,6 @@ public abstract class JDFAutoBundleItem extends JDFElement
             setAttribute(AttributeName.ORIENTATION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Orientation
           * @return the value of the attribute
@@ -307,8 +297,6 @@ public abstract class JDFAutoBundleItem extends JDFElement
         {
             return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -323,11 +311,9 @@ public abstract class JDFAutoBundleItem extends JDFElement
             setAttribute(AttributeName.TRANSFORMATION, value, null);
         }
 
-
-
         /**
           * (20) get JDFMatrix attribute Transformation
-          * @return JDFMatrixthe value of the attribute, null if a the
+          * @return JDFMatrix the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFMatrix
           */
         public JDFMatrix getTransformation()
@@ -346,8 +332,6 @@ public abstract class JDFAutoBundleItem extends JDFElement
             return nPlaceHolder;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -362,8 +346,6 @@ public abstract class JDFAutoBundleItem extends JDFElement
         return (JDFComponent) getElement(ElementName.COMPONENT, null, 0);
     }
 
-
-
     /** (25) getCreateComponent
      * 
      * @return JDFComponent the element
@@ -373,17 +355,14 @@ public abstract class JDFAutoBundleItem extends JDFElement
         return (JDFComponent) getCreateElement_KElement(ElementName.COMPONENT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementComponent
+     * (29) append element Component
      */
     public JDFComponent appendComponent() throws JDFException
     {
         return (JDFComponent) appendElementN(ElementName.COMPONENT, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -392,4 +371,5 @@ public abstract class JDFAutoBundleItem extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

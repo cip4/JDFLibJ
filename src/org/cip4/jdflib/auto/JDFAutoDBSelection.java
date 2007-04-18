@@ -186,8 +186,6 @@ public abstract class JDFAutoDBSelection extends JDFResource
             setAttribute(AttributeName.DATABASE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DataBase
           * @return the value of the attribute
@@ -196,8 +194,6 @@ public abstract class JDFAutoDBSelection extends JDFResource
         {
             return getAttribute(AttributeName.DATABASE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -212,11 +208,9 @@ public abstract class JDFAutoDBSelection extends JDFResource
             setAttribute(AttributeName.RECORDS, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerRangeList attribute Records
-          * @return JDFIntegerRangeListthe value of the attribute, null if a the
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerRangeList
           */
         public JDFIntegerRangeList getRecords()
@@ -235,8 +229,6 @@ public abstract class JDFAutoDBSelection extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Select
@@ -250,8 +242,6 @@ public abstract class JDFAutoDBSelection extends JDFResource
             setAttribute(AttributeName.SELECT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Select
           * @return the value of the attribute
@@ -260,7 +250,5 @@ public abstract class JDFAutoDBSelection extends JDFResource
         {
             return getAttribute(AttributeName.SELECT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

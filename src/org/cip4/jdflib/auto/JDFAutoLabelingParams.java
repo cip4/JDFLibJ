@@ -239,11 +239,9 @@ public abstract class JDFAutoLabelingParams extends JDFResource
             setAttribute(AttributeName.CTM, value, null);
         }
 
-
-
         /**
           * (20) get JDFMatrix attribute CTM
-          * @return JDFMatrixthe value of the attribute, null if a the
+          * @return JDFMatrix the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFMatrix
           */
         public JDFMatrix getCTM()
@@ -262,8 +260,6 @@ public abstract class JDFAutoLabelingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Application
@@ -277,8 +273,6 @@ public abstract class JDFAutoLabelingParams extends JDFResource
             setAttribute(AttributeName.APPLICATION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Application
           * @return the value of the attribute
@@ -287,8 +281,6 @@ public abstract class JDFAutoLabelingParams extends JDFResource
         {
             return getAttribute(AttributeName.APPLICATION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -303,8 +295,6 @@ public abstract class JDFAutoLabelingParams extends JDFResource
             setAttribute(AttributeName.POSITION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Position
           * @return the value of the attribute
@@ -313,7 +303,5 @@ public abstract class JDFAutoLabelingParams extends JDFResource
         {
             return EnumPosition.getEnum(getAttribute(AttributeName.POSITION, null, null));
         }
-
-
 
 }// end namespace JDF

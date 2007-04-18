@@ -171,8 +171,6 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
             setAttribute(AttributeName.EXACT, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Exact
           * @return boolean the value of the attribute
@@ -181,8 +179,6 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.EXACT, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -197,8 +193,6 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
             setAttribute(AttributeName.LISTCOMMANDS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute ListCommands
           * @return boolean the value of the attribute
@@ -207,8 +201,6 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.LISTCOMMANDS, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -223,8 +215,6 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
             setAttribute(AttributeName.LISTQUERIES, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute ListQueries
           * @return boolean the value of the attribute
@@ -233,8 +223,6 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.LISTQUERIES, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -249,8 +237,6 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
             setAttribute(AttributeName.LISTREGISTRATIONS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute ListRegistrations
           * @return boolean the value of the attribute
@@ -259,8 +245,6 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.LISTREGISTRATIONS, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -275,8 +259,6 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
             setAttribute(AttributeName.LISTSIGNALS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute ListSignals
           * @return boolean the value of the attribute
@@ -285,8 +267,6 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.LISTSIGNALS, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -301,8 +281,6 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
             setAttribute(AttributeName.PERSISTENT, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Persistent
           * @return boolean the value of the attribute
@@ -311,7 +289,5 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.PERSISTENT, null, false);
         }
-
-
 
 }// end namespace JDF

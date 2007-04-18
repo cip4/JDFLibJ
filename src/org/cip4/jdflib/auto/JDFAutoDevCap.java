@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.devicecapability.JDFLoc;
     /*
@@ -245,8 +246,6 @@ public abstract class JDFAutoDevCap extends JDFElement
             setAttribute(AttributeName.AVAILABILITY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Availability
           * @return the value of the attribute
@@ -255,8 +254,6 @@ public abstract class JDFAutoDevCap extends JDFElement
         {
             return EnumAvailability.getEnum(getAttribute(AttributeName.AVAILABILITY, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -271,8 +268,6 @@ public abstract class JDFAutoDevCap extends JDFElement
             setAttribute(AttributeName.DEVCAPREFS, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute DevCapRefs
           * @return VString the value of the attribute
@@ -284,8 +279,6 @@ public abstract class JDFAutoDevCap extends JDFElement
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -300,8 +293,6 @@ public abstract class JDFAutoDevCap extends JDFElement
             setAttribute(AttributeName.DEVNS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DevNS
           * @return the value of the attribute
@@ -310,8 +301,6 @@ public abstract class JDFAutoDevCap extends JDFElement
         {
             return getAttribute(AttributeName.DEVNS, null, "http://www.CIP4.org/JDFSchema_1_1");
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -326,8 +315,6 @@ public abstract class JDFAutoDevCap extends JDFElement
             setAttribute(AttributeName.ID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ID
           * @return the value of the attribute
@@ -336,8 +323,6 @@ public abstract class JDFAutoDevCap extends JDFElement
         {
             return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -352,8 +337,6 @@ public abstract class JDFAutoDevCap extends JDFElement
             setAttribute(AttributeName.MAXOCCURS, value, null);
         }
 
-
-
         /**
           * (15) get int attribute MaxOccurs
           * @return int the value of the attribute
@@ -362,8 +345,6 @@ public abstract class JDFAutoDevCap extends JDFElement
         {
             return getIntAttribute(AttributeName.MAXOCCURS, null, 1);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -378,8 +359,6 @@ public abstract class JDFAutoDevCap extends JDFElement
             setAttribute(AttributeName.MINOCCURS, value, null);
         }
 
-
-
         /**
           * (15) get int attribute MinOccurs
           * @return int the value of the attribute
@@ -388,8 +367,6 @@ public abstract class JDFAutoDevCap extends JDFElement
         {
             return getIntAttribute(AttributeName.MINOCCURS, null, 1);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -404,8 +381,6 @@ public abstract class JDFAutoDevCap extends JDFElement
             setAttribute(AttributeName.MODULEREFS, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute ModuleRefs
           * @return VString the value of the attribute
@@ -417,8 +392,6 @@ public abstract class JDFAutoDevCap extends JDFElement
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -433,8 +406,6 @@ public abstract class JDFAutoDevCap extends JDFElement
             setAttribute(AttributeName.NAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Name
           * @return the value of the attribute
@@ -443,8 +414,6 @@ public abstract class JDFAutoDevCap extends JDFElement
         {
             return getAttribute(AttributeName.NAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -459,8 +428,6 @@ public abstract class JDFAutoDevCap extends JDFElement
             setAttribute(AttributeName.RESOURCEUSAGE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ResourceUsage
           * @return the value of the attribute
@@ -469,8 +436,6 @@ public abstract class JDFAutoDevCap extends JDFElement
         {
             return getAttribute(AttributeName.RESOURCEUSAGE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -487,8 +452,6 @@ public abstract class JDFAutoDevCap extends JDFElement
         return (JDFLoc)getCreateElement_KElement(ElementName.LOC, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Loc
      * @param iSkip number of elements to skip
@@ -499,9 +462,10 @@ public abstract class JDFAutoDevCap extends JDFElement
         return (JDFLoc) getElement(ElementName.LOC, null, iSkip);
     }
 
-
-
-    public JDFLoc appendLoc()
+    /**
+     * (30) append element Loc
+     */
+    public JDFLoc appendLoc() throws JDFException
     {
         return (JDFLoc) appendElement(ElementName.LOC, null);
     }

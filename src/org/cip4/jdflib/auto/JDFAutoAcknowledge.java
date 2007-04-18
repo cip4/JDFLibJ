@@ -238,8 +238,6 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
             setAttribute(AttributeName.REFID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute refID
           * @return the value of the attribute
@@ -248,8 +246,6 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
         {
             return getAttribute(AttributeName.REFID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -264,8 +260,6 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
             setEnumerationsAttribute(AttributeName.ACKNOWLEDGETYPE, v, null);
         }
 
-
-
         /**
           * (9.2) get AcknowledgeType attribute AcknowledgeType
           * @return Vector of the enumerations
@@ -274,8 +268,6 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
         {
             return getEnumerationsAttribute(AttributeName.ACKNOWLEDGETYPE, null, EnumAcknowledgeType.Completed, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -290,8 +282,6 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
             setAttribute(AttributeName.RETURNCODE, value, null);
         }
 
-
-
         /**
           * (15) get int attribute ReturnCode
           * @return int the value of the attribute
@@ -300,8 +290,6 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
         {
             return getIntAttribute(AttributeName.RETURNCODE, null, 0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -317,8 +305,6 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
         return (JDFNotification) getElement(ElementName.NOTIFICATION, null, 0);
     }
 
-
-
     /** (25) getCreateNotification
      * 
      * @return JDFNotification the element
@@ -328,15 +314,12 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
         return (JDFNotification) getCreateElement_KElement(ElementName.NOTIFICATION, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementNotification
+     * (29) append element Notification
      */
     public JDFNotification appendNotification() throws JDFException
     {
         return (JDFNotification) appendElementN(ElementName.NOTIFICATION, 1, null);
     }
+
 }// end namespace JDF

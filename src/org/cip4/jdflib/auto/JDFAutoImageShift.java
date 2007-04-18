@@ -273,8 +273,6 @@ public abstract class JDFAutoImageShift extends JDFElement
             setAttribute(AttributeName.POSITIONX, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute PositionX
           * @return the value of the attribute
@@ -283,8 +281,6 @@ public abstract class JDFAutoImageShift extends JDFElement
         {
             return EnumPositionX.getEnum(getAttribute(AttributeName.POSITIONX, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -299,8 +295,6 @@ public abstract class JDFAutoImageShift extends JDFElement
             setAttribute(AttributeName.POSITIONY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute PositionY
           * @return the value of the attribute
@@ -309,8 +303,6 @@ public abstract class JDFAutoImageShift extends JDFElement
         {
             return EnumPositionY.getEnum(getAttribute(AttributeName.POSITIONY, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -325,11 +317,9 @@ public abstract class JDFAutoImageShift extends JDFElement
             setAttribute(AttributeName.SHIFTBACK, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute ShiftBack
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getShiftBack()
@@ -348,8 +338,6 @@ public abstract class JDFAutoImageShift extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ShiftFront
@@ -363,11 +351,9 @@ public abstract class JDFAutoImageShift extends JDFElement
             setAttribute(AttributeName.SHIFTFRONT, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute ShiftFront
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getShiftFront()
@@ -385,7 +371,5 @@ public abstract class JDFAutoImageShift extends JDFElement
             }
             return nPlaceHolder;
         }
-
-
 
 }// end namespace JDF

@@ -288,8 +288,6 @@ public abstract class JDFAutoRunList extends JDFResource
             setAttribute(AttributeName.COMPONENTGRANULARITY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ComponentGranularity
           * @return the value of the attribute
@@ -298,8 +296,6 @@ public abstract class JDFAutoRunList extends JDFResource
         {
             return EnumComponentGranularity.getEnum(getAttribute(AttributeName.COMPONENTGRANULARITY, null, "Document"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -314,8 +310,6 @@ public abstract class JDFAutoRunList extends JDFResource
             setAttribute(AttributeName.ISPAGE, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IsPage
           * @return boolean the value of the attribute
@@ -324,8 +318,6 @@ public abstract class JDFAutoRunList extends JDFResource
         {
             return getBoolAttribute(AttributeName.ISPAGE, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -340,8 +332,6 @@ public abstract class JDFAutoRunList extends JDFResource
             setAttribute(AttributeName.PAGECOPIES, value, null);
         }
 
-
-
         /**
           * (15) get int attribute PageCopies
           * @return int the value of the attribute
@@ -350,8 +340,6 @@ public abstract class JDFAutoRunList extends JDFResource
         {
             return getIntAttribute(AttributeName.PAGECOPIES, null, 1);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -366,8 +354,6 @@ public abstract class JDFAutoRunList extends JDFResource
             setAttribute(AttributeName.SETCOPIES, value, null);
         }
 
-
-
         /**
           * (15) get int attribute SetCopies
           * @return int the value of the attribute
@@ -376,8 +362,6 @@ public abstract class JDFAutoRunList extends JDFResource
         {
             return getIntAttribute(AttributeName.SETCOPIES, null, 1);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -392,8 +376,6 @@ public abstract class JDFAutoRunList extends JDFResource
             setAttribute(AttributeName.DIRECTORY, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Directory
           * @return the value of the attribute
@@ -402,8 +384,6 @@ public abstract class JDFAutoRunList extends JDFResource
         {
             return getAttribute(AttributeName.DIRECTORY, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -417,8 +397,6 @@ public abstract class JDFAutoRunList extends JDFResource
         {
             setAttribute(AttributeName.DOCNAMES, value, null);
         }
-
-
 
         /**
           * (20) get JDFNameRangeList attribute DocNames
@@ -441,8 +419,6 @@ public abstract class JDFAutoRunList extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Docs
@@ -455,8 +431,6 @@ public abstract class JDFAutoRunList extends JDFResource
         {
             setAttribute(AttributeName.DOCS, value, null);
         }
-
-
 
         /**
           * (20) get JDFIntegerRangeList attribute Docs
@@ -479,8 +453,6 @@ public abstract class JDFAutoRunList extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute EndOfBundleItem
@@ -494,8 +466,6 @@ public abstract class JDFAutoRunList extends JDFResource
             setAttribute(AttributeName.ENDOFBUNDLEITEM, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute EndOfBundleItem
           * @return boolean the value of the attribute
@@ -504,8 +474,6 @@ public abstract class JDFAutoRunList extends JDFResource
         {
             return getBoolAttribute(AttributeName.ENDOFBUNDLEITEM, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -520,8 +488,6 @@ public abstract class JDFAutoRunList extends JDFResource
             setAttribute(AttributeName.ENDOFDOCUMENT, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute EndOfDocument
           * @return boolean the value of the attribute
@@ -530,8 +496,6 @@ public abstract class JDFAutoRunList extends JDFResource
         {
             return getBoolAttribute(AttributeName.ENDOFDOCUMENT, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -546,8 +510,6 @@ public abstract class JDFAutoRunList extends JDFResource
             setAttribute(AttributeName.ENDOFSET, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute EndOfSet
           * @return boolean the value of the attribute
@@ -556,8 +518,6 @@ public abstract class JDFAutoRunList extends JDFResource
         {
             return getBoolAttribute(AttributeName.ENDOFSET, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -572,8 +532,6 @@ public abstract class JDFAutoRunList extends JDFResource
             setAttribute(AttributeName.FIRSTPAGE, value, null);
         }
 
-
-
         /**
           * (15) get int attribute FirstPage
           * @return int the value of the attribute
@@ -582,8 +540,6 @@ public abstract class JDFAutoRunList extends JDFResource
         {
             return getIntAttribute(AttributeName.FIRSTPAGE, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -598,8 +554,6 @@ public abstract class JDFAutoRunList extends JDFResource
             setAttribute(AttributeName.LOGICALPAGE, value, null);
         }
 
-
-
         /**
           * (15) get int attribute LogicalPage
           * @return int the value of the attribute
@@ -608,8 +562,6 @@ public abstract class JDFAutoRunList extends JDFResource
         {
             return getIntAttribute(AttributeName.LOGICALPAGE, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -624,8 +576,6 @@ public abstract class JDFAutoRunList extends JDFResource
             setAttribute(AttributeName.NDOC, value, null);
         }
 
-
-
         /**
           * (15) get int attribute NDoc
           * @return int the value of the attribute
@@ -634,8 +584,6 @@ public abstract class JDFAutoRunList extends JDFResource
         {
             return getIntAttribute(AttributeName.NDOC, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -650,8 +598,6 @@ public abstract class JDFAutoRunList extends JDFResource
             setAttribute(AttributeName.NPAGE, value, null);
         }
 
-
-
         /**
           * (15) get int attribute NPage
           * @return int the value of the attribute
@@ -660,8 +606,6 @@ public abstract class JDFAutoRunList extends JDFResource
         {
             return getIntAttribute(AttributeName.NPAGE, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -676,8 +620,6 @@ public abstract class JDFAutoRunList extends JDFResource
             setAttribute(AttributeName.NSET, value, null);
         }
 
-
-
         /**
           * (15) get int attribute NSet
           * @return int the value of the attribute
@@ -686,8 +628,6 @@ public abstract class JDFAutoRunList extends JDFResource
         {
             return getIntAttribute(AttributeName.NSET, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -701,8 +641,6 @@ public abstract class JDFAutoRunList extends JDFResource
         {
             setAttribute(AttributeName.PAGELISTINDEX, value, null);
         }
-
-
 
         /**
           * (20) get JDFIntegerRangeList attribute PageListIndex
@@ -725,8 +663,6 @@ public abstract class JDFAutoRunList extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute PageNames
@@ -739,8 +675,6 @@ public abstract class JDFAutoRunList extends JDFResource
         {
             setAttribute(AttributeName.PAGENAMES, value, null);
         }
-
-
 
         /**
           * (20) get JDFNameRangeList attribute PageNames
@@ -763,8 +697,6 @@ public abstract class JDFAutoRunList extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Pages
@@ -777,8 +709,6 @@ public abstract class JDFAutoRunList extends JDFResource
         {
             setAttribute(AttributeName.PAGES, value, null);
         }
-
-
 
         /**
           * (20) get JDFIntegerRangeList attribute Pages
@@ -801,8 +731,6 @@ public abstract class JDFAutoRunList extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute RunTag
@@ -816,8 +744,6 @@ public abstract class JDFAutoRunList extends JDFResource
             setAttribute(AttributeName.RUNTAG, value, null);
         }
 
-
-
         /**
           * (23) get String attribute RunTag
           * @return the value of the attribute
@@ -826,8 +752,6 @@ public abstract class JDFAutoRunList extends JDFResource
         {
             return getAttribute(AttributeName.RUNTAG, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -841,8 +765,6 @@ public abstract class JDFAutoRunList extends JDFResource
         {
             setAttribute(AttributeName.SETNAMES, value, null);
         }
-
-
 
         /**
           * (20) get JDFNameRangeList attribute SetNames
@@ -865,8 +787,6 @@ public abstract class JDFAutoRunList extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Sets
@@ -879,8 +799,6 @@ public abstract class JDFAutoRunList extends JDFResource
         {
             setAttribute(AttributeName.SETS, value, null);
         }
-
-
 
         /**
           * (20) get JDFIntegerRangeList attribute Sets
@@ -903,8 +821,6 @@ public abstract class JDFAutoRunList extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute SkipPage
@@ -918,8 +834,6 @@ public abstract class JDFAutoRunList extends JDFResource
             setAttribute(AttributeName.SKIPPAGE, value, null);
         }
 
-
-
         /**
           * (15) get int attribute SkipPage
           * @return int the value of the attribute
@@ -928,8 +842,6 @@ public abstract class JDFAutoRunList extends JDFResource
         {
             return getIntAttribute(AttributeName.SKIPPAGE, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -944,8 +856,6 @@ public abstract class JDFAutoRunList extends JDFResource
             setAttribute(AttributeName.SORTED, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Sorted
           * @return boolean the value of the attribute
@@ -954,8 +864,6 @@ public abstract class JDFAutoRunList extends JDFResource
         {
             return getBoolAttribute(AttributeName.SORTED, null, false);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -971,8 +879,6 @@ public abstract class JDFAutoRunList extends JDFResource
         return (JDFByteMap) getElement(ElementName.BYTEMAP, null, 0);
     }
 
-
-
     /** (25) getCreateByteMap
      * 
      * @return JDFByteMap the element
@@ -982,17 +888,14 @@ public abstract class JDFAutoRunList extends JDFResource
         return (JDFByteMap) getCreateElement_KElement(ElementName.BYTEMAP, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementByteMap
+     * (29) append element ByteMap
      */
     public JDFByteMap appendByteMap() throws JDFException
     {
         return (JDFByteMap) appendElementN(ElementName.BYTEMAP, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -1001,6 +904,7 @@ public abstract class JDFAutoRunList extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateDynamicInput
      * 
      * @param iSkip number of elements to skip
@@ -1010,8 +914,6 @@ public abstract class JDFAutoRunList extends JDFResource
     {
         return (JDFDynamicInput)getCreateElement_KElement(ElementName.DYNAMICINPUT, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element DynamicInput
@@ -1023,9 +925,10 @@ public abstract class JDFAutoRunList extends JDFResource
         return (JDFDynamicInput) getElement(ElementName.DYNAMICINPUT, null, iSkip);
     }
 
-
-
-    public JDFDynamicInput appendDynamicInput()
+    /**
+     * (30) append element DynamicInput
+     */
+    public JDFDynamicInput appendDynamicInput() throws JDFException
     {
         return (JDFDynamicInput) appendElement(ElementName.DYNAMICINPUT, null);
     }
@@ -1040,8 +943,6 @@ public abstract class JDFAutoRunList extends JDFResource
         return (JDFInsertSheet)getCreateElement_KElement(ElementName.INSERTSHEET, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element InsertSheet
      * @param iSkip number of elements to skip
@@ -1052,9 +953,10 @@ public abstract class JDFAutoRunList extends JDFResource
         return (JDFInsertSheet) getElement(ElementName.INSERTSHEET, null, iSkip);
     }
 
-
-
-    public JDFInsertSheet appendInsertSheet()
+    /**
+     * (30) append element InsertSheet
+     */
+    public JDFInsertSheet appendInsertSheet() throws JDFException
     {
         return (JDFInsertSheet) appendElement(ElementName.INSERTSHEET, null);
     }
@@ -1067,6 +969,7 @@ public abstract class JDFAutoRunList extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element LayoutElement
      * @return JDFLayoutElement the element
@@ -1075,8 +978,6 @@ public abstract class JDFAutoRunList extends JDFResource
     {
         return (JDFLayoutElement) getElement(ElementName.LAYOUTELEMENT, null, 0);
     }
-
-
 
     /** (25) getCreateLayoutElement
      * 
@@ -1087,17 +988,14 @@ public abstract class JDFAutoRunList extends JDFResource
         return (JDFLayoutElement) getCreateElement_KElement(ElementName.LAYOUTELEMENT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementLayoutElement
+     * (29) append element LayoutElement
      */
     public JDFLayoutElement appendLayoutElement() throws JDFException
     {
         return (JDFLayoutElement) appendElementN(ElementName.LAYOUTELEMENT, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -1106,6 +1004,7 @@ public abstract class JDFAutoRunList extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element InterpretedPDLData
      * @return JDFInterpretedPDLData the element
@@ -1114,8 +1013,6 @@ public abstract class JDFAutoRunList extends JDFResource
     {
         return (JDFInterpretedPDLData) getElement(ElementName.INTERPRETEDPDLDATA, null, 0);
     }
-
-
 
     /** (25) getCreateInterpretedPDLData
      * 
@@ -1126,17 +1023,14 @@ public abstract class JDFAutoRunList extends JDFResource
         return (JDFInterpretedPDLData) getCreateElement_KElement(ElementName.INTERPRETEDPDLDATA, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementInterpretedPDLData
+     * (29) append element InterpretedPDLData
      */
     public JDFInterpretedPDLData appendInterpretedPDLData() throws JDFException
     {
         return (JDFInterpretedPDLData) appendElementN(ElementName.INTERPRETEDPDLDATA, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -1145,6 +1039,7 @@ public abstract class JDFAutoRunList extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element Disposition
      * @return JDFDisposition the element
@@ -1153,8 +1048,6 @@ public abstract class JDFAutoRunList extends JDFResource
     {
         return (JDFDisposition) getElement(ElementName.DISPOSITION, null, 0);
     }
-
-
 
     /** (25) getCreateDisposition
      * 
@@ -1165,17 +1058,14 @@ public abstract class JDFAutoRunList extends JDFResource
         return (JDFDisposition) getCreateElement_KElement(ElementName.DISPOSITION, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDisposition
+     * (29) append element Disposition
      */
     public JDFDisposition appendDisposition() throws JDFException
     {
         return (JDFDisposition) appendElementN(ElementName.DISPOSITION, 1, null);
     }
+
     /**
      * (24) const get element PageList
      * @return JDFPageList the element
@@ -1184,8 +1074,6 @@ public abstract class JDFAutoRunList extends JDFResource
     {
         return (JDFPageList) getElement(ElementName.PAGELIST, null, 0);
     }
-
-
 
     /** (25) getCreatePageList
      * 
@@ -1196,17 +1084,14 @@ public abstract class JDFAutoRunList extends JDFResource
         return (JDFPageList) getCreateElement_KElement(ElementName.PAGELIST, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPageList
+     * (29) append element PageList
      */
     public JDFPageList appendPageList() throws JDFException
     {
         return (JDFPageList) appendElementN(ElementName.PAGELIST, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -1215,4 +1100,5 @@ public abstract class JDFAutoRunList extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

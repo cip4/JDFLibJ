@@ -239,8 +239,6 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
             setAttribute(AttributeName.JOBID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobID
           * @return the value of the attribute
@@ -249,8 +247,6 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
         {
             return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -265,8 +261,6 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
             setAttribute(AttributeName.JOBPARTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobPartID
           * @return the value of the attribute
@@ -275,8 +269,6 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
         {
             return getAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -291,8 +283,6 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
             setAttribute(AttributeName.QUEUEENTRYID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute QueueEntryID
           * @return the value of the attribute
@@ -301,8 +291,6 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
         {
             return getAttribute(AttributeName.QUEUEENTRYID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -317,8 +305,6 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
             setAttribute(AttributeName.UPDATEMETHOD, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute UpdateMethod
           * @return the value of the attribute
@@ -327,8 +313,6 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
         {
             return EnumUpdateMethod.getEnum(getAttribute(AttributeName.UPDATEMETHOD, null, "Complete"));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -345,8 +329,6 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
         return (JDFPart)getCreateElement_KElement(ElementName.PART, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Part
      * @param iSkip number of elements to skip
@@ -357,9 +339,10 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
         return (JDFPart) getElement(ElementName.PART, null, iSkip);
     }
 
-
-
-    public JDFPart appendPart()
+    /**
+     * (30) append element Part
+     */
+    public JDFPart appendPart() throws JDFException
     {
         return (JDFPart) appendElement(ElementName.PART, null);
     }
@@ -373,8 +356,6 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
         return (JDFNodeInfo) getElement(ElementName.NODEINFO, null, 0);
     }
 
-
-
     /** (25) getCreateNodeInfo
      * 
      * @return JDFNodeInfo the element
@@ -384,15 +365,12 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
         return (JDFNodeInfo) getCreateElement_KElement(ElementName.NODEINFO, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementNodeInfo
+     * (29) append element NodeInfo
      */
     public JDFNodeInfo appendNodeInfo() throws JDFException
     {
         return (JDFNodeInfo) appendElementN(ElementName.NODEINFO, 1, null);
     }
+
 }// end namespace JDF

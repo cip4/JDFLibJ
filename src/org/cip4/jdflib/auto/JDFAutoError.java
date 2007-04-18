@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFErrorData;
     /*
     *****************************************************************************
@@ -235,8 +236,6 @@ public abstract class JDFAutoError extends JDFElement
             setAttribute(AttributeName.ERRORID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ErrorID
           * @return the value of the attribute
@@ -245,8 +244,6 @@ public abstract class JDFAutoError extends JDFElement
         {
             return getAttribute(AttributeName.ERRORID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -261,8 +258,6 @@ public abstract class JDFAutoError extends JDFElement
             setAttribute(AttributeName.RESEND, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Resend
           * @return the value of the attribute
@@ -271,8 +266,6 @@ public abstract class JDFAutoError extends JDFElement
         {
             return EnumResend.getEnum(getAttribute(AttributeName.RESEND, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -287,8 +280,6 @@ public abstract class JDFAutoError extends JDFElement
             setAttribute(AttributeName.RETURNCODE, value, null);
         }
 
-
-
         /**
           * (15) get int attribute ReturnCode
           * @return int the value of the attribute
@@ -297,8 +288,6 @@ public abstract class JDFAutoError extends JDFElement
         {
             return getIntAttribute(AttributeName.RETURNCODE, null, 0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -315,8 +304,6 @@ public abstract class JDFAutoError extends JDFElement
         return (JDFErrorData)getCreateElement_KElement(ElementName.ERRORDATA, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element ErrorData
      * @param iSkip number of elements to skip
@@ -327,9 +314,10 @@ public abstract class JDFAutoError extends JDFElement
         return (JDFErrorData) getElement(ElementName.ERRORDATA, null, iSkip);
     }
 
-
-
-    public JDFErrorData appendErrorData()
+    /**
+     * (30) append element ErrorData
+     */
+    public JDFErrorData appendErrorData() throws JDFException
     {
         return (JDFErrorData) appendElement(ElementName.ERRORDATA, null);
     }

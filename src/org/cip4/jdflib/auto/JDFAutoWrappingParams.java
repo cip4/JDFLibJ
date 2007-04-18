@@ -230,8 +230,6 @@ public abstract class JDFAutoWrappingParams extends JDFResource
             setAttribute(AttributeName.WRAPPINGKIND, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute WrappingKind
           * @return the value of the attribute
@@ -240,7 +238,5 @@ public abstract class JDFAutoWrappingParams extends JDFResource
         {
             return EnumWrappingKind.getEnum(getAttribute(AttributeName.WRAPPINGKIND, null, null));
         }
-
-
 
 }// end namespace JDF

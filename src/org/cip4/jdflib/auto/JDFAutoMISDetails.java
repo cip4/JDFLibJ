@@ -312,8 +312,6 @@ public abstract class JDFAutoMISDetails extends JDFElement
             setAttribute(AttributeName.COSTTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute CostType
           * @return the value of the attribute
@@ -322,8 +320,6 @@ public abstract class JDFAutoMISDetails extends JDFElement
         {
             return EnumCostType.getEnum(getAttribute(AttributeName.COSTTYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -338,8 +334,6 @@ public abstract class JDFAutoMISDetails extends JDFElement
             setAttribute(AttributeName.DEVICEOPERATIONMODE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute DeviceOperationMode
           * @return the value of the attribute
@@ -348,8 +342,6 @@ public abstract class JDFAutoMISDetails extends JDFElement
         {
             return EnumDeviceOperationMode.getEnum(getAttribute(AttributeName.DEVICEOPERATIONMODE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -364,8 +356,6 @@ public abstract class JDFAutoMISDetails extends JDFElement
             setAttribute(AttributeName.WORKTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute WorkType
           * @return the value of the attribute
@@ -374,8 +364,6 @@ public abstract class JDFAutoMISDetails extends JDFElement
         {
             return EnumWorkType.getEnum(getAttribute(AttributeName.WORKTYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -390,8 +378,6 @@ public abstract class JDFAutoMISDetails extends JDFElement
             setAttribute(AttributeName.WORKTYPEDETAILS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute WorkTypeDetails
           * @return the value of the attribute
@@ -400,7 +386,5 @@ public abstract class JDFAutoMISDetails extends JDFElement
         {
             return getAttribute(AttributeName.WORKTYPEDETAILS, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

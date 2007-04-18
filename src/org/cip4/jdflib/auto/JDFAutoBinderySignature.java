@@ -412,8 +412,6 @@ public abstract class JDFAutoBinderySignature extends JDFResource
             setAttribute(AttributeName.BINDERYSIGNATURETYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute BinderySignatureType
           * @return the value of the attribute
@@ -422,8 +420,6 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         {
             return EnumBinderySignatureType.getEnum(getAttribute(AttributeName.BINDERYSIGNATURETYPE, null, "Fold"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -438,8 +434,6 @@ public abstract class JDFAutoBinderySignature extends JDFResource
             setAttribute(AttributeName.BINDINGEDGE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute BindingEdge
           * @return the value of the attribute
@@ -448,8 +442,6 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         {
             return EnumBindingEdge.getEnum(getAttribute(AttributeName.BINDINGEDGE, null, "Left"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -464,8 +456,6 @@ public abstract class JDFAutoBinderySignature extends JDFResource
             setAttribute(AttributeName.JOGEDGE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute JogEdge
           * @return the value of the attribute
@@ -474,8 +464,6 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         {
             return EnumJogEdge.getEnum(getAttribute(AttributeName.JOGEDGE, null, "Top"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -489,8 +477,6 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         {
             setAttribute(AttributeName.NUMBERUP, value, null);
         }
-
-
 
         /**
           * (20) get JDFXYPair attribute NumberUp
@@ -513,8 +499,6 @@ public abstract class JDFAutoBinderySignature extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute FoldCatalog
@@ -528,8 +512,6 @@ public abstract class JDFAutoBinderySignature extends JDFResource
             setAttribute(AttributeName.FOLDCATALOG, value, null);
         }
 
-
-
         /**
           * (23) get String attribute FoldCatalog
           * @return the value of the attribute
@@ -538,8 +520,6 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         {
             return getAttribute(AttributeName.FOLDCATALOG, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -554,8 +534,6 @@ public abstract class JDFAutoBinderySignature extends JDFResource
             setAttribute(AttributeName.BINDINGORIENTATION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute BindingOrientation
           * @return the value of the attribute
@@ -564,8 +542,6 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         {
             return EnumBindingOrientation.getEnum(getAttribute(AttributeName.BINDINGORIENTATION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -580,8 +556,6 @@ public abstract class JDFAutoBinderySignature extends JDFResource
             setAttribute(AttributeName.OUTSIDEGUTTER, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute OutsideGutter
           * @return boolean the value of the attribute
@@ -590,8 +564,6 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         {
             return getBoolAttribute(AttributeName.OUTSIDEGUTTER, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -605,8 +577,6 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         {
             setAttribute(AttributeName.STAGGERCOLUMNS, value, null);
         }
-
-
 
         /**
           * (20) get JDFNumberList attribute StaggerColumns
@@ -629,8 +599,6 @@ public abstract class JDFAutoBinderySignature extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute StaggerContinuous
@@ -644,8 +612,6 @@ public abstract class JDFAutoBinderySignature extends JDFResource
             setAttribute(AttributeName.STAGGERCONTINUOUS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute StaggerContinuous
           * @return boolean the value of the attribute
@@ -654,8 +620,6 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         {
             return getBoolAttribute(AttributeName.STAGGERCONTINUOUS, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -669,8 +633,6 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         {
             setAttribute(AttributeName.STAGGERROWS, value, null);
         }
-
-
 
         /**
           * (20) get JDFNumberList attribute StaggerRows
@@ -693,8 +655,6 @@ public abstract class JDFAutoBinderySignature extends JDFResource
             return nPlaceHolder;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -709,8 +669,6 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         return (JDFDieLayout) getElement(ElementName.DIELAYOUT, null, 0);
     }
 
-
-
     /** (25) getCreateDieLayout
      * 
      * @return JDFDieLayout the element
@@ -720,17 +678,14 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         return (JDFDieLayout) getCreateElement_KElement(ElementName.DIELAYOUT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDieLayout
+     * (29) append element DieLayout
      */
     public JDFDieLayout appendDieLayout() throws JDFException
     {
         return (JDFDieLayout) appendElementN(ElementName.DIELAYOUT, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -739,6 +694,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateFold
      * 
      * @param iSkip number of elements to skip
@@ -748,8 +704,6 @@ public abstract class JDFAutoBinderySignature extends JDFResource
     {
         return (JDFFold)getCreateElement_KElement(ElementName.FOLD, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Fold
@@ -761,9 +715,10 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         return (JDFFold) getElement(ElementName.FOLD, null, iSkip);
     }
 
-
-
-    public JDFFold appendFold()
+    /**
+     * (30) append element Fold
+     */
+    public JDFFold appendFold() throws JDFException
     {
         return (JDFFold) appendElement(ElementName.FOLD, null);
     }
@@ -778,8 +733,6 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         return (JDFSignatureCell)getCreateElement_KElement(ElementName.SIGNATURECELL, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element SignatureCell
      * @param iSkip number of elements to skip
@@ -790,9 +743,10 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         return (JDFSignatureCell) getElement(ElementName.SIGNATURECELL, null, iSkip);
     }
 
-
-
-    public JDFSignatureCell appendSignatureCell()
+    /**
+     * (30) append element SignatureCell
+     */
+    public JDFSignatureCell appendSignatureCell() throws JDFException
     {
         return (JDFSignatureCell) appendElement(ElementName.SIGNATURECELL, null);
     }

@@ -347,8 +347,6 @@ public abstract class JDFAutoIdentificationField extends JDFResource
             setAttribute(AttributeName.ENCODING, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Encoding
           * @return the value of the attribute
@@ -357,8 +355,6 @@ public abstract class JDFAutoIdentificationField extends JDFResource
         {
             return EnumEncoding.getEnum(getAttribute(AttributeName.ENCODING, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -373,8 +369,6 @@ public abstract class JDFAutoIdentificationField extends JDFResource
             setAttribute(AttributeName.ENCODINGDETAILS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute EncodingDetails
           * @return the value of the attribute
@@ -383,8 +377,6 @@ public abstract class JDFAutoIdentificationField extends JDFResource
         {
             return getAttribute(AttributeName.ENCODINGDETAILS, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -399,11 +391,9 @@ public abstract class JDFAutoIdentificationField extends JDFResource
             setAttribute(AttributeName.BOUNDINGBOX, value, null);
         }
 
-
-
         /**
           * (20) get JDFRectangle attribute BoundingBox
-          * @return JDFRectanglethe value of the attribute, null if a the
+          * @return JDFRectangle the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFRectangle
           */
         public JDFRectangle getBoundingBox()
@@ -422,8 +412,6 @@ public abstract class JDFAutoIdentificationField extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Format
@@ -437,8 +425,6 @@ public abstract class JDFAutoIdentificationField extends JDFResource
             setAttribute(AttributeName.FORMAT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Format
           * @return the value of the attribute
@@ -447,8 +433,6 @@ public abstract class JDFAutoIdentificationField extends JDFResource
         {
             return getAttribute(AttributeName.FORMAT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -463,11 +447,9 @@ public abstract class JDFAutoIdentificationField extends JDFResource
             setAttribute(AttributeName.ORIENTATION, value, null);
         }
 
-
-
         /**
           * (20) get JDFMatrix attribute Orientation
-          * @return JDFMatrixthe value of the attribute, null if a the
+          * @return JDFMatrix the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFMatrix
           */
         public JDFMatrix getOrientation()
@@ -486,8 +468,6 @@ public abstract class JDFAutoIdentificationField extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Page
@@ -501,8 +481,6 @@ public abstract class JDFAutoIdentificationField extends JDFResource
             setAttribute(AttributeName.PAGE, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Page
           * @return int the value of the attribute
@@ -511,8 +489,6 @@ public abstract class JDFAutoIdentificationField extends JDFResource
         {
             return getIntAttribute(AttributeName.PAGE, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -527,8 +503,6 @@ public abstract class JDFAutoIdentificationField extends JDFResource
             setAttribute(AttributeName.POSITION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Position
           * @return the value of the attribute
@@ -537,8 +511,6 @@ public abstract class JDFAutoIdentificationField extends JDFResource
         {
             return EnumPosition.getEnum(getAttribute(AttributeName.POSITION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -553,8 +525,6 @@ public abstract class JDFAutoIdentificationField extends JDFResource
             setAttribute(AttributeName.PURPOSE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Purpose
           * @return the value of the attribute
@@ -563,8 +533,6 @@ public abstract class JDFAutoIdentificationField extends JDFResource
         {
             return EnumPurpose.getEnum(getAttribute(AttributeName.PURPOSE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -579,8 +547,6 @@ public abstract class JDFAutoIdentificationField extends JDFResource
             setAttribute(AttributeName.PURPOSEDETAILS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute PurposeDetails
           * @return the value of the attribute
@@ -589,8 +555,6 @@ public abstract class JDFAutoIdentificationField extends JDFResource
         {
             return getAttribute(AttributeName.PURPOSEDETAILS, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -605,8 +569,6 @@ public abstract class JDFAutoIdentificationField extends JDFResource
             setAttribute(AttributeName.VALUE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Value
           * @return the value of the attribute
@@ -615,8 +577,6 @@ public abstract class JDFAutoIdentificationField extends JDFResource
         {
             return getAttribute(AttributeName.VALUE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -631,8 +591,6 @@ public abstract class JDFAutoIdentificationField extends JDFResource
             setAttribute(AttributeName.VALUEFORMAT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ValueFormat
           * @return the value of the attribute
@@ -641,8 +599,6 @@ public abstract class JDFAutoIdentificationField extends JDFResource
         {
             return getAttribute(AttributeName.VALUEFORMAT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -657,8 +613,6 @@ public abstract class JDFAutoIdentificationField extends JDFResource
             setAttribute(AttributeName.VALUETEMPLATE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ValueTemplate
           * @return the value of the attribute
@@ -667,7 +621,5 @@ public abstract class JDFAutoIdentificationField extends JDFResource
         {
             return getAttribute(AttributeName.VALUETEMPLATE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

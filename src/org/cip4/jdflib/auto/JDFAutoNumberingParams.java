@@ -74,6 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFNumberingParam;
     /*
@@ -179,8 +180,6 @@ public abstract class JDFAutoNumberingParams extends JDFResource
         return (JDFNumberingParam)getCreateElement_KElement(ElementName.NUMBERINGPARAM, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element NumberingParam
      * @param iSkip number of elements to skip
@@ -191,9 +190,10 @@ public abstract class JDFAutoNumberingParams extends JDFResource
         return (JDFNumberingParam) getElement(ElementName.NUMBERINGPARAM, null, iSkip);
     }
 
-
-
-    public JDFNumberingParam appendNumberingParam()
+    /**
+     * (30) append element NumberingParam
+     */
+    public JDFNumberingParam appendNumberingParam() throws JDFException
     {
         return (JDFNumberingParam) appendElement(ElementName.NUMBERINGPARAM, null);
     }

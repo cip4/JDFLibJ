@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.devicecapability.JDFDisplayGroup;
     /*
     *****************************************************************************
@@ -165,8 +166,6 @@ public abstract class JDFAutoDisplayGroupPool extends JDFElement
         return (JDFDisplayGroup)getCreateElement_KElement(ElementName.DISPLAYGROUP, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element DisplayGroup
      * @param iSkip number of elements to skip
@@ -177,9 +176,10 @@ public abstract class JDFAutoDisplayGroupPool extends JDFElement
         return (JDFDisplayGroup) getElement(ElementName.DISPLAYGROUP, null, iSkip);
     }
 
-
-
-    public JDFDisplayGroup appendDisplayGroup()
+    /**
+     * (30) append element DisplayGroup
+     */
+    public JDFDisplayGroup appendDisplayGroup() throws JDFException
     {
         return (JDFDisplayGroup) appendElement(ElementName.DISPLAYGROUP, null);
     }

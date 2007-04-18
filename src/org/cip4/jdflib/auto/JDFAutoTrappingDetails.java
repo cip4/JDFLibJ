@@ -206,8 +206,6 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
             setAttribute(AttributeName.DEFAULTTRAPPING, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute DefaultTrapping
           * @return boolean the value of the attribute
@@ -216,8 +214,6 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
         {
             return getBoolAttribute(AttributeName.DEFAULTTRAPPING, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -232,8 +228,6 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
             setAttribute(AttributeName.IGNOREFILEPARAMS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IgnoreFileParams
           * @return boolean the value of the attribute
@@ -242,8 +236,6 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
         {
             return getBoolAttribute(AttributeName.IGNOREFILEPARAMS, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -258,8 +250,6 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
             setAttribute(AttributeName.TRAPPING, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Trapping
           * @return boolean the value of the attribute
@@ -268,8 +258,6 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
         {
             return getBoolAttribute(AttributeName.TRAPPING, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -284,8 +272,6 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
             setAttribute(AttributeName.TRAPPINGTYPE, value, null);
         }
 
-
-
         /**
           * (15) get int attribute TrappingType
           * @return int the value of the attribute
@@ -294,8 +280,6 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
         {
             return getIntAttribute(AttributeName.TRAPPINGTYPE, null, 0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -311,8 +295,6 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
         return (JDFTrappingOrder) getElement(ElementName.TRAPPINGORDER, null, 0);
     }
 
-
-
     /** (25) getCreateTrappingOrder
      * 
      * @return JDFTrappingOrder the element
@@ -322,17 +304,14 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
         return (JDFTrappingOrder) getCreateElement_KElement(ElementName.TRAPPINGORDER, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementTrappingOrder
+     * (29) append element TrappingOrder
      */
     public JDFTrappingOrder appendTrappingOrder() throws JDFException
     {
         return (JDFTrappingOrder) appendElementN(ElementName.TRAPPINGORDER, 1, null);
     }
+
     /**
      * (24) const get element TrappingParams
      * @return JDFTrappingParams the element
@@ -341,8 +320,6 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
     {
         return (JDFTrappingParams) getElement(ElementName.TRAPPINGPARAMS, null, 0);
     }
-
-
 
     /** (25) getCreateTrappingParams
      * 
@@ -353,17 +330,14 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
         return (JDFTrappingParams) getCreateElement_KElement(ElementName.TRAPPINGPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementTrappingParams
+     * (29) append element TrappingParams
      */
     public JDFTrappingParams appendTrappingParams() throws JDFException
     {
         return (JDFTrappingParams) appendElementN(ElementName.TRAPPINGPARAMS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -372,6 +346,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateObjectResolution
      * 
      * @param iSkip number of elements to skip
@@ -381,8 +356,6 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
     {
         return (JDFObjectResolution)getCreateElement_KElement(ElementName.OBJECTRESOLUTION, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element ObjectResolution
@@ -394,9 +367,10 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
         return (JDFObjectResolution) getElement(ElementName.OBJECTRESOLUTION, null, iSkip);
     }
 
-
-
-    public JDFObjectResolution appendObjectResolution()
+    /**
+     * (30) append element ObjectResolution
+     */
+    public JDFObjectResolution appendObjectResolution() throws JDFException
     {
         return (JDFObjectResolution) appendElement(ElementName.OBJECTRESOLUTION, null);
     }
@@ -409,6 +383,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateTrapRegion
      * 
      * @param iSkip number of elements to skip
@@ -418,8 +393,6 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
     {
         return (JDFTrapRegion)getCreateElement_KElement(ElementName.TRAPREGION, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element TrapRegion
@@ -431,9 +404,10 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
         return (JDFTrapRegion) getElement(ElementName.TRAPREGION, null, iSkip);
     }
 
-
-
-    public JDFTrapRegion appendTrapRegion()
+    /**
+     * (30) append element TrapRegion
+     */
+    public JDFTrapRegion appendTrapRegion() throws JDFException
     {
         return (JDFTrapRegion) appendElement(ElementName.TRAPREGION, null);
     }
@@ -446,4 +420,5 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

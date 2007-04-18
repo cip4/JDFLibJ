@@ -74,6 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.intent.JDFShapeCut;
     /*
@@ -165,8 +166,6 @@ public abstract class JDFAutoShapeCuttingIntent extends JDFIntentResource
         return (JDFShapeCut)getCreateElement_KElement(ElementName.SHAPECUT, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element ShapeCut
      * @param iSkip number of elements to skip
@@ -177,9 +176,10 @@ public abstract class JDFAutoShapeCuttingIntent extends JDFIntentResource
         return (JDFShapeCut) getElement(ElementName.SHAPECUT, null, iSkip);
     }
 
-
-
-    public JDFShapeCut appendShapeCut()
+    /**
+     * (30) append element ShapeCut
+     */
+    public JDFShapeCut appendShapeCut() throws JDFException
     {
         return (JDFShapeCut) appendElement(ElementName.SHAPECUT, null);
     }

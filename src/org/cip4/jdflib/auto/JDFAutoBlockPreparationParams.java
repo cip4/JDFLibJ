@@ -82,6 +82,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFRegisterRibbon;
 import org.cip4.jdflib.resource.JDFResource;
     /*
@@ -250,8 +251,6 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
             setAttribute(AttributeName.BACKING, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Backing
           * @return double the value of the attribute
@@ -260,8 +259,6 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
         {
             return getRealAttribute(AttributeName.BACKING, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -276,8 +273,6 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
             setAttribute(AttributeName.ROUNDING, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Rounding
           * @return double the value of the attribute
@@ -286,8 +281,6 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
         {
             return getRealAttribute(AttributeName.ROUNDING, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -302,8 +295,6 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
             setAttribute(AttributeName.TIGHTBACKING, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute TightBacking
           * @return the value of the attribute
@@ -312,8 +303,6 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
         {
             return EnumTightBacking.getEnum(getAttribute(AttributeName.TIGHTBACKING, null, null));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -330,8 +319,6 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
         return (JDFRegisterRibbon)getCreateElement_KElement(ElementName.REGISTERRIBBON, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element RegisterRibbon
      * @param iSkip number of elements to skip
@@ -342,9 +329,10 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
         return (JDFRegisterRibbon) getElement(ElementName.REGISTERRIBBON, null, iSkip);
     }
 
-
-
-    public JDFRegisterRibbon appendRegisterRibbon()
+    /**
+     * (30) append element RegisterRibbon
+     */
+    public JDFRegisterRibbon appendRegisterRibbon() throws JDFException
     {
         return (JDFRegisterRibbon) appendElement(ElementName.REGISTERRIBBON, null);
     }
@@ -357,4 +345,5 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

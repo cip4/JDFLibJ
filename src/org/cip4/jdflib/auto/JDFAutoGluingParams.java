@@ -78,6 +78,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFGlue;
     /*
@@ -197,8 +198,6 @@ public abstract class JDFAutoGluingParams extends JDFResource
             setAttribute(AttributeName.GLUINGPRODUCTIONID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute GluingProductionID
           * @return the value of the attribute
@@ -207,8 +206,6 @@ public abstract class JDFAutoGluingParams extends JDFResource
         {
             return getAttribute(AttributeName.GLUINGPRODUCTIONID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -225,8 +222,6 @@ public abstract class JDFAutoGluingParams extends JDFResource
         return (JDFGlue)getCreateElement_KElement(ElementName.GLUE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Glue
      * @param iSkip number of elements to skip
@@ -237,9 +232,10 @@ public abstract class JDFAutoGluingParams extends JDFResource
         return (JDFGlue) getElement(ElementName.GLUE, null, iSkip);
     }
 
-
-
-    public JDFGlue appendGlue()
+    /**
+     * (30) append element Glue
+     */
+    public JDFGlue appendGlue() throws JDFException
     {
         return (JDFGlue) appendElement(ElementName.GLUE, null);
     }

@@ -169,8 +169,6 @@ public abstract class JDFAutoBookCase extends JDFElement
         return (JDFOptionSpan) getElement(ElementName.HEADBANDS, null, 0);
     }
 
-
-
     /** (25) getCreateHeadBands
      * 
      * @return JDFOptionSpan the element
@@ -180,17 +178,14 @@ public abstract class JDFAutoBookCase extends JDFElement
         return (JDFOptionSpan) getCreateElement_KElement(ElementName.HEADBANDS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementHeadBands
+     * (29) append element HeadBands
      */
     public JDFOptionSpan appendHeadBands() throws JDFException
     {
         return (JDFOptionSpan) appendElementN(ElementName.HEADBANDS, 1, null);
     }
+
     /**
      * (24) const get element Shape
      * @return JDFSpanShape the element
@@ -199,8 +194,6 @@ public abstract class JDFAutoBookCase extends JDFElement
     {
         return (JDFSpanShape) getElement(ElementName.SHAPE, null, 0);
     }
-
-
 
     /** (25) getCreateShape
      * 
@@ -211,17 +204,14 @@ public abstract class JDFAutoBookCase extends JDFElement
         return (JDFSpanShape) getCreateElement_KElement(ElementName.SHAPE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementShape
+     * (29) append element Shape
      */
     public JDFSpanShape appendShape() throws JDFException
     {
         return (JDFSpanShape) appendElementN(ElementName.SHAPE, 1, null);
     }
+
     /**
      * (24) const get element Thickness
      * @return JDFNumberSpan the element
@@ -230,8 +220,6 @@ public abstract class JDFAutoBookCase extends JDFElement
     {
         return (JDFNumberSpan) getElement(ElementName.THICKNESS, null, 0);
     }
-
-
 
     /** (25) getCreateThickness
      * 
@@ -242,15 +230,12 @@ public abstract class JDFAutoBookCase extends JDFElement
         return (JDFNumberSpan) getCreateElement_KElement(ElementName.THICKNESS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementThickness
+     * (29) append element Thickness
      */
     public JDFNumberSpan appendThickness() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.THICKNESS, 1, null);
     }
+
 }// end namespace JDF

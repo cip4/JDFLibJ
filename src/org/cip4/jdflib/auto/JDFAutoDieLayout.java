@@ -181,8 +181,6 @@ public abstract class JDFAutoDieLayout extends JDFResource
         return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
     /** (25) getCreateFileSpec
      * 
      * @return JDFFileSpec the element
@@ -192,17 +190,14 @@ public abstract class JDFAutoDieLayout extends JDFResource
         return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFileSpec
+     * (29) append element FileSpec
      */
     public JDFFileSpec appendFileSpec() throws JDFException
     {
         return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -211,6 +206,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateStation
      * 
      * @param iSkip number of elements to skip
@@ -220,8 +216,6 @@ public abstract class JDFAutoDieLayout extends JDFResource
     {
         return (JDFStation)getCreateElement_KElement(ElementName.STATION, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Station
@@ -233,9 +227,10 @@ public abstract class JDFAutoDieLayout extends JDFResource
         return (JDFStation) getElement(ElementName.STATION, null, iSkip);
     }
 
-
-
-    public JDFStation appendStation()
+    /**
+     * (30) append element Station
+     */
+    public JDFStation appendStation() throws JDFException
     {
         return (JDFStation) appendElement(ElementName.STATION, null);
     }

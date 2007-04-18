@@ -199,8 +199,6 @@ public abstract class JDFAutoPreflightReportRulePool extends JDFResource
             setAttribute(AttributeName.MAXOCCURRENCES, value, null);
         }
 
-
-
         /**
           * (15) get int attribute MaxOccurrences
           * @return int the value of the attribute
@@ -209,8 +207,6 @@ public abstract class JDFAutoPreflightReportRulePool extends JDFResource
         {
             return getIntAttribute(AttributeName.MAXOCCURRENCES, null, 0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -227,8 +223,6 @@ public abstract class JDFAutoPreflightReportRulePool extends JDFResource
         return (JDFPRRule)getCreateElement_KElement(ElementName.PRRULE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element PRRule
      * @param iSkip number of elements to skip
@@ -239,9 +233,10 @@ public abstract class JDFAutoPreflightReportRulePool extends JDFResource
         return (JDFPRRule) getElement(ElementName.PRRULE, null, iSkip);
     }
 
-
-
-    public JDFPRRule appendPRRule()
+    /**
+     * (30) append element PRRule
+     */
+    public JDFPRRule appendPRRule() throws JDFException
     {
         return (JDFPRRule) appendElement(ElementName.PRRULE, null);
     }
@@ -255,8 +250,6 @@ public abstract class JDFAutoPreflightReportRulePool extends JDFResource
         return (JDFPRRuleAttr) getElement(ElementName.PRRULEATTR, null, 0);
     }
 
-
-
     /** (25) getCreatePRRuleAttr
      * 
      * @return JDFPRRuleAttr the element
@@ -266,15 +259,12 @@ public abstract class JDFAutoPreflightReportRulePool extends JDFResource
         return (JDFPRRuleAttr) getCreateElement_KElement(ElementName.PRRULEATTR, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPRRuleAttr
+     * (29) append element PRRuleAttr
      */
     public JDFPRRuleAttr appendPRRuleAttr() throws JDFException
     {
         return (JDFPRRuleAttr) appendElementN(ElementName.PRRULEATTR, 1, null);
     }
+
 }// end namespace JDF

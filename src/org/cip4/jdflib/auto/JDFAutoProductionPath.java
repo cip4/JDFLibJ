@@ -200,8 +200,6 @@ public abstract class JDFAutoProductionPath extends JDFResource
             setAttribute(AttributeName.PRODUCTIONPATHID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ProductionPathID
           * @return the value of the attribute
@@ -210,8 +208,6 @@ public abstract class JDFAutoProductionPath extends JDFResource
         {
             return getAttribute(AttributeName.PRODUCTIONPATHID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -227,8 +223,6 @@ public abstract class JDFAutoProductionPath extends JDFResource
         return (JDFProductionSubPath) getElement(ElementName.FOLDERSUPERSTRUCTUREWEBPATH, null, 0);
     }
 
-
-
     /** (25) getCreateFolderSuperstructureWebPath
      * 
      * @return JDFProductionSubPath the element
@@ -238,17 +232,14 @@ public abstract class JDFAutoProductionPath extends JDFResource
         return (JDFProductionSubPath) getCreateElement_KElement(ElementName.FOLDERSUPERSTRUCTUREWEBPATH, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFolderSuperstructureWebPath
+     * (29) append element FolderSuperstructureWebPath
      */
     public JDFProductionSubPath appendFolderSuperstructureWebPath() throws JDFException
     {
         return (JDFProductionSubPath) appendElementN(ElementName.FOLDERSUPERSTRUCTUREWEBPATH, 1, null);
     }
+
     /** (26) getCreatePostPressComponentPath
      * 
      * @param iSkip number of elements to skip
@@ -258,8 +249,6 @@ public abstract class JDFAutoProductionPath extends JDFResource
     {
         return (JDFProductionSubPath)getCreateElement_KElement(ElementName.POSTPRESSCOMPONENTPATH, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element PostPressComponentPath
@@ -271,9 +260,10 @@ public abstract class JDFAutoProductionPath extends JDFResource
         return (JDFProductionSubPath) getElement(ElementName.POSTPRESSCOMPONENTPATH, null, iSkip);
     }
 
-
-
-    public JDFProductionSubPath appendPostPressComponentPath()
+    /**
+     * (30) append element PostPressComponentPath
+     */
+    public JDFProductionSubPath appendPostPressComponentPath() throws JDFException
     {
         return (JDFProductionSubPath) appendElement(ElementName.POSTPRESSCOMPONENTPATH, null);
     }
@@ -288,8 +278,6 @@ public abstract class JDFAutoProductionPath extends JDFResource
         return (JDFProductionSubPath)getCreateElement_KElement(ElementName.PRINTINGUNITWEBPATH, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element PrintingUnitWebPath
      * @param iSkip number of elements to skip
@@ -300,9 +288,10 @@ public abstract class JDFAutoProductionPath extends JDFResource
         return (JDFProductionSubPath) getElement(ElementName.PRINTINGUNITWEBPATH, null, iSkip);
     }
 
-
-
-    public JDFProductionSubPath appendPrintingUnitWebPath()
+    /**
+     * (30) append element PrintingUnitWebPath
+     */
+    public JDFProductionSubPath appendPrintingUnitWebPath() throws JDFException
     {
         return (JDFProductionSubPath) appendElement(ElementName.PRINTINGUNITWEBPATH, null);
     }

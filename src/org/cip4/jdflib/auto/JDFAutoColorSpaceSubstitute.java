@@ -167,8 +167,6 @@ public abstract class JDFAutoColorSpaceSubstitute extends JDFElement
         return (JDFPDLResourceAlias) getElement(ElementName.PDLRESOURCEALIAS, null, 0);
     }
 
-
-
     /** (25) getCreatePDLResourceAlias
      * 
      * @return JDFPDLResourceAlias the element
@@ -178,17 +176,14 @@ public abstract class JDFAutoColorSpaceSubstitute extends JDFElement
         return (JDFPDLResourceAlias) getCreateElement_KElement(ElementName.PDLRESOURCEALIAS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPDLResourceAlias
+     * (29) append element PDLResourceAlias
      */
     public JDFPDLResourceAlias appendPDLResourceAlias() throws JDFException
     {
         return (JDFPDLResourceAlias) appendElementN(ElementName.PDLRESOURCEALIAS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -197,6 +192,7 @@ public abstract class JDFAutoColorSpaceSubstitute extends JDFElement
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateSeparationSpec
      * 
      * @param iSkip number of elements to skip
@@ -206,8 +202,6 @@ public abstract class JDFAutoColorSpaceSubstitute extends JDFElement
     {
         return (JDFSeparationSpec)getCreateElement_KElement(ElementName.SEPARATIONSPEC, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element SeparationSpec
@@ -219,9 +213,10 @@ public abstract class JDFAutoColorSpaceSubstitute extends JDFElement
         return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
     }
 
-
-
-    public JDFSeparationSpec appendSeparationSpec()
+    /**
+     * (30) append element SeparationSpec
+     */
+    public JDFSeparationSpec appendSeparationSpec() throws JDFException
     {
         return (JDFSeparationSpec) appendElement(ElementName.SEPARATIONSPEC, null);
     }

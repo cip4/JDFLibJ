@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
@@ -196,8 +197,6 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
             setEnumerationsAttribute(AttributeName.CLASSES, v, null);
         }
 
-
-
         /**
           * (9.2) get Classes attribute Classes
           * @return Vector of the enumerations
@@ -206,8 +205,6 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
         {
             return getEnumerationsAttribute(AttributeName.CLASSES, null, JDFResource.EnumResourceClass.getEnum(0), false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -222,8 +219,6 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
             setAttribute(AttributeName.EXACT, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Exact
           * @return boolean the value of the attribute
@@ -232,8 +227,6 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.EXACT, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -248,8 +241,6 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
             setAttribute(AttributeName.JOBID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobID
           * @return the value of the attribute
@@ -258,8 +249,6 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
         {
             return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -274,8 +263,6 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
             setAttribute(AttributeName.JOBPARTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobPartID
           * @return the value of the attribute
@@ -284,8 +271,6 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
         {
             return getAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -300,8 +285,6 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
             setAttribute(AttributeName.PROCESSUSAGE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ProcessUsage
           * @return the value of the attribute
@@ -310,8 +293,6 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
         {
             return getAttribute(AttributeName.PROCESSUSAGE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -326,8 +307,6 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
             setAttribute(AttributeName.PRODUCTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ProductID
           * @return the value of the attribute
@@ -336,8 +315,6 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
         {
             return getAttribute(AttributeName.PRODUCTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -352,8 +329,6 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
             setAttribute(AttributeName.QUEUEENTRYID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute QueueEntryID
           * @return the value of the attribute
@@ -362,8 +337,6 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
         {
             return getAttribute(AttributeName.QUEUEENTRYID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -378,8 +351,6 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
             setAttribute(AttributeName.RESOURCEID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ResourceID
           * @return the value of the attribute
@@ -388,8 +359,6 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
         {
             return getAttribute(AttributeName.RESOURCEID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -404,8 +373,6 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
             setAttribute(AttributeName.RESOURCENAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ResourceName
           * @return the value of the attribute
@@ -414,8 +381,6 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
         {
             return getAttribute(AttributeName.RESOURCENAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -430,8 +395,6 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
             setAttribute(AttributeName.USAGE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Usage
           * @return the value of the attribute
@@ -440,8 +403,6 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
         {
             return JDFResourceLink.EnumUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -458,8 +419,6 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
         return (JDFPart)getCreateElement_KElement(ElementName.PART, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Part
      * @param iSkip number of elements to skip
@@ -470,9 +429,10 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
         return (JDFPart) getElement(ElementName.PART, null, iSkip);
     }
 
-
-
-    public JDFPart appendPart()
+    /**
+     * (30) append element Part
+     */
+    public JDFPart appendPart() throws JDFException
     {
         return (JDFPart) appendElement(ElementName.PART, null);
     }

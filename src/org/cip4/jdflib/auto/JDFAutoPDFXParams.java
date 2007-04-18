@@ -230,8 +230,6 @@ public abstract class JDFAutoPDFXParams extends JDFElement
             setAttribute(AttributeName.PDFX1ACHECK, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute PDFX1aCheck
           * @return boolean the value of the attribute
@@ -240,8 +238,6 @@ public abstract class JDFAutoPDFXParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.PDFX1ACHECK, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -256,8 +252,6 @@ public abstract class JDFAutoPDFXParams extends JDFElement
             setAttribute(AttributeName.PDFX3CHECK, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute PDFX3Check
           * @return boolean the value of the attribute
@@ -266,8 +260,6 @@ public abstract class JDFAutoPDFXParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.PDFX3CHECK, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -282,11 +274,9 @@ public abstract class JDFAutoPDFXParams extends JDFElement
             setAttribute(AttributeName.PDFXBLEEDBOXTOTRIMBOXOFFSET, value, null);
         }
 
-
-
         /**
           * (20) get JDFRectangle attribute PDFXBleedBoxToTrimBoxOffset
-          * @return JDFRectanglethe value of the attribute, null if a the
+          * @return JDFRectangle the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFRectangle
           */
         public JDFRectangle getPDFXBleedBoxToTrimBoxOffset()
@@ -305,8 +295,6 @@ public abstract class JDFAutoPDFXParams extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute PDFXCompliantPDFOnly
@@ -320,8 +308,6 @@ public abstract class JDFAutoPDFXParams extends JDFElement
             setAttribute(AttributeName.PDFXCOMPLIANTPDFONLY, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute PDFXCompliantPDFOnly
           * @return boolean the value of the attribute
@@ -330,8 +316,6 @@ public abstract class JDFAutoPDFXParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.PDFXCOMPLIANTPDFONLY, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -346,8 +330,6 @@ public abstract class JDFAutoPDFXParams extends JDFElement
             setAttribute(AttributeName.PDFXOUTPUTCONDITION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute PDFXOutputCondition
           * @return the value of the attribute
@@ -356,8 +338,6 @@ public abstract class JDFAutoPDFXParams extends JDFElement
         {
             return getAttribute(AttributeName.PDFXOUTPUTCONDITION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -372,8 +352,6 @@ public abstract class JDFAutoPDFXParams extends JDFElement
             setAttribute(AttributeName.PDFXOUTPUTINTENTPROFILE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute PDFXOutputIntentProfile
           * @return the value of the attribute
@@ -382,8 +360,6 @@ public abstract class JDFAutoPDFXParams extends JDFElement
         {
             return getAttribute(AttributeName.PDFXOUTPUTINTENTPROFILE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -398,8 +374,6 @@ public abstract class JDFAutoPDFXParams extends JDFElement
             setAttribute(AttributeName.PDFXNOTRIMBOXERROR, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute PDFXNoTrimBoxError
           * @return boolean the value of the attribute
@@ -408,8 +382,6 @@ public abstract class JDFAutoPDFXParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.PDFXNOTRIMBOXERROR, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -424,8 +396,6 @@ public abstract class JDFAutoPDFXParams extends JDFElement
             setAttribute(AttributeName.PDFXREGISTRYNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute PDFXRegistryName
           * @return the value of the attribute
@@ -434,8 +404,6 @@ public abstract class JDFAutoPDFXParams extends JDFElement
         {
             return getAttribute(AttributeName.PDFXREGISTRYNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -450,8 +418,6 @@ public abstract class JDFAutoPDFXParams extends JDFElement
             setAttribute(AttributeName.PDFXSETBLEEDBOXTOMEDIABOX, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute PDFXSetBleedBoxToMediaBox
           * @return boolean the value of the attribute
@@ -460,8 +426,6 @@ public abstract class JDFAutoPDFXParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.PDFXSETBLEEDBOXTOMEDIABOX, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -476,8 +440,6 @@ public abstract class JDFAutoPDFXParams extends JDFElement
             setAttribute(AttributeName.PDFXTRAPPED, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute PDFXTrapped
           * @return the value of the attribute
@@ -486,8 +448,6 @@ public abstract class JDFAutoPDFXParams extends JDFElement
         {
             return EnumPDFXTrapped.getEnum(getAttribute(AttributeName.PDFXTRAPPED, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -502,11 +462,9 @@ public abstract class JDFAutoPDFXParams extends JDFElement
             setAttribute(AttributeName.PDFXTRIMBOXTOMEDIABOXOFFSET, value, null);
         }
 
-
-
         /**
           * (20) get JDFRectangle attribute PDFXTrimBoxToMediaBoxOffset
-          * @return JDFRectanglethe value of the attribute, null if a the
+          * @return JDFRectangle the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFRectangle
           */
         public JDFRectangle getPDFXTrimBoxToMediaBoxOffset()
@@ -524,7 +482,5 @@ public abstract class JDFAutoPDFXParams extends JDFElement
             }
             return nPlaceHolder;
         }
-
-
 
 }// end namespace JDF

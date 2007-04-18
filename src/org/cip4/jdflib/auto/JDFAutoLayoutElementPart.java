@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFBarcodeProductionParams;
     /*
     *****************************************************************************
@@ -165,8 +166,6 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
         return (JDFBarcodeProductionParams)getCreateElement_KElement(ElementName.BARCODEPRODUCTIONPARAMS, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element BarcodeProductionParams
      * @param iSkip number of elements to skip
@@ -177,9 +176,10 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
         return (JDFBarcodeProductionParams) getElement(ElementName.BARCODEPRODUCTIONPARAMS, null, iSkip);
     }
 
-
-
-    public JDFBarcodeProductionParams appendBarcodeProductionParams()
+    /**
+     * (30) append element BarcodeProductionParams
+     */
+    public JDFBarcodeProductionParams appendBarcodeProductionParams() throws JDFException
     {
         return (JDFBarcodeProductionParams) appendElement(ElementName.BARCODEPRODUCTIONPARAMS, null);
     }

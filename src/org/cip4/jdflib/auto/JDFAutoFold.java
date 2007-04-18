@@ -323,8 +323,6 @@ public abstract class JDFAutoFold extends JDFResource
             setAttribute(AttributeName.FROM, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute From
           * @return the value of the attribute
@@ -333,8 +331,6 @@ public abstract class JDFAutoFold extends JDFResource
         {
             return EnumFrom.getEnum(getAttribute(AttributeName.FROM, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -349,8 +345,6 @@ public abstract class JDFAutoFold extends JDFResource
             setAttribute(AttributeName.TO, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute To
           * @return the value of the attribute
@@ -359,8 +353,6 @@ public abstract class JDFAutoFold extends JDFResource
         {
             return EnumTo.getEnum(getAttribute(AttributeName.TO, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -375,8 +367,6 @@ public abstract class JDFAutoFold extends JDFResource
             setAttribute(AttributeName.TRAVEL, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Travel
           * @return double the value of the attribute
@@ -385,8 +375,6 @@ public abstract class JDFAutoFold extends JDFResource
         {
             return getRealAttribute(AttributeName.TRAVEL, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -401,8 +389,6 @@ public abstract class JDFAutoFold extends JDFResource
             setAttribute(AttributeName.RELATIVETRAVEL, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute RelativeTravel
           * @return the value of the attribute
@@ -411,7 +397,5 @@ public abstract class JDFAutoFold extends JDFResource
         {
             return EnumRelativeTravel.getEnum(getAttribute(AttributeName.RELATIVETRAVEL, null, null));
         }
-
-
 
 }// end namespace JDF

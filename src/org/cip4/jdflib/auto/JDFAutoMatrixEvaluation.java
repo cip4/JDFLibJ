@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFValue;
@@ -199,8 +200,6 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
             setAttribute(AttributeName.ROTATEMOD, value, null);
         }
 
-
-
         /**
           * (17) get double attribute RotateMod
           * @return double the value of the attribute
@@ -209,8 +208,6 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
         {
             return getRealAttribute(AttributeName.ROTATEMOD, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -225,8 +222,6 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
             setAttribute(AttributeName.SHIFT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Shift
           * @return the value of the attribute
@@ -235,8 +230,6 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
         {
             return getAttribute(AttributeName.SHIFT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -251,11 +244,9 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
             setAttribute(AttributeName.TOLERANCE, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute Tolerance
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getTolerance()
@@ -274,8 +265,6 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Transforms
@@ -289,8 +278,6 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
             setAttribute(AttributeName.TRANSFORMS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Transforms
           * @return the value of the attribute
@@ -299,8 +286,6 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
         {
             return getAttribute(AttributeName.TRANSFORMS, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -317,8 +302,6 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
         return (JDFBasicPreflightTest)getCreateElement_KElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element BasicPreflightTest
      * @param iSkip number of elements to skip
@@ -329,9 +312,10 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
         return (JDFBasicPreflightTest) getElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
     }
 
-
-
-    public JDFBasicPreflightTest appendBasicPreflightTest()
+    /**
+     * (30) append element BasicPreflightTest
+     */
+    public JDFBasicPreflightTest appendBasicPreflightTest() throws JDFException
     {
         return (JDFBasicPreflightTest) appendElement(ElementName.BASICPREFLIGHTTEST, null);
     }
@@ -346,8 +330,6 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
         return (JDFValue)getCreateElement_KElement(ElementName.VALUE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Value
      * @param iSkip number of elements to skip
@@ -358,9 +340,10 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
         return (JDFValue) getElement(ElementName.VALUE, null, iSkip);
     }
 
-
-
-    public JDFValue appendValue()
+    /**
+     * (30) append element Value
+     */
+    public JDFValue appendValue() throws JDFException
     {
         return (JDFValue) appendElement(ElementName.VALUE, null);
     }

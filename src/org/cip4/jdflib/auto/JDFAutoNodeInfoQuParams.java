@@ -186,8 +186,6 @@ public abstract class JDFAutoNodeInfoQuParams extends JDFElement
             setAttribute(AttributeName.JOBID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobID
           * @return the value of the attribute
@@ -196,8 +194,6 @@ public abstract class JDFAutoNodeInfoQuParams extends JDFElement
         {
             return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -212,8 +208,6 @@ public abstract class JDFAutoNodeInfoQuParams extends JDFElement
             setAttribute(AttributeName.JOBPARTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobPartID
           * @return the value of the attribute
@@ -222,8 +216,6 @@ public abstract class JDFAutoNodeInfoQuParams extends JDFElement
         {
             return getAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -238,8 +230,6 @@ public abstract class JDFAutoNodeInfoQuParams extends JDFElement
             setAttribute(AttributeName.QUEUEENTRYID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute QueueEntryID
           * @return the value of the attribute
@@ -248,8 +238,6 @@ public abstract class JDFAutoNodeInfoQuParams extends JDFElement
         {
             return getAttribute(AttributeName.QUEUEENTRYID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -265,8 +253,6 @@ public abstract class JDFAutoNodeInfoQuParams extends JDFElement
         return (JDFPart) getElement(ElementName.PART, null, 0);
     }
 
-
-
     /** (25) getCreatePart
      * 
      * @return JDFPart the element
@@ -276,15 +262,12 @@ public abstract class JDFAutoNodeInfoQuParams extends JDFElement
         return (JDFPart) getCreateElement_KElement(ElementName.PART, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPart
+     * (29) append element Part
      */
     public JDFPart appendPart() throws JDFException
     {
         return (JDFPart) appendElementN(ElementName.PART, 1, null);
     }
+
 }// end namespace JDF

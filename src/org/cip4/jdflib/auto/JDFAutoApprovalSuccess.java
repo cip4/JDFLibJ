@@ -184,8 +184,6 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
         return (JDFApprovalDetails)getCreateElement_KElement(ElementName.APPROVALDETAILS, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element ApprovalDetails
      * @param iSkip number of elements to skip
@@ -196,9 +194,10 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
         return (JDFApprovalDetails) getElement(ElementName.APPROVALDETAILS, null, iSkip);
     }
 
-
-
-    public JDFApprovalDetails appendApprovalDetails()
+    /**
+     * (30) append element ApprovalDetails
+     */
+    public JDFApprovalDetails appendApprovalDetails() throws JDFException
     {
         return (JDFApprovalDetails) appendElement(ElementName.APPROVALDETAILS, null);
     }
@@ -212,8 +211,6 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
         return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
     /** (25) getCreateFileSpec
      * 
      * @return JDFFileSpec the element
@@ -223,17 +220,14 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
         return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFileSpec
+     * (29) append element FileSpec
      */
     public JDFFileSpec appendFileSpec() throws JDFException
     {
         return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -242,6 +236,7 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateContact
      * 
      * @param iSkip number of elements to skip
@@ -251,8 +246,6 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
     {
         return (JDFContact)getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Contact
@@ -264,9 +257,10 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
         return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
     }
 
-
-
-    public JDFContact appendContact()
+    /**
+     * (30) append element Contact
+     */
+    public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -279,4 +273,5 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

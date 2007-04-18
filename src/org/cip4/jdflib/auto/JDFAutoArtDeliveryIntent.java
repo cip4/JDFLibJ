@@ -256,8 +256,6 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
             setAttribute(AttributeName.PREFLIGHTSTATUS, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute PreflightStatus
           * @return the value of the attribute
@@ -266,8 +264,6 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
         {
             return EnumPreflightStatus.getEnum(getAttribute(AttributeName.PREFLIGHTSTATUS, null, "NotPerformed"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -282,8 +278,6 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
             setAttribute(AttributeName.RETURNLIST, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute ReturnList
           * @return VString the value of the attribute
@@ -295,8 +289,6 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -312,8 +304,6 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
         return (JDFTimeSpan) getElement(ElementName.ARTDELIVERYDATE, null, 0);
     }
 
-
-
     /** (25) getCreateArtDeliveryDate
      * 
      * @return JDFTimeSpan the element
@@ -323,17 +313,14 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
         return (JDFTimeSpan) getCreateElement_KElement(ElementName.ARTDELIVERYDATE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementArtDeliveryDate
+     * (29) append element ArtDeliveryDate
      */
     public JDFTimeSpan appendArtDeliveryDate() throws JDFException
     {
         return (JDFTimeSpan) appendElementN(ElementName.ARTDELIVERYDATE, 1, null);
     }
+
     /**
      * (24) const get element ArtDeliveryDuration
      * @return JDFDurationSpan the element
@@ -342,8 +329,6 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
     {
         return (JDFDurationSpan) getElement(ElementName.ARTDELIVERYDURATION, null, 0);
     }
-
-
 
     /** (25) getCreateArtDeliveryDuration
      * 
@@ -354,17 +339,14 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
         return (JDFDurationSpan) getCreateElement_KElement(ElementName.ARTDELIVERYDURATION, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementArtDeliveryDuration
+     * (29) append element ArtDeliveryDuration
      */
     public JDFDurationSpan appendArtDeliveryDuration() throws JDFException
     {
         return (JDFDurationSpan) appendElementN(ElementName.ARTDELIVERYDURATION, 1, null);
     }
+
     /**
      * (24) const get element ArtHandling
      * @return JDFSpanArtHandling the element
@@ -373,8 +355,6 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
     {
         return (JDFSpanArtHandling) getElement(ElementName.ARTHANDLING, null, 0);
     }
-
-
 
     /** (25) getCreateArtHandling
      * 
@@ -385,17 +365,14 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
         return (JDFSpanArtHandling) getCreateElement_KElement(ElementName.ARTHANDLING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementArtHandling
+     * (29) append element ArtHandling
      */
     public JDFSpanArtHandling appendArtHandling() throws JDFException
     {
         return (JDFSpanArtHandling) appendElementN(ElementName.ARTHANDLING, 1, null);
     }
+
     /**
      * (24) const get element DeliveryCharge
      * @return JDFSpanDeliveryCharge the element
@@ -404,8 +381,6 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
     {
         return (JDFSpanDeliveryCharge) getElement(ElementName.DELIVERYCHARGE, null, 0);
     }
-
-
 
     /** (25) getCreateDeliveryCharge
      * 
@@ -416,17 +391,14 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
         return (JDFSpanDeliveryCharge) getCreateElement_KElement(ElementName.DELIVERYCHARGE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDeliveryCharge
+     * (29) append element DeliveryCharge
      */
     public JDFSpanDeliveryCharge appendDeliveryCharge() throws JDFException
     {
         return (JDFSpanDeliveryCharge) appendElementN(ElementName.DELIVERYCHARGE, 1, null);
     }
+
     /**
      * (24) const get element Method
      * @return JDFNameSpan the element
@@ -435,8 +407,6 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
     {
         return (JDFNameSpan) getElement(ElementName.METHOD, null, 0);
     }
-
-
 
     /** (25) getCreateMethod
      * 
@@ -447,17 +417,14 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
         return (JDFNameSpan) getCreateElement_KElement(ElementName.METHOD, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMethod
+     * (29) append element Method
      */
     public JDFNameSpan appendMethod() throws JDFException
     {
         return (JDFNameSpan) appendElementN(ElementName.METHOD, 1, null);
     }
+
     /**
      * (24) const get element ReturnMethod
      * @return JDFNameSpan the element
@@ -466,8 +433,6 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
     {
         return (JDFNameSpan) getElement(ElementName.RETURNMETHOD, null, 0);
     }
-
-
 
     /** (25) getCreateReturnMethod
      * 
@@ -478,17 +443,14 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
         return (JDFNameSpan) getCreateElement_KElement(ElementName.RETURNMETHOD, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementReturnMethod
+     * (29) append element ReturnMethod
      */
     public JDFNameSpan appendReturnMethod() throws JDFException
     {
         return (JDFNameSpan) appendElementN(ElementName.RETURNMETHOD, 1, null);
     }
+
     /**
      * (24) const get element ServiceLevel
      * @return JDFStringSpan the element
@@ -497,8 +459,6 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
     {
         return (JDFStringSpan) getElement(ElementName.SERVICELEVEL, null, 0);
     }
-
-
 
     /** (25) getCreateServiceLevel
      * 
@@ -509,17 +469,14 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
         return (JDFStringSpan) getCreateElement_KElement(ElementName.SERVICELEVEL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementServiceLevel
+     * (29) append element ServiceLevel
      */
     public JDFStringSpan appendServiceLevel() throws JDFException
     {
         return (JDFStringSpan) appendElementN(ElementName.SERVICELEVEL, 1, null);
     }
+
     /**
      * (24) const get element Transfer
      * @return JDFSpanTransfer the element
@@ -528,8 +485,6 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
     {
         return (JDFSpanTransfer) getElement(ElementName.TRANSFER, null, 0);
     }
-
-
 
     /** (25) getCreateTransfer
      * 
@@ -540,17 +495,14 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
         return (JDFSpanTransfer) getCreateElement_KElement(ElementName.TRANSFER, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementTransfer
+     * (29) append element Transfer
      */
     public JDFSpanTransfer appendTransfer() throws JDFException
     {
         return (JDFSpanTransfer) appendElementN(ElementName.TRANSFER, 1, null);
     }
+
     /** (26) getCreateArtDelivery
      * 
      * @param iSkip number of elements to skip
@@ -560,8 +512,6 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
     {
         return (JDFArtDelivery)getCreateElement_KElement(ElementName.ARTDELIVERY, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element ArtDelivery
@@ -573,9 +523,10 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
         return (JDFArtDelivery) getElement(ElementName.ARTDELIVERY, null, iSkip);
     }
 
-
-
-    public JDFArtDelivery appendArtDelivery()
+    /**
+     * (30) append element ArtDelivery
+     */
+    public JDFArtDelivery appendArtDelivery() throws JDFException
     {
         return (JDFArtDelivery) appendElement(ElementName.ARTDELIVERY, null);
     }
@@ -589,8 +540,6 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
         return (JDFCompany) getElement(ElementName.COMPANY, null, 0);
     }
 
-
-
     /** (25) getCreateCompany
      * 
      * @return JDFCompany the element
@@ -600,17 +549,14 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
         return (JDFCompany) getCreateElement_KElement(ElementName.COMPANY, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementCompany
+     * (29) append element Company
      */
     public JDFCompany appendCompany() throws JDFException
     {
         return (JDFCompany) appendElementN(ElementName.COMPANY, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -619,6 +565,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateContact
      * 
      * @param iSkip number of elements to skip
@@ -628,8 +575,6 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
     {
         return (JDFContact)getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Contact
@@ -641,9 +586,10 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
         return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
     }
 
-
-
-    public JDFContact appendContact()
+    /**
+     * (30) append element Contact
+     */
+    public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -656,4 +602,5 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

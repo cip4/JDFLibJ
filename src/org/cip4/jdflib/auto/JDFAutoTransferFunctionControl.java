@@ -248,8 +248,6 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
             setAttribute(AttributeName.TRANSFERFUNCTIONSOURCE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute TransferFunctionSource
           * @return the value of the attribute
@@ -258,8 +256,6 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
         {
             return EnumTransferFunctionSource.getEnum(getAttribute(AttributeName.TRANSFERFUNCTIONSOURCE, null, null));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -275,8 +271,6 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
         return (JDFTransferCurvePool) getElement(ElementName.TRANSFERCURVEPOOL, null, 0);
     }
 
-
-
     /** (25) getCreateTransferCurvePool
      * 
      * @return JDFTransferCurvePool the element
@@ -286,17 +280,14 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
         return (JDFTransferCurvePool) getCreateElement_KElement(ElementName.TRANSFERCURVEPOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementTransferCurvePool
+     * (29) append element TransferCurvePool
      */
     public JDFTransferCurvePool appendTransferCurvePool() throws JDFException
     {
         return (JDFTransferCurvePool) appendElementN(ElementName.TRANSFERCURVEPOOL, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -305,4 +296,5 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

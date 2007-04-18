@@ -200,8 +200,6 @@ public abstract class JDFAutoCylinderLayout extends JDFResource
             setAttribute(AttributeName.DEVICEID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DeviceID
           * @return the value of the attribute
@@ -210,8 +208,6 @@ public abstract class JDFAutoCylinderLayout extends JDFResource
         {
             return getAttribute(AttributeName.DEVICEID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -227,8 +223,6 @@ public abstract class JDFAutoCylinderLayout extends JDFResource
         return (JDFLayout) getElement(ElementName.LAYOUT, null, 0);
     }
 
-
-
     /** (25) getCreateLayout
      * 
      * @return JDFLayout the element
@@ -238,17 +232,14 @@ public abstract class JDFAutoCylinderLayout extends JDFResource
         return (JDFLayout) getCreateElement_KElement(ElementName.LAYOUT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementLayout
+     * (29) append element Layout
      */
     public JDFLayout appendLayout() throws JDFException
     {
         return (JDFLayout) appendElementN(ElementName.LAYOUT, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -257,6 +248,7 @@ public abstract class JDFAutoCylinderLayout extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateCylinderPosition
      * 
      * @param iSkip number of elements to skip
@@ -266,8 +258,6 @@ public abstract class JDFAutoCylinderLayout extends JDFResource
     {
         return (JDFCylinderPosition)getCreateElement_KElement(ElementName.CYLINDERPOSITION, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element CylinderPosition
@@ -279,9 +269,10 @@ public abstract class JDFAutoCylinderLayout extends JDFResource
         return (JDFCylinderPosition) getElement(ElementName.CYLINDERPOSITION, null, iSkip);
     }
 
-
-
-    public JDFCylinderPosition appendCylinderPosition()
+    /**
+     * (30) append element CylinderPosition
+     */
+    public JDFCylinderPosition appendCylinderPosition() throws JDFException
     {
         return (JDFCylinderPosition) appendElement(ElementName.CYLINDERPOSITION, null);
     }

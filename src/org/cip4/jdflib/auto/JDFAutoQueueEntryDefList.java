@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.jmf.JDFQueueEntryDef;
     /*
     *****************************************************************************
@@ -165,8 +166,6 @@ public abstract class JDFAutoQueueEntryDefList extends JDFElement
         return (JDFQueueEntryDef)getCreateElement_KElement(ElementName.QUEUEENTRYDEF, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element QueueEntryDef
      * @param iSkip number of elements to skip
@@ -177,9 +176,10 @@ public abstract class JDFAutoQueueEntryDefList extends JDFElement
         return (JDFQueueEntryDef) getElement(ElementName.QUEUEENTRYDEF, null, iSkip);
     }
 
-
-
-    public JDFQueueEntryDef appendQueueEntryDef()
+    /**
+     * (30) append element QueueEntryDef
+     */
+    public JDFQueueEntryDef appendQueueEntryDef() throws JDFException
     {
         return (JDFQueueEntryDef) appendElement(ElementName.QUEUEENTRYDEF, null);
     }

@@ -240,8 +240,6 @@ public abstract class JDFAutoComChannel extends JDFResource
             setAttribute(AttributeName.CHANNELTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ChannelType
           * @return the value of the attribute
@@ -250,8 +248,6 @@ public abstract class JDFAutoComChannel extends JDFResource
         {
             return EnumChannelType.getEnum(getAttribute(AttributeName.CHANNELTYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -266,8 +262,6 @@ public abstract class JDFAutoComChannel extends JDFResource
             setAttribute(AttributeName.LOCATOR, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Locator
           * @return the value of the attribute
@@ -276,8 +270,6 @@ public abstract class JDFAutoComChannel extends JDFResource
         {
             return getAttribute(AttributeName.LOCATOR, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -292,8 +284,6 @@ public abstract class JDFAutoComChannel extends JDFResource
             setAttribute(AttributeName.CHANNELTYPEDETAILS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ChannelTypeDetails
           * @return the value of the attribute
@@ -302,8 +292,6 @@ public abstract class JDFAutoComChannel extends JDFResource
         {
             return getAttribute(AttributeName.CHANNELTYPEDETAILS, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -318,8 +306,6 @@ public abstract class JDFAutoComChannel extends JDFResource
             setAttribute(AttributeName.CHANNELUSAGE, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute ChannelUsage
           * @return VString the value of the attribute
@@ -331,7 +317,5 @@ public abstract class JDFAutoComChannel extends JDFResource
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
 }// end namespace JDF

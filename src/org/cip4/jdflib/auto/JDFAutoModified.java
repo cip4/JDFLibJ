@@ -168,8 +168,6 @@ public abstract class JDFAutoModified extends JDFAudit
             setAttribute(AttributeName.JREF, value, null);
         }
 
-
-
         /**
           * (23) get String attribute jRef
           * @return the value of the attribute
@@ -178,8 +176,6 @@ public abstract class JDFAutoModified extends JDFAudit
         {
             return getAttribute(AttributeName.JREF, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -194,8 +190,6 @@ public abstract class JDFAutoModified extends JDFAudit
             setAttribute(AttributeName.XPATH, value, null);
         }
 
-
-
         /**
           * (23) get String attribute XPath
           * @return the value of the attribute
@@ -204,7 +198,5 @@ public abstract class JDFAutoModified extends JDFAudit
         {
             return getAttribute(AttributeName.XPATH, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

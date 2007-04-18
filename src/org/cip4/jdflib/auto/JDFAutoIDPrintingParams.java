@@ -316,8 +316,6 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
             setAttribute(AttributeName.ATTRIBUTESNATURALLANG, value, null);
         }
 
-
-
         /**
           * (23) get String attribute AttributesNaturalLang
           * @return the value of the attribute
@@ -326,8 +324,6 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
         {
             return getAttribute(AttributeName.ATTRIBUTESNATURALLANG, null, "US");
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -342,8 +338,6 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
             setAttribute(AttributeName.IDPATTRIBUTEFIDELITY, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IDPAttributeFidelity
           * @return boolean the value of the attribute
@@ -352,8 +346,6 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.IDPATTRIBUTEFIDELITY, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -368,8 +360,6 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
             setAttribute(AttributeName.IPPJOBPRIORITY, value, null);
         }
 
-
-
         /**
           * (15) get int attribute IPPJobPriority
           * @return int the value of the attribute
@@ -378,8 +368,6 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
         {
             return getIntAttribute(AttributeName.IPPJOBPRIORITY, null, 50);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -393,8 +381,6 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
         {
             setAttribute(AttributeName.IPPVERSION, value, null);
         }
-
-
 
         /**
           * (20) get JDFXYPair attribute IPPVersion
@@ -417,8 +403,6 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute OutputBin
@@ -432,8 +416,6 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
             setAttribute(AttributeName.OUTPUTBIN, value, null);
         }
 
-
-
         /**
           * (23) get String attribute OutputBin
           * @return the value of the attribute
@@ -442,8 +424,6 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
         {
             return getAttribute(AttributeName.OUTPUTBIN, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -458,8 +438,6 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
             setAttribute(AttributeName.PAGEDELIVERY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute PageDelivery
           * @return the value of the attribute
@@ -468,8 +446,6 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
         {
             return EnumPageDelivery.getEnum(getAttribute(AttributeName.PAGEDELIVERY, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -484,8 +460,6 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
             setAttribute(AttributeName.PRINTQUALITY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute PrintQuality
           * @return the value of the attribute
@@ -494,8 +468,6 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
         {
             return EnumPrintQuality.getEnum(getAttribute(AttributeName.PRINTQUALITY, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -510,8 +482,6 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
             setAttribute(AttributeName.SHEETCOLLATE, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute SheetCollate
           * @return boolean the value of the attribute
@@ -520,8 +490,6 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.SHEETCOLLATE, null, false);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -538,8 +506,6 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
         return (JDFCover)getCreateElement_KElement(ElementName.COVER, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Cover
      * @param iSkip number of elements to skip
@@ -550,9 +516,10 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
         return (JDFCover) getElement(ElementName.COVER, null, iSkip);
     }
 
-
-
-    public JDFCover appendCover()
+    /**
+     * (30) append element Cover
+     */
+    public JDFCover appendCover() throws JDFException
     {
         return (JDFCover) appendElement(ElementName.COVER, null);
     }
@@ -566,8 +533,6 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
         return (JDFIDPFinishing) getElement(ElementName.IDPFINISHING, null, 0);
     }
 
-
-
     /** (25) getCreateIDPFinishing
      * 
      * @return JDFIDPFinishing the element
@@ -577,17 +542,14 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
         return (JDFIDPFinishing) getCreateElement_KElement(ElementName.IDPFINISHING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementIDPFinishing
+     * (29) append element IDPFinishing
      */
     public JDFIDPFinishing appendIDPFinishing() throws JDFException
     {
         return (JDFIDPFinishing) appendElementN(ElementName.IDPFINISHING, 1, null);
     }
+
     /**
      * (24) const get element IDPLayout
      * @return JDFIDPLayout the element
@@ -596,8 +558,6 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
     {
         return (JDFIDPLayout) getElement(ElementName.IDPLAYOUT, null, 0);
     }
-
-
 
     /** (25) getCreateIDPLayout
      * 
@@ -608,17 +568,14 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
         return (JDFIDPLayout) getCreateElement_KElement(ElementName.IDPLAYOUT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementIDPLayout
+     * (29) append element IDPLayout
      */
     public JDFIDPLayout appendIDPLayout() throws JDFException
     {
         return (JDFIDPLayout) appendElementN(ElementName.IDPLAYOUT, 1, null);
     }
+
     /** (26) getCreateJobSheet
      * 
      * @param iSkip number of elements to skip
@@ -628,8 +585,6 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
     {
         return (JDFJobSheet)getCreateElement_KElement(ElementName.JOBSHEET, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element JobSheet
@@ -641,9 +596,10 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
         return (JDFJobSheet) getElement(ElementName.JOBSHEET, null, iSkip);
     }
 
-
-
-    public JDFJobSheet appendJobSheet()
+    /**
+     * (30) append element JobSheet
+     */
+    public JDFJobSheet appendJobSheet() throws JDFException
     {
         return (JDFJobSheet) appendElement(ElementName.JOBSHEET, null);
     }
@@ -657,8 +613,6 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
         return (JDFMediaIntent) getElement(ElementName.MEDIAINTENT, null, 0);
     }
 
-
-
     /** (25) getCreateMediaIntent
      * 
      * @return JDFMediaIntent the element
@@ -668,17 +622,14 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
         return (JDFMediaIntent) getCreateElement_KElement(ElementName.MEDIAINTENT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMediaIntent
+     * (29) append element MediaIntent
      */
     public JDFMediaIntent appendMediaIntent() throws JDFException
     {
         return (JDFMediaIntent) appendElementN(ElementName.MEDIAINTENT, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -687,6 +638,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element MediaSource
      * @return JDFMediaSource the element
@@ -695,8 +647,6 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
     {
         return (JDFMediaSource) getElement(ElementName.MEDIASOURCE, null, 0);
     }
-
-
 
     /** (25) getCreateMediaSource
      * 
@@ -707,17 +657,14 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
         return (JDFMediaSource) getCreateElement_KElement(ElementName.MEDIASOURCE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMediaSource
+     * (29) append element MediaSource
      */
     public JDFMediaSource appendMediaSource() throws JDFException
     {
         return (JDFMediaSource) appendElementN(ElementName.MEDIASOURCE, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -726,4 +673,5 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

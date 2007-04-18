@@ -189,8 +189,6 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
             setAttribute(AttributeName.STARTPOSITION, value, null);
         }
 
-
-
         /**
           * (17) get double attribute StartPosition
           * @return double the value of the attribute
@@ -199,8 +197,6 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
         {
             return getRealAttribute(AttributeName.STARTPOSITION, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -215,8 +211,6 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
             setAttribute(AttributeName.FLEXVALUE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute FlexValue
           * @return double the value of the attribute
@@ -225,8 +219,6 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
         {
             return getRealAttribute(AttributeName.FLEXVALUE, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -241,8 +233,6 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
             setAttribute(AttributeName.MILLINGDEPTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute MillingDepth
           * @return double the value of the attribute
@@ -251,8 +241,6 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
         {
             return getRealAttribute(AttributeName.MILLINGDEPTH, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -267,8 +255,6 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
             setAttribute(AttributeName.NOTCHINGDEPTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute NotchingDepth
           * @return double the value of the attribute
@@ -277,8 +263,6 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
         {
             return getRealAttribute(AttributeName.NOTCHINGDEPTH, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -293,8 +277,6 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
             setAttribute(AttributeName.NOTCHINGDISTANCE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute NotchingDistance
           * @return double the value of the attribute
@@ -303,8 +285,6 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
         {
             return getRealAttribute(AttributeName.NOTCHINGDISTANCE, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -319,8 +299,6 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
             setAttribute(AttributeName.OPERATIONS, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute Operations
           * @return VString the value of the attribute
@@ -332,8 +310,6 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -348,8 +324,6 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
             setAttribute(AttributeName.PULLOUTVALUE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute PullOutValue
           * @return double the value of the attribute
@@ -358,8 +332,6 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
         {
             return getRealAttribute(AttributeName.PULLOUTVALUE, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -374,8 +346,6 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
             setAttribute(AttributeName.WORKINGLENGTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute WorkingLength
           * @return double the value of the attribute
@@ -384,7 +354,5 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
         {
             return getRealAttribute(AttributeName.WORKINGLENGTH, null, 0.0);
         }
-
-
 
 }// end namespace JDF

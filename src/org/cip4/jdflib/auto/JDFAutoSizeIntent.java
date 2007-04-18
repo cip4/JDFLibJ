@@ -235,8 +235,6 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
             setAttribute(AttributeName.TYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Type
           * @return the value of the attribute
@@ -245,8 +243,6 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
         {
             return EnumType.getEnum(getAttribute(AttributeName.TYPE, null, "Folded"));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -262,8 +258,6 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
         return (JDFXYPairSpan) getElement(ElementName.DIMENSIONS, null, 0);
     }
 
-
-
     /** (25) getCreateDimensions
      * 
      * @return JDFXYPairSpan the element
@@ -273,17 +267,14 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
         return (JDFXYPairSpan) getCreateElement_KElement(ElementName.DIMENSIONS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDimensions
+     * (29) append element Dimensions
      */
     public JDFXYPairSpan appendDimensions() throws JDFException
     {
         return (JDFXYPairSpan) appendElementN(ElementName.DIMENSIONS, 1, null);
     }
+
     /**
      * (24) const get element Pages
      * @return JDFIntegerSpan the element
@@ -292,8 +283,6 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
     {
         return (JDFIntegerSpan) getElement(ElementName.PAGES, null, 0);
     }
-
-
 
     /** (25) getCreatePages
      * 
@@ -304,15 +293,12 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
         return (JDFIntegerSpan) getCreateElement_KElement(ElementName.PAGES, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPages
+     * (29) append element Pages
      */
     public JDFIntegerSpan appendPages() throws JDFException
     {
         return (JDFIntegerSpan) appendElementN(ElementName.PAGES, 1, null);
     }
+
 }// end namespace JDF

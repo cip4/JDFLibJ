@@ -170,8 +170,6 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
         return (JDFNumberSpan) getElement(ElementName.DOTSIZE, null, 0);
     }
 
-
-
     /** (25) getCreateDotSize
      * 
      * @return JDFNumberSpan the element
@@ -181,17 +179,14 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
         return (JDFNumberSpan) getCreateElement_KElement(ElementName.DOTSIZE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDotSize
+     * (29) append element DotSize
      */
     public JDFNumberSpan appendDotSize() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.DOTSIZE, 1, null);
     }
+
     /**
      * (24) const get element Frequency
      * @return JDFNumberSpan the element
@@ -200,8 +195,6 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
     {
         return (JDFNumberSpan) getElement(ElementName.FREQUENCY, null, 0);
     }
-
-
 
     /** (25) getCreateFrequency
      * 
@@ -212,17 +205,14 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
         return (JDFNumberSpan) getCreateElement_KElement(ElementName.FREQUENCY, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFrequency
+     * (29) append element Frequency
      */
     public JDFNumberSpan appendFrequency() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.FREQUENCY, 1, null);
     }
+
     /**
      * (24) const get element FrequencySelection
      * @return JDFSpanFrequencySelection the element
@@ -231,8 +221,6 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
     {
         return (JDFSpanFrequencySelection) getElement(ElementName.FREQUENCYSELECTION, null, 0);
     }
-
-
 
     /** (25) getCreateFrequencySelection
      * 
@@ -243,17 +231,14 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
         return (JDFSpanFrequencySelection) getCreateElement_KElement(ElementName.FREQUENCYSELECTION, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFrequencySelection
+     * (29) append element FrequencySelection
      */
     public JDFSpanFrequencySelection appendFrequencySelection() throws JDFException
     {
         return (JDFSpanFrequencySelection) appendElementN(ElementName.FREQUENCYSELECTION, 1, null);
     }
+
     /**
      * (24) const get element ScreeningType
      * @return JDFSpanScreeningType the element
@@ -262,8 +247,6 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
     {
         return (JDFSpanScreeningType) getElement(ElementName.SCREENINGTYPE, null, 0);
     }
-
-
 
     /** (25) getCreateScreeningType
      * 
@@ -274,15 +257,12 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
         return (JDFSpanScreeningType) getCreateElement_KElement(ElementName.SCREENINGTYPE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementScreeningType
+     * (29) append element ScreeningType
      */
     public JDFSpanScreeningType appendScreeningType() throws JDFException
     {
         return (JDFSpanScreeningType) appendElementN(ElementName.SCREENINGTYPE, 1, null);
     }
+
 }// end namespace JDF

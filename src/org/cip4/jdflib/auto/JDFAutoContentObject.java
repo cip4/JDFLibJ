@@ -234,8 +234,6 @@ public abstract class JDFAutoContentObject extends JDFElement
             setAttribute(AttributeName.TYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Type
           * @return the value of the attribute
@@ -244,8 +242,6 @@ public abstract class JDFAutoContentObject extends JDFElement
         {
             return EnumType.getEnum(getAttribute(AttributeName.TYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -260,8 +256,6 @@ public abstract class JDFAutoContentObject extends JDFElement
             setAttribute(AttributeName.SOURCECLIPPATH, value, null);
         }
 
-
-
         /**
           * (23) get String attribute SourceClipPath
           * @return the value of the attribute
@@ -270,8 +264,6 @@ public abstract class JDFAutoContentObject extends JDFElement
         {
             return getAttribute(AttributeName.SOURCECLIPPATH, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -286,8 +278,6 @@ public abstract class JDFAutoContentObject extends JDFElement
             setAttribute(AttributeName.SETORD, value, null);
         }
 
-
-
         /**
           * (15) get int attribute SetOrd
           * @return int the value of the attribute
@@ -296,8 +286,6 @@ public abstract class JDFAutoContentObject extends JDFElement
         {
             return getIntAttribute(AttributeName.SETORD, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -312,8 +300,6 @@ public abstract class JDFAutoContentObject extends JDFElement
             setAttribute(AttributeName.LAYERID, value, null);
         }
 
-
-
         /**
           * (15) get int attribute LayerID
           * @return int the value of the attribute
@@ -322,8 +308,6 @@ public abstract class JDFAutoContentObject extends JDFElement
         {
             return getIntAttribute(AttributeName.LAYERID, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -338,11 +322,9 @@ public abstract class JDFAutoContentObject extends JDFElement
             setAttribute(AttributeName.CTM, value, null);
         }
 
-
-
         /**
           * (20) get JDFMatrix attribute CTM
-          * @return JDFMatrixthe value of the attribute, null if a the
+          * @return JDFMatrix the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFMatrix
           */
         public JDFMatrix getCTM()
@@ -361,8 +343,6 @@ public abstract class JDFAutoContentObject extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Ord
@@ -376,8 +356,6 @@ public abstract class JDFAutoContentObject extends JDFElement
             setAttribute(AttributeName.ORD, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Ord
           * @return int the value of the attribute
@@ -386,8 +364,6 @@ public abstract class JDFAutoContentObject extends JDFElement
         {
             return getIntAttribute(AttributeName.ORD, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -402,11 +378,9 @@ public abstract class JDFAutoContentObject extends JDFElement
             setAttribute(AttributeName.TRIMSIZE, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute TrimSize
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getTrimSize()
@@ -425,8 +399,6 @@ public abstract class JDFAutoContentObject extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute HalfTonePhaseOrigin
@@ -440,11 +412,9 @@ public abstract class JDFAutoContentObject extends JDFElement
             setAttribute(AttributeName.HALFTONEPHASEORIGIN, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute HalfTonePhaseOrigin
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getHalfTonePhaseOrigin()
@@ -463,8 +433,6 @@ public abstract class JDFAutoContentObject extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute OrdExpression
@@ -478,8 +446,6 @@ public abstract class JDFAutoContentObject extends JDFElement
             setAttribute(AttributeName.ORDEXPRESSION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute OrdExpression
           * @return the value of the attribute
@@ -488,8 +454,6 @@ public abstract class JDFAutoContentObject extends JDFElement
         {
             return getAttribute(AttributeName.ORDEXPRESSION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -504,8 +468,6 @@ public abstract class JDFAutoContentObject extends JDFElement
             setAttribute(AttributeName.ORDID, value, null);
         }
 
-
-
         /**
           * (15) get int attribute OrdID
           * @return int the value of the attribute
@@ -514,8 +476,6 @@ public abstract class JDFAutoContentObject extends JDFElement
         {
             return getIntAttribute(AttributeName.ORDID, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -530,11 +490,9 @@ public abstract class JDFAutoContentObject extends JDFElement
             setAttribute(AttributeName.TRIMCTM, value, null);
         }
 
-
-
         /**
           * (20) get JDFMatrix attribute TrimCTM
-          * @return JDFMatrixthe value of the attribute, null if a the
+          * @return JDFMatrix the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFMatrix
           */
         public JDFMatrix getTrimCTM()
@@ -553,8 +511,6 @@ public abstract class JDFAutoContentObject extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute DocOrd
@@ -568,8 +524,6 @@ public abstract class JDFAutoContentObject extends JDFElement
             setAttribute(AttributeName.DOCORD, value, null);
         }
 
-
-
         /**
           * (15) get int attribute DocOrd
           * @return int the value of the attribute
@@ -578,8 +532,6 @@ public abstract class JDFAutoContentObject extends JDFElement
         {
             return getIntAttribute(AttributeName.DOCORD, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -594,11 +546,9 @@ public abstract class JDFAutoContentObject extends JDFElement
             setAttribute(AttributeName.CLIPBOX, value, null);
         }
 
-
-
         /**
           * (20) get JDFRectangle attribute ClipBox
-          * @return JDFRectanglethe value of the attribute, null if a the
+          * @return JDFRectangle the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFRectangle
           */
         public JDFRectangle getClipBox()
@@ -617,8 +567,6 @@ public abstract class JDFAutoContentObject extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ClipPath
@@ -632,8 +580,6 @@ public abstract class JDFAutoContentObject extends JDFElement
             setAttribute(AttributeName.CLIPPATH, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ClipPath
           * @return the value of the attribute
@@ -642,7 +588,5 @@ public abstract class JDFAutoContentObject extends JDFElement
         {
             return getAttribute(AttributeName.CLIPPATH, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

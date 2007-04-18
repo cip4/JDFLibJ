@@ -83,6 +83,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.postpress.JDFStitchingParams;
     /*
     *****************************************************************************
@@ -291,8 +292,6 @@ public abstract class JDFAutoIDPStitching extends JDFElement
             setAttribute(AttributeName.STITCHINGPOSITION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute StitchingPosition
           * @return the value of the attribute
@@ -301,8 +300,6 @@ public abstract class JDFAutoIDPStitching extends JDFElement
         {
             return EnumStitchingPosition.getEnum(getAttribute(AttributeName.STITCHINGPOSITION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -317,8 +314,6 @@ public abstract class JDFAutoIDPStitching extends JDFElement
             setAttribute(AttributeName.STITCHINGREFERENCEEDGE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute StitchingReferenceEdge
           * @return the value of the attribute
@@ -327,8 +322,6 @@ public abstract class JDFAutoIDPStitching extends JDFElement
         {
             return EnumStitchingReferenceEdge.getEnum(getAttribute(AttributeName.STITCHINGREFERENCEEDGE, null, null));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -345,8 +338,6 @@ public abstract class JDFAutoIDPStitching extends JDFElement
         return (JDFStitchingParams)getCreateElement_KElement(ElementName.STITCHINGPARAMS, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element StitchingParams
      * @param iSkip number of elements to skip
@@ -357,9 +348,10 @@ public abstract class JDFAutoIDPStitching extends JDFElement
         return (JDFStitchingParams) getElement(ElementName.STITCHINGPARAMS, null, iSkip);
     }
 
-
-
-    public JDFStitchingParams appendStitchingParams()
+    /**
+     * (30) append element StitchingParams
+     */
+    public JDFStitchingParams appendStitchingParams() throws JDFException
     {
         return (JDFStitchingParams) appendElement(ElementName.STITCHINGPARAMS, null);
     }
@@ -372,4 +364,5 @@ public abstract class JDFAutoIDPStitching extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

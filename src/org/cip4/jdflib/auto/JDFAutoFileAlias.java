@@ -239,8 +239,6 @@ public abstract class JDFAutoFileAlias extends JDFElement
             setAttribute(AttributeName.ALIAS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Alias
           * @return the value of the attribute
@@ -249,8 +247,6 @@ public abstract class JDFAutoFileAlias extends JDFElement
         {
             return getAttribute(AttributeName.ALIAS, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -265,8 +261,6 @@ public abstract class JDFAutoFileAlias extends JDFElement
             setAttribute(AttributeName.DISPOSITION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Disposition
           * @return the value of the attribute
@@ -275,8 +269,6 @@ public abstract class JDFAutoFileAlias extends JDFElement
         {
             return EnumDisposition.getEnum(getAttribute(AttributeName.DISPOSITION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -291,8 +283,6 @@ public abstract class JDFAutoFileAlias extends JDFElement
             setAttribute(AttributeName.MIMETYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute MimeType
           * @return the value of the attribute
@@ -301,8 +291,6 @@ public abstract class JDFAutoFileAlias extends JDFElement
         {
             return getAttribute(AttributeName.MIMETYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -317,8 +305,6 @@ public abstract class JDFAutoFileAlias extends JDFElement
             setAttribute(AttributeName.RAWALIAS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute RawAlias
           * @return the value of the attribute
@@ -327,8 +313,6 @@ public abstract class JDFAutoFileAlias extends JDFElement
         {
             return getAttribute(AttributeName.RAWALIAS, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -343,8 +327,6 @@ public abstract class JDFAutoFileAlias extends JDFElement
             setAttribute(AttributeName.URL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute URL
           * @return the value of the attribute
@@ -353,8 +335,6 @@ public abstract class JDFAutoFileAlias extends JDFElement
         {
             return getAttribute(AttributeName.URL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -370,8 +350,6 @@ public abstract class JDFAutoFileAlias extends JDFElement
         return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
     /** (25) getCreateFileSpec
      * 
      * @return JDFFileSpec the element
@@ -381,17 +359,14 @@ public abstract class JDFAutoFileAlias extends JDFElement
         return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFileSpec
+     * (29) append element FileSpec
      */
     public JDFFileSpec appendFileSpec() throws JDFException
     {
         return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -400,4 +375,5 @@ public abstract class JDFAutoFileAlias extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

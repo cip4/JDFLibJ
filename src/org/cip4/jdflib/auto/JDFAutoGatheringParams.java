@@ -179,8 +179,6 @@ public abstract class JDFAutoGatheringParams extends JDFResource
         return (JDFDisjointing) getElement(ElementName.DISJOINTING, null, 0);
     }
 
-
-
     /** (25) getCreateDisjointing
      * 
      * @return JDFDisjointing the element
@@ -190,15 +188,12 @@ public abstract class JDFAutoGatheringParams extends JDFResource
         return (JDFDisjointing) getCreateElement_KElement(ElementName.DISJOINTING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDisjointing
+     * (29) append element Disjointing
      */
     public JDFDisjointing appendDisjointing() throws JDFException
     {
         return (JDFDisjointing) appendElementN(ElementName.DISJOINTING, 1, null);
     }
+
 }// end namespace JDF

@@ -171,8 +171,6 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
         return (JDFTimeSpan) getElement(ElementName.ISSUEDATE, null, 0);
     }
 
-
-
     /** (25) getCreateIssueDate
      * 
      * @return JDFTimeSpan the element
@@ -182,17 +180,14 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
         return (JDFTimeSpan) getCreateElement_KElement(ElementName.ISSUEDATE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementIssueDate
+     * (29) append element IssueDate
      */
     public JDFTimeSpan appendIssueDate() throws JDFException
     {
         return (JDFTimeSpan) appendElementN(ElementName.ISSUEDATE, 1, null);
     }
+
     /**
      * (24) const get element IssueName
      * @return JDFStringSpan the element
@@ -201,8 +196,6 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
     {
         return (JDFStringSpan) getElement(ElementName.ISSUENAME, null, 0);
     }
-
-
 
     /** (25) getCreateIssueName
      * 
@@ -213,17 +206,14 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
         return (JDFStringSpan) getCreateElement_KElement(ElementName.ISSUENAME, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementIssueName
+     * (29) append element IssueName
      */
     public JDFStringSpan appendIssueName() throws JDFException
     {
         return (JDFStringSpan) appendElementN(ElementName.ISSUENAME, 1, null);
     }
+
     /**
      * (24) const get element IssueType
      * @return JDFNameSpan the element
@@ -232,8 +222,6 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
     {
         return (JDFNameSpan) getElement(ElementName.ISSUETYPE, null, 0);
     }
-
-
 
     /** (25) getCreateIssueType
      * 
@@ -244,17 +232,14 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
         return (JDFNameSpan) getCreateElement_KElement(ElementName.ISSUETYPE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementIssueType
+     * (29) append element IssueType
      */
     public JDFNameSpan appendIssueType() throws JDFException
     {
         return (JDFNameSpan) appendElementN(ElementName.ISSUETYPE, 1, null);
     }
+
     /**
      * (24) const get element Circulation
      * @return JDFIntegerSpan the element
@@ -263,8 +248,6 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
     {
         return (JDFIntegerSpan) getElement(ElementName.CIRCULATION, null, 0);
     }
-
-
 
     /** (25) getCreateCirculation
      * 
@@ -275,15 +258,12 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
         return (JDFIntegerSpan) getCreateElement_KElement(ElementName.CIRCULATION, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementCirculation
+     * (29) append element Circulation
      */
     public JDFIntegerSpan appendCirculation() throws JDFException
     {
         return (JDFIntegerSpan) appendElementN(ElementName.CIRCULATION, 1, null);
     }
+
 }// end namespace JDF

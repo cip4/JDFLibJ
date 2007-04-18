@@ -231,8 +231,6 @@ public abstract class JDFAutoDBSchema extends JDFResource
             setAttribute(AttributeName.DBSCHEMATYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute DBSchemaType
           * @return the value of the attribute
@@ -241,7 +239,5 @@ public abstract class JDFAutoDBSchema extends JDFResource
         {
             return EnumDBSchemaType.getEnum(getAttribute(AttributeName.DBSCHEMATYPE, null, null));
         }
-
-
 
 }// end namespace JDF

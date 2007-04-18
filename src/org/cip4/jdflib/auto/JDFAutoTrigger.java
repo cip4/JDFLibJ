@@ -204,8 +204,6 @@ public abstract class JDFAutoTrigger extends JDFResource
             setAttribute(AttributeName.REPEATSTEP, value, null);
         }
 
-
-
         /**
           * (15) get int attribute RepeatStep
           * @return int the value of the attribute
@@ -214,8 +212,6 @@ public abstract class JDFAutoTrigger extends JDFResource
         {
             return getIntAttribute(AttributeName.REPEATSTEP, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -230,8 +226,6 @@ public abstract class JDFAutoTrigger extends JDFResource
             setAttribute(AttributeName.REPEATTIME, value, null);
         }
 
-
-
         /**
           * (17) get double attribute RepeatTime
           * @return double the value of the attribute
@@ -240,8 +234,6 @@ public abstract class JDFAutoTrigger extends JDFResource
         {
             return getRealAttribute(AttributeName.REPEATTIME, null, 0.0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -258,8 +250,6 @@ public abstract class JDFAutoTrigger extends JDFResource
         return (JDFChangedAttribute)getCreateElement_KElement(ElementName.CHANGEDATTRIBUTE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element ChangedAttribute
      * @param iSkip number of elements to skip
@@ -270,9 +260,10 @@ public abstract class JDFAutoTrigger extends JDFResource
         return (JDFChangedAttribute) getElement(ElementName.CHANGEDATTRIBUTE, null, iSkip);
     }
 
-
-
-    public JDFChangedAttribute appendChangedAttribute()
+    /**
+     * (30) append element ChangedAttribute
+     */
+    public JDFChangedAttribute appendChangedAttribute() throws JDFException
     {
         return (JDFChangedAttribute) appendElement(ElementName.CHANGEDATTRIBUTE, null);
     }
@@ -286,8 +277,6 @@ public abstract class JDFAutoTrigger extends JDFResource
         return (JDFAdded) getElement(ElementName.ADDED, null, 0);
     }
 
-
-
     /** (25) getCreateAdded
      * 
      * @return JDFAdded the element
@@ -297,17 +286,14 @@ public abstract class JDFAutoTrigger extends JDFResource
         return (JDFAdded) getCreateElement_KElement(ElementName.ADDED, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementAdded
+     * (29) append element Added
      */
     public JDFAdded appendAdded() throws JDFException
     {
         return (JDFAdded) appendElementN(ElementName.ADDED, 1, null);
     }
+
     /** (26) getCreateChangedPath
      * 
      * @param iSkip number of elements to skip
@@ -317,8 +303,6 @@ public abstract class JDFAutoTrigger extends JDFResource
     {
         return (JDFChangedPath)getCreateElement_KElement(ElementName.CHANGEDPATH, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element ChangedPath
@@ -330,9 +314,10 @@ public abstract class JDFAutoTrigger extends JDFResource
         return (JDFChangedPath) getElement(ElementName.CHANGEDPATH, null, iSkip);
     }
 
-
-
-    public JDFChangedPath appendChangedPath()
+    /**
+     * (30) append element ChangedPath
+     */
+    public JDFChangedPath appendChangedPath() throws JDFException
     {
         return (JDFChangedPath) appendElement(ElementName.CHANGEDPATH, null);
     }
@@ -346,8 +331,6 @@ public abstract class JDFAutoTrigger extends JDFResource
         return (JDFRemoved) getElement(ElementName.REMOVED, null, 0);
     }
 
-
-
     /** (25) getCreateRemoved
      * 
      * @return JDFRemoved the element
@@ -357,15 +340,12 @@ public abstract class JDFAutoTrigger extends JDFResource
         return (JDFRemoved) getCreateElement_KElement(ElementName.REMOVED, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementRemoved
+     * (29) append element Removed
      */
     public JDFRemoved appendRemoved() throws JDFException
     {
         return (JDFRemoved) appendElementN(ElementName.REMOVED, 1, null);
     }
+
 }// end namespace JDF

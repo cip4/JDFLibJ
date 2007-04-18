@@ -173,8 +173,6 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
         return (JDFOptionSpan) getElement(ElementName.LAMINATED, null, 0);
     }
 
-
-
     /** (25) getCreateLaminated
      * 
      * @return JDFOptionSpan the element
@@ -184,17 +182,14 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
         return (JDFOptionSpan) getCreateElement_KElement(ElementName.LAMINATED, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementLaminated
+     * (29) append element Laminated
      */
     public JDFOptionSpan appendLaminated() throws JDFException
     {
         return (JDFOptionSpan) appendElementN(ElementName.LAMINATED, 1, null);
     }
+
     /**
      * (24) const get element Temperature
      * @return JDFSpanTemperature the element
@@ -203,8 +198,6 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
     {
         return (JDFSpanTemperature) getElement(ElementName.TEMPERATURE, null, 0);
     }
-
-
 
     /** (25) getCreateTemperature
      * 
@@ -215,17 +208,14 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
         return (JDFSpanTemperature) getCreateElement_KElement(ElementName.TEMPERATURE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementTemperature
+     * (29) append element Temperature
      */
     public JDFSpanTemperature appendTemperature() throws JDFException
     {
         return (JDFSpanTemperature) appendElementN(ElementName.TEMPERATURE, 1, null);
     }
+
     /**
      * (24) const get element Surface
      * @return JDFSpanSurface the element
@@ -234,8 +224,6 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
     {
         return (JDFSpanSurface) getElement(ElementName.SURFACE, null, 0);
     }
-
-
 
     /** (25) getCreateSurface
      * 
@@ -246,17 +234,14 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
         return (JDFSpanSurface) getCreateElement_KElement(ElementName.SURFACE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementSurface
+     * (29) append element Surface
      */
     public JDFSpanSurface appendSurface() throws JDFException
     {
         return (JDFSpanSurface) appendElementN(ElementName.SURFACE, 1, null);
     }
+
     /**
      * (24) const get element Texture
      * @return JDFNameSpan the element
@@ -265,8 +250,6 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
     {
         return (JDFNameSpan) getElement(ElementName.TEXTURE, null, 0);
     }
-
-
 
     /** (25) getCreateTexture
      * 
@@ -277,17 +260,14 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
         return (JDFNameSpan) getCreateElement_KElement(ElementName.TEXTURE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementTexture
+     * (29) append element Texture
      */
     public JDFNameSpan appendTexture() throws JDFException
     {
         return (JDFNameSpan) appendElementN(ElementName.TEXTURE, 1, null);
     }
+
     /**
      * (24) const get element Thickness
      * @return JDFNumberSpan the element
@@ -296,8 +276,6 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
     {
         return (JDFNumberSpan) getElement(ElementName.THICKNESS, null, 0);
     }
-
-
 
     /** (25) getCreateThickness
      * 
@@ -308,15 +286,12 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
         return (JDFNumberSpan) getCreateElement_KElement(ElementName.THICKNESS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementThickness
+     * (29) append element Thickness
      */
     public JDFNumberSpan appendThickness() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.THICKNESS, 1, null);
     }
+
 }// end namespace JDF

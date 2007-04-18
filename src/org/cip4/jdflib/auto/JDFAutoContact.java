@@ -206,8 +206,6 @@ public abstract class JDFAutoContact extends JDFResource
             setAttribute(AttributeName.CONTACTTYPES, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute ContactTypes
           * @return VString the value of the attribute
@@ -219,8 +217,6 @@ public abstract class JDFAutoContact extends JDFResource
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -235,8 +231,6 @@ public abstract class JDFAutoContact extends JDFResource
             setAttribute(AttributeName.CONTACTTYPEDETAILS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ContactTypeDetails
           * @return the value of the attribute
@@ -245,8 +239,6 @@ public abstract class JDFAutoContact extends JDFResource
         {
             return getAttribute(AttributeName.CONTACTTYPEDETAILS, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -262,8 +254,6 @@ public abstract class JDFAutoContact extends JDFResource
         return (JDFAddress) getElement(ElementName.ADDRESS, null, 0);
     }
 
-
-
     /** (25) getCreateAddress
      * 
      * @return JDFAddress the element
@@ -273,17 +263,14 @@ public abstract class JDFAutoContact extends JDFResource
         return (JDFAddress) getCreateElement_KElement(ElementName.ADDRESS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementAddress
+     * (29) append element Address
      */
     public JDFAddress appendAddress() throws JDFException
     {
         return (JDFAddress) appendElementN(ElementName.ADDRESS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -292,6 +279,7 @@ public abstract class JDFAutoContact extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateComChannel
      * 
      * @param iSkip number of elements to skip
@@ -301,8 +289,6 @@ public abstract class JDFAutoContact extends JDFResource
     {
         return (JDFComChannel)getCreateElement_KElement(ElementName.COMCHANNEL, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element ComChannel
@@ -314,9 +300,10 @@ public abstract class JDFAutoContact extends JDFResource
         return (JDFComChannel) getElement(ElementName.COMCHANNEL, null, iSkip);
     }
 
-
-
-    public JDFComChannel appendComChannel()
+    /**
+     * (30) append element ComChannel
+     */
+    public JDFComChannel appendComChannel() throws JDFException
     {
         return (JDFComChannel) appendElement(ElementName.COMCHANNEL, null);
     }
@@ -329,6 +316,7 @@ public abstract class JDFAutoContact extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element Company
      * @return JDFCompany the element
@@ -337,8 +325,6 @@ public abstract class JDFAutoContact extends JDFResource
     {
         return (JDFCompany) getElement(ElementName.COMPANY, null, 0);
     }
-
-
 
     /** (25) getCreateCompany
      * 
@@ -349,17 +335,14 @@ public abstract class JDFAutoContact extends JDFResource
         return (JDFCompany) getCreateElement_KElement(ElementName.COMPANY, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementCompany
+     * (29) append element Company
      */
     public JDFCompany appendCompany() throws JDFException
     {
         return (JDFCompany) appendElementN(ElementName.COMPANY, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -368,6 +351,7 @@ public abstract class JDFAutoContact extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element Person
      * @return JDFPerson the element
@@ -376,8 +360,6 @@ public abstract class JDFAutoContact extends JDFResource
     {
         return (JDFPerson) getElement(ElementName.PERSON, null, 0);
     }
-
-
 
     /** (25) getCreatePerson
      * 
@@ -388,17 +370,14 @@ public abstract class JDFAutoContact extends JDFResource
         return (JDFPerson) getCreateElement_KElement(ElementName.PERSON, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPerson
+     * (29) append element Person
      */
     public JDFPerson appendPerson() throws JDFException
     {
         return (JDFPerson) appendElementN(ElementName.PERSON, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -407,4 +386,5 @@ public abstract class JDFAutoContact extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

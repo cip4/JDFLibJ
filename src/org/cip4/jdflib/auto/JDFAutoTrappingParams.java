@@ -83,6 +83,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFColorantZoneDetails;
     /*
@@ -269,8 +270,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
             setAttribute(AttributeName.MINIMUMBLACKWIDTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute MinimumBlackWidth
           * @return double the value of the attribute
@@ -279,8 +278,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.MINIMUMBLACKWIDTH, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -295,8 +292,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
             setAttribute(AttributeName.TRAPENDSTYLE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute TrapEndStyle
           * @return the value of the attribute
@@ -305,8 +300,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         {
             return getAttribute(AttributeName.TRAPENDSTYLE, null, "Miter");
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -321,8 +314,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
             setAttribute(AttributeName.TRAPJOINSTYLE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute TrapJoinStyle
           * @return the value of the attribute
@@ -331,8 +322,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         {
             return getAttribute(AttributeName.TRAPJOINSTYLE, null, "Miter");
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -347,8 +336,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
             setAttribute(AttributeName.BLACKCOLORLIMIT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute BlackColorLimit
           * @return double the value of the attribute
@@ -357,8 +344,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.BLACKCOLORLIMIT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -373,8 +358,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
             setAttribute(AttributeName.BLACKDENSITYLIMIT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute BlackDensityLimit
           * @return double the value of the attribute
@@ -383,8 +366,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.BLACKDENSITYLIMIT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -399,8 +380,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
             setAttribute(AttributeName.BLACKWIDTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute BlackWidth
           * @return double the value of the attribute
@@ -409,8 +388,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.BLACKWIDTH, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -425,8 +402,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
             setAttribute(AttributeName.ENABLED, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Enabled
           * @return boolean the value of the attribute
@@ -435,8 +410,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.ENABLED, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -451,8 +424,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
             setAttribute(AttributeName.HALFTONENAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute HalftoneName
           * @return the value of the attribute
@@ -461,8 +432,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         {
             return getAttribute(AttributeName.HALFTONENAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -477,8 +446,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
             setAttribute(AttributeName.IMAGEINTERNALTRAPPING, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute ImageInternalTrapping
           * @return boolean the value of the attribute
@@ -487,8 +454,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.IMAGEINTERNALTRAPPING, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -503,8 +468,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
             setAttribute(AttributeName.IMAGERESOLUTION, value, null);
         }
 
-
-
         /**
           * (15) get int attribute ImageResolution
           * @return int the value of the attribute
@@ -513,8 +476,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         {
             return getIntAttribute(AttributeName.IMAGERESOLUTION, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -529,8 +490,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
             setAttribute(AttributeName.IMAGEMASKTRAPPING, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute ImageMaskTrapping
           * @return boolean the value of the attribute
@@ -539,8 +498,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.IMAGEMASKTRAPPING, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -555,8 +512,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
             setAttribute(AttributeName.IMAGETOIMAGETRAPPING, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute ImageToImageTrapping
           * @return boolean the value of the attribute
@@ -565,8 +520,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.IMAGETOIMAGETRAPPING, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -581,8 +534,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
             setAttribute(AttributeName.IMAGETOOBJECTTRAPPING, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute ImageToObjectTrapping
           * @return boolean the value of the attribute
@@ -591,8 +542,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.IMAGETOOBJECTTRAPPING, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -607,8 +556,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
             setAttribute(AttributeName.IMAGETRAPPLACEMENT, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ImageTrapPlacement
           * @return the value of the attribute
@@ -617,8 +564,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         {
             return EnumImageTrapPlacement.getEnum(getAttribute(AttributeName.IMAGETRAPPLACEMENT, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -633,8 +578,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
             setAttribute(AttributeName.IMAGETRAPWIDTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute ImageTrapWidth
           * @return double the value of the attribute
@@ -643,8 +586,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.IMAGETRAPWIDTH, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -659,8 +600,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
             setAttribute(AttributeName.IMAGETRAPWIDTHY, value, null);
         }
 
-
-
         /**
           * (17) get double attribute ImageTrapWidthY
           * @return double the value of the attribute
@@ -669,8 +608,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.IMAGETRAPWIDTHY, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -685,8 +622,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
             setAttribute(AttributeName.SLIDINGTRAPLIMIT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute SlidingTrapLimit
           * @return double the value of the attribute
@@ -695,8 +630,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.SLIDINGTRAPLIMIT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -711,8 +644,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
             setAttribute(AttributeName.STEPLIMIT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute StepLimit
           * @return double the value of the attribute
@@ -721,8 +652,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.STEPLIMIT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -737,8 +666,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
             setAttribute(AttributeName.TRAPCOLORSCALING, value, null);
         }
 
-
-
         /**
           * (17) get double attribute TrapColorScaling
           * @return double the value of the attribute
@@ -747,8 +674,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.TRAPCOLORSCALING, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -763,8 +688,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
             setAttribute(AttributeName.TRAPWIDTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute TrapWidth
           * @return double the value of the attribute
@@ -773,8 +696,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.TRAPWIDTH, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -789,8 +710,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
             setAttribute(AttributeName.TRAPWIDTHY, value, null);
         }
 
-
-
         /**
           * (17) get double attribute TrapWidthY
           * @return double the value of the attribute
@@ -799,8 +718,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.TRAPWIDTHY, null, 0.0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -817,8 +734,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         return (JDFColorantZoneDetails)getCreateElement_KElement(ElementName.COLORANTZONEDETAILS, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element ColorantZoneDetails
      * @param iSkip number of elements to skip
@@ -829,9 +744,10 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         return (JDFColorantZoneDetails) getElement(ElementName.COLORANTZONEDETAILS, null, iSkip);
     }
 
-
-
-    public JDFColorantZoneDetails appendColorantZoneDetails()
+    /**
+     * (30) append element ColorantZoneDetails
+     */
+    public JDFColorantZoneDetails appendColorantZoneDetails() throws JDFException
     {
         return (JDFColorantZoneDetails) appendElement(ElementName.COLORANTZONEDETAILS, null);
     }

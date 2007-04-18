@@ -204,8 +204,6 @@ public abstract class JDFAutoAddress extends JDFResource
             setAttribute(AttributeName.CITY, value, null);
         }
 
-
-
         /**
           * (23) get String attribute City
           * @return the value of the attribute
@@ -214,8 +212,6 @@ public abstract class JDFAutoAddress extends JDFResource
         {
             return getAttribute(AttributeName.CITY, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -230,8 +226,6 @@ public abstract class JDFAutoAddress extends JDFResource
             setAttribute(AttributeName.COUNTRY, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Country
           * @return the value of the attribute
@@ -240,8 +234,6 @@ public abstract class JDFAutoAddress extends JDFResource
         {
             return getAttribute(AttributeName.COUNTRY, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -256,8 +248,6 @@ public abstract class JDFAutoAddress extends JDFResource
             setAttribute(AttributeName.COUNTRYCODE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute CountryCode
           * @return the value of the attribute
@@ -266,8 +256,6 @@ public abstract class JDFAutoAddress extends JDFResource
         {
             return getAttribute(AttributeName.COUNTRYCODE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -282,8 +270,6 @@ public abstract class JDFAutoAddress extends JDFResource
             setAttribute(AttributeName.POSTBOX, value, null);
         }
 
-
-
         /**
           * (23) get String attribute PostBox
           * @return the value of the attribute
@@ -292,8 +278,6 @@ public abstract class JDFAutoAddress extends JDFResource
         {
             return getAttribute(AttributeName.POSTBOX, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -308,8 +292,6 @@ public abstract class JDFAutoAddress extends JDFResource
             setAttribute(AttributeName.POSTALCODE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute PostalCode
           * @return the value of the attribute
@@ -318,8 +300,6 @@ public abstract class JDFAutoAddress extends JDFResource
         {
             return getAttribute(AttributeName.POSTALCODE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -334,8 +314,6 @@ public abstract class JDFAutoAddress extends JDFResource
             setAttribute(AttributeName.REGION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Region
           * @return the value of the attribute
@@ -344,8 +322,6 @@ public abstract class JDFAutoAddress extends JDFResource
         {
             return getAttribute(AttributeName.REGION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -360,8 +336,6 @@ public abstract class JDFAutoAddress extends JDFResource
             setAttribute(AttributeName.STREET, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Street
           * @return the value of the attribute
@@ -370,8 +344,6 @@ public abstract class JDFAutoAddress extends JDFResource
         {
             return getAttribute(AttributeName.STREET, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -387,8 +359,6 @@ public abstract class JDFAutoAddress extends JDFResource
         return (JDFElement) getElement(ElementName.EXTENDEDADDRESS, null, 0);
     }
 
-
-
     /** (25) getCreateExtendedAddress
      * 
      * @return JDFElement the element
@@ -398,15 +368,12 @@ public abstract class JDFAutoAddress extends JDFResource
         return (JDFElement) getCreateElement_KElement(ElementName.EXTENDEDADDRESS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementExtendedAddress
+     * (29) append element ExtendedAddress
      */
     public JDFElement appendExtendedAddress() throws JDFException
     {
         return (JDFElement) appendElementN(ElementName.EXTENDEDADDRESS, 1, null);
     }
+
 }// end namespace JDF

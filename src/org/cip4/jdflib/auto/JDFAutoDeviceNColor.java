@@ -172,8 +172,6 @@ public abstract class JDFAutoDeviceNColor extends JDFElement
             setAttribute(AttributeName.COLORLIST, value, null);
         }
 
-
-
         /**
           * (20) get JDFNumberList attribute ColorList
           * @return JDFNumberList the value of the attribute, null if a the
@@ -195,8 +193,6 @@ public abstract class JDFAutoDeviceNColor extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute N
@@ -210,8 +206,6 @@ public abstract class JDFAutoDeviceNColor extends JDFElement
             setAttribute(AttributeName.N, value, null);
         }
 
-
-
         /**
           * (15) get int attribute N
           * @return int the value of the attribute
@@ -220,8 +214,6 @@ public abstract class JDFAutoDeviceNColor extends JDFElement
         {
             return getIntAttribute(AttributeName.N, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -236,8 +228,6 @@ public abstract class JDFAutoDeviceNColor extends JDFElement
             setAttribute(AttributeName.NAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Name
           * @return the value of the attribute
@@ -246,7 +236,5 @@ public abstract class JDFAutoDeviceNColor extends JDFElement
         {
             return getAttribute(AttributeName.NAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

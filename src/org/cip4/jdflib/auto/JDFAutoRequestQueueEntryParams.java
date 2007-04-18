@@ -240,8 +240,6 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
             setAttribute(AttributeName.JOBID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobID
           * @return the value of the attribute
@@ -250,8 +248,6 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
         {
             return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -266,8 +262,6 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
             setAttribute(AttributeName.JOBPARTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobPartID
           * @return the value of the attribute
@@ -276,8 +270,6 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
         {
             return getAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -292,8 +284,6 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
             setAttribute(AttributeName.QUEUEURL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute QueueURL
           * @return the value of the attribute
@@ -302,8 +292,6 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
         {
             return getAttribute(AttributeName.QUEUEURL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -318,8 +306,6 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
             setAttribute(AttributeName.SUBMITPOLICY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute SubmitPolicy
           * @return the value of the attribute
@@ -328,8 +314,6 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
         {
             return EnumSubmitPolicy.getEnum(getAttribute(AttributeName.SUBMITPOLICY, null, null));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -346,8 +330,6 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
         return (JDFPart)getCreateElement_KElement(ElementName.PART, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Part
      * @param iSkip number of elements to skip
@@ -358,9 +340,10 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
         return (JDFPart) getElement(ElementName.PART, null, iSkip);
     }
 
-
-
-    public JDFPart appendPart()
+    /**
+     * (30) append element Part
+     */
+    public JDFPart appendPart() throws JDFException
     {
         return (JDFPart) appendElement(ElementName.PART, null);
     }
@@ -374,8 +357,6 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
         return (JDFQueue) getElement(ElementName.QUEUE, null, 0);
     }
 
-
-
     /** (25) getCreateQueue
      * 
      * @return JDFQueue the element
@@ -385,15 +366,12 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
         return (JDFQueue) getCreateElement_KElement(ElementName.QUEUE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementQueue
+     * (29) append element Queue
      */
     public JDFQueue appendQueue() throws JDFException
     {
         return (JDFQueue) appendElementN(ElementName.QUEUE, 1, null);
     }
+
 }// end namespace JDF

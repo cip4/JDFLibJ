@@ -171,8 +171,6 @@ public abstract class JDFAutoCreditCard extends JDFElement
             setAttribute(AttributeName.AUTHORIZATION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Authorization
           * @return the value of the attribute
@@ -181,8 +179,6 @@ public abstract class JDFAutoCreditCard extends JDFElement
         {
             return getAttribute(AttributeName.AUTHORIZATION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -197,8 +193,6 @@ public abstract class JDFAutoCreditCard extends JDFElement
             setAttribute(AttributeName.AUTHORIZATIONEXPIRES, value, null);
         }
 
-
-
         /**
           * (23) get String attribute AuthorizationExpires
           * @return the value of the attribute
@@ -207,8 +201,6 @@ public abstract class JDFAutoCreditCard extends JDFElement
         {
             return getAttribute(AttributeName.AUTHORIZATIONEXPIRES, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -223,8 +215,6 @@ public abstract class JDFAutoCreditCard extends JDFElement
             setAttribute(AttributeName.EXPIRES, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Expires
           * @return the value of the attribute
@@ -233,8 +223,6 @@ public abstract class JDFAutoCreditCard extends JDFElement
         {
             return getAttribute(AttributeName.EXPIRES, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -249,8 +237,6 @@ public abstract class JDFAutoCreditCard extends JDFElement
             setAttribute(AttributeName.NUMBER, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Number
           * @return the value of the attribute
@@ -259,8 +245,6 @@ public abstract class JDFAutoCreditCard extends JDFElement
         {
             return getAttribute(AttributeName.NUMBER, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -275,8 +259,6 @@ public abstract class JDFAutoCreditCard extends JDFElement
             setAttribute(AttributeName.TYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Type
           * @return the value of the attribute
@@ -285,7 +267,5 @@ public abstract class JDFAutoCreditCard extends JDFElement
         {
             return getAttribute(AttributeName.TYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

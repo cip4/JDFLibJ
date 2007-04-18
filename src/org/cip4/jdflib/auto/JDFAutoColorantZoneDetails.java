@@ -169,8 +169,6 @@ public abstract class JDFAutoColorantZoneDetails extends JDFElement
             setAttribute(AttributeName.COLORANT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Colorant
           * @return the value of the attribute
@@ -179,8 +177,6 @@ public abstract class JDFAutoColorantZoneDetails extends JDFElement
         {
             return getAttribute(AttributeName.COLORANT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -195,8 +191,6 @@ public abstract class JDFAutoColorantZoneDetails extends JDFElement
             setAttribute(AttributeName.STEPLIMIT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute StepLimit
           * @return double the value of the attribute
@@ -205,8 +199,6 @@ public abstract class JDFAutoColorantZoneDetails extends JDFElement
         {
             return getRealAttribute(AttributeName.STEPLIMIT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -221,8 +213,6 @@ public abstract class JDFAutoColorantZoneDetails extends JDFElement
             setAttribute(AttributeName.TRAPCOLORSCALING, value, null);
         }
 
-
-
         /**
           * (17) get double attribute TrapColorScaling
           * @return double the value of the attribute
@@ -231,7 +221,5 @@ public abstract class JDFAutoColorantZoneDetails extends JDFElement
         {
             return getRealAttribute(AttributeName.TRAPCOLORSCALING, null, 0.0);
         }
-
-
 
 }// end namespace JDF

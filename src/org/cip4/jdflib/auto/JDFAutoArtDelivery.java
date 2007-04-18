@@ -273,8 +273,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
             setAttribute(AttributeName.AMOUNT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Amount
           * @return int the value of the attribute
@@ -283,8 +281,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
         {
             return getIntAttribute(AttributeName.AMOUNT, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -299,8 +295,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
             setAttribute(AttributeName.ARTDELIVERYTYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ArtDeliveryType
           * @return the value of the attribute
@@ -309,8 +303,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
         {
             return getAttribute(AttributeName.ARTDELIVERYTYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -325,8 +317,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
             setAttribute(AttributeName.HASBLEEDS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute HasBleeds
           * @return boolean the value of the attribute
@@ -335,8 +325,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
         {
             return getBoolAttribute(AttributeName.HASBLEEDS, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -351,8 +339,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
             setAttribute(AttributeName.ISTRAPPED, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IsTrapped
           * @return boolean the value of the attribute
@@ -361,8 +347,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
         {
             return getBoolAttribute(AttributeName.ISTRAPPED, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -376,8 +360,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
         {
             setAttribute(AttributeName.PAGELIST, value, null);
         }
-
-
 
         /**
           * (20) get JDFIntegerRangeList attribute PageList
@@ -400,8 +382,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute PreflightOutput
@@ -415,8 +395,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
             setAttribute(AttributeName.PREFLIGHTOUTPUT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute PreflightOutput
           * @return the value of the attribute
@@ -425,8 +403,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
         {
             return getAttribute(AttributeName.PREFLIGHTOUTPUT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -441,8 +417,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
             setAttribute(AttributeName.PREFLIGHTSTATUS, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute PreflightStatus
           * @return the value of the attribute
@@ -451,8 +425,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
         {
             return EnumPreflightStatus.getEnum(getAttribute(AttributeName.PREFLIGHTSTATUS, null, null));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -468,8 +440,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
         return (JDFTimeSpan) getElement(ElementName.ARTDELIVERYDATE, null, 0);
     }
 
-
-
     /** (25) getCreateArtDeliveryDate
      * 
      * @return JDFTimeSpan the element
@@ -479,17 +449,14 @@ public abstract class JDFAutoArtDelivery extends JDFElement
         return (JDFTimeSpan) getCreateElement_KElement(ElementName.ARTDELIVERYDATE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementArtDeliveryDate
+     * (29) append element ArtDeliveryDate
      */
     public JDFTimeSpan appendArtDeliveryDate() throws JDFException
     {
         return (JDFTimeSpan) appendElementN(ElementName.ARTDELIVERYDATE, 1, null);
     }
+
     /**
      * (24) const get element ArtDeliveryDuration
      * @return JDFDurationSpan the element
@@ -498,8 +465,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
     {
         return (JDFDurationSpan) getElement(ElementName.ARTDELIVERYDURATION, null, 0);
     }
-
-
 
     /** (25) getCreateArtDeliveryDuration
      * 
@@ -510,17 +475,14 @@ public abstract class JDFAutoArtDelivery extends JDFElement
         return (JDFDurationSpan) getCreateElement_KElement(ElementName.ARTDELIVERYDURATION, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementArtDeliveryDuration
+     * (29) append element ArtDeliveryDuration
      */
     public JDFDurationSpan appendArtDeliveryDuration() throws JDFException
     {
         return (JDFDurationSpan) appendElementN(ElementName.ARTDELIVERYDURATION, 1, null);
     }
+
     /**
      * (24) const get element ArtHandling
      * @return JDFSpanArtHandling the element
@@ -529,8 +491,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
     {
         return (JDFSpanArtHandling) getElement(ElementName.ARTHANDLING, null, 0);
     }
-
-
 
     /** (25) getCreateArtHandling
      * 
@@ -541,17 +501,14 @@ public abstract class JDFAutoArtDelivery extends JDFElement
         return (JDFSpanArtHandling) getCreateElement_KElement(ElementName.ARTHANDLING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementArtHandling
+     * (29) append element ArtHandling
      */
     public JDFSpanArtHandling appendArtHandling() throws JDFException
     {
         return (JDFSpanArtHandling) appendElementN(ElementName.ARTHANDLING, 1, null);
     }
+
     /**
      * (24) const get element DeliveryCharge
      * @return JDFSpanDeliveryCharge the element
@@ -560,8 +517,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
     {
         return (JDFSpanDeliveryCharge) getElement(ElementName.DELIVERYCHARGE, null, 0);
     }
-
-
 
     /** (25) getCreateDeliveryCharge
      * 
@@ -572,17 +527,14 @@ public abstract class JDFAutoArtDelivery extends JDFElement
         return (JDFSpanDeliveryCharge) getCreateElement_KElement(ElementName.DELIVERYCHARGE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDeliveryCharge
+     * (29) append element DeliveryCharge
      */
     public JDFSpanDeliveryCharge appendDeliveryCharge() throws JDFException
     {
         return (JDFSpanDeliveryCharge) appendElementN(ElementName.DELIVERYCHARGE, 1, null);
     }
+
     /**
      * (24) const get element Method
      * @return JDFNameSpan the element
@@ -591,8 +543,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
     {
         return (JDFNameSpan) getElement(ElementName.METHOD, null, 0);
     }
-
-
 
     /** (25) getCreateMethod
      * 
@@ -603,17 +553,14 @@ public abstract class JDFAutoArtDelivery extends JDFElement
         return (JDFNameSpan) getCreateElement_KElement(ElementName.METHOD, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMethod
+     * (29) append element Method
      */
     public JDFNameSpan appendMethod() throws JDFException
     {
         return (JDFNameSpan) appendElementN(ElementName.METHOD, 1, null);
     }
+
     /**
      * (24) const get element ReturnMethod
      * @return JDFNameSpan the element
@@ -622,8 +569,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
     {
         return (JDFNameSpan) getElement(ElementName.RETURNMETHOD, null, 0);
     }
-
-
 
     /** (25) getCreateReturnMethod
      * 
@@ -634,17 +579,14 @@ public abstract class JDFAutoArtDelivery extends JDFElement
         return (JDFNameSpan) getCreateElement_KElement(ElementName.RETURNMETHOD, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementReturnMethod
+     * (29) append element ReturnMethod
      */
     public JDFNameSpan appendReturnMethod() throws JDFException
     {
         return (JDFNameSpan) appendElementN(ElementName.RETURNMETHOD, 1, null);
     }
+
     /**
      * (24) const get element ServiceLevel
      * @return JDFStringSpan the element
@@ -653,8 +595,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
     {
         return (JDFStringSpan) getElement(ElementName.SERVICELEVEL, null, 0);
     }
-
-
 
     /** (25) getCreateServiceLevel
      * 
@@ -665,17 +605,14 @@ public abstract class JDFAutoArtDelivery extends JDFElement
         return (JDFStringSpan) getCreateElement_KElement(ElementName.SERVICELEVEL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementServiceLevel
+     * (29) append element ServiceLevel
      */
     public JDFStringSpan appendServiceLevel() throws JDFException
     {
         return (JDFStringSpan) appendElementN(ElementName.SERVICELEVEL, 1, null);
     }
+
     /**
      * (24) const get element Transfer
      * @return JDFSpanTransfer the element
@@ -684,8 +621,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
     {
         return (JDFSpanTransfer) getElement(ElementName.TRANSFER, null, 0);
     }
-
-
 
     /** (25) getCreateTransfer
      * 
@@ -696,17 +631,14 @@ public abstract class JDFAutoArtDelivery extends JDFElement
         return (JDFSpanTransfer) getCreateElement_KElement(ElementName.TRANSFER, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementTransfer
+     * (29) append element Transfer
      */
     public JDFSpanTransfer appendTransfer() throws JDFException
     {
         return (JDFSpanTransfer) appendElementN(ElementName.TRANSFER, 1, null);
     }
+
     /**
      * (24) const get element Company
      * @return JDFCompany the element
@@ -715,8 +647,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
     {
         return (JDFCompany) getElement(ElementName.COMPANY, null, 0);
     }
-
-
 
     /** (25) getCreateCompany
      * 
@@ -727,17 +657,14 @@ public abstract class JDFAutoArtDelivery extends JDFElement
         return (JDFCompany) getCreateElement_KElement(ElementName.COMPANY, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementCompany
+     * (29) append element Company
      */
     public JDFCompany appendCompany() throws JDFException
     {
         return (JDFCompany) appendElementN(ElementName.COMPANY, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -746,6 +673,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element Component
      * @return JDFComponent the element
@@ -754,8 +682,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
     {
         return (JDFComponent) getElement(ElementName.COMPONENT, null, 0);
     }
-
-
 
     /** (25) getCreateComponent
      * 
@@ -766,17 +692,14 @@ public abstract class JDFAutoArtDelivery extends JDFElement
         return (JDFComponent) getCreateElement_KElement(ElementName.COMPONENT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementComponent
+     * (29) append element Component
      */
     public JDFComponent appendComponent() throws JDFException
     {
         return (JDFComponent) appendElementN(ElementName.COMPONENT, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -785,6 +708,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateContact
      * 
      * @param iSkip number of elements to skip
@@ -794,8 +718,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
     {
         return (JDFContact)getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Contact
@@ -807,9 +729,10 @@ public abstract class JDFAutoArtDelivery extends JDFElement
         return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
     }
 
-
-
-    public JDFContact appendContact()
+    /**
+     * (30) append element Contact
+     */
+    public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -822,6 +745,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element DigitalMedia
      * @return JDFDigitalMedia the element
@@ -830,8 +754,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
     {
         return (JDFDigitalMedia) getElement(ElementName.DIGITALMEDIA, null, 0);
     }
-
-
 
     /** (25) getCreateDigitalMedia
      * 
@@ -842,17 +764,14 @@ public abstract class JDFAutoArtDelivery extends JDFElement
         return (JDFDigitalMedia) getCreateElement_KElement(ElementName.DIGITALMEDIA, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDigitalMedia
+     * (29) append element DigitalMedia
      */
     public JDFDigitalMedia appendDigitalMedia() throws JDFException
     {
         return (JDFDigitalMedia) appendElementN(ElementName.DIGITALMEDIA, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -861,6 +780,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element ExposedMedia
      * @return JDFExposedMedia the element
@@ -869,8 +789,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
     {
         return (JDFExposedMedia) getElement(ElementName.EXPOSEDMEDIA, null, 0);
     }
-
-
 
     /** (25) getCreateExposedMedia
      * 
@@ -881,17 +799,14 @@ public abstract class JDFAutoArtDelivery extends JDFElement
         return (JDFExposedMedia) getCreateElement_KElement(ElementName.EXPOSEDMEDIA, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementExposedMedia
+     * (29) append element ExposedMedia
      */
     public JDFExposedMedia appendExposedMedia() throws JDFException
     {
         return (JDFExposedMedia) appendElementN(ElementName.EXPOSEDMEDIA, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -900,6 +815,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element RunList
      * @return JDFRunList the element
@@ -908,8 +824,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
     {
         return (JDFRunList) getElement(ElementName.RUNLIST, null, 0);
     }
-
-
 
     /** (25) getCreateRunList
      * 
@@ -920,17 +834,14 @@ public abstract class JDFAutoArtDelivery extends JDFElement
         return (JDFRunList) getCreateElement_KElement(ElementName.RUNLIST, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementRunList
+     * (29) append element RunList
      */
     public JDFRunList appendRunList() throws JDFException
     {
         return (JDFRunList) appendElementN(ElementName.RUNLIST, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -939,6 +850,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element ScanParams
      * @return JDFScanParams the element
@@ -947,8 +859,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
     {
         return (JDFScanParams) getElement(ElementName.SCANPARAMS, null, 0);
     }
-
-
 
     /** (25) getCreateScanParams
      * 
@@ -959,17 +869,14 @@ public abstract class JDFAutoArtDelivery extends JDFElement
         return (JDFScanParams) getCreateElement_KElement(ElementName.SCANPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementScanParams
+     * (29) append element ScanParams
      */
     public JDFScanParams appendScanParams() throws JDFException
     {
         return (JDFScanParams) appendElementN(ElementName.SCANPARAMS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -978,6 +885,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element Tool
      * @return JDFTool the element
@@ -986,8 +894,6 @@ public abstract class JDFAutoArtDelivery extends JDFElement
     {
         return (JDFTool) getElement(ElementName.TOOL, null, 0);
     }
-
-
 
     /** (25) getCreateTool
      * 
@@ -998,17 +904,14 @@ public abstract class JDFAutoArtDelivery extends JDFElement
         return (JDFTool) getCreateElement_KElement(ElementName.TOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementTool
+     * (29) append element Tool
      */
     public JDFTool appendTool() throws JDFException
     {
         return (JDFTool) appendElementN(ElementName.TOOL, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -1017,4 +920,5 @@ public abstract class JDFAutoArtDelivery extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

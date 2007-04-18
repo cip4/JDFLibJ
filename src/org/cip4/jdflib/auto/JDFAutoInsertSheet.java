@@ -365,8 +365,6 @@ public abstract class JDFAutoInsertSheet extends JDFResource
             setAttribute(AttributeName.SHEETTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute SheetType
           * @return the value of the attribute
@@ -375,8 +373,6 @@ public abstract class JDFAutoInsertSheet extends JDFResource
         {
             return EnumSheetType.getEnum(getAttribute(AttributeName.SHEETTYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -391,8 +387,6 @@ public abstract class JDFAutoInsertSheet extends JDFResource
             setAttribute(AttributeName.SHEETUSAGE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute SheetUsage
           * @return the value of the attribute
@@ -401,8 +395,6 @@ public abstract class JDFAutoInsertSheet extends JDFResource
         {
             return EnumSheetUsage.getEnum(getAttribute(AttributeName.SHEETUSAGE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -417,8 +409,6 @@ public abstract class JDFAutoInsertSheet extends JDFResource
             setAttribute(AttributeName.INCLUDEINBUNDLEITEM, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute IncludeInBundleItem
           * @return the value of the attribute
@@ -427,8 +417,6 @@ public abstract class JDFAutoInsertSheet extends JDFResource
         {
             return EnumIncludeInBundleItem.getEnum(getAttribute(AttributeName.INCLUDEINBUNDLEITEM, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -443,8 +431,6 @@ public abstract class JDFAutoInsertSheet extends JDFResource
             setAttribute(AttributeName.ISWASTE, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute IsWaste
           * @return boolean the value of the attribute
@@ -453,8 +439,6 @@ public abstract class JDFAutoInsertSheet extends JDFResource
         {
             return getBoolAttribute(AttributeName.ISWASTE, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -469,8 +453,6 @@ public abstract class JDFAutoInsertSheet extends JDFResource
             setAttribute(AttributeName.MARKLIST, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute MarkList
           * @return VString the value of the attribute
@@ -482,8 +464,6 @@ public abstract class JDFAutoInsertSheet extends JDFResource
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -498,8 +478,6 @@ public abstract class JDFAutoInsertSheet extends JDFResource
             setAttribute(AttributeName.SHEETFORMAT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute SheetFormat
           * @return the value of the attribute
@@ -508,8 +486,6 @@ public abstract class JDFAutoInsertSheet extends JDFResource
         {
             return getAttribute(AttributeName.SHEETFORMAT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -524,8 +500,6 @@ public abstract class JDFAutoInsertSheet extends JDFResource
             setAttribute(AttributeName.USAGE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Usage
           * @return the value of the attribute
@@ -534,8 +508,6 @@ public abstract class JDFAutoInsertSheet extends JDFResource
         {
             return EnumSheetUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -551,8 +523,6 @@ public abstract class JDFAutoInsertSheet extends JDFResource
         return (JDFRunList) getElement(ElementName.RUNLIST, null, 0);
     }
 
-
-
     /** (25) getCreateRunList
      * 
      * @return JDFRunList the element
@@ -562,17 +532,14 @@ public abstract class JDFAutoInsertSheet extends JDFResource
         return (JDFRunList) getCreateElement_KElement(ElementName.RUNLIST, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementRunList
+     * (29) append element RunList
      */
     public JDFRunList appendRunList() throws JDFException
     {
         return (JDFRunList) appendElementN(ElementName.RUNLIST, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -581,6 +548,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element Layout
      * @return JDFLayout the element
@@ -589,8 +557,6 @@ public abstract class JDFAutoInsertSheet extends JDFResource
     {
         return (JDFLayout) getElement(ElementName.LAYOUT, null, 0);
     }
-
-
 
     /** (25) getCreateLayout
      * 
@@ -601,17 +567,14 @@ public abstract class JDFAutoInsertSheet extends JDFResource
         return (JDFLayout) getCreateElement_KElement(ElementName.LAYOUT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementLayout
+     * (29) append element Layout
      */
     public JDFLayout appendLayout() throws JDFException
     {
         return (JDFLayout) appendElementN(ElementName.LAYOUT, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -620,6 +583,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element Sheet
      * @return JDFSheet the element
@@ -628,8 +592,6 @@ public abstract class JDFAutoInsertSheet extends JDFResource
     {
         return (JDFSheet) getElement(ElementName.SHEET, null, 0);
     }
-
-
 
     /** (25) getCreateSheet
      * 
@@ -640,17 +602,14 @@ public abstract class JDFAutoInsertSheet extends JDFResource
         return (JDFSheet) getCreateElement_KElement(ElementName.SHEET, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementSheet
+     * (29) append element Sheet
      */
     public JDFSheet appendSheet() throws JDFException
     {
         return (JDFSheet) appendElementN(ElementName.SHEET, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -659,4 +618,5 @@ public abstract class JDFAutoInsertSheet extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

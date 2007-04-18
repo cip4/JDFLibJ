@@ -256,8 +256,6 @@ public abstract class JDFAutoElementColorParams extends JDFResource
             setAttribute(AttributeName.COLORMANAGEMENTSYSTEM, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ColorManagementSystem
           * @return the value of the attribute
@@ -266,8 +264,6 @@ public abstract class JDFAutoElementColorParams extends JDFResource
         {
             return getAttribute(AttributeName.COLORMANAGEMENTSYSTEM, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -282,8 +278,6 @@ public abstract class JDFAutoElementColorParams extends JDFResource
             setAttribute(AttributeName.ICCOUTPUTPROFILEUSAGE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ICCOutputProfileUsage
           * @return the value of the attribute
@@ -292,8 +286,6 @@ public abstract class JDFAutoElementColorParams extends JDFResource
         {
             return EnumICCOutputProfileUsage.getEnum(getAttribute(AttributeName.ICCOUTPUTPROFILEUSAGE, null, null));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -309,8 +301,6 @@ public abstract class JDFAutoElementColorParams extends JDFResource
         return (JDFAutomatedOverPrintParams) getElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, 0);
     }
 
-
-
     /** (25) getCreateAutomatedOverPrintParams
      * 
      * @return JDFAutomatedOverPrintParams the element
@@ -320,17 +310,14 @@ public abstract class JDFAutoElementColorParams extends JDFResource
         return (JDFAutomatedOverPrintParams) getCreateElement_KElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementAutomatedOverPrintParams
+     * (29) append element AutomatedOverPrintParams
      */
     public JDFAutomatedOverPrintParams appendAutomatedOverPrintParams() throws JDFException
     {
         return (JDFAutomatedOverPrintParams) appendElementN(ElementName.AUTOMATEDOVERPRINTPARAMS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -339,6 +326,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateColorantAlias
      * 
      * @param iSkip number of elements to skip
@@ -348,8 +336,6 @@ public abstract class JDFAutoElementColorParams extends JDFResource
     {
         return (JDFColorantAlias)getCreateElement_KElement(ElementName.COLORANTALIAS, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element ColorantAlias
@@ -361,9 +347,10 @@ public abstract class JDFAutoElementColorParams extends JDFResource
         return (JDFColorantAlias) getElement(ElementName.COLORANTALIAS, null, iSkip);
     }
 
-
-
-    public JDFColorantAlias appendColorantAlias()
+    /**
+     * (30) append element ColorantAlias
+     */
+    public JDFColorantAlias appendColorantAlias() throws JDFException
     {
         return (JDFColorantAlias) appendElement(ElementName.COLORANTALIAS, null);
     }
@@ -376,6 +363,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element ColorSpaceConversionOp
      * @return JDFColorSpaceConversionOp the element
@@ -384,8 +372,6 @@ public abstract class JDFAutoElementColorParams extends JDFResource
     {
         return (JDFColorSpaceConversionOp) getElement(ElementName.COLORSPACECONVERSIONOP, null, 0);
     }
-
-
 
     /** (25) getCreateColorSpaceConversionOp
      * 
@@ -396,17 +382,14 @@ public abstract class JDFAutoElementColorParams extends JDFResource
         return (JDFColorSpaceConversionOp) getCreateElement_KElement(ElementName.COLORSPACECONVERSIONOP, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementColorSpaceConversionOp
+     * (29) append element ColorSpaceConversionOp
      */
     public JDFColorSpaceConversionOp appendColorSpaceConversionOp() throws JDFException
     {
         return (JDFColorSpaceConversionOp) appendElementN(ElementName.COLORSPACECONVERSIONOP, 1, null);
     }
+
     /**
      * (24) const get element FileSpec
      * @return JDFFileSpec the element
@@ -415,8 +398,6 @@ public abstract class JDFAutoElementColorParams extends JDFResource
     {
         return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
     }
-
-
 
     /** (25) getCreateFileSpec
      * 
@@ -427,17 +408,14 @@ public abstract class JDFAutoElementColorParams extends JDFResource
         return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFileSpec
+     * (29) append element FileSpec
      */
     public JDFFileSpec appendFileSpec() throws JDFException
     {
         return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -446,4 +424,5 @@ public abstract class JDFAutoElementColorParams extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

@@ -85,6 +85,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.process.JDFTIFFEmbeddedFile;
 import org.cip4.jdflib.resource.process.JDFTIFFtag;
@@ -289,8 +290,6 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
             setAttribute(AttributeName.BYTEORDER, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ByteOrder
           * @return the value of the attribute
@@ -299,8 +298,6 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
         {
             return EnumByteOrder.getEnum(getAttribute(AttributeName.BYTEORDER, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -315,8 +312,6 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
             setAttribute(AttributeName.INTERLEAVING, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Interleaving
           * @return int the value of the attribute
@@ -325,8 +320,6 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
         {
             return getIntAttribute(AttributeName.INTERLEAVING, null, 1);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -341,8 +334,6 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
             setAttribute(AttributeName.WHITEISZERO, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute WhiteIsZero
           * @return boolean the value of the attribute
@@ -351,8 +342,6 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.WHITEISZERO, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -367,8 +356,6 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
             setAttribute(AttributeName.SEGMENTATION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Segmentation
           * @return the value of the attribute
@@ -377,8 +364,6 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
         {
             return EnumSegmentation.getEnum(getAttribute(AttributeName.SEGMENTATION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -393,8 +378,6 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
             setAttribute(AttributeName.ROWSPERSTRIP, value, null);
         }
 
-
-
         /**
           * (15) get int attribute RowsPerStrip
           * @return int the value of the attribute
@@ -403,8 +386,6 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
         {
             return getIntAttribute(AttributeName.ROWSPERSTRIP, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -418,8 +399,6 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
         {
             setAttribute(AttributeName.TILESIZE, value, null);
         }
-
-
 
         /**
           * (20) get JDFXYPair attribute TileSize
@@ -442,8 +421,6 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute SeparationNameTag
@@ -457,8 +434,6 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
             setAttribute(AttributeName.SEPARATIONNAMETAG, value, null);
         }
 
-
-
         /**
           * (15) get int attribute SeparationNameTag
           * @return int the value of the attribute
@@ -467,8 +442,6 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
         {
             return getIntAttribute(AttributeName.SEPARATIONNAMETAG, null, 270);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -485,8 +458,6 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
         return (JDFTIFFtag)getCreateElement_KElement(ElementName.TIFFTAG, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element TIFFtag
      * @param iSkip number of elements to skip
@@ -497,9 +468,10 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
         return (JDFTIFFtag) getElement(ElementName.TIFFTAG, null, iSkip);
     }
 
-
-
-    public JDFTIFFtag appendTIFFtag()
+    /**
+     * (30) append element TIFFtag
+     */
+    public JDFTIFFtag appendTIFFtag() throws JDFException
     {
         return (JDFTIFFtag) appendElement(ElementName.TIFFTAG, null);
     }
@@ -514,8 +486,6 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
         return (JDFTIFFEmbeddedFile)getCreateElement_KElement(ElementName.TIFFEMBEDDEDFILE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element TIFFEmbeddedFile
      * @param iSkip number of elements to skip
@@ -526,9 +496,10 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
         return (JDFTIFFEmbeddedFile) getElement(ElementName.TIFFEMBEDDEDFILE, null, iSkip);
     }
 
-
-
-    public JDFTIFFEmbeddedFile appendTIFFEmbeddedFile()
+    /**
+     * (30) append element TIFFEmbeddedFile
+     */
+    public JDFTIFFEmbeddedFile appendTIFFEmbeddedFile() throws JDFException
     {
         return (JDFTIFFEmbeddedFile) appendElement(ElementName.TIFFEMBEDDEDFILE, null);
     }

@@ -79,6 +79,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
     /*
     *****************************************************************************
     class JDFAutoPreflightInstanceDetail : public JDFElement
@@ -183,8 +184,6 @@ public abstract class JDFAutoPreflightInstanceDetail extends JDFElement
             setAttribute(AttributeName.PROPERTY, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Property
           * @return the value of the attribute
@@ -193,8 +192,6 @@ public abstract class JDFAutoPreflightInstanceDetail extends JDFElement
         {
             return getAttribute(AttributeName.PROPERTY, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -211,8 +208,6 @@ public abstract class JDFAutoPreflightInstanceDetail extends JDFElement
         return (JDFElement)getCreateElement_KElement(ElementName.VALUE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Value
      * @param iSkip number of elements to skip
@@ -223,9 +218,10 @@ public abstract class JDFAutoPreflightInstanceDetail extends JDFElement
         return (JDFElement) getElement(ElementName.VALUE, null, iSkip);
     }
 
-
-
-    public JDFElement appendValue()
+    /**
+     * (30) append element Value
+     */
+    public JDFElement appendValue() throws JDFException
     {
         return (JDFElement) appendElement(ElementName.VALUE, null);
     }

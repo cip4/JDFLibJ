@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.JDFXYPairRangeList;
 import org.cip4.jdflib.resource.JDFResource;
@@ -250,11 +251,9 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
             setAttribute(AttributeName.TOLERANCE, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute Tolerance
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getTolerance()
@@ -273,8 +272,6 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ValueList
@@ -288,11 +285,9 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
             setAttribute(AttributeName.VALUELIST, value.toString(), null);
         }
 
-
-
         /**
           * (20) get JDFXYPairRangeList attribute ValueList
-          * @return JDFXYPairRangeListthe value of the attribute, null if a the
+          * @return JDFXYPairRangeList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPairRangeList
           */
         public JDFXYPairRangeList getValueList()
@@ -311,8 +306,6 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute XYRelation
@@ -326,8 +319,6 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
             setAttribute(AttributeName.XYRELATION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute XYRelation
           * @return the value of the attribute
@@ -336,8 +327,6 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
         {
             return EnumXYRelation.getEnum(getAttribute(AttributeName.XYRELATION, null, null));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -354,8 +343,6 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
         return (JDFBasicPreflightTest)getCreateElement_KElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element BasicPreflightTest
      * @param iSkip number of elements to skip
@@ -366,9 +353,10 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
         return (JDFBasicPreflightTest) getElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
     }
 
-
-
-    public JDFBasicPreflightTest appendBasicPreflightTest()
+    /**
+     * (30) append element BasicPreflightTest
+     */
+    public JDFBasicPreflightTest appendBasicPreflightTest() throws JDFException
     {
         return (JDFBasicPreflightTest) appendElement(ElementName.BASICPREFLIGHTTEST, null);
     }

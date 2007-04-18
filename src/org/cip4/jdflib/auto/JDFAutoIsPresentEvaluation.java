@@ -74,6 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFBasicPreflightTest;
     /*
@@ -173,8 +174,6 @@ public abstract class JDFAutoIsPresentEvaluation extends JDFResource
         return (JDFBasicPreflightTest)getCreateElement_KElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element BasicPreflightTest
      * @param iSkip number of elements to skip
@@ -185,9 +184,10 @@ public abstract class JDFAutoIsPresentEvaluation extends JDFResource
         return (JDFBasicPreflightTest) getElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
     }
 
-
-
-    public JDFBasicPreflightTest appendBasicPreflightTest()
+    /**
+     * (30) append element BasicPreflightTest
+     */
+    public JDFBasicPreflightTest appendBasicPreflightTest() throws JDFException
     {
         return (JDFBasicPreflightTest) appendElement(ElementName.BASICPREFLIGHTTEST, null);
     }

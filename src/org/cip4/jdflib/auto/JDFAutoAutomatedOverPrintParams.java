@@ -185,8 +185,6 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
             setAttribute(AttributeName.KNOCKOUTCMYKWHITE, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute KnockOutCMYKWhite
           * @return boolean the value of the attribute
@@ -195,8 +193,6 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.KNOCKOUTCMYKWHITE, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -211,8 +207,6 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
             setAttribute(AttributeName.OVERPRINTBLACKTEXT, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute OverPrintBlackText
           * @return boolean the value of the attribute
@@ -221,8 +215,6 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.OVERPRINTBLACKTEXT, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -237,8 +229,6 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
             setAttribute(AttributeName.OVERPRINTBLACKLINEART, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute OverPrintBlackLineArt
           * @return boolean the value of the attribute
@@ -247,8 +237,6 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.OVERPRINTBLACKLINEART, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -263,8 +251,6 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
             setAttribute(AttributeName.TEXTBLACKLEVEL, value, null);
         }
 
-
-
         /**
           * (17) get double attribute TextBlackLevel
           * @return double the value of the attribute
@@ -273,8 +259,6 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
         {
             return getRealAttribute(AttributeName.TEXTBLACKLEVEL, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -289,8 +273,6 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
             setAttribute(AttributeName.LINEARTBLACKLEVEL, value, null);
         }
 
-
-
         /**
           * (17) get double attribute LineArtBlackLevel
           * @return double the value of the attribute
@@ -299,8 +281,6 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
         {
             return getRealAttribute(AttributeName.LINEARTBLACKLEVEL, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -315,8 +295,6 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
             setAttribute(AttributeName.TEXTSIZETHRESHOLD, value, null);
         }
 
-
-
         /**
           * (15) get int attribute TextSizeThreshold
           * @return int the value of the attribute
@@ -325,7 +303,5 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
         {
             return getIntAttribute(AttributeName.TEXTSIZETHRESHOLD, null, 0);
         }
-
-
 
 }// end namespace JDF

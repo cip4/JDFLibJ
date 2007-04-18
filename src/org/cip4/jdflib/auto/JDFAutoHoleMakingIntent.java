@@ -242,8 +242,6 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
             setAttribute(AttributeName.HOLEREFERENCEEDGE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute HoleReferenceEdge
           * @return the value of the attribute
@@ -252,8 +250,6 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
         {
             return EnumHoleReferenceEdge.getEnum(getAttribute(AttributeName.HOLEREFERENCEEDGE, null, "Left"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -268,11 +264,9 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
             setAttribute(AttributeName.EXTENT, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute Extent
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getExtent()
@@ -291,8 +285,6 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
             return nPlaceHolder;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -307,8 +299,6 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
         return (JDFStringSpan) getElement(ElementName.HOLETYPE, null, 0);
     }
 
-
-
     /** (25) getCreateHoleType
      * 
      * @return JDFStringSpan the element
@@ -318,17 +308,14 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
         return (JDFStringSpan) getCreateElement_KElement(ElementName.HOLETYPE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementHoleType
+     * (29) append element HoleType
      */
     public JDFStringSpan appendHoleType() throws JDFException
     {
         return (JDFStringSpan) appendElementN(ElementName.HOLETYPE, 1, null);
     }
+
     /**
      * (24) const get element HoleList
      * @return JDFHoleList the element
@@ -337,8 +324,6 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
     {
         return (JDFHoleList) getElement(ElementName.HOLELIST, null, 0);
     }
-
-
 
     /** (25) getCreateHoleList
      * 
@@ -349,15 +334,12 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
         return (JDFHoleList) getCreateElement_KElement(ElementName.HOLELIST, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementHoleList
+     * (29) append element HoleList
      */
     public JDFHoleList appendHoleList() throws JDFException
     {
         return (JDFHoleList) appendElementN(ElementName.HOLELIST, 1, null);
     }
+
 }// end namespace JDF

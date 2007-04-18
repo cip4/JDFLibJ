@@ -235,8 +235,6 @@ public abstract class JDFAutoGlue extends JDFElement
             setAttribute(AttributeName.WORKINGDIRECTION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute WorkingDirection
           * @return the value of the attribute
@@ -245,8 +243,6 @@ public abstract class JDFAutoGlue extends JDFElement
         {
             return EnumWorkingDirection.getEnum(getAttribute(AttributeName.WORKINGDIRECTION, null, null));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -262,8 +258,6 @@ public abstract class JDFAutoGlue extends JDFElement
         return (JDFGlueApplication) getElement(ElementName.GLUEAPPLICATION, null, 0);
     }
 
-
-
     /** (25) getCreateGlueApplication
      * 
      * @return JDFGlueApplication the element
@@ -273,17 +267,14 @@ public abstract class JDFAutoGlue extends JDFElement
         return (JDFGlueApplication) getCreateElement_KElement(ElementName.GLUEAPPLICATION, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementGlueApplication
+     * (29) append element GlueApplication
      */
     public JDFGlueApplication appendGlueApplication() throws JDFException
     {
         return (JDFGlueApplication) appendElementN(ElementName.GLUEAPPLICATION, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -292,6 +283,7 @@ public abstract class JDFAutoGlue extends JDFElement
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element GlueLine
      * @return JDFGlueLine the element
@@ -300,8 +292,6 @@ public abstract class JDFAutoGlue extends JDFElement
     {
         return (JDFGlueLine) getElement(ElementName.GLUELINE, null, 0);
     }
-
-
 
     /** (25) getCreateGlueLine
      * 
@@ -312,17 +302,14 @@ public abstract class JDFAutoGlue extends JDFElement
         return (JDFGlueLine) getCreateElement_KElement(ElementName.GLUELINE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementGlueLine
+     * (29) append element GlueLine
      */
     public JDFGlueLine appendGlueLine() throws JDFException
     {
         return (JDFGlueLine) appendElementN(ElementName.GLUELINE, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -331,4 +318,5 @@ public abstract class JDFAutoGlue extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

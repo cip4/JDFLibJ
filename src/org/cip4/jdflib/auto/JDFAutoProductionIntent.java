@@ -169,8 +169,6 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
         return (JDFSpanPrintPreference) getElement(ElementName.PRINTPREFERENCE, null, 0);
     }
 
-
-
     /** (25) getCreatePrintPreference
      * 
      * @return JDFSpanPrintPreference the element
@@ -180,17 +178,14 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
         return (JDFSpanPrintPreference) getCreateElement_KElement(ElementName.PRINTPREFERENCE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPrintPreference
+     * (29) append element PrintPreference
      */
     public JDFSpanPrintPreference appendPrintPreference() throws JDFException
     {
         return (JDFSpanPrintPreference) appendElementN(ElementName.PRINTPREFERENCE, 1, null);
     }
+
     /**
      * (24) const get element PrintProcess
      * @return JDFNameSpan the element
@@ -199,8 +194,6 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
     {
         return (JDFNameSpan) getElement(ElementName.PRINTPROCESS, null, 0);
     }
-
-
 
     /** (25) getCreatePrintProcess
      * 
@@ -211,17 +204,14 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
         return (JDFNameSpan) getCreateElement_KElement(ElementName.PRINTPROCESS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPrintProcess
+     * (29) append element PrintProcess
      */
     public JDFNameSpan appendPrintProcess() throws JDFException
     {
         return (JDFNameSpan) appendElementN(ElementName.PRINTPROCESS, 1, null);
     }
+
     /** (26) getCreateResource
      * 
      * @param iSkip number of elements to skip
@@ -231,8 +221,6 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
     {
         return (JDFResource)getCreateElement_KElement(ElementName.RESOURCE, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Resource
@@ -244,9 +232,10 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
         return (JDFResource) getElement(ElementName.RESOURCE, null, iSkip);
     }
 
-
-
-    public JDFResource appendResource()
+    /**
+     * (30) append element Resource
+     */
+    public JDFResource appendResource() throws JDFException
     {
         return (JDFResource) appendElement(ElementName.RESOURCE, null);
     }
@@ -259,4 +248,5 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

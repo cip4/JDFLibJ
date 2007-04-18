@@ -207,8 +207,6 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
             setAttribute(AttributeName.FOUNTAINPOSITIONS, value, null);
         }
 
-
-
         /**
           * (20) get JDFNumberList attribute FountainPositions
           * @return JDFNumberList the value of the attribute, null if a the
@@ -230,8 +228,6 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute PrintableArea
@@ -244,8 +240,6 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
         {
             setAttribute(AttributeName.PRINTABLEAREA, value, null);
         }
-
-
 
         /**
           * (20) get JDFRectangle attribute PrintableArea
@@ -268,8 +262,6 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ZoneWidth
@@ -283,8 +275,6 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
             setAttribute(AttributeName.ZONEWIDTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute ZoneWidth
           * @return double the value of the attribute
@@ -293,8 +283,6 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
         {
             return getRealAttribute(AttributeName.ZONEWIDTH, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -309,8 +297,6 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
             setAttribute(AttributeName.ZONES, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Zones
           * @return int the value of the attribute
@@ -319,8 +305,6 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
         {
             return getIntAttribute(AttributeName.ZONES, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -335,8 +319,6 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
             setAttribute(AttributeName.ZONESY, value, null);
         }
 
-
-
         /**
           * (15) get int attribute ZonesY
           * @return int the value of the attribute
@@ -345,8 +327,6 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
         {
             return getIntAttribute(AttributeName.ZONESY, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -361,8 +341,6 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
             setAttribute(AttributeName.ZONEHEIGHT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute ZoneHeight
           * @return double the value of the attribute
@@ -371,8 +349,6 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
         {
             return getRealAttribute(AttributeName.ZONEHEIGHT, null, 0.0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -388,8 +364,6 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
         return (JDFDevice) getElement(ElementName.DEVICE, null, 0);
     }
 
-
-
     /** (25) getCreateDevice
      * 
      * @return JDFDevice the element
@@ -399,17 +373,14 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
         return (JDFDevice) getCreateElement_KElement(ElementName.DEVICE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDevice
+     * (29) append element Device
      */
     public JDFDevice appendDevice() throws JDFException
     {
         return (JDFDevice) appendElementN(ElementName.DEVICE, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -418,4 +389,5 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

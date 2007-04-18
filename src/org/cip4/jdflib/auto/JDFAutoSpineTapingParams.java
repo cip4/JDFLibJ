@@ -83,6 +83,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueApplication;
     /*
@@ -257,8 +258,6 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
             setAttribute(AttributeName.TOPEXCESS, value, null);
         }
 
-
-
         /**
           * (17) get double attribute TopExcess
           * @return double the value of the attribute
@@ -267,8 +266,6 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.TOPEXCESS, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -283,8 +280,6 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
             setAttribute(AttributeName.HORIZONTALEXCESS, value, null);
         }
 
-
-
         /**
           * (17) get double attribute HorizontalExcess
           * @return double the value of the attribute
@@ -293,8 +288,6 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.HORIZONTALEXCESS, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -309,8 +302,6 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
             setAttribute(AttributeName.STRIPBRAND, value, null);
         }
 
-
-
         /**
           * (23) get String attribute StripBrand
           * @return the value of the attribute
@@ -319,8 +310,6 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
         {
             return getAttribute(AttributeName.STRIPBRAND, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -335,8 +324,6 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
             setAttribute(AttributeName.STRIPCOLOR, value.getName(), null);
         }
 
-
-
         /**
           * (19) get EnumNamedColor attribute StripColor
           * @return EnumNamedColor the value of the attribute
@@ -349,8 +336,6 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
             nPlaceHolder = EnumNamedColor.getEnum(strAttrName);
             return nPlaceHolder;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -365,8 +350,6 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
             setAttribute(AttributeName.STRIPLENGTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute StripLength
           * @return double the value of the attribute
@@ -375,8 +358,6 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.STRIPLENGTH, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -391,8 +372,6 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
             setAttribute(AttributeName.STRIPMATERIAL, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute StripMaterial
           * @return the value of the attribute
@@ -401,8 +380,6 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
         {
             return EnumStripMaterial.getEnum(getAttribute(AttributeName.STRIPMATERIAL, null, null));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -419,8 +396,6 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
         return (JDFGlueApplication)getCreateElement_KElement(ElementName.GLUEAPPLICATION, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element GlueApplication
      * @param iSkip number of elements to skip
@@ -431,9 +406,10 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
         return (JDFGlueApplication) getElement(ElementName.GLUEAPPLICATION, null, iSkip);
     }
 
-
-
-    public JDFGlueApplication appendGlueApplication()
+    /**
+     * (30) append element GlueApplication
+     */
+    public JDFGlueApplication appendGlueApplication() throws JDFException
     {
         return (JDFGlueApplication) appendElement(ElementName.GLUEAPPLICATION, null);
     }
@@ -446,4 +422,5 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

@@ -204,8 +204,6 @@ public abstract class JDFAutoJMF extends JDFPool
             setAttribute(AttributeName.DEVICEID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DeviceID
           * @return the value of the attribute
@@ -214,8 +212,6 @@ public abstract class JDFAutoJMF extends JDFPool
         {
             return getAttribute(AttributeName.DEVICEID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -230,8 +226,6 @@ public abstract class JDFAutoJMF extends JDFPool
             setAttribute(AttributeName.ICSVERSIONS, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute ICSVersions
           * @return VString the value of the attribute
@@ -243,8 +237,6 @@ public abstract class JDFAutoJMF extends JDFPool
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -259,8 +251,6 @@ public abstract class JDFAutoJMF extends JDFPool
             setAttribute(AttributeName.MAXVERSION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute MaxVersion
           * @return the value of the attribute
@@ -269,8 +259,6 @@ public abstract class JDFAutoJMF extends JDFPool
         {
             return EnumVersion.getEnum(getAttribute(AttributeName.MAXVERSION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -285,8 +273,6 @@ public abstract class JDFAutoJMF extends JDFPool
             setAttribute(AttributeName.RESPONSEURL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ResponseURL
           * @return the value of the attribute
@@ -295,8 +281,6 @@ public abstract class JDFAutoJMF extends JDFPool
         {
             return getAttribute(AttributeName.RESPONSEURL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -311,8 +295,6 @@ public abstract class JDFAutoJMF extends JDFPool
             setAttribute(AttributeName.SENDERID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute SenderID
           * @return the value of the attribute
@@ -321,8 +303,6 @@ public abstract class JDFAutoJMF extends JDFPool
         {
             return getAttribute(AttributeName.SENDERID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -337,8 +317,6 @@ public abstract class JDFAutoJMF extends JDFPool
             setAttribute(AttributeName.TIMESTAMP, new JDFDate().getDateTimeISO(), null);
         }
 
-
-
         /**
           * (11) set attribute TimeStamp
           * @param value: the value to set the attribute to or null
@@ -348,8 +326,6 @@ public abstract class JDFAutoJMF extends JDFPool
             if (value == null) value = new JDFDate();
             setAttribute(AttributeName.TIMESTAMP, value.getDateTimeISO(), null);
         }
-
-
 
         /**
           * (12) get JDFDate attribute TimeStamp
@@ -374,8 +350,6 @@ public abstract class JDFAutoJMF extends JDFPool
             return nMyDate;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -391,8 +365,6 @@ public abstract class JDFAutoJMF extends JDFPool
         return (JDFCommand)getCreateElement_KElement(ElementName.COMMAND, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Command
      * @param iSkip number of elements to skip
@@ -403,9 +375,10 @@ public abstract class JDFAutoJMF extends JDFPool
         return (JDFCommand) getElement(ElementName.COMMAND, null, iSkip);
     }
 
-
-
-    public JDFCommand appendCommand()
+    /**
+     * (30) append element Command
+     */
+    public JDFCommand appendCommand() throws JDFException
     {
         return (JDFCommand) appendElement(ElementName.COMMAND, null);
     }
@@ -420,8 +393,6 @@ public abstract class JDFAutoJMF extends JDFPool
         return (JDFAcknowledge)getCreateElement_KElement(ElementName.ACKNOWLEDGE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Acknowledge
      * @param iSkip number of elements to skip
@@ -432,9 +403,10 @@ public abstract class JDFAutoJMF extends JDFPool
         return (JDFAcknowledge) getElement(ElementName.ACKNOWLEDGE, null, iSkip);
     }
 
-
-
-    public JDFAcknowledge appendAcknowledge()
+    /**
+     * (30) append element Acknowledge
+     */
+    public JDFAcknowledge appendAcknowledge() throws JDFException
     {
         return (JDFAcknowledge) appendElement(ElementName.ACKNOWLEDGE, null);
     }
@@ -449,8 +421,6 @@ public abstract class JDFAutoJMF extends JDFPool
         return (JDFResponse)getCreateElement_KElement(ElementName.RESPONSE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Response
      * @param iSkip number of elements to skip
@@ -461,9 +431,10 @@ public abstract class JDFAutoJMF extends JDFPool
         return (JDFResponse) getElement(ElementName.RESPONSE, null, iSkip);
     }
 
-
-
-    public JDFResponse appendResponse()
+    /**
+     * (30) append element Response
+     */
+    public JDFResponse appendResponse() throws JDFException
     {
         return (JDFResponse) appendElement(ElementName.RESPONSE, null);
     }
@@ -478,8 +449,6 @@ public abstract class JDFAutoJMF extends JDFPool
         return (JDFSignal)getCreateElement_KElement(ElementName.SIGNAL, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Signal
      * @param iSkip number of elements to skip
@@ -490,9 +459,10 @@ public abstract class JDFAutoJMF extends JDFPool
         return (JDFSignal) getElement(ElementName.SIGNAL, null, iSkip);
     }
 
-
-
-    public JDFSignal appendSignal()
+    /**
+     * (30) append element Signal
+     */
+    public JDFSignal appendSignal() throws JDFException
     {
         return (JDFSignal) appendElement(ElementName.SIGNAL, null);
     }
@@ -507,8 +477,6 @@ public abstract class JDFAutoJMF extends JDFPool
         return (JDFQuery)getCreateElement_KElement(ElementName.QUERY, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Query
      * @param iSkip number of elements to skip
@@ -519,9 +487,10 @@ public abstract class JDFAutoJMF extends JDFPool
         return (JDFQuery) getElement(ElementName.QUERY, null, iSkip);
     }
 
-
-
-    public JDFQuery appendQuery()
+    /**
+     * (30) append element Query
+     */
+    public JDFQuery appendQuery() throws JDFException
     {
         return (JDFQuery) appendElement(ElementName.QUERY, null);
     }
@@ -536,8 +505,6 @@ public abstract class JDFAutoJMF extends JDFPool
         return (JDFRegistration)getCreateElement_KElement(ElementName.REGISTRATION, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Registration
      * @param iSkip number of elements to skip
@@ -548,9 +515,10 @@ public abstract class JDFAutoJMF extends JDFPool
         return (JDFRegistration) getElement(ElementName.REGISTRATION, null, iSkip);
     }
 
-
-
-    public JDFRegistration appendRegistration()
+    /**
+     * (30) append element Registration
+     */
+    public JDFRegistration appendRegistration() throws JDFException
     {
         return (JDFRegistration) appendElement(ElementName.REGISTRATION, null);
     }

@@ -168,8 +168,6 @@ public abstract class JDFAutoGangCmdFilter extends JDFElement
             setAttribute(AttributeName.GANGNAMES, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute GangNames
           * @return VString the value of the attribute
@@ -181,7 +179,5 @@ public abstract class JDFAutoGangCmdFilter extends JDFElement
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
 }// end namespace JDF

@@ -181,8 +181,6 @@ public abstract class JDFAutoComment extends JDFElement
             setAttribute(AttributeName.AGENTNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute AgentName
           * @return the value of the attribute
@@ -191,8 +189,6 @@ public abstract class JDFAutoComment extends JDFElement
         {
             return getAttribute(AttributeName.AGENTNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -207,8 +203,6 @@ public abstract class JDFAutoComment extends JDFElement
             setAttribute(AttributeName.AGENTVERSION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute AgentVersion
           * @return the value of the attribute
@@ -217,8 +211,6 @@ public abstract class JDFAutoComment extends JDFElement
         {
             return getAttribute(AttributeName.AGENTVERSION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -233,8 +225,6 @@ public abstract class JDFAutoComment extends JDFElement
             setAttribute(AttributeName.ATTRIBUTE, value, null);
         }
 
-
-
         /**
           * (22) get String attribute Attribute
           * @return String the value of the attribute
@@ -243,8 +233,6 @@ public abstract class JDFAutoComment extends JDFElement
         {
             return getAttribute(AttributeName.ATTRIBUTE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -259,8 +247,6 @@ public abstract class JDFAutoComment extends JDFElement
             setAttribute(AttributeName.AUTHOR, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Author
           * @return the value of the attribute
@@ -269,8 +255,6 @@ public abstract class JDFAutoComment extends JDFElement
         {
             return getAttribute(AttributeName.AUTHOR, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -285,11 +269,9 @@ public abstract class JDFAutoComment extends JDFElement
             setAttribute(AttributeName.BOX, value, null);
         }
 
-
-
         /**
           * (20) get JDFRectangle attribute Box
-          * @return JDFRectanglethe value of the attribute, null if a the
+          * @return JDFRectangle the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFRectangle
           */
         public JDFRectangle getBox()
@@ -308,8 +290,6 @@ public abstract class JDFAutoComment extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ID
@@ -323,8 +303,6 @@ public abstract class JDFAutoComment extends JDFElement
             setAttribute(AttributeName.ID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ID
           * @return the value of the attribute
@@ -333,8 +311,6 @@ public abstract class JDFAutoComment extends JDFElement
         {
             return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -349,8 +325,6 @@ public abstract class JDFAutoComment extends JDFElement
             setAttribute(AttributeName.LANGUAGE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Language
           * @return the value of the attribute
@@ -359,8 +333,6 @@ public abstract class JDFAutoComment extends JDFElement
         {
             return getAttribute(AttributeName.LANGUAGE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -375,8 +347,6 @@ public abstract class JDFAutoComment extends JDFElement
             setAttribute(AttributeName.NAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Name
           * @return the value of the attribute
@@ -385,8 +355,6 @@ public abstract class JDFAutoComment extends JDFElement
         {
             return getAttribute(AttributeName.NAME, null, "Description");
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -401,8 +369,6 @@ public abstract class JDFAutoComment extends JDFElement
             setAttribute(AttributeName.PATH, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Path
           * @return the value of the attribute
@@ -411,8 +377,6 @@ public abstract class JDFAutoComment extends JDFElement
         {
             return getAttribute(AttributeName.PATH, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -427,8 +391,6 @@ public abstract class JDFAutoComment extends JDFElement
             setAttribute(AttributeName.TIMESTAMP, new JDFDate().getDateTimeISO(), null);
         }
 
-
-
         /**
           * (11) set attribute TimeStamp
           * @param value: the value to set the attribute to or null
@@ -438,8 +400,6 @@ public abstract class JDFAutoComment extends JDFElement
             if (value == null) value = new JDFDate();
             setAttribute(AttributeName.TIMESTAMP, value.getDateTimeISO(), null);
         }
-
-
 
         /**
           * (12) get JDFDate attribute TimeStamp
@@ -463,7 +423,5 @@ public abstract class JDFAutoComment extends JDFElement
             }
             return nMyDate;
         }
-
-
 
 }// end namespace JDF

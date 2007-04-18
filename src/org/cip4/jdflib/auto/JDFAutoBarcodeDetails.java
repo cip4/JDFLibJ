@@ -170,8 +170,6 @@ public abstract class JDFAutoBarcodeDetails extends JDFElement
             setAttribute(AttributeName.BARCODEVERSION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute BarcodeVersion
           * @return the value of the attribute
@@ -180,8 +178,6 @@ public abstract class JDFAutoBarcodeDetails extends JDFElement
         {
             return getAttribute(AttributeName.BARCODEVERSION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -196,8 +192,6 @@ public abstract class JDFAutoBarcodeDetails extends JDFElement
             setAttribute(AttributeName.ERRORCORRECTIONLEVEL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ErrorCorrectionLevel
           * @return the value of the attribute
@@ -206,8 +200,6 @@ public abstract class JDFAutoBarcodeDetails extends JDFElement
         {
             return getAttribute(AttributeName.ERRORCORRECTIONLEVEL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -222,8 +214,6 @@ public abstract class JDFAutoBarcodeDetails extends JDFElement
             setAttribute(AttributeName.XCELLS, value, null);
         }
 
-
-
         /**
           * (15) get int attribute XCells
           * @return int the value of the attribute
@@ -232,8 +222,6 @@ public abstract class JDFAutoBarcodeDetails extends JDFElement
         {
             return getIntAttribute(AttributeName.XCELLS, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -248,8 +236,6 @@ public abstract class JDFAutoBarcodeDetails extends JDFElement
             setAttribute(AttributeName.YCELLS, value, null);
         }
 
-
-
         /**
           * (15) get int attribute YCells
           * @return int the value of the attribute
@@ -258,7 +244,5 @@ public abstract class JDFAutoBarcodeDetails extends JDFElement
         {
             return getIntAttribute(AttributeName.YCELLS, null, 0);
         }
-
-
 
 }// end namespace JDF

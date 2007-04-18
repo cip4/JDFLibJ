@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
@@ -301,8 +302,6 @@ public abstract class JDFAutoInsertingParams extends JDFResource
             setAttribute(AttributeName.INSERTLOCATION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute InsertLocation
           * @return the value of the attribute
@@ -311,8 +310,6 @@ public abstract class JDFAutoInsertingParams extends JDFResource
         {
             return EnumInsertLocation.getEnum(getAttribute(AttributeName.INSERTLOCATION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -327,8 +324,6 @@ public abstract class JDFAutoInsertingParams extends JDFResource
             setAttribute(AttributeName.METHOD, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Method
           * @return the value of the attribute
@@ -337,8 +332,6 @@ public abstract class JDFAutoInsertingParams extends JDFResource
         {
             return EnumMethod.getEnum(getAttribute(AttributeName.METHOD, null, "BlowIn"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -353,11 +346,9 @@ public abstract class JDFAutoInsertingParams extends JDFResource
             setAttribute(AttributeName.SHEETOFFSET, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute SheetOffset
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getSheetOffset()
@@ -376,8 +367,6 @@ public abstract class JDFAutoInsertingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute FinishedPage
@@ -391,8 +380,6 @@ public abstract class JDFAutoInsertingParams extends JDFResource
             setAttribute(AttributeName.FINISHEDPAGE, value, null);
         }
 
-
-
         /**
           * (15) get int attribute FinishedPage
           * @return int the value of the attribute
@@ -401,8 +388,6 @@ public abstract class JDFAutoInsertingParams extends JDFResource
         {
             return getIntAttribute(AttributeName.FINISHEDPAGE, null, 0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -419,8 +404,6 @@ public abstract class JDFAutoInsertingParams extends JDFResource
         return (JDFGlueLine)getCreateElement_KElement(ElementName.GLUELINE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element GlueLine
      * @param iSkip number of elements to skip
@@ -431,9 +414,10 @@ public abstract class JDFAutoInsertingParams extends JDFResource
         return (JDFGlueLine) getElement(ElementName.GLUELINE, null, iSkip);
     }
 
-
-
-    public JDFGlueLine appendGlueLine()
+    /**
+     * (30) append element GlueLine
+     */
+    public JDFGlueLine appendGlueLine() throws JDFException
     {
         return (JDFGlueLine) appendElement(ElementName.GLUELINE, null);
     }
@@ -446,4 +430,5 @@ public abstract class JDFAutoInsertingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFBoxArgument;
 import org.cip4.jdflib.resource.process.JDFBoxToBoxDifference;
     /*
@@ -167,8 +168,6 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
         return (JDFBoxArgument)getCreateElement_KElement(ElementName.BOXARGUMENT, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element BoxArgument
      * @param iSkip number of elements to skip
@@ -179,9 +178,10 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
         return (JDFBoxArgument) getElement(ElementName.BOXARGUMENT, null, iSkip);
     }
 
-
-
-    public JDFBoxArgument appendBoxArgument()
+    /**
+     * (30) append element BoxArgument
+     */
+    public JDFBoxArgument appendBoxArgument() throws JDFException
     {
         return (JDFBoxArgument) appendElement(ElementName.BOXARGUMENT, null);
     }
@@ -196,8 +196,6 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
         return (JDFBoxToBoxDifference)getCreateElement_KElement(ElementName.BOXTOBOXDIFFERENCE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element BoxToBoxDifference
      * @param iSkip number of elements to skip
@@ -208,9 +206,10 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
         return (JDFBoxToBoxDifference) getElement(ElementName.BOXTOBOXDIFFERENCE, null, iSkip);
     }
 
-
-
-    public JDFBoxToBoxDifference appendBoxToBoxDifference()
+    /**
+     * (30) append element BoxToBoxDifference
+     */
+    public JDFBoxToBoxDifference appendBoxToBoxDifference() throws JDFException
     {
         return (JDFBoxToBoxDifference) appendElement(ElementName.BOXTOBOXDIFFERENCE, null);
     }

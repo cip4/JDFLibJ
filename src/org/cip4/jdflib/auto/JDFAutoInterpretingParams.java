@@ -357,8 +357,6 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
             setAttribute(AttributeName.CENTER, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Center
           * @return boolean the value of the attribute
@@ -367,8 +365,6 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.CENTER, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -383,8 +379,6 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
             setAttribute(AttributeName.MIRRORAROUND, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute MirrorAround
           * @return the value of the attribute
@@ -393,8 +387,6 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
         {
             return EnumMirrorAround.getEnum(getAttribute(AttributeName.MIRRORAROUND, null, "None"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -409,8 +401,6 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
             setAttribute(AttributeName.POLARITY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Polarity
           * @return the value of the attribute
@@ -419,8 +409,6 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
         {
             return EnumPolarity.getEnum(getAttribute(AttributeName.POLARITY, null, "Positive"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -435,8 +423,6 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
             setAttribute(AttributeName.PRINTQUALITY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute PrintQuality
           * @return the value of the attribute
@@ -445,8 +431,6 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
         {
             return EnumPrintQuality.getEnum(getAttribute(AttributeName.PRINTQUALITY, null, "Normal"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -461,8 +445,6 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
             setAttribute(AttributeName.FITTOPAGE, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute FitToPage
           * @return boolean the value of the attribute
@@ -471,8 +453,6 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.FITTOPAGE, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -487,11 +467,9 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
             setAttribute(AttributeName.POSTER, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute Poster
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getPoster()
@@ -510,8 +488,6 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute PosterOverlap
@@ -525,11 +501,9 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
             setAttribute(AttributeName.POSTEROVERLAP, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute PosterOverlap
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getPosterOverlap()
@@ -548,8 +522,6 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Scaling
@@ -563,11 +535,9 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
             setAttribute(AttributeName.SCALING, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute Scaling
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getScaling()
@@ -586,8 +556,6 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ScalingOrigin
@@ -601,11 +569,9 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
             setAttribute(AttributeName.SCALINGORIGIN, value, null);
         }
 
-
-
         /**
           * (20) get JDFXYPair attribute ScalingOrigin
-          * @return JDFXYPairthe value of the attribute, null if a the
+          * @return JDFXYPair the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFXYPair
           */
         public JDFXYPair getScalingOrigin()
@@ -624,8 +590,6 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -641,8 +605,6 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
         return (JDFObjectResolution)getCreateElement_KElement(ElementName.OBJECTRESOLUTION, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element ObjectResolution
      * @param iSkip number of elements to skip
@@ -653,9 +615,10 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
         return (JDFObjectResolution) getElement(ElementName.OBJECTRESOLUTION, null, iSkip);
     }
 
-
-
-    public JDFObjectResolution appendObjectResolution()
+    /**
+     * (30) append element ObjectResolution
+     */
+    public JDFObjectResolution appendObjectResolution() throws JDFException
     {
         return (JDFObjectResolution) appendElement(ElementName.OBJECTRESOLUTION, null);
     }
@@ -668,6 +631,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element FitPolicy
      * @return JDFFitPolicy the element
@@ -676,8 +640,6 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
     {
         return (JDFFitPolicy) getElement(ElementName.FITPOLICY, null, 0);
     }
-
-
 
     /** (25) getCreateFitPolicy
      * 
@@ -688,17 +650,14 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
         return (JDFFitPolicy) getCreateElement_KElement(ElementName.FITPOLICY, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFitPolicy
+     * (29) append element FitPolicy
      */
     public JDFFitPolicy appendFitPolicy() throws JDFException
     {
         return (JDFFitPolicy) appendElementN(ElementName.FITPOLICY, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -707,6 +666,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateMedia
      * 
      * @param iSkip number of elements to skip
@@ -716,8 +676,6 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
     {
         return (JDFMedia)getCreateElement_KElement(ElementName.MEDIA, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Media
@@ -729,9 +687,10 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
         return (JDFMedia) getElement(ElementName.MEDIA, null, iSkip);
     }
 
-
-
-    public JDFMedia appendMedia()
+    /**
+     * (30) append element Media
+     */
+    public JDFMedia appendMedia() throws JDFException
     {
         return (JDFMedia) appendElement(ElementName.MEDIA, null);
     }
@@ -744,6 +703,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element PDFInterpretingParams
      * @return JDFPDFInterpretingParams the element
@@ -752,8 +712,6 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
     {
         return (JDFPDFInterpretingParams) getElement(ElementName.PDFINTERPRETINGPARAMS, null, 0);
     }
-
-
 
     /** (25) getCreatePDFInterpretingParams
      * 
@@ -764,15 +722,12 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
         return (JDFPDFInterpretingParams) getCreateElement_KElement(ElementName.PDFINTERPRETINGPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPDFInterpretingParams
+     * (29) append element PDFInterpretingParams
      */
     public JDFPDFInterpretingParams appendPDFInterpretingParams() throws JDFException
     {
         return (JDFPDFInterpretingParams) appendElementN(ElementName.PDFINTERPRETINGPARAMS, 1, null);
     }
+
 }// end namespace JDF

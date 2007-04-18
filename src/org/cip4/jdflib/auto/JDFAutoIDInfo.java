@@ -191,8 +191,6 @@ public abstract class JDFAutoIDInfo extends JDFElement
             setAttribute(AttributeName.CATEGORY, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Category
           * @return the value of the attribute
@@ -201,8 +199,6 @@ public abstract class JDFAutoIDInfo extends JDFElement
         {
             return getAttribute(AttributeName.CATEGORY, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -217,8 +213,6 @@ public abstract class JDFAutoIDInfo extends JDFElement
             setAttribute(AttributeName.JOBID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobID
           * @return the value of the attribute
@@ -227,8 +221,6 @@ public abstract class JDFAutoIDInfo extends JDFElement
         {
             return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -243,8 +235,6 @@ public abstract class JDFAutoIDInfo extends JDFElement
             setAttribute(AttributeName.JOBPARTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobPartID
           * @return the value of the attribute
@@ -253,8 +243,6 @@ public abstract class JDFAutoIDInfo extends JDFElement
         {
             return getAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -269,8 +257,6 @@ public abstract class JDFAutoIDInfo extends JDFElement
             setAttribute(AttributeName.PARENTJOBID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ParentJobID
           * @return the value of the attribute
@@ -279,8 +265,6 @@ public abstract class JDFAutoIDInfo extends JDFElement
         {
             return getAttribute(AttributeName.PARENTJOBID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -295,8 +279,6 @@ public abstract class JDFAutoIDInfo extends JDFElement
             setAttribute(AttributeName.PARENTJOBPARTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ParentJobPartID
           * @return the value of the attribute
@@ -305,8 +287,6 @@ public abstract class JDFAutoIDInfo extends JDFElement
         {
             return getAttribute(AttributeName.PARENTJOBPARTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -321,8 +301,6 @@ public abstract class JDFAutoIDInfo extends JDFElement
             setAttribute(AttributeName.TYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Type
           * @return the value of the attribute
@@ -331,8 +309,6 @@ public abstract class JDFAutoIDInfo extends JDFElement
         {
             return getAttribute(AttributeName.TYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -347,8 +323,6 @@ public abstract class JDFAutoIDInfo extends JDFElement
             setAttribute(AttributeName.TYPES, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute Types
           * @return VString the value of the attribute
@@ -360,8 +334,6 @@ public abstract class JDFAutoIDInfo extends JDFElement
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -377,8 +349,6 @@ public abstract class JDFAutoIDInfo extends JDFElement
         return (JDFDevice) getElement(ElementName.DEVICE, null, 0);
     }
 
-
-
     /** (25) getCreateDevice
      * 
      * @return JDFDevice the element
@@ -388,15 +358,12 @@ public abstract class JDFAutoIDInfo extends JDFElement
         return (JDFDevice) getCreateElement_KElement(ElementName.DEVICE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDevice
+     * (29) append element Device
      */
     public JDFDevice appendDevice() throws JDFException
     {
         return (JDFDevice) appendElementN(ElementName.DEVICE, 1, null);
     }
+
 }// end namespace JDF

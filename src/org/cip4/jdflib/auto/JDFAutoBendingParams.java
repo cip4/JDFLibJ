@@ -183,8 +183,6 @@ public abstract class JDFAutoBendingParams extends JDFResource
             setAttribute(AttributeName.BEND, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Bend
           * @return boolean the value of the attribute
@@ -193,8 +191,6 @@ public abstract class JDFAutoBendingParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.BEND, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -209,8 +205,6 @@ public abstract class JDFAutoBendingParams extends JDFResource
             setAttribute(AttributeName.PUNCH, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Punch
           * @return boolean the value of the attribute
@@ -219,8 +213,6 @@ public abstract class JDFAutoBendingParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.PUNCH, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -235,8 +227,6 @@ public abstract class JDFAutoBendingParams extends JDFResource
             setAttribute(AttributeName.PUNCHTYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute PunchType
           * @return the value of the attribute
@@ -245,7 +235,5 @@ public abstract class JDFAutoBendingParams extends JDFResource
         {
             return getAttribute(AttributeName.PUNCHTYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

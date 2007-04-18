@@ -74,6 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFCutBlock;
 import org.cip4.jdflib.resource.process.postpress.JDFCut;
@@ -183,8 +184,6 @@ public abstract class JDFAutoCuttingParams extends JDFResource
         return (JDFCutBlock)getCreateElement_KElement(ElementName.CUTBLOCK, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element CutBlock
      * @param iSkip number of elements to skip
@@ -195,9 +194,10 @@ public abstract class JDFAutoCuttingParams extends JDFResource
         return (JDFCutBlock) getElement(ElementName.CUTBLOCK, null, iSkip);
     }
 
-
-
-    public JDFCutBlock appendCutBlock()
+    /**
+     * (30) append element CutBlock
+     */
+    public JDFCutBlock appendCutBlock() throws JDFException
     {
         return (JDFCutBlock) appendElement(ElementName.CUTBLOCK, null);
     }
@@ -210,6 +210,7 @@ public abstract class JDFAutoCuttingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateCutMark
      * 
      * @param iSkip number of elements to skip
@@ -219,8 +220,6 @@ public abstract class JDFAutoCuttingParams extends JDFResource
     {
         return (JDFCutMark)getCreateElement_KElement(ElementName.CUTMARK, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element CutMark
@@ -232,9 +231,10 @@ public abstract class JDFAutoCuttingParams extends JDFResource
         return (JDFCutMark) getElement(ElementName.CUTMARK, null, iSkip);
     }
 
-
-
-    public JDFCutMark appendCutMark()
+    /**
+     * (30) append element CutMark
+     */
+    public JDFCutMark appendCutMark() throws JDFException
     {
         return (JDFCutMark) appendElement(ElementName.CUTMARK, null);
     }
@@ -247,6 +247,7 @@ public abstract class JDFAutoCuttingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateCut
      * 
      * @param iSkip number of elements to skip
@@ -256,8 +257,6 @@ public abstract class JDFAutoCuttingParams extends JDFResource
     {
         return (JDFCut)getCreateElement_KElement(ElementName.CUT, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Cut
@@ -269,9 +268,10 @@ public abstract class JDFAutoCuttingParams extends JDFResource
         return (JDFCut) getElement(ElementName.CUT, null, iSkip);
     }
 
-
-
-    public JDFCut appendCut()
+    /**
+     * (30) append element Cut
+     */
+    public JDFCut appendCut() throws JDFException
     {
         return (JDFCut) appendElement(ElementName.CUT, null);
     }

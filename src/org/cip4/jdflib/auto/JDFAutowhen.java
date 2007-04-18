@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.devicecapability.JDFset;
     /*
     *****************************************************************************
@@ -165,8 +166,6 @@ public abstract class JDFAutowhen extends JDFElement
         return (JDFset)getCreateElement_KElement(ElementName.SET, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element set
      * @param iSkip number of elements to skip
@@ -177,9 +176,10 @@ public abstract class JDFAutowhen extends JDFElement
         return (JDFset) getElement(ElementName.SET, null, iSkip);
     }
 
-
-
-    public JDFset appendset()
+    /**
+     * (30) append element set
+     */
+    public JDFset appendset() throws JDFException
     {
         return (JDFset) appendElement(ElementName.SET, null);
     }

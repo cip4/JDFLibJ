@@ -175,8 +175,6 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
         return (JDFStringSpan) getElement(ElementName.COATINGS, null, 0);
     }
 
-
-
     /** (25) getCreateCoatings
      * 
      * @return JDFStringSpan the element
@@ -186,17 +184,14 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
         return (JDFStringSpan) getCreateElement_KElement(ElementName.COATINGS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementCoatings
+     * (29) append element Coatings
      */
     public JDFStringSpan appendCoatings() throws JDFException
     {
         return (JDFStringSpan) appendElementN(ElementName.COATINGS, 1, null);
     }
+
     /**
      * (24) const get element ColorStandard
      * @return JDFNameSpan the element
@@ -205,8 +200,6 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
     {
         return (JDFNameSpan) getElement(ElementName.COLORSTANDARD, null, 0);
     }
-
-
 
     /** (25) getCreateColorStandard
      * 
@@ -217,17 +210,14 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
         return (JDFNameSpan) getCreateElement_KElement(ElementName.COLORSTANDARD, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementColorStandard
+     * (29) append element ColorStandard
      */
     public JDFNameSpan appendColorStandard() throws JDFException
     {
         return (JDFNameSpan) appendElementN(ElementName.COLORSTANDARD, 1, null);
     }
+
     /**
      * (24) const get element ColorICCStandard
      * @return JDFStringSpan the element
@@ -236,8 +226,6 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
     {
         return (JDFStringSpan) getElement(ElementName.COLORICCSTANDARD, null, 0);
     }
-
-
 
     /** (25) getCreateColorICCStandard
      * 
@@ -248,17 +236,14 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
         return (JDFStringSpan) getCreateElement_KElement(ElementName.COLORICCSTANDARD, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementColorICCStandard
+     * (29) append element ColorICCStandard
      */
     public JDFStringSpan appendColorICCStandard() throws JDFException
     {
         return (JDFStringSpan) appendElementN(ElementName.COLORICCSTANDARD, 1, null);
     }
+
     /**
      * (24) const get element Coverage
      * @return JDFNumberSpan the element
@@ -267,8 +252,6 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
     {
         return (JDFNumberSpan) getElement(ElementName.COVERAGE, null, 0);
     }
-
-
 
     /** (25) getCreateCoverage
      * 
@@ -279,17 +262,14 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
         return (JDFNumberSpan) getCreateElement_KElement(ElementName.COVERAGE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementCoverage
+     * (29) append element Coverage
      */
     public JDFNumberSpan appendCoverage() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.COVERAGE, 1, null);
     }
+
     /**
      * (24) const get element InkManufacturer
      * @return JDFNameSpan the element
@@ -298,8 +278,6 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
     {
         return (JDFNameSpan) getElement(ElementName.INKMANUFACTURER, null, 0);
     }
-
-
 
     /** (25) getCreateInkManufacturer
      * 
@@ -310,17 +288,14 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
         return (JDFNameSpan) getCreateElement_KElement(ElementName.INKMANUFACTURER, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementInkManufacturer
+     * (29) append element InkManufacturer
      */
     public JDFNameSpan appendInkManufacturer() throws JDFException
     {
         return (JDFNameSpan) appendElementN(ElementName.INKMANUFACTURER, 1, null);
     }
+
     /**
      * (24) const get element ColorPool
      * @return JDFColorPool the element
@@ -329,8 +304,6 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
     {
         return (JDFColorPool) getElement(ElementName.COLORPOOL, null, 0);
     }
-
-
 
     /** (25) getCreateColorPool
      * 
@@ -341,17 +314,14 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
         return (JDFColorPool) getCreateElement_KElement(ElementName.COLORPOOL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementColorPool
+     * (29) append element ColorPool
      */
     public JDFColorPool appendColorPool() throws JDFException
     {
         return (JDFColorPool) appendElementN(ElementName.COLORPOOL, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -360,6 +330,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element ColorsUsed
      * @return JDFSeparationList the element
@@ -368,8 +339,6 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
     {
         return (JDFSeparationList) getElement(ElementName.COLORSUSED, null, 0);
     }
-
-
 
     /** (25) getCreateColorsUsed
      * 
@@ -380,15 +349,12 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
         return (JDFSeparationList) getCreateElement_KElement(ElementName.COLORSUSED, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementColorsUsed
+     * (29) append element ColorsUsed
      */
     public JDFSeparationList appendColorsUsed() throws JDFException
     {
         return (JDFSeparationList) appendElementN(ElementName.COLORSUSED, 1, null);
     }
+
 }// end namespace JDF

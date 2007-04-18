@@ -74,6 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFCrease;
     /*
@@ -179,8 +180,6 @@ public abstract class JDFAutoCreasingParams extends JDFResource
         return (JDFCrease)getCreateElement_KElement(ElementName.CREASE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Crease
      * @param iSkip number of elements to skip
@@ -191,9 +190,10 @@ public abstract class JDFAutoCreasingParams extends JDFResource
         return (JDFCrease) getElement(ElementName.CREASE, null, iSkip);
     }
 
-
-
-    public JDFCrease appendCrease()
+    /**
+     * (30) append element Crease
+     */
+    public JDFCrease appendCrease() throws JDFException
     {
         return (JDFCrease) appendElement(ElementName.CREASE, null);
     }

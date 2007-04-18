@@ -239,8 +239,6 @@ public abstract class JDFAutoQuery extends JDFMessage
             setAttribute(AttributeName.ACKNOWLEDGEFORMAT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute AcknowledgeFormat
           * @return the value of the attribute
@@ -249,8 +247,6 @@ public abstract class JDFAutoQuery extends JDFMessage
         {
             return getAttribute(AttributeName.ACKNOWLEDGEFORMAT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -265,8 +261,6 @@ public abstract class JDFAutoQuery extends JDFMessage
             setAttribute(AttributeName.ACKNOWLEDGETEMPLATE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute AcknowledgeTemplate
           * @return the value of the attribute
@@ -275,8 +269,6 @@ public abstract class JDFAutoQuery extends JDFMessage
         {
             return getAttribute(AttributeName.ACKNOWLEDGETEMPLATE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -291,8 +283,6 @@ public abstract class JDFAutoQuery extends JDFMessage
             setAttribute(AttributeName.ACKNOWLEDGEURL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute AcknowledgeURL
           * @return the value of the attribute
@@ -301,8 +291,6 @@ public abstract class JDFAutoQuery extends JDFMessage
         {
             return getAttribute(AttributeName.ACKNOWLEDGEURL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -317,8 +305,6 @@ public abstract class JDFAutoQuery extends JDFMessage
             setEnumerationsAttribute(AttributeName.ACKNOWLEDGETYPE, v, null);
         }
 
-
-
         /**
           * (9.2) get AcknowledgeType attribute AcknowledgeType
           * @return Vector of the enumerations
@@ -327,8 +313,6 @@ public abstract class JDFAutoQuery extends JDFMessage
         {
             return getEnumerationsAttribute(AttributeName.ACKNOWLEDGETYPE, null, EnumAcknowledgeType.Completed, false);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -344,8 +328,6 @@ public abstract class JDFAutoQuery extends JDFMessage
         return (JDFSubscription) getElement(ElementName.SUBSCRIPTION, null, 0);
     }
 
-
-
     /** (25) getCreateSubscription
      * 
      * @return JDFSubscription the element
@@ -355,15 +337,12 @@ public abstract class JDFAutoQuery extends JDFMessage
         return (JDFSubscription) getCreateElement_KElement(ElementName.SUBSCRIPTION, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementSubscription
+     * (29) append element Subscription
      */
     public JDFSubscription appendSubscription() throws JDFException
     {
         return (JDFSubscription) appendElementN(ElementName.SUBSCRIPTION, 1, null);
     }
+
 }// end namespace JDF

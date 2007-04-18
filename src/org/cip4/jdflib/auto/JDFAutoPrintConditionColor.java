@@ -85,6 +85,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFCMYKColor;
 import org.cip4.jdflib.datatypes.JDFLabColor;
 import org.cip4.jdflib.datatypes.JDFRGBColor;
@@ -301,11 +302,9 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
             setAttribute(AttributeName.CMYK, value, null);
         }
 
-
-
         /**
           * (20) get JDFCMYKColor attribute CMYK
-          * @return JDFCMYKColorthe value of the attribute, null if a the
+          * @return JDFCMYKColor the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFCMYKColor
           */
         public JDFCMYKColor getCMYK()
@@ -324,8 +323,6 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ColorBook
@@ -339,8 +336,6 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
             setAttribute(AttributeName.COLORBOOK, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ColorBook
           * @return the value of the attribute
@@ -349,8 +344,6 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
         {
             return getAttribute(AttributeName.COLORBOOK, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -365,8 +358,6 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
             setAttribute(AttributeName.COLORBOOKENTRY, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ColorBookEntry
           * @return the value of the attribute
@@ -375,8 +366,6 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
         {
             return getAttribute(AttributeName.COLORBOOKENTRY, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -391,8 +380,6 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
             setAttribute(AttributeName.COLORBOOKPREFIX, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ColorBookPrefix
           * @return the value of the attribute
@@ -401,8 +388,6 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
         {
             return getAttribute(AttributeName.COLORBOOKPREFIX, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -417,8 +402,6 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
             setAttribute(AttributeName.COLORBOOKSUFFIX, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ColorBookSuffix
           * @return the value of the attribute
@@ -427,8 +410,6 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
         {
             return getAttribute(AttributeName.COLORBOOKSUFFIX, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -443,8 +424,6 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
             setAttribute(AttributeName.DENSITY, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Density
           * @return double the value of the attribute
@@ -453,8 +432,6 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
         {
             return getRealAttribute(AttributeName.DENSITY, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -469,11 +446,9 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
             setAttribute(AttributeName.LAB, value, null);
         }
 
-
-
         /**
           * (20) get JDFLabColor attribute Lab
-          * @return JDFLabColorthe value of the attribute, null if a the
+          * @return JDFLabColor the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFLabColor
           */
         public JDFLabColor getLab()
@@ -492,8 +467,6 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute MappingSelection
@@ -507,8 +480,6 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
             setAttribute(AttributeName.MAPPINGSELECTION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute MappingSelection
           * @return the value of the attribute
@@ -517,8 +488,6 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
         {
             return EnumMappingSelection.getEnum(getAttribute(AttributeName.MAPPINGSELECTION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -533,8 +502,6 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
             setAttribute(AttributeName.MEDIASIDE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute MediaSide
           * @return the value of the attribute
@@ -543,8 +510,6 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
         {
             return EnumMediaSide.getEnum(getAttribute(AttributeName.MEDIASIDE, null, "Both"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -559,8 +524,6 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
             setAttribute(AttributeName.NEUTRALDENSITY, value, null);
         }
 
-
-
         /**
           * (17) get double attribute NeutralDensity
           * @return double the value of the attribute
@@ -569,8 +532,6 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
         {
             return getRealAttribute(AttributeName.NEUTRALDENSITY, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -585,8 +546,6 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
             setAttribute(AttributeName.PRINTCONDITIONNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute PrintConditionName
           * @return the value of the attribute
@@ -595,8 +554,6 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
         {
             return getAttribute(AttributeName.PRINTCONDITIONNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -611,11 +568,9 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
             setAttribute(AttributeName.SRGB, value, null);
         }
 
-
-
         /**
           * (20) get JDFRGBColor attribute sRGB
-          * @return JDFRGBColorthe value of the attribute, null if a the
+          * @return JDFRGBColor the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFRGBColor
           */
         public JDFRGBColor getsRGB()
@@ -634,8 +589,6 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
             return nPlaceHolder;
         }
 
-
-
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
@@ -651,8 +604,6 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
         return (JDFFileSpec)getCreateElement_KElement(ElementName.FILESPEC, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element FileSpec
      * @param iSkip number of elements to skip
@@ -663,9 +614,10 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
         return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
     }
 
-
-
-    public JDFFileSpec appendFileSpec()
+    /**
+     * (30) append element FileSpec
+     */
+    public JDFFileSpec appendFileSpec() throws JDFException
     {
         return (JDFFileSpec) appendElement(ElementName.FILESPEC, null);
     }
@@ -678,6 +630,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateDeviceNColor
      * 
      * @param iSkip number of elements to skip
@@ -687,8 +640,6 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
     {
         return (JDFDeviceNColor)getCreateElement_KElement(ElementName.DEVICENCOLOR, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element DeviceNColor
@@ -700,9 +651,10 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
         return (JDFDeviceNColor) getElement(ElementName.DEVICENCOLOR, null, iSkip);
     }
 
-
-
-    public JDFDeviceNColor appendDeviceNColor()
+    /**
+     * (30) append element DeviceNColor
+     */
+    public JDFDeviceNColor appendDeviceNColor() throws JDFException
     {
         return (JDFDeviceNColor) appendElement(ElementName.DEVICENCOLOR, null);
     }
@@ -717,8 +669,6 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
         return (JDFMedia)getCreateElement_KElement(ElementName.MEDIA, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Media
      * @param iSkip number of elements to skip
@@ -729,9 +679,10 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
         return (JDFMedia) getElement(ElementName.MEDIA, null, iSkip);
     }
 
-
-
-    public JDFMedia appendMedia()
+    /**
+     * (30) append element Media
+     */
+    public JDFMedia appendMedia() throws JDFException
     {
         return (JDFMedia) appendElement(ElementName.MEDIA, null);
     }
@@ -744,6 +695,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateTransferCurve
      * 
      * @param iSkip number of elements to skip
@@ -753,8 +705,6 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
     {
         return (JDFTransferCurve)getCreateElement_KElement(ElementName.TRANSFERCURVE, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element TransferCurve
@@ -766,9 +716,10 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
         return (JDFTransferCurve) getElement(ElementName.TRANSFERCURVE, null, iSkip);
     }
 
-
-
-    public JDFTransferCurve appendTransferCurve()
+    /**
+     * (30) append element TransferCurve
+     */
+    public JDFTransferCurve appendTransferCurve() throws JDFException
     {
         return (JDFTransferCurve) appendElement(ElementName.TRANSFERCURVE, null);
     }
@@ -781,4 +732,5 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

@@ -180,8 +180,6 @@ public abstract class JDFAutoJacketingParams extends JDFResource
             setAttribute(AttributeName.FOLDINGWIDTH, value, null);
         }
 
-
-
         /**
           * (17) get double attribute FoldingWidth
           * @return double the value of the attribute
@@ -190,7 +188,5 @@ public abstract class JDFAutoJacketingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.FOLDINGWIDTH, null, 0.0);
         }
-
-
 
 }// end namespace JDF

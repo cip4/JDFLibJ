@@ -335,8 +335,6 @@ public abstract class JDFAutoPreview extends JDFResource
             setAttribute(AttributeName.PREVIEWFILETYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute PreviewFileType
           * @return the value of the attribute
@@ -345,8 +343,6 @@ public abstract class JDFAutoPreview extends JDFResource
         {
             return EnumPreviewFileType.getEnum(getAttribute(AttributeName.PREVIEWFILETYPE, null, "PNG"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -361,8 +357,6 @@ public abstract class JDFAutoPreview extends JDFResource
             setAttribute(AttributeName.PREVIEWUSAGE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute PreviewUsage
           * @return the value of the attribute
@@ -371,8 +365,6 @@ public abstract class JDFAutoPreview extends JDFResource
         {
             return EnumPreviewUsage.getEnum(getAttribute(AttributeName.PREVIEWUSAGE, null, "Separation"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -387,8 +379,6 @@ public abstract class JDFAutoPreview extends JDFResource
             setAttribute(AttributeName.URL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute URL
           * @return the value of the attribute
@@ -397,8 +387,6 @@ public abstract class JDFAutoPreview extends JDFResource
         {
             return getAttribute(AttributeName.URL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -413,8 +401,6 @@ public abstract class JDFAutoPreview extends JDFResource
             setAttribute(AttributeName.COMPENSATION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Compensation
           * @return the value of the attribute
@@ -423,8 +409,6 @@ public abstract class JDFAutoPreview extends JDFResource
         {
             return EnumCompensation.getEnum(getAttribute(AttributeName.COMPENSATION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -438,8 +422,6 @@ public abstract class JDFAutoPreview extends JDFResource
         {
             setAttribute(AttributeName.CTM, value, null);
         }
-
-
 
         /**
           * (20) get JDFMatrix attribute CTM
@@ -462,8 +444,6 @@ public abstract class JDFAutoPreview extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Directory
@@ -477,8 +457,6 @@ public abstract class JDFAutoPreview extends JDFResource
             setAttribute(AttributeName.DIRECTORY, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Directory
           * @return the value of the attribute
@@ -487,7 +465,5 @@ public abstract class JDFAutoPreview extends JDFResource
         {
             return getAttribute(AttributeName.DIRECTORY, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

@@ -320,8 +320,6 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
             setAttribute(AttributeName.INCORRECTCOMPONENTQUALITY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute IncorrectComponentQuality
           * @return the value of the attribute
@@ -330,8 +328,6 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
         {
             return EnumIncorrectComponentQuality.getEnum(getAttribute(AttributeName.INCORRECTCOMPONENTQUALITY, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -346,8 +342,6 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
             setAttribute(AttributeName.INCORRECTCOMPONENTS, value, null);
         }
 
-
-
         /**
           * (15) get int attribute IncorrectComponents
           * @return int the value of the attribute
@@ -356,8 +350,6 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
         {
             return getIntAttribute(AttributeName.INCORRECTCOMPONENTS, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -372,8 +364,6 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
             setAttribute(AttributeName.DOUBLEFEEDQUALITY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute DoubleFeedQuality
           * @return the value of the attribute
@@ -382,8 +372,6 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
         {
             return EnumDoubleFeedQuality.getEnum(getAttribute(AttributeName.DOUBLEFEEDQUALITY, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -398,8 +386,6 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
             setAttribute(AttributeName.DOUBLEFEEDS, value, null);
         }
 
-
-
         /**
           * (15) get int attribute DoubleFeeds
           * @return int the value of the attribute
@@ -408,8 +394,6 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
         {
             return getIntAttribute(AttributeName.DOUBLEFEEDS, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -424,8 +408,6 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
             setAttribute(AttributeName.BADFEEDQUALITY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute BadFeedQuality
           * @return the value of the attribute
@@ -434,8 +416,6 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
         {
             return EnumBadFeedQuality.getEnum(getAttribute(AttributeName.BADFEEDQUALITY, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -450,8 +430,6 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
             setAttribute(AttributeName.BADFEEDS, value, null);
         }
 
-
-
         /**
           * (15) get int attribute BadFeeds
           * @return int the value of the attribute
@@ -460,7 +438,5 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
         {
             return getIntAttribute(AttributeName.BADFEEDS, null, 0);
         }
-
-
 
 }// end namespace JDF

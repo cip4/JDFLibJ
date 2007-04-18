@@ -554,8 +554,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
             setAttribute(AttributeName.DIRECTPROOF, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute DirectProof
           * @return boolean the value of the attribute
@@ -564,8 +562,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.DIRECTPROOF, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -580,8 +576,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
             setAttribute(AttributeName.DRYING, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Drying
           * @return the value of the attribute
@@ -590,8 +584,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
         {
             return EnumDrying.getEnum(getAttribute(AttributeName.DRYING, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -606,8 +598,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
             setAttribute(AttributeName.FIRSTSURFACE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute FirstSurface
           * @return the value of the attribute
@@ -616,8 +606,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
         {
             return EnumFirstSurface.getEnum(getAttribute(AttributeName.FIRSTSURFACE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -632,8 +620,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
             setAttribute(AttributeName.FOUNTAINSOLUTION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute FountainSolution
           * @return the value of the attribute
@@ -642,8 +628,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
         {
             return EnumFountainSolution.getEnum(getAttribute(AttributeName.FOUNTAINSOLUTION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -658,8 +642,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
             setAttribute(AttributeName.MEDIALOCATION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute MediaLocation
           * @return the value of the attribute
@@ -668,8 +650,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
         {
             return getAttribute(AttributeName.MEDIALOCATION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -684,11 +664,9 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
             setAttribute(AttributeName.MODULEAVAILABLEINDEX, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerRangeList attribute ModuleAvailableIndex
-          * @return JDFIntegerRangeListthe value of the attribute, null if a the
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerRangeList
           */
         public JDFIntegerRangeList getModuleAvailableIndex()
@@ -707,8 +685,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ModuleDrying
@@ -722,8 +698,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
             setAttribute(AttributeName.MODULEDRYING, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ModuleDrying
           * @return the value of the attribute
@@ -732,8 +706,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
         {
             return EnumModuleDrying.getEnum(getAttribute(AttributeName.MODULEDRYING, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -748,11 +720,9 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
             setAttribute(AttributeName.MODULEINDEX, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerRangeList attribute ModuleIndex
-          * @return JDFIntegerRangeListthe value of the attribute, null if a the
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFIntegerRangeList
           */
         public JDFIntegerRangeList getModuleIndex()
@@ -771,8 +741,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute NonPrintableMarginBottom
@@ -786,8 +754,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
             setAttribute(AttributeName.NONPRINTABLEMARGINBOTTOM, value, null);
         }
 
-
-
         /**
           * (17) get double attribute NonPrintableMarginBottom
           * @return double the value of the attribute
@@ -796,8 +762,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.NONPRINTABLEMARGINBOTTOM, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -812,8 +776,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
             setAttribute(AttributeName.NONPRINTABLEMARGINLEFT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute NonPrintableMarginLeft
           * @return double the value of the attribute
@@ -822,8 +784,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.NONPRINTABLEMARGINLEFT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -838,8 +798,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
             setAttribute(AttributeName.NONPRINTABLEMARGINRIGHT, value, null);
         }
 
-
-
         /**
           * (17) get double attribute NonPrintableMarginRight
           * @return double the value of the attribute
@@ -848,8 +806,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.NONPRINTABLEMARGINRIGHT, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -864,8 +820,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
             setAttribute(AttributeName.NONPRINTABLEMARGINTOP, value, null);
         }
 
-
-
         /**
           * (17) get double attribute NonPrintableMarginTop
           * @return double the value of the attribute
@@ -874,8 +828,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.NONPRINTABLEMARGINTOP, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -890,8 +842,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
             setAttribute(AttributeName.PERFECTINGMODULE, value, null);
         }
 
-
-
         /**
           * (15) get int attribute PerfectingModule
           * @return int the value of the attribute
@@ -900,8 +850,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
         {
             return getIntAttribute(AttributeName.PERFECTINGMODULE, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -916,8 +864,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
             setAttribute(AttributeName.POWDER, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Powder
           * @return double the value of the attribute
@@ -926,8 +872,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.POWDER, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -942,8 +886,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
             setAttribute(AttributeName.PRINTINGTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute PrintingType
           * @return the value of the attribute
@@ -952,8 +894,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
         {
             return EnumPrintingType.getEnum(getAttribute(AttributeName.PRINTINGTYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -968,8 +908,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
             setAttribute(AttributeName.SHEETLAY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute SheetLay
           * @return the value of the attribute
@@ -978,8 +916,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
         {
             return EnumSheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -994,8 +930,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
             setAttribute(AttributeName.SPEED, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Speed
           * @return double the value of the attribute
@@ -1004,8 +938,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.SPEED, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -1020,8 +952,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
             setAttribute(AttributeName.WORKSTYLE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute WorkStyle
           * @return the value of the attribute
@@ -1030,8 +960,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
         {
             return EnumWorkStyle.getEnum(getAttribute(AttributeName.WORKSTYLE, null, null));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -1048,8 +976,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
         return (JDFInk)getCreateElement_KElement(ElementName.INK, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Ink
      * @param iSkip number of elements to skip
@@ -1060,9 +986,10 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
         return (JDFInk) getElement(ElementName.INK, null, iSkip);
     }
 
-
-
-    public JDFInk appendInk()
+    /**
+     * (30) append element Ink
+     */
+    public JDFInk appendInk() throws JDFException
     {
         return (JDFInk) appendElement(ElementName.INK, null);
     }
@@ -1075,6 +1002,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element ApprovalParams
      * @return JDFApprovalParams the element
@@ -1083,8 +1011,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
     {
         return (JDFApprovalParams) getElement(ElementName.APPROVALPARAMS, null, 0);
     }
-
-
 
     /** (25) getCreateApprovalParams
      * 
@@ -1095,17 +1021,14 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
         return (JDFApprovalParams) getCreateElement_KElement(ElementName.APPROVALPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementApprovalParams
+     * (29) append element ApprovalParams
      */
     public JDFApprovalParams appendApprovalParams() throws JDFException
     {
         return (JDFApprovalParams) appendElementN(ElementName.APPROVALPARAMS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -1114,4 +1037,5 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

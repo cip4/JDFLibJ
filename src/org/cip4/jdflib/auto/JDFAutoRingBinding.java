@@ -177,8 +177,6 @@ public abstract class JDFAutoRingBinding extends JDFElement
         return (JDFStringSpan) getElement(ElementName.BINDERBRAND, null, 0);
     }
 
-
-
     /** (25) getCreateBinderBrand
      * 
      * @return JDFStringSpan the element
@@ -188,17 +186,14 @@ public abstract class JDFAutoRingBinding extends JDFElement
         return (JDFStringSpan) getCreateElement_KElement(ElementName.BINDERBRAND, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementBinderBrand
+     * (29) append element BinderBrand
      */
     public JDFStringSpan appendBinderBrand() throws JDFException
     {
         return (JDFStringSpan) appendElementN(ElementName.BINDERBRAND, 1, null);
     }
+
     /**
      * (24) const get element BinderMaterial
      * @return JDFNameSpan the element
@@ -207,8 +202,6 @@ public abstract class JDFAutoRingBinding extends JDFElement
     {
         return (JDFNameSpan) getElement(ElementName.BINDERMATERIAL, null, 0);
     }
-
-
 
     /** (25) getCreateBinderMaterial
      * 
@@ -219,17 +212,14 @@ public abstract class JDFAutoRingBinding extends JDFElement
         return (JDFNameSpan) getCreateElement_KElement(ElementName.BINDERMATERIAL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementBinderMaterial
+     * (29) append element BinderMaterial
      */
     public JDFNameSpan appendBinderMaterial() throws JDFException
     {
         return (JDFNameSpan) appendElementN(ElementName.BINDERMATERIAL, 1, null);
     }
+
     /**
      * (24) const get element HoleType
      * @return JDFSpanHoleType the element
@@ -238,8 +228,6 @@ public abstract class JDFAutoRingBinding extends JDFElement
     {
         return (JDFSpanHoleType) getElement(ElementName.HOLETYPE, null, 0);
     }
-
-
 
     /** (25) getCreateHoleType
      * 
@@ -250,17 +238,14 @@ public abstract class JDFAutoRingBinding extends JDFElement
         return (JDFSpanHoleType) getCreateElement_KElement(ElementName.HOLETYPE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementHoleType
+     * (29) append element HoleType
      */
     public JDFSpanHoleType appendHoleType() throws JDFException
     {
         return (JDFSpanHoleType) appendElementN(ElementName.HOLETYPE, 1, null);
     }
+
     /**
      * (24) const get element RingDiameter
      * @return JDFNumberSpan the element
@@ -269,8 +254,6 @@ public abstract class JDFAutoRingBinding extends JDFElement
     {
         return (JDFNumberSpan) getElement(ElementName.RINGDIAMETER, null, 0);
     }
-
-
 
     /** (25) getCreateRingDiameter
      * 
@@ -281,17 +264,14 @@ public abstract class JDFAutoRingBinding extends JDFElement
         return (JDFNumberSpan) getCreateElement_KElement(ElementName.RINGDIAMETER, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementRingDiameter
+     * (29) append element RingDiameter
      */
     public JDFNumberSpan appendRingDiameter() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.RINGDIAMETER, 1, null);
     }
+
     /**
      * (24) const get element RingMechanic
      * @return JDFOptionSpan the element
@@ -300,8 +280,6 @@ public abstract class JDFAutoRingBinding extends JDFElement
     {
         return (JDFOptionSpan) getElement(ElementName.RINGMECHANIC, null, 0);
     }
-
-
 
     /** (25) getCreateRingMechanic
      * 
@@ -312,17 +290,14 @@ public abstract class JDFAutoRingBinding extends JDFElement
         return (JDFOptionSpan) getCreateElement_KElement(ElementName.RINGMECHANIC, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementRingMechanic
+     * (29) append element RingMechanic
      */
     public JDFOptionSpan appendRingMechanic() throws JDFException
     {
         return (JDFOptionSpan) appendElementN(ElementName.RINGMECHANIC, 1, null);
     }
+
     /**
      * (24) const get element RingShape
      * @return JDFNameSpan the element
@@ -331,8 +306,6 @@ public abstract class JDFAutoRingBinding extends JDFElement
     {
         return (JDFNameSpan) getElement(ElementName.RINGSHAPE, null, 0);
     }
-
-
 
     /** (25) getCreateRingShape
      * 
@@ -343,17 +316,14 @@ public abstract class JDFAutoRingBinding extends JDFElement
         return (JDFNameSpan) getCreateElement_KElement(ElementName.RINGSHAPE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementRingShape
+     * (29) append element RingShape
      */
     public JDFNameSpan appendRingShape() throws JDFException
     {
         return (JDFNameSpan) appendElementN(ElementName.RINGSHAPE, 1, null);
     }
+
     /**
      * (24) const get element RingSystem
      * @return JDFNameSpan the element
@@ -362,8 +332,6 @@ public abstract class JDFAutoRingBinding extends JDFElement
     {
         return (JDFNameSpan) getElement(ElementName.RINGSYSTEM, null, 0);
     }
-
-
 
     /** (25) getCreateRingSystem
      * 
@@ -374,17 +342,14 @@ public abstract class JDFAutoRingBinding extends JDFElement
         return (JDFNameSpan) getCreateElement_KElement(ElementName.RINGSYSTEM, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementRingSystem
+     * (29) append element RingSystem
      */
     public JDFNameSpan appendRingSystem() throws JDFException
     {
         return (JDFNameSpan) appendElementN(ElementName.RINGSYSTEM, 1, null);
     }
+
     /**
      * (24) const get element RivetsExposed
      * @return JDFOptionSpan the element
@@ -393,8 +358,6 @@ public abstract class JDFAutoRingBinding extends JDFElement
     {
         return (JDFOptionSpan) getElement(ElementName.RIVETSEXPOSED, null, 0);
     }
-
-
 
     /** (25) getCreateRivetsExposed
      * 
@@ -405,17 +368,14 @@ public abstract class JDFAutoRingBinding extends JDFElement
         return (JDFOptionSpan) getCreateElement_KElement(ElementName.RIVETSEXPOSED, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementRivetsExposed
+     * (29) append element RivetsExposed
      */
     public JDFOptionSpan appendRivetsExposed() throws JDFException
     {
         return (JDFOptionSpan) appendElementN(ElementName.RIVETSEXPOSED, 1, null);
     }
+
     /**
      * (24) const get element ViewBinder
      * @return JDFNameSpan the element
@@ -424,8 +384,6 @@ public abstract class JDFAutoRingBinding extends JDFElement
     {
         return (JDFNameSpan) getElement(ElementName.VIEWBINDER, null, 0);
     }
-
-
 
     /** (25) getCreateViewBinder
      * 
@@ -436,15 +394,12 @@ public abstract class JDFAutoRingBinding extends JDFElement
         return (JDFNameSpan) getCreateElement_KElement(ElementName.VIEWBINDER, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementViewBinder
+     * (29) append element ViewBinder
      */
     public JDFNameSpan appendViewBinder() throws JDFException
     {
         return (JDFNameSpan) appendElementN(ElementName.VIEWBINDER, 1, null);
     }
+
 }// end namespace JDF

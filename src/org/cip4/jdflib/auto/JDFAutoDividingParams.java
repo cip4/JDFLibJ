@@ -184,8 +184,6 @@ public abstract class JDFAutoDividingParams extends JDFResource
             setAttribute(AttributeName.DIVIDEPOSITIONS, value, null);
         }
 
-
-
         /**
           * (20) get JDFNumberList attribute DividePositions
           * @return JDFNumberList the value of the attribute, null if a the
@@ -206,7 +204,5 @@ public abstract class JDFAutoDividingParams extends JDFResource
             }
             return nPlaceHolder;
         }
-
-
 
 }// end namespace JDF

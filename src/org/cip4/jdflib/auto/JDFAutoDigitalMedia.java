@@ -205,8 +205,6 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
             setAttribute(AttributeName.MEDIATYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute MediaType
           * @return the value of the attribute
@@ -215,8 +213,6 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
         {
             return getAttribute(AttributeName.MEDIATYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -231,8 +227,6 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
             setAttribute(AttributeName.CAPACITY, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Capacity
           * @return int the value of the attribute
@@ -241,8 +235,6 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
         {
             return getIntAttribute(AttributeName.CAPACITY, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -257,8 +249,6 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
             setAttribute(AttributeName.MEDIALABEL, value, null);
         }
 
-
-
         /**
           * (23) get String attribute MediaLabel
           * @return the value of the attribute
@@ -267,8 +257,6 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
         {
             return getAttribute(AttributeName.MEDIALABEL, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -283,8 +271,6 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
             setAttribute(AttributeName.MEDIATYPEDETAILS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute MediaTypeDetails
           * @return the value of the attribute
@@ -293,8 +279,6 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
         {
             return getAttribute(AttributeName.MEDIATYPEDETAILS, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -310,8 +294,6 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
         return (JDFRunList) getElement(ElementName.RUNLIST, null, 0);
     }
 
-
-
     /** (25) getCreateRunList
      * 
      * @return JDFRunList the element
@@ -321,17 +303,14 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
         return (JDFRunList) getCreateElement_KElement(ElementName.RUNLIST, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementRunList
+     * (29) append element RunList
      */
     public JDFRunList appendRunList() throws JDFException
     {
         return (JDFRunList) appendElementN(ElementName.RUNLIST, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -340,6 +319,7 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateContact
      * 
      * @param iSkip number of elements to skip
@@ -349,8 +329,6 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
     {
         return (JDFContact)getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Contact
@@ -362,9 +340,10 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
         return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
     }
 
-
-
-    public JDFContact appendContact()
+    /**
+     * (30) append element Contact
+     */
+    public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -377,6 +356,7 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateIdentificationField
      * 
      * @param iSkip number of elements to skip
@@ -386,8 +366,6 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
     {
         return (JDFIdentificationField)getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element IdentificationField
@@ -399,9 +377,10 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
         return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
 
-
-
-    public JDFIdentificationField appendIdentificationField()
+    /**
+     * (30) append element IdentificationField
+     */
+    public JDFIdentificationField appendIdentificationField() throws JDFException
     {
         return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
     }
@@ -414,4 +393,5 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

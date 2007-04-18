@@ -172,8 +172,6 @@ public abstract class JDFAutoLongPerforate extends JDFElement
             setAttribute(AttributeName.TEETHPERDIMENSION, value, null);
         }
 
-
-
         /**
           * (15) get int attribute TeethPerDimension
           * @return int the value of the attribute
@@ -182,8 +180,6 @@ public abstract class JDFAutoLongPerforate extends JDFElement
         {
             return getIntAttribute(AttributeName.TEETHPERDIMENSION, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -197,8 +193,6 @@ public abstract class JDFAutoLongPerforate extends JDFElement
         {
             setAttribute(AttributeName.WORKINGLIST, value, null);
         }
-
-
 
         /**
           * (20) get JDFNumberList attribute WorkingList
@@ -221,8 +215,6 @@ public abstract class JDFAutoLongPerforate extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute XOffset
@@ -236,8 +228,6 @@ public abstract class JDFAutoLongPerforate extends JDFElement
             setAttribute(AttributeName.XOFFSET, value, null);
         }
 
-
-
         /**
           * (17) get double attribute XOffset
           * @return double the value of the attribute
@@ -246,7 +236,5 @@ public abstract class JDFAutoLongPerforate extends JDFElement
         {
             return getRealAttribute(AttributeName.XOFFSET, null, 0.0);
         }
-
-
 
 }// end namespace JDF

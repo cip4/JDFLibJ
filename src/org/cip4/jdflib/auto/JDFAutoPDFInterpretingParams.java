@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFOCGControl;
     /*
     *****************************************************************************
@@ -292,8 +293,6 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
             setAttribute(AttributeName.EMITPDFBG, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute EmitPDFBG
           * @return boolean the value of the attribute
@@ -302,8 +301,6 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.EMITPDFBG, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -318,8 +315,6 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
             setAttribute(AttributeName.EMITPDFHALFTONES, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute EmitPDFHalftones
           * @return boolean the value of the attribute
@@ -328,8 +323,6 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.EMITPDFHALFTONES, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -344,8 +337,6 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
             setAttribute(AttributeName.EMITPDFTRANSFERS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute EmitPDFTransfers
           * @return boolean the value of the attribute
@@ -354,8 +345,6 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.EMITPDFTRANSFERS, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -370,8 +359,6 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
             setAttribute(AttributeName.EMITPDFUCR, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute EmitPDFUCR
           * @return boolean the value of the attribute
@@ -380,8 +367,6 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.EMITPDFUCR, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -396,8 +381,6 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
             setAttribute(AttributeName.HONORPDFOVERPRINT, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute HonorPDFOverprint
           * @return boolean the value of the attribute
@@ -406,8 +389,6 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.HONORPDFOVERPRINT, null, true);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -422,8 +403,6 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
             setAttribute(AttributeName.ICCCOLORASDEVICECOLOR, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute ICCColorAsDeviceColor
           * @return boolean the value of the attribute
@@ -432,8 +411,6 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.ICCCOLORASDEVICECOLOR, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -448,8 +425,6 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
             setAttribute(AttributeName.OCGDEFAULT, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute OCGDefault
           * @return the value of the attribute
@@ -458,8 +433,6 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
         {
             return EnumOCGDefault.getEnum(getAttribute(AttributeName.OCGDEFAULT, null, "FromPDF"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -474,8 +447,6 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
             setAttribute(AttributeName.OCGINTENT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute OCGIntent
           * @return the value of the attribute
@@ -484,8 +455,6 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
         {
             return getAttribute(AttributeName.OCGINTENT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -500,8 +469,6 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
             setAttribute(AttributeName.OCGPROCESS, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute OCGProcess
           * @return the value of the attribute
@@ -510,8 +477,6 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
         {
             return EnumOCGProcess.getEnum(getAttribute(AttributeName.OCGPROCESS, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -526,8 +491,6 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
             setAttribute(AttributeName.OCGZOOM, value, null);
         }
 
-
-
         /**
           * (17) get double attribute OCGZoom
           * @return double the value of the attribute
@@ -536,8 +499,6 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
         {
             return getRealAttribute(AttributeName.OCGZOOM, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -552,8 +513,6 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
             setAttribute(AttributeName.PRINTPDFANNOTATIONS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute PrintPDFAnnotations
           * @return boolean the value of the attribute
@@ -562,8 +521,6 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.PRINTPDFANNOTATIONS, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -578,8 +535,6 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
             setAttribute(AttributeName.PRINTTRAPANNOTATIONS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute PrintTrapAnnotations
           * @return boolean the value of the attribute
@@ -588,8 +543,6 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
         {
             return getBoolAttribute(AttributeName.PRINTTRAPANNOTATIONS, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -604,8 +557,6 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
             setAttribute(AttributeName.TRANSPARENCYRENDERINGQUALITY, value, null);
         }
 
-
-
         /**
           * (17) get double attribute TransparencyRenderingQuality
           * @return double the value of the attribute
@@ -614,8 +565,6 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
         {
             return getRealAttribute(AttributeName.TRANSPARENCYRENDERINGQUALITY, null, 0.0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -632,8 +581,6 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
         return (JDFOCGControl)getCreateElement_KElement(ElementName.OCGCONTROL, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element OCGControl
      * @param iSkip number of elements to skip
@@ -644,9 +591,10 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
         return (JDFOCGControl) getElement(ElementName.OCGCONTROL, null, iSkip);
     }
 
-
-
-    public JDFOCGControl appendOCGControl()
+    /**
+     * (30) append element OCGControl
+     */
+    public JDFOCGControl appendOCGControl() throws JDFException
     {
         return (JDFOCGControl) appendElement(ElementName.OCGCONTROL, null);
     }

@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.jmf.JDFQueueEntry;
 import org.cip4.jdflib.resource.JDFDevice;
     /*
@@ -241,8 +242,6 @@ public abstract class JDFAutoQueue extends JDFElement
             setAttribute(AttributeName.STATUS, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Status
           * @return the value of the attribute
@@ -251,8 +250,6 @@ public abstract class JDFAutoQueue extends JDFElement
         {
             return EnumQueueStatus.getEnum(getAttribute(AttributeName.STATUS, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -267,8 +264,6 @@ public abstract class JDFAutoQueue extends JDFElement
             setAttribute(AttributeName.DEVICEID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DeviceID
           * @return the value of the attribute
@@ -277,8 +272,6 @@ public abstract class JDFAutoQueue extends JDFElement
         {
             return getAttribute(AttributeName.DEVICEID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -293,8 +286,6 @@ public abstract class JDFAutoQueue extends JDFElement
             setAttribute(AttributeName.QUEUESIZE, value, null);
         }
 
-
-
         /**
           * (15) get int attribute QueueSize
           * @return int the value of the attribute
@@ -303,8 +294,6 @@ public abstract class JDFAutoQueue extends JDFElement
         {
             return getIntAttribute(AttributeName.QUEUESIZE, null, 0);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -321,8 +310,6 @@ public abstract class JDFAutoQueue extends JDFElement
         return (JDFDevice)getCreateElement_KElement(ElementName.DEVICE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Device
      * @param iSkip number of elements to skip
@@ -333,9 +320,10 @@ public abstract class JDFAutoQueue extends JDFElement
         return (JDFDevice) getElement(ElementName.DEVICE, null, iSkip);
     }
 
-
-
-    public JDFDevice appendDevice()
+    /**
+     * (30) append element Device
+     */
+    public JDFDevice appendDevice() throws JDFException
     {
         return (JDFDevice) appendElement(ElementName.DEVICE, null);
     }
@@ -350,8 +338,6 @@ public abstract class JDFAutoQueue extends JDFElement
         return (JDFQueueEntry)getCreateElement_KElement(ElementName.QUEUEENTRY, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element QueueEntry
      * @param iSkip number of elements to skip
@@ -362,9 +348,10 @@ public abstract class JDFAutoQueue extends JDFElement
         return (JDFQueueEntry) getElement(ElementName.QUEUEENTRY, null, iSkip);
     }
 
-
-
-    public JDFQueueEntry appendQueueEntry()
+    /**
+     * (30) append element QueueEntry
+     */
+    public JDFQueueEntry appendQueueEntry() throws JDFException
     {
         return (JDFQueueEntry) appendElement(ElementName.QUEUEENTRY, null);
     }

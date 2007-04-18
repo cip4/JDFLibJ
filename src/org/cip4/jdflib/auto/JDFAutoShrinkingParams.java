@@ -235,8 +235,6 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
             setAttribute(AttributeName.SHRINKINGMETHOD, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ShrinkingMethod
           * @return the value of the attribute
@@ -245,8 +243,6 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
         {
             return EnumShrinkingMethod.getEnum(getAttribute(AttributeName.SHRINKINGMETHOD, null, "ShrinkHot"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -260,8 +256,6 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
         {
             setAttribute(AttributeName.DURATION, value, null);
         }
-
-
 
         /**
           * (20) get JDFDuration attribute Duration
@@ -284,8 +278,6 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Temperature
@@ -299,8 +291,6 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
             setAttribute(AttributeName.TEMPERATURE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Temperature
           * @return double the value of the attribute
@@ -309,7 +299,5 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.TEMPERATURE, null, 0.0);
         }
-
-
 
 }// end namespace JDF

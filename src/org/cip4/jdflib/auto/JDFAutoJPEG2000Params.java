@@ -228,8 +228,6 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
             setAttribute(AttributeName.CODEBLOCKSIZE, value, null);
         }
 
-
-
         /**
           * (15) get int attribute CodeBlockSize
           * @return int the value of the attribute
@@ -238,8 +236,6 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
         {
             return getIntAttribute(AttributeName.CODEBLOCKSIZE, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -254,8 +250,6 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
             setAttribute(AttributeName.LAYERSPERTILE, value, null);
         }
 
-
-
         /**
           * (15) get int attribute LayersPerTile
           * @return int the value of the attribute
@@ -264,8 +258,6 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
         {
             return getIntAttribute(AttributeName.LAYERSPERTILE, null, 1);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -279,8 +271,6 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
         {
             setAttribute(AttributeName.LAYERRATES, value, null);
         }
-
-
 
         /**
           * (20) get JDFNumberList attribute LayerRates
@@ -303,8 +293,6 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute NumResolutions
@@ -318,8 +306,6 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
             setAttribute(AttributeName.NUMRESOLUTIONS, value, null);
         }
 
-
-
         /**
           * (15) get int attribute NumResolutions
           * @return int the value of the attribute
@@ -328,8 +314,6 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
         {
             return getIntAttribute(AttributeName.NUMRESOLUTIONS, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -344,8 +328,6 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
             setAttribute(AttributeName.PROGRESSIONORDER, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ProgressionOrder
           * @return the value of the attribute
@@ -354,8 +336,6 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
         {
             return EnumProgressionOrder.getEnum(getAttribute(AttributeName.PROGRESSIONORDER, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -369,8 +349,6 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
         {
             setAttribute(AttributeName.TILESIZE, value, null);
         }
-
-
 
         /**
           * (20) get JDFXYPair attribute TileSize
@@ -392,7 +370,5 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
             }
             return nPlaceHolder;
         }
-
-
 
 }// end namespace JDF

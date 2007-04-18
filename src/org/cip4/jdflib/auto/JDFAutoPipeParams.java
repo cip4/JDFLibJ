@@ -79,6 +79,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
     /*
     *****************************************************************************
@@ -187,8 +188,6 @@ public abstract class JDFAutoPipeParams extends JDFElement
             setAttribute(AttributeName.JOBID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobID
           * @return the value of the attribute
@@ -197,8 +196,6 @@ public abstract class JDFAutoPipeParams extends JDFElement
         {
             return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -213,8 +210,6 @@ public abstract class JDFAutoPipeParams extends JDFElement
             setAttribute(AttributeName.JOBPARTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobPartID
           * @return the value of the attribute
@@ -223,8 +218,6 @@ public abstract class JDFAutoPipeParams extends JDFElement
         {
             return getAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -239,8 +232,6 @@ public abstract class JDFAutoPipeParams extends JDFElement
             setAttribute(AttributeName.PIPEID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute PipeID
           * @return the value of the attribute
@@ -249,8 +240,6 @@ public abstract class JDFAutoPipeParams extends JDFElement
         {
             return getAttribute(AttributeName.PIPEID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -265,8 +254,6 @@ public abstract class JDFAutoPipeParams extends JDFElement
             setAttribute(AttributeName.UPDATEDSTATUS, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute UpdatedStatus
           * @return the value of the attribute
@@ -275,8 +262,6 @@ public abstract class JDFAutoPipeParams extends JDFElement
         {
             return JDFResource.EnumResStatus.getEnum(getAttribute(AttributeName.UPDATEDSTATUS, null, null));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -293,8 +278,6 @@ public abstract class JDFAutoPipeParams extends JDFElement
         return (JDFResource)getCreateElement_KElement(ElementName.RESOURCE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Resource
      * @param iSkip number of elements to skip
@@ -305,9 +288,10 @@ public abstract class JDFAutoPipeParams extends JDFElement
         return (JDFResource) getElement(ElementName.RESOURCE, null, iSkip);
     }
 
-
-
-    public JDFResource appendResource()
+    /**
+     * (30) append element Resource
+     */
+    public JDFResource appendResource() throws JDFException
     {
         return (JDFResource) appendElement(ElementName.RESOURCE, null);
     }

@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
     /*
@@ -167,8 +168,6 @@ public abstract class JDFAutoMediaLayers extends JDFElement
         return (JDFGlueLine)getCreateElement_KElement(ElementName.GLUELINE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element GlueLine
      * @param iSkip number of elements to skip
@@ -179,9 +178,10 @@ public abstract class JDFAutoMediaLayers extends JDFElement
         return (JDFGlueLine) getElement(ElementName.GLUELINE, null, iSkip);
     }
 
-
-
-    public JDFGlueLine appendGlueLine()
+    /**
+     * (30) append element GlueLine
+     */
+    public JDFGlueLine appendGlueLine() throws JDFException
     {
         return (JDFGlueLine) appendElement(ElementName.GLUELINE, null);
     }
@@ -194,6 +194,7 @@ public abstract class JDFAutoMediaLayers extends JDFElement
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateMedia
      * 
      * @param iSkip number of elements to skip
@@ -203,8 +204,6 @@ public abstract class JDFAutoMediaLayers extends JDFElement
     {
         return (JDFMedia)getCreateElement_KElement(ElementName.MEDIA, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element Media
@@ -216,9 +215,10 @@ public abstract class JDFAutoMediaLayers extends JDFElement
         return (JDFMedia) getElement(ElementName.MEDIA, null, iSkip);
     }
 
-
-
-    public JDFMedia appendMedia()
+    /**
+     * (30) append element Media
+     */
+    public JDFMedia appendMedia() throws JDFException
     {
         return (JDFMedia) appendElement(ElementName.MEDIA, null);
     }
@@ -231,4 +231,5 @@ public abstract class JDFAutoMediaLayers extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

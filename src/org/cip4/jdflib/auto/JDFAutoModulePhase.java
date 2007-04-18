@@ -198,8 +198,6 @@ public abstract class JDFAutoModulePhase extends JDFElement
             setAttribute(AttributeName.COMBINEDPROCESSINDEX, value, null);
         }
 
-
-
         /**
           * (20) get JDFIntegerList attribute CombinedProcessIndex
           * @return JDFIntegerList the value of the attribute, null if a the
@@ -221,8 +219,6 @@ public abstract class JDFAutoModulePhase extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute DeviceID
@@ -236,8 +232,6 @@ public abstract class JDFAutoModulePhase extends JDFElement
             setAttribute(AttributeName.DEVICEID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute DeviceID
           * @return the value of the attribute
@@ -246,8 +240,6 @@ public abstract class JDFAutoModulePhase extends JDFElement
         {
             return getAttribute(AttributeName.DEVICEID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -262,8 +254,6 @@ public abstract class JDFAutoModulePhase extends JDFElement
             setAttribute(AttributeName.DEVICESTATUS, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute DeviceStatus
           * @return the value of the attribute
@@ -272,8 +262,6 @@ public abstract class JDFAutoModulePhase extends JDFElement
         {
             return JDFDeviceInfo.EnumDeviceStatus.getEnum(getAttribute(AttributeName.DEVICESTATUS, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -288,8 +276,6 @@ public abstract class JDFAutoModulePhase extends JDFElement
             setAttribute(AttributeName.END, new JDFDate().getDateTimeISO(), null);
         }
 
-
-
         /**
           * (11) set attribute End
           * @param value: the value to set the attribute to or null
@@ -299,8 +285,6 @@ public abstract class JDFAutoModulePhase extends JDFElement
             if (value == null) value = new JDFDate();
             setAttribute(AttributeName.END, value.getDateTimeISO(), null);
         }
-
-
 
         /**
           * (12) get JDFDate attribute End
@@ -325,8 +309,6 @@ public abstract class JDFAutoModulePhase extends JDFElement
             return nMyDate;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ModuleID
@@ -340,8 +322,6 @@ public abstract class JDFAutoModulePhase extends JDFElement
             setAttribute(AttributeName.MODULEID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ModuleID
           * @return the value of the attribute
@@ -350,8 +330,6 @@ public abstract class JDFAutoModulePhase extends JDFElement
         {
             return getAttribute(AttributeName.MODULEID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -365,8 +343,6 @@ public abstract class JDFAutoModulePhase extends JDFElement
         {
             setAttribute(AttributeName.MODULEINDEX, value, null);
         }
-
-
 
         /**
           * (20) get JDFIntegerRangeList attribute ModuleIndex
@@ -389,8 +365,6 @@ public abstract class JDFAutoModulePhase extends JDFElement
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ModuleType
@@ -404,8 +378,6 @@ public abstract class JDFAutoModulePhase extends JDFElement
             setAttribute(AttributeName.MODULETYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ModuleType
           * @return the value of the attribute
@@ -414,8 +386,6 @@ public abstract class JDFAutoModulePhase extends JDFElement
         {
             return getAttribute(AttributeName.MODULETYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -430,8 +400,6 @@ public abstract class JDFAutoModulePhase extends JDFElement
             setAttribute(AttributeName.START, new JDFDate().getDateTimeISO(), null);
         }
 
-
-
         /**
           * (11) set attribute Start
           * @param value: the value to set the attribute to or null
@@ -441,8 +409,6 @@ public abstract class JDFAutoModulePhase extends JDFElement
             if (value == null) value = new JDFDate();
             setAttribute(AttributeName.START, value.getDateTimeISO(), null);
         }
-
-
 
         /**
           * (12) get JDFDate attribute Start
@@ -467,8 +433,6 @@ public abstract class JDFAutoModulePhase extends JDFElement
             return nMyDate;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute StatusDetails
@@ -482,8 +446,6 @@ public abstract class JDFAutoModulePhase extends JDFElement
             setAttribute(AttributeName.STATUSDETAILS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute StatusDetails
           * @return the value of the attribute
@@ -492,8 +454,6 @@ public abstract class JDFAutoModulePhase extends JDFElement
         {
             return getAttribute(AttributeName.STATUSDETAILS, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -510,8 +470,6 @@ public abstract class JDFAutoModulePhase extends JDFElement
         return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Employee
      * @param iSkip number of elements to skip
@@ -522,9 +480,10 @@ public abstract class JDFAutoModulePhase extends JDFElement
         return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
     }
 
-
-
-    public JDFEmployee appendEmployee()
+    /**
+     * (30) append element Employee
+     */
+    public JDFEmployee appendEmployee() throws JDFException
     {
         return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
     }
@@ -537,4 +496,5 @@ public abstract class JDFAutoModulePhase extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

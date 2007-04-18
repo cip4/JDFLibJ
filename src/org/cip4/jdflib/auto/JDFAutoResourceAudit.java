@@ -235,8 +235,6 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
             setAttribute(AttributeName.CONTENTSMODIFIED, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute ContentsModified
           * @return boolean the value of the attribute
@@ -245,8 +243,6 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
         {
             return getBoolAttribute(AttributeName.CONTENTSMODIFIED, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -261,8 +257,6 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
             setAttribute(AttributeName.REASON, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Reason
           * @return the value of the attribute
@@ -271,8 +265,6 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
         {
             return EnumReason.getEnum(getAttribute(AttributeName.REASON, null, "ProcessResult"));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -288,8 +280,6 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
         return (JDFMISDetails) getElement(ElementName.MISDETAILS, null, 0);
     }
 
-
-
     /** (25) getCreateMISDetails
      * 
      * @return JDFMISDetails the element
@@ -299,15 +289,12 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
         return (JDFMISDetails) getCreateElement_KElement(ElementName.MISDETAILS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMISDetails
+     * (29) append element MISDetails
      */
     public JDFMISDetails appendMISDetails() throws JDFException
     {
         return (JDFMISDetails) appendElementN(ElementName.MISDETAILS, 1, null);
     }
+
 }// end namespace JDF

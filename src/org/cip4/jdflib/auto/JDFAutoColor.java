@@ -324,8 +324,6 @@ public abstract class JDFAutoColor extends JDFResource
             setAttribute(AttributeName.MAPPINGSELECTION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute MappingSelection
           * @return the value of the attribute
@@ -334,8 +332,6 @@ public abstract class JDFAutoColor extends JDFResource
         {
             return EnumMappingSelection.getEnum(getAttribute(AttributeName.MAPPINGSELECTION, null, "UsePDLValues"));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -350,8 +346,6 @@ public abstract class JDFAutoColor extends JDFResource
             setAttribute(AttributeName.NAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Name
           * @return the value of the attribute
@@ -360,8 +354,6 @@ public abstract class JDFAutoColor extends JDFResource
         {
             return getAttribute(AttributeName.NAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -376,11 +368,9 @@ public abstract class JDFAutoColor extends JDFResource
             setAttribute(AttributeName.CMYK, value, null);
         }
 
-
-
         /**
           * (20) get JDFCMYKColor attribute CMYK
-          * @return JDFCMYKColorthe value of the attribute, null if a the
+          * @return JDFCMYKColor the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFCMYKColor
           */
         public JDFCMYKColor getCMYK()
@@ -399,8 +389,6 @@ public abstract class JDFAutoColor extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ColorBook
@@ -414,8 +402,6 @@ public abstract class JDFAutoColor extends JDFResource
             setAttribute(AttributeName.COLORBOOK, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ColorBook
           * @return the value of the attribute
@@ -424,8 +410,6 @@ public abstract class JDFAutoColor extends JDFResource
         {
             return getAttribute(AttributeName.COLORBOOK, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -440,8 +424,6 @@ public abstract class JDFAutoColor extends JDFResource
             setAttribute(AttributeName.COLORBOOKENTRY, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ColorBookEntry
           * @return the value of the attribute
@@ -450,8 +432,6 @@ public abstract class JDFAutoColor extends JDFResource
         {
             return getAttribute(AttributeName.COLORBOOKENTRY, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -466,8 +446,6 @@ public abstract class JDFAutoColor extends JDFResource
             setAttribute(AttributeName.COLORBOOKPREFIX, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ColorBookPrefix
           * @return the value of the attribute
@@ -476,8 +454,6 @@ public abstract class JDFAutoColor extends JDFResource
         {
             return getAttribute(AttributeName.COLORBOOKPREFIX, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -492,8 +468,6 @@ public abstract class JDFAutoColor extends JDFResource
             setAttribute(AttributeName.COLORBOOKSUFFIX, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ColorBookSuffix
           * @return the value of the attribute
@@ -502,8 +476,6 @@ public abstract class JDFAutoColor extends JDFResource
         {
             return getAttribute(AttributeName.COLORBOOKSUFFIX, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -518,8 +490,6 @@ public abstract class JDFAutoColor extends JDFResource
             setAttribute(AttributeName.COLORNAME, value.getName(), null);
         }
 
-
-
         /**
           * (19) get EnumNamedColor attribute ColorName
           * @return EnumNamedColor the value of the attribute
@@ -532,8 +502,6 @@ public abstract class JDFAutoColor extends JDFResource
             nPlaceHolder = EnumNamedColor.getEnum(strAttrName);
             return nPlaceHolder;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -548,8 +516,6 @@ public abstract class JDFAutoColor extends JDFResource
             setAttribute(AttributeName.COLORTYPE, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute ColorType
           * @return the value of the attribute
@@ -558,8 +524,6 @@ public abstract class JDFAutoColor extends JDFResource
         {
             return EnumColorType.getEnum(getAttribute(AttributeName.COLORTYPE, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -574,8 +538,6 @@ public abstract class JDFAutoColor extends JDFResource
             setAttribute(AttributeName.DENSITY, value, null);
         }
 
-
-
         /**
           * (17) get double attribute Density
           * @return double the value of the attribute
@@ -584,8 +546,6 @@ public abstract class JDFAutoColor extends JDFResource
         {
             return getRealAttribute(AttributeName.DENSITY, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -600,11 +560,9 @@ public abstract class JDFAutoColor extends JDFResource
             setAttribute(AttributeName.LAB, value, null);
         }
 
-
-
         /**
           * (20) get JDFLabColor attribute Lab
-          * @return JDFLabColorthe value of the attribute, null if a the
+          * @return JDFLabColor the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFLabColor
           */
         public JDFLabColor getLab()
@@ -623,8 +581,6 @@ public abstract class JDFAutoColor extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute MediaType
@@ -638,8 +594,6 @@ public abstract class JDFAutoColor extends JDFResource
             setAttribute(AttributeName.MEDIATYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute MediaType
           * @return the value of the attribute
@@ -648,8 +602,6 @@ public abstract class JDFAutoColor extends JDFResource
         {
             return getAttribute(AttributeName.MEDIATYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -664,8 +616,6 @@ public abstract class JDFAutoColor extends JDFResource
             setAttribute(AttributeName.NEUTRALDENSITY, value, null);
         }
 
-
-
         /**
           * (17) get double attribute NeutralDensity
           * @return double the value of the attribute
@@ -674,8 +624,6 @@ public abstract class JDFAutoColor extends JDFResource
         {
             return getRealAttribute(AttributeName.NEUTRALDENSITY, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -690,8 +638,6 @@ public abstract class JDFAutoColor extends JDFResource
             setAttribute(AttributeName.RAWNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute RawName
           * @return the value of the attribute
@@ -700,8 +646,6 @@ public abstract class JDFAutoColor extends JDFResource
         {
             return getAttribute(AttributeName.RAWNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -716,11 +660,9 @@ public abstract class JDFAutoColor extends JDFResource
             setAttribute(AttributeName.SRGB, value, null);
         }
 
-
-
         /**
           * (20) get JDFRGBColor attribute sRGB
-          * @return JDFRGBColorthe value of the attribute, null if a the
+          * @return JDFRGBColor the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFRGBColor
           */
         public JDFRGBColor getsRGB()
@@ -739,8 +681,6 @@ public abstract class JDFAutoColor extends JDFResource
             return nPlaceHolder;
         }
 
-
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute UsePDLAlternateCS
@@ -754,8 +694,6 @@ public abstract class JDFAutoColor extends JDFResource
             setAttribute(AttributeName.USEPDLALTERNATECS, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute UsePDLAlternateCS
           * @return boolean the value of the attribute
@@ -764,8 +702,6 @@ public abstract class JDFAutoColor extends JDFResource
         {
             return getBoolAttribute(AttributeName.USEPDLALTERNATECS, null, false);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -781,8 +717,6 @@ public abstract class JDFAutoColor extends JDFResource
         return (JDFColorMeasurementConditions) getElement(ElementName.COLORMEASUREMENTCONDITIONS, null, 0);
     }
 
-
-
     /** (25) getCreateColorMeasurementConditions
      * 
      * @return JDFColorMeasurementConditions the element
@@ -792,17 +726,14 @@ public abstract class JDFAutoColor extends JDFResource
         return (JDFColorMeasurementConditions) getCreateElement_KElement(ElementName.COLORMEASUREMENTCONDITIONS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementColorMeasurementConditions
+     * (29) append element ColorMeasurementConditions
      */
     public JDFColorMeasurementConditions appendColorMeasurementConditions() throws JDFException
     {
         return (JDFColorMeasurementConditions) appendElementN(ElementName.COLORMEASUREMENTCONDITIONS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -811,6 +742,7 @@ public abstract class JDFAutoColor extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateFileSpec
      * 
      * @param iSkip number of elements to skip
@@ -820,8 +752,6 @@ public abstract class JDFAutoColor extends JDFResource
     {
         return (JDFFileSpec)getCreateElement_KElement(ElementName.FILESPEC, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element FileSpec
@@ -833,9 +763,10 @@ public abstract class JDFAutoColor extends JDFResource
         return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
     }
 
-
-
-    public JDFFileSpec appendFileSpec()
+    /**
+     * (30) append element FileSpec
+     */
+    public JDFFileSpec appendFileSpec() throws JDFException
     {
         return (JDFFileSpec) appendElement(ElementName.FILESPEC, null);
     }
@@ -848,6 +779,7 @@ public abstract class JDFAutoColor extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateDeviceNColor
      * 
      * @param iSkip number of elements to skip
@@ -857,8 +789,6 @@ public abstract class JDFAutoColor extends JDFResource
     {
         return (JDFDeviceNColor)getCreateElement_KElement(ElementName.DEVICENCOLOR, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element DeviceNColor
@@ -870,9 +800,10 @@ public abstract class JDFAutoColor extends JDFResource
         return (JDFDeviceNColor) getElement(ElementName.DEVICENCOLOR, null, iSkip);
     }
 
-
-
-    public JDFDeviceNColor appendDeviceNColor()
+    /**
+     * (30) append element DeviceNColor
+     */
+    public JDFDeviceNColor appendDeviceNColor() throws JDFException
     {
         return (JDFDeviceNColor) appendElement(ElementName.DEVICENCOLOR, null);
     }
@@ -887,8 +818,6 @@ public abstract class JDFAutoColor extends JDFResource
         return (JDFPrintConditionColor)getCreateElement_KElement(ElementName.PRINTCONDITIONCOLOR, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element PrintConditionColor
      * @param iSkip number of elements to skip
@@ -899,9 +828,10 @@ public abstract class JDFAutoColor extends JDFResource
         return (JDFPrintConditionColor) getElement(ElementName.PRINTCONDITIONCOLOR, null, iSkip);
     }
 
-
-
-    public JDFPrintConditionColor appendPrintConditionColor()
+    /**
+     * (30) append element PrintConditionColor
+     */
+    public JDFPrintConditionColor appendPrintConditionColor() throws JDFException
     {
         return (JDFPrintConditionColor) appendElement(ElementName.PRINTCONDITIONCOLOR, null);
     }
@@ -916,8 +846,6 @@ public abstract class JDFAutoColor extends JDFResource
         return (JDFTransferCurve)getCreateElement_KElement(ElementName.TRANSFERCURVE, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element TransferCurve
      * @param iSkip number of elements to skip
@@ -928,9 +856,10 @@ public abstract class JDFAutoColor extends JDFResource
         return (JDFTransferCurve) getElement(ElementName.TRANSFERCURVE, null, iSkip);
     }
 
-
-
-    public JDFTransferCurve appendTransferCurve()
+    /**
+     * (30) append element TransferCurve
+     */
+    public JDFTransferCurve appendTransferCurve() throws JDFException
     {
         return (JDFTransferCurve) appendElement(ElementName.TRANSFERCURVE, null);
     }
@@ -943,4 +872,5 @@ public abstract class JDFAutoColor extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

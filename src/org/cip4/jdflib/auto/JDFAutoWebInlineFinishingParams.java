@@ -74,6 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFFolderProduction;
     /*
@@ -179,8 +180,6 @@ public abstract class JDFAutoWebInlineFinishingParams extends JDFResource
         return (JDFFolderProduction)getCreateElement_KElement(ElementName.FOLDERPRODUCTION, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element FolderProduction
      * @param iSkip number of elements to skip
@@ -191,9 +190,10 @@ public abstract class JDFAutoWebInlineFinishingParams extends JDFResource
         return (JDFFolderProduction) getElement(ElementName.FOLDERPRODUCTION, null, iSkip);
     }
 
-
-
-    public JDFFolderProduction appendFolderProduction()
+    /**
+     * (30) append element FolderProduction
+     */
+    public JDFFolderProduction appendFolderProduction() throws JDFException
     {
         return (JDFFolderProduction) appendElement(ElementName.FOLDERPRODUCTION, null);
     }

@@ -189,8 +189,6 @@ public abstract class JDFAutoDynamicField extends JDFElement
             setAttribute(AttributeName.FORMAT, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Format
           * @return the value of the attribute
@@ -199,8 +197,6 @@ public abstract class JDFAutoDynamicField extends JDFElement
         {
             return getAttribute(AttributeName.FORMAT, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -215,8 +211,6 @@ public abstract class JDFAutoDynamicField extends JDFElement
             setAttribute(AttributeName.INPUTFIELD, value, null);
         }
 
-
-
         /**
           * (23) get String attribute InputField
           * @return the value of the attribute
@@ -225,8 +219,6 @@ public abstract class JDFAutoDynamicField extends JDFElement
         {
             return getAttribute(AttributeName.INPUTFIELD, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -241,8 +233,6 @@ public abstract class JDFAutoDynamicField extends JDFElement
             setAttribute(AttributeName.ORD, value, null);
         }
 
-
-
         /**
           * (15) get int attribute Ord
           * @return int the value of the attribute
@@ -251,8 +241,6 @@ public abstract class JDFAutoDynamicField extends JDFElement
         {
             return getIntAttribute(AttributeName.ORD, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -267,8 +255,6 @@ public abstract class JDFAutoDynamicField extends JDFElement
             setAttribute(AttributeName.ORDEXPRESSION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute OrdExpression
           * @return the value of the attribute
@@ -277,8 +263,6 @@ public abstract class JDFAutoDynamicField extends JDFElement
         {
             return getAttribute(AttributeName.ORDEXPRESSION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -293,8 +277,6 @@ public abstract class JDFAutoDynamicField extends JDFElement
             setAttribute(AttributeName.REPLACEFIELD, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ReplaceField
           * @return the value of the attribute
@@ -303,8 +285,6 @@ public abstract class JDFAutoDynamicField extends JDFElement
         {
             return getAttribute(AttributeName.REPLACEFIELD, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -319,8 +299,6 @@ public abstract class JDFAutoDynamicField extends JDFElement
             setAttribute(AttributeName.TEMPLATE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Template
           * @return the value of the attribute
@@ -329,8 +307,6 @@ public abstract class JDFAutoDynamicField extends JDFElement
         {
             return getAttribute(AttributeName.TEMPLATE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -346,8 +322,6 @@ public abstract class JDFAutoDynamicField extends JDFElement
         return (JDFDeviceMark) getElement(ElementName.DEVICEMARK, null, 0);
     }
 
-
-
     /** (25) getCreateDeviceMark
      * 
      * @return JDFDeviceMark the element
@@ -357,17 +331,14 @@ public abstract class JDFAutoDynamicField extends JDFElement
         return (JDFDeviceMark) getCreateElement_KElement(ElementName.DEVICEMARK, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementDeviceMark
+     * (29) append element DeviceMark
      */
     public JDFDeviceMark appendDeviceMark() throws JDFException
     {
         return (JDFDeviceMark) appendElementN(ElementName.DEVICEMARK, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -376,4 +347,5 @@ public abstract class JDFAutoDynamicField extends JDFElement
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

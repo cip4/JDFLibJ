@@ -169,8 +169,6 @@ public abstract class JDFAutoInsertingIntent extends JDFIntentResource
         return (JDFSpanGlueType) getElement(ElementName.GLUETYPE, null, 0);
     }
 
-
-
     /** (25) getCreateGlueType
      * 
      * @return JDFSpanGlueType the element
@@ -180,17 +178,14 @@ public abstract class JDFAutoInsertingIntent extends JDFIntentResource
         return (JDFSpanGlueType) getCreateElement_KElement(ElementName.GLUETYPE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementGlueType
+     * (29) append element GlueType
      */
     public JDFSpanGlueType appendGlueType() throws JDFException
     {
         return (JDFSpanGlueType) appendElementN(ElementName.GLUETYPE, 1, null);
     }
+
     /**
      * (24) const get element InsertList
      * @return JDFInsertList the element
@@ -199,8 +194,6 @@ public abstract class JDFAutoInsertingIntent extends JDFIntentResource
     {
         return (JDFInsertList) getElement(ElementName.INSERTLIST, null, 0);
     }
-
-
 
     /** (25) getCreateInsertList
      * 
@@ -211,17 +204,14 @@ public abstract class JDFAutoInsertingIntent extends JDFIntentResource
         return (JDFInsertList) getCreateElement_KElement(ElementName.INSERTLIST, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementInsertList
+     * (29) append element InsertList
      */
     public JDFInsertList appendInsertList() throws JDFException
     {
         return (JDFInsertList) appendElementN(ElementName.INSERTLIST, 1, null);
     }
+
     /**
      * (24) const get element Method
      * @return JDFSpanMethod the element
@@ -230,8 +220,6 @@ public abstract class JDFAutoInsertingIntent extends JDFIntentResource
     {
         return (JDFSpanMethod) getElement(ElementName.METHOD, null, 0);
     }
-
-
 
     /** (25) getCreateMethod
      * 
@@ -242,15 +230,12 @@ public abstract class JDFAutoInsertingIntent extends JDFIntentResource
         return (JDFSpanMethod) getCreateElement_KElement(ElementName.METHOD, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMethod
+     * (29) append element Method
      */
     public JDFSpanMethod appendMethod() throws JDFException
     {
         return (JDFSpanMethod) appendElementN(ElementName.METHOD, 1, null);
     }
+
 }// end namespace JDF

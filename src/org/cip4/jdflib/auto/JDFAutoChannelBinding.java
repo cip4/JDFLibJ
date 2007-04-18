@@ -169,8 +169,6 @@ public abstract class JDFAutoChannelBinding extends JDFElement
         return (JDFStringSpan) getElement(ElementName.CHANNELBRAND, null, 0);
     }
 
-
-
     /** (25) getCreateChannelBrand
      * 
      * @return JDFStringSpan the element
@@ -180,17 +178,14 @@ public abstract class JDFAutoChannelBinding extends JDFElement
         return (JDFStringSpan) getCreateElement_KElement(ElementName.CHANNELBRAND, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementChannelBrand
+     * (29) append element ChannelBrand
      */
     public JDFStringSpan appendChannelBrand() throws JDFException
     {
         return (JDFStringSpan) appendElementN(ElementName.CHANNELBRAND, 1, null);
     }
+
     /**
      * (24) const get element Cover
      * @return JDFOptionSpan the element
@@ -199,8 +194,6 @@ public abstract class JDFAutoChannelBinding extends JDFElement
     {
         return (JDFOptionSpan) getElement(ElementName.COVER, null, 0);
     }
-
-
 
     /** (25) getCreateCover
      * 
@@ -211,17 +204,14 @@ public abstract class JDFAutoChannelBinding extends JDFElement
         return (JDFOptionSpan) getCreateElement_KElement(ElementName.COVER, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementCover
+     * (29) append element Cover
      */
     public JDFOptionSpan appendCover() throws JDFException
     {
         return (JDFOptionSpan) appendElementN(ElementName.COVER, 1, null);
     }
+
     /**
      * (24) const get element Thickness
      * @return JDFNumberSpan the element
@@ -230,8 +220,6 @@ public abstract class JDFAutoChannelBinding extends JDFElement
     {
         return (JDFNumberSpan) getElement(ElementName.THICKNESS, null, 0);
     }
-
-
 
     /** (25) getCreateThickness
      * 
@@ -242,15 +230,12 @@ public abstract class JDFAutoChannelBinding extends JDFElement
         return (JDFNumberSpan) getCreateElement_KElement(ElementName.THICKNESS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementThickness
+     * (29) append element Thickness
      */
     public JDFNumberSpan appendThickness() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.THICKNESS, 1, null);
     }
+
 }// end namespace JDF

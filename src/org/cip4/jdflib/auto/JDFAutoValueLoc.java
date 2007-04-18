@@ -79,6 +79,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.devicecapability.JDFLoc;
     /*
     *****************************************************************************
@@ -183,8 +184,6 @@ public abstract class JDFAutoValueLoc extends JDFElement
             setAttribute(AttributeName.VALUE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Value
           * @return the value of the attribute
@@ -193,8 +192,6 @@ public abstract class JDFAutoValueLoc extends JDFElement
         {
             return getAttribute(AttributeName.VALUE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -211,8 +208,6 @@ public abstract class JDFAutoValueLoc extends JDFElement
         return (JDFLoc)getCreateElement_KElement(ElementName.LOC, null, iSkip);
     }
 
-
-
     /**
      * (27) const get element Loc
      * @param iSkip number of elements to skip
@@ -223,9 +218,10 @@ public abstract class JDFAutoValueLoc extends JDFElement
         return (JDFLoc) getElement(ElementName.LOC, null, iSkip);
     }
 
-
-
-    public JDFLoc appendLoc()
+    /**
+     * (30) append element Loc
+     */
+    public JDFLoc appendLoc() throws JDFException
     {
         return (JDFLoc) appendElement(ElementName.LOC, null);
     }

@@ -254,8 +254,6 @@ public abstract class JDFAutoMediaSource extends JDFResource
             setAttribute(AttributeName.MANUALFEED, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute ManualFeed
           * @return boolean the value of the attribute
@@ -264,8 +262,6 @@ public abstract class JDFAutoMediaSource extends JDFResource
         {
             return getBoolAttribute(AttributeName.MANUALFEED, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -280,8 +276,6 @@ public abstract class JDFAutoMediaSource extends JDFResource
             setAttribute(AttributeName.LEADINGEDGE, value, null);
         }
 
-
-
         /**
           * (17) get double attribute LeadingEdge
           * @return double the value of the attribute
@@ -290,8 +284,6 @@ public abstract class JDFAutoMediaSource extends JDFResource
         {
             return getRealAttribute(AttributeName.LEADINGEDGE, null, 0.0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -306,8 +298,6 @@ public abstract class JDFAutoMediaSource extends JDFResource
             setAttribute(AttributeName.MEDIALOCATION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute MediaLocation
           * @return the value of the attribute
@@ -316,8 +306,6 @@ public abstract class JDFAutoMediaSource extends JDFResource
         {
             return getAttribute(AttributeName.MEDIALOCATION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -332,8 +320,6 @@ public abstract class JDFAutoMediaSource extends JDFResource
             setAttribute(AttributeName.SHEETLAY, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute SheetLay
           * @return the value of the attribute
@@ -342,8 +328,6 @@ public abstract class JDFAutoMediaSource extends JDFResource
         {
             return EnumSheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -359,8 +343,6 @@ public abstract class JDFAutoMediaSource extends JDFResource
         return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
     }
 
-
-
     /** (25) getCreateMedia
      * 
      * @return JDFMedia the element
@@ -370,17 +352,14 @@ public abstract class JDFAutoMediaSource extends JDFResource
         return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMedia
+     * (29) append element Media
      */
     public JDFMedia appendMedia() throws JDFException
     {
         return (JDFMedia) appendElementN(ElementName.MEDIA, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -389,6 +368,7 @@ public abstract class JDFAutoMediaSource extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element Component
      * @return JDFComponent the element
@@ -397,8 +377,6 @@ public abstract class JDFAutoMediaSource extends JDFResource
     {
         return (JDFComponent) getElement(ElementName.COMPONENT, null, 0);
     }
-
-
 
     /** (25) getCreateComponent
      * 
@@ -409,17 +387,14 @@ public abstract class JDFAutoMediaSource extends JDFResource
         return (JDFComponent) getCreateElement_KElement(ElementName.COMPONENT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementComponent
+     * (29) append element Component
      */
     public JDFComponent appendComponent() throws JDFException
     {
         return (JDFComponent) appendElementN(ElementName.COMPONENT, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -428,4 +403,5 @@ public abstract class JDFAutoMediaSource extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF

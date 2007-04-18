@@ -259,8 +259,6 @@ public abstract class JDFAutoAncestor extends JDFElement
             setAttribute(AttributeName.ACTIVATION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute Activation
           * @return the value of the attribute
@@ -269,8 +267,6 @@ public abstract class JDFAutoAncestor extends JDFElement
         {
             return EnumActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -285,8 +281,6 @@ public abstract class JDFAutoAncestor extends JDFElement
             setAttribute(AttributeName.FILENAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute FileName
           * @return the value of the attribute
@@ -295,8 +289,6 @@ public abstract class JDFAutoAncestor extends JDFElement
         {
             return getAttribute(AttributeName.FILENAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -311,8 +303,6 @@ public abstract class JDFAutoAncestor extends JDFElement
             setAttribute(AttributeName.ICSVERSIONS, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute ICSVersions
           * @return VString the value of the attribute
@@ -324,8 +314,6 @@ public abstract class JDFAutoAncestor extends JDFElement
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -340,8 +328,6 @@ public abstract class JDFAutoAncestor extends JDFElement
             setAttribute(AttributeName.JOBID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobID
           * @return the value of the attribute
@@ -350,8 +336,6 @@ public abstract class JDFAutoAncestor extends JDFElement
         {
             return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -366,8 +350,6 @@ public abstract class JDFAutoAncestor extends JDFElement
             setAttribute(AttributeName.JOBPARTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute JobPartID
           * @return the value of the attribute
@@ -376,8 +358,6 @@ public abstract class JDFAutoAncestor extends JDFElement
         {
             return getAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -392,8 +372,6 @@ public abstract class JDFAutoAncestor extends JDFElement
             setAttribute(AttributeName.MAXVERSION, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute MaxVersion
           * @return the value of the attribute
@@ -402,8 +380,6 @@ public abstract class JDFAutoAncestor extends JDFElement
         {
             return EnumVersion.getEnum(getAttribute(AttributeName.MAXVERSION, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -418,8 +394,6 @@ public abstract class JDFAutoAncestor extends JDFElement
             setAttribute(AttributeName.NODEID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute NodeID
           * @return the value of the attribute
@@ -428,8 +402,6 @@ public abstract class JDFAutoAncestor extends JDFElement
         {
             return getAttribute(AttributeName.NODEID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -444,8 +416,6 @@ public abstract class JDFAutoAncestor extends JDFElement
             setAttribute(AttributeName.PROJECTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ProjectID
           * @return the value of the attribute
@@ -454,8 +424,6 @@ public abstract class JDFAutoAncestor extends JDFElement
         {
             return getAttribute(AttributeName.PROJECTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -470,8 +438,6 @@ public abstract class JDFAutoAncestor extends JDFElement
             setAttribute(AttributeName.RELATEDJOBID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute RelatedJobID
           * @return the value of the attribute
@@ -480,8 +446,6 @@ public abstract class JDFAutoAncestor extends JDFElement
         {
             return getAttribute(AttributeName.RELATEDJOBID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -496,8 +460,6 @@ public abstract class JDFAutoAncestor extends JDFElement
             setAttribute(AttributeName.RELATEDJOBPARTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute RelatedJobPartID
           * @return the value of the attribute
@@ -506,8 +468,6 @@ public abstract class JDFAutoAncestor extends JDFElement
         {
             return getAttribute(AttributeName.RELATEDJOBPARTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -522,8 +482,6 @@ public abstract class JDFAutoAncestor extends JDFElement
             setAttribute(AttributeName.SPAWNID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute SpawnID
           * @return the value of the attribute
@@ -532,8 +490,6 @@ public abstract class JDFAutoAncestor extends JDFElement
         {
             return getAttribute(AttributeName.SPAWNID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -548,8 +504,6 @@ public abstract class JDFAutoAncestor extends JDFElement
             setAttribute(AttributeName.STATUSDETAILS, value, null);
         }
 
-
-
         /**
           * (23) get String attribute StatusDetails
           * @return the value of the attribute
@@ -558,8 +512,6 @@ public abstract class JDFAutoAncestor extends JDFElement
         {
             return getAttribute(AttributeName.STATUSDETAILS, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -574,8 +526,6 @@ public abstract class JDFAutoAncestor extends JDFElement
             setAttribute(AttributeName.TEMPLATE, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Template
           * @return boolean the value of the attribute
@@ -584,8 +534,6 @@ public abstract class JDFAutoAncestor extends JDFElement
         {
             return getBoolAttribute(AttributeName.TEMPLATE, null, false);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -600,8 +548,6 @@ public abstract class JDFAutoAncestor extends JDFElement
             setAttribute(AttributeName.TEMPLATEID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute TemplateID
           * @return the value of the attribute
@@ -610,8 +556,6 @@ public abstract class JDFAutoAncestor extends JDFElement
         {
             return getAttribute(AttributeName.TEMPLATEID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -626,8 +570,6 @@ public abstract class JDFAutoAncestor extends JDFElement
             setAttribute(AttributeName.TEMPLATEVERSION, value, null);
         }
 
-
-
         /**
           * (23) get String attribute TemplateVersion
           * @return the value of the attribute
@@ -636,8 +578,6 @@ public abstract class JDFAutoAncestor extends JDFElement
         {
             return getAttribute(AttributeName.TEMPLATEVERSION, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -652,8 +592,6 @@ public abstract class JDFAutoAncestor extends JDFElement
             setAttribute(AttributeName.TYPE, value, null);
         }
 
-
-
         /**
           * (23) get String attribute Type
           * @return the value of the attribute
@@ -662,8 +600,6 @@ public abstract class JDFAutoAncestor extends JDFElement
         {
             return getAttribute(AttributeName.TYPE, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -678,8 +614,6 @@ public abstract class JDFAutoAncestor extends JDFElement
             setAttribute(AttributeName.TYPES, value, null);
         }
 
-
-
         /**
           * (21) get VString attribute Types
           * @return VString the value of the attribute
@@ -691,8 +625,6 @@ public abstract class JDFAutoAncestor extends JDFElement
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -708,8 +640,6 @@ public abstract class JDFAutoAncestor extends JDFElement
         return (JDFCustomerInfo) getElement(ElementName.CUSTOMERINFO, null, 0);
     }
 
-
-
     /** (25) getCreateCustomerInfo
      * 
      * @return JDFCustomerInfo the element
@@ -719,17 +649,14 @@ public abstract class JDFAutoAncestor extends JDFElement
         return (JDFCustomerInfo) getCreateElement_KElement(ElementName.CUSTOMERINFO, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementCustomerInfo
+     * (29) append element CustomerInfo
      */
     public JDFCustomerInfo appendCustomerInfo() throws JDFException
     {
         return (JDFCustomerInfo) appendElementN(ElementName.CUSTOMERINFO, 1, null);
     }
+
     /**
      * (24) const get element NodeInfo
      * @return JDFNodeInfo the element
@@ -738,8 +665,6 @@ public abstract class JDFAutoAncestor extends JDFElement
     {
         return (JDFNodeInfo) getElement(ElementName.NODEINFO, null, 0);
     }
-
-
 
     /** (25) getCreateNodeInfo
      * 
@@ -750,15 +675,12 @@ public abstract class JDFAutoAncestor extends JDFElement
         return (JDFNodeInfo) getCreateElement_KElement(ElementName.NODEINFO, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementNodeInfo
+     * (29) append element NodeInfo
      */
     public JDFNodeInfo appendNodeInfo() throws JDFException
     {
         return (JDFNodeInfo) appendElementN(ElementName.NODEINFO, 1, null);
     }
+
 }// end namespace JDF

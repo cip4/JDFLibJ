@@ -168,8 +168,6 @@ public abstract class JDFAutoStation extends JDFElement
             setAttribute(AttributeName.STATIONAMOUNT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute StationAmount
           * @return int the value of the attribute
@@ -178,8 +176,6 @@ public abstract class JDFAutoStation extends JDFElement
         {
             return getIntAttribute(AttributeName.STATIONAMOUNT, null, 1);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -194,8 +190,6 @@ public abstract class JDFAutoStation extends JDFElement
             setAttribute(AttributeName.STATIONNAME, value, null);
         }
 
-
-
         /**
           * (23) get String attribute StationName
           * @return the value of the attribute
@@ -204,7 +198,5 @@ public abstract class JDFAutoStation extends JDFElement
         {
             return getAttribute(AttributeName.STATIONNAME, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

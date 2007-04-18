@@ -168,8 +168,6 @@ public abstract class JDFAutoCreateLink extends JDFElement
             setAttribute(AttributeName.PARENTJOBID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ParentJobID
           * @return the value of the attribute
@@ -178,8 +176,6 @@ public abstract class JDFAutoCreateLink extends JDFElement
         {
             return getAttribute(AttributeName.PARENTJOBID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -194,8 +190,6 @@ public abstract class JDFAutoCreateLink extends JDFElement
             setAttribute(AttributeName.PARENTJOBPARTID, value, null);
         }
 
-
-
         /**
           * (23) get String attribute ParentJobPartID
           * @return the value of the attribute
@@ -204,7 +198,5 @@ public abstract class JDFAutoCreateLink extends JDFElement
         {
             return getAttribute(AttributeName.PARENTJOBPARTID, null, JDFConstants.EMPTYSTRING);
         }
-
-
 
 }// end namespace JDF

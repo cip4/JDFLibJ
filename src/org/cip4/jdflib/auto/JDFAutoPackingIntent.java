@@ -184,8 +184,6 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
         return (JDFIntegerSpan) getElement(ElementName.BOXEDQUANTITY, null, 0);
     }
 
-
-
     /** (25) getCreateBoxedQuantity
      * 
      * @return JDFIntegerSpan the element
@@ -195,17 +193,14 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
         return (JDFIntegerSpan) getCreateElement_KElement(ElementName.BOXEDQUANTITY, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementBoxedQuantity
+     * (29) append element BoxedQuantity
      */
     public JDFIntegerSpan appendBoxedQuantity() throws JDFException
     {
         return (JDFIntegerSpan) appendElementN(ElementName.BOXEDQUANTITY, 1, null);
     }
+
     /**
      * (24) const get element BoxShape
      * @return JDFShapeSpan the element
@@ -214,8 +209,6 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
     {
         return (JDFShapeSpan) getElement(ElementName.BOXSHAPE, null, 0);
     }
-
-
 
     /** (25) getCreateBoxShape
      * 
@@ -226,17 +219,14 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
         return (JDFShapeSpan) getCreateElement_KElement(ElementName.BOXSHAPE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementBoxShape
+     * (29) append element BoxShape
      */
     public JDFShapeSpan appendBoxShape() throws JDFException
     {
         return (JDFShapeSpan) appendElementN(ElementName.BOXSHAPE, 1, null);
     }
+
     /**
      * (24) const get element CartonQuantity
      * @return JDFIntegerSpan the element
@@ -245,8 +235,6 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
     {
         return (JDFIntegerSpan) getElement(ElementName.CARTONQUANTITY, null, 0);
     }
-
-
 
     /** (25) getCreateCartonQuantity
      * 
@@ -257,17 +245,14 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
         return (JDFIntegerSpan) getCreateElement_KElement(ElementName.CARTONQUANTITY, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementCartonQuantity
+     * (29) append element CartonQuantity
      */
     public JDFIntegerSpan appendCartonQuantity() throws JDFException
     {
         return (JDFIntegerSpan) appendElementN(ElementName.CARTONQUANTITY, 1, null);
     }
+
     /**
      * (24) const get element CartonShape
      * @return JDFShapeSpan the element
@@ -276,8 +261,6 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
     {
         return (JDFShapeSpan) getElement(ElementName.CARTONSHAPE, null, 0);
     }
-
-
 
     /** (25) getCreateCartonShape
      * 
@@ -288,17 +271,14 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
         return (JDFShapeSpan) getCreateElement_KElement(ElementName.CARTONSHAPE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementCartonShape
+     * (29) append element CartonShape
      */
     public JDFShapeSpan appendCartonShape() throws JDFException
     {
         return (JDFShapeSpan) appendElementN(ElementName.CARTONSHAPE, 1, null);
     }
+
     /**
      * (24) const get element CartonMaxWeight
      * @return JDFNumberSpan the element
@@ -307,8 +287,6 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
     {
         return (JDFNumberSpan) getElement(ElementName.CARTONMAXWEIGHT, null, 0);
     }
-
-
 
     /** (25) getCreateCartonMaxWeight
      * 
@@ -319,17 +297,14 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
         return (JDFNumberSpan) getCreateElement_KElement(ElementName.CARTONMAXWEIGHT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementCartonMaxWeight
+     * (29) append element CartonMaxWeight
      */
     public JDFNumberSpan appendCartonMaxWeight() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.CARTONMAXWEIGHT, 1, null);
     }
+
     /**
      * (24) const get element CartonStrength
      * @return JDFNumberSpan the element
@@ -338,8 +313,6 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
     {
         return (JDFNumberSpan) getElement(ElementName.CARTONSTRENGTH, null, 0);
     }
-
-
 
     /** (25) getCreateCartonStrength
      * 
@@ -350,17 +323,14 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
         return (JDFNumberSpan) getCreateElement_KElement(ElementName.CARTONSTRENGTH, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementCartonStrength
+     * (29) append element CartonStrength
      */
     public JDFNumberSpan appendCartonStrength() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.CARTONSTRENGTH, 1, null);
     }
+
     /**
      * (24) const get element FoldingCatalog
      * @return JDFNameSpan the element
@@ -369,8 +339,6 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
     {
         return (JDFNameSpan) getElement(ElementName.FOLDINGCATALOG, null, 0);
     }
-
-
 
     /** (25) getCreateFoldingCatalog
      * 
@@ -381,17 +349,14 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
         return (JDFNameSpan) getCreateElement_KElement(ElementName.FOLDINGCATALOG, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementFoldingCatalog
+     * (29) append element FoldingCatalog
      */
     public JDFNameSpan appendFoldingCatalog() throws JDFException
     {
         return (JDFNameSpan) appendElementN(ElementName.FOLDINGCATALOG, 1, null);
     }
+
     /**
      * (24) const get element PalletCornerBoards
      * @return JDFNameSpan the element
@@ -400,8 +365,6 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
     {
         return (JDFNameSpan) getElement(ElementName.PALLETCORNERBOARDS, null, 0);
     }
-
-
 
     /** (25) getCreatePalletCornerBoards
      * 
@@ -412,17 +375,14 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
         return (JDFNameSpan) getCreateElement_KElement(ElementName.PALLETCORNERBOARDS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPalletCornerBoards
+     * (29) append element PalletCornerBoards
      */
     public JDFNameSpan appendPalletCornerBoards() throws JDFException
     {
         return (JDFNameSpan) appendElementN(ElementName.PALLETCORNERBOARDS, 1, null);
     }
+
     /**
      * (24) const get element PalletQuantity
      * @return JDFIntegerSpan the element
@@ -431,8 +391,6 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
     {
         return (JDFIntegerSpan) getElement(ElementName.PALLETQUANTITY, null, 0);
     }
-
-
 
     /** (25) getCreatePalletQuantity
      * 
@@ -443,17 +401,14 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
         return (JDFIntegerSpan) getCreateElement_KElement(ElementName.PALLETQUANTITY, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPalletQuantity
+     * (29) append element PalletQuantity
      */
     public JDFIntegerSpan appendPalletQuantity() throws JDFException
     {
         return (JDFIntegerSpan) appendElementN(ElementName.PALLETQUANTITY, 1, null);
     }
+
     /**
      * (24) const get element PalletSize
      * @return JDFXYPairSpan the element
@@ -462,8 +417,6 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
     {
         return (JDFXYPairSpan) getElement(ElementName.PALLETSIZE, null, 0);
     }
-
-
 
     /** (25) getCreatePalletSize
      * 
@@ -474,17 +427,14 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
         return (JDFXYPairSpan) getCreateElement_KElement(ElementName.PALLETSIZE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPalletSize
+     * (29) append element PalletSize
      */
     public JDFXYPairSpan appendPalletSize() throws JDFException
     {
         return (JDFXYPairSpan) appendElementN(ElementName.PALLETSIZE, 1, null);
     }
+
     /**
      * (24) const get element PalletMaxHeight
      * @return JDFNumberSpan the element
@@ -493,8 +443,6 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
     {
         return (JDFNumberSpan) getElement(ElementName.PALLETMAXHEIGHT, null, 0);
     }
-
-
 
     /** (25) getCreatePalletMaxHeight
      * 
@@ -505,17 +453,14 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
         return (JDFNumberSpan) getCreateElement_KElement(ElementName.PALLETMAXHEIGHT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPalletMaxHeight
+     * (29) append element PalletMaxHeight
      */
     public JDFNumberSpan appendPalletMaxHeight() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.PALLETMAXHEIGHT, 1, null);
     }
+
     /**
      * (24) const get element PalletMaxWeight
      * @return JDFNumberSpan the element
@@ -524,8 +469,6 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
     {
         return (JDFNumberSpan) getElement(ElementName.PALLETMAXWEIGHT, null, 0);
     }
-
-
 
     /** (25) getCreatePalletMaxWeight
      * 
@@ -536,17 +479,14 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
         return (JDFNumberSpan) getCreateElement_KElement(ElementName.PALLETMAXWEIGHT, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPalletMaxWeight
+     * (29) append element PalletMaxWeight
      */
     public JDFNumberSpan appendPalletMaxWeight() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.PALLETMAXWEIGHT, 1, null);
     }
+
     /**
      * (24) const get element PalletType
      * @return JDFNameSpan the element
@@ -555,8 +495,6 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
     {
         return (JDFNameSpan) getElement(ElementName.PALLETTYPE, null, 0);
     }
-
-
 
     /** (25) getCreatePalletType
      * 
@@ -567,17 +505,14 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
         return (JDFNameSpan) getCreateElement_KElement(ElementName.PALLETTYPE, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPalletType
+     * (29) append element PalletType
      */
     public JDFNameSpan appendPalletType() throws JDFException
     {
         return (JDFNameSpan) appendElementN(ElementName.PALLETTYPE, 1, null);
     }
+
     /**
      * (24) const get element PalletWrapping
      * @return JDFNameSpan the element
@@ -586,8 +521,6 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
     {
         return (JDFNameSpan) getElement(ElementName.PALLETWRAPPING, null, 0);
     }
-
-
 
     /** (25) getCreatePalletWrapping
      * 
@@ -598,17 +531,14 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
         return (JDFNameSpan) getCreateElement_KElement(ElementName.PALLETWRAPPING, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementPalletWrapping
+     * (29) append element PalletWrapping
      */
     public JDFNameSpan appendPalletWrapping() throws JDFException
     {
         return (JDFNameSpan) appendElementN(ElementName.PALLETWRAPPING, 1, null);
     }
+
     /**
      * (24) const get element WrappedQuantity
      * @return JDFIntegerSpan the element
@@ -617,8 +547,6 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
     {
         return (JDFIntegerSpan) getElement(ElementName.WRAPPEDQUANTITY, null, 0);
     }
-
-
 
     /** (25) getCreateWrappedQuantity
      * 
@@ -629,17 +557,14 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
         return (JDFIntegerSpan) getCreateElement_KElement(ElementName.WRAPPEDQUANTITY, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementWrappedQuantity
+     * (29) append element WrappedQuantity
      */
     public JDFIntegerSpan appendWrappedQuantity() throws JDFException
     {
         return (JDFIntegerSpan) appendElementN(ElementName.WRAPPEDQUANTITY, 1, null);
     }
+
     /**
      * (24) const get element WrappingMaterial
      * @return JDFNameSpan the element
@@ -648,8 +573,6 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
     {
         return (JDFNameSpan) getElement(ElementName.WRAPPINGMATERIAL, null, 0);
     }
-
-
 
     /** (25) getCreateWrappingMaterial
      * 
@@ -660,15 +583,12 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
         return (JDFNameSpan) getCreateElement_KElement(ElementName.WRAPPINGMATERIAL, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementWrappingMaterial
+     * (29) append element WrappingMaterial
      */
     public JDFNameSpan appendWrappingMaterial() throws JDFException
     {
         return (JDFNameSpan) appendElementN(ElementName.WRAPPINGMATERIAL, 1, null);
     }
+
 }// end namespace JDF

@@ -255,8 +255,6 @@ public abstract class JDFAutoRenderingParams extends JDFResource
             setAttribute(AttributeName.BANDHEIGHT, value, null);
         }
 
-
-
         /**
           * (15) get int attribute BandHeight
           * @return int the value of the attribute
@@ -265,8 +263,6 @@ public abstract class JDFAutoRenderingParams extends JDFResource
         {
             return getIntAttribute(AttributeName.BANDHEIGHT, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -281,8 +277,6 @@ public abstract class JDFAutoRenderingParams extends JDFResource
             setAttribute(AttributeName.BANDORDERING, enumVar.getName(), null);
         }
 
-
-
         /**
           * (9) get attribute BandOrdering
           * @return the value of the attribute
@@ -291,8 +285,6 @@ public abstract class JDFAutoRenderingParams extends JDFResource
         {
             return EnumBandOrdering.getEnum(getAttribute(AttributeName.BANDORDERING, null, null));
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -307,8 +299,6 @@ public abstract class JDFAutoRenderingParams extends JDFResource
             setAttribute(AttributeName.BANDWIDTH, value, null);
         }
 
-
-
         /**
           * (15) get int attribute BandWidth
           * @return int the value of the attribute
@@ -317,8 +307,6 @@ public abstract class JDFAutoRenderingParams extends JDFResource
         {
             return getIntAttribute(AttributeName.BANDWIDTH, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -333,8 +321,6 @@ public abstract class JDFAutoRenderingParams extends JDFResource
             setAttribute(AttributeName.COLORANTDEPTH, value, null);
         }
 
-
-
         /**
           * (15) get int attribute ColorantDepth
           * @return int the value of the attribute
@@ -343,8 +329,6 @@ public abstract class JDFAutoRenderingParams extends JDFResource
         {
             return getIntAttribute(AttributeName.COLORANTDEPTH, null, 0);
         }
-
-
 
         
         /* ---------------------------------------------------------------------
@@ -359,8 +343,6 @@ public abstract class JDFAutoRenderingParams extends JDFResource
             setAttribute(AttributeName.INTERLEAVED, value, null);
         }
 
-
-
         /**
           * (18) get boolean attribute Interleaved
           * @return boolean the value of the attribute
@@ -369,8 +351,6 @@ public abstract class JDFAutoRenderingParams extends JDFResource
         {
             return getBoolAttribute(AttributeName.INTERLEAVED, null, false);
         }
-
-
 
 /* ***********************************************************************
  * Element getter / setter
@@ -386,8 +366,6 @@ public abstract class JDFAutoRenderingParams extends JDFResource
         return (JDFAutomatedOverPrintParams) getElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, 0);
     }
 
-
-
     /** (25) getCreateAutomatedOverPrintParams
      * 
      * @return JDFAutomatedOverPrintParams the element
@@ -397,17 +375,14 @@ public abstract class JDFAutoRenderingParams extends JDFResource
         return (JDFAutomatedOverPrintParams) getCreateElement_KElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementAutomatedOverPrintParams
+     * (29) append element AutomatedOverPrintParams
      */
     public JDFAutomatedOverPrintParams appendAutomatedOverPrintParams() throws JDFException
     {
         return (JDFAutomatedOverPrintParams) appendElementN(ElementName.AUTOMATEDOVERPRINTPARAMS, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -416,6 +391,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /** (26) getCreateObjectResolution
      * 
      * @param iSkip number of elements to skip
@@ -425,8 +401,6 @@ public abstract class JDFAutoRenderingParams extends JDFResource
     {
         return (JDFObjectResolution)getCreateElement_KElement(ElementName.OBJECTRESOLUTION, null, iSkip);
     }
-
-
 
     /**
      * (27) const get element ObjectResolution
@@ -438,9 +412,10 @@ public abstract class JDFAutoRenderingParams extends JDFResource
         return (JDFObjectResolution) getElement(ElementName.OBJECTRESOLUTION, null, iSkip);
     }
 
-
-
-    public JDFObjectResolution appendObjectResolution()
+    /**
+     * (30) append element ObjectResolution
+     */
+    public JDFObjectResolution appendObjectResolution() throws JDFException
     {
         return (JDFObjectResolution) appendElement(ElementName.OBJECTRESOLUTION, null);
     }
@@ -453,6 +428,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
     /**
      * (24) const get element Media
      * @return JDFMedia the element
@@ -461,8 +437,6 @@ public abstract class JDFAutoRenderingParams extends JDFResource
     {
         return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
     }
-
-
 
     /** (25) getCreateMedia
      * 
@@ -473,17 +447,14 @@ public abstract class JDFAutoRenderingParams extends JDFResource
         return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
     }
 
-
-
-
-
     /**
-     * (29) append elementMedia
+     * (29) append element Media
      */
     public JDFMedia appendMedia() throws JDFException
     {
         return (JDFMedia) appendElementN(ElementName.MEDIA, 1, null);
     }
+
     /**
       * (31) create inter-resource link to refTarget
       * @param refTarget the element that is referenced
@@ -492,4 +463,5 @@ public abstract class JDFAutoRenderingParams extends JDFResource
     {
         refElement(refTarget);
     }
+
 }// end namespace JDF
