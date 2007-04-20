@@ -82,6 +82,7 @@ import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 
@@ -99,7 +100,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
         assertEquals(m1.get("a2"), "v2");
         assertEquals(m2.get("a2"), "v3");
     }
-    
+
     public void testCloneNull()
     {
         JDFAttributeMap m1=new JDFAttributeMap(null);
@@ -111,7 +112,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
         assertEquals(m1.get("a2"), "v2");
         assertEquals(m2.get("a2"), "v3");
     }
-    
+
     public void testEquals()
     {
         JDFAttributeMap m1=new JDFAttributeMap("a1","v1");
@@ -120,9 +121,13 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
         assertNotSame(m1,m2);
         m2.put("a2","v2");
         assertEquals(m1,m2);
+        m1.put("a2",null);
+        assertNotSame(m1,m2);
+        m2.put("a2",null);
+        assertEquals(m1,m2);
         assertNotSame(m1,null);
     }
-    
+
     //////////////////////////////////////////////////////////////////////
 
     public void testPut()
@@ -147,7 +152,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
     }
 
     //////////////////////////////////////////////////////////////////////
- 
+
     public void testSubMap()
     {
         JDFAttributeMap m1=new JDFAttributeMap("a1","v1");
@@ -165,9 +170,9 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
         assertFalse(m1.subMap(m2));
         assertTrue(m1.subMap(null));
     }
-    
+
     ///////////////////////////////////////////////////////////////////
-    
+
     public void testOverlapMap()
     {
         JDFAttributeMap m1=new JDFAttributeMap("a1","v1");
@@ -183,17 +188,26 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
         assertTrue(m1.overlapMap(m2));
         m2.put("a3","v3");
         assertTrue(m1.overlapMap(m2));
+        m2.put("a4",null);
+        assertTrue(m1.overlapMap(m2));
+        m2.put("a4",null);
+        assertTrue(m1.overlapMap(m2));
+        m1.put("a4",null);
+        assertTrue(m1.overlapMap(m2));
         assertTrue(m1.overlapMap(null));
     }
-    
+
     ///////////////////////////////////////////////////////////////
-    
+
+    /**
+     * @deprecated
+     */
     public void testReduceMap()
     {
         JDFAttributeMap m1=new JDFAttributeMap("a1","v1");
         m1.put("a2","v2");
         JDFAttributeMap m2=new JDFAttributeMap("a1","v1");
-        Vector keys=new Vector();
+        VString keys=new VString();
         keys.add("a1");
         m1.reduceMap(keys);
         assertEquals(m1,m2);
@@ -210,7 +224,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
         assertEquals(m1,m2);
     }
     ///////////////////////////////////////////////////////////////
-    
+
     public void testRemoveKeys()
     {
         JDFAttributeMap m1=new JDFAttributeMap("a1","v1");
@@ -220,9 +234,13 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
         keys.add("a2");
         m1.removeKeys(keys);
         assertEquals(m1,m2);
+        m1.put("a2",null);
+        assertNotSame(m1,m2);
+        m1.removeKeys(keys);
+        assertEquals(m1,m2);
     }
     ///////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////
-    
+
 }

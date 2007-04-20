@@ -85,6 +85,7 @@ import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
+import org.cip4.jdflib.auto.JDFAutoValue.EnumValueUsage;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -98,7 +99,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.resource.JDFValue;
-import org.cip4.jdflib.resource.JDFValue.EnumValueUsage;
+import org.cip4.jdflib.util.StringUtil;
 
 public class JDFMatrixState extends JDFAbstractState
 {
@@ -339,8 +340,7 @@ public class JDFMatrixState extends JDFAbstractState
 
     public JDFValue getValue(int iSkip)
     {
-        JDFValue e = (JDFValue)getElement(ElementName.VALUE, JDFConstants.EMPTYSTRING, iSkip);
-        return e;
+        return (JDFValue)getElement(ElementName.VALUE, JDFConstants.EMPTYSTRING, iSkip);
     }
 
 
@@ -426,6 +426,55 @@ public class JDFMatrixState extends JDFAbstractState
         return EnumFitsValue.getEnum(e.getValueUsage().getName());
     }
 
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java.lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
+     */
+    public void addValue(String value, EnumFitsValue testlists)
+    {
+        if(fitsValue(value, testlists))
+            return;
+
+        try
+        {
+           new JDFMatrix(value);
+        }
+        catch (DataFormatException x)
+        {
+            return; // nop for bad values
+        }
+       if(testlists==null || EnumFitsValue.Allowed.equals(testlists))
+        {
+            JDFValue v=appendValue();
+            v.setAllowedValue(value);
+            if(testlists!=null)
+                v.setValueUsage(EnumValueUsage.Allowed);
+        }
+        if(EnumFitsValue.Present.equals(testlists))
+        {
+            JDFValue v=appendValue();
+            v.setAllowedValue(value);
+            if(testlists!=null)
+                v.setValueUsage(EnumValueUsage.Present);
+        }
+    }
+
+    public void appendValue(JDFMatrix value, EnumFitsValue testlists)
+    {
+        if(testlists==null || EnumFitsValue.Allowed.equals(testlists))
+        {
+            JDFValue v=appendValue();
+            v.setAllowedValue(value.toString());
+            if(testlists!=null)
+                v.setValueUsage(EnumValueUsage.Allowed);
+        }
+        if(EnumFitsValue.Present.equals(testlists))
+        {
+            JDFValue v=appendValue();
+            v.setAllowedValue(value.toString());
+            if(testlists!=null)
+                v.setValueUsage(EnumValueUsage.Present);
+        }
+    }   
     
     /* ******************************************************
     // FitsValue Methods
@@ -449,24 +498,23 @@ public class JDFMatrixState extends JDFAbstractState
         if (siz%6!=0) {
             return false;
         }
-        VString matrixList = new VString();
-        int i=0;
-        StringBuffer sb = new StringBuffer(250);
-        sb.append((String) vs.elementAt(i));
-        while ((i+1)<siz)
+        Vector matrixList = new Vector();
+
+        for(int i=0;i<siz;i+=6)
         {
-            do  {
-                sb.append(JDFConstants.BLANK);
-                i++;
-                sb.append((String) vs.elementAt(i));
+            VString v=new VString();
+            v.ensureCapacity(6);
+            for(int j=0;j<6;j++)
+                v.add(vs.stringAt(i+j));
+            
+            try
+            {
+                JDFMatrix m=new JDFMatrix(StringUtil.setvString(vs, " ", null, null));
+                matrixList.add(m);
             }
-            while ((i+1)%6!=0);
-            matrixList.add(sb.toString());
-            if ((i+1)<siz)
-            { 
-                i++;
-                sb = new StringBuffer(250);
-                sb.append((String) vs.elementAt(i));
+            catch (DataFormatException x)
+            {
+                return false;
             }
         }
 
@@ -474,19 +522,11 @@ public class JDFMatrixState extends JDFAbstractState
         {
             for (int k=0; k<matrixList.size(); k++) 
             {
-                String str = (String) matrixList.elementAt(k);
-                JDFMatrix matrix;
-                try {
-                    matrix = new JDFMatrix(str);
-                }
-                catch (DataFormatException dfe)
-                {
-                    return false;
-                }
-                if (( fitsRotateMod(matrix,testlists)   && 
-                      fitsShift(matrix,testlists)       &&
-                      fitsTransforms(matrix,testlists)  &&
-                      fitsValueElem (matrix,testlists)) == false)
+                JDFMatrix matrix = (JDFMatrix) matrixList.elementAt(k);
+                if (  !fitsRotateMod(matrix,testlists)   ||
+                      !fitsShift(matrix,testlists)       ||
+                      !fitsTransforms(matrix,testlists)  ||
+                      !fitsValueElem (matrix,testlists))
                       return false;
             }
             return true;    
@@ -502,26 +542,11 @@ public class JDFMatrixState extends JDFAbstractState
      * 
      * @return boolean - true, if 'value' matches specified ListType
      */
-    private final boolean fitsListType(VString matrixList)
+    private final boolean fitsListType(Vector matrixList)
     {
         EnumListType listType=getListType();
 
         int size = matrixList.size();
-        for (int i=0; i<size; i++)
-        {
-            try
-            {
-                new JDFMatrix((String) matrixList.elementAt(i));
-            }
-            catch (JDFException e)
-            {
-                return false;
-            }
-            catch (DataFormatException dfe)
-            {
-                return false;
-            }
-        }
         
         if (listType.equals(EnumListType.SingleValue) || listType.equals(EnumListType.getEnum(0))) 
         {// default ListType = SingleValue
@@ -535,15 +560,12 @@ public class JDFMatrixState extends JDFAbstractState
         {
             for (int i=0; i<size; i++)
             {
-                for (int j=0; j<size; j++)
+                for (int j=i+1; j<size; j++)
                 {
-                    if ( j!=i ) 
-                    {
-                        String mi =(String)matrixList.elementAt(i);
-                        String mj =(String)matrixList.elementAt(j);
-                        if (mi.compareTo(mj)==0) 
-                            return false;
-                    }
+                    JDFMatrix mi =(JDFMatrix)matrixList.elementAt(i);
+                    JDFMatrix mj =(JDFMatrix)matrixList.elementAt(j);
+                    if (mi.equals(mj)) 
+                        return false;
                 }
             }
             return true;
@@ -605,7 +627,7 @@ public class JDFMatrixState extends JDFAbstractState
      */
     private final boolean fitsRotateMod(JDFMatrix matrix, EnumFitsValue rotatemod)
     {
-        if (rotatemod.equals(EnumFitsValue.Allowed)) 
+        if (rotatemod==null || rotatemod.equals(EnumFitsValue.Allowed)) 
         {
             if(!hasAttribute(AttributeName.ALLOWEDROTATEMOD))
                 return true;
@@ -618,7 +640,7 @@ public class JDFMatrixState extends JDFAbstractState
         }
         
         double rm;
-        if (rotatemod.equals(EnumFitsValue.Allowed)) 
+        if (rotatemod==null ||rotatemod.equals(EnumFitsValue.Allowed)) 
         {
             rm = getAllowedRotateMod();
         } 
@@ -669,7 +691,7 @@ public class JDFMatrixState extends JDFAbstractState
     private final boolean fitsShift(JDFMatrix matrix, EnumFitsValue shift)
     {
         
-        if (shift.equals(EnumFitsValue.Allowed)) 
+        if (shift==null || shift.equals(EnumFitsValue.Allowed)) 
         {
             if(!hasAttribute(AttributeName.ALLOWEDSHIFT))
                 return true;
@@ -682,7 +704,7 @@ public class JDFMatrixState extends JDFAbstractState
         }
 
         JDFRectangle shiftValue;
-        if (shift.equals(EnumFitsValue.Allowed)) 
+        if (shift==null || shift.equals(EnumFitsValue.Allowed)) 
         {
             shiftValue = new JDFRectangle(getAllowedShift());
         } 
@@ -714,7 +736,7 @@ public class JDFMatrixState extends JDFAbstractState
      */
     private final boolean fitsTransforms(JDFMatrix matrix, EnumFitsValue transforms)
     {
-        if (transforms.equals(EnumFitsValue.Allowed)) 
+        if (transforms==null || transforms.equals(EnumFitsValue.Allowed)) 
         {
             if(!hasAttribute(AttributeName.ALLOWEDTRANSFORMS))
                 return true;
@@ -745,7 +767,7 @@ public class JDFMatrixState extends JDFAbstractState
         d=d/java.lang.Math.sqrt(java.lang.Math.abs(det));
         
         Vector vTransf;
-        if (transforms.equals(EnumFitsValue.Allowed)) 
+        if (transforms==null || transforms.equals(EnumFitsValue.Allowed)) 
         {
             vTransf = getAllowedTransforms();
         } 

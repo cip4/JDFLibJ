@@ -226,8 +226,8 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
             {
                 JDFFileSpec fs=rlSheet.appendLayoutElement().appendFileSpec();
                 fs.setMimeType("application/pdf");
-                fs.setFileFormat(format+"%s.pdf");
-                fs.setFileTemplate("SheetNum,Surface");
+                fs.setFileFormat(format+"%s_%s.pdf");
+                fs.setFileTemplate("SheetNum,Surface,Separation");
             }
     
             doc.write2File(sm_dirTestDataTemp+"AutomatedLayout_Plateset"+loop+".jdf", 2, false);

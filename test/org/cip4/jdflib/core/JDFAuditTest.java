@@ -144,10 +144,10 @@ public class JDFAuditTest extends JDFTestCaseBase
         assertNotNull(ap);
         JDFNode n2=n.addJDFNode(EnumType.CaseMaking);
         JDFCreated c1=ap.addCreated("foo", n2);
-        assertEquals(n2.buildXPath(ap.getParentJDF().buildXPath(null,true),true), c1.getXPath());
+        assertEquals(n2.buildXPath(ap.getParentJDF().buildXPath(null,1),1), c1.getXPath());
         JDFResource r=n2.addResource("CaseMakingParams", null, EnumUsage.Input, null, null, null, null);
         JDFCreated c2=ap.addCreated("foo", r);
-        assertEquals(r.buildXPath(ap.getParentJDF().buildXPath(null,true),true), c2.getXPath());
+        assertEquals(r.buildXPath(ap.getParentJDF().buildXPath(null,1),1), c2.getXPath());
         
         d.write2File(sm_dirTestDataTemp+"createdTest.jdf", 0, false);
         
@@ -164,7 +164,6 @@ public class JDFAuditTest extends JDFTestCaseBase
         JDFCreated crea=(JDFCreated) ap.getAudit(0, EnumAuditType.Created, null,null);
         assertEquals(crea.getAgentName(),JDFAudit.getStaticAgentName());
 
-        boolean b=JDFResource.getAutoAgent();
         JDFResource.setAutoAgent(true);
         JDFResource r=n.appendMatchingResource(ElementName.CONVENTIONALPRINTINGPARAMS, null, null);
         assertEquals(r.getAgentName(), JDFAudit.getStaticAgentName());

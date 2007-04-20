@@ -86,7 +86,9 @@ import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
+import org.cip4.jdflib.datatypes.JDFNumberRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.resource.devicecapability.JDFIntegerState;
 
 
@@ -94,6 +96,19 @@ public class JDFIntegerStateTest extends JDFTestCaseBase
 {
 
     JDFIntegerState iState=null;
+    public final void testAddValue() throws Exception
+    {
+       final JDFIntegerRangeList integerList = new JDFIntegerRangeList("1 2 3 4 ~ 44");
+       iState.setAllowedValueList(integerList);
+       iState.addValue("24", EnumFitsValue.Allowed);
+       assertEquals(iState.getAllowedValueList(), integerList);
+       iState.addValue("45", EnumFitsValue.Allowed);
+       assertEquals(iState.getAllowedValueList(), new JDFIntegerRangeList("1 ~ 45"));
+       iState.addValue("48", EnumFitsValue.Allowed);
+       assertEquals(iState.getAllowedValueList(), new JDFIntegerRangeList("1 ~ 45 48"));
+       iState.addValue("49", EnumFitsValue.Present);
+       assertEquals(iState.getPresentValueList(), new JDFIntegerRangeList("49"));
+     }
 
     public void setUp() throws Exception
     {

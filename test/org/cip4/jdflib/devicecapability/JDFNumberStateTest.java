@@ -87,6 +87,7 @@ import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.datatypes.JDFNumberRange;
 import org.cip4.jdflib.datatypes.JDFNumberRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.resource.devicecapability.JDFNumberState;
 
 
@@ -163,6 +164,18 @@ public class JDFNumberStateTest extends JDFTestCaseBase
 
     }
     ////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////
+    public final void testAddValue() throws Exception
+    {
+       final JDFNumberRangeList integerList = new JDFNumberRangeList("1 2 3 4 ~ 44");
+       iState.setAllowedValueList(integerList);
+       iState.addValue("24", EnumFitsValue.Allowed);
+       assertEquals(iState.getAllowedValueList(), integerList);
+       iState.addValue("45", EnumFitsValue.Allowed);
+       assertEquals(iState.getAllowedValueList(), new JDFNumberRangeList("1 2 3 4 ~ 44 45"));
+       iState.addValue("48", EnumFitsValue.Present);
+       assertEquals(iState.getPresentValueList(), new JDFNumberRangeList("48"));
+     }
     ////////////////////////////////////////////////////////////
     public final void testSetAllowedValueList() throws Exception
     {

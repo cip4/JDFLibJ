@@ -393,7 +393,44 @@ public class JDFXYPairState extends JDFAbstractState
     /* ******************************************************
     // Element getter / setter
     **************************************************************** */
+    /* ******************************************************
+    // Element getter / setter
+    **************************************************************** */
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java.lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
+     */
+    public void addValue(String value, EnumFitsValue testlists)
+    {
+        if(fitsValue(value, testlists))
+            return;
 
+        JDFXYPair rect;
+        try
+        {
+            rect = new JDFXYPair(value);
+        }
+        catch (DataFormatException x)
+        {
+            return; // nop for bad values
+        }
+        if(testlists==null || EnumFitsValue.Allowed.equals(testlists))
+        {
+            JDFXYPairRangeList list=getAllowedValueList();
+            if(list==null)
+                list=new JDFXYPairRangeList();
+            list.append (rect);
+            setAllowedValueList(list);
+        }
+        if(testlists==null || EnumFitsValue.Present.equals(testlists))
+        {
+            JDFXYPairRangeList list=getPresentValueList();
+            if(list==null || !hasAttribute(AttributeName.PRESENTVALUELIST))
+                list=new JDFXYPairRangeList();
+            list.append (rect);
+            setPresentValueList(list);
+        }
+    }
+    
     /**
     * fitsValue - checks whether <code>value</code> matches the Allowed/Present test lists
     * specified for this State.

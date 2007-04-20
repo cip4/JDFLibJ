@@ -1055,6 +1055,31 @@ public class JDFResourceTest extends JDFTestCaseBase
     }
 
     ////////////////////////////////////////////////////////////////////////////
+    public void testGetLocalPartitionKey()
+    {              
+        JDFDoc doc=creatXMDoc();
+        JDFNode n=doc.getJDFRoot();
+        JDFExposedMedia xm=(JDFExposedMedia)n.getMatchingResource("ExposedMedia",JDFNode.EnumProcessUsage.AnyInput,null,0);
+        JDFExposedMedia xmLeaf=(JDFExposedMedia)xm.getLeaves(false).elementAt(1);
+        assertEquals(xmLeaf.getLocalPartitionKey(), "Side");
+        xmLeaf=(JDFExposedMedia)xmLeaf.getParentNode_KElement();
+        assertEquals(xmLeaf.getLocalPartitionKey(), "SheetName");
+        xmLeaf=(JDFExposedMedia)xmLeaf.getParentNode_KElement();
+        assertEquals(xmLeaf.getLocalPartitionKey(), "SignatureName");
+        xmLeaf=(JDFExposedMedia)xmLeaf.getParentNode_KElement();
+        assertNull(xmLeaf.getLocalPartitionKey());
+     }   
+    
+    ////////////////////////////////////////////////////////////////////////////
+    public void testBuildXPath()
+    {              
+        JDFDoc doc=creatXMDoc();
+        JDFNode n=doc.getJDFRoot();
+        JDFExposedMedia xm=(JDFExposedMedia)n.getMatchingResource("ExposedMedia",JDFNode.EnumProcessUsage.AnyInput,null,0);
+        JDFExposedMedia xmLeaf=(JDFExposedMedia)xm.getLeaves(false).elementAt(1);
+        assertEquals(xmLeaf.buildXPath(null,2), "/JDF/ResourcePool[1]/ExposedMedia[1]/ExposedMedia[@SignatureName=\"Sig1\"]/ExposedMedia[@SheetName=\"S1\"]/ExposedMedia[@Side=\"Back\"]");
+     }   
+      ////////////////////////////////////////////////////////////////////////////
     public void testInvalidPartIDKeysLeaves()
     {              
         JDFDoc doc=creatXMDoc();

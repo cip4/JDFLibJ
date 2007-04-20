@@ -1,73 +1,73 @@
 /*
-*
-* The CIP4 Software License, Version 1.0
-*
-*
-* Copyright (c) 2001-2006 The International Cooperation for the Integration of 
-* Processes in  Prepress, Press and Postpress (CIP4).  All rights 
-* reserved.
-*
-* Redistribution and use in source and binary forms, with or without
-* modification, are permitted provided that the following conditions
-* are met:
-*
-* 1. Redistributions of source code must retain the above copyright
-*    notice, this list of conditions and the following disclaimer. 
-*
-* 2. Redistributions in binary form must reproduce the above copyright
-*    notice, this list of conditions and the following disclaimer in
-*    the documentation and/or other materials provided with the
-*    distribution.
-*
-* 3. The end-user documentation included with the redistribution,
-*    if any, must include the following acknowledgment:  
-*       "This product includes software developed by the
-*        The International Cooperation for the Integration of 
-*        Processes in  Prepress, Press and Postpress (www.cip4.org)"
-*    Alternately, this acknowledgment may appear in the software itself,
-*    if and wherever such third-party acknowledgments normally appear.
-*
-* 4. The names "CIP4" and "The International Cooperation for the Integration of 
-*    Processes in  Prepress, Press and Postpress" must
-*    not be used to endorse or promote products derived from this
-*    software without prior written permission. For written 
-*    permission, please contact info@cip4.org.
-*
-* 5. Products derived from this software may not be called "CIP4",
-*    nor may "CIP4" appear in their name, without prior written
-*    permission of the CIP4 organization
-*
-* Usage of this software in commercial products is subject to restrictions. For
-* details please consult info@cip4.org.
-*
-* THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-* OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-* DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
-* THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
-* ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-* SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-* LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
-* USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-* ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-* OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
-* OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-* SUCH DAMAGE.
-* ====================================================================
-*
-* This software consists of voluntary contributions made by many
-* individuals on behalf of the The International Cooperation for the Integration 
-* of Processes in Prepress, Press and Postpress and was
-* originally based on software 
-* copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
-* copyright (c) 1999-2001, Agfa-Gevaert N.V. 
-*  
-* For more information on The International Cooperation for the 
-* Integration of Processes in  Prepress, Press and Postpress , please see
-* <http://www.cip4.org/>.
-*  
-* 
-*/
+ *
+ * The CIP4 Software License, Version 1.0
+ *
+ *
+ * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer. 
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
+ *
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:  
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of 
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
+ *
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written 
+ *    permission, please contact info@cip4.org.
+ *
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
+ *
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
+ *
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration 
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software 
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
+ *  
+ * For more information on The International Cooperation for the 
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
+ *  
+ * 
+ */
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
@@ -96,6 +96,7 @@ import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.datatypes.JDFNumberRange;
 import org.cip4.jdflib.datatypes.JDFNumberRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.util.StringUtil;
 
 public class JDFNumberState extends JDFAbstractState
 {
@@ -121,7 +122,7 @@ public class JDFNumberState extends JDFAbstractState
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
-    
+
 
     private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
     static
@@ -151,9 +152,9 @@ public class JDFNumberState extends JDFAbstractState
      * @param qualifiedName
      */
     public JDFNumberState(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
+            CoreDocumentImpl myOwnerDocument,
+            String myNamespaceURI,
+            String qualifiedName)
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
@@ -166,10 +167,10 @@ public class JDFNumberState extends JDFAbstractState
      * @param myLocalName
      */
     public JDFNumberState(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
+            CoreDocumentImpl myOwnerDocument,
+            String myNamespaceURI,
+            String qualifiedName,
+            String myLocalName)
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
@@ -184,10 +185,10 @@ public class JDFNumberState extends JDFAbstractState
     {
         return "JDFNumberState[ --> " + super.toString() + " ]";
     }
-    
+
     /* ******************************************************
     // Attribute getter/ setter
-    **************************************************************** */
+     **************************************************************** */
 
     public void setDefaultValue(double value)
     {
@@ -197,7 +198,7 @@ public class JDFNumberState extends JDFAbstractState
     {
         setAttribute(AttributeName.DEFAULTVALUE, value, null);
     }
-    
+
     public void setCurrentValue(JDFNumberList value)
     {
         setAttribute(AttributeName.CURRENTVALUE, value, null);
@@ -217,7 +218,7 @@ public class JDFNumberState extends JDFAbstractState
     {
         return getNumberList(AttributeName.CURRENTVALUE);
     }
-        
+
     public void setAllowedValueList(JDFNumberRangeList value)
     {
         setAttribute(AttributeName.ALLOWEDVALUELIST, value.toString(), null);
@@ -262,7 +263,7 @@ public class JDFNumberState extends JDFAbstractState
         if (hasAttribute(AttributeName.PRESENTVALUEMAX))
         {
             return getRealAttribute(AttributeName.PRESENTVALUEMAX,
-                null, 0.0);
+                    null, 0.0);
         }
         return getAllowedValueMax();
     }
@@ -270,17 +271,17 @@ public class JDFNumberState extends JDFAbstractState
     public void setAllowedValueMin(double value)
     {
         setAttribute(
-            AttributeName.ALLOWEDVALUEMIN,
-            value,
-            null);
+                AttributeName.ALLOWEDVALUEMIN,
+                value,
+                null);
     }
 
     public double getAllowedValueMin()
     {
         return getRealAttribute(
-            AttributeName.ALLOWEDVALUEMIN,
-            null,
-            0.0);
+                AttributeName.ALLOWEDVALUEMIN,
+                null,
+                0.0);
     }
 
     public void setPresentValueMin(double value)
@@ -293,9 +294,9 @@ public class JDFNumberState extends JDFAbstractState
         if (hasAttribute(AttributeName.PRESENTVALUEMIN))
         {
             return getRealAttribute(
-                AttributeName.PRESENTVALUEMIN,
-                null,
-                0.0);
+                    AttributeName.PRESENTVALUEMIN,
+                    null,
+                    0.0);
         }
         return getAllowedValueMin();
     }
@@ -303,9 +304,9 @@ public class JDFNumberState extends JDFAbstractState
     public void setAllowedValueMod(JDFXYPair value)
     {
         setAttribute(
-            AttributeName.ALLOWEDVALUEMOD,
-            value.toString(),
-            null);
+                AttributeName.ALLOWEDVALUEMOD,
+                value.toString(),
+                null);
     }
 
     public JDFXYPair getAllowedValueMod()
@@ -341,9 +342,9 @@ public class JDFNumberState extends JDFAbstractState
         {
             throw new JDFException("JDFNumberState.setAllowedValueMod: The XYPair value is invalid!");      
         }
-        
+
     }
-    
+
     public String getUnitType()
     {
         return getAttribute(AttributeName.UNITTYPE);
@@ -356,8 +357,36 @@ public class JDFNumberState extends JDFAbstractState
 
     /* ******************************************************
     // Element getter / setter
-    **************************************************************** */
+     **************************************************************** */
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java.lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
+     */
+    public void addValue(String value, EnumFitsValue testlists)
+    {
+        if(fitsValue(value, testlists))
+            return;
 
+        if(!StringUtil.isNumber(value))
+            return;
+        double d=StringUtil.parseDouble(value, 0);
+
+        if(testlists==null || EnumFitsValue.Allowed.equals(testlists))
+        {
+            JDFNumberRangeList list=getAllowedValueList();
+            if(list==null)
+                list=new JDFNumberRangeList();
+            list.append (d);
+            setAllowedValueList(list);
+        }
+        if(testlists==null || EnumFitsValue.Present.equals(testlists))
+        {
+            JDFNumberRangeList list=getPresentValueList();
+            if(list==null || !hasAttribute(AttributeName.PRESENTVALUELIST))
+                list=new JDFNumberRangeList();
+            list.append (d);
+            setPresentValueList(list);
+        }
+    }
     /**
      * fitsValue - checks whether <code>value</code> matches the Allowed/Present test lists
      * specified for this State
@@ -388,7 +417,7 @@ public class JDFNumberState extends JDFAbstractState
         }
         return false; // the value doesn't fit ListType attribute of this State
     }
-    
+
     /**
      * fitsValueList - checks whether <code>rangelist</code> matches 
      * the AllowedValueList/PresentValueList specified for this State
@@ -412,7 +441,7 @@ public class JDFNumberState extends JDFAbstractState
         }
         if (list == null)
             return true;
-        
+
         EnumListType listType=getListType();
         if (listType.equals(EnumListType.CompleteList))
         {
@@ -460,7 +489,7 @@ public class JDFNumberState extends JDFAbstractState
             if(!hasAttribute(AttributeName.ALLOWEDVALUEMOD)&&!hasAttribute(AttributeName.PRESENTVALUEMOD))
                 return true;
         }
-        
+
         JDFXYPair mod;
         if (valuemod.equals(EnumFitsValue.Allowed)) 
         {
@@ -480,21 +509,21 @@ public class JDFNumberState extends JDFAbstractState
             double right = range.getRight();
             if (left!=right) // if we have a range return false, check only single value
                 return false;
-           
+
             double elem=left; // single value 
             double divi = mod.getX(); // X - the Modulo
             double shift = mod.getY(); // Y - offset of the allowed/present value
 
             if (divi==0) 
                 return false;
-            
+
             // if ValueMod is not "0 x"
             double n = ((elem-divi*(int)(elem/divi))-shift); // n = elem % divi - shift
             if ( java.lang.Math.abs(n) < EPSILON * java.lang.Math.abs(divi) ) 
             {
                 return true;
             }
-                
+
             double m = (n-divi*(int)(n/divi)); // m = ( elem % divi - shift ) % divi
             if  ( java.lang.Math.abs(m) < EPSILON * java.lang.Math.abs(divi) ) 
             {
@@ -519,13 +548,13 @@ public class JDFNumberState extends JDFAbstractState
     {
         int v_size=value.size();
         int l_size=list.size();
-        
+
         if (v_size!=l_size) 
             return false; 
-        
+
         if (!value.isUnique()) 
             return false;
-     
+
         JDFNumberRangeList valueList = new JDFNumberRangeList(value);
 
         boolean bFound;
@@ -562,13 +591,13 @@ public class JDFNumberState extends JDFAbstractState
     {
         int v_size = value.size();
         int l_size = list.size();
-        
+
         if ( v_size != l_size ) 
             return false; 
-        
+
         if (!value.isUnique()) 
             return false;
-      
+
         for (int i=0; i<l_size; i++)
         {
             if (!list.at(i).equals(value.at(i))) 
@@ -592,7 +621,7 @@ public class JDFNumberState extends JDFAbstractState
     {
         int v_size = value.size();
         int l_size = list.size();
-        
+
         for (int i=0; i<v_size; i++)
         {
             for (int j=0; j<l_size; j++)
@@ -643,11 +672,11 @@ public class JDFNumberState extends JDFAbstractState
             throw new JDFException("JDFIntegerState.getIntegerRangeList, Unable to create JDFIntegerRangeList from Attribute value: "+listName);
         }
     }
-    
+
     public VString getInvalidAttributes(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
     {
         return getInvalidAttributesImpl(level, bIgnorePrivate, nMax);
     }
 
-    
+
 }

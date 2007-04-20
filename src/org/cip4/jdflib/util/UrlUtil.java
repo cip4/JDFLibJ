@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -381,6 +381,21 @@ public class UrlUtil
     }
     
     /**
+     * checks whether there is a remote chance that the file is useful for reading
+     * 
+     * @param f - File to check
+     * @return true if the file is ok
+     */
+    public static boolean isFileOK(File f)
+    {
+        if (f != null && !f.isDirectory() && f.canRead())
+        {
+            return true;
+        }
+        return false;
+    }
+    
+    /**
      * test whether a given url is a cid
      * @param url the url to test
      * @return
@@ -424,7 +439,42 @@ public class UrlUtil
             return false;
         return pathName.startsWith("\\\\");
     }
+    /**
+     * check whether a file is a mime file
+     * only check extensions
+     * TODO sniff file rather than check extensions
+     * @param file the FILE to check
+     * @return true if the file is a MIME file
+     */
+    
+    public static boolean isMIME(File file)
+    {
+        String packageName;
+        try
+        {
+            packageName = file.getCanonicalPath();
+        }
+        catch (IOException x)
+        {
+            return false;
+        }
+        final String lower = packageName.toLowerCase();
+        return isMIMEExtenstension(lower);
+    }
 
+    /**
+     * check whether a file is a mime file
+     * @param lower
+     * @return
+     */
+    public static boolean isMIMEExtenstension(String lower)
+    {
+        lower=extension(lower);
+        if(lower==null)
+            return false;
+        return lower.equalsIgnoreCase("mjm") || lower.equalsIgnoreCase("mjd") || lower.equalsIgnoreCase("mim");
+    }
+    
     /**
      * @param val
      * @return

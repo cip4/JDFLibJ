@@ -89,7 +89,7 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFDurationRangeList;
-import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.JDFDuration;
 
 public class JDFDurationEvaluation extends JDFEvaluation
 {
@@ -249,7 +249,7 @@ public class JDFDurationEvaluation extends JDFEvaluation
             
             try
             {
-                new JDFDate(value);
+                new JDFDuration(value);
             }
             catch (JDFException e)
             {

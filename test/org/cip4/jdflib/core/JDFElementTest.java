@@ -158,9 +158,8 @@ public class JDFElementTest extends TestCase
         JDFParser p=new JDFParser();
         JDFDoc dp=p.parseString("<Device xmlns=\"www.CIP4.org/JDFSchema_1_1\"/>");
         KElement ep=dp.getRoot();
-//        assertFalse(ep.hasAttribute("xmlns"));
         KElement e4=e.copyElement(ep,null);
-//        assertFalse(e4.hasAttribute("xmlns"));
+        assertEquals(e4.hasAttribute("xmlns"),ep.hasAttribute("xmlns"));
         assertEquals(e3.getNamespaceURI(), e.getNamespaceURI());
         assertFalse(d.toString().indexOf("xmlns=\"\"")>=0);
 
@@ -595,6 +594,8 @@ public class JDFElementTest extends TestCase
         assertTrue("follow refs in matchespath",cc.matchesPath("/JDF/ResourcePool/NodeInfo/Contact/ComChannel",true));
         assertTrue("follow refs in matchespath",cc.matchesPath("JDF/JDF/ResourcePool/NodeInfo/Contact/ComChannel",true));
         assertTrue("follow refs in matchespath",cc.matchesPath("/JDF/JDF/ResourcePool/NodeInfo/Contact/ComChannel",true));
+        assertTrue("follow refs in matchespath",cc.matchesPath("//JDF/ResourcePool/NodeInfo/Contact/ComChannel",true));
+        assertTrue("follow * in matchespath",cc.matchesPath("/JDF/*/ResourcePool/NodeInfo/Contact/ComChannel",true));
         assertFalse("follow refs in matchespath",cc.matchesPath("JDF/JDF/JDF/ResourcePool/NodeInfo/Contact/ComChannel",true));
         assertFalse("follow refs in matchespath",cc.matchesPath("JDF/JDF/JDF/ResourcePool/NodeInfo/Contact/ComChannel",true));
         assertFalse("follow refs in matchespath",c.matchesPath("ResourcePool/NodeInfo/Contact/ComChannel",true));

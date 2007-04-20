@@ -145,7 +145,7 @@ public class JDFDateTest extends TestCase
 
     }
     /**
-     * Method testdateTimeISO.
+     * Method testdateOnly
      */
     public void testdateOnly() throws Exception
     {

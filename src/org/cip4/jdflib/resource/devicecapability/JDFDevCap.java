@@ -1412,9 +1412,9 @@ public class JDFDevCap extends JDFAutoDevCap
                     KElement partTestResult = stateReport(leaf,testlists,level,ignoreExtensions,false,p);
                     if(partTestResult != null) 
                     {
-                        String path = leaf.buildXPath(null,true);
+                        String path = leaf.buildXPath(null,1);
                         p.setAttribute("XPath",path);
-                        String leafPath = path.substring(res.buildXPath(null,true).length());
+                        String leafPath = path.substring(res.buildXPath(null,1).length());
                         p.setAttribute("LeafXPath",res.getNodeName()+leafPath);
                     }
                     else
@@ -1491,7 +1491,7 @@ public class JDFDevCap extends JDFAutoDevCap
                     KElement subEl = vElem.item(j);
                     r = parentReport.appendElement("InvalidElement");
                     r.setAttribute("CapXPath", dc.getNamePath(true));
-                    r.setAttribute("XPath", subEl.buildXPath(null,true));
+                    r.setAttribute("XPath", subEl.buildXPath(null,1));
                     r.setAttribute("Name", dcName);
                     r.setAttribute("Message", "Element occurrence exceeds value of MaxOccurs");
                     r.setAttribute("MaxOccurs", maxOccurs, null); // MaxOccurs
@@ -1502,7 +1502,7 @@ public class JDFDevCap extends JDFAutoDevCap
             {
                 r = parentReport.appendElement("MissingElement");
                 r.setAttribute("CapXPath", dc.getNamePath(true));
-                r.setAttribute("XPath", e.buildXPath(null,true) + "/" + dcName);
+                r.setAttribute("XPath", e.buildXPath(null,1) + "/" + dcName);
                 r.setAttribute("Name", dcName);
                 r.setAttribute("Message", "Element occurrence is less than value of MinOccurs");
                 r.setAttribute("MinOccurs", minOccurs, null);
@@ -1532,7 +1532,7 @@ public class JDFDevCap extends JDFAutoDevCap
                 if(recursionResult != null) 
                 {
                     r.setAttribute("CapXPath", dc.getNamePath(true));
-                    r.setAttribute("XPath", subEl.buildXPath(null,true));
+                    r.setAttribute("XPath", subEl.buildXPath(null,1));
                     r.setAttribute("Name", dcName);
                 }
                 else
@@ -1604,19 +1604,19 @@ public class JDFDevCap extends JDFAutoDevCap
                         if (!am.containsKey(key) && !key.equals("CommentText")) // it is Span but not Attribute
                         {
                             r = iap.appendElement("InvalidSpan");
-                            r.setAttribute("XPath", e.buildXPath(null,true)+ "/"+ key);
+                            r.setAttribute("XPath", e.buildXPath(null,1)+ "/"+ key);
                             r.setAttribute("Message", "Span value doesn't fit this State description");
                         }
                         else if (key.equals("CommentText"))
                         {
                             r = iap.appendElement("InvalidComment");
-                            r.setAttribute("XPath", e.buildXPath(null,true)+ "/"+ key);
+                            r.setAttribute("XPath", e.buildXPath(null,1)+ "/"+ key);
                             r.setAttribute("Message", "Comment doesn't fit this State description");
                         }
                         else 
                         {
                             r = iap.appendElement("InvalidAttribute");
-                            r.setAttribute("XPath", e.buildXPath(null,true)+ "/@"+ key);
+                            r.setAttribute("XPath", e.buildXPath(null,1)+ "/@"+ key);
                             r.setAttribute("Message", "Attribute value doesn't fit this State description");
                         }
                         r.setAttribute("Name", key);
@@ -1666,7 +1666,7 @@ public class JDFDevCap extends JDFAutoDevCap
 
             KElement ms = map.appendElement("Missing"+typ);
             ms.setAttribute("Message", "Missing "+typ);
-            ms.setAttribute("XPath", e.buildXPath(null,true)+ "/@"+ nam);
+            ms.setAttribute("XPath", e.buildXPath(null,1)+ "/@"+ nam);
             String capNamePath=capMap.get(nam);
             if(capNamePath!=null)
             ms.setAttribute("CapXPath", capNamePath);
@@ -1687,13 +1687,13 @@ public class JDFDevCap extends JDFAutoDevCap
                     if(!am.containsKey(key) && !key.equals("CommentText")) 
                     {
                         us = msp.appendElement("UnknownSpan");
-                        us.setAttribute("XPath", e.buildXPath(null,true)+"/"+key);
+                        us.setAttribute("XPath", e.buildXPath(null,1)+"/"+key);
                         us.setAttribute("CapXPath", getNamePath(true)+"/"+key);
                     }
                     else 
                     {
                         us = msp.appendElement("UnknownAttribute");
-                        us.setAttribute("XPath", e.buildXPath(null,true)+ "/@"+ key);
+                        us.setAttribute("XPath", e.buildXPath(null,1)+ "/@"+ key);
                         us.setAttribute("CapXPath", getNamePath(true)+"/@"+key);
                     }
                     us.setAttribute("Name", key);
@@ -1836,7 +1836,7 @@ public class JDFDevCap extends JDFAutoDevCap
                 if (!bFound) 
                 {    
                     KElement us = root.appendElement("UnknownElement");
-                    us.setAttribute("XPath", e.buildXPath(null,true));
+                    us.setAttribute("XPath", e.buildXPath(null,1));
                     us.setAttribute("CapXPath", getNamePath(false)+ JDFConstants.SLASH + nam);
                     us.setAttribute("Name", nam);
                     us.setAttribute("Message", "Found no DevCap description for this element");
@@ -2212,7 +2212,8 @@ public class JDFDevCap extends JDFAutoDevCap
                     success=true;
                 }
             }
-            for(int ii=0;ii<subElms.size();ii++)
+            final int subSize= subElms==null ? 0 : subElms.size();
+            for(int ii=0;ii<subSize;ii++)
             {
                 success = subDevCap.setDefaultsFromCaps(subElms.item(ii)) || success;
             }            

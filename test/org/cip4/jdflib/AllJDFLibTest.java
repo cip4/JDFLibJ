@@ -78,7 +78,6 @@ import org.cip4.jdflib.core.AttrInfoTest;
 import org.cip4.jdflib.core.ElemInfoTest;
 import org.cip4.jdflib.core.FactoryTest;
 import org.cip4.jdflib.core.FixVersionTest;
-import org.cip4.jdflib.core.IterationTest;
 import org.cip4.jdflib.core.JDFAuditTest;
 import org.cip4.jdflib.core.JDFCustomerInfoTest;
 import org.cip4.jdflib.core.JDFDocTest;
@@ -117,11 +116,13 @@ import org.cip4.jdflib.devicecapability.JDFIntegerStateTest;
 import org.cip4.jdflib.devicecapability.JDFNameStateTest;
 import org.cip4.jdflib.devicecapability.JDFNumberStateTest;
 import org.cip4.jdflib.devicecapability.JDFStateBaseTest;
+import org.cip4.jdflib.devicecapability.JDFStringStateTest;
 import org.cip4.jdflib.devicecapability.JDFTestTest;
 import org.cip4.jdflib.examples.AmountTest;
 import org.cip4.jdflib.examples.AutomatedLayoutTest;
 import org.cip4.jdflib.examples.ContentCreationTest;
 import org.cip4.jdflib.examples.DigiPrintTest;
+import org.cip4.jdflib.examples.IterationTest;
 import org.cip4.jdflib.examples.JDFExampleDocTest;
 import org.cip4.jdflib.examples.MISFinTest;
 import org.cip4.jdflib.examples.NColorTest;
@@ -237,6 +238,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JDFNameStateTest.class);
         suite.addTestSuite(JDFNumberStateTest.class);
         suite.addTestSuite(JDFStateBaseTest.class);
+        suite.addTestSuite(JDFStringStateTest.class);
         suite.addTestSuite(JDFTestTest.class);
         
         //examples

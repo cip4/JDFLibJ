@@ -94,6 +94,7 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFLayout;
+import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRegisterMark;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.JDFSurface;
@@ -133,6 +134,17 @@ public class JDFLayoutTest extends JDFTestCaseBase
         lo.addPartition(EnumPartIDKey.SheetName,"Sheet1");
         assertTrue("lo 1.3",JDFLayout.isNewLayout(lo));  
         assertFalse("l no layout",JDFLayout.isNewLayout(rl));
+    }    
+    //////////////////////////////////////////////////////////////////////////
+
+    public void testMedia()
+    {
+        JDFLayout lo=(JDFLayout) n.appendMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null);
+        lo.appendMedia();
+        JDFMedia m2=lo.appendMedia();
+        assertNotNull("2. Media ok",m2);
+        assertEquals(m2, lo.getMedia(1));
+        assertEquals(m2, lo.getCreateMedia(1));
     }    
 
     /**

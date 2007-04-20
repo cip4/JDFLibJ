@@ -381,6 +381,41 @@ public class JDFDateTimeState extends JDFAbstractState
 	/* ******************************************************
 	// Element getter / setter
 	**************************************************************** */
+	/* (non-Javadoc)
+	 * @see org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java.lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
+	 */
+	public void addValue(String value, EnumFitsValue testlists)
+	{
+	    if(fitsValue(value, testlists))
+	        return;
+
+	    JDFDate date;
+	    try
+	    {
+	        date = new JDFDate(value);
+	    }
+	    catch (DataFormatException x)
+	    {
+	        return; // nop for bad values
+	    }
+	    if(testlists==null || EnumFitsValue.Allowed.equals(testlists))
+	    {
+	        JDFDateTimeRangeList list=getAllowedValueList();
+	        if(list==null)
+	            list=new JDFDateTimeRangeList();
+	        list.append (date);
+            setAllowedValueList(list);
+            
+	    }
+	    if(testlists==null || EnumFitsValue.Present.equals(testlists))
+	    {
+	        JDFDateTimeRangeList list=getPresentValueList();
+	        if(list==null  || !hasAttribute(AttributeName.PRESENTVALUELIST))
+	            list=new JDFDateTimeRangeList();
+	        list.append (date);
+            setPresentValueList(list);
+	    }
+	}
 
 
 	/**

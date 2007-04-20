@@ -402,7 +402,7 @@ public class JDFDevCaps extends JDFAutoDevCaps
                 r.deleteNode();
                 return null;// first DevCap that fits found -> erase all error messages
             }
-            r.setAttribute("XPath", elem.buildXPath(null,true));
+            r.setAttribute("XPath", elem.buildXPath(null,1));
             r.setAttribute("Name", getContextName());
             r.setAttribute("CapXPath", dc.getName());
          }
@@ -792,7 +792,7 @@ public class JDFDevCaps extends JDFAutoDevCaps
              if (context.equals(EnumContext.Element)) 
             {
                 r = mrp.appendElement("MissingElement");
-                r.setAttribute("XPath", jdfRoot.buildXPath(null,true)+ "/" + getName());
+                r.setAttribute("XPath", jdfRoot.buildXPath(null,1)+ "/" + getName());
             }
             else 
             {
@@ -809,7 +809,7 @@ public class JDFDevCaps extends JDFAutoDevCaps
                 }
                 if(badElem==null)
                     badElem=jdfRoot; // fudge against npe in next line
-                r.setAttribute("XPath", badElem.buildXPath(null,true)+ "/" + getName());
+                r.setAttribute("XPath", badElem.buildXPath(null,1)+ "/" + getName());
             }                    
             r.setAttribute("Name", getName());
             r.setAttribute("CapXPath", getName());                    
@@ -821,7 +821,7 @@ public class JDFDevCaps extends JDFAutoDevCaps
             if (context.equals(EnumContext.Element) || context.equals(EnumContext.JMF)) 
             {
                 r = irp.appendElement("ManyElement");
-                r.setAttribute("XPath", jdfRoot.buildXPath(null,true)+ "/" + getName());
+                r.setAttribute("XPath", jdfRoot.buildXPath(null,1)+ "/" + getName());
             }
             else 
             {
@@ -838,7 +838,7 @@ public class JDFDevCaps extends JDFAutoDevCaps
                 }
                 if(badElem==null)
                     badElem=jdfRoot; // fudge against npe in next line
-                r.setAttribute("XPath", badElem.buildXPath(null,true)+ "/" + getName());
+                r.setAttribute("XPath", badElem.buildXPath(null,1)+ "/" + getName());
             }                    
             r.setAttribute("Name", getName());
             r.setAttribute("CapXPath", getName()); 

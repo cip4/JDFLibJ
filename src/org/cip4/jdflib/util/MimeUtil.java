@@ -421,6 +421,12 @@ public class MimeUtil {
      */
     public static boolean isJDFMimeType(String mimeType)
     {
+        if(mimeType==null)
+            return false;
+        int posSemicolon=mimeType.indexOf(";");
+        if(posSemicolon>0)
+            mimeType=mimeType.substring(0, posSemicolon);
+        
         return  JDFConstants.MIME_JDF.equalsIgnoreCase(mimeType)  ||
         JDFConstants.MIME_JMF.equalsIgnoreCase(mimeType)  ||
         JDFConstants.MIME_TEXTXML.equalsIgnoreCase(mimeType); 

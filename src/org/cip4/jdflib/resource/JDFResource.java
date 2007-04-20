@@ -2598,7 +2598,7 @@ public class JDFResource extends JDFElement
     {
         if(isResourceElement())
         {
-            throw new JDFException("Attempting to add partition to resource element: " + buildXPath(null,true));
+            throw new JDFException("Attempting to add partition to resource element: " + buildXPath(null,1));
         }
         
         final VElement v = new VElement();
@@ -2644,11 +2644,11 @@ public class JDFResource extends JDFElement
     {
         if(isResourceElement())
         {
-            throw new JDFException("Attempting to add partition to resource element: " + buildXPath(null,true));
+            throw new JDFException("Attempting to add partition to resource element: " + buildXPath(null,1));
         }
         if(partType==null)
         {
-            throw new JDFException("Attempting to add null partition to resource: " + buildXPath(null,true));            
+            throw new JDFException("Attempting to add null partition to resource: " + buildXPath(null,1));            
         }
         
         
@@ -2792,6 +2792,52 @@ public class JDFResource extends JDFElement
         }
         
         return v;
+    }
+    
+    /**
+     * Gets the XPath full tree representation of 'this'
+     * @param relativeTo  relative path to which to create an xpath
+     * @param methCountSiblings, if 1 count siblings, i.e. add '[n]'
+     *                           if 0, only specify the path of parents
+     * @return String    the XPath representation of 'this' e.g. 
+     *                   <code>/root/parent/element</code><br>
+     *                   <code>null</code> if parent of this is null 
+     *                   (e.g. called on rootnode)
+     */
+    public String buildXPath(String relativeTo, int methCountSiblings)
+    {
+        if(methCountSiblings!=2 || isResourceElement() || isResourceRoot())
+            return super.buildXPath(relativeTo, methCountSiblings);
+
+        String path = "/"+getLocalName(); // tbd handle namespaces
+        String sKey = getLocalPartitionKey();
+        if(sKey!=null)
+        {
+            path+="[@"+sKey+"=\""+getAttribute(sKey)+"\"]";
+        }
+
+        KElement parent=getParentNode_KElement();
+        return parent.buildXPath(relativeTo, methCountSiblings)+path;
+    }
+
+
+    /**
+     * get the local partition key of this leaf
+     * @return the key, if one exists, null otherwise
+     */
+    public String getLocalPartitionKey()
+    {
+        VString partKeys=getPartIDKeys();
+        String sKey=null;
+        for(int i=0;i<partKeys.size();i++)
+        {
+            if(hasAttribute_KElement(partKeys.stringAt(i), null, false))
+            {
+                sKey=partKeys.stringAt(i);
+                break;
+            }
+        }
+        return sKey;
     }
     
     /**

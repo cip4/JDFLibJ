@@ -1,73 +1,73 @@
 /*
-*
-* The CIP4 Software License, Version 1.0
-*
-*
-* Copyright (c) 2001-2006 The International Cooperation for the Integration of 
-* Processes in  Prepress, Press and Postpress (CIP4).  All rights 
-* reserved.
-*
-* Redistribution and use in source and binary forms, with or without
-* modification, are permitted provided that the following conditions
-* are met:
-*
-* 1. Redistributions of source code must retain the above copyright
-*    notice, this list of conditions and the following disclaimer. 
-*
-* 2. Redistributions in binary form must reproduce the above copyright
-*    notice, this list of conditions and the following disclaimer in
-*    the documentation and/or other materials provided with the
-*    distribution.
-*
-* 3. The end-user documentation included with the redistribution,
-*    if any, must include the following acknowledgment:  
-*       "This product includes software developed by the
-*        The International Cooperation for the Integration of 
-*        Processes in  Prepress, Press and Postpress (www.cip4.org)"
-*    Alternately, this acknowledgment may appear in the software itself,
-*    if and wherever such third-party acknowledgments normally appear.
-*
-* 4. The names "CIP4" and "The International Cooperation for the Integration of 
-*    Processes in  Prepress, Press and Postpress" must
-*    not be used to endorse or promote products derived from this
-*    software without prior written permission. For written 
-*    permission, please contact info@cip4.org.
-*
-* 5. Products derived from this software may not be called "CIP4",
-*    nor may "CIP4" appear in their name, without prior written
-*    permission of the CIP4 organization
-*
-* Usage of this software in commercial products is subject to restrictions. For
-* details please consult info@cip4.org.
-*
-* THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-* OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-* DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
-* THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
-* ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-* SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-* LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
-* USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-* ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-* OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
-* OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-* SUCH DAMAGE.
-* ====================================================================
-*
-* This software consists of voluntary contributions made by many
-* individuals on behalf of the The International Cooperation for the Integration 
-* of Processes in Prepress, Press and Postpress and was
-* originally based on software 
-* copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
-* copyright (c) 1999-2001, Agfa-Gevaert N.V. 
-*  
-* For more information on The International Cooperation for the 
-* Integration of Processes in  Prepress, Press and Postpress , please see
-* <http://www.cip4.org/>.
-*  
-* 
-*/
+ *
+ * The CIP4 Software License, Version 1.0
+ *
+ *
+ * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer. 
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
+ *
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:  
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of 
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
+ *
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written 
+ *    permission, please contact info@cip4.org.
+ *
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
+ *
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
+ *
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration 
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software 
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
+ *  
+ * For more information on The International Cooperation for the 
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
+ *  
+ * 
+ */
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
@@ -110,7 +110,7 @@ public class JDFNameState extends JDFAbstractState
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
-    
+
 
     private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
     static
@@ -140,9 +140,9 @@ public class JDFNameState extends JDFAbstractState
      * @param qualifiedName
      */
     public JDFNameState(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
+            CoreDocumentImpl myOwnerDocument,
+            String myNamespaceURI,
+            String qualifiedName)
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
@@ -155,10 +155,10 @@ public class JDFNameState extends JDFAbstractState
      * @param myLocalName
      */
     public JDFNameState(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
+            CoreDocumentImpl myOwnerDocument,
+            String myNamespaceURI,
+            String qualifiedName,
+            String myLocalName)
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
@@ -173,10 +173,10 @@ public class JDFNameState extends JDFAbstractState
     {
         return "JDFNameState[ --> " + super.toString() + " ]";
     }
-    
+
     /* ******************************************************
     // Attribute getter/ setter
-    **************************************************************** */
+     **************************************************************** */
 
     public void setCurrentValue(String value)
     {
@@ -186,18 +186,18 @@ public class JDFNameState extends JDFAbstractState
     {
         setAttribute(AttributeName.CURRENTVALUE, value,null);
     }
-    
+
     public VString getCurrentValue()
     {
         final String attribute = getAttribute(AttributeName.CURRENTVALUE, null, null);
         return attribute==null ? null : new VString(attribute, null);
     }
-    
+
     public void setDefaultValue(String value)
     {
         setAttribute(AttributeName.DEFAULTVALUE, value);
     }
-    
+
     public void setDefaultValue(VString value)
     {
         setAttribute(AttributeName.DEFAULTVALUE, value,null);
@@ -208,7 +208,7 @@ public class JDFNameState extends JDFAbstractState
         final String attribute = getAttribute(AttributeName.DEFAULTVALUE, null, null);
         return attribute==null ? null : new VString(attribute, null);
     }
-         
+
     public VString getAllowedValueList()
     {
         final String attribute = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
@@ -258,10 +258,36 @@ public class JDFNameState extends JDFAbstractState
         return getAllowedRegExp();
     }
 
- 
+
     /* ******************************************************
     // Element getter / setter
-    **************************************************************** */
+     **************************************************************** */
+
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java.lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
+     */
+    public void addValue(String value, EnumFitsValue testlists)
+    {
+        if(fitsValue(value, testlists))
+            return;
+
+        if(testlists==null || EnumFitsValue.Allowed.equals(testlists))
+        {
+            VString list=getAllowedValueList();
+            if(list==null)
+                list=new VString();
+            list.appendUnique(value);
+            setAllowedValueList(list);
+        }
+        if(testlists==null || EnumFitsValue.Present.equals(testlists))
+        {
+            VString list=getPresentValueList();
+            if(list==null || !hasAttribute(AttributeName.PRESENTVALUELIST))
+                list=new VString();
+            list.appendUnique(value);
+            setPresentValueList(list);
+        }        
+    }
 
     /**
      * fitsValue - checks whether <code>value</code> matches the testlists 
@@ -280,7 +306,7 @@ public class JDFNameState extends JDFAbstractState
             return (fitsValueList(value,testlists) && fitsRegExp(value,testlists));
         return false;
     }
-    
+
     /**
      * fitsValueList - checks whether <code>value</code> matches  
      * the AllowedValueList/PresentValueList specified for this State
@@ -292,7 +318,7 @@ public class JDFNameState extends JDFAbstractState
     private final boolean fitsValueList(String value, EnumFitsValue valuelist)
     {
         VString vs = new VString(value, null);
-        
+
         VString list;
         if (valuelist.equals(EnumFitsValue.Allowed)) 
         {
@@ -304,7 +330,7 @@ public class JDFNameState extends JDFAbstractState
         }
         if (list==null)
             return true;
-        
+
         EnumListType listType = getListType();
         if (listType.equals(EnumListType.CompleteList))
         {
@@ -321,7 +347,7 @@ public class JDFNameState extends JDFAbstractState
 
         int v_size = vs.size();
         int l_size = list.size();
-        
+
         for (int i=0; i<v_size; i++) // test every token, that 'value' consists of
         {
             boolean bFound = false;
@@ -340,7 +366,7 @@ public class JDFNameState extends JDFAbstractState
         }
         return true;
     }
-    
+
     /**
      * fitsCompleteList - tests whether <code>value</code> matches the 
      * AllowedValueList/PresentValueList specified for this State
@@ -354,13 +380,13 @@ public class JDFNameState extends JDFAbstractState
     {
         int v_size=value.size();
         int l_size=list.size();
-        
+
         if (v_size!=l_size) 
             return false; 
-        
+
         if (!isUnique(value)) 
             return false;
-     
+
         VString valueList = new VString(value);
 
         boolean bFound;
@@ -384,7 +410,7 @@ public class JDFNameState extends JDFAbstractState
         return true;
     }
 
-    
+
     /**
      * fitsCompleteOrderedList - tests whether <code>value</code> matches the 
      * AllowedValueList/PresentValueList specified for this State
@@ -394,27 +420,27 @@ public class JDFNameState extends JDFAbstractState
      * @param list  testlist
      * @return boolean - true, if <code>value</code> matches the testlist
      */
-     private final boolean fitsCompleteOrderedList(VString value, VString list)
-     {
-         int v_size = value.size();
-         int l_size = list.size();
-         
-         if ( v_size != l_size ) 
-              return false; 
+    private final boolean fitsCompleteOrderedList(VString value, VString list)
+    {
+        int v_size = value.size();
+        int l_size = list.size();
 
-         if (!isUnique(value)) 
-             return false;
+        if ( v_size != l_size ) 
+            return false; 
 
-         for (int i=0; i<l_size; i++)
-         {
-             if (!list.elementAt(i).equals(value.elementAt(i))) 
-             {
-                 return false;
-             }
-         }
-         return true;        
-     }
-     
+        if (!isUnique(value)) 
+            return false;
+
+        for (int i=0; i<l_size; i++)
+        {
+            if (!list.elementAt(i).equals(value.elementAt(i))) 
+            {
+                return false;
+            }
+        }
+        return true;        
+    }
+
     /**
      * fitsContainedList - tests whether <code>value</code> matches the 
      * AllowedValueList/PresentValueList specified for this State
@@ -424,24 +450,24 @@ public class JDFNameState extends JDFAbstractState
      * @param list  testlist
      * @return boolean - true, if <code>value</code> matches the testlist
      */
-     private final boolean fitsContainedList(VString value, VString list)
-     {
-         int v_size = value.size();
-         int l_size = list.size();
-         
-         for (int i=0; i<v_size; i++)
-         {
-             for (int j=0; j<l_size; j++)
-             {
-                 if (value.elementAt(i).equals(list.elementAt(j))) 
-                 {
-                     return true;
-                 }
-             }
-         }
-         return false;
-     }
-    
+    private final boolean fitsContainedList(VString value, VString list)
+    {
+        int v_size = value.size();
+        int l_size = list.size();
+
+        for (int i=0; i<v_size; i++)
+        {
+            for (int j=0; j<l_size; j++)
+            {
+                if (value.elementAt(i).equals(list.elementAt(j))) 
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     /**
      * isUnique - tests whether <code>value</code> string has unique tokens only
      *
@@ -466,7 +492,7 @@ public class JDFNameState extends JDFAbstractState
         }
         return true;
     }
-    
+
     public VString getInvalidAttributes(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
     {
         return getInvalidAttributesImpl(level, bIgnorePrivate, nMax);

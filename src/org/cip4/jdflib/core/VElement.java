@@ -227,9 +227,9 @@ public class VElement extends Vector
         }
     }
     /**
-     * AppendUnique - append a string but ignore multiple entries
+     * addAll ignoring null collections
      *
-     * @param v the element to append
+     * @param v the vector of elements to append
      */
     public void addAll(VElement elem)
     {

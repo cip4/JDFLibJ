@@ -11,13 +11,10 @@
 
 package org.cip4.jdflib.resource;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoValue.EnumValueUsage;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -194,51 +191,12 @@ public class JDFValue extends JDFElement // ignore JDFAutoValue
         return "JDFValue[  --> " + super.toString() + " ]";
     }
 
+ 
     /**
-     * Enumeration strings for ValueUsage
+     * @deprecated use EnumValueUsage.getEnum(enumName);
+     * @param enumName
+     * @return
      */
-
-    public static class EnumValueUsage extends ValuedEnum
-    {
-        private static final long serialVersionUID = 1L;
-        private static int m_startValue = 0;
-
-        private EnumValueUsage(String name)
-        {
-            super(name, m_startValue++);
-        }
-
-        public static EnumValueUsage getEnum(String enumName)
-        {
-            return (EnumValueUsage) getEnum(EnumValueUsage.class, enumName);
-        }
-
-        public static EnumValueUsage getEnum(int enumValue)
-        {
-            return (EnumValueUsage) getEnum(EnumValueUsage.class, enumValue);
-        }
-
-        public static Map getEnumMap()
-        {
-            return getEnumMap(EnumValueUsage.class);
-        }
-
-        public static List getEnumList()
-        {
-            return getEnumList(EnumValueUsage.class);
-        }
-
-        public static Iterator iterator()
-        {
-            return iterator(EnumValueUsage.class);
-        }
-
-        public static final EnumValueUsage Present = new EnumValueUsage("Present");
-        public static final EnumValueUsage Allowed = new EnumValueUsage("Allowed");
-    }      
-
-
-
     public static EnumValueUsage stringToValueUsage(String enumName)
     {
         return EnumValueUsage.getEnum(enumName);

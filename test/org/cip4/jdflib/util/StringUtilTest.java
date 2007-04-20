@@ -273,6 +273,8 @@ public class StringUtilTest extends JDFTestCaseBase
         assertEquals(StringUtil.newExtension("a.b.c","c"), "a.b.c");
         assertEquals(StringUtil.newExtension("a.b",null), "a");
         assertEquals(StringUtil.newExtension("a.b",".c"), "a.c");
+        assertEquals(StringUtil.newExtension("a.b",".c.d"), "a.c.d");
+        assertEquals(StringUtil.newExtension("a.b","c.d"), "a.c.d");
         assertEquals(StringUtil.newExtension(".b",".c"), ".c");
     }
 

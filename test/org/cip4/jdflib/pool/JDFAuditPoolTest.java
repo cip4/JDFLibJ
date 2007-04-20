@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -124,7 +124,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
         JDFResource e = (JDFResource) myResourcePool.getElement("BindingIntent", "", 0);
         myAuditPool.addCreated("A Test Author for JUnitTest 2", e);
                 
-        String strResourceID = e.buildXPath("/JDF",true);
+        String strResourceID = e.buildXPath("/JDF",1);
         JDFCreated kResourceAudit = 
             (JDFCreated) myAuditPool.getChildWithAttribute(null, "XPath", null, strResourceID, 0, true);
 
@@ -200,6 +200,26 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
         assertNotNull(p2);
         assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true).size(), 4);
     }
+    
+    public void testGetLastPhase() throws Exception
+    {        
+        JDFPhaseTime p1=myAuditPool.setPhase(EnumNodeStatus.Setup, null, null);
+        assertNotNull(p1);
+        assertEquals(p1,myAuditPool.getLastPhase(null));
+        VJDFAttributeMap vMap=new VJDFAttributeMap();
+        vMap.add(new JDFAttributeMap("SheetName","s1"));
+        VJDFAttributeMap vMap2=new VJDFAttributeMap();
+        vMap2.add(new JDFAttributeMap("SheetName","s1"));
+        JDFPhaseTime p2=myAuditPool.setPhase(EnumNodeStatus.Setup, null, vMap);
+        assertEquals(p2,myAuditPool.getLastPhase(vMap));
+        assertEquals(p2,myAuditPool.getLastPhase(null));
+        JDFPhaseTime p3=myAuditPool.setPhase(EnumNodeStatus.Setup, null, vMap2);
+        myAuditPool.addModified(null, jdfRoot);
+        assertEquals(p2,myAuditPool.getLastPhase(vMap));
+        assertEquals(p3,myAuditPool.getLastPhase(null));
+        assertEquals(p3,myAuditPool.getLastPhase(vMap2));
+                
+     }
         
     public void testSetPhaseJMF() throws Exception
     {        

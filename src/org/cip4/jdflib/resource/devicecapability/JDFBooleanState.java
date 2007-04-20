@@ -318,4 +318,33 @@ public class JDFBooleanState extends JDFAbstractState
         return v.contains(eb);
     }
 
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java.lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
+     */
+    public void addValue(String value, EnumFitsValue testlists)
+    {
+        if(fitsValue(value, testlists))
+            return;
+        EnumBoolean b=EnumBoolean.getEnum(value);
+        if(b==null)
+            return;
+        
+        if(testlists==null || EnumFitsValue.Allowed.equals(testlists))
+        {
+            Vector list=getAllowedValueList();
+            if(list==null)
+                list=new Vector();
+            list.add(b);
+            setAllowedValueList(list);
+        }
+        if(testlists==null || EnumFitsValue.Present.equals(testlists))
+        {
+            Vector list=getPresentValueList();
+            if(list==null || !hasAttribute(AttributeName.PRESENTVALUELIST))
+                list=new Vector();
+            list.add(b);
+            setPresentValueList(list);
+        }        
+    }
+
 }

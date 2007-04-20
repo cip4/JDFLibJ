@@ -1690,6 +1690,7 @@ public final class AttributeName
     public static final String ELEMENTPAGES = "ElementPages";
     public static final String CONTENTLISTINDEX = "ContentListIndex";
     public static final String PRODUCTIONPATHID = "ProductionPathID";
+    public static final String SCHEMALOCATION = "schemaLocation";
     public static final String SCOPE = "Scope";
     public static final String COUNTERTYPES = "CounterTypes";
     public static final String YCELLS = "YCells";

@@ -82,6 +82,7 @@ package org.cip4.jdflib.resource.devicecapability;
 
 
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoValue.EnumValueUsage;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -92,7 +93,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.resource.JDFValue;
-import org.cip4.jdflib.resource.JDFValue.EnumValueUsage;
 
 public class JDFStringState extends JDFAbstractState
 {
@@ -338,8 +338,30 @@ public class JDFStringState extends JDFAbstractState
         JDFValue e = (JDFValue) getElement(ElementName.VALUE,null,iSkip);
         return EnumFitsValue.getEnum(e.getValueUsage().getName());
     }
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java.lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
+     */
+    public void addValue(String value, EnumFitsValue testlists)
+    {
+        if(fitsValue(value, testlists))
+            return;
 
-    
+        if(testlists==null || EnumFitsValue.Allowed.equals(testlists))
+        {
+            JDFValue v=appendValue();
+            v.setAllowedValue(value);
+            if(testlists!=null)
+                v.setValueUsage(EnumValueUsage.Allowed);
+        }
+        if(EnumFitsValue.Present.equals(testlists))
+        {
+            JDFValue v=appendValue();
+            v.setAllowedValue(value);
+            if(testlists!=null)
+                v.setValueUsage(EnumValueUsage.Present);
+        }
+    }
+
     /* ******************************************************
     // FitsValue Methods
     **************************************************************** */

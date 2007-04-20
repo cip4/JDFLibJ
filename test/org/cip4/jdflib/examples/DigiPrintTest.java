@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -38,7 +38,7 @@
  *
  * Usage of this software in commercial products is subject to restrictions. For
  * details please consult info@cip4.org.
-  *
+ *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -74,6 +74,7 @@ import java.io.File;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
+import org.cip4.jdflib.auto.JDFAutoResourceAudit.EnumReason;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
@@ -104,6 +105,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFDevCaps;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 import org.cip4.jdflib.resource.devicecapability.JDFNameState;
 import org.cip4.jdflib.resource.process.JDFComponent;
+import org.cip4.jdflib.resource.process.JDFDigitalPrintingParams;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFMiscConsumable;
 import org.cip4.jdflib.resource.process.JDFUsageCounter;
@@ -119,6 +121,9 @@ public class DigiPrintTest extends JDFTestCaseBase
     private JDFComponent comp;
     private JDFStrippingParams stripParams;
     private JDFResourceLink rlComp;
+    private JDFDigitalPrintingParams digiParams;
+    private JDFMedia med;
+    private JDFResourceLink rlMedia;
 
     /**
      * test amount handling
@@ -143,7 +148,7 @@ public class DigiPrintTest extends JDFTestCaseBase
         mpRIP2.setStart(date);
         date.addOffset(0,5,0,0);
         pt.setEnd(date);
-        
+
         JDFModulePhase mpPrint=pt2.appendModulePhase();
         mpPrint.setStatus(EnumNodeStatus.InProgress);
         pt2.setStart(date);
@@ -151,14 +156,14 @@ public class DigiPrintTest extends JDFTestCaseBase
         date.addOffset(0,30,0,0);
         mpRIP.setEnd(date);
         mpRIP2.setEnd(date);
-        
+
         date.addOffset(0,70,0,0);
         pt2.setEnd(date);
         mpPrint.setEnd(date);
         mpPrint.setModuleType("Printer");
         doc.write2File(sm_dirTestDataTemp+"DigiPrintModule1.jdf", 2, false);
     }
-    
+
     /**
      * test amount handling
      * @return
@@ -172,7 +177,7 @@ public class DigiPrintTest extends JDFTestCaseBase
             JDFAuditPool ap=n.getCreateAuditPool();
             ap.appendXMLComment("JDF 1.3 incompatible auditing of module phases the REQUIRED time attributes are not set in the ModulePhase elements\n"+
                     "- note that phases may now arbitrarily overlap\n"+
-            "The modulePhase elements now only specify which modules are involved, times are all defined by the phasetime proper", null);
+                    "The modulePhase elements now only specify which modules are involved, times are all defined by the phasetime proper", null);
             ap.appendXMLComment("The following phaseTime is executed by one module - the RIP,which executes two process steps (Interpreting and Rendering)", null);
             JDFPhaseTime ptRIP=ap.addPhaseTime(EnumNodeStatus.Setup, null, null);
             final JDFDate date = new JDFDate();
@@ -201,7 +206,7 @@ public class DigiPrintTest extends JDFTestCaseBase
             mpRIP.setCombinedProcessIndex(new JDFIntegerList("0 1"));
             mpRIP.setModuleType("Imaging");
             mpRIP.setModuleID("ID_Imaging");
-            
+
             JDFModuleStatus msPrint=di.appendModuleStatus();
             msPrint.setCombinedProcessIndex(new JDFIntegerList("2"));
             msPrint.setModuleType("Printer");
@@ -211,7 +216,7 @@ public class DigiPrintTest extends JDFTestCaseBase
             msStitch.setCombinedProcessIndex(new JDFIntegerList("3"));
             msStitch.setModuleType("Stitcher");
             msStitch.setModuleID("ID_Stitcher");
-           
+
             jmfDoc.write2File(sm_dirTestDataTemp+"moduleStatus"+testType+"0.jmf", 2, false);
             date.addOffset(0,5,0,0);
             jmf.setTimeStamp(date);
@@ -277,7 +282,7 @@ public class DigiPrintTest extends JDFTestCaseBase
             date.addOffset(0,70,0,0);
             ptPrint.setEnd(date);
             jmf.setTimeStamp(date);
-            
+
             if(i<2)
             {
                 signal.deleteNode();
@@ -299,7 +304,7 @@ public class DigiPrintTest extends JDFTestCaseBase
             doc.write2File(sm_dirTestDataTemp+"DigiPrintModule.1.4.jdf", 2, false);
         }
     }
-    
+
     /**
      * test devcaps for usagecounters
      * @return
@@ -318,14 +323,72 @@ public class DigiPrintTest extends JDFTestCaseBase
         counterID.setListType(EnumListType.SingleValue);
         duc.write2File(sm_dirTestDataTemp+"DevCapUsageCounter.jdf", 2, false);
     }
-    
-     /**
+
+    /**
+     * test amount handling
+     * @return
+     */
+    public void testDirectProof() throws Exception
+    {
+        n.setXMLComment("Example workflow with initioal warmup phase, one direct proof and 100 copies of 10 sheets each.\n"+
+                "The direct proof is acceptable and included in the good output");
+        digiParams.setDirectProofAmount(1);
+        digiParams.setXMLComment("1 initial proof is requested");
+        rlComp.setAmount(100, null);
+        JDFAuditPool ap=n.getAuditPool();
+        
+        VElement vRL=new VElement();
+        vRL.add(rlComp);
+        vRL.add(rlMedia);
+        
+        StatusUtil stUtil=new StatusUtil(n,null,vRL);
+        stUtil.setDeviceID("MyDevice");
+        stUtil.setTrackWaste(rlMedia,true);
+        stUtil.setTrackWaste(rlComp,false);       
+        
+        doc.write2File(sm_dirTestDataTemp+File.separator+"DigiPrintAmount_initial.jdf",2,false);
+
+        AmountBag[] bags=new AmountBag[vRL.size()];
+        bags[0]=stUtil.new AmountBag(rlComp.getrRef());
+        bags[1]=stUtil.new AmountBag(rlMedia.getrRef());
+
+        stUtil.setPhase(EnumNodeStatus.InProgress, "Waste", EnumDeviceStatus.Running, null,bags);
+        ap.getLastPhase(null).setXMLComment("Phase where warm up waste is produced");
+        bags[0].addPhase(0,2,true);
+        bags[1].addPhase(0,20,true);
+
+        stUtil.setPhase(EnumNodeStatus.InProgress, "Waste", EnumDeviceStatus.Running, null,bags);
+
+        bags[0].addPhase(1,0,true);
+        bags[1].addPhase(10,0,true);
+        stUtil.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, null,bags);
+        ap.getLastPhase(null).setXMLComment("Phase where 1 proof is produced");
+        
+        bags[0].addPhase(0,0,true);
+        bags[1].addPhase(0,0,true);
+        stUtil.setPhase(EnumNodeStatus.Stopped, "WaitForApproval", EnumDeviceStatus.Stopped, null,bags);
+        ap.getLastPhase(null).setXMLComment("Phase where the proof is evaluated while the device is stopped");
+        stUtil.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, null,bags);
+
+        bags[0].addPhase(99,0,false);
+        bags[1].addPhase(990,0,false);
+        stUtil.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, null,bags);
+        ap.getLastPhase(null).setXMLComment("Phase where the 100 copies are produced");
+        
+        bags[0].addPhase(0,0,true);
+        bags[1].addPhase(0,0,true);
+        stUtil.setPhase(EnumNodeStatus.Completed, "Idle", EnumDeviceStatus.Idle, null,bags);
+        stUtil.setResourceAudit(bags[1], EnumReason.ProcessResult);
+        doc.write2File(sm_dirTestDataTemp+File.separator+"DigiPrintProof_final.jdf",2,false);
+        
+    }
+    /**
      * test amount handling
      * @return
      */
     public void testAmount() throws Exception
-        {
-            rlComp.setAmount(20,null);
+    {
+        rlComp.setAmount(20,null);
         rlComp.setDescriptiveName("The link points to 20 planned and 20 good + 2 Waste brochures");
 
         JDFMiscConsumable mc=(JDFMiscConsumable) n.appendMatchingResource(ElementName.MISCCONSUMABLE, EnumProcessUsage.AnyInput, null);
@@ -343,41 +406,38 @@ public class DigiPrintTest extends JDFTestCaseBase
         JDFResourceLink rlu=n.getLink(uc, null);
         rlu.setAmount(200,null);
         rlu.setDescriptiveName("The link points to 200 actual clicks");
-        
-        JDFMedia med=(JDFMedia) n.appendMatchingResource(ElementName.MEDIA, EnumProcessUsage.AnyInput, null);
-        med.setResStatus(EnumResStatus.Available, false);
-        JDFResourceLink rlm=n.getLink(med, null);
-        rlm.setAmount(100,null);
-        rlm.setDescriptiveName("The link points to 100 actual sheets");
+
+        rlMedia.setAmount(100,null);
+        rlMedia.setDescriptiveName("The link points to 100 actual sheets");
 
         Thread.sleep(1000);
         comp.setResStatus(EnumResStatus.Available, true);
 
-        
+
         VElement vRL=new VElement();
         vRL.add(rlComp);
         vRL.add(rlu);
-        vRL.add(rlm);
+        vRL.add(rlMedia);
         vRL.add(rlmc);
         StatusUtil stUtil=new StatusUtil(n,null,vRL);
         stUtil.setDeviceID("MyDevice");
-        stUtil.setTrackWaste(rlm,true);
+        stUtil.setTrackWaste(rlMedia,true);
         stUtil.setTrackWaste(rlComp,true);
         stUtil.setCopyResInResInfo(rlu,true);
-        
+
         doc.write2File(sm_dirTestDataTemp+File.separator+"DigiPrintAmount_initial.jdf",2,false);
-        
+
         AmountBag[] bags=new AmountBag[vRL.size()];
         bags[0]=stUtil.new AmountBag(rlComp.getrRef());
         bags[1]=stUtil.new AmountBag(rlu.getrRef());
-        bags[2]=stUtil.new AmountBag(rlm.getrRef());
+        bags[2]=stUtil.new AmountBag(rlMedia.getrRef());
         bags[3]=stUtil.new AmountBag(rlmc.getrRef());
         stUtil.setPhase(EnumNodeStatus.InProgress, "Waste", EnumDeviceStatus.Running, null,bags);
         JDFDoc docStatusJMF=stUtil.getDocJMFPhaseTime();
         docStatusJMF.write2File(sm_dirTestDataTemp+File.separator+"DigiPrintAmountStatus0.jmf",2,false);
         JDFDoc docResJMF=stUtil.getDocJMFResource();
         docResJMF.write2File(sm_dirTestDataTemp+File.separator+"DigiPrintAmountResource0.jmf",2,false);
-        
+
         bags[0].addPhase(0,2,true);
         bags[1].addPhase(0,20,true);
         bags[2].addPhase(0,10,true);
@@ -387,7 +447,7 @@ public class DigiPrintTest extends JDFTestCaseBase
         docStatusJMF.write2File(sm_dirTestDataTemp+File.separator+"DigiPrintAmountStatus1.jmf",2,false);
         docResJMF=stUtil.getDocJMFResource();
         docResJMF.write2File(sm_dirTestDataTemp+File.separator+"DigiPrintAmountResource1.jmf",2,false);
-        
+
         bags[0].addPhase(15,0,true);
         bags[1].addPhase(150,0,true);
         bags[2].addPhase(75,0,true);
@@ -417,10 +477,10 @@ public class DigiPrintTest extends JDFTestCaseBase
         docStatusJMF.write2File(sm_dirTestDataTemp+File.separator+"DigiPrintAmountStatus4.jmf",2,false);
         docResJMF=stUtil.getDocJMFResource();
         docResJMF.write2File(sm_dirTestDataTemp+File.separator+"DigiPrintAmountResource4.jmf",2,false);
-       
+
         doc.write2File(sm_dirTestDataTemp+File.separator+"DigiPrintAmount_final.jdf",2,false);
-     }
-    
+    }
+
 
     /**
      * 
@@ -439,8 +499,12 @@ public class DigiPrintTest extends JDFTestCaseBase
         n.setTypes(new VString("Interpreting Rendering DigitalPrinting Stitching"," "));
         comp = (JDFComponent) n.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, null, null, null);
         rlComp=n.getLink(comp,null);
- 
+        digiParams=(JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+        med=(JDFMedia) n.appendMatchingResource(ElementName.MEDIA, EnumProcessUsage.AnyInput, null);
+        med.setResStatus(EnumResStatus.Available, false);
+        rlMedia=n.getLink(med, null);
+   
     }
-    
+
     /////////////////////////////////////////////////////////////////////////
 }

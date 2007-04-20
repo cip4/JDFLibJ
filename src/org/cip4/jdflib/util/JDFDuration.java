@@ -128,9 +128,9 @@ public class JDFDuration implements Duration
         
         if (bComplete)
         {
-            setDurationISO(strDuration);
+            bComplete=setDurationISO(strDuration);
         }
-        else
+        if(!bComplete)
         {
             //its not a DateTime nor a Duration
             throw new DataFormatException("JDFDuration.init: invalid duration String " +  strDuration);

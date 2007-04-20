@@ -94,6 +94,7 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFDurationRangeList;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.JDFDuration;
 
 public class JDFDurationState extends JDFAbstractState
 {
@@ -287,7 +288,41 @@ public class JDFDurationState extends JDFAbstractState
     // FitsValue Methods
     **************************************************************** */
     
-    /**
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java.lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
+     */
+    public void addValue(String value, EnumFitsValue testlists)
+    {
+        if(fitsValue(value, testlists))
+            return;
+
+        JDFDuration duration;
+        try
+        {
+            duration = new JDFDuration(value);
+        }
+        catch (DataFormatException x)
+        {
+            return; // nop for bad values
+        }
+        if(testlists==null || EnumFitsValue.Allowed.equals(testlists))
+        {
+            JDFDurationRangeList list=getAllowedValueList();
+            if(list==null)
+                list=new JDFDurationRangeList();
+            list.append (duration);
+            setAllowedValueList(list);
+        }
+        if(testlists==null || EnumFitsValue.Present.equals(testlists))
+        {
+            JDFDurationRangeList list=getPresentValueList();
+            if(list==null || !hasAttribute(AttributeName.PRESENTVALUELIST))
+                list=new JDFDurationRangeList();
+            list.append (duration);
+            setPresentValueList(list);
+        }
+    }
+   /**
      * fitsValue - tests, if the defined value matches Allowed test lists or Present test lists,
      * specified for this State
      *

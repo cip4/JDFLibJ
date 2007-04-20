@@ -290,6 +290,8 @@ public class CheckJDFTest extends JDFTestCaseBase
 
         // Check that report exists
         assertTrue(reportFile.exists());
+        jmfFile.delete();
+        reportFile.delete();
     }
 
     // //////////////////////////////////////////////////////////////////////////

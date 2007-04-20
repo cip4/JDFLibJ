@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.core;
 
+import java.io.File;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -104,11 +105,21 @@ public class XMLDocTest extends JDFTestCaseBase
         e2=e.appendElement("foobar");
         assertTrue(e.isDirty());
         assertTrue(e2.isDirty());
-
-
-
     }
 
+    public void testSetSchemaLocation() throws Exception
+    {
+        XMLDoc doc=new XMLDoc("test",null);
+        doc.write2File(sm_dirTestDataTemp+"schematest.xml", 0, false); // create a readable dummy
+        final File schema = new File(sm_dirTestDataTemp+"schematest.xml");
+        
+        final String nsURI = "www.foo.com";
+        doc.setSchemaLocation(nsURI, schema);
+        assertNotNull(doc.getSchemaLocation(nsURI));
+        assertEquals(doc.getSchemaLocationFile(nsURI).getCanonicalFile(), schema.getCanonicalFile());
+    }
+    
+    
     public void testDirtyIDs() throws Exception
     {
         // -i bookintent.jdf -o spawned.jdf -p 4

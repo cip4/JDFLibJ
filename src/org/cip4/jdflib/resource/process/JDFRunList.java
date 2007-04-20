@@ -1040,7 +1040,6 @@ public class JDFRunList extends JDFAutoRunList
         v.add(EnumPartIDKey.DocSheetIndex);
         v.add(EnumPartIDKey.SetIndex);
         v.add(EnumPartIDKey.PageNumber);
-
         return v;
     }
 

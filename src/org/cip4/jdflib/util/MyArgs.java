@@ -74,9 +74,13 @@
 //Beschreibung:  Utility library for the JDF library
 package org.cip4.jdflib.util;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.VString;
 
 public class MyArgs
 {
@@ -85,14 +89,13 @@ public class MyArgs
     //  Variables
     ////////////////////////////////////////////////////////////////////////////////
     private String m_usageTable;
-    private int m_nArgs;
-    private Vector m_onlyArgs;
-    private Vector m_argV;
+    private VString m_onlyArgs;
     private String m_switchParameterString;
     private String m_argumentParameterString;
     private String m_requiredParameterString;
-    private int m_argC;
-    private boolean m_hasArgs = false;
+    private HashSet m_flags=new HashSet();
+    private HashMap m_Parameters=new HashMap();
+    private VString m_argV;
     // cmd-line has or has not args and not only options(  starting with "-" )
 
     ////////////////////////////////////////////////////////////////////////////////
@@ -123,59 +126,56 @@ public class MyArgs
         if(argv==null)
             argv=new String[0];
         
-        argv=(String[])argv.clone();
-        m_nArgs = -1;
-        m_onlyArgs = new Vector();
+        m_switchParameterString = strSwitchParameter;
+        m_argumentParameterString =strArgumentParameter;
+        m_requiredParameterString = strRequiredParameter;
 
-        //test if cmd-line starts with "-" or not
-        if (argv.length == 0)
-        {
-            m_hasArgs = false;
-        }
-        else
-        {
-            m_hasArgs = (argv[0].charAt(0) != '-');
-        }
+        m_argV=new VString(argv);
+        m_onlyArgs = new VString();
+
 
         // cut of the "-" from the options, but don't remove it from file names
         for (int i = 0; i < argv.length; i++)
         {
             String tempString = argv[i];
-            if (tempString != null && tempString.length() >=1 && tempString.charAt(0) == '-')
+            if(tempString.startsWith("-"))
             {
-                argv[i]= tempString.substring(1);
-            }
-        }
-        
-        // put the argument behind the argumentparameter
-         for (int i = 0; i < argv.length; i++)
-        {
-            String tempString =  argv[i];
-            if (strArgumentParameter.indexOf(tempString) >= 0)
-            {
-                if (i+1 < argv.length)
+                String whazzLeft=tempString.substring(1);
+                while(whazzLeft.length()>0)
                 {
-                    argv[i]= tempString + " " + argv[i + 1];
-                    argv[i + 1]=null;
-                    i++;
+                    String flag=whazzLeft.substring(0,1);
+                    if(m_switchParameterString!=null && m_switchParameterString.indexOf(flag)>=0)
+                    {
+                        m_flags.add(flag);
+                        whazzLeft=whazzLeft.substring(1);
+                    }
+                    else if(m_argumentParameterString!=null && m_argumentParameterString.indexOf(flag)>=0)
+                    {
+                        String wl2=whazzLeft.substring(1);
+                        if(wl2.length()==0 && argv.length>i+1)
+                        {
+                            wl2=argv[i+1];
+                            i++;
+                        }
+                        m_Parameters.put(flag, wl2);
+                        whazzLeft="";
+                    }
+                    else
+                    {
+                        // oops... don't know it; skip it
+                        whazzLeft=whazzLeft.substring(1);
+                        System.out.println("unknown flag:"+flag);
+                    }
                 }
             }
+            else
+            {
+                m_onlyArgs.add(tempString);
+            }
+                
         }
-         
-        m_argV = new Vector();
-        for (int i = 0; i < argv.length; i++)
-        {
-            if(argv[i]!=null)
-                m_argV.add(argv[i]);
-        }
-       m_argC = m_argV.size();
-
-        if (m_argV.isEmpty())
-        {
-            m_argV.add(JDFConstants.EMPTYSTRING);
-        }
-
-        m_nArgs = m_hasArgs ? -1 : 0;
+        
+ 
         // number will later be computeted if necessary
 
         if (m_onlyArgs.isEmpty())
@@ -183,22 +183,7 @@ public class MyArgs
             m_onlyArgs.add(JDFConstants.EMPTYSTRING); // will later be filled
         }
 
-        this.m_switchParameterString = JDFConstants.EMPTYSTRING;
-        this.m_argumentParameterString = JDFConstants.EMPTYSTRING;
-        this.m_requiredParameterString = JDFConstants.EMPTYSTRING;
 
-        if (strSwitchParameter!=null && strSwitchParameter.length() != 0)
-        {
-            this.m_switchParameterString = strSwitchParameter;
-        }
-        if (strArgumentParameter != null &&strArgumentParameter.length() != 0)
-        {
-            this.m_argumentParameterString = strArgumentParameter;
-        }
-        if (strRequiredParameter!=null && strRequiredParameter.length() != 0)
-        {
-            this.m_requiredParameterString = strRequiredParameter;
-        }
     }
 
     public String toString()
@@ -207,11 +192,23 @@ public class MyArgs
         s += "\t\t switchParameterString=" + m_switchParameterString + "\n";
         s += "\t\t argumentParameterString=" + m_argumentParameterString + "\n";
         s += "\t\t requiredParameterString=" + m_requiredParameterString + "\n";
-        s += "\t\t argC    =" + m_argC + "\n";
+        s += "\t\t argC    =" + m_argV.size() + "\n";
         s += "\t\t argV    =" + m_argV + "\n";
-        s += "\t\t hasArgs =" + m_hasArgs + "\n";
         s += "\t\t Nargs   =" + nargs() + "\n";
+        s += "\t\t Flags:  =";
+        Iterator it=m_flags.iterator();
+        while(it.hasNext())
+            s+=(String)it.next()+", ";
+        s+="\n";
+        it=m_Parameters.keySet().iterator();
+        s += "\t\t Parameters: \n";
+        while(it.hasNext())
+        {
+            String key=(String)it.next();
+            s+="\t\t\t "+key+" = "+(String)m_Parameters.get(key)+"\n";
+        }
         s += "\t\t onlyArgs=" + m_onlyArgs + "\n";
+        
         return s += "\n";
     }
     ////////////////////////////////////////////////////////////////////////////////
@@ -228,50 +225,9 @@ public class MyArgs
 
     public String parameter(char c)
     {
-        ///// completely changed code in comparison to c++
-        String s = m_switchParameterString;
-        String p = m_argumentParameterString;
-
-        boolean optionSwitch = false;
-        boolean param = false;
-
-        //test if valid option
-        if (s.length() != 0 && s.indexOf(c) >= 0)
-        {
-            optionSwitch = true;
-        }
-        if (p.length() != 0 && p.indexOf(c) >= 0)
-        {
-            param = true;
-        }
-
-        if (!optionSwitch && !param)
-        {
-            System.out.println(
-                "WARNING: illegal Option [-"
-                    + c
-                    + "] in cmd-line found"
-                    + "  ==> return \"\"-String");
-            return "";
-        }
-
-        //look if exist in cmd-line
-        s = JDFConstants.EMPTYSTRING;
-        
-        for (int i = (m_hasArgs ? 1 : 0); i < m_argV.size(); i++)
-        {
-            s = (String) m_argV.elementAt(i); // i-te Token bzgl "-"
-            if (s.startsWith(JDFConstants.EMPTYSTRING + c))
-            {
-                if (optionSwitch)
-                {
-                    return "t";
-                }
-                return s.substring(1).trim(); // c-char entfernen
-            }
-        }
-
-        return null;
+        String s=new String();
+        s+=c;
+        return (String)m_Parameters.get(s);
     }
 
     //.........................................................
@@ -289,31 +245,18 @@ public class MyArgs
     //------------------------------------------------------------------------------
 
     public int nargs()
-    { ///// completely changed code in comparison to c++
-        if (!m_hasArgs)
-        {
-            return 0;
-        }
-        if (m_nArgs >= 0)
-        {
-            return m_nArgs;
-        }
-        m_onlyArgs = StringUtil.tokenize(((String) m_argV.elementAt(0)), JDFConstants.BLANK, false);
-        m_nArgs = m_onlyArgs.size();
-        return m_nArgs;
+    { 
+        return m_onlyArgs.size();
     }
     //......................................................................
     public String argument(int m)
     {
-        if (m_nArgs < 0)
+ 
+        if (m >= nargs())
         {
-            this.nargs();
+            return null;
         }
-        if (m >= m_nArgs)
-        {
-            return JDFConstants.EMPTYSTRING;
-        }
-        return (String) m_onlyArgs.elementAt(m);
+        return m_onlyArgs.stringAt(m);
     }
     //......................................................................
     /**
@@ -449,7 +392,7 @@ public class MyArgs
     public String usage(String paramString)
     {
         m_usageTable = "\n.\n.\n.usage: ";
-        m_usageTable += (String) m_argV.elementAt(0);
+        m_usageTable += m_argV.stringAt(0);
 
         if (m_switchParameterString.length() != 0)
         {
@@ -478,7 +421,7 @@ public class MyArgs
     
     public boolean hasParameter(char c)
     {
-        return !JDFConstants.EMPTYSTRING.equals(parameter(c));
+        return parameter(c)!=null;
     }
 
 }

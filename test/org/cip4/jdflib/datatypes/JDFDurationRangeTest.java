@@ -89,21 +89,11 @@ public class JDFDurationRangeTest extends TestCase
     /*
      * Constructors JDFDurationRange(JDFDuration) and JDFDurationRange(JDFDuration, JDFDuration)
      */
-    public final void testJDFDurationRangeJDFDuration()
+    public final void testJDFDurationRangeJDFDuration() throws Exception
     {
-        JDFDurationRange r = new JDFDurationRange();
-        JDFDurationRange r2 = new JDFDurationRange();
-        try
-        {
-            r  = new JDFDurationRange(new JDFDuration("PT5M"), new JDFDuration("PT15M"));
-            r2 = new JDFDurationRange(new JDFDuration("PT5M"));
-        }
-        catch (DataFormatException dfe)
-        {
-            System.out.println(dfe.toString());
-            fail("bad duration");
-            
-        }
+        JDFDurationRange r = new JDFDurationRange(new JDFDuration("PT5M"), new JDFDuration("PT15M"));
+        JDFDurationRange  r2 = new JDFDurationRange(new JDFDuration("PT5M"));
+
         assertTrue("Bad Constructor ", r.toString().equals("PT5M ~ PT15M"));
         assertTrue("Bad Constructor ", r2.toString().equals("PT5M"));
     }
@@ -111,161 +101,74 @@ public class JDFDurationRangeTest extends TestCase
     /*
      * Class under test for void JDFDurationRange(JDFDurationRange)
      */
-    public final void testJDFDurationRangeJDFDurationRange()
+    public final void testJDFDurationRangeJDFDurationRange() throws Exception
     {
-        JDFDurationRange r = new JDFDurationRange();
-        JDFDurationRange r2 = new JDFDurationRange();
-        JDFDurationRange r3 = new JDFDurationRange();
-        try
-        {
-            r = new JDFDurationRange(new JDFDuration("PT5M"), new JDFDuration("PT25M"));
-            r2 = new JDFDurationRange(new JDFDuration("PT15M"));
-            r3 = new JDFDurationRange(r2);
-            r3.setRight(new JDFDuration("PT25M"));
-        }
-        catch (DataFormatException dfe)
-        {
-            System.out.println(dfe.toString());
-            fail("bad duration");
-        }
+        JDFDurationRange r = new JDFDurationRange(new JDFDuration("PT5M"), new JDFDuration("PT25M"));
+        JDFDurationRange r2 = new JDFDurationRange(new JDFDuration("PT15M"));
+        JDFDurationRange r3 = new JDFDurationRange(r2);
+        r3.setRight(new JDFDuration("PT25M"));
         assertTrue("Bad Constructor"+r.toString(), r.toString().equals("PT5M ~ PT25M"));
         assertTrue("Bad Constructor"+r2.toString(), r2.toString().equals("PT15M"));
         assertTrue("Bad CopyConstructor"+r3.toString(), r3.toString().equals("PT15M ~ PT25M"));
     }
 
-    
-    public final void testJDFDurationRangeString()
+
+    public final void testJDFDurationRangeString() throws Exception
     {
-        JDFDurationRange r = new JDFDurationRange();
-        try
-        {
-            r = new JDFDurationRange(" PT5M ~ PT15M ");
-        }
-        catch (DataFormatException dfe)
-        {
-            System.out.println(dfe.toString());
-            fail("bad duration");
-        }
-        
+        JDFDurationRange r = new JDFDurationRange(" PT5M ~ PT15M ");
+
         assertTrue("Bad Constructor"+r.toString(), r.toString().equals("PT5M ~ PT15M"));
     }
-    
-    public final void testInRange()
-    {
-        try
-        {
-            JDFDurationRangeList rangelist = 
-                new JDFDurationRangeList("PT5M ~ PT15M  PT1H5M ~ PT1H15M");
 
-            assertTrue("InRange: ", rangelist.inRange(new JDFDuration("PT15M")));
-            assertTrue("InRange: ", rangelist.inRange(new JDFDuration("PT1H15M")));
-            assertFalse("NOT InRange: ", rangelist.inRange(new JDFDuration("PT1H25M")));
-            assertFalse("NOT InRange: ", rangelist.inRange(new JDFDuration("PT55S")));
-        }
-        catch (DataFormatException dfe)
-        {
-            System.out.println(dfe.toString());
-            fail("bad duration");
-        }
+    public final void testInRange() throws Exception
+    {
+        JDFDurationRangeList rangelist = 
+            new JDFDurationRangeList("PT5M ~ PT15M  PT1H5M ~ PT1H15M");
+
+        assertTrue("InRange: ", rangelist.inRange(new JDFDuration("PT15M")));
+        assertTrue("InRange: ", rangelist.inRange(new JDFDuration("PT1H15M")));
+        assertFalse("NOT InRange: ", rangelist.inRange(new JDFDuration("PT1H25M")));
+        assertFalse("NOT InRange: ", rangelist.inRange(new JDFDuration("PT55S")));
+
     }
 
-    public final void testJDFDuration()
+    public final void testJDFDuration() throws Exception
     {
-        JDFDuration d = new JDFDuration();
-        JDFDuration d1 = new JDFDuration();
-        JDFDuration d2 = new JDFDuration();
-        JDFDuration d3 = new JDFDuration();
-        
-        JDFDuration p1 = new JDFDuration();
-        JDFDuration p2 = new JDFDuration();
-        JDFDuration p3 = new JDFDuration();
-        
+
+        JDFDuration    d = new JDFDuration("PT5M");
+        JDFDuration    d1 = new JDFDuration("PT50M");
+
         try
         {
-            d = new JDFDuration("PT5M");
+            new JDFDuration("P0T5M");
+            fail("invalid duration String");
+
         }
         catch (DataFormatException dfe)
         {
-            System.out.println(dfe.toString());
-            fail("bad duration");
+            //
         }
-        
+
         try
         {
-            d1 = new JDFDuration("PT50M");
+            new JDFDuration("PT5MS");
+            fail("invalid duration String");
+
         }
         catch (DataFormatException dfe)
         {
-            System.out.println(dfe.toString());
-            fail("bad duration");
+//
         }
-        
-        try
-        {
-            d2 = new JDFDuration("P0T5M");
-        }
-        catch (DataFormatException dfe)
-        {
-            assertFalse("invalid duration String",false);
-        }
-        
-        try
-        {
-            d3 = new JDFDuration("PT5MS");
-        }
-        catch (DataFormatException dfe)
-        {
-            assertFalse("invalid duration String",false);
-        }
-        
-        try
-        {
-            p1 = new JDFDuration("P1Y2M3DT50M");
-        }
-        catch (DataFormatException dfe)
-        {
-            System.out.println(dfe.toString());
-            fail("bad duration");
-        }
-        
-        try
-        {
-            p1 = new JDFDuration("P01Y02M03DT50M");
-        }
-        catch (DataFormatException dfe)
-        {
-            System.out.println(dfe.toString());
-            fail("bad duration");
-        }
-        
-        try
-        {
-            p2 = new JDFDuration("P01Y02M03D");
-        }
-        catch (DataFormatException dfe)
-        {
-            System.out.println(dfe.toString());
-            fail("bad duration");
-        }
-        
-        try
-        {
-            p3 = new JDFDuration("P1Y2M3DT10H30M");
-        }
-        catch (DataFormatException dfe)
-        {
-            System.out.println(dfe.toString());
-            fail("bad duration");
-        }
-       
-       
+        JDFDuration p1 = new JDFDuration("P1Y2M3DT50M");
+        JDFDuration  p11 = new JDFDuration("P01Y02M03DT50M");
+        assertEquals(p1, p11);
+        JDFDuration p2 = new JDFDuration("P01Y02M03D");
+        JDFDuration p3 = new JDFDuration("P1Y2M3DT10H30M");
         assertTrue("Bad Constructor d", d.getDuration()==300);
         assertTrue("Bad Constructor d1", d1.getDuration()==3000);
-        assertTrue("Bad Constructor d2", d2.getDuration()==0);
-        assertTrue("Bad Constructor d3", d3.getDuration()==0);
         assertTrue("Bad Constructor p1", p1.getDurationISO().equals("P1Y2M3DT50M"));
         assertTrue("Bad Constructor p2", p2.getDurationISO().equals("P1Y2M3D"));
         assertTrue("Bad Constructor p2", p3.getDurationISO().equals("P1Y2M3DT10H30M"));
-        
+
     }
 }

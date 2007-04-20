@@ -1,73 +1,73 @@
 /*
-*
-* The CIP4 Software License, Version 1.0
-*
-*
-* Copyright (c) 2001-2006 The International Cooperation for the Integration of 
-* Processes in  Prepress, Press and Postpress (CIP4).  All rights 
-* reserved.
-*
-* Redistribution and use in source and binary forms, with or without
-* modification, are permitted provided that the following conditions
-* are met:
-*
-* 1. Redistributions of source code must retain the above copyright
-*    notice, this list of conditions and the following disclaimer. 
-*
-* 2. Redistributions in binary form must reproduce the above copyright
-*    notice, this list of conditions and the following disclaimer in
-*    the documentation and/or other materials provided with the
-*    distribution.
-*
-* 3. The end-user documentation included with the redistribution,
-*    if any, must include the following acknowledgment:  
-*       "This product includes software developed by the
-*        The International Cooperation for the Integration of 
-*        Processes in  Prepress, Press and Postpress (www.cip4.org)"
-*    Alternately, this acknowledgment may appear in the software itself,
-*    if and wherever such third-party acknowledgments normally appear.
-*
-* 4. The names "CIP4" and "The International Cooperation for the Integration of 
-*    Processes in  Prepress, Press and Postpress" must
-*    not be used to endorse or promote products derived from this
-*    software without prior written permission. For written 
-*    permission, please contact info@cip4.org.
-*
-* 5. Products derived from this software may not be called "CIP4",
-*    nor may "CIP4" appear in their name, without prior written
-*    permission of the CIP4 organization
-*
-* Usage of this software in commercial products is subject to restrictions. For
-* details please consult info@cip4.org.
-*
-* THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-* OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-* DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
-* THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
-* ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-* SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-* LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
-* USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-* ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-* OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
-* OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-* SUCH DAMAGE.
-* ====================================================================
-*
-* This software consists of voluntary contributions made by many
-* individuals on behalf of the The International Cooperation for the Integration 
-* of Processes in Prepress, Press and Postpress and was
-* originally based on software 
-* copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
-* copyright (c) 1999-2001, Agfa-Gevaert N.V. 
-*  
-* For more information on The International Cooperation for the 
-* Integration of Processes in  Prepress, Press and Postpress , please see
-* <http://www.cip4.org/>.
-*  
-* 
-*/
+ *
+ * The CIP4 Software License, Version 1.0
+ *
+ *
+ * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer. 
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
+ *
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:  
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of 
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
+ *
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written 
+ *    permission, please contact info@cip4.org.
+ *
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
+ *
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
+ *
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration 
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software 
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
+ *  
+ * For more information on The International Cooperation for the 
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
+ *  
+ * 
+ */
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
@@ -96,10 +96,11 @@ import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.util.StringUtil;
 
 public class JDFIntegerState extends JDFAbstractState
 {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[11];
     static 
@@ -121,7 +122,7 @@ public class JDFIntegerState extends JDFAbstractState
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
-    
+
 
     private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
     static
@@ -151,9 +152,9 @@ public class JDFIntegerState extends JDFAbstractState
      * @param qualifiedName
      */
     public JDFIntegerState(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
+            CoreDocumentImpl myOwnerDocument,
+            String myNamespaceURI,
+            String qualifiedName)
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
@@ -166,10 +167,10 @@ public class JDFIntegerState extends JDFAbstractState
      * @param myLocalName
      */
     public JDFIntegerState(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
+            CoreDocumentImpl myOwnerDocument,
+            String myNamespaceURI,
+            String qualifiedName,
+            String myLocalName)
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
@@ -184,11 +185,11 @@ public class JDFIntegerState extends JDFAbstractState
     {
         return "JDFIntegerState[ --> " + super.toString() + " ]";
     }
-    
-	/* ******************************************************
+
+    /* ******************************************************
 	// Attribute getter/ setter
-	**************************************************************** */	
-	
+     **************************************************************** */	
+
     public void setDefaultValue(int value)
     {
         setAttribute(AttributeName.DEFAULTVALUE, value, null);
@@ -216,11 +217,11 @@ public class JDFIntegerState extends JDFAbstractState
     {
         return getIntegerList(AttributeName.CURRENTVALUE);
     }
-        
+
     public void setAllowedValueList( JDFIntegerRangeList value)
     {
-		setAttribute(AttributeName.ALLOWEDVALUELIST, value.toString(), null);
-	}
+        setAttribute(AttributeName.ALLOWEDVALUELIST, value.toString(), null);
+    }
 
     /**
      * get the allowedValueList
@@ -229,18 +230,18 @@ public class JDFIntegerState extends JDFAbstractState
     public JDFIntegerRangeList getAllowedValueList()  
     {
         return getIntegerRangeList(AttributeName.ALLOWEDVALUELIST);
-	}
+    }
 
     public void setPresentValueList( JDFIntegerRangeList value)
     {
-		setAttribute(AttributeName.PRESENTVALUELIST, value.toString(), null);
-	}
-	
+        setAttribute(AttributeName.PRESENTVALUELIST, value.toString(), null);
+    }
+
     public JDFIntegerRangeList getPresentValueList()  
     {
-		JDFIntegerRangeList il=getIntegerRangeList(AttributeName.PRESENTVALUELIST);
+        JDFIntegerRangeList il=getIntegerRangeList(AttributeName.PRESENTVALUELIST);
         return (il==null) ? getAllowedValueList() : il;            
-	}
+    }
 
     /**
      * @param listName
@@ -281,63 +282,63 @@ public class JDFIntegerState extends JDFAbstractState
 
     public void setAllowedValueMax(int value)
     {
-		setAttribute(AttributeName.ALLOWEDVALUEMAX, value, null);
-	}
+        setAttribute(AttributeName.ALLOWEDVALUEMAX, value, null);
+    }
 
     public int getAllowedValueMax()  
     {
-		return getIntAttribute(AttributeName.ALLOWEDVALUEMAX, null, 0);
-	}
+        return getIntAttribute(AttributeName.ALLOWEDVALUEMAX, null, 0);
+    }
 
     public void setPresentValueMax(int value)
     {
-		setAttribute(AttributeName.PRESENTVALUEMAX, value, null);
-	}
+        setAttribute(AttributeName.PRESENTVALUEMAX, value, null);
+    }
 
 
     public int getPresentValueMax()  
     {
-		if (hasAttribute(AttributeName.PRESENTVALUEMAX))
+        if (hasAttribute(AttributeName.PRESENTVALUEMAX))
         {
-			return getIntAttribute(AttributeName.PRESENTVALUEMAX, null, 0);
-		}
-		return getAllowedValueMax();
-	}
+            return getIntAttribute(AttributeName.PRESENTVALUEMAX, null, 0);
+        }
+        return getAllowedValueMax();
+    }
 
     public void setAllowedValueMin(int value)
     {
-		setAttribute(AttributeName.ALLOWEDVALUEMIN, value, null);
-	}
+        setAttribute(AttributeName.ALLOWEDVALUEMIN, value, null);
+    }
 
 
     public int getAllowedValueMin()  
     {
-		return getIntAttribute(AttributeName.ALLOWEDVALUEMIN, null, 0);
-	}
+        return getIntAttribute(AttributeName.ALLOWEDVALUEMIN, null, 0);
+    }
 
 
     public void setPresentValueMin(int value)
     {
-		setAttribute(AttributeName.PRESENTVALUEMIN, value, null);
-	}
+        setAttribute(AttributeName.PRESENTVALUEMIN, value, null);
+    }
 
     public int getPresentValueMin()  
     {
-		if (hasAttribute(AttributeName.PRESENTVALUEMIN))
+        if (hasAttribute(AttributeName.PRESENTVALUEMIN))
         {
-			return getIntAttribute(AttributeName.PRESENTVALUEMIN, null, 0);
-		}
-		return getAllowedValueMin();
-	}
+            return getIntAttribute(AttributeName.PRESENTVALUEMIN, null, 0);
+        }
+        return getAllowedValueMin();
+    }
 
 
     public void setAllowedValueMod(JDFXYPair value)
     {
-		setAttribute(AttributeName.ALLOWEDVALUEMOD, value.toString());
-	}
+        setAttribute(AttributeName.ALLOWEDVALUEMOD, value.toString());
+    }
 
 
-	public JDFXYPair getAllowedValueMod()  
+    public JDFXYPair getAllowedValueMod()  
     {
         try
         {
@@ -347,7 +348,7 @@ public class JDFIntegerState extends JDFAbstractState
         {
             throw new JDFException("JDFIntegerState.getAllowedValueMod: The XYPair value is invalid!");      
         }
-	}
+    }
 
     public void setPresentValueMod(JDFXYPair value)
     {
@@ -369,40 +370,71 @@ public class JDFIntegerState extends JDFAbstractState
         {
             throw new JDFException("The XYPair value is invalid!");      
         }
-        
+
     }
-	
+
     public String getUnitType()
     {
-		return getAttribute(AttributeName.UNITTYPE);
-	}
+        return getAttribute(AttributeName.UNITTYPE);
+    }
 
 
     public void setUnitType(String value)
     {
-		setAttribute(AttributeName.UNITTYPE, value);
-	}
+        setAttribute(AttributeName.UNITTYPE, value);
+    }
 
-	/* ******************************************************
+    /* ******************************************************
 	// Element getter / setter
-	**************************************************************** */
+     **************************************************************** */
 
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java.lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
+     */
+    public void addValue(String value, EnumFitsValue testlists)
+    {
+        if(fitsValue(value, testlists))
+            return;
 
+        if(!StringUtil.isInteger(value))
+            return;
+        int i=StringUtil.parseInt(value, 0);
+
+        if(testlists==null || EnumFitsValue.Allowed.equals(testlists))
+        {
+            JDFIntegerRangeList list=getAllowedValueList();
+            if(list==null)
+                list=new JDFIntegerRangeList();
+            list.append (i);
+            list.normalize(true);
+            setAllowedValueList(list);
+
+        }
+        if(testlists==null || EnumFitsValue.Present.equals(testlists))
+        {
+            JDFIntegerRangeList list=getPresentValueList();
+            if(list==null || !hasAttribute(AttributeName.PRESENTVALUELIST))
+                list=new JDFIntegerRangeList();
+            list.append (i);
+            list.normalize(true);
+            setPresentValueList(list);
+        }
+    }
     /**
-    * fitsValue - checks whether <code>value</code> matches the given test lists
-    *
-    * @param value     value to test
-    * @param testlists test lists the value has to match.
-    *            In this State the test lists are ValueList AND ValueMod.<br> 
-    *            Choose one of two values: FitsValue_Allowed or FitsValue_Present. Defaults to Allowed.
-    * 
-    * @return boolean - true, if <code>value</code> matches the testlists or 
-    *            if AllowedValueList and AllowedValueMod are not specified
-    */
+     * fitsValue - checks whether <code>value</code> matches the given test lists
+     *
+     * @param value     value to test
+     * @param testlists test lists the value has to match.
+     *            In this State the test lists are ValueList AND ValueMod.<br> 
+     *            Choose one of two values: FitsValue_Allowed or FitsValue_Present. Defaults to Allowed.
+     * 
+     * @return boolean - true, if <code>value</code> matches the testlists or 
+     *            if AllowedValueList and AllowedValueMod are not specified
+     */
     public boolean fitsValue(String value, EnumFitsValue testlists)
     {
         boolean testResult = true;
-        
+
         if (!fitsListType(value))
             testResult = false;
         else 
@@ -421,8 +453,8 @@ public class JDFIntegerState extends JDFAbstractState
         }
         return testResult;
     }
-    
-    
+
+
     /**
      * fitsValueList - checks whether <code>rangelist</code> matches 
      *           the AllowedValueList/PresentValueList, specified for this State
@@ -444,7 +476,7 @@ public class JDFIntegerState extends JDFAbstractState
         }
         if (list == null)
             return true;
-        
+
         EnumListType listType=getListType();
         if (listType.equals(EnumListType.CompleteList))
         {
@@ -463,14 +495,14 @@ public class JDFIntegerState extends JDFAbstractState
         for (int i=0; i<siz; i++)
         {
             JDFIntegerRange range = (JDFIntegerRange) rangelist.at(i);
-            
+
             // if range looks like"0~-1" but no xdef, then we assume that xdef=lastIntegerInList 
             int lastInList = ((JDFIntegerRange) list.at(list.size()-1)).getRight();
             int leftInRange = range.getLeft();
             int rightInRange = range.getRight();
             if (lastInList>0  && 
-               (( rightInRange < 0 && java.lang.Math.abs(rightInRange)< lastInList ) || 
-                ( leftInRange  < 0 && java.lang.Math.abs(leftInRange) < lastInList )) ) 
+                    (( rightInRange < 0 && java.lang.Math.abs(rightInRange)< lastInList ) || 
+                            ( leftInRange  < 0 && java.lang.Math.abs(leftInRange) < lastInList )) ) 
             {
                 range.setDef(lastInList);
             }
@@ -501,7 +533,7 @@ public class JDFIntegerState extends JDFAbstractState
             if(!hasAttribute(AttributeName.ALLOWEDVALUEMOD)&&!hasAttribute(AttributeName.PRESENTVALUEMOD))
                 return true;
         }
-        
+
         JDFXYPair mod;
         if (valuemod.equals(EnumFitsValue.Allowed)) 
         {
@@ -514,11 +546,11 @@ public class JDFIntegerState extends JDFAbstractState
 
         int divi = (int)(mod.getX()+0.5); // X - the Modulo
         int shift = (int)(mod.getY()+0.5); // Y - offset of the allowed/present value
-        
+
         if (divi==0)   // ValueMod can't be "0 x"  
             return false;
-        
-        
+
+
         JDFIntegerList v=rangelist.getIntegerList();
         int[] vi = v.getIntArray();
         int siz=vi.length;
@@ -543,13 +575,13 @@ public class JDFIntegerState extends JDFAbstractState
     {
         int v_size=value.size();
         int l_size=list.size();
-        
+
         if (v_size!=l_size) 
             return false; 
-        
+
         if (!value.isUnique()) 
             return false;
-     
+
         JDFIntegerRangeList valueList = new JDFIntegerRangeList(value);
 
         boolean bFound;
@@ -574,25 +606,25 @@ public class JDFIntegerState extends JDFAbstractState
     }
 
     /**
-    * fitsCompleteOrderedList - tests whether <code>value</code> matches the given testlist
-    * (ListType=CompleteOrderedList)
-    *
-    * @param value value to test
-    * @param list  testlist, either AllowedValueList or PresentValueList.
-    * 
-    * @return boolean - true, if <code>value</code> matches the testlist
-    */
+     * fitsCompleteOrderedList - tests whether <code>value</code> matches the given testlist
+     * (ListType=CompleteOrderedList)
+     *
+     * @param value value to test
+     * @param list  testlist, either AllowedValueList or PresentValueList.
+     * 
+     * @return boolean - true, if <code>value</code> matches the testlist
+     */
     private final boolean fitsCompleteOrderedList(JDFIntegerRangeList value, JDFIntegerRangeList list)
     {
         int v_size = value.size();
         int l_size = list.size();
-        
+
         if ( v_size != l_size ) 
             return false; 
 
         if (!value.isUnique()) 
             return false;
- 
+
         for (int i=0; i<l_size; i++)
         {
             if (!list.at(i).equals(value.at(i))) 
@@ -616,7 +648,7 @@ public class JDFIntegerState extends JDFAbstractState
     {
         int v_size = value.size();
         int l_size = list.size();
-        
+
         for (int i=0; i<v_size; i++)
         {
             for (int j=0; j<l_size; j++)
@@ -643,6 +675,6 @@ public class JDFIntegerState extends JDFAbstractState
         // TODO Auto-generated method stub
         return super.clone();
     }
-    
-    
+
+
 }

@@ -4105,8 +4105,11 @@ public class JDFElement extends KElement
     }
     
 
-    /* (non-Javadoc)
-     * @see org.cip4.jdflib.core.KElement#matchesPath(java.lang.String, boolean)
+    /**
+     * check whether this matches a simple xpath - note that references are NOT followed in case a node name is 
+     * replaced with a "*"
+     * @param path xpath to match
+     * @return boolean true, if this matches the given xpath
      */
     public boolean matchesPath(String path, boolean bFollowRefs)
     {
@@ -4120,7 +4123,7 @@ public class JDFElement extends KElement
             if(e==null)
                 return false;
             final String locName = e.getLocalName();
-            if(!locName.equals(v.stringAt(i)))
+            if(!v.stringAt(i).equals(JDFConstants.STAR)&&!locName.equals(v.stringAt(i)))
             {
                 if(bFollowRefs && eLast!=null && locName.equals(ElementName.RESOURCEPOOL))
                 { // now look for a refelement that points at this
