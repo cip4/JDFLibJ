@@ -79,6 +79,8 @@ package org.cip4.jdflib.core;
 
 import java.io.File;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
@@ -735,6 +737,7 @@ public class KElementTest extends JDFTestCaseBase
         assertTrue(f.length()>1.1*f2.length());
     }
 
+    ///////////////////////////////////////////////////////////////////
     public void testRemoveXPathElement()
     {
         XMLDoc d=new XMLDoc("doc",null);
@@ -756,11 +759,53 @@ public class KElementTest extends JDFTestCaseBase
     }
     ///////////////////////////////////////////////////////////////////
 
+    public void testGetXPathAttributeMap()
+    {
+        XMLDoc  jdfDoc = new XMLDoc("a",null);
+        KElement root   = jdfDoc.getRoot();
+        root.setXPathAttribute("b/c[3]/d/@foo", "bar3");
+        root.setXPathAttribute("b/c[5]/d/@foo", "bar5");
+        Map m=root.getXPathAttributeMap("//*/@foo");
+        assertEquals(m.size(), 2);
+        m=root.getXPathAttributeMap("//@foo");
+        assertEquals(m.size(), 2);
+        Iterator it=m.keySet().iterator();
+        assertEquals(root.getXPathAttribute((String)it.next(), null), "bar3");
+        assertEquals(root.getXPathAttribute((String)it.next(), null), "bar5");
+               
+    }
+  ///////////////////////////////////////////////////////////////////
+
+    public void testGetXPathElementVector()
+    {
+        XMLDoc  jdfDoc = new XMLDoc("a",null);
+        KElement root   = jdfDoc.getRoot();
+        VElement va=new VElement();
+        va.add(root);
+        assertEquals(va,root.getXPathElementVector("//a", 0));
+        assertEquals(va,root.getXPathElementVector("/a", 0));
+        assertEquals(va,root.getXPathElementVector(".", 0));
+        va.clear();
+        va.add(root.appendElement("b"));
+        va.add(root.appendElement("b"));
+        assertEquals(va,root.getXPathElementVector("b", 0));
+        assertEquals(va,root.getXPathElementVector("//b", 0));
+        va.clear();
+        va.add(root.getCreateXPathElement("./b/c"));
+        va.add(root.getCreateXPathElement("./c"));
+        root.getCreateXPathElement("./c/d");
+        assertEquals(va,root.getXPathElementVector("//c", 0));
+        root.getCreateXPathElement("./c/d");
+        assertEquals(va,root.getXPathElementVector("//c", 0));
+        assertEquals(1,root.getXPathElementVector("//d", 0).size());
+        assertEquals(root.getXPathElementVector("//d", 0),root.getXPathElementVector("//c/d", 0));
+        assertTrue(root.getXPathElementVector("//*", 0).contains(va.elementAt(0)));
+        assertTrue(root.getXPathElementVector("//*", 0).contains(root));
+    }
+    ///////////////////////////////////////////////////////////////////
+
     public void testGetXPathElement()
     {
-
-
-
         JDFDoc  jdfDoc = new JDFDoc(ElementName.JDF);
         JDFNode root   = (JDFNode) jdfDoc.getRoot();
 
@@ -794,6 +839,13 @@ public class KElementTest extends JDFTestCaseBase
         assertEquals(e.getNodeName(), "foo.bar");
         assertEquals(root2.getXPathElement("foo.bar"), e);
         assertEquals(root2.getCreateXPathElement("foo.bar"), e);
+        root.setXPathAttribute("/JDF/ee[2]/@a", "2");
+        root.setXPathAttribute("/JDF/ee[1]/@a", "2");
+        root.setXPathAttribute("/JDF/ee[2]/ff/@b", "3");
+        assertEquals(root.getXPathAttribute("/JDF/ee/ff/@b",null), "3");
+        assertEquals(root.getXPathAttribute("/JDF/ee[@a=\"2\"]/ff/@b",null), "3");
+        assertNull(root.getXPathAttribute("/JDF/ee[1]/ff/@b",null));
+        
 
     }
     ///////////////////////////////////////////////////////////////////
@@ -833,12 +885,29 @@ public class KElementTest extends JDFTestCaseBase
         assertNotNull("e",e);
         assertEquals("",e,root.getCreateXPathElement("./foo/bar[2]/fnarf[3]"));
         assertEquals("",e,root.getXPathElement("./foo/bar[2]/fnarf[3]"));
+        root.setXPathAttribute("./foo/bar[2]@blub", "b1");
+        
         assertEquals("1 foo",root.numChildElements("foo",null),1);
         assertNotNull("get",root.getXPathElement("./foo/bar[2]/fnarf[3]"));
         assertEquals("",root.getElement("foo").numChildElements("bar",null),2);
         assertEquals("",root.getElement("foo").getElement("bar").numChildElements("fnarf",null),0);
         assertEquals("",root.getElement("foo").getElement("bar").getNextSiblingElement("bar",null).numChildElements("fnarf",null),3);
         assertEquals("",root.getCreateXPathElement("."),root);
+
+        assertEquals("",e,root.getXPathElement("./foo/bar[@blub=\"b1\"]/fnarf[3]"));
+        assertEquals("",e,root.getCreateXPathElement("./foo/bar[@blub=\"b1\"]/fnarf[3]"));
+        assertNotSame("",e,root.getCreateXPathElement("./foo/bar[@blub=\"b1\"]/fnarf[5]"));
+        assertEquals("",root.getElement("foo").getElement("bar").numChildElements("fnarf",null),0);
+        assertEquals("",root.getElement("foo").getElement("bar").getNextSiblingElement("bar",null).numChildElements("fnarf",null),5);
+        try
+        {
+            root.getCreateXPathElement("./foo/bar[@blub=\"b1\"]/fnarf[@a=\"b\"]");
+            fail("cannot create by attribute value");
+        }
+        catch(IllegalArgumentException x)
+        {
+        /* */
+        }
     }
 
     public void testBuildXPath()

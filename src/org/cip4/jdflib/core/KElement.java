@@ -81,6 +81,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -4605,6 +4606,7 @@ public class KElement extends ElementNSImpl
      * 			     or null if the xpath element does not exist
      *
      * @throws JDFException if the defined path is a bad attribute path
+     * @default getXPathAttribute(path, null);
      */
     public String getXPathAttribute(String path, String def)
     {
@@ -4618,6 +4620,48 @@ public class KElement extends ElementNSImpl
                 : kEle.getAttribute(path.substring(pos + 1), null, def);
     }
 
+    /**
+     * Gets a map of attribute values as defined by XPath
+     * namespace prefixes are resolved <br>
+     *
+     * @tbd enhance the subsets of allowed XPaths, 
+     *      now only .,..,/,@ are supported
+     * 
+     * @param path XPath abbreviated syntax representation of the attribute, 
+     *              <code>parentElement/thisElement/@thisAtt</code>
+     *              <code>parentElement/thisElement[2]/@thisAtt</code>
+     *              <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
+     * @param def default value if it doesn't exist
+     * 
+     * @return String the String value of the attribute
+     *               or null if the xpath element does not exist
+     *
+     * @throws JDFException if the defined path is a bad attribute path
+     * @default getXPathAttribute(path, null);
+     */
+    public Map getXPathAttributeMap(String path)
+    {
+        final int pos = path.lastIndexOf(JDFConstants.AET);        
+        if (pos == -1)
+        {
+            throw new JDFException("GetXPathAttribute - bad attribute path: " + path);
+        }
+        final String attName=path.substring(pos + 1);
+        final VElement vEle = getXPathElementVector(path.substring(0, pos),0);
+        if(vEle==null)
+            return null;
+        LinkedHashMap map=new LinkedHashMap();
+        for(int i=0;i<vEle.size();i++)
+        {
+            KElement e=vEle.item(i);
+            String s=e.getAttribute_KElement(attName,null,null);
+            if(s!=null)
+            {
+                map.put(e.buildXPath(null, 1)+"/@"+attName,s);
+            }
+        }
+        return map.size()>0 ? map : null;
+    }
 //  public Node getXPathNode(String path)
 //  {
 //  Document doc=getOwnerDocument();
@@ -4629,6 +4673,7 @@ public class KElement extends ElementNSImpl
 //  }
     /**
      * gets an element as defined by XPath to value <br>
+     * 
      *
      * @tbd enhance the subsets of allowed XPaths, 
      *      now only .,..,/,@ are supported
@@ -4640,54 +4685,115 @@ public class KElement extends ElementNSImpl
      *              <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
      * 
      * @return KElement the specified element
+     * @throws IllegalArgumentException if path is not supported
      */
     public KElement getXPathElement(String path)
     {
-        path=StringUtil.replaceString(path, "[@", "|||");
-        if (JDFConstants.EMPTYSTRING.equals(path))
-            return this;
+        VElement v= getXPathElementVector(path, 1);
+        if(v==null || v.size()<1)
+            return null;
+        return v.item(0);
+    } 
+    
+    /**
+     * gets an vector of elements element as defined by XPath to value <br>
+     * 
+     *
+     * @tbd enhance the subsets of allowed XPaths, 
+     *      now only .,..,/,@,// are supported
+     * 
+     * @param path XPath abbreviated syntax representation of the 
+     *             attribute, e.g  
+     *              <code>parentElement/thisElement</code>
+     *              <code>parentElement/thisElement[2]</code>
+     *              <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
+     * 
+     * @return VElement the vector of matching elements
+     * 
+     * @throws IllegalArgumentException if path is not supported
+     */
+    public VElement getXPathElementVector(String path, int maxSize)
+    {
         if (path == null)
             return null;
 
+        VElement vRet=new VElement();
+        if (JDFConstants.EMPTYSTRING.equals(path))
+        {
+            vRet.add(this);
+            return vRet;
+        }
+        path=StringUtil.replaceString(path, "[@", "|||");
         if (path.startsWith(JDFConstants.SLASH))
         {
-            KElement r = getDocRoot();
-            int nextPos = path.indexOf("/", 2);
-            if ((path.substring(1, nextPos)).equals(r.getNodeName()))
+            KElement r=getDocRoot();
+            final String rootNodeName = r.getNodeName();
+            if(path.startsWith("//"))                   
             {
-                if (nextPos == -1)
+                int nextPos = path.indexOf("/", 3);
+                final String nextPath = nextPos>0 ? path.substring( nextPos+1) : "";
+                final String loop=nextPos>0 ? path.substring(2, nextPos) : path.substring(2);
+                VElement vTest=r.getChildrenByTagName(loop, null, null, false, true, 0);
+                if(rootNodeName.equals(loop) || isWildCard(loop))
+                    vTest.add(r);
+                
+                for(int i=0;i<vTest.size();i++)
                 {
-                    return this;
+                    KElement e=vTest.item(i);
+                    VElement vRet2=e.getXPathElementVector(nextPath, maxSize);
+                    if(vRet2!=null)
+                    {
+                        vRet.addAll(vRet2);
+                        vRet.unify();
+                        if(maxSize>0 && vRet.size()>=maxSize)
+                            return vRet;
+                    }
                 }
-                return r.getXPathElement(path.substring(nextPos + 1));
+                return vRet;
             }
+            int nextPos = path.indexOf("/", 2);
+            final String rootPath = nextPos>0 ? path.substring( 1,nextPos) : path.substring( 1);
+            final String nextPath = nextPos>0 ? path.substring( nextPos+1) : "";
+            if (rootPath.equals(rootNodeName) || isWildCard(rootNodeName))
+            {
+                return r.getXPathElementVector(nextPath,maxSize);
+            }
+            throw new IllegalArgumentException("Invalid root node name");
+                
         }
         else if (path.startsWith(JDFConstants.DOT))
         {
             if (path.startsWith(JDFConstants.DOTSLASH))
-                return getXPathElement(path.substring(JDFConstants.DOTSLASH.length()));
+                return getXPathElementVector(path.substring(JDFConstants.DOTSLASH.length()),maxSize);
             if (path.startsWith(JDFConstants.DOTDOTSLASH))
             {
                 final KElement parent = getParentNode_KElement();
                 if(parent==null)
                     return null;
-                return parent.getXPathElement(path.substring(JDFConstants.DOTDOTSLASH.length()));
+                return parent.getXPathElementVector(path.substring(JDFConstants.DOTDOTSLASH.length()),maxSize);
             }
             else if (path.equals(JDFConstants.DOT))
             {
-                return this;
+                vRet.add(this);
+                return vRet;
             }
             else if (path.equals(".."))
             {
-                return getParentNode_KElement();
+                KElement parent=getParentNode_KElement();
+                if(parent==null)
+                    return null;
+                vRet.add(parent);
+                return vRet;
             }
         }
+        
         int posB0 = path.indexOf("[");
         int posBAt=path.indexOf("|||");
         int iSkip = 0;
         String newPath = path;
         int pos = newPath.indexOf(JDFConstants.SLASH);
         JDFAttributeMap map=null;
+        boolean bExplicitSkip=false;
 
         if (posB0 != -1 && (posB0<pos || pos==-1)) // parse for [n]
         {
@@ -4695,26 +4801,51 @@ public class KElement extends ElementNSImpl
             String n = path.substring(posB0 + 1, posB1);
             iSkip = StringUtil.parseInt(n, 0);
             iSkip--;
+            bExplicitSkip=true;
             newPath = path.substring(0, posB0) + path.substring(posB1 + 1);
             pos = newPath.indexOf(JDFConstants.SLASH);                   
         }
         else  if (posBAt != -1 && (posBAt<pos || pos==-1)) // parse for [@a="b"]
         {
             int posB1 = path.indexOf("]");
+            map=new JDFAttributeMap();
             String attEqVal = path.substring(posBAt + 3, posB1);
+            //TODO multiple attributes, maybe tokenize by ","
             String attName=StringUtil.token(attEqVal, 0, "=");
             String attVal=attEqVal.substring(attName.length()+2,attEqVal.length()-1);
-            map=new JDFAttributeMap(attName,attVal);
+            map.put(attName,attVal);
             newPath = path.substring(0, posBAt) + path.substring(posB1 + 1);
             pos = newPath.indexOf(JDFConstants.SLASH);                   
         }
 
         if (pos != -1) // have another element
         {
-            final KElement ee = getChildByTagName(newPath.substring(0, pos), null, iSkip, map, true, true);            
-            return (ee == null) ? null : ee.getXPathElement(newPath.substring(pos + 1));
+            final String elmName = newPath.substring(0, pos);
+            KElement eRet=null;
+            final VElement ve = getChildrenByTagName(elmName, null, map, true, true,0);  
+            if(ve==null || ve.size()<=iSkip)
+                return null;
+            int iFirst=bExplicitSkip ? iSkip : 0;
+            int iLast=bExplicitSkip ? iSkip+1 : ve.size();
+            for(int i=iFirst;i<iLast;i++) // loop in case multiple elements contain the same attribute
+            {
+                KElement ee=ve.item(i);
+                if (ee != null) 
+                    eRet= ee.getXPathElement(newPath.substring(pos + 1));
+                if(eRet!=null)
+                    vRet.add(eRet);
+             }
+            return vRet.size()>0 ? vRet : null;
         }
-        return getChildByTagName(newPath, null, iSkip, map, true, true);
+        if(bExplicitSkip)
+        {
+            KElement e=getChildByTagName(newPath, null, iSkip, map, true, true);
+            if(e==null)
+                return null;
+            vRet.add(e);
+            return vRet;
+        }
+        return getChildrenByTagName(newPath, null, map, true, true,maxSize);
     }
 
     /**
@@ -4734,6 +4865,21 @@ public class KElement extends ElementNSImpl
     {
         if(path==null || path.length()==0) 
             return this;
+        KElement e=getXPathElement(path);
+        if(e!=null)
+            return e;
+        int slash=path.indexOf("/");
+        if(slash>0)
+        {
+            String next=path.substring(0,slash);
+            e=getXPathElement(next);
+            if(e!=null)
+            {
+                next=path.substring(slash+1);
+                return e.getCreateXPathElement(next);
+            }
+        }
+
         if (path.startsWith(JDFConstants.SLASH))
         {
             KElement r=getDocRoot();
@@ -4763,7 +4909,9 @@ public class KElement extends ElementNSImpl
         if(posB0!=-1 && (posB0<pos || pos==-1)){
             int posB1=path.indexOf("]");
             final String siSkip=path.substring(posB0+1,posB1);
-            iSkip=new Integer(siSkip).intValue();
+            if(!StringUtil.isInteger(siSkip))
+                throw new IllegalArgumentException("GetCreateXPath: illegal path:"+path);
+            iSkip=StringUtil.parseInt(siSkip, 1);
             iSkip--;
             newPath=path.substring(0,posB0)+path.substring(posB1+1);
             pos=newPath.indexOf(JDFConstants.SLASH);
@@ -4772,7 +4920,7 @@ public class KElement extends ElementNSImpl
             int n=numChildElements(newPath.substring(0,pos),null);
             for(int i=n;i<iSkip;i++)
                 appendElement(newPath.substring(0,pos),null);
-            KElement e=getCreateElement(newPath.substring(0,pos),null,iSkip);
+            e=getCreateElement(newPath.substring(0,pos),null,iSkip);
             return e.getCreateXPathElement(newPath.substring(pos+1));
         }
         int n=numChildElements(newPath,null);
