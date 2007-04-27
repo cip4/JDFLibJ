@@ -1335,7 +1335,7 @@ public class JDFDevCap extends JDFAutoDevCap
         if (hasAttribute(AttributeName.DEVCAPREFS)) 
         {         
             JDFDeviceCap deviceCap = (JDFDeviceCap) getDeepParent(ElementName.DEVICECAP, 0);
-            JDFDevCapPool devCapPool = deviceCap.getDevCapPool();
+            JDFDevCapPool devCapPool = deviceCap == null ? null : deviceCap.getDevCapPool();
             if (devCapPool != null) 
             {
                 VString idRefs = getDevCapRefs();
@@ -2172,9 +2172,10 @@ public class JDFDevCap extends JDFAutoDevCap
       * sets the element and attribute defaults
       * 
 	 * @param element
+     * @param bAll if false, only add if minOccurs>=1 and required=true or a default exists
 	 * @return
 	 */
-    public boolean setDefaultsFromCaps(KElement element)
+    public boolean setDefaultsFromCaps(KElement element, boolean bAll)
     {
         boolean success=false;
         if(element instanceof JDFResource)
@@ -2185,18 +2186,28 @@ public class JDFDevCap extends JDFAutoDevCap
                 VElement vR=r.getLeaves(false);
                 for(int i=0;i<vR.size();i++)
                 {
-                    success=setDefaultsFromCaps(vR.item(i)) || success;
+                    success=setDefaultsFromCaps(vR.item(i),bAll) || success;
                 }
                 return success;
             }
         }
         // default leaf or element case -
-        VElement vSubDevCap=getDevCapVector(null,true);
+        VElement vSubDevCap=null;
+        try
+        {
+            vSubDevCap = getDevCapVector(null,true);
+        }
+        catch(JDFException x)
+        {
+            return false;
+        }
         int i;
         for(i=0;i<vSubDevCap.size();i++)
         {
             JDFDevCap subDevCap=(JDFDevCap) vSubDevCap.elementAt(i);
-            final int minOccurs = subDevCap.getMinOccurs();
+            int minOccurs = subDevCap.getMinOccurs();
+            if(minOccurs==0 && bAll)
+                minOccurs=1;
             VElement subElms=subDevCap.getMatchingElementsFromParent(element,vSubDevCap);
             if(minOccurs>0)
             {
@@ -2215,7 +2226,7 @@ public class JDFDevCap extends JDFAutoDevCap
             final int subSize= subElms==null ? 0 : subElms.size();
             for(int ii=0;ii<subSize;ii++)
             {
-                success = subDevCap.setDefaultsFromCaps(subElms.item(ii)) || success;
+                success = subDevCap.setDefaultsFromCaps(subElms.item(ii), bAll) || success;
             }            
         }
         // states
@@ -2223,11 +2234,48 @@ public class JDFDevCap extends JDFAutoDevCap
         for(i=0;i<vStates.size();i++)
         {
             JDFAbstractState state=(JDFAbstractState)vStates.elementAt(i);
-            success = state.setDefaultsFromCaps(element) || success;
+            success = state.setDefaultsFromCaps(element, bAll) || success;
         }
 
         return false;
-    }   
-     
+    }
+
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib.core.KElement.EnumValidationLevel, boolean, int)
+     */
+    public VString getInvalidAttributes(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
+    {
+        VString vs= super.getInvalidAttributes(level, bIgnorePrivate, nMax);
+        if(nMax>0 && vs.size()>nMax)
+            return vs;
+        if(!EnumValidationLevel.RecursiveComplete.equals(level) && !EnumValidationLevel.RecursiveIncomplete.equals(level))
+            return vs;
+        if(vs.contains(AttributeName.DEVCAPREFS))
+            return vs;
+
+        if(hasAttribute(AttributeName.DEVCAPREFS))
+        {
+            JDFDeviceCap deviceCap = (JDFDeviceCap) getDeepParent(ElementName.DEVICECAP, 0);
+            JDFDevCapPool devCapPool = deviceCap == null ? null : deviceCap.getDevCapPool();
+            if (devCapPool == null)
+            {
+                vs.add(AttributeName.DEVCAPREFS);
+                return vs;
+            }
+            VString idRefs = getDevCapRefs();
+            for (int i=0; i < idRefs.size(); i++) 
+            {
+                JDFDevCap devCap = devCapPool.getDevCap(idRefs.stringAt(i));
+                if (devCap==null)
+                {
+                    vs.add(AttributeName.DEVCAPREFS);
+                    return vs;
+                }
+            }
+        }           
+        return vs;
+    }
+
+
 ///////////////////////////////////////////////////////     
 }

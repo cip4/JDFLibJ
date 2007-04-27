@@ -138,7 +138,7 @@ public class JDFDevCapTest extends TestCase
         assertTrue(is.fitsValue("19~33", EnumFitsValue.Allowed));
     }
     
-    public void tetgetMatchingElementsFromParentSingle()
+    public void testgetMatchingElementsFromParentSingle()
     {
         JDFDoc ddc=new JDFDoc("DevCap");
         JDFDoc dde=new JDFDoc("Layout");
@@ -165,7 +165,7 @@ public class JDFDevCapTest extends TestCase
     
     
     
-    public void tetgetMatchingElementsFromParentMulti()
+    public void testgetMatchingElementsFromParentMulti()
     {
         JDFDoc ddc=new JDFDoc("DevCap");
         JDFDoc dde=new JDFDoc("Layout");

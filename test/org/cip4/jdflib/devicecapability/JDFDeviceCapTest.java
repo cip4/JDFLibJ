@@ -584,7 +584,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
         JDFDoc d=new JDFDoc("JDF");
         JDFNode n=d.getJDFRoot();         
         n.setType("fnarf",false);
-        devicecap.setDefaultsFromCaps(n,true);
+        devicecap.setDefaultsFromCaps(n,true,false);
         assertNotNull(n.getResourceLinks("Layout", null, null));
         JDFLayout lo=(JDFLayout) n.getResourcePool().getPoolChild(0,"Layout",null,null);
         final JDFContentObject contentObject = lo.getContentObject(0);

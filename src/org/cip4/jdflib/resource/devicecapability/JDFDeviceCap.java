@@ -944,27 +944,34 @@ public static JDFMessageService getMessageServiceForJMFType(JDFMessage m, JDFRes
      * set the defaults of node to the values defined in the child DevCap and State elements
      * @param node   the JDFNode in which to set defaults
      * @param bLocal if true, set only in the local node, else recurse children
+     * @param bAll if false, only add if minOccurs>=1 and required=true or a default exists
      */
-    public boolean setDefaultsFromCaps(JDFNode node, boolean bLocal)
+    public boolean setDefaultsFromCaps(JDFNode node, boolean bLocal, boolean bAll)
     {
         boolean success=false;
-        if(!node.hasAttribute(AttributeName.TYPE))
-        {
-            node.setType(EnumType.ProcessGroup);
-        }
+        boolean bTestTypes=node.hasAttribute(AttributeName.TYPE);
         if(bLocal==false)
         {
             VElement vNode=node.getvJDFNode(null,null,false);
             for(int i=0;i<vNode.size();i++)
             {
                 JDFNode nod=(JDFNode)vNode.elementAt(i);
-                success = setDefaultsFromCaps(nod,true) || success;
+                success = setDefaultsFromCaps(nod,true, bAll) || success;
             }
             return success;
         }
-        if(!matchesType(node,true))
+        if(bTestTypes && !matchesType(node,true))
             return false;
-        addResourcesFromDevCaps(node);
+        if(hasAttribute(AttributeName.TYPES))
+        {
+            node.setType(EnumType.ProcessGroup);
+            Vector cm=getCombinedMethod();
+            if(cm!=null && cm.contains(EnumCombinedMethod.Combined))
+                node.setType(EnumType.Combined);
+                
+            node.setTypes(getTypes());
+        }
+        addResourcesFromDevCaps(node, bAll);
         int i;
         VElement vDevCaps=getChildElementVector(ElementName.DEVCAPS,null,null,true,99999,false);
 //      step 1, create all missing resources etc
@@ -972,18 +979,41 @@ public static JDFMessageService getMessageServiceForJMFType(JDFMessage m, JDFRes
         for(i=0;i<size;i++)
         {
             JDFDevCaps dcs=(JDFDevCaps)vDevCaps.elementAt(i);
-            success =  dcs.setDefaultsFromCaps(node) || success;
+            success =  dcs.setDefaultsFromCaps(node, bAll) || success;
+        }
+        
+        VElement vStates = getStates();
+        for(i=0;i<vStates.size();i++)
+        {
+            JDFAbstractState state=(JDFAbstractState)vStates.elementAt(i);
+            success = state.setDefaultsFromCaps(node, bAll) || success;
         }
 
         return success;
    }
 
+    /**
+     * get all direct state elements of <this>
+     * @return the vector of state elements
+     */
+    public VElement getStates()
+    {
+        VElement vStates=getChildrenByTagName(null,null,null,true,true,0);
+        for(int ii=vStates.size()-1;ii>=0;ii--)
+        {
+            if(!(vStates.elementAt(ii) instanceof JDFAbstractState))
+                vStates.remove(ii);
+        }
+        return vStates;
+    }
+
 
     /**
      * add any missing resources, links or elements that are described by devcaps elements
+     * @param bAll if false, only add if minOccurs>=1 and required=true or a default exists
      * @param node
      */
-    private void addResourcesFromDevCaps(JDFNode node)
+    private void addResourcesFromDevCaps(JDFNode node, boolean bAll)
     {
         VElement vDevCaps=getChildElementVector(ElementName.DEVCAPS,null,null,true,99999,false);
 // step 1, create all missing resources etc
@@ -991,7 +1021,7 @@ public static JDFMessageService getMessageServiceForJMFType(JDFMessage m, JDFRes
         for(int i=0;i<size;i++)
         {
             JDFDevCaps dcs=(JDFDevCaps)vDevCaps.elementAt(i);
-            dcs.appendMatchingElementsToNode(node);
+            dcs.appendMatchingElementsToNode(node, bAll);
         }
     }
 

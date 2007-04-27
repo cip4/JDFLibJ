@@ -3860,10 +3860,12 @@ public class KElement extends ElementNSImpl
         insertBefore(newChild,beforeChild);
     }
     /**
-     * append a DOM comment <code>&lt;!-- XMLComment --&gt;</code> in front of <code>this</code>
+     * set a DOM comment <code>&lt;!-- XMLComment --&gt;</code> in front of <code>this</code>
+     * if an xml Comment node already exists directly in front of <code>this</code>, the previous comment is removed 
+     *
      * The double minus sign '--' is escaped with an underscore '_' in order to ensure valid xml
      * 
-     * @param commentText  the comment to append
+     * @param commentText  the comment text to set
      */
     public void setXMLComment(String commentText)
     {
@@ -3873,9 +3875,18 @@ public class KElement extends ElementNSImpl
             commentText=StringUtil.replaceString(commentText, "--", "__");
             final Comment newChild = getOwnerDocument().createComment(commentText);
             getOwnerDocument().insertBefore(newChild,this);
+            Node last=newChild.getPreviousSibling();
+            if(last!=null && last.getNodeType()==Node.COMMENT_NODE)
+                getOwnerDocument().removeChild(last);
         }
         else
+        {
+            Node last=getPreviousSibling();
             e.appendXMLComment(commentText, this);
+            if(last!=null && last.getNodeType()==Node.COMMENT_NODE)
+                e.removeChild(last);
+
+        }
     }
 
     /** 

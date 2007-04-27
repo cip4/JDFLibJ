@@ -376,7 +376,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
      */
     public String getDevNS()
     {
-        return getAttribute(AttributeName.DEVNS, JDFConstants.EMPTYSTRING, "http://www.cip4.org/JDFSchema_1_1");
+        return getAttribute(AttributeName.DEVNS, null,JDFElement.getSchemaURL());
     }
 
     /**
@@ -793,18 +793,53 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
      * @param element the element to set the defaults on
      * @return true if successful
      */
-    public boolean setDefaultsFromCaps(KElement element)
+    public boolean setDefaultsFromCaps(KElement element, boolean bAll)
     {
-        if(!getHasDefault())
-            return false;
         String def=getAttribute(AttributeName.DEFAULTVALUE,null,null);
-        if(def==null)
+        if(!bAll && def==null)
             return false;
+        if(def==null)
+        {
+            def=getAttribute(AttributeName.CURRENTVALUE,null,null);
+        }
+
+        if(def==null)
+        {
+            def=getAttribute(AttributeName.ALLOWEDVALUELIST); 
+            if(def.indexOf("~")>=0 || def.indexOf(" ")>=0)// allowedvaluelist is a list or range
+            {
+                String lt=getListType().getName();
+                if(!lt.endsWith("List")&&def.indexOf(" ")>=0)
+                    def=null;
+                else  if(lt.indexOf("Range")<0 && def.indexOf("~")>=0)
+                    def=null;
+            }
+        }
+        if(def==null)
+        {
+            if ((this instanceof JDFIntegerState)||(this instanceof JDFNumberState))
+            {
+                def="1";              
+            }
+            def="some_value"; //TODO add better type dependent value generator
+        }
         Object theValue=getMatchingObjectInNode(element);
         if(theValue!= null)
             return false;
 
-        final String nam = getName();
+        String nam = getName();
+        String nsURI=getDevNS();
+        if(nsURI.equals(JDFElement.getSchemaURL()))
+            nsURI=null;
+        if(nsURI!=null)
+        {
+            String prefix=KElement.xmlnsPrefix(nam);
+            if(prefix==null)
+            {
+                nam=StringUtil.token(nsURI, -1, "/")+":"+nam;
+            }
+        }
+        
         if(getListType().equals(EnumListType.Span))
         {            
             JDFIntentResource ir=(JDFIntentResource)element;
@@ -813,7 +848,8 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
         }
         else // some attribute...
         {
-            element.setAttribute(nam,def,null);
+            
+            element.setAttribute(nam,def,nsURI);
         } 
         return true;
     }

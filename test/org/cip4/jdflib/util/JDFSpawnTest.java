@@ -91,6 +91,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFAudit.EnumSeverity;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
@@ -501,6 +502,40 @@ public class JDFSpawnTest extends JDFTestCaseBase
     //////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////
 
+    public void testSpawnSimple()
+    {
+        JDFDoc d=JDFResourceTest.creatXMDoc();
+        JDFNode n=d.getJDFRoot();
+        // test spawning of referenced resources in parent nodes
+        n.setType(EnumType.ProcessGroup);
+        JDFNode n2=n.addJDFNode(EnumType.ConventionalPrinting);
+        n2.moveElement(n.getResourceLinkPool(), null);
+        n=n2;
+        n.removeNodeInfo();
+        n.appendNodeInfo();
+        final JDFSpawn spawn=new JDFSpawn(n); // fudge to test output counting
+        n.setStatus(EnumNodeStatus.Waiting);
+        assertEquals(EnumNodeStatus.Waiting,n.getPartStatus(null));
+
+        String pid=n.getJobPartID(false);
+        assertNotSame(pid,"");
+        JDFNode spawnedNode=spawn.spawn("thisUrl","newURL",null,null,false,true,true,true);
+        assertTrue("no spawnStatus",spawnedNode.toString().indexOf(AttributeName.SPAWNSTATUS)<0);
+        
+        spawnedNode.setStatus(EnumNodeStatus.Part);
+        spawnedNode.getNodeInfo().setNodeStatus(EnumNodeStatus.Aborted);
+        assertEquals(EnumNodeStatus.Part,spawnedNode.getStatus());
+        assertEquals(EnumNodeStatus.Aborted,spawnedNode.getPartStatus(null));
+        
+        JDFNode mergedNode=new JDFMerge(n).mergeJDF(spawnedNode, "merged", JDFNode.EnumCleanUpMerge.None, EnumAmountMerge.UpdateLink);
+        assertEquals(EnumNodeStatus.Part,mergedNode.getStatus());
+        assertEquals(EnumNodeStatus.Aborted,mergedNode.getPartStatus(null));
+      
+        assertEquals(d.getJDFRoot().getJobPart(pid, null), mergedNode);
+
+    }
+    ///////////////////////////////////////////////////////////
+
     public void testSpawnAddPartRoot()
     {
         JDFDoc d=JDFResourceTest.creatXMDoc();
@@ -867,6 +902,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
                 JDFNode n2=n.addCombined(v);
                 JDFNodeInfo ni=n2.appendNodeInfo();
+                ni.setFirstEnd(new JDFDate());
                 final JDFSpawn spawn=new JDFSpawn(n2);
                 JDFNode spawnedNode=spawn.spawn("thisFile","spawnFile",null,partmapvector,true,true,true,true);
                 ci= spawnedNode.getInheritedCustomerInfo(null);
@@ -905,6 +941,19 @@ public class JDFSpawnTest extends JDFTestCaseBase
                 n2=new JDFSpawn(d.getJDFRoot()).unSpawn(spawnID);
                 assertNotNull("n2",n2);
                 assertTrue("n2 no spawnID",n2.toString().indexOf(spawnID)<0);
+
+                final JDFSpawn spawn2=new JDFSpawn(n2);
+                spawnedNode=spawn2.spawn("thisFile","spawnFile",null,partmapvector,true,true,true,true);
+                spawnID = spawnedNode.getSpawnID(false);
+            
+                niSpawn= spawnedNode.getInheritedNodeInfo(null);
+                assertNotNull("ni",niSpawn);
+                
+                spawnedNode.setPartStatus(partmapvector, EnumNodeStatus.Aborted);
+                assertEquals(spawnedNode.getPartStatus(j==1 ? partmapvector.elementAt(0): null),EnumNodeStatus.Aborted);
+                
+                JDFNode mergedNode=new JDFMerge(n2).mergeJDF(spawnedNode, "merged", JDFNode.EnumCleanUpMerge.None, EnumAmountMerge.UpdateLink);
+                assertEquals(mergedNode.getPartStatus(j==1 ? partmapvector.elementAt(0): null),EnumNodeStatus.Aborted);
             }
         }
     }    
@@ -978,6 +1027,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
             nodeSubJDF.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp+"manySub"+i+".jdf", 2, true);
             jdfDoc.write2File(sm_dirTestDataTemp+"bigMainMany"+i+".jdf", 2, true);
 
+            assertEquals(nodeProc.getID(), nodeSubJDF.getID());
             JDFDoc d2=parser.parseFile(sm_dirTestDataTemp+"manySub"+i+".jdf");
             assertNotNull("The subjdf could be parsed!",d2);
             String spawnID=nodeSubJDF.getSpawnID(false);

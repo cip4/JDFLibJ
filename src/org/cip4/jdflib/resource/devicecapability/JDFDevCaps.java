@@ -97,6 +97,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.jmf.JDFMessage;
@@ -105,6 +106,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.StringUtil;
 
 
 //----------------------------------
@@ -356,8 +358,13 @@ public class JDFDevCaps extends JDFAutoDevCaps
             final JDFDevCapPool dcp=getDevCapPool();
             if(dcp!=null)
             {
-                final KElement dcre= dcp.getChildWithAttribute(ElementName.DEVCAP,AttributeName.ID,null,dcr,0,true);
-                vDevCap.appendUnique(dcre);
+                VString v=StringUtil.tokenize(dcr, " ", false);
+                for(int i=0;i<v.size();i++)
+                {
+                    String s=v.stringAt(i);
+                    final KElement dcre= dcp.getChildWithAttribute(ElementName.DEVCAP,AttributeName.ID,null,s,0,true);
+                    vDevCap.appendUnique(dcre);
+                }
             }
         }
         return vDevCap;
@@ -637,17 +644,20 @@ public class JDFDevCaps extends JDFAutoDevCaps
      * append elements to the node that match this DevCap, if they do not exist yet
      * 
      * @param node the node to append the elements to
+     * @param bAll if false, only add if minOccurs>=1 and required=true or a default exists
      * 
      * @return KElement - the last element that was appended
      */
-    public KElement appendMatchingElementsToNode(JDFNode node)
+    public KElement appendMatchingElementsToNode(JDFNode node, boolean bAll)
     {
         final String nam = getName();
         final EnumContext context = getContext();
         final JDFDevCap devCap = getDevCap();
         if(devCap==null)
             return null;
-        final int minOcc=devCap.getMinOccurs();
+        int minOcc=devCap.getMinOccurs();
+        if(minOcc==0 &&  bAll)
+            minOcc=1;
 
         KElement e=null;
         for(int i=0;i<minOcc;i++)
@@ -697,10 +707,11 @@ public class JDFDevCaps extends JDFAutoDevCaps
 
     /**
      * sets default elements and adds them, if there are less than minorrurs
-     * @param node
+     * @param node the node to set
+     * @param bAll if false, only add if minOccurs>=1 and required=true or a default exists
      * @return boolean
      */
-    public boolean setDefaultsFromCaps(JDFNode node)
+    public boolean setDefaultsFromCaps(JDFNode node, boolean bAll)
     {
         boolean modified = false;
         final JDFDevCap dc = getDevCap();
@@ -710,7 +721,7 @@ public class JDFDevCaps extends JDFAutoDevCaps
             final int size = v == null ? 0 : v.size();
             for (int i = 0; i < size; i++)
             {
-                modified = dc.setDefaultsFromCaps((KElement) v.elementAt(i)) || modified;
+                modified = dc.setDefaultsFromCaps(v.item(i),bAll) || modified;
             }
         }
 
@@ -868,6 +879,42 @@ public class JDFDevCaps extends JDFAutoDevCaps
         return badElem;
     }
 
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib.core.KElement.EnumValidationLevel, boolean, int)
+     */
+    public VString getInvalidAttributes(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
+    {
+        VString vs= super.getInvalidAttributes(level, bIgnorePrivate, nMax);
+        if(nMax>0 && vs.size()>nMax)
+            return vs;
+        if(!EnumValidationLevel.RecursiveComplete.equals(level) && !EnumValidationLevel.RecursiveIncomplete.equals(level))
+            return vs;
+        if(vs.contains(AttributeName.DEVCAPREF))
+            return vs;
+
+        if(hasAttribute(AttributeName.DEVCAPREF))
+        {
+            JDFDeviceCap deviceCap = (JDFDeviceCap) getDeepParent(ElementName.DEVICECAP, 0);
+            JDFDevCapPool devCapPool = deviceCap == null ? null : deviceCap.getDevCapPool();
+            if (devCapPool == null)
+            {
+                vs.add(AttributeName.DEVCAPREF);
+                return vs;
+            }
+            String idRef = getDevCapRef();
+            VString idRefs=StringUtil.tokenize(idRef, " ", false);
+            for (int i=0; i < idRefs.size(); i++) 
+            {
+                JDFDevCap devCap = devCapPool.getDevCap(idRefs.stringAt(i));
+                if (devCap==null)
+                {
+                    vs.add(AttributeName.DEVCAPREF);
+                    return vs;
+                }
+            }
+        }           
+        return vs;
+    }
 
 
 

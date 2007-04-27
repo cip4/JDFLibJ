@@ -1536,6 +1536,23 @@ public class KElementTest extends JDFTestCaseBase
         assertEquals(e4.getNamespaceURI(), "www.foo.com");                  
     }
 
+    public void testSetXMLComment()
+    {
+        XMLDoc d=new XMLDoc("e",null);
+        KElement root=d.getRoot();
+        root.setXMLComment("foo");
+        assertEquals(d.getDocumentElement().getParentNode().getFirstChild().getNodeValue(),"foo");
+        root.setXMLComment("bar");
+        assertEquals(d.getDocumentElement().getParentNode().getFirstChild().getNodeValue(),"bar");
+        KElement e2=root.appendElement("e2");
+        e2.setXMLComment("foobar");
+        assertEquals(root.getFirstChild().getNodeValue(),"foobar");
+        e2.setXMLComment("foobar2");
+        assertEquals(root.getFirstChild().getNodeValue(),"foobar2");
+        assertEquals(root.getFirstChild().getNextSibling(),e2);
+        assertNull(root.getFirstChild().getNextSibling().getNextSibling());
+        
+    }
 
     public void testAppendElement()
     {

@@ -652,8 +652,11 @@ public class JDFMerge
 
         if (parts!=null && !parts.isEmpty())
         {
-            final JDFResourceLinkPool overWriteRLP = overWriteNode.getResourceLinkPool();
             final JDFResourceLinkPool toMergeRLP   = resourceLinkPool;
+            if (toMergeRLP == null)
+                return; // nothing to do
+
+            final JDFResourceLinkPool overWriteRLP = overWriteNode.getCreateResourceLinkPool();
             final VElement overWriteLinks = overWriteRLP.getPoolChildren(null, null, null);
             final VElement toMergeLinks   = toMergeRLP.getPoolChildren(null, null, null);
 
@@ -663,9 +666,9 @@ public class JDFMerge
                 {
                     JDFResourceLink overWriteLink = null;
                     final JDFResourceLink toMergeLink = 
-                                    (JDFResourceLink) toMergeLinks.elementAt(rl);
+                        (JDFResourceLink) toMergeLinks.elementAt(rl);
                     final String rRef = toMergeLink.getAttribute(AttributeName.RREF);
-                    
+
                     for (int k = 0; k < overWriteLinks.size(); k++)
                     {
                         if (((JDFResourceLink) overWriteLinks.elementAt(k)).getAttribute(
@@ -691,7 +694,7 @@ public class JDFMerge
                     }
                 }
             }
-            
+
             toMergeRLP.deleteNode();
             toMerge.copyElement(overWriteRLP, null);
         }
