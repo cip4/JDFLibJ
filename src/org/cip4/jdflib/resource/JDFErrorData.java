@@ -8,10 +8,10 @@
 package org.cip4.jdflib.resource;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoError;
+import org.cip4.jdflib.auto.JDFAutoErrorData;
 
 
-public class JDFErrorData extends JDFAutoError  //TODO JDFAutoErrorData ?
+public class JDFErrorData extends JDFAutoErrorData
 {
     private static final long serialVersionUID = 1L;
 
@@ -63,7 +63,8 @@ public class JDFErrorData extends JDFAutoError  //TODO JDFAutoErrorData ?
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFErrorData[  --> " + super.toString() + " ]";
     }

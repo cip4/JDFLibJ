@@ -1704,4 +1704,6 @@ public final class AttributeName
     public static final String OCCURRENCES = "Occurrences";
     public static final String IMPLICITGUTTERMINIMUMLIMIT = "ImplicitGutterMinimumLimit";
     public static final String PRINTTRAPANNOTATIONS = "PrintTrapAnnotations";
+	public static final String ERRORURL = "ErrorURL";
+	public static final String FIXEXPRESSION = "FixExpression";
 }

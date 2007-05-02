@@ -50,10 +50,10 @@ public class ComplexTypeList extends JPanel implements ListSelectionListener, Mo
     private static DefaultListModel listModel           = new DefaultListModel();
     private static DefaultListModel defaultlistModel    = new DefaultListModel();
     private static DefaultListModel loadedListModel     = new DefaultListModel();
-    private String lineSep = System.getProperty("line.separator");
-    private GeneratorUI motherComp;
+    private final String lineSep = System.getProperty("line.separator");
+    private final GeneratorUI motherComp;
     private ListButtonPanel lbp;
-    private ArrayList doubleClickedListener = new ArrayList();
+    private final ArrayList doubleClickedListener = new ArrayList();
     private JMenuItem popup_load;
     private JMenuItem popup_safe;
     private JMenuItem popup_removeSel;
@@ -101,14 +101,16 @@ public class ComplexTypeList extends JPanel implements ListSelectionListener, Mo
         myList.addMouseListener(this);
         myList.addMouseListener(new MouseAdapter() 
         {
-            public void mousePressed(MouseEvent evt) 
+            @Override
+			public void mousePressed(MouseEvent evt) 
             {
                 if (evt.isPopupTrigger()) 
                 {
                     popmenu.show(evt.getComponent(), evt.getX(), evt.getY());
                 }
             }
-            public void mouseReleased(MouseEvent evt) 
+            @Override
+			public void mouseReleased(MouseEvent evt) 
             {
                 if (evt.isPopupTrigger()) 
                 {
@@ -534,6 +536,7 @@ public class ComplexTypeList extends JPanel implements ListSelectionListener, Mo
         defaultlistModel.addElement("JDFAutoEnumerationEvaluation.java");
 //        defaultlistModel.addElement("JDFAutoEnumerationSpan.java");  // all JDFxxxSpan inherit from JDFSpanBase
         defaultlistModel.addElement("JDFAutoError.java");
+        defaultlistModel.addElement("JDFAutoErrorData.java");
         defaultlistModel.addElement("JDFAutoEvent.java");
         defaultlistModel.addElement("JDFAutoExposedMedia.java");
         defaultlistModel.addElement("JDFAutoExternalImpositionTemplate.java");
