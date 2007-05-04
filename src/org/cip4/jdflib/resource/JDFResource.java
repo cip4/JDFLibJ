@@ -2806,7 +2806,7 @@ public class JDFResource extends JDFElement
      */
     public String buildXPath(String relativeTo, int methCountSiblings)
     {
-        if(methCountSiblings!=2 || isResourceElement() || isResourceRoot())
+        if((methCountSiblings!=2 && methCountSiblings!=3)|| isResourceElement() || isResourceRoot())
             return super.buildXPath(relativeTo, methCountSiblings);
 
         String path = "/"+getLocalName(); // tbd handle namespaces

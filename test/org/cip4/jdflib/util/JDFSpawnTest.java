@@ -146,6 +146,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
         {
             root=new JDFSpawn(root).unSpawn(strSpawnID);
             assertTrue (" root empty",root.toString().indexOf(strSpawnID)<0);
+            assertNull(root.getMultipleIDs("ID"));
+
 
             // write out the unspawned file
             doc.write2File(sm_dirTestDataTemp + "Unspawn_" + strXMLFile, 0, true);   // Unspawn_bookintent.jdf
@@ -1060,6 +1062,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
             final JDFAudit audit = ap.getAudit(0, EnumAuditType.Merged, null,null);
             assertNotNull(audit);
             assertFalse(audit.hasAttribute(AttributeName.SPAWNID));
+            assertNull(nodeMain.getMultipleIDs("ID"));
         }
         jdfDoc.write2File(sm_dirTestDataTemp+"BigMerge.jdf", 2, true);
     }
@@ -1100,7 +1103,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
         spawn.vSpawnParts=vamParts;
         JDFNode s2=spawn.spawn();
         assertNotNull(spawn.checkSpawnedResources());
-
+        assertNull(s2.getMultipleIDs("ID"));
+        
         try
         {
             spawn.spawn();
@@ -1307,6 +1311,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
         JDFNode nodemerged = rootMain.getChildJDFNode(root2ID, false);
         assertTrue("MergeJDF fixup", nodemerged.getDescriptiveName().equals("fixup"));
 
+        assertNull(m_jdfDoc.getRoot().getMultipleIDs("ID"));
         m_jdfDoc.write2File(sm_dirTestDataTemp + m_outFile, 2, true);
 
         assertTrue("MergeJDF ok", true);

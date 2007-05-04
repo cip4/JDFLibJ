@@ -146,7 +146,8 @@ public class CheckJDF
 {
     VString foundNameSpaces = new VString();
     VString vID = new VString();
-    VString vBadID = new VString();
+    public VString vBadID = new VString();
+    public VString vMultiID = new VString();
     VString vBadJobPartID = new VString();
     VString vJobPartID = new VString();
     VElement vResources = new VElement();
@@ -181,6 +182,7 @@ public class CheckJDF
 
     public  String devCapFile=null;
     public EnumFitsValue testlists=EnumFitsValue.Allowed;
+    private boolean bMultiID=false;
     
     final private static String version =
         "CheckJDF: JDF validator; -- (c) 2001-2007 CIP4"
@@ -201,6 +203,7 @@ public class CheckJDF
             + "-c requires all required elements and attributes to exist, else incomplete JDF is OK\n"
             + "-d location of a device capabilities file to test against\n"
             + "-f force version to a given jdf version (1.0, 1.1, 1.2, 1.3)\n"
+            + "-m print multiple IDs\n"
             + "-P device capabilities parameter. Use present value lists, otherwise allowed value lists\n"
             + "-u URL to send the JMF to. In this case, checkJDF will validate the response from the URL\n"
             + "-U check for dangling URL attributes\n"
@@ -1717,7 +1720,7 @@ public class CheckJDF
       */
      public XMLDoc validate(String commandLineArgs[], InputStream inStream)
      {
-         MyArgs args = new MyArgs(commandLineArgs, "?cqQvVntPU", "dlfLuhpxX",null);
+         MyArgs args = new MyArgs(commandLineArgs, "?cmqQvVntPU", "dlfLuhpxX",null);
          
          if (args.boolParameter('?', false))
          {
@@ -1744,6 +1747,7 @@ public class CheckJDF
          }
          
          bPrintNameSpace = args.boolParameter('n', false);
+         bMultiID = args.boolParameter('m', false);
 
          if(args.hasParameter('h'))
          {
@@ -2148,7 +2152,8 @@ public class CheckJDF
                      JDFParser p=new JDFParser();
                      p.m_SchemaLocation=schemaLocation;                             
                      theDoc = p.parseInputSource(inSource);   
-                     theDoc.setBodyPart(bp);
+                     if(theDoc!=null)
+                         theDoc.setBodyPart(bp);
                  }
              }
              
@@ -2226,6 +2231,7 @@ public class CheckJDF
                      }
                      else
                      { // we have a jdf
+                         printMultipleIDs(url, xmlFile, root);
                          
                          VElement allElms = root.getChildrenByTagName(null, null,null,false, true, 0);
                          allElms.add(root);
@@ -2355,6 +2361,47 @@ public class CheckJDF
          
          return pOut;
     }
+
+        private void printMultipleIDs(String url, String xmlFile, JDFNode root)
+        {
+            if(bMultiID)
+             {
+                 boolean bPrint=sysOut.wannaPrint;
+                 sysOut.wannaPrint=true;
+                 if (bQuiet)
+                 {
+                     sysOut.println("\n**********************************************************");
+                     sysOut.println("       *** Checking "+ xmlFile==null ? "JDFDoc" : xmlFile +" *** ");
+                     if (url!=null && url.length()>0)
+                         sysOut.println("           " + url);
+                     sysOut.println("**********************************************************\n");
+                 }
+
+                 vMultiID=root.getMultipleIDs("ID");
+                 if(vMultiID!=null)
+                 {                                 
+                     sysOut.println("Multiple ID elements:\n");
+                     for(int i=0;i<vMultiID.size();i++)
+                     {
+                         String id=vMultiID.stringAt(i);
+                         VElement v=root.getChildrenByTagName(null, null, new JDFAttributeMap("ID",id), false, true, 0);
+                         if(id.equals(root.getAttribute("ID")))
+                             v.add(root);
+                         for(int ii=0;ii<v.size();ii++)
+                         {
+                             KElement e=v.item(ii);
+                             sysOut.println(id+" \t:"+e.buildXPath(null, 2));
+                          }
+                     }
+                 }
+                 else
+                 {
+                     sysOut.println("No Multiple ID elements!");
+                 }
+                 sysOut.wannaPrint=bPrint;
+
+             }
+        }
 
     //////////////////////////////////////////////////////////////////////
     

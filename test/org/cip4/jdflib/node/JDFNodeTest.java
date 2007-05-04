@@ -1076,6 +1076,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
         m.put("SheetName","S1");
         m.put("Side","Front");  
+        assertEquals(node.getPartStatus(m), EnumNodeStatus.Completed);
         node.setPartStatus(m,EnumNodeStatus.Waiting);
         assertTrue("ni sig1 waiting",node.getPartStatus(m)==EnumNodeStatus.Waiting);
 

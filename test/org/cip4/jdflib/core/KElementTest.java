@@ -136,6 +136,25 @@ public class KElementTest extends JDFTestCaseBase
 
     ///////////////////////////////////////////////////////////
 
+    public void testGetElementsWithMultipleID()
+    {
+        XMLDoc d=new XMLDoc("e1",null);
+        KElement e1=d.getRoot();
+        assertNull(e1.getMultipleIDs("ID"));
+        e1.setXPathAttribute("./e2[2]/e3/@ID", "i1");
+        e1.setXPathAttribute("./e2[3]/e3/@ID", "i2");
+        assertNull(e1.getMultipleIDs("ID"));
+        e1.setXPathAttribute("./e2[4]/e3/@ID", "i1");
+        assertEquals(e1.getMultipleIDs("ID").stringAt(0),"i1");
+        assertEquals(e1.getMultipleIDs("ID").size(),1);
+        e1.setAttribute("ID", "i2");
+        assertEquals(e1.getMultipleIDs("ID").size(),2);
+        assertTrue(e1.getMultipleIDs("ID").contains("i1"));
+        assertTrue(e1.getMultipleIDs("ID").contains("i2"));
+        
+    }
+///////////////////////////////////////////////////////////
+
     public void testGetElementById()
     {
         String xmlString =   "<JDF ID=\"Link20704459_000351\">" +
@@ -920,7 +939,11 @@ public class KElementTest extends JDFTestCaseBase
         assertEquals(root.buildXPath("/d",0), ".");
         root.appendElement("e");
         KElement e=root.appendElement("e");
+        e.setAttribute("ID", "i");
+        root.setAttribute("ID", "r");
         assertEquals(e.buildXPath(null,1), "/d/e[2]");
+        assertEquals(e.buildXPath(null,3), "/d[@ID=\"r\"]/e[@ID=\"i\"]");
+        assertEquals(e.buildXPath("/d",3), "./e[@ID=\"i\"]");
         assertEquals(e.buildXPath(null,0), "/d/e");
         assertEquals(e.buildXPath("/d",1), "./e[2]");
         assertEquals(e.buildXPath("/d",1), e.buildXPath("/d",2));

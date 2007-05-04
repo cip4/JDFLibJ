@@ -72,7 +72,7 @@ public class MergeJDF
         String outFile = args.parameter('o');
         System.out.println(prg + "o: outFile=" + outFile);
 
-        boolean v = args.boolParameter('v' + JDFConstants.EMPTYSTRING, false);
+        boolean v = args.boolParameter('v', false);
         System.out.println(prg + "v: " + v);
 
         JDFParser p = new JDFParser();

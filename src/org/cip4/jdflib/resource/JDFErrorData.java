@@ -20,9 +20,9 @@ public class JDFErrorData extends JDFAutoErrorData
      * @param ownerDocument
      * @param qualifiedName
      */
-     public JDFErrorData(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
+    public JDFErrorData(
+            CoreDocumentImpl myOwnerDocument,
+            String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
@@ -35,9 +35,9 @@ public class JDFErrorData extends JDFAutoErrorData
      * @param qualifiedName
      */
     public JDFErrorData(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
+            CoreDocumentImpl myOwnerDocument,
+            String myNamespaceURI,
+            String qualifiedName)
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
@@ -50,10 +50,10 @@ public class JDFErrorData extends JDFAutoErrorData
      * @param localName
      */
     public JDFErrorData(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
+            CoreDocumentImpl myOwnerDocument,
+            String myNamespaceURI,
+            String qualifiedName,
+            String myLocalName)
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
@@ -62,9 +62,9 @@ public class JDFErrorData extends JDFAutoErrorData
      * toString
      *
      * @return String
+     * @Override
      */
-    @Override
-	public String toString()
+    public String toString()
     {
         return "JDFErrorData[  --> " + super.toString() + " ]";
     }

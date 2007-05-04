@@ -101,15 +101,13 @@ public class ComplexTypeList extends JPanel implements ListSelectionListener, Mo
         myList.addMouseListener(this);
         myList.addMouseListener(new MouseAdapter() 
         {
-            @Override
-			public void mousePressed(MouseEvent evt) 
+ 			public void mousePressed(MouseEvent evt) 
             {
                 if (evt.isPopupTrigger()) 
                 {
                     popmenu.show(evt.getComponent(), evt.getX(), evt.getY());
                 }
             }
-            @Override
 			public void mouseReleased(MouseEvent evt) 
             {
                 if (evt.isPopupTrigger()) 

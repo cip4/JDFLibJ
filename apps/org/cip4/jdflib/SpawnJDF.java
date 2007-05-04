@@ -80,10 +80,10 @@ public class SpawnJDF
             + "-d delete node from original file"
             + "-n export as new jdf";
 
-        boolean doEscapes = args.boolParameter('e' + JDFConstants.EMPTYSTRING, false);
+        boolean doEscapes = args.boolParameter('e' , false);
         System.out.println(prg + "e: doEscapes=" + doEscapes);
 
-        boolean useVDOMParser = args.boolParameter('v' + JDFConstants.EMPTYSTRING, false);
+        boolean useVDOMParser = args.boolParameter('v' , false);
         System.out.println(prg + "v: useVDOMParser=" + useVDOMParser);
 
 
@@ -106,7 +106,7 @@ public class SpawnJDF
         String task = args.parameter('t');
         System.out.println(prg + "t: task=" + task);
 
-        boolean v = args.boolParameter('v' + JDFConstants.EMPTYSTRING, false);
+        boolean v = args.boolParameter('v', false);
         System.out.println(prg + "v: =" + v);
 
         String strPartID = args.parameter('p');

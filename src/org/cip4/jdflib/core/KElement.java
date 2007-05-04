@@ -84,6 +84,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -1882,6 +1883,45 @@ public class KElement extends ElementNSImpl
     public KElement getCreateElement(String nodeName)
     {
         return getCreateElement_KElement(nodeName, null, 0);
+    }
+    
+    /**
+     * Get a vector of all IDs that occur multiple times
+     *
+     * @param attributeName      name of the attribute to test for
+     * @return VString     the list of multiply occurring ID values, null if all is well
+     */
+    public VString getMultipleIDs(String attributeName)
+    {
+        VString vRet=new VString();
+        getMultipleIDs(attributeName, vRet, new HashSet());
+        return vRet.isEmpty() ? null : vRet;
+    }
+
+    /**
+     * Get a vector of all IDs that occur multiple times
+     *
+     * @param attributeName      name of the attribute to test for
+     * @param vRet used for recursion; should be null
+     * @param setID  used for recursion; should be null
+     * @return VString     the list of multiply occurring ID values, null if all is well
+     */
+    private void getMultipleIDs(String attributeName, VString vRet, Set setID)
+    {
+        String id=getAttribute_KElement(attributeName, null, null);
+        if(id!=null)
+        {
+            if(setID.contains(id))
+                vRet.appendUnique(id);
+            else
+                setID.add(id);
+        }
+        KElement child=getFirstChildElement();
+        while(child!=null)
+        {
+            child.getMultipleIDs(attributeName,vRet,setID);
+            child=child.getNextSiblingElement();
+        }
     }
 
     /**
@@ -4477,20 +4517,27 @@ public class KElement extends ElementNSImpl
 
         if(methCountSiblings>0)
         {
-            KElement e = (p != null) ? p.getElement(path, null, 0) : null;
-            int i = 1;
-            while (e != null)
+            if(methCountSiblings==3 && hasAttribute_KElement(AttributeName.ID,null,false))
             {
-                if (e.equals(this))
+                path+="[@ID=\""+getAttribute(AttributeName.ID)+"\"]";
+            }
+            else
+            {
+                KElement e = (p != null) ? p.getElement(path, null, 0) : null;
+                int i = 1;
+                while (e != null)
                 {
-                    path+="["+Integer.toString(i)+"]";
-                    break;
+                    if (e.equals(this))
+                    {
+                        path+="["+Integer.toString(i)+"]";
+                        break;
+                    }
+                    do
+                    {
+                        e = e.getNextSiblingElement();
+                    } while (e != null && !e.fitsName_KElement(path, null));
+                    i++;
                 }
-                do
-                {
-                    e = e.getNextSiblingElement();
-                } while (e != null && !e.fitsName_KElement(path, null));
-                i++;
             }
         }
         path="/"+path;
@@ -4502,6 +4549,12 @@ public class KElement extends ElementNSImpl
             if(path.startsWith(relativeTo))
             {
                 path="."+path.substring(relativeTo.length());
+                if(path.startsWith(".["))
+                {
+                    int iB=path.indexOf("]");
+                    if(iB>0)
+                        path="."+path.substring(iB+1);
+                }
             }
         }
         return path;

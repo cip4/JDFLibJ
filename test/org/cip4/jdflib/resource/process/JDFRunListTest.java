@@ -72,10 +72,10 @@ package org.cip4.jdflib.resource.process;
 
 import java.util.Iterator;
 
-import junit.framework.TestCase;
-
+import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -86,42 +86,35 @@ import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFRunList.JDFRunData;
 
-public class JDFRunListTest extends TestCase
+public class JDFRunListTest extends JDFTestCaseBase
 {
 
-    public JDFRunListTest (String arg0)
-    {
-        super(arg0);
-    }
+    private JDFDoc doc;
+    private JDFNode root;
 
+ 
     public final void testGetFileURL()
     {
-        JDFDoc doc = new JDFDoc("JDF");
-        JDFNode root = doc.getJDFRoot();
         JDFRunList rl=(JDFRunList) root.addResource(ElementName.RUNLIST,null,EnumUsage.Input,null,null,null,null);
         rl.setFileURL("./foo/bar.pdf");
         rl.setDirectory("File://c/fnarf");
         assertEquals(rl.getFileURL(), "File://c/fnarf/foo/bar.pdf");
-      }
+    }
 
     public final void testSetPages()
     {
-        JDFDoc doc = new JDFDoc("JDF");
-        JDFNode root = doc.getJDFRoot();
         JDFRunList rl=(JDFRunList) root.addResource(ElementName.RUNLIST,null,EnumUsage.Input,null,null,null,null);
         final JDFIntegerRangeList integerRangeList = new JDFIntegerRangeList(new JDFIntegerRange(0,-1,8));
         rl.setPages(integerRangeList);
         assertEquals(rl.getPages(), integerRangeList);
         assertEquals(rl.getNPage(), 8);
-     }
-    
-    
+    }
+
+
     public final void testGetMimeType()
     {
-        JDFDoc doc = new JDFDoc("JDF");
-        JDFNode root = doc.getJDFRoot();
         JDFResourcePool resPool = root.getCreateResourcePool();
-            KElement kElem = resPool.appendResource(ElementName.RUNLIST, null, null);
+        KElement kElem = resPool.appendResource(ElementName.RUNLIST, null, null);
         assertTrue(kElem instanceof JDFRunList);
         JDFRunList ruli=(JDFRunList) kElem;
         assertNull(ruli.getFileMimeType());
@@ -133,8 +126,6 @@ public class JDFRunListTest extends TestCase
      */
     public final void testGetNPage() throws Exception
     {
-        JDFDoc doc = new JDFDoc("JDF");
-        JDFNode root = doc.getJDFRoot();
         JDFResourcePool resPool = root.getCreateResourcePool();
         JDFRunList rl = (JDFRunList)resPool.appendResource(ElementName.RUNLIST, null, null);
         JDFRunList rlp=(JDFRunList)rl.addPartition(EnumPartIDKey.Run, "r1");
@@ -153,8 +144,6 @@ public class JDFRunListTest extends TestCase
      */
     public final void testGetIndexPartition() throws Exception
     {
-        JDFDoc doc = new JDFDoc("JDF");
-        JDFNode root = doc.getJDFRoot();
         JDFResourcePool resPool = root.getCreateResourcePool();
         JDFRunList rl = (JDFRunList)resPool.appendResource(ElementName.RUNLIST, null, null);
         JDFRunList rlp=(JDFRunList)rl.addPartition(EnumPartIDKey.Run, "r1");
@@ -173,8 +162,6 @@ public class JDFRunListTest extends TestCase
      */
     public final void testGetPageInFile() throws Exception
     {
-        JDFDoc doc = new JDFDoc("JDF");
-        JDFNode root = doc.getJDFRoot();
         JDFResourcePool resPool = root.getCreateResourcePool();
         JDFRunList rl = (JDFRunList)resPool.appendResource(ElementName.RUNLIST, null, null);
         JDFRunList rlp=(JDFRunList)rl.addPartition(EnumPartIDKey.Run, "r1");
@@ -200,8 +187,6 @@ public class JDFRunListTest extends TestCase
      */
     public final void testGetPageLeaves() throws Exception
     {
-        JDFDoc doc = new JDFDoc("JDF");
-        JDFNode root = doc.getJDFRoot();
         JDFResourcePool resPool = root.getCreateResourcePool();
         JDFRunList rl = (JDFRunList)resPool.appendResource(ElementName.RUNLIST, null, null);
         JDFRunList rlp=(JDFRunList)rl.addPartition(EnumPartIDKey.Run, "r1");
@@ -234,8 +219,6 @@ public class JDFRunListTest extends TestCase
      */
     public final void testGetIndex() throws Exception
     {
-        JDFDoc doc = new JDFDoc("JDF");
-        JDFNode root = doc.getJDFRoot();
         JDFResourcePool resPool = root.getCreateResourcePool();
         JDFRunList rl = (JDFRunList)resPool.appendResource(ElementName.RUNLIST, null, null);
         JDFRunList rlp=(JDFRunList)rl.addPartition(EnumPartIDKey.Run, "r1");
@@ -268,8 +251,6 @@ public class JDFRunListTest extends TestCase
      */
     public final void testPageIterator() throws Exception
     {
-        JDFDoc doc = new JDFDoc("JDF");
-        JDFNode root = doc.getJDFRoot();
         JDFResourcePool resPool = root.getCreateResourcePool();
         JDFRunList rl = (JDFRunList)resPool.appendResource(ElementName.RUNLIST, null, null);
         JDFRunList rlp=(JDFRunList)rl.addPartition(EnumPartIDKey.Run, "r1");
@@ -294,8 +275,6 @@ public class JDFRunListTest extends TestCase
      */
     public final void testPageIteratorSpeed() throws Exception
     {
-        JDFDoc doc = new JDFDoc("JDF");
-        JDFNode root = doc.getJDFRoot();
         JDFResourcePool resPool = root.getCreateResourcePool();
         JDFRunList rl = (JDFRunList)resPool.appendResource(ElementName.RUNLIST, null, null);
         int nMax=3000;
@@ -316,6 +295,90 @@ public class JDFRunListTest extends TestCase
             n++;
         }
         assertEquals(n, 4*nMax);
+    }
+
+    /**
+     * experimental mapping of tags to partition keys
+     */
+    public void testTagMap() throws Exception
+    {
+       JDFRunList rl=(JDFRunList) root.addResource(ElementName.RUNLIST,null,EnumUsage.Input,null,null,null,null);
+        
+        JDFLayout lo=(JDFLayout) root.addResource(ElementName.LAYOUT,null,EnumUsage.Input,null,null,null,null);
+        JDFMedia med=(JDFMedia) root.addResource(ElementName.MEDIA,null,EnumUsage.Input,null,null,null,null);
+        JDFMedia medM=(JDFMedia) med.addPartition(EnumPartIDKey.RunTags, "MaleCover");
+        JDFMedia medF=(JDFMedia) med.addPartition(EnumPartIDKey.RunTags, "FemaleCover");
+        JDFMedia medB=(JDFMedia) med.addPartition(EnumPartIDKey.RunTags, "BigBody SmallBody");
+        
+        JDFLayout loM=(JDFLayout)lo.addPartition(EnumPartIDKey.RunTags, "MaleCover");
+        loM.refElement(medM);
+        JDFLayout loF=(JDFLayout)lo.addPartition(EnumPartIDKey.RunTags, "FemaleCover");
+        loF.refElement(medF);
+        JDFLayout loBB=(JDFLayout)lo.addPartition(EnumPartIDKey.RunTags, "BigBody");
+        loBB.refElement(medB);
+        JDFLayout loSB=(JDFLayout)lo.addPartition(EnumPartIDKey.RunTags, "SmallBody");
+        loSB.refElement(medB);
+        lo.setXMLComment("Layout for versioned product");
+        
+
+        
+        KElement tagMap=rl.appendElement("TagMap");
+        tagMap.setAttribute("PartIDKey", "RunTags");
+        tagMap.setAttribute("PartIDValue", "MaleCover");
+        KElement tagSet=tagMap.appendElement("TagSet");
+        tagSet.setAttribute("Path", "/Dokument/Sektion");
+        tagSet.setAttribute("Value", "Einband");
+        tagSet=tagMap.appendElement("TagSet");
+        tagSet.setAttribute("Path", "/Dokument/Rezipient/@Sex");
+        tagSet.setAttribute("Value", "Male");
+        tagMap.setXMLComment("The TagMap element maps arbitrary tags in the document to a structural RunTag\nNote that any partition key may be mapped.\nNote also that although an XPath syntax is used, this may be mapped to any hierarchical structure including but not limited to XML.");
+        
+        tagMap=rl.appendElement("TagMap");
+        tagMap.setAttribute("PartIDKey", "RunTags");
+        tagMap.setAttribute("PartIDValue", "FemaleCover");
+        tagSet=tagMap.appendElement("TagSet");
+        tagSet.setAttribute("Path", "/Dokument/Sektion");
+        tagSet.setAttribute("Value", "Einband");
+        tagSet=tagMap.appendElement("TagSet");
+        tagSet.setAttribute("Path", "/Dokument/Rezipient/@Sex");
+        tagSet.setAttribute("Value", "Female");
+        
+        tagMap=rl.appendElement("TagMap");
+        tagMap.setAttribute("PartIDKey", "RunTags");
+        tagMap.setAttribute("PartIDValue", "BigBody");
+        tagSet=tagMap.appendElement("TagSet");
+        tagSet.setAttribute("Path", "/Dokument/Sektion");
+        tagSet.setAttribute("Value", "HauptTeil");
+        tagSet=tagMap.appendElement("TagSet");
+        tagSet.setAttribute("Path", "/Dokument/Sektion/Pages");
+        tagSet.setAttribute("Value", "Many");
+        
+        tagMap=rl.appendElement("TagMap");
+        tagMap.setAttribute("PartIDKey", "RunTags");
+        tagMap.setAttribute("PartIDValue", "SmallBody");
+        tagSet=tagMap.appendElement("TagSet");
+        tagSet.setAttribute("Path", "/Dokument/Sektion");
+        tagSet.setAttribute("Value", "HauptTeil");
+        tagSet=tagMap.appendElement("TagSet");
+        tagSet.setAttribute("Path", "/Dokument/Sektion/Pages");
+        tagSet.setAttribute("Value", "Few");
+        
+        rl.setFileURL("bigVariable.ppml");
+        rl.setXMLComment("this runlist points to a ppml with arbitrary structural tagging");
+        
+        //JDFResourceLink rlll
+        doc.write2File(sm_dirTestDataTemp+"tagmap.jdf", 2, false);
+    }
+
+    /* (non-Javadoc)
+     * @see junit.framework.TestCase#setUp()
+     */
+    protected void setUp() throws Exception
+    {
+        super.setUp();
+        doc = new JDFDoc("JDF");
+        root = doc.getJDFRoot();
+ 
     }
 
 }

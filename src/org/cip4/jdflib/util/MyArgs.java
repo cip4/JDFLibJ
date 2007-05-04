@@ -164,7 +164,8 @@ public class MyArgs
                     {
                         // oops... don't know it; skip it
                         whazzLeft=whazzLeft.substring(1);
-                        System.out.println("unknown flag:"+flag);
+                        if(!flag.equals("-"))
+                            System.out.println("unknown flag:"+flag);
                     }
                 }
             }
@@ -375,12 +376,7 @@ public class MyArgs
      */
     public boolean boolParameter(String s, boolean defaultValue)
     {
-        String paramString = parameter(s);
-        if ("t".equals(paramString))
-        {
-            return true;
-        }
-        return defaultValue;
+       return m_flags.contains(s) ? true : defaultValue;
     }
 
     /**
