@@ -119,6 +119,7 @@ import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.postpress.JDFFoldingParams;
 import org.w3c.dom.Node;
 
@@ -385,6 +386,68 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
     }
     //////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////
+
+    public void testSpawnMixPart()
+    {
+        for(int i=0;i<2;i++)
+        {
+            JDFDoc doc =new JDFDoc("JDF");
+            JDFNode root=doc.getJDFRoot();
+            root.setType(EnumType.Imposition);
+            JDFRunList rl=(JDFRunList) root.addResource(ElementName.RUNLIST, null, EnumUsage.Input, null, null, null, null);
+            JDFRunList rlEn=(JDFRunList) rl.addPartition(EnumPartIDKey.PartVersion, "EN");
+            rlEn.addPDF("En.pdf", 0, -1);
+            JDFRunList rlDe=(JDFRunList) rl.addPartition(EnumPartIDKey.PartVersion, "DE");
+            rlDe.addPDF("De.pdf", 0, -1);
+
+            JDFRunList rlOut=(JDFRunList) root.addResource(ElementName.RUNLIST, null, EnumUsage.Output, null, null, null, null);
+            for(int j=0;j<4;j++)
+            {
+                JDFRunList rlS1=(JDFRunList) rlOut.addPartition(EnumPartIDKey.SheetName, "S"+j);
+                JDFRunList rlS1F=(JDFRunList) rlS1.addPartition(EnumPartIDKey.Side, "Front");
+                rlS1F.addPartition(EnumPartIDKey.PartVersion, "EN");
+                rlS1F.addPartition(EnumPartIDKey.PartVersion, "DE");
+
+                rlS1.addPartition(EnumPartIDKey.Side, "Back");
+            }
+
+            JDFSpawn spawn=new JDFSpawn(root);
+            spawn.vSpawnParts=new VJDFAttributeMap();
+            spawn.vSpawnParts.add(new JDFAttributeMap(EnumPartIDKey.PartVersion,"EN"));
+            spawn.vRWResources_in=new VString("Output",null);
+            spawn.bFixResources = i==0;
+
+            JDFNode spawnedNode=spawn.spawn();
+            
+            assertNotNull(spawnedNode);
+            
+            JDFRunList rlOutSpawn=(JDFRunList) spawnedNode.getMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null, 0);
+            VElement vOut=rlOutSpawn.getPartitionVector(new JDFAttributeMap(EnumPartIDKey.PartVersion,"DE"), null);
+            assertEquals(vOut.size(),0);
+            vOut=rlOutSpawn.getPartitionVector(new JDFAttributeMap(EnumPartIDKey.PartVersion,"EN"), null);
+            assertEquals(vOut.size(),4);
+            for(int j=0;j<vOut.size();j++)
+                ((JDFResource)vOut.item(j)).setResStatus(EnumResStatus.Available, false);
+            
+            JDFMerge merge=new JDFMerge(root);
+            root=merge.mergeJDF(spawnedNode, null, EnumCleanUpMerge.None, EnumAmountMerge.UpdateLink);
+            assertNotNull(root);
+            JDFRunList rlOutMerge=(JDFRunList) root.getMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null, 0);
+            vOut=rlOutMerge.getPartitionVector(new JDFAttributeMap(EnumPartIDKey.PartVersion,"DE"), null);
+            assertEquals(vOut.size(),4);
+            
+            vOut=rlOutMerge.getPartitionVector(new JDFAttributeMap(EnumPartIDKey.PartVersion,"EN"), null);
+            assertEquals(vOut.size(),4);
+            for(int j=0;j<vOut.size();j++)
+                assertEquals(((JDFResource)vOut.item(j)).getResStatus(false), EnumResStatus.Available);
+            vOut=rlOutMerge.getPartitionVector(new JDFAttributeMap(EnumPartIDKey.PartVersion,"DE"), null);
+            assertEquals(vOut.size(),4);
+            for(int j=0;j<vOut.size();j++)
+                assertEquals(((JDFResource)vOut.item(j)).getResStatus(false), EnumResStatus.Unavailable);
+        }
+    }
+    
     ///////////////////////////////////////////////////////////
 
     public void testSpawnPart()

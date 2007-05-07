@@ -82,11 +82,8 @@ public class ContentCreationTest extends PreflightTest
         positionObj=lePart.appendElement("PositionObject");
         positionObj.setAttribute("PageRange", "0");
         positionObj.setAttribute("Anchor", "TopCenter");
-        KElement nextAnchor=positionObj.appendElement("NextAnchor");
-        nextAnchor.setAttribute("Anchor", "BottomCenter");
-        nextAnchor.setAttribute("AbsolutePosition", "0 36");
-        nextAnchor.setAttribute("rRef",id);
-
+        setNextAnchor(positionObj,id, "BottomCenter","0 36",null,"Sibling");
+    
         image = (JDFLayoutElement)lePart.appendElement("LayoutElement");
         image.setElementType(EnumElementType.Image);
         image.appendComment().setText("Please add an image of a beach ball below the palm tree!");
@@ -124,19 +121,17 @@ public class ContentCreationTest extends PreflightTest
         positionObj=lePart.appendElement("PositionObject");
         positionObj.setAttribute("Position", "0.0 0.0");
         positionObj.setAttribute("Anchor", "BottomLeft");
-        positionObj.setAttribute("ParentRef", idParent);
+        setNextAnchor(positionObj,idParent, "BottomLeft","0 0",null,"Parent");
         lePart.appendBarcodeProductionParams().appendXMLComment("barcode details here", null);
 
         lep.appendXMLComment("This is a disclaimer text inside the previous container\nThe anchor at top left is defined in the !Unrotated! orientation.\n The barcode and text are justified with their top margins and spaced by 72 points\n which corresponds to the left of the page because the container is rotated 90°\n"+
                 "AbsoluteSize specifies the size of the object in points", null);
         lePart=lep.appendLayoutElementPart();
         positionObj=lePart.appendElement("PositionObject");
-        nextAnchor=positionObj.appendElement("NextAnchor");
-        nextAnchor.setAttribute("Anchor", "TopRight");
-        nextAnchor.setAttribute("AbsolutePosition", "-72 0");
-        nextAnchor.setAttribute("rRef",id);        
+        setNextAnchor(positionObj,id, "TopRight","-72 0",null,"Sibling");
+  
         positionObj.setAttribute("Anchor", "TopLeft");
-        positionObj.setAttribute("ParentRef", idParent);
+//        positionObj.setAttribute("ParentRef", idParent);
         positionObj.setAttribute("AbsoluteSize", "300 200");
         JDFLayoutElement text = (JDFLayoutElement)lePart.appendElement("LayoutElement");
         text.setElementType(EnumElementType.Text);
@@ -194,7 +189,7 @@ public class ContentCreationTest extends PreflightTest
             sm1.setMarkName("ColorControlStrip");
             sm1.setMarkSide(EnumMarkSide.TwoSidedIndependent);
             sm1.setAttribute("Orientation", "Rotate90");
-            setNextAnchor(sm1, null, "CenterRight", "0 0", null);
+            setNextAnchor(sm1, null, "CenterRight", "0 0", null, "Parent");
             sm1.setAttribute("Anchor", "TopCenter");
             sm1.appendElement(ElementName.COLORCONTROLSTRIP).setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata");
         }
@@ -212,7 +207,7 @@ public class ContentCreationTest extends PreflightTest
             sm1_1.setMarkSide(EnumMarkSide.TwoSidedBackToBack);
             sm1_1.setAttribute("Orientation", "Rotate0");
             sm1_1.setAttribute("Anchor", "CenterCenter");
-            setNextAnchor(sm1_1, null, "BottomRight", "-5 5", null);
+            setNextAnchor(sm1_1, null, "BottomRight", "-5 5", null,"Parent");
             sm1_1.appendElement(ElementName.CUTMARK).setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata");
         } 
 //      TODO page cs vs. cell cs
@@ -224,7 +219,7 @@ public class ContentCreationTest extends PreflightTest
             sm1_2.setMarkSide(EnumMarkSide.Back);
             sm1_2.setAttribute("Orientation", "Rotate90");
             sm1_2.setAttribute("Anchor", "CenterLeft");
-            setNextAnchor(sm1_2, null, "BottomCenter", "5 0", null);
+            setNextAnchor(sm1_2, null, "BottomCenter", "5 0", null,"Parent");
             sm1_2.appendElement(ElementName.IDENTIFICATIONFIELD).setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata");
         } 
 
@@ -236,7 +231,7 @@ public class ContentCreationTest extends PreflightTest
             sm1_3.setMarkSide(EnumMarkSide.Back);
             sm1_3.setAttribute("Orientation", "Rotate0");
             sm1_3.setAttribute("Anchor", "BottomCenter");
-            setNextAnchor(sm1_3, null, "BottomCenter", "0 5", null);
+            setNextAnchor(sm1_3, null, "BottomCenter", "0 5", null,"Parent");
             sm1_3.setAttribute("AbsoluteWidth", "20");
             sm1_3.setAttribute("AbsoluteHeight", "10");
             sm1_3.appendElement(ElementName.IDENTIFICATIONFIELD).setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata");
@@ -260,7 +255,7 @@ public class ContentCreationTest extends PreflightTest
             sm2_1.setMarkSide(EnumMarkSide.Front);
             sm2_1.setAttribute("Orientation", "Rotate0");
             sm2_1.setAttribute("Anchor", "TopLeft");
-            setNextAnchor(sm2_1, null, "TopLeft", "2 -3", null);
+            setNextAnchor(sm2_1, null, "TopLeft", "2 -3", null,"Parent");
             String idAnchor=sm2_1.appendAnchor(null);
             sm2_1.appendElement(ElementName.IDENTIFICATIONFIELD).setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata");
             
@@ -274,7 +269,7 @@ public class ContentCreationTest extends PreflightTest
             sm2_2.setAttribute("Orientation", "Rotate0");
             sm2_2.appendElement(ElementName.REGISTERMARK).setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata");
             setNextAnchor(sm2_2, idAnchor, "BottomRight","3 0",
-                    "This NextAnchor element refers to the previous barcode. the lower left of this is 3 points tothe right of the lower right of the referenced barcode.");
+                    "This NextAnchor element refers to the previous barcode. the lower left of this is 3 points tothe right of the lower right of the referenced barcode.","Sibling");
                  
         } 
         
@@ -286,12 +281,13 @@ public class ContentCreationTest extends PreflightTest
      * @param sm2_2
      * @param idAnchor
      */
-    private void setNextAnchor(JDFStripMark sm2_2, String idAnchor, String anchor, String absolutePosition,String xmlComment)
+    private void setNextAnchor(KElement sm2_2, String idAnchor, String anchor, String absolutePosition,String xmlComment, String anchorType)
     {
         KElement nextAnchor=sm2_2.appendElement("RefAnchor");
         nextAnchor.setAttribute("Anchor",anchor);
         nextAnchor.setAttribute("MarkOffset", absolutePosition);
         nextAnchor.setAttribute("rRef",idAnchor);  
+        nextAnchor.setAttribute("AnchorType",anchorType);  
         nextAnchor.setXMLComment(xmlComment);
     }
 

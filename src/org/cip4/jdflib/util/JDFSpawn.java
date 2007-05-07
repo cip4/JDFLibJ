@@ -916,29 +916,33 @@ public class JDFSpawn
             // loop over all part maps to get best matching resource
             for (int j = 0; j < size; j++)
             {
-                final JDFResource pLeaf = r.getPartition(vParts.elementAt(j), null);
-                if (pLeaf != null)
+                VElement vSubParts=r.getPartitionVector(vParts.elementAt(j), null);
+                for(int k=0;k<vSubParts.size();k++)
                 {
-                    // set the lock of the leaf to true if it is RO, else unlock it
-                    if (bStayinMain)
+                    final JDFResource pLeaf = (JDFResource) vSubParts.item(k);
+                    if (pLeaf != null)
                     {
-                        if( (copyStatus==EnumSpawnStatus.SpawnedRW)
-                                || (pLeaf.getSpawnStatus()!=EnumSpawnStatus.SpawnedRW))
+                        // set the lock of the leaf to true if it is RO, else unlock it
+                        if (bStayinMain)
                         {
-                            pLeaf.setSpawnStatus(copyStatus);
-                            pLeaf.setLocked(copyStatus == EnumSpawnStatus.SpawnedRW);
+                            if( (copyStatus==EnumSpawnStatus.SpawnedRW)
+                                    || (pLeaf.getSpawnStatus()!=EnumSpawnStatus.SpawnedRW))
+                            {
+                                pLeaf.setSpawnStatus(copyStatus);
+                                pLeaf.setLocked(copyStatus == EnumSpawnStatus.SpawnedRW);
+                            }
                         }
+                        else
+                        {
+                            pLeaf.setLocked(copyStatus != EnumSpawnStatus.SpawnedRW);
+                        }
+
+                        pLeaf.appendSpawnIDs(spawnID);
                     }
-                    else
-                    {
-                        pLeaf.setLocked(copyStatus != EnumSpawnStatus.SpawnedRW);
-                    }
-                    
-                    pLeaf.appendSpawnIDs(spawnID);
                 }
             }
         }
-        else
+        else // no partitions
         {
             if (bStayinMain)
             {
@@ -953,7 +957,7 @@ public class JDFSpawn
             {
                 r.setLocked(copyStatus != EnumSpawnStatus.SpawnedRW);
             }
-            
+
             r.appendSpawnIDs(spawnID);
         }
     }

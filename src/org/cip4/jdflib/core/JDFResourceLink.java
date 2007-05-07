@@ -1402,7 +1402,11 @@ public class JDFResourceLink extends JDFElement
             if(apParts!=null)
             {
                 for (int i = 0; i < apParts.size(); i++)
-                    r.getCreatePartition(apParts.elementAt(i), null);
+                {
+                    VElement vExist=r.getPartitionVector(apParts.elementAt(i), null);
+                    if(vExist.isEmpty())
+                        r.getCreatePartition(apParts.elementAt(i), null);
+                }
             }
         }
     }

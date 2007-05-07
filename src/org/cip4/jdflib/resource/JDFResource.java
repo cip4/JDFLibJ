@@ -3577,7 +3577,7 @@ public class JDFResource extends JDFElement
      */
     public VElement getPartitionVector(JDFAttributeMap m, EnumPartUsage partUsage)
     {
-        return getDeepPartVector(m, partUsage , 0, getPartIDKeys());
+        return getDeepPartVector(m, partUsage , -1, getPartIDKeys());
     }
     
     /**
@@ -6653,18 +6653,27 @@ public class JDFResource extends JDFElement
     public VElement createPartitions(VJDFAttributeMap vPartMap, VString vPartIDKeys)
     {
         VElement v = new VElement();
+        VString tmp=new VString();
         for (int i = 0; i < vPartMap.size(); i++)
         {
-            VString tmp=new VString();
             JDFAttributeMap map = vPartMap.elementAt(i);
-            for(int j=0;j<vPartIDKeys.size();j++)
+            VElement vExist=getPartitionVector(map, null);
+            if(vExist.isEmpty())
             {
-                if (map.containsKey(vPartIDKeys.elementAt(j)))
+                tmp.clear();
+                for(int j=0;j<vPartIDKeys.size();j++)
                 {
-                    tmp.add(vPartIDKeys.elementAt(j));
+                    if (map.containsKey(vPartIDKeys.elementAt(j)))
+                    {
+                        tmp.add(vPartIDKeys.elementAt(j));
+                    }
                 }
+                v.add(getCreatePartition(map, tmp));
             }
-            v.add(getCreatePartition(map, tmp));
+            else
+            {
+                v.addAll(vExist);
+            }
         }
         
         return v;
