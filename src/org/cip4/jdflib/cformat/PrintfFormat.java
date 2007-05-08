@@ -741,21 +741,21 @@ public class PrintfFormat
         return pad();
     }
 
-    private void convert(long x, int n, int m, String d)
-    {
-        if (x == 0)
-        {
-            output.append('0');
-
-            return;
-        }
-
-        while (x != 0)
-        {
-            output.prepend(d.charAt((int) (x & m)));
-            x = x >>> n;
-        }
-    }
+//    private void convert(long x, int n, int m, String d)
+//    {
+//        if (x == 0)
+//        {
+//            output.append('0');
+//
+//            return;
+//        }
+//
+//        while (x != 0)
+//        {
+//            output.prepend(d.charAt((int) (x & m)));
+//            x = x >>> n;
+//        }
+//    }
 
     private void expFormat(DecDouble dd, int p)
     {

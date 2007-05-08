@@ -588,7 +588,6 @@ public class ScanfReader extends Reader
         // parse [-][0-9]*[.][0-9]*[eE][-][0-9]*
         boolean hasDigits = false;
 
-        boolean signed;
         double value = 0;
         int w;
 
@@ -611,8 +610,6 @@ public class ScanfReader extends Reader
             int skippedSpaces = skipWhiteSpace(w);
             w -= skippedSpaces;
         }
-
-        signed = (acceptChar('-', w) || acceptChar('+', w));
 
         if (acceptDigits(w))
         {
@@ -638,8 +635,6 @@ public class ScanfReader extends Reader
 
         if (acceptChar('e', w) || acceptChar('E', w))
         {
-            signed = (acceptChar('-', w) || acceptChar('+', w));
-
             if ((bcnt == w) || !Character.isDigit((char) curChar))
             {
                 if (curCharValid && (curChar == -1))
@@ -1650,13 +1645,13 @@ public class ScanfReader extends Reader
         return val;
     }
 
-    private final void scanPrefix(ScanfFormat fmt) throws IOException
-    {
-        if (fmt.prefix != null)
-        {
-            matchString(fmt.prefix);
-        }
-    }
+//    private final void scanPrefix(ScanfFormat fmt) throws IOException
+//    {
+//        if (fmt.prefix != null)
+//        {
+//            matchString(fmt.prefix);
+//        }
+//    }
 
     private final void scanSuffix(ScanfFormat fmt) throws IOException
     {

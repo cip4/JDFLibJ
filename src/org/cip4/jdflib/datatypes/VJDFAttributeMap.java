@@ -14,7 +14,6 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
-import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.util.HashUtil;
 
 /**

@@ -25,9 +25,11 @@ import java.io.IOException;
   */
 public class ScanfMatchException extends IOException
 {
+	private static final long serialVersionUID = -5732069796015243165L;
+	
     //~ Constructors ///////////////////////////////////////////////////////////
 
-    /**
+	/**
       * Creates a new ScanfMatchException with the given message.
       *
       * @param msg Error message

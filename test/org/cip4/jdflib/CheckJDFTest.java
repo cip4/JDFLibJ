@@ -261,7 +261,7 @@ public class CheckJDFTest extends JDFTestCaseBase
         // containing hyphens from being parsed correctly
 
         // Run test once
-        String report1 = "checkjdf_report_1.xml";
+        String report1 = sm_dirTestDataTemp+"checkjdf_report_1.xml";
         String[] args1 = { jdfFile.getAbsolutePath(), "-q", "-c", "-x " + report1 };
         CheckJDF.main(args1);
         assertTrue(new File(report1).exists());

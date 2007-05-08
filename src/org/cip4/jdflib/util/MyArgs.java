@@ -77,7 +77,6 @@ package org.cip4.jdflib.util;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Vector;
 
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
