@@ -146,12 +146,14 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFNodeInfo;
+import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFPartStatus;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDocUserData;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
@@ -2143,10 +2145,12 @@ public class JDFNode extends JDFElement
      * get the node's partition status
      * 
      * @param mattr Attribute map of partition
+     * @param bFromLeaves if false, get the directly specified value
+     * if true ignore the directly specified value and calculate the value from leaves, if any
      * 
      * @return JDFElement.EnumNodeStatus: Status of the partition, null if no Status exists
      */
-    public JDFElement.EnumNodeStatus getPartStatus (JDFAttributeMap mattr)
+    public JDFElement.EnumNodeStatus getPartStatus(JDFAttributeMap mattr)
     {
         EnumNodeStatus stat = getStatus();
         if ((stat != EnumNodeStatus.Pool)&&(stat != EnumNodeStatus.Part)){
@@ -2162,10 +2166,15 @@ public class JDFNode extends JDFElement
                 return null;
             stat = ni.getNodeStatus();
 
-            final VElement vLeaves=ni.getLeaves(true);
+            final VElement vLeaves=ni.getLeaves(false);
             final int size = vLeaves.size();
+ 
             for(int i=0;i<size;i++){
-                final JDFNodeInfo niCmp=(JDFNodeInfo) vLeaves.elementAt(i);
+                JDFNodeInfo niCmp=(JDFNodeInfo) vLeaves.elementAt(i);
+                JDFAttributeMap map=niCmp.getPartMap();
+                if(map!=null && !map.subMap(mattr))
+                    continue;
+                    
                 if(niCmp.getNodeStatus()!=stat)
                 {
                     return null; //inconsistent
@@ -2204,6 +2213,39 @@ public class JDFNode extends JDFElement
     }
  
 
+    /**
+     * return the partMapVector defined by nodeInfo partitioning
+     * null if nodeInfo is not partitioned or if the node status is neither pool nor part
+     * @return the vector of PartMaps
+     */
+    public VJDFAttributeMap getStatusPartMapVector()
+    {
+        final EnumNodeStatus status = getStatus();
+        if(EnumNodeStatus.Pool.equals(status))
+        {
+           JDFStatusPool pool=getStatusPool();
+           if(pool!=null)
+           {
+               VJDFAttributeMap vMap=new VJDFAttributeMap();
+               VElement vParts=pool.getPartStatusVector(null);
+               for(int i=0;i<vParts.size();i++)
+               {
+                   JDFPartStatus ps=(JDFPartStatus) vParts.item(i);                   
+                   vMap.appendUnique(ps.getPartMap());
+               }
+               vMap.unify();
+               return vMap;
+           }
+        }
+        else if(EnumNodeStatus.Part.equals(status))
+        {
+            JDFNodeInfo ni=getNodeInfo();
+            if(ni!=null)
+                return ni.getPartMapVector(true);
+        }
+
+        return null; // nop
+    }
     /**
      * return the partMapVector defined in AncestorPool, 
      * null if no AncestorPool exists, or AncestorPool has no Part elements
@@ -3329,8 +3371,77 @@ public class JDFNode extends JDFElement
     }
 
 
+     /**
+     * update the node status or nodeinfo/@NodeStatus for all partitions specified in vMap
+     * @param vMap the map of partitions to apply the update algorithm to
+     * @param updateKids if true, also recursively update all kids, if false move to root without updating kids
+     * @param updateParents if true, recurse down to the root, updatimg the satus based on modifications in this
+     */
+    public void updatePartStatus(VJDFAttributeMap vMap, boolean updateKids, boolean updateParents)
+    {
+        VElement vNodes=getvJDFNode(null, null, true);
+        if(vNodes==null || vNodes.isEmpty()) 
+            return; // no kids=nothing to do..
+        final int kidsize = vNodes.size();
+        // clean kids first and then start algorithm based on clean kids
+        VJDFAttributeMap statusMaps=new VJDFAttributeMap();
+        for(int i=0;i<kidsize;i++)
+        {
+            final JDFNode node = (JDFNode)vNodes.item(i);
+            if(updateKids)
+                node.updatePartStatus(vMap,updateKids,false);
+            statusMaps.addall(node.getStatusPartMapVector());
+        }
+        statusMaps.unify();
+        if(statusMaps.size()>0)
+        {
+            for(int i=statusMaps.size()-1;i>=0;i--)
+            {
+                JDFAttributeMap map=statusMaps.elementAt(i);
+                if(!map.subMap(vMap))
+                {
+                    statusMaps.removeElementAt(i);
+                }
+            }
+            if(statusMaps.size()==0)
+                return;
+        }
+        else   
+        {
+            statusMaps.add(null);
+        }
+        for(int i=0;i<statusMaps.size();i++)
+        {
+            JDFAttributeMap map=statusMaps.elementAt(i);
+            EnumNodeStatus minStatus=EnumNodeStatus.Completed;
+            for(int j=0;j<kidsize;j++)
+            {
+                final JDFNode node = (JDFNode)vNodes.item(j);
+               
+                EnumNodeStatus status=node.getPartStatus(map);
+                if(status==null)
+                {
+                    minStatus=null;
+                    break; // no consistent status, don't set
+                }
+                if(minStatus.getValue()>status.getValue())
+                    minStatus=status;
+            }
+            if(minStatus!=null)
+                setPartStatus(map, minStatus);
+        }
+        // recurse down to root
+        if(updateParents)
+        {
+            JDFNode parent=getParentJDF();
+            if(parent!=null)
+                parent.updatePartStatus(vMap, false, true);
+        }
+        
+    }
     /**
      * UpDateStatus - update the status of a node depending on its resources and child nodes
+     * @deprecated use updatePartStatus(VJDFAttributeMAP)
      */
     public void upDateStatus()
     {

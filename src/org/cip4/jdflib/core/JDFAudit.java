@@ -605,6 +605,7 @@ public class JDFAudit extends JDFElement
         setAttribute(AttributeName.AGENTVERSION, value);
     }
     
+    
     /**
      Get string attribute AgentVersion
      */
@@ -626,6 +627,23 @@ public class JDFAudit extends JDFElement
         return (JDFAuditPool)getDeepParent(ElementName.AUDITPOOL, 0);
     }
     
+    /**
+     * create an update audit for this
+     * @return
+     */
+    public JDFAudit createUpdateAudit()
+    {
+        JDFAuditPool pool=getAuditPool();
+        if(pool==null)
+            return null;
+        JDFAudit copy=(JDFAudit) pool.copyElement(this, null);
+        copy.removeAttribute(AttributeName.ID);
+        copy.removeAttribute(AttributeName.AGENTNAME);
+        copy.removeAttribute(AttributeName.AGENTVERSION);
+        copy.init();
+        copy.setRef(this);      
+        return copy;
+    }
     /**
      * Gets the default static AgentName that is used to preset @AgentName when generating a new Audit
      * @return Returns the m_strAgentName.

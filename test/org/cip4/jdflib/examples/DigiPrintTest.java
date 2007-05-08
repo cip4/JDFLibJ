@@ -164,6 +164,46 @@ public class DigiPrintTest extends JDFTestCaseBase
         doc.write2File(sm_dirTestDataTemp+"DigiPrintModule1.jdf", 2, false);
     }
 
+    public void testModulesUpdate() throws Exception
+    {
+        JDFAuditPool ap=n.getCreateAuditPool();
+        ap.appendXMLComment("JDF 1.3 compatible auditing of module phases with updates", null);
+        JDFPhaseTime pt=ap.addPhaseTime(EnumNodeStatus.Setup, null, null);
+        JDFPhaseTime pt2=ap.addPhaseTime(EnumNodeStatus.InProgress, null, null);        
+        JDFPhaseTime pt3=ap.addPhaseTime(EnumNodeStatus.InProgress, null, null);        
+        final JDFDate date = new JDFDate();
+        JDFModulePhase mpRIP=pt.appendModulePhase();
+        mpRIP.setModuleType("Imaging");
+        JDFModulePhase mpJob=pt.appendModulePhase();
+        mpJob.setModuleType("Manual");
+        mpJob.setStatus(EnumNodeStatus.InProgress);
+        JDFModulePhase mpPrint=pt.appendModulePhase();
+        mpPrint.setModuleType("Printing");
+        
+        mpRIP.setStatus(EnumNodeStatus.InProgress);
+        pt.setStart(date);
+        mpRIP.setStart(date);
+        date.addOffset(0,5,0,0);
+        pt.setEnd(date);
+
+        pt2.copyElement(mpRIP, null);
+        pt2.copyElement(mpJob, null);
+        pt2.copyElement(mpPrint, null);
+        mpPrint.setStatus(EnumNodeStatus.InProgress);
+        pt2.setStart(date);
+        mpPrint.setStart(date);
+        date.addOffset(0,30,0,0);
+        mpRIP.setEnd(date);
+
+        date.addOffset(0,70,0,0);
+        pt2.setEnd(date);
+        mpPrint.setEnd(date);
+        pt3.copyElement(mpRIP, null);
+        pt3.copyElement(mpJob, null);
+        pt3.copyElement(mpPrint, null);
+
+        doc.write2File(sm_dirTestDataTemp+"DigiPrintModuleUpdate.jdf", 2, false);
+    }
     /**
      * test amount handling
      * @return

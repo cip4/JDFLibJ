@@ -116,7 +116,66 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
         assertFalse(v.subMap(m3));
          
     }
-    
+    public void testAddAll()
+    {
+        JDFAttributeMap m1=new JDFAttributeMap("a1","v1");
+        m1.put("a2","v2");
+        JDFAttributeMap m2=new JDFAttributeMap(m1);
+        m2.put("a2","v3");
+        JDFAttributeMap m3=new JDFAttributeMap(m1);
+        m3.put("a2","v3");
+        VJDFAttributeMap v=new VJDFAttributeMap();
+        v.add(m1);
+        v.add(m2);
+        VJDFAttributeMap v2=new VJDFAttributeMap();
+        v2.add(m2);
+        v2.add(m3);
+        v.addall(v2);
+        assertEquals(v.size(), 4);
+        assertTrue(v.contains(m1));
+        assertTrue(v.contains(m2));
+        assertTrue(v.contains(m3));
+        
+
+    }
+    public void testUnify()
+    {
+        JDFAttributeMap m1=new JDFAttributeMap("a1","v1");
+        m1.put("a2","v2");
+        JDFAttributeMap m2=new JDFAttributeMap(m1);
+        m2.put("a2","v3");
+        JDFAttributeMap m3=new JDFAttributeMap(m1);
+        m3.put("a2","v3");
+        VJDFAttributeMap v=new VJDFAttributeMap();
+        v.add(m1);
+        v.add(m2);
+        v.add(m3);
+        v.unify();
+        assertEquals(v.size(), 2);
+        assertTrue(v.contains(m1));
+        assertTrue(v.contains(m2));
+        assertTrue(v.contains(m3));
+        v.add(m1);
+        v.add(m2);
+        v.add(m3);
+        v.add(m1);
+        v.add(m2);
+        v.add(m3);
+        v.unify();
+        assertEquals(v.size(), 2);
+        assertTrue(v.contains(m1));
+        assertTrue(v.contains(m2));
+        assertTrue(v.contains(m3));
+        
+        v.add(null);
+        v.unify();
+        assertEquals(v.size(), 3);
+        assertTrue(v.contains(m1));
+        assertTrue(v.contains(m2));
+        assertTrue(v.contains(m3));
+        assertTrue(v.contains(null));
+
+    }
     public void testEquals()
     {
         JDFAttributeMap m1=new JDFAttributeMap("a1","v1");

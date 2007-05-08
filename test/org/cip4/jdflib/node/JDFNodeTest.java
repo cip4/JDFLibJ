@@ -78,6 +78,7 @@ import java.util.Vector;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
+import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
@@ -1459,10 +1460,89 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertEquals(v.size(),1);
         assertEquals(root.getResourceLinkPool().getElement(null), v.elementAt(0));
     }
-   //////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
 
-    public void testGetLinksForType()
+    public void testUpdatePartStatus()
     {
+        for(int loop=0;loop<2;loop++)
+        {
+            JDFDoc doc= new JDFDoc("JDF");
+            JDFNode root = doc.getJDFRoot();
+            root.setType(EnumType.ProcessGroup);
+            JDFNode[] nodes=new JDFNode[12];
+            JDFAttributeMap map1=new JDFAttributeMap("Run","r1");
+            JDFAttributeMap map2=new JDFAttributeMap("Run","r2");
+            JDFAttributeMap map3=new JDFAttributeMap("Run","r3");
+            JDFAttributeMap map21=new JDFAttributeMap("Run","r2");
+            map21.put("RunSet","s1");
+            JDFAttributeMap map22=new JDFAttributeMap("Run","r2");
+            map22.put("RunSet","s2");
+            for(int i=0;i<4;i++)
+            {
+                JDFNode interNode=nodes[3*i]=root.addProcessGroup(null);
+                for(int j=0;j<3;j++)
+                {
+                    JDFNode leafNode=nodes[3*i+j]=interNode.addCombined(new VString("a b c"," "));
+                    leafNode.setPartStatus(map1, EnumNodeStatus.Completed);
+                    leafNode.setPartStatus(map2, EnumNodeStatus.Waiting);
+                    leafNode.setPartStatus(map3, EnumNodeStatus.Waiting);
+                    leafNode.setPartStatus(map21, EnumNodeStatus.InProgress);
+                    leafNode.setPartStatus(map22, EnumNodeStatus.Waiting);
+                }
+            }
+            VJDFAttributeMap vMap=loop==0 ? null : new VJDFAttributeMap();
+            if(loop>0)
+            {
+                vMap.add(map1);
+                vMap.add(map3);
+            }
+            root.updatePartStatus(vMap,true,true);
+            assertEquals(root.getPartStatus(map1), EnumNodeStatus.Completed);
+            assertNull(root.getPartStatus(null));
+            if(loop==0)
+            {
+                assertEquals(root.getPartStatus(map21), EnumNodeStatus.InProgress);
+            }
+            else
+            {
+                assertNotSame("only updated run=1",root.getPartStatus(map21),EnumNodeStatus.InProgress);               
+            }
+            
+        }
+    }    
+    
+    //////////////////////////////////////////////////////////////
+
+    public void testStatusPartMapVector()
+    {
+        JDFDoc doc= new JDFDoc("JDF");
+        JDFNode root = doc.getJDFRoot();
+
+        root.setType(EnumType.Combined);
+        root.setTypes(new VString("Cutting Folding Cutting"," "));
+        for(int i=0;i<2;i++)
+        {
+            EnumVersion v=i==0 ? EnumVersion.Version_1_1 : EnumVersion.Version_1_3;
+            root.setVersion(v);
+            VJDFAttributeMap vMapIn=new VJDFAttributeMap();
+            if(i==1) // nodeinfo returns all intermediate nodes in addition
+                vMapIn.add(new JDFAttributeMap());
+            for(int j=0;j<3;j++)
+            {
+                JDFAttributeMap map=new JDFAttributeMap("Run","R"+j);
+                root.setPartStatus(map, EnumNodeStatus.Completed);
+                vMapIn.add(map);
+            }
+            VJDFAttributeMap vMap=root.getStatusPartMapVector();
+            assertEquals(vMapIn,vMap);
+        }
+    }
+    
+    
+        //////////////////////////////////////////////////////////////
+
+        public void testGetLinksForType()
+        {
         JDFDoc doc= new JDFDoc("JDF");
         JDFNode root = doc.getJDFRoot();
 

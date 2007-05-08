@@ -275,6 +275,40 @@ public class JDFAttributeMap implements Map
 
         return false;
     }
+    
+    /**
+     * Method subMap.
+     * @param vMap the vector submaps to check against
+     * @return true if this has at least one entry that vMap contains at least a submap of
+     */
+    public boolean subMap (VJDFAttributeMap vMap)
+    {
+        if(vMap==null)
+            return true;
+        for (int i=0; i<vMap.size(); i++)
+        {
+           if(subMap(vMap.elementAt(i)))
+               return true;
+        }
+        return false;
+    }
+    
+    /**
+     * Method overlapMap.
+     * @param vMap the vector submaps to check against
+     * @return true if this has at least one entry that vMap contains at least a submap of
+     */
+    public boolean overlapMap (VJDFAttributeMap vMap)
+    {
+        if(vMap==null)
+            return true;
+        for (int i=0; i<vMap.size(); i++)
+        {
+           if(overlapMap(vMap.elementAt(i)))
+               return true;
+        }
+        return false;
+    }
 
     /**
      * overlapMap - identical keys must have the same values in both maps

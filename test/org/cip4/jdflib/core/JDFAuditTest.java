@@ -133,6 +133,21 @@ public class JDFAuditTest extends JDFTestCaseBase
         pt2.setRef(pt);
         assertEquals(pt.getID(), pt2.getrefID());
      }
+    /////////////////////////////////////////////////////////////////////
+    public void testCreateUpdate() throws Exception
+    {
+        JDFDoc d=new JDFDoc(ElementName.JDF);
+        JDFNode n=d.getJDFRoot();
+        n.setType("ConventionalPrinting",true);
+        JDFAuditPool ap=n.getAuditPool();
+        assertNotNull(ap);
+        JDFPhaseTime pt=ap.setPhase(EnumNodeStatus.Stopped, null, null);
+        JDFPhaseTime pt2=(JDFPhaseTime) pt.createUpdateAudit();
+        assertEquals(pt.getID(), pt2.getrefID());
+        assertNotSame(pt.getID(), "");       
+        assertNotSame(pt2.getID(), "");       
+        assertNotSame(pt2.getID(), pt.getID());       
+     }
 
     /////////////////////////////////////////////////////////////////////
     public void testCreated() throws Exception
@@ -208,6 +223,7 @@ public class JDFAuditTest extends JDFTestCaseBase
         // TODO Auto-generated method stub
         super.setUp();
         b=JDFResource.getAutoAgent();
+        JDFElement.setLongID(false);
 
     }
     

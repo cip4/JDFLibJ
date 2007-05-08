@@ -157,7 +157,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
     {
         JDFAttributeMap m1=new JDFAttributeMap("a1","v1");
         m1.put("a2","v2");
-        assertTrue(m1.subMap(null));
+        assertTrue(m1.subMap((JDFAttributeMap)null));
         JDFAttributeMap m2=new JDFAttributeMap("a1","v1");
         assertTrue(m1.subMap(m2));
         m2.put("a2","v2");
@@ -168,7 +168,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
         assertTrue(m1.subMap(m2));
         m2.put("a3","v3");
         assertFalse(m1.subMap(m2));
-        assertTrue(m1.subMap(null));
+        assertTrue(m1.subMap((JDFAttributeMap)null));
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -177,7 +177,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
     {
         JDFAttributeMap m1=new JDFAttributeMap("a1","v1");
         m1.put("a2","v2");
-        assertTrue(m1.overlapMap(null));
+        assertTrue(m1.overlapMap((JDFAttributeMap)null));
         JDFAttributeMap m2=new JDFAttributeMap("a1","v1");
         assertTrue(m1.overlapMap(m2));
         m2.put("a2","v2");
@@ -194,7 +194,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
         assertTrue(m1.overlapMap(m2));
         m1.put("a4",null);
         assertTrue(m1.overlapMap(m2));
-        assertTrue(m1.overlapMap(null));
+        assertTrue(m1.overlapMap((JDFAttributeMap)null));
     }
 
     ///////////////////////////////////////////////////////////////

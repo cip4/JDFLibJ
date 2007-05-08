@@ -9,10 +9,12 @@
  */
 package org.cip4.jdflib.datatypes;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.util.HashUtil;
 
 /**
@@ -182,6 +184,17 @@ public class VJDFAttributeMap
     {
         m_vec.add(obj);
     }
+    /**
+     * Appends all the specified elements to the end of this Vector
+     *
+     * @param obj the given element
+     */
+    public void addall(VJDFAttributeMap obj)
+    {
+        if(obj!=null)
+            for(int i=0;i<obj.size();i++)
+                m_vec.add(obj.elementAt(i));
+    }
 
     /**
      * Adds the specified component to the end of this vector, increasing its size by one
@@ -338,17 +351,37 @@ public class VJDFAttributeMap
         m_vec.addElement(map);
     }
 
-
+    /**
+     * unify - make VElement unique, retaining initial order
+     */
+    public void unify()
+    {
+        HashSet set=new HashSet();
+        int size=size();
+        for (int i=0;i<size;i++)
+        {
+            final JDFAttributeMap e = this.elementAt(i);
+            if(set.contains(e))
+            {
+                this.removeElementAt(i);
+                i--;
+                size--;
+            }
+            else
+            {
+                set.add(e);
+            }
+        }        
+    }
+    
     /**
      * Method appendUnique.
      * @param map maps to append
      */
     public void appendUnique (VJDFAttributeMap map)
     {
-        for (int i=0; i<map.size(); i++)
-        {
-            appendUnique (new JDFAttributeMap(map.elementAt(i)));
-        }
+       addall(map);
+       unify();
     }
 
 
@@ -377,6 +410,22 @@ public class VJDFAttributeMap
         {
             if (this.elementAt(i).subMap(map))
                 return true;
+        }
+        return false;
+    }
+    /**
+     * Method subMap.
+     * @param vMap the vector submaps to check against
+     * @return true if this has at least one entry that vMap contains at least a submap of
+     */
+    public boolean subMap (VJDFAttributeMap vMap)
+    {
+        if(vMap==null)
+            return true;
+        for (int i=0; i<vMap.size(); i++)
+        {
+           if(subMap(vMap.elementAt(i)))
+               return true;
         }
         return false;
     }
