@@ -88,7 +88,7 @@ public class JMFKnownMessagesTest extends JDFTestCaseBase
         doc.write2File(sm_dirTestDataTemp+"JMFDevCap.xml", 2, false);
         docJMF.write2File(sm_dirTestDataTemp+"JMFDevCapTest.jmf", 2, false);
         {
-            JDFResponse resp=jmf.appendResponse(EnumType.AbortQueueEntry);             
+            jmf.appendResponse(EnumType.AbortQueueEntry);             
         }
         report=JDFDeviceCap.getJMFInfo(jmf, r, EnumFitsValue.Allowed, EnumValidationLevel.Complete, true);
         assertEquals(report.getRoot().getAttribute("IsValid"),"false");

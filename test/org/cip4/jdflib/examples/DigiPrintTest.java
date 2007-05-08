@@ -98,7 +98,6 @@ import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFModulePhase;
 import org.cip4.jdflib.resource.JDFModuleStatus;
 import org.cip4.jdflib.resource.JDFPhaseTime;
-import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCap;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCaps;
@@ -119,7 +118,6 @@ public class DigiPrintTest extends JDFTestCaseBase
     private JDFDoc doc;
     private JDFNode n;
     private JDFComponent comp;
-    private JDFStrippingParams stripParams;
     private JDFResourceLink rlComp;
     private JDFDigitalPrintingParams digiParams;
     private JDFMedia med;

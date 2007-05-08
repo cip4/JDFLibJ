@@ -13,7 +13,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFNodeInfo;
-import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -137,7 +136,7 @@ public class WebTest extends JDFTestCaseBase
         xm.appendMedia();
         JDFExposedMedia xmCyl=(JDFExposedMedia) node.appendMatchingResource(ElementName.EXPOSEDMEDIA, EnumProcessUsage.Cylinder, null);
         xmCyl.setDescriptiveName("Optional cylinder");
-        JDFResourceLink rlCylOut=node.linkMatchingResource(xmCyl, EnumProcessUsage.AnyOutput, null);
+        node.linkMatchingResource(xmCyl, EnumProcessUsage.AnyOutput, null);
         assertEquals("2 for cylinder one for plate",node.getResourceLinkPool().numChildElements("ExposedMediaLink", null), 3);
         doc.write2File(sm_dirTestDataTemp+File.separator+"webDirect.jdf", 2,false);
 

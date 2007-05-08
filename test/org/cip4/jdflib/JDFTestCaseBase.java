@@ -86,9 +86,10 @@ import org.cip4.jdflib.datatypes.JDFIntegerRange;
  */
 public abstract class JDFTestCaseBase extends TestCase
 {
-    static protected final String sm_dirTestSchema   = ".." + File.separator + "schema" + File.separator + "Version_1_3" + File.separator;
-    static protected final String sm_dirTestData     = "test" + File.separator + "data" + File.separator;
-    static protected final String sm_dirTestDataTemp = sm_dirTestData + "temp" + File.separator;
+    private static final String SEPARATOR = File.separator; // "/"; //
+	static protected final String sm_dirTestSchema   = ".." + SEPARATOR + "schema" + SEPARATOR + "Version_1_3" + SEPARATOR;
+    static protected final String sm_dirTestData     = "test" + SEPARATOR + "data" + SEPARATOR;
+    static protected final String sm_dirTestDataTemp = sm_dirTestData + "temp" + SEPARATOR;
     private String agentName;
     private String agentVersion;
     private String author;

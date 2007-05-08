@@ -9,11 +9,11 @@
 package org.cip4.jdflib.datatypes;
 
 import java.util.Iterator;
-import java.util.Vector;
 
 import junit.framework.TestCase;
 
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.VString;
 
 
 public class JDFRectangleTest extends TestCase {
@@ -81,11 +81,11 @@ public class JDFRectangleTest extends TestCase {
             }
         }
 
-        Vector vec = new Vector();
+        VString vec = new VString();
         vec.add("a");
         vec.add("b");
 
-        vMap.reduceKey(vec);
+        vMap.reduceMap(vec.getSet());
 
         System.out.println("pos 2-------------------------------------");
         

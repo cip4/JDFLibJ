@@ -15,7 +15,6 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
-import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
@@ -92,7 +91,7 @@ public class JMFResourceTest extends JDFTestCaseBase
         rqp.setResourceName(ElementName.MEDIA);
         
         JDFResourceInfo ri=s.appendResourceInfo();
-        JDFAmountPool ap=ri.getCreateAmountPool();
+        ri.getCreateAmountPool();
         //TODO continue
     }
 

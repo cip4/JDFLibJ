@@ -11,7 +11,6 @@ package org.cip4.jdflib;
 
 import java.io.File;
 
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFParser;

@@ -120,8 +120,7 @@ public class QueueTest extends TestCase
     public void testEndTime()
     {
         JDFQueueEntry _qe = (JDFQueueEntry) new JDFDoc(ElementName.QUEUEENTRY).getRoot();
-        JDFDate date = _qe.getEndTime();
-        int i=0;
+        _qe.getEndTime();
     }
 
 /////////////////////////////////////////////////////////////////////////////

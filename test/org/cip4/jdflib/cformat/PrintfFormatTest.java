@@ -533,8 +533,6 @@ public class PrintfFormatTest extends JDFTestCaseBase
             fail("bad expression");
         }
 
-        boolean pass = false;
-
         assertEquals("type is '" + fmt.type + "' vs. '" + type + "'",fmt.type ,type);
         assertEquals("prefix is '" + fmt.prefix + "' vs. '" + pfx + "'",fmt.prefix ,pfx);
         assertEquals("suffix is '" + fmt.suffix + "' vs. '" + sfx + "'",fmt.suffix ,sfx);
@@ -590,7 +588,9 @@ public class PrintfFormatTest extends JDFTestCaseBase
     //    }
     private static class TestException extends Exception
     {
-        TestException(String msg)
+		private static final long serialVersionUID = -857552775825506243L;
+
+		TestException(String msg)
         {
             super(msg);
         }

@@ -382,7 +382,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
         final JDFSpawn spawn=new JDFSpawn(n); // fudge to test output counting
         VJDFAttributeMap vMap=new VJDFAttributeMap();
         vMap.add(m2);
-        JDFNode spawnedNode=spawn.spawn("thisUrl","newURL",null,vMap,true,true,true,true);
+        spawn.spawn("thisUrl","newURL",null,vMap,true,true,true,true);
 
     }
     //////////////////////////////////////////////////////////////
@@ -678,7 +678,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
             }
             n.removeNodeInfo();
             JDFNodeInfo ni=n.getCreateNodeInfo();
-            JDFApprovalSuccess as=(JDFApprovalSuccess) n.appendMatchingResource(ElementName.APPROVALSUCCESS, EnumProcessUsage.AnyInput, null);
+            n.appendMatchingResource(ElementName.APPROVALSUCCESS, EnumProcessUsage.AnyInput, null);
             assertNotNull("ni",ni);
             JDFComment comment=n.appendComment();
             comment.setText("Comment 1");
@@ -1178,7 +1178,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
         }
         spawn.bSpawnRWPartsMultiple=true;
         assertNotNull(spawn.checkSpawnedResources());
-        JDFNode s3=spawn.spawn();
+        spawn.spawn();
 
     }
 

@@ -120,7 +120,6 @@ import org.cip4.jdflib.resource.process.JDFCutBlock;
 import org.cip4.jdflib.resource.process.JDFDigitalPrintingParams;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
-import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPreview;
@@ -259,8 +258,8 @@ public class JDFResourceTest extends JDFTestCaseBase
         JDFNode root = jdfDoc.getJDFRoot();
         root.appendElement("foo:elem","www.foo.com");
         JDFResourcePool rp=root.appendResourcePool();
-        JDFResource r=rp.appendResource("foo:res",EnumResourceClass.Parameter,"www.foo.com");
-        JDFResource r2=(JDFResource)rp.appendElement("foo:res","www.foo.com");
+        rp.appendResource("foo:res",EnumResourceClass.Parameter,"www.foo.com");
+        rp.appendElement("foo:res","www.foo.com");
         rp.appendElement("foo:elem","www.foo.com");
     }
     /**
@@ -867,7 +866,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 
         JDFComponent c1=(JDFComponent) c.addPartition(JDFResource.EnumPartIDKey.SheetName,"S1");
         c1.addPartition(JDFResource.EnumPartIDKey.Separation,"Cyan");
-        JDFComponent c1y=(JDFComponent) c1.addPartition(JDFResource.EnumPartIDKey.Separation,"Yellow");
+        c1.addPartition(JDFResource.EnumPartIDKey.Separation,"Yellow");
         c1.addPartition(JDFResource.EnumPartIDKey.Separation,"Magenta");
 
         JDFComponent c2=(JDFComponent) c.addPartition(JDFResource.EnumPartIDKey.SheetName,"S2");
@@ -1144,7 +1143,7 @@ public class JDFResourceTest extends JDFTestCaseBase
         n.setType("ConventionalPrinting",true);
         n.appendElement("NS:Foobar","www.foobar.com");
 
-        JDFLayout lo=(JDFLayout)n.appendMatchingResource("Layout",JDFNode.EnumProcessUsage.AnyInput,null);
+        n.appendMatchingResource("Layout",JDFNode.EnumProcessUsage.AnyInput,null);
         JDFComponent comp=(JDFComponent)n.appendMatchingResource("Component",JDFNode.EnumProcessUsage.AnyOutput,null);
         JDFExposedMedia xm=(JDFExposedMedia)n.appendMatchingResource("ExposedMedia",JDFNode.EnumProcessUsage.Plate,null);
         JDFNodeInfo ni=n.appendNodeInfo();
@@ -1615,8 +1614,8 @@ public class JDFResourceTest extends JDFTestCaseBase
         JDFNode n=doc.getJDFRoot();
         JDFResource media=n.addResource("Media", null, EnumUsage.Input, null, null, null, null);
 
-        JDFResource sig=media.addPartition(EnumPartIDKey.SignatureName, "sig1");
-        sig=media.addPartition(EnumPartIDKey.SignatureName, "sig2");
+        media.addPartition(EnumPartIDKey.SignatureName, "sig1");
+        media.addPartition(EnumPartIDKey.SignatureName, "sig2");
         try
         {
             media.getCreatePartition(EnumPartIDKey.SheetName, "sh11",new VString("SignatureName SheetName"," "));
@@ -1682,7 +1681,7 @@ public class JDFResourceTest extends JDFTestCaseBase
         JDFResource sheet=sig.addPartition(EnumPartIDKey.SheetName, "sh1");
         try
         {
-            JDFResource side=sig.addPartition(EnumPartIDKey.Side, "Front");
+            sig.addPartition(EnumPartIDKey.Side, "Front");
             fail("no existing other parallel");
         }
         catch (JDFException x)

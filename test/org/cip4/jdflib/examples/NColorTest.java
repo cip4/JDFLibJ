@@ -255,7 +255,7 @@ public class NColorTest extends JDFTestCaseBase
                     {
                         n2.setNodeStatus(EnumNodeStatus.Waiting);
                     }
-                    JDFExposedMedia x3=(JDFExposedMedia) x2.addPartition(EnumPartIDKey.Separation,separation);
+                    x2.addPartition(EnumPartIDKey.Separation,separation);
 
                 }
             }           

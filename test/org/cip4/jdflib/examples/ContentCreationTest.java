@@ -33,6 +33,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPosition;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.JDFStripMark;
+import org.cip4.jdflib.util.StatusUtil;
 
 
 public class ContentCreationTest extends PreflightTest
@@ -238,7 +239,7 @@ public class ContentCreationTest extends PreflightTest
         } 
 
         JDFStrippingParams spBS2=(JDFStrippingParams) spS1.addPartition(EnumPartIDKey.BinderySignatureName, "BS_2");
-        JDFBinderySignature bs2=spBS2.appendBinderySignature();
+        spBS2.appendBinderySignature();
         JDFPosition posBS2_1=spBS2.appendPosition();
         posBS2_1.setRelativeBox(new JDFRectangle(0.5,0,1,0.5));
         posBS2_1.setOrientation(EnumOrientation.Rotate270);
@@ -319,12 +320,18 @@ public class ContentCreationTest extends PreflightTest
         appendBWSeparationAction();
         appendTrimBoxAction();
         appendResolutionAction();
+		StatusUtil su=new StatusUtil(n,null,null);
+		su.setPhase(EnumNodeStatus.InProgress, "Creative Work", EnumDeviceStatus.Running, null,null);
 
-        n.setPhase(EnumNodeStatus.InProgress, "Creative Work",  EnumDeviceStatus.Running, null, null);
+        su.getDocJMFPhaseTime();
         Thread.sleep(1000);
-        n.setPhase(EnumNodeStatus.InProgress, "Creative Work",  EnumDeviceStatus.Running, null, null);
+		su=new StatusUtil(n,null,null);
+		su.setPhase(EnumNodeStatus.InProgress, "Creative Work", EnumDeviceStatus.Running, null,null);
+        su.getDocJMFPhaseTime();
         Thread.sleep(1000);
-        n.setPhase(EnumNodeStatus.Completed, "done",  EnumDeviceStatus.Idle, null, null);
+		su=new StatusUtil(n,null,null);
+		su.setPhase(EnumNodeStatus.Completed, "done", EnumDeviceStatus.Idle, null,null);
+        su.getDocJMFPhaseTime();
         d.write2File(sm_dirTestDataTemp+File.separator+"LayoutPreflight.jdf",2,false);
 
 

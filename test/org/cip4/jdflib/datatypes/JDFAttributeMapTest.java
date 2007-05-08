@@ -78,7 +78,6 @@
 package org.cip4.jdflib.datatypes;
 
 import java.util.HashSet;
-import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;

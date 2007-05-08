@@ -406,7 +406,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
         JDFDoc jdfTest = p.parseFile(sm_dirTestData + docTest);
         JDFNode jdfRoot = jdfTest.getJDFRoot();
         assertTrue("jdfRoot is null", jdfRoot != null);
-        XMLDoc docOutTest = jdfRoot.getOwnerDocument_KElement();
+        jdfRoot.getOwnerDocument_KElement();
         JDFDeviceCap deviceCap = (JDFDeviceCap) jmfRoot.getChildByTagName("DeviceCap", null, 0,
                 null, false, true);
 
@@ -500,7 +500,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
         vExecNodes = devicecap.getExecutableJDF(n, testlists, level);
         assertNotNull("no missing resources",vExecNodes);
 
-        JDFRunList rlMark=(JDFRunList)n.addResource(ElementName.RUNLIST, null, EnumUsage.Input, EnumProcessUsage.Marks, null, null, null);
+        n.addResource(ElementName.RUNLIST, null, EnumUsage.Input, EnumProcessUsage.Marks, null, null, null);
         vExecNodes = devicecap.getExecutableJDF(n, testlists, level);
         assertNotNull("no missing resources",vExecNodes);
         
