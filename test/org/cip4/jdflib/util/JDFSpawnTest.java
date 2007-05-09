@@ -1139,11 +1139,15 @@ public class JDFSpawnTest extends JDFTestCaseBase
             JDFNode spawnedNode=spawn.spawn();
             spawnedNode.setPartStatus(map1, EnumNodeStatus.Completed);
             JDFMerge merge=new JDFMerge(node);
+            
+            // this is the feature taht is being tested..
             merge.bUpdateStati=true;
             node=merge.mergeJDF(spawnedNode, null, EnumCleanUpMerge.None, EnumAmountMerge.None);
             assertEquals(node.getID(), nodes[i].getID());
             assertEquals(root.getPartStatus(map1), i==2 ? EnumNodeStatus.Completed : EnumNodeStatus.Waiting);
             assertEquals(root.getPartStatus(map2), EnumNodeStatus.Waiting);
+            assertEquals(node.getPartStatus(map1), EnumNodeStatus.Completed );
+            assertEquals(node.getPartStatus(map2), EnumNodeStatus.Waiting);
         }
 
     }
