@@ -412,7 +412,10 @@ public class JDFMerge
      * 
      * @default mergePartition (resToMerge, spawnID, EnumAmountMerge.None, false);
      */
-    static private JDFResource mergePartition(JDFResource targetRes,JDFResource resToMerge, String spawnID, EnumAmountMerge amountPolicy, boolean bLocalResource)
+    /*
+     * mergePartition will stay public, as long as deprecated JDFResource.mergePartition is not deleted
+     */
+    static public JDFResource mergePartition(JDFResource targetRes,JDFResource resToMerge, String spawnID, EnumAmountMerge amountPolicy, boolean bLocalResource)
     {
         if (!targetRes.getID().equals(resToMerge.getID()))
         {
