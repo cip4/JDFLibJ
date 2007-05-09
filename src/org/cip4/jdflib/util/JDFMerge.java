@@ -48,6 +48,10 @@ public class JDFMerge
 
     private JDFNode m_ParentNode;
     /**
+     * set this to true if you want to update the stati of the relevant parent nodes based on the new Stati of the merged node
+     */
+    public boolean bUpdateStati=false;
+    /**
      * 
      * @param parentNode the parent node to merge into. MAY be the actual node to be replace or any Parent thereof
      */
@@ -203,7 +207,9 @@ public class JDFMerge
         // now burn it in!
         overWriteNode=(JDFNode)overWriteNode.replaceElement(toMerge);
         overWriteNode.eraseEmptyNodes(true);
-
+        // update all stati (generally in NodeInfo) of the merged node and of the parents of the merged node
+        if(bUpdateStati)
+            overWriteNode.updatePartStatus(parts, true, true);
         return overWriteNode;
     }    
 
@@ -406,7 +412,7 @@ public class JDFMerge
      * 
      * @default mergePartition (resToMerge, spawnID, EnumAmountMerge.None, false);
      */
-    static public JDFResource mergePartition(JDFResource targetRes,JDFResource resToMerge, String spawnID, EnumAmountMerge amountPolicy, boolean bLocalResource)
+    static private JDFResource mergePartition(JDFResource targetRes,JDFResource resToMerge, String spawnID, EnumAmountMerge amountPolicy, boolean bLocalResource)
     {
         if (!targetRes.getID().equals(resToMerge.getID()))
         {

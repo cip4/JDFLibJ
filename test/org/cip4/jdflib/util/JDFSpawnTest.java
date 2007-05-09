@@ -82,10 +82,12 @@ import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
@@ -1108,9 +1110,48 @@ public class JDFSpawnTest extends JDFTestCaseBase
     ///////////////////////////////////////////////////////////////////////
 
 
-    public void testBigMerge()    
-    throws Exception    
-    {       
+    public void testMergeUpdateNI() throws Exception    
+    {
+        JDFDoc doc=new JDFDoc("JDF");
+        JDFNode root = doc.getJDFRoot();
+        root.setType(EnumType.ProcessGroup);
+        JDFAttributeMap map1=new JDFAttributeMap("Run","r1");
+        JDFAttributeMap map2=new JDFAttributeMap("Run","r2");
+        VJDFAttributeMap vMap=new VJDFAttributeMap();
+        vMap.add(map1);
+        vMap.add(map2);
+        JDFNode[] nodes=new JDFNode[3];
+        root.setPartStatus(vMap, EnumNodeStatus.Waiting);
+        nodes[0]=root.addJDFNode(EnumType.Approval);
+        nodes[1]=root.addJDFNode(EnumType.Bending);
+        nodes[2]=root.addJDFNode(EnumType.ImageReplacement);
+        for(int i=0;i<3;i++)
+            nodes[i].setPartStatus(vMap, EnumNodeStatus.Waiting);
+          
+        vMap.removeElementAt(1);
+        for(int i=0;i<3;i++)
+        {
+            
+            JDFNode node = nodes[i];
+            assertNotNull(node.getNodeInfo());
+            JDFSpawn spawn=new JDFSpawn(node);
+            spawn.vSpawnParts=vMap;
+            JDFNode spawnedNode=spawn.spawn();
+            spawnedNode.setPartStatus(map1, EnumNodeStatus.Completed);
+            JDFMerge merge=new JDFMerge(node);
+            merge.bUpdateStati=true;
+            node=merge.mergeJDF(spawnedNode, null, EnumCleanUpMerge.None, EnumAmountMerge.None);
+            assertEquals(node.getID(), nodes[i].getID());
+            assertEquals(root.getPartStatus(map1), i==2 ? EnumNodeStatus.Completed : EnumNodeStatus.Waiting);
+            assertEquals(root.getPartStatus(map2), EnumNodeStatus.Waiting);
+        }
+
+    }
+    ///////////////////////////////////////////////////////////////////////
+
+
+    public void testBigMerge() throws Exception    
+        {       
         testBigSpawn();
         JDFParser parser = new JDFParser ();
         JDFDoc jdfDoc = parser.parseFile(sm_dirTestDataTemp+"bigMainPost.jdf");
@@ -1486,6 +1527,16 @@ public class JDFSpawnTest extends JDFTestCaseBase
         new JDFMerge(root).mergeJDF(root2, m_xmlFile2, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None);
 
         m_jdfDoc.write2File(sm_dirTestDataTemp + m_outFile, 2, true);
+    }
+
+
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+     */
+    protected void setUp() throws Exception
+    {
+        super.setUp();
+        JDFElement.setLongID(false);
     }
 
 

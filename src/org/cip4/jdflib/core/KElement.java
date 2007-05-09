@@ -506,6 +506,10 @@ public class KElement extends ElementNSImpl
             return namesVector;
         }
 
+        public static final EnumValidationLevel NoWarnIncomplete = new EnumValidationLevel("NoWarnIncomplete");
+
+        public static final EnumValidationLevel NoWarnComplete = new EnumValidationLevel("NoWarnComplete");
+
         public static final EnumValidationLevel Incomplete = new EnumValidationLevel(
                 JDFConstants.VALIDATIONLEVEL_INCOMPLETE);
 
@@ -3029,14 +3033,8 @@ public class KElement extends ElementNSImpl
     public boolean isValid(EnumValidationLevel level)
     {
         if(level==null)
-            level=EnumValidationLevel.Complete;
-        boolean bRet = level.getValue()<999; // true and makes compiler happy
-        if (getOwnerDocument() == null)
-        {
-            bRet = false;
-        }
-
-        return bRet;
+            level=EnumValidationLevel.Complete;// makes compiler happy
+        return getOwnerDocument() != null;
     }
 
     /**

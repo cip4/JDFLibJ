@@ -3378,56 +3378,59 @@ public class JDFNode extends JDFElement
     public void updatePartStatus(VJDFAttributeMap vMap, boolean updateKids, boolean updateParents)
     {
         VElement vNodes=getvJDFNode(null, null, true);
-        if(vNodes==null || vNodes.isEmpty()) 
-            return; // no kids=nothing to do..
-        final int kidsize = vNodes.size();
-        // clean kids first and then start algorithm based on clean kids
-        VJDFAttributeMap statusMaps=new VJDFAttributeMap();
-        for(int i=0;i<kidsize;i++)
+        if(vNodes!=null && !vNodes.isEmpty()) 
         {
-            final JDFNode node = (JDFNode)vNodes.item(i);
-            if(updateKids)
-                node.updatePartStatus(vMap,updateKids,false);
-            statusMaps.addall(node.getStatusPartMapVector());
-        }
-        statusMaps.unify();
-        if(statusMaps.size()>0)
-        {
-            for(int i=statusMaps.size()-1;i>=0;i--)
+
+            final int kidsize = vNodes.size();
+            // clean kids first and then start algorithm based on clean kids
+            VJDFAttributeMap statusMaps=new VJDFAttributeMap();
+            for(int i=0;i<kidsize;i++)
+            {
+                final JDFNode node = (JDFNode)vNodes.item(i);
+                if(updateKids)
+                    node.updatePartStatus(vMap,updateKids,false);
+                statusMaps.addall(node.getStatusPartMapVector());
+            }
+            statusMaps.unify();
+            if(statusMaps.size()>0)
+            {
+                for(int i=statusMaps.size()-1;i>=0;i--)
+                {
+                    JDFAttributeMap map=statusMaps.elementAt(i);
+                    if(!map.subMap(vMap))
+                    {
+                        statusMaps.removeElementAt(i);
+                    }
+                }
+                if(statusMaps.size()==0)
+                    return;
+            }
+            else   
+            {
+                statusMaps.add(null);
+            }
+            for(int i=0;i<statusMaps.size();i++)
             {
                 JDFAttributeMap map=statusMaps.elementAt(i);
-                if(!map.subMap(vMap))
+                EnumNodeStatus minStatus=EnumNodeStatus.Completed;
+                for(int j=0;j<kidsize;j++)
                 {
-                    statusMaps.removeElementAt(i);
+                    final JDFNode node = (JDFNode)vNodes.item(j);
+
+                    EnumNodeStatus status=node.getPartStatus(map);
+                    if(status==null)
+                    {
+                        minStatus=null;
+                        break; // no consistent status, don't set
+                    }
+                    if(minStatus.getValue()>status.getValue())
+                        minStatus=status;
                 }
+                if(minStatus!=null)
+                    setPartStatus(map, minStatus);
             }
-            if(statusMaps.size()==0)
-                return;
         }
-        else   
-        {
-            statusMaps.add(null);
-        }
-        for(int i=0;i<statusMaps.size();i++)
-        {
-            JDFAttributeMap map=statusMaps.elementAt(i);
-            EnumNodeStatus minStatus=EnumNodeStatus.Completed;
-            for(int j=0;j<kidsize;j++)
-            {
-                final JDFNode node = (JDFNode)vNodes.item(j);
-               
-                EnumNodeStatus status=node.getPartStatus(map);
-                if(status==null)
-                {
-                    minStatus=null;
-                    break; // no consistent status, don't set
-                }
-                if(minStatus.getValue()>status.getValue())
-                    minStatus=status;
-            }
-            if(minStatus!=null)
-                setPartStatus(map, minStatus);
-        }
+
         // recurse down to root
         if(updateParents)
         {
@@ -3435,7 +3438,7 @@ public class JDFNode extends JDFElement
             if(parent!=null)
                 parent.updatePartStatus(vMap, false, true);
         }
-        
+
     }
     /**
      * UpDateStatus - update the status of a node depending on its resources and child nodes

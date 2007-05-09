@@ -147,7 +147,7 @@ public class CheckJDF
     VString foundNameSpaces = new VString();
     VString vID = new VString();
     public VString vBadID = new VString();
-    public VString vMultiID = new VString();
+    public VString vMultiID = null;
     VString vBadJobPartID = new VString();
     VString vJobPartID = new VString();
     VElement vResources = new VElement();
@@ -163,6 +163,7 @@ public class CheckJDF
     JDFDoc theDoc=null;
     
     public boolean bTiming=false;
+    public boolean bWarning=false;
     public boolean bQuiet=true;
     private boolean bPrintNameSpace=true;
     public boolean bValidate=true;
@@ -216,6 +217,7 @@ public class CheckJDF
               "except that multiple schema and schema/namespace pairs are separated by commas ',' not blanks ' '\n   " +
               "The JDF schema specified in the -L switch should not be included in this list\n"
             + "-t print out Timing information\n"
+            + "-w print out Warnings (deprecated etc.)\n"
             + "-x output filename that contains an xml formatted error report\n"
             + "-X XSL stylesheet to apply to the xml formatted error report as specified in -x\n";
     
@@ -789,35 +791,35 @@ public class CheckJDF
                      }
                  }
              }
-             else
+             else 
              {
                  sysOut.println(indent(indent + 2)+ whatType+ " Attribute: " + invalidAt +
-                                        " = " + part.getAttribute(invalidAt));
-                     KElement e = testElement.appendElement("TestAttribute");
-                     if(whatType.equals("PreRelease")){
-                         EnumVersion v=part.getFirstVersion(invalidAt,false);
-                         if(v!=null)
-                         {
-                             e.setAttribute("FirstVersion",v.getName());
-                             message+=" First valid Version: "+v.getName();
-                         }
-                     }
-                     else if (whatType.equals("Deprecated"))
+                         " = " + part.getAttribute(invalidAt));
+                 KElement e = testElement.appendElement("TestAttribute");
+                 if(whatType.equals("PreRelease")){
+                     EnumVersion v=part.getFirstVersion(invalidAt,false);
+                     if(v!=null)
                      {
-                         EnumVersion v=part.getLastVersion(invalidAt,false);
-                         if(v!=null)
-                         {
-                             e.setAttribute("LastVersion",v.getName());
-                             message+=" Last valid Version: "+v.getName();
-                         }                         
+                         e.setAttribute("FirstVersion",v.getName());
+                         message+=" First valid Version: "+v.getName();
                      }
-                     setErrorType(e,whatType+"Attribute",invalidAt+" "+message);
-                     e.setAttribute("NodeName", invalidAt);
-                     e.setAttribute("XPath", part.buildXPath(null,1)+ "/@" + invalidAt);
-                     e.setAttribute("Value", part.getAttribute(invalidAt));
-                     
                  }
+                 else if (whatType.equals("Deprecated"))
+                 {
+                     EnumVersion v=part.getLastVersion(invalidAt,false);
+                     if(v!=null)
+                     {
+                         e.setAttribute("LastVersion",v.getName());
+                         message+=" Last valid Version: "+v.getName();
+                     }                         
+                 }
+                 setErrorType(e,whatType+"Attribute",invalidAt+" "+message);
+                 e.setAttribute("NodeName", invalidAt);
+                 e.setAttribute("XPath", part.buildXPath(null,1)+ "/@" + invalidAt);
+                 e.setAttribute("Value", part.getAttribute(invalidAt));
+
              }
+         }
          if (attributeVector.size()>0)
          {
              testElement.setAttribute(whatType+"Attributes",StringUtil.setvString(attributeVector,JDFConstants.BLANK,null,null));
@@ -840,7 +842,6 @@ public class CheckJDF
          // get a vector with all jdf nodes and loop over all jdf nodes
         
          Vector vProcs = root.getvJDFNode(null, null, false);
-         
          int i, j;
          int size = vProcs.size();         
          for(i=0; i < size; i++)
@@ -1720,13 +1721,14 @@ public class CheckJDF
       */
      public XMLDoc validate(String commandLineArgs[], InputStream inStream)
      {
-         MyArgs args = new MyArgs(commandLineArgs, "?cmqQvVntPU", "dlfLuhpxX",null);
+         MyArgs args = new MyArgs(commandLineArgs, "?cmqQvVntwPU", "dlfLuhpxX",null);
          
          if (args.boolParameter('?', false))
          {
              sysOut.println("CheckJDF:\n" + version  + '\n' + usage);
              System.exit(0);
          }
+         bWarning =args.boolParameter('w',false);
          bTiming =args.boolParameter('t',false);
          bQuiet = args.boolParameter('q', false);
          bWarnDanglingURL = args.boolParameter('U', false);
