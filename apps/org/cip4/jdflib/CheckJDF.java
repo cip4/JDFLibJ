@@ -161,7 +161,7 @@ public class CheckJDF
     static String[] aGBList={"ImpositionRIPing","PlateMaking","ProofAndPlateMaking","ImpositionProofing","PageProofing","RIPing","PrePressPreparation","ImpositionPreparation","ProofImaging"};
  
     JDFDoc theDoc=null;
-    
+    private String translation=null;
     public boolean bTiming=false;
     public boolean bWarning=false;
     public boolean bQuiet=true;
@@ -217,6 +217,7 @@ public class CheckJDF
               "except that multiple schema and schema/namespace pairs are separated by commas ',' not blanks ' '\n   " +
               "The JDF schema specified in the -L switch should not be included in this list\n"
             + "-t print out Timing information\n"
+            + "-T Translation language for the xslt output\n"
             + "-w print out Warnings (deprecated etc.)\n"
             + "-x output filename that contains an xml formatted error report\n"
             + "-X XSL stylesheet to apply to the xml formatted error report as specified in -x\n";
@@ -1721,7 +1722,7 @@ public class CheckJDF
       */
      public XMLDoc validate(String commandLineArgs[], InputStream inStream)
      {
-         MyArgs args = new MyArgs(commandLineArgs, "?cmqQvVntwPU", "dlfLuhpxX",null);
+         MyArgs args = new MyArgs(commandLineArgs, "?cmqPQvVntwU", "dlfLuhpTxX",null);
          
          if (args.boolParameter('?', false))
          {
@@ -1736,6 +1737,7 @@ public class CheckJDF
          this.setPrint(!args.boolParameter('Q', false));         
          xmlOutputName = args.parameterString('x');         
          xslStyleSheet = args.parameterString('X');         
+         getTranslation(args);
          pOut = new XMLDoc("CheckOutput", null);                 
          KElement xmlRoot=pOut.getRoot();
          xmlRoot.setAttribute("Language", "EN"); 
@@ -1823,6 +1825,17 @@ public class CheckJDF
          return processAllFiles();    
      }
 
+    private void getTranslation(MyArgs args)
+    {
+        translation = args.parameterString('T');
+         if(translation!=null)
+         {
+             translation=translation.toUpperCase();
+             if(translation.length()>2)
+                 translation=translation.substring(0,2);
+         }
+    }
+
      /**
       * @deprecated use setJDFSchemaLocation(File)
       * @param _schemaLocation
@@ -1906,7 +1919,13 @@ public class CheckJDF
         if (pOut != null && xmlOutputName != null && xmlOutputName.length()>0 ) 
         {
             if(xslStyleSheet!=null)
+            {
                 pOut.setXSLTURL(xslStyleSheet);
+                if(translation!=null)
+                {
+                    pOut.getRoot().setAttribute("Language", translation);
+                }
+            }
             pOut.write2File(xmlOutputName, 2, false);
         }
         return pOut;

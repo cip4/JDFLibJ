@@ -2759,6 +2759,9 @@ public class JDFNode extends JDFElement
             for (int j = 0; j < size2; j++)
             {
                 final JDFNode p = (JDFNode) vc.elementAt(j);
+                if(p==this)
+                    continue; // snafu
+                
                 v.addElement(p);
                 if(!bDirect)
                 {
