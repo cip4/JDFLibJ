@@ -1,4 +1,91 @@
 
+Label JDFLIBJ_2.1.2BLD430 (10.05.2007)
+
+getpredecesoors dead loop fix
+checkjdf add language
+updates for JDFUtility webserver
+nederlands xslt
+added vector utilities to JDFAttributeMap
+added JDFAudit.createUpdateAudit
+some more tests
+Improved Spawning Merging for parallel partitions (java and c++)
+added Kelement.getMultipleIDs
+minor bug fix in MyArgs.java
+some more tests
+JDFJ-105 : JDFAutoErrorData is missing and JDFErrorData inherits from JDFError - snafu...
+capabilities enhancements for the Editor.java
+one new  spawn test
+xpath enhancements
+handle filenames with spaces from the command line
+buildXPath now has new option to include partition keys
+editor can populate a node from a caps file
+mime files are opened from the editor regardless of extension
+minor buglets and cleanup and documentation
+read schema location from xml file if it exists
+Editor fixes for capabilities
+bug fix SignatureCell/@SectionIndex Jira/Editor-118
+
+
+Changed files:
+ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD430) && !lbtype(JDFLIBJ_2.1.3BLD420)}" -print
+.\auto@@\main\43
+...
+.\auto\JDFAutoError.java@@\main\43
+.\auto\JDFAutoErrorData.java@@\main\1
+...
+.\cformat\PrintfFormat.java@@\main\4
+.\cformat\ScanfMatchException.java@@\main\2
+.\cformat\ScanfReader.java@@\main\3
+.\core\AttributeInfo.java@@\main\33
+.\core\AttributeName.java@@\main\41
+.\core\DocumentJDFImpl.java@@\main\91
+.\core\JDFAudit.java@@\main\84
+.\core\JDFElement.java@@\main\230
+.\core\JDFParser.java@@\main\42
+.\core\JDFResourceLink.java@@\main\130
+.\core\KElement.java@@\main\239
+.\core\VElement.java@@\main\31
+.\core\XMLDoc.java@@\main\82
+.\core\XMLDocUserData.java@@\main\27
+.\datatypes\JDFAttributeMap.java@@\main\34
+.\datatypes\VJDFAttributeMap.java@@\main\25
+.\node\JDFNode.java@@\main\243
+.\pool\JDFAuditPool.java@@\main\94
+.\resource\devicecapability\JDFAbstractState.java@@\main\48
+.\resource\devicecapability\JDFBooleanState.java@@\main\26
+.\resource\devicecapability\JDFDateTimeState.java@@\main\27
+.\resource\devicecapability\JDFDevCap.java@@\main\49
+.\resource\devicecapability\JDFDevCaps.java@@\main\36
+.\resource\devicecapability\JDFDeviceCap.java@@\main\48
+.\resource\devicecapability\JDFDurationEvaluation.java@@\main\14
+.\resource\devicecapability\JDFDurationState.java@@\main\25
+.\resource\devicecapability\JDFEnumerationState.java@@\main\29
+.\resource\devicecapability\JDFEvaluation.java@@\main\23
+.\resource\devicecapability\JDFIntegerState.java@@\main\28
+.\resource\devicecapability\JDFMatrixState.java@@\main\27
+.\resource\devicecapability\JDFNameState.java@@\main\31
+.\resource\devicecapability\JDFNumberState.java@@\main\29
+.\resource\devicecapability\JDFPDFPathState.java@@\main\24
+.\resource\devicecapability\JDFRectangleState.java@@\main\30
+.\resource\devicecapability\JDFShapeState.java@@\main\29
+.\resource\devicecapability\JDFStringState.java@@\main\25
+.\resource\devicecapability\JDFXYPairState.java@@\main\27
+.\resource\JDFErrorData.java@@\main\3
+.\resource\JDFResource.java@@\main\215
+.\resource\JDFResourceAudit.java@@\main\33
+.\resource\JDFValue.java@@\main\25
+.\resource\process\JDFColorPool.java@@\main\26
+.\resource\process\JDFRunList.java@@\main\53
+.\util\JDFDuration.java@@\main\5
+.\util\JDFMerge.java@@\main\11
+.\util\JDFSpawn.java@@\main\15
+.\util\MimeUtil.java@@\main\3
+.\util\MyArgs.java@@\main\24
+.\util\UrlUtil.java@@\main\6
+___________________________________________________________
+
+
+
 Label JDFLIBJ_2.1.2BLD421 (13.04.2007)
 
 Fix JDFResourceLink.isexecutable to analyze minstatus
