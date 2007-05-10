@@ -1038,6 +1038,9 @@ public class JDFResourceLink extends JDFElement
             
             for (int i = 0; i < siz; i++)
             {
+                if(vPart==null)
+                    return true;
+                
                 if (vPart.elementAt(i).overlapMap(partMap))
                     return true;
             }
@@ -1051,8 +1054,12 @@ public class JDFResourceLink extends JDFElement
             
             for (int i = 0; i < siz; i++)
             {
+                final JDFAttributeMap elementAt = vPart.elementAt(i);
+                if(elementAt==null || elementAt.size()==0)
+                    return true;
+                
                 // RP 050120 swap of vPart[i] and partmap
-                if (partMap.subMap(vPart.elementAt(i)))
+                if (partMap!=null && partMap.subMap(elementAt))
                     return true;
             }
         }
