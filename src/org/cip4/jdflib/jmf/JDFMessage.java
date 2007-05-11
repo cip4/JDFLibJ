@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -1640,13 +1640,22 @@ public class JDFMessage extends JDFAutoMessage
     }
     /////////////////////////////////////////////////////////////////////
     /**
+     * get element <code>PipeParams</code>
+     * @return JDFPipeParams: the element
+     */
+    public JDFPipeParams getPipeParams()
+    {
+        return (JDFPipeParams) getValidElement(ElementName.PIPEPARAMS, null,0);
+    }
+    /**
      * get iSkip'th element <code>PipeParams</code>
      * @param iSkip number of elements to skip
+     * @deprecated - use the 0 parameter version
      * @return JDFPipeParams: the element
      */
     public JDFPipeParams getPipeParams(int iSkip)
     {
-        return (JDFPipeParams) getValidElement(ElementName.PIPEPARAMS, JDFConstants.EMPTYSTRING, iSkip);
+        return (JDFPipeParams) getValidElement(ElementName.PIPEPARAMS, null, iSkip);
     }
     //////////////////////////////////////////////////////////////////////
     

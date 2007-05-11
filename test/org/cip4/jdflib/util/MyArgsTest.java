@@ -9,13 +9,14 @@ public class MyArgsTest extends TestCase {
     
     final String[] _testArray = {
             "/Users/clabu/Documents/workarea/Elk/testarea/jakarta-tomcat-5.0.30/temp/VAHNSC6a7ag5ecAn9379.jdf",
-            "-q -c -v",
+            "-qc",
+            "-v",
             "-d /Users/clabu/Documents/workarea/Elk/testarea/jakarta-tomcat-5.0.30/temp/tENgU4Gh3huO2iVH9380.xml",
     "-x /Users/clabu/Documents/workarea/Elk/testarea/jakarta-tomcat-5.0.30/temp/SimpleJDFPreprocessor_report9378.xml" };
     
     final String[] _testArrayWithQuotes = {
             "\"/Users/clabu/Documents/workarea/Elk/testarea/jakarta-tomcat-5.0.30/temp/VAHNSC6a7ag5ecAn9379.jdf\"",
-            "-q -c -v",
+            "-qcv",
             "-d \"/Users/clabu/Documents/workarea/Elk/testarea/jakarta-tomcat-5.0.30/temp/tENgU4Gh3huO2iVH9380.xml\"",
     "-x \"/Users/clabu/Documents/workarea/Elk/testarea/jakarta-tomcat-5.0.30/temp/SimpleJDFPreprocessor_report9378.xml\"" };
     
@@ -79,10 +80,7 @@ public class MyArgsTest extends TestCase {
      */
     public void testParameterString() {
         String d = _myArgs.parameter("d");
-        System.out.println(d);
-        assertEquals(
-                d,
-        "/Users/clabu/Documents/workarea/Elk/testarea/jakarta-tomcat-5.0.30/temp/tENgU4Gh3huO2iVH9380.xml");
+        assertEquals( d, "/Users/clabu/Documents/workarea/Elk/testarea/jakarta-tomcat-5.0.30/temp/tENgU4Gh3huO2iVH9380.xml");
     }
     
     
@@ -110,15 +108,23 @@ public class MyArgsTest extends TestCase {
     /*
      * Test method for 'org.cip4.jdflib.util.MyArgs.nargs()'
      */
-    public void testNargs() {
-//      dummy        
+    public void testNargs() 
+    {
+        String[] s={"-abc","foo"};
+        MyArgs args=new MyArgs(s,"ab","c",null);
+        assertEquals(args.nargs(), 0);
+        
     }
     
     /*
      * Test method for 'org.cip4.jdflib.util.MyArgs.argument(int)'
      */
-    public void testArgument() {
-//      dummy        
+    public void testArgument()
+    {
+        String[] s={"-abc","foo","bar"};
+        MyArgs args=new MyArgs(s,"ab","c",null);
+        assertEquals(args.nargs(), 1);
+        assertEquals(args.argument(0),"bar");
     }
     
     /*

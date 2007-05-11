@@ -174,16 +174,6 @@ public class MyArgs
             }
                 
         }
-        
- 
-        // number will later be computeted if necessary
-
-        if (m_onlyArgs.isEmpty())
-        {
-            m_onlyArgs.add(JDFConstants.EMPTYSTRING); // will later be filled
-        }
-
-
     }
 
     public String toString()

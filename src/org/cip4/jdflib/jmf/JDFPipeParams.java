@@ -177,16 +177,16 @@ public class JDFPipeParams extends JDFAutoPipeParams
     }
     
     /**
-     * Gets the ResourceLink from the pool
+     * Gets the ResourceLink from the PipeParams element
      * @return VElement: a vector with all resource links in the pool matching the conditions
      */
     final public JDFResourceLink getResourceLink()
     {
         VElement v = getChildElementVector(null,null,null,true, 0, false);
         
-        for(int i=v.size()-1; i>=0; i--)
+        for(int i=0;i<v.size(); i++)
         {
-            JDFElement e = (JDFElement) v.elementAt(i);
+            KElement e =  v.item(i);
             if(e instanceof JDFResourceLink){
                 return (JDFResourceLink) e;
             }
@@ -236,13 +236,29 @@ public class JDFPipeParams extends JDFAutoPipeParams
     
     /**
      * get resource defined by <code>resName</code>
-     * @param resName name of the resource to get
+     * @param resName name of the resource to get; if null get the resource that is linked by the reslink
      * @return JDFResource: the element
      */
     public JDFResource getResource(String resName)
     {
+        if(resName==null)
+        {
+            JDFResourceLink rl=getResourceLink();
+            if(rl!=null)
+                return rl.getTarget();
+            VElement v=getChildElementVector(null, null, null, true, 0, false);
+            
+            for(int i=0;i<v.size(); i++)
+            {
+                KElement e =  v.item(i);
+                if(e instanceof JDFResource){
+                    return (JDFResource) e;
+                }
+            }
+            return null;
+        }
         JDFResource r = null;
-        KElement e = getElement(resName, JDFConstants.EMPTYSTRING, 0);
+        KElement e = getElement(resName, null, 0);
         if(e instanceof JDFResource)
         { 
             r = (JDFResource) e;

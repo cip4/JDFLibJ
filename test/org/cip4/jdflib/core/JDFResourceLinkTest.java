@@ -544,8 +544,28 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
         JDFResourceLink rl=(JDFResourceLink) rlp.appendElement("FooLink");
         assertNull(rl.getUsage());
     }
+    
     /**
      * Method testIncludesMatchingAttribute.
+     * @throws Exception
+     */
+    public void testHasResourcePartMap() throws Exception
+    {        
+        JDFDoc d=new JDFDoc(ElementName.JDF);
+        JDFNode n=d.getJDFRoot();
+        JDFResource r=n.addResource(ElementName.SCREENINGINTENT, null, EnumUsage.Input, null, null, null, null);
+        JDFResource rSig=r.addPartition(EnumPartIDKey.SignatureName, "sig1");
+        JDFResourceLink rl=n.getLink(r, null);
+        assertTrue(rl.hasResourcePartMap(null,false));
+        rl.setPart(EnumPartIDKey.SignatureName.getName(), "sig1");
+        assertTrue(rl.hasResourcePartMap(null,false));
+        rSig.addPartition(EnumPartIDKey.SheetName, "sh1");
+        assertTrue(rl.hasResourcePartMap(null,false));
+        assertTrue(rl.hasResourcePartMap(new JDFAttributeMap(EnumPartIDKey.SignatureName, "sig1"),false));
+        assertFalse(rl.hasResourcePartMap(new JDFAttributeMap(EnumPartIDKey.SignatureName, "sig2"),false));
+    }
+    /**
+     * Method testIsExecutable().
      * @throws Exception
      */
     public void testIsExecutable() throws Exception
@@ -573,7 +593,32 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
         assertTrue(rl.isExecutable(null, true));
         rl.setDraftOK(true);
         assertTrue(rl.isExecutable(null, true));
-       
+
+        JDFResource rSig=r.addPartition(EnumPartIDKey.SignatureName, "sig1");
+        JDFResource rSheet=rSig.addPartition(EnumPartIDKey.SheetName, "sh1");
+        rSheet.setResStatus(EnumResStatus.Available, false);
+        r.setResStatus(EnumResStatus.Unavailable, true);
+        rSheet.setResStatus(EnumResStatus.Available, true);
+        rl.setUsage(EnumUsage.Input);
+        JDFAttributeMap map=new JDFAttributeMap(EnumPartIDKey.SignatureName, "sig1");
+        assertFalse(rl.isExecutable(map, false));
+        assertTrue(rl.isExecutable(map, true));
+        JDFResource rSheet2=rSig.addPartition(EnumPartIDKey.SheetName, "sh2");
+        rSheet2.setResStatus(EnumResStatus.Unavailable, false);
+        assertFalse(rl.isExecutable(map, false));
+        assertFalse(rl.isExecutable(map, true));
+        map.put(EnumPartIDKey.SheetName, "sh1");
+        assertTrue(rl.isExecutable(map, false));
+        assertTrue(rl.isExecutable(map, true));
+        rl.appendPart().setPartMap(map);
+        map.put(EnumPartIDKey.SheetName, "sh2");
+        rl.appendPart().setPartMap(map);
+        map=new JDFAttributeMap(EnumPartIDKey.SignatureName, "sig1");
+        rSheet2.setResStatus(EnumResStatus.Available, false);
+
+        assertTrue(rl.isExecutable(map, false));
+        assertTrue(rl.isExecutable(map, true));
+
     }
     /////////////////////////////////////////////////////////////////////
     /**

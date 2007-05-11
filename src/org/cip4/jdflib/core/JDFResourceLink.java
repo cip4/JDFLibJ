@@ -828,29 +828,30 @@ public class JDFResourceLink extends JDFElement
         }
         
         else
-        { // calculate availability directly
-            leaves = getTargetVector(-1);
+        { // calculate availability directly, but only for the subelements as specified by partMap
+            VElement leaves2 = getTargetVector(-1);
+            for (int i = 0; i < leaves2.size(); i++)
+            {
+                JDFResource leaf = (JDFResource) leaves2.elementAt(i);
+                leaf=leaf.getPartition(partMap, null);
+                if(leaf!=null)
+                    leaves.add(leaf);
+            }    
         }
-        
+        leaves.unify();
+                
         for (int i = 0; i < leaves.size(); i++)
         {
             final JDFResource leaf = (JDFResource) leaves.elementAt(i);
-            
-            if (partMap != null && !partMap.isEmpty())
-            {
-                if (!partMap.overlapMap(leaf.getPartMap()))
-                {
-                    continue;
-                }
-            }
-            
-            final JDFResource.EnumResStatus status = leaf.getResStatus(true);
-            
+            if (partMap != null && !partMap.isEmpty() && !partMap.overlapMap(leaf.getPartMap()))
+                continue;
+
+            final JDFResource.EnumResStatus status = leaf.getResStatus(true);            
             if (status.equals(JDFResource.EnumResStatus.InUse))
             {
                 return false;
             }
-            
+
             bExec=getMinStatus().getValue()<=status.getValue();
             // any leaf not executable --> the whole thing is not executable
             if (!bExec)
@@ -1009,17 +1010,7 @@ public class JDFResourceLink extends JDFElement
         // Attention !!!
         // Don't change this method without checking if routing is still working !
         // The C++ method is different and is not used, the java method is used for routing.
-        VJDFAttributeMap vPart;
-        
-        if (bCheckResource)
-        {
-            vPart = getResourcePartMapVector();
-        }
-        else
-        {
-            vPart = getPartMapVector();
-        }
-        
+        VJDFAttributeMap vPart=bCheckResource ? getResourcePartMapVector() : getPartMapVector();
         boolean bImplicit = JDFResource.EnumPartUsage.Implicit.equals(getLinkRoot().getPartUsage());
         
         if ((partMap == null || partMap.isEmpty()) && (vPart == null || vPart.isEmpty()))
@@ -1027,8 +1018,7 @@ public class JDFResourceLink extends JDFElement
             return true;
         }
 
-        final int siz = vPart == null  ? 0 : vPart.size();
-        
+        final int siz = vPart == null  ? 0 : vPart.size();        
         if (bImplicit)
         {
             if (siz == 0)
@@ -1059,7 +1049,8 @@ public class JDFResourceLink extends JDFElement
                     return true;
                 
                 // RP 050120 swap of vPart[i] and partmap
-                if (partMap!=null && partMap.subMap(elementAt))
+                // RP 070511 swap back of vPart[i] and partmap
+                if (elementAt.subMap(partMap))
                     return true;
             }
         }
