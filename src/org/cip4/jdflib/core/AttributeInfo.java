@@ -735,15 +735,17 @@ public class AttributeInfo
 		}
 		
 		EnumAttributeValidity val=getAttributeValidity(key);
-        if(
-                (val==EnumAttributeValidity.Deprecated)||
-                (val==EnumAttributeValidity.Unknown))
+        if (val==EnumAttributeValidity.Unknown)
         {
             return (attribute==null);
         }
+        else if (val==EnumAttributeValidity.Deprecated)
+        {
+            return (attribute==null) || EnumValidationLevel.isNoWarn(level);
+        }
         else if(val==EnumAttributeValidity.None) // prerelease may be set by schema validating parser
         {
-            return (attribute==null) || attribute.equals(getAttributeDefault(key)); // TODO add check for equivalence with defaults
+            return (attribute==null) || attribute.equals(getAttributeDefault(key)) || EnumValidationLevel.isNoWarn(level); 
         }
 		else if((val==EnumAttributeValidity.Optional)||
 				((level!=EnumValidationLevel.Complete)&&(level!=EnumValidationLevel.RecursiveComplete)))

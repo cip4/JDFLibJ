@@ -100,6 +100,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.node.JDFNode;
@@ -1498,7 +1499,7 @@ public class JDFDevCap extends JDFAutoDevCap
                     r.setAttribute("FoundElements", occurs, null);
                 }
             }
-            else if(occurs < minOccurs && requiredLevel(level)) 
+            else if(occurs < minOccurs && EnumValidationLevel.isRequired(level)) 
             {
                 r = parentReport.appendElement("MissingElement");
                 r.setAttribute("CapXPath", dc.getNamePath(true));
@@ -1630,7 +1631,7 @@ public class JDFDevCap extends JDFAutoDevCap
                 }
             }
             
-            if ((size==vKeys.size()) && state.getRequired() && requiredLevel(level)) 
+            if ((size==vKeys.size()) && state.getRequired() && EnumValidationLevel.isRequired(level)) 
             { // No attribute/span found but state is required
                 
                 if (state.getListType().equals(EnumListType.Span)) 
@@ -1644,7 +1645,7 @@ public class JDFDevCap extends JDFAutoDevCap
                 capMap.put(nam, state.getNamePath());
             }
         }
-        if(requiredLevel(level))
+        if(EnumValidationLevel.isRequired(level))
         {
             VString missAts=e.getMissingAttributes(9999999);
             for(int i=0;i<missAts.size();i++)

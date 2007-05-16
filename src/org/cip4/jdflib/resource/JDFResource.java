@@ -98,6 +98,7 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
@@ -6709,7 +6710,7 @@ public class JDFResource extends JDFElement
      */
     private EnumValidationLevel incompleteLevel(EnumValidationLevel level, boolean bForce)
     {
-        if (requiredLevel(level))
+        if (EnumValidationLevel.isRequired(level))
         {
             EnumResStatus es = getResStatus(false);
             if ((es == EnumResStatus.Incomplete) || isResourceUpdate() || bForce)

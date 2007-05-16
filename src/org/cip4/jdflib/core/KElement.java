@@ -439,10 +439,10 @@ public class KElement extends ElementNSImpl
     /**
      * Enumeration for validation level <br>
      * <blockquote><ul>
-     * <li>level ValidationLevel_None: 
-     *     always return true <br>
-     * <li>level ValidationLevel_Construct: 
-     *     incomplete and null elements are valid <br>
+     * <li>level ValidationLevel_NoWarnIncomplete: 
+     *     Ignore warnings and don't require all required parameters <br>
+     * <li>level ValidationLevel_NoWarnComplete: 
+     *     Ignore warnings and require all required parameters <br>
      * <li>level ValidationLevel_Incomplete: 
      *     incomplete elements are valid <br>
      * <li>level ValidationLevel_Complete: 
@@ -504,6 +504,41 @@ public class KElement extends ElementNSImpl
             }
 
             return namesVector;
+        }
+
+        /**
+         * return true if vl is a recursvive EnumValidationLevel
+         * @param vl the EnumValidationLevel to check
+         * @return true if vl is recursive
+         */
+        public static boolean isRecursive(EnumValidationLevel vl)
+        {
+            return EnumValidationLevel.RecursiveIncomplete.equals(vl)
+            || EnumValidationLevel.RecursiveComplete.equals(vl);
+        }
+        
+        /**
+         * return true if vl is a recursvive EnumValidationLevel
+         * @param vl the EnumValidationLevel to check
+         * @return true if vl is recursive
+         */
+        public static boolean isNoWarn(EnumValidationLevel vl)
+        {
+            return EnumValidationLevel.NoWarnComplete.equals(vl)
+            || EnumValidationLevel.NoWarnIncomplete.equals(vl);
+        }
+
+        /**
+         * returns true if the enumeration level is either Complete, NoWarnComplete
+         * or RecursiveComplete, i.e. if the parameter is required
+         * @param level the level to check 
+         * @return true if required
+         */
+        public static boolean isRequired(EnumValidationLevel vl)
+        {
+            return EnumValidationLevel.Complete.equals(vl)
+            || EnumValidationLevel.RecursiveComplete.equals(vl)
+            || EnumValidationLevel.NoWarnComplete.equals(vl);
         }
 
         public static final EnumValidationLevel NoWarnIncomplete = new EnumValidationLevel("NoWarnIncomplete");

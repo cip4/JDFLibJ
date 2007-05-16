@@ -153,6 +153,7 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDocUserData;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
@@ -3367,7 +3368,7 @@ public class JDFNode extends JDFElement
             }
         }
 
-        if (requiredLevel(level))
+        if (EnumValidationLevel.isRequired(level))
         {
             vElem.appendUnique(getMissingLinkVector(nMax));
         }

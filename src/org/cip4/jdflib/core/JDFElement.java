@@ -106,6 +106,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
+import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFDateTimeRangeList;
 import org.cip4.jdflib.datatypes.JDFDurationRangeList;
@@ -1096,8 +1097,7 @@ public class JDFElement extends KElement
                 return false;
             }
             
-            if ((level.equals(EnumValidationLevel.RecursiveIncomplete))
-                    || (level.equals(EnumValidationLevel.RecursiveComplete)))
+            if (EnumValidationLevel.isRecursive(level))
             {
                 final EnumValidationLevel valDown =
                     (level == EnumValidationLevel.RecursiveIncomplete)
@@ -1590,7 +1590,7 @@ public class JDFElement extends KElement
         if(!att4.equals(JDFConstants.EMPTYSTRING))
             n += hasAttribute(att4) ? 1 : 0;
         
-        if(requiredLevel(level))
+        if(EnumValidationLevel.isRequired(level))
         {
             // exactly one or more than one, but not this one
             return n==1 || ((!hasAtt1)&&(n>=1));
@@ -1619,7 +1619,7 @@ public class JDFElement extends KElement
         int n = 0;
         n += hasChildElement(elm1, ns1) ? 1 : 0;
         n += hasChildElement(elm2, ns2) ? 1 : 0;
-        if(requiredLevel(level))
+        if(EnumValidationLevel.isRequired(level))
         {
             // exactly one
             return n==1;
@@ -2435,7 +2435,8 @@ public class JDFElement extends KElement
         final VString vAttsReturn = new VString();
         int numAtts  = 0;
         Vector vAtts= getAttributeVector_KElement();
-        for(int i=0;i<vAtts.size();i++){
+        for(int i=0;i<vAtts.size();i++)
+        {
             String key=(String)vAtts.elementAt(i);
             if(!ai.validAttribute(key,getAttribute(key,null,null),level)){
                 vAttsReturn.add(key);
@@ -2445,7 +2446,7 @@ public class JDFElement extends KElement
                 }
             }
         }
-        if (requiredLevel(level))
+        if (EnumValidationLevel.isRequired(level))
         {    
             vAttsReturn.addAll(getMissingAttributes(nMax)); 
         } 
@@ -2504,7 +2505,7 @@ public class JDFElement extends KElement
             }
         }
         
-        if (requiredLevel(level))
+        if (EnumValidationLevel.isRequired(level))
         {
             vBad.appendUnique(new VString(getMissingElements(nMax)));
         }
@@ -3196,11 +3197,11 @@ public class JDFElement extends KElement
      * or RecursiveComplete, i.e. if the parameter is required
      * @param level the level to check 
      * @return true if required
+     * @deprecated use {@link EnumValidationLevel}.isRequired()
      */
     public static boolean requiredLevel(EnumValidationLevel level)
     {
-        return (level == EnumValidationLevel.Complete)
-        || (level == EnumValidationLevel.RecursiveComplete);
+        return EnumValidationLevel.isRequired(level);
     }
     
     /**

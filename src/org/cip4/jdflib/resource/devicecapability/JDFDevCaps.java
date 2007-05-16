@@ -97,6 +97,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.jmf.JDFMessage;
@@ -797,7 +798,7 @@ public class JDFDevCaps extends JDFAutoDevCaps
         
         final EnumContext context = getContext();
         KElement r=null;
-        if (requiredLevel(level) && svElemResources<getMinOccurs())
+        if (EnumValidationLevel.isRequired(level) && svElemResources<getMinOccurs())
         {
              if (context.equals(EnumContext.Element)) 
             {
