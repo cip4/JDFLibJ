@@ -75,6 +75,7 @@ import java.util.List;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
@@ -118,8 +119,10 @@ import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.process.JDFApprovalSuccess;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFContact;
+import org.cip4.jdflib.resource.process.JDFConventionalPrintingParams;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
+import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.postpress.JDFFoldingParams;
@@ -450,6 +453,71 @@ public class JDFSpawnTest extends JDFTestCaseBase
         }
     }
     
+    ///////////////////////////////////////////////////////////
+
+    public void testSpawnPartNoSide()
+    {
+        for(int l=0;l<2;l++) 
+        {
+        JDFDoc d=new JDFDoc("JDF");
+        JDFNode n=d.getJDFRoot();
+        n.setType(EnumType.ProcessGroup);
+        JDFNode n2=n.addJDFNode(EnumType.ConventionalPrinting);
+        JDFLayout lo=(JDFLayout) n2.addResource("Layout", null, EnumUsage.Input, null, n, null, null);
+        JDFConventionalPrintingParams cpp=(JDFConventionalPrintingParams) n2.addResource(ElementName.CONVENTIONALPRINTINGPARAMS, null, EnumUsage.Input, null, n, null, null);
+        JDFComponent comp=(JDFComponent) n2.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, n, null, null);
+        JDFNodeInfo ni=(JDFNodeInfo) n2.addResource(ElementName.NODEINFO, null, EnumUsage.Input, null, null, null, null);
+        
+        lo=(JDFLayout) lo.addPartition(EnumPartIDKey.SignatureName, "sig1");
+        cpp=(JDFConventionalPrintingParams) cpp.addPartition(EnumPartIDKey.SignatureName, "sig1");
+        comp=(JDFComponent) comp.addPartition(EnumPartIDKey.SignatureName, "sig1");
+        ni=(JDFNodeInfo) ni.addPartition(EnumPartIDKey.SignatureName, "sig1");
+        for(int i=0;i<2;i++)
+        {
+            JDFLayout lo2=(JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "sh"+i);
+            JDFConventionalPrintingParams cpp2=(JDFConventionalPrintingParams) cpp.addPartition(EnumPartIDKey.SheetName, "sh"+i);
+            JDFComponent comp2=(JDFComponent) comp.addPartition(EnumPartIDKey.SheetName, "sh"+i);
+            lo2.addPartition(EnumPartIDKey.Side, EnumSide.Front);
+            lo2.addPartition(EnumPartIDKey.Side, EnumSide.Back);    
+            JDFNodeInfo ni2= l==0 ? (JDFNodeInfo) ni.addPartition(EnumPartIDKey.SheetName, "sh"+i) : ni; 
+            if(l==0 || i==0)
+            {
+                ni2.addPartition(EnumPartIDKey.Side, EnumSide.Front);
+                ni2.addPartition(EnumPartIDKey.Side, EnumSide.Back);   
+            }
+
+        }
+        JDFAttributeMap map=new JDFAttributeMap();
+        map.put(EnumPartIDKey.SignatureName, "sig1");
+        if(l==0) // miss a part for l=1
+            map.put(EnumPartIDKey.SheetName, "sh1");
+        map.put(EnumPartIDKey.Side, EnumSide.Front);
+        VJDFAttributeMap vMap=new VJDFAttributeMap();
+        vMap.add(map);
+        
+        JDFSpawn spawn=new JDFSpawn(n2);
+        spawn.bFixResources=false;
+        spawn.vRWResources_in=new VString("Output",null);
+        spawn.vSpawnParts=vMap;
+        spawn.bSpawnRWPartsMultiple=true;
+        
+        JDFNode nS1=spawn.spawn();
+        assertNotNull(nS1);
+        nS1.setXPathAttribute("./ResourcePool/Component/Component/Component[@SheetName=\"sh1\"]/@foo", "fnarf");
+        map.put(EnumPartIDKey.Side, EnumSide.Back);
+        JDFNode nS2=spawn.spawn();
+        assertNotNull(nS2);
+        
+        nS2.setXPathAttribute("./ResourcePool/Component/Component/Component[@SheetName=\"sh1\"]/@foo", "bar");
+        
+        JDFMerge merge=new JDFMerge(n);
+        merge.mergeJDF(nS1, null, EnumCleanUpMerge.None, EnumAmountMerge.None);
+        assertEquals(n.getXPathAttribute("./ResourcePool/Component/Component/Component[@SheetName=\"sh1\"]/@foo",null),"fnarf");
+        merge.mergeJDF(nS2, null, EnumCleanUpMerge.None, EnumAmountMerge.None);
+        assertEquals(n.getXPathAttribute("./ResourcePool/Component/Component/Component[@SheetName=\"sh1\"]/@foo",null),"bar");
+        }
+    }
+        
     ///////////////////////////////////////////////////////////
 
     public void testSpawnPart()

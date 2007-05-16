@@ -33,6 +33,7 @@ import org.cip4.jdflib.pool.JDFAncestorPool;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumSpawnStatus;
 
 /**
@@ -929,7 +930,7 @@ public class JDFSpawn
             // loop over all part maps to get best matching resource
             for (int j = 0; j < size; j++)
             {
-                VElement vSubParts=r.getPartitionVector(vParts.elementAt(j), null);
+                VElement vSubParts=r.getPartitionVector(vParts.elementAt(j), EnumPartUsage.Implicit); // alway implicit - in the worst case some partitions may be multiply spawned
                 for(int k=0;k<vSubParts.size();k++)
                 {
                     final JDFResource pLeaf = (JDFResource) vSubParts.item(k);

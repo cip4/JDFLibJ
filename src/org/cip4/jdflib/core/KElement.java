@@ -4714,7 +4714,7 @@ public class KElement extends ElementNSImpl
         }
         final KElement kEle = getXPathElement(path.substring(0, pos));
         return kEle == null ? def // xpath element does not exist
-                : kEle.getAttribute(path.substring(pos + 1), null, def);
+                : kEle.getAttribute_KElement(path.substring(pos + 1), null, def);
     }
 
     /**
@@ -4919,7 +4919,7 @@ public class KElement extends ElementNSImpl
         {
             final String elmName = newPath.substring(0, pos);
             KElement eRet=null;
-            final VElement ve = getChildrenByTagName(elmName, null, map, true, true,0);  
+            final VElement ve = getChildElementVector_KElement(elmName, null, map, true,0);  
             if(ve==null || ve.size()<=iSkip)
                 return null;
             int iFirst=bExplicitSkip ? iSkip : 0;
