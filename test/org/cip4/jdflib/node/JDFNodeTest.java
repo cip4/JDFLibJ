@@ -1198,6 +1198,18 @@ public class JDFNodeTest extends JDFTestCaseBase
     }
     ///////////////////////////////////////////////////////////////////////////
 
+    public void testAppendMatchingResourceDefinition()
+    {
+        JDFDoc d=new JDFDoc("JDF");
+        JDFNode n=d.getJDFRoot();
+        n.setType(EnumType.ResourceDefinition);
+        JDFResource r=n.appendMatchingResource("foo", null, null);
+        assertNotNull(r);
+        assertEquals(r.getNodeName(),"foo"); 
+    }
+    
+    //////////////////////////////////////////////////////////////////////////
+    
     public void testAppendMatchingResource()
     {
         JDFDoc d=new JDFDoc("JDF");
@@ -1371,19 +1383,24 @@ public class JDFNodeTest extends JDFTestCaseBase
         root.setTypes(types);
 
         assertEquals(root.getAllTypes(),types);
+        root.appendElement("JDF").setAttribute("Type", "fooBar2");
+        VString types2=new VString(types);
+        types2.insertElementAt("fooBar2",0);
+        assertEquals(root.getAllTypes(),types2);
+        
         root.removeAttribute("Types");
 
         JDFNode n2 =root.addCombined(types);
         n2.setTypes(types);
 
-        assertEquals(types,root.getAllTypes());
+        assertEquals(types2,root.getAllTypes());
         assertEquals(types,n2.getAllTypes());
 
         root.addJDFNode("foobar");
 
         assertEquals(types,n2.getAllTypes());
-        types.add("foobar");
-        assertEquals(types,root.getAllTypes());
+        types2.add("foobar");
+        assertEquals(types2,root.getAllTypes());
 
     }
     //////////////////////////////////////////////////////////////

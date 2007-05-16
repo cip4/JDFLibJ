@@ -2741,7 +2741,18 @@ public class JDFNode extends JDFElement
          */
     public VElement getPredecessors(boolean bPre, boolean bDirect)
     {
-        final VElement v = new VElement();
+        HashSet hashSet = new HashSet();
+        getPredecessorImpl(bPre, bDirect,hashSet);
+        
+        VElement v=new VElement();
+        Iterator it=hashSet.iterator();
+        while(it.hasNext())
+            v.add(it.next());
+        return v;
+        
+    }
+    private void getPredecessorImpl(boolean bPre, boolean bDirect, HashSet h)
+    {
         final JDFResourceLinkPool rlp = getResourceLinkPool();
 
         // get either all input or output resources, depending on bPre
@@ -2759,23 +2770,16 @@ public class JDFNode extends JDFElement
             for (int j = 0; j < size2; j++)
             {
                 final JDFNode p = (JDFNode) vc.elementAt(j);
-                if(p==this)
+                if(h.contains(p))
                     continue; // snafu
+                h.add(p);
                 
-                v.addElement(p);
                 if(!bDirect)
                 {
-                    final Vector vRec = p.getPredecessors(bPre,bDirect);
-                    if (!vRec.isEmpty())
-                    {
-                        v.addAll(vRec);
-                    }
+                    p.getPredecessorImpl(bPre, bDirect, h);
                 }
             }
         }
-
-        v.unify();
-        return v;
     }
 
     /**
@@ -5881,16 +5885,8 @@ public class JDFNode extends JDFElement
         else if(myType.equals(JDFConstants.PROCESSGROUP))
         {
             VElement vNodes = getvJDFNode(null,null,true);
-            vs = getTypes();
+            VString vsTypes = getTypes();
             final int nodeSize = vNodes.size();
-            if (vs!=null) // grey box or simple type 
-            {
-                if (nodeSize!=0) 
-                {
-                    throw new JDFException ("JDFNode.getAllTypes: illegal combination of the attribute 'Types' and child JDF Nodes");
-                }
-                return vs;// __Lena__  May contain GrayBoxes
-            }
             for (int i=0; i<nodeSize; i++) 
             {
                 JDFNode node = (JDFNode)vNodes.elementAt(i);
@@ -5907,6 +5903,18 @@ public class JDFNode extends JDFElement
                     }
                 }
             }
+            if (vsTypes!=null) // grey box or simple type 
+            {
+                if (vs!=null) 
+                {
+                    vs.addAll(vsTypes);
+                }
+                else
+                {
+                  vs=vsTypes;// __Lena__  May contain GrayBoxes
+                }
+            }
+
         }
         else
         {

@@ -117,6 +117,7 @@ import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.JDFProcessRun;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -733,67 +734,12 @@ public class JDFAuditPool extends JDFPool
     /**
      * @param cleanPolicy
      * @param spawnID
+     * @deprecated use JDFMerge.cleanUpMerge
      */
-    public void cleanUpMerge(JDFNode.EnumCleanUpMerge cleanPolicy, String spawnID)
+    public void cleanUpMerge(JDFNode.EnumCleanUpMerge cleanPolicy, String spawnID) throws NoSuchMethodException
     {
-        if (cleanPolicy != JDFNode.EnumCleanUpMerge.None)
-        {
-            VElement vMerged    = new VElement();
-            VElement vSpawned   = new VElement();
-
-            if (isWildCard(spawnID))
-            {
-                vMerged     = getAudits(JDFAudit.EnumAuditType.Merged, null,null);
-                vSpawned    = getAudits(JDFAudit.EnumAuditType.Spawned, null,null);
-            }
-            else
-            {
-
-                final JDFAttributeMap mSpawnID = new JDFAttributeMap(AttributeName.MERGEID, spawnID);
-                JDFAudit a = getAudit(0, JDFAudit.EnumAuditType.Merged, mSpawnID,null);
-                if(a != null)
-                {    
-                    vMerged.add(a);
-                }
-                mSpawnID.clear();
-                mSpawnID.put(AttributeName.NEWSPAWNID, spawnID);
-                a = getAudit(0, JDFAudit.EnumAuditType.Spawned, mSpawnID,null);
-                if(a != null)
-                {    
-                    vSpawned.add(a);
-                }
-            }
-            for (int i = vMerged.size() - 1; i >= 0; i--)
-            {
-                final JDFMerged merged = (JDFMerged)vMerged.elementAt(i);
-                final String mergeID = merged.getMergeID();
-                for (int j = vSpawned.size() - 1; j >= 0; j--)
-                {
-                    final JDFSpawned spawned = (JDFSpawned)vSpawned.elementAt(i);
-                    if (spawned.getNewSpawnID().equals(mergeID))
-                    {
-                        if (cleanPolicy == JDFNode.EnumCleanUpMerge.RemoveAll)
-                        {
-                            spawned.deleteNode();
-                            merged.deleteNode();
-                            vSpawned.remove(j);
-                        }
-                        else if (cleanPolicy == JDFNode.EnumCleanUpMerge.RemoveRRefs)
-                        {
-                            spawned.removeAttribute(AttributeName.RREFSRWCOPIED);
-                            spawned.removeAttribute(AttributeName.RREFSROCOPIED);
-                            merged.removeAttribute(AttributeName.RREFSOVERWRITTEN);
-                        }
-                        else
-                        {
-                            // never get here
-                            throw new JDFException("JDFNode.EnumCleanUpMerge: illegal cleanPolicy enumeration: " + 
-                                    cleanPolicy.getValue());
-                        }
-                    }
-                }
-            }
-        }
+        throw new NoSuchMethodException("use JDFMerge.cleanUpMergeAudits");
+        //JDFMerge.cleanUpMergeAudits(this, cleanPolicy, spawnID);
     }
 
     //////////////////////////////////////////////////////////////////////

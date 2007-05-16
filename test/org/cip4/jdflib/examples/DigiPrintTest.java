@@ -211,6 +211,7 @@ public class DigiPrintTest extends JDFTestCaseBase
         VString v=new VString("orig fullList end",null);
         for(int i=0;i<v.size();i++)
         {
+            setUp();
             String testType=v.stringAt(i);
             JDFAuditPool ap=n.getCreateAuditPool();
             ap.appendXMLComment("JDF 1.3 incompatible auditing of module phases the REQUIRED time attributes are not set in the ModulePhase elements\n"+
@@ -335,11 +336,11 @@ public class DigiPrintTest extends JDFTestCaseBase
             {
                 jpRIP.deleteNode();
                 jpPrint.setAttribute("EndTime", date.getDateTimeISO());
-                jpPrint.setDescriptiveName("Added ne EndTime to explicitly close phase");
+                jpPrint.setDescriptiveName("Added EndTime to explicitly close phase");
             }
             jmf.setDescriptiveName("Phase when the Printer and Finisher have completed");
             jmfDoc.write2File(sm_dirTestDataTemp+"moduleStatus"+testType+"3.jmf", 2, false);
-            doc.write2File(sm_dirTestDataTemp+"DigiPrintModule.1.4.jdf", 2, false);
+            doc.write2File(sm_dirTestDataTemp+"DigiPrintModule.1.4"+testType+".jdf", 2, false);
         }
     }
 

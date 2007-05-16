@@ -959,6 +959,11 @@ public class AttributeInfo
             {
                 return StringUtil.matches(val,JDFConstants.REGEXP_HEXBINARY);
             }
+            else if (iType == AttributeInfo.EnumAttributeType.TransferFunction)
+            {
+                JDFNumberList nl=new JDFNumberList(val);
+                return nl.size()%2==0;
+            }
 			else
             {
                 // TODO check if we are complete

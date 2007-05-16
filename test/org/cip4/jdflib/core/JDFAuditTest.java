@@ -80,7 +80,9 @@ import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFCreated;
 import org.cip4.jdflib.resource.JDFModified;
 import org.cip4.jdflib.resource.JDFPhaseTime;
+import org.cip4.jdflib.resource.JDFProcessRun;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.JDFDate;
 
 /**
  * @author MuchaD
@@ -166,6 +168,38 @@ public class JDFAuditTest extends JDFTestCaseBase
         
         d.write2File(sm_dirTestDataTemp+"createdTest.jdf", 0, false);
         
+    }    
+    
+    
+    public void testProcessRun() throws Exception
+    {
+        JDFDoc d=new JDFDoc(ElementName.JDF);
+        JDFNode n=d.getJDFRoot();
+        n.setType(EnumType.ProcessGroup);
+        JDFAuditPool ap=n.getAuditPool();
+        assertNotNull(ap);
+        JDFProcessRun p1=ap.addProcessRun(EnumNodeStatus.Completed, null, null);
+        assertEquals(p1.getTimeStamp(), new JDFDate().getDateTimeISO());
+       
+    
+    }    
+    
+    /////////////////////////////////////////////////////////////////////
+    public void testSpawnID() throws Exception
+    {
+        JDFDoc d=new JDFDoc(ElementName.JDF);
+        JDFNode n=d.getJDFRoot();
+        n.setSpawnID("spawn");
+        n.setType(EnumType.ProcessGroup);
+        JDFAuditPool ap=n.getAuditPool();
+        assertNotNull(ap);
+        JDFProcessRun p1=ap.addProcessRun(EnumNodeStatus.Completed, null, null);
+        assertEquals(p1.getSpawnID(), n.getSpawnID(false));
+        JDFNode n2=n.addJDFNode(EnumType.CaseMaking);
+        JDFProcessRun p2=n.getCreateAuditPool().addProcessRun(EnumNodeStatus.Completed, null, null);
+        assertEquals(p2.getSpawnID(), n2.getSpawnID(true));
+        assertEquals(p2.getSpawnID(), n.getSpawnID(false));
+
     }    
     
     /////////////////////////////////////////////////////////////////////

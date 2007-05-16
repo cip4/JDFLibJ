@@ -77,28 +77,28 @@ import org.cip4.jdflib.core.JDFElement.EnumVersion;
 
 public class AttrInfoTest extends TestCase
 {
-    
-    
+
+
     public void testgetFirstLastVersion()
     {
         AtrInfo ai=new AtrInfo(0x44433211, AttributeInfo.EnumAttributeType.boolean_, null,null);
         assertEquals("",ai.getFirstVersion(),EnumVersion.Version_1_2);
         assertEquals("",ai.getLastVersion(),EnumVersion.Version_1_4);
-        
+
         ai=new AtrInfo(0x33333222, AttributeInfo.EnumAttributeType.boolean_, null,null);
         assertEquals("",ai.getFirstVersion(),EnumVersion.Version_1_0);
         assertEquals("",ai.getLastVersion(),EnumVersion.Version_1_7);        
     }
-    
+
     //////////////////////////////////////////////////////////////
-    
+
     public void testValidStringForType()
     {
         assertTrue(AttributeInfo.validStringForType("1", EnumAttributeType.integer, null));
         assertFalse(AttributeInfo.validStringForType("1234567898765432", EnumAttributeType.integer, null));
         assertFalse(AttributeInfo.validStringForType("a", EnumAttributeType.integer, null));
         assertFalse(AttributeInfo.validStringForType("3.6", EnumAttributeType.integer, null));
-        
+
         assertTrue(AttributeInfo.validStringForType("123456789", EnumAttributeType.double_, null));
         assertTrue(AttributeInfo.validStringForType("1234567898765432", EnumAttributeType.double_, null));
         assertFalse(AttributeInfo.validStringForType("a", EnumAttributeType.double_, null));
@@ -107,7 +107,7 @@ public class AttrInfoTest extends TestCase
 
         assertTrue(AttributeInfo.validStringForType("Rotate90", EnumAttributeType.enumeration, EnumOrientation.getEnum(0)));
         assertFalse(AttributeInfo.validStringForType("Rotate91", EnumAttributeType.enumeration, EnumOrientation.getEnum(0)));
-        
+
         assertTrue(AttributeInfo.validStringForType("Rotate90 Rotate180", EnumAttributeType.enumerations, EnumOrientation.getEnum(0)));
         assertFalse(AttributeInfo.validStringForType("Rotate91", EnumAttributeType.enumerations, EnumOrientation.getEnum(0)));
 
@@ -129,14 +129,23 @@ public class AttrInfoTest extends TestCase
         assertFalse(AttributeInfo.validStringForType("aa 42", EnumAttributeType.IDREFS, null));
 
         assertFalse(AttributeInfo.validStringForType(null, EnumAttributeType.IDREFS, null));
-        
+
         assertTrue(AttributeInfo.validStringForType("2006-11-26T00:00:00+00:00", EnumAttributeType.dateTime, null));
+        assertTrue(AttributeInfo.validStringForType("2006-11-26T00:00:00.04G", EnumAttributeType.dateTime, null));
         assertFalse(AttributeInfo.validStringForType("2006-11-26", EnumAttributeType.dateTime, null));
         assertFalse(AttributeInfo.validStringForType("2006-11-26T", EnumAttributeType.dateTime, null));
         assertFalse(AttributeInfo.validStringForType("2006-11-26T1", EnumAttributeType.dateTime, null));
 
-    }
-    
+        assertTrue(AttributeInfo.validStringForType("P1Y2M3DT10H30M20.4S", EnumAttributeType.duration, null));
+        assertTrue(AttributeInfo.validStringForType("P1Y2M3DT10H30M", EnumAttributeType.duration, null));
+        assertTrue(AttributeInfo.validStringForType("P1Y2M3DT10H30M20S", EnumAttributeType.duration, null));
+
+        assertTrue(AttributeInfo.validStringForType("0 1 2 3", EnumAttributeType.TransferFunction, null));
+        assertTrue(AttributeInfo.validStringForType("0 1 0 3", EnumAttributeType.TransferFunction, null));
+        assertFalse(AttributeInfo.validStringForType("0 1 0", EnumAttributeType.TransferFunction, null));
+    } 
+
+
     //////////////////////////////////////////////////////////////
-    
- }
+
+}

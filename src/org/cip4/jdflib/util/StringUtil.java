@@ -1099,6 +1099,18 @@ public class StringUtil
                     {
                         l=posDot+9;
                         s=s.substring(0,l);
+                        if(s.endsWith("999"))
+                            return formatDouble(d+0.0000000004);
+                        else
+                        {
+                            int n;
+                            for(n=l;n>posDot;n--)
+                            {
+                                if(!s.substring(n-1,n).equals("0"))
+                                    break;
+                            }
+                            s=s.substring(0,n);
+                        }
                     }
                 }
                 

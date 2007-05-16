@@ -509,55 +509,60 @@ public class JDFSpawn
                 boolean isThereAlready = allIDsCopied.contains(refID);            
                 JDFResource.EnumSpawnStatus copyStatus = bResRW ? JDFResource.EnumSpawnStatus.SpawnedRW : JDFResource.EnumSpawnStatus.SpawnedRO;
 
+                HashSet vvRO = new LinkedHashSet();
+                HashSet vvRW = new LinkedHashSet();
+                if(rRoot==null)
+                    rRoot = (JDFResource)node.getTarget(refID, AttributeName.ID);
+
+                //  check for null and throw an exception in picky mode
+                if(rRoot == null)
+                {
+                    continue;
+                }
+
                 if(!isThereAlready)
                 {
-                    if(rRoot==null)
-                        rRoot = (JDFResource)node.getTarget(refID, AttributeName.ID);
-
-                    //  check for null and throw an exception in picky mode
-                    if(rRoot == null)
-                    {
-                        continue;
-                    }
-
                     // copy any missing linked resources, just in case
                     // the root is in the original jdf and can be used as a hook to the original document 
                     // get a list of all resources referenced by this link
                     // always do a copyresource in case some dangling rRefs are waiting
 
-                    HashSet vvRO = new LinkedHashSet();
-                    HashSet vvRW = new LinkedHashSet();
 
                     copySpawnedResource(rPool, rRoot, copyStatus, vSpawnParts, spawnID, vRWResources, vvRW, vvRO, allIDsCopied);
 
                     nSpawned += vvRO.size() + vvRW.size();
-                    VString rRefsRW=spawnAudit.getrRefsRWCopied();
-                    VString rRefsRO=spawnAudit.getrRefsROCopied();
-                    Iterator iterRefs=vvRW.iterator();
-                    while(iterRefs.hasNext())
-                    {
-                        final String s=(String)iterRefs.next();
-                        rRefsRW.add(s);
-                        int ind=rRefsRO.index(s);
-                        if(ind>=0)
-                            rRefsRO.remove(ind);
-                    }
-                    iterRefs=vvRO.iterator();
-                    while(iterRefs.hasNext())
-                    {
-                        final String s=(String)iterRefs.next();
-                        rRefsRO.add(s);
-                    }
-                    rRefsRO.unify();
-                    rRefsRW.unify();
-                    if(rRefsRO.isEmpty())
-                        rRefsRO=null;
-                    if(rRefsRW.isEmpty())
-                        rRefsRW=null;
-                    
-                    spawnAudit.setrRefsROCopied(rRefsRO);
-                    spawnAudit.setrRefsRWCopied(rRefsRW);
                 }
+                else
+                {
+                    if (bResRW)
+                        vvRW.add(rRoot.getID());
+                }
+                VString rRefsRW=spawnAudit.getrRefsRWCopied();
+                VString rRefsRO=spawnAudit.getrRefsROCopied();
+                Iterator iterRefs=vvRW.iterator();
+                while(iterRefs.hasNext())
+                {
+                    final String s=(String)iterRefs.next();
+                    rRefsRW.add(s);
+                    int ind=rRefsRO.index(s);
+                    if(ind>=0)
+                        rRefsRO.remove(ind);
+                }
+                iterRefs=vvRO.iterator();
+                while(iterRefs.hasNext())
+                {
+                    final String s=(String)iterRefs.next();
+                    rRefsRO.add(s);
+                }
+                rRefsRO.unify();
+                rRefsRW.unify();
+                if(rRefsRO.isEmpty())
+                    rRefsRO=null;
+                if(rRefsRW.isEmpty())
+                    rRefsRW=null;
+
+                spawnAudit.setrRefsROCopied(rRefsRO);
+                spawnAudit.setrRefsRWCopied(rRefsRW);
                 // get the effected resources
                 VElement vRes = new VElement();
                 VElement vResRoot = new VElement();
@@ -604,6 +609,14 @@ public class JDFSpawn
                         catch (JDFException x)
                         {
                             fixSpawnPartitions(r, rootPartIDKeys);
+                        }
+                        try
+                        {
+                            rRoot1.getResourceRoot().createPartitions(vSpawnParts, rootPartIDKeys);
+                        }
+                        catch (JDFException x)
+                        {
+                            fixSpawnPartitions(rRoot1, rootPartIDKeys);
                         }
                     }
 

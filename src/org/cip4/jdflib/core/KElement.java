@@ -3105,7 +3105,7 @@ public class KElement extends ElementNSImpl
     }
 
     /**
-     * Get the number od child elements. If String 'node' is an empty string
+     * Get the number of child elements. If String 'node' is null, an empty string
      * or '*', all nodes are counted. This method is the same as numChildElements
      * but prevents before the maybe unwanted virtuality of numChildElements.
      * <p>

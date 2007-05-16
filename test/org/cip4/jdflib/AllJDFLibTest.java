@@ -93,6 +93,7 @@ import org.cip4.jdflib.core.XMLDocTest;
 import org.cip4.jdflib.datatypes.JDFAttributeMapTest;
 import org.cip4.jdflib.datatypes.JDFDateTimeRangeTest;
 import org.cip4.jdflib.datatypes.JDFDurationRangeTest;
+import org.cip4.jdflib.datatypes.JDFDurationTest;
 import org.cip4.jdflib.datatypes.JDFEnumerationTest;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeListTest;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeTest;
@@ -212,6 +213,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         // datatype
         suite.addTestSuite(JDFAttributeMapTest.class);
         suite.addTestSuite(JDFDateTimeRangeTest.class);
+        suite.addTestSuite(JDFDurationTest.class);
         suite.addTestSuite(JDFDurationRangeTest.class);
         suite.addTestSuite(JDFEnumerationTest.class);
         suite.addTestSuite(JDFIntegerRangeTest.class);

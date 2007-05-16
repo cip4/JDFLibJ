@@ -22,7 +22,7 @@ public class JDFDuration implements Duration
 {
     private static final long serialVersionUID = 1L;
 
-    private int m_lDuration                     = 0;                            // in seconds
+    private double m_lDuration                     = 0;                            // in seconds
     
     // private static final String REGEX_DURATION_RESTRICTED is a RegularExpression
     // for a validation of incoming duration Strings, where is important that 
@@ -55,7 +55,7 @@ public class JDFDuration implements Duration
 
     
     private static final String REGEX_DURATION = "[P](((\\d)*)[Y])?((\\d)*[M])?((\\d)*[D])?" +
-                                                 "([T]((\\d)*[H])?((\\d)*[M])?((\\d)*[S])?)?";
+                                                 "([T]((\\d)*[H])?((\\d)*[M])?((\\d)*([.](\\d)+)?[S])?)?";
     
     
     /**
@@ -77,8 +77,9 @@ public class JDFDuration implements Duration
     /**
      * Allocates a <code>JDFDuration</code> object and initializes it with 's'
      * @param s duration in seconds
+     * s may be fractional
      */
-    public JDFDuration(int s)
+    public JDFDuration(double s)
     {
         m_lDuration = s;
     }
@@ -99,7 +100,15 @@ public class JDFDuration implements Duration
         init(strDuration);
     }
 
-    
+ /**
+  * add seconds to a duration
+  * @param seconds number of seconds to add
+  */   
+    public double addSeconds(double seconds)
+    {
+        m_lDuration+=seconds;
+        return m_lDuration;
+    }
     
     /** for debug purposes
      * 
@@ -116,12 +125,15 @@ public class JDFDuration implements Duration
      * <li>"P1Y2M3DT10H30M"</li>
      * <li>"PM8T12M"</li>
      * <li>"PT30M"</li>
+     * <li>"PT30M40S"</li>
+     * <li>"PT30M40.3333S"</li>
      * 
      * @param strDuration 
      * @throws DataFormatException
      */
     private void init(String strDuration) throws DataFormatException
     {
+        strDuration=StringUtil.zappTokenWS(strDuration, " ");
 
         boolean bComplete      = strDuration.matches(REGEX_DURATION);
         m_lDuration            = 0;
@@ -152,15 +164,15 @@ public class JDFDuration implements Duration
             return "PT00M";
 
         int i;
-        int temp = m_lDuration;
+        int temp = (int)m_lDuration;
         StringBuffer iso = new StringBuffer(20);
         iso.append("P"); //P is the indicator that 'iso' is a duration
         
-        i = m_lDuration/(60*60*24*365);
+        i = (int)m_lDuration/(60*60*24*365);
         if(i!=0) 
         {
             iso.append(i).append("Y"); // string with years
-            temp = m_lDuration - (i*60*60*24*365);
+            temp = (int)m_lDuration - (i*60*60*24*365);
         }
         i = temp;
         i = i/(60*60*24*30);
@@ -177,24 +189,38 @@ public class JDFDuration implements Duration
         }
         iso.append("T");
         
-        i=m_lDuration%(60*60*24);
+        i=(int)m_lDuration%(60*60*24);
         i=i/(60*60);
         if(i!=0) 
         {
             iso.append(i).append("H"); // string with hours
         }
-        i = m_lDuration%(60*60);
+        i = (int)m_lDuration%(60*60);
         i = i/(60);
         if(i!=0) 
         {
             iso.append(i).append("M"); // string with minutes
         }
-        i = m_lDuration%(60); 
+        i = (int)m_lDuration%(60); 
+        boolean bSec=false;
         if(i!=0) 
         {
-            iso.append(i).append("S"); // string with seconds
+            iso.append(i); // string with seconds
+            bSec=true;
         }
-            
+        double deltaS = m_lDuration-((int)(m_lDuration));
+        if(deltaS>0)
+        {
+         
+            String s=StringUtil.formatDouble(deltaS);
+            if(!bSec)
+                iso.append("0"); // add missing 0 
+            iso.append(s.substring(1));
+            bSec=true;
+        }
+        if(bSec)
+            iso.append("S");
+        
         int lastIndex=iso.length()-1;
         if (iso.charAt(lastIndex)=='T')
             iso.deleteCharAt(lastIndex);
@@ -251,7 +277,7 @@ public class JDFDuration implements Duration
         { // e.g. if durationInstant looks like "P1Y2M3D" - without time part
             strDate = strPeriod;
         }
-
+        double fracSecs=0;
         try
         {
             if (strDate.length() > 0)
@@ -300,12 +326,31 @@ public class JDFDuration implements Duration
                 int iSPos = strTime.indexOf("S");
                 if (iSPos > 0)
                 {
-                    iSeconds = Integer.parseInt(strTime.substring(iTimeLastPos, iSPos));
-                    iduration += iSeconds;
+                    int iDotPos = strTime.indexOf(".");
+                    if(iDotPos>0)
+                    {
+                        iSeconds = Integer.parseInt(strTime.substring(iTimeLastPos, iDotPos));
+                        iDotPos++;
+                        int mLen=iSPos-iDotPos;
+                        if(mLen>0)
+                        {
+                            String sMilli="0."+strTime.substring(iDotPos, iSPos);
+                            fracSecs = Double.parseDouble(sMilli);
+                        }
+                        iduration += iSeconds;
+                        
+                    }
+                    else
+                    {
+                        iSeconds = Integer.parseInt(strTime.substring(iTimeLastPos, iSPos));
+                        iduration += iSeconds;
+                    }
                 }
             }
             
             m_lDuration = iduration;
+            if(fracSecs!=0)
+                m_lDuration+=fracSecs;
         }
         catch (NumberFormatException e)
         {
@@ -334,7 +379,7 @@ public class JDFDuration implements Duration
      */
     public int getDuration()
     {
-        return m_lDuration;
+        return (int)m_lDuration;
     }
     
     /**

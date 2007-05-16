@@ -366,6 +366,8 @@ public class CheckJDF
              {
                  printResource((JDFResource) kElement, indent, testElement);
              }
+             if(!bPrintNameSpace&&xmlParent!=null&&!testElement.hasChildElements())
+                 testElement.deleteNode();
              return;
          }
          

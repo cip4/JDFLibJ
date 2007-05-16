@@ -544,7 +544,7 @@ public class JDFAudit extends JDFElement
      */
     public String getTimeStamp()
     {
-        return getAttribute (AttributeName.TIMESTAMP, JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING);
+        return getAttribute (AttributeName.TIMESTAMP, null, JDFConstants.EMPTYSTRING);
     }
     
     
@@ -553,7 +553,7 @@ public class JDFAudit extends JDFElement
      */
     public String getSpawnID()
     {
-        return getAttribute(AttributeName.SPAWNID, JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING);
+        return getAttribute(AttributeName.SPAWNID, null, JDFConstants.EMPTYSTRING);
     }
     
     /**

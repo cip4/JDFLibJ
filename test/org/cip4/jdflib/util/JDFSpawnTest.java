@@ -107,6 +107,7 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFBufferParams;
 import org.cip4.jdflib.resource.JDFMerged;
+import org.cip4.jdflib.resource.JDFProcessRun;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.JDFResourceTest;
@@ -467,20 +468,21 @@ public class JDFSpawnTest extends JDFTestCaseBase
             l.setPart("SignatureName","Sig1");
             Vector vRWRes=new Vector();
             vRWRes.add(ElementName.EXPOSEDMEDIA);
-            VJDFAttributeMap vMap=new VJDFAttributeMap();
+            VJDFAttributeMap vPartMap=new VJDFAttributeMap();
             JDFAttributeMap map=new JDFAttributeMap();
             map.put("SignatureName","Sig1");
             map.put("SheetName","S1");
-            vMap.add(map);
+            vPartMap.add(map);
             JDFResourceLink xmRL=n.getMatchingLink(ElementName.EXPOSEDMEDIA,EnumProcessUsage.AnyInput,0);
             xmRL.setAmount(40,i==1 ? map : null);
             xmRL.setUsage(EnumUsage.Output);
             xmRL.setAttribute("foo:bar", "a","www.foobar.com");
 
             final JDFSpawn spawn=new JDFSpawn(n); // fudge to test output counting
-            JDFNode spawnedNode=spawn.spawn("thisUrl","newURL",vRWRes,vMap,false,true,true,true);
+            JDFNode spawnedNode=spawn.spawn("thisUrl","newURL",vRWRes,vPartMap,false,true,true,true);
             String spawnID=spawnedNode.getSpawnID(false);
             assertNotSame(spawnID,"");
+            spawnedNode.getCreateAuditPool().addProcessRun(EnumNodeStatus.Completed, null, vPartMap);
 
             assertTrue("no spawnStatus",spawnedNode.toString().indexOf(AttributeName.SPAWNSTATUS)<0);
             JDFResourceLink rl = spawnedNode.getMatchingLink(ElementName.EXPOSEDMEDIA,EnumProcessUsage.AnyOutput,0);
@@ -526,13 +528,20 @@ public class JDFSpawnTest extends JDFTestCaseBase
                 xmRLspawn.setActualAmount(42,null);
             }
 
+            final JDFMerge merge = new JDFMerge(n);
+            merge.bAddMergeToProcessRun=true;
+            
             // merge here
-            JDFNode mergedNode=new JDFMerge(n).mergeJDF(spawnedNode, "merged", JDFNode.EnumCleanUpMerge.None, EnumAmountMerge.UpdateLink);
+            JDFNode mergedNode=merge.mergeJDF(spawnedNode, "merged", JDFNode.EnumCleanUpMerge.None, EnumAmountMerge.UpdateLink);
             JDFAuditPool ap=mergedNode.getAuditPool();
             assertNotNull(ap);
             JDFMerged merged=(JDFMerged) ap.getAudit(0, EnumAuditType.Merged, null, null);
+            JDFProcessRun pr=(JDFProcessRun) mergedNode.getChildByTagName(ElementName.PROCESSRUN, null, 0, null, false, true);
+            assertEquals(pr.getSpawnID(), spawnID);
+            assertEquals(pr.getAttribute("ReturnTime"), merged.getTimeStamp());
+
             assertNotNull(merged);
-            assertEquals(vMap, merged.getPartMapVector());
+            assertEquals(vPartMap, merged.getPartMapVector());
             assertNull(ap.getElement(ElementName.PART));
             xmRL=mergedNode.getMatchingLink(ElementName.EXPOSEDMEDIA,EnumProcessUsage.AnyOutput,0);  
             final VElement poolChildren = mergedNode.getResourceLinkPool().getPoolChildren("NodeInfoLink", null, null);
@@ -568,7 +577,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
     //////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////
 
-    public void testSpawnSimple()
+    public void testSpawnMergeSimple()
     {
         JDFDoc d=JDFResourceTest.creatXMDoc();
         JDFNode n=d.getJDFRoot();
@@ -576,14 +585,14 @@ public class JDFSpawnTest extends JDFTestCaseBase
         n.setType(EnumType.ProcessGroup);
         JDFNode n2=n.addJDFNode(EnumType.ConventionalPrinting);
         n2.moveElement(n.getResourceLinkPool(), null);
-        n=n2;
-        n.removeNodeInfo();
-        n.appendNodeInfo();
-        final JDFSpawn spawn=new JDFSpawn(n); // fudge to test output counting
-        n.setStatus(EnumNodeStatus.Waiting);
-        assertEquals(EnumNodeStatus.Waiting,n.getPartStatus(null));
 
-        String pid=n.getJobPartID(false);
+        n2.removeNodeInfo();
+        n2.appendNodeInfo();
+        final JDFSpawn spawn=new JDFSpawn(n2); // fudge to test output counting
+        n2.setStatus(EnumNodeStatus.Waiting);
+        assertEquals(EnumNodeStatus.Waiting,n2.getPartStatus(null));
+
+        String pid=n2.getJobPartID(false);
         assertNotSame(pid,"");
         JDFNode spawnedNode=spawn.spawn("thisUrl","newURL",null,null,false,true,true,true);
         assertTrue("no spawnStatus",spawnedNode.toString().indexOf(AttributeName.SPAWNSTATUS)<0);
@@ -592,12 +601,19 @@ public class JDFSpawnTest extends JDFTestCaseBase
         spawnedNode.getNodeInfo().setNodeStatus(EnumNodeStatus.Aborted);
         assertEquals(EnumNodeStatus.Part,spawnedNode.getStatus());
         assertEquals(EnumNodeStatus.Aborted,spawnedNode.getPartStatus(null));
+        spawnedNode.getCreateAuditPool().addProcessRun(EnumNodeStatus.Aborted, null, null);
         
-        JDFNode mergedNode=new JDFMerge(n).mergeJDF(spawnedNode, "merged", JDFNode.EnumCleanUpMerge.None, EnumAmountMerge.UpdateLink);
+        final JDFMerge merge = new JDFMerge(n);
+        merge.bAddMergeToProcessRun=true;
+        
+        JDFNode mergedNode=merge.mergeJDF(spawnedNode, "merged", JDFNode.EnumCleanUpMerge.None, EnumAmountMerge.UpdateLink);
+        
         assertEquals(EnumNodeStatus.Part,mergedNode.getStatus());
         assertEquals(EnumNodeStatus.Aborted,mergedNode.getPartStatus(null));
       
-        assertEquals(d.getJDFRoot().getJobPart(pid, null), mergedNode);
+        final JDFNode jobPart = d.getJDFRoot().getJobPart(pid, null);
+        assertEquals(jobPart, mergedNode);
+        assertEquals(jobPart.getAuditPool().getAudit(0, EnumAuditType.ProcessRun, null, null).getAttribute("SubmitTime"), n.getAuditPool().getAudit(0, EnumAuditType.Spawned, null, null).getTimeStamp());
 
     }
     ///////////////////////////////////////////////////////////

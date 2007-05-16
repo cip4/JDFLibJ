@@ -9,6 +9,7 @@ import java.util.Vector;
 import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
@@ -33,6 +34,7 @@ import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.pool.JDFStatusPool;
 import org.cip4.jdflib.resource.JDFMerged;
 import org.cip4.jdflib.resource.JDFNotification;
+import org.cip4.jdflib.resource.JDFProcessRun;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumAmountMerge;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
@@ -51,6 +53,10 @@ public class JDFMerge
      * set this to true if you want to update the stati of the relevant parent nodes based on the new Stati of the merged node
      */
     public boolean bUpdateStati=false;
+    /**
+     * set this to true if you want to update the ProcessRun(s) timestamps for this merge
+     */
+    public boolean bAddMergeToProcessRun=false;
     /**
      * 
      * @param parentNode the parent node to merge into. MAY be the actual node to be replace or any Parent thereof
@@ -201,7 +207,7 @@ public class JDFMerge
         if (spawnID != null)
         {
             JDFNode overWriteParent=mergeAudit.getParentJDF(); // since all links get screwed up, let's relink here
-            cleanUpMerge(overWriteParent,cleanPolicy, spawnID, false);
+            cleanUpMerge(overWriteParent,cleanPolicy, spawnID, false,toMerge);
         }
 
         // now burn it in!
@@ -1001,8 +1007,25 @@ public class JDFMerge
      * @param bRecurse    if true also recurse into all child JDF nodes; default=false
      */
 
-    private static void cleanUpMerge(JDFNode overWriteNode, EnumCleanUpMerge cleanPolicy, String spawnID, boolean bRecurse)
+    private void cleanUpMerge(JDFNode overWriteNode, EnumCleanUpMerge cleanPolicy, String spawnID, boolean bRecurse, JDFNode toMerge)
     {
+        if(bAddMergeToProcessRun)
+        {
+            VElement vProcessRun= toMerge.getChildrenByTagName(ElementName.PROCESSRUN, null, new JDFAttributeMap(AttributeName.SPAWNID,spawnID),false, true, -1);
+            JDFSpawned spawned=(JDFSpawned) overWriteNode.getChildByTagName(ElementName.SPAWNED, null, 0,new JDFAttributeMap(AttributeName.NEWSPAWNID,spawnID),false, true);
+            JDFMerged merged=(JDFMerged) overWriteNode.getChildByTagName(ElementName.MERGED, null, 0,new JDFAttributeMap(AttributeName.MERGEID,spawnID),false, true);
+            for(int k=0;k<vProcessRun.size();k++)
+            {
+                JDFProcessRun pr=(JDFProcessRun)vProcessRun.elementAt(k);
+                if(!pr.hasAttribute("ReturnTime"))
+                {
+                    if(merged!=null)
+                        pr.setAttribute("ReturnTime", merged.getTimeStamp());
+                    if(spawned!=null)
+                        pr.setAttribute("SubmitTime", spawned.getTimeStamp());
+                }
+            }
+        }
         if(!cleanPolicy.equals(EnumCleanUpMerge.None))
         {
             if(bRecurse)
@@ -1010,18 +1033,85 @@ public class JDFMerge
                 final Vector v = overWriteNode.getvJDFNode(null, null, false);
                 for(int i = v.size(); i >= 0; i--)
                 {
-                    cleanUpMerge((JDFNode)v.elementAt(i),cleanPolicy, spawnID, false);
+                    cleanUpMerge((JDFNode)v.elementAt(i),cleanPolicy, spawnID, false,toMerge);
                 }
             }
             else
             {
                 JDFAuditPool auditPool = overWriteNode.getAuditPool();
                 if (auditPool != null)
-                    auditPool.cleanUpMerge(cleanPolicy, spawnID);
+                    cleanUpMergeAudits(auditPool,cleanPolicy, spawnID);
             }
         }
     }
 
+    /**
+     * @param cleanPolicy
+     * @param spawnID
+     */
+    private void cleanUpMergeAudits(JDFAuditPool pool, JDFNode.EnumCleanUpMerge cleanPolicy, String spawnID)
+    {
+        if (cleanPolicy != JDFNode.EnumCleanUpMerge.None)
+        {
+            VElement vMerged    = new VElement();
+            VElement vSpawned   = new VElement();
+
+            if (KElement.isWildCard(spawnID))
+            {
+                vMerged     = pool.getAudits(JDFAudit.EnumAuditType.Merged, null,null);
+                vSpawned    = pool.getAudits(JDFAudit.EnumAuditType.Spawned, null,null);
+            }
+            else
+            {
+
+                final JDFAttributeMap mSpawnID = new JDFAttributeMap(AttributeName.MERGEID, spawnID);
+                JDFAudit a = pool.getAudit(0, JDFAudit.EnumAuditType.Merged, mSpawnID,null);
+                if(a != null)
+                {    
+                    vMerged.add(a);
+                }
+                mSpawnID.clear();
+                mSpawnID.put(AttributeName.NEWSPAWNID, spawnID);
+                a = pool.getAudit(0, JDFAudit.EnumAuditType.Spawned, mSpawnID,null);
+                if(a != null)
+                {    
+                    vSpawned.add(a);
+                }
+            }
+            for (int i = vMerged.size() - 1; i >= 0; i--)
+            {
+                final JDFMerged merged = (JDFMerged)vMerged.elementAt(i);
+                final String mergeID = merged.getMergeID();
+                for (int j = vSpawned.size() - 1; j >= 0; j--)
+                {
+                    final JDFSpawned spawned = (JDFSpawned)vSpawned.elementAt(i);
+                    if (spawned.getNewSpawnID().equals(mergeID))
+                    {
+
+
+                        if (cleanPolicy == JDFNode.EnumCleanUpMerge.RemoveAll)
+                        {
+                            spawned.deleteNode();
+                            merged.deleteNode();
+                            vSpawned.remove(j);
+                        }
+                        else if (cleanPolicy == JDFNode.EnumCleanUpMerge.RemoveRRefs)
+                        {
+                            spawned.removeAttribute(AttributeName.RREFSRWCOPIED);
+                            spawned.removeAttribute(AttributeName.RREFSROCOPIED);
+                            merged.removeAttribute(AttributeName.RREFSOVERWRITTEN);
+                        }
+                        else
+                        {
+                            // never get here
+                            throw new JDFException("JDFNode.EnumCleanUpMerge: illegal cleanPolicy enumeration: " + 
+                                    cleanPolicy.getValue());
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 
 }

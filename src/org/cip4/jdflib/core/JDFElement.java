@@ -1211,7 +1211,7 @@ public class JDFElement extends KElement
     
     /**
      * Remove attribute SettingsPolicy
-     * @deprecated
+     * @deprecated use removeAttribute
      */
     public void removeSettingsPolicy()
     {
@@ -1220,29 +1220,13 @@ public class JDFElement extends KElement
     
     /**
      * Remove attribute BestEffortExceptions
+     * @deprecated use removeAttribute
      */
     public void removeBestEffortExceptions()
     {
         removeAttribute(AttributeName.BESTEFFORTEXCEPTIONS, null);
     }
-    
-//    /**
-//     * GetAttribute - get an attribute value also check ns JDF
-//     *
-//     * @param String attrib       - attribute name
-//     * @param String nameSpaceURI - attribute namespace uri
-//     * @param String def          - attribute default that is returned if no attribute exists
-//     *
-//     * @return String - the attribute
-//     * @deprecated use KElement instead
-//     * 
-//     * default: getAttribute(attrib, null, JDFConstants.EMPTYSTRING)
-//     */
-//    
-//  public String getAttribute_JDFElement(String attrib, String nameSpaceURI, String def){
-    //       return super.getAttribute_KElement(attrib, nameSpaceURI, def);
-    //}
-    
+        
     /**
      * Gets the one and reference to an ID
      *
@@ -1881,7 +1865,7 @@ public class JDFElement extends KElement
         // check whether it is a resource element
         if (target.isResourceElement())
         {
-            newRef.appendHRef(target, AttributeName.RSUBREF, JDFConstants.EMPTYSTRING);
+            newRef.appendHRef(target, AttributeName.RSUBREF, null);
         }
         
         // check whether it is a resource leaf or root
@@ -1891,7 +1875,7 @@ public class JDFElement extends KElement
             newRef.setPartMap(partMap);
         }
         // ID is appended to the resource root of target
-        newRef.appendHRef(root, AttributeName.RREF, JDFConstants.EMPTYSTRING);
+        newRef.appendHRef(root, AttributeName.RREF, null);
         
         //move the resource to the closest common ancestor if it is not already an ancestor of this
         JDFNode parent=root.getParentJDF();
@@ -3465,7 +3449,7 @@ public class JDFElement extends KElement
      *
      * @return String: the inherited version information or "1.3" if no valid 
      *                 version info was found
-     * @deprecated use getDefaultDFVersion()
+     * @deprecated use getDefaultJDFVersion()
      */
     public final String version()
     {
