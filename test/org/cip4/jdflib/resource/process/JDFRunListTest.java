@@ -75,6 +75,7 @@ import java.util.Iterator;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -330,7 +331,9 @@ public class JDFRunListTest extends JDFTestCaseBase
         tagSet=tagMap.appendElement("TagSet");
         tagSet.setAttribute("Path", "/Dokument/Rezipient/@Sex");
         tagSet.setAttribute("Value", "Male");
-        tagMap.setXMLComment("The TagMap element maps arbitrary tags in the document to a structural RunTag\nNote that any partition key may be mapped.\nNote also that although an XPath syntax is used, this may be mapped to any hierarchical structure including but not limited to XML.");
+        tagMap.setXMLComment("The TagMap element maps arbitrary tags in the document to a structural RunTag\nNote that any partition key may be mapped.\nNote also that although an XPath syntax is used, this may be mapped to any hierarchical structure including but not limited to XML.\n"+
+                "Multiple TagSet Elements are combined as a logical And\n"+
+                "This TagSet maps all Male (Dokument/Rezipient/@Sex=\"Male\") Covers (/Dokument/Sektion=Einband to MaleCover");
         
         tagMap=rl.appendElement("TagMap");
         tagMap.setAttribute("PartIDKey", "RunTags");
@@ -341,7 +344,8 @@ public class JDFRunListTest extends JDFTestCaseBase
         tagSet=tagMap.appendElement("TagSet");
         tagSet.setAttribute("Path", "/Dokument/Rezipient/@Sex");
         tagSet.setAttribute("Value", "Female");
-        
+        tagMap.setXMLComment( "This TagSet maps all Male (Dokument/Rezipient/@Sex=\"Feale\") Covers (/Dokument/Sektion=Einband to FemaleCover");
+                
         tagMap=rl.appendElement("TagMap");
         tagMap.setAttribute("PartIDKey", "RunTags");
         tagMap.setAttribute("PartIDValue", "BigBody");
@@ -351,6 +355,9 @@ public class JDFRunListTest extends JDFTestCaseBase
         tagSet=tagMap.appendElement("TagSet");
         tagSet.setAttribute("Path", "/Dokument/Sektion/Pages");
         tagSet.setAttribute("Value", "Many");
+        tagMap.setXMLComment( "This TagSet maps all (/Dokument/Sektion=HauptTeil with many pages (/Dokument/Sektion/Pages=Many to BigBody\n"
+                +"Note that only string matching is allowed - we do not allow for arithmetic.\n"
+                +"If arithmetic is required, we could think about using Evaluation elements from Preflight/DevCaps");
         
         tagMap=rl.appendElement("TagMap");
         tagMap.setAttribute("PartIDKey", "RunTags");
@@ -361,6 +368,7 @@ public class JDFRunListTest extends JDFTestCaseBase
         tagSet=tagMap.appendElement("TagSet");
         tagSet.setAttribute("Path", "/Dokument/Sektion/Pages");
         tagSet.setAttribute("Value", "Few");
+        tagMap.setXMLComment( "This TagSet maps all (/Dokument/Sektion=HauptTeil with many pages (/Dokument/Sektion/Pages=Few to SmallBody\n");
         
         rl.setFileURL("bigVariable.ppml");
         rl.setXMLComment("this runlist points to a ppml with arbitrary structural tagging");
@@ -377,6 +385,7 @@ public class JDFRunListTest extends JDFTestCaseBase
         super.setUp();
         doc = new JDFDoc("JDF");
         root = doc.getJDFRoot();
+        JDFElement.setLongID(false);
  
     }
 

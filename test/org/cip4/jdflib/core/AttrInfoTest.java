@@ -132,6 +132,9 @@ public class AttrInfoTest extends TestCase
 
         assertTrue(AttributeInfo.validStringForType("2006-11-26T00:00:00+00:00", EnumAttributeType.dateTime, null));
         assertTrue(AttributeInfo.validStringForType("2006-11-26T00:00:00.04G", EnumAttributeType.dateTime, null));
+        assertTrue(AttributeInfo.validStringForType("2006-11-26T00:00:00.023454+01:30", EnumAttributeType.dateTime, null));
+        assertFalse(AttributeInfo.validStringForType("2006-11-26T00:00G", EnumAttributeType.dateTime, null));
+        
         assertFalse(AttributeInfo.validStringForType("2006-11-26", EnumAttributeType.dateTime, null));
         assertFalse(AttributeInfo.validStringForType("2006-11-26T", EnumAttributeType.dateTime, null));
         assertFalse(AttributeInfo.validStringForType("2006-11-26T1", EnumAttributeType.dateTime, null));
