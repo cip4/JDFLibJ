@@ -313,19 +313,36 @@ public class JDFDevCapTest extends TestCase
     
     public void testGetIntegerState()
     {
-    	JDFDoc d = new JDFDoc("DevCap");
-    	JDFDevCap dc = (JDFDevCap) d.getRoot();
-    	JDFIntegerState is = dc.appendIntegerState("foo");
-    	assertEquals(is.getName(), "foo");
-    	is=dc.getIntegerState("bar");
-    	assertNull(is);
-    	is=dc.getCreateIntegerState("bar");
-    	assertNotNull(is);
-    	assertEquals(is.getName(), "bar");
-    	is=dc.getIntegerState("bar");
-    	assertNotNull(is);
-    	assertEquals(is.getName(), "bar");
-    	
+        JDFDoc d = new JDFDoc("DevCap");
+        JDFDevCap dc = (JDFDevCap) d.getRoot();
+        JDFIntegerState is = dc.appendIntegerState("foo");
+        assertEquals(is.getName(), "foo");
+        is=dc.getIntegerState("bar");
+        assertNull(is);
+        is=dc.getCreateIntegerState("bar");
+        assertNotNull(is);
+        assertEquals(is.getName(), "bar");
+        is=dc.getIntegerState("bar");
+        assertNotNull(is);
+        assertEquals(is.getName(), "bar");
+        
+    }
+    public void testGetInValidAttributes()
+    {
+        JDFDoc d = new JDFDoc("DevCap");
+        JDFDevCap dc = (JDFDevCap) d.getRoot();
+        dc.setDevNS(null);
+        assertEquals(dc.getInvalidAttributes(EnumValidationLevel.Complete, true, 0).size(),0);
+        dc.setName("Foo");
+        assertTrue(dc.getInvalidAttributes(EnumValidationLevel.RecursiveComplete, true, 0).contains("Name"));
+        assertTrue(dc.getInvalidAttributes(EnumValidationLevel.Complete, true, 0).contains("Name"));
+        dc.setName("FooLink");
+        assertFalse(dc.getInvalidAttributes(EnumValidationLevel.Complete, true, 0).contains("Name"));
+        dc.setName("ScreeningParams");
+        assertFalse(dc.getInvalidAttributes(EnumValidationLevel.Complete, true, 0).contains("Name"));
+        dc.setName("ScreeningParams_");
+        assertTrue(dc.getInvalidAttributes(EnumValidationLevel.Complete, true, 0).contains("Name"));
+        
     }
            
     public void testGetNumberState()

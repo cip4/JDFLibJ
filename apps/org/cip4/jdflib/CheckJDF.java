@@ -162,6 +162,7 @@ public class CheckJDF
  
     JDFDoc theDoc=null;
     private String translation=null;
+    private boolean bTryFormats=false;
     public boolean bTiming=false;
     public boolean bWarning=false;
     public boolean bQuiet=true;
@@ -1693,9 +1694,9 @@ public class CheckJDF
          p.m_ErrorHandler=errorHandler;
          
          gd = p.parseFile(xmlFile);
-         if(gd==null)
+         if(gd==null&& !bTryFormats)
          {
-             sysOut.println("File " + xmlFile + " not found");
+             sysOut.println("Error parsing File: " + xmlFile);
          }
 
          return gd;
@@ -1918,7 +1919,7 @@ public class CheckJDF
                  processSingleFile(xmlFile);
              }
          }
-        if (pOut != null && xmlOutputName != null && xmlOutputName.length()>0 ) 
+        if ( xmlOutputName != null && xmlOutputName.length()>0 ) 
         {
             if(xslStyleSheet!=null)
             {
@@ -1941,6 +1942,7 @@ public class CheckJDF
      */
     public XMLDoc processZipFile(File argFile)
     {
+        boolean bTryKeep=bTryFormats;
         try
         {
             ZipFile zip=new ZipFile(argFile);
@@ -1954,23 +1956,31 @@ public class CheckJDF
                 {
                     InputStream inStream=zip.getInputStream(ze);
                     processSingleStream(inStream,nam,null);
+                    bTryKeep=bTryKeep && bTryFormats;
                 }
             }
         }
         catch (ZipException e)
         {
-            KElement testFileRoot = pOut.getRoot().appendElement("TestFile");
-            testFileRoot=testFileRoot.appendElement("Error");
-            testFileRoot.setAttribute("Message","Invalid zip file, Bailing out!");
-            sysOut.println("Invalid zip file, Bailing out!");
+            if(!bTryFormats)
+            {
+                KElement testFileRoot = pOut.getRoot().appendElement("TestFile");
+                testFileRoot=testFileRoot.appendElement("Error");
+                testFileRoot.setAttribute("Message","Invalid zip file, Bailing out!");
+                sysOut.println("Invalid zip file, Bailing out!");
+            }
         }
         catch (IOException e)
         {
-            KElement testFileRoot = pOut.getRoot().appendElement("TestFile");
-            testFileRoot=testFileRoot.appendElement("Error");
-            testFileRoot.setAttribute("Message","I/O Exception on zip file, Bailing out!");
-            sysOut.println("I/O Exception on zip file, Bailing out!");
+            if(!bTryFormats)
+            {
+                KElement testFileRoot = pOut.getRoot().appendElement("TestFile");
+                testFileRoot=testFileRoot.appendElement("Error");
+                testFileRoot.setAttribute("Message","I/O Exception on zip file, Bailing out!");
+                sysOut.println("I/O Exception on zip file, Bailing out!");
+            }
         }
+        bTryFormats=bTryKeep;
         return pOut;
     }
     
@@ -1982,6 +1992,7 @@ public class CheckJDF
     public XMLDoc processMimeStream(InputStream inStream)
     {
         Multipart multi=MimeUtil.getMultiPart(inStream);
+        boolean bTryKeep=bTryFormats;
         if(multi==null)
             return null;
         int count;
@@ -2009,6 +2020,7 @@ public class CheckJDF
                     if(MimeUtil.isJDFMimeType(contentType))
                     {
                         processSingleStream(bpStream, fiName,bp);
+                        bTryKeep =bTryKeep && bTryFormats;
                     }
                     else
                     {
@@ -2025,6 +2037,7 @@ public class CheckJDF
                 //nop and continue
             }
         }
+        bTryFormats=bTryKeep;
         return pOut;
     }
 
@@ -2072,7 +2085,26 @@ public class CheckJDF
     public XMLDoc processSingleFile(String fileName)
     {
         theDoc=null;
-        return processSingleFile(null,null,fileName,null);
+        final File file = new File(fileName);
+        bTryFormats=file.canRead();
+            
+        XMLDoc d=processSingleFile(null,null,fileName,null);
+        if(!bTryFormats)
+            return d;
+        if(bTryFormats)
+            d=processZipFile(file);
+        if(bTryFormats)
+        {
+            try
+            {
+                d=processMimeStream(new FileInputStream(file));
+            }
+            catch (FileNotFoundException x)
+            {
+                // nop
+            }
+        }
+        return d;
     }
    
     /**
@@ -2179,6 +2211,7 @@ public class CheckJDF
                          theDoc.setBodyPart(bp);
                  }
              }
+             bTryFormats=bTryFormats && theDoc==null;
              
              //  measure the time of parsing
              lEndTime_SchemaValidation = System.currentTimeMillis();

@@ -126,8 +126,8 @@ public class CheckJDFTest extends JDFTestCaseBase
         
         List args = new ArrayList();
         args.add(checkSavePath);
-        args.add("-x " + checkSaveLocator);
-        args.add("-L " + schemaLocator);
+        args.add("-x" + checkSaveLocator);
+        args.add("-L" + schemaLocator);
         args.add("-qcv");
         String[] commandLineArgs = (String[]) args.toArray(new String[args.size()]);
         

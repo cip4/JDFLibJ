@@ -100,6 +100,7 @@ import org.cip4.jdflib.util.HashUtil;
 public class JDFMatrix extends JDFNumList
 {
     //**************************************** Constructors ****************************************
+    public final static JDFMatrix unitMatrix=new JDFMatrix(1,0,0,1,0,0);
     /**
      * constructs a matrix with all values set to 0.0 Double
      */

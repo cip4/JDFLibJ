@@ -694,6 +694,26 @@ public class JDFDevCaps extends JDFAutoDevCaps
                 {
                     JDFResource r=node.addResource(nam, null, linkUsage, pu, null, getDevNS(), null);
                     e=node.getLink(r,null);
+                    final String id=devCap.getAttribute(AttributeName.ID,null,null);
+                    if(id!=null)
+                    {
+                        r.setID(id);
+                        ((JDFResourceLink)e).setrRef(id);
+                    }
+                    final JDFEnumerationState pidKeys = devCap.getEnumerationState(AttributeName.PARTIDKEYS);
+                    if(pidKeys!=null)
+                    {
+                        VString keys=pidKeys.getAllowedValueList();
+                        if(keys!=null && keys.size()>0)
+                        {
+                            JDFAttributeMap keyMap=new JDFAttributeMap();
+                            for(int k=0;k<keys.size();k++)
+                            {
+                                keyMap.put(keys.stringAt(k), "PartKey"+k);
+                            }
+                            r.getCreatePartition(keyMap, keys);
+                        }
+                    }
                 }
             }
             else if (context.equals(EnumContext.JMF)) 

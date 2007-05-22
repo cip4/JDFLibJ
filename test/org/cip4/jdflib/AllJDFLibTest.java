@@ -154,6 +154,7 @@ import org.cip4.jdflib.resource.JDFLayoutTest;
 import org.cip4.jdflib.resource.JDFMediaColorTest;
 import org.cip4.jdflib.resource.JDFPartTest;
 import org.cip4.jdflib.resource.JDFResourceTest;
+import org.cip4.jdflib.resource.JDFStrippingTest;
 import org.cip4.jdflib.resource.PhaseTimeTest;
 import org.cip4.jdflib.resource.ProcessRunTest;
 import org.cip4.jdflib.resource.process.JDFAddressTest;
@@ -289,6 +290,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JDFMediaColorTest.class);
         suite.addTestSuite(JDFPartTest.class);
         suite.addTestSuite(JDFResourceTest.class);
+        suite.addTestSuite(JDFStrippingTest.class);
         
         // resource.process
         suite.addTestSuite(JDFAddressTest.class);

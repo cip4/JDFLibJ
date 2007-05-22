@@ -95,12 +95,14 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
-import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.node.JDFNode;
@@ -2172,9 +2174,9 @@ public class JDFDevCap extends JDFAutoDevCap
      /**
       * sets the element and attribute defaults
       * 
-	 * @param element
+	 * @param element the element that is defaulted
      * @param bAll if false, only add if minOccurs>=1 and required=true or a default exists
-	 * @return
+	 * @return ignored
 	 */
     public boolean setDefaultsFromCaps(KElement element, boolean bAll)
     {
@@ -2202,8 +2204,7 @@ public class JDFDevCap extends JDFAutoDevCap
         {
             return false;
         }
-        int i;
-        for(i=0;i<vSubDevCap.size();i++)
+        for(int i=0;i<vSubDevCap.size();i++)
         {
             JDFDevCap subDevCap=(JDFDevCap) vSubDevCap.elementAt(i);
             int minOccurs = subDevCap.getMinOccurs();
@@ -2218,9 +2219,18 @@ public class JDFDevCap extends JDFAutoDevCap
                 
                 for(int ii=occurs;ii<minOccurs;ii++)
                 {
-                    
-                    KElement newSub=element.appendElement(subDevCap.getName(),subDevCap.getDevNS());
-                    subElms.add(newSub);
+                    final String id=subDevCap.getID();                   
+                    KElement isThere=id==null ? null : element.getOwnerDocument_KElement().getRoot().getTarget(id, AttributeName.ID);
+                    if(!(isThere instanceof JDFResource) || !(element instanceof JDFElement))
+                    {
+                        KElement newSub=element.appendElement(subDevCap.getName(),subDevCap.getDevNS());
+                        subElms.add(newSub);
+                    }
+                    else
+                    {
+                        JDFRefElement re=((JDFElement)element).refElement((JDFResource)isThere);
+                        subElms.add(re.getTarget());
+                    }
                     success=true;
                 }
             }
@@ -2232,7 +2242,7 @@ public class JDFDevCap extends JDFAutoDevCap
         }
         // states
         VElement vStates=getStates(true,null);
-        for(i=0;i<vStates.size();i++)
+        for(int i=0;i<vStates.size();i++)
         {
             JDFAbstractState state=(JDFAbstractState)vStates.elementAt(i);
             success = state.setDefaultsFromCaps(element, bAll) || success;
@@ -2249,12 +2259,8 @@ public class JDFDevCap extends JDFAutoDevCap
         VString vs= super.getInvalidAttributes(level, bIgnorePrivate, nMax);
         if(nMax>0 && vs.size()>nMax)
             return vs;
-        if(!EnumValidationLevel.RecursiveComplete.equals(level) && !EnumValidationLevel.RecursiveIncomplete.equals(level))
-            return vs;
-        if(vs.contains(AttributeName.DEVCAPREFS))
-            return vs;
 
-        if(hasAttribute(AttributeName.DEVCAPREFS))
+        if(EnumValidationLevel.isRecursive(level)&& !vs.contains(AttributeName.DEVCAPREFS) && hasAttribute(AttributeName.DEVCAPREFS))
         {
             JDFDeviceCap deviceCap = (JDFDeviceCap) getDeepParent(ElementName.DEVICECAP, 0);
             JDFDevCapPool devCapPool = deviceCap == null ? null : deviceCap.getDevCapPool();
@@ -2273,7 +2279,18 @@ public class JDFDevCap extends JDFAutoDevCap
                     return vs;
                 }
             }
-        }           
+        }  
+        String nam=getName();
+        if(!vs.contains(AttributeName.NAME) && nam!=null && getDevNS().equals(JDFElement.getSchemaURL()))
+        {
+            nam=KElement.xmlnsLocalName(nam);
+            JDFDoc tmpDoc=new JDFDoc(nam);
+            KElement tmpRoot=tmpDoc.getRoot();
+            if(JDFElement.class.equals(tmpRoot.getClass()))
+            {
+                vs.add(AttributeName.NAME);
+            }           
+        }
         return vs;
     }
 

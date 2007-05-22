@@ -104,10 +104,13 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
+import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFNameRangeList;
 import org.cip4.jdflib.datatypes.JDFRangeList;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.span.JDFSpanBase;
+import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
 
 
@@ -805,15 +808,21 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
         if(def==null)
         {
-            def=getAttribute(AttributeName.ALLOWEDVALUELIST); 
-            if(def.indexOf("~")>=0 || def.indexOf(" ")>=0)// allowedvaluelist is a list or range
+            def=getAttribute(AttributeName.ALLOWEDVALUELIST,null,null); 
+            if(def!=null && (def.indexOf("~")>=0 || def.indexOf(" ")>=0))// allowedvaluelist is a list or range
             {
                 String lt=getListType().getName();
                 if(!lt.endsWith("List")&&def.indexOf(" ")>=0)
-                    def=null;
+                {
+                    def=StringUtil.token(def, 0, " ");
+                }
                 else  if(lt.indexOf("Range")<0 && def.indexOf("~")>=0)
+                {
                     def=null;
+                }
             }
+            if(def==null)
+                def=getXPathAttribute("Value/@AllowedValue", null);
         }
         if(def==null)
         {
@@ -821,7 +830,34 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
             {
                 def="1";              
             }
-            def="some_value"; //TODO add better type dependent value generator
+            else if(this instanceof JDFXYPairState)
+            {
+                def="1 1";
+            }
+            else if(this instanceof JDFBooleanState)
+            {
+                def="true";
+            }
+            else if(this instanceof JDFMatrixState)
+            {
+                def=JDFMatrix.unitMatrix.toString();
+            }
+            else if(this instanceof JDFShapeState)
+            {
+                def="1 2 3";
+            }
+            else if(this instanceof JDFDateTimeState)
+            {
+                def=new JDFDate().getDateTimeISO();
+            }
+            else if(this instanceof JDFDurationState)
+            {
+                def=new JDFDuration(42).getDurationISO();
+            }
+            else
+            {
+                def="some_value"; //TODO add better type dependent value generator
+            }
         }
         Object theValue=getMatchingObjectInNode(element);
         if(theValue!= null)
