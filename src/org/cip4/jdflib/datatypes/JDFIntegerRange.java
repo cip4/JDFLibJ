@@ -89,6 +89,7 @@ import org.cip4.jdflib.util.StringUtil;
  * This class represents an integer range (JDFIntegerRange). 
  * It is a pair of 2 integer values separated by a tilde "~", 
  * for example "123 ~ 145"
+ * negative values are treated differently depending on the value of m_defaultXDef @see getDefaultDef
  */
 public class JDFIntegerRange extends JDFRange
 {

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -78,42 +78,32 @@
  */
 package org.cip4.jdflib.datatypes;
 
-import java.util.zip.DataFormatException;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 
 
 public class JDFIntegerRangeTest extends JDFTestCaseBase
 {
-    
+
     public final void testJDFIntegerRangeString() throws Exception
     {
-        
+
         JDFIntegerRange range = new JDFIntegerRange();
         range = new JDFIntegerRange(" 0 ~ 1 ");
-         
+
         // rangeList is not empty
         assertFalse("Bad Constructor from a given String", range.toString().length()==0);
         // must be trasformed into the string "0~1"
         assertEquals("Bad Constructor from a given String",range.toString(),"0 ~ 1"); 
         range = new JDFIntegerRange(" 1 ~ 1 ");
         assertEquals("Bad Constructor from a given String",range.toString(),"1"); 
-               
+
     }  
 
     ///////////////////////////////////////////////////////////////////
-    public final void testAppend()
+    public final void testAppend() throws Exception
     {        
-        JDFIntegerRange range = new JDFIntegerRange();
-        try
-        {
-            range = new JDFIntegerRange(" 0 ~ 1 ");
-        }
-        catch (DataFormatException dfe)
-        {
-            fail("DataFormatException");
-        }
-        
+        JDFIntegerRange range = new JDFIntegerRange(" 0 ~ 1 ");
+
         // rangeList is not empty
         assertFalse("Bad Constructor from a given String", range.toString().length()==0);
         // must be trasformed into the string "0~1"
@@ -128,11 +118,11 @@ public class JDFIntegerRangeTest extends JDFTestCaseBase
         assertEquals("Bad Constructor from a given String",range.toString(),"0 ~ 2"); 
         assertFalse(range.append(1));
         assertEquals("Bad Constructor from a given String",range.toString(),"0 ~ 2");         
-}
-    
+    }
+
     ///////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////
-    
+
     public final void testCopyConstructor()
     {        
         JDFIntegerRange range = new JDFIntegerRange(4,-1,8);
@@ -147,25 +137,20 @@ public class JDFIntegerRangeTest extends JDFTestCaseBase
         assertFalse(range2.inRange(8));
     }
     ///////////////////////////////////////////////////////////////////
-    
-    public final void testDefaultDef()
+
+    public final void testDefaultDef() throws Exception
     {        
-        JDFIntegerRange range;
-        try
-        {
-            range = new JDFIntegerRange("0~-1");
-            assertFalse(range.inRange(4));
-            JDFIntegerRange.setDefaultDef(Integer.MAX_VALUE);
-            range = new JDFIntegerRange("0~-1");
-            assertTrue(range.inRange(4));
-            JDFIntegerRange.setDefaultDef(0);
-            range = new JDFIntegerRange("0~-1");
-            assertFalse(range.inRange(4));
-         }
-        catch (DataFormatException e)
-        {
-            fail("constructor");
-        }
-     }
-     
+        JDFIntegerRange range = new JDFIntegerRange("0~-1");
+        assertFalse(range.inRange(4));
+        JDFIntegerRange.setDefaultDef(Integer.MAX_VALUE);
+        range = new JDFIntegerRange("0~-1");
+        assertTrue(range.inRange(4));
+        JDFIntegerRange.setDefaultDef(0);
+        range = new JDFIntegerRange("0~-1");
+        assertFalse(range.inRange(4));
+        assertFalse(range.inRange(-4));
+        assertTrue(range.inRange(0));
+
+    }
+
 }

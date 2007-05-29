@@ -742,32 +742,27 @@ public class StringUtil
         return true;
     }
     
-    
-    public static int find_last_not_of(String strWork, String s)
+    /**
+     * find the last character in strwork that is not in strNotList
+     * 
+     * @param strWork the string to search
+     * @param strNotList the list of characters to ignore
+     * @return position of the last matching char, -1 if all strWork only contains chars from strNotList
+     */
+    public static int find_last_not_of(String strWork, String strNotList)
     {
-        int iPosition = -1;
-        boolean bIsOf = false;
-        char[] charArray = s.toCharArray();
-        int iLengthOfThis = strWork.length();
-        
-        for(int i = 0; i < iLengthOfThis; i++)
+        if(strWork==null)
+            return -1;
+        if(strNotList==null || strNotList.length()==0)
+            return strWork.length()-1;
+
+        for(int i =strWork.length()-1; i>=0; i--)
         {
-            char cCharOfThis = strWork.charAt(i);
-            for(int j = 0; j < charArray.length; j++)
-            {
-                if(cCharOfThis == charArray[j])
-                {
-                    bIsOf = true;
-                }
-            }
-            if(bIsOf != true)
-            {
-                iPosition = i;
-            }
-            bIsOf = false;
+            if(strNotList.indexOf(strWork.charAt(i))<0)
+                return i;
         }
-        
-        return iPosition;
+
+        return -1;
     }
     
     /**

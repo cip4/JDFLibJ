@@ -1304,6 +1304,21 @@ public class KElementTest extends JDFTestCaseBase
     }
     ///////////////////////////////////////////////////////////////////////////////
 
+    public void testGetChildrenFromList()
+    {
+        XMLDoc doc=new XMLDoc("Foo",null);
+        KElement root=doc.getRoot();
+        KElement a=root.appendElement("a");
+        KElement b=a.appendElement("b");
+        KElement b2=a.appendElement("b:b","s");
+        assertTrue(root.getChildrenFromList(new VString("b"," "), null, false, null).contains(b));
+        assertTrue(root.getChildrenFromList(new VString("b"," "), null, false, null).contains(b2));
+        assertTrue(root.getChildrenFromList(new VString("b:b"," "), null, false, null).contains(b2));
+        assertFalse(root.getChildrenFromList(new VString("b:b"," "), null, false, null).contains(b));
+    }
+    
+    ///////////////////////////////////////////////////////////////////////////////
+
     public void testGetChildWithAttribute()
     {
         XMLDoc doc=new XMLDoc("Foo",null);

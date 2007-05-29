@@ -310,7 +310,17 @@ public class StringUtilTest extends JDFTestCaseBase
         assertFalse(StringUtil.isNumber(s));
     }
 //////////////////////////////////////////////////////////////
-    
+
+    public void testFind_last_not_of()
+    {
+        assertEquals(StringUtil.find_last_not_of("abc", "bcd"), 0);
+        assertEquals(StringUtil.find_last_not_of("abc", "abc"), -1);
+        assertEquals(StringUtil.find_last_not_of("abc", "ac"), 1);
+        assertEquals(StringUtil.find_last_not_of("grün", "הצü"), 3);
+        assertEquals(StringUtil.find_last_not_of("abc", "_"), 2);
+    }
+
+
     public void testFormatDouble()
     {
         double d=0.12345678901234;

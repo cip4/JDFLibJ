@@ -465,6 +465,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         JDFResource rx=n.addResource("ExposedMedia", null, null, null, null, null, null);
         assertEquals(rp.getUnlinkedResources().elementAt(0), rx);
         
+
         n.setVersion(EnumVersion.Version_1_2);
         JDFCustomerInfo ci=n.appendCustomerInfo();
         JDFContact co=ci.appendContact();
@@ -477,9 +478,17 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertEquals(rp.getElement("Contact"), co);
         
         ci.deleteNode();
-        assertEquals("referenced contact accidentally tzapped",rp.getUnlinkedResources().elementAt(0), co);
+        assertEquals("referenced contact accidentally zapped",rp.getUnlinkedResources().elementAt(0), co);
         n.eraseUnlinkedResources();
         assertNull("didn't zapp unlinked co",rp.getElement("Contact"));
+        
+        JDFResource rFoo=n.addResource("FOO:Bar", EnumResourceClass.Handling, null, null, null, "www.foo.com", null);
+        assertEquals(rp.getUnlinkedResources().elementAt(0), rFoo);
+        JDFResourceLink rlFoo=n.linkResource(rFoo, EnumUsage.Output, null);
+        assertNotNull(rlFoo);
+        assertNull(rp.getUnlinkedResources());
+        
+
     }
 
     //////////////////////////////////////////////////////////
@@ -1667,6 +1676,24 @@ public class JDFNodeTest extends JDFTestCaseBase
     }
 
     //////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
+
+    public void testGetMinID()
+    {
+        JDFDoc doc= new JDFDoc("JDF");
+        JDFNode root = doc.getJDFRoot();
+        root.setType(EnumType.ConventionalPrinting);
+        int id=root.getMinID();
+        assertTrue(id<5 && id>0);
+        for(int i=0;i<1000;i++)
+            root.getAuditPool().addModified(null, null);
+        assertEquals(id+1000,root.getMinID());
+        root.setID("ida123456");
+        root.setID("ida123456");
+        assertEquals(123456,root.getMinID());
+        root.setID("ida00000");
+        assertEquals(id+1000,root.getMinID());
+    }
     //////////////////////////////////////////////////////////////
 
     public void testGetMissingLinks()

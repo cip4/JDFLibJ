@@ -153,7 +153,6 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDocUserData;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
@@ -2366,6 +2365,21 @@ public class JDFNode extends JDFElement
             usage=bInput ? EnumUsage.Input : EnumUsage.Output; 
         return addResource(strName,resClass,usage,null,resRoot,nameSpaceURI,null);
     }
+    /**
+     * addResource - add a resource to resroot and link it to this process
+     * utility with the minimal parameter set
+     *
+     * @param strName   the localname of the resource
+     * @param usage     the Usage attribute of the ResourceLink. If null, the resource is not linked
+     * @return JDFResource the new resource
+     * 
+     * @default addResource(name, null, usage, null, null, null,null)
+     */
+    public JDFResource addResource(String strName, EnumUsage usage)    
+    {
+        return addResource(strName,null,usage,null,null,null,null);
+    }
+    
     /**
      * addResource - add a resource to resroot and link it to this process
      *
@@ -6214,23 +6228,24 @@ public class JDFNode extends JDFElement
 
         int iMax = 0;
         final VString vIDNames = new VString("ID SpawnID MergeID NewSpawnID",null);
+        final int idSize = vIDNames.size();
 
-        for (int i = 0; i < v.size(); i++)
+        final int size = v.size();
+        for (int i = 0; i < size; i++)
         {
-            final JDFElement jdfElem = (JDFElement)v.elementAt(i);
+            final KElement jdfElem = v.item(i);
 
-            for (int j = 0; j < vIDNames.size(); j++)
+            for (int j = 0; j < idSize; j++)
             {   
                 // 4 = size of the atr vector
                 // get the rightmost last 4 numerical characters as seed for UniqueID()
 
-                String strID = jdfElem.getAttribute((String)vIDNames.elementAt(j), 
-                        null, JDFConstants.EMPTYSTRING);
-                if (strID.length() > 0)
+                String strID = jdfElem.getAttribute(vIDNames.stringAt(j),null, null);
+                if (strID!=null)
                 {
-                    if (strID.length() > 5)
+                    if (strID.length() > 7)
                     {
-                        strID = strID.substring(strID.length()-5);  // only use the last 5 chars
+                        strID = strID.substring(strID.length()-7);  // only use the last 5 chars
                     }
 
                     final int pos = StringUtil.find_last_not_of(strID, "0123456789");
@@ -6242,6 +6257,7 @@ public class JDFNode extends JDFElement
 
                     strID = strID.substring(pos + 1);
                     strID = strID.trim();
+                    final int len=strID.length();
 
                     if (strID.equals(JDFConstants.EMPTYSTRING))
                     {
@@ -6249,15 +6265,14 @@ public class JDFNode extends JDFElement
                     }
 
                     int iPos = 0;
-
-                    while (strID.charAt(iPos) == '0')
+                    while (iPos<len && strID.charAt(iPos) == '0')
                     {
                         iPos++;
                     }
 
                     if (iPos > 0)
                     {
-                        strID = strID.substring(strID.length() - pos, strID.length()); //.rightStr(-iPos);
+                        strID = strID.substring(iPos); 
                     }
 
                     if (strID.equals(JDFConstants.EMPTYSTRING))
@@ -6265,12 +6280,10 @@ public class JDFNode extends JDFElement
                         continue;
                     }
 
-                    //strID.strzapp(L"0",true,false); // otherwise int returns the octal value!
-
                     int iS = new Integer(strID).intValue();
-                    if (iS > 10000) // not in the simple ordering
+                    if (iS > 1000000) // not in the simple ordering
                     {
-                        iS = iS % 10000;
+                        iS = iS % 1000000;
                     }
 
                     iMax = (iS > iMax) ? iS : iMax;

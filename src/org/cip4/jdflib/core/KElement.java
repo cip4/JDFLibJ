@@ -4437,13 +4437,10 @@ public class KElement extends ElementNSImpl
         return newChild;
     }
 
-    //************************** end of methods needed in JDFResource **********
-    ////////////////////////////////////////////////////////////////////////////
-    //************************** start of methods needed in JDFSurface *********	
-    /**
+      /**
      * get a vector of all Children that match the strings defined in nodeNames
      * 
-     * @param  nodeNames    list of node names that fit
+     * @param  nodeNames    list of node names that fit, both local and qualified node names are checked
      * 
      * @return VElement     the found child elements
      */
@@ -4455,7 +4452,7 @@ public class KElement extends ElementNSImpl
 
         while (kElem != null)
         {
-            if (nodeNames.contains(kElem.getLocalName()))
+            if (nodeNames.contains(kElem.getLocalName())|| nodeNames.contains(kElem.getNodeName()))
             {
                 if(map==null || kElem.includesAttributes(map,true))
                 {
