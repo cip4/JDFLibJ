@@ -230,6 +230,8 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
             }
 
             public static final EnumType R2_generic = new EnumType("R2-generic");
+            public static final EnumType S1_generic = new EnumType("S1-generic");
+            public static final EnumType S_generic = new EnumType("S-generic");
             public static final EnumType R2m_DIN = new EnumType("R2m-DIN");
             public static final EnumType R2m_ISO = new EnumType("R2m-ISO");
             public static final EnumType R2m_MIB = new EnumType("R2m-MIB");

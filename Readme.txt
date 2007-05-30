@@ -1,3 +1,18 @@
+Label JDFLIBJ_2.1.2BLD43x (xx.05.2007)
+
+Changes due to schema fixes:
+
+JDFAutoDevCaps : DEVCAPREF is EnumAttributeType.IDREFS, setDevCapRef() and getDevCapRef() use VString
+JDFAutoDevice  : ICSVERSIONS is EnumAttributeType.NMTOKENS, setICSVersions() and getICSVersions() use VString
+JDFAutoEmboss  : spelling fix EnumEmbossingType.BlindEmbossing, added EnumEmbossingType.Braille
+JDFAutoLayoutElement : spelling fix EnumElementType.Auxiliary
+JDFAutoMedia         : added EnumHoleType.S1_generic, EnumHoleType.S_generic
+JDFAutoModulePhase   : attribute DEVICESTATUS ist optional, attribute START ist optional
+JDFAutoPhaseTime     : attribute END is optional
+JDFAutoPlasticCombBindingParams : added EnumType.S1_generic, EnumType.S_generic
+JDFAutoResourceAudit : added optional attribute NODESTATUS
+___________________________________________________________
+
 
 Label JDFLIBJ_2.1.2BLD430 (10.05.2007)
 
@@ -83,7 +98,6 @@ ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD430) && !lbtype(JDFLIBJ_2.1.3BLD420)
 .\util\MyArgs.java@@\main\24
 .\util\UrlUtil.java@@\main\6
 ___________________________________________________________
-
 
 
 Label JDFLIBJ_2.1.2BLD421 (13.04.2007)

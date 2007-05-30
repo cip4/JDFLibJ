@@ -254,7 +254,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
                 return iterator(EnumElementType.class);
             }
 
-            public static final EnumElementType Auxilliary = new EnumElementType("Auxilliary");
+            public static final EnumElementType Auxiliary = new EnumElementType("Auxiliary");
             public static final EnumElementType Barcode = new EnumElementType("Barcode");
             public static final EnumElementType Composed = new EnumElementType("Composed");
             public static final EnumElementType Document = new EnumElementType("Document");

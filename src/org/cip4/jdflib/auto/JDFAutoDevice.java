@@ -105,7 +105,7 @@ public abstract class JDFAutoDevice extends JDFResource
         atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVICETYPE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable[3] = new AtrInfoTable(AttributeName.DIRECTORY, 0x33333331, AttributeInfo.EnumAttributeType.URL, null, null);
         atrInfoTable[4] = new AtrInfoTable(AttributeName.FRIENDLYNAME, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.ICSVERSIONS, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.ICSVERSIONS, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
         atrInfoTable[6] = new AtrInfoTable(AttributeName.JDFERRORURL, 0x33333311, AttributeInfo.EnumAttributeType.URL, null, null);
         atrInfoTable[7] = new AtrInfoTable(AttributeName.JDFINPUTURL, 0x33333311, AttributeInfo.EnumAttributeType.URL, null, null);
         atrInfoTable[8] = new AtrInfoTable(AttributeName.JDFOUTPUTURL, 0x33333311, AttributeInfo.EnumAttributeType.URL, null, null);
@@ -332,18 +332,21 @@ public abstract class JDFAutoDevice extends JDFResource
           * (36) set attribute ICSVersions
           * @param value: the value to set the attribute to
           */
-        public void setICSVersions(String value)
+        public void setICSVersions(VString value)
         {
             setAttribute(AttributeName.ICSVERSIONS, value, null);
         }
 
         /**
-          * (23) get String attribute ICSVersions
-          * @return the value of the attribute
+          * (21) get VString attribute ICSVersions
+          * @return VString the value of the attribute
           */
-        public String getICSVersions()
+        public VString getICSVersions()
         {
-            return getAttribute(AttributeName.ICSVERSIONS, null, JDFConstants.EMPTYSTRING);
+            VString vStrAttrib = new VString();
+            String  s = getAttribute(AttributeName.ICSVERSIONS, null, JDFConstants.EMPTYSTRING);
+            vStrAttrib.setAllStrings(s, " ");
+            return vStrAttrib;
         }
 
         

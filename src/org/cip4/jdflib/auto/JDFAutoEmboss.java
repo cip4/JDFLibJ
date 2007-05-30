@@ -295,7 +295,8 @@ public abstract class JDFAutoEmboss extends JDFElement
                 return iterator(EnumEmbossingType.class);
             }
 
-            public static final EnumEmbossingType BlinedEmbossing = new EnumEmbossingType("BlinedEmbossing");
+            public static final EnumEmbossingType BlindEmbossing = new EnumEmbossingType("BlindEmbossing");
+            public static final EnumEmbossingType Braille = new EnumEmbossingType("Braille");
             public static final EnumEmbossingType EmbossedFinish = new EnumEmbossingType("EmbossedFinish");
             public static final EnumEmbossingType FoilEmbossing = new EnumEmbossingType("FoilEmbossing");
             public static final EnumEmbossingType FoilStamping = new EnumEmbossingType("FoilStamping");

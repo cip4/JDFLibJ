@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
     /*
     *****************************************************************************
@@ -97,11 +98,12 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTENTSMODIFIED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.REASON, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumReason.getEnum(0), "ProcessResult");
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.NODESTATUS, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.REASON, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumReason.getEnum(0), "ProcessResult");
     }
     
     protected AttributeInfo getTheAttributeInfo()
@@ -110,10 +112,11 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
     }
 
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
     static
     {
         elemInfoTable[0] = new ElemInfoTable(ElementName.MISDETAILS, 0x66666111);
+        elemInfoTable[1] = new ElemInfoTable(ElementName.PART, 0x33333111);
     }
     
     protected ElementInfo getTheElementInfo()
@@ -246,6 +249,28 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 
         
         /* ---------------------------------------------------------------------
+        Methods for Attribute NodeStatus
+        --------------------------------------------------------------------- */
+        /**
+          * (5) set attribute NodeStatus
+          * @param enumVar: the enumVar to set the attribute to
+          */
+        public void setNodeStatus(EnumNodeStatus enumVar)
+        {
+            setAttribute(AttributeName.NODESTATUS, enumVar.getName(), null);
+        }
+
+        /**
+          * (9) get attribute NodeStatus
+          * @return the value of the attribute
+          */
+        public EnumNodeStatus getNodeStatus()
+        {
+            return EnumNodeStatus.getEnum(getAttribute(AttributeName.NODESTATUS, null, null));
+        }
+
+        
+        /* ---------------------------------------------------------------------
         Methods for Attribute Reason
         --------------------------------------------------------------------- */
         /**
@@ -295,6 +320,34 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
     public JDFMISDetails appendMISDetails() throws JDFException
     {
         return (JDFMISDetails) appendElementN(ElementName.MISDETAILS, 1, null);
+    }
+
+    /** (26) getCreatePart
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFPart the element
+     */
+    public JDFPart getCreatePart(int iSkip)
+    {
+        return (JDFPart)getCreateElement_KElement(ElementName.PART, null, iSkip);
+    }
+
+    /**
+     * (27) const get element Part
+     * @param iSkip number of elements to skip
+     * @return JDFPart the element
+     * default is getPart(0)     */
+    public JDFPart getPart(int iSkip)
+    {
+        return (JDFPart) getElement(ElementName.PART, null, iSkip);
+    }
+
+    /**
+     * (30) append element Part
+     */
+    public JDFPart appendPart() throws JDFException
+    {
+        return (JDFPart) appendElement(ElementName.PART, null);
     }
 
 }// end namespace JDF

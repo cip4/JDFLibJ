@@ -281,6 +281,8 @@ public abstract class JDFAutoMedia extends JDFResource
             }
 
             public static final EnumHoleType None = new EnumHoleType("None");
+            public static final EnumHoleType S1_generic = new EnumHoleType("S1-generic");
+            public static final EnumHoleType S_generic = new EnumHoleType("S-generic");
             public static final EnumHoleType R2_generic = new EnumHoleType("R2-generic");
             public static final EnumHoleType R2m_DIN = new EnumHoleType("R2m-DIN");
             public static final EnumHoleType R2m_ISO = new EnumHoleType("R2m-ISO");

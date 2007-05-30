@@ -103,7 +103,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
     private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.END, 0x22222222, AttributeInfo.EnumAttributeType.dateTime, null, null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.END, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
         atrInfoTable[1] = new AtrInfoTable(AttributeName.START, 0x22222222, AttributeInfo.EnumAttributeType.dateTime, null, null);
         atrInfoTable[2] = new AtrInfoTable(AttributeName.STATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
         atrInfoTable[3] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);

@@ -108,7 +108,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.AVAILABILITY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumAvailability.getEnum(0), "Installed");
         atrInfoTable[1] = new AtrInfoTable(AttributeName.CONTEXT, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumContext.getEnum(0), "Resource");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVCAPREF, 0x33333111, AttributeInfo.EnumAttributeType.IDREF, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVCAPREF, 0x33333111, AttributeInfo.EnumAttributeType.IDREFS, null, null);
         atrInfoTable[3] = new AtrInfoTable(AttributeName.DEVNS, 0x33333331, AttributeInfo.EnumAttributeType.URI, null, "http://www.CIP4.org/JDFSchema_1_1");
         atrInfoTable[4] = new AtrInfoTable(AttributeName.ID, 0x33333311, AttributeInfo.EnumAttributeType.ID, null, null);
         atrInfoTable[5] = new AtrInfoTable(AttributeName.LINKUSAGE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, JDFResourceLink.EnumUsage.getEnum(0), null);
@@ -342,18 +342,21 @@ public abstract class JDFAutoDevCaps extends JDFElement
           * (36) set attribute DevCapRef
           * @param value: the value to set the attribute to
           */
-        public void setDevCapRef(String value)
+        public void setDevCapRef(VString value)
         {
             setAttribute(AttributeName.DEVCAPREF, value, null);
         }
 
         /**
-          * (23) get String attribute DevCapRef
-          * @return the value of the attribute
+          * (21) get VString attribute DevCapRef
+          * @return VString the value of the attribute
           */
-        public String getDevCapRef()
+        public VString getDevCapRef()
         {
-            return getAttribute(AttributeName.DEVCAPREF, null, JDFConstants.EMPTYSTRING);
+            VString vStrAttrib = new VString();
+            String  s = getAttribute(AttributeName.DEVCAPREF, null, JDFConstants.EMPTYSTRING);
+            vStrAttrib.setAllStrings(s, " ");
+            return vStrAttrib;
         }
 
         
