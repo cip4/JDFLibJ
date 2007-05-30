@@ -94,7 +94,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
@@ -117,7 +116,6 @@ import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.JDFProcessRun;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.util.JDFDate;
-import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.StringUtil;
 
 /**

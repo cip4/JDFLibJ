@@ -475,8 +475,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
         for(int i=0;i<2;i++)
         {
             JDFLayout lo2=(JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "sh"+i);
-            JDFConventionalPrintingParams cpp2=(JDFConventionalPrintingParams) cpp.addPartition(EnumPartIDKey.SheetName, "sh"+i);
-            JDFComponent comp2=(JDFComponent) comp.addPartition(EnumPartIDKey.SheetName, "sh"+i);
+            cpp.addPartition(EnumPartIDKey.SheetName, "sh"+i);
+            comp.addPartition(EnumPartIDKey.SheetName, "sh"+i);
             lo2.addPartition(EnumPartIDKey.Side, EnumSide.Front);
             lo2.addPartition(EnumPartIDKey.Side, EnumSide.Back);    
             JDFNodeInfo ni2= l==0 ? (JDFNodeInfo) ni.addPartition(EnumPartIDKey.SheetName, "sh"+i) : ni; 

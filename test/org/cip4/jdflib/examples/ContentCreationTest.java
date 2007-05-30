@@ -9,30 +9,19 @@ import java.io.File;
 
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoLayoutElement.EnumElementType;
-import org.cip4.jdflib.auto.JDFAutoPosition.EnumOrientation;
-import org.cip4.jdflib.auto.JDFAutoStripMark.EnumMarkSide;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.datatypes.JDFRectangle;
-import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
-import org.cip4.jdflib.resource.JDFStrippingParams;
-import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.devicecapability.JDFActionPool;
-import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;
 import org.cip4.jdflib.resource.process.JDFLayoutElementPart;
 import org.cip4.jdflib.resource.process.JDFLayoutElementProductionParams;
-import org.cip4.jdflib.resource.process.JDFMedia;
-import org.cip4.jdflib.resource.process.JDFPosition;
 import org.cip4.jdflib.resource.process.JDFRunList;
-import org.cip4.jdflib.resource.process.JDFStripMark;
 import org.cip4.jdflib.util.StatusUtil;
 
 

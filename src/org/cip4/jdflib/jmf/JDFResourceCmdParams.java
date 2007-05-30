@@ -301,13 +301,16 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
                 continue;
 
             final boolean isIncremental = (getUpdateMethod () == EnumUpdateMethod.Incremental);
-            double dAmount = -1.0;
-            if (hasAttribute (AttributeName.PRODUCTIONAMOUNT))
-            {
-                dAmount = getProductionAmount ();  // TODO: set ProductionAmount
-            }
-            final String strProcessUsage = getProcessUsage();    // TODO: use ProcessUsage
-            final JDFElement.EnumNodeStatus status = getStatus(); // TODO: set Status
+            
+// commented out, statements have no effect            
+//            double dAmount = -1.0;
+//            if (hasAttribute (AttributeName.PRODUCTIONAMOUNT))
+//            {
+//                dAmount = getProductionAmount ();  // TODO: set ProductionAmount
+//            }
+//            final String strProcessUsage = getProcessUsage();    // TODO: use ProcessUsage
+//            final JDFElement.EnumNodeStatus status = getStatus(); // TODO: set Status
+            
             final VJDFAttributeMap vamParts = getPartMapVector();            
             JDFResource resTarget = getTargetResource(node); 
             if (resTarget == null)
