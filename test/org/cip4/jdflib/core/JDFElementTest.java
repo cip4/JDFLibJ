@@ -102,10 +102,12 @@ import org.cip4.jdflib.node.JDFAncestor;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFSpawned;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
+import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFPhaseTime;
+import org.cip4.jdflib.resource.JDFProcessRun;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
@@ -275,7 +277,23 @@ public class JDFElementTest extends TestCase
         assertFalse(xmpl.getHRefs(null,true,true).contains("id1"));          
     }
     
-////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+    
+    public void testFixVersion()
+    {
+        JDFDoc d=new JDFDoc("JDF");
+        JDFNode n=d.getJDFRoot();
+        n.setType(EnumType.Bundling);
+        JDFProcessRun pr = n.getAuditPool().addProcessRun(EnumNodeStatus.Completed, null, null);
+        pr.setAttribute("Duration", "PT90S", null);
+        assertEquals(pr.getAttribute("Duration"), "PT90S");
+        n.setAttribute("foo3", "a~.doc");
+        n.fixVersion(null);
+        assertEquals(pr.getAttribute("Duration"), "PT1M30S");
+        assertEquals(n.getAttribute("foo3"), "a~.doc");
+
+    }
+    ////////////////////////////////////////////////////////////////////
     
     public void testDefaultVersion()
     {

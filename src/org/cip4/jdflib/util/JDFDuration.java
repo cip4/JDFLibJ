@@ -1,3 +1,73 @@
+/*
+ *
+ * The CIP4 Software License, Version 1.0
+ *
+ *
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer. 
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
+ *
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:  
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of 
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
+ *
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written 
+ *    permission, please contact info@cip4.org.
+ *
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
+ *
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
+ *
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration 
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software 
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
+ *  
+ * For more information on The International Cooperation for the 
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
+ *  
+ * 
+ */
 /**
  * ==========================================================================
  * class JDFDate extends Date
@@ -8,22 +78,20 @@
  * independent of the default timezone
  * ==========================================================================
  * COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2003. ALL RIGHTS RESERVED 
-**/
+ **/
 
 package org.cip4.jdflib.util;
 
 
 import java.util.zip.DataFormatException;
 
-import org.cip4.jdflib.core.JDFConstants;
 
-
-public class JDFDuration implements Duration
+public class JDFDuration 
 {
     private static final long serialVersionUID = 1L;
 
     private double m_lDuration                     = 0;                            // in seconds
-    
+
     // private static final String REGEX_DURATION_RESTRICTED is a RegularExpression
     // for a validation of incoming duration Strings, where is important that 
     // values of seconds, minutes do not exceed 59, hours do not exceed 23...
@@ -41,23 +109,23 @@ public class JDFDuration implements Duration
     // min   (0?[0-9]|[1-5][0-9])               --  0(00) - 59 are valid seconds
     // sec   (0?[0-9]|[1-5][0-9])               --  0(00) - 59 are valid minutes
     //regual expressions to validate incoming duration Strings
-    
-     
+
+
     //private static final String REGEX_DURATION_RESTRICTED = "[P]((0?[0-9]|[1-9][0-9])[Y])?((0?[0-9]|1[01])[M])?((0?[0-9]|[12][0-9]|3[0])[D])?" +
     //                                             "([T]((0?[0-9]|1[0-9]|2[0123])[H])?((0?[0-9]|[1-5][0-9])[M])?((0?[0-9]|[1-5][0-9])[S])?)?";
-    
-    
+
+
     // private static final String REGEX_DURATION is a RegularExpression
     // for a validation of incoming duration Strings
     // Formatted string looks like "PyYmMdDThHmMsS"
     // y,m,d,h,m,s are any int values. 
     // E.g. expressions "P60D" that is equal 60 days or "PT68H" that is equal 68hours are allowed
 
-    
+
     private static final String REGEX_DURATION = "[P](((\\d)*)[Y])?((\\d)*[M])?((\\d)*[D])?" +
-                                                 "([T]((\\d)*[H])?((\\d)*[M])?((\\d)*([.](\\d)+)?[S])?)?";
-    
-    
+    "([T]((\\d)*[H])?((\\d)*[M])?((\\d)*([.](\\d)+)?[S])?)?";
+
+
     /**
      * Allocates a <code>JDFDuration</code> object and initializes it with 0
      */
@@ -65,7 +133,7 @@ public class JDFDuration implements Duration
     {
         m_lDuration = 0;
     }
-    
+
     /**
      * Makes a copy of the<code>JDFDuration</code> object 'd'
      */
@@ -73,7 +141,7 @@ public class JDFDuration implements Duration
     {
         m_lDuration = d.m_lDuration;
     }
-    
+
     /**
      * Allocates a <code>JDFDuration</code> object and initializes it with 's'
      * @param s duration in seconds
@@ -83,13 +151,14 @@ public class JDFDuration implements Duration
     {
         m_lDuration = s;
     }
-    
+
     /**
      * Allocates a <code>JDFDuration</code> object and initializes it with a
      * value of <code>strDuration</code>, represented as a formatted duration string. <br>
      * Duration examples: 
      * <li>"P1Y2M3DT10H30M"</li>
      * <li>"PM8T12M"</li>
+     * Durations with overflows, e.g. P13M (13 Months) are also handled and correctly output, in this case P1Y1M
      *
      * @param strDuration - formatted duration
      * @throws DataFormatException if strDuration is not a valid string 
@@ -100,16 +169,16 @@ public class JDFDuration implements Duration
         init(strDuration);
     }
 
- /**
-  * add seconds to a duration
-  * @param seconds number of seconds to add
-  */   
+    /**
+     * add seconds to a duration
+     * @param seconds number of seconds to add
+     */   
     public double addSeconds(double seconds)
     {
         m_lDuration+=seconds;
         return m_lDuration;
     }
-    
+
     /** for debug purposes
      * 
      * @return  Object informations
@@ -119,7 +188,7 @@ public class JDFDuration implements Duration
         return "JDFDuration[ m_lDuration=(" + m_lDuration + ")  --> " + super.toString() + " ]";
     }
 
-   
+
     /**
      * Method init handles Strings of type: <br>
      * <li>"P1Y2M3DT10H30M"</li>
@@ -137,7 +206,7 @@ public class JDFDuration implements Duration
 
         boolean bComplete      = strDuration.matches(REGEX_DURATION);
         m_lDuration            = 0;
-        
+
         if (bComplete)
         {
             bComplete=setDurationISO(strDuration);
@@ -149,7 +218,7 @@ public class JDFDuration implements Duration
         }
     }
 
-    
+
     /**
      * Format and return the duration set by 'setDuration(int i)' or
      * 'setDurationString(String a_aDuration)' as an ISO conforming String.<br>
@@ -167,7 +236,7 @@ public class JDFDuration implements Duration
         int temp = (int)m_lDuration;
         StringBuffer iso = new StringBuffer(20);
         iso.append("P"); //P is the indicator that 'iso' is a duration
-        
+
         i = (int)m_lDuration/(60*60*24*365);
         if(i!=0) 
         {
@@ -188,7 +257,7 @@ public class JDFDuration implements Duration
             iso.append(i).append("D"); // string with days
         }
         iso.append("T");
-        
+
         i=(int)m_lDuration%(60*60*24);
         i=i/(60*60);
         if(i!=0) 
@@ -211,7 +280,7 @@ public class JDFDuration implements Duration
         double deltaS = m_lDuration-((int)(m_lDuration));
         if(deltaS>0)
         {
-         
+
             String s=StringUtil.formatDouble(deltaS);
             if(!bSec)
                 iso.append("0"); // add missing 0 
@@ -220,15 +289,15 @@ public class JDFDuration implements Duration
         }
         if(bSec)
             iso.append("S");
-        
+
         int lastIndex=iso.length()-1;
         if (iso.charAt(lastIndex)=='T')
             iso.deleteCharAt(lastIndex);
-        
+
         return iso.toString();
     }
-    
-            
+
+
     /**
      * Set a duration. Durations are not bound to time or date and can be set independently
      * 
@@ -240,10 +309,9 @@ public class JDFDuration implements Duration
     public boolean setDurationISO(String a_aDuration)
     {
         boolean result      = true;
-        
-        String strPeriod    = JDFConstants.EMPTYSTRING;
-        String strDate      = JDFConstants.EMPTYSTRING;
-        String strTime      = JDFConstants.EMPTYSTRING;
+
+        String strDate      = null;
+        String strTime      = null;
         int iYears          = 0;
         int iMonths         = 0;
         int iDays           = 0;
@@ -253,11 +321,11 @@ public class JDFDuration implements Duration
         int iduration       = 0;
         int iTimeLastPos    = 0;
         int iDateLastPos    = 0;
-        
+
         int iPPos = a_aDuration.indexOf("P");
-        
-        strPeriod = a_aDuration.substring(++iPPos, a_aDuration.length());
-            
+
+        String strPeriod = a_aDuration.substring(++iPPos, a_aDuration.length());
+
         // devide periodInstant into date and time part, which are separated by 'T'
         int iTPos = strPeriod.indexOf("T");
 
@@ -280,7 +348,7 @@ public class JDFDuration implements Duration
         double fracSecs=0;
         try
         {
-            if (strDate.length() > 0)
+            if (strDate!=null)
             {
                 int iYPos = strDate.indexOf("Y");
                 if (iYPos > 0)
@@ -294,7 +362,8 @@ public class JDFDuration implements Duration
                 if (iMPos > 0)
                 {
                     iMonths = Integer.parseInt(strDate.substring(iDateLastPos, iMPos));
-                    iduration += iMonths * 30 * 24 * 60 * 60;
+                    int nYears=iMonths/12;
+                    iduration += (iMonths * 30 +nYears * 5)* 24 * 60 * 60 ; // add 5 days for each complete year (360 --> 365)
                     iDateLastPos = ++iMPos;
                 }
 
@@ -306,7 +375,7 @@ public class JDFDuration implements Duration
                 }
             }
 
-            if (strTime.length() > 0)
+            if (strTime!=null)
             {
                 int iHPos = strTime.indexOf("H");
                 if (iHPos > 0)
@@ -338,7 +407,7 @@ public class JDFDuration implements Duration
                             fracSecs = Double.parseDouble(sMilli);
                         }
                         iduration += iSeconds;
-                        
+
                     }
                     else
                     {
@@ -347,7 +416,7 @@ public class JDFDuration implements Duration
                     }
                 }
             }
-            
+
             m_lDuration = iduration;
             if(fracSecs!=0)
                 m_lDuration+=fracSecs;
@@ -356,10 +425,10 @@ public class JDFDuration implements Duration
         {
             result = false;
         }
-        
+
         return result;
     }
-    
+
     /**
      * setDuration: sets a duration for <code>this</code> in seconds. 
      * This duration is used in multiple classes of the JDF (e.g. Heating time).  
@@ -370,8 +439,8 @@ public class JDFDuration implements Duration
     {
         m_lDuration = (i > 0 ? i : 0);
     }
-    
-    
+
+
     /**
      * the duration in seconds
      * 
@@ -381,7 +450,7 @@ public class JDFDuration implements Duration
     {
         return (int)m_lDuration;
     }
-    
+
     /**
      * isLess - tests if the duration of this JDFDuration is longer than
      * the duration of the specified JDFDuration. 
@@ -390,12 +459,12 @@ public class JDFDuration implements Duration
      * @return boolean - true if the duration of this JDFDuration is longer than
      * the duration of the JDFDuration 'x'. 
      */
-    public boolean isLonger(Duration x)
+    public boolean isLonger(JDFDuration x)
     {
         return this.getDuration() > x.getDuration();
     }
-    
-       
+
+
     /**
      * isShorter - tests if the duration of this JDFDuration is less than
      * the duration of the specified JDFDuration. 
@@ -404,31 +473,31 @@ public class JDFDuration implements Duration
      * @return boolean - true if the duration of this JDFDuration is shorter than
      * the duration of the JDFDuration 'x'. 
      */
-    public boolean isShorter(Duration x)
+    public boolean isShorter(JDFDuration x)
     {
         return this.getDuration() < x.getDuration();
     }
-    
-  
-   /**
-    * Compares two JDFDuration objects for equality.<br>
-    * The result is <code>true</code> if and only if the argument is 
-    * not <code>null</code> and is a <code>JDFDuration</code> object that 
-    * represents the same duration, as this object.
-    * <p>
-    */ 
+
+
+    /**
+     * Compares two JDFDuration objects for equality.<br>
+     * The result is <code>true</code> if and only if the argument is 
+     * not <code>null</code> and is a <code>JDFDuration</code> object that 
+     * represents the same duration, as this object.
+     * <p>
+     */ 
     public boolean equals(Object other)
     {
         if (this == other)
             return true;
         if (other == null)
             return false;
-        if (other.getClass() != getClass())
+        if (!(other instanceof JDFDuration))
             return false;
 
         return (this.m_lDuration == ((JDFDuration) other).m_lDuration);
     }
-    
+
     /**
      * hashCode: complements equals() to fulfill the equals/hashCode contract
      */
@@ -436,6 +505,6 @@ public class JDFDuration implements Duration
     {
         return HashUtil.hashCode(0, m_lDuration);
     }
-    
-    
+
+
 }

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -128,8 +128,7 @@ public class AttributeInfo
     protected AttributeInfo(AtrInfoTable[] attrInfo_own)
     {
         // fill table with the attributes specific to this element type (if any)
-        updateReplace(attrInfo_own);
-        
+        updateReplace(attrInfo_own);        
         // now all schema-based knowledge should be in the attribute info table
     }
     
@@ -527,11 +526,8 @@ public class AttributeInfo
 		 * @return  the enum object if enumName is valid. Otherwise null
 		 */
 		public static EnumAttributeType getEnum(String enumName)
-		{
-			
-			EnumAttributeType eat = (EnumAttributeType) getEnum(
-					EnumAttributeType.class,
-					enumName);
+		{			
+			EnumAttributeType eat = (EnumAttributeType) getEnum(EnumAttributeType.class,enumName);
 			return (eat == null) ? EnumAttributeType.Any : eat;
 		}
 		
@@ -541,9 +537,7 @@ public class AttributeInfo
 		 */
 		public static EnumAttributeType getEnum(int enumValue)
 		{
-			return (EnumAttributeType) getEnum(
-					EnumAttributeType.class,
-					enumValue);
+			return (EnumAttributeType) getEnum(EnumAttributeType.class,enumValue);
 		}
 		
 		/**
@@ -562,13 +556,36 @@ public class AttributeInfo
 			return getEnumList(EnumAttributeType.class);
 		}
 		
-		/**
-		 * @return an iterator over the enum objects
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumAttributeType.class);
-		}
+        /**
+         * @return an iterator over the enum objects
+         */
+        public static Iterator iterator()
+        {
+            return iterator(EnumAttributeType.class);
+        }
+        
+        /**
+         * @return true if test is a range data type
+         */
+        public static boolean isRange(EnumAttributeType test)
+        {
+            return EnumAttributeType.DateTimeRange.equals(test) ||
+            EnumAttributeType.DateTimeRangeList.equals(test) ||
+            EnumAttributeType.DurationRange.equals(test) ||
+            EnumAttributeType.DurationRangeList.equals(test) ||
+            EnumAttributeType.IntegerRange.equals(test) ||
+            EnumAttributeType.IntegerRangeList.equals(test) ||
+            EnumAttributeType.NameRange.equals(test) ||
+            EnumAttributeType.NameRangeList.equals(test) ||
+            EnumAttributeType.NumberRange.equals(test) ||
+            EnumAttributeType.NumberRangeList.equals(test) ||
+            EnumAttributeType.RectangleRange.equals(test) ||
+            EnumAttributeType.RectangleRangeList.equals(test) ||
+            EnumAttributeType.ShapeRange.equals(test) ||
+            EnumAttributeType.ShapeRangeList.equals(test) ||
+            EnumAttributeType.XYPairRange.equals(test) ||
+            EnumAttributeType.XYPairRangeList.equals(test);
+        }
 			
 		
 		public static final EnumAttributeType Any                   = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_ANY);

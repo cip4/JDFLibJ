@@ -87,7 +87,7 @@ public class JDFDurationTest extends TestCase
     public final void testJDFDurationString() throws Exception
     {
         JDFDuration d = new JDFDuration(" PT5M ");
-        assertEquals("Bad Constructor", d.getDurationISO(),"PT5M");
+        assertEquals(  d.getDurationISO(),"PT5M");
         try
         {
             new JDFDuration("PT5M90.95aS");
@@ -96,7 +96,21 @@ public class JDFDurationTest extends TestCase
         catch (Exception e) {
             // nop
         }
+        d = new JDFDuration("P3M");
+        assertEquals(d.getDurationISO(),"P3M");
+        assertEquals(d.getDuration(),3*30*24*60*60);
+        d = new JDFDuration("P3MT4M");
+        assertEquals(d.getDurationISO(),"P3MT4M");
+        assertEquals(d.getDuration(),3*30*24*60*60 + 4*60);
+        d = new JDFDuration("P13M");
+        assertEquals(d.getDurationISO(),"P1Y1M");
 
+        d = new JDFDuration("P365D");
+        assertEquals(d.getDurationISO(),"P1Y");
+        d = new JDFDuration("P395D");
+        assertEquals(d.getDurationISO(),"P1Y1M");
+        d = new JDFDuration("PT3600S");
+        assertEquals(d.getDurationISO(),"PT1H");
     }
     public final void testFractions() throws Exception
     {
@@ -110,5 +124,20 @@ public class JDFDurationTest extends TestCase
         final JDFDuration duration = new JDFDuration();
         assertEquals(duration.addSeconds(5.234),5.234,0.0001);
         assertEquals(duration.getDurationISO(),"PT5.234S");       
+    }
+    
+    public final void testSetDuration() throws Exception
+    {
+        final JDFDuration duration = new JDFDuration();
+        duration.setDuration(65);
+        assertEquals(duration.getDurationISO(),"PT1M5S");       
+        duration.setDuration(60*60*24*63);
+        assertEquals(duration.getDurationISO(),"P2M3D");     
+        duration.addSeconds(65.5);
+        assertEquals(duration.getDurationISO(),"P2M3DT1M5.5S");     
+        duration.addSeconds(60*60*3);
+        assertEquals(duration.getDurationISO(),"P2M3DT3H1M5.5S");     
+        duration.addSeconds(60*60*3);
+        assertEquals(duration.getDurationISO(),"P2M3DT6H1M5.5S");     
     }
 }

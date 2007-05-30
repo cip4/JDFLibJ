@@ -106,7 +106,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
-import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFDateTimeRangeList;
 import org.cip4.jdflib.datatypes.JDFDurationRangeList;
@@ -1136,7 +1135,8 @@ public class JDFElement extends KElement
      * @param version version the resulting element should correspond to
      * @return true if successful
      */
-    public boolean fixVersion(EnumVersion version){
+    public boolean fixVersion(EnumVersion version)
+    {
         boolean bRet=true;
         VElement v=getChildElementVector_KElement(null,null,null,true,-1); // do not follow refelements
         final int size = v.size();
@@ -1157,10 +1157,13 @@ public class JDFElement extends KElement
         {
             String key = (String)it.next();
             String value = m.get(key);
-            
-            if(value.indexOf(JDFConstants.TILDE)>=0){
-                try{
-                    JDFNumberRangeList nrl=new JDFNumberRangeList(value);
+            EnumAttributeType attType=ai.getAttributeType(key);
+
+            if(EnumAttributeType.isRange(attType))
+            {
+                try
+                {
+                    JDFNameRangeList nrl=new JDFNameRangeList(value);
                     setAttribute(key,nrl,null);
                 }catch(JDFException e){
                     // do nothing
@@ -1168,6 +1171,17 @@ public class JDFElement extends KElement
                     // do nothing
                 }
             } 
+            else if(EnumAttributeType.duration.equals(attType))
+            {
+                try
+                {
+                    setAttribute(key, new JDFDuration(value).getDurationISO());
+                }
+                catch(DataFormatException ex)
+                {
+                    bRet=false;
+                }
+            }
             if(bFixVersionIDFix && value.length()>0 && StringUtils.isNumeric(value.substring(0,1)))
             {
                 EnumAttributeType atType=ai.getAttributeType(key);
