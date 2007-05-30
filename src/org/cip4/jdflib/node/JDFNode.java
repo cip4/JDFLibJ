@@ -2932,7 +2932,7 @@ public class JDFNode extends JDFElement
      * else recurse down the tree and include this, i.e. return a complete tree starting at this
      * 
      * @return VElement of JDF nodes
-     * @default getvJDFNode(null, JDFNode.EnumActivation.Unknown, false)
+     * @default getvJDFNode(null, null, false)
      */
     public VElement getvJDFNode(String task, EnumActivation active, boolean bDirect)
     {
