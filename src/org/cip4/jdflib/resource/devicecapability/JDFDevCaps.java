@@ -97,7 +97,6 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.jmf.JDFMessage;
@@ -234,14 +233,6 @@ public class JDFDevCaps extends JDFAutoDevCaps
         return dcp;
     }
 
-    /**
-     * get IDREF attribute <code>DevCapRef</code>
-     * @return String the value of the attribute
-     */
-    public String getDevCapRef()
-    {
-        return getAttribute(AttributeName.DEVCAPREF, null, JDFConstants.EMPTYSTRING);
-    }
 
     /**
      * set attribute <code>ModuleRefs</code>
@@ -921,8 +912,7 @@ public class JDFDevCaps extends JDFAutoDevCaps
                 vs.add(AttributeName.DEVCAPREF);
                 return vs;
             }
-            String idRef = getDevCapRef();
-            VString idRefs=StringUtil.tokenize(idRef, " ", false);
+            VString idRefs=getDevCapRef();
             for (int i=0; i < idRefs.size(); i++) 
             {
                 JDFDevCap devCap = devCapPool.getDevCap(idRefs.stringAt(i));
@@ -935,9 +925,6 @@ public class JDFDevCaps extends JDFAutoDevCaps
         }           
         return vs;
     }
-
-
-
 }
 
 
