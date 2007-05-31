@@ -80,9 +80,11 @@
 
 package org.cip4.jdflib.jmf;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Vector;
 
 import org.apache.commons.lang.ArrayUtils;
@@ -101,6 +103,7 @@ import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFDeviceList;
 import org.cip4.jdflib.resource.JDFQueueEntryDefList;
 import org.cip4.jdflib.resource.process.JDFNotificationFilter;
+import org.cip4.jdflib.util.ContainerUtil;
 
 public class JDFMessage extends JDFAutoMessage
 {
@@ -2519,1119 +2522,102 @@ public class JDFMessage extends JDFAutoMessage
             int nMax)
     {
         int nElem = 0;
-        int i = 0;
-        boolean bCatch = false;
         VString vElem = super.getInvalidElements(level, bIgnorePrivate, nMax);
         int n = vElem.size();
         if (n >= nMax)
         {
             return vElem;
         }
-        
-        nElem = numChildElements(ElementName.DEVICE, JDFConstants.EMPTYSTRING);
-        for (i = 0; i < nElem; i++)
+         
+        String[] elementArray=
         {
-            JDFDevice child = null;
-            try
+                ElementName.DEVICE,
+                ElementName.DEVICEFILTER,
+                ElementName.DEVICEINFO,                
+                ElementName.DEVICELIST,
+                ElementName.FLUSHEDRESOURCES,
+                ElementName.FLUSHQUEUEPARAMS,
+                ElementName.FLUSHRESOURCEPARAMS,                
+                ElementName.IDINFO,
+                ElementName.JDFCONTROLLER,
+                ElementName.JDFSERVICE,
+                ElementName.JOBPHASE,                
+                ElementName.KNOWNMSGQUPARAMS,                
+                ElementName.MESSAGESERVICE,       
+                ElementName.MSGFILTER,               
+                ElementName.NEWJDFCMDPARAMS,               
+                ElementName.NEWJDFQUPARAMS,
+                ElementName.NODEINFOCMDPARAMS,
+                ElementName.NODEINFOQUPARAMS,                
+                ElementName.NODEINFORESP,                
+                ElementName.NOTIFICATIONDEF,                
+                ElementName.NOTIFICATIONFILTER, 
+                ElementName.OCCUPATION,          
+                ElementName.PIPEPARAMS,
+                ElementName.QUEUE,               
+                ElementName.QUEUEENTRY,                
+                ElementName.QUEUEENTRYDEF, 
+                ElementName.QUEUEENTRYDEFLIST,                 
+                ElementName.QUEUEENTRYPRIPARAMS,                
+                ElementName.QUEUEENTRYPOSPARAMS,                
+                ElementName.QUEUEFILTER,
+                ElementName.QUEUESUBMISSIONPARAMS,                
+                ElementName.REQUESTQUEUEENTRYPARAMS,
+                ElementName.RESOURCECMDPARAMS,                
+                ElementName.RESOURCEINFO,                
+                ElementName.RESOURCEPULLPARAMS,                
+                ElementName.RESOURCEQUPARAMS,
+                ElementName.RESUBMISSIONPARAMS,                
+                ElementName.RETURNQUEUEENTRYPARAMS,                
+                ElementName.SHUTDOWNCMDPARAMS,                
+                ElementName.STATUSQUPARAMS, 
+                ElementName.STOPPERSCHPARAMS,                
+                ElementName.SUBMISSIONMETHODS,                
+                ElementName.TRACKFILTER,                
+                ElementName.TRACKRESULT,
+                ElementName.WAKEUPCMDPARAMS,                
+         };
+        KElement[] ae=getChildElementArray();
+        if(ae==null || ae.length==0)
+        {
+         return vElem;
+        }
+        Set s=new HashSet();
+        for(int i=0;i<ae.length;i++)
+            s.add(ae[i].getLocalName());
+        
+        for(int ii=0;ii<elementArray.length;ii++)
+        {
+            String element=elementArray[ii];
+            if(!s.contains(element))
+                continue;
+            
+            nElem = numChildElements(element,null);
+            for (int i = 0; i < nElem; i++)
             {
-                child = (JDFDevice) getValidElement(ElementName.DEVICE, JDFConstants.EMPTYSTRING, i);
-            }
-            catch(JDFException e)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level)) 
-            {
-                vElem.appendUnique("Device");
-                bCatch = false;
-                if (++n >= nMax)
+                KElement child = null;
+                boolean bCatch = false;
+
+                try
                 {
-                    return vElem;
+                    child = getValidElement(element, null, i);
                 }
-                break;
-            }
-        }
-        
-        nElem = numChildElements(ElementName.DEVICEFILTER, JDFConstants.EMPTYSTRING);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFDeviceFilter child = null;
-            try
-            {
-                child = (JDFDeviceFilter) getValidElement(ElementName.DEVICEFILTER, JDFConstants.EMPTYSTRING, i);
-            }
-            catch(JDFException e)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.DEVICEFILTER);
-                bCatch = false;
-                if (++n >= nMax)
+                catch(JDFException e)
                 {
-                    return vElem;
+                    bCatch = true;
                 }
-                break;
-            }
-        }
-        nElem = numChildElements(ElementName.DEVICEINFO, JDFConstants.EMPTYSTRING);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFDeviceInfo child = null;
-            try
-            {
-                child = (JDFDeviceInfo) getValidElement(ElementName.DEVICEINFO, JDFConstants.EMPTYSTRING, i);
-            }
-            catch(JDFException e)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.DEVICEINFO);
-                bCatch = false;
-                if (++n >= nMax)
+                if (bCatch || child == null || !child.isValid(level)) 
                 {
-                    return vElem;
+                    vElem.appendUnique(element);
+                    if (++n >= nMax)
+                    {
+                        return vElem;
+                    }
+                    break;
                 }
-                break;
             }
         }
-        
-        nElem = numChildElements(ElementName.DEVICELIST, null);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFDeviceList child = null;
-            try
-            {
-                child = (JDFDeviceList)getValidElement(ElementName.DEVICELIST, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException x)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.DEVICELIST);
-                bCatch = false;
-                if (++n >= nMax)
-                {    
-                    return vElem; 
-                } 
-                break;
-            }
-        }
-        
-        
-        nElem = numChildElements(ElementName.EMPLOYEEDEF, JDFConstants.EMPTYSTRING);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFEmployeeDef child = null;
-            try
-            {
-                child = (JDFEmployeeDef) getValidElement(ElementName.EMPLOYEEDEF, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException e)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.EMPLOYEEDEF);
-                bCatch = false;
-                if (++n >= nMax)
-                {
-                    return vElem;
-                }
-                break;
-            }
-        }
-        
-        nElem = numChildElements(ElementName.FLUSHEDRESOURCES, null);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFFlushedResources child = null;
-            try
-            {
-                child = (JDFFlushedResources)getValidElement(ElementName.FLUSHEDRESOURCES, JDFConstants.EMPTYSTRING,i);
-            }
-            catch (JDFException e)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.FLUSHEDRESOURCES);
-                bCatch = false;
-                if (++n >= nMax)
-                {    
-                    return vElem; 
-                } 
-                break;
-            }
-        }
-        
-        nElem = numChildElements(ElementName.FLUSHQUEUEPARAMS, null);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFFlushQueueParams child = null;
-            try
-            {
-                child = (JDFFlushQueueParams)getValidElement(ElementName.FLUSHQUEUEPARAMS, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException e)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.FLUSHQUEUEPARAMS);
-                bCatch = false;
-                if (++n >= nMax)
-                {    
-                    return vElem; 
-                } 
-                break;
-            }
-        }
-        
-        nElem = numChildElements(ElementName.FLUSHRESOURCEPARAMS, null);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFFlushResourceParams child = null;
-            try
-            {
-                child = (JDFFlushResourceParams)getValidElement(ElementName.FLUSHRESOURCEPARAMS, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException e)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.FLUSHRESOURCEPARAMS);
-                bCatch = false;
-                if (++n >= nMax)
-                {    
-                    return vElem; 
-                } 
-                break;
-            }
-        }
-        
-        nElem = numChildElements(ElementName.IDINFO, null);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFIDInfo child = null;
-            try
-            {
-                child = (JDFIDInfo)getValidElement(ElementName.IDINFO, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException e)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.IDINFO);
-                bCatch = false;
-                if (++n >= nMax)
-                {    
-                    return vElem; 
-                } 
-                break;
-            }
-        }
-        
-        
-        nElem = numChildElements(ElementName.JDFCONTROLLER, JDFConstants.EMPTYSTRING);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFJDFController child = null;
-            try
-            {
-                child = (JDFJDFController) getValidElement(ElementName.JDFCONTROLLER, JDFConstants.EMPTYSTRING, i);
-            }
-            catch(JDFException e)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.JDFCONTROLLER);
-                bCatch = false;
-                if (++n >= nMax)
-                {
-                    return vElem;
-                }
-                break;
-            }
-        }
-        nElem = numChildElements(ElementName.JDFSERVICE, JDFConstants.EMPTYSTRING);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFJDFService child = null;
-            try
-            {
-                child = (JDFJDFService) getValidElement(ElementName.JDFSERVICE, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException e)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.JDFSERVICE);
-                bCatch = false;
-                if (++n >= nMax)
-                {
-                    return vElem;
-                }
-                break;
-            }
-        }
-        nElem = numChildElements(ElementName.JOBPHASE, JDFConstants.EMPTYSTRING);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFJobPhase child = null;
-            try
-            {   
-                child = (JDFJobPhase) getValidElement(ElementName.JOBPHASE, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException e)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.JOBPHASE);
-                bCatch = false;
-                if (++n >= nMax)
-                {
-                    return vElem;
-                }
-                break;
-            }
-        }
-        nElem = numChildElements(ElementName.KNOWNMSGQUPARAMS, JDFConstants.EMPTYSTRING);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFKnownMsgQuParams child = null;
-            try
-            {
-                child = (JDFKnownMsgQuParams) getValidElement(ElementName.KNOWNMSGQUPARAMS, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException e)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.KNOWNMSGQUPARAMS);
-                bCatch = false;
-                if (++n >= nMax)
-                {
-                    return vElem;
-                }
-                break;
-            }
-        }
-        nElem = numChildElements(ElementName.MESSAGESERVICE, JDFConstants.EMPTYSTRING);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFMessageService child = null;
-            try
-            {
-                child = (JDFMessageService) getValidElement(ElementName.MESSAGESERVICE, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException e)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.MESSAGESERVICE);
-                bCatch = false;
-                if (++n >= nMax)
-                {
-                    return vElem;
-                }
-                break;
-            }
-        }
-        nElem = numChildElements(ElementName.MSGFILTER, JDFConstants.EMPTYSTRING);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFMsgFilter child = null;
-            try
-            {
-                child = (JDFMsgFilter) getValidElement(ElementName.MSGFILTER, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException e)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.MSGFILTER);
-                bCatch = false;
-                if (++n >= nMax)
-                {
-                    return vElem;
-                }
-                break;
-            }
-        }
-        
-        nElem = numChildElements(ElementName.NEWJDFCMDPARAMS, null);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFNewJDFCmdParams child = null;
-            try
-            {
-                child = (JDFNewJDFCmdParams)getValidElement(
-                        ElementName.NEWJDFCMDPARAMS,
-                        JDFConstants.EMPTYSTRING,
-                        i);
-            }
-            catch (JDFException x)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.NEWJDFCMDPARAMS);
-                bCatch = false;
-                if (++n >= nMax)
-                {    
-                    return vElem; 
-                } 
-                break;
-            }
-        }
-        
-        nElem = numChildElements(ElementName.NEWJDFQUPARAMS, null);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFNewJDFQuParams child = null;
-            try
-            {
-                child = (JDFNewJDFQuParams)getValidElement(
-                        ElementName.NEWJDFQUPARAMS,
-                        JDFConstants.EMPTYSTRING,
-                        i);
-            }
-            catch (JDFException x)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.NEWJDFQUPARAMS);
-                bCatch = false;
-                if (++n >= nMax)
-                {    
-                    return vElem; 
-                } 
-                break;
-            }
-        }
-        
-        nElem = numChildElements(ElementName.NODEINFOCMDPARAMS, null);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFNodeInfoCmdParams child = null;
-            try
-            {
-                child = (JDFNodeInfoCmdParams)getValidElement(
-                        ElementName.NODEINFOCMDPARAMS,
-                        JDFConstants.EMPTYSTRING,
-                        i);
-            }
-            catch (JDFException x)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.NODEINFOCMDPARAMS);
-                bCatch = false;
-                if (++n >= nMax)
-                {    
-                    return vElem; 
-                } 
-                break;
-            }
-        }
-        
-        nElem = numChildElements(ElementName.NODEINFOQUPARAMS, null);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFNodeInfoQuParams child = null;
-            try
-            {
-                child = (JDFNodeInfoQuParams)getValidElement(
-                        ElementName.NODEINFOQUPARAMS,
-                        JDFConstants.EMPTYSTRING,
-                        i);
-            }
-            catch (JDFException x)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.NODEINFOQUPARAMS);
-                bCatch = false;
-                if (++n >= nMax)
-                {    
-                    return vElem; 
-                } 
-                break;
-            }
-        }
-        
-        nElem = numChildElements(ElementName.NODEINFORESP, null);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFNodeInfoResp child = null;
-            try
-            {
-                child = (JDFNodeInfoResp)getValidElement(ElementName.NODEINFORESP, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException x)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.NODEINFORESP);
-                bCatch = false;
-                if (++n >= nMax)
-                {    
-                    return vElem; 
-                } 
-                break;
-            }
-        }
-        
-        nElem = numChildElements(ElementName.NOTIFICATIONDEF, JDFConstants.EMPTYSTRING);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFNotificationDef child = null;
-            try
-            {
-                child = (JDFNotificationDef) getValidElement(ElementName.NOTIFICATIONDEF, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException e)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.NOTIFICATIONDEF);
-                bCatch = false;
-                if (++n >= nMax)
-                {
-                    return vElem;
-                }
-                break;
-            }
-        }
-        nElem = numChildElements(ElementName.NOTIFICATIONFILTER, JDFConstants.EMPTYSTRING);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFNotificationFilter child = null;
-            try
-            {
-                child = (JDFNotificationFilter) getValidElement(ElementName.NOTIFICATIONFILTER, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException e)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.NOTIFICATIONFILTER);
-                bCatch = false;
-                if (++n >= nMax)
-                {
-                    return vElem;
-                }
-                break;
-            }
-        }
-        nElem = numChildElements(ElementName.OCCUPATION, JDFConstants.EMPTYSTRING);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFOccupation child = null;
-            try
-            {    
-                child = (JDFOccupation) getValidElement(ElementName.OCCUPATION, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException e)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.OCCUPATION);
-                bCatch = false;
-                if (++n >= nMax)
-                {
-                    return vElem;
-                }
-                break;
-            }
-        }
-        nElem = numChildElements(ElementName.PIPEPARAMS, JDFConstants.EMPTYSTRING);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFPipeParams child = null;
-            try
-            {    
-                child = (JDFPipeParams) getValidElement(ElementName.PIPEPARAMS, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException e)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.PIPEPARAMS);
-                bCatch = false;
-                if (++n >= nMax)
-                {
-                    return vElem;
-                }
-                break;
-            }
-        }
-        nElem = numChildElements(ElementName.QUEUE, JDFConstants.EMPTYSTRING);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFQueue child = null;
-            try
-            {
-                child = (JDFQueue) getValidElement(ElementName.QUEUE, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException e)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.QUEUE);
-                bCatch = false;
-                if (++n >= nMax)
-                {
-                    return vElem;
-                }
-                break;
-            }
-        }
-        nElem = numChildElements(ElementName.QUEUEENTRY, JDFConstants.EMPTYSTRING);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFQueueEntry child = null;
-            try
-            {
-                child = (JDFQueueEntry) getValidElement(ElementName.QUEUEENTRY, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException e)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.QUEUEENTRY);
-                bCatch = false;
-                if (++n >= nMax)
-                {
-                    return vElem;
-                }
-                break;
-            }
-        }
-        nElem = numChildElements(ElementName.QUEUEENTRYDEF, JDFConstants.EMPTYSTRING);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFQueueEntryDef child = null;
-            try
-            {
-                child = (JDFQueueEntryDef) getValidElement(ElementName.QUEUEENTRYDEF, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException e)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.QUEUEENTRYDEF);
-                bCatch = false;
-                if (++n >= nMax)
-                {
-                    return vElem;
-                }
-                break;
-            }
-        }
-        
-        nElem = numChildElements(ElementName.QUEUEENTRYDEFLIST, JDFConstants.EMPTYSTRING);
-        for(i = 0; i < nElem; i++)
-        {
-            JDFQueueEntryDefList child = null;
-            try 
-            {
-                child = (JDFQueueEntryDefList)getValidElement(ElementName.QUEUEENTRYDEFLIST, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException x)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level)) 
-            {
-                vElem.appendUnique(ElementName.QUEUEENTRYDEFLIST);
-                bCatch = false;
-                if (++n >= nMax) 
-                {    
-                    return vElem; 
-                } 
-                break;
-            }
-        }
-        
-        
-        nElem = numChildElements(ElementName.QUEUEENTRYPRIPARAMS, JDFConstants.EMPTYSTRING);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFQueueEntryPriParams child = null;
-            try
-            {
-                child = (JDFQueueEntryPriParams) getValidElement(ElementName.QUEUEENTRYPRIPARAMS, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException e)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.QUEUEENTRYPRIPARAMS);
-                bCatch = false;
-                if (++n >= nMax)
-                {
-                    return vElem;
-                }
-                break;
-            }
-        }
-        nElem = numChildElements(ElementName.QUEUEENTRYPOSPARAMS, JDFConstants.EMPTYSTRING);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFQueueEntryPosParams child = null;
-            try
-            {
-                child = (JDFQueueEntryPosParams) getValidElement(ElementName.QUEUEENTRYPOSPARAMS, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException e)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.QUEUEENTRYPOSPARAMS);
-                bCatch = false;
-                if (++n >= nMax)
-                {
-                    return vElem;
-                }
-                break;
-            }
-        }
-        
-        nElem = numChildElements(ElementName.QUEUEFILTER, null);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFQueueFilter child = null;
-            try
-            {
-                child = (JDFQueueFilter)getValidElement(ElementName.QUEUEFILTER, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException x)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.QUEUEFILTER);
-                bCatch = false;
-                if (++n >= nMax)
-                {    
-                    return vElem; 
-                } 
-                break;
-            }
-        }
-        
-        
-        nElem = numChildElements(ElementName.QUEUESUBMISSIONPARAMS, JDFConstants.EMPTYSTRING);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFQueueSubmissionParams child = null;
-            try
-            {
-                child = (JDFQueueSubmissionParams)getValidElement(ElementName.QUEUESUBMISSIONPARAMS, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException x)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.QUEUESUBMISSIONPARAMS);
-                bCatch = false;
-                if (++n >= nMax)
-                {
-                    return vElem;
-                }
-                break;
-            }
-        }
-        
-        nElem = numChildElements(ElementName.REQUESTQUEUEENTRYPARAMS, null);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFRequestQueueEntryParams child = null;
-            try
-            {
-                child =(JDFRequestQueueEntryParams) getValidElement(
-                        ElementName.REQUESTQUEUEENTRYPARAMS,
-                        JDFConstants.EMPTYSTRING,
-                        i);
-            }
-            catch (JDFException x)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.REQUESTQUEUEENTRYPARAMS);
-                bCatch = false;
-                if (++n >= nMax)
-                {    
-                    return vElem; 
-                } 
-                break;
-            }
-        }
-        
-        nElem = numChildElements(ElementName.RESOURCECMDPARAMS, JDFConstants.EMPTYSTRING);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFResourceCmdParams child = null;
-            try
-            {
-                child = (JDFResourceCmdParams) getValidElement(ElementName.RESOURCECMDPARAMS, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException x)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.RESOURCECMDPARAMS);
-                bCatch = false;
-                if (++n >= nMax)
-                {
-                    return vElem;
-                }
-                break;
-            }
-        }
-        nElem = numChildElements(ElementName.RESOURCEINFO, JDFConstants.EMPTYSTRING);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFResourceInfo child = null;
-            try
-            {
-                child = (JDFResourceInfo) getValidElement(ElementName.RESOURCEINFO, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException x)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.RESOURCEINFO);
-                bCatch = false;
-                if (++n >= nMax)
-                {
-                    return vElem;
-                }
-                break;
-            }
-        }
-        
-        nElem = numChildElements(ElementName.RESOURCEPULLPARAMS, null);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFResourcePullParams child = null;
-            try
-            {
-                child = (JDFResourcePullParams)getValidElement(ElementName.RESOURCEPULLPARAMS, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException x)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.RESOURCEPULLPARAMS);
-                bCatch = false;
-                if (++n >= nMax)
-                    return vElem;
-                break;
-            }
-        }
-        
-        nElem = numChildElements(ElementName.RESOURCEQUPARAMS, null);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFResourceQuParams child = null;
-            try
-            {
-                child = (JDFResourceQuParams)getValidElement(ElementName.RESOURCEQUPARAMS, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException x)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.RESOURCEQUPARAMS);
-                bCatch = false;
-                if (++n >= nMax)
-                {    
-                    return vElem; 
-                } 
-                break;
-            }
-        }
-        
-        nElem = numChildElements(ElementName.RESUBMISSIONPARAMS, null);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFResubmissionParams child = null;
-            try
-            {
-                child = (JDFResubmissionParams)getValidElement(ElementName.RESUBMISSIONPARAMS, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException x)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.RESUBMISSIONPARAMS);
-                bCatch = false;
-                if (++n >= nMax)
-                {    
-                    return vElem; 
-                } 
-                break;
-            }
-        }
-        
-        nElem = numChildElements(ElementName.RETURNQUEUEENTRYPARAMS, null);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFReturnQueueEntryParams child = null;
-            try
-            {
-                child = (JDFReturnQueueEntryParams)getValidElement(ElementName.RETURNQUEUEENTRYPARAMS, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException x)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.RETURNQUEUEENTRYPARAMS);
-                bCatch = false;
-                if (++n >= nMax)
-                {    
-                    return vElem; 
-                } 
-                break;
-            }
-        }
-        
-        nElem = numChildElements(ElementName.SHUTDOWNCMDPARAMS, null);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFShutDownCmdParams child = null;
-            try
-            {
-                child = (JDFShutDownCmdParams)getValidElement(
-                        ElementName.SHUTDOWNCMDPARAMS,
-                        JDFConstants.EMPTYSTRING,
-                        i);
-            }
-            catch (JDFException x)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.SHUTDOWNCMDPARAMS);
-                bCatch = false;
-                if (++n >= nMax)
-                {    
-                    return vElem; 
-                } 
-                break;
-            }
-        }
-        
-        nElem = numChildElements(ElementName.STATUSQUPARAMS, JDFConstants.EMPTYSTRING);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFStatusQuParams child = null;
-            try
-            {
-                child = (JDFStatusQuParams) getValidElement(ElementName.STATUSQUPARAMS, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException x)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.STATUSQUPARAMS);
-                bCatch = false;
-                if (++n >= nMax)
-                {
-                    return vElem;
-                }
-                break;
-            }
-        }
-        nElem = numChildElements(ElementName.STOPPERSCHPARAMS, JDFConstants.EMPTYSTRING);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFStopPersChParams child = null;
-            try
-            {
-                child = (JDFStopPersChParams) getValidElement(ElementName.STOPPERSCHPARAMS, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException x)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.STOPPERSCHPARAMS);
-                bCatch = false;
-                if (++n >= nMax)
-                {
-                    return vElem;
-                }
-                break;
-            }
-        }
-        nElem = numChildElements(ElementName.SUBMISSIONMETHODS, JDFConstants.EMPTYSTRING);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFSubmissionMethods child = null;
-            try
-            {
-                child = (JDFSubmissionMethods) getValidElement(ElementName.SUBMISSIONMETHODS, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException x)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.SUBMISSIONMETHODS);
-                bCatch = false;
-                if (++n >= nMax)
-                {
-                    return vElem;
-                }
-                break;
-            }
-        }
-        nElem = numChildElements(ElementName.TRACKFILTER, JDFConstants.EMPTYSTRING);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFTrackFilter child = null;
-            try
-            {
-                child = (JDFTrackFilter) getValidElement(ElementName.TRACKFILTER, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException x)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.TRACKFILTER);
-                bCatch = false;
-                if (++n >= nMax)
-                {
-                    return vElem;
-                }
-                break;
-            }
-        }
-        nElem = numChildElements(ElementName.TRACKRESULT, JDFConstants.EMPTYSTRING);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFTrackResult child = null;
-            try
-            {
-                child = (JDFTrackResult) getValidElement(ElementName.TRACKRESULT, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException x)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.TRACKRESULT);
-                bCatch = false;
-                if (++n >= nMax)
-                {
-                    return vElem;
-                }
-                break;
-            }
-        }
-        nElem = numChildElements(ElementName.WAKEUPCMDPARAMS, JDFConstants.EMPTYSTRING);
-        for (i = 0; i < nElem; i++)
-        {
-            JDFTrackResult child = null;
-            try
-            {
-                child = (JDFTrackResult) getValidElement(ElementName.WAKEUPCMDPARAMS, JDFConstants.EMPTYSTRING, i);
-            }
-            catch (JDFException x)
-            {
-                bCatch = true;
-            }
-            if (bCatch || child == null || !child.isValid(level))
-            {
-                vElem.appendUnique(ElementName.WAKEUPCMDPARAMS);
-                bCatch = false;
-                if (++n >= nMax)
-                {
-                    return vElem;
-                }
-                break;
-            }
-        }
+   
         return vElem;
     }
     
@@ -3664,6 +2650,27 @@ public class JDFMessage extends JDFAutoMessage
             }
         }
         return s;
+    }
+
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib.core.KElement.EnumValidationLevel, boolean, int)
+     */
+    public VString getInvalidAttributes(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
+    {
+         VString s=super.getInvalidAttributes(level, bIgnorePrivate, nMax);
+         if(s.contains(AttributeName.XSITYPE))
+             return s;
+         
+         if(!hasAttribute(AttributeName.XSITYPE))
+             return s;
+         String t=getType();
+         if(xmlnsPrefix(t)!=null)
+             return s;
+         String xs=getXSIType();
+         if(!xs.equals(getLocalName()+t))
+             s.add(AttributeName.XSITYPE);
+         return s;
+         
     }
     
 }

@@ -72,16 +72,18 @@ package org.cip4.jdflib.jmf;
 
 import junit.framework.TestCase;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 
 
 public class JDFMessageTest extends TestCase
 {
-     
+
     public void testIsValidMessageElement()
     {
         JDFDoc doc = new JDFDoc(ElementName.JMF);
@@ -89,7 +91,7 @@ public class JDFMessageTest extends TestCase
         JDFSignal sig=(JDFSignal) jmf.appendMessageElement(EnumFamily.Signal,EnumType.UpdateJDF);
         assertTrue(sig.isValidMessageElement(ElementName.UPDATEJDFCMDPARAMS,0));
         assertFalse(sig.isValidMessageElement(ElementName.MODIFYNODECMDPARAMS,0));
-        
+
         JDFResponse resp=(JDFResponse) jmf.appendMessageElement(EnumFamily.Response,EnumType.RepeatMessages);
         assertTrue(resp.isValidMessageElement(ElementName.SIGNAL,3));
         assertTrue(resp.isValidMessageElement(ElementName.REGISTRATION,3));
@@ -97,11 +99,11 @@ public class JDFMessageTest extends TestCase
 
         JDFRegistration reg=(JDFRegistration) jmf.appendMessageElement(EnumFamily.Registration,EnumType.RepeatMessages);
         assertFalse(reg.isValidMessageElement(ElementName.SIGNAL,3));
-    
+
     }
-    
+
 /////////////////////////////////////////////////////////////////////////////
-    
+
     public void testAppendValidElement()
     {
         JDFDoc doc = new JDFDoc(ElementName.JMF);
@@ -109,9 +111,21 @@ public class JDFMessageTest extends TestCase
         JDFSignal sig=(JDFSignal) jmf.appendMessageElement(EnumFamily.Signal,EnumType.UpdateJDF);
         assertNotNull(sig.appendValidElement(ElementName.UPDATEJDFCMDPARAMS,null));
     }
-    
+
 /////////////////////////////////////////////////////////////////////////////
-    
+    public void testGetInvalidAttributes()
+    {
+        JDFDoc doc = new JDFDoc(ElementName.JMF);
+        JDFJMF jmf=doc.getJMFRoot();
+        JDFSignal sig=(JDFSignal) jmf.appendMessageElement(EnumFamily.Signal,EnumType.UpdateJDF);
+        assertNotNull(sig.appendValidElement(ElementName.UPDATEJDFCMDPARAMS,null));
+        assertFalse(sig.getInvalidAttributes(EnumValidationLevel.Complete, true, 999).contains(AttributeName.XSITYPE));
+        sig.setAttribute("Type",EnumType.AbortQueueEntry.getName());
+        assertTrue(sig.getInvalidAttributes(EnumValidationLevel.Complete, true, 999).contains(AttributeName.XSITYPE));
+    }
+
+/////////////////////////////////////////////////////////////////////////////
+
     public void testModifyNode()
     {
         JDFDoc doc = new JDFDoc(ElementName.JMF);
@@ -133,9 +147,9 @@ public class JDFMessageTest extends TestCase
             // nop
         }
     }
-    
+
     /////////////////////////////////////////////////////////////////////////////
-    
+
     public void testUpdateJDF()
     {
         JDFDoc doc = new JDFDoc(ElementName.JMF);
@@ -157,10 +171,10 @@ public class JDFMessageTest extends TestCase
             // nop
         }
     }
-    
+
 /////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////
-    
+
     public void testSetType()
     {
         JDFDoc doc = new JDFDoc(ElementName.JMF);
@@ -174,5 +188,5 @@ public class JDFMessageTest extends TestCase
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
-    
+
 }

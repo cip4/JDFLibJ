@@ -168,6 +168,7 @@ import org.cip4.jdflib.resource.process.JDFRunListTest;
 import org.cip4.jdflib.resource.process.JDFTileTest;
 import org.cip4.jdflib.resource.process.JDFUsageCounterTest;
 import org.cip4.jdflib.span.JDFEnumerationSpanTest;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.HashUtilTest;
 import org.cip4.jdflib.util.JDFDateTest;
 import org.cip4.jdflib.util.JDFSpawnTest;
@@ -306,10 +307,11 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JDFUsageCounterTest.class);
         
         // util
-        suite.addTestSuite(MimeUtilTest.class);
+        suite.addTestSuite(ContainerUtil.class);
         suite.addTestSuite(HashUtilTest.class);
         suite.addTestSuite(JDFDateTest.class);
         suite.addTestSuite(JDFSpawnTest.class);
+        suite.addTestSuite(MimeUtilTest.class);
         suite.addTestSuite(StringUtilTest.class);
         suite.addTestSuite(UrlUtilTest.class);
         
