@@ -108,6 +108,7 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFBufferParams;
 import org.cip4.jdflib.resource.JDFMerged;
+import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.JDFProcessRun;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResourceAudit;
@@ -669,8 +670,10 @@ public class JDFSpawnTest extends JDFTestCaseBase
         spawnedNode.getNodeInfo().setNodeStatus(EnumNodeStatus.Aborted);
         assertEquals(EnumNodeStatus.Part,spawnedNode.getStatus());
         assertEquals(EnumNodeStatus.Aborted,spawnedNode.getPartStatus(null));
-        spawnedNode.getCreateAuditPool().addProcessRun(EnumNodeStatus.Aborted, null, null);
-        
+        final JDFAuditPool auditPool = spawnedNode.getCreateAuditPool();
+        auditPool.addProcessRun(EnumNodeStatus.Aborted, null, null);
+        JDFNotification notif=(JDFNotification) auditPool.addAudit(EnumAuditType.Notification, null);
+        notif.appendComment().setText("fooBar");
         final JDFMerge merge = new JDFMerge(n);
         merge.bAddMergeToProcessRun=true;
         
@@ -682,6 +685,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
         final JDFNode jobPart = d.getJDFRoot().getJobPart(pid, null);
         assertEquals(jobPart, mergedNode);
         assertEquals(jobPart.getAuditPool().getAudit(0, EnumAuditType.ProcessRun, null, null).getAttribute("SubmitTime"), n.getAuditPool().getAudit(0, EnumAuditType.Spawned, null, null).getTimeStamp());
+        assertEquals("comment text correctly merged",jobPart.getAuditPool().getAudit(0, EnumAuditType.Notification, null, null).getComment(0).getText(),"fooBar");
 
     }
     ///////////////////////////////////////////////////////////
