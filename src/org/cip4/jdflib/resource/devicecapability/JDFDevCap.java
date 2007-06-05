@@ -1958,16 +1958,22 @@ public class JDFDevCap extends JDFAutoDevCap
                             }
                         }                        
                     }
-                    if(vResult==null)
+                    JDFDevCaps dcs=(JDFDevCaps) deviceCap.getChildWithAttribute(ElementName.DEVCAPS,AttributeName.DEVCAPREF,null,id,0,true);                        
+                    if(dcs!=null)
                     {
-                        JDFDevCaps dcs=(JDFDevCaps) deviceCap.getChildWithAttribute(ElementName.DEVCAPS,AttributeName.DEVCAPREF,null,id,0,true);                        
-                        if(dcs!=null)
+                        VString vResult2=dcs.getNamePathVector(); 
+                        if(vResult==null)
                         {
-                            vResult=dcs.getNamePathVector();    
-                            return vResult;
+                            vResult=vResult2;
                         }
-  // TODO mixed mode devcaps subelements + devcappool
+                        else
+                        {
+                            StringUtil.concatStrings(vResult, "/"+result);
+                            vResult.appendUnique(vResult2);
+                        }
+                        return vResult;
                     }
+                    // TODO mixed mode devcaps subelements + devcappool
                 }
             }
         }
