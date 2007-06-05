@@ -2969,8 +2969,8 @@ public class JDFElement extends KElement
     protected void setEnumerationsAttribute(String key, Vector value, String nameSpaceURI)
     {
         String s = JDFConstants.EMPTYSTRING;
-        int n = 0;
         if (value != null) {
+        	int n = 0;
 	        final Iterator valueIterator = value.iterator();
 	        while (valueIterator.hasNext()) {
 				Object o = valueIterator.next();
@@ -2988,12 +2988,7 @@ public class JDFElement extends KElement
 	        }
         }
 
-        final int size = value==null ? 0 : value.size();
-        if(size>=0) {
-			setAttribute(key, s, nameSpaceURI);
-		} else {
-			removeAttribute(key, nameSpaceURI);
-		}
+		setAttribute(key, s, nameSpaceURI);
     }
 
 
