@@ -1,4 +1,26 @@
-Label JDFLIBJ_2.1.2BLD43x (xx.05.2007)
+Label JDFLIBJ_2.1.2BLD431 (30.05.2007)
+
+JDFDevCaps errata fix - data type of getDevCapRef now VString
+added some tests
+duration fix for overflows
+Add default maximum value support for IntegerRange
+fix GetMinID (cleanup only in java)
+fix id cache handling
+improved validation of DevCaps
+fixes + tests for spawning of non-identical resource partitions in / out / spawn
+xpath fixes for partitioned resources 
+add validation of warnings
+add editor normalize
+fix dead loop in getpredecessors
+add fractional Durations
+fix bug that causes referenced rw resources to be spawned ro
+add transfercurve to list of tested datatypes in attrinfo
+pipeparams fix for finding THE resource, (the one selected by the pipe)
+cleanup of isexecutable for resourcelink
+better handling of partitions for the colorcodined process view in the Editor.java
+added function to sort chidren of jdf whose order is irrelevant
+npe fix
+
 
 Changes due to schema fixes:
 
@@ -11,6 +33,40 @@ JDFAutoModulePhase   : attribute DEVICESTATUS ist optional, attribute START ist 
 JDFAutoPhaseTime     : attribute END is optional
 JDFAutoPlasticCombBindingParams : added EnumType.S1_generic, EnumType.S_generic
 JDFAutoResourceAudit : added optional attribute NODESTATUS
+
+>ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD431) && !lbtype(JDFLIBJ_2.1.3BLD430)}" -print
+.\auto\JDFAutoDevCaps.java@@\main\52
+.\auto\JDFAutoDevice.java@@\main\69
+.\auto\JDFAutoEmboss.java@@\main\51
+.\auto\JDFAutoLayoutElement.java@@\main\74
+.\auto\JDFAutoMedia.java@@\main\79
+.\auto\JDFAutoModulePhase.java@@\main\77
+.\auto\JDFAutoPhaseTime.java@@\main\59
+.\auto\JDFAutoPlasticCombBindingParams.java@@\main\57
+.\auto\JDFAutoResourceAudit.java@@\main\49
+.\core\AttributeInfo.java@@\main\34
+.\core\JDFAudit.java@@\main\85
+.\core\JDFElement.java@@\main\231
+.\core\JDFResourceLink.java@@\main\132
+.\core\KElement.java@@\main\240
+.\datatypes\JDFIntegerRange.java@@\main\31
+.\datatypes\JDFMatrix.java@@\main\16
+.\jmf\JDFMessage.java@@\main\67
+.\jmf\JDFPipeParams.java@@\main\19
+.\node\JDFNode.java@@\main\244
+.\pool\JDFAuditPool.java@@\main\95
+.\resource@@\main\33
+.\resource\devicecapability\JDFAbstractState.java@@\main\49
+.\resource\devicecapability\JDFDateTimeState.java@@\main\28
+.\resource\devicecapability\JDFDevCap.java@@\main\50
+.\resource\devicecapability\JDFDevCaps.java@@\main\37
+.\resource\JDFResource.java@@\main\216
+.\util\Duration.java@@\main\3
+.\util\JDFDuration.java@@\main\6
+.\util\JDFMerge.java@@\main\12
+.\util\JDFSpawn.java@@\main\16
+.\util\MyArgs.java@@\main\25
+.\util\StringUtil.java@@\main\59
 ___________________________________________________________
 
 
