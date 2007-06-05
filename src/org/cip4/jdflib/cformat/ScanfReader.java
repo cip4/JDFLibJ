@@ -1364,7 +1364,7 @@ public class ScanfReader extends Reader
         curChar = reader.read();
     }
 
-    private final void consumeChar() throws IOException
+    private final void consumeChar()
     {
         if (curChar != -1)
         {
