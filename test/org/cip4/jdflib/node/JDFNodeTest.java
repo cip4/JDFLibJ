@@ -127,6 +127,7 @@ import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.JDFMerge;
+import org.cip4.jdflib.util.JDFSpawn;
 import org.cip4.jdflib.util.StatusUtil;
 
 
@@ -766,15 +767,9 @@ public class JDFNodeTest extends JDFTestCaseBase
         if (vRunListLinks != null)
         {
             JDFResourceLink link = (JDFResourceLink) vRunListLinks.get (0);
-    
-            JDFResource res = link.getLinkRoot ();
-    
-            VJDFAttributeMap vamExec = nodeProc.getExecutablePartitions (link, res, JDFResource.EnumResStatus.Draft);
-    
+            VJDFAttributeMap vamExec = nodeProc.getExecutablePartitions(link, JDFResource.EnumResStatus.Draft);
             assertTrue ("Size of vamExec must be 2", vamExec.size() == 2);
-    
             JDFAttributeMap am0 = vamExec.elementAt (0);
-    
             assertTrue ("Size of vamExec[0] must be 1", am0.size() == 1);
             assertTrue (am0.containsKey   ("Run"));
             assertTrue (am0.containsValue ("Chf06181149500001"));
@@ -797,39 +792,72 @@ public class JDFNodeTest extends JDFTestCaseBase
     throws Exception
     {
         String strJDFName = "Normalizer.jdf";
-
         JDFParser parser = new JDFParser ();
-
         JDFDoc jdfDoc = parser.parseFile (sm_dirTestData+strJDFName);
-
         JDFNode nodeProc = jdfDoc.getJDFRoot ().getJobPart ("Qua0.N", JDFConstants.EMPTYSTRING);
-
         final JDFResourceLinkPool linkPool = nodeProc.getResourceLinkPool ();
-
         final VElement vRunListLinks = linkPool.getPoolChildren("RunListLink", null, null);
-        if (vRunListLinks != null)
-        {
-            JDFResourceLink link = (JDFResourceLink) vRunListLinks.get (0);
-    
-            JDFResource res = link.getLinkRoot ();
-    
-            VJDFAttributeMap vamExec = nodeProc.getExecutablePartitions (link, res, JDFResource.EnumResStatus.Draft);
-    
-            assertTrue ("Size of vamExec must be 2", vamExec.size() == 2);
-    
-            JDFAttributeMap am0 = vamExec.elementAt (0);
-    
-            assertTrue ("Size of vamExec[0] must be 1", am0.size() == 1);
-            assertTrue (am0.containsKey   ("Run"));
-            assertTrue (am0.containsValue ("Run93379_000255"));
-    
-            JDFAttributeMap am1 = vamExec.elementAt (1);
-    
-            assertTrue ("Size of vamExec[1] must be 0", am1.size() == 0);
-        }
+        JDFResourceLink link = (JDFResourceLink) vRunListLinks.get (0);
+        VJDFAttributeMap vamExec = nodeProc.getExecutablePartitions(link, JDFResource.EnumResStatus.Draft);
+        assertEquals("Size of vamExec must be 2", vamExec.size() , 2);
+        JDFAttributeMap am0 = vamExec.elementAt (0);
+        assertEquals ("Size of vamExec[0] must be 1", am0.size() , 1);
+        assertTrue (am0.containsKey   ("Run"));
+        assertTrue (am0.containsValue ("Run93379_000255"));
+        JDFAttributeMap am1 = vamExec.elementAt (1);
+        assertEquals ("Size of vamExec[1] must be 0", am1.size() , 0);
     }
 
+    /**
+     * Method testGetExecutablePartitionsNormalizer
+     * 
+     * @throws Exception
+     */
 
+    public void testIsExecutableZones()throws Exception
+    {
+        String strJDFName = "ZoneTest.jdf";
+        JDFParser parser = new JDFParser ();
+        JDFDoc jdfDoc = parser.parseFile (sm_dirTestData+strJDFName);
+        JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart ("PPIPressRoot.P", null);
+        JDFAttributeMap map=new JDFAttributeMap();
+        map.put(EnumPartIDKey.SignatureName, "Signature1");
+        map.put(EnumPartIDKey.SheetName, "SM 102 52x28");
+        VJDFAttributeMap vTest=new VJDFAttributeMap();
+        vTest.add(map);
+        boolean b = nodeProc.isExecutable(map, true);
+        assertTrue(b);
+
+        VElement links=nodeProc.getResourceLinks(null,  new JDFAttributeMap("Usage","Input"), null);
+        for(int i=0;i<links.size();i++)
+        {
+            JDFResourceLink link=(JDFResourceLink) links.elementAt(i);
+            VJDFAttributeMap vamExec = nodeProc.getExecutablePartitions(link, JDFResource.EnumResStatus.Draft);
+            assertNotNull(vamExec);
+            assertTrue(vamExec.size()>0);
+        }
+
+        links=nodeProc.getResourceLinks(null,  new JDFAttributeMap("Usage","Output"), null);
+        for(int i=0;i<links.size();i++)
+        {
+            JDFResourceLink link=(JDFResourceLink) links.elementAt(i);
+            VJDFAttributeMap vamExec = nodeProc.getExecutablePartitions(link, JDFResource.EnumResStatus.Unavailable);
+            assertNotNull(vamExec);
+            assertTrue(vamExec.size()>0);
+            assertTrue(vamExec.contains(map));
+        }
+        JDFSpawn spawn=new JDFSpawn(nodeProc);
+        spawn.vSpawnParts=vTest;
+        spawn.vRWResources_in=new VString();
+        spawn.vRWResources_in.add("Output");
+        JDFNode spawnedNode=spawn.spawn();
+        assertNotNull(spawnedNode);
+        assertEquals(spawnedNode.getAncestorPool().getPartMapVector(), vTest);
+        
+    }
+    
+    /////////////////////////////////////////////////////////////////////////
+    
     public void testNullPointerException()
     {
         List LcleanUpMerge = JDFNode.EnumCleanUpMerge.getEnumList();

@@ -98,7 +98,7 @@ public class VJDFAttributeMap
         for (int i = 0; i < nPartMaps; i++)
         {
             JDFAttributeMap amParts = this.elementAt (i);
-            sb.append ("[" + i + "]" + amParts.toString ());
+            sb.append ("[" + i + "]" + amParts.toString ()+"\n");
         }            
         
         return (sb.toString());        
