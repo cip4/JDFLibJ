@@ -76,6 +76,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -332,6 +333,7 @@ public class JDFRunListTest extends JDFTestCaseBase
         tagSet.setAttribute("Path", "/Dokument/Rezipient/@Sex");
         tagSet.setAttribute("Value", "Male");
         tagMap.setXMLComment("The TagMap element maps arbitrary tags in the document to a structural RunTag\nNote that any partition key may be mapped.\nNote also that although an XPath syntax is used, this may be mapped to any hierarchical structure including but not limited to XML.\n"+
+                "The data type of @Value should be regExp to allow expression matching\n"+
                 "Multiple TagSet Elements are combined as a logical And\n"+
                 "This TagSet maps all Male (Dokument/Rezipient/@Sex=\"Male\") Covers (/Dokument/Sektion=Einband to MaleCover");
         
@@ -370,10 +372,20 @@ public class JDFRunListTest extends JDFTestCaseBase
         tagSet.setAttribute("Value", "Few");
         tagMap.setXMLComment( "This TagSet maps all (/Dokument/Sektion=HauptTeil with many pages (/Dokument/Sektion/Pages=Few to SmallBody\n");
         
+        tagMap=rl.appendElement("TagMap");
+        tagMap.setAttribute("BoundaryKey", "EndOfDocument");
+        tagSet=tagMap.appendElement("TagSet");
+        tagSet.setAttribute("Path", "/Dokument");
+        tagMap.setXMLComment("This tagmap specifies which document structure corresponds to a Document\n"
+                +" thus incrementing DocIndex or forcing an implicit RunList/@EndofDocument=true");
+        
         rl.setFileURL("bigVariable.ppml");
         rl.setXMLComment("this runlist points to a ppml with arbitrary structural tagging");
         
-        //JDFResourceLink rlll
+        JDFResourceLink rll=root.getLink(rl, null);
+        rll.appendPart().setDocIndex("10 ~ 20");
+        rll.setXMLComment("this link selects the 11-20 document");
+        
         doc.write2File(sm_dirTestDataTemp+"tagmap.jdf", 2, false);
     }
 

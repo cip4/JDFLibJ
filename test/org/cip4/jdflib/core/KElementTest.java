@@ -84,11 +84,13 @@ import java.util.Map;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.Element;
@@ -1147,9 +1149,10 @@ public class KElementTest extends JDFTestCaseBase
         jdfDoc=JDFDoc.parseFile(sm_dirTestDataTemp+"longAtt.jdf");
         root=jdfDoc.getJDFRoot();
         assertEquals(root.getAttribute("long"), longString);        
-
     }
 
+    //////////////////////////////////////////////////////////////////////////////
+    
     public void testSetAttributes() throws Exception
     {
         XMLDoc jdfDoc = new XMLDoc("Foo",null);
@@ -1162,8 +1165,22 @@ public class KElementTest extends JDFTestCaseBase
         KElement a2=root2.appendElement("a");
         a2.setAttributes(a);
         assertEquals(a2.getAttribute("a"), "1");
-        assertEquals(a2.getAttribute("b","www.b.com",null), "2");
+        assertEquals(a2.getAttribute("b","www.b.com",null), "2");        
+    }  
 
+    /////////////////////////////////////////////////////////////////////////////////////
+    
+    public void testSetAttributesResource() throws Exception
+    {
+        JDFDoc doc=new JDFDoc("JDF");
+        JDFNode n=doc.getJDFRoot();
+        JDFExposedMedia x=(JDFExposedMedia) n.addResource("ExposedMedia", EnumUsage.Input);
+        JDFExposedMedia x2=(JDFExposedMedia) x.addPartition(EnumPartIDKey.SignatureName, "S1");
+        KElement e2=n.appendElement("foo");
+        e2.setAttributes(x2);
+        assertEquals("root resource attributes not copied",e2.getAttribute("Class"), "Handling");
+        assertEquals("leaf resource attributes not copied",e2.getAttribute("SignatureName"), "S1");
+        
     }
 
 

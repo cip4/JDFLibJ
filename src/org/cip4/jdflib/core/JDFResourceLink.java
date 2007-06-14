@@ -987,9 +987,10 @@ public class JDFResourceLink extends JDFElement
      */
     public JDFPool getPool()
     {
-        if (getDeepParentNotName(getNodeName()) != null)
+        final KElement deepParentNotName = getDeepParentNotName(getLocalName());
+        if (deepParentNotName != null)
         {
-            return (JDFPool) getDeepParentNotName(getNodeName());
+            return (JDFPool) deepParentNotName;
         }
         
         return null;

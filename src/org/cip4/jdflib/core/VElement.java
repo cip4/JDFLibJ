@@ -269,7 +269,7 @@ public class VElement extends Vector
 		final int size = v.size();
         for (int i = 0; i < size; i++)
 		{
-			appendUnique((KElement)v.elementAt(i));
+			appendUnique(v.item(i));
 		}
 	}
 	
@@ -373,6 +373,21 @@ public class VElement extends Vector
 			}
 		}
 	}
+    
+    /**
+     * get the node names of this vector in the same order
+     * @param bLocal if true use getLocalName() else getNodeName() o each item
+     * @return VString vector of node names
+     */
+    public VString getElementNameVector(boolean bLocal)
+    {
+        VString v=new VString();
+        final int size = size();
+        v.ensureCapacity(size);
+        for(int i=0;i<size;i++)
+            v.add(bLocal ? item(i).getLocalName() : item(i).getNodeName());
+        return v;
+    }
 	
 	/**
 	 * ToVector - parse a node list for elements spezified through parameters

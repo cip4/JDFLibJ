@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2005 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -435,7 +435,55 @@ public class JDFResourceTest extends JDFTestCaseBase
             assertTrue(myMap.containsKey("SheetName"));
         }
     }
+    public void testGetChildElementVector()
+    {
+        JDFDoc doc = new JDFDoc(ElementName.JDF);
+        JDFNode root = doc.getJDFRoot();
 
+        JDFResourcePool resPool = root.appendResourcePool();
+        JDFColorantControl colControl = (JDFColorantControl) 
+        resPool.appendElement(ElementName.COLORANTCONTROL, null);          
+        colControl.setProcessColorModel("DeviceCMY");
+        JDFColorantControl ccPart=(JDFColorantControl) colControl.addPartition(EnumPartIDKey.Condition, "Good");
+        KElement a1=colControl.appendElement("a");
+        KElement a2=colControl.appendElement("a");
+        VElement vChildren=colControl.getChildElementVector("a", null, null, true, 0, true);
+        assertEquals(vChildren.size(), 2);
+        assertTrue(vChildren.contains(a1));
+        assertTrue(vChildren.contains(a2));
+        
+        KElement b1=ccPart.appendElement("b");
+        KElement b2=ccPart.appendElement("b");
+        // now a leaf
+        vChildren=ccPart.getChildElementVector("a", null, null, true, 0, true);
+        assertEquals(vChildren.size(), 2);
+        assertTrue(vChildren.contains(a1));
+        assertTrue(vChildren.contains(a2));
+        
+        vChildren=ccPart.getChildElementVector(null, null, null, true, 0, true);
+        assertEquals(vChildren.size(), 4);
+        assertTrue(vChildren.contains(a1));
+        assertTrue(vChildren.contains(a2));
+        assertTrue(vChildren.contains(b1));
+        assertTrue(vChildren.contains(b2));
+        
+        KElement a3=ccPart.appendElement("a");
+        // now a leaf
+        vChildren=ccPart.getChildElementVector("a", null, null, true, 0, true);
+        assertEquals(vChildren.size(), 1);
+        assertTrue(vChildren.contains(a3));
+        assertFalse(vChildren.contains(a2));
+        
+        vChildren=ccPart.getChildElementVector(null, null, null, true, 0, true);
+        assertEquals(vChildren.size(), 3);
+        assertTrue(vChildren.contains(a3));
+        assertFalse(vChildren.contains(a2));
+        assertTrue(vChildren.contains(b1));
+        assertTrue(vChildren.contains(b2));
+     }
+    
+    /////////////////////////////////////////////////////////////////////////////////
+    
     public void testGetColorPool()
     {
         JDFDoc doc = new JDFDoc(ElementName.JDF);

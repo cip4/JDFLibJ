@@ -96,6 +96,7 @@ import org.apache.xml.serialize.XMLSerializer;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;
@@ -1375,16 +1376,26 @@ public class KElement extends ElementNSImpl
      */
     public int setAttributes(KElement kElem)
     {
+        if(kElem==null)
+            return 0;
+
         final NamedNodeMap nm = kElem.getAttributes();
 
         final int siz = (nm == null) ? 0 : nm.getLength();
 
+        if(kElem instanceof JDFResource)
+        {
+            KElement parent=kElem.getParentNode_KElement();
+            if(parent!=null && kElem.getNodeName().equals(parent.getNodeName()))
+            {
+                setAttributes(parent);
+            }
+        }
         for (int i = 0; i < siz; i++)
         {
             final Node a = nm.item(i);
             setAttribute(a.getNodeName(), a.getNodeValue(), a.getNamespaceURI());
         }
-
         return siz;
     }
 
@@ -5201,7 +5212,7 @@ public class KElement extends ElementNSImpl
                 if (bHasNoMap || e.includesAttributes(mAttrib, bAnd))
                 {
                     // this guy is the one
-                    v.appendUnique(e);
+                    v.add(e);
                     if (!bDirect)
                     { // if not direct, recurse
                         final VElement vv = e.getTree(nodeName, nameSpaceURI, mAttrib, bDirect, bAnd);
@@ -5452,10 +5463,22 @@ public class KElement extends ElementNSImpl
     {
         final String strSrcAttrib = (srcAttrib==null)|| srcAttrib.equals(JDFConstants.EMPTYSTRING)  ? attrib : srcAttrib;
         final String strNameSpace = (srcNameSpaceURI==null)|| srcNameSpaceURI.equals(JDFConstants.EMPTYSTRING) ? nameSpaceURI : srcNameSpaceURI;
-
+        if(xmlnsPrefix(attrib)!=null && nameSpaceURI==null)
+        {
+            boolean b=src.hasAttribute(strSrcAttrib, strNameSpace,false);
+            if(b)
+            {
+                final Attr attr=src.getDOMAttr(strSrcAttrib, strNameSpace, true);
+                if(attr!=null)
+                {
+                    nameSpaceURI=attr.getNamespaceURI();
+                }
+            }
+        }
         final String attribute = src.getAttribute(strSrcAttrib, strNameSpace, null);
         setAttribute(attrib, attribute);
-        if(attribute!=null) {
+        if(attribute!=null) 
+        {
 			src.removeAttribute(strSrcAttrib, strNameSpace);
 		}
     }

@@ -388,12 +388,12 @@ public class JDFRefElement extends JDFElement
 		final JDFResource newInline   = (JDFResource) appendElement(targetRes.getNodeName(), null);
 				
 		// copy elements and attributes¬
-		newInline.setAttributes(targetRes.getAttributeMap());
+		newInline.setAttributes(targetRes);
 		final VElement v = targetRes.getChildElementVector(null, null, null, true, 0, false);
 		
 		for(i = 0; i < v.size(); i++)
 		{
-			newInline.copyElement((KElement)v.elementAt(i), null);
+			newInline.copyElement(v.item(i), null);
 		}
 		
 		newInline.cleanResourceAttributes();

@@ -51,6 +51,21 @@ public class VElementTest extends TestCase
         assertFalse("containsElement",v.containsElement(e1));
        
     }
+    
+    public void testgetNodeNames()
+    {
+        XMLDoc d=new XMLDoc("doc",null);
+        KElement e=d.getRoot();
+        KElement a1=e.appendElement("a1");
+        KElement a2=e.appendElement("b:a2","b");
+        VElement v=e.getChildElementVector(null,null, null, true,0,true);
+        VString s=v.getElementNameVector(false);
+        assertEquals(s, new VString("a1 b:a2"," "));
+        s=v.getElementNameVector(true);
+        assertEquals(s, new VString("a1 a2"," "));
+    }
+    /////////////////////////////////////////////
+    
     public void testUnify()
     {
         XMLDoc d=new XMLDoc("doc",null);

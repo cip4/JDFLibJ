@@ -105,6 +105,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.pool.JDFPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
@@ -114,6 +115,7 @@ import org.cip4.jdflib.resource.process.JDFQualityControlResult;
 import org.cip4.jdflib.resource.process.JDFSourceResource;
 import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.StringUtil;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 
@@ -1200,12 +1202,12 @@ public class JDFResource extends JDFElement
             if (kElem instanceof JDFResourceLink)
             {
                 final JDFResourceLink l = (JDFResourceLink) kElem;
-
-                if (l.isValid(KElement.EnumValidationLevel.Incomplete))
+                if (JDFResourceLink.EnumUsage.Input.equals(l.getUsage()) != bCreate)
                 {
-                    if ((l.getUsage().equals(JDFResourceLink.EnumUsage.Input)) != bCreate)
+                    final JDFPool pool = l.getPool();
+                    if(pool!=null)
                     {
-                        vv.add(l.getPool().getParentNode_KElement());
+                        vv.add(pool.getParentNode_KElement());
                     }
                 }
             }
@@ -1372,7 +1374,9 @@ public class JDFResource extends JDFElement
         if(!bLink && !bRef) {
 			return null;
 		}
-        final JDFAttributeMap mID = new JDFAttributeMap(AttributeName.RREF, getID());
+        final String resID = getID();
+        
+        final JDFAttributeMap mID = new JDFAttributeMap(AttributeName.RREF, resID);
         final VString refList=new VString();
         if(bLink) {
 			refList.add(getLinkString());
@@ -1385,7 +1389,28 @@ public class JDFResource extends JDFElement
         if(n==null) {
 			return null;
 		}
-        VElement vRet= n.getChildrenFromList(refList, mID, false, null);
+        VElement vRet=null;
+        if(bRef)
+        {
+            vRet=n.getChildrenFromList(refList, mID, false, null);
+        }
+        else
+        {
+            VElement vNodes=n.getvJDFNode(null, null, false);
+            vRet=new VElement();
+            final int size = vNodes.size();
+            for(int i=0;i<size;i++)
+            {
+                VElement vTmp=((JDFNode)vNodes.elementAt(i)).getResourceLinks(null);
+                final int size2 = vTmp==null ? 0 : vTmp.size();
+                for(int j=0;j<size2;j++)
+                {
+                    final JDFResourceLink link = (JDFResourceLink)vTmp.item(j);
+                    if(resID.equals(link.getrRef()))
+                        vRet.add(link);
+                }              
+            }
+        }
         JDFAttributeMap mPart=getPartMap();
         if(mPart!=null && mPart.size()>0)
         {
@@ -2424,6 +2449,7 @@ public class JDFResource extends JDFElement
         return resultAttrib;
     }
 
+  
     /**
      * Get the Attribute Map of the actual element also following inheritence
      *
@@ -2482,20 +2508,11 @@ public class JDFResource extends JDFElement
             String nameSpaceURI,
             boolean bInherit)
     {
-        boolean bRet = false;
-
         if (bInherit)
         {
-            bRet = getInheritedAttribute(attrib, nameSpaceURI, JDFConstants.QUOTE).
-            compareTo(JDFConstants.QUOTE) != 0;
+            return getInheritedAttribute(attrib, nameSpaceURI, null)!=null;
         }
-        else
-        {
-            bRet = getAttribute(attrib, nameSpaceURI, JDFConstants.QUOTE).
-            compareTo(JDFConstants.QUOTE) != 0;
-        }
-
-        return bRet;
+        return getAttribute(attrib, nameSpaceURI, null)!=null;
     }
 
 
@@ -3365,7 +3382,7 @@ public class JDFResource extends JDFElement
     private void collapseElements(boolean bCollapseToNode, JDFResource leaf, JDFResource parent, final VElement localLeaves)
     {
         final int localSize = localLeaves.size();
-        final VElement vElm = leaf.getChildElementVector(null, null, null, true, 0, false);
+        final VElement vElm = leaf.getChildElementVector_JDFElement(null, null, null, true, 0, false);
         for (int j = 0; j < vElm.size(); j++)
         {
             final String nodeName = ((KElement) vElm.elementAt(j)).getNodeName();
@@ -4089,16 +4106,15 @@ public class JDFResource extends JDFElement
      *
      * @default getChildElementVector(null, null, null, true, 0, false)
      */
-    public VElement getChildElementVector(String element,
-            String nameSpaceURI, JDFAttributeMap mAttrib, boolean bAnd, int maxSize, boolean bResolveTarget)
+    public VElement getChildElementVector(String element, String nameSpaceURI, JDFAttributeMap mAttrib, boolean bAnd, int maxSize, boolean bResolveTarget)
     {
-        final VElement v = super.getChildElementVector(element, nameSpaceURI, mAttrib, bAnd, 0, bResolveTarget);
+        VElement v = super.getChildElementVector(element, nameSpaceURI, mAttrib, bAnd, 0, bResolveTarget);
         final String nodeName = getNodeName();
 
         // remove partitions
         for (int i = v.size()-1; i >= 0; i--)
         {
-            if (nodeName.equals( ((KElement)v.elementAt(i)).getNodeName()) )
+            if (nodeName.equals( (v.item(i)).getNodeName()) )
             {
                 v.remove(i);
             }
@@ -4108,16 +4124,18 @@ public class JDFResource extends JDFElement
         {
             // no direct kids, check parents
             final KElement n = getParentNode_KElement();
-
-            if (n!=null && n.getNodeName().equals(getNodeName()))
+            if (n!=null && n.getNodeName().equals(getNodeName())&& (n instanceof JDFResource))
             {
-                if (n instanceof JDFResource)
+                final JDFResource r = (JDFResource)n;
+                // recurse into parents
+                VElement v2=r.getChildElementVector(element,nameSpaceURI,mAttrib,bAnd,maxSize,bResolveTarget);
+                VString nodeNames=v.getElementNameVector(false);
+                for(int i=v2.size()-1;i>=0;i--)
                 {
-                    final JDFResource r = (JDFResource)n;
-                    // recurse into parents
-                    v.appendUnique(r.getChildElementVector(
-                            element,nameSpaceURI,mAttrib,bAnd,maxSize,bResolveTarget));
+                    if(nodeNames.contains(v2.item(i).getLocalName()))
+                        v2.remove(i);
                 }
+                v.addAll(v2);
             }
         }
 
