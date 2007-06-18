@@ -486,7 +486,9 @@ public class JDFMerge
                 }
                 else if (srcMap.subMap(trgMap))
                 {
-                    // potential check for very deep src
+                     if(trgMap.size()+1!=srcMap.size())
+                        throw new JDFException("JDFResource.mergePartition attempting to merge incompatible sub-partitions!");
+                    
                     trg.copyElement(src, null);
                 }
                 else
