@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -82,6 +82,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Vector;
@@ -108,7 +109,7 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 
 /**
- * TODO JAVADOC
+ * MIME utilities for reading and writing MIME/MULTIPART/RELATED streams
  *
  * @author Markus Nyman, (markus.cip4@myman.se)
  * 
@@ -123,30 +124,30 @@ public class MimeUtil {
     /**
      * 
      */
-    
+
     public static void setContentID(BodyPart bp, String cid) 
     {
         if(cid==null)
             return;
-        
+
         try
         {
             bp.setHeader(CONTENT_ID, "<" + urlToCid(cid).substring(4)  + ">");
         }
         catch (MessagingException x)
         {
-// nop
+//          nop
         } 
     }
-    
-    
+
+
     /**
      * set the filename header of a bodypart to a string
-      * 
+     * 
      * @param bp the bodypart
      * @param path the path to set
      * 
-      */
+     */
     public static void setFileName(BodyPart bp, String path) 
     {
         try
@@ -155,12 +156,11 @@ public class MimeUtil {
         }
         catch (MessagingException x)
         {
-            // nop
-            
+            // nop           
         }
     }
 
-        /**
+    /**
      * get the filename header of a bodypart a string
      * if no file name is set, a unique filename is generated from cid and content type
      * 
@@ -176,16 +176,16 @@ public class MimeUtil {
             s=bp.getFileName();
             if(s!=null)
                 return s;
-         }
+        }
         catch (MessagingException x)
         {
-           // nop
+            // nop
         }
         // TODO handle extensions here
         s=getContentID(bp);
         return s;        
     }
-    
+
     /**
      * get the ContentID header of a bodypart a string
      * @param bp the bodypart
@@ -206,7 +206,7 @@ public class MimeUtil {
         String s=StringUtil.setvString(cids, null, null, null);
         if(s==null)
             return s;
-        
+
         return urlToCid(s).substring(4);
     }
 
@@ -245,7 +245,7 @@ public class MimeUtil {
         }
         return bodyParts;
     }
-    
+
     /**
      * get the MIME BodyPart from a multiPart package with a given cid
      * 
@@ -270,9 +270,9 @@ public class MimeUtil {
             return null;
         } 
 
-         return null;
+        return null;
     }
-    
+
     /**
      * get the MIME BodyPart from a multiPart package with a given cid
      * create one if it does not exist;
@@ -311,7 +311,7 @@ public class MimeUtil {
     {
         if(bp==null)
             return null;
-        
+
         try
         {
             String mimeType=bp.getContentType();
@@ -332,7 +332,7 @@ public class MimeUtil {
         {
             return null; // snafu
         }
-     }
+    }
 
     /**
      * check if a BodyPart matches a given cid
@@ -346,7 +346,7 @@ public class MimeUtil {
     {
         if(cid==null)
             return true; // wildcard
-        
+
         if(cid.startsWith("<"))
             cid=cid.substring(1);
         if(cid.toLowerCase().startsWith("cid:"))
@@ -357,8 +357,8 @@ public class MimeUtil {
         String s=getContentID(bp);
         if(s==null)
             return false;
-        
-        
+
+
         return cid.equalsIgnoreCase(s);
     }
 
@@ -384,7 +384,7 @@ public class MimeUtil {
         {
             return null;
         }
-   }
+    }
     /**
      * create a root multipart from an input stream
      * 
@@ -426,7 +426,7 @@ public class MimeUtil {
         int posSemicolon=mimeType.indexOf(";");
         if(posSemicolon>0)
             mimeType=mimeType.substring(0, posSemicolon);
-        
+
         return  JDFConstants.MIME_JDF.equalsIgnoreCase(mimeType)  ||
         JDFConstants.MIME_JMF.equalsIgnoreCase(mimeType)  ||
         JDFConstants.MIME_TEXTXML.equalsIgnoreCase(mimeType); 
@@ -470,7 +470,6 @@ public class MimeUtil {
             {
                 cid=urlToCid(urlStrings[0]);
             }
-
         }
 
         extendMultipart(multipart, docJDF, cid);
@@ -483,7 +482,6 @@ public class MimeUtil {
         {
             return null;
         }
-
         return multipart;
     }
 
@@ -506,7 +504,7 @@ public class MimeUtil {
             }
         }
         updateXMLMultipart(multipart, docJDF, cid);
-       
+
         URL urls[]=new URL[vSize];
         // add a new body part for each url
         for(int i=0;i<vSize;i++)
@@ -527,7 +525,8 @@ public class MimeUtil {
                         URLDataSource uds=new URLDataSource(urls[i]);
                         BodyPart messageBodyPart = new MimeBodyPart();
                         messageBodyPart.setDataHandler(new DataHandler(uds));
-                        setFileName(messageBodyPart,urlString);
+                        File f=UrlUtil.urlToFile(urlString);
+                        setFileName(messageBodyPart,f.getAbsolutePath());
                         //messageBodyPart.setHeader("Content-Type", JMFServlet.JDF_CONTENT_TYPE); // JDF: application/vnd.cip4-jdf+xml
                         setContentID(messageBodyPart,urlString);
                         multipart.addBodyPart(messageBodyPart);
@@ -569,7 +568,7 @@ public class MimeUtil {
             urlString=urlString.substring(4);
         if(urlString.endsWith(">"))
             urlString=urlString.substring(0,urlString.length()-1);
-        
+
         return "cid:"+new File(urlString).getName(); // 
     }
 
@@ -615,7 +614,7 @@ public class MimeUtil {
             cid=originalFileName;
         if(cid==null)
             cid="CID_"+xmlDoc.getRoot().getAttribute("ID");
-        
+
         BodyPart messageBodyPart=getCreatePartByCID(multipart, cid);
         try
         {
@@ -640,7 +639,33 @@ public class MimeUtil {
     }
 
     /**
-     * write a Multipart to an output stream
+     * write a Multipart to an output URL
+     * Use getInputStream() to retrieve the http response
+     * 
+     * @param mp the mime MultiPart to write
+     * @param strUrl the URL to write to
+     * 
+     * @throws IOException
+     * @throws MessagingException
+     * @return {@link HttpURLConnection} the opened http connection
+     * @throws IOException 
+     * @throws MessagingException 
+     */
+    public static HttpURLConnection writeToURL(Multipart mp, String strUrl) throws IOException, MessagingException 
+    {
+        URL url=new URL(strUrl);
+        HttpURLConnection httpURLconnection = (HttpURLConnection) url.openConnection();
+        httpURLconnection.setRequestMethod("POST");
+       
+        httpURLconnection.setDoOutput(true);
+        httpURLconnection.setDoInput(true);
+        
+        final OutputStream out= httpURLconnection.getOutputStream();
+        writeToStream(mp, out);
+        return httpURLconnection;     
+    }    
+    /**
+     * write a Multipart to an output file
      * 
      * @param mp the mime MultiPart to write
      * @param outStream the existing output stream
@@ -688,11 +713,12 @@ public class MimeUtil {
         outStream.flush();
         outStream.close();
     }
+    
     /**
-     * write a Message to an existing output stream
+     * write a Message to a directory
      * 
      * @param mp the mime Message to write
-     * @param outStream the existing output stream
+     * @param directory the directory to use as '.' for writing the mime parts
      * @throws MessagingException 
      * 
      * @throws IOException
@@ -703,20 +729,20 @@ public class MimeUtil {
         boolean exists = directory.exists();
         if(!exists)
             exists = directory.mkdir();
-        
+
         if(!exists)
             throw new FileNotFoundException();
-        
+
         if(!directory.canWrite())
             throw new IOException();
-        
+
         int parts = mp.getCount();
         for (int i = 0; i<parts; i++ ) {
             BodyPart bp = mp.getBodyPart(i);
             writeBodyPartToFile(bp, directory);
             // TODO update urls to the new file values
         }
-     }
+    }
 
 
     /**
@@ -730,7 +756,7 @@ public class MimeUtil {
         boolean exists = directory.exists();
         if(!exists)
             exists = directory.mkdir();
-        
+
         if(!exists)
             throw new FileNotFoundException();
 

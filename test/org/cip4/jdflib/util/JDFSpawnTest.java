@@ -640,6 +640,10 @@ public class JDFSpawnTest extends JDFTestCaseBase
             assertEquals("old res ID",rOld.getID(),clonedResID);
             JDFResource rNew=raMerge.getNewLink().getTarget();
             assertNotNull("new res  merged",rNew);
+            assertNull(ap.getElement("Part"));
+            JDFMerged mergedAudit=(JDFMerged) ap.getAudit(-1, EnumAuditType.Merged, null, null);
+            assertNotNull(mergedAudit);
+            assertEquals(mergedAudit.getPartMapVector().elementAt(0), map);
         }
     }
 

@@ -1012,7 +1012,7 @@ public class KElement extends ElementNSImpl
             }
             else
             {
-                super.removeAttributeNS(nameSpaceURI, attrib);
+                super.removeAttributeNS(nameSpaceURI, xmlnsLocalName(attrib));
                 if(nameSpaceURI.equals(getNamespaceURI())) {
 					super.removeAttributeNS(null, attrib);
 				}

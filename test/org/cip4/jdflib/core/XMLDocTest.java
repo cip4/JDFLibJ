@@ -336,6 +336,23 @@ public class XMLDocTest extends JDFTestCaseBase
 
     }
     
+    public void testWriteToFile() throws Exception
+    {
+        XMLDoc d=new XMLDoc("doc",null);
+        String out=sm_dirTestDataTemp+File.separator+"dir"+File.separator+"dir2";
+        File dir=new File(out);
+        if(dir.isDirectory())
+            dir.delete();
+        else
+            dir.mkdirs();
+        
+        out+=File.separator+"d.xml";
+        
+        assertTrue(d.write2File(out, 2, true));
+        File f=new File(out);
+        assertTrue(f.canRead());
+    }
+    
     public void testSize()
     {
         Runtime.getRuntime().gc();

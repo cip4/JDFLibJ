@@ -1206,6 +1206,19 @@ public class KElementTest extends JDFTestCaseBase
         kElem.setAttribute("foo","הצü\"\'");
         assertEquals("special characters", kElem.getAttribute("foo", null, null), "הצü\"\'");
     }
+    public void testSetAttributeNS() throws Exception
+    {
+        XMLDoc doc = new XMLDoc("a",null);
+        KElement root = doc.getRoot();
+        root.setAttribute("n:b", "1", "www.n.com");
+        assertEquals(root.getAttribute("n:b"), "1");
+        assertEquals(root.getAttribute("n:b","www.n.com",null), "1");
+        assertEquals(root.getAttribute("b","www.n.com",null), "1");
+        root.setAttribute("n:b", (String)null, "www.n.com");
+        assertNull(root.getAttribute("n:b",null,null));
+        assertNull(root.getAttribute("n:b","www.n.com",null));
+        assertNull(root.getAttribute("b","www.n.com",null));
+   }
 
     public void testCache()
     {

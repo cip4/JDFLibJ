@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,7 +76,9 @@
  */
 package org.cip4.jdflib.util;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.net.URL;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -85,6 +87,41 @@ import org.cip4.jdflib.JDFTestCaseBase;
 
 public class UrlUtilTest extends JDFTestCaseBase
 {   
+
+    ///////////////////////////////////////////////////////////////////////////
+    public void testStreamToFile() throws Exception
+    {
+        byte[] b=new byte[55555];
+        for(int i=0;i<55555;i++)
+            b[i]=(byte)(i%256);
+        ByteArrayInputStream is=new ByteArrayInputStream(b);
+        is.close();
+        File f=new File(sm_dirTestDataTemp+"stream.dat");
+        if(f.exists())
+            f.delete();
+        
+        UrlUtil.streamToFile(is, sm_dirTestDataTemp+"stream.dat");
+        assertTrue(f.exists());
+
+        FileInputStream fis=new FileInputStream(f);
+        for(int i=0;i<55555;i++)
+        {
+            b[i]=(byte)fis.read();
+            if(i%287==0)
+                assertEquals((256+ (int)b[i])%256, i%256);
+        }
+        
+        int j=fis.read();
+        assertEquals("eof reached",j, -1);
+        fis.close();
+        
+        FileInputStream fis2=new FileInputStream(f);
+        File f2=UrlUtil.streamToFile(fis2, sm_dirTestDataTemp+"stream2.dat");
+        assertTrue(f2.canRead());
+        assertTrue(f.delete());
+        assertTrue(f2.delete());
+        
+    }
 
     ///////////////////////////////////////////////////////////////////////////
     public void testIsCid() throws Exception
@@ -129,7 +166,7 @@ public class UrlUtilTest extends JDFTestCaseBase
         assertTrue(UrlUtil.isURL("HTTP://a/b?c"));
     }
     ///////////////////////////////////////////////////////////////////////////
-    
+
     public void testStringToURL() throws Exception
     {
 
@@ -149,28 +186,39 @@ public class UrlUtilTest extends JDFTestCaseBase
             assertEquals(UrlUtil.StringToURL("File:/c:/xyz/").getPath(), new URL("File:/c:/xyz").getPath());
             assertEquals(UrlUtil.StringToURL("c:\\xyz").getPath(), new URL("File:/c:/xyz").getPath());
             assertEquals(UrlUtil.StringToURL("File:/c:/xyz").getPath(), new URL("File:/c:/xyz").getPath());
-            
+
             file.delete();
         }
 
         assertEquals(UrlUtil.StringToURL("http://foo"), new URL("http://foo"));
     }
     ///////////////////////////////////////////////////////////////////////////
-    
+
+    public void testFileToURL() throws Exception
+    {
+        File f=new File("C:\\IO.SYS");
+        String s=UrlUtil.fileToUrl(f, false);
+        assertEquals(s,"file:///C:/IO.SYS");
+        f=new File("\\IO.SYS");
+        s=UrlUtil.fileToUrl(f, false);
+        assertEquals(s,"file:///C:/IO.SYS");
+    }     
+    ///////////////////////////////////////////////////////////////////////////
+
     public void testURLToFile() throws Exception
     {
-         String cwd=System.getProperty("user.dir");
+        String cwd=System.getProperty("user.dir");
         System.setProperty("user.dir", sm_dirTestDataTemp);
         File f=UrlUtil.urlToFile(".");
         assertTrue(f.isDirectory());
         File f2=UrlUtil.urlToFile(UrlUtil.fileToUrl(f, true));
         assertTrue(f2.isDirectory());
         assertEquals(f2.getCanonicalPath(), f.getCanonicalPath());
-        
+
         f=new File(".\\simple.pdf");
         f2=UrlUtil.urlToFile(UrlUtil.fileToUrl(f, true));   
         assertEquals("asccii",f.getCanonicalPath(), f2.getCanonicalPath());
-        
+
         f=new File("blöd .pdf");
         f2=UrlUtil.urlToFile(UrlUtil.fileToUrl(f, true));   
         assertEquals("non asccii",f.getCanonicalPath(), f2.getCanonicalPath());
@@ -182,15 +230,15 @@ public class UrlUtilTest extends JDFTestCaseBase
 
         System.setProperty("user.dir", cwd);
     }
-   ///////////////////////////////////////////////////////////////////////////
-    
+    ///////////////////////////////////////////////////////////////////////////
+
     public  void testisUNC()
     {
         assertTrue(UrlUtil.isUNC("\\\\foo\\bar"));
         assertFalse(UrlUtil.isUNC("c/d/e.f"));
         assertFalse(UrlUtil.isUNC("/c/d/e.f"));
     }   
-    
+
     public void testGetRelativeURI()
     {
         File f=new File("./a b");
@@ -199,7 +247,7 @@ public class UrlUtilTest extends JDFTestCaseBase
         assertEquals("escaped utf8", StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, true),'\\',"/",0),"../a.%c3%a4");
         assertEquals("unescaped but utf8",StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, false),'\\',"/",0),new String(StringUtil.setUTF8String("../a.ä")));
     }
-    
+
     ///////////////////////////////////////////////////////////////////////////
     public void testGetRelativeURL()
     {
@@ -213,24 +261,24 @@ public class UrlUtilTest extends JDFTestCaseBase
         file=cwd;
         assertEquals(UrlUtil.getRelativeURL(file, cwd, true),".");   
     }
-    
+
     ///////////////////////////////////////////////////////////////////////////
-   
+
     public void testGetURLWithDirectory()
     {
         String url="File://a.b";
         assertEquals("test nulls",url, UrlUtil.getURLWithDirectory(null, url));
         assertEquals("test nulls",url, UrlUtil.getURLWithDirectory("", url));
         assertEquals("test nulls",url, UrlUtil.getURLWithDirectory("File:/dir", url));
-        
+
         url="a.b";
         assertEquals("relative url","File://dir/a.b", UrlUtil.getURLWithDirectory("File://dir/", url));
         assertEquals("relative url","File://dir/a.b", UrlUtil.getURLWithDirectory("File://dir", url));
-        
+
         url="/a.b";
         assertEquals("absolute url no host","File://a.b", UrlUtil.getURLWithDirectory("File://dir/", url));
         assertEquals("absolute url no host","File://a.b", UrlUtil.getURLWithDirectory("File://dir", url));
-        
+
         url="//a.b";
         assertEquals("absolute url with default host","File://a.b", UrlUtil.getURLWithDirectory("File://dir/", url));
         assertEquals("absolute url with default host","File://a.b", UrlUtil.getURLWithDirectory("File://dir", url));
@@ -238,14 +286,14 @@ public class UrlUtilTest extends JDFTestCaseBase
         url="//boo/a.b";
         assertEquals("absolute url with new host","File://boo/a.b", UrlUtil.getURLWithDirectory("File://dir/", url));
         assertEquals("absolute url with new host","File://boo/a.b", UrlUtil.getURLWithDirectory("File://dir", url));
-        
+
         url="//boo/./gg/../a.b";
         assertEquals("absolute url with new host and cleandots","File://boo/a.b", UrlUtil.getURLWithDirectory("File://dir/", url));
         assertEquals("absolute url with new host and cleandots","File://boo/a.b", UrlUtil.getURLWithDirectory("File://dir", url));
     }
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
-    
+
     public void testCleanDots()
     {
         assertEquals(UrlUtil.cleanDots("."), ".");

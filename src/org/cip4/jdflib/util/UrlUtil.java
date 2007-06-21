@@ -82,6 +82,7 @@ package org.cip4.jdflib.util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -293,6 +294,22 @@ public class UrlUtil
     }
 
     /**
+     * create a new directory and return null if the directory could not be created
+     * @param newDir the path or URL of the new directory
+     */
+    public static File getCreateDirectory(String newDir) 
+    {
+        File f=UrlUtil.urlToFile(newDir);
+        if(f==null)
+            return null;
+        if(!f.exists())
+            f.mkdirs();
+        if(!f.isDirectory())
+            return null;
+        return f;
+    }
+
+    /**
      * Convert a File to a valid file URL or IRL<br>
      * note that some internal functions use network protocol and therefor performance may be non-optimal
      * 
@@ -303,7 +320,6 @@ public class UrlUtil
      */
     public static String fileToUrl(File f, boolean bEscape128) throws MalformedURLException
     {
-
         try
         {
             f=f.getCanonicalFile();
@@ -313,8 +329,6 @@ public class UrlUtil
             throw new MalformedURLException();
         }
 
-//      URL u=f.toURL();
-//      String s=u.toExternalForm().substring(5); // remove "file:"
         String s=f.getAbsolutePath();
         s=StringUtil.replaceChar(s,'\\',"/",0);
         s=new String(StringUtil.setUTF8String(s));
@@ -326,8 +340,10 @@ public class UrlUtil
         {
             s= StringUtil.escape(s,m_URIEscape,"%",16,2,0x21,0x7fffffff);           
         }
+//        if(s.length()>2 && s.charAt(1)==':' && File.separator.equals("\\"))
+//            s=s.charAt(0)+s.substring(2);
         if(s.charAt(0)!='/')
-            s="/"+s;
+            s="///"+s;
 
         return "file:"+s;
     }
@@ -346,12 +362,56 @@ public class UrlUtil
 
         if(urlString.toLowerCase().startsWith("file:"))
             urlString=urlString.substring(5); // remove "file:"
+        if(File.separator.equals("\\")) // on windows
+        {
+            if(urlString.startsWith("///") && urlString.length()>5 && urlString.charAt(4)=='/')
+                urlString=urlString.charAt(3)+":"+urlString.substring(4);
+            else if(urlString.startsWith("/") && urlString.length()>3 && urlString.charAt(2)=='/'&& urlString.charAt(1)!='/')
+                urlString=urlString.charAt(1)+":"+urlString.substring(2);
+        }
         urlString= StringUtil.unEscape(urlString, "%", 16, 2);
         urlString=StringUtil.getUTF8String(urlString.getBytes());
 
         return new File(urlString);
     }
     
+    /**
+     * dump a stream to a newly created file
+     * @param fis the inputstream to read
+     * @return the file created by the stream, null if snafu
+     */
+    public static File streamToFile(InputStream fis, String fileName)
+    {
+        File tmp=urlToFile(fileName);
+        if(tmp==null)
+        {
+            return null;
+        }
+        byte[] b=new byte[1000];
+        try
+        {
+            FileOutputStream fos=new FileOutputStream(tmp);
+            while (true)
+            {
+                int i=fis.read(b);
+                if(i<=0)
+                    break;
+                fos.write(b,0,i);
+            }
+            fos.close();
+            fis.close();
+        }
+        catch (FileNotFoundException x)
+        {
+            return null;
+        }
+        catch (IOException x)
+        {
+            return null;
+        }
+
+        return tmp;
+    }
     /**
      * Retrieve a file for a relative or absolute file url
      * @param urlString the file url to retrieve a file for
