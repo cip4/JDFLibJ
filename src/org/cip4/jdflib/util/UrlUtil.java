@@ -82,7 +82,6 @@ package org.cip4.jdflib.util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -375,43 +374,7 @@ public class UrlUtil
         return new File(urlString);
     }
     
-    /**
-     * dump a stream to a newly created file
-     * @param fis the inputstream to read
-     * @return the file created by the stream, null if snafu
-     */
-    public static File streamToFile(InputStream fis, String fileName)
-    {
-        File tmp=urlToFile(fileName);
-        if(tmp==null)
-        {
-            return null;
-        }
-        byte[] b=new byte[1000];
-        try
-        {
-            FileOutputStream fos=new FileOutputStream(tmp);
-            while (true)
-            {
-                int i=fis.read(b);
-                if(i<=0)
-                    break;
-                fos.write(b,0,i);
-            }
-            fos.close();
-            fis.close();
-        }
-        catch (FileNotFoundException x)
-        {
-            return null;
-        }
-        catch (IOException x)
-        {
-            return null;
-        }
 
-        return tmp;
-    }
     /**
      * Retrieve a file for a relative or absolute file url
      * @param urlString the file url to retrieve a file for

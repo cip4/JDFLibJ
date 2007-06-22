@@ -88,40 +88,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 public class UrlUtilTest extends JDFTestCaseBase
 {   
 
-    ///////////////////////////////////////////////////////////////////////////
-    public void testStreamToFile() throws Exception
-    {
-        byte[] b=new byte[55555];
-        for(int i=0;i<55555;i++)
-            b[i]=(byte)(i%256);
-        ByteArrayInputStream is=new ByteArrayInputStream(b);
-        is.close();
-        File f=new File(sm_dirTestDataTemp+"stream.dat");
-        if(f.exists())
-            f.delete();
-        
-        UrlUtil.streamToFile(is, sm_dirTestDataTemp+"stream.dat");
-        assertTrue(f.exists());
 
-        FileInputStream fis=new FileInputStream(f);
-        for(int i=0;i<55555;i++)
-        {
-            b[i]=(byte)fis.read();
-            if(i%287==0)
-                assertEquals((256+ (int)b[i])%256, i%256);
-        }
-        
-        int j=fis.read();
-        assertEquals("eof reached",j, -1);
-        fis.close();
-        
-        FileInputStream fis2=new FileInputStream(f);
-        File f2=UrlUtil.streamToFile(fis2, sm_dirTestDataTemp+"stream2.dat");
-        assertTrue(f2.canRead());
-        assertTrue(f.delete());
-        assertTrue(f2.delete());
-        
-    }
 
     ///////////////////////////////////////////////////////////////////////////
     public void testIsCid() throws Exception
