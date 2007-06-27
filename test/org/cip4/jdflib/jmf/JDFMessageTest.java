@@ -185,6 +185,24 @@ public class JDFMessageTest extends TestCase
         assertNull(command.getXSIType());
         assertEquals(command.getType(),"foo:bar");
     }
+    /////////////////////////////////////////////////////////////////////////////
+
+    public void testCreateResponse()
+    {
+        JDFDoc doc = new JDFDoc(ElementName.JMF);
+        JDFJMF jmf=doc.getJMFRoot();
+        JDFCommand command=(JDFCommand) jmf.appendMessageElement(EnumFamily.Command,EnumType.UpdateJDF);
+        assertEquals(command.getXSIType(),"CommandUpdateJDF");
+        command.setType("foo:bar");
+        assertNull(command.getXSIType());
+        assertEquals(command.getType(),"foo:bar");
+        JDFJMF resp=command.createResponse();
+        final JDFResponse response = resp.getResponse(0);
+        assertEquals(response,resp.getMessageElement(null, null, 0));
+        assertEquals(response.getType(),"foo:bar");
+        assertEquals(response.getrefID(),command.getID());
+        
+    }
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////

@@ -84,6 +84,37 @@ import org.cip4.jdflib.util.JDFDuration;
 public class JDFDurationTest extends TestCase
 {
 
+    public final void testNegativeDuration() throws Exception
+    {
+        JDFDuration d = new JDFDuration(" -PT5M ");
+        assertEquals(  d.getDurationISO(),"-PT5M");
+        try
+        {
+            new JDFDuration("--PT5M90.95S");
+            fail("bad duration string");
+        }
+        catch (Exception e) {
+            // nop
+        }
+        d = new JDFDuration("-P3M");
+        assertEquals(d.getDurationISO(),"-P3M");
+        assertEquals(d.getDuration(),-3*30*24*60*60);
+        d = new JDFDuration("-P3MT4M");
+        assertEquals(d.getDurationISO(),"-P3MT4M");
+        assertEquals(d.getDuration(),-3*30*24*60*60 - 4*60);
+        d = new JDFDuration("-P13M");
+        assertEquals(d.getDurationISO(),"-P1Y1M");
+
+        d = new JDFDuration("-P365D");
+        assertEquals(d.getDurationISO(),"-P1Y");
+        d = new JDFDuration("-P395D");
+        assertEquals(d.getDurationISO(),"-P1Y1M");
+        d = new JDFDuration("-PT3600S");
+        assertEquals(d.getDurationISO(),"-PT1H");
+        assertEquals(new JDFDuration("-PT0.95S").getDurationISO(),"-PT0.95S");
+        assertEquals(new JDFDuration("-PT5M30.45S").getDurationISO(),"-PT5M30.45S");
+        assertEquals(new JDFDuration("-PT5M90.95S").getDurationISO(),"-PT6M30.95S");        
+    }
     public final void testJDFDurationString() throws Exception
     {
         JDFDuration d = new JDFDuration(" PT5M ");
@@ -114,6 +145,8 @@ public class JDFDurationTest extends TestCase
     }
     public final void testFractions() throws Exception
     {
+        assertEquals(new JDFDuration(90.5).getDurationISO(),"PT1M30.5S");
+        assertEquals(new JDFDuration(-90.5).getDurationISO(),"-PT1M30.5S");
         assertEquals(new JDFDuration("PT0.95S").getDurationISO(),"PT0.95S");
         assertEquals(new JDFDuration("PT5M30.45S").getDurationISO(),"PT5M30.45S");
         assertEquals(new JDFDuration("PT5M90.95S").getDurationISO(),"PT6M30.95S");        

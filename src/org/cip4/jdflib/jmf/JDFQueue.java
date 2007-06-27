@@ -151,7 +151,7 @@ public class JDFQueue extends JDFAutoQueue
      */
     public int getEntryCount()
     {
-        return getChildrenByTagName(ElementName.QUEUEENTRY,null,null, false, true,0).size();
+        return numChildElements(ElementName.QUEUEENTRY,null);
     }
     
     /**
@@ -222,10 +222,14 @@ public class JDFQueue extends JDFAutoQueue
      * attribute map, if you have more information available
      * 
      * @param strQEntryID the QueueEntryID of the requeste QueueEntry
-     * @return the QueueEntry with QueueEntryID=strQEntryID
+     * @return the QueueEntry with QueueEntryID=strQEntryID, null if strQEntryID is null or empty string 
+     * or the queueentry does not exist
+     * 
      */
     public JDFQueueEntry getEntry (String strQEntryID)
     {
+        if(isWildCard(strQEntryID))
+            return null;
         return (JDFQueueEntry) getChildByTagName(ElementName.QUEUEENTRY,null,0,new JDFAttributeMap(AttributeName.QUEUEENTRYID,strQEntryID),true,true);
     }
     

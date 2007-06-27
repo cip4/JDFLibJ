@@ -4969,6 +4969,8 @@ public class KElement extends ElementNSImpl
             int posB1 = path.indexOf("]");
             String n = path.substring(posB0 + 1, posB1);
             iSkip = StringUtil.parseInt(n, 0);
+            if(iSkip<=0)
+                throw new IllegalArgumentException("getXPathVector: bad index:"+iSkip);
             iSkip--;
             bExplicitSkip=true;
             newPath = path.substring(0, posB0) + path.substring(posB1 + 1);

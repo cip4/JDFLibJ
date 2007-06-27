@@ -96,6 +96,7 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
@@ -368,11 +369,11 @@ public class JDFMessage extends JDFAutoMessage
 
 
     /**
-     * SetQuery - sets the initiating query to q
+     * SetQuery - sets the initiating query, command or registration to q
      *
      * @param q
      */
-    public void setQuery(JDFQuery q)
+    public void setQuery(JDFMessage q)
     {
         EnumFamily f=getFamily();
         if(f==null || f.equals(EnumFamily.Query)||
@@ -384,7 +385,7 @@ public class JDFMessage extends JDFAutoMessage
                                 : "JDFMessage.setQuery: illegal family type " + f.getName();
             throw new JDFException(message);
         }
-        setAttribute(AttributeName.REFID, q.getID(), JDFConstants.EMPTYSTRING);
+        setAttribute(AttributeName.REFID, q.getID(), null);
         setType(q.getType());
     }
 
@@ -444,6 +445,23 @@ public class JDFMessage extends JDFAutoMessage
     {
         final String typeName = value.getName();
         setType(typeName);
+    }
+
+    /**
+     * create a new response for this if this is any message except response
+     * correctly fills refId, type etc.
+      * @return the newly created message
+     */    
+    public JDFJMF createResponse()
+    {
+        JDFMessage.EnumFamily family=getFamily();
+
+        if (family==null)
+            throw new JDFException ("createResponse: creating resp from undefined message family");
+
+        JDFJMF jmf=JDFJMF.createJMF(EnumFamily.Response, null);
+        jmf.getResponse(0).setQuery(this);
+        return jmf;
     }
 
     /**

@@ -122,7 +122,7 @@ public class JDFDuration
     // E.g. expressions "P60D" that is equal 60 days or "PT68H" that is equal 68hours are allowed
 
 
-    private static final String REGEX_DURATION = "[P](((\\d)*)[Y])?((\\d)*[M])?((\\d)*[D])?" +
+    private static final String REGEX_DURATION = "([-])?[P](((\\d)*)[Y])?((\\d)*[M])?((\\d)*[D])?" +
     "([T]((\\d)*[H])?((\\d)*[M])?((\\d)*([.](\\d)+)?[S])?)?";
 
 
@@ -232,16 +232,18 @@ public class JDFDuration
         if (m_lDuration == 0)
             return "PT00M";
 
-        int i;
-        int temp = (int)m_lDuration;
-        StringBuffer iso = new StringBuffer(20);
+        int temp = Math.abs((int)m_lDuration);
+        double abs = Math.abs(m_lDuration);
+        StringBuffer iso = new StringBuffer(32);
+        if(m_lDuration<0)
+            iso.append("-");
         iso.append("P"); //P is the indicator that 'iso' is a duration
 
-        i = (int)m_lDuration/(60*60*24*365);
+        int i = (int)abs/(60*60*24*365);
         if(i!=0) 
         {
             iso.append(i).append("Y"); // string with years
-            temp = (int)m_lDuration - (i*60*60*24*365);
+            temp = (int)abs - (i*60*60*24*365);
         }
         i = temp;
         i = i/(60*60*24*30);
@@ -258,26 +260,26 @@ public class JDFDuration
         }
         iso.append("T");
 
-        i=(int)m_lDuration%(60*60*24);
+        i=(int)abs%(60*60*24);
         i=i/(60*60);
         if(i!=0) 
         {
             iso.append(i).append("H"); // string with hours
         }
-        i = (int)m_lDuration%(60*60);
+        i = (int)abs%(60*60);
         i = i/(60);
         if(i!=0) 
         {
             iso.append(i).append("M"); // string with minutes
         }
-        i = (int)m_lDuration%(60); 
+        i = (int)abs%(60); 
         boolean bSec=false;
         if(i!=0) 
         {
             iso.append(i); // string with seconds
             bSec=true;
         }
-        double deltaS = m_lDuration-((int)(m_lDuration));
+        double deltaS = abs-((int)(abs));
         if(deltaS>0)
         {
 
@@ -321,8 +323,15 @@ public class JDFDuration
         int iduration       = 0;
         int iTimeLastPos    = 0;
         int iDateLastPos    = 0;
+        int factor          = 1; // the factor for negative durations
 
         int iPPos = a_aDuration.indexOf("P");
+        if(iPPos>0) // check for negative duration
+        {
+            char c=a_aDuration.charAt(iPPos-1);
+            if(c=='-')
+                factor=-1;            
+        }
 
         String strPeriod = a_aDuration.substring(++iPPos, a_aDuration.length());
 
@@ -420,12 +429,12 @@ public class JDFDuration
             m_lDuration = iduration;
             if(fracSecs!=0)
                 m_lDuration+=fracSecs;
+            m_lDuration*=factor;
         }
         catch (NumberFormatException e)
         {
             result = false;
         }
-
         return result;
     }
 
@@ -433,11 +442,21 @@ public class JDFDuration
      * setDuration: sets a duration for <code>this</code> in seconds. 
      * This duration is used in multiple classes of the JDF (e.g. Heating time).  
      * 
-     * @param i the duration in seconds. Values below '0' are set to '0'
+     * @param seconds the duration in seconds. 
      */
-    public void setDuration(int i)
+    public void setDuration(int seconds)
     {
-        m_lDuration = (i > 0 ? i : 0);
+        m_lDuration = seconds;
+    }
+    /**
+     * setDuration: sets a duration for <code>this</code> in seconds, including fractions. 
+     * This duration is used in multiple classes of the JDF (e.g. Heating time).  
+     * 
+     * @param seconds the duration in seconds. 
+     */
+    public void setDuration(double seconds)
+    {
+        m_lDuration = seconds;
     }
 
 
@@ -454,6 +473,7 @@ public class JDFDuration
     /**
      * isLess - tests if the duration of this JDFDuration is longer than
      * the duration of the specified JDFDuration. 
+     * Compares the integer durations, thus -PT15S is shorter than -PT5S
      * 
      * @param x the JDFDuration object to compare to <code>this</code>
      * @return boolean - true if the duration of this JDFDuration is longer than
@@ -468,6 +488,7 @@ public class JDFDuration
     /**
      * isShorter - tests if the duration of this JDFDuration is less than
      * the duration of the specified JDFDuration. 
+     * Compares the integer durations, thus -PT15S is shorter than -PT5S
      * 
      * @param x the JDFDuration object to compare to <code>this</code>
      * @return boolean - true if the duration of this JDFDuration is shorter than

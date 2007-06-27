@@ -973,6 +973,15 @@ public class KElementTest extends JDFTestCaseBase
         root.setXPathAttribute("foo/bar[2]/@a","b2");
         root.setXPathAttribute("foo/bar[2]/sub/@c","d2");
         assertEquals(root.getXPathAttribute("foo/bar[@a=\"b2\"]/sub/@c", null), "d2");
+        try
+        {
+            root.getXPathAttribute("foo/bar[0]/sub/@c", null);
+            fail("index must be >0");
+        }
+        catch(IllegalArgumentException x)
+        {
+            // nop
+        }
 
     }
 
