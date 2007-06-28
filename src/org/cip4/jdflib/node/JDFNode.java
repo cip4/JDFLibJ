@@ -2463,7 +2463,8 @@ public class JDFNode extends JDFElement
             JDFResourceAudit resourceAudit=auditPool.addResourceAudit(null);
             resourceAudit.addNewOldLink(true, r, usage);
             resourceAudit.addNewOldLink(false,toReplace,usage);
-            VElement vRL=getResourceLinkPool().getInOutLinks(usage,true,null,null);
+            final JDFResourceLinkPool resourceLinkPool = getResourceLinkPool();
+            VElement vRL=(resourceLinkPool==null) ? null : resourceLinkPool.getInOutLinks(usage,true,null,null);
             if (vRL != null)
             {
                 for(int i=0;i<vRL.size();i++){
@@ -2845,7 +2846,10 @@ public class JDFNode extends JDFElement
 
     public boolean isExecutable(JDFAttributeMap partMap, boolean bCheckChildren)
     {
-        final Vector v = getResourceLinkPool().getPoolChildren(null, null, null);
+        final JDFResourceLinkPool resourceLinkPool = getResourceLinkPool();
+        if(resourceLinkPool==null)
+            return false;
+        final Vector v = resourceLinkPool.getPoolChildren(null, null, null);
         EnumNodeStatus status=getPartStatus(partMap);
         if((status!=EnumNodeStatus.Waiting)&&(status!=EnumNodeStatus.Ready)) {
             return false;
@@ -5872,8 +5876,10 @@ public class JDFNode extends JDFElement
         JDFResourceAudit resourceAudit = null;
 
         final JDFResource r       = resLink.getLinkRoot();
-        final JDFResourcePool p   = r.getParentJDF().getResourcePool();
-        final JDFResource oldCopy = (JDFResource) p.copyElement(r, null);
+        if(r==null)
+            return null;
+        final JDFResourcePool pool   = r.getParentJDF().getResourcePool();
+        final JDFResource oldCopy = (JDFResource) pool.copyElement(r, null);
 
         if (oldCopy != null)
         {

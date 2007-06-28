@@ -93,7 +93,7 @@ public class JDFRunListTest extends JDFTestCaseBase
     private JDFDoc doc;
     private JDFNode root;
 
- 
+
     public final void testGetFileURL()
     {
         JDFRunList rl=(JDFRunList) root.addResource(ElementName.RUNLIST,null,EnumUsage.Input,null,null,null,null);
@@ -301,16 +301,35 @@ public class JDFRunListTest extends JDFTestCaseBase
     /**
      * experimental mapping of tags to partition keys
      */
+    public void testTagMapTiff() throws Exception
+    {
+        JDFRunList rl=(JDFRunList) root.addResource(ElementName.RUNLIST,EnumUsage.Input);
+        KElement tagMap=rl.appendElement("TagMap");
+        tagMap.setAttribute("BoundaryKey", "EndOfDocument");
+        KElement tagSet=tagMap.appendElement("TagSet");
+        tagSet.setAttribute("Path", "/x3141");
+        tagMap.setXMLComment("This tagmap specifies which document structure corresponds to a Document\n"
+                +" thus incrementing DocIndex or forcing an implicit RunList/@EndofDocument=true\n D100 is the tiff tag 0x3141");
+
+        rl.setFileURL("bigVariable.tiff");
+        rl.setXMLComment("this runlist points to a tiff file with arbitrary structural tagging defined in the tiff tags");
+
+
+    }
+
+    /**
+     * experimental mapping of tags to partition keys
+     */
     public void testTagMap() throws Exception
     {
-       JDFRunList rl=(JDFRunList) root.addResource(ElementName.RUNLIST,null,EnumUsage.Input,null,null,null,null);
-        
+        JDFRunList rl=(JDFRunList) root.addResource(ElementName.RUNLIST,EnumUsage.Input);
+
         JDFLayout lo=(JDFLayout) root.addResource(ElementName.LAYOUT,null,EnumUsage.Input,null,null,null,null);
         JDFMedia med=(JDFMedia) root.addResource(ElementName.MEDIA,null,EnumUsage.Input,null,null,null,null);
         JDFMedia medM=(JDFMedia) med.addPartition(EnumPartIDKey.RunTags, "MaleCover");
         JDFMedia medF=(JDFMedia) med.addPartition(EnumPartIDKey.RunTags, "FemaleCover");
         JDFMedia medB=(JDFMedia) med.addPartition(EnumPartIDKey.RunTags, "BigBody SmallBody");
-        
+
         JDFLayout loM=(JDFLayout)lo.addPartition(EnumPartIDKey.RunTags, "MaleCover");
         loM.refElement(medM);
         JDFLayout loF=(JDFLayout)lo.addPartition(EnumPartIDKey.RunTags, "FemaleCover");
@@ -320,9 +339,9 @@ public class JDFRunListTest extends JDFTestCaseBase
         JDFLayout loSB=(JDFLayout)lo.addPartition(EnumPartIDKey.RunTags, "SmallBody");
         loSB.refElement(medB);
         lo.setXMLComment("Layout for versioned product");
-        
 
-        
+
+
         KElement tagMap=rl.appendElement("TagMap");
         tagMap.setAttribute("PartIDKey", "RunTags");
         tagMap.setAttribute("PartIDValue", "MaleCover");
@@ -335,8 +354,8 @@ public class JDFRunListTest extends JDFTestCaseBase
         tagMap.setXMLComment("The TagMap element maps arbitrary tags in the document to a structural RunTag\nNote that any partition key may be mapped.\nNote also that although an XPath syntax is used, this may be mapped to any hierarchical structure including but not limited to XML.\n"+
                 "The data type of @Value should be regExp to allow expression matching\n"+
                 "Multiple TagSet Elements are combined as a logical And\n"+
-                "This TagSet maps all Male (Dokument/Rezipient/@Sex=\"Male\") Covers (/Dokument/Sektion=Einband to MaleCover");
-        
+        "This TagSet maps all Male (Dokument/Rezipient/@Sex=\"Male\") Covers (/Dokument/Sektion=Einband to MaleCover");
+
         tagMap=rl.appendElement("TagMap");
         tagMap.setAttribute("PartIDKey", "RunTags");
         tagMap.setAttribute("PartIDValue", "FemaleCover");
@@ -347,7 +366,7 @@ public class JDFRunListTest extends JDFTestCaseBase
         tagSet.setAttribute("Path", "/Dokument/Rezipient/@Sex");
         tagSet.setAttribute("Value", "Female");
         tagMap.setXMLComment( "This TagSet maps all Male (Dokument/Rezipient/@Sex=\"Feale\") Covers (/Dokument/Sektion=Einband to FemaleCover");
-                
+
         tagMap=rl.appendElement("TagMap");
         tagMap.setAttribute("PartIDKey", "RunTags");
         tagMap.setAttribute("PartIDValue", "BigBody");
@@ -360,7 +379,7 @@ public class JDFRunListTest extends JDFTestCaseBase
         tagMap.setXMLComment( "This TagSet maps all (/Dokument/Sektion=HauptTeil with many pages (/Dokument/Sektion/Pages=Many to BigBody\n"
                 +"Note that only string matching is allowed - we do not allow for arithmetic.\n"
                 +"If arithmetic is required, we could think about using Evaluation elements from Preflight/DevCaps");
-        
+
         tagMap=rl.appendElement("TagMap");
         tagMap.setAttribute("PartIDKey", "RunTags");
         tagMap.setAttribute("PartIDValue", "SmallBody");
@@ -371,21 +390,21 @@ public class JDFRunListTest extends JDFTestCaseBase
         tagSet.setAttribute("Path", "/Dokument/Sektion/Pages");
         tagSet.setAttribute("Value", "Few");
         tagMap.setXMLComment( "This TagSet maps all (/Dokument/Sektion=HauptTeil with many pages (/Dokument/Sektion/Pages=Few to SmallBody\n");
-        
+
         tagMap=rl.appendElement("TagMap");
         tagMap.setAttribute("BoundaryKey", "EndOfDocument");
         tagSet=tagMap.appendElement("TagSet");
         tagSet.setAttribute("Path", "/Dokument");
         tagMap.setXMLComment("This tagmap specifies which document structure corresponds to a Document\n"
                 +" thus incrementing DocIndex or forcing an implicit RunList/@EndofDocument=true");
-        
+
         rl.setFileURL("bigVariable.ppml");
         rl.setXMLComment("this runlist points to a ppml with arbitrary structural tagging");
-        
+
         JDFResourceLink rll=root.getLink(rl, null);
         rll.appendPart().setDocIndex("10 ~ 20");
         rll.setXMLComment("this link selects the 11-20 document");
-        
+
         doc.write2File(sm_dirTestDataTemp+"tagmap.jdf", 2, false);
     }
 
@@ -398,7 +417,7 @@ public class JDFRunListTest extends JDFTestCaseBase
         doc = new JDFDoc("JDF");
         root = doc.getJDFRoot();
         JDFElement.setLongID(false);
- 
+
     }
 
 }

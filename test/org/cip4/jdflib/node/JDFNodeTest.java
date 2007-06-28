@@ -958,6 +958,8 @@ public class JDFNodeTest extends JDFTestCaseBase
         node.setVersion(JDFElement.EnumVersion.Version_1_3);
         node.setStatus(EnumNodeStatus.Ready);
 
+        assertFalse("no links, no execute",node.isExecutable(null, true));
+        
         // simple non-partitioned case
         JDFNodeInfo n=node.appendNodeInfo();
         assertTrue("ni resource",n.hasAttribute(AttributeName.CLASS));
