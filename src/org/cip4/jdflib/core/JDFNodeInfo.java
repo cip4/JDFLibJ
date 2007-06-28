@@ -99,8 +99,8 @@ import org.w3c.dom.Node;
 public class JDFNodeInfo extends JDFAutoNodeInfo
 {
     private static final long serialVersionUID = 1L;
+    private static boolean bDefaultWorkStepID=false;
 
-    
     private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[19];
     static
     {
@@ -124,12 +124,12 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
         atrInfoTable[17] = new AtrInfoTable(AttributeName.NODESTATUS, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
         atrInfoTable[18] = new AtrInfoTable(AttributeName.NODESTATUSDETAILS, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
     }
-    
+
 
     protected AttributeInfo getTheAttributeInfo()
     {
         AttributeInfo ai; 
-        
+
         if (getParentNode().getLocalName().equals(ElementName.JDF)) 
         { 
             ai = super.getTheAttributeInfo_JDFElement().updateReplace(atrInfoTable);
@@ -138,12 +138,12 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
         {
             ai = super.getTheAttributeInfo().updateReplace(atrInfoTable);
         }
-             
+
         return ai;
     }
-    
-  
-    
+
+
+
     private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[5];
     static
     {
@@ -153,12 +153,12 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
         elemInfoTable[3] = new ElemInfoTable(ElementName.MISDETAILS, 0x33333311);
         elemInfoTable[4] = new ElemInfoTable(ElementName.NOTIFICATIONFILTER, 0x33333311);
     }
-    
+
 
     protected ElementInfo getTheElementInfo()
     {
         ElementInfo ei; 
-        
+
         if (getParentNode().getLocalName().equals(ElementName.JDF)) 
         { 
             ei = new ElementInfo(super.getTheElementInfo_JDFElement(), elemInfoTable);
@@ -169,15 +169,15 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
         }
         return ei;
     }
-     
+
     /**
      * Constructor for JDFNodeInfo
      * @param myOwnerDocument
      * @param qualifiedName
      */
     public JDFNodeInfo(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
+            CoreDocumentImpl myOwnerDocument,
+            String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
@@ -189,9 +189,9 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
      * @param qualifiedName
      */
     public JDFNodeInfo(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
+            CoreDocumentImpl myOwnerDocument,
+            String myNamespaceURI,
+            String qualifiedName)
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
@@ -204,10 +204,10 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
      * @param myLocalName
      */
     public JDFNodeInfo(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
+            CoreDocumentImpl myOwnerDocument,
+            String myNamespaceURI,
+            String qualifiedName,
+            String myLocalName)
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
@@ -273,31 +273,31 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
          * constants EnumBusinessObject
          */
         public static final EnumBusinessObject BusinessObject_Unknown =
-                                new EnumBusinessObject("BusinessObject_Unknown");
+            new EnumBusinessObject("BusinessObject_Unknown");
         public static final EnumBusinessObject BusinessObject_RFQ =
-                                new EnumBusinessObject("BusinessObject_RFQ");
+            new EnumBusinessObject("BusinessObject_RFQ");
         public static final EnumBusinessObject BusinessObject_Quote =
-                                new EnumBusinessObject("BusinessObject_Quote");
+            new EnumBusinessObject("BusinessObject_Quote");
         public static final EnumBusinessObject BusinessObject_RFRequote =
-                                new EnumBusinessObject("BusinessObject_RFRequote");
+            new EnumBusinessObject("BusinessObject_RFRequote");
         public static final EnumBusinessObject BusinessObject_Requote =
-                                new EnumBusinessObject("BusinessObject_Requote");
+            new EnumBusinessObject("BusinessObject_Requote");
         public static final EnumBusinessObject BusinessObject_PO =
-                                new EnumBusinessObject("BusinessObject_PO");
+            new EnumBusinessObject("BusinessObject_PO");
         public static final EnumBusinessObject BusinessObject_Confirmation =
-                                new EnumBusinessObject("BusinessObject_Confirmation");
+            new EnumBusinessObject("BusinessObject_Confirmation");
         public static final EnumBusinessObject BusinessObject_CO_RFQ =
-                                new EnumBusinessObject("BusinessObject_CO_RFQ");
+            new EnumBusinessObject("BusinessObject_CO_RFQ");
         public static final EnumBusinessObject BusinessObject_CO_Quote =
-                                new EnumBusinessObject("BusinessObject_CO_Quote");
+            new EnumBusinessObject("BusinessObject_CO_Quote");
         public static final EnumBusinessObject BusinessObject_CO_PO =
-                                new EnumBusinessObject("BusinessObject_CO_PO");
+            new EnumBusinessObject("BusinessObject_CO_PO");
         public static final EnumBusinessObject BusinessObject_CO_Confirmation =
-                                new EnumBusinessObject("BusinessObject_CO_Confirmation");
+            new EnumBusinessObject("BusinessObject_CO_Confirmation");
         public static final EnumBusinessObject BusinessObject_Invoice =
-                                new EnumBusinessObject("BusinessObject_Invoice");
+            new EnumBusinessObject("BusinessObject_Invoice");
         public static final EnumBusinessObject BusinessObject_None =
-                                new EnumBusinessObject("BusinessObject_None");
+            new EnumBusinessObject("BusinessObject_None");
 
     }
 
@@ -315,16 +315,18 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 
     public boolean init()
     {
-    	Node n=getParentNode();
-		if (n!=null && ElementName.RESOURCEPOOL.equals(n.getLocalName()))
-		{
-			super.init();
+        Node n=getParentNode();
+        if(bDefaultWorkStepID && !hasAttribute("WorkStepID"))
+            setAttribute("WorkStepID", "W"+uniqueID(0),null);
+        if (n!=null && ElementName.RESOURCEPOOL.equals(n.getLocalName()))
+        {
+            super.init();
             setResStatus(EnumResStatus.Available,false);
-			setPartUsage(JDFResource.EnumPartUsage.Implicit);			
-		}
-    	return true;
+            setPartUsage(JDFResource.EnumPartUsage.Implicit);			
+        }
+        return true;
     }
-    
+
     /**
      * UpdateBusiness
      * @param businessObject
@@ -334,22 +336,22 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
     public boolean updateBusiness(EnumBusinessObject businessObject, String newID)
     {
         final KElement bo  = getElement (ElementName.BUSINESSINFO, JDFConstants.EMPTYSTRING, 0);
-        
+
         final Vector vBos  = EnumBusinessObject.getNamesVector();
         final KElement boe = bo.getChildFromList(new VString(vBos), 0,null,true);
         final String bos   = boe.getNodeName();
-        
+
         final int oldType = vBos.indexOf(bos);
-        
+
         System.out.println("JDFNodeInfo:: " + businessObject.getValue() + " Boe:: " + boe);
         boe.renameElement((String)vBos.elementAt(businessObject.getValue()), JDFConstants.EMPTYSTRING);
 
         if (businessObject.getValue() > oldType)
         {
             boe.setAttribute (
-                JDFConstants.BUSINESSREFID, 
-                boe.getAttribute(JDFConstants.BUSINESSID, JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING), 
-                JDFConstants.EMPTYSTRING);
+                    JDFConstants.BUSINESSREFID, 
+                    boe.getAttribute(JDFConstants.BUSINESSID, JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING), 
+                    JDFConstants.EMPTYSTRING);
 
             if (newID.length() != 0)
             {
@@ -392,8 +394,8 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
         }
         return vElem;
     }  
-   //////////////////////////////////////////////////////////////////////
-    
+    //////////////////////////////////////////////////////////////////////
+
     /**
      * Mother of all version fixing routines
      *
@@ -404,21 +406,38 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
      * @param version: version that the resulting element should correspond to
      * @return true if successful
      */
-   public boolean fixVersion(EnumVersion version){
+    public boolean fixVersion(EnumVersion version){
         if(hasAttribute(AttributeName.RREFS))
             removeAttribute(AttributeName.RREFS);
         return super.fixVersion(version);
     }
-   //////////////////////////////////////////////////////////////////////
-   /**
-    * remove any resource specific attribute when making this to an element
-    *
-    */
-   public void cleanResourceAttributes()
-   {
-       removeAttribute(AttributeName.NODESTATUS);
-       removeAttribute(AttributeName.NODESTATUSDETAILS);
-       super.cleanResourceAttributes();
-   }
-    
+    //////////////////////////////////////////////////////////////////////
+    /**
+     * remove any resource specific attribute when making this to an element
+     *
+     */
+    public void cleanResourceAttributes()
+    {
+        removeAttribute(AttributeName.NODESTATUS);
+        removeAttribute(AttributeName.NODESTATUSDETAILS);
+        super.cleanResourceAttributes();
+    }
+
+    /**
+     * @return the bDefaultWorkStepID
+     */
+    public static boolean isDefaultWorkStepID()
+    {
+        return bDefaultWorkStepID;
+    }
+
+    /**
+     * if set to true, all newly generated partitions are generated with a unique WorkStepID attribute
+     * @param defaultWorkStepID the bDefaultWorkStepID to set
+     */
+    public static void setDefaultWorkStepID(boolean defaultWorkStepID)
+    {
+        bDefaultWorkStepID = defaultWorkStepID;
+    }
+
 }

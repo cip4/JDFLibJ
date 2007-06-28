@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -102,8 +102,8 @@ public class JDFNodeInfoTest extends JDFTestCaseBase
         {
             // nop
         }
-      }
-        /////////////////////////////////////////////////////////////////////
+    }
+    /////////////////////////////////////////////////////////////////////
     public void testPartUsage() throws Exception
     {
         JDFDoc d=new JDFDoc(ElementName.JDF);
@@ -115,8 +115,22 @@ public class JDFNodeInfoTest extends JDFTestCaseBase
         JDFNodeInfo niPart=(JDFNodeInfo)ni.getPartition(map, null);
         assertNotNull(niPart);
         assertNull(niPart.getAttribute_KElement(AttributeName.PARTUSAGE,null,null));
- 
-      }
-        /////////////////////////////////////////////////////////////////////
+    }
+    /////////////////////////////////////////////////////////////////////
+    public void testWorkstepID() throws Exception
+    {
+        JDFDoc d=new JDFDoc(ElementName.JDF);
+        JDFNode n=d.getJDFRoot();
+        n.setType("ConventionalPrinting",true);
+        JDFNodeInfo.setDefaultWorkStepID(true);
+        JDFNodeInfo ni=n.getCreateNodeInfo(); 
+        assertTrue(ni.hasAttribute("WorkStepID"));
+        final JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.Separation,"Cyan");
+        n.setPartStatus(map, EnumNodeStatus.Ready);
+        JDFNodeInfo niPart=(JDFNodeInfo)ni.getPartition(map, null);
+        assertNotNull(niPart);
+        assertTrue(niPart.hasAttribute("WorkStepID"));
+    }
+    /////////////////////////////////////////////////////////////////////
 
 }

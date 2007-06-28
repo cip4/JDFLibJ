@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,6 +75,7 @@ import junit.framework.TestCase;
 
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 
@@ -117,6 +118,7 @@ public abstract class JDFTestCaseBase extends TestCase
         JDFAudit.setStaticAgentName(agentName);
         JDFAudit.setStaticAgentVersion(agentVersion);
         JDFAudit.setStaticAuthor(author);
+        JDFNodeInfo.setDefaultWorkStepID(false);
     }
     
 }

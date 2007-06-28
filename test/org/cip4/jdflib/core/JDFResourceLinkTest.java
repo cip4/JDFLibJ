@@ -430,6 +430,26 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
         assertEquals(rl.getTarget(),xmPart);
         assertEquals(rl.getTargetVector(0).size(),1);
     }
+    public void testGetCombinedProcessTypes() throws Exception
+    {
+        JDFDoc d=new JDFDoc(ElementName.JDF);
+        JDFNode n=d.getJDFRoot();
+        n.setType("Combined",true);
+        n.setTypes(new VString("a b c d e f e f"," "));
+        JDFResource r=n.addResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input);;
+        JDFResourceLink rl=n.getLink(r, null);
+        VString nodeTypes=n.getTypes();
+        nodeTypes.unify();
+        assertEquals(rl.getCombinedProcessTypes(), nodeTypes);
+        rl.setCombinedProcessType("c");
+        assertEquals(rl.getCombinedProcessTypes(), new VString("c"," "));
+        rl.removeAttribute(AttributeName.COMBINEDPROCESSTYPE);
+        assertEquals(rl.getCombinedProcessTypes(), nodeTypes);
+        rl.setCombinedProcessIndex(new JDFIntegerList("0 2 4 6"));
+        assertEquals(rl.getCombinedProcessTypes(), new VString("a c e"," "));
+        rl.setCombinedProcessIndex(new JDFIntegerList("0 2 4 6 8 99"));
+        assertEquals(rl.getCombinedProcessTypes(), new VString("a c e"," "));
+     }
     /**
 	 * Method testGetLinkRootJMF
 	 * @throws Exception

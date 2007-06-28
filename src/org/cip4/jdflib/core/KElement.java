@@ -259,7 +259,6 @@ public class KElement extends ElementNSImpl
             return usrDat.isDirty(this);
         }
         return false;
-
     }
 
     /**
@@ -341,7 +340,6 @@ public class KElement extends ElementNSImpl
                 strRet = parentNode.getInheritedAttribute(attrib, nameSpaceURI, def);
             }
         }
-
         return strRet==null ? def : strRet;
     }
 
