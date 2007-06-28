@@ -585,6 +585,24 @@ public class JDFElementTest extends TestCase
         assertEquals(ni.getVersion(true),EnumVersion.Version_1_3);
     }
     
+    public void testMatchesPathKElement()
+    {
+        JDFDoc doc      = new JDFDoc("Test"); // make sure we call jdf methods
+        KElement root=doc.getRoot();
+        KElement a=root.appendElement("a");
+        KElement b=root.appendElement("b");
+        KElement a2=root.appendElement("a");
+        KElement a3=root.appendElement("a");
+        a.setAttribute("att", "42");
+        assertTrue(a.matchesPath("//a", false));
+        assertTrue(a.matchesPath("/Test/a", false));
+        assertTrue(a.matchesPath("/Test/a[1]", false));
+        assertTrue(a.matchesPath("/Test/a[@att=\"42\"]", false));
+        assertTrue(a2.matchesPath("/Test/a[2]", false));
+        assertTrue(a3.matchesPath("/Test/a[3]", false));
+        assertFalse(a3.matchesPath("/Test/a[@att=\"*\"]", false));
+        assertTrue(a.matchesPath("/Test/a[@att=\"*\"]", false));
+    }
     public void testMatchesPath()
     {
         JDFDoc doc = new JDFDoc(ElementName.JDF);

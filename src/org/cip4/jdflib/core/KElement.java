@@ -6111,18 +6111,60 @@ public class KElement extends ElementNSImpl
             if(e==null) {
 				return false;
 			}
-            if (!v.stringAt(i).equals(JDFConstants.STAR)&&!e.getLocalName().equals(v.stringAt(i))) {
+            final String pathAt = v.stringAt(i);
+            if (!e.matchesPathName(pathAt)) 
+            {
 				return false;
 			}
 
             e = e.getParentNode_KElement();
         }
 
-        if (path.startsWith("/")) {
+        if (path.startsWith("/") && !path.startsWith("//")) {
 			return e == null; // must be root
 		}
 
         return true; // any location
+    }
+
+    protected boolean matchesPathName(final String pathAt)
+    {
+        if(pathAt==null || pathAt.equals(JDFConstants.STAR))
+            return true;
+        if(localName.equals(pathAt))
+            return true;
+        final String nodeName = getNodeName();
+        if(nodeName.equals(pathAt))
+            return true;
+        String startPath=pathAt.startsWith(localName)? localName : pathAt.startsWith(nodeName) ? nodeName : null;
+        if(startPath!=null) // process for attributes
+        {
+            String token=StringUtil.token(pathAt,1,"[");
+            if(token==null || ! token.endsWith("]")) // want e[@a="b"] or e[n];
+                return false;
+            token=StringUtil.leftStr(token, -1); // remove "]"
+            int n=StringUtil.parseInt(token, 0);
+            if(n!=0)
+            {
+                KElement p=getParentNode_KElement();
+                if(p==null)
+                    return n==1;
+                return p.getElement(localName,getNamespaceURI(),n-1)==this;
+            }
+            if(token.startsWith("@"))
+            {
+                token=token.substring(1);
+                String name=StringUtil.token(token, 0, "=");
+                String value=StringUtil.token(token, 1, "=");
+                if(value==null)
+                    return false;
+                if(value.length()<2 || ! value.startsWith("\"") || !value.endsWith("\""))
+                    return false;
+                value=value.substring(1, value.length()-1);
+                return value.equals("*")&&hasAttribute(name) || value.equals(getAttribute(name));                       
+            }
+        }
+        return false;
     }
 
     /**

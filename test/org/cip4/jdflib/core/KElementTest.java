@@ -359,7 +359,24 @@ public class KElementTest extends JDFTestCaseBase
         assertFalse("has foo",e.hasAttribute("foo",JDFConstants.JDFNAMESPACE,false));
 
     }
-
+    public void testMatchesPath()
+    {
+        XMLDoc doc      = new XMLDoc("Test","www.test.com");
+        KElement root=doc.getRoot();
+        KElement a=root.appendElement("a");
+        KElement b=root.appendElement("b");
+        KElement a2=root.appendElement("a");
+        KElement a3=root.appendElement("a");
+        a.setAttribute("att", "42");
+        assertTrue(a.matchesPath("//a", false));
+        assertTrue(a.matchesPath("/Test/a", false));
+        assertTrue(a.matchesPath("/Test/a[1]", false));
+        assertTrue(a.matchesPath("/Test/a[@att=\"42\"]", false));
+        assertTrue(a2.matchesPath("/Test/a[2]", false));
+        assertTrue(a3.matchesPath("/Test/a[3]", false));
+        assertFalse(a3.matchesPath("/Test/a[@att=\"*\"]", false));
+        assertTrue(a.matchesPath("/Test/a[@att=\"*\"]", false));
+    }
 
     public void testMoveAttribute()
     {

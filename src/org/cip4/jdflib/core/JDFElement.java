@@ -4173,7 +4173,7 @@ public class JDFElement extends KElement
 				return false;
 			}
             final String locName = e.getLocalName();
-            if(!v.stringAt(i).equals(JDFConstants.STAR)&&!locName.equals(v.stringAt(i)))
+            if(!e.matchesPathName(v.stringAt(i)))
             {
                 if(bFollowRefs && eLast!=null && locName.equals(ElementName.RESOURCEPOOL))
                 { // now look for a refelement that points at this
