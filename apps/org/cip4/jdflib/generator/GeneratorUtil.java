@@ -4,7 +4,7 @@
  *  Author:         Kai Mattern
  *  Titel:          GeneratorUtil.java
  *  Version:        0.1
- *  Description:    The xml Schema is partitioned into many "complex type's" 
+ *  Description:    The xml Schema is partitioned into many "complex type's"
  *                  these types have children named "attributes" and "elements"
  *                  this file is for describing all values a "element" can have.
  *
@@ -88,17 +88,17 @@ public class GeneratorUtil
         }
         else if ("ResponseTypeObj".equals(elementName) || "QueryTypeObj".equals(elementName)
                 || "AbstractTerms".equals(elementName) || "AbstractStates".equals(elementName)
-                || "CommandTypeObj".equals(elementName) || "CommandOrQueryTypeObj".equals(elementName) 
+                || "CommandTypeObj".equals(elementName) || "CommandOrQueryTypeObj".equals(elementName)
                 || "JDF".equals(elementName)
                 || "Location".equals(elementName) || "FoldOperation".equals(elementName)
                 || "NotificationDetails".equals(elementName))
         {
             // no auto file generation for abstract classes
             isValid = false;
-        } 
+        }
         else if ("Part".equals (elementName))
         {
-            if ( complexTypeName.endsWith("Ref") 
+            if ( complexTypeName.endsWith("Ref")
                     || complexTypeName.endsWith("Link")
                     || complexTypeName.endsWith("PartAmount") )
             {
@@ -118,7 +118,7 @@ public class GeneratorUtil
         {
             if ("Pricing".equals(elementName) || "Module".equals(elementName))
             {
-                // Exception for JDFPricing and JDFModule. 
+                // Exception for JDFPricing and JDFModule.
                 // These are the only known Elements which can have subelements of the same type
                 isValid = true;
             }
@@ -132,10 +132,10 @@ public class GeneratorUtil
     }
 
     /**
-     * Every complex type in the schema has elements and attributes. 
-     * Some of the attributes defined in the Schema are already defined 
-     * in the lib because they are attributes of a base resource. 
-     * These attributes do not need new getter and setter methods. 
+     * Every complex type in the schema has elements and attributes.
+     * Some of the attributes defined in the Schema are already defined
+     * in the lib because they are attributes of a base resource.
+     * These attributes do not need new getter and setter methods.
      * This Function validates the attribute in an easy way if its already definded in the lib or not.
      * @param  String strAttributeName - Name of the Attribute to "test"
      *
@@ -144,7 +144,7 @@ public class GeneratorUtil
     public static boolean isAttributeToAdd (String strAttributeName, String strComplexTypeName)
     {
         boolean isValid = true;
-        
+
         // Attributes defined in JDFResource (Part of Partitionable Resources)
         // are not meant to be added again (12 Attributes). You can find these Attributes
         // in JDFResource in the Method "OptionalAttributes()"
@@ -155,52 +155,52 @@ public class GeneratorUtil
 
         // Table 3-25: Partitionable resource element, JDFSpec 1.3
         if (!"Part".equals (strComplexTypeName)
-                && (       "BinderySignatureName".equals (strAttributeName) 
-                        || "BlockName".equals (strAttributeName) 
+                && (       "BinderySignatureName".equals (strAttributeName)
+                        || "BlockName".equals (strAttributeName)
                         || "BundleItemIndex".equals (strAttributeName)
-                        || "CellIndex".equals (strAttributeName) 
+                        || "CellIndex".equals (strAttributeName)
                         || "Condition".equals (strAttributeName)
                         || (strAttributeName.startsWith("DeliveryUnit") && strAttributeName.length() == ("DeliveryUnit".length()+1))
-                        || "DocCopies".equals (strAttributeName) 
+                        || "DocCopies".equals (strAttributeName)
                         || "DocIndex".equals (strAttributeName)
-                        || "DocRunIndex".equals (strAttributeName) 
+                        || "DocRunIndex".equals (strAttributeName)
                         || "DocSheetIndex".equals (strAttributeName)
-                        || "DocTags".equals (strAttributeName) 
+                        || "DocTags".equals (strAttributeName)
                         || "Edition".equals (strAttributeName)
-                        || "EditionVersion".equals (strAttributeName) 
-                        || "FountainNumber".equals (strAttributeName) 
+                        || "EditionVersion".equals (strAttributeName)
+                        || "FountainNumber".equals (strAttributeName)
                         || "ItemNames".equals (strAttributeName)
-                        || "LayerIDs".equals (strAttributeName) 
+                        || "LayerIDs".equals (strAttributeName)
                         || "Location".equals (strAttributeName)
-                        || "Option".equals (strAttributeName) 
+                        || "Option".equals (strAttributeName)
                         || "PageNumber".equals (strAttributeName)
                         || "PageTags".equals (strAttributeName)
-                        || "PartVersion".equals (strAttributeName) 
-                        || "PlateLayout".equals (strAttributeName) 
+                        || "PartVersion".equals (strAttributeName)
+                        || "PlateLayout".equals (strAttributeName)
                         || "PreflightRule".equals (strAttributeName)
-                        || "PreviewType".equals (strAttributeName) 
+                        || "PreviewType".equals (strAttributeName)
                         || "ProductionRun".equals (strAttributeName)
                         || "RibbonName".equals (strAttributeName)
-                        || "Run".equals (strAttributeName) 
+                        || "Run".equals (strAttributeName)
                         || "RunIndex".equals (strAttributeName)
                         || "RunPage".equals (strAttributeName)
-                        || "RunSet".equals (strAttributeName) 
-                        || "RunTags".equals (strAttributeName) 
-                        || "SectionIndex".equals (strAttributeName) 
+                        || "RunSet".equals (strAttributeName)
+                        || "RunTags".equals (strAttributeName)
+                        || "SectionIndex".equals (strAttributeName)
                         || "Separation".equals (strAttributeName)
-                        || "SetDocIndex".equals (strAttributeName) 
+                        || "SetDocIndex".equals (strAttributeName)
                         || "SetIndex".equals (strAttributeName)
-                        || "SetRunIndex".equals (strAttributeName) 
+                        || "SetRunIndex".equals (strAttributeName)
                         || "SetSheetIndex".equals (strAttributeName)
                         || "SetTags".equals (strAttributeName)
-                        || "SheetIndex".equals (strAttributeName) 
+                        || "SheetIndex".equals (strAttributeName)
                         || "SheetName".equals (strAttributeName)
-                        || "Side".equals (strAttributeName) 
+                        || "Side".equals (strAttributeName)
                         || "SignatureName".equals (strAttributeName)
-                        || "Sorting".equals (strAttributeName) 
-                        || "SortAmount".equals (strAttributeName) 
-                        || "SubRun".equals (strAttributeName) 
-                        || "TileID".equals (strAttributeName) 
+                        || "Sorting".equals (strAttributeName)
+                        || "SortAmount".equals (strAttributeName)
+                        || "SubRun".equals (strAttributeName)
+                        || "TileID".equals (strAttributeName)
                         || "WebName".equals (strAttributeName)
                         || "WebProduct".equals (strAttributeName)
                         || "NoOp".equals (strAttributeName)
@@ -232,7 +232,7 @@ public class GeneratorUtil
         }
 
         //rRefs is defined in JDFResource. But NodeInfo implements it also and is derived from
-        //JDFPool - JDFElement. 
+        //JDFPool - JDFElement.
         if (!"NodeInfo".equals (strComplexTypeName) && "rRefs".equals (strAttributeName))
         //JDFResource Attribute defined in JDFResource.OptionalAttributes()
         {
@@ -244,7 +244,7 @@ public class GeneratorUtil
         {
             isValid = false;
         }
-        
+
         if (strComplexTypeName.equals("BaseElement"))
         {
             if ("CommentURL".equals(strAttributeName))
@@ -262,7 +262,7 @@ public class GeneratorUtil
         }
 
         // Separation is a PartIDKey and a normal attribut, so fix it here
-        if ("Separation".equals (strAttributeName) && 
+        if ("Separation".equals (strAttributeName) &&
                 (  "DensityMeasuringField".equals (strComplexTypeName)
                 || "ScreenSelector".equals (strComplexTypeName)
                 || "TransferCurve".equals (strComplexTypeName)
@@ -272,7 +272,7 @@ public class GeneratorUtil
         }
 
         // SectionIndex is a PartIDKey and a normal attribut, so fix it here
-        if ("SectionIndex".equals (strAttributeName) && 
+        if ("SectionIndex".equals (strAttributeName) &&
             "SignatureCell".equals (strComplexTypeName))
         {
             isValid = true;
@@ -282,16 +282,16 @@ public class GeneratorUtil
     }
 
     /**
-     *  Every complexType inside the Schema has many many elements and attributes. 
-     *  To reflect the Schema as closly as possible and the need of it, 
+     *  Every complexType inside the Schema has many many elements and attributes.
+     *  To reflect the Schema as closly as possible and the need of it,
      *  all VALID attributes will be listed inside the SchemaComplexType (as a vector of attributes).
-     *  What are Valid attributes? 
-     *  A ComplexType can be a Resource for example. 
-     *  A Resource has attributes which are listed as a String in the JDFResource file 
-     *  but are also listed in the Schema and the Example ComplexType. 
-     *  To provide the attribute to be listed twice, it has to "validated". 
-     *  This validation isn't more then a question 
-     *  (is this attribute already processed in JDFResource or somewhere else?). 
+     *  What are Valid attributes?
+     *  A ComplexType can be a Resource for example.
+     *  A Resource has attributes which are listed as a String in the JDFResource file
+     *  but are also listed in the Schema and the Example ComplexType.
+     *  To provide the attribute to be listed twice, it has to "validated".
+     *  This validation isn't more then a question
+     *  (is this attribute already processed in JDFResource or somewhere else?).
      *  If not, its added to the "ComplexType" unique attribute list.
      * @param schemaElement TODO
      * @param vComplexTypes TODO
@@ -302,27 +302,27 @@ public class GeneratorUtil
      * @return SchemaComplexType - The attribute done SchemaComplextype
      */
     public static SchemaComplexType getAllValidAttributes (
-            KElement schemaElement, Vector vComplexTypes, VElement vSimpleType, 
+            KElement schemaElement, Vector vComplexTypes, VElement vSimpleType,
             String[] parents, VElement vAppInfoElements, SchemaComplexType complexType)
     {
         String complexTypeName = complexType.m_SchemaComplexTypeName;
-        
-        VElement vAttributes = 
+
+        VElement vAttributes =
             collectAllAttributes(schemaElement, complexType, vComplexTypes, complexTypeName);
-        
+
         Iterator attributeIter = vAttributes.iterator();
         while (attributeIter.hasNext())
         {
             final KElement attribute   = (KElement) attributeIter.next();
-            
+
             fillAttributeIntoComplexType(
                 attribute, complexTypeName, parents, vAppInfoElements, vSimpleType, complexType);
         }
-        
+
         return complexType;
     }
 
-    private static VElement collectAllAttributes(KElement schemaElement, 
+    private static VElement collectAllAttributes(KElement schemaElement,
             SchemaComplexType complexType, Vector vComplexTypes, String complexTypeName)
     {
         KElement nKElement;
@@ -351,7 +351,7 @@ public class GeneratorUtil
 
             vAttributes = nKElement.
                 getChildrenByTagName("xs:attribute", "", new JDFAttributeMap(), true, true, 0);
-            
+
             // BAD WORKAROUND; this method should check the extend for attributes to add
             if ("ContentObject".equals(complexTypeName) || "MarkObject".equals(complexTypeName))
             {
@@ -396,30 +396,30 @@ public class GeneratorUtil
             vAttributes = nKElement.
                 getChildrenByTagName("xs:attribute", "", new JDFAttributeMap(),  true, true, 0);
         }
-        
+
         VElement vAttributesGroup = nKElement.
             getChildrenByTagName("xs:attributeGroup", "", new JDFAttributeMap(), true, true, 0);
-        
+
         vAttributes.addAll(groups2Attributes(vAttributesGroup));
-        
+
         return vAttributes;
     }
-    
 
-    private static void fillAttributeIntoComplexType(KElement attribute, String complexTypeName, 
+
+    private static void fillAttributeIntoComplexType(KElement attribute, String complexTypeName,
             String[] parents, VElement vAppInfoElements, VElement vSimpleType, SchemaComplexType complexType)
     {
         final String attributeName = attribute.getAttribute("name").replace('-', '_');
-        
+
         if (isAttributeToAdd(attributeName, complexTypeName))
         {
             SchemaAttribute schemaAttribute = new SchemaAttribute(attribute);
-            
+
             schemaAttribute.setStrAttributeName(attributeName);
             schemaAttribute.setStrEnumName(attributeName);
-            
+
             attributeHandleVersion(parents, vAppInfoElements, schemaAttribute, complexType);
-            
+
             String type = attribute.getAttribute("type").replace('-', '_');
             schemaAttribute.setStrType(type, vSimpleType);
             schemaAttribute.setStrUse(
@@ -428,22 +428,22 @@ public class GeneratorUtil
                     attribute.getAttribute("fixed").replace('-', '_'));
             schemaAttribute.setStrValue(
                     attribute.getAttribute("value").replace('-', '_'));
-            
-            
+
+
             String defaultAttributeValue = attribute.getAttribute("default").replace('-', '_');
             if (!defaultAttributeValue.equals(JDFConstants.EMPTYSTRING))
             {   // if an attribute has a default value, its usage is "optional"
                 schemaAttribute.setStrUse("optional");
             }
             schemaAttribute.setStrDefault(defaultAttributeValue);
-            
+
             // Note, the isEnum depends in some cases on the return type !!!
             // The return type must be set first!
             schemaAttribute.setStrReturnType(
                     getReturnType(attributeName, type, complexType.isJava));
             schemaAttribute.setIsEnum(isEnumAttribute(vSimpleType, schemaAttribute, type));
             schemaAttribute.setVEnumValues(getEnumValues(schemaAttribute, vSimpleType));
-            
+
             complexType.m_vSchemaAttributes.addElement(schemaAttribute);
         }
     }
@@ -471,21 +471,21 @@ public class GeneratorUtil
         {
             String minOccurs = sequence.getAttribute("minOccurs", "", "");
             String maxOccurs = sequence.getAttribute("maxOccurs", "", "");
-            
-            VElement vElements = 
+
+            VElement vElements =
                 sequence.getChildrenByTagName("xs:element", "", new JDFAttributeMap(), true, true, 0);
-            
-            VElement vElementsGroup = 
+
+            VElement vElementsGroup =
                 sequence.getChildrenByTagName("xs:group", "", new JDFAttributeMap(), true, true, 0);
-            
+
             vElements.addAll(groups2Elements(vElementsGroup));
-            
+
             Iterator elementIter = vElements.iterator();
             while (elementIter.hasNext())
             {
                 final KElement element = (KElement) elementIter.next();
-                
-                fillElementIntoComplexType(element, parents, vAppInfoElements, 
+
+                fillElementIntoComplexType(element, parents, vAppInfoElements,
                                             minOccurs, maxOccurs, complexType);
             }
         }
@@ -502,7 +502,7 @@ public class GeneratorUtil
         {
             complexTypeKElement = complexTypeKElement.getElement("xs:complexType", "", 0);
         }
-        
+
         KElement complexContent = complexTypeKElement.getElement("xs:complexContent", "", 0);
         if (complexContent != null)
         {
@@ -516,21 +516,21 @@ public class GeneratorUtil
         {
             extension = complexTypeKElement;
         }
-        
+
         /*
-         * assumption for getElement : 
-         * we use the element information from either resourcename_r or resourcename_re 
-         * 
-         * to use the element information from resourcename_rp one has to use getChildByTagName 
+         * assumption for getElement :
+         * we use the element information from either resourcename_r or resourcename_re
+         *
+         * to use the element information from resourcename_rp one has to use getChildByTagName
          */
         KElement sequence = extension.getElement("xs:sequence", "", 0);
 //            KElement sequence = extension.getChildByTagName("xs:sequence", null, 0, null, true, true);
-        
+
         return sequence;
     }
 
 
-    private static void fillElementIntoComplexType(KElement element, String[] parents, 
+    private static void fillElementIntoComplexType(KElement element, String[] parents,
             VElement vAppInfoElements, String minOccurs, String maxOccurs, SchemaComplexType complexType)
     {
         String elementName = element.getAttribute("ref");
@@ -542,9 +542,9 @@ public class GeneratorUtil
                 elementName = name;
             }
         }
-        
+
         SchemaElement schemaElem = new SchemaElement(element);
-        
+
         schemaElem.setStrElementName(elementName);
         elementName = schemaElem.getStrElementName();
 
@@ -552,7 +552,7 @@ public class GeneratorUtil
         {
             schemaElem.setStrMinOccurs(minOccurs);
             schemaElem.setStrMaxOccurs(maxOccurs);
-            
+
             elementHandleVersion(parents, vAppInfoElements, schemaElem, complexType);
 
             elementHandleMinMaxOccurs(parents, vAppInfoElements, schemaElem, complexType);
@@ -584,10 +584,10 @@ public class GeneratorUtil
      * file for this CompleyType. This means All Elements and Attributes for this spezific
      * ComplexType need to take out of these three Vector elements. To make this task a little
      * easier, all names will be shorten ('_r', '_rp', '___' and '_m', '_rp').
-     * 
+     *
      * @param SchemaComplexType
      *            nComplexType
-     * 
+     *
      * @return SchemaComplexType - The done element (SchemaComplextype)
      */
     public static SchemaComplexType unifyComplexTypNames (SchemaComplexType nComplexType, String strType)
@@ -872,12 +872,12 @@ public class GeneratorUtil
     } // unifyComplexTypNames
 
     /**
-     *  Most Attributes are tied together to groups. 
+     *  Most Attributes are tied together to groups.
      *  These groups are just referenced inside the ComplexTyps
-     *  To generate the file you need the Attributes out of these references. 
-     *  So this method expects a group as input-paramter and will return you all attributes in the group 
+     *  To generate the file you need the Attributes out of these references.
+     *  So this method expects a group as input-paramter and will return you all attributes in the group
      *  (also with recursive call if there were attribute groups in the group)
-     *  
+     *
      *  @param  VElement - vector with groups (of attributes) to resolve into members
      *
      *  @return VElement - vector of all attributes
@@ -891,21 +891,21 @@ public class GeneratorUtil
         {
             final KElement attributesGroup = (KElement) attributesGroupIter.next();
             String ref = attributesGroup.getAttribute("ref", "", "").substring("jdf:".length());
-    
+
             if (isAttributesGroupToAdd(ref))
             {
                 KElement nKElement = attributesGroup.getDocRoot().
                     getChildWithAttribute("xs:attributeGroup", "name", "", ref, 0, false);
-    
+
                 if (nKElement != null)
                 {
                     VElement vAttributes = nKElement.
                         getChildrenByTagName("xs:attribute", "", new JDFAttributeMap(), true, true, 0);
                     v.addAll(vAttributes);
-       
+
                     vAttributesGroup = nKElement.
                         getChildrenByTagName("xs:attributeGroup", "", new JDFAttributeMap(), true, true, 0);
-    
+
                     v.addAll(groups2Attributes(vAttributesGroup));
                 }
             }
@@ -916,8 +916,8 @@ public class GeneratorUtil
 
     /**
      *  Most Attributes are tied together to groups. These groups are just referenced inside the ComplexTyps
-     *  To generate the file you need the Attributes out of these references. 
-     *  So this Mehtod expects a group as input-paramter and will return you all Attributes in the group 
+     *  To generate the file you need the Attributes out of these references.
+     *  So this Mehtod expects a group as input-paramter and will return you all Attributes in the group
      *  (also with recursive call if there were Attribute groups in the group)
      *
      *  @param  VElement - vector with groups (of elements) to resolve into members
@@ -949,7 +949,7 @@ public class GeneratorUtil
 
                     vElementsGroup = nKElement.
                         getChildrenByTagName("xs:group", "", new JDFAttributeMap(), true, true, 0);
-                    
+
                     v.addAll(groups2Elements(vElementsGroup));
                 }
             }
@@ -963,9 +963,9 @@ public class GeneratorUtil
      * ComplexTypes. To generate the file you need the Attributes out of these references. So this
      * Method expects a group as input-paramter and will return you all Attributes in the group
      * (also with recursive call if there where Attribute groups in the group)
-     * 
+     *
      * @param KElement - the Group to resolve into its members
-     * 
+     *
      * @return VElement - Vector of all Attributes (Strings)
      */
     private static Vector getEnumValues(SchemaAttribute nSchemaAttribute, VElement nSimpleType)
@@ -983,7 +983,7 @@ public class GeneratorUtil
             {
                 nChild = nChild.getChildByTagName("xs:restriction", "", 0, new JDFAttributeMap(), true, true);
                 vEnumElements = nChild.getChildElementVector("*", "", new JDFAttributeMap(), true, 0, false);
-                
+
                 for (int i = 0; i < vEnumElements.size(); i++)
                 {
                     String strEnumName = ((KElement) vEnumElements.elementAt(i)).getAttribute("value");
@@ -998,7 +998,7 @@ public class GeneratorUtil
                 {
                     nChild = nChild.getChildByTagName("xs:restriction", "", 0, new JDFAttributeMap(), true, true);
                     vEnumElements = nChild.getChildrenByTagName("xs:enumeration", "", new JDFAttributeMap(), true, true, 0);
-                    
+
                     for (int i = 0; i < vEnumElements.size(); i++)
                     {
                         String strEnumName = ((KElement) vEnumElements.elementAt(i)).getAttribute("value");
@@ -1012,7 +1012,7 @@ public class GeneratorUtil
 //        {
 ////            System.out.println(nSchemaAttribute.getStrAttributeName() + "\t" + nSchemaAttribute.getStrEnumName());
 //            vStrEnum.insertElementAt("Unknown", 0);
-//            
+//
 //            for (int i = 1; i < vStrEnum.size(); i++)
 //            {
 //                if (vStrEnum.elementAt(i).equals("Unknown"))
@@ -1032,7 +1032,7 @@ public class GeneratorUtil
         {
             strType = strType.substring("jdftyp:".length());
         }
-        
+
         if (strType.startsWith("jdf:"))
         {
             strType = strType.substring("jdf:".length());
@@ -1046,7 +1046,7 @@ public class GeneratorUtil
         for (int i = 0; i < nSimpleTypes.size(); i++)
         {
             KElement nKElement = (KElement) nSimpleTypes.elementAt(i);
-            
+
             if ((strType + "_").equals(nKElement.getAttribute("name", "", ""))
                     || nKElement.getAttribute("name", "", "").equals(strType))
             // found it!
@@ -1054,7 +1054,7 @@ public class GeneratorUtil
                 nChild = (KElement) nSimpleTypes.elementAt(i);
                 restrict = nChild.getChildByTagName(
                         "xs:restriction", "", 0, new JDFAttributeMap(), true, true);
-                
+
                 if (restrict == null)
                 {
                     list = nChild.getChildByTagName(
@@ -1084,11 +1084,11 @@ public class GeneratorUtil
                                 "itemType", null, JDFConstants.EMPTYSTRING), nSimpleTypes);
                     }
                 }
-                
+
                 return nChild;
             }
         }
-        
+
         return nChild;
     }
 
@@ -1320,7 +1320,7 @@ public class GeneratorUtil
      * @param vAppInfoElements
      */
     public static SchemaComplexType getRestInfo (
-            String[] parents, VElement vAppInfoElements, 
+            String[] parents, VElement vAppInfoElements,
             SchemaComplexType complexType)
     {
         if (complexType.isNode)
@@ -1328,7 +1328,7 @@ public class GeneratorUtil
             complexType = getNodeUsageString (complexType, parents, vAppInfoElements);
             complexType = getNodeLinkNames (complexType);
         }
-        
+
         return complexType;
     }
 
@@ -1341,12 +1341,12 @@ public class GeneratorUtil
         {
             SchemaElement nSchemaElement = ((SchemaElement) vSchemaElements.elementAt (i));
             String strName = nSchemaElement.getm_schemaKElem ().getAttribute ("name");
-            
+
             if (strName.endsWith ("Link"))
             {
                 strName = strName.substring (0, strName.length () - 4);
             }
-            
+
             strLinkNames += strName;
             iNodeLength += 1;
             if (iNodeLength != vSchemaElements.size ())
@@ -1354,17 +1354,17 @@ public class GeneratorUtil
                 strLinkNames += ",";
             }
         }
-        
+
         nSchemaComplexType.setStrNodeLinkInfo (strLinkNames);
         nSchemaComplexType.setNodeLinkLength (iNodeLength);
-        
+
         return nSchemaComplexType;
     }
 
-    // Some groups are real core attributes and already handled in deeper inheritance classes like JDFResource 
+    // Some groups are real core attributes and already handled in deeper inheritance classes like JDFResource
     // or JDFPart. To make sure that these Attributes and elements does not show up in the autofiles
     // this "check" is added. If it is a group where the getter and setter methods for the members already
-    // exist, they will not be resolved. 
+    // exist, they will not be resolved.
     private static boolean isAttributesGroupToAdd (String ref)
     {
         boolean isGroupToAdd = true;
@@ -1393,18 +1393,18 @@ public class GeneratorUtil
     // JDFResource
     // or JDFPart. To make sure that these Attributes and elements does not show up in the autofiles
     // this "check" is added. If it is a group where the getter and setter methods for the members already
-    // exist, they will not be resolved. 
+    // exist, they will not be resolved.
     private static boolean isElementsGroupToAdd (String ref)
     {
         boolean isGroupToAdd = true;
 
-        if (JDFConstants.EMPTYSTRING.equals(ref) 
-                || "GenericElements".equals(ref) 
+        if (JDFConstants.EMPTYSTRING.equals(ref)
+                || "GenericElements".equals(ref)
                 || "GenericResourceElements".equals(ref))
         {
             isGroupToAdd = false;
         }
-        
+
         return isGroupToAdd;
     }
 
@@ -1453,7 +1453,7 @@ public class GeneratorUtil
      *                                   for enumeration spans
      * @param String strType        -   Type of Attribute or Element
      * @param boolean isAttribute   -   true if the calling class is SchemaAttribute false for SchemaElement
-     * @param boolean isJava        -   true if the return type is used in java. False for C++ 
+     * @param boolean isJava        -   true if the return type is used in java. False for C++
      */
     private static String getReturnType (String strName, String strType, boolean isJava)
     {   // note!!! The Return type will be overwritten if the Attribute is an Enum
@@ -1462,7 +1462,7 @@ public class GeneratorUtil
         if (strType.startsWith("jdftyp:"))
         {
             strType = strType.substring(7, strType.length());
-        } 
+        }
         else if (strType.startsWith("jdf:"))
         {
             strType = strType.substring(4, strType.length());
@@ -1515,10 +1515,10 @@ public class GeneratorUtil
             strType = strType.substring(iFirst + 1, strType.length());
         }
 
-        
-        
+
+
         String strReturnType = isJava ? "String" : "KString";
-        
+
         if (       strType.equals("string")
                 || strType.equals("regExp")
                 || strType.equals("XPath")
@@ -1557,7 +1557,7 @@ public class GeneratorUtil
         {
             strReturnType = isJava ? "boolean" : "bool";
         }
-        else if ("NMTOKENS".equals(strType) 
+        else if ("NMTOKENS".equals(strType)
                 || "languages".equals(strType)
                 || "IDREFS".equals(strType))
         {
@@ -1672,7 +1672,7 @@ public class GeneratorUtil
         {
             // type for spans
             strReturnType = "JDFSpan" + strName;
-            
+
             if ("BindingColor".equals(strName) || "CoverColor".equals(strName)
                     || "BackCoverColor".equals(strName) || "HeadBandColor".equals(strName)
                     || "FoilColor".equals(strName) || "MediaColor".equals(strName)
@@ -1690,7 +1690,7 @@ public class GeneratorUtil
                 strReturnType = "JDFSpanCoatings";
             }
         }
-        else if (JDFConstants.EMPTYSTRING.equals(strType) 
+        else if (JDFConstants.EMPTYSTRING.equals(strType)
                     || strType.startsWith(strName) || strType.endsWith(strName))
         {
             strReturnType = "JDF" + strName;
@@ -1699,10 +1699,10 @@ public class GeneratorUtil
         {
             strReturnType = "JDF" + strType;
         }
-            
+
         return strReturnType;
     }
-    
+
 
     // THIS IS NOT OK, CHANGE IT SO YOU CAN DIF BETWEEN NODE CORE AND MESSAGE
     public static boolean isComplexTypeToGenerate (String strComplexTypeName)
@@ -1822,30 +1822,33 @@ public class GeneratorUtil
 //        typeInfo.put ("shortString", "shortString");
     }
 
-    public static String getAttributeExt (String m_strType, boolean isEnum)
-    {
-        AttributeInfo.EnumAttributeType at = AttributeInfo.EnumAttributeType.getEnum (m_strType);
+    public static String getAttributeExt(SchemaAttribute schemaAttribute) {
+    	String strType = schemaAttribute.getStrType();
 
-        // if a valid enumType was found we are done no need for further mapping
-        if (at != AttributeInfo.EnumAttributeType.Any)
-        {
-            m_strType = at.getName ();
-        }
-        else if (isEnum)
-        {
-            m_strType = "enumeration";
-        }
-        else
-        {
-            String value = (String) typeInfo.get (m_strType);
-            m_strType = AttributeInfo.EnumAttributeType.getEnum (value).getName ();
-        }
+    	boolean isEnum =
+    		JavaCoreStringUtil.useEnumAttribute(schemaAttribute.getIsEnum(), schemaAttribute.getStrAttributeName());
 
-        // if(m_strType.equals("Any"))
-        // System.out.println(temp);
+		AttributeInfo.EnumAttributeType at =
+			AttributeInfo.EnumAttributeType.getEnum(strType);
 
-        return m_strType;
-    }
+		if (at != AttributeInfo.EnumAttributeType.Any) {
+			// if a valid enumType was found we are done no need for further mapping
+			strType = at.getName();
+		} else if (schemaAttribute.getIsEnumList()) {
+			strType = "enumerations";
+		} else if (isEnum) {
+			strType = "enumeration";
+		} else {
+//			JDFAutoPart : AttributeName.SORTAMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.Any
+			String value = (String) typeInfo.get(strType);
+			strType = AttributeInfo.EnumAttributeType.getEnum(value).getName();
+//			JDFAutoPart : AttributeName.SORTAMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.boolean
+//			strType = (String) typeInfo.get(strType);
+//			strType = (strType == null) ? "Any" : strType;
+		}
+
+		return strType;
+	}
 
     public static SchemaComplexType getNodeUsageString (
             SchemaComplexType complexType, String[] parents,
@@ -1863,7 +1866,7 @@ public class GeneratorUtil
         {
             //to write some info in it
             SchemaElement myElement = (SchemaElement) complexType.m_vSchemaElements.elementAt (i);
-            
+
             boolean isUnbounded = false;
             KElement k = myElement.getm_schemaKElem ();
             KElement annotation = k.getElement_KElement ("xs:annotation", "", 0);
@@ -1876,7 +1879,7 @@ public class GeneratorUtil
                 if (appinfo != null)
                 {
                     VElement vInOut = appinfo.getChildElementVector("Constraint", "", new JDFAttributeMap (), true, 0,false);
-                    
+
                     for (int j = 0; j < vInOut.size (); j++)
                     {
                         // reset it to empty string
@@ -1885,7 +1888,7 @@ public class GeneratorUtil
                         KElement kElem = schemaElement.getm_schemaKElem ();
 
                         sUsage = kElem.getAttribute ("Usage");
-                        
+
                         sMinOccurs = kElem.getAttribute ("minOccurs");
                         sMaxOccurs = kElem.getAttribute ("maxOccurs");
 
@@ -1923,12 +1926,12 @@ public class GeneratorUtil
                             {
                                 sBuffer += "i_";
                             }
-                            
+
                             if (!JDFConstants.EMPTYSTRING.equals (sProcessUsage))
                             {
                                 sBuffer += sProcessUsage;
                             }
-                            
+
                             if (j != vInOut.size () - 1)
                             {
                                 sBuffer += " ";
@@ -1951,19 +1954,19 @@ public class GeneratorUtil
                             {
                                 sBuffer += "o_";
                             }
-                            
+
                             if (!JDFConstants.EMPTYSTRING.equals (sProcessUsage))
                             {
                                 sBuffer += sProcessUsage;
                             }
-                            
+
                             if (j != vInOut.size () - 1)
                             {
                                 sBuffer += " ";
                             }
                         }
                     }
-                    
+
                     if (i == complexType.m_vSchemaElements.size () - 1)
                     {
                         sUsageString += sBuffer + "";
@@ -1974,7 +1977,7 @@ public class GeneratorUtil
                     }
 
                     myElement.setStrUsageString (sBuffer);
-                    
+
                     if (isUnbounded)
                     {
                         myElement.setStrMaxOccurs ("unbounded");
@@ -1989,10 +1992,10 @@ public class GeneratorUtil
                 }
             }
         }
-        
+
         //set the usage string in the actual complex type
         complexType.setStrNodeUsageString (sUsageString);
-        
+
         return complexType;
     }
 
@@ -2012,13 +2015,13 @@ public class GeneratorUtil
     //        VElement v = new VElement(h.GetChildElementVector("Constraint"));
     //        for(int i = 0; i < v.size(); i++)
     //        {
-    //            
+    //
     //        }
-    //        
+    //
     //        return null;
     //    }
 
-    
+
     public static String[] fillParents(SchemaComplexType complexType)
     {
         String parents[] = null;
@@ -2031,12 +2034,12 @@ public class GeneratorUtil
                 parents = complexType.strVersionInfoPath.split("_");
             }
         }
-        
+
         return parents;
     }
-             
-    
-    public static void fillAppInfoElements(String motherOf, String[] parents, 
+
+
+    public static void fillAppInfoElements(String motherOf, String[] parents,
             VElement vElements, VElement vAppInfoElements)
     {
         for (int i = 0; i < vElements.size(); i++)
@@ -2045,7 +2048,7 @@ public class GeneratorUtil
             String kElemName = kElem.getAttribute("name", "", "");
             kElemName = kElemName.split("_")[0];
 
-            if (kElemName.equals(motherOf) 
+            if (kElemName.equals(motherOf)
                     || ((parents != null) && kElemName.equals(parents[0])))
             {
                 // found mother of complexType, now get the appinfo
@@ -2058,8 +2061,8 @@ public class GeneratorUtil
             }
         }
     }
-             
-    
+
+
     /**
      * @param parents
      * @param vAppInfoElements
@@ -2067,7 +2070,7 @@ public class GeneratorUtil
      * @param complexType TODO
      */
     private static void elementHandleMinMaxOccurs (
-            String[] parents, VElement vAppInfoElements, SchemaElement schemaElement, 
+            String[] parents, VElement vAppInfoElements, SchemaElement schemaElement,
             SchemaComplexType complexType)
     {
         String parentsPath = "";
@@ -2083,16 +2086,16 @@ public class GeneratorUtil
         final String elementName = schemaElement.getStrElementName();
         parentsPath += elementName;
 
-        KElement complexTypeappInfoElement = 
+        KElement complexTypeappInfoElement =
             complexType.m_kElem.getXPathElement("xs:annotation/xs:appinfo");
 
         boolean isMinMaxOccursInitialized = false;
         if (complexTypeappInfoElement != null)
         {
-            isMinMaxOccursInitialized = 
+            isMinMaxOccursInitialized =
                 elementSetMinMaxOccurs(schemaElement, parentsPath, elementName, complexTypeappInfoElement);
         }
-        
+
         if (!isMinMaxOccursInitialized)
         {
             Iterator appInfoIter = vAppInfoElements.iterator();
@@ -2100,20 +2103,20 @@ public class GeneratorUtil
             {
                 KElement appInfoElement = (KElement) appInfoIter.next();
 
-                isMinMaxOccursInitialized = 
+                isMinMaxOccursInitialized =
                     elementSetMinMaxOccurs(schemaElement, parentsPath, elementName, appInfoElement);
             }
         }
     }
 
-    private static boolean elementSetMinMaxOccurs(SchemaElement schemaElement, 
+    private static boolean elementSetMinMaxOccurs(SchemaElement schemaElement,
             final String parentsPath, final String elementName, final KElement appInfoElement)
     {
         boolean isMinMaxOccursInitialized = false;
-        
+
         VElement vConstraintElements = appInfoElement.getChildrenByTagName(
                 "Constraint", "", new JDFAttributeMap(), true, true, 0);
-        
+
         Iterator constraintIter = vConstraintElements.iterator();
         while (constraintIter.hasNext())
         {
@@ -2121,7 +2124,7 @@ public class GeneratorUtil
             String elementPath = constraintElement.getAttribute("Path", "", "");
 
             if (!elementPath.startsWith("Signature/") && // hack to exclude the deprecated Signature/Media
-            		(isElementInParent(parentsPath, elementPath) 
+            		(isElementInParent(parentsPath, elementPath)
                     || isElementInSchema(elementPath, elementName)
                     // I don´t want to implement [@xxx ... notation, so I use a special case for it
                     || (parentsPath.equals("EndSheet/GlueLine") && elementPath.equals("EndSheet[@Side=\"Back\"]/GlueLine"))
@@ -2135,22 +2138,22 @@ public class GeneratorUtil
                 // found it again, get the maxOccurs/minOccurs now
                 String strMinValue = constraintElement.getAttribute("minOccurs", "", "1");
                 String strMaxValue = constraintElement.getAttribute("maxOccurs", "", "1");
-                
+
                 schemaElement.setStrMinOccurs(strMinValue);
                 schemaElement.setStrMaxOccurs(strMaxValue);
-        
+
                 if (isElementInSchema(elementPath, elementName))
                 {
                     isMinMaxOccursInitialized = true;
                 }
             }
         }
-        
+
         return isMinMaxOccursInitialized;
     }
 
     public static void elementHandleVersion (
-            String[] parents, VElement vAppInfoElements, SchemaElement schemaElement, 
+            String[] parents, VElement vAppInfoElements, SchemaElement schemaElement,
             SchemaComplexType complexType)
     {
         String parentsPath = "";
@@ -2162,11 +2165,11 @@ public class GeneratorUtil
                 parentsPath += "/";
             }
         }
-        
+
         final String elementName = schemaElement.getStrElementName();
         parentsPath += elementName;
-        
-        KElement complexTypeappInfoElement = 
+
+        KElement complexTypeappInfoElement =
             complexType.m_kElem.getXPathElement("xs:annotation/xs:appinfo");
 
         boolean isVersionInitialized = false;
@@ -2175,27 +2178,27 @@ public class GeneratorUtil
             isVersionInitialized = true;
             elementSetVersion(schemaElement, parentsPath, elementName, complexTypeappInfoElement);
         }
-        
+
         if (!isVersionInitialized)
         {
             Iterator appInfoIter = vAppInfoElements.iterator();
             while (appInfoIter.hasNext() && !isVersionInitialized)
             {
                 KElement appInfoElement = (KElement) appInfoIter.next();
-                
-                isVersionInitialized = 
+
+                isVersionInitialized =
                     elementSetVersion(schemaElement, parentsPath, elementName, appInfoElement);
             }
         }
     }
 
-    private static boolean elementSetVersion(SchemaElement schemaElement, final String parentsPath, 
+    private static boolean elementSetVersion(SchemaElement schemaElement, final String parentsPath,
             final String elementName, final KElement appInfoElement)
     {
         boolean isVersionInitialized = false;
-        VElement vVersionElements = 
+        VElement vVersionElements =
             appInfoElement.getChildrenByTagName("Version", "", new JDFAttributeMap(), true, true, 0);
-        
+
         Iterator versionIter = vVersionElements.iterator();
         while (versionIter.hasNext())
         {
@@ -2210,33 +2213,33 @@ public class GeneratorUtil
                 String strFirst = versionElement.getAttribute("First", "", "");
                 String strLast  = versionElement.getAttribute("Last", "", "");
                 schemaElement.setFirstVersion(strFirst);
-                schemaElement.setLastVersion(strLast);                        
-                
+                schemaElement.setLastVersion(strLast);
+
                 if (isElementInSchema(elementPath, elementName))
                 {
                     isVersionInitialized = true;
                 }
             }
         }
-        
+
         return isVersionInitialized;
     }
 
     private static boolean isElementInParent (String parentsPath, String elementPath)
     {
-        boolean result = parentsPath.equals(elementPath) 
+        boolean result = parentsPath.equals(elementPath)
                             || parentsPath.startsWith(elementPath+"/")
                             || parentsPath.endsWith("/" + elementPath);
-        
+
 //        boolean resultNew = isElementInSchema(elementPath, elementName);
-//        
+//
 //        if (resultNew && result != resultNew)
 //            System.out.println(complexType.strVersionInfoPath+"\t"+parentsPath+"\t"+
 //                    parentsPath.equals(elementPath)+"\t"+parentsPath.startsWith(elementPath+"/")+"\t"+result+"\t"+
 //                    elementPath+"\t"+
 //                    elementPath.equals(elementName)+"\t"+elementPath.endsWith("/"+elementName)+"\t"+resultNew+"\t"+
 //                    elementName);
-        
+
         return result;
     }
 
@@ -2246,7 +2249,7 @@ public class GeneratorUtil
     }
 
     public static void attributeHandleVersion (
-            String[] parents, VElement vAppInfoElements, SchemaAttribute schemaAttribute, 
+            String[] parents, VElement vAppInfoElements, SchemaAttribute schemaAttribute,
             SchemaComplexType complexType)
     {
         String parentsPath = "";
@@ -2258,11 +2261,11 @@ public class GeneratorUtil
                 parentsPath += "/";
             }
         }
-        
+
         final String attributeName = "@" + schemaAttribute.getStrAttributeName();
         parentsPath += attributeName;
-        
-        KElement complexTypeappInfoElement = 
+
+        KElement complexTypeappInfoElement =
             complexType.m_kElem.getXPathElement("xs:annotation/xs:appinfo");
 
         boolean isVersionInitialized = false;
@@ -2271,35 +2274,35 @@ public class GeneratorUtil
             isVersionInitialized = true;
             attributeSetVersion(schemaAttribute, parentsPath, attributeName, complexTypeappInfoElement);
         }
-        
+
         if (!isVersionInitialized)
         {
             Iterator appInfoIter = vAppInfoElements.iterator();
             while (appInfoIter.hasNext() && ! isVersionInitialized)
             {
                 KElement appInfoElement = (KElement) appInfoIter.next();
-                
-                isVersionInitialized = 
+
+                isVersionInitialized =
                     attributeSetVersion(schemaAttribute, parentsPath, attributeName, appInfoElement);
             }
         }
     }
 
-    private static boolean attributeSetVersion(SchemaAttribute schemaAttribute, 
+    private static boolean attributeSetVersion(SchemaAttribute schemaAttribute,
             final String parentsPath, final String attributeName, final KElement appInfoElement)
     {
         boolean isVersionInitialized = false;
 
-        VElement vVersionElements = 
+        VElement vVersionElements =
             appInfoElement.getChildrenByTagName("Version", "", new JDFAttributeMap(), true, true, 0);
-        
+
         Iterator versionIter = vVersionElements.iterator();
         while (versionIter.hasNext())
         {
             KElement versionElement = (KElement) versionIter.next();
             String attributePath    = versionElement.getAttribute("Path", "", "");
-        
-            if (isElementInParent(parentsPath, attributePath) 
+
+            if (isElementInParent(parentsPath, attributePath)
                     || isElementInSchema(attributePath, attributeName)
                     || (".".equals(attributePath))
                )
@@ -2307,17 +2310,17 @@ public class GeneratorUtil
                 // found attributePath, get First and Last for the parent as default
                 String strFirst = versionElement.getAttribute("First", "", "");
                 String strLast  = versionElement.getAttribute("Last", "", "");
-        
+
                 schemaAttribute.setFirstVersion(strFirst);
                 schemaAttribute.setLastVersion(strLast);
-                
+
                 if (isElementInSchema(attributePath, attributeName))
                 {
                     isVersionInitialized = true;
                 }
             }
         }
-        
+
         return isVersionInitialized;
     }
 
@@ -2360,24 +2363,24 @@ public class GeneratorUtil
     }
 
     /**
-     *  generates a string of form 11111333. Each digit denotates a version starting 
+     *  generates a string of form 11111333. Each digit denotates a version starting
      *  at the right with version 1.0 and incrementing to the left 1.1, 1.2 ... 1.7
      *  (not sure if the world exists after 1.7 ;)
-     *  
+     *
      *  Number lookup for attributes (-> JDFSpec 1.3, 1.3.4 Specification of Cardinality
      *  None            = 1
      *  Required        = 2 - A
      *  Optional        = 3 - A?
      *  Deprecated      = 4
-     *  
-     *  44444432 means "was required in 1.0, was optional in 1.1, is deprecated in 1.2 
+     *
+     *  44444432 means "was required in 1.0, was optional in 1.1, is deprecated in 1.2
      *  44333311 means "was first introduced as optional in 1.2, was deprecated in 1.6
-     *  
+     *
      * @param String usage        "optional" or "required"
      * @param String firstVersion i.e. "1.1" and lastVersion  = ""
      * @param String lastVersion  i.e. "1.2" and firstVersion = ""
      * @return a String of form  44333311
-     
+
      */
     public static String getVersionInfoAttributes (String usage, String firstVersion, String lastVersion)
     {
@@ -2395,11 +2398,13 @@ public class GeneratorUtil
         EnumVersion eFirstVer = EnumVersion.getEnum(firstVersion);
         EnumVersion eLastVer = EnumVersion.getEnum(lastVersion);
 
-        if (eFirstVer == null)
-            eFirstVer = EnumVersion._1_0;
+        if (eFirstVer == null) {
+			eFirstVer = EnumVersion._1_0;
+		}
 
-        if (eLastVer == null)
-            eLastVer = EnumVersion._1_7;
+        if (eLastVer == null) {
+			eLastVer = EnumVersion._1_7;
+		}
 
         StringBuffer verBuffer = new StringBuffer(10);
 
@@ -2434,20 +2439,20 @@ public class GeneratorUtil
     /**
      * generates a string of form 33333333. Every digit is a version starting at the right with
      * version 1.0 and incrementing to the left 1.1, 1.2 etc.
-     * 
+     *
      * Number lookup for elements (-> JDFSpec 1.3, 1.3.4 Specification of Cardinality None = 1
      * Required = 2 - E+ Optional = 3 - E* Deprecated = 4 Single Required = 5 - E Single Optional =
      * 6 - E? Single Deprecated = 7 Dummy = 8
-     * 
+     *
      * 00000432 means "was required in 1.0, was optional in 1.1, is deprecated in 1.2 and no
      * informations for further versions are available"
-     * 
+     *
      * @param isOptional
      * @param firstVersion
      * @param lastVersion
      * @param maxOccurs
      * @param schemaComplexType
-     * 
+     *
      * @return a String of form 11111333 boolean isOptional, String firstVersion, String
      *         lastVersion, String maxOccurs element.getIsOptionalElement(),
      *         element.getFirstVersion(), element.getLastVersion(), element.getStrMaxOccurs()
@@ -2468,11 +2473,13 @@ public class GeneratorUtil
         EnumVersion eLastVer = EnumVersion.getEnum(lastVersion);
         EnumVersion eFirstVer = EnumVersion.getEnum(firstVersion);
 
-        if (eFirstVer == null)
-            eFirstVer = EnumVersion._1_0;
+        if (eFirstVer == null) {
+			eFirstVer = EnumVersion._1_0;
+		}
 
-        if (eLastVer == null)
-            eLastVer = EnumVersion._1_7;
+        if (eLastVer == null) {
+			eLastVer = EnumVersion._1_7;
+		}
 
         StringBuffer verBuffer = new StringBuffer(10);
 

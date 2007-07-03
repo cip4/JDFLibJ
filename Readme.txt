@@ -1,4 +1,30 @@
-Label JDFLIBJ_2.1.2BLD431 (30.05.2007)
+___________________________________________________________
+
+Label JDFLIBJ_2.1.3BLD432 (08.06.2007)
+
+made VJDFAttributemap.toString() more readable
+fix in JDFNode.getExecutablePartition
+changed for loops to iterator loops, cosmetic changes
+updated printtalk spec
+minor editor cleanup
+new class ContainerUtil.java and ContainerUtilTest.java
+
+ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD432) && !lbtype(JDFLIBJ_2.1.3BLD431)}" -print
+.\cformat\ScanfReader.java@@\main\4
+.\core\JDFDocumentBuilder.java@@\main\4
+.\core\JDFElement.java@@\main\233
+.\core\KElement.java@@\main\241
+.\datatypes\VJDFAttributeMap.java@@\main\26
+.\jmf\JDFMessage.java@@\main\69
+.\jmf\JDFResourceCmdParams.java@@\main\24
+.\node\JDFNode.java@@\main\246
+.\pool\JDFAuditPool.java@@\main\96
+.\resource\JDFResource.java@@\main\218
+.\util@@\main\18
+.\util\ContainerUtil.java@@\main\1
+___________________________________________________________
+
+Label JDFLIBJ_2.1.3BLD431 (30.05.2007)
 
 JDFDevCaps errata fix - data type of getDevCapRef now VString
 added some tests
@@ -8,7 +34,7 @@ fix GetMinID (cleanup only in java)
 fix id cache handling
 improved validation of DevCaps
 fixes + tests for spawning of non-identical resource partitions in / out / spawn
-xpath fixes for partitioned resources 
+xpath fixes for partitioned resources
 add validation of warnings
 add editor normalize
 fix dead loop in getpredecessors
@@ -34,7 +60,7 @@ JDFAutoPhaseTime     : attribute END is optional
 JDFAutoPlasticCombBindingParams : added EnumType.S1_generic, EnumType.S_generic
 JDFAutoResourceAudit : added optional attribute NODESTATUS
 
->ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD431) && !lbtype(JDFLIBJ_2.1.3BLD430)}" -print
+ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD431) && !lbtype(JDFLIBJ_2.1.3BLD430)}" -print
 .\auto\JDFAutoDevCaps.java@@\main\52
 .\auto\JDFAutoDevice.java@@\main\69
 .\auto\JDFAutoEmboss.java@@\main\51
@@ -70,7 +96,7 @@ JDFAutoResourceAudit : added optional attribute NODESTATUS
 ___________________________________________________________
 
 
-Label JDFLIBJ_2.1.2BLD430 (10.05.2007)
+Label JDFLIBJ_2.1.3BLD430 (10.05.2007)
 
 getpredecesoors dead loop fix
 checkjdf add language
@@ -156,7 +182,7 @@ ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD430) && !lbtype(JDFLIBJ_2.1.3BLD420)
 ___________________________________________________________
 
 
-Label JDFLIBJ_2.1.2BLD421 (13.04.2007)
+Label JDFLIBJ_2.1.3BLD421 (13.04.2007)
 
 Fix JDFResourceLink.isexecutable to analyze minstatus
 do not write resource/AgentName by default
@@ -184,7 +210,7 @@ ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD421) && !lbtype(JDFLIBJ_2.1.3BLD420)
 ___________________________________________________________
 
 
-Label JDFLIBJ_2.1.2BLD420 (29.03.2007)
+Label JDFLIBJ_2.1.3BLD420 (29.03.2007)
 
 fix for JDFDate memory
 added jmf to audit conversion to JDFAuditPool.html
@@ -236,7 +262,7 @@ ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD420) && !lbtype(JDFLIBJ_2.1.3BLD410)
 ___________________________________________________________
 
 
-Label JDFLIBJ_2.1.2BLD410 (28.02.2007)
+Label JDFLIBJ_2.1.3BLD410 (28.02.2007)
 
 remove minor warnings
 Jira JDFJ-91 exception when a resource is missing
@@ -305,7 +331,7 @@ ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD410) && !lbtype(JDFLIBJ_2.1.3BLD401)
 .\util\StatusUtil.java@@\main\5
 ___________________________________________________________
 
-Label JDFLIBJ_2.1.2BLD401 (14.02.2007)
+Label JDFLIBJ_2.1.3BLD401 (14.02.2007)
 
 devcap for editor
 Updates for partitioned layout
@@ -327,11 +353,11 @@ ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD401) && !lbtype(JDFLIBJ_2.1.3BLD400)
 
 ___________________________________________________________
 
-Label JDFLIBJ_2.1.2BLD400 (08.02.2007)
+Label JDFLIBJ_2.1.3BLD400 (08.02.2007)
 
 
-API change due to schema bug :	
-	rename AutomatedOverprintParams to AutomatedOverPrintParams etc.
+API change due to schema bug :
+    rename AutomatedOverprintParams to AutomatedOverPrintParams etc.
 
 bug fix for heuristics in KElement.getNamespaceURI()
 
@@ -364,11 +390,11 @@ ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD400) && !lbtype(JDFLIBJ_2.1.3BLD391)
 
 ___________________________________________________________
 
-Label JDFLIBJ_2.1.2BLD391 (18.01.2007)
+Label JDFLIBJ_2.1.3BLD391 (18.01.2007)
 
 
-Bug fixes due to API change in Build 390 :	
-	JDFResourceLinkPool.getPoolChildren and JDFResourceLinkPool.getInOutLinks can return null
+Bug fixes due to API change in Build 390 :
+    JDFResourceLinkPool.getPoolChildren and JDFResourceLinkPool.getInOutLinks can return null
 
 Changed files:
 ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD391) && !lbtype(JDFLIBJ_2.1.3BLD390)}" -print
@@ -380,13 +406,13 @@ ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD391) && !lbtype(JDFLIBJ_2.1.3BLD390)
 
 ___________________________________________________________
 
-Label JDFLIBJ_2.1.2BLD390 (15.01.2007)
+Label JDFLIBJ_2.1.3BLD390 (15.01.2007)
 
 
 Jira issues fixed since JDFLIBJ_2.1.2BLD380:
 
-Improvement  	JDFJ-85  	ScreenSelector/@Separation  	  
-Bug 		JDFJ-83 	Device capabilities test does not always look for attributes in leaf nodes of partitioned resources 
+Improvement     JDFJ-85     ScreenSelector/@Separation
+Bug         JDFJ-83     Device capabilities test does not always look for attributes in leaf nodes of partitioned resources
 
 
 Changed files:
@@ -422,7 +448,7 @@ ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD390) && !lbtype(JDFLIBJ_2.1.3BLD381)
 
 ___________________________________________________________
 
-Label JDFLIBJ_2.1.2BLD381 (05.12.2006)
+Label JDFLIBJ_2.1.3BLD381 (05.12.2006)
 
 Changes:  - Vermeidung doppelter Attribute beim Aufruf von SetAttributeNS
 
@@ -450,7 +476,7 @@ ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD381) && !lbtype(JDFLIBJ_2.1.3BLD380)
 
 ___________________________________________________________
 
-Label JDFLIBJ_2.1.2BLD380 (24.11.2006)
+Label JDFLIBJ_2.1.3BLD380 (24.11.2006)
 
 Changed files:
 
@@ -718,13 +744,13 @@ JDFCapability.xsd
 
 JDFCore.xsd
     fixed       GeneralID, SourceResource
-    fixed       ICSVersions added in Ancestor 
+    fixed       ICSVersions added in Ancestor
     changed     annotation for AncestorPool_, CustomerInfo_, StatusPool_, StatusPool_PartStatus_l,
 
-JDFMessage.xsd  
+JDFMessage.xsd
     fixed       NodeInfoQuParams_m, NodeInfoCmdParams_m
     changed     annotation for ModifyNodeCmdParams, RequestQueueEntryParams, QueueFilter
-                
+
 JDFProcess.xsd
     changed     annotation for ProcessInputResources_
 
@@ -734,9 +760,9 @@ JDFResource.xsd
     fixed       ImplicitGutterMinimumLimit added in LayoutPreparationParamsAttribs_c
     changed     annotation for Resource, Assembly, Assembly_AssemblySection_lr.
                 BinderySignature, BoxPackingParams, ColorSpaceConversionOp_re,
-                CreasingParams, CuttingParams, DeviceNSpace, GluingParams, 
-                LaminatingParams, LayoutPreparationParams, PageList, 
-                ShapeCuttingParams, StackingParams, StrappingParams, 
+                CreasingParams, CuttingParams, DeviceNSpace, GluingParams,
+                LaminatingParams, LayoutPreparationParams, PageList,
+                ShapeCuttingParams, StackingParams, StrappingParams,
                 StrippingParams, Tool, DeliveryIntent, DeliveryIntent_Pricing_lr
     changed     NMTOKEN --> NMTOKENS in AssemblyAttribs_c, Assembly_AssemblySection_lr,
                 Assembly_AssemblySection_AssemblySection_lr, ComponentAttribs_c,
@@ -759,13 +785,13 @@ JDFAbstractState
 
 JDFDoc + XMLDoc
     changed     toString()
-    
+
 JDFDate
     changed     JDFDate(String strDateTime) allows milliseconds 3.123 ...
                 but getDateTimeISO() still returns the time rounded to full seconds
                 only long getTimeInMillis() returns the exact time
-                
-StringUrils     
+
+StringUrils
     added       String formatInteger(int i) can return JDFConstants.POSINF and JDFConstants.NEGINF ("INF" / "-INF")
     fixed       int parseInt(String s, int def) allows for JDFConstants.POSINF and JDFConstants.NEGINF
 
@@ -792,7 +818,7 @@ Label JDFLIBJ_2.1.2BLD027 (14.12.2005)
 
 auto files : e.init() removed, validClass(xxx) --> validClass()
 
-unit test file paths are now relative to the project directory 
+unit test file paths are now relative to the project directory
 (before they were relative to project directory/test/data)
 
 DocumentJDFImpl returns as minimal type now KElement (was JDFElement) !!!
@@ -829,7 +855,7 @@ JDFNode
     changed     validation has been replaced by new version dependent algorithms
     added       eraseemptynodes now clears empty pools
     added       checkspawnresources - spawn checks whether any resources would be spawned rw multiply
-         
+
 
 VNode
     deprecated  use VElement and a cast of elementAt() to JDFNode
@@ -844,8 +870,8 @@ JDFSelector
     removed     JDFSelector has been dead (really dead, not deprecated) since JDF 1.1
 
 All Auto files
-    removed     ValidNodeNames() is not used, since it is an artifact from C++, 
-                where type (up) casts are more widespread. 
+    removed     ValidNodeNames() is not used, since it is an artifact from C++,
+                where type (up) casts are more widespread.
                 The parser factory in the Java version implicitly defines the valid node names.
 ___________________________________________________________
 
@@ -874,9 +900,9 @@ ___________________________________________________________
 Label JDFLIBJ_2.1.2BLD021 (09.06.2005)
 
 DocumentJDFImpl
-    changed     ExtendedAddress does now map to JDFComment. 
+    changed     ExtendedAddress does now map to JDFComment.
                 The file JDFExtendedAddress is obsolet and got deleted
-                OrganizationalUnit does now map to JDFComment. 
+                OrganizationalUnit does now map to JDFComment.
                 The file JDF OrganizationalUnit is obsolet and got deleted
     added       NodeName "PayTerm" as a valid Comment name
     added       NodeName "Range" as a valid Comment name
@@ -890,9 +916,9 @@ JDFElement
 JDFNode
     changed     While spawning more then one partition only the first part element was set to status spawned.
                 (Wrong method call)
-    
+
 JDFComment
-    changed     New nodenames are allowed for a comment. These are 
+    changed     New nodenames are allowed for a comment. These are
                 ExtendedAddress, OfferRange, OrganizationalUnit, PayTerm,Range, SearchPath
                 See corresponding changes in DocumentJDFImpl
 ________________________________________________________________________________
@@ -947,7 +973,7 @@ JDFResourceLink
     added        expandTarget(boolean bForce)
 
 KElement
-         bug fix        setAttribute() – throw a JDFException if two setAttribute using the same prefix but a different 
+         bug fix        setAttribute() – throw a JDFException if two setAttribute using the same prefix but a different
 namespace are used
 JDFNode
     added        boolean setPartStatus (VJDFAttributeMap vmattr, EnumNodeStatus status)
@@ -976,27 +1002,27 @@ JDFNode
          bug fix        NPEs regarding the ancestor pool
 
 
-Several Changes to the Device Capabilities and to the validation routines to make them JDFSpec 1.3 
+Several Changes to the Device Capabilities and to the validation routines to make them JDFSpec 1.3
 compatible
 ________________________________________________________________________________
 
 Label JDFLIBJ_2.1.2BLD015 (xxxx)
 
 JDFNode
-         changed        there was a NullpointerException if a resource for a Resourcelink wasn’t there. We decided to 
-continue in this case. So in the best case your spawned prozess is still valid but is missing a 
+         changed        there was a NullpointerException if a resource for a Resourcelink wasn’t there. We decided to
+continue in this case. So in the best case your spawned prozess is still valid but is missing a
 audit for example. In the worst case your spawned job is as broken then the main jdf.
-KElement    
+KElement
          changed        changed isDirty and deprecated it. This method should not be called from outside anyway
-         changed    changed getDeepParentNotName internaly from NodeName to LocalName to work with 
+         changed    changed getDeepParentNotName internaly from NodeName to LocalName to work with
 private Namespaces
-         changed    appendElement(xyz:abc) will throw a JDFException if the namespace was not set before using 
-it. In this example you would get an exception if the namespace xyz was not set in this 
-element or any other element above it (root is top). 
+         changed    appendElement(xyz:abc) will throw a JDFException if the namespace was not set before using
+it. In this example you would get an exception if the namespace xyz was not set in this
+element or any other element above it (root is top).
 
 
 XMLUserData
-         changed            added a EnumDirtyPolicy with default none. IF you want to change the DirtyPolicy use 
+         changed            added a EnumDirtyPolicy with default none. IF you want to change the DirtyPolicy use
 setDirtyPolicy(EnumDirtyPolicy dirtPol). Valid values are None/ID/Xpath
          changed            getDirtyIDs(), returns an empty VString if Policy is set to None (Default!)
          added            getDirtyXPaths() returns an empty VString if Policy is not set to XPath
@@ -1010,9 +1036,9 @@ Check with findbugs 0.8.6, lots of warnings removed, the rest is
 
 JDFNode
          added        added informativeSpawn zu JDFNode
-         added    NodeInfo CustomerInfo are now Resources if the Node is a 1.3 Node. Otherwise the are 
-treated as always. The inheritance of both changed to JDFResource, beware of virtual method 
-calls. 
+         added    NodeInfo CustomerInfo are now Resources if the Node is a 1.3 Node. Otherwise the are
+treated as always. The inheritance of both changed to JDFResource, beware of virtual method
+calls.
          Info    Handling of NodeInfo-Elemente of Ancestor Nodes in the AncestorPool are not in yet.
          added    changed spawn to allow spawning of RO Resources
 
@@ -1020,7 +1046,7 @@ JDFResourceLink
          bug fix        changed method hasResourcePartMap to be more restrictive (proper way)
 
 JDFResource
-added    JDFResource.addPartition throws a JDFException if you try to add a partition to a 
+added    JDFResource.addPartition throws a JDFException if you try to add a partition to a
 ResourceElement.
 
 JDFBooleanEvaluation
@@ -1033,7 +1059,7 @@ JDFArtDelivery
 bug fix    GetArtHandling() --> getArtHandling()
 
 JDFDuration, Duration
-Api change    public void setDurationISO(String a_aDuration) 
+Api change    public void setDurationISO(String a_aDuration)
        --> public boolean setDurationISO(String a_aDuration)
 
 JDFNode
@@ -1043,26 +1069,26 @@ ________________________________________________________________________________
 Label JDFLIBJ_2.1.2BLD013 (14.02.2005)
 
 KElement
-bug fix    fix for DOM Level 1 namespace bug in setAttribute(String key, String value, String 
+bug fix    fix for DOM Level 1 namespace bug in setAttribute(String key, String value, String
 nameSpaceURI) (copied from C++)
 
-JDFResourceLinkPool 
-bug fix    fix for DOM Level 1 namespace bug in appendResource (…) 
+JDFResourceLinkPool
+bug fix    fix for DOM Level 1 namespace bug in appendResource (…)
 
-JDFElement 
-bug fix    fix for DOM Level 1 namespace bug in refElement (…) 
+JDFElement
+bug fix    fix for DOM Level 1 namespace bug in refElement (…)
 
 
-This DOM Level 1 namespace bug will get a more global treatment in BLD014 
+This DOM Level 1 namespace bug will get a more global treatment in BLD014
 with changes in KElement. For now the known problems are fixed.
 ________________________________________________________________________________
 
 Label JDFLIBJ_2.1.2BLD012 (08.02.2005)
 
 KElement
-bug fix    fix for DOM Level 1 namespace bug in appendElement ( the incorrect call 
-appendElement("HDM:newElem", "") inserted a wrong namespace 
-xmlns:HDM="http://www.CIP4.org/JDFSchema_1_1".This was used in Printready. Now it tries 
+bug fix    fix for DOM Level 1 namespace bug in appendElement ( the incorrect call
+appendElement("HDM:newElem", "") inserted a wrong namespace
+xmlns:HDM="http://www.CIP4.org/JDFSchema_1_1".This was used in Printready. Now it tries
 to find a predefined namespace HDM and throws if no one can be found)
 ________________________________________________________________________________
 
@@ -1072,11 +1098,11 @@ The greatest part of the changes was validation induced - making validation work
 including device capabilities
 
 Auto classes
-changed    various wrong return types (i.e. JDFSpanSpineGlue --> JDFSpanGlue, 
+changed    various wrong return types (i.e. JDFSpanSpineGlue --> JDFSpanGlue,
 JDFSpanBackCoverColor --> JDFSpanNamedColor ...)
     various signature changes concerning validation methods
     various methods of attributes of type Enumerations now return a vector instead of EnumXYZ
-    (before every time the attribute had more than one entry the method returned Unknown, now a 
+    (before every time the attribute had more than one entry the method returned Unknown, now a
 vector of Integer is returned)
     various methods of attributes of type NMTOKENS now return a VString instead of String
 
@@ -1089,30 +1115,30 @@ JDFDoc
 bug fix    getJDFRoot(), getJMFRoot()
 
 JDFElement
-       bug fix        refElement() 
+       bug fix        refElement()
        changed    signature of xyRelation() contains 2 additional tolerance params
 
 KElement
-changed    appendElement(String elementName, String nameSpaceURI) creates a DOM level 2 Element 
-in the default namespace when no namespace is given (JDFConstants.NONAMESPACE) 
+changed    appendElement(String elementName, String nameSpaceURI) creates a DOM level 2 Element
+in the default namespace when no namespace is given (JDFConstants.NONAMESPACE)
 xmlns="http://www.CIP4.org/JDFSchema_1_1"
 
 XMLDoc
-changed    initRoot and setRoot create a DOM level 2 Element in the default namespace when no 
-namespace is given (JDFConstants.NONAMESPACE) 
+changed    initRoot and setRoot create a DOM level 2 Element in the default namespace when no
+namespace is given (JDFConstants.NONAMESPACE)
 xmlns="http://www.CIP4.org/JDFSchema_1_1"
-    If a user manages to enter a DOM level 1 Element into the tree and serializes it with 
+    If a user manages to enter a DOM level 1 Element into the tree and serializes it with
 XMLDoc.write2XXX it will contain a namespace xmlns=""
 
 JDFDurationRange
-       changed    uses new class JDFDuration instead of JDFDate 
+       changed    uses new class JDFDuration instead of JDFDate
 
 JDFPath
-       added        new method public void transform(AffineTransform at) 
+       added        new method public void transform(AffineTransform at)
 
 JDFQueue
 added    public JDFQueueEntry getEntry (String strQEntryID)
-    public VString findQueueEntries (String strJobID, String strJobPartID, 
+    public VString findQueueEntries (String strJobID, String strJobPartID,
                                             VJDFAttributeMap vamParts, EnumQueueEntryStatus status)
 
 JDFQueueEntryDef
@@ -1136,7 +1162,7 @@ deprecated    GetNamedFeatures(boolean bInherit). Use getNamedFeatures() instead
 deprecated    getStatusDetails(boolean bInherit). Use getStatusDetails () instead
 bug fix    getJobPartID(). Default version of getJobPartID(boolean bInherit)
 added    getJobPartID(boolean bInherit)
-added    getSpawnID(boolean bInherit)    
+added    getSpawnID(boolean bInherit)
 changed    getTypes(), setTypes(), validTypes() – correction for Process Group Nodes
 added    getTemplate()
 
@@ -1150,7 +1176,7 @@ JDFResource
 changed    isResourceElement()
 
 JDFDate
-deprecated    all methods that use a duration. Use new JDFDuration class instead. In the moment both of 
+deprecated    all methods that use a duration. Use new JDFDuration class instead. In the moment both of
 JDFDate and JDFDuration are inherited from the Duration interface.
 ________________________________________________________________________________
 
@@ -1163,13 +1189,13 @@ API changes
 
     All classes start now with an uppercase letter, so vString -> VString and so on.
 
-        The convenience Methods hasXXX() have been removed, 
+        The convenience Methods hasXXX() have been removed,
         use hasAttribute(xxx, JDFConstants.NONAMESPACE, false) instead
 
 
 JDFElement
-changed    getEnumerationsAttribute had a bug where enumerations attributes where stored as a String 
-and not as tokens. Due to that it was impossible to find the corresponding enumeration. This 
+changed    getEnumerationsAttribute had a bug where enumerations attributes where stored as a String
+and not as tokens. Due to that it was impossible to find the corresponding enumeration. This
 may change the behaviour.
 
 
@@ -1205,7 +1231,7 @@ deleted        removeStatus()
 
 JDFParser.java
 deleted deprecated    parseFile(String strFile, boolean bValidate) -> use parseFile(String strFile)
-        initParser(String documentClassName, boolean bValidate, ErrorHandler errorHandler,       
+        initParser(String documentClassName, boolean bValidate, ErrorHandler errorHandler,
 String schemaLocation) -> use initParser(schemaLocation, documentClassName, errorHandler)
 
 XMLDoc.java
@@ -1217,7 +1243,7 @@ bug fix        removeStrings(s)
 added        removeStrings(s, nMax)
 
 JDFNode.java
-deleted deprecated    addProcessGroup_JDFNode(String prodName) -> 
+deleted deprecated    addProcessGroup_JDFNode(String prodName) ->
             use JDFNodeProcessGroup.addProcessGroup()
 delete        public EnumType getEnumType() -> use EnumType.getEnum(getType())
 delete        public void setEnumType(EnumType typ) -> use setType(typ.getName(), false)
@@ -1232,7 +1258,7 @@ deleted        hasUpdateID(), removeRun(), hasRun(), removePartIDKeys(), removeP
 deleted        hasPartIDKeys(), getPartRoot(), hasResourceWeight(), hasSpawnIDs(),
 deleted        getResourceClassString(), hasResourceClass(), isPrepared(boolean bRecurseRefs)
 deleted        setDraft(boolean bDraft), removePartUsage(), hasPartUsage(),hasResStatus()
-deleted        
+deleted
 deleted        EnumPipePartIDKey -> use EnumPartIDKey
 deleted        pipePartIDKeyString(EnumPipePartIDKey value) -> use value.getName()
 deleted        pipePartIDKeyString() -> use partIDKeyString()
@@ -1268,7 +1294,7 @@ added        EnumJMFReturnCode from Appendix I
 JDFNode.java
 added        public boolean isSuccessor (JDFNode proc)
         public vString getResourceIDs (boolean isInput)
-        public vJDFAttributeMap 
+        public vJDFAttributeMap
              getExecutablePartitions (JDFResourceLink link, JDFResource res, boolean isEnforced)
         public JDFNode [] getProcessNodes ()
         public boolean isProcessNode ()
@@ -1289,37 +1315,37 @@ Autoclasses
 
 JDFAudit.java
        changed    getPhase() : getEnumNodeStatus -> getStatus
-      
+
 JDFElement.java
        removed    getEnumNodeStatus, setNodeStatus, getNodeStatus, getElementStatus
-                           setElementStatus, nodeStatusString, getElementStatusString, setElementStatusString 
-      
+                           setElementStatus, nodeStatusString, getElementStatusString, setElementStatusString
+
 JDFNode.java
        removed    setStatusString, setStatus, setNodeStatus, getStatusString, getStatus
        changed    used setStatus/getStatus instead
        bug fix        mergeJDF, mergeStatusPool
-      
+
 JDFAuditPool.java
        changed    setPhase() : getEnumNodeStatus -> getStatus
-      
+
 JDFStatusPool.java
        removed    getElementStatus. setElementStatus used instead getStatus, setStatus
-      
+
 JDFPhaseTime.java
        changed    validStatus() : getEnumNodeStatus -> getStatus
-      
+
 JDFProcessRun.java
        changed    validEndStatus () : getEnumNodeStatus -> getStatus
-      
+
 JDFResource.java
        changed    getDeepPart() : semantics before : returned always a leaf, now returns a leaf or a node
-      
+
 KElementTest.java
        added        testNameSpace
-      
+
 JDFResourceTest.java
        changed    testgetPartMap() to reflect semantic change in JDFResource.getDeepPart()
-      
+
 JDFDate.java
        changed    Defaultconstructor use current time instead of 1970 always
 ________________________________________________________________________________
@@ -1330,9 +1356,9 @@ AttributeName.java
     changed    REF = "ref", the attribute starts with lower case "r", see JDFConstants.java for "Ref"
 
 DocumentJDFImpl.java
-    changed    getFactoryClass() has a second parameter namespaceURI and handles elements in 
+    changed    getFactoryClass() has a second parameter namespaceURI and handles elements in
        namespace JDFNAMESPACE = "http://www.CIP4.org/JDFSchema_1_1" correctly
-       Context sensitive element names (HoleType, Method, Shape, Surface) are handled 
+       Context sensitive element names (HoleType, Method, Shape, Surface) are handled
        correctly (see putConstructorToHashMap() and handleOtherElements())
 
 JDFConstants.java
@@ -1344,12 +1370,12 @@ KElement.java
 JDFDoc.java
     changed    getJDFDoc() returned the the nodename ‘JDF’ even if in wrong namespace.At the same
             time it returned null for the correct ‘jdf:JDF’ with jdf: = http://www.CIP4.org/JDFSchema_1_1
-getJDFDoc() does now look for the lokal name (everything past the first colon if there is a 
+getJDFDoc() does now look for the lokal name (everything past the first colon if there is a
 colon) and checks for valid jdf namespaceURI.
 
 XMLDoc.java
        added        write2URL()
-       
+
 
 resource.intent.JDFMediaColor.java
     removed
@@ -1376,9 +1402,9 @@ JDFElement.java
     new         EnumSeparation
     new         boolean XYRelation(EnumXYRelation value, double x, double y)
     new        boolean XYRelation(EnumXYRelation value, double x, double y)
-       update        public boolean validAttribute(String key, EnumAttributeType iType, 
+       update        public boolean validAttribute(String key, EnumAttributeType iType,
           boolean bRequired, String nameSpaceURI)
-       delete        public boolean validAttribute(String key, int iType, 
+       delete        public boolean validAttribute(String key, int iType,
           boolean bRequired, String nameSpaceURI)
        changed    changed length limit of uniqueID(int id) to 15 (old 12)
 
@@ -1387,36 +1413,36 @@ KElement.java
     API change    moveElement : added second parameter beforeChild
     new        getNextSiblingElement
 
-JDFNode.java    
+JDFNode.java
     delete        public boolean removeProcess(Vector vp, boolean bLeaveSubmit)
     delete        public boolean removeProcess(JDFNode p, boolean bLeaveSubmit)
 
-MyDate.java  --> JDFDate.java    
+MyDate.java  --> JDFDate.java
     removed     obsolete class JDFDate, renamed MyDate --> JDFDate
 
 JDFDate.java
-       
+
        note        to create a Date from a JDFDate use the inherited method getTime()
-       note        to create a JDFDate from a Date, create a default JDFDate() and use the inherited 
+       note        to create a JDFDate from a Date, create a default JDFDate() and use the inherited
                method setTime(Date)
-warning    The JDFDate after() method is not equal to the new one inherited from Calendar. 
-The new inherited after() method expects an Object. 
-So your compiler may not fail but it will return false always! 
-The new after() method expects a Calendar to work right. 
+warning    The JDFDate after() method is not equal to the new one inherited from Calendar.
+The new inherited after() method expects an Object.
+So your compiler may not fail but it will return false always!
+The new after() method expects a Calendar to work right.
 See how to create a Calendar/JDFDate from a Date above.
        changed    toLocalString is deprecated since 1.1 if you still used it use the class DateFormat
                Example: DateFormat.getInstance().format(date);
                Please refer to DataFormat Java documentation for the formats available.
        changed    JDFDate extends GregorianCalendar no longer Date !!!
-changed    Constructor JDFDate(int iOffset) expectes iOffset in seconds. This was always the case, just 
+changed    Constructor JDFDate(int iOffset) expectes iOffset in seconds. This was always the case, just
 the comment was wrong.
-changed    the Constructor JDFDate(String strDateTime) throws a DataFormatException if strDateTime is 
-an invalid String. Valid Strings are 
-        "yyyy-mm-ddThh:mm:ss+hh:00"  
+changed    the Constructor JDFDate(String strDateTime) throws a DataFormatException if strDateTime is
+an invalid String. Valid Strings are
+        "yyyy-mm-ddThh:mm:ss+hh:00"
         "yyyy-mm-ddThh:mm:ss-hh:00"
 
 added        "yyyy-mm-ddThh:mm:ssZ" as valid parameter
-added         Duration support. JDFDate(String strDateTime) now also accepts duration strings of form 
+added         Duration support. JDFDate(String strDateTime) now also accepts duration strings of form
 "P1Y2M3DT10H30M"
                 "PM8T12M"
 API change    dateTime()  changed to getDateTime()
@@ -1425,7 +1451,7 @@ API change    DateTimeISO changed to getDateTimeISO()
 API change    dateISO() changed to getDateISO()
 API change     timeISO() changed to getTimeISO()
 API change    isoTimeZone() changed to getTimeZoneISO()
-added        equals(JDFDate x)  Two JDFDates are equal if they specify the same moment in time. 
+added        equals(JDFDate x)  Two JDFDates are equal if they specify the same moment in time.
 14:00:00+03:00 is equal to 13:00:00:+02:00 because they descripe the same moment in time.
 API change    changed setDurationString(String s) to setDurationISO(String s)
 
@@ -1440,13 +1466,13 @@ API change    parseInputSource(InputSource inSource,
                  ErrorHandler errorHandler,
                  boolean bEraseEmpty,
                  boolean bDoNamespaces)
-    API change    
+    API change
 
 
 XMLDoc.java
-new    all write methods got setPreserveSpace(). Carriage Returns in comments will no longer 
-converted to spaces. 
-    new        write2URL. Untested! Do not use 
+new    all write methods got setPreserveSpace(). Carriage Returns in comments will no longer
+converted to spaces.
+    new        write2URL. Untested! Do not use
 
 JDFDurationRange. java
     API change    isEquals(String s) throws DataFormatException if s is an invalid DurationRange
@@ -1455,7 +1481,7 @@ JDFResource.java
     changed    fixed a couple of bugs in makeRootResource()
 
 JDFConstants.java
-added    CONTACTTYPES_SENDER, CONTACTTYPES_DELIVERYCHARGE, 
+added    CONTACTTYPES_SENDER, CONTACTTYPES_DELIVERYCHARGE,
 CONTACTTYPES_APPROVER
     set CONTACTTYPES_APPROVAL to deprecated
 ________________________________________________________________________________

@@ -139,13 +139,14 @@ public class JavaCoreStringUtil
 
         StringBuffer strbufResult   = new StringBuffer(100000);
 
-        
+
 		// remove unwanted abstract ResourceLink elements
 		for (int i = vElements.size() - 1; i >= 0; i--) {
 			final SchemaElement element = (SchemaElement) vElements.elementAt(i);
 			final String strName = element.getStrElementName();
-			if ("ResourceLink".equals(strName))
+			if ("ResourceLink".equals(strName)) {
 				vElements.remove(i);
+			}
 		}
 
         appendImportAndStartOfClass(strJDFAutoFileName, strExtends, strbufResult);
@@ -261,15 +262,12 @@ public class JavaCoreStringUtil
             SchemaAttribute schemaAttribute = (SchemaAttribute) vAttributes.elementAt(i);
             String attributeName            = schemaAttribute.getStrAttributeName();
 
-            String usage           = schemaAttribute.getStrUse();  // usage is either optional or required
-            String firstVersion    = schemaAttribute.getFirstVersion();
-            String lastVersion     = schemaAttribute.getLastVersion();
-            String versionInfo     = GeneratorUtil.getVersionInfoAttributes(usage, firstVersion, lastVersion);
+            String usage             = schemaAttribute.getStrUse();  // usage is either optional or required
+            String firstVersion      = schemaAttribute.getFirstVersion();
+            String lastVersion       = schemaAttribute.getLastVersion();
+            String versionInfo       = GeneratorUtil.getVersionInfoAttributes(usage, firstVersion, lastVersion);
 
-            String enumAttributeType = schemaAttribute.getIsEnumList()
-                                        ? "enumerations"
-                                        : GeneratorUtil.getAttributeExt(schemaAttribute.getStrType(),
-                                                useEnumAttribute(schemaAttribute.getIsEnum(), attributeName));
+            String enumAttributeType = GeneratorUtil.getAttributeExt(schemaAttribute);
 
             String enumType = null;
             if (useEnumAttribute(schemaAttribute.getIsEnum(), attributeName))
@@ -279,26 +277,27 @@ public class JavaCoreStringUtil
                 {
                     enumType = getTypeName(complexTypeName);
                 }
-                else if ("MaxVersion".equals(attributeName))
-                    enumType = "EnumVersion";
-                else if ("UpdatedStatus".equals(attributeName))
-                    enumType = "JDFResource.EnumResStatus";
-                else if ("LinkUsage".equals(attributeName))
-                    enumType = "JDFResourceLink.EnumUsage";
-                else if ("Usage".equals(attributeName) && "ResourceInfo".equals(complexTypeName))
-                    enumType = "JDFResourceLink.EnumUsage";
-                else if ("Usage".equals(attributeName) && "ResourceQuParams".equals(complexTypeName))
-                    enumType = "JDFResourceLink.EnumUsage";
-                else if ("Classes".equals(attributeName) && "ResourceQuParams".equals(complexTypeName))
-                    enumType = "JDFResource.EnumResourceClass";
-                else if ("Usage".equals(attributeName) && "InsertSheet".equals(complexTypeName))
-                    enumType = "EnumSheetUsage";
-                else if ("DeviceStatus".equals(attributeName) && "ModulePhase".equals(complexTypeName))
-                    enumType = "JDFDeviceInfo.EnumDeviceStatus";
-                else if ("DeviceStatus".equals(attributeName) && "ModuleStatus".equals(complexTypeName))
-                    enumType = "JDFDeviceInfo.EnumDeviceStatus";
-                else if ("HoleType".equals(attributeName) && "HoleMakingParams".equals(complexTypeName))
-                    enumType = "JDFMedia.EnumHoleType";
+                else if ("MaxVersion".equals(attributeName)) {
+					enumType = "EnumVersion";
+				} else if ("UpdatedStatus".equals(attributeName)) {
+					enumType = "JDFResource.EnumResStatus";
+				} else if ("LinkUsage".equals(attributeName)) {
+					enumType = "JDFResourceLink.EnumUsage";
+				} else if ("Usage".equals(attributeName) && "ResourceInfo".equals(complexTypeName)) {
+					enumType = "JDFResourceLink.EnumUsage";
+				} else if ("Usage".equals(attributeName) && "ResourceQuParams".equals(complexTypeName)) {
+					enumType = "JDFResourceLink.EnumUsage";
+				} else if ("Classes".equals(attributeName) && "ResourceQuParams".equals(complexTypeName)) {
+					enumType = "JDFResource.EnumResourceClass";
+				} else if ("Usage".equals(attributeName) && "InsertSheet".equals(complexTypeName)) {
+					enumType = "EnumSheetUsage";
+				} else if ("DeviceStatus".equals(attributeName) && "ModulePhase".equals(complexTypeName)) {
+					enumType = "JDFDeviceInfo.EnumDeviceStatus";
+				} else if ("DeviceStatus".equals(attributeName) && "ModuleStatus".equals(complexTypeName)) {
+					enumType = "JDFDeviceInfo.EnumDeviceStatus";
+				} else if ("HoleType".equals(attributeName) && "HoleMakingParams".equals(complexTypeName)) {
+					enumType = "JDFMedia.EnumHoleType";
+				}
                 enumType = enumType + ".getEnum(0)";
             }
 
@@ -391,8 +390,9 @@ public class JavaCoreStringUtil
 		for (int i = elementsForVersion.size() - 1; i >= 0; i--) {
 			SchemaElement element = (SchemaElement) elementsForVersion.elementAt(i);
 			String strName = element.getStrElementName();
-			if ((strName.endsWith("Ref") && !strName.equals("TestRef")))
+			if ((strName.endsWith("Ref") && !strName.equals("TestRef"))) {
 				elementsForVersion.remove(i);
+			}
 		}
 
 		int siz2 = elementsForVersion.size();
@@ -407,9 +407,9 @@ public class JavaCoreStringUtil
 			for (int i = 0; i < siz2; i++) {
 				SchemaElement element = (SchemaElement) elementsForVersion.elementAt(i);
 				String elemName = element.getStrElementName().toUpperCase();
-				
+
 				String versionInfo = GeneratorUtil.getVersionInfoElements(
-						element.getIsOptionalElement(), element.getFirstVersion(), 
+						element.getIsOptionalElement(), element.getFirstVersion(),
 						element.getLastVersion(), element.getStrMaxOccurs());
 
 				strbufResult.append(strDepth2).append("elemInfoTable[")
@@ -510,7 +510,9 @@ public class JavaCoreStringUtil
             String baseOf = getBaseOf(base);
 
             String resourceClass = baseOf;
-            if (JDFConstants.EMPTYSTRING.equals(baseOf)) resourceClass = "Parameter";
+            if (JDFConstants.EMPTYSTRING.equals(baseOf)) {
+				resourceClass = "Parameter";
+			}
 
             strbufResult.append(strDepth1)
                 .append("public boolean ").append(" init()").append(strLineEnd);
@@ -722,7 +724,7 @@ public class JavaCoreStringUtil
      * @param attributeName
      * @return
      */
-    private static boolean useEnumAttribute(boolean isEnum, String attributeName)
+    public static boolean useEnumAttribute(boolean isEnum, String attributeName)
     {
         return isEnum && !"Version".equals(attributeName);
     }
@@ -1028,7 +1030,9 @@ public class JavaCoreStringUtil
                     strbufResult.append(strDepth2).append("{").append(strLineEnd);
 
                     String defaultValue = schemaAttribute.getStrDefault();
-                    if (defaultValue.equals(JDFConstants.EMPTYSTRING)) defaultValue = "getEnum(0)";
+                    if (defaultValue.equals(JDFConstants.EMPTYSTRING)) {
+						defaultValue = "getEnum(0)";
+					}
 
                     strbufResult.append(strDepth3).append("return getEnumerationsAttribute(AttributeName.")
                         .append(modifiedAttributeName.toUpperCase()).append(", null, ")
@@ -1915,8 +1919,9 @@ public class JavaCoreStringUtil
         while (c != null)
         {
             // have we found the given classname?
-            if (c == tClass)
-                return true;
+            if (c == tClass) {
+				return true;
+			}
 
             c = c.getSuperclass();
         }

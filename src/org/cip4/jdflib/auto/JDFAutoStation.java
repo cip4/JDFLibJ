@@ -88,11 +88,12 @@ public abstract class JDFAutoStation extends JDFElement
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.STATIONAMOUNT, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, "1");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.STATIONNAME, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.ASSEMBLYID, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.STATIONAMOUNT, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, "1");
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.STATIONNAME, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
     protected AttributeInfo getTheAttributeInfo()
@@ -155,6 +156,28 @@ public abstract class JDFAutoStation extends JDFElement
  * Attribute getter / setter
  * ************************************************************************
  */
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute AssemblyID
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute AssemblyID
+          * @param value: the value to set the attribute to
+          */
+        public void setAssemblyID(String value)
+        {
+            setAttribute(AttributeName.ASSEMBLYID, value, null);
+        }
+
+        /**
+          * (23) get String attribute AssemblyID
+          * @return the value of the attribute
+          */
+        public String getAssemblyID()
+        {
+            return getAttribute(AttributeName.ASSEMBLYID, null, JDFConstants.EMPTYSTRING);
+        }
+
         
         /* ---------------------------------------------------------------------
         Methods for Attribute StationAmount

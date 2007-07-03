@@ -94,7 +94,7 @@ public abstract class JDFAutoPart extends JDFElement
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[56];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[57];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.SORTING, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
@@ -148,11 +148,12 @@ public abstract class JDFAutoPart extends JDFElement
         atrInfoTable[48] = new AtrInfoTable(AttributeName.SHEETNAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable[49] = new AtrInfoTable(AttributeName.SIDE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSide.getEnum(0), null);
         atrInfoTable[50] = new AtrInfoTable(AttributeName.SIGNATURENAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[51] = new AtrInfoTable(AttributeName.SUBRUN, 0x33333111, AttributeInfo.EnumAttributeType.Any, null, null);
-        atrInfoTable[52] = new AtrInfoTable(AttributeName.TILEID, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[53] = new AtrInfoTable(AttributeName.WEBNAME, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[54] = new AtrInfoTable(AttributeName.WEBPRODUCT, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[55] = new AtrInfoTable(AttributeName.WEBSETUP, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[51] = new AtrInfoTable(AttributeName.STATIONNAME, 0x33333333, AttributeInfo.EnumAttributeType.Any, null, null);
+        atrInfoTable[52] = new AtrInfoTable(AttributeName.SUBRUN, 0x33333111, AttributeInfo.EnumAttributeType.Any, null, null);
+        atrInfoTable[53] = new AtrInfoTable(AttributeName.TILEID, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
+        atrInfoTable[54] = new AtrInfoTable(AttributeName.WEBNAME, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[55] = new AtrInfoTable(AttributeName.WEBPRODUCT, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[56] = new AtrInfoTable(AttributeName.WEBSETUP, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
     }
     
     protected AttributeInfo getTheAttributeInfo()
@@ -1431,6 +1432,28 @@ public abstract class JDFAutoPart extends JDFElement
         public String getSignatureName()
         {
             return getAttribute(AttributeName.SIGNATURENAME, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute StationName
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute StationName
+          * @param value: the value to set the attribute to
+          */
+        public void setStationName(String value)
+        {
+            setAttribute(AttributeName.STATIONNAME, value, null);
+        }
+
+        /**
+          * (23) get String attribute StationName
+          * @return the value of the attribute
+          */
+        public String getStationName()
+        {
+            return getAttribute(AttributeName.STATIONNAME, null, JDFConstants.EMPTYSTRING);
         }
 
         

@@ -56,8 +56,8 @@ public class VElementTest extends TestCase
     {
         XMLDoc d=new XMLDoc("doc",null);
         KElement e=d.getRoot();
-        KElement a1=e.appendElement("a1");
-        KElement a2=e.appendElement("b:a2","b");
+        e.appendElement("a1");
+        e.appendElement("b:a2","b");
         VElement v=e.getChildElementVector(null,null, null, true,0,true);
         VString s=v.getElementNameVector(false);
         assertEquals(s, new VString("a1 b:a2"," "));
