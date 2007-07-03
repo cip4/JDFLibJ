@@ -316,8 +316,8 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
     public boolean init()
     {
         Node n=getParentNode();
-        if(bDefaultWorkStepID && !hasAttribute("WorkStepID"))
-            setAttribute("WorkStepID", "W"+uniqueID(0),null);
+        if(bDefaultWorkStepID && !hasAttribute(AttributeName.WORKSTEPID))
+            setAttribute(AttributeName.WORKSTEPID, "W"+uniqueID(0),null);
         if (n!=null && ElementName.RESOURCEPOOL.equals(n.getLocalName()))
         {
             super.init();

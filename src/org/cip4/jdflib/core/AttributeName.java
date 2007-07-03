@@ -1634,6 +1634,7 @@ public final class AttributeName
     public static final String WORKINGLENGTH = "WorkingLength";
     public static final String WORKINGLIST = "WorkingList";
     public static final String WORKINGPATH = "WorkingPath";
+    public static final String WORKSTEPID = "WorkStepID";
     public static final String WORKSTYLE = "WorkStyle";
     public static final String WORKTYPE = "WorkType";
     public static final String WORKTYPEDETAILS = "WorkTypeDetails";

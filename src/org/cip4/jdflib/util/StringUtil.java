@@ -116,9 +116,9 @@ public class StringUtil
      */
     public static final String m_URIEscape = UrlUtil.m_URIEscape;
 
-    
+
 //  ****************************************    Methods   ******************************************
-     
+
     /**
      * Returns a string with deleted whitespaces near 'delim'
      * and from the both ends of the string (if they were there)<br>
@@ -135,14 +135,14 @@ public class StringUtil
     public static String zappTokenWS(String str, String delim)
     {
         String s = JDFConstants.EMPTYSTRING;
-        
+
         VString vs=new VString(str, delim);
         int size=vs.size();
-        
+
         if (size > 0)
         {
             s = ((String) vs.elementAt(0)).trim();
-            
+
             for (int i=1; i<size; i++)
             {
                 s = s + delim + ((String) vs.elementAt(i)).trim();
@@ -185,7 +185,7 @@ public class StringUtil
         }
         return sprintf(format, vObj);
     }
-    
+
     /**
      * format a string using C++ sprintf functionality
      * 
@@ -207,7 +207,7 @@ public class StringUtil
         final int nStart = (bStart ? 0 : 1);
         if(tokens.size()>objects.length + nStart)
             throw new IllegalArgumentException("not enough tokens to satisfy format");
-        
+
         // tokenize does not return an empty token if we start with %
         String s=bStart ? "" : tokens.stringAt(0);
         PrintfFormat f=new PrintfFormat("");
@@ -224,11 +224,11 @@ public class StringUtil
                 s+=f.tostr((Double)ob);
             else if(ob instanceof ValuedEnum)
                 s+=f.tostr(((ValuedEnum)ob).getName());
-            
+
         }
         return replaceString(s,"__percent__€ß-eher selten","%"); // undo quick hack ;-)
     }
-    
+
     /**
      * create a string from an array of tokens
      * 
@@ -245,12 +245,12 @@ public class StringUtil
         VString v=new VString(a);
         return setvString(v, sep, front, back);
     }
-    
+
     /**
      * create a string from a vector of tokens
      * <p>
      * default: setvString(v, JDFConstants.BLANK, null, null)
-      * 
+     * 
      * @param v the token vector
      * 
      * @return String - the vector as String
@@ -259,7 +259,7 @@ public class StringUtil
     {
         return setvString(v, m_sep, null, null);
     }
-    
+
     /**
      * create a string from a vector of tokens
      * 
@@ -276,13 +276,13 @@ public class StringUtil
     {
         if(v==null)
             return null;
-        
+
         final int siz = v.size();
         StringBuffer buf=new StringBuffer(siz*16); // guestimat 16 chars per token max
-        
+
         if(front!=null)
             buf.append(front);
-        
+
         for (int i = 0; i < siz; i++)
         {
             if (i > 0 && sep!=null)
@@ -301,15 +301,15 @@ public class StringUtil
             else
                 throw new IllegalArgumentException("illegal vector contents");
 
-                
+
         }
-        
+
         if (back != null)
             buf.append(back);
-        
+
         return buf.toString();
     }
-    
+
     // n > 0    substring(0, n)             take the first n chars (leftmost)
     // n < 0    substring(0, s.length()+n)  take the string and cut n chars on the right
     // example:    string = "abcdefgh"
@@ -321,15 +321,15 @@ public class StringUtil
         {
             n = strWork.length() + n;
         }
-        
+
         if (n <= 0)
         {
             return JDFConstants.EMPTYSTRING;
         }
-        
+
         return strWork.substring(0, n <= strWork.length() ? n : strWork.length());
     }
-    
+
     // n > 0    str.substring(str.length() - n)   take the rightmost n chars
     // n < 0    substring(-n)                     take the string and cut n chars on the left
     // example:    string = "abcdefgh"
@@ -341,20 +341,20 @@ public class StringUtil
         {
             n = strWork.length()+n;
         }
-        
+
         if(n <= 0)
         {
             return JDFConstants.EMPTYSTRING;
         }
-        
+
         if (n > strWork.length())
         {
             return strWork;
         }
-        
+
         return strWork.substring(strWork.length() - n);
     }
-    
+
     /**
      * return a vector of individual tokens<br>
      * Multiple consequtive delimitors are treated as one (similar to whitespace handling). 
@@ -377,10 +377,10 @@ public class StringUtil
                 v.add(st.nextToken());
             }
         }
-        
+
         return v;
     }
-    
+
     /**
      * check whether a String contains a given token
      * <p>
@@ -414,7 +414,7 @@ public class StringUtil
         }
         return false;
     }
-    
+
     /**
      * check whether a vector of Strings contains a given token
      * <p>
@@ -454,7 +454,7 @@ public class StringUtil
      */
     public static String token(String strWork, int index, String delim)
     {        
-       if(index<0)
+        if(index<0)
         {
             VString v = StringUtil.tokenize(strWork, delim, false);            
             index=v.size()+index;
@@ -475,80 +475,108 @@ public class StringUtil
         }
         return null;        
     }
-    
+
     /**
      * replace a character in a given String
      * <p>
      * default: replaceChar(strWork, c, s, 0)
      * 
      * @param strWork String to work on
-     * @param c       character to replace
-     * @param s       String to insert for c
+     * @param c       characters to replace
+     * @param replaceString       String to insert for c
      * @param offset
      * @return the String with replaced characters
      */
-    public static String replaceChar(String strWork, char c, String s, int offset)
+    public static String replaceCharSet(String strWork, String charSet, String replaceString, int offset)
     {
-        String r = JDFConstants.EMPTYSTRING;
-        StringTokenizer st = new StringTokenizer(strWork, c + JDFConstants.EMPTYSTRING, true);
-        
-        while(st.hasMoreTokens())
-        {
-            String token = st.nextToken();
-            
-            if (token.equals(c+JDFConstants.EMPTYSTRING))
-            {
-                r += s;
-            }
-            else if (offset < token.length())
-            {
-                r += token.substring(offset);
-            }
-        }
-        
-        strWork = r;
-        return JDFConstants.EMPTYSTRING.equals(strWork) ? null : strWork;
+        if(charSet==null)
+            return strWork;
+        for(int i=0;i<charSet.length();i++)
+            strWork= replaceChar(strWork,charSet.charAt(i),replaceString,offset);
+        return strWork;
     }
+
+    /**
+     * replace any of a set of characters in a given String
+     * <p>
+     * default: replaceChar(strWork, c, s, 0)
+     * 
+     * @param strWork String to work on
+     * @param c       characters to replace
+     * @param replaceString       String to insert for c
+     * @param offset
+     * @return the String with replaced characters
+     */
+    public static String replaceChar(String strWork, char c, String replaceString, int offset)
+    {
+        if(strWork==null)
+            return null;
+        if(offset>strWork.length())
+            return strWork;
+        
+        StringBuffer b = new StringBuffer(strWork.length()*2);
+        int lastPos=offset;
+        b.append(strWork.substring(0, offset));
+        while(lastPos>=0)
+        {
+            int pos=strWork.indexOf(c, lastPos);
+            if(pos>=0)
+            {
+                b.append(strWork.substring(lastPos, pos));
+                if(replaceString!=null)
+                    b.append(replaceString);
+            }
+            else
+            {
+                b.append(strWork.substring(lastPos));
+            }
+            lastPos=pos>=0 ? pos+1 : pos;
+        }
+
+        return b.toString();
+     }
+    
     /**
      * replace a string in a given String
      * <p>
      * default: replaceChar(strWork, c, s)
      * 
-     * @param strWork String to work on
-     * @param toReplace       String to replace
-     * @param replaceBy       String to insert for toReplace
-      * @return the String with replaced characters
+     * @param strWork         String to work on
+     * @param toReplace       String to match and replace
+     * @param replaceBy       String to insert for toReplace, null if nothing should be inserted
+     * @return the String with replaced characters
      */
     public static String replaceString(String strWork, String toReplace, String replaceBy)
     {
-         if(strWork==null)
+        if(strWork==null)
             return strWork;
-         int indexOf = strWork.indexOf(toReplace);
-         if( indexOf<0)
-             return strWork;
+        int indexOf = strWork.indexOf(toReplace);
+        if( indexOf<0)
+            return strWork;
 
-         int len = toReplace.length();
-         String r="";
-         do
-         {
-             r+=strWork.substring(0,indexOf);
-             r+=replaceBy;
-             strWork=strWork.substring(indexOf+len);
-             indexOf = strWork.indexOf(toReplace);
-         }
-         while(indexOf>=0);
-         r+=strWork;
-         
-         return r;
+        int len = toReplace.length();
+        StringBuffer b=new StringBuffer(strWork.length()*2);
+        do
+        {
+            b.append(strWork.substring(0,indexOf));
+            if(replaceBy!=null)
+                b.append(replaceBy);
+            strWork=strWork.substring(indexOf+len);
+            indexOf = strWork.indexOf(toReplace);
+        }
+        while(indexOf>=0);
+        b.append(strWork);
+
+        return b.toString();
     }
-    
+
     public static String xmlNameEscape(String strWork)
     {
         strWork = replaceChar(strWork, '*', "_star_", 0);
         strWork = replaceChar(strWork, '&', "_and_", 0);
         return strWork;
     }
-    
+
     /**
      * the filename extension of pathName
      * @param pathName
@@ -559,7 +587,7 @@ public class StringUtil
     {
         return UrlUtil.extension(pathName);
     }
-    
+
     public static String prefix(String strWork)
     {
         String ext = UrlUtil.extension(strWork);
@@ -568,7 +596,7 @@ public class StringUtil
 
         return strWork.substring(0, strWork.length() - ext.length() - 1);
     }
-    
+
     /**
      * replace the .extension of a file name
      * @param strWork the file path
@@ -579,12 +607,12 @@ public class StringUtil
     {
         if(newExt==null)
             return StringUtil.prefix(strWork);
-        
+
         if(!newExt.startsWith("."))
             newExt="."+newExt;
         return StringUtil.prefix(strWork)+newExt;
     }
-    
+
     /**
      * @deprecated 060314 use KElement.xmlnsprefix
      * @param strWork
@@ -594,9 +622,9 @@ public class StringUtil
     {
         return KElement.xmlnsPrefix(strWork);
     }
-    
+
     ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * get the mime type for a given extension
      * @param strWork String to work in
@@ -608,7 +636,7 @@ public class StringUtil
             return JDFConstants.MIME_TEXTUNKNOWN;
 
         extension=extension.toLowerCase();
-        
+
         if ("pdf".equals(extension))
         {
             return JDFConstants.MIME_PDF;
@@ -642,7 +670,7 @@ public class StringUtil
             return JDFConstants.MIME_TEXTUNKNOWN;
         }
     }
-    
+
     /**
      * checks whether a string is a NMTOKEN
      * @param strWork the string to check
@@ -657,7 +685,7 @@ public class StringUtil
             return false;
         return strWork.indexOf(" \t") == -1;
     }
-    
+
     /**
      * checks whether a string is an ID
      * @param strWork the string to check
@@ -671,7 +699,7 @@ public class StringUtil
             return false;
         return isNMTOKEN(strWork);
     }
- 
+
     /**
      * checks whether a string is matches an NMTOKENS list
      * @param strWork the string to check
@@ -702,7 +730,7 @@ public class StringUtil
         for(int i=0; i < s; i++)
         {
             if(   (bID && !StringUtil.isID(vs.stringAt(i)))
-                  || !StringUtil.isNMTOKEN(vs.stringAt(i)) )
+                    || !StringUtil.isNMTOKEN(vs.stringAt(i)) )
             {
                 return false;
             }
@@ -711,7 +739,7 @@ public class StringUtil
     }
 
     /////////////////////////////////////////////////////////////////////
-    
+
     /**
      * checks whether a string matches the boolean values "true" or "false"
      * @param strWork the string to check
@@ -721,7 +749,7 @@ public class StringUtil
     {
         return "true".equals(strWork) || "false".equals(strWork);
     }
-    
+
     /**
      * checks whether a string is a number
      * @param strWork the string to check
@@ -734,14 +762,14 @@ public class StringUtil
         String dStr = str.trim();
         if (dStr.length()==0)
             return false;
-        
+
         // if I get the default in both cases it is really snafu
         if((parseDouble(str,-1234567.987)==-1234567.987)
-            &&(parseDouble(str,9876.473)==9876.473))
+                &&(parseDouble(str,9876.473)==9876.473))
             return false;
         return true;
     }
-    
+
     /**
      * find the last character in strwork that is not in strNotList
      * 
@@ -764,7 +792,7 @@ public class StringUtil
 
         return -1;
     }
-    
+
     /**
      * returns the position of the token, if it is in the String.<br>
      * The separator is excluded from the tokens. 
@@ -783,7 +811,7 @@ public class StringUtil
         {
             vNames.addAll(StringUtil.tokenize(strWork, separator, false));
         }
-        
+
         if(iSkip == -1 || iSkip == 0)
         {
             posOfToken = vNames.indexOf(name);
@@ -806,8 +834,8 @@ public class StringUtil
         }
         return posOfToken;
     }
-    
-    
+
+
     /**
      * check whether a string contains a complete token 
      * <p>
@@ -821,11 +849,11 @@ public class StringUtil
      */
     public static boolean hasToken(String strWork, String typ, String delim)
     {
-       return hasToken(strWork,typ,delim,0);
+        return hasToken(strWork,typ,delim,0);
     }
-    
-    
-    
+
+
+
     /**
      * set this to the raw bytes specified in buffer, bypassing all transcoders
      * @param buffer the buffer to assign to <code>this</code>
@@ -833,21 +861,21 @@ public class StringUtil
      */
     public static String setRawBytes(byte[] buffer, int len)
     {
-        
+
         if(len < 0)
         {
             len = buffer.length;
         }
-        
+
         char[] target = null;
-        
+
         if (!(buffer.length < 0))
         {
-            
+
             if (len > 0)
             {
                 target = new char[len];
-                
+
                 for (int i = 0; i < len; i++)
                 {
                     target[i] = (char)buffer[i];
@@ -864,7 +892,7 @@ public class StringUtil
         }
         return new String(target);
     }
-    
+
     /**
      * get the raw bytes specified in strUnicode, bypassing all transcoders<br>
      * any character values above 255 is truncated (c=c&0xff)
@@ -873,18 +901,18 @@ public class StringUtil
     public static byte[] getRawBytes(String strUnicode)
     {
         char[] pBuf = strUnicode.toCharArray();
-        
+
         int len = pBuf.length;
-        
+
         byte[] pc = new byte[len];
-        
+
         for (int i = 0; i < len; i++)
         {
             pc[i] = (byte)(pBuf[i] & 0x00ff);
         }
         return pc;
     }
-    
+
     /**
      * get buffer as HexBinary <br>
      * any character values above 255 is truncated
@@ -892,11 +920,11 @@ public class StringUtil
      * @param len     the length of the buffer. <br>
      *                If<0, default is -1. In this case the lenght of the char array will be used.
      */
-    
+
     public static String setHexBinaryBytes(byte[] buffer, int len)
     {
         char[] target = null;
-        
+
         if (buffer.length >= 0)
         {
             if (len < 0)
@@ -926,7 +954,7 @@ public class StringUtil
         }
         return new String(target);
     }
-    
+
     /**
      * Decode a HexBinary encoded byte array back to Unicode
      * @param unicodeArray array which stores the HexBinary
@@ -936,24 +964,24 @@ public class StringUtil
     {
         byte emptyArray[] = new byte[0];
         int len = unicodeArray.length;
-        
+
         //  check if there is at least one 16Bit unicode char
         if (len%2 > 0)
         {
             return emptyArray; 
         }
-        
+
         //this will be the container for output                
         byte pc[] = new byte[len/2];
         byte c = '0'; 
-        
+
         for (int i = 0; i < len/2; i++)
         {
             //maskiert das obere Byte
             int p   = unicodeArray[i * 2] & 0x00ff;
-            
+
             //System.out.println((int)'0');
-            
+
             if (p >= '0' && p <= '9')
             {
                 c = (byte)(p - '0');
@@ -976,12 +1004,12 @@ public class StringUtil
                     }
                 }
             }
-            
+
             pc[i] = (byte)(c << 4);
-            
-            
+
+
             p = unicodeArray[i * 2 + 1] & 0x00ff;
-            
+
             if (p >= '0' && p <= '9')
             {
                 c = (byte)(p - '0');
@@ -1008,10 +1036,10 @@ public class StringUtil
         }
         return pc;
     }
-    
-    
-    
-    
+
+
+
+
     /**
      * return the UTF8 String <code>strUnicode</code> as Unicode byte array
      * @param strUnicode the unicode string to transcode to utf8
@@ -1033,8 +1061,8 @@ public class StringUtil
         }
         return null;
     }
-    
-    
+
+
     /**
      * get the unicode string representing the UTF8 representation of the byte buffer
      *
@@ -1057,7 +1085,7 @@ public class StringUtil
         }
         return null;
     }
-    
+
     /**
      * returns a formatted double. 
      * Truncates to 8 digits after the "." <br>
@@ -1083,7 +1111,7 @@ public class StringUtil
             s=String.valueOf(d);
             if(s.endsWith(".0"))
                 s=s.substring(0,s.length()-2);
-            
+
             if(s.length()>10)
             {
                 int posDot=s.indexOf(JDFConstants.DOT);
@@ -1110,7 +1138,7 @@ public class StringUtil
         }
         return s;
     }
-    
+
     /**
      * returns a formatted integer, 
      * replaces string constants with according int constants
@@ -1121,7 +1149,7 @@ public class StringUtil
     public static String formatInteger(int i)
     {
         String s=null;
-        
+
         if(i==Integer.MAX_VALUE)
         {
             s=JDFConstants.POSINF;
@@ -1136,7 +1164,7 @@ public class StringUtil
         }
         return s;
     }    
-    
+
     /**
      * checks whether <code>str</code> reprents an integer
      * @param str the String to check
@@ -1149,16 +1177,16 @@ public class StringUtil
         String intStr = str.trim();
         if (intStr.length()==0)
             return false;
-        
+
         if (intStr.equals(JDFConstants.POSINF))
             return true;
-        
+
         if (intStr.equals(JDFConstants.NEGINF))
             return true;
         // hack for xml schema conformance, which uses unbounded to define + infinity
         if (intStr.equals("unbounded"))
             return true;
-        
+
         try
         {
             new Integer(intStr);
@@ -1169,7 +1197,7 @@ public class StringUtil
             return false;
         }
     }
-    
+
     /**
      * escape a string by prepending escapeChar and a numerical representation of the string.
      * Characters to be escaped are defined by toEscape, escapeBelow and escapeAbove
@@ -1202,24 +1230,24 @@ public class StringUtil
         { 
             strEscapeChar = "\\"; 
         }
-        
+
         if(iEscapeAbove<0)
             iEscapeAbove=0x7fffffff;
-        
- //       String escapedString = JDFConstants.EMPTYSTRING;
+
+        //       String escapedString = JDFConstants.EMPTYSTRING;
         byte[] a_toEscape = strToEscape.getBytes();
         int l = a_toEscape.length;
         int cToEscape;
         byte[] escaped=new byte[a_toEscape.length*4];
         int posE=0;
         byte[]escapeCharbytes=strEscapeChar.getBytes();
-        
+
         for(int i=0;i<l;i++)
         {
             cToEscape = a_toEscape[i];
             if(cToEscape<0)
                 cToEscape=256+cToEscape;
-                
+
             if ((cToEscape > iEscapeAbove)||(cToEscape < iEscapeBelow)||(strCharSet!=null && strCharSet.indexOf(cToEscape) != -1))
             {   // the character must be escaped
                 for(int ee=0;ee<escapeCharbytes.length;ee++)
@@ -1230,12 +1258,12 @@ public class StringUtil
                 if (iRadix > 0)
                 {   // radix is a flag to convert to octal, hex etc.
                     StringBuffer buf = new StringBuffer();
-                    
+
                     if (iRadix == 2)
                     {
                         buf.append(Integer.toBinaryString(cToEscape)); 
                     }
-                    
+
                     else if (iRadix == 8)
                     {
                         buf.append(Integer.toOctalString(cToEscape)); 
@@ -1252,7 +1280,7 @@ public class StringUtil
                     {
                         throw new IllegalArgumentException("StringUtil.escape radix out of range");
                     }
-                    
+
                     if (iEscapeLen > 0)
                     {   //check if the length of the buffer is smaler then the ordered escape length. If this is the case
                         //insert some 0 in front of. for Example buf = 12345 iEscapeLen is 7. The result String is 0012345
@@ -1265,14 +1293,14 @@ public class StringUtil
                             }
                         }
                     }
-                    
+
                     byte[] bufbytes= buf.toString().getBytes();
                     for(int ee=0;ee<bufbytes.length;ee++)
                     {
                         escaped[posE]=bufbytes[ee];
                         posE++;
                     }
-                    
+
                     //empty StringBuffer
                     buf.delete(0, buf.length());
                 }
@@ -1295,7 +1323,7 @@ public class StringUtil
         String escapedString = new String(escaped,0,posE);
         return escapedString;
     }
-    
+
     /**
      * unescape a String which was escaped with the Java StringUtil.escape method
      * 
@@ -1313,7 +1341,7 @@ public class StringUtil
         byte escapeChar=strEscapeChar.getBytes()[0]; // dont even dream of using € as an escape char
         int n=0;
         byte[] escapeSeq=new byte[escapeLen];
-        
+
         for(int i=0;i<byteUnEscape.length;i++)
         {
             if(byteUnEscape[i]!=escapeChar)
@@ -1341,7 +1369,7 @@ public class StringUtil
         }
         return new String(stringByte);
     }
-    
+
     /**
      * converts a VString to a single string represents all members of the VString concatenated together
      * @deprecated use vs.getString(" ",null,null)
@@ -1351,7 +1379,7 @@ public class StringUtil
     {
         return StringUtil.setvString(vs," ",null,null);
     }
-    
+
     /**
      * parses a string to double and catches any format exception
      * @param s the string to parse
@@ -1377,7 +1405,7 @@ public class StringUtil
         }
         return d;	
     }
-    
+
     /**
      * parses a string to double and catches any format exception
      * @param s the string to parse
@@ -1394,7 +1422,7 @@ public class StringUtil
             return Integer.MAX_VALUE;
         if(s.equals(JDFConstants.NEGINF))
             return Integer.MIN_VALUE;
-        
+
         try
         {
             i = Integer.parseInt(s);
@@ -1405,7 +1433,7 @@ public class StringUtil
         }
         return i;	
     }
-    
+
     /**
      * Convert a UNC path to a valid file URL or IRL
      * note that some internal functions use network protocol and therefor performance may be non-optimal
@@ -1419,7 +1447,7 @@ public class StringUtil
     {
         return UrlUtil.fileToUrl(new File(unc), bEscape128);
     }
- 
+
 
     /**
      * gets the file name from a path - regardless of the OS syntax that the path is declared in
@@ -1432,16 +1460,16 @@ public class StringUtil
             return token(pathName,-1,"\\");
         return token(pathName,-1,"/");            
     }
- 
-////////////////////////////////////////////////////////////////
-    
+
+
+
     /**
      * @deprecated use UrlUtil.isWindowsLocalPath(pathName);
      */
     public static boolean isWindowsLocalPath(String pathName)
     {
-       return UrlUtil.isWindowsLocalPath(pathName);
-        
+        return UrlUtil.isWindowsLocalPath(pathName);
+
     }
 
 /////////////////////////////////////////////////////////////////    
@@ -1450,9 +1478,9 @@ public class StringUtil
      */
     public static boolean isUNC(String pathName)
     {
-       return UrlUtil.isUNC(pathName);
+        return UrlUtil.isUNC(pathName);
     }
-    
+
     /**
      * checks whether smallAtt is a matching subset of bigAtt depending on datatype
      * 
@@ -1467,7 +1495,7 @@ public class StringUtil
         final boolean bAny = dataType==null || dataType.equals(AttributeInfo.EnumAttributeType.Any);
         if(bAny)
             return bigAtt.equals(smallAtt);
-        
+
         if ((dataType.equals(AttributeInfo.EnumAttributeType.NMTOKENS)) || 
                 (dataType.equals(AttributeInfo.EnumAttributeType.enumerations)) ||
                 (dataType.equals(AttributeInfo.EnumAttributeType.IDREFS)))
@@ -1483,7 +1511,7 @@ public class StringUtil
             }
             return true;
         }
-        
+
         if (dataType.equals(AttributeInfo.EnumAttributeType.NumberRange))
         {
             try
@@ -1507,7 +1535,7 @@ public class StringUtil
                 //do nothing
             }
         }
-        
+
         if (dataType.equals(AttributeInfo.EnumAttributeType.NumberRangeList))
         {
             try
@@ -1531,7 +1559,7 @@ public class StringUtil
                 //do nothing
             }
         }
-        
+
         if (dataType.equals(AttributeInfo.EnumAttributeType.IntegerList))
         {       
             try
@@ -1580,7 +1608,7 @@ public class StringUtil
                 //do nothing
             }
         }
-        
+
         if (dataType.equals(AttributeInfo.EnumAttributeType.IntegerRangeList))
         {       
             try
@@ -1605,7 +1633,7 @@ public class StringUtil
                 //do nothing
             }
         }
-        
+
         if (dataType.equals(AttributeInfo.EnumAttributeType.XYPairRange))
         {
             try
@@ -1626,7 +1654,7 @@ public class StringUtil
                 //do nothing
             }
         }
-        
+
         if (dataType.equals(AttributeInfo.EnumAttributeType.XYPairRangeList))
         {
             try
@@ -1650,15 +1678,15 @@ public class StringUtil
         return false;
     }
 
-/**
-	 * match a regular expression using String.matches(), but also catch
-	 * exceptions and handle simplified regexp.
-	 * The <code>null</code> expression is assumed to match anything.
- * 
- * @param str the string to match 
- * @param regExp the expression to match against
-	 * @return true, if str matches regExp or regexp is empty
- */
+    /**
+     * match a regular expression using String.matches(), but also catch
+     * exceptions and handle simplified regexp.
+     * The <code>null</code> expression is assumed to match anything.
+     * 
+     * @param str the string to match 
+     * @param regExp the expression to match against
+     * @return true, if str matches regExp or regexp is empty
+     */
     public static boolean matches(String str, String regExp)
     {
         if(str==null)
@@ -1669,7 +1697,7 @@ public class StringUtil
         // this is a really common mistake
         if(regExp.equals("*"))
             regExp=".*";
-        
+
         boolean b;
         try
         {
@@ -1681,7 +1709,21 @@ public class StringUtil
         }
         return b;
     }
- 
+
+    /**
+     * match a regular expression using ignoring cases using String.matches(), but also catch
+     * exceptions and handle simplified regexp.
+     * The <code>null</code> expression is assumed to match anything.
+     * 
+     * @param str the string to match 
+     * @param regExp the expression to match against
+     * @return true, if str matches regExp or regexp is empty
+     */
+    public static boolean matchesIgnoreCase(String str, String regExp)
+    {
+        return matches(str==null ? null : str.toLowerCase(), regExp==null ? null : regExp.toLowerCase());
+    }
+
     /**
      * add the string appendString to all Strings in VString vs
      * @param vS the string vector
@@ -1699,8 +1741,8 @@ public class StringUtil
             }
         }
     }       
- ////////////////////////////////////////////////////////////////////////
-    
+    ////////////////////////////////////////////////////////////////////////
+
     /**
      * returns the relative URL of a file relative to the current working directory
      * @param f the file to get the relative url for
@@ -1711,8 +1753,8 @@ public class StringUtil
     public static String getRelativeURL(File f, File baseDir)
     {
         return UrlUtil.getRelativeURL(f, baseDir, true);
-     }
-    
+    }
+
     /**
      * returns the relative URL of a file relative to the current workin directory
      * @param f the file to get the relative url for
@@ -1737,9 +1779,9 @@ public class StringUtil
      */
     public static String getRelativePath(File f, File fCWD)
     {
-       return UrlUtil.getRelativePath(f, fCWD);        
+        return UrlUtil.getRelativePath(f, fCWD);        
     }
-    
+
     /**
      * get a vector of names in an iteration
      * @param e any member of the enum to iterate over
@@ -1753,12 +1795,12 @@ public class StringUtil
         {
             namesVector.addElement(((ValuedEnum) it.next()).getName());
         }
-        
+
         return namesVector;
     }
 
     //////////////////////////////////////////////////////////////////////////////////
-    
+
     /**
      * get a vector of elements in an iteration
      * @param e any member of the enum to iterate over
@@ -1786,12 +1828,39 @@ public class StringUtil
      */
     public static String fileToUrl(File f, boolean b) throws MalformedURLException
     {
-         return UrlUtil.fileToUrl(f, b);
+        return UrlUtil.fileToUrl(f, b);
+    }
+
+    /**
+     * strip a prefix, if it is there else return the string
+     * 
+     * @param str the string to strip
+     * @param prefix the prefix to strip
+     * @param bIgnoreCase if true ignore the case of the prefix
+     * @return
+     */
+    public static String stripPrefix(String str, String prefix, boolean bIgnoreCase)
+    {
+        if(str==null)
+            return null;
+        if(prefix==null)
+            return str;
+        if(bIgnoreCase)
+        {
+            str=str.toLowerCase();
+            prefix=prefix.toLowerCase();
+        }
+        if(str.startsWith(prefix))
+        {
+            str=StringUtil.rightStr(str, -prefix.length());
+        }
+        return str;
     }
 
 
- 
-    
+
+
+
     //////////////////////////////////////////////////////////////////////////////////
-    
+
 }

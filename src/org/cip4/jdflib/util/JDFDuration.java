@@ -122,8 +122,8 @@ public class JDFDuration
     // E.g. expressions "P60D" that is equal 60 days or "PT68H" that is equal 68hours are allowed
 
 
-    private static final String REGEX_DURATION = "([-])?[P](((\\d)*)[Y])?((\\d)*[M])?((\\d)*[D])?" +
-    "([T]((\\d)*[H])?((\\d)*[M])?((\\d)*([.](\\d)+)?[S])?)?";
+    private static final String REGEX_DURATION = "([-])?[P](((\\d)+)[Y])?((\\d)+[M])?((\\d)+[D])?" +
+    "([T]((\\d)+[H])?((\\d)+[M])?((\\d)+([.](\\d)+)?[S])?)?";
 
 
     /**
@@ -157,7 +157,7 @@ public class JDFDuration
      * value of <code>strDuration</code>, represented as a formatted duration string. <br>
      * Duration examples: 
      * <li>"P1Y2M3DT10H30M"</li>
-     * <li>"PM8T12M"</li>
+     * <li>"P8MT12M"</li>
      * Durations with overflows, e.g. P13M (13 Months) are also handled and correctly output, in this case P1Y1M
      *
      * @param strDuration - formatted duration

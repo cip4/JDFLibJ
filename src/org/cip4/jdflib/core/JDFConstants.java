@@ -827,7 +827,9 @@ public abstract class JDFConstants
     public static final String BOOLEAN_FALSE                        = "false";
     
     public static final String REGEXP_HEXBINARY                     ="([0-9a-fA-F]{2})+";
-
+    public static final String REGEXP_EMAIL                         ="(mailto:)?([_.a-zA-Z0-9\\-])+[@]([_.a-zA-Z0-9\\-])+[.]([_.a-zA-Z0-9\\-])+";
+    public static final String REGEXP_PHONE                        ="(tel:)?([+])?(([0-9./\\-])|[(]([0-9./\\-])[)])+";
+    
     public static final String JDFELEMENT = "JDFElement";
     public static final String JDFNODE = "JDFNode";
 

@@ -115,7 +115,6 @@ import org.cip4.jdflib.resource.process.JDFQualityControlResult;
 import org.cip4.jdflib.resource.process.JDFSourceResource;
 import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.StringUtil;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 
@@ -800,6 +799,7 @@ public class JDFResource extends JDFElement
         public static final EnumPartIDKey SetTags= new EnumPartIDKey(AttributeName.SETTAGS);
         public static final EnumPartIDKey SubRun= new EnumPartIDKey(AttributeName.SUBRUN);
         public static final EnumPartIDKey WebProduct= new EnumPartIDKey(AttributeName.WEBPRODUCT);
+        public static final EnumPartIDKey StationName= new EnumPartIDKey(AttributeName.STATIONNAME); // jdf1.3 errata addition
         public static final EnumPartIDKey WebSetup= new EnumPartIDKey(AttributeName.WEBSETUP);
     }
 
@@ -6371,6 +6371,27 @@ public class JDFResource extends JDFElement
     {
         return getAttribute(AttributeName.SIGNATURENAME, null , JDFConstants.EMPTYSTRING);
     }
+
+    /**
+     * Gets string attribute StationName
+     *
+     * @return String - the attribute value
+     */
+    public String getStationName()
+    {
+        return getAttribute(AttributeName.STATIONNAME, null , JDFConstants.EMPTYSTRING);
+    }
+
+    /**
+     * Sets attribute StationName
+     *
+     * @param value the value to set the attribute to
+     */
+    public void setStationName(String value)
+    {
+        setAttribute(AttributeName.STATIONNAME,value);
+    }
+
 
     /**
      * Sets attribute SortAmount

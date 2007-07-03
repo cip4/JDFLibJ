@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -38,7 +38,7 @@
  *
  * Usage of this software in commercial products is subject to restrictions. For
  * details please consult info@cip4.org.
-  *
+ *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -108,8 +108,8 @@ public class StringUtilTest extends JDFTestCaseBase
         f=new File("a/b/c");
         assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, f),'\\',"/",0),".");
     }
-    
-    
+
+
     public void testSprintfString()
     {
         assertEquals(StringUtil.sprintf("abc%03idef","5"), "abc005def");
@@ -121,11 +121,11 @@ public class StringUtilTest extends JDFTestCaseBase
         assertEquals(StringUtil.sprintf("%s","\\,"), ",");
         assertEquals(StringUtil.sprintf("%s","\\\\,"), "\\,");
         assertEquals(StringUtil.sprintf("%s_%s","\\\\,,a"), "\\,_a");
-               
+
     }
-    
+
     public void testSprintf()
-       {
+    {
         Object[] o=new Object[1];
         o[0]=new Integer(5);
         assertEquals(StringUtil.sprintf("abc%03idef",o), "abc005def");
@@ -146,15 +146,15 @@ public class StringUtilTest extends JDFTestCaseBase
         {
             //
         }
-        
+
         o=new Object[]{new Integer(5),"foobar"};
         assertEquals(StringUtil.sprintf("abc %02i%7sdef",o), "abc 05 foobardef");
         assertEquals(StringUtil.sprintf("%02i%7sdef",o), "05 foobardef");
         o=new Object[]{"5","foobar"};
         assertEquals(StringUtil.sprintf("abc %02i%7sdef",o), "abc 05 foobardef");
         assertEquals(StringUtil.sprintf("%02i%7sdef",o), "05 foobardef");
-   }
-    
+    }
+
     public void testSetHexBinaryBytes()
     {
         String strTestString = "ABCDEFGHIJKLMNOPQESTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ÖÄÜöäü€";
@@ -164,7 +164,7 @@ public class StringUtilTest extends JDFTestCaseBase
         String strResultString  = new String(tempBuffer); 
         assertEquals("Input and Outputstring are not equal", strTestString,strResultString);
     }
-    
+
     public void testSetUTF8Bytes()
     {
         //String strTestString = "€";
@@ -177,7 +177,7 @@ public class StringUtilTest extends JDFTestCaseBase
         assertEquals("Input and Output string are not equal", strTestString,newString);
         assertEquals("Input and Output string are not equal", strTestString,strResultString);
     }
-    
+
     public void testSetVStringEnum()
     {
         Vector v=new Vector();
@@ -185,7 +185,7 @@ public class StringUtilTest extends JDFTestCaseBase
         v.add(EnumUsage.Output);
         assertEquals(StringUtil.setvString(v, " ", null, null), "Input Output");
     }
-    
+
     public void testSetVString()
     {
         VString v=new VString();
@@ -194,19 +194,19 @@ public class StringUtilTest extends JDFTestCaseBase
         v.add("333");
         v.add("4444");
         String s=StringUtil.setvString(v);
-        
+
         assertEquals("s","1 22 333 4444",s);
         s=StringUtil.setvString(v,"","","");
         assertEquals("s","1223334444",s);
         s=StringUtil.setvString(v,null,null,null);
         assertEquals("s","1223334444",s);
-        
+
         String[] a=new String[v.size()];
         a=(String[]) v.toArray(a);
         s=StringUtil.setvString(a," ",null,null);
         assertEquals("s","1 22 333 4444",s);
     }
-    
+
     public void testEscape()
     {
         String iri="file://myHost/a/c%20äöü%25&?.txtß€";
@@ -219,7 +219,7 @@ public class StringUtilTest extends JDFTestCaseBase
         assertEquals("a__a",StringUtil.escape("aä_a",null,"_",-1,0,0x21,127));
         assertEquals("a_äa",StringUtil.escape("aäa",null,"_",0,0,0x21,127));
     }
-    
+
     public void testExtension()
     {
         String iri="file://my.Host/a.n/c%20äöü%25&?.txtß";
@@ -230,8 +230,33 @@ public class StringUtilTest extends JDFTestCaseBase
      * test regexp matching utility
      *
      */
+    public void testMatchesIgnoreCase()
+    {
+        assertFalse(StringUtil.matchesIgnoreCase(null,"(.+ )*(BB)( .+)*"));
+        assertTrue(StringUtil.matchesIgnoreCase("a bb c","(.+ )*(BB)( .+)*"));
+        assertTrue(StringUtil.matchesIgnoreCase("mailTo:a@b.c",JDFConstants.REGEXP_EMAIL));
+        assertFalse(StringUtil.matchesIgnoreCase("mailT:a@b.c",JDFConstants.REGEXP_EMAIL ));
+    }
+    /**
+     * test regexp matching utility
+     *
+     */
+    public void testStripPrefix()
+    {
+        assertEquals(StringUtil.stripPrefix("a:b", "a:", true),"b");
+        assertEquals(StringUtil.stripPrefix("a:b", "A:", true),"b");
+        assertEquals(StringUtil.stripPrefix("a:b", "A:", false),"a:b");
+        assertEquals(StringUtil.stripPrefix("abcdef", "ABC", true),"def");
+        assertNull(StringUtil.stripPrefix(null, "A:", false));
+        assertEquals(StringUtil.stripPrefix("a:b", null, false),"a:b");
+    }
+    /**
+     * test regexp matching utility
+     *
+     */
     public void testMatches()
     {
+        assertFalse(StringUtil.matches(null,"(.+ )*(BB)( .+)*"));
         assertTrue(StringUtil.matches("a bb c","(.+ )*(bb)( .+)*"));
         assertTrue(StringUtil.matches("b bb c","(.* )*(bb)( .+)*"));
         assertTrue(StringUtil.matches("a bb","(.+ )*(bb)( .+)*"));
@@ -256,10 +281,24 @@ public class StringUtilTest extends JDFTestCaseBase
         assertFalse(StringUtil.matches("abc",".."));
         assertFalse(StringUtil.matches(null,null));
         assertFalse(StringUtil.matches("abc","?"));
-        
+        assertTrue(StringUtil.matches("a b","(a)?( b)?( c)?"));
+        assertTrue(StringUtil.matches("a b","a? b?"));
+        assertTrue(StringUtil.matches("a b","a?(( )*b)?"));
+        assertTrue(StringUtil.matches("a","a?(( )*b)?"));
+        assertTrue(StringUtil.matches("b","a?(( )*b)?"));
+        assertFalse(StringUtil.matches("b b","a?(( )*b)?"));
+
+        assertTrue(StringUtil.matches("a-aB.3@b.c",JDFConstants.REGEXP_EMAIL));
+        assertTrue(StringUtil.matches("a@b.c",JDFConstants.REGEXP_EMAIL ));
+        assertTrue(StringUtil.matches("mailto:a@b.c",JDFConstants.REGEXP_EMAIL));
+        assertFalse(StringUtil.matches("mailt:a@b.c",JDFConstants.REGEXP_EMAIL ));
+        assertTrue(StringUtil.matches("aa@b.c",JDFConstants.REGEXP_EMAIL ));
+        assertFalse(StringUtil.matches("a@b",JDFConstants.REGEXP_EMAIL ));
+        assertTrue(StringUtil.matches("+(1).2/344",JDFConstants.REGEXP_PHONE));
+        assertFalse(StringUtil.matches("+(1).2 344",JDFConstants.REGEXP_PHONE));        
     }
-    
-//////////////////////////////////////////////////////////////
+
+
     public void testMime()
     {
         assertEquals(StringUtil.mime(null), JDFConstants.MIME_TEXTUNKNOWN);
@@ -278,9 +317,9 @@ public class StringUtilTest extends JDFTestCaseBase
         assertEquals(StringUtil.newExtension(".b",".c"), ".c");
     }
 
-//////////////////////////////////////////////////////////////
-    
-    
+
+
+
     public void testReplaceString()
     {
         assertEquals(StringUtil.replaceString("abbcc", "a", "_"), "_bbcc");
@@ -289,10 +328,21 @@ public class StringUtilTest extends JDFTestCaseBase
         assertEquals(StringUtil.replaceString("abbcc", "bb", "_"), "a_cc");
         assertEquals(StringUtil.replaceString("abbcc", "c", "_"), "abb__");
         assertEquals(StringUtil.replaceString("abbcc", "cc", "_"), "abb_");
+        assertEquals(StringUtil.replaceString("abbcc", "bb", null), "acc");
     }
-
-//////////////////////////////////////////////////////////////
-
+    public void testReplaceChar()
+    {
+        assertEquals(StringUtil.replaceChar("abbcc", 'a',null, 0), "bbcc");
+        assertEquals(StringUtil.replaceChar("abbcc", 'b',null, 0), "acc");
+        assertEquals(StringUtil.replaceChar("abbcc", 'b',null, 2), "abcc");
+        assertEquals(StringUtil.replaceChar("abbcc", 'b',"_2", 2), "ab_2cc");
+    }
+    public void testReplaceCharSet()
+    {
+        assertEquals(StringUtil.replaceCharSet("abbcc", "ab",null, 0), "cc");
+        assertEquals(StringUtil.replaceCharSet("abbcc", "ab","_", 0), "___cc");
+        assertEquals(StringUtil.replaceCharSet("abbcc", "ab","_", 2), "ab_cc");
+    }
 
     public void testParseDouble()
     {
@@ -309,7 +359,7 @@ public class StringUtilTest extends JDFTestCaseBase
         assertEquals(StringUtil.parseDouble(s,0.),0.,0.);
         assertFalse(StringUtil.isNumber(s));
     }
-//////////////////////////////////////////////////////////////
+
 
     public void testFind_last_not_of()
     {
@@ -342,14 +392,14 @@ public class StringUtilTest extends JDFTestCaseBase
         s=StringUtil.formatDouble(d);
         assertEquals("s=int","1234560",s);       
     }
-    
+
     ///////////////////////////////////////////////////////////////////////////
-    
+
     public void testuncToUrl(){
         String unc="\\\\myHost\\a\\.\\b\\..\\c äöü%.txt";
         String iri="file://myHost/a/c%20Ã¤Ã¶Ã¼%25.txt";
         String uri="file://myHost/a/c%20%c3%a4%c3%b6%c3%bc%25.txt";
-        
+
         try
         {
             assertEquals("uri ok",StringUtil.uncToUrl(unc,true),uri);
@@ -360,18 +410,19 @@ public class StringUtilTest extends JDFTestCaseBase
             assertFalse("malformed URL",true);
         }
     }
-    
+
     ///////////////////////////////////////////////////////////////////////////
-    
+
     public void testZappTokenWS()
     {
         String s=" 1 2 3~    4";
         s=StringUtil.zappTokenWS(s,JDFConstants.TILDE);
         assertEquals("new string","1 2 3~4",s);        
+        assertEquals(StringUtil.zappTokenWS(" n2 ",null),"n2");        
     }
-    
-  ///////////////////////////////////////////////////////////////////////////
-    
+
+    ///////////////////////////////////////////////////////////////////////////
+
     public void testHasToken()
     {
         String s="1 2 3 3 15 4";
@@ -387,10 +438,10 @@ public class StringUtilTest extends JDFTestCaseBase
         assertFalse(StringUtil.hasToken(null,"0"," ",0));   
         assertFalse(StringUtil.hasToken("ab","a"," ",0));   
         assertFalse(StringUtil.hasToken("ab","b"," ",0));   
-        
+
     }
-   ///////////////////////////////////////////////////////////////////////////
-    
+    ///////////////////////////////////////////////////////////////////////////
+
     public void testToken()
     {
         String s="1 2 3 4";
@@ -401,8 +452,8 @@ public class StringUtilTest extends JDFTestCaseBase
         assertNull(StringUtil.token(s,4," "));      
         assertNull(StringUtil.token(s,-5," "));      
     }
-   ///////////////////////////////////////////////////////////////////////////
-    
+    ///////////////////////////////////////////////////////////////////////////
+
     public void testTokenize()
     {
         String s="1 2 3";
@@ -412,17 +463,17 @@ public class StringUtilTest extends JDFTestCaseBase
         v.add("3");
         assertEquals(StringUtil.tokenize(s," ",false),v);      
     }
-    
-   ///////////////////////////////////////////////////////////////////////////
-    
+
+    ///////////////////////////////////////////////////////////////////////////
+
     public  void testConcatStrings()
     {
         VString v=StringUtil.tokenize("a b c"," ",false);
         StringUtil.concatStrings(v,"_foo");
         assertEquals("a_foo b_foo c_foo",StringUtil.setvString(v," ",null,null));
     }   
-   ///////////////////////////////////////////////////////////////////////////
-    
+    ///////////////////////////////////////////////////////////////////////////
+
     public  void testEndsWithIgnoreCase()
     {
         String s="a.ZIP";
@@ -430,7 +481,7 @@ public class StringUtilTest extends JDFTestCaseBase
         assertEquals(s,"a.ZIP");
     }   
     ///////////////////////////////////////////////////////////////////////////
-    
+
     public  void testisWindowsLocalPath()
     {
         assertTrue(UrlUtil.isWindowsLocalPath("c:\\foo"));
@@ -440,10 +491,10 @@ public class StringUtilTest extends JDFTestCaseBase
         assertFalse(UrlUtil.isWindowsLocalPath("c/d/e.f"));
         assertFalse(UrlUtil.isWindowsLocalPath("/c/d/e.f"));
     }   
-    
-    
-   ///////////////////////////////////////////////////////////////////////////
-    
+
+
+    ///////////////////////////////////////////////////////////////////////////
+
     public  void testPathToName()
     {
         assertEquals(StringUtil.pathToName("\\\\foo\\bar"),"bar");
@@ -451,26 +502,26 @@ public class StringUtilTest extends JDFTestCaseBase
         assertEquals(StringUtil.pathToName("c/foo/bar.txt"),"bar.txt");
         assertEquals(StringUtil.pathToName("bar.txt"),"bar.txt");
     }   
-    
+
     ///////////////////////////////////////////////////////////////////////////
-    
+
     public  void testGetNamesVector()
     {
         VString v=StringUtil.getNamesVector(EnumOrientation.class);        
         assertTrue(v.contains("Rotate90"));
     }   
     ///////////////////////////////////////////////////////////////////////////
-    
+
     public  void testGetEnumsVector()
     {
         Vector v=StringUtil.getEnumsVector(EnumOrientation.class);        
         assertTrue(v.contains(EnumOrientation.Rotate180));
     }   
-    
+
     ///////////////////////////////////////////////////////////////////////////
-    
+
     ///////////////////////////////////////////////////////////////////////////
-    
+
     ///////////////////////////////////////////////////////////////////////////
-    
+
 }   

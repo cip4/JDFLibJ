@@ -889,6 +889,7 @@ public class JDFResourceTest extends JDFTestCaseBase
         {
             //
         }
+        doc.write2File(sm_dirTestDataTemp+"identical.jdf", 2, false);
     }
 
     //////////////////////////////////////////////////////////////

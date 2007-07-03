@@ -127,6 +127,14 @@ public class JDFDurationTest extends TestCase
         catch (Exception e) {
             // nop
         }
+        try
+        {
+            new JDFDuration("PTM90.95aS");
+            fail("bad duration string");
+        }
+        catch (Exception e) {
+            // nop
+        }
         d = new JDFDuration("P3M");
         assertEquals(d.getDurationISO(),"P3M");
         assertEquals(d.getDuration(),3*30*24*60*60);

@@ -160,6 +160,7 @@ import org.cip4.jdflib.resource.ProcessRunTest;
 import org.cip4.jdflib.resource.process.JDFAddressTest;
 import org.cip4.jdflib.resource.process.JDFColorConversionParamsTest;
 import org.cip4.jdflib.resource.process.JDFColorantControlTest;
+import org.cip4.jdflib.resource.process.JDFComChannelTest;
 import org.cip4.jdflib.resource.process.JDFCutBlockTest;
 import org.cip4.jdflib.resource.process.JDFDieLayoutTest;
 import org.cip4.jdflib.resource.process.JDFMediaTest;
@@ -189,12 +190,12 @@ public class AllJDFLibTest extends JDFTestCaseBase
         TestSuite suite = new TestSuite("Tests for org.cip4.jdflib.*");
 
         suite.addTestSuite(JDFClassInstantiationTest.class);
-        
+
         suite.addTestSuite(CheckJDFTest.class);
         suite.addTestSuite(EmptyNamespace.class);
-        
+
         suite.addTestSuite(AutoTest.class);
- 
+
         // core
         suite.addTestSuite(AttrInfoTest.class);
         suite.addTestSuite(ElemInfoTest.class);
@@ -214,7 +215,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(XMLDocTest.class);
         // cformat
         suite.addTestSuite(PrintfFormatTest.class);
-        
+
         // datatype
         suite.addTestSuite(JDFAttributeMapTest.class);
         suite.addTestSuite(JDFDateTimeRangeTest.class);
@@ -234,7 +235,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JDFXYPairRangeListTest.class);
         suite.addTestSuite(JDFXYPairTest.class);
         suite.addTestSuite(VJDFAttributeMapTest.class);
-        
+
         // capabilities and preflight
         suite.addTestSuite(JDFActionPoolTest.class);
         suite.addTestSuite(JDFDeviceCapTest.class);
@@ -247,7 +248,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JDFStateBaseTest.class);
         suite.addTestSuite(JDFStringStateTest.class);
         suite.addTestSuite(JDFTestTest.class);
-        
+
         //examples
         suite.addTestSuite(AmountTest.class);
         suite.addTestSuite(AutomatedLayoutTest.class);
@@ -270,11 +271,11 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JMFStatusTest.class);
         suite.addTestSuite(JMFTest.class);
         suite.addTestSuite(QueueTest.class);
-        
+
         // Node
         suite.addTestSuite(JDFNodeProductTest.class);
         suite.addTestSuite(JDFNodeTest.class);
-        
+
         // pool
         suite.addTestSuite(JDFAmountPoolTest.class);
         suite.addTestSuite(JDFAncestorPoolTest.class);
@@ -282,7 +283,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JDFColorPoolTest.class);
         suite.addTestSuite(JDFResourceLinkPoolTest.class);
         suite.addTestSuite(JDFResourcePoolTest.class);
-        
+
         //resource
         suite.addTestSuite(ProcessRunTest.class);
         suite.addTestSuite(PhaseTimeTest.class);
@@ -295,11 +296,12 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JDFPartTest.class);
         suite.addTestSuite(JDFResourceTest.class);
         suite.addTestSuite(JDFStrippingTest.class);
-        
+
         // resource.process
         suite.addTestSuite(JDFAddressTest.class);
         suite.addTestSuite(JDFColorantControlTest.class);
         suite.addTestSuite(JDFColorConversionParamsTest.class);
+        suite.addTestSuite(JDFComChannelTest.class);
         suite.addTestSuite(JDFCutBlockTest.class);
         suite.addTestSuite(JDFDieLayoutTest.class);
         suite.addTestSuite(JDFMediaTest.class);
@@ -307,7 +309,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JDFRunListTest.class);
         suite.addTestSuite(JDFTileTest.class);
         suite.addTestSuite(JDFUsageCounterTest.class);
-        
+
         // util
         suite.addTestSuite(BiHashMapTest.class);
         suite.addTestSuite(ContainerUtilTest.class);
@@ -318,9 +320,9 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(MimeUtilTest.class);
         suite.addTestSuite(StringUtilTest.class);
         suite.addTestSuite(UrlUtilTest.class);
-        
+
         suite.addTestSuite(JDFEnumerationSpanTest.class);
-        
+
         return suite;
     }
 }

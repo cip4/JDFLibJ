@@ -367,6 +367,8 @@ public class KElementTest extends JDFTestCaseBase
         KElement b=root.appendElement("b");
         KElement a2=root.appendElement("a");
         KElement a3=root.appendElement("a");
+        KElement c=root.appendElement("ns:c","www.c.com");
+        c.setAttribute("att", "41");
         a.setAttribute("att", "42");
         assertTrue(a.matchesPath("//a", false));
         assertTrue(a.matchesPath("/Test/a", false));
@@ -376,6 +378,10 @@ public class KElementTest extends JDFTestCaseBase
         assertTrue(a3.matchesPath("/Test/a[3]", false));
         assertFalse(a3.matchesPath("/Test/a[@att=\"*\"]", false));
         assertTrue(a.matchesPath("/Test/a[@att=\"*\"]", false));
+        assertTrue(c.matchesPath("/Test/ns:c", false));
+        assertTrue(c.matchesPath("/Test/ns:c[1]", false));
+        assertTrue(c.matchesPath("/Test/ns:c[@att=\"*\"]", false));
+        assertTrue(c.matchesPath("/Test/ns:c[@att=\"41\"]", false));
     }
 
     public void testMoveAttribute()

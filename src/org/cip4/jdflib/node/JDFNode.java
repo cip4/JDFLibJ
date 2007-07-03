@@ -232,7 +232,7 @@ public class JDFNode extends JDFElement
         atrInfoTable_PG[0] = new AtrInfoTable(AttributeName.TYPES, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
     }   
 
-     /**
+    /**
      * definition of optional attributes in the JDF namespace
      * @return comma separated list of optional attributes for JDF nodes
      */
@@ -443,24 +443,24 @@ public class JDFNode extends JDFElement
          * @deprecated
          * @return Vector
          */
-         public static Vector getNamesVector()
-         {
-             final Vector namesVector = new Vector();
-             final Iterator it = iterator(EnumActivation.class);
-             while (it.hasNext())
-             {
-                 namesVector.addElement(((ValuedEnum) it.next()).getName());
-             }
+        public static Vector getNamesVector()
+        {
+            final Vector namesVector = new Vector();
+            final Iterator it = iterator(EnumActivation.class);
+            while (it.hasNext())
+            {
+                namesVector.addElement(((ValuedEnum) it.next()).getName());
+            }
 
-             return namesVector;
-         }
+            return namesVector;
+        }
 
-         /**
-          * Constants EnumActivation
-          */
-         public static final EnumCleanUpMerge None         = new EnumCleanUpMerge(JDFConstants.CLEANUPMERGE_NONE);
-         public static final EnumCleanUpMerge RemoveRRefs  = new EnumCleanUpMerge(JDFConstants.CLEANUPMERGE_REMOVERREFS);
-         public static final EnumCleanUpMerge RemoveAll    = new EnumCleanUpMerge(JDFConstants.CLEANUPMERGE_REMOVEALL);
+        /**
+         * Constants EnumActivation
+         */
+        public static final EnumCleanUpMerge None         = new EnumCleanUpMerge(JDFConstants.CLEANUPMERGE_NONE);
+        public static final EnumCleanUpMerge RemoveRRefs  = new EnumCleanUpMerge(JDFConstants.CLEANUPMERGE_REMOVERREFS);
+        public static final EnumCleanUpMerge RemoveAll    = new EnumCleanUpMerge(JDFConstants.CLEANUPMERGE_REMOVEALL);
     }
 
     /**
@@ -526,7 +526,7 @@ public class JDFNode extends JDFElement
          * @deprectated (only null is deprecated)
          */
         public static final EnumActivation Unknown = null;
-        
+
         public static final EnumActivation Inactive = new EnumActivation(JDFConstants.ACTIVATION_INACTIVE);
         public static final EnumActivation Informative = new EnumActivation(JDFConstants.ACTIVATION_INFORMATIVE);
         public static final EnumActivation Held = new EnumActivation(JDFConstants.ACTIVATION_HELD);
@@ -966,183 +966,183 @@ public class JDFNode extends JDFElement
         mapPut(EnumType.ProcessGroup.getName(),
                 ",*",
                 // links
-                 ",i* o*"
+                ",i* o*"
         );
 
         mapPut(EnumType.Combined.getName(),
                 ",",
                 //links
-                 ","
+                ","
         );
-        
+
         // ----- general -----
         mapPut(EnumType.Approval.getName(),
-        		",*,ApprovalSuccess,ApprovalParams",
-        		// links
-        		",o*Rejected o*Accepted i*,o_,i_"
+                ",*,ApprovalSuccess,ApprovalParams",
+                // links
+                ",o*Rejected o*Accepted i*,o_,i_"
         );
-        
+
         mapPut(EnumType.Buffer.getName(),
-        		",*,BufferParams",
-        		// links
-        		",o_ i_,i_"
+                ",*,BufferParams",
+                // links
+                ",o_ i_,i_"
         );
-        
+
         mapPut(EnumType.Combine.getName(),
                 ",*",
-         		// links
+                // links
                 ",o_ i+"
         );
-        
+
         mapPut(EnumType.Delivery.getName(),
-        		",*,DeliveryParams",
-        		// links
-        		",o+ i?,i_"
+                ",*,DeliveryParams",
+                // links
+                ",o+ i?,i_"
         );
-        
+
         mapPut(EnumType.ManualLabor.getName(),
-        		",*,ManualLaborParams",
-        		// links
-        		",o_ i*,i_"
+                ",*,ManualLaborParams",
+                // links
+                ",o_ i*,i_"
         );
-        
+
         mapPut(EnumType.Ordering.getName(),
-        		",*,OrderingParams",
-        		// links
-        		",o+,i_"
+                ",*,OrderingParams",
+                // links
+                ",o+,i_"
         );
-        		
+
         mapPut(EnumType.Packing.getName(),
-        		",*,PackingParams",
-        		// links
-        		",o_ i_,i_"
+                ",*,PackingParams",
+                // links
+                ",o_ i_,i_"
         );
-        		
+
         mapPut(EnumType.QualityControl.getName(),
-        		",*,QualityControlResult,QualityControlParams",
-        		// links
-        		",o_ i_,o_,i_"
+                ",*,QualityControlResult,QualityControlParams",
+                // links
+                ",o_ i_,o_,i_"
         );
-        
+
         mapPut(EnumType.ResourceDefinition.getName(),
-        		",*,ResourceDefinitionParams",
-        		// links
-        		",o+ i*,i?"
+                ",*,ResourceDefinitionParams",
+                // links
+                ",o+ i*,i?"
         );
-        
+
         mapPut(EnumType.Split.getName(),
-        		",*",
-        		// links
-        		",o+ i_"
+                ",*",
+                // links
+                ",o+ i_"
         );
-        
+
         mapPut(EnumType.Verification.getName(),
-        		",*,DBSelection,ApprovalSuccess,VerificationParams,IdentificationField,DBSchema",
-        		// links
-        		",o? i?,o? i?,o?,i_,i*,i?"
+                ",*,DBSelection,ApprovalSuccess,VerificationParams,IdentificationField,DBSchema",
+                // links
+                ",o? i?,o? i?,o?,i_,i*,i?"
         );
-                
+
         // ----- prepress -----
         mapPut(EnumType.AssetListCreation.getName(),
-        		",AssetListCreationParams,RunList",
-        		// links
-        		",i_,i_ o_"
+                ",AssetListCreationParams,RunList",
+                // links
+                ",i_,i_ o_"
         );
-        
+
         mapPut(EnumType.Bending.getName(),
-        		",BendingParams,ExposedMedia,Media",
-        		// links
-        		",i_,i? o_,i?"
+                ",BendingParams,ExposedMedia,Media",
+                // links
+                ",i_,i? o_,i?"
         );
-        
+
         mapPut(EnumType.ColorCorrection.getName(),
-        		",ColorantControl,ColorCorrectionParams,RunList",
-        		// links
-        		",i?,i_,o_ i_"
+                ",ColorantControl,ColorCorrectionParams,RunList",
+                // links
+                ",i?,i_,o_ i_"
         );
-        		
+
         mapPut(EnumType.ColorSpaceConversion.getName(),
-        		",ColorantControl,ColorSpaceConversionParams,RunList",
-        		// links
-        		",i?,i_,o_ i_"
+                ",ColorantControl,ColorSpaceConversionParams,RunList",
+                // links
+                ",i?,i_,o_ i_"
         );
-        
+
         mapPut(EnumType.ContactCopying.getName(),
-        		",ContactCopyParams,DevelopingParams,ExposedMedia,Media,PlateCopyParams",
-        		// links
-        		",i_,i?,o_ i+,i_,i?"
+                ",ContactCopyParams,DevelopingParams,ExposedMedia,Media,PlateCopyParams",
+                // links
+                ",i_,i?,o_ i+,i_,i?"
         );
-        
+
         mapPut(EnumType.ContoneCalibration.getName(),
-        		",RunList,ScreeningParams,TransferFunctionControl",
-        		// links
-        		",o_ i_,i?,i?"
+                ",RunList,ScreeningParams,TransferFunctionControl",
+                // links
+                ",o_ i_,i?,i?"
         );
-        
+
         mapPut(EnumType.CylinderLayoutPreparation.getName(),
-        		",CylinderLayoutPreparationParams,Layout,Runlist,CylinderLayout",
-        		// links
-        		",i?,i_,i_,o_"
+                ",CylinderLayoutPreparationParams,Layout,Runlist,CylinderLayout",
+                // links
+                ",i?,i_,i_,o_"
         );
-        
+
         mapPut(EnumType.DBDocTemplateLayout.getName(),
-        		",DBRules,DBSchema,LayoutElement",
-        		// links
-        		",i_,i_,o* i*"
+                ",DBRules,DBSchema,LayoutElement",
+                // links
+                ",i_,i_,o* i*"
         );
-        
+
         mapPut(EnumType.DBTemplateMerging.getName(),
-        		",DBMergeParams,DBSelection,LayoutElement,RunList",
-        		// links
-        		",i_,i_,i*,o_"
+                ",DBMergeParams,DBSelection,LayoutElement,RunList",
+                // links
+                ",i_,i_,i*,o_"
         );
-        
+
         mapPut(EnumType.DigitalDelivery.getName(),
-        		",DigitalDeliveryParams,RunList",
-        		// links
-        		",i_,o+ i*"
+                ",DigitalDeliveryParams,RunList",
+                // links
+                ",i_,o+ i*"
         );
-        		
+
         mapPut(EnumType.FilmToPlateCopying.getName(),
-        		",DevelopingParams,ExposedMedia,Media,PlateCopyParams",
-        		// links
-        		",i?,o_ i_,i_,i_"
+                ",DevelopingParams,ExposedMedia,Media,PlateCopyParams",
+                // links
+                ",i?,o_ i_,i_,i_"
         );
-        
+
         mapPut(EnumType.FormatConversion.getName(),
-        		",FormatConversionParams,RunList",
-        		// links
-        		",i_,o_ i_"
+                ",FormatConversionParams,RunList",
+                // links
+                ",i_,o_ i_"
         );
-        
+
         mapPut(EnumType.ImageReplacement.getName(),
-        		",ImageCompressionParams,ImageReplacementParams,RunList",
-        		// links
-        		",i?,i_,o_ i_"
+                ",ImageCompressionParams,ImageReplacementParams,RunList",
+                // links
+                ",i?,i_,o_ i_"
         );
-        
+
         mapPut(EnumType.ImageSetting.getName(),
-        		",ColorantControl,DevelopingParams,ImageSetterParams,Media," +
+                ",ColorantControl,DevelopingParams,ImageSetterParams,Media," +
                 "RunList,TransferCurvePool,ExposedMedia",
                 // links
-        		",i?,i?,i?,i?,"+
-        		"i_,i?,o_ i?"
+                ",i?,i?,i?,i?,"+
+                "i_,i?,o_ i?"
         );
-        
+
         mapPut(EnumType.Imposition.getName(),
-        		",Layout,RunList",
+                ",Layout,RunList",
                 // links
-        		",i_,o_ i?Marks i_Document"
+                ",i_,o_ i?Marks i_Document"
         );
-        
+
         mapPut(EnumType.InkZoneCalculation.getName(),
-        		",InkZoneCalculationParams,InkZoneProfile,Layout," + 
-        		"TransferCurvePool,Sheet,Preview",
+                ",InkZoneCalculationParams,InkZoneProfile,Layout," + 
+                "TransferCurvePool,Sheet,Preview",
                 // links
-        		",i?,o_,i?," +
-        		"i?,i?,i_"
+                ",i?,o_,i?," +
+                "i?,i?,i_"
         );
-        		
+
         mapPut(EnumType.Interpreting.getName(),        		
                 ",ColorantControl,FontPolicy,InterpretedPDLData" +
                 ",InterpretingParams,PDLResourceAlias,RunList",
@@ -1150,36 +1150,36 @@ public class JDFNode extends JDFElement
                 ",i?,i?,o?" +
                 ",i_,i*,o? i_"
         );
-        
+
         mapPut(EnumType.LayoutElementProduction.getName(),
-        		",LayoutElement,RunList,LayoutElementProductionParams",
+                ",LayoutElement,RunList,LayoutElementProductionParams",
                 // links
-        		",o? i*,o?,i?"
+                ",o? i*,o?,i?"
         );
-        		
+
         mapPut(EnumType.LayoutPreparation.getName(),
-        		",LayoutPreparationParams,RunList,Layout,TransferCurvePool",
+                ",LayoutPreparationParams,RunList,Layout,TransferCurvePool",
                 // links
-        		",i_,o?Marks i?Marks i?Document,o_,o?"
+                ",i_,o?Marks i?Marks i?Document,o_,o?"
         );
 
         mapPut(EnumType.PDFToPSConversion.getName(),
-        		",PDFToPSConversionParams,RunList",
+                ",PDFToPSConversionParams,RunList",
                 // links
-        		",i_,o_ i_"
+                ",i_,o_ i_"
         );
-        
+
         mapPut(EnumType.PDLCreation.getName(),
-        		",ImageCompressionParams,PDLCreationParams,RunList",
+                ",ImageCompressionParams,PDLCreationParams,RunList",
                 // links
-        		",i?,i?,o_ i_"
+                ",i?,i?,o_ i_"
         );
 
         mapPut(EnumType.Preflight.getName(),
                 ",PreflightParams,PreflightReportRulePool,RunList,PreflightReport",
-        		// links
+                // links
                 ",i_,i_,i_,o_"
-                );
+        );
 
         mapPut(EnumType.PreviewGeneration.getName(),
                 ",ColorantControl,ExposedMedia,PreviewGenerationParams" +
@@ -1188,53 +1188,53 @@ public class JDFNode extends JDFElement
                 ",i?,i?,i_" +
                 ",i?,i?,o_ i?"
         );
-                
+
         mapPut(EnumType.Proofing.getName(),
                 ",ColorantControl,ColorSpaceConversionParams" +
-        		",ExposedMedia,Layout,Media,ProofingParams,RunList",
-        		// links
-        		",i?,i?" +
-        		",o_,i?,i_,i_,i?Marks i_Document"
+                ",ExposedMedia,Layout,Media,ProofingParams,RunList",
+                // links
+                ",i?,i?" +
+                ",o_,i?,i_,i_,i?Marks i_Document"
         );
 
         mapPut(EnumType.PSToPDFConversion.getName(),
                 ",FontParams,ImageCompressionParams" +
                 ",PSToPDFConversionParams,RunList",
-        		// links
+                // links
                 ",i?,i?" +
                 ",i?,o_ i_"
         );
-        
+
         mapPut(EnumType.RasterReading.getName(),
-        		",RasterReadingParams,RunList",
-        		// links
-        		",i?,o_ i_"
+                ",RasterReadingParams,RunList",
+                // links
+                ",i?,o_ i_"
         );
-        
+
         mapPut(EnumType.Rendering.getName(),
-        		",InterpretedPDLData,Media,RenderingParams,RunList",
-        		// links
-        		",i?,i?,i?,o_ i?"
+                ",InterpretedPDLData,Media,RenderingParams,RunList",
+                // links
+                ",i?,i?,i?,o_ i?"
         );
-        		
+
         mapPut(EnumType.Scanning.getName(),
                 ",ExposedMedia,ScanParams,RunList",
                 // links                 
                 ",i_,i_,o_"
         );
-                
+
         mapPut(EnumType.Screening.getName(),
                 ",RunList,ScreeningParams",
                 // links
                 ",o_ i_,i_"
         );
-        
+
         mapPut(EnumType.Separation.getName(),        		
                 ",ColorantControl,RunList,SeparationControlParams",
                 // links
                 ",i?,o_ i_,i_"
         );
-        
+
         mapPut(EnumType.SoftProofing.getName(),
                 ",ColorantControl,ColorSpaceConversionParams,Layout" +
                 ",ProofingParams,RunList",
@@ -1242,19 +1242,19 @@ public class JDFNode extends JDFElement
                 ",i?,i?,i?" +
                 ",i_,i?Marks i_Document"
         );
-        
+
         mapPut(EnumType.Stripping.getName(),
-        		",RunList,Layout,Assembly,TransferCurvePool,StrippingParams,ColorantControl",
+                ",RunList,Layout,Assembly,TransferCurvePool,StrippingParams,ColorantControl",
                 // links
-        		",o?Marks o?Document i?Document,o_,i+,i?,i_,i?"
+                ",o?Marks o?Document i?Document,o_,i+,i?,i_,i?"
         );
-        
+
         mapPut(EnumType.Tiling.getName(),
-    		    ",RunList,Tile",
+                ",RunList,Tile",
                 // links
-    		    ",o_ i?Marks i_Surface,i_"
+                ",o_ i?Marks i_Surface,i_"
         );
-        
+
         mapPut(EnumType.Trapping.getName(),
                 ",ColorantControl,RunList,TrappingDetails,FontPolicy",
                 // links
@@ -1293,143 +1293,143 @@ public class JDFNode extends JDFElement
                 ",i?,i_,i?" +
                 ",i?"
         );
-        
+
         // ----- postpress -----
         mapPut(EnumType.AdhesiveBinding.getName(),
-                 ",AdhesiveBindingParams,Component",
-                 //links
-                 ",i_,o_ i?Cover i_BookBlock"
+                ",AdhesiveBindingParams,Component",
+                //links
+                ",i_,o_ i?Cover i_BookBlock"
         );
-        
+
         mapPut(EnumType.BlockPreparation.getName(),
                 ",Component,BlockPreparationParams",
                 //links
-                ",o_ i_,i_");
-        
+        ",o_ i_,i_");
+
         mapPut(EnumType.BoxFolding.getName(),
-        		",Component,BoxFoldingParams",
+                ",Component,BoxFoldingParams",
                 //links
-        		",o_ i*Application i_,i_"
+                ",o_ i*Application i_,i_"
         );
-        
+
         mapPut(EnumType.BoxPacking.getName(),
-        		",Component,BoxPackingParams",
+                ",Component,BoxPackingParams",
                 //links
-        		",o_ i?Box i_,i_"
+                ",o_ i?Box i_,i_"
         );
-        
+
         mapPut(EnumType.Bundling.getName(),
                 ",Component,BundlingParams,Media",
                 //links
                 ",o_ i_,i_,i?"
         );
-        
+
         mapPut(EnumType.CaseMaking.getName(),
                 ",Component,CaseMakingParams,Media",
                 //links
                 ",o_ i?CoverMaterial,i_,i?SpineBoard i_CoverBoard i?CoverMaterial"
         );
-        
+
         mapPut(EnumType.CasingIn.getName(),
-        		",Component,CasingInParams",
-                 //links
-        		",o_ i_Case i_,i_"        		
-        );
-        
-        mapPut(EnumType.ChannelBinding.getName(),
-        		",ChannelBindingParams,Component",
+                ",Component,CasingInParams",
                 //links
-        		",i_,o_ i?Cover i_BookBlock"
+                ",o_ i_Case i_,i_"        		
         );
-        
+
+        mapPut(EnumType.ChannelBinding.getName(),
+                ",ChannelBindingParams,Component",
+                //links
+                ",i_,o_ i?Cover i_BookBlock"
+        );
+
         mapPut(EnumType.CoilBinding.getName(),
                 ",CoilBindingParams,Component",
                 //links
                 ",i_,o_ i_"
         );
-        
+
         mapPut(EnumType.Collecting.getName(),
                 ",CollectingParams,Component,DBRules,DBSelection" +
-        		",IdentificationField,Assembly",
+                ",IdentificationField,Assembly",
                 //links
-        		",i?,o_ i+,i*,i?" +
-        		",i?,i?"
+                ",i?,o_ i+,i*,i?" +
+                ",i?,i?"
         );
-        
+
         mapPut(EnumType.CoverApplication.getName(),
                 ",Component,CoverApplicationParams",
                 //links
                 ",o_ i_Cover i_,i_"
         );
-        
+
         mapPut(EnumType.Creasing.getName(),
                 ",CreasingParams,Component",
                 //links
                 ",i_,o_ i_"
         );
-        
+
         mapPut(EnumType.Cutting.getName(),
-        		",Component,CutBlock,CutMark,CuttingParams,Media",
+                ",Component,CutBlock,CutMark,CuttingParams,Media",
                 //links
                 ",o* i?,i*,i*,i_,o* i?"
         );
-        
+
         mapPut(EnumType.Dividing.getName(),
                 ",Component,DividingParams",
                 //links
                 ",o_ i_,i_"
         );
-        
+
         mapPut(EnumType.Embossing.getName(),
                 ",Component,EmbossingParams,Media,Tool",
                 //links
                 ",o_ i_,i_,i?,i?"
         );
-        
+
         mapPut(EnumType.EndSheetGluing.getName(),
                 ",Component,EndSheetGluingParams",
                 //links
                 ",o_ i_FrontEndSheet i_BookBlock i_BackEndSheet,i_"
         );
-        
+
         mapPut(EnumType.Feeding.getName(),
-        		",Component,FeedingParams,Media",
+                ",Component,FeedingParams,Media",
                 //links
-        		",o* i*,i_,o* i*"
+                ",o* i*,i_,o* i*"
         );
-        
+
         mapPut(EnumType.Folding.getName(),
                 ",Component,FoldingParams",
                 //links
                 ",o_ i_,i_"
         );
-        
+
         mapPut(EnumType.Gathering.getName(),
                 ",Assembly,Component,DBRules,DBSelection" +
                 ",GatheringParams,IdentificationField",
                 //links
-        		",i?,o_ i+,i*,i?" +
-        		",i_,i?"
+                ",i?,o_ i+,i*,i?" +
+                ",i_,i?"
         );
-        
+
         mapPut(EnumType.Gluing.getName(),
                 ",Component,GluingParams",
                 //links
                 ",o_ i_,i_"
         );
-        
+
         mapPut(EnumType.HeadBandApplication.getName(),
-        		",Component,HeadBandApplicationParams",
+                ",Component,HeadBandApplicationParams",
                 //links
-        		",o_ i_,i_"
+                ",o_ i_,i_"
         );
-        
+
         mapPut(EnumType.HoleMaking.getName(),
-        		",Component,HoleMakingParams",
+                ",Component,HoleMakingParams",
                 //links
-        		",o_ i_,i_"
+                ",o_ i_,i_"
         );
-        
+
         mapPut(EnumType.Inserting.getName(),
                 ",Component,DBRules,DBSelection" +
                 ",IdentificationField,InsertingParams",
@@ -1437,167 +1437,167 @@ public class JDFNode extends JDFElement
                 ",o_ i_Child i_Mother,i?,i?" +
                 ",i?,i_"
         );
-        
+
         mapPut(EnumType.Jacketing.getName(),
                 ",Component,JacketingParams",
                 //links
                 ",o_ i_Jacket i_Book,i_"
         );
-        
+
         mapPut(EnumType.Labeling.getName(),
                 ",Component,LabelingParams",
                 //links
                 ",o_ i?Label i_,i_"
         );
-        
+
         mapPut(EnumType.Laminating.getName(),
-                 ",Component,LaminatingParams,Media",
-                 //links
-                 ",o_ i_,i_,i?"
-        );
-        
-        mapPut(EnumType.LongitudinalRibbonOperations.getName(),
-                 ",Component,LongitudinalRibbonOperationParams",
-                 //links
-                 ",o+ i_,i_"
-        );
-        
-        mapPut(EnumType.Numbering.getName(),
-                 ",Component,NumberingParams",
-                 //links
-                 ",o_ i_,i_"
-        );
-        
-        mapPut(EnumType.Palletizing.getName(),
-                 ",Component,PalletizingParams,Pallet",
-                 //links
-                 ",o_ i_,i_,i_"
-        );
-        
-        mapPut(EnumType.Perforating.getName(),
-                 ",PerforatingParams,Component",
-                 //links
-                 ",i_,o_ i_"
-        );
-        
-        mapPut(EnumType.PlasticCombBinding.getName(),
-                 ",Component,PlasticCombBindingParams",
-                 //links
-                 ",o_ i_,i_"
-        );
-        
-        mapPut(EnumType.PrintRolling.getName(),
-                 ",Component,PrintRollingParams,RollStand",
-                 //links
-                 ",o_ i_,i?,i?"
-        );
-        
-        mapPut(EnumType.RingBinding.getName(),
-                 ",Component,RingBindingParams",
-                 //links
-                 ",o_ i?RingBinder i_BookBlock,i_"
-        );
-        
-        mapPut(EnumType.SaddleStitching.getName(),
-                 ",Component,SaddleStitchingParams",
-                 //links
-                 ",o_ i_,i_"
-        );
-        
-        mapPut(EnumType.ShapeCutting.getName(),
-                 ",Component,ShapeCuttingParams,Tool",
-                 //links
-                 ",o+ i_,i?,i*"
-        );
-        
-        mapPut(EnumType.Shrinking.getName(),
-                 ",Component,ShrinkingParams",
-                 //links
-                 ",o_ i_,i_"
-        );
-        
-        mapPut(EnumType.SideSewing.getName(),
-                 ",Component,SideSewingParams",
-                 //links
-                 ",o_ i_,i_"
-        );
-        
-        mapPut(EnumType.SpinePreparation.getName(),
-                 ",Component,SpinePreparationParams",
-                 //links
-                 ",o_ i_,i_"
-        );
-        
-        mapPut(EnumType.SpineTaping.getName(),
-                 ",Component,SpineTapingParams",
-                 //links
-                 ",o_ i_,i_"
-        );
-        
-        mapPut(EnumType.Stacking.getName(),
-                 ",Component,StackingParams",
-                 //links
-                 ",o_ i_,i_"
-        );
-        
-        mapPut(EnumType.Stitching.getName(),
-                 ",Component,StitchingParams",
-                 //links
-                 ",o_ i_,i_"
-        );
-        
-        mapPut(EnumType.Strapping.getName(),
-                 ",Component,StrappingParams,Strap",
-                 //links
-                 ",o_ i_,i_,i?"
-        );
-        
-        mapPut(EnumType.StripBinding.getName(),
-                 ",Component,StripBindingParams",
-                 //links
-                 ",o_ i_,i_"
-        );
-        
-        mapPut(EnumType.ThreadSealing.getName(),
-                 ",Component,ThreadSealingParams",
-                 //links
-                 ",o_ i_,i_"
-        );
-        
-        mapPut(EnumType.ThreadSewing.getName(),
-                 ",Component,ThreadSewingParams",
-                 //links
-                 ",o_ i_,i_"
-        );
-        
-        mapPut(EnumType.Trimming.getName(),
-                 ",Component,TrimmingParams",
-                 //links
-                 ",o_ i_,i_"
-        );
-        
-        mapPut(EnumType.WebInlineFinishing.getName(),
-        		",Assembly,Component,ProductionPath" +
-        		",StrippingParams,WebInlineFinishingParams",
+                ",Component,LaminatingParams,Media",
                 //links
-        		",i?,o_ i_,i?" +
-        		",i?,i?"
+                ",o_ i_,i_,i?"
         );
-        
+
+        mapPut(EnumType.LongitudinalRibbonOperations.getName(),
+                ",Component,LongitudinalRibbonOperationParams",
+                //links
+                ",o+ i_,i_"
+        );
+
+        mapPut(EnumType.Numbering.getName(),
+                ",Component,NumberingParams",
+                //links
+                ",o_ i_,i_"
+        );
+
+        mapPut(EnumType.Palletizing.getName(),
+                ",Component,PalletizingParams,Pallet",
+                //links
+                ",o_ i_,i_,i_"
+        );
+
+        mapPut(EnumType.Perforating.getName(),
+                ",PerforatingParams,Component",
+                //links
+                ",i_,o_ i_"
+        );
+
+        mapPut(EnumType.PlasticCombBinding.getName(),
+                ",Component,PlasticCombBindingParams",
+                //links
+                ",o_ i_,i_"
+        );
+
+        mapPut(EnumType.PrintRolling.getName(),
+                ",Component,PrintRollingParams,RollStand",
+                //links
+                ",o_ i_,i?,i?"
+        );
+
+        mapPut(EnumType.RingBinding.getName(),
+                ",Component,RingBindingParams",
+                //links
+                ",o_ i?RingBinder i_BookBlock,i_"
+        );
+
+        mapPut(EnumType.SaddleStitching.getName(),
+                ",Component,SaddleStitchingParams",
+                //links
+                ",o_ i_,i_"
+        );
+
+        mapPut(EnumType.ShapeCutting.getName(),
+                ",Component,ShapeCuttingParams,Tool",
+                //links
+                ",o+ i_,i?,i*"
+        );
+
+        mapPut(EnumType.Shrinking.getName(),
+                ",Component,ShrinkingParams",
+                //links
+                ",o_ i_,i_"
+        );
+
+        mapPut(EnumType.SideSewing.getName(),
+                ",Component,SideSewingParams",
+                //links
+                ",o_ i_,i_"
+        );
+
+        mapPut(EnumType.SpinePreparation.getName(),
+                ",Component,SpinePreparationParams",
+                //links
+                ",o_ i_,i_"
+        );
+
+        mapPut(EnumType.SpineTaping.getName(),
+                ",Component,SpineTapingParams",
+                //links
+                ",o_ i_,i_"
+        );
+
+        mapPut(EnumType.Stacking.getName(),
+                ",Component,StackingParams",
+                //links
+                ",o_ i_,i_"
+        );
+
+        mapPut(EnumType.Stitching.getName(),
+                ",Component,StitchingParams",
+                //links
+                ",o_ i_,i_"
+        );
+
+        mapPut(EnumType.Strapping.getName(),
+                ",Component,StrappingParams,Strap",
+                //links
+                ",o_ i_,i_,i?"
+        );
+
+        mapPut(EnumType.StripBinding.getName(),
+                ",Component,StripBindingParams",
+                //links
+                ",o_ i_,i_"
+        );
+
+        mapPut(EnumType.ThreadSealing.getName(),
+                ",Component,ThreadSealingParams",
+                //links
+                ",o_ i_,i_"
+        );
+
+        mapPut(EnumType.ThreadSewing.getName(),
+                ",Component,ThreadSewingParams",
+                //links
+                ",o_ i_,i_"
+        );
+
+        mapPut(EnumType.Trimming.getName(),
+                ",Component,TrimmingParams",
+                //links
+                ",o_ i_,i_"
+        );
+
+        mapPut(EnumType.WebInlineFinishing.getName(),
+                ",Assembly,Component,ProductionPath" +
+                ",StrippingParams,WebInlineFinishingParams",
+                //links
+                ",i?,o_ i_,i?" +
+                ",i?,i?"
+        );
+
         mapPut(EnumType.WireCombBinding.getName(),
-                 ",Component,WireCombBindingParams",
-                 //links
-                 ",o_ i_,i_"
+                ",Component,WireCombBindingParams",
+                //links
+                ",o_ i_,i_"
         );
-        
+
         mapPut(EnumType.Wrapping.getName(),
-                 ",Component,WrappingParams,Media",
-                 //links
-                 ",o_ i_,i_,i?"
+                ",Component,WrappingParams,Media",
+                //links
+                ",o_ i_,i_,i?"
         );
     }
-   
-    
+
+
     //**************************************** Constructors ****************************************
     //NEWWWW
 
@@ -1778,7 +1778,7 @@ public class JDFNode extends JDFElement
     {
         if(hasAttribute(AttributeName.ID)) {
             return false; // has previously been initialized
-		}
+        }
 
         String id=appendAnchor(null);
         if (isJDFRoot())
@@ -1797,7 +1797,7 @@ public class JDFNode extends JDFElement
             // set an initial jobpartid
             if(!hasAttribute(AttributeName.JOBPARTID)) {
                 setJobPartID(id);
-        }
+            }
         }
         else
         {            
@@ -1849,7 +1849,7 @@ public class JDFNode extends JDFElement
         final EnumType typ = EnumType.getEnum(getType());
         if(typ==null) {
             return null;
-		}
+        }
 
         if (typ.equals(EnumType.Combined) || (typ==EnumType.ProcessGroup && hasAttribute(AttributeName.TYPES)))
         {
@@ -1858,8 +1858,8 @@ public class JDFNode extends JDFElement
             vTypes=expandGrayBoxTypes(vTypes);
             if(vTypes==null) {
                 return null;
-			}
-            
+            }
+
             final int size=vTypes.size();
             for (int i = 0; i < size; i++)
             {
@@ -1867,7 +1867,7 @@ public class JDFNode extends JDFElement
                 final String[] typeLinkNames = typeLinkNames(t);
                 if(typeLinkNames==null) {
                     return null; // bail out - it's open anyhow
-				}
+                }
                 for (int j = m_strGenericLinkNames.length; j < typeLinkNames.length; j++)
                 {
                     v.add(typeLinkNames[j]);
@@ -1880,7 +1880,7 @@ public class JDFNode extends JDFElement
         final String[] typeLinkNames = typeLinkNames(typ);
         if(typeLinkNames==null) {
             return null; // bail out - it's open anyhow
-		}
+        }
         return new VString(typeLinkNames);
     }
 
@@ -1892,7 +1892,7 @@ public class JDFNode extends JDFElement
     {
         if(types==null) {
             return null;
-		}
+        }
         VString vNew=new VString();
         for(int i=0;i<types.size();i++)
         {
@@ -1925,7 +1925,7 @@ public class JDFNode extends JDFElement
         final EnumType typ = EnumType.getEnum(getType());
         if(typ==null) {
             return null;
-		}
+        }
         if (typ.equals(EnumType.Combined)|| (typ==EnumType.ProcessGroup && hasAttribute(AttributeName.TYPES)))
         {
 
@@ -1936,20 +1936,20 @@ public class JDFNode extends JDFElement
             vTypes=expandGrayBoxTypes(vTypes);
             if(vTypes==null) {
                 return null;
-			}
+            }
             int i = 0;
             for (i = 0; i < vTypes.size(); i++)
             {
                 final EnumType t = EnumType.getEnum((String) vTypes.elementAt(i));
                 if(t==null) {
                     return null;
-				}
+                }
 
                 final String[] typeLinkInfo = typeLinkInfo(t);
                 final String[] typeLinkNames = typeLinkNames(t);
                 if(typeLinkInfo==null || typeLinkNames==null) {
                     return null;
-				}
+                }
 
                 for(int j = m_GenericLinkInfo.length; j < typeLinkInfo.length; j++)
                 {
@@ -2038,7 +2038,7 @@ public class JDFNode extends JDFElement
     {
         if(typeNum==null) {
             return null;
-		}
+        }
         return (String[])  m_LinkNamesMap.get(typeNum.getName());
     }
 
@@ -2172,23 +2172,23 @@ public class JDFNode extends JDFElement
             JDFNodeInfo ni=getNodeInfo();
             if(ni==null) {
                 return null;
-			}
+            }
             ni=(JDFNodeInfo)ni.getPartition(mattr, null);
             if(ni==null) {
                 return null;
-			}
+            }
             stat = ni.getNodeStatus();
 
             final VElement vLeaves=ni.getLeaves(false);
             final int size = vLeaves.size();
- 
+
             for(int i=0;i<size;i++){
                 JDFNodeInfo niCmp=(JDFNodeInfo) vLeaves.elementAt(i);
                 JDFAttributeMap map=niCmp.getPartMap();
                 if(map!=null && !map.subMap(mattr)) {
                     continue;
-				}
-                    
+                }
+
                 if(niCmp.getNodeStatus()!=stat)
                 {
                     return null; //inconsistent
@@ -2200,7 +2200,7 @@ public class JDFNode extends JDFElement
             final JDFStatusPool statusPool = getStatusPool();
             if(statusPool==null) {
                 return null;
-			}
+            }
             stat = statusPool.getStatus(mattr);
         }
         return stat;
@@ -2226,7 +2226,7 @@ public class JDFNode extends JDFElement
         su.setPhase(nodeStatus, nodeStatusDetails, deviceStatus, deviceStatusDetails,null);
         return su.getDocJMFPhaseTime();
     }
- 
+
 
     /**
      * return the partMapVector defined by nodeInfo partitioning
@@ -2238,26 +2238,26 @@ public class JDFNode extends JDFElement
         final EnumNodeStatus status = getStatus();
         if(EnumNodeStatus.Pool.equals(status))
         {
-           JDFStatusPool pool=getStatusPool();
-           if(pool!=null)
-           {
-               VJDFAttributeMap vMap=new VJDFAttributeMap();
-               VElement vParts=pool.getPartStatusVector(null);
-               for(int i=0;i<vParts.size();i++)
-               {
-                   JDFPartStatus ps=(JDFPartStatus) vParts.item(i);                   
-                   vMap.appendUnique(ps.getPartMap());
-               }
-               vMap.unify();
-               return vMap;
-           }
+            JDFStatusPool pool=getStatusPool();
+            if(pool!=null)
+            {
+                VJDFAttributeMap vMap=new VJDFAttributeMap();
+                VElement vParts=pool.getPartStatusVector(null);
+                for(int i=0;i<vParts.size();i++)
+                {
+                    JDFPartStatus ps=(JDFPartStatus) vParts.item(i);                   
+                    vMap.appendUnique(ps.getPartMap());
+                }
+                vMap.unify();
+                return vMap;
+            }
         }
         else if(EnumNodeStatus.Part.equals(status))
         {
             JDFNodeInfo ni=getNodeInfo();
             if(ni!=null) {
                 return ni.getPartMapVector(true);
-        }
+            }
         }
 
         return null; // nop
@@ -2272,7 +2272,7 @@ public class JDFNode extends JDFElement
         JDFAncestorPool ancPool=getAncestorPool();
         if(ancPool!=null) {
             return ancPool.getPartMapVector();
-		}
+        }
         return null;
     }
     /**
@@ -2325,7 +2325,7 @@ public class JDFNode extends JDFElement
                     }
                 }
                 p = (JDFNode) p.getParentNode_KElement();
-             }// end while
+            }// end while
         }
         else
         {
@@ -2382,7 +2382,7 @@ public class JDFNode extends JDFElement
         EnumUsage usage=null;
         if(bLink) {
             usage=bInput ? EnumUsage.Input : EnumUsage.Output; 
-		}
+        }
         return addResource(strName,resClass,usage,null,resRoot,nameSpaceURI,null);
     }
     /**
@@ -2399,7 +2399,7 @@ public class JDFNode extends JDFElement
     {
         return addResource(strName,null,usage,null,null,null,null);
     }
-    
+
     /**
      * addResource - add a resource to resroot and link it to this process
      *
@@ -2444,7 +2444,7 @@ public class JDFNode extends JDFElement
         }
         if(resClass!=null) {
             r.setResourceClass(resClass);
-		}
+        }
 
 
         // parameters and consumables are assumed to be available by default
@@ -2496,7 +2496,7 @@ public class JDFNode extends JDFElement
     {
         if(bForce) {
             bForce=true;
-		}
+        }
         return linkResource(jdfResource,input ? EnumUsage.Input : EnumUsage.Output,null);
     }
     /**
@@ -2517,7 +2517,7 @@ public class JDFNode extends JDFElement
     {
         if (jdfResource == null) {
             return null;
-		}
+        }
 
         final JDFResourceLinkPool resourceLinkPool = getCreateResourceLinkPool();
         JDFResourceLink resourceLink = resourceLinkPool.linkResource(jdfResource, usage, processUsage);
@@ -2560,8 +2560,8 @@ public class JDFNode extends JDFElement
                 String inOut=null;
                 if(usage!=null) {
                     inOut=usage==EnumUsage.Input ? "i" : "o";
-				}
-                
+                }
+
                 for(int ti=0;ti<typeInfo.size();ti++)
                 {
                     String sti=typeInfo.stringAt(ti);
@@ -2581,29 +2581,29 @@ public class JDFNode extends JDFElement
                 }
                 if(bAddCPI) {
                     cpi.add(i);
-				}
+                }
                 lastGot=i;
                 typeLinkNamesLast=typeLinkNames;
             }                               
         }
         if(cpi.size()>0) {
             resourceLink.setCombinedProcessIndex(cpi);
-    }
+        }
     }
 
 
-/**
- * remove any duplicate combinedprocessusages
- * @param usage
- * @param types
- * @param cpi
- * @param resName
- * @param lastGot
- * @param typeLinkNamesLast
- * @param bAddCPI
- * @param typeInfo
- * @return boolean
- */
+    /**
+     * remove any duplicate combinedprocessusages
+     * @param usage
+     * @param types
+     * @param cpi
+     * @param resName
+     * @param lastGot
+     * @param typeLinkNamesLast
+     * @param bAddCPI
+     * @param typeInfo
+     * @return boolean
+     */
     private boolean cleanCombinedProcessIndex(EnumUsage usage, final VString types, JDFIntegerList cpi, final String resName, int lastGot, String[] typeLinkNamesLast, boolean bAddCPI, final VString typeInfo)
     {
         int iPosLast = ArrayUtils.indexOf(typeLinkNamesLast,resName);
@@ -2748,14 +2748,14 @@ public class JDFNode extends JDFElement
         final JDFResourcePool resourcePool = getResourcePool();
         if (resourcePool == null) {
             return null;
-		}
+        }
         VElement vUnlinkedResources = resourcePool.getUnlinkedResources();
         if(bLocal) {
             return vUnlinkedResources;
-		}
+        }
         if(vUnlinkedResources==null) {
             vUnlinkedResources= new VElement();
-		}
+        }
         VElement children=getvJDFNode(null, null, true);
         for(int i=0;i<children.size();i++)
         {
@@ -2776,26 +2776,26 @@ public class JDFNode extends JDFElement
     {
         return getPredecessors(bPre,false);
     }
-        /**
-         * get a vector of all direct predecessor or following nodes, depending on bPre
-         *
-         * @param bPre if true get predecessors, if false get following nodes
-         * @param bDirect if true, only return the direct condidates
-         *
-         * @return Vector of pre / post decessor nodes
-         */
+    /**
+     * get a vector of all direct predecessor or following nodes, depending on bPre
+     *
+     * @param bPre if true get predecessors, if false get following nodes
+     * @param bDirect if true, only return the direct condidates
+     *
+     * @return Vector of pre / post decessor nodes
+     */
     public VElement getPredecessors(boolean bPre, boolean bDirect)
     {
         HashSet hashSet = new HashSet();
         getPredecessorImpl(bPre, bDirect,hashSet);
-        
+
         VElement v=new VElement();
         Iterator it=hashSet.iterator();
         while(it.hasNext()) {
             v.add(it.next());
-		}
+        }
         return v;
-        
+
     }
     private void getPredecessorImpl(boolean bPre, boolean bDirect, HashSet h)
     {
@@ -2805,28 +2805,28 @@ public class JDFNode extends JDFElement
         final Vector vLoc = (rlp == null) ? null : rlp.getInOutLinks(bPre?EnumUsage.Input:EnumUsage.Output, false, null,null);
 
         if (vLoc != null) {
-        	final Iterator vLocIterator = vLoc.iterator();
-        	while (vLocIterator.hasNext()) {
-				JDFResource r = (JDFResource) vLocIterator.next();
-            // get all creator or consumer processes
-            final Vector vc = r.getCreator(bPre);
+            final Iterator vLocIterator = vLoc.iterator();
+            while (vLocIterator.hasNext()) {
+                JDFResource r = (JDFResource) vLocIterator.next();
+                // get all creator or consumer processes
+                final Vector vc = r.getCreator(bPre);
 
-	            if (vc != null) {
-	            	final Iterator vcIterator = vc.iterator();
-	            	while (vcIterator.hasNext()) {
-						JDFNode p = (JDFNode) vcIterator.next();
-		                if (h.contains(p)) {
-                    continue; // snafu
-						}
-                h.add(p);
-                
-                if(!bDirect)
-                {
-                    p.getPredecessorImpl(bPre, bDirect, h);
+                if (vc != null) {
+                    final Iterator vcIterator = vc.iterator();
+                    while (vcIterator.hasNext()) {
+                        JDFNode p = (JDFNode) vcIterator.next();
+                        if (h.contains(p)) {
+                            continue; // snafu
+                        }
+                        h.add(p);
+
+                        if(!bDirect)
+                        {
+                            p.getPredecessorImpl(bPre, bDirect, h);
+                        }
+                    }
                 }
             }
-        }
-    }
         }
     }
 
@@ -2853,14 +2853,14 @@ public class JDFNode extends JDFElement
         EnumNodeStatus status=getPartStatus(partMap);
         if((status!=EnumNodeStatus.Waiting)&&(status!=EnumNodeStatus.Ready)) {
             return false;
-		}
+        }
 
         if (v != null)
         {
             for (int i = 0; i < v.size(); i++)
             {
                 final JDFResourceLink rl = (JDFResourceLink) v.elementAt(i);
-    
+
                 if (rl != null && !rl.isExecutable(partMap, bCheckChildren))
                 {
                     return false;
@@ -2904,7 +2904,7 @@ public class JDFNode extends JDFElement
 
      *
      */
-    
+
     /**
      * ResourceTypeEqual<br>
      * Checks whether the given resources are of the same type. Resources are considered equal by
@@ -2960,7 +2960,7 @@ public class JDFNode extends JDFElement
      * 
      * default: getvJDFNode(null, JDFNode.EnumActivation.Unknown, false)
      */  
-    
+
     /**
      * Get a vector of all JDF children with type nodeType
      * @param task    node type
@@ -2990,7 +2990,7 @@ public class JDFNode extends JDFElement
             if (p.fitsActivation(active, true)
                     && (!wantTask || p.getType().equals(task))) {
                 v.addElement(p);
-        }
+            }
         }
         return v;
     }
@@ -3164,8 +3164,8 @@ public class JDFNode extends JDFElement
                 setXSIType(newType);
                 if(!eTyp.equals(EnumType.Combined)&&!eTyp.equals(EnumType.ProcessGroup)) {
                     removeAttribute(AttributeName.TYPES);
+                }
             }
-        }
         }
         else
         {
@@ -3205,11 +3205,11 @@ public class JDFNode extends JDFElement
         }
         if(!hasAttribute(AttributeName.JOBPARTID)) {
             setJobPartID(generateDotID(AttributeName.JOBPARTID,null));
-		}
+        }
 
         if(isJDFRoot()&&!hasAncestorAttribute(AttributeName.JOBID,null)) {
             setJobID(generateDotID(AttributeName.JOBID,null));
-		}
+        }
 
         return super.fixVersion(version) && bRet;
     }
@@ -3257,8 +3257,8 @@ public class JDFNode extends JDFElement
                         moveAttribute(AttributeName.STATUS,e,AttributeName.NODESTATUS,null,null);
                         if(e.hasAttribute(AttributeName.NODESTATUSDETAILS)) {
                             moveAttribute(AttributeName.STATUSDETAILS,e,AttributeName.NODESTATUSDETAILS,null,null);
+                        }
                     }
-                }
                 }
             }else{ // partitioned nodeinfo or customerinfo handling
                 if(i==1){ // copy nodeinfo stati into statuspool
@@ -3273,8 +3273,8 @@ public class JDFNode extends JDFElement
                         ps.setAttribute(AttributeName.STATUS,ni.getAttribute(AttributeName.NODESTATUS));
                         if(ni.hasAttribute(AttributeName.STATUSDETAILS)) {
                             ps.setAttribute(AttributeName.STATUSDETAILS,ni.getAttribute(AttributeName.NODESTATUSDETAILS));
+                        }
                     }
-                }
                 }
                 // merge the most fitting resource partition into the unpartitioned 
                 // nodeinfo or customerinfo
@@ -3285,7 +3285,7 @@ public class JDFNode extends JDFElement
                 final String partidkeys = root.getAttribute(AttributeName.PARTIDKEYS,null,null);
                 if(partidkeys!=null) {
                     e.setAttribute(AttributeName.PARTIDKEYS,partidkeys);
-            }
+                }
             }
 
             ((JDFResource)e).cleanResourceAttributes();
@@ -3344,7 +3344,7 @@ public class JDFNode extends JDFElement
                             ni.setAttribute(AttributeName.NODESTATUS,ps.getAttribute(AttributeName.STATUS));
                             if(ps.hasAttribute(AttributeName.STATUSDETAILS)) {
                                 ni.setAttribute(AttributeName.NODESTATUSDETAILS,ps.getStatusDetails());
-                        }
+                            }
                         }
                         removeChild(ElementName.STATUSPOOL,null,0);
                     }
@@ -3361,9 +3361,9 @@ public class JDFNode extends JDFElement
     }
 
     /**
-    * typesafe validator,
+     * typesafe validator,
      * checks whether all resource links are ok
-    * @param level validation level
+     * @param level validation level
      * @return true if this node is valid
      */
     public boolean isValid(EnumValidationLevel level)
@@ -3371,7 +3371,7 @@ public class JDFNode extends JDFElement
         boolean bValid=super.isValid(level);
         if(!bValid) {
             return false;
-		}
+        }
 
         bValid=!hasInvalidLinks(level);
         if(bValid && EnumType.Product.equals(getEnumType()))
@@ -3437,7 +3437,7 @@ public class JDFNode extends JDFElement
     }
 
 
-     /**
+    /**
      * update the node status or nodeinfo/@NodeStatus for all partitions specified in vMap
      * @param vMap the map of partitions to apply the update algorithm to
      * @param updateKids if true, also recursively update all kids, if false move to root without updating kids
@@ -3457,7 +3457,7 @@ public class JDFNode extends JDFElement
                 final JDFNode node = (JDFNode)vNodes.item(i);
                 if(updateKids) {
                     node.updatePartStatus(vMap,updateKids,false);
-				}
+                }
                 statusMaps.addall(node.getStatusPartMapVector());
             }
             statusMaps.unify();
@@ -3473,7 +3473,7 @@ public class JDFNode extends JDFElement
                 }
                 if(statusMaps.size()==0) {
                     return;
-            }
+                }
             }
             else   
             {
@@ -3495,12 +3495,12 @@ public class JDFNode extends JDFElement
                     }
                     if(minStatus.getValue()>status.getValue()) {
                         minStatus=status;
-                }
+                    }
                 }
                 if(minStatus!=null) {
                     setPartStatus(map, minStatus);
+                }
             }
-        }
         }
 
         // recurse down to root
@@ -3509,7 +3509,7 @@ public class JDFNode extends JDFElement
             JDFNode parent=getParentJDF();
             if(parent!=null) {
                 parent.updatePartStatus(vMap, false, true);
-        }
+            }
         }
 
     }
@@ -3522,7 +3522,7 @@ public class JDFNode extends JDFElement
         final JDFResourceLinkPool resourceLinkPool = getResourceLinkPool();
         if (resourceLinkPool == null) {
             return;
-		}
+        }
 
         final VElement vOut = resourceLinkPool.getInOutLinks(EnumUsage.Output, false, null,null);
         if (vOut == null || vOut.isEmpty())
@@ -3610,35 +3610,35 @@ public class JDFNode extends JDFElement
         JDFResourcePool rp = getResourcePool();
         if(rp != null && bRecurse) {
             v1 = rp.getAllRefs(v1, bRecurse);
-		}
+        }
 
         JDFResourceLinkPool rlp = getResourceLinkPool();
         if(rlp != null) {
             v1 = rlp.getAllRefs(v1, bRecurse);
-		}
+        }
 
         // only 1.2 direct element - resources are retrieved from the ResourcePool
         JDFCustomerInfo ci = (JDFCustomerInfo)getElement(ElementName.CUSTOMERINFO);
         if(ci != null) {
             v1 = ci.getAllRefs(v1, bRecurse);
-		}
+        }
 
         // only 1.2 direct element - resources are retrieved from the ResourcePool
         JDFNodeInfo ni = (JDFNodeInfo)getElement(ElementName.NODEINFO);
         if(ni != null) {
             v1 = ni.getAllRefs(v1, bRecurse);
-		}
+        }
 
         JDFAncestorPool ap = getAncestorPool();
         if(ap != null) {
             v1 = ap.getAllRefs(v1, true);
-		}
+        }
 
         Vector vNodes = getvJDFNode(null, null, true);
         final int size = vNodes.size();
         for(int i = 0; i < size; i++) {
             v1 = ((JDFNode) vNodes.elementAt(i)).getAllRefs(v1,bRecurse);
-		}
+        }
 
         return v1;
     }
@@ -3810,7 +3810,7 @@ public class JDFNode extends JDFElement
      */
     public JDFNode unSpawn(String spawnID)
     {
-       return new JDFSpawn(this).unSpawn(spawnID);
+        return new JDFSpawn(this).unSpawn(spawnID);
     }
 
 
@@ -3884,7 +3884,7 @@ public class JDFNode extends JDFElement
     {
         return getLink(r,bInput ? EnumUsage.Input : EnumUsage.Output);
     }
-    
+
     /**
      * getLink - get the resourcelink that resides in the ResourceLinkPool of this node and references
      * the resource r
@@ -3915,7 +3915,7 @@ public class JDFNode extends JDFElement
             for (int i = 0; i < vSize; i++)
             {
                 final JDFResourceLink resLink = (JDFResourceLink) v.elementAt(i);
-    
+
                 if (resLink != null && 
                         resLink.getrRef().equals(r.getID()) && 
                         resLink.getNodeName().equals(r.getLinkString()))
@@ -4031,12 +4031,12 @@ public class JDFNode extends JDFElement
         final JDFNode root = getJDFRoot();
         if (root == null) {
             return def;
-		}
+        }
         // not in the inherited nodes, check the root node's AncestorPool
         final JDFAncestorPool ap = root.getAncestorPool();
         if (ap == null) {
-             return def;
-		}
+            return def;
+        }
         return ap.getAncestorAttribute(attrib, nameSpaceURI, def);
     }
 
@@ -4098,17 +4098,17 @@ public class JDFNode extends JDFElement
         JDFElement e=(JDFElement) getInheritedElement(element, nameSpaceURI, 0);
         if(e!=null) {
             return e;
-		}
+        }
 
         final JDFNode root = getJDFRoot();
         if(root==null) {
             return null;
-		}
+        }
         // not in the inherited nodes, check the root node's AncestorPool
         JDFAncestorPool ap=root.getAncestorPool();
         if(ap==null) {
             return null;
-		}
+        }
 
         return ap.getAncestorElement(element, nameSpaceURI, null);
     }
@@ -4447,14 +4447,14 @@ public class JDFNode extends JDFElement
         ret[0]=ret[1]=-1;
         if (rl == null) {
             return ret;
-		}
+        }
 
         // 311002 KM added nOccur for looping over combined nodes
         // TBD evaluate CombinedProcessIndex when generating nOccur
         final VString linkNames = linkNames();
         if(linkNames==null) {
             return ret;
-		}
+        }
 
         int namIndex = linkNames.indexOf(rl.getLinkedResourceName());
 
@@ -4474,7 +4474,7 @@ public class JDFNode extends JDFElement
         final VString vIndex = vLinkInfo(namIndex);
         if(vIndex==null) {
             return ret;
-		}
+        }
 
         int iLoop = 0;
         for (int i = 0; i < vIndex.size(); i++)
@@ -4707,10 +4707,10 @@ public class JDFNode extends JDFElement
         // allow call with initial null
         if(doneIndexList==null) {
             doneIndexList =new Vector();
-		}
+        }
         if(doneNameList==null) {
             doneNameList =new Vector();
-		}
+        }
 
         int nOccur = 0;
         int iIndex;
@@ -4794,7 +4794,7 @@ public class JDFNode extends JDFElement
      * see chapter 6 JDFSpec, then the links are ignored
      *
      * @param resName of the resource to remove
-    * @param bLink   if false, returns the linked resources, else if true, returns the ResourceLink elements
+     * @param bLink   if false, returns the linked resources, else if true, returns the ResourceLink elements
      * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
      * @return vector of resourcelink elements
      */
@@ -4858,12 +4858,12 @@ public class JDFNode extends JDFElement
                 // TODO ideally we would check if they are connected, but this is a sufficient 98% solution
                 if(bLink && vE != null)
                 {
-                	final Iterator vEIterator = vE.iterator();
-                	while (vEIterator.hasNext()) {
-                		JDFResourceLink rl = (JDFResourceLink) vEIterator.next();
+                    final Iterator vEIterator = vE.iterator();
+                    while (vEIterator.hasNext()) {
+                        JDFResourceLink rl = (JDFResourceLink) vEIterator.next();
                         if(rl.getPipeProtocol().equals(JDFConstants.INTERNAL))
                         {
-                        	vEIterator.remove();
+                            vEIterator.remove();
                         }
                     }
                 }
@@ -4875,12 +4875,12 @@ public class JDFNode extends JDFElement
                 // TODO ideally we would check if they are connected, but this is a sufficient 98% solution
                 if(bLink && vE != null)
                 {
-                	final Iterator vEIterator = vE.iterator();
-                	while (vEIterator.hasNext()) {
-                		JDFResourceLink rl = (JDFResourceLink) vEIterator.next();
+                    final Iterator vEIterator = vE.iterator();
+                    while (vEIterator.hasNext()) {
+                        JDFResourceLink rl = (JDFResourceLink) vEIterator.next();
                         if(JDFConstants.INTERNAL.equals(rl.getPipeProtocol()))
                         {
-                        	vEIterator.remove();
+                            vEIterator.remove();
                         }
                     }
                 }
@@ -4901,7 +4901,7 @@ public class JDFNode extends JDFElement
         final VString names = linkNames();
         if(names==null) {
             return null;
-		}
+        }
 
         if(getType().equals(EnumType.ProcessGroup.getName())){ // TODO fix processgroup with Types and gray box category entries
             return null;
@@ -4924,36 +4924,36 @@ public class JDFNode extends JDFElement
 
             if(namDone) {
                 continue; // already tested this name - vLinkInfo collects all data
-			}
+            }
 
             final VString types = vLinkInfo(i);
             if (types != null)
             {
-	            final Iterator typesIterator = types.iterator();
-	            while (typesIterator.hasNext()) {
-					String typesAt = (String) typesIterator.next();
-                if (typesAt.charAt(1) == '+' || typesAt.charAt(1) == '_')
-                {
-                    // 110602 added
-                    final EnumProcessUsage pu = getEnumProcessUsage(typesAt, 0);
-                    if (getMatchingLink((String)names.elementAt(i), pu, 0) == null)
+                final Iterator typesIterator = types.iterator();
+                while (typesIterator.hasNext()) {
+                    String typesAt = (String) typesIterator.next();
+                    if (typesAt.charAt(1) == '+' || typesAt.charAt(1) == '_')
                     {
-                        String s = names.elementAt(i) + "Link";
-
-                        if(pu != null)
+                        // 110602 added
+                        final EnumProcessUsage pu = getEnumProcessUsage(typesAt, 0);
+                        if (getMatchingLink((String)names.elementAt(i), pu, 0) == null)
                         {
-                            s += JDFConstants.COLON + pu.getName();
-                        }
+                            String s = names.elementAt(i) + "Link";
 
-                        vMissing.addElement(s);
-                        if (vMissing.size() >= nMax)
-                        {
-                            break;
+                            if(pu != null)
+                            {
+                                s += JDFConstants.COLON + pu.getName();
+                            }
+
+                            vMissing.addElement(s);
+                            if (vMissing.size() >= nMax)
+                            {
+                                break;
+                            }
                         }
                     }
                 }
             }
-        }
         }
 
         return vMissing;
@@ -5002,7 +5002,7 @@ public class JDFNode extends JDFElement
         final JDFResourceLink rl = getMatchingLink(resName, processUsage, pos);
         if (rl == null) {
             return null;
-		}
+        }
 
         if (partMap!=null && !partMap.isEmpty() && !rl.hasPartMap(partMap))
         {
@@ -5012,20 +5012,20 @@ public class JDFNode extends JDFElement
         final JDFResource r = rl.getTarget();
         if (r == null) {
             return null;
-		}
-        
+        }
+
         return r.getPartition(partMap, null);
     }
 
     /**
-    * get the link that matches the typesafe resource name<br>
-    * if the Resource type is not defined for the process represented by this node,
-    * the link is ignored (see JDF Spec Chapter 6)
+     * get the link that matches the typesafe resource name<br>
+     * if the Resource type is not defined for the process represented by this node,
+     * the link is ignored (see JDF Spec Chapter 6)
      *
-    * @param resName      name of the resource to remove
-    * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
-    * @param pos          the position of the link (if multiple matching links exist)
-    * @return JDFResourceLink - the resourcelink
+     * @param resName      name of the resource to remove
+     * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
+     * @param pos          the position of the link (if multiple matching links exist)
+     * @return JDFResourceLink - the resourcelink
      */    
     public JDFResourceLink getMatchingLink(String resName, EnumProcessUsage processUsage, int pos)
     {
@@ -5056,7 +5056,7 @@ public class JDFNode extends JDFElement
      */
     public JDFResource appendMatchingResource(String resName, EnumProcessUsage processUsage, JDFNode resourceRoot)
     {
-    	// TODO check comment for processUsage
+        // TODO check comment for processUsage
         final VString vtyp = getMatchType(resName, processUsage);
         if (vtyp==null) // anything goes
         {
@@ -5135,7 +5135,7 @@ public class JDFNode extends JDFElement
         final VString linkNames = linkNames();
         if(linkNames==null) {
             return null;
-		}
+        }
 
         int namIndex = linkNames.indexOf(resName);
         if (namIndex < 0)
@@ -5150,11 +5150,11 @@ public class JDFNode extends JDFElement
         final VString vInfo = vLinkInfo(namIndex);
         if(vInfo==null) {
             return null;
-		}
+        }
 
         if ((processUsage == null)) {
             return vInfo; // no filtering required
-		}
+        }
 
         String infoTemp = null;
         final String pu = processUsage.getName();
@@ -5264,27 +5264,27 @@ public class JDFNode extends JDFElement
         final VString vtyp   = getMatchType(resName, processUsage);
 
         if (vtyp != null) {
-        	final Iterator vtypIterator = vtyp.iterator();
-        	while (vtypIterator.hasNext()) {
-				String typ = (String) vtypIterator.next();
-            if ((typ.charAt(1) == '?') || (typ.charAt(1) == '_'))
-            {
-                if (numMatchingLinks(resName, false, processUsage) > 0)
+            final Iterator vtypIterator = vtyp.iterator();
+            while (vtypIterator.hasNext()) {
+                String typ = (String) vtypIterator.next();
+                if ((typ.charAt(1) == '?') || (typ.charAt(1) == '_'))
                 {
-                    continue; // not this one...
+                    if (numMatchingLinks(resName, false, processUsage) > 0)
+                    {
+                        continue; // not this one...
+                    }
                 }
+
+                rl = linkResource(resource,typ.charAt(0) == 'i' ? EnumUsage.Input : EnumUsage.Output,null);
+                if (typ.length() > 2)
+                {
+                    rl.setProcessUsage(EnumProcessUsage.getEnum(typ.substring(2)));
+                }
+
+                rl.setPartMap(partMap);
+
+                return rl;
             }
-
-            rl = linkResource(resource,typ.charAt(0) == 'i' ? EnumUsage.Input : EnumUsage.Output,null);
-            if (typ.length() > 2)
-            {
-                rl.setProcessUsage(EnumProcessUsage.getEnum(typ.substring(2)));
-            }
-
-            rl.setPartMap(partMap);
-
-            return rl;
-        }
         }
 
         // should only get here it the link alreay exists
@@ -5395,12 +5395,20 @@ public class JDFNode extends JDFElement
         if (eVer.getValue() >= EnumVersion.Version_1_3.getValue() || (nici == null))
         {
             JDFResourceLinkPool rlp = getResourceLinkPool();
-            if(rlp != null){
-                JDFResourceLink rl=rlp.getPoolChild(0,elementName+"Link",new JDFAttributeMap(AttributeName.USAGE,"Input"),null);
-                if(rl != null) {
-                    nici=rl.getTarget();
+            if(rlp != null)
+            {
+                VElement v=rlp.getPoolChildren(elementName+"Link",new JDFAttributeMap(AttributeName.USAGE,"Input"),null);
+                int siz=v==null ? 0 : v.size();
+                for(int i=0;i<siz;i++)
+                {
+                    JDFResourceLink rl=(JDFResourceLink) v.elementAt(i);
+                    if(!rl.hasAttribute(AttributeName.COMBINEDPROCESSINDEX) || rl.getCombinedProcessIndex().size()==getTypes().size())
+                    {
+                        nici=rl.getTarget();
+                        break;
+                    }
+                }
             }
-        }
         }
 
         // continue search if not found
@@ -5411,7 +5419,7 @@ public class JDFNode extends JDFElement
 
         if(nici!=null || ! bInherit) {
             return nici;
-		}
+        }
 
         JDFNode parent = getParentJDF();
         if(parent!=null){
@@ -5420,7 +5428,7 @@ public class JDFNode extends JDFElement
         JDFAncestorPool ap=getAncestorPool();
         if(ap!=null) {
             return ap.getAncestorElement(elementName,null,xPath);
-		}
+        }
         return null;
     }
     ///////////////////////////////////////////////////////////////////////////////////
@@ -5443,7 +5451,7 @@ public class JDFNode extends JDFElement
      */
     private KElement getCreateNiCi(String s)
     {
-        // check if this already has a Nodeinfo
+        // check if this already has a Nodeinfo/CustomerInfo
         KElement nici = getNiCi(s, false, null);
         if (nici == null)
         {
@@ -5473,6 +5481,47 @@ public class JDFNode extends JDFElement
         }
         return getCreateNodeInfo();
     }  
+    /**
+     * appends a NodeInfo for a given combinedprocessindex to this
+     * 
+     * @param combinedProcessIndex the combinedprocessindex that must be explicitly specified in the link
+     * @return the appended NodeInfo
+     * @throws JDFException if combinedProcessIndex is outside the legal range implied by @Types
+     */
+    public JDFNodeInfo appendNodeInfo(int combinedProcessIndex)
+    {
+        if(combinedProcessIndex<0 || combinedProcessIndex>=getTypes().size())
+            throw new JDFException("appendNodeInfo: appending ni for non existing ccombinedProcessIndex:"+combinedProcessIndex+" types="+getTypes());
+        if(getNodeInfo(combinedProcessIndex) !=null)
+        {
+            throw new JDFException("JDFNodeInfo.appendNodeInfo: NodeInfo already exists");
+        }
+        JDFNodeInfo ni=(JDFNodeInfo) addResource(ElementName.NODEINFO, EnumUsage.Input);
+        JDFResourceLink rl=getLink(ni, null);
+        rl.setCombinedProcessIndex(new JDFIntegerList(combinedProcessIndex));
+        return ni;
+    }  
+
+    /**
+     * gets the existing local NodeInfo if it is a resource or an element
+     * 
+     * @param combinedProcessIndex the combinedprocessindex that must be explicitly specified in the link
+     * @return the existing NodeInfo.
+     */
+    public JDFNodeInfo getNodeInfo(int combinedProcessIndex)
+    {
+        if(combinedProcessIndex<0 || combinedProcessIndex>=getTypes().size())
+            return null;
+        JDFResourceLinkPool rlp=getResourceLinkPool();
+        if(rlp==null)
+            return null;
+        JDFResourceLink rl=(JDFResourceLink) rlp.getChildWithMatchingAttribute("NodeInfoLink", AttributeName.COMBINEDPROCESSINDEX, null,String.valueOf(combinedProcessIndex), 0, true, AttributeInfo.EnumAttributeType.IntegerList);
+        if(rl==null)
+            return null;
+ 
+        return (JDFNodeInfo) rl.getTarget();
+    }
+
 
     /**
      * gets the existing local NodeInfo if it is a resource or an element
@@ -5631,8 +5680,8 @@ public class JDFNode extends JDFElement
                 rlp.removeChild(rl);
                 if(!kRet.deleteUnLinked()) {
                     kRet=null;               
-            }
-        }        
+                }
+            }        
         }
         return kRet;
     }
@@ -5715,8 +5764,8 @@ public class JDFNode extends JDFElement
         return (JDFResourceLinkPool) 
         getCreateElement_KElement(ElementName.RESOURCELINKPOOL, null, 0);
     }
-    
-    
+
+
     /**
      * Append a ResourceLinkPool element, return existing element if one already exist
      * @return the ResourceLinkPool element
@@ -5745,7 +5794,7 @@ public class JDFNode extends JDFElement
     {
         return (JDFResourcePool) getCreateElement_KElement(ElementName.RESOURCEPOOL, null, 0);
     }
-    
+
     /**
      * append a ResourcePool element, return existing element if one already exist
      * @return the ResourcePool element
@@ -5754,7 +5803,7 @@ public class JDFNode extends JDFElement
     {
         return (JDFResourcePool) appendElementN(ElementName.RESOURCEPOOL, 1, null);
     }
-    
+
     /**
      * get the first ResourcePool element
      * @return the element
@@ -5934,7 +5983,7 @@ public class JDFNode extends JDFElement
         final String types = getAttribute(AttributeName.TYPES, null, null);
         return types==null ? null : new VString(types,null);
     }
-    
+
     /**
      * get the Types as a vector of EnumType
      * @return vector of enumerated types, null if extensions exist that hinder us from generating a complete vector<br>
@@ -5942,22 +5991,22 @@ public class JDFNode extends JDFElement
      */
     public Vector getEnumTypes()
     {
-    	Vector vs=null;
+        Vector vs=null;
         VString types=getTypes();
         if (types != null) {
-	        Iterator typesIterator = types.iterator();
-	        while (typesIterator.hasNext()) {
-				EnumType typ=EnumType.getEnum((String) typesIterator.next());
-	            if (typ==null) {
-            return null;
-				}
+            Iterator typesIterator = types.iterator();
+            while (typesIterator.hasNext()) {
+                EnumType typ=EnumType.getEnum((String) typesIterator.next());
+                if (typ==null) {
+                    return null;
+                }
 
-	            if (vs == null) {
-                vs=new Vector();
+                if (vs == null) {
+                    vs=new Vector();
+                }
+
+                vs.add(typ);
             }
-
-            vs.add(typ);
-        }
         }
 
         return vs;
@@ -6012,7 +6061,7 @@ public class JDFNode extends JDFElement
                 }
                 else
                 {
-                  vs=vsTypes;// __Lena__  May contain GrayBoxes
+                    vs=vsTypes;// __Lena__  May contain GrayBoxes
                 }
             }
 
@@ -6037,7 +6086,7 @@ public class JDFNode extends JDFElement
     public void setTypes(VString vCombiNodes)
     {
         EnumType type = EnumType.getEnum(getType());
-        if (type.equals(EnumType.Combined) || type.equals(EnumType.ProcessGroup))
+        if (EnumType.Combined.equals(type) || EnumType.ProcessGroup.equals(type))
         {
             setAttribute(AttributeName.TYPES, vCombiNodes, null);
         }
@@ -6061,13 +6110,13 @@ public class JDFNode extends JDFElement
         EnumType typ = getEnumType();
         if(!EnumType.Combined.equals(typ)&&!EnumType.ProcessGroup.equals(typ)) {
             return null;
-		}
+        }
 
 
         VElement vLinks=getResourceLinks(null, null, null);
         if(vLinks==null) {
             return null;
-		}
+        }
 
         final String indexString=StringUtil.formatInteger(combinedProcessIndex);
         // loop over all links
@@ -6096,7 +6145,7 @@ public class JDFNode extends JDFElement
         EnumType typ = getEnumType();
         if(typ==null) {
             return null;
-		}
+        }
         // not combined, simpy get links from entire node 
         if(typ.equals(type))
         {
@@ -6104,22 +6153,25 @@ public class JDFNode extends JDFElement
         }
 
         // nasty - mismatching type attribute
-        if(!typ.equals(EnumType.Combined)&&!typ.equals(EnumType.ProcessGroup)) {
+        if(!typ.equals(EnumType.Combined)&&!typ.equals(EnumType.ProcessGroup)) 
+        {
             return null;
-		}
+        }
 
         // no types - this is a corrupt node
         Vector vTypes=getEnumTypes();
-        if(vTypes==null) {
+        if(vTypes==null) 
+        {
             return null;
-		}
+        }
         final int typSize=vTypes.size();
 
         // no links here at all
         VElement vLinks=getResourceLinks(null, null, null);
-        if(vLinks==null) {
+        if(vLinks==null) 
+        {
             return null;
-		}
+        }
 
         // loop over all links and remove non-matching entries
         for(int i=vLinks.size()-1;i>=0;i--)
@@ -6151,15 +6203,15 @@ public class JDFNode extends JDFElement
                                     final EnumType cpiTypeCount=(EnumType)vTypes.elementAt(k);
                                     if(cpiTypeCount.equals(type)) {
                                         nFound++;                                  
-                                }
+                                    }
                                 }
                                 bFound=nFound==nType;
                                 if(bFound) {
                                     break;
+                                }
                             }
                         }
                     }
-                }
                 }
                 // found non matching cpi - remove link
                 if(!bFound) 
@@ -6195,16 +6247,16 @@ public class JDFNode extends JDFElement
         VString types=getTypes();
         if(types==null) {
             types=new VString();
-		}
+        }
 
         final int typeSize = types.size();
         if(beforePos<0) {
             beforePos=typeSize+beforePos;
-		}
+        }
 
         if(beforePos<0) {
             beforePos=0;
-		}
+        }
 
         if(beforePos<=typeSize) // insert somehwere within the list
         {
@@ -6219,7 +6271,7 @@ public class JDFNode extends JDFElement
                     {
                         if (cpi[j]>=beforePos) {
                             cpi[j]++;
-                    }
+                        }
                     }
                     rl.setCombinedProcessIndex(new JDFIntegerList(cpi));
                 }
@@ -6505,7 +6557,7 @@ public class JDFNode extends JDFElement
         p.setType(EnumType.ProcessGroup.getName(), false);
         if (tasks != null && !tasks.equals(VString.emptyVector)) {
             p.setTypes(tasks);
-		}
+        }
         return p;
     }
 
@@ -6597,7 +6649,7 @@ public class JDFNode extends JDFElement
             KElement e=ud.getTarget(id);
             if(e instanceof JDFResource) {
                 return (JDFResource)e;
-        }
+            }
         }
 
         final JDFResourcePool p = getResourcePool();
@@ -6651,11 +6703,11 @@ public class JDFNode extends JDFElement
         JDFNode root = getJDFRoot();
         if (root == null) {
             return def;
-		}
-            JDFAncestorPool ancestorPool = root.getAncestorPool();
+        }
+        JDFAncestorPool ancestorPool = root.getAncestorPool();
         if (ancestorPool == null) {
             return def;
-		}
+        }
         return ancestorPool.getAncestorElementAttribute(element, attrib,nameSpaceURI,def);
 
     }
@@ -6728,27 +6780,27 @@ public class JDFNode extends JDFElement
 
         if (ve != null)
         {
-	        final Iterator veIterator = ve.iterator();
-	        while (veIterator.hasNext()) {
-				JDFResourceLink rl    = (JDFResourceLink) veIterator.next();
-            final String nodename    = rl.getNodeName().substring(0, rl.getNodeName().length() -4);
+            final Iterator veIterator = ve.iterator();
+            while (veIterator.hasNext()) {
+                JDFResourceLink rl    = (JDFResourceLink) veIterator.next();
+                final String nodename    = rl.getNodeName().substring(0, rl.getNodeName().length() -4);
 
-	            if (bAllNS || (vInNameSpace != null && vInNameSpace.contains(xmlnsPrefix(nodename))))
-            {
-                if(!names.contains(nodename))
+                if (bAllNS || (vInNameSpace != null && vInNameSpace.contains(xmlnsPrefix(nodename))))
                 {
-	                    if(vUnknown==null) {
-                        vUnknown=new VElement();
-						}
-
-                    vUnknown.add(rl);
-                    if(vUnknown.size()>=nMax)
+                    if(!names.contains(nodename))
                     {
-                        break;
+                        if(vUnknown==null) {
+                            vUnknown=new VElement();
+                        }
+
+                        vUnknown.add(rl);
+                        if(vUnknown.size()>=nMax)
+                        {
+                            break;
+                        }
                     }
                 }
             }
-        }
         }
 
         return vUnknown;
@@ -7081,11 +7133,11 @@ public class JDFNode extends JDFElement
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
             return null;
-		}
+        }
         final JDFMISDetails details = inheritedNodeInfo.getMISDetails();
         if(details==null) {
             return null;
-		}
+        }
         return details.getCostType();
     }
 
@@ -7097,7 +7149,7 @@ public class JDFNode extends JDFElement
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
             return null;
-		}
+        }
         return inheritedNodeInfo.getDueLevel();
     }
 
@@ -7109,7 +7161,7 @@ public class JDFNode extends JDFElement
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
             return null;
-		}
+        }
         return inheritedNodeInfo.getEnd();
     }
 
@@ -7121,7 +7173,7 @@ public class JDFNode extends JDFElement
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
             return null;
-		}
+        }
         return inheritedNodeInfo.getFirstEnd();
     }
 
@@ -7133,7 +7185,7 @@ public class JDFNode extends JDFElement
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
             return null;
-		}
+        }
         return inheritedNodeInfo.getFirstStart();
     }
 
@@ -7145,7 +7197,7 @@ public class JDFNode extends JDFElement
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
             return null;
-		}
+        }
         return inheritedNodeInfo.getIPPVersion();
     }
 
@@ -7157,7 +7209,7 @@ public class JDFNode extends JDFElement
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
             return 0;
-		}
+        }
         return inheritedNodeInfo.getJobPriority();
     }
 
@@ -7169,7 +7221,7 @@ public class JDFNode extends JDFElement
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
             return null;
-		}
+        }
         return inheritedNodeInfo.getLastEnd();
     }
 
@@ -7181,7 +7233,7 @@ public class JDFNode extends JDFElement
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
             return null;
-		}
+        }
         return inheritedNodeInfo.getLastStart();
     }
 
@@ -7193,7 +7245,7 @@ public class JDFNode extends JDFElement
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
             return JDFConstants.EMPTYSTRING;
-		}
+        }
         return inheritedNodeInfo.getNaturalLang();
     }
 
@@ -7205,7 +7257,7 @@ public class JDFNode extends JDFElement
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
             return JDFConstants.EMPTYSTRING;
-		}
+        }
         return inheritedNodeInfo.getRoute();
     }
 
@@ -7217,7 +7269,7 @@ public class JDFNode extends JDFElement
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
             return null;
-		}
+        }
         return inheritedNodeInfo.getSetupDuration();
     }
 
@@ -7229,7 +7281,7 @@ public class JDFNode extends JDFElement
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
             return null;
-		}
+        }
         return inheritedNodeInfo.getStart();
     }
 
@@ -7240,7 +7292,7 @@ public class JDFNode extends JDFElement
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
             return JDFConstants.EMPTYSTRING;
-		}
+        }
         return inheritedNodeInfo.getTargetRoute();
     }
 
@@ -7252,7 +7304,7 @@ public class JDFNode extends JDFElement
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
             return null;
-		}
+        }
         return inheritedNodeInfo.getTotalDuration();
     }
 
@@ -7264,11 +7316,11 @@ public class JDFNode extends JDFElement
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
             return null;
-		}
+        }
         final JDFMISDetails details = inheritedNodeInfo.getMISDetails();
         if(details==null) {
             return null;
-		}
+        }
         return details.getWorkType();
     }
 
@@ -7280,11 +7332,11 @@ public class JDFNode extends JDFElement
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
             return null;
-		}
+        }
         final JDFMISDetails details = inheritedNodeInfo.getMISDetails();
         if(details==null) {
             return null;
-		}
+        }
         return details.getWorkTypeDetails();
     }
 
@@ -7296,7 +7348,7 @@ public class JDFNode extends JDFElement
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
             return null;
-		}
+        }
         return inheritedNodeInfo.getBusinessInfo();
     }
 
@@ -7308,7 +7360,7 @@ public class JDFNode extends JDFElement
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
             return null;
-		}
+        }
         return inheritedNodeInfo.getEmployee();
     }
 
@@ -7320,7 +7372,7 @@ public class JDFNode extends JDFElement
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
             return null;
-		}
+        }
         return inheritedNodeInfo.getJMF(iSkip);
     }
 
@@ -7332,7 +7384,7 @@ public class JDFNode extends JDFElement
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
             return null;
-		}
+        }
         return inheritedNodeInfo.getNotificationFilter(iSkip);
     }
 
@@ -7369,7 +7421,7 @@ public class JDFNode extends JDFElement
         final JDFCustomerInfo inheritedCustomerInfo = getInheritedCustomerInfo();
         if(inheritedCustomerInfo==null) {
             return JDFConstants.EMPTYSTRING;
-		}
+        }
         return inheritedCustomerInfo.getBillingCode();
     }
 
@@ -7381,7 +7433,7 @@ public class JDFNode extends JDFElement
         final JDFCustomerInfo inheritedCustomerInfo = getInheritedCustomerInfo();
         if(inheritedCustomerInfo==null) {
             return JDFConstants.EMPTYSTRING;
-		}
+        }
         return inheritedCustomerInfo.getCustomerID();
     }
     /**
@@ -7392,7 +7444,7 @@ public class JDFNode extends JDFElement
         final JDFCustomerInfo inheritedCustomerInfo = getInheritedCustomerInfo();
         if(inheritedCustomerInfo==null) {
             return JDFConstants.EMPTYSTRING;
-		}
+        }
         return inheritedCustomerInfo.getCustomerJobName();
     }
     /**
@@ -7403,7 +7455,7 @@ public class JDFNode extends JDFElement
         final JDFCustomerInfo inheritedCustomerInfo = getInheritedCustomerInfo();
         if(inheritedCustomerInfo==null) {
             return JDFConstants.EMPTYSTRING;
-		}
+        }
         return inheritedCustomerInfo.getCustomerOrderID();
     }
     /**
@@ -7414,7 +7466,7 @@ public class JDFNode extends JDFElement
         final JDFCustomerInfo inheritedCustomerInfo = getInheritedCustomerInfo();
         if(inheritedCustomerInfo==null) {
             return JDFConstants.EMPTYSTRING;
-		}
+        }
         return inheritedCustomerInfo.getCustomerProjectID();
     }
     /**
@@ -7425,7 +7477,7 @@ public class JDFNode extends JDFElement
         final JDFCustomerInfo inheritedCustomerInfo = getInheritedCustomerInfo();
         if(inheritedCustomerInfo==null) {
             return null;
-		}
+        }
         return inheritedCustomerInfo.getCompany();
     }
     /**
@@ -7436,7 +7488,7 @@ public class JDFNode extends JDFElement
         final JDFCustomerInfo inheritedCustomerInfo = getInheritedCustomerInfo();
         if(inheritedCustomerInfo==null) {
             return null;
-		}
+        }
         return inheritedCustomerInfo.getContact(iSkip);
     }
     /**
@@ -7447,7 +7499,7 @@ public class JDFNode extends JDFElement
         final JDFCustomerInfo inheritedCustomerInfo = getInheritedCustomerInfo();
         if(inheritedCustomerInfo==null) {
             return null;
-		}
+        }
         return inheritedCustomerInfo.getCustomerMessage(iSkip);
     }
 
@@ -7529,7 +7581,7 @@ public class JDFNode extends JDFElement
 
         return getExecutablePartitions(link, minStatus);
     }
-    
+
     /**
      * Gets the executable partitions of the resource in this node (with corresponding
      * resource link). The part maps returned may be nested. If the empty part map
@@ -7657,7 +7709,7 @@ public class JDFNode extends JDFElement
 
         return new ExecPartFlags (isAvailable, isProcStatOK);
     }
-    
+
     /**
      * Class ExecPartFlags
      * 
@@ -7792,7 +7844,7 @@ public class JDFNode extends JDFElement
         {
             if(partMap!=null) {
                 matchingPartIDKeys = partMap.getKeys();
-        }
+            }
         }
         if(matchingPartIDKeys.isEmpty())
         {
@@ -7801,7 +7853,7 @@ public class JDFNode extends JDFElement
             JDFResourceLinkPool rp=getResourceLinkPool();
             if(rp!=null) {
                 vRes = rp.getInOutLinks(EnumUsage.Output, false, null,null);
-			}
+            }
 
             // get heuristic list of partidkeys from the output
             if (vRes != null && vRes.size() > 0)
@@ -7906,10 +7958,10 @@ public class JDFNode extends JDFElement
         JDFResourceLinkPool rlp=getResourceLinkPool();
         if(rlp==null) {
             return null;
-		}
+        }
         if(linkName!=null && !linkName.endsWith(JDFConstants.LINK)) {
             linkName+=JDFConstants.LINK;
-		}
+        }
 
         return rlp.getPoolChildren(linkName, mLinkAtt, linkNS);
     }
@@ -7931,10 +7983,10 @@ public class JDFNode extends JDFElement
         JDFResourceLinkPool rlp=getResourceLinkPool();
         if(rlp==null) {
             return null;
-		}
+        }
         if(linkName!=null && !linkName.endsWith(JDFConstants.LINK)) {
             linkName+=JDFConstants.LINK;
-		}
+        }
 
         return rlp.getPoolChild(index, linkName, mLinkAtt, linkNS);
     }
@@ -7966,11 +8018,11 @@ public class JDFNode extends JDFElement
         JDFResourcePool rp=getResourcePool();
         if(rp!=null) {
             rp.sortChildren();
-		}
+        }
         VElement vNode=getvJDFNode(null, null, true);
         for(int i=0;i<vNode.size();i++) {
             vNode.item(i).sortChildren();
-    }   
+        }   
     }
 
 

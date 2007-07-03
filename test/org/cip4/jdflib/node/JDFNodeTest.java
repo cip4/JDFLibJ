@@ -74,6 +74,7 @@ import java.io.File;
 import java.util.Collection;
 import java.util.List;
 import java.util.Vector;
+import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
@@ -164,7 +165,7 @@ public class JDFNodeTest extends JDFTestCaseBase
     }
 
     ///////////////////////////////////////////////////////
-    
+
     public void testSortChildren()
     {
         JDFDoc d=new JDFDoc("JDF");
@@ -188,12 +189,12 @@ public class JDFNodeTest extends JDFTestCaseBase
         xm2.setAttribute("ID","xm2");
         KElement m21=rp2.appendElement("Media");
         m21.setAttribute("ID","m1");
-        
+
         n.sortChildren();
         assertEquals("reordered sub elements",
                 n.getChildWithAttribute("JDF", "ID", null, "n1", 0, true).getNextSiblingElement(null, null), 
                 n.getChildWithAttribute("JDF", "ID", null, "n2", 0, true));
-       
+
         assertEquals(rp2.getFirstChildElement(), xm2);
         assertEquals(xm2.getNextSiblingElement(), m21);
         assertEquals(m21.getNextSiblingElement(), m22);
@@ -224,7 +225,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         n.setType(EnumType.ContactCopying);
         assertNull(n.getAttribute("Types",null,null));
     }
-    
+
     public void testSetEnum()
     {
         JDFDoc d=new JDFDoc("JDF");
@@ -335,7 +336,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         JDFResource foPa= n.addResource(ElementName.FOLDINGPARAMS, null, EnumUsage.Input, null, null, null, null);
         JDFResourceLink rlfoPa=n.getLink(foPa,null);
         assertEquals("folding is 0 and 2",rlfoPa.getCombinedProcessIndex().toString(),"0 3");
-        
+
         JDFResource cuPa= n.addResource(ElementName.CUTTINGPARAMS, null, null, null, null, null, null);
         JDFResourceLink rlCuPa=n.linkResource(cuPa,EnumUsage.Input ,null);
         assertEquals("cutting is 1",rlCuPa.getCombinedProcessIndex().toString(),"1");
@@ -448,7 +449,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertNotNull(n.getResourcePool());
         assertNotNull(n.getResourceLinkPool());
     }  
-    
+
     public void testEraseUnlinkedResources()
     {
         JDFDoc d=new JDFDoc("JDF");
@@ -465,7 +466,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertNull(rp.getUnlinkedResources());
         JDFResource rx=n.addResource("ExposedMedia", null, null, null, null, null, null);
         assertEquals(rp.getUnlinkedResources().elementAt(0), rx);
-        
+
 
         n.setVersion(EnumVersion.Version_1_2);
         JDFCustomerInfo ci=n.appendCustomerInfo();
@@ -477,18 +478,18 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertNull(rp.getUnlinkedResources());
         assertNull("didn't zapp unlinked xm",rp.getElement("ExposedMedia"));
         assertEquals(rp.getElement("Contact"), co);
-        
+
         ci.deleteNode();
         assertEquals("referenced contact accidentally zapped",rp.getUnlinkedResources().elementAt(0), co);
         n.eraseUnlinkedResources();
         assertNull("didn't zapp unlinked co",rp.getElement("Contact"));
-        
+
         JDFResource rFoo=n.addResource("FOO:Bar", EnumResourceClass.Handling, null, null, null, "www.foo.com", null);
         assertEquals(rp.getUnlinkedResources().elementAt(0), rFoo);
         JDFResourceLink rlFoo=n.linkResource(rFoo, EnumUsage.Output, null);
         assertNotNull(rlFoo);
         assertNull(rp.getUnlinkedResources());
-        
+
 
     }
 
@@ -589,8 +590,8 @@ public class JDFNodeTest extends JDFTestCaseBase
         root.setJobPartID("jpID");
         JDFNodeInfo nodeInfo = root.getCreateNodeInfo();
         nodeInfo.setAgentName("myAgent");
-		StatusUtil su=new StatusUtil(root,null,null);
-		su.setPhase(EnumNodeStatus.Waiting, "Queued", EnumDeviceStatus.Idle, null,null);
+        StatusUtil su=new StatusUtil(root,null,null);
+        su.setPhase(EnumNodeStatus.Waiting, "Queued", EnumDeviceStatus.Idle, null,null);
         JDFDoc docJMF=su.getDocJMFPhaseTime();
         JDFJMF jmf = docJMF.getJMFRoot();
         assertNotNull(jmf);
@@ -604,8 +605,8 @@ public class JDFNodeTest extends JDFTestCaseBase
         vMap.add(map);
         docJMF.write2File(sm_dirTestDataTemp+File.separator+"queued.jmf",2,true);
         Thread.sleep(1000);
-		su=new StatusUtil(root,vMap,null);
-		su.setPhase(EnumNodeStatus.Setup, "Setup", EnumDeviceStatus.Setup, null,null);
+        su=new StatusUtil(root,vMap,null);
+        su.setPhase(EnumNodeStatus.Setup, "Setup", EnumDeviceStatus.Setup, null,null);
 
         docJMF=su.getDocJMFPhaseTime();
         pt= ap.getLastPhase(vMap);
@@ -617,8 +618,8 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertEquals(jmf.numChildElements(ElementName.SIGNAL,null),1);
         docJMF.write2File(sm_dirTestDataTemp+File.separator+"setup.jmf",2,true);        
         Thread.sleep(1000);
-		su=new StatusUtil(root,vMap,null);
-		su.setPhase(EnumNodeStatus.InProgress, "Run", EnumDeviceStatus.Running, null,null);
+        su=new StatusUtil(root,vMap,null);
+        su.setPhase(EnumNodeStatus.InProgress, "Run", EnumDeviceStatus.Running, null,null);
 
         docJMF=su.getDocJMFPhaseTime();
         pt=(JDFPhaseTime) ap.getAudit(-1, EnumAuditType.PhaseTime, null,null);
@@ -629,8 +630,8 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertNotNull(jmf);
         assertEquals(jmf.numChildElements(ElementName.SIGNAL,null),2);        docJMF.write2File(sm_dirTestDataTemp+File.separator+"inprogress.jmf",2,true);
         Thread.sleep(1000);
-		su=new StatusUtil(root,vMap,null);
-		su.setPhase(EnumNodeStatus.InProgress, "Run", EnumDeviceStatus.Running, null,null);
+        su=new StatusUtil(root,vMap,null);
+        su.setPhase(EnumNodeStatus.InProgress, "Run", EnumDeviceStatus.Running, null,null);
 
         docJMF=su.getDocJMFPhaseTime();
         pt=(JDFPhaseTime) ap.getAudit(-1, EnumAuditType.PhaseTime, null,null);
@@ -642,8 +643,8 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertEquals(jmf.numChildElements(ElementName.SIGNAL,null),1);        docJMF.write2File(sm_dirTestDataTemp+File.separator+"inprogress2.jmf",2,true);
 
         root.getCreateAncestorPool().setPartMapVector(vMap);
-		su=new StatusUtil(root,null,null);
-		su.setPhase(EnumNodeStatus.InProgress, "Run", EnumDeviceStatus.Running, null,null);
+        su=new StatusUtil(root,null,null);
+        su.setPhase(EnumNodeStatus.InProgress, "Run", EnumDeviceStatus.Running, null,null);
         docJMF=su.getDocJMFPhaseTime();
         pt=(JDFPhaseTime) ap.getAudit(-1, EnumAuditType.PhaseTime, null,null);
         assertEquals(pt.getStatus(),EnumNodeStatus.InProgress);
@@ -773,9 +774,9 @@ public class JDFNodeTest extends JDFTestCaseBase
             assertTrue ("Size of vamExec[0] must be 1", am0.size() == 1);
             assertTrue (am0.containsKey   ("Run"));
             assertTrue (am0.containsValue ("Chf06181149500001"));
-    
+
             JDFAttributeMap am1 = vamExec.elementAt (1);
-    
+
             assertTrue ("Size of vamExec[1] must be 1", am1.size() == 1);
             assertTrue (am1.containsKey   ("Run"));
             assertTrue (am1.containsValue ("Chf06181154470000"));
@@ -853,11 +854,11 @@ public class JDFNodeTest extends JDFTestCaseBase
         JDFNode spawnedNode=spawn.spawn();
         assertNotNull(spawnedNode);
         assertEquals(spawnedNode.getAncestorPool().getPartMapVector(), vTest);
-        
+
     }
-    
+
     /////////////////////////////////////////////////////////////////////////
-    
+
     public void testNullPointerException()
     {
         List LcleanUpMerge = JDFNode.EnumCleanUpMerge.getEnumList();
@@ -946,8 +947,8 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertFalse(node.isGroupNode());
         node.setType(EnumType.ConventionalPrinting);
         assertFalse(node.isGroupNode());
-     }    
-    
+    }    
+
     //////////////////////////////////////////////
 
     public void testIsExecutable()
@@ -959,7 +960,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         node.setStatus(EnumNodeStatus.Ready);
 
         assertFalse("no links, no execute",node.isExecutable(null, true));
-        
+
         // simple non-partitioned case
         JDFNodeInfo n=node.appendNodeInfo();
         assertTrue("ni resource",n.hasAttribute(AttributeName.CLASS));
@@ -987,13 +988,13 @@ public class JDFNodeTest extends JDFTestCaseBase
         rl.setDraftOK(true);
         exec=node.isExecutable(null,false);
         assertFalse("exec",exec);
-        
-        
+
+
         xm.setResStatus(EnumResStatus.Draft,true);
         exec=node.isExecutable(null,false);
         assertTrue("exec",exec);
         xm.setResStatus(EnumResStatus.Available,true);
-        
+
 
         // now a partition
         convPrintParams.setPartUsage(EnumPartUsage.Implicit);
@@ -1164,7 +1165,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         n.appendMatchingResource(ElementName.CONVENTIONALPRINTINGPARAMS,EnumProcessUsage.AnyInput,null);
         n.appendMatchingResource(ElementName.COMPONENT,EnumProcessUsage.AnyOutput,null);
         n.appendMatchingResource(ElementName.EXPOSEDMEDIA,EnumProcessUsage.Plate,null);
-        
+
         assertTrue("valid node",n.isValid(EnumValidationLevel.Incomplete));
     }   
 
@@ -1246,9 +1247,9 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertNotNull(r);
         assertEquals(r.getNodeName(),"foo"); 
     }
-    
+
     //////////////////////////////////////////////////////////////////////////
-    
+
     public void testAppendMatchingResource()
     {
         JDFDoc d=new JDFDoc("JDF");
@@ -1334,6 +1335,28 @@ public class JDFNodeTest extends JDFTestCaseBase
     }
 
     //////////////////////////////////////////////////////////////
+    
+    public void testGetNodeInfo() throws DataFormatException
+    {
+        JDFDoc d=new JDFDoc("JDF");
+        JDFNode n=d.getJDFRoot();
+        n.setType(JDFNode.EnumType.ProcessGroup);
+        n.setTypes(new VString("a b c",null));
+        JDFNodeInfo n2=n.appendNodeInfo();
+        JDFResourceLink rl=n.getLink(n2, null);
+        rl.setCombinedProcessIndex(new JDFIntegerList("1 2"));
+        final JDFAttributeMap map = new JDFAttributeMap("SheetName","S1");
+        n.setPartStatus(map, EnumNodeStatus.FailedTestRun);
+        assertNotNull(n.getNodeInfo());
+        assertNotSame(n2, n.getNodeInfo());
+        assertEquals(n2, n.getNodeInfo(1));
+        assertEquals(n2, n.getNodeInfo(2));
+        assertNull(n.getNodeInfo(0));
+        assertNull(n.getNodeInfo(3));
+                      assertEquals(n.getPartStatus(map), EnumNodeStatus.FailedTestRun);
+    }
+    
+    //////////////////////////////////////////////////////////////
     public void testGetParentJDF()
     {
         {
@@ -1383,7 +1406,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         VString types=new VString();
         types.add("foo");
         types.add("bar");
-  
+
         JDFNode n2 =root.addCombined(types);
         assertEquals(n2.getActivation(true), EnumActivation.Active);
         assertNull(n2.getActivation(false));
@@ -1393,14 +1416,14 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertEquals(root.getActivation(false), EnumActivation.Inactive);
         assertEquals(n2.getActivation(true), EnumActivation.Inactive);
         assertNull(n2.getActivation(false));
-        
+
         n2.setActivation(EnumActivation.Active);
         assertEquals(n2.getActivation(true), EnumActivation.Inactive);
         assertEquals(n2.getActivation(false), EnumActivation.Active);
     }
-    
+
     //////////////////////////////////////////////////////////////
-    
+
     public void testGetAllTypes()
     {
         JDFDoc doc = new JDFDoc("JDF");
@@ -1426,7 +1449,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         VString types2=new VString(types);
         types2.insertElementAt("fooBar2",0);
         assertEquals(root.getAllTypes(),types2);
-        
+
         root.removeAttribute("Types");
 
         JDFNode n2 =root.addCombined(types);
@@ -1478,8 +1501,8 @@ public class JDFNodeTest extends JDFTestCaseBase
         JDFNode p11=p1.addJDFNode(EnumType.Product);
         assertEquals(root.getJobPart("p0.1.1", null), p11);
         assertEquals(p1.getJobPart("p0.1.1", null), p11);
-     }
-    
+    }
+
     public void testGetChildJDFNode()
     {
         JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -1499,7 +1522,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertEquals(root.getChildJDFNode("I11", false), p11);
         assertEquals(p1.getChildJDFNode("I11", true), p11);
         assertEquals(p1.getChildJDFNode("I11", false), p11);
-     }
+    }
 
     public void testGetLink()
     {
@@ -1507,17 +1530,17 @@ public class JDFNodeTest extends JDFTestCaseBase
         JDFNode root = doc.getJDFRoot();
         root.setType(EnumType.ImageSetting);
         {
-        JDFResource r=root.addResource("foo:res", EnumResourceClass.Parameter, EnumUsage.Input, null, null, "www.foo.com", null);
-        JDFResourceLink rl=root.getLink(r, null);
-        assertNotNull(rl);
+            JDFResource r=root.addResource("foo:res", EnumResourceClass.Parameter, EnumUsage.Input, null, null, "www.foo.com", null);
+            JDFResourceLink rl=root.getLink(r, null);
+            assertNotNull(rl);
         }
         {
-        JDFResource r=root.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, null, null, null);
-        JDFResourceLink rl=root.getLink(r, null);
-        assertNotNull(rl);
+            JDFResource r=root.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, null, null, null);
+            JDFResourceLink rl=root.getLink(r, null);
+            assertNotNull(rl);
         }
     }
-   //////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
     public void testGetResourceLinks()
     {
         JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -1577,10 +1600,10 @@ public class JDFNodeTest extends JDFTestCaseBase
             {
                 assertNotSame("only updated run=1",root.getPartStatus(map21),EnumNodeStatus.InProgress);               
             }
-            
+
         }
     }    
-    
+
     //////////////////////////////////////////////////////////////
 
     public void testStatusPartMapVector()
@@ -1607,12 +1630,12 @@ public class JDFNodeTest extends JDFTestCaseBase
             assertEquals(vMapIn,vMap);
         }
     }
-    
-    
-        //////////////////////////////////////////////////////////////
 
-        public void testGetLinksForType()
-        {
+
+    //////////////////////////////////////////////////////////////
+
+    public void testGetLinksForType()
+    {
         JDFDoc doc= new JDFDoc("JDF");
         JDFNode root = doc.getJDFRoot();
 
@@ -1752,7 +1775,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         root.setType(EnumType.Product);
         VString vs=root.getMissingLinkVector(999);
         assertTrue(vs.contains(ElementName.COMPONENT+"Link:AnyOutput"));
-        
+
         root.addJDFNode(EnumType.ProcessGroup);
         root.appendMatchingResource("Employee", EnumProcessUsage.AnyInput, null);
         vs=root.getMissingLinkVector(999);
@@ -1770,7 +1793,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertNull(vs);
 
         root.addResource(ElementName.FOLDINGPARAMS, null, EnumUsage.Input, null, null, null, null);
-        
+
         vs=root.getUnknownLinkVector(null,999);
         assertTrue(vs.elementAt(0) instanceof JDFResourceLink);
         assertEquals(((JDFResourceLink)vs.elementAt(0)).getLocalName(),"FoldingParamsLink");
@@ -1794,7 +1817,7 @@ public class JDFNodeTest extends JDFTestCaseBase
     //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////
-   //////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////

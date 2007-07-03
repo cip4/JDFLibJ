@@ -6089,8 +6089,9 @@ public class KElement extends ElementNSImpl
     }
 
     /**
-     * check whether this matches a simple xpath
-     * @param path xpath to match
+     * check whether this element matches a simple xpath
+     * @param path xpath to match may include syntax <code>e[i]</code> or <code>e[@a="b"]</code>
+     * 
      * @return boolean true, if this matches the given xpath
      */
     public boolean matchesPath(String path, boolean bFollowRefs)
