@@ -310,11 +310,17 @@ public class StringUtil
         return buf.toString();
     }
 
-    // n > 0    substring(0, n)             take the first n chars (leftmost)
-    // n < 0    substring(0, s.length()+n)  take the string and cut n chars on the right
-    // example:    string = "abcdefgh"
-    //    string.leftStr( 2) = "ab"
-    //    string.leftStr(-3) = "abcde"
+    /**
+     * n > 0    substring(0, n)             take the first n chars (leftmost)
+     * n < 0    substring(0, s.length()+n)  take the string and cut n chars on the right
+     * example:    string = "abcdefgh"
+     *   string.leftStr( 2) = "ab"
+     *   string.leftStr(-3) = "abcde"
+     * 
+     * @param strWork the string to work on
+     * @param n number of characters to cut (negative) or retain (positive)
+     * @return the modified string
+     */
     public static String leftStr(String strWork, int n)
     {
         if(strWork==null)
@@ -323,20 +329,24 @@ public class StringUtil
         {
             n = strWork.length() + n;
         }
-
         if (n <= 0)
         {
             return null;
         }
-
         return strWork.substring(0, n <= strWork.length() ? n : strWork.length());
     }
 
-    // n > 0    str.substring(str.length() - n)   take the rightmost n chars
-    // n < 0    substring(-n)                     take the string and cut n chars on the left
-    // example:    string = "abcdefgh"
-    //    string.rightStr( 2) = "gh"
-    //    string.rightStr(-3) = "defgh"
+    /**
+     * get the end of a string
+     n > 0    str.substring(str.length() - n)   take the rightmost n chars
+     n < 0    substring(-n)                     take the string and cut n chars on the left
+     example:    string = "abcdefgh"
+        string.rightStr( 2) = "gh"
+        string.rightStr(-3) = "defgh"
+     * @param strWork the string to work on
+     * @param n number of characters to cut (negative) or retain (positive)
+     * @return the modified string
+     */
     public static String rightStr(String strWork, int n)
     {
         if(strWork==null)
@@ -350,12 +360,10 @@ public class StringUtil
         {
             return null;
         }
-
         if (n > strWork.length())
         {
             return strWork;
         }
-
         return strWork.substring(strWork.length() - n);
     }
 
@@ -517,7 +525,7 @@ public class StringUtil
             return null;
         if(offset>strWork.length())
             return strWork;
-        
+
         StringBuffer b = new StringBuffer(strWork.length()*2);
         int lastPos=offset;
         b.append(strWork.substring(0, offset));
@@ -538,8 +546,8 @@ public class StringUtil
         }
 
         return b.toString();
-     }
-    
+    }
+
     /**
      * replace a string in a given String
      * <p>
