@@ -590,7 +590,7 @@ public class JDFElementTest extends TestCase
         JDFDoc doc      = new JDFDoc("Test"); // make sure we call jdf methods
         KElement root=doc.getRoot();
         KElement a=root.appendElement("a");
-        KElement b=root.appendElement("b");
+        root.appendElement("b");
         KElement a2=root.appendElement("a");
         KElement a3=root.appendElement("a");
         a.setAttribute("att", "42");

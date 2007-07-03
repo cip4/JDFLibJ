@@ -16,7 +16,6 @@ import java.util.Map;
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoComChannel;
-import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.util.StringUtil;
 

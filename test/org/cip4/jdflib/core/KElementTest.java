@@ -364,7 +364,7 @@ public class KElementTest extends JDFTestCaseBase
         XMLDoc doc      = new XMLDoc("Test","www.test.com");
         KElement root=doc.getRoot();
         KElement a=root.appendElement("a");
-        KElement b=root.appendElement("b");
+        root.appendElement("b");
         KElement a2=root.appendElement("a");
         KElement a3=root.appendElement("a");
         KElement c=root.appendElement("ns:c","www.c.com");
