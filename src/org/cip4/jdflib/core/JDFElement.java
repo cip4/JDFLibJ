@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -2363,12 +2363,20 @@ public class JDFElement extends KElement
         }
         else if ((strName==null)||strName.equals(JDFConstants.EMPTYSTRING))
         {
-            strName = getIDPrefix() + uniqueID(0);
+            String local="";
+            final JDFNode n=getJDFRoot();
+            if(n!=null)
+            {
+                local=n.getSpawnID(true);
+                local="."+StringUtil.rightStr(local, 6)+".";
+            }
+            strName = getIDPrefix() + local+uniqueID(0);
         }
         setAttribute(AttributeName.ID, strName, null);
 
         return strName;
     }
+
 
     /**
      * create a node with the current local time in ISO format
