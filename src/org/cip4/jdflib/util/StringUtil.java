@@ -317,6 +317,8 @@ public class StringUtil
     //    string.leftStr(-3) = "abcde"
     public static String leftStr(String strWork, int n)
     {
+        if(strWork==null)
+            return null;
         if (n < 0)
         {
             n = strWork.length() + n;
@@ -324,7 +326,7 @@ public class StringUtil
 
         if (n <= 0)
         {
-            return JDFConstants.EMPTYSTRING;
+            return null;
         }
 
         return strWork.substring(0, n <= strWork.length() ? n : strWork.length());
@@ -337,6 +339,8 @@ public class StringUtil
     //    string.rightStr(-3) = "defgh"
     public static String rightStr(String strWork, int n)
     {
+        if(strWork==null)
+            return null;
         if (n < 0)
         {
             n = strWork.length()+n;
@@ -344,7 +348,7 @@ public class StringUtil
 
         if(n <= 0)
         {
-            return JDFConstants.EMPTYSTRING;
+            return null;
         }
 
         if (n > strWork.length())

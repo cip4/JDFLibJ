@@ -343,6 +343,28 @@ public class StringUtilTest extends JDFTestCaseBase
         assertEquals(StringUtil.replaceCharSet("abbcc", "ab","_", 0), "___cc");
         assertEquals(StringUtil.replaceCharSet("abbcc", "ab","_", 2), "ab_cc");
     }
+//////////////////////////////////////////////////////////////
+    
+    public void testRightString()
+    {
+        assertEquals(StringUtil.rightStr("abbcc",2), "cc");
+        assertEquals(StringUtil.rightStr("abbcc",-3), "cc");
+        assertNull(StringUtil.rightStr("abbcc",-5));
+        assertNull(StringUtil.rightStr(null,-5));
+        assertNull(StringUtil.rightStr("abc",-55));
+    }
+
+//////////////////////////////////////////////////////////////
+    
+    public void testLeftString()
+    {
+        assertEquals(StringUtil.leftStr("abbcc",2), "ab");
+        assertEquals(StringUtil.leftStr("abbcc",-2), "abb");
+        assertNull(StringUtil.leftStr("abbcc",-5));
+        assertNull(StringUtil.leftStr(null,-5));
+        assertNull(StringUtil.leftStr("abc",-55));
+    }
+//////////////////////////////////////////////////////////////
 
     public void testParseDouble()
     {
