@@ -75,6 +75,7 @@ import java.util.List;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -88,6 +89,7 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
@@ -519,6 +521,45 @@ public class JDFSpawnTest extends JDFTestCaseBase
         }
     }
         
+    ///////////////////////////////////////////////////////////
+
+    public void testSpawnParallel()
+    {
+        JDFNode[] aSpawned=new JDFNode[3];
+        JDFDoc d=JDFResourceTest.creatXMDoc();
+        JDFNode n=d.getJDFRoot();
+        for(int i=0;i<3;i++)
+        {
+            VJDFAttributeMap vPartMap=new VJDFAttributeMap();
+            JDFAttributeMap map=new JDFAttributeMap();
+            map.put("SignatureName","Sig1");
+            map.put("SheetName","S"+i);
+            vPartMap.add(map);
+
+            final JDFSpawn spawn=new JDFSpawn(n); // fudge to test output counting}
+            spawn.vSpawnParts=vPartMap;
+            aSpawned[i]=spawn.spawn();           
+        }
+        for(int i=0;i<3;i++)
+        {
+            JDFElement.uniqueID(100);
+            JDFAuditPool ap=aSpawned[i].getCreateAuditPool();
+            for(int j=0;j<100;j++)
+                ap.addNotification(EnumClass.Error, null, null);
+        }       
+        JDFElement.uniqueID(300);
+        for(int i=0;i<3;i++)
+        {
+            final JDFMerge merge = new JDFMerge(n);
+            merge.bAddMergeToProcessRun=true;
+            
+            // merge here
+            JDFNode mergedNode=merge.mergeJDF(aSpawned[i], "merged", JDFNode.EnumCleanUpMerge.None, EnumAmountMerge.UpdateLink);
+            
+            assertNull(mergedNode.getMultipleIDs("ID"));
+         }       
+    }
+    
     ///////////////////////////////////////////////////////////
 
     public void testSpawnPart()
