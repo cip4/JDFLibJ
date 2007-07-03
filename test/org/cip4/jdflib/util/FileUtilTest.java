@@ -91,6 +91,7 @@ public class FileUtilTest extends JDFTestCaseBase
     public void testListFiles() throws Exception
     {
          File f=new File(sm_dirTestDataTemp+"/foo");
+         f.mkdir(); // make sure we have one
          assertTrue(FileUtil.deleteAll(f));
          assertTrue(f.mkdir());
          
