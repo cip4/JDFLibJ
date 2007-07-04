@@ -76,6 +76,7 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.VString;
     /*
     *****************************************************************************
     class JDFAutoStation : public JDFElement
@@ -91,7 +92,7 @@ public abstract class JDFAutoStation extends JDFElement
     private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ASSEMBLYID, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
         atrInfoTable[1] = new AtrInfoTable(AttributeName.STATIONAMOUNT, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, "1");
         atrInfoTable[2] = new AtrInfoTable(AttributeName.STATIONNAME, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
     }
@@ -158,24 +159,27 @@ public abstract class JDFAutoStation extends JDFElement
  */
         
         /* ---------------------------------------------------------------------
-        Methods for Attribute AssemblyID
+        Methods for Attribute AssemblyIDs
         --------------------------------------------------------------------- */
         /**
-          * (36) set attribute AssemblyID
+          * (36) set attribute AssemblyIDs
           * @param value: the value to set the attribute to
           */
-        public void setAssemblyID(String value)
+        public void setAssemblyIDs(VString value)
         {
-            setAttribute(AttributeName.ASSEMBLYID, value, null);
+            setAttribute(AttributeName.ASSEMBLYIDS, value, null);
         }
 
         /**
-          * (23) get String attribute AssemblyID
-          * @return the value of the attribute
+          * (21) get VString attribute AssemblyIDs
+          * @return VString the value of the attribute
           */
-        public String getAssemblyID()
+        public VString getAssemblyIDs()
         {
-            return getAttribute(AttributeName.ASSEMBLYID, null, JDFConstants.EMPTYSTRING);
+            VString vStrAttrib = new VString();
+            String  s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFConstants.EMPTYSTRING);
+            vStrAttrib.setAllStrings(s, " ");
+            return vStrAttrib;
         }
 
         

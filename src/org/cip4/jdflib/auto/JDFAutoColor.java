@@ -106,25 +106,26 @@ public abstract class JDFAutoColor extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[16];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[17];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.MAPPINGSELECTION, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumMappingSelection.getEnum(0), "UsePDLValues");
         atrInfoTable[1] = new AtrInfoTable(AttributeName.NAME, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.CMYK, 0x33333333, AttributeInfo.EnumAttributeType.CMYKColor, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.COLORBOOK, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.COLORBOOKENTRY, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.COLORBOOKPREFIX, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.COLORBOOKSUFFIX, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.COLORNAME, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.COLORTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumColorType.getEnum(0), null);
-        atrInfoTable[9] = new AtrInfoTable(AttributeName.DENSITY, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[10] = new AtrInfoTable(AttributeName.LAB, 0x33333333, AttributeInfo.EnumAttributeType.LabColor, null, null);
-        atrInfoTable[11] = new AtrInfoTable(AttributeName.MEDIATYPE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[12] = new AtrInfoTable(AttributeName.NEUTRALDENSITY, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[13] = new AtrInfoTable(AttributeName.RAWNAME, 0x33333311, AttributeInfo.EnumAttributeType.hexBinary, null, null);
-        atrInfoTable[14] = new AtrInfoTable(AttributeName.SRGB, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[15] = new AtrInfoTable(AttributeName.USEPDLALTERNATECS, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.ACTUALCOLORNAME, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.CMYK, 0x33333333, AttributeInfo.EnumAttributeType.CMYKColor, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.COLORBOOK, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.COLORBOOKENTRY, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.COLORBOOKPREFIX, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.COLORBOOKSUFFIX, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.COLORNAME, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[9] = new AtrInfoTable(AttributeName.COLORTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumColorType.getEnum(0), null);
+        atrInfoTable[10] = new AtrInfoTable(AttributeName.DENSITY, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[11] = new AtrInfoTable(AttributeName.LAB, 0x33333333, AttributeInfo.EnumAttributeType.LabColor, null, null);
+        atrInfoTable[12] = new AtrInfoTable(AttributeName.MEDIATYPE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[13] = new AtrInfoTable(AttributeName.NEUTRALDENSITY, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[14] = new AtrInfoTable(AttributeName.RAWNAME, 0x33333311, AttributeInfo.EnumAttributeType.hexBinary, null, null);
+        atrInfoTable[15] = new AtrInfoTable(AttributeName.SRGB, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[16] = new AtrInfoTable(AttributeName.USEPDLALTERNATECS, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
     }
     
     protected AttributeInfo getTheAttributeInfo()
@@ -353,6 +354,28 @@ public abstract class JDFAutoColor extends JDFResource
         public String getName()
         {
             return getAttribute(AttributeName.NAME, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ActualColorName
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute ActualColorName
+          * @param value: the value to set the attribute to
+          */
+        public void setActualColorName(String value)
+        {
+            setAttribute(AttributeName.ACTUALCOLORNAME, value, null);
+        }
+
+        /**
+          * (23) get String attribute ActualColorName
+          * @return the value of the attribute
+          */
+        public String getActualColorName()
+        {
+            return getAttribute(AttributeName.ACTUALCOLORNAME, null, JDFConstants.EMPTYSTRING);
         }
 
         

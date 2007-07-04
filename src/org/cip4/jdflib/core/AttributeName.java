@@ -1707,4 +1707,5 @@ public final class AttributeName
     public static final String PRINTTRAPANNOTATIONS = "PrintTrapAnnotations";
 	public static final String ERRORURL = "ErrorURL";
 	public static final String FIXEXPRESSION = "FixExpression";
+	public static final String ACTUALCOLORNAME = "ActualColorName";
 }
