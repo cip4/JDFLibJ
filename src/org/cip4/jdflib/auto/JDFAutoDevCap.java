@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -86,6 +81,7 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 import org.cip4.jdflib.resource.devicecapability.JDFLoc;
     /*
     *****************************************************************************
@@ -102,7 +98,7 @@ public abstract class JDFAutoDevCap extends JDFElement
     private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.AVAILABILITY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumAvailability.getEnum(0), null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.AVAILABILITY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, JDFDeviceCap.EnumAvailability.getEnum(0), null);
         atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVCAPREFS, 0x33333111, AttributeInfo.EnumAttributeType.IDREFS, null, null);
         atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVNS, 0x33333331, AttributeInfo.EnumAttributeType.URI, null, "http://www.CIP4.org/JDFSchema_1_1");
         atrInfoTable[3] = new AtrInfoTable(AttributeName.ID, 0x33333111, AttributeInfo.EnumAttributeType.ID, null, null);
@@ -181,54 +177,6 @@ public abstract class JDFAutoDevCap extends JDFElement
     }
 
 
-        /**
-        * Enumeration strings for Availability
-        */
-
-        public static class EnumAvailability extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
-
-            private EnumAvailability(String name)
-            {
-                super(name, m_startValue++);
-            }
-
-            public static EnumAvailability getEnum(String enumName)
-            {
-                return (EnumAvailability) getEnum(EnumAvailability.class, enumName);
-            }
-
-            public static EnumAvailability getEnum(int enumValue)
-            {
-                return (EnumAvailability) getEnum(EnumAvailability.class, enumValue);
-            }
-
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumAvailability.class);
-            }
-
-            public static List getEnumList()
-            {
-                return getEnumList(EnumAvailability.class);
-            }
-
-            public static Iterator iterator()
-            {
-                return iterator(EnumAvailability.class);
-            }
-
-            public static final EnumAvailability Installed = new EnumAvailability("Installed");
-            public static final EnumAvailability Module = new EnumAvailability("Module");
-            public static final EnumAvailability NotInstalled = new EnumAvailability("NotInstalled");
-            public static final EnumAvailability NotLicensed = new EnumAvailability("NotLicensed");
-            public static final EnumAvailability Disabled = new EnumAvailability("Disabled");
-        }      
-
-
-
 /* ************************************************************************
  * Attribute getter / setter
  * ************************************************************************
@@ -241,7 +189,7 @@ public abstract class JDFAutoDevCap extends JDFElement
           * (5) set attribute Availability
           * @param enumVar: the enumVar to set the attribute to
           */
-        public void setAvailability(EnumAvailability enumVar)
+        public void setAvailability(JDFDeviceCap.EnumAvailability enumVar)
         {
             setAttribute(AttributeName.AVAILABILITY, enumVar.getName(), null);
         }
@@ -250,9 +198,9 @@ public abstract class JDFAutoDevCap extends JDFElement
           * (9) get attribute Availability
           * @return the value of the attribute
           */
-        public EnumAvailability getAvailability()
+        public JDFDeviceCap.EnumAvailability getAvailability()
         {
-            return EnumAvailability.getEnum(getAttribute(AttributeName.AVAILABILITY, null, null));
+            return JDFDeviceCap.EnumAvailability.getEnum(getAttribute(AttributeName.AVAILABILITY, null, null));
         }
 
         

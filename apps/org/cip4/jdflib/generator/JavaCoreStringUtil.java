@@ -281,6 +281,8 @@ public class JavaCoreStringUtil
 					enumType = "EnumVersion";
 				} else if ("UpdatedStatus".equals(attributeName)) {
 					enumType = "JDFResource.EnumResStatus";
+				} else if ("Availability".equals(attributeName)) {
+					enumType = "JDFDeviceCap.EnumAvailability";
 				} else if ("LinkUsage".equals(attributeName)) {
 					enumType = "JDFResourceLink.EnumUsage";
 				} else if ("Usage".equals(attributeName) && "ResourceInfo".equals(complexTypeName)) {
@@ -595,6 +597,7 @@ public class JavaCoreStringUtil
             if (useEnumAttribute(schemaAttribute.getIsEnum(), attributeName)
                     && !"MaxVersion".equals(attributeName)
                     && !"UpdatedStatus".equals(attributeName)
+                    && !"Availability".equals(attributeName)
                     && !"LinkUsage".equals(attributeName)
                     && !("Usage".equals(attributeName) && "ResourceInfo".equals(complexTypeName))
                     && !("Usage".equals(attributeName) && "ResourceQuParams".equals(complexTypeName))
@@ -768,6 +771,10 @@ public class JavaCoreStringUtil
                 else if ("UpdatedStatus".equals(attributeName))
                 {
                     modifiedAttributeTypeName = "JDFResource.EnumResStatus";
+                }
+                else if ("Availability".equals(attributeName))
+                {
+                    modifiedAttributeTypeName = "JDFDeviceCap.EnumAvailability";
                 }
                 else if ("LinkUsage".equals(attributeName))
                 {
