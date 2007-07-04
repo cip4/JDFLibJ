@@ -719,6 +719,7 @@ public class KElement extends ElementNSImpl
                 {
                     bDirty = true;
                     super.setAttributeNS(AttributeName.XMLNSURI, key, value);
+                    ((DocumentJDFImpl)getOwnerDocument()).setIgnoreNSDefault(false); 
                 }
             }
             else
@@ -1189,7 +1190,7 @@ public class KElement extends ElementNSImpl
 				}
             }
 
-            strNamespaceURI = getAttribute(AttributeName.XMLNS);
+            strNamespaceURI = getAttribute(AttributeName.XMLNS,null,null);
             if (strNamespaceURI != null) {
 				return strNamespaceURI;
 			}
@@ -1285,7 +1286,7 @@ public class KElement extends ElementNSImpl
             }
             parent=parent.getParentNode_KElement();
         }
-
+ 
         final String nsuri;
 
         if (s != null)
@@ -1299,6 +1300,12 @@ public class KElement extends ElementNSImpl
         if(nsuri!=null) // we found a valid nsuri so we might as well set it for this
         {
             namespaceURI=nsuri;
+        }
+        else if(s==null)
+        {
+            // ran into root and no default ns found - ciao from now on
+            ((DocumentJDFImpl)getOwnerDocument()).setIgnoreNSDefault(true); 
+
         }
         return nsuri;
     }
@@ -2175,6 +2182,7 @@ public class KElement extends ElementNSImpl
      * @param depth           which one you want to have (in order of appearance)
      *
      * @return KElement     the first ancestor node with name nodeName
+     * @deprectated - loop over the single node method
      */
     public KElement getDeepParent(Vector vParentElement, int depth)
     {

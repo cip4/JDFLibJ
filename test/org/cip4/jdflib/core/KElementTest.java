@@ -1617,10 +1617,10 @@ public class KElementTest extends JDFTestCaseBase
     }
     public void testParseAppendChild()
     {
-        String s="<e xmlns:foo=\"www.foo.com\"><e2/></e>";
+        String s="<e xmlns=\"a\" xmlns:foo=\"www.foo.com\"><e2/></e>";
         JDFParser p=new JDFParser();
         p.bKElementOnly=true;
-        p.ignoreNSDefault=true;
+        p.ignoreNSDefault=false;
 
         XMLDoc d=p.parseString(s);
         KElement e=d.getRoot();
@@ -1664,6 +1664,7 @@ public class KElementTest extends JDFTestCaseBase
         KElement bar=foo.appendElement("bar");
         assertNull(bar.getNamespaceURI());
         bar.setAttribute("xmlns", "www.bar.com");
+       
         KElement bar2=bar.appendElement("bar");
         assertEquals(bar2.getNamespaceURI(), "www.bar.com");              
 

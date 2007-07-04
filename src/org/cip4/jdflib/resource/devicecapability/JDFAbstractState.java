@@ -89,7 +89,6 @@ import java.util.zip.DataFormatException;
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
-import org.cip4.jdflib.auto.JDFAutoDevCap.EnumAvailability;
 import org.cip4.jdflib.auto.JDFAutoDevCaps.EnumContext;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -107,6 +106,9 @@ import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFNameRangeList;
 import org.cip4.jdflib.datatypes.JDFRangeList;
+import org.cip4.jdflib.ifaces.IModuleCapability;
+import org.cip4.jdflib.jmf.JDFMessageService;
+import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap.EnumAvailability;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.span.JDFSpanBase;
 import org.cip4.jdflib.util.JDFDate;
@@ -114,7 +116,7 @@ import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
 
 
-public abstract class JDFAbstractState extends JDFElement implements JDFBaseDataTypes
+public abstract class JDFAbstractState extends JDFElement implements JDFBaseDataTypes, IModuleCapability
 {
     private static final long serialVersionUID = 1L;
 
@@ -143,7 +145,6 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
-
 
     private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
     static
@@ -274,7 +275,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
      */
     public final String getNamePath()
     {
-        JDFDevCap devCap = (JDFDevCap) getParentNode();
+        JDFDevCap devCap = getParentDevCap();
         String namePath = devCap.getNamePath(true);
         JDFDevCaps dcs=getParentDevCaps();
         if(dcs!=null)
@@ -300,7 +301,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
      */
     public final VString getNamePathVector(boolean bRecurse)
     {
-        JDFDevCap devCap = (JDFDevCap) getParentNode();
+        JDFDevCap devCap = getParentDevCap();
         VString vNamePath = devCap.getNamePathVector(bRecurse);
         JDFDevCaps dcs=getParentDevCaps();
         if(dcs!=null)
@@ -327,7 +328,8 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
      * get the ancestor devCaps, null if this resides in a DevCapPool
      * @return JDFDevCaps
      */
-    public JDFDevCaps getParentDevCaps(){
+    public JDFDevCaps getParentDevCaps()
+    {
         return (JDFDevCaps) getDeepParent(ElementName.DEVCAPS,0);
     }
 
@@ -339,7 +341,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
      *
      * @param value the value to set the attribute to
      */
-    public void setAvailability(JDFDevCaps.EnumAvailability value)
+    public void setAvailability(EnumAvailability value)
     {
         setAttribute(AttributeName.AVAILABILITY, value.getName(), null);
     }
@@ -349,17 +351,27 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
      *
      * @return EnumAvailability: the enumeration value of the attribute
      */
-    public JDFDevCap.EnumAvailability getAvailability()
+    public EnumAvailability getAvailability()
     {
-        JDFDevCap.EnumAvailability avail = JDFDevCap.EnumAvailability.getEnum(getAttribute(
-                AttributeName.AVAILABILITY, null, null));
+        EnumAvailability avail = EnumAvailability.getEnum(
+                getAttribute(AttributeName.AVAILABILITY, null, null));
 
-        if (avail.getValue() == JDFDevCaps.EnumAvailability.getEnum(0).getValue())
+        if (avail==null)
         {
-            JDFDevCap par = (JDFDevCap) getParentNode();
-            avail = par.getAvailability();
+            JDFDevCap par = getParentDevCap();
+            if(par!=null)
+                avail = par.getAvailability();
         }
-        return avail;
+        return avail==null ? EnumAvailability.Installed : avail;
+    }
+
+    /**
+     * get the parent devCap of this
+     * @return
+     */
+    public JDFDevCap getParentDevCap()
+    {
+        return (JDFDevCap) getParentNode();
     }
 
     /**
@@ -1075,6 +1087,42 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
         // dummy - never used
         return null;
     }
+    /** 
+     * get the availability of this devcaps based on the list of installed modules in ModuleRefs and ModulePool
+     * @return
+     */
+    public EnumAvailability getModuleAvailability()
+    {
+        return JDFModulePool.getModuleAvailability(this); 
+    }
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.ifaces.IModuleCapability#getModulePool()
+     */
+    public JDFModulePool getModulePool()
+    {
+        return(JDFModulePool)getParentPool(ElementName.MODULEPOOL);
+    }
+    /**
+     * get the DEvCapPool that contains devcap elements referenced by this
+     * @return JDFDevCapPool the pool
+     */
+    private KElement getParentPool(String poolName)
+    {
+        KElement parent=getDeepParent(ElementName.DEVICECAP,0);
+        if(parent==null)
+            parent=getDeepParent(ElementName.MESSAGESERVICE,0);
+        if(!(parent instanceof JDFDeviceCap)&&!(parent instanceof JDFMessageService))
+            throw new JDFException("JDFDevCap.getParentPool - invalid parent context");
+        return parent.getElement(poolName);
+    }
+    /**
+     * (21) get VString attribute ModuleRefs
+     * @return VString the value of the attribute
+     */
+   public VString getModuleRefs()
+   {
+       return StringUtil.tokenize(getAttribute(AttributeName.MODULEREFS, null, null)," ",false);
+   }
 
     /////////////////////////////////////////////
 }

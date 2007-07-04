@@ -7,6 +7,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoUsageCounter.EnumScope;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
@@ -18,6 +19,7 @@ import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
+import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFUsageCounter;
 
@@ -73,7 +75,7 @@ public class JMFResourceTest extends JDFTestCaseBase
         assertTrue(jmf.isValid(EnumValidationLevel.Complete));
     }
 
-   /////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////
     
     public void testMedia()
     {
@@ -94,6 +96,36 @@ public class JMFResourceTest extends JDFTestCaseBase
         ri.getCreateAmountPool();
         //TODO continue
     }
+
+  /////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////
+    
+    public void testMediaRef()
+    {
+        
+        JDFDoc doc = new JDFDoc(ElementName.JMF);
+        JDFJMF jmf=doc.getJMFRoot();
+       
+        JDFSignal s=jmf.appendSignal();
+        jmf.setSenderID("DeviceSenderID");
+        
+        
+        s.setType(EnumType.Resource);
+        JDFResourceQuParams rqp=s.appendResourceQuParams();
+        rqp.setJobID("JobID");
+        rqp.setJobPartID("JobPartID");
+        rqp.setResourceName(ElementName.EXPOSEDMEDIA);
+        
+        JDFResourceInfo ri=s.appendResourceInfo();
+        JDFExposedMedia xm=(JDFExposedMedia) ri.appendElement("ExposedMedia");
+        
+        JDFResourceInfo ri2=s.appendResourceInfo();
+        JDFMedia m=(JDFMedia) ri2.appendElement("Media");
+        JDFRefElement rm=xm.refElement(m);
+        
+        assertEquals("works initially ",m, rm.getTarget());
+        assertEquals("also works with cache", m, rm.getTarget());
+     }
 
   /////////////////////////////////////////////////////////////////////
     

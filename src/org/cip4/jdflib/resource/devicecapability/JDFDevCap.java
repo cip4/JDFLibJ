@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -105,16 +105,19 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
+import org.cip4.jdflib.ifaces.IModuleCapability;
+import org.cip4.jdflib.jmf.JDFMessageService;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
+import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap.EnumAvailability;
 import org.cip4.jdflib.span.JDFSpanBase;
 import org.cip4.jdflib.util.StringUtil;
 
 
 //----------------------------------
-public class JDFDevCap extends JDFAutoDevCap 
+public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
 {
     private static final long serialVersionUID = 1L;
     
@@ -204,6 +207,14 @@ public class JDFDevCap extends JDFAutoDevCap
     }
 
     /**
+     * all devcap elements should have an id
+     */
+    public boolean init()
+    {
+        appendAnchor(null); // just in case it is missing
+        return super.init();
+    }
+    /**
      * set attribute <code>DevCapRefs</code>
      * @param value the value to set the attribute to
      */
@@ -212,15 +223,6 @@ public class JDFDevCap extends JDFAutoDevCap
         setAttribute(AttributeName.DEVCAPREFS, value, null);
     }
     
-    /**
-     * get IDREFS attribute <code>DevCapRefs</code>
-     * @return VString: the value of the attribute
-     */
-    public VString getDevCapRefs()
-    {
-        return new VString (getAttribute(AttributeName.DEVCAPREFS, null, JDFConstants.EMPTYSTRING), null);
-    }
-
     /**
      * set attribute <code>ID</code>
      * @param value the value to set the attribute to
@@ -244,12 +246,12 @@ public class JDFDevCap extends JDFAutoDevCap
      *
      * @return EnumAvailability: the enumeration value of the attribute
      */
-    public JDFDevCap.EnumAvailability getAvailability()
+    public EnumAvailability getAvailability()
     {
-        JDFDevCap.EnumAvailability avail = JDFDevCap.EnumAvailability.getEnum(
+        EnumAvailability avail = EnumAvailability.getEnum(
                     getAttribute(AttributeName.AVAILABILITY,  null, null));
         
-        if (avail.getValue() == JDFDevCaps.EnumAvailability.getEnum(0).getValue())
+        if (avail==null)
         {
             String parName = getParentNode().getNodeName();
             if (parName.equals(ElementName.DEVCAP))
@@ -260,11 +262,10 @@ public class JDFDevCap extends JDFAutoDevCap
             else if (parName.equals(ElementName.DEVCAPS))
             {
                 JDFDevCaps devCaps = (JDFDevCaps) getParentNode();
-                String availStr = devCaps.getAvailability().getName();// there are two equal enumerations in DevCap and DevCaps
-                avail = JDFDevCap.EnumAvailability.getEnum(availStr); // transfer from DevCaps EnumValue to DevCap EnumValue
+                avail = devCaps.getAvailability();
             }
         }
-        return avail;
+        return avail==null ? EnumAvailability.Installed : avail;
     }
     
     //  ///////////////////////////////////////////////////////////////////
@@ -1307,6 +1308,19 @@ public class JDFDevCap extends JDFAutoDevCap
     /* ******************************************************
      // FitsValue Methods
       **************************************************************** */
+    /**
+     * get the DEvCapPool that contains devcap elements referenced by this
+     * @return JDFDevCapPool the pool
+     */
+    private KElement getParentPool(String poolName)
+    {
+        KElement parent=getDeepParent(ElementName.DEVICECAP,0);
+        if(parent==null)
+            parent=getDeepParent(ElementName.MESSAGESERVICE,0);
+        if(!(parent instanceof JDFDeviceCap)&&!(parent instanceof JDFMessageService))
+            throw new JDFException("JDFDevCap.getParentPool - invalid parent context");
+        return parent.getElement(poolName);
+    }
     
     /**
      * Gets of this the Vector of all direct child DevCap elements plus 
@@ -1337,8 +1351,7 @@ public class JDFDevCap extends JDFAutoDevCap
         
         if (hasAttribute(AttributeName.DEVCAPREFS)) 
         {         
-            JDFDeviceCap deviceCap = (JDFDeviceCap) getDeepParent(ElementName.DEVICECAP, 0);
-            JDFDevCapPool devCapPool = deviceCap == null ? null : deviceCap.getDevCapPool();
+            JDFDevCapPool devCapPool = (JDFDevCapPool)getParentPool(ElementName.DEVCAPPOOL);
             if (devCapPool != null) 
             {
                 VString idRefs = getDevCapRefs();
@@ -1369,6 +1382,7 @@ public class JDFDevCap extends JDFAutoDevCap
         }
         return vDevCap;
     }
+
     
     /**
      * Tests if the attributes and subelements of the given element
@@ -1459,7 +1473,7 @@ public class JDFDevCap extends JDFAutoDevCap
      * Composes a detailed report of the found errors in XML form. <br>
      * If XMLDoc is <code>null</code> there are no errors.
      * 
-     * @param e         element to test
+     * @param testElem         element to test
      * @param testlists FitsValue_Allowed or FitsValue_Present testlists
      *                  that are specified for the State elements. 
      *                  (Will be used in fitsValue method of the State element.)
@@ -1467,7 +1481,7 @@ public class JDFDevCap extends JDFAutoDevCap
      * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc equals null - there are no errors,
      * 'e' fits the corresponding DevCap elements of 'this' DevCap
      */
-    private final KElement subelementsTest(KElement e, EnumFitsValue testlists, EnumValidationLevel level, boolean ignoreExtensions, KElement parentReport)
+    private final KElement subelementsTest(KElement testElem, EnumFitsValue testlists, EnumValidationLevel level, boolean ignoreExtensions, KElement parentReport)
     {        
         VElement vDevCap = getDevCapVector(null,true); // vDevCap - contains DevCap elements of this DevCap
         
@@ -1479,10 +1493,13 @@ public class JDFDevCap extends JDFAutoDevCap
             // then element e must have subelements, and we are going to check them first
             JDFDevCap dc = (JDFDevCap) vDevCap.elementAt(k);
             String dcName = dc.getName();
+            EnumAvailability av=dc.getModuleAvailability();
+            if(!EnumAvailability.Installed.equals(av))
+                continue;
             
             // vElem - direct children of the Node. 
             // If 'dcName' is a partition Leaf - gets only children of the Leaf.
-            VElement vElem = dc.getMatchingElementsFromParent(e,vDevCap);
+            VElement vElem = dc.getMatchingElementsFromParent(testElem,vDevCap);
             int occurs = vElem==null ? 0 : vElem.size();
             KElement r;
             final int minOccurs = dc.getMinOccurs();
@@ -1505,7 +1522,7 @@ public class JDFDevCap extends JDFAutoDevCap
             {
                 r = parentReport.appendElement("MissingElement");
                 r.setAttribute("CapXPath", dc.getNamePath(true));
-                r.setAttribute("XPath", e.buildXPath(null,1) + "/" + dcName);
+                r.setAttribute("XPath", testElem.buildXPath(null,1) + "/" + dcName);
                 r.setAttribute("Name", dcName);
                 r.setAttribute("Message", "Element occurrence is less than value of MinOccurs");
                 r.setAttribute("MinOccurs", minOccurs, null);
@@ -1514,7 +1531,7 @@ public class JDFDevCap extends JDFAutoDevCap
             // there were elements that didn't pass some of the tests - assume that these are actually invalid and report on them
             for (int j = 0; j < occurs; j++)
             {
-                KElement subEl = (KElement)vElem.elementAt(j);
+                KElement subEl = vElem.item(j);
                 if(goodElems.contains(subEl))
                     continue;
                 r = parentReport.appendElement("InvalidElement");
@@ -1587,11 +1604,14 @@ public class JDFDevCap extends JDFAutoDevCap
         //(2) span key-values (in case of intent resource), (3) comments 
         VString vKeys = m.getKeys(); //we'll use "keys" to find the appropriate State elements in DevCap
        
-        final int sizeStates = vStates.size();
+        final int sizeStates = vStates==null ? 0 : vStates.size();
         for (int j=0; j<sizeStates; j++) // SubElem can be DevCap, can be Loc, can be any State element
         {                                     // here we need only States
             JDFAbstractState state =(JDFAbstractState) vStates.item(j);
             String nam = state.getName();
+            EnumAvailability av=state.getModuleAvailability();
+            if(!EnumAvailability.Installed.equals(av))
+                continue;
             
             int size=vKeys.size();
             for (int i=size-1; i>=0; i--) 
@@ -1827,13 +1847,27 @@ public class JDFDevCap extends JDFAutoDevCap
             {    
                 String nam = e.getNodeName(); // we are looking for DevCap whose atr_Name is equal 'nam'
                 boolean bFound = false;
+                EnumAvailability foundAv=null;
                 
-                for (int k=0; k < vDevCap.size() && !bFound; k++) 
+                for (int k=0; k < vDevCap.size(); k++) 
                 {
                     JDFDevCap devCap = (JDFDevCap) vDevCap.elementAt(k);
                     if (devCap.getName().equals(nam)) // getName() as default takes the name of a parent DevCaps
                     { 
-                        bFound = true;
+                        final EnumAvailability moduleAvailability = devCap.getModuleAvailability();
+                        if(EnumAvailability.Installed.equals(moduleAvailability))
+                        {
+                            bFound = true;
+                            break;
+                        }
+                        else if(foundAv==null)
+                        {
+                            foundAv=moduleAvailability;
+                        }
+                        else if(moduleAvailability!=null && foundAv.getValue()<moduleAvailability.getValue())
+                        {
+                            foundAv=moduleAvailability;                            
+                        }
                     }    
                 }       
                 if (!bFound) 
@@ -1843,6 +1877,7 @@ public class JDFDevCap extends JDFAutoDevCap
                     us.setAttribute("CapXPath", getNamePath(false)+ JDFConstants.SLASH + nam);
                     us.setAttribute("Name", nam);
                     us.setAttribute("Message", "Found no DevCap description for this element");
+                    us.setAttribute("Availability", foundAv==null ? "None" : foundAv.getName());
                 }
             }
         }
@@ -2298,6 +2333,22 @@ public class JDFDevCap extends JDFAutoDevCap
             }           
         }
         return vs;
+    }
+
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.ifaces.IModuleCapability#getModulePool()
+     */
+    public JDFModulePool getModulePool()
+    {
+        return(JDFModulePool)getParentPool(ElementName.MODULEPOOL);
+    }
+    /** 
+     * get the availability of this devcaps based on the list of installed modules in ModuleRefs and ModulePool
+     * @return
+     */
+    public EnumAvailability getModuleAvailability()
+    {
+        return JDFModulePool.getModuleAvailability(this); 
     }
 
 

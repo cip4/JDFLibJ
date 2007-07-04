@@ -208,10 +208,7 @@ public class XMLDoc
      */
     public XMLDoc(String strDocType)
     {
-        m_doc = new DocumentJDFImpl();
-
-        setRoot(strDocType);
-        getCreateXMLDocUserData();
+        new XMLDoc(strDocType,null);
     }
 
     /**
@@ -224,7 +221,10 @@ public class XMLDoc
     {
         m_doc = new DocumentJDFImpl();
         if(namespaceURI==null)
+        {
             m_doc.bKElementOnly=true;
+            m_doc.setIgnoreNSDefault(true);
+        }
 
         setRoot(strDocType,namespaceURI);
         getCreateXMLDocUserData();

@@ -82,8 +82,12 @@ package org.cip4.jdflib.resource.devicecapability;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
+import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDeviceCap;
 import org.cip4.jdflib.auto.JDFAutoDevCaps.EnumContext;
@@ -186,6 +190,47 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
     {
         return "JDFDeviceCap[  --> " + super.toString() + " ]";
     }
+    public static class EnumAvailability extends ValuedEnum
+    {
+        private static final long serialVersionUID = 1L;
+        private static int m_startValue = 0;
+
+        private EnumAvailability(String name)
+        {
+            super(name, m_startValue++);
+        }
+
+        public static EnumAvailability getEnum(String enumName)
+        {
+            return (EnumAvailability) getEnum(EnumAvailability.class, enumName);
+        }
+
+        public static EnumAvailability getEnum(int enumValue)
+        {
+            return (EnumAvailability) getEnum(EnumAvailability.class, enumValue);
+        }
+
+        public static Map getEnumMap()
+        {
+            return getEnumMap(EnumAvailability.class);
+        }
+
+        public static List getEnumList()
+        {
+            return getEnumList(EnumAvailability.class);
+        }
+
+        public static Iterator iterator()
+        {
+            return iterator(EnumAvailability.class);
+        }
+
+        public static final EnumAvailability NotInstalled = new EnumAvailability("NotInstalled");
+        public static final EnumAvailability NotLicensed = new EnumAvailability("NotLicensed");
+        public static final EnumAvailability Disabled = new EnumAvailability("Disabled");
+        public static final EnumAvailability Installed = new EnumAvailability("Installed");
+        public static final EnumAvailability Module = new EnumAvailability("Module");
+    }   
     
     /**
      * Gets of this string attribute <code>TypeExpression</code> if it exists,
@@ -315,8 +360,8 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
        return bugReport;
    }
    /**
-    * Composes a BugReport in XML form for the given JDFNode 'jdfRoot'. 
-    * Gives a list of error messages for 'jdfRoot' and every child rejected Node.<br> 
+    * Composes a BugReport in XML form for the given JMF message 'jmfRoot'. 
+    * Gives a list of error messages for 'jmfRoot' and every child rejected element.<br> 
     * Returns <code>null</code> if there are no errors.
     *
     * @param jdfRoot   the node to test
@@ -683,19 +728,6 @@ public static JDFMessageService getMessageServiceForJMFType(JDFMessage m, JDFRes
     {
         KElement mrp = parentReport.appendElement("MissingResources");
         KElement irp = parentReport.appendElement("InvalidResources");
-        KElement badElem=null;
-        if(parent instanceof JDFDeviceCap)
-        {
-            badElem = ((JDFNode)jdfRoot).getResourceLinkPool();
-        } 
-        else if(parent instanceof JDFMessageService)
-        {
-            badElem=jdfRoot;
-        }
-        else
-        {
-            throw new JDFException("illegal arguments in invaliddevcaps");
-        }
         VElement vDevCaps = parent.getChildElementVector(ElementName.DEVCAPS, null, null, true, 0, false);
         final int size = vDevCaps.size();
         HashSet goodElems=new HashSet();
@@ -704,7 +736,7 @@ public static JDFMessageService getMessageServiceForJMFType(JDFMessage m, JDFRes
         for (int i=0; i < size; i++) 
         {
             JDFDevCaps devCaps = (JDFDevCaps) vDevCaps.elementAt(i);
-            badElem = devCaps.analyzeDevCaps(jdfRoot, testlists, level, mrp, irp, badElem, goodElems, badElems, ignoreExtensions);
+            devCaps.analyzeDevCaps(jdfRoot, testlists, level, mrp, irp, goodElems, badElems, ignoreExtensions);
         }
         
  

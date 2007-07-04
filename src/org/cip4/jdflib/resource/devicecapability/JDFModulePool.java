@@ -3,7 +3,7 @@
 * The CIP4 Software License, Version 1.0
 *
 *
-* Copyright (c) 2001-2004 The International Cooperation for the Integration of 
+* Copyright (c) 2001-2007 The International Cooperation for the Integration of 
 * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
 * reserved.
 *
@@ -79,12 +79,19 @@
  */
 package org.cip4.jdflib.resource.devicecapability;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoModulePool;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.ifaces.IModuleCapability;
+import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap.EnumAvailability;
 
 
-public class JDFModulePool extends JDFElement
+public class JDFModulePool extends JDFAutoModulePool
 {
     private static final long serialVersionUID = 1L;
 
@@ -141,40 +148,71 @@ public class JDFModulePool extends JDFElement
     }
     
     
-    /** 
-     * get iSkip'th element <code>Module</code>, create if it doesn't exist
-     * 
-     * @param iSkip number of elements to skip (0 -> get first Module)
-     * @return JDFModule - the element
-     */
-    public JDFModule getCreateModule(int iSkip)
-    {
-        return (JDFModule)getCreateElement_KElement(ElementName.MODULE, null, iSkip);
-    }
-
-
     /**
-     * get iSkip'th element Module
-     * <p>
-     * default: getModule(0)
-     *      
-     * @param iSkip number of elements to skip (0 -> get first module)
-     * @return JDFModule
+     * get the minimum availability
+     * @param vModuleRefs the list of module ids that are evaluated
+     * @return the minimum availability, null in case of an error, for instance if no modulerefs are specified
      */
-    public JDFModule getModule(int iSkip)
+    public EnumAvailability getMinAvailability(VString vModuleRefs)
     {
-        return (JDFModule) getElement(ElementName.MODULE, null, iSkip);
+        Map m=getModuleMap();
+        if(vModuleRefs==null || m==null || vModuleRefs.size()==0)
+            return null; // error exit
+        JDFDeviceCap.EnumAvailability minAvail=JDFDeviceCap.EnumAvailability.Installed;
+        for(int i=0;i<vModuleRefs.size();i++)
+        {
+            JDFModuleCap mc=(JDFModuleCap) m.get(vModuleRefs.stringAt(i));
+            if(mc==null)
+                return null;
+            EnumAvailability a=mc.getAvailability();
+            if(a==null || EnumAvailability.Module.equals(a)) // module is not valid recursively
+                return null;
+            if(minAvail.compareTo(a)>0)
+                minAvail=a;
+            
+        }
+        return minAvail;
     }
     
     /**
-     * append new Module element
-     * 
-     * @return JDFModule - newly created Module element
+     * get a hashmap that uses ModuleCap/@ID as a key and has the ModuleCap as a value
+     * @return the hashmap, null if no modulecaps exist
      */
-    public JDFModule appendModule()
+    public Map getModuleMap()
     {
-        return (JDFModule)appendElement(ElementName.MODULE, null);
+        VElement v=getChildElementVector(ElementName.MODULECAP, null, null, true, 0,true);
+        int siz=v==null ? 0 : v.size();
+        
+        HashMap h=new HashMap();
+        for(int i=0;i<siz;i++)
+        {
+            JDFModuleCap mc=(JDFModuleCap) v.elementAt(i);
+            String id=mc.getID();
+            if(!isWildCard(id))
+            {
+                h.put(id, mc);
+            }
+        }        
+        return h.size()==0 ? null : h;
     }
+
+    /**
+     * get the module availability based on modulerefs and availability
+     * @param caps either A State, devcap or devcaps
+     * @return
+     */
+    public static EnumAvailability getModuleAvailability(IModuleCapability caps)
+    {
+        EnumAvailability a=caps.getAvailability();
+        if(!EnumAvailability.Module.equals(a))
+            return a;
+        JDFModulePool mp=caps.getModulePool();
+        if(mp==null)
+            return null;
+        return mp.getMinAvailability(caps.getModuleRefs());
+    }
+    
+ 
 }
 
 

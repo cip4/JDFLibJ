@@ -92,10 +92,12 @@ import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.resource.devicecapability.JDFBooleanState;
 import org.cip4.jdflib.resource.devicecapability.JDFDateTimeState;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCap;
+import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 import org.cip4.jdflib.resource.devicecapability.JDFDurationState;
 import org.cip4.jdflib.resource.devicecapability.JDFEnumerationState;
 import org.cip4.jdflib.resource.devicecapability.JDFIntegerState;
 import org.cip4.jdflib.resource.devicecapability.JDFMatrixState;
+import org.cip4.jdflib.resource.devicecapability.JDFModuleCap;
 import org.cip4.jdflib.resource.devicecapability.JDFNameState;
 import org.cip4.jdflib.resource.devicecapability.JDFNumberState;
 import org.cip4.jdflib.resource.devicecapability.JDFPDFPathState;
@@ -103,6 +105,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFRectangleState;
 import org.cip4.jdflib.resource.devicecapability.JDFShapeState;
 import org.cip4.jdflib.resource.devicecapability.JDFStringState;
 import org.cip4.jdflib.resource.devicecapability.JDFXYPairState;
+import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap.EnumAvailability;
 import org.cip4.jdflib.resource.process.JDFLayout;
 
 
@@ -445,6 +448,31 @@ public class JDFDevCapTest extends TestCase
         assertNotNull(ss);
         assertEquals(ss.getName(), "bar");
        
+    }
+    
+    public void testGetAvailability()
+    {
+        JDFDoc d=new JDFDoc("DevCap");
+        JDFDevCap dc=(JDFDevCap) d.getRoot();
+        dc.setAvailability(EnumAvailability.NotInstalled);
+        assertEquals(dc.getAvailability(), EnumAvailability.NotInstalled);
+        assertEquals(dc.getModuleAvailability(), EnumAvailability.NotInstalled);
+    }
+    
+    public void testGetModuleAvailability()
+    {
+        JDFDoc d=new JDFDoc("DeviceCap");
+        JDFDeviceCap deviceCap=(JDFDeviceCap) d.getRoot();
+        JDFModuleCap mc=deviceCap.appendModulePool().appendModuleCap();
+        mc.setID("i");
+        mc.setAvailability(EnumAvailability.NotLicensed);
+        JDFDevCap dc=deviceCap.appendDevCaps().appendDevCap();
+        assertEquals(dc.getModuleAvailability(), EnumAvailability.Installed);
+        dc.setAvailability(EnumAvailability.Module);
+        assertEquals(dc.getAvailability(), EnumAvailability.Module);
+        assertNull(dc.getModuleAvailability());
+        dc.setModuleRefs(new VString("i",null));
+        assertEquals(dc.getModuleAvailability(), EnumAvailability.NotLicensed);
     }
     
     public void testGetMatrixState()

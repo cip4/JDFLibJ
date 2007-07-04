@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -104,6 +104,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 import org.cip4.jdflib.resource.devicecapability.JDFIntegerState;
 import org.cip4.jdflib.resource.devicecapability.JDFMatrixState;
 import org.cip4.jdflib.resource.devicecapability.JDFStringState;
+import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap.EnumAvailability;
 
 
 public class JDFStateBaseTest extends JDFTestCaseBase
@@ -290,6 +291,22 @@ public class JDFStateBaseTest extends JDFTestCaseBase
         JDFDevCap dc=deviceCap.appendDevCaps().appendDevCap();
         JDFIntegerState is=dc.appendIntegerState();
         assertEquals("default=1",is.getMinOccurs(),1);
+    }
+    /**
+     * tests defaults for availability 
+     */
+    public final void testGetAvailability()
+    { 
+        JDFDevCap dc=deviceCap.appendDevCaps().appendDevCap();
+        JDFIntegerState is=dc.appendIntegerState();
+        
+        assertEquals(EnumAvailability.Installed,dc.getAvailability());
+        assertEquals(EnumAvailability.Installed,is.getAvailability());
+        
+        dc.setAvailability(EnumAvailability.NotLicensed);
+        assertEquals(EnumAvailability.NotLicensed,dc.getAvailability());
+        assertEquals(EnumAvailability.NotLicensed,is.getAvailability());
+        
     }
 
     ////////////////////////////////////////////////////////////
