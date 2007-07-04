@@ -84,7 +84,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 
 
 public class UrlUtilTest extends JDFTestCaseBase
-{   
+{
 
 
 
@@ -164,10 +164,7 @@ public class UrlUtilTest extends JDFTestCaseBase
         File f=new File("C:\\IO.SYS");
         String s=UrlUtil.fileToUrl(f, false);
         assertEquals(s,"file:///C:/IO.SYS");
-        f=new File("\\IO.SYS");
-        s=UrlUtil.fileToUrl(f, false);
-        assertEquals(s,"file:///C:/IO.SYS");
-    }     
+    }
     ///////////////////////////////////////////////////////////////////////////
 
     public void testURLToFile() throws Exception
@@ -181,16 +178,16 @@ public class UrlUtilTest extends JDFTestCaseBase
         assertEquals(f2.getCanonicalPath(), f.getCanonicalPath());
 
         f=new File(".\\simple.pdf");
-        f2=UrlUtil.urlToFile(UrlUtil.fileToUrl(f, true));   
+        f2=UrlUtil.urlToFile(UrlUtil.fileToUrl(f, true));
         assertEquals("asccii",f.getCanonicalPath(), f2.getCanonicalPath());
 
         f=new File("blöd .pdf");
-        f2=UrlUtil.urlToFile(UrlUtil.fileToUrl(f, true));   
+        f2=UrlUtil.urlToFile(UrlUtil.fileToUrl(f, true));
         assertEquals("non asccii",f.getCanonicalPath(), f2.getCanonicalPath());
 
         f=new File("blöd ist es 10@€.pdf");
         final String fileToUrl = UrlUtil.fileToUrl(f, true);
-        f2=UrlUtil.urlToFile(fileToUrl);   
+        f2=UrlUtil.urlToFile(fileToUrl);
         assertEquals("escape %20",f.getCanonicalPath(), f2.getCanonicalPath());
 
         System.setProperty("user.dir", cwd);
@@ -202,7 +199,7 @@ public class UrlUtilTest extends JDFTestCaseBase
         assertTrue(UrlUtil.isUNC("\\\\foo\\bar"));
         assertFalse(UrlUtil.isUNC("c/d/e.f"));
         assertFalse(UrlUtil.isUNC("/c/d/e.f"));
-    }   
+    }
 
     public void testGetRelativeURI()
     {
@@ -218,13 +215,13 @@ public class UrlUtilTest extends JDFTestCaseBase
     {
         File file=new File("c:\\a\\b\\c.txt");
         File cwd=new File("c:\\a\\b1");
-        assertEquals(UrlUtil.getRelativeURL(file, cwd, true),"../b/c.txt");   
+        assertEquals(UrlUtil.getRelativeURL(file, cwd, true),"../b/c.txt");
         file=new File("c:\\a\\b1\\c.txt");
-        assertEquals(UrlUtil.getRelativeURL(file, cwd, true),"./c.txt");   
+        assertEquals(UrlUtil.getRelativeURL(file, cwd, true),"./c.txt");
         file=new File("a\\..\\b\\c.txt");
-        assertEquals(UrlUtil.getRelativeURL(file, null, true),"./b/c.txt");   
+        assertEquals(UrlUtil.getRelativeURL(file, null, true),"./b/c.txt");
         file=cwd;
-        assertEquals(UrlUtil.getRelativeURL(file, cwd, true),".");   
+        assertEquals(UrlUtil.getRelativeURL(file, cwd, true),".");
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -271,4 +268,4 @@ public class UrlUtilTest extends JDFTestCaseBase
         assertEquals(UrlUtil.cleanDots("/."), "/.");
     }
 
-}   
+}
