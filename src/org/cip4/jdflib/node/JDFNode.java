@@ -2523,7 +2523,7 @@ public class JDFNode extends JDFElement
         JDFResourceLink resourceLink = resourceLinkPool.linkResource(jdfResource, usage, processUsage);
         final VString types = getTypes();
         // generate 
-        if(types!=null) 
+        if(types!=null && !EnumResourceClass.Implementation.equals(jdfResource.getResourceClass()) && !(jdfResource instanceof JDFNodeInfo)) 
         {
             generateCombinedProcessIndex(jdfResource, usage, processUsage, resourceLink, types);
         }
@@ -2586,7 +2586,8 @@ public class JDFNode extends JDFElement
                 typeLinkNamesLast=typeLinkNames;
             }                               
         }
-        if(cpi.size()>0) {
+        if(cpi.size()>0) 
+        {
             resourceLink.setCombinedProcessIndex(cpi);
         }
     }

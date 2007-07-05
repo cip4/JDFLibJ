@@ -376,6 +376,14 @@ public class JDFNodeTest extends JDFTestCaseBase
         JDFResourceLink rlcompIn=n.linkResource(compIn,EnumUsage.Input,null);
         assertEquals("cpi output",rlcompIn.getCombinedProcessIndex(),new JDFIntegerList("0 4"));
 
+        JDFResource devIn= n.addResource(ElementName.DEVICE, null, null, null, null, null, null);
+        JDFResourceLink rlDevIn=n.linkResource(devIn,EnumUsage.Input,null);
+        assertNull("dev input",rlDevIn.getCombinedProcessIndex());
+
+        JDFResource niIn= n.addResource(ElementName.NODEINFO, null, null, null, null, null, null);
+        JDFResourceLink rlNiIn=n.linkResource(niIn,EnumUsage.Input,null);
+        assertNull("ni input",rlNiIn.getCombinedProcessIndex());
+
     }
 
     ///////////////////////////////////////////////////////////////////////////
