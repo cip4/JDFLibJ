@@ -107,6 +107,7 @@ public final class AttributeName
     public static final String ACTIVATION = "Activation";
     public static final String ACTUAL = "Actual";
     public static final String ACTUALAMOUNT = "ActualAmount";
+    public static final String ACTUALCOLORNAME = "ActualColorName";
     public static final String ACTUALTOTALAMOUNT = "ActualTotalAmount";
     public static final String ADDITIONALAMOUNT = "AdditionalAmount";
     public static final String ADDITIONALNAMES = "AdditionalNames";
@@ -571,6 +572,7 @@ public final class AttributeName
     public static final String FIRSTPAGE = "FirstPage";
     public static final String FIRSTSTART = "FirstStart";
     public static final String FIRSTSURFACE = "FirstSurface";
+    public static final String FIXEXPRESSION = "FixExpression";
     public static final String FITTOPAGE = "FitToPage";
     public static final String FLATNESS = "Flatness";
     public static final String FLEXVALUE = "FlexValue";
@@ -1706,6 +1708,4 @@ public final class AttributeName
     public static final String IMPLICITGUTTERMINIMUMLIMIT = "ImplicitGutterMinimumLimit";
     public static final String PRINTTRAPANNOTATIONS = "PrintTrapAnnotations";
 	public static final String ERRORURL = "ErrorURL";
-	public static final String FIXEXPRESSION = "FixExpression";
-	public static final String ACTUALCOLORNAME = "ActualColorName";
 }
