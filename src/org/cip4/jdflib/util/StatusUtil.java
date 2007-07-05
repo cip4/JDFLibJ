@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /**
  * Created on Jul 5, 2006, 11:45:44 AM
@@ -106,13 +106,13 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 
 /**
  * Utility class for status JDF and JMF
- * 
+ *
  * @author prosirai
  *
  */
 public class StatusUtil {
 
-    private JDFNode m_Node;
+    JDFNode m_Node;
     private JDFDoc docJMFPhaseTime;
     private JDFDoc docJMFResource;
     protected VJDFAttributeMap m_vPartMap;
@@ -144,12 +144,14 @@ public class StatusUtil {
      */
     public static AmountBag getBag(String refID, AmountBag[] bags)
     {
-        if(bags==null || refID==null)
-            return null;
+        if(bags==null || refID==null) {
+			return null;
+		}
         for(int i=0;i<bags.length;i++)
         {
-            if(bags[i].refID.equals(refID))
-                return bags[i];
+            if(bags[i].refID.equals(refID)) {
+				return bags[i];
+			}
         }
         return null;
     }
@@ -160,12 +162,14 @@ public class StatusUtil {
      */
     public LinkAmount getLinkAmount(String refID)
     {
-        if(vLinkAmount==null || refID==null)
-            return null;
+        if(vLinkAmount==null || refID==null) {
+			return null;
+		}
         for(int i=0;i<vLinkAmount.length;i++)
         {
-            if(vLinkAmount[i].rl.getrRef().equals(refID))
-                return vLinkAmount[i];
+            if(vLinkAmount[i].rl.getrRef().equals(refID)) {
+				return vLinkAmount[i];
+			}
         }
         return null;
     }
@@ -176,8 +180,9 @@ public class StatusUtil {
      */
     public String getFirstRefID()
     {
-        if(vLinkAmount==null || vLinkAmount.length==0)
-            return null;
+        if(vLinkAmount==null || vLinkAmount.length==0) {
+			return null;
+		}
         return vLinkAmount[0].rl.getrRef();
 
     }
@@ -186,8 +191,9 @@ public class StatusUtil {
      */
     private void setUpResLinks(VElement resLinks)
     {
-        if(resLinks==null || resLinks.size()==0)
-            return;
+        if(resLinks==null || resLinks.size()==0) {
+			return;
+		}
         vLinkAmount=new LinkAmount[resLinks.size()];
         for(int i=0;i<vLinkAmount.length;i++)
         {
@@ -198,16 +204,16 @@ public class StatusUtil {
 
     /**
      * Set the Status and StatusDetails of this node
-     * update the PhaseTime audit or append a new phasetime as appropriate  
+     * update the PhaseTime audit or append a new phasetime as appropriate
      * also prepare a status JMF
-     * 
+     *
      * @param nodeStatus the new status of the node
      * @param nodeStatusDetails the new statusDetails of the node
      * @param deviceStatus the new status of the device
      * @param deviceStatusDetails the new statusDetails of the device
      * @param vPartMap the vector of parts to that should be set
      * @param vResLink the resourcelinks that are used to fill the various amount attributes in jobphase and phasetime
-     * 
+     *
      */
     public void setPhase(EnumNodeStatus nodeStatus, String nodeStatusDetails, EnumDeviceStatus deviceStatus, String deviceStatusDetails, AmountBag[] amounts)
     {
@@ -218,7 +224,7 @@ public class StatusUtil {
 
         final AmountBag ab=getBag(getFirstRefID(), amounts);
         final LinkAmount la=getLinkAmount(getFirstRefID());
-        final AmountBag lastAb=la==null ? null : la.lastBag;        
+        final AmountBag lastAb=la==null ? null : la.lastBag;
 
         JDFAuditPool ap=m_Node.getCreateAuditPool();
         // TODO rethink when to send 2 phases
@@ -244,13 +250,14 @@ public class StatusUtil {
 
             JDFSignal s=(JDFSignal)jmf.appendMessageElement(JDFMessage.EnumFamily.Signal,JDFMessage.EnumType.Status);
             JDFDeviceInfo deviceInfo = s.appendDeviceInfo();
-            JDFJobPhase jp=deviceInfo.createJobPhaseFromPhaseTime(pt1);  
+            JDFJobPhase jp=deviceInfo.createJobPhaseFromPhaseTime(pt1);
             jp.setJobID(m_Node.getJobID(true));
             jp.setJobPartID(m_Node.getJobPartID(false));
             setJobPhaseAmounts(lastAb, jp);
 
-            if(m_deviceID!=null)
-                pt2.appendDevice().setDeviceID(m_deviceID);            
+            if(m_deviceID!=null) {
+				pt2.appendDevice().setDeviceID(m_deviceID);
+			}
         }
 
         if(pt2!=null)
@@ -331,32 +338,40 @@ public class StatusUtil {
      */
     private void setJobPhaseAmounts(final AmountBag lastAb, JDFJobPhase jp)
     {
-        if(lastAb==null)
-            return;
+        if(lastAb==null) {
+			return;
+		}
 
-        
+
         LinkAmount la=getLinkAmount(lastAb.refID);
-        if(la==null)
-            return;
-        
+        if(la==null) {
+			return;
+		}
+
         if(la.bTrackWaste)
         {
-            if(lastAb.phaseAmount!=0)
-                jp.setPhaseAmount(lastAb.phaseAmount);
-            if(lastAb.totalAmount!=0)
-                jp.setAmount(lastAb.totalAmount);
-            if(lastAb.phaseWaste!=0)
-                jp.setPhaseWaste(lastAb.phaseWaste);
-            if(lastAb.totalWaste!=0)
-                jp.setWaste(lastAb.totalWaste);
+            if(lastAb.phaseAmount!=0) {
+				jp.setPhaseAmount(lastAb.phaseAmount);
+			}
+            if(lastAb.totalAmount!=0) {
+				jp.setAmount(lastAb.totalAmount);
+			}
+            if(lastAb.phaseWaste!=0) {
+				jp.setPhaseWaste(lastAb.phaseWaste);
+			}
+            if(lastAb.totalWaste!=0) {
+				jp.setWaste(lastAb.totalWaste);
+			}
         }
         else
         {
-            if((lastAb.phaseAmount + lastAb.phaseWaste)!=0)
-                jp.setPhaseAmount(lastAb.phaseAmount+lastAb.phaseWaste);
-            if((lastAb.totalAmount+lastAb.totalWaste)!=0)
-                jp.setAmount(lastAb.totalAmount+lastAb.totalWaste);
-            
+            if((lastAb.phaseAmount + lastAb.phaseWaste)!=0) {
+				jp.setPhaseAmount(lastAb.phaseAmount+lastAb.phaseWaste);
+			}
+            if((lastAb.totalAmount+lastAb.totalWaste)!=0) {
+				jp.setAmount(lastAb.totalAmount+lastAb.totalWaste);
+			}
+
         }
         double total=0;
 
@@ -365,7 +380,7 @@ public class StatusUtil {
         {
             jp.setTotalAmount(total);
             jp.setPercentCompleted(lastAb.totalAmount/total*100.0);
-        } 
+        }
     }
 
 
@@ -375,20 +390,25 @@ public class StatusUtil {
      */
     private VElement getVResLink(AmountBag[] amounts, int n)
     {
-        if(amounts==null && vLinkAmount==null)
-            return null;
-        if(vLinkAmount==null || amounts==null || vLinkAmount.length!=amounts.length)
-            throw new JDFException("incoherent resLink sizes");
+        if(amounts==null && vLinkAmount==null) {
+			return null;
+		}
+        if(vLinkAmount==null || amounts==null || vLinkAmount.length!=amounts.length) {
+			throw new JDFException("incoherent resLink sizes");
+		}
         VElement vRet=new VElement();
         for(int i=0;i<vLinkAmount.length;i++)
         {
             LinkAmount la=vLinkAmount[i];
-            if(n==1)
-                vRet.add(la.getPhaseTimeLink(getBag(la.rl.getrRef(),amounts)));
-            if(n==2)
-                vRet.add(la.updateNodeLink(getBag(la.rl.getrRef(),amounts)));
-            if(n==3)
-                vRet.add(la.getResourceInfoLink(getBag(la.rl.getrRef(),amounts)));
+            if(n==1) {
+				vRet.add(la.getPhaseTimeLink(getBag(la.rl.getrRef(),amounts)));
+			}
+            if(n==2) {
+				vRet.add(la.updateNodeLink(getBag(la.rl.getrRef(),amounts)));
+			}
+            if(n==3) {
+				vRet.add(la.getResourceInfoLink(getBag(la.rl.getrRef(),amounts)));
+			}
         }
         return vRet;
     }
@@ -418,7 +438,7 @@ public class StatusUtil {
         /**
          * refID of the resourceLink to set
          */
-        public String refID; 
+        public String refID;
         public double totalAmount;
         public double phaseAmount;
         public double totalWaste;
@@ -431,7 +451,7 @@ public class StatusUtil {
         }
 
         /**
-         * 
+         *
          * @param rl resourceLink to the resource that is being counted
          */
         public AmountBag(JDFResourceLink rl)
@@ -439,7 +459,7 @@ public class StatusUtil {
            this(rl.getrRef());
         }
         /**
-         * 
+         *
          * @param _refID refID of the resource that is being counted
          */
         public AmountBag(String _refID)
@@ -449,7 +469,7 @@ public class StatusUtil {
         }
 
         /**
-         * 
+         *
          */
         public void reset()
         {
@@ -465,7 +485,7 @@ public class StatusUtil {
          */
         public AmountBag(AmountBag bag)
         {
-            refID=bag.refID; 
+            refID=bag.refID;
             totalAmount=bag.totalAmount;
             phaseAmount=bag.phaseAmount;
             totalWaste=bag.totalWaste;
@@ -489,10 +509,10 @@ public class StatusUtil {
             else
             {
                 phaseAmount+=amount;
-                phaseWaste+=waste;               
+                phaseWaste+=waste;
             }
         }
-    }    
+    }
 
     ///////////////////////////////////////////////////////////////////////
 
@@ -518,12 +538,14 @@ public class StatusUtil {
                 map=new JDFAttributeMap(map);
                 map.put(EnumPartIDKey.Condition, "Good");
                 startAmount=rl.getAmount(map);
-                if(startAmount==-1)
-                    startAmount=0;
+                if(startAmount==-1) {
+					startAmount=0;
+				}
                 map.put(EnumPartIDKey.Condition, "Waste");
                 startWaste=rl.getAmount(map);
-                if(startWaste==-1)
-                    startWaste=0;
+                if(startWaste==-1) {
+					startWaste=0;
+				}
             }
         }
 
@@ -537,8 +559,9 @@ public class StatusUtil {
             if(bag!=null)
             {
                 VJDFAttributeMap vMap=new VJDFAttributeMap(m_vPartMap);
-                if(vMap.size()==0)
-                    vMap.add(new JDFAttributeMap());
+                if(vMap.size()==0) {
+					vMap.add(new JDFAttributeMap());
+				}
                     if(nodeLink!=null)
                     {
                         if(bTrackWaste)
@@ -566,32 +589,39 @@ public class StatusUtil {
             if(bag!=null)
             {
                 VJDFAttributeMap vMap=new VJDFAttributeMap(m_vPartMap);
-                if(vMap.size()==0)
-                    vMap.add(new JDFAttributeMap());
+                if(vMap.size()==0) {
+					vMap.add(new JDFAttributeMap());
+				}
                 if(bTrackWaste)
                 {
                     vMap.put(EnumPartIDKey.Condition, "Good");
-                    if(bag.phaseAmount!=0)
-                        rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(bag.phaseAmount), null, vMap);
-                    if(startAmount!=0)
-                        rl.setAmountPoolAttribute(AttributeName.AMOUNT, StringUtil.formatDouble(startAmount), null, vMap);
+                    if(bag.phaseAmount!=0) {
+						rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(bag.phaseAmount), null, vMap);
+					}
+                    if(startAmount!=0) {
+						rl.setAmountPoolAttribute(AttributeName.AMOUNT, StringUtil.formatDouble(startAmount), null, vMap);
+					}
                     vMap.put(EnumPartIDKey.Condition, "Waste");
-                    if(bag.phaseWaste!=0)
-                        rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(bag.phaseWaste), null, vMap);
-                    if(startWaste!=0)
-                        rl.setAmountPoolAttribute(AttributeName.AMOUNT, StringUtil.formatDouble(startWaste), null, vMap);
+                    if(bag.phaseWaste!=0) {
+						rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(bag.phaseWaste), null, vMap);
+					}
+                    if(startWaste!=0) {
+						rl.setAmountPoolAttribute(AttributeName.AMOUNT, StringUtil.formatDouble(startWaste), null, vMap);
+					}
                 }
                 else
                 {
-                    if(bag.phaseAmount + bag.phaseWaste !=0)
-                        rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(bag.phaseAmount+bag.phaseWaste), null, vMap);
-                    if(startAmount+startWaste!=0)
-                        rl.setAmountPoolAttribute(AttributeName.AMOUNT, StringUtil.formatDouble(startAmount+startWaste), null, vMap);                    
+                    if(bag.phaseAmount + bag.phaseWaste !=0) {
+						rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(bag.phaseAmount+bag.phaseWaste), null, vMap);
+					}
+                    if(startAmount+startWaste!=0) {
+						rl.setAmountPoolAttribute(AttributeName.AMOUNT, StringUtil.formatDouble(startAmount+startWaste), null, vMap);
+					}
                 }
             }
             return rl;
-        }    
-        
+        }
+
         /**
          * @return
          */
@@ -601,61 +631,75 @@ public class StatusUtil {
             if(bag!=null)
             {
                 VJDFAttributeMap vMap=new VJDFAttributeMap(m_vPartMap);
-                if(vMap.size()==0)
-                    vMap.add(new JDFAttributeMap());
+                if(vMap.size()==0) {
+					vMap.add(new JDFAttributeMap());
+				}
                 if(bTrackWaste)
                 {
                     vMap.put(EnumPartIDKey.Condition, "Good");
-                    if(bag.totalAmount!=0)
-                        rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(bag.totalAmount), null, vMap);
-                    if(startAmount!=0)
-                        rl.setAmountPoolAttribute(AttributeName.AMOUNT, StringUtil.formatDouble(startAmount), null, vMap);
+                    if(bag.totalAmount!=0) {
+						rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(bag.totalAmount), null, vMap);
+					}
+                    if(startAmount!=0) {
+						rl.setAmountPoolAttribute(AttributeName.AMOUNT, StringUtil.formatDouble(startAmount), null, vMap);
+					}
                     vMap.put(EnumPartIDKey.Condition, "Waste");
-                    if(bag.totalWaste!=0)
-                        rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(bag.totalWaste), null, vMap);
-                    if(startWaste!=0)
-                        rl.setAmountPoolAttribute(AttributeName.AMOUNT, StringUtil.formatDouble(startWaste), null, vMap);
+                    if(bag.totalWaste!=0) {
+						rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(bag.totalWaste), null, vMap);
+					}
+                    if(startWaste!=0) {
+						rl.setAmountPoolAttribute(AttributeName.AMOUNT, StringUtil.formatDouble(startWaste), null, vMap);
+					}
                 }
                 else
                 {
-                    if(bag.totalAmount + bag.totalWaste !=0)
-                        rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(bag.totalAmount+bag.totalWaste), null, vMap);
-                    if(startAmount+startWaste!=0)
-                        rl.setAmountPoolAttribute(AttributeName.AMOUNT, StringUtil.formatDouble(startAmount+startWaste), null, vMap);                    
+                    if(bag.totalAmount + bag.totalWaste !=0) {
+						rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(bag.totalAmount+bag.totalWaste), null, vMap);
+					}
+                    if(startAmount+startWaste!=0) {
+						rl.setAmountPoolAttribute(AttributeName.AMOUNT, StringUtil.formatDouble(startAmount+startWaste), null, vMap);
+					}
                 }
             }
             return rl;
-        }  
+        }
         /**
          * @return
          */
         public JDFResourceLink getResourceInfoLink(AmountBag bag)
-        { 
+        {
             cleanAmounts();
             if(bag!=null)
             {
                 VJDFAttributeMap vMap=new VJDFAttributeMap(m_vPartMap);
-                if(vMap.size()==0)
-                    vMap.add(new JDFAttributeMap());
+                if(vMap.size()==0) {
+					vMap.add(new JDFAttributeMap());
+				}
                 if(bTrackWaste)
                 {
                     vMap.put(EnumPartIDKey.Condition, "Good");
-                    if(bag.totalAmount!=0)
-                        rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(bag.totalAmount), null, vMap);
-                    if(startAmount!=0)
-                        rl.setAmountPoolAttribute(AttributeName.AMOUNT, StringUtil.formatDouble(startAmount), null, vMap);
+                    if(bag.totalAmount!=0) {
+						rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(bag.totalAmount), null, vMap);
+					}
+                    if(startAmount!=0) {
+						rl.setAmountPoolAttribute(AttributeName.AMOUNT, StringUtil.formatDouble(startAmount), null, vMap);
+					}
                     vMap.put(EnumPartIDKey.Condition, "Waste");
-                    if(bag.totalWaste!=0)
-                        rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(bag.totalWaste), null, vMap);
-                    if(startWaste!=0)
-                        rl.setAmountPoolAttribute(AttributeName.AMOUNT, StringUtil.formatDouble(startWaste), null, vMap);
+                    if(bag.totalWaste!=0) {
+						rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(bag.totalWaste), null, vMap);
+					}
+                    if(startWaste!=0) {
+						rl.setAmountPoolAttribute(AttributeName.AMOUNT, StringUtil.formatDouble(startWaste), null, vMap);
+					}
                 }
                 else
                 {
-                    if(bag.totalAmount + bag.totalWaste !=0)
-                        rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(bag.totalAmount+bag.totalWaste), null, vMap);
-                    if(startAmount+startWaste!=0)
-                        rl.setAmountPoolAttribute(AttributeName.AMOUNT, StringUtil.formatDouble(startAmount+startWaste), null, vMap);                    
+                    if(bag.totalAmount + bag.totalWaste !=0) {
+						rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(bag.totalAmount+bag.totalWaste), null, vMap);
+					}
+                    if(startAmount+startWaste!=0) {
+						rl.setAmountPoolAttribute(AttributeName.AMOUNT, StringUtil.formatDouble(startAmount+startWaste), null, vMap);
+					}
                 }
             }
             return rl;       }
@@ -697,8 +741,9 @@ public class StatusUtil {
     public void setTrackWaste(JDFResourceLink rl, boolean b)
     {
         LinkAmount la=getLinkAmount(rl.getrRef());
-        if(la!=null)
-            la.bTrackWaste=b;        
+        if(la!=null) {
+			la.bTrackWaste=b;
+		}
     }
 
     /**
@@ -709,8 +754,9 @@ public class StatusUtil {
     public void setCopyResInResInfo(JDFResourceLink rl, boolean b)
     {
         LinkAmount la=getLinkAmount(rl.getrRef());
-        if(la!=null)
-            la.bCopyResInfo=b;        
+        if(la!=null) {
+			la.bCopyResInfo=b;
+		}
     }
 
     /**
@@ -724,7 +770,7 @@ public class StatusUtil {
        JDFResourceAudit ra=ap.addResourceAudit(null);
        ra.setContentsModified(false);
        ra.setReason(reason);
-       
+
        final LinkAmount la=getLinkAmount(bag.refID);
        ra.copyElement(la.getResourceAuditLink(bag), null);
        ra.setPartMapVector(m_vPartMap);
@@ -733,7 +779,7 @@ public class StatusUtil {
     }
 
     /**
-     * 
+     *
      */
     public JDFProcessRun setProcessResult(EnumNodeStatus endStatus)
     {
@@ -741,8 +787,8 @@ public class StatusUtil {
 
         JDFProcessRun pr=ap.addProcessRun(endStatus, null, m_vPartMap);
         return pr;
-        
+
     }
 
- 
+
 }

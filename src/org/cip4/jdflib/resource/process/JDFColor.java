@@ -13,7 +13,6 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoColor;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -76,9 +75,9 @@ public class JDFColor extends JDFAutoColor
     {
         return "JDFColor[  --> " + super.toString() + " ]";
     }
-    
 
-    /** 
+
+    /**
      * Set the Name and RawName attributes to the value given in pName
      * The value in Name uses the default encoding
      * @param char[] cName the 8 bit string to set the name to
@@ -92,10 +91,10 @@ public class JDFColor extends JDFAutoColor
 
     /**
      * Gets the ActualColorName or Name if no ActualColorName is set
-     * @return String Name of the color extracted from RawName, 
+     * @return String Name of the color extracted from RawName,
      *         or if this is missing from Name, using the default transcoder
      */
-    public String getActualColorName() 
+    public String getActualColorName()
     {
         final String strName = getAttribute(AttributeName.ACTUALCOLORNAME, null, null);
         return strName==null ? getName() : strName;
@@ -104,29 +103,29 @@ public class JDFColor extends JDFAutoColor
     /**
      * Gets the 16 bit representation of the 8 bit color name
      * Use String GetRawBytes() to extract the 8 bit representation
-     * @return String Name of the color extracted from RawName, 
+     * @return String Name of the color extracted from RawName,
      *         or if this is missing from Name, using the default transcoder
      */
-    public String get8BitName() 
+    public String get8BitName()
     {
         String strName = getAttribute(AttributeName.RAWNAME, null, null);
         if (strName!=null)
         {
             byte[] rawName   = strName.getBytes();
             byte[] foundName = StringUtil.getHexBinaryBytes(rawName);
-            
+
             return new String(foundName);
         }
         return getActualColorName();
     }
-    
+
     ////////////////////////////////////////////////////////////////
-    
+
     public JDFFileSpec getColorProfile()
     {
         VElement v = getChildElementVector(ElementName.FILESPEC, null, null, true, 0, false);
         int siz    = v==null ? 0 : v.size();
-        for(int i = 0; i < siz; i++)
+        for (int i = 0; i < siz; i++)
         {
             JDFFileSpec res = (JDFFileSpec)v.elementAt(i);
             if (res.hasAttribute(AttributeName.RESOURCEUSAGE))
@@ -134,18 +133,18 @@ public class JDFColor extends JDFAutoColor
                 if (res.getResourceUsage().equals("ColorProfile"))
                 {
                     return res;
-                }   
+                }
             }
         }
         return null;
     }
 
     ///////////////////////////////////////////////////////////////////
-    
-    public JDFFileSpec getCreateColorProfile() 
+
+    public JDFFileSpec getCreateColorProfile()
     {
         JDFFileSpec res = getColorProfile();
-        if (res == null) 
+        if (res == null)
         {
             res = appendColorProfile();
         }
@@ -153,27 +152,27 @@ public class JDFColor extends JDFAutoColor
     }
 
     ///////////////////////////////////////////////////////////////////
-    
-    public JDFFileSpec appendColorProfile() 
+
+    public JDFFileSpec appendColorProfile()
     {
         JDFFileSpec res = appendFileSpec();
         res.setResourceUsage("ColorProfile");
 
         return res;
     }
-    
+
     ///////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////
 
     public JDFFileSpec getTargetProfile()
     {
         VElement v = getChildElementVector(ElementName.FILESPEC,
-                                           null, 
-                                           null, 
-                                           true, 
-                                           0, 
+                                           null,
+                                           null,
+                                           true,
+                                           0,
                                            false);
-        
+
         int siz = v.size();
         for(int i = 0; i < siz; i++)
         {
@@ -183,18 +182,18 @@ public class JDFColor extends JDFAutoColor
                 if (res.getResourceUsage().equals("TargetProfile"))
                 {
                     return res;
-                }   
+                }
             }
         }
         return null;
     }
 
     ///////////////////////////////////////////////////////////////////
-    
-    public JDFFileSpec getCreateTargetProfile() 
+
+    public JDFFileSpec getCreateTargetProfile()
     {
         JDFFileSpec res = getTargetProfile();
-        if (res == null) 
+        if (res == null)
         {
             res = appendTargetProfile();
         }
@@ -202,7 +201,7 @@ public class JDFColor extends JDFAutoColor
     }
 
     ///////////////////////////////////////////////////////////////////
-    
+
     JDFFileSpec appendTargetProfile()
     {
         JDFFileSpec res = appendFileSpec();
