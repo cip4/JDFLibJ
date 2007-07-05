@@ -1,9 +1,10 @@
+
 /*
  *
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,58 +69,38 @@
  *  
  * 
  */
-package org.cip4.jdflib.ifaces;
 
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.resource.devicecapability.JDFModuleCap;
-import org.cip4.jdflib.resource.devicecapability.JDFModulePool;
-import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap.EnumAvailability;
+package org.cip4.jdflib.resource.process;
 
-/**
- * interface that connects the devcap classes that implement module availability
- * @author prosirai
- *
- */
-public interface IModuleCapability
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumType;
+
+public class JDFColorTest extends JDFTestCaseBase
 {
-    /**
-     * get the ModulePool that contains ModuleCap elements referenced by this
-     * @return JDFModulePool the pool
-     */    
-    public JDFModulePool getModulePool();
-    /**
-     * get the ModulePool that contains ModuleCap elements referenced by this
-     * create one, if it does not exist
-     * 
-     * @return JDFModulePool the pool
-     */    
-    public JDFModulePool getCreateModulePool();
 
-    /**
-     * get VString attribute ModuleRefs
-     * @return VString the value of the attribute
-     */
-    public VString getModuleRefs();
+    private JDFColorPool cp;
+    public void testSetRawName()
+    {
+        JDFColor c=cp.appendColor();
+        byte[] b="grün".getBytes();
+        c.set8BitNames(b);
+        assertEquals(c.get8BitName(), "grün");
+    }
 
-    /**
-     * getAvailability - gets typesafe enumerated attribute <code>Availability</code>
-     *
-     * @return EnumAvailability: the enumeration value of the attribute
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
      */
-    public EnumAvailability getAvailability();
-    
-    /**
-     * append moduleRef to moduleRefs, if it does not exist, set the availability to
-     * module and ensure that the appropriate modulecap exists
-     * @return {@link JDFModuleCap} the Modulecap that id refers tp
-     * @return EnumAvailability: the enumeration value of the attribute
-     */
-    public JDFModuleCap appendModuleRef(String id);
-    
-    /**
-     * @param module
-     */
-    public void setAvailability(EnumAvailability module);
-
-
+    protected void setUp() throws Exception
+    {
+        // TODO Auto-generated method stub
+        super.setUp();
+        JDFDoc doc=new JDFDoc("JDF");
+        JDFNode n=doc.getJDFRoot();
+        n.setType(EnumType.ColorSpaceConversion);
+        cp=(JDFColorPool) n.addResource(ElementName.COLORPOOL, null);
+    }
+ 
 }

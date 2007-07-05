@@ -84,7 +84,9 @@ import java.util.Map;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoModulePool;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.ifaces.IModuleCapability;
@@ -212,6 +214,46 @@ public class JDFModulePool extends JDFAutoModulePool
         return mp.getMinAvailability(caps.getModuleRefs());
     }
     
+    /**
+     * @param caps the element to append the ref to
+     * 
+     * @return {@link JDFModuleCap} the Modulecap that id refers tp
+     */
+    public static JDFModuleCap appendModuleRef(IModuleCapability caps, String id)
+    {
+        caps.setAvailability(EnumAvailability.Module);
+        JDFModulePool mp=caps.getCreateModulePool();
+        ((KElement)caps).appendAttribute(AttributeName.MODULEREFS, id, null, null, true);
+        return mp.getCreateModuleCap(id);
+    }
+
+    /**
+     * get a modulecap with a given id
+     * 
+     * @param id the modulecap id
+     * @return the modulecap
+     */
+    public JDFModuleCap getModuleCap(String id)
+    {
+        return (JDFModuleCap) getChildWithAttribute(ElementName.MODULECAP, AttributeName.ID, null, id, 0, true);
+    }
+    
+    /**
+     * get a modulecap with a given id, create it if it does not exist
+     * 
+     * @param id the modulecap id
+     * @return the modulecap
+     */
+    public JDFModuleCap getCreateModuleCap(String id)
+    {
+        JDFModuleCap mc=getModuleCap(id);
+        if(mc==null)
+        {
+            mc=appendModuleCap();
+            mc.setID(id);
+        }
+        return mc;
+    }
  
 }
 

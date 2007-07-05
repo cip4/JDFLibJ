@@ -1314,12 +1314,27 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
      */
     private KElement getParentPool(String poolName)
     {
+        KElement parent = getPoolParent();
+         return parent.getElement(poolName);
+    }
+    /**
+     * get the DEvCapPool that contains devcap elements referenced by this
+     * @return JDFDevCapPool the pool
+     */
+    private KElement getCreateParentPool(String poolName)
+    {
+        KElement parent = getPoolParent();
+        return parent.getCreateElement(poolName);
+    }
+
+    private KElement getPoolParent()
+    {
         KElement parent=getDeepParent(ElementName.DEVICECAP,0);
         if(parent==null)
             parent=getDeepParent(ElementName.MESSAGESERVICE,0);
         if(!(parent instanceof JDFDeviceCap)&&!(parent instanceof JDFMessageService))
             throw new JDFException("JDFDevCap.getParentPool - invalid parent context");
-        return parent.getElement(poolName);
+        return parent;
     }
     
     /**
@@ -2342,6 +2357,13 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return(JDFModulePool)getParentPool(ElementName.MODULEPOOL);
     }
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.ifaces.IModuleCapability#getModulePool()
+     */
+    public JDFModulePool getCreateModulePool()
+    {
+        return(JDFModulePool)getCreateParentPool(ElementName.MODULEPOOL);
+    }
     /** 
      * get the availability of this devcaps based on the list of installed modules in ModuleRefs and ModulePool
      * @return
@@ -2349,6 +2371,13 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     public EnumAvailability getModuleAvailability()
     {
         return JDFModulePool.getModuleAvailability(this); 
+    }
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.ifaces.IModuleCapability#appendModuleRef(java.lang.String)
+     */
+    public JDFModuleCap appendModuleRef(String id)
+    {
+        return JDFModulePool.appendModuleRef(this, id);     
     }
 
 

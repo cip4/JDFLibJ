@@ -85,13 +85,21 @@ public class JDFColor extends JDFAutoColor
      */
     public void set8BitNames(byte[] cName)
     {
-        String rawName = JDFConstants.EMPTYSTRING;
-        rawName = StringUtil.setHexBinaryBytes(cName, -1);
-        setAttribute("RawName", rawName, JDFConstants.EMPTYSTRING);
+        String rawName =  StringUtil.setHexBinaryBytes(cName, -1);
+        setRawName(rawName);
         setName(new String(cName));
     }
 
-
+    /**
+     * Gets the ActualColorName or Name if no ActualColorName is set
+     * @return String Name of the color extracted from RawName, 
+     *         or if this is missing from Name, using the default transcoder
+     */
+    public String getActualColorName() 
+    {
+        final String strName = getAttribute(AttributeName.ACTUALCOLORNAME, null, null);
+        return strName==null ? getName() : strName;
+    }
 
     /**
      * Gets the 16 bit representation of the 8 bit color name
@@ -101,28 +109,23 @@ public class JDFColor extends JDFAutoColor
      */
     public String get8BitName() 
     {
-        String strName = JDFConstants.EMPTYSTRING;
-        if (hasAttribute("RawName", JDFConstants.EMPTYSTRING, false))
+        String strName = getAttribute(AttributeName.RAWNAME, null, null);
+        if (strName!=null)
         {
-            strName = getAttribute("RawName", JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING);
             byte[] rawName   = strName.getBytes();
             byte[] foundName = StringUtil.getHexBinaryBytes(rawName);
             
             return new String(foundName);
         }
-        return getName();
+        return getActualColorName();
     }
     
+    ////////////////////////////////////////////////////////////////
     
     public JDFFileSpec getColorProfile()
     {
-        VElement v = getChildElementVector(ElementName.FILESPEC,
-                                           null,
-                                           null, 
-                                           true, 
-                                           0, 
-                                           false);
-        int siz    = v.size();
+        VElement v = getChildElementVector(ElementName.FILESPEC, null, null, true, 0, false);
+        int siz    = v==null ? 0 : v.size();
         for(int i = 0; i < siz; i++)
         {
             JDFFileSpec res = (JDFFileSpec)v.elementAt(i);

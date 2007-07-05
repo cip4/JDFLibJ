@@ -973,6 +973,28 @@ public static JDFMessageService getMessageServiceForJMFType(JDFMessage m, JDFRes
    ////////////////////////////////////////////////////
     
     /**
+     * creates and links devcaps to modules
+     * @param includeNameExpression   regexp  of names  to include
+     */
+    public void createModuleCaps(String includeNameExpression)
+    {
+        VElement devcaps=getChildElementVector(ElementName.DEVCAPS, null, null, true, 0, true);
+        int siz=devcaps==null?0:devcaps.size();
+        for(int i=0;i<siz;i++)
+        {
+            JDFDevCaps dcs=(JDFDevCaps) devcaps.elementAt(i);
+            
+            String _name = dcs.getName();
+            if(StringUtil.matches(_name, includeNameExpression))
+            {
+                JDFModuleCap mc=dcs.appendModuleRef("Module_"+_name);
+                mc.setAvailability(EnumAvailability.Installed);
+                mc.setDescriptiveName("Module that implements the resource: "+_name);
+            }
+        }
+    }
+    
+    /**
      * set the defaults of node to the values defined in the child DevCap and State elements
      * @param node   the JDFNode in which to set defaults
      * @param bLocal if true, set only in the local node, else recurse children

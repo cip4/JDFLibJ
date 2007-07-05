@@ -160,6 +160,7 @@ import org.cip4.jdflib.resource.PhaseTimeTest;
 import org.cip4.jdflib.resource.ProcessRunTest;
 import org.cip4.jdflib.resource.process.JDFAddressTest;
 import org.cip4.jdflib.resource.process.JDFColorConversionParamsTest;
+import org.cip4.jdflib.resource.process.JDFColorTest;
 import org.cip4.jdflib.resource.process.JDFColorantControlTest;
 import org.cip4.jdflib.resource.process.JDFComChannelTest;
 import org.cip4.jdflib.resource.process.JDFCutBlockTest;
@@ -301,6 +302,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 
         // resource.process
         suite.addTestSuite(JDFAddressTest.class);
+        suite.addTestSuite(JDFColorTest.class);
         suite.addTestSuite(JDFColorantControlTest.class);
         suite.addTestSuite(JDFColorConversionParamsTest.class);
         suite.addTestSuite(JDFComChannelTest.class);

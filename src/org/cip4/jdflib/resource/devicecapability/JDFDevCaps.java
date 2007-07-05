@@ -231,9 +231,28 @@ public class JDFDevCaps extends JDFAutoDevCaps implements IModuleCapability
      * get the DEvCapPool that contains devcap elements referenced by this
      * @return JDFDevCapPool the pool
      */
+    private KElement getCreateParentPool(String poolName)
+    {
+        final KElement parent=getParentNode_KElement();
+        if(!(parent instanceof JDFDeviceCap)&&!(parent instanceof JDFMessageService))
+            throw new JDFException("JDFDevCap.getParentPool - invalid parent context");
+        return parent.getCreateElement(poolName);
+    }
+    /**
+     * get the DEvCapPool that contains devcap elements referenced by this
+     * @return JDFDevCapPool the pool
+     */
     public JDFModulePool getModulePool()
     {
         return (JDFModulePool) getParentPool(ElementName.MODULEPOOL);
+    }
+    /**
+     * get the DEvCapPool that contains devcap elements referenced by this
+     * @return JDFDevCapPool the pool
+     */
+    public JDFModulePool getCreateModulePool()
+    {
+        return (JDFModulePool) getCreateParentPool(ElementName.MODULEPOOL);
     }
     /**
      * get the DevCapPool that contains devcap elements referenced by this
@@ -928,7 +947,17 @@ public class JDFDevCaps extends JDFAutoDevCaps implements IModuleCapability
         }           
         return vs;
     }
-}
+
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.ifaces.IModuleCapability#appendModuleRef(java.lang.String)
+     */
+    public JDFModuleCap appendModuleRef(String id)
+    {
+        return JDFModulePool.appendModuleRef(this, id);     
+    }
+
+ 
+  }
 
 
 

@@ -52,7 +52,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
     }
     
     /**
-     * tests the proposed Color/@PDLName attribute  
+     * tests the proposed Color/@ActualColorName attribute  
      *
      */
     public final void testActualColorName()

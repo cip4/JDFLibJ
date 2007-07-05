@@ -592,6 +592,14 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
         assertEquals(contentObject.getCTM(), new JDFMatrix("1 0 0 1 1 1"));
         assertNotNull(lo.getContentObject(1));
     }
+    /////////////////////////////////////////////////////////////////
+    public void testCreateModuleCaps() throws Exception
+    {
+       devicecap.createModuleCaps(null);
+       assertNotNull(devicecap.getModulePool());
+    }
+/////////////////////////////////////////////////////////////////
+    
 /////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////
 

@@ -1102,18 +1102,40 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     {
         return(JDFModulePool)getParentPool(ElementName.MODULEPOOL);
     }
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.ifaces.IModuleCapability#getModulePool()
+     */
+    public JDFModulePool getCreateModulePool()
+    {
+        return(JDFModulePool)getCreateParentPool(ElementName.MODULEPOOL);
+    }
     /**
      * get the DEvCapPool that contains devcap elements referenced by this
      * @return JDFDevCapPool the pool
      */
     private KElement getParentPool(String poolName)
     {
+        KElement parent = getPoolParent();
+        return parent.getElement(poolName);
+    }
+    /**
+     * get the DEvCapPool that contains devcap elements referenced by this
+     * @return JDFDevCapPool the pool
+     */
+    private KElement getCreateParentPool(String poolName)
+    {
+        KElement parent = getPoolParent();
+        return parent.getCreateElement(poolName);
+    }
+
+    private KElement getPoolParent()
+    {
         KElement parent=getDeepParent(ElementName.DEVICECAP,0);
         if(parent==null)
             parent=getDeepParent(ElementName.MESSAGESERVICE,0);
         if(!(parent instanceof JDFDeviceCap)&&!(parent instanceof JDFMessageService))
             throw new JDFException("JDFDevCap.getParentPool - invalid parent context");
-        return parent.getElement(poolName);
+        return parent;
     }
     /**
      * (21) get VString attribute ModuleRefs
@@ -1124,5 +1146,12 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
        return StringUtil.tokenize(getAttribute(AttributeName.MODULEREFS, null, null)," ",false);
    }
 
-    /////////////////////////////////////////////
+   /* (non-Javadoc)
+    * @see org.cip4.jdflib.ifaces.IModuleCapability#appendModuleRef(java.lang.String)
+    */
+   public JDFModuleCap appendModuleRef(String id)
+   {
+       return JDFModulePool.appendModuleRef(this, id);     
+   }
+   /////////////////////////////////////////////
 }

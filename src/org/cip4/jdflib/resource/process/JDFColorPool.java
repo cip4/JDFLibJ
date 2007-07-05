@@ -86,7 +86,7 @@ import org.w3c.dom.DOMException;
 public class JDFColorPool extends JDFAutoColorPool
 {
     private static final long serialVersionUID = 1L;
-    
+
     /**
      * Constructor for JDFColorPool
      * @param ownerDocument
@@ -98,7 +98,7 @@ public class JDFColorPool extends JDFAutoColorPool
     {
         super(myOwnerDocument, qualifiedName);
     }
-    
+
     /**
      * Constructor for JDFColorPool
      * @param ownerDocument
@@ -114,7 +114,7 @@ public class JDFColorPool extends JDFAutoColorPool
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
-    
+
     /**
      * Constructor for JDFColorPool
      * @param ownerDocument
@@ -132,7 +132,7 @@ public class JDFColorPool extends JDFAutoColorPool
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
-    
+
     //**************************************** Methods *********************************************
     /**
      * toString
@@ -143,20 +143,21 @@ public class JDFColorPool extends JDFAutoColorPool
     {
         return "JDFColorPool[  --> " + super.toString() + " ]";
     }
-    
-    
+
+
     public void removeColor(String strColorName)
     {
-        JDFAttributeMap map=new JDFAttributeMap(AttributeName.NAME,strColorName);
-        VElement vElem = getChildElementVector(ElementName.COLOR, null, map, true, 0, false);
-        for (int i = 0; i < vElem.size(); i++)
+        VElement vElem = getChildElementVector(ElementName.COLOR, null, null, true, 0, false);
+        final int size = vElem==null ? 0 : vElem.size();
+        for (int i = 0; i < size; i++)
         {
-            KElement e = (KElement) vElem.elementAt(i);
-            e.deleteNode();
+            JDFColor c = (JDFColor) vElem.elementAt(i);
+            if(strColorName.equals(c.getActualColorName()))
+                c.deleteNode();
         }
     }
-    
-    
+
+
     /**
      * typesafe validator
      * @param EnumValidationLevel level validation level
@@ -164,15 +165,15 @@ public class JDFColorPool extends JDFAutoColorPool
      */
     public boolean isValid(EnumValidationLevel level)
     {
-        
+
         boolean bValid = super.isValid(level);
         if(!bValid) 
             return false;
-        
+
         bValid = !hasDuplicateColors();
         return bValid;
     }    
-    
+
     /**
      * does this ColorPool have Color elements with identical Name or RawName eattributes
      * return false if no Color elements with identical Name or RawName tags exist 
@@ -188,7 +189,7 @@ public class JDFColorPool extends JDFAutoColorPool
         VString vName    = new VString();
         VString vRawName = new VString();
         int nCols        = v.size();
-        
+
         for(int i = 0 ; i < nCols; i++)
         {
             JDFColor color = (JDFColor)v.elementAt(i);
@@ -201,11 +202,11 @@ public class JDFColorPool extends JDFAutoColorPool
                 return true;
             vRawName.add(colorName);
         }
-        
+
         return false;
     }
-    
-    
+
+
     /**
      * Get the Color Element with Name=name
      * @param String name the name of the color
@@ -215,27 +216,27 @@ public class JDFColorPool extends JDFAutoColorPool
      */
     public JDFColor getColorWithName(String colorName)
     {
-        JDFAttributeMap m = new JDFAttributeMap();
-        m.put(AttributeName.NAME, colorName);
-        VElement v = getChildElementVector(ElementName.COLOR, 
-                JDFConstants.EMPTYSTRING, 
-                m, 
-                true, 
-                0, 
-                false);
-        if(v.size() == 0)
+        if(colorName==null)
+            throw new JDFException("Bad colorname:"+colorName);
+
+        VElement v = getChildElementVector(ElementName.COLOR, null, null, true, 0, false);
+        int siz=v ==null ? 0 : v.size();
+        int pos=-1;
+        for(int i=0;i<siz;i++)
         {
-            return null;
+            JDFColor c=(JDFColor) v.elementAt(i);
+            if(colorName.equals(c.getActualColorName()))
+            {
+                if(pos<0)
+                    pos=i;
+                else
+                    throw new JDFException("Multiple colors exist for:"+colorName);
+            }
         }
-        else if (v.size() > 1)
-        {
-            throw new JDFException("JDFColorPool::GetColorWithName: too many colors\n");
-        }
-        
-        return (JDFColor)v.elementAt(0);
+        return (JDFColor) (pos==-1 ? null : v.elementAt(pos));
     }
-    
-    
+
+
     /**
      * Get the Color Element with RawName=rawName or Name=rawName in the momentary encoding
      * @param String rawName the 8 bit representation of the rawName of the color
@@ -245,13 +246,8 @@ public class JDFColorPool extends JDFAutoColorPool
      */
     public JDFColor getColorWith8BitName(String rawName)
     {
-        VElement v = getChildElementVector(ElementName.COLOR, 
-                null,
-                null, 
-                true, 
-                0, 
-                false);
-        
+        VElement v = getChildElementVector(ElementName.COLOR, null, null, true, 0, false);
+
         for(int i = 0; i < v.size(); i++)
         {
             JDFColor c = (JDFColor)v.elementAt(i);
@@ -261,11 +257,11 @@ public class JDFColorPool extends JDFAutoColorPool
                 return c;
             }
         }
-        
+
         return null;
     }
-    
-    
+
+
     /**
      * Get the Color Element with RawName=rawName 
      * @param String rawName the 8 bit representation of the rawName of the color
@@ -276,16 +272,10 @@ public class JDFColorPool extends JDFAutoColorPool
     public JDFColor getColorWithRawName(String rawName)
     {
         JDFAttributeMap m = new JDFAttributeMap();
-        String hexRawName = JDFConstants.EMPTYSTRING;
-        hexRawName        = StringUtil.setHexBinaryBytes(rawName.getBytes(), -1);
-        
+        String hexRawName = StringUtil.setHexBinaryBytes(rawName.getBytes(), -1);
+
         m.put(AttributeName.RAWNAME, hexRawName);
-        VElement v = getChildElementVector(ElementName.COLOR, 
-                JDFConstants.EMPTYSTRING, 
-                m, 
-                true, 
-                0, 
-                false);
+        VElement v = getChildElementVector(ElementName.COLOR, null, m,  true, 0,  false);
         if(v.size() == 0)
         {
             return null;
@@ -294,11 +284,10 @@ public class JDFColorPool extends JDFAutoColorPool
         {
             throw new JDFException("JDFColorPool.getColorWithRawName: too many colors\n");
         }
-        
         return (JDFColor)v.elementAt(0);
     }
-    
-    
+
+
     /**
      * Append a Color Element with RawName=rawName and Name = Name
      * @param String name the name of the color
@@ -325,11 +314,11 @@ public class JDFColorPool extends JDFAutoColorPool
         {
             throw new JDFException("JDFColorPool::AppendColorWithName color exists: " + colorName);
         }
-        
+
         return col;
     }
-    
-    
+
+
     /**
      * Get an existing or append a Color Element with RawName=rawName and Name = Name
      * @param colorName the name of the color
@@ -343,10 +332,10 @@ public class JDFColorPool extends JDFAutoColorPool
         JDFColor col = getColorWithRawName(rawName);
         if(col != null)
             return col;
-        
+
         // it only defaulted throught the transcoder, therefor redo
         col = getColorWithName(colorName);
-        
+
         if(col == null)
         {
             col = appendColor();
@@ -361,7 +350,7 @@ public class JDFColorPool extends JDFAutoColorPool
                 throw new JDFException("JDFColorPool.getCreateColorWithName color is inconsistent: " + colorName);
             }
         }
-        
+
         return col;
     }
 }

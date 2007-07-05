@@ -459,6 +459,25 @@ public class JDFDevCapTest extends TestCase
         assertEquals(dc.getModuleAvailability(), EnumAvailability.NotInstalled);
     }
     
+    public void testAppendModuleRef()
+    {
+        JDFDoc d=new JDFDoc("DeviceCap");
+        JDFDeviceCap deviceCap=(JDFDeviceCap) d.getRoot();
+        JDFDevCap dc=deviceCap.appendDevCaps().appendDevCap();
+        dc.setAvailability(EnumAvailability.NotInstalled);
+        assertEquals(dc.getAvailability(), EnumAvailability.NotInstalled);
+        assertEquals(dc.getModuleAvailability(), EnumAvailability.NotInstalled);
+        JDFModuleCap mc=dc.appendModuleRef("MyDev");
+        mc.setAvailability(EnumAvailability.Disabled);
+        assertEquals(dc.getAvailability(), EnumAvailability.Module);
+        assertEquals(dc.getModuleAvailability(), EnumAvailability.Disabled);
+        assertEquals(mc.getAvailability(), EnumAvailability.Disabled);
+        mc=dc.appendModuleRef("MyOtherDev");
+        mc.setAvailability(EnumAvailability.NotInstalled);
+        assertEquals(dc.getModuleAvailability(), EnumAvailability.NotInstalled);
+        assertEquals(mc.getAvailability(), EnumAvailability.NotInstalled);
+    }
+    
     public void testGetModuleAvailability()
     {
         JDFDoc d=new JDFDoc("DeviceCap");
