@@ -1207,10 +1207,11 @@ public class KElementTest extends JDFTestCaseBase
         JDFDoc doc=new JDFDoc("JDF");
         JDFNode n=doc.getJDFRoot();
         JDFExposedMedia x=(JDFExposedMedia) n.addResource("ExposedMedia", EnumUsage.Input);
+        x.setAgentName("a1");
         JDFExposedMedia x2=(JDFExposedMedia) x.addPartition(EnumPartIDKey.SignatureName, "S1");
         KElement e2=n.appendElement("foo");
         e2.setAttributes(x2);
-        assertEquals("root resource attributes not copied",e2.getAttribute("Class"), "Handling");
+        assertEquals("root resource attributes not copied",e2.getAttribute("AgentName"), "a1");
         assertEquals("leaf resource attributes not copied",e2.getAttribute("SignatureName"), "S1");
         
     }

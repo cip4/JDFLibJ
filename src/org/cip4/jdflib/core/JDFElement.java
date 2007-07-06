@@ -2368,7 +2368,8 @@ public class JDFElement extends KElement
             if(n!=null)
             {
                 local=n.getSpawnID(true);
-                local="."+StringUtil.rightStr(local, 6)+".";
+                if(!isWildCard(local))
+                    local="."+StringUtil.rightStr(local, 6)+".";
             }
             strName = getIDPrefix() + local+uniqueID(0);
         }

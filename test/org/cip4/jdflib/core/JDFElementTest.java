@@ -807,13 +807,15 @@ public class JDFElementTest extends TestCase
         JDFDoc doc=new JDFDoc("JDF");
         JDFElement e=doc.getJDFRoot();
         HashSet m=new HashSet();
+        KElement e2=e.appendElement("e2");
         for(int i=0;i<10000;i++)
         {           
-            final JDFElement appendElement = (JDFElement)e.appendElement("FooBar");
+            final JDFElement appendElement = (JDFElement)e2.appendElement("FooBar");
             String s=appendElement.appendAnchor(null);
             if(m.contains(s))
                 fail("oops");
             assertEquals(s, appendElement.getID());
+            assertTrue(s.indexOf("..")<0);
             m.add(s);
         }
     }

@@ -317,7 +317,7 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
     {
         Node n=getParentNode();
         if(bDefaultWorkStepID && !hasAttribute(AttributeName.WORKSTEPID))
-            setAttribute(AttributeName.WORKSTEPID, "W"+uniqueID(0),null);
+            setWorkStepID( "W"+uniqueID(0));
         if (n!=null && ElementName.RESOURCEPOOL.equals(n.getLocalName()))
         {
             super.init();
@@ -325,6 +325,25 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
             setPartUsage(JDFResource.EnumPartUsage.Implicit);			
         }
         return true;
+    }
+
+    /**
+     * set the workstepid
+     * @param workStep
+     */
+    public void setWorkStepID(String workStep)
+    {
+        setAttribute(AttributeName.WORKSTEPID,workStep,null);
+    }
+    
+    /**
+     * get the workstepid
+     * @return the workstepid
+     *
+     */
+    public void getWorkStepID()
+    {
+        getAttribute(AttributeName.WORKSTEPID,null,"");
     }
 
     /**

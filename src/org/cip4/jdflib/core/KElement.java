@@ -1123,9 +1123,7 @@ public class KElement extends ElementNSImpl
      */
     public static boolean isWildCard(String nodeName)
     {
-        // use Star instead of WILDCARD to appease the compiler
         return (nodeName==null) || (nodeName.length()<2) && (nodeName.equals(JDFConstants.EMPTYSTRING) || nodeName.equals(JDFConstants.STAR));
-        // return (nodeName==null) || nodeName.equals(JDFConstants.EMPTYSTRING) || nodeName.equals(JDFConstants.STAR);
     }
 
     /**
@@ -1144,20 +1142,20 @@ public class KElement extends ElementNSImpl
     }
     protected boolean fitsName_KElement(String nodeName, String nameSpaceURI)
     {
-        boolean bNameOK = isWildCard(nodeName);
+        boolean bNameOK = nodeName==null || isWildCard(nodeName);
 
         // first check name, since it is faster
         if (!bNameOK)
         {
             String s=getNodeName();
-            bNameOK=nodeName.equals(s);
-            if(!bNameOK) {
+            bNameOK=s.endsWith(nodeName);
+            if(bNameOK && !s.equals(nodeName)) {
 				bNameOK=nodeName.equals(xmlnsLocalName(s));
 			}
         }
 
         // only check ns, if the name is ok
-        if (bNameOK && !isWildCard(nameSpaceURI))
+        if (bNameOK && nameSpaceURI!=null && !isWildCard(nameSpaceURI))
         {
             if (!nameSpaceURI.equals(getNamespaceURI()))
             {
@@ -1381,25 +1379,53 @@ public class KElement extends ElementNSImpl
      */
     public int setAttributes(KElement kElem)
     {
+        return setAttributes(kElem,null);
+    }
+    /**
+     * Sets the attributes from the curent element to the attributes from kElem.
+     * If the Attributes map from kElem is empty (kElem has no attributes),
+     * zero is returned. Otherwhise the size of the map (number of attributes
+     * from kElem) is returned.
+     *
+     * @param  kElem     the attribute source
+     *
+     * @return int       number of elements from kElem
+     */
+    protected int setAttributes(KElement kElem, VString ignoreList)
+    {
         if(kElem==null)
             return 0;
 
         final NamedNodeMap nm = kElem.getAttributes();
 
         final int siz = (nm == null) ? 0 : nm.getLength();
-
+        KElement parent=null;
         if(kElem instanceof JDFResource)
         {
-            KElement parent=kElem.getParentNode_KElement();
+            parent=kElem.getParentNode_KElement();
             if(parent!=null && kElem.getNodeName().equals(parent.getNodeName()))
             {
-                setAttributes(parent);
+                JDFResource r=(JDFResource)parent;
+                VString il2=ignoreList;
+                if(il2==null)
+                {
+                    il2=new VString();
+                    il2.add(AttributeName.ID);
+                    il2.add(AttributeName.PARTUSAGE);
+                    il2.add(AttributeName.PARTIDKEYS);
+                    il2.add(AttributeName.CLASS);
+                    il2.appendUnique(r.getPartIDKeys());
+                }
+                setAttributes(parent,il2);
             }
         }
         for (int i = 0; i < siz; i++)
         {
             final Node a = nm.item(i);
-            setAttribute(a.getNodeName(), a.getNodeValue(), a.getNamespaceURI());
+            if(ignoreList==null || !ignoreList.contains(a.getLocalName()) )
+            {
+                setAttribute(a.getNodeName(), a.getNodeValue(), a.getNamespaceURI());
+            }
         }
         return siz;
     }
