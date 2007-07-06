@@ -1278,6 +1278,24 @@ public class JDFResourceTest extends JDFTestCaseBase
 
     }
 
+    public void testSetAttributes()
+    {        
+        JDFDoc d=new JDFDoc(ElementName.JDF);
+        JDFNode n=d.getJDFRoot();
+        JDFResource r1=n.addResource(ElementName.SPINETAPINGPARAMS, EnumUsage.Input);
+        JDFResource r2=n.addResource(ElementName.SPINETAPINGPARAMS, EnumUsage.Input);
+        JDFResource r1p=r1.addPartition(EnumPartIDKey.SheetName, "s1").addPartition(EnumPartIDKey.Side, EnumSide.Front);
+        r1p.setAgentName("a1");
+        r1.setAgentVersion("v1");
+        JDFResource r2p=r2.addPartition(EnumPartIDKey.SheetName, "s2").addPartition(EnumPartIDKey.Side, EnumSide.Back);
+        r2p.setAttributes(r1p);
+        assertEquals("child copied",r2p.getAgentName(), "a1");
+        assertEquals("root copied",r2p.getAgentVersion(), "v1");
+        assertEquals("parent partIDKey not copied",r2p.getSheetName(),"s2");
+        assertEquals("leaf partIDKey copied",r2p.getSide(),EnumSide.Front);
+    }
+    
+    
     public void testSetLocked()
     {
         JDFDoc doc=creatXMDoc();
