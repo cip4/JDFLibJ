@@ -341,9 +341,9 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
      * @return the workstepid
      *
      */
-    public void getWorkStepID()
+    public String getWorkStepID()
     {
-        getAttribute(AttributeName.WORKSTEPID,null,"");
+        return getAttribute(AttributeName.WORKSTEPID,null,"");
     }
 
     /**
