@@ -654,32 +654,4 @@ public abstract class JDFAutoResourceInfo extends JDFElement
         return (JDFPart) appendElement(ElementName.PART, null);
     }
 
-    /** (26) getCreateResource
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFResource the element
-     */
-    public JDFResource getCreateResource(int iSkip)
-    {
-        return (JDFResource)getCreateElement_KElement(ElementName.RESOURCE, null, iSkip);
-    }
-
-    /**
-     * (27) const get element Resource
-     * @param iSkip number of elements to skip
-     * @return JDFResource the element
-     * default is getResource(0)     */
-    public JDFResource getResource(int iSkip)
-    {
-        return (JDFResource) getElement(ElementName.RESOURCE, null, iSkip);
-    }
-
-    /**
-     * (30) append element Resource
-     */
-    public JDFResource appendResource() throws JDFException
-    {
-        return (JDFResource) appendElement(ElementName.RESOURCE, null);
-    }
-
 }// end namespace JDF
