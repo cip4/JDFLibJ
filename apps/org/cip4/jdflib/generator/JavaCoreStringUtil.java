@@ -1721,8 +1721,12 @@ public class JavaCoreStringUtil
 
             m_nSchemaElement = (SchemaElement) vElements.elementAt(i);
             strElementName = m_nSchemaElement.getStrElementName();
-            if (!strElementName.endsWith("Ref"))
-            {
+            
+            if (strElementName.endsWith("Ref") || 
+            		("ResourceInfo".equals(strComplexTypeName) && "Resource".equals(strElementName))) {
+            	// don't write the element setters and getters for Ref-elements  
+            	// and for ResourceInfo.Resource (Resource is abstract)
+            } else {
                 strReturnType = m_nSchemaElement.getStrReturnType();
                 if ("1".equals(m_nSchemaElement.getStrMaxOccurs()))
                 {
