@@ -1,5 +1,85 @@
 ___________________________________________________________
 
+
+Label JDFLIBJ_2.1.3BLD441 (06.07.2007)
+
+fix for setattributes(KElement) when applied to resources
+added NodeInfo get/setWorkStepID
+remove ".." in id generation
+
+
+ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD441) && !lbtype(JDFLIBJ_2.1.3BLD440)}" -print
+.\core\JDFElement.java@@\main\235
+.\core\JDFNodeInfo.java@@\main\54
+.\core\KElement.java@@\main\245
+___________________________________________________________
+
+
+Label JDFLIBJ_2.1.3BLD440 (05.07.2007)
+
+correct handling of multiple elements in subnodes when calling getChildElementVector for resources
+additional sanity check when merging partitions
+url fixes
+setAttribute(ns:foo,null,"www.foobar) now correctly removes ns:foo
+move StreamToFile from urlutil to fileutil
+implement negative durations
+npe in isexecutable http://www.cip4.org/jira//browse/EDITOR-135
+fix for xpath search in editor
+xpath enhancements
+add high level locator methods to comchannel (mailto: and tel:)
+add stackwalker wrapper to c++ for memory leak checks
+add stationName partiton key
+add support for multiple nodeinfo by combinedprocessindex
+npe fix
+parallel spawn test
+add module references in devcaps availability
+modifications for modules in device capabilities
+actualcolorname support
+remove combinedprocessindex for JDFNode.linkResource
+
+
+ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD440) && !lbtype(JDFLIBJ_2.1.3BLD432)}" -print
+.\auto\JDFAutoColor.java@@\main\74
+.\auto\JDFAutoDevCap.java@@\main\48
+.\auto\JDFAutoDevCaps.java@@\main\53
+.\auto\JDFAutoModuleCap.java@@\main\14
+.\auto\JDFAutoPart.java@@\main\50
+.\auto\JDFAutoStation.java@@\main\12
+.\core\AttributeName.java@@\main\43
+.\core\JDFConstants.java@@\main\70
+.\core\JDFElement.java@@\main\234
+.\core\JDFNodeInfo.java@@\main\53
+.\core\JDFRefElement.java@@\main\61
+.\core\JDFResourceLink.java@@\main\134
+.\core\KElement.java@@\main\244
+.\core\VElement.java@@\main\32
+.\core\XMLDoc.java@@\main\83
+.\ifaces@@\main\2
+.\ifaces\IModuleCapability.java@@\main\1
+.\jmf\JDFMessage.java@@\main\70
+.\jmf\JDFQueue.java@@\main\20
+.\node\JDFNode.java@@\main\249
+.\resource\devicecapability\JDFAbstractState.java@@\main\50
+.\resource\devicecapability\JDFDevCap.java@@\main\51
+.\resource\devicecapability\JDFDevCaps.java@@\main\38
+.\resource\devicecapability\JDFDeviceCap.java@@\main\49
+.\resource\devicecapability\JDFModulePool.java@@\main\7
+.\resource\JDFResource.java@@\main\220
+.\resource\process\JDFColor.java@@\main\26
+.\resource\process\JDFColorPool.java@@\main\27
+.\resource\process\JDFComChannel.java@@\main\15
+.\util@@\main\19
+.\util\BiHashMap.java@@\main\1
+.\util\FileUtil.java@@\main\1
+.\util\JDFDuration.java@@\main\7
+.\util\JDFMerge.java@@\main\13
+.\util\MimeUtil.java@@\main\4
+.\util\StatusUtil.java@@\main\6
+.\util\StringUtil.java@@\main\60
+.\util\UrlUtil.java@@\main\7
+___________________________________________________________
+
+
 Label JDFLIBJ_2.1.3BLD432 (08.06.2007)
 
 made VJDFAttributemap.toString() more readable
@@ -23,6 +103,7 @@ ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD432) && !lbtype(JDFLIBJ_2.1.3BLD431)
 .\util@@\main\18
 .\util\ContainerUtil.java@@\main\1
 ___________________________________________________________
+
 
 Label JDFLIBJ_2.1.3BLD431 (30.05.2007)
 
@@ -909,8 +990,8 @@ DocumentJDFImpl
                 SearchPath does now map to JDFComment. The file
                 JDF SearchPath is obsolet and got deleted
 JDFElement
-    changed     getChildElementVector in JDFElement fügte auch dann REF Elemente dem Vector
-                hinzu wenn diese eigentlich aufgelöst werden sollten. Dies macht die Methode nun
+    changed     getChildElementVector in JDFElement fgte auch dann REF Elemente dem Vector
+                hinzu wenn diese eigentlich aufgellst werden sollten. Dies macht die Methode nun
                 nicht mehr.
 
 JDFNode
@@ -973,7 +1054,7 @@ JDFResourceLink
     added        expandTarget(boolean bForce)
 
 KElement
-         bug fix        setAttribute() – throw a JDFException if two setAttribute using the same prefix but a different
+         bug fix        setAttribute()  throw a JDFException if two setAttribute using the same prefix but a different
 namespace are used
 JDFNode
     added        boolean setPartStatus (VJDFAttributeMap vmattr, EnumNodeStatus status)
@@ -992,7 +1073,7 @@ deleted
 
 JDFDate
          info        Java functions Date.before() and Calendar.before() work perhaps unexpectedly:
-            calendar1.before(date1) returns always false (Calendar and Date can’t be mixed)
+            calendar1.before(date1) returns always false (Calendar and Date cant be mixed)
             should JDFDate override and implement a mixed type version of before() et al. ???
 
 JDFNode
@@ -1009,7 +1090,7 @@ ________________________________________________________________________________
 Label JDFLIBJ_2.1.2BLD015 (xxxx)
 
 JDFNode
-         changed        there was a NullpointerException if a resource for a Resourcelink wasn’t there. We decided to
+         changed        there was a NullpointerException if a resource for a Resourcelink wasnt there. We decided to
 continue in this case. So in the best case your spawned prozess is still valid but is missing a
 audit for example. In the worst case your spawned job is as broken then the main jdf.
 KElement
@@ -1073,10 +1154,10 @@ bug fix    fix for DOM Level 1 namespace bug in setAttribute(String key, String 
 nameSpaceURI) (copied from C++)
 
 JDFResourceLinkPool
-bug fix    fix for DOM Level 1 namespace bug in appendResource (…)
+bug fix    fix for DOM Level 1 namespace bug in appendResource ()
 
 JDFElement
-bug fix    fix for DOM Level 1 namespace bug in refElement (…)
+bug fix    fix for DOM Level 1 namespace bug in refElement ()
 
 
 This DOM Level 1 namespace bug will get a more global treatment in BLD014
@@ -1163,7 +1244,7 @@ deprecated    getStatusDetails(boolean bInherit). Use getStatusDetails () instea
 bug fix    getJobPartID(). Default version of getJobPartID(boolean bInherit)
 added    getJobPartID(boolean bInherit)
 added    getSpawnID(boolean bInherit)
-changed    getTypes(), setTypes(), validTypes() – correction for Process Group Nodes
+changed    getTypes(), setTypes(), validTypes()  correction for Process Group Nodes
 added    getTemplate()
 
 JDFResourceLinkPool
@@ -1368,8 +1449,8 @@ KElement.java
     added        appendElementN()
 
 JDFDoc.java
-    changed    getJDFDoc() returned the the nodename ‘JDF’ even if in wrong namespace.At the same
-            time it returned null for the correct ‘jdf:JDF’ with jdf: = http://www.CIP4.org/JDFSchema_1_1
+    changed    getJDFDoc() returned the the nodename JDF even if in wrong namespace.At the same
+            time it returned null for the correct jdf:JDF with jdf: = http://www.CIP4.org/JDFSchema_1_1
 getJDFDoc() does now look for the lokal name (everything past the first colon if there is a
 colon) and checks for valid jdf namespaceURI.
 
@@ -1387,7 +1468,7 @@ span.JDFSpanMediaColor.java
 
 StringUtil.java
     added        escape and unescape. You must spezify which characters you wish to escape, which radix
-            and seperator you want to use. Binary radix (2) and an ‘Ö’ would be encoded as 11010110
+            and seperator you want to use. Binary radix (2) and an ? would be encoded as 11010110
 
 DocumentJDFImplTest.java
     added        test for recognition heuristic of context sensitive elements
