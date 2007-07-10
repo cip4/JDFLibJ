@@ -133,9 +133,8 @@ public interface JDFBaseDataTypes
     /**
      * max difference between two double values to be equal
      */
-    public static final double EPSILON = 0.0000000001;
+    public static final double EPSILON = 0.000001;
 
-    
     /**
      * Enumeration for FitsValue method, 
      * switches between Allowed and Present testlists 

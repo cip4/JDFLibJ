@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -78,8 +78,6 @@
  */
 package org.cip4.jdflib.datatypes;
 
-import java.util.zip.DataFormatException;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.node.JDFNode;
@@ -87,52 +85,30 @@ import org.cip4.jdflib.node.JDFNode;
 
 public class JDFNumListTest extends JDFTestCaseBase
 {
-    public final void testSetString()
+    public final void testSetString() throws Exception
     {
         JDFDoc d=new JDFDoc("JDF");
         JDFNode n=d.getJDFRoot();
-        
+
         JDFIntegerList il =null;
-        try
-        {
-            il = new JDFIntegerList("1 2 INF");
-            n.setAttribute("test",il,null);
-            assertEquals("il",il.toString(),"1 2 INF");
-        }
-        catch (DataFormatException dfe)
-        {
-            assertFalse("exception caught",false);
-        }
-        
+        il = new JDFIntegerList("1 2 INF");
+        n.setAttribute("test",il,null);
+        assertEquals("il",il.toString(),"1 2 INF");
+
         JDFNumberList nl = null;
-        try
-        {
-            nl = new JDFNumberList("-INF 1.1 2.2 INF");
-            n.setAttribute("test2",nl,null);
-            assertEquals("nl",nl.toString(),"-INF 1.1 2.2 INF");
-        }
-        catch (DataFormatException dfe)
-        {
-            assertFalse("exception caught",false);
-        }
-     }
-       
+        nl = new JDFNumberList("-INF 1.1 2.2 INF");
+        n.setAttribute("test2",nl,null);
+        assertEquals("nl",nl.toString(),"-INF 1.1 2.2 INF");
+    }
+
     //////////////////////////////////////////////////////////////
 
-    public final void testGetIntArray()
+    public final void testGetIntArray() throws Exception
     {
-        JDFIntegerList il =null;
-        try
-        {
-            il = new JDFIntegerList("1 2 INF");
-            int[] ar=il.getIntArray();
-            assertEquals(3,ar.length);
-            assertEquals(ar[2],Integer.MAX_VALUE);        
-        }
-        catch (DataFormatException dfe)
-        {
-            assertFalse("exception caught",false);
-        }
+        JDFIntegerList il = new JDFIntegerList("1 2 INF");
+        int[] ar=il.getIntArray();
+        assertEquals(3,ar.length);
+        assertEquals(ar[2],Integer.MAX_VALUE);        
     }
 
     //////////////////////////////////////////////////////////////
@@ -150,6 +126,32 @@ public class JDFNumListTest extends JDFTestCaseBase
         assertEquals(iArray[2],ar[2]);        
     }
     //////////////////////////////////////////////////////////////
+    public final void testScale()
+    {
+        int[] iArray=new int[3];
+        iArray[0]=1;
+        iArray[1]=2;
+        iArray[2]=4;
+        JDFIntegerList il = new JDFIntegerList(iArray);
+        il.scale(2);
+        int[] ar=il.getIntArray();
+        assertEquals(iArray.length,ar.length);
+        assertEquals(2*iArray[0],ar[0]);        
+        assertEquals(2*iArray[1],ar[1]);        
+        assertEquals(2*iArray[2],ar[2]);        
+    }
+    //////////////////////////////////////////////////////////////
+    public final void testCopy() throws Exception
+    {
+        JDFCMYKColor cmy1=new JDFCMYKColor("1 2 3 4");
+        JDFCMYKColor cmy2=new JDFCMYKColor(cmy1);
+        assertEquals(cmy1, cmy2);
+        cmy2.setK(0);
+        assertEquals(cmy2.getK(), 0.,0.);
+        assertEquals(cmy1.getK(), 4.,0.);
+        
+    }
+    //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////
     public final void testRemoveElementAt()
     {
@@ -163,9 +165,19 @@ public class JDFNumListTest extends JDFTestCaseBase
         assertEquals(il.getInt(-1),2);
         il.removeElementAt(-1);
         assertEquals(il.getInt(-1),1);
-     }
+    }
     //////////////////////////////////////////////////////////////
 
+    public void testGetDouble() throws Exception
+    {
+        JDFNumberList nl=new JDFNumberList("1.1 2.2 3.3");
+        assertEquals(nl.doubleAt(0), 1.1,0.0);
+        assertEquals(nl.doubleAt(1), 2.2,0.0);
+        assertEquals(nl.doubleAt(2), 3.3,0.0);
+        assertEquals(nl.doubleAt(-1), 3.3,0.0);
+        assertEquals(nl.doubleAt(3),0.0 ,0.0);
+               
+    }
     //////////////////////////////////////////////////////////////
-    
+
 }

@@ -85,6 +85,7 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
 
 
 /**
@@ -343,8 +344,8 @@ public class StringUtilTest extends JDFTestCaseBase
         assertEquals(StringUtil.replaceCharSet("abbcc", "ab","_", 0), "___cc");
         assertEquals(StringUtil.replaceCharSet("abbcc", "ab","_", 2), "ab_cc");
     }
-//////////////////////////////////////////////////////////////
-    
+
+
     public void testRightString()
     {
         assertEquals(StringUtil.rightStr("abbcc",2), "cc");
@@ -354,8 +355,8 @@ public class StringUtilTest extends JDFTestCaseBase
         assertNull(StringUtil.rightStr("abc",-55));
     }
 
-//////////////////////////////////////////////////////////////
-    
+
+
     public void testLeftString()
     {
         assertEquals(StringUtil.leftStr("abbcc",2), "ab");
@@ -364,7 +365,7 @@ public class StringUtilTest extends JDFTestCaseBase
         assertNull(StringUtil.leftStr(null,-5));
         assertNull(StringUtil.leftStr("abc",-55));
     }
-//////////////////////////////////////////////////////////////
+
 
     public void testParseDouble()
     {
@@ -413,6 +414,8 @@ public class StringUtilTest extends JDFTestCaseBase
         d=123.456e4;
         s=StringUtil.formatDouble(d);
         assertEquals("s=int","1234560",s);       
+        assertEquals("s=real small","0",StringUtil.formatDouble(0.1e-20));       
+        assertEquals("s=real small -","0",StringUtil.formatDouble(-0.1e-20));       
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -502,6 +505,36 @@ public class StringUtilTest extends JDFTestCaseBase
         assertTrue(s.toLowerCase().endsWith(".zip"));
         assertEquals(s,"a.ZIP");
     }   
+    ///////////////////////////////////////////////////////////////////////////
+
+    public  void testisEqual()
+    {
+        final double d=1.3141516171819;
+        double d2=0.00000000000001;
+        double d3=-0.000000000000011;
+        
+        while (d2<9999999999.9999)
+        {
+            d2*=d;
+            d3*=d;
+            assertTrue(""+d2,StringUtil.isEqual(d2, StringUtil.parseDouble(StringUtil.formatDouble(d2), 0.)));
+            assertTrue(""+d3,StringUtil.isEqual(d3, StringUtil.parseDouble(StringUtil.formatDouble(d3), 0.)));
+            assertFalse(""+d2,StringUtil.isEqual(d2, d2*(1+1.1*JDFBaseDataTypes.EPSILON)+JDFBaseDataTypes.EPSILON));
+            assertFalse(""+d3,StringUtil.isEqual(d3, d3*(1+1.1*JDFBaseDataTypes.EPSILON)-JDFBaseDataTypes.EPSILON));
+        }
+        assertTrue("0.000001",StringUtil.isEqual(0.000000001,-0.000000001 ));
+        assertTrue("int",StringUtil.isEqual(4,4 ));
+    }
+    ///////////////////////////////////////////////////////////////////////////
+
+    public  void testCompareTo()
+    {
+        assertEquals(-1, StringUtil.compareTo(-3, -2));    
+        assertEquals(1, StringUtil.compareTo(3, 2));    
+        assertEquals(1, StringUtil.compareTo(3, 2));    
+        assertEquals(1, StringUtil.compareTo(3, 2));    
+        assertEquals(0, StringUtil.compareTo(2+0.5*JDFBaseDataTypes.EPSILON, 2));    
+    }
     ///////////////////////////////////////////////////////////////////////////
 
     public  void testisWindowsLocalPath()

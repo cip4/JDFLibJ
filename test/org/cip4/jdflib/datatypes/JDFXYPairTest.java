@@ -18,36 +18,18 @@ import org.cip4.jdflib.node.JDFNode;
 
 public class JDFXYPairTest extends TestCase
 {
-    public final void testSetString()
+    public final void testSetString() throws Exception
     {
         JDFDoc doc=new JDFDoc("JDF");
         JDFNode n=doc.getJDFRoot();
-        
-        JDFXYPair xy = new JDFXYPair();
-        
-        try
-        {
-            xy = new JDFXYPair("1 2");
-        }
-        catch (DataFormatException dfe)
-        {
-            assertFalse("exception caught",false);
-            System.out.println(dfe.toString());
-        }
+
+        JDFXYPair xy =  new JDFXYPair("1 2");
         n.setAttribute("test",xy,null);
-        
-        try
-        {
-            xy = new JDFXYPair("1.1 2.2");
-        }
-        catch (DataFormatException dfe)
-        {
-            assertFalse("exception caught",false);
-            System.out.println(dfe.toString());
-        }
+
+        xy = new JDFXYPair("1.1 2.2");
         n.setAttribute("test2",xy,null);
         assertEquals("double double",n.getAttribute("test2",null,""),"1.1 2.2");
-        
+
         try
         {
             new JDFXYPair("1 2 3");
@@ -68,6 +50,14 @@ public class JDFXYPairTest extends TestCase
         assertTrue(ab.equals(xy));
         assertTrue(ab.isLessOrEqual(xy));
         assertTrue(ab.isGreaterOrEqual(xy));
+    }
+    public final void testClone() throws Exception
+    {
+         
+        JDFXYPair ab = new JDFXYPair(1.0, 2.0);
+        JDFXYPair ac=new JDFXYPair(ab);
+        ac.setX(3.0);
+        assertEquals(ab.getX(), 1.0,0.0);
     }
 
     public final void testIsLessOrEqual()

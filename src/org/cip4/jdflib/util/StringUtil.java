@@ -97,6 +97,7 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
@@ -374,12 +375,13 @@ public class StringUtil
      * default: tokenize(strWork, delim, false)
      * 
      * @param strWork the string to tokenize
-     * @param delim       the delimiter
+     * @param delim       the delimiter, if null use whitespace
      * @param delim2token should a delimiter be a token?
      * @return the vector of strings
      */
     public static VString tokenize(String strWork, String delim, boolean delim2token)
     {
+        delim=delim==null ? JDFConstants.BLANK : delim;
         VString v = new VString();
         if(strWork != null)
         {
@@ -710,6 +712,39 @@ public class StringUtil
         if(StringUtils.isNumeric(strWork.substring(0,1)))
             return false;
         return isNMTOKEN(strWork);
+    }
+    
+    /**
+     * return true if d1 and d2 are within a range of epsilon
+     * or close enough to be serialized identically
+     * @param d1
+     * @param d2
+     * @return true if (almost) identical
+     */
+    public static boolean isEqual(double d1, double d2)
+    {
+        if(d1==d2)
+            return true;
+        if(Math.abs(d1-d2)<JDFBaseDataTypes.EPSILON)
+            return true;
+        if(d1!=0 && Math.abs((d2/d1)-1.0)<JDFBaseDataTypes.EPSILON)
+            return true;
+        
+        return false;
+    }
+    /**
+     * return -1 if d1 < d2 , 0 if d1==d2 ; +1 if d1>d2 are within a range of epsilon
+     * or close enough to be serialized identically
+     * @param d1
+     * @param d2
+     * @return int 1,0 or -1
+     */
+    public static int compareTo(double d1, double d2)
+    {
+        if(isEqual(d1, d2))
+            return 0;
+        return  d1<d2 ? -1 : 1;
+
     }
 
     /**
@@ -1123,6 +1158,11 @@ public class StringUtil
             s=String.valueOf(d);
             if(s.endsWith(".0"))
                 s=s.substring(0,s.length()-2);
+            if(s.indexOf("E")>=0)
+            {
+                Double[] ad={new Double(d)};
+                s=sprintf("%10.10f", ad);
+            }
 
             if(s.length()>10)
             {
@@ -1135,7 +1175,7 @@ public class StringUtil
                         l=posDot+9;
                         s=s.substring(0,l);
                         if(s.endsWith("999"))
-                            return formatDouble(d+0.0000000004);
+                            return formatDouble(d+0.000000004);
 
                         int n;
                         for(n=l;n>posDot;n--)
@@ -1147,6 +1187,12 @@ public class StringUtil
                     }
                 }                
             }
+            if(s.endsWith("."))
+            {
+                s=leftStr(s, -1);                
+            }
+            if("-0".equals(s))
+                s="0";
         }
         return s;
     }

@@ -13,6 +13,7 @@ import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.util.HashUtil;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * This class represents a rectangle JDFRectangle) consisting of a lower left x value (llx),
@@ -126,35 +127,6 @@ public class JDFRectangle extends JDFNumList
     }
 
     /**
-     * equals - returns true if both JDFRectangles are equal, otherwise false
-     *
-     * @param other Object to compare
-     * @return boolean - true if equal otherwise false
-     */
-    public boolean equals(Object other)
-    {
-        if (this == other)
-        {
-            return true;
-        }
-        if (other == null)
-        {
-            return false;
-        }
-        if (!other.getClass().equals(getClass()))
-        {
-            return false;
-        }
-            
-        JDFRectangle r = (JDFRectangle) other;
-        
-        return  (Math.abs(this.getLlx() - r.getLlx())  <= EPSILON) &&
-                (Math.abs(this.getLly() - r.getLly())  <= EPSILON) &&
-                (Math.abs(this.getUrx() - r.getUrx())  <= EPSILON) &&
-                (Math.abs(this.getUry() - r.getUry())  <= EPSILON) ;
-    }
-    
-    /**
      * hashCode complements equals() to fulfill the equals/hashCode contract
      * @return int
      */
@@ -163,51 +135,6 @@ public class JDFRectangle extends JDFNumList
         return HashUtil.hashCode(super.hashCode(), this.toString());
     }
     
-    /**
-    * isGreaterOrEqual - equality operator >=
-    * 
-    * @param r the JDFRectangle object to compare to
-    * @return boolean - true if <code>this</this> >= r  
-    */
-    public boolean isGreaterOrEqual(JDFRectangle r)
-    {
-        return (getLlx()<=r.getLlx())&&(getLly()<=r.getLly())&&(getUrx()>=r.getUrx())&&(getUry()>=r.getUry());
-    }
-
-    /**
-    * isLessOrEqual - equality operator <=
-    * 
-    * @param r the JDFRectangle object to compare to
-    * @return boolean - true if <code>this</this> <= r  
-    */
-    public boolean isLessOrEqual(JDFRectangle r)
-    {
-        return (getLlx()>=r.getLlx())&&(getLly()>=r.getLly())&&(getUrx()<=r.getUrx())&&(getUry()<=r.getUry());
-    }
-    
-    /**
-    * isGreater - equality operator >
-    * 
-    * @param r the JDFRectangle object to compare to
-    * @return boolean - true if <code>this</this> > r  
-    */
-    public boolean isGreater(JDFRectangle r)
-    {
-        return (!equals(r)&&(getLlx()<=r.getLlx())&&(getLly()<=r.getLly())&&(getUrx()>=r.getUrx())&&(getUry()>=r.getUry()));   
-    }
-
-    /**
-    * isLess - equality operator <
-    * 
-    * @param r the JDFRectangle object to compare to
-    * @return boolean - true if <code>this</this> < r  
-    */
-    public boolean isLess(JDFRectangle r)
-    {
-        return (!equals(r)&&(getLlx()>=r.getLlx())&&(getLly()>=r.getLly())&&(getUrx()<=r.getUrx())&&(getUry()<=r.getUry()));   
-    }
-
-
     /**
      * getLlx - returns the lower left x coordinate
      *
@@ -310,5 +237,49 @@ public class JDFRectangle extends JDFNumList
     {
         return Math.abs(((Double)getnumList().elementAt(3)).doubleValue() -
                         ((Double)getnumList().elementAt(1)).doubleValue());
+    }
+
+    /**
+    * isGreater - equality operator >
+    * 
+    * @param r the JDFRectangle object to compare to
+    * @return boolean - true if <code>this</this> > r  
+    */
+    public boolean isGreater(JDFRectangle r)
+    {
+        return (!equals(r)&&(getLlx()<=r.getLlx())&&(getLly()<=r.getLly())&&(getUrx()>=r.getUrx())&&(getUry()>=r.getUry()));   
+    }
+
+    /**
+    * isGreaterOrEqual - equality operator >=
+    * 
+    * @param r the JDFRectangle object to compare to
+    * @return boolean - true if <code>this</this> >= r  
+    */
+    public boolean isGreaterOrEqual(JDFRectangle r)
+    {
+        return (getLlx()<=r.getLlx())&&(getLly()<=r.getLly())&&(getUrx()>=r.getUrx())&&(getUry()>=r.getUry());
+    }
+
+    /**
+    * isLess - equality operator <
+    * 
+    * @param r the JDFRectangle object to compare to
+    * @return boolean - true if <code>this</this> < r  
+    */
+    public boolean isLess(JDFRectangle r)
+    {
+        return (!equals(r)&&(getLlx()>=r.getLlx())&&(getLly()>=r.getLly())&&(getUrx()<=r.getUrx())&&(getUry()<=r.getUry()));   
+    }
+
+    /**
+    * isLessOrEqual - equality operator <=
+    * 
+    * @param r the JDFRectangle object to compare to
+    * @return boolean - true if <code>this</this> <= r  
+    */
+    public boolean isLessOrEqual(JDFRectangle r)
+    {
+        return (getLlx()>=r.getLlx())&&(getLly()>=r.getLly())&&(getUrx()<=r.getUrx())&&(getUry()<=r.getUry());
     }
 }
