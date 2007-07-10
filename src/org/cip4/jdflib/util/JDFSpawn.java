@@ -527,10 +527,7 @@ public class JDFSpawn
                     // the root is in the original jdf and can be used as a hook to the original document 
                     // get a list of all resources referenced by this link
                     // always do a copyresource in case some dangling rRefs are waiting
-
-
                     copySpawnedResource(rPool, rRoot, copyStatus, vSpawnParts, spawnID, vRWResources, vvRW, vvRO, allIDsCopied);
-
                     nSpawned += vvRO.size() + vvRW.size();
                 }
                 else
@@ -945,14 +942,14 @@ public class JDFSpawn
                                 pLeaf.setSpawnStatus(copyStatus);
                                 pLeaf.setLocked(copyStatus == EnumSpawnStatus.SpawnedRW);
                             }
-                        }
+                            pLeaf.appendSpawnIDs(spawnID);
+                       }
                         else
                         {
                             pLeaf.setLocked(copyStatus != EnumSpawnStatus.SpawnedRW);
+                            pLeaf.setSpawnIDs(new VString(spawnID,null));
                         }
-
-                        pLeaf.appendSpawnIDs(spawnID);
-                    }
+                     }
                 }
             }
         }
@@ -972,7 +969,10 @@ public class JDFSpawn
                 r.setLocked(copyStatus != EnumSpawnStatus.SpawnedRW);
             }
 
-            r.appendSpawnIDs(spawnID);
+            if(bStayinMain)
+                r.appendSpawnIDs(spawnID);
+            else
+                r.setSpawnIDs(new VString(spawnID,null));
         }
     }
 

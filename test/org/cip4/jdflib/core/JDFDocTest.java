@@ -127,15 +127,8 @@ public class JDFDocTest extends JDFTestCaseBase
         JDFDoc dm=new JDFDoc("JMF");
         assertEquals(dm.getContentType(),"application/vnd.cip4-jmf+xml");
         JDFDoc db=new JDFDoc("JMF_");
-        try{
-            db.getContentType();
-            fail("no good content");
-        }
-        catch(JDFException ex)
-        {
-//            ex.equals(null);
-        }
-    }   
+        assertNull( db.getContentType());
+     }   
     
 
     /**

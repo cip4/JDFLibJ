@@ -295,19 +295,19 @@ public class JDFDoc extends XMLDoc
     
     /**
      * gets the content type
-     * @return the content type
+     * @return the content type, null if neither jdf nor jmf
      */
     public String getContentType() 
     {
         final KElement e=getRoot();
-        String strContentType;
+        final String strContentType;
         
         if (e instanceof JDFNode){
-            strContentType = "application/vnd.cip4-jdf+xml";
+            strContentType = JDFConstants.MIME_JDF;
         }else if (e instanceof JDFJMF){
-            strContentType = "application/vnd.cip4-jmf+xml";
+            strContentType = JDFConstants.MIME_JMF;
         }else{
-            throw new JDFException("GetContentType - illegal root element: "+e.getNodeName());
+            strContentType = null;
         }
         return strContentType;
     }

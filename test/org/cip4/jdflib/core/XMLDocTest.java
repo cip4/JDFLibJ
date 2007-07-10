@@ -90,19 +90,26 @@ public class XMLDocTest extends JDFTestCaseBase
         XMLDoc doc=new XMLDoc("test",null);
         KElement e=doc.getRoot();
         assertFalse(e.isDirty());
+        assertFalse(doc.isDirty(null));
         doc.getCreateXMLDocUserData().setDirtyPolicy(EnumDirtyPolicy.Doc);
         assertFalse(e.isDirty());
+        assertFalse(doc.isDirty(null));
         e.setAttribute("foo","bar");
         assertTrue(e.isDirty());
+        assertTrue(doc.isDirty(null));
         doc.clearDirtyIDs();
+        assertFalse(doc.isDirty(null));
         assertFalse(e.isDirty());
         KElement e2=e.appendElement("foobar");
         assertTrue(e.isDirty());
+        assertTrue(doc.isDirty(null));
         assertTrue(e2.isDirty());
         doc.getCreateXMLDocUserData().setDirtyPolicy(EnumDirtyPolicy.XPath);
         doc.clearDirtyIDs();
+        assertFalse(doc.isDirty(null));
         assertFalse(e.isDirty());
         e2=e.appendElement("foobar");
+        assertTrue(doc.isDirty(null));
         assertTrue(e.isDirty());
         assertTrue(e2.isDirty());
     }

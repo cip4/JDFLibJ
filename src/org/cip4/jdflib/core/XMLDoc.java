@@ -1365,7 +1365,7 @@ public class XMLDoc
      * @param String id the id to be checked
      * @return boolean - true if the node with ID=id is dirty
      */
-    protected boolean isDirty(String strID)
+    public boolean isDirty(String strID)
     {
         final XMLDocUserData docUserData = getXMLDocUserData();
         return docUserData==null ? false : docUserData.isDirty(strID);

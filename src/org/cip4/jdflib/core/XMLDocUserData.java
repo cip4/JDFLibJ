@@ -322,15 +322,18 @@ public class XMLDocUserData
      */
     public boolean isDirty (String strID)
     {
-        if(strID==null)
-            return false;
         if(dirtyPolicy==EnumDirtyPolicy.ID)
         {
+            if(strID==null)
+                return m_vDirtyID.size()>0;
             return m_vDirtyID.contains (strID);  // was in C++  .hasString(id);
         }
         else if(dirtyPolicy==EnumDirtyPolicy.XPath)
         {
             final int size = m_vDirtyID.size();
+            if(strID==null)
+                return size>0;
+                
             for(int i = 0; i < size; i++)
             {
                 final String s = (String)m_vDirtyID.elementAt(i);
