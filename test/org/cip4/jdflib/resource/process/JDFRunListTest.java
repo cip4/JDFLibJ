@@ -402,7 +402,7 @@ public class JDFRunListTest extends JDFTestCaseBase
         rl.setXMLComment("this runlist points to a ppml with arbitrary structural tagging");
 
         JDFResourceLink rll=root.getLink(rl, null);
-        rll.appendPart().setDocIndex("10 ~ 20");
+        rll.appendPart().setDocIndex(new JDFIntegerRangeList("10 ~ 20"));
         rll.setXMLComment("this link selects the 11-20 document");
 
         doc.write2File(sm_dirTestDataTemp+"tagmap.jdf", 2, false);

@@ -73,6 +73,7 @@ package org.cip4.jdflib.auto;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -82,6 +83,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
+import org.cip4.jdflib.datatypes.JDFXYPair;
     /*
     *****************************************************************************
     class JDFAutoPart : public JDFElement
@@ -317,18 +320,30 @@ public abstract class JDFAutoPart extends JDFElement
           * (36) set attribute Sorting
           * @param value: the value to set the attribute to
           */
-        public void setSorting(String value)
+        public void setSorting(JDFIntegerRangeList value)
         {
             setAttribute(AttributeName.SORTING, value, null);
         }
 
         /**
-          * (23) get String attribute Sorting
-          * @return the value of the attribute
+          * (20) get JDFIntegerRangeList attribute Sorting
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFIntegerRangeList
           */
-        public String getSorting()
+        public JDFIntegerRangeList getSorting()
         {
-            return getAttribute(AttributeName.SORTING, null, JDFConstants.EMPTYSTRING);
+            String strAttrName = "";
+            JDFIntegerRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.SORTING, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
         }
 
         
@@ -383,18 +398,30 @@ public abstract class JDFAutoPart extends JDFElement
           * (36) set attribute BundleItemIndex
           * @param value: the value to set the attribute to
           */
-        public void setBundleItemIndex(String value)
+        public void setBundleItemIndex(JDFIntegerRangeList value)
         {
             setAttribute(AttributeName.BUNDLEITEMINDEX, value, null);
         }
 
         /**
-          * (23) get String attribute BundleItemIndex
-          * @return the value of the attribute
+          * (20) get JDFIntegerRangeList attribute BundleItemIndex
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFIntegerRangeList
           */
-        public String getBundleItemIndex()
+        public JDFIntegerRangeList getBundleItemIndex()
         {
-            return getAttribute(AttributeName.BUNDLEITEMINDEX, null, JDFConstants.EMPTYSTRING);
+            String strAttrName = "";
+            JDFIntegerRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.BUNDLEITEMINDEX, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
         }
 
         
@@ -405,18 +432,30 @@ public abstract class JDFAutoPart extends JDFElement
           * (36) set attribute CellIndex
           * @param value: the value to set the attribute to
           */
-        public void setCellIndex(String value)
+        public void setCellIndex(JDFIntegerRangeList value)
         {
             setAttribute(AttributeName.CELLINDEX, value, null);
         }
 
         /**
-          * (23) get String attribute CellIndex
-          * @return the value of the attribute
+          * (20) get JDFIntegerRangeList attribute CellIndex
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFIntegerRangeList
           */
-        public String getCellIndex()
+        public JDFIntegerRangeList getCellIndex()
         {
-            return getAttribute(AttributeName.CELLINDEX, null, JDFConstants.EMPTYSTRING);
+            String strAttrName = "";
+            JDFIntegerRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.CELLINDEX, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
         }
 
         
@@ -669,18 +708,30 @@ public abstract class JDFAutoPart extends JDFElement
           * (36) set attribute DocIndex
           * @param value: the value to set the attribute to
           */
-        public void setDocIndex(String value)
+        public void setDocIndex(JDFIntegerRangeList value)
         {
             setAttribute(AttributeName.DOCINDEX, value, null);
         }
 
         /**
-          * (23) get String attribute DocIndex
-          * @return the value of the attribute
+          * (20) get JDFIntegerRangeList attribute DocIndex
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFIntegerRangeList
           */
-        public String getDocIndex()
+        public JDFIntegerRangeList getDocIndex()
         {
-            return getAttribute(AttributeName.DOCINDEX, null, JDFConstants.EMPTYSTRING);
+            String strAttrName = "";
+            JDFIntegerRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.DOCINDEX, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
         }
 
         
@@ -691,18 +742,30 @@ public abstract class JDFAutoPart extends JDFElement
           * (36) set attribute DocCopies
           * @param value: the value to set the attribute to
           */
-        public void setDocCopies(String value)
+        public void setDocCopies(JDFIntegerRangeList value)
         {
             setAttribute(AttributeName.DOCCOPIES, value, null);
         }
 
         /**
-          * (23) get String attribute DocCopies
-          * @return the value of the attribute
+          * (20) get JDFIntegerRangeList attribute DocCopies
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFIntegerRangeList
           */
-        public String getDocCopies()
+        public JDFIntegerRangeList getDocCopies()
         {
-            return getAttribute(AttributeName.DOCCOPIES, null, JDFConstants.EMPTYSTRING);
+            String strAttrName = "";
+            JDFIntegerRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.DOCCOPIES, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
         }
 
         
@@ -713,18 +776,30 @@ public abstract class JDFAutoPart extends JDFElement
           * (36) set attribute DocRunIndex
           * @param value: the value to set the attribute to
           */
-        public void setDocRunIndex(String value)
+        public void setDocRunIndex(JDFIntegerRangeList value)
         {
             setAttribute(AttributeName.DOCRUNINDEX, value, null);
         }
 
         /**
-          * (23) get String attribute DocRunIndex
-          * @return the value of the attribute
+          * (20) get JDFIntegerRangeList attribute DocRunIndex
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFIntegerRangeList
           */
-        public String getDocRunIndex()
+        public JDFIntegerRangeList getDocRunIndex()
         {
-            return getAttribute(AttributeName.DOCRUNINDEX, null, JDFConstants.EMPTYSTRING);
+            String strAttrName = "";
+            JDFIntegerRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.DOCRUNINDEX, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
         }
 
         
@@ -735,18 +810,30 @@ public abstract class JDFAutoPart extends JDFElement
           * (36) set attribute DocSheetIndex
           * @param value: the value to set the attribute to
           */
-        public void setDocSheetIndex(String value)
+        public void setDocSheetIndex(JDFIntegerRangeList value)
         {
             setAttribute(AttributeName.DOCSHEETINDEX, value, null);
         }
 
         /**
-          * (23) get String attribute DocSheetIndex
-          * @return the value of the attribute
+          * (20) get JDFIntegerRangeList attribute DocSheetIndex
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFIntegerRangeList
           */
-        public String getDocSheetIndex()
+        public JDFIntegerRangeList getDocSheetIndex()
         {
-            return getAttribute(AttributeName.DOCSHEETINDEX, null, JDFConstants.EMPTYSTRING);
+            String strAttrName = "";
+            JDFIntegerRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.DOCSHEETINDEX, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
         }
 
         
@@ -757,18 +844,18 @@ public abstract class JDFAutoPart extends JDFElement
           * (36) set attribute FountainNumber
           * @param value: the value to set the attribute to
           */
-        public void setFountainNumber(String value)
+        public void setFountainNumber(int value)
         {
             setAttribute(AttributeName.FOUNTAINNUMBER, value, null);
         }
 
         /**
-          * (23) get String attribute FountainNumber
-          * @return the value of the attribute
+          * (15) get int attribute FountainNumber
+          * @return int the value of the attribute
           */
-        public String getFountainNumber()
+        public int getFountainNumber()
         {
-            return getAttribute(AttributeName.FOUNTAINNUMBER, null, JDFConstants.EMPTYSTRING);
+            return getIntAttribute(AttributeName.FOUNTAINNUMBER, null, 0);
         }
 
         
@@ -867,18 +954,30 @@ public abstract class JDFAutoPart extends JDFElement
           * (36) set attribute LayerIDs
           * @param value: the value to set the attribute to
           */
-        public void setLayerIDs(String value)
+        public void setLayerIDs(JDFIntegerRangeList value)
         {
             setAttribute(AttributeName.LAYERIDS, value, null);
         }
 
         /**
-          * (23) get String attribute LayerIDs
-          * @return the value of the attribute
+          * (20) get JDFIntegerRangeList attribute LayerIDs
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFIntegerRangeList
           */
-        public String getLayerIDs()
+        public JDFIntegerRangeList getLayerIDs()
         {
-            return getAttribute(AttributeName.LAYERIDS, null, JDFConstants.EMPTYSTRING);
+            String strAttrName = "";
+            JDFIntegerRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.LAYERIDS, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
         }
 
         
@@ -933,18 +1032,30 @@ public abstract class JDFAutoPart extends JDFElement
           * (36) set attribute PageNumber
           * @param value: the value to set the attribute to
           */
-        public void setPageNumber(String value)
+        public void setPageNumber(JDFIntegerRangeList value)
         {
             setAttribute(AttributeName.PAGENUMBER, value, null);
         }
 
         /**
-          * (23) get String attribute PageNumber
-          * @return the value of the attribute
+          * (20) get JDFIntegerRangeList attribute PageNumber
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFIntegerRangeList
           */
-        public String getPageNumber()
+        public JDFIntegerRangeList getPageNumber()
         {
-            return getAttribute(AttributeName.PAGENUMBER, null, JDFConstants.EMPTYSTRING);
+            String strAttrName = "";
+            JDFIntegerRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.PAGENUMBER, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
         }
 
         
@@ -1112,18 +1223,30 @@ public abstract class JDFAutoPart extends JDFElement
           * (36) set attribute RunIndex
           * @param value: the value to set the attribute to
           */
-        public void setRunIndex(String value)
+        public void setRunIndex(JDFIntegerRangeList value)
         {
             setAttribute(AttributeName.RUNINDEX, value, null);
         }
 
         /**
-          * (23) get String attribute RunIndex
-          * @return the value of the attribute
+          * (20) get JDFIntegerRangeList attribute RunIndex
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFIntegerRangeList
           */
-        public String getRunIndex()
+        public JDFIntegerRangeList getRunIndex()
         {
-            return getAttribute(AttributeName.RUNINDEX, null, JDFConstants.EMPTYSTRING);
+            String strAttrName = "";
+            JDFIntegerRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.RUNINDEX, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
         }
 
         
@@ -1134,18 +1257,18 @@ public abstract class JDFAutoPart extends JDFElement
           * (36) set attribute RunPage
           * @param value: the value to set the attribute to
           */
-        public void setRunPage(String value)
+        public void setRunPage(int value)
         {
             setAttribute(AttributeName.RUNPAGE, value, null);
         }
 
         /**
-          * (23) get String attribute RunPage
-          * @return the value of the attribute
+          * (15) get int attribute RunPage
+          * @return int the value of the attribute
           */
-        public String getRunPage()
+        public int getRunPage()
         {
-            return getAttribute(AttributeName.RUNPAGE, null, JDFConstants.EMPTYSTRING);
+            return getIntAttribute(AttributeName.RUNPAGE, null, 0);
         }
 
         
@@ -1200,18 +1323,30 @@ public abstract class JDFAutoPart extends JDFElement
           * (36) set attribute SectionIndex
           * @param value: the value to set the attribute to
           */
-        public void setSectionIndex(String value)
+        public void setSectionIndex(JDFIntegerRangeList value)
         {
             setAttribute(AttributeName.SECTIONINDEX, value, null);
         }
 
         /**
-          * (23) get String attribute SectionIndex
-          * @return the value of the attribute
+          * (20) get JDFIntegerRangeList attribute SectionIndex
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFIntegerRangeList
           */
-        public String getSectionIndex()
+        public JDFIntegerRangeList getSectionIndex()
         {
-            return getAttribute(AttributeName.SECTIONINDEX, null, JDFConstants.EMPTYSTRING);
+            String strAttrName = "";
+            JDFIntegerRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.SECTIONINDEX, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
         }
 
         
@@ -1244,18 +1379,30 @@ public abstract class JDFAutoPart extends JDFElement
           * (36) set attribute SetDocIndex
           * @param value: the value to set the attribute to
           */
-        public void setSetDocIndex(String value)
+        public void setSetDocIndex(JDFIntegerRangeList value)
         {
             setAttribute(AttributeName.SETDOCINDEX, value, null);
         }
 
         /**
-          * (23) get String attribute SetDocIndex
-          * @return the value of the attribute
+          * (20) get JDFIntegerRangeList attribute SetDocIndex
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFIntegerRangeList
           */
-        public String getSetDocIndex()
+        public JDFIntegerRangeList getSetDocIndex()
         {
-            return getAttribute(AttributeName.SETDOCINDEX, null, JDFConstants.EMPTYSTRING);
+            String strAttrName = "";
+            JDFIntegerRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.SETDOCINDEX, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
         }
 
         
@@ -1266,18 +1413,30 @@ public abstract class JDFAutoPart extends JDFElement
           * (36) set attribute SetRunIndex
           * @param value: the value to set the attribute to
           */
-        public void setSetRunIndex(String value)
+        public void setSetRunIndex(JDFIntegerRangeList value)
         {
             setAttribute(AttributeName.SETRUNINDEX, value, null);
         }
 
         /**
-          * (23) get String attribute SetRunIndex
-          * @return the value of the attribute
+          * (20) get JDFIntegerRangeList attribute SetRunIndex
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFIntegerRangeList
           */
-        public String getSetRunIndex()
+        public JDFIntegerRangeList getSetRunIndex()
         {
-            return getAttribute(AttributeName.SETRUNINDEX, null, JDFConstants.EMPTYSTRING);
+            String strAttrName = "";
+            JDFIntegerRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.SETRUNINDEX, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
         }
 
         
@@ -1288,18 +1447,30 @@ public abstract class JDFAutoPart extends JDFElement
           * (36) set attribute SetSheetIndex
           * @param value: the value to set the attribute to
           */
-        public void setSetSheetIndex(String value)
+        public void setSetSheetIndex(JDFIntegerRangeList value)
         {
             setAttribute(AttributeName.SETSHEETINDEX, value, null);
         }
 
         /**
-          * (23) get String attribute SetSheetIndex
-          * @return the value of the attribute
+          * (20) get JDFIntegerRangeList attribute SetSheetIndex
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFIntegerRangeList
           */
-        public String getSetSheetIndex()
+        public JDFIntegerRangeList getSetSheetIndex()
         {
-            return getAttribute(AttributeName.SETSHEETINDEX, null, JDFConstants.EMPTYSTRING);
+            String strAttrName = "";
+            JDFIntegerRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.SETSHEETINDEX, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
         }
 
         
@@ -1332,18 +1503,30 @@ public abstract class JDFAutoPart extends JDFElement
           * (36) set attribute SetIndex
           * @param value: the value to set the attribute to
           */
-        public void setSetIndex(String value)
+        public void setSetIndex(JDFIntegerRangeList value)
         {
             setAttribute(AttributeName.SETINDEX, value, null);
         }
 
         /**
-          * (23) get String attribute SetIndex
-          * @return the value of the attribute
+          * (20) get JDFIntegerRangeList attribute SetIndex
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFIntegerRangeList
           */
-        public String getSetIndex()
+        public JDFIntegerRangeList getSetIndex()
         {
-            return getAttribute(AttributeName.SETINDEX, null, JDFConstants.EMPTYSTRING);
+            String strAttrName = "";
+            JDFIntegerRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.SETINDEX, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
         }
 
         
@@ -1354,18 +1537,30 @@ public abstract class JDFAutoPart extends JDFElement
           * (36) set attribute SheetIndex
           * @param value: the value to set the attribute to
           */
-        public void setSheetIndex(String value)
+        public void setSheetIndex(JDFIntegerRangeList value)
         {
             setAttribute(AttributeName.SHEETINDEX, value, null);
         }
 
         /**
-          * (23) get String attribute SheetIndex
-          * @return the value of the attribute
+          * (20) get JDFIntegerRangeList attribute SheetIndex
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFIntegerRangeList
           */
-        public String getSheetIndex()
+        public JDFIntegerRangeList getSheetIndex()
         {
-            return getAttribute(AttributeName.SHEETINDEX, null, JDFConstants.EMPTYSTRING);
+            String strAttrName = "";
+            JDFIntegerRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.SHEETINDEX, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
         }
 
         
@@ -1486,18 +1681,30 @@ public abstract class JDFAutoPart extends JDFElement
           * (36) set attribute TileID
           * @param value: the value to set the attribute to
           */
-        public void setTileID(String value)
+        public void setTileID(JDFXYPair value)
         {
             setAttribute(AttributeName.TILEID, value, null);
         }
 
         /**
-          * (23) get String attribute TileID
-          * @return the value of the attribute
+          * (20) get JDFXYPair attribute TileID
+          * @return JDFXYPair the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFXYPair
           */
-        public String getTileID()
+        public JDFXYPair getTileID()
         {
-            return getAttribute(AttributeName.TILEID, null, JDFConstants.EMPTYSTRING);
+            String strAttrName = "";
+            JDFXYPair nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.TILEID, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFXYPair(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
         }
 
         

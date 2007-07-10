@@ -1,6 +1,6 @@
 /**
  *
- *  Copyright (c)   2002 Heidelberger Druckmaschinen AG, All Rights Reserved.
+ *  Copyright (c)   2002-2007 Heidelberger Druckmaschinen AG, All Rights Reserved.
  *  Author:         Kai Mattern
  *  Titel:          GeneratorUtil.java
  *  Version:        0.1
@@ -1448,8 +1448,9 @@ public class GeneratorUtil
     }
 
     /**
-     * This Method defines the return typ for every Attribute or Element in the Schema.
-     * @param String strName        -   Name of the Element (only used to construct the return typ
+     * This Method defines the return type for every Attribute or Element in the Schema.
+     * It is hard coded now but should use JDFTypes.xsd (10.7.2007)
+     * @param String strName        -   Name of the Element (only used to construct the return type
      *                                   for enumeration spans
      * @param String strType        -   Type of Attribute or Element
      * @param boolean isAttribute   -   true if the calling class is SchemaAttribute false for SchemaElement
@@ -1549,10 +1550,6 @@ public class GeneratorUtil
         {
             strReturnType = isJava ? "String" : "KString";      // while there is no JDFBooleanList use String
         }
-        else if ("pDeliveryUnit".equals(strType))
-        {
-            strReturnType = isJava ? "String" : "KString";
-        }
         else if ("boolean".equals(strType))
         {
             strReturnType = isJava ? "boolean" : "bool";
@@ -1645,7 +1642,50 @@ public class GeneratorUtil
         }
         else if (strType.startsWith("p"))
         {
-            strReturnType = isJava ? "String" : "KString";  // Part attributes
+        	// Part attributes are hard coded here (see JDFTypes.xsd)
+            if ("pSorting".equals(strType)) {
+            	strReturnType = "JDFIntegerRangeList";
+            } else if ("pBundleItemIndex".equals(strType)) {
+            	strReturnType = "JDFIntegerRangeList";
+            } else if ("pCellIndex".equals(strType)) {
+            	strReturnType = "JDFIntegerRangeList";
+            } else if ("pDocIndex".equals(strType)) {
+            	strReturnType = "JDFIntegerRangeList";
+            } else if ("pDocCopies".equals(strType)) {
+            	strReturnType = "JDFIntegerRangeList";
+            } else if ("pDocRunIndex".equals(strType)) {
+            	strReturnType = "JDFIntegerRangeList";
+            } else if ("pDocSheetIndex".equals(strType)) {
+            	strReturnType = "JDFIntegerRangeList";
+            } else if ("pFountainNumber".equals(strType)) {
+            	strReturnType = "int";
+            } else if ("pLayerIDs".equals(strType)) {
+            	strReturnType = "JDFIntegerRangeList";
+            } else if ("pPageNumber".equals(strType)) {
+            	strReturnType = "JDFIntegerRangeList";
+            } else if ("pPreviewType".equals(strType)) {
+            	strReturnType = "EnumPreviewType";
+            } else if ("pRunIndex".equals(strType)) {
+            	strReturnType = "JDFIntegerRangeList";
+            } else if ("pRunPage".equals(strType)) {
+            	strReturnType = "int";
+            } else if ("pSectionIndex".equals(strType)) {
+            	strReturnType = "JDFIntegerRangeList";
+            } else if ("pSetDocIndex".equals(strType)) {
+            	strReturnType = "JDFIntegerRangeList";
+            } else if ("pSetRunIndex".equals(strType)) {
+            	strReturnType = "JDFIntegerRangeList";
+            } else if ("pSetSheetIndex".equals(strType)) {
+            	strReturnType = "JDFIntegerRangeList";
+            } else if ("pSetIndex".equals(strType)) {
+            	strReturnType = "JDFIntegerRangeList";
+            } else if ("pSheetIndex".equals(strType)) {
+            	strReturnType = "JDFIntegerRangeList";
+            } else if ("pTileID".equals(strType)) {
+            	strReturnType = "JDFXYPair";
+            } else {
+            	strReturnType = isJava ? "String" : "KString";
+            }
         }
         else if ("PreflightCommonPool".equals(strType)
                 || "PreflightValue".equals(strType)
