@@ -86,6 +86,7 @@ import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.MimeUtil;
 import org.w3c.dom.Document;
 
 /**
@@ -353,6 +354,32 @@ public class JDFDoc extends XMLDoc
         }        
         return root;
     }
+    
+    /**
+     * This method sends the contents of this JDFDoc to the URL <code>strURL</code> 
+     * and receives the response in the returned JDFDoc.
+     * the content type is automagically set to either text/xml for undefined xml or to
+     * application/vnd.cip4-jdf+xml or application/vnd.cip4-jmf+xml 
+     * @param strURL            the URL to write to
+     * 
+     * @return docResponse the response received from URL. 
+     * A Null document if no response was received, or an exception occurred
+     */
+    public JDFDoc write2URL(String strURL)
+    {
+        KElement e=getRoot();
+        if(e==null)
+            return null;
+        String strContentType=MimeUtil.TEXT_XML;
+        if(e instanceof JDFNode)
+            strContentType=MimeUtil.VND_JDF;
+        else if(e instanceof JDFJMF)
+            strContentType=MimeUtil.VND_JMF;
+        
+        XMLDoc d=super.write2URL(strURL, strContentType);
+        return d==null ? null : new JDFDoc(d.getMemberDocument());
+    }
+
 //    //////////////////////////////////////////////////////////////////////
 //
 //    JDFDoc write2URL(String strURL, String schemaLocation) {

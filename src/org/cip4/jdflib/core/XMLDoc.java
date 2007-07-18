@@ -1433,30 +1433,37 @@ public class XMLDoc
      * @param strURL            the URL to write to
      * @param strContentType    the content type to write to
      * 
-     * @return docResponse the response received from URL. A Null document if no response was received
+     * @return docResponse the response received from URL. 
+     * A Null document if no response was received, or an exception occurred
      */
-    public XMLDoc write2URL(String strURL, String strContentType) throws IOException
+    public XMLDoc write2URL(String strURL, String strContentType)
     {
         XMLDoc docResponse    = null;
-
-        final URL url         = new URL(strURL);
-        final String protocol = url.getProtocol(); //file; ftp; http
-        if(protocol.equalsIgnoreCase("File"))
+        try
         {
-            write2File(strURL, 0, true);
-        }
-        else
-        {    
-            final URLConnection urlCon = url.openConnection();
-            urlCon.setDoOutput(true);
-            urlCon.setRequestProperty("Connection", "close");
-            urlCon.setRequestProperty("Content-Type", strContentType);
+            final URL url         = new URL(strURL);
+            final String protocol = url.getProtocol(); //file; ftp; http
+            if(protocol.equalsIgnoreCase("File"))
+            {
+                write2File(strURL, 0, true);
+            }
+            else
+            {    
+                final URLConnection urlCon = url.openConnection();
+                urlCon.setDoOutput(true);
+                urlCon.setRequestProperty("Connection", "close");
+                urlCon.setRequestProperty("Content-Type", strContentType);
 
-            write2Stream(urlCon.getOutputStream(), 0);
-            final JDFParser parser = new JDFParser();
-            final InputStream inStream = urlCon.getInputStream();
-            parser.parseStream(inStream); 
-            docResponse = new XMLDoc(parser.getDocument());
+                write2Stream(urlCon.getOutputStream(), 0, true);
+                final JDFParser parser = new JDFParser();
+                final InputStream inStream = urlCon.getInputStream();
+                parser.parseStream(inStream); 
+                docResponse = parser.getDocument()==null ? null : new XMLDoc(parser.getDocument());
+            }
+        }
+        catch (IOException ex)
+        {
+            ex=null;
         }
         return docResponse;
     }

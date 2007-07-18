@@ -347,68 +347,64 @@ public class JDFMerge
             }
 
             //retain all other elements of the original (non spawned) JDF Node if the spawn is partitioned¬
-            final JDFAncestorPool ancestorPool = toMerge.getAncestorPool();
-            if (ancestorPool!=null && ancestorPool.isPartitioned())
+            final VElement localChildren = overwriteLocalNode.getChildElementVector(null, null, null, true, 0, false);
+
+            final int siz = localChildren.size();
+            for (int i = 0; i < siz; i++)
             {
-                final VElement localChildren = overwriteLocalNode.getChildElementVector(null, null, null, true, 0, false);
-
-                final int siz = localChildren.size();
-                for (int i = 0; i < siz; i++)
+                final KElement e = (KElement) localChildren.elementAt(i);
+                //          skip all pools
+                final String nodeName = e.getLocalName();
+                if (nodeName.endsWith("Pool"))
                 {
-                    final KElement e = (KElement) localChildren.elementAt(i);
-                    //          skip all pools
-                    final String nodeName = e.getLocalName();
-                    if (nodeName.endsWith("Pool"))
-                    {
-                        if (nodeName.equals(ElementName.RESOURCELINKPOOL))
-                        {
-                            continue;
-                        }
-                        if (nodeName.equals(ElementName.RESOURCEPOOL))
-                        {
-                            continue;
-                        }
-                        if (nodeName.equals(ElementName.AUDITPOOL))
-                        {
-                            mergeAuditPool(overwriteLocalNode,toMergeLocalNode);
-                            continue;
-                        }
-                        if (nodeName.equals(ElementName.STATUSPOOL))
-                        {
-                            mergeStatusPool(overwriteLocalNode,toMergeLocalNode,parts);
-                            continue;
-                        }
-                        if (nodeName.equals(ElementName.ANCESTORPOOL))
-                        {
-                            continue;
-                        }
-                    }
-
-                    // 131204 RP also skip all sub-JDF nodes!!!
-                    if(nodeName.equals(ElementName.JDF))
+                    if (nodeName.equals(ElementName.RESOURCELINKPOOL))
                     {
                         continue;
                     }
-                    //050708 RP special handling for comments
-                    if(nodeName==ElementName.COMMENT){
-                        mergeComments(overwriteLocalNode,toMergeLocalNode);
+                    if (nodeName.equals(ElementName.RESOURCEPOOL))
+                    {
                         continue;
                     }
-
-                    toMergeLocalNode.removeChildren(nodeName, null, null);
-                    toMergeLocalNode.moveElement(e, null);
-
-                    // repeat in case of multiple identical elements (e.g. comments)
-                    for (int j = i + 1; j < siz; j++)
+                    if (nodeName.equals(ElementName.AUDITPOOL))
                     {
-                        final JDFElement localChild = (JDFElement) localChildren.elementAt(j);
-                        if ( localChild != null )
+                        mergeAuditPool(overwriteLocalNode,toMergeLocalNode);
+                        continue;
+                    }
+                    if (nodeName.equals(ElementName.STATUSPOOL))
+                    {
+                        mergeStatusPool(overwriteLocalNode,toMergeLocalNode,parts);
+                        continue;
+                    }
+                    if (nodeName.equals(ElementName.ANCESTORPOOL))
+                    {
+                        continue;
+                    }
+                }
+
+                // 131204 RP also skip all sub-JDF nodes!!!
+                if(nodeName.equals(ElementName.JDF))
+                {
+                    continue;
+                }
+                //050708 RP special handling for comments
+                if(nodeName==ElementName.COMMENT){
+                    mergeComments(overwriteLocalNode,toMergeLocalNode);
+                    continue;
+                }
+
+                toMergeLocalNode.removeChildren(nodeName, null, null);
+                toMergeLocalNode.moveElement(e, null);
+
+                // repeat in case of multiple identical elements (e.g. comments)
+                for (int j = i + 1; j < siz; j++)
+                {
+                    final JDFElement localChild = (JDFElement) localChildren.elementAt(j);
+                    if ( localChild != null )
+                    {
+                        if ( localChild.getNodeName().equals(nodeName) )
                         {
-                            if ( localChild.getNodeName().equals(nodeName) )
-                            {
-                                toMergeLocalNode.moveElement(localChild, null);
-                                localChildren.set(j, null);
-                            }
+                            toMergeLocalNode.moveElement(localChild, null);
+                            localChildren.set(j, null);
                         }
                     }
                 }
@@ -592,7 +588,7 @@ public class JDFMerge
         else if(vsRW.contains(resID))
         {
             boolean bWrite=false;
-           
+
             for(int i=0;i<spawnIDs.size();i++) // check for multiple rw spawns
             {
                 final String resSpawnID=spawnIDs.stringAt(i);
@@ -943,14 +939,14 @@ public class JDFMerge
             }
 
             final JDFStatusPool toMergeStatusPool = toMerge.getStatusPool();
-            if (toMerge.getStatus() == JDFElement.EnumNodeStatus.Pool)
+            final int size = parts==null ? 0 : parts.size();
+            if (JDFElement.EnumNodeStatus.Pool.equals(toMerge.getStatus()))
             {
-                for (int i = 0; i < parts.size(); i++)
+                for (int i = 0; i < size; i++)
                 {
-                    int j;
-                    // clean up the pool to overwrite
+                     // clean up the pool to overwrite
                     final VElement vpso = overWriteStatusPool.getMatchingPartStatusVector(parts.elementAt(i));
-                    for (j=0;j<vpso.size();j++)
+                    for (int j=0;j<vpso.size();j++)
                     {
                         // remove all matching partstatus elements in case they were expanded in the spawned node
                         ((JDFPartStatus) vpso.elementAt(j)).deleteNode(); 
@@ -958,7 +954,7 @@ public class JDFMerge
 
                     // extract data from spawned node
                     final VElement vps=toMergeStatusPool.getMatchingPartStatusVector(parts.elementAt(i));
-                    for (j=0; j<vps.size(); j++)
+                    for (int j=0; j<vps.size(); j++)
                     {
                         final JDFPartStatus ps = (JDFPartStatus) vps.elementAt(j);
                         final JDFAttributeMap m = ps.getPartMap();
@@ -976,7 +972,7 @@ public class JDFMerge
             else
             {
                 // this part of the program will probably never be executed, but...
-                for (int i = 0; i < parts.size(); i++)
+                for (int i = 0; i < size; i++)
                     overWriteStatusPool.setStatus(parts.elementAt(i), 
                             toMerge.getStatus(), null);
                 if (toMergeStatusPool != null)
@@ -985,7 +981,6 @@ public class JDFMerge
                 toMerge.moveElement(overWriteStatusPool, null);
             }
         }
-
     }
 
     /**

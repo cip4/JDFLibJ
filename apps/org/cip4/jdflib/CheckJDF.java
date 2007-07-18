@@ -1124,16 +1124,23 @@ public class CheckJDF
                      VString vs=jdfNode.getTypes();
                      String msg="";
                      int n=0;
-                     for(int i=0;i<vs.size();i++)
+                     if(vs==null)
                      {
-                         final String t=vs.stringAt(i);
-                         if(EnumType.getEnum(t)==null)
+                             // illegal type for types
+                     }
+                     else
+                     {
+                         for(int i=0;i<vs.size();i++)
                          {
-                             if (ArrayUtils.contains(aGBList,t))
-                                 continue;
-                             if(n++>0)
-                                 msg+="; ";
-                             msg+=t;
+                             final String t=vs.stringAt(i);
+                             if(EnumType.getEnum(t)==null)
+                             {
+                                 if (ArrayUtils.contains(aGBList,t))
+                                     continue;
+                                 if(n++>0)
+                                     msg+="; ";
+                                 msg+=t;
+                             }
                          }
                      }
                      if(n>0)
@@ -1163,7 +1170,7 @@ public class CheckJDF
                  JDFNode n = jdfNode.getParentJDF();
                  if(n != null)
                  {
-                     if(!n.getType().equals(JDFConstants.PRODUCT))
+                     if(!JDFConstants.PRODUCT.equals(n.getType()))
                      {
                          isValid = false;
                          sysOut.println(errMessage);
@@ -2464,26 +2471,16 @@ public class CheckJDF
     private void processURL(String url)
     {
         if(url!=null)
-         {                   
-             try
-             {
-                 if(proxyHost!=null)
-                 {
-                     System.setProperty("http.proxyHost",proxyHost);
-                     if(proxyPort==null)
-                         proxyPort="8080";
-                     System.setProperty("http.proxyPort",proxyPort);
-                 }
-                 theDoc =(JDFDoc)theDoc.write2URL(url,theDoc.getContentType());
-             }
-             catch(IOException x)
-             {
-                 sysOut.println("error writing to :" + url);
-                 sysOut.println(x.getMessage());
-                 theDoc=null;
-             }
-             
-         }
+        {                   
+            if(proxyHost!=null)
+            {
+                System.setProperty("http.proxyHost",proxyHost);
+                if(proxyPort==null)
+                    proxyPort="8080";
+                System.setProperty("http.proxyPort",proxyPort);
+            }
+            theDoc =(JDFDoc)theDoc.write2URL(url,theDoc.getContentType());
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////////

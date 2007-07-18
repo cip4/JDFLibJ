@@ -2193,6 +2193,10 @@ public class JDFElement extends KElement
     {
         // loop over the list
         int i                       = 0;
+        if(iSkip<0)
+            iSkip=numChildElements_JDFElement(nodeName, nameSpaceURI)+iSkip;
+        if(iSkip<0)
+            return null;
         KElement jdfElem          = getFirstChildElement();
         final boolean bExplicitRefElement = (nodeName!=null) && (nodeName.endsWith(JDFConstants.REF));
 
@@ -2370,6 +2374,13 @@ public class JDFElement extends KElement
                 local=n.getSpawnID(true);
                 if(!isWildCard(local))
                     local="."+StringUtil.rightStr(local, 6)+".";
+            }
+            final JDFJMF m=getJMFRoot();
+            if(m!=null)
+            {
+                local=m.getSenderID();
+                if(!isWildCard(local))
+                    local="."+local+".";
             }
             strName = getIDPrefix() + local+uniqueID(0);
         }
@@ -2771,12 +2782,10 @@ public class JDFElement extends KElement
      */
     public synchronized static String uniqueID(int id)
     {
-
-        if (id != 0)
+       if (id != 0)
         {
             m_lStoreID = id;
         }
-
         final String s           = "00000" + Integer.toString(m_lStoreID);
         m_lStoreID=++m_lStoreID %100000;
         // time + 6 digits (ID)

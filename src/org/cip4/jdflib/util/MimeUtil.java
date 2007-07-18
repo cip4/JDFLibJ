@@ -107,6 +107,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.jmf.JDFJMF;
 
 /**
  * MIME utilities for reading and writing MIME/MULTIPART/RELATED streams
@@ -114,10 +115,22 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
  * @author Markus Nyman, (markus.cip4@myman.se)
  * 
  */
-public class MimeUtil {
+public class MimeUtil 
+{
 
+    /**
+     * commonly used strings
+     */
     public static final String CONTENT_TYPE = "Content-Type";
     public static final String CONTENT_ID = "Content-ID";
+    public static final String TEXT_XML =JDFConstants.MIME_TEXTXML;
+    public static final String TEXT_PLAIN ="text/plain";
+    public static final String TEXT_UNKNOWN =JDFConstants.MIME_TEXTUNKNOWN;
+    public static final String VND_JDF =JDFConstants.MIME_JDF;
+    public static final String VND_JMF =JDFConstants.MIME_JMF;
+    public static final String MULTIPART_RELATED = "multipart/related";
+    public static final String POST = "POST";
+    public static final String GET = "GET";
 
 
     //private static Logger log = Logger.getLogger(MimeUtil.class);
@@ -150,6 +163,8 @@ public class MimeUtil {
      */
     public static void setFileName(BodyPart bp, String path) 
     {
+        if(path==null)
+            return;
         try
         {
             bp.setFileName(new File(path).getName());
@@ -220,30 +235,37 @@ public class MimeUtil {
      */
     public static BodyPart[] extractMultipartMime(InputStream mimeStream) {
         BodyPart[] bodyParts = null;
-        try {
-            Multipart mp = getMultiPart(mimeStream);
+        Multipart mp = getMultiPart(mimeStream);
+        bodyParts = getBodyParts(mp);
+        return bodyParts;
+    }
+
+
+    /**
+     * get all the parts of of a multipart an
+     * @param mp the multiPart to extract
+     * 
+     * @return the array of parts, null if snafu...
+     */
+    public static BodyPart[] getBodyParts(Multipart mp) 
+    {
+        try
+        {
             int parts = mp.getCount();
-            bodyParts = new BodyPart[parts];
+
+            BodyPart[] bodyParts = new BodyPart[parts];
             for (int i = 0; i<parts; i++ ) {
-                //log.debug("Partno:" + i);
                 BodyPart bp = mp.getBodyPart(i);
                 bodyParts[i] = bp;
             }
-        } 
-        catch (MessagingException e) 
-        {
-            //log.error("MessagingException: ", e);
-            return null;
-        } 
 
-        try {
-            mimeStream.reset();
-        } catch (IOException e) {
-            // tries to reset the InputStream
-            //log.error("Couldn´t reset stream.", e);
-
+            return bodyParts;
         }
-        return bodyParts;
+        catch (MessagingException m)
+        {
+            return null;
+        }
+
     }
 
     /**
@@ -401,6 +423,7 @@ public class MimeUtil {
         try
         {
             Message mimeMessage = new MimeMessage(null, mimeStream);
+            
             Multipart mp = new MimeMultipart(mimeMessage.getDataHandler().getDataSource());
             return mp;
         }
@@ -526,7 +549,7 @@ public class MimeUtil {
                         BodyPart messageBodyPart = new MimeBodyPart();
                         messageBodyPart.setDataHandler(new DataHandler(uds));
                         File f=UrlUtil.urlToFile(urlString);
-                        setFileName(messageBodyPart,f.getAbsolutePath());
+                        setFileName(messageBodyPart,f==null ? null : f.getAbsolutePath());
                         //messageBodyPart.setHeader("Content-Type", JMFServlet.JDF_CONTENT_TYPE); // JDF: application/vnd.cip4-jdf+xml
                         setContentID(messageBodyPart,urlString);
                         multipart.addBodyPart(messageBodyPart);
@@ -655,10 +678,10 @@ public class MimeUtil {
     {
         URL url=new URL(strUrl);
         HttpURLConnection httpURLconnection = (HttpURLConnection) url.openConnection();
-        httpURLconnection.setRequestMethod("POST");
-       
+        httpURLconnection.setRequestMethod(POST);
+        httpURLconnection.setRequestProperty("Connection", "close");
+        httpURLconnection.setRequestProperty(CONTENT_TYPE,mp.getContentType() );
         httpURLconnection.setDoOutput(true);
-        httpURLconnection.setDoInput(true);
         
         final OutputStream out= httpURLconnection.getOutputStream();
         writeToStream(mp, out);
@@ -701,15 +724,15 @@ public class MimeUtil {
      * 
      * @param mp the mime MultiPart to write
      * @param outStream the existing output stream
-     * 
+      * 
      * @throws IOException
      * @throws MessagingException
      */
     public static void writeToStream(Multipart m, OutputStream outStream) throws IOException, MessagingException 
     {
-        Message mess = new MimeMessage((Session)null);
-        mess.setContent(m);
-        mess.writeTo(outStream);
+        MimeMessage mm=new MimeMessage((Session)null);
+        mm.setContent(m);
+        mm.writeTo(outStream);
         outStream.flush();
         outStream.close();
     }
@@ -767,5 +790,36 @@ public class MimeUtil {
         IOUtils.copy(ins,fos);
         fos.flush();
         fos.close();
+    }
+
+
+    /**
+     * gets the JMF document of a submitqueueentry or returnqueuentry 
+     * and the attached jdf document
+     *  
+     * @param bp the array of body parts to search
+     * @return two JDFDocs: bp[0] is the jmf, bp[1] is the jdf
+     * null if the bp does not contain a jmf and at least one jdf
+     */
+    public static JDFDoc[] getJMFSubmission(Multipart mp)
+    {
+        BodyPart bp[]=getBodyParts(mp);
+        if(bp==null || bp.length<2)
+            return null;
+        JDFDoc jmf=getJDFDoc(bp[0]);
+        if(jmf==null || jmf.getJMFRoot()==null)
+            return null;
+        JDFJMF jmfRoot=jmf.getJMFRoot();
+        String subURL=jmfRoot.getSubmissionURL();
+
+        if(subURL==null)
+            return null;
+        BodyPart bpJDF=getPartByCID(mp, subURL);
+        JDFDoc docs[]=new JDFDoc[2];
+        docs[0]=jmf;
+        docs[1]=getJDFDoc(bpJDF);
+        if(docs[1]==null)
+            return null;
+        return docs;
     }
 }

@@ -97,6 +97,12 @@
 	<target name="major_jar" depends="jar" description="Builds a JAR archive containing the JDFLib-J binaries.">
 		<copy file="${dist.dir}/${base.filename}.jar" tofile="${dist.dir}/${major.filename}.jar"/>
 	</target>
+	<target name="spam" depends="major_jar" description="Builds a JAR archive containing the JDFLib-J binaries.">
+		<copy tofile="../JDFUtility/src/lib/${major.filename}.jar" file="${dist.dir}/${major.filename}.jar"/>
+		<copy tofile="../JDFEditor/src/lib/${major.filename}.jar" file="${dist.dir}/${major.filename}.jar"/>
+		<copy tofile="../elk/src/lib/${major.filename}.jar" file="${dist.dir}/${major.filename}.jar"/>
+		<copy tofile="../alces/src/lib/${major.filename}.jar" file="${dist.dir}/${major.filename}.jar"/>
+	</target>
 
 	<!--  ==================================================================================  -->
 	<!--  ==================================================================================  -->

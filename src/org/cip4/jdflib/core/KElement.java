@@ -3612,6 +3612,24 @@ public class KElement extends ElementNSImpl
     }
 
     /**
+     * moves this to a position before another child, 
+     * fails if either this or beforechild are document roots 
+     * 
+     * @param beforeChild the child to move before, if beforechild is a the document root, do nothing
+     * if null, move me to the end of my parent
+     * 
+     * @return this after moving, null if failure
+     */
+    public KElement moveMe(KElement beforeChild)
+    {
+        KElement parent=beforeChild==null ? getParentNode_KElement() : beforeChild.getParentNode_KElement();
+        if(beforeChild==this)
+            return this;
+        if(parent==null || getParentNode_KElement()==null)
+            return null;
+        return parent.moveElement(this, beforeChild);
+    }
+    /**
      * Moves src node (including all attributes and subelements)
      * from its parent node into 'this' and
      * inserts it in front of beforeChild, if it exists.
@@ -3639,6 +3657,8 @@ public class KElement extends ElementNSImpl
 
         if (src != null)
         {
+            if(src.isAncestor(this))
+                return null; // snafu when moving a to b in a/b
             Node srcElement = src.getParentNode().removeChild(src);
 
             if (beforeChild != null && beforeChild.getParentNode() != this)

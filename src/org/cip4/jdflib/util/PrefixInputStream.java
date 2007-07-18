@@ -79,130 +79,83 @@
  */
 package org.cip4.jdflib.util;
 
-import java.io.File;
-import java.io.FileFilter;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringReader;
 
 
 /**
- * collection of helper routines to work with files
+ * Bidirectional HashMap utility class
  * @author prosirai
  *
  */
-public class FileUtil
+public class PrefixInputStream extends FilterInputStream
 {
-    /**
-     * list all files with a given extension (directories are skipped
-     * @param dir the directory to search
-     * @param extension the extension to check for (null = list all)
-     * @return Files[] the matching files, null if none are found
-     */
-    public static File[] listFiles(File dir, String extension)
+
+    private InputStream streamPre;
+    private boolean bDone;
+     
+    public PrefixInputStream(InputStream stream1, InputStream stream2)
     {
-        if(dir==null)
-            return null;
-        File[] files=dir.listFiles(new SimpleFileFilter(extension));
-        return (files==null || files.length==0) ? null : files;
-    }
-//////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
-
-    /************************ Inner class ***********************
-    *
-    * UtilFileFilter
-    *
-    ************************************************************/
-   public static class SimpleFileFilter implements FileFilter
-   {
-       private String m_extension;
- 
-       /**
-        * 
-        */
-       public SimpleFileFilter(String fileExtension)
-       {
-           m_extension = fileExtension;
-           fileExtension=UrlUtil.extension(fileExtension);
-           if(fileExtension!=null)
-               m_extension=fileExtension;
-       }
-
-       /* (non-Javadoc)
-        * @see java.io.FileFilter#accept(java.io.File)
-        */
-       public boolean accept(File checkFile)
-       {
-           if ((checkFile == null) || !checkFile.isFile())
-               return false;
-           if(m_extension==null)
-               return true;
-           return m_extension.equalsIgnoreCase(UrlUtil.extension(checkFile.getPath()));
-       }
-   }
-
-    /**
-     * very brutal tree zapper that will delete a directory tree recursively
-     * @param f
-     * @return
-     */
-    public static boolean deleteAll(File f)
-    {
-        if(f==null)
-            return false;
-        boolean b=true;
-        if(f.isDirectory())
-        {
-            File[] ff=f.listFiles();
-            int siz=(ff==null) ? 0 : ff.length;
-            for(int i=0;i<siz;i++)
-                b = b && deleteAll(ff[i]);
-        }
-        return b && f.delete();
-    }
-   
-//////////////////////////////////////////////////////////////////////////////////
-    /**
-     * dump a stream to a newly created file
-     * @param fis the inputstream to read
-     * @return the file created by the stream, null if snafu
-     */
-    public static File streamToFile(InputStream fis, String fileName)
-    {
-        if(fis==null)
-            return null;
-        File tmp=UrlUtil.urlToFile(fileName);
-        if(tmp==null)
-        {
-            return null;
-        }
-        byte[] b=new byte[1000];
-        try
-        {
-            FileOutputStream fos=new FileOutputStream(tmp);
-            while (true)
-            {
-                int i=fis.read(b);
-                if(i<=0)
-                    break;
-                fos.write(b,0,i);
-            }
-            fos.close();
-            fis.close();
-        }
-        catch (FileNotFoundException x)
-        {
-            return null;
-        }
-        catch (IOException x)
-        {
-            return null;
-        }
-
-        return tmp;
+        super(stream2);
+        bDone=false;
+        streamPre=stream1;
     }
     
- }
+    public PrefixInputStream(String prefix, InputStream stream2)
+    {
+        super(stream2);
+        bDone=false;
+        streamPre=new ByteArrayInputStream(prefix.getBytes());
+    }
+
+    /* (non-Javadoc)
+     * @see java.io.FilterInputStream#read()
+     */
+    public int read() throws IOException
+    {
+        if(!bDone)
+        {
+            final int read = streamPre.read();
+            if(read!=-1)
+                return read;
+            bDone=true;
+        }
+
+         return super.read();
+    }
+
+    /* (non-Javadoc)
+     * @see java.io.FilterInputStream#read(byte[], int, int)
+     */
+    public int read(byte[] b, int off, int len) throws IOException
+    {
+        if(!bDone)
+        {
+            final int read = streamPre.read(b,off,len);
+            if(read!=-1)
+                return read;
+            bDone=true;
+        }
+       return super.read(b, off, len);
+    }
+
+    /* (non-Javadoc)
+     * @see java.io.FilterInputStream#read(byte[])
+     */
+    public int read(byte[] b) throws IOException
+    {
+        if(!bDone)
+        {
+            final int read = streamPre.read(b);
+            if(read!=-1)
+                return read;
+            bDone=true;
+        }
+       return super.read(b);
+    }
+
+   
+}

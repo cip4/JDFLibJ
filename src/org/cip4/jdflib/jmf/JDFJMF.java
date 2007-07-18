@@ -96,6 +96,8 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 
 
 /**
@@ -104,6 +106,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 public class JDFJMF extends JDFAutoJMF
 {
     private static final long serialVersionUID = 1L;
+    private static String theSenderID=null;
 
     /**
      * Constructor for JDFJMF
@@ -162,6 +165,8 @@ public class JDFJMF extends JDFAutoJMF
         super.init ();
         setTimeStamp(null);
         setVersion (getDefaultJDFVersion());
+        if(theSenderID!=null)
+            setSenderID(theSenderID);
         return true;
     }
 
@@ -660,6 +665,16 @@ public class JDFJMF extends JDFAutoJMF
     {
         return (JDFCommand) appendMessageElement (JDFMessage.EnumFamily.Command, typ);
     }
+    /**
+     * Append a Command
+     * 
+     * @param typ the type attribute of the appended message
+     * @return JDFQuery the newly created message element
+     */
+    public JDFRegistration appendRegistration (JDFMessage.EnumType typ)
+    {
+        return (JDFRegistration) appendMessageElement (JDFMessage.EnumFamily.Registration, typ);
+    }
 
     /**
      * Append a query
@@ -708,4 +723,73 @@ public class JDFJMF extends JDFAutoJMF
         return (JDFAcknowledge) appendMessageElement (JDFMessage.EnumFamily.Acknowledge, typ);
 
     }
+
+    /**
+     * @return the theSenderID which is used as default when initializing new messages
+     */
+    public static String getTheSenderID()
+    {
+        return theSenderID;
+    }
+
+    /**
+     * set the default senderID that is used to generate jmf messages
+     * @param theSenderID the theSenderID to set
+     */
+    public static void setTheSenderID(String _theSenderID)
+    {
+        JDFJMF.theSenderID = _theSenderID;
+    }
+    /**
+     * create a new response for all messages of this 
+     * if the message is any message except response
+     * correctly fills refId, type etc.
+     * 
+      * @return the newly created JMF with multiple responses
+     */    
+    public JDFJMF createResponse()
+    {
+        VElement v=getMessageVector(null, null);
+        JDFJMF jmf=new JDFDoc("JMF").getJMFRoot();
+        for(int i=0;i<v.size();i++)
+        {
+            JDFMessage m=(JDFMessage) v.elementAt(i);
+            final EnumFamily family = m.getFamily();
+            if(family!=null && EnumFamily.Response!=family&& EnumFamily.Acknowledge!=family)
+            {
+                JDFResponse r=jmf.appendResponse();
+                r.setQuery(m);
+            }
+        }
+        return jmf;
+    }
+
+    /**
+     * get the @URL of this message if it is either a submitQueueEntry, a returnQueuentry or a resubmitqueueentry
+     * @return
+     */
+    public String getSubmissionURL()
+    {
+        JDFCommand cSubmit=(JDFCommand) getMessageElement(EnumFamily.Command, EnumType.SubmitQueueEntry, 0);
+        if(cSubmit!=null)
+        {
+            JDFQueueSubmissionParams qsp=cSubmit.getQueueSubmissionParams(0);
+            return qsp==null ? null : isWildCard(qsp.getURL()) ? null : qsp.getURL();
+        }
+        cSubmit=(JDFCommand) getMessageElement(EnumFamily.Command, EnumType.ResubmitQueueEntry, 0);
+        if(cSubmit!=null)
+        {
+            JDFResubmissionParams rsp=cSubmit.getResubmissionParams(0);
+            return rsp==null ? null : isWildCard(rsp.getURL()) ? null : rsp.getURL();
+        }
+        cSubmit=(JDFCommand) getMessageElement(EnumFamily.Command, EnumType.ReturnQueueEntry, 0);
+        if(cSubmit!=null)
+        {
+            JDFReturnQueueEntryParams rsp=cSubmit.getReturnQueueEntryParams(0);
+            return rsp==null ? null : isWildCard(rsp.getURL()) ? null : rsp.getURL();
+        }
+        return null;
+
+    }
+
 }

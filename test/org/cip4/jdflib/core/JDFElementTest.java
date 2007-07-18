@@ -167,7 +167,7 @@ public class JDFElementTest extends TestCase
 
     }
     
-   /**
+    /**
      * 
      *
      */
@@ -181,6 +181,22 @@ public class JDFElementTest extends TestCase
         assertNull(xm.getElement_KElement("Media", null, 0));
         assertNotNull(xm.getElement_JDFElement("Media", null, 0));
      }    
+    /**
+     * 
+     *
+     */
+    public void testGetElement_JDFElement()
+    {
+        JDFDoc d=new JDFDoc("JDF");
+        JDFNode root=d.getJDFRoot();
+        JDFExposedMedia xm=(JDFExposedMedia)root.addResource("ExposedMedia", null, EnumUsage.Input, null, null, null, null);
+        JDFMedia m=xm.appendMedia();
+        JDFResource r=m.makeRootResource(null, null, true);
+        assertNull(xm.getElement_KElement("Media", null, 0));
+        assertNotNull(xm.getElement_JDFElement("Media", null, 0));
+        assertEquals(xm.getElement_JDFElement("Media", null, 0),r);
+        assertEquals(xm.getElement_JDFElement("Media", null, -1),r);
+    }    
     /**
      * 
     *

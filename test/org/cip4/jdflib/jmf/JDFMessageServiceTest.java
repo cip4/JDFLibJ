@@ -68,72 +68,59 @@
  *  
  * 
  */
-/**
- *
- * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- *
- * KString.java
- *
- * Last changes
- *
- */
-package org.cip4.jdflib.util;
+package org.cip4.jdflib.jmf;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import java.util.Vector;
 
+import junit.framework.TestCase;
 
-/**
- * class with utilities for containers, e.g. Vectors, sets etc.
- * @author prosirai
- *
- */
-public class ContainerUtil
+import org.apache.commons.lang.ArrayUtils;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
+
+
+public class JDFMessageServiceTest extends TestCase
 {
-    /**
-     * create a HashSet from a List (Vector...)
-     * @param l
-     * @return
-     */
-    public static Set toHashSet(List l)
+     
+    public void testgetFamilies() throws Exception
     {
-        if(l==null)
-            return null;
-        Set s=new HashSet();
-        for(int i=0;i<l.size();i++)
-            s.add(l.get(i));
-        return s;
+        JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
+        JDFMessageService ms=(JDFMessageService)doc.getRoot();
+        ms.setQuery(true);
+        assertEquals(ms.getFamilies().elementAt(0),EnumFamily.Query);
+        assertEquals(ms.getFamilies().size(),1);
+        assertFalse(ms.getFamilies().contains(EnumFamily.Command));
+        ms.setCommand(true);
+        assertTrue(ms.getFamilies().contains(EnumFamily.Query));
+        assertTrue(ms.getFamilies().contains(EnumFamily.Command));
+        assertEquals(ms.getFamilies().size(),2);
     }
-    /**
-     * create a HashSet from an Array
-     * @param l
-     * @return
-     */
-    public static Set toHashSet(Object[] l)
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////
+    public void testsetFamily() throws Exception
     {
-        if(l==null)
-            return null;
-        Set s=new HashSet();
-        for(int i=0;i<l.length;i++)
-            s.add(l[i]);
-        return s;
+        JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
+        JDFMessageService ms=(JDFMessageService)doc.getRoot();
+        ms.setFamily(EnumFamily.Query);
+        assertTrue(ms.getQuery());
     }
-    /**
-     * create a Vector from an Array
-     * @param l
-     * @return
-     */
-    public static Vector toVector(Object[] l)
+    /////////////////////////////////////////////////////////////////////////////////////////////
+    public void testsetFamilies() throws Exception
     {
-        if(l==null)
-            return null;
+        JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
+        JDFMessageService ms=(JDFMessageService)doc.getRoot();
         Vector v=new Vector();
-        v.ensureCapacity(l.length);
-        for(int i=0;i<l.length;i++)
-            v.add(l[i]);
-        return v;
+        v.add(EnumFamily.Query);
+        v.add(EnumFamily.Command);
+        ms.setFamilies(v);
+        assertTrue(ms.getQuery());
+        assertTrue(ms.getCommand());
+        assertFalse(ms.getRegistration());
     }
-
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////
+    
+ 
+    
 }

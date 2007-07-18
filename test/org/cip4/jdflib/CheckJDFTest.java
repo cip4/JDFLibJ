@@ -303,7 +303,7 @@ public class CheckJDFTest extends JDFTestCaseBase
         checkJDF.bQuiet = true;
         checkJDF.level = EnumValidationLevel.Incomplete;
         File foo=new File(sm_dirTestSchema);
-        assertTrue(foo.isDirectory());
+        assertTrue("please mount the svn schema parallel to jdflib-J",foo.isDirectory());
         final File jdfxsd = new File(sm_dirTestSchema + "JDF.xsd");
         checkJDF.setJDFSchemaLocation(jdfxsd);
         JDFNode n=doc.getJDFRoot();

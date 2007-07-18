@@ -101,6 +101,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 
 public class MimeUtilTest extends JDFTestCaseBase
 {
+    
     public void testBuildMimePackageDocJMF() throws Exception
     {
         JDFDoc d1=new JDFDoc("JMF");
@@ -121,6 +122,33 @@ public class MimeUtilTest extends JDFTestCaseBase
         Multipart m=MimeUtil.buildMimePackage(d1,doc);
         MimeUtil.writeToFile(m, sm_dirTestDataTemp+File.separator+"testMimePackageDoc.mjm");
         
+    }
+
+    public void testGetJMFSubmission() throws Exception
+    {
+        JDFDoc d1=new JDFDoc("JMF");
+        d1.setOriginalFileName("JMF.jmf");
+        JDFJMF jmf=d1.getJMFRoot();
+        JDFCommand com=(JDFCommand) jmf.appendMessageElement(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.SubmitQueueEntry);
+      
+        com.appendQueueSubmissionParams().setURL("cid:TheJDF");
+        
+        JDFDoc doc=new JDFDoc("JDF");
+        doc.setOriginalFileName("JDF.jdf");  
+        JDFNode n=doc.getJDFRoot();
+        n.setType(EnumType.ColorSpaceConversion);
+        JDFColorSpaceConversionParams cscp=(JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input, null, null, null, null);
+        JDFFileSpec fs0=cscp.appendFinalTargetDevice();
+        fs0.setURL(StringUtil.uncToUrl(sm_dirTestData+File.separator+"test.icc",true));
+        JDFRunList rl=(JDFRunList)n.addResource(ElementName.RUNLIST, null, EnumUsage.Input, null, null, null, null);
+        rl.addPDF(StringUtil.uncToUrl(sm_dirTestData+File.separator+"url1.pdf",false), 0, -1);
+        Multipart m=MimeUtil.buildMimePackage(d1,doc);
+        
+        JDFDoc[] d2=MimeUtil.getJMFSubmission(m);
+        assertNotNull(d2);
+        assertEquals(d2[0].getJMFRoot().getCommand(0).getQueueSubmissionParams(0).getURL(), "cid:TheJDF");
+        assertEquals(d2[1].getJDFRoot().getEnumType(),EnumType.ColorSpaceConversion);
+         
     }
     
     public void testGetPartByCID() throws Exception

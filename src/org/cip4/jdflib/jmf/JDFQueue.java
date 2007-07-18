@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2005 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,6 +91,15 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 public class JDFQueue extends JDFAutoQueue
 {
     private static final long serialVersionUID = 1L;
+     /**
+     * number of concurrent running entries 
+     */
+    public int maxRunningEntries=1;
+    /**
+     * max number of completed entries to retain 
+     */
+    public int maxCompletedEntries=0;
+    private boolean automated=false;
     
     /**
      * Constructor for JDFQueue
@@ -162,6 +171,26 @@ public class JDFQueue extends JDFAutoQueue
     {
         return getChildrenByTagName(ElementName.QUEUEENTRY,null,null, false, true,0);
     }
+    /**
+     * Get a vector of queueentry elements with a given set of attributes and part maps
+     * @return VElement: the vector of queue entries
+     */
+    public VElement getQueueEntryVector(JDFAttributeMap attMap, VJDFAttributeMap parts)
+    {
+        VElement v=getChildrenByTagName(ElementName.QUEUEENTRY,null,attMap, false, true,0);
+        if(parts!=null)
+        {
+            for(int i=v.size()-1;i>=0;i--)
+            {
+                JDFQueueEntry qe=(JDFQueueEntry)v.elementAt(i);
+                if(!parts.equals(qe.getPartMapVector()))
+                {
+                    v.remove(i);
+                }
+            }
+        }
+        return (v==null || v.size()==0) ? null : v;
+    }
     
     /**
      * Method getEntry: find a queuentry by position
@@ -190,7 +219,8 @@ public class JDFQueue extends JDFAutoQueue
     {
         final VString vsQEntryIDs = new VString ();
         
-        for (int i = 0; i < getEntryCount(); i++)
+        final int entryCount = getEntryCount();
+        for (int i = 0; i < entryCount; i++)
         {
             final JDFQueueEntry entry = getEntry (i);
             
@@ -250,6 +280,133 @@ public class JDFQueue extends JDFAutoQueue
                 return i;
         }
         return -1;
+        
+    }
+    
+    ///////////////////////////////////////////////////////////////////////
+    /**
+     * Get the next QueueEntry to be processed
+     * the first entry with equal priority gets selected
+     * 
+     * @return the executable queueEntry, null if none is available
+     */
+    public JDFQueueEntry getNextExecutableQueueEntry()
+    {
+       if(!canExecute())
+           return null;
+       VElement v=getQueueEntryVector(new JDFAttributeMap(AttributeName.STATUS,EnumQueueEntryStatus.Waiting),null);
+       int siz=v==null ? 0 : v.size();
+       JDFQueueEntry theEntry=null;
+       for(int i=0;i<siz;i++)
+       {
+           JDFQueueEntry qe=(JDFQueueEntry)v.elementAt(i);
+           if(theEntry==null)
+           {
+               theEntry=qe;
+           }
+           else if(qe.getPriority()>theEntry.getPriority())
+           {
+               theEntry=qe;
+           }
+       }
+       return theEntry; 
+    }
+
+    /**
+     * if the outgoing device processor is accepting new entries
+     * @return true, if new entries are accepted
+     */
+    public boolean canExecute()
+    {
+        EnumQueueStatus status=getQueueStatus();
+        if(EnumQueueStatus.Blocked.equals(status))
+            return false;
+        if(EnumQueueStatus.Held.equals(status))
+            return false;
+        if(EnumQueueStatus.Full.equals(status))
+            return false;
+        if(EnumQueueStatus.Running.equals(status))
+            return false;
+        if(EnumQueueStatus.Waiting.equals(status))
+            return true;
+        //if(EnumQueueStatus.Blocked.equals(status))
+        // blocked or null(illegal)
+        return numEntries(EnumQueueEntryStatus.Running)<maxRunningEntries;         
+    }
+    
+    /**
+     * if the incoming queue processor is accepting new entries
+     * @return true, if new entries are accepted
+     */
+    public boolean canAccept()
+    {
+        EnumQueueStatus status=getQueueStatus();
+        if(EnumQueueStatus.Blocked.equals(status))
+            return false;
+        if(EnumQueueStatus.Held.equals(status))
+            return false;
+        if(EnumQueueStatus.Full.equals(status))
+            return false;
+        if(EnumQueueStatus.Waiting.equals(status))
+            return true;
+        //if(EnumQueueStatus.Blocked.equals(status))
+        // blocked or null(illegal)
+        return numEntries(null)<getQueueSize();         
+    }
+    
+    /**
+     * remove all entries with Staus=Removed and any entries 
+     * over maxCompleted that are either aborted or completed @see {@link JDFQueueEntry}.isCompleted()
+     */
+    public void cleanup()
+    {
+       VElement v=getQueueEntryVector();
+       int siz=v==null ? 0 : v.size();
+       int nBad=0;
+       for(int i=0;i<siz;i++)
+       {
+           JDFQueueEntry qe=(JDFQueueEntry)v.elementAt(i);
+           EnumQueueEntryStatus status=qe.getQueueEntryStatus();
+           if(status==null)
+               qe.deleteNode();
+           else if(EnumQueueEntryStatus.Removed.equals(status))
+               qe.deleteNode();
+           else if(qe.isCompleted())
+           {
+               if(nBad++>=maxCompletedEntries)
+                   qe.deleteNode();
+           }
+       }         
+    }
+
+     /**
+     * return the number of  entries
+     * @param qeStatus the queueentry status of the enries to count, 
+     * if null, do not filter
+     * @return the number of active processors
+     */
+    public int numEntries(EnumQueueEntryStatus qeStatus)
+    {
+        VElement v=getQueueEntryVector(qeStatus==null ? null : new JDFAttributeMap(AttributeName.STATUS,qeStatus),null);
+        return v==null ? 0 : v.size();
+     }
+
+    /**
+     * make this a smart queue when modifying queueentries
+     * @param_automated automate if true
+     */
+    public void setAutomated(boolean _automated)
+    {
+        automated=_automated;        
+    }
+    
+    /**
+     * is this a smart queue when modifying queueentries
+     * @param_automated automate if true
+     */
+    public boolean isAutomated()
+    {
+        return automated;
         
     }
     

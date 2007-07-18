@@ -370,7 +370,7 @@ public class JDFMessage extends JDFAutoMessage
     /**
      * SetQuery - sets the initiating query, command or registration to q
      *
-     * @param q
+     * @param q the query, command or registration to create a response for
      */
     public void setQuery(JDFMessage q)
     {
@@ -384,7 +384,7 @@ public class JDFMessage extends JDFAutoMessage
                                 : "JDFMessage.setQuery: illegal family type " + f.getName();
             throw new JDFException(message);
         }
-        setAttribute(AttributeName.REFID, q.getID(), null);
+        setrefID(q.getID());
         setType(q.getType());
     }
 
@@ -442,7 +442,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public void setType(EnumType value)
     {
-        final String typeName = value.getName();
+        final String typeName = value==null ? null : value.getName();
         setType(typeName);
     }
 
@@ -2522,6 +2522,14 @@ public class JDFMessage extends JDFAutoMessage
     public String getrefID()
     {
         return getAttribute(AttributeName.REFID);
+    }
+    /**
+     * Method setrefID.
+     * @param refIF
+     */
+    public void setrefID(String refID)
+    {
+        setAttribute(AttributeName.REFID, refID);
     }
 
     /* (non-Javadoc)

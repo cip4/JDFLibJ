@@ -377,59 +377,63 @@ public class JDFSpawnTest extends JDFTestCaseBase
                 vMap=null; // unpartitioned
             for(int j=0;j<4;j++) // rw or ro first
             {
-                JDFDoc dRoot=new JDFDoc("JDF");
-                JDFNode nRoot=dRoot.getJDFRoot();
+                for(int k=0;k<2;k++) // copy local or copy from high level
+                {
+                    JDFDoc dRoot=new JDFDoc("JDF");
+                    JDFNode nRoot=dRoot.getJDFRoot();
 
-                nRoot.setType("Product",true);
+                    nRoot.setType("Product",true);
 
-                JDFDoc d=JDFResourceTest.creatXMDoc();
-                JDFNode n=(JDFNode) nRoot.copyElement(d.getJDFRoot(),null);
-                nRoot.moveElement(n.getResourcePool(), null);
+                    JDFDoc d=JDFResourceTest.creatXMDoc();
+                    JDFNode n=(JDFNode) nRoot.copyElement(d.getJDFRoot(),null);
+                    if(k>0)
+                        nRoot.moveElement(n.getResourcePool(), null);
 
-                JDFExposedMedia xm=(JDFExposedMedia) n.getMatchingResource(ElementName.EXPOSEDMEDIA,EnumProcessUsage.AnyInput,null,0);
-                JDFExposedMedia xmPart=(JDFExposedMedia) xm.getPartition(map, null);
-                JDFMedia media=xm.getMedia();
-                media.makeRootResource("mediaID", n, true);
+                    JDFExposedMedia xm=(JDFExposedMedia) n.getMatchingResource(ElementName.EXPOSEDMEDIA,EnumProcessUsage.AnyInput,null,0);
+                    JDFExposedMedia xmPart=(JDFExposedMedia) xm.getPartition(map, null);
+                    JDFMedia media=xm.getMedia();
+                    media.makeRootResource("mediaID", n, true);
 
-                Vector vRWRes=new Vector();
-                if(j<2)
-                    vRWRes.add(ElementName.EXPOSEDMEDIA);
+                    Vector vRWRes=new Vector();
+                    if(j<2)
+                        vRWRes.add(ElementName.EXPOSEDMEDIA);
 
-                JDFSpawn spawn=new JDFSpawn(n);
-                JDFNode spawnedNodeXMRW=spawn.spawn(null,null,vRWRes,vMap,false,true,true,true);
+                    JDFSpawn spawn=new JDFSpawn(n);
+                    JDFNode spawnedNodeXMRW=spawn.spawn(null,null,vRWRes,vMap,false,true,true,true);
 
-                // this one spawns the component rw
-                vRWRes.clear();
-                JDFExposedMedia xmSpawn=(JDFExposedMedia)spawnedNodeXMRW.getMatchingResource(ElementName.EXPOSEDMEDIA, EnumProcessUsage.AnyInput, null, 0);
-                assertNotNull(xmSpawn);
-                assertEquals(xmPart.getSpawnStatus(), j<2 ? EnumSpawnStatus.SpawnedRW : EnumSpawnStatus.SpawnedRO);
-                 if(j>=2) // swap sequence or rw / ro
-                    vRWRes.add(ElementName.EXPOSEDMEDIA);
+                    // this one spawns the component rw
+                    vRWRes.clear();
+                    JDFExposedMedia xmSpawn=(JDFExposedMedia)spawnedNodeXMRW.getMatchingResource(ElementName.EXPOSEDMEDIA, EnumProcessUsage.AnyInput, null, 0);
+                    assertNotNull(xmSpawn);
+                    assertEquals(xmPart.getSpawnStatus(), j<2 ? EnumSpawnStatus.SpawnedRW : EnumSpawnStatus.SpawnedRO);
+                    if(j>=2) // swap sequence or rw / ro
+                        vRWRes.add(ElementName.EXPOSEDMEDIA);
 
-                spawn=new JDFSpawn(n);
+                    spawn=new JDFSpawn(n);
 
-                JDFNode spawnedNodeXMRO=spawn.spawn("thisUrl","newURL",vRWRes,vMap,false,true,true,true); 
-                 // merge and immediately respawn the same thing
-                JDFNode s1=j%2==0?spawnedNodeXMRO:spawnedNodeXMRW;
-                String spawnIDRO=s1.getSpawnID(false);
-                JDFNode s2=j%2==1?spawnedNodeXMRO:spawnedNodeXMRW;
-                String spawnIDRW=s2.getSpawnID(false);
-                //n=new JDFMerge(nRoot).mergeJDF(s1, null, EnumCleanUpMerge.None, EnumAmountMerge.UpdateLink);
-                n=new JDFMerge(nRoot).mergeJDF(s1, null, EnumCleanUpMerge.RemoveAll, EnumAmountMerge.UpdateLink);
-                assertTrue("spawnID RO gone",nRoot.toString().indexOf(spawnIDRO)<0);
-                assertTrue("spawnID RW not gone",nRoot.toString().indexOf(spawnIDRW)>=0);
-                xm=(JDFExposedMedia) n.getMatchingResource(ElementName.EXPOSEDMEDIA,EnumProcessUsage.AnyInput,null,0);
-                xmPart=(JDFExposedMedia) xm.getPartition(map, null);
-                assertEquals(i+" "+j,xmPart.getSpawnStatus(), j==0 || j==3 ? EnumSpawnStatus.SpawnedRW : EnumSpawnStatus.SpawnedRO);
+                    JDFNode spawnedNodeXMRO=spawn.spawn("thisUrl","newURL",vRWRes,vMap,false,true,true,true); 
+                    // merge and immediately respawn the same thing
+                    JDFNode s1=j%2==0?spawnedNodeXMRO:spawnedNodeXMRW;
+                    String spawnIDRO=s1.getSpawnID(false);
+                    JDFNode s2=j%2==1?spawnedNodeXMRO:spawnedNodeXMRW;
+                    String spawnIDRW=s2.getSpawnID(false);
+                    //n=new JDFMerge(nRoot).mergeJDF(s1, null, EnumCleanUpMerge.None, EnumAmountMerge.UpdateLink);
+                    n=new JDFMerge(nRoot).mergeJDF(s1, null, EnumCleanUpMerge.RemoveAll, EnumAmountMerge.UpdateLink);
+                    assertTrue("spawnID RO gone",nRoot.toString().indexOf(spawnIDRO)<0);
+                    assertTrue("spawnID RW not gone",nRoot.toString().indexOf(spawnIDRW)>=0);
+                    xm=(JDFExposedMedia) n.getMatchingResource(ElementName.EXPOSEDMEDIA,EnumProcessUsage.AnyInput,null,0);
+                    xmPart=(JDFExposedMedia) xm.getPartition(map, null);
+                    assertEquals(i+" "+j,xmPart.getSpawnStatus(), j==0 || j==3 ? EnumSpawnStatus.SpawnedRW : EnumSpawnStatus.SpawnedRO);
 
-                // merge and immediately respawn the same thing
-                n=new JDFMerge(nRoot).mergeJDF(s2, null, EnumCleanUpMerge.RemoveAll, EnumAmountMerge.UpdateLink);
-//                n=new JDFMerge(nRoot).mergeJDF(s2, null, EnumCleanUpMerge.None, EnumAmountMerge.UpdateLink);
-                assertTrue("spawnID gone",nRoot.toString().indexOf(spawnIDRW)<0);
-                assertTrue("spawnIDs gone",nRoot.toString().indexOf("SpawnIDs")<0);
-                xm=(JDFExposedMedia) n.getMatchingResource(ElementName.EXPOSEDMEDIA,EnumProcessUsage.AnyInput,null,0);
-                xmPart=(JDFExposedMedia) xm.getPartition(map, null);
-                assertEquals(xmPart.getSpawnStatus(),  EnumSpawnStatus.NotSpawned);
+                    // merge and immediately respawn the same thing
+                    n=new JDFMerge(nRoot).mergeJDF(s2, null, EnumCleanUpMerge.RemoveAll, EnumAmountMerge.UpdateLink);
+//                  n=new JDFMerge(nRoot).mergeJDF(s2, null, EnumCleanUpMerge.None, EnumAmountMerge.UpdateLink);
+                    assertTrue("spawnID gone",nRoot.toString().indexOf(spawnIDRW)<0);
+                    assertTrue("spawnIDs gone",nRoot.toString().indexOf("SpawnIDs")<0);
+                    xm=(JDFExposedMedia) n.getMatchingResource(ElementName.EXPOSEDMEDIA,EnumProcessUsage.AnyInput,null,0);
+                    xmPart=(JDFExposedMedia) xm.getPartition(map, null);
+                    assertEquals(xmPart.getSpawnStatus(),  EnumSpawnStatus.NotSpawned);
+                }
             }
         }
     }
@@ -767,44 +771,54 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
     public void testSpawnMergeSimple()
     {
-        JDFDoc d=JDFResourceTest.creatXMDoc();
-        JDFNode n=d.getJDFRoot();
-        // test spawning of referenced resources in parent nodes
-        n.setType(EnumType.ProcessGroup);
-        JDFNode n2=n.addJDFNode(EnumType.ConventionalPrinting);
-        n2.moveElement(n.getResourceLinkPool(), null);
+        EnumCleanUpMerge cu[]=new EnumCleanUpMerge[]{EnumCleanUpMerge.None,EnumCleanUpMerge.RemoveAll,EnumCleanUpMerge.RemoveRRefs};
+        for(int i=0;i<3;i++)
+        {
+            JDFDoc d=JDFResourceTest.creatXMDoc();
+            JDFNode n=d.getJDFRoot();
+            // test spawning of referenced resources in parent nodes
+            n.setType(EnumType.ProcessGroup);
+            JDFNode n2=n.addJDFNode(EnumType.ConventionalPrinting);
+            n2.moveElement(n.getResourceLinkPool(), null);
+            n2.getCreateAuditPool().addNotification(null, null, null).appendComment().setText("notification all pre");
+            n2.removeNodeInfo();
+            n2.appendNodeInfo();
+            final JDFSpawn spawn=new JDFSpawn(n2); // fudge to test output counting
+            n2.setStatus(EnumNodeStatus.Waiting);
+            assertEquals(EnumNodeStatus.Waiting,n2.getPartStatus(null));
+            n2.getCreateAuditPool().addNotification(null, null, null).appendComment().setText("notification 2 main");
 
-        n2.removeNodeInfo();
-        n2.appendNodeInfo();
-        final JDFSpawn spawn=new JDFSpawn(n2); // fudge to test output counting
-        n2.setStatus(EnumNodeStatus.Waiting);
-        assertEquals(EnumNodeStatus.Waiting,n2.getPartStatus(null));
+            String pid=n2.getJobPartID(false);
+            assertNotSame(pid,"");
+            JDFNode spawnedNode=spawn.spawn("thisUrl","newURL",null,null,false,true,true,true);
+            spawnedNode.getCreateAuditPool().addNotification(null, null, null).appendComment().setText("notification 3 sub");
+            assertTrue("no spawnStatus",spawnedNode.toString().indexOf(AttributeName.SPAWNSTATUS)<0);
 
-        String pid=n2.getJobPartID(false);
-        assertNotSame(pid,"");
-        JDFNode spawnedNode=spawn.spawn("thisUrl","newURL",null,null,false,true,true,true);
-        assertTrue("no spawnStatus",spawnedNode.toString().indexOf(AttributeName.SPAWNSTATUS)<0);
+            spawnedNode.setStatus(EnumNodeStatus.Part);
+            spawnedNode.getNodeInfo().setNodeStatus(EnumNodeStatus.Aborted);
+            assertEquals(EnumNodeStatus.Part,spawnedNode.getStatus());
+            assertEquals(EnumNodeStatus.Aborted,spawnedNode.getPartStatus(null));
+            final JDFAuditPool auditPool = spawnedNode.getCreateAuditPool();
+            auditPool.addProcessRun(EnumNodeStatus.Aborted, null, null);
+            JDFNotification notif=(JDFNotification) auditPool.addAudit(EnumAuditType.Notification, null);
+            notif.appendComment().setText("fooBar");
+            final JDFMerge merge = new JDFMerge(n);
+            merge.bAddMergeToProcessRun=true;
 
-        spawnedNode.setStatus(EnumNodeStatus.Part);
-        spawnedNode.getNodeInfo().setNodeStatus(EnumNodeStatus.Aborted);
-        assertEquals(EnumNodeStatus.Part,spawnedNode.getStatus());
-        assertEquals(EnumNodeStatus.Aborted,spawnedNode.getPartStatus(null));
-        final JDFAuditPool auditPool = spawnedNode.getCreateAuditPool();
-        auditPool.addProcessRun(EnumNodeStatus.Aborted, null, null);
-        JDFNotification notif=(JDFNotification) auditPool.addAudit(EnumAuditType.Notification, null);
-        notif.appendComment().setText("fooBar");
-        final JDFMerge merge = new JDFMerge(n);
-        merge.bAddMergeToProcessRun=true;
+            JDFNode mergedNode=merge.mergeJDF(spawnedNode, "merged", cu[i], EnumAmountMerge.UpdateLink);
 
-        JDFNode mergedNode=merge.mergeJDF(spawnedNode, "merged", JDFNode.EnumCleanUpMerge.None, EnumAmountMerge.UpdateLink);
+            assertEquals(EnumNodeStatus.Part,mergedNode.getStatus());
+            assertEquals(EnumNodeStatus.Aborted,mergedNode.getPartStatus(null));
 
-        assertEquals(EnumNodeStatus.Part,mergedNode.getStatus());
-        assertEquals(EnumNodeStatus.Aborted,mergedNode.getPartStatus(null));
-
-        final JDFNode jobPart = d.getJDFRoot().getJobPart(pid, null);
-        assertEquals(jobPart, mergedNode);
-        assertEquals(jobPart.getAuditPool().getAudit(0, EnumAuditType.ProcessRun, null, null).getAttribute("SubmitTime"), n.getAuditPool().getAudit(0, EnumAuditType.Spawned, null, null).getTimeStamp());
-        assertEquals("comment text correctly merged",jobPart.getAuditPool().getAudit(0, EnumAuditType.Notification, null, null).getComment(0).getText(),"fooBar");
+            final JDFNode jobPart = d.getJDFRoot().getJobPart(pid, null);
+            assertEquals(jobPart, mergedNode);
+            final JDFAuditPool auditPoolMerged = jobPart.getAuditPool();
+            if(i==0) // spawned is cleaed away in loop 1 and 2
+                assertEquals(auditPoolMerged.getAudit(0, EnumAuditType.ProcessRun, null, null).getAttribute("SubmitTime"), n.getAuditPool().getAudit(0, EnumAuditType.Spawned, null, null).getTimeStamp());
+            assertNotNull(auditPoolMerged.getAudit(3, EnumAuditType.Notification, null, null));
+            assertNull(auditPoolMerged.getAudit(4, EnumAuditType.Notification, null, null));
+            assertEquals("comment text correctly merged",auditPoolMerged.getAudit(-1, EnumAuditType.Notification, null, null).getComment(0).getText(),"fooBar");
+        }
 
     }
     ///////////////////////////////////////////////////////////
@@ -1362,7 +1376,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
     public void testBigMerge() throws Exception    
     {       
- //       testBigSpawn();
+        //       testBigSpawn();
         JDFParser parser = new JDFParser ();
         JDFDoc jdfDoc = parser.parseFile(sm_dirTestDataTemp+"bigMainPost.jdf");
         for(int i=9;i>0;i--)

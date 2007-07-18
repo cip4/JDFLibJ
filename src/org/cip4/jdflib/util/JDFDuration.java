@@ -151,6 +151,15 @@ public class JDFDuration
     {
         m_lDuration = s;
     }
+    /**
+     * Allocates a <code>JDFDuration</code> object and initializes it with 's'
+     * @param s duration in seconds
+     * s may be fractional
+     */
+    public JDFDuration(int s)
+    {
+        m_lDuration = s;
+    }
 
     /**
      * Allocates a <code>JDFDuration</code> object and initializes it with a

@@ -437,7 +437,8 @@ public class JDFAuditPool extends JDFPool
         final JDFNotification l = (JDFNotification) addAudit(JDFAudit.EnumAuditType.Notification, by);
         if (l != null)
         {
-            l.setClass(severity);
+            if(severity!=null)
+                l.setClass(severity);
             l.setPartMapVector(vmParts);
         }
         return l;

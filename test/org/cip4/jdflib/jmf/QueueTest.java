@@ -72,8 +72,11 @@ package org.cip4.jdflib.jmf;
 
 import junit.framework.TestCase;
 
+import org.cip4.jdflib.auto.JDFAutoQueue.EnumQueueStatus;
+import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.util.JDFDate;
 
 /**
@@ -83,32 +86,22 @@ import org.cip4.jdflib.util.JDFDate;
  */
 public class QueueTest extends TestCase
 {
-    
-    
+    private JDFQueue q;
+
     public void testGetQueueEntry()
     {
-        JDFDoc doc = new JDFDoc(ElementName.QUEUE);
-        JDFQueue q=(JDFQueue) doc.getRoot();
-        JDFQueueEntry qe=q.appendQueueEntry();
-        qe.setQueueEntryID("qe1");
-        qe=q.appendQueueEntry();
-        qe.setQueueEntryID("qe2");
-        qe=q.appendQueueEntry();
-        qe.setQueueEntryID("qe3");
         assertEquals("qe2",q.getEntry(1).getQueueEntryID(),"qe2");
         assertEquals("qe2",q.getEntry("qe1").getQueueEntryID(),"qe1");
         assertEquals("qe2",q.getEntry("qe2").getQueueEntryID(),"qe2");
         assertEquals("qe2",q.getEntry("qe3").getQueueEntryID(),"qe3");
-        assertNull("qe4",q.getEntry("qe4"));
-        assertEquals("qe4",-1,q.getQueueEntryPos("qe4"));
+        assertNull("qe6",q.getEntry("qe6"));
+        assertEquals("qe6",-1,q.getQueueEntryPos("qe6"));
         assertEquals("qe2",1,q.getQueueEntryPos("qe2"));
     }
-    
+
     public void testGetTimes()
     {
-        JDFDoc doc = new JDFDoc(ElementName.QUEUE);
-        JDFQueue q=(JDFQueue) doc.getRoot();
-        JDFQueueEntry qe=q.appendQueueEntry();
+        JDFQueueEntry qe=q.getQueueEntry(0);
         qe.setQueueEntryID("qe1");
         JDFDate d=qe.getEndTime();
         assertNull("date",d);
@@ -116,7 +109,7 @@ public class QueueTest extends TestCase
         d=qe.getEndTime();
         assertEquals("date",d.getTimeInMillis(),new JDFDate().getTimeInMillis(),1000);        
     }
-    
+
     public void testEndTime()
     {
         JDFQueueEntry _qe = (JDFQueueEntry) new JDFDoc(ElementName.QUEUEENTRY).getRoot();
@@ -124,5 +117,125 @@ public class QueueTest extends TestCase
     }
 
 /////////////////////////////////////////////////////////////////////////////
-    
+
+    public void testGetQueueEntryVector()
+    {
+        assertEquals(5,q.getQueueEntryVector().size()); 
+        assertEquals(2,q.getQueueEntryVector(new JDFAttributeMap("Status",EnumQueueEntryStatus.Waiting),null).size()); 
+    }
+
+    public void testCanExecute()
+    {
+        assertFalse(q.canExecute());
+        q.maxRunningEntries=2;
+        assertTrue(q.canExecute());
+        q.setQueueStatus(EnumQueueStatus.Held);
+        assertFalse(q.canExecute());
+        q.setQueueStatus(EnumQueueStatus.Waiting);
+        assertTrue("note that this is inconsistent",q.canExecute());
+    }
+
+/////////////////////////////////////////////////////////////////////////////
+
+    public void testGetNextExecutableQueueEntry()
+    {
+        assertNull(q.getNextExecutableQueueEntry());
+        q.maxRunningEntries=2;
+        assertEquals(q.getNextExecutableQueueEntry(), q.getEntry("qe2"));
+        q.setQueueStatus(EnumQueueStatus.Held);
+        assertNull(q.getNextExecutableQueueEntry());
+        q.setQueueStatus(EnumQueueStatus.Waiting);
+    }
+
+/////////////////////////////////////////////////////////////////////////////
+
+    public void testSetPriority()
+    {
+        JDFQueueEntry qe=q.getEntry("qe2");
+        assertEquals(q.getQueueEntryPos("qe2"), 1);
+        q.setAutomated(true);
+        int l=q.numEntries(null);
+        qe.setPriority(99);
+        assertEquals(q.numEntries(null), l);
+        assertEquals(q.getQueueEntryPos("qe2"), 0);
+        
+        qe.setPriority(0);
+        assertEquals(q.numEntries(null), l);
+        assertEquals(q.getQueueEntryPos("qe2"), 2);
+    }
+
+/////////////////////////////////////////////////////////////////////////////
+
+    public void testCleanup()
+    {
+        JDFQueueEntry qe=q.appendQueueEntry();
+        qe.setQueueEntryStatus(EnumQueueEntryStatus.Removed);
+        q.maxCompletedEntries=1;
+        q.cleanup();
+        assertFalse(q.getQueueEntryVector().contains(qe));
+        assertEquals("removed completed and aborted",q.numEntries(null), 5);
+        q.maxCompletedEntries=0;
+        q.cleanup();
+        assertEquals("removed completed and aborted",q.numEntries(null), 4);
+    }
+/////////////////////////////////////////////////////////////////////////////
+
+    public void testSetQueueEntryStatus()
+    {
+        JDFQueueEntry qe=q.getEntry("qe2");
+        assertEquals(q.getQueueEntryPos("qe2"), 1);
+        q.setAutomated(true);
+        int l=q.numEntries(null);
+        qe.setQueueEntryStatus(EnumQueueEntryStatus.Completed);
+        assertEquals(q.numEntries(null), l);
+        assertEquals(q.getQueueEntryPos("qe2"), 4);
+        qe.setQueueEntryStatus(EnumQueueEntryStatus.Running);
+        assertEquals(q.numEntries(null), l);
+        assertEquals(q.getQueueEntryPos("qe2"), 0);
+        qe=q.getEntry("qe1");
+        qe.setQueueEntryStatus(EnumQueueEntryStatus.Running);
+        assertEquals(q.numEntries(null), l);
+        assertEquals(q.getQueueEntryPos("qe1"), 1);
+        
+        qe=q.getEntry("qe5");
+        qe.setQueueEntryStatus(EnumQueueEntryStatus.Aborted);
+        assertEquals(q.numEntries(null), l);
+        assertEquals(q.getQueueEntryPos("qe5"), 4);
+        
+        qe=q.getEntry("qe1");
+        qe.setQueueEntryStatus(EnumQueueEntryStatus.Aborted);
+        assertEquals(q.numEntries(null), l);
+        assertEquals(q.getQueueEntryPos("qe1"), 2);
+
+        
+     }
+
+    /* (non-Javadoc)
+     * @see junit.framework.TestCase#setUp()
+     */
+    protected void setUp() throws Exception
+    {
+        // TODO Auto-generated method stub
+        super.setUp();
+        JDFDoc doc = new JDFDoc(ElementName.QUEUE);
+        q=(JDFQueue) doc.getRoot();
+        JDFQueueEntry qe=q.appendQueueEntry();
+        qe.setQueueEntryID("qe1");
+        qe.setQueueEntryStatus(EnumQueueEntryStatus.Waiting);
+        qe.setPriority(5);
+        qe=q.appendQueueEntry();
+        qe.setQueueEntryStatus(EnumQueueEntryStatus.Waiting);
+        qe.setPriority(55);
+        qe.setQueueEntryID("qe2");
+        qe=q.appendQueueEntry();
+        qe.setQueueEntryStatus(EnumQueueEntryStatus.Held);
+        qe.setPriority(99);
+        qe.setQueueEntryID("qe3");
+        qe=q.appendQueueEntry();
+        qe.setQueueEntryStatus(EnumQueueEntryStatus.Completed);
+        qe.setQueueEntryID("qe4");
+        qe=q.appendQueueEntry();
+        qe.setQueueEntryStatus(EnumQueueEntryStatus.Running);
+        qe.setQueueEntryID("qe5");
+    }
 }

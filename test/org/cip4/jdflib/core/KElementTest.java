@@ -226,6 +226,7 @@ public class KElementTest extends JDFTestCaseBase
         KElement ec2=e.appendElement("c2");
         ec2.setAttribute("foo", "ec2");
         KElement ec4=e.appendElement("c4");
+        
         KElement ec3=ec1.replaceElement(ec2);
         assertEquals("c1=c2",ec3,ec2);
         assertEquals("c4 is next",ec3,ec4.getPreviousSibling());
@@ -234,19 +235,24 @@ public class KElementTest extends JDFTestCaseBase
         assertNull("no sibling",ec1.getPreviousSibling());
         assertEquals("parent ok",ec2.getParentNode_KElement(),e);
         assertNull("ec1 no parent",ec1.getParentNode());
+        
         KElement ec33=ec3.replaceElement(ec3);
         assertEquals("replace of this is a nop",ec3,ec33);
-
 
         // now cross document
         KElement e2=d2.getRoot();
         e2.appendElement("e22");
+        
         ec1=ec3.replaceElement(e2);
         assertNull("ec3 no parent",ec3.getParentNode());
         assertEquals("parent ok",ec1.getParentNode_KElement(),e);
         assertEquals("c4 is next",ec1,ec4.getPreviousSibling());
         assertEquals("c4 is next",ec1.getNextSibling(),ec4);
         assertEquals("root",ec1.getParentNode(),e);
+        
+        KElement eNew=e.replaceElement(e2);
+        assertTrue(eNew.isEqual(e2));
+        assertTrue(e.isEqual(e2));
 
     }
 
@@ -384,6 +390,25 @@ public class KElementTest extends JDFTestCaseBase
         assertTrue(c.matchesPath("/Test/ns:c[@att=\"41\"]", false));
     }
 
+    public void testMoveMe()
+    {
+        XMLDoc doc      = new XMLDoc("Test","www.test.com");
+        KElement root=doc.getRoot();
+        KElement a=root.appendElement("a");
+        KElement b=root.appendElement("b");
+        KElement c=b.appendElement("c");
+        assertNull(root.moveMe(a));
+        assertNull(b.moveMe(c));
+        assertEquals(b.getPreviousSibling(),a);
+        b=b.moveMe(a);
+        assertEquals(b.getNextSibling(),a);
+        b=b.moveMe(b);
+        assertEquals(b.getNextSibling(),a);
+        b=b.moveMe(null);
+        assertEquals(a.getNextSibling(),b);
+        
+    }
+    
     public void testMoveAttribute()
     {
         XMLDoc doc      = new XMLDoc("Test","www.test.com");

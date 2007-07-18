@@ -128,11 +128,14 @@ import org.cip4.jdflib.examples.IterationTest;
 import org.cip4.jdflib.examples.JDFExampleDocTest;
 import org.cip4.jdflib.examples.MISFinTest;
 import org.cip4.jdflib.examples.NColorTest;
+import org.cip4.jdflib.examples.StrippingTest;
 import org.cip4.jdflib.examples.VarnishTest;
 import org.cip4.jdflib.examples.WebTest;
 import org.cip4.jdflib.jmf.JDFJMFTest;
+import org.cip4.jdflib.jmf.JDFMessageServiceTest;
 import org.cip4.jdflib.jmf.JDFMessageTest;
 import org.cip4.jdflib.jmf.JDFPipeParamsTest;
+import org.cip4.jdflib.jmf.JDFQueueSubmissionParamsTest;
 import org.cip4.jdflib.jmf.JMFKnownMessagesTest;
 import org.cip4.jdflib.jmf.JMFResourceInfoTest;
 import org.cip4.jdflib.jmf.JMFResourceTest;
@@ -178,6 +181,7 @@ import org.cip4.jdflib.util.HashUtilTest;
 import org.cip4.jdflib.util.JDFDateTest;
 import org.cip4.jdflib.util.JDFSpawnTest;
 import org.cip4.jdflib.util.MimeUtilTest;
+import org.cip4.jdflib.util.PrefixInputStreamTest;
 import org.cip4.jdflib.util.StringUtilTest;
 import org.cip4.jdflib.util.UrlUtilTest;
 
@@ -260,15 +264,18 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(IterationTest.class);
         suite.addTestSuite(JDFExampleDocTest.class);
         suite.addTestSuite(MISFinTest.class);
-        suite.addTestSuite(NColorTest.class);
+        suite.addTestSuite(NColorTest.class);        
+        suite.addTestSuite(StrippingTest.class);
         suite.addTestSuite(VarnishTest.class);
         suite.addTestSuite(WebTest.class);
 
         // JMF
         suite.addTestSuite(JDFJMFTest.class);
         suite.addTestSuite(JDFMessageTest.class);
-        suite.addTestSuite(JDFPipeParamsTest.class);
+        suite.addTestSuite(JDFMessageServiceTest.class);
         suite.addTestSuite(JMFKnownMessagesTest.class);
+        suite.addTestSuite(JDFPipeParamsTest.class);
+        suite.addTestSuite(JDFQueueSubmissionParamsTest.class);
         suite.addTestSuite(JMFResourceTest.class);
         suite.addTestSuite(JMFResourceInfoTest.class);
         suite.addTestSuite(JMFStatusTest.class);
@@ -322,6 +329,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JDFDateTest.class);
         suite.addTestSuite(JDFSpawnTest.class);
         suite.addTestSuite(MimeUtilTest.class);
+        suite.addTestSuite(PrefixInputStreamTest.class);
         suite.addTestSuite(StringUtilTest.class);
         suite.addTestSuite(UrlUtilTest.class);
 

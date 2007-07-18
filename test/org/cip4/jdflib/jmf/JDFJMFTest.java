@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -74,6 +74,7 @@ import junit.framework.TestCase;
 
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 
@@ -94,6 +95,57 @@ public class JDFJMFTest extends TestCase
         assertEquals(jmf.getMessageVector(null, EnumType.Status).size(), 2);
     }
 /////////////////////////////////////////////////////////////////////////////
+    public void testInit()
+    {
+        JDFDoc doc = new JDFDoc(ElementName.JMF);
+        JDFJMF jmf=doc.getJMFRoot();
+        jmf.setSenderID("sid");
+        JDFCommand c=jmf.appendCommand();
+        assertTrue(c.getID().contains(".sid."));
+    }
+/////////////////////////////////////////////////////////////////////////////
+    public void testTheSenderID()
+    {
+        JDFJMF.setTheSenderID("sid");
+        JDFDoc doc = new JDFDoc(ElementName.JMF);
+        JDFJMF jmf=doc.getJMFRoot();
+        JDFCommand c=jmf.appendCommand();
+        assertTrue(c.getID().contains(".sid."));
+        JDFJMF.setTheSenderID(null);
+    }
+/////////////////////////////////////////////////////////////////////////////
+    public void testgetSubmissionParams()
+    {
+        JDFDoc doc = new JDFDoc(ElementName.JMF);
+        JDFJMF jmf=doc.getJMFRoot();
+        assertNull(jmf.getSubmissionURL());
+        JDFCommand c=jmf.appendCommand(EnumType.ResubmitQueueEntry);
+        assertNull(jmf.getSubmissionURL());
+        JDFResubmissionParams rsp=c.appendResubmissionParams();
+        assertNull(jmf.getSubmissionURL());
+        rsp.setURL("url");
+        assertEquals("url", jmf.getSubmissionURL());
+    }
+/////////////////////////////////////////////////////////////////////////////
+    public void testCreateResponse()
+    {
+        JDFJMF queries=JDFJMF.createJMF(EnumFamily.Query, EnumType.Status);
+        queries.appendCommand(EnumType.Resource);
+        queries.appendCommand(EnumType.Resource);
+        queries.appendRegistration(EnumType.Resource);
+
+        JDFJMF responses=queries.createResponse();
+        final VElement messageVector = queries.getMessageVector(null, null);
+        final VElement responseVector = responses.getMessageVector(null, null);
+        assertEquals(responseVector.size(), 4);
+        for(int i=0;i<responseVector.size();i++)
+        {
+            JDFResponse r=(JDFResponse)responseVector.elementAt(i);
+            JDFMessage m=(JDFMessage)messageVector.elementAt(i);
+            assertEquals(r.getrefID(), m.getID());
+            assertEquals(r.getType(), m.getType());
+        }
+    }
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
