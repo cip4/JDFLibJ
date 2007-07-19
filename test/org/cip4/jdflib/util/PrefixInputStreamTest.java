@@ -72,7 +72,6 @@
 package org.cip4.jdflib.util;
 
 import java.io.ByteArrayInputStream;
-import java.io.StringBufferInputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 

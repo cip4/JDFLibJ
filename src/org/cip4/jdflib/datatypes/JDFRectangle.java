@@ -13,7 +13,6 @@ import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.util.HashUtil;
-import org.cip4.jdflib.util.StringUtil;
 
 /**
  * This class represents a rectangle JDFRectangle) consisting of a lower left x value (llx),

@@ -157,7 +157,6 @@ package org.cip4.jdflib.jmf;
 
 import java.util.Vector;
 
-import org.apache.commons.lang.ArrayUtils;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoMessageService;
 import org.cip4.jdflib.auto.JDFAutoDevCaps.EnumContext;

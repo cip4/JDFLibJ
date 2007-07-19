@@ -74,7 +74,6 @@ import java.util.Vector;
 
 import junit.framework.TestCase;
 
-import org.apache.commons.lang.ArrayUtils;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;

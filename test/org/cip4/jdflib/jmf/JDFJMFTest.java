@@ -101,7 +101,7 @@ public class JDFJMFTest extends TestCase
         JDFJMF jmf=doc.getJMFRoot();
         jmf.setSenderID("sid");
         JDFCommand c=jmf.appendCommand();
-        assertTrue(c.getID().contains(".sid."));
+        assertTrue(c.getID().indexOf(".sid.") != -1);
     }
 /////////////////////////////////////////////////////////////////////////////
     public void testTheSenderID()
@@ -110,7 +110,7 @@ public class JDFJMFTest extends TestCase
         JDFDoc doc = new JDFDoc(ElementName.JMF);
         JDFJMF jmf=doc.getJMFRoot();
         JDFCommand c=jmf.appendCommand();
-        assertTrue(c.getID().contains(".sid."));
+        assertTrue(c.getID().indexOf(".sid.") != -1);
         JDFJMF.setTheSenderID(null);
     }
 /////////////////////////////////////////////////////////////////////////////
