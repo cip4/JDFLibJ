@@ -100,7 +100,7 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 {
     private static final long serialVersionUID = 1L;
     private static boolean bDefaultWorkStepID=false;
-
+    
     private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[19];
     static
     {
@@ -110,7 +110,7 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
         atrInfoTable[3] = new AtrInfoTable(AttributeName.FIRSTEND, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
         atrInfoTable[4] = new AtrInfoTable(AttributeName.FIRSTSTART, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
         atrInfoTable[5] = new AtrInfoTable(AttributeName.IPPVERSION, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.JOBPRIORITY, 0x33333331, AttributeInfo.EnumAttributeType.integer, null,"50");
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.JOBPRIORITY, 0x22222222, AttributeInfo.EnumAttributeType.integer, null,"50");
         atrInfoTable[7] = new AtrInfoTable(AttributeName.LASTEND, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
         atrInfoTable[8] = new AtrInfoTable(AttributeName.LASTSTART, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
         atrInfoTable[9] = new AtrInfoTable(AttributeName.NATURALLANG, 0x33333331, AttributeInfo.EnumAttributeType.language, null, null);
