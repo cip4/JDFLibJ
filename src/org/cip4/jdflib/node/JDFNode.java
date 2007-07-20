@@ -184,7 +184,9 @@ import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.Node;
 
 /**
- *
+ * This is the main node for the JDF ticket. Others are around, but this is the main one to do editing.
+ * 0x22222222 is the HexValue used so programmers know which attribute/element is REQUIRED when "Add Required elements/attributes"
+ * is selected. The validation tool will also throw an error until the attribute/element is added.
  */
 public class JDFNode extends JDFElement
 {
@@ -205,7 +207,7 @@ public class JDFNode extends JDFElement
         atrInfoTable_abstract[11] = new AtrInfoTable(AttributeName.SPAWNID, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
         atrInfoTable_abstract[12] = new AtrInfoTable(AttributeName.STATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
         atrInfoTable_abstract[13] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable_abstract[14] = new AtrInfoTable(AttributeName.TEMPLATE, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null,"false");
+        atrInfoTable_abstract[14] = new AtrInfoTable(AttributeName.TEMPLATE, 0x22222222, AttributeInfo.EnumAttributeType.boolean_, null,"false");
         atrInfoTable_abstract[15] = new AtrInfoTable(AttributeName.TEMPLATEID, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable_abstract[16] = new AtrInfoTable(AttributeName.TEMPLATEVERSION, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable_abstract[17] = new AtrInfoTable(AttributeName.TYPE, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
@@ -215,7 +217,7 @@ public class JDFNode extends JDFElement
     }
     private static AtrInfoTable[] atrInfoTable_root = new AtrInfoTable[2];
     static
-    {
+    {	//TODO BMI: Ask Rainer why xmlns is not picked up by the JDFEditor but Version is. I even matched it up to Version.
         atrInfoTable_root[0] = new AtrInfoTable(AttributeName.VERSION, 0x22222222, AttributeInfo.EnumAttributeType.JDFJMFVersion, EnumVersion.getEnum(0), null);
         atrInfoTable_root[1] = new AtrInfoTable(AttributeName.XMLNS, 0x22222221, AttributeInfo.EnumAttributeType.URI, null, null);
     }
