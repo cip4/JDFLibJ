@@ -114,11 +114,17 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
     private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[12];
     static
+    /*
+     * 0x22222222 = HexValue for "required" attributes in CheckJDF. This value is use when you select
+     * "Add Required Attributes."
+     * Orig value:0x33333331
+     */
+    
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.TYPE, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumType.getEnum(0), null);
         atrInfoTable[1] = new AtrInfoTable(AttributeName.TRIMCTM, 0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
         atrInfoTable[2] = new AtrInfoTable(AttributeName.ORDID, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.LAYOUTELEMENTPAGENUM, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, "0");
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.LAYOUTELEMENTPAGENUM, 0x22222222, AttributeInfo.EnumAttributeType.integer, null, "0");
         atrInfoTable[4] = new AtrInfoTable(AttributeName.SOURCECLIPPATH, 0x33333333, AttributeInfo.EnumAttributeType.PDFPath, null, null);
         atrInfoTable[5] = new AtrInfoTable(AttributeName.CLIPBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
         atrInfoTable[6] = new AtrInfoTable(AttributeName.LAYERID, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
@@ -126,7 +132,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
         atrInfoTable[8] = new AtrInfoTable(AttributeName.CLIPPATH, 0x33333333, AttributeInfo.EnumAttributeType.PDFPath, null, null);
         atrInfoTable[9] = new AtrInfoTable(AttributeName.ORD, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
         atrInfoTable[10] = new AtrInfoTable(AttributeName.TRIMSIZE, 0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[11] = new AtrInfoTable(AttributeName.HALFTONEPHASEORIGIN, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
+        atrInfoTable[11] = new AtrInfoTable(AttributeName.HALFTONEPHASEORIGIN, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
     }
     
     protected AttributeInfo getTheAttributeInfo()
