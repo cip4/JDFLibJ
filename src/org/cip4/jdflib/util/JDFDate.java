@@ -377,6 +377,11 @@ public class JDFDate implements Comparable
         return getDateFormat(timePattern).format(createCalendar());
     }
 
+    public String  getDateTimeISOBD()
+    {
+        final String timePattern = "yyyy'-'MM'-'dd'";
+        return getDateFormat(timePattern).format(createCalendar());
+    }
     /**
      * @param timePattern
      * @return
