@@ -96,7 +96,7 @@ public class JDFAudit extends JDFElement
     
     private static final long serialVersionUID = 1L;
     final private static String m_libAgentName    = "CIP4 JDF Writer Java";
-    final private static String m_libAgentVersion = "1.3 BLD 44";
+    final private static String m_libAgentVersion = "1.3 BLD 44b";
     // use reasonable defaults
     private static String m_strAgentName    = m_libAgentName;
     private static String m_strAgentVersion = m_libAgentVersion;
@@ -110,7 +110,7 @@ public class JDFAudit extends JDFElement
         atrInfoTable[3] = new AtrInfoTable(AttributeName.AGENTVERSION,  0x33333311, AttributeInfo.EnumAttributeType.string,null,null);
         atrInfoTable[4] = new AtrInfoTable(AttributeName.ID,            0x33333311, AttributeInfo.EnumAttributeType.ID,null,null);
         atrInfoTable[5] = new AtrInfoTable(AttributeName.REFID,         0x33333311, AttributeInfo.EnumAttributeType.IDREF,null,null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.TIMESTAMP,     0x33333222, AttributeInfo.EnumAttributeType.dateTime,null,null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.TIMESTAMP,     0x22222222, AttributeInfo.EnumAttributeType.dateTime,null,null);
     }
     
     protected AttributeInfo getTheAttributeInfo() 
