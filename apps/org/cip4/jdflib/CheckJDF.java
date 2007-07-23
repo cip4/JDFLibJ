@@ -129,16 +129,16 @@ import org.xml.sax.InputSource;
 
 
 /**
- * Refactored CheckJDF to be non-static in order to make it thread compatible. 
+ * Refactored CheckJDF to be non-static in order to make it thread compatible.
  * Previously, only one thread at a time could call CheckJDF from within the same
- * JVM. Now an instance of CheckJDF and the the method validate should be called. 
+ * JVM. Now an instance of CheckJDF and the the method validate should be called.
  * CheckJDF can still be called from the command line in the same way as before.
- * 
+ *
  * TODO Break out validation error handling logging so that new error handlers can
  * easily be registered. For example, there should be an error handler for logging to
  * the XML log file and an error handler for logging to the <code>sysOut</code>.
  * Perhaps <code>org.xml.sax.ErrorHandler</code> could be used?
- * 
+ *
  * @author Claes Buckwalter (clabu@itn.liu.se)
  * @version 2005-06-21
  */
@@ -156,10 +156,10 @@ public class CheckJDF
     VString vSeparations = new VString();
     VString vSeparations2 = new VString();
     VString vColorPoolSeparations = new VString();
-    XMLDoc pOut = new XMLDoc("CheckOutput", null);  
+    XMLDoc pOut = new XMLDoc("CheckOutput", null);
     // list of gray boxes that are ignored when checking types for extensions
     static String[] aGBList={"ImpositionRIPing","PlateMaking","ProofAndPlateMaking","ImpositionProofing","PageProofing","RIPing","PrePressPreparation","ImpositionPreparation","ProofImaging"};
- 
+
     JDFDoc theDoc=null;
     private String translation=null;
     private boolean bTryFormats=false;
@@ -174,7 +174,7 @@ public class CheckJDF
     public boolean bWarnDanglingURL=false;
     public KElement.EnumValidationLevel level=EnumValidationLevel.Incomplete;
     public VString allFiles=null;
-    
+
     public String proxyHost = null;
     public String proxyPort = null;
 
@@ -185,19 +185,19 @@ public class CheckJDF
     public  String devCapFile=null;
     public EnumFitsValue testlists=EnumFitsValue.Allowed;
     private boolean bMultiID=false;
-    
+
     final private static String version =
         "CheckJDF: JDF validator; -- (c) 2001-2007 CIP4"
             + "\nJDF 1.3 compatible version\n"
             + "\nCode based on schema JDF_1.3.xsd Release Candidate 001\n"
             + "Build version " + JDFAudit.software();
-    
-    final private static String usage =  "\n******************************************************************************************\n" 
-            + "Usage: <input JDF files>\n" 
+
+    final private static String usage =  "\n******************************************************************************************\n"
+            + "Usage: <input JDF files>\n"
             + "-V(ersion) -q(uiet) -c(omplete) -n(amespace) -v(alidate) -t(ime)\n"
-            + "-u(RL)<URL> -h(ost) -p(ort) -l(ocation)<schemaLocation> -L(ocation)<schemaLocation>\n" 
+            + "-u(RL)<URL> -h(ost) -p(ort) -l(ocation)<schemaLocation> -L(ocation)<schemaLocation>\n"
             + "-d(eviceCapabilities)<input JDM file>  -P(resentValueLists) \n\n"
-            
+
             + "-? usage info\n"
             + "-q is quiet for valid files\n"
             + "-Q is completely quiet for all files\n"
@@ -209,7 +209,7 @@ public class CheckJDF
             + "-P device capabilities parameter. Use present value lists, otherwise allowed value lists\n"
             + "-u URL to send the JMF to. In this case, checkJDF will validate the response from the URL\n"
             + "-U check for dangling URL attributes\n"
-            + "-h proxy host name\n" 
+            + "-h proxy host name\n"
             + "-p proxy port name\n"
             + "-v validate using XML Schema validation;\n   the Schema can be defined in the xsi:schemaLocation tag in the JDF or using the -l or -L switch\n"
             + "-V Always print a version stamp, even in quiet mode (-q)\n"
@@ -222,7 +222,7 @@ public class CheckJDF
             + "-w print out Warnings (deprecated etc.)\n"
             + "-x output filename that contains an xml formatted error report\n"
             + "-X XSL stylesheet to apply to the xml formatted error report as specified in -x\n";
-    
+
     public CheckJDF()
     {
         super();
@@ -230,31 +230,34 @@ public class CheckJDF
     }
 
     private void setErrorType(KElement reportElem,String type, String message, int indent){
-        if(reportElem==null)
-            return;
+        if(reportElem==null) {
+			return;
+		}
         reportElem.setAttribute("IsValid",false,null);
         reportElem.setAttribute("ErrorType",type,null);
         reportElem.setAttribute("Message",message,null);
-        if(indent>0)
-            sysOut.println(indent(indent)+message);
+        if(indent>0) {
+			sysOut.println(indent(indent)+message);
+		}
     }
     private void setErrorType(KElement reportElem,String type, String message){
         setErrorType(reportElem,type, message,-1);
     }
-    
+
     public static String toMessageString(KElement checkOut)
     {
-        if(checkOut==null)
-            return null;
+        if(checkOut==null) {
+			return null;
+		}
         return checkOut.getAttribute("Message",null,null);
     }
-    
+
     public void setDoc(JDFDoc d){
         theDoc=d;
     }
-   
+
     MySysOut sysOut = new MySysOut();
-    
+
     /**
      * if bI
      * @param bIgnore
@@ -291,7 +294,7 @@ public class CheckJDF
      * @param JDFElement jdfElement - the element to test
      * @param bool bQuiet - flag what to do with valid elements; quiet if true
      * @param indent - indent for println() to console window
-     * @param xmlParent - root for XML output (if '-x' set) 
+     * @param xmlParent - root for XML output (if '-x' set)
      * @param bIsNodeRoot - is the jdfElement a root of a whole testNode or not
      */
 
@@ -302,46 +305,47 @@ public class CheckJDF
              boolean bIsNodeRoot)
      {
          int i, j;
-         
+
          String id = kElement.getAttribute(AttributeName.ID,null,"");
          String pref = kElement.getPrefix();
          String elmName = kElement.getNodeName();
          String nsURI = kElement.getNamespaceURI();
-         
-         
+
+
          KElement testElement = null;
-         
+
          if(xmlParent != null)
          {
              testElement = xmlParent.appendElement("TestElement");
              testElement.setAttribute("XPath",kElement.buildXPath(null,1));
              testElement.setAttribute("NodeName",kElement.getNodeName());
              String strID = kElement.getAttribute(AttributeName.ID,null,null);
-             if (strID!=null)
-                 testElement.setAttribute("ID",strID);
+             if (strID!=null) {
+				testElement.setAttribute("ID",strID);
+			}
          }
-         
-         if (kElement instanceof JDFNode) 
+
+         if (kElement instanceof JDFNode)
          {
              JDFNode node = (JDFNode) kElement;
               printNode(node, indent, testElement);
-             
+
              if (bIsNodeRoot) // this will be executed only once - test of the whole Node
              {
                  printNodeRoot(node, xmlParent);
              }
          }
-         
+
          boolean isJDFNS = JDFElement.isInJDFNameSpaceStatic(kElement);
          if (!isJDFNS)
-         {             
+         {
              if (bPrintNameSpace)
              {
                  sysOut.print(indent(indent+2));
                  String status = isJDFNS ? "Testing" : "Skipping";
                  sysOut.print(status+" ");
-                 
-                 sysOut.println("Element that is not in JDF nameSpace: <"  
+
+                 sysOut.println("Element that is not in JDF nameSpace: <"
                          + kElement.getLocalName()
                          + "> namespace:" + pref + "  uri: " + nsURI);
                  setErrorType(testElement,"PrivateElement","Element in Private NameSpace: "+elmName);
@@ -357,52 +361,53 @@ public class CheckJDF
              {
                  printResourceLink((JDFResourceLink) kElement,  indent, testElement);
              }
-             
+
              if(kElement instanceof JDFRefElement)
-             {    
+             {
                  printRefElement((JDFRefElement) kElement, indent, testElement);
              }
-             
+
              if (kElement instanceof JDFResource )
              {
                  printResource((JDFResource) kElement, indent, testElement);
              }
-             if(!bPrintNameSpace&&xmlParent!=null&&!testElement.hasChildElements())
-                 testElement.deleteNode();
+             if(!bPrintNameSpace&&xmlParent!=null && testElement != null && !testElement.hasChildElements()) {
+				testElement.deleteNode();
+			}
              return;
          }
-         
-         // the following code line is a copy from C++ version and 
+
+         // the following code line is a copy from C++ version and
          // is used for identity of variable names for CheckJDF in Java and C++.
          // In C++ here a factory object is created.
-         
+
          if (!(kElement instanceof JDFElement))
-         {            
+         {
              return; //TODO more
          }
          JDFElement jdfElement = (JDFElement) kElement ;
-         
+
          VString privateAttributes = new VString(jdfElement.getUnknownAttributes(false, 9999999));
          VString unknownAttributes = new VString(jdfElement.getUnknownAttributes(true, 9999999));
          privateAttributes.removeStrings(unknownAttributes, Integer.MAX_VALUE);
-         
+
          VString privateElements = new VString(jdfElement.getUnknownElements(false, 9999999));
          VString unknownElements = new VString(jdfElement.getUnknownElements(true, 9999999));
          privateElements.removeStrings(unknownElements, Integer.MAX_VALUE);
-         
+
          if (bPrintNameSpace)
          {
              printPrivate(privateAttributes, privateElements, jdfElement, indent, testElement);
          }
-         
+
          boolean bIsOK = true;
-         
-         if (jdfElement instanceof JDFResourceLinkPool) 
+
+         if (jdfElement instanceof JDFResourceLinkPool)
          {// check typesafe node links
              bIsOK = true;  // nop this is done in printnode
          }
          else if(jdfElement instanceof JDFRefElement)
-         {    
+         {
              bIsOK = printRefElement((JDFRefElement) jdfElement, indent, testElement);
          }
          else if (jdfElement instanceof JDFResourceLink)
@@ -417,15 +422,15 @@ public class CheckJDF
          {
              printURL(kElement, indent, testElement);
          }
-         
-         boolean  bIsValid = jdfElement.isValid(level);         
+
+         boolean  bIsValid = jdfElement.isValid(level);
          boolean bValidID = id==null || id.equals(JDFConstants.EMPTYSTRING) ? true : !vBadID.contains(id);
          boolean bUnknownElem=false;
 
-         
+
          if (testElement != null && xmlParent != null)
          {
-             if (bIsOK) 
+             if (bIsOK)
              {
                  String invElems = xmlParent.getAttribute("PreReleaseElements");
                  bIsOK = !StringUtil.hasToken(invElems,elmName," ",0);
@@ -435,8 +440,8 @@ public class CheckJDF
                      setErrorType(testElement,"PreReleaseElement",elmName+" is not valid in JDF Version"+jdfElement.getVersion(true).getName()+" First Valid version: "+v.getName(),indent+2);
                  }
              }
-             
-             if (bIsOK) 
+
+             if (bIsOK)
              {
                  String invElems = xmlParent.getAttribute("DeprecatedElements");
                  bIsOK = !StringUtil.hasToken(invElems,elmName," ",0);
@@ -446,8 +451,8 @@ public class CheckJDF
                      setErrorType(testElement,"DeprecatedElement",elmName+" is not valid in JDF Version"+jdfElement.getVersion(true).getName()+" Last Valid version: "+v.getName(),indent+2);
                  }
              }
-             
-             if (bIsOK) 
+
+             if (bIsOK)
              {
                  String invElems = xmlParent.getAttribute("PrivateElements");
                  bIsOK = !StringUtil.hasToken(invElems,elmName," ",0);
@@ -455,7 +460,7 @@ public class CheckJDF
                      setErrorType(testElement,"PrivateElement",elmName+" is not a valid subelement");
                  }
              }
-             if (bIsOK) 
+             if (bIsOK)
              {
                  String swapElems = xmlParent.getAttribute("SwapElements");
                  bIsOK = !StringUtil.hasToken(swapElems,elmName," ",0);
@@ -464,7 +469,7 @@ public class CheckJDF
                      setErrorType(testElement,"SwapElement", elmName+" is written as an Element");
                  }
              }
-             if (bIsOK) 
+             if (bIsOK)
              {
                  String unkElems = xmlParent.getAttribute("UnknownElements",null,null);
                  if (unkElems!=null)
@@ -478,7 +483,7 @@ public class CheckJDF
                  }
              }
          }
-         
+
          if (bUnknownElem && testElement!=null)
          {
                  testElement.setAttribute("IsValid", false, null);
@@ -491,13 +496,14 @@ public class CheckJDF
                  sysOut.println(indent(indent)
                          + "--- Valid:"+ jdfElement.buildXPath(null,1) + " " + id);
              }
-             if(testElement!=null)
-                 testElement.setAttribute("IsValid", true, null);
+             if(testElement!=null) {
+				testElement.setAttribute("IsValid", true, null);
+			}
              if(bIsNodeRoot && xmlParent!=null)
              {
                  xmlParent.setAttribute("IsValid", true, null);
              }
-             
+
          }
          else // this one is bad -> recurse to find a reason
          {
@@ -506,15 +512,16 @@ public class CheckJDF
                  sysOut.println(indent(indent)
                          + "!!! InValid Element: "+ kElement.buildXPath(null,1)+ " " + id + " !!! ");
              }
-             if(testElement!=null)
-                 testElement.setAttribute("IsValid", false, null);
+             if(testElement!=null) {
+				testElement.setAttribute("IsValid", false, null);
+			}
              sysOut.println(indent(indent+2)+"Invalid Element "+elmName+" is not valid, see child elements for details");
              if(testElement!=null && !testElement.hasAttribute("ErrorType"))
              {
                  setErrorType(testElement,"InvalidElement",elmName+" is not valid, see child elements for details",2);
              }
-             
-             if (!bValidID)
+
+             if (!bValidID && testElement!=null)
              {
                  KElement e = testElement.appendElement("TestAttribute");
                  setErrorType(e,"MultipleID", "Multiply defined ID = " + id,indent);
@@ -522,7 +529,7 @@ public class CheckJDF
                  e.setAttribute("Value", id);
                  e.setAttribute("XPath", jdfElement.buildXPath(null,1)+ "/@ID");
              }
-                          
+
              boolean printMissElms=true;
              if(jdfElement instanceof JDFResource)
              {
@@ -533,8 +540,8 @@ public class CheckJDF
                      printMissElms = false;
                  }
              }
-             
-             
+
+
              VString swapAtt = new VString();
              VString vTmp = jdfElement.knownElements();
              // compare missing elements with unknown attributes to find elem <-> attrib swaps
@@ -547,7 +554,7 @@ public class CheckJDF
                      swapAtt.appendUnique(unknownAttr);
                  }
              }
-             
+
              // compare missing attributes with unknown elements to find elem <-> attrib swaps
              VString swapElem = new VString();
              vTmp = jdfElement.knownAttributes();
@@ -559,7 +566,7 @@ public class CheckJDF
                      swapElem.appendUnique(unknownElem);
                  }
              }
-             
+
              // get a list of missing and invalid attribute and element names
              VString invalidAttributes =
                  new VString(jdfElement.getInvalidAttributes(level, true, 9999999));
@@ -571,26 +578,26 @@ public class CheckJDF
              VString deprecatedElements = new VString(jdfElement.getDeprecatedElements( 9999999));
              VString prereleaseAttributes = new VString(jdfElement.getPrereleaseAttributes( 9999999));
              VString prereleaseElements = new VString(jdfElement.getPrereleaseElements( 9999999));
-             
+
              // unknown attributes are also invalid -> remove them from the print list
              invalidAttributes.removeStrings(unknownAttributes,99999);
              invalidAttributes.removeStrings(deprecatedAttributes,99999);
              invalidAttributes.removeStrings(prereleaseAttributes,99999);
              unknownAttributes.removeStrings(prereleaseAttributes,99999);
              unknownAttributes.removeStrings(deprecatedAttributes,99999);
-             
+
              // unknown elements are also invalid -> remove them from the print list
              invalidElements.removeStrings(unknownElements,99999);
              invalidElements.removeStrings(deprecatedElements,99999);
              invalidElements.removeStrings(prereleaseElements,99999);
              unknownElements.removeStrings(deprecatedElements,99999);
              unknownElements.removeStrings(prereleaseElements,99999);
-             
+
              // swapped elements are also invalid -> remove them from the print list
              unknownElements.removeStrings(swapElem,99999);
              // swapped attributes are also invalid -> remove them from the print list
              unknownAttributes.removeStrings(swapAtt,99999);
-             
+
              // find missing elements and attributes
              if (level.getValue()>= EnumValidationLevel.Complete.getValue())
              {
@@ -601,32 +608,33 @@ public class CheckJDF
                  // missing elements are also invalid -> remove them from the print list
                  invalidElements.removeStrings(missingElements,99999);
              }
-             
+
              // remove all double entries before printing
              unknownElements.unify();
              missingElements.unify();
-             
+
              // print the various snafus
-             
+
              printAttributeList(indent, testElement, jdfElement, printMissElms, unknownAttributes,"Unknown","Unknown Attribute");
              printAttributeList(indent, testElement, jdfElement, printMissElms, invalidAttributes,"Invalid","Invalid attribute Value");
              printAttributeList(indent, testElement, jdfElement, printMissElms, deprecatedAttributes,"Deprecated","Deprecated Attribute in JDF Version "+jdfElement.getVersion(true).getName());
              printAttributeList(indent, testElement, jdfElement, printMissElms, prereleaseAttributes,"PreRelease","Attribute not yet defined in JDF Version "+jdfElement.getVersion(true).getName());
              printAttributeList(indent, testElement, jdfElement, printMissElms, missingAttributes,"Missing","Missing Attribute");
              printAttributeList(indent, testElement, jdfElement, printMissElms, swapAtt,"Swap","Element written as Attribute");
-             
+
              for (j = 0; j < swapElem.size(); j++)
              {
                  String swEl = swapElem.stringAt(j);
                  sysOut.println(indent(indent + 2)
                          + "Attribute is written as Element: " + swEl);
              }
-             if (swapElem.size()>0)
+
+             if (swapElem.size()>0 && testElement!=null)
              {
                  testElement.setAttribute("SwapElements",StringUtil.setvString(swapElem,JDFConstants.BLANK,null,null));
              }
-             
-             
+
+
              if(printMissElms)
              {
                  for (j = 0; j < missingElements.size(); j++)
@@ -634,7 +642,7 @@ public class CheckJDF
                      String missEl = missingElements.stringAt(j);
                      sysOut.println(indent(indent + 2)
                              + "Missing Element: " + missEl);
-                     
+
                      if (testElement != null)
                      {
                          KElement e = testElement.appendElement("TestElement");
@@ -658,35 +666,35 @@ public class CheckJDF
              {
                  testElement.setAttribute("UnknownElements",StringUtil.setvString(unknownElements,JDFConstants.BLANK,null,null));
              }
-             
+
              printElementList(indent, testElement, jdfElement, invalidElements, "Invalid");
              printElementList(indent, testElement, jdfElement, deprecatedElements, "Deprecated");
              printElementList(indent, testElement, jdfElement, prereleaseElements, "PreRelease");
              printElementList(indent, testElement, jdfElement, privateElements, "Private");
-             
+
              if (jdfElement instanceof JDFResource )
              {
                  final JDFResource res = (JDFResource) jdfElement;
-                 
+
                  if (!res.isLeaf())
                  { // handle partitioned resources
                      VElement vr = res.getLeaves(false);
                      for (j = 0; j < vr.size(); j++)
                      {
                          printBad( (JDFElement)vr.elementAt(j),
-                                 indent + 2, testElement, 
+                                 indent + 2, testElement,
                                  false);
                      }
                  }
              }
          }
-         
+
          // recurse through all child elements :
          VElement ve = jdfElement.getChildElementVector(null, null, null, true, 0, false);
          for (i = 0; i < ve.size(); i++)
          {
-             printBad((KElement) ve.elementAt(i), 
-                     indent + 2, 
+             printBad((KElement) ve.elementAt(i),
+                     indent + 2,
                      testElement,false);
          }
      }
@@ -698,14 +706,15 @@ public class CheckJDF
      */
      private void printURL(KElement element, int indent, KElement testElement)
      {
-         if(!element.hasAttribute(AttributeName.URL))
-             return;
+         if(!element.hasAttribute(AttributeName.URL)) {
+			return;
+		}
          final String url = element.getAttribute(AttributeName.URL);
          if(UrlUtil.getURLInputStream(url, element.getOwnerDocument_KElement().getBodyPart())==null)
          {
              // found bad url
              KElement e = testElement.appendElement("TestAttribute");
-             setErrorType(e,"DanglingURL", "Dangling URL points to Nirvana: "+url,indent);                           
+             setErrorType(e,"DanglingURL", "Dangling URL points to Nirvana: "+url,indent);
              e.setAttribute("NodeName", "URL");
              e.setAttribute("Value", url);
              e.setAttribute("XPath", element.buildXPath(null,1)+ "/@URL");
@@ -723,14 +732,14 @@ public class CheckJDF
 //            potDup="- (potential duplicate): ";
             potRef="- (potential reference to invalid element): ";
         }
-                       
+
         for (j = 0; j < elementVector.size(); j++)
          {
              String invalidElem = elementVector.stringAt(j);
              if (part.numChildElements(invalidElem, "") > 1)
              {
                  sysOut.println(
-                     indent(indent + 2) + whatType 
+                     indent(indent + 2) + whatType
                          + " Element "+potRef
                          + invalidElem);
              }
@@ -739,11 +748,12 @@ public class CheckJDF
              if(eInv==null)
              {
                  eInv=ePart.getElement(invalidElem + "Ref", null, 0);
-                 if(eInv!=null)
-                     sysOut.println(
-                             indent(indent+2) + whatType 
+                 if(eInv!=null) {
+					sysOut.println(
+                             indent(indent+2) + whatType
                              + " Element "+potRef
                              + invalidElem +"Ref");
+				}
              }
          }
          if (testElement != null && elementVector.size()>0)
@@ -762,8 +772,8 @@ public class CheckJDF
              message=originalMessage;
              String invalidAt = (String) attributeVector.elementAt(j);
              if (!((KElement)part).hasAttribute_KElement(invalidAt, "", false)) // exactly this node (e.g. ResourceElement or Leaf)
-             { 
-                 if (EnumPartIDKey.getEnum(invalidAt)!= null) 
+             {
+                 if (EnumPartIDKey.getEnum(invalidAt)!= null)
                  {
                      // missing PartIDKeys are written into invalidAttributes vector
                      if(part.getAttribute(invalidAt,null,null)==null)
@@ -781,7 +791,7 @@ public class CheckJDF
                          KElement e = testElement.appendElement("TestAttribute");
                          setErrorType(e,"InvalidAttribute","Incorrectly placed Partition key: "+invalidAt, indent+2);
                          e.setAttribute("NodeName", invalidAt);
-                         e.setAttribute("XPath", part.buildXPath(null,1)+ "/@" + invalidAt);                         
+                         e.setAttribute("XPath", part.buildXPath(null,1)+ "/@" + invalidAt);
                      }
                  }
                  else if (!part.hasAttribute(invalidAt, null, false)) // if the resourceRoot doesn`t have it as well
@@ -795,7 +805,7 @@ public class CheckJDF
                      }
                  }
              }
-             else 
+             else
              {
                  sysOut.println(indent(indent + 2)+ whatType+ " Attribute: " + invalidAt +
                          " = " + part.getAttribute(invalidAt));
@@ -815,7 +825,7 @@ public class CheckJDF
                      {
                          e.setAttribute("LastVersion",v.getName());
                          message+=" Last valid Version: "+v.getName();
-                     }                         
+                     }
                  }
                  setErrorType(e,whatType+"Attribute",invalidAt+" "+message);
                  e.setAttribute("NodeName", invalidAt);
@@ -833,27 +843,27 @@ public class CheckJDF
 
      /**
       * For all subnodes that 'root' consist of makes the total check of Links, Resources and separations
-      * fill in the vectors 'vLinkedResources', 'vResources', 'vBadResourceLinks', 
+      * fill in the vectors 'vLinkedResources', 'vResources', 'vBadResourceLinks',
       * 'vColorPoolSeparations', 'vSeparations'. Print the warnings
-      *   
+      *
       * @param root - Node root we test
       * @param bQuiet - Mode '-q' quiet
       * @param level - validation level
-      * @param xmlParent - xmlParent for yml output of this check 
+      * @param xmlParent - xmlParent for yml output of this check
       */
      private void printNodeRoot(final JDFNode root, KElement xmlParent)
      {
          // get a vector with all jdf nodes and loop over all jdf nodes
-        
+
          Vector vProcs = root.getvJDFNode(null, null, false);
          int i, j;
-         int size = vProcs.size();         
+         int size = vProcs.size();
          for(i=0; i < size; i++)
          {
              JDFNode n = (JDFNode) vProcs.elementAt(i);
-             
+
              vLinkedResources.appendUnique(n.getLinkedResources(null,true));
-             
+
              // find unlinked resources in ResourcePool
              JDFResourcePool rp=n.getResourcePool();
              if (rp!=null)
@@ -870,8 +880,8 @@ public class CheckJDF
              }
              // add all invalid resource links in ResourcePool to vBadResourceLinks
              JDFResourceLinkPool rlp=n.getResourceLinkPool();
-             if (rlp!=null) 
-             {  
+             if (rlp!=null)
+             {
                  final VElement vLinks = rlp.getPoolChildren(null, null, null);
                  final int size2 = (vLinks==null) ? 0 : vLinks.size();
                  for(j = size2 - 1; j >= 0; j--)
@@ -881,9 +891,9 @@ public class CheckJDF
                      {
                          vBadResourceLinks.appendUnique(rl);
                      }
-                     else 
+                     else
                      {
-                         JDFElement target = rl.getTarget();                         
+                         JDFElement target = rl.getTarget();
                          if (target==null)
                          {
                              vBadResourceLinks.appendUnique(rl);
@@ -892,7 +902,7 @@ public class CheckJDF
                  }
              }
          }
-         
+
          VElement vr = new VElement();
          for(i=0; i < vResources.size(); i++)
          {
@@ -900,7 +910,7 @@ public class CheckJDF
              vr.appendUnique(res.getResourceRoot());
          }
          vResources = new VElement(vr);
-         
+
          vr.clear();
          for(i=0; i < vLinkedResources.size(); i++)
          {
@@ -911,13 +921,13 @@ public class CheckJDF
              }
          }
          vLinkedResources = new VElement(vr);
-         
+
          KElement sepPool = null;
-         if (xmlParent != null) 
+         if (xmlParent != null)
          {
              sepPool = xmlParent.appendElement("SeparationPool");
          }
-         
+
          if(!bQuiet)
          {
              for(i=0; i < vSeparations2.size(); i++)
@@ -952,36 +962,37 @@ public class CheckJDF
                  warn.setAttribute("Separation",sep);
              }
          }
-         
-         if (sepPool!=null && !sepPool.hasChildElements() && xmlParent != null)
-             xmlParent.removeChild(sepPool);
-         
+
+         if (sepPool!=null && !sepPool.hasChildElements() && xmlParent != null) {
+			xmlParent.removeChild(sepPool);
+		}
+
      }
-     
-     
+
+
      /**
       * Print private contents
-      * 
+      *
       * @param privateAttributes - vector of private attributes
       * @param privateElements - vector of private elements
       * @param jdfElement - jdfElement we test
       * @param indent - indent for println() to console window
       * @param testElement - test element of the XML output (if '-x' set) we "stand in"
       */
-     private void printPrivate(VString privateAttributes, 
+     private void printPrivate(VString privateAttributes,
                                         VString privateElements,
                                           KElement jdfElement,
-                                            int indent, 
-                                              KElement testElement) 
+                                            int indent,
+                                              KElement testElement)
      {
          int j;
-         
+
          if(!privateAttributes.isEmpty()||!privateElements.isEmpty())
          {
              sysOut.println(indent(indent)
-                     + "Element with private contents:   " 
+                     + "Element with private contents:   "
                      + jdfElement.buildXPath(null,1) + " " + jdfElement.getAttribute(AttributeName.ID,null,""));
-             
+
              if(testElement != null)
              {
                  setErrorType(testElement,"PrivateContents", "Element with private contents");
@@ -1000,11 +1011,11 @@ public class CheckJDF
              {
                  if(!foundNameSpaces.contains(privateAttribute))
                  {
-                     sysOut.println( 
-                             indent(indent+2) 
-                             + "Foreign namespace found: " + localname + " " 
+                     sysOut.println(
+                             indent(indent+2)
+                             + "Foreign namespace found: " + localname + " "
                              + jdfElement.getAttribute(privateAttribute));
-                     
+
                      if(testElement != null)
                      {
                          KElement e = testElement.appendElement("ForeignNSFound");
@@ -1017,11 +1028,11 @@ public class CheckJDF
              else
              {
                  sysOut.println(
-                         indent(indent+2) + 
-                         "Private Attribute:     " 
-                         + prefix + " " + localname + " = " 
+                         indent(indent+2) +
+                         "Private Attribute:     "
+                         + prefix + " " + localname + " = "
                          + jdfElement.getAttribute(privateAttribute));
-                 
+
                  if(testElement!=null)
                  {
                      KElement e = testElement.appendElement("TestAttribute");
@@ -1031,8 +1042,8 @@ public class CheckJDF
                      e.setAttribute("ErrorType","PrivateAttribute");
                      e.setAttribute("NodeName",privateAttribute);
                      e.setAttribute("Value",jdfElement.getAttribute(privateAttribute));
-                     e.setAttribute("XPath", jdfElement.buildXPath(null,1)+ "/@" + privateAttribute);                    
-                 }                 
+                     e.setAttribute("XPath", jdfElement.buildXPath(null,1)+ "/@" + privateAttribute);
+                 }
             }
          }
 
@@ -1041,20 +1052,20 @@ public class CheckJDF
              sysOut.println( indent(indent + 2)
                                  + "Private Element:       "
                                  + privateElements.stringAt(j));
-             
+
          }
      }
 
      /**
       * Check a whole Node and print the problems if exist
-      * 
+      *
       * @param jdfNode - JDFNode we check
       * @param level - validation level
       * @param indent - indent for println() to console window
       * @param testElement - test element of the XML output (if '-x' set) we "stand in"
       * @return boolean - true if valid
       */
-     private boolean printNode(final JDFNode jdfNode, int indent, KElement testElement) 
+     private boolean printNode(final JDFNode jdfNode, int indent, KElement testElement)
      {
          boolean isValid = true;
          String jobPartID=jdfNode.getJobPartID(false);
@@ -1067,11 +1078,11 @@ public class CheckJDF
              KElement e = testElement.appendElement("TestAttribute");
              if (jobPartID.equals(""))
              {
-                setErrorType(e,"MissingAttribute", "Missing JobPartID - required by Base ICS",indent);                           
+                setErrorType(e,"MissingAttribute", "Missing JobPartID - required by Base ICS",indent);
              }
              else
              {
-                 setErrorType(e,"MultipleID", "Multiply defined JobPartID = "+jobPartID,indent);                           
+                 setErrorType(e,"MultipleID", "Multiply defined JobPartID = "+jobPartID,indent);
                  e.setAttribute("Value", jobPartID);
              }
              e.setAttribute("NodeName", AttributeName.JOBPARTID);
@@ -1081,15 +1092,15 @@ public class CheckJDF
          {
              vJobPartID.add(jobPartID);
          }
-         
+
          isValid = checkType(jdfNode, indent, testElement, isValid);
-         
+
          if (vMissingLinks!=null)
          {
              if (testElement != null &&
                      level.getValue()>= KElement.EnumValidationLevel.Complete.getValue())
-             {                 
-                 if(jdfNode.getElement(ElementName.RESOURCELINKPOOL, null, 0)==null)  
+             {
+                 if(jdfNode.getElement(ElementName.RESOURCELINKPOOL, null, 0)==null)
                  {
                      KElement pool = testElement.appendElement("TestElement");
                      setErrorType(pool,"MissingElement","Missing ResourceLinkPool");
@@ -1098,13 +1109,13 @@ public class CheckJDF
                  printResourceLinkPool(jdfNode.buildXPath(null,1)+ "/ResourceLinkPool[1]",testElement,vMissingLinks);
              }
          }
-         
+
          return isValid;
      }
 
     private boolean checkType(final JDFNode jdfNode, int indent, KElement testElement, boolean isValid)
     {
-        String errMessage = indent(indent)+ "!!! InValid Element: "+ 
+        String errMessage = indent(indent)+ "!!! InValid Element: "+
                              jdfNode.buildXPath(null,1)+ " " + jdfNode.getID() + " !!! ";
          if(jdfNode.hasAttribute(AttributeName.TYPE))
          {
@@ -1114,9 +1125,9 @@ public class CheckJDF
              {
                  nodeType += " - " + jdfNode.getAttribute("Types");
              }
-             
+
              testElement.setAttribute("Type", typeString);
-             if(jdfNode.hasAttribute("Types")) 
+             if(jdfNode.hasAttribute("Types"))
              {
                  testElement.setAttribute("Types", jdfNode.getAttribute("Types"));
                  if(bPrintNameSpace && jdfNode.getEnumTypes()==null)
@@ -1135,10 +1146,12 @@ public class CheckJDF
                              final String t=vs.stringAt(i);
                              if(EnumType.getEnum(t)==null)
                              {
-                                 if (ArrayUtils.contains(aGBList,t))
-                                     continue;
-                                 if(n++>0)
-                                     msg+="; ";
+                                 if (ArrayUtils.contains(aGBList,t)) {
+									continue;
+								}
+                                 if(n++>0) {
+									msg+="; ";
+								}
                                  msg+=t;
                              }
                          }
@@ -1151,10 +1164,10 @@ public class CheckJDF
                          e.setAttribute("NodeName", "Types");
                          e.setAttribute("Value", msg);
                      }
-                     
+
                  }
              }
-             
+
              // check for virtual or extension types
              if(bPrintNameSpace && EnumType.getEnum(typeString)==null)
              {
@@ -1163,7 +1176,7 @@ public class CheckJDF
                  e.setAttribute("XPath", jdfNode.buildXPath(null,1)+"/@Type");
                  e.setAttribute("NodeName", "Type");
                  e.setAttribute("Value", typeString);
-                 
+
              }
              if(typeString.equals(JDFConstants.PRODUCT))
              {
@@ -1175,8 +1188,8 @@ public class CheckJDF
                          isValid = false;
                          sysOut.println(errMessage);
                          sysOut.println(nodeType);
-                         sysOut.println(indent(indent) + 
-                                 "Invalid Parent for JDF Product: Type= " 
+                         sysOut.println(indent(indent) +
+                                 "Invalid Parent for JDF Product: Type= "
                                  + n.getType());
 
                          setErrorType(testElement,"InvalidParentForProduct","Invalid Parent for JDF Product: Type = " + n.getType());
@@ -1188,10 +1201,10 @@ public class CheckJDF
          }
         return isValid;
     }
-     
+
      /**
       * Check ResourceLinkPool and print the problem if it contains missing resourceLinks
-      * 
+      *
       * @param rlp - JDFResourceLinkPool we check
       * @param level - validation level
       * @param indent - indent for println() to console window
@@ -1201,87 +1214,92 @@ public class CheckJDF
      private boolean printResourceLinkPool(final String rlpXPath,  KElement testElement, VString vMissingLinks)
      {
          boolean isValid = true;
- 
+
 
          if (level.getValue()>= EnumValidationLevel.Complete.getValue())
          {
              int size = vMissingLinks==null ? 0 : vMissingLinks.size();
-             if (size > 0)
-                 isValid = false;
-             
+             if (size > 0) {
+				isValid = false;
+			}
+
              for (int i = size-1; i >= 0 ; i--)
              {
                  String missResLink = vMissingLinks.stringAt(i);
-                 
+
                  if (testElement != null)
                  {
                      KElement e = testElement.appendElement("TestElement");
-                     
-                     String name = missResLink.indexOf(":")>0 ? StringUtil.token(missResLink, 0, ":") : missResLink;             
+
+                     String name = missResLink.indexOf(":")>0 ? StringUtil.token(missResLink, 0, ":") : missResLink;
                      String procUsage =  missResLink.indexOf(":")>0 ? StringUtil.token(missResLink, 1, ":") : "";
-                     if(procUsage.startsWith("Any"))
-                         procUsage=procUsage.substring(3);
-  
+                     if(procUsage.startsWith("Any")) {
+						procUsage=procUsage.substring(3);
+					}
+
                      setErrorType(e,"MissingResourceLink","Missing "+procUsage+" resourceLink ");
                      e.setAttribute("NodeName", name);
-                     if (!procUsage.equals(JDFConstants.EMPTYSTRING))
-                         e.setAttribute("ProcessUsage", procUsage);
-                     
+                     if (!procUsage.equals(JDFConstants.EMPTYSTRING)) {
+						e.setAttribute("ProcessUsage", procUsage);
+					}
+
                      e.setAttribute("XPath", rlpXPath + "/"+ name + "[1]");
                  }
                  vMissingLinks.removeElement(missResLink);
              }
          }
-         
+
          return isValid;
      }
-     
+
      /**
       * Check RefElements and print the problem if they are not valid
-      * 
+      *
       * @param r - refElement we check
       * @param level - validation level
       * @param indent - indent for println() to console window
       * @param testElement - test element of the XML output (if '-x' set) we "stand in"
       * @return boolean - true if valid
       */
-     private boolean printRefElement(final JDFRefElement re,  int indent, KElement testElement) 
+     private boolean printRefElement(final JDFRefElement re,  int indent, KElement testElement)
      {
          boolean isValid = true;
          String rRef = re.getrRef();
          String refName = re.getNodeName();
 
          String errMessage = indent(indent)+ "!!! InValid Element: "+ re.buildXPath(null,1)+ " !!! ";
-         
+
          if(testElement != null)
          {
              testElement.setAttribute("rRef", rRef);
-             if (re.hasAttribute(AttributeName.RSUBREF))
-                 testElement.setAttribute("rSubRef", re.getrSubRef());
+             if (re.hasAttribute(AttributeName.RSUBREF)) {
+				testElement.setAttribute("rSubRef", re.getrSubRef());
+			}
          }
 
          if (vBadID.contains(rRef))
          {
              isValid = false;
              sysOut.println(errMessage);
-             sysOut.println(indent(indent) + "Invalid RefElement: " + refName +  
+             sysOut.println(indent(indent) + "Invalid RefElement: " + refName +
                                  ". Points to the element with multiply defined ID=" + rRef );
              setErrorType(testElement,"InvalidRefElement","RefElement: " + refName +"Points to the multiply defined ID");
          }
-         else 
+         else
          {
              JDFResource targEl = re.getTarget();
 
              if (targEl == null)
              {
-                  
+
                  isValid = false;
                  sysOut.println(errMessage);
                  sysOut.println(indent(indent) + "Dangling RefElement: " + refName + " rRef=" + rRef);
                  JDFResource targRoot=re.getTargetRoot();
-                 if(targRoot!=null)
-                     sysOut.println(indent(indent)+"Refelement points to non-existing partition: "+re.getPartMap().toString());
-                 
+                 if(targRoot!=null) {
+					sysOut.println(indent(indent)+"Refelement points to non-existing partition: "+re.getPartMap().toString());
+				}
+
 
                  if (testElement != null)
                  {
@@ -1302,13 +1320,13 @@ public class CheckJDF
                  isValid = false;
                  sysOut.println(errMessage);
                  sysOut.println(indent(indent) + "Invalid RefElement: " + refName +
-                         " rRef=" + rRef + 
-                         (re.hasAttribute(AttributeName.RSUBREF) 
+                         " rRef=" + rRef +
+                         (re.hasAttribute(AttributeName.RSUBREF)
                                  ? (" rSubRef=" + re.getrSubRef())
                                          : JDFConstants.EMPTYSTRING)+
                                          ". Points to " + re.getRefNodeName() +
                                          " ID=" + targEl.getAttribute(AttributeName.ID,null,""));
-                 
+
                  if(!re.validResourcePosition())
                  {
                      JDFNode targJDF=targEl.getParentJDF();
@@ -1322,11 +1340,11 @@ public class CheckJDF
          }
          return isValid;
      }
-     
+
      /**
       * Check Resources if they are not in the vector of linked resources 'vLinkedResources',
       * print the problem
-      * 
+      *
       * @param r - resource we check
       * @param indent - indent for println() to console window
       * @param testElement - test element of the XML output (if '-x' set) we "stand in"
@@ -1335,34 +1353,34 @@ public class CheckJDF
      private boolean printResource(final JDFResource r, int indent, KElement testElement)
      {
          boolean isValid = true;
-         
+
          if (vResources.contains(r))
          {
              if(!vLinkedResources.contains(r))
              {
                  isValid = false;
-                 sysOut.println(indent(indent) + "!!! InValid Element: " + 
+                 sysOut.println(indent(indent) + "!!! InValid Element: " +
                                     r.buildXPath(null,1) + " " + r.getID() + " !!! ");
-                 
-                 sysOut.println(indent(indent) + 
-                                    "Unlinked Resource: " + 
+
+                 sysOut.println(indent(indent) +
+                                    "Unlinked Resource: " +
                                     r.getNodeName() + " " + r.getID());
-                 
+
                  if(testElement != null)
                  {
-                     setErrorType(testElement,"UnlinkedResource","Resource is not linked or referenced");                     
+                     setErrorType(testElement,"UnlinkedResource","Resource is not linked or referenced");
                  }
              }
              vResources.removeElement(r);
          }
-         
+
          return isValid;
      }
-     
+
      /**
-      * Check ResourceLinks if they are in the vector of bad resourceLinks 'vBadResourceLinks', 
+      * Check ResourceLinks if they are in the vector of bad resourceLinks 'vBadResourceLinks',
       * print the problem
-      * 
+      *
       * @param rl - resource link we check
       * @param level - validation level
       * @param indent - indent for println() to console window
@@ -1378,25 +1396,27 @@ public class CheckJDF
              String resLinkName = rl.getNodeName();
              String procUsage = (rl.hasAttribute(AttributeName.PROCESSUSAGE) && !rl.getProcessUsage().equals(JDFConstants.EMPTYSTRING))
              ?  "(ProcessUsage:" + rl.getProcessUsage() + ")"  : JDFConstants.EMPTYSTRING;
-             
+
              String errMessage = indent(indent)+ "!!! InValid Element: "+ rl.buildXPath(null,1)+ " !!! ";
-             
+
              if(testElement != null)
              {
                  setErrorType(testElement,"InvalidResourceLink","Invalid ResourceLink");
                  testElement.setAttribute("rRef", rRef);
-                 if (rl.getUsage()!=null)
-                     testElement.setAttribute("Usage", rl.getUsage().getName());
-                 if (rl.hasAttribute(AttributeName.PROCESSUSAGE) && !rl.getProcessUsage().equals(JDFConstants.EMPTYSTRING))
-                     testElement.setAttribute("ProcessUsage",rl.getProcessUsage());
+                 if (rl.getUsage()!=null) {
+					testElement.setAttribute("Usage", rl.getUsage().getName());
+				}
+                 if (rl.hasAttribute(AttributeName.PROCESSUSAGE) && !rl.getProcessUsage().equals(JDFConstants.EMPTYSTRING)) {
+					testElement.setAttribute("ProcessUsage",rl.getProcessUsage());
+				}
              }
-             
+
              if (vBadID.contains(rRef))
              {
                  isValid = false;
                  sysOut.println(errMessage);
-                 sysOut.println(indent(indent) + 
-                         "Invalid " + rl.getAttribute("Usage") + 
+                 sysOut.println(indent(indent) +
+                         "Invalid " + rl.getAttribute("Usage") +
                          " ResLink: " + resLinkName + procUsage +
                          "\nrRef points to the multiply defined ID=\"" + rRef +"\"");
                  if(testElement != null)
@@ -1411,13 +1431,14 @@ public class CheckJDF
                  {  // print resource links which have no target
                      isValid = false;
                      sysOut.println(errMessage);
-                     sysOut.println(indent(indent) + 
+                     sysOut.println(indent(indent) +
                              "Dangling " + rl.getAttribute("Usage") +  " ResLink: " + resLinkName +   procUsage + " " + rRef);
-                     
+
                      JDFResource targRoot=rl.getLinkRoot();
-                     if(targRoot!=null)
-                         sysOut.println(indent(indent)+"Resource Link points to non-existing partition: "+rl.getPartMapVector().toString());
-                     
+                     if(targRoot!=null) {
+						sysOut.println(indent(indent)+"Resource Link points to non-existing partition: "+rl.getPartMapVector().toString());
+					}
+
 
                      if (testElement != null)
                      {
@@ -1430,27 +1451,27 @@ public class CheckJDF
                              setErrorType(testElement,"DanglingPartResLink","ResourceLink points to nonexisting Partition. rRef="+rRef);
                              testElement.appendElement("Part").setAttributes(rl.getPartMapVector().elementAt(0));
                              testElement.setAttribute("ResourcePartUsage",targRoot.getPartUsage().getName(),null);
-                         }                    
+                         }
                      }
                  }
                  else
-                 {  
+                 {
                      // print resource links which have an invalid target
                      isValid = false;
                      sysOut.println(errMessage);
-                     sysOut.print(indent(indent) + 
-                             "Invalid " + rl.getAttribute("Usage") + " ResLink: " + resLinkName 
+                     sysOut.print(indent(indent) +
+                             "Invalid " + rl.getAttribute("Usage") + " ResLink: " + resLinkName
                              + procUsage + " " + rRef + ". ");
-                     
+
                      if(!rl.validResourcePosition())
                      {
-                         String errStr = "Points to: " + res.getNodeName() + ". Resource Node (ID=" + res.getParentJDF().getID() + 
+                         String errStr = "Points to: " + res.getNodeName() + ". Resource Node (ID=" + res.getParentJDF().getID() +
                          ") is not an ancestor of ResLink Node (ID=" + rl.getParentJDF().getID() + ")";
-                         
+
                          sysOut.print(errStr);
                              setErrorType(testElement,"InvalidPosition", errStr);
                          }
-                     else if (rl.isValid(level)) // but !isValidLink() 
+                     else if (rl.isValid(level)) // but !isValidLink()
                      {
                          String resName = res.getLocalName();
                          VString strLinkNames = res.getParentJDF().linkNames();
@@ -1480,7 +1501,7 @@ public class CheckJDF
                                          String linkName = (String) vs.elementAt(0);
                                          if(linkName.equals(rl.getNodeName()))
                                          {
-                                             sysOut.print(" (Potential missing ProcessUsage: " + 
+                                             sysOut.print(" (Potential missing ProcessUsage: " +
                                                      vs.elementAt(1) + ")");
                                                  setErrorType(testElement,"MissingProcessUsage", "Potential missing ProcessUsage: " + vs.elementAt(1));
                                                  foundMissing=true;
@@ -1489,7 +1510,7 @@ public class CheckJDF
                                      }
                                      if(!foundMissing)
                                      {
-                                         setErrorType(testElement,"UnknownResourceLink", "Incorrect ResourceLink @Usage or @ProcessUsage for Process "+n.getType());                                         
+                                         setErrorType(testElement,"UnknownResourceLink", "Incorrect ResourceLink @Usage or @ProcessUsage for Process "+n.getType());
                                      }
                                  }
                              }
@@ -1498,7 +1519,7 @@ public class CheckJDF
                                  sysOut.print(" (Potentially ResLink has a wrong cardinality)");
                                  if(testElement != null)
                                  {
-                                     setErrorType(testElement,"ResLinkCardinality","Potentially ResLink has a wrong cardinality"); 
+                                     setErrorType(testElement,"ResLinkCardinality","Potentially ResLink has a wrong cardinality");
                                  }
                              }
                          }
@@ -1508,18 +1529,18 @@ public class CheckJDF
              }
              vBadResourceLinks.removeElement(rl);
          }
-         
+
          return isValid;
      }
-     
+
      /**
       * print Device Capabilities: executable nodes and bugReport if exist
-      * 
+      *
       * @param jdfRoot - node to test
       * @param devCapFile - Device Capabilities fileName to test Node against
       * @param testlists - Allowed or Present testLists (parameter '-P')
       * @param level - validation level
-      * @param testElement - root of the XMLStructure for DeviceCap 
+      * @param testElement - root of the XMLStructure for DeviceCap
       */
      private void printDevCap(final JDFElement jdfRoot, final KElement testElement)
      {
@@ -1537,7 +1558,7 @@ public class CheckJDF
          if (jmfRoot == null)
          {
              sysOut.println("JMFNode == null --> can't start Test");
-             if (testElement != null) 
+             if (testElement != null)
              {
                  KElement kEl = testElement.appendElement("Error");
                  kEl.setAttribute("Message", "JMFNode == null. Can't start Test");
@@ -1549,7 +1570,7 @@ public class CheckJDF
          if (deviceCap == null)
          {
              sysOut.println("No DeviceCap element found --> can't start Test");
-             if (testElement != null) 
+             if (testElement != null)
              {
                  KElement kEl = testElement.appendElement("Error");
                  kEl.setAttribute("Message", "No DeviceCap element found. Can't start Test");
@@ -1560,9 +1581,9 @@ public class CheckJDF
          deviceCap.setIgnoreExtensions(!bPrintNameSpace);
          sysOut.println("\n**********************************************************");
          sysOut.println("\nOutput of DeviceCapability test result follows:\n");
-         
-         KElement execRoot = testElement.appendElement("ExecutableNodes");     
-         
+
+         KElement execRoot = testElement.appendElement("ExecutableNodes");
+
          final VElement vExecNodes = deviceCap.getExecutableJDF(jdfNode, testlists, level);
          if (vExecNodes!=null)
          {
@@ -1574,12 +1595,12 @@ public class CheckJDF
                  final String descrName = node.getAttribute(AttributeName.DESCRIPTIVENAME,null,null);
                  final String xPath = node.buildXPath(null,1);
                  sysOut.println( xPath + " ID= " + id + " " + descrName);
-                 
-                 if (execRoot != null) 
+
+                 if (execRoot != null)
                  {
                       final KElement exNode = execRoot.appendElement("ExecutableNode");
                       exNode.setAttribute("XPath",xPath);
-                      exNode.setAttribute("ID",id);                        
+                      exNode.setAttribute("ID",id);
                       exNode.setAttribute("DescriptiveName",descrName);
                  }
              }
@@ -1588,12 +1609,12 @@ public class CheckJDF
          else
          {
              sysOut.println("\nNo executable nodes that fit device capabilities were found");
-             if (execRoot != null) 
+             if (execRoot != null)
              {
                   execRoot.setAttribute("Message", "No Executable Nodes were found");
              }
          }
-         
+
          final XMLDoc testResult = deviceCap.getBadJDFInfo(jdfNode, testlists, level);
          if (testResult == null)
          {
@@ -1601,8 +1622,8 @@ public class CheckJDF
              KElement bugReportRoot = testElement.appendElement("BugReport");
              bugReportRoot.setAttribute("Message", "No bad JDF were found");
          }
-         else 
-         { 
+         else
+         {
              testElement.copyElement(testResult.getRoot(), null);
          }
      }
@@ -1611,7 +1632,7 @@ public class CheckJDF
      /**
       * Sets correct validation status of the nodes that has invalid entries.
       * E.g. if ResourcePool has invalid children sets its status as invalid ["IsValid" = false].
-      * 
+      *
       * Check the Validation Status of all children for Mode [bQuiet=true]
       * and if there are no invalid child nodes and it has no private contents - removes valid entries
       * @param root - xml output root.
@@ -1619,23 +1640,25 @@ public class CheckJDF
       */
      private void removeValidEntriesIfQuiet(KElement root, boolean bRoot)
      {
-         if(root==null)
-             return;
-         final JDFAttributeMap mInv = new JDFAttributeMap("IsValid", "false"); 
-         final JDFAttributeMap mVal = new  JDFAttributeMap("IsValid", "true"); 
+         if(root==null) {
+			return;
+		}
+         final JDFAttributeMap mInv = new JDFAttributeMap("IsValid", "false");
+         final JDFAttributeMap mVal = new  JDFAttributeMap("IsValid", "true");
          VElement vEl = root.getChildElementVector_KElement(null, null, null, true, 0);
          boolean bValid=true;
          for (int i = vEl.size()-1; i >= 0; i--)
          {
              KElement el = (KElement) vEl.elementAt(i);
              // ignore separationpools etc - only TestElement and TestAttribute are important
-             if(el==null || !el.getLocalName().startsWith("Test"))
-                 continue;
-             
+             if(el==null || !el.getLocalName().startsWith("Test")) {
+				continue;
+			}
+
              if (el.hasAttribute("IsValid") &&  el.getBoolAttribute("IsValid", null, false)) // has attr "Valid" and Valid=true
              {
                   KElement invChild = el.getChildByTagName(null, null, 0, mInv, false, true); // found invalid children
-                 if (invChild == null) 
+                 if (invChild == null)
                  {
                      if (bQuiet)
                      {
@@ -1643,12 +1666,12 @@ public class CheckJDF
                          JDFAttributeMap mPrivate = new JDFAttributeMap();
                          mPrivate.put("HasPrivateContents", "true");
                          mPrivate.put("IsPrivate", "true");
-                         
+
                          removeValidEntriesIfQuiet(el,false);
 
-                         if (!el.getBoolAttribute("HasPrivateContents", null, false) 
-                         && eName!="ForeignNSFound" 
-                         && (el.getChildByTagName(null, null, 0,mPrivate,false,false)  ==  null)) 
+                         if (!el.getBoolAttribute("HasPrivateContents", null, false)
+                         && eName!="ForeignNSFound"
+                         && (el.getChildByTagName(null, null, 0,mPrivate,false,false)  ==  null))
                          {
                              el.deleteNode(); // if node is valid and bQuiet is true - remove it
                          }
@@ -1666,7 +1689,7 @@ public class CheckJDF
                     }
                  }
              }
-             else 
+             else
              {
                  bValid=false;
                  KElement valChild = el.getChildByTagName(null, null,0, mVal, false, true);
@@ -1681,13 +1704,14 @@ public class CheckJDF
                  }
              }
          }
-         if(!bValid && bRoot)
-             root.setAttribute("IsValid",false,null);
+         if(!bValid && bRoot) {
+			root.setAttribute("IsValid",false,null);
+		}
      }
 
      /**
       * Parses file and if schemaLocation is not null validates against Schema.
-      * 
+      *
       * @param xmlFile - File Name to parse
       * @param schemaLocation - schema location
       * @param errorHandler - error handler
@@ -1699,7 +1723,7 @@ public class CheckJDF
          JDFParser p = new JDFParser();
          p.m_SchemaLocation=schemaLocation;
          p.m_ErrorHandler=errorHandler;
-         
+
          gd = p.parseFile(xmlFile);
          if(gd==null&& !bTryFormats)
          {
@@ -1708,32 +1732,32 @@ public class CheckJDF
 
          return gd;
      }
-     
-     
+
+
      /**
-      * main 
+      * main
       * Schema validation + internal checkJDF Test + Test against DeviceCapability File (if specified)
       * @param argv
       */
      public static void main(String argv[])
-     {   
-         // job.jdf -n -c -v or 
+     {
+         // job.jdf -n -c -v or
          // job.jdf -n -c -v -q if only invalid elements are of interest
          CheckJDF checker = new CheckJDF();
          checker.validate(argv,null);
      }
-     
+
      /**
-      * Validates the JDF instance or JMF message specified by the command line 
+      * Validates the JDF instance or JMF message specified by the command line
       * arguments. See the source code below for a description of what
       * arguments are valid.
-      *  
-      * @param commandLineArgs  command line arguments 
+      *
+      * @param commandLineArgs  command line arguments
       */
      public XMLDoc validate(String commandLineArgs[], InputStream inStream)
      {
          MyArgs args = new MyArgs(commandLineArgs, "?cmqPQvVntwU", "dlfLuhpTxX",null);
-         
+
          if (args.boolParameter('?', false))
          {
              sysOut.println("CheckJDF:\n" + version  + '\n' + usage);
@@ -1743,23 +1767,23 @@ public class CheckJDF
          bTiming =args.boolParameter('t',false);
          bQuiet = args.boolParameter('q', false);
          bWarnDanglingURL = args.boolParameter('U', false);
-         
-         this.setPrint(!args.boolParameter('Q', false));         
-         xmlOutputName = args.parameterString('x');         
-         xslStyleSheet = args.parameterString('X');         
+
+         this.setPrint(!args.boolParameter('Q', false));
+         xmlOutputName = args.parameterString('x');
+         xslStyleSheet = args.parameterString('X');
          getTranslation(args);
-         pOut = new XMLDoc("CheckOutput", null);                 
+         pOut = new XMLDoc("CheckOutput", null);
          KElement xmlRoot=pOut.getRoot();
-         xmlRoot.setAttribute("Language", "EN"); 
-         
-         boolean bVersion=!bQuiet||args.boolParameter('V',false);         
+         xmlRoot.setAttribute("Language", "EN");
+
+         boolean bVersion=!bQuiet||args.boolParameter('V',false);
          if(bVersion)
          {
              sysOut.println('\n' + version + '\n');
              sysOut.println(args.toString());
              xmlRoot.setAttribute("Arguments",StringUtil.setvString(commandLineArgs," ",null,null));
          }
-         
+
          bPrintNameSpace = args.boolParameter('n', false);
          bMultiID = args.boolParameter('m', false);
 
@@ -1768,7 +1792,7 @@ public class CheckJDF
              proxyHost = args.parameterString('h');
              proxyPort = args.parameterString('p');
          }
-         
+
          if (args.hasParameter('c'))
          {
              if (args.boolParameter('c', false))
@@ -1782,11 +1806,12 @@ public class CheckJDF
          }
 
          final String parameterString = args.parameterString('L');
-         if(parameterString!=null)
-             setJDFSchemaLocation(new File(parameterString));
-         
+         if(parameterString!=null) {
+			setJDFSchemaLocation(new File(parameterString));
+		}
+
          String schemaLocation0=args.parameterString('l');
-         
+
          // convert "," to blank
          if(schemaLocation0!=null)
          {
@@ -1799,10 +1824,11 @@ public class CheckJDF
              schemaLocation0 = StringUtil.setvString(vs,JDFConstants.BLANK,JDFConstants.EMPTYSTRING,JDFConstants.EMPTYSTRING);
              schemaLocation += schemaLocation0;
          }
-         
-         if(args.hasParameter('d'))
-             devCapFile = args.parameterString('d');
-         
+
+         if(args.hasParameter('d')) {
+			devCapFile = args.parameterString('d');
+		}
+
          bValidate=(args.boolParameter('v',false))||(schemaLocation!=null);
          String jdfVersion=args.parameterString('f');
          if(jdfVersion!=null)
@@ -1811,28 +1837,28 @@ public class CheckJDF
         	 JDFElement.setDefaultJDFVersion(v);
         	 JDFVersions.setForceVersion(true);
          }
-         
+
          if (args.nargs() == 0)
          {
              sysOut.println(args.usage(usage));
              System.exit(2);
          }
-         
+
          testlists = EnumFitsValue.Allowed;
-         if(args.boolParameter('P',false)) 
+         if(args.boolParameter('P',false))
           {
               testlists = EnumFitsValue.Present;
           }
-         
+
          String url = args.parameterString('u');
-         
+
          setAllFiles(args);
          // for all files do
          if(inStream!=null || url!=null)
          {
              return processSingleURLStream(inStream,url);
          }
-         return processAllFiles();    
+         return processAllFiles();
      }
 
     private void getTranslation(MyArgs args)
@@ -1841,8 +1867,9 @@ public class CheckJDF
          if(translation!=null)
          {
              translation=translation.toUpperCase();
-             if(translation.length()>2)
-                 translation=translation.substring(0,2);
+             if(translation.length()>2) {
+				translation=translation.substring(0,2);
+			}
          }
     }
 
@@ -1854,7 +1881,7 @@ public class CheckJDF
      {
          setJDFSchemaLocation(new File(_schemaLocation));
      }
-     
+
      public void setJDFSchemaLocation(File _schemaLocation)
      {
          if(_schemaLocation!=null && _schemaLocation.length()!=0)
@@ -1874,17 +1901,18 @@ public class CheckJDF
      /**
       * processes all files that have been placed into the public VString member
       * CheckJDF.allFiles
-      * 
+      *
       * @return XMLDoc the xml output document
       */
     public XMLDoc processAllFiles()
     {
-        if(allFiles==null)
-            return null;
-        
+        if(allFiles==null) {
+			return null;
+		}
+
         for (int arg = 0; arg < allFiles.size(); arg++)
          {
-             String xmlFile = allFiles.stringAt(arg);            
+             String xmlFile = allFiles.stringAt(arg);
              VString vFiles=new VString();
              File argFile=new File(xmlFile);
              if(argFile.isDirectory())
@@ -1893,8 +1921,9 @@ public class CheckJDF
                  for(int i=0;i<lFiles.length;i++)
                  {
                      File fil=lFiles[i];
-                     if(fil.isDirectory())
-                         continue;
+                     if(fil.isDirectory()) {
+						continue;
+					}
                      if(fil.canRead())
                      {
                          vFiles.add(fil.getPath());
@@ -1926,7 +1955,7 @@ public class CheckJDF
                  processSingleFile(xmlFile);
              }
          }
-        if ( xmlOutputName != null && xmlOutputName.length()>0 ) 
+        if ( xmlOutputName != null && xmlOutputName.length()>0 )
         {
             if(xslStyleSheet!=null)
             {
@@ -1990,7 +2019,7 @@ public class CheckJDF
         bTryFormats=bTryKeep;
         return pOut;
     }
-    
+
     /**
      * process a mime file
      * @param argFile
@@ -2000,8 +2029,9 @@ public class CheckJDF
     {
         Multipart multi=MimeUtil.getMultiPart(inStream);
         boolean bTryKeep=bTryFormats;
-        if(multi==null)
-            return null;
+        if(multi==null) {
+			return null;
+		}
         int count;
         try
         {
@@ -2012,7 +2042,7 @@ public class CheckJDF
             // can't count - it must be crap
             return null;
         }
-        
+
         for (int i=0;i<count;i++)
         {
             try
@@ -2056,15 +2086,16 @@ public class CheckJDF
      */
     public XMLDoc processSingleDocument(JDFDoc doc)
     {
-        if(doc!=null)
-            theDoc=doc;
+        if(doc!=null) {
+			theDoc=doc;
+		}
         return processSingleFile(null,null,null);
     }
     /**
      * process a single document as specified by doc
-     * @param stream the input stream 
-     * @param url the url that the stream is sent to 
-     * 
+     * @param stream the input stream
+     * @param url the url that the stream is sent to
+     *
      * @return the xml output of the validation
      */
     public XMLDoc processSingleURLStream(InputStream stream, String url)
@@ -2074,9 +2105,9 @@ public class CheckJDF
     }
     /**
      * process a single document as specified by doc
-     * @param stream the input stream 
+     * @param stream the input stream
      * @param fileName the fileName that the stream originated from
-     * 
+     *
      * @return the xml output of the validation
      */
     public XMLDoc processSingleStream(InputStream stream, String fileName, BodyPart bp)
@@ -2086,7 +2117,7 @@ public class CheckJDF
     }
     /**
      * process a single file document as specified by fileName
-     * @param fileName the path of the file to parse and validate 
+     * @param fileName the path of the file to parse and validate
      * @return the xml output of the validation
      */
     public XMLDoc processSingleFile(String fileName)
@@ -2094,12 +2125,14 @@ public class CheckJDF
         theDoc=null;
         final File file = new File(fileName);
         bTryFormats=file.canRead();
-            
+
         XMLDoc d=processSingleFile(null,null,fileName,null);
-        if(!bTryFormats)
-            return d;
-        if(bTryFormats)
-            d=processZipFile(file);
+        if(!bTryFormats) {
+			return d;
+		}
+        if(bTryFormats) {
+			d=processZipFile(file);
+		}
         if(bTryFormats)
         {
             try
@@ -2113,9 +2146,9 @@ public class CheckJDF
         }
         return d;
     }
-   
+
     /**
-     * processes a single file 
+     * processes a single file
      * @param inStream
      * @param url
      * @param xmlFile
@@ -2127,7 +2160,7 @@ public class CheckJDF
         return processSingleFile(inStream, url, xmlFile, null);
     }
         /**
-         * processes a single file 
+         * processes a single file
          * @param inStream
          * @param url
          * @param xmlFile
@@ -2143,7 +2176,7 @@ public class CheckJDF
             sysOut.println("No input URL, stream or file. Bailing out!");
             return pOut;
         }
-        
+
         // reset all per file
          foundNameSpaces = new VString();
          vID.clear();
@@ -2156,8 +2189,8 @@ public class CheckJDF
          vSeparations = new VString();
          vSeparations2 = new VString();
          vColorPoolSeparations = new VString();
-         
-        
+
+
          // measure the time
          long lSchemaValidationTime = 0;
          long lCheckJDFTime = 0;
@@ -2165,42 +2198,45 @@ public class CheckJDF
          long lDevCapsTime = 0;
          long lStartTime = System.currentTimeMillis();
          long lEndTime = 0;
-         long lStartTime_SchemaValidation = 0; 
+         long lStartTime_SchemaValidation = 0;
          long lEndTime_SchemaValidation = 0;
          long lStartTime_InternalCheckJDF = 0;
          long lEndTime_InternalCheckJDF = 0;
          long lStartTime_TestDevCap = 0;
          long lEndTime_TestDevCap = 0;
-         
+
          if (!bQuiet)
          {
              sysOut.println("\n**********************************************************");
              sysOut.println("       *** Checking "+ xmlFile==null ? "JDFDoc" : xmlFile +" *** ");
-             if (url!=null && url.length()>0)
-                 sysOut.println("           " + url);
+             if (url!=null && url.length()>0) {
+				sysOut.println("           " + url);
+			}
              sysOut.println("**********************************************************\n");
          }
-         
-    
-         if(xmlFile!=null)
-             testFileRoot.setAttribute("FileName", xmlFile);
-         
-         if (url!=null && url.length()>0)
-             testFileRoot.setAttribute("URL", url);
-         
+
+
+         if(xmlFile!=null) {
+			testFileRoot.setAttribute("FileName", xmlFile);
+		}
+
+         if (url!=null && url.length()>0) {
+			testFileRoot.setAttribute("URL", url);
+		}
+
          try
-         {   // measure the time of parsing     
+         {   // measure the time of parsing
              lStartTime_SchemaValidation = System.currentTimeMillis();
-             
+
              if(bValidate)
              {
                  sysOut.println("\n**********************************************************");
                  sysOut.println("\nOutput of the XERCES schema validation follows:\n");
              }
-             
+
              // Here we Parse file 'xmlFile' and validate it against Schema 'schemaLocation'.
-             // We will not use JDFDoc 'gd' for internal CheckJDF and DevCaps test  
-             // but create new one JDFDoc 'doc' with schemaLocation = null, 
+             // We will not use JDFDoc 'gd' for internal CheckJDF and DevCaps test
+             // but create new one JDFDoc 'doc' with schemaLocation = null,
              // otherwise we will have non-existent errors caused by schema validation !!!
              if(theDoc==null)
              {
@@ -2212,67 +2248,68 @@ public class CheckJDF
                  {
                      final InputSource inSource = new InputSource(inStream);
                      JDFParser p=new JDFParser();
-                     p.m_SchemaLocation=schemaLocation;                             
-                     theDoc = p.parseInputSource(inSource);   
-                     if(theDoc!=null)
-                         theDoc.setBodyPart(bp);
+                     p.m_SchemaLocation=schemaLocation;
+                     theDoc = p.parseInputSource(inSource);
+                     if(theDoc!=null) {
+						theDoc.setBodyPart(bp);
+					}
                  }
              }
              bTryFormats=bTryFormats && theDoc==null;
-             
+
              //  measure the time of parsing
              lEndTime_SchemaValidation = System.currentTimeMillis();
-             
-             if (theDoc == null) 
+
+             if (theDoc == null)
              {
                      KElement kEl = testFileRoot.appendElement("Error");
                      kEl.setAttribute("Message", "File " + xmlFile + " not found or not parsed");
                  }
-             else     
+             else
              {
                  XMLDoc schemaValOutput = theDoc.getValidationResult();
-                 
+
                  KElement schemaValRoot = null;
                  if ( schemaValOutput == null)
                  {
                      schemaValRoot = testFileRoot.appendElement("SchemaValidationOutput");
                  }
-                 else 
+                 else
                  {
                      testFileRoot.copyElement(schemaValOutput.getRoot(), null);
                      schemaValRoot = testFileRoot.getElement("SchemaValidationOutput", null, 0);
                  }
-                 
+
                  if(bTiming)
                  {
                      lSchemaValidationTime = lEndTime_SchemaValidation - lStartTime_SchemaValidation;
-                     
-                     if (schemaValRoot != null) 
+
+                     if (schemaValRoot != null)
                      {
                          schemaValRoot.setAttribute("ValidationTime", lSchemaValidationTime + " ms");
                      }
                  }
-                 
+
                  processURL(url);
-                 
+
                  if(theDoc!=null)
                  {
-                     
+
                      // measure the time of internal CheckJDF
                      lStartTime_InternalCheckJDF = System.currentTimeMillis();
-                     
+
                      if(bValidate)
                      {
                          sysOut.println("\n**********************************************************\n");
                          sysOut.println("Output of checkJDF proper follows:\n");
-                     }    
-                     
+                     }
+
                      KElement checkJDFxmlRoot = testFileRoot.appendElement("CheckJDFOutput");
-                     
+
                      // JDFDoc doc for internal CheckJDF and Test against DevCaps.  Important - WITHOUT SCHEMA VALIDATION!
                      JDFNode root = theDoc.getJDFRoot();
                      JDFJMF jmf = theDoc.getJMFRoot();
-                     
+
                      if (root != null && jmf != null)
                      { // find the correct root, if there is a jdf and a jmf
                          if (jmf.isAncestor(root))
@@ -2284,25 +2321,26 @@ public class CheckJDF
                              jmf = null;
                          }
                      }
-                     
+
                      if (root == null)
                      { // no jdf, maybe jmf
-                         if(jmf!=null)
-                             printBad(jmf,  0, checkJDFxmlRoot, false);
-                         else
-                             checkJDFxmlRoot.setAttribute("FoundJDF",false,null);
+                         if(jmf!=null) {
+							printBad(jmf,  0, checkJDFxmlRoot, false);
+						} else {
+							checkJDFxmlRoot.setAttribute("FoundJDF",false,null);
+						}
                      }
                      else
                      { // we have a jdf
                          printMultipleIDs(url, xmlFile, root);
-                         
+
                          VElement allElms = root.getChildrenByTagName(null, null,null,false, true, 0);
                          allElms.add(root);
-                         int size = allElms.size();                         
+                         int size = allElms.size();
                          for(int i=0; i < size; i++)
                          {
                              KElement e =  allElms.item(i);
-                             
+
                              if(e.hasAttribute_KElement(AttributeName.ID,null,false))
                              {
                                  String id = e.getAttribute(AttributeName.ID,null,"");
@@ -2315,7 +2353,7 @@ public class CheckJDF
                                      vID.add(id);
                                  }
                              }
-                             
+
                              if(e.hasAttribute(AttributeName.SEPARATION))
                              {
                                  String separation = e.getAttribute(AttributeName.SEPARATION);
@@ -2324,7 +2362,7 @@ public class CheckJDF
                                      vSeparations.appendUnique(separation);
                                  }
                              }
-                             
+
                              if(e.getLocalName().equals(ElementName.SEPARATIONSPEC))
                              {
                                  if(!e.getParentNode().getLocalName().equals(ElementName.COLORANTALIAS))
@@ -2332,7 +2370,7 @@ public class CheckJDF
                                      vSeparations.appendUnique(e.getAttribute(AttributeName.NAME));
                                  }
                              }
-                             
+
                              if(e.getLocalName().equals(ElementName.COLOR))
                              {
                                  if(e.getParentNode().getLocalName().equals(ElementName.COLORPOOL))
@@ -2354,39 +2392,39 @@ public class CheckJDF
                                  }
                              }
                          }
-                         
+
                          vSeparations2 = new VString(vSeparations);
                          vSeparations.removeStrings(vColorPoolSeparations, Integer.MAX_VALUE);
                          vColorPoolSeparations.removeStrings(vSeparations2, Integer.MAX_VALUE);
-                         
+
                          printBad(root,  0, checkJDFxmlRoot, true);
-                        
+
                          if(devCapFile!=null)
                          {
                              // measure the time
                              lStartTime_TestDevCap = System.currentTimeMillis();
-                             
+
                              KElement devCapTest = testFileRoot.appendElement("DeviceCapTest");
-                             
+
                              printDevCap(root, devCapTest);
-                             
-                             lEndTime_TestDevCap = System.currentTimeMillis();                             
-                             lDevCapsTime = (lEndTime_TestDevCap - lStartTime_TestDevCap);                             
-                             if(bTiming && devCapTest != null) 
+
+                             lEndTime_TestDevCap = System.currentTimeMillis();
+                             lDevCapsTime = (lEndTime_TestDevCap - lStartTime_TestDevCap);
+                             if(bTiming && devCapTest != null)
                              {
                                  devCapTest.setAttribute("DeviceCapTestTime", lDevCapsTime + " ms");
                              }
                          }
                      }
-                     
+
                      // clean up the output
                      removeValidEntriesIfQuiet(checkJDFxmlRoot,true);
                      if(!checkJDFxmlRoot.hasAttributes()&&!checkJDFxmlRoot.hasChildElements())
                      {
                          checkJDFxmlRoot.setAttribute("IsValid",true,null);
                      }
-                     lEndTime_InternalCheckJDF = System.currentTimeMillis();                     
-                     
+                     lEndTime_InternalCheckJDF = System.currentTimeMillis();
+
                      if(bTiming)
                      {
                          lCheckJDFTime = lEndTime_InternalCheckJDF - lStartTime_InternalCheckJDF;
@@ -2401,27 +2439,27 @@ public class CheckJDF
                  KElement er = testFileRoot.appendElement("Error");
                  er.setAttribute("Message", "Caught Exception: " + e.getMessage());
              }
-         
+
          sysOut.println("\n**********************************************************");
-         
-         // measure the total time for this File         
+
+         // measure the total time for this File
          lEndTime = System.currentTimeMillis();
-         
+
          if(bTiming)
          {
              sysOut.println("Schema Validation time = " + lSchemaValidationTime + " ms");
              sysOut.println("Internal checkJDF time = " + lCheckJDFTime + " ms");
-             
+
              lTotalTime = lEndTime - lStartTime;
              sysOut.println("Total time = " + lTotalTime + " ms");
-             
+
                  testFileRoot.setAttribute("TotalTime", lTotalTime + " ms");
              if (lDevCapsTime > 0)
              {
                  sysOut.println("DeviceCapabilities Test time = " + lDevCapsTime + " ms");
              }
          }
-         
+
          return pOut;
     }
 
@@ -2435,21 +2473,23 @@ public class CheckJDF
                  {
                      sysOut.println("\n**********************************************************");
                      sysOut.println("       *** Checking "+ xmlFile==null ? "JDFDoc" : xmlFile +" *** ");
-                     if (url!=null && url.length()>0)
-                         sysOut.println("           " + url);
+                     if (url!=null && url.length()>0) {
+						sysOut.println("           " + url);
+					}
                      sysOut.println("**********************************************************\n");
                  }
 
                  vMultiID=root.getMultipleIDs("ID");
                  if(vMultiID!=null)
-                 {                                 
+                 {
                      sysOut.println("Multiple ID elements:\n");
                      for(int i=0;i<vMultiID.size();i++)
                      {
                          String id=vMultiID.stringAt(i);
                          VElement v=root.getChildrenByTagName(null, null, new JDFAttributeMap("ID",id), false, true, 0);
-                         if(id.equals(root.getAttribute("ID")))
-                             v.add(root);
+                         if(id.equals(root.getAttribute("ID"))) {
+							v.add(root);
+						}
                          for(int ii=0;ii<v.size();ii++)
                          {
                              KElement e=v.item(ii);
@@ -2467,16 +2507,17 @@ public class CheckJDF
         }
 
     //////////////////////////////////////////////////////////////////////
-    
+
     private void processURL(String url)
     {
         if(url!=null)
-        {                   
+        {
             if(proxyHost!=null)
             {
                 System.setProperty("http.proxyHost",proxyHost);
-                if(proxyPort==null)
-                    proxyPort="8080";
+                if(proxyPort==null) {
+					proxyPort="8080";
+				}
                 System.setProperty("http.proxyPort",proxyPort);
             }
             theDoc =(JDFDoc)theDoc.write2URL(url,theDoc.getContentType());
@@ -2484,7 +2525,7 @@ public class CheckJDF
     }
 
     ////////////////////////////////////////////////////////////////////////////////
-    
+
     private void setAllFiles(MyArgs args)
     {
         if(allFiles==null)
@@ -2508,9 +2549,9 @@ public class CheckJDF
              }
          }
     }
-////////////////////////////////////////////////////////////////////////////////    
-    //////////////////////////////////////////////////////////////////   
-    //////////////////////////////////////////////////////////////////   
+////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////
     /**
      * This is just a quick and dirty class to centrally switch print on and off
      * @author prosirai
@@ -2520,33 +2561,36 @@ public class CheckJDF
     {
 
         boolean wannaPrint=true;
-        
+
         public void setPrint(boolean b)
         {
             wannaPrint=b;
         }
-        
+
         public void println(String string)
         {
-            if (!wannaPrint)
-                return;
-            System.out.println(string);            
+            if (!wannaPrint) {
+				return;
+			}
+            System.out.println(string);
         }
         public void println()
         {
-            if (!wannaPrint)
-                return;
+            if (!wannaPrint) {
+				return;
+			}
             System.out.println();
-            
+
         }
         public void print(String string)
         {
-            if (!wannaPrint)
-                return;
-            System.out.println(string);            
-        }    
+            if (!wannaPrint) {
+				return;
+			}
+            System.out.println(string);
+        }
     }
-    //////////////////////////////////////////////////////////////////   
-    //////////////////////////////////////////////////////////////////   
-    //////////////////////////////////////////////////////////////////   
+    //////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////
  }

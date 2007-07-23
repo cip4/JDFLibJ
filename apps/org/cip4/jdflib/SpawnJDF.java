@@ -11,6 +11,7 @@ package org.cip4.jdflib;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
@@ -59,7 +60,7 @@ public class SpawnJDF
     }
 
     public static void main(String argv[])
-    {   
+    {
         // -i bookintent.jdf -o spawned.jdf -p 4
         // -i bookintent.jdf -o spawned.jdf -p 0 -w r0007
         // -iic2.jdf -ospawnic.jdf -pp1 -wOutput
@@ -126,8 +127,9 @@ public class SpawnJDF
 
             JDFNode rootIn = (JDFNode) docIn.getRoot();
             // always assume jdf 1.3 or higher  when spawning to jdf 2.0
-            if(args.boolParameter('n', false))
-                rootIn.fixVersion(EnumVersion.Version_1_3); 
+            if(args.boolParameter('n', false)) {
+				rootIn.fixVersion(EnumVersion.Version_1_3);
+			}
 
             JDFNode pCut;
             if (strPartID.equals(""))
@@ -211,14 +213,18 @@ public class SpawnJDF
         for(int i=0;i<v.size();i++)
         {
             KElement e=v.item(i);
-            if(e instanceof JDFResourceLinkPool)
-                continue;
-            if(e instanceof JDFResourcePool)
-                continue;
-            if(e instanceof JDFAncestorPool)
-                continue;
-            if(e instanceof JDFAuditPool)
-                continue;
+            if(e instanceof JDFResourceLinkPool) {
+				continue;
+			}
+            if(e instanceof JDFResourcePool) {
+				continue;
+			}
+            if(e instanceof JDFAncestorPool) {
+				continue;
+			}
+            if(e instanceof JDFAuditPool) {
+				continue;
+			}
             newRoot.copyElement(e, null);
         }
     }
@@ -230,23 +236,27 @@ public class SpawnJDF
     private static void setAudits(KElement newRoot, JDFNode node)
     {
         JDFAuditPool ap=node.getAuditPool();
-        if(ap==null)
-            return;
+        if(ap==null) {
+			return;
+		}
         VElement audits=ap.getAudits(null, null,null);
         KElement newPool=newRoot.appendElement("AuditPool");
         int n=0;
         for(int i=0;i<audits.size();i++)
         {
             JDFAudit audit=(JDFAudit) audits.elementAt(i);
-            if(audit instanceof JDFSpawned)
-                continue;
-            if(audit instanceof JDFMerged)
-                continue;
+            if(audit instanceof JDFSpawned) {
+				continue;
+			}
+            if(audit instanceof JDFMerged) {
+				continue;
+			}
             newPool.copyElement(audit, null);
             n++;
         }
-        if(n==0)
-            newPool.deleteNode(); 
+        if(n==0) {
+			newPool.deleteNode();
+		}
     }
 
     /**
@@ -255,10 +265,12 @@ public class SpawnJDF
      */
     private static String setProduct(JDFNode node, JDFNode rootIn)
     {
-        if(rootIn==null)
-            return null;
-        if(!rootIn.getType().equals("Product"))
-            return null;
+        if(rootIn==null) {
+			return null;
+		}
+        if(!rootIn.getType().equals("Product")) {
+			return null;
+		}
         KElement list=node.getCreateElement("ProductList");
         KElement product=list.appendElement("Product");
         product.setAttributes(rootIn);
@@ -320,8 +332,9 @@ public class SpawnJDF
     private static void setResources(KElement newRoot, JDFNode rootIn, VElement resLinks)
     {
         VElement vResLinks=resLinks==null ? rootIn.getResourceLinks(null) : resLinks;
-        if(vResLinks==null)
-            return;
+        if(vResLinks==null) {
+			return;
+		}
         for(int i=0;i<vResLinks.size();i++)
         {
             JDFResourceLink rl=(JDFResourceLink) vResLinks.elementAt(i);
@@ -339,12 +352,13 @@ public class SpawnJDF
     private static void setResource(KElement newRoot, JDFResourceLink rl, final JDFResource linkRoot)
     {
         String className=getClassName(linkRoot);
-        if(className==null)
-            return;
+        if(className==null) {
+			return;
+		}
         KElement resourceSet=newRoot.appendElement(className+"Set");
 
         setLinkAttributes(resourceSet, rl, linkRoot);
-        
+
         VElement vRes=rl.getTargetVector(0);
         int dot=0;
         String resID=linkRoot.getID();
@@ -376,15 +390,16 @@ public class SpawnJDF
         JDFAmountPool ap=rl.getAmountPool();
         if(ap!=null)
         {
-            VElement vPartAmounts=ap.getMatchingPartAmountVector(partMap); 
+            VElement vPartAmounts=ap.getMatchingPartAmountVector(partMap);
             if(vPartAmounts!=null)
             {
                 KElement amountPool=newLeaf.appendElement("AmountPool");
-                for(int i=0;i<vPartAmounts.size();i++)
-                    amountPool.copyElement(vPartAmounts.item(i), null);
+                for(int i=0;i<vPartAmounts.size();i++) {
+					amountPool.copyElement(vPartAmounts.item(i), null);
+				}
             }
         }
-        if(partMap!=null &&partMap.size()>0)    
+        if(partMap!=null &&partMap.size()>0)
         {
             newLeaf.appendElement("Part").setAttributes(partMap);
             //                     attMap.removeKeys(partMap.keySet());
@@ -405,16 +420,20 @@ public class SpawnJDF
      */
     private static String getClassName(JDFResource r)
     {
-        if(r==null)
-            return null;
+        if(r==null) {
+			return null;
+		}
         final EnumResourceClass resourceClass = r.getResourceClass();
-        if(resourceClass==null)
-            return null;
+        if(resourceClass==null) {
+			return null;
+		}
         String className="Resource";
-        if(resourceClass.equals(EnumResourceClass.Parameter)||resourceClass.equals(EnumResourceClass.Intent))
-            className=resourceClass.getName();
-        if(resourceClass.equals(EnumResourceClass.PlaceHolder))
-            return null;
+        if(resourceClass.equals(EnumResourceClass.Parameter)||resourceClass.equals(EnumResourceClass.Intent)) {
+			className=resourceClass.getName();
+		}
+        if(resourceClass.equals(EnumResourceClass.PlaceHolder)) {
+			return null;
+		}
         return className;
     }
 
@@ -433,10 +452,10 @@ public class SpawnJDF
         {
             JDFResourceLink resLink=(JDFResourceLink)rl;
             VElement vCreators=linkRoot.getCreator(EnumUsage.Input.equals(resLink.getUsage()));
-            final int size = vCreators==null ? 0 : vCreators.size();
-            for( int i=0;i<size;i++)
+            Iterator vCreatorsIterator = vCreators.iterator();
+            while (vCreatorsIterator.hasNext())
             {
-                JDFNode depNode=(JDFNode) vCreators.elementAt(i);
+                JDFNode depNode=(JDFNode) vCreatorsIterator.next();
                 KElement dependent=resourceSet.appendElement("Dependent");
                 dependent.setAttribute(AttributeName.JOBID, depNode.getJobID(true));
                 dependent.copyAttribute(AttributeName.JMFURL, depNode, null, null, null);

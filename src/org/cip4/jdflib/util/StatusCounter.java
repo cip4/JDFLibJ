@@ -75,6 +75,8 @@
  */
 package org.cip4.jdflib.util;
 
+import java.util.Iterator;
+
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoResourceAudit.EnumReason;
 import org.cip4.jdflib.core.AttributeName;
@@ -429,16 +431,18 @@ public class StatusCounter
         rqp.setExact(false);
         boolean bAllExact=true;
 
-        final int size = vResResourceInfo==null ? 0 : vResResourceInfo.size();
-        for(int i=0;i<size;i++)
-        {
-            JDFResourceInfo ri=sig.appendResourceInfo();
-            final JDFResourceLink rl = (JDFResourceLink)vResResourceInfo.elementAt(i);
-            LinkAmount la=getLinkAmount(rl.getrRef());
-            boolean bExact=la.bCopyResInfo;
-            bAllExact=bAllExact && bExact;
-            rqp.setExact(bExact);
-            ri.setLink(rl,rqp);
+        if (vResResourceInfo != null) {
+        	Iterator vResResourceInfoIterator = vResResourceInfo.iterator();
+	        while (vResResourceInfoIterator.hasNext())
+	        {
+	            JDFResourceInfo ri=sig.appendResourceInfo();
+	            final JDFResourceLink rl = (JDFResourceLink) vResResourceInfoIterator.next();
+	            LinkAmount la=getLinkAmount(rl.getrRef());
+	            boolean bExact=la.bCopyResInfo;
+	            bAllExact=bAllExact && bExact;
+	            rqp.setExact(bExact);
+	            ri.setLink(rl,rqp);
+	        }
         }
         rqp.setExact(bAllExact);
     }

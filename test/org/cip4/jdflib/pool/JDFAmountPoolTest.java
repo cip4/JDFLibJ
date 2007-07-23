@@ -80,7 +80,6 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
-import org.cip4.jdflib.resource.JDFResourceTest;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFComponent;
 
@@ -91,7 +90,7 @@ import org.cip4.jdflib.resource.process.JDFComponent;
  */
 public class JDFAmountPoolTest extends JDFTestCaseBase
 {
-     
+
     ///////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////
     /**
@@ -128,7 +127,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
         ap.reducePartAmounts(v);
         assertEquals("1 pa entries",ap.numChildElements(ElementName.PARTAMOUNT,null), 1);
     }  ///////////////////////////////////////////////////////
-    
+
     /**
      * Method testVirtualAmounts.
      * @throws Exception
@@ -159,36 +158,36 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
         }
     }
     ///////////////////////////////////////////////////////
-        
+
         /**
          * Method testGetMatchingPartAmountVector.
          * @throws Exception
          */
         public void testGetMatchingPartAmountVector() throws Exception
         {
-        JDFDoc d=JDFResourceTest.creatXMDoc();
+        JDFDoc d=JDFTestCaseBase.creatXMDoc();
         JDFNode n=d.getJDFRoot();
         JDFResourceLink xmLink=n.getLink(0,ElementName.EXPOSEDMEDIA,null,null);
         JDFAttributeMap mPart=new JDFAttributeMap("SignatureName","Sig1");
         mPart.put("SheetName","S1");
-        mPart.put("Side","Front");       
+        mPart.put("Side","Front");
         mPart.put("Separation","Black");
         mPart.put("Condition","Good");
         xmLink.setAmount(2,mPart);
         mPart.put("Condition","Waste");
         xmLink.setAmount(1,mPart);
-        
+
         JDFAmountPool ap=xmLink.getAmountPool();
         assertNotNull(ap);
         mPart.remove("Condition");
-        
+
         VElement v=ap.getMatchingPartAmountVector(mPart);
         assertEquals(v.size(),2);
         mPart.put("Side","Moebius");
         v=ap.getMatchingPartAmountVector(mPart);
         assertNull("there certainly is no moebius side ...",v);
-    }  
-    
+    }
+
     ///////////////////////////////////////////////////////
-    
+
 }

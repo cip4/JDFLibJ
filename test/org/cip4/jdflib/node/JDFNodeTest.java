@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.node;
 
@@ -113,7 +113,6 @@ import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResourceAudit;
-import org.cip4.jdflib.resource.JDFResourceTest;
 import org.cip4.jdflib.resource.JDFResource.EnumAmountMerge;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
@@ -131,10 +130,8 @@ import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.JDFSpawn;
 import org.cip4.jdflib.util.StatusUtil;
 
-import sun.java2d.pipe.AATextRenderer;
 
-
-public class JDFNodeTest extends JDFTestCaseBase       
+public class JDFNodeTest extends JDFTestCaseBase
 {
 
     public void testBigSortChildren()
@@ -194,7 +191,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
         n.sortChildren();
         assertEquals("reordered sub elements",
-                n.getChildWithAttribute("JDF", "ID", null, "n1", 0, true).getNextSiblingElement(null, null), 
+                n.getChildWithAttribute("JDF", "ID", null, "n1", 0, true).getNextSiblingElement(null, null),
                 n.getChildWithAttribute("JDF", "ID", null, "n2", 0, true));
 
         assertEquals(rp2.getFirstChildElement(), xm2);
@@ -293,7 +290,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         VString e=n.linkNames();
         assertTrue(e.contains(ElementName.CUSTOMERINFO));
         assertTrue(e.contains(ElementName.RENDERINGPARAMS));
-    }    
+    }
 
     /**
      * test whether combinedprocessIndex is automagically and correctly assigned
@@ -308,7 +305,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertTrue(e.contains(ElementName.CUSTOMERINFO));
         assertTrue(e.contains(ElementName.MEDIAINTENT));
         assertTrue(e.contains(ElementName.COMPONENT));
-    }    
+    }
 
     /**
      * test whether combinedprocessIndex is automagically and correctly assigned
@@ -401,7 +398,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertNotNull("",mainNode.getMatchingResource(ElementName.COMPONENT,EnumProcessUsage.AnyOutput,null,0));
         JDFResource myRes =  mainNode.addResource("whatever:foo", JDFResource.EnumResourceClass.Quantity, EnumUsage.Output, null, mainNode, "www.whatever.com", null);
         myRes.setDescriptiveName("descriptive_name");
-    }   
+    }
     ///////////////////////////////////////////////////////////////
 
     public void testAddInternalPipe()
@@ -417,13 +414,13 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertEquals(vE.size(),2);
         assertEquals(((JDFResourceLink)vE.elementAt(0)).getPipeProtocol(),"Internal");
         assertEquals(((JDFResourceLink)vE.elementAt(1)).getPipeProtocol(),"Internal");
-    }   
+    }
 
     /////////////////////////////////////////////////////////
 
     public void testCloneResourceToModify()
     {
-        JDFDoc d=JDFResourceTest.creatXMDoc();
+        JDFDoc d=JDFTestCaseBase.creatXMDoc();
         JDFNode n=d.getJDFRoot();
         JDFResourceLink rl = n.getMatchingLink(ElementName.EXPOSEDMEDIA,EnumProcessUsage.AnyInput,0);
         JDFAttributeMap m =new JDFAttributeMap();
@@ -434,7 +431,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertTrue("link",ra.getNewLink().hasChildElement("Part",null));
         assertTrue("link",ra.getOldLink().hasChildElement("Part",null));
         assertTrue("link",ra.getNewLink().hasChildElement("AmountPool",null));
-        assertTrue("link",ra.getOldLink().hasChildElement("AmountPool",null));       
+        assertTrue("link",ra.getOldLink().hasChildElement("AmountPool",null));
     }
 
     public void testEraseEmptyAttributes()
@@ -455,10 +452,10 @@ public class JDFNodeTest extends JDFTestCaseBase
         JDFNode n=d.getJDFRoot();
         n.addResource("_foo", EnumResourceClass.Consumable, EnumUsage.Input, EnumProcessUsage.AnyInput, null, "", null);
         n.removeResource("_foo", 0);
-        n.eraseEmptyNodes(true);       
+        n.eraseEmptyNodes(true);
         assertNotNull(n.getResourcePool());
         assertNotNull(n.getResourceLinkPool());
-    }  
+    }
 
     public void testEraseUnlinkedResources()
     {
@@ -560,9 +557,9 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertNull(ni);
         assertEquals(root.getStatus(), EnumNodeStatus.Completed);
         assertNull(root.getStatusPool());
-    }   
+    }
     /**
-     * 
+     *
      *
      */
     public void testSetPartStatusNotNull() throws Exception
@@ -588,7 +585,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertEquals(root.getStatusPool().getPartStatus(pm).getStatus(), EnumNodeStatus.Completed);
     }
     /**
-     * 
+     *
      *
      */
     public void testSetPhase() throws Exception
@@ -626,7 +623,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         jmf = docJMF.getJMFRoot();
         assertNotNull(jmf);
         assertEquals(jmf.numChildElements(ElementName.SIGNAL,null),1);
-        docJMF.write2File(sm_dirTestDataTemp+File.separator+"setup.jmf",2,true);        
+        docJMF.write2File(sm_dirTestDataTemp+File.separator+"setup.jmf",2,true);
         Thread.sleep(1000);
         su=new StatusUtil(root,vMap,null);
         su.setPhase(EnumNodeStatus.InProgress, "Run", EnumDeviceStatus.Running, null,null);
@@ -666,7 +663,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
     }
     /**
-     * 
+     *
      *
      */
     public void testGetCreateNodeInfo()
@@ -689,7 +686,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         nodeVer3.setVersion(JDFElement.EnumVersion.Version_1_3);
         nodeVer1.setVersion(JDFElement.EnumVersion.Version_1_1);
 
-        root.setVersion(EnumVersion.Version_1_3); 
+        root.setVersion(EnumVersion.Version_1_3);
         //append some NodeInfos
 
         //try to append the other NodeInfo (only 1 is valid)
@@ -757,7 +754,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
     /**
      * Method testGetExecutablePartitionsPreflightImport
-     * 
+     *
      * @throws Exception
      */
 
@@ -795,7 +792,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
     /**
      * Method testGetExecutablePartitionsNormalizer
-     * 
+     *
      * @throws Exception
      */
 
@@ -821,7 +818,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
     /**
      * Method testGetExecutablePartitionsNormalizer
-     * 
+     *
      * @throws Exception
      */
 
@@ -876,7 +873,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
         for(int i = 0; i < LcleanUpMerge.size(); i ++)
         {
-            EnumCleanUpMerge cleanUp = (EnumCleanUpMerge)LcleanUpMerge.get(i); 
+            EnumCleanUpMerge cleanUp = (EnumCleanUpMerge)LcleanUpMerge.get(i);
 
             for(int j = 0; j < LcleanUpMerge.size(); j ++)
             {
@@ -897,8 +894,9 @@ public class JDFNodeTest extends JDFTestCaseBase
                 assertNotNull(root);
                 JDFNode root2 = (JDFNode) m_jdfDoc2.getRoot();
                 assertNotNull(root2);
-                if (root == null)
-                    return; // soothe findbugs ;)
+                if (root == null) {
+					return; // soothe findbugs ;)
+				}
                 new JDFMerge(root).mergeJDF(root2, sm_dirTestData+xmlFile2, cleanUp, amountMerge);
 
                 m_jdfDoc.write2File(sm_dirTestDataTemp + outFile + i + j, 2, true);
@@ -957,7 +955,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertFalse(node.isGroupNode());
         node.setType(EnumType.ConventionalPrinting);
         assertFalse(node.isGroupNode());
-    }    
+    }
 
     //////////////////////////////////////////////
 
@@ -1094,7 +1092,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 //      System.out.println(n.version());
         assertTrue("nodeinfo is resource",n.getResourceClass()==EnumResourceClass.Parameter);
         doc.write2File(sm_dirTestDataTemp + "createNodeInfoTest.xml", 0, true);
-        JDFCustomerInfo myCustInfo = node.getCreateCustomerInfo(); 
+        JDFCustomerInfo myCustInfo = node.getCreateCustomerInfo();
         JDFContact myContact =myCustInfo.appendContact();
         assertTrue("contact is res", myContact.getResourceClass()==EnumResourceClass.Parameter);
         assertNotNull(node.getNodeInfo());
@@ -1126,7 +1124,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
     public void testGetPartStatus()
     {
-        JDFDoc doc = JDFResourceTest.creatXMDoc();
+        JDFDoc doc = JDFTestCaseBase.creatXMDoc();
         JDFNode node = doc.getJDFRoot();
         JDFNodeInfo ni=node.getNodeInfo();
         assertTrue("nodeinfo is resource",ni.getResourceClass()==EnumResourceClass.Parameter);
@@ -1140,7 +1138,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertTrue("ni sig2 waiting",node.getPartStatus(m3)==EnumNodeStatus.Waiting);
 
         m.put("SheetName","S1");
-        m.put("Side","Front");  
+        m.put("Side","Front");
         assertEquals(node.getPartStatus(m), EnumNodeStatus.Completed);
         node.setPartStatus(m,EnumNodeStatus.Waiting);
         assertTrue("ni sig1 waiting",node.getPartStatus(m)==EnumNodeStatus.Waiting);
@@ -1177,7 +1175,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         n.appendMatchingResource(ElementName.EXPOSEDMEDIA,EnumProcessUsage.Plate,null);
 
         assertTrue("valid node",n.isValid(EnumValidationLevel.Incomplete));
-    }   
+    }
 
     //////////////////////////////////////////////////////////
 
@@ -1194,7 +1192,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         JDFEmployee emp=(JDFEmployee) n.appendMatchingResource(ElementName.EMPLOYEE, EnumProcessUsage.AnyInput,null);
         emp.setPersonalID("emp1");
         assertTrue("valid module",m.isValid(EnumValidationLevel.Complete));
-    }   
+    }
     //////////////////////////////////////////////////////////
 
     public void testGrayBox()
@@ -1208,7 +1206,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         n.setTypes(v);
         v=n.getInsertLinkVector(9999);
         assertTrue("interpretingParams",v.contains("InterpretingParamsLink:AnyInput"));
-    }   
+    }
 
 
     public void testAppendMatchingResourceProduct()
@@ -1255,7 +1253,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         n.setType(EnumType.ResourceDefinition);
         JDFResource r=n.appendMatchingResource("foo", null, null);
         assertNotNull(r);
-        assertEquals(r.getNodeName(),"foo"); 
+        assertEquals(r.getNodeName(),"foo");
     }
 
     //////////////////////////////////////////////////////////////////////////
@@ -1309,7 +1307,7 @@ public class JDFNodeTest extends JDFTestCaseBase
             assertNotNull("complink 2",rl);
             assertEquals(rl.getProcessUsage(),"");
         }
-    }    
+    }
 
     ///////////////////////////////////////////////////////////////
 
@@ -1345,7 +1343,7 @@ public class JDFNodeTest extends JDFTestCaseBase
     }
 
     //////////////////////////////////////////////////////////////
-    
+
     public void testGetNodeInfo() throws DataFormatException
     {
         JDFDoc d=new JDFDoc("JDF");
@@ -1365,7 +1363,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertNull(n.getNodeInfo(3));
                       assertEquals(n.getPartStatus(map), EnumNodeStatus.FailedTestRun);
     }
-    
+
     //////////////////////////////////////////////////////////////
     public void testGetParentJDF()
     {
@@ -1383,7 +1381,7 @@ public class JDFNodeTest extends JDFTestCaseBase
             assertNull(n.getParentJDF());
             JDFNode n2=(JDFNode)n.appendElement("JDF");
             assertEquals(n,n2.getParentJDF());
-        }        
+        }
     }
 
     //////////////////////////////////////////////////////////////
@@ -1491,14 +1489,18 @@ public class JDFNodeTest extends JDFTestCaseBase
                 ppnode=p;
                 break;
             }
-        } 
+        }
         assertNotNull(ppnode);
-        assertTrue(ppnode.getTypes().contains(EnumType.LayoutElementProduction.getName()));
-        JDFResource res= ppnode.getMatchingResource("RunList",JDFNode.EnumProcessUsage.AnyInput,null,0);
-        assertEquals(res.getNodeName(),ElementName.RUNLIST);
-        res= ppnode.getMatchingResource("LayoutElementProductionParams",JDFNode.EnumProcessUsage.AnyInput,null,0);
-        assertEquals(res.getNodeName(),ElementName.LAYOUTELEMENTPRODUCTIONPARAMS);
-    }    
+
+        if (ppnode != null) {
+	        assertTrue(ppnode.getTypes().contains(EnumType.LayoutElementProduction.getName()));
+	        JDFResource res= ppnode.getMatchingResource("RunList",JDFNode.EnumProcessUsage.AnyInput,null,0);
+	        assertEquals(res.getNodeName(),ElementName.RUNLIST);
+	        res= ppnode.getMatchingResource("LayoutElementProductionParams",JDFNode.EnumProcessUsage.AnyInput,null,0);
+	        assertEquals(res.getNodeName(),ElementName.LAYOUTELEMENTPRODUCTIONPARAMS);
+        }
+    }
+
     public void testGetJobPart()
     {
         JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -1608,11 +1610,11 @@ public class JDFNodeTest extends JDFTestCaseBase
             }
             else
             {
-                assertNotSame("only updated run=1",root.getPartStatus(map21),EnumNodeStatus.InProgress);               
+                assertNotSame("only updated run=1",root.getPartStatus(map21),EnumNodeStatus.InProgress);
             }
 
         }
-    }    
+    }
 
     //////////////////////////////////////////////////////////////
 
@@ -1628,8 +1630,9 @@ public class JDFNodeTest extends JDFTestCaseBase
             EnumVersion v=i==0 ? EnumVersion.Version_1_1 : EnumVersion.Version_1_3;
             root.setVersion(v);
             VJDFAttributeMap vMapIn=new VJDFAttributeMap();
-            if(i==1) // nodeinfo returns all intermediate nodes in addition
-                vMapIn.add(new JDFAttributeMap());
+            if(i==1) {
+				vMapIn.add(new JDFAttributeMap());
+			}
             for(int j=0;j<3;j++)
             {
                 JDFAttributeMap map=new JDFAttributeMap("Run","R"+j);
@@ -1748,8 +1751,9 @@ public class JDFNodeTest extends JDFTestCaseBase
         root.setType(EnumType.ConventionalPrinting);
         int id=root.getMinID();
         assertTrue(id<5 && id>0);
-        for(int i=0;i<1000;i++)
-            root.getAuditPool().addModified(null, null);
+        for(int i=0;i<1000;i++) {
+			root.getAuditPool().addModified(null, null);
+		}
         assertEquals(id+1000,root.getMinID());
         root.setID("ida123456");
         root.setID("ida123456");

@@ -69,7 +69,7 @@
  */
 /**
  * JDFResourceTest.java
- * 
+ *
  * @author Dietrich Mucha
  *
  * Copyright (C) 2002 Heidelberger Druckmaschinen AG. All Rights Reserved.
@@ -78,8 +78,8 @@ package org.cip4.jdflib.core;
 
 import junit.framework.TestCase;
 
+import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.resource.JDFResourceTest;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFSourceResource;
 
@@ -88,13 +88,13 @@ public class JDFSourceResourceTest extends TestCase
     static final String fileSeparator      = System.getProperty("file.separator");
     static final String sm_dirTestData     = "test"+fileSeparator+"data"+fileSeparator;
     static final String sm_dirTestDataTemp = sm_dirTestData+"temp"+fileSeparator;
-    
+
 /////////////////////////////////////////////////////////////////////////////
-    
-    
+
+
    public void testSourceResource()
     {
-        JDFDoc doc=JDFResourceTest.creatXMDoc();
+        JDFDoc doc=JDFTestCaseBase.creatXMDoc();
         JDFNode n=doc.getJDFRoot();
         JDFExposedMedia xm=(JDFExposedMedia)n.getMatchingResource("ExposedMedia",JDFNode.EnumProcessUsage.AnyInput,null,0);
         JDFNodeInfo ni =(JDFNodeInfo) n.getMatchingResource("NodeInfo",JDFNode.EnumProcessUsage.AnyInput,null,0);
@@ -107,8 +107,8 @@ public class JDFSourceResourceTest extends TestCase
         assertNull(sr.getTarget());
         assertNull(sr.getSourceLocalName());
     }
-    
- 
+
+
 /////////////////////////////////////////////////////////////////////////////
-    
+
 }

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2006 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,7 +75,6 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.XMLDocUserData.EnumDirtyPolicy;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.resource.JDFResourceTest;
 import org.cip4.jdflib.util.JDFSpawn;
 import org.w3c.dom.Attr;
 
@@ -85,7 +84,7 @@ import org.w3c.dom.Attr;
 public class XMLDocTest extends JDFTestCaseBase
 {
 
-    public void testIsDirty() 
+    public void testIsDirty()
     {
         XMLDoc doc=new XMLDoc("test",null);
         KElement e=doc.getRoot();
@@ -119,14 +118,14 @@ public class XMLDocTest extends JDFTestCaseBase
         XMLDoc doc=new XMLDoc("test",null);
         doc.write2File(sm_dirTestDataTemp+"schematest.xml", 0, false); // create a readable dummy
         final File schema = new File(sm_dirTestDataTemp+"schematest.xml");
-        
+
         final String nsURI = "www.foo.com";
         doc.setSchemaLocation(nsURI, schema);
         assertNotNull(doc.getSchemaLocation(nsURI));
         assertEquals(doc.getSchemaLocationFile(nsURI).getCanonicalFile(), schema.getCanonicalFile());
     }
-    
-    
+
+
     public void testDirtyIDs() throws Exception
     {
         // -i bookintent.jdf -o spawned.jdf -p 4
@@ -138,8 +137,9 @@ public class XMLDocTest extends JDFTestCaseBase
         JDFDoc jdfDocIn = p.parseFile(sm_dirTestData + xmlFile);
 
         assertTrue(jdfDocIn != null);
-        if (jdfDocIn == null)
-            return; // soothe findbugs ;)
+        if (jdfDocIn == null) {
+			return; // soothe findbugs ;)
+		}
 
         XMLDocUserData xmlUserData = jdfDocIn.getCreateXMLDocUserData();
         xmlUserData.setDirtyPolicy(XMLDocUserData.EnumDirtyPolicy.ID);
@@ -201,7 +201,7 @@ public class XMLDocTest extends JDFTestCaseBase
         e.appendElement("bar2");
         d.getRoot().appendChild(e);
         assertEquals(e.getAttribute("foo:at"),"1");
-        
+
     }
     public void testCreateElementNoNS() throws Exception
     {
@@ -209,7 +209,7 @@ public class XMLDocTest extends JDFTestCaseBase
         d.getMemberDocument().setIgnoreNSDefault(true);
         KElement e=(KElement) d.createElement("bar");
         assertNull(e.getNamespaceURI());
-        
+
     }
     public void testCreateElementThreads() throws Exception
     {
@@ -218,7 +218,7 @@ public class XMLDocTest extends JDFTestCaseBase
         JDFDoc jd=new JDFDoc("JDF");
         assertEquals("JDFDoc creates typesafe elements",jd.getRoot().getClass(), JDFNode.class);
         XMLDoc d2=new XMLDoc("JDF",null);
-        assertEquals("XMLDoc only creates KElement - Hasmap must not be applied",d2.getRoot().getClass(), KElement.class);         
+        assertEquals("XMLDoc only creates KElement - Hasmap must not be applied",d2.getRoot().getClass(), KElement.class);
     }
 
     public void testParseNoNS() throws Exception
@@ -235,9 +235,9 @@ public class XMLDocTest extends JDFTestCaseBase
         assertFalse(root.toString().indexOf("xmlns=\"\"")>=0);
         KElement foo=root.appendElement("foo");
         assertNull(foo.getNamespaceURI());
-        
+
     }
-    
+
     public void testCreateAttribute() throws Exception
     {
         XMLDoc d=new XMLDoc("TEST",null);
@@ -292,7 +292,7 @@ public class XMLDocTest extends JDFTestCaseBase
 //      }
 //      assertTrue("ns extension works", bClassCast);
         assertTrue("ns extension works", !(n.appendElement("blub:JDFTestType", "WWW.fnarf2.com") instanceof JDFTestType));
-    } 
+    }
 
     public void testNSRoot()
     {
@@ -342,24 +342,25 @@ public class XMLDocTest extends JDFTestCaseBase
         assertNotSame(doc.getXMLDocUserData(), doc2.getXMLDocUserData());
 
     }
-    
+
     public void testWriteToFile() throws Exception
     {
         XMLDoc d=new XMLDoc("doc",null);
         String out=sm_dirTestDataTemp+File.separator+"dir"+File.separator+"dir2";
         File dir=new File(out);
-        if(dir.isDirectory())
-            dir.delete();
-        else
-            dir.mkdirs();
-        
+        if(dir.isDirectory()) {
+			dir.delete();
+		} else {
+			dir.mkdirs();
+		}
+
         out+=File.separator+"d.xml";
-        
+
         assertTrue(d.write2File(out, 2, true));
         File f=new File(out);
         assertTrue(f.canRead());
     }
-    
+
     public void testSize()
     {
         Runtime.getRuntime().gc();
@@ -371,7 +372,7 @@ public class XMLDocTest extends JDFTestCaseBase
         assertTrue("mem", mem + 100000 > s.length());
         // the gc is messy and sometimes returns +/- a few 10k
         assertTrue("mem", mem + 100000 > s.length());
-        d = JDFResourceTest.creatXMDoc();
+        d = JDFTestCaseBase.creatXMDoc();
         mem = d.getDocMemoryUsed();
         s = d.write2String(0);
         assertTrue("mem", mem + 10000 > s.length());
@@ -379,10 +380,12 @@ public class XMLDocTest extends JDFTestCaseBase
         KElement e = d.getRoot();
         KElement e2 = e.appendElement("e2");
         KElement e3 = e2.appendElement("e3");
-        for (int i = 33; i < 999; i++)
-            e3.setAttribute("k" + String.valueOf(i), "value" + String.valueOf(i));
-        for (int j = 0; j < 99; j++)
-            e2.copyElement(e3, null);
+        for (int i = 33; i < 999; i++) {
+			e3.setAttribute("k" + String.valueOf(i), "value" + String.valueOf(i));
+		}
+        for (int j = 0; j < 99; j++) {
+			e2.copyElement(e3, null);
+		}
         mem = d.getDocMemoryUsed();
         s = d.write2String(0);
         assertTrue("mem", mem + 10000 > s.length());

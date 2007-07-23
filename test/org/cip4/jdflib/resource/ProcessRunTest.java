@@ -70,7 +70,7 @@
 /*
  * MediaColorTest.java
  * @author Dietrich Mucha
- * 
+ *
  * Copyright (C) 2004 Heidelberger Druckmaschinen AG. All Rights Reserved.
  */
 package org.cip4.jdflib.resource;
@@ -99,7 +99,7 @@ public class ProcessRunTest extends JDFTestCaseBase
         assertEquals("",pt.getDuration().getDuration(), 100.,1.);
         pt.setDurationSeconds(50);
         assertEquals("",pt.getDuration().getDuration(), 50.,1.);
-        
+
     }
     public void testAddPhaseTime() throws Exception
     {
@@ -109,11 +109,12 @@ public class ProcessRunTest extends JDFTestCaseBase
         JDFProcessRun pr=ap.addProcessRun(EnumNodeStatus.Completed,null,null);
         JDFPhaseTime pt0=null;
         for(int i=0;i<10;i++)
-        {           
+        {
             JDFPhaseTime pt=ap.addPhaseTime(EnumNodeStatus.InProgress,null,null);
-            if(i==0)
-                pt0=pt;
-            
+            if(i==0) {
+				pt0=pt;
+			}
+
             final JDFDate start = new JDFDate();
             start.setTimeInMillis(start.getTimeInMillis()+i*1000*1000);
             pt.setStart(start);
@@ -124,9 +125,11 @@ public class ProcessRunTest extends JDFTestCaseBase
 
             pr.addPhase(pt);
             assertEquals("",pr.getDuration().getDuration(), (i+1)*100, 1.);
-            assertEquals("", pr.getStart(),pt0.getStart());
+            if (pt0 != null) {
+				assertEquals("", pr.getStart(),pt0.getStart());
+			}
             assertEquals("", pr.getEnd(),pt.getEnd());
-        }      
-    }    
- 
+        }
+    }
+
 }
