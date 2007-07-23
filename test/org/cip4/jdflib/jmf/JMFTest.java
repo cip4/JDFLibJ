@@ -247,7 +247,11 @@ public class JMFTest extends JDFTestCaseBase
         
         JDFMessageService ms=r.appendMessageService();
         ms.setType("KnownMessages");
-        s.convertResponse(r);
+        s.convertResponse(r,q);
+        assertEquals("type",r.getType(),s.getType());
+        assertTrue("ms equal",ms.isEqual(s.getMessageService(0)));
+        s=jmf.appendSignal();
+        s.convertResponse(r,null);
         assertEquals("type",r.getType(),s.getType());
         assertTrue("ms equal",ms.isEqual(s.getMessageService(0)));
     }

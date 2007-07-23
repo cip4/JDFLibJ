@@ -85,6 +85,7 @@ import org.cip4.jdflib.auto.JDFAutoSignal;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 
 /**
@@ -152,19 +153,40 @@ public class JDFSignal extends JDFAutoSignal
      * 
      * @param response the response to convert
      * @return true if successful
+     * @deprecated use the two parameter varianz
      */
-    public boolean convertResponse(JDFResponse response){
+    public boolean convertResponse(JDFResponse response)
+    {
+       return convertResponse(response, null);
+    }
+    /**
+     * converts a response to a signal that can be sent individually
+     * 
+     * @param response the response to convert
+     * @return true if successful
+     */
+    public boolean convertResponse(JDFResponse response, JDFQuery q){
         if(response==null) 
             return false;
         if(response.hasAttribute(AttributeName.REFID) == false){
             throw new JDFException("JDFSignal::convertResponse response does not have a refID");
         }
-        setrefID(response.getrefID());
-        setType(response.getType());
+        setAttributes(response);
         VElement elements = response.getChildElementVector(null,null,null, true, 0,true);
         for(int i=0;i<elements.size();i++){
             JDFElement element=(JDFElement) elements.elementAt(i);
             copyElement(element,null);
+        }
+        if(q!=null)
+        {
+            VElement v=q.getChildElementVector(null, null, null, true, 0,true);
+            for(int i=0;i<v.size();i++)
+            {
+                final KElement item = v.item(i);
+                if(item instanceof JDFSubscription)
+                    continue;
+                copyElement(item, null);
+            }
         }
         return true;
     }

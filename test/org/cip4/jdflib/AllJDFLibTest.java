@@ -182,8 +182,10 @@ import org.cip4.jdflib.util.JDFDateTest;
 import org.cip4.jdflib.util.JDFSpawnTest;
 import org.cip4.jdflib.util.MimeUtilTest;
 import org.cip4.jdflib.util.PrefixInputStreamTest;
+import org.cip4.jdflib.util.StatusCounterTest;
 import org.cip4.jdflib.util.StringUtilTest;
 import org.cip4.jdflib.util.UrlUtilTest;
+import org.cip4.jdflib.util.VectorMapTest;
 
 /**
  * @author MuchaD
@@ -330,8 +332,10 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JDFSpawnTest.class);
         suite.addTestSuite(MimeUtilTest.class);
         suite.addTestSuite(PrefixInputStreamTest.class);
+        suite.addTestSuite(StatusCounterTest.class);
         suite.addTestSuite(StringUtilTest.class);
         suite.addTestSuite(UrlUtilTest.class);
+        suite.addTestSuite(VectorMapTest.class);
 
         suite.addTestSuite(JDFEnumerationSpanTest.class);
 

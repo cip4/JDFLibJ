@@ -1,4 +1,5 @@
-/**
+/*
+ *
  * The CIP4 Software License, Version 1.0
  *
  *
@@ -58,7 +59,7 @@
  * individuals on behalf of the The International Cooperation for the Integration 
  * of Processes in Prepress, Press and Postpress and was
  * originally based on software 
- * copyright (c) 1999-2006, Heidelberger Druckmaschinen AG 
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
  * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
  *  
  * For more information on The International Cooperation for the 
@@ -67,83 +68,38 @@
  *  
  * 
  */
-/**
- *
- * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- *
- * JDFQuery.java
- *
- * Last changes
- *
- * 02-07-2002  JG - init() Also call super::init()
- *
- */
+package org.cip4.jdflib.ifaces;
 
+import org.cip4.jdflib.jmf.JDFSubscription;
 
-package org.cip4.jdflib.jmf;
-
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoQuery;
-import org.cip4.jdflib.ifaces.IJMFSubscribable;
 
 /**
+ * interface that connects the JMF message classes that implement subscriptions,
+ * i.e. Query and Registration
+ * @author prosirai
  *
  */
-public class JDFQuery extends JDFAutoQuery implements IJMFSubscribable
+public interface IJMFSubscribable
 {
-    private static final long serialVersionUID = 1L;
-
     /**
-     * Constructor for JDFQuery
-     * @param myOwnerDocument
-     * @param qualifiedName
+     * get the subscription
+     * @return
      */
-    public JDFQuery(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
-
+    public JDFSubscription getSubscription();
     /**
-     * Constructor for JDFQuery
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
+     * get the subscription, create if it doesn't exist
+     * @return
      */
-    public JDFQuery(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
-
+    public JDFSubscription getCreateSubscription();
     /**
-     * Constructor for JDFQuery
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
+     * append the subscription
+     * @return
      */
-    public JDFQuery(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-
-    //**************************************** Methods *********************************************
+    public JDFSubscription appendSubscription();
     /**
-     * toString
-     *
-     * @return String
+     * get the ID of the message
+     * @return
      */
-    public String toString()
-    {
-        return "JDFQuery[  --> " + super.toString() + " ]";
-    }
+    public String getID();
 
 }

@@ -90,7 +90,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
@@ -98,7 +97,6 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
-import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -1181,84 +1179,6 @@ public class JDFResourceTest extends JDFTestCaseBase
 
         return doc;
     }
-
-    ////////////////////////////////////////////////////////
-    public static JDFDoc creatXMDoc()
-    {
-        JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_3);
-        JDFDoc doc=new JDFDoc("JDF");
-        JDFNode n=doc.getJDFRoot();
-        n.setJobPartID("P1");
-        n.setJobID("J1");
-        n.setType("ConventionalPrinting",true);
-        n.appendElement("NS:Foobar","www.foobar.com");
-
-        n.appendMatchingResource("Layout",JDFNode.EnumProcessUsage.AnyInput,null);
-        JDFComponent comp=(JDFComponent)n.appendMatchingResource("Component",JDFNode.EnumProcessUsage.AnyOutput,null);
-        JDFExposedMedia xm=(JDFExposedMedia)n.appendMatchingResource("ExposedMedia",JDFNode.EnumProcessUsage.Plate,null);
-        JDFNodeInfo ni=n.appendNodeInfo();
-        JDFMedia m=xm.appendMedia();
-        m.appendElement("NS:FoobarMedia","www.foobar.com");
-
-        assertEquals("m Class",m.getResourceClass(),EnumResourceClass.Consumable);
-
-
-        VString vs=new VString();
-        vs.add("SignatureName");
-        vs.add("SheetName");
-        vs.add("Side");
-
-        JDFAttributeMap mPart1=new JDFAttributeMap("SignatureName","Sig1");
-        mPart1.put("SheetName","S1");
-        mPart1.put("Side","Front");
-        xm.getCreatePartition(mPart1,vs);
-        ni.getCreatePartition(mPart1,vs);
-        comp.getCreatePartition(mPart1,vs);
-
-        mPart1.put("Side","Back");
-        xm.getCreatePartition(mPart1,vs);
-        ni.getCreatePartition(mPart1,vs);
-        comp.getCreatePartition(mPart1,vs);
-
-        mPart1.put("SheetName","S2");
-        mPart1.put("Side","Front");
-        xm.getCreatePartition(mPart1,vs);
-        ni.getCreatePartition(mPart1,vs);
-        comp.getCreatePartition(mPart1,vs);
-
-        mPart1.put("Side","Back");
-        xm.getCreatePartition(mPart1,vs);
-        ni.getCreatePartition(mPart1,vs);
-        comp.getCreatePartition(mPart1,vs);
-
-        mPart1.put("SignatureName","Sig2");
-        mPart1.put("SheetName","S1");
-        mPart1.put("Side","Front");
-        xm.getCreatePartition(mPart1,vs);
-        ni.getCreatePartition(mPart1,vs);
-        comp.getCreatePartition(mPart1,vs);
-        comp.appendElement("foo:bar","www.foobar.com");
-
-
-        mPart1.put("Side","Back");
-        xm.getCreatePartition(mPart1,vs);
-        ni.getCreatePartition(mPart1,vs);
-        comp.getCreatePartition(mPart1,vs);
-
-        mPart1.put("SheetName","S2");
-        mPart1.put("Side","Front");
-        xm.getCreatePartition(mPart1,vs);
-        ni.getCreatePartition(mPart1,vs);
-        comp.getCreatePartition(mPart1,vs);
-
-        mPart1.put("Side","Back");
-        xm.getCreatePartition(mPart1,vs);
-        ni.getCreatePartition(mPart1,vs);
-        comp.getCreatePartition(mPart1,vs);
-        return doc;
-    }
-
-    /////////////////////////////////////////////////////////
 
     public void testSubElement()
     {

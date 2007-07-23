@@ -1534,15 +1534,10 @@ public class JDFResource extends JDFElement
      */
     public JDFResource getPartition(JDFAttributeMap m, JDFResource.EnumPartUsage partUsage)
     {
-        JDFResource retRes = this;
-
-        if (m!=null && !m.isEmpty())
-        {
-            retRes = getDeepPart(m, partUsage);
-        }
-
-        return retRes;
-    }
+        if (m==null || m.isEmpty())
+            return this;
+        return  getDeepPart(m, partUsage);
+     }
 
 
     /**

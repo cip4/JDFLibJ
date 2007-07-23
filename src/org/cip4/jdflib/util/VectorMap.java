@@ -1,4 +1,5 @@
-/**
+/*
+ *
  * The CIP4 Software License, Version 1.0
  *
  *
@@ -58,7 +59,7 @@
  * individuals on behalf of the The International Cooperation for the Integration 
  * of Processes in Prepress, Press and Postpress and was
  * originally based on software 
- * copyright (c) 1999-2006, Heidelberger Druckmaschinen AG 
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
  * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
  *  
  * For more information on The International Cooperation for the 
@@ -71,79 +72,101 @@
  *
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
  *
- * JDFQuery.java
+ * KString.java
  *
  * Last changes
  *
- * 02-07-2002  JG - init() Also call super::init()
- *
  */
+package org.cip4.jdflib.util;
 
+import java.util.HashMap;
+import java.util.Vector;
 
-package org.cip4.jdflib.jmf;
-
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoQuery;
-import org.cip4.jdflib.ifaces.IJMFSubscribable;
 
 /**
+ * Bidirectional HashMap utility class
+ * @author prosirai
  *
  */
-public class JDFQuery extends JDFAutoQuery implements IJMFSubscribable
+public class VectorMap extends HashMap
 {
-    private static final long serialVersionUID = 1L;
 
     /**
-     * Constructor for JDFQuery
-     * @param myOwnerDocument
-     * @param qualifiedName
+     * 
      */
-    public JDFQuery(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+    private static final long serialVersionUID = -2180413692846276265L;
 
-    /**
-     * Constructor for JDFQuery
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    public JDFQuery(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
+    public VectorMap()
     {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
+        super();
     }
+    
+    /**
+     * get the value for key
+     */
+    public Object getOne(Object key, int i)
+    {
+        Vector c=(Vector) get(key);
+        if(c==null)
+            return null;
+        int n=c.size();
+        if(i<0)
+            i=n+i;
+        if(i<0 || i>=n)
+            return null;
+        return c.get(i);
+    }
+    /**
+     * get the value for key
+     */
+    public Object getOne(Object key, Object singleObject)
+    {
+        Vector c=(Vector) get(key);
+        if(c==null)
+            return null;
+        int i=c.indexOf(singleObject);
+        return i<0 ? null : c.get(i); 
+    }
+    /**
+     * get the size of the vector for key
+     */
+    public int size(Object key)
+    {
+        Vector c=(Vector) get(key);
+        if(c==null)
+            return 0;
+        return c.size();
+    }
+     
+    /**
+     * put the value for key, ensuring uniqueness
+     */
+    public void putOne(Object key, Object val)
+    {
+        Vector v=(Vector) get(key);
+        if(v==null)
+        {
+            v=new Vector();
+            put(key,v);
+        }
+        if(!v.contains(val))
+            v.add(val);        
+    }
+    /**
+     * remove the value for key,also remove key if the vector is empty
+     */
+    public void removeOne(Object key, Object val)
+    {
+        Vector v=(Vector) get(key);
+        if(v!=null)
+        {
+            v.remove(val);
+            if(v.size()==0)
+                remove(key);
+        } 
+    }
+    
 
-    /**
-     * Constructor for JDFQuery
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    public JDFQuery(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFQuery[  --> " + super.toString() + " ]";
-    }
+//////////////////////////////////////////////////////////////////////////////////
 
 }

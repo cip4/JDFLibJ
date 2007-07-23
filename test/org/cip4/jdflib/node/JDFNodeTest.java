@@ -131,6 +131,8 @@ import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.JDFSpawn;
 import org.cip4.jdflib.util.StatusUtil;
 
+import sun.java2d.pipe.AATextRenderer;
+
 
 public class JDFNodeTest extends JDFTestCaseBase       
 {
@@ -1791,6 +1793,32 @@ public class JDFNodeTest extends JDFTestCaseBase
     }
     //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////
+
+    public void testGetWorkStepID()
+    {
+        JDFDoc doc= new JDFDoc("JDF");
+        JDFNode root = doc.getJDFRoot();
+        root.setType(EnumType.ConventionalPrinting);
+        root.setJobPartID("p1");
+        assertEquals(root.getWorkStepID(null), "p1");
+        final JDFAttributeMap attributeMap = new JDFAttributeMap("SheetName","S1");
+        assertEquals(root.getWorkStepID(attributeMap), "p1");
+        root.setPartStatus(attributeMap, EnumNodeStatus.Cleanup);
+        assertEquals(root.getWorkStepID(null), "p1");
+        assertEquals(root.getWorkStepID(attributeMap), "p1");
+        JDFNodeInfo ni=root.getNodeInfo();
+        JDFNodeInfo nip=(JDFNodeInfo) ni.getPartition(attributeMap, null);
+        nip.setWorkStepID("w2");
+        assertEquals(root.getWorkStepID(null), "p1");
+        assertEquals(root.getWorkStepID(attributeMap), "w2");
+        ni.setWorkStepID("w1");
+        assertEquals(root.getWorkStepID(null), "w1");
+        assertEquals(root.getWorkStepID(attributeMap), "w2");
+        nip.removeAttribute(AttributeName.WORKSTEPID);
+        assertEquals(root.getWorkStepID(null), "w1");
+        assertEquals(root.getWorkStepID(attributeMap), "w1");
+    }
+   //////////////////////////////////////////////////////////////
 
     public void testGetUnknownLinks()
     {

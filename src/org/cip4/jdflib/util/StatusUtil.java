@@ -177,7 +177,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
  * Utility class for status JDF and JMF
  *
  * @author prosirai
- *
+ * @deprecated - use StatusCounter
  */
 public class StatusUtil {
 
@@ -205,25 +205,6 @@ public class StatusUtil {
         setUpResLinks(vResLinks);
     }
 
-    /**
-     * simple sleep wrapper
-     * @param millis
-     */
-    public static void sleep(int millis)
-    {
-        try
-        {
-            Object o=new Object();
-            synchronized (o)
-            {
-                o.wait(millis);
-            }
-        }
-        catch (InterruptedException x)
-        {
-            //nop
-        }
-    }
     /**
      * get the matching AmountBag out of an array
      * @param refID the refID of the bag - this MUST match the refID of a ResourceLink

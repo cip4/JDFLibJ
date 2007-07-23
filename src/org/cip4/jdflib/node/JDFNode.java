@@ -4848,7 +4848,10 @@ public class JDFNode extends JDFElement
         {
             if(processUsage==null)
             {
-                vE=rlp.getPoolChildren(null,null,null);
+                String linkName=null;
+                if(resName!=null && ! resName.endsWith("Link"))
+                    linkName=resName+"Link";
+                vE=rlp.getPoolChildren(linkName,null,null);
                 if (!bLink)
                 {
                     vE = JDFResourceLinkPool.resourceVector(vE, resName);
@@ -7117,6 +7120,24 @@ public class JDFNode extends JDFElement
         return getAttribute(AttributeName.TEMPLATEVERSION);
     }
 
+      /**
+     * get the NodeInfo/@workstepid for a given partition
+     * if no workstepID exists, returns jobPartID
+     * 
+     * @return the workstepid
+     *
+     */
+    public String getWorkStepID(JDFAttributeMap map)
+    {
+        JDFNodeInfo ni=getNodeInfo();
+        if(ni==null)
+            return getJobPartID(false);
+        ni=(JDFNodeInfo) ni.getPartition(map, null);
+        if(ni==null)
+            return getJobPartID(false);
+        String wsID=ni.getWorkStepID();
+        return isWildCard(wsID) ? getJobPartID(false) : wsID;
+    }
 
     /**
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
