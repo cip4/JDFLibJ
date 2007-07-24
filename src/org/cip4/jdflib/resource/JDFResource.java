@@ -6534,12 +6534,7 @@ public class JDFResource extends JDFElement
      */
     public void setStatus(EnumResStatus value, boolean bCleanLeaves)
     {
-        if (bCleanLeaves)
-        {
-            this.removeAttributeFromLeaves(AttributeName.STATUS, null);
-        }
-
-        setAttribute(AttributeName.STATUS, value.getName(), null);
+        setResStatus(value,bCleanLeaves);
     }
 
     /**
