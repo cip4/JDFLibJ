@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,24 +56,24 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /**
  * JDFDeviceCapTest.java
  *
  * @author Elena Skobchenko
- * 
- * Copyright (c) 2001-2004 The International Cooperation for the Integration 
+ *
+ * Copyright (c) 2001-2004 The International Cooperation for the Integration
  * of Processes in  Prepress, Press and Postpress (CIP4).  All rights reserved.
  */
 package org.cip4.jdflib.devicecapability;
@@ -121,8 +121,8 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 public class JDFDeviceCapTest extends JDFTestCaseBase
 {
 
-    /////////////////////////////////////////////////////////////////    
-    /////////////////////////////////////////////////////////////////    
+    /////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
     private JDFDeviceCap devicecap;
     private JDFDeviceCap devicecapProduct;
     private JDFDevice device;
@@ -153,7 +153,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 
             dcs=devicecap.appendDevCaps();
             dcs.setContext(EnumContext.Element);
-            dcs.setName("AncestorPool");       
+            dcs.setName("AncestorPool");
             dc=dcs.appendDevCap();
             dc.setMinOccurs(0);
             dc.setID("dc_AncestorPool");
@@ -166,7 +166,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
             {
                 dcs=devicecap.appendDevCaps();
                 dcs.setContext(EnumContext.Resource);
-                dcs.setName("RunList");    
+                dcs.setName("RunList");
                 dcs.setLinkUsage(EnumUsage.Input);
                 dcs.setProcessUsage(pu==0 ? "Document": "Marks");
                 dc=dcs.appendDevCap();
@@ -178,13 +178,13 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
                 else
                 {
                     dc.setID("dc_RL_Mark");
-                    dc.setMinOccurs(0);                
+                    dc.setMinOccurs(0);
                 }
             }
 
             dcs=devicecap.appendDevCaps();
             dcs.setContext(EnumContext.Resource);
-            dcs.setName("Layout");    
+            dcs.setName("Layout");
             dcs.setLinkUsage(EnumUsage.Input);
             dc=dcs.appendDevCap();
             dc.setID("dc_Layout");
@@ -203,13 +203,13 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
             dcs=devicecap.appendDevCaps();
             dcs.setContext(EnumContext.Link);
             dcs.setLinkUsage(EnumUsage.Input);
-            dcs.setName("Layout");       
+            dcs.setName("Layout");
             dc=dcs.appendDevCap();
             dc.setID("dc_LayoutLink");
 
             dcs=devicecap.appendDevCaps();
             dcs.setContext(EnumContext.Element);
-            dcs.setName("JDF");       
+            dcs.setName("JDF");
             dc=dcp.appendDevCap();
             dc.setID("dc_JDF");
             dcs.setDevCapRef(dc);
@@ -238,11 +238,11 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
             dc.setName("Created");
             dc.setID("dc_Created");
 
- 
+
 
             dcs=devicecap.appendDevCaps();
             dcs.setContext(EnumContext.Resource);
-            dcs.setName("Layout");    
+            dcs.setName("Layout");
             dcs.setLinkUsage(EnumUsage.Input);
             dc=dcs.appendDevCap();
             dc.setID("dc_Layout");
@@ -262,13 +262,13 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
             dcs=devicecap.appendDevCaps();
             dcs.setContext(EnumContext.Link);
             dcs.setLinkUsage(EnumUsage.Input);
-            dcs.setName("Layout");       
+            dcs.setName("Layout");
             dc=dcs.appendDevCap();
             dc.setID("dc_LayoutLink");
 
             dcs=devicecap.appendDevCaps();
             dcs.setContext(EnumContext.Element);
-            dcs.setName("JDF");       
+            dcs.setName("JDF");
             dc=dcp.appendDevCap();
             dc.setID("dc_JDF");
             dcs.setDevCapRef(dc);
@@ -276,7 +276,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 
     }
 
-    /////////////////////////////////////////////////////////////////    
+    /////////////////////////////////////////////////////////////////
 
     public void testGetBadJDFInfo() throws Exception
     {
@@ -290,7 +290,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
         assertNull("devcaps are consistently evaluated",outDoc);
     }
 
-    /////////////////////////////////////////////////////////////////    
+    /////////////////////////////////////////////////////////////////
 
 
     public void testAction()
@@ -302,10 +302,10 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
         final JDFActionPool ap=dc.appendActionPool();
         JDFAction a = ap.appendAction();
         a.setTest(test);
-        assertEquals("",test,a.getTest());        
-        assertTrue("",a.hasAttribute("TestRef"));        
+        assertEquals("",test,a.getTest());
+        assertTrue("",a.hasAttribute("TestRef"));
     }
-    /////////////////////////////////////////////////////////////////    
+    /////////////////////////////////////////////////////////////////
 
     public void testGetDevCapsByName()
     {
@@ -329,14 +329,14 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 
     }
 
-    /////////////////////////////////////////////////////////////////    
+    /////////////////////////////////////////////////////////////////
 
     public void testDevCapsMinOccurs()
     {
         JDFDevCaps dcs=devicecap.getDevCapsByName("AuditPool",null,null,null,0);
         assertEquals(dcs.getMinOccurs(),1);
     }
-    /////////////////////////////////////////////////////////////////    
+    /////////////////////////////////////////////////////////////////
 
     public void testDevCapsMaxOccurs()
     {
@@ -344,7 +344,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
         assertEquals(dcs.getMaxOccurs(),1);
     }
 
-    /////////////////////////////////////////////////////////////////    
+    /////////////////////////////////////////////////////////////////
 
     public void testLogic()
     {
@@ -358,9 +358,9 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
         final JDFActionPool ap=dc.appendActionPool();
         JDFAction a = ap.appendAction();
         a.setTest(test);
-//      TODO more     
+//      TODO more
     }
-/////////////////////////////////////////////////////////////////    
+/////////////////////////////////////////////////////////////////
 
     public void testGetCombinedMethod()
     {
@@ -371,7 +371,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
         assertEquals("default is none",dc.getCombinedMethod(), v);
 
     }
-/////////////////////////////////////////////////////////////////    
+/////////////////////////////////////////////////////////////////
 
     public void testDeviceCapIsValid ()
     {
@@ -389,7 +389,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 
     public void testGetExecutableJDF () throws Exception
     {
- 
+
         String docTest = "MISPrepress_ICS_Minimal.jdf";
         String docDevCap = "DevCaps_Product_MISPrepress_ICS_Minimal.jdf";
 
@@ -406,39 +406,42 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
         JDFDoc jdfTest = p.parseFile(sm_dirTestData + docTest);
         JDFNode jdfRoot = jdfTest.getJDFRoot();
         assertTrue("jdfRoot is null", jdfRoot != null);
-        jdfRoot.getOwnerDocument_KElement();
-        JDFDeviceCap deviceCap = (JDFDeviceCap) jmfRoot.getChildByTagName("DeviceCap", null, 0,
-                null, false, true);
 
-        EnumFitsValue testlists = EnumFitsValue.Allowed;
-        EnumValidationLevel level = KElement.EnumValidationLevel.Complete;
-        VElement vExecNodes = deviceCap.getExecutableJDF(jdfRoot, testlists, level);
-        if (vExecNodes==null)
-        {
-            System.out.println(docDevCap + ": found No matching JDFNode");
-        }
-        else
-        {
-            for (int n = 0; n < vExecNodes.size(); n++)
-            {
-                // XMLDoc docExecNodes = ((JDFNode)
-                // vExecNodes.elementAt(n)).getOwnerDocument_KElement();
-                // docExecNodes.write2File ("temp\\" + "_" + docTest +"_ExecNode" + (n+1) +
-                // ".jdf", 0);
-                System.out.println(vExecNodes.elementAt(n));
+        if (jdfRoot != null) {
+	        jdfRoot.getOwnerDocument_KElement();
+	        JDFDeviceCap deviceCap = (JDFDeviceCap)
+	        	jmfRoot.getChildByTagName("DeviceCap", null, 0, null, false, true);
 
-            }
-        }
+	        EnumFitsValue testlists = EnumFitsValue.Allowed;
+	        EnumValidationLevel level = KElement.EnumValidationLevel.Complete;
+	        VElement vExecNodes = deviceCap.getExecutableJDF(jdfRoot, testlists, level);
+	        if (vExecNodes==null)
+	        {
+	            System.out.println(docDevCap + ": found No matching JDFNode");
+	        }
+	        else
+	        {
+	            for (int n = 0; n < vExecNodes.size(); n++)
+	            {
+	                // XMLDoc docExecNodes = ((JDFNode)
+	                // vExecNodes.elementAt(n)).getOwnerDocument_KElement();
+	                // docExecNodes.write2File ("temp\\" + "_" + docTest +"_ExecNode" + (n+1) +
+	                // ".jdf", 0);
+	                System.out.println(vExecNodes.elementAt(n));
 
-        XMLDoc testResult = deviceCap.getBadJDFInfo(jdfRoot, testlists, level);
-        if (testResult != null)
-        {
-            testResult.write2File(sm_dirTestDataTemp + "_BugReport.xml", 0, true);
-        }
+	            }
+	        }
+
+	        XMLDoc testResult = deviceCap.getBadJDFInfo(jdfRoot, testlists, level);
+	        if (testResult != null)
+	        {
+	            testResult.write2File(sm_dirTestDataTemp + "_BugReport.xml", 0, true);
+	        }
+		}
     }
 
 /////////////////////////////////////////////////////////////////
-    
+
     public void testGetMatchingTypeNodeVector()
     {
         JDFDoc d=new JDFDoc("JDF");
@@ -457,7 +460,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
         assertNull("want pg but have local node",devicecap.getMatchingTypeNodeVector(n2));
 
     }
-    
+
 /////////////////////////////////////////////////////////////////
 
 
@@ -477,7 +480,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
         assertEquals(device.getMatchingDeviceCapVector(n, false).elementAt(0),devicecapProduct);
         assertEquals(device.getMatchingDeviceCapVector(n2, false).size(),2);
 
-    }   
+    }
 /////////////////////////////////////////////////////////////////
 
     public void testProcessUsage() throws Exception
@@ -490,7 +493,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
         EnumValidationLevel level = KElement.EnumValidationLevel.Complete;
         VElement vExecNodes = devicecap.getExecutableJDF(n, testlists, level);
         assertNull("missing resources",vExecNodes);
-        
+
 
         JDFLayout lo=(JDFLayout)n.addResource(ElementName.LAYOUT, null, EnumUsage.Input, null, null, null, null);
         lo.appendContentObject().setCTM(new JDFMatrix("1 0 0 1 0 0"));
@@ -503,27 +506,27 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
         n.addResource(ElementName.RUNLIST, null, EnumUsage.Input, EnumProcessUsage.Marks, null, null, null);
         vExecNodes = devicecap.getExecutableJDF(n, testlists, level);
         assertNotNull("no missing resources",vExecNodes);
-        
+
         JDFResourceLink rl=n.getLink(rlDoc, null);
         rl.setUsage(EnumUsage.Output);
         vExecNodes = devicecap.getExecutableJDF(n, testlists, level);
         assertNull("no required runlist doc",vExecNodes);
-        
+
         rl.setUsage(EnumUsage.Input);
         vExecNodes = devicecap.getExecutableJDF(n, testlists, level);
         assertNotNull("no required runlist doc",vExecNodes);
-        
+
         JDFDevCaps dcsRLDoc=devicecap.getDevCapsByName("RunList", null, null, EnumProcessUsage.Document, 0);
         JDFNameState ns=dcsRLDoc.getDevCap().appendNameState("RunTag");
         ns.setRequired(true);
-        
+
         vExecNodes = devicecap.getExecutableJDF(n, testlists, level);
         assertNull("incomplete required runlist doc",vExecNodes);
-        
-        ns.setRequired(false);        
+
+        ns.setRequired(false);
         vExecNodes = devicecap.getExecutableJDF(n, testlists, level);
         assertNotNull("incomplete required runlist doc",vExecNodes);
-        
+
         JDFDevCaps dcsRLMarks=devicecap.getDevCapsByName("RunList", null, null, EnumProcessUsage.Marks, 0);
         JDFNameState nsMarks=dcsRLMarks.getDevCap().appendNameState("PageNames");
         nsMarks.setRequired(true);
@@ -555,7 +558,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
         assertTrue(devicecap.matchesType(n,false));
         assertTrue(device.matchesType(n,true));
         assertTrue(device.matchesType(n,false));
-        
+
         n.setType("Combined",false);
         n.setTypes(new VString("blub fnarf"," "));
         assertFalse(devicecap.matchesType(n,true));
@@ -567,22 +570,22 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
         devicecap.setCombinedMethod(EnumCombinedMethod.ProcessGroup);
         n.setType("ProcessGroup",true);
         JDFNode n2=n.addJDFNode("fnarf");
-        
+
         assertTrue(devicecap.matchesType(n,true));
         assertTrue(devicecap.matchesType(n,false));
         assertTrue(device.matchesType(n,true));
         assertTrue(device.matchesType(n,false));
         assertFalse("method pg for local individual process",devicecap.matchesType(n2,true));
-        assertFalse(devicecap.matchesType(n2,false));    
-        assertTrue(devicecapProduct.matchesType(n2,false));    
-        assertTrue(device.matchesType(n2,false));    
+        assertFalse(devicecap.matchesType(n2,false));
+        assertTrue(devicecapProduct.matchesType(n2,false));
+        assertTrue(device.matchesType(n2,false));
     }
 
     /////////////////////////////////////////////////////////////////
     public void testSetDefaultsFromCaps() throws Exception
     {
         JDFDoc d=new JDFDoc("JDF");
-        JDFNode n=d.getJDFRoot();         
+        JDFNode n=d.getJDFRoot();
         n.setType("fnarf",false);
         devicecap.setDefaultsFromCaps(n,true,false);
         assertNotNull(n.getResourceLinks("Layout", null, null));
@@ -599,7 +602,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
        assertNotNull(devicecap.getModulePool());
     }
 /////////////////////////////////////////////////////////////////
-    
+
 /////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////
 
