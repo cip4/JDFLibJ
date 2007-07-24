@@ -1,6 +1,66 @@
 ___________________________________________________________
 
 
+Label JDFLIBJ_2.1.3BLD442 (24.07.2007)
+
+spawn and merge fix for mrging non partitioned deep nodes
+queue automation for bambi
+double formatting for exponential numbers
+numlist cleanup
+use specific attribute types for attributes of part elements (e.g. String --> JDFIntegerRangeList)
+merging in varying sequences
+removed JDFAutoResourceInfo.(getCreateResource,getResource,appendResource) as Resource is abstract
+generator for auto files :
+   don't create JDFAutoResourceInfo.(getCreateResource,getResource,appendResource) as Resource is abstract
+getWorkStepID actually returns a string...
+
+
+ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD442) && !lbtype(JDFLIBJ_2.1.3BLD441)}" -print
+.\auto\JDFAutoPart.java@@\main\51
+.\auto\JDFAutoResourceInfo.java@@\main\60
+.\core\JDFDoc.java@@\main\71
+.\core\JDFElement.java@@\main\236
+.\core\KElement.java@@\main\246
+.\core\XMLDoc.java@@\main\85
+.\core\XMLDocUserData.java@@\main\28
+.\datatypes\JDFBaseDataTypes.java@@\main\10
+.\datatypes\JDFCMYKColor.java@@\main\7
+.\datatypes\JDFIntegerList.java@@\main\15
+.\datatypes\JDFNumList.java@@\main\29
+.\datatypes\JDFRectangle.java@@\main\20
+.\datatypes\JDFXYPair.java@@\main\18
+.\ifaces@@\main\3
+.\ifaces\IJMFSubscribable.java@@\main\1
+.\jmf\JDFJMF.java@@\main\62
+.\jmf\JDFMessage.java@@\main\71
+.\jmf\JDFMessageService.java@@\main\14
+.\jmf\JDFQuery.java@@\main\21
+.\jmf\JDFQueue.java@@\main\21
+.\jmf\JDFQueueEntry.java@@\main\19
+.\jmf\JDFQueueSubmissionParams.java@@\main\11
+.\jmf\JDFRegistration.java@@\main\4
+.\jmf\JDFResponse.java@@\main\28
+.\jmf\JDFSignal.java@@\main\22
+.\node\JDFNode.java@@\main\250
+.\pool\JDFAuditPool.java@@\main\97
+.\resource\JDFPhaseTime.java@@\main\28
+.\resource\JDFResource.java@@\main\221
+.\util@@\main\20
+.\util\ContainerUtil.java@@\main\2
+.\util\FileUtil.java@@\main\2
+.\util\JDFDate.java@@\main\45
+.\util\JDFDuration.java@@\main\8
+.\util\JDFMerge.java@@\main\15
+.\util\JDFSpawn.java@@\main\17
+.\util\MimeUtil.java@@\main\5
+.\util\PrefixInputStream.java@@\main\1
+.\util\StatusCounter.java@@\main\1
+.\util\StatusUtil.java@@\main\7
+.\util\StringUtil.java@@\main\61
+.\util\VectorMap.java@@\main\1
+___________________________________________________________
+
+
 Label JDFLIBJ_2.1.3BLD441 (06.07.2007)
 
 fix for setattributes(KElement) when applied to resources
