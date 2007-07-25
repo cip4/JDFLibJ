@@ -84,9 +84,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 
-
 /**
  * class with utilities for containers, e.g. Vectors, sets etc.
+ * also simple object utils
  * @author prosirai
  *
  */
@@ -136,4 +136,19 @@ public class ContainerUtil
         return v;
     }
 
+    /**
+     * return true if a equals b or both are null
+     * 
+     * @param a Object to compare
+     * @param b Object to compare
+     * @return boolean true if a equals b or both are null
+     */
+    public static boolean equals(Object a, Object b)
+    {
+        if(a==null)
+            return b==null;
+        if(b==null)
+            return false;
+        return a.equals(b);
+    }
 }

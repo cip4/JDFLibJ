@@ -202,6 +202,17 @@ public class StatusCounter
      */
     public StatusCounter(JDFNode node, VJDFAttributeMap vPartMap, VElement vResLinks)
     {
+        setActiveNode(node, vPartMap, vResLinks);
+    }
+
+    /**
+     * set the currently active node
+     * @param node the JDFNode that is being processed
+     * @param vPartMap the map of Parts that is being processed excluding the waste partition
+     * @param vResLinks the reslinks that are tracked for amount handling
+     */
+    public void setActiveNode(JDFNode node, VJDFAttributeMap vPartMap, VElement vResLinks)
+    {
         m_Node=node;
         m_vPartMap=vPartMap;
         JDFAttributeMap wsMap=null;
@@ -213,7 +224,7 @@ public class StatusCounter
             wsMap=m_vPartMap.elementAt(0);
         
         workStepID=node.getWorkStepID(wsMap);
-        if(vResLinks==null)
+        if(vResLinks==null && m_Node!=null)
         {
             vResLinks=m_Node.getResourceLinks(null);            
             int siz=vResLinks==null ? 0 : vResLinks.size();
@@ -228,18 +239,14 @@ public class StatusCounter
     }
 
     /**
-     * simple sleep wrapper
+     * simple sleep wrapper that catches its exception
      * @param millis
      */
     public static void sleep(int millis)
     {
         try
         {
-            Object o=new Object();
-            synchronized (o)
-            {
-                o.wait(millis);
-            }
+            Thread.sleep(millis);
         }
         catch (InterruptedException x)
         {

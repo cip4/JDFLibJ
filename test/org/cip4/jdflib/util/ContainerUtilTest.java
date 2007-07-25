@@ -75,9 +75,23 @@ import java.util.Set;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 
-
+/**
+ * general utilities for containers and objects
+ * 
+ * @author prosirai
+ *
+ */
 public class ContainerUtilTest extends JDFTestCaseBase
 {
+    public void testEquals()
+    {
+        assertTrue(ContainerUtil.equals(null, null));
+        assertFalse(ContainerUtil.equals(null, ""));
+        assertFalse(ContainerUtil.equals("", null));
+        assertFalse(ContainerUtil.equals("", " "));
+        assertTrue(ContainerUtil.equals("a", "a"));
+    }
+
     public void testToHashSetArray()
     {
        String[] a={"a","b"};
