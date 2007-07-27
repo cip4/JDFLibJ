@@ -91,7 +91,8 @@ public class GeneratorUtil
                 || "CommandTypeObj".equals(elementName) || "CommandOrQueryTypeObj".equals(elementName)
                 || "JDF".equals(elementName)
                 || "Location".equals(elementName) || "FoldOperation".equals(elementName)
-                || "NotificationDetails".equals(elementName))
+                || "NotificationDetails".equals(elementName)
+                )
         {
             // no auto file generation for abstract classes
             isValid = false;
@@ -217,7 +218,6 @@ public class GeneratorUtil
         }
 
         if (!"Notification".equals (strComplexTypeName) && "Class".equals (strAttributeName))
-        //JDFResource Attribute defined in JDFResource.OptionalAttributes()
         {
             isValid = false;
         }
