@@ -259,7 +259,7 @@ public class StatusCounter
      * @param refID the refID of the bag - this MUST match the refID of a ResourceLink
      * @return the LinkAmount with matching refID, null if none found or bags is null
      */
-    public LinkAmount getLinkAmount(String refID)
+    protected LinkAmount getLinkAmount(String refID)
     {
         if(vLinkAmount==null || refID==null) {
             return null;
@@ -300,7 +300,8 @@ public class StatusCounter
      */
     private void setUpResLinks(VElement resLinks)
     {
-        if(resLinks==null || resLinks.size()==0) {
+        if(resLinks==null || resLinks.size()==0) 
+        {
             return;
         }
         vLinkAmount=new LinkAmount[resLinks.size()];
@@ -312,6 +313,21 @@ public class StatusCounter
     }
 
     /**
+     * clear all the amounts in the resource with id refID
+     * 
+     * @param refID id of the resource
+     */
+    public void clearAmounts(String refID)
+    {
+        LinkAmount la=getLinkAmount(refID);
+        if(la==null)
+            return;
+        la.lastBag.reset();
+    }
+    /**
+     * add the amount specified by amount and waste to the resource with id refID
+     * 
+     * @param refID id of the resource
      * @param amount
      * @param waste
      */
@@ -557,10 +573,10 @@ public class StatusCounter
             /**
              * refID of the resourceLink to set
              */
-            public double totalAmount;
-            public double phaseAmount;
-            public double totalWaste;
-            public double phaseWaste;
+            protected double totalAmount;
+            protected double phaseAmount;
+            protected double totalWaste;
+            protected double phaseWaste;
 
 
             public String toString()
@@ -572,7 +588,7 @@ public class StatusCounter
              *
              * @param _refID refID of the resource that is being counted
              */
-            public AmountBag()
+            protected AmountBag()
             {
                 reset();
             }
@@ -580,7 +596,7 @@ public class StatusCounter
             /**
              *
              */
-            public void reset()
+            protected void reset()
             {
                 totalAmount=0;
                 phaseAmount=0;
@@ -592,7 +608,7 @@ public class StatusCounter
              * copy ctor
              * @param bag
              */
-            public AmountBag(AmountBag bag)
+            protected AmountBag(AmountBag bag)
             {
                 totalAmount=bag.totalAmount;
                 phaseAmount=bag.phaseAmount;
@@ -605,7 +621,7 @@ public class StatusCounter
              * @param waste
              * @param bNewPhase
              */
-            public void addPhase(double amount, double waste, boolean bNewPhase)
+            protected void addPhase(double amount, double waste, boolean bNewPhase)
             {
                 totalAmount+=amount;
                 totalWaste+=waste;
@@ -663,7 +679,7 @@ public class StatusCounter
          * @param lastBag
          * @return
          */
-        public JDFResourceLink updateNodeLink()
+        protected JDFResourceLink updateNodeLink()
         {
             final JDFResourceLink nodeLink=m_Node.getLink(0,null,new JDFAttributeMap(AttributeName.RREF,rl.getrRef()),null);
             VJDFAttributeMap vMap=new VJDFAttributeMap(m_vPartMap);
@@ -690,7 +706,7 @@ public class StatusCounter
         /**
          * @return
          */
-        public JDFResourceLink getPhaseTimeLink()
+        protected JDFResourceLink getPhaseTimeLink()
         {
             cleanAmounts();
             VJDFAttributeMap vMap=new VJDFAttributeMap(m_vPartMap);
@@ -729,7 +745,7 @@ public class StatusCounter
         /**
          * @return
          */
-        public JDFResourceLink getResourceAuditLink()
+        protected JDFResourceLink getResourceAuditLink()
         {
             cleanAmounts();
             VJDFAttributeMap vMap=new VJDFAttributeMap(m_vPartMap);
@@ -767,7 +783,7 @@ public class StatusCounter
         /**
          * @return
          */
-        public JDFResourceLink getResourceInfoLink()
+        protected JDFResourceLink getResourceInfoLink()
         {
             cleanAmounts();
             VJDFAttributeMap vMap=new VJDFAttributeMap(m_vPartMap);
@@ -884,8 +900,8 @@ public class StatusCounter
      */
     public JDFProcessRun setProcessResult(EnumNodeStatus endStatus)
     {
+        setPhase(EnumNodeStatus.Completed, null, EnumDeviceStatus.Idle, null);
         JDFAuditPool ap=m_Node.getCreateAuditPool();
-
         JDFProcessRun pr=ap.addProcessRun(endStatus, null, m_vPartMap);
         return pr;
     }

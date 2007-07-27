@@ -21,26 +21,29 @@ import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFSignal;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.pool.JDFAuditPool;
+import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.JDFProcessRun;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFComponent;
+import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
-import org.cip4.jdflib.util.StatusUtil;
-import org.cip4.jdflib.util.StatusUtil.AmountBag;
+import org.cip4.jdflib.util.StatusCounter;
 
 
 public class AmountTest extends JDFTestCaseBase
 {
     private JDFNode n;
-    private JDFComponent out;
-    private JDFMedia in;
-    private JDFResourceLink rl;
-    private JDFResourceLink rlIn;
+    private JDFComponent outComp;
+    private JDFMedia inMedia;
+    private JDFResourceLink rlOut;
+    private JDFResourceLink rlMediaIn;
     private JDFDoc d;
 
     /**
@@ -53,34 +56,34 @@ public class AmountTest extends JDFTestCaseBase
         d = new JDFDoc("JDF");
         n=d.getJDFRoot();
         n.setType(EnumType.ConventionalPrinting);
-        out=(JDFComponent) n.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, null, null, null);
-        rl=n.getLink(out, null);
-        JDFAmountPool ap=rl.getCreateAmountPool();
+        outComp=(JDFComponent) n.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, null, null, null);
+        rlOut=n.getLink(outComp, null);
+        JDFAmountPool ap=rlOut.getCreateAmountPool();
 
-        JDFComponent cover=(JDFComponent) out.addPartition(EnumPartIDKey.SheetName, "Cover");
+        JDFComponent cover=(JDFComponent) outComp.addPartition(EnumPartIDKey.SheetName, "Cover");
         JDFAttributeMap map=cover.getPartMap();
         ap.appendXMLComment("Want 10000-10500 good cover sheets and allow for 500 waste cover sheets", null);
         map.put(EnumPartIDKey.Condition, "Good");
-        rl.setAmount(10000, map);
-        rl.setMaxAmount(10500, map);
+        rlOut.setAmount(10000, map);
+        rlOut.setMaxAmount(10500, map);
         map.put(EnumPartIDKey.Condition, "Waste");
-        rl.setMaxAmount(500, map);
+        rlOut.setMaxAmount(500, map);
 
         ap.appendXMLComment("Want 20000 good first insert sheets and allow for 200 waste insert sheets", null);
-        JDFComponent sheet1=(JDFComponent) out.addPartition(EnumPartIDKey.SheetName, "Sheet1");
+        JDFComponent sheet1=(JDFComponent) outComp.addPartition(EnumPartIDKey.SheetName, "Sheet1");
         map=sheet1.getPartMap();
         map.put(EnumPartIDKey.Condition, "Good");
-        rl.setAmount(20000, map);
+        rlOut.setAmount(20000, map);
         map.put(EnumPartIDKey.Condition, "Waste");
-        rl.setMaxAmount(200, map);
+        rlOut.setMaxAmount(200, map);
 
         ap.appendXMLComment("Want 20000 good second insert sheets and allow for 200 waste insert sheets", null);
-        JDFComponent sheet2=(JDFComponent) out.addPartition(EnumPartIDKey.SheetName, "Sheet2");
+        JDFComponent sheet2=(JDFComponent) outComp.addPartition(EnumPartIDKey.SheetName, "Sheet2");
         map=sheet2.getPartMap();
         map.put(EnumPartIDKey.Condition, "Good");
-        rl.setAmount(20000, map);
+        rlOut.setAmount(20000, map);
         map.put(EnumPartIDKey.Condition, "Waste");
-        rl.setMaxAmount(100, map);
+        rlOut.setMaxAmount(100, map);
 
 
         d.write2File(sm_dirTestDataTemp+"plannedWaste.jdf", 2, true);
@@ -91,41 +94,41 @@ public class AmountTest extends JDFTestCaseBase
      */
     public void testPlannedWasteICS() throws Exception
     {
-        JDFAmountPool ap=rl.getCreateAmountPool();
-        JDFAmountPool apIn=rlIn.getCreateAmountPool();
+        JDFAmountPool ap=rlOut.getCreateAmountPool();
+        JDFAmountPool apIn=rlMediaIn.getCreateAmountPool();
 
-        JDFComponent cover=(JDFComponent) out.addPartition(EnumPartIDKey.SheetName, "Cover");
+        JDFComponent cover=(JDFComponent) outComp.addPartition(EnumPartIDKey.SheetName, "Cover");
         JDFAttributeMap map=cover.getPartMap();
         ap.appendXMLComment("Want 10000-10400 good cover sheets and allow for 500 waste cover sheets", null);
         map.put(EnumPartIDKey.Condition, "Good");
-        rl.setAmount(10000, map);
-        rl.setMaxAmount(10400, map);
+        rlOut.setAmount(10000, map);
+        rlOut.setMaxAmount(10400, map);
         apIn.appendXMLComment("Amount[Good]: planned consumption for good production\n"+
                 "MaxAmount[Good]: planned maximum consumption for good production\n"+
         "MaxAmount[Waste]: planned Media for waste", null);
-        rlIn.setAmount(10500, map);
+        rlMediaIn.setAmount(10500, map);
         map.put(EnumPartIDKey.Condition, "Waste");
-        rlIn.setMaxAmount(500, map);
+        rlMediaIn.setMaxAmount(500, map);
 
         ap.appendXMLComment("Want 20000 good first insert sheets and allow for 200 waste insert sheets", null);
-        JDFComponent sheet1=(JDFComponent) out.addPartition(EnumPartIDKey.SheetName, "Sheet1");
+        JDFComponent sheet1=(JDFComponent) outComp.addPartition(EnumPartIDKey.SheetName, "Sheet1");
         map=sheet1.getPartMap();
         map.put(EnumPartIDKey.Condition, "Good");
-        rl.setAmount(20000, map);
-        rl.setMaxAmount(20800, map);
-        rlIn.setAmount(21000, map);
+        rlOut.setAmount(20000, map);
+        rlOut.setMaxAmount(20800, map);
+        rlMediaIn.setAmount(21000, map);
         map.put(EnumPartIDKey.Condition, "Waste");
-        rlIn.setMaxAmount(200, map);
+        rlMediaIn.setMaxAmount(200, map);
 
         ap.appendXMLComment("Want 20000 good second insert sheets and allow for 100 waste insert sheets", null);
-        JDFComponent sheet2=(JDFComponent) out.addPartition(EnumPartIDKey.SheetName, "Sheet2");
+        JDFComponent sheet2=(JDFComponent) outComp.addPartition(EnumPartIDKey.SheetName, "Sheet2");
         map=sheet2.getPartMap();
         map.put(EnumPartIDKey.Condition, "Good");
-        rl.setAmount(20000, map);
-        rl.setMaxAmount(20800, map);
-        rlIn.setAmount(20900, map);
+        rlOut.setAmount(20000, map);
+        rlOut.setMaxAmount(20800, map);
+        rlMediaIn.setAmount(20900, map);
         map.put(EnumPartIDKey.Condition, "Waste");
-        rlIn.setMaxAmount(100, map);
+        rlMediaIn.setMaxAmount(100, map);
 
         d.write2File(sm_dirTestDataTemp+"plannedWasteICS.jdf", 2, true);
         
@@ -155,10 +158,10 @@ public class AmountTest extends JDFTestCaseBase
         n = d.getJDFRoot();
         n.appendXMLComment("Example to illustrate JDF 1.3 Base and MIS compatible amount handling", null);
         n.setType(EnumType.ConventionalPrinting);
-        out = (JDFComponent) n.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, null, null, null);
-        in = (JDFMedia) n.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, null, null, null);
-        rl = n.getLink(out, null);
-        rlIn = n.getLink(in, null);
+        outComp = (JDFComponent) n.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, null, null, null);
+        inMedia = (JDFMedia) n.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, null, null, null);
+        rlOut = n.getLink(outComp, null);
+        rlMediaIn = n.getLink(inMedia, null);
     }
 
     //////////////////////////////////////////////////////////////////////////////////
@@ -169,8 +172,8 @@ public class AmountTest extends JDFTestCaseBase
         VString vs=new VString("Cover Sheet1 Sheet2"," ");
 
         VElement vRL=new VElement();
-        vRL.add(rl);
-        vRL.add(rlIn);
+        vRL.add(rlOut);
+        vRL.add(rlMediaIn);
 
 
         for(int j=0;j<2;j++) 
@@ -182,62 +185,60 @@ public class AmountTest extends JDFTestCaseBase
                 String sheet=vs.stringAt(i);
                 VJDFAttributeMap vmP=new VJDFAttributeMap();
                 vmP.add(new JDFAttributeMap(EnumPartIDKey.SheetName,sheet));
-                StatusUtil stUtil=new StatusUtil(n,vmP,vRL);
+                StatusCounter stUtil=new StatusCounter(n,vmP,vRL);
 
-                AmountBag[] bags=new AmountBag[2];
-                bags[0]=stUtil.new AmountBag(rlIn);
-                bags[1]=stUtil.new AmountBag(rl);
-
-                stUtil.setTrackWaste(rl,true);
-                stUtil.setTrackWaste(rlIn,true);
+                String refComp=rlOut.getrRef();
+                String refMedia=rlMediaIn.getrRef();
+                
+                stUtil.setTrackWaste(refComp,true);
+                stUtil.setTrackWaste(refMedia,true);
 
                 if(i==0)
-                    stUtil.setPhase(EnumNodeStatus.Stopped, "PowerOn", EnumDeviceStatus.Stopped, "PowerOn" ,bags);
-                bags[0].addPhase(0, 200, true);
-                bags[1].addPhase(0, 200, true);
-                stUtil.setPhase(EnumNodeStatus.Setup, "FormChange", EnumDeviceStatus.Setup, "FormChange" ,bags);
+                    stUtil.setPhase(EnumNodeStatus.Stopped, "PowerOn", EnumDeviceStatus.Stopped, "PowerOn" );
+                stUtil.setPhase(EnumNodeStatus.Setup, "FormChange", EnumDeviceStatus.Setup, "FormChange");
+                stUtil.addPhase(refMedia,0, 200);
+                stUtil.addPhase(refComp,0, 200);
+                stUtil.setPhase(EnumNodeStatus.Setup, "FormChange", EnumDeviceStatus.Setup, "FormChange");
 
                 if(i>=1 &&!bMinimal)
                 {
-                    JDFResourceAudit ra=stUtil.setResourceAudit(bags[0],EnumReason.ProcessResult);
+                    JDFResourceAudit ra=stUtil.setResourceAudit(refMedia,EnumReason.ProcessResult);
 
-                    stUtil.setResourceAudit(bags[1],EnumReason.ProcessResult);
+                    stUtil.setResourceAudit(refComp,EnumReason.ProcessResult);
 
-                    bags[0].reset();
-                    bags[0].totalAmount=50;
-                    JDFResourceAudit ra2=stUtil.setResourceAudit(bags[0],EnumReason.OperatorInput);
+                    stUtil.clearAmounts(refMedia);
+                    stUtil.addPhase(refMedia, 50, 0);
+                    JDFResourceAudit ra2=stUtil.setResourceAudit(refMedia,EnumReason.OperatorInput);
                     ra2.setRef(ra);
                     ra2.setDescriptiveName("manual reset to using only 50 sheets because 100 initially were wastes");
 
                 }
-                bags[0].addPhase(4000, 0, true);
-                bags[1].addPhase(4000, 0, true);
-                stUtil.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, null ,bags);
+                stUtil.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, null);
+                stUtil.addPhase(refMedia,4000, 0);
+                stUtil.addPhase(refComp,4000, 0);
+                stUtil.setPhase(EnumNodeStatus.Cleanup, "Washup during processing", EnumDeviceStatus.Cleanup, "Washup" );
+                stUtil.setPhase(EnumNodeStatus.InProgress, "Waste", EnumDeviceStatus.Running, null);
 
-                bags[0].addPhase(0, 0, true);
-                bags[1].addPhase(0, 0, true);
-                stUtil.setPhase(EnumNodeStatus.Cleanup, "Washup during processing", EnumDeviceStatus.Cleanup, "Washup" ,bags);
+                stUtil.addPhase(refMedia,0, i==0 ? 40 : 30);
+                stUtil.addPhase(refComp, 0, i==0 ? 40 : 30);
+                stUtil.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, null);
 
-                bags[0].addPhase(0, i==0 ? 40 : 30, true);
-                bags[1].addPhase(0, i==0 ? 40 : 30, true);
-                stUtil.setPhase(EnumNodeStatus.InProgress, "Waste", EnumDeviceStatus.Running, null ,bags);
+                stUtil.addPhase(refMedia,1000, 0);
+                stUtil.addPhase(refComp,1000, 0);
+                stUtil.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, null);
+                stUtil.addPhase(refMedia,i==0 ? 5200 : 5400, 0);
+                stUtil.addPhase(refComp,i==0 ? 5200 : 5400, 0);
+                stUtil.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, null);
 
-                bags[0].addPhase(1000, 0, true);
-                bags[1].addPhase(1000,0, true);
-                stUtil.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, null ,bags);
-                bags[0].addPhase(i==0 ? 5200 : 5400, 0, false);
-                bags[1].addPhase(i==0 ? 5200 : 5400, 0, false);
-                stUtil.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, null ,bags);
-
-                JDFResourceAudit ra=stUtil.setResourceAudit(bags[0],EnumReason.ProcessResult);
+                JDFResourceAudit ra=stUtil.setResourceAudit(refMedia,EnumReason.ProcessResult);
 
                 if(!bMinimal)
                 {
-                    stUtil.setResourceAudit(bags[1],EnumReason.ProcessResult);
+                    stUtil.setResourceAudit(refComp,EnumReason.ProcessResult);
 
-                    bags[0].reset();
-                    bags[0].totalAmount=i==0 ? 10200 : 10100;
-                    JDFResourceAudit ra2=stUtil.setResourceAudit(bags[0],EnumReason.OperatorInput);
+                    stUtil.clearAmounts(refMedia);
+                    stUtil.addPhase(refMedia, 1==0 ? 10100 : 10200, 0);
+                    JDFResourceAudit ra2=stUtil.setResourceAudit(refMedia,EnumReason.OperatorInput);
                     ra2.setRef(ra);
                     ra2.setDescriptiveName("manual reset to using only 10200 sheets because 100 initially were  wates");
                 }
@@ -255,5 +256,61 @@ public class AmountTest extends JDFTestCaseBase
             }
             d.write2File(sm_dirTestDataTemp+File.separator+"ConvPrintAmount_"+ (bMinimal ? "min":"full") +".jdf",2,false);
         }
+    }
+    
+    public void testAuditsImageSetting() throws Exception
+    {
+
+        n.removeChildren(null, null, null);
+        n.setType(EnumType.ImageSetting);
+        JDFExposedMedia outXM = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Output);
+        inMedia = (JDFMedia) n.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, null, null, null);
+        
+        rlOut = n.getLink(outXM, null);
+        rlMediaIn = n.getLink(inMedia, null);
+        VElement vRL=new VElement();
+//        vRL.add(rlOut);
+        vRL.add(rlMediaIn);
+
+        outXM=(JDFExposedMedia) outXM.addPartition(EnumPartIDKey.SignatureName, "Sig1");
+        VString vsSheet=new VString("Cover Sheet1 Sheet2"," ");
+        VString vsCMYK=new VString("Cyan Magenta Yellow Black Spot1"," ");
+        StatusCounter stUtil=new StatusCounter(n,null,vRL);
+           
+        for(int i=0;i<vsSheet.size();i++)
+        {
+            String sheet=vsSheet.stringAt(i);
+            VJDFAttributeMap vmP=new VJDFAttributeMap();
+            final JDFAttributeMap attributeMap = new JDFAttributeMap(EnumPartIDKey.SheetName,sheet);
+            attributeMap.put("SignatureName","Sig1");
+            
+            vmP.add(attributeMap);
+            stUtil.setActiveNode(n, vmP, vRL);
+            String refXM=rlOut.getrRef();
+            String refMedia=rlMediaIn.getrRef();
+
+            stUtil.setTrackWaste(refXM,true);
+            stUtil.setTrackWaste(refMedia,false);
+
+            stUtil.setPhase(EnumNodeStatus.Stopped, "PowerOn", EnumDeviceStatus.Stopped, "PowerOn" );
+
+            stUtil.setPhase(EnumNodeStatus.InProgress, "Imaging", EnumDeviceStatus.Running, null);
+            stUtil.addPhase(refMedia,5, 0);
+            stUtil.addPhase(refXM,5, 0);
+            stUtil.setPhase(EnumNodeStatus.InProgress, "Imaging", EnumDeviceStatus.Running, null);
+            
+            JDFResourceAudit ra=stUtil.setResourceAudit(refMedia,EnumReason.ProcessResult);
+
+            JDFProcessRun pr=stUtil.setProcessResult(EnumNodeStatus.Completed);
+            pr.setDescriptiveName("we even have the utterly useless ProcessRun");
+        }
+        d.write2File(sm_dirTestDataTemp+File.separator+"ImageSetAmount_.jdf",2,false);
+        JDFDoc d2=stUtil.getDocJMFResource();
+        JDFJMF jmf=d2.getJMFRoot();
+        JDFSignal sig=jmf.appendSignal(org.cip4.jdflib.jmf.JDFMessage.EnumType.Notification);
+        JDFNotification not=sig.appendNotification();
+        not.setXPathAttribute("MileStone/@MileStoneType", "PrepressCompleted");
+        not.setXPathAttribute("MileStone/@Amount", "5");
+        d2.write2File(sm_dirTestDataTemp+File.separator+"ImageSetAmount_.jmf",2,false);
     }
 }

@@ -1555,6 +1555,16 @@ public class JDFResourceTest extends JDFTestCaseBase
         assertNull(n.getXPathAttribute("ResourcePool/ExposedMedia/ExposedMedia/ExposedMedia/@SignatureName", null));
     }
     /////////////////////////////////////////////////////////////////////////////
+    /**
+     * tests getxpathattribute for partitions
+     */
+    public void testGetXPathElement()
+    {
+        JDFDoc doc=creatXMDoc();
+        JDFNode n=doc.getJDFRoot();
+        assertNotNull(n.getXPathElement("//ResourcePool/ExposedMedia/ExposedMedia[@SignatureName=\"Sig1\"]"));
+    }
+    /////////////////////////////////////////////////////////////////////////////
 
     public void testGetResStatus()
     {

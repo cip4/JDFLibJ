@@ -5031,12 +5031,7 @@ public class KElement extends ElementNSImpl
         else  if (posBAt != -1 && (posBAt<pos || pos==-1)) // parse for [@a="b"]
         {
             int posB1 = path.indexOf("]");
-            map=new JDFAttributeMap();
-            String attEqVal = path.substring(posBAt + 3, posB1);
-            //TODO multiple attributes, maybe tokenize by ","
-            String attName=StringUtil.token(attEqVal, 0, "=");
-            String attVal=attEqVal.substring(attName.length()+2,attEqVal.length()-1);
-            map.put(attName,attVal);
+            map = getXPathAtMap(path, posBAt, posB1);
             newPath = path.substring(0, posBAt) + path.substring(posB1 + 1);
             pos = newPath.indexOf(JDFConstants.SLASH);
         }
@@ -5072,7 +5067,18 @@ public class KElement extends ElementNSImpl
             vRet.add(e);
             return vRet;
         }
-        return getChildrenByTagName(newPath, null, map, true, true,maxSize);
+        return getChildElementVector_KElement(newPath, null, map, true,maxSize);
+    }
+
+    private JDFAttributeMap getXPathAtMap(String path, int posBAt, int posB1)
+    {
+        JDFAttributeMap map = new JDFAttributeMap();
+        String attEqVal = path.substring(posBAt + 3, posB1);
+        //TODO multiple attributes, maybe tokenize by ","
+        String attName=StringUtil.token(attEqVal, 0, "=");
+        String attVal=attEqVal.substring(attName.length()+2,attEqVal.length()-1);
+        map.put(attName,attVal);
+        return map;
     }
 
     /**
@@ -6216,7 +6222,7 @@ public class KElement extends ElementNSImpl
                 if(value.length()<2 || ! value.startsWith("\"") || !value.endsWith("\""))
                     return false;
                 value=value.substring(1, value.length()-1);
-                return value.equals("*")&&hasAttribute(name) || value.equals(getAttribute(name));                       
+                return value.equals("*")&&hasAttribute_KElement(name,null,false) || value.equals(getAttribute_KElement(name));                       
             }
         }
         return false;

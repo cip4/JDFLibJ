@@ -102,8 +102,8 @@ public class StringUtilTest extends JDFTestCaseBase
         assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null),'\\',"/",0),"./a");
         f=new File("../a.b");
         assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null),'\\',"/",0),"../a.b");
-        f=new File("../../a b/b");
-        assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null),'\\',"/",0),"../../a b/b");
+        f=new File("./../a b/b");
+        assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null),'\\',"/",0),"../a b/b");
         f=new File("a/b/c");
         assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null),'\\',"/",0),"./a/b/c");
         f=new File("a/b/c");

@@ -84,6 +84,7 @@ import java.awt.geom.AffineTransform;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
 
+import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.util.HashUtil;
 
 /**
@@ -119,6 +120,67 @@ public class JDFMatrix extends JDFNumList
     public JDFMatrix(Vector v) throws DataFormatException
     {
         super(v);
+    }
+    /**
+     * constructs a matrix with all values set via an enumerated orientation
+     *
+     * @param orientation - the named orientation
+     * @param w the width of the unrotated object to transform
+     * @param h the height of the unrotated object to transform
+     *
+     * @throws DataFormatException - if the Vector has not a valid format
+     */
+    public JDFMatrix(EnumOrientation orientation, double w, double h) 
+    {
+        super(MAX_MATRIX_DIMENSION);
+        if(orientation==null || orientation.equals(EnumOrientation.Rotate0))
+        {
+            setA(1.);
+            setD(1.);
+        }
+        else if(orientation.equals(EnumOrientation.Rotate90))
+        {
+            setB(1.);
+            setC(-1.);
+            setTx(h);
+        }
+        else if(orientation.equals(EnumOrientation.Rotate180))
+        {
+            setA(-1.);
+            setD(-1.);
+            setTx(w);
+            setTy(h);
+        }
+        else if(orientation.equals(EnumOrientation.Rotate270))
+        {
+            setB(-1.);
+            setC(1.);
+            setTy(w);
+        }
+        else if(orientation.equals(EnumOrientation.Flip0))
+        {
+            setA(1.);
+            setD(-1.);
+            setTy(h);
+        }
+        else if(orientation.equals(EnumOrientation.Flip90))
+        {
+            setB(-1.);
+            setC(-1.);
+            setTx(h);
+            setTy(w);
+        }
+        else if(orientation.equals(EnumOrientation.Flip180))
+        {
+            setA(-1.);
+            setD(1.);
+            setTx(w);
+         }
+        else if(orientation.equals(EnumOrientation.Flip270))
+        {
+            setB(1.);
+            setC(1.);
+        }
     }
 
     /**
@@ -411,5 +473,17 @@ public class JDFMatrix extends JDFNumList
     {
         setTx(getTx()+tx);
         setTy(getTy()+ty);        
+    }
+    /**
+     * concatinates this with m
+     * @param m the matrix to concatinate
+     * @param tY shift in y direction
+     */
+    public void concat(JDFMatrix m)
+    {
+        AffineTransform a=getAffineTransform();
+        AffineTransform ma=m.getAffineTransform();
+        a.concatenate(ma);
+        setAffineTransform(a);
     }
 }

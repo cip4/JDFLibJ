@@ -109,6 +109,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFMiscConsumable;
 import org.cip4.jdflib.resource.process.JDFUsageCounter;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.StatusCounter;
 import org.cip4.jdflib.util.StatusUtil;
 import org.cip4.jdflib.util.StatusUtil.AmountBag;
 
@@ -380,44 +381,39 @@ public class DigiPrintTest extends JDFTestCaseBase
         vRL.add(rlComp);
         vRL.add(rlMedia);
         
-        StatusUtil stUtil=new StatusUtil(n,null,vRL);
-        stUtil.setDeviceID("MyDevice");
-        stUtil.setTrackWaste(rlMedia,true);
-        stUtil.setTrackWaste(rlComp,false);       
+        StatusCounter stCounter=new StatusCounter(n,null,vRL);
+        stCounter.setDeviceID("MyDevice");
+        final String mediaRef = rlMedia.getrRef();
+        stCounter.setTrackWaste(mediaRef,true);
+        final String compRef = rlComp.getrRef();
+        stCounter.setTrackWaste(compRef,false);       
         
         doc.write2File(sm_dirTestDataTemp+File.separator+"DigiPrintAmount_initial.jdf",2,false);
 
-        AmountBag[] bags=new AmountBag[vRL.size()];
-        bags[0]=stUtil.new AmountBag(rlComp.getrRef());
-        bags[1]=stUtil.new AmountBag(rlMedia.getrRef());
-
-        stUtil.setPhase(EnumNodeStatus.InProgress, "Waste", EnumDeviceStatus.Running, null,bags);
+        stCounter.setPhase(EnumNodeStatus.InProgress, "Waste", EnumDeviceStatus.Running, null);
         ap.getLastPhase(null).setXMLComment("Phase where warm up waste is produced");
-        bags[0].addPhase(0,2,true);
-        bags[1].addPhase(0,20,true);
+        stCounter.addPhase(mediaRef,0,2);
+        stCounter.addPhase(compRef,0,20);
 
-        stUtil.setPhase(EnumNodeStatus.InProgress, "Waste", EnumDeviceStatus.Running, null,bags);
+        stCounter.setPhase(EnumNodeStatus.InProgress, "Waste", EnumDeviceStatus.Running, null);
 
-        bags[0].addPhase(1,0,true);
-        bags[1].addPhase(10,0,true);
-        stUtil.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, null,bags);
+        stCounter.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, null);
+        stCounter.addPhase(mediaRef,1,0);
+        stCounter.addPhase(compRef,10,0);
+        stCounter.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, null);
         ap.getLastPhase(null).setXMLComment("Phase where 1 proof is produced");
-        
-        bags[0].addPhase(0,0,true);
-        bags[1].addPhase(0,0,true);
-        stUtil.setPhase(EnumNodeStatus.Stopped, "WaitForApproval", EnumDeviceStatus.Stopped, null,bags);
-        ap.getLastPhase(null).setXMLComment("Phase where the proof is evaluated while the device is stopped");
-        stUtil.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, null,bags);
 
-        bags[0].addPhase(99,0,false);
-        bags[1].addPhase(990,0,false);
-        stUtil.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, null,bags);
+        stCounter.setPhase(EnumNodeStatus.Stopped, "WaitForApproval", EnumDeviceStatus.Stopped, null);
+        ap.getLastPhase(null).setXMLComment("Phase where the proof is evaluated while the device is stopped");
+        stCounter.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, null);
+
+        stCounter.addPhase(mediaRef,99,0);
+        stCounter.addPhase(compRef,990,0);
+        stCounter.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, null);
         ap.getLastPhase(null).setXMLComment("Phase where the 100 copies are produced");
         
-        bags[0].addPhase(0,0,true);
-        bags[1].addPhase(0,0,true);
-        stUtil.setPhase(EnumNodeStatus.Completed, "Idle", EnumDeviceStatus.Idle, null,bags);
-        stUtil.setResourceAudit(bags[1], EnumReason.ProcessResult);
+        stCounter.setPhase(EnumNodeStatus.Completed, "Idle", EnumDeviceStatus.Idle, null);
+        stCounter.setResourceAudit(mediaRef, EnumReason.ProcessResult);
         doc.write2File(sm_dirTestDataTemp+File.separator+"DigiPrintProof_final.jdf",2,false);
         
     }
