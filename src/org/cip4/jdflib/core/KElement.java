@@ -5574,7 +5574,7 @@ public class KElement extends ElementNSImpl
             }
         }
 
-        return strBuff.length() < 0 ? null : strBuff.toString();
+        return strBuff.length() <= 0 ? null : strBuff.toString();
     }
 
     /**

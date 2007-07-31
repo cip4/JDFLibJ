@@ -70,11 +70,22 @@
  */
 package org.cip4.jdflib.jmf;
 
+import java.io.File;
+
+import javax.mail.Multipart;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
+import org.cip4.jdflib.util.MimeUtil;
+import org.cip4.jdflib.util.StringUtil;
 
 
 public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
@@ -82,7 +93,7 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
     JDFQueue theQueue;
     JDFJMF theJMF;
     JDFQueueSubmissionParams qsp;
-    
+
     public void setUp() throws Exception
     {
         JDFDoc d=new JDFDoc(ElementName.QUEUE);
@@ -91,7 +102,7 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
         theJMF=d.getJMFRoot();
         qsp=theJMF.appendCommand(EnumType.SubmitQueueEntry).appendQueueSubmissionParams();
     }
-    
+
     /////////////////////////////////////////////////////////////////////////////////////////////
     public void testAddNull() throws Exception
     {
@@ -99,7 +110,7 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
         assertEquals(2,resp.getReturnCode());
     }
     /////////////////////////////////////////////////////////////////////////////////////////////
-    
+
     public void testAddEntry() throws Exception
     {
         JDFResponse resp=qsp.addEntry(theQueue,null);
@@ -119,7 +130,36 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
         assertEquals(theQueue.numEntries(EnumQueueEntryStatus.Held),1);
         assertNotSame(theQueue.getQueueEntry(0).getQueueEntryID(),theQueue.getQueueEntry(1).getQueueEntryID());
     }
-    
+
     /////////////////////////////////////////////////////////////////////////////////////////////
-    
+    public void testGetMimeURL() throws Exception
+    {
+        JDFDoc d1=new JDFDoc("JMF");
+        d1.setOriginalFileName("JMF.jmf");
+        JDFJMF jmf=d1.getJMFRoot();
+        JDFCommand com=(JDFCommand) jmf.appendMessageElement(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.SubmitQueueEntry);
+      
+        com.appendQueueSubmissionParams().setURL("cid:TheJDF");
+        
+        JDFDoc doc=new JDFDoc("JDF");
+        doc.setOriginalFileName("JDF.jdf");  
+        JDFNode n=doc.getJDFRoot();
+        n.setType(JDFNode.EnumType.ColorSpaceConversion);
+        JDFColorSpaceConversionParams cscp=(JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input, null, null, null, null);
+        JDFFileSpec fs0=cscp.appendFinalTargetDevice();
+        fs0.setURL(StringUtil.uncToUrl(sm_dirTestData+File.separator+"test.icc",true));
+        JDFRunList rl=(JDFRunList)n.addResource(ElementName.RUNLIST, null, EnumUsage.Input, null, null, null, null);
+        rl.addPDF(StringUtil.uncToUrl(sm_dirTestData+File.separator+"url1.pdf",false), 0, -1);
+        Multipart m=MimeUtil.buildMimePackage(d1,doc);
+        
+        JDFDoc[] d2=MimeUtil.getJMFSubmission(m);
+        assertNotNull(d2);
+        final JDFQueueSubmissionParams queueSubmissionParams = d2[0].getJMFRoot().getCommand(0).getQueueSubmissionParams(0);
+        assertEquals(queueSubmissionParams.getURL(), "cid:TheJDF");
+        assertEquals(d2[1].getJDFRoot().getEnumType(),JDFNode.EnumType.ColorSpaceConversion);
+        JDFDoc d3=queueSubmissionParams.getURLDoc();
+        assertNotNull(d3);
+        assertEquals(d3.getJDFRoot().getEnumType(),JDFNode.EnumType.ColorSpaceConversion);
+    }
+
 }

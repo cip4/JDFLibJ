@@ -2344,7 +2344,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
             KElement tmpRoot=tmpDoc.getRoot();
             if(JDFElement.class.equals(tmpRoot.getClass()))
             {
-                vs.add(AttributeName.NAME);
+                vs.add(AttributeName.DEVNS); // the element is not a known jdf resource
             }           
         }
         return vs;

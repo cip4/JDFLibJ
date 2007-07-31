@@ -390,7 +390,7 @@ public class XMLDoc
 
         try
         {
-            final File outFile = new File(oFilePath);
+            final File outFile = UrlUtil.urlToFile(oFilePath);
             // ensure having an empty file in case it did not exist
             outFile.delete();
             if (outFile.createNewFile())
