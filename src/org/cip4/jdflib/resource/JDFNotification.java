@@ -292,6 +292,31 @@ public class JDFNotification extends JDFAutoNotification
 	public JDFEvent getEvent() {
 		return (JDFEvent) getElement(ElementName.EVENT, null, 0);
 	}
+
+	/**
+	* get element <code>Milestone</code>, create if it doesn't exist
+	* @return JDFMilestone: the element
+	*/
+	public JDFMilestone getCreateMilestone() {
+		return (JDFMilestone) getCreateElement_KElement(ElementName.MILESTONE,
+				null, 0);
+	}
+
+	/**
+	 * append element <code>Milestone</code>
+	 * @return JDFMilestone: the element 
+	 */
+	public JDFMilestone appendMilestone() {
+		return (JDFMilestone) appendElementN(ElementName.MILESTONE, 1, null);
+	}
+
+	/**
+	 * get element <code>Milestone</code>
+	 * @return JDFMilestone: the element
+	 */
+	public JDFMilestone getMilestone() {
+		return (JDFMilestone) getElement(ElementName.MILESTONE, null, 0);
+	}
    
 } // class JDFNotification
 // ==========================================================================

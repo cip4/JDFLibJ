@@ -256,7 +256,7 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
                 {
                     // internal error
                     String message = "(DocumentJDFImpl.createElementNS) getFactoryClass() " + 
-                                     "class " + qualifiedName + " could not be created"
+                                     "class " + e.getMessage() + " could not be created"
                                      + " (surplus line in sm_PackageNames or non existing class ???)";
                     throw new DOMException(DOMException.NOT_FOUND_ERR, message);
                 }
@@ -409,7 +409,12 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
                 }
                 
                 // assert strClassPath != null
-                packageNameClass = Class.forName(strClassPath);
+                try {
+					packageNameClass = Class.forName(strClassPath);
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					throw new ClassNotFoundException(e.getMessage(), e);
+				}
                 
                 if (normalElement || strClassPath.equals(sm_PackageNames.get("ResDefault")))
                 {
@@ -975,6 +980,7 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
         sm_PackageNames.put(ElementName.MESSAGE,                           "org.cip4.jdflib.jmf.JDFMessage");
         sm_PackageNames.put(ElementName.MESSAGESERVICE,                    "org.cip4.jdflib.jmf.JDFMessageService");
 //      "Method" is context sensitive, see handleOtherElements() and putConstructorToHashMap()
+        sm_PackageNames.put(ElementName.MILESTONE,                    	   "org.cip4.jdflib.resource.JDFMilestone");
         sm_PackageNames.put(ElementName.MISCCONSUMABLE,                    "org.cip4.jdflib.resource.process.JDFMiscConsumable");
         sm_PackageNames.put(ElementName.MISDETAILS,                        "org.cip4.jdflib.resource.process.JDFMISDetails");
         sm_PackageNames.put(ElementName.MODIFIED,                          "org.cip4.jdflib.resource.JDFModified");
