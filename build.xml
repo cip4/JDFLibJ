@@ -100,7 +100,7 @@
 	<target name="spam" depends="major_jar" description="Builds a JAR archive containing the JDFLib-J binaries.">
 		<copy tofile="../Bambi/src/lib/${major.filename}.jar" file="${dist.dir}/${major.filename}.jar"/>
 		<copy tofile="../JDFUtility/src/lib/${major.filename}.jar" file="${dist.dir}/${major.filename}.jar"/>
-		<copy tofile="../JDFEditor/src/lib/${major.filename}.jar" file="${dist.dir}/${major.filename}.jar"/>
+		<copy tofile="../JDFEditor/lib/${major.filename}.jar" file="${dist.dir}/${major.filename}.jar"/>
 		<copy tofile="../elk/src/lib/${major.filename}.jar" file="${dist.dir}/${major.filename}.jar"/>
 		<copy tofile="../alces/src/lib/${major.filename}.jar" file="${dist.dir}/${major.filename}.jar"/>
 	</target>
