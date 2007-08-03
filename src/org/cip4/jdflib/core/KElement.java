@@ -6215,14 +6215,14 @@ public class KElement extends ElementNSImpl
             if(token.startsWith("@"))
             {
                 token=token.substring(1);
-                String name=StringUtil.token(token, 0, "=");
+                String nam=StringUtil.token(token, 0, "=");
                 String value=StringUtil.token(token, 1, "=");
                 if(value==null)
                     return false;
                 if(value.length()<2 || ! value.startsWith("\"") || !value.endsWith("\""))
                     return false;
                 value=value.substring(1, value.length()-1);
-                return value.equals("*")&&hasAttribute_KElement(name,null,false) || value.equals(getAttribute_KElement(name));                       
+                return value.equals("*")&&hasAttribute_KElement(nam,null,false) || value.equals(getAttribute_KElement(nam));                       
             }
         }
         return false;

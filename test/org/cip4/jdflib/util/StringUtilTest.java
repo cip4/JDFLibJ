@@ -422,7 +422,7 @@ public class StringUtilTest extends JDFTestCaseBase
 
     public void testuncToUrl(){
         String unc="\\\\myHost\\a\\.\\b\\..\\c äöü%.txt";
-        String iri="file://myHost/a/c%20Ã¤Ã¶Ã¼%25.txt";
+        String iri="file://myHost/a/c%20äöü%25.txt";
         String uri="file://myHost/a/c%20%c3%a4%c3%b6%c3%bc%25.txt";
 
         try

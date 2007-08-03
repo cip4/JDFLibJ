@@ -1883,7 +1883,7 @@ public class KElementTest extends JDFTestCaseBase
         assertTrue(e1.hasChildText());
 
         e1.removeAllText();
-        assertEquals(JDFConstants.EMPTYSTRING, e1.getText());
+        assertNull(e1.getText());
         assertFalse(e1.hasChildText());
 
         e1.appendText("foo");
@@ -1907,7 +1907,7 @@ public class KElementTest extends JDFTestCaseBase
         e1.removeChildText(0);
         assertEquals(e1.getNumChildText(), 0);
         assertEquals(null, e1.getText(0));                      // getText(i) can return null
-        assertEquals(JDFConstants.EMPTYSTRING, e1.getText());   // getText() can't return null !!!
+        assertNull(e1.getText());   // getText() can return null !!!
         assertFalse(e1.hasChildText());
 
         e1.removeAllText();

@@ -113,7 +113,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
         {
             fail("exception");
         }
-        assertEquals(fs.getURL(), new String(StringUtil.setUTF8String("file:///C:/ist%20blöd/fnord%20is%20€")));
+        assertEquals(fs.getURL(), "file:///C:/ist%20blöd/fnord%20is%20€");
         assertEquals(fs2.getURL(),"file:///C:/ist%20bl%c3%b6d/fnord%20is%20%e2%82%ac");
     }
     

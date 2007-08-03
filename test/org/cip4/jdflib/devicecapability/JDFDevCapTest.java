@@ -337,14 +337,14 @@ public class JDFDevCapTest extends TestCase
         dc.setDevNS(null);
         assertEquals(dc.getInvalidAttributes(EnumValidationLevel.Complete, true, 0).size(),0);
         dc.setName("Foo");
-        assertTrue(dc.getInvalidAttributes(EnumValidationLevel.RecursiveComplete, true, 0).contains("Name"));
-        assertTrue(dc.getInvalidAttributes(EnumValidationLevel.Complete, true, 0).contains("Name"));
+        assertTrue(dc.getInvalidAttributes(EnumValidationLevel.RecursiveComplete, true, 0).contains("DevNS"));
+        assertTrue(dc.getInvalidAttributes(EnumValidationLevel.Complete, true, 0).contains("DevNS"));
         dc.setName("FooLink");
-        assertFalse(dc.getInvalidAttributes(EnumValidationLevel.Complete, true, 0).contains("Name"));
+        assertFalse(dc.getInvalidAttributes(EnumValidationLevel.Complete, true, 0).contains("DevNS"));
         dc.setName("ScreeningParams");
-        assertFalse(dc.getInvalidAttributes(EnumValidationLevel.Complete, true, 0).contains("Name"));
+        assertFalse(dc.getInvalidAttributes(EnumValidationLevel.Complete, true, 0).contains("DevNS"));
         dc.setName("ScreeningParams_");
-        assertTrue(dc.getInvalidAttributes(EnumValidationLevel.Complete, true, 0).contains("Name"));
+        assertTrue(dc.getInvalidAttributes(EnumValidationLevel.Complete, true, 0).contains("DevNS"));
         
     }
            

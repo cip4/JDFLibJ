@@ -106,6 +106,38 @@ import org.cip4.jdflib.core.VString;
  */
 public class UrlUtil
 {
+    /**
+     * simple struct to contain the stream and type of a bodypart
+     * @author prosirai
+     *
+     */
+    public static class UrlPart
+    {
+        /**
+         * @param connection
+         * @throws IOException 
+         */
+        public UrlPart(URLConnection connection) throws IOException
+        {
+            inStream=connection.getInputStream();
+            contentLength=connection.getContentLength();
+            contentType=connection.getContentType();
+        }
+        /**
+         * @param part
+         * @throws MessagingException 
+         * @throws IOException 
+         */
+        public UrlPart(BodyPart part) throws MessagingException, IOException
+        {
+            inStream=part.getInputStream();
+            contentLength=part.getSize();
+            contentType=part.getContentType();
+        }
+        public InputStream inStream;
+        public String contentType;
+        public int contentLength;
+    }
 //  public static final String m_URIEscape = "%?:@&=+$,[]";
     public static final String m_URIEscape = "%?@&=+$,[]";
 
@@ -240,6 +272,62 @@ public class UrlUtil
     }
 
     /**
+     * get an array of urlparts, regardless of whether this was mime or not
+     * if the stream is mime/multipart get also extract that
+     * @return the array of body parts input stream
+     */
+    public static UrlPart[] getURLParts(URLConnection connection)
+    {
+        if(connection==null)
+            return null;
+        String urlContentType=connection.getContentType();
+        if(!MimeUtil.MULTIPART_RELATED.equalsIgnoreCase(urlContentType))
+        {
+            UrlPart p;
+            try
+            {
+                p = new UrlPart(connection);
+            }
+            catch (IOException x)
+            {
+                return null;
+            }
+            return new UrlPart[]{p};
+        }
+
+        Multipart mp;
+        try
+        {
+            mp = MimeUtil.getMultiPart(connection.getInputStream());
+        }
+        catch (IOException x)
+        {
+            return null;
+        }
+        BodyPart bp[]=MimeUtil.getBodyParts(mp);
+        if(bp==null)
+            return null;
+        UrlPart[] parts=new UrlPart[bp.length];
+        for(int i=0;i<bp.length;i++)
+        {
+            try
+            {
+                String bpContent=bp[i].getContentType();
+                parts[i]=new UrlPart(bp[i]);
+            }
+            catch (MessagingException e) 
+            {
+                parts[i]=null;
+            }
+            catch (IOException e) 
+            {
+                parts[i]=null;
+            }
+
+        }
+        return parts;
+    }
+    /**
      * get the opened input stream for a given url string
      * 
      * @param urlString
@@ -330,9 +418,9 @@ public class UrlUtil
 
         String s=f.getAbsolutePath();
         s=StringUtil.replaceChar(s,'\\',"/",0);
-        s=new String(StringUtil.setUTF8String(s));
         if(bEscape128)
         {
+            s=new String(StringUtil.setUTF8String(s));
             s= StringUtil.escape(s,m_URIEscape,"%",16,2,0x21,127);
         }
         else
