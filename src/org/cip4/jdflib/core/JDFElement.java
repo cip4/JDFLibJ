@@ -2378,11 +2378,21 @@ public class JDFElement extends KElement
             final JDFJMF m=getJMFRoot();
             if(m!=null)
             {
+            	//For some reason, only this function produced local to be "New Value" and caused the JDF Schema validation to be
+            	//messed up. I hacked it to reset it to "" and everything works fine now. I don't understand how/where it sets
+            	//local to "New Value".
+
+            	final String local1 = "New Value";
                 local=m.getSenderID();
+                if (local.equals(local1))
+                {
+                	local = "";
+                }
                 if(!isWildCard(local))
-                    local="."+local+".";
+                    local = "." + local + ".";
             }
-            strName = getIDPrefix() + local+uniqueID(0);
+            //Possibly where the JMF Messages get there "General" ID value
+            strName = getIDPrefix() + local + uniqueID(0);
         }
         setAttribute(AttributeName.ID, strName, null);
 
@@ -2792,7 +2802,7 @@ public class JDFElement extends KElement
         if(bIDDate)
         {
             final String date = dateFormatter.format(new Date());
-            return date +"_" + s.substring(s.length()-6);
+            return date + "_" + s.substring(s.length()-6);
         }
         return s.substring(s.length()-6);
     }
