@@ -2192,12 +2192,12 @@ public class JDFElement extends KElement
             int iSkip)
     {
         // loop over the list
-        int i                       = 0;
+        int i = 0;
         if(iSkip<0)
             iSkip=numChildElements_JDFElement(nodeName, nameSpaceURI)+iSkip;
         if(iSkip<0)
             return null;
-        KElement jdfElem          = getFirstChildElement();
+        KElement jdfElem = getFirstChildElement();
         final boolean bExplicitRefElement = (nodeName!=null) && (nodeName.endsWith(JDFConstants.REF));
 
         while (jdfElem != null)
@@ -2372,6 +2372,7 @@ public class JDFElement extends KElement
             if(n!=null)
             {
                 local=n.getSpawnID(true);
+                
                 if(!isWildCard(local))
                     local="."+StringUtil.rightStr(local, 6)+".";
             }
@@ -2384,14 +2385,13 @@ public class JDFElement extends KElement
 
             	final String local1 = "New Value";
                 local=m.getSenderID();
+                
                 if (local.equals(local1))
-                {
-                	local = "";
-                }
+                { local = "";}
+                
                 if(!isWildCard(local))
                     local = "." + local + ".";
             }
-            //Possibly where the JMF Messages get there "General" ID value
             strName = getIDPrefix() + local + uniqueID(0);
         }
         setAttribute(AttributeName.ID, strName, null);
