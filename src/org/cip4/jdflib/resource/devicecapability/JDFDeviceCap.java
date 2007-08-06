@@ -118,6 +118,8 @@ public class JDFDeviceCap extends JDFAutoDeviceCap
 {
     private static final long serialVersionUID = 1L;
     private boolean ignoreExtensions=false;
+    private boolean ignoreDefaults=false;
+
     /**
      * Constructor for JDFDeviceCap
      * @param myOwnerDocument
@@ -1138,6 +1140,22 @@ public static JDFMessageService getMessageServiceForJMFType(JDFMessage m, JDFRes
     public void setIgnoreExtensions(boolean _ignoreExtensions)
     {
         this.ignoreExtensions = _ignoreExtensions;
+    }
+
+    /**
+     * @return the ignoreDefaults
+     */
+    public boolean isIgnoreDefaults()
+    {
+        return ignoreDefaults;
+    }
+
+    /**
+     * @param ignoreDefaults the ignoreDefaults to set
+     */
+    public void setIgnoreDefaults(boolean ignoreDefaults)
+    {
+        this.ignoreDefaults = ignoreDefaults;
     }
     
 }

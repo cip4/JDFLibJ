@@ -95,10 +95,9 @@ import org.cip4.jdflib.resource.process.JDFMedia;
  */
 public abstract class JDFTestCaseBase extends TestCase
 {
-    private static final String SEPARATOR = File.separator; // "/"; //
-	static protected final String sm_dirTestSchema   = ".." + SEPARATOR + "schema" + SEPARATOR + "Version_1_3" + SEPARATOR;
-    static protected final String sm_dirTestData     = "test" + SEPARATOR + "data" + SEPARATOR;
-    static protected final String sm_dirTestDataTemp = sm_dirTestData + "temp" + SEPARATOR;
+    static protected final String sm_dirTestSchema   = ".." + File.separator + "schema" + File.separator + "Version_1_3" + File.separator;
+    static protected final String sm_dirTestData     = "test" + File.separator + "data" + File.separator;
+    static protected final String sm_dirTestDataTemp = sm_dirTestData + "temp" + File.separator;
     public static JDFDoc creatXMDoc()
     {
         JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_3);

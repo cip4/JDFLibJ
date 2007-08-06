@@ -215,15 +215,25 @@ public class StatusCounter
     {
         m_Node=node;
         m_vPartMap=vPartMap;
+        vLinkAmount=null;
+        workStepID=null;
+        firstRefID=null;
+        docJMFResource=null;
+        docJMFPhaseTime=null;
+        if(node==null)
+        {
+            setPhase(null, null, EnumDeviceStatus.Idle, null);
+        }
+        
         JDFAttributeMap wsMap=null;
-        if(m_vPartMap==null)
+        if(m_vPartMap==null && m_Node!=null)
         {
             m_vPartMap = m_Node.getPartMapVector();
         }
         if(m_vPartMap!=null && m_vPartMap.size()>0)
             wsMap=m_vPartMap.elementAt(0);
         
-        workStepID=node.getWorkStepID(wsMap);
+        workStepID=node!=null ? node.getWorkStepID(wsMap) : null;
         if(vResLinks==null && m_Node!=null)
         {
             vResLinks=m_Node.getResourceLinks(null);            
@@ -353,6 +363,9 @@ public class StatusCounter
      */
     public boolean setPhase(EnumNodeStatus nodeStatus, String nodeStatusDetails, EnumDeviceStatus deviceStatus, String deviceStatusDetails)
     {
+        if(m_Node==null)
+            return setIdlePhase(deviceStatus, deviceStatusDetails);
+        
         docJMFPhaseTime=new JDFDoc(ElementName.JMF);
         JDFJMF jmf=docJMFPhaseTime.getJMFRoot();
         docJMFResource=new JDFDoc(ElementName.JMF);
@@ -363,81 +376,119 @@ public class StatusCounter
         JDFAuditPool ap=m_Node.getCreateAuditPool();
         // TODO rethink when to send 2 phases
         JDFPhaseTime pt1= ap.getLastPhase(m_vPartMap);
-        JDFPhaseTime pt2=pt1;
-        boolean bEnd=nodeStatus.equals(EnumNodeStatus.Completed) || nodeStatus.equals(EnumNodeStatus.Aborted);
+        JDFPhaseTime pt2= pt1;
+        boolean bEnd=EnumNodeStatus.Completed.equals(nodeStatus) || EnumNodeStatus.Aborted.equals(nodeStatus);
         boolean bChanged=bEnd || pt1==null; // no previous audit or over and out
 
         pt2=ap.setPhase(nodeStatus,nodeStatusDetails,m_vPartMap);
         if(bEnd )
         {
-            JDFProcessRun pr=(JDFProcessRun) ap.addAudit(EnumAuditType.ProcessRun, null);
-            pr.setPartMapVector(m_vPartMap);
-            VElement audits=ap.getAudits(EnumAuditType.PhaseTime, null, m_vPartMap);
-            for(int i=0;i<audits.size();i++)
-            {
-                pr.addPhase((JDFPhaseTime)audits.elementAt(i));
-            }
-            pr.setEndStatus(nodeStatus);
+            appendProcessRun(nodeStatus, ap);
         }
-
-        JDFResponse s=null;
+        JDFResponse respStatus=null;
         if(pt1!=null && pt2!=pt1) // we explicitly added a new phasetime audit, thus we need to add a closing JMF for the original jobPhase
         {
             bChanged=true;
-            s=(JDFResponse)jmf.appendMessageElement(JDFMessage.EnumFamily.Response,JDFMessage.EnumType.Status);
-            JDFDeviceInfo deviceInfo = s.appendDeviceInfo();
-            JDFJobPhase jp=deviceInfo.createJobPhaseFromPhaseTime(pt1);
-            jp.setJobID(m_Node.getJobID(true));
-            jp.setJobPartID(m_Node.getJobPartID(false));
-            setJobPhaseAmounts(la, jp);
-
-            if(m_deviceID!=null) {
-                pt2.appendDevice().setDeviceID(m_deviceID);
-            }
-            // cleanup!
-            if(vLinkAmount!=null)
-            {
-                for(int i=0;i<vLinkAmount.length;i++)
-                {
-                    vLinkAmount[i].lastBag.addPhase(0, 0, true);
-                }
-            }
+            respStatus = closeJobPhase(jmf, la, pt1, pt2);
         }
 
         if(pt2!=null)
         {
-            if(s==null)
-            {
-                s=(JDFResponse)jmf.appendMessageElement(JDFMessage.EnumFamily.Response,JDFMessage.EnumType.Status);
-            }
-            JDFDeviceInfo deviceInfo = s.appendDeviceInfo();
-            if(!bEnd) // don't write a jobphase for an idle device
-            {
-                JDFJobPhase jp=deviceInfo.createJobPhaseFromPhaseTime(pt2);
-                setJobPhaseAmounts(la, jp);
-            }
-
-            deviceInfo.setDeviceStatus(deviceStatus);
-            deviceInfo.setStatusDetails(deviceStatusDetails);
-            deviceInfo.setDeviceID(m_deviceID);
-            m_Node.setPartStatus(m_vPartMap,nodeStatus);
-            getVResLink(2);// update the nodes links
-
+            //TODO rethink this line - if removed 2 explicit responses are generated
+            updateCurrentJobPhase(nodeStatus, deviceStatus, deviceStatusDetails, jmf, la, pt2, bEnd, respStatus);
             generateResourceSignal(jmfRes);
-
-            if(bEnd)
-            {
-                pt2.deleteNode(); // zapp the last phasetime
-            }
-            else
-            {
-                pt2.setLinks(getVResLink(1));
-                pt2.eraseEmptyAttributes(true);
-            }
         }
 
         jmf.eraseEmptyAttributes(true);
         return bChanged;
+    }
+
+    /**
+     * @param deviceStatus
+     * @param deviceStatusDetails
+     * @return true if change since last time
+     */
+    private boolean setIdlePhase(EnumDeviceStatus deviceStatus, String deviceStatusDetails)
+    {        
+        boolean bChanged = docJMFPhaseTime==null; // first aftersetPhase
+        JDFResponse r=bChanged ? null : docJMFPhaseTime.getJMFRoot().getResponse(0);
+        JDFDeviceInfo di2=r==null ? null : r.getDeviceInfo(-1);
+       
+        bChanged=bChanged || !ContainerUtil.equals(deviceStatusDetails, di2==null ? null : di2.getAttribute(AttributeName.STATUSDETAILS,null,null));
+        JDFDate d = ( di2==null || di2.getStartTime()==null || bChanged) ? new JDFDate() : di2.getStartTime();
+        
+        docJMFPhaseTime=new JDFDoc(ElementName.JMF);
+        JDFDeviceInfo di=docJMFPhaseTime.getJMFRoot().appendResponse(EnumType.Status).appendDeviceInfo();
+        di.setDeviceStatus(deviceStatus);
+        di.setStatusDetails(deviceStatusDetails);
+        di.setStartTime(d);
+        return bChanged;
+    }
+
+    private void updateCurrentJobPhase(EnumNodeStatus nodeStatus, EnumDeviceStatus deviceStatus, String deviceStatusDetails, JDFJMF jmf, final LinkAmount la, JDFPhaseTime pt2, boolean bEnd, JDFResponse respStatus)
+    {
+        if(respStatus==null) 
+        {
+            respStatus=(JDFResponse)jmf.appendMessageElement(JDFMessage.EnumFamily.Response,JDFMessage.EnumType.Status);
+        }
+        JDFDeviceInfo deviceInfo = respStatus.appendDeviceInfo();
+        if(!bEnd) // don't write a jobphase for an idle device
+        {
+            JDFJobPhase jp=deviceInfo.createJobPhaseFromPhaseTime(pt2);
+            setJobPhaseAmounts(la, jp);
+        }
+
+        deviceInfo.setDeviceStatus(deviceStatus);
+        deviceInfo.setStatusDetails(deviceStatusDetails);
+        deviceInfo.setDeviceID(m_deviceID);
+        m_Node.setPartStatus(m_vPartMap,nodeStatus);
+        getVResLink(2);// update the nodes links
+ 
+        if(bEnd)
+        {
+            pt2.deleteNode(); // zapp the last phasetime
+        }
+        else
+        {
+            pt2.setLinks(getVResLink(1));
+            pt2.eraseEmptyAttributes(true);
+        }
+    }
+
+    private JDFResponse closeJobPhase(JDFJMF jmf, final LinkAmount la, JDFPhaseTime pt1, JDFPhaseTime pt2)
+    {
+        JDFResponse respStatus;
+        respStatus=(JDFResponse)jmf.appendMessageElement(JDFMessage.EnumFamily.Response,JDFMessage.EnumType.Status);
+        JDFDeviceInfo deviceInfo = respStatus.appendDeviceInfo();
+        JDFJobPhase jp=deviceInfo.createJobPhaseFromPhaseTime(pt1);
+        jp.setJobID(m_Node.getJobID(true));
+        jp.setJobPartID(m_Node.getJobPartID(false));
+        setJobPhaseAmounts(la, jp);
+
+        if(m_deviceID!=null) {
+            pt2.appendDevice().setDeviceID(m_deviceID);
+        }
+        // cleanup!
+        if(vLinkAmount!=null)
+        {
+            for(int i=0;i<vLinkAmount.length;i++)
+            {
+                vLinkAmount[i].lastBag.addPhase(0, 0, true);
+            }
+        }
+        return respStatus;
+    }
+
+    private void appendProcessRun(EnumNodeStatus nodeStatus, JDFAuditPool ap)
+    {
+        JDFProcessRun pr=(JDFProcessRun) ap.addAudit(EnumAuditType.ProcessRun, null);
+        pr.setPartMapVector(m_vPartMap);
+        VElement audits=ap.getAudits(EnumAuditType.PhaseTime, null, m_vPartMap);
+        for(int i=0;i<audits.size();i++)
+        {
+            pr.addPhase((JDFPhaseTime)audits.elementAt(i));
+        }
+        pr.setEndStatus(nodeStatus);
     }
 
     /**

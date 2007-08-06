@@ -132,5 +132,17 @@ public class JDFNodeInfoTest extends JDFTestCaseBase
         assertTrue(niPart.hasAttribute("WorkStepID"));
     }
     /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    public void testCPI() throws Exception
+    {
+        JDFDoc d=new JDFDoc(ElementName.JDF);
+        JDFNode n=d.getJDFRoot();
+        n.setType("Combined",true);
+        n.setTypes(new VString("ConventionalPrinting Folding"," "));
+        
+        JDFNodeInfo ni=n.getCreateNodeInfo(); 
+        JDFResourceLink rl=n.getLink(ni, null);
+        assertFalse(rl.hasAttribute(AttributeName.COMBINEDPROCESSINDEX));
+    }
 
 }

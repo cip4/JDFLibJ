@@ -75,6 +75,7 @@
  */
 package org.cip4.jdflib.util;
 
+import java.util.TimeZone;
 import java.util.zip.DataFormatException;
 
 import junit.framework.TestCase;
@@ -153,8 +154,7 @@ public class JDFDateTest extends TestCase
         String strDate = date.getDateTimeISO();
         date = new JDFDate("2006-11-26");
         strDate = date.getDateTimeISO();
-        assertEquals("Bug "+strDate,strDate,"2006-11-26T00:00:00+00:00");
-
+        assertEquals("Bug "+strDate,strDate,"2006-11-26T00:00:00"+new JDFDate().getTimeZoneISO());
     }
 
     /**
@@ -331,6 +331,16 @@ public class JDFDateTest extends TestCase
             v[i]=d;
             d.addOffset(0, 0, 1, 0);
             d=new JDFDate(d.getDateTimeISO());
+            if(i>0)
+                assertTrue(d.after(v[i-1]));
         }
     }   
+    ///////////////////////////////////////////////////////
+    public void testTimeZone() throws Exception
+    {
+        TimeZone t=TimeZone.getDefault();        
+        JDFDate d=new JDFDate();
+        assertEquals(t.getOffset(System.currentTimeMillis()), d.getTimeZoneOffsetInMillis());
+        
+     }   
 }

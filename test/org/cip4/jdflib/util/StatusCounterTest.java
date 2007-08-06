@@ -76,6 +76,7 @@ import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJobPhase;
 import org.cip4.jdflib.jmf.JDFResponse;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
@@ -131,4 +132,45 @@ public class StatusCounterTest extends JDFTestCaseBase
         jp=sig.getDeviceInfo(0).getJobPhase(0);
         assertFalse(jp.hasAttribute(AttributeName.AMOUNT));
     }
+    
+    
+    public void testIdle()
+    {
+        JDFDoc d=creatXMDoc();
+        JDFNode n=d.getJDFRoot();
+        StatusCounter sc=new StatusCounter(n,null,null);
+        JDFExposedMedia m=(JDFExposedMedia) n.getMatchingResource("ExposedMedia", null, null, 0);
+        String resID=m.getID();
+        sc.setFirstRefID(resID);
+        sc.addPhase(resID, 200, 0);
+        boolean bChanged=sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
+        assertTrue(bChanged);
+        JDFDoc docJMF=sc.getDocJMFPhaseTime();
+        JDFResponse sig=(JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
+        JDFDeviceInfo deviceInfo = sig.getDeviceInfo(0);
+        JDFJobPhase jp=deviceInfo.getJobPhase(0);
+        assertEquals(jp.getAmount(), 200,0);
+        sc.addPhase(resID, 0, 100);
+        sc.setTrackWaste(m.getID(), true);
+        bChanged= sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
+        assertFalse(bChanged);
+        docJMF=sc.getDocJMFPhaseTime();
+        sig=(JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
+        bChanged= sc.setPhase(EnumNodeStatus.Completed, null, EnumDeviceStatus.Idle, null);
+        assertTrue(bChanged);
+        
+        sc.setActiveNode(null, null, null);
+        bChanged= sc.setPhase(null, null, EnumDeviceStatus.Idle, null);
+        assertFalse(bChanged);
+        bChanged=sc.setPhase(null, null, EnumDeviceStatus.Idle, "very idle");
+        assertTrue(bChanged);
+
+       
+
+        docJMF=sc.getDocJMFPhaseTime();
+        sig=(JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
+        deviceInfo=sig.getDeviceInfo(0);
+        jp=deviceInfo.getJobPhase(0);
+        assertNull(jp);
+    }    
 }

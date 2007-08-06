@@ -1424,7 +1424,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public JDFJobPhase getJobPhase(int iSkip)
     {
-        return (JDFJobPhase) getValidElement(ElementName.JOBPHASE, JDFConstants.EMPTYSTRING, iSkip);
+        return (JDFJobPhase) getValidElement(ElementName.JOBPHASE, null, iSkip);
     }
     //////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////
@@ -1437,7 +1437,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFKnownMsgQuParams getCreateKnownMsgQuParams(int iSkip)
     {
         return (JDFKnownMsgQuParams)
-        getCreateValidElement(ElementName.KNOWNMSGQUPARAMS, JDFConstants.EMPTYSTRING, iSkip);
+        getCreateValidElement(ElementName.KNOWNMSGQUPARAMS, null, iSkip);
     }
     /////////////////////////////////////////////////////////////////////
 
@@ -1459,7 +1459,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public JDFKnownMsgQuParams getKnownMsgQuParams(int iSkip)
     {
-        return (JDFKnownMsgQuParams) getValidElement(ElementName.KNOWNMSGQUPARAMS, JDFConstants.EMPTYSTRING, iSkip);
+        return (JDFKnownMsgQuParams) getValidElement(ElementName.KNOWNMSGQUPARAMS, null, iSkip);
     }
 
     //////////////////////////////////////////////////////////////////////
@@ -1473,7 +1473,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFMessageService getCreateMessageService(int iSkip)
     {
         return (JDFMessageService)
-        getCreateValidElement(ElementName.MESSAGESERVICE, JDFConstants.EMPTYSTRING, iSkip);
+        getCreateValidElement(ElementName.MESSAGESERVICE, null, iSkip);
     }
 
     /////////////////////////////////////////////////////////////////////
@@ -1493,7 +1493,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public JDFMessageService getMessageService(int iSkip)
     {
-        return (JDFMessageService) getValidElement(ElementName.MESSAGESERVICE, JDFConstants.EMPTYSTRING, iSkip);
+        return (JDFMessageService) getValidElement(ElementName.MESSAGESERVICE, null, iSkip);
     }
 
     //////////////////////////////////////////////////////////////////////
@@ -1507,7 +1507,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public JDFMsgFilter getCreateMsgFilter(int iSkip)
     {
-        return  (JDFMsgFilter) getCreateValidElement(ElementName.MSGFILTER, JDFConstants.EMPTYSTRING, iSkip);
+        return  (JDFMsgFilter) getCreateValidElement(ElementName.MSGFILTER, null, iSkip);
     }
 
     /////////////////////////////////////////////////////////////////////
@@ -1529,7 +1529,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public JDFMsgFilter getMsgFilter(int iSkip)
     {
-        return (JDFMsgFilter) getValidElement(ElementName.MSGFILTER, JDFConstants.EMPTYSTRING, iSkip);
+        return (JDFMsgFilter) getValidElement(ElementName.MSGFILTER, null, iSkip);
     }
     //////////////////////////////////////////////////////////////////////
 
@@ -1542,7 +1542,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFNotificationDef getCreateNotificationDef(int iSkip)
     {
         return  (JDFNotificationDef)
-        getCreateValidElement(ElementName.NOTIFICATIONDEF, JDFConstants.EMPTYSTRING, iSkip);
+        getCreateValidElement(ElementName.NOTIFICATIONDEF, null, iSkip);
     }
     /////////////////////////////////////////////////////////////////////
 
@@ -1563,7 +1563,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public JDFNotificationDef getNotificationDef(int iSkip)
     {
-        return (JDFNotificationDef) getValidElement(ElementName.NOTIFICATIONDEF, JDFConstants.EMPTYSTRING, iSkip);
+        return (JDFNotificationDef) getValidElement(ElementName.NOTIFICATIONDEF, null, iSkip);
     }
 
     //////////////////////////////////////////////////////////////////////
@@ -1578,7 +1578,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFNotificationFilter getCreateNotificationFilter(int iSkip)
     {
         return  (JDFNotificationFilter)
-        getCreateValidElement(ElementName.NOTIFICATIONFILTER, JDFConstants.EMPTYSTRING, iSkip);
+        getCreateValidElement(ElementName.NOTIFICATIONFILTER, null, iSkip);
     }
 
     /////////////////////////////////////////////////////////////////////
@@ -1600,7 +1600,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public JDFNotificationFilter getNotificationFilter(int iSkip)
     {
-        return (JDFNotificationFilter) getValidElement(ElementName.NOTIFICATIONFILTER, JDFConstants.EMPTYSTRING, iSkip);
+        return (JDFNotificationFilter) getValidElement(ElementName.NOTIFICATIONFILTER, null, iSkip);
     }
     //////////////////////////////////////////////////////////////////////
 
@@ -1614,7 +1614,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFOccupation getCreateOccupation(int iSkip)
     {
         return (JDFOccupation)
-        getCreateValidElement(ElementName.OCCUPATION, JDFConstants.EMPTYSTRING, iSkip);
+        getCreateValidElement(ElementName.OCCUPATION, null, iSkip);
     }
     /////////////////////////////////////////////////////////////////////
 
@@ -1634,7 +1634,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public JDFOccupation getOccupation(int iSkip)
     {
-        return (JDFOccupation) getValidElement(ElementName.OCCUPATION, JDFConstants.EMPTYSTRING, iSkip);
+        return (JDFOccupation) getValidElement(ElementName.OCCUPATION, null, iSkip);
     }
     //////////////////////////////////////////////////////////////////////
 
@@ -1648,7 +1648,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFPipeParams getCreatePipeParams(int iSkip)
     {
         return  (JDFPipeParams)
-        getCreateValidElement(ElementName.PIPEPARAMS, JDFConstants.EMPTYSTRING, iSkip);
+        getCreateValidElement(ElementName.PIPEPARAMS, null, iSkip);
     }
     /////////////////////////////////////////////////////////////////////
 
@@ -1689,7 +1689,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public JDFQueue getCreateQueue(int iSkip)
     {
-        return (JDFQueue) getCreateValidElement(ElementName.QUEUE, JDFConstants.EMPTYSTRING, iSkip);
+        return (JDFQueue) getCreateValidElement(ElementName.QUEUE, null, iSkip);
     }
 
     /////////////////////////////////////////////////////////////////////
@@ -1711,7 +1711,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public JDFQueue getQueue(int iSkip)
     {
-        return (JDFQueue) getValidElement(ElementName.QUEUE, JDFConstants.EMPTYSTRING, iSkip);
+        return (JDFQueue) getValidElement(ElementName.QUEUE, null, iSkip);
     }
     //////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////
@@ -1724,7 +1724,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFQueueEntry getCreateQueueEntry(int iSkip)
     {
         return  (JDFQueueEntry)
-        getCreateValidElement(ElementName.QUEUEENTRY, JDFConstants.EMPTYSTRING, iSkip);
+        getCreateValidElement(ElementName.QUEUEENTRY, null, iSkip);
     }
     /////////////////////////////////////////////////////////////////////
     /**
@@ -1744,7 +1744,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFQueueEntry getQueueEntry(int iSkip)
     {
         return (JDFQueueEntry)
-        getValidElement(ElementName.QUEUEENTRY, JDFConstants.EMPTYSTRING, iSkip);
+        getValidElement(ElementName.QUEUEENTRY, null, iSkip);
     }
     //////////////////////////////////////////////////////////////////////
 
@@ -1758,7 +1758,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFQueueEntryDef getCreateQueueEntryDef(int iSkip)
     {
         return (JDFQueueEntryDef)
-        getCreateValidElement(ElementName.QUEUEENTRYDEF, JDFConstants.EMPTYSTRING, iSkip);
+        getCreateValidElement(ElementName.QUEUEENTRYDEF, null, iSkip);
     }
     /////////////////////////////////////////////////////////////////////
 
@@ -1778,7 +1778,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public JDFQueueEntryDef getQueueEntryDef(int iSkip)
     {
-        return (JDFQueueEntryDef) getValidElement(ElementName.QUEUEENTRYDEF, JDFConstants.EMPTYSTRING, iSkip);
+        return (JDFQueueEntryDef) getValidElement(ElementName.QUEUEENTRYDEF, null, iSkip);
     }
 
     //////////////////////////////////////////////////////////////////////
@@ -1791,7 +1791,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFQueueEntryDefList getCreateQueueEntryDefList(int iSkip)
     {
         return (JDFQueueEntryDefList)
-        getCreateValidElement(ElementName.QUEUEENTRYDEFLIST, JDFConstants.EMPTYSTRING, iSkip);
+        getCreateValidElement(ElementName.QUEUEENTRYDEFLIST, null, iSkip);
     }
     /////////////////////////////////////////////////////////////////////
 
@@ -1812,7 +1812,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFQueueEntryDefList getQueueEntryDefList(int iSkip)
     {
         return (JDFQueueEntryDefList)
-        getValidElement(ElementName.QUEUEENTRYDEFLIST, JDFConstants.EMPTYSTRING, iSkip);
+        getValidElement(ElementName.QUEUEENTRYDEFLIST, null, iSkip);
 
     }
 
@@ -1826,7 +1826,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFQueueEntryPriParams getCreateQueueEntryPriParams(int iSkip)
     {
         return  (JDFQueueEntryPriParams)
-        getCreateValidElement(ElementName.QUEUEENTRYPRIPARAMS, JDFConstants.EMPTYSTRING, iSkip);
+        getCreateValidElement(ElementName.QUEUEENTRYPRIPARAMS, null, iSkip);
     }
 
     /**
@@ -1846,7 +1846,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFQueueEntryPriParams getQueueEntryPriParams(int iSkip)
     {
         return (JDFQueueEntryPriParams)
-        getValidElement(ElementName.QUEUEENTRYPRIPARAMS, JDFConstants.EMPTYSTRING, iSkip);
+        getValidElement(ElementName.QUEUEENTRYPRIPARAMS, null, iSkip);
     }
     //////////////////////////////////////////////////////////////////////
 
@@ -1860,7 +1860,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFQueueEntryPosParams getCreateQueueEntryPosParams(int iSkip)
     {
         return  (JDFQueueEntryPosParams)
-        getCreateValidElement(ElementName.QUEUEENTRYPOSPARAMS, JDFConstants.EMPTYSTRING, iSkip);
+        getCreateValidElement(ElementName.QUEUEENTRYPOSPARAMS, null, iSkip);
     }
     /////////////////////////////////////////////////////////////////////
 
@@ -1882,7 +1882,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFQueueEntryPosParams getQueueEntryPosParams(int iSkip)
     {
         return (JDFQueueEntryPosParams)
-        getValidElement(ElementName.QUEUEENTRYPOSPARAMS, JDFConstants.EMPTYSTRING, iSkip);
+        getValidElement(ElementName.QUEUEENTRYPOSPARAMS, null, iSkip);
     }
     //////////////////////////////////////////////////////////////////////
 
@@ -1895,7 +1895,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFQueueSubmissionParams getCreateQueueSubmissionParams(int iSkip)
     {
         return  (JDFQueueSubmissionParams)
-        getCreateValidElement(ElementName.QUEUESUBMISSIONPARAMS, JDFConstants.EMPTYSTRING, iSkip);
+        getCreateValidElement(ElementName.QUEUESUBMISSIONPARAMS, null, iSkip);
     }
     /////////////////////////////////////////////////////////////////////
 
@@ -1916,7 +1916,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFQueueSubmissionParams getQueueSubmissionParams(int iSkip)
     {
         return (JDFQueueSubmissionParams)
-        getValidElement(ElementName.QUEUESUBMISSIONPARAMS, JDFConstants.EMPTYSTRING, iSkip);
+        getValidElement(ElementName.QUEUESUBMISSIONPARAMS, null, iSkip);
     }
     //////////////////////////////////////////////////////////////////////
 
@@ -1929,7 +1929,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFResourceCmdParams getCreateResourceCmdParams(int iSkip)
     {
         return  (JDFResourceCmdParams)
-        getCreateValidElement(ElementName.RESOURCECMDPARAMS, JDFConstants.EMPTYSTRING, iSkip);
+        getCreateValidElement(ElementName.RESOURCECMDPARAMS, null, iSkip);
     }
     /////////////////////////////////////////////////////////////////////
 
@@ -1949,7 +1949,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public JDFResourceCmdParams getResourceCmdParams(int iSkip)
     {
-        return (JDFResourceCmdParams) getValidElement(ElementName.RESOURCECMDPARAMS, JDFConstants.EMPTYSTRING, iSkip);
+        return (JDFResourceCmdParams) getValidElement(ElementName.RESOURCECMDPARAMS, null, iSkip);
     }
     //////////////////////////////////////////////////////////////////////
 
@@ -1963,7 +1963,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFResourceQuParams getCreateResourceQuParams(int iSkip)
     {
         return (JDFResourceQuParams)
-        getCreateValidElement(ElementName.RESOURCEQUPARAMS, JDFConstants.EMPTYSTRING, iSkip);
+        getCreateValidElement(ElementName.RESOURCEQUPARAMS, null, iSkip);
     }
     /////////////////////////////////////////////////////////////////////
 
@@ -1983,7 +1983,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public JDFResourceQuParams getResourceQuParams(int iSkip)
     {
-        return (JDFResourceQuParams) getValidElement(ElementName.RESOURCEQUPARAMS, JDFConstants.EMPTYSTRING, iSkip);
+        return (JDFResourceQuParams) getValidElement(ElementName.RESOURCEQUPARAMS, null, iSkip);
     }
     //////////////////////////////////////////////////////////////////////
 
@@ -1997,7 +1997,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFResourceInfo getCreateResourceInfo(int iSkip)
     {
         return (JDFResourceInfo)
-        getCreateValidElement(ElementName.RESOURCEINFO, JDFConstants.EMPTYSTRING, iSkip);
+        getCreateValidElement(ElementName.RESOURCEINFO, null, iSkip);
     }
     /////////////////////////////////////////////////////////////////////
 
@@ -2017,7 +2017,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public JDFResourceInfo getResourceInfo(int iSkip)
     {
-        return (JDFResourceInfo) getValidElement(ElementName.RESOURCEINFO, JDFConstants.EMPTYSTRING, iSkip);
+        return (JDFResourceInfo) getValidElement(ElementName.RESOURCEINFO, null, iSkip);
     }
     //////////////////////////////////////////////////////////////////////
 
@@ -2030,7 +2030,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFStatusQuParams getCreateStatusQuParams(int iSkip)
     {
         return  (JDFStatusQuParams)
-        getCreateValidElement(ElementName.STATUSQUPARAMS, JDFConstants.EMPTYSTRING, iSkip);
+        getCreateValidElement(ElementName.STATUSQUPARAMS, null, iSkip);
     }
     /////////////////////////////////////////////////////////////////////
 
@@ -2052,7 +2052,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public JDFStatusQuParams getStatusQuParams(int iSkip)
     {
-        return (JDFStatusQuParams) getValidElement(ElementName.STATUSQUPARAMS, JDFConstants.EMPTYSTRING, iSkip);
+        return (JDFStatusQuParams) getValidElement(ElementName.STATUSQUPARAMS, null, iSkip);
     }
     /**
      * get iSkip'th element StatusQuParams
@@ -2061,7 +2061,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public JDFStatusQuParams getStatusQuParams()
     {
-        return (JDFStatusQuParams) getValidElement(ElementName.STATUSQUPARAMS, JDFConstants.EMPTYSTRING, 0);
+        return (JDFStatusQuParams) getValidElement(ElementName.STATUSQUPARAMS, null, 0);
     }
     //////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////
@@ -2075,7 +2075,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFStopPersChParams getCreateStopPersChParams(int iSkip)
     {
         return  (JDFStopPersChParams)
-        getCreateValidElement(ElementName.STOPPERSCHPARAMS, JDFConstants.EMPTYSTRING, iSkip);
+        getCreateValidElement(ElementName.STOPPERSCHPARAMS, null, iSkip);
     }
     /////////////////////////////////////////////////////////////////////
 
@@ -2096,7 +2096,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public JDFStopPersChParams getStopPersChParams(int iSkip)
     {
-        return (JDFStopPersChParams) getValidElement(ElementName.STOPPERSCHPARAMS, JDFConstants.EMPTYSTRING, iSkip);
+        return (JDFStopPersChParams) getValidElement(ElementName.STOPPERSCHPARAMS, null, iSkip);
     }
 
     //////////////////////////////////////////////////////////////////////
@@ -2111,7 +2111,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFSubmissionMethods getCreateSubmissionMethods(int iSkip)
     {
         return (JDFSubmissionMethods)
-        getCreateValidElement(ElementName.SUBMISSIONMETHODS, JDFConstants.EMPTYSTRING, iSkip);
+        getCreateValidElement(ElementName.SUBMISSIONMETHODS, null, iSkip);
     }
     /////////////////////////////////////////////////////////////////////
 
@@ -2131,7 +2131,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public JDFSubmissionMethods getSubmissionMethods(int iSkip)
     {
-        return (JDFSubmissionMethods) getValidElement(ElementName.SUBMISSIONMETHODS, JDFConstants.EMPTYSTRING, iSkip);
+        return (JDFSubmissionMethods) getValidElement(ElementName.SUBMISSIONMETHODS, null, iSkip);
     }
     //////////////////////////////////////////////////////////////////////
 
@@ -2145,7 +2145,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFTrackFilter getCreateTrackFilter(int iSkip)
     {
         return (JDFTrackFilter)
-        getCreateValidElement(ElementName.TRACKFILTER, JDFConstants.EMPTYSTRING, iSkip);
+        getCreateValidElement(ElementName.TRACKFILTER, null, iSkip);
     }
     /////////////////////////////////////////////////////////////////////
 
@@ -2166,7 +2166,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public JDFTrackFilter getTrackFilter(int iSkip)
     {
-        return (JDFTrackFilter) getValidElement(ElementName.TRACKFILTER, JDFConstants.EMPTYSTRING, iSkip);
+        return (JDFTrackFilter) getValidElement(ElementName.TRACKFILTER, null, iSkip);
     }
     //////////////////////////////////////////////////////////////////////
 
@@ -2179,7 +2179,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFTrackResult getCreateTrackResult(int iSkip)
     {
         return (JDFTrackResult)
-        getCreateValidElement(ElementName.TRACKRESULT, JDFConstants.EMPTYSTRING, iSkip);
+        getCreateValidElement(ElementName.TRACKRESULT, null, iSkip);
     }
 
     /////////////////////////////////////////////////////////////////////
@@ -2200,7 +2200,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public JDFTrackResult getTrackResult(int iSkip)
     {
-        return (JDFTrackResult) getValidElement(ElementName.TRACKRESULT, JDFConstants.EMPTYSTRING, iSkip);
+        return (JDFTrackResult) getValidElement(ElementName.TRACKRESULT, null, iSkip);
     }
 
 
@@ -2537,7 +2537,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public String getID()
     {
-        return this.getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
+        return this.getAttribute(AttributeName.ID, null, null);
     }
 
     /* (non-Javadoc)

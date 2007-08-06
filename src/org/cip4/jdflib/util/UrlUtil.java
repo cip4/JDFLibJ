@@ -407,17 +407,19 @@ public class UrlUtil
      */
     public static String fileToUrl(File f, boolean bEscape128) throws MalformedURLException
     {
-        try
-        {
-            f=f.getCanonicalFile();
-        }
-        catch (IOException e)
-        {
-            throw new MalformedURLException();
-        }
+//        try
+//        {
+//            f=f.getCanonicalFile();
+//        }
+//        catch (IOException e)
+//        {
+//            throw new MalformedURLException();
+//        }
 
         String s=f.getAbsolutePath();
-        s=StringUtil.replaceChar(s,'\\',"/",0);
+        if(File.separator.equals("\\"))
+            s =StringUtil.replaceChar(s,'\\',"/",0);
+        s=UrlUtil.cleanDots(s);
         if(bEscape128)
         {
             s=new String(StringUtil.setUTF8String(s));
@@ -455,6 +457,8 @@ public class UrlUtil
                 urlString=urlString.charAt(3)+":"+urlString.substring(4);
             else if(urlString.startsWith("/") && urlString.length()>3 && urlString.charAt(2)=='/'&& urlString.charAt(1)!='/')
                 urlString=urlString.charAt(1)+":"+urlString.substring(2);
+            else if(urlString.startsWith("///"))
+                urlString=urlString.substring(2);
         }
         urlString= StringUtil.unEscape(urlString, "%", 16, 2);
         urlString=StringUtil.getUTF8String(urlString.getBytes());

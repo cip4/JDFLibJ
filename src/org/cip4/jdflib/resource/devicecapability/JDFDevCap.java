@@ -119,8 +119,14 @@ import org.cip4.jdflib.util.StringUtil;
 //----------------------------------
 public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
 {
-    private static final long serialVersionUID = 1L;
-    
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -8230286210621220326L;
+    /**
+     * 
+     */
     private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[14];
     static
     {
@@ -139,7 +145,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
         elemInfoTable[12] = new ElemInfoTable(ElementName.STRINGSTATE, 0x33333333);
         elemInfoTable[13] = new ElemInfoTable(ElementName.XYPAIRSTATE, 0x33333333);
     }
-    
+
     protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
@@ -149,7 +155,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.MAXOCCURS, 0x33333331, AttributeInfo.EnumAttributeType.unbounded, null, "1");
     }
-    
+
     protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
@@ -196,7 +202,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
-    
+
     /**
      * toString()
      * @return String
@@ -222,7 +228,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         setAttribute(AttributeName.DEVCAPREFS, value, null);
     }
-    
+
     /**
      * set attribute <code>ID</code>
      * @param value the value to set the attribute to
@@ -231,7 +237,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         setAttribute(AttributeName.ID, value, null);
     }
-    
+
     /**
      * get String attribute <code>ID</code>
      * @return String: the value of the attribute
@@ -249,8 +255,8 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     public EnumAvailability getAvailability()
     {
         EnumAvailability avail = EnumAvailability.getEnum(
-                    getAttribute(AttributeName.AVAILABILITY,  null, null));
-        
+                getAttribute(AttributeName.AVAILABILITY,  null, null));
+
         if (avail==null)
         {
             String parName = getParentNode().getNodeName();
@@ -267,9 +273,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
         }
         return avail==null ? EnumAvailability.Installed : avail;
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * get iSkip'th element <code>DevCap</code>
      * @param iSkip number of elements to skip (0 -> get first element)
@@ -279,9 +285,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFDevCap)getElement(ElementName.DEVCAP, JDFConstants.EMPTYSTRING, iSkip);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * get iSkip'th element <code>DevCap</code>, create if it doesn't exist 
      * @param iSkip number of elements to skip
@@ -291,9 +297,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFDevCap)getCreateElement(ElementName.DEVCAP, JDFConstants.EMPTYSTRING , iSkip);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * append element <code>DevCap</code>
      * @return the appended element
@@ -302,9 +308,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFDevCap)appendElement(ElementName.DEVCAP, null);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * append dc/@ID to the value of devCap/@ID
      * @param dc the devCap to append
@@ -319,7 +325,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     }
 
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * append dc/@ID to the value of devCap/@ID
      * @param dcID @ID of the devCap to append
@@ -328,9 +334,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         appendAttribute(AttributeName.DEVCAPREFS,dcID,null," ",true);
     }
-        
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets the iSkip'th existing BooleanState 
      * @param iSkip number of elements to skip (0 -> get first element)
@@ -339,10 +345,10 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     public JDFBooleanState getBooleanState(int iSkip) 
     {
         return (JDFBooleanState)getElement(ElementName.BOOLEANSTATE, null, iSkip);
-     }
-    
+    }
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets an existing BooleanState with @Name="name"
      * @param nam the Name attribute of the newly appended BooleanState
@@ -352,9 +358,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFBooleanState)getChildWithAttribute(ElementName.BOOLEANSTATE, AttributeName.NAME, null, nam, 0, true);
     }
-     
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * @deprecated use method with parameter (string) instead
      * @return
@@ -363,9 +369,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFBooleanState)getCreateElement(ElementName.BOOLEANSTATE, null, iSkip);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets a NumberState with @Name="name", appends it if it does not exist
      * @param name the name attribute of the newly appended NumberState
@@ -378,9 +384,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
             s=appendBooleanState(nam);
         return s;
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * @deprecated use method with parameter (string) instead
      * @return
@@ -389,7 +395,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFBooleanState)appendElement(ElementName.BOOLEANSTATE, null);
     }
-    
+
     /**
      * appends a BooleanState with @Name="name"
      * @param nam the name attribute of the newly appended BooleanState
@@ -401,10 +407,10 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
         s.setName(nam);
         return s;
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets the iSkip'th existing IntegerState 
      * @param iSkip number of elements to skip (0 -> get first element)
@@ -415,9 +421,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
         JDFIntegerState e = (JDFIntegerState)getElement(ElementName.INTEGERSTATE, null, iSkip);
         return e;
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets an existing IntegerState with @Name="name"
      * @param nam the name attribute of the newly appended IntegerState
@@ -427,9 +433,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFIntegerState)getChildWithAttribute(ElementName.INTEGERSTATE, AttributeName.NAME, null, nam, 0, true);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * @deprecated use method with parameter (string) instead
      * @return
@@ -438,7 +444,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFIntegerState)getCreateElement(ElementName.INTEGERSTATE, null, iSkip);
     }
-    
+
     /**
      * gets an IntegerState with @Name="name", appends it if it does not yet exist
      * @param nam the name attribute of the newly appended IntegerState
@@ -451,9 +457,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
             s=appendIntegerState(nam);
         return s;
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * append an IntegerState with no name set
      * @return JDFIntegerState: the newly appended IntegerState
@@ -462,9 +468,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFIntegerState)appendElement(ElementName.INTEGERSTATE, null);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * appends an IntegerState with @Name="name"
      * @param name the Name attribute of the newly appended IntegerState
@@ -476,10 +482,10 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
         s.setName(nam);
         return s;
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets the iSkip'th existing NumberState 
      * @param iSkip number of elements to skip
@@ -489,7 +495,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFNumberState)getElement(ElementName.NUMBERSTATE, null, iSkip);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
     /**
      * gets an existing  NumberState with @Name="name"
@@ -500,9 +506,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFNumberState)getChildWithAttribute(ElementName.NUMBERSTATE, AttributeName.NAME, null, nam, 0, true);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * @deprecated use method with parameter (string) instead
      * @return
@@ -512,7 +518,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
         return (JDFNumberState)getCreateElement(ElementName.NUMBERSTATE, null, iSkip);       
     }
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets a NumberState with @Name="name", appends it if it does not yet exist
      * @param nam the Name attribute of the newly appended NumberState
@@ -537,7 +543,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
         s.setName(nam);
         return s;
     }
-    
+
     /**
      * @deprecated use method with parameter (string) instead
      * @return
@@ -548,7 +554,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     }
     //  ///////////////////////////////////////////////////////////////////
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets the iSkip'th existing EnumerationState
      * @param iSkip number of elements to skip (0 -> get first element)
@@ -558,9 +564,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFEnumerationState)getElement(ElementName.ENUMERATIONSTATE, null, iSkip);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets an existing  EnumerationState with @Name="name"
      * @param name the Name attribute of the newly appended EnumerationState
@@ -570,9 +576,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFEnumerationState)getChildWithAttribute(ElementName.ENUMERATIONSTATE, AttributeName.NAME, null, nam, 0, true);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets the iSkip'th existing EnumerationState, creates it if it doesn't exist
      * @param iSkip number of elements to skip (0 -> get first element)
@@ -582,9 +588,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFEnumerationState)getCreateElement(ElementName.ENUMERATIONSTATE, null, iSkip);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets a EnumerationState with @Name="name", appends it if it does not exist
      * @param nam the name attribute of the newly appended EnumerationState
@@ -597,9 +603,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
             s=appendEnumerationState(nam);
         return s;
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * @deprecated use method with parameter (string) instead
      * @return
@@ -608,9 +614,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return  (JDFEnumerationState)appendElement(ElementName.ENUMERATIONSTATE, null);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * appends a NumberState with @Name="name"
      * @param nam   the name attribute of the newly appended NumberState
@@ -622,10 +628,10 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
         s.setName(nam);
         return s;
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets the iSkip'th existing NameState 
      * @param iSkip number of elements to skip
@@ -635,9 +641,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFNameState)getElement(ElementName.NAMESTATE, null, iSkip);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets an existing NameState with @Name="name"
      * @param nam the Name attribute of the newly appended NameState
@@ -647,9 +653,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFNameState)getChildWithAttribute(ElementName.NAMESTATE, AttributeName.NAME, null, nam, 0, true);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * @deprecated use method with parameter (string) instead
      * @return
@@ -658,9 +664,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFNameState)getCreateElement(ElementName.NAMESTATE, null, iSkip);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets a NameState with @Name="name", appends it if it does not exist
      * @param nam the name attribute of the newly appended NameState
@@ -673,9 +679,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
             s=appendNameState(nam);
         return s;
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * @deprecated use method with parameter (string) instead
      * @return
@@ -684,9 +690,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFNameState)appendElement(ElementName.NAMESTATE, null);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * appends a NameState with @Name="name"
      * @param nam the name attribute of the newly appended NameState
@@ -698,10 +704,10 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
         s.setName(nam);
         return s;
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets the iSkip'th existing StringState 
      * @param iSkip number of elements to skip
@@ -711,9 +717,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFStringState)getElement(ElementName.STRINGSTATE, null, iSkip);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets an existing  StringState with @Name="name"
      * @param nam the Name attribute of the newly appended StringState
@@ -723,9 +729,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFStringState)getChildWithAttribute(ElementName.STRINGSTATE, AttributeName.NAME, null, nam, 0, true);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * @deprecated use method with parameter (string) instead
      * @return
@@ -734,7 +740,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFStringState)getCreateElement(ElementName.STRINGSTATE, null, iSkip);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
 
     /**
@@ -749,9 +755,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
             s=appendStringState(nam);
         return s;
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////       
-    
+
     /**
      * @deprecated use method with parameter (string) instead
      * @return
@@ -760,7 +766,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFStringState)appendElement(ElementName.STRINGSTATE, null);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
 
     /**
@@ -774,10 +780,10 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
         s.setName(nam);
         return s;
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets the iSkip'th existing XYPairState 
      * @param iSkip number of elements to skip
@@ -787,7 +793,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFXYPairState) getElement(ElementName.XYPAIRSTATE, null, iSkip);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
 
     /**
@@ -799,9 +805,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFXYPairState)getChildWithAttribute(ElementName.XYPAIRSTATE, AttributeName.NAME, null, nam, 0, true);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * @deprecated use method with parameter (string) instead
      * @return
@@ -810,7 +816,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFXYPairState)getCreateElement(ElementName.XYPAIRSTATE, null, iSkip);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
 
     /**
@@ -825,9 +831,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
             s=appendXYPairState(nam);
         return s;
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * @deprecated use method with parameter (string) instead
      * @return
@@ -836,7 +842,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFXYPairState)appendElement(ElementName.XYPAIRSTATE, null);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
 
     /**
@@ -850,10 +856,10 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
         s.setName(nam);
         return s;
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets the iSkip'th existing ShapeState 
      * @param iSkip number of elements to skip (0 -> get first element)
@@ -863,7 +869,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFShapeState)getElement(ElementName.SHAPESTATE, null, iSkip);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
 
     /**
@@ -875,9 +881,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFShapeState)getChildWithAttribute(ElementName.SHAPESTATE, AttributeName.NAME, null, nam, 0, true);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * @deprecated use method with parameter (string) instead
      * @return
@@ -886,7 +892,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return(JDFShapeState)getCreateElement(ElementName.SHAPESTATE, null, iSkip);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
 
     /**
@@ -901,9 +907,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
             s=appendShapeState(nam);
         return s;
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-        
+
     /**
      * @deprecated use method with parameter (string) instead
      * @return
@@ -912,7 +918,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFShapeState)appendElement(ElementName.SHAPESTATE, null);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
 
     /**
@@ -926,10 +932,10 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
         s.setName(nam);
         return s;
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets the iSkip'th existing MatrixState 
      * @param iSkip number of elements to skip (0 -> get first element)
@@ -939,7 +945,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return(JDFMatrixState)getElement(ElementName.MATRIXSTATE, null, iSkip);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
 
     /**
@@ -951,9 +957,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFMatrixState)getChildWithAttribute(ElementName.MATRIXSTATE, AttributeName.NAME, null, nam, 0, true);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * @deprecated use method with parameter (string) instead
      * @return
@@ -962,7 +968,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFMatrixState)getCreateElement(ElementName.MATRIXSTATE, null, iSkip);
     }
-    
+
     /**
      * gets a MatrixState with @Name="name", appends it if it does not yet exist
      * @param nam the Name attribute of the newly appended MatrixState
@@ -975,9 +981,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
             s=appendMatrixState(nam);
         return s;
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * @deprecated use method with parameter (string) instead
      * @return
@@ -986,7 +992,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFMatrixState)appendElement(ElementName.MATRIXSTATE, null);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
 
     /**
@@ -1000,10 +1006,10 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
         s.setName(nam);
         return s;
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets the iSkip'th existing DateTimeState 
      * @param iSkip number of elements to skip (0 -> get first element)
@@ -1013,7 +1019,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFDateTimeState)getElement(ElementName.DATETIMESTATE, null, iSkip);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
 
     /**
@@ -1025,9 +1031,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFDateTimeState)getChildWithAttribute(ElementName.DATETIMESTATE, AttributeName.NAME, null, nam, 0, true);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * @deprecated use method with parameter (string) instead
      * @return
@@ -1036,7 +1042,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return(JDFDateTimeState)getCreateElement(ElementName.DATETIMESTATE, null, iSkip);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
 
     /**
@@ -1051,9 +1057,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
             s=appendDateTimeState(nam);
         return s;
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * @deprecated use method with parameter (string) instead
      * @return
@@ -1062,7 +1068,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFDateTimeState)appendElement(ElementName.DATETIMESTATE, null);
     }
- 
+
     //  ///////////////////////////////////////////////////////////////////
 
     /**
@@ -1076,10 +1082,10 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
         s.setName(nam);
         return s;
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets the iSkip'th existing DurationState 
      * @param iSkip number of elements to skip (0 -> get first element)
@@ -1089,7 +1095,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFDurationState) getElement(ElementName.DURATIONSTATE, null, iSkip);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
 
     /**
@@ -1101,9 +1107,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFDurationState)getChildWithAttribute(ElementName.DURATIONSTATE, AttributeName.NAME, null, nam, 0, true);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * @deprecated use method with parameter (string) instead
      * @return
@@ -1112,7 +1118,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFDurationState)getCreateElement(ElementName.DURATIONSTATE, null, iSkip);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
 
     /**
@@ -1127,9 +1133,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
             s=appendDurationState(nam);
         return s;
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * @deprecated use method with parameter (string) instead
      * @return
@@ -1138,7 +1144,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFDurationState)appendElement(ElementName.DURATIONSTATE, null);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
 
     /**
@@ -1152,9 +1158,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
         s.setName(nam);
         return s;
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets the iSkip'th existing PDFPathState 
      * @param iSkip number of elements to skip (0 -> get first element)
@@ -1164,7 +1170,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return(JDFPDFPathState)getElement(ElementName.PDFPATHSTATE, null, iSkip);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
 
     /**
@@ -1176,9 +1182,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFPDFPathState)getChildWithAttribute(ElementName.PDFPATHSTATE, AttributeName.NAME, null, nam, 0, true);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * @deprecated use method with parameter (string) instead
      * @return
@@ -1187,7 +1193,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return  (JDFPDFPathState)getCreateElement(ElementName.PDFPATHSTATE, null, iSkip);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
 
     /**
@@ -1202,9 +1208,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
             s=appendPDFPathState(nam);
         return s;
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * @deprecated use method with parameter (string) instead
      * @return
@@ -1213,7 +1219,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFPDFPathState)appendElement(ElementName.PDFPATHSTATE, null);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
 
     /**
@@ -1227,10 +1233,10 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
         s.setName(nam);
         return s;
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets the iSkip'th existing RectangleState 
      * @param iSkip number of elements to skip (0 -> get first element)
@@ -1240,7 +1246,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFRectangleState)getElement(ElementName.RECTANGLESTATE, null, iSkip);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
 
     /**
@@ -1252,9 +1258,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFRectangleState)getChildWithAttribute(ElementName.RECTANGLESTATE, AttributeName.NAME, null, nam, 0, true);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * @deprecated use method with parameter (string) instead
      * @return
@@ -1263,7 +1269,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFRectangleState)getCreateElement(ElementName.RECTANGLESTATE, null, iSkip);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
 
     /**
@@ -1278,9 +1284,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
             s=appendRectangleState(nam);
         return s;
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * @deprecated use method with parameter (string) instead
      * @return
@@ -1289,7 +1295,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         return (JDFRectangleState)appendElement(ElementName.RECTANGLESTATE, null);
     }
-    
+
     //  ///////////////////////////////////////////////////////////////////
 
     /**
@@ -1303,11 +1309,11 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
         s.setName(nam);
         return s;
     }
-    
-    
+
+
     /* ******************************************************
      // FitsValue Methods
-      **************************************************************** */
+     **************************************************************** */
     /**
      * get the DEvCapPool that contains devcap elements referenced by this
      * @return JDFDevCapPool the pool
@@ -1315,7 +1321,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     private KElement getParentPool(String poolName)
     {
         KElement parent = getPoolParent();
-         return parent.getElement(poolName);
+        return parent.getElement(poolName);
     }
     /**
      * get the DEvCapPool that contains devcap elements referenced by this
@@ -1327,16 +1333,24 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
         return parent.getCreateElement(poolName);
     }
 
+    private boolean getIgnoreDefaults()
+    {
+        KElement p=getPoolParent();
+        if(p instanceof JDFDeviceCap)
+            return ((JDFDeviceCap)p).isIgnoreDefaults();
+        return false;
+    }
+    
     private KElement getPoolParent()
     {
         KElement parent=getDeepParent(ElementName.DEVICECAP,0);
         if(parent==null)
             parent=getDeepParent(ElementName.MESSAGESERVICE,0);
-        if(!(parent instanceof JDFDeviceCap)&&!(parent instanceof JDFMessageService))
+        if(parent!=null && !(parent instanceof JDFDeviceCap)&&!(parent instanceof JDFMessageService))
             throw new JDFException("JDFDevCap.getParentPool - invalid parent context");
         return parent;
     }
-    
+
     /**
      * Gets of this the Vector of all direct child DevCap elements plus 
      * the referenced (by attribute DevCapRefs) reusable DevCap elements, 
@@ -1362,8 +1376,8 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
             if(bDirect==false)
                 vDevCap.appendUnique(this);
         }
-        
-        
+
+
         if (hasAttribute(AttributeName.DEVCAPREFS)) 
         {         
             JDFDevCapPool devCapPool = (JDFDevCapPool)getParentPool(ElementName.DEVCAPPOOL);
@@ -1398,7 +1412,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
         return vDevCap;
     }
 
-    
+
     /**
      * Tests if the attributes and subelements of the given element
      * match the corresponding States and DevCap subelements of this DevCap.<br>
@@ -1416,17 +1430,17 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     public final KElement stateReport(KElement e, EnumFitsValue testlists, EnumValidationLevel level, boolean ignoreExtensions, boolean bRecurse, KElement parentReport)
     {        
         // 'e' in DeviceCapabilities is described by this DevCap
-        
+
         // first test if there are any subelements of 'e' that are not described by DevCap
         if(!(e instanceof JDFNode) && !ignoreExtensions)
         {
             missingDevCap(e,parentReport);
         }
-        
+
         // DevCap contains: (1) description of parts; 
         // (2) description of subelements; 
         // (3) description of attributes
-        
+
         // (1) Test Partition Leaves: 'e' - is partitioned, its leaves must be described by 'this' DevCap
         if (e instanceof JDFResource && bRecurse) 
         {
@@ -1468,7 +1482,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
         if(!bRecurse)            
         {
             subelementsTest(e,testlists,level,ignoreExtensions,parentReport);
- 
+
             // (3) Test Attributes, Spans and Comments - described by States
             spanAndAttributesTest(e,testlists,level, ignoreExtensions,parentReport);
         }
@@ -1476,11 +1490,11 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
         {
             parentReport = null;
         }
-         return parentReport;
+        return parentReport;
     }
-    
-    
-    
+
+
+
     /**
      * Tests subelements of the element <code>e</code>
      * whether they fit the corresponding DevCap elements of <code>this</code>.<br>
@@ -1499,7 +1513,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     private final KElement subelementsTest(KElement testElem, EnumFitsValue testlists, EnumValidationLevel level, boolean ignoreExtensions, KElement parentReport)
     {        
         VElement vDevCap = getDevCapVector(null,true); // vDevCap - contains DevCap elements of this DevCap
-        
+
         HashSet goodElems=new HashSet();
         HashMap badElems=new HashMap();
 
@@ -1511,7 +1525,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
             EnumAvailability av=dc.getModuleAvailability();
             if(!EnumAvailability.Installed.equals(av))
                 continue;
-            
+
             // vElem - direct children of the Node. 
             // If 'dcName' is a partition Leaf - gets only children of the Leaf.
             VElement vElem = dc.getMatchingElementsFromParent(testElem,vDevCap);
@@ -1563,7 +1577,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
                 {
                     badElems.put(subEl,recursionResult);
                 }
-                 
+
                 if(recursionResult != null) 
                 {
                     r.setAttribute("CapXPath", dc.getNamePath(true));
@@ -1576,15 +1590,15 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
                 }
             }
         }
-        
+
         if (!parentReport.hasChildElements())
         {
-             parentReport = null;
+            parentReport = null;
         }
-        
+
         return parentReport;
     }
-    
+
     /**
      * Tests attributes and span elements (if <code>e</code> is a intent resource) 
      * of the element <code>e</code>.<br>
@@ -1606,19 +1620,19 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
         KElement msp = parentReport.appendElement("UnknownAttributes");
         KElement map = parentReport.appendElement("MissingAttributes");
         KElement iap = parentReport.appendElement("InvalidAttributes");
-        
+
         //  vSubElem - contains all subelements of this DevCap
         VElement vStates = getStates(true,null); 
         JDFAttributeMap missMap=new JDFAttributeMap();
         JDFAttributeMap capMap=new JDFAttributeMap();
-        
-        final JDFAttributeMap defMap = e.getDefaultAttributeMap();
+
+        final JDFAttributeMap defMap = getIgnoreDefaults() ? null : e.getDefaultAttributeMap();
         JDFAttributeMap am = new JDFAttributeMap(defMap);
         am.putAll(e.getAttributeMap()); // only attribute map of 'e'   
         JDFAttributeMap m = getSpanAndAttributesMap(e); // get of 'e' as a map of attributes: (1) all attributes, 
         //(2) span key-values (in case of intent resource), (3) comments 
         VString vKeys = m.getKeys(); //we'll use "keys" to find the appropriate State elements in DevCap
-       
+
         final int sizeStates = vStates==null ? 0 : vStates.size();
         for (int j=0; j<sizeStates; j++) // SubElem can be DevCap, can be Loc, can be any State element
         {                                     // here we need only States
@@ -1627,7 +1641,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
             EnumAvailability av=state.getModuleAvailability();
             if(!EnumAvailability.Installed.equals(av))
                 continue;
-            
+
             int size=vKeys.size();
             for (int i=size-1; i>=0; i--) 
             {  
@@ -1637,7 +1651,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
                     String value = nam.length()!=0 ? m.get(key) : m.get("CommentText");
                     if (!state.fitsValue(value,testlists)) 
                     { // The attribute/span was found but it has the wrong value
-                        
+
                         KElement r;
                         if (!am.containsKey(key) && !key.equals("CommentText")) // it is Span but not Attribute
                         {
@@ -1661,16 +1675,16 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
                         r.setAttribute("CapXPath", state.getNamePath());
                         r.setAttribute("Value", value);
                         r.copyElement(state,null);
-                        
+
                     }
                     vKeys.removeElementAt(i); // The attribute/span was found, checked, so we don't need it any more in vKeys
                     break; // go to next State
                 }
             }
-            
+
             if ((size==vKeys.size()) && state.getRequired() && EnumValidationLevel.isRequired(level)) 
             { // No attribute/span found but state is required
-                
+
                 if (state.getListType().equals(EnumListType.Span)) 
                 {
                     missMap.put(nam, "Span");
@@ -1695,7 +1709,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
                     missMap.put(stringAt, "Span");
             }
         }
-        
+
         Enumeration missIt=missMap.keys();
         while (missIt.hasMoreElements())
         { // No attribute/span found but state is required
@@ -1707,12 +1721,10 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
             ms.setAttribute("XPath", e.buildXPath(null,1)+ "/@"+ nam);
             String capNamePath=capMap.get(nam);
             if(capNamePath!=null)
-            ms.setAttribute("CapXPath", capNamePath);
+                ms.setAttribute("CapXPath", capNamePath);
             ms.setAttribute("Name", nam);
         }
 
-        
-        
         if(!ignoreExtensions)
         {
             for (int x=0; x<vKeys.size(); x++) 
@@ -1739,26 +1751,26 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
                 }
             }
         }
-        
+
         if (!map.hasChildElements())
             parentReport.removeChild(map);
-        
+
         if (!iap.hasChildElements())
             parentReport.removeChild(iap);
-        
+
         if (!msp.hasChildElements())
             parentReport.removeChild(msp);
-        
+
         if (!parentReport.hasChildElements())
         {
             parentReport = null;
         }
-        
+
         return parentReport;
     }
-    
-    
-    
+
+
+
     /**
      * Gets a map of Attributes, Comments and Span key-value pairs for <code>e</code>.
      * All of them must be described as State elements.
@@ -1768,12 +1780,10 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
      */
     private final JDFAttributeMap getSpanAndAttributesMap(KElement e)
     {
-        JDFAttributeMap m = e.getDefaultAttributeMap();
-        if(m!=null)
-            m.putAll(e.getAttributeMap()); // get all attributes of 'e' as a map of attributes
-        else
-            m=e.getAttributeMap();
-       
+        final JDFAttributeMap defMap = getIgnoreDefaults() ? null : e.getDefaultAttributeMap();
+        JDFAttributeMap m = new JDFAttributeMap(defMap);
+        m.putAll(e.getAttributeMap()); // only attribute map of 'e'   
+
         if (e instanceof JDFResource)
         {
             JDFResource r = (JDFResource) e; // if 'e' is an Intent Resource
@@ -1794,11 +1804,11 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
             JDFComment c = (JDFComment) e;
             m.put("CommentText", c.getText(0)) ;
         }
-        
+
         return m;
     }
-    
-    
+
+
     /**
      * Gets a map of key-value pairs for the intent resource <code>r</code>. 
      * The key of the map is a Span NodeName, 
@@ -1818,21 +1828,21 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
             {
 //              JDFSpanBase span = (JDFSpanBase) el;
 //              String value = span.getValue();
-                
+
                 String value = el.hasAttribute(AttributeName.ACTUAL) 
                 ? el.getAttribute(AttributeName.ACTUAL) 
                         : el.getAttribute(AttributeName.PREFERRED);
-                
+
                 if (value.length()==0)
                     value = el.getAttribute(AttributeName.RANGE);
-                
+
                 map.put(el.getNodeName(), value);
             }
         }    
         return map;
     }
-    
-    
+
+
     /**
      * Tests if there are any subelements of the element elem that are not described by DevCap.<br>
      * Composes a detailed report of the found errors in XML form. 
@@ -1846,7 +1856,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     {
         KElement root = parentReport.appendElement("UnknownElements");        
         VElement vDevCap = getDevCapVector(null,true);
-        
+
         VElement vSubElem = elem.getChildElementVector(null, null, null, true, 0, true); // follows the refelements
         // for every one child of the 'elem' we look for the corresponding DevCap description
         for (int i=0; i < vSubElem.size(); i++) 
@@ -1863,7 +1873,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
                 String nam = e.getNodeName(); // we are looking for DevCap whose atr_Name is equal 'nam'
                 boolean bFound = false;
                 EnumAvailability foundAv=null;
-                
+
                 for (int k=0; k < vDevCap.size(); k++) 
                 {
                     JDFDevCap devCap = (JDFDevCap) vDevCap.elementAt(k);
@@ -1896,7 +1906,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
                 }
             }
         }
-        
+
         if (!root.hasChildElements())
         {
             root.deleteNode();
@@ -1904,8 +1914,8 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
         }        
         return root;
     }
-    
-    
+
+
     /**
      * Checks if the attributes key of the tested element is 
      * a generic attribute. (Gets this attribute of DeviceCap element)
@@ -1919,18 +1929,18 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
             return true;
         if(key.startsWith(AttributeName.XMLNS))
             return true;
-        
+
         KElement deviceCap = getDeepParent(ElementName.DEVICECAP,0);
         if(deviceCap==null)
             deviceCap = getDeepParent(ElementName.MESSAGESERVICE,0);
         if(deviceCap==null)
             return false;
-        
+
         VString s = StringUtil.tokenize(deviceCap.getAttribute(AttributeName.GENERICATTRIBUTES)," ",false);
         return s!=null && (s.contains(key) || s.contains("*"));
     }
-    
-    
+
+
     /**
      * Gets the NamePath of this DevCap in form 
      * "DevCapsName/SubelemName1/SubelemName2/..."<br>
@@ -1949,9 +1959,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
         if(paths==null || paths.size()<1)
             return null;
         return paths.stringAt(0);
-            
+
     }
-    
+
     /**
      * Gets the NamePath of this DevCap in form 
      * "DevCapsName/SubelemName1/SubelemName2/..."<br>
@@ -1970,9 +1980,9 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
         VString vResult=null;
         if(result==null)
             return null;
-        
+
         final KElement parentNode = getParentNode_KElement();
-        
+
         if (parentNode instanceof JDFDevCap)
         { //subsub elem - always recurse
             JDFDevCap devCap = (JDFDevCap) parentNode;
@@ -1987,7 +1997,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
                 {
                     VElement v=parentNode.getChildrenByTagName("DevCap",null,null,false,true,0);
                     KElement deviceCap= parentNode.getParentNode_KElement();
- 
+
                     for(int i=0;i<v.size();i++)
                     {
                         JDFDevCap dc=(JDFDevCap)v.elementAt(i);
@@ -2045,8 +2055,8 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
         return vResult;
     }
 
-////////////////////////////////////////////////////////////////////////////////////////
-    
+
+
     /**
      * gets String attribute Name, inherits from devcap or devcaps if necessary
      * 
@@ -2077,13 +2087,13 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
                     JDFDevCaps dcs=(JDFDevCaps) dec.getChildWithAttribute(ElementName.DEVCAPS,AttributeName.DEVCAPREF,null,id,0,true);
                     if(dcs!=null)
                         s=dcs.getName();
-                    
+
                 }
-             }
+            }
         }
-         return s;
+        return s;
     }
-        
+
     /**
      * return the vector of all states
      * @param bDirect if false, recurse into child elements, else return only direct child states
@@ -2119,121 +2129,121 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
         } 
         return v;
     }
-    
+
     /**
      * Sets attribute <code>MaxOccurs</code>, 
      * also handles unbounded
      *
      * @param value the value to set the attribute to
      */
-     public void setMaxOccurs(int value)
-     {
-         if(value==Integer.MAX_VALUE)
-         {
-             setAttribute(AttributeName.MAXOCCURS, JDFConstants.POSINF, null);
-         }
-         else
-         {
-             setAttribute(AttributeName.MAXOCCURS, value, null);
-         }
-     }
+    public void setMaxOccurs(int value)
+    {
+        if(value==Integer.MAX_VALUE)
+        {
+            setAttribute(AttributeName.MAXOCCURS, JDFConstants.POSINF, null);
+        }
+        else
+        {
+            setAttribute(AttributeName.MAXOCCURS, value, null);
+        }
+    }
 
-     /**
+    /**
      * Gets integer attribute <code>MaxOccurs</code>,
      * also handles unbounded
      *
      * @return int: the attribute value 
      */
-     public int getMaxOccurs()
-     {
-         final String s = getAttribute(AttributeName.MAXOCCURS, null, null);
-         if(JDFConstants.UNBOUNDED.equals(s))
-             return Integer.MAX_VALUE;
-         return StringUtil.parseInt(s,1);
-     }
+    public int getMaxOccurs()
+    {
+        final String s = getAttribute(AttributeName.MAXOCCURS, null, null);
+        if(JDFConstants.UNBOUNDED.equals(s))
+            return Integer.MAX_VALUE;
+        return StringUtil.parseInt(s,1);
+    }
 
 
-     /**
-      * gets the matching elements in the node that match <code>this</code>
-      * 
-      * @param node the node to search in
-      * @param testValidity if true, recusively check for validity of the elements, 
-      * else only get children by name
-      * 
-      * @return VElement - the element vector of matching elements, 
-      * <code>null</code> if none were found
-      */
-     public VElement getMatchingElementsFromParent(KElement parent, VElement vDevCap)
-     {
-         VElement v= getAllMatchingElementsFromParent(parent);
-         if(v==null)
-             return null;
+    /**
+     * gets the matching elements in the node that match <code>this</code>
+     * 
+     * @param node the node to search in
+     * @param testValidity if true, recusively check for validity of the elements, 
+     * else only get children by name
+     * 
+     * @return VElement - the element vector of matching elements, 
+     * <code>null</code> if none were found
+     */
+    public VElement getMatchingElementsFromParent(KElement parent, VElement vDevCap)
+    {
+        VElement v= getAllMatchingElementsFromParent(parent);
+        if(v==null)
+            return null;
 
-         final String _name=getName();
-         VElement vOther=new VElement();
-         if(vDevCap!=null)
-         {
-             for(int i=0;i<vDevCap.size();i++)
-             {
-                 JDFDevCap dcOther=(JDFDevCap) vDevCap.elementAt(i);
-                 if(dcOther==this)
-                     continue;
-                 if(!_name.equals(dcOther.getName()))
-                     continue;
-                 vOther.add(dcOther);
-              }
-         }
-         if(vOther.size()==0) // no other elements that we have to worry about
-             return v;
-         
-         
-         XMLDoc doc=new XMLDoc("dummy",null);
-         KElement repRootDummy=doc.getRoot();
-         for(int i=v.size()-1;i>=0;i--)
-         {
-             KElement e=v.item(i);
-             repRootDummy.flush();
-             if(spanAndAttributesTest(e, EnumFitsValue.Allowed, EnumValidationLevel.Incomplete, true, repRootDummy)!=null || 
-                     subelementsTest(e, EnumFitsValue.Allowed, EnumValidationLevel.Incomplete, true, repRootDummy) !=null)
-             {
-                 // check if an element fits to a different devcap in this, if so remove it from the check
-                 for(int j=0;j<vOther.size();j++)
-                 {
-                     repRootDummy.flush();
-                     JDFDevCap dcOther=(JDFDevCap) vOther.elementAt(j);
-                     if(dcOther.spanAndAttributesTest(e, EnumFitsValue.Allowed, EnumValidationLevel.Incomplete, true, repRootDummy)==null && 
-                             dcOther.subelementsTest(e, EnumFitsValue.Allowed, EnumValidationLevel.Incomplete, true, repRootDummy) ==null)
-                     {
-                         v.remove(i);
-                         break;   // j                      
-                     }
-                 }                 
-             }
-         }
-         return v.size()!=0 ? v : null;
-     }
+        final String _name=getName();
+        VElement vOther=new VElement();
+        if(vDevCap!=null)
+        {
+            for(int i=0;i<vDevCap.size();i++)
+            {
+                JDFDevCap dcOther=(JDFDevCap) vDevCap.elementAt(i);
+                if(dcOther==this)
+                    continue;
+                if(!_name.equals(dcOther.getName()))
+                    continue;
+                vOther.add(dcOther);
+            }
+        }
+        if(vOther.size()==0) // no other elements that we have to worry about
+            return v;
 
-     /**
-      * gets the matching elements in the node that match the nodename of this
-      * 
-      * @param node the node to search in
-      * @return VElement - the element vector of matching elements, 
-      * <code>null</code> if none were found
-      */
-     public VElement getAllMatchingElementsFromParent(KElement parent)
-     {
-         String nam=getName();
-         VElement subElems=parent.getChildElementVector(nam,null,null,true,999999,true);
-         return subElems.size()==0 ? null : subElems;
-     }
 
-     /**
-      * sets the element and attribute defaults
-      * 
-	 * @param element the element that is defaulted
+        XMLDoc doc=new XMLDoc("dummy",null);
+        KElement repRootDummy=doc.getRoot();
+        for(int i=v.size()-1;i>=0;i--)
+        {
+            KElement e=v.item(i);
+            repRootDummy.flush();
+            if(spanAndAttributesTest(e, EnumFitsValue.Allowed, EnumValidationLevel.Incomplete, true, repRootDummy)!=null || 
+                    subelementsTest(e, EnumFitsValue.Allowed, EnumValidationLevel.Incomplete, true, repRootDummy) !=null)
+            {
+                // check if an element fits to a different devcap in this, if so remove it from the check
+                for(int j=0;j<vOther.size();j++)
+                {
+                    repRootDummy.flush();
+                    JDFDevCap dcOther=(JDFDevCap) vOther.elementAt(j);
+                    if(dcOther.spanAndAttributesTest(e, EnumFitsValue.Allowed, EnumValidationLevel.Incomplete, true, repRootDummy)==null && 
+                            dcOther.subelementsTest(e, EnumFitsValue.Allowed, EnumValidationLevel.Incomplete, true, repRootDummy) ==null)
+                    {
+                        v.remove(i);
+                        break;   // j                      
+                    }
+                }                 
+            }
+        }
+        return v.size()!=0 ? v : null;
+    }
+
+    /**
+     * gets the matching elements in the node that match the nodename of this
+     * 
+     * @param node the node to search in
+     * @return VElement - the element vector of matching elements, 
+     * <code>null</code> if none were found
+     */
+    public VElement getAllMatchingElementsFromParent(KElement parent)
+    {
+        String nam=getName();
+        VElement subElems=parent.getChildElementVector(nam,null,null,true,999999,true);
+        return subElems.size()==0 ? null : subElems;
+    }
+
+    /**
+     * sets the element and attribute defaults
+     * 
+     * @param element the element that is defaulted
      * @param bAll if false, only add if minOccurs>=1 and required=true or a default exists
-	 * @return ignored
-	 */
+     * @return ignored
+     */
     public boolean setDefaultsFromCaps(KElement element, boolean bAll)
     {
         boolean success=false;
@@ -2272,7 +2282,7 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
                 int occurs=subElms==null ? 0 : subElms.size();
                 if(occurs<minOccurs && subElms==null)
                     subElms=new VElement();
-                
+
                 for(int ii=occurs;ii<minOccurs;ii++)
                 {
                     final String id=subDevCap.getID();                   

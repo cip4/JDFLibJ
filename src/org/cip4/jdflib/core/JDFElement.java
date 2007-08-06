@@ -130,6 +130,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
+import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -2379,16 +2380,13 @@ public class JDFElement extends KElement
             final JDFJMF m=getJMFRoot();
             if(m!=null)
             {
-            	//For some reason, only this function produced local to be "New Value" and caused the JDF Schema validation to be
-            	//messed up. I hacked it to reset it to "" and everything works fine now. I don't understand how/where it sets
-            	//local to "New Value".
-
-            	final String local1 = "New Value";
                 local=m.getSenderID();
-                
-                if (local.equals(local1))
-                { local = "";}
-                
+                if(!isWildCard(local))
+                    local="."+local+".";
+            }
+
+            if(m!=null)
+            {                        
                 if(!isWildCard(local))
                     local = "." + local + ".";
             }
@@ -3133,6 +3131,16 @@ public class JDFElement extends KElement
         }
 
         return (String) vs.elementAt(value);
+    }
+    /**
+     * Get the document object that owns this
+     *
+     * @return JDFDoc the owner document of this
+     */
+    public XMLDoc getOwnerDocument_JDFElement()
+    {
+        final Document doc = getOwnerDocument();
+        return new JDFDoc(doc);
     }
 
     /**

@@ -173,9 +173,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 
     public void testURLToFile() throws Exception
     {
-        String cwd=System.getProperty("user.dir");
-        System.setProperty("user.dir", sm_dirTestDataTemp);
-        File f=UrlUtil.urlToFile(".");
+         File f=UrlUtil.urlToFile(".");
         assertTrue(f.isDirectory());
         File f2=UrlUtil.urlToFile(UrlUtil.fileToUrl(f, true));
         assertTrue(f2.isDirectory());
@@ -194,7 +192,6 @@ public class UrlUtilTest extends JDFTestCaseBase
         f2=UrlUtil.urlToFile(fileToUrl);
         assertEquals("escape %20",f.getCanonicalPath(), f2.getCanonicalPath());
 
-        System.setProperty("user.dir", cwd);
     }
     ///////////////////////////////////////////////////////////////////////////
 

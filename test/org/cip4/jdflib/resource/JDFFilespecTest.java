@@ -98,25 +98,18 @@ import org.cip4.jdflib.util.StringUtil;
 
 public class JDFFilespecTest extends JDFTestCaseBase
 {
-    public void testSetAbsoluteURL()
+    public void testSetAbsoluteURL() throws Exception
     {
         JDFDoc doc=new JDFDoc("JDF");
         JDFNode n=doc.getJDFRoot();
         JDFFileSpec fs=(JDFFileSpec) n.addResource("FileSpec", null, EnumUsage.Input, null, null, null, null);
         JDFFileSpec fs2=(JDFFileSpec) n.addResource("FileSpec", null, EnumUsage.Input, null, null, null, null);
-        try
-        {
-            fs.setAbsoluteFileURL(new File("c:\\ist blöd\\fnord is €"),false);
-            fs2.setAbsoluteFileURL(new File("c:\\ist blöd\\fnord is €"),true);
-        }
-        catch (MalformedURLException e)
-        {
-            fail("exception");
-        }
+        fs.setAbsoluteFileURL(new File("C:\\ist blöd\\fnord is €"),false);
+        fs2.setAbsoluteFileURL(new File("C:\\ist blöd\\fnord is €"),true);
         assertEquals(fs.getURL(), "file:///C:/ist%20blöd/fnord%20is%20€");
         assertEquals(fs2.getURL(),"file:///C:/ist%20bl%c3%b6d/fnord%20is%20%e2%82%ac");
     }
-    
+
     ////////////////////////////////////////////////////////////////
    
     public void testGetURLCidStream() throws Exception

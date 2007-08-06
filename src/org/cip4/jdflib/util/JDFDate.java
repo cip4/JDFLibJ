@@ -86,6 +86,7 @@ package org.cip4.jdflib.util;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.SimpleTimeZone;
+import java.util.TimeZone;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.time.FastDateFormat;
@@ -102,16 +103,18 @@ public class JDFDate implements Comparable
      * Allocates a <code>JDFDate</code> object and initializes it so that 
      * it represents the time at which it was allocated, measured to the 
      * nearest millisecond. 
+     * Also sets the current time zone to the system default time zone
      */
     public JDFDate()
     {
-        lTimeInMillis = System.currentTimeMillis();
+        this(System.currentTimeMillis());
     }
 
     /**
      * Allocates a <code>JDFDate</code> object and initializes it so that 
      * it represents the time point, expressed in milliseconds 
      * after January 1, 1970, 0:00:00 GMT.
+     * Also sets the current time zone to the system default time zone
      * 
      * @param iTime   current time in milliseconds after January 1, 1970, 0:00:00 GMT.
      * Use JDFDuration instead. This class will be modified to handle only JDFDate objects
@@ -119,6 +122,8 @@ public class JDFDate implements Comparable
     public JDFDate(final long iTime)
     {
         lTimeInMillis = iTime;
+        TimeZone t=TimeZone.getDefault();
+        m_TimeZoneOffsetInMillis=t.getOffset(lTimeInMillis);
     }
 
 
@@ -146,6 +151,7 @@ public class JDFDate implements Comparable
      */
     public JDFDate(final String strDateTime) throws DataFormatException
     {
+        this();
         init(strDateTime);
     }
 
@@ -193,7 +199,7 @@ public class JDFDate implements Comparable
         {
 
             if(strDateTime.indexOf("T")==-1)
-                strDateTime+="T00:00:00Z";
+                strDateTime+="T00:00:00"+getTimeZoneISO();
 
             // check for zulu style time zone
             final int length = strDateTime.length();
@@ -261,20 +267,18 @@ public class JDFDate implements Comparable
             //check if there is an +xx:00 or -xx:00 at the end specifying the timezone
             if (   (strDateTime.indexOf('+', 19) == -1) && (strDateTime.indexOf('-', 19) == - 1) )  
             {
-                //no + or - timezone found
-                strDateTime += "+00:00"; //add the zulu timezone
+                setTimeZoneOffsetInMillis( TimeZone.getDefault().getOffset(lTimeInMillis));
             }
-
-
-            setTimeZoneOffsetInMillis(0);
-            // handle sign explicitly, because "+02" is no valid Integer, while "-02" and "02" are valid Integer
-            setTimeZoneOffsetInMillis(3600 * 1000 * new Integer (strDateTime.substring(20+decimalLength,22+decimalLength)).intValue());
-
-            if (strDateTime.charAt(19+decimalLength) == '-')
+            else
             {
-                setTimeZoneOffsetInMillis(- getTimeZoneOffsetInMillis());
+                // handle sign explicitly, because "+02" is no valid Integer, while "-02" and "02" are valid Integer
+                setTimeZoneOffsetInMillis(3600 * 1000 * new Integer (strDateTime.substring(20+decimalLength,22+decimalLength)).intValue());
+                if (strDateTime.charAt(19+decimalLength) == '-')
+                {
+                    setTimeZoneOffsetInMillis(- getTimeZoneOffsetInMillis());
+                }
             }
-
+     
 
             // interprete string
             final int iYear  = new Integer (strDateTime.substring( 0, 4)).intValue();
@@ -556,7 +560,7 @@ public class JDFDate implements Comparable
     /**
      * @param timeZoneOffsetInMillis The timeZoneOffsetInMillis to set.
      */
-    private void setTimeZoneOffsetInMillis(final int timeZoneOffsetInMillis)
+    public void setTimeZoneOffsetInMillis(final int timeZoneOffsetInMillis)
     {
         m_TimeZoneOffsetInMillis = timeZoneOffsetInMillis;
     }
@@ -564,13 +568,10 @@ public class JDFDate implements Comparable
     /**
      * @return Returns the timeZoneOffsetInMillis.
      */
-    private int getTimeZoneOffsetInMillis()
+    public int getTimeZoneOffsetInMillis()
     {
         return m_TimeZoneOffsetInMillis;
     }
-
-
-
 
 
     /**

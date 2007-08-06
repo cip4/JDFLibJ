@@ -128,6 +128,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.JDFSpawn;
+import org.cip4.jdflib.util.StatusCounter;
 import org.cip4.jdflib.util.StatusUtil;
 
 
@@ -597,12 +598,12 @@ public class JDFNodeTest extends JDFTestCaseBase
         root.setJobPartID("jpID");
         JDFNodeInfo nodeInfo = root.getCreateNodeInfo();
         nodeInfo.setAgentName("myAgent");
-        StatusUtil su=new StatusUtil(root,null,null);
-        su.setPhase(EnumNodeStatus.Waiting, "Queued", EnumDeviceStatus.Idle, null,null);
+        StatusCounter su=new StatusCounter(root,null,null);
+        su.setPhase(EnumNodeStatus.Waiting, "Queued", EnumDeviceStatus.Idle, null);
         JDFDoc docJMF=su.getDocJMFPhaseTime();
         JDFJMF jmf = docJMF.getJMFRoot();
         assertNotNull(jmf);
-        assertEquals(jmf.numChildElements(ElementName.SIGNAL,null),1);
+        assertEquals(jmf.numChildElements(ElementName.RESPONSE,null),1);
         JDFAuditPool ap=root.getAuditPool();
         JDFPhaseTime pt= ap.getLastPhase(null);
         assertEquals(pt.getStatus(),EnumNodeStatus.Waiting);
@@ -612,8 +613,8 @@ public class JDFNodeTest extends JDFTestCaseBase
         vMap.add(map);
         docJMF.write2File(sm_dirTestDataTemp+File.separator+"queued.jmf",2,true);
         Thread.sleep(1000);
-        su=new StatusUtil(root,vMap,null);
-        su.setPhase(EnumNodeStatus.Setup, "Setup", EnumDeviceStatus.Setup, null,null);
+        su.setActiveNode(root, vMap, null);
+        su.setPhase(EnumNodeStatus.Setup, "Setup", EnumDeviceStatus.Setup, null);
 
         docJMF=su.getDocJMFPhaseTime();
         pt= ap.getLastPhase(vMap);
@@ -622,11 +623,10 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertEquals(pt.getPartMapVector(),vMap);
         jmf = docJMF.getJMFRoot();
         assertNotNull(jmf);
-        assertEquals(jmf.numChildElements(ElementName.SIGNAL,null),1);
+        assertEquals(jmf.numChildElements(ElementName.RESPONSE,null),1);
         docJMF.write2File(sm_dirTestDataTemp+File.separator+"setup.jmf",2,true);
         Thread.sleep(1000);
-        su=new StatusUtil(root,vMap,null);
-        su.setPhase(EnumNodeStatus.InProgress, "Run", EnumDeviceStatus.Running, null,null);
+        su.setPhase(EnumNodeStatus.InProgress, "Run", EnumDeviceStatus.Running, null);
 
         docJMF=su.getDocJMFPhaseTime();
         pt=(JDFPhaseTime) ap.getAudit(-1, EnumAuditType.PhaseTime, null,null);
@@ -635,10 +635,10 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertEquals(pt.getPartMapVector(),vMap);
         jmf = docJMF.getJMFRoot();
         assertNotNull(jmf);
-        assertEquals(jmf.numChildElements(ElementName.SIGNAL,null),2);        docJMF.write2File(sm_dirTestDataTemp+File.separator+"inprogress.jmf",2,true);
+        assertEquals(jmf.numChildElements(ElementName.RESPONSE,null),1);        
+        docJMF.write2File(sm_dirTestDataTemp+"inprogress.jmf",2,true);
         Thread.sleep(1000);
-        su=new StatusUtil(root,vMap,null);
-        su.setPhase(EnumNodeStatus.InProgress, "Run", EnumDeviceStatus.Running, null,null);
+        su.setPhase(EnumNodeStatus.InProgress, "Run", EnumDeviceStatus.Running, null);
 
         docJMF=su.getDocJMFPhaseTime();
         pt=(JDFPhaseTime) ap.getAudit(-1, EnumAuditType.PhaseTime, null,null);
@@ -647,11 +647,11 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertEquals(pt.getPartMapVector(),vMap);
         jmf = docJMF.getJMFRoot();
         assertNotNull(jmf);
-        assertEquals(jmf.numChildElements(ElementName.SIGNAL,null),1);        docJMF.write2File(sm_dirTestDataTemp+File.separator+"inprogress2.jmf",2,true);
+        assertEquals(jmf.numChildElements(ElementName.RESPONSE,null),1);        
+        docJMF.write2File(sm_dirTestDataTemp+"inprogress2.jmf",2,true);
 
         root.getCreateAncestorPool().setPartMapVector(vMap);
-        su=new StatusUtil(root,null,null);
-        su.setPhase(EnumNodeStatus.InProgress, "Run", EnumDeviceStatus.Running, null,null);
+        su.setPhase(EnumNodeStatus.InProgress, "Run", EnumDeviceStatus.Running, null);
         docJMF=su.getDocJMFPhaseTime();
         pt=(JDFPhaseTime) ap.getAudit(-1, EnumAuditType.PhaseTime, null,null);
         assertEquals(pt.getStatus(),EnumNodeStatus.InProgress);
@@ -659,7 +659,8 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertEquals(pt.getPartMapVector(),vMap);
         jmf = docJMF.getJMFRoot();
         assertNotNull(jmf);
-        assertEquals(jmf.numChildElements(ElementName.SIGNAL,null),1);        docJMF.write2File(sm_dirTestDataTemp+File.separator+"inprogress2.jmf",2,true);
+        assertEquals(jmf.numChildElements(ElementName.RESPONSE,null),1);        
+        docJMF.write2File(sm_dirTestDataTemp+"inprogress2.jmf",2,true);
 
     }
     /**

@@ -289,7 +289,6 @@ public class KElement extends ElementNSImpl
     public XMLDoc getOwnerDocument_KElement()
     {
         final Document doc = getOwnerDocument();
-
         return new XMLDoc(doc);
     }
 
@@ -1610,6 +1609,22 @@ public class KElement extends ElementNSImpl
     {
         bResolveTarget=bResolveTarget&&true; // fool compiler
         return getChildElementVector_KElement(nodeName, nameSpaceURI, mAttrib, bAnd, maxSize);
+    }
+    
+    /**
+     * Get all children from the actual element matching the given conditions<br>
+     * convenience for  getChildElementVector(nodeName, nameSpaceURI, null, true, 0, true)
+     * @param nodeName       element name you are searching for
+     * @param nameSpaceURI   nameSpace you are searching for
+     *
+     * @return VElement      vector with all found elements
+     *
+     * @default getChildElementVector(null, null)
+     * 
+     */
+    public VElement getChildElementVector(String nodeName, String nameSpaceURI)
+    {
+        return getChildElementVector(nodeName, nameSpaceURI, null, true, 0, true);
     }
 
     /**
