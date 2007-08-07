@@ -111,7 +111,7 @@ public class TestJDF
         try
         {
             MimeUtil.writeToFile(m, sm_dirTestDataTemp+"/Bambitest.mjm");
-            HttpURLConnection uc=MimeUtil.writeToURL(m, "http://localhost:8080/JDFUtility/Bambi/test");
+            HttpURLConnection uc=MimeUtil.writeToURL(m, "http://localhost:8080/Bambi/jmf/device001/");
             FileUtil.streamToFile(uc.getInputStream(), sm_dirTestDataTemp+"/BambiIn.txt");
             FileUtil.streamToFile(uc.getErrorStream(), sm_dirTestDataTemp+"/BambiErr.txt");
         }

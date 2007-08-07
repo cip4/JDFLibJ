@@ -556,6 +556,43 @@ public class KElement extends ElementNSImpl
         public static final EnumValidationLevel RecursiveComplete = new EnumValidationLevel(
                 JDFConstants.VALIDATIONLEVEL_RECURSIVECOMPLETE);
 
+        /**
+         * 
+         * calculate the corresponding nowarn level based on level
+         * @param noWarning if true, set to nowarne, else set to standard
+         * @return
+         */
+        public static EnumValidationLevel setNoWarning(EnumValidationLevel level, boolean noWarning)
+        {
+            if(noWarning &&!isNoWarn(level))
+                level=isRequired(level) ? EnumValidationLevel.NoWarnComplete : EnumValidationLevel.NoWarnIncomplete;
+            if(!noWarning &&isNoWarn(level))
+                level=isRequired(level) ? EnumValidationLevel.Complete : EnumValidationLevel.Incomplete;
+            return level;
+        }
+
+        /**
+         * calculate the corresponding incomplete level based on level
+         *
+         * @param level the level to test
+         * @return EnumValidationLevel - the modified level
+         */
+        public static EnumValidationLevel incompleteLevel(EnumValidationLevel level)
+        {
+            if(EnumValidationLevel.Complete.equals(level))
+            {
+                level = EnumValidationLevel.Incomplete;
+            }
+            else if(EnumValidationLevel.RecursiveComplete.equals(level))
+            {
+                level = EnumValidationLevel.RecursiveIncomplete;
+            }
+            else if(EnumValidationLevel.NoWarnComplete.equals(level))
+            {
+                level = EnumValidationLevel.NoWarnIncomplete;
+            }
+            return level;
+        }
     }
 
 
@@ -2583,9 +2620,9 @@ public class KElement extends ElementNSImpl
      * <p>
      * default: getPrereleaseElements(99999999)
      *
-     * @return Vector   vector with nMax missing elements
+     * @return VString   vector with nMax missing elements
      */
-    public Vector getPrereleaseElements(int nMax)
+    public VString getPrereleaseElements(int nMax)
     {
         VString v=getTheElementInfo().prereleaseElements();
         return getMatchingElementVector(v, nMax);
@@ -2597,9 +2634,9 @@ public class KElement extends ElementNSImpl
      * <p>
      * default: getDeprecatedElements(99999999)
      *
-     * @return Vector   vector with nMax missing elements
+     * @return VString   vector with nMax missing elements
      */
-    public Vector getDeprecatedElements(int nMax)
+    public VString getDeprecatedElements(int nMax)
     {
         VString v = getTheElementInfo().deprecatedElements();
         return getMatchingElementVector(v, nMax);
@@ -2677,10 +2714,10 @@ public class KElement extends ElementNSImpl
      *
      * @return Vector the vector with the missing elements
      */
-    private Vector getMatchingElementVector(Vector vReqKeys, int nMax)
+    private VString getMatchingElementVector(VString vReqKeys, int nMax)
     {
-        final Vector vAtts = getElementNameVector();
-        final Vector vReturn = new Vector();
+        final VString vAtts = getElementNameVector();
+        final VString vReturn = new VString();
 
         for (int i = 0; i < vReqKeys.size() && vReturn.size() < nMax; i++)
         {

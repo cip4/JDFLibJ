@@ -164,7 +164,7 @@ public class CheckJDF
     private String translation=null;
     private boolean bTryFormats=false;
     public boolean bTiming=false;
-    public boolean bWarning=false;
+    private boolean bWarning=false;
     public boolean bQuiet=true;
     private boolean bPrintNameSpace=true;
     public boolean bValidate=true;
@@ -441,7 +441,7 @@ public class CheckJDF
                  }
              }
 
-             if (bIsOK)
+             if (bIsOK && bWarning)
              {
                  String invElems = xmlParent.getAttribute("DeprecatedElements");
                  bIsOK = !StringUtil.hasToken(invElems,elmName," ",0);
@@ -574,10 +574,10 @@ public class CheckJDF
                  jdfElement.getInvalidElements(level, true, 9999999);
              VString missingAttributes = new VString();
              VString missingElements = new VString();
-             VString deprecatedAttributes = new VString(jdfElement.getDeprecatedAttributes( 9999999));
-             VString deprecatedElements = new VString(jdfElement.getDeprecatedElements( 9999999));
-             VString prereleaseAttributes = new VString(jdfElement.getPrereleaseAttributes( 9999999));
-             VString prereleaseElements = new VString(jdfElement.getPrereleaseElements( 9999999));
+             VString deprecatedAttributes = jdfElement.getDeprecatedAttributes( 9999999);
+             VString deprecatedElements = jdfElement.getDeprecatedElements( 9999999);
+             VString prereleaseAttributes = jdfElement.getPrereleaseAttributes( 9999999);
+             VString prereleaseElements = jdfElement.getPrereleaseElements( 9999999);
 
              // unknown attributes are also invalid -> remove them from the print list
              invalidAttributes.removeStrings(unknownAttributes,99999);
@@ -609,6 +609,13 @@ public class CheckJDF
                  invalidElements.removeStrings(missingElements,99999);
              }
 
+             // remove all warning lists
+             if(!bWarning)
+             {
+                 deprecatedElements=null;
+                 deprecatedAttributes=null;
+             }
+             
              // remove all double entries before printing
              unknownElements.unify();
              missingElements.unify();
@@ -723,6 +730,9 @@ public class CheckJDF
 
     private void printElementList(int indent, KElement testElement, JDFElement part, VString elementVector, String whatType)
     {
+        if(elementVector==null)
+            return;
+        
         elementVector.unify();
         int j;
 //        String potDup=" : ";
@@ -764,6 +774,8 @@ public class CheckJDF
 
      private void printAttributeList(int indent, KElement testElement, JDFElement part, boolean printMissElms, VString attributeVector, String whatType, String message)
      {
+         if(attributeVector==null)
+             return;
          attributeVector.unify();
          String originalMessage=message;
          int j;
@@ -2593,4 +2605,20 @@ public class CheckJDF
     //////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////
+    /**
+     * @return the bWarning
+     */
+    public boolean isBWarning()
+    {
+        return bWarning;
+    }
+
+    /**
+     * @param warning the bWarning to set
+     */
+    public void setWarning(boolean warning)
+    {
+        bWarning = warning;
+        level=EnumValidationLevel.setNoWarning(level,!warning);
+    }
  }

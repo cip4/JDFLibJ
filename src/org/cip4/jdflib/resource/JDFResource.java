@@ -6806,20 +6806,10 @@ public class JDFResource extends JDFElement
      */
     private EnumValidationLevel incompleteLevel(EnumValidationLevel level, boolean bForce)
     {
-        if (EnumValidationLevel.isRequired(level))
+        EnumResStatus es = getResStatus(false);
+        if ((es == EnumResStatus.Incomplete) || isResourceUpdate() || bForce)
         {
-            EnumResStatus es = getResStatus(false);
-            if ((es == EnumResStatus.Incomplete) || isResourceUpdate() || bForce)
-            {
-                if(level == EnumValidationLevel.Complete)
-                {
-                    level = EnumValidationLevel.Incomplete;
-                }
-                else if(level == EnumValidationLevel.RecursiveComplete)
-                {
-                    level = EnumValidationLevel.RecursiveIncomplete;
-                }
-            }
+            level=EnumValidationLevel.incompleteLevel(level);
         }
         return level;
     }

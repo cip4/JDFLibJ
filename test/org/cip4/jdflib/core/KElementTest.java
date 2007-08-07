@@ -85,6 +85,7 @@ import java.util.Map;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
@@ -98,6 +99,15 @@ import org.w3c.dom.Element;
 public class KElementTest extends JDFTestCaseBase
 {
 
+    public void testEnumValid()
+    {
+        EnumValidationLevel level=EnumValidationLevel.RecursiveComplete;
+        assertEquals(EnumValidationLevel.NoWarnComplete, EnumValidationLevel.setNoWarning(level, true));
+        assertEquals(EnumValidationLevel.RecursiveComplete, EnumValidationLevel.setNoWarning(level, false));
+        level=EnumValidationLevel.RecursiveIncomplete;
+        assertEquals(EnumValidationLevel.NoWarnIncomplete, EnumValidationLevel.setNoWarning(level, true));
+        assertEquals(EnumValidationLevel.RecursiveIncomplete, EnumValidationLevel.setNoWarning(level, false));
+    }
     /*
      * Test for void RemoveAttribute(String, String) - PR-AKMP-000001
      */
