@@ -2381,8 +2381,12 @@ public class JDFElement extends KElement
             if(m!=null)
             {
                 local=m.getSenderID();
+                
+                if(local.equals("New Value"))
+                {local="";}
+                
                 if(!isWildCard(local))
-                    local="."+local+".";
+                local="."+local+".";
             }
 
             if(m!=null)
