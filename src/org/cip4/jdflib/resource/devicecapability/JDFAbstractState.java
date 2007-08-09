@@ -1186,11 +1186,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     /* (non-Javadoc)
      * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
      */
-    public EnumTerm getEvaluationType()
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
+    public abstract EnumTerm getEvaluationType();
 
     /* (non-Javadoc)
      * @see java.lang.Object#clone()

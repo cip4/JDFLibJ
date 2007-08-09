@@ -74,13 +74,15 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.devicecapability.JDFModuleCap;
 import org.cip4.jdflib.resource.devicecapability.JDFModulePool;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap.EnumAvailability;
+import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 
 /**
- * interface that connects the devcap classes that implement module availability
+ * interface that connects the devcap classes that implement vapabilities, i.e. 
+ * state and devcap
  * @author prosirai
  *
  */
-public interface IModuleCapability
+public interface ICapabilityElement
 {
     /**
      * get the ModulePool that contains ModuleCap elements referenced by this
@@ -120,6 +122,13 @@ public interface IModuleCapability
      * @param module
      */
     public void setAvailability(EnumAvailability module);
+    
+    /**
+     * get the type of evaluation that is appropriate for this ICapabilityElement
+     * @return EnumTerm the type of evaluation
+     */
+    public abstract EnumTerm getEvaluationType();
+
 
 
 }
