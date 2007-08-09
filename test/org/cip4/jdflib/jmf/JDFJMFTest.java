@@ -210,6 +210,14 @@ public class JDFJMFTest extends TestCase
         assertEquals(jmf.getResponse(0).getLocalName(), "Response");
     }
     /////////////////////////////////////////////////////////////////////
+    public void testSenderIDBlank()
+    {
+        JDFJMF.setTheSenderID("a b");
+        JDFJMF jmf=JDFJMF.createJMF(EnumFamily.Response, EnumType.AbortQueueEntry);
+        final JDFResponse response = jmf.getResponse(0);
+        assertTrue("thge sender id was added but stripped",response.getID().indexOf(".ab.")>0);
+    }
+    /////////////////////////////////////////////////////////////////////
     
     public void testDeviceInfo()
     {
@@ -333,6 +341,14 @@ public class JDFJMFTest extends TestCase
         rqe.setURL("http://foo.jdf");
         rqe.setQueueEntryID("dummyID");
         assertTrue("JDFReturnQueueEntryParams",rqe.isValid(EnumValidationLevel.Complete));
+    }
+    /* (non-Javadoc)
+     * @see junit.framework.TestCase#tearDown()
+     */
+    protected void tearDown() throws Exception
+    {
+        JDFJMF.setTheSenderID(null);
+        super.tearDown();
     }
 
 }

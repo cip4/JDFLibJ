@@ -4398,7 +4398,7 @@ public class JDFNode extends JDFElement
     public JDFNode getParentJDF()
     {
         final KElement jdfElem = getParentNode_KElement();        
-        if (jdfElem != null && jdfElem instanceof JDFNode)
+        if (jdfElem instanceof JDFNode)
         {
             return (JDFNode) jdfElem;
         }       

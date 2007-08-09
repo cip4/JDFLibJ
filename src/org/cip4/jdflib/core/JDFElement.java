@@ -2381,12 +2381,11 @@ public class JDFElement extends KElement
             if(m!=null)
             {
                 local=m.getSenderID();
-                
-                if(local.equals("New Value"))
-                {local="";}
-                
                 if(!isWildCard(local))
-                local="."+local+".";
+                {
+                    local=StringUtil.replaceCharSet(local, " \t\n\f", null, 0);
+                    local="."+local+".";
+                }
             }
 
             strName = getIDPrefix() + local + uniqueID(0);
