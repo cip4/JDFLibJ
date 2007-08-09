@@ -100,6 +100,7 @@ import javax.mail.internet.MimeMultipart;
 
 import org.apache.commons.io.IOUtils;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
@@ -516,7 +517,7 @@ public class MimeUtil
 
         KElement e=docJDF.getRoot();
         // get a list of all referenced document urls
-        VElement v=e.getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.URL,"*"), false, false, 0);
+        VElement v=e.getChildrenByTagName(ElementName.FILESPEC, null, new JDFAttributeMap(AttributeName.URL,"*"), false, false, 0);
         final int vSize = v==null ? 0 : v.size();
         String[] urlStrings = listURLs(v);
         for(int i=0;i<urlStrings.length;i++)

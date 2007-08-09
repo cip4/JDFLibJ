@@ -318,7 +318,7 @@ public class StringUtilTest extends JDFTestCaseBase
         assertEquals(StringUtil.newExtension(".b",".c"), ".c");
     }
 
-
+ 
 
 
     public void testReplaceString()

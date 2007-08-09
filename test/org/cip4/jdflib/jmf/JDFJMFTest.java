@@ -184,6 +184,7 @@ public class JDFJMFTest extends TestCase
         s.convertResponse(r,null);
         assertEquals("type",r.getType(),s.getType());
         assertTrue("ms equal",ms.isEqual(s.getMessageService(0)));
+        assertTrue(s.getXSIType().startsWith("Signal"));
     }
     
     

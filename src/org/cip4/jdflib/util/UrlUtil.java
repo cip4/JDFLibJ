@@ -270,6 +270,19 @@ public class UrlUtil
         int index = pathName.lastIndexOf(".");
         return (index == -1) ? null : pathName.substring(index + 1);
     }
+    /**
+     * get the filename extension of pathName
+     * @param pathName the pathName to get the extension for
+     * @return String - the filename extension
+     */
+    public static String removeExtension(String pathName)
+    {
+        if(pathName==null)
+            return null;
+
+        int index = pathName.lastIndexOf(".");
+        return (index == -1) ? pathName : pathName.substring(0,index);
+    }
 
     /**
      * get an array of urlparts, regardless of whether this was mime or not

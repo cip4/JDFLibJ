@@ -23,6 +23,9 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.jmf.JDFQuery;
+import org.cip4.jdflib.jmf.JDFQueueSubmissionParams;
+import org.cip4.jdflib.jmf.JDFSubscription;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
@@ -89,12 +92,18 @@ public class TestJDF
         d1.setOriginalFileName("JMF.jmf");
         JDFJMF jmf=d1.getJMFRoot();
         JDFCommand com=(JDFCommand) jmf.appendMessageElement(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.SubmitQueueEntry);
-        com.appendQueueSubmissionParams().setURL("cid:TheJDF");
+        final JDFQueueSubmissionParams appendQueueSubmissionParams = com.appendQueueSubmissionParams();
+        appendQueueSubmissionParams.setURL("cid:TheJDF");
+        appendQueueSubmissionParams.setReturnJMF("http://localhost:8080/JDFUtility/dump");
         
         JDFDoc doc=new JDFDoc("JDF");
         doc.setOriginalFileName("JDF.jdf");  
         JDFNode n=doc.getJDFRoot();
         n.setType(EnumType.ColorSpaceConversion);
+        JDFQuery query=n.appendNodeInfo().appendJMF().appendQuery(org.cip4.jdflib.jmf.JDFMessage.EnumType.Status);
+        final JDFSubscription subs = query.appendSubscription();
+        subs.setURL("http://localhost:8080/JDFUtility/dump");
+        subs.setRepeatTime(1);
         JDFColorSpaceConversionParams cscp=(JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input, null, null, null, null);
         JDFFileSpec fs0=cscp.appendFinalTargetDevice();
         JDFRunList rl=(JDFRunList)n.addResource(ElementName.RUNLIST, null, EnumUsage.Input, null, null, null, null);
@@ -111,9 +120,10 @@ public class TestJDF
         try
         {
             MimeUtil.writeToFile(m, sm_dirTestDataTemp+"/Bambitest.mjm");
-            HttpURLConnection uc=MimeUtil.writeToURL(m, "http://localhost:8080/Bambi/jmf/device001/");
-            FileUtil.streamToFile(uc.getInputStream(), sm_dirTestDataTemp+"/BambiIn.txt");
-            FileUtil.streamToFile(uc.getErrorStream(), sm_dirTestDataTemp+"/BambiErr.txt");
+            HttpURLConnection uc2=MimeUtil.writeToURL(m, "http://localhost:8080/Bambi/jmf/device001/");
+//            HttpURLConnection uc=MimeUtil.writeToURL(m, "http://localhost:8080/JDFUtility/dump");
+            FileUtil.streamToFile(uc2.getInputStream(), sm_dirTestDataTemp+"/BambiIn.txt");
+            FileUtil.streamToFile(uc2.getErrorStream(), sm_dirTestDataTemp+"/BambiErr.txt");
         }
         catch (IOException x)
         {
