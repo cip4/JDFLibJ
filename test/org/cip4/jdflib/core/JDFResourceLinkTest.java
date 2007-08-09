@@ -338,6 +338,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
         assertTrue("valid param",jmf.isValid(EnumValidationLevel.Complete));
         assertEquals(ruli,rl.getTarget());
     }
+    
     /**
      * Method testGetTarget
      * @throws Exception
@@ -353,6 +354,42 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
         VElement v=rl.getTargetVector(0);
         assertEquals("The target vector is the node with two leaves",v.size(),1);
 
+     }
+    /**
+     * Method testGetTarget
+     * @throws Exception
+     */
+    public void testGetTargetVectorNullPart() throws Exception
+    {
+        JDFDoc d=JDFTestCaseBase.creatXMDoc();
+        JDFNode n=d.getJDFRoot();
+         JDFResourceLink rl=n.getMatchingLink("ExposedMedia",EnumProcessUsage.Plate,0);
+        rl.appendPart();
+        VElement v=rl.getTargetVector(0);
+        assertEquals("The target vector is the node with two leaves",v.size(),1);
+        final JDFResource linkRoot = rl.getLinkRoot();
+        assertEquals("The target vector is the node with two leaves",v.elementAt(0), linkRoot);
+        linkRoot.setPartUsage(EnumPartUsage.Implicit);
+        v=rl.getTargetVector(0);
+        assertEquals("The target vector is the node with two leaves",v.size(),1);
+        assertEquals("The target vector is the node with two leaves",v.elementAt(0), linkRoot);
+
+        linkRoot.setPartUsage(EnumPartUsage.Explicit);
+
+        JDFAttributeMap mPart=new JDFAttributeMap("SignatureName","Sig1");
+        mPart.put("SheetName","S1");
+        rl.setPartMap(mPart);
+        rl.appendPart();
+
+
+        v=rl.getTargetVector(0);
+        assertEquals("The target vector is the node with two leaves",v.size(),2);
+        assertTrue(v.contains(linkRoot));
+        assertTrue(v.contains(linkRoot.getPartition(mPart, null)));
+        linkRoot.setPartUsage(EnumPartUsage.Implicit);
+        v=rl.getTargetVector(0);
+        assertTrue(v.contains(linkRoot));
+        assertTrue(v.contains(linkRoot.getPartition(mPart, null)));
      }
 
     /**

@@ -409,6 +409,26 @@ public class JDFQueue extends JDFAutoQueue
         return automated;
         
     }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#clone()
+     */
+    protected Object clone() throws CloneNotSupportedException
+    {
+        // TODO Auto-generated method stub
+        return super.clone();
+    }
+
+    /**
+     * get the queuesize attribute or if it does not exist, count queuentry elements
+     * thesize of the queue
+     */
+    public int getQueueSize()
+    {
+        if(hasAttribute(AttributeName.QUEUESIZE))
+            return super.getQueueSize();
+        return getEntryCount();
+    }
     
     ///////////////////////////////////////////////////////////////////////
     

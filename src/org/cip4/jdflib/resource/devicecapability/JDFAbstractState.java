@@ -106,9 +106,10 @@ import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFNameRangeList;
 import org.cip4.jdflib.datatypes.JDFRangeList;
-import org.cip4.jdflib.ifaces.IModuleCapability;
+import org.cip4.jdflib.ifaces.ICapabilityElement;
 import org.cip4.jdflib.jmf.JDFMessageService;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap.EnumAvailability;
+import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.span.JDFSpanBase;
 import org.cip4.jdflib.util.JDFDate;
@@ -116,7 +117,7 @@ import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
 
 
-public abstract class JDFAbstractState extends JDFElement implements JDFBaseDataTypes, IModuleCapability
+public abstract class JDFAbstractState extends JDFElement implements JDFBaseDataTypes, ICapabilityElement
 {
     private static final long serialVersionUID = 1L;
 
@@ -201,6 +202,8 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     {
         return "JDFAbstractState[ --> " + super.toString() + " ]";
     }
+
+
 
     public static class EnumUserDisplay extends ValuedEnum
     {
@@ -412,6 +415,14 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     public boolean getHasDefault()
     {
         return getBoolAttribute(AttributeName.HASDEFAULT, null, true);
+    }
+
+    /**
+     * get the id
+     */
+    public String getID()
+    {
+        return getAttribute(AttributeName.ID);
     }
 
     /**
@@ -887,7 +898,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
                 nam=StringUtil.token(nsURI, -1, "/")+":"+nam;
             }
         }
-        
+
         if(getListType().equals(EnumListType.Span))
         {            
             JDFIntentResource ir=(JDFIntentResource)element;
@@ -896,7 +907,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
         }
         else // some attribute...
         {
-            
+
             element.setAttribute(nam,def,nsURI);
         } 
         return true;
@@ -1141,17 +1152,52 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
      * (21) get VString attribute ModuleRefs
      * @return VString the value of the attribute
      */
-   public VString getModuleRefs()
-   {
-       return StringUtil.tokenize(getAttribute(AttributeName.MODULEREFS, null, null)," ",false);
-   }
+    public VString getModuleRefs()
+    {
+        return StringUtil.tokenize(getAttribute(AttributeName.MODULEREFS, null, null)," ",false);
+    }
 
-   /* (non-Javadoc)
-    * @see org.cip4.jdflib.ifaces.IModuleCapability#appendModuleRef(java.lang.String)
-    */
-   public JDFModuleCap appendModuleRef(String id)
-   {
-       return JDFModulePool.appendModuleRef(this, id);     
-   }
-   /////////////////////////////////////////////
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.ifaces.IModuleCapability#appendModuleRef(java.lang.String)
+     */
+    public JDFModuleCap appendModuleRef(String id)
+    {
+        return JDFModulePool.appendModuleRef(this, id);     
+    }
+    /////////////////////////////////////////////
+
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.core.KElement#init()
+     */
+    public boolean init()
+    {
+        appendAnchor(null);
+        return super.init();
+    }
+
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.core.JDFElement#getIDPrefix()
+     */
+    protected String getIDPrefix()
+    {
+        return "d";
+    }
+
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
+     */
+    public EnumTerm getEvaluationType()
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#clone()
+     */
+    protected Object clone() throws CloneNotSupportedException
+    {
+        // TODO Auto-generated method stub
+        return super.clone();
+    }
 }

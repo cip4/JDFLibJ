@@ -220,7 +220,6 @@ public class JDFRunList extends JDFAutoRunList
     {
         String runID = "Run" + uniqueID(0);
         JDFRunList r = (JDFRunList) addPartition(JDFResource.EnumPartIDKey.Run, runID); //JDFRun to RunList
-        r.init();
 
         JDFIntegerRangeList irl = new JDFIntegerRangeList();
         irl.append(first, last);
@@ -368,7 +367,6 @@ public class JDFRunList extends JDFAutoRunList
     {
         JDFRunList r = (JDFRunList) addPartition (JDFResource.EnumPartIDKey.Run, "Run" + uniqueID(0));
         int siz = fileNames.size();
-        r.init();
         r.setNPage(n);
         r.setIsPage(true);
 
@@ -491,7 +489,6 @@ public class JDFRunList extends JDFAutoRunList
     {
         JDFRunList r = (JDFRunList) addPartition(JDFResource.EnumPartIDKey.Run, "Run" + uniqueID(0)); //Test TBD
         int siz = fileSpec.size();
-        r.init();
         r.setNPage(n);
 
         for (int i = 0; i < sepNames.size(); i++)

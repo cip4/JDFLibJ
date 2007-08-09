@@ -98,6 +98,8 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
 import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.ifaces.ICapabilityElement;
+import org.cip4.jdflib.ifaces.IDeviceCapable;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -346,7 +348,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
      */
     protected String getEvalXPath(KElement jdf)
     {
-        final JDFElement stateDC = getRefTarget();
+        final ICapabilityElement stateDC = getRefTarget();
         if(stateDC==null)
             return null;
         
@@ -411,7 +413,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
      */
     public String getRefTargetNamePath()
     {
-        KElement e=getRefTarget();
+        ICapabilityElement e=getRefTarget();
         if(e instanceof JDFAbstractState){
             return ((JDFAbstractState)e).getNamePath();
         }
@@ -427,7 +429,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
      */
     public String getRefTargetName()
     {
-        KElement e=getRefTarget();
+        ICapabilityElement e=getRefTarget();
         if(e instanceof JDFAbstractState){
             return ((JDFAbstractState)e).getName();
         }
@@ -457,21 +459,15 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
     
     /**
      * getRefTarget() get the target referencened in @rRef
-     * @return JDFElement() the referenced element, either state or a devcap
+     * @return ICapabilityElement the referenced element, either state or a devcap
      */
-    public JDFElement getRefTarget()
+    public ICapabilityElement getRefTarget()
     {
-        JDFDeviceCap deviceCap =(JDFDeviceCap)getDeepParent(ElementName.DEVICECAP,0);
+        IDeviceCapable deviceCap=getDeviceCapable();
         if(deviceCap==null)
             return null;
-        KElement e=deviceCap.getTarget(getrRef(),null);
-        if(e instanceof JDFAbstractState){
-            return (JDFAbstractState)e;
-        }
-        else if(e instanceof JDFDevCap){
-            return (JDFDevCap)e;
-        }
-        return null;
+        return deviceCap.getTargetCap(getrRef());
+       
     }
     
     
@@ -481,9 +477,9 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
      */
     public JDFAbstractState getState()
     {        
-        KElement e=getRefTarget();
-        if(e!=null && e instanceof JDFAbstractState)
-            return (JDFAbstractState)e;
+        ICapabilityElement ic=getRefTarget();
+        if(ic instanceof JDFAbstractState)
+            return (JDFAbstractState)ic;
         return null;
     }
     

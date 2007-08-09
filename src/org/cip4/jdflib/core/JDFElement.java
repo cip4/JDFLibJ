@@ -2389,11 +2389,6 @@ public class JDFElement extends KElement
                 local="."+local+".";
             }
 
-            if(m!=null)
-            {                        
-                if(!isWildCard(local))
-                    local = "." + local + ".";
-            }
             strName = getIDPrefix() + local + uniqueID(0);
         }
         setAttribute(AttributeName.ID, strName, null);
@@ -3587,17 +3582,21 @@ public class JDFElement extends KElement
      */
     public EnumVersion getVersion(boolean bInherit)
     {
-        String version;
-        if (bInherit)
-        {
-            version = getInheritedAttribute(AttributeName.VERSION,  null, null);
-        }
-        else
-        {
-            version = getAttribute(AttributeName.VERSION,null,null);
-        }
-
-        return EnumVersion.getEnum(version);
+        return EnumVersion.getEnum(bInherit 
+        ? getInheritedAttribute(AttributeName.VERSION,  null, null)
+        : getAttribute(AttributeName.VERSION,null,null));
+    }
+    
+    /**
+     * get the version of this element
+     * @param bInherit if true, check ancestor nodes
+     * @return the version corresponding to this element
+     */
+    public EnumVersion getMaxVersion(boolean bInherit)
+    {
+        return EnumVersion.getEnum(bInherit 
+        ? getInheritedAttribute(AttributeName.MAXVERSION,  null, null)
+        : getAttribute(AttributeName.MAXVERSION,null,null));
     }
 
     /**
@@ -3672,6 +3671,16 @@ public class JDFElement extends KElement
         public static Iterator iterator()
         {
             return iterator(EnumVersion.class);
+        }
+        /**
+         * returns true if this is greater than other
+         * @return boolean true if this>other
+         */
+        public boolean isGreater(EnumVersion other)
+        {
+            if(other==null)
+                return true;
+            return getValue()>other.getValue();
         }
 
 

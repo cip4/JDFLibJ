@@ -99,7 +99,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
-import org.cip4.jdflib.ifaces.IModuleCapability;
+import org.cip4.jdflib.ifaces.ICapabilityElement;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFMessageService;
 import org.cip4.jdflib.node.JDFNode;
@@ -107,11 +107,12 @@ import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap.EnumAvailability;
+import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.cip4.jdflib.util.StringUtil;
 
 
 //----------------------------------
-public class JDFDevCaps extends JDFAutoDevCaps implements IModuleCapability
+public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 {
     private static final long serialVersionUID = 1L;
 
@@ -956,7 +957,14 @@ public class JDFDevCaps extends JDFAutoDevCaps implements IModuleCapability
         return JDFModulePool.appendModuleRef(this, id);     
     }
 
- 
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
+     */
+    public EnumTerm getEvaluationType()
+    {
+        return EnumTerm.IsPresentEvaluation;
+    }
+
   }
 
 

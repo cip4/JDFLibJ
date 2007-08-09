@@ -394,8 +394,7 @@ public class StatusCounter
 
         if(pt2!=null)
         {
-            //TODO rethink this line - if removed 2 explicit responses are generated
-            updateCurrentJobPhase(nodeStatus, deviceStatus, deviceStatusDetails, jmf, la, pt2, bEnd, respStatus);
+            updateCurrentJobPhase(nodeStatus, deviceStatus, deviceStatusDetails, jmf, la, pt2, bEnd);
             generateResourceSignal(jmfRes);
         }
 
@@ -415,22 +414,19 @@ public class StatusCounter
         JDFDeviceInfo di2=r==null ? null : r.getDeviceInfo(-1);
        
         bChanged=bChanged || !ContainerUtil.equals(deviceStatusDetails, di2==null ? null : di2.getAttribute(AttributeName.STATUSDETAILS,null,null));
-        JDFDate d = ( di2==null || di2.getStartTime()==null || bChanged) ? new JDFDate() : di2.getStartTime();
+        JDFDate d = ( di2==null || di2.getIdleStartTime()==null || bChanged) ? new JDFDate() : di2.getIdleStartTime();
         
         docJMFPhaseTime=new JDFDoc(ElementName.JMF);
         JDFDeviceInfo di=docJMFPhaseTime.getJMFRoot().appendResponse(EnumType.Status).appendDeviceInfo();
         di.setDeviceStatus(deviceStatus);
         di.setStatusDetails(deviceStatusDetails);
-        di.setStartTime(d);
+        di.setIdleStartTime(d);
         return bChanged;
     }
 
-    private void updateCurrentJobPhase(EnumNodeStatus nodeStatus, EnumDeviceStatus deviceStatus, String deviceStatusDetails, JDFJMF jmf, final LinkAmount la, JDFPhaseTime pt2, boolean bEnd, JDFResponse respStatus)
+    private void updateCurrentJobPhase(EnumNodeStatus nodeStatus, EnumDeviceStatus deviceStatus, String deviceStatusDetails, JDFJMF jmf, final LinkAmount la, JDFPhaseTime pt2, boolean bEnd)
     {
-        if(respStatus==null) 
-        {
-            respStatus=(JDFResponse)jmf.appendMessageElement(JDFMessage.EnumFamily.Response,JDFMessage.EnumType.Status);
-        }
+        JDFResponse respStatus=(JDFResponse)jmf.appendMessageElement(JDFMessage.EnumFamily.Response,JDFMessage.EnumType.Status);
         JDFDeviceInfo deviceInfo = respStatus.appendDeviceInfo();
         if(!bEnd) // don't write a jobphase for an idle device
         {

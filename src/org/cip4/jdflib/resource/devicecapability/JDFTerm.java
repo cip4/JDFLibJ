@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.ifaces.IDeviceCapable;
 import org.w3c.dom.DOMException;
 
 
@@ -234,4 +235,17 @@ public abstract class JDFTerm extends JDFElement
         public static final EnumTerm TestRef = new EnumTerm(ElementName.TESTREF);
     }
  
+    /**
+     * get the parent devicecap or messageservice
+     * @return
+     */
+    IDeviceCapable getDeviceCapable()
+    {
+        IDeviceCapable deviceCap =(IDeviceCapable)getDeepParent(ElementName.DEVICECAP,0);
+        if(deviceCap!=null)
+            return deviceCap;
+        deviceCap =(IDeviceCapable)getDeepParent(ElementName.MESSAGESERVICE,0);
+        return deviceCap;
+    }
+    
 }

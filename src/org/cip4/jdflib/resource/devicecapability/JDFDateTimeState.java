@@ -97,6 +97,7 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFDateTimeRange;
 import org.cip4.jdflib.datatypes.JDFDateTimeRangeList;
 import org.cip4.jdflib.datatypes.JDFDurationRangeList;
+import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 
@@ -628,5 +629,14 @@ public class JDFDateTimeState extends JDFAbstractState
         }
         return false;
     }
+    
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
+     */
+    public EnumTerm getEvaluationType()
+    {
+        return EnumTerm.DateTimeEvaluation;
+    }
+
     
 }

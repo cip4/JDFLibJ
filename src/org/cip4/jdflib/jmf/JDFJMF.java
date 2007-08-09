@@ -95,6 +95,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
@@ -116,7 +117,6 @@ public class JDFJMF extends JDFAutoJMF
     public JDFJMF (CoreDocumentImpl myOwnerDocument, String qualifiedName)
     {
         super (myOwnerDocument, qualifiedName);
-        init ();
     }
 
     /**
@@ -128,7 +128,6 @@ public class JDFJMF extends JDFAutoJMF
     public JDFJMF (CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
     {
         super (myOwnerDocument, myNamespaceURI==null ? getSchemaURL() : myNamespaceURI, qualifiedName);
-        init ();
     }
 
     /**
@@ -141,7 +140,6 @@ public class JDFJMF extends JDFAutoJMF
     public JDFJMF (CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
     {
         super (myOwnerDocument, myNamespaceURI==null ? getSchemaURL() : myNamespaceURI, qualifiedName, myLocalName);
-        init ();
     }
 
     // **************************************** Methods *********************************************
@@ -165,6 +163,10 @@ public class JDFJMF extends JDFAutoJMF
         super.init ();
         setTimeStamp(null);
         setVersion (getDefaultJDFVersion());
+        final EnumVersion version = getVersion(true);
+        if(!EnumVersion.Version_1_3.isGreater(version))
+            setMaxVersion (version);
+        setXSIType("JMFRootMessage");
         if(theSenderID!=null)
             setSenderID(theSenderID);
         return true;
@@ -762,6 +764,28 @@ public class JDFJMF extends JDFAutoJMF
             }
         }
         return jmf;
+    }
+    /**
+     * convert all responses that match the query q to signals
+     * 
+      * @return the newly created JMF with multiple responses
+     */    
+    public void convertResponses(JDFQuery q)
+    {
+        EnumType t=q==null ? null : q.getEnumType();
+        VElement v=getMessageVector(EnumFamily.Response, t);
+        String qID=q==null ? null : q.getID();
+        for(int i=0;i<v.size();i++)
+        {
+            JDFResponse r=(JDFResponse) v.elementAt(i);
+            if(qID==null || qID.equals(r.getrefID()))
+            {
+                JDFSignal s=appendSignal();
+                moveElement(s, r); // retain ordering
+                s.convertResponse(r, q);
+                r.deleteNode();
+            }
+        }
     }
 
     /**

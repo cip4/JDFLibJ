@@ -97,6 +97,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -140,8 +141,8 @@ public class JDFResourceTest extends JDFTestCaseBase
         JDFNode n=doc.getJDFRoot();
         JDFExposedMedia xm=(JDFExposedMedia)n.getMatchingResource("ExposedMedia",JDFNode.EnumProcessUsage.AnyInput,null,0);
         assertTrue(xm.getCreator(false).contains(n));
-
     }
+    
     public void testGetAttributeVector()
     {
         JDFDoc doc=creatXMDoc();
@@ -223,8 +224,8 @@ public class JDFResourceTest extends JDFTestCaseBase
             JDFAudit.setStaticAgentName("foo");
             xm.init();
             if(bb) {
-				assertEquals(xm.getAgentName(),"foo");
-			}
+                assertEquals(xm.getAgentName(),"foo");
+            }
         }
     }
 
@@ -479,7 +480,7 @@ public class JDFResourceTest extends JDFTestCaseBase
         assertFalse(vChildren.contains(a2));
         assertTrue(vChildren.contains(b1));
         assertTrue(vChildren.contains(b2));
-     }
+    }
 
     /////////////////////////////////////////////////////////////////////////////////
 
@@ -1115,7 +1116,7 @@ public class JDFResourceTest extends JDFTestCaseBase
         assertEquals(xmLeaf.getLocalPartitionKey(), "SignatureName");
         xmLeaf=(JDFExposedMedia)xmLeaf.getParentNode_KElement();
         assertNull(xmLeaf.getLocalPartitionKey());
-     }
+    }
 
     ////////////////////////////////////////////////////////////////////////////
     public void testBuildXPath()
@@ -1125,8 +1126,8 @@ public class JDFResourceTest extends JDFTestCaseBase
         JDFExposedMedia xm=(JDFExposedMedia)n.getMatchingResource("ExposedMedia",JDFNode.EnumProcessUsage.AnyInput,null,0);
         JDFExposedMedia xmLeaf=(JDFExposedMedia)xm.getLeaves(false).elementAt(1);
         assertEquals(xmLeaf.buildXPath(null,2), "/JDF/ResourcePool[1]/ExposedMedia[1]/ExposedMedia[@SignatureName=\"Sig1\"]/ExposedMedia[@SheetName=\"S1\"]/ExposedMedia[@Side=\"Back\"]");
-     }
-      ////////////////////////////////////////////////////////////////////////////
+    }
+    ////////////////////////////////////////////////////////////////////////////
     public void testInvalidPartIDKeysLeaves()
     {
         JDFDoc doc=creatXMDoc();
@@ -1135,6 +1136,21 @@ public class JDFResourceTest extends JDFTestCaseBase
         xm.setPartIDKeys(new VString("fnarf"," "));
         assertTrue(xm.getInvalidAttributes(EnumValidationLevel.Incomplete, true, -1).contains(AttributeName.PARTIDKEYS));
     }
+    ////////////////////////////////////////////////////////////////////////////
+    public void testInvalidPartUsage()
+    {
+        JDFDoc doc=creatXMDoc();
+        JDFNode n=doc.getJDFRoot();
+        JDFExposedMedia xm=(JDFExposedMedia)n.getMatchingResource("ExposedMedia",JDFNode.EnumProcessUsage.AnyInput,null,0);
+        xm.setPartUsage(EnumPartUsage.Sparse);
+        assertFalse(xm.getInvalidAttributes(EnumValidationLevel.Incomplete, true, 999).contains("PartUsage"));
+        n.setVersion(EnumVersion.Version_1_1);
+        assertTrue(xm.getInvalidAttributes(EnumValidationLevel.Incomplete, true, 999).contains("PartUsage"));
+        n.setVersion(EnumVersion.Version_1_2);
+        assertTrue(xm.getInvalidAttributes(EnumValidationLevel.Incomplete, true, 999).contains("PartUsage"));
+        assertFalse(xm.getInvalidAttributes(EnumValidationLevel.NoWarnIncomplete, true, 999).contains("PartUsage"));
+    }
+   
     ////////////////////////////////////////////////////////////////////////////
 
     public void testGetLeaves()
@@ -1214,8 +1230,8 @@ public class JDFResourceTest extends JDFTestCaseBase
         assertEquals("parent partIDKey not copied",r2p.getSheetName(),"s2");
         assertEquals("leaf partIDKey copied",r2p.getSide(),EnumSide.Front);
     }
-    
-    
+
+
     public void testSetLocked()
     {
         JDFDoc doc=creatXMDoc();

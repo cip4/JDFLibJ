@@ -164,22 +164,22 @@ import org.cip4.jdflib.util.JDFDate;
     }   
     
     /**
-     * (11) set attribute StartTime
+     * (11) set attribute IdleStartTime
      * @param value: the value to set the attribute to or null
      */
-   public void setStartTime(JDFDate value)
+   public void setIdleStartTime(JDFDate value)
    {
        if (value == null) value = new JDFDate();
-       setAttribute(AttributeName.STARTTIME, value.getDateTimeISO(), null);
+       setAttribute(AttributeName.IDLESTARTTIME, value.getDateTimeISO(), null);
    }
 
    /**
-     * (12) get JDFDate attribute StartTime
+     * (12) get JDFDate attribute IdleStartTime
      * @return JDFDate the value of the attribute
      */
-   public JDFDate getStartTime()
+   public JDFDate getIdleStartTime()
    {
-       String str = getAttribute(AttributeName.STARTTIME, null, null);
+       String str = getAttribute(AttributeName.IDLESTARTTIME, null, null);
        if (str!=null)
        {
            try

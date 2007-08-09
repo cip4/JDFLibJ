@@ -220,11 +220,10 @@ public class JDFPipeParams extends JDFAutoPipeParams
     public JDFResource getCreateResource(String resName)
     {
         JDFResource r = null;
-        KElement e = getCreateElement(resName, JDFConstants.EMPTYSTRING, 0);
+        KElement e = getCreateElement(resName, null, 0);
         if(e instanceof JDFResource)
         {
-            r = (JDFResource) e;
-            r.init();
+            /**/
         }
         else
         {

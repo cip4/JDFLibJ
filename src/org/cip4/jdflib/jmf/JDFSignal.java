@@ -82,9 +82,7 @@ package org.cip4.jdflib.jmf;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoSignal;
-import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 
@@ -168,9 +166,6 @@ public class JDFSignal extends JDFAutoSignal
     public boolean convertResponse(JDFResponse response, JDFQuery q){
         if(response==null) 
             return false;
-        if(response.hasAttribute(AttributeName.REFID) == false){
-            throw new JDFException("JDFSignal::convertResponse response does not have a refID");
-        }
         setAttributes(response);
         VElement elements = response.getChildElementVector(null,null,null, true, 0,true);
         for(int i=0;i<elements.size();i++){

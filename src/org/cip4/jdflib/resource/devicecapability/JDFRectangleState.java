@@ -3,7 +3,7 @@
 * The CIP4 Software License, Version 1.0
 *
 *
-* Copyright (c) 2001-2004 The International Cooperation for the Integration of 
+* Copyright (c) 2001-2007 The International Cooperation for the Integration of 
 * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
 * reserved.
 *
@@ -95,6 +95,7 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFRectangleRange;
 import org.cip4.jdflib.datatypes.JDFRectangleRangeList;
+import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 
 public class JDFRectangleState extends JDFAbstractState
 {
@@ -555,4 +556,12 @@ public class JDFRectangleState extends JDFAbstractState
         return false;
     }
     
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
+     */
+    public EnumTerm getEvaluationType()
+    {
+        return EnumTerm.RectangleEvaluation;
+    }
+
 }

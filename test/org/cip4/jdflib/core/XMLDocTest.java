@@ -262,15 +262,15 @@ public class XMLDocTest extends JDFTestCaseBase
 
     public void testRegisterClass() throws Exception
     {
+        XMLDoc.registerCustomClass("JDFTestType", "org.cip4.jdflib.core.JDFTestType");
+        XMLDoc.registerCustomClass("fnarf:JDFTestType", "org.cip4.jdflib.core.JDFTestType");
         JDFDoc d = new JDFDoc("JDF");
         JDFNode n = d.getJDFRoot();
 
-        XMLDoc.registerCustomClass("JDFTestType", "org.cip4.jdflib.core.JDFTestType");
-        JDFTestType tt = (JDFTestType) n.appendElement("JDFTestType", null);
+         JDFTestType tt = (JDFTestType) n.appendElement("JDFTestType", null);
         tt.setAttribute("fnarf", 3, null);
         assertTrue("extension is valid", tt.isValid(KElement.EnumValidationLevel.Complete));
 
-        XMLDoc.registerCustomClass("fnarf:JDFTestType", "org.cip4.jdflib.core.JDFTestType");
         tt = (JDFTestType) n.appendElement("fnarf:JDFTestType", "WWW.fnarf.com");
         tt.setAttribute("fnarf", 3, null);
         assertTrue("ns extension is valid", tt.isValid(KElement.EnumValidationLevel.Complete));

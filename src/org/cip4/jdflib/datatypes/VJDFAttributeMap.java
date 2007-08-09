@@ -323,9 +323,10 @@ public class VJDFAttributeMap
        for (int i = 0; i < m_vec.size(); i++)
        {
            JDFAttributeMap map = (JDFAttributeMap)m_vec.elementAt(i);
+           boolean bNullMap=map.isEmpty();
            map.reduceMap(keySet);
 
-           if (!map.isEmpty())
+           if (bNullMap || !map.isEmpty())
            {
                v.appendUnique(map);
            }

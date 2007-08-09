@@ -738,12 +738,8 @@ public class JDFElementTest extends TestCase
             System.out.println("Parsing: " + file.getPath());
             JDFDoc jdfDoc = p.parseFile(file.getPath());
             assertTrue("parse ok", jdfDoc != null);
-            KElement e = null;
-            if (jdfDoc != null)
-            {
-                e = jdfDoc.getRoot();
-                assertTrue("valid doc: " + file.getPath(), e.isValid(EnumValidationLevel.RecursiveComplete));
-            }
+            KElement e =  jdfDoc.getRoot();
+            assertTrue("valid doc: " + file.getPath(), e.isValid(EnumValidationLevel.RecursiveComplete));
             
             // now with schema validation
             jdfDoc = p2.parseFile(file.getPath());

@@ -238,4 +238,11 @@ public class QueueTest extends TestCase
         qe.setQueueEntryStatus(EnumQueueEntryStatus.Running);
         qe.setQueueEntryID("qe5");
     }
+    
+    public void testgetQueueSize()
+    {
+        assertEquals("no size set - count entries",q.getQueueSize(), 5);
+        q.setQueueSize(10);
+        assertEquals(q.getQueueSize(), 10);
+    }
 }

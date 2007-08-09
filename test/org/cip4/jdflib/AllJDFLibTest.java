@@ -140,7 +140,6 @@ import org.cip4.jdflib.jmf.JMFKnownMessagesTest;
 import org.cip4.jdflib.jmf.JMFResourceInfoTest;
 import org.cip4.jdflib.jmf.JMFResourceTest;
 import org.cip4.jdflib.jmf.JMFStatusTest;
-import org.cip4.jdflib.jmf.JMFTest;
 import org.cip4.jdflib.jmf.QueueTest;
 import org.cip4.jdflib.node.JDFNodeProductTest;
 import org.cip4.jdflib.node.JDFNodeTest;
@@ -281,8 +280,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JMFResourceTest.class);
         suite.addTestSuite(JMFResourceInfoTest.class);
         suite.addTestSuite(JMFStatusTest.class);
-        suite.addTestSuite(JMFTest.class);
-        suite.addTestSuite(QueueTest.class);
+         suite.addTestSuite(QueueTest.class);
 
         // Node
         suite.addTestSuite(JDFNodeProductTest.class);

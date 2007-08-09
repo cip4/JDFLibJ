@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,6 +81,9 @@ package org.cip4.jdflib.resource.devicecapability;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoActionPool;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.ifaces.ICapabilityElement;
+import org.cip4.jdflib.ifaces.IDeviceCapable;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.w3c.dom.DOMException;
 
@@ -88,7 +91,7 @@ import org.w3c.dom.DOMException;
 public class JDFActionPool extends JDFAutoActionPool
 {
     private static final long serialVersionUID = 1L;
-    
+
     /**
      * Constructor for JDFActionPool
      * @param ownerDocument
@@ -102,8 +105,8 @@ public class JDFActionPool extends JDFAutoActionPool
     {
         super(myOwnerDocument, qualifiedName);
     }
-    
-    
+
+
     /**
      * Constructor for JDFActionPool
      * @param ownerDocument
@@ -119,7 +122,7 @@ public class JDFActionPool extends JDFAutoActionPool
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
-    
+
     /**
      * Constructor for JDFActionPool
      * @param ownerDocument
@@ -137,7 +140,7 @@ public class JDFActionPool extends JDFAutoActionPool
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
-    
+
     /**
      * toString
      *
@@ -147,15 +150,15 @@ public class JDFActionPool extends JDFAutoActionPool
     {
         return "JDFActionPool[  --> " + super.toString() + " ]" ;
     }
-    
-    
+
+
     /**
      * 
-     * @return the deviceCap that this resides in
+     * @return the deviceCap or MessageService that <this> resides in
      */
-    public JDFDeviceCap getDeviceCap()
+    public IDeviceCapable getDeviceCap()
     {
-        return (JDFDeviceCap) getParentNode_KElement();
+        return (IDeviceCapable) getParentNode_KElement();
     }
     /**
      * append an action to this that references a Test with a term of type term in the parallel TestPool
@@ -180,7 +183,7 @@ public class JDFActionPool extends JDFAutoActionPool
         action.setTest(test);
         return action;
     }
-    
+
     /**
      * append an action to this that references a Test with a term of type term in the parallel TestPool
      * @param term the type of term in the test
@@ -199,6 +202,37 @@ public class JDFActionPool extends JDFAutoActionPool
         action.setPreflightActionSetRef(setTest);
         return action;
     }
+
+    /**
+     * append an action to this that references a Test that defines an exclusion of two values
+     * 
+     * @param id1 the id of the first state or devcap to reference
+     * @param id2 the id of the 2nd state or devcap to reference
+     * 
+     * @return the newly created action
+     */
+    public JDFAction appendExcludeTest(ICapabilityElement t1, ICapabilityElement t2)
+    {
+        if(t1==null || t2==null)
+            return null; // snafu - cant find elements to match
+
+        String id1=((JDFElement)t1).appendAnchor(null);
+        String id2=((JDFElement)t2).appendAnchor(null);
+
+ 
+        JDFAction action=appendActionTest(EnumTerm.and,true); // fail if a && b
+        JDFand and=(JDFand) action.getTestTerm();
+
+        JDFEvaluation ev1=(JDFEvaluation)and.appendTerm(t1.getEvaluationType());
+        ev1.setrRef(id1);
+        JDFEvaluation ev2=(JDFEvaluation)and.appendTerm(t2.getEvaluationType());
+        ev2.setrRef(id2);
+
+        return action;
+    }
+
+
+
 }
 
 

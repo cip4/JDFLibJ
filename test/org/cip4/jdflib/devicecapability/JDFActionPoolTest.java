@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -76,6 +76,10 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.resource.devicecapability.JDFAction;
 import org.cip4.jdflib.resource.devicecapability.JDFActionPool;
+import org.cip4.jdflib.resource.devicecapability.JDFDevCaps;
+import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
+import org.cip4.jdflib.resource.devicecapability.JDFIntegerState;
+import org.cip4.jdflib.resource.devicecapability.JDFStringState;
 import org.cip4.jdflib.resource.devicecapability.JDFTest;
 import org.cip4.jdflib.resource.devicecapability.JDFand;
 import org.cip4.jdflib.resource.devicecapability.JDFnot;
@@ -84,7 +88,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 
 public class JDFActionPoolTest extends JDFTestCaseBase
 {
-     public void testAppendActionTest()
+    public void testAppendActionTest()
     {
         JDFDoc d=new JDFDoc(ElementName.PREFLIGHTPARAMS);
         JDFActionPool ap=(JDFActionPool)d.getRoot().appendElement(ElementName.ACTIONPOOL);
@@ -93,7 +97,7 @@ public class JDFActionPoolTest extends JDFTestCaseBase
         assertNotNull(test);
         assertNotNull(test.getTerm());
         assertTrue(test.getTerm() instanceof JDFand);
-        
+
         a=ap.appendActionTest(EnumTerm.and,false);
         test = a.getTest();
         assertNotNull(test);
@@ -102,6 +106,29 @@ public class JDFActionPoolTest extends JDFTestCaseBase
         assertTrue(((JDFnot)test.getTerm()).getTerm(null, 0) instanceof JDFand);
     }
 
-//////////////////////////////////////////////////////////////////////////////////  
+    ////////////////////////////////////////////////////////////////
+
+    public void testAppendExcludeTest()
+    {
+        JDFDoc d=new JDFDoc(ElementName.DEVICECAP);
+        JDFDeviceCap dc=(JDFDeviceCap)d.getRoot();
+        
+        JDFActionPool ap=(JDFActionPool)d.getRoot().appendElement(ElementName.ACTIONPOOL);
+        JDFDevCaps dcs=dc.appendDevCaps();
+        JDFStringState stst=dcs.appendDevCap().appendStringState("stbar");
+        JDFIntegerState ist=dcs.appendDevCap().appendIntegerState("ibar");
+        
+        JDFAction ac=ap.appendExcludeTest(stst, ist);
+        assertNotNull(ac);
+        JDFTest t=ac.getTest();
+        assertNotNull(t);
+        JDFand a=(JDFand) t.getTerm() ;
+        assertNotNull(a);
+        assertNotNull(a.getTerm(EnumTerm.StringEvaluation, 0));
+        assertNotNull(a.getTerm(EnumTerm.IntegerEvaluation, 0));
+
+    }
+
+
 
 }

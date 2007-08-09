@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -105,6 +105,8 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
+import org.cip4.jdflib.ifaces.ICapabilityElement;
+import org.cip4.jdflib.ifaces.IDeviceCapable;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFMessageService;
@@ -114,7 +116,7 @@ import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.util.StringUtil;
 
-public class JDFDeviceCap extends JDFAutoDeviceCap 
+public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 {
     private static final long serialVersionUID = 1L;
     private boolean ignoreExtensions=false;
@@ -1156,6 +1158,17 @@ public static JDFMessageService getMessageServiceForJMFType(JDFMessage m, JDFRes
     public void setIgnoreDefaults(boolean ignoreDefaults)
     {
         this.ignoreDefaults = ignoreDefaults;
+    }
+
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.ifaces.IDeviceCapable#getTargetCap(java.lang.String)
+     */
+    public ICapabilityElement getTargetCap(String id)
+    {
+        KElement e = getTarget(id, null);
+        if(e instanceof ICapabilityElement)
+            return (ICapabilityElement)e;
+        return null;
     }
     
 }

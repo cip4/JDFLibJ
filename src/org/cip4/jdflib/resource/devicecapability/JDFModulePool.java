@@ -89,7 +89,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.ifaces.IModuleCapability;
+import org.cip4.jdflib.ifaces.ICapabilityElement;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap.EnumAvailability;
 
 
@@ -203,7 +203,7 @@ public class JDFModulePool extends JDFAutoModulePool
      * @param caps either A State, devcap or devcaps
      * @return
      */
-    public static EnumAvailability getModuleAvailability(IModuleCapability caps)
+    public static EnumAvailability getModuleAvailability(ICapabilityElement caps)
     {
         EnumAvailability a=caps.getAvailability();
         if(!EnumAvailability.Module.equals(a))
@@ -219,7 +219,7 @@ public class JDFModulePool extends JDFAutoModulePool
      * 
      * @return {@link JDFModuleCap} the Modulecap that id refers tp
      */
-    public static JDFModuleCap appendModuleRef(IModuleCapability caps, String id)
+    public static JDFModuleCap appendModuleRef(ICapabilityElement caps, String id)
     {
         caps.setAvailability(EnumAvailability.Module);
         JDFModulePool mp=caps.getCreateModulePool();

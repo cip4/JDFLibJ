@@ -3,7 +3,7 @@
 * The CIP4 Software License, Version 1.0
 *
 *
-* Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+* Copyright (c) 2001-2007 The International Cooperation for the Integration of 
 * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
 * reserved.
 *
@@ -93,6 +93,7 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.resource.JDFValue;
+import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 
 public class JDFPDFPathState extends JDFAbstractState
 {
@@ -406,5 +407,12 @@ public class JDFPDFPathState extends JDFAbstractState
     {        
         return super.getPresentLength();
     }
-    
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
+     */
+    public EnumTerm getEvaluationType()
+    {
+        return EnumTerm.PDDFPathEvaluation;
+    }
+
 }

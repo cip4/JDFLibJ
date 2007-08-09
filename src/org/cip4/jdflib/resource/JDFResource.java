@@ -6945,6 +6945,13 @@ public class JDFResource extends JDFElement
                 }
             }
         }
+        if(!EnumValidationLevel.isNoWarn(level) && isResourceRoot())
+        {
+            EnumPartUsage pu=getPartUsage();
+            if(EnumPartUsage.Sparse.equals(pu) && EnumVersion.Version_1_3.isGreater(getVersion(true)))
+                vAtts.add(AttributeName.PARTUSAGE); 
+        }
+           
 
         return vAtts;
     }

@@ -700,6 +700,7 @@ public final class AttributeName
     public static final String ICSVERSIONS = "ICSVersions";
     public static final String ID = "ID";
     public static final String IDENTIFIER = "Identifier";
+    public static final String IDLESTARTTIME = "IdleStartTime";
     public static final String IDPATTRIBUTEFIDELITY = "IDPAttributeFidelity";
     public static final String IDUSAGE = "IDUsage";
     public static final String IDVALUE = "IDValue";

@@ -524,8 +524,7 @@ public class JDFAudit extends JDFElement
     
     public String getIDPrefix()
     {
-        final String n = "a";
-        return n;
+        return "a";
     }
     
     /**
@@ -561,7 +560,7 @@ public class JDFAudit extends JDFElement
      */
     public String getrefID()
     {
-        return getAttribute(AttributeName.REFID, JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING);
+        return getAttribute(AttributeName.REFID, null, JDFConstants.EMPTYSTRING);
     }
     
     /**

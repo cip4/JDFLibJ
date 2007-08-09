@@ -93,6 +93,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 
 
 public class JDFBooleanState extends JDFAbstractState
@@ -345,6 +346,14 @@ public class JDFBooleanState extends JDFAbstractState
             list.add(b);
             setPresentValueList(list);
         }        
+    }
+
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
+     */
+    public EnumTerm getEvaluationType()
+    {
+        return EnumTerm.BooleanEvaluation;
     }
 
 }

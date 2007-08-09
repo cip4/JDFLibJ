@@ -105,19 +105,20 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
-import org.cip4.jdflib.ifaces.IModuleCapability;
+import org.cip4.jdflib.ifaces.ICapabilityElement;
 import org.cip4.jdflib.jmf.JDFMessageService;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap.EnumAvailability;
+import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.cip4.jdflib.span.JDFSpanBase;
 import org.cip4.jdflib.util.StringUtil;
 
 
 //----------------------------------
-public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
+public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
 {
 
     /**
@@ -245,6 +246,13 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     public String getID()
     {
         return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
+    }
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.core.JDFElement#getIDPrefix()
+     */
+    protected String getIDPrefix()
+    {
+        return "d";
     }
 
     /**
@@ -2388,6 +2396,14 @@ public class JDFDevCap extends JDFAutoDevCap implements IModuleCapability
     public JDFModuleCap appendModuleRef(String id)
     {
         return JDFModulePool.appendModuleRef(this, id);     
+    }
+
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
+     */
+    public EnumTerm getEvaluationType()
+    {
+        return EnumTerm.IsPresentEvaluation;
     }
 
 

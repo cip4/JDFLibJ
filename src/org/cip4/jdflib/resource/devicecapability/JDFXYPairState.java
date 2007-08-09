@@ -3,7 +3,7 @@
 * The CIP4 Software License, Version 1.0
 *
 *
-* Copyright (c) 2001-2004 The International Cooperation for the Integration of 
+* Copyright (c) 2001-2007 The International Cooperation for the Integration of 
 * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
 * reserved.
 *
@@ -95,6 +95,7 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.JDFXYPairRange;
 import org.cip4.jdflib.datatypes.JDFXYPairRangeList;
+import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 
 public class JDFXYPairState extends JDFAbstractState
 {
@@ -664,4 +665,13 @@ public class JDFXYPairState extends JDFAbstractState
         }
         return false;
     }
+    
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
+     */
+    public EnumTerm getEvaluationType()
+    {
+        return EnumTerm.XYPairEvaluation;
+    }
+
 }

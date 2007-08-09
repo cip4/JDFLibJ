@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -96,6 +96,7 @@ import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.datatypes.JDFNumberRange;
 import org.cip4.jdflib.datatypes.JDFNumberRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.cip4.jdflib.util.StringUtil;
 
 public class JDFNumberState extends JDFAbstractState
@@ -676,6 +677,13 @@ public class JDFNumberState extends JDFAbstractState
     public VString getInvalidAttributes(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
     {
         return getInvalidAttributesImpl(level, bIgnorePrivate, nMax);
+    }
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
+     */
+    public EnumTerm getEvaluationType()
+    {
+        return EnumTerm.NumberEvaluation;
     }
 
 
