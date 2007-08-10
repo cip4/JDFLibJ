@@ -1008,6 +1008,7 @@ public class JDFResourceLink extends JDFElement
      */
     public boolean hasResourcePartMap(JDFAttributeMap partMap, boolean bCheckResource)
     {
+        //TODO remove implicit partitions
         // Attention !!!
         // Don't change this method without checking if routing is still working !
         // The C++ method is different and is not used, the java method is used for routing.

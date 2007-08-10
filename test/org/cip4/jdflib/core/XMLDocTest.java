@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -138,8 +138,8 @@ public class XMLDocTest extends JDFTestCaseBase
 
         assertTrue(jdfDocIn != null);
         if (jdfDocIn == null) {
-			return; // soothe findbugs ;)
-		}
+            return; // soothe findbugs ;)
+        }
 
         XMLDocUserData xmlUserData = jdfDocIn.getCreateXMLDocUserData();
         xmlUserData.setDirtyPolicy(XMLDocUserData.EnumDirtyPolicy.ID);
@@ -196,7 +196,7 @@ public class XMLDocTest extends JDFTestCaseBase
     {
         XMLDoc d=new XMLDoc("TEST",null);
         KElement e=(KElement) d.createElement("foo:bar");
-//        e.appendElement("bar:foo");
+//      e.appendElement("bar:foo");
         e.setAttribute("foo:at", "1");
         e.appendElement("bar2");
         d.getRoot().appendChild(e);
@@ -229,7 +229,7 @@ public class XMLDocTest extends JDFTestCaseBase
         JDFParser p=new JDFParser();
         JDFDoc d2=p.parseFile(fn);
         KElement root=d2.getRoot();
-//        assertNull(root.getNamespaceURI());
+//      assertNull(root.getNamespaceURI());
         assertFalse(d2.toString().indexOf("xmlns=\"\"")>=0);
         assertFalse(d.toString().indexOf("xmlns=\"\"")>=0);
         assertFalse(root.toString().indexOf("xmlns=\"\"")>=0);
@@ -267,7 +267,7 @@ public class XMLDocTest extends JDFTestCaseBase
         JDFDoc d = new JDFDoc("JDF");
         JDFNode n = d.getJDFRoot();
 
-         JDFTestType tt = (JDFTestType) n.appendElement("JDFTestType", null);
+        JDFTestType tt = (JDFTestType) n.appendElement("JDFTestType", null);
         tt.setAttribute("fnarf", 3, null);
         assertTrue("extension is valid", tt.isValid(KElement.EnumValidationLevel.Complete));
 
@@ -349,15 +349,52 @@ public class XMLDocTest extends JDFTestCaseBase
         String out=sm_dirTestDataTemp+File.separator+"dir"+File.separator+"dir2";
         File dir=new File(out);
         if(dir.isDirectory()) {
-			dir.delete();
-		} else {
-			dir.mkdirs();
-		}
+            dir.delete();
+        } else {
+            dir.mkdirs();
+        }
 
         out+=File.separator+"d.xml";
 
         assertTrue(d.write2File(out, 2, true));
         File f=new File(out);
+        assertTrue(f.canRead());
+    }
+
+    public void testWriteToFileFile() throws Exception
+    {
+        XMLDoc d=new XMLDoc("doc",null);
+        String out=sm_dirTestDataTemp+File.separator+"dir"+File.separator+"dir2";
+        File dir=new File(out);
+        if(dir.isDirectory()) {
+            dir.delete();
+        } else {
+            dir.mkdirs();
+        }
+
+        out+=File.separator+"d%25.xml";
+
+        File f=new File(out);
+        f.delete();
+        assertTrue(d.write2File(out, 2, true));
+        assertTrue(f.canRead());
+    }
+    public void testWriteToFileURL() throws Exception
+    {
+        XMLDoc d=new XMLDoc("doc",null);
+        String out=sm_dirTestDataTemp+File.separator+"dir"+File.separator+"dir2";
+        File dir=new File(out);
+        if(dir.isDirectory()) {
+            dir.delete();
+        } else {
+            dir.mkdirs();
+        }
+        String out2=out+File.separator+"d .xml";
+        out+=File.separator+"d%20.xml";
+
+        File f=new File(out2);
+        f.delete();
+        assertNotNull(d.write2URL("File:"+out, null));
         assertTrue(f.canRead());
     }
 
@@ -381,11 +418,11 @@ public class XMLDocTest extends JDFTestCaseBase
         KElement e2 = e.appendElement("e2");
         KElement e3 = e2.appendElement("e3");
         for (int i = 33; i < 999; i++) {
-			e3.setAttribute("k" + String.valueOf(i), "value" + String.valueOf(i));
-		}
+            e3.setAttribute("k" + String.valueOf(i), "value" + String.valueOf(i));
+        }
         for (int j = 0; j < 99; j++) {
-			e2.copyElement(e3, null);
-		}
+            e2.copyElement(e3, null);
+        }
         mem = d.getDocMemoryUsed();
         s = d.write2String(0);
         assertTrue("mem", mem + 10000 > s.length());

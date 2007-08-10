@@ -382,50 +382,66 @@ public class XMLDoc
         if(oFilePath==null)
             oFilePath=m_doc.m_OriginalFileName;
 
-        if(oFilePath==null)
-            return false;
+        return write2File(new File(oFilePath), indent, bPreserveSpace);
+    }    
+    
+    /**
+     * write2File - write to a file; Create if it doesn't exist always assume utf-8 encoding
+    *
+    * @param file       fthe file to write to
+    * @param indent          indentation
+    * @param bPreserveSpace  if true, preserve whitespace
+    *
+    * @return boolean - true if successful
+    * 
+    * @default write2File(String oFilePath, 0)
+    */
+   public boolean write2File(File file, int indent, boolean bPreserveSpace)
+   {
+ 
+       if(file==null)
+           return false;
 
-        boolean fSuccess = true;
-        FileOutputStream outStream = null;
+       boolean fSuccess = true;
+       FileOutputStream outStream = null;
 
-        try
-        {
-            final File outFile = UrlUtil.urlToFile(oFilePath);
-            // ensure having an empty file in case it did not exist
-            outFile.delete();
-            if (outFile.createNewFile())
-            {
-                outStream = new FileOutputStream(outFile);
-                write2Stream(outStream, indent, bPreserveSpace);
-            }
-        }
-        catch (FileNotFoundException e)
-        {
-            System.out.println("Write2File: " + oFilePath + " : " + e);
-            fSuccess = false;
-        }
-        catch (IOException e)
-        {
-            System.out.println("Write2File: " + oFilePath + " : " + e);
-            fSuccess = false;
-        }
-        finally
-        {
-            if (outStream != null)
-            {
-                try
-                {
-                    outStream.close();
-                }
-                catch (IOException e1)
-                {
-                    e1.printStackTrace();
-                }
-            } 
-        }
+       try
+       {
+           // ensure having an empty file in case it did not exist
+           file.delete();
+           if (file.createNewFile())
+           {
+               outStream = new FileOutputStream(file);
+               write2Stream(outStream, indent, bPreserveSpace);
+           }
+       }
+       catch (FileNotFoundException e)
+       {
+           System.out.println("Write2File: " + file.getAbsolutePath() + " : " + e);
+           fSuccess = false;
+       }
+       catch (IOException e)
+       {
+           System.out.println("Write2File: " + file.getAbsolutePath() + " : " + e);
+           fSuccess = false;
+       }
+       finally
+       {
+           if (outStream != null)
+           {
+               try
+               {
+                   outStream.close();
+               }
+               catch (IOException e1)
+               {
+                   e1.printStackTrace();
+               }
+           } 
+       }
 
-        return fSuccess;
-    }
+       return fSuccess;
+   }
 
     /**
      * @deprecated use write2Stream(outStream, indent, true);
@@ -1434,6 +1450,8 @@ public class XMLDoc
      * @param strContentType    the content type to write to
      * 
      * @return docResponse the response received from URL. 
+     * if url is a file, an empty doc is returned
+     * 
      * A Null document if no response was received, or an exception occurred
      */
     public XMLDoc write2URL(String strURL, String strContentType)
@@ -1445,7 +1463,8 @@ public class XMLDoc
             final String protocol = url.getProtocol(); //file; ftp; http
             if(protocol.equalsIgnoreCase("File"))
             {
-                write2File(strURL, 0, true);
+                write2File(UrlUtil.urlToFile(strURL), 0, true);
+                return new XMLDoc();
             }
             else
             {    

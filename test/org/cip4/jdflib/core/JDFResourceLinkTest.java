@@ -472,7 +472,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
         JDFNode n=d.getJDFRoot();
         n.setType("Combined",true);
         n.setTypes(new VString("a b c d e f e f"," "));
-        JDFResource r=n.addResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input);;
+        JDFResource r=n.addResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input);
         JDFResourceLink rl=n.getLink(r, null);
         VString nodeTypes=n.getTypes();
         nodeTypes.unify();
