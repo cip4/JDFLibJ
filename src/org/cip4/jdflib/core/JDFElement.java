@@ -4289,6 +4289,70 @@ public class JDFElement extends KElement
     {
         bFixVersionIDFix = fixVersionIDFix;
     }
+    
+    
+    static public String  getValueForNewAttribute(KElement e,String attName)
+    {
+        //TODO move this to JDFElement and let JDFLib predefine reasonable attributes 
+        if (attName.equals("ID"))
+            return JDFElement.uniqueID(0);
 
+        if (attName.equals("JobID"))
+            return JDFElement.uniqueID(0);
+
+        if (attName.equals("JobPartID") &&(e instanceof JDFElement))
+        {
+            return ((JDFElement)e).generateDotID("JobPartID", null);
+        }
+
+        if (attName.equals("Status") &&(e instanceof JDFNode))
+        {
+            return "Waiting";
+        }
+        if (attName.equals("Status") &&(e instanceof JDFResource))
+        {
+            return "Unavailable";
+        }
+
+        if (attName.equals("Type"))
+            return "Product";
+
+        if (attName.equals("TimeStamp"))
+            return new JDFDate().getDateTimeISO();
+
+        if (attName.equals("ComponentType"))
+            return "PartialProduct";
+
+        if (attName.equals("PreviewType"))
+            return "Separation";
+        
+        EnumAttributeType attyp=e.getAtrType(attName);
+        if(attyp!=null)
+        {
+            if(EnumAttributeType.boolean_.equals(attyp))
+                return "true";
+            if(EnumAttributeType.CMYKColor.equals(attyp))
+                return "1 0 0 0";
+            if(EnumAttributeType.dateTime.equals(attyp) || EnumAttributeType.DateTimeRange.equals(attyp)|| EnumAttributeType.DateTimeRangeList.equals(attyp))
+                return new JDFDate().getDateTimeISO();
+            if(EnumAttributeType.double_.equals(attyp))
+                return "0.0";
+            if(EnumAttributeType.duration.equals(attyp)|| EnumAttributeType.DurationRange.equals(attyp)|| EnumAttributeType.DurationRangeList.equals(attyp))
+                return "PT1H";
+            //TODO evaluate durations
+//            if(EnumAttributeType.enumeration.equals(attyp) || EnumAttributeType.enumerations.equals(attyp))
+//                return "";
+            if(EnumAttributeType.integer.equals(attyp)||EnumAttributeType.IntegerRange.equals(attyp)||EnumAttributeType.IntegerRangeList.equals(attyp)||EnumAttributeType.IntegerList.equals(attyp))
+                return "0";
+            if(EnumAttributeType.JDFJMFVersion.equals(attyp))
+                return "1.3";
+            if(EnumAttributeType.matrix.equals(attyp))
+                return "1 0 0 1 0 0";            
+            if(EnumAttributeType.XYPair.equals(attyp)||EnumAttributeType.XYPairRange.equals(attyp)||EnumAttributeType.XYPairRangeList.equals(attyp))
+                return "0 0";            
+        }
+
+        return "New Value";
+    }
 
 }
