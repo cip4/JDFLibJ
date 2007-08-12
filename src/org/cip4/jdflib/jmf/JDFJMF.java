@@ -95,7 +95,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.core.JDFElement.EnumVersion;
+//import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;

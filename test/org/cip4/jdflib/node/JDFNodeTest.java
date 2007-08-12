@@ -129,7 +129,7 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.JDFSpawn;
 import org.cip4.jdflib.util.StatusCounter;
-import org.cip4.jdflib.util.StatusUtil;
+//import org.cip4.jdflib.util.StatusUtil;
 
 
 public class JDFNodeTest extends JDFTestCaseBase
