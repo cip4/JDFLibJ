@@ -4351,7 +4351,6 @@ public class JDFElement extends KElement
             if(EnumAttributeType.XYPair.equals(attyp)||EnumAttributeType.XYPairRange.equals(attyp)||EnumAttributeType.XYPairRangeList.equals(attyp))
                 return "0 0";            
         }
-
         return "New Value";
     }
 
