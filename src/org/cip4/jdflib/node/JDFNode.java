@@ -217,7 +217,7 @@ public class JDFNode extends JDFElement
     }
     private static AtrInfoTable[] atrInfoTable_root = new AtrInfoTable[2];
     static
-    {	//TODO BMI: Ask Rainer why xmlns is not picked up by the JDFEditor but Version is. I even matched it up to Version.
+    {	
         atrInfoTable_root[0] = new AtrInfoTable(AttributeName.VERSION, 0x22222222, AttributeInfo.EnumAttributeType.JDFJMFVersion, EnumVersion.getEnum(0), null);
         atrInfoTable_root[1] = new AtrInfoTable(AttributeName.XMLNS, 0x22222221, AttributeInfo.EnumAttributeType.URI, null, null);
     }
