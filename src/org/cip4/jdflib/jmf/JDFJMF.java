@@ -260,14 +260,11 @@ public class JDFJMF extends JDFAutoJMF
         public static final EnumJMFReturnCode INSUFFICIENT_PARAMETER           = new EnumJMFReturnCode (7,
                                                                                        "Insufficient parameters");
 
-        public static final EnumJMFReturnCode DEVICE_NOT_AVAILABLE             = new EnumJMFReturnCode (8,
-                                                                                       "Device not available (controller exists but not the device or queue)");
+        public static final EnumJMFReturnCode DEVICE_NOT_AVAILABLE             = new EnumJMFReturnCode (8, "Device not available (controller exists but not the device or queue)");
 
-        public static final EnumJMFReturnCode MESSAGE_INCOMPLETE               = new EnumJMFReturnCode (9,
-        "Message incomplete.");
+        public static final EnumJMFReturnCode MESSAGE_INCOMPLETE               = new EnumJMFReturnCode (9, "Message incomplete.");
 
-        public static final EnumJMFReturnCode MESSAGESERVICE_BUSY               = new EnumJMFReturnCode (10,
-        "Message Service is busy");
+        public static final EnumJMFReturnCode MESSAGESERVICE_BUSY               = new EnumJMFReturnCode (10, "Message Service is busy");
 
         // 100..199 Device and controller errors
         public static final EnumJMFReturnCode DEVICE_NOT_RUNNING               = new EnumJMFReturnCode (100,

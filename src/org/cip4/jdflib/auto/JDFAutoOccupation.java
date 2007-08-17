@@ -197,7 +197,7 @@ public abstract class JDFAutoOccupation extends JDFElement
           */
         public double getBusy()
         {
-            return getRealAttribute(AttributeName.BUSY, null, 0.0);
+            return getRealAttribute(AttributeName.BUSY, null, 100);
         }
 
         
@@ -319,6 +319,8 @@ public abstract class JDFAutoOccupation extends JDFElement
 
     /**
      * (29) append element Employee
+     * BMI 07-08-15: Why is this AppendElement different than Part and Device? I am getting errors when I try to use this
+     * element in Response - Occupation JMF Message. 
      */
     public JDFEmployee appendEmployee() throws JDFException
     {
