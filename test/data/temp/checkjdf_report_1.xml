@@ -1,0 +1,725 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CheckOutput Language="EN">
+  <TestFile FileName="C:\SVN\JDFLibJ\test\data\job.jdf">
+    <SchemaValidationOutput ValidationResult="NotPerformed"/>
+    <CheckJDFOutput IsValid="false">
+      <TestElement ErrorType="InvalidElement" ID="n20020528155314"
+        InvalidAttributes="Version"
+        InvalidElements="ResourcePool AuditPool JDF" IsValid="false"
+        Message="JDF is not valid, see child elements for details"
+        NodeName="JDF" PrivateElements="pt:Job" Type="Product"
+        UnknownAttributes="JobName" XPath="/JDF">
+        <TestAttribute ErrorType="MissingAttribute" IsValid="false"
+          Message="Missing JobPartID - required by Base ICS"
+          NodeName="JobPartID" XPath="/JDF/@JobPartID"/>
+        <TestAttribute ErrorType="UnknownAttribute" IsValid="false"
+          Message="JobName Unknown Attribute" NodeName="JobName"
+          Value="testedit2" XPath="/JDF/@JobName"/>
+        <TestAttribute ErrorType="InvalidAttribute" IsValid="false"
+          Message="Version Invalid attribute Value" NodeName="Version"
+          Value="1.14" XPath="/JDF/@Version"/>
+        <TestElement ErrorType="InvalidElement"
+          InvalidElements="RunList PSToPDFConversionParams ImageCompressionParams FontParams FontPolicy ReportList ImageReplacementParams ColorSpaceConversionParams TrappingDetails ColorPool ColorantControl"
+          IsValid="false"
+          Message="ResourcePool is not valid, see child elements for details"
+          NodeName="ResourcePool" XPath="/JDF/ResourcePool[1]">
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7ffa"
+            InvalidAttributes="Directory" IsValid="false"
+            Message="RunList is not valid, see child elements for details"
+            NodeName="RunList" PrivateElements="pt:BaseLocID" XPath="/JDF/ResourcePool[1]/RunList[1]">
+            <TestAttribute ErrorType="InvalidAttribute" IsValid="false"
+              Message="Directory Invalid attribute Value"
+              NodeName="Directory"
+              Value="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\Hotfolders\ContentHotfolder\target" XPath="/JDF/ResourcePool[1]/RunList[1]/@Directory"/>
+            <TestElement ErrorType="InvalidElement" ID="Linkf72:-7ffa"
+              InvalidElements="LayoutElement" IsValid="false"
+              Message="RunList is not valid, see child elements for details"
+              NodeName="RunList" PrivateElements="pt:BaseLocID" XPath="/JDF/ResourcePool[1]/RunList[1]/RunList[1]">
+              <TestElement ErrorType="InvalidElement"
+                InvalidElements="FileSpec" IsValid="false"
+                Message="LayoutElement is not valid, see child elements for details"
+                NodeName="LayoutElement" XPath="/JDF/ResourcePool[1]/RunList[1]/RunList[1]/LayoutElement[1]">
+                <TestElement ErrorType="InvalidElement"
+                  InvalidAttributes="URL" IsValid="false"
+                  Message="FileSpec is not valid, see child elements for details"
+                  NodeName="FileSpec" XPath="/JDF/ResourcePool[1]/RunList[1]/RunList[1]/LayoutElement[1]/FileSpec[1]">
+                  <TestAttribute ErrorType="InvalidAttribute"
+                    IsValid="false"
+                    Message="URL Invalid attribute Value" NodeName="URL"
+                    Value="file://H:\docs\harry_potter\Copy of Harry_Potter_Teil1_2up_short.pdf" XPath="/JDF/ResourcePool[1]/RunList[1]/RunList[1]/LayoutElement[1]/FileSpec[1]/@URL"/>
+                </TestElement>
+              </TestElement>
+            </TestElement>
+            <TestElement ErrorType="InvalidElement" ID="Linkf72:-7ffa"
+              InvalidElements="LayoutElement" IsValid="false"
+              Message="RunList is not valid, see child elements for details"
+              NodeName="RunList" PrivateElements="pt:BaseLocID" XPath="/JDF/ResourcePool[1]/RunList[1]/RunList[2]">
+              <TestElement ErrorType="InvalidElement"
+                InvalidElements="FileSpec" IsValid="false"
+                Message="LayoutElement is not valid, see child elements for details"
+                NodeName="LayoutElement" XPath="/JDF/ResourcePool[1]/RunList[1]/RunList[2]/LayoutElement[1]">
+                <TestElement ErrorType="InvalidElement"
+                  InvalidAttributes="URL" IsValid="false"
+                  Message="FileSpec is not valid, see child elements for details"
+                  NodeName="FileSpec" XPath="/JDF/ResourcePool[1]/RunList[1]/RunList[2]/LayoutElement[1]/FileSpec[1]">
+                  <TestAttribute ErrorType="InvalidAttribute"
+                    IsValid="false"
+                    Message="URL Invalid attribute Value" NodeName="URL"
+                    Value="file://H:\docs\harry_potter\Harry_Potter_Teil1_2up_short.pdf" XPath="/JDF/ResourcePool[1]/RunList[1]/RunList[2]/LayoutElement[1]/FileSpec[1]/@URL"/>
+                </TestElement>
+              </TestElement>
+            </TestElement>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7ff5"
+            InvalidAttributes="Directory" IsValid="false"
+            Message="RunList is not valid, see child elements for details"
+            NodeName="RunList" PrivateElements="pt:BaseLocID" XPath="/JDF/ResourcePool[1]/RunList[2]">
+            <TestAttribute ErrorType="InvalidAttribute" IsValid="false"
+              Message="Directory Invalid attribute Value"
+              NodeName="Directory"
+              Value="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Documents\Actual" XPath="/JDF/ResourcePool[1]/RunList[2]/@Directory"/>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7ff4"
+            InvalidAttributes="Directory" IsValid="false"
+            Message="RunList is not valid, see child elements for details"
+            NodeName="RunList" PrivateElements="pt:BaseLocID" XPath="/JDF/ResourcePool[1]/RunList[3]">
+            <TestAttribute ErrorType="InvalidAttribute" IsValid="false"
+              Message="Directory Invalid attribute Value"
+              NodeName="Directory"
+              Value="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Documents\Actual" XPath="/JDF/ResourcePool[1]/RunList[3]/@Directory"/>
+            <TestElement ErrorType="InvalidElement" ID="Linkf72:-7ff4"
+              InvalidElements="LayoutElement" IsValid="false"
+              Message="RunList is not valid, see child elements for details"
+              NodeName="RunList" PrivateElements="pt:BaseLocID" XPath="/JDF/ResourcePool[1]/RunList[3]/RunList[1]">
+              <TestElement ErrorType="InvalidElement"
+                InvalidElements="FileSpec" IsValid="false"
+                Message="LayoutElement is not valid, see child elements for details"
+                NodeName="LayoutElement" XPath="/JDF/ResourcePool[1]/RunList[3]/RunList[1]/LayoutElement[1]">
+                <TestElement ErrorType="InvalidElement"
+                  InvalidAttributes="URL" IsValid="false"
+                  Message="FileSpec is not valid, see child elements for details"
+                  NodeName="FileSpec" XPath="/JDF/ResourcePool[1]/RunList[3]/RunList[1]/LayoutElement[1]/FileSpec[1]">
+                  <TestAttribute ErrorType="InvalidAttribute"
+                    IsValid="false"
+                    Message="URL Invalid attribute Value" NodeName="URL"
+                    Value="file://H:\docs\harry_potter\Copy of Harry_Potter_Teil1_2up_short.pdf" XPath="/JDF/ResourcePool[1]/RunList[3]/RunList[1]/LayoutElement[1]/FileSpec[1]/@URL"/>
+                </TestElement>
+              </TestElement>
+            </TestElement>
+            <TestElement ErrorType="InvalidElement" ID="Linkf72:-7ff4"
+              InvalidElements="LayoutElement" IsValid="false"
+              Message="RunList is not valid, see child elements for details"
+              NodeName="RunList" PrivateElements="pt:BaseLocID" XPath="/JDF/ResourcePool[1]/RunList[3]/RunList[2]">
+              <TestElement ErrorType="InvalidElement"
+                InvalidElements="FileSpec" IsValid="false"
+                Message="LayoutElement is not valid, see child elements for details"
+                NodeName="LayoutElement" XPath="/JDF/ResourcePool[1]/RunList[3]/RunList[2]/LayoutElement[1]">
+                <TestElement ErrorType="InvalidElement"
+                  InvalidAttributes="URL" IsValid="false"
+                  Message="FileSpec is not valid, see child elements for details"
+                  NodeName="FileSpec" XPath="/JDF/ResourcePool[1]/RunList[3]/RunList[2]/LayoutElement[1]/FileSpec[1]">
+                  <TestAttribute ErrorType="InvalidAttribute"
+                    IsValid="false"
+                    Message="URL Invalid attribute Value" NodeName="URL"
+                    Value="file://H:\docs\harry_potter\Harry_Potter_Teil1_2up_short.pdf" XPath="/JDF/ResourcePool[1]/RunList[3]/RunList[2]/LayoutElement[1]/FileSpec[1]/@URL"/>
+                </TestElement>
+              </TestElement>
+            </TestElement>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7ff3"
+            InvalidAttributes="Directory" IsValid="false"
+            Message="RunList is not valid, see child elements for details"
+            NodeName="RunList" PrivateElements="pt:BaseLocID" XPath="/JDF/ResourcePool[1]/RunList[4]">
+            <TestAttribute ErrorType="InvalidAttribute" IsValid="false"
+              Message="Directory Invalid attribute Value"
+              NodeName="Directory"
+              Value="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Documents\Actual" XPath="/JDF/ResourcePool[1]/RunList[4]/@Directory"/>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7ff0"
+            InvalidElements="AdvancedParams" IsValid="false"
+            Message="PSToPDFConversionParams is not valid, see child elements for details"
+            NodeName="PSToPDFConversionParams"
+            UnknownAttributes="Modify" XPath="/JDF/ResourcePool[1]/PSToPDFConversionParams[1]">
+            <TestAttribute ErrorType="UnknownAttribute" IsValid="false"
+              Message="Modify Unknown Attribute" NodeName="Modify"
+              Value="false" XPath="/JDF/ResourcePool[1]/PSToPDFConversionParams[1]/@Modify"/>
+            <TestElement ErrorType="InvalidElement" IsValid="false"
+              Message="AdvancedParams is not valid, see child elements for details"
+              NodeName="AdvancedParams"
+              UnknownAttributes="AutoPostitionEPSInfo" XPath="/JDF/ResourcePool[1]/PSToPDFConversionParams[1]/AdvancedParams[1]">
+              <TestAttribute ErrorType="UnknownAttribute"
+                IsValid="false"
+                Message="AutoPostitionEPSInfo Unknown Attribute"
+                NodeName="AutoPostitionEPSInfo" Value="true" XPath="/JDF/ResourcePool[1]/PSToPDFConversionParams[1]/AdvancedParams[1]/@AutoPostitionEPSInfo"/>
+            </TestElement>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7fef"
+            IsValid="false"
+            Message="ImageCompressionParams is not valid, see child elements for details"
+            NodeName="ImageCompressionParams" UnknownAttributes="Modify" XPath="/JDF/ResourcePool[1]/ImageCompressionParams[1]">
+            <TestAttribute ErrorType="UnknownAttribute" IsValid="false"
+              Message="Modify Unknown Attribute" NodeName="Modify"
+              Value="false" XPath="/JDF/ResourcePool[1]/ImageCompressionParams[1]/@Modify"/>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7fee"
+            IsValid="false"
+            Message="FontParams is not valid, see child elements for details"
+            NodeName="FontParams" UnknownAttributes="Modify" XPath="/JDF/ResourcePool[1]/FontParams[1]">
+            <TestAttribute ErrorType="UnknownAttribute" IsValid="false"
+              Message="Modify Unknown Attribute" NodeName="Modify"
+              Value="false" XPath="/JDF/ResourcePool[1]/FontParams[1]/@Modify"/>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7fed"
+            IsValid="false"
+            Message="FontPolicy is not valid, see child elements for details"
+            NodeName="FontPolicy" UnknownAttributes="Modify" XPath="/JDF/ResourcePool[1]/FontPolicy[1]">
+            <TestAttribute ErrorType="UnknownAttribute" IsValid="false"
+              Message="Modify Unknown Attribute" NodeName="Modify"
+              Value="false" XPath="/JDF/ResourcePool[1]/FontPolicy[1]/@Modify"/>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7feb"
+            InvalidAttributes="Directory" IsValid="false"
+            Message="RunList is not valid, see child elements for details"
+            NodeName="RunList" PrivateElements="pt:BaseLocID" XPath="/JDF/ResourcePool[1]/RunList[5]">
+            <TestAttribute ErrorType="InvalidAttribute" IsValid="false"
+              Message="Directory Invalid attribute Value"
+              NodeName="Directory"
+              Value="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Pagefiles\Actual" XPath="/JDF/ResourcePool[1]/RunList[5]/@Directory"/>
+            <TestElement ErrorType="InvalidElement" ID="Linkf72:-7feb"
+              InvalidElements="LayoutElement" IsValid="false"
+              Message="RunList is not valid, see child elements for details"
+              NodeName="RunList"
+              PrivateElements="HDM:FilePage HDM:FilePageCommon pt:BaseLocID" XPath="/JDF/ResourcePool[1]/RunList[5]/RunList[1]">
+              <TestElement ErrorType="InvalidElement"
+                InvalidElements="FileSpec" IsValid="false"
+                Message="LayoutElement is not valid, see child elements for details"
+                NodeName="LayoutElement" XPath="/JDF/ResourcePool[1]/RunList[5]/RunList[1]/LayoutElement[1]">
+                <TestElement ErrorType="InvalidElement"
+                  InvalidAttributes="URL" IsValid="false"
+                  Message="FileSpec is not valid, see child elements for details"
+                  NodeName="FileSpec" XPath="/JDF/ResourcePool[1]/RunList[5]/RunList[1]/LayoutElement[1]/FileSpec[1]">
+                  <TestAttribute ErrorType="InvalidAttribute"
+                    IsValid="false"
+                    Message="URL Invalid attribute Value" NodeName="URL"
+                    Value="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Pagefiles\Actual\Copy of Harry_Potter_Teil1_2up_short.pdf" XPath="/JDF/ResourcePool[1]/RunList[5]/RunList[1]/LayoutElement[1]/FileSpec[1]/@URL"/>
+                </TestElement>
+              </TestElement>
+            </TestElement>
+            <TestElement ErrorType="InvalidElement" ID="Linkf72:-7feb"
+              InvalidElements="LayoutElement" IsValid="false"
+              Message="RunList is not valid, see child elements for details"
+              NodeName="RunList"
+              PrivateElements="HDM:FilePage HDM:FilePageCommon pt:BaseLocID" XPath="/JDF/ResourcePool[1]/RunList[5]/RunList[2]">
+              <TestElement ErrorType="InvalidElement"
+                InvalidElements="FileSpec" IsValid="false"
+                Message="LayoutElement is not valid, see child elements for details"
+                NodeName="LayoutElement" XPath="/JDF/ResourcePool[1]/RunList[5]/RunList[2]/LayoutElement[1]">
+                <TestElement ErrorType="InvalidElement"
+                  InvalidAttributes="URL" IsValid="false"
+                  Message="FileSpec is not valid, see child elements for details"
+                  NodeName="FileSpec" XPath="/JDF/ResourcePool[1]/RunList[5]/RunList[2]/LayoutElement[1]/FileSpec[1]">
+                  <TestAttribute ErrorType="InvalidAttribute"
+                    IsValid="false"
+                    Message="URL Invalid attribute Value" NodeName="URL"
+                    Value="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Pagefiles\Actual\Harry_Potter_Teil1_2up_short.pdf" XPath="/JDF/ResourcePool[1]/RunList[5]/RunList[2]/LayoutElement[1]/FileSpec[1]/@URL"/>
+                </TestElement>
+              </TestElement>
+            </TestElement>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7fe9"
+            IsValid="false"
+            Message="PreflightProfile is not valid, see child elements for details"
+            NodeName="PreflightProfile"
+            PrivateElements="HDM:ActionList pt:BaseLocID HDM:Profile"
+            UnknownAttributes="Modify" XPath="/JDF/ResourcePool[1]/PreflightProfile[1]">
+            <TestAttribute ErrorType="UnknownAttribute" IsValid="false"
+              Message="Modify Unknown Attribute" NodeName="Modify"
+              Value="false" XPath="/JDF/ResourcePool[1]/PreflightProfile[1]/@Modify"/>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7fe4"
+            InvalidAttributes="Directory" IsValid="false"
+            Message="RunList is not valid, see child elements for details"
+            NodeName="RunList" PrivateElements="pt:BaseLocID" XPath="/JDF/ResourcePool[1]/RunList[6]">
+            <TestAttribute ErrorType="InvalidAttribute" IsValid="false"
+              Message="Directory Invalid attribute Value"
+              NodeName="Directory"
+              Value="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\PDFEditing\Actual" XPath="/JDF/ResourcePool[1]/RunList[6]/@Directory"/>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7fdf"
+            InvalidAttributes="Directory" IsValid="false"
+            Message="RunList is not valid, see child elements for details"
+            NodeName="RunList" PrivateElements="pt:BaseLocID" XPath="/JDF/ResourcePool[1]/RunList[7]">
+            <TestAttribute ErrorType="InvalidAttribute" IsValid="false"
+              Message="Directory Invalid attribute Value"
+              NodeName="Directory"
+              Value="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Pagefiles\Actual" XPath="/JDF/ResourcePool[1]/RunList[7]/@Directory"/>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7fde"
+            InvalidElements="FileSpec" IsValid="false"
+            Message="ImageReplacementParams is not valid, see child elements for details"
+            NodeName="ImageReplacementParams" UnknownAttributes="Modify" XPath="/JDF/ResourcePool[1]/ImageReplacementParams[1]">
+            <TestAttribute ErrorType="UnknownAttribute" IsValid="false"
+              Message="Modify Unknown Attribute" NodeName="Modify"
+              Value="false" XPath="/JDF/ResourcePool[1]/ImageReplacementParams[1]/@Modify"/>
+            <TestElement ErrorType="InvalidElement"
+              InvalidAttributes="URL" IsValid="false"
+              Message="FileSpec is not valid, see child elements for details"
+              NodeName="FileSpec" PrivateElements="pt:BaseLocID" XPath="/JDF/ResourcePool[1]/ImageReplacementParams[1]/FileSpec[1]">
+              <TestAttribute ErrorType="InvalidAttribute"
+                IsValid="false" Message="URL Invalid attribute Value"
+                NodeName="URL"
+                Value="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Images" XPath="/JDF/ResourcePool[1]/ImageReplacementParams[1]/FileSpec[1]/@URL"/>
+            </TestElement>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7fdc"
+            InvalidAttributes="Directory" IsValid="false"
+            Message="RunList is not valid, see child elements for details"
+            NodeName="RunList" PrivateElements="pt:BaseLocID" XPath="/JDF/ResourcePool[1]/RunList[8]">
+            <TestAttribute ErrorType="InvalidAttribute" IsValid="false"
+              Message="Directory Invalid attribute Value"
+              NodeName="Directory"
+              Value="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Pagefiles\Actual" XPath="/JDF/ResourcePool[1]/RunList[8]/@Directory"/>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7fdb"
+            InvalidElements="ColorSpaceConversionOp FileSpec"
+            IsValid="false"
+            Message="ColorSpaceConversionParams is not valid, see child elements for details"
+            NodeName="ColorSpaceConversionParams"
+            UnknownAttributes="Modify" XPath="/JDF/ResourcePool[1]/ColorSpaceConversionParams[1]">
+            <TestAttribute ErrorType="UnknownAttribute" IsValid="false"
+              Message="Modify Unknown Attribute" NodeName="Modify"
+              Value="false" XPath="/JDF/ResourcePool[1]/ColorSpaceConversionParams[1]/@Modify"/>
+            <TestElement ErrorType="InvalidElement"
+              InvalidElements="FileSpec" IsValid="false"
+              Message="ColorSpaceConversionOp is not valid, see child elements for details"
+              NodeName="ColorSpaceConversionOp" XPath="/JDF/ResourcePool[1]/ColorSpaceConversionParams[1]/ColorSpaceConversionOp[1]">
+              <TestElement ErrorType="InvalidElement"
+                InvalidAttributes="URL" IsValid="false"
+                Message="FileSpec is not valid, see child elements for details"
+                NodeName="FileSpec" XPath="/JDF/ResourcePool[1]/ColorSpaceConversionParams[1]/ColorSpaceConversionOp[1]/FileSpec[1]">
+                <TestAttribute ErrorType="InvalidAttribute"
+                  IsValid="false" Message="URL Invalid attribute Value"
+                  NodeName="URL" Value="monitor/HDPP sRGB Profile.icm" XPath="/JDF/ResourcePool[1]/ColorSpaceConversionParams[1]/ColorSpaceConversionOp[1]/FileSpec[1]/@URL"/>
+              </TestElement>
+            </TestElement>
+            <TestElement ErrorType="InvalidElement"
+              InvalidElements="FileSpec" IsValid="false"
+              Message="ColorSpaceConversionOp is not valid, see child elements for details"
+              NodeName="ColorSpaceConversionOp" XPath="/JDF/ResourcePool[1]/ColorSpaceConversionParams[1]/ColorSpaceConversionOp[2]">
+              <TestElement ErrorType="InvalidElement"
+                InvalidAttributes="URL" IsValid="false"
+                Message="FileSpec is not valid, see child elements for details"
+                NodeName="FileSpec" XPath="/JDF/ResourcePool[1]/ColorSpaceConversionParams[1]/ColorSpaceConversionOp[2]/FileSpec[1]">
+                <TestAttribute ErrorType="InvalidAttribute"
+                  IsValid="false" Message="URL Invalid attribute Value"
+                  NodeName="URL" Value="monitor/HDPP sRGB Profile.icm" XPath="/JDF/ResourcePool[1]/ColorSpaceConversionParams[1]/ColorSpaceConversionOp[2]/FileSpec[1]/@URL"/>
+              </TestElement>
+            </TestElement>
+            <TestElement ErrorType="InvalidElement"
+              InvalidAttributes="URL" IsValid="false"
+              Message="FileSpec is not valid, see child elements for details"
+              NodeName="FileSpec" XPath="/JDF/ResourcePool[1]/ColorSpaceConversionParams[1]/FileSpec[1]">
+              <TestAttribute ErrorType="InvalidAttribute"
+                IsValid="false" Message="URL Invalid attribute Value"
+                NodeName="URL"
+                Value="printer/cmyk/SWOP ANSI CGATS-TR001/PO_SWOP_CGATS_TR001 U300K95.icm" XPath="/JDF/ResourcePool[1]/ColorSpaceConversionParams[1]/FileSpec[1]/@URL"/>
+            </TestElement>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7fd9"
+            InvalidAttributes="Directory" IsValid="false"
+            Message="RunList is not valid, see child elements for details"
+            NodeName="RunList" PrivateElements="pt:BaseLocID" XPath="/JDF/ResourcePool[1]/RunList[9]">
+            <TestAttribute ErrorType="InvalidAttribute" IsValid="false"
+              Message="Directory Invalid attribute Value"
+              NodeName="Directory"
+              Value="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Pagefiles\Actual" XPath="/JDF/ResourcePool[1]/RunList[9]/@Directory"/>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7fd7"
+            IsValid="false"
+            Message="PreflightProfile is not valid, see child elements for details"
+            NodeName="PreflightProfile"
+            PrivateElements="HDM:ActionList pt:BaseLocID HDM:Profile"
+            UnknownAttributes="Modify" XPath="/JDF/ResourcePool[1]/PreflightProfile[2]">
+            <TestAttribute ErrorType="UnknownAttribute" IsValid="false"
+              Message="Modify Unknown Attribute" NodeName="Modify"
+              Value="false" XPath="/JDF/ResourcePool[1]/PreflightProfile[2]/@Modify"/>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7fd5"
+            InvalidAttributes="Directory" IsValid="false"
+            Message="RunList is not valid, see child elements for details"
+            NodeName="RunList" PrivateElements="pt:BaseLocID" XPath="/JDF/ResourcePool[1]/RunList[10]">
+            <TestAttribute ErrorType="InvalidAttribute" IsValid="false"
+              Message="Directory Invalid attribute Value"
+              NodeName="Directory"
+              Value="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Pagefiles\Actual" XPath="/JDF/ResourcePool[1]/RunList[10]/@Directory"/>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7fd4"
+            InvalidElements="TrappingParams" IsValid="false"
+            Message="TrappingDetails is not valid, see child elements for details"
+            NodeName="TrappingDetails" UnknownAttributes="Modify" XPath="/JDF/ResourcePool[1]/TrappingDetails[1]">
+            <TestAttribute ErrorType="UnknownAttribute" IsValid="false"
+              Message="Modify Unknown Attribute" NodeName="Modify"
+              Value="false" XPath="/JDF/ResourcePool[1]/TrappingDetails[1]/@Modify"/>
+            <TestElement ErrorType="InvalidElement"
+              InvalidAttributes="ImageResolution" IsValid="false"
+              Message="TrappingParams is not valid, see child elements for details"
+              NodeName="TrappingParams"
+              UnknownAttributes="BlackOverprintGraphics BlackOverprintStrokes" XPath="/JDF/ResourcePool[1]/TrappingDetails[1]/TrappingParams[1]">
+              <TestAttribute ErrorType="UnknownAttribute"
+                IsValid="false"
+                Message="BlackOverprintGraphics Unknown Attribute"
+                NodeName="BlackOverprintGraphics" Value="false" XPath="/JDF/ResourcePool[1]/TrappingDetails[1]/TrappingParams[1]/@BlackOverprintGraphics"/>
+              <TestAttribute ErrorType="UnknownAttribute"
+                IsValid="false"
+                Message="BlackOverprintStrokes Unknown Attribute"
+                NodeName="BlackOverprintStrokes" Value="false" XPath="/JDF/ResourcePool[1]/TrappingDetails[1]/TrappingParams[1]/@BlackOverprintStrokes"/>
+              <TestAttribute ErrorType="InvalidAttribute"
+                IsValid="false"
+                Message="ImageResolution Invalid attribute Value"
+                NodeName="ImageResolution" Value="900.0" XPath="/JDF/ResourcePool[1]/TrappingDetails[1]/TrappingParams[1]/@ImageResolution"/>
+            </TestElement>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7fd3"
+            InvalidElements="Color" IsValid="false"
+            Message="ColorPool is not valid, see child elements for details"
+            NodeName="ColorPool" XPath="/JDF/ResourcePool[1]/ColorPool[1]">
+            <TestElement ErrorType="InvalidElement" ID="Linkf72:-7fd1"
+              IsValid="false"
+              Message="Color is not valid, see child elements for details"
+              NodeName="Color" UnknownAttributes="Status" XPath="/JDF/ResourcePool[1]/ColorPool[1]/Color[1]">
+              <TestAttribute ErrorType="UnknownAttribute"
+                IsValid="false" Message="Status Unknown Attribute"
+                NodeName="Status" Value="Unavailable" XPath="/JDF/ResourcePool[1]/ColorPool[1]/Color[1]/@Status"/>
+            </TestElement>
+            <TestElement ErrorType="InvalidElement" ID="Linkf72:-7fd0"
+              IsValid="false"
+              Message="Color is not valid, see child elements for details"
+              NodeName="Color" UnknownAttributes="Status" XPath="/JDF/ResourcePool[1]/ColorPool[1]/Color[2]">
+              <TestAttribute ErrorType="UnknownAttribute"
+                IsValid="false" Message="Status Unknown Attribute"
+                NodeName="Status" Value="Unavailable" XPath="/JDF/ResourcePool[1]/ColorPool[1]/Color[2]/@Status"/>
+            </TestElement>
+            <TestElement ErrorType="InvalidElement" ID="Linkf72:-7fcf"
+              IsValid="false"
+              Message="Color is not valid, see child elements for details"
+              NodeName="Color" UnknownAttributes="Status" XPath="/JDF/ResourcePool[1]/ColorPool[1]/Color[3]">
+              <TestAttribute ErrorType="UnknownAttribute"
+                IsValid="false" Message="Status Unknown Attribute"
+                NodeName="Status" Value="Unavailable" XPath="/JDF/ResourcePool[1]/ColorPool[1]/Color[3]/@Status"/>
+            </TestElement>
+            <TestElement ErrorType="InvalidElement" ID="Linkf72:-7fce"
+              IsValid="false"
+              Message="Color is not valid, see child elements for details"
+              NodeName="Color" UnknownAttributes="Status" XPath="/JDF/ResourcePool[1]/ColorPool[1]/Color[4]">
+              <TestAttribute ErrorType="UnknownAttribute"
+                IsValid="false" Message="Status Unknown Attribute"
+                NodeName="Status" Value="Unavailable" XPath="/JDF/ResourcePool[1]/ColorPool[1]/Color[4]/@Status"/>
+            </TestElement>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7fd2"
+            IsValid="false"
+            Message="ColorantControl is not valid, see child elements for details"
+            NodeName="ColorantControl" XPath="/JDF/ResourcePool[1]/ColorantControl[1]"/>
+        </TestElement>
+        <TestElement ErrorType="InvalidElement" IsValid="false"
+          Message="Element is not valid, see child elements for details"
+          NodeName="ResourceLinkPool" XPath="/JDF/ResourceLinkPool[1]">
+          <TestElement ErrorType="UnknownResourceLink" IsValid="false"
+            Message="Unknown ResourceLink for Process Product"
+            NodeName="ColorPoolLink" Usage="Input"
+            XPath="/JDF/ResourceLinkPool[1]/ColorPoolLink[1]" rRef="Linkf72:-7fd3"/>
+          <TestElement ErrorType="UnknownResourceLink" IsValid="false"
+            Message="Unknown ResourceLink for Process Product"
+            NodeName="ColorantControlLink" Usage="Input"
+            XPath="/JDF/ResourceLinkPool[1]/ColorantControlLink[1]" rRef="Linkf72:-7fd2"/>
+        </TestElement>
+        <TestElement ErrorType="InvalidElement"
+          InvalidElements="Created" IsValid="false"
+          Message="AuditPool is not valid, see child elements for details"
+          NodeName="AuditPool" XPath="/JDF/AuditPool[1]">
+          <TestElement ErrorType="InvalidElement"
+            InvalidAttributes="TimeStamp" IsValid="false"
+            Message="Created is not valid, see child elements for details"
+            NodeName="Created" XPath="/JDF/AuditPool[1]/Created[1]">
+            <TestAttribute ErrorType="InvalidAttribute" IsValid="false"
+              Message="TimeStamp Invalid attribute Value"
+              NodeName="TimeStamp" Value="2002-05-28T15:53:14CEST" XPath="/JDF/AuditPool[1]/Created[1]/@TimeStamp"/>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement"
+            InvalidAttributes="TimeStamp" IsValid="false"
+            Message="Created is not valid, see child elements for details"
+            NodeName="Created" XPath="/JDF/AuditPool[1]/Created[2]">
+            <TestAttribute ErrorType="InvalidAttribute" IsValid="false"
+              Message="TimeStamp Invalid attribute Value"
+              NodeName="TimeStamp" Value="2002-05-28T15:53:39CEST" XPath="/JDF/AuditPool[1]/Created[2]/@TimeStamp"/>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement"
+            InvalidAttributes="TimeStamp" IsValid="false"
+            Message="Created is not valid, see child elements for details"
+            NodeName="Created" XPath="/JDF/AuditPool[1]/Created[3]">
+            <TestAttribute ErrorType="InvalidAttribute" IsValid="false"
+              Message="TimeStamp Invalid attribute Value"
+              NodeName="TimeStamp" Value="2002-05-28T15:53:41CEST" XPath="/JDF/AuditPool[1]/Created[3]/@TimeStamp"/>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement"
+            InvalidAttributes="TimeStamp" IsValid="false"
+            Message="Created is not valid, see child elements for details"
+            NodeName="Created" XPath="/JDF/AuditPool[1]/Created[4]">
+            <TestAttribute ErrorType="InvalidAttribute" IsValid="false"
+              Message="TimeStamp Invalid attribute Value"
+              NodeName="TimeStamp" Value="2002-05-28T15:53:42CEST" XPath="/JDF/AuditPool[1]/Created[4]/@TimeStamp"/>
+          </TestElement>
+        </TestElement>
+        <TestElement ErrorType="InvalidElement" ID="Linkf72:-7ffc"
+          InvalidElements="AuditPool JDF" IsValid="false"
+          Message="JDF is not valid, see child elements for details"
+          NodeName="JDF" PrivateElements="pt:Sequence"
+          Type="ProcessGroup" UnknownElements="AncestorPool" XPath="/JDF/JDF[1]">
+          <TestAttribute ErrorType="MissingAttribute" IsValid="false"
+            Message="Missing JobPartID - required by Base ICS"
+            NodeName="JobPartID" XPath="/JDF/JDF[1]/@JobPartID"/>
+          <TestElement ErrorType="InvalidElement"
+            InvalidElements="Spawned" IsValid="false"
+            Message="AuditPool is not valid, see child elements for details"
+            NodeName="AuditPool" XPath="/JDF/JDF[1]/AuditPool[1]">
+            <TestElement ErrorType="InvalidElement"
+              InvalidAttributes="TimeStamp URL" IsValid="false"
+              Message="Spawned is not valid, see child elements for details"
+              NodeName="Spawned" XPath="/JDF/JDF[1]/AuditPool[1]/Spawned[1]">
+              <TestAttribute ErrorType="InvalidAttribute"
+                IsValid="false"
+                Message="TimeStamp Invalid attribute Value"
+                NodeName="TimeStamp" Value="2002-05-28T15:53:44CEST" XPath="/JDF/JDF[1]/AuditPool[1]/Spawned[1]/@TimeStamp"/>
+              <TestAttribute ErrorType="InvalidAttribute"
+                IsValid="false" Message="URL Invalid attribute Value"
+                NodeName="URL"
+                Value="file://\\SCHMIDTA-PC\PTConfig\JDFHotfolders\ContentHotfolder_1.0\Chfp1\testedit2_391808494_.jdf" XPath="/JDF/JDF[1]/AuditPool[1]/Spawned[1]/@URL"/>
+            </TestElement>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7ffb"
+            IsValid="false"
+            Message="Element is not valid, see child elements for details"
+            NodeName="JDF" Type="HDM:ManualRunlist" XPath="/JDF/JDF[1]/JDF[1]">
+            <TestAttribute ErrorType="MissingAttribute" IsValid="false"
+              Message="Missing JobPartID - required by Base ICS"
+              NodeName="JobPartID" XPath="/JDF/JDF[1]/JDF[1]/@JobPartID"/>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7ff8"
+            IsValid="false"
+            Message="Element is not valid, see child elements for details"
+            NodeName="JDF" Type="HDM:ContentHotfolder" XPath="/JDF/JDF[1]/JDF[2]">
+            <TestAttribute ErrorType="MissingAttribute" IsValid="false"
+              Message="Missing JobPartID - required by Base ICS"
+              NodeName="JobPartID" XPath="/JDF/JDF[1]/JDF[2]/@JobPartID"/>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7ff6"
+            IsValid="false"
+            Message="JDF is not valid, see child elements for details"
+            NodeName="JDF" Type="HDM:FileTypeSwitch" XPath="/JDF/JDF[1]/JDF[3]">
+            <TestAttribute ErrorType="MissingAttribute" IsValid="false"
+              Message="Missing JobPartID - required by Base ICS"
+              NodeName="JobPartID" XPath="/JDF/JDF[1]/JDF[3]/@JobPartID"/>
+            <TestElement ErrorType="InvalidElement" IsValid="false"
+              Message="StatusPool is not valid, see child elements for details"
+              NodeName="StatusPool" XPath="/JDF/JDF[1]/JDF[3]/StatusPool[1]">
+              <TestElement ErrorType="InvalidElement" IsValid="false"
+                Message="PartStatus is not valid, see child elements for details"
+                NodeName="PartStatus" XPath="/JDF/JDF[1]/JDF[3]/StatusPool[1]/PartStatus[1]"/>
+              <TestElement ErrorType="InvalidElement" IsValid="false"
+                Message="PartStatus is not valid, see child elements for details"
+                NodeName="PartStatus" XPath="/JDF/JDF[1]/JDF[3]/StatusPool[1]/PartStatus[2]"/>
+            </TestElement>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7ff1"
+            IsValid="false"
+            Message="JDF is not valid, see child elements for details"
+            NodeName="JDF" Type="PSToPDFConversion" XPath="/JDF/JDF[1]/JDF[4]">
+            <TestAttribute ErrorType="MissingAttribute" IsValid="false"
+              Message="Missing JobPartID - required by Base ICS"
+              NodeName="JobPartID" XPath="/JDF/JDF[1]/JDF[4]/@JobPartID"/>
+            <TestElement ErrorType="InvalidElement" IsValid="false"
+              Message="Element is not valid, see child elements for details"
+              NodeName="ResourceLinkPool" XPath="/JDF/JDF[1]/JDF[4]/ResourceLinkPool[1]">
+              <TestElement ErrorType="UnknownResourceLink"
+                IsValid="false"
+                Message="Unknown ResourceLink for Process Product"
+                NodeName="FontPolicyLink" Usage="Input"
+                XPath="/JDF/JDF[1]/JDF[4]/ResourceLinkPool[1]/FontPolicyLink[1]" rRef="Linkf72:-7fed"/>
+            </TestElement>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7fec"
+            InvalidAttributes="Version"
+            InvalidElements="ResourceLinkPool AuditPool" IsValid="false"
+            Message="JDF is not valid, see child elements for details"
+            NodeName="JDF" Type="Preflight"
+            UnknownElements="AncestorPool" XPath="/JDF/JDF[1]/JDF[5]">
+            <TestAttribute ErrorType="MissingAttribute" IsValid="false"
+              Message="Missing JobPartID - required by Base ICS"
+              NodeName="JobPartID" XPath="/JDF/JDF[1]/JDF[5]/@JobPartID"/>
+            <TestAttribute ErrorType="InvalidAttribute" IsValid="false"
+              Message="Version Invalid attribute Value"
+              NodeName="Version" Value="1.14" XPath="/JDF/JDF[1]/JDF[5]/@Version"/>
+            <TestElement ErrorType="InvalidElement" IsValid="false"
+              Message="ResourceLinkPool is not valid, see child elements for details"
+              NodeName="ResourceLinkPool" XPath="/JDF/JDF[1]/JDF[5]/ResourceLinkPool[1]">
+              <TestElement ErrorType="UnknownResourceLink"
+                IsValid="false"
+                Message="Unknown ResourceLink for Process Product"
+                NodeName="RunListLink" Usage="Output"
+                XPath="/JDF/JDF[1]/JDF[5]/ResourceLinkPool[1]/RunListLink[2]" rRef="Linkf72:-7feb"/>
+              <TestElement ErrorType="UnknownResourceLink"
+                IsValid="false"
+                Message="Unknown ResourceLink for Process Product"
+                NodeName="PreflightProfileLink" Usage="Input"
+                XPath="/JDF/JDF[1]/JDF[5]/ResourceLinkPool[1]/PreflightProfileLink[1]" rRef="Linkf72:-7fe9"/>
+            </TestElement>
+            <TestElement ErrorType="InvalidElement"
+              InvalidElements="Spawned Merged" IsValid="false"
+              Message="AuditPool is not valid, see child elements for details"
+              NodeName="AuditPool" XPath="/JDF/JDF[1]/JDF[5]/AuditPool[1]">
+              <TestElement ErrorType="InvalidElement"
+                InvalidAttributes="TimeStamp URL" IsValid="false"
+                Message="Spawned is not valid, see child elements for details"
+                NodeName="Spawned" XPath="/JDF/JDF[1]/JDF[5]/AuditPool[1]/Spawned[1]">
+                <TestAttribute ErrorType="InvalidAttribute"
+                  IsValid="false"
+                  Message="TimeStamp Invalid attribute Value"
+                  NodeName="TimeStamp" Value="2002-05-28T15:54:08CEST" XPath="/JDF/JDF[1]/JDF[5]/AuditPool[1]/Spawned[1]/@TimeStamp"/>
+                <TestAttribute ErrorType="InvalidAttribute"
+                  IsValid="false" Message="URL Invalid attribute Value"
+                  NodeName="URL"
+                  Value="file://\\SCHMIDTA-PC\PTConfig\JDFHotfolders\Preflighter_1.0\Preflight1\testedit2_391831737_.jdf" XPath="/JDF/JDF[1]/JDF[5]/AuditPool[1]/Spawned[1]/@URL"/>
+              </TestElement>
+              <TestElement ErrorType="InvalidElement"
+                InvalidAttributes="URL" IsValid="false"
+                Message="Merged is not valid, see child elements for details"
+                NodeName="Merged" XPath="/JDF/JDF[1]/JDF[5]/AuditPool[1]/Merged[1]">
+                <TestAttribute ErrorType="InvalidAttribute"
+                  IsValid="false" Message="URL Invalid attribute Value"
+                  NodeName="URL"
+                  Value="File://\\SCHMIDTA-PC\PTConfig\JDFHotfolders\Preflighter_1.0\Preflight1\QueueTemp\testedit2_391831737_.jdf" XPath="/JDF/JDF[1]/JDF[5]/AuditPool[1]/Merged[1]/@URL"/>
+              </TestElement>
+            </TestElement>
+            <TestElement ErrorType="InvalidElement" IsValid="false"
+              Message="StatusPool is not valid, see child elements for details"
+              NodeName="StatusPool" XPath="/JDF/JDF[1]/JDF[5]/StatusPool[1]">
+              <TestElement ErrorType="InvalidElement" IsValid="false"
+                Message="PartStatus is not valid, see child elements for details"
+                NodeName="PartStatus" XPath="/JDF/JDF[1]/JDF[5]/StatusPool[1]/PartStatus[1]"/>
+              <TestElement ErrorType="InvalidElement" IsValid="false"
+                Message="PartStatus is not valid, see child elements for details"
+                NodeName="PartStatus" XPath="/JDF/JDF[1]/JDF[5]/StatusPool[1]/PartStatus[2]"/>
+            </TestElement>
+            <TestElement ErrorType="UnknownElement" IsValid="false"
+              Message="AncestorPool is not defined in a TestElement"
+              NodeName="AncestorPool" XPath="/JDF/JDF[1]/JDF[5]/AncestorPool[1]"/>
+          </TestElement>
+          <TestElement ErrorType="UnknownElement" IsValid="false"
+            Message="AncestorPool is not defined in a TestElement"
+            NodeName="AncestorPool" XPath="/JDF/JDF[1]/AncestorPool[1]"/>
+        </TestElement>
+        <TestElement ErrorType="InvalidElement" ID="Linkf72:-7fe8"
+          InvalidElements="JDF" IsValid="false"
+          Message="JDF is not valid, see child elements for details"
+          NodeName="JDF" PrivateElements="pt:Sequence"
+          Type="ProcessGroup" XPath="/JDF/JDF[2]">
+          <TestAttribute ErrorType="MissingAttribute" IsValid="false"
+            Message="Missing JobPartID - required by Base ICS"
+            NodeName="JobPartID" XPath="/JDF/JDF[2]/@JobPartID"/>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7fe7"
+            InvalidElements="AuditPool" IsValid="false"
+            Message="JDF is not valid, see child elements for details"
+            NodeName="JDF" Type="HDM:PDFEditing"
+            UnknownElements="AncestorPool" XPath="/JDF/JDF[2]/JDF[1]">
+            <TestAttribute ErrorType="MissingAttribute" IsValid="false"
+              Message="Missing JobPartID - required by Base ICS"
+              NodeName="JobPartID" XPath="/JDF/JDF[2]/JDF[1]/@JobPartID"/>
+            <TestElement ErrorType="InvalidElement"
+              InvalidElements="Spawned" IsValid="false"
+              Message="AuditPool is not valid, see child elements for details"
+              NodeName="AuditPool" XPath="/JDF/JDF[2]/JDF[1]/AuditPool[1]">
+              <TestElement ErrorType="InvalidElement"
+                InvalidAttributes="TimeStamp URL" IsValid="false"
+                Message="Spawned is not valid, see child elements for details"
+                NodeName="Spawned" XPath="/JDF/JDF[2]/JDF[1]/AuditPool[1]/Spawned[1]">
+                <TestAttribute ErrorType="InvalidAttribute"
+                  IsValid="false"
+                  Message="TimeStamp Invalid attribute Value"
+                  NodeName="TimeStamp" Value="2002-05-28T16:41:52CEST" XPath="/JDF/JDF[2]/JDF[1]/AuditPool[1]/Spawned[1]/@TimeStamp"/>
+                <TestAttribute ErrorType="InvalidAttribute"
+                  IsValid="false" Message="URL Invalid attribute Value"
+                  NodeName="URL"
+                  Value="file://\\SCHMIDTA-PC\PTConfig\Jobs\Active\testedit2\System\Pagefiles\Actual\Copy of Harry_Potter_Teil1_2up_short.Actual.jdf" XPath="/JDF/JDF[2]/JDF[1]/AuditPool[1]/Spawned[1]/@URL"/>
+              </TestElement>
+            </TestElement>
+            <TestElement ErrorType="UnknownElement" IsValid="false"
+              Message="AncestorPool is not defined in a TestElement"
+              NodeName="AncestorPool" XPath="/JDF/JDF[2]/JDF[1]/AncestorPool[1]"/>
+            <TestElement ErrorType="InvalidElement" IsValid="false"
+              Message="StatusPool is not valid, see child elements for details"
+              NodeName="StatusPool" XPath="/JDF/JDF[2]/JDF[1]/StatusPool[1]">
+              <TestElement ErrorType="InvalidElement" IsValid="false"
+                Message="PartStatus is not valid, see child elements for details"
+                NodeName="PartStatus" XPath="/JDF/JDF[2]/JDF[1]/StatusPool[1]/PartStatus[1]"/>
+            </TestElement>
+          </TestElement>
+        </TestElement>
+        <TestElement ErrorType="InvalidElement" ID="Linkf72:-7fe2"
+          InvalidElements="JDF" IsValid="false"
+          Message="JDF is not valid, see child elements for details"
+          NodeName="JDF" PrivateElements="pt:Sequence"
+          Type="ProcessGroup" XPath="/JDF/JDF[3]">
+          <TestAttribute ErrorType="MissingAttribute" IsValid="false"
+            Message="Missing JobPartID - required by Base ICS"
+            NodeName="JobPartID" XPath="/JDF/JDF[3]/@JobPartID"/>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7fe1"
+            IsValid="false"
+            Message="Element is not valid, see child elements for details"
+            NodeName="JDF" Type="ImageReplacement" XPath="/JDF/JDF[3]/JDF[1]">
+            <TestAttribute ErrorType="MissingAttribute" IsValid="false"
+              Message="Missing JobPartID - required by Base ICS"
+              NodeName="JobPartID" XPath="/JDF/JDF[3]/JDF[1]/@JobPartID"/>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7fdd"
+            IsValid="false"
+            Message="Element is not valid, see child elements for details"
+            NodeName="JDF" Type="ColorSpaceConversion" XPath="/JDF/JDF[3]/JDF[2]">
+            <TestAttribute ErrorType="MissingAttribute" IsValid="false"
+              Message="Missing JobPartID - required by Base ICS"
+              NodeName="JobPartID" XPath="/JDF/JDF[3]/JDF[2]/@JobPartID"/>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7fda"
+            InvalidElements="ResourceLinkPool" IsValid="false"
+            Message="JDF is not valid, see child elements for details"
+            NodeName="JDF" Type="Preflight" XPath="/JDF/JDF[3]/JDF[3]">
+            <TestAttribute ErrorType="MissingAttribute" IsValid="false"
+              Message="Missing JobPartID - required by Base ICS"
+              NodeName="JobPartID" XPath="/JDF/JDF[3]/JDF[3]/@JobPartID"/>
+            <TestElement ErrorType="InvalidElement" IsValid="false"
+              Message="ResourceLinkPool is not valid, see child elements for details"
+              NodeName="ResourceLinkPool" XPath="/JDF/JDF[3]/JDF[3]/ResourceLinkPool[1]">
+              <TestElement ErrorType="UnknownResourceLink"
+                IsValid="false"
+                Message="Unknown ResourceLink for Process Product"
+                NodeName="RunListLink" Usage="Output"
+                XPath="/JDF/JDF[3]/JDF[3]/ResourceLinkPool[1]/RunListLink[2]" rRef="Linkf72:-7fd9"/>
+              <TestElement ErrorType="UnknownResourceLink"
+                IsValid="false"
+                Message="Unknown ResourceLink for Process Product"
+                NodeName="PreflightProfileLink" Usage="Input"
+                XPath="/JDF/JDF[3]/JDF[3]/ResourceLinkPool[1]/PreflightProfileLink[1]" rRef="Linkf72:-7fd7"/>
+            </TestElement>
+          </TestElement>
+          <TestElement ErrorType="InvalidElement" ID="Linkf72:-7fd6"
+            IsValid="false"
+            Message="Element is not valid, see child elements for details"
+            NodeName="JDF" Type="Trapping" XPath="/JDF/JDF[3]/JDF[4]">
+            <TestAttribute ErrorType="MissingAttribute" IsValid="false"
+              Message="Missing JobPartID - required by Base ICS"
+              NodeName="JobPartID" XPath="/JDF/JDF[3]/JDF[4]/@JobPartID"/>
+          </TestElement>
+        </TestElement>
+      </TestElement>
+    </CheckJDFOutput>
+  </TestFile>
+</CheckOutput>
