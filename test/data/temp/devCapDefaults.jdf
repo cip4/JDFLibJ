@@ -22,9 +22,9 @@
     </DevCaps>
     <DevCaps Context="Resource" LinkUsage="Input" Name="Layout">
       <DevCap ID="dc_Layout" MinOccurs="1" Name="Layout">
-        <DevCap ID="d070817_04490999_000009" MinOccurs="2" Name="ContentObject">
+        <DevCap ID="d070817_050024220_000009" MinOccurs="2" Name="ContentObject">
           <NumberState DefaultValue="1 0 0 1 1 1" HasDefault="true"
-            ID="d070817_04490999_000010" ListType="List" MaxOccurs="6"
+            ID="d070817_050024220_000010" ListType="List" MaxOccurs="6"
             MinOccurs="6" Name="CTM" Required="true"/>
         </DevCap>
       </DevCap>
