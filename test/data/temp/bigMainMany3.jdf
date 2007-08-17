@@ -37962,9 +37962,9 @@
           URL="http://KIE-SCHIELKE:49159/CHFP1"
           jRef="Link84846946_000272"
           rRefsROCopied="Link84846946_000274 Link84825524_000053 Link84832821_000115 Link84846446_000264 Link84846665_000267"/><Created
-          ID="a000003" TimeStamp="2007-08-17T14:51:39-04:00"/><Spawned
+          ID="a000003" TimeStamp="2007-08-17T16:49:35-04:00"/><Spawned
           ID="a000015" NewSpawnID="Sp000014" Status="Spawned"
-          TimeStamp="2007-08-17T14:51:42-04:00"
+          TimeStamp="2007-08-17T16:49:38-04:00"
           jRef="Link84846946_000272"
           rRefsROCopied="Link84846946_000274 Link84825524_000053 Link84832821_000115 Link84846446_000264 Link84846665_000267"
           rRefsRWCopied="Link84846946_000273"/></AuditPool><ResourcePool><NodeInfo
@@ -37988,7 +37988,7 @@
               HDM:ElementKind="Contentfile"><Comment
             URL="file://KIE-SCHIELKE/PTJobs/TestData/Drupa_HD-Stadt_lowRes/LowRes_PDF/001_Stadt_HD_1-18.pdf"/></Created><Created
             Author="Administrator" HDM:ElementKind="Contentfile"
-            ID="a000008" TimeStamp="2007-08-17T14:51:40-04:00"><Comment
+            ID="a000008" TimeStamp="2007-08-17T16:49:37-04:00"><Comment
             URL="file://KIE-SCHIELKE/PTJobs/TestData/Drupa_HD-Stadt_lowRes/LowRes_PDF/001_Stadt_HD_1-18.pdf"/></Created></AuditPool><ResourcePool><NodeInfo
             Class="Parameter" ID="Link84846805_000269" NaturalLang="en"
             NodeStatus="Waiting"
