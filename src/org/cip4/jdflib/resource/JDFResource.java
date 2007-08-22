@@ -1465,7 +1465,7 @@ public class JDFResource extends JDFElement
     {
         final String nodeNames[] = {
                 "ResourcePool","PipeParams","ResourceInfo","ResourceCmdParams", // copy of validRootParentNodeNames
-                "DeviceInfo","DropItemIntent","DropItem","ProductionIntent","CustomerInfo","NodeInfo","Ancestor",ElementName.PHASETIME};
+                "DeviceInfo","DropItemIntent","DropItem","ProductionIntent","CustomerInfo","NodeInfo","Ancestor", "Occupation",ElementName.PHASETIME};
 
         return nodeNames;
     }
