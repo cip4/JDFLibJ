@@ -86,6 +86,10 @@ public class JDFComChannelTest extends JDFTestCaseBase
         cc.setEMailLocator(" test@cip4.org");
         assertEquals(JDFComChannel.MAILTO+"test@cip4.org", cc.getLocator());
         assertEquals("test@cip4.org", cc.getEMailAddress());
+        cc.setLocator("test@cip4.org");
+        assertEquals("test@cip4.org", cc.getEMailAddress());
+        cc.setLocator("test.2@cip4.org");
+        assertEquals("test.2@cip4.org", cc.getEMailAddress());
     }
 
     public void testSetPhoneNumber() throws Exception

@@ -930,7 +930,7 @@ public class JDFRunList extends JDFAutoRunList
      * get RunList/LayoutElement/FileSpec/@URL
      * also evaluate RunList/@directory and concatinate Directory + URL in case 
      * URL is a relative URL
-     * @Dirextory is ignored if URL contains a scheme or is an absolute URL
+     * @Directory is ignored if URL contains a scheme or is an absolute URL
      * 
      * @return URL if a URL or Directory attribute exists, else null
      */ 

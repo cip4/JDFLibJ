@@ -566,12 +566,23 @@ public class JDFSpawn
                 VElement vResRoot = new VElement();
                 if(liRoot instanceof JDFResourceLink)
                 {
-                    vResRoot=((JDFResourceLink)liRoot).getTargetVector(-1);
-
+                    JDFResourceLink liRootLink=(JDFResourceLink)liRoot;
+                    VJDFAttributeMap vLinkMap=liRootLink.getPartMapVector();
+                    // make sure that spawned resources are sufficiently partitioned if spawning rw so that no merge conflicts arise
                     // create a temporary dummy copy of the link so that we have a gauranteed copy that behaves the same as the original
                     JDFResourceLink dummy=(JDFResourceLink) rootOut.getCreateResourceLinkPool().copyElement(liRoot,null);
+                    fixResLinks(rootOut, bResRW, liRootLink, dummy);
+                    // reduce partitions in main so that the links remain consistent
+                    liRootLink.setPartMapVector(vSpawnParts);                   
+                    dummy.setPartMapVector(vSpawnParts);                   
+
+                    vResRoot=((JDFResourceLink)liRoot).getTargetVector(-1);
+
                     vRes=dummy.getTargetVector(-1);
                     dummy.deleteNode();
+                    // reset partitions in main
+                    liRootLink.setPartMapVector(vLinkMap);
+
                 }
                 else if(liRoot instanceof JDFRefElement)
                 {
@@ -596,27 +607,7 @@ public class JDFSpawn
                     final JDFResource r = (JDFResource) vRes.elementAt(resParts);
                     final JDFResource rRoot1 = (JDFResource) vResRoot.elementAt(resParts);
 
-                    // make sure that spawned resources are sufficiently partitioned if spawning rw so that no merge conflicts arise
-                    if (bFixResources && vSpawnParts !=null && vSpawnParts.size() != 0 && bResRW)
-                    {
-                        final VString rootPartIDKeys = rootOut.getJDFRoot().getPartIDKeys(vSpawnParts.elementAt(0));
-                        try
-                        {
-                            r.getResourceRoot().createPartitions(vSpawnParts, rootPartIDKeys);
-                        }
-                        catch (JDFException x)
-                        {
-                            fixSpawnPartitions(r, rootPartIDKeys);
-                        }
-                        try
-                        {
-                            rRoot1.getResourceRoot().createPartitions(vSpawnParts, rootPartIDKeys);
-                        }
-                        catch (JDFException x)
-                        {
-                            fixSpawnPartitions(rRoot1, rootPartIDKeys);
-                        }
-                    }
+
 
                     spawnPart(rRoot1,spawnID, copyStatus, vSpawnParts, true);
                     spawnPart(r,spawnID, copyStatus, vSpawnParts, false);
@@ -624,7 +615,7 @@ public class JDFSpawn
                     if (vSpawnParts !=null  && vSpawnParts.size() != 0 && (bResRW || bSpawnROPartsOnly))
                     {
                         // reduce partitions of all RW resources and of RO resources if requested
-                        r.reducePartitions(vSpawnParts);
+                        r.getResourceRoot().reducePartitions(vSpawnParts);
                     }
                 }
             }
@@ -635,6 +626,50 @@ public class JDFSpawn
             ap.deleteNode();
 
         return nSpawned;
+    }
+
+    /**
+     * @param rootOut
+     * @param bResRW
+     * @param liRootLink
+     * @param dummy
+     */
+    private void fixResLinks(JDFNode rootOut, boolean bResRW, JDFResourceLink liRootLink, JDFResourceLink dummy)
+    {
+        if (bFixResources && vSpawnParts !=null && vSpawnParts.size() != 0 && bResRW)
+        {
+            final VString rootPartIDKeys = rootOut.getJDFRoot().getPartIDKeys(vSpawnParts.elementAt(0));
+            final JDFResource linkRoot = liRootLink.getLinkRoot();
+            if(linkRoot!=null)
+            {
+                try
+                {
+                    linkRoot.createPartitions(vSpawnParts, rootPartIDKeys);
+                }
+                catch (JDFException x)
+                {
+                    for(int i=0;i<vSpawnParts.size();i++)
+                    {
+                        fixSpawnPartitions(linkRoot.getPartition(vSpawnParts.elementAt(i), null), rootPartIDKeys);
+                    }
+                }
+            }
+            final JDFResource dummyRoot = dummy.getLinkRoot();
+            if(dummyRoot!=null)
+            {
+                try
+                {
+                    dummyRoot.createPartitions(vSpawnParts, rootPartIDKeys);
+                }
+                catch (JDFException x)
+                {
+                    for(int i=0;i<vSpawnParts.size();i++)
+                    {
+                        fixSpawnPartitions(dummyRoot.getPartition(vSpawnParts.elementAt(i), null), rootPartIDKeys);
+                    }
+                }
+            }
+        }
     }
 
     /////////////////////////////////////////////////////////////////////////
@@ -978,6 +1013,8 @@ public class JDFSpawn
 
     private void fixSpawnPartitions(final JDFResource r, final VString rootPartIDKeys)
     {
+        if(r==null)
+            return;
         VString oldParts=r.getPartIDKeys();
         if(oldParts.containsAny(rootPartIDKeys))
         {
