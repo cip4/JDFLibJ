@@ -70,6 +70,7 @@
 
 package org.cip4.jdflib.resource;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -117,11 +118,16 @@ import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.Node;
 
+import sun.awt.windows.ThemeReader;
+
 
 public class JDFResource extends JDFElement
 {
     private static final long serialVersionUID = 1L;
     private static boolean autoAgent=false;
+    
+    private static HashSet validParentNodeNameSet=null;
+    private static HashSet validRootParentNodeNameSet=null;
 
     private static AtrInfoTable[] atrInfoTable_Abstract = new AtrInfoTable[17];
     static
@@ -1011,7 +1017,7 @@ public class JDFResource extends JDFElement
 
                 if (parentName != null && !parentName.equals(JDFConstants.EMPTYSTRING) )
                 {
-                    if (StringUtil.hasToken(validParentNodeNames(), parentName,0))
+                    if (isValidParentNodeName(parentName))
                     {
                         res = (JDFResource) e;
                     }
@@ -1458,27 +1464,39 @@ public class JDFResource extends JDFElement
 
     /**
      * list of valid node names of potential parents for a resource
-     *
-     * @return String comma separated list of node names
+     * @param nodeName the name of the node to check against
+     * @return {@link Boolean} true if nodeName is the name of a valid resource parent element
      */
-    public static String[] validParentNodeNames()
+    private static boolean  isValidParentNodeName(String nodeName)
     {
-        final String nodeNames[] = {
-                "ResourcePool","PipeParams","ResourceInfo","ResourceCmdParams", // copy of validRootParentNodeNames
+        if(validParentNodeNameSet==null)
+        {
+            final String nodeNames[] = {
+                    "ResourcePool","PipeParams","ResourceInfo","ResourceCmdParams", ElementName.OCCUPATION, // copy of validRootParentNodeNames
                 "DeviceInfo","DropItemIntent","DropItem","ProductionIntent","CustomerInfo","NodeInfo","Ancestor", "Occupation",ElementName.PHASETIME};
-
-        return nodeNames;
+            validParentNodeNameSet=new HashSet();
+            for(int i=0;i<nodeNames.length;i++)
+                validParentNodeNameSet.add(nodeNames[i]);
+        }
+        return validParentNodeNameSet.contains(nodeName);
     }
 
     /**
      * list of valid node names of potential parents for a resource that impy a real resource root with class, id etc
-     *
-     * @return String[] of node names
+     * list of valid node names of potential parents for a resource
+     * @param nodeName the name of the node to check against
+     * @return {@link Boolean} true if nodeName is the name of a valid resource parent element
      */
-    public static String[] validRootParentNodeNames()
+    private static boolean isValidRootParentNodeName(String nodeName)
     {
-        final String[] nodeNames = {"ResourcePool","PipeParams","ResourceInfo","ResourceCmdParams"}; // must also copy to validParentNodeNames
-        return nodeNames;
+        if(validRootParentNodeNameSet==null)
+        {
+            final String[] nodeNames = {"ResourcePool","PipeParams","ResourceInfo","ResourceCmdParams"}; // must also copy to validParentNodeNames
+            validRootParentNodeNameSet=new HashSet();
+            for(int i=0;i<nodeNames.length;i++)
+                validRootParentNodeNameSet.add(nodeNames[i]);
+        }
+        return validRootParentNodeNameSet.contains(nodeName);
     }
 
     /**
@@ -1496,7 +1514,7 @@ public class JDFResource extends JDFElement
 		}
 
         final String par = e.getLocalName();
-        return !StringUtil.hasToken(validRootParentNodeNames(), par, 0);
+        return !isValidRootParentNodeName(par);
     }
 
 
@@ -3963,7 +3981,7 @@ public class JDFResource extends JDFElement
 			}
         }
 
-        return StringUtil.hasToken(validParentNodeNames(), locName, 0);
+        return isValidParentNodeName(locName);
     }
 
 
@@ -3985,7 +4003,7 @@ public class JDFResource extends JDFElement
 		}
 
         final String locName = parentNode.getLocalName();
-        return StringUtil.hasToken(validRootParentNodeNames(), locName, 0);
+        return isValidRootParentNodeName(locName);
     }
 
 
