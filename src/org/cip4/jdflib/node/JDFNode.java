@@ -2145,15 +2145,24 @@ public class JDFNode extends JDFElement
             }
 
             ni.getResourceRoot().setPartUsage(JDFResource.EnumPartUsage.Implicit);
-            ni=(JDFNodeInfo) ni.getCreatePartition(mattr, null);
-            ni.removeAttributeFromLeaves(AttributeName.NODESTATUS,null);
-            ni.setNodeStatus(status);
+            VElement ve=ni.getPartitionVector(mattr, EnumPartUsage.Explicit);
+            if(ve.isEmpty()) // no preexisting matching partition - attempt to create it
+            {
+               ve.add(ni.getCreatePartition(mattr, null)); 
+            }
+            
+            for(int i=0;i<ve.size();i++)
+            {
+                ni=(JDFNodeInfo) ve.elementAt(i);
+                ni.removeAttributeFromLeaves(AttributeName.NODESTATUS,null);
+                ni.setNodeStatus(status);
+            }
             setStatus(JDFElement.EnumNodeStatus.Part);
         }
-
         return true;
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////
     /**
      * get the node's partition status
      * 
@@ -7896,15 +7905,15 @@ public class JDFNode extends JDFElement
 
 
     /**
-     * prepare the nodeinfo for a partitioned spawn
+     * prepare the nodeinfo for a list of parts, e.g. for a partitioned spawn 
+     * if nodeinfo is prepartitioned it will return a vector of all matching leaves
      * 
-     * @param vSpawnParts the list of parts to spawn
+     * @param vSpawnParts the list of parts 
      * 
      * @return the vector of nodeinfo leaves
      */
     public VElement prepareNodeInfo(VJDFAttributeMap vSpawnParts)
     {
-
         //make sure we have a nodeinfo in case we have to merge stati
         JDFNodeInfo ni = getCreateNodeInfo();  
         VElement vni=new VElement();
@@ -7923,20 +7932,33 @@ public class JDFNode extends JDFElement
                 }
 
                 VString partVector=getPartIDKeys(spawnPart);
-                if(getStatus()!=EnumNodeStatus.Part){
+                if(getStatus()!=EnumNodeStatus.Part)
+                {
                     ni.setAttribute(AttributeName.NODESTATUS,getAttribute(AttributeName.STATUS));
                     this.setStatus(EnumNodeStatus.Part);
                 }
-                for(int i=0;i<vSpawnParts.size();i++){
-                    JDFNodeInfo niLeaf=(JDFNodeInfo)ni.getPartition(vSpawnParts.elementAt(i), EnumPartUsage.Explicit);
-                    if(niLeaf==null){ // leaves that do not exist yet are assumed waiting
-                        niLeaf=(JDFNodeInfo) ni.getCreatePartition(vSpawnParts.elementAt(i),partVector);
+                
+                for(int i=0;i<vSpawnParts.size();i++)
+                {
+                    //in case we spawn a subset, try to get the superset list first 
+                    VElement vLeaves=ni.getPartitionVector(vSpawnParts.elementAt(i), EnumPartUsage.Explicit);
+                    // no preexisting leaves - create them
+                    if(vLeaves.isEmpty())
+                    {
+                        JDFNodeInfo niLeaf=(JDFNodeInfo) ni.getCreatePartition(vSpawnParts.elementAt(i),partVector);
                         niLeaf.setAttribute(AttributeName.NODESTATUS, "Waiting");
+                        vni.add(niLeaf);
                     }
-                    vni.add(niLeaf);
+                    else // we have existing leaves, use them
+                    {
+                        for(int j=0;j<vLeaves.size();j++)
+                        {
+                            vni.add(vLeaves.elementAt(j));
+                        }
+                    }
                 }
             }
-            else
+            else // not partitioned
             {
                 vni.add(ni); // simply return the 1.3 resource              
             }
@@ -7945,10 +7967,9 @@ public class JDFNode extends JDFElement
         {
             vni.add(ni); // simply return the 1.2 element
         }
-
+        vni.unify();
         return vni;
     }
-
 
     /**
      * getLinks - get the links matching mLinkAtt out of the resource link pool

@@ -29,8 +29,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
-import org.cip4.jdflib.util.StatusUtil;
-import org.cip4.jdflib.util.StatusUtil.AmountBag;
+import org.cip4.jdflib.util.StatusCounter;
 
 
 public class NColorTest extends JDFTestCaseBase
@@ -174,14 +173,11 @@ public class NColorTest extends JDFTestCaseBase
         JDFResourceLink rl=node.getLink(component,null);
         VElement vRL=new VElement();
         vRL.add(rl);
-        StatusUtil su=new StatusUtil(node,vMap,vRL);
-        AmountBag[] bags=new AmountBag[1];
-        bags[0]=su.new AmountBag(rl.getrRef());
-        bags[0].addPhase(good, waste, false);
-        su.setDeviceID("myDevice");
-        su.setPhase(EnumNodeStatus.InProgress,"dummy",EnumDeviceStatus.Running,null,bags);
-        bags[0].addPhase(0, 0, true);
-        su.setPhase(endStatus,"dummy",EnumDeviceStatus.Idle,null,bags);
+        StatusCounter su=new StatusCounter(node,vMap,vRL);
+        su.addPhase(rl.getrRef(),good, waste);
+        su.setDeviceID(deviceID);
+        su.setPhase(EnumNodeStatus.InProgress,"dummy",EnumDeviceStatus.Running,null);
+        su.setPhase(endStatus,"dummy",EnumDeviceStatus.Idle,null);
         JDFDoc jmfStatus=su.getDocJMFPhaseTime();
         jmfStatus.write2File(jmfFile+"_status.jmf", 2,false);
         JDFDoc jmfRes=su.getDocJMFResource();

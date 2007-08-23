@@ -992,7 +992,6 @@ public class JDFResourceLink extends JDFElement
         {
             return (JDFPool) deepParentNotName;
         }
-
         return null;
     }
 
@@ -1027,7 +1026,6 @@ public class JDFResourceLink extends JDFElement
             {
                 return true;
             }
-
             for (int i = 0; i < siz; i++)
             {
                 if(vPart==null)
@@ -1046,13 +1044,13 @@ public class JDFResourceLink extends JDFElement
 
             for (int i = 0; i < siz; i++)
             {
-                final JDFAttributeMap elementAt = vPart.elementAt(i);
-                if(elementAt==null || elementAt.size()==0)
+                final JDFAttributeMap part = vPart.elementAt(i);
+                if(part==null || part.size()==0)
                     return true;
 
                 // RP 050120 swap of vPart[i] and partmap
                 // RP 070511 swap back of vPart[i] and partmap
-                if (elementAt.subMap(partMap))
+                if (part.subMap(partMap))
                     return true;
             }
         }

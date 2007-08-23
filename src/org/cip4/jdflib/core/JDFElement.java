@@ -122,6 +122,7 @@ import org.cip4.jdflib.datatypes.JDFXYPairRange;
 import org.cip4.jdflib.datatypes.JDFXYPairRangeList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.node.JDFAncestor;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
@@ -4294,6 +4295,12 @@ public class JDFElement extends KElement
     static public String  getValueForNewAttribute(KElement e,String attName)
     {
         //TODO move this to JDFElement and let JDFLib predefine reasonable attributes 
+        
+        // return the default if it exists
+        JDFAttributeMap map=e.getDefaultAttributeMap();
+        if(map!=null && map.containsKey(attName))
+            return map.get(attName);
+
         if (attName.equals("ID"))
             return JDFElement.uniqueID(0);
 
@@ -4313,9 +4320,12 @@ public class JDFElement extends KElement
         {
             return "Unavailable";
         }
-
-        if (attName.equals("Type"))
+        
+        if (attName.equals("Type") &&(e instanceof JDFNode))
             return "Product";
+
+        if (attName.equals("Type") &&(e instanceof JDFMessage))
+            return "Status";
 
         if (attName.equals("TimeStamp"))
             return new JDFDate().getDateTimeISO();
@@ -4332,7 +4342,9 @@ public class JDFElement extends KElement
             if(EnumAttributeType.boolean_.equals(attyp))
                 return "true";
             if(EnumAttributeType.CMYKColor.equals(attyp))
-                return "1 0 0 0";
+                return "0 0 0 1";
+            if(EnumAttributeType.RGBColor.equals(attyp))
+                return "1 1 1";
             if(EnumAttributeType.dateTime.equals(attyp) || EnumAttributeType.DateTimeRange.equals(attyp)|| EnumAttributeType.DateTimeRangeList.equals(attyp))
                 return new JDFDate().getDateTimeISO();
             if(EnumAttributeType.double_.equals(attyp))

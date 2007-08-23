@@ -602,7 +602,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
     }
 
     /**
-     * Method testIncludesMatchingAttribute.
+     * Method testHasResourcePartMap.
      * @throws Exception
      */
     public void testHasResourcePartMap() throws Exception
@@ -612,14 +612,37 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
         JDFResource r=n.addResource(ElementName.SCREENINGINTENT, null, EnumUsage.Input, null, null, null, null);
         JDFResource rSig=r.addPartition(EnumPartIDKey.SignatureName, "sig1");
         JDFResourceLink rl=n.getLink(r, null);
+        
         assertTrue(rl.hasResourcePartMap(null,false));
+        assertTrue(rl.hasResourcePartMap(null,true));
         rl.setPart(EnumPartIDKey.SignatureName.getName(), "sig1");
         assertTrue(rl.hasResourcePartMap(null,false));
+        assertTrue(rl.hasResourcePartMap(null,true));
         rSig.addPartition(EnumPartIDKey.SheetName, "sh1");
         assertTrue(rl.hasResourcePartMap(null,false));
-        assertTrue(rl.hasResourcePartMap(new JDFAttributeMap(EnumPartIDKey.SignatureName, "sig1"),false));
+        final JDFAttributeMap attributeMap = new JDFAttributeMap(EnumPartIDKey.SignatureName, "sig1");
+        assertTrue(rl.hasResourcePartMap(attributeMap,false));
+        
+        attributeMap.put(EnumPartIDKey.SheetName, "sh1");
+        assertTrue(rl.hasResourcePartMap(attributeMap,true));
+        assertFalse(rl.hasResourcePartMap(attributeMap,false));
+        
+        attributeMap.put(EnumPartIDKey.Side, "Front");
+        assertFalse(rl.hasResourcePartMap(attributeMap,true));
+        assertFalse(rl.hasResourcePartMap(attributeMap,false));
+
         assertFalse(rl.hasResourcePartMap(new JDFAttributeMap(EnumPartIDKey.SignatureName, "sig2"),false));
-    }
+        assertFalse(rl.hasResourcePartMap(new JDFAttributeMap(EnumPartIDKey.SignatureName, "sig2"),true));
+
+        r.setPartUsage(EnumPartUsage.Implicit);
+        assertTrue(rl.hasResourcePartMap(attributeMap,true));
+        assertTrue(rl.hasResourcePartMap(attributeMap,false));
+      
+        assertFalse(rl.hasResourcePartMap(new JDFAttributeMap(EnumPartIDKey.SignatureName, "sig2"),false));
+        assertFalse(rl.hasResourcePartMap(new JDFAttributeMap(EnumPartIDKey.SignatureName, "sig2"),true));
+   }
+    
+    
     /**
      * Method testIsExecutable().
      * @throws Exception

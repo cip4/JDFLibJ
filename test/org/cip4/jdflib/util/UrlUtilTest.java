@@ -241,10 +241,19 @@ public class UrlUtilTest extends JDFTestCaseBase
         url="/a.b";
         assertEquals("absolute url no host","File://a.b", UrlUtil.getURLWithDirectory("File://dir/", url));
         assertEquals("absolute url no host","File://a.b", UrlUtil.getURLWithDirectory("File://dir", url));
+       
+        url="/a.b:c";
+        assertEquals("absolute url no host - colon","File://a.b:c", UrlUtil.getURLWithDirectory("File://dir/", url));
+        assertEquals("absolute url no host - colon","File://a.b:c", UrlUtil.getURLWithDirectory("File://dir", url));
 
         url="//a.b";
         assertEquals("absolute url with default host","File://a.b", UrlUtil.getURLWithDirectory("File://dir/", url));
         assertEquals("absolute url with default host","File://a.b", UrlUtil.getURLWithDirectory("File://dir", url));
+        
+        url="ftp://a.b";
+        assertEquals("absolute url with default host","ftp://a.b", UrlUtil.getURLWithDirectory("File://dir/", url));
+        url="http://a.b";
+        assertEquals("absolute url with default host","http://a.b", UrlUtil.getURLWithDirectory("File://dir/", url));
 
         url="//boo/a.b";
         assertEquals("absolute url with new host","File://boo/a.b", UrlUtil.getURLWithDirectory("File://dir/", url));

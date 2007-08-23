@@ -164,6 +164,24 @@ public class JDFNodeTest extends JDFTestCaseBase
         n3.getPredecessors(true, true);
     }
 
+    public void testGetRefPartition()throws Throwable
+    {
+        JDFDoc jdfDoc = JDFDoc.parseFile (sm_dirTestData+"GetReferencedPartition.jdf");
+        JDFNode nodeProc = jdfDoc.getJDFRoot ().getJobPart ("1008.C", null);
+        JDFResourceLinkPool linkPool = nodeProc.getResourceLinkPool();
+        JDFResourceLink link = linkPool.getPoolChild (0, "ExposedMediaLink", null, null);
+        VJDFAttributeMap vam = nodeProc.getExecutablePartitions (link, JDFResource.EnumResStatus.Draft);
+        assertTrue (vam.size () == 5);
+
+//      VJDFAttributeMap: 
+//      [0]JDFAttributeMap: { (Side = Front) (SheetName = 002_Text-1) (SignatureName = SIG2) (Separation = Cyan) }
+//      [1]JDFAttributeMap: { (Side = Front) (SheetName = 002_Text-1) (SignatureName = SIG2) (Separation = Magenta) }
+//      [2]JDFAttributeMap: { (Side = Front) (SheetName = 002_Text-1) (SignatureName = SIG2) (Separation = Yellow) }
+//      [3]JDFAttributeMap: { (Side = Front) (SheetName = 002_Text-1) (SignatureName = SIG2) (Separation = Black) }
+//      [4]JDFAttributeMap: { (Side = Front) (SheetName = 002_Text-1) (SignatureName = SIG2) }
+
+    }
+
     ///////////////////////////////////////////////////////
 
     public void testSortChildren()
@@ -660,7 +678,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         jmf = docJMF.getJMFRoot();
         assertNotNull(jmf);
         assertEquals(jmf.numChildElements(ElementName.RESPONSE,null),2);      
-        
+
         jmf.convertResponses(null);
         docJMF.write2File(sm_dirTestDataTemp+"inprogress3.jmf",2,true);
 
@@ -898,8 +916,8 @@ public class JDFNodeTest extends JDFTestCaseBase
                 JDFNode root2 = (JDFNode) m_jdfDoc2.getRoot();
                 assertNotNull(root2);
                 if (root == null) {
-					return; // soothe findbugs ;)
-				}
+                    return; // soothe findbugs ;)
+                }
                 new JDFMerge(root).mergeJDF(root2, sm_dirTestData+xmlFile2, cleanUp, amountMerge);
 
                 m_jdfDoc.write2File(sm_dirTestDataTemp + outFile + i + j, 2, true);
@@ -1364,7 +1382,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertEquals(n2, n.getNodeInfo(2));
         assertNull(n.getNodeInfo(0));
         assertNull(n.getNodeInfo(3));
-                      assertEquals(n.getPartStatus(map), EnumNodeStatus.FailedTestRun);
+        assertEquals(n.getPartStatus(map), EnumNodeStatus.FailedTestRun);
     }
 
     //////////////////////////////////////////////////////////////
@@ -1496,11 +1514,11 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertNotNull(ppnode);
 
         if (ppnode != null) {
-	        assertTrue(ppnode.getTypes().contains(EnumType.LayoutElementProduction.getName()));
-	        JDFResource res= ppnode.getMatchingResource("RunList",JDFNode.EnumProcessUsage.AnyInput,null,0);
-	        assertEquals(res.getNodeName(),ElementName.RUNLIST);
-	        res= ppnode.getMatchingResource("LayoutElementProductionParams",JDFNode.EnumProcessUsage.AnyInput,null,0);
-	        assertEquals(res.getNodeName(),ElementName.LAYOUTELEMENTPRODUCTIONPARAMS);
+            assertTrue(ppnode.getTypes().contains(EnumType.LayoutElementProduction.getName()));
+            JDFResource res= ppnode.getMatchingResource("RunList",JDFNode.EnumProcessUsage.AnyInput,null,0);
+            assertEquals(res.getNodeName(),ElementName.RUNLIST);
+            res= ppnode.getMatchingResource("LayoutElementProductionParams",JDFNode.EnumProcessUsage.AnyInput,null,0);
+            assertEquals(res.getNodeName(),ElementName.LAYOUTELEMENTPRODUCTIONPARAMS);
         }
     }
 
@@ -1634,8 +1652,8 @@ public class JDFNodeTest extends JDFTestCaseBase
             root.setVersion(v);
             VJDFAttributeMap vMapIn=new VJDFAttributeMap();
             if(i==1) {
-				vMapIn.add(new JDFAttributeMap());
-			}
+                vMapIn.add(new JDFAttributeMap());
+            }
             for(int j=0;j<3;j++)
             {
                 JDFAttributeMap map=new JDFAttributeMap("Run","R"+j);
@@ -1755,8 +1773,8 @@ public class JDFNodeTest extends JDFTestCaseBase
         int id=root.getMinID();
         assertTrue(id<5 && id>0);
         for(int i=0;i<1000;i++) {
-			root.getAuditPool().addModified(null, null);
-		}
+            root.getAuditPool().addModified(null, null);
+        }
         assertEquals(id+1000,root.getMinID());
         root.setID("ida123456");
         root.setID("ida123456");
@@ -1825,7 +1843,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertEquals(root.getWorkStepID(null), "w1");
         assertEquals(root.getWorkStepID(attributeMap), "w1");
     }
-   //////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
 
     public void testGetUnknownLinks()
     {

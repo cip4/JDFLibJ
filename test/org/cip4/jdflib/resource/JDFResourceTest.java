@@ -1021,6 +1021,23 @@ public class JDFResourceTest extends JDFTestCaseBase
             JDFExposedMedia xmp=(JDFExposedMedia) v.elementAt(i);
             assertTrue("overlap of maps",m.overlapMap(xmp.getPartMap()));
         }
+        
+        m.clear();
+        m.put("SignatureName","Sig1");
+        m.put("Side","Front");
+        
+        v=xm.getPartitionVector(m,EnumPartUsage.Explicit);
+        assertTrue("explicit key missing",v.size()==2);
+        v=xm.getPartitionVector(m,EnumPartUsage.Sparse);
+        assertTrue("no sparse",v.size()==2);
+        v=xm.getPartitionVector(m,EnumPartUsage.Implicit);
+        assertTrue("1 impl",v.size()==2);
+        for(i=0;i<v.size();i++)
+        {
+            JDFExposedMedia xmp=(JDFExposedMedia) v.elementAt(i);
+            assertTrue("overlap of maps",m.overlapMap(xmp.getPartMap()));
+        }
+
     }
 
     /////////////////////////////////////////////////////////////////////////////

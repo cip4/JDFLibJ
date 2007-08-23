@@ -660,7 +660,7 @@ public class UrlUtil
         if(url==null)
             return directory;
 
-        if(url.toLowerCase().startsWith("file:"))
+        if(url.indexOf(":")>0 && ((url.indexOf("/")<0)||url.indexOf("/")>url.indexOf(":"))) // has scheme
             return url;
         if(url.startsWith("/"))
         {

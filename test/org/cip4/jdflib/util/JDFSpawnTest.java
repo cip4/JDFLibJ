@@ -1558,8 +1558,30 @@ public class JDFSpawnTest extends JDFTestCaseBase
         return strSpawnID;
     }
 
-
     //////////////////////////////////////////////////////////
+
+    public void testSpawnSheetNeedsSide() throws Exception
+    {
+        final JDFDoc readJDF = JDFDoc.parseFile(sm_dirTestData+"pdyv5.jdf");
+        assertNotNull(readJDF);
+        final JDFNode root = readJDF.getJDFRoot();
+        final JDFNode spawnNode = (JDFNode) root.getTarget("Link070822_032611973_013511", AttributeName.ID);
+        final VJDFAttributeMap vSpawnParts = new VJDFAttributeMap();
+//        "ImP1.MR" with "VJDFAttributeMap: [0]JDFAttributeMap: { (PartVersion = Eng Eng) (SheetName = S0C) (SignatureName = Sig001) }
+        final JDFAttributeMap partMap = new JDFAttributeMap();
+        partMap.put("PartVersion","Eng Eng");
+        partMap.put("SheetName","S0C");
+        partMap.put("SignatureName","Sig001");
+        
+        vSpawnParts.add(partMap);
+        final Vector vRWResources_in = new Vector();
+        JDFNode spawnedNode=new JDFSpawn(spawnNode).spawn("parentURL", "spawnURL", vRWResources_in, vSpawnParts, false, true, false, false);
+        JDFNodeInfo ni=spawnedNode.getCreateNodeInfo();
+        assertNull(ni.getPartition(partMap, EnumPartUsage.Explicit));
+        partMap.put("Side","Front");
+        assertNotNull(ni.getPartition(partMap, EnumPartUsage.Explicit));
+    }
+   //////////////////////////////////////////////////////////
 
     public void testPartitionedSpawn()
     {
