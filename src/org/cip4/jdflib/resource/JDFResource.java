@@ -118,8 +118,6 @@ import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.Node;
 
-import sun.awt.windows.ThemeReader;
-
 
 public class JDFResource extends JDFElement
 {
