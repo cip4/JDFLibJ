@@ -450,6 +450,19 @@ public class KElementTest extends JDFTestCaseBase
         assertFalse(d.toString().indexOf("xmlns=\"\"")>=0);
 
     }
+    public void testCopyElementNS()
+    {
+        XMLDoc d=new XMLDoc("d1",null);
+        KElement e=d.getRoot();
+        XMLDoc d2=new XMLDoc("d2",null);
+        KElement e2=d2.getRoot();
+        e2.addNameSpace("foo", "www.foo.com");
+        e2.setAttribute("foo:bar", "blub");
+        KElement e3=e.copyElement(e2,null);
+        assertNull(e3.getNamespaceURI());
+        assertTrue(d.toString().indexOf("xmlns:foo=\"www.foo.com\"")>0);
+
+    }
 
     public void testCopyAttribute()
     {

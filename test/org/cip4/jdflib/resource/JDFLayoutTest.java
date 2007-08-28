@@ -92,6 +92,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.process.JDFColorControlStrip;
 import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
@@ -134,6 +135,33 @@ public class JDFLayoutTest extends JDFTestCaseBase
         lo.addPartition(EnumPartIDKey.SheetName,"Sheet1");
         assertTrue("lo 1.3",JDFLayout.isNewLayout(lo));  
         assertFalse("l no layout",JDFLayout.isNewLayout(rl));
+    }    
+    //////////////////////////////////////////////////////////////////////////
+
+    public void testAutoRegister()
+    {
+        assertEquals("version ok",n.getVersion(false),EnumVersion.Version_1_3);
+        JDFLayout lo=(JDFLayout) n.appendMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null);
+        JDFColorControlStrip autoReg=lo.appendMarkObject().appendColorControlStrip();
+        autoReg.setStripType("AutoRegister");
+        autoReg.appendElement("SeparationSpec").setAttribute("Name", "Black");
+        autoReg.appendElement("SeparationSpec").setAttribute("Name", "Cyan");
+        autoReg.appendElement("SeparationSpec").setAttribute("Name", "Yellow");
+        autoReg.appendElement("SeparationSpec").setAttribute("Name", "Magenta");
+        autoReg.appendElement("SeparationSpec").setAttribute("Name", "Spot1");
+        autoReg.appendElement("SeparationSpec").setAttribute("Name", "Spot2");
+        JDFColorControlStrip fms=lo.getMarkObject(0).appendColorControlStrip();
+        fms.setStripType("FMS");
+        fms.appendElement("SeparationSpec").setAttribute("Name", "Black");
+        fms.appendElement("SeparationSpec").setAttribute("Name", "Yellow");
+        fms.appendElement("SeparationSpec").setAttribute("Name", "Magenta");
+        fms.appendElement("SeparationSpec").setAttribute("Name", "Cyan");
+        
+        fms=lo.getMarkObject(0).appendColorControlStrip();
+        fms.setStripType("FMS");
+        fms.appendElement("SeparationSpec").setAttribute("Name", "Spot1");
+        fms.appendElement("SeparationSpec").setAttribute("Name", "Spot2");
+         doc.write2File(sm_dirTestDataTemp+"autoregister.jdf", 2, false);
     }    
     //////////////////////////////////////////////////////////////////////////
 

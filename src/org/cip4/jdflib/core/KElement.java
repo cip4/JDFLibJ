@@ -128,7 +128,6 @@ import org.w3c.dom.Text;
 public class KElement extends ElementNSImpl
 {
     private static final long serialVersionUID = 1L;
-
     private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 
     static
@@ -1211,7 +1210,6 @@ public class KElement extends ElementNSImpl
      */
     public String getNamespaceURIFromPrefix(String prefix)
     {
-
         String strNamespaceURI = null;
         if (prefix == null || prefix.equals(JDFConstants.EMPTYSTRING))
         {
@@ -1226,7 +1224,7 @@ public class KElement extends ElementNSImpl
 
             strNamespaceURI = getAttribute(AttributeName.XMLNS,null,null);
             if (strNamespaceURI != null) {
-				return strNamespaceURI;
+ 				return strNamespaceURI;
 			}
         }
         else
@@ -1279,10 +1277,10 @@ public class KElement extends ElementNSImpl
             }
 
             // nothing found, recurse into parent element and try again
-            Node e = getParentNode();
-            if (e instanceof KElement)
+            KElement e = getParentNode_KElement();
+            if (e !=null)
             {
-                return ((KElement) e).getNamespaceURIFromPrefix(prefix);
+                return e.getNamespaceURIFromPrefix(prefix);
             }
         }
 

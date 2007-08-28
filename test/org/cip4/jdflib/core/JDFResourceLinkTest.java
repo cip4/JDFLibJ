@@ -613,11 +613,16 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
         JDFResource rSig=r.addPartition(EnumPartIDKey.SignatureName, "sig1");
         JDFResourceLink rl=n.getLink(r, null);
         
+        // the root always exists
         assertTrue(rl.hasResourcePartMap(null,false));
         assertTrue(rl.hasResourcePartMap(null,true));
+        
+        // link and resource match
         rl.setPart(EnumPartIDKey.SignatureName.getName(), "sig1");
         assertTrue(rl.hasResourcePartMap(null,false));
         assertTrue(rl.hasResourcePartMap(null,true));
+        
+        // resource is partitioned deeper than link
         rSig.addPartition(EnumPartIDKey.SheetName, "sh1");
         assertTrue(rl.hasResourcePartMap(null,false));
         final JDFAttributeMap attributeMap = new JDFAttributeMap(EnumPartIDKey.SignatureName, "sig1");

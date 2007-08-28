@@ -3,7 +3,7 @@
 * The CIP4 Software License, Version 1.0
 *
 *
-* Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+* Copyright (c) 2001-2007 The International Cooperation for the Integration of 
 * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
 * reserved.
 *
@@ -296,7 +296,7 @@ public class JDFAttributeMap implements Map
     /**
      * Method overlapMap.
      * @param vMap the vector submaps to check against
-     * @return true if this has at least one entry that vMap contains at least a submap of
+     * @return true if this has at least one entry that vMap contains at least a submap or supermap of
      */
     public boolean overlapMap (VJDFAttributeMap vMap)
     {
@@ -312,6 +312,7 @@ public class JDFAttributeMap implements Map
 
     /**
      * overlapMap - identical keys must have the same values in both maps
+     * i.e submap is either a superset or a subset of this
      *
      * @param subMap the map to compare with <code>this</this>
      *
