@@ -1,6 +1,38 @@
 ___________________________________________________________
 
 
+Label JDFLIBJ_2.1.3BLD450 (03.08.2007)
+
+alces: fix illegalargumentexception
+minor fixes, cleanup
+added submitqueuentry handler, added getURLDoc to queuesubmissionParams, minor npe in alces
+added missing NotificationDetails element Milestone
+fix xpath searches for resources in editor
+added containerutil.equals
+make JDFLibJ Project name consistent
+
+ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD450) && !lbtype(JDFLIBJ_2.1.3BLD442)}" -print
+.\auto@@\main\44
+.\auto\JDFAutoMilestone.java@@\main\1
+.\core\AttributeName.java@@\main\44
+.\core\DocumentJDFImpl.java@@\main\92
+.\core\JDFAudit.java@@\main\87
+.\core\KElement.java@@\main\248
+.\core\XMLDoc.java@@\main\86
+.\datatypes\JDFMatrix.java@@\main\17
+.\jmf\JDFQueueSubmissionParams.java@@\main\12
+.\resource@@\main\34
+.\resource\devicecapability\JDFDevCap.java@@\main\52
+.\resource\JDFMilestone.java@@\main\1
+.\resource\JDFNotification.java@@\main\18
+.\resource\JDFResource.java@@\main\222
+.\util\ContainerUtil.java@@\main\3
+.\util\JDFDate.java@@\main\46
+.\util\StatusCounter.java@@\main\3
+.\util\UrlUtil.java@@\main\8
+___________________________________________________________
+
+
 Label JDFLIBJ_2.1.3BLD442 (24.07.2007)
 
 spawn and merge fix for mrging non partitioned deep nodes
