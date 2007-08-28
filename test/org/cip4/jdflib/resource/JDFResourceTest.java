@@ -1745,6 +1745,24 @@ public class JDFResourceTest extends JDFTestCaseBase
     }
     /////////////////////////////////////////////////////////////////////////////
 
+    public void testMultiplePartIDKeys()
+    {
+        JDFDoc doc=creatXMDoc();
+        JDFNode n=doc.getJDFRoot();
+        JDFExposedMedia xm=(JDFExposedMedia)n.getMatchingResource("ExposedMedia",JDFNode.EnumProcessUsage.AnyInput,null,0);
+        JDFAttributeMap mPart=new JDFAttributeMap("SignatureName","Sig1");
+        mPart.put("SheetName","S1");
+        mPart.put("Side","Front");
+        JDFExposedMedia xmPart=(JDFExposedMedia)xm.getPartition(mPart,null);
+        assertEquals(xmPart.getInvalidAttributes(EnumValidationLevel.Incomplete, true, 999).size(),0);
+        JDFResource r=xmPart.addPartition(EnumPartIDKey.Condition, "Good");
+        assertFalse(r.getInvalidAttributes(EnumValidationLevel.Incomplete, true, 999).contains(EnumPartIDKey.Condition.getName()));
+        xmPart.addPartition(EnumPartIDKey.Condition, "Bad").setAttribute(EnumPartIDKey.Condition.getName(), "Good");
+        assertTrue("Duplicate partition found",r.getInvalidAttributes(EnumValidationLevel.Incomplete, true, 999).contains(EnumPartIDKey.Condition.getName()));
+       
+    }
+        /////////////////////////////////////////////////////////////////////////////
+
     public void testConsistentPartIDKeys()
     {
         JDFDoc doc=creatXMDoc();

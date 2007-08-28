@@ -6947,6 +6947,7 @@ public class JDFResource extends JDFElement
             final JDFResource root=getResourceRoot();
             final VString partIDKeys=root.getPartIDKeys();
             final int size = partIDKeys.size();
+            String currentPartition=null;
             for(int i=0;i<size;i++)
             {
                 final String keyName = partIDKeys.stringAt(i);
@@ -6959,6 +6960,21 @@ public class JDFResource extends JDFElement
                         return vAtts;
                     }
                 }
+                if(hasAttribute_KElement(keyName, null, false))
+                    currentPartition=keyName;
+            }
+            if(currentPartition!=null) // check for multiple identical partition attribute values
+            {
+                KElement parent=getParentNode_KElement();
+                VElement vThis=parent.getChildElementVector_KElement(getNodeName(), getNamespaceURI(), new JDFAttributeMap(currentPartition,getAttribute_KElement(currentPartition)), true, 999);
+                if(vThis.size()>1)
+                {
+                    vAtts.appendUnique(currentPartition);
+                    if (++n >= nMax)
+                    {
+                        return vAtts;
+                    }            
+                }
             }
         }
         if(!EnumValidationLevel.isNoWarn(level) && isResourceRoot())
@@ -6967,7 +6983,6 @@ public class JDFResource extends JDFElement
             if(EnumPartUsage.Sparse.equals(pu) && EnumVersion.Version_1_3.isGreater(getVersion(true)))
                 vAtts.add(AttributeName.PARTUSAGE); 
         }
-           
 
         return vAtts;
     }
