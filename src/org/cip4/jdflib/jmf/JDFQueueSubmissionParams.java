@@ -82,6 +82,7 @@ Revision history:    ...
 package org.cip4.jdflib.jmf;
 
 import java.io.InputStream;
+import java.net.URL;
 
 import javax.mail.BodyPart;
 
@@ -217,6 +218,23 @@ import org.cip4.jdflib.util.UrlUtil;
             return null;
         JDFParser p=new JDFParser();
         return p.parseStream(is);
+    }
+    
+    /**
+     * sets ReturnURL to the value of url
+     * @param url
+     */
+    public void setReturnURL(URL url)
+    {
+        super.setReturnURL(url==null ? null : url.toExternalForm());
+    }
+    /**
+     * sets ReturnURL to the value of url
+     * @param url
+     */
+    public void setReturnJMF(URL url)
+    {
+        super.setReturnJMF(url==null ? null : url.toExternalForm());
     }
 
 }

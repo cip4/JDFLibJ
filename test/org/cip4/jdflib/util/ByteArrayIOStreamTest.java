@@ -110,6 +110,7 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
         assertEquals(n, 200000);
         
     }
+    
     public void testInReadMulti() throws Exception
     {
         ByteArrayIOStream ios=new ByteArrayIOStream();

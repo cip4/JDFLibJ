@@ -71,11 +71,13 @@
 package org.cip4.jdflib.jmf;
 
 import java.io.File;
+import java.net.URL;
 
 import javax.mail.Multipart;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -162,4 +164,18 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
         assertEquals(d3.getJDFRoot().getEnumType(),JDFNode.EnumType.ColorSpaceConversion);
     }
 
+    public void testSetReturnURL() throws Exception
+    {
+        qsp.setReturnURL((URL)null);
+        assertFalse(qsp.hasAttribute(AttributeName.RETURNURL));
+        qsp.setReturnURL(new URL("http://localhost"));
+        assertEquals(qsp.getReturnURL(),"http://localhost");        
+    }
+    public void testSetReturnJMFL() throws Exception
+    {
+        qsp.setReturnJMF((URL)null);
+        assertFalse(qsp.hasAttribute(AttributeName.RETURNJMF));
+        qsp.setReturnJMF(new URL("http://localhost"));
+        assertEquals(qsp.getReturnJMF(),"http://localhost");        
+    }
 }
