@@ -669,15 +669,6 @@ public class JDFIntegerState extends JDFAbstractState
     }
 
     /* (non-Javadoc)
-     * @see java.lang.Object#clone()
-     */
-    protected Object clone() throws CloneNotSupportedException
-    {
-        // TODO Auto-generated method stub
-        return super.clone();
-    }
-
-    /* (non-Javadoc)
      * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
      */
     public EnumTerm getEvaluationType()

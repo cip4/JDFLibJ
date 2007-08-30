@@ -353,8 +353,7 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
      */
     public Object clone() throws CloneNotSupportedException 
     {
-        JDFNumList num = null;
-        num         = (JDFNumList) super.clone();
+        JDFNumList num = (JDFNumList) super.clone();
         num.setnumList((Vector   )(getnumList().clone()));
         return num;
     }

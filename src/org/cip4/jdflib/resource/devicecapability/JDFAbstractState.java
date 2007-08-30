@@ -1188,12 +1188,4 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
      */
     public abstract EnumTerm getEvaluationType();
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#clone()
-     */
-    protected Object clone() throws CloneNotSupportedException
-    {
-        // TODO Auto-generated method stub
-        return super.clone();
-    }
 }

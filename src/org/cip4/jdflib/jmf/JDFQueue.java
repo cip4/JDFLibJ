@@ -91,7 +91,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 public class JDFQueue extends JDFAutoQueue
 {
     private static final long serialVersionUID = 1L;
-     /**
+    /**
      * number of concurrent running entries 
      */
     public int maxRunningEntries=1;
@@ -100,7 +100,7 @@ public class JDFQueue extends JDFAutoQueue
      */
     public int maxCompletedEntries=0;
     private boolean automated=false;
-    
+
     /**
      * Constructor for JDFQueue
      * @param myOwnerDocument
@@ -142,7 +142,7 @@ public class JDFQueue extends JDFAutoQueue
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
-    
+
     /**
      * toString()
      * @return String
@@ -151,9 +151,9 @@ public class JDFQueue extends JDFAutoQueue
     {
         return "JDFQueue[  --> " + super.toString() + " ]";
     }
-    
-    
-    
+
+
+
     /**
      * Method getEntryCount.
      * @return int quantity of QueueEntry children
@@ -162,7 +162,7 @@ public class JDFQueue extends JDFAutoQueue
     {
         return numChildElements(ElementName.QUEUEENTRY,null);
     }
-    
+
     /**
      * Get a vector of all queueentry elements
      * @return VElement: the vector of queue entries
@@ -191,7 +191,7 @@ public class JDFQueue extends JDFAutoQueue
         }
         return (v==null || v.size()==0) ? null : v;
     }
-    
+
     /**
      * Method getEntry: find a queuentry by position
      * @param i the index of the queueentry
@@ -201,7 +201,7 @@ public class JDFQueue extends JDFAutoQueue
     {
         return (JDFQueueEntry) getChildByTagName(ElementName.QUEUEENTRY,null,i,null, false, true);
     }
-    
+
     /**
      * Method findQueueEntries
      * <p>
@@ -218,19 +218,19 @@ public class JDFQueue extends JDFAutoQueue
             VJDFAttributeMap vamParts, EnumQueueEntryStatus status)
     {
         final VString vsQEntryIDs = new VString ();
-        
+
         final int entryCount = getEntryCount();
         for (int i = 0; i < entryCount; i++)
         {
             final JDFQueueEntry entry = getEntry (i);
-            
+
             final String strQEJobID = entry.getJobID ();
             final String strQEJobPartID = entry.getJobPartID();
-            
+
             final VJDFAttributeMap vamQEParts = entry.getPartMapVector ();
-            
+
             final EnumQueueEntryStatus statusQE = entry.getQueueEntryStatus();
-            
+
             if (strJobID.equals (strQEJobID)
                     && strJobPartID.equals (strQEJobPartID)
                     && vamParts.equals (vamQEParts))
@@ -241,10 +241,10 @@ public class JDFQueue extends JDFAutoQueue
                 }
             }
         }
-        
+
         return vsQEntryIDs;
     }
-    
+
     /**
      * Find a queueEntry by QueueEntryID<br>
      * 
@@ -262,9 +262,9 @@ public class JDFQueue extends JDFAutoQueue
             return null;
         return (JDFQueueEntry) getChildByTagName(ElementName.QUEUEENTRY,null,0,new JDFAttributeMap(AttributeName.QUEUEENTRYID,strQEntryID),true,true);
     }
-    
+
     //////////////////////////////////////////////////////////////////////////
-    
+
     /**
      * Find the position of a queueEntry by QueueEntryID
      * @param strQEntryID the QueueEntryID of the requeste QueueEntry
@@ -280,9 +280,9 @@ public class JDFQueue extends JDFAutoQueue
                 return i;
         }
         return -1;
-        
+
     }
-    
+
     ///////////////////////////////////////////////////////////////////////
     /**
      * Get the next QueueEntry to be processed
@@ -292,24 +292,24 @@ public class JDFQueue extends JDFAutoQueue
      */
     public JDFQueueEntry getNextExecutableQueueEntry()
     {
-       if(!canExecute())
-           return null;
-       VElement v=getQueueEntryVector(new JDFAttributeMap(AttributeName.STATUS,EnumQueueEntryStatus.Waiting),null);
-       int siz=v==null ? 0 : v.size();
-       JDFQueueEntry theEntry=null;
-       for(int i=0;i<siz;i++)
-       {
-           JDFQueueEntry qe=(JDFQueueEntry)v.elementAt(i);
-           if(theEntry==null)
-           {
-               theEntry=qe;
-           }
-           else if(qe.getPriority()>theEntry.getPriority())
-           {
-               theEntry=qe;
-           }
-       }
-       return theEntry; 
+        if(!canExecute())
+            return null;
+        VElement v=getQueueEntryVector(new JDFAttributeMap(AttributeName.STATUS,EnumQueueEntryStatus.Waiting),null);
+        int siz=v==null ? 0 : v.size();
+        JDFQueueEntry theEntry=null;
+        for(int i=0;i<siz;i++)
+        {
+            JDFQueueEntry qe=(JDFQueueEntry)v.elementAt(i);
+            if(theEntry==null)
+            {
+                theEntry=qe;
+            }
+            else if(qe.getPriority()>theEntry.getPriority())
+            {
+                theEntry=qe;
+            }
+        }
+        return theEntry; 
     }
 
     /**
@@ -333,7 +333,7 @@ public class JDFQueue extends JDFAutoQueue
         // blocked or null(illegal)
         return numEntries(EnumQueueEntryStatus.Running)<maxRunningEntries;         
     }
-    
+
     /**
      * if the incoming queue processor is accepting new entries
      * @return true, if new entries are accepted
@@ -353,33 +353,33 @@ public class JDFQueue extends JDFAutoQueue
         // blocked or null(illegal)
         return numEntries(null)<getQueueSize();         
     }
-    
+
     /**
      * remove all entries with Staus=Removed and any entries 
      * over maxCompleted that are either aborted or completed @see {@link JDFQueueEntry}.isCompleted()
      */
     public void cleanup()
     {
-       VElement v=getQueueEntryVector();
-       int siz=v==null ? 0 : v.size();
-       int nBad=0;
-       for(int i=0;i<siz;i++)
-       {
-           JDFQueueEntry qe=(JDFQueueEntry)v.elementAt(i);
-           EnumQueueEntryStatus status=qe.getQueueEntryStatus();
-           if(status==null)
-               qe.deleteNode();
-           else if(EnumQueueEntryStatus.Removed.equals(status))
-               qe.deleteNode();
-           else if(qe.isCompleted())
-           {
-               if(nBad++>=maxCompletedEntries)
-                   qe.deleteNode();
-           }
-       }         
+        VElement v=getQueueEntryVector();
+        int siz=v==null ? 0 : v.size();
+        int nBad=0;
+        for(int i=0;i<siz;i++)
+        {
+            JDFQueueEntry qe=(JDFQueueEntry)v.elementAt(i);
+            EnumQueueEntryStatus status=qe.getQueueEntryStatus();
+            if(status==null)
+                qe.deleteNode();
+            else if(EnumQueueEntryStatus.Removed.equals(status))
+                qe.deleteNode();
+            else if(qe.isCompleted())
+            {
+                if(nBad++>=maxCompletedEntries)
+                    qe.deleteNode();
+            }
+        }         
     }
 
-     /**
+    /**
      * return the number of  entries
      * @param qeStatus the queueentry status of the enries to count, 
      * if null, do not filter
@@ -389,7 +389,7 @@ public class JDFQueue extends JDFAutoQueue
     {
         VElement v=getQueueEntryVector(qeStatus==null ? null : new JDFAttributeMap(AttributeName.STATUS,qeStatus),null);
         return v==null ? 0 : v.size();
-     }
+    }
 
     /**
      * make this a smart queue when modifying queueentries
@@ -399,7 +399,7 @@ public class JDFQueue extends JDFAutoQueue
     {
         automated=_automated;        
     }
-    
+
     /**
      * is this a smart queue when modifying queueentries
      * @param_automated automate if true
@@ -407,16 +407,7 @@ public class JDFQueue extends JDFAutoQueue
     public boolean isAutomated()
     {
         return automated;
-        
-    }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#clone()
-     */
-    protected Object clone() throws CloneNotSupportedException
-    {
-        // TODO Auto-generated method stub
-        return super.clone();
     }
 
     /**
@@ -429,9 +420,9 @@ public class JDFQueue extends JDFAutoQueue
             return super.getQueueSize();
         return getEntryCount();
     }
-    
+
     ///////////////////////////////////////////////////////////////////////
-    
+
 }
 
 

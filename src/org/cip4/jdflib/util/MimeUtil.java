@@ -83,12 +83,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Vector;
 
 import javax.activation.DataHandler;
-import javax.activation.URLDataSource;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -97,6 +97,7 @@ import javax.mail.Session;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.mail.util.SharedByteArrayInputStream;
 
 import org.apache.commons.io.IOUtils;
 import org.cip4.jdflib.core.AttributeName;
@@ -109,6 +110,7 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.node.JDFNode;
 
 /**
  * MIME utilities for reading and writing MIME/MULTIPART/RELATED streams
@@ -119,6 +121,61 @@ import org.cip4.jdflib.jmf.JDFJMF;
 public class MimeUtil 
 {
 
+    /**
+     * data source for binary files
+     * 
+     * @author prosirai
+     *
+     */
+    public class ByteArrayDataSource implements DataSource
+    {
+        String contenType;
+        ByteArrayIOStream ioStream;
+
+        /**
+         * create a data source from a byte array
+         * @param ioStream the ByteArrayIOStream to use
+         * @param _contentType the content type of the contents
+         */
+        public ByteArrayDataSource(ByteArrayIOStream _ioStream, String _contentType)
+        {
+            contenType=_contentType;
+            ioStream=_ioStream;
+        }
+        /* (non-Javadoc)
+         * @see javax.activation.DataSource#getContentType()
+         */
+        public String getContentType()
+        {
+            return contenType;
+        }
+
+        /* (non-Javadoc)
+         * @see javax.activation.DataSource#getInputStream()
+         */
+        public InputStream getInputStream() 
+        {
+            return ioStream.getInputStream();
+        }
+
+        /* (non-Javadoc)
+         * @see javax.activation.DataSource#getName()
+         */
+        public String getName()
+        {
+            // not needed 
+            return null;
+        }
+
+        /* (non-Javadoc)
+         * @see javax.activation.DataSource#getOutputStream()
+         */
+        public OutputStream getOutputStream()
+        {
+            return ioStream;
+        }
+        
+    }
     /**
      * commonly used strings
      */
@@ -483,17 +540,15 @@ public class MimeUtil
         Message message = new MimeMessage((Session)null);
         Multipart multipart = new MimeMultipart("related"); // JDF: multipart/related
 
-        String cid=null;
+        String cid=docJDF==null ? null : urlToCid(docJDF.getOriginalFileName());
         if(docJMF!=null)
         {
-            updateXMLMultipart(multipart,docJMF,null);
             KElement e=docJMF.getRoot();
             VElement v=e.getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.URL,"*"), false, false, 0);
-            String[] urlStrings = listURLs(v);
-            if(urlStrings.length>0)
-            {
-                cid=urlToCid(urlStrings[0]);
-            }
+            int siz=v==null ? 0 : v.size();
+            for(int i=0;i<siz;i++)
+                v.item(i).setAttribute(AttributeName.URL, cid);
+            updateXMLMultipart(multipart,docJMF,null);
         }
 
         extendMultipart(multipart, docJDF, cid);
@@ -524,50 +579,63 @@ public class MimeUtil
         {
             if(urlStrings[i]!=null)
             {
-                v.item(i).setAttribute(AttributeName.URL,urlToCid(urlStrings[i]),null);
+                for(int j=0;j<i;j++)
+                {
+                    if(urlStrings[i].equals(urlStrings[j]))
+                    {
+                        v.item(i).setAttribute(AttributeName.URL,urlToCid(urlStrings[i]),null);
+                        urlStrings[i]=null;
+                    }
+                }
+                if(urlStrings[i]!=null)
+                {
+                    File f=UrlUtil.urlToFile(urlStrings[i]);
+                    if(f==null || !f.canRead())
+                    {
+                        urlStrings[i]=null;
+                    }
+                    else
+                    {
+                        v.item(i).setAttribute(AttributeName.URL,urlToCid(urlStrings[i]),null);
+                    }
+                }
             }
         }
         updateXMLMultipart(multipart, docJDF, cid);
 
-        URL urls[]=new URL[vSize];
         // add a new body part for each url
         for(int i=0;i<vSize;i++)
         {
             final String urlString=urlStrings[i];
             if(urlString!=null)
             {
-                boolean alreadyPacked=false;
-                for(int j=0;j<i;j++)
+                try
                 {
-                    alreadyPacked=alreadyPacked || urlString.equals(urlStrings[j]);
-                }
-                if(!alreadyPacked)
-                {    
-                    try
+                    DataSource uds=null;
+                    File f=UrlUtil.urlToFile(urlString);
+                    if(f!=null && f.canRead())
                     {
-                        urls[i]=new URL(urlString);
-                        URLDataSource uds=new URLDataSource(urls[i]);
-                        BodyPart messageBodyPart = new MimeBodyPart();
-                        messageBodyPart.setDataHandler(new DataHandler(uds));
-                        File f=UrlUtil.urlToFile(urlString);
-                        setFileName(messageBodyPart,f==null ? null : f.getAbsolutePath());
-                        //messageBodyPart.setHeader("Content-Type", JMFServlet.JDF_CONTENT_TYPE); // JDF: application/vnd.cip4-jdf+xml
-                        setContentID(messageBodyPart,urlString);
-                        multipart.addBodyPart(messageBodyPart);
-                        n++;
+                        uds=new FileDataSource(f);
                     }
-                    catch (MalformedURLException e1)
-                    {
-                        // nop
-                    } 
-                    catch (MessagingException e1)
-                    {
-                        // nop
-                    } 
-                }
-            }
+                    if(uds==null)
+                        continue; // no data source
 
+                    BodyPart messageBodyPart = new MimeBodyPart();
+                    messageBodyPart.setDataHandler(new DataHandler(uds));
+
+                    setFileName(messageBodyPart,f==null ? null : f.getAbsolutePath());
+                    //messageBodyPart.setHeader("Content-Type", JMFServlet.JDF_CONTENT_TYPE); // JDF: application/vnd.cip4-jdf+xml
+                    setContentID(messageBodyPart,urlString);
+                    multipart.addBodyPart(messageBodyPart);
+                    n++;
+                }
+                catch (MessagingException e1)
+                {
+                    // nop
+                } 
+            }
         }
+
         return n;
     }
 
@@ -643,28 +711,59 @@ public class MimeUtil
         try
         {
             setFileName(messageBodyPart,originalFileName);
-            messageBodyPart.setContent(xmlDoc.write2String(0), "text/xml");
+            setContent(messageBodyPart, xmlDoc);
             setContentID(messageBodyPart,cid);
-            xmlDoc.setBodyPart(messageBodyPart);
-            if(originalFileName==null || originalFileName.toLowerCase().endsWith(".jmf"))
-            {
-                messageBodyPart.setHeader(CONTENT_TYPE, JDFConstants.MIME_JMF); // JDF: application/vnd.cip4-jmf+xml
-            }
-            else
-            {
-                messageBodyPart.setHeader(CONTENT_TYPE, JDFConstants.MIME_JDF); // JDF: application/vnd.cip4-jmf+xml
-            }
         }
         catch (MessagingException x)
         {
             // skip this one
         }
+        catch (IOException x)
+        {
+            // skip this one
+        }
+
         return messageBodyPart;
     }
 
+
+    /**
+     * sets the content of a bodypart to the xmlDoc - correctly handling non-ascii features and setting the 
+     * correct content type
+     * 
+     * @param messageBodyPart the BodyPart to fill
+     * @param xmlDoc the xmlDoc to fill in
+     * @throws MessagingException
+     */
+    public static void setContent(BodyPart messageBodyPart, XMLDoc xmlDoc) throws MessagingException, IOException
+    {
+       if(messageBodyPart==null || xmlDoc==null)
+            throw new MessagingException("null parameters in setContent");
+        
+       //TODO better performing solution for multibyte this quick hack makes quite a few copies...
+       ByteArrayIOStream ios=new ByteArrayIOStream();
+       xmlDoc.write2Stream(ios,0,true);
+       ByteArrayDataSource ds=new MimeUtil().new ByteArrayDataSource(ios,"text/xml");
+
+       messageBodyPart.setDataHandler(new DataHandler(ds));
+       xmlDoc.setBodyPart(messageBodyPart);
+       final KElement root = xmlDoc.getRoot();
+       if(root instanceof JDFJMF)
+       {
+           messageBodyPart.setHeader(CONTENT_TYPE, JDFConstants.MIME_JMF); // JDF: application/vnd.cip4-jmf+xml
+       }
+       else if(root instanceof JDFNode)
+       {
+           messageBodyPart.setHeader(CONTENT_TYPE, JDFConstants.MIME_JDF); // JDF: application/vnd.cip4-jmf+xml
+       } 
+
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////
+    
     /**
      * write a Multipart to an output URL
-     * Use getInputStream() to retrieve the http response
+     * Use HttpURLConnection.getInputStream() to retrieve the http response
      * 
      * @param mp the mime MultiPart to write
      * @param strUrl the URL to write to

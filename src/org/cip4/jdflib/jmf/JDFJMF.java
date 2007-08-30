@@ -354,7 +354,7 @@ public class JDFJMF extends JDFAutoJMF
     /**
      * Get the ith command
      * 
-     * @param i index of the message
+     * @param iLoop index of the message
      * @param bCreate if true, create one, if it does not exist
      * @return JDFCommand: the message element
      * @deprecated use getMessageElement
@@ -382,7 +382,7 @@ public class JDFJMF extends JDFAutoJMF
     /**
      * Get the ith query,
      * 
-     * @param i index of the message
+     * @param iLoop index of the message
      * @param bCreate if true, create one, if it does not exist
      * @return JDFQuery the message element
      *     
@@ -437,7 +437,7 @@ public class JDFJMF extends JDFAutoJMF
     /**
      * Get the ith signal,
      * 
-     * @param i index of the message
+     * @param iLoop index of the message
      * @param bCreate if true, create one, if it does not exist
      * @return JDFSignal the message element
      * @deprecated use getMessageElement
@@ -630,7 +630,7 @@ public class JDFJMF extends JDFAutoJMF
     /**
      * Get the ith acknowledge,
      * 
-     * @param i       index of the message
+     * @param iLoop       index of the message
      * @param bCreate if true, create one, if it does not exist
      * @return JDFAcknowledge: the message element
      * @deprecated use getMessageElement

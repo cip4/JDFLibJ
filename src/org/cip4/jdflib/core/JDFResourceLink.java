@@ -147,15 +147,6 @@ public class JDFResourceLink extends JDFElement
         return true;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#clone()
-     */
-    protected Object clone() throws CloneNotSupportedException
-    {
-        // TODO Auto-generated method stub
-        return super.clone();
-    }
-
     private static final long serialVersionUID = 1L;
 
     private static AtrInfoTable[] atrInfoTable_Abstract = new AtrInfoTable[12];

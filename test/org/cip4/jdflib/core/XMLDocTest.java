@@ -77,6 +77,8 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.util.JDFSpawn;
 import org.w3c.dom.Attr;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * @author MuchaD
@@ -84,6 +86,73 @@ import org.w3c.dom.Attr;
 public class XMLDocTest extends JDFTestCaseBase
 {
 
+    protected class MyExceptionHook 
+    {
+        public Exception e=null;
+    }
+    protected abstract class MyThread implements Runnable
+    {
+
+        public XMLDoc d;
+        public int iLoop;
+        public MyExceptionHook hook;
+        /* (non-Javadoc)
+         * @see java.lang.Runnable#run()
+         */
+        public abstract void run();
+     }
+
+    protected class MyReadThread extends MyThread
+    {
+
+        /* (non-Javadoc)
+         * @see java.lang.Runnable#run()
+         */
+        public void run()
+        {
+            try
+            {
+                System.out.println("Starting "+iLoop);
+                KElement root=d.getRoot();
+                NodeList nl=root.getElementsByTagName("elem"+iLoop%3);
+                for(int i=0;i<nl.getLength();i++)
+                {
+                    Node n=nl.item(i);
+                }
+                System.out.println("Completing "+iLoop);
+            }
+            catch (Exception e) {
+                hook.e=e;
+            }
+        }
+    }
+    protected class MyWriteThread extends MyThread
+    {
+
+         /* (non-Javadoc)
+         * @see java.lang.Runnable#run()
+         */
+        public void run()
+        {
+            try
+            {
+                System.out.println("Starting "+iLoop);
+                KElement root=d.getRoot();
+                NodeList nl=root.getChildNodes();
+                for(int i=0;i<nl.getLength();i++)
+                {
+                    Node n=nl.item(i);
+                    if(i%73==0)
+                        root.removeChild(n);
+                }
+                System.out.println("Completing "+iLoop);
+            }
+            catch (Exception e) {
+                hook.e=e;
+            }
+
+        }
+    }
     public void testIsDirty()
     {
         XMLDoc doc=new XMLDoc("test",null);
@@ -357,6 +426,72 @@ public class XMLDocTest extends JDFTestCaseBase
         out+=File.separator+"d.xml";
 
         assertTrue(d.write2File(out, 2, true));
+        File f=new File(out);
+        assertTrue(f.canRead());
+    }
+
+    public void testWriteToFileThreadRead() throws Exception
+    {
+        XMLDoc d=new XMLDoc("doc",null);
+        final String out=sm_dirTestDataTemp+File.separator+"Thread.jdf";
+
+        KElement root=d.getRoot();
+        for(int i=0;i<1000;i++)
+        {
+            root.appendElement("elem2").appendElement("elem3").setAttribute("foo", "bar"+i);
+        }
+
+        MyExceptionHook h=new MyExceptionHook();
+        for(int i=0;i<100;i++)
+        {
+            MyReadThread mr=new MyReadThread();
+            mr.d=d;
+            mr.iLoop=i;
+            mr.hook=h;
+            new Thread(mr).start();
+ 
+        }
+        System.out.println("Writing start");
+        assertTrue(d.write2File(out, 2, true));
+        System.out.println("Writing done");
+
+        File f=new File(out);
+        assertTrue(f.canRead());
+        if(h.e!=null)
+            fail("exception: "+h.e);
+
+    }  
+
+    public void testWriteToFileThreadWrite() throws Exception
+    {
+        XMLDoc d=new XMLDoc("doc",null);
+        final String out=sm_dirTestDataTemp+File.separator+"Thread.jdf";
+
+        KElement root=d.getRoot();
+        for(int i=0;i<1000;i++)
+        {
+            root.appendElement("elem0").appendElement("elem1").appendElement("elem2").setAttribute("foo", "bar"+i);
+        }
+
+        MyExceptionHook h=new MyExceptionHook();
+        for(int i=0;i<10;i++)
+        {
+            MyWriteThread mr=new MyWriteThread();
+            mr.d=d;
+            mr.iLoop=i;
+            mr.hook=h;
+            new Thread(mr).start();
+
+        }
+        System.out.println("Writing start");
+        assertTrue(d.write2File(out, 2, true));
+        System.out.println("Writing done");
+        if(h.e!=null)
+        {
+//            fail("exception: "+h.e);
+            System.out.println("******** Xerces known defect: not threadsafe: "+h.e);
+        }
+
         File f=new File(out);
         assertTrue(f.canRead());
     }

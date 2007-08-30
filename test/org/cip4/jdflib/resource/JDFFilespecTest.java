@@ -116,7 +116,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
     {
         new MimeUtilTest().testBuildMimePackageDocJMF();
         Multipart mp=MimeUtil.getMultiPart(sm_dirTestDataTemp+File.separator+"testMimePackageDoc.mjm");
-        BodyPart bp=MimeUtil.getPartByCID(mp, "TheJDF");
+        BodyPart bp=MimeUtil.getPartByCID(mp, "jdf.JDF");
         JDFDoc d=MimeUtil.getJDFDoc(bp);
         JDFNode n=d.getJDFRoot();
         JDFColorSpaceConversionParams cscp=(JDFColorSpaceConversionParams) n.getMatchingResource(ElementName.COLORSPACECONVERSIONPARAMS, null, null, 0);

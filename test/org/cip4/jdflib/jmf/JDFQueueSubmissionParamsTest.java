@@ -155,7 +155,7 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
         JDFDoc[] d2=MimeUtil.getJMFSubmission(m);
         assertNotNull(d2);
         final JDFQueueSubmissionParams queueSubmissionParams = d2[0].getJMFRoot().getCommand(0).getQueueSubmissionParams(0);
-        assertEquals(queueSubmissionParams.getURL(), "cid:TheJDF");
+        assertEquals(queueSubmissionParams.getURL(), "cid:JDF.jdf");
         assertEquals(d2[1].getJDFRoot().getEnumType(),JDFNode.EnumType.ColorSpaceConversion);
         JDFDoc d3=queueSubmissionParams.getURLDoc();
         assertNotNull(d3);
