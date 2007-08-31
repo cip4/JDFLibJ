@@ -42,52 +42,52 @@ public class TestJDF
     static protected final String sm_dirTestData     = "O:\\jdflibj\\test" + SEPARATOR + "data" + SEPARATOR;
     static protected final String sm_dirTestDataTemp = sm_dirTestData + "temp" + SEPARATOR;
 
-    
+
     public static void main(String[] argv)
     {         
-//        JDFParser p=new JDFParser();
-//        JDFDoc d=p.parseFile("canon1.xml");
-//        
-//        JDFDeviceCap dc=(JDFDeviceCap) d.getRoot().getChildByTagName("DeviceCap", null, 0, null, false, true);
-//        dc.createModuleCaps(".*Params");
-//        d.write2File("canon2.jdf", 2, false);
-//        XMLDoc d2=d.write2URL("http://localhost:8080/JDFUtility/Bambi/a", "text/xml");
-//        d2=d.write2URL("http://localhost:8080/JDFUtility/Bambi/dc");
-//        System.out.print(d2==null ? "null doc" : d2.toString());
-//        JDFDoc dj=new JDFDoc("JDF");
-//        d2=dj.write2URL("http://localhost:8080/JDFUtility/Bambi/ddd");
-//        Multipart mp=MimeUtil.buildMimePackage(d, dj);
-//        try
-//        {
-//            HttpURLConnection uc=MimeUtil.writeToURL(mp, "http://localhost:8080/JDFUtility/Bambi/ccc");
-//            System.out.print(uc.getResponseCode());
-//            System.out.print(uc.getResponseMessage());
-//            final InputStream inStream = uc.getInputStream();
-//            FileUtil.streamToFile(inStream, "response.txt");
-//
-//            MimeUtil.writeToFile(mp, "test.mjm");
-//            
-//        }
-//        catch (IOException x)
-//        {
-//            // TODO Auto-generated catch block
-//            x.printStackTrace();
-//        }
-//        catch (MessagingException x)
-//        {
-//            // TODO Auto-generated catch block
-//            x.printStackTrace();
-//        }
-//        JDFDoc dj=new JDFDoc("JMF");
-//        JDFJMF jmf=dj.getJMFRoot();
-//        jmf.appendQuery(EnumType.KnownMessages);
-//        jmf.appendQuery(EnumType.Events);
-//        JDFDoc d2=dj.write2URL("http://localhost:8080/JDFUtility/Bambi/jmfTest");
-//        if(d2!=null)
-//            d2.write2File("jmfresp.xml", 2, false);
-//        else
-//            System.out.println("null d");
-  
+//      JDFParser p=new JDFParser();
+//      JDFDoc d=p.parseFile("canon1.xml");
+
+//      JDFDeviceCap dc=(JDFDeviceCap) d.getRoot().getChildByTagName("DeviceCap", null, 0, null, false, true);
+//      dc.createModuleCaps(".*Params");
+//      d.write2File("canon2.jdf", 2, false);
+//      XMLDoc d2=d.write2URL("http://localhost:8080/JDFUtility/Bambi/a", "text/xml");
+//      d2=d.write2URL("http://localhost:8080/JDFUtility/Bambi/dc");
+//      System.out.print(d2==null ? "null doc" : d2.toString());
+//      JDFDoc dj=new JDFDoc("JDF");
+//      d2=dj.write2URL("http://localhost:8080/JDFUtility/Bambi/ddd");
+//      Multipart mp=MimeUtil.buildMimePackage(d, dj);
+//      try
+//      {
+//      HttpURLConnection uc=MimeUtil.writeToURL(mp, "http://localhost:8080/JDFUtility/Bambi/ccc");
+//      System.out.print(uc.getResponseCode());
+//      System.out.print(uc.getResponseMessage());
+//      final InputStream inStream = uc.getInputStream();
+//      FileUtil.streamToFile(inStream, "response.txt");
+
+//      MimeUtil.writeToFile(mp, "test.mjm");
+
+//      }
+//      catch (IOException x)
+//      {
+//      // TODO Auto-generated catch block
+//      x.printStackTrace();
+//      }
+//      catch (MessagingException x)
+//      {
+//      // TODO Auto-generated catch block
+//      x.printStackTrace();
+//      }
+//      JDFDoc dj=new JDFDoc("JMF");
+//      JDFJMF jmf=dj.getJMFRoot();
+//      jmf.appendQuery(EnumType.KnownMessages);
+//      jmf.appendQuery(EnumType.Events);
+//      JDFDoc d2=dj.write2URL("http://localhost:8080/JDFUtility/Bambi/jmfTest");
+//      if(d2!=null)
+//      d2.write2File("jmfresp.xml", 2, false);
+//      else
+//      System.out.println("null d");
+
         JDFDoc d1=new JDFDoc("JMF");
         d1.setOriginalFileName("JMF.jmf");
         JDFJMF jmf=d1.getJMFRoot();
@@ -95,7 +95,7 @@ public class TestJDF
         final JDFQueueSubmissionParams appendQueueSubmissionParams = com.appendQueueSubmissionParams();
         appendQueueSubmissionParams.setURL("cid:TheJDF");
         appendQueueSubmissionParams.setReturnJMF("http://localhost:8080/JDFUtility/dump");
-        
+
         JDFDoc doc=new JDFDoc("JDF");
         doc.setOriginalFileName("JDF.jdf");  
         JDFNode n=doc.getJDFRoot();
@@ -114,16 +114,23 @@ public class TestJDF
         }
         catch (MalformedURLException x)
         {
-//
-            }
+
+        }
         Multipart m=MimeUtil.buildMimePackage(d1,doc);
         try
         {
             MimeUtil.writeToFile(m, sm_dirTestDataTemp+"/Bambitest.mjm");
-            HttpURLConnection uc2=MimeUtil.writeToURL(m, "http://localhost:8080/Bambi/jmf/device001/");
-//            HttpURLConnection uc=MimeUtil.writeToURL(m, "http://localhost:8080/JDFUtility/dump");
-            FileUtil.streamToFile(uc2.getInputStream(), sm_dirTestDataTemp+"/BambiIn.txt");
-            FileUtil.streamToFile(uc2.getErrorStream(), sm_dirTestDataTemp+"/BambiErr.txt");
+//          HttpURLConnection uc2=MimeUtil.writeToURL(m, "http://localhost:8080/Bambi/jmf/device001/");
+//          for(int i=0;i<1000;i++)
+//          {
+////        HttpURLConnection uc=MimeUtil.writeToURL(m, "http://localhost:8080/JDFUtility/dump");
+//          HttpURLConnection uc=MimeUtil.writeToURL(m, "http://KIE-PROSIRAI-LG:49190/GenericConnector1");
+//          System.out.println(i+" "+uc.getResponseCode());
+//          }
+//          FileUtil.streamToFile(uc2.getInputStream(), sm_dirTestDataTemp+"/BambiIn.txt");
+//          FileUtil.streamToFile(uc2.getErrorStream(), sm_dirTestDataTemp+"/BambiErr.txt");
+            HttpURLConnection uc=MimeUtil.writeToURL(m, "http://KIE-PROSIRAI-LG:49190/GenericConnector1");
+            System.out.println(" "+uc.getResponseCode());
         }
         catch (IOException x)
         {

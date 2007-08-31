@@ -97,7 +97,6 @@ import javax.mail.Session;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import javax.mail.util.SharedByteArrayInputStream;
 
 import org.apache.commons.io.IOUtils;
 import org.cip4.jdflib.core.AttributeName;
@@ -780,7 +779,9 @@ public class MimeUtil
         HttpURLConnection httpURLconnection = (HttpURLConnection) url.openConnection();
         httpURLconnection.setRequestMethod(POST);
         httpURLconnection.setRequestProperty("Connection", "close");
-        httpURLconnection.setRequestProperty(CONTENT_TYPE,mp.getContentType() );
+        String contentType = mp.getContentType();
+        contentType=StringUtil.token(contentType, 0, "\n");
+        httpURLconnection.setRequestProperty(CONTENT_TYPE,contentType );
         httpURLconnection.setDoOutput(true);
         
         final OutputStream out= httpURLconnection.getOutputStream();

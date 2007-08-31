@@ -81,6 +81,7 @@ import java.io.StringReader;
 
 import org.apache.xerces.parsers.DOMParser;
 import org.apache.xerces.xni.QName;
+import org.cip4.jdflib.util.UrlUtil;
 import org.w3c.dom.Element;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
@@ -155,7 +156,7 @@ public class JDFParser extends DOMParser
 
     /**
      * parseFile - parse a file specified by strFile
-     * @param strFile link to the document to parse
+     * @param strFile link to the document to parse, may be eiter a file path or a url
      * @return JDFDoc or null if File not found
      */
     public JDFDoc parseFile(String strFile)
@@ -164,7 +165,7 @@ public class JDFParser extends DOMParser
         if (strFile == null)
             return null;
 
-        final File file = new File(strFile);
+        final File file = UrlUtil.urlToFile(strFile);
         if (file.canRead())
         {
             try
