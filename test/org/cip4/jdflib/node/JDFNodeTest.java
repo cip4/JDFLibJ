@@ -476,6 +476,19 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertNotNull(n.getResourceLinkPool());
     }
 
+    public void testFixVersion() throws Exception
+    {
+        JDFDoc doc=new JDFDoc("JDF");
+        JDFNode node=doc.getJDFRoot();
+        node.setAttribute("Type","Scanning");
+        assertFalse(node.hasAttribute("type",AttributeName.XSIURI,false));
+        node.fixVersion(null);
+        assertTrue(node.hasAttribute("type",AttributeName.XSIURI,false));
+        assertTrue(doc.write2String(0).indexOf(AttributeName.XSIURI)>0);        
+    }
+    
+    /////////////////////////////////////////////////////////////////////////////////
+    
     public void testEraseUnlinkedResources()
     {
         JDFDoc d=new JDFDoc("JDF");

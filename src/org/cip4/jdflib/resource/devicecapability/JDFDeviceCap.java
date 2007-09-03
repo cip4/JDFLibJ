@@ -115,12 +115,14 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.VectorMap;
 
 public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 {
     private static final long serialVersionUID = 1L;
     private boolean ignoreExtensions=false;
     private boolean ignoreDefaults=false;
+    private VectorMap setResMap=null;
 
     /**
      * Constructor for JDFDeviceCap
@@ -1075,12 +1077,21 @@ public static JDFMessageService getMessageServiceForJMFType(JDFMessage m, JDFRes
     {
         VElement vDevCaps=getChildElementVector(ElementName.DEVCAPS,null,null,true,99999,false);
 // step 1, create all missing resources etc
+        setResMap=new VectorMap();
         final int size = vDevCaps.size();
+        // loop over all resources first so that we have hooks for the links
         for(int i=0;i<size;i++)
         {
             JDFDevCaps dcs=(JDFDevCaps)vDevCaps.elementAt(i);
-            dcs.appendMatchingElementsToNode(node, bAll);
+            dcs.appendMatchingElementsToNode(node, bAll, setResMap,false);
         }
+        // now loop over all context=link
+        for(int i=0;i<size;i++)
+        {
+            JDFDevCaps dcs=(JDFDevCaps)vDevCaps.elementAt(i);
+            dcs.appendMatchingElementsToNode(node, bAll, setResMap,true);
+        }
+
     }
 
 

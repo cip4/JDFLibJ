@@ -98,6 +98,8 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.ifaces.ICapabilityElement;
 import org.cip4.jdflib.jmf.JDFMessage;
@@ -109,6 +111,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap.EnumAvailability;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.VectorMap;
 
 
 //----------------------------------
@@ -655,10 +658,15 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
      * 
      * @return KElement - the last element that was appended
      */
-    public KElement appendMatchingElementsToNode(JDFNode node, boolean bAll)
+    public KElement appendMatchingElementsToNode(JDFNode node, boolean bAll, VectorMap indexResMap, boolean bLink)
     {
         final String nam = getName();
         final EnumContext context = getContext();
+        if(!bLink && EnumContext.Link.equals(context))
+            return null;
+        if(bLink && !EnumContext.Link.equals(context))
+            return null;
+        
         final JDFDevCap devCap = getDevCap();
         if(devCap==null)
             return null;
@@ -697,16 +705,73 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
                     map.put(AttributeName.USAGE,linkUsage.getName());
                 }
                 VElement links=node.getResourceLinks(nam, map, null);
+                // now look for the correct combinedprocessindex - remove all non-matching
+                JDFIntegerRangeList tocNum=getTypeOccurrenceNum();
+                JDFIntegerList tocNum2=tocNum==null ? null : tocNum.getIntegerList();
+                if(links!=null && tocNum!=null)
+                {
+                    for(int ll=links.size()-1;ll>=0;ll--)
+                    {
+                        JDFResourceLink rl=(JDFResourceLink) links.elementAt(ll);
+                        JDFIntegerList il=rl.getCombinedProcessIndex();
+                        if(il==null || !il.contains(tocNum2))
+                            links.remove(ll);
+                    }
+                }
                 if(links==null || links.size()<=i)
                 {
-                    JDFResource r=node.addResource(nam, null, linkUsage, pu, null, getDevNS(), null);
-                    e=node.getLink(r,null);
-                    final String id=devCap.getAttribute(AttributeName.ID,null,null);
-                    if(id!=null)
+                    JDFResource r=null;
+                    // get a link hook for the matching combinedprocessindex
+                    if(bLink)
                     {
-                        r.setID(id);
-                        ((JDFResourceLink)e).setrRef(id);
+                        int kk=(tocNum2==null|| tocNum2.size()==0) ?-1: tocNum2.getInt(0);
+                        if(EnumUsage.Input.equals(linkUsage))
+                            kk--;
+                        Vector v=(Vector) indexResMap.get(new Integer(kk));
+                        int sv= v==null ? 0 : v.size();
+                        for(int kkk=0;kkk<sv;kkk++)
+                        {
+                            JDFResource rr=(JDFResource)v.elementAt(kkk);
+                            if(rr.getLocalName().equals(nam))
+                            {
+                                r=rr;
+                                break;
+                            }
+                        }
+                    }    
+                    // we found no matching existing res - make a new one
+                    if(r==null)
+                    {
+                        r=node.addResource(nam, null, linkUsage, pu, null, getDevNS(), null);
+                        final String id=devCap.getAttribute(AttributeName.ID,null,null);
+                        if(id!=null)
+                        {
+                            JDFResourceLink rl=node.getLink(r,linkUsage);
+
+                            r.setID(id);
+                            if(rl!=null)
+                            {
+                                rl.setrRef(id);
+                            }
+                        }
+
+                        if(tocNum2==null|| tocNum2.size()==0)
+                            indexResMap.putOne(new Integer(-1), r);
+                        else
+                            indexResMap.putOne(tocNum2.elementAt(0), r); // only support 1 now
                     }
+                    else // preexisting resource - just link it
+                    {
+                        e=node.linkResource(r, linkUsage, pu);
+                    }
+                    e=node.getLink(r,linkUsage);
+                    if(e!=null)
+                    {
+                        JDFResourceLink rl=(JDFResourceLink)e;
+                        rl.setCombinedProcessIndex(tocNum2);
+                    }
+                    
+                    // update partititons
                     final JDFEnumerationState pidKeys = devCap.getEnumerationState(AttributeName.PARTIDKEYS);
                     if(pidKeys!=null)
                     {
@@ -716,7 +781,11 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
                             JDFAttributeMap keyMap=new JDFAttributeMap();
                             for(int k=0;k<keys.size();k++)
                             {
-                                keyMap.put(keys.stringAt(k), "PartKey"+k);
+                                String sk="PartKey"+k;
+                                final String key = keys.stringAt(k);
+                                if(key.equals("RunIndex"))
+                                    sk="0~-1";
+                                keyMap.put(key, sk);
                             }
                             r.getCreatePartition(keyMap, keys);
                         }
@@ -733,10 +802,12 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 
 
     /**
-     * sets default elements and adds them, if there are less than minorrurs
+     * sets default elements and adds them, if there are less than minOccurs
      * @param node the node to set
-     * @param bAll if false, only add if minOccurs>=1 and required=true or a default exists
-     * @return boolean
+     * @param bAll if false, only add if minOccurs>=1 and required=true or a default exists,
+     * if true, always create one
+     * 
+     * @return boolean true if a default element was created, else false
      */
     public boolean setDefaultsFromCaps(JDFNode node, boolean bAll)
     {

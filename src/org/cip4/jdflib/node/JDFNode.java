@@ -3146,12 +3146,13 @@ public class JDFNode extends JDFElement
 
     /**
      * setType set the type attribute to the enumeration type
-     *
+     * also set xsi:type etc
+     * 
      * @param typ the new type to set this to
      */
     public void setType(EnumType typ)
     {
-        setType(typ.getName(),true);
+        setType(typ==null ? null : typ.getName(),true);
     }
 
     /**
@@ -3222,6 +3223,7 @@ public class JDFNode extends JDFElement
         if(isJDFRoot()&&!hasAncestorAttribute(AttributeName.JOBID,null)) {
             setJobID(generateDotID(AttributeName.JOBID,null));
         }
+        setType(getEnumType()); // fixes xsi:type stuff
 
         return super.fixVersion(version) && bRet;
     }

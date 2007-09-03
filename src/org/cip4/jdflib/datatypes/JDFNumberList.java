@@ -110,5 +110,15 @@ public class JDFNumberList extends JDFNumList
             getnumList().addElement(new Double(t));
         }
     }
+    
+    /**
+     * return true if at least one value in the list is d
+     * @param d the value to search
+     * @return
+     */
+    public boolean contains(double d)
+    {
+        return contains(new Double(d));
+    }
 
 }

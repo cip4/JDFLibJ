@@ -178,6 +178,16 @@ public class JDFIntegerList extends JDFNumList
     }
 
     /**
+     * return true if at least one value in the list is d
+     * @param d the value to search
+     * @return
+     */
+    public boolean contains(int d)
+    {
+        return contains(new Integer(d));
+    }
+
+    /**
      * equals - returns true if both JDFIntegerList are equal otherwise false
      *
      * @return boolean - true if equal otherwise false

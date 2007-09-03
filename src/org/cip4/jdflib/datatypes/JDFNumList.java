@@ -419,6 +419,10 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
         return m_numList;
     }
     
+    /**
+     * scale all values of this by factor
+     * @param factor
+     */
     public void scale (double factor)
     {
         for (int i = 0; i < getnumList().size(); i++)
@@ -428,8 +432,32 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
         }
     }
 
+    /**
+     * return true if this contains the Double or Integer object o
+     * @param o
+     * @return
+     */
     public boolean contains (Object o)
     {
         return getnumList().contains(o);
      }
+    
+    /**
+     * return true if this contains the Double or Integer object o
+     * @param o
+     * @return
+     */
+    public boolean contains (JDFNumList l)
+    {
+        if(l==null)
+            return false;
+        for(int i=0;i<l.size();i++)
+        {
+            if(contains(l.elementAt(i)))
+                return true;
+        }
+        return false;
+     }
+    
+    
 }

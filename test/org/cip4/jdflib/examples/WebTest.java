@@ -107,7 +107,9 @@ public class WebTest extends JDFTestCaseBase
                 if(i%2==0)
                     for(int j=0;j<vSep.size();j++)
                     {
-                        shiftObject.appendElement("SeparationShift").setAttribute("CTM", new JDFMatrix(1,0,0,1,j+i/4,j+i%4).toString());
+                        final KElement sepShift = shiftObject.appendElement("SeparationShift");
+                        sepShift.setAttribute("CTM", new JDFMatrix(1,0,0,1,j+i/4,j+i%4).toString());
+                        sepShift.setAttribute("Separation", vSep.stringAt(j));
                     }
             }
             doc.write2File(sm_dirTestDataTemp+"Webgrowth"+k+".jdf", 2, false);

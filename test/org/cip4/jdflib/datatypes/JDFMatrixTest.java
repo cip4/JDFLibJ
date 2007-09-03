@@ -80,130 +80,54 @@ package org.cip4.jdflib.datatypes;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.node.JDFNode;
 
 
-public class JDFNumListTest extends JDFTestCaseBase
+public class JDFMatrixTest extends JDFTestCaseBase
 {
-    public final void testSetString() throws Exception
+    public void testSetString() throws Exception
     {
         JDFDoc d=new JDFDoc("JDF");
         JDFNode n=d.getJDFRoot();
 
-        JDFIntegerList il =null;
-        il = new JDFIntegerList("1 2 INF");
-        n.setAttribute("test",il,null);
-        assertEquals("il",il.toString(),"1 2 INF");
-
-        JDFNumberList nl = null;
-        nl = new JDFNumberList("-INF 1.1 2.2 INF");
-        n.setAttribute("test2",nl,null);
-        assertEquals("nl",nl.toString(),"-INF 1.1 2.2 INF");
+        JDFMatrix m=new JDFMatrix("1 0 0 1 0 0");
+        assertEquals(m, JDFMatrix.unitMatrix);
+        n.setAttribute("foo",m,null);
+        assertEquals(n.getAttribute("foo"), m.toString());
     }
 
     //////////////////////////////////////////////////////////////
-
-    public final void testGetIntArray() throws Exception
+    public void testOrientation() throws Exception
     {
-        JDFIntegerList il = new JDFIntegerList("1 2 INF");
-        int[] ar=il.getIntArray();
-        assertEquals(3,ar.length);
-        assertEquals(ar[2],Integer.MAX_VALUE);        
+
+        JDFMatrix m=new JDFMatrix(EnumOrientation.Rotate0,0,0);
+        assertEquals(m, JDFMatrix.unitMatrix);
     }
 
     //////////////////////////////////////////////////////////////
-    public final void testSetIntArray()
+    //////////////////////////////////////////////////////////////
+    public void testConcat() throws Exception
     {
-        int[] iArray=new int[3];
-        iArray[0]=1;
-        iArray[1]=2;
-        iArray[2]=4;
-        JDFIntegerList il = new JDFIntegerList(iArray);
-        int[] ar=il.getIntArray();
-        assertEquals(iArray.length,ar.length);
-        assertEquals(iArray[0],ar[0]);        
-        assertEquals(iArray[1],ar[1]);        
-        assertEquals(iArray[2],ar[2]);        
+
+        JDFMatrix m=new JDFMatrix(EnumOrientation.Rotate90,  0,0);
+        JDFMatrix m2=new JDFMatrix(EnumOrientation.Rotate270,0,0);
+        m.concat(m2);
+        assertEquals(m, JDFMatrix.unitMatrix);
+
+        m=new JDFMatrix(EnumOrientation.Rotate90,  0,0);
+        m.concat(m);
+        assertEquals(m, new JDFMatrix(EnumOrientation.Rotate180,  0,0));
+
+        m=new JDFMatrix(EnumOrientation.Flip180,  0,0);
+        m.concat(m);
+        assertEquals(m, new JDFMatrix(EnumOrientation.Rotate0,  0,0));
+
+
     }
-    //////////////////////////////////////////////////////////////
-    public final void testScale()
-    {
-        int[] iArray=new int[3];
-        iArray[0]=1;
-        iArray[1]=2;
-        iArray[2]=4;
-        JDFIntegerList il = new JDFIntegerList(iArray);
-        il.scale(2);
-        int[] ar=il.getIntArray();
-        assertEquals(iArray.length,ar.length);
-        assertEquals(2*iArray[0],ar[0]);        
-        assertEquals(2*iArray[1],ar[1]);        
-        assertEquals(2*iArray[2],ar[2]);        
-    }
-    //////////////////////////////////////////////////////////////
-    public final void testCopy() throws Exception
-    {
-        JDFCMYKColor cmy1=new JDFCMYKColor("1 2 3 4");
-        JDFCMYKColor cmy2=new JDFCMYKColor(cmy1);
-        assertEquals(cmy1, cmy2);
-        cmy2.setK(0);
-        assertEquals(cmy2.getK(), 0.,0.);
-        assertEquals(cmy1.getK(), 4.,0.);
-        
-    }
-    public final void testContainsDouble() throws Exception
-    {
-        JDFNumberList l=new JDFNumberList("1 2.0 3 4 3.0");
-        assertTrue(l.contains(2.0));
-        assertTrue(l.contains(4.00));
-        assertTrue(l.contains(3));
-        assertFalse(l.contains(0));
-     }
-    //////////////////////////////////////////////////////////////
-    public final void testContainsInt() throws Exception
-    {
-        JDFIntegerList l=new JDFIntegerList("1 2 3 4 3");
-        assertTrue(l.contains(2));
-        assertTrue(l.contains(4));
-        assertTrue(l.contains(3));
-        assertFalse(l.contains(0));
-     }
-    //////////////////////////////////////////////////////////////
-    public final void testContainsList() throws Exception
-    {
-        JDFIntegerList l=new JDFIntegerList("1 2 3 4 3");
-        assertTrue(l.contains(new JDFIntegerList("1")));
-        assertTrue(l.contains(new JDFIntegerList("2 5")));
-        
-        assertFalse(l.contains(new JDFIntegerList("5")));
-      }
-    //////////////////////////////////////////////////////////////    
-    //////////////////////////////////////////////////////////////
-    public final void testRemoveElementAt()
-    {
-        int[] iArray=new int[3];
-        iArray[0]=1;
-        iArray[1]=2;
-        iArray[2]=4;
-        JDFIntegerList il = new JDFIntegerList(iArray);
-        assertEquals(il.getInt(-1),4);
-        il.removeElementAt(2);
-        assertEquals(il.getInt(-1),2);
-        il.removeElementAt(-1);
-        assertEquals(il.getInt(-1),1);
-    }
+
     //////////////////////////////////////////////////////////////
 
-    public void testGetDouble() throws Exception
-    {
-        JDFNumberList nl=new JDFNumberList("1.1 2.2 3.3");
-        assertEquals(nl.doubleAt(0), 1.1,0.0);
-        assertEquals(nl.doubleAt(1), 2.2,0.0);
-        assertEquals(nl.doubleAt(2), 3.3,0.0);
-        assertEquals(nl.doubleAt(-1), 3.3,0.0);
-        assertEquals(nl.doubleAt(3),0.0 ,0.0);
-               
-    }
-    //////////////////////////////////////////////////////////////
+
 
 }
