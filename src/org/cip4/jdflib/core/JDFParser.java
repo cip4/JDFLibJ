@@ -156,7 +156,7 @@ public class JDFParser extends DOMParser
 
     /**
      * parseFile - parse a file specified by strFile
-     * @param strFile link to the document to parse, may be eiter a file path or a url
+     * @param strFile link to the document to parse, may be either a file path or a url
      * @return JDFDoc or null if File not found
      */
     public JDFDoc parseFile(String strFile)

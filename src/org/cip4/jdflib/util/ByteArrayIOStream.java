@@ -83,8 +83,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
-import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
-
 
 /**
  * Shared input / outputStream class
