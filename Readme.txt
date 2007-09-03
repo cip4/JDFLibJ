@@ -1,6 +1,75 @@
 ___________________________________________________________
 
 
+Label JDFLIBJ_2.1.3BLD460 (28.08.2007)
+
+updated version string
+check for duplicate partition key values
+fix for non-file urls with directory
+fix for spawning "almost-matching" partitions
+fix for element type generation
+c++: remove some warnings
+spawn fixes for links with parts
+fixes for getresourceroot
+removed temp from svn
+JDFResource.java: Added "Occupation" to validParentNodeNames.
+Moved Method getValueforNewAttribute from EditorUtils.java to JDFElement.java.
+writetofile reverted NOT to escape url strings
+added XMLDoc.WriteToFile(File)
+updated handling for empty <Part> elements
+fix id generation from senderID for JMF
+added routine to generate evaluations for states (devcaps)
+removed spurious init calls
+fix statuscounter to allow null nodes (idle)
+add switch to ignore defaults to editor
+select system timezone for null jdf date
+
+>ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD460) && !lbtype(JDFLIBJ_2.1.3BLD450)}" -print
+.\core\AttributeName.java@@\main\45
+.\core\JDFAudit.java@@\main\88
+.\core\JDFElement.java@@\main\237
+.\core\JDFResourceLink.java@@\main\135
+.\core\KElement.java@@\main\249
+.\core\XMLDoc.java@@\main\87
+.\datatypes\JDFAttributeMap.java@@\main\35
+.\datatypes\VJDFAttributeMap.java@@\main\27
+.\ifaces@@\main\4
+.\ifaces\ICapabilityElement.java@@\main\1
+.\ifaces\IDeviceCapable.java@@\main\1
+.\jmf\JDFDeviceInfo.java@@\main\21
+.\jmf\JDFJMF.java@@\main\63
+.\jmf\JDFMessage.java@@\main\72
+.\jmf\JDFMessageService.java@@\main\15
+.\jmf\JDFPipeParams.java@@\main\20
+.\jmf\JDFQueue.java@@\main\22
+.\jmf\JDFSignal.java@@\main\23
+.\node\JDFNode.java@@\main\251
+.\resource\devicecapability\JDFAbstractState.java@@\main\51
+.\resource\devicecapability\JDFActionPool.java@@\main\7
+.\resource\devicecapability\JDFBooleanState.java@@\main\27
+.\resource\devicecapability\JDFDateTimeState.java@@\main\29
+.\resource\devicecapability\JDFDevCap.java@@\main\53
+.\resource\devicecapability\JDFDevCaps.java@@\main\39
+.\resource\devicecapability\JDFDeviceCap.java@@\main\50
+.\resource\devicecapability\JDFDurationState.java@@\main\26
+.\resource\devicecapability\JDFEnumerationState.java@@\main\30
+.\resource\devicecapability\JDFEvaluation.java@@\main\24
+.\resource\devicecapability\JDFIntegerState.java@@\main\29
+.\resource\devicecapability\JDFMatrixState.java@@\main\28
+.\resource\devicecapability\JDFModulePool.java@@\main\8
+.\resource\devicecapability\JDFNameState.java@@\main\32
+.\resource\devicecapability\JDFNumberState.java@@\main\30
+.\resource\devicecapability\JDFPDFPathState.java@@\main\25
+.\resource\devicecapability\JDFRectangleState.java@@\main\31
+.\resource\devicecapability\JDFShapeState.java@@\main\30
+.\resource\devicecapability\JDFStringState.java@@\main\26
+.\resource\devicecapability\JDFTerm.java@@\main\6
+.\resource\devicecapability\JDFXYPairState.java@@\main\28
+.\resource\JDFResource.java@@\main\223
+.\resource\process\JDFRunList.java@@\main\54
+___________________________________________________________
+
+
 Label JDFLIBJ_2.1.3BLD450 (03.08.2007)
 
 alces: fix illegalargumentexception
