@@ -1,4 +1,7 @@
 DEPENDENCIES
 
 Commons Lang 2.1, commons-lang-2.1.jar
+Commons IO 1.1, commons-io-1.1.jar
+JavaBeans Activation Framework 1.0.2, activation-1.0.2.jar
+JavaMail API, mailapi.jar
 Xerces 2.7.1, xercesImpl-2.7.1.jar, xml-apis-2.0.2.jar
