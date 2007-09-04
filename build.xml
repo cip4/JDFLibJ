@@ -178,7 +178,7 @@
 		</javac>
 		<!-- Run test cases -->
 		<echo>Running unit tests...</echo>
-		<property name="test.working.dir" value="${test.src.dir}/data" />
+		<property name="test.working.dir" value="./" />
 		<junit timeout="60000" dir="${test.working.dir}" fork="true" tempdir="${test.bin.dir}" failureproperty="test.failure" errorproperty="test.error">
 			<formatter type="plain" />
 			<formatter type="xml" />
