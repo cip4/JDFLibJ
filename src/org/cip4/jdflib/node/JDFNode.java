@@ -3223,7 +3223,9 @@ public class JDFNode extends JDFElement
         if(isJDFRoot()&&!hasAncestorAttribute(AttributeName.JOBID,null)) {
             setJobID(generateDotID(AttributeName.JOBID,null));
         }
-        setType(getEnumType()); // fixes xsi:type stuff
+        final EnumType enumType = getEnumType();
+        if(enumType!=null)
+            setType(enumType); // fixes xsi:type stuff
 
         return super.fixVersion(version) && bRet;
     }
