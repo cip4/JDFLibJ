@@ -97,7 +97,7 @@
 	<target name="major_jar" depends="jar" description="Builds a JAR archive containing the JDFLib-J binaries.">
 		<copy file="${dist.dir}/${base.filename}.jar" tofile="${dist.dir}/${major.filename}.jar"/>
 	</target>
-	<target name="spam" depends="major_jar" description="Builds a JAR archive containing the JDFLib-J binaries.">
+	<target name="spam" depends="major_jar" description="Copy JDFLib-J binaries to the folders of depending CIP4 apps.">
 		<copy tofile="../Bambi/src/lib/${major.filename}.jar" file="${dist.dir}/${major.filename}.jar"/>
 		<copy tofile="../JDFUtility/src/lib/${major.filename}.jar" file="${dist.dir}/${major.filename}.jar"/>
 		<copy tofile="../JDFEditor/lib/${major.filename}.jar" file="${dist.dir}/${major.filename}.jar"/>
