@@ -780,7 +780,7 @@ public class MimeUtil
         httpURLconnection.setRequestMethod(POST);
         httpURLconnection.setRequestProperty("Connection", "close");
         String contentType = mp.getContentType();
-        contentType=StringUtil.token(contentType, 0, "\n");
+        contentType=StringUtil.token(contentType, 0, "\r");
         httpURLconnection.setRequestProperty(CONTENT_TYPE,contentType );
         httpURLconnection.setDoOutput(true);
         
