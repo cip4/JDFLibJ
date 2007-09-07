@@ -105,22 +105,23 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[13];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[14];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUALAMOUNT, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
         atrInfoTable[1] = new AtrInfoTable(AttributeName.AMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
         atrInfoTable[2] = new AtrInfoTable(AttributeName.AVAILABLEAMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
         atrInfoTable[3] = new AtrInfoTable(AttributeName.LEVEL, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumLevel.getEnum(0), "OK");
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.MODULEID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x33333111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.PROCESSUSAGE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.PRODUCTID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.RESOURCEID, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[9] = new AtrInfoTable(AttributeName.RESOURCENAME, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[10] = new AtrInfoTable(AttributeName.STATUS, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, JDFResource.EnumResStatus.getEnum(0), null);
-        atrInfoTable[11] = new AtrInfoTable(AttributeName.UNIT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[12] = new AtrInfoTable(AttributeName.USAGE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, JDFResourceLink.EnumUsage.getEnum(0), null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.LOCATION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.MODULEID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x33333111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.PROCESSUSAGE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.PRODUCTID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
+        atrInfoTable[9] = new AtrInfoTable(AttributeName.RESOURCEID, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[10] = new AtrInfoTable(AttributeName.RESOURCENAME, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[11] = new AtrInfoTable(AttributeName.STATUS, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, JDFResource.EnumResStatus.getEnum(0), null);
+        atrInfoTable[12] = new AtrInfoTable(AttributeName.UNIT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[13] = new AtrInfoTable(AttributeName.USAGE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, JDFResourceLink.EnumUsage.getEnum(0), null);
     }
     
     protected AttributeInfo getTheAttributeInfo()
@@ -331,6 +332,28 @@ public abstract class JDFAutoResourceInfo extends JDFElement
         public EnumLevel getLevel()
         {
             return EnumLevel.getEnum(getAttribute(AttributeName.LEVEL, null, "OK"));
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute Location
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute Location
+          * @param value: the value to set the attribute to
+          */
+        public void setLocation(String value)
+        {
+            setAttribute(AttributeName.LOCATION, value, null);
+        }
+
+        /**
+          * (23) get String attribute Location
+          * @return the value of the attribute
+          */
+        public String getLocation()
+        {
+            return getAttribute(AttributeName.LOCATION, null, JDFConstants.EMPTYSTRING);
         }
 
         

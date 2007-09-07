@@ -260,8 +260,22 @@ public class GeneratorUtil
                 isValid = false;
             }
         }
+        
 
-        // Separation is a PartIDKey and a normal attribut, so fix it here
+        // now set isValid to true for the cases where the above heuristic went wrong
+        // (mostly a PartIDKey which is also used as normal attribute)
+        
+        if ("ResourceInfo".equals (strComplexTypeName) && "Location".equals (strAttributeName))
+        {
+        	isValid = true;
+        }
+        
+        if ("ResourceQuParams".equals (strComplexTypeName) && "Location".equals (strAttributeName))
+        {
+        	isValid = true;
+        }
+        
+        // Separation is a PartIDKey and a normal attribute, so fix it here
         if ("Separation".equals (strAttributeName) &&
                 (  "DensityMeasuringField".equals (strComplexTypeName)
                 || "ScreenSelector".equals (strComplexTypeName)
@@ -272,8 +286,7 @@ public class GeneratorUtil
         }
 
         // SectionIndex is a PartIDKey and a normal attribut, so fix it here
-        if ("SectionIndex".equals (strAttributeName) &&
-            "SignatureCell".equals (strComplexTypeName))
+        if ("SignatureCell".equals (strComplexTypeName) && "SectionIndex".equals (strAttributeName))
         {
             isValid = true;
         }
@@ -1852,14 +1865,6 @@ public class GeneratorUtil
         typeInfo.put ("shortString", "string");
         typeInfo.put ("sRGBColor", "string");
         typeInfo.put ("StepRepeat", "string");
-//        typeInfo.put ("pLocation", "string");
-//        typeInfo.put ("pOption", "string");
-//        typeInfo.put ("pPartVersion", "string");
-//        typeInfo.put ("pPreflightRule", "string");
-//        typeInfo.put ("pRibbonName", "string");
-//        typeInfo.put ("pRun", "string");
-//        typeInfo.put ("pWebName", "string");
-//        typeInfo.put ("shortString", "shortString");
     }
 
     public static String getAttributeExt(SchemaAttribute schemaAttribute) {
