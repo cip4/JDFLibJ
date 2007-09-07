@@ -89,7 +89,7 @@ public class WebTest extends JDFTestCaseBase
                 mo.setOrdID(i+100);
                 mo.setCTM(new JDFMatrix(1,0,0,1,x+700,y+900));
 
-                KElement shiftObject=los.appendElement("ShiftObject");
+                KElement shiftObject=los.appendElement("ShiftPoint");
                 if(k==1)
                 {
                     if(i%2==0)

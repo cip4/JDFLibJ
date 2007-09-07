@@ -123,13 +123,13 @@ public class TestJDF
 //          HttpURLConnection uc2=MimeUtil.writeToURL(m, "http://localhost:8080/Bambi/jmf/device001/");
 //          for(int i=0;i<1000;i++)
 //          {
-////        HttpURLConnection uc=MimeUtil.writeToURL(m, "http://localhost:8080/JDFUtility/dump");
+        HttpURLConnection uc=MimeUtil.writeToURL(m, "http://localhost:8080/JDFUtility/dump");
 //          HttpURLConnection uc=MimeUtil.writeToURL(m, "http://KIE-PROSIRAI-LG:49190/GenericConnector1");
 //          System.out.println(i+" "+uc.getResponseCode());
 //          }
 //          FileUtil.streamToFile(uc2.getInputStream(), sm_dirTestDataTemp+"/BambiIn.txt");
 //          FileUtil.streamToFile(uc2.getErrorStream(), sm_dirTestDataTemp+"/BambiErr.txt");
-            HttpURLConnection uc=MimeUtil.writeToURL(m, "http://KIE-PROSIRAI-LG:49190/GenericConnector1");
+//            HttpURLConnection uc=MimeUtil.writeToURL(m, "http://KIE-PROSIRAI-LG:49190/GenericConnector1");
             System.out.println(" "+uc.getResponseCode());
         }
         catch (IOException x)

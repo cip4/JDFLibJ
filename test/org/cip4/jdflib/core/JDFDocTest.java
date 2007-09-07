@@ -77,9 +77,13 @@
  */
 package org.cip4.jdflib.core;
 
+import java.io.File;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.process.JDFAssemblySection;
 
 public class JDFDocTest extends JDFTestCaseBase
 {
@@ -130,6 +134,25 @@ public class JDFDocTest extends JDFTestCaseBase
         assertNull( db.getContentType());
      }   
     
+    public void testSchemaDefault() throws Exception
+    {
+        for(int i=0;i<3;i++)
+        {
+            JDFDoc doc=new JDFDoc("JDF");
+            JDFNode n=(JDFNode) doc.getRoot();
+            assertFalse("no schema - no default",n.hasAttribute(AttributeName.TEMPLATE));
+            String s=doc.write2String(2);
+            final JDFParser parser = new JDFParser();
+            JDFDoc docNoSchema=parser.parseString(s);
+            JDFNode as2=(JDFNode) docNoSchema.getRoot();
+            assertFalse("no schema - no default",as2.hasAttribute(AttributeName.TEMPLATE));
+            parser.m_SchemaLocation=sm_dirTestSchema+File.separator+"JDF.xsd";
+            JDFDoc docSchema=parser.parseString(s);
+            JDFNode as3=(JDFNode) docSchema.getRoot();
+            assertTrue("schema parse - default is set",as3.hasAttribute(AttributeName.TEMPLATE));
+            assertFalse("schema parse - default is set",as3.getTemplate());
+        }
+     }
 
     /**
      * make sure that corrupt files always return a null document

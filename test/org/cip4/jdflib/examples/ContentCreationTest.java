@@ -6,6 +6,7 @@
 package org.cip4.jdflib.examples;
 
 import java.io.File;
+import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoLayoutElement.EnumElementType;
@@ -15,6 +16,8 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.datatypes.JDFMatrix;
+import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.devicecapability.JDFActionPool;
@@ -47,7 +50,7 @@ public class ContentCreationTest extends PreflightTest
         JDFLayoutElementPart lePart=lep.appendLayoutElementPart();
         KElement positionObj=lePart.appendElement("PositionObject");
         positionObj.setAttribute("PageRange", "0");
-        positionObj.setAttribute("CTM", "1 0 0 1 0 0");
+        setNextAnchor(positionObj,null, "LowLeft","0 0",null,"Parent",0);
         positionObj.setAttribute("Anchor", "LowLeft");
         positionObj.setAttribute("PositionPolicy", "Exact");
         final JDFLayoutElement bkg = (JDFLayoutElement)lePart.appendElement("LayoutElement");
@@ -58,7 +61,7 @@ public class ContentCreationTest extends PreflightTest
         positionObj=lePart.appendElement("PositionObject");
         positionObj.setAttribute("PageRange", "0");
         //TODO discuss individual positions
-        positionObj.setAttribute("Position", "0.5 0.5");
+        setNextAnchor(positionObj,null, "CenterCenter",null,null,"Parent",0);
         positionObj.setAttribute("Anchor", "CenterCenter");
         positionObj.setAttribute("PositionPolicy", "Free");
         String id=lePart.appendAnchor(null);
@@ -72,7 +75,8 @@ public class ContentCreationTest extends PreflightTest
         positionObj=lePart.appendElement("PositionObject");
         positionObj.setAttribute("PageRange", "0");
         positionObj.setAttribute("Anchor", "TopCenter");
-        setNextAnchor(positionObj,id, "BottomCenter","0 36",null,"Sibling");
+        positionObj.setAttribute("PositionPolicy", "Free");
+        setNextAnchor(positionObj,id, "BottomCenter","0 36",null,"Sibling",0);
     
         image = (JDFLayoutElement)lePart.appendElement("LayoutElement");
         image.setElementType(EnumElementType.Image);
@@ -84,16 +88,18 @@ public class ContentCreationTest extends PreflightTest
         lePart=lep.appendLayoutElementPart();
         positionObj=lePart.appendElement("PositionObject");
         positionObj.setAttribute("PageRange", "0");
-        positionObj.setAttribute("CTM", "1 0 0 1 2 3");
+        setNextAnchor(positionObj,null, "BottomLeft","2 3",null,"Parent",0);
         positionObj.setAttribute("Anchor", "LowLeft");
+        positionObj.setAttribute("PositionPolicy", "Exact");
         lePart.appendBarcodeProductionParams().appendXMLComment("barcode details here", null);
 
         lePart=lep.appendLayoutElementPart();
         positionObj=lePart.appendElement("PositionObject");
         positionObj.setAttribute("PageRange", "0");
-        positionObj.setAttribute("Position", "1.0 1.0");
+        setNextAnchor(positionObj,null, "TopRight",null,null,"Parent",0);
         positionObj.setAttribute("Anchor", "TopRight");
         positionObj.appendXMLComment("This is a \"roughly placed\"  mark\nThe anchor at top right is placed at the right (=1.0) top(=1.0) position of the page.\nNo rotation is specified", null);
+        positionObj.setAttribute("PositionPolicy", "Exact");
         lePart.appendBarcodeProductionParams().appendXMLComment("barcode details here", null);
 
         lep.appendXMLComment("This is a \"roughly placed\"  container for marks\nThe anchor at top left is defined in the !Unrotated! orientation.\n It is placed at the left (=0.0) bottom(=0.0) position of the page.\nThe text flows bottom to top (=Rotate 90 = counterclockwise)\n do we need margins?", null);
@@ -101,24 +107,23 @@ public class ContentCreationTest extends PreflightTest
         String idParent=lePart.appendAnchor(null);
         positionObj=lePart.appendElement("PositionObject");
         positionObj.setAttribute("PageRange", "1");
-        positionObj.setAttribute("Position", "0.0 0.0");
         positionObj.setAttribute("Anchor", "TopLeft");
-        positionObj.setAttribute("Orientation", "Rotate90");
+        positionObj.setAttribute("PositionPolicy", "Free");
+        setNextAnchor(positionObj,null, "BottomCenter","0 0",null,"Parent",90);
 
         lep.appendXMLComment("This is a  barcode inside the previous container\nThe anchor at bottom left is defined in the !Unrotated! orientation.\n It is placed at the left (=0.0) bottom(=0.0) position of the container.", null);
         lePart=lep.appendLayoutElementPart();
         id=lePart.appendAnchor(null);
         positionObj=lePart.appendElement("PositionObject");
-        positionObj.setAttribute("Position", "0.0 0.0");
         positionObj.setAttribute("Anchor", "BottomLeft");
-        setNextAnchor(positionObj,idParent, "BottomLeft","0 0",null,"Parent");
+        setNextAnchor(positionObj,idParent, "BottomLeft","0 0",null,"Parent",0);
         lePart.appendBarcodeProductionParams().appendXMLComment("barcode details here", null);
 
         lep.appendXMLComment("This is a disclaimer text inside the previous container\nThe anchor at top left is defined in the !Unrotated! orientation.\n The barcode and text are justified with their top margins and spaced by 72 points\n which corresponds to the left of the page because the container is rotated 90°\n"+
                 "AbsoluteSize specifies the size of the object in points", null);
         lePart=lep.appendLayoutElementPart();
         positionObj=lePart.appendElement("PositionObject");
-        setNextAnchor(positionObj,id, "TopRight","-72 0",null,"Sibling");
+        setNextAnchor(positionObj,id, "TopRight","-72 0",null,"Sibling",0);
   
         positionObj.setAttribute("Anchor", "TopLeft");
 //        positionObj.setAttribute("ParentRef", idParent);
@@ -158,12 +163,18 @@ public class ContentCreationTest extends PreflightTest
     /**
      * @param sm2_2
      * @param idAnchor
+     * @throws DataFormatException 
      */
-    public static void setNextAnchor(KElement sm2_2, String idAnchor, String anchor, String absolutePosition,String xmlComment, String anchorType)
+    private static void setNextAnchor(KElement sm2_2, String idAnchor, String anchor, String absolutePosition,String xmlComment, String anchorType, double rotation) throws DataFormatException
     {
         KElement nextAnchor=sm2_2.appendElement("RefAnchor");
         nextAnchor.setAttribute("Anchor",anchor);
-        nextAnchor.setAttribute("MarkOffset", absolutePosition);
+        JDFMatrix m=new JDFMatrix("1 0 0 1 0 0");
+        JDFXYPair xy=absolutePosition==null ? null : new JDFXYPair(absolutePosition);
+        m.shift(xy);
+        m.rotate(rotation);
+        if(xy!=null || rotation!=0)
+            sm2_2.setAttribute("CTM", m.toString());
         nextAnchor.setAttribute("rRef",idAnchor);  
         nextAnchor.setAttribute("AnchorType",anchorType);  
         nextAnchor.setXMLComment(xmlComment);

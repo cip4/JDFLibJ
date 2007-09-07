@@ -112,64 +112,76 @@ public class JDFStrippingTest extends JDFTestCaseBase
         sp.refBinderySignature(bs);
     }
 ///////////////////////////////////////////////////////////////////////
-    
+
     /**
      * test how foldouts are generated
      * @throws Exception 
      */
     public void testFoldOut() throws Exception
     {
-        for(int i=0;i<2;i++)
+        for(int i=0;i<3;i++)
         {
             setUp();
-        n.setXMLComment("Stripping Foldout example corresponding to spec example n.6.5 - verion: "+((i==0)?"multi-Cell":"new attribute FoldOutTrimSize"));
-        rl.setNPage(6);
-        JDFSignatureCell sc=bs.appendSignatureCell();
-        sc.setFrontPages(new JDFIntegerList("4"));
-        sc.setFrontFacePages(new JDFIntegerList("5"));
-        sc.setBackPages(new JDFIntegerList("3"));
-        sc.setBackFacePages(new JDFIntegerList("2"));
-        if(i==0)
-        {
-        sc=bs.appendSignatureCell();
-        sc.setFrontPages(new JDFIntegerList("5"));
-        sc.setFrontFacePages(new JDFIntegerList("4"));
-        sc.setBackPages(new JDFIntegerList("2"));
-        sc.setBackFacePages(new JDFIntegerList("3"));
-        }
-       
-        sc=bs.appendSignatureCell();
-        sc.setFrontPages(new JDFIntegerList("0"));
-        sc.setBackPages(new JDFIntegerList("1"));
-        
-        JDFStrippingParams sp1=(JDFStrippingParams) sp.addPartition(EnumPartIDKey.CellIndex, "0");
-        JDFStripCellParams scp=sp1.appendStripCellParams();
-        scp.setTrimSize(new JDFXYPair(200+i*300,400));
-        if(i==0)
-            scp.setXMLComment("stripcell for the folded out foldout(front page=4)");
-        else
-            scp.setXMLComment("stripcell for the entire foldout(front page=4, foldout page =5)\nthe TrimSize applies to the entire foldout spread (page 4 and 5)\n note the new FoldoutTrimSize attribute");
+            n.setXMLComment("Stripping Foldout example corresponding to spec example n.6.5 - verion: "+((i==0)?"multi-Cell":((i==1)?"new attribute FoldOutTrimSize":"new attribute FaceCells")));
+            rl.setNPage(6);
+            JDFSignatureCell sc=bs.appendSignatureCell();
+            sc.setXMLComment("this is the foldout foldout cell");
+            sc.setFrontPages(new JDFIntegerList("4"));
+            sc.setBackPages(new JDFIntegerList("3"));
+            if(i==0 || i==2)
+            {
+                sc=bs.appendSignatureCell();
+                String xmlComment = "this cell is the inner page of the foldout, i.e. the page that is attached to the spine";
+                sc.setFrontPages(new JDFIntegerList("5"));
+                sc.setBackPages(new JDFIntegerList("2"));
+                if(i==0)
+                {
+                    sc.setFrontFacePages(new JDFIntegerList("4"));
+                    sc.setBackFacePages(new JDFIntegerList("3"));
+                }
+                else
+                {
+                    xmlComment+="\nThe new attribute facecells refers to the cell(s) that describe the foldout; in this case the cell to the left.";
+                    xmlComment+="\nThe front and back pages of the foldout are listed in the respective cell(s)";
+                    sc.setAttribute("FaceCells","0");
+                }
+                sc.setXMLComment(xmlComment);
 
-        if(i==0)
-        {
-            sp1=(JDFStrippingParams) sp.addPartition(EnumPartIDKey.CellIndex, "1");
+            }
+
+            sc=bs.appendSignatureCell();
+            sc.setXMLComment("this is the cell that has no foldout");
+            sc.setFrontPages(new JDFIntegerList("0"));
+            sc.setBackPages(new JDFIntegerList("1"));
+
+            JDFStrippingParams sp1=(JDFStrippingParams) sp.addPartition(EnumPartIDKey.CellIndex, "0");
+            JDFStripCellParams scp=sp1.appendStripCellParams();
+            scp.setTrimSize(new JDFXYPair(200+(i%2)*300,400));
+            if(i!=1)
+                scp.setXMLComment("stripcell for the folded out foldout(front page=4)");
+            else
+                scp.setXMLComment("stripcell for the entire foldout(front page=4, foldout page =5)\nthe TrimSize applies to the entire foldout spread (page 4 and 5)\n note the new FoldoutTrimSize attribute");
+
+            if(i!=1)
+            {
+                sp1=(JDFStrippingParams) sp.addPartition(EnumPartIDKey.CellIndex, "1");
+                scp=sp1.appendStripCellParams();
+                scp.setTrimSize(new JDFXYPair(300,400));
+                scp.setXMLComment("stripcell for the inner page of the foldout foldout(front page=5)");
+            }
+            else
+            {
+                scp.setAttribute("FoldoutTrimSize", "200 400");
+            }
+
+            sp1=(JDFStrippingParams) sp.addPartition(EnumPartIDKey.CellIndex, i!=1?"2":"1");
             scp=sp1.appendStripCellParams();
-            scp.setTrimSize(new JDFXYPair(300,400));
-            scp.setXMLComment("stripcell for the inner page of the foldout foldout(front page=5)");
+            scp.setTrimSize(new JDFXYPair(320,400));
+            scp.setXMLComment("stripcell for the inner page of the foldout foldout(front page=0)");
+
+
+            doc.write2File(sm_dirTestDataTemp+"foldoutStrip"+i+".jdf", 2, false);
         }
-        else
-        {
-            scp.setAttribute("FoldoutTrimSize", "200 400");
-        }
-        
-        sp1=(JDFStrippingParams) sp.addPartition(EnumPartIDKey.CellIndex, i==0?"2":"1");
-        scp=sp1.appendStripCellParams();
-        scp.setTrimSize(new JDFXYPair(320,400));
-        scp.setXMLComment("stripcell for the inner page of the foldout foldout(front page=0)");
-        
-        
-        doc.write2File(sm_dirTestDataTemp+"foldoutStrip"+i+".jdf", 2, false);
-        }
-        
+
     }
 }

@@ -181,6 +181,20 @@ public interface IPlacedObject
      * @param value: the value to set the attribute to
      */
     public abstract void setTrimCTM(JDFMatrix value);
+    
+    /**
+     * convenience method to set TrimSize
+     * 
+     * @param xy: the value to set TrimSize to
+     */
+    public abstract void setTrimSize(JDFXYPair xy);
+    /**
+     * convenience method to set TrimSize
+     * 
+     * @param x: the value to set the x Dimension to
+     * @param x: the value to set the y Dimension to
+     */
+    public abstract void setTrimSize(double x, double y);
 
     /**
      * (20) get JDFMatrix attribute TrimCTM

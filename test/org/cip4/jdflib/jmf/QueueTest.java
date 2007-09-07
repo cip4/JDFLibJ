@@ -90,11 +90,11 @@ public class QueueTest extends TestCase
 
     public void testGetQueueEntry()
     {
-        assertEquals("qe2",q.getEntry(1).getQueueEntryID(),"qe2");
-        assertEquals("qe2",q.getEntry("qe1").getQueueEntryID(),"qe1");
-        assertEquals("qe2",q.getEntry("qe2").getQueueEntryID(),"qe2");
-        assertEquals("qe2",q.getEntry("qe3").getQueueEntryID(),"qe3");
-        assertNull("qe6",q.getEntry("qe6"));
+        assertEquals("qe2",q.getQueueEntry(1).getQueueEntryID(),"qe2");
+        assertEquals("qe2",q.getQueueEntry("qe1").getQueueEntryID(),"qe1");
+        assertEquals("qe2",q.getQueueEntry("qe2").getQueueEntryID(),"qe2");
+        assertEquals("qe2",q.getQueueEntry("qe3").getQueueEntryID(),"qe3");
+        assertNull("qe6",q.getQueueEntry("qe6"));
         assertEquals("qe6",-1,q.getQueueEntryPos("qe6"));
         assertEquals("qe2",1,q.getQueueEntryPos("qe2"));
     }
@@ -141,7 +141,7 @@ public class QueueTest extends TestCase
     {
         assertNull(q.getNextExecutableQueueEntry());
         q.maxRunningEntries=2;
-        assertEquals(q.getNextExecutableQueueEntry(), q.getEntry("qe2"));
+        assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe2"));
         q.setQueueStatus(EnumQueueStatus.Held);
         assertNull(q.getNextExecutableQueueEntry());
         q.setQueueStatus(EnumQueueStatus.Waiting);
@@ -151,7 +151,7 @@ public class QueueTest extends TestCase
 
     public void testSetPriority()
     {
-        JDFQueueEntry qe=q.getEntry("qe2");
+        JDFQueueEntry qe=q.getQueueEntry("qe2");
         assertEquals(q.getQueueEntryPos("qe2"), 1);
         q.setAutomated(true);
         int l=q.numEntries(null);
@@ -182,7 +182,7 @@ public class QueueTest extends TestCase
 
     public void testSetQueueEntryStatus()
     {
-        JDFQueueEntry qe=q.getEntry("qe2");
+        JDFQueueEntry qe=q.getQueueEntry("qe2");
         assertEquals(q.getQueueEntryPos("qe2"), 1);
         q.setAutomated(true);
         int l=q.numEntries(null);
@@ -192,17 +192,17 @@ public class QueueTest extends TestCase
         qe.setQueueEntryStatus(EnumQueueEntryStatus.Running);
         assertEquals(q.numEntries(null), l);
         assertEquals(q.getQueueEntryPos("qe2"), 0);
-        qe=q.getEntry("qe1");
+        qe=q.getQueueEntry("qe1");
         qe.setQueueEntryStatus(EnumQueueEntryStatus.Running);
         assertEquals(q.numEntries(null), l);
         assertEquals(q.getQueueEntryPos("qe1"), 1);
         
-        qe=q.getEntry("qe5");
+        qe=q.getQueueEntry("qe5");
         qe.setQueueEntryStatus(EnumQueueEntryStatus.Aborted);
         assertEquals(q.numEntries(null), l);
         assertEquals(q.getQueueEntryPos("qe5"), 4);
         
-        qe=q.getEntry("qe1");
+        qe=q.getQueueEntry("qe1");
         qe.setQueueEntryStatus(EnumQueueEntryStatus.Aborted);
         assertEquals(q.numEntries(null), l);
         assertEquals(q.getQueueEntryPos("qe1"), 2);

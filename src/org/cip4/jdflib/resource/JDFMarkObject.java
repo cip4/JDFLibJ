@@ -85,6 +85,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoMarkObject;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.ifaces.IPlacedObject;
 
 
@@ -174,6 +175,14 @@ public class JDFMarkObject extends JDFAutoMarkObject implements IPlacedObject
         }
         
         return result;
+    }
+
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.ifaces.IPlacedObject#setTrimCTM(double, double)
+     */
+    public void setTrimSize(double x, double y)
+    {
+        setTrimSize(new JDFXYPair(x,y));        
     }
     
 }

@@ -121,6 +121,24 @@ public class JDFMatrix extends JDFNumList
     {
         super(v);
     }
+    
+    /**
+     * constructs a matrix with all values set via arotation and a shift
+     *
+     * @param degrees - the rotation in degrees
+     * @param x the X shift
+     * @param y the Y shift
+     *
+     * @throws DataFormatException - if the Vector has not a valid format
+     */
+    public JDFMatrix(double degrees, double x, double y) 
+    {
+        super(MAX_MATRIX_DIMENSION);
+        setA(1.);
+        setD(1.);
+        shift(x,y);
+        rotate(degrees);
+    }
     /**
      * constructs a matrix with all values set via an enumerated orientation
      *
@@ -474,6 +492,19 @@ public class JDFMatrix extends JDFNumList
         setTx(getTx()+tx);
         setTy(getTy()+ty);        
     }
+    
+    /**
+     * rotate this by degrees degrees CouterClockwise
+     * 
+     * @param degrees the degrees to rotate by in counterclockwise direction
+     */
+    public void rotate(double degrees)
+    {
+        AffineTransform at=getAffineTransform();
+        at.rotate(degrees*Math.PI/180.0);
+        setAffineTransform(at);        
+    }
+ 
     /**
      * concatinates this with m
      * @param m the matrix to concatinate
@@ -485,5 +516,18 @@ public class JDFMatrix extends JDFNumList
         AffineTransform ma=m.getAffineTransform();
         a.concatenate(ma);
         setAffineTransform(a);
+    }
+
+    /**
+     * shift this matrix by an xypair
+     * 
+     * @param point the point to shift by
+     */
+    public void shift(JDFXYPair point)
+    {
+        if(point==null)
+            return;
+        shift(point.getX(), point.getY());
+        
     }
 }

@@ -450,12 +450,13 @@ public class StringUtilTest extends JDFTestCaseBase
 
     public void testHasToken()
     {
-        String s="1 2 3 3 15 4";
-        assertFalse(StringUtil.hasToken(s,"0"," ",0));      
+        String s="1 2 3 3 \n15\n4";
+        assertFalse(StringUtil.hasToken(s,"0"," \n",0));      
         assertTrue(StringUtil.hasToken(s,"1"," ",0));      
         assertFalse(StringUtil.hasToken(s,"5"," ",0));      
+        assertFalse(StringUtil.hasToken(s,"15"," ",0));      
         assertTrue(StringUtil.hasToken(s,"2"," ",0));      
-        assertTrue(StringUtil.hasToken(s,"4"," ",0));      
+        assertTrue(StringUtil.hasToken(s,"4","\n ",0));      
         assertTrue(StringUtil.hasToken(s,"3"," ",0));      
         assertTrue(StringUtil.hasToken(s,"3"," ",1));      
         assertFalse(StringUtil.hasToken(s,"3"," ",2));      
@@ -481,12 +482,14 @@ public class StringUtilTest extends JDFTestCaseBase
 
     public void testTokenize()
     {
-        String s="1 2 3";
+        String s="1 2\n3 \n4   5";
         VString v=new VString();
         v.add("1");
         v.add("2");
         v.add("3");
-        assertEquals(StringUtil.tokenize(s," ",false),v);      
+        v.add("4");
+        v.add("5");
+        assertEquals(StringUtil.tokenize(s," \n",false),v);      
     }
 
     ///////////////////////////////////////////////////////////////////////////

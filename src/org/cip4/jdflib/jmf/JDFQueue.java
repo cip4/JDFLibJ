@@ -196,10 +196,11 @@ public class JDFQueue extends JDFAutoQueue
      * Method getEntry: find a queuentry by position
      * @param i the index of the queueentry
      * @return JDFQueueEntry
+     * @deprecated use getQueueEntry(int)
      */
     public JDFQueueEntry getEntry(int i)
     {
-        return (JDFQueueEntry) getChildByTagName(ElementName.QUEUEENTRY,null,i,null, false, true);
+        return getQueueEntry(i);
     }
 
     /**
@@ -222,7 +223,7 @@ public class JDFQueue extends JDFAutoQueue
         final int entryCount = getEntryCount();
         for (int i = 0; i < entryCount; i++)
         {
-            final JDFQueueEntry entry = getEntry (i);
+            final JDFQueueEntry entry = getQueueEntry(i);
 
             final String strQEJobID = entry.getJobID ();
             final String strQEJobPartID = entry.getJobPartID();
@@ -254,9 +255,25 @@ public class JDFQueue extends JDFAutoQueue
      * @param strQEntryID the QueueEntryID of the requeste QueueEntry
      * @return the QueueEntry with QueueEntryID=strQEntryID, null if strQEntryID is null or empty string 
      * or the queueentry does not exist
-     * 
+     * @deprecated use getQueueEntry(id)
      */
     public JDFQueueEntry getEntry (String strQEntryID)
+    {
+        return getQueueEntry(strQEntryID);
+    }
+
+    /**
+     * Find a queueEntry by QueueEntryID<br>
+     * 
+     * note that you may want to use the generic getChildByTagName with the appropriate 
+     * attribute map, if you have more information available
+     * 
+     * @param strQEntryID the QueueEntryID of the requeste QueueEntry
+     * @return the QueueEntry with QueueEntryID=strQEntryID, null if strQEntryID is null or empty string 
+     * or the queueentry does not exist
+     * 
+     */
+    public JDFQueueEntry getQueueEntry(String strQEntryID)
     {
         if(isWildCard(strQEntryID))
             return null;
@@ -286,7 +303,8 @@ public class JDFQueue extends JDFAutoQueue
     ///////////////////////////////////////////////////////////////////////
     /**
      * Get the next QueueEntry to be processed
-     * the first entry with equal priority gets selected
+     * the first entry with highest priority gets selected
+     * the status of the QueueEntry MUST be waiting  
      * 
      * @return the executable queueEntry, null if none is available
      */
@@ -355,7 +373,7 @@ public class JDFQueue extends JDFAutoQueue
     }
 
     /**
-     * remove all entries with Staus=Removed and any entries 
+     * remove all entries with Status=Removed and any entries 
      * over maxCompleted that are either aborted or completed @see {@link JDFQueueEntry}.isCompleted()
      */
     public void cleanup()
@@ -407,12 +425,11 @@ public class JDFQueue extends JDFAutoQueue
     public boolean isAutomated()
     {
         return automated;
-
     }
 
     /**
      * get the queuesize attribute or if it does not exist, count queuentry elements
-     * thesize of the queue
+     * @return the size of the queue
      */
     public int getQueueSize()
     {

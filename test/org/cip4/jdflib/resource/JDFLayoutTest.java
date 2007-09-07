@@ -81,12 +81,14 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFParser;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFMatrix;
+import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
@@ -173,6 +175,94 @@ public class JDFLayoutTest extends JDFTestCaseBase
         assertNotNull("2. Media ok",m2);
         assertEquals(m2, lo.getMedia(1));
         assertEquals(m2, lo.getCreateMedia(1));
+    }    
+    //////////////////////////////////////////////////////////////////////////
+
+    public void testDynamicMarks() throws Exception
+    {
+        JDFElement.setLongID(false);
+        JDFLayout lo=(JDFLayout) n.appendMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null);
+        lo.setXMLComment("Layout that illustrates dynamic mark placement - all margins are 25 points (gutter=2*25)");
+        lo.setSurfaceContentsBox(new JDFRectangle(0,0,500,350));
+        JDFSheet s=lo.appendSheet();
+        JDFSurface su=s.appendFrontSurface();
+        
+        JDFContentObject co0=su.appendContentObject();
+        co0.setOrd(0);
+        JDFMatrix m1=(JDFMatrix) JDFMatrix.unitMatrix.clone();
+        m1.shift(25, 25);
+        co0.setCTM(JDFMatrix.unitMatrix);
+        co0.setTrimSize(new JDFXYPair(200,300));
+        String[] id=new String[2];
+        id[0]=co0.appendAnchor(null);
+        JDFContentObject co1=su.appendContentObject();
+        m1=(JDFMatrix) JDFMatrix.unitMatrix.clone();
+        m1.shift(275, 25);
+        co1.setCTM(m1);
+        co1.setTrimSize(200,300);
+        id[1]=co1.appendAnchor(null);
+
+        {
+            JDFMarkObject mark0=su.appendMarkObject();
+            mark0.setXMLComment("Register Mark on the top right of the sheet - assumed size is 20*30, assumed sheet size is 500*350");
+            mark0.setTrimSize(20,30);
+            mark0.setCTM(new JDFMatrix(1,0,0,1,500-20,350-30));
+            mark0.setAttribute("Anchor", "TopRight");
+            mark0.appendRegisterMark().setXMLComment("mark metadata goes here");
+            appendRefAnchor(mark0, "TopRight", "Parent", null);
+        }
+
+        {
+            JDFMarkObject mark0=su.appendMarkObject();
+            mark0.setXMLComment("Vertical Slug Line beginning at the top of the bottom margin of of the sheet between the 2 pages"+
+            "\nnote that no TrimSize need be specified and therefore TrimCTM / CTM place the point defined by @Anchor"+
+            "\nnote also that the anchor points to centerleft which is in the unrotated (horizontal) cs of the slug line");
+            JDFMatrix m0=new JDFMatrix(1,0,0,1,0,0);
+            m0.rotate(90);
+            m0.shift(250,25);
+            mark0.setCTM(m0);
+            mark0.setAttribute("Anchor", "CenterLeft");
+            JDFDeviceMark dm=mark0.appendDeviceMark();
+            dm.setFontSize(10);
+            dm.setFont("GhostCrypt");
+            JDFJobField jf=mark0.appendJobField();
+            jf.setXMLComment("Result: Sheet Printed by Dracula at the moonphase FullMoon");
+            jf.setAttribute("JobFormat", "Sheet Printed by %s at the moonphase %s");
+            jf.setAttribute("JobTemplate", "Operator,MoonPhase");
+            appendRefAnchor(mark0, "BottomCenter", "Parent", null);
+        }
+
+        for(int i=0;i<2;i++)
+        {
+            JDFMarkObject mark0=su.appendMarkObject();
+            mark0.setXMLComment("Horizonzal Slug Line, centered 5 points over the top of page "+i+
+            "\nnote that page is not yet a predefined token\n");
+            JDFMatrix m0=new JDFMatrix(1,0,0,1,0,0);
+            m0.rotate(90);
+            m0.shift(25+100,300+25+5);
+            if(i==1)
+                m0.shift(250, 0);
+            mark0.setCTM(m0);
+            mark0.setAttribute("Anchor", "BottomCenter");
+            JDFDeviceMark dm=mark0.appendDeviceMark();
+            dm.setFontSize(8);
+            JDFJobField jf=mark0.appendJobField();
+            jf.setXMLComment("Result: Page # "+i+" for Customer, Polanski - Job: J11");
+            jf.setAttribute("JobFormat", "Page # %i for Customer, %s - Job: %s");
+            jf.setAttribute("JobTemplate", "Page,JobRecipientName,JobID");
+            appendRefAnchor(mark0, "BottomCenter", "Sibling", id[i]);
+        }
+        doc.write2File(sm_dirTestDataTemp+"LayoutDynamicMarks.jdf", 2,false);
+        
+    }
+
+    public static KElement appendRefAnchor(JDFMarkObject mark0, String anchor, String anchorType, String rRef)
+    {
+        KElement refAnchor=mark0.getCreateElement("RefAnchor",null,0);
+        refAnchor.setAttribute("Anchor", anchor);
+        refAnchor.setAttribute("AnchorType", anchorType);
+        refAnchor.setAttribute("rRef", rRef);
+        return refAnchor;
     }    
 
     /**
@@ -390,9 +480,10 @@ public class JDFLayoutTest extends JDFTestCaseBase
 
     }
     /////////////////////////////////////////////////////
-    public void testGetLayoutLeaves()
+    public void testGetLayoutLeavesOld() throws Exception
     {
         testBuildOldLayout();
+
         JDFLayout lo=(JDFLayout) n.getMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null,0);
         VElement leaves=lo.getLayoutLeaves(false);
         assertEquals(leaves.size(), 2);
@@ -402,6 +493,22 @@ public class JDFLayoutTest extends JDFTestCaseBase
         JDFSheet sh=si.getSheet(2);
         leaves=sh.getLayoutLeaves(false);
         assertEquals(leaves.size(), 2);
+
+    }
+    /////////////////////////////////////////////////////
+    public void testGetLayoutLeavesNew() throws Exception
+    {
+        testBuildNewLayout();
+
+        JDFLayout lo=(JDFLayout) n.getMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null,0);
+        VElement leaves=lo.getLayoutLeaves(false);
+        assertEquals("2 Sigs, 2 sheets, 2 surfaces",leaves.size(), 6);
+        JDFSignature si=lo.getSignature(1);
+        leaves=si.getLayoutLeaves(false);
+        assertEquals("2 sheets, 2 surfaces",leaves.size(), 4);
+        JDFSheet sh=si.getSheet(2);
+        leaves=sh.getLayoutLeaves(false);
+        assertEquals("2 surfaces",leaves.size(), 2);
 
     }
     /////////////////////////////////////////////////////
