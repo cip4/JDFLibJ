@@ -82,6 +82,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFMatrix;
+import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
@@ -89,6 +90,7 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
+import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFLayout;
@@ -240,9 +242,9 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
     
     public void testAutomateLayout1() throws Exception
     {
-        n.getAuditPool().appendXMLComment("This is the simplest example of an automated layout\n"+
+        n.setXMLComment("This is the simplest example of an automated layout\n"+
                 "The structure is aligned as closely as possible with a static Layout\n"+
-        "note that the actual processes and outputs have been omitted for brevity", null);
+        "note that the actual processes and outputs have been omitted for brevity");
     
         setUpAutomatedInputRunList();
         rl.setDescriptiveName("This is a RunList specifiying 100 instance documents of 14 pages each in a ppml file");
@@ -302,9 +304,9 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
     
     public void testAutomateLayout2() throws Exception
     {
-        n.getAuditPool().appendXMLComment("This another example of an automated layout\n"+
+        n.setXMLComment("This another example of an automated layout\n"+
                 "The structure is aligned close to a static Layout but additionally uses OrdExpression and allows for varying numbers of pages in the runlist\n"+
-        "note that the actual processes and outputs have been omitted for brevity", null);
+        "note that the actual processes and outputs have been omitted for brevity");
     
         setUpAutomatedInputRunList();
         rl.setDescriptiveName("This is a RunList specifiying 100 instance documents of varying pages each in a ppml file");
@@ -366,9 +368,9 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
     
     public void testAutomateLayout3() throws Exception
     {
-        n.getAuditPool().appendXMLComment("This is a simple example of an automated layout that positions multiple instance documents onto one sheet\n"+
+        n.setXMLComment("This is a simple example of an automated layout that positions multiple instance documents onto one sheet\n"+
                 "The structure is aligned as closely as possible with a static Layout\n"+
-        "note that the actual processes and outputs have been omitted for brevity", null);
+        "note that the actual processes and outputs have been omitted for brevity");
     
         setUpAutomatedInputRunList();
         rl.setDescriptiveName("This is a RunList specifiying 100 instance documents of 14 pages each in a ppml file");
@@ -435,9 +437,9 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
     
     public void testAutomateLayout4() throws Exception
     {
-        n.getAuditPool().appendXMLComment("This is a simple example of an automated layout that positions multiple instance documents onto one sheet\n"+
+        n.setXMLComment("This is a simple example of an automated layout that positions multiple instance documents onto one sheet\n"+
                 "The structure is aligned as closely as possible with a static Layout\n"+
-        "note that the actual processes and outputs have been omitted for brevity", null);
+        "note that the actual processes and outputs have been omitted for brevity");
     
         setUpAutomatedInputRunList();
         rl.setDescriptiveName("This is a RunList specifiying 100 instance documents of 14 pages each in a ppml file.\n"+
@@ -480,7 +482,78 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
     
         doc.write2File(sm_dirTestDataTemp+"AutomatedLayout4.jdf", 2, false);
     }
+    public void testAutomatedStrippingCutAndStack() throws Exception
+    {
+        n.setType(EnumType.Stripping);
+        stripParams=(JDFStrippingParams) n.addResource(ElementName.STRIPPINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+        stripParams.getParentNode_KElement().appendXMLComment("Simple automated StrippingParams for the cut&stack example layout\n", stripParams);
+        JDFStrippingParams stripSheet=(JDFStrippingParams) stripParams.addPartition(EnumPartIDKey.SheetName, "Sheets");
+        stripSheet.setAttribute(AttributeName.AUTOMATED, true,null);
+        final String format = "Sheet%02i";
+        stripSheet.setAttribute("NameFormat", format);
+        stripSheet.setAttribute("NameTemplate", "SheetNum");
+        JDFStrippingParams stripStack0=(JDFStrippingParams) stripSheet.addPartition(EnumPartIDKey.BinderySignatureName, "Stack0");
 
+        JDFBinderySignature binderySignature = stripStack0.appendBinderySignature();
+        stripStack0.appendPosition().setRelativeBox(new JDFRectangle(0,0,0.5,1));
+        binderySignature=(JDFBinderySignature) binderySignature.makeRootResource(null, null, true);
+        binderySignature.setNumberUp(new JDFXYPair(1,1));
+        binderySignature.setAttribute("StackDepth", "100");
+        JDFStrippingParams stripStack1=(JDFStrippingParams) stripSheet.addPartition(EnumPartIDKey.BinderySignatureName, "Stack1");
+        stripStack1.refElement(binderySignature);
+        stripStack1.appendPosition().setRelativeBox(new JDFRectangle(0.5,0,1,1));
+        doc.write2File(sm_dirTestDataTemp+"AutomatedStrippingCutStack.jdf", 2, false);         
+    }
+
+    public void testCutAndStack() throws Exception
+    {
+        n.setXMLComment("This is a simple cut and stack layout witrh 2 stacks of one page each (two sided)\n");
+    
+        setUpAutomatedInputRunList();
+        rl.setDescriptiveName("This is any RunList...");
+        lo=(JDFLayout) n.appendMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null);
+        lo.setResStatus(EnumResStatus.Available, true);
+        lo.setMaxOrd(2);
+        lo.setAutomated(true);
+        lo.setXMLComment("2 stacks with 2 pages\n"+
+        "The algorithm for calculating which pages go where is:\n"+
+        "Ord + MaxOrd*SheetLoop%(MaxOrd*MaxStack*StackDepth) + StackOrd*StackDepth\n"+
+        "Each set of stacks consumes 2 * 2 * 100 = 400 Pages (4 ContentObjects = 2 front, 2 Back / Sheet * 100 StackDepth");
+        lo.setAttribute("StackDepth", "100");
+        lo.setAttribute("MaxStack", "2");
+        JDFLayout cover=(JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "TheSheet");
+        JDFLayout coverFront=(JDFLayout) cover.addPartition(EnumPartIDKey.Side, EnumSide.Front);
+        JDFContentObject co=coverFront.appendContentObject();
+        co.setCTM(new JDFMatrix(1,0,0,1,0,0));
+        co.setOrd(0);
+        co.setAttribute("StackOrd", "0");
+        co.setDescriptiveName("Front Page 0,2,4..., Stack 0");
+        co.setXMLComment("this co consumes all pages 0,2,4...198, 400,402,404...598, 800....");
+    
+        co=coverFront.appendContentObject();
+        co.setCTM(new JDFMatrix(1,0,0,1,8.5*72,0));
+        co.setOrd(0);
+        co.setAttribute("StackOrd", "1");
+        co.setDescriptiveName("Front Page 0,2,4,..., Stack 1");
+        co.setXMLComment("this co consumes all pages 200,202,204...398, 600,602,604...798, 1000....");
+    
+        JDFLayout coverBack=(JDFLayout) cover.addPartition(EnumPartIDKey.Side, EnumSide.Back);
+        co=coverBack.appendContentObject();
+        co.setCTM(new JDFMatrix(1,0,0,1,8.5*72,0));
+        co.setOrd(1);
+        co.setAttribute("StackOrd", "0");
+        co.setDescriptiveName("Back Page 1,3,5, Stack 0");
+        co.setXMLComment("this co consumes all pages 1,3,5...199, 401,403,405...499, 801....");
+    
+        co=coverBack.appendContentObject();
+        co.setCTM(new JDFMatrix(1,0,0,1,0,0));
+        co.setOrd(1);
+        co.setAttribute("StackOrd", "1");
+        co.setDescriptiveName("Back Page 1,3,5, Stack 1");
+        co.setXMLComment("this co consumes all pages 201,203,205...299, 601,603,605...799, 1001....");
+    
+        doc.write2File(sm_dirTestDataTemp+"CutStack.jdf", 2, false);
+    }
     /////////////////////////////////////////////////////
     
     /////////////////////////////////////////////////////

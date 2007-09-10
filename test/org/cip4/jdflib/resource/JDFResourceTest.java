@@ -435,17 +435,36 @@ public class JDFResourceTest extends JDFTestCaseBase
             assertTrue(myMap.containsKey("SheetName"));
         }
     }
-    public void testGetChildElementVector()
+    
+    public void testGetChildrenByTagName()
     {
         JDFDoc doc = new JDFDoc(ElementName.JDF);
         JDFNode root = doc.getJDFRoot();
 
         JDFResourcePool resPool = root.appendResourcePool();
-        JDFColorantControl colControl = (JDFColorantControl)
-        resPool.appendElement(ElementName.COLORANTCONTROL, null);
-        colControl.setProcessColorModel("DeviceCMY");
-        JDFColorantControl ccPart=(JDFColorantControl) colControl.addPartition(EnumPartIDKey.Condition, "Good");
-        KElement a1=colControl.appendElement("a");
+        JDFMedia med=(JDFMedia) root.addResource("Media", EnumUsage.Input);
+        JDFExposedMedia expMedia=(JDFExposedMedia) root.addResource("ExposedMedia", EnumUsage.Input);
+        expMedia.refElement(med);
+        VElement e=resPool.getChildrenByTagName("Media", null, null, false, true, 0);
+        assertEquals(e.size(), 2);
+        for(int i=0;i<e.size();i++)
+        {
+            JDFMedia m=(JDFMedia)e.item(i);
+            assertEquals(m, med);
+        }
+    }
+
+    public void testGetChildElementVector()
+    {
+            JDFDoc doc = new JDFDoc(ElementName.JDF);
+            JDFNode root = doc.getJDFRoot();
+
+            JDFResourcePool resPool = root.appendResourcePool();
+            JDFColorantControl colControl = (JDFColorantControl)
+            resPool.appendElement(ElementName.COLORANTCONTROL, null);
+            colControl.setProcessColorModel("DeviceCMY");
+            JDFColorantControl ccPart=(JDFColorantControl) colControl.addPartition(EnumPartIDKey.Condition, "Good");
+            KElement a1=colControl.appendElement("a");
         KElement a2=colControl.appendElement("a");
         VElement vChildren=colControl.getChildElementVector("a", null, null, true, 0, true);
         assertEquals(vChildren.size(), 2);

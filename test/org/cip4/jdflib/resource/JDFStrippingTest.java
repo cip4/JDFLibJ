@@ -80,6 +80,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.JDFSignatureCell;
@@ -119,11 +120,16 @@ public class JDFStrippingTest extends JDFTestCaseBase
      */
     public void testFoldOut() throws Exception
     {
+        // 0=1.3; 2=1.4
         for(int i=0;i<3;i++)
         {
+            if(i==1)
+                continue; // rejected by wg
             setUp();
-            n.setXMLComment("Stripping Foldout example corresponding to spec example n.6.5 - verion: "+((i==0)?"multi-Cell":((i==1)?"new attribute FoldOutTrimSize":"new attribute FaceCells")));
+            n.setXMLComment("Stripping Foldout example corresponding to spec example n.6.5 - verion: "+((i==0)?"multi-Cell":((i==1)?"new attribute FoldOutTrimSize":"new attribute FaceCells (Accepted for 1.4)")));
             rl.setNPage(6);
+            sp.setResStatus(EnumResStatus.Available, true);
+            bs.setResStatus(EnumResStatus.Available, true);
             JDFSignatureCell sc=bs.appendSignatureCell();
             sc.setXMLComment("this is the foldout foldout cell");
             sc.setFrontPages(new JDFIntegerList("4"));
@@ -141,7 +147,7 @@ public class JDFStrippingTest extends JDFTestCaseBase
                 }
                 else
                 {
-                    xmlComment+="\nThe new attribute facecells refers to the cell(s) that describe the foldout; in this case the cell to the left.";
+                    xmlComment+="\nThe new attribute FaceCells refers to the cell(s) that describe the foldout; in this case the cell to the left.";
                     xmlComment+="\nThe front and back pages of the foldout are listed in the respective cell(s)";
                     sc.setAttribute("FaceCells","0");
                 }

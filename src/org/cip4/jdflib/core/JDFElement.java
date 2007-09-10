@@ -2076,7 +2076,100 @@ public class JDFElement extends KElement
     {
         return getChildElementVector_JDFElement(nodeName, nameSpaceURI, mAttrib, bAnd, maxSize, bResolveTarget);
     }
-
+    /**
+     * Gets children of 'this' by tag name, nameSpaceURI
+     * and attribute map, if the attribute map is not empty.<br>
+     * Searches the entire tree including hidden nodes that are children
+     * of non-matching nodes
+     *
+     * @param elementName    elementname you are searching for
+     * @param nameSpaceURI   nameSpace you are searching for
+     * @param  mAttrib       map of attributes you are looking for <br>
+     *                       Wildcards in the attribute map are supported
+     * @param bDirect        if true, return value is a vector only of all direct
+     *                       child elements. <br> Otherwise the returned vector
+     *                       contains nodes of arbitrary depth
+     * @param bAnd           if true, a child is only added, if it includes all
+     *                       attributes, specified in mAttrib
+     * @param maxSize        maximum size of the element vector.
+     *                       maxSize is ignored if bDirect is false
+     * 
+     * @return VElement: vector with all found elements
+     *
+     * @see org.cip4.jdflib.core.KElement#getChildElementVector(
+     *          java.lang.String, java.lang.String,
+     *          org.cip4.jdflib.datatypes.JDFAttributeMap,
+     *          boolean, int, boolean)
+     *
+     * @default getChildrenByTagName(s,null,null, false, true, 0)
+     */
+    public VElement getChildrenByTagName(String elementName, String nameSpaceURI, JDFAttributeMap mAttrib, boolean bDirect,
+            boolean bAnd, int maxSize)
+    {
+        
+        return getChildrenByTagName(elementName, nameSpaceURI, mAttrib, bDirect, bAnd, maxSize,
+                !isWildCard(elementName)&&!elementName.endsWith("Ref"));
+        
+    }
+    /**
+     * Gets children of 'this' by tag name, nameSpaceURI
+     * and attribute map, if the attribute map is not empty.<br>
+     * Searches the entire tree including hidden nodes that are children
+     * of non-matching nodes
+     *
+     * @param elementName    elementname you are searching for
+     * @param nameSpaceURI   nameSpace you are searching for
+     * @param  mAttrib       map of attributes you are looking for <br>
+     *                       Wildcards in the attribute map are supported
+     * @param bDirect        if true, return value is a vector only of all direct
+     *                       child elements. <br> Otherwise the returned vector
+     *                       contains nodes of arbitrary depth
+     * @param bAnd           if true, a child is only added, if it includes all
+     *                       attributes, specified in mAttrib
+     * @param maxSize        maximum size of the element vector.
+     *                       maxSize is ignored if bDirect is false
+     * @param bFollowRefs   if true follow references of refElements, else return the refElement 
+     * 
+     * @return VElement: vector with all found elements
+     *
+     * @see org.cip4.jdflib.core.KElement#getChildElementVector(
+     *          java.lang.String, java.lang.String,
+     *          org.cip4.jdflib.datatypes.JDFAttributeMap,
+     *          boolean, int, boolean)
+     *
+     * @default getChildrenByTagName(s,null,null, false, true, 0)
+     */
+    public VElement getChildrenByTagName(String elementName, String nameSpaceURI, JDFAttributeMap mAttrib, boolean bDirect,
+            boolean bAnd, int maxSize, boolean bFollowRefs)
+    {
+        VElement v=super.getChildrenByTagName(elementName, nameSpaceURI, mAttrib, bDirect, bAnd, maxSize);
+ 
+        if(bFollowRefs==false)
+            return v; // do not folow refs if explicit refs are requested
+        
+        final int size = v==null ? 0 : v.size();        
+        for(int i=0;i<size;i++)
+        {
+            if(v.elementAt(i) instanceof JDFRefElement)
+                v.set(i, ((JDFRefElement)v.elementAt(i)).getTarget());
+        }
+        return v;
+    }
+    
+    /**
+   * @see org.cip4.jdflib.core.KElement#getChildElementVector(
+     *          java.lang.String, java.lang.String,
+     *          org.cip4.jdflib.datatypes.JDFAttributeMap,
+     *          boolean, int, boolean)
+     * 
+     * @param nodeName
+     * @param nameSpaceURI
+     * @param mAttrib
+     * @param bAnd
+     * @param maxSize
+     * @param bResolveTarget - additional control how refelements are followed
+     * @return
+     */
     public VElement getChildElementVector_JDFElement( String nodeName, String nameSpaceURI, JDFAttributeMap mAttrib,
             boolean bAnd, int maxSize, boolean bResolveTarget)
     {
