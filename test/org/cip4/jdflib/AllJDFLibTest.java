@@ -178,6 +178,7 @@ import org.cip4.jdflib.span.JDFEnumerationSpanTest;
 import org.cip4.jdflib.util.BiHashMapTest;
 import org.cip4.jdflib.util.ByteArrayIOStreamTest;
 import org.cip4.jdflib.util.ContainerUtilTest;
+import org.cip4.jdflib.util.EnumUtilTest;
 import org.cip4.jdflib.util.FileUtilTest;
 import org.cip4.jdflib.util.HashUtilTest;
 import org.cip4.jdflib.util.JDFDateTest;
@@ -286,7 +287,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JMFResourceTest.class);
         suite.addTestSuite(JMFResourceInfoTest.class);
         suite.addTestSuite(JMFStatusTest.class);
-         suite.addTestSuite(QueueTest.class);
+        suite.addTestSuite(QueueTest.class);
 
         // Node
         suite.addTestSuite(JDFNodeProductTest.class);
@@ -331,6 +332,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(BiHashMapTest.class);
         suite.addTestSuite(ByteArrayIOStreamTest.class);
         suite.addTestSuite(ContainerUtilTest.class);
+        suite.addTestSuite(EnumUtilTest.class);
         suite.addTestSuite(FileUtilTest.class);
         suite.addTestSuite(HashUtilTest.class);
         suite.addTestSuite(JDFDateTest.class);

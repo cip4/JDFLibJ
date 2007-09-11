@@ -370,7 +370,16 @@ public class StringUtilTest extends JDFTestCaseBase
 
     public void testParseDouble()
     {
-        String s="123.45e3";
+        String s="INF";
+        assertEquals(StringUtil.parseDouble(s,0),Double.MAX_VALUE,0.0);
+        assertTrue(StringUtil.isNumber(s));
+        s="-INF";
+        assertEquals(StringUtil.parseDouble(s,0),-Double.MAX_VALUE,0.0);
+        assertTrue(StringUtil.isNumber(s));
+         s="123.45e3";
+        assertEquals(StringUtil.parseDouble(s,0),123450.,0.);
+        assertTrue(StringUtil.isNumber(s));
+        s="123.45E3";
         assertEquals(StringUtil.parseDouble(s,0),123450.,0.);
         assertTrue(StringUtil.isNumber(s));
         s="123.45";

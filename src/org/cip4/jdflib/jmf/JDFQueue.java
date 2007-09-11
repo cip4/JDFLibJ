@@ -175,7 +175,7 @@ public class JDFQueue extends JDFAutoQueue
      * Get a vector of queueentry elements with a given set of attributes and part maps
      * @return VElement: the vector of queue entries
      */
-    public VElement getQueueEntryVector(JDFAttributeMap attMap, VJDFAttributeMap parts)
+    public synchronized VElement getQueueEntryVector(JDFAttributeMap attMap, VJDFAttributeMap parts)
     {
         VElement v=getChildrenByTagName(ElementName.QUEUEENTRY,null,attMap, false, true,0);
         if(parts!=null)
@@ -308,7 +308,7 @@ public class JDFQueue extends JDFAutoQueue
      * 
      * @return the executable queueEntry, null if none is available
      */
-    public JDFQueueEntry getNextExecutableQueueEntry()
+    public synchronized JDFQueueEntry getNextExecutableQueueEntry()
     {
         if(!canExecute())
             return null;

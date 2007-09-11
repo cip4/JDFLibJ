@@ -6142,9 +6142,7 @@ public class KElement extends ElementNSImpl
         if(ownerDocument==null) {
 			return null;
 		}
-
-        final XMLDocUserData userData = (XMLDocUserData) ownerDocument.getUserData();
-        return userData;
+        return (XMLDocUserData) ownerDocument.getUserData();
     }
 
     private void clearTargets ()

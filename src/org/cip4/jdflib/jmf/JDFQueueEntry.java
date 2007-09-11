@@ -202,38 +202,42 @@ public class JDFQueueEntry extends JDFAutoQueueEntry
         super.setQueueEntryStatus(value);
         if(isAutomated()&& value!=null && !value.equals(oldVal))
         {
-            if(EnumQueueEntryStatus.Running.equals(value)) // running is alway front of queue
+            final JDFQueue queue = (JDFQueue)getParentNode_KElement();
+            synchronized (queue)
             {
-                JDFQueueEntry qe=((JDFQueue)getParentNode_KElement()).getQueueEntry(0);
-                while(qe!=null)
+                if(EnumQueueEntryStatus.Running.equals(value)) // running is alway front of queue
                 {
-                    if(qe==this)
-                        break;
-                    if(EnumQueueEntryStatus.Running.equals(qe.getQueueEntryStatus()))
-                        qe = qe.getNextQueueEntry();
-                    else
-                        break;
+                    JDFQueueEntry qe=queue.getQueueEntry(0);
+                    while(qe!=null)
+                    {
+                        if(qe==this)
+                            break;
+                        if(EnumQueueEntryStatus.Running.equals(qe.getQueueEntryStatus()))
+                            qe = qe.getNextQueueEntry();
+                        else
+                            break;
+                    }
+                    moveMe(qe);
                 }
-                moveMe(qe);
-            }
-            else if(EnumQueueEntryStatus.Completed.equals(value) || EnumQueueEntryStatus.Aborted.equals(value)) 
-            {
-                JDFQueueEntry qe=((JDFQueue)getParentNode_KElement()).getQueueEntry(-1);
-                while(qe!=null)
+                else if(EnumQueueEntryStatus.Completed.equals(value) || EnumQueueEntryStatus.Aborted.equals(value)) 
                 {
-                    final EnumQueueEntryStatus queueEntryStatus = qe.getQueueEntryStatus();
-                    if(qe==this)
-                        break;
-                    if(EnumQueueEntryStatus.Completed.equals(queueEntryStatus) || EnumQueueEntryStatus.Aborted.equals(queueEntryStatus))
-                        qe=qe.getPreviousQueueEntry();
-                    else
-                        break;
+                    JDFQueueEntry qe=queue.getQueueEntry(-1);
+                    while(qe!=null)
+                    {
+                        final EnumQueueEntryStatus queueEntryStatus = qe.getQueueEntryStatus();
+                        if(qe==this)
+                            break;
+                        if(EnumQueueEntryStatus.Completed.equals(queueEntryStatus) || EnumQueueEntryStatus.Aborted.equals(queueEntryStatus))
+                            qe=qe.getPreviousQueueEntry();
+                        else
+                            break;
+                    }
+                    qe = qe==null ? qe=queue.getQueueEntry(0): qe.getNextQueueEntry();
+                    moveMe(qe);
+
                 }
-                qe = qe==null ? qe=((JDFQueue)getParentNode_KElement()).getQueueEntry(0): qe.getNextQueueEntry();
-                moveMe(qe);
-                
             }
-                
+
         }
     }
 

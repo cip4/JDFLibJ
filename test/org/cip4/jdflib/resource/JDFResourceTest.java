@@ -1215,6 +1215,34 @@ public class JDFResourceTest extends JDFTestCaseBase
         vL=xm.getLeaves(true);
         assertEquals("size false",vL.size(),15);
     }
+    ////////////////////////////////////////////////////////////////////////////
+
+    public void testGetMinStatusFromLeaves()
+    {
+        JDFDoc doc=creatXMDoc();
+        JDFNode n=doc.getJDFRoot();
+        JDFExposedMedia xm=(JDFExposedMedia)n.getMatchingResource("ExposedMedia",JDFNode.EnumProcessUsage.AnyInput,null,0);
+
+        xm.setResStatus(EnumResStatus.Incomplete, true);
+        assertEquals(xm.getStatusFromLeaves(false), EnumResStatus.Incomplete);
+        assertEquals(xm.getStatusFromLeaves(true), EnumResStatus.Incomplete);
+        
+        xm.setResStatus(EnumResStatus.Available, true);
+        assertEquals(xm.getStatusFromLeaves(false), EnumResStatus.Available);
+        assertEquals(xm.getStatusFromLeaves(true), EnumResStatus.Available);
+        
+        xm.setResStatus(EnumResStatus.Incomplete, true);
+
+        VElement vL=xm.getLeaves(false);
+        for(int i=0;i<vL.size();i++)
+        {
+            JDFResource r=(JDFResource)vL.elementAt(i);
+            r.setResStatus(EnumResStatus.InUse, false);
+        }
+        assertEquals(xm.getStatusFromLeaves(false), EnumResStatus.InUse);
+        assertEquals(xm.getStatusFromLeaves(true), EnumResStatus.Incomplete);
+
+    }
 
     ////////////////////////////////////////////////////////
     public static JDFDoc creatRLDoc()
