@@ -156,6 +156,7 @@ public class StringUtilTest extends JDFTestCaseBase
         assertEquals(StringUtil.sprintf("%02i%7sdef",o), "05 foobardef");
     }
 
+
     public void testSetHexBinaryBytes()
     {
         String strTestString = "ABCDEFGHIJKLMNOPQESTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ÖÄÜöäü€";
@@ -318,7 +319,7 @@ public class StringUtilTest extends JDFTestCaseBase
         assertEquals(StringUtil.newExtension(".b",".c"), ".c");
     }
 
- 
+
 
 
     public void testReplaceString()
@@ -515,7 +516,7 @@ public class StringUtilTest extends JDFTestCaseBase
         final double d=1.3141516171819;
         double d2=0.00000000000001;
         double d3=-0.000000000000011;
-        
+
         while (d2<9999999999.9999)
         {
             d2*=d;

@@ -37,7 +37,7 @@ public class ScanfFormat
     String cmatch;
     String prefix;
     String suffix;
-    int type;
+    public int type;
     int width;
 
     //~ Constructors ///////////////////////////////////////////////////////////
