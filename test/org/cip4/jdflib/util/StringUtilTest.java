@@ -541,6 +541,23 @@ public class StringUtilTest extends JDFTestCaseBase
     }
     ///////////////////////////////////////////////////////////////////////////
 
+    public  void testIsNMTOKEN()
+    {
+        assertTrue(StringUtil.isNMTOKEN("abc"));  
+        assertFalse(StringUtil.isNMTOKEN(" abc"));  
+        assertFalse(StringUtil.isNMTOKEN("a bc"));  
+        assertFalse(StringUtil.isNMTOKEN("a\nbc"));  
+        assertFalse(StringUtil.isNMTOKEN("\tabc"));  
+        assertFalse(StringUtil.isNMTOKEN("abc "));  
+    }
+    ///////////////////////////////////////////////////////////////////////////
+    public  void testIsID()
+    {
+        assertTrue(StringUtil.isID("abc"));  
+        assertFalse(StringUtil.isID("1abc"));  
+    }
+    ///////////////////////////////////////////////////////////////////////////
+
     public  void testisWindowsLocalPath()
     {
         assertTrue(UrlUtil.isWindowsLocalPath("c:\\foo"));

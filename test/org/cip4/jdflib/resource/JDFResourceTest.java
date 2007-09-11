@@ -1164,6 +1164,15 @@ public class JDFResourceTest extends JDFTestCaseBase
         assertEquals(xmLeaf.buildXPath(null,2), "/JDF/ResourcePool[1]/ExposedMedia[1]/ExposedMedia[@SignatureName=\"Sig1\"]/ExposedMedia[@SheetName=\"S1\"]/ExposedMedia[@Side=\"Back\"]");
     }
     ////////////////////////////////////////////////////////////////////////////
+    public void testBinderySignatureName()
+    {
+        JDFDoc doc=new JDFDoc("JDF");
+        JDFNode n=doc.getJDFRoot();
+        JDFBinderySignature bs=(JDFBinderySignature)n.addResource(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+        JDFBinderySignature bsp=(JDFBinderySignature)bs.addPartition(EnumPartIDKey.BinderySignatureName, "bad name");
+        assertFalse("Bad BS partidkey value - should be nmtoken",bsp.isValid(EnumValidationLevel.Incomplete));
+    }
+    ////////////////////////////////////////////////////////////////////////////
     public void testInvalidPartIDKeysLeaves()
     {
         JDFDoc doc=creatXMDoc();

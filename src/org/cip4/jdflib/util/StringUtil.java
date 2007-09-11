@@ -111,6 +111,8 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.JDFXYPairRange;
 import org.cip4.jdflib.datatypes.JDFXYPairRangeList;
 
+import com.sun.imageio.metadata.XmlNames;
+
 
 public class StringUtil
 {
@@ -703,7 +705,7 @@ public class StringUtil
             return false;
         if(strWork.length()>=64)
             return false;
-        return strWork.indexOf(" \t") == -1;
+        return XmlNames.isNmtoken(strWork);
     }
 
     /**
