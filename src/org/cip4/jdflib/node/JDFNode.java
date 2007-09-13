@@ -179,7 +179,7 @@ import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.JDFSpawn;
-import org.cip4.jdflib.util.StatusUtil;
+import org.cip4.jdflib.util.StatusCounter;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.Node;
 
@@ -2233,9 +2233,9 @@ public class JDFNode extends JDFElement
      */
     public JDFDoc setPhase(EnumNodeStatus nodeStatus, String nodeStatusDetails, EnumDeviceStatus deviceStatus, String deviceStatusDetails, VJDFAttributeMap vPartMap)
     {
-        StatusUtil su=new StatusUtil(this,vPartMap,null);
-        su.setPhase(nodeStatus, nodeStatusDetails, deviceStatus, deviceStatusDetails,null);
-        return su.getDocJMFPhaseTime();
+        StatusCounter sc=new StatusCounter(this,vPartMap,null);
+        sc.setPhase(nodeStatus, nodeStatusDetails, deviceStatus, deviceStatusDetails);
+        return sc.getDocJMFPhaseTime();
     }
 
 

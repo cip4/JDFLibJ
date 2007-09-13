@@ -80,8 +80,6 @@
 package org.cip4.jdflib.util;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.util.Iterator;
@@ -94,8 +92,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.enums.EnumUtils;
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.cformat.PrintfFormat;
-import org.cip4.jdflib.cformat.ScanfMatchException;
-import org.cip4.jdflib.cformat.ScanfReader;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
