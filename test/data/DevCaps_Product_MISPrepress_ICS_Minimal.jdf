@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- created by Elena Skobchenko (CIP4) -->
+
+<JMF xmlns="http://www.CIP4.org/JDFSchema_1_1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+ Version="1.2" TimeStamp="2004-10-17T09:30:47-05:00" SenderID="Controller1">
+<Response ID="xyz" refID="DeviceQuery" Type="KnownDevices">
+<DeviceList>
+<DeviceInfo DeviceStatus="Idle">
+<Device ID="IDXYZ" Class="Implementation" Status="Available"
+DeviceID="Device1">
+<DeviceCap Types="Product" CombinedMethod="None" GenericAttributes="ID ProductID Class
+SettingsPolicy BestEffortExceptions
+OperatorInterventionExceptions MustHonorExceptions
+PartIDKeys DocIndex Status Locked DescriptiveName CustomerID Brand">
+
+	<DevCaps Name="CustomerInfo">
+	   <DevCap> 
+		<DevCap Name="Contact">
+			<NameState ListType="List" Name="ContactTypes"/>
+			<DevCap Name="Company">
+				<StringState Name="OrganizationName"/>
+			</DevCap>
+			<DevCap Name="Person">
+				 <StringState Name="FamilyName"/>
+			</DevCap>
+		</DevCap>
+	   </DevCap>
+	</DevCaps>
+	<DevCaps Name="NodeInfo">
+	   <DevCap/> 
+	</DevCaps>
+	<DevCaps Name="Comment">
+	   <DevCap> 
+		<StringState Name="Name"/>
+		<StringState AllowedLength="0~50"/>
+	   </DevCap>
+	</DevCaps>
+	<DevCaps Name="ColorPool">
+	   <DevCap> 
+		<DevCap Name="Color">
+			<StringState Name="Name"/>
+		</DevCap> 
+	   </DevCap> 
+	</DevCaps>
+	<DevCaps Name="ColorantControl" LinkUsage="Input">
+	   <DevCap> 
+		<DevCap Name="ColorantParams">
+			<DevCap Name="SeparationSpec">
+				<StringState Name="Name"/>
+			</DevCap>
+		</DevCap> 
+		<DevCap Name="ColorPool">
+	   		<DevCap Name="Color">
+				<StringState Name="Name"/>
+			</DevCap> 
+	   	</DevCap> 
+	   </DevCap> 
+	</DevCaps>
+	<DevCaps Name="Component" LinkUsage="Output">
+	   <DevCap> 
+		<EnumerationState Name="ComponentType" ListType="List" AllowedValueList="FinalProduct PartialProduct Sheet"/>
+		<NameState Name="ProductType" AllowedValueList="Body"/>
+		<BooleanState Name="IsWaste" AllowedValueList="false"/>
+	   </DevCap> 
+	</DevCaps>
+	<DevCaps Name="Media" LinkUsage="Input">
+	   <DevCap> 
+		<EnumerationState Name="MediaType" AllowedValueList="Plate"/>
+	   </DevCap> 
+	</DevCaps>
+	<DevCaps Name="MediaIntent" LinkUsage="Input">
+	   <DevCap MinOccurs="1" MaxOccurs="1">
+		<XYPairState Name="Dimensions" AllowedValueList="2835 1984" ListType="Span"/>
+		<StringState Name="StockBrand" ListType="Span">
+			<Value AllowedValue="OFFSET HOUTVRIJ WIT 1000x700 mm 150 g/m2" ValueUsage="Allowed" />
+		</StringState>
+		<NumberState Name="Weight" AllowedValueList="100~200" ListType="Span"/>
+	   </DevCap>
+	</DevCaps>
+	<DevCaps Name="Layout">
+	   <DevCap> 
+		<StringState Name="Name"/>
+	   </DevCap> 
+	</DevCaps>
+	<DevCaps Name="ExposedMedia" LinkUsage="Output">
+	   <DevCap> 
+		<EnumerationState Name="PartIDKeys" AllowedValueList="Separation"/>
+		<EnumerationState Name="PartUsage" AllowedValueList="Implicit"/>
+		<EnumerationState Name="Separation" AllowedValueList="Cyan Magenta Yellow Black"/>
+		<DevCap Name="Media"> 
+		     <EnumerationState Name="MediaType" AllowedValueList="Plate"/>
+	   	</DevCap>
+	   </DevCap> 
+	</DevCaps>
+	<DevCaps Name="Preview">
+	   <DevCap> 
+		<EnumerationState Name="PartIDKeys" AllowedValueList="Separation"/>
+		<EnumerationState Name="PreviewUsage" AllowedValueList="Separation"/>
+		<EnumerationState Name="Separation" AllowedValueList="Cyan Magenta Yellow Black"/>
+	   </DevCap> 
+	</DevCaps>
+	<DevCaps Name="RunList">
+	   <DevCap> 
+		<IntegerState Name="NPage" AllowedValueList="0~12"/>
+	   </DevCap> 
+	</DevCaps>
+</DeviceCap>
+</Device>
+</DeviceInfo>
+</DeviceList>
+</Response>
+</JMF>
+
+
+

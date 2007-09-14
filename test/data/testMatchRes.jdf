@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<JDF xmlns="http://www.CIP4.org/JDFSchema_1_1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="ID_040050" Type="Product" xsi:type="Product" Version="1.2" MaxVersion="1.2" ICSVersions="Base_L1-1.0 MIS_L1-1.0 MISPRE_L1-1.0" Status="Ready" JobID="MISPRE_PL_BarcodeMinimal" JobPartID="MISPRE_PL_BarcodeMinimal" DescriptiveName="MISPrepress PL Minimal  Gray box with barcode">
+	<!-- Description: this is the simplest job that conforms to the spec, all optional stuff left out;  contents have to be made with a barcode -->
+	<!-- all attributes that did not have a W status in MIS or Prepress ICS were removed, added more auditpools -->
+	<!-- History: 
+		03-10-2005: derived from MISPRE ICS platemaking minial sample 
+	-->
+	<CustomerInfo CustomerID="100002">
+		<Contact ContactTypes="Customer Administrator">
+			<Company OrganizationName="DIOXINUS BV"/>
+			<Person FamilyName="MESTDAGH">  </Person>
+		</Contact>
+	</CustomerInfo>
+	<Comment Name="JobDescription">Minimal prepress example with barcode</Comment>
+	<AuditPool>
+		<Created Author="Miss Prepress" TimeStamp="2005-10-03T12:00:00+01:00" AgentName="MIS" AgentVersion="v1.0"/>
+	</AuditPool>
+	<!-- added for MIS to store Employee -->
+	<NodeInfo>
+		<Employee Roles="CSR" PersonalID="Always on the phone"/>
+	</NodeInfo>
+
+	<ResourcePool>
+			<RunList Class="Parameter" ID="RNL000_D" Status="Unavailable"/>
+			<RunList Class="Parameter" ID="RNL000" Status="Available" NPage="1"/>
+	</ResourcePool>
+
+	<ResourceLinkPool>
+		<RunListtLink rRef="RNL000_D" Usage="Output"/>
+	</ResourceLinkPool>
+
+	<JDF ID="PPP000" JobPartID="PPP000" Type="ProcessGroup" xsi:type="ProcessGroup" Types="LayoutElementProduction" Category="ContentCreation" DescriptiveName="GB ContentCreation" Status="Waiting">
+			<AuditPool>
+				<Created Author="Miss Prepress" TimeStamp="2005-01-19T12:00:00+01:00" AgentName="MIS" AgentVersion="v1.0"/>
+			</AuditPool>
+			
+			<ResourcePool>
+					<BarcodeCompParams Class="Parameter" ID="BWR" Status="Available" CompensationProcess="Printing" CompensationValue="0.1"/>
+					<BarcodeCompParams Class="Parameter" ID="Dev" Status="Available" CompensationProcess="Platemaking" CompensationValue="0.2"/>
+					<LayoutElementProductionParams Class="Parameter" ID="BCParams" Status="Available">
+							<LayoutElementPart>
+								<BarcodeProductionParams>
+									<IdentificationField Encoding="Barcode" EncodingDetails="EAN_13" Value="0123456789128">
+										<ExtraValues Usage="Supplemental" Value="23"/>
+									</IdentificationField>
+									<BarcodeReproParams Magnification="1.1">
+										<BarcodeCompParamsRef rRef="BWR"/>
+										<BarcodeCompParamsRef rRef="Dev"/>
+									</BarcodeReproParams>
+								</BarcodeProductionParams>
+							</LayoutElementPart>
+					</LayoutElementProductionParams>
+			</ResourcePool>
+			
+			<ResourceLinkPool>
+			    <LayoutElementProductionParamsLink rRef="BCParams" Usage="Input"/>
+				<RunListLink rRef="RNL000" ProcessUsage="Document" Usage="Input"/>
+				<RunListLink rRef="RNL000_D" ProcessUsage="Document" Usage="Output"/>
+			</ResourceLinkPool>
+	</JDF>
+</JDF>

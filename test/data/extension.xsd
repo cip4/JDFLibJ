@@ -1,0 +1,19 @@
+<xs:schema xmlns:jdftyp="http://www.CIP4.org/JDFSchema_1_3_Types" xmlns:jdf="http://www.CIP4.org/JDFSchema_1_1" targetNamespace="http://www.extension.com" elementFormDefault="qualified" xmlns:ext="http://www.extension.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:import namespace="http://www.CIP4.org/JDFSchema_1_1" schemaLocation="./JDF.xsd"/>
+<xs:import namespace="http://www.CIP4.org/JDFSchema_1_3_Types" schemaLocation="./JDFTypes.xsd"/>
+<!-- the top level element -->
+ 
+<xs:element name="FooBar" type="ext:FooBar_"/>
+ 
+	<xs:complexType name="FooBar_" mixed="false">
+		<xs:complexContent mixed="false">
+			<xs:extension base="jdf:Comment_Type">
+      		<xs:attribute name="Fnarf" type="jdftyp:double"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+		<xs:attribute name="ExtensionAtt" type="jdftyp:double"/>
+
+</xs:schema>
