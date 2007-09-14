@@ -205,5 +205,31 @@ public class JDFNumListTest extends JDFTestCaseBase
                
     }
     //////////////////////////////////////////////////////////////
+    public void testShape() throws Exception
+    {
+        JDFShape nl=new JDFShape("1.1 2.2 3.3");
+        assertEquals(nl.doubleAt(0), 1.1,0.0);
+        assertEquals(nl.doubleAt(1), 2.2,0.0);
+        assertEquals(nl.doubleAt(2), 3.3,0.0);
+        assertEquals(nl.getX(), 1.1,0.0);
+        assertEquals(nl.getY(), 2.2,0.0);
+        assertEquals(nl.getZ(), 3.3,0.0);
+        
+        nl.setY(5);
+        assertEquals(nl.getY(), 5,0.0);
+               
+    }
+    //////////////////////////////////////////////////////////////
+    public void testShape2() throws Exception
+    {
+        JDFShape nl=new JDFShape(1,2);
+        assertEquals(nl.doubleAt(0), 1,0.0);
+        assertEquals(nl.doubleAt(1), 2,0.0);
+        assertEquals(nl.doubleAt(2), 0,0.0);
+        assertEquals(nl.getX(), 1,0.0);
+        assertEquals(nl.getY(), 2,0.0);
+        assertEquals(nl.getZ(), 0,0.0);
+     }
+    //////////////////////////////////////////////////////////////
 
 }

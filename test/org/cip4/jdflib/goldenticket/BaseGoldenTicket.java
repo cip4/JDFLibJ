@@ -68,62 +68,90 @@
  *  
  * 
  */
-/**
- *
- * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- *
- * KString.java
- *
- * Last changes
- *
- */
-package org.cip4.jdflib.util;
+package org.cip4.jdflib.goldenticket;
 
-import org.apache.commons.lang.enums.ValuedEnum;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.UrlUtil;
 
 /**
- * class with utilities for containers, e.g. Vectors, sets etc.
- * also simple object utils
  * @author prosirai
- *
+ * class that generates golden tickets based on ICS levels etc
  */
-public class EnumUtil
+public class BaseGoldenTicket
 {
+    protected JDFNode theNode=null;
+    protected EnumVersion theVersion=null;
+    protected int baseICSLevel;
     /**
-     * get the lower of two enum values, null is lowest
-     * @param e1
-     * @param e2
-     * @return the lower of the two values
+     * create a BaseGoldenTicket
+     * @param node the node to update, if null, a default node is created
+     * @param icsLevel the level to init to (1,2 or 3)
+     * @param jdfVersion the version to generate a golden ticket for
      */
-    public static ValuedEnum min(ValuedEnum e1, ValuedEnum e2)
+    public BaseGoldenTicket(int icsLevel, EnumVersion jdfVersion)
     {
-        if(e1==null || e2==null)
-            return null;
-        return e1.getValue()<e2.getValue() ? e1 : e2;
+        baseICSLevel=icsLevel;
+        theVersion=jdfVersion;
+    }
+    public void assign(JDFNode node)
+    {
+        theNode=node==null ? new JDFDoc("JDF").getJDFRoot() : node;
+        setVersion();
+        init();
+    }
+    protected void setVersion()
+    {
+        if(theVersion==null)
+            theVersion= theNode.getVersion(true);
+        if(theVersion==null)
+            theVersion=JDFElement.getDefaultJDFVersion();
     }
     /**
-     * get the higher of two enum values, null is lowest
-     * @param e1
-     * @param e2
-     * @return the higher of the two values
+     * initializes this node to a given ICS version
+     * @param icsLevel the level to init to (1,2 or 3)
      */
-    public static ValuedEnum max(ValuedEnum e1, ValuedEnum e2)
+    public void init()
     {
-        if(e1==null) 
-            return e2;
-        if(e2==null) 
-            return e1;
-        return e1.getValue()>e2.getValue() ? e1 : e2;
+        String icsTag="Base_L"+baseICSLevel+"-"+theVersion.getName();
+        theNode.appendAttribute(AttributeName.ICSVERSIONS, icsTag, null, " ", true);
+        theNode.setVersion(theVersion);
+        theNode.setMaxVersion(theVersion);
+        theNode.setStatus(EnumNodeStatus.Waiting);
+        if(!theNode.hasAttribute(AttributeName.DESCRIPTIVENAME))
+            theNode.setDescriptiveName("Base Golden Ticket Example Job - version: "+JDFAudit.software());
+        
+        if(!theNode.hasAttribute(AttributeName.COMMENTURL))
+            theNode.setCommentURL(UrlUtil.StringToURL("//MyHost/data/Comments.html").toExternalForm());
     }
     /**
-     * null save convenience name getter
-     * @param en the enum to get the name
-     * @return
+     * @return the theNode
      */
-    public static String getName(ValuedEnum en)
+    public JDFNode getNode()
     {
-        return en==null ? "null" : en.getName();
+        return theNode;
     }
-    
- 
+    /**
+     * @param theNode the theNode to set
+     */
+    public void setNode(JDFNode _theNode)
+    {
+        this.theNode = _theNode;
+    }
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    public String toString()
+    {
+         String s= "["+this.getClass().getSimpleName()+" Version: "+EnumUtil.getName(theVersion)+"]";
+         if(theNode!=null)
+             s+=theNode.toString();
+         return s;
+    }
 }

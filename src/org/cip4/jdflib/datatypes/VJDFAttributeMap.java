@@ -9,6 +9,7 @@
  */
 package org.cip4.jdflib.datatypes;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -162,6 +163,22 @@ public class VJDFAttributeMap
     {
         m_vec.removeElementAt(index);
     }
+    
+    /**
+     * remove the keys specified in set and then erase any duplicates and emptys
+     * @param set
+     */
+    public void removeKeys(Collection set)
+    {
+        for(int i=size()-1;i>=0;i--)
+        {
+            elementAt(i).removeKeys(set);
+            if(elementAt(i).isEmpty())
+                removeElementAt(i);
+        }
+        unify();
+    }
+
 
     /**
      * Sets the element at the given position

@@ -2148,9 +2148,9 @@ public class JDFNode extends JDFElement
             VElement ve=ni.getPartitionVector(mattr, EnumPartUsage.Explicit);
             if(ve.isEmpty()) // no preexisting matching partition - attempt to create it
             {
-               ve.add(ni.getCreatePartition(mattr, null)); 
+                ve.add(ni.getCreatePartition(mattr, null)); 
             }
-            
+
             for(int i=0;i<ve.size();i++)
             {
                 ni=(JDFNodeInfo) ve.elementAt(i);
@@ -2366,6 +2366,50 @@ public class JDFNode extends JDFElement
     public JDFAudit addModified(String by)
     {
         return getCreateAuditPool().addModified(by, null);
+    }
+
+    /**
+     * Get the linked resource with name=strName
+     * @param strName the resource name
+     * @param usage the ResourceLink Usage, if null either in or out are accepted
+     * @param int i the nuber of matches to skip, if negative, count backwards
+     * @return the matching resource, null if none matches
+     */
+    public JDFResource getResource(String strName, EnumUsage usage, int i)
+    {
+        VElement velem=null;
+
+        final JDFResourceLinkPool rlp = getResourceLinkPool();
+
+        if (rlp != null)
+        {
+            final JDFAttributeMap mALink = usage==null ? null : new JDFAttributeMap(AttributeName.USAGE, usage);   // map of requesetd link attributes         
+
+            velem = rlp.getLinkedResources(strName, mALink, null, false);
+        }
+        int siz=velem==null ? 0 : velem.size();
+        if(i<0)
+            i+=siz;
+        if(siz==0 || i<0 || i>=siz)
+            return null;
+        return (JDFResource) velem.elementAt(i);
+    }   
+
+    /**
+     * Get the linked resource with name=strName; create it if it does not exist
+     * @param strName the resource name
+     * @param usage the ResourceLink Usage, if null either in or out are accepted
+     * @param int i the nuber of matches to skip, if negative, count backwards
+     * @return the matching resource, 
+     * 
+     * @throws JDFException if resource does not exist and EnumUsage is null
+     */
+    public JDFResource getCreateResource(String strName, EnumUsage usage, int i)
+    {
+        JDFResource r=getResource(strName, usage, i);
+        if(r==null)
+            r=addResource(strName, usage);
+        return r;
     }
 
     /**
@@ -3673,12 +3717,12 @@ public class JDFNode extends JDFElement
 
     /**
      * getCombinedTypes - get the list of combined types if this is a combined node
-     *
+     * @deprecated use getTypes() or getEnumTypes()
      * @return Vector
      */
     public Vector getCombinedTypes()
     {
-        if (!getType().equals(JDFConstants.COMBINED))
+        if(!isTypesNode())
         {
             return new Vector();
         }
@@ -4267,6 +4311,15 @@ public class JDFNode extends JDFElement
     {
         final EnumType type2 = getEnumType();
         return EnumType.ProcessGroup.equals(type2) && !hasAttribute(AttributeName.TYPES)|| EnumType.Product.equals(type2);
+    }
+    /**
+     * Is this a group node type that allows @Types (ProcessGroup or Combined)?
+     * @return boolean - true if this is a combined node
+     */
+    public boolean isTypesNode()
+    {
+        final EnumType type2 = getEnumType();
+        return EnumType.ProcessGroup.equals(type2) && !hasChildElement(ElementName.JDF, null) || EnumType.Combined.equals(type2);
     }
 
     /**
@@ -5537,7 +5590,7 @@ public class JDFNode extends JDFElement
         JDFResourceLink rl=(JDFResourceLink) rlp.getChildWithMatchingAttribute("NodeInfoLink", AttributeName.COMBINEDPROCESSINDEX, null,String.valueOf(combinedProcessIndex), 0, true, AttributeInfo.EnumAttributeType.IntegerList);
         if(rl==null)
             return null;
- 
+
         return (JDFNodeInfo) rl.getTarget();
     }
 
@@ -5994,11 +6047,8 @@ public class JDFNode extends JDFElement
      */
     public VString getTypes()
     {
-        final EnumType type = EnumType.getEnum(getType());
-        if (type==null || !type.equals(EnumType.Combined) && !type.equals(EnumType.ProcessGroup))
-        {
+        if(!isTypesNode())
             return null;
-        }
         final String types = getAttribute(AttributeName.TYPES, null, null);
         return types==null ? null : new VString(types,null);
     }
@@ -6014,23 +6064,58 @@ public class JDFNode extends JDFElement
         VString types=getTypes();
         if (types != null) {
             Iterator typesIterator = types.iterator();
-            while (typesIterator.hasNext()) {
+            while (typesIterator.hasNext()) 
+            {
                 EnumType typ=EnumType.getEnum((String) typesIterator.next());
-                if (typ==null) {
+                if (typ==null) 
+                {
                     return null;
                 }
-
-                if (vs == null) {
+                if (vs == null) 
+                {
                     vs=new Vector();
                 }
-
                 vs.add(typ);
             }
         }
-
         return vs;
     }
+    /**
+     * get the first index of a process in types after start
+     * @param typ the Type to search for
+     * @param start the position to start searching at - generally 0
+     * @return int the position of the first occurence after start,-1 if none is found
+     */
+    public int getCombinedProcessIndex(EnumType typ, int start)
+    {
+       if(typ==null)
+           return -1;
+       return getCombinedProcessIndex(typ.getName(), start);
+    }
+    /**
+     * get the first index of a process in types after start
+     * @param typ the Type to search for
+     * @param start the position to start searching at - generally 0
+     * @return int the position of the first occurence after start,-1 if none is found
+     */
+    public int getCombinedProcessIndex(String typ, int start)
+    {
+        VString types=getTypes();
+        if (types == null) 
+            return -1;
+        return types.indexOf(typ, start);
+    }
 
+    /**
+     * add typ to the types list if this is a combined node or gray box
+     * @param typ
+     */
+    public void addTypes(EnumType typ)
+    {
+        if(!isTypesNode() || typ==null)
+            return;
+        appendAttribute(AttributeName.TYPES, typ.getName() , null, " ", false);
+    }
     /**
      * Gets the vector of the string Type/Types attribute values of the given JDFNode by 
      * recursively traversing the tree<br>
@@ -7133,7 +7218,7 @@ public class JDFNode extends JDFElement
         return getAttribute(AttributeName.TEMPLATEVERSION);
     }
 
-      /**
+    /**
      * get the NodeInfo/@workstepid for a given partition
      * if no workstepID exists, returns jobPartID
      * 
@@ -7941,7 +8026,7 @@ public class JDFNode extends JDFElement
                     ni.setAttribute(AttributeName.NODESTATUS,getAttribute(AttributeName.STATUS));
                     this.setStatus(EnumNodeStatus.Part);
                 }
-                
+
                 for(int i=0;i<vSpawnParts.size();i++)
                 {
                     //in case we spawn a subset, try to get the superset list first 

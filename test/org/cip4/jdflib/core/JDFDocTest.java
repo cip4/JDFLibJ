@@ -131,7 +131,7 @@ public class JDFDocTest extends JDFTestCaseBase
         JDFDoc dm=new JDFDoc("JMF");
         assertEquals(dm.getContentType(),"application/vnd.cip4-jmf+xml");
         JDFDoc db=new JDFDoc("JMF_");
-        assertNull( db.getContentType());
+        assertEquals( db.getContentType(),"text/xml");
      }   
     
     public void testSchemaDefault() throws Exception

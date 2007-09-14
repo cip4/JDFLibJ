@@ -148,8 +148,8 @@ public class JDFXYPair extends JDFNumList
         super(MAX_XY_DIMENSION);
         if (nl.size()!=MAX_XY_DIMENSION)
             throw new DataFormatException("JDFXYPair: can't construct JDFXYPair from this JDFNuberList value");
-        getnumList().set(0, nl.getnumList().get(0));
-        getnumList().set(1, nl.getnumList().get(1));
+        m_numList.set(0, nl.m_numList.get(0));
+        m_numList.set(1, nl.m_numList.get(1));
     }
 
     /**
@@ -161,8 +161,8 @@ public class JDFXYPair extends JDFNumList
     public JDFXYPair(double x, double y)
     {
         super(MAX_XY_DIMENSION);
-        getnumList().set(0, new Double(x));
-        getnumList().set(1, new Double(y));
+        m_numList.set(0, new Double(x));
+        m_numList.set(1, new Double(y));
     }
 
     //**************************************** Methods *********************************************
@@ -173,14 +173,14 @@ public class JDFXYPair extends JDFNumList
      */
     public void isValid() throws DataFormatException
     {
-        if (getnumList().size() != MAX_XY_DIMENSION)
+        if (m_numList.size() != MAX_XY_DIMENSION)
         {
             throw new DataFormatException("Data format exception!");
         }
 
-        for (int i = 0; i < getnumList().size(); i++)
+        for (int i = 0; i < m_numList.size(); i++)
         {
-            if (!(getnumList().elementAt(i) instanceof Double))
+            if (!(m_numList.elementAt(i) instanceof Double))
             {
                 throw new DataFormatException("Data format exception!");
             }
@@ -194,7 +194,7 @@ public class JDFXYPair extends JDFNumList
      */
     public double getX()
     {
-        return ((Double)getnumList().get(0)).doubleValue();
+        return ((Double)m_numList.get(0)).doubleValue();
     }
 
     /**
@@ -204,7 +204,7 @@ public class JDFXYPair extends JDFNumList
      */
     public void setX(double x)
     {
-        getnumList().set(0, new Double(x));
+        m_numList.set(0, new Double(x));
     }
 
     /**
@@ -214,7 +214,7 @@ public class JDFXYPair extends JDFNumList
      */
     public double getY()
     {
-        return ((Double)getnumList().get(1)).doubleValue();
+        return ((Double)m_numList.get(1)).doubleValue();
     }
 
     /**
@@ -224,7 +224,7 @@ public class JDFXYPair extends JDFNumList
      */
     public void setY(double y)
     {
-        getnumList().set(1, new Double(y));
+        m_numList.set(1, new Double(y));
     }
     
    

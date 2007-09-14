@@ -74,10 +74,16 @@ import junit.framework.TestCase;
 
 import org.cip4.jdflib.auto.JDFAutoQueue.EnumQueueStatus;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
+import org.cip4.jdflib.auto.JDFAutoQueueFilter.EnumQueueEntryDetails;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.StatusCounter;
+
+import com.sun.org.apache.bcel.internal.classfile.Attribute;
 
 /**
  * @author MuchaD
@@ -87,7 +93,27 @@ import org.cip4.jdflib.util.JDFDate;
 public class QueueTest extends TestCase
 {
     private JDFQueue q;
+    protected static int iThread;
+    protected class QueueTestThread implements Runnable
+    {
+        public void run()
+        {
+            int t=1000*iThread++;
+            for(int i=0;i<100;i++)
+            {
+                final JDFQueueEntry qe = q.appendQueueEntry();
+                qe.setQueueEntryID("q"+t+"_"+i);
+                qe.setPriority((i*7)%100);
+                qe.setQueueEntryStatus((t%2000==0) ? EnumQueueEntryStatus.Waiting :  EnumQueueEntryStatus.Held);
+            }
+            iThread--;
+        }
+    }
 
+    public String toString()
+    {
+        return q==null ? "null" : q.toString();
+    }
     public void testGetQueueEntry()
     {
         assertEquals("qe2",q.getQueueEntry(1).getQueueEntryID(),"qe2");
@@ -114,6 +140,47 @@ public class QueueTest extends TestCase
     {
         JDFQueueEntry _qe = (JDFQueueEntry) new JDFDoc(ElementName.QUEUEENTRY).getRoot();
         _qe.getEndTime();
+    }
+    
+    public void testThreads()
+    {
+        q.setAutomated(true);
+        q.removeChildren(ElementName.QUEUEENTRY, null,null);
+        for(int i=0;i<10;i++)
+        {
+            final QueueTestThread queueTestThread = new QueueTestThread();
+            new Thread(queueTestThread).start();
+        }
+        // now also zapp some...
+        for(int j=0;j<100;j++)
+        {
+            JDFQueueEntry qex=q.getNextExecutableQueueEntry();
+            if(qex!=null)
+            {
+                qex.setQueueEntryStatus(EnumQueueEntryStatus.Running);
+                qex.setQueueEntryStatus(EnumQueueEntryStatus.Completed);
+            }
+        }
+        while(iThread>0)
+            StatusCounter.sleep(100); // wait for threads to be over
+        assertEquals(q.getQueueSize(), 1000);
+        int prio=999999;
+        VElement v=q.getQueueEntryVector();
+        for(int i=0;i<v.size();i++)
+        {
+            JDFQueueEntry qe=(JDFQueueEntry)v.elementAt(i);
+            System.out.println(qe.getPriority()+" "+qe.getQueueEntryID()+" "+qe.getQueueEntryStatus());
+            assertTrue(""+i,prio>=qe.getSortPriority());
+            prio=qe.getSortPriority();
+        }
+        v=q.getQueueEntryVector(new JDFAttributeMap(AttributeName.STATUS,"Completed"),null);
+        assertEquals(v.size(), 100);
+        v=q.getQueueEntryVector(new JDFAttributeMap(AttributeName.STATUS,"Running"),null);
+        assertNull(v);
+        v=q.getQueueEntryVector(new JDFAttributeMap(AttributeName.STATUS,"Held"),null);
+        assertEquals(v.size(), 500);
+        v=q.getQueueEntryVector(new JDFAttributeMap(AttributeName.STATUS,"Waiting"),null);
+        assertEquals(v.size(), 400);
     }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -161,7 +228,16 @@ public class QueueTest extends TestCase
         
         qe.setPriority(0);
         assertEquals(q.numEntries(null), l);
-        assertEquals(q.getQueueEntryPos("qe2"), 2);
+        assertEquals(q.getQueueEntryPos("qe2"), 1);
+        q.removeChildren(ElementName.QUEUEENTRY, null,null);
+        for(int i=0;i<1000;i++)
+        {
+            qe = q.appendQueueEntry();
+            qe.setQueueEntryID("q"+i);
+            qe.setPriority((i*7)%100);
+            qe.setQueueEntryStatus(EnumQueueEntryStatus.Waiting);
+        }
+
     }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -188,7 +264,7 @@ public class QueueTest extends TestCase
         int l=q.numEntries(null);
         qe.setQueueEntryStatus(EnumQueueEntryStatus.Completed);
         assertEquals(q.numEntries(null), l);
-        assertEquals(q.getQueueEntryPos("qe2"), 4);
+        assertEquals(q.getQueueEntryPos("qe2"), 2);
         qe.setQueueEntryStatus(EnumQueueEntryStatus.Running);
         assertEquals(q.numEntries(null), l);
         assertEquals(q.getQueueEntryPos("qe2"), 0);
@@ -205,7 +281,7 @@ public class QueueTest extends TestCase
         qe=q.getQueueEntry("qe1");
         qe.setQueueEntryStatus(EnumQueueEntryStatus.Aborted);
         assertEquals(q.numEntries(null), l);
-        assertEquals(q.getQueueEntryPos("qe1"), 2);
+        assertEquals(q.getQueueEntryPos("qe1"), 3);
 
         
      }

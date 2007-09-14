@@ -90,14 +90,14 @@ public class JDFTransferFunction extends JDFNumList
      */
     public void isValid() throws DataFormatException
     {
-        if ((getnumList().size() % 2) != 0)
+        if ((m_numList.size() % 2) != 0)
         {
             throw new DataFormatException("Data format exception!");
         }
 
-        for (int i = 0; i < getnumList().size(); i++)
+        for (int i = 0; i < m_numList.size(); i++)
         {
-            if (!(getnumList().elementAt(i) instanceof Double))
+            if (!(m_numList.elementAt(i) instanceof Double))
             {
                 throw new DataFormatException("Data format exception!");
             }
@@ -111,8 +111,8 @@ public class JDFTransferFunction extends JDFNumList
      */
     public void add(JDFXYPair xy)
     {
-        getnumList().add(new Double(xy.getX()));
-        getnumList().add(new Double(xy.getY()));
+        m_numList.add(new Double(xy.getX()));
+        m_numList.add(new Double(xy.getY()));
     }
 
     /**
@@ -123,8 +123,8 @@ public class JDFTransferFunction extends JDFNumList
      */
     public void add(Double x, Double y)
     {
-        getnumList().add(x);
-        getnumList().add(y);
+        m_numList.add(x);
+        m_numList.add(y);
     }
 
     /**
@@ -135,8 +135,8 @@ public class JDFTransferFunction extends JDFNumList
      */
     public void add(double x, double y)
     {
-        getnumList().add(new Double(x));
-        getnumList().add(new Double(y));
+        m_numList.add(new Double(x));
+        m_numList.add(new Double(y));
     }
 
     /**
@@ -161,7 +161,7 @@ public class JDFTransferFunction extends JDFNumList
 
             try
             {
-                getnumList().addElement(new Double(t));
+                m_numList.addElement(new Double(t));
             }
             catch(NumberFormatException e)
             {
@@ -177,6 +177,6 @@ public class JDFTransferFunction extends JDFNumList
      */
     public void add(JDFTransferFunction tf)
     {
-        getnumList().addAll(tf.copyNumList());
+        m_numList.addAll(tf.copyNumList());
     }
 }

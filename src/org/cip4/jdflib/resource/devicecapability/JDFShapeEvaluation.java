@@ -439,20 +439,20 @@ public class JDFShapeEvaluation extends JDFEvaluation
             JDFShapeRange range = (JDFShapeRange) rangeList.at(i);
         
             JDFShape left=range.getLeft();
-            double leftX=left.getHeight();
-            double leftY=left.getWidth();
-            double leftZ=left.getLength();
-            left.setHeight( leftX - nt );
-            left.setWidth( leftY - nt );
-            left.setLength( leftZ - nt );
+            double leftX=left.getY();
+            double leftY=left.getX();
+            double leftZ=left.getZ();
+            left.setY(leftX - nt);
+            left.setX(leftY - nt);
+            left.setZ(leftZ - nt);
             
             JDFShape right=range.getRight();
-            double rightX=right.getHeight();
-            double rightY=right.getWidth();
-            double rightZ=right.getLength();
-            right.setHeight( rightX + pt );
-            right.setWidth( rightY + pt );
-            right.setLength( rightZ + pt );
+            double rightX=right.getY();
+            double rightY=right.getX();
+            double rightZ=right.getZ();
+            right.setY(rightX + pt);
+            right.setX(rightY + pt);
+            right.setZ(rightZ + pt);
             
             range.setLeft(left);
             range.setRight(right);
@@ -478,16 +478,16 @@ public class JDFShapeEvaluation extends JDFEvaluation
         JDFShape left = range.getLeft();
         JDFShape right = range.getRight();
 
-        double leftX = left.getHeight();
-        double rightX = right.getHeight();
+        double leftX = left.getY();
+        double rightX = right.getY();
         JDFNumberRange rangeX = new JDFNumberRange(leftX, rightX);
 
-        double leftY = left.getWidth();
-        double rightY = right.getWidth();
+        double leftY = left.getX();
+        double rightY = right.getX();
         JDFNumberRange rangeY = new JDFNumberRange(leftY, rightY);
         
-        double leftZ = left.getLength();
-        double rightZ = right.getLength();
+        double leftZ = left.getZ();
+        double rightZ = right.getZ();
         JDFNumberRange rangeZ = new JDFNumberRange(leftZ, rightZ);
       
         x=getX();

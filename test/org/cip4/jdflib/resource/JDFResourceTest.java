@@ -90,6 +90,7 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
@@ -115,6 +116,7 @@ import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
 import org.cip4.jdflib.resource.process.JDFComponent;
+import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFCutBlock;
 import org.cip4.jdflib.resource.process.JDFDigitalPrintingParams;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
@@ -230,6 +232,20 @@ public class JDFResourceTest extends JDFTestCaseBase
     }
 
     /**
+     * 
+     *
+     */
+    public void testMakeRootResource()
+    {
+        JDFNode n=new JDFDoc("JDF").getJDFRoot();
+        JDFResourcePool p=n.appendResourcePool();
+        JDFExposedMedia xm=(JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
+        JDFMedia m=xm.appendMedia();
+        JDFMedia m2=(JDFMedia) m.makeRootResource(null, null, true);
+        assertEquals(m,m2);
+        assertEquals(m2.getParentNode_KElement(), p);
+    }
+    /**
      * test the the generalized partition matching
      *
      */
@@ -262,6 +278,15 @@ public class JDFResourceTest extends JDFTestCaseBase
         rp.appendElement("foo:res","www.foo.com");
         rp.appendElement("foo:elem","www.foo.com");
     }
+
+    public void testGetResourceRootNI13()
+    {
+        JDFNode rootNode=new JDFDoc("JDF").getJDFRoot();
+        JDFNodeInfo ni=rootNode.getCreateNodeInfo();
+        JDFContact con=ni.appendContact();
+        assertEquals(con.getResourceRoot(), ni);
+    }
+
     /**
      * test the resource root stuff
      *
@@ -275,15 +300,15 @@ public class JDFResourceTest extends JDFTestCaseBase
         JDFResource resRoot;
 
         // !(parentName != null && !parentName.equals(JDFConstants.EMPTYSTRING)
-        resRoot = ((JDFResource) root).getResourceRoot();
-        assertTrue(resRoot == null);
+//        resRoot = ((JDFResource) root).getResourceRoot();
+//        assertTrue(resRoot == null);
 
         resource = (JDFResource) root.appendElement(ElementName.COLOR);
 
         // isResourceStatic((JDFElement) parentNode)
         // Rekursion : !(parentName != null && !parentName.equals(JDFConstants.EMPTYSTRING)
-        resRoot = resource.getResourceRoot();
-        assertNull(resRoot);
+//        resRoot = resource.getResourceRoot();
+//        assertNull(resRoot);
 
         // set up a test document
         jdfDoc = new JDFDoc(ElementName.RESOURCEPOOL);
@@ -326,8 +351,8 @@ public class JDFResourceTest extends JDFTestCaseBase
         JDFColorantControl cc=(JDFColorantControl) rootNode.addResource("ColorantControl", null, EnumUsage.Input, null, null, null, null);
         JDFSeparationSpec ss=cc.appendColorantParams().appendSeparationSpec();
         assertFalse(ss.hasAttribute(AttributeName.CLASS));
+        
     }
-
 
     public void testIsResourceElement()
     {

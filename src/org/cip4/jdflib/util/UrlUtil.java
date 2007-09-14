@@ -481,7 +481,7 @@ public class UrlUtil
     
 
     /**
-     * Retrieve a file for a relative or absolute file url
+     * Create a file for a relative or absolute file url
      * @param urlString the file url to retrieve a file for
      * @return
      */
@@ -499,7 +499,7 @@ public class UrlUtil
             urlString= StringUtil.unEscape(urlString, "%", 16, 2);
             urlString=StringUtil.getUTF8String(urlString.getBytes());
 
-            return new File(urlString).toURL();
+            return new URL(fileToUrl(new File(urlString),false));
         }
         catch (MalformedURLException x)
         {

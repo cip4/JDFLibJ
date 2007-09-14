@@ -1,3 +1,71 @@
+/*--------------------------------------------------------------------------------------------------
+ * The CIP4 Software License, Version 1.0
+ *
+ *
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
+ *
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
+ *
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
+ *
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
+ *
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
+ *
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
+ *
+ */
 /**
  *
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
@@ -16,7 +84,8 @@ import org.cip4.jdflib.util.HashUtil;
 
 /**
  * This class is a representation of a JDFShape. It is a blank separated list of double values
- * consisting of a height, a width and a lenght value.
+ * consisting of a width(x), a height(y) and a depth(z) value.
+ * this spans a standard right-handed xyz coordinate system
  */
 public class JDFShape extends JDFNumList
 {
@@ -64,9 +133,9 @@ public class JDFShape extends JDFNumList
     public JDFShape(JDFShape shape)
     {
         super(MAX_SHAPE_DIMENSION);
-        setHeight(shape.getHeight());
-        setWidth(shape.getWidth());
-        setLength(shape.getLength());
+        setY(shape.getY());
+        setX(shape.getX());
+        setZ(shape.getZ());
     }
 
     /**
@@ -81,24 +150,24 @@ public class JDFShape extends JDFNumList
         super(MAX_SHAPE_DIMENSION);
         if (nl.size()!=MAX_SHAPE_DIMENSION)
             throw new DataFormatException("JDFShape: can't construct JDFShape from this JDFNuberList value");
-        getnumList().set(0, nl.getnumList().get(0));
-        getnumList().set(1, nl.getnumList().get(1));
-        getnumList().set(2, nl.getnumList().get(2));
+        m_numList.set(0, nl.m_numList.get(0));
+        m_numList.set(1, nl.m_numList.get(1));
+        m_numList.set(2, nl.m_numList.get(2));
     }
 
     /**
      * constructor - constructs a new JDFShape with the given double values
      *
-     * @param height the height
-     * @param width  the width
-     * @param length the length
+     * @param x the x value
+     * @param y  the y value
+     * @param z the z value
      */
-    public JDFShape(double height, double width, double length)
+    public JDFShape(double x, double y, double z)
     {
         super(MAX_SHAPE_DIMENSION);
-        setHeight(height);
-        setWidth(width);
-        setLength(length);
+        setY(y);
+        setX(x);
+        setZ(z);
     }
 
     /**
@@ -109,12 +178,12 @@ public class JDFShape extends JDFNumList
      * @param width  the width
      * @param length the length  = 0.0
      */
-    public JDFShape(double height, double width)
+    public JDFShape(double x, double y)
     {
         super(MAX_SHAPE_DIMENSION);
-        setHeight(height);
-        setWidth(width);
-        setLength(0.0);
+        setY(y);
+        setX(x);
+        setZ(0.0);
     }
     
     //**************************************** Methods *********************************************
@@ -125,21 +194,21 @@ public class JDFShape extends JDFNumList
      */
     public void isValid() throws DataFormatException
     {
-        if (getnumList().size() != MAX_SHAPE_DIMENSION 
-           && getnumList().size() != MAX_SHAPE_DIMENSION - 1) // Shape with default length = 0.0
+        if (m_numList.size() != MAX_SHAPE_DIMENSION 
+           && m_numList.size() != MAX_SHAPE_DIMENSION - 1) // Shape with default length = 0.0
         {
             throw new DataFormatException("Data format exception!");
         }
 
-        for (int i = 0; i < getnumList().size(); i++)
+        for (int i = 0; i < m_numList.size(); i++)
         {
-            if (!(getnumList().elementAt(i) instanceof Double))
+            if (!(m_numList.elementAt(i) instanceof Double))
             {
                 throw new DataFormatException("Data format exception!");
             }
         }
-        if (getnumList().size()==2) 
-            getnumList().addElement(new Double(0.0));
+        if (m_numList.size()==2) 
+            m_numList.addElement(new Double(0.0));
     }
 
     /**
@@ -164,9 +233,9 @@ public class JDFShape extends JDFNumList
             
         JDFShape shape = (JDFShape) other;
         
-        return  (Math.abs(this.getHeight() - shape.getHeight())  <= EPSILON) &&
-                (Math.abs(this.getWidth()  - shape.getWidth())   <= EPSILON) &&
-                (Math.abs(this.getLength() - shape.getLength())  <= EPSILON) ;
+        return  (Math.abs(this.getY() - shape.getY())  <= EPSILON) &&
+                (Math.abs(this.getX()  - shape.getX())   <= EPSILON) &&
+                (Math.abs(this.getZ() - shape.getZ())  <= EPSILON) ;
     }
     
     /**
@@ -185,7 +254,7 @@ public class JDFShape extends JDFNumList
     */
     public boolean isGreaterOrEqual(JDFShape x)
     {
-        return ((getHeight()>=x.getHeight())&&(getWidth()>=x.getWidth())&&(getLength()>=x.getLength()));   
+        return ((getY()>=x.getY())&&(getX()>=x.getX())&&(getZ()>=x.getZ()));   
     }
 
     /**
@@ -196,7 +265,7 @@ public class JDFShape extends JDFNumList
     */
     public boolean isLessOrEqual(JDFShape x)
     {
-        return ((getHeight()<=x.getHeight())&&(getWidth()<=x.getWidth())&&(getLength()<=x.getLength()));
+        return ((getY()<=x.getY())&&(getX()<=x.getX())&&(getZ()<=x.getZ()));
     }
         
     /**
@@ -207,7 +276,7 @@ public class JDFShape extends JDFNumList
     */
     public boolean isGreater(JDFShape x)
     {
-        return (!equals(x)&&(getHeight()>=x.getHeight())&&(getWidth()>=x.getWidth())&&(getLength()>=x.getLength()));   
+        return (!equals(x)&&(getY()>=x.getY())&&(getX()>=x.getX())&&(getZ()>=x.getZ()));   
     }
     
     /**
@@ -218,68 +287,127 @@ public class JDFShape extends JDFNumList
     */
     public boolean isLess(JDFShape x)
     {
-        return (!equals(x)&&(getHeight()<=x.getHeight())&&(getWidth()<=x.getWidth())&&(getLength()<=x.getLength()));
+        return (!equals(x)&&(getY()<=x.getY())&&(getX()<=x.getX())&&(getZ()<=x.getZ()));
     }
        
        
     /**
      * getHeight - returns the height
-     *
+     * @deprecated use getY - attention height and width were accidentally exchanged
+     * 
      * @return double - the height
      */
     public double getHeight()
     {
-        return ((Double)getnumList().elementAt(0)).doubleValue();
+        return getY();
     }
     
     /**
-     * setHeight - sets the height
+     * getY - returns the width
      *
+     * @return double - the width
+     * 
+     */
+    public double getY()
+    {
+        return ((Double)m_numList.elementAt(1)).doubleValue();
+    }
+   
+    /**
+     * setHeight - sets the height
+     * @deprecated attention height and width were accidentally exchanged
      * @param height the height
      */
     public void setHeight(double height)
     {
-        getnumList().set(0, new Double(height));
+       setY(height);
+    }
+    /**
+     * setY - sets the height
+     *
+     * @param height the height
+     */
+    public void setY(double y)
+    {
+        m_numList.set(1, new Double(y));
     }
 
     /**
-     * getWidth - returns the width
-     *
+     * getWidth - returns the width 
+     * @deprecated use getX - attention height and width were accidentally exchanged
      * @return double - the width
+     * 
      */
     public double getWidth()
     {
-        return ((Double)getnumList().elementAt(1)).doubleValue();
+        return getX();
+    }
+    /**
+     * getX - returns the width
+     *
+     * @return double - the width
+     * 
+     */
+    public double getX()
+    {
+        return ((Double)m_numList.elementAt(0)).doubleValue();
     }
 
     /**
-     * setWidth - sets the width
+     * setWidth - sets the x value
      *
+     * @param x the width
+     */
+    public void setX(double x)
+    {
+        m_numList.set(0, new Double(x));
+    }
+    /**
+     * setWidth - sets the width
+     * @deprecated attention height and width were accidentally exchanged
      * @param width the width
      */
     public void setWidth(double width)
     {
-        getnumList().set(1, new Double(width));
+        setX(width);
     }
 
     /**
      * getLength - returns the length
-     *
+     * @deprecated use getZ
      * @return double - the length
      */
     public double getLength()
     {
-        return ((Double)getnumList().elementAt(2)).doubleValue();
+        return getZ();
+    }
+    /**
+     * getZ - returns the z value
+     *
+     * @return double - the length
+     */
+    public double getZ()
+    {
+        return ((Double)m_numList.elementAt(2)).doubleValue();
     }
 
     /**
      * setLength - sets the length
-     *
+     * @deprecated
      * @param length the length
      */
     public void setLength(double length)
     {
-        getnumList().set(2, new Double(length));
+        setZ(length);
+    }
+
+    /**
+     * set the z value
+     * @param z
+     */
+    public void setZ(double z)
+    {
+        m_numList.set(2, new Double(z));
     }
 
 }

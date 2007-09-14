@@ -451,7 +451,7 @@ public class XMLDoc
      */
     public void write2Stream(OutputStream outStream, int indent) throws IOException
     {
-        write2Stream(outStream, indent, true);
+        write2Stream(outStream, indent, indent==0);
     }
 
     public void write2Stream(OutputStream outStream, int indent, boolean bPreserveSpace) throws IOException

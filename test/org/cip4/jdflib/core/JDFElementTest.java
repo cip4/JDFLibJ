@@ -501,7 +501,11 @@ public class JDFElementTest extends TestCase
         assertEquals(ap.getSettingsPolicy(true),EnumSettingsPolicy.MustHonor);
     }
     
-    ///////////////////////////////////////////////////7
+    ///////////////////////////////////////////////////
+    public void testGetValueForNewAttribute()
+    {
+        assertTrue(JDFElement.getValueForNewAttribute(null, "ID").startsWith("I"));
+    }
     
     public void testGetParentJDFNode() 
     {

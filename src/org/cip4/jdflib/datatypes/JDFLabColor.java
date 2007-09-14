@@ -85,9 +85,9 @@ public class JDFLabColor extends JDFNumList
     public JDFLabColor(double l, double a, double b)
     {
         super(MAX_LAB_COLOR);
-        getnumList().set(0, new Double(l));
-        getnumList().set(1, new Double(a));
-        getnumList().set(2, new Double(b));
+        m_numList.set(0, new Double(l));
+        m_numList.set(1, new Double(a));
+        m_numList.set(2, new Double(b));
     }
 
     //**************************************** Methods *********************************************
@@ -98,14 +98,14 @@ public class JDFLabColor extends JDFNumList
      */
     public void isValid() throws DataFormatException
     {
-        if (getnumList().size() != MAX_LAB_COLOR)
+        if (m_numList.size() != MAX_LAB_COLOR)
         {
             throw new DataFormatException("Data format exception!");
         }
 
-        for (int i = 0; i < getnumList().size(); i++)
+        for (int i = 0; i < m_numList.size(); i++)
         {
-            if (!(getnumList().elementAt(i) instanceof Double))
+            if (!(m_numList.elementAt(i) instanceof Double))
             {
                 throw new DataFormatException("Data format exception!");
             }
@@ -119,7 +119,7 @@ public class JDFLabColor extends JDFNumList
      */
     public double getL()
     {
-        return ((Double)getnumList().elementAt(0)).doubleValue();
+        return ((Double)m_numList.elementAt(0)).doubleValue();
     }
 
     /**
@@ -129,7 +129,7 @@ public class JDFLabColor extends JDFNumList
      */
     public void setL(double l)
     {
-        getnumList().set(0, new Double(l));
+        m_numList.set(0, new Double(l));
     }
 
     /**
@@ -139,7 +139,7 @@ public class JDFLabColor extends JDFNumList
      */
     public double getA()
     {
-        return ((Double)getnumList().elementAt(1)).doubleValue();
+        return ((Double)m_numList.elementAt(1)).doubleValue();
     }
 
     /**
@@ -149,7 +149,7 @@ public class JDFLabColor extends JDFNumList
      */
     public void setA(double a)
     {
-        getnumList().set(1, new Double(a));
+        m_numList.set(1, new Double(a));
     }
 
     /**
@@ -159,7 +159,7 @@ public class JDFLabColor extends JDFNumList
      */
     public double getB()
     {
-        return ((Double)getnumList().elementAt(2)).doubleValue();
+        return ((Double)m_numList.elementAt(2)).doubleValue();
     }
 
     /**
@@ -169,6 +169,6 @@ public class JDFLabColor extends JDFNumList
      */
     public void setB(double b)
     {
-        getnumList().set(2, new Double(b));
+        m_numList.set(2, new Double(b));
     }
 }

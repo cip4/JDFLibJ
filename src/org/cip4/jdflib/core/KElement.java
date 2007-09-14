@@ -1506,7 +1506,7 @@ public class KElement extends ElementNSImpl
      *
      * @throws JDFException if you tried to append an element into an unspecified namespace
      */
-    public KElement appendElement(String elementName, String nameSpaceURI)
+    public synchronized KElement appendElement(String elementName, String nameSpaceURI)
     {
         KElement newChild = createChildFromName(elementName, nameSpaceURI);
         appendChild(newChild);
@@ -3787,11 +3787,6 @@ public class KElement extends ElementNSImpl
         return nRemove;
     }
 
-    //*** end of methods needed in JDFElement, JDFNodeInfo, XMLDoc, JDFDoc ***//
-    ////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////
-    //************************** start of methods needed in JDFRefElement ******
-
     /**
      * Copies src node (including all attributes and subelements)
      * and inserts the copy into 'this' in front of beforeChild, if it exists.
@@ -3807,37 +3802,29 @@ public class KElement extends ElementNSImpl
      */
     public KElement copyElement(KElement src, KElement beforeChild)
     {
-        KElement kRet = null;
+        return (KElement)copyNode(this, src, beforeChild);
+    }
 
-        if (src != null)
+    private static Node copyNode(Node parent, Node src, Node beforeChild)
+    {
+        if (src == null)
+            return null;
+        
+        Node childNode = null;
+        if (src.getOwnerDocument() == parent.getOwnerDocument())
         {
-            Node childNode = null;
-
-            if (src.getOwnerDocument() == getOwnerDocument())
-            {
-                childNode = src.cloneNode(true);
-            }
-            else
-            {
-                childNode = getOwnerDocument().importNode(src, true);
-            }
-
-            if (beforeChild == null)
-            {
-                kRet = (KElement) appendChild(childNode);
-            }
-            else
-            {
-                if (beforeChild.getParentNode() != this)
-                {
-                    throw new JDFException("KElementInsertBefore" + " beforeChild is not child of this");
-                }
-
-                kRet = (KElement) insertBefore(childNode, beforeChild);
-            }
+            childNode = src.cloneNode(true);
+        }
+        else
+        {
+            childNode = parent.getOwnerDocument().importNode(src, true);
         }
 
-        return kRet;
+        if (beforeChild != null && beforeChild.getParentNode() != parent)
+        {
+            throw new JDFException("KElement.copyElement" + " beforeChild is not child of this");
+        }
+        return parent.insertBefore(childNode, beforeChild);
     }
 
     /**
@@ -4132,6 +4119,19 @@ public class KElement extends ElementNSImpl
         appendChild(newChild);
     }
 
+    /**
+     * Appends XML CData section <code>&lt;![CDATA[ CData Section ]]&gt;</code>
+     * some character data <br>
+     * Appends a new CData section child node to the end of 'this '
+     *
+     * @param cDataElem the element of the XML CData section to append
+     */
+    public void appendCData(KElement cDataElem)
+    {
+        final String s=cDataElem.toString();
+        final CDATASection newChild = getOwnerDocument().createCDATASection(s);
+        appendChild(newChild);
+    }
     /**
      * append some generic text
      *
@@ -6108,7 +6108,7 @@ public class KElement extends ElementNSImpl
         return insertBefore(arg0, null);
     }
 
-    public Node removeChild(Node arg0) throws DOMException
+    public synchronized Node removeChild(Node arg0) throws DOMException
     {
         setDirty(false);
         if(arg0 instanceof KElement) {
@@ -6118,13 +6118,13 @@ public class KElement extends ElementNSImpl
         return super.removeChild(arg0);
     }
 
-    public Node insertBefore(Node arg0, Node arg1) throws DOMException
+    public synchronized Node insertBefore(Node arg0, Node arg1) throws DOMException
     {
         setDirty(false);
         return super.insertBefore(arg0,arg1);
     }
 
-    public Node replaceChild(Node arg0, Node arg1) throws DOMException
+    public synchronized Node replaceChild(Node arg0, Node arg1) throws DOMException
     {
         setDirty(false);
         if(arg1 instanceof KElement) {

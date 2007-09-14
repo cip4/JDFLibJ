@@ -211,6 +211,23 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
         assertEquals(v, v2);
     }
     ///////////////////////////////////////////////////////////////
+    public void testRemoveKeys()
+    {
+        JDFAttributeMap m1=new JDFAttributeMap("a1","v1");
+        VJDFAttributeMap v2=new VJDFAttributeMap();
+        v2.add(new JDFAttributeMap(m1));
+        m1.put("a2","v2");
+        JDFAttributeMap m2=new JDFAttributeMap(m1);
+        m2.put("a2","v3");
+        VJDFAttributeMap v=new VJDFAttributeMap();
+        v.add(m1);
+        v.add(m2);
+        VString vs=new VString("a2"," ");
+        v.removeKeys(vs.getSet());
+        assertEquals(v, v2);
+        assertEquals(v.size(), 1);
+    }
+    ///////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////
     
 }

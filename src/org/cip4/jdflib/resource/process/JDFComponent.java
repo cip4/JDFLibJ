@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -78,12 +78,16 @@
  */
 package org.cip4.jdflib.resource.process;
 
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoComponent;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFShape;
+import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.w3c.dom.DOMException;
 
 
@@ -197,5 +201,32 @@ public class JDFComponent extends JDFAutoComponent
             }
         }
         return super.fixVersion(version) && bRet;
+    }
+
+
+    /**
+     * sets the Dimension to X Y 0
+     * convenience method to copy media dimension to component
+     * @param dimension
+     */
+    public void setDimensions(JDFXYPair dimension)
+    {
+       if(dimension!=null)
+       {
+           JDFShape s=new JDFShape(dimension.getX(),dimension.getY());
+           super.setDimensions(s);
+       }       
+    }
+    
+    public void setComponentType(EnumComponentType partialFinal, EnumComponentType sheetWebProof)
+    {
+        Vector v=new Vector();
+        if(partialFinal!=null)
+            v.add(partialFinal);
+        if(sheetWebProof!=null)
+            v.add(sheetWebProof);
+        if(v.size()==0)
+            v=null;
+        setComponentType(v);
     }
 }

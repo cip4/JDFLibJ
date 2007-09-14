@@ -3086,8 +3086,9 @@ public class JDFElement extends KElement
      */
     protected void setEnumerationsAttribute(String key, Vector value, String nameSpaceURI)
     {
-        String s = JDFConstants.EMPTYSTRING;
-        if (value != null) {
+        String s = null;
+        if (value != null)
+        {
         	int n = 0;
 	        final Iterator valueIterator = value.iterator();
 	        while (valueIterator.hasNext()) {
@@ -3101,11 +3102,15 @@ public class JDFElement extends KElement
 	            {
 	                s += JDFConstants.BLANK;
 	            }
+                else
+                {
+                    s="";
+                }
 
 	            s += ((ValuedEnum)o).getName();
 	        }
         }
-
+        
 		setAttribute(key, s, nameSpaceURI);
     }
 
@@ -3229,7 +3234,7 @@ public class JDFElement extends KElement
      *
      * @return JDFDoc the owner document of this
      */
-    public XMLDoc getOwnerDocument_JDFElement()
+    public JDFDoc getOwnerDocument_JDFElement()
     {
         final Document doc = getOwnerDocument();
         return new JDFDoc(doc);
@@ -4385,20 +4390,19 @@ public class JDFElement extends KElement
     }
     
     
-    static public String  getValueForNewAttribute(KElement e,String attName)
+    static public String getValueForNewAttribute(KElement e,String attName)
     {
-        //TODO move this to JDFElement and let JDFLib predefine reasonable attributes 
-        
+         
         // return the default if it exists
-        JDFAttributeMap map=e.getDefaultAttributeMap();
+        JDFAttributeMap map=e==null ? null : e.getDefaultAttributeMap();
         if(map!=null && map.containsKey(attName))
             return map.get(attName);
 
         if (attName.equals("ID"))
-            return JDFElement.uniqueID(0);
+            return "ID"+JDFElement.uniqueID(0);
 
         if (attName.equals("JobID"))
-            return JDFElement.uniqueID(0);
+            return "J"+JDFElement.uniqueID(0);
 
         if (attName.equals("JobPartID") &&(e instanceof JDFElement))
         {

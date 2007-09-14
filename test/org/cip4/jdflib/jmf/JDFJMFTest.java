@@ -72,8 +72,7 @@ package org.cip4.jdflib.jmf;
 
 import java.util.Iterator;
 
-import junit.framework.TestCase;
-
+import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
 import org.cip4.jdflib.core.AttributeName;
@@ -87,7 +86,7 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.resource.JDFNotification;
 
 
-public class JDFJMFTest extends TestCase
+public class JDFJMFTest extends JDFTestCaseBase
 {
 
     public void testGetMessageVector()

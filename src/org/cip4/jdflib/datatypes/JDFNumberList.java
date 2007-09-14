@@ -54,9 +54,9 @@ public class JDFNumberList extends JDFNumList
      */
     public void isValid() throws DataFormatException
     {
-        for (int i = 0; i < getnumList().size(); i++)
+        for (int i = 0; i < m_numList.size(); i++)
         {
-            if (!(getnumList().elementAt(i) instanceof Double))
+            if (!(m_numList.elementAt(i) instanceof Double))
             {
                 throw new DataFormatException("Data format exception!");
             }
@@ -70,7 +70,7 @@ public class JDFNumberList extends JDFNumList
      */
     public void add(double x)
     {
-        getnumList().add(new Double(x));
+        m_numList.add(new Double(x));
     }
 
     /**
@@ -80,7 +80,7 @@ public class JDFNumberList extends JDFNumList
      */
     public void add(Double x)
     {
-        getnumList().add(x);
+        m_numList.add(x);
     }
 
     /**
@@ -90,7 +90,7 @@ public class JDFNumberList extends JDFNumList
      */
     public void add(JDFNumberList nl)
     {
-        getnumList().addAll(nl.copyNumList());
+        m_numList.addAll(nl.copyNumList());
     }
 
     /**
@@ -107,7 +107,7 @@ public class JDFNumberList extends JDFNumList
         while (sToken.hasMoreTokens())
         {
             String t = sToken.nextToken().trim();
-            getnumList().addElement(new Double(t));
+            m_numList.addElement(new Double(t));
         }
     }
     

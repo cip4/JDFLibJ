@@ -68,62 +68,44 @@
  *  
  * 
  */
-/**
- *
- * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- *
- * KString.java
- *
- * Last changes
- *
- */
-package org.cip4.jdflib.util;
+package org.cip4.jdflib.goldenticket;
 
-import org.apache.commons.lang.enums.ValuedEnum;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.node.JDFNode;
 
 /**
- * class with utilities for containers, e.g. Vectors, sets etc.
- * also simple object utils
  * @author prosirai
- *
+ * class that generates golden tickets based on ICS levels etc
  */
-public class EnumUtil
+public class JMFGoldenTicket extends BaseGoldenTicket
 {
+    protected int jmfICSLevel;
     /**
-     * get the lower of two enum values, null is lowest
-     * @param e1
-     * @param e2
-     * @return the lower of the two values
+     * create a BaseGoldenTicket
+     * @param node the node to update, if null, a default node is created
+     * @param icsLevel the level to init to (1,2 or 3)
+     * @param jdfVersion the version to generate a golden ticket for
      */
-    public static ValuedEnum min(ValuedEnum e1, ValuedEnum e2)
+    public JMFGoldenTicket(int icsLevel, EnumVersion jdfVersion)
     {
-        if(e1==null || e2==null)
-            return null;
-        return e1.getValue()<e2.getValue() ? e1 : e2;
+        super(2,jdfVersion);
+        jmfICSLevel=icsLevel;
     }
     /**
-     * get the higher of two enum values, null is lowest
-     * @param e1
-     * @param e2
-     * @return the higher of the two values
+     * initializes this node to a given ICS version
+     * @param icsLevel the level to init to (1,2 or 3)
      */
-    public static ValuedEnum max(ValuedEnum e1, ValuedEnum e2)
+    public void init()
     {
-        if(e1==null) 
-            return e2;
-        if(e2==null) 
-            return e1;
-        return e1.getValue()>e2.getValue() ? e1 : e2;
+        if(jmfICSLevel>0)
+        {
+        String icsTag="JMF_L"+jmfICSLevel+"-"+theVersion.getName();
+        theNode.appendAttribute(AttributeName.ICSVERSIONS, icsTag, null, " ", true);
+        if(!theNode.hasAttribute(AttributeName.DESCRIPTIVENAME))
+            theNode.setDescriptiveName("JMF Golden Ticket Example Job - version: "+JDFAudit.software());
+        }
+        super.init();
     }
-    /**
-     * null save convenience name getter
-     * @param en the enum to get the name
-     * @return
-     */
-    public static String getName(ValuedEnum en)
-    {
-        return en==null ? "null" : en.getName();
-    }
-    
- 
 }

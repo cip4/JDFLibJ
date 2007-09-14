@@ -136,7 +136,7 @@ public class JDFIntegerList extends JDFNumList
      */
     public JDFIntegerList(JDFIntegerList il) throws DataFormatException
     {
-        this(il.getnumList());
+        this(il.m_numList);
     }
     
     /**
@@ -168,9 +168,9 @@ public class JDFIntegerList extends JDFNumList
      */
     public void isValid() throws DataFormatException
     {
-        for (int i = 0; i < getnumList().size(); i++)
+        for (int i = 0; i < m_numList.size(); i++)
         {
-            if (!(getnumList().elementAt(i) instanceof Integer))
+            if (!(m_numList.elementAt(i) instanceof Integer))
             {
                 throw new DataFormatException("Data format exception!");
             }
@@ -225,7 +225,7 @@ public class JDFIntegerList extends JDFNumList
      */
     public void addIntegerList(JDFIntegerList il)
     {
-        final Vector getnumList = getnumList();
+        final Vector getnumList = m_numList;
         final int size = il.size();
         for (int i = 0; i < size; i++)
         {
@@ -240,7 +240,7 @@ public class JDFIntegerList extends JDFNumList
      */
     public void add(int x)
     {
-        getnumList().add(new Integer(x));
+        m_numList.add(new Integer(x));
     }
 
     /**
@@ -250,7 +250,7 @@ public class JDFIntegerList extends JDFNumList
      */
     public void add(Integer x)
     {
-        getnumList().add(x);
+        m_numList.add(x);
     }
 
     /**
@@ -260,7 +260,7 @@ public class JDFIntegerList extends JDFNumList
      */
     public void add(JDFIntegerList il)
     {
-        getnumList().addAll(il.copyNumList());
+        m_numList.addAll(il.copyNumList());
     }
 
     /**
@@ -273,7 +273,7 @@ public class JDFIntegerList extends JDFNumList
     public void add(String s) throws DataFormatException
     {
         StringTokenizer sToken = new StringTokenizer(s, JDFConstants.BLANK);
-        final Vector numList = getnumList();
+        final Vector numList = m_numList;
 
         while (sToken.hasMoreTokens())
         {
@@ -328,7 +328,7 @@ public class JDFIntegerList extends JDFNumList
     public int[] getIntArray()
     
     {
-        final Vector numList = getnumList();
+        final Vector numList = m_numList;
         final int size = numList.size();
         int[] intArray = new int[size];
         
@@ -348,7 +348,7 @@ public class JDFIntegerList extends JDFNumList
      */
     public void setIntArray(int[] iArray)
     {
-        Vector numList = getnumList();
+        Vector numList = m_numList;
         numList.clear();
         for(int i=0;i<iArray.length;i++)
             numList.add(new Integer(iArray[i]));
@@ -362,7 +362,7 @@ public class JDFIntegerList extends JDFNumList
      */
     public void setInt(int i)
     {
-        Vector numList = getnumList();
+        Vector numList = m_numList;
         numList.clear();
         numList.add(new Integer(i));
     }

@@ -1663,6 +1663,20 @@ public class KElementTest extends JDFTestCaseBase
         assertEquals(e2.getNextSibling(), e3);                  
         assertEquals(e3.getNamespaceURI(), "www.foo.com");                  
     }
+    public void testAppendCData() throws Exception
+    {
+        XMLDoc d=new XMLDoc("e",null);
+        KElement e=d.getRoot();
+        XMLDoc d2=new XMLDoc("e2",null);
+        KElement e2=d2.getRoot();
+        e.appendCData(e2);
+        assertTrue(e.toString().indexOf("<e2")>0);
+        e.appendCData(e);
+        JDFParser p=new JDFParser();
+        JDFDoc d3=p.parseString(d.write2String(2));
+        assertNotNull(d3);
+        
+     }
     public void testParseAppendChild()
     {
         String s="<e xmlns=\"a\" xmlns:foo=\"www.foo.com\"><e2/></e>";

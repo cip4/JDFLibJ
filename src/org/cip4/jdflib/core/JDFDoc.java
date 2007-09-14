@@ -87,6 +87,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.MimeUtil;
+import org.cip4.jdflib.util.UrlUtil;
 import org.w3c.dom.Document;
 
 /**
@@ -296,7 +297,7 @@ public class JDFDoc extends XMLDoc
     
     /**
      * gets the content type
-     * @return the content type, null if neither jdf nor jmf
+     * @return the content type, Text/XML if neither jdf nor jmf
      */
     public String getContentType() 
     {
@@ -308,7 +309,7 @@ public class JDFDoc extends XMLDoc
         }else if (e instanceof JDFJMF){
             strContentType = JDFConstants.MIME_JMF;
         }else{
-            strContentType = null;
+            strContentType = JDFConstants.MIME_TEXTXML;
         }
         return strContentType;
     }

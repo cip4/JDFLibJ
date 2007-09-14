@@ -52,9 +52,6 @@ public class WebTest extends JDFTestCaseBase
             doc = new JDFDoc("JDF");
             JDFNode n=doc.getJDFRoot();
             final JDFResourcePool rp = n.getCreateResourcePool();
-            rp.appendXMLComment("We actually have a problem if we separate LayoutShift and Layout.\n"+
-                    "Ord is not a unique Reference, because you MAY have multiple placed objects at completely different locations on the spread, e.g. in a multi-up binderysignature environment.\n"+
-            "Therefore I suggest referencing PlacedObject/@OrdID instead.", null);
             JDFResource lo=n.addResource("Layout", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
             JDFLayout losh=(JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Sheet1");
             JDFLayout lofr=(JDFLayout) losh.addPartition(EnumPartIDKey.Side, EnumSide.Front.getName());
@@ -114,10 +111,61 @@ public class WebTest extends JDFTestCaseBase
             }
             doc.write2File(sm_dirTestDataTemp+"Webgrowth"+k+".jdf", 2, false);
         }
+    }        /**
+     * test WebGrowth Compensation
+     */
+    public void testWebGrowthCompensationPartition()
+    {
+
+        JDFElement.setLongID(false);
+        doc = new JDFDoc("JDF");
+        JDFNode n=doc.getJDFRoot();
+        final JDFResourcePool rp = n.getCreateResourcePool();
+        JDFResource lo=n.addResource("Layout", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
+        JDFLayout losh=(JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Sheet1");
+        JDFLayout lofr=(JDFLayout) losh.addPartition(EnumPartIDKey.Side, EnumSide.Front.getName());
+
+        rp.appendXMLComment("LayoutShift SHOULD be partitioned: at least Side and Separation will make sense", null);
+
+        JDFResource los=n.addResource("LayoutShift", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
+        los.appendXMLComment("Note that the interpolation algorithm between positions is implementation dependent", null);
+        los=los.addPartition(EnumPartIDKey.Side, "Front");
+        VString vSep=new VString("Cyan Magenta Yellow Black"," ");
+
+        for(int i=0;i<16;i++)
+        {
+            int x=720*(i%4);
+            int y=1000*(i/4);
+            int ord=i%8;
+            JDFContentObject co=lofr.appendContentObject();
+            co.setOrd(ord);
+            co.setOrdID(i);
+            co.setCTM(new JDFMatrix(1,0,0,1,x,y));
+            JDFMarkObject mo=lofr.appendMarkObject();
+            mo.setOrd(ord);
+            mo.setOrdID(i+100);
+            mo.setCTM(new JDFMatrix(1,0,0,1,x+700,y+900));
+        }
+        for(int j=0;j<vSep.size();j++)
+        {
+            final KElement sepShift = los.addPartition(EnumPartIDKey.Separation, vSep.stringAt(j));
+            for(int i=0;i<16;i+=2)
+            {
+
+                int x=720*(i%4);
+                int y=1000*(i/4);
+                KElement shiftObject=sepShift.appendElement("ShiftPoint");
+
+                shiftObject.setAttribute("Position", new JDFXYPair(x+360,y+500).toString());
+                shiftObject.setAttribute("CTM", new JDFMatrix(1,0,0,1,j+i/4,j+i%4).toString());
+            }
+        }
+        doc.write2File(sm_dirTestDataTemp+"WebgrowthPartition.jdf", 2, false);
+
     }    
 
-    /**
-     * test direct imaging
+/**
+ * test direct imaging
      */
     public void testDirectImage()
     {

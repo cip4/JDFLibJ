@@ -157,10 +157,10 @@ public class JDFCMYKColor extends JDFNumList
     public JDFCMYKColor(double c, double m, double y, double k)
     {
         super(MAX_CMYK_COLOR);
-        getnumList().set(0, new Double(c));
-        getnumList().set(1, new Double(m));
-        getnumList().set(2, new Double(y));
-        getnumList().set(3, new Double(k));
+        m_numList.set(0, new Double(c));
+        m_numList.set(1, new Double(m));
+        m_numList.set(2, new Double(y));
+        m_numList.set(3, new Double(k));
     }
 
     //**************************************** Methods *********************************************
@@ -171,14 +171,14 @@ public class JDFCMYKColor extends JDFNumList
      */
     public void isValid() throws DataFormatException
     {
-        if (getnumList().size() != MAX_CMYK_COLOR)
+        if (m_numList.size() != MAX_CMYK_COLOR)
         {
             throw new DataFormatException("Data format exception!");
         }
 
-        for (int i = 0; i < getnumList().size(); i++)
+        for (int i = 0; i < m_numList.size(); i++)
         {
-            if (!(getnumList().elementAt(i) instanceof Double))
+            if (!(m_numList.elementAt(i) instanceof Double))
             {
                 throw new DataFormatException("Data format exception!");
             }
@@ -192,7 +192,7 @@ public class JDFCMYKColor extends JDFNumList
      */
     public double getC()
     {
-        return ((Double)getnumList().elementAt(0)).doubleValue();
+        return ((Double)m_numList.elementAt(0)).doubleValue();
     }
 
     /**
@@ -202,7 +202,7 @@ public class JDFCMYKColor extends JDFNumList
      */
     public void setC(double c)
     {
-        getnumList().set(0, new Double(c));
+        m_numList.set(0, new Double(c));
     }
 
     /**
@@ -212,7 +212,7 @@ public class JDFCMYKColor extends JDFNumList
      */
     public double getM()
     {
-        return ((Double)getnumList().elementAt(1)).doubleValue();
+        return ((Double)m_numList.elementAt(1)).doubleValue();
     }
 
     /**
@@ -222,7 +222,7 @@ public class JDFCMYKColor extends JDFNumList
      */
     public void setM(double m)
     {
-        getnumList().set(1, new Double(m));
+        m_numList.set(1, new Double(m));
     }
 
     /**
@@ -232,7 +232,7 @@ public class JDFCMYKColor extends JDFNumList
      */
     public double getY()
     {
-        return ((Double)getnumList().elementAt(2)).doubleValue();
+        return ((Double)m_numList.elementAt(2)).doubleValue();
     }
 
     /**
@@ -242,7 +242,7 @@ public class JDFCMYKColor extends JDFNumList
      */
     public void setY(double y)
     {
-        getnumList().set(2, new Double(y));
+        m_numList.set(2, new Double(y));
     }
 
     /**
@@ -252,7 +252,7 @@ public class JDFCMYKColor extends JDFNumList
      */
     public double getK()
     {
-        return ((Double)getnumList().elementAt(3)).doubleValue();
+        return ((Double)m_numList.elementAt(3)).doubleValue();
     }
 
     /**
@@ -262,7 +262,7 @@ public class JDFCMYKColor extends JDFNumList
      */
     public void setK(double k)
     {
-        getnumList().set(3, new Double(k));
+        m_numList.set(3, new Double(k));
     }
 
 }

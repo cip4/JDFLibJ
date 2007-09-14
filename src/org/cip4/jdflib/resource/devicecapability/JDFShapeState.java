@@ -621,16 +621,16 @@ public class JDFShapeState extends JDFAbstractState
             JDFShape left = range.getLeft();
             JDFShape right = range.getRight();
 
-            double leftX = left.getHeight();
-            double rightX = right.getHeight();
+            double leftX = left.getY();
+            double rightX = right.getY();
             JDFNumberRange rangeX = new JDFNumberRange(leftX, rightX);
 
-            double leftY = left.getWidth();
-            double rightY = right.getWidth();
+            double leftY = left.getX();
+            double rightY = right.getX();
             JDFNumberRange rangeY = new JDFNumberRange(leftY, rightY);
             
-            double leftZ = left.getLength();
-            double rightZ = right.getLength();
+            double leftZ = left.getZ();
+            double rightZ = right.getZ();
             JDFNumberRange rangeZ = new JDFNumberRange(leftZ, rightZ);
                 
             if (xyzlist.equals(EnumFitsValue.Allowed))

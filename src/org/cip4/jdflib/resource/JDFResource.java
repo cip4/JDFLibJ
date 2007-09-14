@@ -1010,7 +1010,7 @@ public class JDFResource extends JDFElement
 
         if (e != null)
         {
-            Node parentNode = e.getParentNode();
+            KElement parentNode = e.getParentNode_KElement();
             if (parentNode != null)
             {
                 String parentName = parentNode.getLocalName();
@@ -1020,6 +1020,14 @@ public class JDFResource extends JDFElement
                     if (isValidParentNodeName(parentName))
                     {
                         res = (JDFResource) e;
+                        if(parentNode instanceof JDFNodeInfo || parentNode instanceof JDFCustomerInfo)
+                        {
+                            KElement par=parentNode.getParentNode_KElement();
+                            if(par!=null && !(par instanceof JDFNode))
+                            {
+                                res=((JDFResource)parentNode).getResourceRoot();
+                            }                               
+                        }
                     }
                     else
                     {
@@ -1029,7 +1037,7 @@ public class JDFResource extends JDFElement
                                 && !(parentNode instanceof JDFJMF))
                         {
                             // find the first resource uptree
-                            parentNode = parentNode.getParentNode();
+                            parentNode = parentNode.getParentNode_KElement();
                         }
 
                         if (((JDFElement) parentNode) instanceof JDFResource)
@@ -1124,7 +1132,7 @@ public class JDFResource extends JDFElement
      * @param bLinkHere if true, creates a refelement (link) to the newly created resource
      *                  at the position where 'this' originally resided.
      *
-     * @return JDFRefElement link to the newly created resource from the position were it originally resided
+     * @return JDFResource the moved resource
      *
      * @default makeRootResource(null, null, true)
      */

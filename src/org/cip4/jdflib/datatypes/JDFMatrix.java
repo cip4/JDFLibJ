@@ -241,12 +241,12 @@ public class JDFMatrix extends JDFNumList
         super(MAX_MATRIX_DIMENSION);
         if (nl.size()!=MAX_MATRIX_DIMENSION)
             throw new DataFormatException("JDFMatrix: can't construct JDFMatrix from this JDFNuberList value");
-        getnumList().set(0, nl.getnumList().get(0));
-        getnumList().set(1, nl.getnumList().get(1));
-        getnumList().set(2, nl.getnumList().get(2));
-        getnumList().set(3, nl.getnumList().get(3));
-        getnumList().set(4, nl.getnumList().get(4));
-        getnumList().set(5, nl.getnumList().get(5));
+        m_numList.set(0, nl.m_numList.get(0));
+        m_numList.set(1, nl.m_numList.get(1));
+        m_numList.set(2, nl.m_numList.get(2));
+        m_numList.set(3, nl.m_numList.get(3));
+        m_numList.set(4, nl.m_numList.get(4));
+        m_numList.set(5, nl.m_numList.get(5));
     }
 
     /**
@@ -278,14 +278,14 @@ public class JDFMatrix extends JDFNumList
      */
     public void isValid() throws DataFormatException
     {
-        if (getnumList().size() != MAX_MATRIX_DIMENSION)
+        if (m_numList.size() != MAX_MATRIX_DIMENSION)
         {
             throw new DataFormatException("Data format exception!");
         }
 
-        for (int i = 0; i < getnumList().size(); i++)
+        for (int i = 0; i < m_numList.size(); i++)
         {
-            if (!(getnumList().elementAt(i) instanceof Double))
+            if (!(m_numList.elementAt(i) instanceof Double))
             {
                 throw new DataFormatException("Data format exception!");
             }
@@ -299,7 +299,7 @@ public class JDFMatrix extends JDFNumList
      */
     public double getA()
     {
-        return ((Double)getnumList().get(0)).doubleValue();
+        return ((Double)m_numList.get(0)).doubleValue();
     }
 
     /**
@@ -309,7 +309,7 @@ public class JDFMatrix extends JDFNumList
      */
     public void setA(double p_a)
     {
-        getnumList().set(0, new Double(p_a));
+        m_numList.set(0, new Double(p_a));
     }
 
     /**
@@ -319,7 +319,7 @@ public class JDFMatrix extends JDFNumList
      */
     public double getB()
     {
-        return ((Double)getnumList().get(1)).doubleValue();
+        return ((Double)m_numList.get(1)).doubleValue();
     }
 
     /**
@@ -329,7 +329,7 @@ public class JDFMatrix extends JDFNumList
      */
     public void setB(double p_b)
     {
-        getnumList().set(1, new Double(p_b));
+        m_numList.set(1, new Double(p_b));
     }
 
     /**
@@ -339,7 +339,7 @@ public class JDFMatrix extends JDFNumList
      */
     public double getC()
     {
-        return ((Double)getnumList().get(2)).doubleValue();
+        return ((Double)m_numList.get(2)).doubleValue();
     }
 
     /**
@@ -349,7 +349,7 @@ public class JDFMatrix extends JDFNumList
      */
     public void setC(double p_c)
     {
-        getnumList().set(2, new Double(p_c));
+        m_numList.set(2, new Double(p_c));
     }
 
     /**
@@ -359,7 +359,7 @@ public class JDFMatrix extends JDFNumList
      */
     public double getD()
     {
-        return ((Double)getnumList().get(3)).doubleValue();
+        return ((Double)m_numList.get(3)).doubleValue();
     }
 
     /**
@@ -369,7 +369,7 @@ public class JDFMatrix extends JDFNumList
      */
     public void setD(double p_d)
     {
-        getnumList().set(3, new Double(p_d));
+        m_numList.set(3, new Double(p_d));
     }
 
     /**
@@ -379,7 +379,7 @@ public class JDFMatrix extends JDFNumList
      */
     public double getTx()
     {
-        return ((Double)getnumList().get(4)).doubleValue();
+        return ((Double)m_numList.get(4)).doubleValue();
     }
 
     /**
@@ -389,7 +389,7 @@ public class JDFMatrix extends JDFNumList
      */
     public void setTx(double p_tx)
     {
-        getnumList().set(4, new Double(p_tx));
+        m_numList.set(4, new Double(p_tx));
     }
 
     /**
@@ -399,7 +399,7 @@ public class JDFMatrix extends JDFNumList
      */
     public double getTy()
     {
-        return ((Double)getnumList().get(5)).doubleValue();
+        return ((Double)m_numList.get(5)).doubleValue();
     }
 
     /**
@@ -409,7 +409,7 @@ public class JDFMatrix extends JDFNumList
      */
     public void setTy(double p_ty)
     {
-        getnumList().set(5, new Double(p_ty));
+        m_numList.set(5, new Double(p_ty));
     }
 
     /**

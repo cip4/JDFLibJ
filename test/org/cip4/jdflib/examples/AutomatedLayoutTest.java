@@ -493,12 +493,12 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
         stripSheet.setAttribute("NameFormat", format);
         stripSheet.setAttribute("NameTemplate", "SheetNum");
         JDFStrippingParams stripStack0=(JDFStrippingParams) stripSheet.addPartition(EnumPartIDKey.BinderySignatureName, "Stack0");
+        stripParams.setAttribute("StackDepth", "100");
 
         JDFBinderySignature binderySignature = stripStack0.appendBinderySignature();
         stripStack0.appendPosition().setRelativeBox(new JDFRectangle(0,0,0.5,1));
         binderySignature=(JDFBinderySignature) binderySignature.makeRootResource(null, null, true);
         binderySignature.setNumberUp(new JDFXYPair(1,1));
-        binderySignature.setAttribute("StackDepth", "100");
         JDFStrippingParams stripStack1=(JDFStrippingParams) stripSheet.addPartition(EnumPartIDKey.BinderySignatureName, "Stack1");
         stripStack1.refElement(binderySignature);
         stripStack1.appendPosition().setRelativeBox(new JDFRectangle(0.5,0,1,1));

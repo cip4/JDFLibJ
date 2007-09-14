@@ -80,10 +80,10 @@ public class JDFRectangle extends JDFNumList
         super(MAX_RECTANGLE_DIMENSION);
         if (nl.size()!=MAX_RECTANGLE_DIMENSION)
             throw new DataFormatException("JDFRectangle: can't construct JDFRectangle from this JDFNuberList value");
-        getnumList().set(0, nl.getnumList().get(0));
-        getnumList().set(1, nl.getnumList().get(1));
-        getnumList().set(2, nl.getnumList().get(2));
-        getnumList().set(3, nl.getnumList().get(3));
+        m_numList.set(0, nl.m_numList.get(0));
+        m_numList.set(1, nl.m_numList.get(1));
+        m_numList.set(2, nl.m_numList.get(2));
+        m_numList.set(3, nl.m_numList.get(3));
     }
 
     /**
@@ -111,14 +111,14 @@ public class JDFRectangle extends JDFNumList
      */
     public void isValid() throws DataFormatException
     {
-        if (getnumList().size() != MAX_RECTANGLE_DIMENSION)
+        if (m_numList.size() != MAX_RECTANGLE_DIMENSION)
         {
             throw new DataFormatException("Data format exception!");
         }
 
-        for (int i = 0; i < getnumList().size(); i++)
+        for (int i = 0; i < m_numList.size(); i++)
         {
-            if (!(getnumList().elementAt(i) instanceof Double))
+            if (!(m_numList.elementAt(i) instanceof Double))
             {
                 throw new DataFormatException("Data format exception!");
             }
@@ -141,7 +141,7 @@ public class JDFRectangle extends JDFNumList
      */
     public double getLlx()
     {
-        return ((Double)getnumList().elementAt(0)).doubleValue();
+        return ((Double)m_numList.elementAt(0)).doubleValue();
     }
 
     /**
@@ -151,7 +151,7 @@ public class JDFRectangle extends JDFNumList
      */
     public void setLlx(double x)
     {
-        getnumList().set(0, new Double(x));
+        m_numList.set(0, new Double(x));
     }
 
     /**
@@ -161,7 +161,7 @@ public class JDFRectangle extends JDFNumList
      */
     public double getLly()
     {
-        return ((Double)getnumList().elementAt(1)).doubleValue();
+        return ((Double)m_numList.elementAt(1)).doubleValue();
     }
 
     /**
@@ -171,7 +171,7 @@ public class JDFRectangle extends JDFNumList
      */
     public void setLly(double y)
     {
-        getnumList().set(1, new Double(y));
+        m_numList.set(1, new Double(y));
     }
 
     /**
@@ -181,7 +181,7 @@ public class JDFRectangle extends JDFNumList
      */
     public double getUrx()
     {
-        return ((Double)getnumList().elementAt(2)).doubleValue();
+        return ((Double)m_numList.elementAt(2)).doubleValue();
     }
 
     /**
@@ -191,7 +191,7 @@ public class JDFRectangle extends JDFNumList
      */
     public void setUrx(double x)
     {
-        getnumList().set(2, new Double(x));
+        m_numList.set(2, new Double(x));
     }
 
     /**
@@ -201,7 +201,7 @@ public class JDFRectangle extends JDFNumList
      */
     public double getUry()
     {
-        return ((Double)getnumList().elementAt(3)).doubleValue();
+        return ((Double)m_numList.elementAt(3)).doubleValue();
     }
 
     /**
@@ -211,7 +211,7 @@ public class JDFRectangle extends JDFNumList
      */
     public void setUry(double y)
     {
-        getnumList().set(3, new Double(y));
+        m_numList.set(3, new Double(y));
     }
 
     /**
@@ -222,8 +222,8 @@ public class JDFRectangle extends JDFNumList
      */
     public double getWidth()
     {
-        return Math.abs(((Double)getnumList().elementAt(2)).doubleValue() -
-                        ((Double)getnumList().elementAt(0)).doubleValue());
+        return Math.abs(((Double)m_numList.elementAt(2)).doubleValue() -
+                        ((Double)m_numList.elementAt(0)).doubleValue());
     }
 
     /**
@@ -234,8 +234,8 @@ public class JDFRectangle extends JDFNumList
      */
     public double getHeight()
     {
-        return Math.abs(((Double)getnumList().elementAt(3)).doubleValue() -
-                        ((Double)getnumList().elementAt(1)).doubleValue());
+        return Math.abs(((Double)m_numList.elementAt(3)).doubleValue() -
+                        ((Double)m_numList.elementAt(1)).doubleValue());
     }
 
     /**
