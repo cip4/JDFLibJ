@@ -91,6 +91,7 @@
 
 package org.cip4.jdflib.core;
 
+import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
@@ -101,6 +102,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
+
+import javax.mail.BodyPart;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -131,6 +134,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.UrlUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -4461,6 +4465,23 @@ public class JDFElement extends KElement
                 return "0 0";            
         }
         return "New Value";
+    }
+    
+    /**
+     * returns the jdf doc referenced by url
+     * @return the document
+     */
+    protected JDFDoc getURLDoc()
+    {
+        String url=getAttribute(AttributeName.URL, null, JDFConstants.EMPTYSTRING);
+        if(isWildCard(url))
+            return null;
+        BodyPart bodyPart=getOwnerDocument_KElement().getBodyPart();
+        InputStream is=UrlUtil.getURLInputStream(url, bodyPart);
+        if(is==null)
+            return null;
+        JDFParser p=new JDFParser();
+        return p.parseStream(is);
     }
 
 }
