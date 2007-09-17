@@ -11,8 +11,15 @@
  */
 package org.cip4.jdflib.jmf;
 
+import java.io.InputStream;
+
+import javax.mail.BodyPart;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoReturnQueueEntryParams;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFParser;
+import org.cip4.jdflib.util.UrlUtil;
 
 /**
  *
@@ -61,6 +68,23 @@ public class JDFReturnQueueEntryParams extends JDFAutoReturnQueueEntryParams
         String myLocalName)
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+    }
+    
+    /**
+     * returns the jdf doc referenced by url
+     * @return the document
+     */
+    public JDFDoc getURLDoc()
+    {
+        String url=getURL();
+        if(isWildCard(url))
+            return null;
+        BodyPart bodyPart=getOwnerDocument_KElement().getBodyPart();
+        InputStream is=UrlUtil.getURLInputStream(url, bodyPart);
+        if(is==null)
+            return null;
+        JDFParser p=new JDFParser();
+        return p.parseStream(is);
     }
 
     //**************************************** Methods *********************************************
