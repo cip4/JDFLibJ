@@ -71,12 +71,19 @@
 package org.cip4.jdflib.goldenticket;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFPartAmount;
+import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.JDFProcessRun;
 import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.UrlUtil;
 
@@ -96,6 +103,15 @@ public class BaseGoldenTicket
     protected JDFNode theNode=null;
     protected EnumVersion theVersion=null;
     protected int baseICSLevel;
+    /**
+     * percentage allowed maxamount waste to be used for audits
+     */
+    public int wastePercent=150; 
+    
+    /**
+     * percentage of amount to be used as actual for audits
+     */
+    public int actualPercent=103; 
 
     /**
      * create a BaseGoldenTicket
@@ -109,7 +125,7 @@ public class BaseGoldenTicket
     }
 
     /**
-     * assign a node to this golden ticket instatnce
+     * assign a node to this golden ticket instance
      * @param node the node to assign, if null a new conforming node is generated from scratch
      */
     public void assign(JDFNode node)
@@ -117,6 +133,58 @@ public class BaseGoldenTicket
         theNode=node==null ? new JDFDoc("JDF").getJDFRoot() : node;
         setVersion();
         init();
+    }
+
+    /**
+     * simulate execution of this node
+     * the internal node will be modified to reflect the excution
+     */
+    public void execute()
+    {
+        VElement vResLinks=theNode.getResourceLinks(null);
+        int siz= vResLinks!=null ? vResLinks.size() : 0;
+        for(int i=0;i<siz;i++)
+        {
+            JDFResourceLink rl=(JDFResourceLink)vResLinks.elementAt(i);
+            if(rl.hasChildElement(ElementName.AMOUNTPOOL, null))
+            {
+                int ipa=0;
+                while(true)
+                {
+                    JDFPartAmount pa=rl.getAmountPool().getPartAmount(ipa++);
+                    if(pa==null)
+                        break;
+                    JDFAttributeMap mPA=pa.getPartMap();
+                    if(mPA.containsKey("Condition"))
+                    {
+                        if(mPA.get("Condition").equals("Good"))
+                        {
+                            pa.setActualAmount(pa.getAmount(null)*actualPercent/100,null);
+                        }
+                        else if(mPA.get("Condition").equals("Waste"))
+                        {
+                            pa.setActualAmount(pa.getMaxAmount(null)*wastePercent/100,null);
+                        }
+                        
+                    }
+                    else if(pa.hasAttribute(AttributeName.AMOUNT))
+                    {
+                        pa.setActualAmount(pa.getAmount(null)*actualPercent/100,null);
+                    }
+                    
+                }
+                
+                
+            }
+            else if(rl.hasAttribute(AttributeName.AMOUNT))
+            {
+                rl.setActualAmount(rl.getAmount(null)*actualPercent/100, null);
+            }
+        }
+            
+        // base requires no generic excute support
+//      JDFProcessRun pr=(JDFProcessRun) theNode.getCreateAuditPool().addAudit(EnumAuditType.ProcessRun, null);
+
     }
 
 

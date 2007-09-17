@@ -76,15 +76,21 @@ import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFDevice;
+import org.cip4.jdflib.resource.JDFProcessRun;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.process.JDFCompany;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFPerson;
+import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.JDFDuration;
 
 /**
  * @author prosirai
@@ -94,6 +100,14 @@ public class MISGoldenTicket extends BaseGoldenTicket
 {
     protected int misICSLevel;
     protected int jmfICSLevel;
+    /**
+     * seconds ago that this started
+     */
+    public int preStart=600;
+    /**
+     * seconds this was active
+     */
+    public int duration=preStart/2;
     /**
      * create a BaseGoldenTicket
      * @param icsLevel the level to init to (1,2 or 3)
@@ -118,6 +132,31 @@ public class MISGoldenTicket extends BaseGoldenTicket
             new JMFGoldenTicket(jmfICSLevel,theVersion).assign(theNode);
         }
         super.init(); 
+    }
+    /**
+     * simulate execution of this node
+     * the internal node will be modified to reflect the excution
+      */
+    public void execute()
+    {
+        super.execute();
+        VJDFAttributeMap vNodeMap=theNode.getStatusPartMapVector();
+        if(vNodeMap==null)
+        {
+            vNodeMap=new VJDFAttributeMap();
+            vNodeMap.add(null);
+        }
+        for(int i=0;i<vNodeMap.size();i++)
+        {
+            JDFProcessRun pr=(JDFProcessRun) theNode.getCreateAuditPool().addAudit(EnumAuditType.ProcessRun, null);
+            JDFAttributeMap theMap=vNodeMap.elementAt(i);
+            pr.setPartMap(theMap);
+            pr.setEndStatus(theNode.getPartStatus(theMap));
+            pr.setDuration(new JDFDuration(duration));
+            final JDFDate date = new JDFDate();
+            date.addOffset(-preStart, 0, 0, 0);
+            pr.setStart(date);
+        }
     }
 
     /**

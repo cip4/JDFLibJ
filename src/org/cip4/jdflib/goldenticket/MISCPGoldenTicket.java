@@ -272,7 +272,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
                     if(previewAvailable)
                     {
                         pvp.setResStatus(EnumResStatus.Available, false);
-                        pvp.setURL("file://preveiewHost/previewDir/"+part.toString()+".png");
+                        pvp.setURL("file://previewHost/previewDir/"+part.toString()+".png");
                     }
                     else
                     {

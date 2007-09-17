@@ -534,8 +534,8 @@ public class CheckJDF
              if(jdfElement instanceof JDFResource)
              {
                  final JDFResource r = (JDFResource) jdfElement;
-                 if ((JDFResource.EnumResStatus.Incomplete).equals(r.getResStatus(false))
-                         ||(!r.isLeaf()&&(!r.getPartUsage().equals(JDFResource.EnumPartUsage.Implicit))))
+                 if (JDFResource.EnumResStatus.Incomplete.equals(r.getResStatus(false))
+                         ||(!r.isLeaf()&&(!JDFResource.EnumPartUsage.Implicit.equals(r.getPartUsage()))))
                  {
                      printMissElms = false;
                  }

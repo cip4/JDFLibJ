@@ -71,6 +71,7 @@
 package org.cip4.jdflib.goldenticket;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -80,7 +81,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 
 public class GoldenTicketTest extends JDFTestCaseBase
 {
-
+    String agentName;
     /////////////////////////////////////////////////////////////////////////////
     public void testBase()
     {
@@ -124,20 +125,29 @@ public class GoldenTicketTest extends JDFTestCaseBase
         vMap.add(new JDFAttributeMap(map));
         BaseGoldenTicket bgt=new MISCPGoldenTicket(1,null,2,1,true,vMap);
         bgt.assign(null);
-        final JDFNode node = bgt.getNode();
-        node.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp+"GoldenTicket_MISCPS_1_GB.jdf", 2, false);
+        JDFNode node = bgt.getNode();
+        node.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp+"GoldenTicket_Manager_MISCPS_1_GB.jdf", 2, false);
         assertTrue(node.getICSVersions(false).contains("Base_L2-1.3"));
         assertTrue(node.getICSVersions(false).contains("JMF_L2-1.3"));
         assertTrue(node.getICSVersions(false).contains("MIS_L1-1.3"));
         assertTrue(node.getICSVersions(false).contains("MISCPS_L1-1.3"));
-   }
+        bgt.execute();
+        node = bgt.getNode();
+        node.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp+"GoldenTicket_Worker_MISCPS_1_GB.jdf", 2, false);
+        assertTrue(node.getICSVersions(false).contains("Base_L2-1.3"));
+        assertTrue(node.getICSVersions(false).contains("JMF_L2-1.3"));
+        assertTrue(node.getICSVersions(false).contains("MIS_L1-1.3"));
+        assertTrue(node.getICSVersions(false).contains("MISCPS_L1-1.3"));
+    }
     /////////////////////////////////////////////////////////////////////////////
     /* (non-Javadoc)
      * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
      */
     protected void setUp() throws Exception
     {
+        agentName=JDFAudit.getStaticAgentName();
         JDFElement.setLongID(false);
+        JDFAudit.setStaticAgentName("JDF golden ticket generator");
         super.setUp();
     }
     /////////////////////////////////////////////////////////////////////////////
@@ -146,6 +156,7 @@ public class GoldenTicketTest extends JDFTestCaseBase
      */
     protected void tearDown() throws Exception
     {
+        JDFAudit.setStaticAgentName(agentName);
         JDFElement.setLongID(true);
         super.tearDown();
     }

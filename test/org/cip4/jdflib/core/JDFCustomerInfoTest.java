@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -79,19 +79,18 @@ package org.cip4.jdflib.core;
 
 import java.util.Vector;
 
-import junit.framework.TestCase;
-
+import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFContact;
 
 
-public class JDFCustomerInfoTest extends TestCase
+public class JDFCustomerInfoTest extends JDFTestCaseBase
 {
     public void testgetContactVector()
     {
         JDFDoc doc = new JDFDoc("JDF");
         JDFCustomerInfo info=prepareInfo(doc);
-        
+
         Vector v = null;
         info = doc.getJDFRoot().getCustomerInfo();
         if (info != null)
@@ -100,7 +99,7 @@ public class JDFCustomerInfoTest extends TestCase
             assertEquals("v does not contain 4 contact", v.size() , 4);
         }
 
-        
+
         v = null;
         info = doc.getJDFRoot().getCustomerInfo();
         if (info != null)
@@ -109,14 +108,14 @@ public class JDFCustomerInfoTest extends TestCase
             assertTrue("v does not contain 4 contacts", v.size() == 4);
         }        
     }    
-    
+
     /////////////////////////////////////////////////////////////////////////
 
     public void testGetContactWithContactType()
     {
         JDFDoc doc = new JDFDoc("JDF");
         JDFCustomerInfo info=prepareInfo(doc);
-        
+
         JDFContact cc = info.getContactWithContactType("Customer", 0);
         assertNotNull("cc", cc);
         cc = info.getContactWithContactType("Customer", 2);
@@ -138,7 +137,7 @@ public class JDFCustomerInfoTest extends TestCase
     {
         JDFDoc doc = new JDFDoc("JDF");
         JDFCustomerInfo info=prepareInfo(doc);
-        
+
         VElement v = info.getContactVectorWithContactType("Customer");
         assertNotNull(v);
         assertEquals(v.size(),3);
@@ -147,9 +146,9 @@ public class JDFCustomerInfoTest extends TestCase
         assertEquals(v.size(),1);
         v = info.getContactVectorWithContactType("beagle");
         assertNull(v);
-     }
+    }
     /////////////////////////////////////////////////////////////////////////
-    
+
     private JDFCustomerInfo prepareInfo(JDFDoc doc)
     {
         JDFNode n=doc.getJDFRoot();
@@ -167,6 +166,17 @@ public class JDFCustomerInfoTest extends TestCase
         vct.add("Customer");
         info.appendContact().setContactTypes(vct);
         return info;
+    }
+
+    /////////////////////////////////////////////////////////////////////////
+
+    public void testGetContact()
+    {
+        JDFDoc doc = new JDFDoc("JDF");
+        JDFNode n=doc.getJDFRoot();
+        JDFCustomerInfo info = n.appendCustomerInfo();
+        info.appendContact().setContactTypes(new VString("foo",null));
+        assertNotNull(info.getContact(0));
     }
 
 }

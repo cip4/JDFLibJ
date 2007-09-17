@@ -247,6 +247,8 @@ public class StringUtil
      */
     public static String setvString(String[] a, String sep, String front, String back)
     {
+        if(a==null)
+            return null;
         VString v=new VString(a);
         return setvString(v, sep, front, back);
     }
