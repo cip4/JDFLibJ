@@ -74,7 +74,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFCustomerInfo;
-import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -97,17 +96,20 @@ public class MISGoldenTicket extends BaseGoldenTicket
     protected int jmfICSLevel;
     /**
      * create a BaseGoldenTicket
-     * @param node the node to update, if null, a default node is created
      * @param icsLevel the level to init to (1,2 or 3)
      * @param jdfVersion the version to generate a golden ticket for
      * @param jmfLevel level of jmf ICS to support
      */
     public MISGoldenTicket(int icsLevel, EnumVersion jdfVersion, int jmfLevel)
     {
-        super(2,jdfVersion);
+        super(2,jdfVersion); // mis always requires base 2
         misICSLevel=icsLevel;
         jmfICSLevel=jmfLevel;
     }
+    
+    /**
+     * 
+     */
     public void assign(JDFNode node)
     {
         super.assign(node);
@@ -115,9 +117,9 @@ public class MISGoldenTicket extends BaseGoldenTicket
         {
             new JMFGoldenTicket(jmfICSLevel,theVersion).assign(theNode);
         }
-        super.init(); // mis always requires base 2
+        super.init(); 
     }
-    
+
     /**
      * initializes this node to a given ICS version
      * @param icsLevel the level to init to (1,2 or 3)

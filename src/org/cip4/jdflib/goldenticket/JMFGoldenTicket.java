@@ -84,7 +84,6 @@ public class JMFGoldenTicket extends BaseGoldenTicket
     protected int jmfICSLevel;
     /**
      * create a BaseGoldenTicket
-     * @param node the node to update, if null, a default node is created
      * @param icsLevel the level to init to (1,2 or 3)
      * @param jdfVersion the version to generate a golden ticket for
      */

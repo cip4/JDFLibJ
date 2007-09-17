@@ -90,7 +90,6 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFCMYKColor;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
@@ -106,7 +105,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPreview;
 
 /**
- * @author prosirai
+ * @author Rainer Prosi
  * class that generates golden tickets based on ICS levels etc
  */
 public class MISCPGoldenTicket extends MISGoldenTicket
@@ -122,7 +121,6 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 
     /**
      * create a BaseGoldenTicket
-     * @param node the node to update, if null, a default node is created
      * @param icsLevel the level to init to (1,2 or 3)
      * @param jdfVersion the version to generate a golden ticket for
      * @param jmfLevel level of jmf ICS to support
@@ -137,6 +135,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         vParts=vPartMap;
         icsLevel=_icsLevel;        
     }
+    
     /**
      * initializes this node to a given ICS version
      * @param icsLevel the level to init to (1,2 or 3)
@@ -172,6 +171,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         initPreview();
         super.init();
     }
+    
     /**
      * @param icsLevel
      */

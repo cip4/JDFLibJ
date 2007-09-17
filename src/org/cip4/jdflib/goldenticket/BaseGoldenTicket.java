@@ -83,15 +83,22 @@ import org.cip4.jdflib.util.UrlUtil;
 /**
  * @author prosirai
  * class that generates golden tickets based on ICS levels etc
+ * basegolden ticket should generally be the last in the cascade domain - mis - jmf - base
+ * 
+ * To generate a new golden ticket, follow these steps
+ * 1.) construct the appropriate domain subclass, e.g. MISCPGoldenTicket for mis to conventional print
+ * 2.) call .assign(null) (or your favorite hand-coded jdf node)
+ * 3.) retrieve the updated copy with .getNode()
+ * 
  */
 public class BaseGoldenTicket
 {
     protected JDFNode theNode=null;
     protected EnumVersion theVersion=null;
     protected int baseICSLevel;
+
     /**
      * create a BaseGoldenTicket
-     * @param node the node to update, if null, a default node is created
      * @param icsLevel the level to init to (1,2 or 3)
      * @param jdfVersion the version to generate a golden ticket for
      */
@@ -100,12 +107,19 @@ public class BaseGoldenTicket
         baseICSLevel=icsLevel;
         theVersion=jdfVersion;
     }
+
+    /**
+     * assign a node to this golden ticket instatnce
+     * @param node the node to assign, if null a new conforming node is generated from scratch
+     */
     public void assign(JDFNode node)
     {
         theNode=node==null ? new JDFDoc("JDF").getJDFRoot() : node;
         setVersion();
         init();
     }
+
+
     protected void setVersion()
     {
         if(theVersion==null)
@@ -126,32 +140,28 @@ public class BaseGoldenTicket
         theNode.setStatus(EnumNodeStatus.Waiting);
         if(!theNode.hasAttribute(AttributeName.DESCRIPTIVENAME))
             theNode.setDescriptiveName("Base Golden Ticket Example Job - version: "+JDFAudit.software());
-        
+
         if(!theNode.hasAttribute(AttributeName.COMMENTURL))
             theNode.setCommentURL(UrlUtil.StringToURL("//MyHost/data/Comments.html").toExternalForm());
     }
+
     /**
+     * gets the current state of the node
      * @return the theNode
      */
     public JDFNode getNode()
     {
         return theNode;
     }
-    /**
-     * @param theNode the theNode to set
-     */
-    public void setNode(JDFNode _theNode)
-    {
-        this.theNode = _theNode;
-    }
+
     /* (non-Javadoc)
      * @see java.lang.Object#toString()
      */
     public String toString()
     {
-         String s= "["+this.getClass().getSimpleName()+" Version: "+EnumUtil.getName(theVersion)+"]";
-         if(theNode!=null)
-             s+=theNode.toString();
-         return s;
+        String s= "["+this.getClass().getSimpleName()+" Version: "+EnumUtil.getName(theVersion)+"]";
+        if(theNode!=null)
+            s+=theNode.toString();
+        return s;
     }
 }

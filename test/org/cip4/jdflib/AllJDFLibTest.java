@@ -133,6 +133,7 @@ import org.cip4.jdflib.examples.NColorTest;
 import org.cip4.jdflib.examples.StrippingTest;
 import org.cip4.jdflib.examples.VarnishTest;
 import org.cip4.jdflib.examples.WebTest;
+import org.cip4.jdflib.goldenticket.GoldenTicketTest;
 import org.cip4.jdflib.jmf.JDFJMFTest;
 import org.cip4.jdflib.jmf.JDFMessageServiceTest;
 import org.cip4.jdflib.jmf.JDFMessageTest;
@@ -278,6 +279,9 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(StrippingTest.class);
         suite.addTestSuite(VarnishTest.class);
         suite.addTestSuite(WebTest.class);
+        
+        // Golden tickets
+        suite.addTestSuite(GoldenTicketTest.class);
 
         // JMF
         suite.addTestSuite(JDFJMFTest.class);
