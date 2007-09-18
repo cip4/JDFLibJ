@@ -83,7 +83,6 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.resource.process.JDFAssemblySection;
 
 public class JDFDocTest extends JDFTestCaseBase
 {
