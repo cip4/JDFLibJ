@@ -325,7 +325,7 @@ public class UrlUtil
         {
             try
             {
-                String bpContent=bp[i].getContentType();
+                bp[i].getContentType();
                 parts[i]=new UrlPart(bp[i]);
             }
             catch (MessagingException e) 

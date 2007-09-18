@@ -87,7 +87,6 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.MimeUtil;
-import org.cip4.jdflib.util.UrlUtil;
 import org.w3c.dom.Document;
 
 /**

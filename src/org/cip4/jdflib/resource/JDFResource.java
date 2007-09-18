@@ -117,7 +117,6 @@ import org.cip4.jdflib.resource.process.JDFSourceResource;
 import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.StringUtil;
-import org.w3c.dom.Node;
 
 
 public class JDFResource extends JDFElement

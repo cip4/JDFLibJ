@@ -78,12 +78,10 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.resource.JDFProcessRun;
 import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.UrlUtil;
 
@@ -227,7 +225,7 @@ public class BaseGoldenTicket
      */
     public String toString()
     {
-        String s= "["+this.getClass().getSimpleName()+" Version: "+EnumUtil.getName(theVersion)+"]";
+        String s= "["+this.getClass().getName()+" Version: "+EnumUtil.getName(theVersion)+"]";
         if(theNode!=null)
             s+=theNode.toString();
         return s;

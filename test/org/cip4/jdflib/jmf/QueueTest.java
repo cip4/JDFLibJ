@@ -74,7 +74,6 @@ import junit.framework.TestCase;
 
 import org.cip4.jdflib.auto.JDFAutoQueue.EnumQueueStatus;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
-import org.cip4.jdflib.auto.JDFAutoQueueFilter.EnumQueueEntryDetails;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -83,7 +82,6 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StatusCounter;
 
-import com.sun.org.apache.bcel.internal.classfile.Attribute;
 
 /**
  * @author MuchaD

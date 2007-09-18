@@ -100,7 +100,6 @@ import org.cip4.jdflib.resource.process.JDFColorantControl;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFConventionalPrintingParams;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
-import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPreview;
 
@@ -230,14 +229,14 @@ public class MISCPGoldenTicket extends MISGoldenTicket
             for(int i=0;i<reducedMap.size();i++)
             {
                 final JDFAttributeMap part = reducedMap.elementAt(i);
-                JDFComponent outCompPart=(JDFComponent) outComp.getCreatePartition(part, partIDKeys);
+                outComp.getCreatePartition(part, partIDKeys);
                 JDFAttributeMap newMap=new JDFAttributeMap(part);
                 newMap.put(AttributeName.CONDITION, "Good");
                 rl.setAmount(sheetAmount, newMap);
                 rl.setMaxAmount(sheetAmount*1.1, newMap);
             }
         }
-        JDFLayout lo=outComp.appendLayout();
+        outComp.appendLayout();
         JDFMedia inMedia=(JDFMedia) theNode.getResource(ElementName.MEDIA, EnumUsage.Input, 0);
         outComp.setDimensions(inMedia.getDimension());
 
