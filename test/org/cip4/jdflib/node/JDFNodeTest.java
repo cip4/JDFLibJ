@@ -712,6 +712,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         docJMF.write2File(sm_dirTestDataTemp+"inprogress3.jmf",2,true);
 
     }
+    
     /**
      *
      *
@@ -1470,7 +1471,11 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertEquals(n2, n.getNodeInfo(2));
         assertNull(n.getNodeInfo(0));
         assertNull(n.getNodeInfo(3));
+        
         assertEquals(n.getPartStatus(map), EnumNodeStatus.FailedTestRun);
+        n.removeAttribute(AttributeName.TYPES);
+        assertNotNull("invalid types attribute, but still retrieve ni with no cpi",n.getNodeInfo());
+        assertNotSame("invalid types attribute, but...",n.getNodeInfo(),n2);
     }
 
     //////////////////////////////////////////////////////////////

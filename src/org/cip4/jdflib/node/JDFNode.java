@@ -5474,7 +5474,7 @@ public class JDFNode extends JDFElement
                 for(int i=0;i<siz;i++)
                 {
                     JDFResourceLink rl=(JDFResourceLink) v.elementAt(i);
-                    if(!rl.hasAttribute(AttributeName.COMBINEDPROCESSINDEX) || rl.getCombinedProcessIndex().size()==getTypes().size())
+                    if(!rl.hasAttribute(AttributeName.COMBINEDPROCESSINDEX) || (hasAttribute(AttributeName.TYPES) && rl.getCombinedProcessIndex().size()==getTypes().size()))
                     {
                         nici=rl.getTarget();
                         break;
