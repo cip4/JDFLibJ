@@ -389,7 +389,7 @@ public class StatusCounter
         if(pt1!=null && pt2!=pt1) // we explicitly added a new phasetime audit, thus we need to add a closing JMF for the original jobPhase
         {
             bChanged=true;
-            respStatus = closeJobPhase(jmf, la, pt1, pt2);
+            respStatus = closeJobPhase(jmf, la, pt1, pt2);	// TODO evaluate respStatus
         }
 
         if(pt2!=null)

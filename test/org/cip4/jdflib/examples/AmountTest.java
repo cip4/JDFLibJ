@@ -274,7 +274,6 @@ public class AmountTest extends JDFTestCaseBase
 
         outXM=(JDFExposedMedia) outXM.addPartition(EnumPartIDKey.SignatureName, "Sig1");
         VString vsSheet=new VString("Cover Sheet1 Sheet2"," ");
-        VString vsCMYK=new VString("Cyan Magenta Yellow Black Spot1"," ");
         StatusCounter stUtil=new StatusCounter(n,null,vRL);
            
         for(int i=0;i<vsSheet.size();i++)
@@ -299,7 +298,7 @@ public class AmountTest extends JDFTestCaseBase
             stUtil.addPhase(refXM,5, 0);
             stUtil.setPhase(EnumNodeStatus.InProgress, "Imaging", EnumDeviceStatus.Running, null);
             
-            JDFResourceAudit ra=stUtil.setResourceAudit(refMedia,EnumReason.ProcessResult);
+            stUtil.setResourceAudit(refMedia,EnumReason.ProcessResult);
 
             JDFProcessRun pr=stUtil.setProcessResult(EnumNodeStatus.Completed);
             pr.setDescriptiveName("we even have the utterly useless ProcessRun");

@@ -76,16 +76,9 @@
  */
 package org.cip4.jdflib.util;
 
-import java.io.File;
-import java.net.MalformedURLException;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.core.JDFElement.EnumOrientation;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
 
 
 /**
