@@ -93,6 +93,7 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFPhaseTime;
+import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.util.JDFDate;
 
 
@@ -218,6 +219,9 @@ import org.cip4.jdflib.util.JDFDate;
             if(rl.getAmountPoolAttribute(AttributeName.ACTUALAMOUNT, null, null, 0)!=null)
                 jp.setPhaseAmount(rl.getActualAmount(null));
         }
+        JDFMISDetails md=pt.getMISDetails();
+        jp.copyElement(md,null);
+        
         //TODO set more
         jp.eraseEmptyAttributes(true);
         return jp;

@@ -5577,7 +5577,7 @@ public class JDFResource extends JDFElement
             final String idKeys = partRoot.getAttribute(AttributeName.PARTIDKEYS, null, null);
             return StringUtil.tokenize(idKeys,JDFConstants.BLANK,false);
         }
-        return new VString();
+        return null;
     }
 
 

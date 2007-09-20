@@ -602,6 +602,7 @@ public class JDFAuditPool extends JDFPool
                         continue;
 
                     JDFPhaseTime pt=setPhase(phase.getStatus(), phase.getStatusDetails(), phase.getPartMapVector());
+                    pt.copyElement(phase.getMISDetails(), null);
                     pt.setEnd(jmf.getTimeStamp());
                     pt.setStart(phase.getPhaseStartTime());
                     vRet.add(pt);

@@ -130,10 +130,12 @@ import org.cip4.jdflib.examples.IterationTest;
 import org.cip4.jdflib.examples.JDFExampleDocTest;
 import org.cip4.jdflib.examples.MISFinTest;
 import org.cip4.jdflib.examples.NColorTest;
+import org.cip4.jdflib.examples.RIPTest;
 import org.cip4.jdflib.examples.StrippingTest;
 import org.cip4.jdflib.examples.VarnishTest;
 import org.cip4.jdflib.examples.WebTest;
 import org.cip4.jdflib.goldenticket.GoldenTicketTest;
+import org.cip4.jdflib.jmf.JDFDeviceInfoTest;
 import org.cip4.jdflib.jmf.JDFJMFTest;
 import org.cip4.jdflib.jmf.JDFMessageServiceTest;
 import org.cip4.jdflib.jmf.JDFMessageTest;
@@ -276,6 +278,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JDFExampleDocTest.class);
         suite.addTestSuite(MISFinTest.class);
         suite.addTestSuite(NColorTest.class);        
+        suite.addTestSuite(RIPTest.class);        
         suite.addTestSuite(StrippingTest.class);
         suite.addTestSuite(VarnishTest.class);
         suite.addTestSuite(WebTest.class);
@@ -284,6 +287,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(GoldenTicketTest.class);
 
         // JMF
+        suite.addTestSuite(JDFDeviceInfoTest.class);
         suite.addTestSuite(JDFJMFTest.class);
         suite.addTestSuite(JDFMessageTest.class);
         suite.addTestSuite(JDFMessageServiceTest.class);

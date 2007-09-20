@@ -319,13 +319,15 @@ public class StatusUtil {
 
             JDFSignal s=(JDFSignal)jmf.appendMessageElement(JDFMessage.EnumFamily.Signal,JDFMessage.EnumType.Status);
             JDFDeviceInfo deviceInfo = s.appendDeviceInfo();
+            
             JDFJobPhase jp=deviceInfo.createJobPhaseFromPhaseTime(pt1);
             jp.setJobID(m_Node.getJobID(true));
             jp.setJobPartID(m_Node.getJobPartID(false));
             setJobPhaseAmounts(lastAb, jp);
 
-            if(m_deviceID!=null) {
-				pt2.appendDevice().setDeviceID(m_deviceID);
+            if(m_deviceID!=null) 
+            {
+				deviceInfo.setDeviceID(m_deviceID);
 			}
         }
 

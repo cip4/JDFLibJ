@@ -73,9 +73,12 @@ package org.cip4.jdflib.util;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
+import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumWorkType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJobPhase;
 import org.cip4.jdflib.jmf.JDFResponse;
@@ -87,15 +90,41 @@ import org.cip4.jdflib.resource.process.JDFExposedMedia;
 
 public class StatusCounterTest extends JDFTestCaseBase
 {
-    public void testAddPhase()
+    protected JDFDoc d;
+    private JDFNode n;
+    private StatusCounter sc;
+    private String deviceID;
+    private String resID;
+    private JDFExposedMedia xpMedia;
+
+
+    public void setUp() throws Exception
     {
-        JDFDoc d=creatXMDoc();
-        JDFNode n=d.getJDFRoot();
-        StatusCounter sc=new StatusCounter(n,null,null);
-        JDFExposedMedia m=(JDFExposedMedia) n.getMatchingResource("ExposedMedia", null, null, 0);
-        String resID=m.getID();
+        d = creatXMDoc();
+        n = d.getJDFRoot();
+        sc = new StatusCounter(n,null,null);
+        deviceID = "Status-counter-TestDevice";
+        sc.setDeviceID(deviceID);
+        xpMedia = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", null, null, 0);
+        resID = xpMedia.getID();
         sc.setFirstRefID(resID);
         sc.addPhase(resID, 200, 0);
+
+    }
+
+
+    public void testDeviceID()
+    {
+        boolean bChanged=sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
+        assertTrue(bChanged);
+        JDFDoc docJMF=sc.getDocJMFPhaseTime();
+        JDFResponse sig=(JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
+        final JDFDeviceInfo deviceInfo = sig.getDeviceInfo(0);
+        assertEquals(deviceInfo.getDeviceID(), deviceID);
+
+    }
+    public void testAddPhase()
+    {
         boolean bChanged=sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
         assertTrue(bChanged);
         JDFDoc docJMF=sc.getDocJMFPhaseTime();
@@ -103,37 +132,48 @@ public class StatusCounterTest extends JDFTestCaseBase
         JDFJobPhase jp=sig.getDeviceInfo(0).getJobPhase(0);
         assertEquals(jp.getAmount(), 200,0);
         sc.addPhase(resID, 0, 100);
-        sc.setTrackWaste(m.getID(), true);
-        bChanged= sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
-        assertFalse(bChanged);
-        docJMF=sc.getDocJMFPhaseTime();
-        sig=(JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
-        jp=sig.getDeviceInfo(0).getJobPhase(0);
-        assertEquals(jp.getAmount(), 200,0);
-        assertEquals(jp.getWaste(), 100,0);
+        sc.setTrackWaste(resID, true);
+        JDFResourceLink rlXM=n.getLink(xpMedia, null);
+        for(int loop=1;loop<4;loop++)
+        {
+            bChanged= sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
+            assertFalse(bChanged);
+            docJMF=sc.getDocJMFPhaseTime();
+            sig=(JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
+            jp=sig.getDeviceInfo(0).getJobPhase(0);
+            assertEquals("multiple setPhase calls do not modify",jp.getAmount(), 200,0);
+            assertEquals("multiple setPhase calls do not modify: "+loop,rlXM.getActualAmount(new JDFAttributeMap("Condition","Good")), 200,0);
+            sc.addPhase(resID, 0, 100);
+            assertEquals(""+loop,jp.getWaste(), loop*100,0);
+            assertEquals("multiple setPhase calls do Stack: "+loop,rlXM.getActualAmount(new JDFAttributeMap("Condition","Waste")), 100*loop,0);
+            
+        }
+        sc.setWorkType(EnumWorkType.Alteration);
         bChanged=sc.setPhase(EnumNodeStatus.InProgress, "ii", EnumDeviceStatus.Running, "r");
         assertTrue(bChanged);
         docJMF=sc.getDocJMFPhaseTime();
         sig=(JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
         jp=sig.getDeviceInfo(0).getJobPhase(0);
         assertEquals(jp.getAmount(), 200,0);
-        assertEquals(jp.getWaste(), 100,0);
+        assertEquals(jp.getWaste(), 400,0);
         assertTrue(jp.hasAttribute(AttributeName.PHASEAMOUNT));
         sig=(JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 1);
         jp=sig.getDeviceInfo(0).getJobPhase(0);
         assertFalse(jp.hasAttribute(AttributeName.PHASEAMOUNT));
-       
+        assertEquals(jp.getMISDetails().getWorkType(),EnumWorkType.Alteration);
+
         sc.setFirstRefID("dummy");
         sc.addPhase(resID, 0, 100);
-        sc.setTrackWaste(m.getID(), true);
+        sc.setTrackWaste(resID, true);
         sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
         docJMF=sc.getDocJMFPhaseTime();
         sig=(JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
         jp=sig.getDeviceInfo(0).getJobPhase(0);
         assertFalse(jp.hasAttribute(AttributeName.AMOUNT));
+        assertEquals(jp.getMISDetails().getWorkType(),EnumWorkType.Alteration);
     }
-    
-    
+
+
     public void testIdle()
     {
         JDFDoc d=creatXMDoc();
@@ -158,14 +198,14 @@ public class StatusCounterTest extends JDFTestCaseBase
         sig=(JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
         bChanged= sc.setPhase(EnumNodeStatus.Completed, null, EnumDeviceStatus.Idle, null);
         assertTrue(bChanged);
-        
+
         sc.setActiveNode(null, null, null);
         bChanged= sc.setPhase(null, null, EnumDeviceStatus.Idle, null);
         assertFalse(bChanged);
         bChanged=sc.setPhase(null, null, EnumDeviceStatus.Idle, "very idle");
         assertTrue(bChanged);
 
-       
+
 
         docJMF=sc.getDocJMFPhaseTime();
         sig=(JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
