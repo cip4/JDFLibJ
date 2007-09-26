@@ -81,7 +81,9 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
@@ -89,6 +91,7 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFMedia;
 
 
@@ -222,6 +225,26 @@ public class CheckJDFTest extends JDFTestCaseBase
         checker.validate(args, ins);
     }
 
+    public void testBadResLink() throws Exception
+    {
+        JDFDoc d=new JDFDoc("JDF");
+        JDFNode n=d.getJDFRoot();
+        n.setType(EnumType.Stitching);
+        JDFResource r=n.addResource(ElementName.STITCHINGPARAMS, EnumUsage.Input);
+        JDFResourceLink rl=n.getLink(r, null);
+        assertTrue(rl.isValid(EnumValidationLevel.Complete));
+        assertTrue(n.isValid(EnumValidationLevel.Incomplete));
+        rl.setrRef("badLink");
+        assertFalse(rl.isValid(EnumValidationLevel.Complete));
+        assertFalse(n.isValid(EnumValidationLevel.Complete));
+        CheckJDF cj=new CheckJDF();
+        XMLDoc res=cj.processSingleDocument(d);
+        KElement root=res.getRoot();
+        String s=root.toString();
+        assertTrue(s.indexOf("Dangling")>0);
+        
+        
+    }
     public void testValidateZip() throws Exception
     {
    

@@ -4858,6 +4858,7 @@ public class KElement extends ElementNSImpl
      *
      * @tbd enhance the subsets of allowed XPaths,
      *      now only .,..,/,@ are supported
+     * TODO fix bug for attribute searches where the att value contains xpath syntax      
      *
      * @param path XPath abbreviated syntax representation of the attribute,
      *              <code>parentElement/thisElement/@thisAtt</code>
@@ -5069,6 +5070,13 @@ public class KElement extends ElementNSImpl
         if (posB0 != -1 && (posB0<pos || pos==-1)) // parse for [n]
         {
             int posB1 = path.indexOf("]");
+            int posB2 = path.indexOf("[");
+            //TODO fix escape attribute values
+//            while(posB2<posB1)
+//            {
+//                posB1 = path.indexOf(posB1,']');
+//                posB2 = path.indexOf(posB2,'[');                
+//            }
             String n = path.substring(posB0 + 1, posB1);
             iSkip = StringUtil.parseInt(n, 0);
             if(iSkip<=0)

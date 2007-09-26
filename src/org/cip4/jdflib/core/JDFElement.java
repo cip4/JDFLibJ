@@ -2585,8 +2585,18 @@ public class JDFElement extends KElement
             boolean bIgnorePrivate,
             int nMax)
     {
-        AttributeInfo ai=getTheAttributeInfo();
-        return getInvalidAttributes_JDFElement(level, bIgnorePrivate, nMax,ai);
+        
+        final AttributeInfo ai=getTheAttributeInfo();
+        VString v=getInvalidAttributes_JDFElement(level, bIgnorePrivate, nMax,ai);
+        String s=getNamespaceURI();
+        if(s!=null && s.startsWith("http://www.CIP4.org/JDFSchema")&&!s.equals(JDFConstants.JDFNAMESPACE))
+        {
+           if(v==null)
+               v=new VString(AttributeName.XMLNS,null);
+           else
+               v.appendUnique(AttributeName.XMLNS);
+        }
+        return v;
     }
 
     /**

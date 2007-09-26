@@ -1003,7 +1003,11 @@ public class JDFResourceLink extends JDFElement
         // Don't change this method without checking if routing is still working !
         // The C++ method is different and is not used, the java method is used for routing.
         VJDFAttributeMap vPart=bCheckResource ? getResourcePartMapVector() : getPartMapVector();
-        boolean bImplicit = JDFResource.EnumPartUsage.Implicit.equals(getLinkRoot().getPartUsage());
+        final JDFResource linkRoot = getLinkRoot();
+        if(linkRoot==null)
+            return false;
+        
+        boolean bImplicit = JDFResource.EnumPartUsage.Implicit.equals(linkRoot.getPartUsage());
 
         if ((partMap == null || partMap.isEmpty()) && (vPart == null || vPart.isEmpty()))
         {
