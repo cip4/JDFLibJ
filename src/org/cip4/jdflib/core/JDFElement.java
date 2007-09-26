@@ -2589,7 +2589,9 @@ public class JDFElement extends KElement
         final AttributeInfo ai=getTheAttributeInfo();
         VString v=getInvalidAttributes_JDFElement(level, bIgnorePrivate, nMax,ai);
         String s=getNamespaceURI();
-        if(s!=null && s.startsWith("http://www.CIP4.org/JDFSchema")&&!s.equals(JDFConstants.JDFNAMESPACE))
+        if(s!=null)
+            s=s.toLowerCase();
+        if(s!=null && s.indexOf("www.cip4.org")>=0&&!s.equals(JDFConstants.JDFNAMESPACE))
         {
            if(v==null)
                v=new VString(AttributeName.XMLNS,null);

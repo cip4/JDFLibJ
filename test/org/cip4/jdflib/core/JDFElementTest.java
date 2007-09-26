@@ -116,6 +116,7 @@ import org.cip4.jdflib.resource.process.JDFComChannel;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author MuchaD
@@ -815,6 +816,20 @@ public class JDFElementTest extends TestCase
                 fail("oops");
             m.add(s);
         }
+    }
+///////////////////////////////////////////////////////////////////////////    
+
+    public void testInvalidNameSpace()
+    {
+        JDFDoc doc=new JDFDoc("JDF");
+        JDFElement e=doc.getJDFRoot();
+        String s =JDFConstants.JDFNAMESPACE;
+        s=StringUtil.replaceString(s, "_1_1", "_1_3");
+        JDFElement e2=(JDFElement)e.appendElement("ResourcePool", s);
+        assertTrue(e2.getInvalidAttributes(EnumValidationLevel.Incomplete, true, 9999).contains("xmlns"));
+        e2=(JDFElement)e.appendElement("ResourceLinkPool", "www.cip4.org");
+        assertTrue(e2.getInvalidAttributes(EnumValidationLevel.Incomplete, true, 9999).contains("xmlns"));
+        
     }
 ///////////////////////////////////////////////////////////////////////////    
 
