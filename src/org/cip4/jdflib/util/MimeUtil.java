@@ -83,6 +83,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Vector;
 
@@ -563,91 +564,110 @@ public class MimeUtil
         return multipart;
     }
 
-    private static int extendMultipart(Multipart multipart, JDFDoc docJDF , String cid)
-    {
-        int n=0;
-        if(docJDF==null)
-            return 0;
+    /**
+	 * Adds a JDF document to a multipart. Any files referenced by the JDF
+	 * document using FileSpec/@URL are also included in the multipart.
+	 * 
+	 * @param multipart
+	 *            the multipart to add the JDF document to
+	 * @param docJDF
+	 *            the JDF document
+	 * @param cid
+	 *            the CID the JDF document should have in the multipart
+	 * @return the number of files added to the multipart
+	 */
+	private static int extendMultipart(Multipart multipart, JDFDoc docJDF, String cid) {
+		int n = 0;
+		if (docJDF == null) {
+			return 0;
+		}
+		// Get all FileSpec elements
+		final KElement e = docJDF.getRoot();
+		final VElement fileSpecs = e.getChildrenByTagName(ElementName.FILESPEC, null, new JDFAttributeMap(AttributeName.URL, "*"), false, false, 0);
+		final int vSize = fileSpecs == null ? 0 : fileSpecs.size();
+		String[] urlStrings = listURLs(fileSpecs);
+		for (int i = 0; i < urlStrings.length; i++) {
+			if (urlStrings[i] != null) {
+				// Convert URL to CID and update FileSpec
+				File f = UrlUtil.urlToFile(urlStrings[i]);
+				if (f != null && !f.isAbsolute()) {
+					// Resolve relative URLs
+					if (docJDF.getOriginalFileName() != null) {
+						File jdfFile = new File(docJDF.getOriginalFileName());
+						f = new File(jdfFile.getParent(), f.getPath());
+						try {
+							urlStrings[i] = f.toURL().toExternalForm();
+						} catch (MalformedURLException e1) {							
+						}
+					}
+				}
+				if (f == null || !f.canRead()) {
+					// Ignore unreadable files
+					urlStrings[i] = null;
+				} else {
+					// Update FileSpec's URL
+					fileSpecs.item(i).setAttribute(AttributeName.URL, urlToCid(urlStrings[i]), null);
+				}
+				// Set duplicate URLs to null so that the file is only added once to multipart  
+				for (int j = 0; j < i; j++) {
+					if (urlStrings[i] != null && urlStrings[i].equals(urlStrings[j])) {
+						urlStrings[i] = null;
+					}
+				}
+			}
+		}
+		updateXMLMultipart(multipart, docJDF, cid);
 
-        KElement e=docJDF.getRoot();
-        // get a list of all referenced document urls
-        VElement v=e.getChildrenByTagName(ElementName.FILESPEC, null, new JDFAttributeMap(AttributeName.URL,"*"), false, false, 0);
-        final int vSize = v==null ? 0 : v.size();
-        String[] urlStrings = listURLs(v);
-        for(int i=0;i<urlStrings.length;i++)
-        {
-            if(urlStrings[i]!=null)
-            {
-                for(int j=0;j<i;j++)
-                {
-                    if(urlStrings[i].equals(urlStrings[j]))
-                    {
-                        v.item(i).setAttribute(AttributeName.URL,urlToCid(urlStrings[i]),null);
-                        urlStrings[i]=null;
-                    }
-                }
-                if(urlStrings[i]!=null)
-                {
-                    File f=UrlUtil.urlToFile(urlStrings[i]);
-                    if(f==null || !f.canRead())
-                    {
-                        urlStrings[i]=null;
-                    }
-                    else
-                    {
-                        v.item(i).setAttribute(AttributeName.URL,urlToCid(urlStrings[i]),null);
-                    }
-                }
-            }
-        }
-        updateXMLMultipart(multipart, docJDF, cid);
+		// add a new body part for each url
+		for (int i = 0; i < vSize; i++) {
+			final String urlString = urlStrings[i];
+			if (urlString != null) {
+				try {
+					DataSource uds = null;
+					File f = UrlUtil.urlToFile(urlString);
+					if (f != null && f.canRead()) {
+						uds = new FileDataSource(f);
+					}
+					if (uds == null) {
+						continue; // no data source
+					}
+					BodyPart messageBodyPart = new MimeBodyPart();
+					messageBodyPart.setDataHandler(new DataHandler(uds));
 
-        // add a new body part for each url
-        for(int i=0;i<vSize;i++)
-        {
-            final String urlString=urlStrings[i];
-            if(urlString!=null)
-            {
-                try
-                {
-                    DataSource uds=null;
-                    File f=UrlUtil.urlToFile(urlString);
-                    if(f!=null && f.canRead())
-                    {
-                        uds=new FileDataSource(f);
-                    }
-                    if(uds==null)
-                        continue; // no data source
+					setFileName(messageBodyPart, f == null ? null : f.getAbsolutePath());
+					// messageBodyPart.setHeader("Content-Type",
+					// JMFServlet.JDF_CONTENT_TYPE); // JDF:
+					// application/vnd.cip4-jdf+xml
+					setContentID(messageBodyPart, urlString);
+					multipart.addBodyPart(messageBodyPart);
+					n++;
+				} catch (MessagingException e1) {
+					// nop
+				}
+			}
+		}
+		return n;
+	}
 
-                    BodyPart messageBodyPart = new MimeBodyPart();
-                    messageBodyPart.setDataHandler(new DataHandler(uds));
-
-                    setFileName(messageBodyPart,f==null ? null : f.getAbsolutePath());
-                    //messageBodyPart.setHeader("Content-Type", JMFServlet.JDF_CONTENT_TYPE); // JDF: application/vnd.cip4-jdf+xml
-                    setContentID(messageBodyPart,urlString);
-                    multipart.addBodyPart(messageBodyPart);
-                    n++;
-                }
-                catch (MessagingException e1)
-                {
-                    // nop
-                } 
-            }
-        }
-
-        return n;
-    }
-
-    private static String[] listURLs(VElement v)
-    {
-        final int vSize = v==null ? 0 : v.size();
-        String[] urlStrings=new String[vSize];
-        for(int i=0;i<vSize;i++)
-        {
-            urlStrings[i]=v.item(i).getAttribute(AttributeName.URL,null,null);
-        }
-        return urlStrings;
-    }
+	/**
+	 * Returns the values of the <i>URL</i> attribute of each element in the
+	 * input list.
+	 * 
+	 * @param fileSpecs
+	 *            a list of elements with <i>URL</i> attributes
+	 * @return an array containing the value of the <i>URL</i> attribute of
+	 *         each element in the input list. The order of values in the
+	 *         returned array corresponds to the order of the elements in the
+	 *         input list.
+	 */
+    private static String[] listURLs(VElement fileSpecs) {
+		final int vSize = fileSpecs == null ? 0 : fileSpecs.size();
+		String[] urlStrings = new String[vSize];
+		for (int i = 0; i < vSize; i++) {
+			urlStrings[i] = fileSpecs.item(i).getAttribute(AttributeName.URL, null, null);
+		}
+		return urlStrings;
+	}
 
     private static String urlToCid(String urlString)
     {
@@ -664,11 +684,14 @@ public class MimeUtil
     }
 
     /**
-     * Builds a MIME package.
-     * @param vXMLDocs   the Vector of XMLDoc representing the JMF and JDFs to be stored as the first part
-     *                      of the package t
-     * @return a Message representing the resulting MIME package, null if an error occured
-     */
+	 * Builds a MIME package.
+	 * 
+	 * @param vXMLDocs
+	 *            the Vector of XMLDoc representing the JMF and JDFs to be
+	 *            stored as the first part of the package t
+	 * @return a Message representing the resulting MIME package, null if an
+	 *         error occured
+	 */
     static public Multipart buildMimePackage(Vector vXMLDocs)  
     {
         if(vXMLDocs==null || vXMLDocs.size()==0)

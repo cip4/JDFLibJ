@@ -76,6 +76,8 @@ package org.cip4.jdflib.util;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 
 import javax.mail.BodyPart;
@@ -86,9 +88,12 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
@@ -120,7 +125,7 @@ public class MimeUtilTest extends JDFTestCaseBase
         JDFRunList rl=(JDFRunList)n.addResource(ElementName.RUNLIST, null, EnumUsage.Input, null, null, null, null);
         rl.addPDF(StringUtil.uncToUrl(sm_dirTestData+File.separator+"url1.pdf",false), 0, -1);
         for(int i=0;i<100;i++)
-            rl.addPDF(StringUtil.uncToUrl(sm_dirTestData+File.separator+"urlü€.pdf",false), 0, -1);
+            rl.addPDF(StringUtil.uncToUrl(sm_dirTestData+File.separator+"urlï¿½.pdf",false), 0, -1);
         Multipart m=MimeUtil.buildMimePackage(docJMF,doc);
         MimeUtil.writeToFile(m, sm_dirTestDataTemp+File.separator+"testMimePackageDoc.mjm");
         
@@ -131,7 +136,7 @@ public class MimeUtilTest extends JDFTestCaseBase
         JDFDoc d1=new JDFDoc("JMF");
         d1.setOriginalFileName("JMF.jmf");
         JDFJMF jmf=d1.getJMFRoot();
-        jmf.setDeviceID("grün€");
+        jmf.setDeviceID("grï¿½nï¿½");
         JDFCommand com=(JDFCommand) jmf.appendMessageElement(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.SubmitQueueEntry);
       
         com.appendQueueSubmissionParams().setURL("TheJDF");
@@ -146,7 +151,7 @@ public class MimeUtilTest extends JDFTestCaseBase
         JDFRunList rl=(JDFRunList)n.addResource(ElementName.RUNLIST, null, EnumUsage.Input, null, null, null, null);
         rl.addPDF(StringUtil.uncToUrl(sm_dirTestData+File.separator+"url1.pdf",false), 0, -1);
         for(int i=0;i<100;i++)
-            rl.addPDF("grün€"+i+".pdf",0,-1);
+            rl.addPDF("grï¿½nï¿½"+i+".pdf",0,-1);
         Multipart m=MimeUtil.buildMimePackage(d1,doc);
        
         
@@ -323,6 +328,36 @@ public class MimeUtilTest extends JDFTestCaseBase
         assertEquals(o3.toString(), "bye World");
       
      }
+    
+    /**
+     * Tests that MimeUtil can resolve FileSpec URLs with relative URLs.
+     * 
+     * @author Claes Buckwalter
+     */
+    public void testResolveRelativeUrls() {
+    	// Build MIME package
+    	String path = sm_dirTestData + File.separator + "MISPrepress-ICS-Complex.jdf";
+    	JDFDoc jdfDoc = new JDFParser().parseFile(path);
+    	assertNotNull("Could not parse JDF: " + path, jdfDoc);
+    	Multipart multipart = MimeUtil.buildMimePackage(null, jdfDoc);
+    	assertNotNull("Could not build multipart", multipart);
+    	// Verify contents
+    	BodyPart[] bodyParts = MimeUtil.getBodyParts(multipart);
+    	assertEquals(3, bodyParts.length);
+    	JDFDoc jdfDoc2 = MimeUtil.getJDFDoc(bodyParts[0]);
+    	assertNotNull(jdfDoc2);
+    	JDFNode jdf = jdfDoc2.getJDFRoot();
+    	assertNotNull(jdf);
+    	List fileSpecs = jdf.getChildrenByTagName(ElementName.FILESPEC, null, new JDFAttributeMap(AttributeName.URL, "*"), false, false, 0);
+    	assertEquals(3, fileSpecs.size());
+    	for (Iterator i = fileSpecs.iterator(); i.hasNext(); ) {
+    		JDFFileSpec fileSpec = (JDFFileSpec) i.next();
+    		String cid = fileSpec.getURL();
+    		assertTrue(cid.startsWith("cid:"));
+    		assertNotNull(MimeUtil.getPartByCID(multipart, cid));
+    	}
+    	
+    }
     
     /////////////////////////////////////////////////////
     
