@@ -75,6 +75,7 @@
  */
 package org.cip4.jdflib.util;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -98,6 +99,7 @@ import javax.mail.Session;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.mail.util.SharedFileInputStream;
 
 import org.apache.commons.io.IOUtils;
 import org.cip4.jdflib.core.AttributeName;
@@ -307,23 +309,30 @@ public class MimeUtil
      */
     public static BodyPart[] getBodyParts(Multipart mp) 
     {
+        Vector v=new Vector();
         try
         {
-            int parts = mp.getCount();
-
-            BodyPart[] bodyParts = new BodyPart[parts];
-            for (int i = 0; i<parts; i++ ) {
+             for (int i = 0; true; i++ ) 
+             {
                 BodyPart bp = mp.getBodyPart(i);
-                bodyParts[i] = bp;
+                v.add(bp);
             }
 
-            return bodyParts;
         }
         catch (MessagingException m)
         {
             return null;
         }
-
+        // this may seem messy, but getCount() can be very costly since it requires a complete mime parse.
+        // simply getting the next reduces the time by a factor 2, since only one linear parse is required
+        catch (ArrayIndexOutOfBoundsException m)
+        {
+            if(v.size()==0)
+                return null;
+            BodyPart[] ret=new BodyPart[v.size()];
+            ret=(BodyPart[]) v.toArray(ret);
+            return ret;
+        }
     }
 
     /**
@@ -337,8 +346,7 @@ public class MimeUtil
     public static BodyPart getPartByCID(Multipart mp, String cid)
     {
         try {
-            int parts = mp.getCount();
-            for (int i = 0; i<parts; i++ ) {
+             for (int i = 0; true; i++ ) {
                 BodyPart bp = mp.getBodyPart(i);
                 if(matchesCID(bp,cid))
                     return bp;
@@ -349,8 +357,11 @@ public class MimeUtil
             //log.error("MessagingException: ", e);
             return null;
         } 
-
-        return null;
+        catch (ArrayIndexOutOfBoundsException e) 
+        {
+            //log.error("MessagingException: ", e);
+            return null;
+        } 
     }
 
     /**
@@ -443,7 +454,7 @@ public class MimeUtil
     }
 
     /**
-     * helper to create a root multipart from an file
+     * helper to create a root multipart from a file
      * 
      * @param fileName the name of the file used as input
      * 
@@ -453,14 +464,18 @@ public class MimeUtil
     public static Multipart getMultiPart(String fileName)
     {
         File f=new File(fileName);
-        FileInputStream fis;
         try
         {
-            fis = new FileInputStream(f);
+            SharedFileInputStream fis = new SharedFileInputStream(f);
+           
             Multipart mp=MimeUtil.getMultiPart(fis);
             return mp;
         }
         catch (FileNotFoundException e)
+        {
+            return null;
+        }
+        catch (IOException e)
         {
             return null;
         }
@@ -480,6 +495,9 @@ public class MimeUtil
 
         try
         {
+//            ManagedMemoryDataSource
+            // TODO rethink memory management for large files
+            //SharedInputStream sis=new Shared
             Message mimeMessage = new MimeMessage(null, mimeStream);
             
             Multipart mp = new MimeMultipart(mimeMessage.getDataHandler().getDataSource());
@@ -623,16 +641,16 @@ public class MimeUtil
 			final String urlString = urlStrings[i];
 			if (urlString != null) {
 				try {
-					DataSource uds = null;
+					DataSource dataSrc = null;
 					File f = UrlUtil.urlToFile(urlString);
 					if (f != null && f.canRead()) {
-						uds = new FileDataSource(f);
+						dataSrc = new FileDataSource(f);
 					}
-					if (uds == null) {
+					if (dataSrc == null) {
 						continue; // no data source
 					}
 					BodyPart messageBodyPart = new MimeBodyPart();
-					messageBodyPart.setDataHandler(new DataHandler(uds));
+					messageBodyPart.setDataHandler(new DataHandler(dataSrc));
 
 					setFileName(messageBodyPart, f == null ? null : f.getAbsolutePath());
 					// messageBodyPart.setHeader("Content-Type",
@@ -826,7 +844,8 @@ public class MimeUtil
         final File file = new File(fileName);
         try
         {
-            FileOutputStream fos = new FileOutputStream(file);
+            // the buffered stream speeds up large mimes by a facto>10!
+            BufferedOutputStream fos = new BufferedOutputStream(new FileOutputStream(file));
             writeToStream(m, fos);
             return file;
         }

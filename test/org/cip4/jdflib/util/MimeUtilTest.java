@@ -76,8 +76,8 @@ package org.cip4.jdflib.util;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.Iterator;
-import java.util.List;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.Vector;
 
 import javax.mail.BodyPart;
@@ -88,12 +88,9 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
@@ -103,10 +100,12 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 
+import com.sun.corba.se.spi.orbutil.fsm.Input;
+
 
 public class MimeUtilTest extends JDFTestCaseBase
 {
-    
+
     public void testBuildMimePackageDocJMF() throws Exception
     {
         JDFDoc docJMF=new JDFDoc("JMF");
@@ -114,7 +113,7 @@ public class MimeUtilTest extends JDFTestCaseBase
         JDFJMF jmf=docJMF.getJMFRoot();
         JDFCommand com=(JDFCommand) jmf.appendMessageElement(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.SubmitQueueEntry);
         com.appendQueueSubmissionParams().setURL("TheJDF");
-        
+
         JDFDoc doc=new JDFDoc("JDF");
         doc.setOriginalFileName("JDF.jdf");  
         JDFNode n=doc.getJDFRoot();
@@ -125,10 +124,10 @@ public class MimeUtilTest extends JDFTestCaseBase
         JDFRunList rl=(JDFRunList)n.addResource(ElementName.RUNLIST, null, EnumUsage.Input, null, null, null, null);
         rl.addPDF(StringUtil.uncToUrl(sm_dirTestData+File.separator+"url1.pdf",false), 0, -1);
         for(int i=0;i<100;i++)
-            rl.addPDF(StringUtil.uncToUrl(sm_dirTestData+File.separator+"urlï¿½.pdf",false), 0, -1);
+            rl.addPDF(StringUtil.uncToUrl(sm_dirTestData+File.separator+"urlü€.pdf",false), 0, -1);
         Multipart m=MimeUtil.buildMimePackage(docJMF,doc);
         MimeUtil.writeToFile(m, sm_dirTestDataTemp+File.separator+"testMimePackageDoc.mjm");
-        
+
     }
 
     public void testGetJMFSubmission() throws Exception
@@ -136,11 +135,11 @@ public class MimeUtilTest extends JDFTestCaseBase
         JDFDoc d1=new JDFDoc("JMF");
         d1.setOriginalFileName("JMF.jmf");
         JDFJMF jmf=d1.getJMFRoot();
-        jmf.setDeviceID("grï¿½nï¿½");
+        jmf.setDeviceID("grün€");
         JDFCommand com=(JDFCommand) jmf.appendMessageElement(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.SubmitQueueEntry);
-      
+
         com.appendQueueSubmissionParams().setURL("TheJDF");
-        
+
         JDFDoc doc=new JDFDoc("JDF");
         doc.setOriginalFileName("JDF.jdf");  
         JDFNode n=doc.getJDFRoot();
@@ -151,15 +150,15 @@ public class MimeUtilTest extends JDFTestCaseBase
         JDFRunList rl=(JDFRunList)n.addResource(ElementName.RUNLIST, null, EnumUsage.Input, null, null, null, null);
         rl.addPDF(StringUtil.uncToUrl(sm_dirTestData+File.separator+"url1.pdf",false), 0, -1);
         for(int i=0;i<100;i++)
-            rl.addPDF("grï¿½nï¿½"+i+".pdf",0,-1);
+            rl.addPDF("grün€"+i+".pdf",0,-1);
         Multipart m=MimeUtil.buildMimePackage(d1,doc);
-       
-        
+
+
         JDFDoc[] d2=MimeUtil.getJMFSubmission(m);
         assertNotNull(d2);
         assertEquals(d2[0].getJMFRoot().getCommand(0).getQueueSubmissionParams(0).getURL(), "cid:JDF.jdf");
         assertEquals(d2[1].getJDFRoot().getEnumType(),EnumType.ColorSpaceConversion);
-        
+
         // now serialize to file and reread - should still work
         MimeUtil.writeToFile(m, sm_dirTestDataTemp+"test2.mjm");
         Multipart m2=MimeUtil.getMultiPart(sm_dirTestDataTemp+"test2.mjm");
@@ -168,9 +167,9 @@ public class MimeUtilTest extends JDFTestCaseBase
         assertNotNull(d2);
         assertEquals(d2[0].getJMFRoot().getCommand(0).getQueueSubmissionParams(0).getURL(), "cid:JDF.jdf");
         assertEquals(d2[1].getJDFRoot().getEnumType(),EnumType.ColorSpaceConversion);
-         
+
     }
-    
+
     public void testGetPartByCID() throws Exception
     {
         testBuildMimePackageDocJMF();
@@ -179,7 +178,7 @@ public class MimeUtilTest extends JDFTestCaseBase
         assertNotNull(bp);
         assertEquals(bp.getFileName(), "JDF.jdf");
     }
-    
+
     public void testGetContentID() throws Exception
     {
         testBuildMimePackageDocJMF();
@@ -195,14 +194,14 @@ public class MimeUtilTest extends JDFTestCaseBase
         MimeUtil.setContentID(bp,  "<cid:TheJDF>");
         assertEquals(MimeUtil.getContentID(bp), "TheJDF");
     }
-    
+
     public void testGetMultiPart() throws Exception
     {
         testBuildMimePackageDocJMF();
         Multipart mp=MimeUtil.getMultiPart(sm_dirTestDataTemp+File.separator+"testMimePackageDoc.mjm");
         MimeUtil.writeToFile(mp, sm_dirTestDataTemp+File.separator+"testMimePackageDoc_out.mjm");
     }
-    
+
     public void testGetCreatePartByCID() throws Exception
     {
         Message message = new MimeMessage((Session)null);
@@ -217,7 +216,7 @@ public class MimeUtilTest extends JDFTestCaseBase
         assertEquals(multipart.getCount(), 2);
         assertEquals(bp3.getContent(), "boo");
     }
-    
+
     public void testGetJDFDoc() throws Exception
     {
         testBuildMimePackageDocJMF();
@@ -234,7 +233,7 @@ public class MimeUtilTest extends JDFTestCaseBase
         JDFNode n=d.getJDFRoot();
         assertNotNull(n);
     }
- 
+
     public void testBuildMimePackageDoc() throws Exception
     {
         JDFDoc doc=new JDFDoc("JDF");
@@ -249,14 +248,14 @@ public class MimeUtilTest extends JDFTestCaseBase
         rl.addPDF(StringUtil.uncToUrl(sm_dirTestData+File.separator+"url1.pdf",false), 0, -1);
         rl.addPDF(StringUtil.uncToUrl(sm_dirTestData+File.separator+"url2.pdf",false), 0, -1);
         Multipart m=MimeUtil.buildMimePackage(null,doc);
-        
+
         final String mimeFile = sm_dirTestDataTemp+File.separator+"testMimePackageDoc.mjm";
         MimeUtil.writeToFile(m, mimeFile);
-        
+
         Multipart mp=MimeUtil.getMultiPart(mimeFile);
         assertEquals("JDF, 2* rl, 1 icc",mp.getCount(), 4);
-     }
-    
+    }
+
     public void testUpdateXMLMultipart() throws Exception
     {
         Message message = new MimeMessage((Session)null);
@@ -267,22 +266,22 @@ public class MimeUtilTest extends JDFTestCaseBase
         MimeUtil.updateXMLMultipart(multipart, jDoc, null);
         final String mimeFile = sm_dirTestDataTemp+File.separator+"testUpdateXML";
         MimeUtil.writeToFile(multipart, mimeFile+"1.mjm");
-        
+
         JDFDoc jDoc2=new JDFDoc("JDF");
         jDoc2.setOriginalFileName("jdf1.jdf");
         jDoc2.getJDFRoot().setDescriptiveName("updated jdf");
         MimeUtil.updateXMLMultipart(multipart, jDoc2, "jdf1.jdf");
         MimeUtil.writeToFile(multipart, mimeFile+"2.mjm");
-        
+
         Multipart multipart3=MimeUtil.getMultiPart(mimeFile+"2.mjm");
         jDoc2.getJDFRoot().setDescriptiveName("3rd jdf");
         MimeUtil.updateXMLMultipart(multipart3, jDoc2, "jdf2.jdf");
         MimeUtil.writeToFile(multipart3, mimeFile+"3.mjm");
-       
+
     }
-        
+
     public void testReplaceContents() throws Exception
-        {
+    {
         JDFDoc doc=new JDFDoc("JDF");
         doc.setOriginalFileName("JDF.jdf");  
         JDFNode n=doc.getJDFRoot();
@@ -293,24 +292,24 @@ public class MimeUtilTest extends JDFTestCaseBase
         Multipart mp=MimeUtil.buildMimePackage(null,doc);
         assertEquals("JDF,  1 icc",mp.getCount(), 2);
 
-       
+
         BodyPart bp=mp.getBodyPart(1);
         assertNotNull(bp);
         String newContents="hello World";
         bp.setContent(newContents, "text/plain");
-        
+
         BodyPart bp2=mp.getBodyPart(1);
         Object o=bp2.getContent();
         assertEquals(o.toString(), "hello World");
-        
+
         final String mimeFile = sm_dirTestDataTemp+File.separator+"testReplaceContents";
         MimeUtil.writeToFile(mp, mimeFile+".mjm");
-        
+
         Multipart mp2=MimeUtil.getMultiPart(mimeFile+".mjm");
         BodyPart bp21=mp2.getBodyPart(1);
         Object o2=bp21.getContent();
         assertEquals(o2.toString(), "hello World");
-        
+
         BodyPart bp22=mp2.getBodyPart(1);
         assertNotNull(bp22);
         String newContents2="bye World";
@@ -326,41 +325,11 @@ public class MimeUtilTest extends JDFTestCaseBase
         BodyPart bp31=mp3.getBodyPart(1);
         Object o3=bp31.getContent();
         assertEquals(o3.toString(), "bye World");
-      
-     }
-    
-    /**
-     * Tests that MimeUtil can resolve FileSpec URLs with relative URLs.
-     * 
-     * @author Claes Buckwalter
-     */
-    public void testResolveRelativeUrls() {
-    	// Build MIME package
-    	String path = sm_dirTestData + File.separator + "MISPrepress-ICS-Complex.jdf";
-    	JDFDoc jdfDoc = new JDFParser().parseFile(path);
-    	assertNotNull("Could not parse JDF: " + path, jdfDoc);
-    	Multipart multipart = MimeUtil.buildMimePackage(null, jdfDoc);
-    	assertNotNull("Could not build multipart", multipart);
-    	// Verify contents
-    	BodyPart[] bodyParts = MimeUtil.getBodyParts(multipart);
-    	assertEquals(3, bodyParts.length);
-    	JDFDoc jdfDoc2 = MimeUtil.getJDFDoc(bodyParts[0]);
-    	assertNotNull(jdfDoc2);
-    	JDFNode jdf = jdfDoc2.getJDFRoot();
-    	assertNotNull(jdf);
-    	List fileSpecs = jdf.getChildrenByTagName(ElementName.FILESPEC, null, new JDFAttributeMap(AttributeName.URL, "*"), false, false, 0);
-    	assertEquals(3, fileSpecs.size());
-    	for (Iterator i = fileSpecs.iterator(); i.hasNext(); ) {
-    		JDFFileSpec fileSpec = (JDFFileSpec) i.next();
-    		String cid = fileSpec.getURL();
-    		assertTrue(cid.startsWith("cid:"));
-    		assertNotNull(MimeUtil.getPartByCID(multipart, cid));
-    	}
-    	
+
     }
-    
+
     /////////////////////////////////////////////////////
-    
+
     public void testBuildMimePackage() throws Exception
     {
         JDFDoc d1=new JDFDoc("JMF");
@@ -370,30 +339,104 @@ public class MimeUtilTest extends JDFTestCaseBase
         Vector vXMLDocs=new Vector();
         vXMLDocs.add(d1);
         vXMLDocs.add(d2);
-        
+
         Multipart m=MimeUtil.buildMimePackage(vXMLDocs);
         final File file = MimeUtil.writeToFile(m,sm_dirTestDataTemp+File.separator+"test.mjm");
-        
+
         FileInputStream fis=new FileInputStream(file);
         BodyPart[] aBp=MimeUtil.extractMultipartMime(fis);
         assertEquals(aBp.length, 2);
-        
+
         assertEquals(aBp[0].getFileName(), "JMF.jmf");
         assertEquals(aBp[1].getFileName(), "JDF.jdf");
     }
-    
+
     ///////////////////////////////////////////////////////
-    
+
     public void testWriteToDir() throws Exception
     {
         testBuildMimePackageDocJMF();
-        
+
         Multipart mp=MimeUtil.getMultiPart(sm_dirTestDataTemp+File.separator+"testMimePackageDoc.mjm");
         File directory=new File(sm_dirTestDataTemp+File.separator+"TestWriteMime");
         if(directory.exists())
             directory.delete();
         MimeUtil.writeToDir(mp, directory);
         assertTrue(new File(sm_dirTestDataTemp+File.separator+"TestWriteMime"+File.separator+"test.icc").exists());
+    }
+    ///////////////////////////////////////////////////////
+
+    //TODO see if we can find a better - non memory hog data source e.g. ManagedMemoryDataSource
+    public void testPerformance() throws Exception
+    {
+        long start=System.currentTimeMillis();
+        final String big = sm_dirTestData+File.separator+"big.pdf";
+        final String bigger = sm_dirTestDataTemp+File.separator+"bigger.pdf";
+        JDFDoc docJMF=new JDFDoc("JMF");
+        docJMF.setOriginalFileName("JMF.jmf");
+        JDFJMF jmf=docJMF.getJMFRoot();
+        JDFCommand com=(JDFCommand) jmf.appendMessageElement(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.SubmitQueueEntry);
+        com.appendQueueSubmissionParams().setURL("TheJDF");
+        File fBigger=new File(bigger);
+        if(!fBigger.exists() || fBigger.length()<10000000)
+        {
+            fBigger.createNewFile();
+            FileInputStream fis=new FileInputStream(big);
+            FileOutputStream fos=new FileOutputStream(bigger);
+            byte[] b=new byte[10000];
+            while (true)
+            {
+                int i=fis.read(b);
+                if(i<=0)
+                    break;
+                for(int j=0;j<2;j++)
+                    fos.write(b,0,i);
+            }
+            fis.close();
+            fos.close();
+            fos.flush();
+            
+        }
+        JDFDoc doc=new JDFDoc("JDF");
+        doc.setOriginalFileName("JDF.jdf");  
+        JDFNode n=doc.getJDFRoot();
+        n.setType(EnumType.Interpreting);
+        JDFRunList rl=(JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
+        rl.addPDF(StringUtil.uncToUrl(bigger,false), 0, -1);
+        long setup=System.currentTimeMillis();
+        System.out.println("Setup time: "+(setup-start));
+        Multipart m=MimeUtil.buildMimePackage(null,doc);
+        long build=System.currentTimeMillis();
+        System.out.println("Build time: "+(build-setup));
+        assertNotNull(MimeUtil.writeToFile(m,sm_dirTestDataTemp+"performance.mjm"));
+        long write=System.currentTimeMillis();
+        System.out.println("Write time: "+(write-build));
+
+        Multipart mp=MimeUtil.getMultiPart(sm_dirTestDataTemp+File.separator+"performance.mjm");
+        long getMP=System.currentTimeMillis();
+        System.out.println("get multipart time: "+(getMP-write));
+        BodyPart bp=MimeUtil.getPartByCID(mp, "bigger.pdf");
+        long getCID=System.currentTimeMillis();
+        System.out.println("get big time: "+(getCID-getMP));
+        assertNotNull(bp);
+        assertEquals(bp.getFileName(), "bigger.pdf");
+        FileUtil.streamToFile(bp.getInputStream(), sm_dirTestDataTemp+File.separator+"performance.pdf");
+/*
+        InputStream is=bp.getInputStream();
+        byte[] b=new byte[1000];
+        int l=0;
+        while (true)
+        {
+            int i=is.read(b);
+            if(i<=0)
+                break;
+            l+=i;
+        }
+ */
+        long extract=System.currentTimeMillis();
+//        System.out.println("extracted "+l+" bytes in time: "+(extract-getCID));
+       System.out.println("extracted  bytes in time: "+(extract-getCID));
+
     }
     ///////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////

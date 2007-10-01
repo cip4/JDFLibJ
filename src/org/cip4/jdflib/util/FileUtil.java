@@ -179,7 +179,7 @@ public class FileUtil
         {
             return null;
         }
-        byte[] b=new byte[1000];
+        byte[] b=new byte[10000];
         try
         {
             FileOutputStream fos=new FileOutputStream(tmp);
@@ -190,6 +190,7 @@ public class FileUtil
                     break;
                 fos.write(b,0,i);
             }
+            fos.flush();
             fos.close();
             fis.close();
         }

@@ -323,7 +323,8 @@ public class JDFResource extends JDFElement
         }
 
         final VString partIDKeys = getPartIDKeys();
-        for (int i = 0; i < partIDKeys.size(); i++)
+        final int siz = partIDKeys==null ? 0 : partIDKeys.size();
+        for (int i = 0; i < siz; i++)
         {
             String partIDKey = partIDKeys.stringAt(i);
             for  (int j = 0; j < atrInfoTable_PartIDKeys.length; j++)

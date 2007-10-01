@@ -61,6 +61,7 @@ public class RIPTest extends JDFTestCaseBase
         final JDFAttributeMap attributeMap = new JDFAttributeMap(EnumPartIDKey.SheetName,sheet);
         attributeMap.put("SignatureName","Sig1");
         attributeMap.put("Separation", vsCMYK.stringAt(3));
+        attributeMap.put("Side", "Front");
 
         vmP.add(attributeMap);
         statCounter.setActiveNode(n, vmP, vRL);
@@ -133,7 +134,7 @@ public class RIPTest extends JDFTestCaseBase
         {
             JDFResource xmPart2=(JDFResource) v.elementAt(i);
             xmPart2.getCreatePartition(EnumPartIDKey.Side,"Front",null).addPartitions(EnumPartIDKey.Separation, vsCMYK);
-            xmPart2.getCreatePartition(EnumPartIDKey.Side,"Back",null).addPartitions(EnumPartIDKey.Separation, vsCMYK);
+ //           xmPart2.getCreatePartition(EnumPartIDKey.Side,"Back",null).addPartitions(EnumPartIDKey.Separation, vsCMYK);
         }
         statCounter=new StatusCounter(n,null,vRL);
         statCounter.setDeviceID("Rip-DeviceID");
@@ -144,7 +145,6 @@ public class RIPTest extends JDFTestCaseBase
     public void testAuditsImageSetting() throws Exception
     {
 
- 
         for(int i=0;i<vsSheet.size();i++)
         {
             String sheet=vsSheet.stringAt(i);

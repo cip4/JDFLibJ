@@ -175,6 +175,7 @@ import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.resource.process.JDFNotificationFilter;
+import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.JDFMerge;
@@ -5464,7 +5465,7 @@ public class JDFNode extends JDFElement
         EnumVersion eVer = getVersion(true);
 
         // if version>=1.0 or no direct element is there try the resource
-        if (eVer.getValue() >= EnumVersion.Version_1_3.getValue() || (nici == null))
+        if (eVer!=null && eVer.getValue() >= EnumVersion.Version_1_3.getValue() || (nici == null))
         {
             JDFResourceLinkPool rlp = getResourceLinkPool();
             if(rlp != null)

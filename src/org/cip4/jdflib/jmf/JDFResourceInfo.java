@@ -349,7 +349,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo
         }
         
         boolean bExact= rqp==null ? false : rqp.getExact();
-        if(!bExact)
+        if(!bExact || r==null) // if we do not have a resource let's limp along and provide as much as we have
         {
             setResourceName(resourceLink.getLinkedResourceName());
             setAttribute(AttributeName.RESOURCEID,resourceLink.getrRef());
@@ -359,7 +359,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo
             if(r!=null && r.hasAttribute(AttributeName.PRODUCTID))
                 setProductID(r.getProductID());
         }
-        else if(r!=null)
+        else
         {
             // create a copy of the resource in the original jdf
             JDFResource rr=(JDFResource)r.getParentNode_KElement().copyElement(r, null);
