@@ -228,6 +228,21 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
         rl.setActualAmount(33, null);
         assertEquals(rl.getActualAmount(null),33.,0.1);
      }
+    
+    public void testGetAmountPoolVector()
+    {
+        JDFDoc d=new JDFDoc("TestLink");
+        JDFResourceLink rl=(JDFResourceLink) d.getRoot();
+        VJDFAttributeMap vM=new VJDFAttributeMap();
+        vM.add(new JDFAttributeMap("SignatureName","1"));
+        vM.add(new JDFAttributeMap("SignatureName","2"));
+        rl.setAmountPoolAttribute("Amount", "42", null, vM);
+         
+        assertEquals(rl.getAmountPoolAttribute("Amount", null, vM),"42");
+        vM.add(new JDFAttributeMap("SignatureName","3"));
+        assertNull(rl.getAmountPoolAttribute("Amount", null, vM));
+               
+    }
 
 	/**
 	 * tests whether the convoluted inheritence of partAmount and ResourceLink function correctly

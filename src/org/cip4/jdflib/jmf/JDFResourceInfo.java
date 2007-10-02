@@ -99,6 +99,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 
 
 public class JDFResourceInfo extends JDFAutoResourceInfo
@@ -179,22 +180,18 @@ public class JDFResourceInfo extends JDFAutoResourceInfo
      */
     public JDFResource getResource(String resName)
     {
-        JDFResource r = null;
-        KElement e = getElement(resName, null, 0);
-        if(e==null)
-            return null;
-        if(e instanceof JDFResource)
+        for(int i=0;true;i++)
         {
-            r = (JDFResource) e;
+            KElement e = getElement(resName, null, i);
+            if(e==null)
+                return null;
+            if(e instanceof JDFResource)
+            {
+                return(JDFResource) e;
+            }
         }
-        else
-        {
-            throw new JDFException("JDFResouceInfo.getResource tried to return a JDFElement instead of a JDFResource");
-        }
-        return r;
-        
     }
-    
+
     /**
      * append resource
      * @param resName name of the resource to append
@@ -377,7 +374,77 @@ public class JDFResourceInfo extends JDFAutoResourceInfo
     public void setProcessUsage(EnumProcessUsage processUsage)
     {
         setAttribute(AttributeName.PROCESSUSAGE, processUsage==null ? null : processUsage.getName(), null);
-    }    
+    }
+
+    /**
+     * if a Resource is available, return it's ProductID
+     * @see org.cip4.jdflib.auto.JDFAutoResourceInfo#getProductID()
+     */
+    public String getProductID()
+    {
+        String _name=super.getResourceName();
+        if(isWildCard(_name))
+        {
+            JDFResource r=getResource(null);
+            if(r==null)
+                return null;
+            _name= r.getProductID();
+        }
+        return _name;
+    }
+
+    /**
+    * if a Resource is available, return it's ID
+     * @see org.cip4.jdflib.auto.JDFAutoResourceInfo#getResourceID()
+     */
+    public String getResourceID()
+    {
+        String _name=super.getResourceID();
+        if(isWildCard(_name))
+        {
+            JDFResource r=getResource(null);
+            if(r==null)
+                return null;
+            _name= r.getID();
+        }
+        return _name;
+    }
+
+    /**
+     * if a Resource is available, return it's name
+     * @see org.cip4.jdflib.auto.JDFAutoResourceInfo#getResourceName()
+     */
+    public String getResourceName()
+    {
+        
+       String _name=super.getResourceName();
+       if(isWildCard(_name))
+       {
+           JDFResource r=getResource(null);
+           if(r==null)
+               return null;
+           _name= r.getLocalName();
+       }
+       return _name;
+    }
+
+    /**
+     *     
+     * if a Resource is available, return it's status
+     * @see org.cip4.jdflib.auto.JDFAutoResourceInfo#getResStatus()
+     */
+    public EnumResStatus getResStatus()
+    {
+        EnumResStatus s =super.getResStatus();
+        if(s==null)
+        {
+            JDFResource r=getResource(null);
+            if(r==null)
+                return null;
+            s= r.getResStatus(false);
+        }
+        return s;
+    }
 
 }
 

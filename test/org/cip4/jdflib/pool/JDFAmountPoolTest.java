@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,6 +72,7 @@ package org.cip4.jdflib.pool;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
@@ -159,12 +160,12 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
     }
     ///////////////////////////////////////////////////////
 
-        /**
-         * Method testGetMatchingPartAmountVector.
-         * @throws Exception
-         */
-        public void testGetMatchingPartAmountVector() throws Exception
-        {
+    /**
+     * Method testGetMatchingPartAmountVector.
+     * @throws Exception
+     */
+    public void testGetMatchingPartAmountVector() throws Exception
+    {
         JDFDoc d=JDFTestCaseBase.creatXMDoc();
         JDFNode n=d.getJDFRoot();
         JDFResourceLink xmLink=n.getLink(0,ElementName.EXPOSEDMEDIA,null,null);
@@ -188,6 +189,42 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
         assertNull("there certainly is no moebius side ...",v);
     }
 
-    ///////////////////////////////////////////////////////
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+     */
+    protected void setUp() throws Exception
+    {
+        // TODO Auto-generated method stub
+        super.setUp();
+    }
 
+    ///////////////////////////////////////////////////////
+    /**
+     * Method testGetMatchingPartAmountVector.
+     * @throws Exception
+     */
+    public void testGetPartAmountMulti() throws Exception
+    {
+        JDFDoc d=new JDFDoc("JDF");
+        JDFNode n=d.getJDFRoot();
+        n.setType(EnumType.ConventionalPrinting);
+        JDFComponent comp=(JDFComponent) n.addResource("Component", null, EnumUsage.Output, null, null, null, null);
+        JDFAttributeMap map=new JDFAttributeMap(EnumPartIDKey.SignatureName,"Sig1");
+        JDFAttributeMap map2=new JDFAttributeMap(EnumPartIDKey.SignatureName,"Sig1");
+        JDFResourceLink rl=n.getLink(comp, null);
+        map.put(EnumPartIDKey.SheetName, "Sheet");
+        comp.getCreatePartition(map, new VString("SignatureName SheetName"," "));
+        map.put(EnumPartIDKey.Side, "Front");
+        map2.put(EnumPartIDKey.Side, "Back");
+        VJDFAttributeMap vMap=new VJDFAttributeMap();
+        vMap.add(map);
+        vMap.add(map2);
+        JDFAmountPool ap=rl.appendAmountPool();
+        JDFPartAmount pa=ap.appendPartAmount(vMap);
+        assertEquals(pa.numChildElements_JDFElement(ElementName.PART, null), 2);
+        rl.setActualAmount(42, map);
+        assertEquals(pa.numChildElements_JDFElement(ElementName.PART, null), 2);
+        assertEquals("we made an equivalence of map 1 and map 2",rl.getActualAmount(map2), 42.,0.); 
+        assertEquals(pa,ap.getPartAmount(vMap));
+     }
 }

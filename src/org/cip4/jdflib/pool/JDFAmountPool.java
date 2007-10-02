@@ -172,6 +172,26 @@ public class JDFAmountPool extends JDFAutoAmountPool
         }
         return null;
     }
+    /**
+     * Get a PartAmount that fits to the filter defined by mPart
+     * @param vPart filter for the part to set the status
+     * @return the PartAmount that fits
+     */
+    public JDFPartAmount getPartAmount(VJDFAttributeMap vPart)
+    {
+        final VElement vPartAmount =  getChildElementVector(ElementName.PARTAMOUNT, null,null, true, 0, false);
+         for (int i = vPartAmount.size() - 1; i >= 0; i--)
+        {
+            final JDFPartAmount partAmount = (JDFPartAmount) vPartAmount.elementAt(i);
+            final VJDFAttributeMap vMapPart = partAmount.getPartMapVector();
+
+            if (vMapPart.equals(vPart))
+            {
+                return partAmount; // exact match
+            }
+        }
+        return null;
+    }
 
     /**
      * Get a PartAmount that fits to the filter defined by mPart

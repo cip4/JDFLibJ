@@ -1378,6 +1378,7 @@ public class KElementTest extends JDFTestCaseBase
         KElement ref=root.appendElement("dRef");
 
         assertEquals(root.getElement("c"), c1);
+        assertEquals(root.getElement(null), root.getFirstChild());
         assertEquals(root.getElement("dRef"), ref);
 
         assertNull(root.getElement("d"));

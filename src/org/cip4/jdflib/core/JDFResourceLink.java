@@ -520,8 +520,8 @@ public class JDFResourceLink extends JDFElement
      */
     public double getAmount(JDFAttributeMap mPart)
     {
-        double d = getAmountPoolDouble(AttributeName.AMOUNT, mPart,-1.2345);
-        if (d==-1.2345)
+        double d = getAmountPoolDouble(AttributeName.AMOUNT, mPart);
+        if (d==-1)
         {
             JDFResource target = getTarget();
             if (target != null)
@@ -548,8 +548,8 @@ public class JDFResourceLink extends JDFElement
      */
     public double getMinAmount(JDFAttributeMap mPart)
     {
-        double d=getAmountPoolDouble(AttributeName.MINAMOUNT, mPart, -1.2345);
-        if(d==-1.2345)
+        double d=getAmountPoolDouble(AttributeName.MINAMOUNT, mPart);
+        if(d==-1)
             return getAmount(mPart);
         return d;
     }
@@ -563,8 +563,8 @@ public class JDFResourceLink extends JDFElement
      */
     public double getMaxAmount(JDFAttributeMap mPart)
     {
-        double d=getAmountPoolDouble(AttributeName.MAXAMOUNT, mPart, -1.2345);
-        if(d==-1.2345)
+        double d=getAmountPoolDouble(AttributeName.MAXAMOUNT, mPart);
+        if(d==-1)
             return getAmount(mPart);
         return d;
     }
@@ -1501,6 +1501,41 @@ public class JDFResourceLink extends JDFElement
 
         return ret;
     }
+    /**
+     * returns  the  attribute occurence in PartAmount, or the default in the ResourceLink
+     * 
+     * @param attrib       the attribute name
+     * @param nameSpaceURI the XML-namespace
+     * @param vPart        defines which part of this ResourceLink the Amount belongs to.
+     *                     If null get the ResourceLink root attribute.
+     * @return value of attribute found, null if not available
+     * @since 071103 
+     */
+    public String getAmountPoolAttribute(String attrib, String nameSpaceURI, VJDFAttributeMap vPart)
+    {
+        // want a map but already in a partamount - snafu
+        if (this instanceof JDFPartAmount)
+        {
+            if(vPart!=null)
+                throw new JDFException("JDFResourceLink.getAmountPoolAttribute: calling method on PartAmount object");
+            return  getAttribute(attrib, nameSpaceURI, null);
+        }
+        // default to attribute if no amountpool
+        final JDFAmountPool amountPool = getAmountPool();
+        if (amountPool == null || vPart==null)
+        {
+            return getAttribute(attrib, nameSpaceURI, null);
+        }
+        final JDFPartAmount pa = amountPool.getPartAmount(vPart);
+        if (pa != null) // we have a pa; if it has the attribute return its vlaue, else get the link attribute
+        {
+            String ret= pa.getAttribute(attrib, nameSpaceURI, null);
+            if(ret!=null)
+                return ret;
+        }
+
+        return getAttribute(attrib, nameSpaceURI, null);
+    }
 
     /**
      * returns true if the  attribute occurrs
@@ -1555,7 +1590,6 @@ public class JDFResourceLink extends JDFElement
         }
         if(pa0==null)
             pa0=ap.appendPartAmount(vPart);
-        pa0.setPartMapVector(vPart);    
         pa0.setAttribute(attrib, value, nameSpaceURI);
     }
     /** 
@@ -1594,11 +1628,34 @@ public class JDFResourceLink extends JDFElement
     /**
      * get the first element AmountPool as a double 
      * @param attName
+     * @param vPart
+     * @return double - 
+     * @throws JDFException if the element can not be cast to double 
+     */
+    public double getAmountPoolDouble(String attName, VJDFAttributeMap vPart)
+    {
+        double d = 0;
+        String w = getAmountPoolAttribute(attName, null, vPart);
+        if (w == null) 
+        {
+            return -1;
+        }
+        d = StringUtil.parseDouble(w, -1.234567);
+        if (d == -1.234567) 
+        {
+            throw new JDFException("JDFResourceLink.getAmountPoolDouble: Attribute "+ attName + " has an invalid value");
+        }
+        return d;
+    }
+
+/**
+ * get the first element AmountPool as a double 
+     * @param attName
      * @param mPart
      * @return double - the element
      * @throws JDFException if the element can not be cast to double 
      */
-    private double getAmountPoolDouble(String attName, JDFAttributeMap mPart, double def)
+    public double getAmountPoolDouble(String attName, JDFAttributeMap mPart)
     {
         double d = 0;
         int n = 0;
@@ -1606,14 +1663,14 @@ public class JDFResourceLink extends JDFElement
         {
             final String w = getAmountPoolAttribute(attName, null, mPart, n++);
             if (w == null) {
-                return n == 1 ? def : d;
+                return n == 1 ? -1 : d;
             }
-            def = StringUtil.parseDouble(w, -1.234567);
-            if (def == -1.234567) 
+            double dd= StringUtil.parseDouble(w, -1.234567);
+            if (dd == -1.234567) 
             {
                 throw new JDFException("JDFResourceLink.getAmountPoolDouble: Attribute "+ attName + " has an invalid value");
             }
-            d += def;
+            d += dd;
         }
     }
 
@@ -1633,7 +1690,8 @@ public class JDFResourceLink extends JDFElement
 
     public double getActualAmount(JDFAttributeMap  mPart)  
     {
-        return getAmountPoolDouble(AttributeName.ACTUALAMOUNT, mPart,0.);
+        final double amountPoolDouble = getAmountPoolDouble(AttributeName.ACTUALAMOUNT, mPart);
+        return amountPoolDouble==-1 ? 0 : amountPoolDouble;
     }
 
     /**
