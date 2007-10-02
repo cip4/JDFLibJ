@@ -643,9 +643,10 @@ public class JDFSpawnTest extends JDFTestCaseBase
         {
             JDFElement.uniqueID(100);
             JDFAuditPool ap=aSpawned[i].getCreateAuditPool();
-            for(int j=0;j<100;j++) {
+            for(int j=0;j<5;j++) {
 				ap.addNotification(EnumClass.Error, null, null);
 			}
+            ap.addProcessRun(EnumNodeStatus.Completed, "me", aSpawned[i].getPartMapVector());
         }
         JDFElement.uniqueID(300);
         for(int i=0;i<3;i++)
@@ -656,6 +657,16 @@ public class JDFSpawnTest extends JDFTestCaseBase
             // merge here
             JDFNode mergedNode=merge.mergeJDF(aSpawned[i], "merged", JDFNode.EnumCleanUpMerge.None, EnumAmountMerge.UpdateLink);
 
+            final VJDFAttributeMap partMapVector = aSpawned[i].getPartMapVector();
+            JDFProcessRun pr=(JDFProcessRun) mergedNode.getAuditPool().getAudit(0, EnumAuditType.ProcessRun, null, partMapVector);
+            JDFSpawned sp=(JDFSpawned) mergedNode.getAuditPool().getAudit(0, EnumAuditType.Spawned, null, partMapVector);
+            JDFMerged me=(JDFMerged) mergedNode.getAuditPool().getAudit(0, EnumAuditType.Merged, null, partMapVector);
+            assertNotNull(pr);
+            assertEquals(sp.getTimeStampDate(), pr.getSubmissionTime());
+            assertEquals(me.getTimeStampDate(), pr.getReturnTime());
+                 
+            
+            
             assertNull(mergedNode.getMultipleIDs("ID"));
         }
     }
@@ -748,7 +759,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
             JDFMerged merged=(JDFMerged) ap.getAudit(0, EnumAuditType.Merged, null, null);
             JDFProcessRun pr=(JDFProcessRun) mergedNode.getChildByTagName(ElementName.PROCESSRUN, null, 0, null, false, true);
             assertEquals(pr.getSpawnID(), spawnID);
-            assertEquals(pr.getAttribute("ReturnTime"), merged.getTimeStamp());
+            assertEquals(pr.getReturnTime(), merged.getTimeStampDate());
 
             assertNotNull(merged);
             assertEquals(vPartMap, merged.getPartMapVector());
@@ -836,7 +847,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
             assertEquals(jobPart, mergedNode);
             final JDFAuditPool auditPoolMerged = jobPart.getAuditPool();
             if(i==0) {
-				assertEquals(auditPoolMerged.getAudit(0, EnumAuditType.ProcessRun, null, null).getAttribute("SubmitTime"), n.getAuditPool().getAudit(0, EnumAuditType.Spawned, null, null).getTimeStamp());
+				assertEquals(((JDFProcessRun)auditPoolMerged.getAudit(0, EnumAuditType.ProcessRun, null, null)).getSubmissionTime(), n.getAuditPool().getAudit(0, EnumAuditType.Spawned, null, null).getTimeStampDate());
 			}
             assertNotNull(auditPoolMerged.getAudit(3, EnumAuditType.Notification, null, null));
             assertNull(auditPoolMerged.getAudit(4, EnumAuditType.Notification, null, null));

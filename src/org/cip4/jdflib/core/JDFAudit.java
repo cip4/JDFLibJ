@@ -78,6 +78,7 @@ package org.cip4.jdflib.core;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -93,7 +94,7 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class JDFAudit extends JDFElement
 {
-    
+
     private static final long serialVersionUID = 1L;
     final private static String m_libAgentName    = "CIP4 JDF Writer Java";
     final private static String m_libAgentVersion = "1.3 BLD 46";
@@ -101,7 +102,7 @@ public class JDFAudit extends JDFElement
     private static String m_strAgentName    = m_libAgentName;
     private static String m_strAgentVersion = m_libAgentVersion;
     private static String m_strAuthor = software();
-    
+
     private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
     static {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.AUTHOR,        0x33333333, AttributeInfo.EnumAttributeType.string,null,null);
@@ -112,12 +113,12 @@ public class JDFAudit extends JDFElement
         atrInfoTable[5] = new AtrInfoTable(AttributeName.REFID,         0x33333311, AttributeInfo.EnumAttributeType.IDREF,null,null);
         atrInfoTable[6] = new AtrInfoTable(AttributeName.TIMESTAMP,     0x33333222, AttributeInfo.EnumAttributeType.dateTime,null,null);
     }
-    
+
     protected AttributeInfo getTheAttributeInfo() 
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
-    
+
     /**
      * Constructor for JDFAudit
      * @param myOwnerDocument
@@ -129,8 +130,8 @@ public class JDFAudit extends JDFElement
     {
         super(myOwnerDocument, qualifiedName);
     }
-    
-    
+
+
     /**
      * Constructor for JDFAudit
      * @param myOwnerDocument
@@ -144,7 +145,7 @@ public class JDFAudit extends JDFElement
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
-    
+
     /**
      * Constructor for JDFAudit
      * @param ownerDocument
@@ -160,44 +161,44 @@ public class JDFAudit extends JDFElement
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
-    
-    
-    
+
+
+
     public static class EnumAuditType extends ValuedEnum
     {
         private static final long serialVersionUID = 1L;
         private static int m_startValue = 0;
-        
+
         protected EnumAuditType(String name)
         {
             super(name, m_startValue++);
         }
-        
+
         public static EnumAuditType getEnum(String enumName)
         {
             return (EnumAuditType) getEnum(EnumAuditType.class, enumName);
         }
-        
+
         public static EnumAuditType getEnum(int enumValue)
         {
             return (EnumAuditType) getEnum(EnumAuditType.class, enumValue);
         }
-        
+
         public static Map getEnumMap()
         {
             return getEnumMap(EnumAuditType.class);
         }
-        
+
         public static List getEnumList()
         {
             return getEnumList(EnumAuditType.class);
         }
-        
+
         public static Iterator iterator()
         {
             return iterator(EnumAuditType.class);
         }
-        
+
         public static final EnumAuditType Created           = new EnumAuditType("Created");
         public static final EnumAuditType Modified          = new EnumAuditType("Modified");
         public static final EnumAuditType Deleted           = new EnumAuditType("Deleted");
@@ -208,52 +209,52 @@ public class JDFAudit extends JDFElement
         public static final EnumAuditType ResourceAudit     = new EnumAuditType("ResourceAudit");
         public static final EnumAuditType ProcessRun        = new EnumAuditType("ProcessRun");
     }
-    
+
     public static final class EnumSeverity extends ValuedEnum
     {
         private static final long serialVersionUID = 1L;
         private static int m_startValue = 0;
-        
+
         private EnumSeverity(String name)
         {
             super(name, m_startValue++);
         }
-        
+
         public static EnumSeverity getEnum(String enumName)
         {
             return (EnumSeverity) getEnum(EnumSeverity.class, enumName);
         }
-        
+
         public static EnumSeverity getEnum(int enumValue)
         {
             return (EnumSeverity) getEnum(EnumSeverity.class, enumValue);
         }
-        
+
         public static Map getEnumMap()
         {
             return getEnumMap(EnumSeverity.class);
         }
-        
+
         public static List getEnumList()
         {
             return getEnumList(EnumSeverity.class);
         }
-        
+
         public static Iterator iterator()
         {
             return iterator(EnumSeverity.class);
         }
-        
+
         public static final EnumSeverity Event        = new EnumSeverity("Event");
         public static final EnumSeverity Information  = new EnumSeverity("Information");
         public static final EnumSeverity Warning      = new EnumSeverity("Warning");
         public static final EnumSeverity Error        = new EnumSeverity("Error");
         public static final EnumSeverity Fatal        = new EnumSeverity("Fatal");
     }
-    
-    
+
+
     //**************************************** Methods *********************************************
-    
+
     /**
      * toString
      *
@@ -263,8 +264,8 @@ public class JDFAudit extends JDFElement
     {
         return "JDFAudit[ -->" + super.toString() + "]";
     }
-    
-    
+
+
     /**
      * SetSeverity
      *
@@ -274,7 +275,7 @@ public class JDFAudit extends JDFElement
     {
         setAttribute (JDFConstants.SEVERITY, s.getName(), null);
     }
-    
+
     /**
      * GetSeverity
      *
@@ -284,7 +285,7 @@ public class JDFAudit extends JDFElement
     {
         return EnumSeverity.getEnum(getAttribute(JDFConstants.SEVERITY,null,null));
     }
-    
+
     /**
      * SetStatus
      *
@@ -296,7 +297,7 @@ public class JDFAudit extends JDFElement
             throw new JDFException("setStatus setting to null");
         setAttribute(AttributeName.STATUS, s.getName(),null); 
     }
-    
+
     /**
      * SetEndStatus
      *
@@ -306,7 +307,7 @@ public class JDFAudit extends JDFElement
     {
         setAttribute (AttributeName.ENDSTATUS, s.getName(), null);
     }
-    
+
     /**
      * GetEndStatus
      *
@@ -316,7 +317,7 @@ public class JDFAudit extends JDFElement
     {
         return JDFElement.EnumNodeStatus.getEnum(getAttribute (AttributeName.ENDSTATUS,null,null)); 
     }
-    
+
     /**
      * GetAuditType
      *
@@ -327,7 +328,7 @@ public class JDFAudit extends JDFElement
         final String nam = getLocalName();
         return EnumAuditType.getEnum(nam);
     }
-    
+
     /**
      * GetPhase
      * @deprecated use JDFPhaseTime.getStatus()
@@ -339,11 +340,11 @@ public class JDFAudit extends JDFElement
         {
             return null;
         }
-        
+
         return super.getStatus();
     }
-    
-    
+
+
     /**
      * SetPart
      *
@@ -354,7 +355,7 @@ public class JDFAudit extends JDFElement
     {
         super.setPartMap(m);
     }
-    
+
     /**
      * get part map vector
      * @return VJDFAttributeMap: vector of mAttribute, one for each part
@@ -363,8 +364,8 @@ public class JDFAudit extends JDFElement
     {
         return super.getPartMapVector();
     }
-   
-    
+
+
     /**
      * Set attribute SpawnID
      */
@@ -372,7 +373,7 @@ public class JDFAudit extends JDFElement
     {
         setAttribute (AttributeName.SPAWNID, value, JDFConstants.EMPTYSTRING);
     }
-    
+
     /**
      * Set attribute refID
      */
@@ -391,7 +392,7 @@ public class JDFAudit extends JDFElement
             setrefID(id);
         }
     }
-    
+
     /**
      * SetAuthor
      *
@@ -410,7 +411,7 @@ public class JDFAudit extends JDFElement
     {
         setAttribute (AttributeName.ID, id, null);
     }
-    
+
     /**
      * SetBy
      *
@@ -423,10 +424,10 @@ public class JDFAudit extends JDFElement
         {
             return;
         }
-        
+
         setAttribute (AttributeName.AUTHOR, by, JDFConstants.EMPTYSTRING);
     }
-    
+
     /**
      * Software
      *
@@ -436,7 +437,7 @@ public class JDFAudit extends JDFElement
     {
         return m_libAgentName + JDFConstants.BLANK + m_libAgentVersion;
     }
-    
+
     /**
      * init
      *
@@ -453,14 +454,14 @@ public class JDFAudit extends JDFElement
         }
         if(m_strAuthor!=null)
             setAuthor(m_strAuthor);
-        
+
         if(auditVersion==null || auditVersion.getValue()>=EnumVersion.Version_1_3.getValue())
         {
             appendAnchor(null);
         }
         return super.init();
     }
-    
+
     /**
      * version fixing routine for JDF
      *
@@ -494,7 +495,7 @@ public class JDFAudit extends JDFElement
                 if(tmp.length()!=0){
                     if(!b)
                         author+="_|_ ";
-                    
+
                     author+="_|_"+tmp;
                     b=true;
                 }
@@ -521,12 +522,12 @@ public class JDFAudit extends JDFElement
         }
         return super.fixVersion(version);
     }
-    
+
     public String getIDPrefix()
     {
         return "a";
     }
-    
+
     /**
      * SetTimeStamp
      * @deprecated 2005-12-02 use setTimeStamp(null)
@@ -535,18 +536,38 @@ public class JDFAudit extends JDFElement
     {
         setTimeStamp(null);
     }
-    
+
     /**
      * GetTimeStamp
-     *
-     * @return String
+     * @deprecated use getTimeStampDate as the typed version
+     * @return the String value of TimeStamp
      */
     public String getTimeStamp()
     {
         return getAttribute (AttributeName.TIMESTAMP, null, JDFConstants.EMPTYSTRING);
     }
-    
-    
+
+    /**
+     * (12) get JDFDate attribute TimeStamp
+     * @return JDFDate the value of the attribute
+     */
+    public JDFDate getTimeStampDate()
+    {
+        final String str = getAttribute(AttributeName.TIMESTAMP, null, null);
+        if (str==null)
+            return null;
+        try
+        {
+            return new JDFDate(str);
+        }
+        catch(DataFormatException dfe)
+        {
+            throw new JDFException("not a valid date string. Malformed JDF");
+        }
+    }
+
+
+
     /**
      * Get string attribute SpawnID
      */
@@ -554,7 +575,7 @@ public class JDFAudit extends JDFElement
     {
         return getAttribute(AttributeName.SPAWNID, null, JDFConstants.EMPTYSTRING);
     }
-    
+
     /**
      * Get string attribute refID
      */
@@ -562,7 +583,7 @@ public class JDFAudit extends JDFElement
     {
         return getAttribute(AttributeName.REFID, null, JDFConstants.EMPTYSTRING);
     }
-    
+
     /**
      Get string attribute Author
      */
@@ -570,7 +591,7 @@ public class JDFAudit extends JDFElement
     {
         return getAttribute(AttributeName.AUTHOR);
     }
-    
+
     /**
      Get string attribute ID
      */
@@ -578,7 +599,7 @@ public class JDFAudit extends JDFElement
     {
         return getAttribute(AttributeName.ID);
     }
-    
+
     /**
      Set attribute AgentName
      */
@@ -586,7 +607,7 @@ public class JDFAudit extends JDFElement
     {
         setAttribute(AttributeName.AGENTNAME, value);
     }
-    
+
     /**
      Get string attribute AgentName
      */
@@ -594,8 +615,8 @@ public class JDFAudit extends JDFElement
     {
         return getAttribute(AttributeName.AGENTNAME);
     }
-    
-    
+
+
     /**
      Set attribute AgentVersion
      */
@@ -603,8 +624,8 @@ public class JDFAudit extends JDFElement
     {
         setAttribute(AttributeName.AGENTVERSION, value);
     }
-    
-    
+
+
     /**
      Get string attribute AgentVersion
      */
@@ -612,7 +633,7 @@ public class JDFAudit extends JDFElement
     {
         return getAttribute(AttributeName.AGENTVERSION);
     }
-    
+
     /**
      Set attribute TimeStamp
      */
@@ -620,12 +641,12 @@ public class JDFAudit extends JDFElement
     {
         setAttributeNameTimeStamp(AttributeName.TIMESTAMP, value);
     }
-    
+
     public JDFAuditPool getAuditPool()
     {
         return (JDFAuditPool)getDeepParent(ElementName.AUDITPOOL, 0);
     }
-    
+
     /**
      * create an update audit for this
      * @return
@@ -651,7 +672,7 @@ public class JDFAudit extends JDFElement
     {
         return m_strAgentName;
     }
-    
+
     /**
      * sets the default static AgentName that is used to preset @AgentName when generating a new Audit
      * @param agentName The m_strAgentName to set.
@@ -660,7 +681,7 @@ public class JDFAudit extends JDFElement
     {
         m_strAgentName = agentName;
     }
-    
+
     /**
      * Gets the default static Author that is used to preset @AgentName when generating a new Audit
      * @return Returns the m_Author.
@@ -669,7 +690,7 @@ public class JDFAudit extends JDFElement
     {
         return m_strAuthor;
     }
-    
+
     /**
      * sets the default static AgentName that is used to preset @AgentName when generating a new Audit
      * @param agentName The m_strAgentName to set.
@@ -678,7 +699,7 @@ public class JDFAudit extends JDFElement
     {
         m_strAuthor = author;
     }
-    
+
     /**
      * gets the default static AgentVersion that is used to preset @AgentName when generating a new Audit
      * @return sTRING the m_strAgentVersion.
@@ -687,7 +708,7 @@ public class JDFAudit extends JDFElement
     {
         return m_strAgentVersion;
     }
-    
+
     /**
      * Sets the default static AgentVersion that is used to preset @AgentName when generating a new Audit
      * @param agentVersion The m_strAgentVersion to set.

@@ -179,7 +179,7 @@ public class JDFAuditTest extends JDFTestCaseBase
         JDFAuditPool ap=n.getAuditPool();
         assertNotNull(ap);
         JDFProcessRun p1=ap.addProcessRun(EnumNodeStatus.Completed, null, null);
-        assertEquals(p1.getTimeStamp(), new JDFDate().getDateTimeISO());
+        assertEquals(p1.getTimeStampDate(), new JDFDate());
        
     
     }    

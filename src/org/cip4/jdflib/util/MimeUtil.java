@@ -99,6 +99,7 @@ import javax.mail.Session;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.mail.util.SharedByteArrayInputStream;
 import javax.mail.util.SharedFileInputStream;
 
 import org.apache.commons.io.IOUtils;
@@ -802,33 +803,44 @@ public class MimeUtil
     /////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
-     * write a Multipart to an output URL
+     * write a Multipart to an output URL 
+     * File: and http: are currently supported
      * Use HttpURLConnection.getInputStream() to retrieve the http response
      * 
      * @param mp the mime MultiPart to write
      * @param strUrl the URL to write to
      * 
-     * @throws IOException
-     * @throws MessagingException
-     * @return {@link HttpURLConnection} the opened http connection
+     * @return {@link HttpURLConnection} the opened http connection, null in case of error or file
+     * 
      * @throws IOException 
      * @throws MessagingException 
      */
     public static HttpURLConnection writeToURL(Multipart mp, String strUrl) throws IOException, MessagingException 
     {
         URL url=new URL(strUrl);
-        HttpURLConnection httpURLconnection = (HttpURLConnection) url.openConnection();
-        httpURLconnection.setRequestMethod(POST);
-        httpURLconnection.setRequestProperty("Connection", "close");
-        String contentType = mp.getContentType();
-        contentType=StringUtil.token(contentType, 0, "\r");
-        contentType=StringUtil.token(contentType, 0, "\n");
-        httpURLconnection.setRequestProperty(CONTENT_TYPE,contentType );
-        httpURLconnection.setDoOutput(true);
+        if("File".equalsIgnoreCase(url.getProtocol()))
+        {
+            writeToFile(mp, UrlUtil.urlToFile(strUrl).getAbsolutePath());
+            return null;
+        }
+        else // assume http
+        {
+            HttpURLConnection httpURLconnection = (HttpURLConnection) url.openConnection();
+            httpURLconnection.setRequestMethod(POST);
+            httpURLconnection.setRequestProperty("Connection", "close");
+            String contentType = mp.getContentType();
+            contentType=StringUtil.token(contentType, 0, "\r");
+            contentType=StringUtil.token(contentType, 0, "\n");
+            httpURLconnection.setRequestProperty(CONTENT_TYPE,contentType );
+            httpURLconnection.setDoOutput(true);
 
-        final OutputStream out= httpURLconnection.getOutputStream();
-        writeToStream(mp, out);
-        return httpURLconnection;     
+            httpURLconnection.setChunkedStreamingMode(10000);
+            final OutputStream out= httpURLconnection.getOutputStream();
+
+            writeToStream(mp, out);
+            
+            return httpURLconnection;   
+        }
     }    
     /**
      * write a Multipart to an output file
@@ -844,8 +856,7 @@ public class MimeUtil
         final File file = new File(fileName);
         try
         {
-            // the buffered stream speeds up large mimes by a facto>10!
-            BufferedOutputStream fos = new BufferedOutputStream(new FileOutputStream(file));
+            FileOutputStream fos = new FileOutputStream(file);
             writeToStream(m, fos);
             return file;
         }
@@ -868,7 +879,7 @@ public class MimeUtil
      * 
      * @param mp the mime MultiPart to write
      * @param outStream the existing output stream, 
-     * note that this should be a buffered stream in case you care about performance
+     * note that a buffered output stream is created in case outStream is unbuffered
      * 
      * @throws IOException
      * @throws MessagingException
@@ -877,6 +888,10 @@ public class MimeUtil
     {
         MimeMessage mm=new MimeMessage((Session)null);
         mm.setContent(m);
+        
+        // buffers are good - the encoders decoders otherwise hit stream read/write once per byte...
+        if(!(outStream instanceof BufferedOutputStream))
+            outStream=new BufferedOutputStream(outStream);
         mm.writeTo(outStream);
         outStream.flush();
         outStream.close();

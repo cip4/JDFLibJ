@@ -77,12 +77,6 @@ public class RIPTest extends JDFTestCaseBase
         statCounter.addPhase(refMedia,1, 0);
         statCounter.addPhase(refXM,1, 0);
         statCounter.setPhase(EnumNodeStatus.InProgress, "Imaging", EnumDeviceStatus.Running, null);
-
-        JDFResourceAudit ra=statCounter.setResourceAudit(refMedia,EnumReason.ProcessResult);
-        JDFProcessRun pr=statCounter.setProcessResult(EnumNodeStatus.Completed);
- 
-
-        d.write2File(sm_dirTestDataTemp+File.separator+"ImageSetAmount_Reprint.jdf",2,false);
         JDFDoc d2=statCounter.getDocJMFResource();
         JDFJMF jmf=d2.getJMFRoot();
         jmf.convertResponses(null);
@@ -95,6 +89,12 @@ public class RIPTest extends JDFTestCaseBase
         for(int i=0;i<vSigs.size();i++)
             jmf.copyElement(vSigs.item(i), null);
         dStatusJMF.write2File(sm_dirTestDataTemp+File.separator+"ImageSetReprint_.jmf",2,false);
+
+        JDFResourceAudit ra=statCounter.setResourceAudit(refMedia,EnumReason.ProcessResult);
+        JDFProcessRun pr=statCounter.setProcessResult(EnumNodeStatus.Completed);
+ 
+
+        d.write2File(sm_dirTestDataTemp+File.separator+"ImageSetAmount_Reprint.jdf",2,false);
     }
 
     /**

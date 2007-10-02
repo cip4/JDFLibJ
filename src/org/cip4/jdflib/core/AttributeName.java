@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -38,7 +38,7 @@
  *
  * Usage of this software in commercial products is subject to restrictions. For
  * details please consult info@cip4.org.
-  *
+ *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -90,7 +90,7 @@ public final class AttributeName
     {
         // to prohibit instantiation of this constant only class
     }
-    
+
     public static final String ABORTED = "Aborted";
     public static final String ABORTJOBWHENSCREENMATCHINGFAILS = "AbortJobWhenScreenMatchingFails";
     public static final String ABSOLUTEBOX = "AbsoluteBox";
@@ -195,7 +195,7 @@ public final class AttributeName
     public static final String AVERAGEAMOUNT = "AverageAmount";
     public static final String AVERAGECLEANUP = "AverageCleanup";
     public static final String AVERAGESETUP = "AverageSetup";
-    
+
     public static final String BACKCOATINGS = "BackCoatings";
     public static final String BACKFACEPAGES = "BackFacePages";
     public static final String BACKGLOSSVALUE = "BackGlossValue";
@@ -279,7 +279,7 @@ public final class AttributeName
     public static final String BUSY = "Busy";
     public static final String BUYERACCOUNT = "BuyerAccount";
     public static final String BYTEORDER = "ByteOrder";
-    
+
     public static final String CANNOTEMBEDFONTPOLICY = "CannotEmbedFontPolicy";
     public static final String CAPACITY = "Capacity";
     public static final String CARTONMAXWEIGHT = "CartonMaxWeight";
@@ -415,7 +415,7 @@ public final class AttributeName
     public static final String CUTWIDTHFOOT = "CutWidthFoot";
     public static final String CUTWIDTHHEAD = "CutWidthHead";
     public static final String CYCLE = "Cycle";
-    
+
     public static final String DATA = "Data";
     public static final String DATABASE = "DataBase";
     public static final String DATATYPE = "DataType";
@@ -500,7 +500,7 @@ public final class AttributeName
     public static final String DRYING = "Drying";
     public static final String DUELEVEL = "DueLevel";
     public static final String DURATION = "Duration";
-    
+
     public static final String EARLIEST = "Earliest";
     public static final String EARLYCHANGE = "EarlyChange";
     public static final String EDGEANGLE = "EdgeAngle";
@@ -561,7 +561,7 @@ public final class AttributeName
     public static final String EXTENT = "Extent";
     public static final String EXTERNALREFERENCEMISSING = "ExternalReferenceMissing";
     public static final String EXTRADURATION = "ExtraDuration";
-    
+
     public static final String FAILED = "Failed";
     public static final String FALSE = "false";
     public static final String FAMILY = "Family";
@@ -639,7 +639,7 @@ public final class AttributeName
     public static final String FRONTOVERFOLD = "FrontOverfold";
     public static final String FRONTPAGES = "FrontPages";
     public static final String FRONTSIDE = "FrontSide";
-    
+
     public static final String GANGNAME = "GangName";
     public static final String GANGNAMES = "GangNames";
     public static final String GANGPOLICY = "GangPolicy";
@@ -660,7 +660,7 @@ public final class AttributeName
     public static final String GUTTER = "Gutter";
     public static final String GUTTERMINIMUMLIMIT = "GutterMinimumLimit";
     public static final String GUTTERPOLICY = "GutterPolicy";
-    
+
     public static final String HALFTONE = "HalfTone";
     public static final String HALFTONED = "Halftoned";
     public static final String HALFTONENAME = "HalftoneName";
@@ -691,7 +691,7 @@ public final class AttributeName
     public static final String HTTPGET = "HttpGet";
     public static final String HUFFTABLE = "HuffTable";
     public static final String HWRELATION = "HWRelation";
-    
+
     public static final String ICCCOLORASDEVICECOLOR = "ICCColorAsDeviceColor";
     public static final String ICCOUTPUTPROFILEUSAGE = "ICCOutputProfileUsage";
     public static final String ICCPROFILESUBFOLDER = "ICCProfileSubFolder";
@@ -797,7 +797,7 @@ public final class AttributeName
     public static final String ITEM = "Item";
     public static final String ITEMNAME = "ItemName";
     public static final String ITEMNAMES = "ItemNames";
-    
+
     public static final String JBIG2LOSSLESS = "JBIG2Lossless";
     public static final String JDFDETAILS = "JDFDetails";
     public static final String JDFERRORURL = "JDFErrorURL";
@@ -819,13 +819,13 @@ public final class AttributeName
     public static final String JREF = "jRef";
     public static final String JREFDESTINATION = "jRefDestination";
     public static final String JREFSOURCE = "jRefSource";
-    
+
     public static final String K = "K";
     public static final String KEY = "Key";
     public static final String KEYWORDS = "Keywords";
     public static final String KNOCKOUTCMYKWHITE = "KnockOutCMYKWhite";
     public static final String KNOWNLOCALIZATIONS = "KnownLocalizations";
-    
+
     public static final String LAB = "Lab";
     public static final String LABCOLORVALUE = "LabColorValue";
     public static final String LABORTYPE = "LaborType";
@@ -875,7 +875,7 @@ public final class AttributeName
     public static final String LOGICALPRINTERSECTION = "LogicalPrinterSection";
     public static final String LOTCONTROL = "LotControl";
     public static final String LOTID = "LotID";
-    
+
     public static final String MACROREFS = "MacroRefs";
     public static final String MAGNIFICATION = "Magnification";
     public static final String MANUALFEED = "ManualFeed";
@@ -980,7 +980,7 @@ public final class AttributeName
     public static final String MOUNTID = "MountID";
     public static final String MOUNTING = "Mounting";
     public static final String MUSTHONOREXCEPTIONS = "MustHonorExceptions";
-    
+
     public static final String N = "N";
     public static final String NAME = "Name";
     public static final String NAMEDFEATURES = "NamedFeatures";
@@ -1019,7 +1019,7 @@ public final class AttributeName
     public static final String NUMBERUP = "NumberUp";
     public static final String NUMBERVALUE = "NumberValue";
     public static final String NUMRESOLUTIONS = "NumResolutions";
-    
+
     public static final String OBLIGATED = "Obligated";
     public static final String OBSERVATIONPATH = "ObservationPath";
     public static final String OBSERVER = "Observer";
@@ -1079,7 +1079,7 @@ public final class AttributeName
     public static final String OVERPRINTMODE = "OverPrintMode";
     public static final String OVERWRITEPOLICY = "OverwritePolicy";
     public static final String OWNERSHIP = "Ownership";
-    
+
     public static final String PACKAGING = "Packaging";
     public static final String PAGE = "Page";
     public static final String PAGEBOXTYPE = "PageBoxType";
@@ -1262,7 +1262,7 @@ public final class AttributeName
     public static final String PUNCHTYPE = "PunchType";
     public static final String PURPOSE = "Purpose";
     public static final String PURPOSEDETAILS = "PurposeDetails";
-    
+
     public static final String QFACTOR = "QFactor";
     public static final String QUANTTABLE = "QuantTable";
     public static final String QUERY = "Query";
@@ -1271,7 +1271,7 @@ public final class AttributeName
     public static final String QUEUEINFO = "QueueInfo";
     public static final String QUEUESIZE = "QueueSize";
     public static final String QUEUEURL = "QueueURL";
-    
+
     public static final String RANGE = "Range";
     public static final String RATIO = "Ratio";
     public static final String RAWALIAS = "RawAlias";
@@ -1284,7 +1284,7 @@ public final class AttributeName
     public static final String RECYCLED = "Recycled";
     public static final String RECYCLEDPERCENTAGE = "RecycledPercentage";
     public static final String REF = "ref"; // important: lower case "r", only "ref" is an attribute name
-                                            // see JDFConstants.REF for "Ref" as part of a name
+    // see JDFConstants.REF for "Ref" as part of a name
     public static final String REFERENCEEDGE = "ReferenceEdge";
     public static final String REFID = "refID";
     public static final String REGEXP = "RegExp";
@@ -1323,6 +1323,7 @@ public final class AttributeName
     public static final String RETURNCODE = "ReturnCode";
     public static final String RETURNJMF = "ReturnJMF";
     public static final String RETURNLIST = "ReturnList";
+    public static final String RETURNTIME = "ReturnTime";
     public static final String RETURNURL = "ReturnURL";
     public static final String REVERSEPAGENUMBER = "ReversePageNumber";
     public static final String RGB2GRAYBLACK = "RGB2GrayBlack";
@@ -1359,7 +1360,7 @@ public final class AttributeName
     public static final String RUNSET = "RunSet";
     public static final String RUNTAG = "RunTag";
     public static final String RUNTAGS = "RunTags";
-    
+
     public static final String SAMPLEBACKING = "SampleBacking";
     public static final String SAMPLEINTERVAL = "SampleInterval";
     public static final String SCALE = "Scale";
@@ -1538,7 +1539,7 @@ public final class AttributeName
     public static final String SUPPRESSROTATE = "SuppressRotate";
     public static final String SURFACECONTENTSBOX = "SurfaceContentsBox";
     public static final String SURFACECOUNT = "SurfaceCount";
-    
+
     public static final String TABBANKS = "TabBanks";
     public static final String TABSPERBANK = "TabsPerBank";
     public static final String TAGNUMBER = "TagNumber";
@@ -1633,7 +1634,7 @@ public final class AttributeName
     public static final String TYPEOCCURRENCENUM = "TypeOccurrenceNum";
     public static final String TYPEORDER = "TypeOrder";
     public static final String TYPES = "Types";
-    
+
     public static final String UCRANDBGINFO = "UCRandBGInfo";
     public static final String UID = "UID";
     public static final String UNCOMPRESSED = "Uncompressed";
@@ -1662,7 +1663,7 @@ public final class AttributeName
     public static final String USERFILENAME = "UserFileName";
     public static final String USERMEDIATYPE = "UserMediaType";
     public static final String USERTEXT = "UserText";
-    
+
     public static final String VACUUM = "Vacuum";
     public static final String VALUE = "Value";
     public static final String VALUEDURATIONLIST = "ValueDurationList";
@@ -1677,7 +1678,7 @@ public final class AttributeName
     public static final String VIEWBINDER = "ViewBinder";
     public static final String VISIBLELENGTH = "VisibleLength";
     public static final String VSAMPLES = "VSamples";
-    
+
     public static final String WARNINGCOUNT = "WarningCount";
     public static final String WASMARKED = "WasMarked";
     public static final String WASTE = "Waste";
@@ -1704,7 +1705,7 @@ public final class AttributeName
     public static final String WRAPPERWEIGHT = "WrapperWeight";
     public static final String WRAPPINGKIND = "WrappingKind";
     public static final String WRAPPINGMATERIAL = "WrappingMaterial";
-    
+
     public static final String X = "X";
     public static final String XCELLS = "XCells";
     public static final String XMLNS = "xmlns";
@@ -1716,11 +1717,11 @@ public final class AttributeName
     public static final String XSITYPE = "xsi:type";
     public static final String XSIURI = "http://www.w3.org/2001/XMLSchema-instance";
     public static final String XYRELATION = "XYRelation";
-    
+
     public static final String Y = "Y";
     public static final String YCELLS = "YCells";
     public static final String YPOSITION = "YPosition";
-    
+
     public static final String Z = "Z";
     public static final String ZONEHEIGHT = "ZoneHeight";
     public static final String ZONES = "Zones";

@@ -79,6 +79,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.util.Iterator;
 import java.util.List;
@@ -91,6 +93,7 @@ import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import org.apache.commons.io.IOUtils;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -400,6 +403,31 @@ public class MimeUtilTest extends JDFTestCaseBase
         MimeUtil.writeToDir(mp, directory);
         assertTrue(new File(sm_dirTestDataTemp+File.separator+"TestWriteMime"+File.separator+"test.icc").exists());
     }
+    //////////////////////////////////////////////////////////////////////
+    
+    public void testWriteToFile() throws Exception
+    {
+        testBuildMimePackageDocJMF();
+
+        Multipart mp=MimeUtil.getMultiPart(sm_dirTestDataTemp+File.separator+"testMimePackageDoc.mjm");
+        MimeUtil.writeToFile(mp, sm_dirTestDataTemp+File.separator+"testMimePackageDoc2.mjm");
+        final File f1 = new File(sm_dirTestDataTemp+File.separator+"testMimePackageDoc2.mjm");
+        final File f2 = new File(sm_dirTestDataTemp+File.separator+"testMimePackageDoc.mjm");
+        assertTrue(f1.exists());
+        assertEquals(f1.length(), f2.length(),100);
+    }
+    //////////////////////////////////////////////////////////////////////////////////////////////
+    public void testWriteToURLFile() throws Exception
+    {
+        testBuildMimePackageDocJMF();
+
+        Multipart mp=MimeUtil.getMultiPart(sm_dirTestDataTemp+File.separator+"testMimePackageDoc.mjm");
+        final File f1 = new File(sm_dirTestDataTemp+File.separator+"testMimePackageDoc3.mjm");
+        MimeUtil.writeToURL(mp, UrlUtil.fileToUrl(f1, false));
+        final File f2 = new File(sm_dirTestDataTemp+File.separator+"testMimePackageDoc.mjm");
+        assertTrue(f1.exists());
+        assertEquals(f1.length(), f2.length(),100);
+    }
     ///////////////////////////////////////////////////////
 
     public void testPerformance() throws Exception
@@ -435,7 +463,29 @@ public class MimeUtilTest extends JDFTestCaseBase
 
     }
     ///////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////
+    public void testURLPerformance() throws Exception
+    {
+        //testWritePerformance();
+
+        long write=System.currentTimeMillis();
+        Multipart mp=MimeUtil.getMultiPart(sm_dirTestDataTemp+File.separator+"performance.mjm");
+        long getMP=System.currentTimeMillis();
+        System.out.println("get multipart time: "+(getMP-write));
+        BodyPart bp=MimeUtil.getPartByCID(mp, "bigger.pdf");
+        long getCID=System.currentTimeMillis();
+        System.out.println("get big time: "+(getCID-getMP));
+        assertNotNull(bp);
+        assertEquals(bp.getFileName(), "bigger.pdf");
+        HttpURLConnection uc=MimeUtil.writeToURL(mp, "http://localhost:8080/JDFUtility/dump");
+        InputStream is=uc.getInputStream();
+        IOUtils.copy(is, System.out);
+        is.close();
+        System.out.println();
+//        System.out.println("extracted "+l+" bytes in time: "+(extract-getCID));
+        long extract=System.currentTimeMillis();
+       System.out.println("sent  bytes in time: "+(extract-getCID));
+
+    }    ///////////////////////////////////////////////////////
 
     public void testWritePerformance() throws IOException, FileNotFoundException, MalformedURLException
     {
@@ -478,5 +528,6 @@ public class MimeUtilTest extends JDFTestCaseBase
         assertNotNull(MimeUtil.writeToFile(m,sm_dirTestDataTemp+"performance.mjm"));
         long write=System.currentTimeMillis();
         System.out.println("Write time: "+(write-build));
-    }
+        
+     }
 }
