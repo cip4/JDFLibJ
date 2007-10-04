@@ -172,6 +172,16 @@ public class MISCPGoldenTicket extends MISGoldenTicket
     }
     
     /**
+     * simulate execution of this node
+     * the internal node will be modified to reflect the excution
+     */
+    public void execute()
+    {
+        theNode.setPartStatus(vParts, EnumNodeStatus.Completed);
+        super.execute();
+    }
+    
+    /**
      * @param icsLevel
      */
     protected void initPaperMedia()

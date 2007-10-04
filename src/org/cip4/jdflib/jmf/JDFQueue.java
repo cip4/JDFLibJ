@@ -94,11 +94,11 @@ public class JDFQueue extends JDFAutoQueue
     /**
      * number of concurrent running entries 
      */
-    public int maxRunningEntries=1;
+    private int maxRunningEntries=1;
     /**
      * max number of completed entries to retain 
      */
-    public int maxCompletedEntries=0;
+    private int maxCompletedEntries=0;
     private boolean automated=false;
 
     /**
@@ -106,9 +106,7 @@ public class JDFQueue extends JDFAutoQueue
      * @param myOwnerDocument
      * @param qualifiedName
      */
-    public JDFQueue(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
+    public JDFQueue(CoreDocumentImpl myOwnerDocument, String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
@@ -119,10 +117,7 @@ public class JDFQueue extends JDFAutoQueue
      * @param myNamespaceURI
      * @param qualifiedName
      */
-    public JDFQueue(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
+    public JDFQueue( CoreDocumentImpl myOwnerDocument,String myNamespaceURI, String qualifiedName)
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
@@ -134,11 +129,7 @@ public class JDFQueue extends JDFAutoQueue
      * @param qualifiedName
      * @param myLocalName
      */
-    public JDFQueue(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
+    public JDFQueue(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,String qualifiedName, String myLocalName)
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
@@ -177,7 +168,7 @@ public class JDFQueue extends JDFAutoQueue
      */
     public synchronized VElement getQueueEntryVector(JDFAttributeMap attMap, VJDFAttributeMap parts)
     {
-        VElement v=getChildrenByTagName(ElementName.QUEUEENTRY,null,attMap, false, true,0);
+        VElement v=getChildrenByTagName(ElementName.QUEUEENTRY,null,attMap, true, true,0);
         if(parts!=null)
         {
             for(int i=v.size()-1;i>=0;i--)
@@ -212,6 +203,7 @@ public class JDFQueue extends JDFAutoQueue
      * @param strJobPartID Job part ID.
      * @param vamParts     Partition to execute, may not be null
      * @param status       Queue Entry Status, null means any status.
+     * @deprecated use getQueueEntry
      * 
      * @return VString: vector of QueueEntry IDs
      */
@@ -376,7 +368,7 @@ public class JDFQueue extends JDFAutoQueue
      * remove all entries with Status=Removed and any entries 
      * over maxCompleted that are either aborted or completed @see {@link JDFQueueEntry}.isCompleted()
      */
-    public void cleanup()
+    public synchronized void cleanup()
     {
         VElement v=getQueueEntryVector();
         int siz=v==null ? 0 : v.size();
@@ -385,9 +377,7 @@ public class JDFQueue extends JDFAutoQueue
         {
             JDFQueueEntry qe=(JDFQueueEntry)v.elementAt(i);
             EnumQueueEntryStatus status=qe.getQueueEntryStatus();
-            if(status==null)
-                qe.deleteNode();
-            else if(EnumQueueEntryStatus.Removed.equals(status))
+            if(EnumQueueEntryStatus.Removed.equals(status))
                 qe.deleteNode();
             else if(qe.isCompleted())
             {
@@ -397,6 +387,26 @@ public class JDFQueue extends JDFAutoQueue
         }         
     }
 
+    /**
+     * copies this to the JDF Response resp, applying the filters defined in filter
+     * 
+     * @param resp the JDFResponse to copy this to
+     * @param filter the QueueFilter that sets the queue size
+     * @return the copied queue
+     */
+    public JDFQueue copyToResponse(JDFResponse resp, JDFQueueFilter filter)
+    {
+       if(resp==null)
+           return null;
+       resp.removeChildren(ElementName.QUEUE, null,null);
+       JDFQueue newQueue=(JDFQueue) resp.copyElement(this, null);
+       if(filter!=null)
+       {
+           filter.match(newQueue);
+       }
+       return newQueue;
+       
+    }
     /**
      * return the number of  entries
      * @param qeStatus the queueentry status of the enries to count, 
@@ -409,6 +419,15 @@ public class JDFQueue extends JDFAutoQueue
         return v==null ? 0 : v.size();
     }
 
+    /**
+     * return true if the number of  entries running is exceeded - performance
+      */
+    private boolean maxRunning()
+    {
+        VElement v=getChildrenByTagName(ElementName.QUEUEENTRY,null,new JDFAttributeMap(AttributeName.STATUS,"Running"), true, true,maxRunningEntries);
+        int n= v==null ? 0 : v.size();
+        return n==maxRunningEntries;
+    }
     /**
      * make this a smart queue when modifying queueentries
      * @param_automated automate if true
@@ -437,8 +456,68 @@ public class JDFQueue extends JDFAutoQueue
             return super.getQueueSize();
         return getEntryCount();
     }
-
+    
+    /**
+     * set the status of this queue based on the status values of the queueentries
+     * @return the newly set Status, null if not modified
+     */
+    public EnumQueueStatus setStatusFromEntries()
+    {
+        EnumQueueStatus queueStatus = getQueueStatus();
+        EnumQueueStatus newStatus = null;
+        if(queueStatus==null || EnumQueueStatus.Waiting.equals(queueStatus) || EnumQueueStatus.Running.equals(queueStatus))
+        {
+            if(!maxRunning())
+                newStatus=EnumQueueStatus.Waiting;
+            else 
+                newStatus=EnumQueueStatus.Running;
+        }
+ 
+        if(newStatus!=null)
+            setQueueStatus(newStatus);
+        
+        return newStatus;
+    }
     ///////////////////////////////////////////////////////////////////////
+
+    /**
+     * @return the maxCompletedEntries
+     */
+    public int getMaxCompletedEntries()
+    {
+        return maxCompletedEntries;
+    }
+
+    /**
+     * set the maximum number of completed entries to keep
+     * also call cleanup if we are automated
+     * 
+     * @param maxCompletedEntries the maxCompletedEntries to set
+     */
+    public void setMaxCompletedEntries(int _maxCompletedEntries)
+    {
+        this.maxCompletedEntries = _maxCompletedEntries;
+        if(automated)
+            cleanup();
+    }
+
+    /**
+     * @return the maxRunningEntries
+     */
+    public int getMaxRunningEntries()
+    {
+        return maxRunningEntries;
+    }
+
+    /**
+     * @param maxRunningEntries the maxRunningEntries to set
+     */
+    public void setMaxRunningEntries(int _maxRunningEntries)
+    {
+        this.maxRunningEntries = _maxRunningEntries;
+        if(automated)
+            setStatusFromEntries();
+    }
 
 }
 

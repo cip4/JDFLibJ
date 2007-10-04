@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2005 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,9 +80,17 @@
  */
 package org.cip4.jdflib.jmf;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoQueueFilter;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.resource.JDFDevice;
 
 /**
  *
@@ -163,4 +171,116 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
     {
         super.setPartMapVector(vPart);
     }
+    
+    /**
+     * return true if the queuentry matches this filter
+     * @return
+     */
+    public boolean matches(JDFQueueEntry qe)
+    {
+        if(qe==null)
+            return false;
+        
+        if(EnumQueueEntryDetails.None.equals(getQueueEntryDetails()))
+            return false;
+        
+        Set qeDefs=getQueueEntryDefSet();
+        if(qeDefs!=null && ! qeDefs.contains(qe.getQueueEntryID()))
+            return false;
+        
+        qeDefs=getDeviceIDSet();
+        if(qeDefs!=null && ! qeDefs.contains(qe.getDeviceID()))
+            return false;
+        
+        if(hasAttribute(AttributeName.GANGNAMES) && !getGangNames().contains(qe.getGangName()))
+            return false;
+       
+        return true;
+    }
+    
+    /**
+     * get the list of QueueEntryDef/@QueueEntryIDs strings as a set
+     * @return the set of QueueEntryIDs, null if no QueueEntryDef is specified
+     */
+    public Set getQueueEntryDefSet()
+    {
+        VElement v=getChildElementVector(ElementName.QUEUEENTRYDEF, null);
+        final int siz = v==null ? 0 : v.size();
+        HashSet set= siz==0 ? null : new HashSet();
+        for(int i=0;i<siz;i++)
+        {
+            String qeid=((JDFQueueEntryDef)v.elementAt(i)).getQueueEntryID();
+            if(!isWildCard(qeid))
+                set.add(qeid);
+        }
+        return set!=null && set.size()>0 ? set : null;
+    }
+    
+    /**
+     * get the list of Device/@DeviceIDs strings as a set
+     * @return the set of DeviceIDs, null if no Device is specified
+     */
+    public Set getDeviceIDSet()
+    {
+        VElement v=getChildElementVector(ElementName.DEVICE, null);
+        final int siz = v==null ? 0 : v.size();
+        HashSet set= siz==0 ? null : new HashSet();
+        for(int i=0;i<siz;i++)
+        {
+            String qeid=((JDFDevice)v.elementAt(i)).getDeviceID();
+            if(!isWildCard(qeid))
+                set.add(qeid);
+        }
+        return set!=null && set.size()>0 ? set : null;
+    }
+
+    /**
+     * modifies queue to match this filter by removing all non-matching entries
+     * 
+     * make sure that this is a copy of any original queue as the incoming queue itself is not cloned
+     * 
+     * @param theQueue the queue to modify
+     */
+    public void match(JDFQueue theQueue)
+    {
+        int maxEntries=hasAttribute(AttributeName.MAXENTRIES) ? getMaxEntries() : 999999;
+
+        VElement v=theQueue.getQueueEntryVector();
+        final int size = v==null ? 0 : v.size();
+        theQueue.setQueueSize(size);
+        for(int i=0;i<size;i++)
+        {
+            JDFQueueEntry qe=(JDFQueueEntry)v.elementAt(i);
+            if(!matches(qe))
+                qe.deleteNode();
+        }
+
+        for(int i=theQueue.numEntries(null)-1;i>=maxEntries;i--)
+            theQueue.removeChild(ElementName.QUEUEENTRY, null, maxEntries); // always zapp first - it is faster to find
+        
+    }
+
+    /**
+     * append a Device element with @DeviceID
+     * @param deviceID the deviceID to set
+     * @see org.cip4.jdflib.auto.JDFAutoQueueFilter#appendDevice()
+     */
+    public JDFDevice appendDevice(String deviceID) throws JDFException
+    {
+        final JDFDevice device = super.appendDevice();
+        device.setDeviceID(deviceID);
+        return device;
+    }
+
+    /**
+     * @param queueEntryID the queueEntryID to set
+     * @see org.cip4.jdflib.auto.JDFAutoQueueFilter#appendQueueEntryDef()
+     */
+    public JDFQueueEntryDef appendQueueEntryDef(String queueEntryID) throws JDFException
+    {
+        final JDFQueueEntryDef queueEntryDef = super.appendQueueEntryDef();
+        queueEntryDef.setQueueEntryID(queueEntryID);
+        return queueEntryDef;
+    }
+
 }

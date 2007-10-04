@@ -90,6 +90,8 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.util.ContainerUtil;
 
+import sun.misc.Cleaner;
+
 
 
 //----------------------------------
@@ -217,6 +219,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry
 
     /**
      * sort this into the queue based on current values
+     * assumes presorted queue
      * @param oldVal - the previous sort value
      */
     private void sortQueue(int oldVal)
@@ -277,7 +280,12 @@ public class JDFQueueEntry extends JDFAutoQueueEntry
         return false;
     }
 
-    /* (non-Javadoc)
+    /**
+     * sets the QueueEntry/@Status
+     * if the queue is automated, also resorts the queue to reflect the new Status and sets the Queue/@Status based on
+     * the maximum number of concurrently running jobs
+     * @param value the queuentry status to set
+     * 
      * @see org.cip4.jdflib.auto.JDFAutoQueueEntry#setQueueEntryStatus(org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus)
      */
     public void setQueueEntryStatus(EnumQueueEntryStatus value)
@@ -290,13 +298,15 @@ public class JDFQueueEntry extends JDFAutoQueueEntry
             {
                 super.setQueueEntryStatus(value);
                 sortQueue(getSortPriority(oldVal,getPriority()));
+                queue.setStatusFromEntries();
+                if(isCompleted())
+                    queue.cleanup();
             }
         }
         else if(!ContainerUtil.equals(oldVal, value)) // non automated
         {
             super.setQueueEntryStatus(value);
         }
-
     }
 
     /**
@@ -322,7 +332,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry
     public boolean isCompleted()
     {
        EnumQueueEntryStatus status=getQueueEntryStatus();
-       return (status==null) || 
+       return // (status==null) || 
        EnumQueueEntryStatus.Completed.equals(status) || 
        EnumQueueEntryStatus.Aborted.equals(status);
     }
@@ -336,7 +346,11 @@ public class JDFQueueEntry extends JDFAutoQueueEntry
     }
     /**
      * return a value based on QueueEntryStatus and Priority to sort the queue
-     * @return int a priority for sorting - low = back
+     * the status is the major order whereas the priority is used to order within regions of identical status
+     * 
+     * @return int a priority for sorting - 
+     *      low value = back of queue, 
+     *      high value = front of queue
      */
     public static int getSortPriority(EnumQueueEntryStatus status, int priority)
     {

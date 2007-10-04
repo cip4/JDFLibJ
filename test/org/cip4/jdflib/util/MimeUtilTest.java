@@ -110,7 +110,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 
- 
+
 
 public class MimeUtilTest extends JDFTestCaseBase
 {
@@ -343,30 +343,30 @@ public class MimeUtilTest extends JDFTestCaseBase
      * @author Claes Buckwalter
      */
     public void testResolveRelativeUrls() {
-    	// Build MIME package
-    	String path = sm_dirTestData + File.separator + "MISPrepress-ICS-Complex.jdf";
-    	JDFDoc jdfDoc = new JDFParser().parseFile(path);
-    	assertNotNull("Could not parse JDF: " + path, jdfDoc);
-    	Multipart multipart = MimeUtil.buildMimePackage(null, jdfDoc);
-    	assertNotNull("Could not build multipart", multipart);
-    	// Verify contents
-    	BodyPart[] bodyParts = MimeUtil.getBodyParts(multipart);
-    	assertEquals(3, bodyParts.length);
-    	JDFDoc jdfDoc2 = MimeUtil.getJDFDoc(bodyParts[0]);
-    	assertNotNull(jdfDoc2);
-    	JDFNode jdf = jdfDoc2.getJDFRoot();
-    	assertNotNull(jdf);
-    	List fileSpecs = jdf.getChildrenByTagName(ElementName.FILESPEC, null, new JDFAttributeMap(AttributeName.URL, "*"), false, false, 0);
-    	assertEquals(3, fileSpecs.size());
-    	for (Iterator i = fileSpecs.iterator(); i.hasNext(); ) {
-    		JDFFileSpec fileSpec = (JDFFileSpec) i.next();
-    		String cid = fileSpec.getURL();
-    		assertTrue(cid.startsWith("cid:"));
-    		assertNotNull(MimeUtil.getPartByCID(multipart, cid));
-    	}
-    	
+        // Build MIME package
+        String path = sm_dirTestData + File.separator + "MISPrepress-ICS-Complex.jdf";
+        JDFDoc jdfDoc = new JDFParser().parseFile(path);
+        assertNotNull("Could not parse JDF: " + path, jdfDoc);
+        Multipart multipart = MimeUtil.buildMimePackage(null, jdfDoc);
+        assertNotNull("Could not build multipart", multipart);
+        // Verify contents
+        BodyPart[] bodyParts = MimeUtil.getBodyParts(multipart);
+        assertEquals(3, bodyParts.length);
+        JDFDoc jdfDoc2 = MimeUtil.getJDFDoc(bodyParts[0]);
+        assertNotNull(jdfDoc2);
+        JDFNode jdf = jdfDoc2.getJDFRoot();
+        assertNotNull(jdf);
+        List fileSpecs = jdf.getChildrenByTagName(ElementName.FILESPEC, null, new JDFAttributeMap(AttributeName.URL, "*"), false, false, 0);
+        assertEquals(3, fileSpecs.size());
+        for (Iterator i = fileSpecs.iterator(); i.hasNext(); ) {
+            JDFFileSpec fileSpec = (JDFFileSpec) i.next();
+            String cid = fileSpec.getURL();
+            assertTrue(cid.startsWith("cid:"));
+            assertNotNull(MimeUtil.getPartByCID(multipart, cid));
+        }
+
     }
-    
+
     /////////////////////////////////////////////////////
 
     public void testBuildMimePackage() throws Exception
@@ -404,7 +404,7 @@ public class MimeUtilTest extends JDFTestCaseBase
         assertTrue(new File(sm_dirTestDataTemp+File.separator+"TestWriteMime"+File.separator+"test.icc").exists());
     }
     //////////////////////////////////////////////////////////////////////
-    
+
     public void testWriteToFile() throws Exception
     {
         testBuildMimePackageDocJMF();
@@ -445,7 +445,7 @@ public class MimeUtilTest extends JDFTestCaseBase
         assertEquals(bp.getFileName(), "bigger.pdf");
         File outFile=FileUtil.streamToFile(bp.getInputStream(), sm_dirTestDataTemp+File.separator+"performance.pdf");
         assertNotNull(outFile);
-/*
+        /*
         InputStream is=bp.getInputStream();
         byte[] b=new byte[1000];
         int l=0;
@@ -456,36 +456,42 @@ public class MimeUtilTest extends JDFTestCaseBase
                 break;
             l+=i;
         }
- */
+         */
         long extract=System.currentTimeMillis();
-//        System.out.println("extracted "+l+" bytes in time: "+(extract-getCID));
-       System.out.println("extracted  bytes in time: "+(extract-getCID));
+//      System.out.println("extracted "+l+" bytes in time: "+(extract-getCID));
+        System.out.println("extracted  bytes in time: "+(extract-getCID));
 
     }
     ///////////////////////////////////////////////////////
-    public void testURLPerformance() throws Exception
+    public void testURLPerformance() 
     {
         //testWritePerformance();
+        try{
+            long write=System.currentTimeMillis();
+            Multipart mp=MimeUtil.getMultiPart(sm_dirTestDataTemp+File.separator+"performance.mjm");
+            long getMP=System.currentTimeMillis();
+            System.out.println("get multipart time: "+(getMP-write));
+            BodyPart bp=MimeUtil.getPartByCID(mp, "bigger.pdf");
+            long getCID=System.currentTimeMillis();
+            System.out.println("get big time: "+(getCID-getMP));
+            assertNotNull(bp);
+            assertEquals(bp.getFileName(), "bigger.pdf");
+            HttpURLConnection uc=MimeUtil.writeToURL(mp, "http://localhost:8080/JDFUtility/dump");
+            InputStream is=uc.getInputStream();
+            IOUtils.copy(is, System.out);
+            is.close();
+            System.out.println();
+//          System.out.println("extracted "+l+" bytes in time: "+(extract-getCID));
+            long extract=System.currentTimeMillis();
+            System.out.println("sent  bytes in time: "+(extract-getCID));
+        }
+        catch (Exception x)
+        {
+            // nop
+        }
+    }
 
-        long write=System.currentTimeMillis();
-        Multipart mp=MimeUtil.getMultiPart(sm_dirTestDataTemp+File.separator+"performance.mjm");
-        long getMP=System.currentTimeMillis();
-        System.out.println("get multipart time: "+(getMP-write));
-        BodyPart bp=MimeUtil.getPartByCID(mp, "bigger.pdf");
-        long getCID=System.currentTimeMillis();
-        System.out.println("get big time: "+(getCID-getMP));
-        assertNotNull(bp);
-        assertEquals(bp.getFileName(), "bigger.pdf");
-        HttpURLConnection uc=MimeUtil.writeToURL(mp, "http://localhost:8080/JDFUtility/dump");
-        InputStream is=uc.getInputStream();
-        IOUtils.copy(is, System.out);
-        is.close();
-        System.out.println();
-//        System.out.println("extracted "+l+" bytes in time: "+(extract-getCID));
-        long extract=System.currentTimeMillis();
-       System.out.println("sent  bytes in time: "+(extract-getCID));
-
-    }    ///////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////
 
     public void testWritePerformance() throws IOException, FileNotFoundException, MalformedURLException
     {
@@ -528,6 +534,6 @@ public class MimeUtilTest extends JDFTestCaseBase
         assertNotNull(MimeUtil.writeToFile(m,sm_dirTestDataTemp+"performance.mjm"));
         long write=System.currentTimeMillis();
         System.out.println("Write time: "+(write-build));
-        
-     }
+
+    }
 }

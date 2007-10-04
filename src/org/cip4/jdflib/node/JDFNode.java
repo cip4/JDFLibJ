@@ -2077,7 +2077,7 @@ public class JDFNode extends JDFElement
         {
             for (int i = 0; i < siz; i++)
             {
-                bRet = bRet && setPartStatus(vmattr.elementAt(i), status);
+                bRet = setPartStatus(vmattr.elementAt(i), status) && bRet;
             }
         }
         else

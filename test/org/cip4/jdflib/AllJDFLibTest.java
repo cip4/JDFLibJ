@@ -140,6 +140,7 @@ import org.cip4.jdflib.jmf.JDFJMFTest;
 import org.cip4.jdflib.jmf.JDFMessageServiceTest;
 import org.cip4.jdflib.jmf.JDFMessageTest;
 import org.cip4.jdflib.jmf.JDFPipeParamsTest;
+import org.cip4.jdflib.jmf.JDFQueueFilterTest;
 import org.cip4.jdflib.jmf.JDFQueueSubmissionParamsTest;
 import org.cip4.jdflib.jmf.JMFKnownMessagesTest;
 import org.cip4.jdflib.jmf.JMFResourceInfoTest;
@@ -293,6 +294,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JDFMessageServiceTest.class);
         suite.addTestSuite(JMFKnownMessagesTest.class);
         suite.addTestSuite(JDFPipeParamsTest.class);
+        suite.addTestSuite(JDFQueueFilterTest.class);
         suite.addTestSuite(JDFQueueSubmissionParamsTest.class);
         suite.addTestSuite(JMFResourceTest.class);
         suite.addTestSuite(JMFResourceInfoTest.class);

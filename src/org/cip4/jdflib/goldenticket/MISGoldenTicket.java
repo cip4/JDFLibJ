@@ -140,7 +140,7 @@ public class MISGoldenTicket extends BaseGoldenTicket
     public void execute()
     {
         super.execute();
-        VJDFAttributeMap vNodeMap=theNode.getStatusPartMapVector();
+        VJDFAttributeMap vNodeMap=theNode.getNodeInfo().getPartMapVector(false);
         if(vNodeMap==null)
         {
             vNodeMap=new VJDFAttributeMap();
