@@ -77,7 +77,6 @@ package org.cip4.jdflib.util;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -99,7 +98,6 @@ import javax.mail.Session;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import javax.mail.util.SharedByteArrayInputStream;
 import javax.mail.util.SharedFileInputStream;
 
 import org.apache.commons.io.IOUtils;
@@ -834,7 +832,8 @@ public class MimeUtil
             httpURLconnection.setRequestProperty(CONTENT_TYPE,contentType );
             httpURLconnection.setDoOutput(true);
 
-            httpURLconnection.setChunkedStreamingMode(10000);
+//            only Java 5 setChunkedStreamingMode()
+//            httpURLconnection.setChunkedStreamingMode(10000);
             final OutputStream out= httpURLconnection.getOutputStream();
 
             writeToStream(mp, out);
