@@ -1,6 +1,129 @@
 ___________________________________________________________
 
 
+Label JDFLIBJ_2.1.3BLD470 (05.10.2007)
+
+removed setChunkedStreamingMode(), this function is only Java 5
+queue automation improvements
+add http streaming support (allow chunked write2url)
+modifications for multiple parts in AmountPool/PartAmount
+get"the" resource in ResourceInfo automatically
+resolved claes conflicts
+improved mime performance http://www.cip4.org/jira/browse/JDFJ-115
+JDFJ-114 MimeUtil now resolves relative URLs
+namespace typo checker
+npe when evaluating unlinked resourcelink
+statuscounter update for multiple passes, deviceID handling, WorkType
+change import for XmlNames to Java 1.4 conformant import org.apache.crimson.util.XmlNames;
+npe in getNodeInfo when link has combinedProcessIndex, but types does not exist
+minor cleanup
+added sendjdf servlet
+moved getURLDoc() to JDFElement
+move goldenticket from test to lib
+added getUrlDoc to JDFReturnQueueEntryParams (returns the jdf doc referenced by url)
+added golden ticket generators
+added sendjdf servlet
+cleanup
+- renamed JDFLib-J to JDFLibJ in ant
+- excluded SubVersion files and folders from .classpath
+- removed unnecessary imports
+- added test/temp folder to source control (folder only, no files / allows unit tests to pass on the first run after fresh checkout)
+use a metered input stream for keepalive=false; clean up destructors in http client
+queue synchronization for automated queue
+set default for keep-alive to false in http routines
+some new tests
+fix for isNMTOKEN
+added sscanf utility function
+FilterInputStream.cpp - fix return type to allow -1
+JDFElement.java added getChildrenByTagName with option to follow RefS
+fix for missing Location attribute in JDFAutoResourceInfo.java and in JDFAutoResourceQuParams.java
+LAYOUT tests
+queue cleanup
+check for both CR and LF
+minor fix: delete tailing carriage return from mime content type
+updated DEPENDENCIES.txt
+corrected test.working.dir
+updated comment for spam target
+JDFNode.fixversion minor bug fix
+fixes for generating internal links from devcaps
+synch mediaintent and media graindirection enumerations
+add NumList.contains()
+add xsi:type in fixversion
+bambi fixes for dispatching, some npes
+cleanup of http header for mime multipart
+mime fixes for non-ascii chars in xml
+added ByteArrayIOStream class
+removed spurious clone() implementations
+
+>ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD470) && !lbtype(JDFLIBJ_2.1.3BLD461)}" -print
+.\auto\JDFAutoResourceInfo.java@@\main\61
+.\auto\JDFAutoResourceQuParams.java@@\main\56
+.\cformat\ScanfFormat.java@@\main\2
+.\core\AttributeName.java@@\main\46
+.\core\JDFAudit.java@@\main\89
+.\core\JDFDoc.java@@\main\73
+.\core\JDFElement.java@@\main\239
+.\core\JDFParser.java@@\main\43
+.\core\JDFResourceLink.java@@\main\137
+.\core\KElement.java@@\main\252
+.\core\XMLDoc.java@@\main\88
+.\datatypes\JDFCMYKColor.java@@\main\8
+.\datatypes\JDFIntegerList.java@@\main\17
+.\datatypes\JDFLabColor.java@@\main\7
+.\datatypes\JDFMatrix.java@@\main\19
+.\datatypes\JDFNumberList.java@@\main\9
+.\datatypes\JDFNumList.java@@\main\32
+.\datatypes\JDFRectangle.java@@\main\21
+.\datatypes\JDFRGBColor.java@@\main\7
+.\datatypes\JDFShape.java@@\main\14
+.\datatypes\JDFTransferFunction.java@@\main\9
+.\datatypes\JDFXYPair.java@@\main\19
+.\datatypes\VJDFAttributeMap.java@@\main\28
+.\goldenticket@@\main\1
+.\goldenticket\BaseGoldenTicket.java@@\main\3
+.\goldenticket\JMFGoldenTicket.java@@\main\2
+.\goldenticket\MISCPGoldenTicket.java@@\main\3
+.\goldenticket\MISGoldenTicket.java@@\main\2
+.\ifaces\IPlacedObject.java@@\main\2
+.\jmf\JDFDeviceInfo.java@@\main\22
+.\jmf\JDFJMF.java@@\main\64
+.\jmf\JDFQueue.java@@\main\26
+.\jmf\JDFQueueEntry.java@@\main\22
+.\jmf\JDFQueueFilter.java@@\main\9
+.\jmf\JDFQueueSubmissionParams.java@@\main\14
+.\jmf\JDFResourceInfo.java@@\main\30
+.\jmf\JDFReturnQueueEntryParams.java@@\main\8
+.\jmf\JDFSubscription.java@@\main\11
+.\node\JDFNode.java@@\main\257
+.\pool\JDFAmountPool.java@@\main\27
+.\pool\JDFAuditPool.java@@\main\98
+.\resource\devicecapability\JDFAbstractState.java@@\main\52
+.\resource\devicecapability\JDFDevCaps.java@@\main\40
+.\resource\devicecapability\JDFDeviceCap.java@@\main\51
+.\resource\devicecapability\JDFIntegerState.java@@\main\30
+.\resource\devicecapability\JDFShapeEvaluation.java@@\main\16
+.\resource\devicecapability\JDFShapeState.java@@\main\31
+.\resource\JDFMarkObject.java@@\main\23
+.\resource\JDFProcessRun.java@@\main\31
+.\resource\JDFResource.java@@\main\226
+.\resource\process\JDFComponent.java@@\main\20
+.\resource\process\JDFContentObject.java@@\main\22
+.\resource\process\JDFPerson.java@@\main\18
+.\util@@\main\22
+.\util\ByteArrayIOStream.java@@\main\1
+.\util\EnumUtil.java@@\main\1
+.\util\FileUtil.java@@\main\3
+.\util\JDFMerge.java@@\main\16
+.\util\JDFSpawn.java@@\main\19
+.\util\MimeUtil.java@@\main\11
+.\util\SScanf.java@@\main\1
+.\util\StatusCounter.java@@\main\7
+.\util\StatusUtil.java@@\main\9
+.\util\StringUtil.java@@\main\63
+.\util\UrlUtil.java@@\main\11
+___________________________________________________________
+
+
 Label JDFLIBJ_2.1.3BLD461 (29.08.2007)
 
 added 5 missing updates for build 460
