@@ -90,8 +90,6 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.util.ContainerUtil;
 
-import sun.misc.Cleaner;
-
 
 
 //----------------------------------

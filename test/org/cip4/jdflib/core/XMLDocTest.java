@@ -117,7 +117,8 @@ public class XMLDocTest extends JDFTestCaseBase
                 NodeList nl=root.getElementsByTagName("elem"+iLoop%3);
                 for(int i=0;i<nl.getLength();i++)
                 {
-                    Node n=nl.item(i);
+//                    Node n=
+                    	nl.item(i);
                 }
                 System.out.println("Completing "+iLoop);
             }

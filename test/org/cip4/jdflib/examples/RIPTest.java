@@ -30,7 +30,6 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.JDFProcessRun;
 import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
@@ -90,8 +89,10 @@ public class RIPTest extends JDFTestCaseBase
             jmf.copyElement(vSigs.item(i), null);
         dStatusJMF.write2File(sm_dirTestDataTemp+File.separator+"ImageSetReprint_.jmf",2,false);
 
-        JDFResourceAudit ra=statCounter.setResourceAudit(refMedia,EnumReason.ProcessResult);
-        JDFProcessRun pr=statCounter.setProcessResult(EnumNodeStatus.Completed);
+//        JDFResourceAudit ra=
+        	statCounter.setResourceAudit(refMedia,EnumReason.ProcessResult);
+//        JDFProcessRun pr=
+        	statCounter.setProcessResult(EnumNodeStatus.Completed);
  
 
         d.write2File(sm_dirTestDataTemp+File.separator+"ImageSetAmount_Reprint.jdf",2,false);
@@ -167,7 +168,8 @@ public class RIPTest extends JDFTestCaseBase
             statCounter.addPhase(refXM,5, 0);
             statCounter.setPhase(EnumNodeStatus.InProgress, "Imaging", EnumDeviceStatus.Running, null);
 
-            JDFResourceAudit ra=statCounter.setResourceAudit(refMedia,EnumReason.ProcessResult);
+//            JDFResourceAudit ra=
+            	statCounter.setResourceAudit(refMedia,EnumReason.ProcessResult);
 
             JDFProcessRun pr=statCounter.setProcessResult(EnumNodeStatus.Completed);
             pr.setDescriptiveName("we even have the utterly useless ProcessRun");

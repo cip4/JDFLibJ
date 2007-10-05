@@ -37,7 +37,8 @@ public class JMFResourceInfoTest extends JDFTestCaseBase
     /////////////////////////////////////////////////////////////////////
     public void testGetResourceName()
     {
-        JDFMedia m=(JDFMedia) ri.appendResource(ElementName.MEDIA);
+//        JDFMedia m=(JDFMedia) 
+        ri.appendResource(ElementName.MEDIA);
         String name= ri.getResourceName();
         assertEquals(name,ElementName.MEDIA);
     }       

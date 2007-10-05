@@ -90,7 +90,6 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
@@ -398,11 +397,12 @@ public class StatusCounter
         {
             appendProcessRun(nodeStatus, ap);
         }
-        JDFResponse respStatus=null;
+//        JDFResponse respStatus=null;
         if(lastPhase!=null && nextPhase!=lastPhase) // we explicitly added a new phasetime audit, thus we need to add a closing JMF for the original jobPhase
         {
             bChanged=true;
-            respStatus = closeJobPhase(jmfStatus, la, lastPhase, nextPhase);
+//            respStatus = 
+            	closeJobPhase(jmfStatus, la, lastPhase, nextPhase);
         }
 
         if(nextPhase!=null)
