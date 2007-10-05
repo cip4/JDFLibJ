@@ -832,8 +832,7 @@ public class MimeUtil
             httpURLconnection.setRequestProperty(CONTENT_TYPE,contentType );
             httpURLconnection.setDoOutput(true);
 
-//            only Java 5 setChunkedStreamingMode()
-//            httpURLconnection.setChunkedStreamingMode(10000);
+            httpURLconnection.setChunkedStreamingMode(10000);
             final OutputStream out= httpURLconnection.getOutputStream();
 
             writeToStream(mp, out);
