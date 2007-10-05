@@ -91,6 +91,8 @@ import java.util.zip.DataFormatException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.enums.EnumUtils;
 import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.crimson.util.XmlNames;		// for Java up to 1.4
+// import com.sun.imageio.metadata.XmlNames;	// for Java from 5.0 onward
 import org.cip4.jdflib.cformat.PrintfFormat;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.JDFConstants;
@@ -106,8 +108,6 @@ import org.cip4.jdflib.datatypes.JDFNumberRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.JDFXYPairRange;
 import org.cip4.jdflib.datatypes.JDFXYPairRangeList;
-
-import com.sun.imageio.metadata.XmlNames;
 
 
 
