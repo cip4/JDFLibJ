@@ -95,13 +95,14 @@ import org.cip4.jdflib.util.StringUtil;
 public class JDFAudit extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID    = 1L;
     final private static String m_libAgentName    = "CIP4 JDF Writer Java";
-    final private static String m_libAgentVersion = "1.3 BLD 46";
+    final private static String m_libAgentVersion = "1.3 BLD 47";
+
     // use reasonable defaults
-    private static String m_strAgentName    = m_libAgentName;
-    private static String m_strAgentVersion = m_libAgentVersion;
-    private static String m_strAuthor = software();
+    private static String m_strAgentName          = m_libAgentName;
+    private static String m_strAgentVersion       = m_libAgentVersion;
+    private static String m_strAuthor             = software();
 
     private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
     static {
@@ -114,7 +115,7 @@ public class JDFAudit extends JDFElement
         atrInfoTable[6] = new AtrInfoTable(AttributeName.TIMESTAMP,     0x33333222, AttributeInfo.EnumAttributeType.dateTime,null,null);
     }
 
-    protected AttributeInfo getTheAttributeInfo() 
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -295,7 +296,7 @@ public class JDFAudit extends JDFElement
     {
         if(s==null)
             throw new JDFException("setStatus setting to null");
-        setAttribute(AttributeName.STATUS, s.getName(),null); 
+        setAttribute(AttributeName.STATUS, s.getName(),null);
     }
 
     /**
@@ -315,7 +316,7 @@ public class JDFAudit extends JDFElement
      */
     protected JDFElement.EnumNodeStatus getEndStatus()
     {
-        return JDFElement.EnumNodeStatus.getEnum(getAttribute (AttributeName.ENDSTATUS,null,null)); 
+        return JDFElement.EnumNodeStatus.getEnum(getAttribute (AttributeName.ENDSTATUS,null,null));
     }
 
     /**
@@ -466,7 +467,7 @@ public class JDFAudit extends JDFElement
      * version fixing routine for JDF
      *
      * uses heuristics to modify this element and its children to be compatible with a given version
-     * in general, it will be able to move from low to high versions but potentially fail 
+     * in general, it will be able to move from low to high versions but potentially fail
      * when attempting to move from higher to lower versions
      *
      * @param version: version that the resulting element should correspond to
@@ -587,7 +588,7 @@ public class JDFAudit extends JDFElement
     /**
      Get string attribute Author
      */
-    public String getAuthor() 
+    public String getAuthor()
     {
         return getAttribute(AttributeName.AUTHOR);
     }
@@ -595,7 +596,7 @@ public class JDFAudit extends JDFElement
     /**
      Get string attribute ID
      */
-    public String getID() 
+    public String getID()
     {
         return getAttribute(AttributeName.ID);
     }
@@ -661,7 +662,7 @@ public class JDFAudit extends JDFElement
         copy.removeAttribute(AttributeName.AGENTNAME);
         copy.removeAttribute(AttributeName.AGENTVERSION);
         copy.init();
-        copy.setRef(this);      
+        copy.setRef(this);
         return copy;
     }
     /**
