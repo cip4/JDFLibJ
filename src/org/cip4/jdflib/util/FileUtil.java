@@ -108,6 +108,19 @@ public class FileUtil
         return (files==null || files.length==0) ? null : files;
     }
 //////////////////////////////////////////////////////////////////////////////////
+    /**
+     * list all direct child directories
+     * @param dir the directory to search
+     * 
+     * @return Files[] the matching directories, null if none are found
+     */
+    public static File[] listDirectories(File dir)
+    {
+        if(dir==null)
+            return null;
+        File[] files=dir.listFiles(new DirectoryFileFilter());
+        return (files==null || files.length==0) ? null : files;
+    }
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -116,33 +129,55 @@ public class FileUtil
     * UtilFileFilter
     *
     ************************************************************/
-   public static class SimpleFileFilter implements FileFilter
-   {
-       private String m_extension;
- 
-       /**
-        * 
-        */
-       public SimpleFileFilter(String fileExtension)
-       {
-           m_extension = fileExtension;
-           fileExtension=UrlUtil.extension(fileExtension);
-           if(fileExtension!=null)
-               m_extension=fileExtension;
-       }
+    public static class SimpleFileFilter implements FileFilter
+    {
+        private String m_extension;
+  
+        /**
+         * 
+         */
+        public SimpleFileFilter(String fileExtension)
+        {
+            m_extension = fileExtension;
+            fileExtension=UrlUtil.extension(fileExtension);
+            if(fileExtension!=null)
+                m_extension=fileExtension;
+        }
 
-       /* (non-Javadoc)
-        * @see java.io.FileFilter#accept(java.io.File)
-        */
-       public boolean accept(File checkFile)
-       {
-           if ((checkFile == null) || !checkFile.isFile())
-               return false;
-           if(m_extension==null)
-               return true;
-           return m_extension.equalsIgnoreCase(UrlUtil.extension(checkFile.getPath()));
-       }
-   }
+        /* (non-Javadoc)
+         * @see java.io.FileFilter#accept(java.io.File)
+         */
+        public boolean accept(File checkFile)
+        {
+            if ((checkFile == null) || !checkFile.isFile())
+                return false;
+            if(m_extension==null)
+                return true;
+            return m_extension.equalsIgnoreCase(UrlUtil.extension(checkFile.getPath()));
+        }
+    }
+    
+    /**
+     * simple file filter that lists all directories
+     * @author prosirai
+     *
+     */
+    public static class DirectoryFileFilter implements FileFilter
+    { 
+        /**
+         * 
+         */
+        public DirectoryFileFilter()
+        { /* nop*/ }
+
+        /* (non-Javadoc)
+         * @see java.io.FileFilter#accept(java.io.File)
+         */
+        public boolean accept(File checkFile)
+        {
+            return checkFile!=null && checkFile.isDirectory();
+        }
+    }
 
     /**
      * very brutal tree zapper that will delete a directory tree recursively
