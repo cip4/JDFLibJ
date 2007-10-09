@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
@@ -111,6 +112,15 @@ public class JDFJMFTest extends JDFTestCaseBase
         assertTrue(c.getID().indexOf(".sid.") != -1);
         assertTrue(jmf.toString().indexOf("xsi:type=")>0);
         assertEquals(jmf.getMaxVersion(), jmf.getVersion(false));
+        assertEquals(jmf.getMaxVersion(), c.getMaxVersion(true));
+    }
+    public void testInitMaxVersion()
+    {
+        JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_2);
+        JDFDoc doc = new JDFDoc(ElementName.JMF);
+        JDFJMF jmf=doc.getJMFRoot();
+        assertEquals(jmf.getMaxVersion(), jmf.getVersion(false));
+        JDFCommand c=jmf.appendCommand();
         assertEquals(jmf.getMaxVersion(), c.getMaxVersion(true));
     }
     

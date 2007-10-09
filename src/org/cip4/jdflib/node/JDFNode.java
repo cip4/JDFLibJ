@@ -7004,7 +7004,8 @@ public class JDFNode extends JDFElement
     }
 
     /**
-     * get attribute MaxVersion
+     * get attribute MaxVersion, defaults to version if not set
+     * 
      * @param bInherit if true recurse through ancestors when searching
      * @return EnumVersion - attribute value
      * 
@@ -7012,20 +7013,13 @@ public class JDFNode extends JDFElement
      */
     public EnumVersion getMaxVersion(boolean bInherit) 
     {
-        String version;
-        if (bInherit)
-        {
-            version = getAncestorAttribute(AttributeName.MAXVERSION, 
-                    null, 
-                    JDFConstants.EMPTYSTRING);
-        }
-        else
-        {
-            version = getAttribute(AttributeName.MAXVERSION, 
-                    null, 
-                    JDFConstants.EMPTYSTRING);
-        }
+        String version=(bInherit) ?
+            getAncestorAttribute(AttributeName.MAXVERSION, null,null) :
+            getAttribute(AttributeName.MAXVERSION,  null,  null);
 
+        if(version==null)
+            return getVersion(bInherit);
+        
         return EnumVersion.getEnum(version);
     }
 

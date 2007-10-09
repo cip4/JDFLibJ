@@ -968,7 +968,23 @@ public class JDFNodeTest extends JDFTestCaseBase
         JDFAuditPool ap=node.getAuditPool();
         assertNotNull(ap);
         assertEquals(ap.numChildElements(ElementName.CREATED, null), 1);
-    }
+    }    
+    
+    public void testInitDefaultVersion()
+    {
+        
+        JDFDoc doc = new JDFDoc(ElementName.JDF);
+        JDFNode node = doc.getJDFRoot();
+        assertEquals(node.getVersion(true),JDFElement.getDefaultJDFVersion());
+        assertEquals(node.getMaxVersion(true),JDFElement.getDefaultJDFVersion());
+        
+        JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_1);
+        doc = new JDFDoc(ElementName.JDF);
+        node = doc.getJDFRoot();
+        assertEquals(node.getVersion(true),JDFElement.getDefaultJDFVersion());
+        assertEquals(node.getMaxVersion(true),JDFElement.getDefaultJDFVersion());
+        
+     }
 
     //////////////////////////////////////////////
 

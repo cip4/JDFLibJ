@@ -3700,15 +3700,23 @@ public class JDFElement extends KElement
     }
     
     /**
-     * get the version of this element
-     * @param bInherit if true, check ancestor nodes
-     * @return the version corresponding to this element
+     * get attribute MaxVersion, defaults to version if not set
+     * 
+     * @param bInherit if true recurse through ancestors when searching
+     * @return EnumVersion - attribute value
+     * 
+     * default - getMaxVersion(false)
      */
-    public EnumVersion getMaxVersion(boolean bInherit)
+    public EnumVersion getMaxVersion(boolean bInherit) 
     {
-        return EnumVersion.getEnum(bInherit 
-        ? getInheritedAttribute(AttributeName.MAXVERSION,  null, null)
-        : getAttribute(AttributeName.MAXVERSION,null,null));
+        String version=(bInherit) ?
+            getInheritedAttribute(AttributeName.MAXVERSION, null,null) :
+            getAttribute(AttributeName.MAXVERSION,  null,  null);
+
+        if(version==null)
+            return getVersion(bInherit);
+        
+        return EnumVersion.getEnum(version);
     }
 
     /**

@@ -245,24 +245,28 @@ public class MimeUtilTest extends JDFTestCaseBase
 
     public void testBuildMimePackageDoc() throws Exception
     {
-        JDFDoc doc=new JDFDoc("JDF");
-        doc.setOriginalFileName("JDF.jdf");  
-        JDFNode n=doc.getJDFRoot();
-        n.setType(EnumType.ColorSpaceConversion);
-        JDFColorSpaceConversionParams cscp=(JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input, null, null, null, null);
-        JDFFileSpec fs0=cscp.appendFinalTargetDevice();
-        fs0.setURL(StringUtil.uncToUrl(sm_dirTestData+File.separator+"test.icc",true));
-        JDFRunList rl=(JDFRunList)n.addResource(ElementName.RUNLIST, null, EnumUsage.Input, null, null, null, null);
-        rl.addPDF(StringUtil.uncToUrl(sm_dirTestData+File.separator+"url1.pdf",false), 0, -1);
-        rl.addPDF(StringUtil.uncToUrl(sm_dirTestData+File.separator+"url1.pdf",false), 0, -1);
-        rl.addPDF(StringUtil.uncToUrl(sm_dirTestData+File.separator+"url2.pdf",false), 0, -1);
-        Multipart m=MimeUtil.buildMimePackage(null,doc);
+        for(int i=0;i<2;i++)
+        {
+            JDFDoc doc=new JDFDoc("JDF");
+            if(i==1)
+                doc.setOriginalFileName("JDF.jdf");  
+            JDFNode n=doc.getJDFRoot();
+            n.setType(EnumType.ColorSpaceConversion);
+            JDFColorSpaceConversionParams cscp=(JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input, null, null, null, null);
+            JDFFileSpec fs0=cscp.appendFinalTargetDevice();
+            fs0.setURL(StringUtil.uncToUrl(sm_dirTestData+File.separator+"test.icc",true));
+            JDFRunList rl=(JDFRunList)n.addResource(ElementName.RUNLIST, null, EnumUsage.Input, null, null, null, null);
+            rl.addPDF(StringUtil.uncToUrl(sm_dirTestData+File.separator+"url1.pdf",false), 0, -1);
+            rl.addPDF(StringUtil.uncToUrl(sm_dirTestData+File.separator+"url1.pdf",false), 0, -1);
+            rl.addPDF(StringUtil.uncToUrl(sm_dirTestData+File.separator+"url2.pdf",false), 0, -1);
+            Multipart m=MimeUtil.buildMimePackage(null,doc);
 
-        final String mimeFile = sm_dirTestDataTemp+File.separator+"testMimePackageDoc.mjm";
-        MimeUtil.writeToFile(m, mimeFile);
+            final String mimeFile = sm_dirTestDataTemp+File.separator+"testMimePackageDoc"+(i==0?"0":"")+".mjm";
+            MimeUtil.writeToFile(m, mimeFile);
 
-        Multipart mp=MimeUtil.getMultiPart(mimeFile);
-        assertEquals("JDF, 2* rl, 1 icc",mp.getCount(), 4);
+            Multipart mp=MimeUtil.getMultiPart(mimeFile);
+            assertEquals("JDF, 2* rl, 1 icc",mp.getCount(), 4);
+        }
     }
 
     public void testUpdateXMLMultipart() throws Exception

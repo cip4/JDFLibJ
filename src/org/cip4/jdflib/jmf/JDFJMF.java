@@ -95,6 +95,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 //import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
@@ -172,6 +173,23 @@ public class JDFJMF extends JDFAutoJMF
         return true;
     }
 
+    /**
+     * get attribute MaxVersion, defaults to version if not set
+     * 
+     * @param bInherit if true recurse through ancestors when searching
+     * @return EnumVersion - attribute value
+     * 
+     * default - getMaxVersion(false)
+     */
+    public EnumVersion getMaxVersion() 
+    {
+        String version=getAttribute(AttributeName.MAXVERSION,  null,  null);
+
+        if(version==null)
+            return getVersion(false);
+        
+        return EnumVersion.getEnum(version);
+    }
     /**
      * version fixing routine for JMF
      *<p>
