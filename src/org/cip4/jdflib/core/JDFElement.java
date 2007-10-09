@@ -3466,10 +3466,10 @@ public class JDFElement extends KElement
             for (int i = iFirstPos; i < iLastPos; i++)
             {
                 final String s     = (String) vDoneRefs.elementAt(i);
-                final JDFElement e = (JDFElement) getTarget(s, AttributeName.ID);
-                if (e != null)
+                final KElement e =  getTarget(s, AttributeName.ID);
+                if (e instanceof JDFElement)
                 {
-                    vDoneRefs = e.getHRefs(vDoneRefs, true, bExpand);
+                    vDoneRefs = ((JDFElement)e).getHRefs(vDoneRefs, true, bExpand);
                 }
             }
         }
@@ -3504,7 +3504,7 @@ public class JDFElement extends KElement
         for (int i = 0; i < sRefs.size(); i++)
         {
             KElement kEl = getTarget((String) sRefs.elementAt(i), AttributeName.ID);
-            if (kEl != null) {
+            if (kEl instanceof JDFResource) {
 				v.appendUnique(kEl);
 			}
         }
