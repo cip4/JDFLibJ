@@ -52,7 +52,8 @@ public class SchemaAttribute implements Serializable
         setm_KElement (other);
     }
 
-    public String toString ()
+    @Override
+	public String toString ()
     {
         return "SchemaAttribute[ --> " + m_KElement + " ]";
     }
@@ -104,7 +105,7 @@ public class SchemaAttribute implements Serializable
 
             for (int i = 0; i < nSimpleType.size (); i++)
             {
-                KElement k = (KElement) nSimpleType.elementAt (i);
+                KElement k = nSimpleType.elementAt (i);
 
                 String strName = k.getAttribute ("name", "", "");
                 if (m_strType != null && m_strType.equals (strName))

@@ -48,7 +48,8 @@ public class ResourceTextPane extends JTextPane implements ListDoubleClickedList
     {
         new Thread()
         {
-            public void run()
+            @Override
+			public void run()
             {
                 setPriority(1);
                 SyntaxHighlighter shl = new SyntaxHighlighter(getTextPane());
@@ -81,7 +82,8 @@ public class ResourceTextPane extends JTextPane implements ListDoubleClickedList
             setNameClickPosition(e.getNameAtClickPosition());
             new Thread()
             {
-                public void run()
+                @Override
+				public void run()
                 {
                     String s        = getNameClickPosition();
                     String strName  = s.substring(7);
@@ -166,7 +168,7 @@ public class ResourceTextPane extends JTextPane implements ListDoubleClickedList
         String strComplexTypeName;
         for(int i = 0; i < vComplexType.size(); i++)
         {
-            KElement k = (KElement)vComplexType.get(i);
+            KElement k = vComplexType.get(i);
             strComplexTypeName = k.getAttribute("name");
             int j = strComplexTypeName.indexOf(strName);
             if(j != -1)

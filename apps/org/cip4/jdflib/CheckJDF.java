@@ -702,7 +702,7 @@ public class CheckJDF
                     VElement vr = res.getLeaves(false);
                     for (j = 0; j < vr.size(); j++)
                     {
-                        printBad( (JDFElement)vr.elementAt(j),
+                        printBad( vr.elementAt(j),
                                 indent + 2, testElement,
                                 false);
                     }
@@ -714,7 +714,7 @@ public class CheckJDF
         VElement ve = jdfElement.getChildElementVector(null, null, null, true, 0, false);
         for (i = 0; i < ve.size(); i++)
         {
-            printBad((KElement) ve.elementAt(i),
+            printBad(ve.elementAt(i),
                     indent + 2,
                     testElement,false);
         }
@@ -940,7 +940,7 @@ public class CheckJDF
         vr.clear();
         for(i=0; i < vLinkedResources.size(); i++)
         {
-            if (((KElement)vLinkedResources.elementAt(i)) instanceof JDFResource)
+            if ((vLinkedResources.elementAt(i)) instanceof JDFResource)
             {
                 JDFResource linkedRes = (JDFResource) vLinkedResources.elementAt(i);
                 vr.appendUnique(linkedRes.getResourceRoot());
@@ -1675,7 +1675,7 @@ public class CheckJDF
         boolean bValid=true;
         for (int i = vEl.size()-1; i >= 0; i--)
         {
-            KElement el = (KElement) vEl.elementAt(i);
+            KElement el = vEl.elementAt(i);
             // ignore separationpools etc - only TestElement and TestAttribute are important
             if(el==null || !el.getLocalName().startsWith("Test")) {
                 continue;
@@ -1903,7 +1903,8 @@ public class CheckJDF
      * @deprecated use setJDFSchemaLocation(File)
      * @param _schemaLocation
      */
-    public void setJDFSchemaLocation(String _schemaLocation)
+    @Deprecated
+	public void setJDFSchemaLocation(String _schemaLocation)
     {
         setJDFSchemaLocation(new File(_schemaLocation));
     }
@@ -2181,7 +2182,8 @@ public class CheckJDF
      * @return
      * @deprecated - use either processSingleDoc, processSingleStream or processSinglFile(String) this will be made private
      */
-    public XMLDoc processSingleFile(InputStream inStream, String url, String xmlFile)
+    @Deprecated
+	public XMLDoc processSingleFile(InputStream inStream, String url, String xmlFile)
     {
         return processSingleFile(inStream, url, xmlFile, null);
     }

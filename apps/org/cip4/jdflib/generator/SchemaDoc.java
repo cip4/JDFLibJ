@@ -71,7 +71,7 @@ public class SchemaDoc extends XMLDoc
             
             // Wrap the KElement "Assembly_AssemblySection_AssemblySection_lr" 
             // into the SchemaComplexType "Assembly" (leads to duplicates)
-            KElement schemaElement = (KElement) vAllComplexTypes.elementAt(i);
+            KElement schemaElement = vAllComplexTypes.elementAt(i);
             // System.out.println (schemaElement.getAttribute_KElement("name","",""));
             complexType = new SchemaComplexType(schemaElement); // sct.strSchemaComplexTypeName
 

@@ -999,7 +999,7 @@ public class GeneratorUtil
 
                 for (int i = 0; i < vEnumElements.size(); i++)
                 {
-                    String strEnumName = ((KElement) vEnumElements.elementAt(i)).getAttribute("value");
+                    String strEnumName = (vEnumElements.elementAt(i)).getAttribute("value");
                     vStrEnum.addElement(strEnumName);
                 }
             }
@@ -1014,7 +1014,7 @@ public class GeneratorUtil
 
                     for (int i = 0; i < vEnumElements.size(); i++)
                     {
-                        String strEnumName = ((KElement) vEnumElements.elementAt(i)).getAttribute("value");
+                        String strEnumName = (vEnumElements.elementAt(i)).getAttribute("value");
                         vStrEnum.addElement(strEnumName);
                     }
                 }
@@ -1929,7 +1929,7 @@ public class GeneratorUtil
                     {
                         // reset it to empty string
                         sProcessUsage = "";
-                        SchemaElement schemaElement = new SchemaElement ((KElement) vInOut.elementAt (j));
+                        SchemaElement schemaElement = new SchemaElement (vInOut.elementAt (j));
                         KElement kElem = schemaElement.getm_schemaKElem ();
 
                         sUsage = kElem.getAttribute ("Usage");
@@ -2089,7 +2089,7 @@ public class GeneratorUtil
     {
         for (int i = 0; i < vElements.size(); i++)
         {
-            KElement kElem = ((KElement) vElements.elementAt(i));
+            KElement kElem = (vElements.elementAt(i));
             String kElemName = kElem.getAttribute("name", "", "");
             kElemName = kElemName.split("_")[0];
 
@@ -2583,7 +2583,7 @@ public class GeneratorUtil
         HashMap h = new HashMap ();
         for (int i = 0; i < source.size (); i++)
         {
-            KElement k = (KElement) source.elementAt (i);
+            KElement k = source.elementAt (i);
             h.put (k.getAttribute ("name"), k);
         }
 
