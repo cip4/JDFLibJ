@@ -155,7 +155,8 @@ public class JDFAttributeMap implements Map
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         StringBuffer sb = new StringBuffer ();
 
@@ -437,7 +438,8 @@ public class JDFAttributeMap implements Map
      * @deprecated use reduceMap(set) (VString.getSet() returns a set)
      * @param keys the given keys
      */
-    public void reduceMap(Vector keys)
+    @Deprecated
+	public void reduceMap(Vector keys)
     {
         Hashtable ht = new Hashtable();
         final int size = keys.size();
@@ -455,7 +457,8 @@ public class JDFAttributeMap implements Map
      * reduceKey - the same as reduceMap but with a worse name
      * @deprecated use reduceMap
      */
-    public void reduceKey(Vector keys)
+    @Deprecated
+	public void reduceKey(Vector keys)
     {
         reduceMap(keys);
     }
@@ -469,7 +472,8 @@ public class JDFAttributeMap implements Map
      *
      * @return boolean - true if the maps are equal, otherwise false
      */
-    public boolean equals(Object other)
+    @Override
+	public boolean equals(Object other)
     {
         if (this == other)
         {
@@ -486,7 +490,8 @@ public class JDFAttributeMap implements Map
      * hashCode complements equals() to fulfill the equals/hashCode contract
      * @return int
      */
-    public int hashCode()
+    @Override
+	public int hashCode()
     {
         return HashUtil.hashCode(0, this.m_hashTable);
     }
@@ -620,7 +625,7 @@ public class JDFAttributeMap implements Map
      */
     public VString getKeys()
     {
-        Iterator it = getKeyIterator();
+        Iterator<String> it = getKeyIterator();
         VString thisKeys = new VString();
         while(it.hasNext())
         {

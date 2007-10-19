@@ -108,7 +108,8 @@ public class JDFEnumerationState extends JDFAbstractState
         atrInfoTable[5]  = new AtrInfoTable(AttributeName.PRESENTREGEXP,     0x33331111, AttributeInfo.EnumAttributeType.RegExp, null, null);
     }
 
-    protected AttributeInfo getTheAttributeInfo() 
+    @Override
+	protected AttributeInfo getTheAttributeInfo() 
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -120,7 +121,8 @@ public class JDFEnumerationState extends JDFAbstractState
         elemInfoTable[0] = new ElemInfoTable(ElementName.VALUELOC, 0x33333311);
     }
 
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
     }
@@ -171,7 +173,8 @@ public class JDFEnumerationState extends JDFAbstractState
      * toString
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFEnumerationState[ --> " + super.toString() + " ]";
     }
@@ -237,7 +240,8 @@ public class JDFEnumerationState extends JDFAbstractState
     /* (non-Javadoc)
      * @see org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java.lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
      */
-    public void addValue(String value, EnumFitsValue testlists)
+    @Override
+	public void addValue(String value, EnumFitsValue testlists)
     {
         if(fitsValue(value, testlists))
             return;
@@ -270,7 +274,8 @@ public class JDFEnumerationState extends JDFAbstractState
      * 
      * @return boolean - true, if 'value' matches testlists or if AllowedValueList is not specified
      */    
-    public boolean fitsValue(String value, EnumFitsValue testlists)
+    @Override
+	public boolean fitsValue(String value, EnumFitsValue testlists)
     {
         if (fitsListType(value))
             return (fitsValueList(value,testlists) && fitsRegExp(value,testlists));
@@ -323,8 +328,8 @@ public class JDFEnumerationState extends JDFAbstractState
             boolean bFound = false;
             for (int j=0; j<l_size; j++)
             {
-                String ve = (String)vs.elementAt(i);
-                String le = (String)list.elementAt(j);
+                String ve = vs.elementAt(i);
+                String le = list.elementAt(j);
                 if (ve.compareTo(le)==0) 
                 {
                     bFound = true;  
@@ -454,8 +459,8 @@ public class JDFEnumerationState extends JDFAbstractState
             {
                 if ( j!=i ) 
                 {
-                    String si =(String)v.elementAt(i);
-                    String sj =(String)v.elementAt(j);
+                    String si =v.elementAt(i);
+                    String sj =v.elementAt(j);
                     if (si.compareTo(sj)==0) 
                         return false;
                 }
@@ -464,12 +469,14 @@ public class JDFEnumerationState extends JDFAbstractState
         return true;
     }
 
-    public String getAllowedRegExp()
+    @Override
+	public String getAllowedRegExp()
     {
         return getAttribute(AttributeName.ALLOWEDREGEXP, null, JDFConstants.EMPTYSTRING);
     }
 
-    public String getPresentRegExp()
+    @Override
+	public String getPresentRegExp()
     {
         if (hasAttribute(AttributeName.PRESENTREGEXP))
         {
@@ -490,7 +497,8 @@ public class JDFEnumerationState extends JDFAbstractState
     /* (non-Javadoc)
      * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
      */
-    public EnumTerm getEvaluationType()
+    @Override
+	public EnumTerm getEvaluationType()
     {
         return EnumTerm.EnumerationEvaluation;
     }

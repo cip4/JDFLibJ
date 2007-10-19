@@ -462,7 +462,7 @@ public class JDFSpawn
     
         // avoid double counting of this node's root element in case of partitioned spawning
         int startAncestorLoop = 0;
-        if ((vs.size() > 0) && (((String) vs.elementAt(0)).equals(lastAncestorID)))
+        if ((vs.size() > 0) && ((vs.elementAt(0)).equals(lastAncestorID)))
         {
             startAncestorLoop = 1;
         }
@@ -471,7 +471,7 @@ public class JDFSpawn
         for (int i = startAncestorLoop; i < vs.size(); i++)
         {
             final JDFAncestor ancestor = ancestorPool.appendAncestor();
-            ancestor.setNodeID((String) vs.elementAt(i));
+            ancestor.setNodeID(vs.elementAt(i));
             if (i == 0)
             { // first in list is the parent
                 if (parentURL!=null && !parentURL.equals(JDFConstants.EMPTYSTRING))
@@ -990,7 +990,7 @@ public class JDFSpawn
         final int size = vs.size();
         for(int i = 0; i < size; i++)
         {
-            final String id = (String)vs.elementAt(i);
+            final String id = vs.elementAt(i);
     
             // the referenced resource is already in this pool - continue
             if(!allIDsCopied.contains(id))
@@ -1367,7 +1367,7 @@ public class JDFSpawn
                 int i = 0;
                 for (i = 0; i < vs.size(); i++)
                 {
-                    final JDFResource oldRes = (JDFResource) parent.getTarget((String) vs.elementAt(i), AttributeName.ID);
+                    final JDFResource oldRes = (JDFResource) parent.getTarget(vs.elementAt(i), AttributeName.ID);
                     if (oldRes != null)
                     {
                         oldRes.unSpawnPart(strSpawnID, JDFResource.EnumSpawnStatus.SpawnedRO);
@@ -1380,7 +1380,7 @@ public class JDFSpawn
                 for (i = 0; i < vRWCopied.size(); i++)
                 {
                     final JDFResource oldRes = (JDFResource) 
-                    parent.getTarget((String) vRWCopied.elementAt(i), AttributeName.ID);
+                    parent.getTarget(vRWCopied.elementAt(i), AttributeName.ID);
                     if (oldRes != null)
                     {
                         oldRes.unSpawnPart(strSpawnID, JDFResource.EnumSpawnStatus.SpawnedRW);

@@ -201,7 +201,7 @@ public class JDFIntegerRangeList extends JDFRangeList
          VString vs = StringUtil.tokenize(zappedWS, " \t", false);
          for(int i = 0; i <  vs.size(); i++)
          {
-             String str = (String) vs.elementAt(i);
+             String str = vs.elementAt(i);
              try 
              {
                  JDFIntegerRange ir = new JDFIntegerRange(str); 
@@ -414,13 +414,14 @@ public class JDFIntegerRangeList extends JDFRangeList
        * 
        * @return boolean - true if 'this' is a OrdneredRangeList
        */
-      public boolean isOrdered()
+      @Override
+	public boolean isOrdered()
       {
           int siz = rangeList.size();
           if (siz == 0)
               return false; // attempt to operate on a null element
 
-          VString v = new VString(); // vector of ranges
+          Vector v = new Vector(); // vector of ranges
           for (int i = 0; i < siz; i++)
           {
               JDFIntegerRange r = (JDFIntegerRange) rangeList.elementAt(i);
@@ -456,14 +457,15 @@ public class JDFIntegerRangeList extends JDFRangeList
       * 
       * @return boolean - true if 'this' is UniqueOrdered RangeList
       */
-      public boolean isUniqueOrdered() {
+      @Override
+	public boolean isUniqueOrdered() {
           
           int siz=rangeList.size();
           if (siz==0) {
               return false; // attempt to operate on a null element
           }
           
-          VString v = new VString(); // vector of ranges
+          Vector v = new Vector(); // vector of ranges
           for  (int i=0; i<siz; i++)
           {
               JDFIntegerRange r = (JDFIntegerRange) rangeList.elementAt(i);

@@ -25,6 +25,7 @@ import org.cip4.jdflib.resource.process.JDFLayoutElement;
 import org.cip4.jdflib.resource.process.JDFLayoutElementPart;
 import org.cip4.jdflib.resource.process.JDFLayoutElementProductionParams;
 import org.cip4.jdflib.resource.process.JDFRunList;
+
 import org.cip4.jdflib.util.StatusUtil;
 
 
@@ -184,7 +185,8 @@ public class ContentCreationTest extends PreflightTest
      * test preflight concepts in layoutelementproduction
      * @throws Exception
      */
-    public void testLayoutPreflight() throws Exception
+    @SuppressWarnings("deprecation")
+	public void testLayoutPreflight() throws Exception
     {
         JDFElement.setLongID(false);
         JDFDoc d=new JDFDoc("JDF");

@@ -171,20 +171,20 @@ public class JDFRectangleRangeList extends JDFRangeList
                  throw new DataFormatException("JDFRectangleRangeList.setString: Illegal string " + s);
              
              StringBuffer str = new StringBuffer(100);
-             str.append((String) vs.elementAt(i)).append(JDFConstants.BLANK)
-                .append((String) vs.elementAt(++i)).append(JDFConstants.BLANK)
-                .append((String) vs.elementAt(++i)).append(JDFConstants.BLANK);
+             str.append(vs.elementAt(i)).append(JDFConstants.BLANK)
+                .append(vs.elementAt(++i)).append(JDFConstants.BLANK)
+                .append(vs.elementAt(++i)).append(JDFConstants.BLANK);
              // the 4-th token 'tildeToken' can be with or without "~"
-             String tildeToken = (String) vs.elementAt(++i);
+             String tildeToken = vs.elementAt(++i);
              str.append(tildeToken);
              if ( tildeToken.indexOf(JDFConstants.TILDE)!=-1) // str - JDFRectangleRange
              {
                  if (size-i < MAX_RECTANGLE_DIMENSION) // the last RectangleRange is incomplete
                      throw new DataFormatException("JDFRectangleRangeList.setString: Illegal string " + s);
                  
-                 str.append(JDFConstants.BLANK).append((String) vs.elementAt(++i))
-                    .append(JDFConstants.BLANK).append((String) vs.elementAt(++i))
-                    .append(JDFConstants.BLANK).append((String) vs.elementAt(++i));
+                 str.append(JDFConstants.BLANK).append(vs.elementAt(++i))
+                    .append(JDFConstants.BLANK).append(vs.elementAt(++i))
+                    .append(JDFConstants.BLANK).append(vs.elementAt(++i));
              }
              try 
              {
@@ -259,13 +259,14 @@ public class JDFRectangleRangeList extends JDFRangeList
        * 
        * @return boolean - true if 'this' is a OrdneredRangeList
        */
-     public boolean isOrdered()
+     @Override
+	public boolean isOrdered()
       {
           int siz = rangeList.size();
           if (siz == 0)
               return false; // attempt to operate on a null element
 
-          VString v = new VString(); // vector of ranges
+          Vector v = new Vector(); // vector of ranges
           for (int i = 0; i < siz; i++)
           {
               JDFRectangleRange r = (JDFRectangleRange) rangeList.elementAt(i);
@@ -301,14 +302,15 @@ public class JDFRectangleRangeList extends JDFRangeList
       * 
       * @return boolean - true if 'this' is an UniqueOrdered RangeList
       */
-     public boolean isUniqueOrdered() {
+     @Override
+	public boolean isUniqueOrdered() {
           
           int siz=rangeList.size();
           if (siz==0) {
               return false; // attempt to operate on a null element
           }
           
-          VString v = new VString(); // vector of ranges
+          Vector v = new Vector(); // vector of ranges
           for  (int i=0; i<siz; i++)
           {
               JDFRectangleRange r = (JDFRectangleRange) rangeList.elementAt(i);

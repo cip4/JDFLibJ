@@ -115,7 +115,8 @@ public class AddAutoFileDialog  extends JDialog implements ActionListener
         setModal(true);
         addWindowListener(new WindowAdapter()
                                 {
-                                    public void WindowClosing()
+                                    @SuppressWarnings("unused")
+									public void WindowClosing()
                                     {
                                         dispose();
                                     }

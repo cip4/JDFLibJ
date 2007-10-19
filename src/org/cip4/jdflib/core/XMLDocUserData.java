@@ -32,12 +32,12 @@ public class XMLDocUserData
     /** 
      * vKString vDirtyID the vector of dirty IDs
      */
-    private VString m_vDirtyID;
+    private final VString m_vDirtyID;
     
     /** 
      * map of ID KElement pairs
      */
-    private HashMap m_mapTarget;
+    private final HashMap m_mapTarget;
      
     private EnumDirtyPolicy dirtyPolicy;
         
@@ -260,7 +260,7 @@ public class XMLDocUserData
             final int size = m_vDirtyID.size();
             for(i = 0; i < size; i++)
             {
-                String s = (String)m_vDirtyID.elementAt(i);
+                String s = m_vDirtyID.elementAt(i);
                 if(s.startsWith(x))
                 {
                     if(s.equals(x)) // e is already dirty
@@ -336,7 +336,7 @@ public class XMLDocUserData
                 
             for(int i = 0; i < size; i++)
             {
-                final String s = (String)m_vDirtyID.elementAt(i);
+                final String s = m_vDirtyID.elementAt(i);
                 if (strID.startsWith(s)) // we have a dirty parent, do nothing
                 { 
                     return true; 

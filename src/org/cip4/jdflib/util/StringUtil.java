@@ -118,7 +118,8 @@ public class StringUtil
     /**
      * @deprecated use {@link UrlUtil}.m_URIEscape
      */
-    public static final String m_URIEscape = UrlUtil.m_URIEscape;
+    @Deprecated
+	public static final String m_URIEscape = UrlUtil.m_URIEscape;
 
 
 //  ****************************************    Methods   ******************************************
@@ -145,11 +146,11 @@ public class StringUtil
 
         if (size > 0)
         {
-            s = ((String) vs.elementAt(0)).trim();
+            s = (vs.elementAt(0)).trim();
 
             for (int i=1; i<size; i++)
             {
-                s = s + delim + ((String) vs.elementAt(i)).trim();
+                s = s + delim + (vs.elementAt(i)).trim();
             }
         }
         return s;
@@ -604,7 +605,8 @@ public class StringUtil
      * @return
      * @deprecated use URLUtil.extension
      */
-    public static String extension(String pathName)
+    @Deprecated
+	public static String extension(String pathName)
     {
         return UrlUtil.extension(pathName);
     }
@@ -639,7 +641,8 @@ public class StringUtil
      * @param strWork
      * @return String
      */
-    public static String xmlNameSpace(String strWork)
+    @Deprecated
+	public static String xmlNameSpace(String strWork)
     {
         return KElement.xmlnsPrefix(strWork);
     }
@@ -762,7 +765,8 @@ public class StringUtil
      * @return boolean - true if strWork is an NMTOKENS list
      * @deprecated 060309 use isNMTOKENS(strWork,false)
      */    
-    public static boolean isNMTOKENS(String strWork)
+    @Deprecated
+	public static boolean isNMTOKENS(String strWork)
     {
         return isNMTOKENS(strWork,false);
     }
@@ -877,7 +881,7 @@ public class StringUtil
             int occurence = 0;
             for(int i = 0; i < vNames.size(); i++)
             {
-                String strName = (String)vNames.elementAt(i);
+                String strName = vNames.elementAt(i);
                 if(strName.equals(name))
                 {
                     if(occurence++ == iSkip)
@@ -903,7 +907,8 @@ public class StringUtil
      * @return boolean - 
      * @deprecated 060420 use hasToken(strWork, token, delim, 0)
      */
-    public static boolean hasToken(String strWork, String typ, String delim)
+    @Deprecated
+	public static boolean hasToken(String strWork, String typ, String delim)
     {
         return hasToken(strWork,typ,delim,0);
     }
@@ -1442,7 +1447,8 @@ public class StringUtil
      * @deprecated use vs.getString(" ",null,null)
      * @return String - the unicode string representation of the utf8 bytes assigned to this, null if an error occurrred
      */
-    public static String vStringToString(VString vs)
+    @Deprecated
+	public static String vStringToString(VString vs)
     {
         return StringUtil.setvString(vs," ",null,null);
     }
@@ -1533,7 +1539,8 @@ public class StringUtil
     /**
      * @deprecated use UrlUtil.isWindowsLocalPath(pathName);
      */
-    public static boolean isWindowsLocalPath(String pathName)
+    @Deprecated
+	public static boolean isWindowsLocalPath(String pathName)
     {
         return UrlUtil.isWindowsLocalPath(pathName);
 
@@ -1543,7 +1550,8 @@ public class StringUtil
     /**
      * @deprecated use URLUtil.isUNC(pathName)
      */
-    public static boolean isUNC(String pathName)
+    @Deprecated
+	public static boolean isUNC(String pathName)
     {
         return UrlUtil.isUNC(pathName);
     }
@@ -1817,7 +1825,8 @@ public class StringUtil
      * @return
      * @deprecated use getRelativeURL(File f, File fCWD, boolean bEscape128)
      */
-    public static String getRelativeURL(File f, File baseDir)
+    @Deprecated
+	public static String getRelativeURL(File f, File baseDir)
     {
         return UrlUtil.getRelativeURL(f, baseDir, true);
     }
@@ -1830,7 +1839,8 @@ public class StringUtil
      * @return
      *@deprecated use URLUtil.getRelativeURL
      */
-    public static String getRelativeURL(File f, File baseDir, boolean bEscape128)
+    @Deprecated
+	public static String getRelativeURL(File f, File baseDir, boolean bEscape128)
     {
         return UrlUtil.getRelativeURL(f, baseDir, bEscape128);
     }
@@ -1844,7 +1854,8 @@ public class StringUtil
      * @return
      * @deprecated use URLUtil.getRelativePath(f, fCWD);
      */
-    public static String getRelativePath(File f, File fCWD)
+    @Deprecated
+	public static String getRelativePath(File f, File fCWD)
     {
         return UrlUtil.getRelativePath(f, fCWD);        
     }
@@ -1893,7 +1904,8 @@ public class StringUtil
      * @throws MalformedURLException 
      * @deprecated use UrlUtil.fileToUrl(f, b);
      */
-    public static String fileToUrl(File f, boolean b) throws MalformedURLException
+    @Deprecated
+	public static String fileToUrl(File f, boolean b) throws MalformedURLException
     {
         return UrlUtil.fileToUrl(f, b);
     }

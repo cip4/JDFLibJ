@@ -167,18 +167,18 @@ public class JDFShapeRangeList extends JDFRangeList
                 throw new DataFormatException("JDFShapeRangeList.setString: Illegal string " + s);
             
             StringBuffer str = new StringBuffer(100);
-            str.append((String) vs.elementAt(i)).append(JDFConstants.BLANK)
-               .append((String) vs.elementAt(++i)).append(JDFConstants.BLANK);
+            str.append(vs.elementAt(i)).append(JDFConstants.BLANK)
+               .append(vs.elementAt(++i)).append(JDFConstants.BLANK);
             // the third token 'tildeToken' can be with or without "~"
-            String tildeToken = (String) vs.elementAt(++i);
+            String tildeToken = vs.elementAt(++i);
             str.append(tildeToken);
             if ( tildeToken.indexOf(JDFConstants.TILDE)!=-1) // str - JDFShapeRange
             {
                 if (size-i < MAX_SHAPE_DIMENSION) // the last ShapeRange is incomplete
                     throw new DataFormatException("JDFShapeRangeList.setString: Illegal string " + s);
                 
-                str.append(JDFConstants.BLANK).append((String) vs.elementAt(++i))
-                   .append(JDFConstants.BLANK).append((String) vs.elementAt(++i));
+                str.append(JDFConstants.BLANK).append(vs.elementAt(++i))
+                   .append(JDFConstants.BLANK).append(vs.elementAt(++i));
             }
             try 
             {
@@ -252,13 +252,14 @@ public class JDFShapeRangeList extends JDFRangeList
      * 
      * @return boolean - true if 'this' is a OrdneredRangeList
      */
-     public boolean isOrdered()
+     @Override
+	public boolean isOrdered()
      {
         int siz = rangeList.size();
         if (siz == 0)
             return false; // attempt to operate on a null element
 
-        VString v = new VString(); // vector of ranges
+        Vector v = new Vector(); // vector of ranges
         for (int i = 0; i < siz; i++)
         {
             JDFShapeRange r = (JDFShapeRange) rangeList.elementAt(i);
@@ -294,14 +295,15 @@ public class JDFShapeRangeList extends JDFRangeList
     * 
     * @return boolean - true if 'this' is UniqueOrdered RangeList
     */
-    public boolean isUniqueOrdered() {
+    @Override
+	public boolean isUniqueOrdered() {
         
         int siz=rangeList.size();
         if (siz==0) {
             return false; // attempt to operate on a null element
         }
         
-        VString v = new VString(); // vector of ranges
+        Vector v = new Vector(); // vector of ranges
         for  (int i=0; i<siz; i++)
         {
             JDFShapeRange r = (JDFShapeRange) rangeList.elementAt(i);

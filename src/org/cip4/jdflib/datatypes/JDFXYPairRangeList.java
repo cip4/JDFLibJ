@@ -192,12 +192,12 @@ public class JDFXYPairRangeList extends JDFRangeList
         {
             if (size-i < MAX_XY_DIMENSION) // the last xypair is incomplete 
                 throw new DataFormatException("JDFXYPairRangeList::SetString: Illegal string " + s);
-            String tok1 = (String) vs.elementAt(i);
-            String tok2 = (String) vs.elementAt(++i);
+            String tok1 = vs.elementAt(i);
+            String tok2 = vs.elementAt(++i);
             String str = tok1 + JDFConstants.BLANK + tok2;
             if ( tok2.indexOf(JDFConstants.TILDE)!=-1)
             {
-                str = tok1 + JDFConstants.BLANK + tok2 + JDFConstants.BLANK + (String) vs.elementAt(++i);
+                str = tok1 + JDFConstants.BLANK + tok2 + JDFConstants.BLANK + vs.elementAt(++i);
             }
             try 
             {
@@ -527,13 +527,14 @@ public class JDFXYPairRangeList extends JDFRangeList
      * 
      * @return boolean - true if 'this' is a OrdneredRangeList
      */
-    public boolean isOrdered()
+    @Override
+	public boolean isOrdered()
     {
         int siz = rangeList.size();
         if (siz == 0)
             return false; // attempt to operate on a null element
         
-        VString v = new VString(); // vector of ranges
+        Vector v = new Vector(); // vector of ranges
         for (int i = 0; i < siz; i++)
         {
             JDFXYPairRange r = (JDFXYPairRange) rangeList.elementAt(i);
@@ -569,14 +570,15 @@ public class JDFXYPairRangeList extends JDFRangeList
      * 
      * @return boolean - true if 'this' is UniqueOrdered RangeList
      */
-    public boolean isUniqueOrdered() {
+    @Override
+	public boolean isUniqueOrdered() {
         
         int siz=rangeList.size();
         if (siz==0) {
             return false; // attempt to operate on a null element
         }
         
-        VString v = new VString(); // vector of ranges
+        Vector v = new Vector(); // vector of ranges
         for  (int i=0; i<siz; i++)
         {
             JDFXYPairRange r = (JDFXYPairRange) rangeList.elementAt(i);

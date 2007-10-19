@@ -76,7 +76,7 @@ public class JDFNameRangeList extends JDFRangeList
         rangeList.clear();
         for (int i = 0; i < vs.size(); i++)
         {
-            String str = (String) vs.elementAt(i);
+            String str = vs.elementAt(i);
             JDFNameRange r = new JDFNameRange(str);
             rangeList.addElement(r);
         }
@@ -113,12 +113,14 @@ public class JDFNameRangeList extends JDFRangeList
         rangeList.addElement(r);
     }
 
-    public boolean isUniqueOrdered()
+    @Override
+	public boolean isUniqueOrdered()
     {
          return false;
     }
 
-    public boolean isOrdered()
+    @Override
+	public boolean isOrdered()
     {
         return false;
     }

@@ -726,7 +726,7 @@ public class JDFMerge
 
         //      JDFNode overWriteParent=ap.getParentJDF();
         VString vs=new VString();
-        Iterator it=vsRW.iterator();
+        Iterator<String> it=vsRW.iterator();
         while(it.hasNext())
             vs.add(it.next());
 

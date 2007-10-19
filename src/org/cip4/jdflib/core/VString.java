@@ -18,12 +18,13 @@ import java.util.StringTokenizer;
 import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
+import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
  *
  */
-public class VString extends Vector
+public class VString extends Vector<String>
 {
     private static final long serialVersionUID = 1L;
     final public static VString emptyVector = new VString();
@@ -54,7 +55,8 @@ public class VString extends Vector
      * @param strIn the string to tokenize by blank
      * @deprecated use VString (String strIn, null)
      */
-    public VString (String strIn)
+    @Deprecated
+	public VString (String strIn)
     {
         this(strIn, null);
     }
@@ -99,7 +101,7 @@ public class VString extends Vector
     //**************************************** Methods *********************************************
     public String stringAt(int index)
     {
-        return (String) super.elementAt(index);
+        return super.elementAt(index);
     }
 
     /**
@@ -107,7 +109,8 @@ public class VString extends Vector
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "vString[ --> " + super.toString() + " ]";
     }
@@ -118,7 +121,8 @@ public class VString extends Vector
      * @return String
      * @deprecated use getString(strSep,null,null)
      */
-    public String getAllStrings (String strSep)
+    @Deprecated
+	public String getAllStrings (String strSep)
     {
         return StringUtil.setvString(this,strSep,null,null);
     }
@@ -127,7 +131,8 @@ public class VString extends Vector
      * @return all strings separated by a blank
      * @deprecated use getString(JDFConstants.BLANK,null,null)
      */
-    public String getAllStrings()
+    @Deprecated
+	public String getAllStrings()
     {
         return StringUtil.setvString(this,JDFConstants.BLANK,null,null);
     }
@@ -182,7 +187,8 @@ public class VString extends Vector
     * @return boolean - true, if 's' is included in <code>this</code>
     * @deprecated 2005-02-14 use contains ...
     */
-    public boolean hasString(String s)
+    @Deprecated
+	public boolean hasString(String s)
     {
         return index(s)>=0;
     }
@@ -225,7 +231,8 @@ public class VString extends Vector
      * @param v
      * @deprecated use removeStrings(v, Integer.MAX_VALUE);
      */
-    public void removeStrings(VString v)
+    @Deprecated
+	public void removeStrings(VString v)
     {
         removeStrings(v, Integer.MAX_VALUE);
     }
@@ -258,7 +265,8 @@ public class VString extends Vector
      * @param String s
      * @deprecated use removeStrings(s, Integer.MAX_VALUE);
      */
-    public void removeStrings(String s)
+    @Deprecated
+	public void removeStrings(String s)
     {
         removeStrings(s, Integer.MAX_VALUE);
     }
@@ -291,7 +299,8 @@ public class VString extends Vector
     * @deprecated use StringUtil setVString
     * default: GetString(sep, JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING)
     */
-    public String getString(String sep, String front, String back)
+    @Deprecated
+	public String getString(String sep, String front, String back)
     {
         return StringUtil.setvString(this,sep,front,back);
     }
@@ -305,7 +314,8 @@ public class VString extends Vector
      * @return condensed string of tokens separated by sep
      * @deprecated use getString
      */
-    public String setvString(VString v, String sep, String front , String end)
+    @Deprecated
+	public String setvString(VString v, String sep, String front , String end)
     {
         String s = front==null ? JDFConstants.EMPTYSTRING : front;
         final int siz = v.size();
@@ -355,7 +365,7 @@ public class VString extends Vector
         if(contains(s))
         {
             int i = indexOf(s);
-            return (String)get(i);
+            return get(i);
         }
         
         return null;
@@ -396,23 +406,6 @@ public class VString extends Vector
     }
     
     /**
-     * appends o to <code>this</code><br>
-     * if o is a String, o is appended directly<br>
-     * if o is a ValuedEnum, the name is appended
-     * 
-     * @param o the object to append
-     * @throws IllegalArgumentException it o is neiter a String or an enum
-     */
-    public boolean add(Object o)
-    {
-        if(o instanceof String)
-            return super.add(o);
-        else if (o instanceof ValuedEnum)
-            return super.add(((ValuedEnum)o).getName());
-        throw new IllegalArgumentException();
-    }
-
-    /**
      * checks whether at least one of a given vector of strings is contained 
      * in <code>this</code>
      * 
@@ -432,5 +425,15 @@ public class VString extends Vector
         return false;
     }
 
-    //////////////////////////////////////////////////////////
+    /**
+     * appends enumType to <code>this</code><br>
+     * if enumType is a ValuedEnum, the name is appended
+     * 
+     * @param enumType the object to append
+     */
+	public boolean add(EnumType enumType)
+    {
+		return super.add(((ValuedEnum) enumType).getName());
+	}
+
 }

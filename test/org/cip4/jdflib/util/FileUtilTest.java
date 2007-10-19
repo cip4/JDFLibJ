@@ -118,9 +118,9 @@ public class FileUtilTest extends JDFTestCaseBase
          assertTrue(f.mkdir());
          assertNull(FileUtil.listDirectories(null));
          assertNull(FileUtil.listDirectories(f));
-         File f1=new File(sm_dirTestDataTemp+f.separator+"foo"+File.separator+"bar1");
+         File f1=new File(sm_dirTestDataTemp+File.separator+"foo"+File.separator+"bar1");
          assertTrue(f1.mkdir());
-         File f2=new File(sm_dirTestDataTemp+f.separator+"foo"+File.separator+"bar2");
+         File f2=new File(sm_dirTestDataTemp+File.separator+"foo"+File.separator+"bar2");
          assertTrue(f2.createNewFile());
          assertEquals(FileUtil.listDirectories(f).length,1);
          assertEquals("skipping bar2 - not a directory",FileUtil.listDirectories(f)[0],f1);

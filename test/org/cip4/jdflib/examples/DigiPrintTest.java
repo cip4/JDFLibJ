@@ -110,6 +110,7 @@ import org.cip4.jdflib.resource.process.JDFMiscConsumable;
 import org.cip4.jdflib.resource.process.JDFUsageCounter;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StatusCounter;
+
 import org.cip4.jdflib.util.StatusUtil;
 import org.cip4.jdflib.util.StatusUtil.AmountBag;
 
@@ -421,7 +422,8 @@ public class DigiPrintTest extends JDFTestCaseBase
      * test amount handling
      * @return
      */
-    public void testAmount() throws Exception
+    @SuppressWarnings("deprecation")
+	public void testAmount() throws Exception
     {
         rlComp.setAmount(20,null);
         rlComp.setDescriptiveName("The link points to 20 planned and 20 good + 2 Waste brochures");
@@ -520,7 +522,8 @@ public class DigiPrintTest extends JDFTestCaseBase
     /**
      * 
      */
-    protected void setUp()
+    @Override
+	protected void setUp()
     {
         JDFElement.setLongID(false);
         JDFAudit.setStaticAgentName(null);

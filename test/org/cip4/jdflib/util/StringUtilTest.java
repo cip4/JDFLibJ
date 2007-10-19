@@ -204,7 +204,7 @@ public class StringUtilTest extends JDFTestCaseBase
         assertEquals("s","1223334444",s);
 
         String[] a=new String[v.size()];
-        a=(String[]) v.toArray(a);
+        a=v.toArray(a);
         s=StringUtil.setvString(a," ",null,null);
         assertEquals("s","1 22 333 4444",s);
     }

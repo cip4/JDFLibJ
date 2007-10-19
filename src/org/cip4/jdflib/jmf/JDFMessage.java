@@ -157,7 +157,8 @@ public class JDFMessage extends JDFAutoMessage
         atrInfoTable[3] = new AtrInfoTable(AttributeName.XSITYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
     }
 
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -293,7 +294,8 @@ public class JDFMessage extends JDFAutoMessage
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFMessage[ --> " + super.toString() + " ]";
     }
@@ -304,7 +306,8 @@ public class JDFMessage extends JDFAutoMessage
      * @return boolean
      * @deprecated use instanceof JDFMessage
      */
-    public boolean isMessageElement()
+    @Deprecated
+	public boolean isMessageElement()
     {
         return true;
     }
@@ -314,7 +317,8 @@ public class JDFMessage extends JDFAutoMessage
      *
      * @return boolean
      */
-    public boolean init()
+    @Override
+	public boolean init()
     {
         appendAnchor(null);
         return super.init();
@@ -326,7 +330,8 @@ public class JDFMessage extends JDFAutoMessage
      *
      * @return the ID prefix of JDFMessage
      */
-    public String getIDPrefix()
+    @Override
+	public String getIDPrefix()
     {
         return "m";
     }
@@ -347,7 +352,8 @@ public class JDFMessage extends JDFAutoMessage
      *
      * @return String
      */
-    public String getType()
+    @Override
+	public String getType()
     {
         return getAttribute(AttributeName.TYPE, null, JDFConstants.EMPTYSTRING);
     }
@@ -357,7 +363,8 @@ public class JDFMessage extends JDFAutoMessage
      *
      * @param typ the type
      */
-    public void setType(String typ)
+    @Override
+	public void setType(String typ)
     {
         removeAttribute("type",AttributeName.XSIURI);
         setAttribute(AttributeName.TYPE, typ, null);
@@ -393,7 +400,9 @@ public class JDFMessage extends JDFAutoMessage
      * @deprecated
      * @return boolean
      */
-    public boolean isValid()
+    @Deprecated
+	@Override
+	public boolean isValid()
     {
         return isValid(KElement.EnumValidationLevel.Complete);
     }
@@ -413,7 +422,8 @@ public class JDFMessage extends JDFAutoMessage
      * @deprecated use EnumType to get strings
      * @return
      */
-    public static String typeString()
+    @Deprecated
+	public static String typeString()
     {
         final String enums =
             "Unknown,Events,KnownControllers,KnownDevices,KnownJDFServices,KnownMessages,"
@@ -431,7 +441,8 @@ public class JDFMessage extends JDFAutoMessage
      * @param value the value to set the attribute to
      * @deprecated use setType()
      */
-    public void setEnumType(EnumType value)
+    @Deprecated
+	public void setEnumType(EnumType value)
     {
         setType(value);
     }
@@ -468,7 +479,8 @@ public class JDFMessage extends JDFAutoMessage
      * adds xsi:Type if it doesn't exist
      * @param version
      */
-    public boolean fixVersion(EnumVersion version)
+    @Override
+	public boolean fixVersion(EnumVersion version)
     {
         if(version!=null) {
 			version.getClass(); // dummy to fool compiler
@@ -985,7 +997,7 @@ public class JDFMessage extends JDFAutoMessage
                 VString v=new VString(queryTypeObjString);
                 v.addAll(responseTypeObjString);
                 v.unify();
-                signalTypeObjString=(String[])v.toArray(new String[v.size()]);
+                signalTypeObjString=v.toArray(new String[v.size()]);
             }
             return signalTypeObjString;
         }
@@ -1107,7 +1119,8 @@ public class JDFMessage extends JDFAutoMessage
      * @param elementName
      * @return
      */
-    public KElement appendValidElement(String elementName)
+    @Deprecated
+	public KElement appendValidElement(String elementName)
     {
         return appendValidElement(elementName, null);
     }
@@ -1675,7 +1688,8 @@ public class JDFMessage extends JDFAutoMessage
      * @deprecated - use the 0 parameter version
      * @return JDFPipeParams: the element
      */
-    public JDFPipeParams getPipeParams(int iSkip)
+    @Deprecated
+	public JDFPipeParams getPipeParams(int iSkip)
     {
         return (JDFPipeParams) getValidElement(ElementName.PIPEPARAMS, null, iSkip);
     }
@@ -2050,7 +2064,8 @@ public class JDFMessage extends JDFAutoMessage
      * @return JDFStatusQuParams: the element
      * @deprecated - use 0 parameter version
      */
-    public JDFStatusQuParams getStatusQuParams(int iSkip)
+    @Deprecated
+	public JDFStatusQuParams getStatusQuParams(int iSkip)
     {
         return (JDFStatusQuParams) getValidElement(ElementName.STATUSQUPARAMS, null, iSkip);
     }
@@ -2535,7 +2550,8 @@ public class JDFMessage extends JDFAutoMessage
     /* (non-Javadoc)
      * @see org.cip4.jdflib.auto.JDFAutoMessage#getID()
      */
-    public String getID()
+    @Override
+	public String getID()
     {
         return this.getAttribute(AttributeName.ID, null, null);
     }
@@ -2543,7 +2559,8 @@ public class JDFMessage extends JDFAutoMessage
     /* (non-Javadoc)
      * @see org.cip4.jdflib.core.JDFElement#getInvalidElements(org.cip4.jdflib.core.KElement.EnumValidationLevel, boolean, int)
      */
-    public VString getInvalidElements(
+    @Override
+	public VString getInvalidElements(
             EnumValidationLevel level,
             boolean bIgnorePrivate,
             int nMax)
@@ -2657,7 +2674,8 @@ public class JDFMessage extends JDFAutoMessage
     /* (non-Javadoc)
      * @see org.cip4.jdflib.core.KElement#optionalElements()
      */
-    public VString optionalElements()
+    @Override
+	public VString optionalElements()
     {
         VString s = super.optionalElements();
         EnumType t = getEnumType();
@@ -2684,7 +2702,8 @@ public class JDFMessage extends JDFAutoMessage
     /* (non-Javadoc)
      * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib.core.KElement.EnumValidationLevel, boolean, int)
      */
-    public VString getInvalidAttributes(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
+    @Override
+	public VString getInvalidAttributes(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
     {
          VString s=super.getInvalidAttributes(level, bIgnorePrivate, nMax);
          if(s.contains(AttributeName.XSITYPE)) {

@@ -105,7 +105,8 @@ public class JDFBooleanEvaluation extends JDFEvaluation
         atrInfoTable[0]  = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumBoolean.getEnum(0),null);
     }
 
-    protected AttributeInfo getTheAttributeInfo() 
+    @Override
+	protected AttributeInfo getTheAttributeInfo() 
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -158,7 +159,8 @@ public class JDFBooleanEvaluation extends JDFEvaluation
      * toString
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFBooleanEvaluation[ --> " + super.toString() + " ]";
     }
@@ -242,7 +244,8 @@ public class JDFBooleanEvaluation extends JDFEvaluation
      * @return boolean - true, if <code>value</code> matches testlists or 
      * if ValueList is not specified
      */
-    public final boolean fitsValue(String valueStr)
+    @Override
+	public final boolean fitsValue(String valueStr)
     {
         if (fitsListType(valueStr))
         {
@@ -250,7 +253,7 @@ public class JDFBooleanEvaluation extends JDFEvaluation
 
             for (int i=0; i<value.size(); i++)
             {
-                if (!fitsValueList((String)value.elementAt(i)))
+                if (!fitsValueList(value.elementAt(i)))
                     return false;
             }
             return true; // if we are here a whole 'valueStr' fits
@@ -298,7 +301,7 @@ public class JDFBooleanEvaluation extends JDFEvaluation
         int size=vBool.size();
         for (int i=0; i<size; i++)
         {
-            if (!StringUtil.isBoolean((String)vBool.elementAt(i)))
+            if (!StringUtil.isBoolean(vBool.elementAt(i)))
                 return false;
         }
                 
@@ -321,8 +324,8 @@ public class JDFBooleanEvaluation extends JDFEvaluation
                 {
                     if ( j!=i ) 
                     {
-                        String bi =(String)vBool.elementAt(i);
-                        String bj =(String)vBool.elementAt(j);
+                        String bi =vBool.elementAt(i);
+                        String bj =vBool.elementAt(j);
                         if (bi.compareTo(bj)==0) 
                             return false;
                     }

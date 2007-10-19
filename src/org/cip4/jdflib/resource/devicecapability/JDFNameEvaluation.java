@@ -103,7 +103,8 @@ public class JDFNameEvaluation extends JDFEvaluation
         atrInfoTable[1]  = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
     }
 
-    protected AttributeInfo getTheAttributeInfo() 
+    @Override
+	protected AttributeInfo getTheAttributeInfo() 
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -153,7 +154,8 @@ public class JDFNameEvaluation extends JDFEvaluation
      * toString
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFNameEvaluation[ --> " + super.toString() + " ]";
     }
@@ -213,7 +215,8 @@ public class JDFNameEvaluation extends JDFEvaluation
      * @return boolean - true, if <code>value</code> matches the testlists or 
      * if testlists are not specified
      */
-    public boolean fitsValue(String value)
+    @Override
+	public boolean fitsValue(String value)
     {
         if (fitsListType(value))
             return (fitsValueList(value) && fitsRegExp(value));
@@ -260,8 +263,8 @@ public class JDFNameEvaluation extends JDFEvaluation
             boolean bFound = false;
             for (int j=0; j<l_size; j++)
             {
-                String str_i = (String)vs.elementAt(i);
-                String str_j = (String)list.elementAt(j);
+                String str_i = vs.elementAt(i);
+                String str_j = list.elementAt(j);
                 if (str_i.compareTo(str_j)==0) {
                     bFound=true;  
                     break;
@@ -440,8 +443,8 @@ public class JDFNameEvaluation extends JDFEvaluation
             {
                 if ( j!=i ) 
                 {
-                    String si =(String)v.elementAt(i);
-                    String sj =(String)v.elementAt(j);
+                    String si =v.elementAt(i);
+                    String sj =v.elementAt(j);
                     if (si.compareTo(sj)==0) 
                         return false;
                 }

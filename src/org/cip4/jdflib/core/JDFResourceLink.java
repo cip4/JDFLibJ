@@ -107,7 +107,8 @@ public class JDFResourceLink extends JDFElement
     /* (non-Javadoc)
      * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib.core.KElement.EnumValidationLevel, boolean, int)
      */
-    public VString getInvalidAttributes(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
+    @Override
+	public VString getInvalidAttributes(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
     {
         // TODO Auto-generated method stub
         VString v= super.getInvalidAttributes(level, bIgnorePrivate, nMax);
@@ -216,7 +217,8 @@ public class JDFResourceLink extends JDFElement
                 AttributeInfo.EnumAttributeType.duration, null, null);
     }
 
-    protected AttributeInfo getTheAttributeInfo() 
+    @Override
+	protected AttributeInfo getTheAttributeInfo() 
     {
         AttributeInfo ai = super.getTheAttributeInfo().updateReplace(atrInfoTable_Abstract);
         if (isPhysical() || getLocalName().equals(ElementName.PARTAMOUNT))
@@ -246,7 +248,8 @@ public class JDFResourceLink extends JDFElement
 
     ////////////////////////////////////////////////////////////////
 
-    protected ElementInfo getTheElementInfo() 
+    @Override
+	protected ElementInfo getTheElementInfo() 
     {
         ElementInfo ei = super.getTheElementInfo().updateReplace(elemInfoTable);
         if (this.isPhysical())
@@ -395,7 +398,8 @@ public class JDFResourceLink extends JDFElement
          * @deprecated use getEnumList
          * @return Vector
          */
-        public static Vector getNamesVector()
+        @Deprecated
+		public static Vector getNamesVector()
         {
             final Vector namesVector = new Vector();
             final Iterator it = iterator(EnumUsage.class);
@@ -418,7 +422,8 @@ public class JDFResourceLink extends JDFElement
      * 
      * @deprecated
      */
-    public static String usageString()
+    @Deprecated
+	public static String usageString()
     {
         String s = JDFConstants.EMPTYSTRING;
         final Vector namesVector = EnumUsage.getNamesVector();
@@ -436,7 +441,8 @@ public class JDFResourceLink extends JDFElement
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFResourceLink[ --> " + super.toString() + " ]";
     }
@@ -451,7 +457,8 @@ public class JDFResourceLink extends JDFElement
      * @param version version that the resulting element should correspond to
      * @return true if successful
      */
-    public boolean fixVersion(EnumVersion version)
+    @Override
+	public boolean fixVersion(EnumVersion version)
     {
         boolean bRet = true;
         if (version != null)
@@ -599,7 +606,8 @@ public class JDFResourceLink extends JDFElement
      * @return JDFResource
      * @deprecated never used
      */
-    public JDFResource getLinkTarget()
+    @Deprecated
+	public JDFResource getLinkTarget()
     {
         return getTarget();
     }
@@ -1243,7 +1251,8 @@ public class JDFResourceLink extends JDFElement
      * @param level validation level
      * @see org.cip4.jdflib.core.JDFElement#isValid(org.cip4.jdflib.core.KElement.EnumValidationLevel)
      */
-    public boolean isValid(EnumValidationLevel level)
+    @Override
+	public boolean isValid(EnumValidationLevel level)
     {
         if(level==null)
             level=EnumValidationLevel.Complete;
@@ -1549,7 +1558,8 @@ public class JDFResourceLink extends JDFElement
      * @deprecated 060601 use getAmountPoolAttribute(attrib,nameSpaceURI,mPart,0)!=null;
      * @since 071103 
      */
-    public boolean hasAmountPoolAttribute(String attrib, String nameSpaceURI, JDFAttributeMap mPart)
+    @Deprecated
+	public boolean hasAmountPoolAttribute(String attrib, String nameSpaceURI, JDFAttributeMap mPart)
     {
         return getAmountPoolAttribute(attrib,nameSpaceURI,mPart,0)!=null;
     }
@@ -1700,7 +1710,8 @@ public class JDFResourceLink extends JDFElement
      * @param s
      * @deprecated use the enum method
      */
-    public void setProcessUsage(String s)
+    @Deprecated
+	public void setProcessUsage(String s)
     {
         setAttribute(AttributeName.PROCESSUSAGE, s, null);
     }
@@ -1826,12 +1837,13 @@ public class JDFResourceLink extends JDFElement
      * @param keys vector of values to set
      * @deprecated use setPipePartIDKeys(Vector enum)
      */
-    public void setPipePartIDKeys(VString keys)
+    @Deprecated
+	public void setPipePartIDKeys(VString keys)
     {
         Vector vEnum = new Vector();
         for (int i = 0; i < keys.size(); i++)
         {
-            vEnum.add(EnumPartIDKey.getEnum((String) keys.elementAt(i)));
+            vEnum.add(EnumPartIDKey.getEnum(keys.elementAt(i)));
         }
         setPipePartIDKeys(vEnum);
     }
@@ -1853,7 +1865,8 @@ public class JDFResourceLink extends JDFElement
      * @return VString - list of all PipePartIDKeys
      * @deprecated
      */
-    public VString getPipePartIDKeys()
+    @Deprecated
+	public VString getPipePartIDKeys()
     {
         VString vPipePartIDKeys  = new VString();
         Vector v = getPipePartIDKeysEnum();
@@ -2389,7 +2402,8 @@ public class JDFResourceLink extends JDFElement
      * 
      * @return VJDFAttributeMap - vector of attribute maps, one for each part
      */
-    public VJDFAttributeMap getPartMapVector()
+    @Override
+	public VJDFAttributeMap getPartMapVector()
     {
         return super.getPartMapVector();
     }
@@ -2399,7 +2413,8 @@ public class JDFResourceLink extends JDFElement
      * 
      * @param vParts vector of attribute maps for the parts
      */
-    public void setPartMapVector(VJDFAttributeMap vParts)
+    @Override
+	public void setPartMapVector(VJDFAttributeMap vParts)
     {
         super.setPartMapVector(vParts);
     }
@@ -2409,7 +2424,8 @@ public class JDFResourceLink extends JDFElement
      * 
      * @param mPart attribute map for the part to set
      */
-    public void setPartMap(JDFAttributeMap mPart)
+    @Override
+	public void setPartMap(JDFAttributeMap mPart)
     {
         super.setPartMap(mPart);
     }
@@ -2419,7 +2435,8 @@ public class JDFResourceLink extends JDFElement
      * 
      * @param mPart attribute map for the part to remove
      */
-    public void removePartMap(JDFAttributeMap mPart)
+    @Override
+	public void removePartMap(JDFAttributeMap mPart)
     {
         super.removePartMap(mPart);
     }
@@ -2430,7 +2447,8 @@ public class JDFResourceLink extends JDFElement
      * @param mPart attribute map for the part to remove
      * @return boolean - returns true if the part exists
      */
-    public boolean hasPartMap(JDFAttributeMap mPart)
+    @Override
+	public boolean hasPartMap(JDFAttributeMap mPart)
     {
         return super.hasPartMap(mPart);
     }    

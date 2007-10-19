@@ -172,7 +172,7 @@ public class JDFDateTimeRangeList extends JDFRangeList
         rangeList.clear();
         for(int i = 0; i <  vs.size(); i++)
         {
-            String str = (String) vs.elementAt(i);
+            String str = vs.elementAt(i);
             try 
             {
                 JDFDateTimeRange dr = new JDFDateTimeRange(str); 
@@ -239,13 +239,14 @@ public class JDFDateTimeRangeList extends JDFRangeList
      * 
      * @return boolean - true if 'this' is an OrdneredRangeList
      */
-     public boolean isOrdered()
+     @Override
+	public boolean isOrdered()
      {
         int siz = rangeList.size();
         if (siz == 0)
             return false; // attempt to operate on a null element
 
-        VString v = new VString(); // vector of ranges
+        Vector v = new Vector(); // vector of ranges
         for (int i = 0; i < siz; i++)
         {
             JDFDateTimeRange r = (JDFDateTimeRange) rangeList.elementAt(i);
@@ -281,14 +282,15 @@ public class JDFDateTimeRangeList extends JDFRangeList
     * 
     * @return boolean - true if 'this' is an UniqueOrdered RangeList
     */
-    public boolean isUniqueOrdered() {
+    @Override
+	public boolean isUniqueOrdered() {
         
         int siz=rangeList.size();
         if (siz==0) {
             return false; // attempt to operate on a null element
         }
         
-        VString v = new VString(); // vector of ranges
+        Vector v = new Vector(); // vector of ranges
         for  (int i=0; i<siz; i++)
         {
             JDFDateTimeRange r = (JDFDateTimeRange) rangeList.elementAt(i);

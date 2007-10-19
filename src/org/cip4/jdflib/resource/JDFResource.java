@@ -1667,7 +1667,7 @@ public class JDFResource extends JDFElement
             // remove the keys of this
             for (int i = 0; i < siz; i++)
             {
-                final String key = (String)vPartIDKeys.elementAt(0);
+                final String key = vPartIDKeys.elementAt(0);
                 localPartMap.remove(key);
 
                 vPartIDKeys.remove(0);
@@ -1680,7 +1680,7 @@ public class JDFResource extends JDFElement
         // create all partitions
         for (int k = 0; k < vPartIDKeys.size(); k++)
         {
-            final String key = (String)vPartIDKeys.elementAt(k);
+            final String key = vPartIDKeys.elementAt(k);
             final EnumPartIDKey enumKey = EnumPartIDKey.getEnum(key);
             final String value = localPartMap.get(key);
 
@@ -1725,7 +1725,7 @@ public class JDFResource extends JDFElement
         final int partSize = localPartMap.size();
         if (appendEnd && allParts && partSize == 1)// one left and continuous, can add
         {
-            final String key = (String)localPartMap.getKeys().elementAt(0);
+            final String key = localPartMap.getKeys().elementAt(0);
             leaf = leaf.addPartition(EnumPartIDKey.getEnum(key), localPartMap.get(key));
         }
         else if (partSize>0)// either non - continuous or more than one left
@@ -1757,7 +1757,7 @@ public class JDFResource extends JDFElement
 
             for(int i=0;i<n;i++)
             {
-                final Object partKey = vExistingPartKeys.elementAt(i);
+                final String partKey = vExistingPartKeys.elementAt(i);
                 if(!vPartIDKeys.contains(partKey)) // allow reordering of the existing partidkeys
                 {
                     throw new JDFException("getCreatePartiton: adding incompatible partitions");
@@ -2821,7 +2821,7 @@ public class JDFResource extends JDFElement
             final VString par = ((JDFResource) parent).getAttributeVector_JDFResource();
             for (int i = 0; i < par.size(); i++)
             {
-                final String att = (String) par.elementAt(i);
+                final String att = par.elementAt(i);
                 if (!v.contains(att))
                 {
                     v.addElement(att);
@@ -3750,7 +3750,7 @@ public class JDFResource extends JDFElement
 
             for (int i = 0; i < ids.size(); i++)
             {
-                final String strIds = (String) ids.elementAt(i);
+                final String strIds = ids.elementAt(i);
 
                 if (r.hasAttribute(strIds, null, false))
                 {

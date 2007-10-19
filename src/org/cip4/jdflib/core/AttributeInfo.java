@@ -143,6 +143,7 @@ public class AttributeInfo
 	 *            attrInfo_own: table with element-specific attribute info
      * @deprecated
 	 */
+	@Deprecated
 	public AttributeInfo(AttributeInfo attrInfo_super, AtrInfoTable[] attrInfo_own)
 	{
 		// use AttributeInfo of super as a starting point
@@ -728,6 +729,7 @@ public class AttributeInfo
 	 * @return the data type of attributeName
 	 * @deprecated 2005-08-26
 	 */
+	@Deprecated
 	public EnumAttributeType getAtrType(String attributeName) {
 		AtrInfo ai = (AtrInfo)attribInfoTable.get(attributeName);
 		if(ai==null)
@@ -959,7 +961,7 @@ public class AttributeInfo
             {
                 VString v=StringUtil.tokenize(val,JDFConstants.BLANK,false);
                 for(int i=0;i<v.size();i++){
-                if (!validLanguageString((String)v.elementAt(i)))
+                if (!validLanguageString(v.elementAt(i)))
                     return false;
                 }
                 return true;
@@ -1005,7 +1007,8 @@ public class AttributeInfo
         return l>=2 && l<=3 || l>4 &&(posDash>=2&&posDash<4); // 2=en, de, ...
     }
     
-    public String toString(){
+    @Override
+	public String toString(){
         String s= "AttributeInfoTable verion="+version;
         s+=attribInfoTable.toString();
         return s;

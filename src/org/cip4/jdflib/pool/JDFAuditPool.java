@@ -179,7 +179,8 @@ public class JDFAuditPool extends JDFPool
         elemInfoTable[8] = new ElemInfoTable(ElementName.PROCESSRUN,       0x33333333);
     }
 
-    protected ElementInfo getTheElementInfo() 
+    @Override
+	protected ElementInfo getTheElementInfo() 
     {
         return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
     }
@@ -190,7 +191,8 @@ public class JDFAuditPool extends JDFPool
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFAuditPool[ -->" + super.toString() + "]";
     }
@@ -204,7 +206,8 @@ public class JDFAuditPool extends JDFPool
      * default: addProcessRun(s, JDFConstants.EMPTYSTRING)
      * @deprecated use addProcessRun(JDFElement.EnumNodeStatus s, JDFConstants.EMPTYSTRING, new VJDFAttributeMap())
      */
-    public JDFProcessRun addProcessRun(JDFElement.EnumNodeStatus s, String by)
+    @Deprecated
+	public JDFProcessRun addProcessRun(JDFElement.EnumNodeStatus s, String by)
     {
         return addProcessRun(s,by,null);
     }
@@ -449,7 +452,8 @@ public class JDFAuditPool extends JDFPool
      * @deprecated use getLastPhase(VJDFAttributeMap)
      * @return JDFAudit - the last PhaseTime audit
      */
-    public JDFPhaseTime getLastPhase()
+    @Deprecated
+	public JDFPhaseTime getLastPhase()
     {
         return getLastPhase(null);
     }
@@ -475,7 +479,8 @@ public class JDFAuditPool extends JDFPool
      * default: getAudits(null, null)
      * @deprecated use getAudits(null, null, null)
      */
-    public VElement getAudits(
+    @Deprecated
+	public VElement getAudits(
             JDFAudit.EnumAuditType typ,
             JDFAttributeMap mAttributes)
     {
@@ -535,7 +540,8 @@ public class JDFAuditPool extends JDFPool
      * default: getAudit(index, typ, null)
      * @deprecated use 4 parameter version
      */
-    public JDFAudit getAudit(
+    @Deprecated
+	public JDFAudit getAudit(
             int index,
             JDFAudit.EnumAuditType typ,
             JDFAttributeMap mAttributes)
@@ -673,7 +679,7 @@ public class JDFAuditPool extends JDFPool
 
         for (int i = 0; i < refs.size(); i++)
         {
-            final KElement e  =  getTarget((String) refs.elementAt(i), AttributeName.ID);            
+            final KElement e  =  getTarget(refs.elementAt(i), AttributeName.ID);            
             if(e!=null && e.includesAttributes(mResAtt, true)) 
             {
                 v.addElement(e);
@@ -695,7 +701,8 @@ public class JDFAuditPool extends JDFPool
      * @deprecated 060216 - this seams to have accidentally been added
      * default: getLinks(null)
      */
-    public VElement getLinks(JDFAttributeMap mLinkAtt)
+    @Deprecated
+	public VElement getLinks(JDFAttributeMap mLinkAtt)
     {
         return getPoolChildrenGeneric(JDFConstants.EMPTYSTRING, mLinkAtt, JDFConstants.EMPTYSTRING);
     }
@@ -736,7 +743,8 @@ public class JDFAuditPool extends JDFPool
      * @param spawnID
      * @deprecated use JDFMerge.cleanUpMerge
      */
-    public void cleanUpMerge(JDFNode.EnumCleanUpMerge cleanPolicy, String spawnID) throws NoSuchMethodException
+    @Deprecated
+	public void cleanUpMerge(JDFNode.EnumCleanUpMerge cleanPolicy, String spawnID) throws NoSuchMethodException
     {
         throw new NoSuchMethodException("use JDFMerge.cleanUpMergeAudits");
         //JDFMerge.cleanUpMergeAudits(this, cleanPolicy, spawnID);
@@ -754,7 +762,8 @@ public class JDFAuditPool extends JDFPool
      * @param version version that the resulting element should correspond to
      * @return true if successful
      */
-    public boolean fixVersion(EnumVersion version){
+    @Override
+	public boolean fixVersion(EnumVersion version){
         if(hasAttribute(AttributeName.RREFS))
             removeAttribute(AttributeName.RREFS);
         return super.fixVersion(version);

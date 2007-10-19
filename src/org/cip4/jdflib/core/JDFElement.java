@@ -3507,7 +3507,7 @@ public class JDFElement extends KElement
             // recurse only the new rrefs
             for (int i = iFirstPos; i < iLastPos; i++)
             {
-                final String s     = (String) vDoneRefs.elementAt(i);
+                final String s     = vDoneRefs.elementAt(i);
                 final KElement e =  getTarget(s, AttributeName.ID);
                 if (e instanceof JDFElement)
                 {
@@ -3546,7 +3546,7 @@ public class JDFElement extends KElement
 
         for (int i = 0; i < sRefs.size(); i++)
         {
-            KElement kEl = getTarget((String) sRefs.elementAt(i), AttributeName.ID);
+            KElement kEl = getTarget(sRefs.elementAt(i), AttributeName.ID);
             if (kEl instanceof JDFResource) {
 				v.appendUnique(kEl);
 			}

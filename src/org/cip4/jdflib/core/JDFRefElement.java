@@ -107,6 +107,7 @@ public class JDFRefElement extends JDFElement
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.RREF,     0x22222222, AttributeInfo.EnumAttributeType.IDREF, null, null);
 	}
 	
+	@Override
 	protected AttributeInfo getTheAttributeInfo() 
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
@@ -118,6 +119,7 @@ public class JDFRefElement extends JDFElement
 		elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x33333331);
 	}
 	
+	@Override
 	protected ElementInfo getTheElementInfo() 
 	{
 		return super.getTheElementInfo().updateReplace(elemInfoTable);
@@ -167,6 +169,7 @@ public class JDFRefElement extends JDFElement
 	 * test Part element existence 
 	 * @deprecated 060310 use inline hasChildElement(ElementName.PART, null);
 	 */
+	@Deprecated
 	public boolean hasPart()
 	{
 		return this.hasChildElement(ElementName.PART, null);
@@ -188,7 +191,8 @@ public class JDFRefElement extends JDFElement
      * @param nameSpaceURI the namespace of the node to test.
      * @return true if ok
      */
-    public boolean fitsName(String nodeName, String nameSpaceURI)
+    @Override
+	public boolean fitsName(String nodeName, String nameSpaceURI)
     {
         if(nodeName==null || nodeName.endsWith(JDFConstants.REF))
         {
@@ -223,6 +227,7 @@ public class JDFRefElement extends JDFElement
 	 *@param value the value to set the attribute to
 	 *@deprecated in JDF 1.2
 	 */
+	@Deprecated
 	public void setrSubRef(String value)
 	{
 		setAttribute(JDFConstants.RSUBREF, value, JDFConstants.EMPTYSTRING);
@@ -237,6 +242,7 @@ public class JDFRefElement extends JDFElement
 		return getAttribute(JDFConstants.RSUBREF, JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING);
 	}
 	
+	@Override
 	public boolean isValid(EnumValidationLevel level)
 	{
 		final boolean b = super.isValid(level);
@@ -401,7 +407,7 @@ public class JDFRefElement extends JDFElement
 		
 		for(i = 0; i < partNames.size(); i++)
 		{
-			newInline.removeAttribute((String) partNames.elementAt(i), null);
+			newInline.removeAttribute(partNames.elementAt(i), null);
 		}
 		
 		// replace this (the refElement) with newInline. 
@@ -459,6 +465,7 @@ public class JDFRefElement extends JDFElement
 	/**
 	 * @deprecated
 	 */
+	@Deprecated
 	public void removePart()
 	{
 		removeChild(ElementName.PART, null, 0);
@@ -469,7 +476,9 @@ public class JDFRefElement extends JDFElement
      * @deprecated 060310 not more than one is allowed - use getPartMap
      * @return VJDFAttributeMap: vector of attribute maps, one for each part
      */
-    public VJDFAttributeMap getPartMapVector()
+    @Deprecated
+	@Override
+	public VJDFAttributeMap getPartMapVector()
     {
         return getPartMapVector();
     }
@@ -478,7 +487,8 @@ public class JDFRefElement extends JDFElement
      * get part map 
      * @return JDFAttributeMap: the attribute maps, one for each part
      */
-    public JDFAttributeMap getPartMap()
+    @Override
+	public JDFAttributeMap getPartMap()
     {
         return super.getPartMap();
     }
@@ -487,7 +497,8 @@ public class JDFRefElement extends JDFElement
      * set all parts to those define in vParts
      * @param mPart attribute map for the part to set
      */
-    public void setPartMap(JDFAttributeMap mPart)
+    @Override
+	public void setPartMap(JDFAttributeMap mPart)
     {
         super.setPartMap(mPart);
     }
@@ -497,7 +508,8 @@ public class JDFRefElement extends JDFElement
      * remove the part defined in mPart
      * @param mPart attribute map for the part to remove
      */
-    public void removePartMap(JDFAttributeMap mPart)
+    @Override
+	public void removePartMap(JDFAttributeMap mPart)
     {
         super.removePartMap(mPart);
     }
@@ -507,7 +519,8 @@ public class JDFRefElement extends JDFElement
      * @param mPart attribute map for the part to remove
      * @return boolean - returns true if the part exists
      */
-    public boolean hasPartMap(JDFAttributeMap mPart)
+    @Override
+	public boolean hasPartMap(JDFAttributeMap mPart)
     {
         return super.hasPartMap(mPart);
     }	

@@ -190,7 +190,7 @@ public class JDFIntentResource extends JDFResource
         }
         for (int i = 0; i < vKeys.size(); i++)
         {
-            JDFSpanBase base = (JDFSpanBase) getElement((String) vKeys.elementAt(i), JDFConstants.EMPTYSTRING, 0);
+            JDFSpanBase base = (JDFSpanBase) getElement(vKeys.elementAt(i), JDFConstants.EMPTYSTRING, 0);
             if (base.preferredToActual())
             {
                 nDone++;

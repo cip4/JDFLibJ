@@ -111,7 +111,8 @@ public class JDFStateBaseTest extends JDFTestCaseBase
 {
 
     private JDFDeviceCap deviceCap; 
-    protected void setUp() throws Exception
+    @Override
+	protected void setUp() throws Exception
     {
         super.setUp();
         JDFDoc doc = new JDFDoc("JMF");
@@ -221,13 +222,13 @@ public class JDFStateBaseTest extends JDFTestCaseBase
         VString matrixList = new VString();
         int i=0;
         StringBuffer sb = new StringBuffer(250);
-        sb.append((String) vs.elementAt(i));
+        sb.append(vs.elementAt(i));
         while ((i+1)<siz)
         {
             do  {
                 sb.append(JDFConstants.BLANK);
                 i++;
-                sb.append((String) vs.elementAt(i));
+                sb.append(vs.elementAt(i));
             }
             while ((i+1)%6!=0);
             matrixList.add(sb.toString());
@@ -235,7 +236,7 @@ public class JDFStateBaseTest extends JDFTestCaseBase
             { 
                 i++;
                 sb = new StringBuffer(250);
-                sb.append((String) vs.elementAt(i));
+                sb.append(vs.elementAt(i));
             }
         }
         for (int z=0; z<matrixList.size(); z++)

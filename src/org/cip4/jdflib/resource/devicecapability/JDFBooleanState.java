@@ -109,7 +109,8 @@ public class JDFBooleanState extends JDFAbstractState
         atrInfoTable[3]  = new AtrInfoTable(AttributeName.PRESENTVALUELIST,  0x33333331, AttributeInfo.EnumAttributeType.enumerations, EnumBoolean.getEnum(0), null);
     }
 
-    protected AttributeInfo getTheAttributeInfo() 
+    @Override
+	protected AttributeInfo getTheAttributeInfo() 
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -121,7 +122,8 @@ public class JDFBooleanState extends JDFAbstractState
         elemInfoTable[0] = new ElemInfoTable(ElementName.VALUELOC, 0x33333311);
     }
 
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
     }
@@ -174,7 +176,8 @@ public class JDFBooleanState extends JDFAbstractState
      * toString
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFBooleanState[ --> " + super.toString() + " ]";
     }
@@ -273,7 +276,8 @@ public class JDFBooleanState extends JDFAbstractState
      * 
      * @return boolean - true, if <code>value</code> matches testlists or if AllowedValueList is not specified
      */
-    public final boolean fitsValue(String valueStr, EnumFitsValue testlists)
+    @Override
+	public final boolean fitsValue(String valueStr, EnumFitsValue testlists)
     {
         if (fitsListType(valueStr))
         {
@@ -281,7 +285,7 @@ public class JDFBooleanState extends JDFAbstractState
 
             for (int i=0; i<value.size(); i++)
             {
-                if (!fitsValueList((String)value.elementAt(i),testlists))
+                if (!fitsValueList(value.elementAt(i),testlists))
                     return false;
             }
             return true; // if we are here a whole 'valueStr' fits
@@ -322,7 +326,8 @@ public class JDFBooleanState extends JDFAbstractState
     /* (non-Javadoc)
      * @see org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java.lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
      */
-    public void addValue(String value, EnumFitsValue testlists)
+    @Override
+	public void addValue(String value, EnumFitsValue testlists)
     {
         if(fitsValue(value, testlists))
             return;
@@ -351,7 +356,8 @@ public class JDFBooleanState extends JDFAbstractState
     /* (non-Javadoc)
      * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
      */
-    public EnumTerm getEvaluationType()
+    @Override
+	public EnumTerm getEvaluationType()
     {
         return EnumTerm.BooleanEvaluation;
     }

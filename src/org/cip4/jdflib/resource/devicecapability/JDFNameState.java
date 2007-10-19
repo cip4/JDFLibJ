@@ -107,7 +107,8 @@ public class JDFNameState extends JDFAbstractState
         atrInfoTable[5]  = new AtrInfoTable(AttributeName.PRESENTVALUELIST,  0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
     }
 
-    protected AttributeInfo getTheAttributeInfo() 
+    @Override
+	protected AttributeInfo getTheAttributeInfo() 
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -119,7 +120,8 @@ public class JDFNameState extends JDFAbstractState
         elemInfoTable[0] = new ElemInfoTable(ElementName.VALUELOC, 0x33333311);
     }
 
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
     }
@@ -170,7 +172,8 @@ public class JDFNameState extends JDFAbstractState
      * toString
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFNameState[ --> " + super.toString() + " ]";
     }
@@ -240,7 +243,8 @@ public class JDFNameState extends JDFAbstractState
         setAttribute(AttributeName.ALLOWEDREGEXP, value);
     }
 
-    public String getAllowedRegExp()
+    @Override
+	public String getAllowedRegExp()
     {
         return getAttribute(AttributeName.ALLOWEDREGEXP, null, JDFConstants.EMPTYSTRING);
     }
@@ -250,7 +254,8 @@ public class JDFNameState extends JDFAbstractState
         setAttribute(AttributeName.PRESENTREGEXP, value);
     }
 
-    public String getPresentRegExp()
+    @Override
+	public String getPresentRegExp()
     {
         if (hasAttribute(AttributeName.PRESENTREGEXP))
         {
@@ -267,7 +272,8 @@ public class JDFNameState extends JDFAbstractState
     /* (non-Javadoc)
      * @see org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java.lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
      */
-    public void addValue(String value, EnumFitsValue testlists)
+    @Override
+	public void addValue(String value, EnumFitsValue testlists)
     {
         if(fitsValue(value, testlists))
             return;
@@ -301,7 +307,8 @@ public class JDFNameState extends JDFAbstractState
      * 
      * @return boolean - true, if the <code>value</code> matches all test lists or if Allowed test lists are not specified
      */
-    public boolean fitsValue(String value, EnumFitsValue testlists)
+    @Override
+	public boolean fitsValue(String value, EnumFitsValue testlists)
     {
         if (fitsListType(value))
             return (fitsValueList(value,testlists) && fitsRegExp(value,testlists));
@@ -354,8 +361,8 @@ public class JDFNameState extends JDFAbstractState
             boolean bFound = false;
             for (int j=0; j<l_size; j++)
             {
-                String ve = (String)vs.elementAt(i);
-                String le = (String)list.elementAt(j);
+                String ve = vs.elementAt(i);
+                String le = list.elementAt(j);
                 if (ve.compareTo(le)==0) 
                 {
                     bFound = true;  
@@ -484,8 +491,8 @@ public class JDFNameState extends JDFAbstractState
             {
                 if ( j!=i ) 
                 {
-                    String si =(String)v.elementAt(i);
-                    String sj =(String)v.elementAt(j);
+                    String si =v.elementAt(i);
+                    String sj =v.elementAt(j);
                     if (si.compareTo(sj)==0) 
                         return false;
                 }
@@ -494,7 +501,8 @@ public class JDFNameState extends JDFAbstractState
         return true;
     }
 
-    public VString getInvalidAttributes(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
+    @Override
+	public VString getInvalidAttributes(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
     {
         return getInvalidAttributesImpl(level, bIgnorePrivate, nMax);
     }
@@ -502,7 +510,8 @@ public class JDFNameState extends JDFAbstractState
     /* (non-Javadoc)
      * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
      */
-    public EnumTerm getEvaluationType()
+    @Override
+	public EnumTerm getEvaluationType()
     {
         return EnumTerm.StringEvaluation;
     }

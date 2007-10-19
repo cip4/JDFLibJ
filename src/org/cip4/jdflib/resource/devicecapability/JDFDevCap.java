@@ -147,7 +147,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
         elemInfoTable[13] = new ElemInfoTable(ElementName.XYPAIRSTATE, 0x33333333);
     }
 
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -157,7 +158,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
         atrInfoTable[0] = new AtrInfoTable(AttributeName.MAXOCCURS, 0x33333331, AttributeInfo.EnumAttributeType.unbounded, null, "1");
     }
 
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -208,7 +210,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * toString()
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFDevCap[  --> " + super.toString() + " ]";
     }
@@ -216,7 +219,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
     /**
      * all devcap elements should have an id
      */
-    public boolean init()
+    @Override
+	public boolean init()
     {
         appendAnchor(null); // just in case it is missing
         return super.init();
@@ -225,7 +229,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * set attribute <code>DevCapRefs</code>
      * @param value the value to set the attribute to
      */
-    public void setDevCapRefs(VString value)
+    @Override
+	public void setDevCapRefs(VString value)
     {
         setAttribute(AttributeName.DEVCAPREFS, value, null);
     }
@@ -234,7 +239,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * set attribute <code>ID</code>
      * @param value the value to set the attribute to
      */
-    public void setID(String value)
+    @Override
+	public void setID(String value)
     {
         setAttribute(AttributeName.ID, value, null);
     }
@@ -243,14 +249,16 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * get String attribute <code>ID</code>
      * @return String: the value of the attribute
      */
-    public String getID()
+    @Override
+	public String getID()
     {
         return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
     }
     /* (non-Javadoc)
      * @see org.cip4.jdflib.core.JDFElement#getIDPrefix()
      */
-    protected String getIDPrefix()
+    @Override
+	protected String getIDPrefix()
     {
         return "d";
     }
@@ -260,7 +268,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      *
      * @return EnumAvailability: the enumeration value of the attribute
      */
-    public EnumAvailability getAvailability()
+    @Override
+	public EnumAvailability getAvailability()
     {
         EnumAvailability avail = EnumAvailability.getEnum(
                 getAttribute(AttributeName.AVAILABILITY,  null, null));
@@ -373,7 +382,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * @deprecated use method with parameter (string) instead
      * @return
      */
-    public JDFBooleanState getCreateBooleanState(int iSkip)
+    @Deprecated
+	public JDFBooleanState getCreateBooleanState(int iSkip)
     {
         return (JDFBooleanState)getCreateElement(ElementName.BOOLEANSTATE, null, iSkip);
     }
@@ -399,7 +409,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * @deprecated use method with parameter (string) instead
      * @return
      */
-    public JDFBooleanState appendBooleanState()
+    @Deprecated
+	public JDFBooleanState appendBooleanState()
     {
         return (JDFBooleanState)appendElement(ElementName.BOOLEANSTATE, null);
     }
@@ -448,7 +459,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * @deprecated use method with parameter (string) instead
      * @return
      */
-    public JDFIntegerState getCreateIntegerState(int iSkip)
+    @Deprecated
+	public JDFIntegerState getCreateIntegerState(int iSkip)
     {
         return (JDFIntegerState)getCreateElement(ElementName.INTEGERSTATE, null, iSkip);
     }
@@ -521,7 +533,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * @deprecated use method with parameter (string) instead
      * @return
      */
-    public JDFNumberState getCreateNumberState(int iSkip)
+    @Deprecated
+	public JDFNumberState getCreateNumberState(int iSkip)
     {
         return (JDFNumberState)getCreateElement(ElementName.NUMBERSTATE, null, iSkip);       
     }
@@ -556,7 +569,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * @deprecated use method with parameter (string) instead
      * @return
      */
-    public JDFNumberState appendNumberState()
+    @Deprecated
+	public JDFNumberState appendNumberState()
     {
         return appendNumberState(null);
     }
@@ -618,7 +632,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * @deprecated use method with parameter (string) instead
      * @return
      */
-    public JDFEnumerationState appendEnumerationState()
+    @Deprecated
+	public JDFEnumerationState appendEnumerationState()
     {
         return  (JDFEnumerationState)appendElement(ElementName.ENUMERATIONSTATE, null);
     }
@@ -668,7 +683,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * @deprecated use method with parameter (string) instead
      * @return
      */
-    public JDFNameState getCreateNameState(int iSkip)
+    @Deprecated
+	public JDFNameState getCreateNameState(int iSkip)
     {
         return (JDFNameState)getCreateElement(ElementName.NAMESTATE, null, iSkip);
     }
@@ -694,7 +710,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * @deprecated use method with parameter (string) instead
      * @return
      */
-    public JDFNameState appendNameState()
+    @Deprecated
+	public JDFNameState appendNameState()
     {
         return (JDFNameState)appendElement(ElementName.NAMESTATE, null);
     }
@@ -744,7 +761,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * @deprecated use method with parameter (string) instead
      * @return
      */
-    public JDFStringState getCreateStringState(int iSkip)
+    @Deprecated
+	public JDFStringState getCreateStringState(int iSkip)
     {
         return (JDFStringState)getCreateElement(ElementName.STRINGSTATE, null, iSkip);
     }
@@ -770,7 +788,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * @deprecated use method with parameter (string) instead
      * @return
      */
-    public JDFStringState appendStringState()
+    @Deprecated
+	public JDFStringState appendStringState()
     {
         return (JDFStringState)appendElement(ElementName.STRINGSTATE, null);
     }
@@ -820,7 +839,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * @deprecated use method with parameter (string) instead
      * @return
      */
-    public JDFXYPairState getCreateXYPairState(int iSkip)
+    @Deprecated
+	public JDFXYPairState getCreateXYPairState(int iSkip)
     {
         return (JDFXYPairState)getCreateElement(ElementName.XYPAIRSTATE, null, iSkip);
     }
@@ -846,7 +866,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * @deprecated use method with parameter (string) instead
      * @return
      */
-    public JDFXYPairState appendXYPairState()
+    @Deprecated
+	public JDFXYPairState appendXYPairState()
     {
         return (JDFXYPairState)appendElement(ElementName.XYPAIRSTATE, null);
     }
@@ -896,7 +917,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * @deprecated use method with parameter (string) instead
      * @return
      */
-    public JDFShapeState getCreateShapeState(int iSkip)
+    @Deprecated
+	public JDFShapeState getCreateShapeState(int iSkip)
     {
         return(JDFShapeState)getCreateElement(ElementName.SHAPESTATE, null, iSkip);
     }
@@ -922,7 +944,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * @deprecated use method with parameter (string) instead
      * @return
      */
-    public JDFShapeState appendShapeState()
+    @Deprecated
+	public JDFShapeState appendShapeState()
     {
         return (JDFShapeState)appendElement(ElementName.SHAPESTATE, null);
     }
@@ -972,7 +995,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * @deprecated use method with parameter (string) instead
      * @return
      */
-    public JDFMatrixState getCreateMatrixState(int iSkip)
+    @Deprecated
+	public JDFMatrixState getCreateMatrixState(int iSkip)
     {
         return (JDFMatrixState)getCreateElement(ElementName.MATRIXSTATE, null, iSkip);
     }
@@ -996,7 +1020,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * @deprecated use method with parameter (string) instead
      * @return
      */
-    public JDFMatrixState appendMatrixState()
+    @Deprecated
+	public JDFMatrixState appendMatrixState()
     {
         return (JDFMatrixState)appendElement(ElementName.MATRIXSTATE, null);
     }
@@ -1046,7 +1071,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * @deprecated use method with parameter (string) instead
      * @return
      */
-    public JDFDateTimeState getCreateDateTimeState(int iSkip)
+    @Deprecated
+	public JDFDateTimeState getCreateDateTimeState(int iSkip)
     {
         return(JDFDateTimeState)getCreateElement(ElementName.DATETIMESTATE, null, iSkip);
     }
@@ -1072,7 +1098,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * @deprecated use method with parameter (string) instead
      * @return
      */
-    public JDFDateTimeState appendDateTimeState()
+    @Deprecated
+	public JDFDateTimeState appendDateTimeState()
     {
         return (JDFDateTimeState)appendElement(ElementName.DATETIMESTATE, null);
     }
@@ -1122,7 +1149,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * @deprecated use method with parameter (string) instead
      * @return
      */
-    public JDFDurationState getCreateDurationState(int iSkip)
+    @Deprecated
+	public JDFDurationState getCreateDurationState(int iSkip)
     {
         return (JDFDurationState)getCreateElement(ElementName.DURATIONSTATE, null, iSkip);
     }
@@ -1148,7 +1176,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * @deprecated use method with parameter (string) instead
      * @return
      */
-    public JDFDurationState appendDurationState()
+    @Deprecated
+	public JDFDurationState appendDurationState()
     {
         return (JDFDurationState)appendElement(ElementName.DURATIONSTATE, null);
     }
@@ -1197,7 +1226,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * @deprecated use method with parameter (string) instead
      * @return
      */
-    public JDFPDFPathState getCreatePDFPathState(int iSkip)
+    @Deprecated
+	public JDFPDFPathState getCreatePDFPathState(int iSkip)
     {
         return  (JDFPDFPathState)getCreateElement(ElementName.PDFPATHSTATE, null, iSkip);
     }
@@ -1223,7 +1253,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * @deprecated use method with parameter (string) instead
      * @return
      */
-    public JDFPDFPathState appendPDFPathState()
+    @Deprecated
+	public JDFPDFPathState appendPDFPathState()
     {
         return (JDFPDFPathState)appendElement(ElementName.PDFPATHSTATE, null);
     }
@@ -1273,7 +1304,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * @deprecated use method with parameter (string) instead
      * @return
      */
-    public JDFRectangleState getCreateRectangleState(int iSkip)
+    @Deprecated
+	public JDFRectangleState getCreateRectangleState(int iSkip)
     {
         return (JDFRectangleState)getCreateElement(ElementName.RECTANGLESTATE, null, iSkip);
     }
@@ -1299,7 +1331,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * @deprecated use method with parameter (string) instead
      * @return
      */
-    public JDFRectangleState appendRectangleState()
+    @Deprecated
+	public JDFRectangleState appendRectangleState()
     {
         return (JDFRectangleState)appendElement(ElementName.RECTANGLESTATE, null);
     }
@@ -1653,7 +1686,7 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
             int size=vKeys.size();
             for (int i=size-1; i>=0; i--) 
             {  
-                String key = (String) vKeys.elementAt(i);
+                String key = vKeys.elementAt(i);
                 if (nam.equals(key) ||(key.equals("CommentText")&& nam.length()==0)) // if name is absent - state describes a Comment
                 {
                     String value = nam.length()!=0 ? m.get(key) : m.get("CommentText");
@@ -1737,7 +1770,7 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
         {
             for (int x=0; x<vKeys.size(); x++) 
             { // if there are in vKeys still some attibutes, they must be generic attributes
-                String key = (String) vKeys.elementAt(x);
+                String key = vKeys.elementAt(x);
 
                 if (!isGenericAttribute(key)&&(defMap==null || !defMap.containsKey(key))) 
                 { // if the rest attributes are not generic -> Node is rejected
@@ -1802,7 +1835,7 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
                 VString vSpanMapKeys = spanMap.getKeys();
                 for (int k=0; k < vSpanMapKeys.size(); k++)
                 {
-                    String spanKey = (String) vSpanMapKeys.elementAt(k);
+                    String spanKey = vSpanMapKeys.elementAt(k);
                     m.put(spanKey, spanMap.get(spanKey));
                 }
             }
@@ -2070,7 +2103,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * 
      * @return String - the value of the attribute
      */
-    public String getName()
+    @Override
+	public String getName()
     {
         String s = getAttribute(AttributeName.NAME, null, null);
         if (s==null) 
@@ -2144,7 +2178,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      *
      * @param value the value to set the attribute to
      */
-    public void setMaxOccurs(int value)
+    @Override
+	public void setMaxOccurs(int value)
     {
         if(value==Integer.MAX_VALUE)
         {
@@ -2162,7 +2197,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      *
      * @return int: the attribute value 
      */
-    public int getMaxOccurs()
+    @Override
+	public int getMaxOccurs()
     {
         final String s = getAttribute(AttributeName.MAXOCCURS, null, null);
         if(JDFConstants.UNBOUNDED.equals(s))
@@ -2328,7 +2364,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
     /* (non-Javadoc)
      * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib.core.KElement.EnumValidationLevel, boolean, int)
      */
-    public VString getInvalidAttributes(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
+    @Override
+	public VString getInvalidAttributes(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
     {
         VString vs= super.getInvalidAttributes(level, bIgnorePrivate, nMax);
         if(nMax>0 && vs.size()>nMax)

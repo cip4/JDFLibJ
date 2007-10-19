@@ -114,7 +114,8 @@ public class JDFMatrixEvaluation extends JDFEvaluation
         atrInfoTable[3]  = new AtrInfoTable(AttributeName.TRANSFORMS, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumOrientation.getEnum(0), null);
     }
 
-    protected AttributeInfo getTheAttributeInfo() 
+    @Override
+	protected AttributeInfo getTheAttributeInfo() 
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -126,7 +127,8 @@ public class JDFMatrixEvaluation extends JDFEvaluation
         elemInfoTable[0] = new ElemInfoTable(ElementName.BASICPREFLIGHTTEST, 0x33333333);
     }
 
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
     }
@@ -177,7 +179,8 @@ public class JDFMatrixEvaluation extends JDFEvaluation
      * toString
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFMatrixEvaluation[ --> " + super.toString() + " ]";
     }
@@ -242,7 +245,8 @@ public class JDFMatrixEvaluation extends JDFEvaluation
             null);
     }
 
-    public JDFXYPair getTolerance()
+    @Override
+	public JDFXYPair getTolerance()
     {
         return super.getTolerance();
     }
@@ -318,7 +322,8 @@ public class JDFMatrixEvaluation extends JDFEvaluation
      * @return boolean - true, if 'value' matches testlists or 
      * if testlists are not specified
      */
-    public boolean fitsValue(String value)
+    @Override
+	public boolean fitsValue(String value)
     {
         VString vs = new VString(value, JDFConstants.BLANK);
         int siz = vs.size();
@@ -328,13 +333,13 @@ public class JDFMatrixEvaluation extends JDFEvaluation
         VString matrixList = new VString();
         int i=0;
         StringBuffer sb = new StringBuffer(250);
-        sb.append((String) vs.elementAt(i));
+        sb.append(vs.elementAt(i));
         while ((i+1)<siz)
         {
             do  {
                 sb.append(JDFConstants.BLANK);
                 i++;
-                sb.append((String) vs.elementAt(i));
+                sb.append(vs.elementAt(i));
             }
             while ((i+1)%6!=0);
             matrixList.add(sb.toString());
@@ -342,7 +347,7 @@ public class JDFMatrixEvaluation extends JDFEvaluation
             { 
                 i++;
                 sb = new StringBuffer(250);
-                sb.append((String) vs.elementAt(i));
+                sb.append(vs.elementAt(i));
             }
         }
 
@@ -351,7 +356,7 @@ public class JDFMatrixEvaluation extends JDFEvaluation
             
         for (int k=0; k<matrixList.size(); k++) 
         {
-            String str = (String) matrixList.elementAt(k);
+            String str = matrixList.elementAt(k);
             JDFMatrix matrix;
             try {
                 matrix = new JDFMatrix(str);
@@ -387,7 +392,7 @@ public class JDFMatrixEvaluation extends JDFEvaluation
         {
             try
             {
-                new JDFMatrix((String) matrixList.elementAt(i));
+                new JDFMatrix(matrixList.elementAt(i));
             }
             catch (JDFException e)
             {
@@ -415,8 +420,8 @@ public class JDFMatrixEvaluation extends JDFEvaluation
                 {
                     if ( j!=i ) 
                     {
-                        String mi =(String)matrixList.elementAt(i);
-                        String mj =(String)matrixList.elementAt(j);
+                        String mi =matrixList.elementAt(i);
+                        String mj =matrixList.elementAt(j);
                         if (mi.compareTo(mj)==0) 
                             return false;
                     }

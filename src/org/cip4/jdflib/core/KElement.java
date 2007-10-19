@@ -3519,7 +3519,7 @@ public class KElement extends ElementNSImpl
         {
             for (int i = 0; i < attribs.size(); i++)
             {
-                removeAttribute((String) attribs.elementAt(i));
+                removeAttribute(attribs.elementAt(i));
             }
         }
 

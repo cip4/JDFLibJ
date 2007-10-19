@@ -562,7 +562,7 @@ public class CheckJDF
             final int unknownSize = unknownAttributes.size();
             for (j = 0; j < unknownSize; j++)
             {
-                String unknownAttr = (String) unknownAttributes.elementAt(j);
+                String unknownAttr = unknownAttributes.elementAt(j);
                 if (vTmp.contains(unknownAttr))
                 {
                     swapAtt.appendUnique(unknownAttr);
@@ -574,7 +574,7 @@ public class CheckJDF
             vTmp = jdfElement.knownAttributes();
             for (j = 0; j < unknownElements.size(); j++)
             {
-                String unknownElem = (String) unknownElements.elementAt(j);
+                String unknownElem = unknownElements.elementAt(j);
                 if (vTmp.contains(unknownElem))
                 {
                     swapElem.appendUnique(unknownElem);
@@ -796,7 +796,7 @@ public class CheckJDF
         for (j = 0; j < attributeVector.size(); j++)
         {
             message=originalMessage;
-            String invalidAt = (String) attributeVector.elementAt(j);
+            String invalidAt = attributeVector.elementAt(j);
             if (!((KElement)part).hasAttribute_KElement(invalidAt, "", false)) // exactly this node (e.g. ResourceElement or Leaf)
             {
                 if (EnumPartIDKey.getEnum(invalidAt)!= null)
@@ -1030,7 +1030,7 @@ public class CheckJDF
         }
         for (j = 0; j < privateAttributes.size(); j++)
         { // print all private parameters
-            String privateAttribute = (String) privateAttributes.elementAt(j);
+            String privateAttribute = privateAttributes.elementAt(j);
             String prefix = StringUtil.token(privateAttribute, 0, ":") ;
             String localname = StringUtil.token(privateAttribute, 1, ":");
             if (prefix!=null && prefix.equals("xmlns"))
@@ -1521,10 +1521,10 @@ public class CheckJDF
                                     final int missLinkSize = vMissingLinks==null ? 0 : vMissingLinks.size();
                                     for(int ii=0; ii< missLinkSize; ii++)
                                     {
-                                        VString vs = new VString(StringUtil.tokenize((String)vMissingLinks.elementAt(ii),":",false));
+                                        VString vs = new VString(StringUtil.tokenize(vMissingLinks.elementAt(ii),":",false));
                                         if(vs.size()==2)
                                         {
-                                            String linkName = (String) vs.elementAt(0);
+                                            String linkName = vs.elementAt(0);
                                             if(linkName.equals(rl.getNodeName()))
                                             {
                                                 sysOut.print(" (Potential missing ProcessUsage: " +
@@ -1978,7 +1978,7 @@ public class CheckJDF
             }
             for(int ff=0;ff<vFiles.size();ff++)
             {
-                xmlFile=(String) vFiles.elementAt(ff);
+                xmlFile=vFiles.elementAt(ff);
                 processSingleFile(xmlFile);
             }
         }

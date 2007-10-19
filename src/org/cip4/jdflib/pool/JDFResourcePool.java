@@ -256,7 +256,8 @@ public class JDFResourcePool extends JDFPool
         elemInfoTable[i++] = new ElemInfoTable(ElementName.WRAPPINGPARAMS, 0x33333331);
      }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateAdd(elemInfoTable);
     }
@@ -282,7 +283,8 @@ public class JDFResourcePool extends JDFPool
 	 * 
 	 * @return String
 	 */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFResourcePool[ --> " + super.toString() + " ]";
     }
@@ -389,7 +391,8 @@ public class JDFResourcePool extends JDFPool
      * 
      * 
      */
-    public VString copyResource(
+    @Deprecated
+	public VString copyResource(
             JDFResource r,
             JDFResource.EnumSpawnStatus copyStatus,
             VJDFAttributeMap vParts,
@@ -453,7 +456,7 @@ public class JDFResourcePool extends JDFPool
         // add recursively copied resources
         for (int i = 0; i < vs.size(); i++)
         {
-            final String id = (String) vs.elementAt(i);
+            final String id = vs.elementAt(i);
             // the referenced resource is in this pool - continue
             if (ss.contains(id))
             {
@@ -588,7 +591,8 @@ public class JDFResourcePool extends JDFPool
      * @param nMax - max entries in vector 
      * @return Vector of unknown element nodenames
      */
-    public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
+    @Override
+	public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
     {
         if(bIgnorePrivate) // dummy to soothe compiler warning
             bIgnorePrivate=false;
@@ -614,7 +618,8 @@ public class JDFResourcePool extends JDFPool
      * @param bRecurse if true, also return recursively linked IDs
      * @return HashSet: the vector of referenced resource IDs
      */
-    public HashSet getAllRefs(HashSet vDoneRefs, boolean bRecurse)
+    @Override
+	public HashSet getAllRefs(HashSet vDoneRefs, boolean bRecurse)
     {
         VElement vResources = getPoolChildren(null, null, null);
         final int size = vResources.size();
@@ -638,7 +643,8 @@ public class JDFResourcePool extends JDFPool
      * @param version version that the resulting element should correspond to
      * @return true if successful
      */
-   public boolean fixVersion(EnumVersion version){
+   @Override
+public boolean fixVersion(EnumVersion version){
         if(hasAttribute(AttributeName.RREFS))
             removeAttribute(AttributeName.RREFS);
         return super.fixVersion(version);
