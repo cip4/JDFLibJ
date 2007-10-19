@@ -87,6 +87,7 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.ifaces.IPlacedObject;
 import org.cip4.jdflib.resource.process.postpress.JDFSheet;
@@ -149,7 +150,8 @@ public class JDFSurface extends JDFSheet
         atrInfoTable[1] = new AtrInfoTable(AttributeName.SURFACECONTENTSBOX, 0x44444333, AttributeInfo.EnumAttributeType.rectangle, null, null);        
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         AttributeInfo ai=super.getTheAttributeInfo();
         if(getLocalName().equals(ElementName.SURFACE))
@@ -157,7 +159,8 @@ public class JDFSurface extends JDFSheet
         return ai;
     }
     
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFSurface[  --> " + super.toString() + " ]";
     }
@@ -215,7 +218,7 @@ public class JDFSurface extends JDFSheet
         {
             if(n instanceof IPlacedObject)
             {
-                v.add(n);
+                v.add((KElement) n);
             }
             n=n.getNextSibling();
         }

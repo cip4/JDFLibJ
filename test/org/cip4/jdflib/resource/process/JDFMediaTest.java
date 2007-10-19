@@ -72,6 +72,8 @@
 
 package org.cip4.jdflib.resource.process;
 
+import java.util.Vector;
+
 import junit.framework.TestCase;
 
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumHoleType;
@@ -79,7 +81,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
@@ -142,7 +143,7 @@ public class JDFMediaTest extends TestCase
         assertTrue(kElem instanceof JDFMedia);
         JDFMedia media = ((JDFMedia) kElem);
         
-        VElement v = new VElement();
+        Vector v = new Vector();
         v.addElement(EnumHoleType.None);
         v.addElement(EnumHoleType.C9_5m_round_0t);
         assertEquals(EnumHoleType.C9_5m_round_0t.getName(), "C9.5m-round-0t");

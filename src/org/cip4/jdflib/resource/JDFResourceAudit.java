@@ -96,13 +96,11 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFResourceLink;
-import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-import org.cip4.jdflib.node.JDFNode;
 
 
 public class JDFResourceAudit extends JDFAutoResourceAudit
@@ -158,7 +156,8 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
      * @return the ResourceLink object in the ResourceAudit that points to r
      * @deprecated use addNewOldLink(true,...)
      */
-    public JDFResourceLink addNewLink(JDFResource r, boolean bInput)
+    @Deprecated
+	public JDFResourceLink addNewLink(JDFResource r, boolean bInput)
     {
         return addNewOldLink(true, r, bInput);
     }
@@ -171,7 +170,8 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
      * @deprecated use addNewOldLink(false,...)
      *
      */
-    public JDFResourceLink addOldLink(JDFResource r, boolean bInput)
+    @Deprecated
+	public JDFResourceLink addOldLink(JDFResource r, boolean bInput)
     {
         return addNewOldLink(false, r, bInput);
     }
@@ -185,7 +185,8 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
      * @deprecated use addNewOldLink(bNew, r, bInput ? EnumUsage.Input : EnumUsage.Output);
      */
 
-    public JDFResourceLink addNewOldLink( boolean bNew,JDFResource r, boolean bInput)
+    @Deprecated
+	public JDFResourceLink addNewOldLink( boolean bNew,JDFResource r, boolean bInput)
     {
         return addNewOldLink(bNew, r, bInput ? EnumUsage.Input : EnumUsage.Output);
     }
@@ -277,7 +278,7 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
         // update of an update, delete the first element and assume the second is the real original
         if (v.size() > 1)
         {
-            ((KElement) v.elementAt(0)).deleteNode();
+            (v.elementAt(0)).deleteNode();
             v.remove(v.elementAt(0));
         }
 
@@ -286,7 +287,7 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
 
         if (v.size() > 0)
         {
-            resLink = (JDFResourceLink) insertBefore(resLink, (JDFNode) v.elementAt(0));
+            resLink = (JDFResourceLink) insertBefore(resLink, v.elementAt(0));
         }
         return resLink;
     }
@@ -322,7 +323,8 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
      * 
      * !!! Do not change the signature of this method
      */
-    public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
+    @Override
+	public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
     {
         if(bIgnorePrivate)
             bIgnorePrivate=false; // dummy to fool compiler
@@ -332,7 +334,8 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
      * get list of missing elements
      * @param nMax maximum size of the returned vector
      */
-    public VString getMissingElements(int nMax)
+    @Override
+	public VString getMissingElements(int nMax)
     {
         VString vs = getTheElementInfo().requiredElements();
         vs = getMissingElementVector(vs, nMax);
@@ -354,7 +357,8 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
      * set all parts to those defined in vParts
      * @param vParts vector of attribute maps for the parts
      */
-    public void setPartMapVector(VJDFAttributeMap vParts)
+    @Override
+	public void setPartMapVector(VJDFAttributeMap vParts)
     {
         super.setPartMapVector(vParts);
     }
@@ -363,7 +367,8 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
      * set all parts to those defined by mPart
      * @param mPart attribute map for the part to set
      */
-    public void setPartMap(JDFAttributeMap mPart)
+    @Override
+	public void setPartMap(JDFAttributeMap mPart)
     {
         super.setPartMap(mPart);
     }
@@ -372,7 +377,8 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
      * remove the part defined by mPart
      * @param mPart attribute map for the part to remove
      */
-    public void removePartMap(JDFAttributeMap mPart)
+    @Override
+	public void removePartMap(JDFAttributeMap mPart)
     {
         super.removePartMap(mPart);
     }
@@ -382,7 +388,8 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
      * @param mPart attribute map to look for
      * @return boolean - returns true if the part exists
      */
-    public boolean hasPartMap(JDFAttributeMap mPart)
+    @Override
+	public boolean hasPartMap(JDFAttributeMap mPart)
     {
         return super.hasPartMap(mPart);
     }

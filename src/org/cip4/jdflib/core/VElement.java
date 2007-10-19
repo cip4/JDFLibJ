@@ -89,7 +89,7 @@ import org.w3c.dom.NodeList;
 /**
  *
  */
-public class VElement extends Vector
+public class VElement extends Vector<KElement>
 {
 	private static final long serialVersionUID = 1L;
 	
@@ -130,7 +130,7 @@ public class VElement extends Vector
 			{
 				if (n.item(i).getNodeType() == Node.ELEMENT_NODE)
 				{
-					this.addElement(n.item(i));
+					this.addElement((KElement) n.item(i));
 				}
 			}
 		}
@@ -143,6 +143,7 @@ public class VElement extends Vector
 	 *
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "VElement[ --> " + super.toString() + " ]";
@@ -159,7 +160,7 @@ public class VElement extends Vector
 	{
 		for (int i = 0; i < size(); i++)
 		{
-			if (((KElement)elementAt(i)).isEqual(s))
+			if ((elementAt(i)).isEqual(s))
 			{
 				return i;
 			}
@@ -176,6 +177,7 @@ public class VElement extends Vector
 	 * @deprecated 060216 use containsElement
 	 * @return true if s is contained in this
 	 */
+	@Deprecated
 	public boolean hasElement (KElement kElem)
 	{
 		return index(kElem) >= 0;
@@ -187,6 +189,7 @@ public class VElement extends Vector
 	 * @param KElement v
 	 * @deprecated simply use appendUnique
 	 */
+	@Deprecated
 	public void appendUniqueNotNull(KElement v)
 	{
 		if (v != null && !contains(v))
@@ -201,13 +204,14 @@ public class VElement extends Vector
 	 * @param VElement v
 	 * @deprecated simply use appendUnique
 	 */
+	@Deprecated
 	public void appendUniqueNotNull(VElement v)
 	{
 		if ( v != null )
 		{
 			for (int i = 0; i < v.size(); i++)
 			{
-				appendUniqueNotNull((KElement) v.elementAt(i));
+				appendUniqueNotNull(v.elementAt(i));
 			}
 		}
 	}
@@ -291,7 +295,7 @@ public class VElement extends Vector
         
         for (int i = 0; i < size(); i++)
         {
-            final KElement k = (KElement) elementAt(i);
+            final KElement k = elementAt(i);
             k.setAttribute(key, (String)vValue.elementAt(i), nameSpaceURI);
         }
     }
@@ -310,7 +314,7 @@ public class VElement extends Vector
         final int siz = size();
         for (int i = 0; i < siz; i++)
         {
-            final KElement k = (KElement) elementAt(i);
+            final KElement k = elementAt(i);
             k.setAttribute(key, value, nameSpaceURI);
         }
     }
@@ -327,7 +331,7 @@ public class VElement extends Vector
         final int siz = size();
         for (int i = 0; i < siz; i++)
         {
-            final KElement k = (KElement) elementAt(i);
+            final KElement k = elementAt(i);
             k.removeAttribute(key, nameSpaceURI);
         }
     }
@@ -341,7 +345,7 @@ public class VElement extends Vector
 	{
 		for (int i = size() - 1; i >= 0; i--)
 		{
-			if (v.containsElement((KElement)elementAt(i)))
+			if (v.containsElement(elementAt(i)))
 			{
 				removeElementAt(i);
 			}
@@ -362,7 +366,7 @@ public class VElement extends Vector
 		
 		for (int i = size() - 1; i >= 0; i--)
 		{
-			if (e == (KElement)elementAt(i))
+			if (e == elementAt(i))
 			{
 				removeElementAt(i);
 				
@@ -418,7 +422,7 @@ public class VElement extends Vector
 		}
 		for (int i = 0; i < len; i++)
 		{
-			final KElement k = (KElement) elementAt(i);
+			final KElement k = elementAt(i);
 			if (bWantName)
 			{
 				// want only named elements
@@ -455,7 +459,7 @@ public class VElement extends Vector
 			return null;
 		}
 		
-		return (KElement) this.elementAt(index);
+		return this.elementAt(index);
 	}
 	
 	/**
@@ -470,15 +474,15 @@ public class VElement extends Vector
 			return null;
 		
 		if(siz==1) // only one - the ancestor is the only entry itself
-			return (KElement) elementAt(0);
+			return elementAt(0);
 		
-		KElement ret=(KElement) elementAt(0); // could all be the same, therefore do not start with parent node
+		KElement ret=elementAt(0); // could all be the same, therefore do not start with parent node
 		
 		// loop down searching for a common ancestor
 		while(ret!=null){
 			boolean bOK=true;
 			for(int i=1;i<siz;i++){ // start at 1, since the parents of 0 are ok by definition
-				if(!ret.isAncestor((KElement) elementAt(i))){
+				if(!ret.isAncestor(elementAt(i))){
 					bOK=false;
 					break;
 				}
@@ -499,6 +503,7 @@ public class VElement extends Vector
 	 * @return JDFResource
 	 * @deprecated used only to facilitate migration from vResource to vElement
 	 */
+	@Deprecated
 	public JDFResource resource(int i)
 	{
 		return (JDFResource) elementAt(i);

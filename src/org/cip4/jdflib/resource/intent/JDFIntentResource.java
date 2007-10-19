@@ -147,7 +147,8 @@ public class JDFIntentResource extends JDFResource
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
     
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFInsertingIntent[  --> " + super.toString() + " ]";
     }
@@ -180,7 +181,7 @@ public class JDFIntentResource extends JDFResource
             true, true, 0);
             for (int i = 0; i < v.size(); i++)
             {
-                vKeys.add(((KElement) v.elementAt(i)).getNodeName());
+                vKeys.add(v.elementAt(i).getNodeName());
             }
         }
         else
@@ -220,7 +221,8 @@ public class JDFIntentResource extends JDFResource
      * Typesafe attribute validation of Class
      * @return true if class is valid
      */
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Intent;
     }
@@ -229,7 +231,8 @@ public class JDFIntentResource extends JDFResource
      * default initialization
      * @return true if successful
      */
-    public boolean init()
+    @Override
+	public boolean init()
     {
         boolean b = super.init();
         this.setResourceClass(EnumResourceClass.Intent);

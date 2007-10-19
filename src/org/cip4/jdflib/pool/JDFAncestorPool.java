@@ -193,7 +193,8 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
      * @param nameSpaceURI
      * @return
      */
-    public KElement getAncestorElement(String element, String nameSpaceURI)
+    @Deprecated
+	public KElement getAncestorElement(String element, String nameSpaceURI)
     {
         return getAncestorElement(element, nameSpaceURI, null);
     }
@@ -264,7 +265,8 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
      * @param parentNode the closest parent Node that contains the information to be copied
      * @deprecated use public void copyNodeData (JDFNode parentNode, false, false) instead
      */
-    public void copyNodeData(JDFNode parentNode)
+    @Deprecated
+	public void copyNodeData(JDFNode parentNode)
     {
        copyNodeData(parentNode,true,true,true);
     }
@@ -338,7 +340,7 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
                                                             null,null,true,0,false);
                     for(int j = 0; j < v.size(); j++)
                     {
-                        ancestor.copyElement((KElement)v.elementAt(j), null);
+                        ancestor.copyElement(v.elementAt(j), null);
                     }
                 }
                 
@@ -404,7 +406,8 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
      * get part map vector
      * @return VJDFAttributeMap: vector of mAttribute, one for each part
      */
-    public VJDFAttributeMap getPartMapVector()
+    @Override
+	public VJDFAttributeMap getPartMapVector()
     {
         return super.getPartMapVector();
     }
@@ -413,7 +416,8 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
      * set all parts to those define in vParts
      * @param vParts vector of attribute maps for the parts
      */
-    public void setPartMapVector(VJDFAttributeMap vParts)
+    @Override
+	public void setPartMapVector(VJDFAttributeMap vParts)
     {
         super.setPartMapVector(vParts);
     }
@@ -422,7 +426,8 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
      * set all parts to those define in vParts
      * @param mPart attribute map for the part to set
      */
-    public void setPartMap(JDFAttributeMap mPart)
+    @Override
+	public void setPartMap(JDFAttributeMap mPart)
     {
         super.setPartMap(mPart);
     }
@@ -431,7 +436,8 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
      * remove the part defined in mPart
      * @param mPart attribute map for the part to remove
      */
-    public void removePartMap(JDFAttributeMap mPart)
+    @Override
+	public void removePartMap(JDFAttributeMap mPart)
     {
         super.removePartMap(mPart);
     }
@@ -441,7 +447,8 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
      * @param mPart attribute map for the part to remove
      * @return true if the part exists
      */
-    public boolean hasPartMap(JDFAttributeMap mPart)
+    @Override
+	public boolean hasPartMap(JDFAttributeMap mPart)
     {
         return super.hasPartMap(mPart);
     }

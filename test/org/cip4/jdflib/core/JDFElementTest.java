@@ -443,7 +443,7 @@ public class JDFElementTest extends TestCase
         _setUp();
         VElement velem = m_jdfRoot.getChildElementVector(null,null,null, true, 0, false);
         assertEquals(velem.size(),5);
-        KElement elem = (KElement)velem.elementAt(0);
+        KElement elem = velem.elementAt(0);
         assertEquals (elem.getNodeName(),"AuditPool");
         velem = m_jdfRoot.getChildElementVector(null,null,null, true, 3, false);
         assertEquals(velem.size(),3);

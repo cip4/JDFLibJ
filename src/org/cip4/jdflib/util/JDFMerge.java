@@ -119,12 +119,12 @@ public class JDFMerge
 {
 
     private JDFSpawned spawnAudit       = null;
-    private JDFNode m_ParentNode;
+    private final JDFNode m_ParentNode;
     private JDFNode toMerge;
     private Set vsRO;
     private Set vsRW;
     private String spawnID              = null;
-    private VString previousMergeIDs    = new VString(); // list of merges in the ancestors
+    private final VString previousMergeIDs    = new VString(); // list of merges in the ancestors
     private boolean bSnafu              = true;
     private JDFNode overWriteNode;
 
@@ -360,7 +360,7 @@ public class JDFMerge
         final int siz=vToMerge.size(); // size prior to appending
         vToMerge.appendUnique(v);
         for(int i=siz;i<vToMerge.size();i++){
-            toMerge.moveElement((KElement)vToMerge.elementAt(i),null);
+            toMerge.moveElement(vToMerge.elementAt(i),null);
         }
     }
 
@@ -422,7 +422,7 @@ public class JDFMerge
             final int siz = localChildren.size();
             for (int i = 0; i < siz; i++)
             {
-                final KElement e = (KElement) localChildren.elementAt(i);
+                final KElement e = localChildren.elementAt(i);
                 //          skip all pools
                 final String nodeName = e.getLocalName();
                 if (nodeName.endsWith("Pool"))

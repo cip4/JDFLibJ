@@ -85,7 +85,6 @@ package org.cip4.jdflib.pool;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 
@@ -146,7 +145,8 @@ public abstract class JDFPool extends JDFElement
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFPool[ --> " + super.toString() + " ]";
     }
@@ -228,9 +228,9 @@ public abstract class JDFPool extends JDFElement
         final VElement v=getPoolChildrenGeneric(null, null, null);
         for(int i=0;i<vp.size();i++)
         {
-            if(!v.containsElement((KElement) vp.elementAt(i)))
+            if(!v.containsElement(vp.elementAt(i)))
             {
-                copyElement((KElement)vp.elementAt(i), null);                
+                copyElement(vp.elementAt(i), null);                
             }
         }
     }

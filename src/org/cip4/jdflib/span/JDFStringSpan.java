@@ -145,7 +145,8 @@ public class JDFStringSpan extends JDFSpanBase
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
-    protected AttributeInfo getTheAttributeInfo() 
+    @Override
+	protected AttributeInfo getTheAttributeInfo() 
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -164,7 +165,8 @@ public class JDFStringSpan extends JDFSpanBase
         elemInfoTable[1] = new ElemInfoTable(ElementName.OFFERRANGE,                     0x33333111);
     }
 
-     protected ElementInfo getTheElementInfo() 
+     @Override
+	protected ElementInfo getTheElementInfo() 
     {
         return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
     }
@@ -175,7 +177,8 @@ public class JDFStringSpan extends JDFSpanBase
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFStringSpan[ --> " + super.toString() + " ]";
     }
@@ -232,7 +235,7 @@ public class JDFStringSpan extends JDFSpanBase
         VElement v = getChildrenByTagName(elementName, null, null, true, true, 0);
         for(int i=0; i < v.size(); i++)
         {
-            KElement e = (KElement) v.elementAt(i);
+            KElement e = v.elementAt(i);
             vL.addElement(e.getText(0));
         }
         return vL;       
@@ -311,7 +314,8 @@ public class JDFStringSpan extends JDFSpanBase
     }
     
     
-    public boolean init()
+    @Override
+	public boolean init()
     {
         boolean b = super.init();
         setDataType(EnumDataType.StringSpan);

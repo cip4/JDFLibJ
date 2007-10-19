@@ -264,7 +264,8 @@ public class KElement extends ElementNSImpl
      * Set this element as dirty
      * @deprecated use setDirty (bAttribute)
      */
-    public void setDirty()
+    @Deprecated
+	public void setDirty()
     {
         setDirty(false);
     }
@@ -395,7 +396,8 @@ public class KElement extends ElementNSImpl
      *
      * @return String        the value of the Attribute or emptystring
      */
-    public String getAttribute(String strLocalName)
+    @Override
+	public String getAttribute(String strLocalName)
     {
         return getAttribute(strLocalName, null, JDFConstants.EMPTYSTRING);
     }
@@ -492,7 +494,8 @@ public class KElement extends ElementNSImpl
          * @deprecated
          * @return vector of valid names, null if key is not an enumeration
          */
-        public static Vector getNamesVector()
+        @Deprecated
+		public static Vector getNamesVector()
         {
             final Vector namesVector = new Vector();
             final Iterator it = iterator(EnumValidationLevel.class);
@@ -598,22 +601,26 @@ public class KElement extends ElementNSImpl
     /**
      * @deprecated use local EnumValidationLevel enums
      */
-    public static final EnumValidationLevel ValidationLevel_Incomplete = EnumValidationLevel.Incomplete;
+    @Deprecated
+	public static final EnumValidationLevel ValidationLevel_Incomplete = EnumValidationLevel.Incomplete;
 
     /**
      * @deprecated use local EnumValidationLevel enums
      */
-    public static final EnumValidationLevel ValidationLevel_Complete =  EnumValidationLevel.Complete;
+    @Deprecated
+	public static final EnumValidationLevel ValidationLevel_Complete =  EnumValidationLevel.Complete;
 
     /**
      * @deprecated use local EnumValidationLevel enums
      */
-    public static final EnumValidationLevel ValidationLevel_RecursiveIncomplete =  EnumValidationLevel.RecursiveIncomplete;
+    @Deprecated
+	public static final EnumValidationLevel ValidationLevel_RecursiveIncomplete =  EnumValidationLevel.RecursiveIncomplete;
 
     /**
      * @deprecated use local EnumValidationLevel enums
      */
-    public static final EnumValidationLevel ValidationLevel_RecursiveComplete = EnumValidationLevel.RecursiveComplete;
+    @Deprecated
+	public static final EnumValidationLevel ValidationLevel_RecursiveComplete = EnumValidationLevel.RecursiveComplete;
 
     /**
      * Sets an NMTOKENS attribute to all elements from parameter value will
@@ -626,7 +633,8 @@ public class KElement extends ElementNSImpl
      *
      * @default setvStringAttribute(key, vStr, null)
      */
-    public void setvStringAttribute(String key, VString value, String nameSpaceURI)
+    @Deprecated
+	public void setvStringAttribute(String key, VString value, String nameSpaceURI)
     {
         setAttribute(key, value, nameSpaceURI);
     }
@@ -893,7 +901,8 @@ public class KElement extends ElementNSImpl
      * @param key    name of the attribute to set
      * @param value  value of the attribute
      */
-    public void setAttribute(String key, String value)
+    @Override
+	public void setAttribute(String key, String value)
     {
         setAttribute(key, value, null);
     }
@@ -908,7 +917,8 @@ public class KElement extends ElementNSImpl
      *
      * @default SetAttribute(key, value, null)
      */
-    public void setIntAttribute(String key, int value, String nameSpaceURI)
+    @Deprecated
+	public void setIntAttribute(String key, int value, String nameSpaceURI)
     {
         setAttribute(key, value, nameSpaceURI);
     }
@@ -937,7 +947,8 @@ public class KElement extends ElementNSImpl
      *
      * @default setAttribute(key, value, null)
      */
-    public void setRealAttribute(String key, double value, String nameSpaceURI)
+    @Deprecated
+	public void setRealAttribute(String key, double value, String nameSpaceURI)
     {
         setAttribute(key, StringUtil.formatDouble(value), nameSpaceURI);
     }
@@ -966,7 +977,8 @@ public class KElement extends ElementNSImpl
      *
      * @default setAttribute(key, b, null)
      */
-    public void setBoolAttribute(String key, boolean b, String nameSpaceURI)
+    @Deprecated
+	public void setBoolAttribute(String key, boolean b, String nameSpaceURI)
     {
         setAttribute(key, b,  nameSpaceURI);
     }
@@ -1063,7 +1075,8 @@ public class KElement extends ElementNSImpl
      *
      * @return boolean true, if the attribute is present
      */
-    public boolean hasAttribute(String attrib)
+    @Override
+	public boolean hasAttribute(String attrib)
     {
         return hasAttribute_KElement(attrib, null, false);
     }
@@ -1293,7 +1306,8 @@ public class KElement extends ElementNSImpl
      *
      * @return String The nameSpaceURI
      */
-    public String getNamespaceURI()
+    @Override
+	public String getNamespaceURI()
     {
         String s = super.getNamespaceURI();
         if ((s != null && s!=JDFConstants.EMPTYSTRING) || ((DocumentJDFImpl)getOwnerDocument()).isIgnoreNSDefault())
@@ -1370,7 +1384,8 @@ public class KElement extends ElementNSImpl
      *
      * @return String   the local name of 'this'
      */
-    public static String getLocalNameStatic(KElement kElem)
+    @Deprecated
+	public static String getLocalNameStatic(KElement kElem)
     {
         return kElem.getLocalName();
     }
@@ -1592,13 +1607,13 @@ public class KElement extends ElementNSImpl
         Node n=getFirstChild();
         while(n!=null){
             if(n.getNodeType()==Node.ELEMENT_NODE) {
-				v.add(n);
+				v.add((KElement) n);
 			}
             n=n.getNextSibling();
         }
         final int size = v.size();
         KElement[] a=new KElement[size];
-        return (KElement[])v.toArray(a);
+        return v.toArray(a);
     }
 
     /**
@@ -1617,7 +1632,8 @@ public class KElement extends ElementNSImpl
      * @deprecated 060302 - use 6 parameter version
      * @default getChildElementVector(null, null, null, true, 0, false)
      */
-    public VElement getChildElementVector(String nodeName, String nameSpaceURI, JDFAttributeMap mAttrib, boolean bAnd,
+    @Deprecated
+	public VElement getChildElementVector(String nodeName, String nameSpaceURI, JDFAttributeMap mAttrib, boolean bAnd,
             int maxSize)
     {
         return getChildElementVector(nodeName, nameSpaceURI, mAttrib, bAnd, maxSize,false);
@@ -2017,7 +2033,8 @@ public class KElement extends ElementNSImpl
      * @deprecated use getChildrenByTagName(nodeName, nameSpaceURI,
      *                                      new JDFAttributeMap(attName, attVal), bDirect, true, 0);
      */
-    public VElement getChildrenWithAttribute(String nodeName, String attName, String nameSpaceURI, String attVal,
+    @Deprecated
+	public VElement getChildrenWithAttribute(String nodeName, String attName, String nameSpaceURI, String attVal,
             boolean bDirect)
     {
         return getChildrenByTagName(nodeName, nameSpaceURI, new JDFAttributeMap(attName, attVal),
@@ -2163,7 +2180,7 @@ public class KElement extends ElementNSImpl
         final int siz=v.size();
         for(int i=0;i<siz;i++)
         {
-            KElement e=(KElement)v.elementAt(i);
+            KElement e=v.elementAt(i);
             m.put(e.getAttribute(attributeName),e);
         }
         return m;
@@ -2874,7 +2891,8 @@ public class KElement extends ElementNSImpl
      * @return Element - the first child element if existing otherwise null
      * @deprecated use elem.getFirstChildElement
      */
-    public static Element getFirstElementNode(Element parent)
+    @Deprecated
+	public static Element getFirstElementNode(Element parent)
     {
         Node firstChildElement = parent.getFirstChild();
 
@@ -2894,7 +2912,8 @@ public class KElement extends ElementNSImpl
      * @return Element  the first sibling element if existing otherwise null
      * @deprecated - use elem.getNextSiblingElement();
      */
-    public static Element getNextElementNode(Element elem)
+    @Deprecated
+	public static Element getNextElementNode(Element elem)
     {
         Node nextSiblingElement = elem.getNextSibling();
 
@@ -2984,7 +3003,8 @@ public class KElement extends ElementNSImpl
      * @return VElement list of all childs
      * @deprecated use getChildElementVector(null, null, null, true, 0)
      */
-    public VElement getChildNodes_KElement()
+    @Deprecated
+	public VElement getChildNodes_KElement()
     {
         return new VElement(getChildNodes());
     }
@@ -3156,7 +3176,8 @@ public class KElement extends ElementNSImpl
      * @deprecated use isValid(EnumValidationLevel level)
      * @return boolean - true if valid (see above)
      */
-    public boolean isValid()
+    @Deprecated
+	public boolean isValid()
     {
         boolean result = true;
 
@@ -3358,7 +3379,8 @@ public class KElement extends ElementNSImpl
      *
      * @deprecated use three parameter version removeChildren(nodeName, nameSpaceURI, null);
      */
-    public void removeChildren(String nodeName, String nameSpaceURI)
+    @Deprecated
+	public void removeChildren(String nodeName, String nameSpaceURI)
     {
         removeChildren(nodeName, nameSpaceURI, null);
     }
@@ -3378,7 +3400,7 @@ public class KElement extends ElementNSImpl
         final int size = v.size();
         for (int i = 0; i < size; i++)
         {
-            removeChild((Element) v.elementAt(i));
+            removeChild(v.elementAt(i));
         }
     }
 
@@ -3456,7 +3478,8 @@ public class KElement extends ElementNSImpl
      * @return Vector vector with all found nodes
      * @deprecated
      */
-    public Vector getChildNodeVector(int maxSize)
+    @Deprecated
+	public Vector getChildNodeVector(int maxSize)
     {
         final Vector v = new Vector();
         int i = 0;
@@ -3575,7 +3598,8 @@ public class KElement extends ElementNSImpl
      *
      * @deprecated use getChildByTagName(nodeName, nameSpaceURI, iSkip, null, false, true);
      */
-    public KElement getDeepElement(String nodeName, String nameSpaceURI, int iSkip)
+    @Deprecated
+	public KElement getDeepElement(String nodeName, String nameSpaceURI, int iSkip)
     {
         return getChildByTagName(nodeName, nameSpaceURI, iSkip, null, false, true);
     }
@@ -3586,7 +3610,8 @@ public class KElement extends ElementNSImpl
      * @param iSkip
      * @return KElement
      */
-    public KElement getChildFromList(VString nodeNames, int iSkip)
+    @Deprecated
+	public KElement getChildFromList(VString nodeNames, int iSkip)
     {
         return getChildFromList(nodeNames, iSkip, null, true);
     }
@@ -3902,7 +3927,7 @@ public class KElement extends ElementNSImpl
 
         for (int iv = 0; iv < children.size(); iv++)
         {
-            copyElement((KElement) children.elementAt(iv), null);
+            copyElement(children.elementAt(iv), null);
         }
 
         return this; // return the original
@@ -4056,7 +4081,8 @@ public class KElement extends ElementNSImpl
      * @param commentText  the comment to append
      * @deprecated use appendXMLComment(commentText, null);
      */
-    public void appendXMLComment(String commentText)
+    @Deprecated
+	public void appendXMLComment(String commentText)
     {
         appendXMLComment(commentText, null);
     }
@@ -4190,7 +4216,7 @@ public class KElement extends ElementNSImpl
 
         for (int i = 0; i < v.size(); i++)
         {
-            final KElement m = (KElement) v.elementAt(i);
+            final KElement m = v.elementAt(i);
             int nThis        = numChildElements(m.getNodeName(), null);
 
             if(nThis == 1)
@@ -4430,7 +4456,8 @@ public class KElement extends ElementNSImpl
      *
      * @see Object#toString()
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         String strJdf = JDFConstants.EMPTYSTRING;
         try
@@ -4552,7 +4579,7 @@ public class KElement extends ElementNSImpl
         for (int i = 0; i < vChildren.size(); i++)
         {
             boolean bAddElement = true;
-            final KElement kElem = (KElement) vChildren.elementAt(i);
+            final KElement kElem = vChildren.elementAt(i);
             final String s = kElem.getAttribute_KElement(attName, nameSpaceURI, JDFConstants.EMPTYSTRING);
             //fill only matching attributes
             if (bAttWildCard || s.equals(attValue))
@@ -4678,7 +4705,8 @@ public class KElement extends ElementNSImpl
      *                   (e.g. called on rootnode)
      *                   @deprecated use buildXPath(null,true);
      */
-    public String buildXPath()
+    @Deprecated
+	public String buildXPath()
     {
         return buildXPath(null,1);
     }
@@ -4691,7 +4719,8 @@ public class KElement extends ElementNSImpl
      *                   (e.g. called on rootnode)
      *                   @deprecated use buildXPath(relativeTo,true);
      */
-    public String buildXPath(String relativeTo)
+    @Deprecated
+	public String buildXPath(String relativeTo)
     {
         return buildXPath(relativeTo,1);
     }
@@ -5240,7 +5269,8 @@ public class KElement extends ElementNSImpl
      *
      * @return boolean true if at least one attribute is present
      */
-    public boolean hasAttributes()
+    @Override
+	public boolean hasAttributes()
     {
         final NamedNodeMap nm = getAttributes();
         final int l = (nm == null) ? 0 : nm.getLength();
@@ -5912,7 +5942,8 @@ public class KElement extends ElementNSImpl
      *
      * @return namespace of the qualified name
      */
-    public static String xmlNameSpace(String s)
+    @Deprecated
+	public static String xmlNameSpace(String s)
     {
 
         return xmlnsPrefix(s);
@@ -5927,7 +5958,8 @@ public class KElement extends ElementNSImpl
      *         not of equal length
      * @deprecated use setAttributes(JDFAttributeMap)
      */
-    public void setAttributes(String[] myAttributes, String[] strValues)
+    @Deprecated
+	public void setAttributes(String[] myAttributes, String[] strValues)
     {
         if (myAttributes.length != strValues.length)
         {
@@ -5977,7 +6009,8 @@ public class KElement extends ElementNSImpl
      * @return  the namespace of the qualified name.
      *          An Emptystring if pc is null or no namespace found.
      */
-    public static String getXMLNSNameSpace(String pc)
+    @Deprecated
+	public static String getXMLNSNameSpace(String pc)
     {
         return xmlnsPrefix(pc);
     }
@@ -6005,7 +6038,8 @@ public class KElement extends ElementNSImpl
      * @return String namespace prefix of pc, emptyspace if no ":" is in pc
      *
      */
-    public static String getXMLNSPrefix(String pc)
+    @Deprecated
+	public static String getXMLNSPrefix(String pc)
     {
         return xmlnsPrefix(pc);
     }
@@ -6055,70 +6089,81 @@ public class KElement extends ElementNSImpl
         appendText(text);
     }
 
-    public void removeAttribute(String attrib) throws DOMException
+    @Override
+	public void removeAttribute(String attrib) throws DOMException
     {
         removeAttribute_KElement(attrib, null);
     }
 
-    public void removeAttributeNS(String nameSpaceURI, String attrib) throws DOMException
+    @Override
+	public void removeAttributeNS(String nameSpaceURI, String attrib) throws DOMException
     {
         removeAttribute_KElement(attrib, nameSpaceURI);
     }
 
 
 
-    public Attr removeAttributeNode(Attr arg0) throws DOMException
+    @Override
+	public Attr removeAttributeNode(Attr arg0) throws DOMException
     {
         setDirty(true);
         return super.removeAttributeNode(arg0);
     }
 
-    public Attr setAttributeNode(Attr arg0) throws DOMException
+    @Override
+	public Attr setAttributeNode(Attr arg0) throws DOMException
     {
         setDirty(true);
         return super.setAttributeNode(arg0);
     }
 
-    public Attr setAttributeNodeNS(Attr arg0) throws DOMException
+    @Override
+	public Attr setAttributeNodeNS(Attr arg0) throws DOMException
     {
         setDirty(true);
         return super.setAttributeNodeNS(arg0);
     }
 
 
-    public void setAttributeNS(String nsURI, String arg1, String arg2) throws DOMException
+    @Override
+	public void setAttributeNS(String nsURI, String arg1, String arg2) throws DOMException
     {
         setDirty(true);
         setAttribute(arg1,arg2,nsURI);
     }
 
 
-    public void normalize()
+    @Override
+	public void normalize()
     {
         setDirty(false);
         super.normalize();
     }
 
 
-    public void setNodeValue(String arg0) throws DOMException
+    @Override
+	public void setNodeValue(String arg0) throws DOMException
     {
         setDirty(false);
         super.setNodeValue(arg0);
     }
 
-    public void setPrefix(String arg0) throws DOMException
+    @Override
+	public void setPrefix(String arg0) throws DOMException
     {
         super.setPrefix(arg0);
         setDirty(false);
     }
 
 
-    public Node appendChild(Node arg0) throws DOMException
+    @Override
+	public Node appendChild(Node arg0) throws DOMException
     {
         return insertBefore(arg0, null);
     }
 
-    public synchronized Node removeChild(Node arg0) throws DOMException
+    @Override
+	public synchronized Node removeChild(Node arg0) throws DOMException
     {
         setDirty(false);
         if(arg0 instanceof KElement) {
@@ -6128,13 +6173,15 @@ public class KElement extends ElementNSImpl
         return super.removeChild(arg0);
     }
 
-    public synchronized Node insertBefore(Node arg0, Node arg1) throws DOMException
+    @Override
+	public synchronized Node insertBefore(Node arg0, Node arg1) throws DOMException
     {
         setDirty(false);
         return super.insertBefore(arg0,arg1);
     }
 
-    public synchronized Node replaceChild(Node arg0, Node arg1) throws DOMException
+    @Override
+	public synchronized Node replaceChild(Node arg0, Node arg1) throws DOMException
     {
         setDirty(false);
         if(arg1 instanceof KElement) {
@@ -6201,7 +6248,8 @@ public class KElement extends ElementNSImpl
      * @return boolean
      * @deprecated use matchesPath(String path, boolean bFollowRefs)
      */
-    public boolean matchesPath(String path)
+    @Deprecated
+	public boolean matchesPath(String path)
     {
         return matchesPath(path,false);
     }

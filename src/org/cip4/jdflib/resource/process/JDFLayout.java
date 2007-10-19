@@ -88,7 +88,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFRefElement;
-import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.JDFResource;
@@ -146,7 +145,8 @@ public class JDFLayout extends JDFSurface
 
     ///////////////////////////////////////////////////////////////////
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFLayout[  --> " + super.toString() + " ]";
     }
@@ -161,7 +161,8 @@ public class JDFLayout extends JDFSurface
      * @param version: version that the resulting element should correspond to
      * @return true if successful
      */	
-    public boolean fixVersion(EnumVersion version){
+    @Override
+	public boolean fixVersion(EnumVersion version){
         boolean bRet=true;
         if(isResourceRoot()&& version!=null)
         {
@@ -344,13 +345,13 @@ public class JDFLayout extends JDFSurface
         if(vPO!=null)
         {
             for(int i=0;i<vPO.size();i++)
-                target.moveElement((KElement)vPO.elementAt(i),null);
+                target.moveElement(vPO.elementAt(i),null);
         }
         vPO=getChildElementVector_JDFElement(ElementName.LAYOUT,null,null,false,0,false);
         if(vPO!=null)
         {
             for(int i=0;i<vPO.size();i++)
-                target.moveElement((KElement)vPO.elementAt(i),null);
+                target.moveElement(vPO.elementAt(i),null);
         }
 
     }
@@ -403,7 +404,8 @@ public class JDFLayout extends JDFSurface
      * if old: a <Signature> element
      * if new: a SignatureName partition leaf
      */
-    public JDFSignature appendSignature() throws JDFException
+    @Override
+	public JDFSignature appendSignature() throws JDFException
     {
         return appendLayoutElement(this,ElementName.SIGNATURE,AttributeName.SIGNATURENAME);
     }
@@ -426,7 +428,8 @@ public class JDFLayout extends JDFSurface
      * if new: a SignatureName partition leaf
      * @param iSkip the number of signatures to skip
      */
-    public JDFSignature getCreateSignature(int iSkip)
+    @Override
+	public JDFSignature getCreateSignature(int iSkip)
     {
         JDFSignature s=getSignature(iSkip);
         if(s==null){
@@ -442,7 +445,8 @@ public class JDFLayout extends JDFSurface
      * if new: a SignatureName partition leaf
      * @param iSkip the number of signatures to skip
      */
-    public JDFSignature getSignature(int iSkip)
+    @Override
+	public JDFSignature getSignature(int iSkip)
     {
         return getLayoutElement(this,ElementName.SIGNATURE,AttributeName.SIGNATURENAME,iSkip);
     }

@@ -238,7 +238,8 @@ public class JDFNode extends JDFElement
      * definition of optional attributes in the JDF namespace
      * @return comma separated list of optional attributes for JDF nodes
      */
-    protected AttributeInfo getTheAttributeInfo() 
+    @Override
+	protected AttributeInfo getTheAttributeInfo() 
     {
         AttributeInfo ai = super.getTheAttributeInfo().updateReplace(atrInfoTable_abstract);
         final String nodeType = getType();
@@ -286,7 +287,8 @@ public class JDFNode extends JDFElement
     /**
      * 
      */
-    protected ElementInfo getTheElementInfo() 
+    @Override
+	protected ElementInfo getTheElementInfo() 
     {        
         ElementInfo ei = super.getTheElementInfo().updateReplace(elemInfoTable_abstract);
 
@@ -388,12 +390,14 @@ public class JDFNode extends JDFElement
      * exception id for multiple merge attempt
      * @deprecated use JDFSpawn.exAlreadyMerged
      */
-    public static final int exAlreadyMerged=JDFSpawn.exAlreadyMerged;
+    @Deprecated
+	public static final int exAlreadyMerged=JDFSpawn.exAlreadyMerged;
     /**
      * exception id for multiple rw spawns
      * @deprecated use JDFSpawn.exMultiSpawnRW
      */
-    public static final int exMultiSpawnRW=JDFSpawn.exMultiSpawnRW;
+    @Deprecated
+	public static final int exMultiSpawnRW=JDFSpawn.exMultiSpawnRW;
 
 
     /**
@@ -405,7 +409,8 @@ public class JDFNode extends JDFElement
 
         private static int m_startValue = 0;
 
-        public String toString()
+        @Override
+		public String toString()
         {
             return getName();
         }
@@ -445,7 +450,8 @@ public class JDFNode extends JDFElement
          * @deprecated
          * @return Vector
          */
-        public static Vector getNamesVector()
+        @Deprecated
+		public static Vector getNamesVector()
         {
             final Vector namesVector = new Vector();
             final Iterator it = iterator(EnumActivation.class);
@@ -509,7 +515,8 @@ public class JDFNode extends JDFElement
          * @deprecated
          * @return Vector
          */
-        public static Vector getNamesVector()
+        @Deprecated
+		public static Vector getNamesVector()
         {
             final Vector namesVector = new Vector();
             final Iterator it = iterator(EnumActivation.class);
@@ -542,17 +549,23 @@ public class JDFNode extends JDFElement
      */
 
     /** @deprecated use EnumActivation.Inactive */
-    public static final EnumActivation Activation_Inactive      = EnumActivation.Inactive;  
+    @Deprecated
+	public static final EnumActivation Activation_Inactive      = EnumActivation.Inactive;  
     /** @deprecated use EnumActivation.EnumActivation.Informative */
-    public static final EnumActivation Activation_Informative   = EnumActivation.Informative;
+    @Deprecated
+	public static final EnumActivation Activation_Informative   = EnumActivation.Informative;
     /** @deprecated use EnumActivation.Held */
-    public static final EnumActivation Activation_Held          = EnumActivation.Held;
+    @Deprecated
+	public static final EnumActivation Activation_Held          = EnumActivation.Held;
     /** @deprecated use EnumActivation.TestRun */
-    public static final EnumActivation Activation_TestRun       = EnumActivation.TestRun;
+    @Deprecated
+	public static final EnumActivation Activation_TestRun       = EnumActivation.TestRun;
     /** @deprecated use EnumActivation.TestRunAndGo */
-    public static final EnumActivation Activation_TestRunAndGo  = EnumActivation.TestRunAndGo;
+    @Deprecated
+	public static final EnumActivation Activation_TestRunAndGo  = EnumActivation.TestRunAndGo;
     /** @deprecated use EnumActivation.Active */
-    public static final EnumActivation Activation_Active        = EnumActivation.Active;
+    @Deprecated
+	public static final EnumActivation Activation_Active        = EnumActivation.Active;
 
     /**
      * inner class EnumType:
@@ -599,7 +612,8 @@ public class JDFNode extends JDFElement
          * @deprecated
          * @return Vector
          */
-        public static Vector getNamesVector()
+        @Deprecated
+		public static Vector getNamesVector()
         {
             final Vector namesVector = new Vector();
             final Iterator it = iterator(EnumType.class);
@@ -726,177 +740,263 @@ public class JDFNode extends JDFElement
      * use EnumType.xxx instead of the deprecated constants EnumType.Type_xxx
      */
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_ProcessGroup = EnumType.ProcessGroup;
+    @Deprecated
+	public static final EnumType Type_ProcessGroup = EnumType.ProcessGroup;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Combined = EnumType.Combined;
+    @Deprecated
+	public static final EnumType Type_Combined = EnumType.Combined;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Product = EnumType.Product;
+    @Deprecated
+	public static final EnumType Type_Product = EnumType.Product;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Approval = EnumType.Approval;
+    @Deprecated
+	public static final EnumType Type_Approval = EnumType.Approval;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Buffer = EnumType.Buffer;
+    @Deprecated
+	public static final EnumType Type_Buffer = EnumType.Buffer;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Combine = EnumType.Combine;
+    @Deprecated
+	public static final EnumType Type_Combine = EnumType.Combine;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Delivery = EnumType.Delivery;
+    @Deprecated
+	public static final EnumType Type_Delivery = EnumType.Delivery;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_ManualLabor = EnumType.ManualLabor;
+    @Deprecated
+	public static final EnumType Type_ManualLabor = EnumType.ManualLabor;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Ordering = EnumType.Ordering;
+    @Deprecated
+	public static final EnumType Type_Ordering = EnumType.Ordering;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Packing = EnumType.Packing;
+    @Deprecated
+	public static final EnumType Type_Packing = EnumType.Packing;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_QualityControl = EnumType.QualityControl;
+    @Deprecated
+	public static final EnumType Type_QualityControl = EnumType.QualityControl;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_ResourceDefinition = EnumType.ResourceDefinition;
+    @Deprecated
+	public static final EnumType Type_ResourceDefinition = EnumType.ResourceDefinition;
     /** @deprecated use EnumType.Type_xxx x*/
-    public static final EnumType Type_Split = EnumType.Split;
+    @Deprecated
+	public static final EnumType Type_Split = EnumType.Split;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Verification = EnumType.Verification;
+    @Deprecated
+	public static final EnumType Type_Verification = EnumType.Verification;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_AssetListCreation = EnumType.AssetListCreation;
+    @Deprecated
+	public static final EnumType Type_AssetListCreation = EnumType.AssetListCreation;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_ColorCorrection = EnumType.ColorCorrection;
+    @Deprecated
+	public static final EnumType Type_ColorCorrection = EnumType.ColorCorrection;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_ColorSpaceConversion = EnumType.ColorSpaceConversion;
+    @Deprecated
+	public static final EnumType Type_ColorSpaceConversion = EnumType.ColorSpaceConversion;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_ContactCopying = EnumType.ContactCopying;
+    @Deprecated
+	public static final EnumType Type_ContactCopying = EnumType.ContactCopying;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_ContoneCalibration = EnumType.ContoneCalibration;
+    @Deprecated
+	public static final EnumType Type_ContoneCalibration = EnumType.ContoneCalibration;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_DBDocTemplateLayout = EnumType.DBDocTemplateLayout;
+    @Deprecated
+	public static final EnumType Type_DBDocTemplateLayout = EnumType.DBDocTemplateLayout;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_DBTemplateMerging = EnumType.DBTemplateMerging;
+    @Deprecated
+	public static final EnumType Type_DBTemplateMerging = EnumType.DBTemplateMerging;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_DigitalDelivery = EnumType.DigitalDelivery;
+    @Deprecated
+	public static final EnumType Type_DigitalDelivery = EnumType.DigitalDelivery;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_FilmToPlateCopying = EnumType.FilmToPlateCopying;
+    @Deprecated
+	public static final EnumType Type_FilmToPlateCopying = EnumType.FilmToPlateCopying;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_FormatConversion = EnumType.FormatConversion;
+    @Deprecated
+	public static final EnumType Type_FormatConversion = EnumType.FormatConversion;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_ImageReplacement = EnumType.ImageReplacement;
+    @Deprecated
+	public static final EnumType Type_ImageReplacement = EnumType.ImageReplacement;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_ImageSetting = EnumType.ImageSetting;
+    @Deprecated
+	public static final EnumType Type_ImageSetting = EnumType.ImageSetting;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Imposition = EnumType.Imposition;
+    @Deprecated
+	public static final EnumType Type_Imposition = EnumType.Imposition;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_InkZoneCalculation = EnumType.InkZoneCalculation;
+    @Deprecated
+	public static final EnumType Type_InkZoneCalculation = EnumType.InkZoneCalculation;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Interpreting = EnumType.Interpreting;
+    @Deprecated
+	public static final EnumType Type_Interpreting = EnumType.Interpreting;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_LayoutElementProduction = EnumType.LayoutElementProduction;
+    @Deprecated
+	public static final EnumType Type_LayoutElementProduction = EnumType.LayoutElementProduction;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_LayoutPreparation = EnumType.LayoutPreparation;
+    @Deprecated
+	public static final EnumType Type_LayoutPreparation = EnumType.LayoutPreparation;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_PDFToPSConversion = EnumType.PDFToPSConversion;
+    @Deprecated
+	public static final EnumType Type_PDFToPSConversion = EnumType.PDFToPSConversion;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Preflight = EnumType.Preflight;
+    @Deprecated
+	public static final EnumType Type_Preflight = EnumType.Preflight;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_PreviewGeneration = EnumType.PreviewGeneration;
+    @Deprecated
+	public static final EnumType Type_PreviewGeneration = EnumType.PreviewGeneration;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Proofing = EnumType.Proofing;
+    @Deprecated
+	public static final EnumType Type_Proofing = EnumType.Proofing;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_PSToPDFConversion = EnumType.PSToPDFConversion;
+    @Deprecated
+	public static final EnumType Type_PSToPDFConversion = EnumType.PSToPDFConversion;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Rendering = EnumType.Rendering;
+    @Deprecated
+	public static final EnumType Type_Rendering = EnumType.Rendering;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Scanning = EnumType.Scanning;
+    @Deprecated
+	public static final EnumType Type_Scanning = EnumType.Scanning;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Screening = EnumType.Screening;
+    @Deprecated
+	public static final EnumType Type_Screening = EnumType.Screening;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Separation = EnumType.Separation;
+    @Deprecated
+	public static final EnumType Type_Separation = EnumType.Separation;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_SoftProofing = EnumType.SoftProofing;
+    @Deprecated
+	public static final EnumType Type_SoftProofing = EnumType.SoftProofing;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Stripping = EnumType.Stripping;
+    @Deprecated
+	public static final EnumType Type_Stripping = EnumType.Stripping;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Tiling = EnumType.Tiling;
+    @Deprecated
+	public static final EnumType Type_Tiling = EnumType.Tiling;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Trapping = EnumType.Trapping;
+    @Deprecated
+	public static final EnumType Type_Trapping = EnumType.Trapping;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_ConventionalPrinting = EnumType.ConventionalPrinting;
+    @Deprecated
+	public static final EnumType Type_ConventionalPrinting = EnumType.ConventionalPrinting;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_DigitalPrinting = EnumType.DigitalPrinting;
+    @Deprecated
+	public static final EnumType Type_DigitalPrinting = EnumType.DigitalPrinting;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_IDPrinting = EnumType.IDPrinting;
+    @Deprecated
+	public static final EnumType Type_IDPrinting = EnumType.IDPrinting;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_AdhesiveBinding = EnumType.AdhesiveBinding;
+    @Deprecated
+	public static final EnumType Type_AdhesiveBinding = EnumType.AdhesiveBinding;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_BlockPreparation = EnumType.BlockPreparation;
+    @Deprecated
+	public static final EnumType Type_BlockPreparation = EnumType.BlockPreparation;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_BoxPacking = EnumType.BoxPacking;
+    @Deprecated
+	public static final EnumType Type_BoxPacking = EnumType.BoxPacking;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Bundling = EnumType.Bundling;
+    @Deprecated
+	public static final EnumType Type_Bundling = EnumType.Bundling;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_CaseMaking = EnumType.CaseMaking ;
+    @Deprecated
+	public static final EnumType Type_CaseMaking = EnumType.CaseMaking ;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_CasingIn = EnumType.CasingIn ;
+    @Deprecated
+	public static final EnumType Type_CasingIn = EnumType.CasingIn ;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_ChannelBinding = EnumType.ChannelBinding ;
+    @Deprecated
+	public static final EnumType Type_ChannelBinding = EnumType.ChannelBinding ;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_CoilBinding = EnumType.CoilBinding;
+    @Deprecated
+	public static final EnumType Type_CoilBinding = EnumType.CoilBinding;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Collecting = EnumType.Collecting;
+    @Deprecated
+	public static final EnumType Type_Collecting = EnumType.Collecting;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_CoverApplication = EnumType.CoverApplication ;
+    @Deprecated
+	public static final EnumType Type_CoverApplication = EnumType.CoverApplication ;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Creasing = EnumType.Creasing;
+    @Deprecated
+	public static final EnumType Type_Creasing = EnumType.Creasing;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Cutting = EnumType.Cutting;
+    @Deprecated
+	public static final EnumType Type_Cutting = EnumType.Cutting;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Dividing = EnumType.Dividing;
+    @Deprecated
+	public static final EnumType Type_Dividing = EnumType.Dividing;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Embossing = EnumType.Embossing;
+    @Deprecated
+	public static final EnumType Type_Embossing = EnumType.Embossing;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_EndSheetGluing = EnumType.EndSheetGluing;
+    @Deprecated
+	public static final EnumType Type_EndSheetGluing = EnumType.EndSheetGluing;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Feeding = EnumType.Feeding;
+    @Deprecated
+	public static final EnumType Type_Feeding = EnumType.Feeding;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Folding = EnumType.Folding;
+    @Deprecated
+	public static final EnumType Type_Folding = EnumType.Folding;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Gathering = EnumType.Gathering;
+    @Deprecated
+	public static final EnumType Type_Gathering = EnumType.Gathering;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Gluing = EnumType.Gluing;
+    @Deprecated
+	public static final EnumType Type_Gluing = EnumType.Gluing;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_HeadBandApplication = EnumType.HeadBandApplication;
+    @Deprecated
+	public static final EnumType Type_HeadBandApplication = EnumType.HeadBandApplication;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_HoleMaking = EnumType.HoleMaking;
+    @Deprecated
+	public static final EnumType Type_HoleMaking = EnumType.HoleMaking;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Inserting = EnumType.Inserting;
+    @Deprecated
+	public static final EnumType Type_Inserting = EnumType.Inserting;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Jacketing = EnumType.Jacketing;
+    @Deprecated
+	public static final EnumType Type_Jacketing = EnumType.Jacketing;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Labeling = EnumType.Labeling;
+    @Deprecated
+	public static final EnumType Type_Labeling = EnumType.Labeling;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Laminating = EnumType.Laminating;
+    @Deprecated
+	public static final EnumType Type_Laminating = EnumType.Laminating;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_LongitudinalRibbonOperations = EnumType.LongitudinalRibbonOperations;
+    @Deprecated
+	public static final EnumType Type_LongitudinalRibbonOperations = EnumType.LongitudinalRibbonOperations;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Numbering = EnumType.Numbering;
+    @Deprecated
+	public static final EnumType Type_Numbering = EnumType.Numbering;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Palletizing = EnumType.Palletizing;
+    @Deprecated
+	public static final EnumType Type_Palletizing = EnumType.Palletizing;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Perforating = EnumType.Perforating;
+    @Deprecated
+	public static final EnumType Type_Perforating = EnumType.Perforating;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_PlasticCombBinding = EnumType.PlasticCombBinding;
+    @Deprecated
+	public static final EnumType Type_PlasticCombBinding = EnumType.PlasticCombBinding;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_PrintRolling = EnumType.PrintRolling;
+    @Deprecated
+	public static final EnumType Type_PrintRolling = EnumType.PrintRolling;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_RingBinding = EnumType.RingBinding;
+    @Deprecated
+	public static final EnumType Type_RingBinding = EnumType.RingBinding;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_SaddleStitching = EnumType.SaddleStitching;
+    @Deprecated
+	public static final EnumType Type_SaddleStitching = EnumType.SaddleStitching;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_ShapeCutting = EnumType.ShapeCutting;
+    @Deprecated
+	public static final EnumType Type_ShapeCutting = EnumType.ShapeCutting;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Shrinking = EnumType.Shrinking;
+    @Deprecated
+	public static final EnumType Type_Shrinking = EnumType.Shrinking;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_SideSewing = EnumType.SideSewing;
+    @Deprecated
+	public static final EnumType Type_SideSewing = EnumType.SideSewing;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_SpinePreparation = EnumType.SpinePreparation;
+    @Deprecated
+	public static final EnumType Type_SpinePreparation = EnumType.SpinePreparation;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_SpineTaping = EnumType.SpineTaping;
+    @Deprecated
+	public static final EnumType Type_SpineTaping = EnumType.SpineTaping;
     /** @deprecated use EnumType.xxx */
-    public static final EnumType Type_Stacking = EnumType.Stacking;
+    @Deprecated
+	public static final EnumType Type_Stacking = EnumType.Stacking;
     /** @deprecated use EnumType.xxx */
     public static final EnumType Type_Stitching = EnumType.Stitching;
     /** @deprecated use EnumType.xxx */
@@ -2848,7 +2948,7 @@ public class JDFNode extends JDFElement
         VElement v=new VElement();
         Iterator it=hashSet.iterator();
         while(it.hasNext()) {
-            v.add(it.next());
+            v.add((KElement) it.next());
         }
         return v;
 
@@ -3890,7 +3990,7 @@ public class JDFNode extends JDFElement
         final VElement v = e.getChildElementVector(null ,null, null, true, 0, false);
         for (int i = 0; i < v.size(); i++)
         {
-            final KElement m = (KElement) v.elementAt(i);
+            final KElement m = v.elementAt(i);
             final String strName = m.getNodeName();
             KElement mHere = null;
             if ((strName.equals(ElementName.NODEINFO))

@@ -16,6 +16,7 @@ import org.cip4.jdflib.resource.JDFResource;
 /**
  * @deprecated use VElement instead
  */
+@Deprecated
 public class VResource extends VElement
 {
     private static final long serialVersionUID = 1L;
@@ -41,7 +42,7 @@ public class VResource extends VElement
         {
             if (m.elementAt(i) instanceof JDFResource)
             {
-                this.addElement(m.elementAt(i));
+                this.addElement((KElement) m.elementAt(i));
             }
         }
     }
@@ -52,7 +53,8 @@ public class VResource extends VElement
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "vResource[ --> " + super.toString() + " ]";
     }

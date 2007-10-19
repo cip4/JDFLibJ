@@ -115,6 +115,7 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo
 	
 /////////////////////////////////////////////////////////////////////////////   
 	
+	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		AttributeInfo ai; 
@@ -141,6 +142,7 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo
 	}
 	
 /////////////////////////////////////////////////////////////////////////////	
+	@Override
 	protected ElementInfo getTheElementInfo()
 	{
 		ElementInfo ei; 
@@ -198,6 +200,7 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 	
+	@Override
 	public boolean init()
 	{
 		Node n=getParentNode();
@@ -210,6 +213,7 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo
 		return true;
 	}
 	
+	@Override
 	public String toString()
 	{
 		return "JDFCustomerInfo[  --> " + super.toString() + " ]";
@@ -235,7 +239,7 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo
 		
 		for (int i = 0; i < v.size(); i++)
 		{
-			if (((KElement) v.elementAt(i)) instanceof JDFRefElement)
+			if ((v.elementAt(i)) instanceof JDFRefElement)
 			{
 				final JDFRefElement l = (JDFRefElement) v.elementAt(i);
 				JDFResource   r = l.getTarget();
@@ -300,7 +304,8 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo
      * @param version version that the resulting element should correspond to
      * @return true if successful
      */
-    public boolean fixVersion(EnumVersion version)
+    @Override
+	public boolean fixVersion(EnumVersion version)
     {
         if(hasAttribute(AttributeName.RREFS))
             removeAttribute(AttributeName.RREFS);
