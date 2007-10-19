@@ -1083,17 +1083,17 @@ public class JDFResource extends JDFElement
         return res;
     }
 
-    /**
-     * Call this function to get information about the node name of the 'this' resource
-     *
-     * @deprecated use getNodeName or getLocalName
-     * @return String the node name of 'this' resource
-     */
-    @Deprecated
-	public String getResourceType()
-    {
-        return getNodeName();
-    }
+//dm    /**
+//     * Call this function to get information about the node name of the 'this' resource
+//     *
+//     * @deprecated use getNodeName or getLocalName
+//     * @return String the node name of 'this' resource
+//     */
+//    @Deprecated
+//	public String getResourceType()
+//    {
+//        return getNodeName();
+//    }
 
     /**
      * Gets the resourcepool that 'this' lives in

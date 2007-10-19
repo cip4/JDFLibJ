@@ -1731,16 +1731,16 @@ public class JDFElement extends KElement
         return setID;
     }
 
-    /**
-     * Get the target element of a link (string id)
-     * @return JDFElement - the element that this reference refers to
-     * @deprecated use the respective subclasses getTarget functions
-     */
-    @Deprecated
-	public JDFResource getTarget()
-    {
-        return (JDFResource) getTarget_JDFElement(getAttribute(AttributeName.RREF), AttributeName.ID);
-    }
+//dm    /**
+//     * Get the target element of a link (string id)
+//     * @return JDFElement - the element that this reference refers to
+//     * @deprecated use the respective subclasses getTarget functions
+//     */
+//    @Deprecated
+//	public JDFResource getTarget()
+//    {
+//        return (JDFResource) getTarget_JDFElement(getAttribute(AttributeName.RREF), AttributeName.ID);
+//    }
 
     /**
      * Get the target element of a link<br>
@@ -3581,17 +3581,17 @@ public class JDFElement extends KElement
                 JDFConstants.BLANK,
                 -1);
     }
-    /**
-     * Set attribute rRefs, i.e. combine the blank separed attribute list
-     * @deprecated rRefs was deprecated in JDF 1.2
-     */
-    @Deprecated
-	public void setrRefs(VString vStr)
-    {
-        setAttribute(
-                AttributeName.RREFS,
-                StringUtil.setvString(vStr,JDFConstants.BLANK,null,null),null);
-    }
+//dm    /**
+//     * Set attribute rRefs, i.e. combine the blank separed attribute list
+//     * @deprecated rRefs was deprecated in JDF 1.2
+//     */
+//    @Deprecated
+//	public void setrRefs(VString vStr)
+//    {
+//        setAttribute(
+//                AttributeName.RREFS,
+//                StringUtil.setvString(vStr,JDFConstants.BLANK,null,null),null);
+//    }
     /**
      * Get string attribute rRefs, i.e. split the blank separed attribute list
      * @deprecated rRefs was deprecated in JDF 1.2
@@ -3725,16 +3725,16 @@ public class JDFElement extends KElement
         setAttribute(AttributeName.VERSION, enumVer.getName(), null);
     }
 
-    /**
-     * get EnumVersion attribute Version
-     * @return EnumVersion - attribute value
-     * @deprecated 060505 use getVersion(boolean);
-     */
-    @Deprecated
-	public EnumVersion getVersion()
-    {
-        return getVersion(true);
-    }
+//dm    /**
+//     * get EnumVersion attribute Version
+//     * @return EnumVersion - attribute value
+//     * @deprecated 060505 use getVersion(boolean);
+//     */
+//    @Deprecated
+//	public EnumVersion getVersion()
+//    {
+//        return getVersion(true);
+//    }
 
     /**
      * get the version of this element
