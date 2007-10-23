@@ -102,25 +102,6 @@ public class JDFVersions {
     }	
         
     /**
-     * Returns the default JDF version.
-     * @deprecated use JDFElement.getDefaultJDFVersion()
-     * @return String: JDF version string
-     */
-    public static int getDefaultVersion()
-    {
-        return JDFElement.getDefaultJDFVersion().getValue()-1;
-    }
-    /**
-     * Sets the default JDF version.
-     * @deprecated use JDFElement.setDefaultJDFVersion(v);
-     * @return String: JDF version string
-     */
-    public static void setDefaultVersion(EnumVersion v)
-    {
-        JDFElement.setDefaultJDFVersion(v);
-    }
-    
-    /**
      * Returns the JDF version that all checks are forced to.
      *
      * @return String: JDF version string
@@ -188,7 +169,8 @@ public class JDFVersions {
             validityMask   = m;
             validityOffset = o;
         }
-        public String toString(){
+        @Override
+		public String toString(){
             String s="Version: "+version.getName();
             s+="; ValidityMask: "+Long.toHexString(validityMask);
             s+="; ValidityOffset: "+validityOffset;
