@@ -120,17 +120,6 @@ public class JDFParser extends DOMParser
     }
 
     /**
-     * @deprecated - use default constructor
-     * @param strDocType
-     */
-    public JDFParser(String strDocType)
-    {
-        this();
-        if(strDocType!=null) // dummy to fool compiler
-            strDocType=null;
-    }
-
-    /**
      * @param parser
      */
     public JDFParser(JDFParser parser)
@@ -195,22 +184,6 @@ public class JDFParser extends DOMParser
     }
 
     /**
-     * parseFile - parse a file specified by strFile
-     * 
-     * @param strFile        link to the document to parse
-     * @param schemaLocation link to the schema to use, null if no validation required
-     * @return JDFDoc or null if File not found
-     * default: parseFile(strFile,null)
-     * @deprecated set the parser members instead
-     */
-    public JDFDoc parseFile(String strFile, String schemaLocation)
-    {
-        m_SchemaLocation=schemaLocation;
-        return parseFile(strFile);
-    }
-
-    
-    /**
      * parseString - parse a string specified by stringInput
      * @param stringInput string to parse
      * @return JDFDoc or null if parse failed
@@ -272,56 +245,6 @@ public class JDFParser extends DOMParser
         return jdfDoc;
     }
     
-    /**
-     * This is the sophisticated parse function, 
-     * where validation, error handlers et al. can be set
-     * 
-     * @param inSource
-     * @param schemaLocation schema location, null if no validation required
-     * @param documentClassName
-     * @param errorHandler
-     * @param bEraseEmpty   if true empty nodes are erased after parsing
-     * @param bDoNamespaces if false a second parse is done, 
-     *                      	where namespaces are ignored
-     * 
-     * @return JDFDoc
-     * 
-     * default: parseInputSource(inSource, 
-     *              null, DocumentJDFImpl.class.getName(), null, true, true);
-     * @deprecated set the parser members instead
-     */
-    public JDFDoc parseInputSource(
-            InputSource inSource,
-            String schemaLocation,
-            String documentClassName,
-            ErrorHandler errorHandler,
-            boolean bEraseEmpty,
-            boolean bDoNamespaces)
-    {
-        JDFDoc doc = null;
-        if(errorHandler instanceof XMLErrorHandler)
-        {
-            initParser(schemaLocation, documentClassName, (XMLErrorHandler)errorHandler);
-        }
-        else
-        {
-            initParser(schemaLocation, documentClassName, null);
-        }
-
-        doc = runParser(inSource, bEraseEmpty);
-        if (doc == null)
-        { // this is the error case:
-            if (!bDoNamespaces)
-            {
-                // try again, ignoring name spaces
-                setIgnoreNamespace();
-                doc = runParser(inSource, bEraseEmpty);
-            }
-        }
-
-        return doc;
-    }
-
     /**
      * @param schemaLocation
      * @param documentClassName
