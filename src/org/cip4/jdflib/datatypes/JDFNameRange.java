@@ -75,14 +75,24 @@ public class JDFNameRange extends JDFRange
      *
      * @return String
      */
-    @Override
-	public String toString()
+    public String toString()
     {
         if (getLeft().equals(getRight()))
         {
             return getRight();
         }
         return getLeft() + " ~ " + getRight();
+    }
+
+    /**
+     * getString - returns the range as a String
+     *
+     * @return String - the range as a String
+     * @deprecated 060418 use toString
+     */
+    public String getString()
+    {
+        return toString();
     }
 
     /**
@@ -102,8 +112,7 @@ public class JDFNameRange extends JDFRange
      *
      * @return boolean - true if equal, otherwise false
      */
-    @Override
-	public boolean equals(Object other)
+    public boolean equals(Object other)
     {
         if (this == other)
         {
@@ -124,8 +133,7 @@ public class JDFNameRange extends JDFRange
     /**
      * hashCode complements equals() to fulfill the equals/hashCode contract
      */
-    @Override
-	public int hashCode()
+    public int hashCode()
     {
         return HashUtil.hashCode(0, this.toString());
     }
@@ -200,25 +208,21 @@ public class JDFNameRange extends JDFRange
         return m_right;
     }
 
-    @Override
-	public boolean isPartOfRange(JDFRange ra)
+    public boolean isPartOfRange(JDFRange ra)
     {
         return this.equals(ra);
     }
 
-    @Override
-	protected Object getRightObject()
+    protected Object getRightObject()
     {
         return m_right;
     }
 
-    @Override
-	protected Object getLeftObject()
+    protected Object getLeftObject()
     {
         return m_left;
     }
-    @Override
-	protected boolean inObjectRange(Object other)
+    protected boolean inObjectRange(Object other)
     {
        return inRange((String) other);
     }

@@ -301,6 +301,18 @@ public class JDFMessage extends JDFAutoMessage
     }
 
     /**
+     * IsMessageElement - is a message with this name a message element?
+     *
+     * @return boolean
+     * @deprecated use instanceof JDFMessage
+     */
+    @Deprecated
+	public boolean isMessageElement()
+    {
+        return true;
+    }
+
+    /**
      * init
      *
      * @return boolean
@@ -384,6 +396,19 @@ public class JDFMessage extends JDFAutoMessage
     }
 
     /**
+     * isValid
+     * @deprecated
+     * @return boolean
+     */
+    @Deprecated
+	@Override
+	public boolean isValid()
+    {
+        return isValid(KElement.EnumValidationLevel.Complete);
+    }
+
+
+    /**
      * Enumeration string for enum value
      * @param EnumType value the enumeration to translate
      * @return KString the string representation of the enumeration
@@ -391,6 +416,35 @@ public class JDFMessage extends JDFAutoMessage
     public static String typeString(EnumType value)
     {
         return value.toString();
+    }
+
+    /**
+     * @deprecated use EnumType to get strings
+     * @return
+     */
+    @Deprecated
+	public static String typeString()
+    {
+        final String enums =
+            "Unknown,Events,KnownControllers,KnownDevices,KnownJDFServices,KnownMessages,"
+            + "RepeatMessages,StopPersistentChannel,Occupation,Resource,"
+            + "Status,Track,PipeClose,PipePull,PipePush,PipePause,AbortQueueEntry,"
+            + "HoldQueueEntry,removeQueueEntry,ResubmitQueueEntry,"
+            + "ResumeQueueEntry,SetQueueEntryPosition,SetQueueEntryPriority,"
+            + "SubmitQueueEntry,CloseQueue,FlushQueue,HoldQueue,OpenQueue,QueueEntryStatus,QueueStatus,"
+            + "ResumeQueue,SubmissionMethods";
+        return enums;
+    }
+
+    /**
+     * Set attribute Type
+     * @param value the value to set the attribute to
+     * @deprecated use setType()
+     */
+    @Deprecated
+	public void setEnumType(EnumType value)
+    {
+        setType(value);
     }
 
     /**
@@ -1061,6 +1115,17 @@ public class JDFMessage extends JDFAutoMessage
     }
 
     /**
+     * @deprecated use appendValidElement(elementName, null);
+     * @param elementName
+     * @return
+     */
+    @Deprecated
+	public KElement appendValidElement(String elementName)
+    {
+        return appendValidElement(elementName, null);
+    }
+
+    /**
      * get a (valid) element<br>
      * throws <code>JDFException</code> if the element is not valid
      * @param nodeName     name of the element to get
@@ -1617,6 +1682,18 @@ public class JDFMessage extends JDFAutoMessage
     {
         return (JDFPipeParams) getValidElement(ElementName.PIPEPARAMS, null,0);
     }
+    /**
+     * get iSkip'th element <code>PipeParams</code>
+     * @param iSkip number of elements to skip
+     * @deprecated - use the 0 parameter version
+     * @return JDFPipeParams: the element
+     */
+    @Deprecated
+	public JDFPipeParams getPipeParams(int iSkip)
+    {
+        return (JDFPipeParams) getValidElement(ElementName.PIPEPARAMS, null, iSkip);
+    }
+    //////////////////////////////////////////////////////////////////////
 
     //////////////////////////////////////////////////////////////////////
 
@@ -1981,6 +2058,17 @@ public class JDFMessage extends JDFAutoMessage
     }
     /////////////////////////////////////////////////////////////////////
 
+    /**
+     * get iSkip'th element StatusQuParams
+     * @param iSkip number of elements to skip
+     * @return JDFStatusQuParams: the element
+     * @deprecated - use 0 parameter version
+     */
+    @Deprecated
+	public JDFStatusQuParams getStatusQuParams(int iSkip)
+    {
+        return (JDFStatusQuParams) getValidElement(ElementName.STATUSQUPARAMS, null, iSkip);
+    }
     /**
      * get iSkip'th element StatusQuParams
      * @param iSkip number of elements to skip

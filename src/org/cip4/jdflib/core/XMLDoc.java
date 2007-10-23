@@ -142,8 +142,7 @@ public class XMLDoc
         getCreateXMLDocUserData();
     }
 
-    @Override
-	public boolean equals(Object o)
+    public boolean equals(Object o)
     {
         if (o == null)
             return false;
@@ -157,8 +156,7 @@ public class XMLDoc
         return m_doc.equals(d.m_doc);
     }
 
-    @Override
-	public int hashCode() 
+    public int hashCode() 
     {
         return HashUtil.hashCode(0, this.m_doc);
     }
@@ -206,6 +204,17 @@ public class XMLDoc
      * constructor
      *
      * @param strDocType ElementName.JDF, ElementName.JMF, "Config" ...
+     * @deprecated use XMLDoc(String strDocType, String namespaceURI)
+     */
+    public XMLDoc(String strDocType)
+    {
+        new XMLDoc(strDocType,null);
+    }
+
+    /**
+     * constructor
+     *
+     * @param strDocType ElementName.JDF, ElementName.JMF, "Config" ...
      * @param namespaceURI namespace to be used by the new XMLDoc
      */
     public XMLDoc(String strDocType, String namespaceURI)
@@ -221,6 +230,17 @@ public class XMLDoc
         getCreateXMLDocUserData();
     }
 
+    /**
+     * 
+     * @param strDocType
+     * @return KElement
+     * @deprecated use setRoot(String strDocType, String namespaceURI)
+     *
+     */
+    public KElement setRoot(String strDocType)
+    {
+        return setRoot(strDocType,JDFElement.getSchemaURL());
+    }
     //**************************************** Methods *********************************************
     /**
      * initialize a new root of strDocType in the document
@@ -302,7 +322,7 @@ public class XMLDoc
         try
         {
             outStream = new ByteArrayOutputStream(4096);
-            write2Stream(outStream, indent, true);
+            write2Stream(outStream, indent);
             strResult = outStream.toString("UTF-8");
         }
         catch (IOException e)
@@ -329,6 +349,21 @@ public class XMLDoc
         }
 
         return strResult;
+    }
+
+    /**
+     * write2File - write to a file; Create if it doesn't exist always assume utf-8 encoding
+     *
+     * @param oFilePath
+     * @param indent
+     *
+     * @return boolean
+     * @deprecated 060419 use write2File(oFilePath, indent, true);
+     * @default write2File(String oFilePath, 0)
+     */    
+    public boolean write2File(String oFilePath, int indent)
+    {
+        return write2File(oFilePath, indent, true);
     }
 
     /**
@@ -408,6 +443,17 @@ public class XMLDoc
        return fSuccess;
    }
 
+    /**
+     * @deprecated use write2Stream(outStream, indent, true);
+     * @param outStream
+     * @param indent
+     * @throws IOException
+     */
+    public void write2Stream(OutputStream outStream, int indent) throws IOException
+    {
+        write2Stream(outStream, indent, indent==0);
+    }
+
     public void write2Stream(OutputStream outStream, int indent, boolean bPreserveSpace) throws IOException
     {        
         final OutputFormat format = new OutputFormat(m_doc);
@@ -433,6 +479,54 @@ public class XMLDoc
 
         serial.serialize(m_doc);        
     }
+
+    /**
+     * @deprecated 060306
+     * @param elem
+     * @param outStream
+     * @param indent
+     * @throws IOException
+     */
+    public static void write2StreamStatic(Element elem, OutputStream outStream, int indent) throws IOException
+    {
+        write2StreamStatic(elem, outStream, indent, true);
+    }
+
+    /**
+     * @deprecated 060306
+     * @param elem
+     * @param outStream
+     * @param indent
+     * @param bPreserveSpace
+     * @throws IOException
+     */
+    public static void write2StreamStatic(Element elem, OutputStream outStream, int indent, boolean bPreserveSpace) throws IOException
+    {
+        final Document doc = elem.getOwnerDocument();
+
+        final OutputFormat format = new OutputFormat(doc);
+
+        if(bPreserveSpace)
+            format.setPreserveSpace(true);
+
+        if (indent < 1)
+        {
+            format.setIndenting(false);
+        }
+        else
+        {
+            format.setIndenting(true);
+            format.setIndent(indent);
+            //TODO remove schema defaulted attributes when serializing
+        }
+
+        final XMLSerializer serial = new XMLSerializer(outStream, format);
+//      serial.setNamespaces(false);    // ###DOM_1_nodes
+        serial.setNamespaces(true);    
+        serial.asDOMSerializer();
+        serial.serialize(elem);
+    }
+
 
     /**
      * getDoctype
@@ -1199,8 +1293,7 @@ public class XMLDoc
      * @return Object
      * @throws CloneNotSupportedException
      */
-    @Override
-	public Object clone() 
+    public Object clone() 
     {
         XMLDoc clon=new XMLDoc();
         if(m_doc!=null)
@@ -1299,8 +1392,7 @@ public class XMLDoc
      *
      * @return String
      */
-    @Override
-	public String toString()
+    public String toString()
     {
         return write2String(2);
     }

@@ -80,7 +80,16 @@ package org.cip4.jdflib.core;
 public abstract class JDFConstants
 {
     public static final String JDFNAMESPACE         = "http://www.CIP4.org/JDFSchema_1_1";
+    /**
+     * @deprecated use null for wildcard
+     */
+    public static final String WILDCARD             = "*";
     public static final String EMPTYSTRING          = "";
+    /**
+     * @deprecated use null for no namespace check
+     */
+    public static final String NONAMESPACE          = EMPTYSTRING;
+    /** @deprecated */  public static final String IMPROBABLE_STRING    = "\"\'";
     public static final String COMMA                = ",";
     public static final String BLANK                = " ";
     public static final String COLON                = ":";
@@ -99,6 +108,7 @@ public abstract class JDFConstants
     public static final String XMLNS                = "xmlns";
     public static final String XSI                  = "xsi";
     
+    /** @deprecated use null (not "null") */  public static final String NULL = "null";
     public static final String TRUE                 = "true";
     public static final String FALSE                = "false";
     
@@ -107,6 +117,11 @@ public abstract class JDFConstants
     
     public static final String INTERNAL             = "Internal";
     
+    // the positive INF value 0x7FEDCBAA
+    /** @deprecated */  public static final long POSINF_HEX             = 0x7FEDCBAA;
+    // the negative INF value 0x80123456
+    /** @deprecated */  public static final long NEGINF_HEX             = 0x80123456;
+
     public static final String INPUT_ZEROTOINFINITY = "i*";
     public static final String INPUT_ONETOINFINITY  = "i+";
     public static final String INPUT_ZEROTOONE      = "i?";
@@ -252,6 +267,7 @@ public abstract class JDFConstants
      * Constants EnumActivation
      * Used by e.g. JDFNode - Table 3-3
      */
+    /** @deprecated */     public static final String ACTIVATION_UNKNOWN      = "Unknown";
     public static final String ACTIVATION_INACTIVE     = "Inactive";
     public static final String ACTIVATION_INFORMATIVE  = "Informative";
     public static final String ACTIVATION_HELD         = "Held";
@@ -262,6 +278,7 @@ public abstract class JDFConstants
     /** Constants EnumPartUsage
      *  Used by e.g. JDFResource
      */
+    /** @deprecated */     public static final String PARTUSAGE_UNKNOWN       = "Unknown";
     public static final String PARTUSAGE_EXPLICIT      = "Explicit";
     public static final String PARTUSAGE_IMPLICIT      = "Implicit";
     public static final String PARTUSAGE_SPARSE        = "Sparse";
@@ -269,6 +286,7 @@ public abstract class JDFConstants
     /** Constants EnumLotControl
      *  Used by JDFResource
      */
+    /** @deprecated */      public static final String LOTCONTROL_UNKNOWN       = "Unknown";
     public static final String LOTCONTROL_CONTROLLED    = "Controlled";
     public static final String LOTCONTROL_NOTCONTROLLED = "NotControlled";
       
@@ -276,6 +294,7 @@ public abstract class JDFConstants
     * Enumeration for partition keys
     * Used by e.g. JDFResource 
     */
+ /** @deprecated */   public static final String PARTIDKEY_UNKNOWN                = "Unknown";
     public static final String PARTIDKEY_BINDERYSIGNATURENAME   = "BinderySignatureName";
     public static final String PARTIDKEY_BLOCKNAME              = "BlockName";
     public static final String PARTIDKEY_BUNDLEITEMINDEX        = "BundleItemIndex"; 
@@ -317,6 +336,7 @@ public abstract class JDFConstants
   * Used by e.g. JDFSpanBase
   */
 
+    /** @deprecated */  public static final String DATATYPE_UNKNOWN           	   = "Unknown";
     public static final String DATATYPE_DURATION               = "DurationSpan";
     public static final String DATATYPE_ENUMERATION            = "EnumerationSpan";
     public static final String DATATYPE_INTEGER                = "IntegerSpan";
@@ -333,6 +353,7 @@ public abstract class JDFConstants
      * Enumeration for Priority 7.1.1.1
      * Used by e.g. JDFSpanBase
      */
+    /** @deprecated */  public static final String PRIORITY_UNKNOWN            = "Unknown";
     public static final String PRIORITY_NONE               = "None";
     public static final String PRIORITY_SUGGESTED          = "Suggested";
     public static final String PRIORITY_REQUIRED           = "Required";
@@ -342,6 +363,7 @@ public abstract class JDFConstants
   * Enumeration for ProcessUsage
   * Used by e.g JDFNode
   */
+    /** @deprecated */  public static final String PROCESSUSAGE_UNKNOWN         = "Unknown";
     public static final String PROCESSUSAGE_ANYINPUT        = "AnyInput";
     public static final String PROCESSUSAGE_ANYOUTPUT       = "AnyOutput";
     public static final String PROCESSUSAGE_ANY             = "Any";
@@ -380,6 +402,7 @@ public abstract class JDFConstants
   */ 
     public static final String EnumType_Prefix = "Type_";
  
+    /** @deprecated */  public static final String TYPE_UNKNOWN                 = "Unknown";
     public static final String TYPE_PRODUCT                 = "Product";
     public static final String TYPE_APPROVAL                = "Approval";
     public static final String TYPE_BUFFER                  = "Buffer";

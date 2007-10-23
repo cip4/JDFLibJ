@@ -136,6 +136,8 @@ import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 
 /**
@@ -350,6 +352,15 @@ public class JDFElement extends KElement
         {
             return iterator(EnumOrientation.class);
         }
+        /**
+         * @return a Vector with all String representatives of the enums
+         * @deprecated
+         */
+        @Deprecated
+		public static Vector getNamesVector()
+        {
+            return StringUtil.getNamesVector(EnumOrientation.class);
+        }
 
         // enums accordng to JDF spec A.3.3.3, Table 3-3 Orientation
         public static final EnumOrientation Flip0       = new EnumOrientation(JDFConstants.ORIENTATION_FLIP0);
@@ -423,6 +434,22 @@ public class JDFElement extends KElement
         public static Iterator iterator()
         {
             return iterator(EnumXYRelation.class);
+        }
+        /**
+         * @return a Vector with all String representatives of the enums
+         * @deprecated
+         */
+        @Deprecated
+		public static Vector getNamesVector()
+        {
+            final Vector namesVector = new Vector();
+            final Iterator it = iterator(EnumXYRelation.class);
+            while (it.hasNext())
+            {
+                namesVector.addElement(((ValuedEnum) it.next()).getName());
+            }
+
+            return namesVector;
         }
 
         // enums accordng to JDF spec 3.1.2, Table 3-3 Status
@@ -704,6 +731,23 @@ public class JDFElement extends KElement
             return iterator(EnumNodeStatus.class);
         }
 
+        /**
+         * @return a Vector with all String representatives of the enums
+         * @deprecated
+         */
+        @Deprecated
+		public static Vector getNamesVector()
+        {
+            final Vector namesVector = new Vector();
+            final Iterator it = iterator(EnumNodeStatus.class);
+            while (it.hasNext())
+            {
+                namesVector.addElement(((ValuedEnum) it.next()).getName());
+            }
+
+            return namesVector;
+        }
+
         // enums accordng to JDF spec Table 3-4 Contents of a node
         public static final EnumNodeStatus Waiting           = new EnumNodeStatus(JDFConstants.WAITING);
         public static final EnumNodeStatus TestRunInProgress = new EnumNodeStatus(JDFConstants.TESTRUNINPROGRESS);
@@ -887,7 +931,22 @@ public class JDFElement extends KElement
         {
             return iterator(EnumNamedColor.class);
         }
+        /**
+         * @return a Vector with all String representatives of the enums
+         * @deprecated
+         */
+        @Deprecated
+		public static Vector getNamesVector()
+        {
+            final Vector namesVector = new Vector();
+            final Iterator it = iterator(EnumNamedColor.class);
+            while (it.hasNext())
+            {
+                namesVector.addElement(((ValuedEnum) it.next()).getName());
+            }
 
+            return namesVector;
+        }
         public static final EnumNamedColor White                = new EnumNamedColor(JDFConstants.NAMEDCOLOR_WHITE);
         public static final EnumNamedColor Black                = new EnumNamedColor(JDFConstants.NAMEDCOLOR_BLACK);
         public static final EnumNamedColor Gray                 = new EnumNamedColor(JDFConstants.NAMEDCOLOR_GRAY);
@@ -1174,6 +1233,50 @@ public class JDFElement extends KElement
             }
         }
         return bRet;
+    }
+
+    /**
+     * Check Existance of attribute SettingsPolicy
+     * @param bInherit recurse through ancestors when searching
+     * @return true if attribute exists
+     * @deprecated use hasAttribute
+     */
+    @Deprecated
+	public boolean hasSettingsPolicy(boolean bInherit)
+    {
+        return hasAttribute(AttributeName.SETTINGSPOLICY, null, bInherit);
+    }
+
+    /**
+     * Remove attribute SettingsPolicy
+     * @deprecated use removeAttribute
+     */
+    @Deprecated
+	public void removeSettingsPolicy()
+    {
+        removeAttribute(AttributeName.SETTINGSPOLICY, null);
+    }
+
+    /**
+     * Remove attribute BestEffortExceptions
+     * @deprecated use removeAttribute
+     */
+    @Deprecated
+	public void removeBestEffortExceptions()
+    {
+        removeAttribute(AttributeName.BESTEFFORTEXCEPTIONS, null);
+    }
+
+    /**
+     * Gets the one and reference to an ID
+     *
+     * @return String the rRef attribute
+     * @deprecated use getrRef of the coresponding sub classes instead
+     */
+    @Deprecated
+	public String getHRef()
+    {
+        return getAttribute(JDFConstants.RREF, null, JDFConstants.EMPTYSTRING);
     }
 
     /**
@@ -1495,6 +1598,24 @@ public class JDFElement extends KElement
     }
 
     /**
+     * Sets an element attribute
+     *
+     * @param key          the name of the attribute to set
+     * @param value        the JDFNameRange to set
+     * @param nameSpaceURI the nameSpace the attribute is in
+     * @deprecated
+     * @default setvStringAttribute(key, value, null)
+     */
+    @Deprecated
+	public void setvStringAttribute(
+            String key,
+            JDFNameRange value,
+            String nameSpaceURI)
+    {
+        setAttribute(key, value.toString(), nameSpaceURI);
+    }
+
+    /**
      * return true if no more than one of att1 or att2 exists or
      * exactly one of att1 or att2 exists depending on level
      *
@@ -1610,6 +1731,16 @@ public class JDFElement extends KElement
         return setID;
     }
 
+//dm    /**
+//     * Get the target element of a link (string id)
+//     * @return JDFElement - the element that this reference refers to
+//     * @deprecated use the respective subclasses getTarget functions
+//     */
+//    @Deprecated
+//	public JDFResource getTarget()
+//    {
+//        return (JDFResource) getTarget_JDFElement(getAttribute(AttributeName.RREF), AttributeName.ID);
+//    }
 
     /**
      * Get the target element of a link<br>
@@ -1644,12 +1775,127 @@ public class JDFElement extends KElement
     }
 
     /**
+     * IsRefElement - is this thing a RefElement?
+     *
+     * @return true, if this is a refElement
+     * @deprecated use instanceof JDFRefElement
+     */
+    @Deprecated
+	public boolean isRefElement()
+    {
+        return this instanceof JDFRefElement;
+    }
+
+    /**
+     * IsRefElement - is this thing a RefElement?
+     *
+     * @return true, if this is a refElement
+     * @deprecated use instanceof JDFRefElement
+     */
+    @Deprecated
+	public static boolean isRefElementStatic(KElement kElem)
+    {
+        return kElem instanceof JDFRefElement;
+    }
+
+    /**
+     * tests whether this Element is a Resource.
+     * @return boolean - true, if it is a Resource.
+     * @deprecated use instanceof JDFResource instead
+     */
+    @Deprecated
+	public boolean isResource()
+    {
+        return this instanceof JDFResource;
+    }
+
+    /**
+     * tests whether this Element is a Resource.
+     * @return boolean - true, if it is a Resource.
+     * @deprecated use instanceof JDFResource instead
+     */
+    @Deprecated
+	static public boolean isResourceStatic(KElement e)
+    {
+        return e instanceof JDFResource;
+    }
+
+    /**
      * is this thing a ResourceUpdate?
      * @return true, if this is a ResourceUpdate
      */
     public boolean isResourceUpdate()
     {
         return this.getLocalName().endsWith(ElementName.UPDATE);
+    }
+
+    /**
+     * Method IsResourceLink.
+     * @return boolean
+     * @deprecated use instanceof JDFResourceLink instead
+     */
+    @Deprecated
+	public boolean isResourceLink()
+    {
+        return this instanceof JDFResourceLink;
+    }
+
+    /**
+     * Method IsResourceLinkStatic.
+     * @param kElem
+     * @return boolean
+     * @deprecated use instanceof JDFResourceLink instead
+     *
+     */
+    @Deprecated
+	public static boolean isResourceLinkStatic(KElement kElem)
+    {
+        return kElem instanceof JDFResourceLink;
+    }
+
+    /**
+     * Check, if this is an Comment element
+     * @return boolean - true, if this is an Comment-Element, otherwise false
+     * @deprecated use instanceof JDFResourceLink instead
+     */
+    @Deprecated
+	public boolean isComment()
+    {
+        return this instanceof JDFComment;
+    }
+
+    /**
+     * Method isCommentStatic.
+     * @param kElem
+     * @return boolean - true, if this is an Comment-Element, otherwise false
+     * @deprecated use instanceof JDFComment instead
+     */
+    @Deprecated
+	public static boolean isCommentStatic(KElement kElem)
+    {
+        return kElem instanceof JDFComment;
+    }
+
+    /**
+     * is this thing a JDF Node?
+     * @return true if this is a JDF Node
+     * @deprecated use instanceof JDFNode instead
+     */
+    @Deprecated
+	public boolean isJDFNode()
+    {
+        return this instanceof JDFNode;
+    }
+
+    /**
+     * Method IsInJDFNameSpace.
+     * @return boolean
+     * @deprecated - use isInJDFNameSpaceStatic(kElem)
+     */
+    @Deprecated
+	public boolean isInJDFNameSpace()
+    {
+        return isInJDFNameSpaceStatic(this);
     }
 
     /**
@@ -1769,6 +2015,30 @@ public class JDFElement extends KElement
         }
         return v;
     }
+
+    /**
+     * UpDates rRefs attribute of this Element, corresponding to the child
+     * reference Elements of this Element.
+     * @deprecated use KElement.fillHashSet(ElementName.RREF,null,hashSet)
+     */
+    @Deprecated
+	public VString upDaterRefs()
+    {
+        final VString vrRefs = new VString();
+        final VElement v =
+            getChildrenByTagName(null, null, new JDFAttributeMap(JDFConstants.RREF, ""),false, true, 0);
+        // grabemall
+
+        final int size = v.size();
+        for (int i = 0; i < size; i++)
+        {
+            final KElement el_i = (v.elementAt(i));
+            vrRefs.add(el_i.getAttribute(JDFConstants.RREF, null, JDFConstants.EMPTYSTRING));
+        }
+        vrRefs.unify();
+        return vrRefs;
+    }
+
 
     /**
      * inline refelements that match nodename and nameSpaceURI
@@ -2257,6 +2527,16 @@ public class JDFElement extends KElement
 
 
     /**
+     * create a node with the current local time in ISO format
+     * @deprecated use setAttributeNameTimeStamp(AttributeName.TIMESTAMP, null);
+     */
+    @Deprecated
+	public void setTimeStamp()
+    {
+        setAttributeNameTimeStamp(AttributeName.TIMESTAMP, null);
+    }
+
+    /**
      * put a timestamp in an attribute of the current node
      *
      * @param attributeName the attribute name to timestamp
@@ -2268,6 +2548,28 @@ public class JDFElement extends KElement
 			timestamp = new JDFDate();
 		}
         setAttribute(attributeName, timestamp.getDateTimeISO(), null);
+    }
+
+    /**
+     * create a string link from an integer
+     *
+     * @param id the integer value to convert to an ID
+     * @deprecated 060307 internal legacy method
+     * @return String - a unique ID string
+     */
+    @Deprecated
+	public String idString(int id)
+    {
+        String s  = JDFConstants.LINK;
+        String strID = Integer.toString(id);
+
+        for (int i = JDFConstants.LINK.length() - strID.length(); i > 0; i--)
+        {
+            s += "0";
+        }
+
+        s += strID;
+        return s;
     }
 
     /**
@@ -2653,6 +2955,120 @@ public class JDFElement extends KElement
     }
 
     /**
+     * defines an enumerated list of attributes ; used by the automated code generator
+     *
+     * @param key          the attribute name
+     * @param v            comma separated string of allowed values
+     * @param nameSpaceURI attribute namespace uri
+     * @param def          the default enum if it does not exist
+     * @param bInherit     if true: recurse into parent elements when searching the attribute as well
+     *
+     * @since 300402
+     *
+     * @return int - the enumeration equivalent of the attribute of the attribute def if
+     * @deprecated use EnumXYZ.getEnum(getAttribute(key, namespaceURI, def)
+     * @default getEnumAttribute(key, v, null, -1, false)
+     */
+    @Deprecated
+	public int getEnumAttribute(
+            String key,
+            Vector v,
+            String nameSpaceURI,
+            int def,
+            boolean bInherit)
+    {
+        String s = null;
+        int i = def;
+
+        if (bInherit)
+        {
+            s = getInheritedAttribute(key, nameSpaceURI, JDFConstants.EMPTYSTRING);
+        }
+        else
+        {
+            s = getAttribute(key, nameSpaceURI, JDFConstants.EMPTYSTRING);
+        }
+
+        if (!s.equals(JDFConstants.EMPTYSTRING) && v.contains(s))
+        {
+            i = v.indexOf(s);
+        }
+
+        return i;
+    }
+
+    /**
+     * defines an enumerated list of attributes ; used by the automated code generator
+     *
+     * @param key          the attribute name
+     * @param v            comma separated string of allowed values
+     * @param nameSpaceURI attribute namespace uri
+     * @param def          the default enum if it does not exist
+     * @param bInherit     if true: recurse into parent elements when searching the attribute as well
+     *
+     * @return the Vector of enumeration equivalents of the attribute
+     * @since 300402
+     * @deprecated use getEnumerationsAttribute(key, nameSpaceURI, EnumXYZ.getEnum(0), bInherit)
+     * @default getEnumerationsAttribute(key, allowedValues, null, -1, false)
+     */
+    @Deprecated
+	public Vector getEnumerationsAttribute(
+            String key,
+            Vector v,
+            String nameSpaceURI,
+            int def,
+            boolean bInherit)
+    {
+        final VString vAllowed = new VString();
+        vAllowed.addAll(v);
+
+        String strAtt = JDFConstants.EMPTYSTRING;
+        VString vs    = new VString();
+        Vector vAtts  = null;
+
+        if (bInherit)
+        {
+            strAtt = getInheritedAttribute(key, nameSpaceURI, JDFConstants.EMPTYSTRING);
+        }
+        else
+        {
+            strAtt = getAttribute(key, nameSpaceURI, JDFConstants.EMPTYSTRING);
+        }
+        if (strAtt.equals(JDFConstants.EMPTYSTRING)) {
+			vs.add(strAtt);
+		}
+        vAtts  = StringUtil.tokenize(strAtt, JDFConstants.BLANK, false);
+        vs.addAll(vAtts);
+
+        final Vector ret = new Vector();
+        if (vs.isEmpty())
+        {
+            if (def >= 0)
+            {
+                ret.addElement(new Integer(def));
+            }
+            return ret;
+        }
+
+        // 080502 RP was vAllowed,size - oops
+        for (int i = 0; i < vs.size(); i++)
+        {
+            final int enumIndex = vAllowed.index(vs.stringAt(i));
+            if (enumIndex >= 0)
+            {
+                ret.addElement(new Integer(enumIndex));
+            }
+            else
+            {
+                // illegal value
+                ret.addElement(new Integer(-1));
+            }
+        }
+
+        return ret;
+    }
+
+    /**
      * defines an enumerated list of attributes; used by the automated code generator
      *
      * @param key the attribute local name
@@ -2751,6 +3167,122 @@ public class JDFElement extends KElement
 
 
 
+    /**
+     * is the attribute valid and of type iType? <br>
+     * iType is of type EnumAttributeType, but may be expanded in child classes
+     *
+     * @param key          the attribute name
+     * @param iType        the attribute type
+     * @param bRequired    true if this attribute is required
+     * @param nameSpaceURI attribute namespace uri
+     *
+     * @return boolean: true if the attribute is valid
+     *
+     * @tbd implement URL validation
+     * @deprecated clean up attributeInfo tables instead
+     *  use KElement public boolean validAttribute(String key,String nameSpaceURI, EnumValidationLevel level)
+     *
+     * @default ValidAttribute(key, iType, bRequired, null)
+     */
+    @Deprecated
+	public boolean validAttribute(
+            String key,
+            AttributeInfo.EnumAttributeType iType,
+            boolean bRequired,
+            String nameSpaceURI)
+    {
+
+        if (!hasAttribute(key, null, false))
+        {
+            return !bRequired;
+        }
+        final String val = getAttribute(key, nameSpaceURI, null);
+        return AttributeInfo.validStringForType(val,iType,null);
+    }
+
+    /**
+     * ValidEnumAttribute - is the attribute valid and does it fit allowedValues, iType is of type
+     * EnumAttributeType but may be expanded in child classes
+     *
+     * @param key           the attribute name
+     * @param v             Vector with all valid enums
+     * @param bRequired     true if this attribute is required
+     * @param nameSpaceURI  attribute namespace uri
+     *
+     * @return booelan - true if the attribute is valid
+     * @deprecated use getTheAttributeInfo instead
+     * @default ValidEnumAttribute(key, v, bRequired, null)
+     */
+    @Deprecated
+	public boolean validEnumAttribute(
+            String key,
+            Vector v,
+            boolean bRequired,
+            String nameSpaceURI)
+    {
+        if (!hasAttribute(key, nameSpaceURI, false))
+        {
+            return !bRequired;
+        }
+        return getEnumAttribute(key, v, nameSpaceURI, -1, false) >= 0;
+    }
+
+    /**
+     * is the attribute valid and does it fit allowedValues.
+     * iType is of type EnumAttributeType but may be expanded in child classes
+     * @param key the attribute name
+     * @param vs comma separated string of allowed values
+     * @param bRequired true if this attribute is required
+     * @param nameSpaceURI attribute namespace uri
+     * @return true, if the attribute is valid
+     * @deprecated use getTheAttributeInfo instead
+     */
+    @Deprecated
+	public boolean validEnumerationsAttribute(
+            String key,
+            Vector vs,
+            boolean bRequired,
+            String nameSpaceURI)
+    {
+        if (!hasAttribute(key, nameSpaceURI, false))
+        {
+            return !bRequired;
+        }
+
+        final Vector v = getEnumerationsAttribute(key, vs, nameSpaceURI, -1, false);
+
+        for (int i = 0; i < v.size(); i++)
+        {
+            if (((Integer) v.elementAt(i)).intValue() == -1)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * get the string value from an enumerated set of values
+     *
+     * @param value         - the enum that is to be translated to a string
+     * @param allowedValues - comma separated string of allowed values
+     * @deprecated use EnumXYZ.getEnum(int)
+     * @return String - the string for the enum
+     */
+    @Deprecated
+	public String getEnumString(int value, String allowedValues)
+    {
+        final Vector vs = new Vector();
+        vs.addAll(StringUtil.tokenize(allowedValues, JDFConstants.COMMA, false));
+
+        if (value >= vs.size())
+        {
+            return JDFConstants.EMPTYSTRING;
+        }
+
+        return (String) vs.elementAt(value);
+    }
     /**
      * Get the document object that owns this
      *
@@ -2903,6 +3435,35 @@ public class JDFElement extends KElement
 
 
     /**
+     * returns true if the enumeration level is either Complete
+     * or RecursiveComplete, i.e. if the parameter is required
+     * @param level the level to check
+     * @return true if required
+     * @deprecated use {@link EnumValidationLevel}.isRequired()
+     */
+    @Deprecated
+	public static boolean requiredLevel(EnumValidationLevel level)
+    {
+        return EnumValidationLevel.isRequired(level);
+    }
+
+    /**
+     * GetHRefs - get inter-resource linked resource IDs
+     *
+     * @param vDoneRefs
+     * @param bRecurse if true, recurse followed refs
+     *
+     * @return VString
+     * @deprecated use getHRefs(VString vDoneRefs, boolean bRecurse, boolean bExpand)
+     * @default GetHRefs(null, false);
+     */
+    @Deprecated
+	public VString getHRefs(VString vDoneRefs, boolean bRecurse)
+    {
+        return getHRefs(vDoneRefs,bRecurse,false);
+    }
+
+    /**
      * GetHRefs - get inter-resource linked resource IDs
      *
      * @param vDoneRefs (use null by default)
@@ -2960,6 +3521,18 @@ public class JDFElement extends KElement
 
     /**
      * get inter-resource linked resource vector
+     * @param bRecurse
+     * @deprecated use getvHRefRes(true,false);
+     * @return VElement
+     */
+    @Deprecated
+	public VElement getvHRefRes(boolean bRecurse)
+    {
+        return getvHRefRes(bRecurse,false);
+    }
+
+    /**
+     * get inter-resource linked resource vector
      * @param bRecurse if true, recurse followed links
      * @param bExpand if true, expand partitioned resources
      *        and follow the refs from the leaves
@@ -2980,6 +3553,61 @@ public class JDFElement extends KElement
         }
 
         return v;
+    }
+
+    /**
+     * Append to attribute rRefs if it is not yet in the list
+     * @param value the rRef token to append
+     * @deprecated rRefs was deprecated in JDF 1.2
+     */
+    @Deprecated
+	public void appendrRefs(String value)
+    {
+        appendAttribute(AttributeName.RREFS, value, null, JDFConstants.BLANK, true);
+    }
+
+    /**
+     * Remove value from attribute rRefs if it is  in the list
+     * @param value the rRef token to remove from the NMTOKENS list
+     * @deprecated rRefs was deprecated in JDF 1.2
+     */
+    @Deprecated
+	public int removeFromrRefs(String value)
+    {
+        return removeFromAttribute(
+                AttributeName.RREFS,
+                value,
+                null,
+                JDFConstants.BLANK,
+                -1);
+    }
+//dm    /**
+//     * Set attribute rRefs, i.e. combine the blank separed attribute list
+//     * @deprecated rRefs was deprecated in JDF 1.2
+//     */
+//    @Deprecated
+//	public void setrRefs(VString vStr)
+//    {
+//        setAttribute(
+//                AttributeName.RREFS,
+//                StringUtil.setvString(vStr,JDFConstants.BLANK,null,null),null);
+//    }
+    /**
+     * Get string attribute rRefs, i.e. split the blank separed attribute list
+     * @deprecated rRefs was deprecated in JDF 1.2
+     */
+    @Deprecated
+	public VString getrRefs()
+    {
+        final VString vStr = new VString();
+        vStr.setAllStrings(
+                getAttribute_KElement(
+                        AttributeName.RREFS,
+                        null,
+                        JDFConstants.EMPTYSTRING),
+                        JDFConstants.BLANK);
+
+        return vStr;
     }
 
     /**
@@ -3071,6 +3699,24 @@ public class JDFElement extends KElement
     }
 
     /**
+     * returns the official JDF version string
+     *
+     * @return String: the inherited version information or "1.3" if no valid
+     *                 version info was found
+     * @deprecated use getDefaultJDFVersion()
+     */
+    @Deprecated
+	public final String version()
+    {
+        String ver = getInheritedAttribute(AttributeName.VERSION, null, JDFConstants.EMPTYSTRING);
+        if(JDFConstants.EMPTYSTRING.equals(ver))
+        {
+            return JDFConstants.VERSION_1_3;
+        }
+        return JDFElement.EnumVersion.getEnum(ver).getName();
+    }
+
+    /**
      * set Version to enumVer
      * @param enumVer the EnumVersion to set
      */
@@ -3078,6 +3724,17 @@ public class JDFElement extends KElement
     {
         setAttribute(AttributeName.VERSION, enumVer.getName(), null);
     }
+
+//dm    /**
+//     * get EnumVersion attribute Version
+//     * @return EnumVersion - attribute value
+//     * @deprecated 060505 use getVersion(boolean);
+//     */
+//    @Deprecated
+//	public EnumVersion getVersion()
+//    {
+//        return getVersion(true);
+//    }
 
     /**
      * get the version of this element
@@ -3120,6 +3777,17 @@ public class JDFElement extends KElement
     {
         private static final long serialVersionUID = 1L;
         private static int m_startValue = 0;
+
+        /**
+         * @see java.lang.Object#toString()
+         * @deprecated just for compiling PrintReady, to be removed afterwards
+         */
+        @Deprecated
+		@Override
+		public String toString()
+        {
+            return getName();
+        }
 
         private EnumVersion(String name)
         {
@@ -3186,6 +3854,13 @@ public class JDFElement extends KElement
             return getValue()>other.getValue();
         }
 
+
+        /**
+         * @deprecated EnumVersion.Unknown
+         */
+        @Deprecated
+		public static final EnumVersion Unknown = new EnumVersion(JDFConstants.UNKNOWN);
+
         public static final EnumVersion Version_1_0 = new EnumVersion(JDFConstants.VERSION_1_0);
         public static final EnumVersion Version_1_1 = new EnumVersion(JDFConstants.VERSION_1_1);
         public static final EnumVersion Version_1_2 = new EnumVersion(JDFConstants.VERSION_1_2);
@@ -3196,6 +3871,78 @@ public class JDFElement extends KElement
         public static final EnumVersion Version_1_7 = new EnumVersion(JDFConstants.VERSION_1_7);
         public static final EnumVersion Version_1_8 = new EnumVersion(JDFConstants.VERSION_1_8);
         public static final EnumVersion Version_1_9 = new EnumVersion(JDFConstants.VERSION_1_9);
+
+    }
+
+    /**
+     * @param enumName
+     * @return EnumVersion
+     * @deprecated use EnumVersion.getEnum
+     */
+    @Deprecated
+	public static EnumVersion stringToVersion(String enumName)
+    {
+        return EnumVersion.getEnum(enumName);
+    }
+
+
+
+    /**
+     * Method getChildElements.
+     * @return JDFElement[]
+     * @deprecated use {@link KElement#getChildElementArray KElement.getChildElementArray()}<br>
+     * not typesafe in case of elements in foreign namespaces
+     * note that this method previously returned JDFElement[]
+     */
+    @Deprecated
+	public KElement[] getChildElements()
+    {
+        return getChildElementArray();
+    }
+
+    /**
+     * Method getChildrenCount.
+     * @return int
+     * @deprecated 060727 use numChildNodes(Node.ELEMENT_NODE);
+     */
+    @Deprecated
+	public int getChildElementCount()
+    {
+       return numChildNodes(Node.ELEMENT_NODE);
+    }
+
+    /**
+     * Method getChildElement
+     * @param n Element index n (1 based)
+     * @return JDFElement
+     *
+     * @deprecated use getElement(null, null ,n)
+     */
+    @Deprecated
+	public JDFElement getChildElement(int n)
+    {
+        JDFElement eReturn = null;
+
+        final NodeList children = getChildNodes();
+
+        final int cnt = children.getLength();
+
+        for (int i = 0; i < cnt && eReturn == null; i++)
+        {
+            final Node node = children.item(i);
+
+            if (node.getNodeType() == Node.ELEMENT_NODE)
+            {
+                n--;
+
+                if (n == 0)
+                {
+                    eReturn = (JDFElement) node;
+                }
+            }
+        }
+
+        return eReturn;
     }
 
     /**

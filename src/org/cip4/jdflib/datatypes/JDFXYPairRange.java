@@ -186,12 +186,22 @@ public class JDFXYPairRange extends JDFRange
     //**************************************** Methods *********************************************
     
     /**
+     * toString
+     *
+     * @return String
+     * @deprecated 060418 use toString
+     */
+    public String getString()
+    {
+        return toString();
+    }
+    
+    /**
      * getString - returns the range as a String
      *
      * @return String - the range as a String
      */
-    @Override
-	public String toString()
+    public String toString()
     {
         if (m_left.equals(m_right)) 
         {
@@ -225,8 +235,7 @@ public class JDFXYPairRange extends JDFRange
      *
      * @return boolean - true if equal otherwise false
      */
-    @Override
-	public boolean equals(Object other)
+    public boolean equals(Object other)
     {
         if (this == other)
         {
@@ -251,8 +260,7 @@ public class JDFXYPairRange extends JDFRange
      * hashCode complements equals() to fulfill the equals/hashCode contract
      * @return int
      */
-    @Override
-	public int hashCode()
+    public int hashCode()
     {
         return HashUtil.hashCode(0, this.toString());
     }
@@ -394,8 +402,7 @@ public class JDFXYPairRange extends JDFRange
      * 
      * @return boolean - true if range 'r' is within this range, else false
      */
-    @Override
-	public boolean isPartOfRange(JDFRange ra)
+    public boolean isPartOfRange(JDFRange ra)
     {
         JDFXYPairRange r=(JDFXYPairRange) ra;
         
@@ -405,19 +412,16 @@ public class JDFXYPairRange extends JDFRange
         JDFXYPair r_max=r.getUpperValue();
         return r_min.isGreaterOrEqual(min) && r_max.isLessOrEqual(max);
     }
-    @Override
-	protected Object getRightObject()
+    protected Object getRightObject()
     {       
         return m_right;
     }
 
-    @Override
-	protected Object getLeftObject()
+    protected Object getLeftObject()
     {
          return m_left;
     }
-    @Override
-	protected boolean inObjectRange(Object other)
+    protected boolean inObjectRange(Object other)
     {
        return inRange((JDFXYPair) other);
     }

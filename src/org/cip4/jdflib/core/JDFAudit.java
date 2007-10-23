@@ -82,6 +82,7 @@ import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.util.JDFDate;
@@ -114,8 +115,7 @@ public class JDFAudit extends JDFElement
         atrInfoTable[6] = new AtrInfoTable(AttributeName.TIMESTAMP,     0x33333222, AttributeInfo.EnumAttributeType.dateTime,null,null);
     }
 
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -261,8 +261,7 @@ public class JDFAudit extends JDFElement
      *
      * @return String
      */
-    @Override
-	public String toString()
+    public String toString()
     {
         return "JDFAudit[ -->" + super.toString() + "]";
     }
@@ -293,8 +292,7 @@ public class JDFAudit extends JDFElement
      *
      * @param JDFElement.EnumNodeStatus s
      */
-    @Override
-	public void setStatus(JDFElement.EnumNodeStatus s)
+    public void setStatus(JDFElement.EnumNodeStatus s)
     {
         if(s==null)
             throw new JDFException("setStatus setting to null");
@@ -333,11 +331,37 @@ public class JDFAudit extends JDFElement
     }
 
     /**
+     * GetPhase
+     * @deprecated use JDFPhaseTime.getStatus()
+     * @return JDFElement.EnumNodeStatus
+     */
+    public JDFElement.EnumNodeStatus getPhase()
+    {
+        if (!getNodeName().equals (ElementName.PHASETIME))
+        {
+            return null;
+        }
+
+        return super.getStatus();
+    }
+
+
+    /**
+     * SetPart
+     *
+     * @param JDFAttributeMap m
+     * @deprecated 2005-10-20 - use setPartMap() in the various subclasses instead
+     */
+    public void setPart(JDFAttributeMap m)
+    {
+        super.setPartMap(m);
+    }
+
+    /**
      * get part map vector
      * @return VJDFAttributeMap: vector of mAttribute, one for each part
      */
-    @Override
-	public VJDFAttributeMap getPartMapVector()
+    public VJDFAttributeMap getPartMapVector()
     {
         return super.getPartMapVector();
     }
@@ -390,6 +414,22 @@ public class JDFAudit extends JDFElement
     }
 
     /**
+     * SetBy
+     *
+     * @param String by
+     * @deprecated 2005-09-01 use setAuthor()
+     */
+    public void setBy(String by)
+    {
+        if (by==null || by.equals(JDFConstants.EMPTYSTRING))
+        {
+            return;
+        }
+
+        setAttribute (AttributeName.AUTHOR, by, JDFConstants.EMPTYSTRING);
+    }
+
+    /**
      * Software
      *
      * @return String
@@ -404,8 +444,7 @@ public class JDFAudit extends JDFElement
      *
      * @return boolean
      */
-    @Override
-	public boolean init()
+    public boolean init()
     {
         EnumVersion auditVersion=getVersion(true);
         setAttributeNameTimeStamp(AttributeName.TIMESTAMP, null);
@@ -434,8 +473,7 @@ public class JDFAudit extends JDFElement
      * @param version: version that the resulting element should correspond to
      * @return true if successful
      */
-    @Override
-	public boolean fixVersion(EnumVersion version)
+    public boolean fixVersion(EnumVersion version)
     {
         if(version!=null)
         {
@@ -486,10 +524,28 @@ public class JDFAudit extends JDFElement
         return super.fixVersion(version);
     }
 
-    @Override
-	public String getIDPrefix()
+    public String getIDPrefix()
     {
         return "a";
+    }
+
+    /**
+     * SetTimeStamp
+     * @deprecated 2005-12-02 use setTimeStamp(null)
+     */
+    public void setTimeStamp()
+    {
+        setTimeStamp(null);
+    }
+
+    /**
+     * GetTimeStamp
+     * @deprecated use getTimeStampDate as the typed version
+     * @return the String value of TimeStamp
+     */
+    public String getTimeStamp()
+    {
+        return getAttribute (AttributeName.TIMESTAMP, null, JDFConstants.EMPTYSTRING);
     }
 
     /**
@@ -540,8 +596,7 @@ public class JDFAudit extends JDFElement
     /**
      Get string attribute ID
      */
-    @Override
-	public String getID()
+    public String getID()
     {
         return getAttribute(AttributeName.ID);
     }

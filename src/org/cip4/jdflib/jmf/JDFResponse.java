@@ -81,6 +81,7 @@ package org.cip4.jdflib.jmf;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -174,6 +175,23 @@ public class JDFResponse extends JDFAutoResponse //JDFMessage
         }
 
         /**
+         * Retrieve all allowed value names of this Enum in a vector
+         * @deprecated
+         * @return the <code>String Vector of</code> names
+         */
+        public static Vector getNamesVector() 
+        {
+            Vector namesVector = new Vector();
+            Iterator it = iterator(EnumError.class);
+            while (it.hasNext()) 
+            {
+                namesVector.addElement(((ValuedEnum) it.next()).getName());
+            }
+
+            return namesVector;
+        }
+
+        /**
          * constants EnumError
          */
         public static final EnumError ErrorUnknown      = new EnumError("ErrorUnknown");
@@ -187,8 +205,7 @@ public class JDFResponse extends JDFAutoResponse //JDFMessage
      *
      * @return String
      */
-    @Override
-	public String toString()
+    public String toString()
     {
         return "JDFResponse[  --> " + super.toString() + " ]";
     }

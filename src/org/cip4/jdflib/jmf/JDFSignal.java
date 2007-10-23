@@ -141,12 +141,22 @@ public class JDFSignal extends JDFAutoSignal
      *
      * @return String
      */
-    @Override
-	public String toString()
+    public String toString()
     {
         return "JDFSignal[  --> " + super.toString() + " ]";
     }
     
+    /**
+     * converts a response to a signal that can be sent individually
+     * 
+     * @param response the response to convert
+     * @return true if successful
+     * @deprecated use the two parameter varianz
+     */
+    public boolean convertResponse(JDFResponse response)
+    {
+       return convertResponse(response, null);
+    }
     /**
      * converts a response to a signal that can be sent individually
      * 

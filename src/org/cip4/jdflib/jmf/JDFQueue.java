@@ -138,8 +138,7 @@ public class JDFQueue extends JDFAutoQueue
      * toString()
      * @return String
      */
-    @Override
-	public String toString()
+    public String toString()
     {
         return "JDFQueue[  --> " + super.toString() + " ]";
     }
@@ -185,6 +184,17 @@ public class JDFQueue extends JDFAutoQueue
     }
 
     /**
+     * Method getEntry: find a queuentry by position
+     * @param i the index of the queueentry
+     * @return JDFQueueEntry
+     * @deprecated use getQueueEntry(int)
+     */
+    public JDFQueueEntry getEntry(int i)
+    {
+        return getQueueEntry(i);
+    }
+
+    /**
      * Method findQueueEntries
      * <p>
      * default: findQueueEntries(jobID, jobPartID, new VJDFAttributeMap(), null)
@@ -197,8 +207,7 @@ public class JDFQueue extends JDFAutoQueue
      * 
      * @return VString: vector of QueueEntry IDs
      */
-    @Deprecated
-	public VString findQueueEntries (String strJobID, String strJobPartID, 
+    public VString findQueueEntries (String strJobID, String strJobPartID, 
             VJDFAttributeMap vamParts, EnumQueueEntryStatus status)
     {
         final VString vsQEntryIDs = new VString ();
@@ -227,6 +236,22 @@ public class JDFQueue extends JDFAutoQueue
         }
 
         return vsQEntryIDs;
+    }
+
+    /**
+     * Find a queueEntry by QueueEntryID<br>
+     * 
+     * note that you may want to use the generic getChildByTagName with the appropriate 
+     * attribute map, if you have more information available
+     * 
+     * @param strQEntryID the QueueEntryID of the requeste QueueEntry
+     * @return the QueueEntry with QueueEntryID=strQEntryID, null if strQEntryID is null or empty string 
+     * or the queueentry does not exist
+     * @deprecated use getQueueEntry(id)
+     */
+    public JDFQueueEntry getEntry (String strQEntryID)
+    {
+        return getQueueEntry(strQEntryID);
     }
 
     /**
@@ -425,8 +450,7 @@ public class JDFQueue extends JDFAutoQueue
      * get the queuesize attribute or if it does not exist, count queuentry elements
      * @return the size of the queue
      */
-    @Override
-	public int getQueueSize()
+    public int getQueueSize()
     {
         if(hasAttribute(AttributeName.QUEUESIZE))
             return super.getQueueSize();

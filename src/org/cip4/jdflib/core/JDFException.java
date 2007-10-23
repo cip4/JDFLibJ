@@ -110,14 +110,30 @@ public class JDFException extends RuntimeException
         id=_id;
     }
     
+    /**
+     * constructor
+     *
+     * @param String message
+     * @param boolean bPrintStack print Stacktrace if true
+     * @deprecated print the stack trace in the application
+     */
+    public JDFException (String message, boolean bPrintStack)
+    {
+        super(message);
+        id=hashCode();
+        if (bPrintStack == true)
+        {
+            printStackTrace();
+        }
+    }
+
     //**************************************** Methods *********************************************
     /**
      * toString - StringRepresentation of JDFNode
      *
      * @return String
      */
-    @Override
-	public String toString()
+    public String toString()
     {
         return "JDFException[  --> " + super.toString() + " ]";
     }

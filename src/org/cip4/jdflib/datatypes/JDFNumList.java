@@ -183,12 +183,22 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
     
     //**************************************** Methods *********************************************
     /**
+     * getString - returns all values whitespace separated in a String
+     *
+     * @return String
+     * @deprecated 060418 - use toString
+     */
+    public String getString()
+    {
+        return toString();
+    }
+    
+    /**
      * toString - returns the JDFNumList as a String
      *
      * @return String - the JDFNumList as a String
      */
-    @Override
-	public String toString()
+    public String toString()
     {
         StringBuffer sb = new StringBuffer();
         
@@ -243,8 +253,7 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
      *
      * @return boolean - true if equal otherwise false
      */
-    @Override
-	public boolean equals(Object other)
+    public boolean equals(Object other)
     {
         if (this == other)
         {
@@ -280,8 +289,7 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
     /**
      * hashCode complements equals() to fulfill the equals/hashCode contract
      */
-    @Override
-	public int hashCode()
+    public int hashCode()
     {
         return HashUtil.hashCode(0, this.m_numList);
     }
@@ -343,8 +351,7 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
      * @return Object - the clone
      * @throws CloneNotSupportedException 
      */
-    @Override
-	public Object clone() throws CloneNotSupportedException 
+    public Object clone() throws CloneNotSupportedException 
     {
         JDFNumList num = (JDFNumList) super.clone();
         num.m_numList = ((Vector   )(m_numList.clone()));

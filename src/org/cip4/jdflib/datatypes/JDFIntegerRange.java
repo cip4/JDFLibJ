@@ -240,6 +240,17 @@ public class JDFIntegerRange extends JDFRange
     }
     
     /**
+     * getString - return the range as a String
+     * 
+     * @return String - the range as a String for example 5~9
+     * @deprecated 060418 use toString
+     */
+    public String getString()
+    {
+        return toString();
+    }
+    
+    /**
      * isValid - validate the given String
      *
      * @param s the given string

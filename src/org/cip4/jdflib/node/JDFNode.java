@@ -387,20 +387,6 @@ public class JDFNode extends JDFElement
     private static final long serialVersionUID = 1L;
 
     /**
-     * exception id for multiple merge attempt
-     * @deprecated use JDFSpawn.exAlreadyMerged
-     */
-    @Deprecated
-	public static final int exAlreadyMerged=JDFSpawn.exAlreadyMerged;
-    /**
-     * exception id for multiple rw spawns
-     * @deprecated use JDFSpawn.exMultiSpawnRW
-     */
-    @Deprecated
-	public static final int exMultiSpawnRW=JDFSpawn.exMultiSpawnRW;
-
-
-    /**
      * Enumeration for the policy of cleaning up the Spawn and Merge audits
      */
     public static final class EnumCleanUpMerge extends ValuedEnum

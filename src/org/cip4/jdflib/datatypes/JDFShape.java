@@ -192,8 +192,7 @@ public class JDFShape extends JDFNumList
      *
      * @throws DataFormatException - if the Vector has not a valid format
      */
-    @Override
-	public void isValid() throws DataFormatException
+    public void isValid() throws DataFormatException
     {
         if (m_numList.size() != MAX_SHAPE_DIMENSION 
            && m_numList.size() != MAX_SHAPE_DIMENSION - 1) // Shape with default length = 0.0
@@ -217,8 +216,7 @@ public class JDFShape extends JDFNumList
      *
      * @return boolean - true if equal otherwise false
      */
-    @Override
-	public boolean equals(Object other)
+    public boolean equals(Object other)
     {
         if (this == other)
         {
@@ -243,8 +241,7 @@ public class JDFShape extends JDFNumList
     /**
      * hashCode complements equals() to fulfill the equals/hashCode contract
      */
-    @Override
-	public int hashCode()
+    public int hashCode()
     {
         return HashUtil.hashCode(super.hashCode(), this.toString());
     }
@@ -295,6 +292,17 @@ public class JDFShape extends JDFNumList
        
        
     /**
+     * getHeight - returns the height
+     * @deprecated use getY - attention height and width were accidentally exchanged
+     * 
+     * @return double - the height
+     */
+    public double getHeight()
+    {
+        return getY();
+    }
+    
+    /**
      * getY - returns the width
      *
      * @return double - the width
@@ -306,6 +314,15 @@ public class JDFShape extends JDFNumList
     }
    
     /**
+     * setHeight - sets the height
+     * @deprecated attention height and width were accidentally exchanged
+     * @param height the height
+     */
+    public void setHeight(double height)
+    {
+       setY(height);
+    }
+    /**
      * setY - sets the height
      *
      * @param height the height
@@ -315,6 +332,16 @@ public class JDFShape extends JDFNumList
         m_numList.set(1, new Double(y));
     }
 
+    /**
+     * getWidth - returns the width 
+     * @deprecated use getX - attention height and width were accidentally exchanged
+     * @return double - the width
+     * 
+     */
+    public double getWidth()
+    {
+        return getX();
+    }
     /**
      * getX - returns the width
      *
@@ -335,7 +362,25 @@ public class JDFShape extends JDFNumList
     {
         m_numList.set(0, new Double(x));
     }
+    /**
+     * setWidth - sets the width
+     * @deprecated attention height and width were accidentally exchanged
+     * @param width the width
+     */
+    public void setWidth(double width)
+    {
+        setX(width);
+    }
 
+    /**
+     * getLength - returns the length
+     * @deprecated use getZ
+     * @return double - the length
+     */
+    public double getLength()
+    {
+        return getZ();
+    }
     /**
      * getZ - returns the z value
      *
@@ -344,6 +389,16 @@ public class JDFShape extends JDFNumList
     public double getZ()
     {
         return ((Double)m_numList.elementAt(2)).doubleValue();
+    }
+
+    /**
+     * setLength - sets the length
+     * @deprecated
+     * @param length the length
+     */
+    public void setLength(double length)
+    {
+        setZ(length);
     }
 
     /**

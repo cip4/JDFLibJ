@@ -195,8 +195,7 @@ public class JDFNumberRange extends JDFRange
      *
      * @return String
      */
-    @Override
-	public String toString()
+    public String toString()
     {
         if (Math.abs(this.getLeft() - this.getRight()) < JDFBaseDataTypes.EPSILON)
         {
@@ -204,6 +203,17 @@ public class JDFNumberRange extends JDFRange
         }
         return getLeftString() + " ~ " + getRightString();
     }
+
+    /**
+     * getString - returns the range as a String
+     *
+     * @return String - the range as a String
+     * @deprecated 060418 use toString
+     */
+    public String getString()
+    {
+        return toString();
+     }
 
     /**
     * isValid - validate the given String
@@ -233,8 +243,7 @@ public class JDFNumberRange extends JDFRange
      * @param other the object to compare with <code>this</code>
      * @return boolean - true if equal otherwise false
      */
-    @Override
-	public boolean equals(Object other)
+    public boolean equals(Object other)
     {
         if (this == other)
         {
@@ -259,8 +268,7 @@ public class JDFNumberRange extends JDFRange
      * hashCode complements equals() to fulfill the equals/hashCode contract
      * @return int - hash code of <code>this</this>
      */
-    @Override
-	public int hashCode()
+    public int hashCode()
     {
         return HashUtil.hashCode(0, this.toString());
     }
@@ -367,26 +375,22 @@ public class JDFNumberRange extends JDFRange
      * 
      * @return boolean - true if range 'r' is within this range, else false
      */
-    @Override
-	public boolean isPartOfRange(JDFRange ra)
+    public boolean isPartOfRange(JDFRange ra)
     {
         JDFNumberRange r=(JDFNumberRange)ra;
         return (r.getLowerValue() >= this.getLowerValue()) && (r.getUpperValue() <= this.getUpperValue());
     }
 
-    @Override
-	protected Object getRightObject()
+    protected Object getRightObject()
     {
         return new Double(m_right);
     }
 
-    @Override
-	protected Object getLeftObject()
+    protected Object getLeftObject()
     {
         return new Double(m_left);
     }
-    @Override
-	protected boolean inObjectRange(Object other)
+    protected boolean inObjectRange(Object other)
     {
        return inRange(((Double) other).doubleValue());
     }

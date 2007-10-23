@@ -147,8 +147,7 @@ public class JDFJMF extends JDFAutoJMF
      * 
      * @return String
      */
-    @Override
-	public String toString ()
+    public String toString ()
     {
         return "JDFJMF[ --> " + super.toString () + " ]";
     }
@@ -158,8 +157,7 @@ public class JDFJMF extends JDFAutoJMF
      * 
      * @return boolean
      */
-    @Override
-	public boolean init ()
+    public boolean init ()
     {
         super.init ();
         setTimeStamp(null);
@@ -181,8 +179,7 @@ public class JDFJMF extends JDFAutoJMF
      * 
      * default - getMaxVersion(false)
      */
-    @Override
-	public EnumVersion getMaxVersion() 
+    public EnumVersion getMaxVersion() 
     {
         String version=getAttribute(AttributeName.MAXVERSION,  null,  null);
 
@@ -201,8 +198,7 @@ public class JDFJMF extends JDFAutoJMF
      * @param version version that the resulting element should correspond to
      * @return true if successful
      */
-    @Override
-	public boolean fixVersion(EnumVersion version)
+    public boolean fixVersion(EnumVersion version)
     {
         if(version!=null)
         {
@@ -215,8 +211,7 @@ public class JDFJMF extends JDFAutoJMF
      * set MaxVersion to enumVer
      * @param enumVer the EnumVersion to set
      */
-    @Override
-	public void setMaxVersion(EnumVersion enumVer)
+    public void setMaxVersion(EnumVersion enumVer)
     {
         setAttribute(AttributeName.MAXVERSION, enumVer.getName(), null);
     }
@@ -360,6 +355,130 @@ public class JDFJMF extends JDFAutoJMF
     }
 
     /**
+     * GetMessage - get the ith message, regardless of type
+     * 
+     * @param i messge index
+     * 
+     * @return JDFMessage - the ith message
+     * @deprecated use getMessageElement(null)
+     */
+    public JDFMessage getMessage (int i)
+    {
+        return getMessageElement(null,null,i);
+    }
+
+    /**
+     * Get the ith command
+     * 
+     * @param iLoop index of the message
+     * @param bCreate if true, create one, if it does not exist
+     * @return JDFCommand: the message element
+     * @deprecated use getMessageElement
+     */
+    // JDFCommand GetCommand(int i=0,bool bCreate=false);
+    public JDFCommand getCommand ()
+    {
+        return getCommand (0, false);
+    }
+
+    /**
+     * 
+     * @param i
+     * @param bCreate
+     * @return
+     * @deprecated use getMessageElement or getCreateMessageElement
+     */
+    public JDFCommand getCommand (int i, boolean bCreate)
+    {
+        if (bCreate)
+            return (JDFCommand) getCreateMessageElement (JDFMessage.EnumFamily.Command, i);
+        return (JDFCommand) getMessageElement(JDFMessage.EnumFamily.Command,null,i);
+    }
+
+    /**
+     * Get the ith query,
+     * 
+     * @param iLoop index of the message
+     * @param bCreate if true, create one, if it does not exist
+     * @return JDFQuery the message element
+     *     
+     * @deprecated use getMessageElement
+     */
+    // JDFQuery GetQuery(int i=0,bool bCreate=false);
+    public JDFQuery getQuery ()
+    {
+        return getQuery (0, false);
+    }
+
+    /**
+     * 
+     * @param i
+     * @param bCreate
+     * @return
+     * @deprecated use getMessageElement or getCreateMessageElement
+     */
+    public JDFQuery getQuery (int i, boolean bCreate)
+    {
+        if (bCreate)
+            return (JDFQuery) getCreateMessageElement (JDFMessage.EnumFamily.Query, i);
+
+        return (JDFQuery) getMessageElement(JDFMessage.EnumFamily.Query,null,i);
+    }
+
+    /**
+     * getResponse()
+     * @return JDFResponse the message element
+     * @deprecated use getMessageElement
+     */
+    // JDFResponse GetResponse(int i=0,bool bCreate=false);
+    public JDFResponse getResponse ()
+    {
+        return getResponse (0, false);
+    }
+
+    /**
+     * getResponse() 
+     * @param i
+     * @param bCreate
+     * @return
+     * @deprecated use getMessageElement or getCreateMessageElement
+     */
+    public JDFResponse getResponse (int i, boolean bCreate)
+    {
+        if (bCreate)
+            return (JDFResponse) getCreateMessageElement (JDFMessage.EnumFamily.Response, i);
+        return (JDFResponse) getMessageElement(JDFMessage.EnumFamily.Response,null,i);
+    }
+
+    /**
+     * Get the ith signal,
+     * 
+     * @param iLoop index of the message
+     * @param bCreate if true, create one, if it does not exist
+     * @return JDFSignal the message element
+     * @deprecated use getMessageElement
+     */
+    // JDFSignal GetSignal(int i=0,bool bCreate=false);
+    public JDFSignal getSignal ()
+    {
+        return getSignal (0, false);
+    }
+
+    /**
+     * 
+     * @param i
+     * @param bCreate
+     * @return
+     * @deprecated use getMessageElement
+     */
+    public JDFSignal getSignal (int i, boolean bCreate)
+    {
+        if (bCreate)
+            return (JDFSignal) getCreateMessageElement (JDFMessage.EnumFamily.Signal, i);
+        return (JDFSignal) getMessageElement(JDFMessage.EnumFamily.Signal,null,i);
+    }
+
+    /**
      * get an existing message element, create it if it doesn't exist
      * @param family the Message family - Query, Acknowledge, Command, Response, Registration or Signal
      * @param i get the ith element
@@ -378,6 +497,17 @@ public class JDFJMF extends JDFAutoJMF
             m = appendMessageElement (family, null);
 
         return m;
+    }
+
+    /**
+     * append a message element to this
+     * @param family
+     * @return
+     * @deprecated use appendMessageElement (family, null);
+     */
+    public JDFMessage appendMessageElement (JDFMessage.EnumFamily family)
+    {
+        return appendMessageElement (family, null);
     }
 
     /**
@@ -418,6 +548,18 @@ public class JDFJMF extends JDFAutoJMF
 
     /**
      * get the ith message element of family type family
+     * @param family
+     * @param i
+     * @return
+     * @deprecated since 060619, use  getMessageElement (JDFMessage.EnumFamily family, JDFMessage.EnumType typ, int i)
+     */
+    public JDFMessage getMessageElement (JDFMessage.EnumFamily family, int i)
+    {
+        return getMessageElement(family,null,i);
+    }
+    
+    /**
+     * get the ith message element of family type family
      * @param family the Message family - Query, Acknowledge, Command, Response, Registration or Signal
      * @param typ    the messages @Type value, null if unknown
      * @param i      the i'th message element to get
@@ -450,6 +592,29 @@ public class JDFJMF extends JDFAutoJMF
     /**
      * get a vector of all messages in this JMF
      * 
+     * @return VElement all message elements
+     * @deprecated use getMessageVector (null, null)
+     */
+    public VElement getMessageVector ()
+    {
+        return getMessageVector (null, null);
+    }
+    
+    /**
+     * get a vector of all messages in this JMF
+     * 
+     * @param family requested message family
+     * @return VElement all message elements
+     * @deprecated use getMessageVector (family, null)
+     */
+    public VElement getMessageVector (JDFMessage.EnumFamily family)
+    {
+        return getMessageVector (family, null);
+    }
+
+    /**
+     * get a vector of all messages in this JMF
+     * 
      * @param family requested message family
      * @param typ    requested message type
      * @return VElement all message elements
@@ -476,6 +641,33 @@ public class JDFJMF extends JDFAutoJMF
         }
         
         return vM;
+    }
+
+    /**
+     * Get the ith acknowledge,
+     * 
+     * @param iLoop       index of the message
+     * @param bCreate if true, create one, if it does not exist
+     * @return JDFAcknowledge: the message element
+     * @deprecated use getMessageElement
+     */
+    public JDFAcknowledge getAcknowledge ()
+    {
+        return getAcknowledge (0, false);
+    }
+
+    /**
+     * 
+     * @param i
+     * @param bCreate
+     * @return
+     * @deprecated use getMessageElement or appendMessageElement
+     */
+    public JDFAcknowledge getAcknowledge (int i, boolean bCreate)
+    {
+        if (bCreate)
+            return (JDFAcknowledge) getCreateMessageElement (JDFMessage.EnumFamily.Acknowledge, i);
+        return (JDFAcknowledge) getMessageElement(JDFMessage.EnumFamily.Acknowledge,null,i);
     }
 
     /**

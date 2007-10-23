@@ -1292,69 +1292,6 @@ public class JDFResource extends JDFElement
 
 
     /**
-     * Gets from all referenced resources the int cast of the minimum value of enumerated attribute
-     * e.g. used in IsAvailable()/GetStatus() to find in all referenced resources Status, which is the minimum
-     *
-     * @param key attribute name you are searching for
-     * @param allowedValues string of allowed values in case of an enumerated attribute
-     * @param def default value, if no explicit value exists
-     * @param nameSpaceURI namespace of attribute key
-     *
-     * @return int the int cast of the minimum referenced value
-     * @deprecated
-     * @default getMinRefAttribute(key, allowedValues, 0, null)
-     */
-    @Deprecated
-	public int getMinRefAttribute(
-            String key,
-            Vector allowedValues,
-            int def,
-            String nameSpaceURI)
-    {
-        int ret = getEnumAttribute(key, allowedValues, nameSpaceURI, def, false);
-        final VElement v = new VElement(getvHRefRes(true));
-
-        for (int i = 0; i < v.size() && ret != 0; i++)
-        {
-            final JDFResource rs = (JDFResource) v.elementAt(i);
-            ret = Math.min(ret,rs.getEnumAttribute(key, allowedValues, nameSpaceURI, def, false));
-        }
-
-        return ret;
-    }
-
-    /**
-     * Gets from all referenced resources the int cast of the maximum value of enumerated attribute
-     *
-     * @param key attribute name you are searching for
-     * @param allowedValues string of allowed values in case of an enumerated attribute
-     * @param def default value, if no explicit value exists
-     * @param nameSpaceURI namespace of attribute key
-     *
-     * @return int: the int cast of the maximum referenced value
-     * @deprecated never used
-     * @default getMaxRefAttribute(key, allowedValues, 0, null)
-     */
-    @Deprecated
-	public int getMaxRefAttribute(
-            String key,
-            Vector allowedValues,
-            int def,
-            String nameSpaceURI)
-    {
-        int ret = getEnumAttribute(key, allowedValues, nameSpaceURI, def, false);
-        final VElement v = new VElement(getvHRefRes(true));
-
-        for (int i = 0; i < v.size() && ret != 0; i++)
-        {
-            final JDFResource rs = (JDFResource) v.elementAt(i);
-            ret = Math.max(ret, rs.getEnumAttribute(key, allowedValues, nameSpaceURI, def, false));
-        }
-
-        return ret;
-    }
-
-    /**
      * Gets all elements with name linkName, which contain resource links that point to this resource
      *
      * @param linkName defaults to any

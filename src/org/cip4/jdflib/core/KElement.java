@@ -262,6 +262,15 @@ public class KElement extends ElementNSImpl
 
     /**
      * Set this element as dirty
+     * @deprecated use setDirty (bAttribute)
+     */
+    @Deprecated
+	public void setDirty()
+    {
+        setDirty(false);
+    }
+    /**
+     * Set this element as dirty
      */
     public void setDirty(boolean bAttribute)
     {
@@ -482,7 +491,24 @@ public class KElement extends ElementNSImpl
         }
 
         /**
-         * return true if vl is a recursive EnumValidationLevel
+         * @deprecated
+         * @return vector of valid names, null if key is not an enumeration
+         */
+        @Deprecated
+		public static Vector getNamesVector()
+        {
+            final Vector namesVector = new Vector();
+            final Iterator it = iterator(EnumValidationLevel.class);
+            while (it.hasNext())
+            {
+                namesVector.addElement(((ValuedEnum) it.next()).getName());
+            }
+
+            return namesVector;
+        }
+
+        /**
+         * return true if vl is a recursvive EnumValidationLevel
          * @param vl the EnumValidationLevel to check
          * @return true if vl is recursive
          */
@@ -572,6 +598,46 @@ public class KElement extends ElementNSImpl
     }
 
 
+    /**
+     * @deprecated use local EnumValidationLevel enums
+     */
+    @Deprecated
+	public static final EnumValidationLevel ValidationLevel_Incomplete = EnumValidationLevel.Incomplete;
+
+    /**
+     * @deprecated use local EnumValidationLevel enums
+     */
+    @Deprecated
+	public static final EnumValidationLevel ValidationLevel_Complete =  EnumValidationLevel.Complete;
+
+    /**
+     * @deprecated use local EnumValidationLevel enums
+     */
+    @Deprecated
+	public static final EnumValidationLevel ValidationLevel_RecursiveIncomplete =  EnumValidationLevel.RecursiveIncomplete;
+
+    /**
+     * @deprecated use local EnumValidationLevel enums
+     */
+    @Deprecated
+	public static final EnumValidationLevel ValidationLevel_RecursiveComplete = EnumValidationLevel.RecursiveComplete;
+
+    /**
+     * Sets an NMTOKENS attribute to all elements from parameter value will
+     * be concatenate with blanks to the resulting NMTOKEN
+     *
+     * @param key    the name of the attribute to set
+     * @param value  the values for the attribute key
+     * @param nameSpaceURI the namespace of the key
+     * @deprecated use setAttribute instead
+     *
+     * @default setvStringAttribute(key, vStr, null)
+     */
+    @Deprecated
+	public void setvStringAttribute(String key, VString value, String nameSpaceURI)
+    {
+        setAttribute(key, value, nameSpaceURI);
+    }
     /**
      * Sets an NMTOKENS attribute to all elements from parameter value will
      * be concatenate with blanks to the resulting NMTOKEN
@@ -847,6 +913,22 @@ public class KElement extends ElementNSImpl
      * @param key          the name of the attribute to set
      * @param value        the value for the attribute
      * @param nameSpaceURI the namespace the element is in
+     * @deprecated	use setAttribute instead
+     *
+     * @default SetAttribute(key, value, null)
+     */
+    @Deprecated
+	public void setIntAttribute(String key, int value, String nameSpaceURI)
+    {
+        setAttribute(key, value, nameSpaceURI);
+    }
+
+    /**
+     * Sets an element attribute
+     *
+     * @param key          the name of the attribute to set
+     * @param value        the value for the attribute
+     * @param nameSpaceURI the namespace the element is in
      *
      * @default SetAttribute(key, value, null)
      */
@@ -861,12 +943,44 @@ public class KElement extends ElementNSImpl
      * @param key           the name of the attribute to set
      * @param value         the value for the attribute
      * @param nameSpaceURI  the namespace the element is in
+     * @deprecated	use setAttribute instead
+     *
+     * @default setAttribute(key, value, null)
+     */
+    @Deprecated
+	public void setRealAttribute(String key, double value, String nameSpaceURI)
+    {
+        setAttribute(key, StringUtil.formatDouble(value), nameSpaceURI);
+    }
+    /**
+     * Sets an element attribute
+     *
+     * @param key           the name of the attribute to set
+     * @param value         the value for the attribute
+     * @param nameSpaceURI  the namespace the element is in
      *
      * @default setAttribute(key, value, null)
      */
     public void setAttribute(String key, double value, String nameSpaceURI)
     {
         setAttribute(key, StringUtil.formatDouble(value), nameSpaceURI);
+    }
+
+    /**
+     * SetAttribute - Sets an element attribute
+     *
+     * @param key           the name of the attribute to set
+     * @param b             value of the boolean attribute to be set
+     *                      (true or false)
+     * @param nameSpaceURI  the nameSpace the attribute is in
+     * @deprecated use setAttribute instead
+     *
+     * @default setAttribute(key, b, null)
+     */
+    @Deprecated
+	public void setBoolAttribute(String key, boolean b, String nameSpaceURI)
+    {
+        setAttribute(key, b,  nameSpaceURI);
     }
 
     /**
@@ -1264,6 +1378,19 @@ public class KElement extends ElementNSImpl
 
 
     /**
+     * Gets the local name of kElem
+     * @deprecated use getLocalName
+     * @param kElem      the element to get the LocalName from
+     *
+     * @return String   the local name of 'this'
+     */
+    @Deprecated
+	public static String getLocalNameStatic(KElement kElem)
+    {
+        return kElem.getLocalName();
+    }
+
+    /**
      * Sets the attributes from the curent element.
      * If Attributes map is null or empty, zero is returned.
      * otherwhise the size of the map is returned
@@ -1499,6 +1626,28 @@ public class KElement extends ElementNSImpl
      * @param mAttrib        attributes you are lokking for
      * @param bAnd           if true, a child is only added if it has all
      *                       attributes specified in Attributes mAttrib
+     * @param maxSize        maximum size of the element vector
+     *
+     * @return VElement      vector with all found elements
+     * @deprecated 060302 - use 6 parameter version
+     * @default getChildElementVector(null, null, null, true, 0, false)
+     */
+    @Deprecated
+	public VElement getChildElementVector(String nodeName, String nameSpaceURI, JDFAttributeMap mAttrib, boolean bAnd,
+            int maxSize)
+    {
+        return getChildElementVector(nodeName, nameSpaceURI, mAttrib, bAnd, maxSize,false);
+    }
+    /**
+     * Get all children from the actual element matching the given conditions<br>
+     * does NOT get refElement targets although the attributes are checked
+     * in the target elements in case of refElements
+     *
+     * @param nodeName       element name you are searching for
+     * @param nameSpaceURI   nameSpace you are searching for
+     * @param mAttrib        attributes you are lokking for
+     * @param bAnd           if true, a child is only added if it has all
+     *                       attributes specified in Attributes mAttrib
      * @param maxSize        maximum size of the element vector (0=any)
      * @param bResolveTarget if true, IDRef elements are followed, dummy at this level but needed in JDFElement
      *
@@ -1545,7 +1694,7 @@ public class KElement extends ElementNSImpl
      *
      * @see org.cip4.jdflib.core.KElement#getChildElementVector(
      *          java.lang.String, java.lang.String,
-     *          org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int, false)
+     *          org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int)
      *
      * @default getChildElementVector(null, null, null, true, 0)
      */
@@ -1861,6 +2010,35 @@ public class KElement extends ElementNSImpl
         }
 
         return vEle;
+    }
+
+    /**
+     * Get a vector of all children with a matching attribte
+     *
+     * @param nodeName      elementname you are searching for
+     * @param attName       attributes you are looking for
+     * @param nameSpaceURI  nameSpace you are searching for
+     * @param attVal        value of the attribute you are searching for
+     * @param bDirect       if true  : return only direct children
+     *                      if false : search recursively
+     *
+     * @return VElement - vector with all found elements
+     *
+     * @default GetChildrenWithAttribute(nodeName,
+     *                                   attName,
+     *                                   null,
+     *                                   null,
+     *                                   true)
+     *
+     * @deprecated use getChildrenByTagName(nodeName, nameSpaceURI,
+     *                                      new JDFAttributeMap(attName, attVal), bDirect, true, 0);
+     */
+    @Deprecated
+	public VElement getChildrenWithAttribute(String nodeName, String attName, String nameSpaceURI, String attVal,
+            boolean bDirect)
+    {
+        return getChildrenByTagName(nodeName, nameSpaceURI, new JDFAttributeMap(attName, attVal),
+                bDirect, true, 0);
     }
 
     /**
@@ -2258,7 +2436,7 @@ public class KElement extends ElementNSImpl
     /**
      * map of all defaults from the schema
      *
-     * @return JDFAttributeMap the comma separated list of default attribute keys
+     * @return JDFAttributeMap the comma separated list of deprecated attribute keys
      */
     public JDFAttributeMap getDefaultAttributeMap ()
     {
@@ -2277,10 +2455,10 @@ public class KElement extends ElementNSImpl
     }
 
     /**
-     * Comma separated list of all prerelease attributes.
+     * Comma separated list of all deprecated attributes.
      * KElement is generic, therefore the list is empty
      *
-     * @return String the comma separated list of prerelease attribute keys
+     * @return String the comma separated list of deprecated attribute keys
      */
     public VString prereleaseAttributes()
     {
@@ -2706,6 +2884,48 @@ public class KElement extends ElementNSImpl
 
 
     /**
+     * get the first child element
+     *
+     * @param parent  the node to get the first element node from
+     *
+     * @return Element - the first child element if existing otherwise null
+     * @deprecated use elem.getFirstChildElement
+     */
+    @Deprecated
+	public static Element getFirstElementNode(Element parent)
+    {
+        Node firstChildElement = parent.getFirstChild();
+
+        while (firstChildElement != null && firstChildElement.getNodeType() != Node.ELEMENT_NODE)
+        {
+            firstChildElement = firstChildElement.getNextSibling();
+        }
+
+        return (Element) firstChildElement;
+    }
+
+    /**
+     * get the next sibling element
+     *
+     * @param elem      the Element to get the next element node from
+     *
+     * @return Element  the first sibling element if existing otherwise null
+     * @deprecated - use elem.getNextSiblingElement();
+     */
+    @Deprecated
+	public static Element getNextElementNode(Element elem)
+    {
+        Node nextSiblingElement = elem.getNextSibling();
+
+        while (nextSiblingElement != null && nextSiblingElement.getNodeType() != Node.ELEMENT_NODE)
+        {
+            nextSiblingElement = nextSiblingElement.getNextSibling();
+        }
+
+        return (Element) nextSiblingElement;
+    }
+
+    /**
      * Checks if this element is equal to element kElem
      *
      * @param kElem     the element to compare
@@ -2775,6 +2995,18 @@ public class KElement extends ElementNSImpl
         }
 
         return true;
+    }
+
+    /**
+     * Get all child nodes from the actual element
+     *
+     * @return VElement list of all childs
+     * @deprecated use getChildElementVector(null, null, null, true, 0)
+     */
+    @Deprecated
+	public VElement getChildNodes_KElement()
+    {
+        return new VElement(getChildNodes());
     }
 
     /**
@@ -2934,6 +3166,27 @@ public class KElement extends ElementNSImpl
             return isAncestor(child.getParentNode_KElement());
         }
         return false;
+    }
+
+    /**
+     * Not full implemented right now right now it checks
+     * if a the current object is null (return false) or if there is a owner
+     * document (if not, return false)
+     *
+     * @deprecated use isValid(EnumValidationLevel level)
+     * @return boolean - true if valid (see above)
+     */
+    @Deprecated
+	public boolean isValid()
+    {
+        boolean result = true;
+
+        if (getOwnerDocument() == null)
+        {
+            result = false;
+        }
+
+        return result;
     }
 
     /**
@@ -3117,6 +3370,22 @@ public class KElement extends ElementNSImpl
     }
 
     /**
+     * Remove children that match <code>nodeName</code> and <code>nameSpaceURI</code>
+     * <p>
+     * default: removeChildren(nodeName, nameSpaceURI, null)
+     *
+     * @param nodeName      name of the child node to get, if empty or null remove all
+     * @param nameSpaceURI  namespace to search in
+     *
+     * @deprecated use three parameter version removeChildren(nodeName, nameSpaceURI, null);
+     */
+    @Deprecated
+	public void removeChildren(String nodeName, String nameSpaceURI)
+    {
+        removeChildren(nodeName, nameSpaceURI, null);
+    }
+
+    /**
      * Removes the children named <code>nodeName</code> in the namespace
      * <code>nameSpaceURI</code> from the parent element
      * <p>
@@ -3198,6 +3467,34 @@ public class KElement extends ElementNSImpl
 
         removeAttributes(null);
         return true;
+    }
+
+    /**
+     * Get all or the spezified number of childs nodes from the actual element
+     * a maxSize of 0 spezifies all children.
+     * <p>
+     * default: getChildNodeVector(0)
+     *
+     * @return Vector vector with all found nodes
+     * @deprecated
+     */
+    @Deprecated
+	public Vector getChildNodeVector(int maxSize)
+    {
+        final Vector v = new Vector();
+        int i = 0;
+        Node node = getFirstChild();
+
+        if (node != null)
+        {
+            do
+            {
+                v.add(node); // this guy is ok
+                node = node.getNextSibling();
+            } while (++i != maxSize && node != null);
+        }
+
+        return v;
     }
 
     /**
@@ -3285,6 +3582,39 @@ public class KElement extends ElementNSImpl
         }
     }
 
+    /**
+     * You can get the iSkip element named by nodeName. If there is no element
+     * present, a new empty element is returned.
+     * If iSkip is out of range, a new element is returned.
+     * <p>
+     * default: getDeepElement(nodeName, null, 0)
+     *
+     * @param nodeName      the type of element you want to get
+     * @param nameSpaceURI  the namespace to search in
+     *                      !!! NOT USED IN FUCTION !!!
+     * @param iSkip         which element you want to have (order of appearance)
+     *
+     * @return KElement     the iSkip element or a new element
+     *
+     * @deprecated use getChildByTagName(nodeName, nameSpaceURI, iSkip, null, false, true);
+     */
+    @Deprecated
+	public KElement getDeepElement(String nodeName, String nameSpaceURI, int iSkip)
+    {
+        return getChildByTagName(nodeName, nameSpaceURI, iSkip, null, false, true);
+    }
+
+    /**
+     * @deprecated use getChildFromList(Vector nodeNames, int iSkip, JDFAttributeMap map)
+     * @param nodeNames
+     * @param iSkip
+     * @return KElement
+     */
+    @Deprecated
+	public KElement getChildFromList(VString nodeNames, int iSkip)
+    {
+        return getChildFromList(nodeNames, iSkip, null, true);
+    }
     /**
      * Get any Child that matches a string defined in nodeNames. The method
      * compares the strings with the element name
@@ -3743,6 +4073,19 @@ public class KElement extends ElementNSImpl
     //************************** end of methods needed in JDFPartAmount ********
     ////////////////////////////////////////////////////////////////////////////
     //************************** start of methods needed in JDFResponse ********
+
+    /**
+     * append a DOM comment <code>&lt;!-- XMLComment --&gt;</code>
+     * The double minus sign '--' is escaped with an underscore '_' in order to ensure valid xml
+     *
+     * @param commentText  the comment to append
+     * @deprecated use appendXMLComment(commentText, null);
+     */
+    @Deprecated
+	public void appendXMLComment(String commentText)
+    {
+        appendXMLComment(commentText, null);
+    }
 
     /**
      * append a DOM comment <code>&lt;!-- XMLComment --&gt;</code>
@@ -4352,6 +4695,35 @@ public class KElement extends ElementNSImpl
     ////////////////////////////////////////////////////////////////////////////
     //************************** start of methods needed in misc/testNew *******
 
+
+    /**
+     * Gets the XPath full tree representation of 'this'
+     *
+     * @return String    the XPath representation of 'this' e.g.
+     *                   <code>/root/parent/element</code><br>
+     *                   <code>null</code> if parent of this is null
+     *                   (e.g. called on rootnode)
+     *                   @deprecated use buildXPath(null,true);
+     */
+    @Deprecated
+	public String buildXPath()
+    {
+        return buildXPath(null,1);
+    }
+    /**
+     * Gets the XPath full tree representation of 'this'
+     * @param relativeTo  relative path to which to create an xpath
+     * @return String    the XPath representation of 'this' e.g.
+     *                   <code>/root/parent/element</code><br>
+     *                   <code>null</code> if parent of this is null
+     *                   (e.g. called on rootnode)
+     *                   @deprecated use buildXPath(relativeTo,true);
+     */
+    @Deprecated
+	public String buildXPath(String relativeTo)
+    {
+        return buildXPath(relativeTo,1);
+    }
 
     /**
      * Gets the XPath full tree representation of 'this'
@@ -5561,6 +5933,50 @@ public class KElement extends ElementNSImpl
     }
 
     /**
+     * get the namespace prefix from a qualified name.
+     * For example, nodename <code>exp:myexampley</code>
+     * would return <code>exp</code>
+     * @deprecated use xmlnsPrefix()
+     *
+     * @param s the qualified name
+     *
+     * @return namespace of the qualified name
+     */
+    @Deprecated
+	public static String xmlNameSpace(String s)
+    {
+
+        return xmlnsPrefix(s);
+    }
+
+    /**
+     * sets multiple attributes at once both arrays need to be of equal length.
+     *
+     * @param myAttributes array of attributes
+     * @param strValues  array of values
+     * @throws ArrayIndexOutOfBoundsException if the arrays are
+     *         not of equal length
+     * @deprecated use setAttributes(JDFAttributeMap)
+     */
+    @Deprecated
+	public void setAttributes(String[] myAttributes, String[] strValues)
+    {
+        if (myAttributes.length != strValues.length)
+        {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+
+        final JDFAttributeMap attributeValueMap = new JDFAttributeMap();
+
+        for (int nPara = 0; nPara < myAttributes.length; nPara++)
+        {
+            attributeValueMap.put(myAttributes[nPara], strValues[nPara]);
+        }
+
+        setAttributes(attributeValueMap);
+    }
+
+    /**
      * used by get localname
      *
      * @param pc the qualifiedname
@@ -5584,6 +6000,22 @@ public class KElement extends ElementNSImpl
         return null;
     }
 
+    /**
+     * get the namespace of the qualified name
+     * * <blockquote><b>namespace</b>:localname</blockquote>
+     *
+     * @param   pc the qualified name.
+     * @deprecated
+     * @return  the namespace of the qualified name.
+     *          An Emptystring if pc is null or no namespace found.
+     */
+    @Deprecated
+	public static String getXMLNSNameSpace(String pc)
+    {
+        return xmlnsPrefix(pc);
+    }
+
+
     public void setXSIType(String typ)
     {
         setAttribute(AttributeName.XSITYPE,typ,AttributeName.XSIURI);
@@ -5596,6 +6028,20 @@ public class KElement extends ElementNSImpl
     public String getXSIType()
     {
         return getAttribute("type",AttributeName.XSIURI,null);
+    }
+    /**
+     * Parses pc for it's namespace prefix<p>
+     * <blockquote><code>ns:foo</code> will return <code>ns</code></blockquote>
+     *@deprecated use xmlnsPrefix
+     * @param pc string to parse
+     *
+     * @return String namespace prefix of pc, emptyspace if no ":" is in pc
+     *
+     */
+    @Deprecated
+	public static String getXMLNSPrefix(String pc)
+    {
+        return xmlnsPrefix(pc);
     }
 
     /**
@@ -5794,6 +6240,18 @@ public class KElement extends ElementNSImpl
         if(kEle!=null) {
 			kEle.removeAttribute(path.substring(pos + 1), null);
 		}
+    }
+
+    /**
+     * check whether this matches a simple xpath
+     * @param path
+     * @return boolean
+     * @deprecated use matchesPath(String path, boolean bFollowRefs)
+     */
+    @Deprecated
+	public boolean matchesPath(String path)
+    {
+        return matchesPath(path,false);
     }
 
     /**

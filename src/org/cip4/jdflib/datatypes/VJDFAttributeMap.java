@@ -11,6 +11,7 @@ package org.cip4.jdflib.datatypes;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
@@ -89,8 +90,7 @@ public class VJDFAttributeMap
      *
      * @return String
      */
-    @Override
-	public String toString()
+    public String toString()
     {
         StringBuffer sb = new StringBuffer ();
         sb.append ("VJDFAttributeMap: ");
@@ -236,6 +236,69 @@ public class VJDFAttributeMap
     }
     
     /**
+     * Tests wether this has a entry with the same key and value entries
+     * not more nor less keys
+     *
+     * @param attmap the given JDFAttributeMap element
+     * @deprecated use contains
+     * @return boolean - true if and only if the specified AttributeMap has the some number
+     * of keys and values and the same keys and values as a entry in this vector
+     */
+    public boolean hasEntryWithEqualKeyValuePairs(JDFAttributeMap attmap)
+    {
+        
+        boolean bEquals = false;
+        
+        for(int i = 0; i < size(); i++)
+        {
+            //if its the same object...ne further action needed
+            if(attmap == elementAt(i))
+            {
+                return true;
+            }
+            
+            //reset for every entry
+            bEquals = false;
+            JDFAttributeMap map = elementAt(i);
+            
+            //only check if both have the same size
+
+            if(map.size() == attmap.size())
+            {
+                //now that we found a entry with same entry counter set 
+                //this to true. A single wrong entry will set it to false and 
+                //break. If bEquals is still true after all checks, we found the map
+                bEquals = true;
+                Set mapSet = map.keySet();
+                Iterator it = mapSet.iterator();
+                while(it.hasNext())
+                {
+                    String key = (String)it.next();
+                    if(!attmap.containsKey(key))
+                    {
+                        bEquals = false;
+                        break;
+                    }
+                    String value1 = map.get(key);
+                    String value2 = attmap.get(key);
+                    if(!value1.equals(value2))
+                    {
+                        bEquals = false;
+                        break;
+                    }
+                }
+                //if bEquals is still true we found a matching map
+                if(bEquals)
+                {
+                    return bEquals;
+                }
+            }
+        }
+        
+        return bEquals;
+    }
+
+    /**
      * Removes all of the elements from this Vector
      */
     public void clear()
@@ -243,6 +306,29 @@ public class VJDFAttributeMap
         m_vec.clear();
     }
 
+    /**
+     *
+     * @param  vKeys
+     * @deprecated use redceMap
+     */
+    public void reduceKey(Vector vKeys)
+    {
+        VJDFAttributeMap v = new VJDFAttributeMap();
+
+        for (int i = 0; i < m_vec.size(); i++)
+        {
+            JDFAttributeMap map = (JDFAttributeMap)m_vec.elementAt(i);
+            map.reduceMap(vKeys);
+
+            if (!map.isEmpty())
+            {
+                v.appendUnique(map);
+            }
+        }
+
+        m_vec = v.getVector();
+    }
+    
     /**
     * reduce each JDFAttributeMap in <code>this</code> by keySet
     * @param keySet
@@ -370,8 +456,7 @@ public class VJDFAttributeMap
      *
      * @return boolean - true if the maps are equal, otherwise false
      */
-    @Override
-	public boolean equals(Object other)
+    public boolean equals(Object other)
     {
         if (this == other)
             return true;
@@ -400,8 +485,7 @@ public class VJDFAttributeMap
      * hashCode complements equals() to fulfill the equals/hashCode contract
      * @return int
      */
-    @Override
-	public int hashCode()
+    public int hashCode()
     {
         return HashUtil.hashCode(0, this.m_vec);
     }

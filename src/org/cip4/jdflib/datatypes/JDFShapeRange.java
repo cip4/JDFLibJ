@@ -186,14 +186,24 @@ public class JDFShapeRange extends JDFRange
      *
      * @return String - the range as a String
      */
-    @Override
-	public String toString()
+    public String toString()
     {
         if (m_left.equals(m_right)) 
         {
             return JDFConstants.EMPTYSTRING + getLeft();
         }
         return getLeft() + " ~ " + getRight();
+    }
+    
+    /**
+     * toString
+     *
+     * @return String
+     * @deprecated 060418 use toString
+     */
+    public String getString()
+    {
+        return toString();
     }
     
     /**
@@ -221,8 +231,7 @@ public class JDFShapeRange extends JDFRange
      *
      * @return boolean - true if equal otherwise false
      */
-    @Override
-	public boolean equals(Object other)
+    public boolean equals(Object other)
     {
         if (this == other)
         {
@@ -247,8 +256,7 @@ public class JDFShapeRange extends JDFRange
      * hashCode complements equals() to fulfill the equals/hashCode contract
      * @return int
      */
-    @Override
-	public int hashCode()
+    public int hashCode()
     {
         return HashUtil.hashCode(0, this.toString());
     }
@@ -274,8 +282,7 @@ public class JDFShapeRange extends JDFRange
      * 
      * @return boolean - true if range 'r' is within this range, else false
      */
-    @Override
-	public boolean isPartOfRange(JDFRange ra)
+    public boolean isPartOfRange(JDFRange ra)
     {
         JDFShapeRange r=(JDFShapeRange)ra;
         JDFShape min=this.getLowerValue();
@@ -344,20 +351,17 @@ public class JDFShapeRange extends JDFRange
     {
         return (m_left.isLess(m_right) ? m_left : m_right);
     }
-    @Override
-	protected Object getRightObject()
+    protected Object getRightObject()
     {       
         return m_right;
     }
 
-    @Override
-	protected Object getLeftObject()
+    protected Object getLeftObject()
     {
          return m_left;
     }
     
-    @Override
-	protected boolean inObjectRange(Object other)
+    protected boolean inObjectRange(Object other)
     {
        return inRange((JDFShape) other);
     }
