@@ -146,7 +146,8 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
     /* (non-Javadoc)
      * @see org.cip4.jdflib.auto.JDFAutoMessageService#toString()
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFMessageService[  --> " + super.toString() + " ]";
     }
@@ -170,29 +171,10 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
     }
 
     /**
-     * Method isCommand.
-     * @return boolean
-     * @deprecated use getCommand
-     */
-    public boolean isCommand()
-    {
-        return getCommand();
-    }
-
-    /**
-     * Method isQuery.
-     * @return boolean
-     * @deprecated use getQuery
-     */
-    public boolean isQuery()
-    {
-        return getQuery();
-    }
-
-    /**
      * append a devcaps for this and set its context to JMF
      */
-    public JDFDevCaps appendDevCaps()
+    @Override
+	public JDFDevCaps appendDevCaps()
     {
         JDFDevCaps dcs=super.appendDevCaps();
         dcs.setContext(EnumContext.JMF);
