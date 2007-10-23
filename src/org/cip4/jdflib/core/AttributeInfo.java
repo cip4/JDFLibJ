@@ -134,33 +134,6 @@ public class AttributeInfo
     
     
 	/**
-	 * Constructor
-	 * 
-	 * @param AttributeInfo
-	 *            attrInfo_super: corresponding attrib info of super; if null: start from
-	 *            scratch, otherwise initialize from other AttributeInfo
-	 * @param AtrInfoTable[]
-	 *            attrInfo_own: table with element-specific attribute info
-     * @deprecated
-	 */
-	@Deprecated
-	public AttributeInfo(AttributeInfo attrInfo_super, AtrInfoTable[] attrInfo_own)
-	{
-		// use AttributeInfo of super as a starting point
-		if (attrInfo_super != null) {
-			attribInfoTable = new HashMap(attrInfo_super.attribInfoTable);
-			version=attrInfo_super.version;
-		}
-		
-		
-		// fill table with the attributes specific to this element type (if any)
-		updateReplace(attrInfo_own);
-		
-		// now all schema-based knowledge should be in the attribute info table
-	}
-	
-	
-	/**
 	 * Updater
 	 * 
 	 * @param AtrInfoTable[]
@@ -720,23 +693,6 @@ public class AttributeInfo
 	
 	public void setVersion(EnumVersion v) {
 		version=v;
-	}
-	
-	
-	/**
-	 * returns the data type of a given attribute
-	 * @param attributeName the localname of the attribute to check 
-	 * @return the data type of attributeName
-	 * @deprecated 2005-08-26
-	 */
-	@Deprecated
-	public EnumAttributeType getAtrType(String attributeName) {
-		AtrInfo ai = (AtrInfo)attribInfoTable.get(attributeName);
-		if(ai==null)
-		{
-			return null;
-		}
-		return ai.getAtrType();
 	}
 	
 	
