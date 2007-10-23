@@ -85,7 +85,6 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.core.JDFConstants;
@@ -431,36 +430,6 @@ public class JDFAttributeMap implements Map
             }
         }
         m_hashTable = ht;
-    }
-    /**
-     * reduceKey - reduces the map, only valid map entries with the given key vector will be copied
-     * to the new hashtable
-     * @deprecated use reduceMap(set) (VString.getSet() returns a set)
-     * @param keys the given keys
-     */
-    @Deprecated
-	public void reduceMap(Vector keys)
-    {
-        Hashtable ht = new Hashtable();
-        final int size = keys.size();
-        for (int i = 0; i < size; i++)
-        {
-            if (m_hashTable.get(keys.elementAt(i)) != null)
-            {
-                ht.put(keys.elementAt(i), m_hashTable.get(keys.elementAt(i)));
-            }
-        }
-        m_hashTable = ht;
-    }
-
-    /**
-     * reduceKey - the same as reduceMap but with a worse name
-     * @deprecated use reduceMap
-     */
-    @Deprecated
-	public void reduceKey(Vector keys)
-    {
-        reduceMap(keys);
     }
 
     /**
