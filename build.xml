@@ -66,7 +66,7 @@
 
 	<target name="compile" depends="-init" description="Compiles the JDFLibJ source code.">
 		<echo>Compiling...</echo>
-		<javac destdir="${bin.dir}" debug="${build.debug}" optimize="${build.optimize}" target="5.0" source="5.0">
+		<javac destdir="${bin.dir}" debug="${build.debug}" optimize="${build.optimize}" target="1.5" source="1.5">
 			<src path="${jdflib.src.dir}" />
 			<src path="${apps.src.dir}" />
 			<classpath refid="project.class.path" />
@@ -170,7 +170,7 @@
 		<mkdir dir="${test.reports.dir}" />
 		<!-- Compile test cases -->
 		<echo>Compiling unit tests...</echo>
-		<javac destdir="${test.bin.dir}" debug="${build.debug}" target="5.0" source="5.0">
+		<javac destdir="${test.bin.dir}" debug="${build.debug}" target="1.5" source="1.5">
 			<src path="${test.src.dir}" />
 			<classpath refid="project.class.path" />
 			<classpath path="${bin.dir}" />
