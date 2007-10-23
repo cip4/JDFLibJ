@@ -176,7 +176,8 @@ public class JDFDoc extends XMLDoc
      * @return Object the cloned JDFDoc
      * @throws CloneNotSupportedException
      */
-    public Object clone() 
+    @Override
+	public Object clone() 
     {
         return new JDFDoc(((XMLDoc)super.clone()).getMemberDocument());
     }
@@ -186,45 +187,10 @@ public class JDFDoc extends XMLDoc
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFDoc: " + super.toString();
-    }
-    
-    /**
-     * CreateJDF
-     *
-     * @param JDFPath
-     * @deprecated simply use constructor
-     * @return JDFDoc
-     */
-    public static JDFDoc createJDF(String jdfPath)
-    {
-        final JDFDoc new_doc = new JDFDoc();
-        final JDFNode root = (JDFNode) new_doc.createElement(ElementName.JDF);
-        root.setAttribute (AttributeName.ID, JDFElement.uniqueID(50), JDFConstants.EMPTYSTRING);
-        root.init();
-
-        new_doc.appendChild(root);
-
-        new_doc.write2File(jdfPath, 0, true);
-        
-        return new_doc;
-    }
-
- 
-   /**
-    * returns a JDFNode by its id attribute
-    *
-    * @param id the ID parameter of the JDF node
-    * @return JDFNode - the corresponding JDF Node, null if no such node exists
-    * @deprecated use getRoot().getTarget(id, AttributeName.ID) and cast.
-    *
-    */
-    public JDFNode getJDFNodeByID(String id)
-    {
-        
-        return (JDFNode) getRoot().getTarget(id, AttributeName.ID);
     }
     
     /**
@@ -335,7 +301,8 @@ public class JDFDoc extends XMLDoc
      * 
      * @default setRoot(ElementName.JDF, null)
      */
-    public KElement setRoot(String strDocType, String namespaceURI)
+    @Override
+	public KElement setRoot(String strDocType, String namespaceURI)
     {
         KElement root = super.setRoot(strDocType, namespaceURI);
         if (root != null)
