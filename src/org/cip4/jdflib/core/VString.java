@@ -19,7 +19,6 @@ import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.node.JDFNode.EnumType;
-import org.cip4.jdflib.util.StringUtil;
 
 /**
  *
@@ -48,17 +47,6 @@ public class VString extends Vector<String>
         super();
         if(m!=null)
             addAll(m);
-    }
-
-    /**
-     * constructs a VString by tokenizing a string
-     * @param strIn the string to tokenize by blank
-     * @deprecated use VString (String strIn, null)
-     */
-    @Deprecated
-	public VString (String strIn)
-    {
-        this(strIn, null);
     }
 
     /**
@@ -116,28 +104,6 @@ public class VString extends Vector<String>
     }
     
     /**
-     * Method getAllStrings - returns all strings concatenated together
-     * @param strSep separation between the strings
-     * @return String
-     * @deprecated use getString(strSep,null,null)
-     */
-    @Deprecated
-	public String getAllStrings (String strSep)
-    {
-        return StringUtil.setvString(this,strSep,null,null);
-    }
-
-    /**
-     * @return all strings separated by a blank
-     * @deprecated use getString(JDFConstants.BLANK,null,null)
-     */
-    @Deprecated
-	public String getAllStrings()
-    {
-        return StringUtil.setvString(this,JDFConstants.BLANK,null,null);
-    }
-    
-    /**
      * Method setAllStrings - put a separated string into the vString<br>
      *                        e.g.  "asdf asdf asdf asdf"
      * @param strIn  separated string
@@ -180,20 +146,6 @@ public class VString extends Vector<String>
     }
 
     /**
-    * hasString - is 's' a member of <code>this</code>?
-    * 
-    * @param s string to find
-    * 
-    * @return boolean - true, if 's' is included in <code>this</code>
-    * @deprecated 2005-02-14 use contains ...
-    */
-    @Deprecated
-	public boolean hasString(String s)
-    {
-        return index(s)>=0;
-    }
-    
-    /**
      * AppendUnique - append a string but ignore multiple entries
      *
      * @param v the string to append
@@ -228,19 +180,6 @@ public class VString extends Vector<String>
     /**
      * removeStrings - remove all occurrences of a string
      *
-     * @param v
-     * @deprecated use removeStrings(v, Integer.MAX_VALUE);
-     */
-    @Deprecated
-	public void removeStrings(VString v)
-    {
-        removeStrings(v, Integer.MAX_VALUE);
-    }
-
-
-    /**
-     * removeStrings - remove all occurrences of a string
-     *
      * @param v    the vector of strings to remove from <code>this</code>
      * @param nMax the max number of strings to remove
      */
@@ -260,18 +199,6 @@ public class VString extends Vector<String>
     }
 
     /**
-     * removeStrings - remove all occurrences of a string
-     *
-     * @param String s
-     * @deprecated use removeStrings(s, Integer.MAX_VALUE);
-     */
-    @Deprecated
-	public void removeStrings(String s)
-    {
-        removeStrings(s, Integer.MAX_VALUE);
-    }
-    
-    /**
      * removeStrings - remove nMax occurrences of a string
      *
      * @param s    the string to remove
@@ -289,49 +216,6 @@ public class VString extends Vector<String>
         }
     }
     
-    /**
-    * serialize to a string
-    * @param sep   separator between strings
-    * @param front string before the first entry
-    * @param back  string after the last entry
-    * 
-    * @return a tokenized string
-    * @deprecated use StringUtil setVString
-    * default: GetString(sep, JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING)
-    */
-    @Deprecated
-	public String getString(String sep, String front, String back)
-    {
-        return StringUtil.setvString(this,sep,front,back);
-    }
-
-    /**
-     * create a string from a vector of tokens
-     * @param v     vector of tokens
-     * @param sep   separator between tokens
-     * @param front prefix to string (before the first token)
-     * @param end   suffix to string (after the last token)
-     * @return condensed string of tokens separated by sep
-     * @deprecated use getString
-     */
-    @Deprecated
-	public String setvString(VString v, String sep, String front , String end)
-    {
-        String s = front==null ? JDFConstants.EMPTYSTRING : front;
-        final int siz = v.size();
-        for(int i = 0; i < siz; i++)
-        {
-            if(i != 0)//add seperator after every add
-            {
-                s+=sep;
-            }
-            s += v.elementAt(i);
-        }
-        if(end!=null)
-        	s += end;
-        return s;
-    }
-
     /**
      * unify - make VString unique, retaining initial order
      */
