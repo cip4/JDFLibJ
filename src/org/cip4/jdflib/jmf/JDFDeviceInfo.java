@@ -88,7 +88,6 @@ import java.util.zip.DataFormatException;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
@@ -149,20 +148,11 @@ import org.cip4.jdflib.util.JDFDate;
      * toString()
      * @see org.cip4.jdflib.auto.JDFAutoDeviceInfo#toString()
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFDeviceInfo[  --> " + super.toString() + " ]";
     }
-    
-     /**
-     * Method getJobCount.
-     * @return int
-     * @deprecated use numChildElements(ElementName.JOBPHASE,null)
-     */
-    public int getJobCount()
-    {
-        return getChildrenByTagName(ElementName.JOBPHASE,null,null, false, true,0).size();
-    }   
     
     /**
      * (11) set attribute IdleStartTime
