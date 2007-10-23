@@ -302,7 +302,7 @@ public class XMLDoc
         try
         {
             outStream = new ByteArrayOutputStream(4096);
-            write2Stream(outStream, indent);
+            write2Stream(outStream, indent, true);
             strResult = outStream.toString("UTF-8");
         }
         catch (IOException e)
