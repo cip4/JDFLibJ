@@ -394,44 +394,10 @@ public class JDFResourceLink extends JDFElement
             return iterator(EnumUsage.class);
         }
 
-        /**
-         * @deprecated use getEnumList
-         * @return Vector
-         */
-        @Deprecated
-		public static Vector getNamesVector()
-        {
-            final Vector namesVector = new Vector();
-            final Iterator it = iterator(EnumUsage.class);
-            while (it.hasNext())
-            {
-                namesVector.addElement(((ValuedEnum) it.next()).getName());
-            }
-
-            return namesVector;
-        }
-
         public static final EnumUsage Input = new EnumUsage("Input");
 
         public static final EnumUsage Output = new EnumUsage("Output");
 
-    }
-
-    /**
-     * Enumeration strings for Usage
-     * 
-     * @deprecated
-     */
-    @Deprecated
-	public static String usageString()
-    {
-        String s = JDFConstants.EMPTYSTRING;
-        final Vector namesVector = EnumUsage.getNamesVector();
-        for (int i = 0; i < namesVector.size(); i++)
-        {
-            s += JDFConstants.COMMA + (String) namesVector.elementAt(i);
-        }
-        return s.equals(JDFConstants.EMPTYSTRING) ? null : s;
     }
 
     // **************************************** Methods
@@ -598,18 +564,6 @@ public class JDFResourceLink extends JDFElement
             }
         }
         return r;
-    }
-
-    /**
-     * getLinkTarget
-     *
-     * @return JDFResource
-     * @deprecated never used
-     */
-    @Deprecated
-	public JDFResource getLinkTarget()
-    {
-        return getTarget();
     }
 
     /**
@@ -1546,24 +1500,6 @@ public class JDFResourceLink extends JDFElement
         return getAttribute(attrib, nameSpaceURI, null);
     }
 
-    /**
-     * returns true if the  attribute occurrs
-     * 
-     * @param attrib the attribute name
-     * @param nameSpaceURI the XML-namespace
-     * @param mPart
-     *            which part of this ResourceLink the Amount belongs to, if empty get the
-     *            ResourceLink root attribute
-     * @return  true if  available
-     * @deprecated 060601 use getAmountPoolAttribute(attrib,nameSpaceURI,mPart,0)!=null;
-     * @since 071103 
-     */
-    @Deprecated
-	public boolean hasAmountPoolAttribute(String attrib, String nameSpaceURI, JDFAttributeMap mPart)
-    {
-        return getAmountPoolAttribute(attrib,nameSpaceURI,mPart,0)!=null;
-    }
-
     /** 
      * sets  the  attribute occurence in the appropriate PartAmount when called for a resourceLink
      * and creates the AmountPool and/or PartAmount(s) if they are not yet there
@@ -1705,18 +1641,6 @@ public class JDFResourceLink extends JDFElement
     }
 
     /**
-     * set attribute ProcessUsage
-     *
-     * @param s
-     * @deprecated use the enum method
-     */
-    @Deprecated
-	public void setProcessUsage(String s)
-    {
-        setAttribute(AttributeName.PROCESSUSAGE, s, null);
-    }
-
-    /**
      * get attribute ProcessUsage
      *
      * @return String
@@ -1832,23 +1756,6 @@ public class JDFResourceLink extends JDFElement
     }
 
     /**
-     * Sets the value of PipePartIDKeys
-     * 
-     * @param keys vector of values to set
-     * @deprecated use setPipePartIDKeys(Vector enum)
-     */
-    @Deprecated
-	public void setPipePartIDKeys(VString keys)
-    {
-        Vector vEnum = new Vector();
-        for (int i = 0; i < keys.size(); i++)
-        {
-            vEnum.add(EnumPartIDKey.getEnum(keys.elementAt(i)));
-        }
-        setPipePartIDKeys(vEnum);
-    }
-
-    /**
      * Sets the value of PipePartIDKeys 
      *
      * @param keys vector of values to set
@@ -1857,23 +1764,6 @@ public class JDFResourceLink extends JDFElement
     {
         setEnumerationsAttribute(AttributeName.PIPEPARTIDKEYS, keys, null);
 
-    }
-
-    /**
-     * Gets a list of all valid pipe part keys for this resource
-     *
-     * @return VString - list of all PipePartIDKeys
-     * @deprecated
-     */
-    @Deprecated
-	public VString getPipePartIDKeys()
-    {
-        VString vPipePartIDKeys  = new VString();
-        Vector v = getPipePartIDKeysEnum();
-        for (int i = 0; i < v.size(); i++)
-            vPipePartIDKeys.add(((EnumPartIDKey) v.elementAt(i)).getName());
-
-        return vPipePartIDKeys;
     }
 
     /**
