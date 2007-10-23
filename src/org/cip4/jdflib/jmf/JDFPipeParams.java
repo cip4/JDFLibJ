@@ -150,32 +150,12 @@ public class JDFPipeParams extends JDFAutoPipeParams
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
     
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFPipeParams[  --> " + super.toString() + " ]";
     }
 
-    /**
-     * Gets all ResourceLink children with the attribute name, mAttrib, nameSpaceURI from the pool
-     * @param name name of the Child
-     * @param mAttrib a attribute to search for
-     * @return VElement: a vector with all resource links in the pool matching the conditions
-     * @deprecated use getResourceLink()
-     */
-    final public VElement getResourceLinks(String nam, JDFAttributeMap mAttrib, String nameSpaceURI)
-    {
-        VElement v = getChildElementVector(nam,nameSpaceURI,mAttrib,true, 0, false);
-        
-        for(int i=v.size()-1; i>=0; i--)
-        {
-            JDFElement e = (JDFElement) v.elementAt(i);
-            if(!(e instanceof JDFResourceLink)){
-                v.remove(i);
-            }
-        }
-        return v;
-    }
-    
     /**
      * Gets the ResourceLink from the PipeParams element
      * @return VElement: a vector with all resource links in the pool matching the conditions
@@ -204,7 +184,8 @@ public class JDFPipeParams extends JDFAutoPipeParams
      * @return Vector - vector of unknown element nodenames
      */
     
-    public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
+    @Override
+	public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
     {
         if(bIgnorePrivate) // dummy to soothe compiler warning
             bIgnorePrivate=false;
