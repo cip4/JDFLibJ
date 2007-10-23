@@ -82,7 +82,6 @@ import java.util.HashSet;
 import java.util.Vector;
 
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.resource.JDFResource;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -167,53 +166,6 @@ public class VElement extends Vector<KElement>
 		}
 		
 		return -1;
-	}
-	
-	/**
-	 * hasElement - checks if kElem is in the vector
-     * in contrast to contains, this uses the isEquals method
-	 *
-	 * @param kElem the element to look for
-	 * @deprecated 060216 use containsElement
-	 * @return true if s is contained in this
-	 */
-	@Deprecated
-	public boolean hasElement (KElement kElem)
-	{
-		return index(kElem) >= 0;
-	}
-	
-	/**
-	 * appendUniqueNotNull - append a string but ignore multiple entries
-	 *
-	 * @param KElement v
-	 * @deprecated simply use appendUnique
-	 */
-	@Deprecated
-	public void appendUniqueNotNull(KElement v)
-	{
-		if (v != null && !contains(v))
-		{
-			addElement(v);
-		}
-	}
-	
-	/**
-	 * AppendUniqueNotNull - append a vector but ignore multiple entries
-	 *
-	 * @param VElement v
-	 * @deprecated simply use appendUnique
-	 */
-	@Deprecated
-	public void appendUniqueNotNull(VElement v)
-	{
-		if ( v != null )
-		{
-			for (int i = 0; i < v.size(); i++)
-			{
-				appendUniqueNotNull(v.elementAt(i));
-			}
-		}
 	}
 	
     /**
@@ -495,20 +447,6 @@ public class VElement extends Vector<KElement>
 		return ret; // if we get here it is null
 	}
 	
-	/**
-	 * Resource
-	 *
-	 * @param int i
-	 *
-	 * @return JDFResource
-	 * @deprecated used only to facilitate migration from vResource to vElement
-	 */
-	@Deprecated
-	public JDFResource resource(int i)
-	{
-		return (JDFResource) elementAt(i);
-	}
-    
     /**
      * unify - make VElement unique, retaining initial order
      */
