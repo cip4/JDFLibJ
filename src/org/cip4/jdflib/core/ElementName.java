@@ -213,8 +213,6 @@ public final class ElementName
     public static final String COLORNAME = "ColorName";
     public static final String COLORPOOL = "ColorPool";
     public static final String COLORSCONSTRAINTSPOOL = "ColorsConstraintsPool";
-    /** @deprecated */
-    public static final String COLORSPACECONVERSION = "ColorSpaceConversion";
     public static final String COLORSPACECONVERSIONOP = "ColorSpaceConversionOp";
     public static final String COLORSPACECONVERSIONPARAMS = "ColorSpaceConversionParams";
     public static final String COLORSPACESUBSTITUTE = "ColorSpaceSubstitute";
@@ -223,10 +221,6 @@ public final class ElementName
     public static final String COLORSUSED = "ColorsUsed";
     public static final String COLORTYPE = "ColorType";
     public static final String COMBBRAND = "CombBrand";
-    /** @deprecated use EnumType.xxx.getName()*/
-    public static final String COMBINE = "Combine";
-    /** @deprecated use EnumType.xxx.getName()*/
-    public static final String COMBINED = "Combined";
     public static final String COMCHANNEL = "ComChannel";
     public static final String COMMAND = "Command";
     public static final String COMMENT = "Comment";
@@ -234,23 +228,17 @@ public final class ElementName
     public static final String COMPONENT = "Component";
     public static final String CONSTRAINTVALUE = "ConstraintValue";
     public static final String CONTACT = "Contact";
-    /** @deprecated use EnumType.xxx.getName()*/
-    public static final String CONTACTCOPYING = "ContactCopying";
     public static final String CONTACTCOPYPARAMS = "ContactCopyParams";
     public static final String CONTAINER = "Container";
     public static final String CONTENTDATA = "ContentData";
     public static final String CONTENTLIST = "ContentList";
     public static final String CONTENTOBJECT = "ContentObject";
     public static final String CONTONECALIBRATION = "ContoneCalibration";
-    /** @deprecated */
-    public static final String CONVENTIONALPRINTING = "ConventionalPrinting";
     public static final String CONVENTIONALPRINTINGPARAMS = "ConventionalPrintingParams";
     public static final String COSTCENTER = "CostCenter";
     public static final String COUNTERRESET = "CounterReset";
     public static final String COVER = "Cover";
     public static final String COVERAGE = "Coverage";
-    /** @deprecated */
-    public static final String COVERAPPLICATION = "CoverApplication";
     public static final String COVERAPPLICATIONPARAMS = "CoverApplicationParams";
     public static final String COVERCOLOR = "CoverColor";
     public static final String COVERSTYLE = "CoverStyle";
@@ -303,16 +291,8 @@ public final class ElementName
     public static final String DEVICENCOLOR = "DeviceNColor";
     public static final String DEVICENSPACE = "DeviceNSpace";
     public static final String DIELAYOUT = "DieLayout";
-    /**
-     * @deprecated use EnumType.Delivery.getName();
-     */
-    public static final String DIGITALDELIVERY = "DigitalDelivery";
     public static final String DIGITALDELIVERYPARAMS = "DigitalDeliveryParams";
     public static final String DIGITALMEDIA = "DigitalMedia";
-    /**
-     * @deprecated use EnumType.DigitalPrinting.getName();
-     */
-    public static final String DIGITALPRINTING = "DigitalPrinting";
     public static final String DIGITALPRINTINGPARAMS = "DigitalPrintingParams";
     public static final String DIMENSIONS = "Dimensions";
     public static final String DIRECTION = "Direction";
@@ -681,12 +661,8 @@ public final class ElementName
     public static final String PRINTROLLINGPARAMS = "PrintRollingParams";
     public static final String PRITEM = "PRItem";
     public static final String PROCCURRENCE = "PROccurrence";
-    /** @deprecated use EnumType.xxx.getName()*/
-    public static final String PROCESSGROUP = "ProcessGroup";
     public static final String PROCESSRUN = "ProcessRun";
     public static final String PROCESSTYPE_UNKNOWN = "Unknown";
-    /** @deprecated use EnumType.xxx.getName()*/
-    public static final String PRODUCT = "Product";
     public static final String PRODUCTIONINTENT = "ProductionIntent";
     public static final String PRODUCTIONPATH = "ProductionPath";
     public static final String PRODUCTIONSUBPATH = "ProductionSubPath";
