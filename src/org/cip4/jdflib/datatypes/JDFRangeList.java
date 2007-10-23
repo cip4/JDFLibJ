@@ -175,20 +175,10 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
      * getString - serialize to string
      * 
      * @return String - a list of ranges in the format PT30M30S~PT35M 
-     * (duration (JDFDate) has a format=P1Y2M3DT12H30M30S)
-     * @deprecated 060418 use toString
-     */
-    public final String getString()
-    {
-         return toString();
-     }
-    /**
-     * getString - serialize to string
-     * 
-     * @return String - a list of ranges in the format PT30M30S~PT35M 
      * (duration (JDFDuration) has a format=P1Y2M3DT12H30M30S)  
      */
-     public final String toString()
+     @Override
+	public final String toString()
      {
          String s = JDFConstants.EMPTYSTRING;
          int sz = rangeList.size();
@@ -286,7 +276,8 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
      *
      * @return boolean - true if equal otherwise false
      */
-    final public boolean equals(Object other)
+    @Override
+	final public boolean equals(Object other)
     {
         if (this == other)
         {
@@ -325,7 +316,8 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
     /**
      * hashCode complements equals() to fulfill the equals/hashCode contract
      */
-    final public int hashCode()
+    @Override
+	final public int hashCode()
     {
         return HashUtil.hashCode(0, this.toString());
     }
