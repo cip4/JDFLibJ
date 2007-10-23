@@ -91,7 +91,6 @@ package org.cip4.jdflib.core;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 
@@ -166,17 +165,6 @@ public class JDFRefElement extends JDFElement
 	}
 	
 	/**
-	 * test Part element existence 
-	 * @deprecated 060310 use inline hasChildElement(ElementName.PART, null);
-	 */
-	@Deprecated
-	public boolean hasPart()
-	{
-		return this.hasChildElement(ElementName.PART, null);
-	}
-	
-	
-	/**
 	 * Set attribute rRef
 	 *@param value the value to set the attribute to
 	 */
@@ -222,17 +210,6 @@ public class JDFRefElement extends JDFElement
 		return getAttribute(JDFConstants.RREF, JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING);
 	}
 		
-	/**
-	 * Set attribute rSubRef
-	 *@param value the value to set the attribute to
-	 *@deprecated in JDF 1.2
-	 */
-	@Deprecated
-	public void setrSubRef(String value)
-	{
-		setAttribute(JDFConstants.RSUBREF, value, JDFConstants.EMPTYSTRING);
-	}
-	
 	/**
 	 * Get string attribute rSubRef
 	 * @return String - the vaue of the attribute
@@ -462,27 +439,6 @@ public class JDFRefElement extends JDFElement
 		return (JDFPart) getCreateElement_KElement(ElementName.PART, null, 0);
 	}
 	
-	/**
-	 * @deprecated
-	 */
-	@Deprecated
-	public void removePart()
-	{
-		removeChild(ElementName.PART, null, 0);
-	}
-	
-    /**
-     * get part map vector
-     * @deprecated 060310 not more than one is allowed - use getPartMap
-     * @return VJDFAttributeMap: vector of attribute maps, one for each part
-     */
-    @Deprecated
-	@Override
-	public VJDFAttributeMap getPartMapVector()
-    {
-        return getPartMapVector();
-    }
-    
     /**
      * get part map 
      * @return JDFAttributeMap: the attribute maps, one for each part
