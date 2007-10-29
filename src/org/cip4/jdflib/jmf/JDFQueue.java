@@ -361,7 +361,7 @@ public class JDFQueue extends JDFAutoQueue
             return true;
         //if(EnumQueueStatus.Blocked.equals(status))
         // blocked or null(illegal)
-        return numEntries(null)<getQueueSize();         
+        return hasAttribute(AttributeName.QUEUESIZE)?numEntries(null)<getQueueSize():true;         
     }
 
     /**

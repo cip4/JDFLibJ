@@ -170,7 +170,7 @@ import org.cip4.jdflib.core.JDFDoc;
             return resp;
         } 
         
-        if(!theQueue.canExecute())
+        if(!theQueue.canAccept())
         {
             resp.setReturnCode(112); //  
             resp.copyElement(theQueue, null);
