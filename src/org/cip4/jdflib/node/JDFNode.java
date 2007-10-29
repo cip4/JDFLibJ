@@ -5647,10 +5647,13 @@ public class JDFNode extends JDFElement
             {
                 VElement v=rlp.getPoolChildren(elementName+"Link",new JDFAttributeMap(AttributeName.USAGE,"Input"),null);
                 int siz=v==null ? 0 : v.size();
+                final VString types = getTypes();
+                
                 for(int i=0;i<siz;i++)
                 {
                     JDFResourceLink rl=(JDFResourceLink) v.elementAt(i);
-                    if(!rl.hasAttribute(AttributeName.COMBINEDPROCESSINDEX) || (hasAttribute(AttributeName.TYPES) && rl.getCombinedProcessIndex().size()==getTypes().size()))
+                    final JDFIntegerList combinedProcessIndex = rl.getCombinedProcessIndex();
+                    if(combinedProcessIndex==null || (types!=null && combinedProcessIndex.size()==types.size()))
                     {
                         nici=rl.getTarget();
                         break;
@@ -5704,7 +5707,7 @@ public class JDFNode extends JDFElement
         if (nici == null)
         {
             EnumVersion eVer = getVersion(true);
-            if (eVer.getValue() >= EnumVersion.Version_1_3.getValue())
+            if (eVer!=null && eVer.getValue() >= EnumVersion.Version_1_3.getValue())
             {
                 nici = addResource( s, null, EnumUsage.Input,null,this,null,null);
             }
