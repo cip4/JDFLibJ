@@ -3856,10 +3856,10 @@ public class JDFElement extends KElement
 
 
         /**
-         * @deprecated EnumVersion.Unknown
+         * @ deprecated EnumVersion.Unknown - 
+         * don't use EnumVersion.Unknown, it can't be deprecated because of bit operations in eg. AtrInfo.getFirstVersion()
          */
-        @Deprecated
-		public static final EnumVersion Unknown = new EnumVersion(JDFConstants.UNKNOWN);
+		public static final EnumVersion Unknown     = new EnumVersion(JDFConstants.UNKNOWN);
 
         public static final EnumVersion Version_1_0 = new EnumVersion(JDFConstants.VERSION_1_0);
         public static final EnumVersion Version_1_1 = new EnumVersion(JDFConstants.VERSION_1_1);
