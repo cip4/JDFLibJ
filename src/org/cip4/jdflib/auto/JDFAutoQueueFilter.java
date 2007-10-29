@@ -338,15 +338,6 @@ public abstract class JDFAutoQueueFilter extends JDFElement
         Methods for Attribute OlderThan
         --------------------------------------------------------------------- */
         /**
-          * (10) set attribute OlderThan
-          * @deprecated 2005-12-02 use setOlderThan(null)
-          */
-        public void setOlderThan()
-        {
-            setAttribute(AttributeName.OLDERTHAN, new JDFDate().getDateTimeISO(), null);
-        }
-
-        /**
           * (11) set attribute OlderThan
           * @param value: the value to set the attribute to or null
           */
@@ -373,7 +364,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
                 }
                 catch(DataFormatException dfe)
                 {
-                    throw new JDFException("not a valid date string. Malformed JDF");
+                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
                 }
             }
             return nMyDate;
@@ -383,15 +374,6 @@ public abstract class JDFAutoQueueFilter extends JDFElement
         /* ---------------------------------------------------------------------
         Methods for Attribute NewerThan
         --------------------------------------------------------------------- */
-        /**
-          * (10) set attribute NewerThan
-          * @deprecated 2005-12-02 use setNewerThan(null)
-          */
-        public void setNewerThan()
-        {
-            setAttribute(AttributeName.NEWERTHAN, new JDFDate().getDateTimeISO(), null);
-        }
-
         /**
           * (11) set attribute NewerThan
           * @param value: the value to set the attribute to or null
@@ -419,7 +401,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
                 }
                 catch(DataFormatException dfe)
                 {
-                    throw new JDFException("not a valid date string. Malformed JDF");
+                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
                 }
             }
             return nMyDate;

@@ -1178,7 +1178,7 @@ public class JavaCoreStringUtil
                 strbufResult
                         .append(strDepth5)
                         .append(
-                                "throw new JDFException(\"not a valid date string. Malformed JDF\");")
+                                "// throw new JDFException(\"not a valid date string. Malformed JDF - return null\");")
                         .append(strLineEnd);
                 strbufResult.append(strDepth4).append("}").append(strLineEnd);
                 strbufResult.append(strDepth3).append("}").append(strLineEnd);
@@ -1189,25 +1189,6 @@ public class JavaCoreStringUtil
             }
             else
             {
-                // set 10
-                strbufResult.append(strDepth2)
-                    .append("/**").append(strLineEnd);
-                strbufResult.append(strDepth2)
-                .append("  * (10) set attribute ").append(modifiedAttributeName).append(strLineEnd);
-                strbufResult.append(strDepth2)
-                .append("  * @deprecated 2005-12-02 use set").append(modifiedAttributeName).append("(null)").append(strLineEnd);
-                strbufResult.append(strDepth2)
-                    .append("  */").append(strLineEnd);
-                strbufResult.append(strDepth2)
-                    .append("public void set").append(modifiedAttributeName).append("()").append(strLineEnd);
-                strbufResult.append(strDepth2)
-                    .append("{").append(strLineEnd);
-                strbufResult.append(strDepth3)
-                    .append("setAttribute(AttributeName.").append(modifiedAttributeName.toUpperCase())
-                        .append(", new JDFDate().getDateTimeISO(), null);").append(strLineEnd);
-                strbufResult.append(strDepth2)
-                    .append("}").append(strLineEnd).append(strLineEnd);
-
                 // set 11
                 strbufResult.append(strDepth2)
                     .append("/**").append(strLineEnd);
@@ -1266,7 +1247,7 @@ public class JavaCoreStringUtil
                 strbufResult.append(strDepth4)
                     .append("{").append(strLineEnd);
                 strbufResult.append(strDepth5)
-                    .append("throw new JDFException(\"not a valid date string. Malformed JDF\");").append(strLineEnd);
+                    .append("// throw new JDFException(\"not a valid date string. Malformed JDF - return null\");").append(strLineEnd);
                 strbufResult.append(strDepth4)
                     .append("}").append(strLineEnd);
                 strbufResult.append(strDepth3)

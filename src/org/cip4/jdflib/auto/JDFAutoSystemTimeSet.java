@@ -78,7 +78,6 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.util.JDFDate;
     /*
     *****************************************************************************
@@ -164,15 +163,6 @@ public abstract class JDFAutoSystemTimeSet extends JDFElement
         Methods for Attribute NewTime
         --------------------------------------------------------------------- */
         /**
-          * (10) set attribute NewTime
-          * @deprecated 2005-12-02 use setNewTime(null)
-          */
-        public void setNewTime()
-        {
-            setAttribute(AttributeName.NEWTIME, new JDFDate().getDateTimeISO(), null);
-        }
-
-        /**
           * (11) set attribute NewTime
           * @param value: the value to set the attribute to or null
           */
@@ -199,7 +189,7 @@ public abstract class JDFAutoSystemTimeSet extends JDFElement
                 }
                 catch(DataFormatException dfe)
                 {
-                    throw new JDFException("not a valid date string. Malformed JDF");
+                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
                 }
             }
             return nMyDate;
@@ -209,15 +199,6 @@ public abstract class JDFAutoSystemTimeSet extends JDFElement
         /* ---------------------------------------------------------------------
         Methods for Attribute OldTime
         --------------------------------------------------------------------- */
-        /**
-          * (10) set attribute OldTime
-          * @deprecated 2005-12-02 use setOldTime(null)
-          */
-        public void setOldTime()
-        {
-            setAttribute(AttributeName.OLDTIME, new JDFDate().getDateTimeISO(), null);
-        }
-
         /**
           * (11) set attribute OldTime
           * @param value: the value to set the attribute to or null
@@ -245,7 +226,7 @@ public abstract class JDFAutoSystemTimeSet extends JDFElement
                 }
                 catch(DataFormatException dfe)
                 {
-                    throw new JDFException("not a valid date string. Malformed JDF");
+                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
                 }
             }
             return nMyDate;

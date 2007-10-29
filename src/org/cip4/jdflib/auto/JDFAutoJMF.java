@@ -309,15 +309,6 @@ public abstract class JDFAutoJMF extends JDFPool
         Methods for Attribute TimeStamp
         --------------------------------------------------------------------- */
         /**
-          * (10) set attribute TimeStamp
-          * @deprecated 2005-12-02 use setTimeStamp(null)
-          */
-        public void setTimeStamp()
-        {
-            setAttribute(AttributeName.TIMESTAMP, new JDFDate().getDateTimeISO(), null);
-        }
-
-        /**
           * (11) set attribute TimeStamp
           * @param value: the value to set the attribute to or null
           */
@@ -344,7 +335,7 @@ public abstract class JDFAutoJMF extends JDFPool
                 }
                 catch(DataFormatException dfe)
                 {
-                    throw new JDFException("not a valid date string. Malformed JDF");
+                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
                 }
             }
             return nMyDate;

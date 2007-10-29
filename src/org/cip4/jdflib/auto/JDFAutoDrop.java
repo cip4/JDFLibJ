@@ -240,15 +240,6 @@ public abstract class JDFAutoDrop extends JDFElement
         Methods for Attribute Earliest
         --------------------------------------------------------------------- */
         /**
-          * (10) set attribute Earliest
-          * @deprecated 2005-12-02 use setEarliest(null)
-          */
-        public void setEarliest()
-        {
-            setAttribute(AttributeName.EARLIEST, new JDFDate().getDateTimeISO(), null);
-        }
-
-        /**
           * (11) set attribute Earliest
           * @param value: the value to set the attribute to or null
           */
@@ -275,7 +266,7 @@ public abstract class JDFAutoDrop extends JDFElement
                 }
                 catch(DataFormatException dfe)
                 {
-                    throw new JDFException("not a valid date string. Malformed JDF");
+                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
                 }
             }
             return nMyDate;
@@ -330,15 +321,6 @@ public abstract class JDFAutoDrop extends JDFElement
         Methods for Attribute Required
         --------------------------------------------------------------------- */
         /**
-          * (10) set attribute Required
-          * @deprecated 2005-12-02 use setRequired(null)
-          */
-        public void setRequired()
-        {
-            setAttribute(AttributeName.REQUIRED, new JDFDate().getDateTimeISO(), null);
-        }
-
-        /**
           * (11) set attribute Required
           * @param value: the value to set the attribute to or null
           */
@@ -365,7 +347,7 @@ public abstract class JDFAutoDrop extends JDFElement
                 }
                 catch(DataFormatException dfe)
                 {
-                    throw new JDFException("not a valid date string. Malformed JDF");
+                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
                 }
             }
             return nMyDate;

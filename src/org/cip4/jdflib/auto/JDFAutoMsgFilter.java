@@ -241,15 +241,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
         Methods for Attribute After
         --------------------------------------------------------------------- */
         /**
-          * (10) set attribute After
-          * @deprecated 2005-12-02 use setAfter(null)
-          */
-        public void setAfter()
-        {
-            setAttribute(AttributeName.AFTER, new JDFDate().getDateTimeISO(), null);
-        }
-
-        /**
           * (11) set attribute After
           * @param value: the value to set the attribute to or null
           */
@@ -276,7 +267,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
                 }
                 catch(DataFormatException dfe)
                 {
-                    throw new JDFException("not a valid date string. Malformed JDF");
+                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
                 }
             }
             return nMyDate;
@@ -286,15 +277,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
         /* ---------------------------------------------------------------------
         Methods for Attribute Before
         --------------------------------------------------------------------- */
-        /**
-          * (10) set attribute Before
-          * @deprecated 2005-12-02 use setBefore(null)
-          */
-        public void setBefore()
-        {
-            setAttribute(AttributeName.BEFORE, new JDFDate().getDateTimeISO(), null);
-        }
-
         /**
           * (11) set attribute Before
           * @param value: the value to set the attribute to or null
@@ -322,7 +304,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
                 }
                 catch(DataFormatException dfe)
                 {
-                    throw new JDFException("not a valid date string. Malformed JDF");
+                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
                 }
             }
             return nMyDate;

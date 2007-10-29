@@ -82,7 +82,6 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
     /*
@@ -397,15 +396,6 @@ public abstract class JDFAutoDisposition extends JDFElement
         Methods for Attribute Until
         --------------------------------------------------------------------- */
         /**
-          * (10) set attribute Until
-          * @deprecated 2005-12-02 use setUntil(null)
-          */
-        public void setUntil()
-        {
-            setAttribute(AttributeName.UNTIL, new JDFDate().getDateTimeISO(), null);
-        }
-
-        /**
           * (11) set attribute Until
           * @param value: the value to set the attribute to or null
           */
@@ -432,7 +422,7 @@ public abstract class JDFAutoDisposition extends JDFElement
                 }
                 catch(DataFormatException dfe)
                 {
-                    throw new JDFException("not a valid date string. Malformed JDF");
+                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
                 }
             }
             return nMyDate;

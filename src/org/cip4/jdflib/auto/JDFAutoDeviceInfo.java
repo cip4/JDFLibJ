@@ -487,15 +487,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
         Methods for Attribute PowerOnTime
         --------------------------------------------------------------------- */
         /**
-          * (10) set attribute PowerOnTime
-          * @deprecated 2005-12-02 use setPowerOnTime(null)
-          */
-        public void setPowerOnTime()
-        {
-            setAttribute(AttributeName.POWERONTIME, new JDFDate().getDateTimeISO(), null);
-        }
-
-        /**
           * (11) set attribute PowerOnTime
           * @param value: the value to set the attribute to or null
           */
@@ -522,7 +513,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
                 }
                 catch(DataFormatException dfe)
                 {
-                    throw new JDFException("not a valid date string. Malformed JDF");
+                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
                 }
             }
             return nMyDate;

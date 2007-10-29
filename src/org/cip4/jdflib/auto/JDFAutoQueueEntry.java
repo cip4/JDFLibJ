@@ -269,15 +269,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
         Methods for Attribute EndTime
         --------------------------------------------------------------------- */
         /**
-          * (10) set attribute EndTime
-          * @deprecated 2005-12-02 use setEndTime(null)
-          */
-        public void setEndTime()
-        {
-            setAttribute(AttributeName.ENDTIME, new JDFDate().getDateTimeISO(), null);
-        }
-
-        /**
           * (11) set attribute EndTime
           * @param value: the value to set the attribute to or null
           */
@@ -304,7 +295,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
                 }
                 catch(DataFormatException dfe)
                 {
-                    throw new JDFException("not a valid date string. Malformed JDF");
+                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
                 }
             }
             return nMyDate;
@@ -447,15 +438,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
         Methods for Attribute StartTime
         --------------------------------------------------------------------- */
         /**
-          * (10) set attribute StartTime
-          * @deprecated 2005-12-02 use setStartTime(null)
-          */
-        public void setStartTime()
-        {
-            setAttribute(AttributeName.STARTTIME, new JDFDate().getDateTimeISO(), null);
-        }
-
-        /**
           * (11) set attribute StartTime
           * @param value: the value to set the attribute to or null
           */
@@ -482,7 +464,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
                 }
                 catch(DataFormatException dfe)
                 {
-                    throw new JDFException("not a valid date string. Malformed JDF");
+                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
                 }
             }
             return nMyDate;
@@ -492,15 +474,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
         /* ---------------------------------------------------------------------
         Methods for Attribute SubmissionTime
         --------------------------------------------------------------------- */
-        /**
-          * (10) set attribute SubmissionTime
-          * @deprecated 2005-12-02 use setSubmissionTime(null)
-          */
-        public void setSubmissionTime()
-        {
-            setAttribute(AttributeName.SUBMISSIONTIME, new JDFDate().getDateTimeISO(), null);
-        }
-
         /**
           * (11) set attribute SubmissionTime
           * @param value: the value to set the attribute to or null
@@ -528,7 +501,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
                 }
                 catch(DataFormatException dfe)
                 {
-                    throw new JDFException("not a valid date string. Malformed JDF");
+                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
                 }
             }
             return nMyDate;

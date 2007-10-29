@@ -190,15 +190,6 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
         Methods for Attribute End
         --------------------------------------------------------------------- */
         /**
-          * (10) set attribute End
-          * @deprecated 2005-12-02 use setEnd(null)
-          */
-        public void setEnd()
-        {
-            setAttribute(AttributeName.END, new JDFDate().getDateTimeISO(), null);
-        }
-
-        /**
           * (11) set attribute End
           * @param value: the value to set the attribute to or null
           */
@@ -225,7 +216,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
                 }
                 catch(DataFormatException dfe)
                 {
-                    throw new JDFException("not a valid date string. Malformed JDF");
+                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
                 }
             }
             return nMyDate;
@@ -235,15 +226,6 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
         /* ---------------------------------------------------------------------
         Methods for Attribute Start
         --------------------------------------------------------------------- */
-        /**
-          * (10) set attribute Start
-          * @deprecated 2005-12-02 use setStart(null)
-          */
-        public void setStart()
-        {
-            setAttribute(AttributeName.START, new JDFDate().getDateTimeISO(), null);
-        }
-
         /**
           * (11) set attribute Start
           * @param value: the value to set the attribute to or null
@@ -271,7 +253,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
                 }
                 catch(DataFormatException dfe)
                 {
-                    throw new JDFException("not a valid date string. Malformed JDF");
+                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
                 }
             }
             return nMyDate;

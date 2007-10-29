@@ -78,7 +78,6 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.util.JDFDate;
     /*
     *****************************************************************************
@@ -187,15 +186,6 @@ public abstract class JDFAutoMessage extends JDFElement
         Methods for Attribute Time
         --------------------------------------------------------------------- */
         /**
-          * (10) set attribute Time
-          * @deprecated 2005-12-02 use setTime(null)
-          */
-        public void setTime()
-        {
-            setAttribute(AttributeName.TIME, new JDFDate().getDateTimeISO(), null);
-        }
-
-        /**
           * (11) set attribute Time
           * @param value: the value to set the attribute to or null
           */
@@ -222,7 +212,7 @@ public abstract class JDFAutoMessage extends JDFElement
                 }
                 catch(DataFormatException dfe)
                 {
-                    throw new JDFException("not a valid date string. Malformed JDF");
+                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
                 }
             }
             return nMyDate;

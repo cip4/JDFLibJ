@@ -78,7 +78,6 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.util.JDFDate;
     /*
@@ -383,15 +382,6 @@ public abstract class JDFAutoComment extends JDFElement
         Methods for Attribute TimeStamp
         --------------------------------------------------------------------- */
         /**
-          * (10) set attribute TimeStamp
-          * @deprecated 2005-12-02 use setTimeStamp(null)
-          */
-        public void setTimeStamp()
-        {
-            setAttribute(AttributeName.TIMESTAMP, new JDFDate().getDateTimeISO(), null);
-        }
-
-        /**
           * (11) set attribute TimeStamp
           * @param value: the value to set the attribute to or null
           */
@@ -418,7 +408,7 @@ public abstract class JDFAutoComment extends JDFElement
                 }
                 catch(DataFormatException dfe)
                 {
-                    throw new JDFException("not a valid date string. Malformed JDF");
+                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
                 }
             }
             return nMyDate;

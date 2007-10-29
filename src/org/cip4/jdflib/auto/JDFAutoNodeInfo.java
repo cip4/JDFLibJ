@@ -301,15 +301,6 @@ public abstract class JDFAutoNodeInfo extends JDFResource
         Methods for Attribute End
         --------------------------------------------------------------------- */
         /**
-          * (10) set attribute End
-          * @deprecated 2005-12-02 use setEnd(null)
-          */
-        public void setEnd()
-        {
-            setAttribute(AttributeName.END, new JDFDate().getDateTimeISO(), null);
-        }
-
-        /**
           * (11) set attribute End
           * @param value: the value to set the attribute to or null
           */
@@ -336,7 +327,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
                 }
                 catch(DataFormatException dfe)
                 {
-                    throw new JDFException("not a valid date string. Malformed JDF");
+                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
                 }
             }
             return nMyDate;
@@ -346,15 +337,6 @@ public abstract class JDFAutoNodeInfo extends JDFResource
         /* ---------------------------------------------------------------------
         Methods for Attribute FirstEnd
         --------------------------------------------------------------------- */
-        /**
-          * (10) set attribute FirstEnd
-          * @deprecated 2005-12-02 use setFirstEnd(null)
-          */
-        public void setFirstEnd()
-        {
-            setAttribute(AttributeName.FIRSTEND, new JDFDate().getDateTimeISO(), null);
-        }
-
         /**
           * (11) set attribute FirstEnd
           * @param value: the value to set the attribute to or null
@@ -382,7 +364,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
                 }
                 catch(DataFormatException dfe)
                 {
-                    throw new JDFException("not a valid date string. Malformed JDF");
+                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
                 }
             }
             return nMyDate;
@@ -392,15 +374,6 @@ public abstract class JDFAutoNodeInfo extends JDFResource
         /* ---------------------------------------------------------------------
         Methods for Attribute FirstStart
         --------------------------------------------------------------------- */
-        /**
-          * (10) set attribute FirstStart
-          * @deprecated 2005-12-02 use setFirstStart(null)
-          */
-        public void setFirstStart()
-        {
-            setAttribute(AttributeName.FIRSTSTART, new JDFDate().getDateTimeISO(), null);
-        }
-
         /**
           * (11) set attribute FirstStart
           * @param value: the value to set the attribute to or null
@@ -428,7 +401,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
                 }
                 catch(DataFormatException dfe)
                 {
-                    throw new JDFException("not a valid date string. Malformed JDF");
+                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
                 }
             }
             return nMyDate;
@@ -473,15 +446,6 @@ public abstract class JDFAutoNodeInfo extends JDFResource
         Methods for Attribute LastEnd
         --------------------------------------------------------------------- */
         /**
-          * (10) set attribute LastEnd
-          * @deprecated 2005-12-02 use setLastEnd(null)
-          */
-        public void setLastEnd()
-        {
-            setAttribute(AttributeName.LASTEND, new JDFDate().getDateTimeISO(), null);
-        }
-
-        /**
           * (11) set attribute LastEnd
           * @param value: the value to set the attribute to or null
           */
@@ -508,7 +472,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
                 }
                 catch(DataFormatException dfe)
                 {
-                    throw new JDFException("not a valid date string. Malformed JDF");
+                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
                 }
             }
             return nMyDate;
@@ -518,15 +482,6 @@ public abstract class JDFAutoNodeInfo extends JDFResource
         /* ---------------------------------------------------------------------
         Methods for Attribute LastStart
         --------------------------------------------------------------------- */
-        /**
-          * (10) set attribute LastStart
-          * @deprecated 2005-12-02 use setLastStart(null)
-          */
-        public void setLastStart()
-        {
-            setAttribute(AttributeName.LASTSTART, new JDFDate().getDateTimeISO(), null);
-        }
-
         /**
           * (11) set attribute LastStart
           * @param value: the value to set the attribute to or null
@@ -554,7 +509,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
                 }
                 catch(DataFormatException dfe)
                 {
-                    throw new JDFException("not a valid date string. Malformed JDF");
+                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
                 }
             }
             return nMyDate;
@@ -709,15 +664,6 @@ public abstract class JDFAutoNodeInfo extends JDFResource
         Methods for Attribute Start
         --------------------------------------------------------------------- */
         /**
-          * (10) set attribute Start
-          * @deprecated 2005-12-02 use setStart(null)
-          */
-        public void setStart()
-        {
-            setAttribute(AttributeName.START, new JDFDate().getDateTimeISO(), null);
-        }
-
-        /**
           * (11) set attribute Start
           * @param value: the value to set the attribute to or null
           */
@@ -744,7 +690,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
                 }
                 catch(DataFormatException dfe)
                 {
-                    throw new JDFException("not a valid date string. Malformed JDF");
+                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
                 }
             }
             return nMyDate;
