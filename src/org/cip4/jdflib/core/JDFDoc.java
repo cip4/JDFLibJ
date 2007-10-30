@@ -79,8 +79,6 @@
 package org.cip4.jdflib.core;
 
 
-import java.util.Vector;
-
 import org.apache.xerces.dom.DocumentImpl;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
@@ -176,7 +174,8 @@ public class JDFDoc extends XMLDoc
      * @return Object the cloned JDFDoc
      * @throws CloneNotSupportedException
      */
-    public Object clone() 
+    @Override
+	public Object clone() 
     {
         return new JDFDoc(((XMLDoc)super.clone()).getMemberDocument());
     }
@@ -186,7 +185,8 @@ public class JDFDoc extends XMLDoc
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFDoc: " + super.toString();
     }
@@ -198,7 +198,8 @@ public class JDFDoc extends XMLDoc
      * @deprecated simply use constructor
      * @return JDFDoc
      */
-    public static JDFDoc createJDF(String jdfPath)
+    @Deprecated
+	public static JDFDoc createJDF(String jdfPath)
     {
         final JDFDoc new_doc = new JDFDoc();
         final JDFNode root = (JDFNode) new_doc.createElement(ElementName.JDF);
@@ -221,7 +222,8 @@ public class JDFDoc extends XMLDoc
     * @deprecated use getRoot().getTarget(id, AttributeName.ID) and cast.
     *
     */
-    public JDFNode getJDFNodeByID(String id)
+    @Deprecated
+	public JDFNode getJDFNodeByID(String id)
     {
         
         return (JDFNode) getRoot().getTarget(id, AttributeName.ID);
@@ -238,7 +240,7 @@ public class JDFDoc extends XMLDoc
     {
         final boolean bCollectAll = nodeNames.isEmpty();
 
-        final Vector vProcs = getJDFRoot().getvJDFNode(null, null, false);
+        final VElement vProcs = getJDFRoot().getvJDFNode(null, null, false);
         VElement vResources       = new VElement();
         VElement vLinkedResources = new VElement();
         
@@ -335,7 +337,8 @@ public class JDFDoc extends XMLDoc
      * 
      * @default setRoot(ElementName.JDF, null)
      */
-    public KElement setRoot(String strDocType, String namespaceURI)
+    @Override
+	public KElement setRoot(String strDocType, String namespaceURI)
     {
         KElement root = super.setRoot(strDocType, namespaceURI);
         if (root != null)
