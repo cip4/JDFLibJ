@@ -29,7 +29,7 @@ import org.cip4.jdflib.util.HashUtil;
 public class VJDFAttributeMap
 {
     //**************************************** Attributes ******************************************
-    private Vector m_vec = new Vector();
+    private Vector<JDFAttributeMap> m_vec = new Vector<JDFAttributeMap>();
 
     //**************************************** Constructors ****************************************
     /**
@@ -90,7 +90,8 @@ public class VJDFAttributeMap
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         StringBuffer sb = new StringBuffer ();
         sb.append ("VJDFAttributeMap: ");
@@ -152,7 +153,7 @@ public class VJDFAttributeMap
      */
     public JDFAttributeMap elementAt(int i)
     {
-        return (JDFAttributeMap)m_vec.elementAt(i);
+        return m_vec.elementAt(i);
     }
 
     /**
@@ -244,7 +245,8 @@ public class VJDFAttributeMap
      * @return boolean - true if and only if the specified AttributeMap has the some number
      * of keys and values and the same keys and values as a entry in this vector
      */
-    public boolean hasEntryWithEqualKeyValuePairs(JDFAttributeMap attmap)
+    @Deprecated
+	public boolean hasEntryWithEqualKeyValuePairs(JDFAttributeMap attmap)
     {
         
         boolean bEquals = false;
@@ -311,13 +313,14 @@ public class VJDFAttributeMap
      * @param  vKeys
      * @deprecated use redceMap
      */
-    public void reduceKey(Vector vKeys)
+    @Deprecated
+	public void reduceKey(Vector vKeys)
     {
         VJDFAttributeMap v = new VJDFAttributeMap();
 
         for (int i = 0; i < m_vec.size(); i++)
         {
-            JDFAttributeMap map = (JDFAttributeMap)m_vec.elementAt(i);
+            JDFAttributeMap map = m_vec.elementAt(i);
             map.reduceMap(vKeys);
 
             if (!map.isEmpty())
@@ -339,7 +342,7 @@ public class VJDFAttributeMap
 
        for (int i = 0; i < m_vec.size(); i++)
        {
-           JDFAttributeMap map = (JDFAttributeMap)m_vec.elementAt(i);
+           JDFAttributeMap map = m_vec.elementAt(i);
            boolean bNullMap=map.isEmpty();
            map.reduceMap(keySet);
 
@@ -359,7 +362,7 @@ public class VJDFAttributeMap
     {
         for (int i = 0; i < m_vec.size(); i++)
         {
-            if (((JDFAttributeMap)m_vec.elementAt(i)).equals(map))
+            if ((m_vec.elementAt(i)).equals(map))
             {
                 return;
             }
@@ -456,7 +459,8 @@ public class VJDFAttributeMap
      *
      * @return boolean - true if the maps are equal, otherwise false
      */
-    public boolean equals(Object other)
+    @Override
+	public boolean equals(Object other)
     {
         if (this == other)
             return true;
@@ -485,7 +489,8 @@ public class VJDFAttributeMap
      * hashCode complements equals() to fulfill the equals/hashCode contract
      * @return int
      */
-    public int hashCode()
+    @Override
+	public int hashCode()
     {
         return HashUtil.hashCode(0, this.m_vec);
     }
