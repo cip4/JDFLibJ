@@ -82,7 +82,6 @@ package org.cip4.jdflib.datatypes;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.core.JDFConstants;
@@ -191,29 +190,7 @@ public interface JDFBaseDataTypes
             return iterator(EnumFitsValue.class);
         }
 
-        /**
-         * @return a Vector with all String representatives of the enums
-         * @deprecated
-         */
-        public static Vector getNamesVector()
-        {
-            Vector namesVector = new Vector();
-            Iterator it = iterator(EnumFitsValue.class);
-            while (it.hasNext())
-            {
-                namesVector.addElement(((ValuedEnum) it.next()).getName());
-            }
-
-            return namesVector;
-        }
-         
         public static final EnumFitsValue Present     = new EnumFitsValue(JDFConstants.FITSVALUE_PRESENT);
         public static final EnumFitsValue Allowed     = new EnumFitsValue(JDFConstants.FITSVALUE_ALLOWED);
-         
     }
-    
-    
-         
-    /** @link dependency */
-    /*#JDFNumList lnkJDFNumList;*/
 }
