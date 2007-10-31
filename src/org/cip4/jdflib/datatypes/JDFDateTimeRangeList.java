@@ -167,7 +167,7 @@ public class JDFDateTimeRangeList extends JDFRangeList
         if (s.indexOf(JDFConstants.TILDE)==0 || s.lastIndexOf(JDFConstants.TILDE)==(s.length()-1))
             throw new DataFormatException("JDFDateTimeRangeList::SetString: Illegal string " + s);
         String zappedWS = StringUtil.zappTokenWS(s, "~");
-        Vector v = StringUtil.tokenize(zappedWS, " \t", false);
+        VString v = StringUtil.tokenize(zappedWS, " \t", false);
         VString vs = new VString(v);
         rangeList.clear();
         for(int i = 0; i <  vs.size(); i++)
@@ -246,7 +246,7 @@ public class JDFDateTimeRangeList extends JDFRangeList
         if (siz == 0)
             return false; // attempt to operate on a null element
 
-        Vector v = new Vector(); // vector of ranges
+        Vector<JDFDate> v = new Vector<JDFDate>(); // vector of ranges
         for (int i = 0; i < siz; i++)
         {
             JDFDateTimeRange r = (JDFDateTimeRange) rangeList.elementAt(i);
@@ -261,13 +261,13 @@ public class JDFDateTimeRangeList extends JDFRangeList
         if (n == 0)
             return true; // single value
 
-        JDFDate first = (JDFDate) (v.elementAt(0));
-        JDFDate last = (JDFDate) (v.elementAt(n));
+        JDFDate first = (v.elementAt(0));
+        JDFDate last = (v.elementAt(n));
 
         for (int j = 0; j < n; j++)
         {
-            JDFDate value = (JDFDate) (v.elementAt(j));
-            JDFDate nextvalue = (JDFDate) (v.elementAt(j + 1));
+            JDFDate value = (v.elementAt(j));
+            JDFDate nextvalue = (v.elementAt(j + 1));
 
             if (((first.equals(last)    &&   value.equals(nextvalue)) || 
                  (first.isEarlier(last) &&  (value.isEarlier(nextvalue)||value.equals(nextvalue))) || 
@@ -290,7 +290,7 @@ public class JDFDateTimeRangeList extends JDFRangeList
             return false; // attempt to operate on a null element
         }
         
-        Vector v = new Vector(); // vector of ranges
+        Vector<JDFDate> v = new Vector<JDFDate>(); // vector of ranges
         for  (int i=0; i<siz; i++)
         {
             JDFDateTimeRange r = (JDFDateTimeRange) rangeList.elementAt(i);
@@ -305,16 +305,16 @@ public class JDFDateTimeRangeList extends JDFRangeList
         if (n==0) {
             return true; // single value
         }
-        JDFDate first = (JDFDate)v.elementAt(0);
-        JDFDate last = (JDFDate) v.elementAt(n);
+        JDFDate first = v.elementAt(0);
+        JDFDate last = v.elementAt(n);
     
         if (first.equals(last)) {
             return false;
         }
         for (int j=0; j<n; j++)
         {
-            JDFDate value = (JDFDate) v.elementAt(j);
-            JDFDate nextvalue = (JDFDate) v.elementAt(j+1);
+            JDFDate value = v.elementAt(j);
+            JDFDate nextvalue = v.elementAt(j+1);
             
             if (((first.isEarlier(last) && value.isEarlier(nextvalue)) || 
                  (first.isLater(last)   && value.isLater(nextvalue))) == false )

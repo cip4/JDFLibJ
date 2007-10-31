@@ -8,10 +8,10 @@
 package org.cip4.jdflib.datatypes;
 
 import java.util.StringTokenizer;
-import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.HashUtil;
 
 /**
@@ -75,24 +75,14 @@ public class JDFNameRange extends JDFRange
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         if (getLeft().equals(getRight()))
         {
             return getRight();
         }
         return getLeft() + " ~ " + getRight();
-    }
-
-    /**
-     * getString - returns the range as a String
-     *
-     * @return String - the range as a String
-     * @deprecated 060418 use toString
-     */
-    public String getString()
-    {
-        return toString();
     }
 
     /**
@@ -112,7 +102,8 @@ public class JDFNameRange extends JDFRange
      *
      * @return boolean - true if equal, otherwise false
      */
-    public boolean equals(Object other)
+    @Override
+	public boolean equals(Object other)
     {
         if (this == other)
         {
@@ -133,7 +124,8 @@ public class JDFNameRange extends JDFRange
     /**
      * hashCode complements equals() to fulfill the equals/hashCode contract
      */
-    public int hashCode()
+    @Override
+	public int hashCode()
     {
         return HashUtil.hashCode(0, this.toString());
     }
@@ -167,7 +159,7 @@ public class JDFNameRange extends JDFRange
      */
     protected void isValid(String s)
     {
-        Vector vs = new Vector();
+        VString vs = new VString();
         StringTokenizer sToken = new StringTokenizer(s, "~");
 
         while (sToken.hasMoreElements())
@@ -176,15 +168,15 @@ public class JDFNameRange extends JDFRange
             vs.addElement(str.trim());
         }
 
-        setLeft((String) vs.elementAt(0));
+        setLeft(vs.elementAt(0));
 
         if (vs.size() == 2)
         {
-            setRight((String) vs.elementAt(1));
+            setRight(vs.elementAt(1));
         }
         else
         {
-            setRight((String) vs.elementAt(0));
+            setRight(vs.elementAt(0));
         }
     }
 
@@ -208,21 +200,25 @@ public class JDFNameRange extends JDFRange
         return m_right;
     }
 
-    public boolean isPartOfRange(JDFRange ra)
+    @Override
+	public boolean isPartOfRange(JDFRange ra)
     {
         return this.equals(ra);
     }
 
-    protected Object getRightObject()
+    @Override
+	protected Object getRightObject()
     {
         return m_right;
     }
 
-    protected Object getLeftObject()
+    @Override
+	protected Object getLeftObject()
     {
         return m_left;
     }
-    protected boolean inObjectRange(Object other)
+    @Override
+	protected boolean inObjectRange(Object other)
     {
        return inRange((String) other);
     }

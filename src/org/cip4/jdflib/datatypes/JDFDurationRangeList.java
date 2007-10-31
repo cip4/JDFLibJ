@@ -168,7 +168,7 @@ public class JDFDurationRangeList extends JDFRangeList
         if (s.indexOf(JDFConstants.TILDE)==0 || s.lastIndexOf(JDFConstants.TILDE)==(s.length()-1))
             throw new DataFormatException("JDFDurationRangeList::SetString: Illegal string " + s);
         String zappedWS = StringUtil.zappTokenWS(s, "~");
-        Vector v = StringUtil.tokenize(zappedWS, " \t", false);
+        VString v = StringUtil.tokenize(zappedWS, " \t", false);
         VString vs = new VString(v);
         rangeList.clear();
         for(int i = 0; i <  vs.size(); i++)
@@ -247,7 +247,7 @@ public class JDFDurationRangeList extends JDFRangeList
         if (siz == 0)
             return false; // attempt to operate on a null element
 
-        Vector v = new Vector(); // vector of ranges
+        Vector<JDFDuration> v = new Vector<JDFDuration>(); // vector of ranges
         for (int i = 0; i < siz; i++)
         {
             JDFDurationRange r = (JDFDurationRange) rangeList.elementAt(i);
@@ -262,13 +262,13 @@ public class JDFDurationRangeList extends JDFRangeList
         if (n == 0)
             return true; // single value
 
-        JDFDuration first = (JDFDuration) (v.elementAt(0));
-        JDFDuration last = (JDFDuration) (v.elementAt(n));
+        JDFDuration first = (v.elementAt(0));
+        JDFDuration last = (v.elementAt(n));
 
         for (int j = 0; j < n; j++)
         {
-            JDFDuration value = (JDFDuration) (v.elementAt(j));
-            JDFDuration nextvalue = (JDFDuration) (v.elementAt(j + 1));
+            JDFDuration value = (v.elementAt(j));
+            JDFDuration nextvalue = (v.elementAt(j + 1));
 
             if (((first.equals(last)    &&   value.equals(nextvalue)) || 
                  (first.isShorter(last) &&  (value.isShorter(nextvalue)||value.equals(nextvalue))) || 
@@ -291,7 +291,7 @@ public class JDFDurationRangeList extends JDFRangeList
             return false; // attempt to operate on a null element
         }
         
-        Vector v = new Vector(); // vector of ranges
+        Vector<JDFDuration> v = new Vector<JDFDuration>(); // vector of ranges
         for  (int i=0; i<siz; i++)
         {
             JDFDurationRange r = (JDFDurationRange) rangeList.elementAt(i);
@@ -306,16 +306,16 @@ public class JDFDurationRangeList extends JDFRangeList
         if (n==0) {
             return true; // single value
         }
-        JDFDuration first = (JDFDuration)v.elementAt(0);
-        JDFDuration last = (JDFDuration) v.elementAt(n);
+        JDFDuration first = v.elementAt(0);
+        JDFDuration last = v.elementAt(n);
     
         if (first.equals(last)) {
             return false;
         }
         for (int j=0; j<n; j++)
         {
-            JDFDuration value = (JDFDuration) v.elementAt(j);
-            JDFDuration nextvalue = (JDFDuration) v.elementAt(j+1);
+            JDFDuration value = v.elementAt(j);
+            JDFDuration nextvalue = v.elementAt(j+1);
             
             if (((first.isShorter(last) && value.isShorter(nextvalue)) || 
                  (first.isLonger(last)   && value.isLonger(nextvalue))) == false )

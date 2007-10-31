@@ -188,24 +188,14 @@ public class JDFRectangleRange extends JDFRange
     *
     * @return String - the range as a String
     */
-    public String toString()
+    @Override
+	public String toString()
     {
         if (m_left.equals(m_right)) 
         {
             return JDFConstants.EMPTYSTRING + getLeft();
         }
         return getLeft() + " ~ " + getRight();
-    }
-    
-    /**
-    * getString
-    *
-    * @return String
-    * @deprecated 060414 use toString
-    */
-    public String getString()
-    {
-        return toString();
     }
     
     /**
@@ -234,7 +224,8 @@ public class JDFRectangleRange extends JDFRange
      *@param other the JDFRectangleRange to compare
      * @return boolean - true if equal, otherwise false
      */
-    public boolean equals(Object other)
+    @Override
+	public boolean equals(Object other)
     {
         if (this == other)
         {
@@ -259,7 +250,8 @@ public class JDFRectangleRange extends JDFRange
      * hashCode complements equals() to fulfill the equals/hashCode contract
      * @return int
      */
-    public int hashCode()
+    @Override
+	public int hashCode()
     {
         return HashUtil.hashCode(0, this.toString());
     }
@@ -285,7 +277,8 @@ public class JDFRectangleRange extends JDFRange
      * 
      * @return boolean - true if range 'r' is within this range, else false
      */
-    public boolean isPartOfRange(JDFRange ra)
+    @Override
+	public boolean isPartOfRange(JDFRange ra)
     {
         JDFRectangleRange r=(JDFRectangleRange) ra;
         JDFRectangle min=this.getLowerValue();
@@ -357,17 +350,20 @@ public class JDFRectangleRange extends JDFRange
         return (m_left.isLess(m_right) ? m_left : m_right);
     }
 
-    protected Object getRightObject()
+    @Override
+	protected Object getRightObject()
     {       
         return m_right;
     }
 
-    protected Object getLeftObject()
+    @Override
+	protected Object getLeftObject()
     {
          return m_left;
     }
     
-    protected boolean inObjectRange(Object other)
+    @Override
+	protected boolean inObjectRange(Object other)
     {
        return inRange((JDFRectangle) other);
     }

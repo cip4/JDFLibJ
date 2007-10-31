@@ -71,7 +71,7 @@ public class JDFNameRangeList extends JDFRangeList
         if (s.indexOf(JDFConstants.TILDE) == 0 || s.lastIndexOf(JDFConstants.TILDE) == (s.length() - 1))
             throw new DataFormatException("JDFNameRangeList::SetString: Illegal string " + s);
         String zappedWS = StringUtil.zappTokenWS(s, "~");
-        Vector v = StringUtil.tokenize(zappedWS, " \t", false);
+        VString v = StringUtil.tokenize(zappedWS, " \t", false);
         VString vs = new VString(v);
         rangeList.clear();
         for (int i = 0; i < vs.size(); i++)

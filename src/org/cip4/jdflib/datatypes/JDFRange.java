@@ -98,34 +98,14 @@ public abstract class JDFRange implements JDFBaseDataTypes
      public abstract boolean isPartOfRange(JDFRange ra);
 
 
-//    /**
-//     * constructor
-//     */
-//    public JDFRange()
-//    {
-//        init(0, 0);
-//    }
-
-
     //**************************************** Methods *********************************************
-    /**
-    * getString - returns the range as a String
-    *
-    * @return String - the range as a String  in the format xmin~xmax
-    * @deprecated 060418 use toString 
-    */
-    public String getString()
-    {
-        return toString();
-     }
-    
-
     /**
      * equals - returns true if both JDFDateTimeRange are equal, otherwise false
      * @param other Object to compare
      * @return boolean - true if equal, otherwise false
      */
-    public boolean equals(Object other)
+    @Override
+	public boolean equals(Object other)
     {
         if (this == other)
         {
@@ -148,7 +128,8 @@ public abstract class JDFRange implements JDFBaseDataTypes
      * hashCode: complements equals() to fulfill the equals/hashCode contract
      * @return int
      */
-    public int hashCode()
+    @Override
+	public int hashCode()
     {
         return HashUtil.hashCode(0, this.toString());
     }

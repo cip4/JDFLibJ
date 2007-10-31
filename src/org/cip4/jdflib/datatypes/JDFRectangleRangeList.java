@@ -266,7 +266,7 @@ public class JDFRectangleRangeList extends JDFRangeList
           if (siz == 0)
               return false; // attempt to operate on a null element
 
-          Vector v = new Vector(); // vector of ranges
+          Vector<JDFRectangle> v = new Vector<JDFRectangle>(); // vector of ranges
           for (int i = 0; i < siz; i++)
           {
               JDFRectangleRange r = (JDFRectangleRange) rangeList.elementAt(i);
@@ -281,13 +281,13 @@ public class JDFRectangleRangeList extends JDFRangeList
           if (n == 0)
               return true; // single value
 
-          JDFRectangle first = (JDFRectangle) (v.elementAt(0));
-          JDFRectangle last = (JDFRectangle) (v.elementAt(n));
+          JDFRectangle first = (v.elementAt(0));
+          JDFRectangle last = (v.elementAt(n));
 
           for (int j = 0; j < n; j++)
           {
-              JDFRectangle value = (JDFRectangle) (v.elementAt(j));
-              JDFRectangle nextvalue = (JDFRectangle) (v.elementAt(j + 1));
+              JDFRectangle value = (v.elementAt(j));
+              JDFRectangle nextvalue = (v.elementAt(j + 1));
 
               if (((first.equals(last)   && value.equals(nextvalue)) || 
                    (first.isLess(last)    && value.isLessOrEqual(nextvalue)) || 
@@ -310,7 +310,7 @@ public class JDFRectangleRangeList extends JDFRangeList
               return false; // attempt to operate on a null element
           }
           
-          Vector v = new Vector(); // vector of ranges
+          Vector<JDFRectangle> v = new Vector<JDFRectangle>(); // vector of ranges
           for  (int i=0; i<siz; i++)
           {
               JDFRectangleRange r = (JDFRectangleRange) rangeList.elementAt(i);
@@ -325,16 +325,16 @@ public class JDFRectangleRangeList extends JDFRangeList
           if (n==0) {
               return true; // single value
           }
-          JDFRectangle first = (JDFRectangle)v.elementAt(0);
-          JDFRectangle last = (JDFRectangle) v.elementAt(n);
+          JDFRectangle first = v.elementAt(0);
+          JDFRectangle last = v.elementAt(n);
       
           if (first.equals(last)) {
               return false;
           }
           for (int j=0; j<n; j++)
           {
-              JDFRectangle value = (JDFRectangle) v.elementAt(j);
-              JDFRectangle nextvalue = (JDFRectangle) v.elementAt(j+1);
+              JDFRectangle value = v.elementAt(j);
+              JDFRectangle nextvalue = v.elementAt(j+1);
               
               if (((first.isLess(last)    && value.isLess(nextvalue)) || 
                    (first.isGreater(last) && value.isGreater(nextvalue))) == false )

@@ -21,6 +21,7 @@ import java.util.StringTokenizer;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.VString;
 
 /**
  * @author GonnermannJ
@@ -30,13 +31,14 @@ import org.cip4.jdflib.core.JDFConstants;
 public class JDFPath
 {
     private String      m_strPath;
-    private GeneralPath     m_GPI = new GeneralPath();
+    private final GeneralPath     m_GPI = new GeneralPath();
 
 
     /* (non-Javadoc)
      * @see Object#toString()
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         String path = JDFConstants.EMPTYSTRING;
         AffineTransform at = new AffineTransform();
@@ -350,7 +352,7 @@ public class JDFPath
      */
     private void rectangle(float x, float y, float w, float h)
     {
-        Vector v = new Vector();
+    	VString v = new VString();
         v.add(JDFConstants.EMPTYSTRING + x);
         v.add(JDFConstants.EMPTYSTRING + y);
         addValues("m", 2, v);

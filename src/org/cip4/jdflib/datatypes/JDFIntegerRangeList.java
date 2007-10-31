@@ -421,7 +421,7 @@ public class JDFIntegerRangeList extends JDFRangeList
           if (siz == 0)
               return false; // attempt to operate on a null element
 
-          Vector v = new Vector(); // vector of ranges
+          Vector<Integer> v = new Vector<Integer>(); // vector of ranges
           for (int i = 0; i < siz; i++)
           {
               JDFIntegerRange r = (JDFIntegerRange) rangeList.elementAt(i);
@@ -436,13 +436,13 @@ public class JDFIntegerRangeList extends JDFRangeList
           if (n == 0)
               return true; // single value
 
-          int first = ((Integer) v.elementAt(0)).intValue();
-          int last = ((Integer) v.elementAt(n)).intValue();
+          int first = (v.elementAt(0)).intValue();
+          int last = (v.elementAt(n)).intValue();
 
           for (int j = 0; j < n; j++)
           {
-              int value = ((Integer)v.elementAt(j)).intValue();
-              int nextvalue = ((Integer)v.elementAt(j + 1)).intValue();
+              int value = (v.elementAt(j)).intValue();
+              int nextvalue = (v.elementAt(j + 1)).intValue();
 
               if ((( first == last && value == nextvalue) || 
                    ( first < last  && value <= nextvalue) || 
@@ -465,7 +465,7 @@ public class JDFIntegerRangeList extends JDFRangeList
               return false; // attempt to operate on a null element
           }
           
-          Vector v = new Vector(); // vector of ranges
+          Vector<Integer> v = new Vector<Integer>(); // vector of ranges
           for  (int i=0; i<siz; i++)
           {
               JDFIntegerRange r = (JDFIntegerRange) rangeList.elementAt(i);
@@ -480,16 +480,16 @@ public class JDFIntegerRangeList extends JDFRangeList
           if (n==0) {
               return true; // single value
           }
-          int first = ((Integer) v.elementAt(0)).intValue();
-          int last = ((Integer) v.elementAt(n)).intValue();
+          int first = (v.elementAt(0)).intValue();
+          int last = (v.elementAt(n)).intValue();
       
           if (first==last) {
               return false;
           }
           for (int j=0; j<n; j++)
           {
-              int value = ((Integer) v.elementAt(j)).intValue();
-              int nextvalue = ((Integer) v.elementAt(j+1)).intValue();
+              int value = (v.elementAt(j)).intValue();
+              int nextvalue = (v.elementAt(j+1)).intValue();
               
               if (((first < last && value < nextvalue) || 
                    (first > last && value < nextvalue)) == false )
@@ -528,7 +528,7 @@ public class JDFIntegerRangeList extends JDFRangeList
      */
     public boolean isOverlapping(JDFIntegerRange newRange, JDFIntegerRange oldRange)
     {
-        Vector rangeListToCheck = rangeList;
+        Vector<Integer> rangeListToCheck = rangeList;
 
         if (oldRange != null)
         {

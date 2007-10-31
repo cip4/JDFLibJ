@@ -534,7 +534,7 @@ public class JDFXYPairRangeList extends JDFRangeList
         if (siz == 0)
             return false; // attempt to operate on a null element
         
-        Vector v = new Vector(); // vector of ranges
+        Vector<JDFXYPair> v = new Vector<JDFXYPair>(); // vector of ranges
         for (int i = 0; i < siz; i++)
         {
             JDFXYPairRange r = (JDFXYPairRange) rangeList.elementAt(i);
@@ -549,13 +549,13 @@ public class JDFXYPairRangeList extends JDFRangeList
         if (n == 0)
             return true; // single value
         
-        JDFXYPair first = (JDFXYPair) (v.elementAt(0));
-        JDFXYPair last = (JDFXYPair) (v.elementAt(n));
+        JDFXYPair first = (v.elementAt(0));
+        JDFXYPair last = (v.elementAt(n));
         
         for (int j = 0; j < n; j++)
         {
-            JDFXYPair value = (JDFXYPair) (v.elementAt(j));
-            JDFXYPair nextvalue = (JDFXYPair) (v.elementAt(j + 1));
+            JDFXYPair value = (v.elementAt(j));
+            JDFXYPair nextvalue = (v.elementAt(j + 1));
             
             if (((first.equals(last)   && value.equals(nextvalue)) || 
                     (first.isLess(last)    && value.isLessOrEqual(nextvalue)) || 
@@ -578,7 +578,7 @@ public class JDFXYPairRangeList extends JDFRangeList
             return false; // attempt to operate on a null element
         }
         
-        Vector v = new Vector(); // vector of ranges
+        Vector<JDFXYPair> v = new Vector<JDFXYPair>(); // vector of ranges
         for  (int i=0; i<siz; i++)
         {
             JDFXYPairRange r = (JDFXYPairRange) rangeList.elementAt(i);
@@ -593,16 +593,16 @@ public class JDFXYPairRangeList extends JDFRangeList
         if (n==0) {
             return true; // single value
         }
-        JDFXYPair first = (JDFXYPair)v.elementAt(0);
-        JDFXYPair last = (JDFXYPair) v.elementAt(n);
+        JDFXYPair first = v.elementAt(0);
+        JDFXYPair last = v.elementAt(n);
         
         if (first.equals(last)) {
             return false;
         }
         for (int j=0; j<n; j++)
         {
-            JDFXYPair value = (JDFXYPair) v.elementAt(j);
-            JDFXYPair nextvalue = (JDFXYPair) v.elementAt(j+1);
+            JDFXYPair value = v.elementAt(j);
+            JDFXYPair nextvalue = v.elementAt(j+1);
             
             if (((first.isLess(last)    && value.isLess(nextvalue)) || 
                     (first.isGreater(last) && value.isGreater(nextvalue))) == false )

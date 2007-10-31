@@ -176,7 +176,7 @@ public class JDFNumberRangeList extends JDFRangeList
         if (s.indexOf(JDFConstants.TILDE)==0 || s.lastIndexOf(JDFConstants.TILDE)==(s.length()-1))
             throw new DataFormatException("JDFNumberRangeList::SetString: Illegal string " + s);
         String zappedWS = StringUtil.zappTokenWS(s, "~");
-        Vector v = StringUtil.tokenize(zappedWS, " \t", false);
+        VString v = StringUtil.tokenize(zappedWS, " \t", false);
         VString vs = new VString(v);
         rangeList.clear();
         for(int i = 0; i <  vs.size(); i++)
@@ -262,7 +262,7 @@ public class JDFNumberRangeList extends JDFRangeList
           if (siz == 0)
               return false; // attempt to operate on a null element
 
-          Vector v = new Vector(); // vector of ranges
+          Vector<Double> v = new Vector<Double>(); // vector of ranges
           for (int i = 0; i < siz; i++)
           {
               JDFNumberRange r = (JDFNumberRange) rangeList.elementAt(i);
@@ -277,13 +277,13 @@ public class JDFNumberRangeList extends JDFRangeList
           if (n == 0)
               return true; // single value
 
-          double first = ((Double) v.elementAt(0)).doubleValue();
-          double last  = ((Double) v.elementAt(n)).doubleValue();
+          double first = (v.elementAt(0)).doubleValue();
+          double last  = (v.elementAt(n)).doubleValue();
 
           for (int j = 0; j < n; j++)
           {
-              double value = ((Double)v.elementAt(j)).doubleValue();
-              double nextvalue = ((Double)v.elementAt(j + 1)).doubleValue();
+              double value = (v.elementAt(j)).doubleValue();
+              double nextvalue = (v.elementAt(j + 1)).doubleValue();
 
               if ((( first == last && value == nextvalue) || 
                    ( first < last  && value <= nextvalue) || 
@@ -306,7 +306,7 @@ public class JDFNumberRangeList extends JDFRangeList
               return false; // attempt to operate on a null element
           }
           
-          Vector v = new Vector(); // vector of ranges
+          Vector<Double> v = new Vector<Double>(); // vector of ranges
           for  (int i=0; i<siz; i++)
           {
               JDFNumberRange r = (JDFNumberRange) rangeList.elementAt(i);
@@ -321,16 +321,16 @@ public class JDFNumberRangeList extends JDFRangeList
           if (n==0) {
               return true; // single value
           }
-          double first = ((Double) v.elementAt(0)).doubleValue();
-          double last  = ((Double) v.elementAt(n)).doubleValue();
+          double first = (v.elementAt(0)).doubleValue();
+          double last  = (v.elementAt(n)).doubleValue();
       
           if (first==last) {
               return false;
           }
           for (int j=0; j<n; j++)
           {
-              double value = ((Double) v.elementAt(j)).doubleValue();
-              double nextvalue = ((Double) v.elementAt(j+1)).doubleValue();
+              double value = (v.elementAt(j)).doubleValue();
+              double nextvalue = (v.elementAt(j+1)).doubleValue();
               
               if (((first < last) && (value < nextvalue) || 
                    (first > last) && (value < nextvalue)) == false )

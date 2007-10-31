@@ -259,7 +259,7 @@ public class JDFShapeRangeList extends JDFRangeList
         if (siz == 0)
             return false; // attempt to operate on a null element
 
-        Vector v = new Vector(); // vector of ranges
+        Vector<JDFShape> v = new Vector<JDFShape>(); // vector of ranges
         for (int i = 0; i < siz; i++)
         {
             JDFShapeRange r = (JDFShapeRange) rangeList.elementAt(i);
@@ -274,13 +274,13 @@ public class JDFShapeRangeList extends JDFRangeList
         if (n == 0)
             return true; // single value
 
-        JDFShape first = (JDFShape) (v.elementAt(0));
-        JDFShape last = (JDFShape) (v.elementAt(n));
+        JDFShape first = (v.elementAt(0));
+        JDFShape last = (v.elementAt(n));
 
         for (int j = 0; j < n; j++)
         {
-            JDFShape value = (JDFShape) (v.elementAt(j));
-            JDFShape nextvalue = (JDFShape) (v.elementAt(j + 1));
+            JDFShape value = (v.elementAt(j));
+            JDFShape nextvalue = (v.elementAt(j + 1));
 
             if (((first.equals(last)   && value.equals(nextvalue)) || 
                  (first.isLess(last)    && value.isLessOrEqual(nextvalue)) || 
@@ -303,7 +303,7 @@ public class JDFShapeRangeList extends JDFRangeList
             return false; // attempt to operate on a null element
         }
         
-        Vector v = new Vector(); // vector of ranges
+        Vector<JDFShape> v = new Vector<JDFShape>(); // vector of ranges
         for  (int i=0; i<siz; i++)
         {
             JDFShapeRange r = (JDFShapeRange) rangeList.elementAt(i);
@@ -318,16 +318,16 @@ public class JDFShapeRangeList extends JDFRangeList
         if (n==0) {
             return true; // single value
         }
-        JDFShape first = (JDFShape)v.elementAt(0);
-        JDFShape last = (JDFShape) v.elementAt(n);
+        JDFShape first = v.elementAt(0);
+        JDFShape last = v.elementAt(n);
     
         if (first.equals(last)) {
             return false;
         }
         for (int j=0; j<n; j++)
         {
-            JDFShape value = (JDFShape) v.elementAt(j);
-            JDFShape nextvalue = (JDFShape) v.elementAt(j+1);
+            JDFShape value = v.elementAt(j);
+            JDFShape nextvalue = v.elementAt(j+1);
             
             if (((first.isLess(last)    && value.isLess(nextvalue)) || 
                  (first.isGreater(last) && value.isGreater(nextvalue))) == false )

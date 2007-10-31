@@ -230,24 +230,14 @@ public class JDFIntegerRange extends JDFRange
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         if (getLeft()==getRight())
         {
             return StringUtil.formatInteger(getRight());
         }
         return StringUtil.formatInteger(getLeft()) + " ~ " + StringUtil.formatInteger(getRight());
-    }
-    
-    /**
-     * getString - return the range as a String
-     * 
-     * @return String - the range as a String for example 5~9
-     * @deprecated 060418 use toString
-     */
-    public String getString()
-    {
-        return toString();
     }
     
     /**
@@ -275,7 +265,8 @@ public class JDFIntegerRange extends JDFRange
      *
      * @return boolean - true if equal otherwise false
      */
-    public boolean equals(Object other)
+    @Override
+	public boolean equals(Object other)
     {
         if (this == other)
         {
@@ -296,7 +287,8 @@ public class JDFIntegerRange extends JDFRange
     /**
      * hashCode complements equals() to fulfill the equals/hashCode contract
      */
-    public int hashCode()
+    @Override
+	public int hashCode()
     {
         return HashUtil.hashCode(0, this.toString());
     }
@@ -432,7 +424,8 @@ public class JDFIntegerRange extends JDFRange
      * 
      * @return boolean - true if range 'ir' is within this range, else false
      */
-    public boolean isPartOfRange(JDFRange r)
+    @Override
+	public boolean isPartOfRange(JDFRange r)
     {
         JDFIntegerRange ir=(JDFIntegerRange) r;
         return (ir.getLowerValue() >= this.getLowerValue()) && (ir.getUpperValue() <= this.getUpperValue());
@@ -612,17 +605,20 @@ public class JDFIntegerRange extends JDFRange
         
     }
     
-    protected Object getRightObject()
+    @Override
+	protected Object getRightObject()
     {
         return new Integer(m_right);
     }
     
-    protected Object getLeftObject()
+    @Override
+	protected Object getLeftObject()
     {
         return new Integer(m_left);
     }
     
-    protected boolean inObjectRange(Object other)
+    @Override
+	protected boolean inObjectRange(Object other)
     {
         return inRange(((Integer)other).intValue());
     }
