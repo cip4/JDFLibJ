@@ -126,7 +126,8 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
     }
 
 
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         AttributeInfo ai; 
 
@@ -155,7 +156,8 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
     }
 
 
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         ElementInfo ei; 
 
@@ -213,93 +215,93 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
     }
 
     /**
-     * inner class EnumBusinessObject - printtalk based business objects
-     */
-    public static final class EnumBusinessObject extends ValuedEnum
-    {
-        private static final long serialVersionUID = 1L;
-
-        private static int m_startValue = 0;
-
-        private EnumBusinessObject(String status) 
-        {
-            super(status, m_startValue++);
-        }
-
-        public static EnumBusinessObject getEnum(String status) 
-        {
-            return (EnumBusinessObject) getEnum(EnumBusinessObject.class, status);
-        }
-
-        public static EnumBusinessObject getEnum(int value) 
-        {
-            return (EnumBusinessObject) getEnum(EnumBusinessObject.class, value);
-        }
-
-        public static Map getEnumMap() 
-        {
-            return getEnumMap(EnumBusinessObject.class);
-        }
-
-        public static List getEnumList() 
-        {
-            return getEnumList(EnumBusinessObject.class);
-        }
-
-        public static Iterator iterator() 
-        {
-            return iterator(EnumBusinessObject.class);
-        }
-
-        /**
-         * Retrieve all allowed value names of this Enum in a vector
-         *
-         * @return the <code>String Vector of</code> names
-         * @deprecated
-         */
-        public static Vector getNamesVector() 
-        {
-            final Vector namesVector = new Vector();
-            final Iterator it = iterator(EnumBusinessObject.class);
-            while (it.hasNext()) 
-            {
-                namesVector.addElement(((ValuedEnum) it.next()).getName());
-            }
-
-            return namesVector;
-        }
-
-        /**
-         * constants EnumBusinessObject
-         */
-        public static final EnumBusinessObject BusinessObject_Unknown =
-            new EnumBusinessObject("BusinessObject_Unknown");
-        public static final EnumBusinessObject BusinessObject_RFQ =
-            new EnumBusinessObject("BusinessObject_RFQ");
-        public static final EnumBusinessObject BusinessObject_Quote =
-            new EnumBusinessObject("BusinessObject_Quote");
-        public static final EnumBusinessObject BusinessObject_RFRequote =
-            new EnumBusinessObject("BusinessObject_RFRequote");
-        public static final EnumBusinessObject BusinessObject_Requote =
-            new EnumBusinessObject("BusinessObject_Requote");
-        public static final EnumBusinessObject BusinessObject_PO =
-            new EnumBusinessObject("BusinessObject_PO");
-        public static final EnumBusinessObject BusinessObject_Confirmation =
-            new EnumBusinessObject("BusinessObject_Confirmation");
-        public static final EnumBusinessObject BusinessObject_CO_RFQ =
-            new EnumBusinessObject("BusinessObject_CO_RFQ");
-        public static final EnumBusinessObject BusinessObject_CO_Quote =
-            new EnumBusinessObject("BusinessObject_CO_Quote");
-        public static final EnumBusinessObject BusinessObject_CO_PO =
-            new EnumBusinessObject("BusinessObject_CO_PO");
-        public static final EnumBusinessObject BusinessObject_CO_Confirmation =
-            new EnumBusinessObject("BusinessObject_CO_Confirmation");
-        public static final EnumBusinessObject BusinessObject_Invoice =
-            new EnumBusinessObject("BusinessObject_Invoice");
-        public static final EnumBusinessObject BusinessObject_None =
-            new EnumBusinessObject("BusinessObject_None");
-
-    }
+	 * inner class EnumBusinessObject - printtalk based business objects
+	 */
+	public static final class EnumBusinessObject extends ValuedEnum
+	{
+	    private static final long serialVersionUID = 1L;
+	
+	    private static int m_startValue = 0;
+	
+	    private EnumBusinessObject(String status) 
+	    {
+	        super(status, m_startValue++);
+	    }
+	
+	    public static EnumBusinessObject getEnum(String status) 
+	    {
+	        return (EnumBusinessObject) getEnum(EnumBusinessObject.class, status);
+	    }
+	
+	    public static EnumBusinessObject getEnum(int value) 
+	    {
+	        return (EnumBusinessObject) getEnum(EnumBusinessObject.class, value);
+	    }
+	
+	    public static Map getEnumMap() 
+	    {
+	        return getEnumMap(EnumBusinessObject.class);
+	    }
+	
+	    public static List getEnumList() 
+	    {
+	        return getEnumList(EnumBusinessObject.class);
+	    }
+	
+	    public static Iterator iterator() 
+	    {
+	        return iterator(EnumBusinessObject.class);
+	    }
+	
+	    /**
+	     * Retrieve all allowed value names of this Enum in a vector
+	     *
+	     * @return the <code>String Vector of</code> names
+	     * @deprecated
+	     */
+	    public static Vector getNamesVector() 
+	    {
+	        final Vector namesVector = new Vector();
+	        final Iterator it = iterator(EnumBusinessObject.class);
+	        while (it.hasNext()) 
+	        {
+	            namesVector.addElement(((ValuedEnum) it.next()).getName());
+	        }
+	
+	        return namesVector;
+	    }
+	
+	    /**
+	     * constants EnumBusinessObject
+	     */
+	    public static final EnumBusinessObject BusinessObject_Unknown =
+	        new EnumBusinessObject("BusinessObject_Unknown");
+	    public static final EnumBusinessObject BusinessObject_RFQ =
+	        new EnumBusinessObject("BusinessObject_RFQ");
+	    public static final EnumBusinessObject BusinessObject_Quote =
+	        new EnumBusinessObject("BusinessObject_Quote");
+	    public static final EnumBusinessObject BusinessObject_RFRequote =
+	        new EnumBusinessObject("BusinessObject_RFRequote");
+	    public static final EnumBusinessObject BusinessObject_Requote =
+	        new EnumBusinessObject("BusinessObject_Requote");
+	    public static final EnumBusinessObject BusinessObject_PO =
+	        new EnumBusinessObject("BusinessObject_PO");
+	    public static final EnumBusinessObject BusinessObject_Confirmation =
+	        new EnumBusinessObject("BusinessObject_Confirmation");
+	    public static final EnumBusinessObject BusinessObject_CO_RFQ =
+	        new EnumBusinessObject("BusinessObject_CO_RFQ");
+	    public static final EnumBusinessObject BusinessObject_CO_Quote =
+	        new EnumBusinessObject("BusinessObject_CO_Quote");
+	    public static final EnumBusinessObject BusinessObject_CO_PO =
+	        new EnumBusinessObject("BusinessObject_CO_PO");
+	    public static final EnumBusinessObject BusinessObject_CO_Confirmation =
+	        new EnumBusinessObject("BusinessObject_CO_Confirmation");
+	    public static final EnumBusinessObject BusinessObject_Invoice =
+	        new EnumBusinessObject("BusinessObject_Invoice");
+	    public static final EnumBusinessObject BusinessObject_None =
+	        new EnumBusinessObject("BusinessObject_None");
+	
+	}
 
     //**************************************** Methods *********************************************
     /**
@@ -307,13 +309,15 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFNodeInfo[ --> " + super.toString() + " ]";
     }
 
 
-    public boolean init()
+    @Override
+	public boolean init()
     {
         Node n=getParentNode();
         if(bDefaultWorkStepID && !hasAttribute(AttributeName.WORKSTEPID))
@@ -425,7 +429,8 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
      * @param version: version that the resulting element should correspond to
      * @return true if successful
      */
-    public boolean fixVersion(EnumVersion version){
+    @Override
+	public boolean fixVersion(EnumVersion version){
         if(hasAttribute(AttributeName.RREFS))
             removeAttribute(AttributeName.RREFS);
         return super.fixVersion(version);
@@ -435,7 +440,8 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
      * remove any resource specific attribute when making this to an element
      *
      */
-    public void cleanResourceAttributes()
+    @Override
+	public void cleanResourceAttributes()
     {
         removeAttribute(AttributeName.NODESTATUS);
         removeAttribute(AttributeName.NODESTATUSDETAILS);
