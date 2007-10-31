@@ -352,15 +352,6 @@ public class JDFElement extends KElement
         {
             return iterator(EnumOrientation.class);
         }
-        /**
-         * @return a Vector with all String representatives of the enums
-         * @deprecated
-         */
-        @Deprecated
-		public static Vector getNamesVector()
-        {
-            return StringUtil.getNamesVector(EnumOrientation.class);
-        }
 
         // enums accordng to JDF spec A.3.3.3, Table 3-3 Orientation
         public static final EnumOrientation Flip0       = new EnumOrientation(JDFConstants.ORIENTATION_FLIP0);
@@ -434,22 +425,6 @@ public class JDFElement extends KElement
         public static Iterator iterator()
         {
             return iterator(EnumXYRelation.class);
-        }
-        /**
-         * @return a Vector with all String representatives of the enums
-         * @deprecated
-         */
-        @Deprecated
-		public static Vector getNamesVector()
-        {
-            final Vector namesVector = new Vector();
-            final Iterator it = iterator(EnumXYRelation.class);
-            while (it.hasNext())
-            {
-                namesVector.addElement(((ValuedEnum) it.next()).getName());
-            }
-
-            return namesVector;
         }
 
         // enums accordng to JDF spec 3.1.2, Table 3-3 Status
@@ -731,23 +706,6 @@ public class JDFElement extends KElement
             return iterator(EnumNodeStatus.class);
         }
 
-        /**
-         * @return a Vector with all String representatives of the enums
-         * @deprecated
-         */
-        @Deprecated
-		public static Vector getNamesVector()
-        {
-            final Vector namesVector = new Vector();
-            final Iterator it = iterator(EnumNodeStatus.class);
-            while (it.hasNext())
-            {
-                namesVector.addElement(((ValuedEnum) it.next()).getName());
-            }
-
-            return namesVector;
-        }
-
         // enums accordng to JDF spec Table 3-4 Contents of a node
         public static final EnumNodeStatus Waiting           = new EnumNodeStatus(JDFConstants.WAITING);
         public static final EnumNodeStatus TestRunInProgress = new EnumNodeStatus(JDFConstants.TESTRUNINPROGRESS);
@@ -931,22 +889,7 @@ public class JDFElement extends KElement
         {
             return iterator(EnumNamedColor.class);
         }
-        /**
-         * @return a Vector with all String representatives of the enums
-         * @deprecated
-         */
-        @Deprecated
-		public static Vector getNamesVector()
-        {
-            final Vector namesVector = new Vector();
-            final Iterator it = iterator(EnumNamedColor.class);
-            while (it.hasNext())
-            {
-                namesVector.addElement(((ValuedEnum) it.next()).getName());
-            }
 
-            return namesVector;
-        }
         public static final EnumNamedColor White                = new EnumNamedColor(JDFConstants.NAMEDCOLOR_WHITE);
         public static final EnumNamedColor Black                = new EnumNamedColor(JDFConstants.NAMEDCOLOR_BLACK);
         public static final EnumNamedColor Gray                 = new EnumNamedColor(JDFConstants.NAMEDCOLOR_GRAY);
@@ -1703,7 +1646,7 @@ public class JDFElement extends KElement
             String element,
             String nameSpaceURI)
     {
-        final Vector setID = new Vector();
+        final VString setID = new VString();
 
         final VElement nl = getElementsByTagName_KElement(element, nameSpaceURI);
         final int l = nl.size();
@@ -2527,16 +2470,6 @@ public class JDFElement extends KElement
 
 
     /**
-     * create a node with the current local time in ISO format
-     * @deprecated use setAttributeNameTimeStamp(AttributeName.TIMESTAMP, null);
-     */
-    @Deprecated
-	public void setTimeStamp()
-    {
-        setAttributeNameTimeStamp(AttributeName.TIMESTAMP, null);
-    }
-
-    /**
      * put a timestamp in an attribute of the current node
      *
      * @param attributeName the attribute name to timestamp
@@ -2650,10 +2583,10 @@ public class JDFElement extends KElement
     {
         final VString vAttsReturn = new VString();
         int numAtts  = 0;
-        Vector vAtts= getAttributeVector_KElement();
+        VString vAtts= getAttributeVector_KElement();
         for(int i=0;i<vAtts.size();i++)
         {
-            String key=(String)vAtts.elementAt(i);
+            String key=vAtts.elementAt(i);
             if(!ai.validAttribute(key,getAttribute(key,null,null),level)){
                 vAttsReturn.add(key);
                 if (++numAtts >= nMax)
@@ -3081,7 +3014,7 @@ public class JDFElement extends KElement
             ValuedEnum enu, boolean bInherit)
     {
         String strAtt=null;
-        Vector vEnum=new Vector();
+        Vector<ValuedEnum> vEnum=new Vector<ValuedEnum>();
 
         if (bInherit)
         {
@@ -3095,13 +3028,13 @@ public class JDFElement extends KElement
 			return null;
 		}
 
-        Vector vAtts  = StringUtil.tokenize(strAtt, JDFConstants.BLANK, false);
+        VString vAtts  = StringUtil.tokenize(strAtt, JDFConstants.BLANK, false);
 
         try {
             Class methodArgs[] = {String.class};
             Method m = enu.getClass().getMethod("getEnum",methodArgs);
             for(int i=0;i<vAtts.size();i++){
-                Object args[]={(String)vAtts.elementAt(i)};
+                Object args[]={vAtts.elementAt(i)};
                 ValuedEnum ve =(ValuedEnum) m.invoke(null,args);
                 // there was an invalid token
                 if( ve!=null)
