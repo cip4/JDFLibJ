@@ -394,44 +394,10 @@ public class JDFResourceLink extends JDFElement
             return iterator(EnumUsage.class);
         }
 
-        /**
-         * @deprecated use getEnumList
-         * @return Vector
-         */
-        @Deprecated
-		public static Vector getNamesVector()
-        {
-            final Vector namesVector = new Vector();
-            final Iterator it = iterator(EnumUsage.class);
-            while (it.hasNext())
-            {
-                namesVector.addElement(((ValuedEnum) it.next()).getName());
-            }
-
-            return namesVector;
-        }
-
         public static final EnumUsage Input = new EnumUsage("Input");
 
         public static final EnumUsage Output = new EnumUsage("Output");
 
-    }
-
-    /**
-     * Enumeration strings for Usage
-     * 
-     * @deprecated
-     */
-    @Deprecated
-	public static String usageString()
-    {
-        String s = JDFConstants.EMPTYSTRING;
-        final Vector namesVector = EnumUsage.getNamesVector();
-        for (int i = 0; i < namesVector.size(); i++)
-        {
-            s += JDFConstants.COMMA + (String) namesVector.elementAt(i);
-        }
-        return s.equals(JDFConstants.EMPTYSTRING) ? null : s;
     }
 
     // **************************************** Methods
@@ -1882,7 +1848,7 @@ public class JDFResourceLink extends JDFElement
      */
     public Vector getPipePartIDKeysEnum()
     {
-        Vector v = null;
+        Vector<EnumPartIDKey> v = null;
 
         JDFResource res = getTarget();
         VString vPartIDKeys = res.getPartIDKeys();
@@ -1897,7 +1863,7 @@ public class JDFResourceLink extends JDFElement
         }
         for (int i = 0; i < v.size(); i++)
         {
-            if (!vPartIDKeys.contains(((EnumPartIDKey) v.elementAt(i)).getName()))
+            if (!vPartIDKeys.contains((v.elementAt(i)).getName()))
             {
                 throw new JDFException("JDFResourceLink.getPipePartIDKeys: key " + v.elementAt(i)
                         + " is not subset of PartIDKey");
