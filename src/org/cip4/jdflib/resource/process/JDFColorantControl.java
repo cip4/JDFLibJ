@@ -80,6 +80,7 @@ package org.cip4.jdflib.resource.process;
 
 import java.util.Vector;
 
+import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoColorantControl;
 import org.cip4.jdflib.core.ElementName;
@@ -147,7 +148,8 @@ public class JDFColorantControl extends JDFAutoColorantControl
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFColorantControl[  --> " + super.toString() + " ]";
     }
@@ -159,11 +161,12 @@ public class JDFColorantControl extends JDFAutoColorantControl
      * @return vector of EnumPartIDKey
      */
     
-    public Vector getImplicitPartitions()
+    @Override
+	public Vector getImplicitPartitions()
     {
-        Vector v = super.getImplicitPartitions();
+        Vector<ValuedEnum> v = super.getImplicitPartitions();
         if(v==null)
-            v=new Vector();
+            v=new Vector<ValuedEnum>();
         v.add(EnumPartIDKey.Separation);
         return v;
     }

@@ -11,6 +11,7 @@ package org.cip4.jdflib.resource;
 
 import java.util.Vector;
 
+import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoCuttingParams;
 import org.w3c.dom.DOMException;
@@ -73,7 +74,8 @@ public class JDFCuttingParams extends JDFAutoCuttingParams
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFCuttingParams[  --> " + super.toString() + " ]" ;
     }
@@ -81,11 +83,12 @@ public class JDFCuttingParams extends JDFAutoCuttingParams
     /**
      * get the vector of implicitly defined partition keys that MUST NOT be used in the resource
      */
-    public Vector getImplicitPartitions()
+    @Override
+	public Vector getImplicitPartitions()
     {
-        Vector v = super.getImplicitPartitions();
+        Vector<ValuedEnum> v = super.getImplicitPartitions();
         if(v==null)
-            v=new Vector();
+            v=new Vector<ValuedEnum>();
         v.add(EnumPartIDKey.BlockName);
         return v;
     }

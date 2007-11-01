@@ -83,6 +83,7 @@ package org.cip4.jdflib.resource.devicecapability;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
 
+import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
 import org.cip4.jdflib.auto.JDFAutoValue.EnumValueUsage;
@@ -119,7 +120,8 @@ public class JDFMatrixState extends JDFAbstractState
         atrInfoTable[7]  = new AtrInfoTable(AttributeName.PRESENTTRANSFORMS, 0x44444431, AttributeInfo.EnumAttributeType.enumerations, EnumOrientation.getEnum(0), null);
     }
 
-    protected AttributeInfo getTheAttributeInfo() 
+    @Override
+	protected AttributeInfo getTheAttributeInfo() 
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -131,7 +133,8 @@ public class JDFMatrixState extends JDFAbstractState
         elemInfoTable[0] = new ElemInfoTable(ElementName.VALUE, 0x33333311);
     }
 
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
     }
@@ -181,7 +184,8 @@ public class JDFMatrixState extends JDFAbstractState
      * toString
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFMatrixState[ --> " + super.toString() + " ]";
     }
@@ -357,7 +361,8 @@ public class JDFMatrixState extends JDFAbstractState
     *              (iSkip=0 - first Value element)
     * @return JDFLoc: newly created Loc element
     */
-    public JDFLoc appendValueLocLoc(int iSkip)
+    @Override
+	public JDFLoc appendValueLocLoc(int iSkip)
     {
         JDFValue val = getValue(iSkip);
         if(val==null)
@@ -430,7 +435,8 @@ public class JDFMatrixState extends JDFAbstractState
     /* (non-Javadoc)
      * @see org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java.lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
      */
-    public void addValue(String value, EnumFitsValue testlists)
+    @Override
+	public void addValue(String value, EnumFitsValue testlists)
     {
         if(fitsValue(value, testlists))
             return;
@@ -492,14 +498,15 @@ public class JDFMatrixState extends JDFAbstractState
      * 
      * @return boolean - true, if the value matches all test lists or if Allowed test lists are not specified
      */
-    public boolean fitsValue(String value, EnumFitsValue testlists)
+    @Override
+	public boolean fitsValue(String value, EnumFitsValue testlists)
     {
         VString vs = new VString(value, JDFConstants.BLANK);
         int siz = vs.size();
         if (siz%6!=0) {
             return false;
         }
-        Vector matrixList = new Vector();
+        Vector<JDFMatrix> matrixList = new Vector<JDFMatrix>();
 
         for(int i=0;i<siz;i+=6)
         {
@@ -523,7 +530,7 @@ public class JDFMatrixState extends JDFAbstractState
         {
             for (int k=0; k<matrixList.size(); k++) 
             {
-                JDFMatrix matrix = (JDFMatrix) matrixList.elementAt(k);
+                JDFMatrix matrix = matrixList.elementAt(k);
                 if (  !fitsRotateMod(matrix,testlists)   ||
                       !fitsShift(matrix,testlists)       ||
                       !fitsTransforms(matrix,testlists)  ||
@@ -767,7 +774,7 @@ public class JDFMatrixState extends JDFAbstractState
         c=c/java.lang.Math.sqrt(java.lang.Math.abs(det));
         d=d/java.lang.Math.sqrt(java.lang.Math.abs(det));
         
-        Vector vTransf;
+        Vector<ValuedEnum> vTransf;
         if (transforms==null || transforms.equals(EnumFitsValue.Allowed)) 
         {
             vTransf = getAllowedTransforms();
@@ -839,7 +846,8 @@ public class JDFMatrixState extends JDFAbstractState
     /* (non-Javadoc)
      * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
      */
-    public EnumTerm getEvaluationType()
+    @Override
+	public EnumTerm getEvaluationType()
     {
         return EnumTerm.MatrixEvaluation;
     }

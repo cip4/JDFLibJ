@@ -80,8 +80,6 @@
 
 package org.cip4.jdflib.resource.devicecapability;
 
-import java.util.Vector;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -170,9 +168,7 @@ public class JDFNameEvaluation extends JDFEvaluation
      */
     public VString getValueList()
     {
-        Vector v = StringUtil.tokenize(AttributeName.VALUELIST, JDFConstants.BLANK, false);
-        VString vs = new VString(v);
-        return vs;
+        return StringUtil.tokenize(AttributeName.VALUELIST, JDFConstants.BLANK, false);
     }
 
     /**

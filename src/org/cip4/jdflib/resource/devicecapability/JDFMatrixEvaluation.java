@@ -596,11 +596,11 @@ public class JDFMatrixEvaluation extends JDFEvaluation
         c=c/java.lang.Math.sqrt(java.lang.Math.abs(det));
         d=d/java.lang.Math.sqrt(java.lang.Math.abs(det));
         
-        Vector vTransf = getTransforms();
+        Vector<Integer> vTransf = getTransforms();
         int siz=vTransf.size();
         for (int i=0; i<siz; i++)
         {
-            EnumOrientation orientation = EnumOrientation.getEnum(((Integer)vTransf.elementAt(i)).intValue());
+            EnumOrientation orientation = EnumOrientation.getEnum((vTransf.elementAt(i)).intValue());
            
             if (orientation.equals(EnumOrientation.Flip0)) // a=1 b=0 c=0 d=-1
             {

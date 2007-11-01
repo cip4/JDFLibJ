@@ -339,7 +339,7 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
     {
         VString vs = getTheElementInfo().requiredElements();
         vs = getMissingElementVector(vs, nMax);
-        Vector v2=getChildElementVector_KElement(null,null,null,true,0);
+        VElement v2=getChildElementVector_KElement(null,null,null,true,0);
         int n=0;
         for(int i=0;i<v2.size();i++)
         {

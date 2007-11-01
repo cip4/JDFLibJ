@@ -177,11 +177,11 @@ public class JDFBooleanEvaluation extends JDFEvaluation
     public Vector getValueList()
     {
         String s = getAttribute(AttributeName.VALUELIST, null, null);
-        Vector v = StringUtil.tokenize(s, JDFConstants.BLANK, false);
-        Vector vRet = new Vector();
+        VString v = StringUtil.tokenize(s, JDFConstants.BLANK, false);
+        Vector<Boolean> vRet = new Vector<Boolean>();
         for (int i = 0; i < v.size(); i++)
         {
-            String s2 = (String) v.elementAt(i);
+            String s2 = v.elementAt(i);
             if (s2.equalsIgnoreCase(JDFConstants.TRUE))
             {
                 vRet.add(Boolean.valueOf(true));
@@ -276,12 +276,12 @@ public class JDFBooleanEvaluation extends JDFEvaluation
         if(!StringUtil.isBoolean(value))
             return false;
        
-        Vector v = getValueList();
+        Vector<Boolean> v = getValueList();
                       
         for (int i=0, size=v.size(); i < size; i++) 
         {
             boolean a = "true".equals(value);
-            boolean b = ((Boolean) v.elementAt(i)).booleanValue();
+            boolean b = (v.elementAt(i)).booleanValue();
             if (a==b)
                 return true; // we have found it
         }

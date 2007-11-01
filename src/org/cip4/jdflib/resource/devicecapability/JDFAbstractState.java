@@ -83,7 +83,6 @@ package org.cip4.jdflib.resource.devicecapability;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -142,7 +141,8 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
         atrInfoTable[15] = new AtrInfoTable(AttributeName.USERDISPLAY,       0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumUserDisplay.getEnum(0),EnumUserDisplay.Display.getName());
     }
 
-    protected AttributeInfo getTheAttributeInfo() 
+    @Override
+	protected AttributeInfo getTheAttributeInfo() 
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -153,7 +153,8 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
         elemInfoTable[0] = new ElemInfoTable(ElementName.LOC, 0x33333311);
     }
 
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -198,7 +199,8 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
      * toString
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFAbstractState[ --> " + super.toString() + " ]";
     }
@@ -420,7 +422,8 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     /**
      * get the id
      */
-    public String getID()
+    @Override
+	public String getID()
     {
         return getAttribute(AttributeName.ID);
     }
@@ -554,8 +557,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     {
         String strActionRefs = getAttribute(AttributeName.ACTIONREFS, null,
                 JDFConstants.EMPTYSTRING);
-        Vector v = StringUtil.tokenize(strActionRefs, JDFConstants.COMMA, false);
-        return new VString(v);
+        return StringUtil.tokenize(strActionRefs, JDFConstants.COMMA, false);
     }
 
     /**
@@ -601,8 +603,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     public VString getMacroRefs()
     {
         String strMacroRef = getAttribute(AttributeName.MACROREFS, null, JDFConstants.EMPTYSTRING);
-        Vector v = StringUtil.tokenize(strMacroRef, JDFConstants.COMMA, false);
-        return new VString(v);
+        return StringUtil.tokenize(strMacroRef, JDFConstants.COMMA, false);
     }
 
     /**
@@ -760,7 +761,8 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
      * @param version version that the resulting element should correspond to
      * @return true if successful
      */
-    public boolean fixVersion(EnumVersion version){
+    @Override
+	public boolean fixVersion(EnumVersion version){
         if(JDFConstants.UNBOUNDED.equals(getAttribute(AttributeName.MAXOCCURS,null,null)))
             setAttribute(AttributeName.MAXOCCURS, JDFConstants.POSINF);
         return super.fixVersion(version);
@@ -1169,7 +1171,8 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     /* (non-Javadoc)
      * @see org.cip4.jdflib.core.KElement#init()
      */
-    public boolean init()
+    @Override
+	public boolean init()
     {
         appendAnchor(null);
         return super.init();
@@ -1178,7 +1181,8 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
     /* (non-Javadoc)
      * @see org.cip4.jdflib.core.JDFElement#getIDPrefix()
      */
-    protected String getIDPrefix()
+    @Override
+	protected String getIDPrefix()
     {
         return "d";
     }

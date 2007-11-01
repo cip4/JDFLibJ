@@ -296,7 +296,7 @@ public class JDFResourcePool extends JDFPool
      */
     public Vector getResIds()
     {
-        final Vector setID = new Vector();
+        final VString setID = new VString();
         
         final VElement nl = getPoolChildren(null, null, null);
         

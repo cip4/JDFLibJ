@@ -83,6 +83,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource;
 
@@ -140,7 +141,8 @@ public class JDFSourceResource extends JDFElement
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFSourceResource[  --> " + super.toString() + " ]";
     }
@@ -199,14 +201,16 @@ public class JDFSourceResource extends JDFElement
      * 
      * @default getUnknownElements(bIgnorePrivate, 99999999)
      */
-    public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
+    @Override
+	public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
     {
         if(bIgnorePrivate)
             bIgnorePrivate=false; // dummy to fool compiler
         return getUnknownPoolElements(JDFElement.EnumPoolType.RefElement, nMax);
     }
       
-    public VString getInvalidElements(EnumValidationLevel level, boolean bIgnorePrivate,int nMax)
+    @Override
+	public VString getInvalidElements(EnumValidationLevel level, boolean bIgnorePrivate,int nMax)
     {
         if(bIgnorePrivate)
             bIgnorePrivate=false; // dummy to fool compiler
@@ -214,7 +218,7 @@ public class JDFSourceResource extends JDFElement
         if(v.size()>=nMax)
             return v;
             
-        Vector v2=getChildElementVector_KElement(null,null,null,true,0);
+        VElement v2=getChildElementVector_KElement(null,null,null,true,0);
         int n=0;
         final int size = v2.size();
         for(int i=0;i<size;i++)
@@ -227,7 +231,7 @@ public class JDFSourceResource extends JDFElement
             for(int i=0;i<size;i++)
             {
                 if(v2.elementAt(i) instanceof JDFRefElement)
-                    v.appendUnique(((KElement)v2.elementAt(i)).getLocalName());
+                    v.appendUnique(v2.elementAt(i).getLocalName());
             }
         }           
         return v;
@@ -280,11 +284,12 @@ public class JDFSourceResource extends JDFElement
      * get list of missing elements
      * @param nMax maximum size of the returned vector
      */
-    public VString getMissingElements(int nMax)
+    @Override
+	public VString getMissingElements(int nMax)
     {
         VString vs = getTheElementInfo().requiredElements();
         vs = getMissingElementVector(vs, nMax);
-        Vector v2=getChildElementVector_KElement(null,null,null,true,0);
+        VElement v2=getChildElementVector_KElement(null,null,null,true,0);
         int n=0;
         for(int i=0;i<v2.size();i++)
         {

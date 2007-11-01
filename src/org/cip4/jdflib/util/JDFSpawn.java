@@ -78,6 +78,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Vector;
 
+import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
@@ -206,7 +207,7 @@ public class JDFSpawn
     public JDFNode spawn()
     {
         // need copy in order to fix up 1.3 NodeInfo spawn
-        Vector vRWResources = vRWResources_in==null ? new Vector() : vRWResources_in;
+        VString vRWResources = vRWResources_in==null ? new VString() : vRWResources_in;
         VJDFAttributeMap vLocalSpawnParts = vSpawnParts;
 
         if(!bSpawnRWPartsMultiple) 
@@ -257,7 +258,7 @@ public class JDFSpawn
 
                 for (int psp = 0; psp < preSpawnedParts.size(); psp++)
                 {
-                    final Vector vAttrib = vLocalSpawnParts.getVector();
+                    final Vector<VJDFAttributeMap> vAttrib = vLocalSpawnParts.getVector();
                     final VJDFAttributeMap tmpParts = new VJDFAttributeMap(vAttrib);
                     tmpParts.overlapMap(preSpawnedParts.elementAt(psp));
                     allParts.appendUnique(tmpParts);
@@ -303,7 +304,7 @@ public class JDFSpawn
     {
         if(vSpawnParts==null)
             return;
-        final Vector vn = node.getvJDFNode(null, null, false);
+        final VElement vn = node.getvJDFNode(null, null, false);
         final int size = vn.size();
         // fill all resources and all links of all children into vResPool and links
         for (int i = 0; i < size; i++)
@@ -864,7 +865,7 @@ public class JDFSpawn
         if (!r.getPartUsage().equals(JDFResource.EnumPartUsage.Implicit))
         {
             final VString vPartKeys = r.getPartIDKeys();
-            final Vector vImplicitPartitions = r.getImplicitPartitions();
+            final Vector<ValuedEnum> vImplicitPartitions = r.getImplicitPartitions();
             if(vImplicitPartitions!=null)
             {
                 for (int ii = 0; ii < vImplicitPartitions.size(); ii++)
@@ -1388,7 +1389,7 @@ public class JDFSpawn
                 }
     
                 localNode = (JDFNode) parent.getTarget(spawnAudit.getjRef(), AttributeName.ID);
-                final Vector vn = localNode.getvJDFNode(null, null, false);
+                final VElement vn = localNode.getvJDFNode(null, null, false);
                 // in C++ Vector is VJDFNode, which is typesafe
     
                 // loop over all child nodes of the spawned node to be unspawned

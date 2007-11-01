@@ -14,6 +14,7 @@ package org.cip4.jdflib.resource.process;
 
 import java.util.Vector;
 
+import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoTransferCurve;
 import org.w3c.dom.DOMException;
@@ -72,7 +73,8 @@ public class JDFTransferCurve extends JDFAutoTransferCurve
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFTransferCurve[  --> " + super.toString() + " ]";
     }
@@ -81,11 +83,12 @@ public class JDFTransferCurve extends JDFAutoTransferCurve
     /**
      * get the vector of implicitly define partition keys that MUST NOT be used in the resource
      */
-    public Vector getImplicitPartitions()
+    @Override
+	public Vector getImplicitPartitions()
     {
-        Vector v = super.getImplicitPartitions();
+        Vector<ValuedEnum> v = super.getImplicitPartitions();
         if(v==null)
-            v=new Vector();
+            v=new Vector<ValuedEnum>();
         v.add(EnumPartIDKey.Separation);
         return v;
     }

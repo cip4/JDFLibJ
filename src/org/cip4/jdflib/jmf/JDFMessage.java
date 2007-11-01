@@ -529,7 +529,7 @@ public class JDFMessage extends JDFAutoMessage
             return false;
         }
 
-        Vector validList = getValidTypeVector(elementName, iSkip);
+        Vector<EnumType> validList = getValidTypeVector(elementName, iSkip);
         return validList.contains(typ);
      }
 
@@ -542,7 +542,7 @@ public class JDFMessage extends JDFAutoMessage
     private Vector getValidTypeVector(String elementName, int iSkip)
     {
         //  typedef std::vector<EnumType> vEnumType;
-        Vector validList = new Vector();
+        Vector<EnumType> validList = new Vector<EnumType>();
 
         // Commands
         if (elementName.equals(ElementName.FLUSHQUEUEPARAMS))
@@ -2684,7 +2684,7 @@ public class JDFMessage extends JDFAutoMessage
         // for each object, check whether it is compatible with the type of this
         for (int i = 0; i < vObjs.length; i++)
         {
-            Vector vt = getValidTypeVector(vObjs[i], 0);
+            Vector<EnumType> vt = getValidTypeVector(vObjs[i], 0);
             // is it there ?
             for (int j = 0; j < vt.size(); j++)
             {

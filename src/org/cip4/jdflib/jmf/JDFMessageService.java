@@ -146,7 +146,8 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
     /* (non-Javadoc)
      * @see org.cip4.jdflib.auto.JDFAutoMessageService#toString()
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFMessageService[  --> " + super.toString() + " ]";
     }
@@ -174,7 +175,8 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
      * @return boolean
      * @deprecated use getCommand
      */
-    public boolean isCommand()
+    @Deprecated
+	public boolean isCommand()
     {
         return getCommand();
     }
@@ -184,7 +186,8 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
      * @return boolean
      * @deprecated use getQuery
      */
-    public boolean isQuery()
+    @Deprecated
+	public boolean isQuery()
     {
         return getQuery();
     }
@@ -192,7 +195,8 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
     /**
      * append a devcaps for this and set its context to JMF
      */
-    public JDFDevCaps appendDevCaps()
+    @Override
+	public JDFDevCaps appendDevCaps()
     {
         JDFDevCaps dcs=super.appendDevCaps();
         dcs.setContext(EnumContext.JMF);
@@ -205,7 +209,7 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
      */
     public Vector getFamilies()
     {
-        Vector fams=new Vector();
+        Vector<EnumFamily> fams=new Vector<EnumFamily>();
         if(getCommand())
             fams.add(EnumFamily.Command);
         if(getSignal())

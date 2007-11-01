@@ -74,7 +74,6 @@ package org.cip4.jdflib.util;
 
 import java.util.Iterator;
 import java.util.Set;
-import java.util.Vector;
 
 import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.core.AttributeName;
@@ -367,7 +366,7 @@ public class JDFMerge
     private void mergeLocalLinks(final VJDFAttributeMap parts)
     {
         int numParts = parts==null ? 0 : parts.size();
-        final Vector vn = overWriteNode.getvJDFNode(null, null, false);
+        final VElement vn = overWriteNode.getvJDFNode(null, null, false);
         final int size = vn.size();
         // merge local (internal) partitioned resource links
         for (int nod = 0; nod < size; nod++)
@@ -394,7 +393,7 @@ public class JDFMerge
     private void mergeLocalNodes(JDFResource.EnumAmountMerge amountPolicy, final VJDFAttributeMap parts)
     {
         // merge local (internal) partitioned resources
-        final Vector vn = overWriteNode.getvJDFNode(null, null, false);
+        final VElement vn = overWriteNode.getvJDFNode(null, null, false);
         for (int nod = 0; nod < vn.size(); nod++)
         {
             final JDFNode overwriteLocalNode = (JDFNode)vn.elementAt(nod);
@@ -1147,7 +1146,7 @@ public class JDFMerge
         {
             if(bRecurse)
             {
-                final Vector v = overWriteTmpNode.getvJDFNode(null, null, false);
+                final VElement v = overWriteTmpNode.getvJDFNode(null, null, false);
                 for(int i = v.size(); i >= 0; i--)
                 {
                     cleanUpMerge((JDFNode)v.elementAt(i),cleanPolicy, false);

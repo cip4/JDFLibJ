@@ -150,7 +150,8 @@ public class JDFPipeParams extends JDFAutoPipeParams
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
     
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFPipeParams[  --> " + super.toString() + " ]";
     }
@@ -162,7 +163,8 @@ public class JDFPipeParams extends JDFAutoPipeParams
      * @return VElement: a vector with all resource links in the pool matching the conditions
      * @deprecated use getResourceLink()
      */
-    final public VElement getResourceLinks(String nam, JDFAttributeMap mAttrib, String nameSpaceURI)
+    @Deprecated
+	final public VElement getResourceLinks(String nam, JDFAttributeMap mAttrib, String nameSpaceURI)
     {
         VElement v = getChildElementVector(nam,nameSpaceURI,mAttrib,true, 0, false);
         
@@ -204,7 +206,8 @@ public class JDFPipeParams extends JDFAutoPipeParams
      * @return Vector - vector of unknown element nodenames
      */
     
-    public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
+    @Override
+	public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
     {
         if(bIgnorePrivate) // dummy to soothe compiler warning
             bIgnorePrivate=false;
@@ -320,7 +323,7 @@ public class JDFPipeParams extends JDFAutoPipeParams
     {
         if(parentNode==null)
             return;
-        Vector vNodes=parentNode.getvJDFNode(null,null,false);
+        VElement vNodes=parentNode.getvJDFNode(null,null,false);
         
         final int size = vNodes.size();
         for(int i=0;i<size;i++)

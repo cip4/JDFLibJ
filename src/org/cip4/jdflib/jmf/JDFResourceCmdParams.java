@@ -148,7 +148,8 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
      * toString()
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFResourceCmdParams[  --> " + super.toString() + " ]";
     }
@@ -227,7 +228,8 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
      * 
      * @return Vector - vector of unknown element nodenames
      */
-    public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
+    @Override
+	public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
     {
         if(bIgnorePrivate)
             bIgnorePrivate=false; // dummy to fool compiler
@@ -238,7 +240,8 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
      * get part map vector
      * @return VJDFAttributeMap: vector of attribute maps, one for each part
      */
-    public VJDFAttributeMap getPartMapVector()
+    @Override
+	public VJDFAttributeMap getPartMapVector()
     {
         return super.getPartMapVector();
     }
@@ -247,7 +250,8 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
      * set all parts to those defined by vParts
      * @param vParts vector of attribute maps for the parts
      */
-    public void setPartMapVector(VJDFAttributeMap vParts)
+    @Override
+	public void setPartMapVector(VJDFAttributeMap vParts)
     {
         super.setPartMapVector(vParts);
     }
@@ -256,7 +260,8 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
      * set all parts to those define by mPart
      * @param mPart attribute map for the part to set
      */
-    public void setPartMap(JDFAttributeMap mPart)
+    @Override
+	public void setPartMap(JDFAttributeMap mPart)
     {
         super.setPartMap(mPart);
     }
@@ -265,7 +270,8 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
      * remove the part defined by mPart
      * @param mPart attribute map for the part to remove
      */
-    public void removePartMap(JDFAttributeMap mPart)
+    @Override
+	public void removePartMap(JDFAttributeMap mPart)
     {
         super.removePartMap(mPart);
     }
@@ -275,7 +281,8 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
      * @param mPart attribute map to look for
      * @return boolean - returns true if the part exists
      */
-    public boolean hasPartMap(JDFAttributeMap mPart)
+    @Override
+	public boolean hasPartMap(JDFAttributeMap mPart)
     {
         return super.hasPartMap(mPart);
     }
@@ -288,7 +295,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
     {
         if(parentNode==null)
             return;
-        Vector vNodes=parentNode.getvJDFNode(null,null,false);
+        VElement vNodes=parentNode.getvJDFNode(null,null,false);
         
         final int size = vNodes.size();
         for(int i=0;i<size;i++)

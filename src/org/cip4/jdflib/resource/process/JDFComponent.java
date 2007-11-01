@@ -80,6 +80,7 @@ package org.cip4.jdflib.resource.process;
 
 import java.util.Vector;
 
+import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoComponent;
 import org.cip4.jdflib.core.AttributeName;
@@ -150,7 +151,8 @@ public class JDFComponent extends JDFAutoComponent
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFComponent[  --> " + super.toString() + " ]";
     }
@@ -164,7 +166,8 @@ public class JDFComponent extends JDFAutoComponent
      * @param version: version that the resulting element should correspond to
      * @return true if successful
      */
-    public boolean fixVersion(EnumVersion version)
+    @Override
+	public boolean fixVersion(EnumVersion version)
     {
         boolean bRet=true;
         if(version!=null)
@@ -220,7 +223,7 @@ public class JDFComponent extends JDFAutoComponent
     
     public void setComponentType(EnumComponentType partialFinal, EnumComponentType sheetWebProof)
     {
-        Vector v=new Vector();
+        Vector<ValuedEnum> v=new Vector<ValuedEnum>();
         if(partialFinal!=null)
             v.add(partialFinal);
         if(sheetWebProof!=null)

@@ -308,7 +308,7 @@ public class MimeUtil
      */
     public static BodyPart[] getBodyParts(Multipart mp) 
     {
-        Vector v=new Vector();
+        Vector<BodyPart> v=new Vector<BodyPart>();
         try
         {
             for (int i = 0; true; i++ ) 
@@ -329,7 +329,7 @@ public class MimeUtil
             if(v.size()==0)
                 return null;
             BodyPart[] ret=new BodyPart[v.size()];
-            ret=(BodyPart[]) v.toArray(ret);
+            ret=v.toArray(ret);
             return ret;
         }
     }

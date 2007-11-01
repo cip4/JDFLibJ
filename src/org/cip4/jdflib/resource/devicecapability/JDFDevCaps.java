@@ -161,7 +161,8 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFDevCaps[  --> " + super.toString() + " ]";
     }
@@ -190,7 +191,8 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
      * set rRef to the value of devCap/@ID
      * @param dc the DevCap to set
      */
-    public JDFDevCap appendDevCap()
+    @Override
+	public JDFDevCap appendDevCap()
     {
         JDFDevCap dc=super.appendDevCap();
         if(hasAttribute(AttributeName.NAME))
@@ -305,7 +307,8 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
      * 
      * @deprecated use getNamePathVector 
      */
-    public final String getNamePath(boolean onlyNames)
+    @Deprecated
+	public final String getNamePath(boolean onlyNames)
     {
         StringBuffer xPath = new StringBuffer(getName());
         if (!onlyNames) {
@@ -455,14 +458,14 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
      */
     private final static void correction_Static(KElement root)
     {
-        Vector v = root.getChildElementVector("InvalidResource", null, null, true, 0,false);
+        VElement v = root.getChildElementVector("InvalidResource", null, null, true, 0,false);
         for (int i = 0; i < v.size(); i++) 
         {
-            KElement invRes = (KElement)v.elementAt(i);
-            Vector vv = invRes.getChildElementVector(null, null, null, true, 0,false);
+            KElement invRes = v.elementAt(i);
+            VElement vv = invRes.getChildElementVector(null, null, null, true, 0,false);
             for (int j = vv.size()-1; j >= 0; j--) 
             {
-                capXPathCorrection_Static((KElement)vv.elementAt(j),invRes.getAttribute("CapXPath"));
+                capXPathCorrection_Static(vv.elementAt(j),invRes.getAttribute("CapXPath"));
             }
             removePoolElements_Static(invRes);
         }
@@ -471,10 +474,10 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 
     private final static void removePoolElements_Static(KElement root)
     {
-        Vector v = root.getChildElementVector(null, null, null, true, 0,false);
+    	VElement v = root.getChildElementVector(null, null, null, true, 0,false);
         for (int j = v.size()-1; j >= 0; j--) 
         {
-            KElement el = (KElement)v.elementAt(j);
+            KElement el = v.elementAt(j);
             String nam = el.getNodeName();
             if (nam.equals("InvalidAttributes") || nam.equals("InvalidElements") ||
                     nam.equals("UnknownAttributes") || nam.equals("UnknownElements") || 
@@ -486,10 +489,10 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
             }
 
         }
-        Vector vv = root.getChildElementVector(null, null, null, true, 0,false);
+        VElement vv = root.getChildElementVector(null, null, null, true, 0,false);
         for (int i = vv.size()-1; i >= 0; i--) 
         {
-            removePoolElements_Static((KElement)vv.elementAt(i));
+            removePoolElements_Static(vv.elementAt(i));
         }
         return;
     }
@@ -525,10 +528,10 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
                 child.setAttribute("CapXPath", parentPath + "/" + childPathPart);
 
                 // recursion to set everywhere the right CapXPath
-                Vector vSubEl = child.getChildElementVector(null, null, null, true, 0,false);
+                VElement vSubEl = child.getChildElementVector(null, null, null, true, 0,false);
                 for (int j = 0; j < vSubEl.size(); j++) 
                 {
-                    capXPathCorrection_Static((KElement)vSubEl.elementAt(j),childPath);
+                    capXPathCorrection_Static(vSubEl.elementAt(j),childPath);
                 }
             }
         }
@@ -546,10 +549,10 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
     {
         if (moveToElement != null && moveFromElement != null)
         {
-            Vector v = moveFromElement.getChildElementVector(null, null, null, true, 0,false);
+        	VElement v = moveFromElement.getChildElementVector(null, null, null, true, 0,false);
             for (int i = 0; i < v.size(); i++) 
             {
-                moveToElement.moveElement((KElement)v.elementAt(i), null);
+                moveToElement.moveElement(v.elementAt(i), null);
             }
         }
         return;
@@ -727,11 +730,11 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
                         int kk=(tocNum2==null|| tocNum2.size()==0) ?-1: tocNum2.getInt(0);
                         if(EnumUsage.Input.equals(linkUsage))
                             kk--;
-                        Vector v=(Vector) indexResMap.get(new Integer(kk));
+                        Vector<JDFResource> v=(Vector) indexResMap.get(new Integer(kk));
                         int sv= v==null ? 0 : v.size();
                         for(int kkk=0;kkk<sv;kkk++)
                         {
-                            JDFResource rr=(JDFResource)v.elementAt(kkk);
+                            JDFResource rr=v.elementAt(kkk);
                             if(rr.getLocalName().equals(nam))
                             {
                                 r=rr;
@@ -988,7 +991,8 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
     /* (non-Javadoc)
      * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib.core.KElement.EnumValidationLevel, boolean, int)
      */
-    public VString getInvalidAttributes(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
+    @Override
+	public VString getInvalidAttributes(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
     {
         VString vs= super.getInvalidAttributes(level, bIgnorePrivate, nMax);
         if(nMax>0 && vs.size()>nMax)

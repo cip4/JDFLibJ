@@ -181,7 +181,8 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
         elemInfoTable[12] = new ElemInfoTable(ElementName.XYPAIRSTATE, 0x33333111);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -192,7 +193,8 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFDeviceCap[  --> " + super.toString() + " ]";
     }
@@ -244,7 +246,8 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
      *
      * @return String - TypeExpression attribute value
      */
-    public String getTypeExpression()
+    @Override
+	public String getTypeExpression()
     {
         if (hasAttribute(AttributeName.TYPEEXPRESSION)) 
         {
@@ -257,12 +260,13 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
      * (9.2) get CombinedMethod attribute <code>CombinedMethod</code>
      * @return Vector of the enumerations
      */
+   @Override
    public Vector getCombinedMethod()
    {
-       Vector v=getEnumerationsAttribute(AttributeName.COMBINEDMETHOD, null, EnumCombinedMethod.None, false);
+       Vector<ValuedEnum> v=getEnumerationsAttribute(AttributeName.COMBINEDMETHOD, null, EnumCombinedMethod.None, false);
        if(v==null)
        {
-           v=new Vector();
+           v=new Vector<ValuedEnum>();
            v.add(EnumCombinedMethod.None);
        }
        return v;
@@ -527,7 +531,7 @@ public static JDFMessageService getMessageServiceForJMFType(JDFMessage m, JDFRes
         VElement v=new VElement();
         String typeNode = testRoot.getType();
 
-        Vector vCombMethod = getCombinedMethod();
+        Vector<ValuedEnum> vCombMethod = getCombinedMethod();
         final String typeExp = getTypeExpression();
         for(int j=0;j<vCombMethod.size();j++)
         {
@@ -1025,7 +1029,7 @@ public static JDFMessageService getMessageServiceForJMFType(JDFMessage m, JDFRes
         if(hasAttribute(AttributeName.TYPES))
         {
             node.setType(EnumType.ProcessGroup);
-            Vector cm=getCombinedMethod();
+            Vector<ValuedEnum> cm=getCombinedMethod();
             if(cm!=null && cm.contains(EnumCombinedMethod.Combined))
                 node.setType(EnumType.Combined);
                 
@@ -1133,7 +1137,8 @@ public static JDFMessageService getMessageServiceForJMFType(JDFMessage m, JDFRes
      * 
      * @param method the individual combined method to set
      */
-    public void setCombinedMethod(Vector vMethod)
+    @Override
+	public void setCombinedMethod(Vector vMethod)
     {
         setEnumerationsAttribute(AttributeName.COMBINEDMETHOD, vMethod, null);
     }

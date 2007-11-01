@@ -84,6 +84,7 @@ package org.cip4.jdflib.resource.devicecapability;
 
 import java.util.Vector;
 
+import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -224,7 +225,7 @@ public class JDFBooleanState extends JDFAbstractState
      */
     public Vector getAllowedValueList()
     {
-        final Vector enumerationsAttribute = getEnumerationsAttribute(AttributeName.ALLOWEDVALUELIST, null, EnumBoolean.True, false);
+        final Vector<ValuedEnum> enumerationsAttribute = getEnumerationsAttribute(AttributeName.ALLOWEDVALUELIST, null, EnumBoolean.True, false);
         if(!enumerationsAttribute.isEmpty())
             return enumerationsAttribute;
         return null;
@@ -304,7 +305,7 @@ public class JDFBooleanState extends JDFAbstractState
      */
     private final boolean fitsValueList(String value, EnumFitsValue valuelist) 
     {
-        Vector v;
+        Vector<EnumBoolean> v;
         EnumBoolean eb=EnumBoolean.getEnum(value);
         if(eb==null)
             return false;
@@ -337,17 +338,17 @@ public class JDFBooleanState extends JDFAbstractState
         
         if(testlists==null || EnumFitsValue.Allowed.equals(testlists))
         {
-            Vector list=getAllowedValueList();
+            Vector<EnumBoolean> list=getAllowedValueList();
             if(list==null)
-                list=new Vector();
+                list=new Vector<EnumBoolean>();
             list.add(b);
             setAllowedValueList(list);
         }
         if(testlists==null || EnumFitsValue.Present.equals(testlists))
         {
-            Vector list=getPresentValueList();
+            Vector<EnumBoolean> list=getPresentValueList();
             if(list==null || !hasAttribute(AttributeName.PRESENTVALUELIST))
-                list=new Vector();
+                list=new Vector<EnumBoolean>();
             list.add(b);
             setPresentValueList(list);
         }        

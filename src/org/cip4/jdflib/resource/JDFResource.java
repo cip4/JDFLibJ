@@ -1827,7 +1827,7 @@ public class JDFResource extends JDFElement
         if(key==null) {
             return false;
         }
-        Vector vImplicitKeys=getImplicitPartitions();
+        Vector<ValuedEnum> vImplicitKeys=getImplicitPartitions();
         if(vImplicitKeys!=null)
         {
             if(vImplicitKeys.contains(key)) {
@@ -1892,7 +1892,7 @@ public class JDFResource extends JDFElement
         if(m==null) {
             return;
         }
-        Vector v=getImplicitPartitions();
+        Vector<ValuedEnum> v=getImplicitPartitions();
         if(v==null) {
             return;
         }
@@ -2373,7 +2373,7 @@ public class JDFResource extends JDFElement
     public Vector getPartValues(EnumPartIDKey partType)
     {
         final VElement v = getLeaves(false);
-        final Vector vs = new Vector();
+        final VString vs = new VString();
 
         for (int i = 0; i < v.size(); i++)
         {
@@ -3772,7 +3772,7 @@ public class JDFResource extends JDFElement
                                         null,null, true, 0, false));
 
                     // remember idix of vtmp Vector of Integer (object type, not the simple datatype)
-                    final Vector vTmp = new Vector();
+                    final Vector<Integer> vTmp = new Vector<Integer>();
 
                     for (int j = 0; j < vKids.size(); j++)
                     {
@@ -3800,9 +3800,9 @@ public class JDFResource extends JDFElement
                             int posMax = -1;
                             for (int kk = 0; kk < vTmp.size(); kk++)
                             {
-                                if (((Integer) vTmp.elementAt(kk)).intValue() > mymax)
+                                if ((vTmp.elementAt(kk)).intValue() > mymax)
                                 {
-                                    mymax = ((Integer) vTmp.elementAt(kk)).intValue();
+                                    mymax = (vTmp.elementAt(kk)).intValue();
                                     posMax = kk;
                                 }
                             }
@@ -3848,9 +3848,8 @@ public class JDFResource extends JDFElement
         }
 
         final String postFix     = id.substring(0, 8);
-        final Vector sibling     = getResourcePool().getResIds();
         String preFix            = id;
-        final VString siblingIDs = new VString(sibling);
+        final VString siblingIDs = (VString) getResourcePool().getResIds();
 
         if (postFix.substring(0, "_old_".length()).equals("_old_"))
         {
@@ -5528,7 +5527,7 @@ public class JDFResource extends JDFElement
         final String s = partType.getName();
         final JDFResource r = getResourceRoot();
 
-        final Vector implicitPartitions = getImplicitPartitions();
+        final Vector<ValuedEnum> implicitPartitions = getImplicitPartitions();
         if (implicitPartitions!=null &&implicitPartitions.contains(partType))
         {
             throw new JDFException("AddPartIDKey: attempting to add implicit partition: "+s);
@@ -5719,7 +5718,7 @@ public class JDFResource extends JDFElement
      */
     public Vector getPipePartIDKeysEnum()
     {
-        Vector v=null;
+        Vector<ValuedEnum> v=null;
 
         VString vPartIDKeys = getPartIDKeys();
         v = getEnumerationsAttribute(AttributeName.PIPEPARTIDKEYS,null,EnumPartIDKey.getEnum(0),false);
@@ -5743,7 +5742,7 @@ public class JDFResource extends JDFElement
 	public VString getPipePartIDKeys()
     {
         VString vPipePartIDKeys  = new VString();
-        Vector v=getPipePartIDKeysEnum();
+        Vector<ValuedEnum> v=getPipePartIDKeysEnum();
         for(int i=0;i<v.size();i++) {
             vPipePartIDKeys.add(((EnumPartIDKey)v.elementAt(i)).getName());
         }
@@ -6101,7 +6100,7 @@ public class JDFResource extends JDFElement
     public VString getRunTags()
     {
         final String s = getAttribute(AttributeName.RUNTAGS, null, JDFConstants.EMPTYSTRING);
-        final Vector v = StringUtil.tokenize(s, JDFConstants.BLANK, false);
+        final VString v = StringUtil.tokenize(s, JDFConstants.BLANK, false);
         final VString vstr = new VString();
         vstr.addAll(v);
         return vstr;
