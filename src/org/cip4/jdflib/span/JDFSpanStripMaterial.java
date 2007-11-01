@@ -12,7 +12,6 @@ package org.cip4.jdflib.span;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -111,18 +110,6 @@ public class JDFSpanStripMaterial extends JDFEnumerationSpan
             return iterator(EnumSpanStripMaterial.class);
         }
         
-        public static Vector getNamesVector()
-        {
-            Vector namesVector = new Vector();
-            Iterator it = iterator(EnumSpanStripMaterial.class);
-            while (it.hasNext())
-            {
-                namesVector.addElement(((ValuedEnum) it.next()).getName());
-            }
-            
-            return namesVector;
-        }
-        
         public static final EnumSpanStripMaterial Calico           = new EnumSpanStripMaterial("Calico");
         public static final EnumSpanStripMaterial Cardboard        = new EnumSpanStripMaterial("Cardboard");
         public static final EnumSpanStripMaterial CrepePaper       = new EnumSpanStripMaterial("CrepePaper");
@@ -140,7 +127,8 @@ public class JDFSpanStripMaterial extends JDFEnumerationSpan
      *
      * @return Vector - vector representation of the allowed values
      */
-    public ValuedEnum getEnumType()
+    @Override
+	public ValuedEnum getEnumType()
     {
         return EnumSpanStripMaterial.getEnum(0);
     }
@@ -150,7 +138,8 @@ public class JDFSpanStripMaterial extends JDFEnumerationSpan
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFSpanStripMaterial[  --> " + super.toString() + " ]" ;
     }

@@ -12,7 +12,6 @@ package org.cip4.jdflib.span;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -113,18 +112,6 @@ public class JDFSpanGlue extends JDFEnumerationSpan
             return iterator(EnumSpanGlue.class);
         }
         
-        public static Vector getNamesVector()
-        {
-            Vector namesVector = new Vector();
-            Iterator it = iterator(EnumSpanGlue.class);
-            while (it.hasNext())
-            {
-                namesVector.addElement(((ValuedEnum) it.next()).getName());
-            }
-            
-            return namesVector;
-        }
-        
         public static final EnumSpanGlue ColdGlue = new EnumSpanGlue("ColdGlue");
         public static final EnumSpanGlue Hotmelt  = new EnumSpanGlue("Hotmelt");
         public static final EnumSpanGlue PUR      = new EnumSpanGlue("PUR");
@@ -136,7 +123,8 @@ public class JDFSpanGlue extends JDFEnumerationSpan
      *
      * @return Vector - vector representation of the allowed values
      */
-    public ValuedEnum getEnumType()
+    @Override
+	public ValuedEnum getEnumType()
     {
         return EnumSpanGlue.getEnum(0);
     }
@@ -149,7 +137,8 @@ public class JDFSpanGlue extends JDFEnumerationSpan
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFSpanGlue[  --> " + super.toString() + " ]" ;
     }

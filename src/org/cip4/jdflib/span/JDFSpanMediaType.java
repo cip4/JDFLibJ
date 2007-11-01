@@ -12,7 +12,6 @@ package org.cip4.jdflib.span;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -110,18 +109,6 @@ public class JDFSpanMediaType extends JDFEnumerationSpan
             return iterator(EnumSpanMediaType.class);
         }
         
-        public static Vector getNamesVector()
-        {
-            Vector namesVector = new Vector();
-            Iterator it = iterator(EnumSpanMediaType.class);
-            while (it.hasNext())
-            {
-                namesVector.addElement(((ValuedEnum) it.next()).getName());
-            }
-            
-            return namesVector;
-        }
-        
         public static final EnumSpanMediaType Disc         = new EnumSpanMediaType("Disc");
         public static final EnumSpanMediaType Other        = new EnumSpanMediaType("Other");
         public static final EnumSpanMediaType Paper        = new EnumSpanMediaType("Paper");
@@ -137,7 +124,8 @@ public class JDFSpanMediaType extends JDFEnumerationSpan
      *
      * @return Vector - vector representation of the allowed values
      */
-    public ValuedEnum getEnumType()
+    @Override
+	public ValuedEnum getEnumType()
     {
         return EnumSpanMediaType.getEnum(0);
     }
@@ -148,7 +136,8 @@ public class JDFSpanMediaType extends JDFEnumerationSpan
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFSpanMediaType[  --> " + super.toString() + " ]" ;
     }

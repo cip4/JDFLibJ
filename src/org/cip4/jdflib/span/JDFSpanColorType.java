@@ -12,7 +12,6 @@ package org.cip4.jdflib.span;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -110,18 +109,6 @@ public class JDFSpanColorType extends JDFEnumerationSpan
             return iterator(EnumSpanColorType.class);
         }
         
-        public static Vector getNamesVector()
-        {
-            Vector namesVector = new Vector();
-            Iterator it = iterator(EnumSpanColorType.class);
-            while (it.hasNext())
-            {
-                namesVector.addElement(((ValuedEnum) it.next()).getName());
-            }
-            
-            return namesVector;
-        }
-        
         public static final EnumSpanColorType Monochrome = new EnumSpanColorType("Monochrome");
         public static final EnumSpanColorType BasicColor = new EnumSpanColorType("BasicColor");
         public static final EnumSpanColorType MatchedColor = new EnumSpanColorType("MatchedColor");
@@ -136,7 +123,8 @@ public class JDFSpanColorType extends JDFEnumerationSpan
      *
      * @return Vector - vector representation of the allowed values
      */
-    public ValuedEnum getEnumType()
+    @Override
+	public ValuedEnum getEnumType()
     {
         return EnumSpanColorType.getEnum(0);
     }
@@ -146,7 +134,8 @@ public class JDFSpanColorType extends JDFEnumerationSpan
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFSpanColorType[  --> " + super.toString() + " ]" ;
     }

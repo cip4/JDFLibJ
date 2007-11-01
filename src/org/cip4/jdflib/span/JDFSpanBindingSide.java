@@ -12,7 +12,6 @@ package org.cip4.jdflib.span;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -111,18 +110,6 @@ public class JDFSpanBindingSide extends JDFEnumerationSpan
             return iterator(EnumSpanBindingSide.class);
         }
         
-        public static Vector getNamesVector()
-        {
-            Vector namesVector = new Vector();
-            Iterator it = iterator(EnumSpanBindingSide.class);
-            while (it.hasNext())
-            {
-                namesVector.addElement(((ValuedEnum) it.next()).getName());
-            }
-            
-            return namesVector;
-        }
-        
         public static final EnumSpanBindingSide Top     = new EnumSpanBindingSide("Top");
         public static final EnumSpanBindingSide Bottom  = new EnumSpanBindingSide("Bottom");
         public static final EnumSpanBindingSide Right   = new EnumSpanBindingSide("Right");
@@ -137,7 +124,8 @@ public class JDFSpanBindingSide extends JDFEnumerationSpan
      *
      * @return  The enum that this span is linked to
      */
-    public ValuedEnum getEnumType()
+    @Override
+	public ValuedEnum getEnumType()
     {
         return EnumSpanBindingSide.getEnum(0);
     }
@@ -147,7 +135,8 @@ public class JDFSpanBindingSide extends JDFEnumerationSpan
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFSpanBindingSide[  --> " + super.toString() + " ]" ;
     }

@@ -12,7 +12,6 @@ package org.cip4.jdflib.span;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -110,18 +109,6 @@ public class JDFSpanSurface extends JDFEnumerationSpan
             return iterator(EnumSpanSurface.class);
         }
         
-        public static Vector getNamesVector()
-        {
-            Vector namesVector = new Vector();
-            Iterator it = iterator(EnumSpanSurface.class);
-            while (it.hasNext())
-            {
-                namesVector.addElement(((ValuedEnum) it.next()).getName());
-            }
-            
-            return namesVector;
-        }
-        
         public static final EnumSpanSurface Unknown = new EnumSpanSurface("Unknown");
         public static final EnumSpanSurface Front   = new EnumSpanSurface("Front");
         public static final EnumSpanSurface Back    = new EnumSpanSurface("Back");
@@ -137,7 +124,8 @@ public class JDFSpanSurface extends JDFEnumerationSpan
      *
      * @return Vector - vector representation of the allowed values
      */
-    public ValuedEnum getEnumType()
+    @Override
+	public ValuedEnum getEnumType()
     {
         return EnumSpanSurface.getEnum(0);
     }
@@ -147,7 +135,8 @@ public class JDFSpanSurface extends JDFEnumerationSpan
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFSpanSurface[  --> " + super.toString() + " ]" ;
     }

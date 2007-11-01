@@ -12,7 +12,6 @@ package org.cip4.jdflib.span;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -114,18 +113,6 @@ public class JDFSpanImageStrategy extends JDFEnumerationSpan
             return iterator(EnumSpanImageStrategy.class);
         }
         
-        public static Vector getNamesVector()
-        {
-            Vector namesVector = new Vector();
-            Iterator it = iterator(EnumSpanImageStrategy.class);
-            while (it.hasNext())
-            {
-                namesVector.addElement(((ValuedEnum) it.next()).getName());
-            }
-            
-            return namesVector;
-        }
-        
         public static final EnumSpanImageStrategy NoImages       = new EnumSpanImageStrategy("NoImages");
         public static final EnumSpanImageStrategy LowResolution  = new EnumSpanImageStrategy("LowResolution");
         public static final EnumSpanImageStrategy HighResolution = new EnumSpanImageStrategy("HighResolution");
@@ -139,7 +126,8 @@ public class JDFSpanImageStrategy extends JDFEnumerationSpan
      *
      * @return Vector - vector representation of the allowed values
      */
-    public ValuedEnum getEnumType()
+    @Override
+	public ValuedEnum getEnumType()
     {
         return EnumSpanImageStrategy.getEnum(0);
     }
@@ -149,14 +137,16 @@ public class JDFSpanImageStrategy extends JDFEnumerationSpan
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFSpanImageStrategy[ --> " + super.toString() + " ]";
     }
     
     
     
-    public boolean init()
+    @Override
+	public boolean init()
     {
         boolean b = super.init();
         setDataType(EnumDataType.EnumerationSpan);

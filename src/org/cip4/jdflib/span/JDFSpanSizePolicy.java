@@ -10,7 +10,6 @@ package org.cip4.jdflib.span;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -110,18 +109,6 @@ public class JDFSpanSizePolicy extends JDFEnumerationSpan
             return iterator(EnumSpanSizePolicy.class);
         }
         
-        public static Vector getNamesVector()
-        {
-            Vector namesVector = new Vector();
-            Iterator it = iterator(EnumSpanSizePolicy.class);
-            while (it.hasNext())
-            {
-                namesVector.addElement(((ValuedEnum) it.next()).getName());
-            }
-            
-            return namesVector;
-        }
-        
         public static final EnumSpanSizePolicy ClipToMaxPage = new EnumSpanSizePolicy("ClipToMaxPage");
         public static final EnumSpanSizePolicy FitToPage     = new EnumSpanSizePolicy("FitToPage");
         public static final EnumSpanSizePolicy ReduceToFit   = new EnumSpanSizePolicy("ReduceToFit");
@@ -137,7 +124,8 @@ public class JDFSpanSizePolicy extends JDFEnumerationSpan
      *
      * @return Vector - vector representation of the allowed values
      */
-    public ValuedEnum getEnumType()
+    @Override
+	public ValuedEnum getEnumType()
     {
         return EnumSpanSizePolicy.getEnum(0);
     }
@@ -147,7 +135,8 @@ public class JDFSpanSizePolicy extends JDFEnumerationSpan
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFSpanSizePolicy[ --> " + super.toString() + " ]" ;
     }

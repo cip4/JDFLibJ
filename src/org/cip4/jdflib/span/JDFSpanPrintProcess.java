@@ -12,7 +12,6 @@ package org.cip4.jdflib.span;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -110,18 +109,6 @@ public class JDFSpanPrintProcess extends JDFEnumerationSpan
             return iterator(EnumSpanPrintProcess.class);
         }
         
-        public static Vector getNamesVector()
-        {
-            Vector namesVector = new Vector();
-            Iterator it = iterator(EnumSpanPrintProcess.class);
-            while (it.hasNext())
-            {
-                namesVector.addElement(((ValuedEnum) it.next()).getName());
-            }
-            
-            return namesVector;
-        }
-        
         public static final EnumSpanPrintProcess Electrophotography = new EnumSpanPrintProcess("Electrophotography");
         public static final EnumSpanPrintProcess Flexography        = new EnumSpanPrintProcess("Flexography");
         public static final EnumSpanPrintProcess Gravure            = new EnumSpanPrintProcess("Gravure");
@@ -140,7 +127,8 @@ public class JDFSpanPrintProcess extends JDFEnumerationSpan
      *
      * @return Vector - vector representation of the allowed values
      */
-    public ValuedEnum getEnumType()
+    @Override
+	public ValuedEnum getEnumType()
     {
         return EnumSpanPrintProcess.getEnum(0);
     }
@@ -150,7 +138,8 @@ public class JDFSpanPrintProcess extends JDFEnumerationSpan
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFSpanPrintProcess[  --> " + super.toString() + " ]" ;
     }

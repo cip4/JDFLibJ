@@ -12,7 +12,6 @@ package org.cip4.jdflib.span;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -111,24 +110,13 @@ public class JDFSpanTransfer extends JDFEnumerationSpan
             return iterator(EnumSpanTransfer.class);
         }
         
-        public static Vector getNamesVector()
-        {
-            Vector namesVector = new Vector();
-            Iterator it = iterator(EnumSpanTransfer.class);
-            while (it.hasNext())
-            {
-                namesVector.addElement(((ValuedEnum) it.next()).getName());
-            }
-            
-            return namesVector;
-        }
-        
         public static final EnumSpanTransfer BuyerToPrinterDeliver = new EnumSpanTransfer("BuyerToPrinterDeliver");
         public static final EnumSpanTransfer BuyerToPrinterPickup = new EnumSpanTransfer("BuyerToPrinterPickup");
         
     }      
     
-    public ValuedEnum getEnumType()
+    @Override
+	public ValuedEnum getEnumType()
     {
         return EnumSpanTransfer.getEnum(0);
     }
@@ -141,7 +129,8 @@ public class JDFSpanTransfer extends JDFEnumerationSpan
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFSpanTransfer[  --> " + super.toString() + " ]" ;
     }

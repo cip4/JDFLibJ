@@ -12,7 +12,6 @@ package org.cip4.jdflib.span;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -115,18 +114,6 @@ public class JDFSpanScreeningType extends JDFEnumerationSpan
             return iterator(EnumSpanScreeningType.class);
         }
         
-        public static Vector getNamesVector()
-        {
-            Vector namesVector = new Vector();
-            Iterator it = iterator(EnumSpanScreeningType.class);
-            while (it.hasNext())
-            {
-                namesVector.addElement(((ValuedEnum) it.next()).getName());
-            }
-            
-            return namesVector;
-        }
-        
         public static final EnumSpanScreeningType AM       = new EnumSpanScreeningType("AM");
         public static final EnumSpanScreeningType FM       = new EnumSpanScreeningType("FM");
         
@@ -140,7 +127,8 @@ public class JDFSpanScreeningType extends JDFEnumerationSpan
      *
      * @return Vector - vector representation of the allowed values
      */
-    public ValuedEnum getEnumType()
+    @Override
+	public ValuedEnum getEnumType()
     {
         return EnumSpanScreeningType.getEnum(0);
     }
@@ -150,7 +138,8 @@ public class JDFSpanScreeningType extends JDFEnumerationSpan
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFSpanScreeningType[ --> " + super.toString() + " ]";
     }

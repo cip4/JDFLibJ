@@ -12,7 +12,6 @@ package org.cip4.jdflib.span;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -110,18 +109,6 @@ public class JDFSpanEdgeShape extends JDFEnumerationSpan
             return iterator(EnumSpanEdgeShape.class);
         }
         
-        public static Vector getNamesVector()
-        {
-            Vector namesVector = new Vector();
-            Iterator it = iterator(EnumSpanEdgeShape.class);
-            while (it.hasNext())
-            {
-                namesVector.addElement(((ValuedEnum) it.next()).getName());
-            }
-            
-            return namesVector;
-        }
-        
         public static final EnumSpanEdgeShape Rounded = new EnumSpanEdgeShape("Rounded");
         public static final EnumSpanEdgeShape Beveled = new EnumSpanEdgeShape("Beveled");
         
@@ -135,7 +122,8 @@ public class JDFSpanEdgeShape extends JDFEnumerationSpan
      *
      * @return Vector - vector representation of the allowed values
      */
-    public ValuedEnum getEnumType()
+    @Override
+	public ValuedEnum getEnumType()
     {
         return EnumSpanEdgeShape.getEnum(0);
     }
@@ -145,7 +133,8 @@ public class JDFSpanEdgeShape extends JDFEnumerationSpan
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFSpanEdgeShape[  --> " + super.toString() + " ]" ;
     }

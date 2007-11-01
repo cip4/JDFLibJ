@@ -12,7 +12,6 @@ package org.cip4.jdflib.span;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -110,18 +109,6 @@ public class JDFSpanDirection extends JDFEnumerationSpan
              return iterator(EnumSpanDirection.class);
          }
 
-         public static Vector getNamesVector()
-         {
-             Vector namesVector = new Vector();
-             Iterator it = iterator(EnumSpanDirection.class);
-             while (it.hasNext())
-             {
-                 namesVector.addElement(((ValuedEnum) it.next()).getName());
-             }
-
-             return namesVector;
-         }
-
          public static final EnumSpanDirection Both      = new EnumSpanDirection("Both");
          public static final EnumSpanDirection Depressed = new EnumSpanDirection("Depressed");
          public static final EnumSpanDirection Raised    = new EnumSpanDirection("Raised");
@@ -136,7 +123,8 @@ public class JDFSpanDirection extends JDFEnumerationSpan
      *
      * @return Vector - vector representation of the allowed values
      */
-     public ValuedEnum getEnumType()
+     @Override
+	public ValuedEnum getEnumType()
      {
          return EnumSpanDirection.getEnum(0);
      }
@@ -146,7 +134,8 @@ public class JDFSpanDirection extends JDFEnumerationSpan
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFSpanDirection[  --> " + super.toString() + " ]" ;
     }

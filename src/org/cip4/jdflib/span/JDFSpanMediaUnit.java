@@ -12,7 +12,6 @@ package org.cip4.jdflib.span;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -112,18 +111,6 @@ public class JDFSpanMediaUnit extends JDFEnumerationSpan
             return iterator(EnumSpanMediaUnit.class);
         }
         
-        public static Vector getNamesVector()
-        {
-            Vector namesVector = new Vector();
-            Iterator it = iterator(EnumSpanMediaUnit.class);
-            while (it.hasNext())
-            {
-                namesVector.addElement(((ValuedEnum) it.next()).getName());
-            }
-            
-            return namesVector;
-        }
-        
         public static final EnumSpanMediaUnit Roll     = new EnumSpanMediaUnit("Roll");
         public static final EnumSpanMediaUnit Sheet    = new EnumSpanMediaUnit("Sheet");
         
@@ -137,7 +124,8 @@ public class JDFSpanMediaUnit extends JDFEnumerationSpan
      *
      * @return Vector - vector representation of the allowed values
      */
-    public ValuedEnum getEnumType()
+    @Override
+	public ValuedEnum getEnumType()
     {
         return EnumSpanMediaUnit.getEnum(0);
     }
@@ -148,7 +136,8 @@ public class JDFSpanMediaUnit extends JDFEnumerationSpan
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFSpanMediaUnit[  --> " + super.toString() + " ]" ;
     }

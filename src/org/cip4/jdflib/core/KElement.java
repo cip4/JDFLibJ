@@ -491,23 +491,6 @@ public class KElement extends ElementNSImpl
         }
 
         /**
-         * @deprecated
-         * @return vector of valid names, null if key is not an enumeration
-         */
-        @Deprecated
-		public static Vector getNamesVector()
-        {
-            final Vector namesVector = new Vector();
-            final Iterator it = iterator(EnumValidationLevel.class);
-            while (it.hasNext())
-            {
-                namesVector.addElement(((ValuedEnum) it.next()).getName());
-            }
-
-            return namesVector;
-        }
-
-        /**
          * return true if vl is a recursvive EnumValidationLevel
          * @param vl the EnumValidationLevel to check
          * @return true if vl is recursive
@@ -2275,9 +2258,10 @@ public class KElement extends ElementNSImpl
      * @param depth           which one you want to have (in order of appearance)
      *
      * @return KElement     the first ancestor node with name nodeName
-     * @deprectated - loop over the single node method
+     * @deprecated - loop over the single node method
      */
-    public KElement getDeepParent(Vector vParentElement, int depth)
+    @Deprecated
+	public KElement getDeepParent(Vector vParentElement, int depth)
     {
         KElement kRet = this;
 
@@ -3022,9 +3006,10 @@ public class KElement extends ElementNSImpl
      */
     public VString getUnknownAttributes(boolean bIgnorePrivate, int nMax)
     {
-        final Vector vKnownAttribs = knownAttributes();
-        final VString v = bIgnorePrivate ? new VString(StringUtil.tokenize(" :JDF", JDFConstants.COLON, false))
-        : new VString();
+        final VString vKnownAttribs = knownAttributes();
+        final VString v = bIgnorePrivate 
+        					? new VString(StringUtil.tokenize(" :JDF", JDFConstants.COLON, false))
+        					: new VString();
         return getUnknownAttributeVector(vKnownAttribs, v, nMax);
     }
 
@@ -3041,7 +3026,7 @@ public class KElement extends ElementNSImpl
      */
     public VString getUnknownAttributeVector(Vector vKnownKeys, Vector vInNameSpace, int nMax)
     {
-        final Vector vAtts = getAttributeVector_KElement();
+        final VString vAtts = getAttributeVector_KElement();
         final VString vUnknown = new VString();
         if(vKnownKeys.contains("*")) {
 			return vUnknown;
@@ -3060,7 +3045,7 @@ public class KElement extends ElementNSImpl
 
         for (int i = 0; i < vAtts.size() && vUnknown.size() < nMax; i++)
         {
-            String strAtts = (String) vAtts.elementAt(i);
+            String strAtts = vAtts.elementAt(i);
             String ns = KElement.xmlnsPrefix(strAtts);
             if( (JDFConstants.XSI.equals(ns)) || JDFConstants.XMLNS.equals(ns)) {
 				continue;
@@ -3092,8 +3077,8 @@ public class KElement extends ElementNSImpl
      */
     public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
     {
-        final Vector v1  = knownElements();
-        final Vector v2  = StringUtil.tokenize(" :JDF", JDFConstants.COLON,false);
+        final VString v1  = knownElements();
+        final VString v2  = StringUtil.tokenize(" :JDF", JDFConstants.COLON,false);
         return  getUnknownElementVector(v1, bIgnorePrivate ? v2 : new Vector(), nMax);
     }
 
@@ -3119,8 +3104,8 @@ public class KElement extends ElementNSImpl
             }
         }
 
-        final Vector vAtts = getElementNameVector();
-        final Vector vUnknown = new Vector();
+        final VString vAtts = getElementNameVector();
+        final VString vUnknown = new VString();
 
         if (vAtts.size() > 0)
         {
@@ -3129,7 +3114,7 @@ public class KElement extends ElementNSImpl
 
             do
             {
-                final String attr = (String) vAtts.elementAt(i);
+                final String attr = vAtts.elementAt(i);
                 String ns = KElement.xmlnsPrefix(attr);
                 if(ns==null) {
 					ns=JDFConstants.EMPTYSTRING;
@@ -3173,7 +3158,7 @@ public class KElement extends ElementNSImpl
      * if a the current object is null (return false) or if there is a owner
      * document (if not, return false)
      *
-     * @deprecated use isValid(EnumValidationLevel level)
+     * @deprecated use isValid(EnumValidationLevel.Complete)
      * @return boolean - true if valid (see above)
      */
     @Deprecated
@@ -3255,21 +3240,6 @@ public class KElement extends ElementNSImpl
     public ValuedEnum getTypeForAttribute(String key)
     {
         return getTheAttributeInfo().getAttributeType(key);
-    }
-
-    /**
-     * Get the vector of valid attribute values for an enumerated attribute
-     * @param key the local name of the attribute
-     * @return vector of valid names, null if key is not an enumeration
-     */
-    public VString getNamesVector(String key)
-    {
-        ValuedEnum enu=getEnumforAttribute(key);
-        if(enu!=null)
-        {
-            return StringUtil.getNamesVector(enu.getClass());
-        }
-        return null;
     }
 
     /**
@@ -3457,11 +3427,11 @@ public class KElement extends ElementNSImpl
      */
     public boolean flush()
     {
-        final Vector list = getChildElementVector(null, null, null, true, 0,false);
+        final VElement list = getChildElementVector(null, null, null, true, 0,false);
 
         for (int i = list.size() - 1; i >= 0; i--)
         {
-            final Node node = (Node) list.elementAt(i);
+            final Node node = list.elementAt(i);
             removeChild(node);
         }
 
@@ -4570,7 +4540,7 @@ public class KElement extends ElementNSImpl
     public Vector getChildAttributeList(String nodeName, String attName, String nameSpaceURI, String attValue,
             boolean bDirect, boolean bUnique)
     {
-        final Vector v = new Vector();
+        final VString v = new VString();
         final VElement vChildren = getChildrenByTagName(nodeName, nameSpaceURI, new JDFAttributeMap(attName, JDFConstants.EMPTYSTRING),
                 bDirect, true, 0);
 
@@ -6367,6 +6337,21 @@ public class KElement extends ElementNSImpl
             v.item(i).fillHashSet(attName,attNS,preFill);
         }
     }
+
+	/**
+	 * Get the vector of valid attribute values for an enumerated attribute
+	 * @param key the local name of the attribute
+	 * @return vector of valid names, null if key is not an enumeration
+	 */
+	public VString getNamesVector(String key)
+	{
+	    ValuedEnum enu=getEnumforAttribute(key);
+	    if(enu!=null)
+	    {
+	        return StringUtil.getNamesVector(enu.getClass());
+	    }
+	    return null;
+	}
 
 /////////////////////////////////////////////////////////////////////////////
 

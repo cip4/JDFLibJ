@@ -10,7 +10,6 @@ package org.cip4.jdflib.span;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -110,18 +109,6 @@ public class JDFSpanGrainDirection extends JDFEnumerationSpan
             return iterator(EnumSpanGrainDirection.class);
         }
         
-        public static Vector getNamesVector()
-        {
-            Vector namesVector = new Vector();
-            Iterator it = iterator(EnumSpanGrainDirection.class);
-            while (it.hasNext())
-            {
-                namesVector.addElement(((ValuedEnum) it.next()).getName());
-            }
-            
-            return namesVector;
-        }
-        
         public static final EnumSpanGrainDirection ShortEdge = new EnumSpanGrainDirection("ShortEdge");
         public static final EnumSpanGrainDirection LongEdge  = new EnumSpanGrainDirection("LongEdge");
         
@@ -135,7 +122,8 @@ public class JDFSpanGrainDirection extends JDFEnumerationSpan
      *
      * @return Vector - vector representation of the allowed values
      */
-    public ValuedEnum getEnumType()
+    @Override
+	public ValuedEnum getEnumType()
     {
         return EnumSpanGrainDirection.getEnum(0);
     }
@@ -145,13 +133,15 @@ public class JDFSpanGrainDirection extends JDFEnumerationSpan
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFSpanGrainDirection[ --> " + super.toString() + " ]" ;
     }
     
     
-    public boolean init()
+    @Override
+	public boolean init()
     {
         boolean b = super.init();
         setDataType(EnumDataType.EnumerationSpan);

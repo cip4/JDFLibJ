@@ -12,7 +12,6 @@ package org.cip4.jdflib.span;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -112,18 +111,6 @@ public class JDFSpanScoring extends JDFEnumerationSpan
             return iterator(EnumSpanScoring.class);
         }
         
-        public static Vector getNamesVector()
-        {
-            Vector namesVector = new Vector();
-            Iterator it = iterator(EnumSpanScoring.class);
-            while (it.hasNext())
-            {
-                namesVector.addElement(((ValuedEnum) it.next()).getName());
-            }
-            
-            return namesVector;
-        }
-        
         public static final EnumSpanScoring TwiceScored = new EnumSpanScoring("TwiceScored");
         public static final EnumSpanScoring QuadScored  = new EnumSpanScoring("QuadScored");
         public static final EnumSpanScoring None        = new EnumSpanScoring("None");
@@ -138,7 +125,8 @@ public class JDFSpanScoring extends JDFEnumerationSpan
      *
      * @return Vector - vector representation of the allowed values
      */
-    public ValuedEnum getEnumType()
+    @Override
+	public ValuedEnum getEnumType()
     {
         return EnumSpanScoring.getEnum(0);
     }
@@ -148,7 +136,8 @@ public class JDFSpanScoring extends JDFEnumerationSpan
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFSpanScoring[  --> " + super.toString() + " ]" ;
     }

@@ -433,23 +433,6 @@ public class JDFNode extends JDFElement
         }
 
         /**
-         * @deprecated
-         * @return Vector
-         */
-        @Deprecated
-		public static Vector getNamesVector()
-        {
-            final Vector namesVector = new Vector();
-            final Iterator it = iterator(EnumActivation.class);
-            while (it.hasNext())
-            {
-                namesVector.addElement(((ValuedEnum) it.next()).getName());
-            }
-
-            return namesVector;
-        }
-
-        /**
          * Constants EnumActivation
          */
         public static final EnumCleanUpMerge None         = new EnumCleanUpMerge(JDFConstants.CLEANUPMERGE_NONE);
@@ -496,31 +479,6 @@ public class JDFNode extends JDFElement
         {
             return iterator(EnumActivation.class);
         }
-
-        /**
-         * @deprecated
-         * @return Vector
-         */
-        @Deprecated
-		public static Vector getNamesVector()
-        {
-            final Vector namesVector = new Vector();
-            final Iterator it = iterator(EnumActivation.class);
-            while (it.hasNext())
-            {
-                namesVector.addElement(((ValuedEnum) it.next()).getName());
-            }
-
-            return namesVector;
-        }
-
-        /**
-         * Constants EnumActivation
-         */
-        /**
-         * @deprectated (only null is deprecated)
-         */
-        public static final EnumActivation Unknown = null;
 
         public static final EnumActivation Inactive = new EnumActivation(JDFConstants.ACTIVATION_INACTIVE);
         public static final EnumActivation Informative = new EnumActivation(JDFConstants.ACTIVATION_INFORMATIVE);
@@ -592,23 +550,6 @@ public class JDFNode extends JDFElement
         public static Iterator iterator()
         {
             return iterator(EnumType.class);
-        }
-
-        /**
-         * @deprecated
-         * @return Vector
-         */
-        @Deprecated
-		public static Vector getNamesVector()
-        {
-            final Vector namesVector = new Vector();
-            final Iterator it = iterator(EnumType.class);
-            while (it.hasNext())
-            {
-                namesVector.addElement(((ValuedEnum) it.next()).getName());
-            }
-
-            return namesVector;
         }
 
         // generic
@@ -1735,24 +1676,6 @@ public class JDFNode extends JDFElement
         {
             return iterator(EnumProcessUsage.class);
         }
-
-        /**
-         * @deprecated
-         * @return Vector
-         */
-        @Deprecated
-		public static Vector getNamesVector()
-        {
-            final Vector namesVector = new Vector();
-            final Iterator it = iterator(EnumProcessUsage.class);
-            while (it.hasNext())
-            {
-                namesVector.addElement(((ValuedEnum) it.next()).getName());
-            }
-
-            return namesVector;
-        }
-
 
         public static final EnumProcessUsage AnyInput = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_ANYINPUT);
         public static final EnumProcessUsage AnyOutput = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_ANYOUTPUT);
@@ -2992,14 +2915,14 @@ public class JDFNode extends JDFElement
         final JDFResourceLinkPool rlp = getResourceLinkPool();
 
         // get either all input or output resources, depending on bPre
-        final Vector vLoc = (rlp == null) ? null : rlp.getInOutLinks(bPre?EnumUsage.Input:EnumUsage.Output, false, null,null);
+        final VElement vLoc = (rlp == null) ? null : rlp.getInOutLinks(bPre?EnumUsage.Input:EnumUsage.Output, false, null,null);
 
         if (vLoc != null) {
             final Iterator vLocIterator = vLoc.iterator();
             while (vLocIterator.hasNext()) {
                 JDFResource r = (JDFResource) vLocIterator.next();
                 // get all creator or consumer processes
-                final Vector vc = r.getCreator(bPre);
+                final VElement vc = r.getCreator(bPre);
 
                 if (vc != null) {
                     final Iterator vcIterator = vc.iterator();
@@ -3039,7 +2962,7 @@ public class JDFNode extends JDFElement
         final JDFResourceLinkPool resourceLinkPool = getResourceLinkPool();
         if(resourceLinkPool==null)
             return false;
-        final Vector v = resourceLinkPool.getPoolChildren(null, null, null);
+        final VElement v = resourceLinkPool.getPoolChildren(null, null, null);
         EnumNodeStatus status=getPartStatus(partMap);
         if((status!=EnumNodeStatus.Waiting)&&(status!=EnumNodeStatus.Ready)) {
             return false;
@@ -3465,7 +3388,7 @@ public class JDFNode extends JDFElement
             }else{ // partitioned nodeinfo or customerinfo handling
                 if(i==1){ // copy nodeinfo stati into statuspool
                     setStatus(EnumNodeStatus.Pool);
-                    Vector vLeaves=root.getLeaves(false);
+                    VElement vLeaves=root.getLeaves(false);
                     JDFStatusPool sp=getCreateStatusPool();
                     sp.removeChildren(null, null, null);
                     for(int j=0;j<vLeaves.size();j++){
@@ -3523,7 +3446,7 @@ public class JDFNode extends JDFElement
 
                         // get PartStatus vector
                         JDFStatusPool statusPool=getStatusPool();
-                        Vector vPartStatus=statusPool.getPoolChildren(null);
+                        VElement vPartStatus=statusPool.getPoolChildren(null);
                         setStatus(EnumNodeStatus.Part);
                         JDFAttributeMap mps=null;
                         if(!vPartStatus.isEmpty()){
@@ -3611,8 +3534,8 @@ public class JDFNode extends JDFElement
     public VString getInvalidLinks(EnumValidationLevel level, int nMax)
     {
         final VString vElem = new VString();
-        final Vector foundSingleLinks  = new Vector();
-        final Vector foundSingleLinks2 = new Vector();
+        final Vector<Integer> foundSingleLinks  = new Vector<Integer>();
+        final Vector<Integer> foundSingleLinks2 = new Vector<Integer>();
 
         final JDFResourceLinkPool linkPool = getResourceLinkPool();
         if (linkPool != null)
@@ -3839,7 +3762,7 @@ public class JDFNode extends JDFElement
             v1 = ap.getAllRefs(v1, true);
         }
 
-        Vector vNodes = getvJDFNode(null, null, true);
+        VElement vNodes = getvJDFNode(null, null, true);
         final int size = vNodes.size();
         for(int i = 0; i < size; i++) {
             v1 = ((JDFNode) vNodes.elementAt(i)).getAllRefs(v1,bRecurse);
@@ -4949,10 +4872,10 @@ public class JDFNode extends JDFElement
 
         // allow call with initial null
         if(doneIndexList==null) {
-            doneIndexList =new Vector();
+            doneIndexList =new Vector<Integer>();
         }
         if(doneNameList==null) {
-            doneNameList =new Vector();
+            doneNameList =new Vector<Integer>();
         }
 
         int nOccur = 0;
@@ -6248,7 +6171,7 @@ public class JDFNode extends JDFElement
      */
     public Vector getEnumTypes()
     {
-        Vector vs=null;
+        Vector<EnumType> vs=null;
         VString types=getTypes();
         if (types != null) {
             Iterator typesIterator = types.iterator();
@@ -6261,7 +6184,7 @@ public class JDFNode extends JDFElement
                 }
                 if (vs == null) 
                 {
-                    vs=new Vector();
+                    vs=new Vector<EnumType>();
                 }
                 vs.add(typ);
             }
@@ -6451,7 +6374,7 @@ public class JDFNode extends JDFElement
         }
 
         // no types - this is a corrupt node
-        Vector vTypes=getEnumTypes();
+        Vector<EnumType> vTypes=getEnumTypes();
         if(vTypes==null) 
         {
             return null;
@@ -6480,7 +6403,7 @@ public class JDFNode extends JDFElement
                     int index=cpi.getInt(j);
                     if(index<typSize) // the index points to a vaild position in the list
                     {
-                        final EnumType cpiType=(EnumType)vTypes.elementAt(index);
+                        final EnumType cpiType=vTypes.elementAt(index);
                         if(cpiType.equals(type))
                         {
                             if(nType<0) // flag not to check which ocurrence
@@ -6492,7 +6415,7 @@ public class JDFNode extends JDFElement
                                 int nFound=-1;
                                 for(int k=0;k<=index;k++) // count occurences of this process type in front of and including this
                                 {
-                                    final EnumType cpiTypeCount=(EnumType)vTypes.elementAt(k);
+                                    final EnumType cpiTypeCount=vTypes.elementAt(k);
                                     if(cpiTypeCount.equals(type)) {
                                         nFound++;                                  
                                     }
@@ -6747,7 +6670,7 @@ public class JDFNode extends JDFElement
      */
     public int getMaxJobPartId(String idPrefix)
     {
-        final Vector v = getvJDFNode(null, null, false);
+        final VElement v = getvJDFNode(null, null, false);
         final int prefixSize = idPrefix.length();
         int iMax = -1;
         final int size = v.size();
@@ -6908,8 +6831,8 @@ public class JDFNode extends JDFElement
      */
     public Vector getCompleted()
     {
-        final Vector v = getvJDFNode(null,null, false);
-        final Vector v2 = new Vector();
+        final VElement v = getvJDFNode(null,null, false);
+        final VElement v2 = new VElement();
         final int size = v.size();
         for (int i = 0; i < size; i++)
         {
@@ -6958,7 +6881,7 @@ public class JDFNode extends JDFElement
             }
         }
 
-        final Vector v = getvJDFNode(null, null, true);
+        final VElement v = getvJDFNode(null, null, true);
         for (int i = 0; i < v.size(); i++)
         {
             final JDFResource r = ((JDFNode)v.elementAt(i)).getTargetResource(id);

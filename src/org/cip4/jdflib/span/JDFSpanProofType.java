@@ -12,7 +12,6 @@ package org.cip4.jdflib.span;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -111,18 +110,6 @@ public class JDFSpanProofType extends JDFEnumerationSpan
             return iterator(EnumSpanProofType.class);
         }
         
-        public static Vector getNamesVector()
-        {
-            Vector namesVector = new Vector();
-            Iterator it = iterator(EnumSpanProofType.class);
-            while (it.hasNext())
-            {
-                namesVector.addElement(((ValuedEnum) it.next()).getName());
-            }
-            
-            return namesVector;
-        }
-        
         public static final EnumSpanProofType Page       = new EnumSpanProofType("Page");
         public static final EnumSpanProofType Imposition = new EnumSpanProofType("Imposition");
         public static final EnumSpanProofType None       = new EnumSpanProofType("None");
@@ -136,7 +123,8 @@ public class JDFSpanProofType extends JDFEnumerationSpan
      *
      * @return Vector - vector representation of the allowed values
      */
-    public ValuedEnum getEnumType()
+    @Override
+	public ValuedEnum getEnumType()
     {
         return EnumSpanProofType.getEnum(0);
     }
@@ -146,7 +134,8 @@ public class JDFSpanProofType extends JDFEnumerationSpan
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFSpanProofType[  --> " + super.toString() + " ]" ;
     }

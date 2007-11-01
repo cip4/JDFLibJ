@@ -12,7 +12,6 @@ package org.cip4.jdflib.span;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -110,18 +109,6 @@ public class JDFSpanGlueProcedure extends JDFEnumerationSpan
             return iterator(EnumSpanGlueProcedure.class);
         }
         
-        public static Vector getNamesVector()
-        {
-            Vector namesVector = new Vector();
-            Iterator it = iterator(EnumSpanGlueProcedure.class);
-            while (it.hasNext())
-            {
-                namesVector.addElement(((ValuedEnum) it.next()).getName());
-            }
-            
-            return namesVector;
-        }
-        
         public static final EnumSpanGlueProcedure Spine      = new EnumSpanGlueProcedure("Spine");
         public static final EnumSpanGlueProcedure SideOnly   = new EnumSpanGlueProcedure("SideOnly");
         public static final EnumSpanGlueProcedure SingleSide = new EnumSpanGlueProcedure("SingleSide");
@@ -137,7 +124,8 @@ public class JDFSpanGlueProcedure extends JDFEnumerationSpan
      *
      * @return Vector - vector representation of the allowed values
      */
-    public ValuedEnum getEnumType()
+    @Override
+	public ValuedEnum getEnumType()
     {
         return EnumSpanGlueProcedure.getEnum(0);
     }
@@ -148,7 +136,8 @@ public class JDFSpanGlueProcedure extends JDFEnumerationSpan
      *
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFSpanGlueProcedure[  --> " + super.toString() + " ]" ;
     }
