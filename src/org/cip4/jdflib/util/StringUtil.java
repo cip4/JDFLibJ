@@ -1868,10 +1868,10 @@ public class StringUtil
     public static VString getNamesVector(Class e)
     {
         final VString namesVector = new VString();
-        final Iterator it = EnumUtils.iterator(e);
+        final Iterator<ValuedEnum> it = EnumUtils.iterator(e);
         while (it.hasNext())
         {
-            namesVector.addElement(((ValuedEnum) it.next()).getName());
+            namesVector.addElement((it.next()).getName());
         }
 
         return namesVector;

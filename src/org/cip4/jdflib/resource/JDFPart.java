@@ -137,7 +137,8 @@ public class JDFPart extends JDFAutoPart
      * toString()
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFPart[  --> " + super.toString() + " ]";
     }
@@ -146,14 +147,15 @@ public class JDFPart extends JDFAutoPart
      * gets a map of all Partition key value pairs, empty if no partition keys exist
      * @return JDFAttributeMap
      */
-    public JDFAttributeMap getPartMap()
+    @Override
+	public JDFAttributeMap getPartMap()
     {
         JDFAttributeMap am=getAttributeMap();
-        Iterator it=am.getKeyIterator();
+        Iterator<String> it=am.getKeyIterator();
         JDFAttributeMap retMap=new JDFAttributeMap();
         while(it.hasNext())
         {
-            final String key=(String) it.next();
+            final String key=it.next();
             if(EnumPartIDKey.getEnum(key)!=null)
                 retMap.put(key,am.get(key));
         }
@@ -165,7 +167,8 @@ public class JDFPart extends JDFAutoPart
      * removes all other attributes
      * @param mPart attribute map for the part to set
      */
-    public void setPartMap(JDFAttributeMap mPart)
+    @Override
+	public void setPartMap(JDFAttributeMap mPart)
     {
         removeAttributes(null);
         setAttributes(mPart);

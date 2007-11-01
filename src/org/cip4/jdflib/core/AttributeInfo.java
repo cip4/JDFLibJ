@@ -282,11 +282,11 @@ public class AttributeInfo
         long l2 = JDFVersions.getTheMask(version);
         long v2 = JDFVersions.getTheOffset(version);
 
-        Iterator iter = attribInfoTable.keySet().iterator();
+        Iterator<String> iter = attribInfoTable.keySet().iterator();
         boolean bOK = attrValidity == null;
         while (iter.hasNext())
         {
-            String theKey = (String) iter.next();
+            String theKey = iter.next();
             AtrInfo ai = (AtrInfo) attribInfoTable.get(theKey);
             if (bOK)
             {
@@ -326,10 +326,10 @@ public class AttributeInfo
     {
         JDFAttributeMap matchingAttribs = new JDFAttributeMap();
 
-        Iterator iter = attribInfoTable.keySet().iterator();
+        Iterator<String> iter = attribInfoTable.keySet().iterator();
         while (iter.hasNext())
         {
-            String theKey = (String) iter.next();
+            String theKey = iter.next();
             AtrInfo ai = (AtrInfo) attribInfoTable.get(theKey);
             long l2 = JDFVersions.getTheMask(version);
             long v2 = JDFVersions.getTheOffset(version);
@@ -356,7 +356,7 @@ public class AttributeInfo
 	 */
 	public boolean hasConformingAttrib(EnumAttributeValidity attrValidity) 
 	{
-		Iterator iter = attribInfoTable.keySet().iterator();
+		Iterator<AtrInfo> iter = attribInfoTable.keySet().iterator();
 		
 		long l2 = JDFVersions.getTheMask(version);
 		long v2 = JDFVersions.getTheOffset(version);
@@ -395,10 +395,10 @@ public class AttributeInfo
 	{
 		VString optionals = new VString(conformingAttribs(EnumAttributeValidity.Optional));
 		optionals.appendUnique(conformingAttribs(EnumAttributeValidity.Deprecated));
-        Iterator iter = attribInfoTable.keySet().iterator();
+        Iterator<String> iter = attribInfoTable.keySet().iterator();
         // anything with a default is at least optional
        while (iter.hasNext()) {
-            String theKey = (String)iter.next();
+            String theKey = iter.next();
             String defaultVal=getAttributeDefault(theKey);
             if(defaultVal!=null)
                 optionals.appendUnique(theKey);

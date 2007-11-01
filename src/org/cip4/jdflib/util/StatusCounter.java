@@ -86,6 +86,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
@@ -533,7 +534,7 @@ public class StatusCounter
         boolean bAllExact=true;
 
         if (vResResourceInfo != null) {
-            Iterator vResResourceInfoIterator = vResResourceInfo.iterator();
+            Iterator<KElement> vResResourceInfoIterator = vResResourceInfo.iterator();
             while (vResResourceInfoIterator.hasNext())
             {
                 JDFResourceInfo ri=sig.appendResourceInfo();
@@ -661,7 +662,8 @@ public class StatusCounter
             protected double phaseWaste;
 
 
-            public String toString()
+            @Override
+			public String toString()
             {
                 return "[AmountBag totalAmount="+totalAmount+" phaseAmount="+phaseAmount+" totalWaste="+totalWaste+" phaseWaste="+phaseWaste+" ]";
             }
@@ -726,7 +728,7 @@ public class StatusCounter
         protected double startWaste=0;
         protected JDFResourceLink rl;
         protected String refID;
-        private AmountBag lastBag;
+        private final AmountBag lastBag;
         protected VJDFAttributeMap vResPartMap;
 
         protected LinkAmount(JDFResourceLink _rl)
@@ -916,7 +918,8 @@ public class StatusCounter
         /* (non-Javadoc)
          * @see java.lang.Object#toString()
          */
-        public String toString()
+        @Override
+		public String toString()
         {
             StringBuffer sb=new StringBuffer();
             sb.append("LinkAmount: refID=");

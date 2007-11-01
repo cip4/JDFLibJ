@@ -872,10 +872,10 @@ public class JDFMerge
                 if(!hasAP) // remove all entries that are identical in the merged and original link so that they are not modified
                 {
                     final JDFAttributeMap opaMap=overWriteLink.getAttributeMap();
-                    Iterator iter=opaMap.getKeyIterator();
+                    Iterator<String> iter=opaMap.getKeyIterator();
                     while(iter.hasNext())
                     {
-                        final String key=(String)iter.next();
+                        final String key=iter.next();
                         if(opaMap.get(key).equals(mpaMap.get(key)))
                             mpaMap.remove(key);
                     }
@@ -938,10 +938,10 @@ public class JDFMerge
     private void mergeRWResources(JDFResource.EnumAmountMerge amountPolicy)
     {
         // merge rw resources
-        Iterator it=vsRW.iterator();
+        Iterator<String> it=vsRW.iterator();
         while(it.hasNext())
         {
-            String s=(String)it.next();
+            String s=it.next();
             JDFResource oldRes = overWriteNode.getLinkRoot(s);
             if(oldRes == null) // also check in tree below
             {
@@ -1061,10 +1061,10 @@ public class JDFMerge
      */
     private void cleanROResources()
     {
-        final Iterator it=vsRO.iterator();
+        final Iterator<String> it=vsRO.iterator();
         while(it.hasNext())
         {
-            String ro=(String)it.next();
+            String ro=it.next();
             final JDFResource newRes = toMerge.getTargetResource(ro);
             final JDFResource oldRes = (JDFResource) overWriteNode.getTarget(ro, AttributeName.ID);
             if(oldRes==null || newRes==null)

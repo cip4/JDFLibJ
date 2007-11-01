@@ -272,10 +272,10 @@ public class VJDFAttributeMap
                 //break. If bEquals is still true after all checks, we found the map
                 bEquals = true;
                 Set mapSet = map.keySet();
-                Iterator it = mapSet.iterator();
+                Iterator<String> it = mapSet.iterator();
                 while(it.hasNext())
                 {
-                    String key = (String)it.next();
+                    String key = it.next();
                     if(!attmap.containsKey(key))
                     {
                         bEquals = false;

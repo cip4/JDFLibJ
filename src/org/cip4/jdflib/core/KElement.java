@@ -1387,10 +1387,10 @@ public class KElement extends ElementNSImpl
         int iRet = 0;
         if (map!=null && !map.isEmpty())
         {
-            final Iterator it = map.getKeyIterator();
+            final Iterator<String> it = map.getKeyIterator();
             while(it.hasNext())
             {
-                final String key = (String) it.next();
+                final String key = it.next();
                 final String value = map.get(key);
                 setAttribute(key, value, null);
             }
@@ -1846,13 +1846,13 @@ public class KElement extends ElementNSImpl
         }
         String key;
         String value;
-        final Iterator it = aMap.getKeyIterator();
+        final Iterator<String> it = aMap.getKeyIterator();
 
         if (bAnd)
         {
             while(it.hasNext())
             {
-                key = (String) it.next();
+                key = it.next();
                 value = aMap.get(key);
                 if (!includesAttribute(key, value))
                 {
@@ -1864,7 +1864,7 @@ public class KElement extends ElementNSImpl
         // bAnd=false
         while(it.hasNext())
         {
-            key = (String) it.next();
+            key = it.next();
             value = aMap.get(key);
             if (includesAttribute(key, value))
             {
@@ -2690,12 +2690,12 @@ public class KElement extends ElementNSImpl
     private static final DocumentJDFImpl m_dummyDocumentJDFImpl = new DocumentJDFImpl();
     private boolean checkInstance(VString vElements, String requiredKey)
     {
-        Class requiredClass = m_dummyDocumentJDFImpl.getFactoryClass(requiredKey);
-        Class elementClass  = null;
-        Iterator elemIter   = vElements.iterator();
+        Class requiredClass 	  = m_dummyDocumentJDFImpl.getFactoryClass(requiredKey);
+        Class elementClass		  = null;
+        Iterator<String> elemIter = vElements.iterator();
         while (elemIter.hasNext() && !requiredClass.equals(elementClass))
         {
-            String elemName = (String) elemIter.next();
+            String elemName = elemIter.next();
             elementClass    = m_dummyDocumentJDFImpl.getFactoryClass(elemName);
         }
 

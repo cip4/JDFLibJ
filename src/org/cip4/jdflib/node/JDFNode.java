@@ -2903,9 +2903,9 @@ public class JDFNode extends JDFElement
         getPredecessorImpl(bPre, bDirect,hashSet);
 
         VElement v=new VElement();
-        Iterator it=hashSet.iterator();
+        Iterator<KElement> it=hashSet.iterator();
         while(it.hasNext()) {
-            v.add((KElement) it.next());
+            v.add(it.next());
         }
         return v;
 
@@ -2918,14 +2918,14 @@ public class JDFNode extends JDFElement
         final VElement vLoc = (rlp == null) ? null : rlp.getInOutLinks(bPre?EnumUsage.Input:EnumUsage.Output, false, null,null);
 
         if (vLoc != null) {
-            final Iterator vLocIterator = vLoc.iterator();
+            final Iterator<KElement> vLocIterator = vLoc.iterator();
             while (vLocIterator.hasNext()) {
                 JDFResource r = (JDFResource) vLocIterator.next();
                 // get all creator or consumer processes
                 final VElement vc = r.getCreator(bPre);
 
                 if (vc != null) {
-                    final Iterator vcIterator = vc.iterator();
+                    final Iterator<KElement> vcIterator = vc.iterator();
                     while (vcIterator.hasNext()) {
                         JDFNode p = (JDFNode) vcIterator.next();
                         if (h.contains(p)) {
@@ -5028,7 +5028,7 @@ public class JDFNode extends JDFElement
                 // TODO ideally we would check if they are connected, but this is a sufficient 98% solution
                 if(bLink && vE != null)
                 {
-                    final Iterator vEIterator = vE.iterator();
+                    final Iterator<KElement> vEIterator = vE.iterator();
                     while (vEIterator.hasNext()) {
                         JDFResourceLink rl = (JDFResourceLink) vEIterator.next();
                         if(rl.getPipeProtocol().equals(JDFConstants.INTERNAL))
@@ -5045,7 +5045,7 @@ public class JDFNode extends JDFElement
                 // TODO ideally we would check if they are connected, but this is a sufficient 98% solution
                 if(bLink && vE != null)
                 {
-                    final Iterator vEIterator = vE.iterator();
+                    final Iterator<KElement> vEIterator = vE.iterator();
                     while (vEIterator.hasNext()) {
                         JDFResourceLink rl = (JDFResourceLink) vEIterator.next();
                         if(JDFConstants.INTERNAL.equals(rl.getPipeProtocol()))
@@ -5099,9 +5099,9 @@ public class JDFNode extends JDFElement
             final VString types = vLinkInfo(i);
             if (types != null)
             {
-                final Iterator typesIterator = types.iterator();
+                final Iterator<String> typesIterator = types.iterator();
                 while (typesIterator.hasNext()) {
-                    String typesAt = (String) typesIterator.next();
+                    String typesAt = typesIterator.next();
                     if (typesAt.charAt(1) == '+' || typesAt.charAt(1) == '_')
                     {
                         // 110602 added
@@ -5435,9 +5435,9 @@ public class JDFNode extends JDFElement
         final VString vtyp   = getMatchType(resName, processUsage);
 
         if (vtyp != null) {
-            final Iterator vtypIterator = vtyp.iterator();
+            final Iterator<String> vtypIterator = vtyp.iterator();
             while (vtypIterator.hasNext()) {
-                String typ = (String) vtypIterator.next();
+                String typ = vtypIterator.next();
                 if ((typ.charAt(1) == '?') || (typ.charAt(1) == '_'))
                 {
                     if (numMatchingLinks(resName, false, processUsage) > 0)
@@ -6174,10 +6174,10 @@ public class JDFNode extends JDFElement
         Vector<EnumType> vs=null;
         VString types=getTypes();
         if (types != null) {
-            Iterator typesIterator = types.iterator();
+            Iterator<String> typesIterator = types.iterator();
             while (typesIterator.hasNext()) 
             {
-                EnumType typ=EnumType.getEnum((String) typesIterator.next());
+                EnumType typ=EnumType.getEnum(typesIterator.next());
                 if (typ==null) 
                 {
                     return null;
@@ -6998,7 +6998,7 @@ public class JDFNode extends JDFElement
 
         if (ve != null)
         {
-            final Iterator veIterator = ve.iterator();
+            final Iterator<KElement> veIterator = ve.iterator();
             while (veIterator.hasNext()) {
                 JDFResourceLink rl    = (JDFResourceLink) veIterator.next();
                 final String nodename    = rl.getNodeName().substring(0, rl.getNodeName().length() -4);

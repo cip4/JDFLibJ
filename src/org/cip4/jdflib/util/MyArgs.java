@@ -92,8 +92,8 @@ public class MyArgs
     private String m_switchParameterString;
     private String m_argumentParameterString;
     private String m_requiredParameterString;
-    private HashSet m_flags=new HashSet();
-    private HashMap m_Parameters=new HashMap();
+    private final HashSet m_flags=new HashSet();
+    private final HashMap m_Parameters=new HashMap();
     private VString m_argV;
     // cmd-line has or has not args and not only options(  starting with "-" )
 
@@ -104,7 +104,8 @@ public class MyArgs
     /**
      * @deprecated
      */
-    public MyArgs(  String argv[],  String switchParameterString,
+    @Deprecated
+	public MyArgs(  String argv[],  String switchParameterString,
         String argumentParameterString)
     {
         initMyArgs(argv, switchParameterString, argumentParameterString,null);
@@ -176,7 +177,8 @@ public class MyArgs
         }
     }
 
-    public String toString()
+    @Override
+	public String toString()
     {
         String s = "\n\tMyArgs: \n";
         s += "\t\t switchParameterString=" + m_switchParameterString + "\n";
@@ -186,15 +188,15 @@ public class MyArgs
         s += "\t\t argV    =" + m_argV + "\n";
         s += "\t\t Nargs   =" + nargs() + "\n";
         s += "\t\t Flags:  =";
-        Iterator it=m_flags.iterator();
+        Iterator<String> it=m_flags.iterator();
         while(it.hasNext())
-            s+=(String)it.next()+", ";
+            s+=it.next()+", ";
         s+="\n";
         it=m_Parameters.keySet().iterator();
         s += "\t\t Parameters: \n";
         while(it.hasNext())
         {
-            String key=(String)it.next();
+            String key=it.next();
             s+="\t\t\t "+key+" = "+(String)m_Parameters.get(key)+"\n";
         }
         s += "\t\t onlyArgs=" + m_onlyArgs + "\n";

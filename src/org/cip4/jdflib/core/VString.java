@@ -378,7 +378,7 @@ public class VString extends Vector<String>
     public Set getSet()
     {
         HashSet set = new LinkedHashSet();
-        Iterator it=iterator();
+        Iterator<String> it=iterator();
         while(it.hasNext())
             set.add(it.next());
         

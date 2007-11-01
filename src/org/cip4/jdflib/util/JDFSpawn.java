@@ -325,10 +325,10 @@ public class JDFSpawn
         {
             String strIDs = "JDFNode.spawn: multiply spawned rw resources: ";
             VString vBad=new VString();
-            Iterator iterCheck=vCheck.iterator();
+            Iterator<JDFResource> iterCheck=vCheck.iterator();
             while(iterCheck.hasNext())
             {
-                vBad.appendUnique(((JDFResource)iterCheck.next()).getAttribute(AttributeName.ID));
+                vBad.appendUnique((iterCheck.next()).getAttribute(AttributeName.ID));
             }
             strIDs += StringUtil.setvString(vBad,JDFConstants.BLANK,null,null);
             throw new JDFException(strIDs,exMultiSpawnRW);
@@ -355,10 +355,10 @@ public class JDFSpawn
         HashSet v = new LinkedHashSet();
         // grab the root node and all it's children
         HashSet vRootLinks = node.getAllRefs(null,true);
-        Iterator iter=vRootLinks.iterator();
+        Iterator<JDFElement> iter=vRootLinks.iterator();
         while(iter.hasNext())
         {
-            JDFElement liRoot = (JDFElement)iter.next();
+            JDFElement liRoot = iter.next();
 
             boolean  bResRW = false;
             if(liRoot instanceof JDFResourceLink)
@@ -545,10 +545,10 @@ public class JDFSpawn
         for (int loopRORW = 0; loopRORW < 2; loopRORW++)
         {
             // loop over all links
-            Iterator iter=vRootLinks.iterator();
+            Iterator<JDFElement> iter=vRootLinks.iterator();
             while(iter.hasNext())
             {
-                final JDFElement liRoot = (JDFElement)iter.next();
+                final JDFElement liRoot = iter.next();
 
                 // test for direct children of resourcepool - these will be added later
                 if(liRoot.getDeepParent(ElementName.RESOURCEPOOL,0)!=null)
@@ -607,10 +607,10 @@ public class JDFSpawn
                 }
                 VString rRefsRW=spawnAudit.getrRefsRWCopied();
                 VString rRefsRO=spawnAudit.getrRefsROCopied();
-                Iterator iterRefs=vvRW.iterator();
+                Iterator<String> iterRefs=vvRW.iterator();
                 while(iterRefs.hasNext())
                 {
-                    final String s=(String)iterRefs.next();
+                    final String s=iterRefs.next();
                     rRefsRW.add(s);
                     int ind=rRefsRO.index(s);
                     if(ind>=0)
@@ -619,7 +619,7 @@ public class JDFSpawn
                 iterRefs=vvRO.iterator();
                 while(iterRefs.hasNext())
                 {
-                    final String s=(String)iterRefs.next();
+                    final String s=iterRefs.next();
                     rRefsRO.add(s);
                 }
                 rRefsRO.unify();

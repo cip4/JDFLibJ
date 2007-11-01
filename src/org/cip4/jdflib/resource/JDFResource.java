@@ -1576,10 +1576,10 @@ public class JDFResource extends JDFElement
 
         // check whether we are already ok
         int iMore=0;
-        Iterator it=localPartMap.getKeyIterator();
+        Iterator<String> it=localPartMap.getKeyIterator();
         while(it.hasNext())
         {
-            final String key = (String)it.next();
+            final String key = it.next();
             if (!vPartIDKeys.contains(key))
             {
                 iMore++;
@@ -1733,8 +1733,8 @@ public class JDFResource extends JDFElement
         }
 
         if (vPartIDKeys != null) {
-            final Iterator nodeKeysIterator    = nodeKeys.iterator();
-            final Iterator vPartIDKeysIterator = vPartIDKeys.iterator();
+            final Iterator<String> nodeKeysIterator    = nodeKeys.iterator();
+            final Iterator<String> vPartIDKeysIterator = vPartIDKeys.iterator();
             while (vPartIDKeysIterator.hasNext()) {
                 if (!vPartIDKeysIterator.next().equals(nodeKeysIterator.next())) {
                     return vPartIDKeys; // nodekeys and partkeys are incompatible, return the input
@@ -1926,10 +1926,10 @@ public class JDFResource extends JDFElement
             matchingDepth = 0;
             JDFAttributeMap thisMap = getPartMap(partIDKeys);
 
-            Iterator it = m.getKeyIterator();
+            Iterator<String> it = m.getKeyIterator();
             while (it.hasNext())// for(int i = 0; i < msiz; i++)
             {
-                String strKey = (String) it.next();
+                String strKey = it.next();
                 EnumPartIDKey partIDKey = EnumPartIDKey.getEnum(strKey);
 
                 // check map and throw exception if bad
@@ -2035,11 +2035,11 @@ public class JDFResource extends JDFElement
             if ((nChildren++ == 0) || bSnafu) // must only search the first element, since only one key
             {                                 //  is allowed and all keys must be in the same sequence;
                 // unless, of course, someone wrote crap JDF (bSnafu=true)
-                Iterator it = m.getKeyIterator();
+                Iterator<String> it = m.getKeyIterator();
                 int im = 0;
                 while (it.hasNext())// for(int im = 0; im < msiz; im++)
                 {
-                    String strKey = (String) it.next();
+                    String strKey = it.next();
                     String strValue = m.get(strKey);
 
                     String sTmp = resourceElement.getAttribute_KElement(strKey, null, null);
@@ -2154,10 +2154,10 @@ public class JDFResource extends JDFElement
                         JDFElement closestElement = closest;
 
                         // check whether any parameters of map were found
-                        Iterator it = m.getKeyIterator();
+                        Iterator<String> it = m.getKeyIterator();
                         while (it.hasNext())// for(int i = 0; i < msiz; i++)
                         {
-                            String strKey = (String) it.next();
+                            String strKey = it.next();
                             if (closestElement.hasAttribute_KElement(strKey, null, false))
                             {
                                 bClosest = true;
@@ -3069,9 +3069,9 @@ public class JDFResource extends JDFElement
     {
         final JDFAttributeMap m = new JDFAttributeMap();
 
-        final Iterator idsIterator = ids.iterator();
+        final Iterator<String> idsIterator = ids.iterator();
         while (idsIterator.hasNext()) {
-            String id = (String) idsIterator.next();
+            String id = idsIterator.next();
             final String atr = getAttribute(id, null, null);
             if (atr != null) {
                 m.put(id, atr);

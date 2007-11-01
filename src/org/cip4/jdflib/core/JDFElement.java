@@ -1117,11 +1117,11 @@ public class JDFElement extends KElement
 
         // replace all "~" with " ~ "
         JDFAttributeMap m=getAttributeMap();
-        final Iterator it = m.getKeyIterator();
+        final Iterator<String> it = m.getKeyIterator();
         AttributeInfo ai=getTheAttributeInfo();
         while (it.hasNext())
         {
-            String key = (String)it.next();
+            String key = it.next();
             String value = m.get(key);
             EnumAttributeType attType=ai.getAttributeType(key);
 

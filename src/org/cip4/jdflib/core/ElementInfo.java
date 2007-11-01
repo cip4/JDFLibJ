@@ -252,12 +252,12 @@ public class ElementInfo
 	private VString conformingElements(EnumElementValidity elemValidity1, EnumElementValidity elemValidity2,EnumElementValidity elemValidity3,EnumElementValidity elemValidity4) 
 	{
 		VString matchingElements = new VString();
-		Iterator iter = elementInfoTable.keySet().iterator();
+		Iterator<String> iter = elementInfoTable.keySet().iterator();
 		
 		long l2 = JDFVersions.getTheMask(version);
 		long v2 = JDFVersions.getTheOffset(version);
 		while (iter.hasNext()) {
-			final String theKey = (String)iter.next();
+			final String theKey = iter.next();
 			final ElemInfo ei = (ElemInfo) elementInfoTable.get(theKey);
 			long eiValStatus=ei.getElemValidityStatus() & l2;
 			if (eiValStatus == ((long)elemValidity1.getValue() << v2)) 
@@ -427,7 +427,8 @@ public class ElementInfo
 	public void setVersion(EnumVersion v) {
 		version=v;
 	}
-    public String toString(){
+    @Override
+	public String toString(){
         String s= "ElementInfoTable version="+version;
         s+=elementInfoTable.toString();
         return s;
