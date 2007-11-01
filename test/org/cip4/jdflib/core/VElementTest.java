@@ -7,7 +7,14 @@
  */
 package org.cip4.jdflib.core;
 
+
+import java.util.List;
+import java.util.Vector;
+
 import junit.framework.TestCase;
+
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.node.JDFNode;
 
 public class VElementTest extends TestCase
 {
@@ -27,6 +34,18 @@ public class VElementTest extends TestCase
         
     }
     
+    public void testCastVector()
+    {
+        JDFDoc d=new JDFDoc("JDF");
+        JDFNode n=d.getJDFRoot();
+        VElement v=new VElement();
+        v.add(n);
+        List<JDFNode>ll=(Vector)v;
+        ll.get(0).addResource("foo", EnumUsage.Input);
+        
+          
+    }
+
     public void testContainsElement()
     {
         XMLDoc d=new XMLDoc("doc",null);

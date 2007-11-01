@@ -124,8 +124,8 @@ public class JDFResource extends JDFElement
     private static final long serialVersionUID = 1L;
     private static boolean autoAgent=false;
 
-    private static HashSet validParentNodeNameSet=null;
-    private static HashSet validRootParentNodeNameSet=null;
+    private static HashSet<String> validParentNodeNameSet=null;
+    private static HashSet<String> validRootParentNodeNameSet=null;
 
     private static AtrInfoTable[] atrInfoTable_Abstract = new AtrInfoTable[17];
     static
@@ -1431,14 +1431,14 @@ public class JDFResource extends JDFElement
      * @param nodeName the name of the node to check against
      * @return {@link Boolean} true if nodeName is the name of a valid resource parent element
      */
-    private static boolean  isValidParentNodeName(String nodeName)
+    private static synchronized boolean  isValidParentNodeName(String nodeName)
     {
         if(validParentNodeNameSet==null)
         {
+            validParentNodeNameSet=new HashSet<String>();
             final String nodeNames[] = {
                     "ResourcePool","PipeParams","ResourceInfo","ResourceCmdParams", ElementName.OCCUPATION, // copy of validRootParentNodeNames
                     "DeviceInfo","DropItemIntent","DropItem","ProductionIntent","CustomerInfo","NodeInfo","Ancestor", "Occupation",ElementName.PHASETIME};
-            validParentNodeNameSet=new HashSet();
             for(int i=0;i<nodeNames.length;i++)
                 validParentNodeNameSet.add(nodeNames[i]);
         }
@@ -1451,12 +1451,12 @@ public class JDFResource extends JDFElement
      * @param nodeName the name of the node to check against
      * @return {@link Boolean} true if nodeName is the name of a valid resource parent element
      */
-    private static boolean isValidRootParentNodeName(String nodeName)
+    private static synchronized boolean isValidRootParentNodeName(String nodeName)
     {
         if(validRootParentNodeNameSet==null)
         {
+            validRootParentNodeNameSet=new HashSet<String>();
             final String[] nodeNames = {"ResourcePool","PipeParams","ResourceInfo","ResourceCmdParams"}; // must also copy to validParentNodeNames
-            validRootParentNodeNameSet=new HashSet();
             for(int i=0;i<nodeNames.length;i++)
                 validRootParentNodeNameSet.add(nodeNames[i]);
         }

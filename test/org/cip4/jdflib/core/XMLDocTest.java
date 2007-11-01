@@ -563,6 +563,35 @@ public class XMLDocTest extends JDFTestCaseBase
         s = d.write2String(0);
         assertTrue("mem", mem + 10000 > s.length());
     }
+    public void testCreateBig()
+    {
+        for(int ii=0;ii<4;ii++)
+        {
+            XMLDoc d = ii%2==0 ? new XMLDoc("foo", null) : new JDFDoc("JDF");
+            KElement e = d.getRoot();
+            long l=System.nanoTime();
+            for(int j=0;j<2000;j++)
+            {
+                KElement e2 = e.appendElement("AuditPool");
+                KElement e3 = e2.appendElement("Created");
+                for (int i = 33; i < 199; i++) {
+                    if(i<2)
+                        e3.setAttribute("k" + String.valueOf(i), "value" + String.valueOf(i));
+                    else
+                        e3.setAttributeRaw("k" + String.valueOf(i), "value" + String.valueOf(i));
+                }
+            }
+            long l2=System.nanoTime();
+
+            System.out.println("xmldoc create: "+ii+" "+(l2-l)/1000000);
+            final String fil = sm_dirTestDataTemp+"big"+ii+"writ.jdf";
+            d.write2File(fil,2,false);
+            File f=new File(fil);
+            long l3=System.nanoTime();
+            System.out.println("xmldoc write: "+ii+" "+(l3-l2)/1000000+" "+f.length());
+            System.out.println("xmldoc total: "+ii+" "+(l3-l)/1000000+"\n");
+        }
+    }
 
     ////////////////////////////////////////////////////////
     /**

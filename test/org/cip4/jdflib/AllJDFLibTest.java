@@ -161,6 +161,7 @@ import org.cip4.jdflib.resource.JDFFilespecTest;
 import org.cip4.jdflib.resource.JDFLayerListTest;
 import org.cip4.jdflib.resource.JDFLayoutTest;
 import org.cip4.jdflib.resource.JDFMediaColorTest;
+import org.cip4.jdflib.resource.JDFPageListTest;
 import org.cip4.jdflib.resource.JDFPartTest;
 import org.cip4.jdflib.resource.JDFResourceTest;
 import org.cip4.jdflib.resource.JDFStrippingTest;
@@ -180,6 +181,7 @@ import org.cip4.jdflib.resource.process.JDFPersonTest;
 import org.cip4.jdflib.resource.process.JDFRunListTest;
 import org.cip4.jdflib.resource.process.JDFTileTest;
 import org.cip4.jdflib.resource.process.JDFUsageCounterTest;
+import org.cip4.jdflib.resource.process.postpress.JDFStitchingParamsTest;
 import org.cip4.jdflib.span.JDFEnumerationSpanTest;
 import org.cip4.jdflib.util.BiHashMapTest;
 import org.cip4.jdflib.util.ByteArrayIOStreamTest;
@@ -322,6 +324,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JDFLayerListTest.class);
         suite.addTestSuite(JDFLayoutTest.class);
         suite.addTestSuite(JDFMediaColorTest.class);
+        suite.addTestSuite(JDFPageListTest.class);
         suite.addTestSuite(JDFPartTest.class);
         suite.addTestSuite(JDFResourceTest.class);
         suite.addTestSuite(JDFStrippingTest.class);
@@ -341,6 +344,9 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JDFRunListTest.class);
         suite.addTestSuite(JDFTileTest.class);
         suite.addTestSuite(JDFUsageCounterTest.class);
+
+        // resource.process.postpress
+        suite.addTestSuite(JDFStitchingParamsTest.class);
 
         // util
         suite.addTestSuite(BiHashMapTest.class);

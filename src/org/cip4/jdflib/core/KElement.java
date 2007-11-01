@@ -885,9 +885,18 @@ public class KElement extends ElementNSImpl
      * @param value  value of the attribute
      */
     @Override
-	public void setAttribute(String key, String value)
+    public void setAttribute(String key, String value)
     {
         setAttribute(key, value, null);
+    }
+    /**
+     * fastest setAttribute - use only if you know exactly what you are doing
+     * @param key  name of the attribute to set
+     * @param value value of the attribute
+     */
+    public void setAttributeRaw(String key, String value)
+    {
+        super.setAttribute(key, value);
     }
 
     /**

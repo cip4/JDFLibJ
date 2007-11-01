@@ -203,7 +203,7 @@ public class JDFQueue extends JDFAutoQueue
      * @param strJobPartID Job part ID.
      * @param vamParts     Partition to execute, may not be null
      * @param status       Queue Entry Status, null means any status.
-     * @deprecated use getQueueEntry
+     * @deprecated use getQueueEntryVector(map, partmapvector)
      * 
      * @return VString: vector of QueueEntry IDs
      */
