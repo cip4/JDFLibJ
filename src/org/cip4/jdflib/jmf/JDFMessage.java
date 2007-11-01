@@ -396,19 +396,6 @@ public class JDFMessage extends JDFAutoMessage
     }
 
     /**
-     * isValid
-     * @deprecated
-     * @return boolean
-     */
-    @Deprecated
-	@Override
-	public boolean isValid()
-    {
-        return isValid(KElement.EnumValidationLevel.Complete);
-    }
-
-
-    /**
      * Enumeration string for enum value
      * @param EnumType value the enumeration to translate
      * @return KString the string representation of the enumeration
