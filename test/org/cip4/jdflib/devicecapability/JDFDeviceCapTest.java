@@ -99,6 +99,10 @@ import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.jmf.JDFMessageService;
+import org.cip4.jdflib.jmf.JDFResponse;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.resource.JDFDevice;
@@ -639,5 +643,23 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
             assertEquals(v.stringAt(0),"JDF");
         }
     }
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public void testGetMessageServiceForJMFType()
+    {
+        JDFMessage m=JDFJMF.createJMF(JDFMessage.EnumFamily.Acknowledge, EnumType.KnownDevices).getMessageElement(null, null, 0);
+        JDFResponse resp=JDFJMF.createJMF(JDFMessage.EnumFamily.Response, EnumType.KnownMessages).getResponse(0);
+        JDFMessageService ms=resp.appendMessageService();
+        ms.setType(EnumType.AbortQueueEntry);
+        ms.setAcknowledge(true);
+        assertNull("wrong type",JDFDeviceCap.getMessageServiceForJMFType(m, resp));
+        JDFMessageService ms2=resp.appendMessageService();
+        ms2.setType(EnumType.KnownDevices);
+        ms2.setQuery(true);
+        assertNull("wrong family",JDFDeviceCap.getMessageServiceForJMFType(m, resp));
+        JDFMessageService ms3=resp.appendMessageService();
+        ms3.setType(EnumType.KnownDevices);
+        ms3.setAcknowledge(true);
+        assertEquals("family and type match",JDFDeviceCap.getMessageServiceForJMFType(m, resp),ms3);
+        
+    }
 }
