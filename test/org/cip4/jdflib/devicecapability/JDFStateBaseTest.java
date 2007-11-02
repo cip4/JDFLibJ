@@ -142,7 +142,7 @@ public class JDFStateBaseTest extends JDFTestCaseBase
 
         JDFBooleanState  state = (JDFBooleanState) devCaps.getChildByTagName(ElementName.BOOLEANSTATE, null, 0, null, false, true);
         System.out.println(state.getNamePath());
-        assertEquals("", state.getNamePath(),"RenderingParams/AutomatedOverprintParams/@OverPrintBlackText");
+        assertEquals("", state.getNamePath(),"JDF/ResourcePool/RenderingParams/AutomatedOverprintParams/@OverPrintBlackText");
     }
 
     public final void testFitsListType_IntegerState()

@@ -303,7 +303,7 @@ public class XMLDocTest extends JDFTestCaseBase
         assertFalse(d2.toString().indexOf("xmlns=\"\"")>=0);
         assertFalse(d.toString().indexOf("xmlns=\"\"")>=0);
         assertFalse(root.toString().indexOf("xmlns=\"\"")>=0);
-        KElement foo=root.appendElement("foo");
+        KElement foo=root.appendElement("foofoo");
         assertNull(foo.getNamespaceURI());
 
     }

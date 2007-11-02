@@ -333,7 +333,17 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
      */
     public final VString getNamePathVector()
     {
-        String result = getDevCapsName();    
+        String result = getDevCapsName(); 
+        final EnumContext cont=getContext();
+        if(cont.equals(EnumContext.Link))
+        {
+            result=ElementName.JDF+"/"+ElementName.RESOURCELINKPOOL+"/"+result;
+        }
+        else if(cont.equals(EnumContext.Resource))
+        {
+            result=ElementName.JDF+"/"+ElementName.RESOURCEPOOL+"/"+result;
+        }
+
         VString vResult=new VString();
         vResult.add(result);
         return vResult;
@@ -342,7 +352,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
     private String getDevCapsName()
     {
         String nam=getName();
-        EnumContext cont=getContext();
+        final EnumContext cont=getContext();
         if(cont.equals(EnumContext.Link))
         {
             nam+=JDFConstants.LINK;

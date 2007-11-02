@@ -362,7 +362,22 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
                 return null;
             bElement=true;
             final JDFDevCap dc=(JDFDevCap)stateDC;
-            vPath=dc.getNamePathVector(true);             
+            vPath=dc.getNamePathVector(true);   
+            // fix up for the fact that ispresent for a resource is actually a link
+            if(vPath!=null)
+            {
+                for(int i=0;i<vPath.size();i++)
+                {
+                    String path=vPath.stringAt(i);
+                    VString tokens=StringUtil.tokenize(path, "/", false);
+                    if(tokens.size()==3 && tokens.stringAt(1).equals(ElementName.RESOURCEPOOL))
+                    {
+                        tokens.set(1, ElementName.RESOURCELINKPOOL);
+                        tokens.set(2, tokens.stringAt(2)+"Link");
+                        vPath.set(i,StringUtil.setvString(tokens, "/", null, null));
+                    }
+                }
+            }
         }
         else
         {

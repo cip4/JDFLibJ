@@ -618,13 +618,13 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
             JDFDevCap dc=(JDFDevCap) devicecap.getChildWithAttribute(null, AttributeName.ID, null, "dc_Layout", 0, false);
             VString v=dc.getNamePathVector(true);
             assertEquals(v.size(),1);
-            assertEquals(v.stringAt(0),"Layout");
+            assertEquals(v.stringAt(0),"JDF/ResourcePool/Layout");
         }
         {
             JDFDevCap dc=(JDFDevCap) devicecap.getChildWithAttribute(null, AttributeName.ID, null, "dc_LayoutLink", 0, false);
             VString v=dc.getNamePathVector(true);
             assertEquals(v.size(),1);
-            assertEquals(v.stringAt(0),"LayoutLink");
+            assertEquals(v.stringAt(0),"JDF/ResourceLinkPool/LayoutLink");
         }
         {
             JDFDevCap dc=(JDFDevCap) devicecap.getChildWithAttribute(null, AttributeName.ID, null, "dc_Created", 0, false);
