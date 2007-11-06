@@ -328,7 +328,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
             for (int j = 0; j < sizeParts; j++)
             {
                 JDFAttributeMap amParts = vamParts==null ? null : vamParts.elementAt (j);
-                JDFResource resTargetPart = resTarget.getPartition (amParts, null);
+                JDFResource resTargetPart = resTarget.getCreatePartition (amParts, null);
                 if(resTargetPart==null)
                     continue;
                 final String id=resTargetPart.getID();
