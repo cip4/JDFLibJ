@@ -2238,7 +2238,7 @@ public class JDFNode extends JDFElement
             if(ni==null) {
                 return null;
             }
-            stat = ni.getNodeStatus();
+            stat = null;
 
             final VElement vLeaves=ni.getLeaves(false);
             final int size = vLeaves.size();
@@ -2246,9 +2246,11 @@ public class JDFNode extends JDFElement
             for(int i=0;i<size;i++){
                 JDFNodeInfo niCmp=(JDFNodeInfo) vLeaves.elementAt(i);
                 JDFAttributeMap map=niCmp.getPartMap();
-                if(map!=null && !map.subMap(mattr)) {
+                if(map!=null && !map.overlapMap(mattr)) {
                     continue;
                 }
+                if(stat==null) // don't compare with root, rather compare first fitting leaf
+                    stat=niCmp.getNodeStatus();
 
                 if(niCmp.getNodeStatus()!=stat)
                 {
@@ -7968,7 +7970,39 @@ public class JDFNode extends JDFElement
 
         if (isExecutable)
         {
-            vamPartMaps.add (amPartMap);
+            if ((nChildPartitions == 0) && (stat == null))  // leaf with unknown PartStatus
+            {
+                if (getStatus () == EnumNodeStatus.Part)
+                {
+                    final JDFNodeInfo ni = getNodeInfo ();
+                  
+                    final VElement veParts = ni.getPartitionVector (amPartMap, JDFResource.EnumPartUsage.Implicit);  
+                          
+                    if ((veParts == null) && veParts.isEmpty ())
+                    {
+                        vamPartMaps.add (amPartMap);
+                    }
+                    else
+                    {
+                        for (int p = 0; p < veParts.size (); p++)
+                        {
+                            final JDFNodeInfo niPart = (JDFNodeInfo) veParts.elementAt (p);
+              
+                            final JDFElement.EnumNodeStatus statPart = niPart.getNodeStatus ();
+              
+                            if ((statPart == JDFNode.EnumNodeStatus.Waiting)
+                             || (statPart == JDFNode.EnumNodeStatus.Ready))
+                            {
+                                vamPartMaps.appendUnique (niPart.getPartMap ());
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                vamPartMaps.add (amPartMap);
+            }
         }
 
         ////////////////////////////////////////////////////////

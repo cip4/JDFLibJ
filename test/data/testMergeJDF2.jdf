@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!-- edited with XML Spy v4.0 NT beta 2 build Jul 24 2001 (http://www.xmlspy.com) by Raik Langer (Heidelberger Druckmaschinen AG) -->
-<JDF ID="Axxx" Type="Product" Status="Waiting" Version="1.1" Activation="Active" JobID="00-0004" DescriptiveName="WinKAAR32 / DC" CommentURL="file:M:/cip/Job2JdfConverter/bin/test.obg" xmlns="http://www.CIP4.org/JDFSchema_1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.CIP4.org/JDFSchema_1
+<JDF ID="Axxx" Type="Product" Status="Waiting" Version="1.1" Activation="Active" JobID="00-0004" DescriptiveName="WinKAAR32 / DC" CommentURL="file:M:/cip/Job2JdfConverter/bin/test.obg" xmlns="http://www.CIP4.org/JDFSchema_1_1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.CIP4.org/JDFSchema_1
 file://///heifs00003/data/TCip/JDF/Schema/2.17/JDFb_2_17.xsd">
 	<CustomerInfo CustomerID="333" CustomerOrderID="00-0004" CustomerJobName="WinKAAR32 / DC">
 		<Company OrganizationName="alphagraph">

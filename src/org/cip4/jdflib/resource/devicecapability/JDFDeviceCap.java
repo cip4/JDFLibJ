@@ -91,6 +91,7 @@ import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDeviceCap;
 import org.cip4.jdflib.auto.JDFAutoDevCaps.EnumContext;
+import org.cip4.jdflib.auto.JDFAutoMessageService.EnumJMFRole;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -445,7 +446,13 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
         // now add the family selection method
         EnumFamily fam=m.getFamily();
         if(fam!=null)
-            map.put(fam.getName(), "true");
+        {
+            if(EnumFamily.Response.equals(fam))
+                map.put("JMFRole", EnumJMFRole.Sender);
+            else
+                map.put(fam.getName(), "true");                
+                
+        }
         return (JDFMessageService) knownMessagesResp.getChildByTagName(ElementName.MESSAGESERVICE, null, 0, map, true, true);
     }
 

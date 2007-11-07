@@ -171,14 +171,26 @@ public class JMFResourceTest extends JDFTestCaseBase
         assertEquals("retained root dimension",m2.getDimension(), new JDFXYPair(20,30));
         assertEquals("overwrote leaf root dimension",m2Sheet.getDimension(), new JDFXYPair(200,300));
 
-        JDFMedia mPartRQP=(JDFMedia)mediaRQP.addPartition(EnumPartIDKey.SheetName, "S1");
+        sheetMap.put(EnumPartIDKey.SheetName, "S2");
+        rqp.setPartMap(sheetMap);
+        mediaRQP.setDimension(new JDFXYPair(300,400));
+
+        rqp.applyResourceCommand(jdf);
+        JDFMedia m2Sheet2=(JDFMedia)m2.getPartition(sheetMap,null);
+        assertNotNull(m2Sheet2);
+        assertEquals("retained root dimension",m2.getDimension(), new JDFXYPair(20,30));
+        assertEquals("overwrote leaf root dimension",m2Sheet2.getDimension(), new JDFXYPair(300,400));
+
+        JDFMedia mPartRQP=(JDFMedia)mediaRQP.addPartition(EnumPartIDKey.SheetName, "S3");
+        sheetMap.put(EnumPartIDKey.SheetName, "S3");
+        rqp.setPartMap(sheetMap);
         mPartRQP.setDimension(new JDFXYPair(400,600));
 
         rqp.applyResourceCommand(jdf);
+        JDFMedia m2Sheet3=(JDFMedia)m2.getPartition(sheetMap,null);
         assertEquals("retained root dimension",m2.getDimension(), new JDFXYPair(20,30));
-        assertEquals("overwrote leaf root dimension",m2Sheet.getDimension(), new JDFXYPair(400,600));
-        assertFalse(m2Sheet.hasAttribute_KElement("ID", null, false));
-
+        assertEquals("overwrote leaf root dimension",m2Sheet3.getDimension(), new JDFXYPair(400,600));
+        assertFalse(m2Sheet3.hasAttribute_KElement("ID", null, false));
     }
 
     /**

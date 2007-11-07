@@ -1236,9 +1236,49 @@ public class JDFNodeTest extends JDFTestCaseBase
         node.prepareNodeInfo(v);
         assertTrue("ni sig3 waiting",node.getPartStatus(m4)==EnumNodeStatus.Waiting);
         assertNotNull("explicit m4",ni.getPartition(m4,EnumPartUsage.Explicit));
+        
+        JDFAttributeMap m5=new JDFAttributeMap("Side","Back");
+        assertNull("ni side back  mixed",node.getPartStatus(m5));
     }
 
     //////////////////////////////////////////////////////////
+    
+    public void testGetPartStatus2() throws Throwable
+
+{
+
+    JDFDoc jdfDoc = JDFDoc.parseFile("C:/Data/Separation.jdf");
+
+    
+
+    JDFAttributeMap amParts = new JDFAttributeMap ();
+
+    
+
+    amParts.put ("RunPage",       "0");
+
+    amParts.put ("Side",          "Front");
+
+    amParts.put ("PartVersion",   "Deu Deu");
+
+    amParts.put ("SheetName",     "S0C");
+
+    amParts.put ("SignatureName", "Sig001");
+
+ 
+
+    JDFNode nodeProc = jdfDoc.getJDFRoot ().getJobPart ("ImO2.I", JDFConstants.EMPTYSTRING);
+
+    
+
+    JDFElement.EnumNodeStatus stat = nodeProc.getPartStatus (amParts);
+
+
+
+    assertTrue (stat == null);
+
+}
+
 
     public void testGenericResources()
     {

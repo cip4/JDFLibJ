@@ -2711,5 +2711,31 @@ public class JDFMessage extends JDFAutoMessage
          return s;
 
     }
-
+    
+    ////////////////////////////////////////////////////////////////////////////////
+    
+    /**
+     * sets the senderID of this message
+     * @param senderID
+     */
+    public void setSenderID(String senderID)
+    {
+        setAttribute(AttributeName.SENDERID, senderID);
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////////
+    
+    /**
+     * sets the senderID of this message
+     * @return String the senderID of this message or the SenderID of the parent JMF.
+     */
+    public String getSenderID()
+    {
+        if(hasAttribute(AttributeName.SENDERID))
+            return getAttribute(AttributeName.SENDERID);
+        KElement parentJMF=getParentNode_KElement();
+        if(parentJMF instanceof JDFJMF)
+            return ((JDFJMF)parentJMF).getSenderID();
+        return null;
+    }
 }

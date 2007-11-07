@@ -120,7 +120,8 @@ public class IterationTest extends JDFTestCaseBase
         pt.appendEmployee().setPersonalID("Employee 1");
         pt.appendDevice().setDeviceID("Device 1");
         iterRuli.setResStatus(EnumResStatus.Draft,false);
-        iterNode.setAttribute("Status",ITERATION_PAUSED);
+        iterNode.setStatus(EnumNodeStatus.Suspended);
+        iterNode.setAttribute("StatusDetails",ITERATION_PAUSED);
         iterDoc.write2File(getIteration(1),2,false);
     }
     
@@ -135,7 +136,8 @@ public class IterationTest extends JDFTestCaseBase
         pt.appendEmployee().setPersonalID("Employee 2");
         pt.appendDevice().setDeviceID("Approval Device 1");
         iterRuli.setResStatus(EnumResStatus.Rejected,false);
-        iterNode.setAttribute("Status",ITERATION_PAUSED);
+        iterNode.setStatus(EnumNodeStatus.Suspended);
+        iterNode.setAttribute("StatusDetails",ITERATION_PAUSED);
         iterDoc.write2File(getIteration(2),2,false);
     }
     
@@ -162,7 +164,8 @@ public class IterationTest extends JDFTestCaseBase
             fail("malformed URL");
         }
         
-        iterNode.setAttribute("Status",ITERATION_PAUSED);
+        iterNode.setStatus(EnumNodeStatus.Suspended);
+        iterNode.setAttribute("StatusDetails",ITERATION_PAUSED);
         iterDoc.write2File(getIteration(3),2,false);
     }
     
@@ -177,7 +180,8 @@ public class IterationTest extends JDFTestCaseBase
         pt.appendEmployee().setPersonalID("Employee 3");
         pt.appendDevice().setDeviceID("Approval Device 1");
         iterRuli.setResStatus(EnumResStatus.Available,false);
-        iterNode.setAttribute("Status",ITERATION_PAUSED);
+        iterNode.setStatus(EnumNodeStatus.Suspended);
+        iterNode.setAttribute("StatusDetails",ITERATION_PAUSED);
         iterAppSuccess.setResStatus(EnumResStatus.Available,true);
         iterDoc.write2File(getIteration(4),2,false);
     }

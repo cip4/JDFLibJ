@@ -80,8 +80,13 @@ import java.io.InputStream;
 import java.io.StringReader;
 
 import org.apache.xerces.parsers.DOMParser;
+import org.apache.xerces.xni.Augmentations;
+import org.apache.xerces.xni.NamespaceContext;
 import org.apache.xerces.xni.QName;
+import org.apache.xerces.xni.XMLLocator;
+import org.apache.xerces.xni.XNIException;
 import org.cip4.jdflib.util.UrlUtil;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
@@ -388,10 +393,6 @@ public class JDFParser extends DOMParser
     private JDFDoc runParser(InputSource inSource, boolean bEraseEmpty)
     {
         JDFDoc doc = new JDFDoc();
-        final DocumentJDFImpl memberDocument = doc.getMemberDocument();
-
-        memberDocument.bKElementOnly=bKElementOnly;
-        memberDocument.setIgnoreNSDefault(ignoreNSDefault);
         
         try
         {
@@ -425,10 +426,15 @@ public class JDFParser extends DOMParser
         if(doc!=null)
         {
             KElement root=doc.getRoot();
+            final DocumentJDFImpl memberDocument = doc.getMemberDocument();
             if(root.getNamespaceURI()!=JDFElement.getSchemaURL())
             {
                 memberDocument.bKElementOnly=true;
-                memberDocument.setIgnoreNSDefault(true);               
+                memberDocument.setIgnoreNSDefault(true);    
+            }
+            else
+            {
+                memberDocument.setIgnoreNSDefault(ignoreNSDefault);    
             }
         }
         return doc;
@@ -450,6 +456,26 @@ public class JDFParser extends DOMParser
         {
             lastExcept=e;
         }
+    }
+    
+    /**
+     * @see org.apache.xerces.parsers.AbstractDOMParser#startDocument(org.apache.xerces.xni.XMLLocator, java.lang.String, org.apache.xerces.xni.NamespaceContext, org.apache.xerces.xni.Augmentations)
+     */
+    @Override
+    public void startDocument(XMLLocator locator, String encoding, NamespaceContext namespaceContext, Augmentations augs)
+            throws XNIException
+    {
+        super.startDocument(locator, encoding, namespaceContext, augs);
+        
+        final Document document = getDocument();
+        
+        if (document instanceof DocumentJDFImpl)
+        {
+            final DocumentJDFImpl memberDocument = (DocumentJDFImpl) document;
+
+            memberDocument.bKElementOnly=bKElementOnly;
+            memberDocument.setIgnoreNSDefault(ignoreNSDefault);
+        }        
     }
 
 }

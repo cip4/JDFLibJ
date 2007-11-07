@@ -517,7 +517,7 @@ public class MimeUtilTest extends JDFTestCaseBase
             int i=fis.read(b);
             if(i<=0)
                 break;
-            for(int j=0;j<10;j++)
+            for(int j=0;j<3;j++)
                 fos.write(b,0,i);
         }
         fis.close();

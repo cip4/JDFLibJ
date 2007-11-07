@@ -152,6 +152,20 @@ public class JDFDocTest extends JDFTestCaseBase
             assertFalse("schema parse - default is set",as3.getTemplate());
         }
      }
+    
+    public void testNS()
+    {
+        JDFDoc doc=new JDFDoc("foo:bar");
+        String s=doc.write2String(2);
+        assertTrue(s.indexOf(JDFConstants.JDFNAMESPACE)>0);        
+        XMLDoc doc2=new XMLDoc("abc",null);
+        String s2=doc2.write2String(2);
+        assertTrue(s2.indexOf(JDFConstants.JDFNAMESPACE)<0);        
+        doc2.getRoot().copyElement(doc.getRoot(), null);
+        s2=doc2.write2String(2);
+        assertTrue(s2.indexOf(JDFConstants.JDFNAMESPACE)>0);        
+
+    }
 
     /**
      * make sure that corrupt files always return a null document

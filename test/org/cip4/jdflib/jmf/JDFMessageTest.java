@@ -186,6 +186,16 @@ public class JDFMessageTest extends TestCase
         assertEquals(command.getType(),"foo:bar");
     }
     /////////////////////////////////////////////////////////////////////////////
+    public void testSenderID()
+    {
+        JDFDoc doc = new JDFDoc(ElementName.JMF);
+        JDFJMF jmf=doc.getJMFRoot();
+        JDFCommand command=(JDFCommand) jmf.appendMessageElement(EnumFamily.Command,EnumType.UpdateJDF);
+        assertEquals(jmf.getSenderID(),command.getSenderID());
+        command.setSenderID("foo:bar");
+        assertEquals(command.getSenderID(),"foo:bar");
+    }
+    /////////////////////////////////////////////////////////////////////////////
 
     public void testCreateResponse()
     {

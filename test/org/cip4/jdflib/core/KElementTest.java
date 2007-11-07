@@ -442,7 +442,7 @@ public class KElementTest extends JDFTestCaseBase
         assertEquals(t22.getAttribute("a"), "2");
         assertEquals(t22.getAttribute("b"), "1");
         assertEquals(t22.getAttribute("c"), "2");       
-        
+
     }
 
     public void testMoveMe()
@@ -1728,7 +1728,7 @@ public class KElementTest extends JDFTestCaseBase
         String s="<e xmlns=\"a\" xmlns:foo=\"www.foo.com\"><e2/></e>";
         JDFParser p=new JDFParser();
         p.bKElementOnly=true;
-        p.ignoreNSDefault=false;
+        p.ignoreNSDefault=true;
 
         XMLDoc d=p.parseString(s);
         KElement e=d.getRoot();
@@ -1737,11 +1737,11 @@ public class KElementTest extends JDFTestCaseBase
         e.appendChild(e3);
         KElement e2 = (KElement) e.getFirstChild();
         assertEquals(e2.getNextSibling(), e3);                  
-        assertEquals(e3.getNamespaceURI(), "www.foo.com");                  
+        assertNull(e3.getNamespaceURI());                  
         KElement e4=(KElement) d.createElement("foo:e3");
         assertNull(e4.getNamespaceURI());                  
         e.appendChild(e4);
-        assertEquals(e4.getNamespaceURI(), "www.foo.com");                  
+        assertNull(e4.getNamespaceURI());                  
     }
 
     public void testSetXMLComment()

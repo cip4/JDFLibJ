@@ -81,10 +81,16 @@ package org.cip4.jdflib.util;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.apache.commons.io.IOUtils;
+import org.cip4.jdflib.core.VString;
 
 
 /**
@@ -97,7 +103,7 @@ public class FileUtil
     /**
      * list all files with a given extension (directories are skipped
      * @param dir the directory to search
-     * @param extension the extension to check for (null = list all)
+     * @param comma separated list of extensions to check for (null = list all)
      * @return Files[] the matching files, null if none are found
      */
     public static File[] listFiles(File dir, String extension)
@@ -131,17 +137,26 @@ public class FileUtil
     ************************************************************/
     public static class SimpleFileFilter implements FileFilter
     {
-        private String m_extension;
+        private Set<String> m_extension;
   
         /**
          * 
          */
         public SimpleFileFilter(String fileExtension)
         {
-            m_extension = fileExtension;
-            fileExtension=UrlUtil.extension(fileExtension);
             if(fileExtension!=null)
-                m_extension=fileExtension;
+            {
+                VString list =StringUtil.tokenize(fileExtension, ",", false);
+                m_extension=new HashSet<String>();
+                for(int i=0;i<list.size();i++)
+                {
+                    String st = list.stringAt(i);
+                    if(st.startsWith("."))
+                        st=st.substring(1);
+                    st=st.toLowerCase();
+                    m_extension.add(st);
+                }
+            }
         }
 
         /* (non-Javadoc)
@@ -153,7 +168,13 @@ public class FileUtil
                 return false;
             if(m_extension==null)
                 return true;
-            return m_extension.equalsIgnoreCase(UrlUtil.extension(checkFile.getPath()));
+            String xt = UrlUtil.extension(checkFile.getPath());
+            if(xt==null)
+                xt="";
+            else
+                xt=xt.toLowerCase();
+            
+            return m_extension.contains(xt);
         }
     }
     
@@ -180,23 +201,23 @@ public class FileUtil
     }
 
     /**
-     * very brutal tree zapper that will delete a directory tree recursively
-     * @param f
-     * @return
+     * very brutal tree zapper that will delete a file or directory tree recursively
+     * @param dirToZapp the file directory to utterly anihilate
+     * @return true if ciao
      */
-    public static boolean deleteAll(File f)
+    public static boolean deleteAll(File dirToZapp)
     {
-        if(f==null)
+        if(dirToZapp==null)
             return false;
         boolean b=true;
-        if(f.isDirectory())
+        if(dirToZapp.isDirectory())
         {
-            File[] ff=f.listFiles();
+            File[] ff=dirToZapp.listFiles();
             int siz=(ff==null) ? 0 : ff.length;
             for(int i=0;i<siz;i++)
-                b = b && deleteAll(ff[i]);
+                b = deleteAll(ff[i]) && b;
         }
-        return b && f.delete();
+        return dirToZapp.delete() && b;
     }
    
 //////////////////////////////////////////////////////////////////////////////////
@@ -241,4 +262,61 @@ public class FileUtil
         return tmp;
     }
     
- }
+    /**
+     * moves a File to dir by trying to rename,
+     * if this fails, a copy with subsequent delete is performed.
+     * if toFile exists, it is brutally overwritten
+     * 
+     * @param fromFile the File to move
+     * @param toFile the File to create
+     * @return File the moved File if success, else null, i.e. toFile exists with the contents of fromFile
+     */
+    public static File moveFileToDir(File fromFile, File toDir)
+    {
+        final File newFile = new File(toDir.getPath()+File.separator+fromFile.getName());
+        boolean b= moveFile(fromFile, newFile);
+        return b ? newFile : null;
+    }
+
+    /**
+     * moves a File by trying to rename,
+     * if this fails, a copy with subsequent delete is performed.
+     * if toFile exists, it is brutally overwritten
+     * 
+     * @param fromFile the File to move
+     * @param toFile the File to create
+     * @return boolean true if success, i.e. toFile exists with the contents of fromFile
+     */
+    public static boolean moveFile(File fromFile, File toFile)
+    {
+        boolean b=false;
+        try
+        {
+
+            if(fromFile.equals(toFile))
+                return true;
+
+            b=fromFile.renameTo(toFile);
+            if(b)
+                return b;
+            if(toFile.exists())
+                toFile.delete();
+            b=toFile.createNewFile();
+            if(!b)
+                return b;
+            FileOutputStream fos=new FileOutputStream(toFile);
+            FileInputStream fis=new FileInputStream(fromFile);
+            IOUtils.copy(fis, fos);
+            fis.close();
+            fos.close();
+            fromFile.delete();
+            b=true;
+            
+        }
+        catch (IOException x)
+        {
+            b=false;
+        }
+        return b;
+    }
+}
