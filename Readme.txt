@@ -4,6 +4,9 @@ ___________________________________________________________
 
 Label JDFLIBJ_2.1.3BLD480 (0x.11.2007)
 
+namespace handling in parser and doc
+added hotfolder implementations
+namespace fixes in test files
 create partitions when applying resource cmd
 devcaps certification fixes for jmf - added test
 devcaps certification fixes for jmf
