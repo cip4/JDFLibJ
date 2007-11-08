@@ -1,3 +1,55 @@
+
+___________________________________________________________
+
+
+Label JDFLIBJ_2.1.3BLD480 (0x.11.2007)
+
+create partitions when applying resource cmd
+devcaps certification fixes for jmf - added test
+devcaps certification fixes for jmf
+devcaps certification fixes for ispresentevaluation
+changed Iterator to Iterator<...>
+removed deprecated method JDFMessage.isValid()
+changed Vector to VElement, VString or Vector<...>
+removed deprecated method getNamesVector (use getEnumList instead)
+JDFResourceLink: changed Vector to Vector<...>
+    removed deprecated methods getNamesVector (use getEnumList instead) and usageString
+JDFElement: changed Vector to VString or Vector<...>
+    removed deprecated methods getNamesVector, setTimeStamp
+removed deprecated method getNamesVector
+JDFAttributeMap: changed Vector to VString or Vector<...>
+removed deprecated functions JDFAttributeMap.reduceMap(Vector), JDFAttributeMap.reduceKey(Vector)
+use JDFAttributeMap.reduceMap(Collection) instead
+changed Vector to VString or Vector<...>
+removed deprecated method getString(), use toString() instead (for range lists)
+change Vector -> VElement in JDFDoc
+- fixed JDFQueue.canAccept(): failed when attribute QueueSize was missing
+- fixed JDFQueueSubmissionParams.addEntry():
+    now checks whether the Queue can accept new QueueEntries, not whether there a executable ones
+minor npe fix in JDFNode
+Clarified deprecation status of EnumVersion.Unknown
+Auto files : removed deprecated methods,
+    getter functions return null instead of throwing a JDFException
+Changed class VString
+    from public class VString extends Vector
+    to   public class VString extends Vector<String>
+    and removed unnecessary casts to String
+Changed in datatypes VString to Vector
+remove unnecessary casts to KElement
+removed deprecated methods which raised warnings in the JDFLib :
+JDFElement.getTarget(), JDFElement.setrRefs(..), JDFElement.getVersion()
+and JDFResource.getResourceType()
+Changed class VElement
+    from public class VElement extends Vector
+    to   public class VElement extends Vector<KElement>
+    and removed unnecessary casts to KElement
+removed unused import
+fix for referencing non-resource elements
+mime fixes
+maxversion defaut to default version
+add call to decodebuffer in mime quoted printable decoder
+bambi cosmetics
+
 ___________________________________________________________
 
 
