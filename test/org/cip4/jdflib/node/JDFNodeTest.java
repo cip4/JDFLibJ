@@ -1243,43 +1243,6 @@ public class JDFNodeTest extends JDFTestCaseBase
 
     //////////////////////////////////////////////////////////
     
-    public void testGetPartStatus2() throws Throwable
-
-{
-
-    JDFDoc jdfDoc = JDFDoc.parseFile("C:/Data/Separation.jdf");
-
-    
-
-    JDFAttributeMap amParts = new JDFAttributeMap ();
-
-    
-
-    amParts.put ("RunPage",       "0");
-
-    amParts.put ("Side",          "Front");
-
-    amParts.put ("PartVersion",   "Deu Deu");
-
-    amParts.put ("SheetName",     "S0C");
-
-    amParts.put ("SignatureName", "Sig001");
-
- 
-
-    JDFNode nodeProc = jdfDoc.getJDFRoot ().getJobPart ("ImO2.I", JDFConstants.EMPTYSTRING);
-
-    
-
-    JDFElement.EnumNodeStatus stat = nodeProc.getPartStatus (amParts);
-
-
-
-    assertTrue (stat == null);
-
-}
-
-
     public void testGenericResources()
     {
         JDFDoc d=new JDFDoc("JDF");
