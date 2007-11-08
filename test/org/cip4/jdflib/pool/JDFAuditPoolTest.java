@@ -74,6 +74,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -251,5 +252,19 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
         assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true).elementAt(1),el.elementAt(0));
         
     }    
+    
+    public void testGetAudit()
+    {
+        JDFAudit a1=myAuditPool.addAudit(EnumAuditType.Deleted, null);
+        JDFAudit a2=myAuditPool.addAudit(EnumAuditType.Created, null);
+        JDFAudit a3=myAuditPool.addAudit(EnumAuditType.PhaseTime, null);
+        JDFAudit a4=myAuditPool.addAudit(EnumAuditType.Deleted, null);
+        assertEquals(myAuditPool.getAudit(-1, null, null, null), a4);
+        assertEquals(myAuditPool.getAudit(1, EnumAuditType.Deleted, null, null), a4);
+        assertEquals(myAuditPool.getAudit(-2, null, null, null), a3);
+        assertEquals(myAuditPool.getAudit(-2, EnumAuditType.Deleted, null, null), a1);
+        assertEquals(myAuditPool.getAudit(0, EnumAuditType.Deleted, null, null), a1);
+        assertEquals(myAuditPool.getAudit(-1, EnumAuditType.Created, null, null), a2);
+    }
     
 }

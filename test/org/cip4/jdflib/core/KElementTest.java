@@ -521,6 +521,11 @@ public class KElementTest extends JDFTestCaseBase
         b.copyAttribute("noThere", a, null, null, null);
         assertNull(b.getAttribute("noThere",null,null));
         assertNull(a.getAttribute("noThere", null, null));
+        b.setAttribute("noThereA","b");
+        b.copyAttribute("noThereA", a, null, null, null);
+        assertNull("the existing attribute was removed ",b.getAttribute("noThereA",null,null));
+        assertNull(a.getAttribute("noThereA", null, null));
+        
         a.setAttribute("foo", "a");
         b.copyAttribute("bar", a, "foo", null, null);
         assertEquals(b.getAttribute("bar"),"a");

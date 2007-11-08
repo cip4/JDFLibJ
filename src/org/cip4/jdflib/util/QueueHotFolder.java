@@ -81,12 +81,19 @@ package org.cip4.jdflib.util;
 
 import java.io.File;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFQueueSubmissionParams;
 import org.cip4.jdflib.jmf.JDFReturnQueueEntryParams;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.pool.JDFAuditPool;
+import org.cip4.jdflib.resource.JDFProcessRun;
 
 
 /**
@@ -113,13 +120,17 @@ public class QueueHotFolder implements HotFolderListener
      * @param _storageDir the storage directory wher hot files are moved to
      * @param ext the file extensions that are moved - if null no filtering
      * @param hfListener callback that receives the generated JMF - the location of the stored file will be found in the standard command parameters
-     * @param _queueCommand the jmf template that will be used to generate a new message
+     * @param _queueCommand the jmf template that will be used to generate a new message, null creates an empty template
      */
     public QueueHotFolder(File _hotFolderDir, File _storageDir, String ext, QueueHotFolderListener hfListener, JDFJMF _queueCommand) 
     {
         storageDir=_storageDir;
+        storageDir.mkdirs();
         qhfl=hfListener;
         hf=new HotFolder(_hotFolderDir,ext,this);
+        if(_queueCommand==null)
+            _queueCommand=JDFJMF.createJMF(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.SubmitQueueEntry);
+
         queueCommand=_queueCommand.getCommand(0);
     }
 
@@ -134,24 +145,54 @@ public class QueueHotFolder implements HotFolderListener
     public void hotFile(File hotFile)
     {
         File storedFile=FileUtil.moveFileToDir(hotFile, storageDir);
-        String stringURL;
-        stringURL=UrlUtil.fileToUrl(storedFile, false);
+        if(storedFile==null)
+        {
+            return; // not good
+        }
+        String stringURL=UrlUtil.fileToUrl(storedFile, false);
 
-        JDFDoc doc=new JDFDoc("JMF");
-        final JDFJMF jmfRoot = doc.getJMFRoot();
+        JDFDoc jmfDoc=new JDFDoc("JMF");
+        final JDFJMF jmfRoot = jmfDoc.getJMFRoot();
         JDFCommand newCommand=(JDFCommand) jmfRoot.copyElement(queueCommand, null);
         EnumType cType=newCommand.getEnumType();
+        JDFDoc jdfDoc=JDFDoc.parseFile(hotFile.getPath());
+        
+        JDFNode jdfRoot=jdfDoc==null?null:jdfDoc.getJDFRoot();
+        
         if(EnumType.ReturnQueueEntry.equals(cType))
         {
-            JDFReturnQueueEntryParams rqp=newCommand.getCreateReturnQueueEntryParams(0);
-            rqp.setURL(stringURL);
+            extractReturnParams(stringURL, newCommand, jdfRoot);
         }
         else if(EnumType.SubmitQueueEntry.equals(cType))
         {
-            JDFQueueSubmissionParams sqp=newCommand.getCreateQueueSubmissionParams(0);
-            sqp.setURL(stringURL);
+            extractSubmitParams(stringURL, newCommand, jdfRoot);
         }
         qhfl.submitted(jmfRoot);
+    }
+
+    private void extractSubmitParams(String stringURL, JDFCommand newCommand, JDFNode jdfRoot)
+    {
+        JDFQueueSubmissionParams sqp=newCommand.getCreateQueueSubmissionParams(0);
+        sqp.setURL(stringURL);    
+        JDFAuditPool ap=jdfRoot==null ? null : jdfRoot.getCreateAuditPool();
+        if(ap!=null)
+        {
+            ap.createSubmitProcessRun(null);
+        }        
+    }
+
+    private void extractReturnParams(String stringURL, JDFCommand newCommand, JDFNode jdfRoot)
+    {
+        JDFReturnQueueEntryParams rqp=newCommand.getCreateReturnQueueEntryParams(0);
+        rqp.setURL(stringURL);
+        JDFAuditPool ap=jdfRoot==null ? null : jdfRoot.getCreateAuditPool();
+        if(ap!=null)
+        {
+            JDFProcessRun pr=(JDFProcessRun) ap.getAudit(-1, EnumAuditType.ProcessRun, null, null);
+            String queueEID=pr.getAttribute(AttributeName.QUEUEENTRYID);
+            if(!KElement.isWildCard(queueEID))
+                rqp.setQueueEntryID(queueEID);
+        }
     }
 
 

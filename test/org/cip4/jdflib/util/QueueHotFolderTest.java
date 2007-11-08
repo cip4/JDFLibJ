@@ -104,9 +104,7 @@ public class QueueHotFolderTest extends JDFTestCaseBase
         public void submitted(JDFJMF submissionJMF)
         {
             vJMF.add(submissionJMF);
-
         }
-
     }
     @Override
 	protected void setUp() throws Exception
@@ -122,14 +120,13 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 
     public void testSubmitSingleFile() throws Exception
     {
-        JDFJMF jmf=JDFJMF.createJMF(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.SubmitQueueEntry);
         final MyListener myListener = new MyListener();
-        hf=new QueueHotFolder(theHF,theStorage,null,myListener,jmf);
         final File file = new File(theHF+File.separator+"f1.txt");
         final File stFile = new File(theStorage+File.separator+"f1.txt");
         file.createNewFile();
         assertTrue(file.exists());
         assertFalse(stFile.exists());
+        hf=new QueueHotFolder(theHF,theStorage,null,myListener,null);
         StatusCounter.sleep(3000);
         assertFalse(file.exists());
         assertTrue(stFile.exists());

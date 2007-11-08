@@ -85,7 +85,8 @@ public interface QueueHotFolderListener
      * this interface function is called whenever a new or modified file has stabilized
      * in the hotFolder
      * 
-     * @param hotFile the File that has appeared in the hot folder
+     * @param submissionJMF the JMF (in general a returnqueueentry or submitqueuentry) that references th
+     * jdf file
      */
     public void submitted(JDFJMF submissionJMF);
 

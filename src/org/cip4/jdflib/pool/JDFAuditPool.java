@@ -104,6 +104,7 @@ import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFJobPhase;
 import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.jmf.JDFQueueEntry;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFSpawned;
@@ -769,5 +770,25 @@ public class JDFAuditPool extends JDFPool
         return super.fixVersion(version);
     }
     //////////////////////////////////////////////////////////////////////
+
+    /**
+     * creates a ProcessRun when this is submitted
+     * should be called by the receiving device when it initially receives and enqueues the JDF
+     * @return the newly created processRun
+     */
+    public JDFProcessRun createSubmitProcessRun(JDFQueueEntry qe)
+    {
+        JDFProcessRun pr=(JDFProcessRun) addAudit(EnumAuditType.ProcessRun, null);
+        pr.setSubmissionTime(new JDFDate());
+        if(qe!=null)
+        {
+            pr.setPartMapVector(qe.getPartMapVector());
+            pr.copyAttribute(AttributeName.QUEUEENTRYID, qe, null, null, null);
+            if(qe.hasAttribute(AttributeName.SUBMISSIONTIME))
+                pr.copyAttribute(AttributeName.SUBMISSIONTIME, qe, null, null, null);
+        }
+        return pr;
+         
+    }
 
 }
