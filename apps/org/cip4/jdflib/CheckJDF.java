@@ -80,7 +80,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.util.Enumeration;
 import java.util.Vector;
 import java.util.zip.ZipEntry;
@@ -1913,15 +1912,8 @@ public class CheckJDF
     {
         if(_schemaLocation!=null && _schemaLocation.length()!=0)
         {
-            try
-            {
-                final String fileToUrl = UrlUtil.fileToUrl(_schemaLocation, false);
-                schemaLocation="http://www.CIP4.org/JDFSchema_1_1 " + fileToUrl;
-            }
-            catch (MalformedURLException e)
-            {
-                // nop
-            }
+            final String fileToUrl = UrlUtil.fileToUrl(_schemaLocation, false);
+			schemaLocation="http://www.CIP4.org/JDFSchema_1_1 " + fileToUrl;
         }
     }
 

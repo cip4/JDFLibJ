@@ -79,8 +79,6 @@ package org.cip4.jdflib.util;
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.auto.JDFAutoMsgFilter.EnumFamily;
-import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
@@ -110,7 +108,8 @@ public class QueueHotFolderTest extends JDFTestCaseBase
         }
 
     }
-    protected void setUp() throws Exception
+    @Override
+	protected void setUp() throws Exception
     {
         super.setUp();
         theHF=new File(sm_dirTestDataTemp+File.separator+"QHFTest");

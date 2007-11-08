@@ -153,14 +153,7 @@ public class UrlUtil
         String relPath=getRelativePath(f,baseDir);
         if(relPath==null)
         {
-            try
-            {
-                return fileToUrl(f,true);
-            }
-            catch (IOException e)
-            {
-                return null;
-            }
+            return fileToUrl(f,true);
         }
 
         relPath=StringUtil.replaceChar(relPath,'\\',"/",0);
@@ -416,19 +409,9 @@ public class UrlUtil
      * @param f          the File to parse,
      * @param bEscape128 if true, escape non -ascii chars (URI), if false, don't (IRI)
      * @return the URL string
-     * @throws MalformedURLException 
      */
-    public static String fileToUrl(File f, boolean bEscape128) throws MalformedURLException
+    public static String fileToUrl(File f, boolean bEscape128)
     {
-//        try
-//        {
-//            f=f.getCanonicalFile();
-//        }
-//        catch (IOException e)
-//        {
-//            throw new MalformedURLException();
-//        }
-
         String s=f.getAbsolutePath();
         if(File.separator.equals("\\"))
             s =StringUtil.replaceChar(s,'\\',"/",0);

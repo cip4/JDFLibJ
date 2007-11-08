@@ -81,7 +81,6 @@ package org.cip4.jdflib.resource.process;
 
 import java.io.File;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.util.HashMap;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -145,7 +144,8 @@ public class JDFFileSpec extends JDFAutoFileSpec
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFFileSpec[  --> " + super.toString() + " ]";
     }
@@ -155,9 +155,8 @@ public class JDFFileSpec extends JDFAutoFileSpec
      * 
      * @param f the file to set the URL to
      * @param boolean bEscape128 if true, escape chars>128 (URL) else don't escape (IRL)
-     * @throws MalformedURLException
      */
-    public void setAbsoluteFileURL(File f, boolean bEscape128) throws MalformedURLException
+    public void setAbsoluteFileURL(File f, boolean bEscape128)
     {
         final String s=UrlUtil.fileToUrl(f, bEscape128);
         setMimeURL(s);

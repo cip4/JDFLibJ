@@ -6,7 +6,6 @@
 package org.cip4.jdflib.examples;
 
 import java.io.File;
-import java.net.MalformedURLException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
@@ -75,18 +74,11 @@ public class IterationTest extends JDFTestCaseBase
         inRuli = (JDFRunList) iterNode.addResource(ElementName.RUNLIST,null, EnumUsage.Input,null,null,null,null);
         inRuli.setResStatus(EnumResStatus.Available,true);
         
-        try
-        {
-            iterRuli.addPDF(StringUtil.uncToUrl("C:\\local\\Myinput.pdf",true), 0, 3);
-            iterRuli.setDescriptiveName("save in place - input equals output");
-            inRuli.addPDF(StringUtil.uncToUrl("C:\\local\\Myinput.pdf",true), 0, 3);
-            inRuli.addPDF(StringUtil.uncToUrl("C:\\local\\Image1.pdf",true), 0, 0);
-            inRuli.addPDF(StringUtil.uncToUrl("C:\\local\\Image2.pdf",true), 0, 0);
-        }
-        catch (MalformedURLException x)
-        {
-            fail("bad url");
-        }
+        iterRuli.addPDF(StringUtil.uncToUrl("C:\\local\\Myinput.pdf",true), 0, 3);
+		iterRuli.setDescriptiveName("save in place - input equals output");
+		inRuli.addPDF(StringUtil.uncToUrl("C:\\local\\Myinput.pdf",true), 0, 3);
+		inRuli.addPDF(StringUtil.uncToUrl("C:\\local\\Image1.pdf",true), 0, 0);
+		inRuli.addPDF(StringUtil.uncToUrl("C:\\local\\Image2.pdf",true), 0, 0);
         iterDoc.write2File(getIteration(0),2,false);
      }
     
@@ -155,14 +147,7 @@ public class IterationTest extends JDFTestCaseBase
         JDFResourceAudit ra=iterNode.cloneResourceToModify(iterNode.getLink(iterRuli,null));
         iterRuli=(JDFRunList) ra.getNewLink().getTarget();
         iterRuli.setResStatus(EnumResStatus.Draft,false);
-        try
-        {
-            iterRuli.setFileURL(StringUtil.uncToUrl("C:\\local\\MyUpdatedInOutput.pdf",false));
-        }
-        catch (MalformedURLException e)
-        {
-            fail("malformed URL");
-        }
+        iterRuli.setFileURL(StringUtil.uncToUrl("C:\\local\\MyUpdatedInOutput.pdf",false));
         
         iterNode.setStatus(EnumNodeStatus.Suspended);
         iterNode.setAttribute("StatusDetails",ITERATION_PAUSED);

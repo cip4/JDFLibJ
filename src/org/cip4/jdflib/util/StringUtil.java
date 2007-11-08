@@ -81,7 +81,6 @@ package org.cip4.jdflib.util;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
 import java.util.Iterator;
 import java.util.StringTokenizer;
 import java.util.Vector;
@@ -91,8 +90,6 @@ import java.util.zip.DataFormatException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.enums.EnumUtils;
 import org.apache.commons.lang.enums.ValuedEnum;
-//import org.apache.crimson.util.XmlNames;		// for Java up to 1.4
-import com.sun.imageio.metadata.XmlNames;	    // for Java from 5.0 onward
 import org.cip4.jdflib.cformat.PrintfFormat;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.JDFConstants;
@@ -108,6 +105,8 @@ import org.cip4.jdflib.datatypes.JDFNumberRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.JDFXYPairRange;
 import org.cip4.jdflib.datatypes.JDFXYPairRangeList;
+
+import com.sun.imageio.metadata.XmlNames;
 
 
 
@@ -1514,9 +1513,8 @@ public class StringUtil
      * @param unc The UNC string to parse, may also be used for local characters
      * @param bEscape128 if true, escape non -ascii chars (URI), if false, don't (IRI)
      * @return the URL string
-     * @throws MalformedURLException 
      */
-    public static String uncToUrl(String unc, boolean bEscape128) throws MalformedURLException
+    public static String uncToUrl(String unc, boolean bEscape128)
     {
         return UrlUtil.fileToUrl(new File(unc), bEscape128);
     }
@@ -1901,11 +1899,10 @@ public class StringUtil
      * @param f
      * @param b
      * @return
-     * @throws MalformedURLException 
      * @deprecated use UrlUtil.fileToUrl(f, b);
      */
     @Deprecated
-	public static String fileToUrl(File f, boolean b) throws MalformedURLException
+	public static String fileToUrl(File f, boolean b)
     {
         return UrlUtil.fileToUrl(f, b);
     }

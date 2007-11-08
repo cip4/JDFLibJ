@@ -12,7 +12,6 @@ package org.cip4.jdflib;
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
@@ -106,15 +105,8 @@ public class TestJDF
         JDFColorSpaceConversionParams cscp=(JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input, null, null, null, null);
         JDFFileSpec fs0=cscp.appendFinalTargetDevice();
         JDFRunList rl=(JDFRunList)n.addResource(ElementName.RUNLIST, null, EnumUsage.Input, null, null, null, null);
-        try
-        {
-            fs0.setURL(StringUtil.uncToUrl(sm_dirTestData+File.separator+"test.icc",true));
-            rl.addPDF(StringUtil.uncToUrl(sm_dirTestData+File.separator+"url1.pdf",false), 0, -1);
-        }
-        catch (MalformedURLException x)
-        {
-// nop
-        }
+        fs0.setURL(StringUtil.uncToUrl(sm_dirTestData+File.separator+"test.icc",true));
+		rl.addPDF(StringUtil.uncToUrl(sm_dirTestData+File.separator+"url1.pdf",false), 0, -1);
         Multipart m=MimeUtil.buildMimePackage(d1,doc);
         try
         {

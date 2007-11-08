@@ -77,7 +77,6 @@
 package org.cip4.jdflib.util;
 
 import java.io.File;
-import java.net.MalformedURLException;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -435,15 +434,8 @@ public class StringUtilTest extends JDFTestCaseBase
         String iri="file://myHost/a/c%20הצü%25.txt";
         String uri="file://myHost/a/c%20%c3%a4%c3%b6%c3%bc%25.txt";
 
-        try
-        {
-            assertEquals("uri ok",StringUtil.uncToUrl(unc,true),uri);
-            assertEquals("iri ok",StringUtil.uncToUrl(unc,false),iri);
-        }
-        catch (MalformedURLException e)
-        {
-            assertFalse("malformed URL",true);
-        }
+        assertEquals("uri ok",StringUtil.uncToUrl(unc,true),uri);
+		assertEquals("iri ok",StringUtil.uncToUrl(unc,false),iri);
     }
 
     ///////////////////////////////////////////////////////////////////////////

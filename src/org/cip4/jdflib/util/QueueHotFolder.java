@@ -80,7 +80,6 @@
 package org.cip4.jdflib.util;
 
 import java.io.File;
-import java.net.MalformedURLException;
 
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.jmf.JDFCommand;
@@ -100,10 +99,10 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumType;
  */
 public class QueueHotFolder implements HotFolderListener
 {
-    private File storageDir;
-    private HotFolder hf;
-    private QueueHotFolderListener qhfl;
-    private JDFCommand queueCommand;
+    private final File storageDir;
+    private final HotFolder hf;
+    private final QueueHotFolderListener qhfl;
+    private final JDFCommand queueCommand;
 
 
     /**
@@ -136,14 +135,7 @@ public class QueueHotFolder implements HotFolderListener
     {
         File storedFile=FileUtil.moveFileToDir(hotFile, storageDir);
         String stringURL;
-        try
-        {
-            stringURL=UrlUtil.fileToUrl(storedFile, false);
-        }
-        catch (MalformedURLException x)
-        { 
-            return; // bad file
-        }
+        stringURL=UrlUtil.fileToUrl(storedFile, false);
 
         JDFDoc doc=new JDFDoc("JMF");
         final JDFJMF jmfRoot = doc.getJMFRoot();

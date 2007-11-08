@@ -7978,7 +7978,7 @@ public class JDFNode extends JDFElement
                   
                     final VElement veParts = ni.getPartitionVector (amPartMap, JDFResource.EnumPartUsage.Implicit);  
                           
-                    if ((veParts == null) && veParts.isEmpty ())
+                    if ((veParts == null) || veParts.isEmpty ())
                     {
                         vamPartMaps.add (amPartMap);
                     }
