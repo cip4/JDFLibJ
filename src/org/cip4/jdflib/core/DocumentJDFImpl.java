@@ -75,7 +75,8 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
         return mem - initialMem;
     }
 
-    public Object clone() 
+    @Override
+	public Object clone() 
     {
         DocumentJDFImpl clon;
         try
@@ -196,7 +197,8 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
     /* (non-Javadoc)
      * @see org.apache.xerces.dom.CoreDocumentImpl#createElement(java.lang.String)
      */
-    public Element createElement(String qualifiedName)
+    @Override
+	public Element createElement(String qualifiedName)
     {
         String namespaceURI = null;
         String localPart = KElement.xmlnsLocalName(qualifiedName);
@@ -207,7 +209,8 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
     /* (non-Javadoc)
      * @see org.apache.xerces.dom.CoreDocumentImpl#createElementNS(java.lang.String, java.lang.String)
      */
-    public Element createElementNS(String namespaceURI, String qualifiedName)
+    @Override
+	public Element createElementNS(String namespaceURI, String qualifiedName)
     {
         String localPart = KElement.xmlnsLocalName(qualifiedName);
         return createElementNS(namespaceURI, qualifiedName, localPart);
@@ -216,7 +219,8 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
     /* (non-Javadoc)
      * @see org.apache.xerces.dom.CoreDocumentImpl#createElementNS(String, String, String)
      */
-    public Element createElementNS(String namespaceURI, String qualifiedName, String localPart)
+    @Override
+	public Element createElementNS(String namespaceURI, String qualifiedName, String localPart)
     {
         Constructor constructi;
         Class classOfConstructor = null;
@@ -559,7 +563,8 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
     /**
      * @see java.lang.Object#toString()
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         final Element rootElement = getDocumentElement();
         if(rootElement != null)
@@ -594,7 +599,8 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
      * @see org.apache.xerces.dom.CoreDocumentImpl#importNode(org.w3c.dom.Node, boolean)
      */
     //TODO revisit setting parent nodes when importing
-    public Node importNode(Node importedNode, boolean deep)
+    @Override
+	public Node importNode(Node importedNode, boolean deep)
     {
         setParentNode(importedNode.getParentNode());
         return super.importNode(importedNode, deep);
@@ -1072,7 +1078,6 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
         sm_PackageNames.put(ElementName.PREFLIGHTCONSTRAINT,               "org.cip4.jdflib.resource.process.prepress.JDFPreflightConstraint");
         sm_PackageNames.put(ElementName.PREFLIGHTCONSTRAINTSPOOL,          "org.cip4.jdflib.pool.JDFPreflightConstraintsPool");
         sm_PackageNames.put(ElementName.PREFLIGHTDETAIL,                   "org.cip4.jdflib.resource.process.prepress.JDFPreflightDetail");
-        sm_PackageNames.put(ElementName.PREFLIGHTINFORMATION,              "org.cip4.jdflib.resource.process.JDFPreflightInformation");
         sm_PackageNames.put(ElementName.PREFLIGHTINSTANCE,                 "org.cip4.jdflib.resource.process.prepress.JDFPreflightInstance");
         sm_PackageNames.put(ElementName.PREFLIGHTINSTANCEDETAIL,           "org.cip4.jdflib.resource.process.prepress.JDFPreflightInstanceDetail");
         sm_PackageNames.put(ElementName.PREFLIGHTINVENTORY,                "org.cip4.jdflib.resource.process.prepress.JDFPreflightInventory");
@@ -1202,7 +1207,6 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
         sm_PackageNames.put(ElementName.SPINEPREPARATIONPARAMS,            "org.cip4.jdflib.resource.JDFSpinePreparationParams");
         sm_PackageNames.put(ElementName.SPINESANDING,                      "org.cip4.jdflib.span.JDFOptionSpan");
         sm_PackageNames.put(ElementName.SPINESHREDDING,                    "org.cip4.jdflib.span.JDFOptionSpan");
-        sm_PackageNames.put(ElementName.SPINETAPING,                       "org.cip4.jdflib.resource.process.postpress.JDFSpineTaping");
         sm_PackageNames.put(ElementName.SPINETAPINGPARAMS,                 "org.cip4.jdflib.resource.JDFSpineTapingParams");
         sm_PackageNames.put(ElementName.STACKINGPARAMS,                    "org.cip4.jdflib.resource.JDFStackingParams");
         sm_PackageNames.put(ElementName.STATION,                           "org.cip4.jdflib.resource.process.JDFStation");
@@ -1220,7 +1224,6 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
         sm_PackageNames.put(ElementName.STRINGSTATE,                       "org.cip4.jdflib.resource.devicecapability.JDFStringState");
         sm_PackageNames.put(ElementName.STRIPBINDING,                      "org.cip4.jdflib.resource.JDFStripBinding");
         sm_PackageNames.put(ElementName.STRIPBINDINGPARAMS,                "org.cip4.jdflib.resource.process.postpress.JDFStripBindingParams");
-        sm_PackageNames.put(ElementName.STRIPBINDINGPARAMSUPDATE,          "org.cip4.jdflib.resource.JDFStripBindingParamsUpdate");
         sm_PackageNames.put(ElementName.STRIPCELLPARAMS,                   "org.cip4.jdflib.resource.process.JDFStripCellParams");
         sm_PackageNames.put(ElementName.STRIPMARK,                         "org.cip4.jdflib.resource.process.JDFStripMark");
         sm_PackageNames.put(ElementName.STRIPMATERIAL,                     "org.cip4.jdflib.span.JDFSpanStripMaterial");
@@ -1238,7 +1241,7 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
         sm_PackageNames.put(ElementName.TABS,                              "org.cip4.jdflib.resource.JDFTabs");
         sm_PackageNames.put(ElementName.TAPE,                              "org.cip4.jdflib.resource.JDFTape");
         sm_PackageNames.put(ElementName.TAPEBINDING,                       "org.cip4.jdflib.span.JDFOptionSpan");
-        sm_PackageNames.put(ElementName.TAPECOLOR,                         "org.cip4.jdflib.span.JDFSpanTapeColor");
+        sm_PackageNames.put(ElementName.TAPECOLOR,                         "org.cip4.jdflib.span.JDFSpanNamedColor");
         sm_PackageNames.put(ElementName.TECHNOLOGY,                        "org.cip4.jdflib.span.JDFNameSpan");
         sm_PackageNames.put(ElementName.TEETHPERDIMENSION,                 "org.cip4.jdflib.span.JDFNumberSpan");
         sm_PackageNames.put(ElementName.TEMPERATURE,                       "org.cip4.jdflib.span.JDFSpanTemperature");
@@ -1312,7 +1315,8 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
         return  (XMLDocUserData) getUserData();
     }
 
-    public Node removeChild(Node arg0) throws DOMException
+    @Override
+	public Node removeChild(Node arg0) throws DOMException
     {
         final XMLDocUserData ud=getXMLDocUserData();
         if(ud!=null)
@@ -1321,7 +1325,8 @@ public class DocumentJDFImpl extends DocumentImpl implements Serializable
         return super.removeChild(arg0);
     }
     
-    public Node replaceChild(Node arg0, Node arg1) throws DOMException
+    @Override
+	public Node replaceChild(Node arg0, Node arg1) throws DOMException
     {
         final XMLDocUserData ud=getXMLDocUserData();
         if(ud!=null)
