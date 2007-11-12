@@ -202,7 +202,7 @@ public class JDFResourceTest extends JDFTestCaseBase
     {
         JDFAttributeMap m1=new JDFAttributeMap("PartVersion","DE EN");
         m1.put("Run","r2");
-        JDFAttributeMap m2=new JDFAttributeMap("PartVersion","DE");
+        JDFAttributeMap m2=new JDFAttributeMap("PartVersion","DE EN");
         assertTrue(JDFPart.overlapPartMap(m1,m2));
         m2.put("Run","r2");
         assertTrue(JDFPart.overlapPartMap(m1,m2));
@@ -251,11 +251,11 @@ public class JDFResourceTest extends JDFTestCaseBase
      */
     public void testMatchesPart()
     {
-        assertTrue(JDFPart.matchesPart("PartVersion","DE EN FR","DE EN"));
+        assertTrue(JDFPart.matchesPart("PartVersion","DE EN FR","DE EN FR"));
         assertTrue(JDFPart.matchesPart("RunIndex","1 ~ 4","2 3"));
         assertTrue(JDFPart.matchesPart("RunIndex","1 ~ 3 5 ~ 6","3 5"));
         assertFalse(JDFPart.matchesPart("RunIndex","1 ~ 3 6 ~ 8","3 ~ 6"));
-        assertTrue(JDFPart.matchesPart("PartVersion","DE EN","DE"));
+        assertTrue(JDFPart.matchesPart("PartVersion","DE EN","DE EN"));
         assertFalse(JDFPart.matchesPart("PartVersion","DE EN","DEU"));
         assertTrue(JDFPart.matchesPart("Run","R1","R1"));
         assertFalse(JDFPart.matchesPart("Run","R1 R2","R1"));
@@ -1011,7 +1011,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 
         // tests for partition list
         // DE from DE FR
-        assertEquals(xm.getPartition(new JDFAttributeMap(EnumPartIDKey.PartVersion.getName(),"DE"),null),xmp);
+        assertEquals(xm.getPartition(new JDFAttributeMap(EnumPartIDKey.PartVersion.getName(),"DE FR"),null),xmp);
         assertNull(xm.getPartition(new JDFAttributeMap(EnumPartIDKey.PartVersion.getName(),"GR"),null));
 
 //      get 2 from 1~3

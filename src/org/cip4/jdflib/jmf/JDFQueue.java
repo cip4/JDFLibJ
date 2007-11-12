@@ -299,8 +299,23 @@ public class JDFQueue extends JDFAutoQueue
      * the status of the QueueEntry MUST be waiting  
      * 
      * @return the executable queueEntry, null if none is available
+     * @deprecated use getNextExecutableQueueEntry(null);
      */
     public synchronized JDFQueueEntry getNextExecutableQueueEntry()
+    {
+        return getNextExecutableQueueEntry(null);
+    }
+    ///////////////////////////////////////////////////////////////////////
+    /**
+     * Get the next QueueEntry to be processed
+     * the first entry with highest priority gets selected
+     * if deviceID is specified, the entries with an explicit non matching deviceID are ignored
+     * the status of the QueueEntry MUST be waiting  
+     * @param deviceID the deviceID of the executing device - if null any deviceID will match
+     * 
+     * @return the executable queueEntry, null if none is available
+     */
+    public synchronized JDFQueueEntry getNextExecutableQueueEntry(String deviceID)
     {
         if(!canExecute())
             return null;
@@ -309,14 +324,17 @@ public class JDFQueue extends JDFAutoQueue
         JDFQueueEntry theEntry=null;
         for(int i=0;i<siz;i++)
         {
-            JDFQueueEntry qe=(JDFQueueEntry)v.elementAt(i);
-            if(theEntry==null)
+            final JDFQueueEntry qe=(JDFQueueEntry)v.elementAt(i);
+            if(deviceID==null || isWildCard(qe.getDeviceID()) || deviceID.equals(qe.getDeviceID()))
             {
-                theEntry=qe;
-            }
-            else if(qe.getPriority()>theEntry.getPriority())
-            {
-                theEntry=qe;
+                if(theEntry==null)
+                {
+                    theEntry=qe;
+                }
+                else if(qe.getPriority()>theEntry.getPriority())
+                {
+                    theEntry=qe;
+                }
             }
         }
         return theEntry; 

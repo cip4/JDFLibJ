@@ -190,8 +190,9 @@ public class JDFPart extends JDFAutoPart
             return resourceValue.equals(linkValue);
         boolean b;
 
-        if(EnumPartIDKey.PartVersion.equals(eKey)
-                || EnumPartIDKey.DocTags.equals(eKey)
+        if(
+                //EnumPartIDKey.PartVersion.equals(eKey)
+                 EnumPartIDKey.DocTags.equals(eKey)
                 || EnumPartIDKey.ItemNames.equals(eKey)
                 || EnumPartIDKey.PageTags.equals(eKey)
                 || EnumPartIDKey.RunTags.equals(eKey)

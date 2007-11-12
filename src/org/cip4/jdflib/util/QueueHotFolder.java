@@ -120,12 +120,12 @@ public class QueueHotFolder implements HotFolderListener
      * @param _storageDir the storage directory wher hot files are moved to
      * @param ext the file extensions that are moved - if null no filtering
      * @param hfListener callback that receives the generated JMF - the location of the stored file will be found in the standard command parameters
-     * @param _queueCommand the jmf template that will be used to generate a new message, null creates an empty template
+     * @param _queueCommand the jmf template that will be used to generate a new message, null creates an empty SubmitQueueEntry template
      */
     public QueueHotFolder(File _hotFolderDir, File _storageDir, String ext, QueueHotFolderListener hfListener, JDFJMF _queueCommand) 
     {
         storageDir=_storageDir;
-        storageDir.mkdirs();
+        storageDir.mkdirs(); // just in case
         qhfl=hfListener;
         hf=new HotFolder(_hotFolderDir,ext,this);
         if(_queueCommand==null)

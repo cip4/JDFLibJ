@@ -154,7 +154,7 @@ public class QueueTest extends TestCase
         // now also zapp some...
         for(int j=0;j<100;j++)
         {
-            JDFQueueEntry qex=q.getNextExecutableQueueEntry();
+            JDFQueueEntry qex=q.getNextExecutableQueueEntry(null);
             if(qex!=null)
             {
                 qex.setQueueEntryStatus(EnumQueueEntryStatus.Running);
@@ -206,12 +206,21 @@ public class QueueTest extends TestCase
 
     public void testGetNextExecutableQueueEntry()
     {
-        assertNull(q.getNextExecutableQueueEntry());
+        assertNull(q.getNextExecutableQueueEntry(null));
         q.setMaxRunningEntries(2);
-        assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe2"));
+        assertEquals(q.getNextExecutableQueueEntry(null), q.getQueueEntry("qe2"));
         q.setQueueStatus(EnumQueueStatus.Held);
-        assertNull(q.getNextExecutableQueueEntry());
+        assertNull(q.getNextExecutableQueueEntry(null));
         q.setQueueStatus(EnumQueueStatus.Waiting);
+        assertEquals(q.getNextExecutableQueueEntry(null), q.getQueueEntry("qe2"));
+        q.getQueueEntry("qe4").setQueueEntryStatus(EnumQueueEntryStatus.Waiting);
+        q.getQueueEntry("qe2").setDeviceID("d1");
+        assertEquals(q.getNextExecutableQueueEntry(null), q.getQueueEntry("qe2"));
+        assertEquals(q.getNextExecutableQueueEntry("d1"), q.getQueueEntry("qe2"));
+        q.getQueueEntry("qe4").setQueueEntryStatus(EnumQueueEntryStatus.Waiting);
+        assertEquals(q.getNextExecutableQueueEntry("d2"), q.getQueueEntry("qe1"));
+        q.getQueueEntry("qe1").setDeviceID("d1");
+        assertEquals(q.getNextExecutableQueueEntry("d2"), q.getQueueEntry("qe4"));
     }
 
 /////////////////////////////////////////////////////////////////////////////
