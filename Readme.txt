@@ -4,6 +4,9 @@ ___________________________________________________________
 
 Label JDFLIBJ_2.1.3BLD480 (0x.11.2007)
 
+DocumentJDFImpl: corrected the class of TAPECOLOR to "org.cip4.jdflib.span.JDFSpanNamedColor"
+    removed three superfluous classes (PreflightInformation, SpineTaping, StripBindingParamsUpdate)
+removed warnings for not thrown MalformedURLException in UrlUtil.fileToURL
 namespace handling in parser and doc
 added hotfolder implementations
 namespace fixes in test files
