@@ -90,7 +90,9 @@ import org.w3c.dom.Node;
  */
 abstract public class JDFNodeTerm extends JDFTerm
 {
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[19];
+	private static final long serialVersionUID = -4750863965825892402L;
+
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[19];
     static
     {
         elemInfoTable[0] = new ElemInfoTable(ElementName.AND, 0x33333311);
@@ -113,7 +115,8 @@ abstract public class JDFNodeTerm extends JDFTerm
         elemInfoTable[17] = new ElemInfoTable(ElementName.XYPAIREVALUATION, 0x33333311);
         elemInfoTable[18] = new ElemInfoTable(ElementName.TESTREF, 0x33333311);
     }
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
     }
@@ -191,7 +194,8 @@ abstract public class JDFNodeTerm extends JDFTerm
      * check whether the boolean logic defined by a Test and a test's subelements
      * make sense in the context of the tested element jdf
      */
-    public boolean fitsContext(KElement testElement)
+    @Override
+	public boolean fitsContext(KElement testElement)
     {
         // we only want the leaves as of now
         if(testElement instanceof JDFResource)
@@ -216,7 +220,8 @@ abstract public class JDFNodeTerm extends JDFTerm
      * @deprecated use getTermVector(null)
      * @return
      */
-    public VElement getTermVector()
+    @Deprecated
+	public VElement getTermVector()
     {
         return getTermVector(null);
     }
@@ -250,7 +255,8 @@ abstract public class JDFNodeTerm extends JDFTerm
      * @return JDFTerm - the iSkip'th Term
      * @deprecated
      */
-    public JDFTerm getTerm(int iSkip)
+    @Deprecated
+	public JDFTerm getTerm(int iSkip)
     {
         return getTerm(null,iSkip);
      }

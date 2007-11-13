@@ -107,13 +107,16 @@ import org.cip4.jdflib.util.StringUtil;
 
 public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 {
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	private static final long serialVersionUID = -1231679460732331896L;
+	
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
     static 
     {
         atrInfoTable[0]  = new AtrInfoTable(AttributeName.RREF, 0x33333333, AttributeInfo.EnumAttributeType.IDREF, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo() 
+    @Override
+	protected AttributeInfo getTheAttributeInfo() 
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -125,7 +128,8 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
         elemInfoTable[0] = new ElemInfoTable(ElementName.BASICPREFLIGHTTEST, 0x33333333);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
     }
@@ -176,7 +180,8 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
      * toString
      * @return String
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "JDFEvaluation[ --> " + super.toString() + " ]";
     }
@@ -190,7 +195,8 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
      * @return boolean - true, if 'm' has a key specified by BasicPreflightTest/@Name 
      * and fitsValue(value) returns true
      */
-    public final boolean fitsMap(JDFAttributeMap m)
+    @Override
+	public final boolean fitsMap(JDFAttributeMap m)
     {
         final JDFBasicPreflightTest basicPreflightTest = getBasicPreflightTest();
         if(basicPreflightTest==null)
@@ -213,7 +219,8 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
      * @param jdf jdf node to test
      * @return boolean - true, if 'jdf' can be accepted by the Device
      */
-    public boolean fitsJDF(KElement jdf, KElement reportRoot)
+    @Override
+	public boolean fitsJDF(KElement jdf, KElement reportRoot)
     {
         String xPath = getEvalXPath(jdf);
         if(reportRoot!=null)
@@ -232,7 +239,8 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
         return b;
     }
     
-    public boolean fitsContext(KElement jdf)
+    @Override
+	public boolean fitsContext(KElement jdf)
     {
         return getEvalXPath(jdf)!=null;
     }
@@ -547,7 +555,8 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
     * @return JDFBasicPreflightTest: the matching element
     * @deprecated use getCreateBasicPreflightTest()
     */
-   public JDFBasicPreflightTest getCreateBasicPreflightTest(int iSkip)
+   @Deprecated
+public JDFBasicPreflightTest getCreateBasicPreflightTest(int iSkip)
    {
        return (JDFBasicPreflightTest)
        getCreateElement(ElementName.BASICPREFLIGHTTEST, JDFConstants.EMPTYSTRING, iSkip);
@@ -570,7 +579,8 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
      * @return JDFBasicPreflightTest: the matching element or null
      * @deprecated use getBasicPreflightTest()
      */
-    public JDFBasicPreflightTest getBasicPreflightTest(int iSkip)
+    @Deprecated
+	public JDFBasicPreflightTest getBasicPreflightTest(int iSkip)
     {
         return (JDFBasicPreflightTest)getElement(ElementName.BASICPREFLIGHTTEST, JDFConstants.EMPTYSTRING, iSkip);
     }
@@ -580,7 +590,8 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
      * @return JDFBasicPreflightTest: newly created BasicPreflightTest element
      * @deprecated use appendBasicPreflightTest(name)
      */
-    public JDFBasicPreflightTest appendBasicPreflightTest()
+    @Deprecated
+	public JDFBasicPreflightTest appendBasicPreflightTest()
     {
         return (JDFBasicPreflightTest)appendElementN(ElementName.BASICPREFLIGHTTEST, 1,null);
     }
