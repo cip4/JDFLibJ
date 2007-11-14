@@ -289,34 +289,42 @@ public class FileUtil
      */
     public static boolean moveFile(File fromFile, File toFile)
     {
-        boolean b=false;
+        if(fromFile.equals(toFile))
+            return true;
+        if(fromFile.renameTo(toFile))
+            return true;
+        if(!copyFile(fromFile, toFile))
+            return false;
+        return fromFile.delete();
+
+    }
+    
+    /**
+     * copy a file 
+     * @param fromFile the source File
+     * @param toFile the destination File
+     * @return true if success
+     * @throws IOException
+     * @throws FileNotFoundException
+     */
+    public static boolean copyFile(File fromFile, File toFile) 
+    {
+        if(toFile.exists())
+            toFile.delete();
         try
         {
-
-            if(fromFile.equals(toFile))
-                return true;
-
-            b=fromFile.renameTo(toFile);
-            if(b)
-                return b;
-            if(toFile.exists())
-                toFile.delete();
-            b=toFile.createNewFile();
-            if(!b)
-                return b;
+            if(!toFile.createNewFile())
+                return false;
             FileOutputStream fos=new FileOutputStream(toFile);
             FileInputStream fis=new FileInputStream(fromFile);
             IOUtils.copy(fis, fos);
             fis.close();
             fos.close();
-            fromFile.delete();
-            b=true;
-            
-        }
+       }
         catch (IOException x)
         {
-            b=false;
-        }
-        return b;
+            return false;
+        }        
+        return true;
     }
 }

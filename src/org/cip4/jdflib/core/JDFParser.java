@@ -478,4 +478,19 @@ public class JDFParser extends DOMParser
         }        
     }
 
+    /** (non-Javadoc)
+     * reset all internal variables to a reasonable default
+     * @see org.apache.xerces.parsers.AbstractDOMParser#reset()
+     */
+    public void cleanup()  
+    {
+        bKElementOnly=false;
+        lastExcept=null;
+        ignoreNSDefault=false;
+        m_eraseEmpty=true;
+        m_ErrorHandler=null;
+        m_SchemaLocation=null;
+        m_DocumentClass=DocumentJDFImpl.class.getName();
+    }
+
 }

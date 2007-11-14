@@ -5107,7 +5107,6 @@ public class KElement extends ElementNSImpl
         if (pos != -1) // have another element
         {
             final String elmName = newPath.substring(0, pos);
-            KElement eRet=null;
             final VElement ve = getChildElementVector_KElement(elmName, null, map, true,0);
             if(ve==null || ve.size()<=iSkip) {
 				return null;
@@ -5116,12 +5115,13 @@ public class KElement extends ElementNSImpl
             int iLast=bExplicitSkip ? iSkip+1 : ve.size();
             for(int i=iFirst;i<iLast;i++) // loop in case multiple elements contain the same attribute
             {
+                VElement eRet=null;
                 KElement ee=ve.item(i);
                 if (ee != null) {
-					eRet= ee.getXPathElement(newPath.substring(pos + 1));
+					eRet= ee.getXPathElementVector(newPath.substring(pos + 1),maxSize);
 				}
                 if(eRet!=null) {
-					vRet.add(eRet);
+					vRet.addAll(eRet);
 				}
              }
             return vRet.size()>0 ? vRet : null;

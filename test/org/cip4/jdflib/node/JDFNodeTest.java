@@ -1036,7 +1036,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         node.setType(EnumType.ProcessGroup);
         assertTrue(node.isTypesNode());
         node.addJDFNode("foo");
-        assertFalse(node.isTypesNode());
+        assertTrue(node.isTypesNode());
 
     }
 

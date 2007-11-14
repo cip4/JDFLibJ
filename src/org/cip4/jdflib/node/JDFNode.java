@@ -4404,7 +4404,9 @@ public class JDFNode extends JDFElement
     public boolean isTypesNode()
     {
         final EnumType type2 = getEnumType();
-        return EnumType.ProcessGroup.equals(type2) && !hasChildElement(ElementName.JDF, null) || EnumType.Combined.equals(type2);
+       //return EnumType.ProcessGroup.equals(type2)  && !hasChildElement(ElementName.JDF, null) || EnumType.Combined.equals(type2);
+        return EnumType.ProcessGroup.equals(type2) || EnumType.Combined.equals(type2);
+         
     }
 
     /**

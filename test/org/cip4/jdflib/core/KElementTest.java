@@ -942,7 +942,12 @@ public class KElementTest extends JDFTestCaseBase
         assertEquals(root.getXPathElementVector("//d", 0),root.getXPathElementVector("//c/d", 0));
         assertTrue(root.getXPathElementVector("//*", 0).contains(va.elementAt(0)));
         assertTrue(root.getXPathElementVector("//*", 0).contains(root));
+        root.getCreateXPathElement("./c/d[2]");
+        assertEquals(2,root.getXPathElementVector("//d", 0).size());
+        assertEquals(2,root.getXPathElementVector("/a/c/d", 0).size());
+        assertEquals("d",root.getXPathElementVector("/a/c/d", 0).elementAt(0).getNodeName());
     }
+    
     ///////////////////////////////////////////////////////////////////
 
     public void testGetXPathElement()

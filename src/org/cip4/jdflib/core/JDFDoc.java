@@ -79,12 +79,17 @@
 package org.cip4.jdflib.core;
 
 
+import java.io.InputStream;
+
+import javax.mail.BodyPart;
+
 import org.apache.xerces.dom.DocumentImpl;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.MimeUtil;
+import org.cip4.jdflib.util.UrlUtil;
 import org.w3c.dom.Document;
 
 /**
@@ -323,10 +328,22 @@ public class JDFDoc extends XMLDoc
     public static JDFDoc parseFile(String fileName)
     {
         JDFParser p=new JDFParser();
-        JDFDoc d=null;
-        d= p.parseFile(fileName);
-        return d;
-    }
+        return p.parseFile(fileName);
+     }
+    
+    /**
+     * parse a given url
+     * @param url the url to search
+     * @param bp the bodypart that the CID url is located in
+     * @return the parsed JDFDoc
+     */
+    public static JDFDoc parseURL(String url, BodyPart bp)
+    {
+        JDFParser p=new JDFParser();
+        InputStream inStream=UrlUtil.getURLInputStream(url, bp);
+        return p.parseStream(inStream);
+     }
+
     /**
      * initialize a new root of strDocType in the document
      * called by constructor XMLDoc(String strDocType)

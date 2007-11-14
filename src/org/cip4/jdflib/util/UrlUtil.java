@@ -436,7 +436,7 @@ public class UrlUtil
     /**
      * Retrieve a file for a relative or absolute file url
      * @param urlString the file url to retrieve a file for
-     * @return
+     * @return the file located at url
      */
     public static File urlToFile(String urlString)
     {

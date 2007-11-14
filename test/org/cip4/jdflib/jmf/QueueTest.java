@@ -132,7 +132,7 @@ public class QueueTest extends TestCase
         assertNull("date",d);
         qe.setEndTime(null);
         d=qe.getEndTime();
-        assertEquals("date",d.getTimeInMillis(),new JDFDate().getTimeInMillis(),1000);        
+        assertEquals("date",d.getTimeInMillis(),new JDFDate().getTimeInMillis(),10000);        
     }
 
     public void testEndTime()
