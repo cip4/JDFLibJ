@@ -4,6 +4,10 @@ ___________________________________________________________
 
 Label JDFLIBJ_2.1.3BLD480 (0x.11.2007)
 
+JDFParser: add cleanup method to enable reuse
+JDFDoc: add parseURL
+fix getXPathElementVector
+PartVersion now handled as a simple string when applying partitions
 DocumentJDFImpl: corrected the class of TAPECOLOR to "org.cip4.jdflib.span.JDFSpanNamedColor"
     removed three superfluous classes (PreflightInformation, SpineTaping, StripBindingParamsUpdate)
 removed warnings for not thrown MalformedURLException in UrlUtil.fileToURL
