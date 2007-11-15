@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -67,102 +67,48 @@
  *
  *
  */
-/**
- *
- * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- *
- * JDFContentObject.java
- *
- * Last changes
- *
- * 2002-07-02 JG init() removed SetType()
- *
- */
-package org.cip4.jdflib.resource.process;
+package org.cip4.jdflib.resource;
 
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoContentObject;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.datatypes.JDFXYPair;
-import org.cip4.jdflib.ifaces.IPlacedObject;
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.JDFDoc;
 
 
-public class JDFContentObject extends JDFAutoContentObject implements IPlacedObject
+public class JDFDeviceListTest extends JDFTestCaseBase
 {
-    private static final long serialVersionUID = 1L;
-
+    private JDFDeviceList d;
     /**
-     * Constructor for JDFContentObject
-     * @param ownerDocument
-     * @param qualifiedName
+     * @return
      */
-    public JDFContentObject(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
+    public void testgetDeviceInfo() throws Exception
     {
-        super(myOwnerDocument, qualifiedName);
+        assertNull(d.getDeviceInfo("abc"));
+        assertNotNull(d.getDeviceInfo("d1"));
+        assertNotNull(d.getDeviceInfo("d2"));
+        assertNull(d.getDeviceInfo("d3"));
+    }
+    /**
+     * @return
+     */
+    public void testgetCreateDeviceInfo() throws Exception
+    {
+        assertNotNull(d.getCreateDeviceInfo("d3"));
+        assertEquals(d.getCreateDeviceInfo("d3").getDeviceID(),"d3");
+    }
+    /**
+     * 
+     */
+    @Override
+    public void setUp() throws Exception
+    {
+        d=(JDFDeviceList) new JDFDoc("DeviceList").getRoot();
+        d.appendDeviceInfo().appendDevice().setDeviceID("d1");
+        d.appendDeviceInfo().setDeviceID("d2");
     }
 
-
-    /**
-     * Constructor for JDFContentObject
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     */
-    public JDFContentObject(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
-
-    /**
-     * Constructor for JDFContentObject
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     */
-    public JDFContentObject(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
+    @Override
     public String toString()
     {
-        return "JDFContentObject[  --> " + super.toString() + " ]";
+        return d.toString();
     }
-
-    /**
-     * set attribute Ord
-     * 
-     * @param int value: the value to set the attribute to
-     * @throws JDFException with stack trace if value < 0
-     */
-    public void setOrd(int value)
-    {
-        setAttribute(AttributeName.ORD, value, null);
-    }
-
-    /* (non-Javadoc)
-     * @see org.cip4.jdflib.ifaces.IPlacedObject#setTrimCTM(double, double)
-     */
-    public void setTrimSize(double x, double y)
-    {
-        setTrimSize(new JDFXYPair(x,y));        
-    }
-
+    /////////////////////////////////////////////////////////////////////////
 }

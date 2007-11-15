@@ -157,6 +157,7 @@ import org.cip4.jdflib.pool.JDFResourceLinkPoolTest;
 import org.cip4.jdflib.pool.JDFResourcePoolTest;
 import org.cip4.jdflib.resource.JDFAssemblySectionTest;
 import org.cip4.jdflib.resource.JDFAutoResourceTest;
+import org.cip4.jdflib.resource.JDFDeviceListTest;
 import org.cip4.jdflib.resource.JDFFilespecTest;
 import org.cip4.jdflib.resource.JDFLayerListTest;
 import org.cip4.jdflib.resource.JDFLayoutTest;
@@ -321,6 +322,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(ProcessRunTest.class);
         suite.addTestSuite(PhaseTimeTest.class);
         suite.addTestSuite(JDFAutoResourceTest.class);
+        suite.addTestSuite(JDFDeviceListTest.class);
         suite.addTestSuite(JDFFilespecTest.class);
         suite.addTestSuite(JDFAssemblySectionTest.class);
         suite.addTestSuite(JDFLayerListTest.class);

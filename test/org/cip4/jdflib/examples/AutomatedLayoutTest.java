@@ -505,6 +505,142 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
         doc.write2File(sm_dirTestDataTemp+"AutomatedStrippingCutStack.jdf", 2, false);         
     }
 
+    /**
+     * tests jdf 1.4 negative ords
+     * 
+     * @throws Exception
+     */
+    public void testAutomatedBooklet1() throws Exception
+    {
+        n.setXMLComment("This is a simple Automated Booklet using negative ords\n"
+                +"New Attribute @OrdsConsumed limits the number of ords consumed by an automated Layout\n"
+                +"Negative Ord values are assumed to flow backwards\n"
+                +"MaxOrd is not specified and must be calculated by counting the number of different ord values\n"
+                +"If we want to keep maxord, it would have to be replaced by an xypair that specifies hom many are consumed from back and from front\n"
+                +"If the number of pages is not mod 4, blank pages are retained at the back of the layout");
+    
+        setUpAutomatedInputRunList();
+        rl.setDescriptiveName("This is any RunList...");
+        lo=(JDFLayout) n.appendMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null);
+        lo.setResStatus(EnumResStatus.Available, true);
+       
+        
+        JDFLayout sheet=(JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "TheSheet");
+        sheet.setAutomated(true);
+        sheet.setAttribute("OrdsConsumed", "0 -1");
+        JDFLayout sheetFront=(JDFLayout) sheet.addPartition(EnumPartIDKey.Side, EnumSide.Front);
+        JDFContentObject co=sheetFront.appendContentObject();
+        co.setCTM(new JDFMatrix(1,0,0,1,0,0));
+        co.setOrd(0);
+        co.setDescriptiveName("Front left Page 0,2,4...");
+    
+        co=sheetFront.appendContentObject();
+        co.setCTM(new JDFMatrix(1,0,0,1,8.5*72,0));
+        co.setOrd(-1);
+        co.setDescriptiveName("Back right page after folding -1 -3 -5 ... (Front sheet)");
+    
+        JDFLayout sheetBack=(JDFLayout) sheet.addPartition(EnumPartIDKey.Side, EnumSide.Back);
+        co=sheetBack.appendContentObject();
+        co.setCTM(new JDFMatrix(1,0,0,1,8.5*72,0));
+        co.setOrd(1);
+        co.setDescriptiveName("Back left Page 1,3,5");
+    
+        co=sheetBack.appendContentObject();
+        co.setCTM(new JDFMatrix(1,0,0,1,0,0));
+        co.setOrd(-2);
+        co.setDescriptiveName("Front Right Page Page -2 -4 -6");
+    
+        doc.write2File(sm_dirTestDataTemp+"SimpleAutomatedBooklet.jdf", 2, false);
+         
+    }
+    /**
+     * tests jdf 1.4 negative ords
+     * 
+     * @throws Exception
+     */
+    public void testAutomatedBookletWithCover() throws Exception
+    {
+        for(int i=0;i<2;i++)
+        {
+            setUp();
+        n.setXMLComment("This is a simple Automated Booklet using negative ords and special handling oft the cover\n"
+                +"New Attribute @OrdsConsumed limits the number of ords consumed by an automated Layout\n"
+                +"Negative Ord values are assumed to flow backwards\n"
+                +"MaxOrd is not specified and must be calculated by counting the number of different ord values\n"
+                +"If we want to keep maxord, it would have to be replaced by an xypair that specifies hom many are consumed from back and from front\n"
+                +"If the number of pages is not mod 4, blank pages are retained at the back of the layout");
+    
+        setUpAutomatedInputRunList();
+        rl.setDescriptiveName("This is any RunList...");
+        lo=(JDFLayout) n.appendMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null);
+        lo.setResStatus(EnumResStatus.Available, true);
+       
+        JDFLayout cover=(JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "TheCover");
+        cover.setAutomated(false);
+        JDFLayout coverFront=(JDFLayout) cover.addPartition(EnumPartIDKey.Side, EnumSide.Front);
+        JDFContentObject co=coverFront.appendContentObject();
+        co.setCTM(new JDFMatrix(1,0,0,1,0,0));
+        co.setOrd(0);
+        JDFLayout sheet=(JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "TheSheet");
+        sheet.setAutomated(true);
+ 
+        if(i==0)
+        {
+            cover.setXMLComment("the cover consumes pages 0 and -1 and is not printed on the inside=back");
+            co.setDescriptiveName("Front left cover Page 0...");
+            co=coverFront.appendContentObject();
+            co.setCTM(new JDFMatrix(1,0,0,1,8.5*72,0));
+            co.setOrd(-1);
+            co.setDescriptiveName("Back right cover page after folding -1 ");
+
+            sheet.setAttribute("OrdsConsumed", "1 -2");
+       }
+        else if(i==1)
+        {
+            cover.setXMLComment("the cover consumes page 0 as a wraparound and is not printed on the inside=back");
+            co.setDescriptiveName("wraparound cover Page 0");
+            sheet.setAttribute("OrdsConsumed", "1 -1");
+        }
+     
+    
+        
+          sheet.setXMLComment("this sheet consumes the second through "+(-2+i)+" pages\nAutomated ords are based on the REDUCED list defined by OrdsConsumed\n"+
+                "In this case ord=0 actually starts at ord(RunList)=1 and ord -1 actually starts at ord(RunList -2)\n"+
+                "The advantage is that the offsets for the loop are specified in OrdsConsumed while the loop increments are specified in the ords:\n"+
+                "Ord RL (++) = OrdsConsumed_x + Ord + n*maxOrd_x\n"+
+                "Ord RL (--) = 1+ OrdsConsumed_y + Ord - n*maxOrd_y (the first 1 in the equation is from the fact that -1+-1 is actually still -1)\n"
+                );
+        JDFLayout sheetFront=(JDFLayout) sheet.addPartition(EnumPartIDKey.Side, EnumSide.Front);
+        co=sheetFront.appendContentObject();
+        co.setCTM(new JDFMatrix(1,0,0,1,0,0));
+        co.setOrd(0);
+        co.setDescriptiveName("Front left Pages ");
+    
+        co=sheetFront.appendContentObject();
+        co.setCTM(new JDFMatrix(1,0,0,1,8.5*72,0));
+        co.setOrd(-1);
+        co.setDescriptiveName("Back right pages after folding ... (Front sheet)");
+    
+        JDFLayout sheetBack=(JDFLayout) sheet.addPartition(EnumPartIDKey.Side, EnumSide.Back);
+        co=sheetBack.appendContentObject();
+        co.setCTM(new JDFMatrix(1,0,0,1,8.5*72,0));
+        co.setOrd(1);
+        co.setDescriptiveName("Back left Pages");
+    
+        co=sheetBack.appendContentObject();
+        co.setCTM(new JDFMatrix(1,0,0,1,0,0));
+        co.setOrd(-2);
+        co.setDescriptiveName("Front Right Page Pages");
+    
+        doc.write2File(sm_dirTestDataTemp+"SimpleAutomatedBookletWithCover"+i+".jdf", 2, false);
+        }
+         
+    }
+    /**
+     * tests jdf 1.4 c&s layout
+     * 
+     * @throws Exception
+     */
     public void testCutAndStack() throws Exception
     {
         n.setXMLComment("This is a simple cut and stack layout witrh 2 stacks of one page each (two sided)\n");
