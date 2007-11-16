@@ -114,6 +114,7 @@ import org.cip4.jdflib.devicecapability.JDFActionPoolTest;
 import org.cip4.jdflib.devicecapability.JDFDevCapTest;
 import org.cip4.jdflib.devicecapability.JDFDevCapsTest;
 import org.cip4.jdflib.devicecapability.JDFDeviceCapTest;
+import org.cip4.jdflib.devicecapability.JDFDurationStateTest;
 import org.cip4.jdflib.devicecapability.JDFEvaluationTest;
 import org.cip4.jdflib.devicecapability.JDFIntegerStateTest;
 import org.cip4.jdflib.devicecapability.JDFModulePoolTest;
@@ -266,6 +267,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JDFDeviceCapTest.class);
         suite.addTestSuite(JDFDevCapTest.class);
         suite.addTestSuite(JDFDevCapsTest.class);
+        suite.addTestSuite(JDFDurationStateTest.class);
         suite.addTestSuite(JDFEvaluationTest.class);
         suite.addTestSuite(JDFIntegerStateTest.class);
         suite.addTestSuite(JDFModulePoolTest.class);

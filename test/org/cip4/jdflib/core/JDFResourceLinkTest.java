@@ -552,6 +552,16 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	}
 
+	public void testLinkRootDeadLoop() throws Exception
+	{
+	    JDFDoc jdfDoc = new JDFDoc("JDF");
+	    JDFNode node = jdfDoc.getJDFRoot();
+	    JDFResource r=node.addResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input);
+	    node.getResourcePool().insertBefore(ElementName.ADHESIVEBINDINGPARAMS+"Ref",r,null).setAttribute("rRef", "badLink");
+	    final JDFResourceLink link =node.getLink(r, null);
+	    assertNotNull(link.getLinkRoot ());    // Endlos-Schleife !!!!
+	}
+
     /**
      * Method testIncludesMatchingAttribute.
      * @throws Exception

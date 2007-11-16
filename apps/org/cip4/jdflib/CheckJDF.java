@@ -1653,7 +1653,60 @@ public class CheckJDF
         }
     }
 
+    /**
+     * print Device Capabilities: executable nodes and bugReport if exist
+     *
+     * @param jdfRoot - node to test
+     * @param devCapFile - Device Capabilities fileName to test Node against
+     * @param testlists - Allowed or Present testLists (parameter '-P')
+     * @param level - validation level
+     * @param testElement - root of the XMLStructure for DeviceCap
+     */
+    private void printJMFDevCap(final JDFElement jdfRoot, final KElement testElement)
+    {
+        if (devCapFile == null || devCapFile.equals(JDFConstants.EMPTYSTRING) || !(jdfRoot instanceof JDFJMF))
+        {
+            return;
+        }
 
+        final JDFJMF jdfNode = (JDFJMF) jdfRoot;
+        final JDFParser p = new JDFParser();
+        final JDFDoc docDevCap = p.parseFile(devCapFile);
+
+        final JDFJMF jmfRoot = docDevCap.getJMFRoot();
+
+        if (jmfRoot == null)
+        {
+            sysOut.println("JMFNode == null --> can't start Test");
+            if (testElement != null)
+            {
+                KElement kEl = testElement.appendElement("Error");
+                kEl.setAttribute("Message", "JMFNode == null. Can't start Test");
+            }
+            return;
+        }
+        sysOut.println("\n**********************************************************");
+        sysOut.println("\nOutput of DeviceCapability test result follows:\n");
+
+
+
+        //final XMLDoc testResult = deviceCap.getBadJDFInfo(jdfNode, testlists, level);
+
+        final XMLDoc testResult = JDFDeviceCap.getJMFInfo(jdfNode, jmfRoot.getResponse(0), testlists, level , !bPrintNameSpace);
+
+        if (testResult == null)
+        {
+            sysOut.println("\nResult of getBadJDFInfo: No bad JDF are found\n");
+            KElement bugReportRoot = testElement.appendElement("BugReport");
+            bugReportRoot.setAttribute("Message", "No bad JDF were found");
+        }
+        else
+        {
+            testElement.copyElement(testResult.getRoot(), null);
+            sysOut.println("\nResult of getBadJDFInfo: "+testResult.toString());
+
+        }
+    }
     /**
      * Sets correct validation status of the nodes that has invalid entries.
      * E.g. if ResourcePool has invalid children sets its status as invalid ["IsValid" = false].
@@ -2345,7 +2398,9 @@ public class CheckJDF
                     if (root == null)
                     { // no jdf, maybe jmf
                         if(jmf!=null) {
-                            printBad(jmf,  0, checkJDFxmlRoot, false);
+                            printJMFDevCap(jmf, checkJDFxmlRoot);
+
+                            
                         } else {
                             checkJDFxmlRoot.setAttribute("FoundJDF",false,null);
                         }
@@ -2419,22 +2474,7 @@ public class CheckJDF
 
                         printBad(root,  0, checkJDFxmlRoot, true);
 
-                        if(devCapFile!=null)
-                        {
-                            // measure the time
-                            lStartTime_TestDevCap = System.currentTimeMillis();
-
-                            KElement devCapTest = testFileRoot.appendElement("DeviceCapTest");
-
-                            printDevCap(root, devCapTest);
-
-                            lEndTime_TestDevCap = System.currentTimeMillis();
-                            lDevCapsTime = (lEndTime_TestDevCap - lStartTime_TestDevCap);
-                            if(bTiming && devCapTest != null)
-                            {
-                                devCapTest.setAttribute("DeviceCapTestTime", lDevCapsTime + " ms");
-                            }
-                        }
+                        lDevCapsTime = evalDevCaps(testFileRoot, lDevCapsTime, root);
                     }
 
                     // clean up the output
@@ -2481,6 +2521,29 @@ public class CheckJDF
         }
 
         return pOut;
+    }
+
+    private long evalDevCaps(KElement testFileRoot, long lDevCapsTime, JDFElement root)
+    {
+        long lStartTime_TestDevCap;
+        long lEndTime_TestDevCap;
+        if(devCapFile!=null)
+        {
+            // measure the time
+            lStartTime_TestDevCap = System.currentTimeMillis();
+
+            KElement devCapTest = testFileRoot.appendElement("DeviceCapTest");
+
+            printDevCap(root, devCapTest);
+
+            lEndTime_TestDevCap = System.currentTimeMillis();
+            lDevCapsTime = (lEndTime_TestDevCap - lStartTime_TestDevCap);
+            if(bTiming && devCapTest != null)
+            {
+                devCapTest.setAttribute("DeviceCapTestTime", lDevCapsTime + " ms");
+            }
+        }
+        return lDevCapsTime;
     }
 
     private void printMultipleIDs(String url, String xmlFile, JDFNode root)

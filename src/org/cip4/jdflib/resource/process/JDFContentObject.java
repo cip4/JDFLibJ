@@ -146,17 +146,6 @@ public class JDFContentObject extends JDFAutoContentObject implements IPlacedObj
         return "JDFContentObject[  --> " + super.toString() + " ]";
     }
 
-    /**
-     * set attribute Ord
-     * 
-     * @param int value: the value to set the attribute to
-     * @throws JDFException with stack trace if value < 0
-     */
-    public void setOrd(int value)
-    {
-        setAttribute(AttributeName.ORD, value, null);
-    }
-
     /* (non-Javadoc)
      * @see org.cip4.jdflib.ifaces.IPlacedObject#setTrimCTM(double, double)
      */
@@ -164,5 +153,33 @@ public class JDFContentObject extends JDFAutoContentObject implements IPlacedObj
     {
         setTrimSize(new JDFXYPair(x,y));        
     }
-
+    
+    /**
+     * calculates a "real" ord value in an automated layout
+     * 
+     * @param ord the Value of Ord in the layout
+     * @param nPages the total number of pages that are consumed by the Layout, if frontOffset!=0 the pages before frontOffset are NOT counted
+     * @param loop which sheet loop are we on?
+     * @param maxOrdFront number of pages consumed from the front of the list
+     * @param maxOrdBack positive number of pages consumed from the back of the list
+     * @param frontOffset page number of the first page to be placed on ord 0 in loop 0
+     * @return the pge to assign in this Ord, -1 if no page fits
+     */
+    public static int calcOrd(int ord, int nPages, int loop, int maxOrdFront, int maxOrdBack, int frontOffset)
+    {
+        final int maxOrd=maxOrdFront+maxOrdBack;
+        if(maxOrd*loop>=nPages)
+            return -1; // we are in a loop that has no remaining pages
+        int page;
+        if(ord>=0) // count from front
+        {
+            page=ord+loop*maxOrdFront;
+        }
+        else
+        {
+            int end= nPages +maxOrd - 1 -((nPages +maxOrd - 1)%maxOrd); // the page to put on -1
+            page=end-loop*maxOrdBack+ord;
+        }
+        return page< nPages? page+frontOffset : -1; // if a page evaluates to e.g. 10 and we only have 9 pages, ciao
+    }
 }

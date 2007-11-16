@@ -90,11 +90,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFDurationRangeList;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
-import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 
 public class JDFDurationState extends JDFAbstractState
@@ -182,54 +179,48 @@ public class JDFDurationState extends JDFAbstractState
 	// Attribute getter/ Setter
 	**************************************************************** */	
 
-    public void setCurrentValue(JDFDate value)
+    public void setCurrentValue(JDFDuration value)
     {
-        setAttribute(AttributeName.CURRENTVALUE, value.getDateTimeISO(), JDFConstants.EMPTYSTRING);
+        setAttribute(AttributeName.CURRENTVALUE, value.getDurationISO(), null);
     }
 
-    public JDFDate getCurrentValue()
+    public JDFDuration getCurrentValue()
     {
-        JDFDate nMyDate = null;
-        String str = JDFConstants.EMPTYSTRING;
-        str = getAttribute(AttributeName.CURRENTVALUE, null, JDFConstants.EMPTYSTRING);
-        if (!JDFConstants.EMPTYSTRING.equals(str))
+        final String str = getAttribute(AttributeName.CURRENTVALUE, null, null);
+        if (str==null)
+            return null;
+        
+        try
         {
-            try
-            {
-                nMyDate = new JDFDate(str);
-            }
-            catch(DataFormatException dfe)
-            {
-                throw new JDFException("not a valid date string. Malformed JDF");
-            }
+            return  new JDFDuration(str);
         }
-        return nMyDate;
+        catch(DataFormatException dfe)
+        {
+            return null;
+        }
     }
    
 
-    public void setDefaultValue(JDFDate value)
+    public void setDefaultValue(JDFDuration value)
     {
-        setAttribute(AttributeName.DEFAULTVALUE, value.getDateTimeISO(), JDFConstants.EMPTYSTRING);
+        setAttribute(AttributeName.DEFAULTVALUE, value.getDurationISO(), null);
     }
 
    
-    public JDFDate getDefaultValue()
+    public JDFDuration getDefaultValue()
     {
-        JDFDate nMyDate = null;
-        String str = JDFConstants.EMPTYSTRING;
-        str = getAttribute(AttributeName.DEFAULTVALUE, null, JDFConstants.EMPTYSTRING);
-        if (!JDFConstants.EMPTYSTRING.equals(str))
+        final String str = getAttribute(AttributeName.DEFAULTVALUE, null, null);
+        if (str==null)
+            return null;
+        
+        try
         {
-            try
-            {
-                nMyDate = new JDFDate(str);
-            }
-            catch(DataFormatException dfe)
-            {
-                throw new JDFException("not a valid date string. Malformed JDF");
-            }
+            return  new JDFDuration(str);
         }
-        return nMyDate;
+        catch(DataFormatException dfe)
+        {
+            return null;
+        }
     }
     
    
