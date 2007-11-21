@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StatusCounter;
 
@@ -123,6 +124,23 @@ public class QueueTest extends TestCase
         assertEquals("qe6",-1,q.getQueueEntryPos("qe6"));
         assertEquals("qe2",1,q.getQueueEntryPos("qe2"));
     }
+    public void testGetQueueEntryByIdentifier()
+    {
+        q.getQueueEntry(1).setJobID("j1");
+        NodeIdentifier ni=new NodeIdentifier("j1",null,null);
+        assertEquals(q.getQueueEntry(ni,0), q.getQueueEntry(1));
+        assertEquals(q.getQueueEntry(ni,-1), q.getQueueEntry(1));
+        assertNull(q.getQueueEntry(ni,-2));
+        assertNull(q.getQueueEntry(ni,1));
+        q.getQueueEntry(3).setJobID("j1");
+        
+        assertEquals(q.getQueueEntry(ni,0), q.getQueueEntry(1));
+        assertEquals(q.getQueueEntry(ni,-1), q.getQueueEntry(3));
+        assertEquals(q.getQueueEntry(ni,1), q.getQueueEntry(3));
+        assertEquals(q.getQueueEntry(ni,-2), q.getQueueEntry(1));
+        assertNull(q.getQueueEntry(ni,-3));
+        assertNull(q.getQueueEntry(ni,4));
+    }
 
     public void testGetTimes()
     {
@@ -154,7 +172,7 @@ public class QueueTest extends TestCase
         // now also zapp some...
         for(int j=0;j<100;j++)
         {
-            JDFQueueEntry qex=q.getNextExecutableQueueEntry(null);
+            JDFQueueEntry qex=q.getNextExecutableQueueEntry(null,null);
             if(qex!=null)
             {
                 qex.setQueueEntryStatus(EnumQueueEntryStatus.Running);
@@ -206,21 +224,24 @@ public class QueueTest extends TestCase
 
     public void testGetNextExecutableQueueEntry()
     {
-        assertNull(q.getNextExecutableQueueEntry(null));
+        assertNull(q.getNextExecutableQueueEntry(null,null));
         q.setMaxRunningEntries(2);
-        assertEquals(q.getNextExecutableQueueEntry(null), q.getQueueEntry("qe2"));
+        assertEquals(q.getNextExecutableQueueEntry(null,null), q.getQueueEntry("qe2"));
         q.setQueueStatus(EnumQueueStatus.Held);
-        assertNull(q.getNextExecutableQueueEntry(null));
+        assertNull(q.getNextExecutableQueueEntry(null,null));
         q.setQueueStatus(EnumQueueStatus.Waiting);
-        assertEquals(q.getNextExecutableQueueEntry(null), q.getQueueEntry("qe2"));
+        assertEquals(q.getNextExecutableQueueEntry(null,null), q.getQueueEntry("qe2"));
         q.getQueueEntry("qe4").setQueueEntryStatus(EnumQueueEntryStatus.Waiting);
         q.getQueueEntry("qe2").setDeviceID("d1");
-        assertEquals(q.getNextExecutableQueueEntry(null), q.getQueueEntry("qe2"));
-        assertEquals(q.getNextExecutableQueueEntry("d1"), q.getQueueEntry("qe2"));
+        assertEquals(q.getNextExecutableQueueEntry(null,null), q.getQueueEntry("qe2"));
+        assertEquals(q.getNextExecutableQueueEntry("d1",null), q.getQueueEntry("qe2"));
         q.getQueueEntry("qe4").setQueueEntryStatus(EnumQueueEntryStatus.Waiting);
-        assertEquals(q.getNextExecutableQueueEntry("d2"), q.getQueueEntry("qe1"));
+        assertEquals(q.getNextExecutableQueueEntry("d2",null), q.getQueueEntry("qe1"));
         q.getQueueEntry("qe1").setDeviceID("d1");
-        assertEquals(q.getNextExecutableQueueEntry("d2"), q.getQueueEntry("qe4"));
+        assertEquals(q.getNextExecutableQueueEntry("d2",null), q.getQueueEntry("qe4"));
+        assertEquals(q.getNextExecutableQueueEntry("d1","foo:foo2"), q.getQueueEntry("qe2"));
+        q.getQueueEntry("qe2").setAttribute("foo:foo2","bar","www.foo");
+        assertEquals(q.getNextExecutableQueueEntry("d1","foo:foo2"), q.getQueueEntry("qe1"));
     }
 
 /////////////////////////////////////////////////////////////////////////////

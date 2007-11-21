@@ -327,4 +327,20 @@ public class FileUtil
         }        
         return true;
     }
+    
+    
+    /**
+     * returns a File objetc corresponding to an instance of localFile placed in dir - No OS calls are made and File is NOT created
+     * @param dir the File Object representing the directory
+     * @param localFile the local file to place in dir, note that only the path is copied - this does copy trees
+     * @return File the File object that represents localFile in Dir
+     */
+     public static File getFileInDirectory(File dir, File localFile)
+    {
+        if(dir==null)
+            return localFile;
+        if(localFile==null)
+            return null;
+        return new File(dir.getPath()+File.separator+localFile.getPath());
+    }
 }

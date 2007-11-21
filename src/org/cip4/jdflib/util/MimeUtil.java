@@ -75,6 +75,7 @@
  */
 package org.cip4.jdflib.util;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -101,6 +102,7 @@ import javax.mail.internet.MimeMultipart;
 import javax.mail.util.SharedFileInputStream;
 
 import org.apache.commons.io.IOUtils;
+import org.cip4.jdflib.auto.JDFAutoMsgFilter.EnumFamily;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
@@ -110,7 +112,10 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFQuery;
+import org.cip4.jdflib.jmf.JDFResponse;
 import org.cip4.jdflib.node.JDFNode;
 
 /**
@@ -840,6 +845,47 @@ public class MimeUtil
             return httpURLconnection;   
         }
     }    
+    
+    /**
+     * submit  a multipart file to a queue
+     * @param mp
+     * @param strUrl
+     * @return
+     * @throws IOException
+     * @throws MessagingException
+     */
+    public static JDFDoc writeToQueue(JDFDoc docJMF, JDFDoc docJDF, String strUrl) throws IOException, MessagingException
+    {
+        Multipart mp=buildMimePackage(docJMF, docJDF);
+        HttpURLConnection uc=writeToURL(mp, strUrl);
+        if(uc==null)
+            return null; // file
+        int rc=uc.getResponseCode();
+        if(rc==200)
+        {
+            final InputStream inputStream = uc.getInputStream();
+            BufferedInputStream bis=new BufferedInputStream(inputStream);
+            Multipart mpRet=getMultiPart(bis);
+            if(mpRet!=null)
+            {
+                BodyPart bp = mpRet.getBodyPart(0);
+                return getJDFDoc(bp);
+            }
+            else
+            {
+                bis.reset();
+                JDFDoc d=new JDFParser().parseStream(bis);
+                if(d!=null)
+                    return d;
+            }
+        }       
+       JDFCommand c=docJMF.getJMFRoot().getCommand(0);
+       final JDFJMF respJMF = c.createResponse();
+       JDFResponse r=respJMF.getResponse(0);
+       r.setErrorText("Invalid http response - RC="+rc);
+       r.setReturnCode(3); // TODO correct rcs
+       return respJMF.getOwnerDocument_JDFElement();       
+    }
     /**
      * write a Multipart to an output file
      * 

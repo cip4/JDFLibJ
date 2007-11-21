@@ -158,6 +158,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFQueueEntry;
 import org.cip4.jdflib.pool.JDFAncestorPool;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.pool.JDFResourceLinkPool;
@@ -1639,6 +1640,110 @@ public class JDFNode extends JDFElement
     //NEWWWW
 
     /**
+     * class to identify nodes even after parsing, e.g in hashmaps
+     * uses JobID, JobPartID and the partMapVector as identifier
+     */
+    public static final class NodeIdentifier
+    {
+        private String _jobID;
+        private String _jobPartID;
+        private VJDFAttributeMap _partMapVector;
+        public NodeIdentifier(String jobID, String jobPartID, VJDFAttributeMap partMapVector)
+        {
+            _jobID=jobID;
+            _jobPartID=jobPartID;
+            _partMapVector=partMapVector;            
+        }
+        
+        public NodeIdentifier()
+        {
+            _jobID=null;
+            _jobPartID=null;
+            _partMapVector=null;            
+           
+        }
+         /**
+         * creates a NodeIdentifier from a given JDF node
+         * @param n
+         */
+        public NodeIdentifier(JDFNode n)
+        {
+             this();
+             setNode(n);
+        }
+        
+        /**
+         * sets a NodeIdentifier to a given JDF node
+         * @param n
+         */
+        public void setNode(JDFNode n)
+        {
+            _jobID=n.getJobID(true);
+            _jobPartID=n.getJobPartID(false);
+            if("".equals(_jobID))
+                _jobID=null;
+            if("".equals(_jobPartID))
+                _jobPartID=null;
+            _partMapVector=n.getPartMapVector();            
+        }
+        
+        /**
+         * sets a NodeIdentifier to a given JDF node
+         * @param n
+         */
+        public void setQueueEntry(JDFQueueEntry qe)
+        {
+            _jobID=qe.getJobID();
+            _jobPartID=qe.getJobPartID();
+            if("".equals(_jobID))
+                _jobID=null;
+            if("".equals(_jobPartID))
+                _jobPartID=null;
+           _partMapVector=qe.getPartMapVector();            
+        }
+        
+        /**
+         * creates a NodeIdentifier from a given QueueEntry
+         * @param qe the queueEntry 
+         */
+        public NodeIdentifier(JDFQueueEntry qe)
+        {
+             this();
+             setQueueEntry(qe);
+        }
+        /* (non-Javadoc)
+         * @see java.lang.Object#equals(java.lang.Object)
+         */
+        @Override
+        public boolean equals(Object arg0)
+        {
+            if(!(arg0 instanceof NodeIdentifier))
+                return false;
+            NodeIdentifier mt=(NodeIdentifier)arg0;
+            boolean b=_jobID==null && mt._jobID==null || _jobID!=null && _jobID.equals(mt._jobID);
+            b=b &&(_jobPartID==null && mt._jobPartID==null || _jobPartID!=null && _jobPartID.equals(mt._jobPartID));
+            return b && _partMapVector==null && mt._partMapVector==null || _partMapVector!=null && _partMapVector.equals(mt._partMapVector);
+
+        }
+        /* (non-Javadoc)
+         * @see java.lang.Object#hashCode()
+         */
+        @Override
+        public int hashCode()
+        {
+            return (_jobID==null?0: _jobID.hashCode()) +(_jobPartID==null?0: _jobPartID.hashCode()) + (_partMapVector==null ? 0 : _partMapVector.hashCode());
+        }
+        /* (non-Javadoc)
+         * @see java.lang.Object#toString()
+         */
+        @Override
+        public String toString()
+        {
+            return "NodeIdentifier :"+_jobID+" "+_jobPartID+"\n"+_partMapVector;
+        }
+        
+    }
+    /**
      * Enumeration for accessing typesafe nodes 
      */
     public static final class EnumProcessUsage extends ValuedEnum
@@ -2334,7 +2439,7 @@ public class JDFNode extends JDFElement
     @Override
 	public VJDFAttributeMap getPartMapVector()
     {
-        JDFAncestorPool ancPool=getAncestorPool();
+        final JDFAncestorPool ancPool=getAncestorPool();
         if(ancPool!=null) {
             return ancPool.getPartMapVector();
         }

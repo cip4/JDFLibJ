@@ -86,6 +86,7 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
 
 
 public class JDFQueue extends JDFAutoQueue
@@ -271,6 +272,50 @@ public class JDFQueue extends JDFAutoQueue
             return null;
         return (JDFQueueEntry) getChildByTagName(ElementName.QUEUEENTRY,null,0,new JDFAttributeMap(AttributeName.QUEUEENTRYID,strQEntryID),true,true);
     }
+    /**
+     * Find a queueEntry by NodeIdentifier (jobid, jobpartid, part)<br>
+     * 
+     * note that you may want to use the generic getChildByTagName with the appropriate 
+     * attribute map, if you have more information available
+     * 
+     * @param nodeID the identifier - jobID, jobPartID, parts - of the qe
+     * @param nSkip the number of nodes to skip, cout backwards if<0
+     * @return the QueueEntry with matching jobID, jobPartID, parts, 
+     * null if nodeID is null or empty string or the queueentry does not exist
+     * 
+     */
+    public JDFQueueEntry getQueueEntry(NodeIdentifier nodeID, int nSkip)
+    {
+        if(nodeID==null)
+            return null;
+        VElement v=getQueueEntryVector();
+        NodeIdentifier ni2=new NodeIdentifier();
+        int siz=v==null ? 0 : v.size();
+        int n=0;
+        if(nSkip>=0)
+        {
+            for(int i=0;i<siz;i++)
+            {
+                JDFQueueEntry qe=(JDFQueueEntry) v.elementAt(i);
+                ni2.setQueueEntry(qe);
+                if(ni2.equals(nodeID)&&n++>=nSkip)
+                    return qe;
+            }
+        }
+        else
+        {
+            for(int i=siz-1;i>=0;i--)
+            {
+                JDFQueueEntry qe=(JDFQueueEntry) v.elementAt(i);
+                ni2.setQueueEntry(qe);
+                if(ni2.equals(nodeID)&&--n<=nSkip)
+                    return qe;
+            }
+            
+        }
+        return null;
+                
+    }
 
     //////////////////////////////////////////////////////////////////////////
 
@@ -303,7 +348,7 @@ public class JDFQueue extends JDFAutoQueue
      */
     public synchronized JDFQueueEntry getNextExecutableQueueEntry()
     {
-        return getNextExecutableQueueEntry(null);
+        return getNextExecutableQueueEntry(null,null);
     }
     ///////////////////////////////////////////////////////////////////////
     /**
@@ -312,10 +357,12 @@ public class JDFQueue extends JDFAutoQueue
      * if deviceID is specified, the entries with an explicit non matching deviceID are ignored
      * the status of the QueueEntry MUST be waiting  
      * @param deviceID the deviceID of the executing device - if null any deviceID will match
+     * @param proxyFlag if not null, the existance of this attribute in the queueentry excludes the qe from the search
+     * used e.g. in case a queue is used as a proxy and represents previously submitted jobs as waiting
      * 
      * @return the executable queueEntry, null if none is available
      */
-    public synchronized JDFQueueEntry getNextExecutableQueueEntry(String deviceID)
+    public synchronized JDFQueueEntry getNextExecutableQueueEntry(String deviceID, String proxyFlag)
     {
         if(!canExecute())
             return null;
@@ -325,6 +372,10 @@ public class JDFQueue extends JDFAutoQueue
         for(int i=0;i<siz;i++)
         {
             final JDFQueueEntry qe=(JDFQueueEntry)v.elementAt(i);
+            
+            if(proxyFlag!=null && qe.hasAttribute(proxyFlag))
+                continue;
+            
             if(deviceID==null || isWildCard(qe.getDeviceID()) || deviceID.equals(qe.getDeviceID()))
             {
                 if(theEntry==null)

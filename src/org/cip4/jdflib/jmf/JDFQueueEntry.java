@@ -84,11 +84,16 @@ package org.cip4.jdflib.jmf;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.util.ContainerUtil;
+
+import sun.misc.Cleaner;
 
 
 
@@ -355,6 +360,30 @@ public class JDFQueueEntry extends JDFAutoQueueEntry
         int sort=(status==null) ? 0 : 10000 - 1000 * status.getValue();
         sort+=priority;
         return sort;
+    }
+    
+    /**
+     * populates this queuentry with the relevant parameters extracted from a JDF
+     * jobid, partmap, jobpartid etc.
+     * 
+     * @param jdf
+     */
+    public void setFromJDF(JDFNode jdf)
+    {
+        if(jdf==null)
+            return;
+        setJobID(jdf.getJobID(true));
+        setJobPartID(jdf.getJobPartID(false));
+        setPartMapVector(jdf.getPartMapVector());
+        
+        if(!hasAttribute(AttributeName.PRIORITY))
+        {
+            JDFNodeInfo ni=jdf.getInheritedNodeInfo("@"+AttributeName.PRIORITY);
+            if(ni!=null)
+                copyAttribute(AttributeName.PRIORITY, ni, null, null, null);
+        }
+         
+        this.eraseEmptyAttributes(true);
     }
 
 }
