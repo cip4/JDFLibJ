@@ -117,7 +117,6 @@ import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.JDFProcessRun;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.util.JDFDate;
-import org.cip4.jdflib.util.JDFDateTest;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
