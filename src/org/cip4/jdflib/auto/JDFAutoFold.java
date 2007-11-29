@@ -98,7 +98,7 @@ public abstract class JDFAutoFold extends JDFResource
         atrInfoTable[0] = new AtrInfoTable(AttributeName.FROM, 0x22222221, AttributeInfo.EnumAttributeType.enumeration, EnumFrom.getEnum(0), null);
         atrInfoTable[1] = new AtrInfoTable(AttributeName.TO, 0x22222221, AttributeInfo.EnumAttributeType.enumeration, EnumTo.getEnum(0), null);
         atrInfoTable[2] = new AtrInfoTable(AttributeName.TRAVEL, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.RELATIVETRAVEL, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumRelativeTravel.getEnum(0), null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.RELATIVETRAVEL, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
     protected AttributeInfo getTheAttributeInfo()
@@ -261,51 +261,6 @@ public abstract class JDFAutoFold extends JDFResource
 
 
 
-        /**
-        * Enumeration strings for RelativeTravel
-        */
-
-        public static class EnumRelativeTravel extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
-
-            private EnumRelativeTravel(String name)
-            {
-                super(name, m_startValue++);
-            }
-
-            public static EnumRelativeTravel getEnum(String enumName)
-            {
-                return (EnumRelativeTravel) getEnum(EnumRelativeTravel.class, enumName);
-            }
-
-            public static EnumRelativeTravel getEnum(int enumValue)
-            {
-                return (EnumRelativeTravel) getEnum(EnumRelativeTravel.class, enumValue);
-            }
-
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumRelativeTravel.class);
-            }
-
-            public static List getEnumList()
-            {
-                return getEnumList(EnumRelativeTravel.class);
-            }
-
-            public static Iterator iterator()
-            {
-                return iterator(EnumRelativeTravel.class);
-            }
-
-            public static final EnumRelativeTravel         RelativeTravel_0 = new EnumRelativeTravel("0");
-            public static final EnumRelativeTravel         RelativeTravel_1 = new EnumRelativeTravel("1");
-        }      
-
-
-
 /* ************************************************************************
  * Attribute getter / setter
  * ************************************************************************
@@ -381,21 +336,21 @@ public abstract class JDFAutoFold extends JDFResource
         Methods for Attribute RelativeTravel
         --------------------------------------------------------------------- */
         /**
-          * (5) set attribute RelativeTravel
-          * @param enumVar: the enumVar to set the attribute to
+          * (36) set attribute RelativeTravel
+          * @param value: the value to set the attribute to
           */
-        public void setRelativeTravel(EnumRelativeTravel enumVar)
+        public void setRelativeTravel(double value)
         {
-            setAttribute(AttributeName.RELATIVETRAVEL, enumVar.getName(), null);
+            setAttribute(AttributeName.RELATIVETRAVEL, value, null);
         }
 
         /**
-          * (9) get attribute RelativeTravel
-          * @return the value of the attribute
+          * (17) get double attribute RelativeTravel
+          * @return double the value of the attribute
           */
-        public EnumRelativeTravel getRelativeTravel()
+        public double getRelativeTravel()
         {
-            return EnumRelativeTravel.getEnum(getAttribute(AttributeName.RELATIVETRAVEL, null, null));
+            return getRealAttribute(AttributeName.RELATIVETRAVEL, null, 0.0);
         }
 
 }// end namespace JDF

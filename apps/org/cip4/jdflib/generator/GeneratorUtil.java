@@ -434,7 +434,27 @@ public class GeneratorUtil
             attributeHandleVersion(parents, vAppInfoElements, schemaAttribute, complexType);
 
             String type = attribute.getAttribute("type").replace('-', '_');
+            if (JDFConstants.EMPTYSTRING.equals(type))
+            {
+				// lex "RelativeTravel, i.e. a double with restrictions (also int possible?)
+				// you have the attribute so check now if there is a childnode
+				// "simpeType" under it. Every enumeration has one.
+				KElement nChild = schemaAttribute.getm_KElement().
+					getChildByTagName("xs:simpleType", "", 0, new JDFAttributeMap(), true, true);
+				if (nChild != null) 
+				{
+					// looks like there was a childnode so check out if there is the restriction
+					nChild = nChild.getChildByTagName("xs:restriction", "", 0, new JDFAttributeMap(), true, true);
+					if (nChild != null && "jdftyp:double".equals(nChild.getAttribute("base"))) 
+					{
+						// there is a double with restrictions
+						type = nChild.getAttribute("base");
+					}
+				}
+
+			}
             schemaAttribute.setStrType(type, vSimpleType);
+            
             schemaAttribute.setStrUse(
                     attribute.getAttribute("use").replace('-', '_'));
             schemaAttribute.setStrFixed(
@@ -1242,7 +1262,7 @@ public class GeneratorUtil
         {
             //looks like there was a childnode so check out if there is the restriction
             nChild = nChild.getChildByTagName ("xs:restriction", "", 0, new JDFAttributeMap (), true, true);
-            if (nChild != null)
+            if (nChild != null && !"jdftyp:double".equals(nChild.getAttribute("base")))
             {
                 //there is one! Its an enum...
                 isEnum = true;
