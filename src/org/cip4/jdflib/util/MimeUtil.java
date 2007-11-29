@@ -102,7 +102,6 @@ import javax.mail.internet.MimeMultipart;
 import javax.mail.util.SharedFileInputStream;
 
 import org.apache.commons.io.IOUtils;
-import org.cip4.jdflib.auto.JDFAutoMsgFilter.EnumFamily;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
@@ -114,7 +113,6 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFJMF;
-import org.cip4.jdflib.jmf.JDFQuery;
 import org.cip4.jdflib.jmf.JDFResponse;
 import org.cip4.jdflib.node.JDFNode;
 
@@ -619,7 +617,8 @@ public class MimeUtil
                         f = new File(jdfFile.getParent(), f.getPath());
                         try {
                             urlStrings[i] = f.toURL().toExternalForm();
-                        } catch (MalformedURLException e1) {							
+                        } catch (MalformedURLException e1) {	
+                            // nop
                         }
                     }
                 }

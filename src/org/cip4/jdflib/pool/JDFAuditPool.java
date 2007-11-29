@@ -117,6 +117,7 @@ import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.JDFProcessRun;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.JDFDateTest;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -774,6 +775,7 @@ public class JDFAuditPool extends JDFPool
     /**
      * creates a ProcessRun when this is submitted
      * should be called by the receiving device when it initially receives and enqueues the JDF
+     * @param qe the queuentry element to copy information from, if null parameters will be genrated on the fly
      * @return the newly created processRun
      */
     public JDFProcessRun createSubmitProcessRun(JDFQueueEntry qe)
@@ -787,6 +789,10 @@ public class JDFAuditPool extends JDFPool
             if(qe.hasAttribute(AttributeName.SUBMISSIONTIME))
                 pr.copyAttribute(AttributeName.SUBMISSIONTIME, qe, null, null, null);
         }
+        if(!pr.hasAttribute(AttributeName.SUBMISSIONTIME))
+            pr.setSubmissionTime(new JDFDate());
+        if(!pr.hasAttribute(AttributeName.QUEUEENTRYID))
+            pr.setAttribute("QueueEntryID","qe_"+JDFElement.uniqueID(0));
         return pr;
          
     }

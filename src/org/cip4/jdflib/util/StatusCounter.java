@@ -88,7 +88,6 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -271,7 +270,7 @@ public class StatusCounter
         }
         catch (InterruptedException x)
         {
-            //nop
+//            System.out.print(".");
         }
     }
 
@@ -329,12 +328,8 @@ public class StatusCounter
         vLinkAmount=new LinkAmount[resLinks.size()];
         for(int i=0;i<vLinkAmount.length;i++)
         {
-            final LinkAmount la = new LinkAmount((JDFResourceLink)resLinks.elementAt(i));
-            vLinkAmount[i]= la;
-
-
+            vLinkAmount[i]= new LinkAmount((JDFResourceLink)resLinks.elementAt(i));
         }
-
     }
 
     /**
@@ -398,12 +393,11 @@ public class StatusCounter
         {
             appendProcessRun(nodeStatus, ap);
         }
-//        JDFResponse respStatus=null;
+
         if(lastPhase!=null && nextPhase!=lastPhase) // we explicitly added a new phasetime audit, thus we need to add a closing JMF for the original jobPhase
         {
             bChanged=true;
-//            respStatus = 
-            	closeJobPhase(jmfStatus, la, lastPhase, nextPhase);
+            closeJobPhase(jmfStatus, la, lastPhase, nextPhase);
         }
 
         if(nextPhase!=null)
@@ -419,6 +413,7 @@ public class StatusCounter
         }
 
         jmfStatus.eraseEmptyAttributes(true);
+        jmfRes.eraseEmptyAttributes(true);
         return bChanged;
     }
 
@@ -496,6 +491,7 @@ public class StatusCounter
         jp.setJobID(m_Node.getJobID(true));
         jp.setJobPartID(m_Node.getJobPartID(false));
         setJobPhaseAmounts(la, jp);
+        pt1.setLinks(getVResLink(1));
 
         // cleanup!
         if(vLinkAmount!=null)
@@ -663,7 +659,7 @@ public class StatusCounter
 
 
             @Override
-			public String toString()
+            public String toString()
             {
                 return "[AmountBag totalAmount="+totalAmount+" phaseAmount="+phaseAmount+" totalWaste="+totalWaste+" phaseWaste="+phaseWaste+" ]";
             }
@@ -744,9 +740,9 @@ public class StatusCounter
             JDFAttributeMap map=null;
             if(vResPartMap!=null)
             {
-                final VString partIDKeys = target.getPartIDKeys();
-                Set keyset=partIDKeys==null ? null : partIDKeys.getSet();
-                vResPartMap.reduceMap(keyset);
+//              final VString partIDKeys = target.getPartIDKeys();
+//              Set keyset=partIDKeys==null ? null : partIDKeys.getSet();
+//              vResPartMap.reduceMap(keyset);
                 if(vResPartMap.size()==0)
                     vResPartMap=null;
                 map=(vResPartMap==null) ? null : vResPartMap.elementAt(0);
@@ -919,7 +915,7 @@ public class StatusCounter
          * @see java.lang.Object#toString()
          */
         @Override
-		public String toString()
+        public String toString()
         {
             StringBuffer sb=new StringBuffer();
             sb.append("LinkAmount: refID=");

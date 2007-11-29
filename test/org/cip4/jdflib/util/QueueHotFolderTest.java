@@ -137,6 +137,30 @@ public class QueueHotFolderTest extends JDFTestCaseBase
     }
 
 
+    public void teststopStart() throws Exception
+    {
+        final MyListener myListener = new MyListener();
+        final File file = new File(theHF+File.separator+"f1.txt");
+        final File stFile = new File(theStorage+File.separator+"f1.txt");
+        file.createNewFile();
+        assertTrue(file.exists());
+        assertFalse(stFile.exists());
+        hf=new QueueHotFolder(theHF,theStorage,null,myListener,null);
+        hf.stop();
+        StatusCounter.sleep(3000);
+        assertTrue(file.exists());
+        assertFalse("File is still there after stop",stFile.exists());
+        assertEquals(myListener.vJMF.size(), 0);
+        hf.restart();
+        StatusCounter.sleep(3000);
+        assertFalse("File is gone after stop",file.exists());
+        assertTrue(stFile.exists());
+        assertEquals(myListener.vJMF.size(), 1);
+        final JDFJMF elementAt = (JDFJMF) myListener.vJMF.elementAt(0);
+        assertEquals(elementAt.getCommand(0).getEnumType(), JDFMessage.EnumType.SubmitQueueEntry);
+        assertEquals(elementAt.getCommand(0).getQueueSubmissionParams(0).getURL(), UrlUtil.fileToUrl(stFile, false));        
+    }
+    
     /* (non-Javadoc)
      * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
      */

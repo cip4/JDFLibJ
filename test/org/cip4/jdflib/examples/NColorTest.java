@@ -7,6 +7,8 @@ package org.cip4.jdflib.examples;
 
 import java.io.File;
 
+import javax.print.attribute.standard.SheetCollate;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
@@ -40,6 +42,7 @@ public class NColorTest extends JDFTestCaseBase
     private JDFMedia media;
     private JDFExposedMedia exposedMedia;
     private JDFDoc doc;
+    private VString sheetsDone;
 
     ///////////////////////////////////////////////////////////////////
 
@@ -109,17 +112,17 @@ public class NColorTest extends JDFTestCaseBase
         doc.write2File(sm_dirTestDataTemp+File.separator+"NColorSetup.jdf",2,false);
 
         run2Seps("Sheet0", EnumSide.Front, "Cyan", "Magenta",510,55,"press",EnumNodeStatus.Completed);
-        JDFResourceLink rl=node.getLink(media,null);
+        JDFResourceLink rlMedia=node.getLink(media,null);
         final JDFAttributeMap sheetNameMap0 = new JDFAttributeMap(EnumPartIDKey.SheetName.getName(),"Sheet0");
         final JDFAttributeMap sheetNameMap1 = new JDFAttributeMap(EnumPartIDKey.SheetName.getName(),"Sheet1");
-        rl.setActualAmount(560,sheetNameMap0);
+        rlMedia.setActualAmount(560,sheetNameMap0);
         doc.write2File(sm_dirTestDataTemp+File.separator+"NColor_S0_F_CM.jdf",2,false);
 
         run2Seps("Sheet0", EnumSide.Back, "Cyan", "Magenta",450,60,"press",EnumNodeStatus.Completed);
         doc.write2File(sm_dirTestDataTemp+File.separator+"NColor_S0_B_CM.jdf",2,false);
 
         run2Seps("Sheet1", EnumSide.Front, "Cyan", "Magenta",500,55,"press",EnumNodeStatus.Completed);
-        rl.setActualAmount(560,sheetNameMap1);
+        rlMedia.setActualAmount(560,sheetNameMap1);
         doc.write2File(sm_dirTestDataTemp+File.separator+"NColor_S1_F_CM.jdf",2,false);
 
         run2Seps("Sheet1", EnumSide.Back, "Cyan", "Magenta",450,50,"press",EnumNodeStatus.Completed);
@@ -131,8 +134,8 @@ public class NColorTest extends JDFTestCaseBase
         run2Seps("Sheet0", EnumSide.Back, "Black", "Yellow",350,50,"press",EnumNodeStatus.Completed);
         // now the sheet is actually available
         component.getPartition(sheetNameMap0,null).setResStatus(EnumResStatus.Available,true);
-        rl=node.getLink(component,null);
-        rl.setActualAmount(350,sheetNameMap0);
+        rlMedia=node.getLink(component,null);
+        rlMedia.setActualAmount(350,sheetNameMap0);
         doc.write2File(sm_dirTestDataTemp+File.separator+"NColor_S0_B_KY.jdf",2,false);
 
         run2Seps("Sheet1", EnumSide.Front, "Black", "Yellow",400,50,"press",EnumNodeStatus.Completed);
@@ -140,8 +143,8 @@ public class NColorTest extends JDFTestCaseBase
 
         run2Seps("Sheet1", EnumSide.Back, "Black", "Yellow",360,40,"press",EnumNodeStatus.Completed);
         component.getPartition(sheetNameMap1,null).setResStatus(EnumResStatus.Available,true);
-        rl=node.getLink(component,null);
-        rl.setActualAmount(360,sheetNameMap1);
+        rlMedia=node.getLink(component,null);
+        rlMedia.setActualAmount(360,sheetNameMap1);
         doc.write2File(sm_dirTestDataTemp+File.separator+"NColor_S1_B_KY.jdf",2,false);
     }
 
@@ -157,6 +160,9 @@ public class NColorTest extends JDFTestCaseBase
         map[0]=new JDFAttributeMap(EnumPartIDKey.SheetName,sheet);
         map[0].put(EnumPartIDKey.Side,side);
        jmfFile+=sheet+"_"+side.getName();
+       boolean bFirst=!sheetsDone.contains(sheet);
+       if(bFirst)
+           sheetsDone.add(sheet);
         if(sep1!=null)
         {
 
@@ -170,13 +176,29 @@ public class NColorTest extends JDFTestCaseBase
         if(sep1!=null)
             nodeInfo.setIdentical(vMap);
 
-        JDFResourceLink rl=node.getLink(component,null);
+        JDFResourceLink rlComp=node.getLink(component,null);
         VElement vRL=new VElement();
-        vRL.add(rl);
+        vRL.add(rlComp);
+        JDFResourceLink rlMedia=null;
+        if(bFirst)
+        {
+            rlMedia=node.getLink(media, null);
+            vRL.add(rlMedia);
+        }
         StatusCounter su=new StatusCounter(node,vMap,vRL);
-        su.addPhase(rl.getrRef(),good, waste);
+        su.setTrackWaste(rlComp.getrRef(), true);
+        
         su.setDeviceID(deviceID);
-        su.setPhase(EnumNodeStatus.InProgress,"dummy",EnumDeviceStatus.Running,null);
+        if(bFirst)
+        {
+            su.setTrackWaste(rlMedia.getrRef(), true);
+        }
+        su.setPhase(EnumNodeStatus.InProgress,"Good",EnumDeviceStatus.Running,null);
+        su.addPhase(rlComp.getrRef(),good, waste);
+        if(rlMedia!=null)
+        {
+            su.addPhase(rlMedia.getrRef(),good, waste);                   
+        }
         su.setPhase(endStatus,"dummy",EnumDeviceStatus.Idle,null);
         JDFDoc jmfStatus=su.getDocJMFPhaseTime();
         jmfStatus.write2File(jmfFile+"_status.jmf", 2,false);
@@ -191,6 +213,7 @@ public class NColorTest extends JDFTestCaseBase
      */
     private void setup(boolean bnColorNI, int nSheet) 
     {
+        sheetsDone=new VString();
         doc = new JDFDoc("JDF");
         node = doc.getJDFRoot();
         node.setType(EnumType.ConventionalPrinting);

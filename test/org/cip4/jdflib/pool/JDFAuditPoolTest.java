@@ -70,6 +70,7 @@
 package org.cip4.jdflib.pool;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFDoc;
@@ -81,6 +82,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFJobPhase;
+import org.cip4.jdflib.jmf.JDFQueueEntry;
 import org.cip4.jdflib.jmf.JDFSignal;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.JDFNode;
@@ -88,6 +90,7 @@ import org.cip4.jdflib.node.JDFSpawned;
 import org.cip4.jdflib.resource.JDFCreated;
 import org.cip4.jdflib.resource.JDFMerged;
 import org.cip4.jdflib.resource.JDFPhaseTime;
+import org.cip4.jdflib.resource.JDFProcessRun;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JDFDate;
 
@@ -222,6 +225,26 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
                 
      }
         
+    public void testCreateSubmitProcessRun() throws Exception
+    {        
+        
+       JDFProcessRun pr=myAuditPool.createSubmitProcessRun(null);
+       assertNotNull(pr.getSubmissionTime());
+       assertFalse("has submissiontime before now",new JDFDate().before(pr.getSubmissionTime()));
+       assertTrue(pr.getAttribute(AttributeName.QUEUEENTRYID).startsWith("qe"));
+       
+       JDFDoc d=new JDFDoc(ElementName.QUEUEENTRY);
+       JDFQueueEntry qe=(JDFQueueEntry) d.getRoot();
+       
+       JDFDate dat=new JDFDate();
+       dat.addOffset(0, 0, 6, 2);
+       qe.setSubmissionTime(dat);
+       qe.setQueueEntryID("q1");
+       pr=myAuditPool.createSubmitProcessRun(qe);
+       assertEquals(pr.getSubmissionTime(), dat);
+       assertEquals(pr.getAttribute(AttributeName.QUEUEENTRYID), "q1");
+    }
+ 
     public void testSetPhaseJMF() throws Exception
     {        
         

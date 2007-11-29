@@ -92,13 +92,14 @@ import java.util.Vector;
 public class HotFolder implements Runnable
 {
     public int stabilizeTime=1000; // time between reads in milliseconds - also minimum lenght of non-modification
-    public boolean interrupt=false; // if set to true, the watcher interupted and the thread ends
+    private boolean interrupt=false; // if set to true, the watcher interupted and the thread ends
 
     private File dir;
     private long lastModified=-1;
     private Vector<FileTime> lft;
     private HotFolderListener hfl;
     private String extension;
+    private Thread runThread;
 
     /**
      * constructor for a simple hotfolder watcher that is automagically started in its own thread
@@ -114,10 +115,47 @@ public class HotFolder implements Runnable
         extension=ext;
         lft=new Vector<FileTime>();
         hfl=_hfl;
-        new Thread(this).start();
+        runThread=null;
+        restart();
     }
 
 
+    public void restart()
+    {
+        if(runThread!=null)
+            stop();
+        runThread=new Thread(this);
+        interrupt=false;
+        runThread.start();
+    }
+
+
+    /**
+     * stop this thread;
+     *
+     */
+    public void stop()
+    {
+        interrupt=true;
+        if(runThread!=null)
+        {
+            synchronized (runThread)
+            {
+                runThread.notifyAll();  
+
+                try
+                {
+                    runThread.join(); // kill the old thread with extreme prejudice - 
+                    //otherwise we may have multiple concurring hf watcher threads
+                }
+                catch (InterruptedException x)
+                {
+//                  nop
+                }
+            }
+            runThread=null;
+        }
+    }
     /* (non-Javadoc)
      * @see java.lang.Runnable#run()
      */
@@ -171,7 +209,9 @@ public class HotFolder implements Runnable
                 }
             }
             StatusCounter.sleep(stabilizeTime);
-        }        
+        }  
+        Thread.currentThread().interrupt();
+
     }
 
     /**

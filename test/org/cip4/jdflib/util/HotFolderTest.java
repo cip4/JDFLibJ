@@ -107,7 +107,7 @@ public class HotFolderTest extends JDFTestCaseBase
             boolean zapp=false;
             if(bZapp)
                 zapp=hotFile.delete();
-             System.out.println(System.currentTimeMillis()+" "+hotFile.getPath()+","+bZapp+","+zapp);
+            System.out.println(System.currentTimeMillis()+" "+hotFile.getPath()+","+bZapp+","+zapp);
 
         }
 
@@ -128,7 +128,48 @@ public class HotFolderTest extends JDFTestCaseBase
         StatusCounter.sleep(3000);
         assertTrue(file.exists());
     }
+    public void testRestartMany() throws Exception
+    {
+            hf=new HotFolder(theHF,null,new MyListener(true));
+            for(int i=0;i<5000;i++)
+            {
+                if((i%20)==0)
+                {
+                    System.out.println(i+" "+Thread.activeCount());
+                }
+                hf.restart();
+            }
+            for(int i=0;i<20;i++)
+            {
+            Thread.sleep(100);
+            hf.stop();
+            System.out.println(" "+Thread.activeCount());
+            }
+
+    }
     
+    
+    public void testStopStart() throws Exception
+    {
+        hf=new HotFolder(theHF,null,new MyListener(true));
+        final File file = new File(theHF+File.separator+"f1.txt");
+        file.createNewFile();
+        assertTrue(file.exists());
+        StatusCounter.sleep(3000);
+        assertFalse(file.exists());
+        hf.stop();
+        hf.stop();
+        file.createNewFile();
+        assertTrue(file.exists());
+        StatusCounter.sleep(3000);
+        assertTrue(file.exists());
+        hf.restart();
+        hf.restart();
+        hf.restart();
+        StatusCounter.sleep(3000);
+        assertFalse(file.exists());
+    }
+
     public void testExtension() throws Exception
     {
         hf=new HotFolder(theHF,".txt,.xml",new MyListener(true));
@@ -202,7 +243,7 @@ public class HotFolderTest extends JDFTestCaseBase
     @Override
     protected void tearDown() throws Exception
     {
-        hf.interrupt=true;
+        hf.stop();
         super.tearDown();
     }
 
