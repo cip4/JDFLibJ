@@ -154,6 +154,8 @@ public class JDFPerson extends JDFAutoPerson
     {
         String oldName=getAttribute(AttributeName.FAMILYNAME, null, null);
         super.setFamilyName(familyName);
+        if(familyName==null)
+            return;
         String descName=getDescriptiveName();
         if(descName==null || descName.equals(""))
         {
@@ -181,6 +183,8 @@ public class JDFPerson extends JDFAutoPerson
         String oldName=getAttribute(AttributeName.FIRSTNAME, null, null);
 
         super.setFirstName(firstName);
+        if(firstName==null)
+            return;
         String descName=getDescriptiveName();
         if(descName==null || descName.equals(""))
         {

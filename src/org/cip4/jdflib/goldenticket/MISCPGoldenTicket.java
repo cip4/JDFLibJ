@@ -149,7 +149,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         String icsTag="MISCPS_L"+icsLevel+"-"+theVersion.getName();
         theNode.appendAttribute(AttributeName.ICSVERSIONS, icsTag, null, " ", true);
         if(!theNode.hasAttribute(AttributeName.DESCRIPTIVENAME))
-            theNode.setDescriptiveName("MICPS Golden Ticket Example Job - version: "+JDFAudit.software());
+            theNode.setDescriptiveName("MISCPS Golden Ticket Example Job - version: "+JDFAudit.software());
         if(grayBox)
         {
             theNode.setType(EnumType.ProcessGroup);
@@ -337,11 +337,11 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 
     /**
      * @param icsLevel
+     * @return 
      */
-    protected void initNodeInfo()
+    protected  JDFNodeInfo initNodeInfo()
     {
-        super.initNodeInfo();
-        JDFNodeInfo ni=theNode.getCreateNodeInfo();
+        JDFNodeInfo ni=super.initNodeInfo();
         if(vParts!=null)
         {
             VJDFAttributeMap reducedMap=new VJDFAttributeMap(vParts);
@@ -356,6 +356,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
                 niPart.setDescriptiveName("Printing for"+part.toString());
             }
         }
+        return ni;
     }
 
 

@@ -91,6 +91,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
 import org.cip4.jdflib.util.ContainerUtil;
 
 
@@ -185,6 +186,19 @@ public class JDFQueueEntry extends JDFAutoQueueEntry
     public void removePartMap(JDFAttributeMap mPart)
     {
         super.removePartMap(mPart);
+    }
+
+    /**
+     * return true if this qe matches the input node identifier
+     * @param ni
+     * @return
+     */
+    public boolean matchesNodeIdentifier(NodeIdentifier ni)
+    {
+        if(ni==null)
+            return false;
+        NodeIdentifier niThis= new NodeIdentifier(this);
+        return niThis.equals(ni);
     }
 
     /**

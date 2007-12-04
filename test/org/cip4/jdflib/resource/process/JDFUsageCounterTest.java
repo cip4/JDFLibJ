@@ -79,10 +79,13 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.pool.JDFAuditPool;
+import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.util.StringUtil;
 
 public class JDFUsageCounterTest extends JDFTestCaseBase
@@ -108,6 +111,9 @@ public class JDFUsageCounterTest extends JDFTestCaseBase
         assertEquals(StringUtil.setvString(uc.getEnumCounterTypes()), StringUtil.setvString(uc.getCounterTypes()));
         JDFResourceLink rl=root.getLink(uc, null);
         rl.setActualAmount(10, null);
+        JDFAuditPool ap=root.getCreateAuditPool();
+        JDFResourceAudit ra=(JDFResourceAudit) ap.addAudit(EnumAuditType.ResourceAudit, null);
+        ra.updateLink(rl);
         
         JDFUsageCounter uc2=(JDFUsageCounter) root.appendMatchingResource(ElementName.USAGECOUNTER, EnumProcessUsage.AnyInput, null);
         uc2.setCounterID("c2");
@@ -117,6 +123,11 @@ public class JDFUsageCounterTest extends JDFTestCaseBase
         assertEquals(StringUtil.setvString(uc2.getEnumCounterTypes()), StringUtil.setvString(uc2.getCounterTypes()));
         rl=root.getLink(uc2, null);
         rl.setActualAmount(20, null);         
+        ra=(JDFResourceAudit) ap.addAudit(EnumAuditType.ResourceAudit, null);
+        ra.updateLink(rl);
+
+        
+        
         JDFUsageCounter uc3=(JDFUsageCounter) root.appendMatchingResource(ElementName.USAGECOUNTER, EnumProcessUsage.AnyInput, null);
         uc3.setCounterID("c3");
         uc3.setScope(EnumScope.Job);
@@ -124,7 +135,10 @@ public class JDFUsageCounterTest extends JDFTestCaseBase
         assertTrue(uc3.isValid(EnumValidationLevel.Complete));
         assertEquals(StringUtil.setvString(uc3.getEnumCounterTypes()), StringUtil.setvString(uc3.getCounterTypes()));
         rl=root.getLink(uc3, null);
-        rl.setActualAmount(30, null);             
+        rl.setActualAmount(30, null);   
+        ra=(JDFResourceAudit) ap.addAudit(EnumAuditType.ResourceAudit, null);
+        ra.updateLink(rl);
+
         JDFUsageCounter uc4=(JDFUsageCounter) root.appendMatchingResource(ElementName.USAGECOUNTER, EnumProcessUsage.AnyInput, null);
         uc4.setCounterID("c4");
         uc4.setScope(EnumScope.Job);
@@ -132,7 +146,13 @@ public class JDFUsageCounterTest extends JDFTestCaseBase
         assertTrue(uc4.isValid(EnumValidationLevel.Complete));
         assertEquals(StringUtil.setvString(uc4.getEnumCounterTypes()), StringUtil.setvString(uc4.getCounterTypes()));
         rl=root.getLink(uc4, null);
-        rl.setActualAmount(40, null);             
+        rl.setActualAmount(40, null); 
+        ra=(JDFResourceAudit) ap.addAudit(EnumAuditType.ResourceAudit, null);
+        ra.updateLink(rl);
+
+        
+ 
+        assertTrue(root.isValid(EnumValidationLevel.Incomplete));
         
         doc.write2File(sm_dirTestDataTemp+"UCList.jdf", 2, false);
         

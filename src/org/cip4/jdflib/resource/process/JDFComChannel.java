@@ -181,15 +181,16 @@ public class JDFComChannel extends JDFAutoComChannel
             return null;
         locator= StringUtil.stripPrefix(locator,TEL,true);
         if(stripNonNumerical)
-            locator=StringUtil.replaceCharSet(locator, "()., /", null, 0);
+            locator=StringUtil.stripNot(locator, "+0123456789");
         return locator;
     }
     /**
-     * set the phone number of this, if this is a valid phone address, 
-     * any "tel:" or "fax:" is stripped
+     * set the phone number of this, if this is a valid phone url, 
+     * "tel:" or "fax:" is prepended, if it is not yet there
      * @param phone the phone number string
      * @param replaceForBlank the replacement char for non-leading blanks , typically "." or null are a good idea
      * @param channelType the channelType - must be either Fax or Phone
+     * @throws IllegalArgumentException if phone is not a valid phone number
      * 
      */
     public void setPhoneNumber(String phone, String replaceForBlank, EnumChannelType channelType)

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -152,15 +152,21 @@ public class JDFIntentResource extends JDFResource
     {
         return "JDFInsertingIntent[  --> " + super.toString() + " ]";
     }
+    
     /**
      * set all actual values to the preset defined in preferred
-     * @param String key the key of the span resource to modify, if empty do all
      * @return number of elements modified
      */
     public int preferredToActual()
     {
-        return this.preferredToActual(JDFConstants.EMPTYSTRING);
+        return this.preferredToActual(null);
     }
+    
+    /**
+     * set actual values to the preset defined in preferred
+     * @param String key the key of the span resource to modify, if null do all
+     * @return number of elements modified
+     */
     public int preferredToActual(String key)
     {
         int nDone = 0;
@@ -198,6 +204,7 @@ public class JDFIntentResource extends JDFResource
         }
         return nDone;
     }
+    
     /**
      * get a list of all span resources
      * @return VElement all Span elements of this

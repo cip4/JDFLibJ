@@ -359,6 +359,14 @@ public class JDFProcessRun extends JDFAutoProcessRun
           throw new JDFException("not a valid date string. Malformed JDF");
       }
   }
+
+@Override
+public boolean init()
+{
+    setEnd(null);
+    return super.init();
+}
+
 } 
 
 // class JDFProcessRun

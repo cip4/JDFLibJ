@@ -251,6 +251,13 @@ public class StringUtilTest extends JDFTestCaseBase
         assertNull(StringUtil.stripPrefix(null, "A:", false));
         assertEquals(StringUtil.stripPrefix("a:b", null, false),"a:b");
     }
+    
+    public void testStripNot()
+    {
+        assertEquals(StringUtil.stripNot("a1b321", "12"),"121");
+        assertNull(StringUtil.stripNot("a1b321", null));
+        assertNull(StringUtil.stripNot("a1b321", "7"));
+    }
     /**
      * test regexp matching utility
      *

@@ -1207,6 +1207,27 @@ public class JDFResourceTest extends JDFTestCaseBase
         assertTrue(xm.getInvalidAttributes(EnumValidationLevel.Incomplete, true, -1).contains(AttributeName.PARTIDKEYS));
     }
     ////////////////////////////////////////////////////////////////////////////
+    public void testExplicitPartUsage()
+    {
+        JDFNode n=new JDFDoc("JDF").getJDFRoot();
+        n.setType(EnumType.ProcessGroup);
+        JDFResource pv=n.addResource("Preview", EnumUsage.Input);
+        pv.setPartUsage(EnumPartUsage.Explicit);
+        JDFResource pv1=pv.addPartition(EnumPartIDKey.Separation, "Cyan");
+        pv.setResStatus(EnumResStatus.Unavailable, false);
+        assertFalse(pv.isValid(EnumValidationLevel.Complete));
+        assertFalse(pv1.isValid(EnumValidationLevel.Complete));
+        pv1.setResStatus(EnumResStatus.Incomplete, false);
+        assertTrue(pv.isValid(EnumValidationLevel.Complete));
+        assertTrue(pv1.isValid(EnumValidationLevel.Complete));
+        JDFResource pv2=pv.addPartition(EnumPartIDKey.Separation, "Blue");
+        assertFalse(pv.isValid(EnumValidationLevel.Complete));
+        assertFalse(pv2.isValid(EnumValidationLevel.Complete));
+        assertTrue(pv1.isValid(EnumValidationLevel.Complete));
+               
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
     public void testInvalidPartUsage()
     {
         JDFDoc doc=creatXMDoc();

@@ -244,7 +244,17 @@ public class JDFElementTest extends TestCase
         assertEquals(rl.toString().indexOf("xmlns=\"\""), -1);
         assertEquals(rl.getPart(0).toString().indexOf("xmlns=\"\""), -1);
     }
-
+    public void testRemoveExtensions()
+    {
+        JDFDoc d=new JDFDoc("JDF");
+        JDFNode n=d.getJDFRoot();
+        KElement e1=n.appendElement("a:b", "a.com");
+        KElement e2=n.getAuditPool().appendElement("a:b", "a.com");
+        n.getAuditPool().setAttribute("a:b", "c","a.com");
+        assertTrue(n.toString().indexOf("a:")>0);
+        n.removeExtensions();
+        assertEquals(n.toString().indexOf("a:"), -1);
+    }
     public void testRemoveChild()
     {
         JDFDoc d=new JDFDoc("JDF");

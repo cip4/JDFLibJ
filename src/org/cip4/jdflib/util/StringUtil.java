@@ -1932,9 +1932,26 @@ public class StringUtil
         }
         return str;
     }
-
-
-
+    
+    /**
+     * returns a new string that has all characters stripped from work that are not in keepChars
+     * @param work
+     * @param keepChars
+     * @return
+     */
+    public static String stripNot(String work, String keepChars)
+    {
+        if(work==null || keepChars==null)
+            return null;
+        StringBuffer b=new StringBuffer(work.length());
+        for(int i=0;i<work.length();i++)
+        {
+            if(keepChars.indexOf(work.charAt(i))>=0)
+                b.append(work.charAt(i));
+            
+        }
+        return b.length()>0 ? b.toString() : null;
+    }
 
 
     //////////////////////////////////////////////////////////////////////////////////

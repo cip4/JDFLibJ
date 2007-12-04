@@ -155,7 +155,7 @@ public class JDFQueue extends JDFAutoQueue
         return numChildElements(ElementName.QUEUEENTRY,null);
     }
 
-    /**
+      /**
      * Get a vector of all queueentry elements
      * @return VElement: the vector of queue entries
      */

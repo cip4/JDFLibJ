@@ -122,16 +122,19 @@ public class JDFPersonTest extends JDFTestCaseBase
         person.setFamilyName("Schmidt");
         assertEquals(person.getFamilyName(), "Schmidt");
         assertEquals(person.getDescriptiveName(), "Mary Schmidt");
-
+        person.setFamilyName(null);
+        assertFalse(person.hasAttribute("FamilyName"));
+        assertEquals(person.getDescriptiveName(), "Mary Schmidt");
     }
+    
     public void testLastFirstName() throws Exception
     {
         testFamilyName();
         person.setFirstName("Joe");
         assertEquals(person.getFirstName(), "Joe");
         assertEquals(person.getDescriptiveName(), "Joe Müller");
-
     }
+    
     public void testKeepDescName() throws Exception
     {
         person.setDescriptiveName("foo");

@@ -177,7 +177,7 @@ public class MISGoldenTicket extends BaseGoldenTicket
     /**
      * @param icsLevel
      */
-    protected void initNodeInfo()
+    protected JDFNodeInfo initNodeInfo()
     {
         JDFNodeInfo ni=theNode.getCreateNodeInfo();
         ni.setResStatus(EnumResStatus.Available, false);
@@ -185,11 +185,12 @@ public class MISGoldenTicket extends BaseGoldenTicket
         JDFEmployee emp=ni.appendEmployee();
         emp.setPersonalID("personalID1");
         emp.setRoles(new VString("CSR",null));
+        return ni;
     }
     /**
      * @param icsLevel
      */
-    protected void initCustomerInfo()
+    protected JDFCustomerInfo initCustomerInfo()
     {
         JDFCustomerInfo ci=theNode.getCreateCustomerInfo();
         ci.setResStatus(EnumResStatus.Available, false);
@@ -205,15 +206,17 @@ public class MISGoldenTicket extends BaseGoldenTicket
         person.setFirstName("Harald");
         JDFCompany comp=contact.appendCompany();
         comp.setOrganizationName("The Pits");
+        return ci;
     }
 
-    protected void initDevice()
+    protected JDFDevice initDevice()
     {
         if(misICSLevel<2)
-            return;
+            return null;
         JDFDevice dev = (JDFDevice) theNode.getCreateResource(ElementName.DEVICE, EnumUsage.Input, 0);
         dev.setResStatus(EnumResStatus.Available, false);
         dev.setDeviceID("deviceID");
+        return dev;
 
     }
 

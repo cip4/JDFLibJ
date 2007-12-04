@@ -135,7 +135,9 @@ import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -168,7 +170,7 @@ public class JDFElement extends KElement
     }
     private static final SimpleDateFormat dateFormatter = new SimpleDateFormat ("yyMMdd_hhmmssSS");
     @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return getTheAttributeInfo_JDFElement();
     }
@@ -185,7 +187,7 @@ public class JDFElement extends KElement
     }
 
     @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -216,7 +218,7 @@ public class JDFElement extends KElement
             String myNamespaceURI,
             String qualifiedName)
     {
-         super(myOwnerDocument, myNamespaceURI==null ? getSchemaURL() : myNamespaceURI , qualifiedName);
+        super(myOwnerDocument, myNamespaceURI==null ? getSchemaURL() : myNamespaceURI , qualifiedName);
     }
 
     /**
@@ -447,20 +449,20 @@ public class JDFElement extends KElement
         public boolean evaluateXY(double x, double y, double nt, double pt)
         {
             if (this == EnumXYRelation.gt) {
-				return x+pt > y-nt;
-			} else if (this == EnumXYRelation.ge) {
-				return x+pt >= y-nt;
-			} else if (this == EnumXYRelation.eq) {
-				return x >= y-nt && x <= y+pt;
-			} else if (this == EnumXYRelation.le) {
-				return x-nt <= y+pt;
-			} else if (this == EnumXYRelation.lt) {
-				return x-nt < y+pt;
-			} else if (this == EnumXYRelation.ne) {
-				return x < y-nt || x > y+pt;
-			} else {
-				return true;
-			}
+                return x+pt > y-nt;
+            } else if (this == EnumXYRelation.ge) {
+                return x+pt >= y-nt;
+            } else if (this == EnumXYRelation.eq) {
+                return x >= y-nt && x <= y+pt;
+            } else if (this == EnumXYRelation.le) {
+                return x-nt <= y+pt;
+            } else if (this == EnumXYRelation.lt) {
+                return x-nt < y+pt;
+            } else if (this == EnumXYRelation.ne) {
+                return x < y-nt || x > y+pt;
+            } else {
+                return true;
+            }
         }
 
 
@@ -1007,7 +1009,7 @@ public class JDFElement extends KElement
      * @return String
      */
     @Override
-	public String toString()
+    public String toString()
     {
         return "JDFElement[  --> " + super.toString() + " ]";
     }
@@ -1027,7 +1029,7 @@ public class JDFElement extends KElement
      * @return boolean the validity of the node
      */
     @Override
-	public boolean isValid(EnumValidationLevel level)
+    public boolean isValid(EnumValidationLevel level)
     {
         return isValid_JDFElement(level);
     }
@@ -1051,13 +1053,13 @@ public class JDFElement extends KElement
         // there is no explicit extension type --> these are always assumed valid
         final Class class1 = this.getClass();
         if(class1==JDFElement.class || class1==JDFResource.class) {
-			return true;
-		}
+            return true;
+        }
 
         try
         {
             if (getInvalidAttributes(level, true, 1).size() > 0 ||
-                getInvalidElements(level, true, 1).size() > 0)
+                    getInvalidElements(level, true, 1).size() > 0)
             {
                 return false;
             }
@@ -1185,7 +1187,7 @@ public class JDFElement extends KElement
      * @deprecated use hasAttribute
      */
     @Deprecated
-	public boolean hasSettingsPolicy(boolean bInherit)
+    public boolean hasSettingsPolicy(boolean bInherit)
     {
         return hasAttribute(AttributeName.SETTINGSPOLICY, null, bInherit);
     }
@@ -1195,7 +1197,7 @@ public class JDFElement extends KElement
      * @deprecated use removeAttribute
      */
     @Deprecated
-	public void removeSettingsPolicy()
+    public void removeSettingsPolicy()
     {
         removeAttribute(AttributeName.SETTINGSPOLICY, null);
     }
@@ -1205,7 +1207,7 @@ public class JDFElement extends KElement
      * @deprecated use removeAttribute
      */
     @Deprecated
-	public void removeBestEffortExceptions()
+    public void removeBestEffortExceptions()
     {
         removeAttribute(AttributeName.BESTEFFORTEXCEPTIONS, null);
     }
@@ -1217,7 +1219,7 @@ public class JDFElement extends KElement
      * @deprecated use getrRef of the coresponding sub classes instead
      */
     @Deprecated
-	public String getHRef()
+    public String getHRef()
     {
         return getAttribute(JDFConstants.RREF, null, JDFConstants.EMPTYSTRING);
     }
@@ -1299,10 +1301,10 @@ public class JDFElement extends KElement
     public void setAttribute(String key, JDFDuration value, String nameSpaceURI)
     {
         if(value==null) {
-			removeAttribute(key,nameSpaceURI);
-		} else {
-			super.setAttribute(key, value.getDurationISO(), nameSpaceURI);
-		}
+            removeAttribute(key,nameSpaceURI);
+        } else {
+            super.setAttribute(key, value.getDurationISO(), nameSpaceURI);
+        }
     }
 
     /**
@@ -1317,10 +1319,10 @@ public class JDFElement extends KElement
     public void setAttribute(String key, JDFDurationRangeList value, String nameSpaceURI)
     {
         if(value==null) {
-			removeAttribute(key,nameSpaceURI);
-		} else {
-			super.setAttribute(key, value.toString(), nameSpaceURI);
-		}
+            removeAttribute(key,nameSpaceURI);
+        } else {
+            super.setAttribute(key, value.toString(), nameSpaceURI);
+        }
     }
 
     /**
@@ -1335,10 +1337,10 @@ public class JDFElement extends KElement
     public void setAttribute(String key, JDFDateTimeRangeList value, String nameSpaceURI)
     {
         if(value==null) {
-			removeAttribute(key,nameSpaceURI);
-		} else {
-			super.setAttribute(key, value.toString(), nameSpaceURI);
-		}
+            removeAttribute(key,nameSpaceURI);
+        } else {
+            super.setAttribute(key, value.toString(), nameSpaceURI);
+        }
     }
 
     /**
@@ -1353,10 +1355,10 @@ public class JDFElement extends KElement
     public void setAttribute(String key, JDFRectangleRangeList value, String nameSpaceURI)
     {
         if(value==null) {
-			removeAttribute(key,nameSpaceURI);
-		} else {
-			super.setAttribute(key, value.toString(), nameSpaceURI);
-		}
+            removeAttribute(key,nameSpaceURI);
+        } else {
+            super.setAttribute(key, value.toString(), nameSpaceURI);
+        }
     }
 
     /**
@@ -1371,10 +1373,10 @@ public class JDFElement extends KElement
     public void setAttribute(String key, JDFShapeRangeList value, String nameSpaceURI)
     {
         if(value==null) {
-			removeAttribute(key,nameSpaceURI);
-		} else {
-			super.setAttribute(key, value.toString(), nameSpaceURI);
-		}
+            removeAttribute(key,nameSpaceURI);
+        } else {
+            super.setAttribute(key, value.toString(), nameSpaceURI);
+        }
     }
 
     /**
@@ -1389,10 +1391,10 @@ public class JDFElement extends KElement
     public void setAttribute(String key, JDFNumList value, String nameSpaceURI)
     {
         if(value==null) {
-			removeAttribute(key,nameSpaceURI);
-		} else {
-			super.setAttribute(key, value.toString(), nameSpaceURI);
-		}
+            removeAttribute(key,nameSpaceURI);
+        } else {
+            super.setAttribute(key, value.toString(), nameSpaceURI);
+        }
     }
 
     /**
@@ -1407,10 +1409,10 @@ public class JDFElement extends KElement
     public void setAttribute(String key, JDFNumberRange value, String nameSpaceURI)
     {
         if(value==null) {
-			removeAttribute(key,nameSpaceURI);
-		} else {
-			super.setAttribute(key, value.toString(), nameSpaceURI);
-		}
+            removeAttribute(key,nameSpaceURI);
+        } else {
+            super.setAttribute(key, value.toString(), nameSpaceURI);
+        }
     }
 
     /**
@@ -1425,10 +1427,10 @@ public class JDFElement extends KElement
     public void setAttribute(String key, JDFIntegerRange value, String nameSpaceURI)
     {
         if(value==null) {
-			removeAttribute(key,nameSpaceURI);
-		} else {
-			super.setAttribute(key, value.toString(), nameSpaceURI);
-		}
+            removeAttribute(key,nameSpaceURI);
+        } else {
+            super.setAttribute(key, value.toString(), nameSpaceURI);
+        }
     }
 
 
@@ -1444,10 +1446,10 @@ public class JDFElement extends KElement
     public void setAttribute(String key, JDFNameRangeList value, String nameSpaceURI)
     {
         if(value==null) {
-			removeAttribute(key,nameSpaceURI);
-		} else {
-			super.setAttribute(key,value.toString(),nameSpaceURI);
-		}
+            removeAttribute(key,nameSpaceURI);
+        } else {
+            super.setAttribute(key,value.toString(),nameSpaceURI);
+        }
     }
 
     /**
@@ -1462,10 +1464,10 @@ public class JDFElement extends KElement
     public void setAttribute(String key, JDFNameRange value, String nameSpaceURI)
     {
         if(value==null) {
-			removeAttribute(key,nameSpaceURI);
-		} else {
-			super.setAttribute(key,value.toString(),nameSpaceURI);
-		}
+            removeAttribute(key,nameSpaceURI);
+        } else {
+            super.setAttribute(key,value.toString(),nameSpaceURI);
+        }
     }
 
     /**
@@ -1480,10 +1482,10 @@ public class JDFElement extends KElement
     public void setAttribute(String key, JDFNumberRangeList value, String nameSpaceURI)
     {
         if(value==null) {
-			removeAttribute(key,nameSpaceURI);
-		} else {
-			super.setAttribute(key,value.toString(),nameSpaceURI);
-		}
+            removeAttribute(key,nameSpaceURI);
+        } else {
+            super.setAttribute(key,value.toString(),nameSpaceURI);
+        }
     }
 
     /**
@@ -1498,10 +1500,10 @@ public class JDFElement extends KElement
     public void setAttribute(String key, JDFIntegerRangeList value, String nameSpaceURI)
     {
         if(value==null) {
-			removeAttribute(key,nameSpaceURI);
-		} else {
-			super.setAttribute(key,value.toString(),nameSpaceURI);
-		}
+            removeAttribute(key,nameSpaceURI);
+        } else {
+            super.setAttribute(key,value.toString(),nameSpaceURI);
+        }
     }
 
     /**
@@ -1516,10 +1518,10 @@ public class JDFElement extends KElement
     public void setAttribute(String key, JDFXYPairRange value, String nameSpaceURI)
     {
         if(value==null) {
-			removeAttribute(key,nameSpaceURI);
-		} else {
-			super.setAttribute(key,value.toString(),nameSpaceURI);
-		}
+            removeAttribute(key,nameSpaceURI);
+        } else {
+            super.setAttribute(key,value.toString(),nameSpaceURI);
+        }
     }
 
     /**
@@ -1534,10 +1536,10 @@ public class JDFElement extends KElement
     public void setAttribute(String key, JDFXYPairRangeList value, String nameSpaceURI)
     {
         if(value==null) {
-			removeAttribute(key,nameSpaceURI);
-		} else {
-			super.setAttribute(key,value.toString(),nameSpaceURI);
-		}
+            removeAttribute(key,nameSpaceURI);
+        } else {
+            super.setAttribute(key,value.toString(),nameSpaceURI);
+        }
     }
 
     /**
@@ -1550,7 +1552,7 @@ public class JDFElement extends KElement
      * @default setvStringAttribute(key, value, null)
      */
     @Deprecated
-	public void setvStringAttribute(
+    public void setvStringAttribute(
             String key,
             JDFNameRange value,
             String nameSpaceURI)
@@ -1585,11 +1587,11 @@ public class JDFElement extends KElement
         n += hasAtt1 ? 1 : 0;
         n += hasAttribute(att2) ? 1 : 0;
         if(!att3.equals(JDFConstants.EMPTYSTRING)) {
-			n += hasAttribute(att3) ? 1 : 0;
-		}
+            n += hasAttribute(att3) ? 1 : 0;
+        }
         if(!att4.equals(JDFConstants.EMPTYSTRING)) {
-			n += hasAttribute(att4) ? 1 : 0;
-		}
+            n += hasAttribute(att4) ? 1 : 0;
+        }
 
         if(EnumValidationLevel.isRequired(level))
         {
@@ -1674,16 +1676,16 @@ public class JDFElement extends KElement
         return setID;
     }
 
-//dm    /**
-//     * Get the target element of a link (string id)
-//     * @return JDFElement - the element that this reference refers to
-//     * @deprecated use the respective subclasses getTarget functions
-//     */
-//    @Deprecated
-//	public JDFResource getTarget()
-//    {
-//        return (JDFResource) getTarget_JDFElement(getAttribute(AttributeName.RREF), AttributeName.ID);
-//    }
+//  dm    /**
+//  * Get the target element of a link (string id)
+//  * @return JDFElement - the element that this reference refers to
+//  * @deprecated use the respective subclasses getTarget functions
+//  */
+//  @Deprecated
+//  public JDFResource getTarget()
+//  {
+//  return (JDFResource) getTarget_JDFElement(getAttribute(AttributeName.RREF), AttributeName.ID);
+//  }
 
     /**
      * Get the target element of a link<br>
@@ -1724,7 +1726,7 @@ public class JDFElement extends KElement
      * @deprecated use instanceof JDFRefElement
      */
     @Deprecated
-	public boolean isRefElement()
+    public boolean isRefElement()
     {
         return this instanceof JDFRefElement;
     }
@@ -1736,7 +1738,7 @@ public class JDFElement extends KElement
      * @deprecated use instanceof JDFRefElement
      */
     @Deprecated
-	public static boolean isRefElementStatic(KElement kElem)
+    public static boolean isRefElementStatic(KElement kElem)
     {
         return kElem instanceof JDFRefElement;
     }
@@ -1747,7 +1749,7 @@ public class JDFElement extends KElement
      * @deprecated use instanceof JDFResource instead
      */
     @Deprecated
-	public boolean isResource()
+    public boolean isResource()
     {
         return this instanceof JDFResource;
     }
@@ -1758,7 +1760,7 @@ public class JDFElement extends KElement
      * @deprecated use instanceof JDFResource instead
      */
     @Deprecated
-	static public boolean isResourceStatic(KElement e)
+    static public boolean isResourceStatic(KElement e)
     {
         return e instanceof JDFResource;
     }
@@ -1778,7 +1780,7 @@ public class JDFElement extends KElement
      * @deprecated use instanceof JDFResourceLink instead
      */
     @Deprecated
-	public boolean isResourceLink()
+    public boolean isResourceLink()
     {
         return this instanceof JDFResourceLink;
     }
@@ -1791,7 +1793,7 @@ public class JDFElement extends KElement
      *
      */
     @Deprecated
-	public static boolean isResourceLinkStatic(KElement kElem)
+    public static boolean isResourceLinkStatic(KElement kElem)
     {
         return kElem instanceof JDFResourceLink;
     }
@@ -1802,7 +1804,7 @@ public class JDFElement extends KElement
      * @deprecated use instanceof JDFResourceLink instead
      */
     @Deprecated
-	public boolean isComment()
+    public boolean isComment()
     {
         return this instanceof JDFComment;
     }
@@ -1814,7 +1816,7 @@ public class JDFElement extends KElement
      * @deprecated use instanceof JDFComment instead
      */
     @Deprecated
-	public static boolean isCommentStatic(KElement kElem)
+    public static boolean isCommentStatic(KElement kElem)
     {
         return kElem instanceof JDFComment;
     }
@@ -1825,7 +1827,7 @@ public class JDFElement extends KElement
      * @deprecated use instanceof JDFNode instead
      */
     @Deprecated
-	public boolean isJDFNode()
+    public boolean isJDFNode()
     {
         return this instanceof JDFNode;
     }
@@ -1836,11 +1838,59 @@ public class JDFElement extends KElement
      * @deprecated - use isInJDFNameSpaceStatic(kElem)
      */
     @Deprecated
-	public boolean isInJDFNameSpace()
+    public boolean isInJDFNameSpace()
     {
         return isInJDFNameSpaceStatic(this);
     }
 
+    /**
+     *remove all private extensions form a jdf element and its children
+     *
+     */
+    public void removeExtensions()
+    {
+        Node n=getFirstChild();
+        while (n!=null)
+        {
+            Node next=n.getNextSibling(); // get next prior to zapping
+            final String nsuri=n.getNamespaceURI();
+            if(!isInJDFNameSpaceStatic(nsuri))
+            {
+                removeChild(n);
+            }
+            else if(n instanceof JDFElement)
+            {
+                ((JDFElement) n).removeExtensions();
+            }
+
+            n=next;
+        }
+        NamedNodeMap nm=getAttributes();
+        int siz=nm==null ? 0 : nm.getLength();
+        for(int i=siz-1;i>=0;i--)
+        {
+            Node na=nm.item(i);
+            final String nsuri=na.getNamespaceURI();
+            if(!isInJDFNameSpaceStatic(nsuri))
+            {
+                removeAttributeNode((Attr)na);
+            }
+        }
+    }
+
+
+    /**
+     * checks whether kElem is in the JDF namespace
+     * @param ns the KElement to check
+     * @return boolean - true, if kElem is in the JDF namespace
+     */
+    public static boolean isInJDFNameSpaceStatic(String ns)
+    {
+        return ns==null || 
+        ns.equals(JDFConstants.EMPTYSTRING)
+        ||  (ns.compareToIgnoreCase("http://www.CIP4.org/JDFSchema_1_1") == 0)
+        ||  (ns.compareToIgnoreCase("http://www.CIP4.org/JDFSchema_1") == 0);
+    }
     /**
      * checks whether kElem is in the JDF namespace
      * @param kElem the KElement to check
@@ -1848,19 +1898,11 @@ public class JDFElement extends KElement
      */
     public static boolean isInJDFNameSpaceStatic(KElement kElem)
     {
-        boolean fIsInJDFNameSpace = true;
+        if(kElem==null)
+            return false; // null ain't no jdf
 
         final String ns = kElem.getNamespaceURI();
-
-        if (ns != null)
-        {
-            fIsInJDFNameSpace =
-                ns.equals(JDFConstants.EMPTYSTRING)
-                ||  (ns.compareToIgnoreCase("http://www.CIP4.org/JDFSchema_1_1") == 0)
-                ||  (ns.compareToIgnoreCase("http://www.CIP4.org/JDFSchema_1") == 0);
-        }
-
-        return fIsInJDFNameSpace;
+        return isInJDFNameSpaceStatic(ns);
     }
 
     /**
@@ -1897,8 +1939,8 @@ public class JDFElement extends KElement
         {
             parent=root.getParentJDF();
             if(parent==null) {
-				break;
-			}
+                break;
+            }
             parent=parent.getParentJDF();
             if(parent==null)
             {
@@ -1965,7 +2007,7 @@ public class JDFElement extends KElement
      * @deprecated use KElement.fillHashSet(ElementName.RREF,null,hashSet)
      */
     @Deprecated
-	public VString upDaterRefs()
+    public VString upDaterRefs()
     {
         final VString vrRefs = new VString();
         final VElement v =
@@ -2044,7 +2086,7 @@ public class JDFElement extends KElement
      * default: getChildElementVector(null, null,null, true, 0, false)
      */
     @Override
-	public VElement getChildElementVector(String nodeName,String nameSpaceURI,
+    public VElement getChildElementVector(String nodeName,String nameSpaceURI,
             JDFAttributeMap mAttrib, boolean bAnd, int maxSize, boolean bResolveTarget)
     {
         return getChildElementVector_JDFElement(nodeName, nameSpaceURI, mAttrib, bAnd, maxSize, bResolveTarget);
@@ -2077,13 +2119,13 @@ public class JDFElement extends KElement
      * @default getChildrenByTagName(s,null,null, false, true, 0)
      */
     @Override
-	public VElement getChildrenByTagName(String elementName, String nameSpaceURI, JDFAttributeMap mAttrib, boolean bDirect,
+    public VElement getChildrenByTagName(String elementName, String nameSpaceURI, JDFAttributeMap mAttrib, boolean bDirect,
             boolean bAnd, int maxSize)
     {
-        
+
         return getChildrenByTagName(elementName, nameSpaceURI, mAttrib, bDirect, bAnd, maxSize,
                 !isWildCard(elementName)&&!elementName.endsWith("Ref"));
-        
+
     }
     /**
      * Gets children of 'this' by tag name, nameSpaceURI
@@ -2117,10 +2159,10 @@ public class JDFElement extends KElement
             boolean bAnd, int maxSize, boolean bFollowRefs)
     {
         VElement v=super.getChildrenByTagName(elementName, nameSpaceURI, mAttrib, bDirect, bAnd, maxSize);
- 
+
         if(bFollowRefs==false)
             return v; // do not folow refs if explicit refs are requested
-        
+
         final int size = v==null ? 0 : v.size();        
         for(int i=0;i<size;i++)
         {
@@ -2129,9 +2171,9 @@ public class JDFElement extends KElement
         }
         return v;
     }
-    
+
     /**
-   * @see org.cip4.jdflib.core.KElement#getChildElementVector(
+     * @see org.cip4.jdflib.core.KElement#getChildElementVector(
      *          java.lang.String, java.lang.String,
      *          org.cip4.jdflib.datatypes.JDFAttributeMap,
      *          boolean, int, boolean)
@@ -2149,17 +2191,17 @@ public class JDFElement extends KElement
     {
         final VElement v = new VElement();
         if(isWildCard(nodeName)) {
-			nodeName=null;
-		}
+            nodeName=null;
+        }
         if(isWildCard(nameSpaceURI)) {
-			nameSpaceURI=null;
-		}
+            nameSpaceURI=null;
+        }
         if(mAttrib!=null && mAttrib.isEmpty()) {
-			mAttrib=null;
-		}
+            mAttrib=null;
+        }
         if(maxSize==0) {
-			maxSize=-1;
-		}
+            maxSize=-1;
+        }
 
         final boolean bAlwaysFit = nodeName==null && nameSpaceURI==null;
         final boolean bMapEmpty = mAttrib == null;
@@ -2212,7 +2254,7 @@ public class JDFElement extends KElement
      * @see org.cip4.jdflib.core.KElement#getElementNameVector()
      */
     @Override
-	public VString getElementNameVector()
+    public VString getElementNameVector()
     {
         final VElement e = getChildElementVector(null,null,null,true,0,false);
 
@@ -2238,7 +2280,7 @@ public class JDFElement extends KElement
      * @default getElement(nodeName, null, 0)
      */
     @Override
-	public KElement getElement(String nodeName, String nameSpaceURI, int iSkip)
+    public KElement getElement(String nodeName, String nameSpaceURI, int iSkip)
     {
         return getElement_JDFElement(nodeName, nameSpaceURI, iSkip);
     }
@@ -2322,7 +2364,7 @@ public class JDFElement extends KElement
      * @default numChildElements(String nodeName, null)
      */
     @Override
-	public int numChildElements(String nodeName, String nameSpaceURI)
+    public int numChildElements(String nodeName, String nameSpaceURI)
     {
         return getChildElementVector(nodeName, nameSpaceURI, null, true, 0, false).size();
     }
@@ -2338,7 +2380,7 @@ public class JDFElement extends KElement
      * @param mAttrib      attribute map to search for
      */
     @Override
-	public void removeChildren(String nodeName, String nameSpaceURI, JDFAttributeMap mAttrib)
+    public void removeChildren(String nodeName, String nameSpaceURI, JDFAttributeMap mAttrib)
     {
         // the loop allows jdf resources to recursively remove all children
         while (true)
@@ -2402,7 +2444,7 @@ public class JDFElement extends KElement
      * @return KElement - the removed node
      */
     @Override
-	public KElement removeChild(String node, String nameSpaceURI, int n)
+    public KElement removeChild(String node, String nameSpaceURI, int n)
     {
         // use KElement because I do not want to remove the target
         final VElement v = getChildElementVector_JDFElement(node, nameSpaceURI, null , true, 0,false);
@@ -2446,7 +2488,7 @@ public class JDFElement extends KElement
             if(n!=null)
             {
                 local=n.getSpawnID(true);
-                
+
                 if(!isWildCard(local))
                     local="."+StringUtil.rightStr(local, 6)+".";
             }
@@ -2478,8 +2520,8 @@ public class JDFElement extends KElement
     public void setAttributeNameTimeStamp(String attributeName, JDFDate timestamp)
     {
         if (timestamp == null) {
-			timestamp = new JDFDate();
-		}
+            timestamp = new JDFDate();
+        }
         setAttribute(attributeName, timestamp.getDateTimeISO(), null);
     }
 
@@ -2491,7 +2533,7 @@ public class JDFElement extends KElement
      * @return String - a unique ID string
      */
     @Deprecated
-	public String idString(int id)
+    public String idString(int id)
     {
         String s  = JDFConstants.LINK;
         String strID = Integer.toString(id);
@@ -2517,11 +2559,11 @@ public class JDFElement extends KElement
     {
         KElement e2=e;
         if(e2 instanceof JDFNode) {
-			e2=e2.getParentNode_KElement();
-		}
+            e2=e2.getParentNode_KElement();
+        }
         if(e2==null) {
-			return null;
-		}
+            return null;
+        }
         e2= e2.getDeepParent(ElementName.JDF, 0);
         return e2==e ? null : (JDFNode) e2;
     }
@@ -2552,16 +2594,16 @@ public class JDFElement extends KElement
             boolean bIgnorePrivate,
             int nMax)
     {
-        
+
         final AttributeInfo ai=getTheAttributeInfo();
         VString v=getInvalidAttributes_JDFElement(level, bIgnorePrivate, nMax,ai);
         String s=getNamespaceURI();
         if(s!=null && s.toLowerCase().indexOf("www.cip4.org")>=0&&!s.equals(JDFConstants.JDFNAMESPACE))
         {
-           if(v==null)
-               v=new VString(AttributeName.XMLNS,null);
-           else
-               v.appendUnique(AttributeName.XMLNS);
+            if(v==null)
+                v=new VString(AttributeName.XMLNS,null);
+            else
+                v.appendUnique(AttributeName.XMLNS);
         }
         return v;
     }
@@ -2783,13 +2825,13 @@ public class JDFElement extends KElement
     {
         final String idPrefix=getIDPrefix();
         if (lastID==null || lastID.equals(JDFConstants.EMPTYSTRING)) {
-			return idPrefix+uniqueID(0);
-		}
+            return idPrefix+uniqueID(0);
+        }
 
         JDFElement p = (JDFElement) getParentNode_KElement();
         if (p == null) {
-			return idPrefix+uniqueID(0);
-		}
+            return idPrefix+uniqueID(0);
+        }
 
         return generateDotID(AttributeName.ID, null);
     }
@@ -2811,12 +2853,12 @@ public class JDFElement extends KElement
         JDFElement p = (JDFElement) getParentNode_KElement();
         final String  idPrefix=getIDPrefix();
         if (p == null) {
-			return idPrefix+uniqueID(0);
-		}
+            return idPrefix+uniqueID(0);
+        }
         String parentID = p.getAttribute(key, nameSpaceURI, null);
         if (parentID==null) {
-			return idPrefix+uniqueID(0);
-		}
+            return idPrefix+uniqueID(0);
+        }
 
         VElement vn = p.getChildElementVector(nodeName, nameSpaceURI, null, true, 0, false);
         int siz = vn.size();
@@ -2863,7 +2905,7 @@ public class JDFElement extends KElement
      */
     public synchronized static String uniqueID(int id)
     {
-       if (id != 0)
+        if (id != 0)
         {
             m_lStoreID = id;
         }
@@ -2903,7 +2945,7 @@ public class JDFElement extends KElement
      * @default getEnumAttribute(key, v, null, -1, false)
      */
     @Deprecated
-	public int getEnumAttribute(
+    public int getEnumAttribute(
             String key,
             Vector v,
             String nameSpaceURI,
@@ -2945,7 +2987,7 @@ public class JDFElement extends KElement
      * @default getEnumerationsAttribute(key, allowedValues, null, -1, false)
      */
     @Deprecated
-	public Vector getEnumerationsAttribute(
+    public Vector getEnumerationsAttribute(
             String key,
             Vector v,
             String nameSpaceURI,
@@ -2968,8 +3010,8 @@ public class JDFElement extends KElement
             strAtt = getAttribute(key, nameSpaceURI, JDFConstants.EMPTYSTRING);
         }
         if (strAtt.equals(JDFConstants.EMPTYSTRING)) {
-			vs.add(strAtt);
-		}
+            vs.add(strAtt);
+        }
         vAtts  = StringUtil.tokenize(strAtt, JDFConstants.BLANK, false);
         vs.addAll(vAtts);
 
@@ -3025,8 +3067,8 @@ public class JDFElement extends KElement
             strAtt = getAttribute(key, nameSpaceURI, null);
         }
         if (strAtt==null) {
-			return null;
-		}
+            return null;
+        }
 
         VString vAtts  = StringUtil.tokenize(strAtt, JDFConstants.BLANK, false);
 
@@ -3072,29 +3114,29 @@ public class JDFElement extends KElement
         String s = null;
         if (value != null)
         {
-        	int n = 0;
-	        final Iterator valueIterator = value.iterator();
-	        while (valueIterator.hasNext()) {
-				Object o = valueIterator.next();
-	            if (!(o instanceof ValuedEnum))
-	            {
-	                throw new JDFException("setEnumerationsAttribute: wrong data type in vector");
-	            }
+            int n = 0;
+            final Iterator valueIterator = value.iterator();
+            while (valueIterator.hasNext()) {
+                Object o = valueIterator.next();
+                if (!(o instanceof ValuedEnum))
+                {
+                    throw new JDFException("setEnumerationsAttribute: wrong data type in vector");
+                }
 
-	            if (n++ > 0)
-	            {
-	                s += JDFConstants.BLANK;
-	            }
+                if (n++ > 0)
+                {
+                    s += JDFConstants.BLANK;
+                }
                 else
                 {
                     s="";
                 }
 
-	            s += ((ValuedEnum)o).getName();
-	        }
+                s += ((ValuedEnum)o).getName();
+            }
         }
-        
-		setAttribute(key, s, nameSpaceURI);
+
+        setAttribute(key, s, nameSpaceURI);
     }
 
 
@@ -3118,7 +3160,7 @@ public class JDFElement extends KElement
      * @default ValidAttribute(key, iType, bRequired, null)
      */
     @Deprecated
-	public boolean validAttribute(
+    public boolean validAttribute(
             String key,
             AttributeInfo.EnumAttributeType iType,
             boolean bRequired,
@@ -3147,7 +3189,7 @@ public class JDFElement extends KElement
      * @default ValidEnumAttribute(key, v, bRequired, null)
      */
     @Deprecated
-	public boolean validEnumAttribute(
+    public boolean validEnumAttribute(
             String key,
             Vector v,
             boolean bRequired,
@@ -3171,7 +3213,7 @@ public class JDFElement extends KElement
      * @deprecated use getTheAttributeInfo instead
      */
     @Deprecated
-	public boolean validEnumerationsAttribute(
+    public boolean validEnumerationsAttribute(
             String key,
             Vector vs,
             boolean bRequired,
@@ -3204,7 +3246,7 @@ public class JDFElement extends KElement
      * @return String - the string for the enum
      */
     @Deprecated
-	public String getEnumString(int value, String allowedValues)
+    public String getEnumString(int value, String allowedValues)
     {
         final Vector vs = new Vector();
         vs.addAll(StringUtil.tokenize(allowedValues, JDFConstants.COMMA, false));
@@ -3275,14 +3317,14 @@ public class JDFElement extends KElement
      *
      * @return JDFAttributeMap, of the part element
      */
-     protected JDFAttributeMap getPartMap()
-     {
-         JDFPart p=(JDFPart)getElement(ElementName.PART,null,0);
-         if(p==null) {
-			return null;
-		}
-         return p.getPartMap();
-     }
+    protected JDFAttributeMap getPartMap()
+    {
+        JDFPart p=(JDFPart)getElement(ElementName.PART,null,0);
+        if(p==null) {
+            return null;
+        }
+        return p.getPartMap();
+    }
 
     /**
      * sets all parts to those defined in vParts
@@ -3293,8 +3335,8 @@ public class JDFElement extends KElement
     {
         removeChildren(ElementName.PART, null,null);
         if(vPart==null) {
-			return;
-		}
+            return;
+        }
 
         for (int i = 0; i < vPart.size(); i++)
         {
@@ -3375,7 +3417,7 @@ public class JDFElement extends KElement
      * @deprecated use {@link EnumValidationLevel}.isRequired()
      */
     @Deprecated
-	public static boolean requiredLevel(EnumValidationLevel level)
+    public static boolean requiredLevel(EnumValidationLevel level)
     {
         return EnumValidationLevel.isRequired(level);
     }
@@ -3391,7 +3433,7 @@ public class JDFElement extends KElement
      * @default GetHRefs(null, false);
      */
     @Deprecated
-	public VString getHRefs(VString vDoneRefs, boolean bRecurse)
+    public VString getHRefs(VString vDoneRefs, boolean bRecurse)
     {
         return getHRefs(vDoneRefs,bRecurse,false);
     }
@@ -3411,18 +3453,18 @@ public class JDFElement extends KElement
     {
 
         if(vDoneRefs==null) {
-			vDoneRefs=new VString();
-		}
+            vDoneRefs=new VString();
+        }
 
-         HashSet h=new HashSet();
+        HashSet h=new HashSet();
 
         if(bExpand&&(this instanceof JDFResource))
         {
             VElement vLeaves=((JDFResource) this).getLeaves(true);
             final int siz=vLeaves.size();
             for(int i=0;i<siz;i++) {
-				vLeaves.item(i).fillHashSet(AttributeName.RREF,null,h);
-			}
+                vLeaves.item(i).fillHashSet(AttributeName.RREF,null,h);
+            }
         }
         else
         {
@@ -3459,7 +3501,7 @@ public class JDFElement extends KElement
      * @return VElement
      */
     @Deprecated
-	public VElement getvHRefRes(boolean bRecurse)
+    public VElement getvHRefRes(boolean bRecurse)
     {
         return getvHRefRes(bRecurse,false);
     }
@@ -3481,8 +3523,8 @@ public class JDFElement extends KElement
         {
             KElement kEl = getTarget(sRefs.elementAt(i), AttributeName.ID);
             if (kEl instanceof JDFResource) {
-				v.appendUnique(kEl);
-			}
+                v.appendUnique(kEl);
+            }
         }
 
         return v;
@@ -3494,7 +3536,7 @@ public class JDFElement extends KElement
      * @deprecated rRefs was deprecated in JDF 1.2
      */
     @Deprecated
-	public void appendrRefs(String value)
+    public void appendrRefs(String value)
     {
         appendAttribute(AttributeName.RREFS, value, null, JDFConstants.BLANK, true);
     }
@@ -3505,7 +3547,7 @@ public class JDFElement extends KElement
      * @deprecated rRefs was deprecated in JDF 1.2
      */
     @Deprecated
-	public int removeFromrRefs(String value)
+    public int removeFromrRefs(String value)
     {
         return removeFromAttribute(
                 AttributeName.RREFS,
@@ -3514,23 +3556,23 @@ public class JDFElement extends KElement
                 JDFConstants.BLANK,
                 -1);
     }
-//dm    /**
-//     * Set attribute rRefs, i.e. combine the blank separed attribute list
-//     * @deprecated rRefs was deprecated in JDF 1.2
-//     */
-//    @Deprecated
-//	public void setrRefs(VString vStr)
-//    {
-//        setAttribute(
-//                AttributeName.RREFS,
-//                StringUtil.setvString(vStr,JDFConstants.BLANK,null,null),null);
-//    }
+//  dm    /**
+//  * Set attribute rRefs, i.e. combine the blank separed attribute list
+//  * @deprecated rRefs was deprecated in JDF 1.2
+//  */
+//  @Deprecated
+//  public void setrRefs(VString vStr)
+//  {
+//  setAttribute(
+//  AttributeName.RREFS,
+//  StringUtil.setvString(vStr,JDFConstants.BLANK,null,null),null);
+//  }
     /**
      * Get string attribute rRefs, i.e. split the blank separed attribute list
      * @deprecated rRefs was deprecated in JDF 1.2
      */
     @Deprecated
-	public VString getrRefs()
+    public VString getrRefs()
     {
         final VString vStr = new VString();
         vStr.setAllStrings(
@@ -3557,8 +3599,8 @@ public class JDFElement extends KElement
 
         final String myid = (id == null) ? getAttribute(AttributeName.RREF, null, null) : id;
         if (myid == null) {
-			return null;
-		}
+            return null;
+        }
 
         boolean bSearching = true;
         XMLDocUserData ud = getXMLDocUserData();
@@ -3639,7 +3681,7 @@ public class JDFElement extends KElement
      * @deprecated use getDefaultJDFVersion()
      */
     @Deprecated
-	public final String version()
+    public final String version()
     {
         String ver = getInheritedAttribute(AttributeName.VERSION, null, JDFConstants.EMPTYSTRING);
         if(JDFConstants.EMPTYSTRING.equals(ver))
@@ -3658,16 +3700,16 @@ public class JDFElement extends KElement
         setAttribute(AttributeName.VERSION, enumVer.getName(), null);
     }
 
-//dm    /**
-//     * get EnumVersion attribute Version
-//     * @return EnumVersion - attribute value
-//     * @deprecated 060505 use getVersion(boolean);
-//     */
-//    @Deprecated
-//	public EnumVersion getVersion()
-//    {
-//        return getVersion(true);
-//    }
+//  dm    /**
+//  * get EnumVersion attribute Version
+//  * @return EnumVersion - attribute value
+//  * @deprecated 060505 use getVersion(boolean);
+//  */
+//  @Deprecated
+//  public EnumVersion getVersion()
+//  {
+//  return getVersion(true);
+//  }
 
     /**
      * get the version of this element
@@ -3677,10 +3719,10 @@ public class JDFElement extends KElement
     public EnumVersion getVersion(boolean bInherit)
     {
         return EnumVersion.getEnum(bInherit 
-        ? getInheritedAttribute(AttributeName.VERSION,  null, null)
-        : getAttribute(AttributeName.VERSION,null,null));
+                ? getInheritedAttribute(AttributeName.VERSION,  null, null)
+                        : getAttribute(AttributeName.VERSION,null,null));
     }
-    
+
     /**
      * get attribute MaxVersion, defaults to version if not set
      * 
@@ -3692,18 +3734,18 @@ public class JDFElement extends KElement
     public EnumVersion getMaxVersion(boolean bInherit) 
     {
         String version=(bInherit) ?
-            getInheritedAttribute(AttributeName.MAXVERSION, null,null) :
-            getAttribute(AttributeName.MAXVERSION,  null,  null);
+                getInheritedAttribute(AttributeName.MAXVERSION, null,null) :
+                    getAttribute(AttributeName.MAXVERSION,  null,  null);
 
-        if(version==null)
-            return getVersion(bInherit);
-        
-        return EnumVersion.getEnum(version);
+                if(version==null)
+                    return getVersion(bInherit);
+
+                return EnumVersion.getEnum(version);
     }
 
     /**
      * Enumeration strings for Version
-	 *
+     *
      * NOTE: If not specified the version defaults to Version 1.3
      */
     public static final class EnumVersion extends ValuedEnum
@@ -3716,8 +3758,8 @@ public class JDFElement extends KElement
          * @deprecated just for compiling PrintReady, to be removed afterwards
          */
         @Deprecated
-		@Override
-		public String toString()
+        @Override
+        public String toString()
         {
             return getName();
         }
@@ -3792,7 +3834,7 @@ public class JDFElement extends KElement
          * @ deprecated EnumVersion.Unknown - 
          * don't use EnumVersion.Unknown, it can't be deprecated because of bit operations in eg. AtrInfo.getFirstVersion()
          */
-		public static final EnumVersion Unknown     = new EnumVersion(JDFConstants.UNKNOWN);
+        public static final EnumVersion Unknown     = new EnumVersion(JDFConstants.UNKNOWN);
 
         public static final EnumVersion Version_1_0 = new EnumVersion(JDFConstants.VERSION_1_0);
         public static final EnumVersion Version_1_1 = new EnumVersion(JDFConstants.VERSION_1_1);
@@ -3813,7 +3855,7 @@ public class JDFElement extends KElement
      * @deprecated use EnumVersion.getEnum
      */
     @Deprecated
-	public static EnumVersion stringToVersion(String enumName)
+    public static EnumVersion stringToVersion(String enumName)
     {
         return EnumVersion.getEnum(enumName);
     }
@@ -3828,7 +3870,7 @@ public class JDFElement extends KElement
      * note that this method previously returned JDFElement[]
      */
     @Deprecated
-	public KElement[] getChildElements()
+    public KElement[] getChildElements()
     {
         return getChildElementArray();
     }
@@ -3839,9 +3881,9 @@ public class JDFElement extends KElement
      * @deprecated 060727 use numChildNodes(Node.ELEMENT_NODE);
      */
     @Deprecated
-	public int getChildElementCount()
+    public int getChildElementCount()
     {
-       return numChildNodes(Node.ELEMENT_NODE);
+        return numChildNodes(Node.ELEMENT_NODE);
     }
 
     /**
@@ -3852,7 +3894,7 @@ public class JDFElement extends KElement
      * @deprecated use getElement(null, null ,n)
      */
     @Deprecated
-	public JDFElement getChildElement(int n)
+    public JDFElement getChildElement(int n)
     {
         JDFElement eReturn = null;
 
@@ -4133,7 +4175,7 @@ public class JDFElement extends KElement
 
     /* ******************************************************
      // Element Getter / Setter
-      **************************************************************** */
+     **************************************************************** */
 
     //////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////
@@ -4198,8 +4240,8 @@ public class JDFElement extends KElement
             if (e.includesMatchingAttribute(attName, attVal, dataType))
             {
                 if (n++ == index) {
-					return e;
-				}
+                    return e;
+                }
             }
         }
         return null;
@@ -4227,8 +4269,8 @@ public class JDFElement extends KElement
 
         final String thisVal = getAttribute(attName,null,null);
         if(thisVal==null) {
-			return false;
-		}
+            return false;
+        }
 
         return StringUtil.matchesAttribute(attVal, thisVal, dataType);
     }
@@ -4268,8 +4310,8 @@ public class JDFElement extends KElement
     public HashSet getAllRefs(HashSet vDoneRefs, boolean bRecurse)
     {
         if(vDoneRefs.contains(this)) {
-			return vDoneRefs;
-		}
+            return vDoneRefs;
+        }
 
         VElement v  = getChildElementVector_KElement(null, null, null, true, 0); // grabemall
 
@@ -4287,8 +4329,8 @@ public class JDFElement extends KElement
                     {
                         JDFResource r = ref.getTarget();
                         if(r!=null) {
-							vDoneRefs=r.getAllRefs(vDoneRefs, bRecurse);
-						}
+                            vDoneRefs=r.getAllRefs(vDoneRefs, bRecurse);
+                        }
                     }
                 }
             }
@@ -4318,19 +4360,19 @@ public class JDFElement extends KElement
      * @return boolean true, if this matches the given xpath
      */
     @Override
-	public boolean matchesPath(String path, boolean bFollowRefs)
+    public boolean matchesPath(String path, boolean bFollowRefs)
     {
         if(path==null) {
-			return true;
-		}
+            return true;
+        }
         VString v =StringUtil.tokenize(path,"/",false);
         KElement e=this;
         KElement eLast=null;
         for(int i=v.size()-1;i>=0;i--)
         {
             if(e==null) {
-				return false;
-			}
+                return false;
+            }
             final String locName = e.getLocalName();
             if(!e.matchesPathName(v.stringAt(i)))
             {
@@ -4344,16 +4386,16 @@ public class JDFElement extends KElement
                         {
                             String subPath=v.stringAt(0);
                             for(int k=1;k<=i+1;k++) {
-								subPath+="/"+v.stringAt(k);
-							}
+                                subPath+="/"+v.stringAt(k);
+                            }
                             subPath+="Ref";
                             for(int j=0;j<vRefs.size();j++)
                             {
                                 KElement eRef=vRefs.item(j);
                                 boolean b=eRef.matchesPath(subPath, bFollowRefs);
                                 if(b) {
-									return true;
-								}
+                                    return true;
+                                }
                             }
                         }
 
@@ -4376,8 +4418,8 @@ public class JDFElement extends KElement
             e=e.getParentNode_KElement();
         }
         if(path.startsWith("/")) {
-			return e==null || path.startsWith("//"); // must be root
-		}
+            return e==null || path.startsWith("//"); // must be root
+        }
         return true; // any location
     }
 
@@ -4400,11 +4442,11 @@ public class JDFElement extends KElement
     {
         bFixVersionIDFix = fixVersionIDFix;
     }
-    
-    
+
+
     static public String getValueForNewAttribute(KElement e,String attName)
     {
-         
+
         // return the default if it exists
         JDFAttributeMap map=e==null ? null : e.getDefaultAttributeMap();
         if(map!=null && map.containsKey(attName))
@@ -4429,7 +4471,7 @@ public class JDFElement extends KElement
         {
             return "Unavailable";
         }
-        
+
         if (attName.equals("Type") &&(e instanceof JDFNode))
             return "Product";
 
@@ -4444,7 +4486,7 @@ public class JDFElement extends KElement
 
         if (attName.equals("PreviewType"))
             return "Separation";
-        
+
         EnumAttributeType attyp=e.getAtrType(attName);
         if(attyp!=null)
         {
@@ -4461,8 +4503,8 @@ public class JDFElement extends KElement
             if(EnumAttributeType.duration.equals(attyp)|| EnumAttributeType.DurationRange.equals(attyp)|| EnumAttributeType.DurationRangeList.equals(attyp))
                 return "PT1H";
             //TODO evaluate durations
-//            if(EnumAttributeType.enumeration.equals(attyp) || EnumAttributeType.enumerations.equals(attyp))
-//                return "";
+//          if(EnumAttributeType.enumeration.equals(attyp) || EnumAttributeType.enumerations.equals(attyp))
+//          return "";
             if(EnumAttributeType.integer.equals(attyp)||EnumAttributeType.IntegerRange.equals(attyp)||EnumAttributeType.IntegerRangeList.equals(attyp)||EnumAttributeType.IntegerList.equals(attyp))
                 return "0";
             if(EnumAttributeType.JDFJMFVersion.equals(attyp))
@@ -4474,7 +4516,7 @@ public class JDFElement extends KElement
         }
         return "New Value";
     }
-    
+
     /**
      * returns the jdf doc referenced by url
      * @return the document

@@ -87,6 +87,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContact;
+import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 import org.w3c.dom.Node;
 
 /**
@@ -315,5 +316,17 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo
    //////////////////////////////////////////////////////////////////////
    //////////////////////////////////////////////////////////////////////
    //////////////////////////////////////////////////////////////////////
+
+    /**
+     * add a contact with a given contacttype
+     * @param typ
+     */
+    public JDFContact appendContact(EnumContactType typ)
+    {
+        JDFContact c=appendContact();
+        c.setContactTypes(typ);
+        return c;
+        
+    }
 
 }

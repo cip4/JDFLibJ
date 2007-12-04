@@ -102,6 +102,9 @@ public class JDFAuditTest extends JDFTestCaseBase
         JDFCreated crea=(JDFCreated) ap.getAudit(0, EnumAuditType.Created, null,null);
         assertTrue(crea.hasAttribute("ID"));
         assertTrue(crea.getID().startsWith("a"));
+        JDFProcessRun pr=ap.addProcessRun(EnumNodeStatus.Completed,"me",null);
+        assertTrue(pr.hasAttribute("End"));        
+        assertTrue(pr.hasAttribute("ID"));        
         n.setVersion(JDFElement.EnumVersion.Version_1_2);
         JDFModified mod=ap.addModified("me",n);
         assertFalse(mod.hasAttribute("ID"));        

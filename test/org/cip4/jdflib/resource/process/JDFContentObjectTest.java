@@ -1,3 +1,4 @@
+
 /*
  *
  * The CIP4 Software License, Version 1.0
@@ -68,72 +69,51 @@
  *  
  * 
  */
-package org.cip4.jdflib.core;
 
-import java.io.File;
+package org.cip4.jdflib.resource.process;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.core.KElement.EnumValidationLevel;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.pool.JDFAuditPool;
-import org.cip4.jdflib.resource.JDFNotification;
+import org.cip4.jdflib.node.JDFNode.EnumType;
 
-public class JDFCommentTest extends JDFTestCaseBase
+public class JDFContentObjectTest extends JDFTestCaseBase
 {
-    public void testInit()
-    {
-      JDFDoc doc = new JDFDoc(ElementName.JDF);
-      JDFNode root = doc.getJDFRoot();
-      JDFComment cRoot = root.appendComment();
-      assertNotNull(cRoot.getAttribute(AttributeName.ID,null,null));
-      assertTrue(cRoot.isValid(EnumValidationLevel.Complete));
-      
-      root.setVersion(JDFElement.EnumVersion.Version_1_2);
-      JDFAuditPool ap = root.getCreateAuditPool();
-      JDFNotification notif = ap.addNotification(JDFNotification.EnumClass.Information,"Me",null);
-      JDFComment c = notif.appendComment();
-      c.setText("This element should have no ID attribute");
-      String id = c.getAttribute(AttributeName.ID,null,null);
-      assertNull(id);
-    }     
+
+    JDFLayout lo;
  
-    /////////////////////////////////////////////////////////////////////
-    public void testFormat()
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+     */
+    protected void setUp() throws Exception
     {
-        JDFDoc doc = new JDFDoc(ElementName.JDF);
-        JDFNode root = doc.getJDFRoot();
-        JDFComment c11 = root.appendComment();
-        String txt = "This element should have no ID attribute and is a rellly long line with many many characters.. asfihAFLKFKJGFaufksgUFGagfAFKJSG";
-        txt+=txt;
-        txt+=txt; // even longer...
-        c11.setText(txt);
-        JDFComment c21 = root.appendComment();
-        final String txt2 = "This element \n has \n crlf";
-        c21.setText(txt2);
-        assertEquals("text is equal in DOM",txt,c11.getText());
-        assertEquals("text is equal in DOM",txt2,c21.getText());
-        final String commentFile = sm_dirTestDataTemp+File.separator+"CommentTest.JDF";
-        doc.write2File(commentFile,2,true);
-        JDFParser p=new JDFParser();
-        JDFDoc doc2 = p.parseFile(commentFile);
-        JDFNode root2 = doc2.getJDFRoot();
-        JDFComment c12 = root2.getComment(0);
-        JDFComment c22 = root2.getComment(1);
-        assertEquals("text is equal after parse",txt,c12.getText());
-        assertEquals("text is equal after parse",txt2,c22.getText());
-     }     
- 
-    /////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////
-    public void testEraseEmptyNodes()
+        // TODO Auto-generated method stub
+        super.setUp();
+        JDFDoc doc=new JDFDoc("JDF");
+        JDFNode n=doc.getJDFRoot();
+        n.setType(EnumType.Imposition);
+        lo=(JDFLayout) n.addResource(ElementName.LAYOUT, null);
+    }
+
+    public void testcalcOrd()
     {
-        JDFDoc doc = new JDFDoc(ElementName.JDF);
-        JDFNode root = doc.getJDFRoot();
-        JDFComment c11 = root.appendComment();
-        String txt = "      \n\n";
-        c11.setText(txt);
-        root.eraseEmptyNodes(true);
-        assertEquals("whitespace is not removed",txt,c11.getText());
+        for(int i=0;i<4;i++)
+        {
+            assertEquals(JDFContentObject.calcOrd(0, 10, 0, 2, 2, i), 0+i);
+            assertEquals(JDFContentObject.calcOrd(-1, 10, 0, 2, 2, i), -1);
+            assertEquals(JDFContentObject.calcOrd(-1, 12, 0, 2, 2, i), 11+i);
+            assertEquals(JDFContentObject.calcOrd(-1, 12, 1, 2, 2, i), 9+i);
+            assertEquals(JDFContentObject.calcOrd(-2, 10, 2, 2, 2, i), 6+i);
+            assertEquals(JDFContentObject.calcOrd(-2, 10, 3, 2, 2, i), -1);
+            assertEquals(JDFContentObject.calcOrd(0, 13, 3, 2, 2, i), 6+i);
+            assertEquals(JDFContentObject.calcOrd(0, 12, 3, 2, 2, i), -1);
+
+            assertEquals(JDFContentObject.calcOrd(-2, 13, 3, 2, 2, i), 8+i);
+            assertEquals(JDFContentObject.calcOrd(-2, 12, 3, 2, 2, i), -1);
+            assertEquals(JDFContentObject.calcOrd(-2, 12, 3, 2, 2, i), -1);
+            assertEquals(JDFContentObject.calcOrd(-1, 10, 1, 2, 2, i), 9+i);
+        }
     }
 
 }
