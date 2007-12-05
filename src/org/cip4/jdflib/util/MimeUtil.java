@@ -106,6 +106,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -546,7 +547,7 @@ public class MimeUtil
 
     /**
      * build a MIME package that contains all references in all FileSpecs of a given JDFDoc
-     * the doc is modified so that all URLs arer cids
+     * the doc is modified so that all URLs are cids
      * 
      * @param docJMF the JDFDoc representation of the JMF that references the jdf to package,
      * if null only the jdf is packaged note that the URL of docJDF must already be specified as a CID
@@ -560,8 +561,13 @@ public class MimeUtil
         Message message = new MimeMessage((Session)null);
         Multipart multipart = new MimeMultipart("related"); // JDF: multipart/related
 
-        String cid=docJDF==null ? null : urlToCid(docJDF.getOriginalFileName());
-        if(docJMF!=null)
+        String originalFileName = docJDF.getOriginalFileName();
+        if(KElement.isWildCard(originalFileName))
+            originalFileName="TheJDF.jdf";
+            
+        String cid=docJDF==null ? null : urlToCid(originalFileName);
+        
+        if(docJMF!=null && cid!=null)
         {
             KElement e=docJMF.getRoot();
             VElement v=e.getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.URL,"*"), false, false, 0);
@@ -748,7 +754,13 @@ public class MimeUtil
         if(cid==null)
             cid=originalFileName;
         if(cid==null)
-            cid="CID_"+xmlDoc.getRoot().getAttribute("ID");
+        {
+            final KElement root = xmlDoc.getRoot();
+            cid="CID_"+((root instanceof JDFNode && root.hasAttribute(AttributeName.ID)) ? 
+                    ((JDFNode)root).getID() : 
+                    JDFElement.uniqueID(0));
+           
+        }
 
         BodyPart messageBodyPart=getCreatePartByCID(multipart, cid);
         try

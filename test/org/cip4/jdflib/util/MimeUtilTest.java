@@ -274,11 +274,24 @@ public class MimeUtilTest extends JDFTestCaseBase
         Message message = new MimeMessage((Session)null);
         Multipart multipart = new MimeMultipart("related"); // JDF: multipart/related
         message.setContent(multipart);
-        JDFDoc jDoc=new JDFDoc("JDF");
-        jDoc.setOriginalFileName("jdf1.jdf");
+        JDFDoc jDoc=new JDFDoc("JMF");
+        
         MimeUtil.updateXMLMultipart(multipart, jDoc, null);
         final String mimeFile = sm_dirTestDataTemp+File.separator+"testUpdateXML";
+        MimeUtil.writeToFile(multipart, mimeFile+"0.mjm");
+        Multipart multiparsed = MimeUtil.getMultiPart(mimeFile+"0.mjm");
+        BodyPart bp=multiparsed.getBodyPart(0);
+        assertTrue("cid >cid_",bp.getHeader(MimeUtil.CONTENT_ID)[0].length()>5);
+
+        JDFDoc jDoc1=new JDFDoc("JDF");
+        jDoc1.setOriginalFileName("jdf1.jdf");
+        
+        MimeUtil.updateXMLMultipart(multipart, jDoc1, null);
+       
         MimeUtil.writeToFile(multipart, mimeFile+"1.mjm");
+        multiparsed = MimeUtil.getMultiPart(mimeFile+"1.mjm");
+        bp=multiparsed.getBodyPart(0);
+        assertTrue("cid >cid_",bp.getHeader(MimeUtil.CONTENT_ID)[0].length()>5);
 
         JDFDoc jDoc2=new JDFDoc("JDF");
         jDoc2.setOriginalFileName("jdf1.jdf");

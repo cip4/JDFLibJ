@@ -314,6 +314,12 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
         assertTrue("allow partamounts to non-existing partitions",n.isValid(EnumValidationLevel.Incomplete));
         mapBad.put(EnumPartIDKey.SheetName.getName(),"Sheet2");
         assertEquals(cpLink.getActualAmount(mapBad),0.,0);
+        JDFAttributeMap m2=new JDFAttributeMap("Condition","Waste");
+        assertEquals(cpLink.getActualAmount(m2),42.,0);
+        m2.put("SheetName", "Sheet1");
+        assertEquals(cpLink.getActualAmount(m2),42.,0);
+        m2.put("Side", "Front");
+        assertEquals(cpLink.getActualAmount(m2),0.,0);
 
     }
 

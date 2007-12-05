@@ -381,15 +381,15 @@ public class MyArgs
         m_usageTable = "\n.\n.\n.usage: ";
         m_usageTable += m_argV.stringAt(0);
 
-        if (m_switchParameterString.length() != 0)
+        if (m_switchParameterString!=null)
         {
             m_usageTable += "\n\t switches:   -" + m_switchParameterString;
         }
-        if (m_argumentParameterString.length() != 0)
+        if (m_argumentParameterString!=null)
         {
             m_usageTable += "\n\t Parameters: -" + m_argumentParameterString;
         }
-        if (m_requiredParameterString.length() != 0)
+        if (m_requiredParameterString!=null)
         {
             m_usageTable += "\n\t Required:   -" + m_requiredParameterString;
         }

@@ -74,6 +74,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFCustomerInfo;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
@@ -171,6 +172,8 @@ public class MISGoldenTicket extends BaseGoldenTicket
         theNode.appendAttribute(AttributeName.ICSVERSIONS, icsTag, null, " ", true);
         if(!theNode.hasAttribute(AttributeName.DESCRIPTIVENAME))
             theNode.setDescriptiveName("MIS Golden Ticket Example Job - version: "+JDFAudit.software());
+        if(!theNode.hasAttribute(AttributeName.JOBID))
+            theNode.setJobID("Job_"+JDFElement.uniqueID(0));
         initNodeInfo();
         initCustomerInfo();
     }

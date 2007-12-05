@@ -173,9 +173,9 @@ public class HotFolderTest extends JDFTestCaseBase
         final File file1 = new File(theHF+File.separator+"f1.xml");
         final File file2 = new File(theHF+File.separator+"f1.foo");
         file.createNewFile();
+        assertTrue(file.exists());
         file1.createNewFile();
         file2.createNewFile();
-        assertTrue(file.exists());
         StatusCounter.sleep(3000);
         assertFalse(file.exists());
         assertFalse(file1.exists());
