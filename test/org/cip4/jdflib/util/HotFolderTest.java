@@ -112,7 +112,8 @@ public class HotFolderTest extends JDFTestCaseBase
         }
 
     }
-    protected void setUp() throws Exception
+    @Override
+	protected void setUp() throws Exception
     {
         super.setUp();
         theHF=new File(sm_dirTestDataTemp+File.separator+"HFTest");
@@ -179,7 +180,7 @@ public class HotFolderTest extends JDFTestCaseBase
         assertTrue(file1.exists());
         file2.createNewFile();
         assertTrue(file2.exists());
-        StatusCounter.sleep(3000);
+        StatusCounter.sleep(4000);
         assertFalse(file.exists());
         assertFalse(file1.exists());
         assertTrue(file2.exists());
