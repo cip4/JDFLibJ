@@ -620,6 +620,53 @@ public class JDFSpawnTest extends JDFTestCaseBase
         }
     }
 
+
+    ///////////////////////////////////////////////////////////
+
+    public void testSpawnPart2Side()
+    {
+        JDFDoc d=new JDFDoc("JDF");
+        JDFNode n=d.getJDFRoot();
+        n.setType(EnumType.ProcessGroup);
+        JDFNode n2=n.addJDFNode(EnumType.ConventionalPrinting);
+        JDFComponent comp=(JDFComponent) n2.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, n, null, null);
+        JDFNodeInfo ni=n2.getCreateNodeInfo();
+        comp=(JDFComponent) comp.addPartition(EnumPartIDKey.SignatureName, "sig1");
+        ni=(JDFNodeInfo) ni.addPartition(EnumPartIDKey.SignatureName, "sig1");
+         for(int i=0;i<2;i++)
+        {
+             JDFComponent c2=(JDFComponent) comp.addPartition(EnumPartIDKey.SheetName, "sh"+i);
+             c2.addPartition(EnumPartIDKey.Condition, "Good");
+             c2.addPartition(EnumPartIDKey.Condition, "Waste");
+             JDFNodeInfo ni2=(JDFNodeInfo) ni.addPartition(EnumPartIDKey.SheetName, "sh"+i);
+             ni2.addPartition(EnumPartIDKey.Side, "Front");
+             ni2.addPartition(EnumPartIDKey.Side, "Back");
+         }
+        JDFAttributeMap map=new JDFAttributeMap();
+        map.put(EnumPartIDKey.SignatureName, "sig1");
+        map.put(EnumPartIDKey.SheetName, "sh1");
+        map.put(EnumPartIDKey.Side, EnumSide.Front);
+        VJDFAttributeMap vMap=new VJDFAttributeMap();
+        vMap.add(map);
+        map=new JDFAttributeMap(map);
+        map.put(EnumPartIDKey.Side, EnumSide.Back);
+        vMap.add(map);
+        
+
+        JDFSpawn spawn=new JDFSpawn(n2);
+        spawn.bFixResources=false;
+        spawn.vRWResources_in=new VString("Output",null);
+        spawn.vSpawnParts=vMap;
+
+        JDFNode nS1=spawn.spawn();
+        assertNotNull(nS1);
+        nS1.setXPathAttribute("./ResourcePool/Component/Component/Component[@SheetName=\"sh1\"]/@foo", "fnarf");
+    
+        JDFMerge merge=new JDFMerge(n);
+        merge.mergeJDF(nS1, null, EnumCleanUpMerge.None, EnumAmountMerge.None);
+        assertEquals(n.getXPathAttribute("./ResourcePool/Component/Component/Component[@SheetName=\"sh1\"]/@foo",null),"fnarf");
+      }
+    
     ///////////////////////////////////////////////////////////
 
     public void testSpawnParallel()

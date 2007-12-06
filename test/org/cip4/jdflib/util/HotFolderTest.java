@@ -169,13 +169,16 @@ public class HotFolderTest extends JDFTestCaseBase
     public void testExtension() throws Exception
     {
         hf=new HotFolder(theHF,".txt,.xml",new MyListener(true));
+        StatusCounter.sleep(1000); // time to start up
         final File file = new File(theHF+File.separator+"f1.txt");
         final File file1 = new File(theHF+File.separator+"f1.xml");
         final File file2 = new File(theHF+File.separator+"f1.foo");
         file.createNewFile();
         assertTrue(file.exists());
         file1.createNewFile();
+        assertTrue(file1.exists());
         file2.createNewFile();
+        assertTrue(file2.exists());
         StatusCounter.sleep(3000);
         assertFalse(file.exists());
         assertFalse(file1.exists());
@@ -217,7 +220,7 @@ public class HotFolderTest extends JDFTestCaseBase
         assertTrue(file.exists());
 
         FileOutputStream fos=new FileOutputStream(file);
-        for(int i=0;i<20;i++)
+        for(int i=0;i<20;i++) // incrementally fill file
         {
             fos.write(i);
             fos.flush();

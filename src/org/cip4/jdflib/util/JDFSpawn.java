@@ -101,6 +101,7 @@ import org.cip4.jdflib.node.JDFSpawned;
 import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.pool.JDFAncestorPool;
 import org.cip4.jdflib.pool.JDFAuditPool;
+import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
@@ -282,7 +283,6 @@ public class JDFSpawn
             }
         }
 
-        final VElement outLinks = prepareSpawnLinks(rootOut);
 
         // setup the ancestor nodes
         setSpawnParent(rootOut, spawnParentNode);
@@ -291,7 +291,7 @@ public class JDFSpawn
 
         // find resources that must be copied
         addSpawnedResources(rootOut,spawnAudit);
-        finalizeSpawn(vLocalSpawnParts, outLinks, spawnAudit);
+        finalizeSpawn(vLocalSpawnParts, rootOut, spawnAudit);
 
         // return the spawned node
         return rootOut;
@@ -744,8 +744,12 @@ public class JDFSpawn
 
     /////////////////////////////////////////////////////////////////////////
 
-    private void finalizeSpawn(VJDFAttributeMap vLocalSpawnParts, final VElement outLinks, final JDFSpawned spawnAudit)
+    private void finalizeSpawn(VJDFAttributeMap vLocalSpawnParts, final JDFNode rootOut, final JDFSpawned spawnAudit)
     {
+        final VElement outLinks = prepareSpawnLinks(rootOut);
+        final VElement mainLinks = prepareSpawnLinks(node);
+        int mainLinkLen=mainLinks.size();
+
         String spawnID=spawnAudit.getNewSpawnID();
         // add parts to resource links if necessary
         if (vLocalSpawnParts!=null && !vLocalSpawnParts.isEmpty())
@@ -753,7 +757,7 @@ public class JDFSpawn
             final int outLinkSize = outLinks.size();
             for (int i = 0; i < outLinkSize; i++)
             {
-                final JDFResourceLink link = (JDFResourceLink) outLinks.elementAt(i);
+                JDFResourceLink link = (JDFResourceLink) outLinks.elementAt(i);
                 final JDFResource r = link.getLinkRoot();
 
                 //2005-03-11 KM if the link is null continue, the JDF ist invalid but in
@@ -767,11 +771,51 @@ public class JDFSpawn
                         VJDFAttributeMap vNewMap = getSpawnedLinkPartMap(link, vPartMap);    
                         link.setPartMapVector(vNewMap);                   
                         updateSpawnIDs(spawnID, link);
+                        String id=link.getrRef();
+                        if(id!=null)
+                        {
+                            link=(JDFResourceLink) mainLinks.elementAt(i);
+
+                            if(id.equals(link.getrRef()))
+                            {
+                                updateSpawnIDsInMain(spawnID, link, vPartMap);
+                            }                                
+                            else // the sequence of links changed - must search, hopefully we never get here
+                            {
+                                for(int ii=0;ii<mainLinkLen;ii++)
+                                {
+                                    link=(JDFResourceLink)mainLinks.elementAt(ii);
+                                    if(id.equals(link.getrRef()))
+                                    {
+                                        updateSpawnIDsInMain(spawnID, link, vPartMap);
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
         }
         finalizeStatusAndAudits(vLocalSpawnParts, spawnAudit);
+    }
+
+    private void updateSpawnIDsInMain(String spawnID, JDFResourceLink link, VJDFAttributeMap vPartMap)
+    {
+        JDFResource rMain=link.getLinkRoot();
+        for(int k=0;k<vPartMap.size();k++)
+        {
+            VElement vMainPart=rMain.getPartitionVector(vPartMap.elementAt(k), null);
+            for(int kk=0;kk<vMainPart.size();kk++)
+            {
+                JDFResource rMainPart=(JDFResource) vMainPart.elementAt(kk);
+                if(rMainPart!=null && !rMainPart.includesMatchingAttribute(AttributeName.SPAWNIDS,spawnID,EnumAttributeType.NMTOKENS))
+                {
+                    rMainPart.appendSpawnIDs(spawnID);
+                    rMainPart.setLocked(true);
+                    rMainPart.setSpawnStatus(EnumSpawnStatus.SpawnedRW);
+                }
+            }
+        }
     }
 
     /**
