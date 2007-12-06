@@ -2,8 +2,23 @@
 ___________________________________________________________
 
 
-Label JDFLIBJ_2.1.3BLD480 (0x.11.2007)
+Label JDFLIBJ_2.1.3BLD480 (06.12.2007)
 
+fix for setting spawnids for virtual partitions now also in the main jdf
+fix for merging partamounts with virtual partitions
+cid generation fixes in mimeutil
+product golden tickets
+JIRA JDFJ-121 : bug fix Crease.RelativeTravel is now double instead of enum
+enhanced bambi hotfolder support
+bambi queue processing additions
+new JDFNode subclass NodeIdentifier
+KElement getChildWithAttribute - fixed dead loop for corrupt refelements in ResourcePool
+CheckJDF - added jmf devcaps check
+JDFContentObject - added automated ord calculation
+JDFDurationState fixed required datatypes fro JDFDateTime to JDFDuration
+added new automated layout booklet tests
+proxy cleanup
+remove exception for negative ord in Contentobject
 JDFParser: add cleanup method to enable reuse
 JDFDoc: add parseURL
 fix getXPathElementVector
