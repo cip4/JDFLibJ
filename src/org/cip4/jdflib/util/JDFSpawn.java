@@ -101,7 +101,6 @@ import org.cip4.jdflib.node.JDFSpawned;
 import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.pool.JDFAncestorPool;
 import org.cip4.jdflib.pool.JDFAuditPool;
-import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;

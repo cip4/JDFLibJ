@@ -109,7 +109,7 @@ import org.cip4.jdflib.util.JDFDate;
  */
 public class ProductGoldenTicket extends MISGoldenTicket
 {
-    private int icsLevel;
+    private final int icsLevel;
     private JDFMediaIntent mediaIntent;
 
     public ProductGoldenTicket(int _icsLevel, EnumVersion jdfVersion, int _jmfLevel, int _misLevel)
@@ -122,7 +122,8 @@ public class ProductGoldenTicket extends MISGoldenTicket
      * initializes this node to a given ICS version
      * @param icsLevel the level to init to (1,2 or 3)
      */
-    public void init()
+    @Override
+	public void init()
     {
 
         if(icsLevel<0)
@@ -183,7 +184,8 @@ public class ProductGoldenTicket extends MISGoldenTicket
     }
     /**
      */
-    protected JDFNodeInfo initNodeInfo()
+    @Override
+	protected JDFNodeInfo initNodeInfo()
     {
         super.initNodeInfo();
         JDFNodeInfo ni=theNode.getCreateNodeInfo();
@@ -352,14 +354,14 @@ public class ProductGoldenTicket extends MISGoldenTicket
 
         initMediaIntent(cover,200, EnumSpanCoatings.Glossy);
         JDFLayoutIntent li=initLayoutIntent(cover,21, 29.7, 4, 2);
-        JDFColorIntent ci=initColorIntent(cover,6,4,null);
+    	initColorIntent(cover,6,4,null);
         JDFComponent cCover=initOutputComponent(cover,li);
         cCover.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
 
 
         JDFNode body=theNode.addJDFNode(EnumType.Product);
         body.setDescriptiveName("HD Brochure Body");
-        ci=initColorIntent(body,4,4,null);
+    	initColorIntent(body,4,4,null);
         initMediaIntent(body,135, EnumSpanCoatings.Coated);
         initLayoutIntent(body,21, 29.7, 32, 2);
         JDFComponent cBody=initOutputComponent(body,li);
@@ -378,7 +380,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
 
         initMediaIntent(theNode,170, EnumSpanCoatings.Coated);
         JDFLayoutIntent li=initLayoutIntent(theNode,21, 29.7, 6, 2);
-        JDFColorIntent ci=initColorIntent(theNode,4,4,null);
+    	initColorIntent(theNode,4,4,null);
         JDFFoldingIntent fi=initFoldingIntent(theNode, "F6-3");
         fi.setDescriptiveName("F6-3 should be the gate fold");
         initOutputComponent(theNode,li);

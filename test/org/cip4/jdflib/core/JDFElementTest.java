@@ -248,8 +248,8 @@ public class JDFElementTest extends TestCase
     {
         JDFDoc d=new JDFDoc("JDF");
         JDFNode n=d.getJDFRoot();
-        KElement e1=n.appendElement("a:b", "a.com");
-        KElement e2=n.getAuditPool().appendElement("a:b", "a.com");
+    	n.appendElement("a:b", "a.com");
+    	n.getAuditPool().appendElement("a:b", "a.com");
         n.getAuditPool().setAttribute("a:b", "c","a.com");
         assertTrue(n.toString().indexOf("a:")>0);
         n.removeExtensions();

@@ -39,11 +39,8 @@ public class TestJDF
         JDFResource part = res.getPartition (amParts, JDFResource.EnumPartUsage.Implicit);
 
         
-        final JDFAttributeMap mpart = part.getPartMap ();
-
-                 // mpart ist leer, warum ???
-    
-   
-
+//        final JDFAttributeMap mpart = 
+    	part.getPartMap ();
+// mpart ist leer, warum ???
     }
 }

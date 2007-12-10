@@ -7,8 +7,6 @@ package org.cip4.jdflib.examples;
 
 import java.io.File;
 
-import javax.print.attribute.standard.SheetCollate;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;

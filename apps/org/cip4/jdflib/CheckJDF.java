@@ -2275,8 +2275,6 @@ public class CheckJDF
         long lEndTime_SchemaValidation = 0;
         long lStartTime_InternalCheckJDF = 0;
         long lEndTime_InternalCheckJDF = 0;
-        long lStartTime_TestDevCap = 0;
-        long lEndTime_TestDevCap = 0;
 
         if (!bQuiet)
         {

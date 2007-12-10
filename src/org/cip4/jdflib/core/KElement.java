@@ -4306,8 +4306,8 @@ public class KElement extends ElementNSImpl
                             }
                         }
                      }
-                    if(e0!=null)
-                        e0 = e0.getNextSiblingElement();
+
+                    e0 = e0.getNextSiblingElement();
     
                 } while (e0 != null && (kRet == null)); // loop to end if we are filling the cache
             }

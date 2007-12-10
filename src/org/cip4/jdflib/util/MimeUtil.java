@@ -561,11 +561,15 @@ public class MimeUtil
         Message message = new MimeMessage((Session)null);
         Multipart multipart = new MimeMultipart("related"); // JDF: multipart/related
 
-        String originalFileName = docJDF.getOriginalFileName();
-        if(KElement.isWildCard(originalFileName))
-            originalFileName="TheJDF.jdf";
-            
-        String cid=docJDF==null ? null : urlToCid(originalFileName);
+        String cid = null;
+        if (docJDF != null)
+        {
+			String originalFileName = docJDF.getOriginalFileName();
+			if (KElement.isWildCard(originalFileName))
+				originalFileName = "TheJDF.jdf";
+
+			cid = urlToCid(originalFileName);
+        }
         
         if(docJMF!=null && cid!=null)
         {
