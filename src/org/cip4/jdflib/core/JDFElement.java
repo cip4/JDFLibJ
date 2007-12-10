@@ -1676,16 +1676,16 @@ public class JDFElement extends KElement
         return setID;
     }
 
-//  dm    /**
-//  * Get the target element of a link (string id)
-//  * @return JDFElement - the element that this reference refers to
-//  * @deprecated use the respective subclasses getTarget functions
-//  */
-//  @Deprecated
-//  public JDFResource getTarget()
-//  {
-//  return (JDFResource) getTarget_JDFElement(getAttribute(AttributeName.RREF), AttributeName.ID);
-//  }
+   /**
+	 * Get the target element of a link (string id)
+	 * 
+	 * @return JDFElement - the element that this reference refers to
+	 * @deprecated use the respective subclasses getTarget functions
+	 */
+	@Deprecated
+	public JDFResource getTarget() {
+		return (JDFResource) getTarget_JDFElement(getAttribute(AttributeName.RREF), AttributeName.ID);
+	}
 
     /**
      * Get the target element of a link<br>
