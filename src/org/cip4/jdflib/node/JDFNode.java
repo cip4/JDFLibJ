@@ -481,6 +481,8 @@ public class JDFNode extends JDFElement
             return iterator(EnumActivation.class);
         }
 
+        public static final EnumActivation Unknown = null;
+
         public static final EnumActivation Inactive = new EnumActivation(JDFConstants.ACTIVATION_INACTIVE);
         public static final EnumActivation Informative = new EnumActivation(JDFConstants.ACTIVATION_INFORMATIVE);
         public static final EnumActivation Held = new EnumActivation(JDFConstants.ACTIVATION_HELD);
