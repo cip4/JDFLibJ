@@ -93,7 +93,7 @@ import org.w3c.dom.DOMException;
 public class JDFFileSpec extends JDFAutoFileSpec
 {
     private static final long serialVersionUID = 1L;
-    private static HashMap mimeMap=null;
+    private static HashMap<String,String> mimeMap=null;
 
     /**
      * Constructor for JDFFileSpec
@@ -208,23 +208,23 @@ public class JDFFileSpec extends JDFAutoFileSpec
     {
         if(mimeMap==null)
         {
-            mimeMap=new HashMap();
-            mimeMap.put("pdf", "application/pdf");
-            mimeMap.put("ps", "application/postscript");
+            mimeMap=new HashMap<String, String>();
+            mimeMap.put("pdf", JDFConstants.MIME_PDF);
+            mimeMap.put("ps", JDFConstants.MIME_PS);
             
-            mimeMap.put("ppf", "application/vnd.cip3-ppf");
-            mimeMap.put("ppml", "application/vnd.podi-ppml+xml");
-            mimeMap.put("jdf", "application/vnd.cip4-jdf+xml");
-            mimeMap.put("jmf", "application/vnd.cip4-jmf+xml");
+            mimeMap.put("ppf", JDFConstants.MIME_CIP3);
+            mimeMap.put("ppml", JDFConstants.MIME_PPML);
+            mimeMap.put("jdf", JDFConstants.MIME_JDF);
+            mimeMap.put("jmf", JDFConstants.MIME_JMF);
             
-            mimeMap.put("xml", "text/xml");
+            mimeMap.put("xml", JDFConstants.MIME_TEXTXML);
             
-            mimeMap.put("jpg", "image/jpeg");
-            mimeMap.put("jpeg", "image/jpeg");
-            mimeMap.put("tif", "image/tiff");
-            mimeMap.put("tiff", "image/tiff");
+            mimeMap.put("jpg",  JDFConstants.MIME_JPG);
+            mimeMap.put("jpeg", JDFConstants.MIME_JPG);
+            mimeMap.put("tif", JDFConstants.MIME_TIFF);
+            mimeMap.put("tiff", JDFConstants.MIME_TIFF);
         }
         String extension=UrlUtil.extension(url);
-        return extension==null ? null : (String) mimeMap.get(extension.toLowerCase());
+        return extension==null ? null : mimeMap.get(extension.toLowerCase());
      }
 }

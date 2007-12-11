@@ -158,7 +158,7 @@ public class JDFMessage extends JDFAutoMessage
     }
 
     @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -295,7 +295,7 @@ public class JDFMessage extends JDFAutoMessage
      * @return String
      */
     @Override
-	public String toString()
+    public String toString()
     {
         return "JDFMessage[ --> " + super.toString() + " ]";
     }
@@ -307,7 +307,7 @@ public class JDFMessage extends JDFAutoMessage
      * @deprecated use instanceof JDFMessage
      */
     @Deprecated
-	public boolean isMessageElement()
+    public boolean isMessageElement()
     {
         return true;
     }
@@ -318,7 +318,7 @@ public class JDFMessage extends JDFAutoMessage
      * @return boolean
      */
     @Override
-	public boolean init()
+    public boolean init()
     {
         appendAnchor(null);
         return super.init();
@@ -331,7 +331,7 @@ public class JDFMessage extends JDFAutoMessage
      * @return the ID prefix of JDFMessage
      */
     @Override
-	public String getIDPrefix()
+    public String getIDPrefix()
     {
         return "m";
     }
@@ -353,7 +353,7 @@ public class JDFMessage extends JDFAutoMessage
      * @return String
      */
     @Override
-	public String getType()
+    public String getType()
     {
         return getAttribute(AttributeName.TYPE, null, JDFConstants.EMPTYSTRING);
     }
@@ -364,13 +364,13 @@ public class JDFMessage extends JDFAutoMessage
      * @param typ the type
      */
     @Override
-	public void setType(String typ)
+    public void setType(String typ)
     {
         removeAttribute("type",AttributeName.XSIURI);
         setAttribute(AttributeName.TYPE, typ, null);
         if(xmlnsPrefix(typ)==null) {
-			setXSIType(getLocalName()+typ);
-		}
+            setXSIType(getLocalName()+typ);
+        }
     }
 
 
@@ -387,8 +387,8 @@ public class JDFMessage extends JDFAutoMessage
                 f.equals(EnumFamily.Registration))
         {
             String message = f == null
-                                ? "JDFMessage.setQuery: illegal family type "
-                                : "JDFMessage.setQuery: illegal family type " + f.getName();
+            ? "JDFMessage.setQuery: illegal family type "
+                    : "JDFMessage.setQuery: illegal family type " + f.getName();
             throw new JDFException(message);
         }
         setrefID(q.getID());
@@ -410,7 +410,7 @@ public class JDFMessage extends JDFAutoMessage
      * @return
      */
     @Deprecated
-	public static String typeString()
+    public static String typeString()
     {
         final String enums =
             "Unknown,Events,KnownControllers,KnownDevices,KnownJDFServices,KnownMessages,"
@@ -429,7 +429,7 @@ public class JDFMessage extends JDFAutoMessage
      * @deprecated use setType()
      */
     @Deprecated
-	public void setEnumType(EnumType value)
+    public void setEnumType(EnumType value)
     {
         setType(value);
     }
@@ -447,7 +447,7 @@ public class JDFMessage extends JDFAutoMessage
     /**
      * create a new response for this if this is any message except response
      * correctly fills refId, type etc.
-      * @return the newly created message
+     * @return the newly created message
      */    
     public JDFJMF createResponse()
     {
@@ -467,11 +467,11 @@ public class JDFMessage extends JDFAutoMessage
      * @param version
      */
     @Override
-	public boolean fixVersion(EnumVersion version)
+    public boolean fixVersion(EnumVersion version)
     {
         if(version!=null) {
-			version.getClass(); // dummy to fool compiler
-		}
+            version.getClass(); // dummy to fool compiler
+        }
         if(hasAttribute(AttributeName.TYPE)&&!hasAttribute(AttributeName.XSITYPE,AttributeName.XSIURI,false))
         {
             setAttribute(AttributeName.XSITYPE,getLocalName()+getType(),AttributeName.XSIURI);
@@ -518,7 +518,7 @@ public class JDFMessage extends JDFAutoMessage
 
         Vector<EnumType> validList = getValidTypeVector(elementName, iSkip);
         return validList.contains(typ);
-     }
+    }
 
     /**
      * returns a vector of valid messageElement types for this element
@@ -955,8 +955,8 @@ public class JDFMessage extends JDFAutoMessage
     {
         EnumFamily family = getFamily();
         if(family==null) {
-			return null;
-		}
+            return null;
+        }
 
         if (family.equals(EnumFamily.Command))
         {
@@ -1107,7 +1107,7 @@ public class JDFMessage extends JDFAutoMessage
      * @return
      */
     @Deprecated
-	public KElement appendValidElement(String elementName)
+    public KElement appendValidElement(String elementName)
     {
         return appendValidElement(elementName, null);
     }
@@ -1157,7 +1157,7 @@ public class JDFMessage extends JDFAutoMessage
 
     /* ******************************************************
      // Element getter / Setter
-      **************************************************************** */
+     **************************************************************** */
 
     /**
      * get device, create if it doesn't exist
@@ -1676,7 +1676,7 @@ public class JDFMessage extends JDFAutoMessage
      * @return JDFPipeParams: the element
      */
     @Deprecated
-	public JDFPipeParams getPipeParams(int iSkip)
+    public JDFPipeParams getPipeParams(int iSkip)
     {
         return (JDFPipeParams) getValidElement(ElementName.PIPEPARAMS, null, iSkip);
     }
@@ -2052,7 +2052,7 @@ public class JDFMessage extends JDFAutoMessage
      * @deprecated - use 0 parameter version
      */
     @Deprecated
-	public JDFStatusQuParams getStatusQuParams(int iSkip)
+    public JDFStatusQuParams getStatusQuParams(int iSkip)
     {
         return (JDFStatusQuParams) getValidElement(ElementName.STATUSQUPARAMS, null, iSkip);
     }
@@ -2468,7 +2468,7 @@ public class JDFMessage extends JDFAutoMessage
         return (JDFShutDownCmdParams)getValidElement(ElementName.SHUTDOWNCMDPARAMS, null, iSkip);
     }
 
-   //////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////
 
     public JDFWakeUpCmdParams getCreateWakeUpCmdParams()
     {
@@ -2484,7 +2484,7 @@ public class JDFMessage extends JDFAutoMessage
     {
         return (JDFWakeUpCmdParams)getValidElement(ElementName.WAKEUPCMDPARAMS, null, 0);
     }
-   //////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////
 
     public JDFModifyNodeCmdParams getCreateModifyNodeCmdParams()
     {
@@ -2500,7 +2500,7 @@ public class JDFMessage extends JDFAutoMessage
     {
         return (JDFModifyNodeCmdParams)getValidElement(ElementName.MODIFYNODECMDPARAMS, null, 0);
     }
-   //////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////
 
     public JDFUpdateJDFCmdParams getCreateUpdateJDFCmdParams()
     {
@@ -2538,7 +2538,7 @@ public class JDFMessage extends JDFAutoMessage
      * @see org.cip4.jdflib.auto.JDFAutoMessage#getID()
      */
     @Override
-	public String getID()
+    public String getID()
     {
         return this.getAttribute(AttributeName.ID, null, null);
     }
@@ -2547,7 +2547,7 @@ public class JDFMessage extends JDFAutoMessage
      * @see org.cip4.jdflib.core.JDFElement#getInvalidElements(org.cip4.jdflib.core.KElement.EnumValidationLevel, boolean, int)
      */
     @Override
-	public VString getInvalidElements(
+    public VString getInvalidElements(
             EnumValidationLevel level,
             boolean bIgnorePrivate,
             int nMax)
@@ -2607,23 +2607,23 @@ public class JDFMessage extends JDFAutoMessage
                 ElementName.TRACKFILTER,
                 ElementName.TRACKRESULT,
                 ElementName.WAKEUPCMDPARAMS,
-         };
+        };
         KElement[] ae=getChildElementArray();
         if(ae==null || ae.length==0)
         {
-         return vElem;
+            return vElem;
         }
         Set s=new HashSet();
         for(int i=0;i<ae.length;i++) {
-			s.add(ae[i].getLocalName());
-		}
+            s.add(ae[i].getLocalName());
+        }
 
         for(int ii=0;ii<elementArray.length;ii++)
         {
             String element=elementArray[ii];
             if(!s.contains(element)) {
-				continue;
-			}
+                continue;
+            }
 
             nElem = numChildElements(element,null);
             for (int i = 0; i < nElem; i++)
@@ -2662,7 +2662,7 @@ public class JDFMessage extends JDFAutoMessage
      * @see org.cip4.jdflib.core.KElement#optionalElements()
      */
     @Override
-	public VString optionalElements()
+    public VString optionalElements()
     {
         VString s = super.optionalElements();
         EnumType t = getEnumType();
@@ -2690,30 +2690,31 @@ public class JDFMessage extends JDFAutoMessage
      * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib.core.KElement.EnumValidationLevel, boolean, int)
      */
     @Override
-	public VString getInvalidAttributes(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
+    public VString getInvalidAttributes(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
     {
-         VString s=super.getInvalidAttributes(level, bIgnorePrivate, nMax);
-         if(s.contains(AttributeName.XSITYPE)) {
-			return s;
-		}
+        VString s=super.getInvalidAttributes(level, bIgnorePrivate, nMax);
+        if(s.contains(AttributeName.XSITYPE)) {
+            return s;
+        }
 
-         if(!hasAttribute(AttributeName.XSITYPE)) {
-			return s;
-		}
-         String t=getType();
-         if(xmlnsPrefix(t)!=null) {
-			return s;
-		}
-         String xs=getXSIType();
-         if(!xs.equals(getLocalName()+t)) {
-			s.add(AttributeName.XSITYPE);
-		}
-         return s;
+        if(!hasAttribute(AttributeName.XSITYPE)) {
+            return s;
+        }
+        String t=getType();
+        if(xmlnsPrefix(t)!=null) {
+            return s;
+        }
+        final String xs=getXSIType();
+        if(xs!=null && !xs.equals(getLocalName()+t)) 
+        {
+            s.add(AttributeName.XSITYPE);
+        }
+        return s;
 
     }
-    
+
     ////////////////////////////////////////////////////////////////////////////////
-    
+
     /**
      * sets the senderID of this message
      * @param senderID
@@ -2722,9 +2723,9 @@ public class JDFMessage extends JDFAutoMessage
     {
         setAttribute(AttributeName.SENDERID, senderID);
     }
-    
+
     ////////////////////////////////////////////////////////////////////////////////
-    
+
     /**
      * sets the senderID of this message
      * @return String the senderID of this message or the SenderID of the parent JMF.

@@ -276,7 +276,7 @@ public class JDFRunList extends JDFAutoRunList
     {
         JDFRunList r = addRun(fileName, first, last);
         JDFFileSpec fs=r.getLayoutElement().getFileSpec();
-        fs.setMimeType("application/PDF");
+        fs.setMimeType(JDFConstants.MIME_PDF);
         return r;
     }
 

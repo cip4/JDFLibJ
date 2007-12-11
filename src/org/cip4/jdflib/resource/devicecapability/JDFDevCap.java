@@ -106,6 +106,7 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.ifaces.ICapabilityElement;
+import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessageService;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
@@ -1616,6 +1617,7 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
                 }
                 else
                 {
+                    recursionResult.appendAttribute("DevCapRefs", dc.getID(), null, " ", true);
                     badElems.put(subEl,recursionResult);
                 }
 
@@ -2234,7 +2236,10 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
                     continue;
                 if(!_name.equals(dcOther.getName()))
                     continue;
-                vOther.add(dcOther);
+                VElement vOtherMatch=dcOther.getAllMatchingElementsFromParent(parent);
+                if(vOtherMatch==null)
+                    continue;
+                 vOther.add(dcOther);
             }
         }
         if(vOther.size()==0) // no other elements that we have to worry about
@@ -2246,6 +2251,7 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
         for(int i=v.size()-1;i>=0;i--)
         {
             KElement e=v.item(i);
+            
             repRootDummy.flush();
             if(spanAndAttributesTest(e, EnumFitsValue.Allowed, EnumValidationLevel.Incomplete, true, repRootDummy)!=null || 
                     subelementsTest(e, EnumFitsValue.Allowed, EnumValidationLevel.Incomplete, true, repRootDummy) !=null)
@@ -2276,8 +2282,22 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      */
     public VElement getAllMatchingElementsFromParent(KElement parent)
     {
-        String nam=getName();
-        VElement subElems=parent.getChildElementVector(nam,null,null,true,999999,true);
+        final String nam=getName();
+        JDFAttributeMap map=null;
+        if(parent instanceof JDFJMF)
+        {
+            JDFNameState ns=getNameState(AttributeName.TYPE);
+            if(ns!=null)
+            {
+                VString valList=ns.getAllowedValueList();
+                if(valList!=null)
+                {
+                    map=new JDFAttributeMap(AttributeName.TYPE,valList.stringAt(0));
+                }
+            }
+        }
+       
+        VElement subElems=parent.getChildElementVector(nam,null,map,true,999999,true);
         return subElems.size()==0 ? null : subElems;
     }
 

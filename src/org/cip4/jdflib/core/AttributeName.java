@@ -1709,6 +1709,7 @@ public final class AttributeName
     public static final String X = "X";
     public static final String XCELLS = "XCells";
     public static final String XMLNS = "xmlns";
+    public static final String XMLNSXSI = "xmlns:xsi";
     public static final String XMLNSURI = "http://www.w3.org/2000/xmlns/";
     public static final String XOFFSET = "XOffset";
     public static final String XPATH = "XPath";

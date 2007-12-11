@@ -2606,6 +2606,11 @@ public class JDFElement extends KElement
             else
                 v.appendUnique(AttributeName.XMLNS);
         }
+        s=getAttribute(AttributeName.XMLNSXSI,null,null);
+        {
+            if((s!=null)&&(!s.equals(AttributeName.XSIURI)))
+                v.appendUnique(AttributeName.XMLNSXSI);
+        }
         return v;
     }
 

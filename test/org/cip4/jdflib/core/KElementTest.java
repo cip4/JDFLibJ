@@ -1527,10 +1527,15 @@ public class KElementTest extends JDFTestCaseBase
         VElement v = r.getChildElementVector_KElement(ElementName.EXPOSEDMEDIA, null, null, true, 0);
         assertEquals(v.elementAt(0), rp);
         assertEquals(v.size(),1);
-        rp.addPartition(EnumPartIDKey.SheetName, "s2");
+        JDFResource r2=rp.addPartition(EnumPartIDKey.SheetName, "s2");
         v = r.getChildElementVector_KElement(ElementName.EXPOSEDMEDIA, null, null, true, 0);
         assertEquals(v.elementAt(0), rp);
         assertEquals(v.size(),1);
+        JDFResource r3=rp.addPartition(EnumPartIDKey.SheetName, "s3");
+        JDFAttributeMap map=new JDFAttributeMap(AttributeName.SHEETNAME,"s2");
+        v = rp.getChildElementVector_KElement(ElementName.EXPOSEDMEDIA, null, map, true, 0);
+        assertTrue(v.contains(r2));
+        assertFalse(v.contains(r3));        
     }
 
     public void testGetChildElementArray()
