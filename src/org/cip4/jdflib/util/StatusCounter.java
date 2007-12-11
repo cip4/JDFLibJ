@@ -78,6 +78,7 @@ package org.cip4.jdflib.util;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.Vector;
 
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumWorkType;
@@ -85,9 +86,11 @@ import org.cip4.jdflib.auto.JDFAutoResourceAudit.EnumReason;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -109,6 +112,8 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
+
+import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
 
 //TODO add time related metadata
 /*
@@ -195,6 +200,8 @@ public class StatusCounter
     private JDFDoc docJMFResource;
     protected VJDFAttributeMap m_vPartMap;
     private String m_deviceID=null;
+    private VString m_moduleID=null;
+    private VString m_moduleType=null;
     private LinkAmount[] vLinkAmount=null;
     private String firstRefID=null;
     private String queueEntryID;
@@ -203,7 +210,7 @@ public class StatusCounter
     protected HashSet setTrackWaste=new HashSet();
     protected HashSet setCopyResInfo=new HashSet();
 
-
+ 
     /**
      * construct a StatusUtil for a node n
      * @param node the JDFNode that is being processed
@@ -383,7 +390,7 @@ public class StatusCounter
 
         JDFAuditPool ap=m_Node.getCreateAuditPool();
         // TODO rethink when to send 2 phases
-        JDFPhaseTime lastPhase= ap.getLastPhase(m_vPartMap);
+        JDFPhaseTime lastPhase= ap.getLastPhase(m_vPartMap,m_moduleID==null ? null : m_moduleID.stringAt(0));
         JDFPhaseTime nextPhase= lastPhase;
         boolean bEnd=EnumNodeStatus.Completed.equals(nodeStatus) || EnumNodeStatus.Aborted.equals(nodeStatus);
         boolean bChanged=bEnd || lastPhase==null; // no previous audit or over and out
@@ -394,10 +401,15 @@ public class StatusCounter
             appendProcessRun(nodeStatus, ap);
         }
 
+        if(nextPhase!=null)
+        {
+            generateResourceSignal(jmfRes);
+        }
+        
         if(lastPhase!=null && nextPhase!=lastPhase) // we explicitly added a new phasetime audit, thus we need to add a closing JMF for the original jobPhase
         {
             bChanged=true;
-            closeJobPhase(jmfStatus, la, lastPhase, nextPhase);
+            closeJobPhase(jmfStatus, la, lastPhase, nextPhase); // attention - resets la to 0 - all calls after this have the new amounts
         }
 
         if(nextPhase!=null)
@@ -408,8 +420,9 @@ public class StatusCounter
             {
                 nextPhase.getCreateDevice(0).setDeviceID(m_deviceID);
             }
+            nextPhase.setModules(m_moduleID,m_moduleType);
+
             updateCurrentJobPhase(nodeStatus, deviceStatus, deviceStatusDetails, jmfStatus, la, nextPhase, bEnd);
-            generateResourceSignal(jmfRes);
         }
 
         jmfStatus.eraseEmptyAttributes(true);
@@ -458,7 +471,7 @@ public class StatusCounter
     private void updateCurrentJobPhase(EnumNodeStatus nodeStatus, EnumDeviceStatus deviceStatus, String deviceStatusDetails, JDFJMF jmf, final LinkAmount la, JDFPhaseTime pt2, boolean bEnd)
     {
         JDFResponse respStatus=(JDFResponse)jmf.appendMessageElement(JDFMessage.EnumFamily.Response,JDFMessage.EnumType.Status);
-        JDFDeviceInfo deviceInfo = respStatus.appendDeviceInfo();
+        JDFDeviceInfo deviceInfo = respStatus.getCreateDeviceInfo(0);
         if(!bEnd) // don't write a jobphase for an idle device
         {
             JDFJobPhase jp=deviceInfo.createJobPhaseFromPhaseTime(pt2);
@@ -484,8 +497,7 @@ public class StatusCounter
 
     private JDFResponse closeJobPhase(JDFJMF jmf, final LinkAmount la, JDFPhaseTime pt1, JDFPhaseTime pt2)
     {
-        JDFResponse respStatus;
-        respStatus=(JDFResponse)jmf.appendMessageElement(JDFMessage.EnumFamily.Response,JDFMessage.EnumType.Status);
+        JDFResponse respStatus=(JDFResponse)jmf.appendMessageElement(JDFMessage.EnumFamily.Response,JDFMessage.EnumType.Status);
         JDFDeviceInfo deviceInfo = respStatus.appendDeviceInfo();
         JDFJobPhase jp=deviceInfo.createJobPhaseFromPhaseTime(pt1);
         jp.setJobID(m_Node.getJobID(true));
@@ -978,6 +990,13 @@ public class StatusCounter
     {
         return m_deviceID;
     }
+    /*
+     * @return the m_moduleID
+     */
+    public VString getModuleeID()
+    {
+        return m_moduleID;
+    }
 
     /**
      * @param m_deviceid the m_deviceID to set
@@ -985,6 +1004,19 @@ public class StatusCounter
     public void setDeviceID(String deviceid)
     {
         m_deviceID = deviceid;
+    }
+
+    /**
+     * @param m_deviceid the m_deviceID to set
+     */
+    public void addModule(String moduleID, String moduleType)
+    {
+        if(m_moduleID==null)
+            m_moduleID=new VString();
+        if(m_moduleType==null)
+            m_moduleType=new VString();
+        m_moduleID.add(moduleID);
+        m_moduleType.add(moduleType);
     }
 
     /**

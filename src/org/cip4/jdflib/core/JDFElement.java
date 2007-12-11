@@ -131,6 +131,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
@@ -2637,7 +2638,8 @@ public class JDFElement extends KElement
                 }
             }
         }
-        if (EnumValidationLevel.isRequired(level))
+        
+        if (EnumValidationLevel.isRequired(level)&&!isIncomplete())
         {
             vAttsReturn.addAll(getMissingAttributes(nMax));
         }
@@ -2649,6 +2651,16 @@ public class JDFElement extends KElement
 
         vAttsReturn.addAll(getUnknownAttributes(bIgnorePrivate,nMax));
         return vAttsReturn;
+    }
+
+    /**
+     * check whether this is a subelem of an incomplete resource and thus need not contain all traits
+     * @return
+     */
+    private boolean isIncomplete()
+    {
+        JDFResource r=JDFResource.getResourceRoot(this);
+        return r==null ? false : EnumResStatus.Incomplete.equals(r.getResStatus(false));
     }
 
     /**
@@ -2696,7 +2708,7 @@ public class JDFElement extends KElement
             }
         }
 
-        if (EnumValidationLevel.isRequired(level))
+        if (EnumValidationLevel.isRequired(level)&&!isIncomplete())
         {
             vBad.appendUnique(new VString(getMissingElements(nMax)));
         }

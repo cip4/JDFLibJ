@@ -392,7 +392,7 @@ public class DigiPrintTest extends JDFTestCaseBase
         doc.write2File(sm_dirTestDataTemp+File.separator+"DigiPrintAmount_initial.jdf",2,false);
 
         stCounter.setPhase(EnumNodeStatus.InProgress, "Waste", EnumDeviceStatus.Running, null);
-        ap.getLastPhase(null).setXMLComment("Phase where warm up waste is produced");
+        ap.getLastPhase(null,null).setXMLComment("Phase where warm up waste is produced");
         stCounter.addPhase(mediaRef,0,2);
         stCounter.addPhase(compRef,0,20);
 
@@ -402,16 +402,16 @@ public class DigiPrintTest extends JDFTestCaseBase
         stCounter.addPhase(mediaRef,1,0);
         stCounter.addPhase(compRef,10,0);
         stCounter.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, null);
-        ap.getLastPhase(null).setXMLComment("Phase where 1 proof is produced");
+        ap.getLastPhase(null,null).setXMLComment("Phase where 1 proof is produced");
 
         stCounter.setPhase(EnumNodeStatus.Stopped, "WaitForApproval", EnumDeviceStatus.Stopped, null);
-        ap.getLastPhase(null).setXMLComment("Phase where the proof is evaluated while the device is stopped");
+        ap.getLastPhase(null,null).setXMLComment("Phase where the proof is evaluated while the device is stopped");
         stCounter.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, null);
 
         stCounter.addPhase(mediaRef,99,0);
         stCounter.addPhase(compRef,990,0);
         stCounter.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, null);
-        ap.getLastPhase(null).setXMLComment("Phase where the 100 copies are produced");
+        ap.getLastPhase(null,null).setXMLComment("Phase where the 100 copies are produced");
         
         stCounter.setPhase(EnumNodeStatus.Completed, "Idle", EnumDeviceStatus.Idle, null);
         stCounter.setResourceAudit(mediaRef, EnumReason.ProcessResult);

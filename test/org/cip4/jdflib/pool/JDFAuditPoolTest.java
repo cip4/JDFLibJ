@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -209,19 +210,23 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
     {        
         JDFPhaseTime p1=myAuditPool.setPhase(EnumNodeStatus.Setup, null, null);
         assertNotNull(p1);
-        assertEquals(p1,myAuditPool.getLastPhase(null));
+        assertEquals(p1,myAuditPool.getLastPhase(null,null));
         VJDFAttributeMap vMap=new VJDFAttributeMap();
         vMap.add(new JDFAttributeMap("SheetName","s1"));
         VJDFAttributeMap vMap2=new VJDFAttributeMap();
         vMap2.add(new JDFAttributeMap("SheetName","s1"));
         JDFPhaseTime p2=myAuditPool.setPhase(EnumNodeStatus.Setup, null, vMap);
-        assertEquals(p2,myAuditPool.getLastPhase(vMap));
-        assertEquals(p2,myAuditPool.getLastPhase(null));
+        assertEquals(p2,myAuditPool.getLastPhase(vMap,null));
+        assertEquals(p2,myAuditPool.getLastPhase(null,null));
         JDFPhaseTime p3=myAuditPool.setPhase(EnumNodeStatus.Setup, null, vMap2);
         myAuditPool.addModified(null, jdfRoot);
-        assertEquals(p2,myAuditPool.getLastPhase(vMap));
-        assertEquals(p3,myAuditPool.getLastPhase(null));
-        assertEquals(p3,myAuditPool.getLastPhase(vMap2));
+        assertEquals(p2,myAuditPool.getLastPhase(vMap,null));
+        assertEquals(p3,myAuditPool.getLastPhase(null,null));
+        assertEquals(p3,myAuditPool.getLastPhase(vMap2,null));
+        
+        p1.setModules(new VString("m1",null), new VString("RIP",null));
+        assertNull(myAuditPool.getLastPhase(null,"m2"));
+        assertEquals(p1,myAuditPool.getLastPhase(null,"m1"));
                 
      }
         

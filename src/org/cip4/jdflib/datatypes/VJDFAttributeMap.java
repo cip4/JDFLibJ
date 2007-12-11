@@ -420,6 +420,21 @@ public class VJDFAttributeMap
         }
     }
     /**
+     * Method overlapMap.
+     * @param map the map to check against
+     */
+    public boolean overlapsMap (JDFAttributeMap map)
+    {
+        for (int i=size()-1; i>=0; i--)
+        {
+            if (elementAt(i).overlapMap(map))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    /**
      * Method subMap.
      * @param map the submap to check against
      * @return true if this has at least one entry that subMap is a submap of

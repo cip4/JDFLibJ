@@ -90,8 +90,10 @@ import org.cip4.jdflib.auto.JDFAutoDeviceInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.JDFModulePhase;
 import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.util.JDFDate;
@@ -221,7 +223,12 @@ import org.cip4.jdflib.util.JDFDate;
         }
         JDFMISDetails md=pt.getMISDetails();
         jp.copyElement(md,null);
-        
+        VElement modules=pt.getChildElementVector(ElementName.MODULEPHASE, null);
+        int mLen=modules==null ? null : modules.size();
+        for(int i=0;i<mLen;i++)
+        {
+            jp.createModuleStatusFromModulePhase((JDFModulePhase)modules.elementAt(i));
+        }
         //TODO set more
         jp.eraseEmptyAttributes(true);
         return jp;

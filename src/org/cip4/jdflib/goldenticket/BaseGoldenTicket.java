@@ -70,6 +70,7 @@
  */
 package org.cip4.jdflib.goldenticket;
 
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
@@ -82,10 +83,12 @@ import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.StatusCounter;
 import org.cip4.jdflib.util.UrlUtil;
 
 /**
@@ -104,6 +107,7 @@ public class BaseGoldenTicket
     protected JDFNode theNode=null;
     protected EnumVersion theVersion=null;
     protected int baseICSLevel;
+    protected StatusCounter theStatusCounter;
     /**
      * percentage allowed maxamount waste to be used for audits
      */
@@ -123,6 +127,8 @@ public class BaseGoldenTicket
     {
         baseICSLevel=icsLevel;
         theVersion=jdfVersion;
+        theStatusCounter=new StatusCounter(null,null,null);
+        JDFElement.setLongID(false);
     }
 
     /**
@@ -140,51 +146,47 @@ public class BaseGoldenTicket
      * simulate execution of this node
      * the internal node will be modified to reflect the excution
      */
-    public void execute()
+    public void execute(VJDFAttributeMap vMap, boolean bOutAvail, boolean bFirst, int good, int waste)
     {
+        theNode.setPartStatus(vMap, EnumNodeStatus.Completed);
         VElement vResLinks=theNode.getResourceLinks(null);
+        runphases(good, waste);
         int siz= vResLinks!=null ? vResLinks.size() : 0;
         for(int i=0;i<siz;i++)
         {
             JDFResourceLink rl=(JDFResourceLink)vResLinks.elementAt(i);
-            if(rl.hasChildElement(ElementName.AMOUNTPOOL, null))
-            {
-                int ipa=0;
-                while(true)
-                {
-                    JDFPartAmount pa=rl.getAmountPool().getPartAmount(ipa++);
-                    if(pa==null)
-                        break;
-                    JDFAttributeMap mPA=pa.getPartMap();
-                    if(mPA.containsKey("Condition"))
-                    {
-                        if(mPA.get("Condition").equals("Good"))
-                        {
-                            pa.setActualAmount(pa.getAmount(null)*actualPercent/100,null);
-                        }
-                        else if(mPA.get("Condition").equals("Waste"))
-                        {
-                            pa.setActualAmount(pa.getMaxAmount(null)*wastePercent/100,null);
-                        }
-                        
-                    }
-                    else if(pa.hasAttribute(AttributeName.AMOUNT))
-                    {
-                        pa.setActualAmount(pa.getAmount(null)*actualPercent/100,null);
-                    }
-                }
-            }
-            else if(rl.hasAttribute(AttributeName.AMOUNT))
-            {
-                rl.setActualAmount(rl.getAmount(null)*actualPercent/100, null);
-            }
-            if(EnumUsage.Output.equals(rl.getUsage()))
+            
+            if(bOutAvail && EnumUsage.Output.equals(rl.getUsage()))
             {
                 VElement vRes=rl.getTargetVector(-1);
+                
                 for(int j=0;j<vRes.size();j++)
                 {
-                    JDFResource r=(JDFResource) vRes.elementAt(j);
-                    r.setResStatus(EnumResStatus.Available, true);
+                    VElement leaves=((JDFResource)vRes.elementAt(j)).getLeaves(false);
+                    for(int k=0;k<leaves.size();k++)
+                    {
+                        JDFResource r=(JDFResource) leaves.elementAt(k);
+                        JDFAttributeMap map=r.getPartMap();
+                        if(vMap==null || vMap.overlapsMap(map))
+                        {
+                            r.setResStatus(EnumResStatus.Available, true);
+                            
+                            if(good>=0)
+                            {
+                                map.put("Condition", "Good");
+                                JDFPartAmount pa=rl.getCreateAmountPool().getPartAmount(map);
+                                double preSet=pa==null ? 0 : pa.getActualAmount(null);
+                                rl.setActualAmount(preSet+good, map);
+                            }
+                            if(waste>=0)
+                            {
+                                map.put("Condition", "Waste");
+                                JDFPartAmount pa=rl.getCreateAmountPool().getPartAmount(map);
+                                double preSet=pa==null ? 0 : pa.getActualAmount(null);
+                                rl.setActualAmount(preSet+waste, map);
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -192,6 +194,19 @@ public class BaseGoldenTicket
         // base requires no generic excute support
 //      JDFProcessRun pr=(JDFProcessRun) theNode.getCreateAuditPool().addAudit(EnumAuditType.ProcessRun, null);
 
+    }
+
+    protected void runphases(int good, int waste)
+    {
+        theStatusCounter.setPhase(EnumNodeStatus.InProgress, "SD", EnumDeviceStatus.Running, "SD");
+        VElement vResLinks=theNode.getResourceLinks(null);
+        int siz= vResLinks!=null ? vResLinks.size() : 0;
+        for(int i=0;i<siz;i++)
+        {
+            JDFResourceLink rl=(JDFResourceLink)vResLinks.elementAt(i);
+            theStatusCounter.addPhase(rl.getrRef(), good, waste);
+        }
+        theStatusCounter.setPhase(EnumNodeStatus.Completed, "SD", EnumDeviceStatus.Idle, "SD");
     }
 
 
@@ -218,6 +233,10 @@ public class BaseGoldenTicket
 
         if(!theNode.hasAttribute(AttributeName.COMMENTURL))
             theNode.setCommentURL(UrlUtil.StringToURL("//MyHost/data/Comments.html").toExternalForm());
+        
+        theStatusCounter.setActiveNode(theNode, null, null);
+        
+        
     }
 
     /**
@@ -238,5 +257,21 @@ public class BaseGoldenTicket
         if(theNode!=null)
             s+=theNode.toString();
         return s;
+    }
+
+    /**
+     * @param string
+     * @param i
+     * @param b
+     */
+    public void write2File(String file, int indent)
+    {
+        theNode.getOwnerDocument_KElement().write2File(file, indent, indent==0);
+        
+    }
+
+    public StatusCounter getStatusCounter()
+    {
+        return theStatusCounter;
     }
 }

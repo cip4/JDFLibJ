@@ -456,17 +456,36 @@ public class JDFAuditPool extends JDFPool
     @Deprecated
 	public JDFPhaseTime getLastPhase()
     {
-        return getLastPhase(null);
+        return getLastPhase(null,null);
     }
 
     /**
      * getLastPhase - get the most recent PhaseTime audit in this pool
      * @param vPartMap the list of matching partMaps
      * @return JDFAudit - the last PhaseTime audit
+     * @deprecated use  getLastPhase(vPartMap, null)
      */
     public JDFPhaseTime getLastPhase(VJDFAttributeMap vPartMap)
     {
-        return (JDFPhaseTime)getAudit(-1, EnumAuditType.PhaseTime, null,vPartMap);
+        return getLastPhase(vPartMap,null);
+    }
+    /**
+     * getLastPhase - get the most recent PhaseTime audit in this pool
+     * @param vPartMap the list of matching partMaps
+     * @return JDFAudit - the last PhaseTime audit
+     */
+    public JDFPhaseTime getLastPhase(VJDFAttributeMap vPartMap, String moduleID)
+    {
+        if(KElement.isWildCard(moduleID))
+            return (JDFPhaseTime)getAudit(-1, EnumAuditType.PhaseTime, null,vPartMap);
+        VElement e=getAudits(EnumAuditType.PhaseTime, null,vPartMap);
+        for(int i= (e==null ? -1 : e.size()-1); i>=0; i--)
+        {
+            JDFPhaseTime pt = (JDFPhaseTime)e.elementAt(i);
+            if(pt.getChildWithAttribute(ElementName.MODULEPHASE, AttributeName.MODULEID, null, moduleID, 0, true)!=null)
+                return pt;
+        }
+        return null;
     }
 
     /**
@@ -635,7 +654,7 @@ public class JDFAuditPool extends JDFPool
      */
     public JDFPhaseTime setPhase( EnumNodeStatus status,String statusDetails, VJDFAttributeMap vmParts)
     {
-        JDFPhaseTime pt = getLastPhase(vmParts);
+        JDFPhaseTime pt = getLastPhase(vmParts,null);
         if("".equals(statusDetails))
             statusDetails=null;
         if (pt == null)
@@ -651,7 +670,7 @@ public class JDFAuditPool extends JDFPool
         else
         {
             // no change but keep stop time
-            pt.setEnd(new JDFDate());
+           // pt.setEnd(new JDFDate());
             return pt;
         }
         if (statusDetails != null)

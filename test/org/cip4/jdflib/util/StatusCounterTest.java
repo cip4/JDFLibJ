@@ -75,6 +75,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumWorkType;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
@@ -173,16 +174,11 @@ public class StatusCounterTest extends JDFTestCaseBase
         assertEquals(jp.getMISDetails().getWorkType(),EnumWorkType.Alteration);
     }
 
-
+//////////////////////////////////////////////////////////////////////////////////////////
+    
     public void testIdle()
     {
-        JDFDoc d=creatXMDoc();
-        JDFNode n=d.getJDFRoot();
-        StatusCounter sc=new StatusCounter(n,null,null);
         JDFExposedMedia m=(JDFExposedMedia) n.getMatchingResource("ExposedMedia", null, null, 0);
-        String resID=m.getID();
-        sc.setFirstRefID(resID);
-        sc.addPhase(resID, 200, 0);
         boolean bChanged=sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
         assertTrue(bChanged);
         JDFDoc docJMF=sc.getDocJMFPhaseTime();
@@ -212,5 +208,52 @@ public class StatusCounterTest extends JDFTestCaseBase
         deviceInfo=sig.getDeviceInfo(0);
         jp=deviceInfo.getJobPhase(0);
         assertNull(jp);
+    }    
+    
+    public void testMultiModule()
+    {
+        StatusCounter scRIP=new StatusCounter(n,null,null);
+        scRIP.addModule("ID_RIP", "RIP");
+        StatusCounter scSetter=new StatusCounter(n,null,null);
+        scSetter.addModule("ID_Setter", "Platesetter");
+        
+        MultiModuleStatusCounter msc=new MultiModuleStatusCounter();
+        msc.addModule(scRIP);
+        msc.addModule(scSetter);
+        
+        JDFExposedMedia m=(JDFExposedMedia) n.getMatchingResource("ExposedMedia", null, null, 0);
+        String resID=m.getID();
+        scRIP.setFirstRefID(resID);
+        scRIP.addPhase(resID, 200, 0);
+        boolean bChanged=scRIP.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
+        assertTrue(bChanged);
+        JDFDoc docJMF=scRIP.getDocJMFPhaseTime();
+        JDFResponse sig=(JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
+        JDFDeviceInfo deviceInfo = sig.getDeviceInfo(0);
+        JDFJobPhase jp=deviceInfo.getJobPhase(0);
+        assertEquals(jp.getAmount(), 200,0);
+        scRIP.addPhase(resID, 0, 100);
+        scRIP.setTrackWaste(m.getID(), true);
+        bChanged= scRIP.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
+        assertFalse(bChanged);
+        JDFDoc dJMFAll=msc.getStatusResponse();
+        assertEquals(dJMFAll.getRoot().getChildrenByTagName(ElementName.JOBPHASE, null, null, false, true, -1).size(), 1);
+        scSetter.setPhase(EnumNodeStatus.InProgress, "seti", EnumDeviceStatus.Running, "run");
+        scSetter.setFirstRefID(resID);
+        scSetter.addPhase(resID, 400, 0);
+        dJMFAll=msc.getStatusResponse();
+        assertEquals("1 RIP, 1 setter",dJMFAll.getRoot().getChildrenByTagName(ElementName.JOBPHASE, null, null, false, true, -1).size(), 2);
+       
+  
+        scRIP.setActiveNode(null, null, null);
+        bChanged= scRIP.setPhase(null, null, EnumDeviceStatus.Idle, null);
+        dJMFAll=msc.getStatusResponse();
+        assertEquals(dJMFAll.getRoot().getChildrenByTagName(ElementName.JOBPHASE, null, null, false, true, -1).size(), 1);
+
+        scSetter.setActiveNode(null, null, null);
+        bChanged= scSetter.setPhase(null, null, EnumDeviceStatus.Idle, null);
+        dJMFAll=msc.getStatusResponse();
+        assertEquals(dJMFAll.getRoot().getChildrenByTagName(ElementName.JOBPHASE, null, null, false, true, -1).size(), 0);
+
     }    
 }

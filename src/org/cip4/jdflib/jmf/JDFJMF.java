@@ -391,7 +391,7 @@ public class JDFJMF extends JDFAutoJMF
     public JDFCommand getCommand (int i, boolean bCreate)
     {
         if (bCreate)
-            return (JDFCommand) getCreateMessageElement (JDFMessage.EnumFamily.Command, i);
+            return (JDFCommand) getCreateMessageElement(JDFMessage.EnumFamily.Command, null, i);
         return (JDFCommand) getMessageElement(JDFMessage.EnumFamily.Command,null,i);
     }
 
@@ -420,7 +420,7 @@ public class JDFJMF extends JDFAutoJMF
     public JDFQuery getQuery (int i, boolean bCreate)
     {
         if (bCreate)
-            return (JDFQuery) getCreateMessageElement (JDFMessage.EnumFamily.Query, i);
+            return (JDFQuery) getCreateMessageElement(JDFMessage.EnumFamily.Query, null, i);
 
         return (JDFQuery) getMessageElement(JDFMessage.EnumFamily.Query,null,i);
     }
@@ -446,7 +446,7 @@ public class JDFJMF extends JDFAutoJMF
     public JDFResponse getResponse (int i, boolean bCreate)
     {
         if (bCreate)
-            return (JDFResponse) getCreateMessageElement (JDFMessage.EnumFamily.Response, i);
+            return (JDFResponse) getCreateMessageElement(JDFMessage.EnumFamily.Response, null, i);
         return (JDFResponse) getMessageElement(JDFMessage.EnumFamily.Response,null,i);
     }
 
@@ -474,8 +474,28 @@ public class JDFJMF extends JDFAutoJMF
     public JDFSignal getSignal (int i, boolean bCreate)
     {
         if (bCreate)
-            return (JDFSignal) getCreateMessageElement (JDFMessage.EnumFamily.Signal, i);
+            return (JDFSignal) getCreateMessageElement(JDFMessage.EnumFamily.Signal, null, i);
         return (JDFSignal) getMessageElement(JDFMessage.EnumFamily.Signal,null,i);
+    }
+    /**
+     * get an existing message element, create it if it doesn't exist
+     * @param family the Message family - Query, Acknowledge, Command, Response, Registration or Signal
+     * @param i get the ith element
+     * @return the newly created message
+     */
+    public JDFMessage getCreateMessageElement (JDFMessage.EnumFamily family, JDFMessage.EnumType typ, int i)
+    {
+        if (family==null)
+        {
+            throw new JDFException ("GetMessageElement: creating undefined message family");
+        }
+
+        JDFMessage m = getMessageElement(family,typ,i);
+
+        if (m == null)
+            m = appendMessageElement (family, typ);
+
+        return m;
     }
 
     /**
@@ -483,20 +503,11 @@ public class JDFJMF extends JDFAutoJMF
      * @param family the Message family - Query, Acknowledge, Command, Response, Registration or Signal
      * @param i get the ith element
      * @return the newly created message
+     * @deprecated use getCreateMessageElement(family, null, i);
      */
     public JDFMessage getCreateMessageElement (JDFMessage.EnumFamily family, int i)
     {
-        if (family==null)
-        {
-            throw new JDFException ("GetMessageElement: creating undefined message family");
-        }
-
-        JDFMessage m = getMessageElement(family,null,i);
-
-        if (m == null)
-            m = appendMessageElement (family, null);
-
-        return m;
+       return getCreateMessageElement(family, null, i);
     }
 
     /**
@@ -666,7 +677,7 @@ public class JDFJMF extends JDFAutoJMF
     public JDFAcknowledge getAcknowledge (int i, boolean bCreate)
     {
         if (bCreate)
-            return (JDFAcknowledge) getCreateMessageElement (JDFMessage.EnumFamily.Acknowledge, i);
+            return (JDFAcknowledge) getCreateMessageElement(JDFMessage.EnumFamily.Acknowledge, null, i);
         return (JDFAcknowledge) getMessageElement(JDFMessage.EnumFamily.Acknowledge,null,i);
     }
 

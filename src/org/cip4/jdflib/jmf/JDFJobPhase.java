@@ -90,6 +90,8 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.JDFModulePhase;
+import org.cip4.jdflib.resource.JDFModuleStatus;
 
 //----------------------------------
 /**
@@ -296,6 +298,26 @@ public class JDFJobPhase extends JDFAutoJobPhase
         if(sqp==null)
             return null;
         return sqp.getAttribute(key, nameSpaceURI, null);
+    }
+
+    /**
+     * creates a new ModuleStatus in this based on the values in mp
+     * generally used to create messages from audits
+     * 
+     * @param mp the modulephase to copy
+     * @return the new ModuleStatus element
+     * 
+     */
+    public JDFModuleStatus createModuleStatusFromModulePhase(JDFModulePhase mp)
+    {
+        if(mp==null)
+            return null;
+        JDFModuleStatus ms=appendModuleStatus();
+        ms.copyAttribute(AttributeName.MODULETYPE, mp, null, null, null);
+        ms.copyAttribute(AttributeName.MODULEINDEX, mp, null, null, null);
+        ms.copyAttribute(AttributeName.MODULEID, mp, null, null, null);
+
+        return ms;
     }
 }
 

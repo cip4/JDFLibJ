@@ -121,6 +121,7 @@ import org.cip4.jdflib.resource.process.JDFCutBlock;
 import org.cip4.jdflib.resource.process.JDFDigitalPrintingParams;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
+import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPreview;
@@ -292,7 +293,27 @@ public class JDFResourceTest extends JDFTestCaseBase
      *
      */
     public void testGetResourceRoot()
+    {       
+        JDFDoc d=new JDFDoc("JDF");
+        JDFNode n=d.getJDFRoot();
+        n.setVersion(EnumVersion.Version_1_1);
+        JDFLayout l=(JDFLayout) n.addResource(ElementName.LAYOUT, EnumUsage.Input);
+        KElement e=l.appendSignature().appendSheet().appendContentObject();
+        assertEquals(JDFResource.getResourceRoot(e), l);
+        assertEquals(JDFResource.getResourceRoot(l), l);
+        assertNull(JDFResource.getResourceRoot(n));
+        assertNull(JDFResource.getResourceRoot(n.getAuditPool()));
+    }
+    
+    /**
+     * test the resource root stuff
+     *
+     */
+    public void testGetResourceRoot_Old()
     {
+        
+         
+        
         // set up a test document
         XMLDoc jdfDoc = new XMLDoc(ElementName.COLORPOOL,JDFElement.getSchemaURL());
         JDFElement root = (JDFElement)jdfDoc.getRoot();
@@ -327,17 +348,9 @@ public class JDFResourceTest extends JDFTestCaseBase
         resource = (JDFResource) root.appendElement(ElementName.COLOR);
         JDFResource elem = (JDFResource) root.appendElement(ElementName.NODEINFO);
 
-        try
-        {
-            // "JDFResource.getResourceRoot ran into the JDF node while searching"
             resRoot = resource.getResourceRoot();
-            fail("JDFResource.getResourceRoot ran into the JDF node while searching");
-        }
-        catch(JDFException e)
-        {
-            // this was expected
-        }
-
+            assertNull(resRoot);
+ 
         // localName.equals(ElementName.NODEINFO) || localName.equals(ElementName.CUSTOMERINFO)
         resRoot = elem.getResourceRoot();
         assertTrue(resRoot == elem);
@@ -434,7 +447,7 @@ public class JDFResourceTest extends JDFTestCaseBase
         assertTrue( ((String)vPartValues.elementAt(2)).equals("Yellow") );
         assertTrue( ((String)vPartValues.elementAt(3)).equals("Black") );
     }
-
+ 
     public void testgetPartMapVector()
     {
         String strFileName = sm_dirTestData+"partitioned_private_resources.jdf";

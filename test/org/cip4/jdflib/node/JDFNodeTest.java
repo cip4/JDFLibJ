@@ -652,7 +652,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertNotNull(jmf);
         assertEquals(jmf.numChildElements(ElementName.RESPONSE,null),1);
         JDFAuditPool ap=root.getAuditPool();
-        JDFPhaseTime pt= ap.getLastPhase(null);
+        JDFPhaseTime pt= ap.getLastPhase(null,null);
         assertEquals(pt.getStatus(),EnumNodeStatus.Waiting);
         assertEquals(root.getPartStatus(null),EnumNodeStatus.Waiting);
         JDFAttributeMap map=new JDFAttributeMap("SheetName","S1");
@@ -664,7 +664,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         su.setPhase(EnumNodeStatus.Setup, "Setup", EnumDeviceStatus.Setup, null);
 
         docJMF=su.getDocJMFPhaseTime();
-        pt= ap.getLastPhase(vMap);
+        pt= ap.getLastPhase(vMap,null);
         assertEquals(pt.getStatus(),EnumNodeStatus.Setup);
         assertEquals(root.getPartStatus(map),EnumNodeStatus.Setup);
         assertEquals(pt.getPartMapVector(),vMap);

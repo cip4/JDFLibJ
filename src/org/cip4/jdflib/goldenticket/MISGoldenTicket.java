@@ -138,26 +138,10 @@ public class MISGoldenTicket extends BaseGoldenTicket
      * simulate execution of this node
      * the internal node will be modified to reflect the excution
       */
-    public void execute()
+    @Override
+    public void execute(VJDFAttributeMap vNodeMap, boolean bOutAvail,boolean bFirst,int good, int waste)
     {
-        super.execute();
-        VJDFAttributeMap vNodeMap=theNode.getNodeInfo().getPartMapVector(false);
-        if(vNodeMap==null)
-        {
-            vNodeMap=new VJDFAttributeMap();
-            vNodeMap.add(null);
-        }
-        for(int i=0;i<vNodeMap.size();i++)
-        {
-            JDFProcessRun pr=(JDFProcessRun) theNode.getCreateAuditPool().addAudit(EnumAuditType.ProcessRun, null);
-            JDFAttributeMap theMap=vNodeMap.elementAt(i);
-            pr.setPartMap(theMap);
-            pr.setEndStatus(theNode.getPartStatus(theMap));
-            pr.setDuration(new JDFDuration(duration));
-            final JDFDate date = new JDFDate();
-            date.addOffset(-preStart, 0, 0, 0);
-            pr.setStart(date);
-        }
+        super.execute(vNodeMap,bOutAvail, bFirst, good,waste);
     }
 
     /**

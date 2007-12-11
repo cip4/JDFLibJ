@@ -85,6 +85,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.util.JDFDate;
@@ -281,6 +282,28 @@ public class JDFPhaseTime extends JDFAutoPhaseTime
         if(dStart==null || dEnd==null)
             return null;
         return new JDFDuration((int)((dEnd.getTimeInMillis()-dStart.getTimeInMillis())/1000));
+    }
+
+    /**
+     * @param m_moduleid the list of module ids to add, if null: nop
+     * @return the list of ModulePhase element
+     * @throws IllegalArgumentException if the vectors have different lengths
+     */
+    public VElement setModules(VString moduleIDs, VString moduleTypes)
+    {
+        if(moduleIDs==null || moduleIDs.size()==0)
+            return null;
+        if(moduleTypes==null || moduleTypes.size()==0 || moduleTypes.size()!=moduleIDs.size())
+            throw new IllegalArgumentException("Inconsistent vector lengths");
+        VElement v=new VElement();
+        for(int i=0;i<moduleIDs.size();i++)
+        {
+            final JDFModulePhase modulePhase = getCreateModulePhase(i);
+            v.add(modulePhase);
+            modulePhase.setModuleID(moduleIDs.stringAt(i));
+            modulePhase.setModuleType(moduleTypes.stringAt(i));
+        }
+        return v;
     }   
     
 } // class JDFPhaseTime

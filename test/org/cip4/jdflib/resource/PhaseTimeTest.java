@@ -76,11 +76,14 @@
 package org.cip4.jdflib.resource;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
@@ -118,6 +121,20 @@ public class PhaseTimeTest extends JDFTestCaseBase
         pt.setEnd(end);
         assertEquals("",pt.getDuration().getDuration(), 100.,1.);
         
+    }
+    
+    public void testModuleIDs() throws Exception
+    {
+        JDFDoc doc=new JDFDoc("JDF");
+        JDFNode n=doc.getJDFRoot();
+        JDFAuditPool ap=n.getCreateAuditPool();
+        JDFPhaseTime pt=ap.addPhaseTime(EnumNodeStatus.InProgress,null,null);
+        pt.setModules(new VString("m1 m2"," "),new VString("RIP Press"," "));
+        assertEquals(pt.numChildElements(ElementName.MODULEPHASE, null),2);
+        assertEquals(pt.getModulePhase(0).getModuleID(), "m1");
+        assertEquals(pt.getModulePhase(1).getModuleID(), "m2");
+        assertEquals(pt.getModulePhase(1).getModuleType(), "Press");
+//        assertTrue(pt.isValid(EnumValidationLevel.Complete));
     }
     
  

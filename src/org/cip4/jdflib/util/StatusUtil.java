@@ -297,7 +297,7 @@ public class StatusUtil {
 
         JDFAuditPool ap=m_Node.getCreateAuditPool();
         // TODO rethink when to send 2 phases
-        JDFPhaseTime pt1= ap.getLastPhase(m_vPartMap);
+        JDFPhaseTime pt1= ap.getLastPhase(m_vPartMap,null);
         JDFPhaseTime pt2=pt1;
         boolean bEnd=nodeStatus.equals(EnumNodeStatus.Completed) || nodeStatus.equals(EnumNodeStatus.Aborted);
 

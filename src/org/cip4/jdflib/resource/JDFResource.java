@@ -1016,71 +1016,55 @@ public class JDFResource extends JDFElement
      */
     public JDFResource getResourceRoot()
     {
-        JDFResource res     = null;
-        final JDFElement e  = (JDFElement) getDeepParent(getLocalName(), Integer.MAX_VALUE);
+        return getResourceRoot(this);
+    }
+    /**
+     * Gets the root resource of 'this'
+     * @param elem the element to get the root of
+     * @return JDFResource - the root resource element
+     *
+     * @throws JDFException if GetResourceRoot ran into the JDF node while searching
+     */
+    public static JDFResource getResourceRoot(KElement elem)
+    {
+        if(elem==null)
+            return null;
+        elem  = elem.getDeepParent(elem.getLocalName(), Integer.MAX_VALUE);
 
-        if (e != null)
+        KElement parentNode = elem.getParentNode_KElement();
+        if (parentNode != null)
         {
-            KElement parentNode = e.getParentNode_KElement();
-            if (parentNode != null)
+            String parentName = parentNode.getLocalName();
+            if (isValidParentNodeName(parentName))
             {
-                String parentName = parentNode.getLocalName();
-
-                if (parentName != null && !parentName.equals(JDFConstants.EMPTYSTRING) )
+                if(parentNode instanceof JDFNodeInfo || parentNode instanceof JDFCustomerInfo)
                 {
-                    if (isValidParentNodeName(parentName))
+                    KElement par=parentNode.getParentNode_KElement();
+                    if(par!=null && !(par instanceof JDFNode))
                     {
-                        res = (JDFResource) e;
-                        if(parentNode instanceof JDFNodeInfo || parentNode instanceof JDFCustomerInfo)
-                        {
-                            KElement par=parentNode.getParentNode_KElement();
-                            if(par!=null && !(par instanceof JDFNode))
-                            {
-                                res=((JDFResource)parentNode).getResourceRoot();
-                            }                               
-                        }
-                    }
-                    else
-                    {
-                        while (parentNode!=null
-                                && !(parentNode instanceof JDFResource)
-                                && !(parentNode instanceof JDFNode)
-                                && !(parentNode instanceof JDFJMF))
-                        {
-                            // find the first resource uptree
-                            parentNode = parentNode.getParentNode_KElement();
-                        }
-
-                        if (((JDFElement) parentNode) instanceof JDFResource)
-                        {   // e was a resource element --> search root of the parent element
-                            return ((JDFResource) parentNode).getResourceRoot();
-                        }
-
-                        if (parentNode instanceof JDFNode)
-                        {
-                            if ((e instanceof JDFNodeInfo) || (e instanceof JDFCustomerInfo))
-                            {
-                                res = (JDFResource) e;
-                            }
-                            else
-                            {
-                                throw new JDFException("JDFResource.getResourceRoot ran into the JDF node while searching");
-                            }
-                        }
-                        else if (parentNode instanceof JDFJMF)
-                        {
-                            throw new JDFException("JDFResource.getResourceRoot ran into the JMF node while searching");
-                        }
-                    }
+                        return getResourceRoot(parentNode);
+                    }                               
                 }
+                return (JDFResource) ((elem instanceof JDFResource) ? elem : null);
             }
-            else // parentNode == null, this is a standalone resource
+            if ((parentNode instanceof JDFNode)||(parentNode instanceof JDFJMF))
             {
-                res=(JDFResource)e;
+                if ((elem instanceof JDFNodeInfo) || (elem instanceof JDFCustomerInfo))
+                {
+                    return (JDFResource) elem;
+                }
+                return null; // not a resource
             }
+            if((elem instanceof JDFResource) &&!(parentNode instanceof JDFResource))
+                return (JDFResource)elem;
+            
+            return getResourceRoot(parentNode);            
         }
-
-        return res;
+        if(elem instanceof JDFResource)// parentNode == null, this is a standalone resource
+        {
+            return (JDFResource)elem;
+        }
+        return null;
     }
 
 //dm    /**
@@ -2872,17 +2856,25 @@ public class JDFResource extends JDFElement
      */
     public String getLocalPartitionKey()
     {
-        VString partKeys=getPartIDKeys();
-        String sKey=null;
-        for(int i=0;i<partKeys.size();i++)
+        final JDFResource partRoot = getResourceRoot();
+        if(partRoot==null)
+            return null;
+        if(partRoot==this)
+            return null;
+        VString keys=partRoot.getPartIDKeys();
+        if(keys==null)
+            return null;
+        int n=0;
+        KElement par=getParentNode_KElement();
+        while(par!=partRoot)
         {
-            if(hasAttribute_KElement(partKeys.stringAt(i), null, false))
-            {
-                sKey=partKeys.stringAt(i);
-                break;
-            }
+            n++;
+            par=par.getParentNode_KElement();
         }
-        return sKey;
+        if(n>=keys.size())
+            return null;
+        String s=keys.stringAt(n);
+        return hasAttribute_KElement(s, null, false) ? s : null;
     }
 
     /**
@@ -6872,7 +6864,7 @@ public class JDFResource extends JDFElement
         level = incompleteLevel(level,false);
 
         final boolean bLeaf = isLeaf();
-        final EnumPartUsage partUsage = getPartUsage();
+        final EnumPartUsage partUsage = getResourceRoot().getPartUsage();
         boolean bForceIncomplete=!(partUsage == EnumPartUsage.Implicit)||(partUsage == EnumPartUsage.Sparse);
         if(bLeaf)
         {
