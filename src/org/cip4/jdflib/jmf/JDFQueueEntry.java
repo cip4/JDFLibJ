@@ -349,6 +349,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry
        EnumQueueEntryStatus status=getQueueEntryStatus();
        return // (status==null) || 
        EnumQueueEntryStatus.Completed.equals(status) || 
+       EnumQueueEntryStatus.Removed.equals(status) || 
        EnumQueueEntryStatus.Aborted.equals(status);
     }
     /**

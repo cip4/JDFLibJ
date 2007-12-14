@@ -89,13 +89,23 @@ import org.cip4.jdflib.jmf.JDFJMF;
 public class MultiModuleStatusCounter
 {
     private Vector<StatusCounter> counters=new Vector<StatusCounter>();
+    
     /**
-     * as a statuscounter representing a set of modules to this device status counter
+     * add a statuscounter representing a set of modules to this device status counter
      * @param theStatusCounter the statuscounter to add
      */
     public void addModule(StatusCounter sc)
     {
         counters.add(sc);
+    }
+    
+    /**
+     * remove a statuscounter representing a set of modules to this device status counter
+     * @param theStatusCounter the statuscounter to add
+     */
+    public void removeModule(StatusCounter sc)
+    {
+        counters.remove(sc);
     }
     
     public JDFDoc getStatusResponse()

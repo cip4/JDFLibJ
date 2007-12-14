@@ -1453,6 +1453,35 @@ public class JDFResourceTest extends JDFTestCaseBase
     /**
      * test expand and collapse methods
      */
+    public void testCollapseElement()
+    {
+        JDFDoc doc=new JDFDoc("JDF");
+        JDFNode n=doc.getJDFRoot();
+        JDFRunList rl=(JDFRunList)n.addResource("RunList",EnumUsage.Input);
+        JDFLayoutElement le=rl.appendLayoutElement();
+        final JDFSeparationSpec ss1 = le.appendSeparationSpec();
+        ss1.setName("n1");
+        final JDFSeparationSpec ss2 = le.appendSeparationSpec();
+        ss2.setName("n2");
+        rl.addPartition(EnumPartIDKey.Run, "r1");
+        rl.addPartition(EnumPartIDKey.Run, "r2");
+        rl.collapse(true);
+        assertEquals(le.getSeparationSpec(0), ss1);
+        assertEquals(le.getSeparationSpec(1), ss2);
+        rl.collapse(false);
+        assertEquals(le.getSeparationSpec(0), ss1);
+        assertEquals(le.getSeparationSpec(1), ss2);
+        le.collapse(true);
+        assertEquals(le.getSeparationSpec(0), ss1);
+        assertEquals(le.getSeparationSpec(1), ss2);
+        le.collapse(false);
+        assertEquals(le.getSeparationSpec(0), ss1);
+        assertEquals(le.getSeparationSpec(1), ss2);
+    }       
+    
+    /**
+     * test expand and collapse methods
+     */
     public void testCollapse()
     {
         JDFDoc doc=creatRLDoc();
@@ -1474,6 +1503,7 @@ public class JDFResourceTest extends JDFTestCaseBase
         JDFRunList rlSep=(JDFRunList) rl.getPartition(map,null);
         assertNotNull(rlSep);
         assertTrue(rlRun.getIsPage());
+     
         assertFalse(rlSep.getIsPage());
         rlRun.collapse(true);
         assertTrue(rlRun.getIsPage());

@@ -166,8 +166,10 @@ public class QueueHotFolder implements HotFolderListener
         JDFDoc jmfDoc=new JDFDoc("JMF");
         final JDFJMF jmfRoot = jmfDoc.getJMFRoot();
         JDFCommand newCommand=(JDFCommand) jmfRoot.copyElement(queueCommand, null);
+        newCommand.removeAttribute(AttributeName.ID);
+        newCommand.appendAnchor(null);
         EnumType cType=newCommand.getEnumType();
-        JDFDoc jdfDoc=JDFDoc.parseFile(hotFile.getPath());
+        JDFDoc jdfDoc=JDFDoc.parseFile(storedFile.getPath());
 
         JDFNode jdfRoot=jdfDoc==null?null:jdfDoc.getJDFRoot();
 
@@ -217,7 +219,7 @@ public class QueueHotFolder implements HotFolderListener
         if(ap!=null)
         {
             JDFProcessRun pr=(JDFProcessRun) ap.getAudit(-1, EnumAuditType.ProcessRun, null, null);
-            String queueEID=pr.getAttribute(AttributeName.QUEUEENTRYID);
+            String queueEID=pr==null ? null : pr.getAttribute(AttributeName.QUEUEENTRYID);
             if(!KElement.isWildCard(queueEID))
                 rqp.setQueueEntryID(queueEID);
         }

@@ -1633,7 +1633,7 @@ public class JDFResource extends JDFElement
                 }
                 else
                 {
-                    throw new JDFException("GetCreatePartition: attempting to fill non-matching partIDKeys");
+                    throw new JDFException("GetCreatePartition: Resource ID="+getID()+" attempting to fill non-matching partIDKeys");
                 }
             }
             else
@@ -2081,7 +2081,7 @@ public class JDFResource extends JDFElement
                 break; // nothing at all left to do; jump out of loop
             }
 
-            KElement k = resourceElement.getNextSiblingElement(nodeName, JDFConstants.EMPTYSTRING);
+            KElement k = resourceElement.getNextSiblingElement(nodeName, null);
 
             if (!(k instanceof JDFResource))
             {

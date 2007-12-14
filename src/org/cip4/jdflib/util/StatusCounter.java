@@ -552,7 +552,7 @@ public class StatusCounter
                 }
                 final JDFResourceLink rl = (JDFResourceLink) vResResourceInfoIterator.next();
                 LinkAmount la=getLinkAmount(rl.getrRef());
-                boolean bExact=la.isCopyResInfo();
+                boolean bExact=la!=null && la.isCopyResInfo();
                 bAllExact=bAllExact && bExact;
                 rqp.setExact(bExact);
                 ri.setLink(rl,rqp);

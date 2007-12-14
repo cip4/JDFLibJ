@@ -89,8 +89,10 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.resource.JDFDevice;
+import org.cip4.jdflib.util.EnumUtil;
 
 /**
  *
@@ -202,11 +204,11 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
      * get the list of QueueEntryDef/@QueueEntryIDs strings as a set
      * @return the set of QueueEntryIDs, null if no QueueEntryDef is specified
      */
-    public Set getQueueEntryDefSet()
+    public Set<String> getQueueEntryDefSet()
     {
         VElement v=getChildElementVector(ElementName.QUEUEENTRYDEF, null);
         final int siz = v==null ? 0 : v.size();
-        HashSet set= siz==0 ? null : new HashSet();
+        HashSet<String> set= siz==0 ? null : new HashSet<String>();
         for(int i=0;i<siz;i++)
         {
             String qeid=((JDFQueueEntryDef)v.elementAt(i)).getQueueEntryID();
@@ -248,16 +250,43 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
         VElement v=theQueue.getQueueEntryVector();
         final int size = v==null ? 0 : v.size();
         theQueue.setQueueSize(size);
+        
         for(int i=0;i<size;i++)
         {
             JDFQueueEntry qe=(JDFQueueEntry)v.elementAt(i);
-            if(!matches(qe))
-                qe.deleteNode();
+            match(qe);
         }
 
         for(int i=theQueue.numEntries(null)-1;i>=maxEntries;i--)
             theQueue.removeChild(ElementName.QUEUEENTRY, null, maxEntries); // always zapp first - it is faster to find
         
+    }
+
+    /**
+     * modifies queueEntry to match this filter by removing all non-matching attributes and elements
+     * 
+     * make sure that this is a copy of any original queue as the incoming queue itself is not cloned
+     * @param qe
+     */
+    public void match(JDFQueueEntry qe)
+    {
+        if(qe==null)
+            return;
+        
+        if(!matches(qe))
+            qe.deleteNode();
+        EnumQueueEntryDetails qed=getQueueEntryDetails();
+        if(qed==null)
+            qed=EnumQueueEntryDetails.Brief;
+        if(EnumUtil.aLessEqualsThanB(EnumQueueEntryDetails.Brief,qed))
+        {
+            qe.removeChildren(ElementName.JOBPHASE, null,null);
+        }
+        if(EnumUtil.aLessEqualsThanB(EnumQueueEntryDetails.JobPhase,qed))
+        {
+             qe.removeChildren(ElementName.JDF, null,null);
+        }
+
     }
 
     /**

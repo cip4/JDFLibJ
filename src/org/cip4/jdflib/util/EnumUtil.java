@@ -80,9 +80,10 @@
 package org.cip4.jdflib.util;
 
 import org.apache.commons.lang.enums.ValuedEnum;
+import org.cip4.jdflib.auto.JDFAutoQueueFilter.EnumQueueEntryDetails;
 
 /**
- * class with utilities for containers, e.g. Vectors, sets etc.
+ * class with utilities for enums
  * also simple object utils
  * @author prosirai
  *
@@ -123,6 +124,32 @@ public class EnumUtil
     public static String getName(ValuedEnum en)
     {
         return en==null ? "null" : en.getName();
+    }
+    /**
+     * checks whether the value of an enum is less than another
+     * 
+     * @param a the first enum; if this is smaller we return true
+     * @param b the second enum
+     * @return boolean a is < b
+     */
+    public static boolean aLessThanB(ValuedEnum a, ValuedEnum b)
+    {
+        int aa=a==null?-1 : a.getValue();
+        int bb=b==null?-1 : b.getValue();
+        return aa<bb;
+    }
+    /**
+     * checks whether the value of an enum is less or equal to another
+     * 
+     * @param a the first enum; if this is smaller we return true
+     * @param b the second enum
+     * @return boolean a is < b
+     */
+    public static boolean aLessEqualsThanB(ValuedEnum a, ValuedEnum b)
+    {
+        int aa=a==null?-1 : a.getValue();
+        int bb=b==null?-1 : b.getValue();
+        return aa<=bb;
     }
     
  
