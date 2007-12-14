@@ -928,7 +928,9 @@ public class JDFMerge
             for (int i = 0; i < size; i++)
             {
                 JDFResourceLink rl = (JDFResourceLink) links.elementAt(i);
-                rl.expandTarget(false);
+                //071214 only expand if rw
+                if(vsRW.contains(rl.getrRef()))
+                    rl.expandTarget(false);
             }
         }
     }
