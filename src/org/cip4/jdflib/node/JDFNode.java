@@ -2364,6 +2364,8 @@ public class JDFNode extends JDFElement
                     return null; //inconsistent
                 }
             }
+            if(stat==null)
+                stat=ni.getNodeStatus(); // we found NO matching leaves
         }
         else if (stat==EnumNodeStatus.Pool)
         {

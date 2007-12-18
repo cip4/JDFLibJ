@@ -1223,7 +1223,39 @@ public class JDFNodeTest extends JDFTestCaseBase
 
     }
     ///////////////////////////////////////////////////////////////
+    public void testGetPartStatusNull()
+    {
+        JDFNode n=new JDFDoc("JDF").getJDFRoot();
+        n.setPartStatus((JDFAttributeMap)null, EnumNodeStatus.Completed);
+        assertEquals(n.getPartStatus(null), EnumNodeStatus.Completed);
+        final JDFNodeInfo nodeInfo = n.appendNodeInfo();
+        nodeInfo.setPartUsage(EnumPartUsage.Implicit);
+        nodeInfo.setNodeStatus(EnumNodeStatus.Cleanup);
+        n.setStatus(EnumNodeStatus.Part);
+        assertEquals(n.getPartStatus(null), EnumNodeStatus.Cleanup);
+        assertEquals(n.getPartStatus(new JDFAttributeMap("Run","r1")), EnumNodeStatus.Cleanup);
+        n.setStatus(EnumNodeStatus.Setup);
+        assertEquals(n.getPartStatus(null), EnumNodeStatus.Setup);
+        assertEquals(n.getPartStatus(new JDFAttributeMap("Run","r1")), EnumNodeStatus.Setup);
+    }
+    public void testGetPartStatus2() throws Exception
+    {
+        JDFNode createJDF=new JDFDoc("JDF").getJDFRoot();
+        createJDF.getCreateResourcePool();
+        final JDFNodeInfo createNodeInfo = createJDF.getCreateNodeInfo();
+        createNodeInfo.setNodeStatus(EnumNodeStatus.Waiting);
+        createJDF.setStatus(EnumNodeStatus.Part);
+        final JDFAttributeMap partMap = new JDFAttributeMap();
+        partMap.put("Run", "1");
+        final VString vPartKeys = null;
+        final JDFNodeInfo createPartition = (JDFNodeInfo) createNodeInfo.getCreatePartition(partMap, vPartKeys);
+        createPartition.setNodeStatus(EnumNodeStatus.Completed);
+        partMap.put("Run", "2");
+        final EnumNodeStatus partStatus = createJDF.getPartStatus(partMap);
+        assertNotNull(partStatus);
+    }
 
+    ///////////////////////////////////////////////////////////////
     public void testGetPartStatus()
     {
         JDFDoc doc = JDFTestCaseBase.creatXMDoc();
