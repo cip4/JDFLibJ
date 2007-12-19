@@ -1238,7 +1238,10 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertEquals(n.getPartStatus(null), EnumNodeStatus.Setup);
         assertEquals(n.getPartStatus(new JDFAttributeMap("Run","r1")), EnumNodeStatus.Setup);
     }
-    public void testGetPartStatus2() throws Exception
+    
+    ///////////////////////////////////////////////////////////////////////////////////////
+    
+    public void testGetPartStatusImplicit() throws Exception
     {
         JDFNode createJDF=new JDFDoc("JDF").getJDFRoot();
         createJDF.getCreateResourcePool();
@@ -1252,7 +1255,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         createPartition.setNodeStatus(EnumNodeStatus.Completed);
         partMap.put("Run", "2");
         final EnumNodeStatus partStatus = createJDF.getPartStatus(partMap);
-        assertNotNull(partStatus);
+        assertEquals("The implicit leaf defaults to root",partStatus, EnumNodeStatus.Waiting);
     }
 
     ///////////////////////////////////////////////////////////////

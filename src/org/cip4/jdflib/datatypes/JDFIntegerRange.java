@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -434,13 +434,14 @@ public class JDFIntegerRange extends JDFRange
     /**
      * getElementCount - returns the number of elements in this range, on the C++ side of the JDF
      * library this method is called NElements
+     * if any if any range cannot be resolved due to an unknown negative value without a known default, -1 is returned
      *
-     * @return int - the number of elements in this range
+     * @return int - the number of elements in this range, -1 if any range cannot be resolved
      */
     public int getElementCount()
     {
         if(m_defaultXDef==0 && (getRight()<0 || getLeft()<0))
-            return 0;
+            return -1;
         return 1 + Math.abs(this.getLeft() - this.getRight());
     }
     

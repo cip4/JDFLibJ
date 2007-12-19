@@ -2345,7 +2345,7 @@ public class JDFNode extends JDFElement
             if(ni==null) {
                 return null;
             }
-            stat = null;
+            stat = ni.getNodeStatus();
 
             final VElement vLeaves=ni.getLeaves(false);
             final int size = vLeaves.size();
@@ -2356,16 +2356,12 @@ public class JDFNode extends JDFElement
                 if(map!=null && !map.overlapMap(mattr)) {
                     continue;
                 }
-                if(stat==null) // don't compare with root, rather compare first fitting leaf
-                    stat=niCmp.getNodeStatus();
 
                 if(niCmp.getNodeStatus()!=stat)
                 {
                     return null; //inconsistent
                 }
             }
-            if(stat==null)
-                stat=ni.getNodeStatus(); // we found NO matching leaves
         }
         else if (stat==EnumNodeStatus.Pool)
         {
@@ -2377,6 +2373,7 @@ public class JDFNode extends JDFElement
         }
         return stat;
     }
+
 
     /**
      * Set the Status and StatusDetails of this node

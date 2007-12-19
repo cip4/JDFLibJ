@@ -85,7 +85,6 @@ import java.util.Map;
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoResponse;
-import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.resource.JDFNotification;
 
 
@@ -99,8 +98,8 @@ public class JDFResponse extends JDFAutoResponse //JDFMessage
      * @param qualifiedName
      */
     public JDFResponse(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
+            CoreDocumentImpl myOwnerDocument,
+            String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
@@ -112,9 +111,9 @@ public class JDFResponse extends JDFAutoResponse //JDFMessage
      * @param qualifiedName
      */
     public JDFResponse(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
+            CoreDocumentImpl myOwnerDocument,
+            String myNamespaceURI,
+            String qualifiedName)
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
@@ -127,10 +126,10 @@ public class JDFResponse extends JDFAutoResponse //JDFMessage
      * @param myLocalName
      */
     public JDFResponse(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
+            CoreDocumentImpl myOwnerDocument,
+            String myNamespaceURI,
+            String qualifiedName,
+            String myLocalName)
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
@@ -188,25 +187,27 @@ public class JDFResponse extends JDFAutoResponse //JDFMessage
      * @return String
      */
     @Override
-	public String toString()
+    public String toString()
     {
         return "JDFResponse[  --> " + super.toString() + " ]";
     }
 
     /**
-     * SetErrorText, 
+     * Set ErrorText, (Notification/Comment/#text)
+     * also sets Notification/@Type=Error and Notification/@Class=Error
      * doesn't create a notification if ErroerText=null
      *
-     * @param et new error text
+     * @param errorText new error text
+     * @return JDFNotification the newly created Notification element
      */
-    public JDFNotification setErrorText(String et)
+    public JDFNotification setErrorText(String errorText)
     {
-        JDFNotification n=appendNotification();
+        final JDFNotification n=appendNotification();
         n.setType("Error");
-        if(et!=null)
+        n.setClass(JDFNotification.EnumClass.Error);
+        if(errorText!=null)
         {
-            JDFComment c=n.appendComment();
-            c.appendText(et);
+            n.appendComment().appendText(errorText);
         }
         return n;
     }

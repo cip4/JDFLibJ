@@ -412,9 +412,19 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
         JDFIntegerRangeList irl=new JDFIntegerRangeList("0 ~ 5");
         assertEquals(6,irl.getElementCount());    
         irl=new JDFIntegerRangeList("0 ~ -1");
-        assertEquals(irl.getElementCount(),0);            
+        assertEquals(irl.getElementCount(),-1);            
         irl=new JDFIntegerRangeList("0 ~ INF");
         assertTrue(irl.getElementCount()<0);            
+        irl=new JDFIntegerRangeList("1 ~ 2 0 ~ INF");
+        assertTrue(irl.getElementCount()<0);            
+        irl=new JDFIntegerRangeList("1 ~ 2 5");
+        assertEquals(irl.getElementCount(),3);  
+        
+        irl=new JDFIntegerRangeList("1 ~ 2 -2");
+        irl.setDef(4);
+        assertEquals(irl.getElementCount(),3);            
+        irl.setDef(1);
+        assertEquals(irl.getElementCount(),-1);            
     }
 
 

@@ -89,30 +89,36 @@ import org.cip4.jdflib.jmf.JDFJMF;
 public class MultiModuleStatusCounter
 {
     private Vector<StatusCounter> counters=new Vector<StatusCounter>();
-    
+
     /**
      * add a statuscounter representing a set of modules to this device status counter
      * @param theStatusCounter the statuscounter to add
      */
     public void addModule(StatusCounter sc)
     {
-        counters.add(sc);
+        if(sc!=null)
+            counters.add(sc);
     }
-    
+
     /**
      * remove a statuscounter representing a set of modules to this device status counter
      * @param theStatusCounter the statuscounter to add
      */
     public void removeModule(StatusCounter sc)
     {
-        counters.remove(sc);
+        if(sc!=null)
+            counters.remove(sc);
     }
-    
+
+    /**
+     * return the jmf root of the status jmf that contains all modules, null if no modules are active
+     * @return
+     */
     public JDFDoc getStatusResponse()
     {
         if(counters.size()==0)
-            throw new JDFException("no modules defined in MultiModuleStatusCounter");
-        
+            return null;
+
         StatusCounter root=counters.elementAt(0);
         JDFDoc d=new JDFDoc("JMF");
         final JDFJMF jmf = d.getJMFRoot();

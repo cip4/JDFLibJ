@@ -254,9 +254,14 @@ public class JDFJMFTest extends JDFTestCaseBase
         JDFDoc doc = new JDFDoc(ElementName.JMF);
         JDFJMF jmf=doc.getJMFRoot();
         JDFResponse r=(JDFResponse) jmf.appendMessageElement (EnumFamily.Response, null);
+        r.setType("Status");
+        r.setrefID("r1");
         JDFNotification n=r.setErrorText("blub");
         assertEquals("get comment text",n.getComment(0).getText(),"blub");
         assertEquals("type",n.getType(),"Error");
+        assertTrue(r.isValid(EnumValidationLevel.Complete));
+        jmf.setSenderID("S1");
+        assertTrue(jmf.isValid(EnumValidationLevel.Complete));
     }
     public void testGetMessageElement()
     {

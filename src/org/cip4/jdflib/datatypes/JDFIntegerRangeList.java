@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -38,7 +38,7 @@
  *
  * Usage of this software in commercial products is subject to restrictions. For
  * details please consult info@cip4.org.
-  *
+ *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -144,7 +144,7 @@ public class JDFIntegerRangeList extends JDFRangeList
         rangeList = new Vector(irl.rangeList);
         setDef(irl.getDef());
     }
-    
+
     /**
      * constructs a JDFIntegerRangeList with the given JDFIntegerRange and sets xDef
      *
@@ -158,7 +158,7 @@ public class JDFIntegerRangeList extends JDFRangeList
     }
 
     //**************************************** Methods *********************************************
-    
+
     /**
      * inRange - returns true if the given int value is in one of the ranges 
      * of the range list
@@ -173,7 +173,7 @@ public class JDFIntegerRangeList extends JDFRangeList
         for (int i = 0; i < sz; i++)
         {
             JDFIntegerRange r = (JDFIntegerRange)rangeList.elementAt(i);
- 
+
             if (r.inRange(x))
             {
                 return true;
@@ -181,68 +181,68 @@ public class JDFIntegerRangeList extends JDFRangeList
         }
         return false;
     }
-    
-       
-     /**
-      * setString - parse the given string and set the integer ranges
-      *
-      * @param s the given string
-      *
-      * @throws DataFormatException - if the String has not a valid format
-      */
-     public void setString(String s) throws DataFormatException
-     {
-         rangeList.clear();
-         if(s==null || s.equals(JDFConstants.EMPTYSTRING))
-             return;
-         if (s.indexOf(JDFConstants.TILDE)==0 || s.lastIndexOf(JDFConstants.TILDE)==(s.length()-1))
-             throw new DataFormatException("JDFIntegerRangeList::SetString: Illegal string " + s);
-         String zappedWS = StringUtil.zappTokenWS(s, "~");
-         VString vs = StringUtil.tokenize(zappedWS, " \t", false);
-         for(int i = 0; i <  vs.size(); i++)
-         {
-             String str = vs.elementAt(i);
-             try 
-             {
-                 JDFIntegerRange ir = new JDFIntegerRange(str); 
-                 rangeList.addElement(ir);
-             }
-             catch (DataFormatException dfe)
-             {
-                 throw new DataFormatException("JDFIntegerRangeList::SetString: Illegal string " + s);
-             }
-         }
-     }  
-        
-     
-     /**
-      * isValid - validate the given String
-      *
-      * @param s the given string
-      *
-      * @return boolean - false if the String has not a valid format 
-      */
-      public boolean isValid(String s) 
-      {
-          try 
-          {
-              new JDFIntegerRangeList(s);
-          }
-          catch (DataFormatException e)
-          {
-              return false;
-          }
-          return true;
-      }
-      
-     
+
+
+    /**
+     * setString - parse the given string and set the integer ranges
+     *
+     * @param s the given string
+     *
+     * @throws DataFormatException - if the String has not a valid format
+     */
+    public void setString(String s) throws DataFormatException
+    {
+        rangeList.clear();
+        if(s==null || s.equals(JDFConstants.EMPTYSTRING))
+            return;
+        if (s.indexOf(JDFConstants.TILDE)==0 || s.lastIndexOf(JDFConstants.TILDE)==(s.length()-1))
+            throw new DataFormatException("JDFIntegerRangeList::SetString: Illegal string " + s);
+        String zappedWS = StringUtil.zappTokenWS(s, "~");
+        VString vs = StringUtil.tokenize(zappedWS, " \t", false);
+        for(int i = 0; i <  vs.size(); i++)
+        {
+            String str = vs.elementAt(i);
+            try 
+            {
+                JDFIntegerRange ir = new JDFIntegerRange(str); 
+                rangeList.addElement(ir);
+            }
+            catch (DataFormatException dfe)
+            {
+                throw new DataFormatException("JDFIntegerRangeList::SetString: Illegal string " + s);
+            }
+        }
+    }  
+
+
+    /**
+     * isValid - validate the given String
+     *
+     * @param s the given string
+     *
+     * @return boolean - false if the String has not a valid format 
+     */
+    public boolean isValid(String s) 
+    {
+        try 
+        {
+            new JDFIntegerRangeList(s);
+        }
+        catch (DataFormatException e)
+        {
+            return false;
+        }
+        return true;
+    }
+
+
     /**
      * getElementCount - returns the number of elements in the list. On the C++ side of the JDF
      * library this method is called NElements. <br>
      * E.g. the following list has 14 elements: "1~5 10~15 20~22"
+     * if any if any range cannot be resolved due to an unknown negative value without a known default, -1 is returned
      *
-     * @return int the number of elements in the list
-     */
+     * @return int - the number of elements in this range, -1 if any range cannot be resolved     */
     public int getElementCount()
     {
         int sz = rangeList.size();
@@ -251,7 +251,10 @@ public class JDFIntegerRangeList extends JDFRangeList
         for (int i = 0; i < sz; i++)
         {
             JDFIntegerRange r = (JDFIntegerRange)rangeList.elementAt(i);
-            elementCount += r.getElementCount();
+            final int elemCount = r.getElementCount();
+            if(elemCount<=0)
+                return -1;
+            elementCount += elemCount;
         }
 
         return elementCount;
@@ -271,7 +274,7 @@ public class JDFIntegerRangeList extends JDFRangeList
      *
      * @throws NoSuchElementException - if the index is out of range
      */
-    
+
     public int getElement(int i) throws NoSuchElementException
     {
         int n = this.getElementCount();
@@ -353,7 +356,7 @@ public class JDFIntegerRangeList extends JDFRangeList
         if (rangeList != null && rangeList.size() > 0)
         {    
             JDFIntegerRange r = (JDFIntegerRange)rangeList.elementAt(rangeList.size() - 1);
-            
+
             if (r.append(x))
             {
                 return;
@@ -370,7 +373,7 @@ public class JDFIntegerRangeList extends JDFRangeList
     public JDFIntegerList getIntegerList()
     {
         JDFIntegerList irl = new JDFIntegerList();
-               
+
         for (int i = 0 ; i < rangeList.size(); i++)
         {
             JDFIntegerRange r = (JDFIntegerRange)rangeList.elementAt(i);
@@ -379,8 +382,8 @@ public class JDFIntegerRangeList extends JDFRangeList
 
         return irl;
     }
-    
-    
+
+
     /**
      * setDef - sets xDef, the default value which is used for negative numbers<br>
      * if xdef==0 (the default), the neg numbers themselves are used<br>
@@ -406,111 +409,111 @@ public class JDFIntegerRangeList extends JDFRangeList
     {
         return m_xDef;
     }
-         
- 
-       
-      /**
-       * isOrdered - tests if 'this' is OrderedRangeList
-       * 
-       * @return boolean - true if 'this' is a OrdneredRangeList
-       */
-      @Override
-	public boolean isOrdered()
-      {
-          int siz = rangeList.size();
-          if (siz == 0)
-              return false; // attempt to operate on a null element
 
-          Vector<Integer> v = new Vector<Integer>(); // vector of ranges
-          for (int i = 0; i < siz; i++)
-          {
-              JDFIntegerRange r = (JDFIntegerRange) rangeList.elementAt(i);
-              v.addElement(new Integer(r.getLeft()));
-              if (r.getLeft()!=r.getRight())
-              {
-                  v.addElement(new Integer(r.getRight()));
-              }
-          }
 
-          int n = v.size() - 1;
-          if (n == 0)
-              return true; // single value
 
-          int first = (v.elementAt(0)).intValue();
-          int last = (v.elementAt(n)).intValue();
+    /**
+     * isOrdered - tests if 'this' is OrderedRangeList
+     * 
+     * @return boolean - true if 'this' is a OrdneredRangeList
+     */
+    @Override
+    public boolean isOrdered()
+    {
+        int siz = rangeList.size();
+        if (siz == 0)
+            return false; // attempt to operate on a null element
 
-          for (int j = 0; j < n; j++)
-          {
-              int value = (v.elementAt(j)).intValue();
-              int nextvalue = (v.elementAt(j + 1)).intValue();
+        Vector<Integer> v = new Vector<Integer>(); // vector of ranges
+        for (int i = 0; i < siz; i++)
+        {
+            JDFIntegerRange r = (JDFIntegerRange) rangeList.elementAt(i);
+            v.addElement(new Integer(r.getLeft()));
+            if (r.getLeft()!=r.getRight())
+            {
+                v.addElement(new Integer(r.getRight()));
+            }
+        }
 
-              if ((( first == last && value == nextvalue) || 
-                   ( first < last  && value <= nextvalue) || 
-                   ( first > last  && value >= nextvalue)) == false) 
-                     return false;
-          }
-          return true;
-      }
-      
-      /**
-      * isUniqueOrdered - tests if 'this' is UniqueOrdered RangeList
-      * 
-      * @return boolean - true if 'this' is UniqueOrdered RangeList
-      */
-      @Override
-	public boolean isUniqueOrdered() {
-          
-          int siz=rangeList.size();
-          if (siz==0) {
-              return false; // attempt to operate on a null element
-          }
-          
-          Vector<Integer> v = new Vector<Integer>(); // vector of ranges
-          for  (int i=0; i<siz; i++)
-          {
-              JDFIntegerRange r = (JDFIntegerRange) rangeList.elementAt(i);
-              v.addElement(new Integer(r.getLeft()));
-              if (!new Integer(r.getLeft()).equals(new Integer(r.getRight()))) 
-              {
-                  v.addElement(new Integer(r.getRight()));
-              }
-          }
-          
-          int n=v.size()-1;
-          if (n==0) {
-              return true; // single value
-          }
-          int first = (v.elementAt(0)).intValue();
-          int last = (v.elementAt(n)).intValue();
-      
-          if (first==last) {
-              return false;
-          }
-          for (int j=0; j<n; j++)
-          {
-              int value = (v.elementAt(j)).intValue();
-              int nextvalue = (v.elementAt(j+1)).intValue();
-              
-              if (((first < last && value < nextvalue) || 
-                   (first > last && value < nextvalue)) == false )
-                    return false;
-          }
-          return true; 
-      }
-     
-     
-     /**
-      * deepCopy - a deep copy of this JDFIntegerRangeList
-      *
-      * @return JDFIntegerRangeList - this object
-      */
-     public JDFIntegerRangeList deepCopy() throws DataFormatException
-     {
-         JDFIntegerRangeList rl = new JDFIntegerRangeList();
-         rl.setString(toString());
-         return rl;
-     }     
-     
+        int n = v.size() - 1;
+        if (n == 0)
+            return true; // single value
+
+        int first = (v.elementAt(0)).intValue();
+        int last = (v.elementAt(n)).intValue();
+
+        for (int j = 0; j < n; j++)
+        {
+            int value = (v.elementAt(j)).intValue();
+            int nextvalue = (v.elementAt(j + 1)).intValue();
+
+            if ((( first == last && value == nextvalue) || 
+                    ( first < last  && value <= nextvalue) || 
+                    ( first > last  && value >= nextvalue)) == false) 
+                return false;
+        }
+        return true;
+    }
+
+    /**
+     * isUniqueOrdered - tests if 'this' is UniqueOrdered RangeList
+     * 
+     * @return boolean - true if 'this' is UniqueOrdered RangeList
+     */
+    @Override
+    public boolean isUniqueOrdered() {
+
+        int siz=rangeList.size();
+        if (siz==0) {
+            return false; // attempt to operate on a null element
+        }
+
+        Vector<Integer> v = new Vector<Integer>(); // vector of ranges
+        for  (int i=0; i<siz; i++)
+        {
+            JDFIntegerRange r = (JDFIntegerRange) rangeList.elementAt(i);
+            v.addElement(new Integer(r.getLeft()));
+            if (!new Integer(r.getLeft()).equals(new Integer(r.getRight()))) 
+            {
+                v.addElement(new Integer(r.getRight()));
+            }
+        }
+
+        int n=v.size()-1;
+        if (n==0) {
+            return true; // single value
+        }
+        int first = (v.elementAt(0)).intValue();
+        int last = (v.elementAt(n)).intValue();
+
+        if (first==last) {
+            return false;
+        }
+        for (int j=0; j<n; j++)
+        {
+            int value = (v.elementAt(j)).intValue();
+            int nextvalue = (v.elementAt(j+1)).intValue();
+
+            if (((first < last && value < nextvalue) || 
+                    (first > last && value < nextvalue)) == false )
+                return false;
+        }
+        return true; 
+    }
+
+
+    /**
+     * deepCopy - a deep copy of this JDFIntegerRangeList
+     *
+     * @return JDFIntegerRangeList - this object
+     */
+    public JDFIntegerRangeList deepCopy() throws DataFormatException
+    {
+        JDFIntegerRangeList rl = new JDFIntegerRangeList();
+        rl.setString(toString());
+        return rl;
+    }     
+
     /**
      * isOverlapping
      *
@@ -565,7 +568,7 @@ public class JDFIntegerRangeList extends JDFRangeList
 
         return false;
     }
-    
+
     /**
      * normalize this range by removing any consecutive entries and creating ranges instead
      * @param bSort if true, sort the rangelist prior to normalizing
@@ -576,7 +579,7 @@ public class JDFIntegerRangeList extends JDFRangeList
         int[] l=getIntegerList().getIntArray();
         if(bSort)
             Arrays.sort(l);
-        
+
         clear();
         int lSiz=l.length;
         for(int i=0;i<lSiz;i++)
