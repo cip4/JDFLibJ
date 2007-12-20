@@ -234,7 +234,7 @@ public class JDFDurationState extends JDFAbstractState
     {
         try
         {
-        	final String attribute = getAttribute(AttributeName.ALLOWEDVALUELIST);
+        	final String attribute = getAttribute(AttributeName.ALLOWEDVALUELIST,null,null);
             if(attribute!=null)
                 return new JDFDurationRangeList(attribute);
         }
@@ -254,20 +254,17 @@ public class JDFDurationState extends JDFAbstractState
     
 	public JDFDurationRangeList getPresentValueList()
     {
-		if (hasAttribute(AttributeName.PRESENTVALUELIST)) 
-        {
-            JDFDurationRangeList r = null;
-            try
+           try
             {
-            	r = new JDFDurationRangeList(getAttribute(AttributeName.PRESENTVALUELIST));
+                final String attribute = getAttribute(AttributeName.PRESENTVALUELIST,null,null);
+                if(attribute!=null)
+                    return new JDFDurationRangeList(attribute);
             }
             catch(DataFormatException dfe)
             {
-            	return null;
+                return null; // malformed so don't default
             }
-            return r;
-		}
-		return getAllowedValueList();
+     		return getAllowedValueList();
 	}
 
     
