@@ -161,16 +161,16 @@ public class JDFDoc extends XMLDoc
      * @param rootName ElementName.JDF or ElementName.JMF
      * @return
      */
-    private JDFElement getJXFRoot(String rootName)
+    private KElement getJXFRoot(String rootName)
     {
         KElement root = getRoot();
 
         if (!root.getLocalName().equals(rootName))
         {
-            root = root.getChildByTagName(rootName, JDFElement.getSchemaURL(), 1, null, true, false);
+            root = root.getChildByTagName(rootName, JDFElement.getSchemaURL(), 0, null, true, false);
         }
         
-        return (JDFElement)root;
+        return root;
     }
 
     /**
