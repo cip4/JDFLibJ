@@ -78,7 +78,6 @@ package org.cip4.jdflib.util;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.Vector;
 
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumWorkType;
@@ -86,7 +85,6 @@ import org.cip4.jdflib.auto.JDFAutoResourceAudit.EnumReason;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -112,8 +110,6 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
-
-import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
 
 //TODO add time related metadata
 /*

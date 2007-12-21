@@ -77,21 +77,16 @@ import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFDevice;
-import org.cip4.jdflib.resource.JDFProcessRun;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.process.JDFCompany;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFPerson;
-import org.cip4.jdflib.util.JDFDate;
-import org.cip4.jdflib.util.JDFDuration;
 
 /**
  * @author prosirai
