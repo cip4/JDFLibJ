@@ -350,7 +350,7 @@ public class JDFDoc extends XMLDoc
      *
      * @param strDocType   qualified tag name of the doc root to create if still empty
      * @param namespaceURI namespace URI of the doc root
-     * @return JDFElement - the root element
+     * @return KElement - the root element
      * 
      * @default setRoot(ElementName.JDF, null)
      */

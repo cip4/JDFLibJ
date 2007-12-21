@@ -25,22 +25,9 @@ public class TestJDF
 
     public static void main(String[] argv)
     {         
-         JDFDoc jdfDoc = JDFDoc.parseFile ("C:/data/vers.jdf");
+         JDFDoc jdfDoc = JDFDoc.parseFile ("C:/data/sub.jdf");
+         assert(jdfDoc.getJDFRoot()==jdfDoc.getRoot());
         
-        JDFResource res = jdfDoc.getJDFRoot().getTargetResource ("Link071112_104319650_000411");
-        
-        JDFAttributeMap amParts = new JDFAttributeMap ();
-        
-        amParts.put ("Side", "Front");
-        amParts.put ("PartVersion", "Eng");
-        amParts.put ("SheetName", "S1B");
-        amParts.put ("SignatureName", "Sig002");
-       
-        JDFResource part = res.getPartition (amParts, JDFResource.EnumPartUsage.Implicit);
-
-        
-//        final JDFAttributeMap mpart = 
-    	part.getPartMap ();
-// mpart ist leer, warum ???
+  // mpart ist leer, warum ???
     }
 }

@@ -138,6 +138,7 @@ import org.cip4.jdflib.examples.WebTest;
 import org.cip4.jdflib.goldenticket.GoldenTicketTest;
 import org.cip4.jdflib.jmf.JDFDeviceInfoTest;
 import org.cip4.jdflib.jmf.JDFJMFTest;
+import org.cip4.jdflib.jmf.JDFJobPhaseTest;
 import org.cip4.jdflib.jmf.JDFMessageServiceTest;
 import org.cip4.jdflib.jmf.JDFMessageTest;
 import org.cip4.jdflib.jmf.JDFPipeParamsTest;
@@ -291,18 +292,19 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(StrippingTest.class);
         suite.addTestSuite(VarnishTest.class);
         suite.addTestSuite(WebTest.class);
-        
+
         // Golden tickets
         suite.addTestSuite(GoldenTicketTest.class);
 
         // JMF
         suite.addTestSuite(JDFDeviceInfoTest.class);
         suite.addTestSuite(JDFJMFTest.class);
+        suite.addTestSuite(JDFJobPhaseTest.class);
         suite.addTestSuite(JDFMessageTest.class);
         suite.addTestSuite(JDFMessageServiceTest.class);
-        suite.addTestSuite(JMFKnownMessagesTest.class);
         suite.addTestSuite(JDFPipeParamsTest.class);
         suite.addTestSuite(JDFQueueFilterTest.class);
+        suite.addTestSuite(JMFKnownMessagesTest.class);
         suite.addTestSuite(JDFQueueSubmissionParamsTest.class);
         suite.addTestSuite(JMFResourceTest.class);
         suite.addTestSuite(JMFResourceInfoTest.class);

@@ -3665,6 +3665,43 @@ public class KElement extends ElementNSImpl
         }
         return this;
     }
+    /**
+     *remove all elements and attributes of a given namespace
+     *@param nsURI the ns uri of the extensions to remove
+     *
+     */
+    public void removeExtensions(String nsURI)
+    {
+        if(nsURI==null)
+            return;
+        KElement n=getFirstChildElement();
+        while (n!=null)
+        {
+            KElement next=n.getNextSiblingElement(); // get next prior to zapping
+            final String nsuri=n.getNamespaceURI();
+            if(nsURI.equals(nsuri))
+            {
+                removeChild(n);
+            }
+            else 
+            {
+                n.removeExtensions(nsURI);
+            }
+
+            n=next;
+        }
+        NamedNodeMap nm=getAttributes();
+        int siz=nm==null ? 0 : nm.getLength();
+        for(int i=siz-1;i>=0;i--)
+        {
+            Node na=nm.item(i);
+            final String nsuri=na.getNamespaceURI();
+            if(nsURI.equals(nsuri))
+            {
+                removeAttributeNode((Attr)na);
+            }
+        }
+    }
 
     /**
      * moves this to a position before another child, 

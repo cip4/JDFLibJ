@@ -160,7 +160,7 @@ public class StatusCounterTest extends JDFTestCaseBase
         assertTrue(jp.hasAttribute(AttributeName.PHASEAMOUNT));
         sig=(JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 1);
         jp=sig.getDeviceInfo(0).getJobPhase(0);
-        assertFalse(jp.hasAttribute(AttributeName.PHASEAMOUNT));
+        assertEquals(jp.getPhaseAmount(),0.0,0.0);
         assertEquals(jp.getMISDetails().getWorkType(),EnumWorkType.Alteration);
 
         sc.setFirstRefID("dummy");

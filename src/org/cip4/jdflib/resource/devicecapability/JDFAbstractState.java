@@ -280,8 +280,9 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
      */
     public final String getNamePath()
     {
-        JDFDevCap devCap = getParentDevCap();
-        String namePath = devCap.getNamePath(true);
+        String namePath = getParentPath();
+ 
+        
         JDFDevCaps dcs=getParentDevCaps();
         if(dcs!=null)
         {
@@ -292,6 +293,26 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
         if (getListType().equals(EnumListType.Span))
             return (namePath + "/" + getName()); // Span is an element
         return (namePath + "/@" + getName());
+    }
+
+    private String getParentPath()
+    {
+        String namePath=null;
+        KElement parent=getParentNode_KElement();
+        if(parent instanceof JDFDevCap)
+        {
+            JDFDevCap devCap = getParentDevCap();
+            namePath = devCap.getNamePath(true);
+        }
+        else if (parent instanceof JDFDeviceCap)
+        {
+            namePath="JDF";
+        }
+        else if (parent instanceof JDFMessageService)
+        {
+            namePath="JMF";
+        }
+        return namePath;
     }
 
     /**
@@ -306,8 +327,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
      */
     public final VString getNamePathVector(boolean bRecurse)
     {
-        JDFDevCap devCap = getParentDevCap();
-        VString vNamePath = devCap.getNamePathVector(bRecurse);
+        VString vNamePath=getParentPathVector(bRecurse);
         JDFDevCaps dcs=getParentDevCaps();
         if(dcs!=null)
         {
@@ -328,6 +348,18 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
         return vNamePath;
     }
 
+
+    /**
+     * @param recurse
+     * @return
+     */
+    private VString getParentPathVector(boolean recurse)
+    {
+        KElement parent=getParentNode_KElement();
+        if(parent instanceof JDFDevCap)
+            return((JDFDevCap)parent).getNamePathVector(recurse);
+        return new VString(getParentPath(),null);
+    }
 
     /**
      * get the ancestor devCaps, null if this resides in a DevCapPool

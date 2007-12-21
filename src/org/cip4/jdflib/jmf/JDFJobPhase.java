@@ -92,6 +92,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFModulePhase;
 import org.cip4.jdflib.resource.JDFModuleStatus;
+import org.cip4.jdflib.util.JDFDate;
 
 //----------------------------------
 /**
@@ -318,6 +319,76 @@ public class JDFJobPhase extends JDFAutoJobPhase
         ms.copyAttribute(AttributeName.MODULEID, mp, null, null, null);
 
         return ms;
+    }
+    
+    /**
+     * return the differential amount produced between this phase and lastphase
+     * @param lastphase the phase
+     * @return
+     */
+    public double getAmountDifference(JDFJobPhase lastphase)
+    {
+        if(lastphase!=null)
+        {
+            JDFDate startTime=getPhaseStartTime();
+            JDFDate lastStartTime=lastphase.getPhaseStartTime();
+            if(startTime!=null &&startTime.equals(lastStartTime))
+            {
+                return getPhaseAmount()-lastphase.getPhaseAmount();
+            }
+        }
+        return getPhaseAmount();
+    }
+    /**
+     * return the differential waste amount produced between this phase and lastphase
+     * @param lastphase
+     * @return
+     */
+    public double getWasteDifference(JDFJobPhase lastphase)
+    {
+        if(lastphase!=null)
+        {
+            JDFDate startTime=getPhaseStartTime();
+            JDFDate lastStartTime=lastphase.getPhaseStartTime();
+            if(startTime!=null &&startTime.equals(lastStartTime))
+            {
+                return getPhaseWaste()-lastphase.getPhaseWaste();
+            }
+        }
+        return getPhaseWaste();
+    }
+
+    /**
+     * returns the phase amount, defaults to amount if not specified
+     */
+    @Override
+    public double getPhaseAmount()
+    {
+        if(hasAttribute(AttributeName.PHASEAMOUNT))
+            return super.getPhaseAmount();
+        return super.getAmount();
+    }
+
+    /**
+     * returns the phase starttime, defaults to starttime if not specified
+     */
+    @Override
+    public JDFDate getPhaseStartTime()
+    {
+        if(hasAttribute(AttributeName.PHASESTARTTIME))
+            return super.getPhaseStartTime();
+        return super.getStartTime();
+    }
+
+    /**
+     * returns the phase waste amount, defaults to waste if not specified
+     */
+    @Override
+    public double getPhaseWaste()
+    {
+        if(hasAttribute(AttributeName.PHASEWASTE))
+            return super.getPhaseWaste();
+        return super.getWaste();
     }
 }
 

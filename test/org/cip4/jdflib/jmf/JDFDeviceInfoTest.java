@@ -75,7 +75,9 @@ import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumWorkType;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
@@ -98,19 +100,15 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
     }
     /////////////////////////////////////////////////////////////////////
 
-    public void testJobPhaseFromPhaseTime()
+    public void testGetDeviceID()
     {
-        JDFDoc d=new JDFDoc("JDF");
-        JDFAuditPool ap=d.getJDFRoot().getCreateAuditPool();
-        JDFPhaseTime pt=ap.setPhase(EnumNodeStatus.InProgress,"dummy",null);
-        JDFJobPhase jp=di.createJobPhaseFromPhaseTime(pt);
-        assertFalse(pt.hasChildElement(ElementName.MISDETAILS, null));
-        final JDFMISDetails misDetails = pt.appendMISDetails();
-        misDetails.setWorkTypeDetails("FooBar");
-        misDetails.setWorkType(EnumWorkType.Alteration);
-        jp=di.createJobPhaseFromPhaseTime(pt);
-        assertEquals(pt.getMISDetails().getWorkType(),jp.getMISDetails().getWorkType());
-            
+        JDFJMF jmf=(JDFJMF) new JDFDoc("JMF").getRoot();
+        jmf.setSenderID("S1");
+        JDFDeviceInfo di=jmf.appendSignal(EnumType.Status).appendDeviceInfo();
+        assertEquals(jmf.getSenderID(),di.getDeviceID());
+        di.appendDevice().setDeviceID("dd");
+        assertEquals(di.getDeviceID(), "dd");
+        di.setDeviceID("da");
+        assertEquals(di.getDeviceID(), "da");
     }
-
 }

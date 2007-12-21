@@ -72,6 +72,7 @@ package org.cip4.jdflib.util;
 
 import java.util.Vector;
 
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFException;
@@ -134,7 +135,24 @@ public class MultiModuleStatusCounter
             VElement phases=di2.getChildElementVector(ElementName.JOBPHASE, null, null, true, -1, false);
             for(int j=0;j<phases.size();j++)
                 di.copyElement(phases.elementAt(j), null);
+            di.setDeviceStatus(getDeviceStatus());
         }            
         return d;
+    }
+
+    /**
+     * @return the amalgamated device status
+     */
+    public EnumDeviceStatus getDeviceStatus()
+    {
+        final int counterSize = counters.size();
+        if(counterSize==0)
+            return EnumDeviceStatus.Idle;
+        EnumDeviceStatus maxStatus=null;
+        for(int i=0;i<counterSize;i++)
+        {
+            maxStatus=(EnumDeviceStatus) EnumUtil.max(maxStatus, counters.elementAt(i).getStatus());
+        }
+        return maxStatus;
     }
 }

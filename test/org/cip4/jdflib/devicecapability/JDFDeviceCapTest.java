@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -142,6 +142,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
             devicecap.setTypeExpression("(fnarf)|(blub)");
             devicecap.setTypes(new VString("fnarf blub",null));
             devicecap.setGenericAttributes(new VString("*",null));
+            
 
             JDFDevCapPool dcp=devicecap.appendDevCapPool();
             JDFDevCaps dcs=devicecap.appendDevCaps();
@@ -642,7 +643,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
             assertEquals(v.size(),1);
             assertEquals(v.stringAt(0),"JDF");
         }
-    }
+     }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void testGetMessageServiceForJMFType()
     {

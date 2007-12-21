@@ -75,7 +75,7 @@ ALL RIGHTS RESERVED
 @Author: sabjon@topmail.de   using a code generator
 Warning! very preliminary test version. Interface subject to change without prior notice!
 Revision history:    ...
-**/
+ **/
 
 
 
@@ -93,6 +93,7 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFModulePhase;
 import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
@@ -101,7 +102,7 @@ import org.cip4.jdflib.util.JDFDate;
 
 
 //----------------------------------
-    public class JDFDeviceInfo extends JDFAutoDeviceInfo
+public class JDFDeviceInfo extends JDFAutoDeviceInfo
 {
     private static final long serialVersionUID = 1L;
 
@@ -111,8 +112,8 @@ import org.cip4.jdflib.util.JDFDate;
      * @param qualifiedName
      */
     public JDFDeviceInfo(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
+            CoreDocumentImpl myOwnerDocument,
+            String qualifiedName)
     {
         super(myOwnerDocument, qualifiedName);
     }
@@ -124,9 +125,9 @@ import org.cip4.jdflib.util.JDFDate;
      * @param qualifiedName
      */
     public JDFDeviceInfo(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
+            CoreDocumentImpl myOwnerDocument,
+            String myNamespaceURI,
+            String qualifiedName)
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
@@ -139,10 +140,10 @@ import org.cip4.jdflib.util.JDFDate;
      * @param myLocalName
      */
     public JDFDeviceInfo(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
+            CoreDocumentImpl myOwnerDocument,
+            String myNamespaceURI,
+            String qualifiedName,
+            String myLocalName)
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
@@ -155,8 +156,8 @@ import org.cip4.jdflib.util.JDFDate;
     {
         return "JDFDeviceInfo[  --> " + super.toString() + " ]";
     }
-    
-     /**
+
+    /**
      * Method getJobCount.
      * @return int
      * @deprecated use numChildElements(ElementName.JOBPHASE,null)
@@ -165,39 +166,39 @@ import org.cip4.jdflib.util.JDFDate;
     {
         return getChildrenByTagName(ElementName.JOBPHASE,null,null, false, true,0).size();
     }   
-    
+
     /**
      * (11) set attribute IdleStartTime
      * @param value: the value to set the attribute to or null
      */
-   public void setIdleStartTime(JDFDate value)
-   {
-       if (value == null) value = new JDFDate();
-       setAttribute(AttributeName.IDLESTARTTIME, value.getDateTimeISO(), null);
-   }
+    public void setIdleStartTime(JDFDate value)
+    {
+        if (value == null) value = new JDFDate();
+        setAttribute(AttributeName.IDLESTARTTIME, value.getDateTimeISO(), null);
+    }
 
-   /**
+    /**
      * (12) get JDFDate attribute IdleStartTime
      * @return JDFDate the value of the attribute
      */
-   public JDFDate getIdleStartTime()
-   {
-       String str = getAttribute(AttributeName.IDLESTARTTIME, null, null);
-       if (str!=null)
-       {
-           try
-           {
-               return new JDFDate(str);
-           }
-           catch(DataFormatException dfe)
-           {
-               // nop
-           }
-       }
-       return null;
-   }
+    public JDFDate getIdleStartTime()
+    {
+        String str = getAttribute(AttributeName.IDLESTARTTIME, null, null);
+        if (str!=null)
+        {
+            try
+            {
+                return new JDFDate(str);
+            }
+            catch(DataFormatException dfe)
+            {
+                // nop
+            }
+        }
+        return null;
+    }
 
-   /**
+    /**
      * create a JobPhase message from a phaseTime Audit
      * @param pt the phasetime audit
      * @return JDFJobPhase: the jobphase element that has been filled by the phaseTime
@@ -206,7 +207,7 @@ import org.cip4.jdflib.util.JDFDate;
     {
         JDFJobPhase jp=appendJobPhase();
         JDFNode node=pt.getParentJDF();
-        
+
         jp.setJobID(node.getJobID(true));
         jp.setJobPartID(node.getJobPartID(true));
         final VJDFAttributeMap partMapVector = pt.getPartMapVector();
@@ -224,7 +225,7 @@ import org.cip4.jdflib.util.JDFDate;
         JDFMISDetails md=pt.getMISDetails();
         jp.copyElement(md,null);
         VElement modules=pt.getChildElementVector(ElementName.MODULEPHASE, null);
-        int mLen=modules==null ? null : modules.size();
+        int mLen=modules==null ? 0 : modules.size();
         for(int i=0;i<mLen;i++)
         {
             jp.createModuleStatusFromModulePhase((JDFModulePhase)modules.elementAt(i));
@@ -233,6 +234,28 @@ import org.cip4.jdflib.util.JDFDate;
         jp.eraseEmptyAttributes(true);
         return jp;
     }
+    
+    
+    /**
+     * gets the deviceID from @DeviceID if it exists, otherwise searches Device/@DeviceID
+     * @return the appropriate deviceID for this deviceInfo
+     */
+    @Override
+    public String getDeviceID()
+    {
+        if(hasAttribute(AttributeName.DEVICEID))
+            return super.getDeviceID();
+        JDFDevice d=getDevice();
+        if(d==null)
+        {
+            JDFMessage m=(JDFMessage) getParentNode_KElement();
+            if(m!=null)
+                return m.getSenderID();
+        }
+        return d.getDeviceID();
+    }
+
+
 }
 
 

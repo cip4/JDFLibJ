@@ -312,8 +312,23 @@ public class KElementTest extends JDFTestCaseBase
 
     ////////////////////////////////////////////////////////////////
 
-    public void testRemoveEmptyAttributes()
+    public void testRemoveExtensions()
     {
+        KElement e=new XMLDoc("e","a.com").getRoot();
+        final KElement b = e.appendElement("b","b.com");
+        b.setAttribute("c:at", "cc","c.com");
+        KElement c=e.appendElement("c", "c.com");
+        assertNotNull(b.getAttribute("at", "c.com",null));
+        assertNotNull(e.getElement("c", "c.com", 0));
+        e.removeExtensions("c.com");
+        assertNull(b.getAttribute("at", "c.com",null));
+        assertNull(e.getElement("c", "c.com", 0));
+        
+    }
+        ////////////////////////////////////////////////////////////////
+
+        public void testRemoveEmptyAttributes()
+        {
         JDFDoc d=new JDFDoc("JDF");
         KElement e=d.getJDFRoot();
 

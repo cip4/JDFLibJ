@@ -1198,4 +1198,216 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
         return null;
     }
 
+    /**
+     * appends a BooleanState with @Name="name"
+     * @param nam the name attribute of the newly appended BooleanState
+     * @return JDFBooleanState: the newly appended BooleanState
+     */
+    public JDFBooleanState appendBooleanState(String nam)
+    {
+        JDFBooleanState s= (JDFBooleanState)appendElement(ElementName.BOOLEANSTATE, null);
+        s.setName(nam);
+        return s;
+    }
+
+    //  ///////////////////////////////////////////////////////////////////
+    
+    /**
+     * appends a NumberState with @Name="name"
+     * @param nam   the name attribute of the newly appended NumberState
+     * @return JDFNumberState: the newly appended NumberState
+     */
+    public JDFEnumerationState appendEnumerationState(String nam)
+    {
+        JDFEnumerationState s= (JDFEnumerationState)appendElement(ElementName.ENUMERATIONSTATE, null);
+        s.setName(nam);
+        return s;
+    }
+
+    //  ///////////////////////////////////////////////////////////////////
+    
+    /**
+     * appends an IntegerState with @Name="name"
+     * @param name the Name attribute of the newly appended IntegerState
+     * @return JDFIntegerState: the newly appended IntegerState
+     */
+    public JDFIntegerState appendIntegerState(String nam)
+    {
+        JDFIntegerState s= (JDFIntegerState)appendElement(ElementName.INTEGERSTATE, null);
+        s.setName(nam);
+        return s;
+    }
+
+    //  ///////////////////////////////////////////////////////////////////
+    
+    /**
+     * appends a NameState with @Name="name"
+     * @param nam the name attribute of the newly appended NameState
+     * @return JDFNameState: the newly appended NameState
+     */
+    public JDFNameState appendNameState(String nam)
+    {
+        JDFNameState s= (JDFNameState)appendElement(ElementName.NAMESTATE, null);
+        s.setName(nam);
+        return s;
+    }
+
+    //  ///////////////////////////////////////////////////////////////////
+    
+    /**
+     * appends a StringState with @Name="name"
+     * @param nam the Name attribute of the newly appended StringState
+     * @return JDFStringState: the newly appended StringState
+     */
+    public JDFStringState appendStringState(String nam)
+    {
+        JDFStringState s= (JDFStringState)appendElement(ElementName.STRINGSTATE, null);
+        s.setName(nam);
+        return s;
+    }
+
+    //  ///////////////////////////////////////////////////////////////////
+    
+    /**
+     * gets an existing BooleanState with @Name="name"
+     * @param nam the Name attribute of the newly appended BooleanState
+     * @return JDFBooleanState: the existing BooleanState
+     */
+    public JDFBooleanState getBooleanState(String nam)
+    {
+        return (JDFBooleanState)getChildWithAttribute(ElementName.BOOLEANSTATE, AttributeName.NAME, null, nam, 0, true);
+    }
+
+    //  ///////////////////////////////////////////////////////////////////
+    
+    /**
+     * gets a NumberState with @Name="name", appends it if it does not exist
+     * @param name the name attribute of the newly appended NumberState
+     * @return JDFNumberState: the existing or newly appended NumberState
+     */
+    public JDFBooleanState getCreateBooleanState(String nam)
+    {
+        JDFBooleanState s=getBooleanState(nam);
+        if(s==null)
+            s=appendBooleanState(nam);
+        return s;
+    }
+
+    //  ///////////////////////////////////////////////////////////////////
+    
+    /**
+     * gets a EnumerationState with @Name="name", appends it if it does not exist
+     * @param nam the name attribute of the newly appended EnumerationState
+     * @return JDFEnumerationState the existing or newly appended EnumerationState
+     */
+    public JDFEnumerationState getCreateEnumerationState(String nam)
+    {
+        JDFEnumerationState s=getEnumerationState(nam);
+        if(s==null)
+            s=appendEnumerationState(nam);
+        return s;
+    }
+
+    /**
+     * gets an IntegerState with @Name="name", appends it if it does not yet exist
+     * @param nam the name attribute of the newly appended IntegerState
+     * @return JDFIntegerState: the existing or newly appended IntegerState
+     */
+    public JDFIntegerState getCreateIntegerState(String nam)
+    {
+        JDFIntegerState s=getIntegerState(nam);
+        if(s==null)
+            s=appendIntegerState(nam);
+        return s;
+    }
+
+    //  ///////////////////////////////////////////////////////////////////
+    
+    /**
+     * gets a NameState with @Name="name", appends it if it does not exist
+     * @param nam the name attribute of the newly appended NameState
+     * @return JDFNameState: the existing or newly appended NameState
+     */
+    public JDFNameState getCreateNameState(String nam)
+    {
+        JDFNameState s=getNameState(nam);
+        if(s==null)
+            s=appendNameState(nam);
+        return s;
+    }
+
+    //  ///////////////////////////////////////////////////////////////////
+    
+    /**
+     * gets a StringState with @Name="name", appends it if it does not yet exist
+     * @param nam the Name attribute of the newly appended StringState
+     * @return JDFStringState: the existing or newly appended StringState
+     */
+    public JDFStringState getCreateStringState(String nam)
+    {
+        JDFStringState s=getStringState(nam);
+        if(s==null)
+            s=appendStringState(nam);
+        return s;
+    }
+
+    //  ///////////////////////////////////////////////////////////////////
+    
+    /**
+     * gets an existing  EnumerationState with @Name="name"
+     * @param name the Name attribute of the newly appended EnumerationState
+     * @return JDFEnumerationState: the existing EnumerationState
+     */
+    public JDFEnumerationState getEnumerationState(String nam)
+    {
+        return (JDFEnumerationState)getChildWithAttribute(ElementName.ENUMERATIONSTATE, AttributeName.NAME, null, nam, 0, true);
+    }
+
+    //  ///////////////////////////////////////////////////////////////////
+    
+    /**
+     * gets an existing IntegerState with @Name="name"
+     * @param nam the name attribute of the newly appended IntegerState
+     * @return JDFIntegerState: the existing IntegerState
+     */
+    public JDFIntegerState getIntegerState(String nam)
+    {
+        return (JDFIntegerState)getChildWithAttribute(ElementName.INTEGERSTATE, AttributeName.NAME, null, nam, 0, true);
+    }
+
+    //  ///////////////////////////////////////////////////////////////////
+    
+    /**
+     * gets an existing NameState with @Name="name"
+     * @param nam the Name attribute of the newly appended NameState
+     * @return JDFNameState: the existing NameState
+     */
+    public JDFNameState getNameState(String nam)
+    {
+        return (JDFNameState)getChildWithAttribute(ElementName.NAMESTATE, AttributeName.NAME, null, nam, 0, true);
+    }
+
+    //  ///////////////////////////////////////////////////////////////////
+    /**
+     * gets an existing  NumberState with @Name="name"
+     * @param nam the Name attribute of the newly appended NumberState
+     * @return JDFNumberState: the existing NumberState
+     */
+    public JDFNumberState getNumberState(String nam)
+    {
+        return (JDFNumberState)getChildWithAttribute(ElementName.NUMBERSTATE, AttributeName.NAME, null, nam, 0, true);
+    }
+
+    //  ///////////////////////////////////////////////////////////////////
+    
+    /**
+     * gets an existing  StringState with @Name="name"
+     * @param nam the Name attribute of the newly appended StringState
+     * @return JDFStringState: the existing StringState
+     */
+    public JDFStringState getStringState(String nam)
+    {
+        return (JDFStringState)getChildWithAttribute(ElementName.STRINGSTATE, AttributeName.NAME, null, nam, 0, true);
+    }
+
 }

@@ -880,21 +880,24 @@ public class MimeUtil
         {
             final InputStream inputStream = uc.getInputStream();
             BufferedInputStream bis=new BufferedInputStream(inputStream);
+            bis.mark(100000);
             Multipart mpRet=getMultiPart(bis);
             if(mpRet!=null)
             {
-                BodyPart bp = mpRet.getBodyPart(0);
-                return getJDFDoc(bp);
+                try{
+                    BodyPart bp = mpRet.getBodyPart(0);
+                    return getJDFDoc(bp);
+                }
+                catch (MessagingException e) {
+                    // nop - try simple doc
+                }
             }
-            else
-            {
-                bis.reset();
-                JDFDoc d=new JDFParser().parseStream(bis);
-                if(d!=null)
-                    return d;
-            }
+            bis.reset();
+            JDFDoc d=new JDFParser().parseStream(bis);
+            if(d!=null)
+                return d;
         }       
-       JDFCommand c=docJMF.getJMFRoot().getCommand(0);
+        JDFCommand c=docJMF.getJMFRoot().getCommand(0);
        final JDFJMF respJMF = c.createResponse();
        JDFResponse r=respJMF.getResponse(0);
        r.setErrorText("Invalid http response - RC="+rc);

@@ -90,6 +90,10 @@ import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoNodeInfo;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFQuery;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.resource.JDFResource;
 import org.w3c.dom.Node;
 
@@ -463,6 +467,33 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
     public static void setDefaultWorkStepID(boolean defaultWorkStepID)
     {
         bDefaultWorkStepID = defaultWorkStepID;
+    }
+
+    /**
+     * gets the subscription query for a given messagetype or creates one if not yet there
+     * note that newly created query do not contain a subscription
+     * 
+     * @param queryType
+     * @return the appropriate query
+     */
+    public JDFQuery getCreateJMFQuery(EnumType queryType)
+    {
+        VElement v=getChildElementVector(ElementName.JMF, null);
+        int siz=v==null ? 0 : v.size();
+        JDFQuery q=null;
+        for(int i=0;i<siz;i++)
+        {
+            JDFJMF jmf=(JDFJMF) v .elementAt(i);
+            q=(JDFQuery) jmf.getMessageElement(EnumFamily.Query, queryType, 0);
+            if(q!=null)
+                break;
+        }
+        if(q==null)
+        {
+            q=appendJMF().appendQuery(queryType);
+        }
+
+        return q;
     }
 
 }

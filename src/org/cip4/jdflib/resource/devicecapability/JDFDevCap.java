@@ -606,6 +606,7 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * gets the iSkip'th existing EnumerationState, creates it if it doesn't exist
      * @param iSkip number of elements to skip (0 -> get first element)
      * @return JDFEnumerationState: the existing EnumerationState
+     * @deprecated
      */
     public JDFEnumerationState getCreateEnumerationState(int iSkip)
     {

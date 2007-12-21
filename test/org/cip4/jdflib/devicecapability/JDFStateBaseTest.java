@@ -112,13 +112,15 @@ public class JDFStateBaseTest extends JDFTestCaseBase
 
     private JDFDeviceCap deviceCap; 
     @Override
-	protected void setUp() throws Exception
+    protected void setUp() throws Exception
     {
         super.setUp();
         JDFDoc doc = new JDFDoc("JMF");
         JDFJMF jmf=doc.getJMFRoot();
         JDFResponse resp =(JDFResponse) jmf.appendMessageElement(EnumFamily.Response,JDFMessage.EnumType.KnownDevices);
         deviceCap=resp.appendDeviceList().appendDeviceInfo().appendDevice().appendDeviceCap();
+        deviceCap.appendBooleanState("Template");
+
     }
 
     ////////////////////////////////////////////////////
@@ -127,7 +129,7 @@ public class JDFStateBaseTest extends JDFTestCaseBase
     {
         JDFParser p = new JDFParser();
         String strNode =
-            "<DevCaps Name=\"RenderingParams\" LinkUsage=\"Input\">" +
+            "<DevCaps xmlns=\"http://www.CIP4.org/JDFSchema_1_1\" Name=\"RenderingParams\" LinkUsage=\"Input\">" +
             "<DevCap>"+
             "<DevCap Name=\"AutomatedOverprintParams\">" +
             "<BooleanState Name=\"OverPrintBlackText\" DefaultValue=\"true\" AllowedValueList=\"true false\"/>" +
@@ -182,7 +184,7 @@ public class JDFStateBaseTest extends JDFTestCaseBase
         JDFMatrix matrix1 = new JDFMatrix("1 0 0 1 3.14 21631.3");
         JDFMatrix matrix2 = new JDFMatrix("0 1 1 0 2 21000");
 
-        Vector transforms = new Vector();
+        Vector<EnumOrientation> transforms = new Vector<EnumOrientation>();
         transforms.add(EnumOrientation.Rotate0);
         transforms.add(EnumOrientation.Rotate270);
         transforms.add(EnumOrientation.Flip0);
@@ -284,6 +286,15 @@ public class JDFStateBaseTest extends JDFTestCaseBase
     }
     ////////////////////////////////////////////////////////////
 
+    public void testGetNamePathVector ()
+    {
+
+        JDFBooleanState b= deviceCap.getBooleanState("Template");
+        VString v=b.getNamePathVector(true);
+        assertEquals(v.size(),1);
+        assertEquals(v.stringAt(0),"JDF/@Template");
+    } 
+    
     /**
      * tests defaults 
      */
@@ -300,14 +311,14 @@ public class JDFStateBaseTest extends JDFTestCaseBase
     { 
         JDFDevCap dc=deviceCap.appendDevCaps().appendDevCap();
         JDFIntegerState is=dc.appendIntegerState();
-        
+
         assertEquals(EnumAvailability.Installed,dc.getAvailability());
         assertEquals(EnumAvailability.Installed,is.getAvailability());
-        
+
         dc.setAvailability(EnumAvailability.NotLicensed);
         assertEquals(EnumAvailability.NotLicensed,dc.getAvailability());
         assertEquals(EnumAvailability.NotLicensed,is.getAvailability());
-        
+
     }
 
     ////////////////////////////////////////////////////////////

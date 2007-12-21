@@ -105,6 +105,21 @@ public class JDFDocTest extends JDFTestCaseBase
         assertNull("no jmf root",jdfDoc.getJMFRoot());
     }  
     
+    public void testForeignRoot()
+    {
+        final XMLDoc doc = new XMLDoc("Foo","fooNS");
+        KElement r=doc.getRoot();
+        JDFNode n=new JDFDoc("JDF").getJDFRoot();
+        r.copyElement(n, null);
+        String s=doc.write2String(0);
+        JDFParser p=new JDFParser();
+        JDFDoc d=p.parseString(s);
+        assertNotNull(d.getJDFRoot());
+        assertNotNull(d.getRoot());
+        assertNotSame(d.getRoot(),d.getJDFRoot());
+        
+        
+    }
     /////////////////////////////////////////////////////
 
     /**

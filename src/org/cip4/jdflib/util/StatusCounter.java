@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -112,76 +112,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 
 //TODO add time related metadata
-/*
- *
- * The CIP4 Software License, Version 1.0
- *
- *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
- * reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
- *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
- *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
- *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
- *    permission, please contact info@cip4.org.
- *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
- *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
- *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
- *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
- *  
- * 
- */
+
 /**
  * Utility class for status JDF and JMF
  *
@@ -205,8 +136,10 @@ public class StatusCounter
     private EnumWorkType workType=null;
     protected HashSet setTrackWaste=new HashSet();
     protected HashSet setCopyResInfo=new HashSet();
+    private EnumDeviceStatus status=null;
+    private String statusDetails=null;
 
- 
+
     /**
      * construct a StatusUtil for a node n
      * @param node the JDFNode that is being processed
@@ -273,7 +206,7 @@ public class StatusCounter
         }
         catch (InterruptedException x)
         {
-//            System.out.print(".");
+//          System.out.print(".");
         }
     }
 
@@ -284,7 +217,7 @@ public class StatusCounter
      */
     protected LinkAmount getLinkAmount(String refID)
     {
-        if(vLinkAmount==null || refID==null) {
+        if(vLinkAmount==null || vLinkAmount.length==0) {
             return null;
         }
         for(int i=0;i<vLinkAmount.length;i++)
@@ -350,12 +283,12 @@ public class StatusCounter
     /**
      * add the amount specified by amount and waste to the resource with id refID
      * 
-     * @param refID, type or usage of the resource
+     * @param refID, type or usage of the resource, if null all are updated
      * @param amount
      * @param waste
      */
     public void addPhase(String refID, double amount, double waste)
-    {
+    { 
         LinkAmount la=getLinkAmount(refID);
         if(la==null)
             return;
@@ -379,6 +312,8 @@ public class StatusCounter
         if(m_Node==null)
             return setIdlePhase(deviceStatus, deviceStatusDetails);
 
+        status=deviceStatus;
+        statusDetails=deviceStatusDetails;
         JDFJMF jmfStatus = createPhaseTimeJMF();
         JDFJMF jmfRes = createResourceJMF();
 
@@ -401,7 +336,7 @@ public class StatusCounter
         {
             generateResourceSignal(jmfRes);
         }
-        
+
         if(lastPhase!=null && nextPhase!=lastPhase) // we explicitly added a new phasetime audit, thus we need to add a closing JMF for the original jobPhase
         {
             bChanged=true;
@@ -452,6 +387,8 @@ public class StatusCounter
         boolean bChanged = docJMFPhaseTime==null; // first aftersetPhase
         JDFResponse r=bChanged ? null : docJMFPhaseTime.getJMFRoot().getResponse(0);
         JDFDeviceInfo di2=r==null ? null : r.getDeviceInfo(-1);
+        status=deviceStatus;
+        statusDetails=deviceStatusDetails;
 
         bChanged=bChanged || !ContainerUtil.equals(deviceStatusDetails, di2==null ? null : di2.getAttribute(AttributeName.STATUSDETAILS,null,null));
         JDFDate d = ( di2==null || di2.getIdleStartTime()==null || bChanged) ? new JDFDate() : di2.getIdleStartTime();
@@ -569,25 +506,19 @@ public class StatusCounter
         LinkAmount.AmountBag lastAb=la.lastBag;
         if(la.isTrackWaste())
         {
-            if(lastAb.phaseAmount!=0) {
-                jp.setPhaseAmount(lastAb.phaseAmount);
-            }
             if(lastAb.totalAmount!=0) {
+                jp.setPhaseAmount(lastAb.phaseAmount);
                 jp.setAmount(lastAb.totalAmount);
             }
-            if(lastAb.phaseWaste!=0) {
-                jp.setPhaseWaste(lastAb.phaseWaste);
-            }
             if(lastAb.totalWaste!=0) {
+                jp.setPhaseWaste(lastAb.phaseWaste);
                 jp.setWaste(lastAb.totalWaste);
             }
         }
         else
         {
-            if((lastAb.phaseAmount + lastAb.phaseWaste)!=0) {
-                jp.setPhaseAmount(lastAb.phaseAmount+lastAb.phaseWaste);
-            }
             if((lastAb.totalAmount+lastAb.totalWaste)!=0) {
+                jp.setPhaseAmount(lastAb.phaseAmount+lastAb.phaseWaste);
                 jp.setAmount(lastAb.totalAmount+lastAb.totalWaste);
             }
 
@@ -941,7 +872,7 @@ public class StatusCounter
         protected boolean linkFitsKey(String key)
         {
             if(key==null)
-                return false;
+                return true;
 
             return  key.equals(rl.getNamedProcessUsage())
             || key.equals(rl.getLinkedResourceName())
@@ -1116,6 +1047,16 @@ public class StatusCounter
             return; // nop
 
         workType=_workType;
+    }
+
+    public EnumDeviceStatus getStatus()
+    {
+        return status;
+    }
+
+    public String getStatusDetails()
+    {
+        return statusDetails;
     }
 
 }

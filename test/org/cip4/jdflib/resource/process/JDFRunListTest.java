@@ -73,12 +73,14 @@ package org.cip4.jdflib.resource.process;
 import java.util.Iterator;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
@@ -92,6 +94,40 @@ public class JDFRunListTest extends JDFTestCaseBase
 
     private JDFDoc doc;
     private JDFNode root;
+
+    public final void testCollapseNPage()
+    {
+        JDFRunList rl=(JDFRunList) root.addResource(ElementName.RUNLIST,null,EnumUsage.Input,null,null,null,null);
+        JDFRunList rl1=rl.addPDF("file:///file1.pdf", 0, 2);
+        JDFRunList rl2=rl.addPDF("file:///file2.pdf", 1, 3);
+        assertEquals(rl.getNPage(), 6);
+        assertEquals(rl1.getNPage(), 3);
+        assertEquals(rl2.getNPage(), 3);
+        
+        rl.collapse(false);
+        assertEquals(rl.getNPage(), 6);
+        assertEquals(rl1.getNPage(), 3);
+        assertEquals(rl2.getNPage(), 3);
+        JDFRunList rl3=rl.addPDF("file:///file3.pdf", 1, 3);
+        assertEquals(rl.getNPage(), 9);
+        rl.expand(false);
+        assertEquals(rl.getNPage(), 9);
+        assertEquals(rl1.getNPage(), 3);
+        assertEquals(rl2.getNPage(), 3);
+        rl.collapse(false);
+        assertEquals(rl.getNPage(), 9);
+        assertEquals(rl1.getNPage(), 3);
+        assertEquals(rl2.getNPage(), 3);
+        assertEquals(rl3.getNPage(), 3);
+                
+    }
+    public final void testAddRun()
+    {
+        JDFRunList rl=(JDFRunList) root.addResource(ElementName.RUNLIST,null,EnumUsage.Input,null,null,null,null);
+        JDFRunList rl2=rl.addRun("f1.pdf", 0, -1);
+        assertFalse(rl2.hasAttribute_KElement(AttributeName.NPAGE, null, false));
+        assertFalse(rl.hasAttribute_KElement(AttributeName.NPAGE, null, false));
+     }
 
 
     public final void testGetFileURL()
@@ -122,6 +158,19 @@ public class JDFRunListTest extends JDFTestCaseBase
         kElem.setXPathAttribute("LayoutElement/FileSpec/@MimeType","application/pdf");
         assertEquals(ruli.getFileMimeType(),"application/pdf");
     }
+    
+    public final void testGetTruePage()
+    {
+        JDFResourcePool resPool = root.getCreateResourcePool();
+        JDFRunList ruli = (JDFRunList) resPool.appendResource(ElementName.RUNLIST, null, null);
+        assertEquals(ruli.getTruePage(), ruli);
+        JDFRunList ruli2=ruli.addSepRun(new VString("c.pdf m.pdf y.pdf k.pdf"," "), new VString("Cyan Magenta Yellow Black"," "), 0, 4, true);
+        assertEquals(ruli.getTruePage(), ruli);
+        assertEquals(ruli2.getTruePage(), ruli2);
+        JDFRunList ruli2c=(JDFRunList) ruli2.getElement_KElement(ElementName.RUNLIST,null,0);
+        assertEquals(ruli2.getTruePage(), ruli2);
+        assertEquals(ruli2c.getTruePage(), ruli2);
+      }
     /*
      * Test method for 'org.cip4.jdflib.resource.process.JDFMedia.setDimensionCM(JDFXYPair)'
      */
@@ -139,6 +188,7 @@ public class JDFRunListTest extends JDFTestCaseBase
         assertEquals(rlp2.getNPage(), 4);
         rlp2.setNPage(3);
         assertEquals(rlp2.getNPage(), 3);
+        assertEquals(rl.getNPage(), 6);
     }
     /*
      * Test method for 'org.cip4.jdflib.resource.process.JDFMedia.setDimensionCM(JDFXYPair)'

@@ -67,75 +67,99 @@
  *
  *
  */
-/**
- * JDFStateBaseTest.java
- *
- * @author Elena Skobchenko
- * 
- * Copyright (c) 2001-2004 The International Cooperation for the Integration 
- * of Processes in  Prepress, Press and Postpress (CIP4).  All rights reserved.
- */
-package org.cip4.jdflib.devicecapability;
+
+package org.cip4.jdflib.jmf;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
+import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumWorkType;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFParser;
-import org.cip4.jdflib.core.KElement.EnumValidationLevel;
-import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
-import org.cip4.jdflib.datatypes.JDFDurationRangeList;
-import org.cip4.jdflib.resource.devicecapability.JDFDurationState;
-import org.cip4.jdflib.util.JDFDuration;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.pool.JDFAuditPool;
+import org.cip4.jdflib.resource.JDFPhaseTime;
+import org.cip4.jdflib.resource.process.JDFMISDetails;
 
-
-public class JDFDurationStateTest extends JDFTestCaseBase
+/**
+ * @author Rainer Prosi
+ *
+ * Test of the Status JMF
+ */
+public class JDFJobPhaseTest extends JDFTestCaseBase
 {
-
-    JDFDurationState iState=null;
-
-    public void setUp() throws Exception
+    private  JDFDeviceInfo di;
+ 
+    public void setUp()
     {
-        super.setUp();
-        JDFDoc doc=new JDFDoc("DurationState");
-        iState=(JDFDurationState)doc.getRoot();
-
+        JDFElement.setLongID(false);
+        JDFDoc doc = new JDFDoc(ElementName.DEVICEINFO);
+        di=(JDFDeviceInfo) doc.getRoot();
+         
     }
-    ////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
 
-    public final void testFitsValue()
+    public void testJobPhaseFromPhaseTime()
     {
-        JDFParser p = new JDFParser();
-        String strNode = 
-            "<DurationState Name=\"BitDepth\" DefaultValue=\"PT1H\" AllowedValueList=\"PT1H~PT4H30M5S\"/>";
-
-        JDFDoc jdfDoc = p.parseString(strNode);
-        JDFDurationState state = (JDFDurationState) jdfDoc.getRoot();
-
-
-        state.setListType(EnumListType.SingleValue);
-        assertTrue("ListType=SingleValue",state.fitsValue("PT2H",JDFBaseDataTypes.EnumFitsValue.Allowed));
-        assertFalse("ListType=SingleValue",state.fitsValue("PT6H",JDFBaseDataTypes.EnumFitsValue.Allowed));
-        
-        state.removeAttribute(AttributeName.ALLOWEDVALUELIST);
-        assertTrue("ListType=SingleValue",state.fitsValue("PT2H",JDFBaseDataTypes.EnumFitsValue.Allowed));
-        assertTrue("ListType=SingleValue",state.fitsValue("PT6H",JDFBaseDataTypes.EnumFitsValue.Allowed));
-        
+        JDFDoc d=new JDFDoc("JDF");
+        JDFAuditPool ap=d.getJDFRoot().getCreateAuditPool();
+        JDFPhaseTime pt=ap.setPhase(EnumNodeStatus.InProgress,"dummy",null);
+        JDFJobPhase jp=di.createJobPhaseFromPhaseTime(pt);
+        assertFalse(pt.hasChildElement(ElementName.MISDETAILS, null));
+        final JDFMISDetails misDetails = pt.appendMISDetails();
+        misDetails.setWorkTypeDetails("FooBar");
+        misDetails.setWorkType(EnumWorkType.Alteration);
+        jp=di.createJobPhaseFromPhaseTime(pt);
+        assertEquals(pt.getMISDetails().getWorkType(),jp.getMISDetails().getWorkType());
+        assertTrue(jp.hasAttribute(AttributeName.PHASESTARTTIME))   ; 
     }
-
-    ////////////////////////////////////////////////////////////
-    public final void testIsValid() throws Exception
+    /////////////////////////////////////////////////////////////////////
+    public void testGetPhaseAmount()
     {
-        iState.setDefaultValue(new JDFDuration("P4D"));
-        assertTrue(iState.isValid(EnumValidationLevel.Complete));
-        iState.setCurrentValue(new JDFDuration("PT30M"));
-        iState.setListType(EnumListType.SingleValue);
-        assertTrue(iState.isValid(EnumValidationLevel.Complete));
-        final JDFDurationRangeList integerRList = new JDFDurationRangeList("PT2S PT5S");
-        iState.setAllowedValueList(integerRList);
-        assertTrue(iState.isValid(EnumValidationLevel.Complete));
-        assertTrue(iState.isValid(EnumValidationLevel.Complete));
+        JDFDoc d=new JDFDoc("JDF");
+        JDFAuditPool ap=d.getJDFRoot().getCreateAuditPool();
+        JDFPhaseTime pt=ap.setPhase(EnumNodeStatus.InProgress,"dummy",null);
+        JDFJobPhase jp=di.createJobPhaseFromPhaseTime(pt);
+        jp.setAmount(42);
+        assertEquals(jp.getPhaseAmount(), 42.0,0.0);
+             
     }
-    ////////////////////////////////////////////////////////////
+    public void testGetPhaseWaste()
+    {
+        JDFDoc d=new JDFDoc("JDF");
+        JDFAuditPool ap=d.getJDFRoot().getCreateAuditPool();
+        JDFPhaseTime pt=ap.setPhase(EnumNodeStatus.InProgress,"dummy",null);
+        JDFJobPhase jp=di.createJobPhaseFromPhaseTime(pt);
+        jp.setWaste(42);
+        assertEquals(jp.getPhaseWaste(), 42.0,0.0);
+             
+    }
+    public void testGetAmountDifference()
+    {
+        JDFDoc d=new JDFDoc("JDF");
+        JDFAuditPool ap=d.getJDFRoot().getCreateAuditPool();
+        JDFPhaseTime pt=ap.setPhase(EnumNodeStatus.InProgress,"dummy",null);
+        JDFJobPhase jp=di.createJobPhaseFromPhaseTime(pt);
+        jp.setAmount(42);
+        assertEquals(jp.getAmountDifference(null), 42.0,0.0);
+        JDFJobPhase jp2=(JDFJobPhase) di.copyElement(jp, null);
+        jp2.setAmount(62);
+        assertEquals(jp2.getAmountDifference(jp), 20.0,0.0);
+             
+    }
+    public void testGetWasteDifference()
+    {
+        JDFDoc d=new JDFDoc("JDF");
+        JDFAuditPool ap=d.getJDFRoot().getCreateAuditPool();
+        JDFPhaseTime pt=ap.setPhase(EnumNodeStatus.InProgress,"dummy",null);
+        JDFJobPhase jp=di.createJobPhaseFromPhaseTime(pt);
+        jp.setPhaseWaste(42);
+        assertEquals(jp.getWasteDifference(null), 42.0,0.0);
+        JDFJobPhase jp2=(JDFJobPhase) di.copyElement(jp, null);
+        jp2.setPhaseWaste(62);
+        assertEquals(jp2.getWasteDifference(jp), 20.0,0.0);
+             
+    }
 
+  
 }
