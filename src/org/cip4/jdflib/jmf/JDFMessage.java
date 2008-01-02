@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -103,6 +103,7 @@ import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFDeviceList;
 import org.cip4.jdflib.resource.JDFQueueEntryDefList;
 import org.cip4.jdflib.resource.process.JDFNotificationFilter;
+import org.cip4.jdflib.util.EnumUtil;
 
 public class JDFMessage extends JDFAutoMessage
 {
@@ -148,13 +149,10 @@ public class JDFMessage extends JDFAutoMessage
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ID, 0x22222222, AttributeInfo.EnumAttributeType.ID, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.TIME, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.TYPE, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.XSITYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.XSITYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
     }
 
     @Override
@@ -1083,6 +1081,54 @@ public class JDFMessage extends JDFAutoMessage
         ElementName.REGISTRATION
     };
     private static String[] signalTypeObjString=null;
+    private final static String[] elementArray=
+    {
+        ElementName.DEVICE,
+        ElementName.DEVICEFILTER,
+        ElementName.DEVICEINFO,
+        ElementName.DEVICELIST,
+        ElementName.FLUSHEDRESOURCES,
+        ElementName.FLUSHQUEUEPARAMS,
+        ElementName.FLUSHRESOURCEPARAMS,
+        ElementName.IDINFO,
+        ElementName.JDFCONTROLLER,
+        ElementName.JDFSERVICE,
+        ElementName.JOBPHASE,
+        ElementName.KNOWNMSGQUPARAMS,
+        ElementName.MESSAGESERVICE,
+        ElementName.MSGFILTER,
+        ElementName.NEWJDFCMDPARAMS,
+        ElementName.NEWJDFQUPARAMS,
+        ElementName.NODEINFOCMDPARAMS,
+        ElementName.NODEINFOQUPARAMS,
+        ElementName.NODEINFORESP,
+        ElementName.NOTIFICATIONDEF,
+        ElementName.NOTIFICATIONFILTER,
+        ElementName.OCCUPATION,
+        ElementName.PIPEPARAMS,
+        ElementName.QUEUE,
+        ElementName.QUEUEENTRY,
+        ElementName.QUEUEENTRYDEF,
+        ElementName.QUEUEENTRYDEFLIST,
+        ElementName.QUEUEENTRYPRIPARAMS,
+        ElementName.QUEUEENTRYPOSPARAMS,
+        ElementName.QUEUEFILTER,
+        ElementName.QUEUESUBMISSIONPARAMS,
+        ElementName.REQUESTQUEUEENTRYPARAMS,
+        ElementName.RESOURCECMDPARAMS,
+        ElementName.RESOURCEINFO,
+        ElementName.RESOURCEPULLPARAMS,
+        ElementName.RESOURCEQUPARAMS,
+        ElementName.RESUBMISSIONPARAMS,
+        ElementName.RETURNQUEUEENTRYPARAMS,
+        ElementName.SHUTDOWNCMDPARAMS,
+        ElementName.STATUSQUPARAMS,
+        ElementName.STOPPERSCHPARAMS,
+        ElementName.SUBMISSIONMETHODS,
+        ElementName.TRACKFILTER,
+        ElementName.TRACKRESULT,
+        ElementName.WAKEUPCMDPARAMS,
+    };
 
     /**
      * append an element<br>
@@ -2560,54 +2606,7 @@ public class JDFMessage extends JDFAutoMessage
             return vElem;
         }
 
-        String[] elementArray=
-        {
-                ElementName.DEVICE,
-                ElementName.DEVICEFILTER,
-                ElementName.DEVICEINFO,
-                ElementName.DEVICELIST,
-                ElementName.FLUSHEDRESOURCES,
-                ElementName.FLUSHQUEUEPARAMS,
-                ElementName.FLUSHRESOURCEPARAMS,
-                ElementName.IDINFO,
-                ElementName.JDFCONTROLLER,
-                ElementName.JDFSERVICE,
-                ElementName.JOBPHASE,
-                ElementName.KNOWNMSGQUPARAMS,
-                ElementName.MESSAGESERVICE,
-                ElementName.MSGFILTER,
-                ElementName.NEWJDFCMDPARAMS,
-                ElementName.NEWJDFQUPARAMS,
-                ElementName.NODEINFOCMDPARAMS,
-                ElementName.NODEINFOQUPARAMS,
-                ElementName.NODEINFORESP,
-                ElementName.NOTIFICATIONDEF,
-                ElementName.NOTIFICATIONFILTER,
-                ElementName.OCCUPATION,
-                ElementName.PIPEPARAMS,
-                ElementName.QUEUE,
-                ElementName.QUEUEENTRY,
-                ElementName.QUEUEENTRYDEF,
-                ElementName.QUEUEENTRYDEFLIST,
-                ElementName.QUEUEENTRYPRIPARAMS,
-                ElementName.QUEUEENTRYPOSPARAMS,
-                ElementName.QUEUEFILTER,
-                ElementName.QUEUESUBMISSIONPARAMS,
-                ElementName.REQUESTQUEUEENTRYPARAMS,
-                ElementName.RESOURCECMDPARAMS,
-                ElementName.RESOURCEINFO,
-                ElementName.RESOURCEPULLPARAMS,
-                ElementName.RESOURCEQUPARAMS,
-                ElementName.RESUBMISSIONPARAMS,
-                ElementName.RETURNQUEUEENTRYPARAMS,
-                ElementName.SHUTDOWNCMDPARAMS,
-                ElementName.STATUSQUPARAMS,
-                ElementName.STOPPERSCHPARAMS,
-                ElementName.SUBMISSIONMETHODS,
-                ElementName.TRACKFILTER,
-                ElementName.TRACKRESULT,
-                ElementName.WAKEUPCMDPARAMS,
-        };
+
         KElement[] ae=getChildElementArray();
         if(ae==null || ae.length==0)
         {
@@ -2739,4 +2738,24 @@ public class JDFMessage extends JDFAutoMessage
             return ((JDFJMF)parentJMF).getSenderID();
         return null;
     }
+
+    @Override
+    public VString getDeprecatedElements(int nMax)
+    {
+        VString v= super.getDeprecatedElements(nMax);
+
+        if(EnumUtil.aLessThanB(EnumVersion.Version_1_1,getVersion(true))&& hasChildElement(ElementName.JDFSERVICE, null))
+            v.add(ElementName.JDFSERVICE);
+        return v;
+    }
+
+    @Override
+    public EnumVersion getLastVersion(String eaName, boolean bElement)
+    {
+        if(ElementName.JDFSERVICE.equals(eaName)&& bElement)
+            return EnumVersion.Version_1_1;
+
+        return super.getLastVersion(eaName, bElement);
+    }
+
 }

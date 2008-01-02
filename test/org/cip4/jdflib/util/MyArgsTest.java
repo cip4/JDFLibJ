@@ -115,6 +115,19 @@ public class MyArgsTest extends TestCase {
         assertEquals(args.nargs(), 0);
         
     }
+    /*
+     * Test method for 'org.cip4.jdflib.util.MyArgs.hasParameter()'
+     */
+    public void hasParam() 
+    {
+        String[] s={"-abc","foo"};
+        MyArgs args=new MyArgs(s,"ab","c",null);
+        assertTrue(args.hasParameter('a'));
+        assertTrue(args.hasParameter('b'));
+        assertTrue(args.hasParameter('c'));
+        assertFalse(args.hasParameter('d'));
+               
+    }
     
     /*
      * Test method for 'org.cip4.jdflib.util.MyArgs.argument(int)'

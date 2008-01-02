@@ -2403,6 +2403,7 @@ public class CheckJDF
                     { // no jdf, maybe jmf
                         if(jmf!=null) {
                             printJMFDevCap(jmf, checkJDFxmlRoot);
+                            printBad(jmf,  0, checkJDFxmlRoot, true);
 
                             
                         } else {
