@@ -915,7 +915,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
         KElement r=null;
         if (EnumValidationLevel.isRequired(level) && svElemResources<getMinOccurs() && EnumAvailability.Installed.equals(av))
         {
-            if (context.equals(EnumContext.Element)) 
+            if (EnumContext.Element.equals(context)||EnumContext.JMF.equals(context)) 
             {
                 r = mrp.appendElement("MissingElement");
                 r.setAttribute("XPath", xpathRoot.buildXPath(null,1)+ "/" + getName());

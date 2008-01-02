@@ -367,7 +367,7 @@ public class JDFRunList extends JDFAutoRunList
      *
      * @param fileNames vector of file names for the URL attribute of the FileSpec in the LayoutElement
      * @param sepNames  parallel vector of separation names.
-     * @param first     ndex of the first page in the file - Sets the RunList FirstPage attribute
+     * @param first     index of the first page in the file - Sets the RunList FirstPage attribute
      * @param n         the number of logical pages in this run
      * @param pageMajor if true, separations are ordered as page Major, i.e CMYKCMYK<br>
      *                  if false, ordering is CCMMYYKK

@@ -139,7 +139,7 @@ import org.xml.sax.InputSource;
  * Perhaps <code>org.xml.sax.ErrorHandler</code> could be used?
  *
  * @author Claes Buckwalter (clabu@itn.liu.se)
- * @version 2005-06-21
+ * @version 2008-01-02
  */
 public class CheckJDF
 {
@@ -1834,6 +1834,17 @@ public class CheckJDF
      */
     public XMLDoc validate(String commandLineArgs[], InputStream inStream)
     {
+        String url = parseArgs(commandLineArgs);
+        // for all files do
+        if(inStream!=null || url!=null)
+        {
+            return processSingleURLStream(inStream,url);
+        }
+        return processAllFiles();
+    }
+
+    private String parseArgs(String[] commandLineArgs)
+    {
         MyArgs args = new MyArgs(commandLineArgs, "?cmqPQvVntwU", "dlfLuhpTxX",null);
 
         if (args.boolParameter('?', false))
@@ -1931,12 +1942,7 @@ public class CheckJDF
         String url = args.parameterString('u');
 
         setAllFiles(args);
-        // for all files do
-        if(inStream!=null || url!=null)
-        {
-            return processSingleURLStream(inStream,url);
-        }
-        return processAllFiles();
+        return url;
     }
 
     private void getTranslation(MyArgs args)

@@ -71,6 +71,7 @@
 package org.cip4.jdflib.resource.process;
 
 import java.util.Iterator;
+import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
@@ -82,6 +83,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.node.JDFNode;
@@ -94,10 +96,11 @@ public class JDFRunListTest extends JDFTestCaseBase
 
     private JDFDoc doc;
     private JDFNode root;
+    private JDFRunList rl;
+        
 
     public final void testCollapseNPage()
     {
-        JDFRunList rl=(JDFRunList) root.addResource(ElementName.RUNLIST,null,EnumUsage.Input,null,null,null,null);
         JDFRunList rl1=rl.addPDF("file:///file1.pdf", 0, 2);
         JDFRunList rl2=rl.addPDF("file:///file2.pdf", 1, 3);
         assertEquals(rl.getNPage(), 6);
@@ -123,7 +126,6 @@ public class JDFRunListTest extends JDFTestCaseBase
     }
     public final void testAddRun()
     {
-        JDFRunList rl=(JDFRunList) root.addResource(ElementName.RUNLIST,null,EnumUsage.Input,null,null,null,null);
         JDFRunList rl2=rl.addRun("f1.pdf", 0, -1);
         assertFalse(rl2.hasAttribute_KElement(AttributeName.NPAGE, null, false));
         assertFalse(rl.hasAttribute_KElement(AttributeName.NPAGE, null, false));
@@ -132,7 +134,6 @@ public class JDFRunListTest extends JDFTestCaseBase
 
     public final void testGetFileURL()
     {
-        JDFRunList rl=(JDFRunList) root.addResource(ElementName.RUNLIST,null,EnumUsage.Input,null,null,null,null);
         rl.setFileURL("./foo/bar.pdf");
         rl.setDirectory("File://c/fnarf");
         assertEquals(rl.getFileURL(), "File://c/fnarf/foo/bar.pdf");
@@ -140,7 +141,6 @@ public class JDFRunListTest extends JDFTestCaseBase
 
     public final void testSetPages()
     {
-        JDFRunList rl=(JDFRunList) root.addResource(ElementName.RUNLIST,null,EnumUsage.Input,null,null,null,null);
         final JDFIntegerRangeList integerRangeList = new JDFIntegerRangeList(new JDFIntegerRange(0,-1,8));
         rl.setPages(integerRangeList);
         assertEquals(rl.getPages(), integerRangeList);
@@ -176,8 +176,6 @@ public class JDFRunListTest extends JDFTestCaseBase
      */
     public final void testGetNPage() throws Exception
     {
-        JDFResourcePool resPool = root.getCreateResourcePool();
-        JDFRunList rl = (JDFRunList)resPool.appendResource(ElementName.RUNLIST, null, null);
         JDFRunList rlp=(JDFRunList)rl.addPartition(EnumPartIDKey.Run, "r1");
         rlp.setPages(new JDFIntegerRangeList("1 3 5 7"));
         assertEquals(rlp.getNPage(), 4);
@@ -195,8 +193,6 @@ public class JDFRunListTest extends JDFTestCaseBase
      */
     public final void testGetIndexPartition() throws Exception
     {
-        JDFResourcePool resPool = root.getCreateResourcePool();
-        JDFRunList rl = (JDFRunList)resPool.appendResource(ElementName.RUNLIST, null, null);
         JDFRunList rlp=(JDFRunList)rl.addPartition(EnumPartIDKey.Run, "r1");
         rlp.setPages(new JDFIntegerRangeList("1 3 5 7"));
         assertEquals(rl.getIndexPartition(0),rlp);
@@ -213,8 +209,6 @@ public class JDFRunListTest extends JDFTestCaseBase
      */
     public final void testGetPageInFile() throws Exception
     {
-        JDFResourcePool resPool = root.getCreateResourcePool();
-        JDFRunList rl = (JDFRunList)resPool.appendResource(ElementName.RUNLIST, null, null);
         JDFRunList rlp=(JDFRunList)rl.addPartition(EnumPartIDKey.Run, "r1");
         rlp.setPages(new JDFIntegerRangeList("1 3 5 7"));
         assertEquals(rlp.getPageInFile(0), 1);
@@ -238,8 +232,6 @@ public class JDFRunListTest extends JDFTestCaseBase
      */
     public final void testGetPageLeaves() throws Exception
     {
-        JDFResourcePool resPool = root.getCreateResourcePool();
-        JDFRunList rl = (JDFRunList)resPool.appendResource(ElementName.RUNLIST, null, null);
         JDFRunList rlp=(JDFRunList)rl.addPartition(EnumPartIDKey.Run, "r1");
         JDFRunList rlp2=(JDFRunList)rl.addPartition(EnumPartIDKey.Run, "r2");
         VElement v=rl.getPageLeaves();
@@ -270,8 +262,6 @@ public class JDFRunListTest extends JDFTestCaseBase
      */
     public final void testGetIndex() throws Exception
     {
-        JDFResourcePool resPool = root.getCreateResourcePool();
-        JDFRunList rl = (JDFRunList)resPool.appendResource(ElementName.RUNLIST, null, null);
         JDFRunList rlp=(JDFRunList)rl.addPartition(EnumPartIDKey.Run, "r1");
         rlp.setPages(new JDFIntegerRangeList("1 3 5 7"));
         assertEquals("first partition starts at 0",rlp.getFirstIndex(), 0);
@@ -302,8 +292,6 @@ public class JDFRunListTest extends JDFTestCaseBase
      */
     public final void testPageIterator() throws Exception
     {
-        JDFResourcePool resPool = root.getCreateResourcePool();
-        JDFRunList rl = (JDFRunList)resPool.appendResource(ElementName.RUNLIST, null, null);
         JDFRunList rlp=(JDFRunList)rl.addPartition(EnumPartIDKey.Run, "r1");
         rlp.setPages(new JDFIntegerRangeList("1 3 5 7"));
         rlp.setNPage(3);
@@ -326,8 +314,6 @@ public class JDFRunListTest extends JDFTestCaseBase
      */
     public final void testPageIteratorSpeed() throws Exception
     {
-        JDFResourcePool resPool = root.getCreateResourcePool();
-        JDFRunList rl = (JDFRunList)resPool.appendResource(ElementName.RUNLIST, null, null);
         int nMax=3000;
         for(int i=0;i<nMax;i++)
         {
@@ -353,7 +339,6 @@ public class JDFRunListTest extends JDFTestCaseBase
      */
     public void testTagMapTiff() throws Exception
     {
-        JDFRunList rl=(JDFRunList) root.addResource(ElementName.RUNLIST,EnumUsage.Input);
         KElement tagMap=rl.appendElement("TagMap");
         tagMap.setAttribute("BoundaryKey", "EndOfDocument");
         KElement tagSet=tagMap.appendElement("TagSet");
@@ -372,7 +357,6 @@ public class JDFRunListTest extends JDFTestCaseBase
      */
     public void testTagMap() throws Exception
     {
-        JDFRunList rl=(JDFRunList) root.addResource(ElementName.RUNLIST,EnumUsage.Input);
 
         JDFLayout lo=(JDFLayout) root.addResource(ElementName.LAYOUT,null,EnumUsage.Input,null,null,null,null);
         JDFMedia med=(JDFMedia) root.addResource(ElementName.MEDIA,null,EnumUsage.Input,null,null,null,null);
@@ -457,16 +441,28 @@ public class JDFRunListTest extends JDFTestCaseBase
 
         doc.write2File(sm_dirTestDataTemp+"tagmap.jdf", 2, false);
     }
+    
+    public void testSeparatedTiff()
+    {
+        VString v1=new VString("Cyan Magenta Yello Black"," ");
+        VString v2=new VString();
+        for(int i=0;i<v1.size();i++)
+            v2.add("File://device/dir/"+v1.stringAt(i)+".tif");
+        JDFRunList rl2=rl.addSepRun(v2,v1,0,0,false);
+        assertTrue(rl2.isValid(EnumValidationLevel.Complete));       
+        
+    }
 
     /* (non-Javadoc)
      * @see junit.framework.TestCase#setUp()
      */
     protected void setUp() throws Exception
     {
+        JDFElement.setLongID(false);
         super.setUp();
         doc = new JDFDoc("JDF");
         root = doc.getJDFRoot();
-        JDFElement.setLongID(false);
+        rl=(JDFRunList) root.addResource(ElementName.RUNLIST,EnumUsage.Input);
 
     }
 

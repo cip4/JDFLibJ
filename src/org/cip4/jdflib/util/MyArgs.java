@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -406,9 +406,16 @@ public class MyArgs
         return m_usageTable;
     }
     
+    /**
+     * return true if either a flag or parameter for c is set
+     * 
+     * @param c the char to test for
+     * @return
+     */
     public boolean hasParameter(char c)
     {
-        return parameter(c)!=null;
+        return (m_switchParameterString!=null && m_switchParameterString.indexOf(c)>-1 && m_flags.contains(""+c) )
+       || (parameter(c)!=null);
     }
 
 }

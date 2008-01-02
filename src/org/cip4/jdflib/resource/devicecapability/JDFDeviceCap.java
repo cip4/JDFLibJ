@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -451,7 +451,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
                 map.put("JMFRole", EnumJMFRole.Sender);
             else
                 map.put(fam.getName(), "true");                
-                
+
         }
         return (JDFMessageService) knownMessagesResp.getChildByTagName(ElementName.MESSAGESERVICE, null, 0, map, true, true);
     }
@@ -741,14 +741,15 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
      * Composes a detailed report of the found errors in XML form. 
      * If XMLDoc is <code>null</code> there are no errors.
      * 
-     * @param jdfRoot node we test
+     * @param parent the devcaps parent element
+     * @param jdfRoot node or jmf message element we test
      * @return boolean - true if invalid devcaps were found 
      * @throws JDFException if DeviceCap is invalid: has a wrong attribute Context value 
      */
     private static boolean invalidDevCaps(KElement parent, final KElement jdfRoot, EnumFitsValue testlists, EnumValidationLevel level, KElement parentReport, boolean ignoreExtensions)
     {
-        KElement mrp = parentReport.appendElement("MissingResources");
-        KElement irp = parentReport.appendElement("InvalidResources");
+        KElement mrp = parentReport.appendElement((jdfRoot instanceof JDFNode) ? "MissingResources" : "MissingElements");
+        KElement irp = parentReport.appendElement((jdfRoot instanceof JDFNode) ? "InvalidResources" : "InvalidElements");
         VElement vDevCaps = parent.getChildElementVector(ElementName.DEVCAPS, null, null, true, 0, false);
         final int size = vDevCaps.size();
         HashSet goodElems=new HashSet();
@@ -759,7 +760,6 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
             JDFDevCaps devCaps = (JDFDevCaps) vDevCaps.elementAt(i);
             devCaps.analyzeDevCaps(jdfRoot, testlists, level, mrp, irp, goodElems, badElems, ignoreExtensions);
         }
-
 
         boolean bRet=mrp.hasChildElements() || irp.hasChildElements();
         if (!mrp.hasChildElements())
@@ -1211,7 +1211,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
     }
 
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * appends a NumberState with @Name="name"
      * @param nam   the name attribute of the newly appended NumberState
@@ -1225,7 +1225,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
     }
 
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * appends an IntegerState with @Name="name"
      * @param name the Name attribute of the newly appended IntegerState
@@ -1239,7 +1239,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
     }
 
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * appends a NameState with @Name="name"
      * @param nam the name attribute of the newly appended NameState
@@ -1253,7 +1253,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
     }
 
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * appends a StringState with @Name="name"
      * @param nam the Name attribute of the newly appended StringState
@@ -1267,7 +1267,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
     }
 
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets an existing BooleanState with @Name="name"
      * @param nam the Name attribute of the newly appended BooleanState
@@ -1279,7 +1279,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
     }
 
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets a NumberState with @Name="name", appends it if it does not exist
      * @param name the name attribute of the newly appended NumberState
@@ -1294,7 +1294,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
     }
 
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets a EnumerationState with @Name="name", appends it if it does not exist
      * @param nam the name attribute of the newly appended EnumerationState
@@ -1322,7 +1322,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
     }
 
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets a NameState with @Name="name", appends it if it does not exist
      * @param nam the name attribute of the newly appended NameState
@@ -1337,7 +1337,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
     }
 
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets a StringState with @Name="name", appends it if it does not yet exist
      * @param nam the Name attribute of the newly appended StringState
@@ -1352,7 +1352,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
     }
 
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets an existing  EnumerationState with @Name="name"
      * @param name the Name attribute of the newly appended EnumerationState
@@ -1364,7 +1364,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
     }
 
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets an existing IntegerState with @Name="name"
      * @param nam the name attribute of the newly appended IntegerState
@@ -1376,7 +1376,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
     }
 
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets an existing NameState with @Name="name"
      * @param nam the Name attribute of the newly appended NameState
@@ -1399,7 +1399,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
     }
 
     //  ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * gets an existing  StringState with @Name="name"
      * @param nam the Name attribute of the newly appended StringState
