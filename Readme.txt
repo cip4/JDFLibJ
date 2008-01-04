@@ -1,9 +1,90 @@
+___________________________________________________________
 
+
+Label JDFLIBJ_2.1.3BLD484 (04.01.2008)
+
+correctly handle nested rw spawns (Part 2)
+deprecated JMF elements not caught correctly
+checkjdf commandline: now correctly handles check for completeness
+Editor: cleanup of devcap output for JMF
+cleanup statuscounter so that phaseXXX is written whenever XXX is written
+add fixNPage to RunList to fix NPage values at all levels
+fix cce in capabilities when states are direct children of devicecap rather than devcap
+add KElement.removeExtensions to remove specifc ns traits
+fix for non jdf namespace roots in getjdfroot
+fixed fitsValue if no allowedvaluelist is specified
+
+>ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD484) && !lbtype(JDFLIBJ_2.1.3BLD483)}" -print
+.\core\AttributeName.java@@\main\47
+.\core\JDFConstants.java@@\main\71
+.\core\JDFDoc.java@@\main\76
+.\core\JDFElement.java@@\main\244
+.\core\JDFNodeInfo.java@@\main\57
+.\core\KElement.java@@\main\256
+.\datatypes\VJDFAttributeMap.java@@\main\30
+.\goldenticket\BaseGoldenTicket.java@@\main\4
+.\goldenticket\MISCPGoldenTicket.java@@\main\5
+.\goldenticket\MISGoldenTicket.java@@\main\5
+.\jmf\JDFDeviceInfo.java@@\main\23
+.\jmf\JDFJMF.java@@\main\66
+.\jmf\JDFJobPhase.java@@\main\22
+.\jmf\JDFMessage.java@@\main\74
+.\jmf\JDFQueueEntry.java@@\main\24
+.\jmf\JDFQueueEntryDef.java@@\main\13
+.\jmf\JDFQueueFilter.java@@\main\10
+.\jmf\JDFResponse.java@@\main\30
+.\resource\devicecapability\JDFAbstractState.java@@\main\54
+.\resource\devicecapability\JDFDevCap.java@@\main\55
+.\resource\devicecapability\JDFDevCaps.java@@\main\42
+.\resource\devicecapability\JDFDeviceCap.java@@\main\53
+.\resource\devicecapability\JDFDurationState.java@@\main\28
+.\resource\JDFPhaseTime.java@@\main\29
+.\resource\process\JDFFileSpec.java@@\main\33
+.\resource\process\JDFRunList.java@@\main\56
+.\util@@\main\24
+.\util\EnumUtil.java@@\main\2
+.\util\MimeUtil.java@@\main\17
+.\util\MultiModuleStatusCounter.java@@\main\1
+.\util\MyArgs.java@@\main\28
+.\util\QueueHotFolder.java@@\main\4
+.\util\StatusCounter.java@@\main\10
+.\util\StatusUtil.java@@\main\10
+___________________________________________________________
+
+
+Label JDFLIBJ_2.1.3BLD483 (04.01.2008)
+
+correctly handle nested rw spawns (Part 1)
+add gray box types to JDFNode.EnumType
+
+>ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD483) && !lbtype(JDFLIBJ_2.1.3BLD482)}" -print
+.\node\JDFNode.java@@\main\263
+.\util\JDFMerge.java@@\main\20
+___________________________________________________________
+
+
+Label JDFLIBJ_2.1.3BLD482 (19.12.2007)
+
+getPartStatus - undo modification to calculate status from leaves
+
+>ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD482) && !lbtype(JDFLIBJ_2.1.3BLD481)}" -print
+.\node\JDFNode.java@@\main\262
+___________________________________________________________
+
+
+Label JDFLIBJ_2.1.3BLD481 (18.12.2007)
+
+getPartStatus fixed for implicit partitions
+
+>ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD481) && !lbtype(JDFLIBJ_2.1.3BLD480)}" -print
+.\node\JDFNode.java@@\main\261
+.\pool\JDFAuditPool.java@@\main\102
 ___________________________________________________________
 
 
 Label JDFLIBJ_2.1.3BLD480 (06.12.2007)
 
+abfangen der erweiterung von ro - ressourcen
 fix for setting spawnids for virtual partitions now also in the main jdf
 fix for merging partamounts with virtual partitions
 cid generation fixes in mimeutil
@@ -101,12 +182,12 @@ bambi cosmetics
 .\core\JDFAudit.java@@\main\91
 .\core\JDFCustomerInfo.java@@\main\41
 .\core\JDFDoc.java@@\main\75
-.\core\JDFElement.java@@\main\241
+.\core\JDFElement.java@@\main\243
 .\core\JDFNodeInfo.java@@\main\56
 .\core\JDFParser.java@@\main\45
 .\core\JDFRefElement.java@@\main\62
 .\core\JDFResourceLink.java@@\main\138
-.\core\KElement.java@@\main\254
+.\core\KElement.java@@\main\255
 .\core\VElement.java@@\main\33
 .\core\VResource.java@@\main\17
 .\core\VString.java@@\main\40
@@ -135,7 +216,7 @@ bambi cosmetics
 .\goldenticket@@\main\2
 .\goldenticket\MISCPGoldenTicket.java@@\main\4
 .\goldenticket\MISGoldenTicket.java@@\main\4
-.\goldenticket\ProductGoldenTicket.java@@\main\1
+.\goldenticket\ProductGoldenTicket.java@@\main\2
 .\jmf\JDFJMF.java@@\main\65
 .\jmf\JDFMessage.java@@\main\73
 .\jmf\JDFMessageService.java@@\main\16
@@ -145,7 +226,7 @@ bambi cosmetics
 .\jmf\JDFQueueSubmissionParams.java@@\main\15
 .\jmf\JDFResourceCmdParams.java@@\main\25
 .\jmf\JDFResponse.java@@\main\29
-.\node\JDFNode.java@@\main\259
+.\node\JDFNode.java@@\main\260
 .\pool\JDFAncestorPool.java@@\main\47
 .\pool\JDFAuditPool.java@@\main\101
 .\pool\JDFPool.java@@\main\37
@@ -170,7 +251,7 @@ bambi cosmetics
 .\resource\JDFDeviceList.java@@\main\7
 .\resource\JDFPart.java@@\main\29
 .\resource\JDFProcessRun.java@@\main\32
-.\resource\JDFResource.java@@\main\227
+.\resource\JDFResource.java@@\main\228
 .\resource\JDFResourceAudit.java@@\main\34
 .\resource\process\JDFColorantControl.java@@\main\23
 .\resource\process\JDFComChannel.java@@\main\16
@@ -227,9 +308,9 @@ bambi cosmetics
 .\util\FileUtil.java@@\main\5
 .\util\HotFolder.java@@\main\2
 .\util\HotFolderListener.java@@\main\1
-.\util\JDFMerge.java@@\main\18
-.\util\JDFSpawn.java@@\main\21
-.\util\MimeUtil.java@@\main\15
+.\util\JDFMerge.java@@\main\19
+.\util\JDFSpawn.java@@\main\22
+.\util\MimeUtil.java@@\main\16
 .\util\MyArgs.java@@\main\27
 .\util\QueueHotFolder.java@@\main\3
 .\util\QueueHotFolderListener.java@@\main\1
