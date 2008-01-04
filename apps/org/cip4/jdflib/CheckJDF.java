@@ -2339,8 +2339,15 @@ public class CheckJDF
 
             if (theDoc == null)
             {
-                KElement kEl = testFileRoot.appendElement("Error");
-                kEl.setAttribute("Message", "File " + xmlFile + " not found or not parsed");
+                if(bTryFormats)
+                {
+                    testFileRoot.deleteNode();
+                }
+                else
+                {
+                    KElement kEl = testFileRoot.appendElement("Error");
+                    kEl.setAttribute("Message", "File " + xmlFile + " not found or not parsed");
+                }
             }
             else
             {
