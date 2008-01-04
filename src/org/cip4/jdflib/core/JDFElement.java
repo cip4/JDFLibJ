@@ -3752,16 +3752,16 @@ public class JDFElement extends KElement
         setAttribute(AttributeName.VERSION, enumVer.getName(), null);
     }
 
-//  dm    /**
-//  * get EnumVersion attribute Version
-//  * @return EnumVersion - attribute value
-//  * @deprecated 060505 use getVersion(boolean);
-//  */
-//  @Deprecated
-//  public EnumVersion getVersion()
-//  {
-//  return getVersion(true);
-//  }
+   /**
+	 * get EnumVersion attribute Version
+	 * 
+	 * @return EnumVersion - attribute value
+	 * @deprecated 060505 use getVersion(boolean);
+	 */
+	@Deprecated
+	public EnumVersion getVersion() {
+		return getVersion(true);
+	}
 
     /**
      * get the version of this element
