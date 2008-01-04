@@ -108,6 +108,7 @@ import javax.mail.BodyPart;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFDateTimeRangeList;
@@ -701,6 +702,40 @@ public class JDFElement extends KElement
             return getEnumList(EnumNodeStatus.class);
         }
 
+        /**
+         * returns the queuentrystatus corresponding to a node status
+         * @param ns the node status to test agains
+         * @return the queentrystatus that corresponds to ns; may be null in case of pool or part
+         */
+        public static EnumQueueEntryStatus getQueueEntryStatus(EnumNodeStatus ns)
+        {
+            if(EnumNodeStatus.Waiting.equals(ns))
+                return EnumQueueEntryStatus.Waiting;
+            if(EnumNodeStatus.TestRunInProgress.equals(ns))
+                return EnumQueueEntryStatus.Waiting;
+            if(EnumNodeStatus.Ready.equals(ns))
+                return EnumQueueEntryStatus.Waiting;
+            if(EnumNodeStatus.FailedTestRun.equals(ns))
+                return EnumQueueEntryStatus.Aborted;
+            if(EnumNodeStatus.Setup.equals(ns))
+                return EnumQueueEntryStatus.Running;
+            if(EnumNodeStatus.InProgress.equals(ns))
+                return EnumQueueEntryStatus.Running;
+            if(EnumNodeStatus.Cleanup.equals(ns))
+                return EnumQueueEntryStatus.Running;
+            if(EnumNodeStatus.Spawned.equals(ns))
+                return EnumQueueEntryStatus.Running;
+            if(EnumNodeStatus.Suspended.equals(ns))
+                return EnumQueueEntryStatus.Suspended;
+            if(EnumNodeStatus.Stopped.equals(ns))
+                return EnumQueueEntryStatus.Suspended;
+            if(EnumNodeStatus.Completed.equals(ns))
+                return EnumQueueEntryStatus.Completed;
+            if(EnumNodeStatus.Aborted.equals(ns))
+                return EnumQueueEntryStatus.Aborted;
+
+            return null; //punt
+        }
         /**
          * @return an iterator over the enum objects
          */

@@ -119,9 +119,10 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 {
     private boolean grayBox;
     private VJDFAttributeMap vParts;
-    public VString cols=new VString("Cyan,Magenta,Yellow,Black,Spot1",",");
-    public VString colsActual = new VString("Cyan,Magenta,Gelb,Schwarz,RIP 4711",",");
+    public VString cols=new VString("Cyan,Magenta,Yellow,Black,Spot1,Spot2,Spot3,Spot4",",");
+    public VString colsActual = new VString("Cyan,Magenta,Gelb,Schwarz,RIP 4711,RIP 4712,RIP 4713,RIP 4714",",");
     public int nCols=0;
+    public EnumWorkStyle workStyle=EnumWorkStyle.Simplex;
     
     private final VString partIDKeys;
     protected int icsLevel;
@@ -351,9 +352,8 @@ public class MISCPGoldenTicket extends MISGoldenTicket
     {
         JDFConventionalPrintingParams cpp=(JDFConventionalPrintingParams) theNode.getCreateResource(ElementName.CONVENTIONALPRINTINGPARAMS,EnumUsage.Input, 0);
         cpp.setPrintingType(EnumPrintingType.SheetFed);
-        cpp.setWorkStyle(EnumWorkStyle.WorkAndTurn);
+        cpp.setWorkStyle(workStyle);
         cpp.setResStatus(EnumResStatus.Available, false);
-
     }
     /**
      * @param icsLevel
@@ -368,8 +368,8 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         JDFSeparationList co=cc.getCreateColorantOrder();
         co.setSeparations(cols);
         cc.setProcessColorModel("DeviceCMYK");
-        if(nCols>4)
-            cc.appendColorantParams().setSeparations(new VString(cols.stringAt(4)," "));
+        for(int i=4;i<getNCols();i++)
+            cc.getCreateColorantParams().appendSeparation(cols.stringAt(i));
         for(int i=0;i<getNCols();i++)
         {
             String name=cols.stringAt(i);

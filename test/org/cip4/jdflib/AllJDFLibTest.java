@@ -136,6 +136,7 @@ import org.cip4.jdflib.examples.StrippingTest;
 import org.cip4.jdflib.examples.VarnishTest;
 import org.cip4.jdflib.examples.WebTest;
 import org.cip4.jdflib.goldenticket.GoldenTicketTest;
+import org.cip4.jdflib.goldenticket.MISCPGoldenTicketTest;
 import org.cip4.jdflib.jmf.JDFDeviceInfoTest;
 import org.cip4.jdflib.jmf.JDFJMFTest;
 import org.cip4.jdflib.jmf.JDFJobPhaseTest;
@@ -295,6 +296,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 
         // Golden tickets
         suite.addTestSuite(GoldenTicketTest.class);
+        suite.addTestSuite(MISCPGoldenTicketTest.class);
 
         // JMF
         suite.addTestSuite(JDFDeviceInfoTest.class);

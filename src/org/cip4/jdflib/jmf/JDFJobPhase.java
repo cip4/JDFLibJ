@@ -82,11 +82,14 @@ package org.cip4.jdflib.jmf;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoJobPhase;
+import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
@@ -389,6 +392,14 @@ public class JDFJobPhase extends JDFAutoJobPhase
         if(hasAttribute(AttributeName.PHASEWASTE))
             return super.getPhaseWaste();
         return super.getWaste();
+    }
+
+    /**
+     * @return the queueentry status that corresponds to the status of this
+     */
+    public EnumQueueEntryStatus getQueueEntryStatus()
+    {
+       return EnumNodeStatus.getQueueEntryStatus(getStatus()); 
     }
 }
 

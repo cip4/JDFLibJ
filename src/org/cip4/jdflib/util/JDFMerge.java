@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -636,11 +636,11 @@ public class JDFMerge
             final VString spawnIDs = leafRes.getSpawnIDs(false);
             spawnIDs.removeAll(previousMergeIDs);
             leafRes.setSpawnIDs(spawnIDs);
-            calcSpawnStatus(leafRes);
+            calcSpawnStatus(leafRes,true);
         }
     }
 
-    private void calcSpawnStatus(final JDFResource leafRes)
+    private void calcSpawnStatus(final JDFResource leafRes,boolean bLocal)
     {
         if(leafRes==null)
             return;
@@ -653,9 +653,9 @@ public class JDFMerge
             leafRes.removeAttribute(AttributeName.LOCKED);
 
         }
-        else if(vsRW.contains(resID))
+        else if(bLocal || vsRW.contains(resID))
         {
-            boolean bWrite=false;
+            boolean bWrite=bLocal;
 
             for(int i=0;i<spawnIDs.size();i++) // check for multiple rw spawns
             {
@@ -668,6 +668,10 @@ public class JDFMerge
                     {
                         bWrite=true;
                     }
+                }
+                else  // retain rw status of spawns that were initiated off line
+                {
+                    bWrite=bWrite || EnumSpawnStatus.SpawnedRW.equals(leafRes.getSpawnStatus());
                 }
             }  
             if(bWrite)
@@ -686,7 +690,6 @@ public class JDFMerge
         {
             // nop
         }
-
     }
     /////////////////////////////////////////////////////////////////////
 
@@ -994,7 +997,7 @@ public class JDFMerge
             {
                 final JDFResource leafRes = (JDFResource)oldResLeafsSpawned.elementAt(leaf);
                 leafRes.removeFromSpawnIDs(spawnID);
-                calcSpawnStatus(leafRes);
+                calcSpawnStatus(leafRes,false);
             }
         }
     }
@@ -1087,7 +1090,7 @@ public class JDFMerge
                 final JDFResource leafRes = (JDFResource)oldResLeafsSpawned.elementAt(leaf);
                 //  handle multiple spawns (reference count of spawned audits!)
                 leafRes.removeFromSpawnIDs(spawnID);
-                calcSpawnStatus(leafRes);
+                calcSpawnStatus(leafRes,false);
             }
             if(!newRes.getParentJDF().getID().equals(oldRes.getParentJDF().getID()))
             {

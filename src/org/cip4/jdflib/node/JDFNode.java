@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -663,6 +663,12 @@ public class JDFNode extends JDFElement
         public static final EnumType WebInlineFinishing = new EnumType(JDFConstants.TYPE_WEBINLINEFINISHING);
         public static final EnumType WireCombBinding = new EnumType(JDFConstants.TYPE_WIRECOMBBINDING);
         public static final EnumType Wrapping = new EnumType(JDFConstants.TYPE_WRAPPING);
+        
+        // prepress gray box types
+        public static final EnumType ImpositionPreparation = new EnumType("ImpositionPreparation");
+        public static final EnumType PrepressPreparation = new EnumType("PrepressPreparation");
+        public static final EnumType ProofImaging = new EnumType("ProofImaging");
+        
     }
 
     /**
