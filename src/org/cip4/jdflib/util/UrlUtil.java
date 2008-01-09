@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -440,13 +440,19 @@ public class UrlUtil
      */
     public static File urlToFile(String urlString)
     {
+        
         if(urlString==null)
             return null;
+        
         if(isCID(urlString) || isHttp(urlString))
             return null;
 
         if(urlString.toLowerCase().startsWith("file:"))
             urlString=urlString.substring(5); // remove "file:"
+
+        File f=new File(urlString);
+        if(f.canRead())
+            return f;
         if(File.separator.equals("\\")) // on windows
         {
             if(urlString.startsWith("///") && urlString.length()>5 && urlString.charAt(4)=='/')
@@ -456,6 +462,7 @@ public class UrlUtil
             else if(urlString.startsWith("///"))
                 urlString=urlString.substring(2);
         }
+        
         urlString= StringUtil.unEscape(urlString, "%", 16, 2);
         urlString=StringUtil.getUTF8String(urlString.getBytes());
 
