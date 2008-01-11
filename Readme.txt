@@ -1,6 +1,26 @@
 ___________________________________________________________
 
 
+Label JDFLIBJ_2.1.3BLD486 (11.01.2008)
+
+Performance JDF-Forwarding for resources with many partitions (Jan Hoppe)
+
+>ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD486) && !lbtype(JDFLIBJ_2.1.3BLD485)}" -print
+.\core\JDFResourceLink.java@@\main\139
+___________________________________________________________
+
+
+Label JDFLIBJ_2.1.3BLD485 (09.01.2008)
+
+bug fix: did not work with umlaut in path names (Bernd Neumann)
+(bei urltofile im falle von Misserfolg zusätzlich ein new File(inputstring) versuchen)
+
+
+>ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD485) && !lbtype(JDFLIBJ_2.1.3BLD484)}" -print
+.\util\UrlUtil.java@@\main\13
+___________________________________________________________
+
+
 Label JDFLIBJ_2.1.3BLD484 (04.01.2008)
 
 correctly handle nested rw spawns (Part 2)
