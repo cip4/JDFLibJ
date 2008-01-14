@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -104,6 +104,7 @@ import org.cip4.jdflib.util.UrlUtil;
 public class BaseGoldenTicket
 {
     protected JDFNode theNode=null;
+    protected JDFNode thePreviousNode=null;
     protected EnumVersion theVersion=null;
     protected int baseICSLevel;
     protected StatusCounter theStatusCounter;
@@ -136,6 +137,7 @@ public class BaseGoldenTicket
      */
     public void assign(JDFNode node)
     {
+        thePreviousNode=node==null ? null : theNode;
         theNode=node==null ? new JDFDoc("JDF").getJDFRoot() : node;
         setVersion();
         init();

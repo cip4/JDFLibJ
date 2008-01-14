@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -123,6 +123,14 @@ public class JDFColorPoolTest extends TestCase
                caught=true;
            }
            assertTrue("noappend",caught);
+    } 
+    /**
+     * Method testIncludesAttribute.
+     * @throws Exception
+     */
+    public void testGetCreateColorWithName() throws Exception
+    {
+        assertNotNull("grün",cp.getCreateColorWithName("Grün",null));
     } 
     
     public void testRemoveColor() throws Exception

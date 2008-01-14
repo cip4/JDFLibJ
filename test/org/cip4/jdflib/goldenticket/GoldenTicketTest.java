@@ -75,10 +75,7 @@ import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 
 
 public class GoldenTicketTest extends JDFTestCaseBase
@@ -118,8 +115,9 @@ public class GoldenTicketTest extends JDFTestCaseBase
         assertTrue(node.getICSVersions(false).contains("JMF_L2-1.3"));
         assertTrue(node.getICSVersions(false).contains("MIS_L2-1.3"));
         node.setType(JDFNode.EnumType.ProcessGroup);
+        node.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp+"MISGT.jdf", 2, false);
         assertTrue(node.isValid(EnumValidationLevel.Complete));
-    }
+   }
     public void testProductCreatePostCards() throws Exception
     {
 

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -532,8 +532,39 @@ public class XMLDocTest extends JDFTestCaseBase
         f.delete();
         assertNotNull(d.write2URL("File:"+out, null));
         assertTrue(f.canRead());
+        assertNotNull(d.write2URL("File:"+out2, null));
+        assertTrue(f.canRead());
     }
 
+    /**
+     * tests all kinds of special characters in file names - including %, € and umlauts
+     * @throws Exception
+     */
+    public void testUmlaut() throws Exception
+    {
+        XMLDoc d=new XMLDoc("doc",null);
+        String out=sm_dirTestDataTemp+"dir"+File.separator+"dir%20 Grün€";
+        File dir=new File(out);
+        if(dir.isDirectory()) {
+            dir.delete();
+        } else {
+            dir.mkdirs();
+        }
+        String out2=out+File.separator+"7€ .xml";
+
+        File f=new File(out2);
+        f.delete();
+        assertNotNull(d.write2File(out2, 0,true));
+        assertTrue(f.canRead());
+        
+        JDFParser p=new JDFParser();
+        JDFDoc d2=p.parseFile(out2);
+        assertNotNull(d2);
+        assertEquals(d2.getRoot().getLocalName(), "doc");
+            
+    }
+        
+    
     public void testSize()
     {
         Runtime.getRuntime().gc();

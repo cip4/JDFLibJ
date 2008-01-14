@@ -153,6 +153,25 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
         
         write3Files(cpGoldenTicket,"SimplexPoster",1000,90);
     }
+    /////////////////////////////////////////////////////////////////////////////
+    
+    public void testMISCPGrayBoxBrochure()
+    {
+        VJDFAttributeMap vMap=new VJDFAttributeMap();
+        JDFAttributeMap map=new JDFAttributeMap();
+        map.put(EnumPartIDKey.SignatureName,"Sig1");
+        map.put(EnumPartIDKey.SheetName,"Cover");
+        map.put(EnumPartIDKey.Side,"Front");
+        vMap.add(new JDFAttributeMap(map));
+        map.put(EnumPartIDKey.Side,"Back");
+        vMap.add(new JDFAttributeMap(map));
+
+        MISCPGoldenTicket cpGoldenTicket=new MISCPGoldenTicket(1,null,2,2,true,vMap);
+        cpGoldenTicket.nCols=6;
+        cpGoldenTicket.workStyle=EnumWorkStyle.WorkAndTurn;
+        
+        write3Files(cpGoldenTicket,"WorkandTurnCover",1000,90);
+    }
 
     /**
      * create 3 files based on a gt

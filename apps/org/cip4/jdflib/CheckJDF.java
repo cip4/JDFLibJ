@@ -184,6 +184,7 @@ public class CheckJDF
     public  String devCapFile=null;
     public EnumFitsValue testlists=EnumFitsValue.Allowed;
     private boolean bMultiID=false;
+    private boolean inOutputLoop=false;
 
     final private static String version =
         "CheckJDF: JDF validator; -- (c) 2001-2007 CIP4"
@@ -1988,6 +1989,7 @@ public class CheckJDF
             return null;
         }
 
+        inOutputLoop=true;
         for (int arg = 0; arg < allFiles.size(); arg++)
         {
             String xmlFile = allFiles.stringAt(arg);
@@ -2033,6 +2035,16 @@ public class CheckJDF
                 processSingleFile(xmlFile);
             }
         }
+        inOutputLoop=false;
+        finalizeOutput();
+        return pOut;
+
+    }
+
+    private void finalizeOutput()
+    {
+        if(inOutputLoop)
+            return;
         if ( xmlOutputName != null && xmlOutputName.length()>0 )
         {
             if(xslStyleSheet!=null)
@@ -2045,8 +2057,6 @@ public class CheckJDF
             }
             pOut.write2File(xmlOutputName, 2, false);
         }
-        return pOut;
-
     }
 
     /**
@@ -2531,7 +2541,7 @@ public class CheckJDF
                 sysOut.println("DeviceCapabilities Test time = " + lDevCapsTime + " ms");
             }
         }
-
+        finalizeOutput();
         return pOut;
     }
 
@@ -2623,27 +2633,34 @@ public class CheckJDF
 
     private void setAllFiles(MyArgs args)
     {
+        for (int arg = 0; arg < args.nargs(); arg++)
+        {
+            String xmlFile = args.argumentString(arg);
+            addFile(xmlFile);
+        }
+    }
+
+    public void addFile(String xmlFile)
+    {
         if(allFiles==null)
         {
             allFiles=new VString();
-            for (int arg = 0; arg < args.nargs(); arg++)
-            {
-                String xmlFile = args.argumentString(arg);
-                File argFile=new File(xmlFile);
-                if(argFile.canRead())
-                {
-                    allFiles.appendUnique(xmlFile);
-                }
-                else
-                {
-                    sysOut.println("File not found: "+argFile.getAbsolutePath());
-                    KElement xmlRoot =pOut.getRoot();
-                    KElement testFileRoot = xmlRoot.appendElement("TestFile");
-                    testFileRoot.setAttribute("FileName", xmlFile);
-                    testFileRoot.setAttribute("Message", "Could not find file: "+xmlFile);                     }
-            }
+        }
+        File argFile=new File(xmlFile);
+        if(argFile.canRead())
+        {
+            allFiles.appendUnique(xmlFile);
+        }
+        else
+        {
+            sysOut.println("File not found: "+argFile.getAbsolutePath());
+            KElement xmlRoot =pOut.getRoot();
+            KElement testFileRoot = xmlRoot.appendElement("TestFile");
+            testFileRoot.setAttribute("FileName", xmlFile);
+            testFileRoot.setAttribute("Message", "Could not find file: "+xmlFile);
         }
     }
+
 
     //////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////

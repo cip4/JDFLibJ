@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -178,10 +178,12 @@ import org.cip4.jdflib.resource.process.JDFColorantControlTest;
 import org.cip4.jdflib.resource.process.JDFComChannelTest;
 import org.cip4.jdflib.resource.process.JDFComponentTest;
 import org.cip4.jdflib.resource.process.JDFContactTest;
+import org.cip4.jdflib.resource.process.JDFContentDataTest;
 import org.cip4.jdflib.resource.process.JDFCutBlockTest;
 import org.cip4.jdflib.resource.process.JDFDieLayoutTest;
 import org.cip4.jdflib.resource.process.JDFMediaTest;
 import org.cip4.jdflib.resource.process.JDFPRItemTest;
+import org.cip4.jdflib.resource.process.JDFPageDataTest;
 import org.cip4.jdflib.resource.process.JDFPersonTest;
 import org.cip4.jdflib.resource.process.JDFRunListTest;
 import org.cip4.jdflib.resource.process.JDFTileTest;
@@ -347,10 +349,12 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JDFColorConversionParamsTest.class);
         suite.addTestSuite(JDFComChannelTest.class);
         suite.addTestSuite(JDFComponentTest.class);
+        suite.addTestSuite(JDFContentDataTest.class);
         suite.addTestSuite(JDFCutBlockTest.class);
         suite.addTestSuite(JDFContactTest.class);
         suite.addTestSuite(JDFDieLayoutTest.class);
         suite.addTestSuite(JDFMediaTest.class);
+        suite.addTestSuite(JDFPageDataTest.class);
         suite.addTestSuite(JDFPersonTest.class);
         suite.addTestSuite(JDFPRItemTest.class);
         suite.addTestSuite(JDFRunListTest.class);

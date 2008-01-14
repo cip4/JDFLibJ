@@ -97,6 +97,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
@@ -152,9 +153,9 @@ public class MISCPGoldenTicket extends MISGoldenTicket
      */
     public void init()
     {
-
         while(cols.size()>nCols && nCols>0)
             cols.remove(nCols);
+     
         if(icsLevel<0)
             return;
         String icsTag="MISCPS_L"+icsLevel+"-"+theVersion.getName();
@@ -226,6 +227,9 @@ public class MISCPGoldenTicket extends MISGoldenTicket
      */
     protected JDFMedia initPaperMedia()
     {
+        if(thePreviousNode!=null)
+            theNode.linkResource(thePreviousNode.getResource(ElementName.MEDIA, EnumUsage.Input, 0),EnumUsage.Input,null);
+
         JDFMedia m=(JDFMedia) theNode.getCreateResource(ElementName.MEDIA,EnumUsage.Input, 0);
         m.setDescriptiveName("the paper to print on");
         m.setResStatus(EnumResStatus.Unavailable, false);
@@ -247,6 +251,9 @@ public class MISCPGoldenTicket extends MISGoldenTicket
      */
     protected void initPlate()
     {
+        if(thePreviousNode!=null)
+            theNode.linkResource(thePreviousNode.getResource(ElementName.EXPOSEDMEDIA, EnumUsage.Input, 0),EnumUsage.Input,null);
+
         JDFExposedMedia xm=(JDFExposedMedia) theNode.getCreateResource(ElementName.EXPOSEDMEDIA,EnumUsage.Input, 0);
         JDFResourceLink rl=theNode.getLink(xm, null);
         rl.setProcessUsage(EnumProcessUsage.Plate);
@@ -282,6 +289,9 @@ public class MISCPGoldenTicket extends MISGoldenTicket
      */
     protected JDFComponent initOutputComponent()
     {
+        if(thePreviousNode!=null)
+            theNode.linkResource(thePreviousNode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0),EnumUsage.Input,null);
+
         JDFComponent outComp=(JDFComponent) theNode.getCreateResource(ElementName.COMPONENT, EnumUsage.Output, 0);
         outComp.setComponentType(EnumComponentType.FinalProduct,EnumComponentType.Sheet);
         JDFResourceLink rl=theNode.getLink(outComp, EnumUsage.Output);
@@ -317,6 +327,9 @@ public class MISCPGoldenTicket extends MISGoldenTicket
     {
         if(theNode.getCombinedProcessIndex(EnumType.InkZoneCalculation, 0)<0)
             return;
+        if(thePreviousNode!=null)
+            theNode.linkResource(thePreviousNode.getResource(ElementName.PREVIEW, EnumUsage.Input, 0),EnumUsage.Input,null);
+
         JDFPreview pv=(JDFPreview) theNode.getCreateResource(ElementName.PREVIEW,EnumUsage.Input, 0);
         pv.setResStatus(EnumResStatus.Incomplete, false);
         pv.setPreviewUsage(EnumPreviewUsage.Separation);
@@ -350,16 +363,43 @@ public class MISCPGoldenTicket extends MISGoldenTicket
      */
     protected void initConventionalPrintingParams()
     {
+        if(thePreviousNode!=null)
+            theNode.linkResource(thePreviousNode.getResource(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input, 0),EnumUsage.Input,null);
+
         JDFConventionalPrintingParams cpp=(JDFConventionalPrintingParams) theNode.getCreateResource(ElementName.CONVENTIONALPRINTINGPARAMS,EnumUsage.Input, 0);
         cpp.setPrintingType(EnumPrintingType.SheetFed);
         cpp.setWorkStyle(workStyle);
         cpp.setResStatus(EnumResStatus.Available, false);
     }
+    
+    protected JDFDevice initDevice()
+    {
+        if(misICSLevel<2)
+            return null;
+        super.initDevice();
+        
+        VJDFAttributeMap reducedMap = getReducedMap(new VString("Side Separation"," "));
+
+        JDFDevice dev = (JDFDevice) theNode.getCreateResource(ElementName.DEVICE, EnumUsage.Input, 0);
+        for(int i=0;i<reducedMap.size();i++)
+        {
+            final JDFAttributeMap part = reducedMap.elementAt(i);
+            JDFDevice devPart=(JDFDevice) dev.getCreatePartition(part, partIDKeys);
+
+            devPart.setResStatus(EnumResStatus.Available, false);
+            devPart.setDeviceID("deviceID_"+i);
+        }
+        return dev;
+    }
+
     /**
      * @param icsLevel
      */
     protected void initColorantControl()
     {
+        if(thePreviousNode!=null)
+            theNode.linkResource(thePreviousNode.getResource(ElementName.COLORANTCONTROL, EnumUsage.Input, 0),EnumUsage.Input,null);
+
         JDFColorantControl cc=(JDFColorantControl) theNode.getCreateResource(ElementName.COLORANTCONTROL,EnumUsage.Input, 0);
         JDFColorPool cp=cc.getCreateColorPool();
         cc.setResStatus(EnumResStatus.Available, false);
@@ -373,7 +413,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         for(int i=0;i<getNCols();i++)
         {
             String name=cols.stringAt(i);
-            JDFColor c=cp.appendColorWithName(name, null);
+            JDFColor c=cp.getCreateColorWithName(name, null);
             c.setActualColorName(colsActual.stringAt(i));
             if(i==0)
                 c.setCMYK(new JDFCMYKColor(1,0,0,0));
@@ -387,6 +427,10 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 
     } 
 
+    /**
+     * prepare an mis fuzzy node and make it runnable by the device
+     *
+     */
     public void makeReady()
     {
         JDFExposedMedia xm=(JDFExposedMedia) theNode.getResource(ElementName.EXPOSEDMEDIA,EnumUsage.Input, 0);
@@ -414,7 +458,9 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         {
             VJDFAttributeMap reducedMap=new VJDFAttributeMap(vParts);
             VString reduceKeys=new VString(partIDKeys);
-            reduceKeys.remove(AttributeName.SIDE);
+            // simplex and perfecting are one run only
+            if(EnumWorkStyle.Simplex.equals(workStyle)||EnumWorkStyle.Perfecting.equals(workStyle))
+                reduceKeys.remove(AttributeName.SIDE);
             reducedMap.reduceMap(reduceKeys.getSet());
             theNode.setPartStatus(reducedMap, EnumNodeStatus.Waiting);
             for(int i=0;i<reducedMap.size();i++)

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -82,29 +82,36 @@ import org.cip4.jdflib.node.JDFNode;
 
 public class JDFComponentTest extends JDFTestCaseBase
 {
-    JDFComponent c;
+    private JDFComponent c;
+    private JDFNode root;
+    private JDFDoc doc;
+    
     /**
      * tests the separationlist class
      *
      */
+/////////////////////////////////////////////////////////////////////////////
     public final void testSetDimensions()
     {
         c.setDimensions(new JDFXYPair(1,2));
         assertEquals(new JDFShape(1,2,0), c.getDimensions());
-     }
+    }
+/////////////////////////////////////////////////////////////////////////////
     protected void setUp() throws Exception
     {
         super.setUp();
-        JDFDoc doc = new JDFDoc("JDF");
-        JDFNode root = doc.getJDFRoot();
+        doc = new JDFDoc("JDF");
+        root = doc.getJDFRoot();
         c= (JDFComponent) root.addResource(ElementName.COMPONENT,EnumUsage.Input);
     }
-    
+/////////////////////////////////////////////////////////////////////////////
+
     public void testSetComponentTypeAuto()
     {
         c.setComponentType(null);
         assertFalse(c.hasAttribute(AttributeName.COMPONENTTYPE));
     }
+/////////////////////////////////////////////////////////////////////////////
     public void testSetComponentType()
     {
         c.setComponentType(EnumComponentType.PartialProduct,EnumComponentType.Sheet);
@@ -112,9 +119,20 @@ public class JDFComponentTest extends JDFTestCaseBase
         assertEquals(c.getComponentType().size(), 2);
         assertTrue(c.getComponentType().contains(EnumComponentType.PartialProduct));
     }
-    
+/////////////////////////////////////////////////////////////////////////////
     public String toString()
     {
         return c.toString();
     }
+/////////////////////////////////////////////////////////////////////////////
+    public void testComponentManifest()
+    {
+        root.getLink(c, null).setUsage(EnumUsage.Output);
+        //TODO complete
+        
+        doc.write2File(sm_dirTestDataTemp+"ComponentManifest.jdf", 2, false);
+        
+    }
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
 }

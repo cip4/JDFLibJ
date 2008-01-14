@@ -68,42 +68,47 @@
  *  
  * 
  */
-package org.cip4.jdflib.goldenticket;
 
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFAudit;
-import org.cip4.jdflib.core.JDFElement.EnumVersion;
+package org.cip4.jdflib.resource.process;
 
-/**
- * @author prosirai
- * class that generates golden tickets based on ICS levels etc
- */
-public class JMFGoldenTicket extends BaseGoldenTicket
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFPageList;
+
+public class JDFPageDataTest extends JDFTestCaseBase
 {
-    protected int jmfICSLevel;
-    /**
-     * create a BaseGoldenTicket
-     * @param icsLevel the level to init to (1,2 or 3)
-     * @param jdfVersion the version to generate a golden ticket for
+
+    JDFContentList cl;
+    JDFPageList pl;
+ 
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
      */
-    public JMFGoldenTicket(int icsLevel, EnumVersion jdfVersion)
+    protected void setUp() throws Exception
     {
-        super(2,jdfVersion);
-        jmfICSLevel=icsLevel;
+        // TODO Auto-generated method stub
+        super.setUp();
+        JDFDoc doc=new JDFDoc("JDF");
+        JDFNode n=doc.getJDFRoot();
+        n.setType(EnumType.Imposition);
+        cl=(JDFContentList) n.addResource(ElementName.CONTENTLIST, null);
+        pl=(JDFPageList) n.addResource(ElementName.PAGELIST, null);
     }
-    /**
-     * initializes this node to a given ICS version
-     * @param icsLevel the level to init to (1,2 or 3)
-     */
-    public void init()
+
+    /////////////////////////////////////////////////////////////////////////
+    
+    public void testRefContentData()
     {
-        if(jmfICSLevel>0)
-        {
-        String icsTag="JMF_L"+jmfICSLevel+"-"+theVersion.getName();
-        theNode.appendAttribute(AttributeName.ICSVERSIONS, icsTag, null, " ", true);
-        if(!theNode.hasAttribute(AttributeName.DESCRIPTIVENAME))
-            theNode.setDescriptiveName("JMF Golden Ticket Example Job - version: "+JDFAudit.software());
-        }
-        super.init();
+        for(int i=0;i<10;i++)
+            assertEquals(cl.appendContentData().getIndex(),i);
+        JDFContentData cd=cl.appendContentData();
+        JDFPageData pd=pl.appendPageData();
+        pd.refContentData(cd);
+        assertEquals(pd.getPageElement(0).getContentListIndex(), 10);
+        
     }
+
 }

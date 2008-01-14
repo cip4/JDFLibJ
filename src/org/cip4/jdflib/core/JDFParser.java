@@ -170,7 +170,8 @@ public class JDFParser extends DOMParser
         if (strFile == null)
             return null;
 
-        final File file = UrlUtil.urlToFile(strFile);
+        File file = UrlUtil.urlToFile(strFile);
+         
         if (file.canRead())
         {
             try

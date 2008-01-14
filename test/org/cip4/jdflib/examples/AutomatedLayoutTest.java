@@ -69,6 +69,9 @@
  */
 package org.cip4.jdflib.examples;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -79,6 +82,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFMatrix;
@@ -91,10 +95,13 @@ import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
+import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFLayout;
+import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.util.StringUtil;
 
 
 public class AutomatedLayoutTest extends JDFTestCaseBase
@@ -558,13 +565,128 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
      * 
      * @throws Exception
      */
+    public void testTaggedAutomatedBooklet() throws Exception
+    {
+        n.setXMLComment("This is a simple Automated Booklet using negative ords and meta data tags\n"
+                +"New Attribute @OrdsConsumed limits the number of ords consumed by an automated Layout\n"
+                +"Negative Ord values are assumed to flow backwards\n"
+                +"New Attribute @OrdReset defines the scope of ords\n"
+                +"MaxOrd is not specified and must be calculated by counting the number of different ord values\n"
+                +"If we want to keep maxord, it would have to be replaced by an xypair that specifies hom many are consumed from back and from front\n"
+                +"If the number of pages is not mod 4, blank pages are retained at the back of the layout");
+
+        n.setType(EnumType.Combined);
+        n.setTypes(new VString("Interpreting Rendering DigitalPrinting Inserting Stitching",null));
+        setUpAutomatedInputRunList();
+        rl.setDescriptiveName("This is any RunList...");
+        lo=(JDFLayout) n.appendMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null);
+        lo.setResStatus(EnumResStatus.Available, true);
+        
+        JDFMedia media=(JDFMedia) n.addResource("Media", EnumUsage.Input);
+        JDFMedia mediaC=(JDFMedia) media.addPartition(EnumPartIDKey.SheetName, "TheCover");
+        JDFMedia mediaCMale=(JDFMedia) mediaC.addPartition(EnumPartIDKey.SetTags, "Male");
+        JDFMedia mediaCFemale=(JDFMedia) mediaC.addPartition(EnumPartIDKey.SetTags, "Female");
+
+        JDFComponent insert=(JDFComponent) n.addResource("Component",null, EnumUsage.Input,EnumProcessUsage.Child, null,null, null);    
+        JDFComponent insertExist=(JDFComponent) insert.addPartition(EnumPartIDKey.DocTags, "Exist");
+        JDFComponent insertProspect=(JDFComponent) insert.addPartition(EnumPartIDKey.DocTags, "Prospect");
+
+        JDFLayout cover=(JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "TheCover");
+        cover.setAutomated(false);
+        JDFLayout coverMale=(JDFLayout) cover.addPartition(EnumPartIDKey.SetTags, "Male");
+        coverMale.refMedia(mediaCMale);
+        JDFLayout coverMaleHi=(JDFLayout) coverMale.addPartition(EnumPartIDKey.PageTags, "Hi");
+        JDFLayout coverMaleLo=(JDFLayout) coverMale.addPartition(EnumPartIDKey.PageTags, "Low");
+        
+        JDFLayout coverFemale=(JDFLayout) cover.addPartition(EnumPartIDKey.SetTags, "Female");
+        coverFemale.refMedia(mediaCFemale);
+        JDFLayout coverFemaleHi=(JDFLayout) coverFemale.addPartition(EnumPartIDKey.PageTags, "Hi");
+        JDFLayout coverFemaleLo=(JDFLayout) coverFemale.addPartition(EnumPartIDKey.PageTags, "Low");
+        
+        
+        JDFLayout[] lo4=new JDFLayout[4];
+        lo4[0]=coverMaleHi;
+        lo4[1]=coverFemaleHi;
+        lo4[2]=coverMaleLo;
+        lo4[3]=coverFemaleLo;
+        JDFContentObject co;
+        for(int i=0;i<4;i++)
+        {
+            JDFLayout lolo=lo4[i];
+
+            JDFLayout coverFront=(JDFLayout) lolo.addPartition(EnumPartIDKey.Side, "Front");
+
+            co=coverFront.appendContentObject();
+            co.setCTM(new JDFMatrix(1,0,0,1,0,0));
+            co.setOrd(0);
+            co.setDescriptiveName("Front Cover Page Outside");
+            co=coverFront.appendContentObject();
+            co.setCTM(new JDFMatrix(1,0,0,8.5*72,0,0));
+            co.setOrd(-1);
+            co.setDescriptiveName("Back Cover Page Outside");
+            if(i<2)
+            {
+                JDFLayout coverBack=(JDFLayout) lolo.addPartition(EnumPartIDKey.Side, "Back");
+                co=coverBack.appendContentObject();
+                co.setCTM(new JDFMatrix(1,0,0,1,0,0));
+                co.setOrd(0);
+                co.setDescriptiveName("Front Cover Page Inside");
+                co=coverBack.appendContentObject();
+                co.setCTM(new JDFMatrix(1,0,0,8.5*72,0,0));
+                co.setOrd(-1);
+                co.setDescriptiveName("Back Cover Page Inside");
+            }
+        }       
+        JDFLayout sheet=(JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "TheSheet");
+        sheet.setAutomated(true);
+        sheet.setAttribute("OrdReset","Set Doc");
+        sheet.setAttribute("OrdsConsumed", "0 -1");
+        sheet=(JDFLayout) sheet.addPartition(EnumPartIDKey.SetTags, "Male Female").addPartition(EnumPartIDKey.PageTags, "Hi Lo");
+        JDFLayout sheetFront=(JDFLayout) sheet.addPartition(EnumPartIDKey.Side, EnumSide.Front);
+        co=sheetFront.appendContentObject();
+        co.setCTM(new JDFMatrix(1,0,0,1,0,0));
+        co.setOrd(0);
+        co.setDescriptiveName("Front left Page 0,2,4...");
+
+        co=sheetFront.appendContentObject();
+        co.setCTM(new JDFMatrix(1,0,0,1,8.5*72,0));
+        co.setOrd(-1);
+        co.setDescriptiveName("Back right page after folding -1 -3 -5 ... (Front sheet)");
+
+        JDFLayout sheetBack=(JDFLayout) sheet.addPartition(EnumPartIDKey.Side, EnumSide.Back);
+        co=sheetBack.appendContentObject();
+        co.setCTM(new JDFMatrix(1,0,0,1,8.5*72,0));
+        co.setOrd(1);
+        co.setDescriptiveName("Back left Page 1,3,5");
+
+        co=sheetBack.appendContentObject();
+        co.setCTM(new JDFMatrix(1,0,0,1,0,0));
+        co.setOrd(-2);
+        co.setDescriptiveName("Front Right Page Page -2 -4 -6");
+        String s=doc.write2String(2);
+        s=StringUtil.replaceString(s, "SetTags", "Meta0");
+        s=StringUtil.replaceString(s, "DocTags", "Meta1");
+        s=StringUtil.replaceString(s, "PageTags", "Meta2");
+        
+        File f=new File(sm_dirTestDataTemp+"TaggedAutomatedBooklet.jdf");
+        OutputStream os=new FileOutputStream(f);
+        os.write(s.getBytes());
+
+    }
+    /**
+     * tests jdf 1.4 negative ords
+     * 
+     * @throws Exception
+     */
     public void testAutomatedBookletWithCover() throws Exception
     {
         for(int j=0;j<2;j++)
         {
 
-            for(int i=0;i<2;i++)
+            for(int i=0;i<3;i++)
             {
+                if(i==2&&j==1)
+                    continue; // no cut&stack centerfold
                 setUp();
                 n.setXMLComment("This is a simple Automated Booklet using negative ords and special handling oft the cover\n"
                         +"New Attribute @OrdsConsumed limits the number of ords consumed by an automated Layout\n"
@@ -621,6 +743,34 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
                     }
                     sheet.setAttribute("OrdsConsumed", "1 -1");
                 }
+                else if(i==2)
+                {
+                    cover.setXMLComment("the cover consumes page 0 as a wraparound and is not printed on the inside=back");
+                    
+                    co=coverFront.appendContentObject();
+                    co.setDescriptiveName("wraparound cover Page 0");
+                    co.setCTM(new JDFMatrix(1,0,0,1,0,0));
+                    co.setOrd(0);
+                    sheet.setAttribute("OrdsConsumed", "1 -5");
+                    JDFLayout centerfold=(JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Centerfold");
+                    centerfold.setAutomated(true);
+                    centerfold.setXMLComment("the cetertfold is an asymmetric z-fold that consumes 1 large page on the front and 3 pages on the back");
+                    centerfold.setAttribute("OrdsConsumed", "-4 -1");
+                    co=((JDFLayout)centerfold.addPartition(EnumPartIDKey.Side, "Front")).appendContentObject();
+                    co.setDescriptiveName("centerfold front spread");
+                    co.setCTM(new JDFMatrix(1,0,0,1,0,0));
+                    co.setOrd(0);
+                    centerfold=(JDFLayout)centerfold.addPartition(EnumPartIDKey.Side, "Back");
+                    for(int k=0;k<3;k++)
+                    {
+                        co=centerfold.appendContentObject();
+                        co.setDescriptiveName("centerfold back page "+(k+1));
+                        co.setCTM(new JDFMatrix(1,0,0,1,0,k*1000));
+                        co.setOrd(k+1);
+                        
+                    }
+                    
+                }
 
 
 
@@ -632,7 +782,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
                 );
                 JDFLayout sheetFront=(JDFLayout) sheet.addPartition(EnumPartIDKey.Side, EnumSide.Front);
                 JDFLayout sheetBack=(JDFLayout) sheet.addPartition(EnumPartIDKey.Side, EnumSide.Back);
-                for(int k=0;k<j;k++)
+                for(int k=0;k<=j;k++)
                 {
                     co=sheetFront.appendContentObject();
                     co.setCTM(new JDFMatrix(1,0,0,1,0,k*1000));

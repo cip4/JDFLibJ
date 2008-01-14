@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,18 +74,23 @@ import java.io.File;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
+import org.cip4.jdflib.auto.JDFAutoDigitalPrintingParams.EnumSides;
 import org.cip4.jdflib.auto.JDFAutoResourceAudit.EnumReason;
+import org.cip4.jdflib.auto.JDFAutoStitchingParams.EnumStitchType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.datatypes.JDFIntegerRange;
+import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFJobPhase;
@@ -97,20 +102,26 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFModulePhase;
 import org.cip4.jdflib.resource.JDFModuleStatus;
+import org.cip4.jdflib.resource.JDFPageList;
 import org.cip4.jdflib.resource.JDFPhaseTime;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCap;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCaps;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 import org.cip4.jdflib.resource.devicecapability.JDFNameState;
 import org.cip4.jdflib.resource.process.JDFComponent;
+import org.cip4.jdflib.resource.process.JDFContentData;
+import org.cip4.jdflib.resource.process.JDFContentList;
 import org.cip4.jdflib.resource.process.JDFDigitalPrintingParams;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFMiscConsumable;
+import org.cip4.jdflib.resource.process.JDFPageData;
+import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.JDFUsageCounter;
+import org.cip4.jdflib.resource.process.postpress.JDFStitchingParams;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StatusCounter;
-
 import org.cip4.jdflib.util.StatusUtil;
 import org.cip4.jdflib.util.StatusUtil.AmountBag;
 
@@ -120,6 +131,7 @@ public class DigiPrintTest extends JDFTestCaseBase
     private JDFDoc doc;
     private JDFNode n;
     private JDFComponent comp;
+    private JDFRunList ruli;
     private JDFResourceLink rlComp;
     private JDFDigitalPrintingParams digiParams;
     private JDFMedia med;
@@ -179,7 +191,7 @@ public class DigiPrintTest extends JDFTestCaseBase
         mpJob.setStatus(EnumNodeStatus.InProgress);
         JDFModulePhase mpPrint=pt.appendModulePhase();
         mpPrint.setModuleType("Printing");
-        
+
         mpRIP.setStatus(EnumNodeStatus.InProgress);
         pt.setStart(date);
         mpRIP.setStart(date);
@@ -372,23 +384,23 @@ public class DigiPrintTest extends JDFTestCaseBase
     public void testDirectProof() throws Exception
     {
         n.setXMLComment("Example workflow with initioal warmup phase, one direct proof and 100 copies of 10 sheets each.\n"+
-                "The direct proof is acceptable and included in the good output");
+        "The direct proof is acceptable and included in the good output");
         digiParams.setDirectProofAmount(1);
         digiParams.setXMLComment("1 initial proof is requested");
         rlComp.setAmount(100, null);
         JDFAuditPool ap=n.getAuditPool();
-        
+
         VElement vRL=new VElement();
         vRL.add(rlComp);
         vRL.add(rlMedia);
-        
+
         StatusCounter stCounter=new StatusCounter(n,null,vRL);
         stCounter.setDeviceID("MyDevice");
         final String mediaRef = rlMedia.getrRef();
         stCounter.setTrackWaste(mediaRef,true);
         final String compRef = rlComp.getrRef();
         stCounter.setTrackWaste(compRef,false);       
-        
+
         doc.write2File(sm_dirTestDataTemp+File.separator+"DigiPrintAmount_initial.jdf",2,false);
 
         stCounter.setPhase(EnumNodeStatus.InProgress, "Waste", EnumDeviceStatus.Running, null);
@@ -412,18 +424,18 @@ public class DigiPrintTest extends JDFTestCaseBase
         stCounter.addPhase(compRef,990,0);
         stCounter.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, null);
         ap.getLastPhase(null,null).setXMLComment("Phase where the 100 copies are produced");
-        
+
         stCounter.setPhase(EnumNodeStatus.Completed, "Idle", EnumDeviceStatus.Idle, null);
         stCounter.setResourceAudit(mediaRef, EnumReason.ProcessResult);
         doc.write2File(sm_dirTestDataTemp+File.separator+"DigiPrintProof_final.jdf",2,false);
-        
+
     }
     /**
      * test amount handling
      * @return
      */
     @SuppressWarnings("deprecation")
-	public void testAmount() throws Exception
+    public void testAmount() throws Exception
     {
         rlComp.setAmount(20,null);
         rlComp.setDescriptiveName("The link points to 20 planned and 20 good + 2 Waste brochures");
@@ -518,12 +530,112 @@ public class DigiPrintTest extends JDFTestCaseBase
         doc.write2File(sm_dirTestDataTemp+File.separator+"DigiPrintAmount_final.jdf",2,false);
     }
 
+    public void testVariableManifests() throws Exception
+    {
+        ruli.setXMLComment("the set / doc / ... structure is transferred from the pre-impositioning pdl");
+
+        JDFPageList pl=(JDFPageList) n.addResource(ElementName.PAGELIST, null);
+        pl.setResStatus(EnumResStatus.Available, false);
+        
+        JDFContentList cl=(JDFContentList) pl.appendContentList().makeRootResource(null, null, true);
+        cl.setResStatus(EnumResStatus.Available, false);
+        cl.setXMLComment("Should we allow for content-data cross references to forther contentdata fields?");
+        ruli.refPageList(pl);
+        comp.refPageList(pl);
+        int pageCount=0;
+        digiParams.setSides(EnumSides.TwoSidedFlipY);
+        digiParams.setXMLComment("the sides attribute may be overridden by explicitly or implicitly missing runlist input elements");
+
+        VString vRun=new VString("Letter BrochureMale BrochureFemale",null); 
+
+        JDFStitchingParams sp=(JDFStitchingParams) n.addResource(ElementName.STITCHINGPARAMS, EnumUsage.Input);
+        med.setXMLComment("Media Partitioning is convenience only- the actual media selection is done by the digitalprintingparams MediaRef");
+        for(int i=0;i<vRun.size();i++)
+        {
+            String part=vRun.elementAt(i);
+            final JDFMedia partMedia = (JDFMedia) med.addPartition(EnumPartIDKey.Run, part);
+            partMedia.setProductID(part+"Media");
+        
+            JDFDigitalPrintingParams digiPart=(JDFDigitalPrintingParams) digiParams.addPartition(EnumPartIDKey.Run, part);
+            digiPart.refMedia(partMedia);
+
+            sp.setXMLComment("how are multiple runs stitched together e.g. cover + body?");
+            JDFStitchingParams spPart=(JDFStitchingParams) sp.addPartition(EnumPartIDKey.Run, part);
+            if(i==0)
+            {
+                spPart.setNoOp(true);
+                spPart.setDescriptiveName("The letter is a loose leaf collection");
+            }
+            else
+            {
+                spPart.setNumberOfStitches(3);
+                spPart.setStitchType(EnumStitchType.Saddle);
+            }
+        }
+        
+        // loop over records
+        for(int i=0;i<10;i++)
+        {
+            JDFContentData letter=cl.appendContentData();
+            letter.setContentType("Letter");
+            JDFContentData brochure=cl.appendContentData();
+            brochure.setContentType("Brochure");
+            final KElement lMeta = letter.appendElement("ContentMetadata");
+            //TODO apply new example
+            lMeta.setAttribute("Record", ""+i);
+            final String gender = i%2==0 ? "Male" : "Female";
+            lMeta.setAttribute("Gender", gender);
+            lMeta.setXMLComment("Note that the final format of the metadata element is open");
+            final KElement bMeta = brochure.appendElement("Metadata");
+            bMeta.setAttribute("Record", ""+i);
+            bMeta.setAttribute("Gender", gender);
+
+            JDFRunList runSet=(JDFRunList) ruli.addPartition(EnumPartIDKey.RunSet, "Record"+i);
+            JDFRunList run=runSet.addRun("file://server/tifs/testLetter"+i+".tif", 0, -1);
+            run.setRun("Letter");
+            JDFComponent compSet=(JDFComponent) comp.addPartition(EnumPartIDKey.RunSet,runSet.getRunSet());
+            JDFComponent co=(JDFComponent) compSet.addPartition(EnumPartIDKey.Run,run.getRun());
+            int page = (3*i)%7 +1 ;
+            run.setPageListIndex(new JDFIntegerRangeList(new JDFIntegerRange(pageCount,pageCount+page-1)));
+            co.setPageListIndex(new JDFIntegerRangeList(new JDFIntegerRange(pageCount,pageCount+page-1)));
+            co.setSurfaceCount(2*((page+1)/2));
+            run.setPages(new JDFIntegerRangeList("0~"+(page-1)));
+            run.setXMLComment("Cover Letter - record "+i);
+            run.setEndOfDocument(true);
+            JDFPageData pd=pl.appendPageData();
+            pd.refContentData(letter);
+            pd.setAttribute("PageIndex", pageCount+" ~ "+(pageCount+page-1));
+            pageCount+=page;
+
+            run=runSet.addRun("file://server/tifs/testBrochure"+i+".tif", 0, -1);
+            run.setRun("Brochure"+gender);
+
+            co=(JDFComponent) compSet.addPartition(EnumPartIDKey.Run,run.getRun());
+            page = 2*((7*i)%13) +2;
+            run.setPageListIndex(new JDFIntegerRangeList(new JDFIntegerRange(pageCount,pageCount+page-1)));
+            co.setPageListIndex(new JDFIntegerRangeList(new JDFIntegerRange(pageCount,pageCount+page-1)));
+            co.setSurfaceCount(2*((page+1+1)/2)); // the 2nd +1 is for the blank inside cover
+            run.setPages(new JDFIntegerRangeList("0~"+(page-1)));
+            run.setXMLComment("Brochure - record "+i);
+            run.setEndOfDocument(true);
+            runSet.setEndOfSet(true);
+            run.setAttribute("SkipBlankOrds", "1");
+            run.setNPage(page+1);
+            run.setXMLComment("SkipBlankOrds specifies the relative position of pages to skip\n1 specifies that the first back sheet is skipped\nNPage MUST be incremented by the # of skipped pages.");
+            pd=pl.appendPageData();
+            pd.refContentData(brochure);
+            pd.setAttribute("PageIndex", pageCount+" ~ "+(pageCount+page-1));
+            pageCount+=page;
+        }
+        doc.write2File(sm_dirTestDataTemp+"RunlistManifest.jdf", 2, false);
+
+    }
 
     /**
      * 
      */
     @Override
-	protected void setUp()
+    protected void setUp()
     {
         JDFElement.setLongID(false);
         JDFAudit.setStaticAgentName(null);
@@ -541,7 +653,8 @@ public class DigiPrintTest extends JDFTestCaseBase
         med=(JDFMedia) n.appendMatchingResource(ElementName.MEDIA, EnumProcessUsage.AnyInput, null);
         med.setResStatus(EnumResStatus.Available, false);
         rlMedia=n.getLink(med, null);
-   
+        ruli=(JDFRunList) n.appendMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyInput, null);
+
     }
 
     /////////////////////////////////////////////////////////////////////////

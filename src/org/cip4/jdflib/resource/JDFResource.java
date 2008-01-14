@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -6006,6 +6006,25 @@ public class JDFResource extends JDFElement
     public void setRun(String value)
     {
         setAttribute(AttributeName.RUN, value, null);
+    }
+
+    /**
+     * Gets string attribute RunSet
+     *
+     * @return String - the attribute value
+     */
+    public String getRunSet()
+    {
+        return getAttribute(AttributeName.RUNSET, null, JDFConstants.EMPTYSTRING);
+    }
+    /**
+     * Sets attribute RunSet
+     *
+     * @param value the value to set the attribute to
+     */
+    public void setRunSet(String value)
+    {
+        setAttribute(AttributeName.RUNSET, value, null);
     }
 
     /**
