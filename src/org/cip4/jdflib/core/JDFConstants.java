@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -79,8 +79,16 @@ package org.cip4.jdflib.core;
 
 public abstract class JDFConstants
 {
-    public static final String JDFNAMESPACE         = "http://www.CIP4.org/JDFSchema_1_1";
     /**
+     * cip4 namespace uri for any jdf
+     */
+    public static final String JDFNAMESPACE         = "http://www.CIP4.org/JDFSchema_1_1";
+    
+    /**
+     * lower case flag for misspelt jdf namespace uris
+     */
+    public static final String CIP4ORG = ".cip4.org"; 
+   /**
      * @deprecated use null for wildcard
      */
     public static final String WILDCARD             = "*";
@@ -89,7 +97,8 @@ public abstract class JDFConstants
      * @deprecated use null for no namespace check
      */
     public static final String NONAMESPACE          = EMPTYSTRING;
-    /** @deprecated */  public static final String IMPROBABLE_STRING    = "\"\'";
+    /** @deprecated use null */
+    public static final String IMPROBABLE_STRING    = "\"\'";
     public static final String COMMA                = ",";
     public static final String BLANK                = " ";
     public static final String COLON                = ":";

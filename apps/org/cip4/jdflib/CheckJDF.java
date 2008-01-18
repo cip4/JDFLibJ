@@ -337,20 +337,23 @@ public class CheckJDF
         }
 
         boolean isJDFNS = JDFElement.isInJDFNameSpaceStatic(kElement);
+        boolean bTypo=false;
         if (!isJDFNS)
         {
             String nameSpaceURI=kElement.getNamespaceURI();
             String nsLower=nameSpaceURI.toLowerCase();
-            if(nsLower.startsWith("http://www.cip4.org/jdfschema")&&!nsLower.equals(JDFConstants.JDFNAMESPACE))
+            if(nsLower.contains(JDFConstants.CIP4ORG)&&!nsLower.equals(JDFConstants.JDFNAMESPACE))
             {
                 sysOut.println("Probable namespace Typo: xmlns="+nameSpaceURI+" should be:"+JDFConstants.JDFNAMESPACE);
                 if(testElement!=null)
                 {
+                    bTypo=true;
                     testElement.setAttribute("NSPrefix", pref);
                     testElement.setAttribute("NSURI", nsURI);
                     testElement.setAttribute("IsPrivate", true, null);
                     testElement.setAttribute("Status", "Skipping");
-                    setErrorType(testElement,"PrivateElement","Element in Private NameSpace - probable Typo: "+elmName);
+                    setErrorType(testElement,"PrivateElement","Element in Private NameSpace - probable Namespace Typo in: "+elmName
+                            +" Correct ns URI="+JDFConstants.JDFNAMESPACE);
                 }
             }
             if (bPrintNameSpace)
@@ -385,7 +388,7 @@ public class CheckJDF
             {
                 printResource((JDFResource) kElement, indent, testElement);
             }
-            if(!bPrintNameSpace&&xmlParent!=null && testElement != null && !testElement.hasChildElements()) {
+            if(!bPrintNameSpace&&!bTypo&&xmlParent!=null && testElement != null && !testElement.hasChildElements()) {
                 testElement.deleteNode();
             }
             return;

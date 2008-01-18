@@ -187,7 +187,7 @@ public class MISGoldenTicket extends BaseGoldenTicket
             statusQuParams.setJobDetails(EnumJobDetails.Brief);
             final JDFSubscription subscription = q.appendSubscription();
             subscription.setRepeatTime(600);
-            subscription.setURL("http://MIS.printer.com/JMFSignal");
+            subscription.setURL(misURL==null?"http://MIS.printer.com/JMFSignal":misURL);
         }
         return ni;
     }

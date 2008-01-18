@@ -207,7 +207,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
             mark0.setXMLComment("Register Mark on the top right of the sheet - assumed size is 20*30, assumed sheet size is 500*350");
             mark0.setTrimSize(20,30);
             mark0.setCTM(new JDFMatrix(1,0,0,1,500-20,350-30));
-            mark0.setAttribute("Anchor", "TopRight");
+            mark0.appendDeviceMark().setAttribute("Anchor", "TopRight");
             mark0.appendRegisterMark().setXMLComment("mark metadata goes here");
             appendRefAnchor(mark0, "TopRight", "Parent", null);
         }
@@ -221,8 +221,8 @@ public class JDFLayoutTest extends JDFTestCaseBase
             m0.rotate(90);
             m0.shift(250,25);
             mark0.setCTM(m0);
-            mark0.setAttribute("Anchor", "CenterLeft");
             JDFDeviceMark dm=mark0.appendDeviceMark();
+            dm.setAttribute("Anchor", "CenterLeft");
             dm.setFontSize(10);
             dm.setFont("GhostCrypt");
             JDFJobField jf=mark0.appendJobField();
@@ -243,8 +243,8 @@ public class JDFLayoutTest extends JDFTestCaseBase
             if(i==1)
                 m0.shift(250, 0);
             mark0.setCTM(m0);
-            mark0.setAttribute("Anchor", "BottomCenter");
             JDFDeviceMark dm=mark0.appendDeviceMark();
+            dm.setAttribute("Anchor", "BottomCenter");
             dm.setFontSize(8);
             JDFJobField jf=mark0.appendJobField();
             jf.setXMLComment("Result: Page # "+i+" for Customer, Polanski - Job: J11");

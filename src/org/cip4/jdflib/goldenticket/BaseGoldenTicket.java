@@ -108,6 +108,8 @@ public class BaseGoldenTicket
     protected EnumVersion theVersion=null;
     protected int baseICSLevel;
     protected StatusCounter theStatusCounter;
+    protected static String misURL=null;
+    protected static String deviceURL=null;
     /**
      * percentage allowed maxamount waste to be used for audits
      */
@@ -274,5 +276,25 @@ public class BaseGoldenTicket
     public StatusCounter getStatusCounter()
     {
         return theStatusCounter;
+    }
+
+    public static String getDeviceURL()
+    {
+        return deviceURL;
+    }
+
+    public static void setDeviceURL(String deviceURL)
+    {
+        BaseGoldenTicket.deviceURL = deviceURL;
+    }
+
+    public static String getMisURL()
+    {
+        return misURL;
+    }
+
+    public static void setMisURL(String misURL)
+    {
+        BaseGoldenTicket.misURL = misURL;
     }
 }

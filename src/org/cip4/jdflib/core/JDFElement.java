@@ -1141,6 +1141,12 @@ public class JDFElement extends KElement
      */
     public boolean fixVersion(EnumVersion version)
     {
+        // fix any spurious ns typos
+        if(!JDFConstants.JDFNAMESPACE.equals(getNamespaceURI()))
+        {
+            this.namespaceURI=JDFConstants.JDFNAMESPACE;
+            setDirty(true);
+        }
         boolean bRet=true;
         VElement v=getChildElementVector_KElement(null,null,null,true,-1); // do not follow refelements
         final int size = v.size();
@@ -1712,16 +1718,16 @@ public class JDFElement extends KElement
         return setID;
     }
 
-   /**
-	 * Get the target element of a link (string id)
-	 * 
-	 * @return JDFElement - the element that this reference refers to
-	 * @deprecated use the respective subclasses getTarget functions
-	 */
-	@Deprecated
-	public JDFResource getTarget() {
-		return (JDFResource) getTarget_JDFElement(getAttribute(AttributeName.RREF), AttributeName.ID);
-	}
+    /**
+     * Get the target element of a link (string id)
+     * 
+     * @return JDFElement - the element that this reference refers to
+     * @deprecated use the respective subclasses getTarget functions
+     */
+    @Deprecated
+    public JDFResource getTarget() {
+        return (JDFResource) getTarget_JDFElement(getAttribute(AttributeName.RREF), AttributeName.ID);
+    }
 
     /**
      * Get the target element of a link<br>
@@ -2634,7 +2640,7 @@ public class JDFElement extends KElement
         final AttributeInfo ai=getTheAttributeInfo();
         VString v=getInvalidAttributes_JDFElement(level, bIgnorePrivate, nMax,ai);
         String s=getNamespaceURI();
-        if(s!=null && s.toLowerCase().indexOf("www.cip4.org")>=0&&!s.equals(JDFConstants.JDFNAMESPACE))
+        if(s!=null && s.toLowerCase().indexOf(JDFConstants.CIP4ORG)>=0&&!s.equals(JDFConstants.JDFNAMESPACE))
         {
             if(v==null)
                 v=new VString(AttributeName.XMLNS,null);
@@ -2678,7 +2684,7 @@ public class JDFElement extends KElement
                 }
             }
         }
-        
+
         if (EnumValidationLevel.isRequired(level)&&!isIncomplete())
         {
             vAttsReturn.addAll(getMissingAttributes(nMax));
@@ -3752,16 +3758,16 @@ public class JDFElement extends KElement
         setAttribute(AttributeName.VERSION, enumVer.getName(), null);
     }
 
-   /**
-	 * get EnumVersion attribute Version
-	 * 
-	 * @return EnumVersion - attribute value
-	 * @deprecated 060505 use getVersion(boolean);
-	 */
-	@Deprecated
-	public EnumVersion getVersion() {
-		return getVersion(true);
-	}
+    /**
+     * get EnumVersion attribute Version
+     * 
+     * @return EnumVersion - attribute value
+     * @deprecated 060505 use getVersion(boolean);
+     */
+    @Deprecated
+    public EnumVersion getVersion() {
+        return getVersion(true);
+    }
 
     /**
      * get the version of this element

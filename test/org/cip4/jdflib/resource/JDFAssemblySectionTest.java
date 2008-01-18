@@ -106,6 +106,7 @@ public class JDFAssemblySectionTest extends JDFTestCaseBase
         JDFAssemblySection asss=ass.appendAssemblySection();
         asss.setAssemblyIDs(new VString("a b c"," "));
         assertTrue(as.isValid(EnumValidationLevel.Incomplete));
+        doc.write2File(sm_dirTestDataTemp+"AssemblySection.jdf", 2, false);
     }
     
 }

@@ -2726,8 +2726,9 @@ public class JDFMessage extends JDFAutoMessage
     ////////////////////////////////////////////////////////////////////////////////
 
     /**
-     * sets the senderID of this message
-     * @return String the senderID of this message or the SenderID of the parent JMF.
+     * gets the senderID of this message
+     * @return String the senderID of this message or the SenderID of the parent JMF; 
+     * null if neither are specified
      */
     public String getSenderID()
     {

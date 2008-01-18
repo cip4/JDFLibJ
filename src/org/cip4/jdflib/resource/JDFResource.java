@@ -916,7 +916,7 @@ public class JDFResource extends JDFElement
     @Deprecated
 	public boolean isAvailable(boolean bRecurseRefs)
     {
-        return getResStatus(bRecurseRefs).equals(EnumResStatus.Available);
+        return EnumResStatus.Available.equals(getResStatus(bRecurseRefs));
     }
 
     /**
@@ -955,7 +955,7 @@ public class JDFResource extends JDFElement
      */
     public boolean isParameter()
     {
-        return EnumResourceClass.Parameter == getResourceClass();
+        return EnumResourceClass.Parameter.equals(getResourceClass());
     }
 
     /**
@@ -1001,9 +1001,9 @@ public class JDFResource extends JDFElement
     {
         EnumResourceClass c= getResourceClass();
 
-        return ( c!=null) && (c==EnumResourceClass.Consumable)||
-        (c==EnumResourceClass.Quantity)   ||
-        (c==EnumResourceClass.Handling);
+        return EnumResourceClass.Consumable.equals(c)||
+        EnumResourceClass.Quantity.equals(c)   ||
+        EnumResourceClass.Handling.equals(c);
     }
 
 
@@ -4014,12 +4014,12 @@ public class JDFResource extends JDFElement
             if (n != null)
             {
                 final JDFNode.EnumType typ = EnumType.getEnum(n.getType());
-                if (!typ.equals(JDFNode.EnumType.ProcessGroup) && !typ.equals(JDFNode.EnumType.Product))
+                if (!JDFNode.EnumType.ProcessGroup.equals(typ) && !JDFNode.EnumType.Product.equals(typ))
                 {
                     double ca = rl.getActualAmount(partMap);
                     double a = rl.getAmount(partMap);
 
-                    if (rl.getUsage() == JDFResourceLink.EnumUsage.Input)
+                    if (JDFResourceLink.EnumUsage.Input.equals(rl.getUsage()))
                     {
                         if (ca > 0)
                         {
@@ -4065,8 +4065,7 @@ public class JDFResource extends JDFElement
 
                 if (amountProduced > 0)
                 {
-                    final Double d = new Double(amountProduced);
-                    setAttribute(AttributeName.AMOUNTPRODUCED, d.toString());
+                    setAmountProduced(amountProduced);
                 }
 
                 if (amountRequired > 0)
@@ -5043,18 +5042,16 @@ public class JDFResource extends JDFElement
      */
     public JDFIntegerRangeList getBundleItemIndex()
     {
-        String strAttrName = JDFConstants.EMPTYSTRING;
-        JDFIntegerRangeList nPlaceHolder = null;
-        strAttrName = getAttribute(AttributeName.BUNDLEITEMINDEX, null, JDFConstants.EMPTYSTRING);
+        String strAttrName = getAttribute(AttributeName.BUNDLEITEMINDEX, null, null);
         try
         {
-            nPlaceHolder = new JDFIntegerRangeList(strAttrName);
+           return new JDFIntegerRangeList(strAttrName);
         }
         catch (DataFormatException e)
         {
             //do nothing
         }
-        return nPlaceHolder;
+        return null;
     }
 
     /**

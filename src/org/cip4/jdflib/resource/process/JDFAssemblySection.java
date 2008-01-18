@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -175,6 +175,10 @@ public class JDFAssemblySection extends JDFAutoAssemblySection
 
 
 
+    /**
+     * appends a new assemblysection to this
+     * @return
+     */
     public JDFAssemblySection appendAssemblySection()
     {
         return (JDFAssemblySection) appendElement(ElementName.ASSEMBLYSECTION, null);
