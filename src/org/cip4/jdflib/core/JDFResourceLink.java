@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of Processes in
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of Processes in
  * Prepress, Press and Postpress (CIP4). All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without modification, are permitted
@@ -109,9 +109,8 @@ public class JDFResourceLink extends JDFElement
      * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib.core.KElement.EnumValidationLevel, boolean, int)
      */
     @Override
-	public VString getInvalidAttributes(final EnumValidationLevel level, final boolean bIgnorePrivate, final int nMax)
+    public VString getInvalidAttributes(final EnumValidationLevel level, final boolean bIgnorePrivate, final int nMax)
     {
-        // TODO Auto-generated method stub
         final VString v= super.getInvalidAttributes(level, bIgnorePrivate, nMax);
         if(!v.contains(AttributeName.COMBINEDPROCESSINDEX) && !validCombinedProcessIndex())
             v.add(AttributeName.COMBINEDPROCESSINDEX);
@@ -219,7 +218,7 @@ public class JDFResourceLink extends JDFElement
     }
 
     @Override
-	protected AttributeInfo getTheAttributeInfo() 
+    protected AttributeInfo getTheAttributeInfo() 
     {
         final AttributeInfo ai = super.getTheAttributeInfo().updateReplace(atrInfoTable_Abstract);
         if (isPhysical() || getLocalName().equals(ElementName.PARTAMOUNT))
@@ -250,7 +249,7 @@ public class JDFResourceLink extends JDFElement
     ////////////////////////////////////////////////////////////////
 
     @Override
-	protected ElementInfo getTheElementInfo() 
+    protected ElementInfo getTheElementInfo() 
     {
         final ElementInfo ei = super.getTheElementInfo().updateReplace(elemInfoTable);
         if (this.isPhysical())
@@ -409,7 +408,7 @@ public class JDFResourceLink extends JDFElement
      * @return String
      */
     @Override
-	public String toString()
+    public String toString()
     {
         return "JDFResourceLink[ --> " + super.toString() + " ]";
     }
@@ -425,7 +424,7 @@ public class JDFResourceLink extends JDFElement
      * @return true if successful
      */
     @Override
-	public boolean fixVersion(final EnumVersion version)
+    public boolean fixVersion(final EnumVersion version)
     {
         final boolean bRet = true;
         if (version != null)
@@ -574,7 +573,7 @@ public class JDFResourceLink extends JDFElement
      * @deprecated never used
      */
     @Deprecated
-	public JDFResource getLinkTarget()
+    public JDFResource getLinkTarget()
     {
         return getTarget();
     }
@@ -981,14 +980,14 @@ public class JDFResourceLink extends JDFElement
         final JDFResource linkRoot = getLinkRoot();
         if(linkRoot==null)
             return false;
-        
+
 
         VJDFAttributeMap vPart;
         final EnumPartUsage partUsage = linkRoot.getPartUsage();
         final boolean bImplicit = JDFResource.EnumPartUsage.Implicit.equals(partUsage);
         if (bCheckResource)
         {
-//            vPart = getResourcePartMapVector();
+//          vPart = getResourcePartMapVector();
             if((partMap == null || partMap.isEmpty()))
             {
                 return true;
@@ -1015,7 +1014,7 @@ public class JDFResourceLink extends JDFElement
             {
                 return true;
             }
-            
+
             final int siz = vPart == null  ? 0 : vPart.size();        
             if (bImplicit)
             {
@@ -1027,7 +1026,7 @@ public class JDFResourceLink extends JDFElement
                 {
                     if(vPart==null)
                         return true;
-                    
+
                     if (vPart.elementAt(i).overlapMap(partMap))
                         return true;
                 }
@@ -1038,13 +1037,13 @@ public class JDFResourceLink extends JDFElement
                 {
                     return true;
                 }
-                
+
                 for (int i = 0; i < siz; i++)
                 {
                     final JDFAttributeMap part = vPart.elementAt(i);
                     if(part==null || part.size()==0)
                         return true;
-                    
+
                     // RP 050120 swap of vPart[i] and partmap
                     // RP 070511 swap back of vPart[i] and partmap
                     if (part.subMap(partMap))
@@ -1248,7 +1247,7 @@ public class JDFResourceLink extends JDFElement
      * @see org.cip4.jdflib.core.JDFElement#isValid(org.cip4.jdflib.core.KElement.EnumValidationLevel)
      */
     @Override
-	public boolean isValid(EnumValidationLevel level)
+    public boolean isValid(EnumValidationLevel level)
     {
         if(level==null)
             level=EnumValidationLevel.Complete;
@@ -1344,7 +1343,7 @@ public class JDFResourceLink extends JDFElement
         if (this instanceof JDFPartAmount)
         {
             throw new JDFException(
-                    "JDFResourceLink.getCreateAmountPool: calling method on PartAmount object");
+            "JDFResourceLink.getCreateAmountPool: calling method on PartAmount object");
         }
         return (JDFAmountPool) getCreateElement_KElement(ElementName.AMOUNTPOOL,null, 0);
     }
@@ -1555,7 +1554,7 @@ public class JDFResourceLink extends JDFElement
      * @since 071103 
      */
     @Deprecated
-	public boolean hasAmountPoolAttribute(final String attrib, final String nameSpaceURI, final JDFAttributeMap mPart)
+    public boolean hasAmountPoolAttribute(final String attrib, final String nameSpaceURI, final JDFAttributeMap mPart)
     {
         return getAmountPoolAttribute(attrib,nameSpaceURI,mPart,0)!=null;
     }
@@ -1654,8 +1653,8 @@ public class JDFResourceLink extends JDFElement
         return d;
     }
 
-/**
- * get the first element AmountPool as a double 
+    /**
+     * get the first element AmountPool as a double 
      * @param attName
      * @param mPart
      * @return double - the element
@@ -1707,7 +1706,7 @@ public class JDFResourceLink extends JDFElement
      * @deprecated use the enum method
      */
     @Deprecated
-	public void setProcessUsage(final String s)
+    public void setProcessUsage(final String s)
     {
         setAttribute(AttributeName.PROCESSUSAGE, s, null);
     }
@@ -1834,7 +1833,7 @@ public class JDFResourceLink extends JDFElement
      * @deprecated use setPipePartIDKeys(Vector enum)
      */
     @Deprecated
-	public void setPipePartIDKeys(final VString keys)
+    public void setPipePartIDKeys(final VString keys)
     {
         final Vector vEnum = new Vector();
         for (int i = 0; i < keys.size(); i++)
@@ -1862,7 +1861,7 @@ public class JDFResourceLink extends JDFElement
      * @deprecated
      */
     @Deprecated
-	public VString getPipePartIDKeys()
+    public VString getPipePartIDKeys()
     {
         final VString vPipePartIDKeys  = new VString();
         final Vector v = getPipePartIDKeysEnum();
@@ -1960,9 +1959,9 @@ public class JDFResourceLink extends JDFElement
     {
         VString vs=null;
         final JDFNode parentJDF = getParentJDF();
-        
+
         final VString vTypes=parentJDF==null ? null : parentJDF.getTypes();
-        
+
         final JDFIntegerList il=getCombinedProcessIndex();
         if(il==null&&!hasAttribute(AttributeName.COMBINEDPROCESSTYPE))
         {
@@ -2399,7 +2398,7 @@ public class JDFResourceLink extends JDFElement
      * @return VJDFAttributeMap - vector of attribute maps, one for each part
      */
     @Override
-	public VJDFAttributeMap getPartMapVector()
+    public VJDFAttributeMap getPartMapVector()
     {
         return super.getPartMapVector();
     }
@@ -2410,7 +2409,7 @@ public class JDFResourceLink extends JDFElement
      * @param vParts vector of attribute maps for the parts
      */
     @Override
-	public void setPartMapVector(final VJDFAttributeMap vParts)
+    public void setPartMapVector(final VJDFAttributeMap vParts)
     {
         super.setPartMapVector(vParts);
     }
@@ -2421,7 +2420,7 @@ public class JDFResourceLink extends JDFElement
      * @param mPart attribute map for the part to set
      */
     @Override
-	public void setPartMap(final JDFAttributeMap mPart)
+    public void setPartMap(final JDFAttributeMap mPart)
     {
         super.setPartMap(mPart);
     }
@@ -2432,7 +2431,7 @@ public class JDFResourceLink extends JDFElement
      * @param mPart attribute map for the part to remove
      */
     @Override
-	public void removePartMap(final JDFAttributeMap mPart)
+    public void removePartMap(final JDFAttributeMap mPart)
     {
         super.removePartMap(mPart);
     }
@@ -2444,7 +2443,7 @@ public class JDFResourceLink extends JDFElement
      * @return boolean - returns true if the part exists
      */
     @Override
-	public boolean hasPartMap(final JDFAttributeMap mPart)
+    public boolean hasPartMap(final JDFAttributeMap mPart)
     {
         return super.hasPartMap(mPart);
     }    

@@ -124,7 +124,7 @@ public class StrippingTest extends JDFTestCaseBase
         {
             JDFStripMark sm1_2=spBS1.appendStripMark();
             sm1_2.setXMLComment("The following describes a 4 back marks, one on each pair of Strip Cells (page) (see new Attribute: MarkContext)\n@Anchor defines the cs origin of the mark, @NextAnchor defines the cs origin of the container, in this case the spine of a pair of Page cells.\nThus the center of the bar code is positioned 0 pts right and 5 point up from the bottom spine of the cell page.\n Position is applied prior to rotating the mark.");
-            sm1_2.setAttribute("MarkContext","StripCellPair");
+            sm1_2.setAttribute("MarkContext","CellPair");
             sm1_2.setMarkName("IdentificationField");
             sm1_2.setMarkSide(EnumMarkSide.Back);
             sm1_2.setAttribute("Orientation", "Rotate90");
@@ -136,7 +136,7 @@ public class StrippingTest extends JDFTestCaseBase
         {
             JDFStripMark sm1_3=spBS1.appendStripMark();
             sm1_3.setXMLComment("The following describes a back mark on each of the 8 Strip Cells (page) (see new Attribute: MarkContext)\n@Anchor defines the cs origin of the mark, @NextAnchor defines the cs origin of the container, in this case the bottom center of a Page cell.\nThus the center of the bar code is positioned 0 pts right and 5 point up from the bottom cell page.");
-            sm1_3.setAttribute("MarkContext","StripCell");
+            sm1_3.setAttribute("MarkContext","Cell");
             sm1_3.setMarkName("IdentificationField");
             sm1_3.setMarkSide(EnumMarkSide.Back);
             sm1_3.setAttribute("Orientation", "Rotate0");

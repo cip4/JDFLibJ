@@ -83,6 +83,7 @@ import org.cip4.jdflib.core.JDFCustomerInfoTest;
 import org.cip4.jdflib.core.JDFDocTest;
 import org.cip4.jdflib.core.JDFElementTest;
 import org.cip4.jdflib.core.JDFNodeInfoTest;
+import org.cip4.jdflib.core.JDFPartAmountTest;
 import org.cip4.jdflib.core.JDFRefElementTest;
 import org.cip4.jdflib.core.JDFResourceLinkTest;
 import org.cip4.jdflib.core.JDFSourceResourceTest;
@@ -235,6 +236,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JDFDocTest.class);
         suite.addTestSuite(JDFElementTest.class);
         suite.addTestSuite(JDFNodeInfoTest.class);
+        suite.addTestSuite(JDFPartAmountTest.class);
         suite.addTestSuite(JDFResourceLinkTest.class);
         suite.addTestSuite(JDFRefElementTest.class);
         suite.addTestSuite(JDFSourceResourceTest.class);

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,7 +71,6 @@
 package org.cip4.jdflib.resource.process;
 
 import java.util.Iterator;
-import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
@@ -89,15 +88,24 @@ import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.devicecapability.JDFIntegerEvaluation;
+import org.cip4.jdflib.resource.devicecapability.JDFNameEvaluation;
+import org.cip4.jdflib.resource.devicecapability.JDFand;
+import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.cip4.jdflib.resource.process.JDFRunList.JDFRunData;
 
 public class JDFRunListTest extends JDFTestCaseBase
 {
 
+    /**
+     * 
+     */
+    private static final String EXPR = "Expr";
+    private static final String METADATA_MAP = "MetadataMap";
     private JDFDoc doc;
     private JDFNode root;
     private JDFRunList rl;
-        
+
 
     public final void testCollapseNPage()
     {
@@ -106,7 +114,7 @@ public class JDFRunListTest extends JDFTestCaseBase
         assertEquals(rl.getNPage(), 6);
         assertEquals(rl1.getNPage(), 3);
         assertEquals(rl2.getNPage(), 3);
-        
+
         rl.collapse(false);
         assertEquals(rl.getNPage(), 6);
         assertEquals(rl1.getNPage(), 3);
@@ -122,14 +130,14 @@ public class JDFRunListTest extends JDFTestCaseBase
         assertEquals(rl1.getNPage(), 3);
         assertEquals(rl2.getNPage(), 3);
         assertEquals(rl3.getNPage(), 3);
-                
+
     }
     public final void testAddRun()
     {
         JDFRunList rl2=rl.addRun("f1.pdf", 0, -1);
         assertFalse(rl2.hasAttribute_KElement(AttributeName.NPAGE, null, false));
         assertFalse(rl.hasAttribute_KElement(AttributeName.NPAGE, null, false));
-     }
+    }
 
 
     public final void testGetFileURL()
@@ -158,7 +166,7 @@ public class JDFRunListTest extends JDFTestCaseBase
         kElem.setXPathAttribute("LayoutElement/FileSpec/@MimeType","application/pdf");
         assertEquals(ruli.getFileMimeType(),"application/pdf");
     }
-    
+
     public final void testGetTruePage()
     {
         JDFResourcePool resPool = root.getCreateResourcePool();
@@ -170,7 +178,7 @@ public class JDFRunListTest extends JDFTestCaseBase
         JDFRunList ruli2c=(JDFRunList) ruli2.getElement_KElement(ElementName.RUNLIST,null,0);
         assertEquals(ruli2.getTruePage(), ruli2);
         assertEquals(ruli2c.getTruePage(), ruli2);
-      }
+    }
     /*
      * Test method for 'org.cip4.jdflib.resource.process.JDFMedia.setDimensionCM(JDFXYPair)'
      */
@@ -339,17 +347,15 @@ public class JDFRunListTest extends JDFTestCaseBase
      */
     public void testTagMapTiff() throws Exception
     {
-        KElement tagMap=rl.appendElement("TagMap");
+        KElement tagMap=rl.appendElement(METADATA_MAP);
         tagMap.setAttribute("BoundaryKey", "EndOfDocument");
-        KElement tagSet=tagMap.appendElement("TagSet");
+        KElement tagSet=tagMap.appendElement(EXPR);
         tagSet.setAttribute("Path", "/x3141");
         tagMap.setXMLComment("This tagmap specifies which document structure corresponds to a Document\n"
                 +" thus incrementing DocIndex or forcing an implicit RunList/@EndofDocument=true\n D100 is the tiff tag 0x3141");
 
         rl.setFileURL("bigVariable.tiff");
         rl.setXMLComment("this runlist points to a tiff file with arbitrary structural tagging defined in the tiff tags");
-
-
     }
 
     /**
@@ -362,75 +368,71 @@ public class JDFRunListTest extends JDFTestCaseBase
         JDFMedia med=(JDFMedia) root.addResource(ElementName.MEDIA,null,EnumUsage.Input,null,null,null,null);
         JDFMedia medM=(JDFMedia) med.addPartition(EnumPartIDKey.RunTags, "MaleCover");
         JDFMedia medF=(JDFMedia) med.addPartition(EnumPartIDKey.RunTags, "FemaleCover");
-        JDFMedia medB=(JDFMedia) med.addPartition(EnumPartIDKey.RunTags, "BigBody SmallBody");
+        JDFMedia medB=(JDFMedia) med.addPartition(EnumPartIDKey.RunTags, "MaleBigBody MaleSmallBody FemaleBigBody FemaleSmallBody");
 
         JDFLayout loM=(JDFLayout)lo.addPartition(EnumPartIDKey.RunTags, "MaleCover");
         loM.refElement(medM);
         JDFLayout loF=(JDFLayout)lo.addPartition(EnumPartIDKey.RunTags, "FemaleCover");
         loF.refElement(medF);
-        JDFLayout loBB=(JDFLayout)lo.addPartition(EnumPartIDKey.RunTags, "BigBody");
+        JDFLayout loBB=(JDFLayout)lo.addPartition(EnumPartIDKey.RunTags, "MaleBigBody FemaleBigBody");
         loBB.refElement(medB);
-        JDFLayout loSB=(JDFLayout)lo.addPartition(EnumPartIDKey.RunTags, "SmallBody");
+        JDFLayout loSB=(JDFLayout)lo.addPartition(EnumPartIDKey.RunTags, "MaleSmallBody FemaleSmallBody");
         loSB.refElement(medB);
         lo.setXMLComment("Layout for versioned product");
 
 
 
-        KElement tagMap=rl.appendElement("TagMap");
-        tagMap.setAttribute("PartIDKey", "RunTags");
-        tagMap.setAttribute("PartIDValue", "MaleCover");
-        KElement tagSet=tagMap.appendElement("TagSet");
-        tagSet.setAttribute("Path", "/Dokument/Sektion");
-        tagSet.setAttribute("Value", "Einband");
-        tagSet=tagMap.appendElement("TagSet");
-        tagSet.setAttribute("Path", "/Dokument/Rezipient/@Sex");
-        tagSet.setAttribute("Value", "Male");
-        tagMap.setXMLComment("The TagMap element maps arbitrary tags in the document to a structural RunTag\nNote that any partition key may be mapped.\nNote also that although an XPath syntax is used, this may be mapped to any hierarchical structure including but not limited to XML.\n"+
-                "The data type of @Value should be regExp to allow expression matching\n"+
-                "Multiple TagSet Elements are combined as a logical And\n"+
-        "This TagSet maps all Male (Dokument/Rezipient/@Sex=\"Male\") Covers (/Dokument/Sektion=Einband to MaleCover");
+        KElement metaMap=rl.appendElement(METADATA_MAP);
+        metaMap.setXMLComment("The MetadataMap element maps arbitrary tags in the document to a structural RunTag partition key\n"+
+                "Note that any partition key may be mapped.\n"+
+        "Note also that although an XPath syntax is used, this may be mapped to any hierarchical structure including but not limited to XML.\n");
 
-        tagMap=rl.appendElement("TagMap");
-        tagMap.setAttribute("PartIDKey", "RunTags");
-        tagMap.setAttribute("PartIDValue", "FemaleCover");
-        tagSet=tagMap.appendElement("TagSet");
-        tagSet.setAttribute("Path", "/Dokument/Sektion");
-        tagSet.setAttribute("Value", "Einband");
-        tagSet=tagMap.appendElement("TagSet");
-        tagSet.setAttribute("Path", "/Dokument/Rezipient/@Sex");
-        tagSet.setAttribute("Value", "Female");
-        tagMap.setXMLComment( "This TagSet maps all Male (Dokument/Rezipient/@Sex=\"Feale\") Covers (/Dokument/Sektion=Einband to FemaleCover");
+        metaMap.setAttribute("Name", "RunTags");
+        metaMap.setAttribute(AttributeName.DATATYPE, "PartIDKey");
+        metaMap.setAttribute(AttributeName.VALUEFORMAT, "%s%s");
+        metaMap.setAttribute(AttributeName.VALUETEMPLATE, "sex,section");
 
-        tagMap=rl.appendElement("TagMap");
-        tagMap.setAttribute("PartIDKey", "RunTags");
-        tagMap.setAttribute("PartIDValue", "BigBody");
-        tagSet=tagMap.appendElement("TagSet");
-        tagSet.setAttribute("Path", "/Dokument/Sektion");
-        tagSet.setAttribute("Value", "HauptTeil");
-        tagSet=tagMap.appendElement("TagSet");
-        tagSet.setAttribute("Path", "/Dokument/Sektion/Pages");
-        tagSet.setAttribute("Value", "Many");
-        tagMap.setXMLComment( "This TagSet maps all (/Dokument/Sektion=HauptTeil with many pages (/Dokument/Sektion/Pages=Many to BigBody\n"
-                +"Note that only string matching is allowed - we do not allow for arithmetic.\n"
-                +"If arithmetic is required, we could think about using Evaluation elements from Preflight/DevCaps");
+        KElement expr=metaMap.appendElement(EXPR);
+        expr.setXMLComment("This expression maps the value of /Dokument/Rezipient/@Sex to a variable \"sex\"\n"+
+                "The Mapping is unconditional, therefore no Term is required");
+        expr.setAttribute("Name", "sex");
+        expr.setAttribute("Path", "/Dokument/Rezipient/@Sex");
 
-        tagMap=rl.appendElement("TagMap");
-        tagMap.setAttribute("PartIDKey", "RunTags");
-        tagMap.setAttribute("PartIDValue", "SmallBody");
-        tagSet=tagMap.appendElement("TagSet");
-        tagSet.setAttribute("Path", "/Dokument/Sektion");
-        tagSet.setAttribute("Value", "HauptTeil");
-        tagSet=tagMap.appendElement("TagSet");
-        tagSet.setAttribute("Path", "/Dokument/Sektion/Pages");
-        tagSet.setAttribute("Value", "Few");
-        tagMap.setXMLComment( "This TagSet maps all (/Dokument/Sektion=HauptTeil with many pages (/Dokument/Sektion/Pages=Few to SmallBody\n");
+        expr=metaMap.appendElement(EXPR);
+        expr.setXMLComment("Maps all elements with /Dokument/Sektion=Einband to Cover");
+        expr.setAttribute("Name", "section");
+        expr.setAttribute("Value", "Cover");
+        JDFNameEvaluation nev=(JDFNameEvaluation) expr.appendElement(ElementName.NAMEEVALUATION);
+        nev.setAttribute("Path", "/Dokument/Sektion");
+        nev.setRegExp("Einband");
 
-        tagMap=rl.appendElement("TagMap");
-        tagMap.setAttribute("BoundaryKey", "EndOfDocument");
-        tagSet=tagMap.appendElement("TagSet");
-        tagSet.setAttribute("Path", "/Dokument");
-        tagMap.setXMLComment("This tagmap specifies which document structure corresponds to a Document\n"
-                +" thus incrementing DocIndex or forcing an implicit RunList/@EndofDocument=true");
+        expr=metaMap.appendElement(EXPR);
+        expr.setXMLComment("Maps all elements with /Dokument/Sektion=HauptTeil and >50 pages to BigBody");
+        expr.setAttribute("Name", "section");
+        expr.setAttribute("Value", "BigBody");
+
+        JDFand and = (JDFand) expr.appendElement("and");
+        nev=(JDFNameEvaluation) and.appendElement(ElementName.NAMEEVALUATION);
+        nev.setAttribute("Path", "/Dokument/Sektion");
+        nev.setRegExp("HauptTeil");   
+        JDFIntegerEvaluation iev=(JDFIntegerEvaluation) and.appendTerm(EnumTerm.IntegerEvaluation);
+        iev.setAttribute("Path","count(PAGE)");
+        iev.setValueList(new JDFIntegerRangeList("51~INF"));
+
+
+        expr=metaMap.appendElement(EXPR);
+        expr.setXMLComment("Maps all elements with /Dokument/Sektion=HauptTeil and <=50 pages to SmallBody");
+        expr.setAttribute("Name", "section");
+        expr.setAttribute("Value", "SmallBody");
+
+        and = (JDFand) expr.appendElement("and");
+        nev=(JDFNameEvaluation) and.appendElement(ElementName.NAMEEVALUATION);
+        nev.setAttribute("Path", "/Dokument/Sektion");
+        nev.setRegExp("HauptTeil");   
+        iev=(JDFIntegerEvaluation) and.appendTerm(EnumTerm.IntegerEvaluation);
+        iev.setAttribute("Path","count(PAGE)");
+        iev.setValueList(new JDFIntegerRangeList("0~INF"));
+
 
         rl.setFileURL("bigVariable.ppml");
         rl.setXMLComment("this runlist points to a ppml with arbitrary structural tagging");
@@ -439,9 +441,9 @@ public class JDFRunListTest extends JDFTestCaseBase
         rll.appendPart().setDocIndex(new JDFIntegerRangeList("10 ~ 20"));
         rll.setXMLComment("this link selects the 11-20 document");
 
-        doc.write2File(sm_dirTestDataTemp+"tagmap.jdf", 2, false);
+        doc.write2File(sm_dirTestDataTemp+"metadataMap.jdf", 2, false);
     }
-    
+
     public void testSeparatedTiff()
     {
         VString v1=new VString("Cyan Magenta Yello Black"," ");
@@ -450,7 +452,7 @@ public class JDFRunListTest extends JDFTestCaseBase
             v2.add("File://device/dir/"+v1.stringAt(i)+".tif");
         JDFRunList rl2=rl.addSepRun(v2,v1,0,0,false);
         assertTrue(rl2.isValid(EnumValidationLevel.Complete));       
-        
+
     }
 
     /* (non-Javadoc)

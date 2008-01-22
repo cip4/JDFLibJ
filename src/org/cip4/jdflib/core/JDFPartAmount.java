@@ -1,15 +1,7 @@
 /**
+ * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- *
- * JDFAmountPool.java
- *
- * -------------------------------------------------------------------------------------------------
- *
- * The CIP4 Software License, Version 0.1
- *
- *
- * Copyright (c) 2001 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,14 +64,26 @@
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
  *
+ *
+ * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
+ *
+ * JDFAmountPool.java
+ *
+ * -------------------------------------------------------------------------------------------------
+ *
+ * The CIP4 Software License, Version 0.1
+ *
  */
 package org.cip4.jdflib.core;
 
-// import java.util.StringTokenizer;
+//import java.util.StringTokenizer;
+
+import java.util.Iterator;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 
 /**
@@ -88,10 +92,10 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
  */
 public class JDFPartAmount extends JDFResourceLink
 {
-    
-	private static final long serialVersionUID = 1L;
-    
-	private static AtrInfoTable[] atrInfoTable_ToRemove = new AtrInfoTable[8];
+
+    private static final long serialVersionUID = 1L;
+
+    private static AtrInfoTable[] atrInfoTable_ToRemove = new AtrInfoTable[8];
     static 
     {
         atrInfoTable_ToRemove[0] = new AtrInfoTable(AttributeName.COMBINEDPROCESSINDEX, 0x33333331, AttributeInfo.EnumAttributeType.IntegerList, null, null);
@@ -103,20 +107,22 @@ public class JDFPartAmount extends JDFResourceLink
         atrInfoTable_ToRemove[6] = new AtrInfoTable(AttributeName.RREF,                 0x22222222, AttributeInfo.EnumAttributeType.IDREF ,null, null);
         atrInfoTable_ToRemove[7] = new AtrInfoTable(AttributeName.USAGE,                0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumUsage.getEnum(0), null);
     }
-    
+
+    @Override
     protected AttributeInfo getTheAttributeInfo() 
     {     
         AttributeInfo ai = super.getTheAttributeInfo().updateReplace((AtrInfoTable) null);
         ai.updateRemove(atrInfoTable_ToRemove);
         return ai;
     }
-    
+
     private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-	static 
-	{
-    	elemInfoTable[0] = new ElemInfoTable(ElementName.PART,     0x55555555);
+    static 
+    {
+        elemInfoTable[0] = new ElemInfoTable(ElementName.PART,     0x55555555);
     }
 
+    @Override
     protected ElementInfo getTheElementInfo() 
     {
         return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
@@ -139,13 +145,13 @@ public class JDFPartAmount extends JDFResourceLink
      * @param qualifiedName
      */
     public JDFPartAmount(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
+            CoreDocumentImpl myOwnerDocument,
+            String myNamespaceURI,
+            String qualifiedName)
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
-    
+
     /**
      * Constructor for JDFPartAmount
      * @param myOwnerDocument
@@ -154,10 +160,10 @@ public class JDFPartAmount extends JDFResourceLink
      * @param myLocalName
      */
     public JDFPartAmount(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
+            CoreDocumentImpl myOwnerDocument,
+            String myNamespaceURI,
+            String qualifiedName,
+            String myLocalName)
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
@@ -168,9 +174,38 @@ public class JDFPartAmount extends JDFResourceLink
      *
      * @return String
      */
+    @Override
     public String toString()
     {
         return "JDFPartAmount[ -->" + super.toString() + "]";
+    }
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib.core.KElement.EnumValidationLevel, boolean, int)
+     */
+    @Override
+    public VString getInvalidAttributes(final EnumValidationLevel level, final boolean bIgnorePrivate, final int nMax)
+    {
+        final VString v= super.getInvalidAttributes(level, bIgnorePrivate, nMax);
+        JDFResourceLink rl=(JDFResourceLink) getDeepParentChild(ElementName.RESOURCELINKPOOL);
+        if(rl!=null)
+        {
+            JDFAttributeMap rlMap=rl.getAttributeMap();
+
+            JDFAttributeMap map=rlMap==null ? null : getAttributeMap();
+            if(map!=null)
+            {
+                Iterator<String> it=map.getKeyIterator();
+                while(it.hasNext())
+                {
+                    String s=it.next();
+                    if(rlMap.containsKey(s))
+                    {
+                        v.add(s);
+                    }
+                }      
+            }
+        }
+        return v;
     }
 
 
@@ -179,19 +214,21 @@ public class JDFPartAmount extends JDFResourceLink
      *
      * @return JDFAttributeMap, of the part element
      */
-     public JDFAttributeMap getPartMap()
-     {
-         return super.getPartMap();
-     }
-     
-     /**
-      * gets part map vector
-      *
-      * @return JDFAttributeMap, of the part element
-      */
-      public VJDFAttributeMap getPartMapVector()
-      {
-          return super.getPartMapVector();
-      }
+    @Override
+    public JDFAttributeMap getPartMap()
+    {
+        return super.getPartMap();
+    }
+
+    /**
+     * gets part map vector
+     *
+     * @return JDFAttributeMap, of the part element
+     */
+    @Override
+    public VJDFAttributeMap getPartMapVector()
+    {
+        return super.getPartMapVector();
+    }
 
 }

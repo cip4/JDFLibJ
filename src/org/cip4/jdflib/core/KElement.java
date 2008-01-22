@@ -4076,7 +4076,7 @@ public class KElement extends ElementNSImpl
     {
         final KElement kElem = getParentNode_KElement();
 
-        if (kElem != null)
+        if (kElem != null && parentNode!=null)
         {
             if (!kElem.getNodeName().equals(parentNode))
             {

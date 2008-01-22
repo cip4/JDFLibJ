@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2004 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -95,6 +95,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
 import org.cip4.jdflib.datatypes.JDFXYPair;
@@ -251,7 +252,9 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
         KElement attr=null;
         String newPath=xPath;
         KElement pathElement = e.getXPathElement(xPath);
-        if(xPath.indexOf("@")<0) //element
+        final int posAt = xPath.lastIndexOf("@");
+        int posAtI=posAt>0 ? xPath.lastIndexOf("[@") : -1;
+        if(posAt<0 || posAt==posAtI+1) //element
         {
             
             b=fitsValue(pathElement);
@@ -268,12 +271,11 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
         }
         else // attribute
         {
-            
             final String attrVal=e.getXPathAttribute(xPath,null);
             b=fitsValue(attrVal);
             if(reportRoot!=null)
             {
-                final String attName = xPath.substring(xPath.indexOf("@")+1);
+                final String attName = xPath.substring(posAt+1);
                 if(pathElement!=null)
                 {
                     if(pathElement instanceof JDFResource)
@@ -386,6 +388,33 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
                     }
                 }
             }
+        }
+        else if(stateDC instanceof JDFDevCaps)
+        {
+            if (!(this instanceof JDFIsPresentEvaluation)) //  only ispresent may reference a devcap, all others must reference a state
+                return null;
+            bElement=true;
+            final JDFDevCaps dc=(JDFDevCaps)stateDC;
+            vPath=dc.getNamePathVector();   
+            // fix up for the fact that ispresent for a resource is actually a link
+            if(vPath!=null)
+            {
+                for(int i=0;i<vPath.size();i++)
+                {
+                    String path=vPath.stringAt(i);
+                    VString tokens=StringUtil.tokenize(path, "/", false);
+                    if(tokens.size()==3 && tokens.stringAt(1).equals(ElementName.RESOURCEPOOL))
+                    {
+                        tokens.set(1, ElementName.RESOURCELINKPOOL);
+                        String link = tokens.stringAt(2)+"Link";
+                        EnumUsage lu=dc.getLinkUsage();
+                        if(lu!=null)
+                            link+="[@Usage=\""+lu.getName()+"\"]";
+                        tokens.set(2, link);
+                        vPath.set(i,StringUtil.setvString(tokens, "/", null, null));
+                    }
+                }
+            }        
         }
         else
         {
