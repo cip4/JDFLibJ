@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -158,9 +158,13 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
         m1.put("a2","v2");
         assertTrue(m1.subMap((JDFAttributeMap)null));
         JDFAttributeMap m2=new JDFAttributeMap("a1","v1");
+        JDFAttributeMap mStar=new JDFAttributeMap("a1",(String)null);
         assertTrue(m1.subMap(m2));
+        assertTrue(m1.subMap(mStar));
         m2.put("a2","v2");
+        mStar=new JDFAttributeMap("a1","*");
         assertTrue(m1.subMap(m2));
+        assertTrue(m1.subMap(mStar));
         m2.put("a2","v3");
         assertFalse(m1.subMap(m2));
         m2.put("a2","v2");
@@ -184,6 +188,8 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
         m2.put("a2","v3");
         assertFalse(m1.overlapMap(m2));
         m2.put("a2","v2");
+        assertTrue(m1.overlapMap(m2));
+        m2.put("a2","*");
         assertTrue(m1.overlapMap(m2));
         m2.put("a3","v3");
         assertTrue(m1.overlapMap(m2));
@@ -217,7 +223,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
         JDFAttributeMap m1=new JDFAttributeMap("a1","v1");
         m1.put("a2","v2");
         JDFAttributeMap m2=new JDFAttributeMap("a1","v1");
-        HashSet keys=new HashSet();
+        HashSet<String> keys=new HashSet<String>();
         keys.add("a1");
         m1.reduceMap(keys);
         assertEquals(m1,m2);
@@ -229,7 +235,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
         JDFAttributeMap m1=new JDFAttributeMap("a1","v1");
         m1.put("a2","v2");
         JDFAttributeMap m2=new JDFAttributeMap("a1","v1");
-        HashSet keys=new HashSet();
+        HashSet<String> keys=new HashSet<String>();
         keys.add("a2");
         m1.removeKeys(keys);
         assertEquals(m1,m2);

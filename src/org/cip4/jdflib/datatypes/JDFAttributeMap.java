@@ -1,73 +1,73 @@
 /*
-*
-* The CIP4 Software License, Version 1.0
-*
-*
-* Copyright (c) 2001-2007 The International Cooperation for the Integration of 
-* Processes in  Prepress, Press and Postpress (CIP4).  All rights 
-* reserved.
-*
-* Redistribution and use in source and binary forms, with or without
-* modification, are permitted provided that the following conditions
-* are met:
-*
-* 1. Redistributions of source code must retain the above copyright
-*    notice, this list of conditions and the following disclaimer. 
-*
-* 2. Redistributions in binary form must reproduce the above copyright
-*    notice, this list of conditions and the following disclaimer in
-*    the documentation and/or other materials provided with the
-*    distribution.
-*
-* 3. The end-user documentation included with the redistribution,
-*    if any, must include the following acknowledgment:  
-*       "This product includes software developed by the
-*        The International Cooperation for the Integration of 
-*        Processes in  Prepress, Press and Postpress (www.cip4.org)"
-*    Alternately, this acknowledgment may appear in the software itself,
-*    if and wherever such third-party acknowledgments normally appear.
-*
-* 4. The names "CIP4" and "The International Cooperation for the Integration of 
-*    Processes in  Prepress, Press and Postpress" must
-*    not be used to endorse or promote products derived from this
-*    software without prior written permission. For written 
-*    permission, please contact info@cip4.org.
-*
-* 5. Products derived from this software may not be called "CIP4",
-*    nor may "CIP4" appear in their name, without prior written
-*    permission of the CIP4 organization
-*
-* Usage of this software in commercial products is subject to restrictions. For
-* details please consult info@cip4.org.
-*
-* THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-* OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-* DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
-* THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
-* ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-* SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-* LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
-* USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-* ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-* OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
-* OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-* SUCH DAMAGE.
-* ====================================================================
-*
-* This software consists of voluntary contributions made by many
-* individuals on behalf of the The International Cooperation for the Integration 
-* of Processes in Prepress, Press and Postpress and was
-* originally based on software 
-* copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
-* copyright (c) 1999-2001, Agfa-Gevaert N.V. 
-*  
-* For more information on The International Cooperation for the 
-* Integration of Processes in  Prepress, Press and Postpress , please see
-* <http://www.cip4.org/>.
-*  
-* 
-*/
+ *
+ * The CIP4 Software License, Version 1.0
+ *
+ *
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer. 
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
+ *
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:  
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of 
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
+ *
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written 
+ *    permission, please contact info@cip4.org.
+ *
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
+ *
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
+ *
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration 
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software 
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
+ *  
+ * For more information on The International Cooperation for the 
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
+ *  
+ * 
+ */
 /**
  *
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
@@ -88,6 +88,7 @@ import java.util.Set;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.util.HashUtil;
@@ -155,19 +156,19 @@ public class JDFAttributeMap implements Map
      * @return String
      */
     @Override
-	public String toString()
+    public String toString()
     {
         StringBuffer sb = new StringBuffer ();
 
         sb.append ("JDFAttributeMap: {");
-        
+
         VString vsKeys = this.getKeys ();
-            
+
         for (int k = 0; k < vsKeys.size (); k++)
         {
             String strKey   = vsKeys.stringAt(k);
             String strValue = this.get(strKey);
-            
+
             sb.append (" (" + strKey + " = " + strValue + ")");
         }
         sb.append (" }");
@@ -252,11 +253,13 @@ public class JDFAttributeMap implements Map
     /**
      * subMap - returns true if map contains subMap, all keys of submap must be in this hashtable
      * and they must have the same value<br>
+     * 
      * if subMap is null, the function returns true
+     * if subMap contains any wildcards, then the existance of the key in this defines a match 
      *
      * @param subMap the map to compare
      *
-     * @return boolean - true if map contains subMap
+     * @return boolean - true if this map contains subMap
      */
     public boolean subMap(JDFAttributeMap subMap)
     {
@@ -264,20 +267,35 @@ public class JDFAttributeMap implements Map
         {
             return true;
         }
-            
-        Set mapSet    = this.entrySet();
-        Set subMapSet = subMap.entrySet();
 
-        if (mapSet.containsAll(subMapSet))
+        Set mapSet    = this.keySet();
+        Set subMapSet = subMap.keySet();
+
+        if (!mapSet.containsAll(subMapSet))
         {
-            return true;
+            return false;
         }
 
-        return false;
+        Iterator it=subMapSet.iterator();
+        while(it.hasNext())
+        {
+            String key=(String) it.next();
+            String subVal=subMap.get(key);
+            if(!KElement.isWildCard(subVal))
+            {
+                String val=this.get(key);
+                if(!val.equals(subVal))
+                    return false;
+            }
+
+        }
+        return true;
     }
-    
+
     /**
-     * Method subMap.
+     * Method subMap check if any of the maps in vMap are a subMap oft this (see subMap for details)
+     * if vMap is null, the function returns true
+     * 
      * @param vMap the vector submaps to check against
      * @return true if this has at least one entry that vMap contains at least a submap of
      */
@@ -287,12 +305,12 @@ public class JDFAttributeMap implements Map
             return true;
         for (int i=0; i<vMap.size(); i++)
         {
-           if(subMap(vMap.elementAt(i)))
-               return true;
+            if(subMap(vMap.elementAt(i)))
+                return true;
         }
         return false;
     }
-    
+
     /**
      * Method overlapMap.
      * @param vMap the vector submaps to check against
@@ -302,10 +320,11 @@ public class JDFAttributeMap implements Map
     {
         if(vMap==null)
             return true;
-        for (int i=0; i<vMap.size(); i++)
+        final int size = vMap.size();
+        for (int i=0; i<size; i++)
         {
-           if(overlapMap(vMap.elementAt(i)))
-               return true;
+            if(overlapMap(vMap.elementAt(i)))
+                return true;
         }
         return false;
     }
@@ -322,21 +341,20 @@ public class JDFAttributeMap implements Map
     {
         if(subMap==null)
             return true;
-        
-        Enumeration subMapEnum = subMap.keys();
+
+        final Enumeration subMapEnum = subMap.keys();
 
         while (subMapEnum.hasMoreElements())
         {
-            String subMapKey    = (String)subMapEnum.nextElement();
-            String subMapVal    = subMap.get(subMapKey);
-            String hashTableVal = this.get(subMapKey);
-
-            if (hashTableVal != null)
+            final String subMapKey    = (String)subMapEnum.nextElement();
+            final String subMapVal    = subMap.get(subMapKey);
+            if(KElement.isWildCard(subMapVal))
+                continue;
+            
+            final String hashTableVal = this.get(subMapKey);
+            if (hashTableVal != null && !hashTableVal.equals(subMapVal))
             {
-                if (!hashTableVal.equals(subMapVal))
-                {
-                    return false;
-                }
+                return false;
             }
         }
 
@@ -442,7 +460,7 @@ public class JDFAttributeMap implements Map
      * @return boolean - true if the maps are equal, otherwise false
      */
     @Override
-	public boolean equals(Object other)
+    public boolean equals(Object other)
     {
         if (this == other)
         {
@@ -460,7 +478,7 @@ public class JDFAttributeMap implements Map
      * @return int
      */
     @Override
-	public int hashCode()
+    public int hashCode()
     {
         return HashUtil.hashCode(0, this.m_hashTable);
     }
@@ -587,7 +605,7 @@ public class JDFAttributeMap implements Map
             value=((ValuedEnum)value).getName();
         return m_hashTable.put(key, value);
     }
-    
+
     /**
      * get the keys as a Vector,
      * @return
@@ -602,7 +620,7 @@ public class JDFAttributeMap implements Map
         }
         return thisKeys;
     }
-    
+
     ///////////////////////////////////////////////////////////////////////
 
     /**
@@ -620,7 +638,7 @@ public class JDFAttributeMap implements Map
             remove(key);
         }        
     }
-    
+
     //////////////////////////////////////////////////////////////////////////////
 
 }

@@ -938,7 +938,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
             r.setAttribute("Name", getName());
             r.setAttribute("CapXPath", getName());                    
             r.setAttribute("Occurrences", svElemResources,null);
-            r.setAttribute("MinOccurrs", getMinOccurs(),null);
+            r.setAttribute("MinOccurs", getMinOccurs(),null);
         }
         else if (svElemResources>getMaxOccurs() || !EnumAvailability.Installed.equals(av))
         {
@@ -965,7 +965,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
             r.setAttribute("Name", getName());
             r.setAttribute("CapXPath", getName()); 
             r.setAttribute("Occurrences", svElemResources,null);
-            r.setAttribute("MaxOccurrs", getMaxOccurs(),null);
+            r.setAttribute("MaxOccurs", getMaxOccurs(),null);
             r.setAttribute("Availability", av==null ? "None" : av.getName());
         }
 

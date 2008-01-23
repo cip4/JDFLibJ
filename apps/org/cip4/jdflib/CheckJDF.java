@@ -1911,7 +1911,7 @@ public class CheckJDF
             VString vs = new VString(schemaLocation0,JDFConstants.COMMA);
             if(vs.size()%2!=0)
             {
-                sysOut.println("error in schema location: format is \"NameSpaceURI1,Location1,NameSpaceURI2,Location2\"\n" + usage);
+                sysOut.println("error in schema location: format is \"NameSpaceURI1,Location1,NameSpaceURI2,Location2\"\n - bailing out!"+usage);
                 System.exit(3);
             }
             schemaLocation0 = StringUtil.setvString(vs,JDFConstants.BLANK,JDFConstants.EMPTYSTRING,JDFConstants.EMPTYSTRING);
@@ -1920,6 +1920,12 @@ public class CheckJDF
 
         if(args.hasParameter('d')) {
             devCapFile = args.parameterString('d');
+            File fDC=UrlUtil.urlToFile(devCapFile);
+            if(fDC==null || !fDC.canRead())
+            {
+                sysOut.println("Error reading devcap file: "+devCapFile+"\n - bailing out!\n"+usage);
+                System.exit(3);
+            }
         }
 
         bValidate=(args.boolParameter('v',false))||(schemaLocation!=null);

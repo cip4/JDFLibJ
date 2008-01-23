@@ -133,6 +133,7 @@ import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
@@ -1946,7 +1947,49 @@ public class JDFElement extends KElement
         final String ns = kElem.getNamespaceURI();
         return isInJDFNameSpaceStatic(ns);
     }
+    
+    /**
+     * gets an inter resource link  to a target resource. if target is a partition, the refElement MUST point exactly to that partition
+     * @param target - Target resource to link  to
+     * @return the existing refElement
+     */
+    public JDFRefElement getRefElement(JDFResource target)
+    {
+        if(target==null)
+            return null;
+        
+        JDFAttributeMap map=target.getPartMap();
+        if(map!=null && map.size()==0)
+            map=null;
+        String id=target.getID();
+        
+        VElement v=getChildrenByTagName(target.getLocalName()+JDFConstants.REF, target.getNamespaceURI(), new JDFAttributeMap(AttributeName.RREF, id), false, true, 0);
+  
+        int siz=v==null ? 0 : v.size();
+        for(int i=0;i<siz;i++)
+        {
+            JDFRefElement re=(JDFRefElement) v.elementAt(i);
+            JDFAttributeMap partMap = re.getPartMap();
+            if(partMap!=null && partMap.size()==0)
+                partMap=null;
 
+            if(ContainerUtil.equals(partMap, map))
+            {
+                return re;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * gets an inter resource link  to a target resource., creates it if it does not exist
+     * @param target - Target resource to link  to
+     */
+    public JDFRefElement getCreateRefElement(JDFResource target)
+    {
+        JDFRefElement re= getRefElement(target);
+        return re==null ? refElement(target) : re;
+    }
     /**
      * Creates an inter resource link  to a target resource.
      * @param target - Target resource to link  to

@@ -703,10 +703,13 @@ public class JDFResourceTest extends JDFTestCaseBase
             rlComp.setActualAmount(42, m1);
 
             m1.put(EnumPartIDKey.Condition, "Waste");
-            comp.removeAttribute(AttributeName.AMOUNTPRODUCED);
             rlComp.setActualAmount(10, m1);
+            
+            m1.put(EnumPartIDKey.Condition, "OtherWaste");
+            rlComp.setActualAmount(20, m1);
+
             comp.updateAmounts(0);
-            assertEquals(c1.getAmountProduced(), 52.,0.1);
+            assertEquals("Anything but Condition=Good is ifnored",c1.getAmountProduced(), 42.,0.1);
         }
     }
 

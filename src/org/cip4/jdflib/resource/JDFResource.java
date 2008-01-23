@@ -3982,6 +3982,7 @@ public class JDFResource extends JDFElement
 
     /**
      * update the amount of a resource based on the connected resource links
+     * Only Condition="Good" is counted if no explicit partioning by condition is specified
      *
      * @param previousAmount the previous resource Amount
      */
@@ -3993,6 +3994,16 @@ public class JDFResource extends JDFElement
         double deltaAmount = previousAmount;
 
         final JDFAttributeMap partMap = getPartMap();
+        JDFAttributeMap partMapGood = null; // explicit check map for Condition=good
+        JDFAttributeMap partMapCond = null; // explicit check map for Condition=anything
+        
+        if(partMap.get(AttributeName.CONDITION)==null)
+        {
+            partMapGood = new JDFAttributeMap(partMap);
+            partMapGood.put(AttributeName.CONDITION, "Good");
+            partMapCond = new JDFAttributeMap(partMap);
+            partMapCond.put(AttributeName.CONDITION, null);
+        }
 
         if (previousAmount < 0)
         {
@@ -4016,33 +4027,54 @@ public class JDFResource extends JDFElement
                 final JDFNode.EnumType typ = EnumType.getEnum(n.getType());
                 if (!JDFNode.EnumType.ProcessGroup.equals(typ) && !JDFNode.EnumType.Product.equals(typ))
                 {
-                    double ca = rl.getActualAmount(partMap);
-                    double a = rl.getAmount(partMap);
+                    double rlActualAmount=0;
+                    double rlAmount=0;
+                    boolean hasConditionAmount=false;
+                    boolean hasConditionActualAmount=false;
+                    
+                    if(partMapGood!=null) // first get good only, in case it exists
+                    {
+                        rlActualAmount = rl.getActualAmount(partMapCond);
+                        rlAmount = rl.getAmount(partMapCond);
+                        if(rlActualAmount>0)
+                        {
+                            hasConditionActualAmount=true;
+                            rlActualAmount = rl.getActualAmount(partMapGood);
+                        }
+                        if(rlAmount>0)
+                        {
+                            hasConditionAmount=true;
+                            rlAmount = rl.getAmount(partMapGood);
+                        }
+                            
+                    }
+                    
+                    if(!hasConditionActualAmount) // if noo virtual good exists, try complete
+                        rlActualAmount=rl.getActualAmount(partMap);
+
+                    if(!hasConditionAmount)
+                        rlAmount=rl.getAmount(partMap);
 
                     if (JDFResourceLink.EnumUsage.Input.equals(rl.getUsage()))
                     {
-                        if (ca > 0)
+                        if (rlActualAmount > 0)
                         {
-                            amount -= ca;
+                            amount -= rlActualAmount;
+                            mustWrite = true;
                         }
-
-                        if (a > 0)
+                        if (rlAmount > 0)
                         {
-                            amountRequired += a;
-                        }
-
-                        if ((ca >= 0) || (a >= 0))
-                        {
+                            amountRequired += rlAmount;
                             mustWrite = true;
                         }
                     }
                     else
                     {
-                        if (ca >= 0)
+                        if (rlActualAmount >= 0)
                         {
                             mustWrite = true;
-                            amount += ca;
-                            amountProduced += ca;
+                            amount += rlActualAmount;
+                            amountProduced += rlActualAmount;
                         }
 
                         hasOutputLink = true;
