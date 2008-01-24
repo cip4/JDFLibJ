@@ -1,6 +1,19 @@
 ___________________________________________________________
 
 
+Label JDFLIBJ_2.1.3BLD487 (18.01.2008)
+
+NPE in JDFResource.updateAmount when type is a proprietary type
+cleanup and detect namespace typos
+add frame archive for Spec/Archive
+
+>ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD487) && !lbtype(JDFLIBJ_2.1.3BLD486)}" -print
+.\org\cip4\jdflib\core\JDFConstants.java@@\main\72
+.\org\cip4\jdflib\core\JDFParser.java@@\main\46
+.\org\cip4\jdflib\resource\JDFResource.java@@\main\229
+___________________________________________________________
+
+
 Label JDFLIBJ_2.1.3BLD486 (11.01.2008)
 
 Performance JDF-Forwarding for resources with many partitions (Jan Hoppe)
