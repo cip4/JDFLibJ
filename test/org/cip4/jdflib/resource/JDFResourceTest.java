@@ -1847,6 +1847,31 @@ public class JDFResourceTest extends JDFTestCaseBase
 
     /////////////////////////////////////////////////////////////////////////////
 
+    public void testGetCreatePartition3()
+    {
+        JDFDoc doc =new JDFDoc(ElementName.JDF);
+        JDFNode n=doc.getJDFRoot();
+        JDFResource media=n.addResource("Media", null, EnumUsage.Input, null, null, null, null);
+
+        JDFMedia mp1=(JDFMedia) media.addPartition(EnumPartIDKey.SignatureName, "sig1");
+        mp1.addPartition(EnumPartIDKey.SheetName, "sh1");
+        JDFMedia mp2=(JDFMedia) media.addPartition(EnumPartIDKey.SignatureName, "sig2");
+        mp2.addPartition(EnumPartIDKey.SheetName, "sh1");
+        assertEquals(media.getPartitionVector(new JDFAttributeMap(AttributeName.SHEETNAME,"sh1"), null).size(), 2);
+
+        try
+        {
+            media.getCreatePartition(EnumPartIDKey.SheetName, "sh11",new VString("SignatureName SheetName"," "));
+            fail("no parallel");
+        }
+        catch (JDFException x)
+        {
+            // nop
+        }
+    }
+
+    /////////////////////////////////////////////////////////////////////////////
+
     public void testAddpartitionEnum() throws Exception
     {
         JDFDoc doc =new JDFDoc(ElementName.JDF);
