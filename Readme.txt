@@ -1,6 +1,16 @@
 ___________________________________________________________
 
 
+Label JDFLIBJ_2.1.3BLD488 (25.01.2008)
+
+bug fix: AmountProduced wird falsch berechnet 2008/00944
+
+>ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD488) && !lbtype(JDFLIBJ_2.1.3BLD487)}" -print
+.\datatypes\JDFAttributeMap.java@@\main\37
+.\resource\JDFResource.java@@\main\230
+___________________________________________________________
+
+
 Label JDFLIBJ_2.1.3BLD487 (18.01.2008)
 
 NPE in JDFResource.updateAmount when type is a proprietary type
