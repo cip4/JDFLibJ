@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -101,6 +101,7 @@ import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
+import org.cip4.jdflib.resource.intent.JDFColorIntent;
 import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
@@ -153,6 +154,9 @@ public class MISCPGoldenTicket extends MISGoldenTicket
      */
     public void init()
     {
+        initColsFromParent();
+        initAmountsFromParent();
+        
         while(cols.size()>nCols && nCols>0)
             cols.remove(nCols);
      
@@ -184,6 +188,36 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         setActivePart(vParts, true);
         theStatusCounter.setTrackWaste(c.getID(), true);
         theStatusCounter.setTrackWaste(m.getID(), true);
+    }
+
+    /**
+     * recalculate ncols from parent color intent if it exists
+     */
+    private void initColsFromParent()
+    {
+        if(theParentNode==null)
+            return;
+        JDFColorIntent ci=(JDFColorIntent) theParentNode.getResource(ElementName.COLORINTENT, EnumUsage.Input, 0);
+        if(ci==null)
+            return;
+        int c=ci.getNumColors();
+        if(c>0)
+            nCols=c;       
+    }
+    /**
+     * recalculate ncols from parent color intent if it exists
+     */
+    private void initAmountsFromParent()
+    {
+        if(theParentNode==null)
+            return;
+        JDFComponent c=(JDFComponent) theParentNode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
+        JDFResourceLink cl=theParentNode.getLink(c, EnumUsage.Output);
+        if(cl==null)
+            return;
+        double amount=cl.getAmount(null);
+        if(amount>0)
+            sheetAmount=(int) amount;
     }
 
     public void setActivePart(VJDFAttributeMap vp, boolean bFirst)
@@ -289,9 +323,14 @@ public class MISCPGoldenTicket extends MISGoldenTicket
      */
     protected JDFComponent initOutputComponent()
     {
-        if(thePreviousNode!=null)
-            theNode.linkResource(thePreviousNode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0),EnumUsage.Input,null);
-
+        if(theParentNode!=null)
+        {
+            final JDFResource parentOutComp = theParentNode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
+            if(parentOutComp!=null)
+            {
+                theNode.linkResource(parentOutComp,EnumUsage.Input,null);
+            }
+        }
         JDFComponent outComp=(JDFComponent) theNode.getCreateResource(ElementName.COMPONENT, EnumUsage.Output, 0);
         outComp.setComponentType(EnumComponentType.FinalProduct,EnumComponentType.Sheet);
         JDFResourceLink rl=theNode.getLink(outComp, EnumUsage.Output);
@@ -328,7 +367,9 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         if(theNode.getCombinedProcessIndex(EnumType.InkZoneCalculation, 0)<0)
             return;
         if(thePreviousNode!=null)
-            theNode.linkResource(thePreviousNode.getResource(ElementName.PREVIEW, EnumUsage.Input, 0),EnumUsage.Input,null);
+        {
+            theNode.linkResource(thePreviousNode.getResource(ElementName.PREVIEW, EnumUsage.Output, 0),EnumUsage.Input,null);
+        }
 
         JDFPreview pv=(JDFPreview) theNode.getCreateResource(ElementName.PREVIEW,EnumUsage.Input, 0);
         pv.setResStatus(EnumResStatus.Incomplete, false);
@@ -363,9 +404,6 @@ public class MISCPGoldenTicket extends MISGoldenTicket
      */
     protected void initConventionalPrintingParams()
     {
-        if(thePreviousNode!=null)
-            theNode.linkResource(thePreviousNode.getResource(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input, 0),EnumUsage.Input,null);
-
         JDFConventionalPrintingParams cpp=(JDFConventionalPrintingParams) theNode.getCreateResource(ElementName.CONVENTIONALPRINTINGPARAMS,EnumUsage.Input, 0);
         cpp.setPrintingType(EnumPrintingType.SheetFed);
         cpp.setWorkStyle(workStyle);

@@ -167,8 +167,6 @@ public class MISGoldenTicket extends BaseGoldenTicket
      */
     protected JDFNodeInfo initNodeInfo()
     {
-        if(thePreviousNode!=null)
-            theNode.linkResource(thePreviousNode.getResource(ElementName.CUSTOMERINFO, EnumUsage.Input, 0),EnumUsage.Input,null);
 
         JDFNodeInfo ni=theNode.getCreateNodeInfo();
         ni.setResStatus(EnumResStatus.Available, false);
@@ -197,7 +195,14 @@ public class MISGoldenTicket extends BaseGoldenTicket
     protected JDFCustomerInfo initCustomerInfo()
     {
         if(thePreviousNode!=null)
-            theNode.linkResource(thePreviousNode.getCustomerInfo(), EnumUsage.Input, null);
+        {
+            final JDFCustomerInfo customerInfo = thePreviousNode.getCustomerInfo();
+            if(customerInfo!=null)
+            {
+                theNode.linkResource(customerInfo, EnumUsage.Input, null);
+                return customerInfo;
+            }
+        }
         JDFCustomerInfo ci=theNode.getCreateCustomerInfo();
         ci.setResStatus(EnumResStatus.Available, false);
 

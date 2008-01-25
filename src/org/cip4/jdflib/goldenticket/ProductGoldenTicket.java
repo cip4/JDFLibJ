@@ -79,6 +79,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFNodeInfo;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -167,7 +168,8 @@ public class ProductGoldenTicket extends MISGoldenTicket
 
     }
     /**
-     * @param icsLevel
+     * initialize deliveryintent and also output component
+     * @param amount
      */
     protected void initDeliveryIntent(int amount)
     {
@@ -179,6 +181,9 @@ public class ProductGoldenTicket extends MISGoldenTicket
         JDFDropItemIntent dit=di.appendDropIntent().appendDropItemIntent();
         dit.refElement(outComp);
         dit.setAmount(amount);
+        JDFResourceLink rl=theNode.getLink(outComp, null);
+        rl.setAmount(amount, null);
+        
         di.setResStatus(EnumResStatus.Available, false);
         di.preferredToActual();
     }

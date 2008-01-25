@@ -74,10 +74,12 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 
 
@@ -150,12 +152,13 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
         MISCPGoldenTicket cpGoldenTicket=new MISCPGoldenTicket(1,null,2,1,true,vMap);
         cpGoldenTicket.nCols=6;
         cpGoldenTicket.workStyle=EnumWorkStyle.Simplex;
+        cpGoldenTicket.assign(null);
         
         write3Files(cpGoldenTicket,"SimplexPoster",1000,90);
     }
     /////////////////////////////////////////////////////////////////////////////
     
-    public void testMISCPGrayBoxBrochure()
+    public void testMISCPGrayBoxBrochure() throws Exception
     {
         VJDFAttributeMap vMap=new VJDFAttributeMap();
         JDFAttributeMap map=new JDFAttributeMap();
@@ -169,7 +172,14 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
         MISCPGoldenTicket cpGoldenTicket=new MISCPGoldenTicket(1,null,2,2,true,vMap);
         cpGoldenTicket.nCols=6;
         cpGoldenTicket.workStyle=EnumWorkStyle.WorkAndTurn;
-        
+     
+        ProductGoldenTicket pgt=new ProductGoldenTicket(0,EnumVersion.Version_1_3,0,0);
+        pgt.assign(null);
+        pgt.createPostCards();
+        JDFNode node = pgt.getNode();
+        JDFNode nodeCP=node.addJDFNode(EnumType.ProcessGroup);
+
+        cpGoldenTicket.assign(nodeCP);
         write3Files(cpGoldenTicket,"WorkandTurnCover",1000,90);
     }
 
@@ -182,13 +192,15 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
      */
     private void write3Files(MISCPGoldenTicket cpGoldenTicket,String templateName,int good, int waste)
     {
-        cpGoldenTicket.assign(null);
+        assertTrue(cpGoldenTicket.getNode().isValid(EnumValidationLevel.Complete));
         cpGoldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_Manager_MISCPS_"+templateName+".jdf", 2);        
         
         cpGoldenTicket.makeReady();
+        assertTrue(cpGoldenTicket.getNode().isValid(EnumValidationLevel.Complete));
         cpGoldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_PrepressCompleted_MISCPS_1_"+templateName+".jdf", 2);
 
         cpGoldenTicket.execute(null,true,true,good,waste);
+        assertTrue(cpGoldenTicket.getNode().isValid(EnumValidationLevel.Complete));
         cpGoldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_Worker_MISCPS_1_"+templateName+".jdf", 2);
     }
 

@@ -105,6 +105,7 @@ public class BaseGoldenTicket
 {
     protected JDFNode theNode=null;
     protected JDFNode thePreviousNode=null;
+    protected JDFNode theParentNode=null;
     protected EnumVersion theVersion=null;
     protected int baseICSLevel;
     protected StatusCounter theStatusCounter;
@@ -139,10 +140,19 @@ public class BaseGoldenTicket
      */
     public void assign(JDFNode node)
     {
-        thePreviousNode=node==null ? null : theNode;
-        theNode=node==null ? new JDFDoc("JDF").getJDFRoot() : node;
+         theNode=node==null ? new JDFDoc("JDF").getJDFRoot() : node;
+        if(theParentNode==null && theNode.getParentJDF()!=null)
+            theParentNode=theNode.getParentJDF();
         setVersion();
         init();
+    }
+    /**
+     * assign a previous node to this golden ticket instance, e.g. an imagesetting node
+     * @param node the node to assign, if null a new conforming node is generated from scratch
+     */
+    public void setPreviousNode(JDFNode node)
+    {
+         thePreviousNode=node;
     }
 
     /**

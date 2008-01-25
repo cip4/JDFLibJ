@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -93,7 +93,7 @@ import org.cip4.jdflib.util.StatusCounter;
 public class QueueTest extends TestCase
 {
     private JDFQueue q;
-    protected static int iThread;
+    protected static int iThread=0;
     protected class QueueTestThread implements Runnable
     {
         public void run()
@@ -371,6 +371,7 @@ public class QueueTest extends TestCase
         qe=q.appendQueueEntry();
         qe.setQueueEntryStatus(EnumQueueEntryStatus.Running);
         qe.setQueueEntryID("qe5");
+        iThread=0;
     }
 
     public void testgetQueueSize()
