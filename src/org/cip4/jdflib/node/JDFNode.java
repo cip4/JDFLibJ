@@ -2661,10 +2661,6 @@ public class JDFNode extends JDFElement
         {
             resClass=resClass2;
         }
-        else
-        {
-            resClass=null;
-        }
         if(resClass!=null) {
             r.setResourceClass(resClass);
         }

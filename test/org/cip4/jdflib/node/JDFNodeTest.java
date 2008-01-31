@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -429,9 +429,13 @@ public class JDFNodeTest extends JDFTestCaseBase
         JDFNode mainNode = doc.getJDFRoot();
         mainNode.setType("Product",true);
         JDFComponent myComponent = (JDFComponent) mainNode.addResource(ElementName.COMPONENT, JDFResource.EnumResourceClass.Quantity, EnumUsage.Output, null, mainNode, null, null);
+        assertEquals(myComponent.getResourceClass(), JDFResource.EnumResourceClass.Quantity);
+        JDFComponent myComponent2 = (JDFComponent) mainNode.addResource(ElementName.COMPONENT, EnumUsage.Input);
+        assertEquals(myComponent2.getResourceClass(), JDFResource.EnumResourceClass.Quantity);
         myComponent.setDescriptiveName("descriptive_name");
         assertNotNull("",mainNode.getMatchingResource(ElementName.COMPONENT,EnumProcessUsage.AnyOutput,null,0));
         JDFResource myRes =  mainNode.addResource("whatever:foo", JDFResource.EnumResourceClass.Quantity, EnumUsage.Output, null, mainNode, "www.whatever.com", null);
+        assertEquals(myRes.getResourceClass(), JDFResource.EnumResourceClass.Quantity);
         myRes.setDescriptiveName("descriptive_name");
     }
     ///////////////////////////////////////////////////////////////
@@ -638,6 +642,8 @@ public class JDFNodeTest extends JDFTestCaseBase
      */
     public void testSetPhase() throws Exception
     {
+        for(int i=0;i<1;i++)
+        {
         JDFDoc doc   = new JDFDoc(ElementName.JDF);
         JDFNode root = doc.getJDFRoot();
         root.setVersion(JDFElement.EnumVersion.Version_1_3);
@@ -710,7 +716,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
         jmf.convertResponses(null);
         docJMF.write2File(sm_dirTestDataTemp+"inprogress3.jmf",2,true);
-
+        }
     }
     
     /**

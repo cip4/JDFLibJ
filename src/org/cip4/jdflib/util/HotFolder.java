@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -96,7 +96,7 @@ public class HotFolder implements Runnable
 
     private File dir;
     private long lastModified=-1;
-    private Vector<FileTime> lft;
+    private Vector<FileTime> lastFileTime;
     private HotFolderListener hfl;
     private String extension;
     private Thread runThread;
@@ -113,7 +113,7 @@ public class HotFolder implements Runnable
     {
         dir=_dir;
         extension=ext;
-        lft=new Vector<FileTime>();
+        lastFileTime=new Vector<FileTime>();
         hfl=_hfl;
         runThread=null;
         restart();
@@ -164,18 +164,18 @@ public class HotFolder implements Runnable
         while(!interrupt)
         {
             long lastMod=dir.lastModified();
-            if(lastMod>lastModified || lft.size()>0) // has the directory been touched?
+            if(lastMod>lastModified || lastFileTime.size()>0) // has the directory been touched?
             {
                 lastModified=lastMod;
                 File[] files=FileUtil.listFiles(dir, extension);
                 int fileListLength=files!=null? files.length : 0;
 
-                for(int i=lft.size()-1;i>=0;i--)
+                for(int i=lastFileTime.size()-1;i>=0;i--)
                 {
                     boolean found=false;
                     for(int j=0;j<fileListLength;j++) // loop over all matching files in the directory
                     {
-                        final FileTime lftAt = lft.elementAt(i);
+                        final FileTime lftAt = lastFileTime.elementAt(i);
                         if(files[j]!=null && files[j].equals(lftAt.f))
                         {
                             found=true;
@@ -199,13 +199,13 @@ public class HotFolder implements Runnable
                     }
                     if(!found)
                     {
-                        lft.remove(i); // not there anymore
+                        lastFileTime.remove(i); // not there anymore
                     }
                 }
                 for(int i=0;i<fileListLength;i++) // the file is new - add to list for nextr check
                 {
                     if(files[i]!=null)
-                        lft.add(new FileTime(files[i]));
+                        lastFileTime.add(new FileTime(files[i]));
                 }
             }
             StatusCounter.sleep(stabilizeTime);
