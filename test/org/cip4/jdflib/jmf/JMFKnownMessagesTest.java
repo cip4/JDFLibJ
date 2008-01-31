@@ -11,10 +11,15 @@ import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.resource.JDFDeviceList;
+import org.cip4.jdflib.resource.devicecapability.JDFAction;
+import org.cip4.jdflib.resource.devicecapability.JDFActionPool;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCap;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCaps;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 import org.cip4.jdflib.resource.devicecapability.JDFStringState;
+import org.cip4.jdflib.resource.devicecapability.JDFTerm;
+import org.cip4.jdflib.resource.devicecapability.JDFTest;
+import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 
 /**
  * @author Rainer Prosi
@@ -58,10 +63,15 @@ public class JMFKnownMessagesTest extends JDFTestCaseBase
         dc=dcs.appendDevCapInPool();
         state=dc.appendStringState(AttributeName.TYPE);
         state.setRequired(true);
+        state=dc.appendStringState("Foo");
+        state.setRequired(false);
         
         
-        
-        
+        JDFActionPool ap=ms.appendActionPool();
+        JDFAction a=ap.appendActionTest(EnumTerm.IsPresentEvaluation, true);
+        JDFTest t=a.getTest();
+        JDFTerm term=t.getTerm();
+        //TODO
         JDFDoc docJMF=new JDFDoc("JMF");
         JDFJMF jmf=docJMF.getJMFRoot();
         for(int i=0;i<3;i++)

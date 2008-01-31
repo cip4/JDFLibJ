@@ -88,6 +88,7 @@ import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDevCaps;
+import org.cip4.jdflib.auto.JDFAutoMessageService.EnumJMFRole;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
@@ -104,6 +105,7 @@ import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.ifaces.ICapabilityElement;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFMessageService;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.pool.JDFResourceLinkPool;
@@ -335,17 +337,32 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
     {
         String result = getDevCapsName(); 
         final EnumContext cont=getContext();
-        if(cont.equals(EnumContext.Link))
-        {
-            result=ElementName.JDF+"/"+ElementName.RESOURCELINKPOOL+"/"+result;
-        }
-        else if(cont.equals(EnumContext.Resource))
-        {
-            result=ElementName.JDF+"/"+ElementName.RESOURCEPOOL+"/"+result;
-        }
-
         VString vResult=new VString();
-        vResult.add(result);
+        if(cont.equals(EnumContext.JMF) && (getParentNode() instanceof JDFMessageService) && result.length()>4)
+        {
+            JDFMessageService serv=(JDFMessageService)getParentNode();
+            Vector<EnumFamily> vf=serv.getFamilies();
+            final int size = vf==null ? 0 : vf.size();
+            for(int i=0;i<size;i++)
+            {
+                vResult.add("JMF/"+vf.elementAt(i).getName()+"/"+result.substring(4));
+            }
+            if(EnumJMFRole.Sender.equals(serv.getJMFRole()))
+                    vResult.add("JMF/Response/"+result.substring(4));
+        }
+        else
+        {
+            if(cont.equals(EnumContext.Link))
+            {
+                result=ElementName.JDF+"/"+ElementName.RESOURCELINKPOOL+"/"+result;
+            }
+            else if(cont.equals(EnumContext.Resource))
+            {
+                result=ElementName.JDF+"/"+ElementName.RESOURCEPOOL+"/"+result;
+            }
+
+            vResult.add(result);
+        }
         return vResult;
     }       
     /////////////////////////////////////////////////// 
