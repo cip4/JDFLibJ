@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -70,6 +70,9 @@
  */
 package org.cip4.jdflib.ifaces;
 
+import org.cip4.jdflib.resource.devicecapability.JDFActionPool;
+import org.cip4.jdflib.resource.devicecapability.JDFTestPool;
+
 
 
 /**
@@ -87,5 +90,15 @@ public interface IDeviceCapable
      * @return ICapabilityElement the referenced term, null if it doesn't exist
      */
     ICapabilityElement getTargetCap(String id);
+
+    /**
+     * @return
+     */
+    JDFActionPool getActionPool();
+
+    /**
+     * @return
+     */
+    JDFTestPool getTestPool();
 
 }

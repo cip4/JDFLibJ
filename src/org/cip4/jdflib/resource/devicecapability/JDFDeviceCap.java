@@ -97,6 +97,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
@@ -408,6 +409,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
             {
                 messageReport.setAttribute("FitsType", true, null);
                 invalidDevCaps(ms,m, testlists, level, parentRoot,ignoreExtensions);
+                actionPoolReport(ms, m, parentRoot);
             }
             else
             {
@@ -723,7 +725,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
         // if all resourceLinks and NodeInfo/CustomerInfo elements (optional) 
         // are specified as DevCaps, we may test them. 
         invalidDevCaps(this,jdfRoot, testlists, level, root,ignoreExtensions);
-        actionPoolReport(jdfRoot,root);
+        actionPoolReport(this,jdfRoot,root);
         if(!root.hasChildElements())
         {
             root.deleteNode();
@@ -865,7 +867,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 
 
-    /**
+     /**
      * actionPoolReport - tests if the JDFNode fits Actions from ActionPool of this DeviceCap.<br>
      * Composes a detailed report of the found errors in XML form. If XMLDoc is <code>null</code> - there are no errors 
      *
@@ -876,20 +878,20 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
      * @throws JDFException if DeviceCap is invalid: ActionPool refers to the non-existent TestPool
      * @throws JDFException if DeviceCap is invalid: Action refers to the non-existent Test
      */
-    public final KElement actionPoolReport(final JDFNode jdfRoot, KElement parentReport)
+    public static KElement actionPoolReport(IDeviceCapable devCapable, final JDFElement jdfRootorMess, KElement parentReport)
     {
         KElement root = parentReport.appendElement("ActionPoolReport");    
-        JDFActionPool actionPool = getActionPool();
+        JDFActionPool actionPool = devCapable.getActionPool();
         if (actionPool != null) 
         {
-            JDFTestPool testPool = getTestPool();
+            JDFTestPool testPool = devCapable.getTestPool();
             if (testPool == null) 
             {
                 throw new JDFException("JDFDeviceCap.actionPoolReport: TestPool is required but was not found. Attempt to operate on a null element");
             }
             VElement vActions = actionPool.getChildElementVector(ElementName.ACTION, null, null, true, 0, false);
-            VElement allElms=jdfRoot.getChildrenByTagName(null,null,null,false,true,0);
-            allElms.add(jdfRoot); // needed for local JDF test
+            VElement allElms=jdfRootorMess.getChildrenByTagName(null,null,null,false,true,0);
+            allElms.add(jdfRootorMess); // needed for local JDF test
             final int elmSize = allElms.size();
             final int actionSize = vActions.size();
             for(int i=0;i<elmSize;i++)
@@ -951,7 +953,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
      * @param testResult XMLDoc to clean
      * @return XMLDoc - the cleaned doc
      */ 
-    private KElement cleanActionPoolReport(KElement actionPoolReport)
+    private static KElement cleanActionPoolReport(KElement actionPoolReport)
     {
         if (actionPoolReport != null)
         {
@@ -1182,9 +1184,9 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
     /**
      * @param ignoreDefaults the ignoreDefaults to set
      */
-    public void setIgnoreDefaults(boolean ignoreDefaults)
+    public void setIgnoreDefaults(boolean _ignoreDefaults)
     {
-        this.ignoreDefaults = ignoreDefaults;
+        this.ignoreDefaults = _ignoreDefaults;
     }
 
     /* (non-Javadoc)

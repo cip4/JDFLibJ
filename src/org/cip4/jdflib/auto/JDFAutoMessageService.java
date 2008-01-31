@@ -96,6 +96,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFModulePool;
 
     *****************************************************************************
     */
+import org.cip4.jdflib.resource.devicecapability.JDFTestPool;
 
 public abstract class JDFAutoMessageService extends JDFElement
 {
@@ -579,26 +580,26 @@ public abstract class JDFAutoMessageService extends JDFElement
      * (24) const get element TestPool
      * @return JDFModulePool the element
      */
-    public JDFModulePool getTestPool()
+    public JDFTestPool getTestPool()
     {
-        return (JDFModulePool) getElement(ElementName.TESTPOOL, null, 0);
+        return (JDFTestPool) getElement(ElementName.TESTPOOL, null, 0);
     }
 
     /** (25) getCreateTestPool
      * 
      * @return JDFModulePool the element
      */
-    public JDFModulePool getCreateTestPool()
+    public JDFTestPool getCreateTestPool()
     {
-        return (JDFModulePool) getCreateElement_KElement(ElementName.TESTPOOL, null, 0);
+        return (JDFTestPool) getCreateElement_KElement(ElementName.TESTPOOL, null, 0);
     }
 
     /**
      * (29) append element TestPool
      */
-    public JDFModulePool appendTestPool() throws JDFException
+    public JDFTestPool appendTestPool() throws JDFException
     {
-        return (JDFModulePool) appendElementN(ElementName.TESTPOOL, 1, null);
+        return (JDFTestPool) appendElementN(ElementName.TESTPOOL, 1, null);
     }
 
 }// end namespace JDF

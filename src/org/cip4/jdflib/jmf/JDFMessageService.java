@@ -92,7 +92,9 @@ import org.cip4.jdflib.ifaces.ICapabilityElement;
 import org.cip4.jdflib.ifaces.IDeviceCapable;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCaps;
+import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 
 
 
