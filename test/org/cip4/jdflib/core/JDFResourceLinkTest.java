@@ -777,6 +777,23 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
      * test that the position checking algorithm works
      *
      */
+    public void testValidAttributesAmountPool() throws Exception
+    {
+        JDFDoc d=new JDFDoc(ElementName.JDF);
+        JDFNode n=d.getJDFRoot();
+        n.setType(EnumType.Strapping);
+        JDFResource rBar=n.addResource(ElementName.COMPONENT, EnumUsage.Input);
+        JDFResourceLink rl=n.getLink(rBar,null);
+        rl.setActualAmount(42, null);
+        assertFalse(rl.getInvalidAttributes(EnumValidationLevel.Incomplete, false, 99).contains(AttributeName.ACTUALAMOUNT));
+        rl.appendAmountPool();
+        assertTrue(rl.getInvalidAttributes(EnumValidationLevel.Incomplete, false, 99).contains(AttributeName.ACTUALAMOUNT));
+     }
+    /////////////////////////////////////////////////////////////////////
+    /**
+     * test that the position checking algorithm works
+     *
+     */
     public void testValidCombinedProcessIndex() throws Exception
     {
         JDFDoc d=new JDFDoc(ElementName.JDF);

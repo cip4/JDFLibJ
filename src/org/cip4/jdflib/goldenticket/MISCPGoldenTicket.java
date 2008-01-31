@@ -100,6 +100,7 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.intent.JDFColorIntent;
 import org.cip4.jdflib.resource.process.JDFColor;
@@ -289,6 +290,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
             theNode.linkResource(thePreviousNode.getResource(ElementName.EXPOSEDMEDIA, EnumUsage.Input, 0),EnumUsage.Input,null);
 
         JDFExposedMedia xm=(JDFExposedMedia) theNode.getCreateResource(ElementName.EXPOSEDMEDIA,EnumUsage.Input, 0);
+        xm.setPartUsage(EnumPartUsage.Explicit);
         JDFResourceLink rl=theNode.getLink(xm, null);
         rl.setProcessUsage(EnumProcessUsage.Plate);
         
@@ -374,6 +376,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         JDFPreview pv=(JDFPreview) theNode.getCreateResource(ElementName.PREVIEW,EnumUsage.Input, 0);
         pv.setResStatus(EnumResStatus.Incomplete, false);
         pv.setPreviewUsage(EnumPreviewUsage.Separation);
+        pv.setPartUsage(EnumPartUsage.Explicit);
         pv.setPreviewFileType(EnumPreviewFileType.PNG);
 
         if(vParts!=null)

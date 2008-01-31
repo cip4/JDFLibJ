@@ -114,6 +114,18 @@ public class JDFResourceLink extends JDFElement
         final VString v= super.getInvalidAttributes(level, bIgnorePrivate, nMax);
         if(!v.contains(AttributeName.COMBINEDPROCESSINDEX) && !validCombinedProcessIndex())
             v.add(AttributeName.COMBINEDPROCESSINDEX);
+        if(!(this instanceof JDFPartAmount) && hasChildElement(ElementName.AMOUNTPOOL,null))
+        {
+            if(hasAttribute(AttributeName.AMOUNT))
+                v.add(AttributeName.AMOUNT);
+            if(hasAttribute(AttributeName.ACTUALAMOUNT))
+                v.add(AttributeName.ACTUALAMOUNT);
+            if(hasAttribute(AttributeName.MAXAMOUNT))
+                v.add(AttributeName.MAXAMOUNT);
+            if(hasAttribute(AttributeName.MINAMOUNT))
+                v.add(AttributeName.MINAMOUNT);
+            v.unify();
+        }
         return v;
     }
 
