@@ -80,7 +80,6 @@
 package org.cip4.jdflib.util;
 
 import org.apache.commons.lang.enums.ValuedEnum;
-import org.cip4.jdflib.auto.JDFAutoQueueFilter.EnumQueueEntryDetails;
 
 /**
  * class with utilities for enums

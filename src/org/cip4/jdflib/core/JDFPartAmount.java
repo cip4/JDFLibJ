@@ -83,7 +83,6 @@ import java.util.Iterator;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 
 /**

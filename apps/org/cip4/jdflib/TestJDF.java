@@ -12,8 +12,6 @@ package org.cip4.jdflib;
 import java.io.File;
 
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.resource.JDFResource;
 
 public class TestJDF
 {
