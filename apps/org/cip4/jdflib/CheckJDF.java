@@ -1098,7 +1098,10 @@ public class CheckJDF
     {
         boolean isValid = true;
         String jobPartID=jdfNode.getJobPartID(false);
-        VString vMissingLinks= jdfNode.getMissingLinkVector(9999999);
+  
+        VString vMissingLinks = EnumValidationLevel.isRequired(level) ? jdfNode.getMissingLinkVector(9999999) : null;
+        VString vInvalidLinks= jdfNode.getInvalidLinks(level, 9999999);
+        
 
 
         boolean bValidJobPartID = !vBadJobPartID.contains(jobPartID);
@@ -1135,8 +1138,13 @@ public class CheckJDF
                     setErrorType(pool,"MissingElement","Missing ResourceLinkPool");
                     pool.setAttribute("NodeName", "ResourceLinkPool");
                 }
-                printResourceLinkPool(jdfNode.buildXPath(null,1)+ "/ResourceLinkPool[1]",testElement,vMissingLinks);
+                printResourceLinkPool(jdfNode.buildXPath(null,1)+ "/ResourceLinkPool[1]",testElement,vMissingLinks,"Missing");
             }
+        }
+        if (vInvalidLinks!=null)
+        {
+            vInvalidLinks.removeStrings(vMissingLinks, 9999);
+            printResourceLinkPool(jdfNode.buildXPath(null,1)+ "/ResourceLinkPool[1]",testElement,vInvalidLinks,"Invalid");
         }
 
         return isValid;
@@ -1240,45 +1248,32 @@ public class CheckJDF
      * @param testElement - test element of the XML output (if '-x' set) we "stand in"
      * @return boolean - true if valid
      */
-    private boolean printResourceLinkPool(final String rlpXPath,  KElement testElement, VString vMissingLinks)
+    private void printResourceLinkPool(final String rlpXPath,  KElement testElement, VString vLinks, String missBad)
     {
-        boolean isValid = true;
-
-
-        if (level.getValue()>= EnumValidationLevel.Complete.getValue())
+        int size = vLinks==null ? 0 : vLinks.size(); 
+        for (int i = 0; i<size ; i++)
         {
-            int size = vMissingLinks==null ? 0 : vMissingLinks.size();
-            if (size > 0) {
-                isValid = false;
-            }
-
-            for (int i = size-1; i >= 0 ; i--)
+            String missResLink = vLinks.stringAt(i);
+            if (testElement != null)
             {
-                String missResLink = vMissingLinks.stringAt(i);
+                KElement e = testElement.appendElement("TestElement");
 
-                if (testElement != null)
-                {
-                    KElement e = testElement.appendElement("TestElement");
-
-                    String name = missResLink.indexOf(":")>0 ? StringUtil.token(missResLink, 0, ":") : missResLink;
-                    String procUsage =  missResLink.indexOf(":")>0 ? StringUtil.token(missResLink, 1, ":") : "";
-                    if(procUsage.startsWith("Any")) {
-                        procUsage=procUsage.substring(3);
-                    }
-
-                    setErrorType(e,"MissingResourceLink","Missing "+procUsage+" resourceLink ");
-                    e.setAttribute("NodeName", name);
-                    if (!procUsage.equals(JDFConstants.EMPTYSTRING)) {
-                        e.setAttribute("ProcessUsage", procUsage);
-                    }
-
-                    e.setAttribute("XPath", rlpXPath + "/"+ name + "[1]");
+                String name = missResLink.indexOf(":")>0 ? StringUtil.token(missResLink, 0, ":") : missResLink;
+                String procUsage =  missResLink.indexOf(":")>0 ? StringUtil.token(missResLink, 1, ":") : "";
+                if(procUsage.startsWith("Any")) {
+                    procUsage=procUsage.substring(3);
                 }
-                vMissingLinks.removeElement(missResLink);
-            }
-        }
 
-        return isValid;
+                setErrorType(e,missBad+"ResourceLink",missBad+procUsage+" resourceLink ");
+                e.setAttribute("NodeName", name);
+                if (!procUsage.equals(JDFConstants.EMPTYSTRING)) {
+                    e.setAttribute("ProcessUsage", procUsage);
+                }
+
+                e.setAttribute("XPath", rlpXPath + "/"+ name + "[1]");
+            }
+            vLinks.removeElement(missResLink);
+        }
     }
 
     /**
