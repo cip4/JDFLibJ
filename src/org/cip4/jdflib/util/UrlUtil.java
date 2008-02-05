@@ -640,7 +640,29 @@ public class UrlUtil
      * relative urls MUST NOT have a scheme (e.g. file:)
      * 
      * @param directory the url of the directory
-     * @param url       the realtive url of the file
+     * @param url       the absolute url 
+     * @return String - the local URL of url after removing directory
+     */
+    public static String getLocalURL(String directory, String url)
+    {
+        if(directory==null || url==null)
+            return url;
+        int len=directory.length();
+        if(len>0&&!directory.endsWith("/"))
+            len++;
+        if(url.length()<=len)
+            return null;
+        if(!url.startsWith(directory))
+            return null;
+        return url.substring(len);
+    }
+    /**
+     * concatenate directory and url to a single path 
+     * IF and only IF url is a relative url<br>
+     * relative urls MUST NOT have a scheme (e.g. file:)
+     * 
+     * @param directory the url of the directory
+     * @param url       the relative url of the file
      * @return String - the concatenated URL of the directory + file
      */
     public static String getURLWithDirectory(String directory, String url)

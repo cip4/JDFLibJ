@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,6 +85,16 @@ import org.cip4.jdflib.JDFTestCaseBase;
 
 public class UrlUtilTest extends JDFTestCaseBase
 {
+    ///////////////////////////////////////////////////////////////////////////
+    public void testGetLocalURL() throws Exception
+    {
+        assertNull(UrlUtil.getLocalURL("foo", "foo"));
+        assertNull(UrlUtil.getLocalURL("foo", null));
+        assertEquals(UrlUtil.getLocalURL("foo", "foo/bar"),"bar");
+        assertEquals(UrlUtil.getLocalURL("foo/", "foo/bar"),"bar");
+        assertEquals(UrlUtil.getLocalURL(null, "foo/bar"),"foo/bar");
+        assertEquals(UrlUtil.getLocalURL("", "foo/bar"),"foo/bar");
+    }
 
 
 

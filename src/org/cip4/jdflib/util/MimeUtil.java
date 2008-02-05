@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -86,6 +86,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Vector;
 
 import javax.activation.DataHandler;
@@ -187,6 +188,7 @@ public class MimeUtil
     public static final String CONTENT_TYPE = "Content-Type";
     public static final String CONTENT_ID = "Content-ID";
     public static final String TEXT_XML =JDFConstants.MIME_TEXTXML;
+    public static final String TEXT_HTML ="text/html";
     public static final String TEXT_PLAIN ="text/plain";
     public static final String TEXT_UNKNOWN =JDFConstants.MIME_TEXTUNKNOWN;
     public static final String VND_JDF =JDFConstants.MIME_JDF;
@@ -194,7 +196,7 @@ public class MimeUtil
     public static final String MULTIPART_RELATED = "multipart/related";
     public static final String POST = "POST";
     public static final String GET = "GET";
-
+    private static HashMap<String,String> extensionMap=null;
 
     //private static Logger log = Logger.getLogger(MimeUtil.class);
     /**
@@ -511,6 +513,55 @@ public class MimeUtil
             return null;
         }
     }
+
+    /**
+     * checkst whether the mime type corresponds to one of
+     *      "application/vnd.cip4-jdf+xml";
+     * "application/vnd.cip4-jmf+xml";
+     * "text/xml";
+     *
+     * @param mimeType the string to test
+     * @return true if matches
+     */
+    public static String getMimeTypeFromExt(String fileName)
+    {
+        if(fileName==null)
+            return TEXT_UNKNOWN;
+        String ext=UrlUtil.extension(fileName);
+        if(ext==null)
+            return TEXT_UNKNOWN;
+        ext=ext.toLowerCase();
+        fillExtensionMap();
+        ext=extensionMap.get(ext);
+        return ext==null ? TEXT_UNKNOWN : ext;
+    }
+
+    /**
+     * 
+     */
+    private static void fillExtensionMap()
+    {
+        if(extensionMap==null)
+        {
+            extensionMap=new HashMap<String, String>();
+            
+            extensionMap.put("jdf", VND_JDF);
+            
+            extensionMap.put("jmf", VND_JMF);
+ 
+            extensionMap.put("xml", TEXT_XML);
+            extensionMap.put("xsl", TEXT_XML);
+            extensionMap.put("xsd", TEXT_XML);
+            
+            extensionMap.put("txt", TEXT_PLAIN);
+
+            extensionMap.put("mjm", MULTIPART_RELATED);
+            extensionMap.put("mjd", MULTIPART_RELATED);
+            extensionMap.put("mim", MULTIPART_RELATED);
+            
+        }
+    }
+
 
     /**
      * checkst whether the mime type corresponds to one of

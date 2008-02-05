@@ -378,7 +378,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
         {
             nam=ElementName.JDF+"/"+nam;
         }
-        else if(cont.equals(EnumContext.JMF))
+        else if(cont.equals(EnumContext.JMF) &&!ElementName.JMF.equals(nam))
         {
             nam=ElementName.JMF+"/"+nam;
         }

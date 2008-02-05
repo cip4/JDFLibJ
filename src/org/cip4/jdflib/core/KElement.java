@@ -4013,11 +4013,7 @@ public class KElement extends ElementNSImpl
     public boolean getBoolAttribute(String attrib, String nameSpaceURI, boolean def)
     {
         final String s = getAttribute(attrib, nameSpaceURI, null);
-        if (s!=null)
-        {
-            return s.equalsIgnoreCase(JDFConstants.TRUE);
-        }
-        return def;
+        return StringUtil.parseBoolean(s, def);
     }
 
     /**

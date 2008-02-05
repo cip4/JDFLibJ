@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -115,6 +115,16 @@ import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 public class MimeUtilTest extends JDFTestCaseBase
 {
 
+    public void testGetMimeTypeFromExt() throws Exception
+    {
+        assertEquals(MimeUtil.TEXT_UNKNOWN, MimeUtil.getMimeTypeFromExt("www.foobar.com"));
+        assertEquals(MimeUtil.VND_JDF, MimeUtil.getMimeTypeFromExt(".JDF"));
+        assertEquals(MimeUtil.VND_JDF, MimeUtil.getMimeTypeFromExt(".jdf"));
+        assertEquals(MimeUtil.VND_JDF, MimeUtil.getMimeTypeFromExt("http://fobar.con/snarf.jdf"));
+        assertEquals(MimeUtil.VND_JMF, MimeUtil.getMimeTypeFromExt("http://fobar.con/snarf.JMF"));
+        assertEquals(MimeUtil.TEXT_XML, MimeUtil.getMimeTypeFromExt("http://fobar.con/snarf.xml"));
+    }
+    
     public void testBuildMimePackageDocJMF() throws Exception
     {
         JDFDoc docJMF=new JDFDoc("JMF");

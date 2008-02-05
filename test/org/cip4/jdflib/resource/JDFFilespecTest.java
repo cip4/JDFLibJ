@@ -77,7 +77,6 @@ package org.cip4.jdflib.resource;
 
 import java.io.File;
 import java.io.InputStream;
-//import java.net.MalformedURLException;
 
 import javax.mail.BodyPart;
 import javax.mail.Multipart;
@@ -91,7 +90,6 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.MimeUtil;
 import org.cip4.jdflib.util.MimeUtilTest;
-//import org.cip4.jdflib.util.StringUtil;
 
 ////////////////////////////////////////////////////////////////
 

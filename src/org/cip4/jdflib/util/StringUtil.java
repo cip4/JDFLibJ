@@ -474,7 +474,9 @@ public class StringUtil
      * @return the single token (<code>null</code> if no token found)
      */
     public static String token(String strWork, int index, String delim)
-    {        
+    {   
+        if(strWork==null)
+            return null; // null bleibt null
         if(index<0)
         {
             VString v = StringUtil.tokenize(strWork, delim, false);            
@@ -1477,6 +1479,22 @@ public class StringUtil
         }
         return d;	
     }
+    /**
+     * parses a string to double and catches any format exception
+     * @param s the string to parse
+     * @param def the default to return in case of error
+     * @return the parsed double of s
+     */
+    public static boolean parseBoolean(String s, boolean def){
+        if(s==null)
+            return def;
+        s=s.trim().toLowerCase();
+        if("false".equals(s))
+            return false;
+        if("true".equals(s))
+            return true;
+        return def; 
+    }
 
     /**
      * parses a string to double and catches any format exception
@@ -1866,10 +1884,10 @@ public class StringUtil
     public static VString getNamesVector(Class e)
     {
         final VString namesVector = new VString();
-        final Iterator<ValuedEnum> it = EnumUtils.iterator(e);
+        final Iterator it = EnumUtils.iterator(e);
         while (it.hasNext())
         {
-            namesVector.addElement((it.next()).getName());
+            namesVector.addElement(((ValuedEnum)it.next()).getName());
         }
 
         return namesVector;

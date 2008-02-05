@@ -77,14 +77,17 @@
 package org.cip4.jdflib.util;
 
 import java.io.File;
+import java.util.Iterator;
 import java.util.Vector;
 
+import org.apache.commons.lang.enums.EnumUtils;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 
 
 /**
@@ -374,7 +377,14 @@ public class StringUtilTest extends JDFTestCaseBase
         assertNull(StringUtil.leftStr("abc",-55));
     }
 
-
+    public void testParseBoolean()
+    {
+        assertEquals(StringUtil.parseBoolean("", false),false);
+        assertEquals(StringUtil.parseBoolean("", true),true);
+        assertEquals(StringUtil.parseBoolean("TRUE ", false),true);
+        assertEquals(StringUtil.parseBoolean(" FalSe ", true),false);
+    }
+    
     public void testParseDouble()
     {
         String s="INF";
@@ -487,6 +497,7 @@ public class StringUtilTest extends JDFTestCaseBase
         assertEquals(StringUtil.token(s,-1," "),"4");      
         assertNull(StringUtil.token(s,4," "));      
         assertNull(StringUtil.token(s,-5," "));      
+        assertNull(StringUtil.token(null,2," "));      
     }
     ///////////////////////////////////////////////////////////////////////////
 
@@ -592,14 +603,16 @@ public class StringUtilTest extends JDFTestCaseBase
 
     public  void testGetNamesVector()
     {
-        VString v=StringUtil.getNamesVector(EnumOrientation.class);        
+        VString v=StringUtil.getNamesVector(EnumType.AbortQueueEntry.getClass());        
+        assertTrue(v.contains("Resource"));
+        v=StringUtil.getNamesVector(EnumOrientation.Flip0.getClass());        
         assertTrue(v.contains("Rotate90"));
     }   
     ///////////////////////////////////////////////////////////////////////////
 
     public  void testGetEnumsVector()
     {
-        Vector v=StringUtil.getEnumsVector(EnumOrientation.class);        
+        Vector v=StringUtil.getEnumsVector(EnumOrientation.Flip180.getClass());        
         assertTrue(v.contains(EnumOrientation.Rotate180));
     }   
 
