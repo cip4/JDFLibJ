@@ -15,6 +15,7 @@ package org.cip4.jdflib.node;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoSpawned;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 
@@ -127,7 +128,7 @@ public class JDFSpawned extends JDFAutoSpawned
     */
     public void appendrRefsROCopied (String rRefs)
     {
-        appendAttribute (JDFConstants.RREFSROCOPIED, rRefs, JDFConstants.EMPTYSTRING, JDFConstants.BLANK, false);
+        appendAttribute (JDFConstants.RREFSROCOPIED, rRefs, JDFConstants.EMPTYSTRING, JDFConstants.BLANK, true);
     }
     
    /**
@@ -136,7 +137,29 @@ public class JDFSpawned extends JDFAutoSpawned
     */
     public void appendrRefsRWCopied (String rRefs)
     {
-        appendAttribute (JDFConstants.RREFSRWCOPIED, rRefs, JDFConstants.EMPTYSTRING, JDFConstants.BLANK, false);
+        appendAttribute (JDFConstants.RREFSRWCOPIED, rRefs, JDFConstants.EMPTYSTRING, JDFConstants.BLANK, true);
     }
-    
+    /**
+     * Typesafe attribute adder of rRefsROCopied
+     * @param rRefs the reference list
+     */
+     public void appendrRefsROCopied (VString rRefs)
+     {
+         VString v0=getrRefsROCopied();
+         v0.appendUnique(rRefs);
+         setrRefsROCopied(v0);
+     }
+     
+    /**
+     * Typesafe attribute adder of rRefsRWCopied
+     * @param KString& rRefs the reference list
+     */
+     public void appendrRefsRWCopied (VString rRefs)
+     {
+         VString v0=getrRefsRWCopied();
+         v0.appendUnique(rRefs);
+         setrRefsRWCopied(v0);
+         
+     }
+ 
 }

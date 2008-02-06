@@ -6349,14 +6349,19 @@ public class KElement extends ElementNSImpl
         return false;
     }
 
-    /**
+    public void fillHashSet(String attName,String attNS, HashSet preFill)
+    {
+        fillHashSet(attName,attNS,preFill,true);
+    }
+   /**
      * fills a HashSet with all values of the attribute in all child elements
      * @param attName attribute name
      * @param attNS attrib ute namespaceuri
      * @param preFill the HashSet to fill
      */
-    public void fillHashSet(String attName,String attNS, HashSet preFill)
+    private void fillHashSet(String attName,String attNS, HashSet preFill, boolean bFirst)
     {
+        
         String attVal=getAttribute(attName,attNS,null);
         if(attVal!=null)
         {
@@ -6369,17 +6374,20 @@ public class KElement extends ElementNSImpl
         // get all subnodes, INCLUDING partition leaves
         VElement v=getChildElementVector_KElement(null,null,null,true,0);
         int siz=v.size();
-        for(int i=0;i<siz;i++)
+        for(int i=0;i<siz;i++) // do not recurse down again for the leaves, we've already done that
         {
-            v.item(i).fillHashSet(attName,attNS,preFill);
+            v.item(i).fillHashSet(attName,attNS,preFill,false);
         }
 
-        // also get all lower level parent partition refs
-        v=getChildElementVector(null,null,null,true,0,false);
-        siz=v.size();
-        for(int i=0;i<siz;i++)
+        if(bFirst)
         {
-            v.item(i).fillHashSet(attName,attNS,preFill);
+            // also get all lower level parent partition refs
+            v=getChildElementVector(null,null,null,true,0,false);
+            siz=v.size();
+            for(int i=0;i<siz;i++)
+            {
+                v.item(i).fillHashSet(attName,attNS,preFill,true);
+            }
         }
     }
 

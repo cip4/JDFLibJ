@@ -1160,6 +1160,10 @@ public class JDFResource extends JDFElement
             if(parentPool instanceof JDFResourcePool) {
                 rp=(JDFResourcePool) parentPool;
             }
+            else if(parentPool instanceof JDFNode)
+            {
+                rp=((JDFNode)parentPool).getCreateResourcePool();
+            }
 
             if (rp == null)
             {
@@ -4126,17 +4130,65 @@ public class JDFResource extends JDFElement
     @Override
 	public VElement getChildElementVector(String element, String nameSpaceURI, JDFAttributeMap mAttrib, boolean bAnd, int maxSize, boolean bResolveTarget)
     {
-        VElement v = super.getChildElementVector(element, nameSpaceURI, mAttrib, bAnd, 0, bResolveTarget);
+        VElement v = null;
         final String nodeName = getNodeName();
-
-        // remove partitions
-        for (int i = v.size()-1; i >= 0; i--)
+        final boolean bAlwaysFit = element==null && nameSpaceURI==null;
+        if(bAlwaysFit) // 
         {
-            if (nodeName.equals( (v.item(i)).getNodeName()) )
+            v=new VElement();
+            
+            final boolean bMapEmpty = mAttrib == null;
+
+            int iSize = 0;
+            KElement kElem = getFirstChildElement();
+
+            while (kElem != null)
             {
-                v.remove(i);
+                if (bResolveTarget && (kElem instanceof JDFRefElement))
+                {
+                    try
+                    {
+                        JDFRefElement ref = (JDFRefElement)kElem;
+                        KElement target = ref.getTarget();
+
+                        // in case there is no element for the REF, target will be null and will be skipped
+                        if ((target != null)&& (bMapEmpty || target.includesAttributes(mAttrib, bAnd)))
+                        {
+                            v.addElement(target);
+                            iSize++;
+                        }
+                    }
+                    catch (JDFException ex)
+                    {
+                        // simply skip invalid refelements
+                    }
+                }
+                else if ((bMapEmpty || kElem.includesAttributes(mAttrib, bAnd)) &&!nodeName.equals(kElem.getNodeName()))
+                {
+                    v.addElement(kElem);
+                    if (++iSize == maxSize)
+                    {
+                        break;
+                    }
+                }
+                kElem = kElem.getNextSiblingElement();
             }
+         }
+        else
+        {
+            v=super.getChildElementVector(element, nameSpaceURI, mAttrib, bAnd, 0, bResolveTarget);
+            // remove partitions
+            for (int i = v.size()-1; i >= 0; i--)
+            {
+                if (nodeName.equals( (v.item(i)).getNodeName()) )
+                {
+                    v.remove(i);
+                }
+            }
+
+
         }
+
 
         if (v.size() == 0 || isWildCard(element))
         {

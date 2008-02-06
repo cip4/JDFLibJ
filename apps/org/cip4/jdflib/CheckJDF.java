@@ -1129,8 +1129,11 @@ public class CheckJDF
 
         if (vMissingLinks!=null)
         {
-            if (testElement != null &&
-                    level.getValue()>= KElement.EnumValidationLevel.Complete.getValue())
+            if (vInvalidLinks!=null)
+            {
+                vInvalidLinks.removeStrings(vMissingLinks, 9999);
+            }           
+            if (testElement != null && EnumValidationLevel.isRequired(level))
             {
                 if(jdfNode.getElement(ElementName.RESOURCELINKPOOL, null, 0)==null)
                 {
@@ -1143,8 +1146,8 @@ public class CheckJDF
         }
         if (vInvalidLinks!=null)
         {
-            vInvalidLinks.removeStrings(vMissingLinks, 9999);
-            printResourceLinkPool(jdfNode.buildXPath(null,1)+ "/ResourceLinkPool[1]",testElement,vInvalidLinks,"Invalid");
+            if(vInvalidLinks.size()>0)
+                printResourceLinkPool(jdfNode.buildXPath(null,1)+ "/ResourceLinkPool[1]",testElement,vInvalidLinks,"Invalid");
         }
 
         return isValid;
@@ -1253,7 +1256,7 @@ public class CheckJDF
         int size = vLinks==null ? 0 : vLinks.size(); 
         for (int i = 0; i<size ; i++)
         {
-            String missResLink = vLinks.stringAt(i);
+            String missResLink = vLinks.stringAt(0);
             if (testElement != null)
             {
                 KElement e = testElement.appendElement("TestElement");
