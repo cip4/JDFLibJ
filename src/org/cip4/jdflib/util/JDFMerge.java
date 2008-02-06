@@ -1209,18 +1209,15 @@ public class JDFMerge
             {
                 final JDFMerged merged = (JDFMerged)vMerged.elementAt(i);
                 final String mergeID = merged.getMergeID();
-                VElement vDoubleSpawn=pool.getChildElementVector(ElementName.SPAWNED, null, new JDFAttributeMap(AttributeName.SPAWNID,mergeID), true, 0, false);
+                KElement doubleSpawn=pool.getChildWithAttribute(ElementName.SPAWNED, AttributeName.SPAWNID, null, mergeID, 0, true);
+                if(doubleSpawn!=null)
+                    continue; // skip cleanup in case spawned audits rely on this
+                
                 for (int j = vSpawned.size() - 1; j >= 0; j--)
                 {
                     final JDFSpawned spawned = (JDFSpawned)vSpawned.elementAt(i);
                     if (spawned.getNewSpawnID().equals(mergeID))
                     {
-                        for(int k=0;k<vDoubleSpawn.size();k++) // retain rrfefsrw / ro in case we do incorrect nesting
-                        {
-                            JDFSpawned doubleSpawned = (JDFSpawned)vDoubleSpawn.elementAt(i);
-                            doubleSpawned.appendrRefsROCopied(spawned.getrRefsROCopied());
-                            doubleSpawned.appendrRefsRWCopied(spawned.getrRefsRWCopied());
-                        }
                         
                         if (cleanPolicy == JDFNode.EnumCleanUpMerge.RemoveAll)
                         {
