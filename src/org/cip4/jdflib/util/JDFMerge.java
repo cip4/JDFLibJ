@@ -1183,7 +1183,6 @@ public class JDFMerge
         {
             VElement vMerged    = new VElement();
             VElement vSpawned   = new VElement();
-
             if (KElement.isWildCard(spawnID))
             {
                 vMerged     = pool.getAudits(JDFAudit.EnumAuditType.Merged, null,null);
@@ -1210,11 +1209,19 @@ public class JDFMerge
             {
                 final JDFMerged merged = (JDFMerged)vMerged.elementAt(i);
                 final String mergeID = merged.getMergeID();
+                VElement vDoubleSpawn=pool.getChildElementVector(ElementName.SPAWNED, null, new JDFAttributeMap(AttributeName.SPAWNID,mergeID), true, 0, false);
                 for (int j = vSpawned.size() - 1; j >= 0; j--)
                 {
                     final JDFSpawned spawned = (JDFSpawned)vSpawned.elementAt(i);
                     if (spawned.getNewSpawnID().equals(mergeID))
                     {
+                        for(int k=0;k<vDoubleSpawn.size();k++) // retain rrfefsrw / ro in case we do incorrect nesting
+                        {
+                            JDFSpawned doubleSpawned = (JDFSpawned)vDoubleSpawn.elementAt(i);
+                            doubleSpawned.appendrRefsROCopied(spawned.getrRefsROCopied());
+                            doubleSpawned.appendrRefsRWCopied(spawned.getrRefsRWCopied());
+                        }
+                        
                         if (cleanPolicy == JDFNode.EnumCleanUpMerge.RemoveAll)
                         {
                             spawned.deleteNode();
