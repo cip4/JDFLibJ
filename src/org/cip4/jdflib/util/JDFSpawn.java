@@ -792,6 +792,12 @@ public class JDFSpawn
         finalizeStatusAndAudits(vLocalSpawnParts, spawnAudit);
     }
 
+    /**
+     * update only local resources
+     * @param spawnID
+     * @param link
+     * @param vPartMap
+     */
     private void updateSpawnIDsInMain(String spawnID, JDFResourceLink link, VJDFAttributeMap vPartMap)
     {
         JDFResource rMain=link.getLinkRoot();
@@ -801,7 +807,20 @@ public class JDFSpawn
             for(int kk=0;kk<vMainPart.size();kk++)
             {
                 JDFResource rMainPart=(JDFResource) vMainPart.elementAt(kk);
-                if(rMainPart!=null && !rMainPart.includesMatchingAttribute(AttributeName.SPAWNIDS,spawnID,EnumAttributeType.NMTOKENS))
+                VElement leaves = rMainPart.getLeaves(true);
+                if(rMainPart==null)
+                    continue;
+                boolean bSpawnID=false;
+                
+                // if any child node or leaf has this spawnID we need not do anything
+                for(int kkk=0;kkk<leaves.size();kkk++)
+                {
+                    JDFResource rMainLeaf=(JDFResource) leaves.elementAt(kkk);
+                    bSpawnID=rMainLeaf.includesMatchingAttribute(AttributeName.SPAWNIDS,spawnID,EnumAttributeType.NMTOKENS);
+                    if(bSpawnID)
+                        break;
+                }
+                if(!bSpawnID)
                 {
                     rMainPart.appendSpawnIDs(spawnID);
                     rMainPart.setLocked(true);
