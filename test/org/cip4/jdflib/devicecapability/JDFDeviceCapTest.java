@@ -460,7 +460,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
         devicecap.setCombinedMethod(EnumCombinedMethod.ProcessGroup);
         n.setType("ProcessGroup",true);
         JDFNode n2=n.addJDFNode("fnarf");
-        assertTrue(devicecap.getMatchingTypeNodeVector(n).contains(n));
+        assertFalse("Only the actually matching nodes are returned, not their ancestors",devicecap.getMatchingTypeNodeVector(n).contains(n));
         assertTrue(devicecap.getMatchingTypeNodeVector(n).contains(n2));
         assertNull("want pg but have local node",devicecap.getMatchingTypeNodeVector(n2));
 
@@ -576,7 +576,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
         n.setType("ProcessGroup",true);
         JDFNode n2=n.addJDFNode("fnarf");
 
-        assertTrue(devicecap.matchesType(n,true));
+        assertFalse(devicecap.matchesType(n,true));
         assertTrue(devicecap.matchesType(n,false));
         assertTrue(device.matchesType(n,true));
         assertTrue(device.matchesType(n,false));

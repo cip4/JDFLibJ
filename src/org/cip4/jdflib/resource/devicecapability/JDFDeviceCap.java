@@ -122,6 +122,10 @@ import org.cip4.jdflib.util.VectorMap;
 
 public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 {
+    /**
+     * 
+     */
+    public static final String FITS_TYPE = "FitsType";
     private static final long serialVersionUID = 1L;
     private boolean ignoreExtensions=false;
     private boolean ignoreDefaults=false;
@@ -407,19 +411,19 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
             JDFMessageService ms=getMessageServiceForJMFType(m,knownMessagesResp);
             if(ms!=null)
             {
-                messageReport.setAttribute("FitsType", true, null);
+                messageReport.setAttribute(FITS_TYPE, true, null);
                 invalidDevCaps(ms,m, testlists, level, parentRoot,ignoreExtensions);
                 actionPoolReport(ms, m, parentRoot);
             }
             else
             {
-                messageReport.setAttribute("FitsType", false, null);
+                messageReport.setAttribute(FITS_TYPE, false, null);
 //              TODO           root.setAttribute("CapsType",typeExp);
                 messageReport.setAttribute("Message","JMF  Type: "+typeJMF+" does not match capabilities type: ");
             }
 
 
-            if (!messageReport.hasChildElements() && messageReport.getBoolAttribute("FitsType",null,true))
+            if (!messageReport.hasChildElements() && messageReport.getBoolAttribute(FITS_TYPE,null,true))
             {
                 messageReport.renameElement("ValidMessage", null);
             }
@@ -491,7 +495,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
         {
             root.setAttribute("IsValid", false, null);
         }
-        if(!matchesType(jdfRoot,false))
+        if(!matchesType(jdfRoot,true))
         {
             String typeNode = jdfRoot.getType();
             reportTypeMatch(root,false,typeNode,typeExp);
@@ -500,7 +504,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
         root = groupReport(jdfRoot, fitsValue, level,root);
         //TODO ???
-        if (!root.hasChildElements() && root.getBoolAttribute("FitsType",null,true))
+        if (!root.hasChildElements() && root.getBoolAttribute(FITS_TYPE,null,true))
         {
             root.deleteNode();
             root= null;
@@ -592,8 +596,6 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
                         v.add(node);
                     }
                 } 
-                if(v.size()>0)
-                    v.add(testRoot);
             }
             else 
             {
@@ -608,7 +610,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
     private static void reportTypeMatch(KElement report, boolean matches, String typeNode, String typeExp)
     {
-        report.setAttribute("FitsType", matches, null);
+        report.setAttribute(FITS_TYPE, matches, null);
         report.setAttribute("NodeType",typeNode);
         report.setAttribute("CapsType",typeExp);
         if(!matches)
@@ -675,11 +677,11 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
         VElement vNodes= getMatchingTypeNodeVector(jdfRoot);
         if (vNodes==null)  
         {
-            parentRoot.setAttribute("FitsType", false, null);
+            parentRoot.setAttribute(FITS_TYPE, false, null);
         }
         else 
         {
-            parentRoot.setAttribute("FitsType", true, null);
+            parentRoot.setAttribute(FITS_TYPE, true, null);
 
             // check the status of all child nodes
             for (int i=0; i < vNodes.size()-1; i++) 

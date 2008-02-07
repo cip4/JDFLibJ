@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -83,6 +83,7 @@ package org.cip4.jdflib.resource;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDevice;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.XMLDoc;
@@ -278,14 +279,32 @@ public class JDFDevice extends JDFAutoDevice
             vn.addAll(bugReport.getRoot().getChildElementVector(null, null, null, true, -1,false));
         }
             
-        XMLDoc bugReport = new XMLDoc("BugReport", null);
-        if(vn.size()==0)
+        final int vnSize = vn.size();
+        if(vnSize==0)
             return null;
 
+        XMLDoc bugReport = new XMLDoc("BugReport", null);
         KElement root=bugReport.getRoot();
-        for(int i=0;i<vn.size();i++)
+        boolean bFit=false;
+        for(int i=0;i<vnSize;i++)
         {
-            root.moveElement(vn.item(i), null);
+            KElement e=vn.elementAt(i);
+            if(JDFConstants.TRUE.equals(e.getAttribute(JDFDeviceCap.FITS_TYPE)))
+                bFit=true;
+        }  
+        if(bFit)
+        {
+            for(int i=0;i<vnSize;i++)
+            {
+                KElement e=vn.elementAt(i);
+                if(JDFConstants.FALSE.equals(e.getAttribute(JDFDeviceCap.FITS_TYPE)))
+                    vn.set(i, null);
+            }      
+        }
+        for(int i=0;i<vnSize;i++)
+        {
+            if(vn.elementAt(i)!=null)
+                root.moveElement(vn.item(i), null);
         }       
         return bugReport;
     } 
