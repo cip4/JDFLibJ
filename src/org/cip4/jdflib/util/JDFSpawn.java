@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -358,7 +358,7 @@ public class JDFSpawn
         while(iter.hasNext())
         {
             JDFElement liRoot = iter.next();
-
+            JDFResource r = null;
             boolean  bResRW = false;
             if(liRoot instanceof JDFResourceLink)
             {
@@ -366,44 +366,38 @@ public class JDFSpawn
                 if(bResRW)
                 {
                     JDFResourceLink rl = (JDFResourceLink)liRoot;
-                    JDFResource r      = rl.getTarget();
-                    if(r!=null)
-                    {
-                        VElement vRes      = new VElement();
-                        if(vSpawnParts==null || vSpawnParts.isEmpty())
-                        {
-                            vRes = r.getLeaves(false);
-                        }
-                        else
-                        {
-                            for(int j = 0; j < vSpawnParts.size(); j++)
-                            { 
-                                vRes.appendUnique(r.getPartitionVector(vSpawnParts.elementAt(j), null));
-                            }
-                        }
-                        for(int k = 0; k < vRes.size(); k++)
-                        {
-                            JDFResource rTarget = (JDFResource)vRes.elementAt(k);
-                            if(rTarget.getSpawnStatus() == JDFResource.EnumSpawnStatus.SpawnedRW)
-                            {
-                                if(!v.contains(rTarget))
-                                    v.add(rTarget);
-                            }
-                        }
-                    }
+                    r                 = rl.getTarget();
                 }
             }
             else if(liRoot instanceof JDFRefElement)
             {
                 JDFRefElement re = (JDFRefElement)liRoot;
-                JDFResource r    = re.getTarget();
+                r                = re.getTarget();
                 if(r!=null){
                     bResRW = resFitsRWRes(r,vRWResources);
-                    if(bResRW)
+                }
+            }
+            if(bResRW && r!=null)
+            {
+                VElement vRes      = new VElement();
+                if(vSpawnParts==null || vSpawnParts.isEmpty())
+                {
+                    vRes = r.getLeaves(false);
+                }
+                else
+                {
+                    for(int j = 0; j < vSpawnParts.size(); j++)
+                    { 
+                        vRes.appendUnique(r.getPartitionVector(vSpawnParts.elementAt(j), null));
+                    }
+                }
+                for(int k = 0; k < vRes.size(); k++)
+                {
+                    JDFResource rTarget = (JDFResource)vRes.elementAt(k);
+                    if(rTarget.getSpawnStatus() == JDFResource.EnumSpawnStatus.SpawnedRW)
                     {
-                        if(r.getSpawnStatus() == JDFResource.EnumSpawnStatus.SpawnedRW)
-                            if(!v.contains(r))
-                                v.add(r);
+                        if(!v.contains(rTarget))
+                            v.add(rTarget);
                     }
                 }
             }
