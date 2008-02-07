@@ -93,7 +93,8 @@ public class HotFolder implements Runnable
 {
     public int stabilizeTime=1000; // time between reads in milliseconds - also minimum lenght of non-modification
     private boolean interrupt=false; // if set to true, the watcher interupted and the thread ends
-
+    private static int nThread=0;
+    
     private File dir;
     private long lastModified=-1;
     private Vector<FileTime> lastFileTime;
@@ -120,11 +121,11 @@ public class HotFolder implements Runnable
     }
 
 
-    public void restart()
+    public synchronized void restart()
     {
         if(runThread!=null)
             stop();
-        runThread=new Thread(this);
+        runThread=new Thread(this,"HotFolder_"+nThread++);
         interrupt=false;
         runThread.start();
     }

@@ -5690,7 +5690,8 @@ public class JDFNode extends JDFElement
                     final JDFIntegerList combinedProcessIndex = rl.getCombinedProcessIndex();
                     if(combinedProcessIndex==null || (types!=null && combinedProcessIndex.size()==types.size()))
                     {
-                        nici=rl.getTarget();
+                        // in case of multiple parts - grab root - else potential performance hit
+                        nici=rl.getPart(1)==null ? rl.getTarget() : rl.getLinkRoot();
                         break;
                     }
                 }
