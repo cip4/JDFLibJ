@@ -7996,15 +7996,24 @@ public class JDFNode extends JDFElement
     {
         final JDFAttributeMap amPartMap = res.getPartMap();
 
-        ////////////////////////////////////////////////////////
-        // Check the process status.
-        //
+            ////////////////////////////////////////////////////////
+            // Check the process status.
+            //
 
-        boolean isProcStatOK = false; 
+        boolean isProcStatOK = false;
+
+            ////////////////////////////////////////////////////////
+            // Check if all child partitions are executable.
+            //
+
+        final VElement veChildPartitions = res.getChildElementVector_JDFElement(
+                res.getNodeName (), null, null, false, 0, true);
+
+        final int nChildPartitions = veChildPartitions.size ();
 
         final JDFElement.EnumNodeStatus stat = getPartStatus (amPartMap);
 
-        if ((stat==null) ||
+        if (((stat==null) && (nChildPartitions == 0)) ||
                 (stat == JDFNode.EnumNodeStatus.Waiting) ||
                 (stat == JDFNode.EnumNodeStatus.Ready)   )
         {
@@ -8013,14 +8022,6 @@ public class JDFNode extends JDFElement
 
         JDFResource.EnumPartUsage partUsage = res.getPartUsage ();
 
-        ////////////////////////////////////////////////////////
-        // Check if all child partitions are executable.
-        //
-
-        final VElement veChildPartitions = res.getChildElementVector_JDFElement(
-                res.getNodeName (), null, null, false, 0, true);
-
-        final int nChildPartitions = veChildPartitions.size ();
         boolean allChildsAvailable = true;
         for (int i = 0; i < nChildPartitions; i++)
         {
@@ -8039,7 +8040,7 @@ public class JDFNode extends JDFElement
                 {
                     isProcStatOK = false;
                 }
-            }            
+            }
         }
 
         ////////////////////////////////////////////////////////
@@ -8086,9 +8087,9 @@ public class JDFNode extends JDFElement
                 if (getStatus () == EnumNodeStatus.Part)
                 {
                     final JDFNodeInfo ni = getNodeInfo ();
-                  
-                    final VElement veParts = ni.getPartitionVector (amPartMap, JDFResource.EnumPartUsage.Implicit);  
-                          
+
+                    final VElement veParts = ni.getPartitionVector (amPartMap, JDFResource.EnumPartUsage.Implicit);
+
                     if ((veParts == null) || veParts.isEmpty ())
                     {
                         vamPartMaps.add (amPartMap);
@@ -8098,9 +8099,9 @@ public class JDFNode extends JDFElement
                         for (int p = 0; p < veParts.size (); p++)
                         {
                             final JDFNodeInfo niPart = (JDFNodeInfo) veParts.elementAt (p);
-              
+
                             final JDFElement.EnumNodeStatus statPart = niPart.getNodeStatus ();
-              
+
                             if ((statPart == JDFNode.EnumNodeStatus.Waiting)
                              || (statPart == JDFNode.EnumNodeStatus.Ready))
                             {
