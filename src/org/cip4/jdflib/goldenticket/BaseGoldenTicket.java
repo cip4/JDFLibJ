@@ -111,6 +111,7 @@ public class BaseGoldenTicket
     protected StatusCounter theStatusCounter;
     protected static String misURL=null;
     protected static String deviceURL=null;
+    
     /**
      * percentage allowed maxamount waste to be used for audits
      */
@@ -307,4 +308,5 @@ public class BaseGoldenTicket
     {
         BaseGoldenTicket.misURL = misURL;
     }
+    
 }
