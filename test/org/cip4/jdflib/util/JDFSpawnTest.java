@@ -772,7 +772,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
         JDFMerge merge=new JDFMerge(n);
         merge.mergeJDF(nS1, null, EnumCleanUpMerge.None, EnumAmountMerge.None);
-        assertEquals(n.getXPathAttribute("./ResourcePool/Component/Component/Component[@SheetName=\"sh1\"]/@foo",null),"fnarf");
+        assertEquals(n.getXPathAttribute("./ResourcePool/Component/Component/Component[@SheetName=\"sh1\"]/@foo",null),null);
     }
 
     ///////////////////////////////////////////////////////////
