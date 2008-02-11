@@ -2949,8 +2949,26 @@ public class JDFResource extends JDFElement
      * @param vValidParts vector of partmaps that define the individual valid parts.<br>
      *        The individual PartMaps are ored to define the final resource.
      */
-    public void reducePartitions(VJDFAttributeMap vValidParts)
+    public void reducePartitions(VJDFAttributeMap vValidParts_)
     {
+        VJDFAttributeMap vValidParts=vValidParts_;
+        if(vValidParts_!=null && vValidParts_.size()>0)
+        {
+            vValidParts=new VJDFAttributeMap(); // need local copy
+            for(int i=0;i<vValidParts_.size();i++)
+            {
+                JDFAttributeMap map=vValidParts_.elementAt(i);
+                VElement v=getPartitionVector(map, EnumPartUsage.Implicit);
+                int vSize=v==null ? 0 : v.size();
+                for(int j=0;j<vSize;j++)
+                {
+                    JDFResource r=(JDFResource) v.elementAt(j);
+                    vValidParts.add(r.getPartMap());
+                }
+            }
+        }
+        
+        
         final int size = vValidParts==null ? 0 : vValidParts.size();
         if (size != 0 && getPartIDKeys().size() > 0)
         {
@@ -4255,27 +4273,22 @@ public class JDFResource extends JDFElement
     /**
      * Tests if the resource is compatible with the given partition keys.
      *
-     * The resource is compatible if the PartIDKeys for
-     * the common start sequence of the PartIDKeys vectors are the same.
+     * The resource is compatible if all PartIDKeys in vsPartitions
+     * are contained in this, regardless of sequence
      * The resource is not compatible if one has PartIDKeys and the other not.
      *
      * @param vsPartitions the given partition keys to compare
      *
      * @return boolean - <code>true</code> if partitioning is compatible with this resource.
      */
-
     public boolean isPartitioningCompatible (VString vsPartitions)
     {
-        boolean isCompatible = true;
-
-        VString vsPartIDKeys1 = this.getPartIDKeys  ();
-
-        for (int i = 0; (i < vsPartIDKeys1.size ()) && (i < vsPartitions.size ()) && isCompatible; i++)
-        {
-            isCompatible = vsPartIDKeys1.stringAt (i).equals (vsPartitions.stringAt (i));
-        }
-
-        return (isCompatible);
+        if(vsPartitions==null || vsPartitions.isEmpty())
+            return true;
+        final VString vsPartIDKeysThis = getPartIDKeys();
+        if(vsPartIDKeysThis==null || vsPartIDKeysThis.isEmpty())
+            return false;
+        return vsPartIDKeysThis.containsAll (vsPartitions);
     }
 
     /**

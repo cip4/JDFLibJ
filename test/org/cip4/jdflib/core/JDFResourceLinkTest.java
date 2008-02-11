@@ -641,8 +641,26 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
         JDFDoc d=new JDFDoc(ElementName.JDF);
         JDFNode n=d.getJDFRoot();
         JDFResource r=n.addResource(ElementName.SCREENINGINTENT, null, EnumUsage.Input, null, null, null, null);
-        JDFResource rSig=r.addPartition(EnumPartIDKey.SignatureName, "sig1");
+
         JDFResourceLink rl=n.getLink(r, null);
+        // the root always exists
+        assertTrue(rl.hasResourcePartMap(null,false));
+        assertTrue(rl.hasResourcePartMap(null,true));
+        
+        final JDFAttributeMap attributeMap = new JDFAttributeMap(EnumPartIDKey.SignatureName, "sig1");
+
+        assertTrue(rl.hasResourcePartMap(attributeMap,false));
+        assertFalse(rl.hasResourcePartMap(attributeMap,true));
+               
+        r.setPartUsage(EnumPartUsage.Implicit);
+        assertTrue(rl.hasResourcePartMap(attributeMap,false));
+        assertTrue(rl.hasResourcePartMap(attributeMap,true));
+
+        
+        r.setPartUsage(EnumPartUsage.Explicit);
+
+        
+        JDFResource rSig=r.addPartition(EnumPartIDKey.SignatureName, "sig1");
         
         // the root always exists
         assertTrue(rl.hasResourcePartMap(null,false));
@@ -656,11 +674,14 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
         // resource is partitioned deeper than link
         rSig.addPartition(EnumPartIDKey.SheetName, "sh1");
         assertTrue(rl.hasResourcePartMap(null,false));
-        final JDFAttributeMap attributeMap = new JDFAttributeMap(EnumPartIDKey.SignatureName, "sig1");
         assertTrue(rl.hasResourcePartMap(attributeMap,false));
         
         attributeMap.put(EnumPartIDKey.SheetName, "sh1");
         assertTrue(rl.hasResourcePartMap(attributeMap,true));
+        assertFalse(rl.hasResourcePartMap(attributeMap,false));
+        
+        attributeMap.put(EnumPartIDKey.SheetName, "sh2");
+        assertFalse(rl.hasResourcePartMap(attributeMap,true));
         assertFalse(rl.hasResourcePartMap(attributeMap,false));
         
         attributeMap.put(EnumPartIDKey.Side, "Front");

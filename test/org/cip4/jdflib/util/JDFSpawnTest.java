@@ -772,7 +772,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
         JDFMerge merge=new JDFMerge(n);
         merge.mergeJDF(nS1, null, EnumCleanUpMerge.None, EnumAmountMerge.None);
-        assertEquals(n.getXPathAttribute("./ResourcePool/Component/Component/Component[@SheetName=\"sh1\"]/@foo",null),null);
+        assertEquals("only the sides are apawned, not the sheet proper",n.getXPathAttribute("./ResourcePool/Component/Component/Component[@SheetName=\"sh1\"]/@foo",null),null);
     }
 
     ///////////////////////////////////////////////////////////
@@ -1831,6 +1831,65 @@ public class JDFSpawnTest extends JDFTestCaseBase
         }
 
         return strSpawnID;
+    }
+
+    //////////////////////////////////////////////////////////
+
+    public void testSpawnSheetMix() throws Exception
+    {
+       JDFNode nr=new JDFDoc("JDF").getJDFRoot();
+       nr.setType(EnumType.Product);
+       JDFNode n=nr.addJDFNode("Combined");
+       JDFNodeInfo ni=n.getCreateNodeInfo();
+       n.setCombined(new VString("Interpreting Rendering ImageSetting",null));
+       JDFRunList rl=(JDFRunList) n.addResource(ElementName.RUNLIST, null, EnumUsage.Output,null,nr,null,null);
+       rl.setPartUsage(EnumPartUsage.Implicit);
+       VString pik=new VString("SignatureName SheetName Side Separation PartVersion",null);
+       JDFAttributeMap map=new JDFAttributeMap(AttributeName.SIGNATURENAME,"Sig1");
+       map.put(AttributeName.PARTVERSION,"en");
+       map.put(AttributeName.SHEETNAME,"s1");
+       map.put(AttributeName.SIDE,"Front");
+       map.put(AttributeName.SEPARATION,"Black");
+       rl.getCreatePartition(map, pik);
+       ni.getCreatePartition(map, pik);
+       map.put(AttributeName.SEPARATION,"Cyan");
+       rl.getCreatePartition(map, pik);
+       ni.getCreatePartition(map, pik);
+       map.put(AttributeName.SEPARATION,"Yellow");
+       ni.getCreatePartition(map, pik);
+      
+       VJDFAttributeMap vm=new VJDFAttributeMap();
+       JDFAttributeMap ms=new JDFAttributeMap(AttributeName.SIGNATURENAME,"Sig1");
+       ms.put(AttributeName.PARTVERSION,"en");
+       ms.put(AttributeName.SEPARATION,"Black");
+       vm.add(ms);
+       JDFAttributeMap ms2=new JDFAttributeMap(ms);
+       ms2.put(AttributeName.SEPARATION,"Yellow"); // not there...
+       vm.add(ms2);
+       
+       JDFSpawn sp=new JDFSpawn(n);
+       sp.vSpawnParts=vm;
+       sp.vRWResources_in=new VString("Output",null);
+       sp.bFixResources=false;
+       
+       JDFNode spawned = sp.spawn();
+       
+       JDFRunList rlS=(JDFRunList) spawned.getResource(ElementName.RUNLIST, null, 0);
+       assertTrue(rlS.toString().indexOf("Cyan")>0);
+       map.put(AttributeName.SEPARATION,"Magenta");
+       rlS.getCreatePartition(map, pik);
+       
+       assertTrue(rl.toString().indexOf("SpawnedRW")>0);
+       assertEquals(rl.getPartition(ms2, null).getAttribute_KElement(AttributeName.SPAWNSTATUS),"SpawnedRW");
+  //     assertEquals(rl.getPartition(ms, null).getAttribute_KElement(AttributeName.SPAWNSTATUS),"");
+       
+       JDFMerge m=new JDFMerge(nr);
+       n=m.mergeJDF(spawned, null, EnumCleanUpMerge.RemoveAll, EnumAmountMerge.UpdateLink);
+       
+       assertTrue(rl.toString().indexOf("SpawnedRW")<0);
+       assertTrue(n.toString().indexOf("SpawnedRW")<0);
+       assertTrue(n.toString().indexOf("SpawnID")<0);
+       assertNotNull(rl.getPartition(map, null));
     }
 
     //////////////////////////////////////////////////////////

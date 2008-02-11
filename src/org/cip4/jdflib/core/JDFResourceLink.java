@@ -999,7 +999,6 @@ public class JDFResourceLink extends JDFElement
         final boolean bImplicit = JDFResource.EnumPartUsage.Implicit.equals(partUsage);
         if (bCheckResource)
         {
-//          vPart = getResourcePartMapVector();
             if((partMap == null || partMap.isEmpty()))
             {
                 return true;
@@ -1036,9 +1035,6 @@ public class JDFResourceLink extends JDFElement
                 }
                 for (int i = 0; i < siz; i++)
                 {
-                    if(vPart==null)
-                        return true;
-
                     if (vPart.elementAt(i).overlapMap(partMap))
                         return true;
                 }
