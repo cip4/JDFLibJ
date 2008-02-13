@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -237,8 +237,8 @@ public final class AttributeName
     public static final String BLACKDENSITYLIMIT = "BlackDensityLimit";
     public static final String BLACKGENERATION = "BlackGeneration";
     public static final String BLACKWIDTH = "BlackWidth";
-    public static final String BLANKDIMENSIONSX = "BlankDimensionsY";
-    public static final String BLANKDIMENSIONSY = "BlankDimensionsX";
+    public static final String BLANKDIMENSIONSX = "BlankDimensionsX";
+    public static final String BLANKDIMENSIONSY = "BlankDimensionsY";
     public static final String BLANKPAGE = "BlankPage";
     public static final String BLEEDFACE = "BleedFace";
     public static final String BLEEDFOOT = "BleedFoot";
