@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -88,7 +88,7 @@ import java.util.Vector;
  * @author prosirai
  *
  */
-public class VectorMap extends HashMap
+public class VectorMap<key,vectorObject> extends HashMap<key,Vector<vectorObject>>
 {
 
     /**
@@ -104,9 +104,9 @@ public class VectorMap extends HashMap
     /**
      * get the value for key
      */
-    public Object getOne(Object key, int i)
+    public vectorObject getOne(Object key, int i)
     {
-        Vector c=(Vector) get(key);
+        Vector<vectorObject> c= get(key);
         if(c==null)
             return null;
         int n=c.size();
@@ -119,9 +119,9 @@ public class VectorMap extends HashMap
     /**
      * get the value for key
      */
-    public Object getOne(Object key, Object singleObject)
+    public Object getOne(key key, vectorObject singleObject)
     {
-        Vector c=(Vector) get(key);
+        Vector<vectorObject> c= get(key);
         if(c==null)
             return null;
         int i=c.indexOf(singleObject);
@@ -130,9 +130,9 @@ public class VectorMap extends HashMap
     /**
      * get the size of the vector for key
      */
-    public int size(Object key)
+    public int size(key key)
     {
-        Vector c=(Vector) get(key);
+        Vector<vectorObject> c= get(key);
         if(c==null)
             return 0;
         return c.size();
@@ -141,12 +141,12 @@ public class VectorMap extends HashMap
     /**
      * put the value for key, ensuring uniqueness
      */
-    public void putOne(Object key, Object val)
+    public void putOne(key key, vectorObject val)
     {
-        Vector v=(Vector) get(key);
+        Vector<vectorObject> v= get(key);
         if(v==null)
         {
-            v=new Vector();
+            v=new Vector<vectorObject>();
             put(key,v);
         }
         if(!v.contains(val))
@@ -155,9 +155,9 @@ public class VectorMap extends HashMap
     /**
      * remove the value for key,also remove key if the vector is empty
      */
-    public void removeOne(Object key, Object val)
+    public void removeOne(key key, vectorObject val)
     {
-        Vector v=(Vector) get(key);
+        Vector v=get(key);
         if(v!=null)
         {
             v.remove(val);

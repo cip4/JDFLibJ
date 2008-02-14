@@ -153,12 +153,6 @@ public class QueueTest extends TestCase
         assertEquals("date",d.getTimeInMillis(),new JDFDate().getTimeInMillis(),10000);        
     }
 
-    public void testEndTime()
-    {
-        JDFQueueEntry _qe = (JDFQueueEntry) new JDFDoc(ElementName.QUEUEENTRY).getRoot();
-        _qe.getEndTime();
-    }
-
     public void testThreads()
     {
         q.setAutomated(true);
@@ -244,38 +238,6 @@ public class QueueTest extends TestCase
         assertEquals(q.getNextExecutableQueueEntry("d1","foo:foo2"), q.getQueueEntry("qe1"));
     }
 
-/////////////////////////////////////////////////////////////////////////////
-
-    public void testSetPriority()
-    {
-        JDFQueueEntry qe=q.getQueueEntry("qe2");
-        assertEquals(q.getQueueEntryPos("qe2"), 1);
-        q.setAutomated(true);
-        int l=q.numEntries(null);
-        qe.setPriority(99);
-        assertEquals(q.numEntries(null), l);
-        assertEquals(q.getQueueEntryPos("qe2"), 0);
-
-        qe.setPriority(0);
-        assertEquals(q.numEntries(null), l);
-        assertEquals(q.getQueueEntryPos("qe2"), 1);
-        q.removeChildren(ElementName.QUEUEENTRY, null,null);
-        for(int i=0;i<1000;i++)
-        {
-            qe = q.appendQueueEntry();
-            qe.setQueueEntryID("q"+i);
-            qe.setPriority((i*7)%100);
-            qe.setQueueEntryStatus((i%3!=0) ? EnumQueueEntryStatus.Waiting : EnumQueueEntryStatus.Running);
-        }
-        int n=9999999;
-        for(int i=0;i<1000;i++)
-        {
-            qe=q.getQueueEntry(i);
-            int n2=qe.getSortPriority();
-            assertTrue("queue is sorted: "+i,n2<=n);
-            n=n2;
-        }
-    }
 
 /////////////////////////////////////////////////////////////////////////////
 
@@ -303,45 +265,12 @@ public class QueueTest extends TestCase
         assertEquals(q2.numEntries(null), 3);
         assertNotSame(q, q2);
         assertTrue(q.numEntries(null)>3);
-
-
-    }
-/////////////////////////////////////////////////////////////////////////////
-
-    public void testSetQueueEntryStatus()
-    {
-        JDFQueueEntry qe=q.getQueueEntry("qe2");
-        assertEquals(q.getQueueEntryPos("qe2"), 1);
-        q.setAutomated(true);
-        assertNull(q.getQueueStatus());
-        q.setMaxRunningEntries(3);
-        q.setMaxCompletedEntries(9999);
-        int l=q.numEntries(null);
-        qe.setQueueEntryStatus(EnumQueueEntryStatus.Completed);
-        assertEquals(q.numEntries(null), l);
-        assertEquals(q.getQueueEntryPos("qe2"), 2);
-        assertEquals("3 is max", EnumQueueStatus.Waiting,q.getQueueStatus());
-        qe.setQueueEntryStatus(EnumQueueEntryStatus.Running);
-        assertEquals("3 is max", EnumQueueStatus.Waiting,q.getQueueStatus());
-        assertEquals(q.numEntries(null), l);
-        assertEquals(q.getQueueEntryPos("qe2"), 0);
-        qe=q.getQueueEntry("qe1");
-        qe.setQueueEntryStatus(EnumQueueEntryStatus.Running);
-        assertEquals("3 is max", EnumQueueStatus.Running,q.getQueueStatus());
-        assertEquals(q.numEntries(null), l);
-        assertEquals(q.getQueueEntryPos("qe1"), 1);
-
-        qe=q.getQueueEntry("qe5");
-        qe.setQueueEntryStatus(EnumQueueEntryStatus.Aborted);
-        assertEquals("3 is max", EnumQueueStatus.Waiting,q.getQueueStatus());
-        assertEquals(q.numEntries(null), l);
-        assertEquals(q.getQueueEntryPos("qe5"), 4);
-
-        qe=q.getQueueEntry("qe1");
-        qe.setQueueEntryStatus(EnumQueueEntryStatus.Aborted);
-        assertEquals("3 is max", EnumQueueStatus.Waiting,q.getQueueStatus());
-        assertEquals(q.numEntries(null), l);
-        assertEquals(q.getQueueEntryPos("qe1"), 3);
+        q2=q.copyToResponse(r, qf);
+        assertEquals(q2,r.getQueue(0));
+        assertNull(r.getElement("Queue",null,1));
+        assertEquals(q2.numEntries(null), 3);
+        assertNotSame(q, q2);
+        assertTrue(q.numEntries(null)>3);
     }
 
     /* (non-Javadoc)

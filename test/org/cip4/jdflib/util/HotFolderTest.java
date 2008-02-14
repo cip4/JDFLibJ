@@ -226,12 +226,12 @@ public class HotFolderTest extends JDFTestCaseBase
             fos.write(i);
             fos.flush();
 
-            StatusCounter.sleep(100);
+            StatusCounter.sleep(10);
 
         }
+        assertTrue(file.exists());
         fos.close();
 
-        assertTrue(file.exists());
         StatusCounter.sleep(3000);
         assertFalse(file.exists());
 

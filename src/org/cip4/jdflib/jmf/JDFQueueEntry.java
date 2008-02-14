@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -81,6 +81,9 @@ Revision history:    ...
 
 
 package org.cip4.jdflib.jmf;
+
+import java.util.Iterator;
+import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry;
@@ -332,14 +335,89 @@ public class JDFQueueEntry extends JDFAutoQueueEntry
     {
         return (JDFQueueEntry)getNextSiblingElement(ElementName.QUEUEENTRY,null);
     }
-    /**
-     * get the previous sibling queueentry
-     * @return
-     */
-    public JDFQueueEntry getPreviousQueueEntry()
-    {
-        return (JDFQueueEntry)getPreviousSiblingElement(ElementName.QUEUEENTRY,null);
-    }
+   /**
+    * get the previous sibling queueentry
+    * @return
+    */
+   public JDFQueueEntry getPreviousQueueEntry()
+   {
+       return (JDFQueueEntry)getPreviousSiblingElement(ElementName.QUEUEENTRY,null);
+   }
+   /**
+    * get the vector of valid next @Status values for this queue entry based on the current staus
+    * based on the table of valid queue entry transitions
+    * 
+    * @return  Vector<EnumQueueEntryStatus> the vector of valid new stati
+    */
+   public Vector<EnumQueueEntryStatus> getNextStatusVector()
+   {
+       Vector<EnumQueueEntryStatus> v=new Vector<EnumQueueEntryStatus>();
+       
+       final EnumQueueEntryStatus qesThis=getQueueEntryStatus();
+       if(qesThis==null)
+       {
+           Iterator<EnumQueueEntryStatus>it=EnumQueueEntryStatus.iterator();
+           while(it.hasNext())
+               v.add(it.next());
+       }
+       else if(EnumQueueEntryStatus.Running.equals(qesThis))
+       {
+           v.add(EnumQueueEntryStatus.Running);
+           v.add(EnumQueueEntryStatus.PendingReturn);
+           v.add(EnumQueueEntryStatus.Completed);
+           v.add(EnumQueueEntryStatus.Aborted);
+                 }
+       else if(EnumQueueEntryStatus.Waiting.equals(qesThis))
+       {
+           v.add(EnumQueueEntryStatus.Running);
+           v.add(EnumQueueEntryStatus.Waiting);
+           v.add(EnumQueueEntryStatus.Held);
+           v.add(EnumQueueEntryStatus.Removed);
+           v.add(EnumQueueEntryStatus.PendingReturn);
+           v.add(EnumQueueEntryStatus.Aborted);
+       }
+       else if(EnumQueueEntryStatus.Held.equals(qesThis))
+       {
+           v.add(EnumQueueEntryStatus.Waiting);
+           v.add(EnumQueueEntryStatus.Held);
+           v.add(EnumQueueEntryStatus.Removed);
+           v.add(EnumQueueEntryStatus.PendingReturn);
+           v.add(EnumQueueEntryStatus.Aborted);
+       }
+       else if(EnumQueueEntryStatus.Removed.equals(qesThis))
+       {
+           v.add(EnumQueueEntryStatus.Removed);
+       }
+       else if(EnumQueueEntryStatus.Suspended.equals(qesThis))
+       {
+           v.add(EnumQueueEntryStatus.Running);
+           v.add(EnumQueueEntryStatus.Suspended);
+           v.add(EnumQueueEntryStatus.Aborted);
+       }
+       else if(EnumQueueEntryStatus.PendingReturn.equals(qesThis))
+       {
+           v.add(EnumQueueEntryStatus.PendingReturn);
+           v.add(EnumQueueEntryStatus.Completed);
+           v.add(EnumQueueEntryStatus.Aborted);
+       }
+       else if(EnumQueueEntryStatus.Completed.equals(qesThis))
+       {
+           v.add(EnumQueueEntryStatus.Waiting);
+           v.add(EnumQueueEntryStatus.Removed);
+           v.add(EnumQueueEntryStatus.PendingReturn);
+           v.add(EnumQueueEntryStatus.Completed);
+           v.add(EnumQueueEntryStatus.Aborted);
+       }
+       else if(EnumQueueEntryStatus.Aborted.equals(qesThis))
+       {
+           v.add(EnumQueueEntryStatus.Waiting);
+           v.add(EnumQueueEntryStatus.Removed);
+           v.add(EnumQueueEntryStatus.PendingReturn);
+           v.add(EnumQueueEntryStatus.Aborted);
+       }
+
+       return v;
+   }
 
     /**
      * @return true if this entry is completed

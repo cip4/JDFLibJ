@@ -278,7 +278,13 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
         }
         return v;
     }
+    public final VString getNamePathVector()
+    {
+        VString vResult=new VString();
+        vResult.add(ElementName.JDF);
 
+        return vResult;
+    }      
 
     /* ******************************************************
      // FitsValue Methods

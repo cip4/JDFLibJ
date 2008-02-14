@@ -70,6 +70,7 @@
  */
 package org.cip4.jdflib.ifaces;
 
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.devicecapability.JDFActionPool;
 import org.cip4.jdflib.resource.devicecapability.JDFTestPool;
 
@@ -100,5 +101,8 @@ public interface IDeviceCapable
      * @return
      */
     JDFTestPool getTestPool();
+    
+    VString getNamePathVector();             
+
 
 }

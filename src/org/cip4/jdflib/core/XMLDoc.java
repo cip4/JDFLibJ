@@ -1485,6 +1485,7 @@ public class XMLDoc
                 write2Stream(urlCon.getOutputStream(), 0, true);
                 final JDFParser parser = new JDFParser();
                 final InputStream inStream = urlCon.getInputStream();
+               
                 parser.parseStream(inStream); 
                 docResponse = parser.getDocument()==null ? null : new XMLDoc(parser.getDocument());
             }

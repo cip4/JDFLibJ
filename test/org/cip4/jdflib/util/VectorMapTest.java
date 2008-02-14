@@ -76,7 +76,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 
 public class VectorMapTest extends JDFTestCaseBase
 {
-    private VectorMap m;
+    private VectorMap<String,String> m;
 
     public void testSize()
     {
@@ -114,7 +114,7 @@ public class VectorMapTest extends JDFTestCaseBase
     {
         // TODO Auto-generated method stub
         super.setUp();
-        m=new VectorMap();
+        m=new VectorMap<String,String>();
         m.putOne("a", "b");
         m.putOne("a", "c");
         m.putOne("a2", "c");

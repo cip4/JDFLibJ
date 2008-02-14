@@ -144,6 +144,7 @@ import org.cip4.jdflib.jmf.JDFJobPhaseTest;
 import org.cip4.jdflib.jmf.JDFMessageServiceTest;
 import org.cip4.jdflib.jmf.JDFMessageTest;
 import org.cip4.jdflib.jmf.JDFPipeParamsTest;
+import org.cip4.jdflib.jmf.JDFQueueEntryTest;
 import org.cip4.jdflib.jmf.JDFQueueFilterTest;
 import org.cip4.jdflib.jmf.JDFQueueSubmissionParamsTest;
 import org.cip4.jdflib.jmf.JMFKnownMessagesTest;
@@ -309,6 +310,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JDFMessageTest.class);
         suite.addTestSuite(JDFMessageServiceTest.class);
         suite.addTestSuite(JDFPipeParamsTest.class);
+        suite.addTestSuite(JDFQueueEntryTest.class);
         suite.addTestSuite(JDFQueueFilterTest.class);
         suite.addTestSuite(JMFKnownMessagesTest.class);
         suite.addTestSuite(JDFQueueSubmissionParamsTest.class);

@@ -4311,6 +4311,18 @@ public class JDFElement extends KElement
     {
         return (JDFComment) getElement(ElementName.COMMENT, null, iSkip);
     }
+    /**
+     * Gets the  Comment with a give @Name
+     * @param _name Comment/@Name
+     * @param index number of elements to skip
+     * @return JDFComment - the matching element
+     *
+     * 
+     */
+    public JDFComment getComment(String _name, int index)
+    {
+        return (JDFComment) getChildWithAttribute(ElementName.COMMENT, AttributeName.NAME, null, _name, index, true);
+    }
 
     //////////////////////////////////////////////////////////////////////
 

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -89,6 +89,7 @@ import org.cip4.jdflib.auto.JDFAutoDevCaps.EnumContext;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.ifaces.ICapabilityElement;
 import org.cip4.jdflib.ifaces.IDeviceCapable;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
@@ -203,6 +204,18 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
         dcs.setContext(EnumContext.JMF);
         return dcs;
     }
+    
+    public final VString getNamePathVector()
+    {
+        VString vResult=new VString();
+        Vector<EnumFamily> families=getFamilies();
+        int siz=families==null ? 0 : families.size();
+        for(int i=0;i<siz;i++)
+            vResult.add(families.get(i).getName());
+
+        return vResult;
+    }      
+    
     /**
      * get the list of supported families
      * 
