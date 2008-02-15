@@ -203,7 +203,7 @@ public abstract class JDFConstants
     public static final String HELD                = "Held";
     // additional stati
     public static final String UNREACHABLE         = "Unreachable";
-    public static final String NEEDSATTENTION      = "Needs Attention";
+    public static final String NEEDSATTENTION      = "NeedsAttention";
 
     // EnumQueueEntryStatus : enums accordng to JDF spec 5.6.4, Table 5-79 Status of a QueueEntry
 //  final static String RUNNING             = "Running";

@@ -4316,8 +4316,7 @@ public class JDFElement extends KElement
      * @param _name Comment/@Name
      * @param index number of elements to skip
      * @return JDFComment - the matching element
-     *
-     * 
+      * 
      */
     public JDFComment getComment(String _name, int index)
     {

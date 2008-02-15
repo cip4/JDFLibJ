@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -79,6 +79,7 @@
 package org.cip4.jdflib.core;
 
 
+import java.io.File;
 import java.io.InputStream;
 
 import javax.mail.BodyPart;
@@ -341,8 +342,13 @@ public class JDFDoc extends XMLDoc
     {
         JDFParser p=new JDFParser();
         InputStream inStream=UrlUtil.getURLInputStream(url, bp);
-        return p.parseStream(inStream);
-     }
+        File f=UrlUtil.urlToFile(url);
+
+        JDFDoc d= p.parseStream(inStream);
+        if(f!=null && f.canRead())
+            d.setOriginalFileName(f.getAbsolutePath());
+        return d;
+    }
 
     /**
      * initialize a new root of strDocType in the document

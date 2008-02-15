@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -332,13 +332,24 @@ public class JDFDate implements Comparable
 
 
     /**
+     * returns the date and time of this in nonean arbitrary pattern
+     * @param format the format string using {@link FastDateFormat} formatting
+     * @return String - the date as specified by patter
+     * @throws IllegalArgumentException
+     */
+    public String getFormattedDateTime(String format)
+    {
+
+        return getDateFormat(format).format(getCalendar());
+    }
+    /**
      * returns the date and time of this in none ISO pattern 'yyyyMMddHHmmss'
      * @return String - the date in pattern yyyyMMddHHmmss
      */
     public String getDateTime()
     {
 
-        return FastDateFormat.getInstance("yyyyMMddHHmmss").format(this);
+        return getFormattedDateTime("yyyyMMddHHmmss");
     }
 
 

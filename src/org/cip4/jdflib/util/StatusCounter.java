@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -138,6 +138,7 @@ public class StatusCounter
     protected HashSet setCopyResInfo=new HashSet();
     private EnumDeviceStatus status=null;
     private String statusDetails=null;
+    private JDFDate startDate;
 
 
     /**
@@ -166,6 +167,7 @@ public class StatusCounter
         firstRefID=null;
         docJMFResource=null;
         docJMFPhaseTime=null;
+        startDate=new JDFDate();
         if(node==null)
         {
             setPhase(null, null, EnumDeviceStatus.Idle, null);
@@ -220,6 +222,9 @@ public class StatusCounter
         if(vLinkAmount==null || vLinkAmount.length==0) {
             return null;
         }
+        if(refID==null)
+            refID=getFirstRefID();
+        
         for(int i=0;i<vLinkAmount.length;i++)
         {
             if(vLinkAmount[i].linkFitsKey(refID)) 
@@ -289,10 +294,52 @@ public class StatusCounter
      */
     public void addPhase(String refID, double amount, double waste)
     { 
+        if(refID==null)
+            refID=getFirstRefID();
         LinkAmount la=getLinkAmount(refID);
         if(la==null)
             return;
         la.addPhase(amount, waste, false);
+    }
+    /**
+     * get the total the amount of the resource with id refID
+     * 
+     * @param refID, type or usage of the resource, 
+     */
+    public double getTotalAmount(String refID)
+    { 
+        final LinkAmount la=getLinkAmount(refID);
+        return la==null ? 0 : la.lastBag.totalAmount;
+    }
+    /**
+     * get the total the amount of the resource with id refID
+     * 
+     * @param refID, type or usage of the resource, 
+     */
+    public double getPhaseAmount(String refID)
+    { 
+        final LinkAmount la=getLinkAmount(refID);
+        return la==null ? 0 : la.lastBag.phaseAmount;
+    }
+    /**
+     * get the total the amount of the resource with id refID
+     * 
+     * @param refID, type or usage of the resource, 
+     */
+    public double getTotalWaste(String refID)
+    { 
+        final LinkAmount la=getLinkAmount(refID);
+        return la==null ? 0 : la.lastBag.totalWaste;
+    }
+    /**
+     * get the total the amount of the resource with id refID
+     * 
+     * @param refID, type or usage of the resource, 
+     */
+    public double getPhaseWaste(String refID)
+    { 
+        final LinkAmount la=getLinkAmount(refID);
+        return la==null ? 0 : la.lastBag.phaseWaste;
     }
     /**
      * Set the Status and StatusDetails of this node
@@ -341,6 +388,7 @@ public class StatusCounter
         {
             bChanged=true;
             closeJobPhase(jmfStatus, la, lastPhase, nextPhase); // attention - resets la to 0 - all calls after this have the new amounts
+            startDate=new JDFDate();
         }
 
         if(nextPhase!=null)
@@ -386,18 +434,18 @@ public class StatusCounter
     {        
         boolean bChanged = docJMFPhaseTime==null; // first aftersetPhase
         JDFResponse r=bChanged ? null : docJMFPhaseTime.getJMFRoot().getResponse(0);
-        JDFDeviceInfo di2=r==null ? null : r.getDeviceInfo(-1);
+        JDFDeviceInfo lastDevInfo=r==null ? null : r.getDeviceInfo(-1);
         status=deviceStatus;
         statusDetails=deviceStatusDetails;
 
-        bChanged=bChanged || !ContainerUtil.equals(deviceStatusDetails, di2==null ? null : di2.getAttribute(AttributeName.STATUSDETAILS,null,null));
-        JDFDate d = ( di2==null || di2.getIdleStartTime()==null || bChanged) ? new JDFDate() : di2.getIdleStartTime();
+        bChanged=bChanged || !ContainerUtil.equals(deviceStatusDetails, lastDevInfo==null ? null : lastDevInfo.getAttribute(AttributeName.STATUSDETAILS,null,null));
+        startDate = ( lastDevInfo==null || lastDevInfo.getIdleStartTime()==null || bChanged) ? new JDFDate() : lastDevInfo.getIdleStartTime();
 
         docJMFPhaseTime=new JDFDoc(ElementName.JMF);
-        JDFDeviceInfo di=docJMFPhaseTime.getJMFRoot().appendResponse(EnumType.Status).appendDeviceInfo();
-        di.setDeviceStatus(deviceStatus);
-        di.setStatusDetails(deviceStatusDetails);
-        di.setIdleStartTime(d);
+        JDFDeviceInfo newDevInfo=docJMFPhaseTime.getJMFRoot().appendResponse(EnumType.Status).appendDeviceInfo();
+        newDevInfo.setDeviceStatus(deviceStatus);
+        newDevInfo.setStatusDetails(deviceStatusDetails);
+        newDevInfo.setIdleStartTime(startDate);
         return bChanged;
     }
 
@@ -1057,6 +1105,11 @@ public class StatusCounter
     public String getStatusDetails()
     {
         return statusDetails;
+    }
+
+    public JDFDate getStartDate()
+    {
+        return startDate;
     }
 
 }

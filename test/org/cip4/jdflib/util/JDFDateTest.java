@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -320,6 +320,18 @@ public class JDFDateTest extends TestCase
         String strDate4 = date4.getDateTimeISO();
         assertEquals("Bug "+strDate+" is not equal to "+strDate4, date,date4);
     }
+    
+    public void testGetFormattedDateTime() throws Exception
+    {
+        JDFDate date = new JDFDate("2008-12-19T07:00:11.300+00:00");
+        assertEquals("2008", date.getFormattedDateTime("yyyy"));
+        assertEquals("12", date.getFormattedDateTime("MM"));
+  }   
+    public void testGetDateTime() throws Exception
+    {
+        JDFDate date = new JDFDate("2008-12-19T07:00:11.300+00:00");
+        assertEquals("20081219070011", date.getDateTime());
+  }   
 
     ///////////////////////////////////////////////////////
     public void testMyDateTime() throws Exception
