@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2005 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,6 +84,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoRequestQueueEntryParams;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
 
 /**
  *
@@ -191,5 +192,14 @@ public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams
     public boolean hasPartMap(JDFAttributeMap mPart)
     {
         return super.hasPartMap(mPart);
+    }
+    
+    /** 
+     * get the NodeIdentifier that can be used to grab a qe from a queue
+     * @return
+     */
+    public NodeIdentifier getNodeIdentifier()
+    {
+        return new NodeIdentifier(getJobID(),getJobPartID(),getPartMapVector());
     }
 }

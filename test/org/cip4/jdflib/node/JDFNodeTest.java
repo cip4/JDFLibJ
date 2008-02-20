@@ -107,6 +107,7 @@ import org.cip4.jdflib.node.JDFNode.EnumCleanUpMerge;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
+import org.cip4.jdflib.pool.JDFAncestorPool;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
@@ -964,7 +965,7 @@ public class JDFNodeTest extends JDFTestCaseBase
     public void  testNodeIdentifier()
     {
         NodeIdentifier ni=new NodeIdentifier();
-        NodeIdentifier ni2=new NodeIdentifier();
+        NodeIdentifier ni2=new NodeIdentifier("","",null);
         assertEquals(ni,ni2);
         JDFNode n=new JDFDoc("JDF").getJDFRoot();
         n.setJobID("j1");
@@ -978,6 +979,28 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertNotSame(ni,ni2);
         ni2.setNode(n);
         assertEquals(ni,ni2);
+    }
+    public void  testNodeIdentifierMatches()
+    {
+        NodeIdentifier ni=new NodeIdentifier();
+        NodeIdentifier ni2=new NodeIdentifier("","",null);
+        assertEquals(ni,ni2);
+        assertTrue(ni.matches(ni2));
+        JDFNode n=new JDFDoc("JDF").getJDFRoot();
+        n.setJobID("j1");
+        n.setJobPartID("p1");
+        ni.setNode(n);
+        assertTrue(ni.matches(ni2));
+        final JDFAncestorPool aPool = n.appendAncestorPool();
+        aPool.appendPart().setPartMap(new JDFAttributeMap("a","b"));
+        ni.setNode(n);
+        assertTrue(ni.matches(ni2));
+        ni2.setNode(n);
+        assertTrue(ni.matches(ni2));
+        aPool.appendPart().setPartMap(new JDFAttributeMap("a","c"));
+        ni.setNode(n);
+        assertTrue(ni.matches(ni2));
+                
     }
 
     //////////////////////////////////////////////

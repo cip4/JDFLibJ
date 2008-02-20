@@ -411,6 +411,11 @@ public class XMLDoc
 
        try
        {
+           if(file.isDirectory()&&getOriginalFileName()!=null)
+           {
+               File orig=new File(getOriginalFileName());
+               file=new File(file+File.separator+orig.getName());
+           }
            // ensure having an empty file in case it did not exist
            file.delete();
            if (file.createNewFile())

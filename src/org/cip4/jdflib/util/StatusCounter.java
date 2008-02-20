@@ -160,6 +160,8 @@ public class StatusCounter
      */
     public void setActiveNode(JDFNode node, VJDFAttributeMap vPartMap, VElement vResLinks)
     {
+        if(node==null)
+            setTrackWaste.clear();
         m_Node=node;
         m_vPartMap=vPartMap;
         vLinkAmount=null;

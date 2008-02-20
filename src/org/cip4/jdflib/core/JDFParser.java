@@ -166,12 +166,20 @@ public class JDFParser extends DOMParser
      */
     public JDFDoc parseFile(String strFile)
     {
-        JDFDoc doc = null;
-        if (strFile == null)
-            return null;
+        final File file = UrlUtil.urlToFile(strFile);
+        return parseFile(file);
+    }
 
-        File file = UrlUtil.urlToFile(strFile);
+    /**
+     * @param file
+     * @return
+     */
+    public JDFDoc parseFile(final File file)
+    {
+        if (file == null)
+            return null;
          
+        JDFDoc doc = null;
         if (file.canRead())
         {
             try

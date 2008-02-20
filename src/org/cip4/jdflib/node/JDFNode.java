@@ -176,6 +176,7 @@ import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.resource.process.JDFNotificationFilter;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.JDFMerge;
@@ -1658,8 +1659,8 @@ public class JDFNode extends JDFElement
         private VJDFAttributeMap _partMapVector;
         public NodeIdentifier(String jobID, String jobPartID, VJDFAttributeMap partMapVector)
         {
-            _jobID=jobID;
-            _jobPartID=jobPartID;
+            _jobID=isWildCard(jobID) ? null : jobID;
+            _jobPartID=isWildCard(jobPartID) ? null :jobPartID;
             _partMapVector=partMapVector;            
         }
         
@@ -1728,11 +1729,26 @@ public class JDFNode extends JDFElement
             if(!(arg0 instanceof NodeIdentifier))
                 return false;
             NodeIdentifier mt=(NodeIdentifier)arg0;
-            boolean b=_jobID==null && mt._jobID==null || _jobID!=null && _jobID.equals(mt._jobID);
-            b=b &&(_jobPartID==null && mt._jobPartID==null || _jobPartID!=null && _jobPartID.equals(mt._jobPartID));
-            return b && _partMapVector==null && mt._partMapVector==null || _partMapVector!=null && _partMapVector.equals(mt._partMapVector);
+            boolean b=ContainerUtil.equals(mt._jobID,_jobID);
+            b=b &&ContainerUtil.equals(mt._jobPartID,_jobPartID);
+            return b && ContainerUtil.equals(mt._partMapVector,_partMapVector);
 
         }
+        /**
+         * return true if the nodeIdentifier matches this, i.e. if all papameters match or arg0 has matching wildcards
+         * @param arg0
+         * @return
+         */
+        public boolean matches(NodeIdentifier mt)
+        {
+            if(mt==null)
+                return true;
+            boolean b= isWildCard(mt._jobID) || ContainerUtil.equals(mt._jobID,_jobID);
+            b=b && (isWildCard(mt._jobID) || ContainerUtil.equals(mt._jobPartID,_jobPartID));
+            return  b && ((_partMapVector==null && mt._partMapVector==null) ||(_partMapVector!=null && _partMapVector.subMap(mt._partMapVector)));
+
+        }
+
         /* (non-Javadoc)
          * @see java.lang.Object#hashCode()
          */
