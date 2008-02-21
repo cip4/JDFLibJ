@@ -1286,7 +1286,28 @@ public class JDFNodeTest extends JDFTestCaseBase
         final EnumNodeStatus partStatus = createJDF.getPartStatus(partMap);
         assertEquals("The implicit leaf defaults to root",partStatus, EnumNodeStatus.Waiting);
     }
-
+    ///////////////////////////////////////////////////////////////
+    public void testGetPartStatusPerformance()
+    {
+        JDFNode node = new JDFDoc("JDF").getJDFRoot();
+        JDFNodeInfo ni=node.appendNodeInfo();
+        JDFResourceLink rl=node.getLink(ni, null);
+        VJDFAttributeMap vParts=new VJDFAttributeMap();
+        long t=System.currentTimeMillis();
+        for(int i=0;i<1000;i++)
+        {
+            final JDFAttributeMap pm = new JDFAttributeMap("SheetName","s"+i);
+            vParts.add(pm);
+            node.setPartStatus(pm, EnumNodeStatus.Completed);
+        }
+        rl.setPartMapVector(vParts);
+        for(int i=0;i<1000;i++)
+        {
+            assertEquals(node.getPartStatus(vParts.elementAt(i)), EnumNodeStatus.Completed);
+        }
+        assertTrue("too slow may laptop takes roughly 2.5 seconds",System.currentTimeMillis()-t<25000);
+    }
+    
     ///////////////////////////////////////////////////////////////
     public void testGetPartStatus()
     {
@@ -1385,7 +1406,7 @@ public class JDFNodeTest extends JDFTestCaseBase
         n.setStatus(EnumNodeStatus.Ready);
         n.setType("Product",true);
         JDFComponent co=(JDFComponent) n.appendMatchingResource("Component",EnumProcessUsage.Cover,null);
-        Vector vType=new Vector();
+        Vector<EnumComponentType> vType=new Vector<EnumComponentType>();
         vType.add(EnumComponentType.FinalProduct);
         vType.add(EnumComponentType.Block);
         co.setComponentType(vType);

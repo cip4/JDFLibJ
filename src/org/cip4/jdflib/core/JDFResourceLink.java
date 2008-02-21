@@ -2455,4 +2455,23 @@ public class JDFResourceLink extends JDFElement
     {
         return super.hasPartMap(mPart);
     }    
+    
+    /**
+     * return true if this is moderately well described by namedReslink
+     * @param namedResLink
+     * @return
+     */
+    public boolean matchesString(String namedResLink)
+    {
+        if(namedResLink==null)
+            return false;
+
+        boolean bMatch = namedResLink.equals(getNamedProcessUsage());
+        bMatch = bMatch || namedResLink.equals(getLinkedResourceName());
+        bMatch = bMatch || namedResLink.equals(getLocalName());
+        bMatch = bMatch || namedResLink.equals(getNodeName());
+        bMatch = bMatch || namedResLink.equals(getrRef());
+        bMatch = bMatch || namedResLink.equals(getAttribute(AttributeName.USAGE));
+        return bMatch;
+    }
 }

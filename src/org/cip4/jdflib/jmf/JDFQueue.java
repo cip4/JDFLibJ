@@ -298,7 +298,7 @@ public class JDFQueue extends JDFAutoQueue
             {
                 JDFQueueEntry qe=(JDFQueueEntry) v.elementAt(i);
                 ni2.setQueueEntry(qe);
-                if(ni2.equals(nodeID)&&n++>=nSkip)
+                if(ni2.matches(nodeID)&&n++>=nSkip)
                     return qe;
             }
         }
@@ -308,7 +308,7 @@ public class JDFQueue extends JDFAutoQueue
             {
                 JDFQueueEntry qe=(JDFQueueEntry) v.elementAt(i);
                 ni2.setQueueEntry(qe);
-                if(ni2.equals(nodeID)&&--n<=nSkip)
+                if(ni2.matches(nodeID)&&--n<=nSkip)
                     return qe;
             }
             

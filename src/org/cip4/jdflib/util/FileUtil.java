@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -273,9 +273,24 @@ public class FileUtil
      */
     public static File moveFileToDir(File fromFile, File toDir)
     {
-        final File newFile = new File(toDir.getPath()+File.separator+fromFile.getName());
+        if(fromFile==null || toDir==null)
+            return null;
+        final File newFile = concat(toDir, new File(fromFile.getName()));
         boolean b= moveFile(fromFile, newFile);
         return b ? newFile : null;
+    }
+    /**
+     * @param fromFile
+     * @param toDir
+     * @return
+     */
+    public static File concat(File toDir, File fromFile)
+    {
+        if(toDir==null)
+            return fromFile;
+        if(fromFile==null)
+            return toDir;
+        return new File(toDir.getPath()+File.separator+fromFile.getPath());
     }
 
     /**

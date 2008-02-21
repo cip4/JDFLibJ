@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -2006,7 +2006,11 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
 
     }
 
-    /**
+    public VString getNamePathVector()
+    {
+        return getNamePathVector(true);
+    }
+   /**
      * Gets the NamePath of this DevCap in form 
      * "DevCapsName/SubelemName1/SubelemName2/..."<br>
      * If this DevCap is located in DevCapPool and not in a DevCaps - it describes the reusable resource 
@@ -2016,7 +2020,7 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
      * @param bRecurse if true, returns "DevCapsName/SubelemName1/SubelemName2/..."
      * @return String - NamePath of this DevCap, null if no name is specified
      * 
-     * default: getNamePath(false)  
+     * default: getNamePath(true)  
      */
     public final VString getNamePathVector(boolean bRecurse)
     {

@@ -567,7 +567,27 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	    final JDFResourceLink link =node.getLink(r, null);
 	    assertNotNull(link.getLinkRoot ());    // Endlos-Schleife !!!!
 	}
+    
+    public void testMatchesString() throws Exception
+    {
+        JDFDoc jdfDoc = new JDFDoc("JDF");
+        JDFNode node = jdfDoc.getJDFRoot();
+        JDFResource r=node.addResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input);
+        final JDFResourceLink link =node.getLink(r, null);
+        assertTrue(link.matchesString(ElementName.ADHESIVEBINDINGPARAMS));
+        assertTrue(link.matchesString("Input"));
+        assertFalse(link.matchesString("Output"));
+        assertTrue(link.matchesString(ElementName.ADHESIVEBINDINGPARAMS+"Link"));
+        assertFalse(link.matchesString(ElementName.ADHESIVEBINDINGPARAMS+":Plate"));
+        link.setProcessUsage(EnumProcessUsage.Plate);
+        assertTrue(link.matchesString(ElementName.ADHESIVEBINDINGPARAMS));
+        assertTrue(link.matchesString("Input"));
+        assertFalse(link.matchesString("Output"));
+        assertTrue(link.matchesString(ElementName.ADHESIVEBINDINGPARAMS+"Link"));
+        assertTrue(link.matchesString(ElementName.ADHESIVEBINDINGPARAMS+":Plate"));
+    }
 
+ 
     /**
      * Method testIncludesMatchingAttribute.
      * @throws Exception

@@ -427,8 +427,16 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
             } 
             else
             {
-                final IDeviceCapable dc=(IDeviceCapable)state.getParentNode_KElement();
-                vPath=dc.getNamePathVector();             
+              
+                final KElement kdc=state.getParentNode_KElement();
+                if(kdc instanceof IDeviceCapable)
+                {
+                    vPath=((IDeviceCapable)kdc).getNamePathVector();                                 
+                }
+                else if (kdc instanceof ICapabilityElement)
+                {
+                    vPath=((ICapabilityElement)kdc).getNamePathVector();                                                     
+                }
                 attName=state.getName();
             }
         }

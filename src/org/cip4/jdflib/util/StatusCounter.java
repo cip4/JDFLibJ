@@ -236,7 +236,18 @@ public class StatusCounter
         }
         return null;
     }
-
+    /**
+     * get the matching LinkAmount out of this
+     * @param refID the refID, name or usage of the resource of the bag - this MUST match the refID of a ResourceLink
+     * @return the LinkAmount with matching refID, null if none found or bags is null
+     */
+    protected LinkAmount getLinkAmount(int n)
+    {
+        if(vLinkAmount==null || vLinkAmount.length<=n) {
+            return null;
+        }
+        return vLinkAmount[n];
+    }
     /**
      * get the refID of the first resource, i.e. the Resource that is being tracked in status messages
      * @return the rRef of the prime resource link
@@ -313,6 +324,50 @@ public class StatusCounter
         final LinkAmount la=getLinkAmount(refID);
         return la==null ? 0 : la.lastBag.totalAmount;
     }
+ 
+    /**
+     * get all total amounts of all tracked resources
+     * 
+     * @param i 
+     */
+    public double[] getTotalAmounts()
+    { 
+        if(vLinkAmount==null || vLinkAmount.length==0) 
+            return null;
+        double[] d=new double[vLinkAmount.length];
+        for(int i=0;i<d.length;i++)
+            d[i]=vLinkAmount[i].lastBag.totalAmount;
+        return d;
+    }
+    /**
+     * get all total amounts of all tracked resources
+     * 
+     * @param i 
+     */
+    public JDFResourceLink[] getAmountLinks()
+    { 
+        if(vLinkAmount==null || vLinkAmount.length==0) 
+            return null;
+        JDFResourceLink[] d=new JDFResourceLink[vLinkAmount.length];
+        for(int i=0;i<d.length;i++)
+            d[i]=vLinkAmount[i].rl;
+        return d;
+    }
+
+    /**
+     * get all phaseamounts of all tracked resources
+     * 
+     * @param i 
+     */
+    public double[] getPhaseAmounts()
+    { 
+        if(vLinkAmount==null || vLinkAmount.length==0) 
+            return null;
+        double[] d=new double[vLinkAmount.length];
+        for(int i=0;i<d.length;i++)
+            d[i]=vLinkAmount[i].lastBag.phaseAmount;
+        return d;
+    }
     /**
      * get the total the amount of the resource with id refID
      * 
@@ -333,6 +388,36 @@ public class StatusCounter
         final LinkAmount la=getLinkAmount(refID);
         return la==null ? 0 : la.lastBag.totalWaste;
     }
+    /**
+     * get all total amounts of all tracked resources
+     * 
+     * @param i 
+     */
+    public double[] getTotalWastes()
+    { 
+        if(vLinkAmount==null || vLinkAmount.length==0) 
+            return null;
+        double[] d=new double[vLinkAmount.length];
+        for(int i=0;i<d.length;i++)
+            d[i]=vLinkAmount[i].lastBag.totalWaste;
+        return d;
+    }
+   
+    /**
+     * get all phase waste amounts of all tracked resources
+     * 
+     * @param i 
+     */
+    public double[] getPhaseWastes()
+    { 
+        if(vLinkAmount==null || vLinkAmount.length==0) 
+            return null;
+        double[] d=new double[vLinkAmount.length];
+        for(int i=0;i<d.length;i++)
+            d[i]=vLinkAmount[i].lastBag.phaseWaste;
+        return d;
+    }
+
     /**
      * get the total the amount of the resource with id refID
      * 
@@ -924,10 +1009,7 @@ public class StatusCounter
             if(key==null)
                 return true;
 
-            return  key.equals(rl.getNamedProcessUsage())
-            || key.equals(rl.getLinkedResourceName())
-            || key.equals(refID)
-            || key.equals(rl.getAttribute(AttributeName.USAGE));
+            return rl.matchesString(key);
         }
 
         protected boolean linkFitsKey(Set keys)

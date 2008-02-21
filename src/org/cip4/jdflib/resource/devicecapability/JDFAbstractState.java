@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -315,7 +315,11 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
         return namePath;
     }
 
-    /**
+    public final VString getNamePathVector()
+    {
+        return getNamePathVector(true);
+    }
+   /**
      * Gets the NamePath of this State in form 
      * "<code>DevCapsName[Context=aaa, LinkUsage=ccc]/DevCapName1/DevCapName2../@StateName</code>"
      * <p>

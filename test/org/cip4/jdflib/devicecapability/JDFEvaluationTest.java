@@ -232,4 +232,12 @@ public class JDFEvaluationTest extends JDFTestCaseBase
         fitsJDF = tst.fitsJDF(comp, eRep);
         assertTrue("have no final",fitsJDF);
     }
+
+
+    @Override
+    public String toString()
+    {
+        // TODO Auto-generated method stub
+        return "[JDFEvaluationTest - "+devicecap;
+    }
 }

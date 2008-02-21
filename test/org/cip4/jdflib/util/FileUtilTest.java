@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -197,6 +197,15 @@ public class FileUtilTest extends JDFTestCaseBase
     }
 
     ///////////////////////////////////////////////////////////////////////////
+    public void testConCat() throws Exception
+    {
+        assertEquals(FileUtil.concat(new File("a/b"), new File("c")), new File("a/b/c"));
+        assertEquals(FileUtil.concat(new File("a/b"), new File("c/d")), new File("a/b/c/d"));
+        assertEquals(FileUtil.concat(new File("a/b"), new File("/c")), new File("a/b/c"));
+        assertEquals(FileUtil.concat(new File("a/b"), new File("/c/d")), new File("a/b/c/d"));
+        assertEquals(FileUtil.concat(new File("a/b"), new File("/c/d/")), new File("a/b/c/d"));
+    }
+    ///////////////////////////////////////////////////////////////////////////
     public void testStreamToFile() throws Exception
     {
         byte[] b=new byte[55555];
@@ -233,7 +242,7 @@ public class FileUtilTest extends JDFTestCaseBase
         assertTrue(f2.delete());
 
     }
-    
+
     //////////////////////////////////////////////////////////////////
     public void testGetFileInDirectory() throws Exception
     {
@@ -244,7 +253,7 @@ public class FileUtilTest extends JDFTestCaseBase
         assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a\\"), new File("\\b")));
         assertEquals(new File("a/c/b"), FileUtil.getFileInDirectory(new File("a"), new File("c/b")));
         assertEquals(new File("a/aa/c/b"), FileUtil.getFileInDirectory(new File("a/aa"), new File("c/b")));
-               
+
     }
 
 }
