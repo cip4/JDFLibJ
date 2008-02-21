@@ -126,13 +126,13 @@ public class QueueTest extends TestCase
     }
     public void testGetQueueEntryByIdentifier()
     {
-        q.getQueueEntry(1).setJobID("j1");
-        NodeIdentifier ni=new NodeIdentifier("j1",null,null);
+        q.getQueueEntry(1).setJobID("j7");
+        NodeIdentifier ni=new NodeIdentifier("j7",null,null);
         assertEquals(q.getQueueEntry(ni,0), q.getQueueEntry(1));
         assertEquals(q.getQueueEntry(ni,-1), q.getQueueEntry(1));
         assertNull(q.getQueueEntry(ni,-2));
         assertNull(q.getQueueEntry(ni,1));
-        q.getQueueEntry(3).setJobID("j1");
+        q.getQueueEntry(3).setJobID("j7");
         
         assertEquals(q.getQueueEntry(ni,0), q.getQueueEntry(1));
         assertEquals(q.getQueueEntry(ni,-1), q.getQueueEntry(3));
@@ -140,6 +140,13 @@ public class QueueTest extends TestCase
         assertEquals(q.getQueueEntry(ni,-2), q.getQueueEntry(1));
         assertNull(q.getQueueEntry(ni,-3));
         assertNull(q.getQueueEntry(ni,4));
+    }
+    public void testGetQueueEntryVectorByIdentifier()
+    {
+        NodeIdentifier ni=new NodeIdentifier("j2",null,null);
+        assertEquals(q.getQueueEntryVector(ni).elementAt(0), q.getQueueEntry(1));
+        assertEquals(q.getQueueEntryVector(null).elementAt(0), q.getQueueEntry(0));
+        assertEquals(q.getQueueEntryVector(null).size(), q.numChildElements(ElementName.QUEUEENTRY, null));
     }
 
     public void testGetTimes()
@@ -284,22 +291,27 @@ public class QueueTest extends TestCase
         q=(JDFQueue) doc.getRoot();
         JDFQueueEntry qe=q.appendQueueEntry();
         qe.setQueueEntryID("qe1");
+        qe.setJobID("j1");
         qe.setQueueEntryStatus(EnumQueueEntryStatus.Waiting);
         qe.setPriority(5);
         qe=q.appendQueueEntry();
         qe.setQueueEntryStatus(EnumQueueEntryStatus.Waiting);
         qe.setPriority(55);
         qe.setQueueEntryID("qe2");
+        qe.setJobID("j2");
         qe=q.appendQueueEntry();
         qe.setQueueEntryStatus(EnumQueueEntryStatus.Held);
         qe.setPriority(99);
         qe.setQueueEntryID("qe3");
+        qe.setJobID("j3");
         qe=q.appendQueueEntry();
         qe.setQueueEntryStatus(EnumQueueEntryStatus.Completed);
         qe.setQueueEntryID("qe4");
+        qe.setJobID("j4");
         qe=q.appendQueueEntry();
         qe.setQueueEntryStatus(EnumQueueEntryStatus.Running);
         qe.setQueueEntryID("qe5");
+        qe.setJobID("j5");
         iThread=0;
     }
 

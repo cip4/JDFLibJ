@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,17 +79,12 @@ Revision history:    ...
 **/
 
 
-
-
-
 package org.cip4.jdflib.jmf;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-
-
+import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
 
 //----------------------------------
     public class JDFStatusQuParams extends JDFAutoStatusQuParams
@@ -145,6 +140,16 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
     public String toString()
     {
         return "JDFStatusQuParams[  --> " + super.toString() + " ]";
+    }
+    /**
+     * gets the NodeIdetifier that matches this
+     * @return
+     */
+    public NodeIdentifier getIdentifier()
+    {
+        NodeIdentifier ni= new NodeIdentifier();
+        ni.setTo(getJobID(), getJobPartID(), getPartMapVector());
+        return ni;
     }
     
    

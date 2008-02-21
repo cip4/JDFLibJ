@@ -1659,16 +1659,24 @@ public class JDFNode extends JDFElement
         private VJDFAttributeMap _partMapVector;
         public NodeIdentifier(String jobID, String jobPartID, VJDFAttributeMap partMapVector)
         {
+            setTo(jobID, jobPartID, partMapVector);            
+        }
+
+        /**
+         * @param jobID
+         * @param jobPartID
+         * @param partMapVector
+         */
+        public void setTo(String jobID, String jobPartID, VJDFAttributeMap partMapVector)
+        {
             _jobID=isWildCard(jobID) ? null : jobID;
             _jobPartID=isWildCard(jobPartID) ? null :jobPartID;
-            _partMapVector=partMapVector;            
+            _partMapVector=partMapVector;
         }
         
         public NodeIdentifier()
         {
-            _jobID=null;
-            _jobPartID=null;
-            _partMapVector=null;            
+            setTo(null,null,null);   
            
         }
          /**
@@ -1687,28 +1695,22 @@ public class JDFNode extends JDFElement
          */
         public void setNode(JDFNode n)
         {
-            _jobID=n.getJobID(true);
-            _jobPartID=n.getJobPartID(false);
-            if("".equals(_jobID))
-                _jobID=null;
-            if("".equals(_jobPartID))
-                _jobPartID=null;
-            _partMapVector=n.getPartMapVector();            
+            if(n==null)
+                setTo(null,null,null);
+            else
+                setTo(n.getJobID(true),n.getJobPartID(false),n.getPartMapVector());            
         }
-        
+
         /**
          * sets a NodeIdentifier to a given JDF node
          * @param n
          */
         public void setQueueEntry(JDFQueueEntry qe)
         {
-            _jobID=qe.getJobID();
-            _jobPartID=qe.getJobPartID();
-            if("".equals(_jobID))
-                _jobID=null;
-            if("".equals(_jobPartID))
-                _jobPartID=null;
-           _partMapVector=qe.getPartMapVector();            
+            if(qe==null)
+                setTo(null,null,null);
+            else
+                setTo(qe.getJobID(),qe.getJobPartID(),qe.getPartMapVector());            
         }
         
         /**
@@ -3401,7 +3403,7 @@ public class JDFNode extends JDFElement
      */
     public boolean setType(String newType, boolean checkName)
     {
-        final EnumType eTyp = checkName ? EnumType.getEnum(newType): null;
+        final EnumType eTyp = EnumType.getEnum(newType);
         if (!checkName || eTyp!=null)
         {
             removeAttribute("type",AttributeName.XSIURI);
@@ -5676,6 +5678,15 @@ public class JDFNode extends JDFElement
     {       
         return (JDFCustomerInfo) getNiCi(ElementName.CUSTOMERINFO, false,null);
     }
+    
+    /**
+     * gets the NodeIdetifier that matches this
+     * @return
+     */
+    public NodeIdentifier getIdentifier()
+    {
+        return new NodeIdentifier(this);
+    }
 
     /**
      * gets the existing inherited CustomerInfo or NodeInfo from parents including ancestorpool
@@ -6872,7 +6883,7 @@ public class JDFNode extends JDFElement
     public JDFNode addJDFNode(EnumType typ)
     {
         final JDFNode p = addJDFNode((String)null);
-        p.setType(typ.getName(), false);
+        p.setType(typ);
         return p;
     }
 
@@ -6933,7 +6944,6 @@ public class JDFNode extends JDFElement
             throw new JDFException("JDFNode.AddProduct adding Product to invalid node type: Type = " + getType());
         }
         final JDFNode p = addJDFNode(EnumType.Product);
-        p.setType(EnumType.Product.getName(), false);
         return p;
     }
     //    /////////////////////////////////////////////////////////////
@@ -8469,6 +8479,30 @@ public class JDFNode extends JDFElement
         for(int i=0;i<vNode.size();i++) {
             vNode.item(i).sortChildren();
         }   
+    }
+
+
+
+    /**
+     * returns all subnodes of this (including this) that match ni
+     * 
+     * @param ni the Identifier to match
+     * @return
+     */
+    public VElement getMatchingNodes(NodeIdentifier ni)
+    {
+        VElement v=getvJDFNode(null, null, false);
+        if(ni==null)
+            return v;
+        int siz = v==null ? 0 : v.size();
+        for(int i=siz-1;i>=0;i--)
+        {
+            JDFNode n=(JDFNode) v.get(i);
+            if(!n.getIdentifier().matches(ni))
+                v.remove(i);
+        }
+        siz = v==null ? 0 : v.size();
+        return siz==0 ? null : v;
     }
 
 

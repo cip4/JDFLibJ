@@ -424,6 +424,17 @@ public class JDFNodeTest extends JDFTestCaseBase
     ///////////////////////////////////////////////////////////////////////////
 
 
+    public void testAddProduct()
+    {
+        JDFDoc doc=new JDFDoc("JDF");
+        JDFNode mainNode = doc.getJDFRoot();
+        mainNode.setType(EnumType.Product);
+        JDFNode p2=mainNode.addProduct();
+        assertEquals(p2.getXSIType(), "Product");
+    }
+    ///////////////////////////////////////////////////////////////////////////
+
+
     public void testAddResource()
     {
         JDFDoc doc=new JDFDoc("JDF");
@@ -1710,6 +1721,24 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertEquals(types2,root.getAllTypes());
 
     }
+    //////////////////////////////////////////////////////////////
+
+    public void testGetMatchingNodes()
+    {
+        JDFNode n=new JDFDoc("JDF").getJDFRoot();
+        n.setJobID("j1");
+        n.setJobPartID("p1");
+        n.setType(EnumType.Product);
+        JDFNode n2=n.addProduct();
+        n2.setJobPartID("p2");
+        assertTrue(n.getvJDFNode(null, null,false).containsAll(n.getMatchingNodes(null)));
+        assertTrue(n.getMatchingNodes(null).contains(n));
+        assertTrue(n.getMatchingNodes(n.getIdentifier()).contains(n));
+        assertTrue(n.getMatchingNodes(n2.getIdentifier()).contains(n2));
+        assertFalse(n.getMatchingNodes(n2.getIdentifier()).contains(n));
+        
+    }
+
     //////////////////////////////////////////////////////////////
 
     public void testGetMatchingResource()

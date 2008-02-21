@@ -275,24 +275,10 @@ public class FileUtil
     {
         if(fromFile==null || toDir==null)
             return null;
-        final File newFile = concat(toDir, new File(fromFile.getName()));
+        final File newFile = getFileInDirectory(toDir, new File(fromFile.getName()));
         boolean b= moveFile(fromFile, newFile);
         return b ? newFile : null;
     }
-    /**
-     * @param fromFile
-     * @param toDir
-     * @return
-     */
-    public static File concat(File toDir, File fromFile)
-    {
-        if(toDir==null)
-            return fromFile;
-        if(fromFile==null)
-            return toDir;
-        return new File(toDir.getPath()+File.separator+fromFile.getPath());
-    }
-
     /**
      * moves a File by trying to rename,
      * if this fails, a copy with subsequent delete is performed.
@@ -345,7 +331,9 @@ public class FileUtil
     
     
     /**
-     * returns a File objetc corresponding to an instance of localFile placed in dir - No OS calls are made and File is NOT created
+     * returns a File object corresponding to an instance of localFile placed in dir - 
+     * No OS calls are made and File is NOT created
+     * 
      * @param dir the File Object representing the directory
      * @param localFile the local file to place in dir, note that only the path is copied - this does copy trees
      * @return File the File object that represents localFile in Dir

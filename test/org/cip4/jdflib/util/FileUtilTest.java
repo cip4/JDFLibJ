@@ -196,16 +196,7 @@ public class FileUtilTest extends JDFTestCaseBase
         assertEquals(nf.getName(), f.getName());
     }
 
-    ///////////////////////////////////////////////////////////////////////////
-    public void testConCat() throws Exception
-    {
-        assertEquals(FileUtil.concat(new File("a/b"), new File("c")), new File("a/b/c"));
-        assertEquals(FileUtil.concat(new File("a/b"), new File("c/d")), new File("a/b/c/d"));
-        assertEquals(FileUtil.concat(new File("a/b"), new File("/c")), new File("a/b/c"));
-        assertEquals(FileUtil.concat(new File("a/b"), new File("/c/d")), new File("a/b/c/d"));
-        assertEquals(FileUtil.concat(new File("a/b"), new File("/c/d/")), new File("a/b/c/d"));
-    }
-    ///////////////////////////////////////////////////////////////////////////
+     ///////////////////////////////////////////////////////////////////////////
     public void testStreamToFile() throws Exception
     {
         byte[] b=new byte[55555];
@@ -253,6 +244,11 @@ public class FileUtilTest extends JDFTestCaseBase
         assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a\\"), new File("\\b")));
         assertEquals(new File("a/c/b"), FileUtil.getFileInDirectory(new File("a"), new File("c/b")));
         assertEquals(new File("a/aa/c/b"), FileUtil.getFileInDirectory(new File("a/aa"), new File("c/b")));
+        assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("c")), new File("a/b/c"));
+        assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("c/d")), new File("a/b/c/d"));
+        assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("/c")), new File("a/b/c"));
+        assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("/c/d")), new File("a/b/c/d"));
+        assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("/c/d/")), new File("a/b/c/d"));
 
     }
 

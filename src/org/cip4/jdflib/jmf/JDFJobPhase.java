@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2005 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,6 +91,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
 import org.cip4.jdflib.resource.JDFModulePhase;
 import org.cip4.jdflib.resource.JDFModuleStatus;
 import org.cip4.jdflib.util.JDFDate;
@@ -290,7 +291,17 @@ public class JDFJobPhase extends JDFAutoJobPhase
         return ((JDFMessage)parent).getStatusQuParams();
         
     }
-    
+    /**
+     * gets the NodeIdetifier that matches this
+     * @return
+     */
+    public NodeIdentifier getIdentifier()
+    {
+        NodeIdentifier ni= new NodeIdentifier();
+        ni.setTo(getJobID(), getJobPartID(), getPartMapVector());
+        return ni;
+    }
+   
     private String getInheritedStatusQuParamsAttribute(String key,String nameSpaceURI)
     {
         String val=getAttribute(key, nameSpaceURI, null);

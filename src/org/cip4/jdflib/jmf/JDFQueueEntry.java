@@ -78,10 +78,7 @@ ALL RIGHTS RESERVED
 Warning! very preliminary test version. Interface subject to change without prior notice!
 Revision history:    ...
  **/
-
-
 package org.cip4.jdflib.jmf;
-
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -96,8 +93,6 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
 import org.cip4.jdflib.util.ContainerUtil;
-
-
 
 //----------------------------------
 public class JDFQueueEntry extends JDFAutoQueueEntry
@@ -327,6 +322,16 @@ public class JDFQueueEntry extends JDFAutoQueueEntry
         }
     }
 
+    /**
+     * gets the NodeIdetifier that matches this
+     * @return
+     */
+    public NodeIdentifier getIdentifier()
+    {
+        NodeIdentifier ni= new NodeIdentifier();
+        ni.setTo(getJobID(), getJobPartID(), getPartMapVector());
+        return ni;
+    }
     /**
      * get the next sibling queueentry
      * @return

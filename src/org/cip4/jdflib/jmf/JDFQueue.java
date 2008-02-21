@@ -183,6 +183,26 @@ public class JDFQueue extends JDFAutoQueue
         }
         return (v==null || v.size()==0) ? null : v;
     }
+    /**
+     * Get a vector of queueentry elements that matches a given nodeidentifier
+     * 
+     * @return VElement: the vector of queue entries
+     */
+    public synchronized VElement getQueueEntryVector(NodeIdentifier nid)
+    {
+        VElement v=getQueueEntryVector();
+        if(nid==null || v==null)
+            return v;
+        for(int i=v.size()-1;i>=0;i--)
+        {
+            JDFQueueEntry qe=(JDFQueueEntry)v.elementAt(i);
+            if(!qe.matchesNodeIdentifier(nid))
+            {
+                v.remove(i);
+            }
+        }
+        return (v==null || v.size()==0) ? null : v;
+    }
 
     /**
      * Method getEntry: find a queuentry by position
