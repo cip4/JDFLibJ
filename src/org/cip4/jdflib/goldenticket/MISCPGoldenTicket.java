@@ -71,6 +71,9 @@
 package org.cip4.jdflib.goldenticket;
 
 import java.io.File;
+import java.util.ResourceBundle;
+
+import javax.swing.JOptionPane;
 
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumPrintingType;
@@ -131,6 +134,10 @@ public class MISCPGoldenTicket extends MISGoldenTicket
     protected int icsLevel;
     public boolean previewAvailable=false;
     public int sheetAmount=1000;
+    public ResourceBundle m_littleBundle;
+    
+	public String[] l1 = { "1", "2" };
+	public String[] l2 = { "1", "2", "3" };
 
     /**
      * create a BaseGoldenTicket
@@ -143,6 +150,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
     public MISCPGoldenTicket(int _icsLevel, EnumVersion jdfVersion, int _jmfLevel, int _misLevel, boolean isGrayBox, VJDFAttributeMap vPartMap)
     {
         super(_misLevel,jdfVersion,_jmfLevel);
+        
         grayBox=isGrayBox;
         partIDKeys = new VString("SignatureName,SheetName,Side,Separation",",");
         vParts=vPartMap;
@@ -157,6 +165,8 @@ public class MISCPGoldenTicket extends MISGoldenTicket
     {
         initColsFromParent();
         initAmountsFromParent();
+        
+        //put level methods?
         
         while(cols.size()>nCols && nCols>0)
             cols.remove(nCols);
@@ -532,5 +542,5 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         super.assign(node);
         theNode.getCreateNodeInfo().setPartIDKeys(partIDKeys);
     }
-
+    
 }
