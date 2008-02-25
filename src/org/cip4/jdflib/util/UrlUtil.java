@@ -412,6 +412,8 @@ public class UrlUtil
      */
     public static String fileToUrl(File f, boolean bEscape128)
     {
+        if(f==null)
+            return null;
         String s=f.getAbsolutePath();
         if(File.separator.equals("\\"))
             s =StringUtil.replaceChar(s,'\\',"/",0);

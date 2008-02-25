@@ -166,7 +166,7 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
     }
     /////////////////////////////////////////////////////////////////////////////
     
-    public void testMISCPGrayBoxBrochure() throws Exception
+    public void testMISCPProductGrayBoxBrochure() throws Exception
     {
         VJDFAttributeMap vMap=new VJDFAttributeMap();
         JDFAttributeMap map=new JDFAttributeMap();
@@ -183,12 +183,12 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
      
         ProductGoldenTicket pgt=new ProductGoldenTicket(0,EnumVersion.Version_1_3,0,0);
         pgt.assign(null);
-        pgt.createPostCards();
+        pgt.createHDCity();
         JDFNode node = pgt.getNode();
         JDFNode nodeCP=node.addJDFNode(EnumType.ProcessGroup);
 
         cpGoldenTicket.assign(nodeCP);
-        write3Files(cpGoldenTicket,"WorkandTurnCover",1000,90);
+        write3Files(cpGoldenTicket,"ProductGrayBox",1000,90);
     }
 
     /**

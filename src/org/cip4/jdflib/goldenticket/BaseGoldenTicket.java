@@ -155,6 +155,34 @@ public class BaseGoldenTicket
     {
          thePreviousNode=node;
     }
+    /**
+     * simulate makeReady of this node
+     * the internal node will be modified to reflect the makeready
+     * all required resources should be available
+     */
+    public void makeReady()
+    {
+        VElement vResLinks=theNode.getResourceLinks(null);
+        int siz= vResLinks!=null ? vResLinks.size() : 0;
+        for(int i=0;i<siz;i++)
+        {
+            JDFResourceLink rl=(JDFResourceLink)vResLinks.elementAt(i);
+            
+            if(EnumUsage.Input.equals(rl.getUsage()))
+            {
+                VElement vRes=rl.getTargetVector(-1);                
+                for(int j=0;j<vRes.size();j++)
+                {
+                    VElement leaves=((JDFResource)vRes.elementAt(j)).getLeaves(false);
+                    for(int k=0;k<leaves.size();k++)
+                    {
+                        JDFResource r=(JDFResource) leaves.elementAt(k);
+                        r.setResStatus(EnumResStatus.Available, true);
+                    }
+                }
+            }
+        }
+    }
 
     /**
      * simulate execution of this node

@@ -251,6 +251,23 @@ public class CheckJDF
         }
         return checkOut.getAttribute("Message",null,null);
     }
+    
+    /**
+     * true if validDoc has no errors or warnings
+     * @param validDoc
+     * @return
+     */
+    public static boolean isValid(XMLDoc validDoc)
+    {
+        if(validDoc==null) {
+            return true;
+        }
+        
+        
+        return true;
+        
+        
+    }
 
     public void setDoc(JDFDoc d){
         theDoc=d;

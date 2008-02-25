@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -156,7 +156,7 @@ public class JDFComment extends JDFAutoComment
     }
     
     /**
-     * init
+     * init this comment by adding agentname, agentversion and id
      *
      * @return boolean
      */
@@ -166,6 +166,8 @@ public class JDFComment extends JDFAutoComment
         if(v.getValue()>=EnumVersion.Version_1_3.getValue()&&getLocalName().equals(ElementName.COMMENT))
         {
             appendAnchor(null);
+            setAgentName(JDFAudit.getStaticAgentName());
+            setAgentVersion(JDFAudit.getStaticAgentVersion());
         }
         return super.init();
     }

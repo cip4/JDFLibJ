@@ -77,10 +77,8 @@
 package org.cip4.jdflib.util;
 
 import java.io.File;
-import java.util.Iterator;
 import java.util.Vector;
 
-import org.apache.commons.lang.enums.EnumUtils;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
@@ -112,6 +110,20 @@ public class StringUtilTest extends JDFTestCaseBase
         assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, f),'\\',"/",0),".");
     }
 
+    public void testGetRandomString()
+    {
+        VString v=new VString();
+        for(int i=0;i<1000;i++)
+        {
+            String s=StringUtil.getRandomString();
+            if(i%100==0)
+                System.out.println(s);
+            v.appendUnique(s);
+            assertTrue(s.length()>1);
+        }
+        assertTrue("should be many different",v.size()<100);
+        assertTrue(v.size()>5);
+    }
 
     public void testSprintfString()
     {
@@ -254,7 +266,7 @@ public class StringUtilTest extends JDFTestCaseBase
         assertNull(StringUtil.stripPrefix(null, "A:", false));
         assertEquals(StringUtil.stripPrefix("a:b", null, false),"a:b");
     }
-    
+
     public void testStripNot()
     {
         assertEquals(StringUtil.stripNot("a1b321", "12"),"121");
@@ -384,7 +396,7 @@ public class StringUtilTest extends JDFTestCaseBase
         assertEquals(StringUtil.parseBoolean("TRUE ", false),true);
         assertEquals(StringUtil.parseBoolean(" FalSe ", true),false);
     }
-    
+
     public void testParseDouble()
     {
         String s="INF";
@@ -393,7 +405,7 @@ public class StringUtilTest extends JDFTestCaseBase
         s="-INF";
         assertEquals(StringUtil.parseDouble(s,0),-Double.MAX_VALUE,0.0);
         assertTrue(StringUtil.isNumber(s));
-         s="123.45e3";
+        s="123.45e3";
         assertEquals(StringUtil.parseDouble(s,0),123450.,0.);
         assertTrue(StringUtil.isNumber(s));
         s="123.45E3";
@@ -443,6 +455,9 @@ public class StringUtilTest extends JDFTestCaseBase
         assertEquals("s=int","1234560",s);       
         assertEquals("s=real small","0",StringUtil.formatDouble(0.1e-20));       
         assertEquals("s=real small -","0",StringUtil.formatDouble(-0.1e-20));       
+        assertEquals("s=1+epsilon","1",StringUtil.formatDouble(1.000000001));       
+        assertEquals("s=1-epsilon","1",StringUtil.formatDouble(0.99999999987));       
+        assertNotSame("s=1-epsilon","1",StringUtil.formatDouble(0.99949999987));       
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -453,7 +468,7 @@ public class StringUtilTest extends JDFTestCaseBase
         String uri="file://myHost/a/c%20%c3%a4%c3%b6%c3%bc%25.txt";
 
         assertEquals("uri ok",StringUtil.uncToUrl(unc,true),uri);
-		assertEquals("iri ok",StringUtil.uncToUrl(unc,false),iri);
+        assertEquals("iri ok",StringUtil.uncToUrl(unc,false),iri);
     }
 
     ///////////////////////////////////////////////////////////////////////////

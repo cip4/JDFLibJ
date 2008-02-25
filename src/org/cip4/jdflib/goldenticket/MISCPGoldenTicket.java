@@ -296,8 +296,8 @@ public class MISCPGoldenTicket extends MISGoldenTicket
      */
     protected void initPlate()
     {
-        if(thePreviousNode!=null)
-            theNode.linkResource(thePreviousNode.getResource(ElementName.EXPOSEDMEDIA, EnumUsage.Input, 0),EnumUsage.Input,null);
+        if(thePreviousNode!=null) // either input (for cp, or output for plateset)
+            theNode.linkResource(thePreviousNode.getResource(ElementName.EXPOSEDMEDIA, null, 0),EnumUsage.Input,null);
 
         JDFExposedMedia xm=(JDFExposedMedia) theNode.getCreateResource(ElementName.EXPOSEDMEDIA,EnumUsage.Input, 0);
         xm.setPartUsage(EnumPartUsage.Explicit);
@@ -335,9 +335,9 @@ public class MISCPGoldenTicket extends MISGoldenTicket
      */
     protected JDFComponent initOutputComponent()
     {
-        if(theParentNode!=null)
+        if(thePreviousNode!=null)
         {
-            final JDFResource parentOutComp = theParentNode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
+            final JDFResource parentOutComp = thePreviousNode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
             if(parentOutComp!=null)
             {
                 theNode.linkResource(parentOutComp,EnumUsage.Input,null);
@@ -497,6 +497,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
             pvp.setResStatus(EnumResStatus.Available,false);
             pvp.setURL(UrlUtil.fileToUrl(new File("\\\\Share\\Dir\\Preview_"+pvp.getSheetName()+"_"+pvp.getSide().getName()+"_"+pvp.getSeparation()+".png"), false));
         }
+        super.makeReady();
     }
     /**
      * @param icsLevel

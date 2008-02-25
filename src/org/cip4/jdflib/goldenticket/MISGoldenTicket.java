@@ -74,6 +74,7 @@ import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFNodeInfo;
@@ -93,6 +94,7 @@ import org.cip4.jdflib.resource.process.JDFCompany;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFPerson;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author prosirai
@@ -142,6 +144,10 @@ public class MISGoldenTicket extends BaseGoldenTicket
     @Override
     public void execute(VJDFAttributeMap vNodeMap, boolean bOutAvail,boolean bFirst,int good, int waste)
     {
+        JDFComment c=theNode.appendComment();
+        c.setName("OperatorText");
+        c.setText(StringUtil.getRandomString());
+        
         super.execute(vNodeMap,bOutAvail, bFirst, good,waste);
     }
 

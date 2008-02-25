@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -123,6 +123,38 @@ public class StringUtil
 
 //  ****************************************    Methods   ******************************************
 
+    /**
+     * returns a random string
+     * really important routine - written on a friday afternoon ;-)
+     * please add more at your leisure....
+     * parts (c) Monty Python
+     * @return
+     */
+    public static String getRandomString()
+    {
+        String[] errors={
+                "Randomly inserted error",
+                "fooBar",
+                "Snafu",
+                "Bad Karma",
+                "What do you expect from a simulator",
+                "Paper Jam",
+                "Strawberry jam",
+                "Elderberry jam",
+                "Your mother was a hamster and your father smelt of elderberries!",
+                "I'm French! Why do think I have this outrageous accent, you silly king-a?!",
+                "You don't frighten us, English pig-dogs!",
+                "Go and boil your bottom, sons of a silly person.",
+                "I blow my nose at you, so-called Arthur King, you and all your silly English k-nnnnniggets. Thpppppt! Thppt! Thppt!",
+                "I don't wanna talk to you no more, you empty headed animal food trough wiper!",
+                "I fart in your general direction!",
+                "C'est un lapin, lapin de bois.",
+                "Quoi? Un cadeau. What? A present. Oh, un cadeau. Oui, oui. Hurry. What? Let's go. Oh. On y va. Bon magne. Over here..."
+        };
+        int pos=(int)(errors.length*Math.random()*0.99999);
+        return errors[pos];
+    }
+    
     /**
      * Returns a string with deleted whitespaces near 'delim'
      * and from the both ends of the string (if they were there)<br>

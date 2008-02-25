@@ -1314,7 +1314,7 @@ public class JDFNode extends JDFElement
                 ",ExposedMedia,Ink,InkZoneProfile,Layout,Media" +
                 ",PrintCondition,Sheet,TransferCurvePool",
                 // link info
-                ",i?,o?Waste o_ i?Proof i?Input,i_,"+
+                ",i?,o?Waste o_ i?Proof i?Input i?,i_,"+
                 "i?Plate i?Cylinder i?Proof,i?,i?,i?,i?,"+
                 "i?,i?,i?"
         );
@@ -1324,7 +1324,7 @@ public class JDFNode extends JDFElement
                 ",ExposedMedia,Ink,PrintCondition,Media,RunList" +
                 ",Layout,Sheet,TransferCurvePool",
                 //links
-                ",i?,o?Waste o_ i?Proof i*Input,i_"+
+                ",i?,o?Waste o_ i?Proof i*Input i*,i_"+
                 ",i?,i?,i?,i*,i_"+
                 ",i?,i?,i?"
         );
@@ -1481,7 +1481,7 @@ public class JDFNode extends JDFElement
                 ",Component,DBRules,DBSelection" +
                 ",IdentificationField,InsertingParams",
                 //links
-                ",o_ i_Child i_Mother,i?,i?" +
+                ",o_ i_Child i?Mother i?,i?,i?" +
                 ",i?,i_"
         );
 
