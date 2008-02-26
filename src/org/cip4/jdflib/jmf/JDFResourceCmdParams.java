@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -323,12 +323,19 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
             if (resTarget == null)
                 continue;
             
-            final VString vsPartIDKeys = resTarget.getPartIDKeys();
+            // get the most granular list of partIDKeys from the cmd or resource
+            VString vsPartIDKeys = resTarget.getPartIDKeys();
+            final VString vsPartIDKeysCmd = resCmd.getPartIDKeys();
+            final int sizTarget=vsPartIDKeys==null ? 0 : vsPartIDKeys.size();
+            final int sizCmd=vsPartIDKeysCmd==null ? 0 : vsPartIDKeysCmd.size();
+            if(sizCmd>sizTarget)
+                vsPartIDKeys=vsPartIDKeysCmd;
+            
             final int sizeParts = vamParts==null ? 1 : vamParts.size ();
             for (int j = 0; j < sizeParts; j++)
             {
                 JDFAttributeMap amParts = vamParts==null ? null : vamParts.elementAt (j);
-                JDFResource resTargetPart = resTarget.getCreatePartition (amParts, null);
+                final JDFResource resTargetPart = resTarget.getCreatePartition (amParts, vsPartIDKeys);
                 if(resTargetPart==null)
                     continue;
                 final String id=resTargetPart.getID();
@@ -338,7 +345,6 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
                     resTargetPart.flush();
                     resTargetPart.setAttributes(map);
                 }
-                resTargetPart = resTarget.getCreatePartition (amParts, vsPartIDKeys);
                 JDFResource resCmdPart=resCmd.getPartition(amParts, EnumPartUsage.Implicit);
                 resTargetPart.mergeElement(resCmdPart, false);
                 resTarget.setID(id);
