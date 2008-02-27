@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -4745,6 +4745,8 @@ public class KElement extends ElementNSImpl
      * @param relativeTo  relative path to which to create an xpath
      * @param methCountSiblings, if 1 count siblings, i.e. add '[n]'
      *                           if 0, only specify the path of parents
+     *                           if 2 or 3, add [@ID="id"]
+     *                           
      * @return String    the XPath representation of 'this' e.g.
      *                   <code>/root/parent/element</code><br>
      *                   <code>null</code> if parent of this is null

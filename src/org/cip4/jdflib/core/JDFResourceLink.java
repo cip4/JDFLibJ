@@ -1363,7 +1363,7 @@ public class JDFResourceLink extends JDFElement
         }
         return (JDFAmountPool) appendElementN(ElementName.AMOUNTPOOL, 1, null);
     }
-    
+
     /**
      * get the nTh Lot element
      * @param n the index of the element
@@ -1379,19 +1379,18 @@ public class JDFResourceLink extends JDFElement
      * @param n the index of the element
      * @return the nth Lot, creates all Lots in case of n-1 does not exist
      */
-   public JDFLot getCreateLot(int n)
+    public JDFLot getCreateLot(int n)
     {
-         return (JDFLot) getCreateElement_KElement(ElementName.LOT,null, n);
+        return (JDFLot) getCreateElement_KElement(ElementName.LOT,null, n);
     }
 
-   /**
-    * append Lot element
+    /**
+     * append Lot element
      * @return the new Lot
-    */
-
+     */
     public JDFLot appendLot()
     {
-         return (JDFLot) appendElement(ElementName.LOT, null);
+        return (JDFLot) appendElement(ElementName.LOT, null);
     }
     /**
      * reduce the parts to the canonical representation. If all children of a parent node are in
@@ -2481,7 +2480,7 @@ public class JDFResourceLink extends JDFElement
     {
         return super.hasPartMap(mPart);
     }    
-    
+
     /**
      * return true if this is moderately well described by namedReslink
      * @param namedResLink

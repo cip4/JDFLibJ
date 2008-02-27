@@ -501,10 +501,17 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
         {
             root.setAttribute("IsValid", false, null);
         }
-        if(!matchesType(jdfRoot,true))
+        final String badState = misMatchingStates(jdfRoot);
+        if(!matchesType(jdfRoot,true)||badState!=null)
         {
             String typeNode = jdfRoot.getType();
             reportTypeMatch(root,false,typeNode,typeExp);
+            if(badState!=null)
+            {
+                root.setAttribute("BadStateName", badState);
+                root.setAttribute("BadStateValue", jdfRoot.getAttribute(badState, null, null));
+                root.copyElement(getState(badState),null);
+            }
             return root;            
         }
 
@@ -519,6 +526,25 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
     }
 
 
+
+    /**
+     * @param jdfRoot
+     * @return
+     */
+    private String misMatchingStates(JDFNode jdfRoot)
+    {
+        VElement vStates=getStates();
+        if(vStates==null)
+            return null; // no additional matching
+        for(int i=0;i<vStates.size();i++)
+        {
+            JDFAbstractState state=(JDFAbstractState) vStates.get(i);
+            final String attName = state.getName();
+            if(!state.fitsValue(jdfRoot.getAttribute(attName,null,null), EnumFitsValue.Present))
+                return attName;
+        }
+        return null; // all matched
+    }
 
     /**
      * test whether a given node has the corect Types and Type Attribute
@@ -614,11 +640,14 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 
 
-    private static void reportTypeMatch(KElement report, boolean matches, String typeNode, String typeExp)
+    private void reportTypeMatch(KElement report, boolean matches, String typeNode, String typeExp)
     {
         report.setAttribute(FITS_TYPE, matches, null);
         report.setAttribute("NodeType",typeNode);
         report.setAttribute("CapsType",typeExp);
+        report.copyAttribute(AttributeName.DESCRIPTIVENAME, this, null, null, null);
+        report.setAttribute("CapXPath", buildXPath(null, 2));
+
         if(!matches)
             report.setAttribute("Message","Node Type: "+typeNode+" does not match capabilities type: "+typeExp);
     }
@@ -1410,6 +1439,23 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
     //  ///////////////////////////////////////////////////////////////////
 
+    /**
+     * gets an existing  State with @Name="name"
+     * @param nam the Name attribute of the newly appended StringState
+     * @return JDFStringState: the existing StringState
+     */
+    public JDFAbstractState getState(String nam)
+    {
+        for(int i=0;true;i++)
+        {
+            KElement e=getChildWithAttribute(null, AttributeName.NAME, null, nam, i, true);
+            if(e==null)
+                break;
+            if(e instanceof JDFAbstractState)
+                return (JDFAbstractState) e;
+        }
+        return null;
+    }
     /**
      * gets an existing  StringState with @Name="name"
      * @param nam the Name attribute of the newly appended StringState
