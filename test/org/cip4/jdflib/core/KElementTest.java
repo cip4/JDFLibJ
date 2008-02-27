@@ -1005,6 +1005,7 @@ public class KElementTest extends JDFTestCaseBase
         root.setXPathAttribute("/JDF/ee[2]/ff/@b", "3");
         assertEquals(root.getXPathAttribute("/JDF/ee/ff/@b",null), "3");
         assertEquals(root.getXPathAttribute("/JDF/ee[@a=\"2\"]/ff/@b",null), "3");
+        assertEquals(root.getXPathAttribute("//ee[@a=\"2\"]/ff/@b",null), "3");
         assertNull(root.getXPathAttribute("/JDF/ee[1]/ff/@b",null));
 
 
@@ -1463,6 +1464,15 @@ public class KElementTest extends JDFTestCaseBase
         assertEquals(root.getElement_KElement(null,null,3), c3);
         assertNull(root.getElement_KElement("c",null,-4));
         assertNull(root.getElement_KElement("c",null,3));
+    }    
+    
+    public void testGetElementsByTagName_KElement()
+    {
+        JDFDoc d=creatXMDoc();
+        JDFNode n=d.getJDFRoot();
+        assertNotNull(n.getElementsByTagName_KElement("*", null));
+        assertNotNull(n.getElementsByTagName_KElement("", null));
+        assertNotNull(n.getElementsByTagName_KElement(null, null));
     }
     ///////////////////////////////////////////////////////////////////////////////
 
