@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -662,20 +662,33 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
      * @return VElement - the element vector of matching elements, 
      *                    <code>null</code> if none were found
      */
-    public VElement getMatchingElementsFromJMF(JDFMessage jmf)
+    public VElement getMatchingElementsFromJMF(JDFMessage messageElement)
     {
         final String nam = getName();
         final EnumContext context = getContext();
 
-        if (!context.equals(EnumContext.JMF)) 
-        { // vElem - for a common return type in all cases
+        if (!EnumContext.JMF.equals(context) && !EnumContext.Element.equals(context)) 
+        { 
             return null;
         }
-        VElement vElem = jmf.getChildElementVector(nam, null, null, true, 0, false);
+        VElement vElem;
+        if(ElementName.JMF.equals(nam))
+        {
+            vElem=new VElement();
+            vElem.add(messageElement.getParentNode_KElement());
+        }
+        else if(messageElement.getLocalName().equals(nam))
+        {
+            vElem=new VElement();
+            vElem.add(messageElement);
+        }
+        else
+        {
+            vElem = messageElement.getChildElementVector(nam, null, null, true, 0, false);
 
-        if(vElem!=null && vElem.size()==0)
-            vElem=null;
-
+            if(vElem!=null && vElem.size()==0)
+                vElem=null;
+        }
         return vElem;
     }
 

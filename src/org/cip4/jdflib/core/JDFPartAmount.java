@@ -83,6 +83,7 @@ import java.util.Iterator;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 
 /**
@@ -106,6 +107,11 @@ public class JDFPartAmount extends JDFResourceLink
         atrInfoTable_ToRemove[6] = new AtrInfoTable(AttributeName.RREF,                 0x22222222, AttributeInfo.EnumAttributeType.IDREF ,null, null);
         atrInfoTable_ToRemove[7] = new AtrInfoTable(AttributeName.USAGE,                0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumUsage.getEnum(0), null);
     }
+    private static ElemInfoTable[] elemInfoTable_ToRemove = new ElemInfoTable[1];
+    static 
+    {
+        elemInfoTable_ToRemove[0] = new ElemInfoTable(ElementName.AMOUNTPOOL, 0x66666661);        
+    }
 
     @Override
     protected AttributeInfo getTheAttributeInfo() 
@@ -115,16 +121,13 @@ public class JDFPartAmount extends JDFResourceLink
         return ai;
     }
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static 
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.PART,     0x55555555);
-    }
-
     @Override
     protected ElementInfo getTheElementInfo() 
     {
-        return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
+        ElementInfo eiRL=super.getTheElementInfo();
+        eiRL.updateRemove(elemInfoTable_ToRemove);
+        return eiRL;
+        
     }
 
     /**
@@ -229,5 +232,19 @@ public class JDFPartAmount extends JDFResourceLink
     {
         return super.getPartMapVector();
     }
+    
+    /**
+     * returns the parent resourcelink root resource
+     */
+    @Override
+    public JDFResource getLinkRoot()
+    {
+        KElement rl=getParentNode_KElement();
+        if(rl!=null)
+            rl=rl.getParentNode_KElement();
+        return (rl instanceof JDFResourceLink) ? ((JDFResourceLink)rl).getLinkRoot() : null;
+       
+    }
+
 
 }

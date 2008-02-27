@@ -767,7 +767,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
         for (int i=0; i < size; i++) 
         {
-            JDFDevCaps devCaps = (JDFDevCaps) vDevCaps.elementAt(i);
+            final JDFDevCaps devCaps = (JDFDevCaps) vDevCaps.elementAt(i);
             devCaps.analyzeDevCaps(jdfRoot, testlists, level, mrp, irp, goodElems, badElems, ignoreExtensions);
         }
 

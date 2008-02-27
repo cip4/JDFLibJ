@@ -98,6 +98,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
+import org.cip4.jdflib.resource.process.JDFLot;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
@@ -255,7 +256,6 @@ public class JDFResourceLink extends JDFElement
     static 
     {
         physInfoTable[0] = new ElemInfoTable(ElementName.LOT,  0x33333111);        
-        elemInfoTable[1] = new ElemInfoTable(ElementName.PART, 0x33333333);
     }
 
     ////////////////////////////////////////////////////////////////
@@ -561,9 +561,6 @@ public class JDFResourceLink extends JDFElement
      */
     public JDFResource getLinkRoot()
     {
-        if (getLocalName().equals(ElementName.PARTAMOUNT))
-            return null;
-
         JDFResource r = null;
         final JDFResource eLink = super.getLinkRoot(null);
         if (eLink != null)
@@ -1366,7 +1363,36 @@ public class JDFResourceLink extends JDFElement
         }
         return (JDFAmountPool) appendElementN(ElementName.AMOUNTPOOL, 1, null);
     }
+    
+    /**
+     * get the nTh Lot element
+     * @param n the index of the element
+     * @return the nth Lot, null if it does not exist
+     */
+    public JDFLot getLot(int n)
+    {
+        return (JDFLot) getElement(ElementName.LOT, null, n);
+    }
 
+    /**
+     * get the nTh Lot element
+     * @param n the index of the element
+     * @return the nth Lot, creates all Lots in case of n-1 does not exist
+     */
+   public JDFLot getCreateLot(int n)
+    {
+         return (JDFLot) getCreateElement_KElement(ElementName.LOT,null, n);
+    }
+
+   /**
+    * append Lot element
+     * @return the new Lot
+    */
+
+    public JDFLot appendLot()
+    {
+         return (JDFLot) appendElement(ElementName.LOT, null);
+    }
     /**
      * reduce the parts to the canonical representation. If all children of a parent node are in
      * defined in parts, they are replaced by their parent. E.g. the canonical representation
