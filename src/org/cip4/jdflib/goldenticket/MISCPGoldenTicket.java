@@ -73,8 +73,6 @@ package org.cip4.jdflib.goldenticket;
 import java.io.File;
 import java.util.ResourceBundle;
 
-import javax.swing.JOptionPane;
-
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumPrintingType;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;

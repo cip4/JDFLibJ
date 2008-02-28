@@ -9,23 +9,15 @@ import java.io.File;
 import java.util.HashSet;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.auto.JDFAutoContentObject.EnumType;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
-import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.goldenticket.MISCPGoldenTicket;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
-import org.cip4.jdflib.resource.process.JDFColorPool;
-import org.cip4.jdflib.resource.process.JDFColorantControl;
-import org.cip4.jdflib.resource.process.JDFExposedMedia;
-import org.cip4.jdflib.resource.process.prepress.JDFInk;
 
 
 public class NColorTest extends JDFTestCaseBase

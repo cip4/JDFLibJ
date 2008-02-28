@@ -98,7 +98,7 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
     {
         JDFJMF jmf=(JDFJMF) new JDFDoc("JMF").getRoot();
         jmf.setSenderID("S1");
-        JDFDeviceInfo di=jmf.appendSignal(EnumType.Status).appendDeviceInfo();
+        di=jmf.appendSignal(EnumType.Status).appendDeviceInfo();
         assertEquals(jmf.getSenderID(),di.getDeviceID());
         di.appendDevice().setDeviceID("dd");
         assertEquals(di.getDeviceID(), "dd");
