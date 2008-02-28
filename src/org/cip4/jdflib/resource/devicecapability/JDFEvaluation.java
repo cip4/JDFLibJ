@@ -481,7 +481,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
             return ((JDFDevCap)e).getNamePath(true);
         }
         else if(e instanceof JDFDevCaps){
-            return ((JDFDevCaps)e).getNamePath(true);
+            return ((JDFDevCaps)e).getName();
         }
         return null;
     }
