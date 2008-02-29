@@ -112,7 +112,7 @@ public class JDFPartTest extends JDFTestCaseBase
         while(it.hasNext())
         {
             final String name = ((EnumPartIDKey)it.next()).getName();
-            assertTrue("name missing "+name,knownAtts.contains(name));
+            assertTrue("name missing in Part: "+name,knownAtts.contains(name));
         }
      }
     ////////////////////////////////////////////////////////////////
