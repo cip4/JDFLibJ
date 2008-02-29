@@ -962,6 +962,9 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
      */
     protected final boolean fitsListType(String value)
     {
+        if(value==null)
+            return true;
+        
         EnumListType listType=getListType();
 
         JDFRangeList rangelist; // lists of strings are most generic
