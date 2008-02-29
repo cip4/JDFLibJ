@@ -72,23 +72,17 @@ package org.cip4.jdflib.goldenticket;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
-import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
-import org.cip4.jdflib.resource.process.JDFColorPool;
-import org.cip4.jdflib.resource.process.JDFColorantControl;
-import org.cip4.jdflib.resource.process.JDFExposedMedia;
-import org.cip4.jdflib.resource.process.prepress.JDFInk;
 
 
 public class MISCPGoldenTicketTest extends JDFTestCaseBase
@@ -162,7 +156,7 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
         cpGoldenTicket.workStyle=EnumWorkStyle.Simplex;
         cpGoldenTicket.assign(null);
         
-        write3Files(cpGoldenTicket,"SimplexPoster",1000,90);
+        write3GTFiles(cpGoldenTicket,"MISCPS_SimplexPoster",1000,90);
     }
     /////////////////////////////////////////////////////////////////////////////
     
@@ -188,60 +182,34 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
         JDFNode nodeCP=node.addJDFNode(EnumType.ProcessGroup);
 
         cpGoldenTicket.assign(nodeCP);
-        write3Files(cpGoldenTicket,"ProductGrayBox",1000,90);
+        write3GTFiles(cpGoldenTicket,"MISCPS_ProductGrayBox",1000,90);
     }
 
-    /**
-     * create 3 files based on a gt
-     * @param cpGoldenTicket
-     * @param templateName
-     * @param good
-     * @param waste
-     */
-    private void write3Files(MISCPGoldenTicket cpGoldenTicket,String templateName,int good, int waste)
-    {
-        assertTrue(cpGoldenTicket.getNode().isValid(EnumValidationLevel.Complete));
-        cpGoldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_Manager_MISCPS_"+templateName+".jdf", 2);        
-        
-        cpGoldenTicket.makeReady();
-        assertTrue(cpGoldenTicket.getNode().isValid(EnumValidationLevel.Complete));
-        cpGoldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_PrepressCompleted_MISCPS_1_"+templateName+".jdf", 2);
 
-        cpGoldenTicket.execute(null,true,true,good,waste);
-        assertTrue(cpGoldenTicket.getNode().isValid(EnumValidationLevel.Complete));
-        cpGoldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_Worker_MISCPS_1_"+templateName+".jdf", 2);
-    }
     /**
      * test identical inks using black + text 
      */
     public void testIdenticalInk()
     {
-        //TODO make gt
         VString v=new VString("Cyan,Magenta,Yellow,Black,Text",",");
         VString vInk=new VString("Cyan,Magenta,Yellow,Black,Black",",");
         VString vInkProd=new VString("MIS-Ink-4711,MIS-Ink-4712,MIS-Ink-4713,MIS-Ink-4714,MIS-Ink-4714",",");
+        VJDFAttributeMap vMap=new VJDFAttributeMap();
+        JDFAttributeMap map=new JDFAttributeMap();
+        map.put(EnumPartIDKey.SignatureName,"Sig1");
+        map.put(EnumPartIDKey.SheetName,"Sheet1");
+        map.put(EnumPartIDKey.Side,"Front");
+        vMap.add(new JDFAttributeMap(map));
+
         JDFNode n=new JDFDoc("JDF").getJDFRoot();
+        MISCPGoldenTicket cpGoldenTicket=new MISCPGoldenTicket(1,null,2,1,true,vMap);
+        cpGoldenTicket.cols=v;
+        cpGoldenTicket.inks=vInk;
+        cpGoldenTicket.inkProductIDs=vInkProd;
+        
         n.setType(JDFNode.EnumType.ConventionalPrinting);
-        n.setXMLComment("Simple cmyk + black text overprint using same black Ink");
-        JDFInk ink=(JDFInk) n.addResource(ElementName.INK, EnumUsage.Input);
-        JDFColorPool colPool=(JDFColorPool) n.addResource(ElementName.COLORPOOL, null);
-        JDFExposedMedia xm=(JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
-        JDFColorantControl cc=(JDFColorantControl) n.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
-        cc.refColorPool(colPool);
-        cc.setProcessColorModel("CMYK");
-        cc.appendColorantParams().appendSeparation("Text");
-        cc.appendColorantOrder().setSeparations(v);
-        JDFExposedMedia sheetF=(JDFExposedMedia) xm.addPartition(EnumPartIDKey.SignatureName, "Sig1").addPartition(EnumPartIDKey.SheetName, "s1").addPartition(EnumPartIDKey.Side, "Front");
-        for(int i=0;i<v.size();i++)
-        {
-            JDFInk inkSep=(JDFInk) ink.addPartition(EnumPartIDKey.Separation, v.elementAt(i));
-            inkSep.setInkName(vInk.elementAt(i));
-            inkSep.setProductID(vInkProd.elementAt(i));
-            colPool.appendColorWithName(v.elementAt(i), null);
-            sheetF.addPartition(EnumPartIDKey.Separation, v.elementAt(i));
-            
-        }
-        n.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp+"sameInk.jdf", 2, false);
+        cpGoldenTicket.assign(n);
+        write3GTFiles(cpGoldenTicket, "sameInk.jdf", 3000,200);
      }
 
     /////////////////////////////////////////////////////////////////////////////

@@ -241,7 +241,7 @@ public class JDFNode extends JDFElement
      * @return comma separated list of optional attributes for JDF nodes
      */
     @Override
-	protected AttributeInfo getTheAttributeInfo() 
+    protected AttributeInfo getTheAttributeInfo() 
     {
         AttributeInfo ai = super.getTheAttributeInfo().updateReplace(atrInfoTable_abstract);
         final String nodeType = getType();
@@ -290,7 +290,7 @@ public class JDFNode extends JDFElement
      * 
      */
     @Override
-	protected ElementInfo getTheElementInfo() 
+    protected ElementInfo getTheElementInfo() 
     {        
         ElementInfo ei = super.getTheElementInfo().updateReplace(elemInfoTable_abstract);
 
@@ -398,7 +398,7 @@ public class JDFNode extends JDFElement
         private static int m_startValue = 0;
 
         @Override
-		public String toString()
+        public String toString()
         {
             return getName();
         }
@@ -498,22 +498,22 @@ public class JDFNode extends JDFElement
 
     /** @deprecated use EnumActivation.Inactive */
     @Deprecated
-	public static final EnumActivation Activation_Inactive      = EnumActivation.Inactive;  
+    public static final EnumActivation Activation_Inactive      = EnumActivation.Inactive;  
     /** @deprecated use EnumActivation.EnumActivation.Informative */
     @Deprecated
-	public static final EnumActivation Activation_Informative   = EnumActivation.Informative;
+    public static final EnumActivation Activation_Informative   = EnumActivation.Informative;
     /** @deprecated use EnumActivation.Held */
     @Deprecated
-	public static final EnumActivation Activation_Held          = EnumActivation.Held;
+    public static final EnumActivation Activation_Held          = EnumActivation.Held;
     /** @deprecated use EnumActivation.TestRun */
     @Deprecated
-	public static final EnumActivation Activation_TestRun       = EnumActivation.TestRun;
+    public static final EnumActivation Activation_TestRun       = EnumActivation.TestRun;
     /** @deprecated use EnumActivation.TestRunAndGo */
     @Deprecated
-	public static final EnumActivation Activation_TestRunAndGo  = EnumActivation.TestRunAndGo;
+    public static final EnumActivation Activation_TestRunAndGo  = EnumActivation.TestRunAndGo;
     /** @deprecated use EnumActivation.Active */
     @Deprecated
-	public static final EnumActivation Activation_Active        = EnumActivation.Active;
+    public static final EnumActivation Activation_Active        = EnumActivation.Active;
 
     /**
      * inner class EnumType:
@@ -664,12 +664,12 @@ public class JDFNode extends JDFElement
         public static final EnumType WebInlineFinishing = new EnumType(JDFConstants.TYPE_WEBINLINEFINISHING);
         public static final EnumType WireCombBinding = new EnumType(JDFConstants.TYPE_WIRECOMBBINDING);
         public static final EnumType Wrapping = new EnumType(JDFConstants.TYPE_WRAPPING);
-        
+
         // prepress gray box types
         public static final EnumType ImpositionPreparation = new EnumType("ImpositionPreparation");
         public static final EnumType PrepressPreparation = new EnumType("PrepressPreparation");
         public static final EnumType ProofImaging = new EnumType("ProofImaging");
-        
+
     }
 
     /**
@@ -678,286 +678,286 @@ public class JDFNode extends JDFElement
      */
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_ProcessGroup = EnumType.ProcessGroup;
+    public static final EnumType Type_ProcessGroup = EnumType.ProcessGroup;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Combined = EnumType.Combined;
+    public static final EnumType Type_Combined = EnumType.Combined;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Product = EnumType.Product;
+    public static final EnumType Type_Product = EnumType.Product;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Approval = EnumType.Approval;
+    public static final EnumType Type_Approval = EnumType.Approval;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Buffer = EnumType.Buffer;
+    public static final EnumType Type_Buffer = EnumType.Buffer;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Combine = EnumType.Combine;
+    public static final EnumType Type_Combine = EnumType.Combine;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Delivery = EnumType.Delivery;
+    public static final EnumType Type_Delivery = EnumType.Delivery;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_ManualLabor = EnumType.ManualLabor;
+    public static final EnumType Type_ManualLabor = EnumType.ManualLabor;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Ordering = EnumType.Ordering;
+    public static final EnumType Type_Ordering = EnumType.Ordering;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Packing = EnumType.Packing;
+    public static final EnumType Type_Packing = EnumType.Packing;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_QualityControl = EnumType.QualityControl;
+    public static final EnumType Type_QualityControl = EnumType.QualityControl;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_ResourceDefinition = EnumType.ResourceDefinition;
+    public static final EnumType Type_ResourceDefinition = EnumType.ResourceDefinition;
     /** @deprecated use EnumType.Type_xxx x*/
     @Deprecated
-	public static final EnumType Type_Split = EnumType.Split;
+    public static final EnumType Type_Split = EnumType.Split;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Verification = EnumType.Verification;
+    public static final EnumType Type_Verification = EnumType.Verification;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_AssetListCreation = EnumType.AssetListCreation;
+    public static final EnumType Type_AssetListCreation = EnumType.AssetListCreation;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_ColorCorrection = EnumType.ColorCorrection;
+    public static final EnumType Type_ColorCorrection = EnumType.ColorCorrection;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_ColorSpaceConversion = EnumType.ColorSpaceConversion;
+    public static final EnumType Type_ColorSpaceConversion = EnumType.ColorSpaceConversion;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_ContactCopying = EnumType.ContactCopying;
+    public static final EnumType Type_ContactCopying = EnumType.ContactCopying;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_ContoneCalibration = EnumType.ContoneCalibration;
+    public static final EnumType Type_ContoneCalibration = EnumType.ContoneCalibration;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_DBDocTemplateLayout = EnumType.DBDocTemplateLayout;
+    public static final EnumType Type_DBDocTemplateLayout = EnumType.DBDocTemplateLayout;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_DBTemplateMerging = EnumType.DBTemplateMerging;
+    public static final EnumType Type_DBTemplateMerging = EnumType.DBTemplateMerging;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_DigitalDelivery = EnumType.DigitalDelivery;
+    public static final EnumType Type_DigitalDelivery = EnumType.DigitalDelivery;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_FilmToPlateCopying = EnumType.FilmToPlateCopying;
+    public static final EnumType Type_FilmToPlateCopying = EnumType.FilmToPlateCopying;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_FormatConversion = EnumType.FormatConversion;
+    public static final EnumType Type_FormatConversion = EnumType.FormatConversion;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_ImageReplacement = EnumType.ImageReplacement;
+    public static final EnumType Type_ImageReplacement = EnumType.ImageReplacement;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_ImageSetting = EnumType.ImageSetting;
+    public static final EnumType Type_ImageSetting = EnumType.ImageSetting;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Imposition = EnumType.Imposition;
+    public static final EnumType Type_Imposition = EnumType.Imposition;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_InkZoneCalculation = EnumType.InkZoneCalculation;
+    public static final EnumType Type_InkZoneCalculation = EnumType.InkZoneCalculation;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Interpreting = EnumType.Interpreting;
+    public static final EnumType Type_Interpreting = EnumType.Interpreting;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_LayoutElementProduction = EnumType.LayoutElementProduction;
+    public static final EnumType Type_LayoutElementProduction = EnumType.LayoutElementProduction;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_LayoutPreparation = EnumType.LayoutPreparation;
+    public static final EnumType Type_LayoutPreparation = EnumType.LayoutPreparation;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_PDFToPSConversion = EnumType.PDFToPSConversion;
+    public static final EnumType Type_PDFToPSConversion = EnumType.PDFToPSConversion;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Preflight = EnumType.Preflight;
+    public static final EnumType Type_Preflight = EnumType.Preflight;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_PreviewGeneration = EnumType.PreviewGeneration;
+    public static final EnumType Type_PreviewGeneration = EnumType.PreviewGeneration;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Proofing = EnumType.Proofing;
+    public static final EnumType Type_Proofing = EnumType.Proofing;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_PSToPDFConversion = EnumType.PSToPDFConversion;
+    public static final EnumType Type_PSToPDFConversion = EnumType.PSToPDFConversion;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Rendering = EnumType.Rendering;
+    public static final EnumType Type_Rendering = EnumType.Rendering;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Scanning = EnumType.Scanning;
+    public static final EnumType Type_Scanning = EnumType.Scanning;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Screening = EnumType.Screening;
+    public static final EnumType Type_Screening = EnumType.Screening;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Separation = EnumType.Separation;
+    public static final EnumType Type_Separation = EnumType.Separation;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_SoftProofing = EnumType.SoftProofing;
+    public static final EnumType Type_SoftProofing = EnumType.SoftProofing;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Stripping = EnumType.Stripping;
+    public static final EnumType Type_Stripping = EnumType.Stripping;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Tiling = EnumType.Tiling;
+    public static final EnumType Type_Tiling = EnumType.Tiling;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Trapping = EnumType.Trapping;
+    public static final EnumType Type_Trapping = EnumType.Trapping;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_ConventionalPrinting = EnumType.ConventionalPrinting;
+    public static final EnumType Type_ConventionalPrinting = EnumType.ConventionalPrinting;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_DigitalPrinting = EnumType.DigitalPrinting;
+    public static final EnumType Type_DigitalPrinting = EnumType.DigitalPrinting;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_IDPrinting = EnumType.IDPrinting;
+    public static final EnumType Type_IDPrinting = EnumType.IDPrinting;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_AdhesiveBinding = EnumType.AdhesiveBinding;
+    public static final EnumType Type_AdhesiveBinding = EnumType.AdhesiveBinding;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_BlockPreparation = EnumType.BlockPreparation;
+    public static final EnumType Type_BlockPreparation = EnumType.BlockPreparation;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_BoxPacking = EnumType.BoxPacking;
+    public static final EnumType Type_BoxPacking = EnumType.BoxPacking;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Bundling = EnumType.Bundling;
+    public static final EnumType Type_Bundling = EnumType.Bundling;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_CaseMaking = EnumType.CaseMaking ;
+    public static final EnumType Type_CaseMaking = EnumType.CaseMaking ;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_CasingIn = EnumType.CasingIn ;
+    public static final EnumType Type_CasingIn = EnumType.CasingIn ;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_ChannelBinding = EnumType.ChannelBinding ;
+    public static final EnumType Type_ChannelBinding = EnumType.ChannelBinding ;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_CoilBinding = EnumType.CoilBinding;
+    public static final EnumType Type_CoilBinding = EnumType.CoilBinding;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Collecting = EnumType.Collecting;
+    public static final EnumType Type_Collecting = EnumType.Collecting;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_CoverApplication = EnumType.CoverApplication ;
+    public static final EnumType Type_CoverApplication = EnumType.CoverApplication ;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Creasing = EnumType.Creasing;
+    public static final EnumType Type_Creasing = EnumType.Creasing;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Cutting = EnumType.Cutting;
+    public static final EnumType Type_Cutting = EnumType.Cutting;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Dividing = EnumType.Dividing;
+    public static final EnumType Type_Dividing = EnumType.Dividing;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Embossing = EnumType.Embossing;
+    public static final EnumType Type_Embossing = EnumType.Embossing;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_EndSheetGluing = EnumType.EndSheetGluing;
+    public static final EnumType Type_EndSheetGluing = EnumType.EndSheetGluing;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Feeding = EnumType.Feeding;
+    public static final EnumType Type_Feeding = EnumType.Feeding;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Folding = EnumType.Folding;
+    public static final EnumType Type_Folding = EnumType.Folding;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Gathering = EnumType.Gathering;
+    public static final EnumType Type_Gathering = EnumType.Gathering;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Gluing = EnumType.Gluing;
+    public static final EnumType Type_Gluing = EnumType.Gluing;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_HeadBandApplication = EnumType.HeadBandApplication;
+    public static final EnumType Type_HeadBandApplication = EnumType.HeadBandApplication;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_HoleMaking = EnumType.HoleMaking;
+    public static final EnumType Type_HoleMaking = EnumType.HoleMaking;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Inserting = EnumType.Inserting;
+    public static final EnumType Type_Inserting = EnumType.Inserting;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Jacketing = EnumType.Jacketing;
+    public static final EnumType Type_Jacketing = EnumType.Jacketing;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Labeling = EnumType.Labeling;
+    public static final EnumType Type_Labeling = EnumType.Labeling;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Laminating = EnumType.Laminating;
+    public static final EnumType Type_Laminating = EnumType.Laminating;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_LongitudinalRibbonOperations = EnumType.LongitudinalRibbonOperations;
+    public static final EnumType Type_LongitudinalRibbonOperations = EnumType.LongitudinalRibbonOperations;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Numbering = EnumType.Numbering;
+    public static final EnumType Type_Numbering = EnumType.Numbering;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Palletizing = EnumType.Palletizing;
+    public static final EnumType Type_Palletizing = EnumType.Palletizing;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Perforating = EnumType.Perforating;
+    public static final EnumType Type_Perforating = EnumType.Perforating;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_PlasticCombBinding = EnumType.PlasticCombBinding;
+    public static final EnumType Type_PlasticCombBinding = EnumType.PlasticCombBinding;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_PrintRolling = EnumType.PrintRolling;
+    public static final EnumType Type_PrintRolling = EnumType.PrintRolling;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_RingBinding = EnumType.RingBinding;
+    public static final EnumType Type_RingBinding = EnumType.RingBinding;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_SaddleStitching = EnumType.SaddleStitching;
+    public static final EnumType Type_SaddleStitching = EnumType.SaddleStitching;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_ShapeCutting = EnumType.ShapeCutting;
+    public static final EnumType Type_ShapeCutting = EnumType.ShapeCutting;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Shrinking = EnumType.Shrinking;
+    public static final EnumType Type_Shrinking = EnumType.Shrinking;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_SideSewing = EnumType.SideSewing;
+    public static final EnumType Type_SideSewing = EnumType.SideSewing;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_SpinePreparation = EnumType.SpinePreparation;
+    public static final EnumType Type_SpinePreparation = EnumType.SpinePreparation;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_SpineTaping = EnumType.SpineTaping;
+    public static final EnumType Type_SpineTaping = EnumType.SpineTaping;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Stacking = EnumType.Stacking;
+    public static final EnumType Type_Stacking = EnumType.Stacking;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Stitching = EnumType.Stitching;
+    public static final EnumType Type_Stitching = EnumType.Stitching;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Strapping = EnumType.Strapping;
+    public static final EnumType Type_Strapping = EnumType.Strapping;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_StripBinding = EnumType.StripBinding;
+    public static final EnumType Type_StripBinding = EnumType.StripBinding;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_ThreadSealing = EnumType.ThreadSealing;
+    public static final EnumType Type_ThreadSealing = EnumType.ThreadSealing;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_ThreadSewing = EnumType.ThreadSewing;
+    public static final EnumType Type_ThreadSewing = EnumType.ThreadSewing;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Trimming = EnumType.Trimming;
+    public static final EnumType Type_Trimming = EnumType.Trimming;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_WireCombBinding = EnumType.WireCombBinding;
+    public static final EnumType Type_WireCombBinding = EnumType.WireCombBinding;
     /** @deprecated use EnumType.xxx */
     @Deprecated
-	public static final EnumType Type_Wrapping = EnumType.Wrapping;
+    public static final EnumType Type_Wrapping = EnumType.Wrapping;
 
 
 
@@ -1673,22 +1673,22 @@ public class JDFNode extends JDFElement
             _jobPartID=isWildCard(jobPartID) ? null :jobPartID;
             _partMapVector=partMapVector;
         }
-        
+
         public NodeIdentifier()
         {
             setTo(null,null,null);   
-           
+
         }
-         /**
+        /**
          * creates a NodeIdentifier from a given JDF node
          * @param n
          */
         public NodeIdentifier(JDFNode n)
         {
-             this();
-             setNode(n);
+            this();
+            setNode(n);
         }
-        
+
         /**
          * sets a NodeIdentifier to a given JDF node
          * @param n
@@ -1712,15 +1712,15 @@ public class JDFNode extends JDFElement
             else
                 setTo(qe.getJobID(),qe.getJobPartID(),qe.getPartMapVector());            
         }
-        
+
         /**
          * creates a NodeIdentifier from a given QueueEntry
          * @param qe the queueEntry 
          */
         public NodeIdentifier(JDFQueueEntry qe)
         {
-             this();
-             setQueueEntry(qe);
+            this();
+            setQueueEntry(qe);
         }
         /* (non-Javadoc)
          * @see java.lang.Object#equals(java.lang.Object)
@@ -1767,7 +1767,7 @@ public class JDFNode extends JDFElement
         {
             return "NodeIdentifier :"+_jobID+" "+_jobPartID+"\n"+_partMapVector;
         }
-        
+
     }
     /**
      * Enumeration for accessing typesafe nodes 
@@ -1814,7 +1814,7 @@ public class JDFNode extends JDFElement
          * @deprecated use null instead
          */
         @Deprecated
-		public static final EnumProcessUsage Any = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_ANY);
+        public static final EnumProcessUsage Any = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_ANY);
         public static final EnumProcessUsage Rejected = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_REJECTED);
         public static final EnumProcessUsage Accepted = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_ACCEPTED);
         public static final EnumProcessUsage Application = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_APPLICATION);
@@ -1851,91 +1851,91 @@ public class JDFNode extends JDFElement
      */
     /** @deprecated use EnumProcessUsage.xxx */
     @Deprecated
-	public static final EnumProcessUsage ProcessUsage_AnyInput= EnumProcessUsage.AnyInput;
+    public static final EnumProcessUsage ProcessUsage_AnyInput= EnumProcessUsage.AnyInput;
     /** @deprecated use EnumProcessUsage.xxx */
     @Deprecated
-	public static final EnumProcessUsage ProcessUsage_AnyOutput = EnumProcessUsage.AnyOutput;
+    public static final EnumProcessUsage ProcessUsage_AnyOutput = EnumProcessUsage.AnyOutput;
     /** @deprecated use EnumProcessUsage.xxx */
     @Deprecated
-	public static final EnumProcessUsage ProcessUsage_Any = EnumProcessUsage.Any;
+    public static final EnumProcessUsage ProcessUsage_Any = EnumProcessUsage.Any;
     /** @deprecated use EnumProcessUsage.xxx */
     @Deprecated
-	public static final EnumProcessUsage ProcessUsage_Rejected = EnumProcessUsage.Rejected;
+    public static final EnumProcessUsage ProcessUsage_Rejected = EnumProcessUsage.Rejected;
     /** @deprecated use EnumProcessUsage.xxx */
     @Deprecated
-	public static final EnumProcessUsage ProcessUsage_Accepted = EnumProcessUsage.Accepted;
+    public static final EnumProcessUsage ProcessUsage_Accepted = EnumProcessUsage.Accepted;
     /** @deprecated use EnumProcessUsage.xxx */
     @Deprecated
-	public static final EnumProcessUsage ProcessUsage_Marks = EnumProcessUsage.Marks;
+    public static final EnumProcessUsage ProcessUsage_Marks = EnumProcessUsage.Marks;
     /** @deprecated use EnumProcessUsage.xxx */
     @Deprecated
-	public static final EnumProcessUsage ProcessUsage_Document = EnumProcessUsage.Document;
+    public static final EnumProcessUsage ProcessUsage_Document = EnumProcessUsage.Document;
     /** @deprecated use EnumProcessUsage.xxx */
     @Deprecated
-	public static final EnumProcessUsage ProcessUsage_Surface = EnumProcessUsage.Surface;
+    public static final EnumProcessUsage ProcessUsage_Surface = EnumProcessUsage.Surface;
     /** @deprecated use EnumProcessUsage.xxx */
     @Deprecated
-	public static final EnumProcessUsage ProcessUsage_Waste = EnumProcessUsage.Waste;
+    public static final EnumProcessUsage ProcessUsage_Waste = EnumProcessUsage.Waste;
     /** @deprecated use EnumProcessUsage.xxx */
     @Deprecated
-	public static final EnumProcessUsage ProcessUsage_Proof = EnumProcessUsage.Proof;
+    public static final EnumProcessUsage ProcessUsage_Proof = EnumProcessUsage.Proof;
     /** @deprecated use EnumProcessUsage.xxx */
     @Deprecated
-	public static final EnumProcessUsage ProcessUsage_Input = EnumProcessUsage.Input;
+    public static final EnumProcessUsage ProcessUsage_Input = EnumProcessUsage.Input;
     /** @deprecated use EnumProcessUsage.xxx */
     @Deprecated
-	public static final EnumProcessUsage ProcessUsage_Plate = EnumProcessUsage.Plate;
+    public static final EnumProcessUsage ProcessUsage_Plate = EnumProcessUsage.Plate;
     /** @deprecated use EnumProcessUsage.xxx */
     @Deprecated
-	public static final EnumProcessUsage ProcessUsage_Good = EnumProcessUsage.Good;
+    public static final EnumProcessUsage ProcessUsage_Good = EnumProcessUsage.Good;
     /** @deprecated use EnumProcessUsage.xxx */
     @Deprecated
-	public static final EnumProcessUsage ProcessUsage_Cover = EnumProcessUsage.Cover;
+    public static final EnumProcessUsage ProcessUsage_Cover = EnumProcessUsage.Cover;
     /** @deprecated use EnumProcessUsage.xxx */
     @Deprecated
-	public static final EnumProcessUsage ProcessUsage_BookBlock = EnumProcessUsage.BookBlock;
+    public static final EnumProcessUsage ProcessUsage_BookBlock = EnumProcessUsage.BookBlock;
     /** @deprecated use EnumProcessUsage.xxx */
     @Deprecated
-	public static final EnumProcessUsage ProcessUsage_Box = EnumProcessUsage.Box;
+    public static final EnumProcessUsage ProcessUsage_Box = EnumProcessUsage.Box;
     /** @deprecated use EnumProcessUsage.xxx */
     @Deprecated
-	public static final EnumProcessUsage ProcessUsage_CoverMaterial = EnumProcessUsage.CoverMaterial;
+    public static final EnumProcessUsage ProcessUsage_CoverMaterial = EnumProcessUsage.CoverMaterial;
     /** @deprecated use EnumProcessUsage.xxx */
     @Deprecated
-	public static final EnumProcessUsage ProcessUsage_SpineBoard = EnumProcessUsage.SpineBoard;
+    public static final EnumProcessUsage ProcessUsage_SpineBoard = EnumProcessUsage.SpineBoard;
     /** @deprecated use EnumProcessUsage.xxx */
     @Deprecated
-	public static final EnumProcessUsage ProcessUsage_CoverBoard = EnumProcessUsage.CoverBoard;
+    public static final EnumProcessUsage ProcessUsage_CoverBoard = EnumProcessUsage.CoverBoard;
     /** @deprecated use EnumProcessUsage.xxx */
     @Deprecated
-	public static final EnumProcessUsage ProcessUsage_Case = EnumProcessUsage.Case;
+    public static final EnumProcessUsage ProcessUsage_Case = EnumProcessUsage.Case;
     /** @deprecated use EnumProcessUsage.xxx */
     @Deprecated
-	public static final EnumProcessUsage ProcessUsage_FrontEndSheet = EnumProcessUsage.FrontEndSheet;
+    public static final EnumProcessUsage ProcessUsage_FrontEndSheet = EnumProcessUsage.FrontEndSheet;
     /** @deprecated use EnumProcessUsage.xxx */
     @Deprecated
-	public static final EnumProcessUsage ProcessUsage_BackEndSheet = EnumProcessUsage.BackEndSheet;
+    public static final EnumProcessUsage ProcessUsage_BackEndSheet = EnumProcessUsage.BackEndSheet;
     /** @deprecated use EnumProcessUsage.xxx */
     @Deprecated
-	public static final EnumProcessUsage ProcessUsage_Child = EnumProcessUsage.Child;
+    public static final EnumProcessUsage ProcessUsage_Child = EnumProcessUsage.Child;
     /** @deprecated use EnumProcessUsage.xxx */
     @Deprecated
-	public static final EnumProcessUsage ProcessUsage_Mother = EnumProcessUsage.Mother;
+    public static final EnumProcessUsage ProcessUsage_Mother = EnumProcessUsage.Mother;
     /** @deprecated use EnumProcessUsage.xxx */
     @Deprecated
-	public static final EnumProcessUsage ProcessUsage_Jacket = EnumProcessUsage.Jacket;
+    public static final EnumProcessUsage ProcessUsage_Jacket = EnumProcessUsage.Jacket;
     /** @deprecated use EnumProcessUsage.xxx */
     @Deprecated
-	public static final EnumProcessUsage ProcessUsage_Book = EnumProcessUsage.Book;
+    public static final EnumProcessUsage ProcessUsage_Book = EnumProcessUsage.Book;
     /** @deprecated use EnumProcessUsage.xxx */
     @Deprecated
-	public static final EnumProcessUsage ProcessUsage_Label = EnumProcessUsage.Label;
+    public static final EnumProcessUsage ProcessUsage_Label = EnumProcessUsage.Label;
     /** @deprecated use EnumProcessUsage.xxx */
     @Deprecated
-	public static final EnumProcessUsage ProcessUsage_RingBinder = EnumProcessUsage.RingBinder;
+    public static final EnumProcessUsage ProcessUsage_RingBinder = EnumProcessUsage.RingBinder;
     /** @deprecated use EnumProcessUsage.xxx */
     @Deprecated
-	public static final EnumProcessUsage ProcessUsage_Ancestor = EnumProcessUsage.Ancestor;
+    public static final EnumProcessUsage ProcessUsage_Ancestor = EnumProcessUsage.Ancestor;
 
 
     //**************************************** Methods *********************************************
@@ -1945,7 +1945,7 @@ public class JDFNode extends JDFElement
      * @return String
      */
     @Override
-	public String toString()
+    public String toString()
     {
         return "JDFNode[ --> " + super.toString() + " ]";
     }
@@ -1957,7 +1957,7 @@ public class JDFNode extends JDFElement
      * @return boolean: always true
      */
     @Override
-	public boolean init()
+    public boolean init()
     {
         if(hasAttribute(AttributeName.ID)) {
             return false; // has previously been initialized
@@ -2414,7 +2414,7 @@ public class JDFNode extends JDFElement
      * @deprecated use the version with deviceID
      */
     @Deprecated
-	public JDFDoc setPhase(EnumNodeStatus nodeStatus, String nodeStatusDetails, EnumDeviceStatus deviceStatus, String deviceStatusDetails, VJDFAttributeMap vPartMap)
+    public JDFDoc setPhase(EnumNodeStatus nodeStatus, String nodeStatusDetails, EnumDeviceStatus deviceStatus, String deviceStatusDetails, VJDFAttributeMap vPartMap)
     {
         StatusCounter sc=new StatusCounter(this,vPartMap,null);
         sc.setPhase(nodeStatus, nodeStatusDetails, deviceStatus, deviceStatusDetails);
@@ -2462,7 +2462,7 @@ public class JDFNode extends JDFElement
      * @return the vector of PartMaps
      */
     @Override
-	public VJDFAttributeMap getPartMapVector()
+    public VJDFAttributeMap getPartMapVector()
     {
         final JDFAncestorPool ancPool=getAncestorPool();
         if(ancPool!=null) {
@@ -2477,7 +2477,7 @@ public class JDFNode extends JDFElement
      * @return EnumActivation
      */
     @Deprecated
-	public EnumActivation getActivation()
+    public EnumActivation getActivation()
     {
         return getActivation(false);
     }
@@ -2612,7 +2612,7 @@ public class JDFNode extends JDFElement
      * @default addResource(name, null, bInput, null, true, null)
      */
     @Deprecated
-	public JDFResource addResource(
+    public JDFResource addResource(
             String strName,
             JDFResource.EnumResourceClass resClass,
             boolean bInput,
@@ -2730,7 +2730,7 @@ public class JDFNode extends JDFElement
      * @default LinkResource(r, true, false)
      */
     @Deprecated
-	public JDFResourceLink linkResource(JDFResource jdfResource, boolean input,boolean bForce)
+    public JDFResourceLink linkResource(JDFResource jdfResource, boolean input,boolean bForce)
     {
         if(bForce) {
             bForce=true;
@@ -2902,7 +2902,7 @@ public class JDFNode extends JDFElement
      * @deprecated use getResourceLinks(null)
      */
     @Deprecated
-	public VElement getResourceLinks()
+    public VElement getResourceLinks()
     {
         return getResourceLinks(null);
     }
@@ -3013,7 +3013,7 @@ public class JDFNode extends JDFElement
      *@deprecated use getPredecessors(bPre,false);
      */
     @Deprecated
-	public Vector getPredecessors(boolean bPre)
+    public Vector getPredecessors(boolean bPre)
     {
         return getPredecessors(bPre,false);
     }
@@ -3121,7 +3121,7 @@ public class JDFNode extends JDFElement
      */
 
     @Deprecated
-	public JDFElement.EnumNodeStatus getProcessStatus(JDFAttributeMap mattr)
+    public JDFElement.EnumNodeStatus getProcessStatus(JDFAttributeMap mattr)
     {
         JDFElement.EnumNodeStatus stat = getStatus();
 
@@ -3249,7 +3249,7 @@ public class JDFNode extends JDFElement
      * @deprecated use     public Vector getvJDFNode(task, JDFNode.EnumActivation.Unknown, false)
      */
     @Deprecated
-	public Vector getvJDFNode(String task, boolean active)
+    public Vector getvJDFNode(String task, boolean active)
     {
         return getvJDFNode(task, null, active);
     }
@@ -3261,7 +3261,7 @@ public class JDFNode extends JDFElement
      * @return boolean
      */
     @Deprecated
-	public boolean isActive()
+    public boolean isActive()
     {
         return fitsActivation(EnumActivation.Active,true);
     }
@@ -3272,7 +3272,7 @@ public class JDFNode extends JDFElement
      * @return boolean
      */
     @Deprecated
-	public boolean isActive(boolean bWalkThroughAnchestors)
+    public boolean isActive(boolean bWalkThroughAnchestors)
     {
         return fitsActivation(EnumActivation.Active,bWalkThroughAnchestors);
     }
@@ -3316,7 +3316,7 @@ public class JDFNode extends JDFElement
      * @deprecated
      */
     @Deprecated
-	public void removeNode(boolean bLeaveSubmit)
+    public void removeNode(boolean bLeaveSubmit)
     {
         if (bLeaveSubmit)
         {
@@ -3341,7 +3341,7 @@ public class JDFNode extends JDFElement
      * @return JDFNode
      */
     @Deprecated
-	public JDFNode addTask(String task, VString tasks)
+    public JDFNode addTask(String task, VString tasks)
     {
         if (task.equals(JDFConstants.EMPTYSTRING))
         {
@@ -3374,7 +3374,7 @@ public class JDFNode extends JDFElement
      * @deprecated use addJDFNode
      */
     @Deprecated
-	public JDFNode addTask(String task)
+    public JDFNode addTask(String task)
     {
         return addTask(task, null);
     }
@@ -3444,7 +3444,7 @@ public class JDFNode extends JDFElement
      * @return true if successful
      */
     @Override
-	public boolean fixVersion(EnumVersion version)
+    public boolean fixVersion(EnumVersion version)
     {
         boolean bRet=true;
         if(version!=null)
@@ -3620,7 +3620,7 @@ public class JDFNode extends JDFElement
      * @return true if this node is valid
      */
     @Override
-	public boolean isValid(EnumValidationLevel level)
+    public boolean isValid(EnumValidationLevel level)
     {
         boolean bValid=super.isValid(level);
         if(!bValid) {
@@ -3772,7 +3772,7 @@ public class JDFNode extends JDFElement
      * @deprecated use updatePartStatus(VJDFAttributeMAP)
      */
     @Deprecated
-	public void upDateStatus()
+    public void upDateStatus()
     {
         final JDFResourceLinkPool resourceLinkPool = getResourceLinkPool();
         if (resourceLinkPool == null) {
@@ -3859,10 +3859,24 @@ public class JDFNode extends JDFElement
      * @return HashSet of referenced resource refs and links
      */
     @Override
-	public HashSet getAllRefs(HashSet vDoneRefs, boolean bRecurse)
+    public HashSet getAllRefs(HashSet vDoneRefs, boolean bRecurse)
     {
         HashSet v1 = vDoneRefs!=null ? vDoneRefs : new LinkedHashSet();
-
+        if(vDoneRefs==null)
+        {
+            XMLDocUserData ud=getXMLDocUserData();
+            if(ud!=null && ud.getIDCache())
+            {
+                //prefill cache!
+                JDFNode root=getJDFRoot();
+                VElement v=root.getChildrenByTagName(ElementName.RESOURCEPOOL, null, null, false, true, 0);
+                for(int i=0;i<v.size();i++)
+                {
+                    JDFResourcePool rp=(JDFResourcePool)v.get(i);
+                    rp.getResourceByID("1"); // invalid so that it will search all!
+                }
+            }
+        }
         JDFResourcePool rp = getResourcePool();
         if(rp != null && bRecurse) {
             v1 = rp.getAllRefs(v1, bRecurse);
@@ -3917,7 +3931,7 @@ public class JDFNode extends JDFElement
      * @return Vector
      */
     @Deprecated
-	public Vector getCombinedTypes()
+    public Vector getCombinedTypes()
     {
         if(!isTypesNode())
         {
@@ -3941,7 +3955,7 @@ public class JDFNode extends JDFElement
      * @default addComponent(cType, bInput, null, true)
      */
     @Deprecated
-	public JDFComponent addComponent(
+    public JDFComponent addComponent(
             String cType,
             boolean bInput,
             JDFNode resRoot,
@@ -4004,7 +4018,7 @@ public class JDFNode extends JDFElement
      * @default spawn(parentURL, null, null, null, false, false, false, false)
      */
     @Deprecated
-	public JDFNode spawn(
+    public JDFNode spawn(
             String parentURL,
             String spawnURL,
             Vector vRWResources_in,
@@ -4047,7 +4061,7 @@ public class JDFNode extends JDFElement
      * @deprecated use JDFSpawn.spawnInformative()
      */
     @Deprecated
-	public JDFNode spawnInformative(String parentURL, 
+    public JDFNode spawnInformative(String parentURL, 
             String spawnURL, 
             VJDFAttributeMap vSpawnParts, 
             boolean bSpawnROPartsOnly,
@@ -4069,7 +4083,7 @@ public class JDFNode extends JDFElement
      * @deprecated use new JDFSpawn(this).unSpawn(spawnID);
      */
     @Deprecated
-	public JDFNode unSpawn(String spawnID)
+    public JDFNode unSpawn(String spawnID)
     {
         return new JDFSpawn(this).unSpawn(spawnID);
     }
@@ -4142,7 +4156,7 @@ public class JDFNode extends JDFElement
      * @deprecated use getLink(resource, EnumUsage)
      */
     @Deprecated
-	public JDFResourceLink getLink(JDFResource r, boolean bInput)
+    public JDFResourceLink getLink(JDFResource r, boolean bInput)
     {
         return getLink(r,bInput ? EnumUsage.Input : EnumUsage.Output);
     }
@@ -4250,7 +4264,7 @@ public class JDFNode extends JDFElement
      * @return JDFNode - the ancestor node
      */
     @Deprecated
-	public JDFNode getAncestorNode(int nSkip)
+    public JDFNode getAncestorNode(int nSkip)
     {
         KElement parent = getParentNode_KElement();
         JDFNode node = (JDFNode) parent;
@@ -4341,7 +4355,7 @@ public class JDFNode extends JDFElement
      * @deprecated
      */
     @Deprecated
-	public boolean hasJobID(boolean bInherit)
+    public boolean hasJobID(boolean bInherit)
     {
         if (bInherit)
         {
@@ -4388,7 +4402,7 @@ public class JDFNode extends JDFElement
      * @return boolean - true if the attribute exists
      */
     @Deprecated
-	public boolean hasAncestorElement(String element, String nameSpaceURI)
+    public boolean hasAncestorElement(String element, String nameSpaceURI)
     {
 
         return getAncestorElement(element, nameSpaceURI)!=null;
@@ -4406,7 +4420,7 @@ public class JDFNode extends JDFElement
      * @deprecated use addResource(strName, JDFResource.EnumClass.Parameter, bInput, resRoot, bLink, null)
      */
     @Deprecated
-	public JDFResource addParameter(
+    public JDFResource addParameter(
             String strName,
             boolean bInput,
             JDFNode resRoot,
@@ -4435,7 +4449,7 @@ public class JDFNode extends JDFElement
      * @default addResource(name, null, true, null, true)
      */
     @Deprecated
-	public JDFResource addConsumable(
+    public JDFResource addConsumable(
             String strName,
             boolean bInput,
             JDFNode resRoot,
@@ -4464,7 +4478,7 @@ public class JDFNode extends JDFElement
      * @default addResource(name, JDFResource.EnumClass.Handling, true, null, true)
      */
     @Deprecated
-	public JDFResource addHandling(
+    public JDFResource addHandling(
             String strName,
             boolean bInput,
             JDFNode resRoot,
@@ -4487,7 +4501,7 @@ public class JDFNode extends JDFElement
      * @deprecated use JDFConstants.COMBINED.equals(getType());
      */
     @Deprecated
-	public boolean isCombined()
+    public boolean isCombined()
     {
         return JDFConstants.COMBINED.equals(getType());
     }
@@ -4498,7 +4512,7 @@ public class JDFNode extends JDFElement
      * @deprecated use JDFConstants.PRODUCT.equals(getType());
      */
     @Deprecated
-	public boolean isProduct()
+    public boolean isProduct()
     {
         return JDFConstants.PRODUCT.equals(getType());
     }
@@ -4509,7 +4523,7 @@ public class JDFNode extends JDFElement
      * @deprecated use JDFConstants.PROCESSGROUP.equals(getType());
      */
     @Deprecated
-	public boolean isProcessGroup()
+    public boolean isProcessGroup()
     {
         return JDFConstants.PROCESSGROUP.equals(getType());
     }
@@ -4530,9 +4544,9 @@ public class JDFNode extends JDFElement
     public boolean isTypesNode()
     {
         final EnumType type2 = getEnumType();
-       //return EnumType.ProcessGroup.equals(type2)  && !hasChildElement(ElementName.JDF, null) || EnumType.Combined.equals(type2);
+        //return EnumType.ProcessGroup.equals(type2)  && !hasChildElement(ElementName.JDF, null) || EnumType.Combined.equals(type2);
         return EnumType.ProcessGroup.equals(type2) || EnumType.Combined.equals(type2);
-         
+
     }
 
     /**
@@ -4541,7 +4555,7 @@ public class JDFNode extends JDFElement
      * @return the ID prefix of JDFNode
      */
     @Override
-	public String getIDPrefix()
+    public String getIDPrefix()
     {
         return "n";
     }
@@ -4566,7 +4580,7 @@ public class JDFNode extends JDFElement
      * @deprecated use getJobPartID(false);
      */
     @Deprecated
-	public String getJobPartID()
+    public String getJobPartID()
     {
         return getJobPartID(false);
     }
@@ -4612,7 +4626,7 @@ public class JDFNode extends JDFElement
      * @deprecated
      */
     @Deprecated
-	public boolean hasStatusPool()
+    public boolean hasStatusPool()
     {
         return numChildElements(ElementName.STATUSPOOL, null) > 0;
     }
@@ -4623,7 +4637,7 @@ public class JDFNode extends JDFElement
      * @deprecated use getSpawnID(boolean)
      */
     @Deprecated
-	public String getSpawnID()
+    public String getSpawnID()
     {
         return getSpawnID(false);
     }
@@ -4649,7 +4663,7 @@ public class JDFNode extends JDFElement
      *@deprecated
      */
     @Deprecated
-	public void removeSpawnID()
+    public void removeSpawnID()
     {
         removeAttribute(JDFConstants.SPAWNID, null);
     }
@@ -4659,7 +4673,7 @@ public class JDFNode extends JDFElement
      * @deprecated
      */
     @Deprecated
-	public void removeAncestorPool()
+    public void removeAncestorPool()
     {
         removeChild(ElementName.ANCESTORPOOL, null, 0);
     }
@@ -4671,7 +4685,7 @@ public class JDFNode extends JDFElement
      * @deprecated use getParentJDF()
      * */
     @Deprecated
-	public JDFNode getParentJDFNode()
+    public JDFNode getParentJDFNode()
     {
         return getParentJDF();
     }
@@ -4682,7 +4696,7 @@ public class JDFNode extends JDFElement
      * @return JDFNode: the parent JDF, null if this is the root JDF
      */
     @Override
-	public JDFNode getParentJDF()
+    public JDFNode getParentJDF()
     {
         final KElement jdfElem = getParentNode_KElement();        
         if (jdfElem instanceof JDFNode)
@@ -4813,7 +4827,7 @@ public class JDFNode extends JDFElement
      * @deprecated use inline hasAttribute
      */
     @Deprecated
-	public boolean hasType()
+    public boolean hasType()
     {
         return hasAttribute(AttributeName.TYPE, null, false);
     }
@@ -4902,7 +4916,7 @@ public class JDFNode extends JDFElement
      * @return bool true if a matching element exists 
      */
     @Deprecated
-	public boolean hasAncestorPool()
+    public boolean hasAncestorPool()
     {
         return numChildElements(ElementName.ANCESTORPOOL, null) > 0;
     }
@@ -4914,7 +4928,7 @@ public class JDFNode extends JDFElement
      * @deprecated
      */
     @Deprecated
-	public boolean hasProjectID(boolean bInherit)
+    public boolean hasProjectID(boolean bInherit)
     {
         if (bInherit)
         {
@@ -4929,7 +4943,7 @@ public class JDFNode extends JDFElement
      * @deprecated
      */
     @Deprecated
-	public boolean hasProjectID()
+    public boolean hasProjectID()
     {
         return hasProjectID(false);
     }
@@ -4964,7 +4978,7 @@ public class JDFNode extends JDFElement
      * @deprecated use getProjectID(boolean bInherit)
      */
     @Deprecated
-	public String getProjectID()
+    public String getProjectID()
     {
         return getProjectID(false);
     }
@@ -4975,7 +4989,7 @@ public class JDFNode extends JDFElement
      * @deprecated use m_strGenericLinkNames.length;
      */
     @Deprecated
-	public int getGenericLinksLength()
+    public int getGenericLinksLength()
     {
         return m_strGenericLinkNames.length;
     }
@@ -5078,7 +5092,7 @@ public class JDFNode extends JDFElement
      * @return VString
      */
     @Deprecated
-	public VString getMissingLinks(int nMax)
+    public VString getMissingLinks(int nMax)
     {
         return getMissingLinkVector(nMax);
     }
@@ -5269,7 +5283,7 @@ public class JDFNode extends JDFElement
      * @return JDFResource
      */
     @Deprecated
-	public JDFResource getMatchingResource(String resName, int processUsage, JDFAttributeMap partMap, int pos)
+    public JDFResource getMatchingResource(String resName, int processUsage, JDFAttributeMap partMap, int pos)
     {
         final JDFResourceLink rl = getMatchingLink(resName, EnumProcessUsage.getEnum(processUsage), pos);
 
@@ -5678,7 +5692,7 @@ public class JDFNode extends JDFElement
     {       
         return (JDFCustomerInfo) getNiCi(ElementName.CUSTOMERINFO, false,null);
     }
-    
+
     /**
      * gets the NodeIdetifier that matches this
      * @return
@@ -5710,7 +5724,7 @@ public class JDFNode extends JDFElement
                 VElement v=rlp.getPoolChildren(elementName+"Link",new JDFAttributeMap(AttributeName.USAGE,"Input"),null);
                 int siz=v==null ? 0 : v.size();
                 final VString types = getTypes();
-                
+
                 for(int i=0;i<siz;i++)
                 {
                     JDFResourceLink rl=(JDFResourceLink) v.elementAt(i);
@@ -5867,7 +5881,7 @@ public class JDFNode extends JDFElement
      * @deprecated 060221 use getInheritedNodeInfo(String xPath)
      */
     @Deprecated
-	public JDFNodeInfo getInheritedNodeInfo()
+    public JDFNodeInfo getInheritedNodeInfo()
     {
         return getInheritedNodeInfo(null);      
     }
@@ -5904,7 +5918,7 @@ public class JDFNode extends JDFElement
      * @deprecated removes only 1 NodeInfo. In Version 1.3 the cardinality of NodeInfo 
      */
     @Deprecated
-	public void removeNodeInfos()
+    public void removeNodeInfos()
     {
         while (numNodeInfos() > 0)
         {
@@ -5931,7 +5945,7 @@ public class JDFNode extends JDFElement
      * @deprecated 060220 use removeCustomerInfo
      */
     @Deprecated
-	public void removeCustomerInfos()
+    public void removeCustomerInfos()
     {
         //TODO hasCustomerInfo returns true if there is one or more customerinfo ANYWHERE
         //so the while loop will end in an infinite loop (the break prohibit this but thats not 
@@ -6009,7 +6023,7 @@ public class JDFNode extends JDFElement
      * @deprecated must never be more than one...
      */
     @Deprecated
-	public int numNodeInfos()
+    public int numNodeInfos()
     {
         int i = numChildElements(ElementName.NODEINFO, null);
 
@@ -6033,7 +6047,7 @@ public class JDFNode extends JDFElement
      * @deprecated must never be more than one...
      */
     @Deprecated
-	public int numCustomerInfos()
+    public int numCustomerInfos()
     {
         int i = numChildElements(ElementName.CUSTOMERINFO, null);
 
@@ -6056,7 +6070,7 @@ public class JDFNode extends JDFElement
      * @deprecated use getNodeInfo()!=null 
      */
     @Deprecated
-	public boolean hasNodeInfo()
+    public boolean hasNodeInfo()
     {
         return getNodeInfo()!=null;
     }
@@ -6069,7 +6083,7 @@ public class JDFNode extends JDFElement
      * @deprecated use getCustomerInfo()!=null 
      */
     @Deprecated
-	public boolean hasCustomerInfo()
+    public boolean hasCustomerInfo()
     {
         return getCustomerInfo()!=null;
     }
@@ -6204,7 +6218,7 @@ public class JDFNode extends JDFElement
      * @deprecated use JDFElement.setVersion(EnumVersion.getEnum(value))
      */
     @Deprecated
-	public void setVersion(String value)
+    public void setVersion(String value)
     {
         setAttribute(AttributeName.VERSION, value, null);
     }
@@ -6220,7 +6234,7 @@ public class JDFNode extends JDFElement
      * this method replaces the C++ methods GetVersion and GetEnumVersion
      */
     @Override
-	public EnumVersion getVersion(boolean bInherit)
+    public EnumVersion getVersion(boolean bInherit)
     {
         String version;
         if (bInherit)
@@ -6339,9 +6353,9 @@ public class JDFNode extends JDFElement
      */
     public int getCombinedProcessIndex(EnumType typ, int start)
     {
-       if(typ==null)
-           return -1;
-       return getCombinedProcessIndex(typ.getName(), start);
+        if(typ==null)
+            return -1;
+        return getCombinedProcessIndex(typ.getName(), start);
     }
     /**
      * get the first index of a process in types after start
@@ -6683,7 +6697,7 @@ public class JDFNode extends JDFElement
      *              @deprecated use JDFMerge class
      */
     @Deprecated
-	public JDFNode mergeJDF(JDFNode toMerge, String urlMerge, EnumCleanUpMerge cleanPolicy, JDFResource.EnumAmountMerge amountPolicy)
+    public JDFNode mergeJDF(JDFNode toMerge, String urlMerge, EnumCleanUpMerge cleanPolicy, JDFResource.EnumAmountMerge amountPolicy)
     {
         return new JDFMerge(this).mergeJDF(toMerge, urlMerge, cleanPolicy, amountPolicy);
     }
@@ -6893,7 +6907,7 @@ public class JDFNode extends JDFElement
      * @deprecated use  addJDFNode(EnumType typ) or addJDFNode(String typ)
      */
     @Deprecated
-	public JDFNode addProcess(String prodName)
+    public JDFNode addProcess(String prodName)
     {
         final JDFNode p = addJDFNode(prodName);
         return p;
@@ -6952,7 +6966,7 @@ public class JDFNode extends JDFElement
      * @deprecated
      */
     @Deprecated
-	public boolean removeCompleted()
+    public boolean removeCompleted()
     {
         final Vector v = getCompleted();
         for (int i = 0; i < v.size(); i++)
@@ -7185,7 +7199,7 @@ public class JDFNode extends JDFElement
      * @deprecated - use getCategory() instead
      */
     @Deprecated
-	public String getCategory(boolean bInherit)
+    public String getCategory(boolean bInherit)
     {
         if(bInherit)
         {
@@ -7234,7 +7248,7 @@ public class JDFNode extends JDFElement
      * @see org.cip4.jdflib.core.JDFElement#getID()
      */
     @Override
-	public String getID()
+    public String getID()
     {
         return this.getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
     }
@@ -7254,7 +7268,7 @@ public class JDFNode extends JDFElement
      * @deprecated use setMaxVersion(EnumVersion)
      */
     @Deprecated
-	public void setMaxVersion(String value)
+    public void setMaxVersion(String value)
     {
         setAttribute(AttributeName.MAXVERSION, value);
     }
@@ -7268,16 +7282,16 @@ public class JDFNode extends JDFElement
      * default - getMaxVersion(false)
      */
     @Override
-	public EnumVersion getMaxVersion(boolean bInherit) 
+    public EnumVersion getMaxVersion(boolean bInherit) 
     {
         String version=(bInherit) ?
-            getAncestorAttribute(AttributeName.MAXVERSION, null,null) :
-            getAttribute(AttributeName.MAXVERSION,  null,  null);
+                getAncestorAttribute(AttributeName.MAXVERSION, null,null) :
+                    getAttribute(AttributeName.MAXVERSION,  null,  null);
 
-        if(version==null)
-            return getVersion(bInherit);
-        
-        return EnumVersion.getEnum(version);
+                if(version==null)
+                    return getVersion(bInherit);
+
+                return EnumVersion.getEnum(version);
     }
 
     /**
@@ -7308,7 +7322,7 @@ public class JDFNode extends JDFElement
      * @deprecated - use getNamedFeatures() instead
      */
     @Deprecated
-	public VString GetNamedFeatures(boolean bInherit) 
+    public VString GetNamedFeatures(boolean bInherit) 
     {
         final VString v = new VString();
         Vector v2;
@@ -7395,7 +7409,7 @@ public class JDFNode extends JDFElement
      * @deprecated - use getStatusDetails() instead
      */
     @Deprecated
-	public String getStatusDetails(boolean bInherit)
+    public String getStatusDetails(boolean bInherit)
     {
         if(bInherit)
         {
@@ -7495,7 +7509,7 @@ public class JDFNode extends JDFElement
      * @return JDFDuration
      */
     @Deprecated
-	public JDFDuration getNodeInfoCleanupDuration()
+    public JDFDuration getNodeInfoCleanupDuration()
     {
         return getInheritedNodeInfo(null).getCleanupDuration();
     }
@@ -7505,7 +7519,7 @@ public class JDFNode extends JDFElement
      * @return JDFMISDetails.EnumCostType
      */
     @Deprecated
-	public JDFMISDetails.EnumCostType getNodeInfoCostType()
+    public JDFMISDetails.EnumCostType getNodeInfoCostType()
     {
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
@@ -7522,7 +7536,7 @@ public class JDFNode extends JDFElement
      * @deprecated 06ß221 use getInheritedNodeInfo(String attName)
      */
     @Deprecated
-	public JDFNodeInfo.EnumDueLevel getNodeInfoDueLevel()
+    public JDFNodeInfo.EnumDueLevel getNodeInfoDueLevel()
     {
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
@@ -7535,7 +7549,7 @@ public class JDFNode extends JDFElement
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
      */
     @Deprecated
-	public JDFDate getNodeInfoEnd()
+    public JDFDate getNodeInfoEnd()
     {
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
@@ -7548,7 +7562,7 @@ public class JDFNode extends JDFElement
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
      */
     @Deprecated
-	public JDFDate getNodeInfoFirstEnd()
+    public JDFDate getNodeInfoFirstEnd()
     {
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
@@ -7561,7 +7575,7 @@ public class JDFNode extends JDFElement
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
      */
     @Deprecated
-	public JDFDate getNodeInfoFirstStart()
+    public JDFDate getNodeInfoFirstStart()
     {
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
@@ -7574,7 +7588,7 @@ public class JDFNode extends JDFElement
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
      */
     @Deprecated
-	public JDFXYPair getNodeInfoIPPVersion()
+    public JDFXYPair getNodeInfoIPPVersion()
     {
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
@@ -7587,7 +7601,7 @@ public class JDFNode extends JDFElement
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
      */
     @Deprecated
-	public int getNodeInfoJobPriority()
+    public int getNodeInfoJobPriority()
     {
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
@@ -7600,7 +7614,7 @@ public class JDFNode extends JDFElement
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
      */
     @Deprecated
-	public JDFDate getNodeInfoLastEnd()
+    public JDFDate getNodeInfoLastEnd()
     {
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
@@ -7613,7 +7627,7 @@ public class JDFNode extends JDFElement
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
      */
     @Deprecated
-	public JDFDate getNodeInfoLastStart()
+    public JDFDate getNodeInfoLastStart()
     {
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
@@ -7626,7 +7640,7 @@ public class JDFNode extends JDFElement
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
      */
     @Deprecated
-	public String getNodeInfoNaturalLang()
+    public String getNodeInfoNaturalLang()
     {
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
@@ -7639,7 +7653,7 @@ public class JDFNode extends JDFElement
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
      */
     @Deprecated
-	public String getNodeInfoRoute()
+    public String getNodeInfoRoute()
     {
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
@@ -7652,7 +7666,7 @@ public class JDFNode extends JDFElement
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
      */
     @Deprecated
-	public JDFDuration getNodeInfoSetupDuration()
+    public JDFDuration getNodeInfoSetupDuration()
     {
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
@@ -7665,7 +7679,7 @@ public class JDFNode extends JDFElement
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
      */
     @Deprecated
-	public JDFDate getNodeInfoStart()
+    public JDFDate getNodeInfoStart()
     {
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
@@ -7678,7 +7692,7 @@ public class JDFNode extends JDFElement
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
      */
     @Deprecated
-	public String getNodeInfoTargetRoute(){
+    public String getNodeInfoTargetRoute(){
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
             return JDFConstants.EMPTYSTRING;
@@ -7690,7 +7704,7 @@ public class JDFNode extends JDFElement
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
      */
     @Deprecated
-	public JDFDuration getNodeInfoTotalDuration()
+    public JDFDuration getNodeInfoTotalDuration()
     {
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
@@ -7703,7 +7717,7 @@ public class JDFNode extends JDFElement
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
      */
     @Deprecated
-	public JDFMISDetails.EnumWorkType getNodeInfoWorkType()
+    public JDFMISDetails.EnumWorkType getNodeInfoWorkType()
     {
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
@@ -7720,7 +7734,7 @@ public class JDFNode extends JDFElement
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
      */
     @Deprecated
-	public String getNodeInfoWorkTypeDetails()
+    public String getNodeInfoWorkTypeDetails()
     {
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
@@ -7737,7 +7751,7 @@ public class JDFNode extends JDFElement
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
      */
     @Deprecated
-	public JDFBusinessInfo getNodeInfoBusinessInfo()
+    public JDFBusinessInfo getNodeInfoBusinessInfo()
     {
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
@@ -7750,7 +7764,7 @@ public class JDFNode extends JDFElement
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
      */
     @Deprecated
-	public JDFEmployee getNodeInfoEmployee()
+    public JDFEmployee getNodeInfoEmployee()
     {
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
@@ -7763,7 +7777,7 @@ public class JDFNode extends JDFElement
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
      */
     @Deprecated
-	public JDFJMF getNodeInfoJMF(int iSkip)
+    public JDFJMF getNodeInfoJMF(int iSkip)
     {
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
@@ -7776,7 +7790,7 @@ public class JDFNode extends JDFElement
      *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
      */
     @Deprecated
-	public JDFNotificationFilter getNodeInfoNotificationFilter(int iSkip)
+    public JDFNotificationFilter getNodeInfoNotificationFilter(int iSkip)
     {
         final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
         if(inheritedNodeInfo==null) {
@@ -7806,7 +7820,7 @@ public class JDFNode extends JDFElement
      * @return  CustomerInfo The matching CustomerInfo element
      */
     @Deprecated
-	public JDFCustomerInfo getInheritedCustomerInfo()
+    public JDFCustomerInfo getInheritedCustomerInfo()
     {
         return getInheritedCustomerInfo(null);
     }
@@ -7815,7 +7829,7 @@ public class JDFNode extends JDFElement
      *@deprecated 06ß221 use getInheritedCustomerInfo(String attName)
      */
     @Deprecated
-	public String getCustomerInfoBillingCode() 
+    public String getCustomerInfoBillingCode() 
     {
         final JDFCustomerInfo inheritedCustomerInfo = getInheritedCustomerInfo();
         if(inheritedCustomerInfo==null) {
@@ -7828,7 +7842,7 @@ public class JDFNode extends JDFElement
      *@deprecated 06ß221 use getInheritedCustomerInfo(String attName)
      */
     @Deprecated
-	public String getCustomerInfoCustomerID() 
+    public String getCustomerInfoCustomerID() 
     {
         final JDFCustomerInfo inheritedCustomerInfo = getInheritedCustomerInfo();
         if(inheritedCustomerInfo==null) {
@@ -7840,7 +7854,7 @@ public class JDFNode extends JDFElement
      *@deprecated 06ß221 use getInheritedCustomerInfo(String attName)
      */   
     @Deprecated
-	public String getCustomerInfoCustomerJobName() 
+    public String getCustomerInfoCustomerJobName() 
     {
         final JDFCustomerInfo inheritedCustomerInfo = getInheritedCustomerInfo();
         if(inheritedCustomerInfo==null) {
@@ -7852,7 +7866,7 @@ public class JDFNode extends JDFElement
      *@deprecated 06ß221 use getInheritedCustomerInfo(String attName)
      */    
     @Deprecated
-	public String getCustomerInfoCustomerOrderID() 
+    public String getCustomerInfoCustomerOrderID() 
     {
         final JDFCustomerInfo inheritedCustomerInfo = getInheritedCustomerInfo();
         if(inheritedCustomerInfo==null) {
@@ -7864,7 +7878,7 @@ public class JDFNode extends JDFElement
      *@deprecated 06ß221 use getInheritedCustomerInfo(String attName)
      */    
     @Deprecated
-	public String getCustomerInfoCustomerProjectID() 
+    public String getCustomerInfoCustomerProjectID() 
     {
         final JDFCustomerInfo inheritedCustomerInfo = getInheritedCustomerInfo();
         if(inheritedCustomerInfo==null) {
@@ -7876,7 +7890,7 @@ public class JDFNode extends JDFElement
      *@deprecated 06ß221 use getInheritedCustomerInfo(String attName)
      */    
     @Deprecated
-	public JDFCompany getCustomerInfoCompany() 
+    public JDFCompany getCustomerInfoCompany() 
     {
         final JDFCustomerInfo inheritedCustomerInfo = getInheritedCustomerInfo();
         if(inheritedCustomerInfo==null) {
@@ -7888,7 +7902,7 @@ public class JDFNode extends JDFElement
      *@deprecated 06ß221 use getInheritedCustomerInfo(String attName)
      */    
     @Deprecated
-	public JDFContact getCustomerInfoContact(int iSkip) 
+    public JDFContact getCustomerInfoContact(int iSkip) 
     {
         final JDFCustomerInfo inheritedCustomerInfo = getInheritedCustomerInfo();
         if(inheritedCustomerInfo==null) {
@@ -7900,7 +7914,7 @@ public class JDFNode extends JDFElement
      *@deprecated 06ß221 use getInheritedCustomerInfo(String attName)
      */    
     @Deprecated
-	public JDFCustomerMessage getCustomerInfoCustomerMessage(int iSkip) 
+    public JDFCustomerMessage getCustomerInfoCustomerMessage(int iSkip) 
     {
         final JDFCustomerInfo inheritedCustomerInfo = getInheritedCustomerInfo();
         if(inheritedCustomerInfo==null) {
@@ -7966,6 +7980,7 @@ public class JDFNode extends JDFElement
 
         return vsLinks;
     }
+
     /**
      * Gets the executable partitions of the resource in this node (with corresponding
      * resource link). The part maps returned may be nested. If the empty part map
@@ -7981,12 +7996,27 @@ public class JDFNode extends JDFElement
      * @return VJDFAttributeMap - A part map vector containing the executable partitions.
      */
     @Deprecated
-	public VJDFAttributeMap getExecutablePartitions (JDFResourceLink link, JDFResource res, JDFResource.EnumResStatus minStatus)
+    public VJDFAttributeMap getExecutablePartitions (JDFResourceLink link, JDFResource res, JDFResource.EnumResStatus minStatus)
     {
         if(res!=null)
             res=null; // satisfy compiler
 
         return getExecutablePartitions(link, minStatus);
+    }
+
+    /**
+     * Method getExecutablePartitions
+     * 
+     * @deprecated only for backward compatibility !!!
+     * 
+     * @param link
+     * @param minStatus
+     * @return
+     */
+    @Deprecated
+    public VJDFAttributeMap getExecutablePartitions (JDFResourceLink link,  JDFResource.EnumResStatus minStatus)
+    {
+        return (getExecutablePartitions (link, minStatus, true));
     }
 
     /**
@@ -7997,12 +8027,13 @@ public class JDFNode extends JDFElement
      * Availability of a resource depends on the status, the availability of refered
      * sub-partitions and the part usage.
      *
-     * @param link      the resource link.
-     * @param minStatus minimum resource status to include.
+     * @param link             the resource link.
+     * @param minStatus        minimum resource status to include.
+     * @param bCheckNodeStatus check node status.
      *
      * @return VJDFAttributeMap - A part map vector containing the executable partitions.
-     */
-    public VJDFAttributeMap getExecutablePartitions (JDFResourceLink link,  JDFResource.EnumResStatus minStatus)
+     */    
+    public VJDFAttributeMap getExecutablePartitions (JDFResourceLink link,  JDFResource.EnumResStatus minStatus, boolean bCheckNodeStatus)
     {
         final VJDFAttributeMap vp = new VJDFAttributeMap ();
         if(link==null)
@@ -8011,26 +8042,26 @@ public class JDFNode extends JDFElement
         for(int i=0;i<v.size();i++)
         {
             JDFResource res=(JDFResource) v.elementAt(i);
-            addExecutablePartitions (link, res, vp, minStatus);
+            addExecutablePartitions (link, res, vp, minStatus, bCheckNodeStatus);
         }
         vp.unify();
         return vp;
     }
 
     private ExecPartFlags addExecutablePartitions(
-            JDFResourceLink link, JDFResource res, VJDFAttributeMap vamPartMaps, JDFResource.EnumResStatus minStatus)
+            JDFResourceLink link, JDFResource res, VJDFAttributeMap vamPartMaps, JDFResource.EnumResStatus minStatus, boolean bCheckNodeStatus)
     {
         final JDFAttributeMap amPartMap = res.getPartMap();
 
-            ////////////////////////////////////////////////////////
-            // Check the process status.
-            //
+        ////////////////////////////////////////////////////////
+        // Check the process status.
+        //
 
         boolean isProcStatOK = false;
 
-            ////////////////////////////////////////////////////////
-            // Check if all child partitions are executable.
-            //
+        ////////////////////////////////////////////////////////
+        // Check if all child partitions are executable.
+        //
 
         final VElement veChildPartitions = res.getChildElementVector_JDFElement(
                 res.getNodeName (), null, null, false, 0, true);
@@ -8039,9 +8070,16 @@ public class JDFNode extends JDFElement
 
         final JDFElement.EnumNodeStatus stat = getPartStatus (amPartMap);
 
-        if (((stat==null) && (nChildPartitions == 0)) ||
-                (stat == JDFNode.EnumNodeStatus.Waiting) ||
-                (stat == JDFNode.EnumNodeStatus.Ready)   )
+        if (bCheckNodeStatus)
+        {
+            if (((stat == null) && (nChildPartitions == 0))
+                    || (stat == JDFNode.EnumNodeStatus.Waiting)
+                    || (stat == JDFNode.EnumNodeStatus.Ready))
+            {
+                isProcStatOK = true;
+            }
+        }
+        else
         {
             isProcStatOK = true;
         }
@@ -8056,7 +8094,7 @@ public class JDFNode extends JDFElement
 
             if (link.overlapsResourcePartMap (amSub))
             {
-                final ExecPartFlags ExecChild = addExecutablePartitions (link, sub, vamPartMaps, minStatus);
+                final ExecPartFlags ExecChild = addExecutablePartitions (link, sub, vamPartMaps, minStatus, bCheckNodeStatus);
                 if (!ExecChild.isAvailable ())
                 {
                     allChildsAvailable = false;
@@ -8129,7 +8167,7 @@ public class JDFNode extends JDFElement
                             final JDFElement.EnumNodeStatus statPart = niPart.getNodeStatus ();
 
                             if ((statPart == JDFNode.EnumNodeStatus.Waiting)
-                             || (statPart == JDFNode.EnumNodeStatus.Ready))
+                                    || (statPart == JDFNode.EnumNodeStatus.Ready))
                             {
                                 vamPartMaps.appendUnique (niPart.getPartMap ());
                             }
@@ -8187,7 +8225,7 @@ public class JDFNode extends JDFElement
      */
 
     @Deprecated
-	public JDFNode [] getProcessNodes()
+    public JDFNode [] getProcessNodes()
     {
         final Vector vJDFNodes = getvJDFNode(null, null, false);
 
@@ -8392,7 +8430,7 @@ public class JDFNode extends JDFElement
      * @deprecated - use getResourceLinks
      */
     @Deprecated
-	public VElement getLinks(String linkName, JDFAttributeMap mLinkAtt, String linkNS)
+    public VElement getLinks(String linkName, JDFAttributeMap mLinkAtt, String linkNS)
     {
         return getResourceLinks(linkName, mLinkAtt, linkNS);
     }
@@ -8456,7 +8494,7 @@ public class JDFNode extends JDFElement
      * @default getLinks(null, null)
      */
     @Deprecated
-	public VElement getLinks(String linkName, String nameSpaceURI)
+    public VElement getLinks(String linkName, String nameSpaceURI)
     {
         final JDFAttributeMap m = new JDFAttributeMap(AttributeName.RREF, getID());
         return getDocRoot().getChildrenByTagName(linkName, nameSpaceURI, m, false, false, 0);
@@ -8468,7 +8506,7 @@ public class JDFNode extends JDFElement
      * @see org.cip4.jdflib.core.KElement#sortChildren()
      */
     @Override
-	public void sortChildren()
+    public void sortChildren()
     {
         super.sortChildren(); // KElement.sortChildren is NOT recursive
         JDFResourcePool rp=getResourcePool();

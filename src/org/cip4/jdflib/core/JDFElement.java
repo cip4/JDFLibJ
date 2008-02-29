@@ -4374,16 +4374,16 @@ public class JDFElement extends KElement
      */
     public boolean includesMatchingAttribute(String attName, String attVal, AttributeInfo.EnumAttributeType dataType)
     {
-        if (includesAttribute(attName,attVal))
-        {
-            return true;
-        }
-
         final String thisVal = getAttribute(attName,null,null);
         if(thisVal==null) {
             return false;
         }
-
+        if (isWildCard(attVal))
+        {
+            return true;
+        }
+        if(attVal.equals(thisVal))
+            return true;
         return StringUtil.matchesAttribute(attVal, thisVal, dataType);
     }
 

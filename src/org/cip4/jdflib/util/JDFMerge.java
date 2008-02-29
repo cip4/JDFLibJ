@@ -72,6 +72,7 @@
  */
 package org.cip4.jdflib.util;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -92,6 +93,7 @@ import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFSpawned;
 import org.cip4.jdflib.node.JDFNode.EnumCleanUpMerge;
@@ -126,6 +128,7 @@ public class JDFMerge
     private final VString previousMergeIDs    = new VString(); // list of merges in the ancestors
     private boolean bSnafu              = true;
     private JDFNode overWriteNode;
+    private HashMap<String,JDFSpawned> newSpawnMap=null;
 
     /**
      * set this to true if you want to update the stati of the relevant parent nodes based on the new Stati of the merged node
@@ -523,7 +526,7 @@ public class JDFMerge
         for (int i = 0; i < allChildren.size(); i++)
         {
             final JDFResource src = (JDFResource) allChildren.elementAt(i);
-            final JDFAttributeMap srcMap = src.getPartMap();
+            final JDFAttributeMap srcMap = src.getPartMap(mergeIDKeys);
             JDFResource trg = targetRes.getPartition(srcMap, EnumPartUsage.Implicit);
 
             if (trg == null)
@@ -556,7 +559,7 @@ public class JDFMerge
                     }
                     else
                     {
-                        KElement copyElement = targetRes.getParentNode_KElement().copyElement(src, null);
+                        KElement copyElement = targetRes.copyElement(src, null);
                         trg = (JDFResource) trg.replaceElement(copyElement);                       
                     }
                 }
@@ -634,7 +637,8 @@ public class JDFMerge
             final JDFResource leafRes = (JDFResource)resLeafsSpawned.elementAt(leaf);
             leafRes.removeFromSpawnIDs(spawnID);
             final VString spawnIDs = leafRes.getSpawnIDs(false);
-            spawnIDs.removeAll(previousMergeIDs);
+            if(spawnIDs!=null)
+                spawnIDs.removeAll(previousMergeIDs);
             leafRes.setSpawnIDs(spawnIDs);
             calcSpawnStatus(leafRes,true);
         }
@@ -644,6 +648,7 @@ public class JDFMerge
     {
         if(leafRes==null)
             return;
+        prepareNewSpawnMap();
         final VString spawnIDs=leafRes.getSpawnIDs(false);
         final String resID=leafRes.getID();
         if(spawnIDs==null || spawnIDs.isEmpty())
@@ -659,8 +664,10 @@ public class JDFMerge
 
             for(int i=0;i<spawnIDs.size();i++) // check for multiple rw spawns
             {
+                 
                 final String resSpawnID=spawnIDs.stringAt(i);
-                JDFSpawned spawnedAudit=(JDFSpawned) (m_ParentNode.getChildByTagName(ElementName.SPAWNED, null, 0, new JDFAttributeMap(AttributeName.NEWSPAWNID,resSpawnID), false, true));
+ //               JDFSpawned spawnedAudit=(JDFSpawned) (m_ParentNode.getChildByTagName(ElementName.SPAWNED, null, 0, new JDFAttributeMap(AttributeName.NEWSPAWNID,resSpawnID), false, true));
+                JDFSpawned spawnedAudit= newSpawnMap.get(resSpawnID);
                 if(spawnedAudit!=null)
                 {
                     VString rw=spawnedAudit.getrRefsRWCopied();
@@ -691,6 +698,34 @@ public class JDFMerge
             // nop
         }
     }
+    /**
+     * 
+     */
+    private void prepareNewSpawnMap()
+    {
+        if(newSpawnMap!=null)
+            return;
+        newSpawnMap=new HashMap<String, JDFSpawned>();
+        //VElement v=m_ParentNode.getChildrenByTagName(ElementName.SPAWNED, null, null, false, true, 0, false);
+        VElement v=m_ParentNode.getvJDFNode(null, null, false);
+        for(int i=0;i<v.size();i++)
+        {
+            JDFNode n=(JDFNode) v.get(i);
+            JDFAuditPool ap=n.getAuditPool();
+            VElement v2=ap==null ? null : ap.getAudits(EnumAuditType.Spawned, null, null);
+            //          JDFSpawned s=(JDFSpawned) v.get(i);
+            int siz=v2==null ? 0 : v2.size();
+            for(int j=0;j<siz;j++)
+            {
+                JDFSpawned s=(JDFSpawned) v2.get(j);
+                String nsID=s.getNewSpawnID();
+                if(!KElement.isWildCard(nsID))
+                    newSpawnMap.put(nsID,s);
+            }
+        }
+
+    }
+
     /////////////////////////////////////////////////////////////////////
 
     private JDFMerged mergeMainPools(final VJDFAttributeMap parts, String preSpawn, String urlMerge)

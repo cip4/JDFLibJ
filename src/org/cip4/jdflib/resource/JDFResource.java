@@ -1946,10 +1946,11 @@ public class JDFResource extends JDFElement
         }
 
         // if we find an <Identical> element, we must clean up the map and merge in the values of
-        // identical
-        if (hasChildElement(ElementName.IDENTICAL, null))
+        // identical can only be in a leaf
+        final KElement identical = getElement_KElement(ElementName.IDENTICAL, null, 0);
+        if (identical!= null)
         {
-            JDFPart part = (JDFPart) getElement(ElementName.IDENTICAL, null, 0).getElement(ElementName.PART);
+            JDFPart part = (JDFPart) identical.getElement(ElementName.PART);
             if (part != null)
             {
                 JDFAttributeMap identityMap = part.getPartMap();
@@ -2952,8 +2953,10 @@ public class JDFResource extends JDFElement
     public void reducePartitions(VJDFAttributeMap vValidParts_)
     {
         VJDFAttributeMap vValidParts=vValidParts_;
+        
         if(vValidParts_!=null && vValidParts_.size()>0)
         {
+            final VString partIDKeys=getPartIDKeys();
             vValidParts=new VJDFAttributeMap(); // need local copy
             for(int i=0;i<vValidParts_.size();i++)
             {
@@ -2963,7 +2966,7 @@ public class JDFResource extends JDFElement
                 for(int j=0;j<vSize;j++)
                 {
                     JDFResource r=(JDFResource) v.elementAt(j);
-                    vValidParts.add(r.getPartMap());
+                    vValidParts.add(r.getPartMap(partIDKeys));
                 }
             }
         }
@@ -3138,22 +3141,33 @@ public class JDFResource extends JDFElement
                     + resToMerge.getID());
         }
 
-        final VElement allNodes = getLeaves(true);
-
-        for (int i = 0; i < allNodes.size(); i++)
+        final VElement allLeaves = getLeaves(true);
+        final VString partIDKeys=getPartIDKeys();
+        for (int i = 0; i < allLeaves.size(); i++)
         {
-            final JDFResource thisResNode = (JDFResource) allNodes.elementAt(i);
+            final JDFResource thisResNode = (JDFResource) allLeaves.elementAt(i);
             final JDFResource mergeResNode =
-                resToMerge.getPartition(thisResNode.getPartMap(), EnumPartUsage.Explicit);
+                resToMerge.getPartition(thisResNode.getPartMap(partIDKeys), EnumPartUsage.Explicit);
 
             if (mergeResNode != null)
             {
-                final VString vPartIDKeys = thisResNode.getSpawnIDs(false);
-                final int siz = vPartIDKeys.size();
-                vPartIDKeys.appendUnique(mergeResNode.getSpawnIDs(false));
-                vPartIDKeys.removeStrings(previousMergeIDs,999999);
+                VString vSpawnIDs = thisResNode.getSpawnIDs(false);
+                int siz;
+                if(vSpawnIDs==null)
+                {
+                    siz=0;
+                    vSpawnIDs=mergeResNode.getSpawnIDs(false);
+                }
+                else
+                {
+                    siz=vSpawnIDs.size();
+                    vSpawnIDs.appendUnique(mergeResNode.getSpawnIDs(false));
+                }
+                
+                if(vSpawnIDs!=null)
+                    vSpawnIDs.removeStrings(previousMergeIDs,999999);
 
-                if (vPartIDKeys.isEmpty())
+                if (vSpawnIDs==null || vSpawnIDs.isEmpty())
                 {
                     thisResNode.removeAttribute(AttributeName.SPAWNIDS);
                     thisResNode.removeAttribute(AttributeName.SPAWNSTATUS);
@@ -3161,13 +3175,12 @@ public class JDFResource extends JDFElement
                 else
                 {
                     // AppendUnique modified the vector
-                    if (siz != vPartIDKeys.size())
+                    if (siz != vSpawnIDs.size())
                     {
-                        thisResNode.setSpawnIDs(vPartIDKeys);
+                        thisResNode.setSpawnIDs(vSpawnIDs);
 
                         // one of the spawnstatus elements was rw, must also be valid here
-                        if (mergeResNode.getSpawnStatus()
-                                == EnumSpawnStatus.SpawnedRW)
+                        if (mergeResNode.getSpawnStatus() == EnumSpawnStatus.SpawnedRW)
                         {
                             thisResNode.setSpawnStatus(EnumSpawnStatus.SpawnedRW);
                         }
@@ -3597,22 +3610,17 @@ public class JDFResource extends JDFElement
      */
     public VElement getNodesWithSpawnID(String spawnID)
     {
-        final VElement v = new VElement(
-                getChildrenByTagName(getNodeName(), null, new JDFAttributeMap(AttributeName.SPAWNIDS,(String) null),
-                        false, true, 0));
+        final VElement v2 = getLeaves(true);
 
-        v.addElement(this);
-
-        for (int i = v.size() - 1; i >= 0; i--)
+        for (int i = v2.size() - 1; i >= 0; i--)
         {
-            final JDFElement e = (JDFElement) v.elementAt(i);
-            if (!e.includesMatchingAttribute(AttributeName.SPAWNIDS, spawnID, AttributeInfo.EnumAttributeType.NMTOKENS))
+            final JDFElement e = (JDFElement) v2.elementAt(i);
+            if(!e.hasAttribute_KElement(AttributeName.SPAWNIDS, null, false)||!e.includesMatchingAttribute(AttributeName.SPAWNIDS, spawnID, AttributeInfo.EnumAttributeType.NMTOKENS))
             {
-                v.remove(i);
+                v2.remove(i);
             }
         }
-
-        return v;
+        return v2;
     }
 
     /**
@@ -6587,14 +6595,10 @@ public class JDFResource extends JDFElement
      */
     public VString getSpawnIDs(boolean bInherit)
     {
-        final VString vStrIDs = new VString();
-        final String attribute = bInherit ?
-                getAttribute(AttributeName.SPAWNIDS,null,null) :
-                    getAttribute_KElement(AttributeName.SPAWNIDS,null,null);
-
-                vStrIDs.setAllStrings(attribute, JDFConstants.BLANK);
-
-                return vStrIDs;
+        final String attribute = bInherit ? getAttribute(AttributeName.SPAWNIDS,null,null) :  getAttribute_KElement(AttributeName.SPAWNIDS,null,null);
+        if(attribute==null)
+            return null;
+        return StringUtil.tokenize(attribute,JDFConstants.BLANK,false);
     }
 
     /**

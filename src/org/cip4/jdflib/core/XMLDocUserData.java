@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.enums.ValuedEnum;
+import org.w3c.dom.Attr;
 
 
 public class XMLDocUserData
@@ -414,7 +415,8 @@ public class XMLDocUserData
             final KElement elem = (KElement)m_mapTarget.get(strID);
             if(elem != null)
             {
-                if(strID.equals(elem.getAttribute(AttributeName.ID, null, null)))
+                Attr a=elem.getAttributeNode(AttributeName.ID);
+                if(a!=null && strID.equals(a.getValue()))
                 {
                     return elem;
                 }

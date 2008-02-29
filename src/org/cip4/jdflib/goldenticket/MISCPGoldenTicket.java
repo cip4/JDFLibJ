@@ -112,6 +112,7 @@ import org.cip4.jdflib.resource.process.JDFConventionalPrintingParams;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPreview;
+import org.cip4.jdflib.resource.process.prepress.JDFInk;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.UrlUtil;
 
@@ -125,6 +126,8 @@ public class MISCPGoldenTicket extends MISGoldenTicket
     private VJDFAttributeMap vParts;
     public VString cols=new VString("Cyan,Magenta,Yellow,Black,Spot1,Spot2,Spot3,Spot4",",");
     public VString colsActual = new VString("Cyan,Magenta,Gelb,Schwarz,RIP 4711,RIP 4712,RIP 4713,RIP 4714",",");
+    public VString inks=null;
+    public VString inkProductIDs=null;
     public int nCols=0;
     public EnumWorkStyle workStyle=EnumWorkStyle.Simplex;
     
@@ -193,6 +196,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         initDevice();
         JDFComponent c=initOutputComponent();
         initPreview();
+        initInk();
         super.init();
         setActivePart(vParts, true);
         theStatusCounter.setTrackWaste(c.getID(), true);
@@ -319,6 +323,24 @@ public class MISCPGoldenTicket extends MISGoldenTicket
                 for(int j=0;j<ncols;j++)
                     xmp.addPartition(EnumPartIDKey.Separation, cols.stringAt(j));
             }
+        }
+    }
+    
+    
+    protected void initInk()
+    {
+        if(inks==null)
+            return;
+        JDFInk ink=(JDFInk) theNode.getCreateResource(ElementName.INK, EnumUsage.Input, 0);
+        int ncols = getNCols();
+        for(int j=0;j<ncols;j++)
+        {
+            JDFInk inkp=(JDFInk) ink.addPartition(EnumPartIDKey.Separation, cols.stringAt(j));
+            inkp.setInkName(inks.elementAt(j));
+            if((cols.get(j).toLowerCase().indexOf("varnish")>=0) || (inks.get(j).toLowerCase().indexOf("varnish")>=0))
+                inkp.setFamily("Varnish");
+            if(inkProductIDs!=null)
+                inkp.setProductID(inkProductIDs.get(j));
         }
     }
 
@@ -463,8 +485,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         {
             String name=cols.stringAt(i);
             JDFColor c=cp.getCreateColorWithName(name, null);
-            c.setActualColorName(colsActual.stringAt(i));
-            if(i==0)
+             if(i==0)
                 c.setCMYK(new JDFCMYKColor(1,0,0,0));
             if(i==1)
                 c.setCMYK(new JDFCMYKColor(0,1,0,0));
@@ -474,6 +495,20 @@ public class MISCPGoldenTicket extends MISGoldenTicket
                 c.setCMYK(new JDFCMYKColor(0,0,0,1));
         }
 
+    } 
+    /**
+     * @param icsLevel
+     */
+    protected void makeReadyColorantControl()
+    {
+        JDFColorantControl cc=(JDFColorantControl) theNode.getCreateResource(ElementName.COLORANTCONTROL,EnumUsage.Input, 0);
+        JDFColorPool cp=cc.getCreateColorPool();
+        for(int i=0;i<getNCols();i++)
+        {
+            String name=cols.stringAt(i);
+            JDFColor c=cp.getCreateColorWithName(name, null);
+            c.setActualColorName(colsActual.stringAt(i));
+        }
     } 
 
     /**
@@ -495,6 +530,8 @@ public class MISCPGoldenTicket extends MISGoldenTicket
             pvp.setResStatus(EnumResStatus.Available,false);
             pvp.setURL(UrlUtil.fileToUrl(new File("\\\\Share\\Dir\\Preview_"+pvp.getSheetName()+"_"+pvp.getSide().getName()+"_"+pvp.getSeparation()+".png"), false));
         }
+        makeReadyColorantControl();
+
         super.makeReady();
     }
     /**

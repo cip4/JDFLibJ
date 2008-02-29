@@ -91,6 +91,7 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.XMLDocUserData;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -115,7 +116,7 @@ public class JDFSpawn
 {
 
     private JDFNode node;
-
+   
     /**
      * if true, reduce read only partitions, else retain entire resource
      */
@@ -353,6 +354,7 @@ public class JDFSpawn
         VString  vRWResources=new VString(vRWResources_in);
         HashSet v = new LinkedHashSet();
         // grab the root node and all it's children
+        
         HashSet vRootLinks = node.getAllRefs(null,true);
         Iterator<JDFElement> iter=vRootLinks.iterator();
         while(iter.hasNext())
@@ -526,7 +528,8 @@ public class JDFSpawn
             ap = (JDFAncestorPool) node.copyElement(ap,null);
 
         // grab the root node and all it's children
-        HashSet vRootLinks=node.getAllRefs(null,false);  
+       
+       HashSet  vRootLinks=node.getAllRefs(null,false);  
 
         // create a HashSet with all IDs of the newly created Node
         HashSet allIDsCopied=new LinkedHashSet();

@@ -424,6 +424,11 @@ public class StringUtil
         VString v = new VString();
         if(strWork != null)
         {
+            if(delim.length()==1 && strWork.indexOf(delim)<0)
+            {
+                v.add(strWork);
+                return v;
+            }
             StringTokenizer st = new StringTokenizer(strWork, delim, delim2token);
             while (st.hasMoreTokens())
             {
@@ -509,14 +514,24 @@ public class StringUtil
     {   
         if(strWork==null)
             return null; // null bleibt null
+        if(delim==null)
+            delim=JDFConstants.BLANK;
+        
+        final int pos=delim.length()==1 ? strWork.indexOf(delim) : 0;
+        if(pos<0) // speed up incase we only have one entry
+        {
+            return (index==-1 || index==0) ? strWork : null;
+        }
+        
         if(index<0)
         {
-            VString v = StringUtil.tokenize(strWork, delim, false);            
+             VString v = StringUtil.tokenize(strWork, delim, false);            
             index=v.size()+index;
             if(index<0)
                 return null;       
             if (index<v.size())
                 return v.stringAt(index);
+            return null;
         }
         // index >0 don't need to calculate # of tokens
         StringTokenizer st = new StringTokenizer(strWork, delim, false);

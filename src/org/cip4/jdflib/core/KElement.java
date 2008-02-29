@@ -380,13 +380,9 @@ public class KElement extends ElementNSImpl
      */
     public String getAttribute_KElement(String attrib, String nameSpaceURI, String def)
     {
-        Attr attribute=getDOMAttr(attrib,nameSpaceURI,false);
-        if (attribute != null)
-        {
-            return attribute.getValue();
-        }
-        return def;
-//      switch for null defaults        return JDFConstants.EMPTYSTRING.equals(def) ? null : def;
+        final Attr attribute=getDOMAttr(attrib,nameSpaceURI,false);
+        return (attribute == null) ? def : attribute.getValue();
+        //      switch for null defaults        return JDFConstants.EMPTYSTRING.equals(def) ? null : def;
     }
 
     /**
@@ -424,7 +420,7 @@ public class KElement extends ElementNSImpl
     public KElement getParentNode_KElement()
     {
         final Node parentNode = getParentNode();
-        if (parentNode != null && parentNode.getNodeType() == Node.ELEMENT_NODE)
+        if (parentNode instanceof KElement)
         {
             return (KElement) parentNode;
         }
@@ -658,7 +654,7 @@ public class KElement extends ElementNSImpl
             if (a != null) {
                 return a;
             }
-
+            
             nameSpaceURI=null;
 
             final String attribPrefix = xmlnsPrefix(attrib);
@@ -1360,8 +1356,8 @@ public class KElement extends ElementNSImpl
     {
         if (nodeName != null)
         {
-            int posColon = nodeName.indexOf(':');
-            if (posColon >= 1) {
+            final int posColon = nodeName.indexOf(':');
+            if (posColon > 0) {
                 return nodeName.substring(0, posColon);
             }
         }
@@ -2230,35 +2226,22 @@ public class KElement extends ElementNSImpl
      */
     public KElement getDeepParent(String parentNode, int depth)
     {
-        KElement kRet = this;
-
         if (!getLocalName().equals(parentNode))
         {
             final KElement parentElement = getParentNode_KElement();
-            if (parentElement != null)
-            {
-                kRet = parentElement.getDeepParent(parentNode, depth);
-            }
-            else
-            {
-                kRet = null;
-            }
+            return  (parentElement == null) ? null : parentElement.getDeepParent(parentNode, depth);
         }
-
         else if (depth > 0)
         {
-            // found one, now look for deeper elements
-            final KElement par = getParentNode_KElement();
-
-            // last in chain or
-            // leaving structure
-            if ((par != null) && (parentNode.equals(par.getLocalName())))
-            {
-                kRet = par.getDeepParent(parentNode, depth - 1);
-            }
-        }
-
-        return kRet;
+            final KElement parentElement = getParentNode_KElement();
+          // last in chain or
+          // leaving structure
+          if ((parentElement != null) && (parentNode.equals(parentElement.getLocalName())))
+          {
+              return parentElement.getDeepParent(parentNode, depth - 1);
+          }
+       }
+        return this;
     }
 
     /**
@@ -3404,10 +3387,8 @@ public class KElement extends ElementNSImpl
     public int removeFromAttribute(String key, String value, String nameSpaceURI, String sep, int nMax)
     {
         final String strAttrValue = getAttribute_KElement(key, nameSpaceURI, null);
-        if(strAttrValue==null) {
+        if(strAttrValue==null || strAttrValue.indexOf(value)<0)
             return 0;
-        }
-
         final VString v = StringUtil.tokenize(strAttrValue, sep, false);
         int siz = v.size();
 
@@ -4279,16 +4260,7 @@ public class KElement extends ElementNSImpl
         KElement kRet = null;
         XMLDocUserData userData = null;
 
-        if(isWildCard(nodeName)) {
-            nodeName=null;
-        }
-        if(isWildCard(nameSpaceURI)) {
-            nameSpaceURI=null;
-        }
-        if(isWildCard(attVal)) {
-            attVal=null;
-        }
-
+ 
         final boolean bID = attName.equals(AttributeName.ID);
         if(bID&&!isWildCard(attVal))
         {
@@ -4306,14 +4278,22 @@ public class KElement extends ElementNSImpl
             }
         }
 
+        if(isWildCard(nodeName)) {
+            nodeName=null;
+        }
+        if(isWildCard(nameSpaceURI)) {
+            nameSpaceURI=null;
+        }
+        if(isWildCard(attVal)) {
+            attVal=null;
+        }
+
         if (bDirect)
         { // inlined for performance
-
             KElement e0 = getFirstChildElement();
             if (e0 != null)
             {
                 final boolean bAlwaysFit = nodeName==null && nameSpaceURI==null;
-
                 do
                 {
                     KElement e=e0;
@@ -4339,10 +4319,10 @@ public class KElement extends ElementNSImpl
                                 userData.setTarget(e,idVal);
                             }
                         }
-                     }
+                    }
 
                     e0 = e0.getNextSiblingElement();
-    
+
                 } while (e0 != null && (kRet == null)); // loop to end if we are filling the cache
             }
         }
@@ -5029,26 +5009,26 @@ public class KElement extends ElementNSImpl
     {
         return getXPathElementVectorInternal(path, maxSize, true);
     }
-  
+
     /**
-         * gets an vector of elements element as defined by XPath to value <br>
-         *
-         *
-         * @tbd enhance the subsets of allowed XPaths,
-         *      now only .,..,/,@,// are supported
-         *
-         * @param path XPath abbreviated syntax representation of the
-         *             attribute, e.g
-         *              <code>parentElement/thisElement</code>
-         *              <code>parentElement/thisElement[2]</code>
-         *              <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
-         *
-         * @return VElement the vector of matching elements
-         *
-         * @throws IllegalArgumentException if path is not supported
-         */
-        private VElement getXPathElementVectorInternal(String path, int maxSize, boolean bLocal)
-        {
+     * gets an vector of elements element as defined by XPath to value <br>
+     *
+     *
+     * @tbd enhance the subsets of allowed XPaths,
+     *      now only .,..,/,@,// are supported
+     *
+     * @param path XPath abbreviated syntax representation of the
+     *             attribute, e.g
+     *              <code>parentElement/thisElement</code>
+     *              <code>parentElement/thisElement[2]</code>
+     *              <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
+     *
+     * @return VElement the vector of matching elements
+     *
+     * @throws IllegalArgumentException if path is not supported
+     */
+    private VElement getXPathElementVectorInternal(String path, int maxSize, boolean bLocal)
+    {
         if (path == null) {
             return null;
         }
@@ -5066,14 +5046,7 @@ public class KElement extends ElementNSImpl
         {
             if(path.startsWith("//"))
             {
-                vRet = getXPathElementVectorInternal(path.substring(2), maxSize, false);
-                try // also include the root!
-                {
-                    vRet.appendUnique(getXPathElementVectorInternal(path.substring(1), maxSize, false));
-                }
-                catch (IllegalArgumentException x)
-                { /* */ }
-                return vRet;
+                return getDocRoot().getXPathElementVectorInternal(path.substring(2), maxSize, false);
             }
             KElement r=getDocRoot();
             final String rootNodeName = r.getNodeName();
@@ -5130,12 +5103,6 @@ public class KElement extends ElementNSImpl
             int posB1 = path.indexOf("]");
 
             //TODO fix escape attribute values
-//          int posB2 = path.indexOf("[");
-//          while(posB2<posB1)
-//          {
-//          posB1 = path.indexOf(posB1,']');
-//          posB2 = path.indexOf(posB2,'[');                
-//          }
 
             String n = path.substring(posB0 + 1, posB1);
             iSkip = StringUtil.parseInt(n, 0);
@@ -5157,9 +5124,17 @@ public class KElement extends ElementNSImpl
         if (pos != -1) // have another element
         {
             final String elmName = newPath.substring(0, pos);
-//            final VElement ve = getChildElementVector_KElement(elmName, null, map, true,0);
-//            final VElement ve = getChildrenByTagName(elmName, null, map, bLocal, true, 0);
-            final VElement ve = bLocal ? getChildElementVector_KElement(elmName, null, map, true,0) : getElementsByTagName_KElement(elmName, null);
+            VElement ve;
+            if(bLocal)
+            {
+                ve = getChildElementVector_KElement(elmName, null, map, true,0);
+            }
+            else
+            {
+                ve = getElementsByTagName_KElement(elmName, null);
+                if(getLocalName().equals(elmName) || isWildCard(newPath))
+                    ve.add(this);
+            }
             if(ve==null || ve.size()<=iSkip) {
                 return null;
             }
@@ -5188,8 +5163,17 @@ public class KElement extends ElementNSImpl
             vRet.add(e);
             return vRet;
         }
-        return bLocal ? getChildElementVector_KElement(newPath, null, map, true,0) : getElementsByTagName_KElement(newPath, null);
-//        return getChildrenByTagName(newPath, null, map, bLocal, true,maxSize);
+        if(bLocal)
+        {
+            vRet =  getChildElementVector_KElement(newPath, null, map, true,0);
+        }
+        else
+        {
+            vRet = getElementsByTagName_KElement(newPath, null);
+            if(getLocalName().equals(newPath) || isWildCard(newPath))
+                vRet.add(this);
+        }
+        return vRet;
     }
 
     private JDFAttributeMap getXPathAtMap(String path, int posBAt, int posB1)
@@ -6229,10 +6213,7 @@ public class KElement extends ElementNSImpl
      */
     protected XMLDocUserData getXMLDocUserData()
     {
-        if(ownerDocument==null) {
-            return null;
-        }
-        return (XMLDocUserData) ownerDocument.getUserData();
+         return (ownerDocument==null) ? null : (XMLDocUserData) ownerDocument.getUserData();
     }
 
     private void clearTargets ()
@@ -6250,7 +6231,6 @@ public class KElement extends ElementNSImpl
                 if(id!=null) {
                     ud.removeTarget(id);
                 }
-
             }
         }
     }
@@ -6371,7 +6351,7 @@ public class KElement extends ElementNSImpl
     {
         fillHashSet(attName,attNS,preFill,true);
     }
-   /**
+    /**
      * fills a HashSet with all values of the attribute in all child elements
      * @param attName attribute name
      * @param attNS attrib ute namespaceuri
@@ -6379,7 +6359,7 @@ public class KElement extends ElementNSImpl
      */
     private void fillHashSet(String attName,String attNS, HashSet preFill, boolean bFirst)
     {
-        
+
         String attVal=getAttribute(attName,attNS,null);
         if(attVal!=null)
         {

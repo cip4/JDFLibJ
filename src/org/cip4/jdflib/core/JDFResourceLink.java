@@ -561,18 +561,15 @@ public class JDFResourceLink extends JDFElement
      */
     public JDFResource getLinkRoot()
     {
-        JDFResource r = null;
         final JDFResource eLink = super.getLinkRoot(null);
         if (eLink != null)
         {
-            r = eLink;
-
-            if (!(r.getNodeName().equals(getLinkedResourceName())))
+            if (!(eLink.getNodeName().equals(getLinkedResourceName())))
             {
                 return null;
             }
         }
-        return r;
+        return eLink;
     }
 
     /**

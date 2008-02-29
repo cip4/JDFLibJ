@@ -219,8 +219,15 @@ public class VString extends Vector<String>
         if(v==null)
             return;
         final int size = v.size();
+        if(size==1) // speedup for single append
+        {
+            final String theOther=v.elementAt(0);
+            if(!this.contains(theOther))
+                add(theOther);
+            return;
+        }
         for(int i=0;i<size;i++)
-            this.add(v.elementAt(i));
+            add(v.elementAt(i));
         
         unify();
     }
@@ -337,7 +344,7 @@ public class VString extends Vector<String>
      */
     public void unify()
     {
-        HashSet set=new HashSet();
+        HashSet<String> set=new HashSet<String>();
         int size=size();
         for (int i=0;i<size;i++)
         {

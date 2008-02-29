@@ -1204,7 +1204,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
             JDFMedia spawnMedia=xm.getMedia();
             assertNotNull(spawnMedia);
 
-            assertEquals(xmRoot.getSpawnIDs(false).size(),0);
+            assertNull(xmRoot.getSpawnIDs(false));
             final VString spawnIDs = xm.getSpawnIDs(false);
             final String spawnID = spawnedNode.getSpawnID(false);
             assertEquals(spawnIDs.stringAt(0),spawnID);

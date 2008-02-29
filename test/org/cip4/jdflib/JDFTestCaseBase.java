@@ -79,8 +79,10 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
+import org.cip4.jdflib.goldenticket.BaseGoldenTicket;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.JDFComponent;
@@ -98,6 +100,28 @@ public abstract class JDFTestCaseBase extends TestCase
     static protected final String sm_dirTestSchema   = ".." + File.separator + "schema" + File.separator + "Version_1_3" + File.separator;
     static protected final String sm_dirTestData     = "test" + File.separator + "data" + File.separator;
     static protected final String sm_dirTestDataTemp = sm_dirTestData + "temp" + File.separator;
+    
+    /**
+     * create 3 files based on a gt
+     * @param goldenTicket
+     * @param templateName
+     * @param good
+     * @param waste
+     */
+    protected void write3GTFiles(BaseGoldenTicket goldenTicket,String templateName,int good, int waste)
+    {
+        assertTrue(goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
+        goldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_Manager_"+templateName+".jdf", 2);        
+        
+        goldenTicket.makeReady();
+        assertTrue(goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
+        goldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_MakeReady_"+templateName+".jdf", 2);
+
+        goldenTicket.execute(null,true,true,good,waste);
+        assertTrue(goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
+        goldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_Worker_"+templateName+".jdf", 2);
+    }
+    
     public static JDFDoc creatXMDoc()
     {
         JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_3);
