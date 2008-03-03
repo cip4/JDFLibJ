@@ -8100,7 +8100,7 @@ public class JDFNode extends JDFElement
                     allChildsAvailable = false;
                 }
 
-                if (!ExecChild.isProcStatOK () && (partUsage == JDFResource.EnumPartUsage.Explicit))
+                if (!ExecChild.isProcStatOK () && (partUsage != JDFResource.EnumPartUsage.Implicit))
                 {
                     isProcStatOK = false;
                 }
@@ -8128,7 +8128,7 @@ public class JDFNode extends JDFElement
             }
             else
             {
-                if ((partUsage == JDFResource.EnumPartUsage.Explicit)
+                if ((partUsage != JDFResource.EnumPartUsage.Implicit)
                         || (link.hasChildElement (ElementName.PART, null)))
                 {
                     isAvailable = true;
