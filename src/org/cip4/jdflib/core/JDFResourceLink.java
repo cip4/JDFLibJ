@@ -1684,8 +1684,11 @@ public class JDFResourceLink extends JDFElement
     }
 
     /**
-     * get the first element AmountPool as a double 
-     * @param attName
+     * get the sum of all matching AmountPool/PartAmount/@attName as a double 
+     * PartAmounts match if all attributes match those in PartAmount, i.e. mPart is a submap of the searche PartAmount elements
+     * 
+     * 
+     * @param attName the Attribute name , e.g Amount, ActualAmount
      * @param mPart
      * @return double - the element
      * @throws JDFException if the element can not be cast to double 

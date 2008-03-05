@@ -251,12 +251,12 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
         boolean b=false;
         KElement attr=null;
         String newPath=xPath;
-        KElement pathElement = e.getXPathElement(xPath);
+         
         final int posAt = xPath.lastIndexOf("@");
         int posAtI=posAt>0 ? xPath.lastIndexOf("[@") : -1;
         if(posAt<0 || posAt==posAtI+1) //element
         {
-            
+            KElement pathElement = e.getXPathElement(xPath);
             b=fitsValue(pathElement);
             if (b)
             {
@@ -276,6 +276,8 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
             if(reportRoot!=null)
             {
                 final String attName = xPath.substring(posAt+1);
+                KElement pathElement = e.getXPathElement(xPath.substring(0,posAt));
+
                 if(pathElement!=null)
                 {
                     if(pathElement instanceof JDFResource)

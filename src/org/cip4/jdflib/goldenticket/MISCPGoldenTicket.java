@@ -365,6 +365,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         }
         JDFComponent outComp=(JDFComponent) theNode.getCreateResource(ElementName.COMPONENT, EnumUsage.Output, 0);
         outComp.setComponentType(EnumComponentType.FinalProduct,EnumComponentType.Sheet);
+        outComp.setProductType("Unknown");
         JDFResourceLink rl=theNode.getLink(outComp, EnumUsage.Output);
         if(vParts!=null)
         {

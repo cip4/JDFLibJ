@@ -101,7 +101,7 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
         vMap.add(new JDFAttributeMap(map));
         map.put(EnumPartIDKey.Side,"Back");
         vMap.add(new JDFAttributeMap(map));
-        MISCPGoldenTicket cpGoldenTicket=new MISCPGoldenTicket(1,null,2,1,true,vMap);
+        MISCPGoldenTicket cpGoldenTicket=new MISCPGoldenTicket(1,null,2,2,true,vMap);
         cpGoldenTicket.nCols=4;
         
         cpGoldenTicket.assign(null);
@@ -109,7 +109,7 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
         cpGoldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_Manager_MISCPS_1_GB.jdf", 2);
         assertTrue(node.getICSVersions(false).contains("Base_L2-1.3"));
         assertTrue(node.getICSVersions(false).contains("JMF_L2-1.3"));
-        assertTrue(node.getICSVersions(false).contains("MIS_L1-1.3"));
+        assertTrue(node.getICSVersions(false).contains("MIS_L2-1.3"));
         assertTrue(node.getICSVersions(false).contains("MISCPS_L1-1.3"));
         assertTrue(node.isValid(EnumValidationLevel.Complete));
         
@@ -119,7 +119,7 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
         cpGoldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_Worker_MISCPS_1_GB.jdf", 2);
         assertTrue(node.getICSVersions(false).contains("Base_L2-1.3"));
         assertTrue(node.getICSVersions(false).contains("JMF_L2-1.3"));
-        assertTrue(node.getICSVersions(false).contains("MIS_L1-1.3"));
+        assertTrue(node.getICSVersions(false).contains("MIS_L2-1.3"));
         assertTrue(node.getICSVersions(false).contains("MISCPS_L1-1.3"));
         assertTrue(node.isValid(EnumValidationLevel.Complete));
         
@@ -151,7 +151,7 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
         map.put(EnumPartIDKey.Side,"Front");
         vMap.add(new JDFAttributeMap(map));
 
-        MISCPGoldenTicket cpGoldenTicket=new MISCPGoldenTicket(1,null,2,1,true,vMap);
+        MISCPGoldenTicket cpGoldenTicket=new MISCPGoldenTicket(1,null,2,2,true,vMap);
         cpGoldenTicket.nCols=6;
         cpGoldenTicket.workStyle=EnumWorkStyle.Simplex;
         cpGoldenTicket.assign(null);

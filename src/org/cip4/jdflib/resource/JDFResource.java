@@ -6883,6 +6883,43 @@ public class JDFResource extends JDFElement
     {
         return getAttribute(AttributeName.WEBSETUP, null, JDFConstants.EMPTYSTRING);
     }
+    
+    /**
+     * gets an element as defined by XPath to value <br>
+     *
+     *
+     * @tbd enhance the subsets of allowed XPaths,
+     *      now only .,..,/,@ are supported
+     *
+     * @param path XPath abbreviated syntax representation of the
+     *             attribute, e.g
+     *              <code>parentElement/thisElement</code>
+     *              <code>parentElement/thisElement[2]</code>
+     *              <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
+     *
+     * @return KElement the specified element
+     * @throws IllegalArgumentException if path is not supported
+     */
+//    @Override
+//    public KElement getXPathElement(String path)
+//    {
+//        VElement v= getXPathElementVector(path, 1);
+//        if(v==null || v.size()<1) {
+//            final String nodeName=getNodeName();
+//            KElement ke=this;
+//            while (v == null || v.size()==0)
+//            {
+//                ke = ke.getParentNode_KElement();
+//                if (ke == null || !ke.getNodeName().equals(nodeName))
+//                {
+//                    return null;
+//                }
+//                v = ke.getXPathElementVector(path, 1);
+//            }
+//        }
+//        return v.item(0);
+//    }
+//    
     /**
      * Recursively adds the partition leaves defined in vPartMap
      *

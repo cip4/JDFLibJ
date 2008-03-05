@@ -3862,21 +3862,24 @@ public class JDFNode extends JDFElement
     public HashSet getAllRefs(HashSet vDoneRefs, boolean bRecurse)
     {
         HashSet v1 = vDoneRefs!=null ? vDoneRefs : new LinkedHashSet();
-        if(vDoneRefs==null)
-        {
-            XMLDocUserData ud=getXMLDocUserData();
-            if(ud!=null && ud.getIDCache())
-            {
-                //prefill cache!
-                JDFNode root=getJDFRoot();
-                VElement v=root.getChildrenByTagName(ElementName.RESOURCEPOOL, null, null, false, true, 0);
-                for(int i=0;i<v.size();i++)
-                {
-                    JDFResourcePool rp=(JDFResourcePool)v.get(i);
-                    rp.getResourceByID("1"); // invalid so that it will search all!
-                }
-            }
-        }
+        // the following code probably does more harm than hel in the standard case 
+        // and only speeds up pathologically ordered JDF
+        //
+//        if(vDoneRefs==null)
+//        {
+//            XMLDocUserData ud=getXMLDocUserData();
+//            if(ud!=null && ud.getIDCache())
+//            {
+//                //prefill cache!
+//                JDFNode root=getJDFRoot();
+//                VElement v=root.getChildrenByTagName(ElementName.RESOURCEPOOL, null, null, false, true, 0);
+//                for(int i=0;i<v.size();i++)
+//                {
+//                    JDFResourcePool rp=(JDFResourcePool)v.get(i);
+//                    rp.getResourceByID("1"); // invalid so that it will search all!
+//                }
+//            }
+//        }
         JDFResourcePool rp = getResourcePool();
         if(rp != null && bRecurse) {
             v1 = rp.getAllRefs(v1, bRecurse);

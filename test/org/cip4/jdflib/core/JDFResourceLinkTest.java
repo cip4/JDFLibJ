@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -120,6 +120,50 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
         assertTrue("rl amount!=44",rl.getAmount(null)==44);
         assertTrue("rl amount!=44",rl.getMinAmount(null)==44);
         assertTrue("rl amount!=44",rl.getMaxAmount(null)==44);
+    }
+    public void testAmountCondition() throws Exception
+    {
+        JDFDoc d=new JDFDoc(ElementName.JDF);
+        JDFNode n=d.getJDFRoot();
+        n.setVersion(JDFElement.EnumVersion.Version_1_3);
+        n.setType("ConventionalPrinting",true);
+        JDFMedia m=(JDFMedia)n.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, null, null, null);
+        JDFResourceLink rl=n.getLink(m,null);
+        JDFAttributeMap map=new JDFAttributeMap("SheetName","s1");
+        JDFAttributeMap mapC=new JDFAttributeMap(map);
+        mapC.put("Condition", "Good");
+
+        m.setAmount(42);
+        assertEquals("m amount!=42",m.getAttribute(AttributeName.AMOUNT),"42");
+        assertEquals("rl amount!=42",rl.getAmount(null),42.,0.1);
+        assertEquals("rl amount!=42",rl.getMinAmount(null),42.,0.1);
+        assertEquals("rl amount!=42",rl.getMaxAmount(null),42.,0.1);
+
+        rl.setAmount(44,map);
+        assertEquals("rl amount!=42",rl.getAmount(map),44.,0.1);
+        assertEquals("rl amount!=42",rl.getMinAmount(map),44.,0.1);
+        assertEquals("rl amount!=42",rl.getMaxAmount(map),44.,0.1);
+        
+        assertEquals("no good in map",rl.getAmount(mapC),-1.,0.1);
+        assertEquals("no good in map",rl.getMinAmount(mapC),-1.,0.1);
+        assertEquals("no good in map",rl.getMaxAmount(mapC),-1.,0.1);
+        
+        rl.removeChild(ElementName.AMOUNTPOOL,null,0);
+        rl.setAmount(44,mapC);
+        assertEquals("rl amount!=42",rl.getAmount(mapC),44.,0.1);
+        assertEquals("rl amount!=42",rl.getMinAmount(mapC),44.,0.1);
+        assertEquals("rl amount!=42",rl.getMaxAmount(mapC),44.,0.1);
+        
+        assertEquals("no good in rl",rl.getAmount(map),44.,0.1);
+        assertEquals("no good in rl",rl.getMinAmount(map),44.,0.1);
+        assertEquals("no good in rl",rl.getMaxAmount(map),44.,0.1);
+
+        JDFAttributeMap mapW=new JDFAttributeMap(map);
+        mapW.put("Condition", "Waste");
+        rl.setAmount(4,mapW);
+        assertEquals("sum g/w in rl",rl.getAmount(map),48.,0.1);
+        assertEquals("sum g/w in rl",rl.getMinAmount(map),48.,0.1);
+        assertEquals("sum g/w in rl",rl.getMaxAmount(map),48.,0.1);
     }
 
     public void testAppendAmountPool() throws Exception

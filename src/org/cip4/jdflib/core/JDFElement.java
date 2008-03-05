@@ -4513,17 +4513,18 @@ public class JDFElement extends KElement
 
                     }
                 }
-                if(eLast!=null)
-                {
-                    if(eLast instanceof JDFResource)
-                    {
-                        if(locName.equals(eLast.getLocalName())){
-                            e=e.getParentNode_KElement();
-                            i++; // undo i--
-                            continue;
-                        }
-                    }
-                }
+                // xpath is xpath -lets try not to be too smart implicitly
+//                if(eLast!=null)
+//                {
+//                    if(eLast instanceof JDFResource)
+//                    {
+//                        if(locName.equals(eLast.getLocalName())){
+//                            e=e.getParentNode_KElement();
+//                            i++; // undo i--
+//                            continue;
+//                        }
+//                    }
+//                }
                 return false;
             }
             eLast=e;

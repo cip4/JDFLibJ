@@ -929,6 +929,12 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
             VElement vActions = actionPool.getChildElementVector(ElementName.ACTION, null, null, true, 0, false);
             VElement allElms=jdfRootorMess.getChildrenByTagName(null,null,null,false,true,0);
             allElms.add(jdfRootorMess); // needed for local JDF test
+            if(jdfRootorMess instanceof JDFMessage)
+            {
+                JDFJMF jmf=jdfRootorMess.getJMFRoot();
+                if(jmf!=null)
+                    allElms.add(jmf);
+            }
             final int elmSize = allElms.size();
             final int actionSize = vActions.size();
             for(int i=0;i<elmSize;i++)
@@ -952,6 +958,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
                     if (test.fitsJDF(e,ar)) // If the Test referenced by TestRef evaluates to “true” the combination 
                     {                           // of processes and attribute values described is not allowed
                         KElement arl = root.getChildWithAttribute("ActionReportList","ID",null,action.getID(),0,true);
+                        
                         if(arl==null)
                         {
                             arl=root.appendElement("ActionReportList");
