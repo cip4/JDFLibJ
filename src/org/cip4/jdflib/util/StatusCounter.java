@@ -126,6 +126,7 @@ public class StatusCounter
     private JDFDoc docJMFPhaseTime;
     private JDFDoc docJMFResource;
     protected VJDFAttributeMap m_vPartMap;
+    protected VString m_ignoreParts=null;
     private String m_deviceID=null;
     private VString m_moduleID=null;
     private VString m_moduleType=null;
@@ -269,6 +270,19 @@ public class StatusCounter
     public void setFirstRefID(String resID)
     {
         firstRefID=resID;
+    }
+    /**
+     * set the partIDKeys to be ignored
+     * @param resID
+     */
+    public void addIgnorePart(EnumPartIDKey key)
+    {
+        if(m_ignoreParts==null && key!=null)
+            m_ignoreParts=new VString();
+        if(key==null)
+            m_ignoreParts=null;
+        else
+            m_ignoreParts.add(key.getName());
     }
     /**
      * @param resLinks
@@ -814,6 +828,10 @@ public class StatusCounter
             JDFAttributeMap map=null;
             if(vResPartMap!=null)
             {
+                if(m_ignoreParts!=null)
+                {
+                    vResPartMap.removeKeys(m_ignoreParts.getSet());
+                }
 //              final VString partIDKeys = target.getPartIDKeys();
 //              Set keyset=partIDKeys==null ? null : partIDKeys.getSet();
 //              vResPartMap.reduceMap(keyset);

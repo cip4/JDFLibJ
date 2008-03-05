@@ -71,6 +71,7 @@
 package org.cip4.jdflib.goldenticket;
 
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
+import org.cip4.jdflib.auto.JDFAutoResourceAudit.EnumReason;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFDoc;
@@ -78,6 +79,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -103,6 +105,7 @@ import org.cip4.jdflib.util.UrlUtil;
  */
 public class BaseGoldenTicket
 {
+    protected VString amountLinks=null;
     protected JDFNode theNode=null;
     protected JDFNode thePreviousNode=null;
     protected JDFNode theParentNode=null;
@@ -111,12 +114,12 @@ public class BaseGoldenTicket
     protected StatusCounter theStatusCounter;
     protected static String misURL=null;
     protected static String deviceURL=null;
-    
+
     /**
      * percentage allowed maxamount waste to be used for audits
      */
     public int wastePercent=150; 
-    
+
     /**
      * percentage of amount to be used as actual for audits
      */
@@ -141,7 +144,7 @@ public class BaseGoldenTicket
      */
     public void assign(JDFNode node)
     {
-         theNode=node==null ? new JDFDoc("JDF").getJDFRoot() : node;
+        theNode=node==null ? new JDFDoc("JDF").getJDFRoot() : node;
         if(theParentNode==null && theNode.getParentJDF()!=null)
             theParentNode=theNode.getParentJDF();
         setVersion();
@@ -153,7 +156,7 @@ public class BaseGoldenTicket
      */
     public void setPreviousNode(JDFNode node)
     {
-         thePreviousNode=node;
+        thePreviousNode=node;
     }
     /**
      * simulate makeReady of this node
@@ -167,7 +170,7 @@ public class BaseGoldenTicket
         for(int i=0;i<siz;i++)
         {
             JDFResourceLink rl=(JDFResourceLink)vResLinks.elementAt(i);
-            
+
             if(EnumUsage.Input.equals(rl.getUsage()))
             {
                 VElement vRes=rl.getTargetVector(-1);                
@@ -191,17 +194,18 @@ public class BaseGoldenTicket
     public void execute(VJDFAttributeMap vMap, boolean bOutAvail, boolean bFirst, int good, int waste)
     {
         theNode.setPartStatus(vMap, EnumNodeStatus.Completed);
-        VElement vResLinks=theNode.getResourceLinks(null);
         runphases(good, waste);
+        
+        VElement vResLinks=theNode.getResourceLinks(null);
         int siz= vResLinks!=null ? vResLinks.size() : 0;
         for(int i=0;i<siz;i++)
         {
             JDFResourceLink rl=(JDFResourceLink)vResLinks.elementAt(i);
-            
+
             if(bOutAvail && EnumUsage.Output.equals(rl.getUsage()))
             {
                 VElement vRes=rl.getTargetVector(-1);
-                
+
                 for(int j=0;j<vRes.size();j++)
                 {
                     VElement leaves=((JDFResource)vRes.elementAt(j)).getLeaves(false);
@@ -212,7 +216,7 @@ public class BaseGoldenTicket
                         if(vMap==null || vMap.overlapsMap(map))
                         {
                             r.setResStatus(EnumResStatus.Available, true);
-                            
+
                             if(good>=0)
                             {
                                 map.put("Condition", "Good");
@@ -232,7 +236,7 @@ public class BaseGoldenTicket
                 }
             }
         }
-            
+
         // base requires no generic excute support
 //      JDFProcessRun pr=(JDFProcessRun) theNode.getCreateAuditPool().addAudit(EnumAuditType.ProcessRun, null);
 
@@ -241,6 +245,17 @@ public class BaseGoldenTicket
     protected void runphases(int good, int waste)
     {
         theStatusCounter.setPhase(EnumNodeStatus.InProgress, "SD", EnumDeviceStatus.Running, "SD");
+        runSinglePhase(good, waste);
+        finalize(); // prior to processRun
+        theStatusCounter.setPhase(EnumNodeStatus.Completed, "SD", EnumDeviceStatus.Idle, "SD");
+    }
+
+    /**
+     * @param good
+     * @param waste
+     */
+    protected void runSinglePhase(int good, int waste)
+    {
         VElement vResLinks=theNode.getResourceLinks(null);
         int siz= vResLinks!=null ? vResLinks.size() : 0;
         for(int i=0;i<siz;i++)
@@ -248,10 +263,20 @@ public class BaseGoldenTicket
             JDFResourceLink rl=(JDFResourceLink)vResLinks.elementAt(i);
             theStatusCounter.addPhase(rl.getrRef(), good, waste);
         }
-        theStatusCounter.setPhase(EnumNodeStatus.Completed, "SD", EnumDeviceStatus.Idle, "SD");
     }
 
 
+    /** 
+     * do the last steps prior to processrun
+     */
+    protected void finalize()
+    {
+        int siz =amountLinks==null ? 0 : amountLinks.size();
+        for(int i=0;i<siz;i++)
+        {
+            theStatusCounter.setResourceAudit(amountLinks.elementAt(i), EnumReason.ProcessResult);
+        }
+    }
     protected void setVersion()
     {
         if(theVersion==null)
@@ -275,10 +300,32 @@ public class BaseGoldenTicket
 
         if(!theNode.hasAttribute(AttributeName.COMMENTURL))
             theNode.setCommentURL(UrlUtil.StringToURL("//MyHost/data/Comments.html").toExternalForm());
-        
-        theStatusCounter.setActiveNode(theNode, null, null);
-        
-        
+        VElement nodeLinks = getNodeLinks();
+        theStatusCounter.setActiveNode(theNode, null, nodeLinks);
+
+    }
+
+    /**
+     * @return
+     */
+    protected VElement getNodeLinks()
+    {
+        VElement nodeLinks=null;
+        if(amountLinks!=null)
+        {
+            nodeLinks=new VElement();
+            VElement resLinks=theNode.getResourceLinks(null);
+            for(int i=0;i<amountLinks.size();i++)
+            {
+                for(int j=0;j<resLinks.size();j++)
+                {
+                    JDFResourceLink rl=(JDFResourceLink) resLinks.elementAt(j);
+                    if(rl.matchesString(amountLinks.elementAt(i)))
+                        nodeLinks.add(rl);
+                }
+            }
+        }
+        return nodeLinks;
     }
 
     /**
@@ -309,7 +356,7 @@ public class BaseGoldenTicket
     public void write2File(String file, int indent)
     {
         theNode.getOwnerDocument_KElement().write2File(file, indent, indent==0);
-        
+
     }
 
     public StatusCounter getStatusCounter()
@@ -336,5 +383,17 @@ public class BaseGoldenTicket
     {
         BaseGoldenTicket.misURL = misURL;
     }
-    
+
+    /**
+     * add the type of amount link for resource audits etc
+     * @param link
+     */
+    public void addAmountLink(String link)
+    {
+        if(amountLinks==null)
+            amountLinks=new VString();
+        amountLinks.appendUnique(link);
+    }
+
+
 }

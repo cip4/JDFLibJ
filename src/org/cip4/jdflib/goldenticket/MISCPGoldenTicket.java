@@ -80,6 +80,7 @@ import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoPreview.EnumPreviewFileType;
 import org.cip4.jdflib.auto.JDFAutoPreview.EnumPreviewUsage;
+import org.cip4.jdflib.auto.JDFAutoResourceAudit.EnumReason;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
@@ -155,7 +156,9 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         grayBox=isGrayBox;
         partIDKeys = new VString("SignatureName,SheetName,Side,Separation",",");
         vParts=vPartMap;
-        icsLevel=_icsLevel;        
+        icsLevel=_icsLevel; 
+        theStatusCounter.addIgnorePart(EnumPartIDKey.Side);
+        theStatusCounter.addIgnorePart(EnumPartIDKey.Separation);
     }
     
     /**
@@ -235,23 +238,23 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 
     public void setActivePart(VJDFAttributeMap vp, boolean bFirst)
     {
-        VElement vResLinks=new VElement();
+        amountLinks=null;
         if(bFirst)
-            vResLinks.add(theNode.getLink(theNode.getResource("Media", null, 0),null));
-        vResLinks.add(theNode.getLink(theNode.getResource("Component", EnumUsage.Output, 0),null));
-        theStatusCounter.setActiveNode(theNode, vp, vResLinks);
+            addAmountLink("Media:Input");
+        addAmountLink("Component:Output");
+        theStatusCounter.setActiveNode(theNode, vp, getNodeLinks());
     }
      /**
      * simulate execution of this node
      * the internal node will be modified to reflect the excution
      */
    @Override
-    public void execute(VJDFAttributeMap parts, boolean outputAvailable, boolean bFirst, int good, int waste)
-    {
+   public void execute(VJDFAttributeMap parts, boolean outputAvailable, boolean bFirst, int good, int waste)
+   {
 
-        parts=parts==null ? vParts : parts;
-        setActivePart(parts, bFirst);
-        super.execute(parts,outputAvailable,bFirst, good, waste);
+       parts=parts==null ? vParts : parts;
+       setActivePart(parts, bFirst);
+       super.execute(parts,outputAvailable,bFirst, good, waste);
     }
     /**
      * simulate execution of this node
@@ -565,10 +568,8 @@ public class MISCPGoldenTicket extends MISGoldenTicket
     protected void runphases(int good, int waste)
     {
         theStatusCounter.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, "Printing");
-        JDFResourceLink rl=theNode.getLink(0, "Media",new JDFAttributeMap("Usage","Input"),null);
-        theStatusCounter.addPhase(rl.getrRef(), good, waste);
-        rl=theNode.getLink(0, "Component",new JDFAttributeMap("Usage","Output"),null);
-        theStatusCounter.addPhase(rl.getrRef(), good, waste);
+        runSinglePhase(good, waste);
+        finalize(); // prior to processRun
         theStatusCounter.setPhase(EnumNodeStatus.Completed, "Done", EnumDeviceStatus.Idle, "Waiting");
     }
 
