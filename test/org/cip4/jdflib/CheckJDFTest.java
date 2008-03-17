@@ -426,6 +426,31 @@ public class CheckJDFTest extends JDFTestCaseBase
             v++;
         }
     }
+    /**
+     * tests validation of a document that is passed by reference to a document
+     */
+    public void testIsValid() 
+    {
+        JDFDoc doc=new JDFDoc("JDF");
+        CheckJDF checkJDF=new CheckJDF();
+        checkJDF.setPrint(false);
+        checkJDF.bQuiet = true;
+        int v=0;
+        while(true)
+        {
+            checkJDF.level = EnumValidationLevel.getEnum(v);
+            if(checkJDF.level==null)
+                break;
+            for(int i=0;i<3;i++)
+            {
+                if(i>=1)
+                    doc=null;
+                boolean bValid = checkJDF.isValid(doc);
+               assertTrue(bValid);
+            }
+            v++;
+        }
+    }
     
     /**
      * tests validation of a document that is passed by reference to a document

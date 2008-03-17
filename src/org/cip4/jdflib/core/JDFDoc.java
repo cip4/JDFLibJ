@@ -81,6 +81,9 @@ package org.cip4.jdflib.core;
 
 import java.io.File;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 
 import javax.mail.BodyPart;
 
@@ -396,14 +399,34 @@ public class JDFDoc extends XMLDoc
         KElement e=getRoot();
         if(e==null)
             return null;
+        String strContentType = getContentType(e);
+        
+        XMLDoc d=super.write2URL(strURL, strContentType);
+        return d==null ? null : new JDFDoc(d.getMemberDocument());
+    }
+    public HttpURLConnection write2HTTPURL(URL strURL) 
+    {
+        KElement e=getRoot();
+        if(e==null)
+            return null;
+        String strContentType = getContentType(e);
+        
+        return super.write2HTTPURL(strURL, strContentType);
+    }
+
+    /**
+     * gets the contentType for a given root element
+     * @param e
+     * @return
+     */
+    public static String getContentType(KElement e)
+    {
         String strContentType=MimeUtil.TEXT_XML;
         if(e instanceof JDFNode)
             strContentType=MimeUtil.VND_JDF;
         else if(e instanceof JDFJMF)
             strContentType=MimeUtil.VND_JMF;
-        
-        XMLDoc d=super.write2URL(strURL, strContentType);
-        return d==null ? null : new JDFDoc(d.getMemberDocument());
+        return strContentType;
     }
 
 //    //////////////////////////////////////////////////////////////////////

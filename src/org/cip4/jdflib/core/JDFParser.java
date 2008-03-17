@@ -275,8 +275,7 @@ public class JDFParser extends DOMParser
      */
     public JDFDoc parseInputSource(InputSource inSource)
     {
-        JDFDoc jdfDoc = null;
-        
+        JDFDoc jdfDoc = null;        
         if (inSource != null)
         {
             initParser(m_SchemaLocation, m_DocumentClass, m_ErrorHandler);
@@ -401,14 +400,11 @@ public class JDFParser extends DOMParser
      */
     private JDFDoc runParser(InputSource inSource, boolean bEraseEmpty)
     {
-        JDFDoc doc = new JDFDoc();
-        
+        JDFDoc doc = new JDFDoc();        
         try
         {
             super.parse(inSource);
-
             doc.setMemberDoc((DocumentJDFImpl) getDocument());
-
             if (bEraseEmpty)
             {
                 doc.getRoot().eraseEmptyNodes(true); // cleanup the XML

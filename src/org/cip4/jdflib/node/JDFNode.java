@@ -1768,6 +1768,21 @@ public class JDFNode extends JDFElement
             return "NodeIdentifier :"+_jobID+" "+_jobPartID+"\n"+_partMapVector;
         }
 
+        public String getJobID()
+        {
+            return _jobID;
+        }
+
+        public String getJobPartID()
+        {
+            return _jobPartID;
+        }
+
+        public VJDFAttributeMap getPartMapVector()
+        {
+            return _partMapVector;
+        }
+
     }
     /**
      * Enumeration for accessing typesafe nodes 
@@ -3431,6 +3446,16 @@ public class JDFNode extends JDFElement
     public String getType()
     {
         return getAttribute(AttributeName.TYPE, null, JDFConstants.EMPTYSTRING);
+    }
+    /**
+     * getType - get node Types or Type attribute
+     *
+     * @return String - the type
+     */
+    public String getTypesString()
+    {
+        String s = getAttribute(AttributeName.TYPES, null, null);
+        return s==null ? getType() : s;
     }
 
     /**

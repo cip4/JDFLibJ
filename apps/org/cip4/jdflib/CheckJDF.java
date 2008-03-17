@@ -2201,7 +2201,23 @@ public class CheckJDF
         if(doc!=null) {
             theDoc=doc;
         }
-        return processSingleFile(null,null,null);
+        return processSingleFile(null, null, null, null);
+    }
+    /**
+     * process a single document as specified by doc
+     * if doc==null, reprocess the currently stored document
+     * @param doc the parsed document to process
+     * @return the xml output of the validation
+     */
+    public boolean isValid(JDFDoc doc)
+    {
+        if(doc!=null) {
+            theDoc=doc;
+        }
+        XMLDoc d= processSingleFile(null, null, null, null);
+        if(d==null)
+            return false;
+        return "true".equals(d.getRoot().getXPathAttribute("TestFile/CheckJDFOutput/@IsValid",null));
     }
     /**
      * process a single document as specified by doc
@@ -2213,7 +2229,7 @@ public class CheckJDF
     public XMLDoc processSingleURLStream(InputStream stream, String url)
     {
         theDoc=null;
-        return processSingleFile(stream,url,null);
+        return processSingleFile(stream, url, null, null);
     }
     /**
      * process a single document as specified by doc

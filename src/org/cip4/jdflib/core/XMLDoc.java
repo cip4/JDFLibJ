@@ -84,6 +84,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringWriter;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Enumeration;
@@ -129,8 +130,6 @@ public class XMLDoc
 
     private DocumentJDFImpl m_doc;
 
-
-
     //**************************************** Constructors ****************************************
     /**
      * constructor
@@ -142,7 +141,7 @@ public class XMLDoc
     }
 
     @Override
-	public boolean equals(Object o)
+    public boolean equals(Object o)
     {
         if (o == null)
             return false;
@@ -157,7 +156,7 @@ public class XMLDoc
     }
 
     @Override
-	public int hashCode() 
+    public int hashCode() 
     {
         return HashUtil.hashCode(0, this.m_doc);
     }
@@ -208,7 +207,7 @@ public class XMLDoc
      * @deprecated use XMLDoc(String strDocType, String namespaceURI)
      */
     @Deprecated
-	public XMLDoc(String strDocType)
+    public XMLDoc(String strDocType)
     {
         new XMLDoc(strDocType,null);
     }
@@ -240,7 +239,7 @@ public class XMLDoc
      *
      */
     @Deprecated
-	public KElement setRoot(String strDocType)
+    public KElement setRoot(String strDocType)
     {
         return setRoot(strDocType,JDFElement.getSchemaURL());
     }
@@ -365,7 +364,7 @@ public class XMLDoc
      * @default write2File(String oFilePath, 0)
      */    
     @Deprecated
-	public boolean write2File(String oFilePath, int indent)
+    public boolean write2File(String oFilePath, int indent)
     {
         return write2File(oFilePath, indent, true);
     }
@@ -388,69 +387,69 @@ public class XMLDoc
 
         return write2File(new File(oFilePath), indent, bPreserveSpace);
     }    
-    
+
     /**
      * write2File - write to a file; Create if it doesn't exist always assume utf-8 encoding
-    *
-    * @param file       fthe file to write to
-    * @param indent          indentation
-    * @param bPreserveSpace  if true, preserve whitespace
-    *
-    * @return boolean - true if successful
-    * 
-    * @default write2File(String oFilePath, 0)
-    */
-   public boolean write2File(File file, int indent, boolean bPreserveSpace)
-   {
- 
-       if(file==null)
-           return false;
+     *
+     * @param file       fthe file to write to
+     * @param indent          indentation
+     * @param bPreserveSpace  if true, preserve whitespace
+     *
+     * @return boolean - true if successful
+     * 
+     * @default write2File(String oFilePath, 0)
+     */
+    public boolean write2File(File file, int indent, boolean bPreserveSpace)
+    {
 
-       boolean fSuccess = true;
-       FileOutputStream outStream = null;
+        if(file==null)
+            return false;
 
-       try
-       {
-           if(file.isDirectory()&&getOriginalFileName()!=null)
-           {
-               File orig=new File(getOriginalFileName());
-               file=new File(file+File.separator+orig.getName());
-           }
-           // ensure having an empty file in case it did not exist
-           file.delete();
-           if (file.createNewFile())
-           {
-               outStream = new FileOutputStream(file);
-               write2Stream(outStream, indent, bPreserveSpace);
-           }
-       }
-       catch (FileNotFoundException e)
-       {
-           System.out.println("Write2File: " + file.getAbsolutePath() + " : " + e);
-           fSuccess = false;
-       }
-       catch (IOException e)
-       {
-           System.out.println("Write2File: " + file.getAbsolutePath() + " : " + e);
-           fSuccess = false;
-       }
-       finally
-       {
-           if (outStream != null)
-           {
-               try
-               {
-                   outStream.close();
-               }
-               catch (IOException e1)
-               {
-                   e1.printStackTrace();
-               }
-           } 
-       }
+        boolean fSuccess = true;
+        FileOutputStream outStream = null;
 
-       return fSuccess;
-   }
+        try
+        {
+            if(file.isDirectory()&&getOriginalFileName()!=null)
+            {
+                File orig=new File(getOriginalFileName());
+                file=new File(file+File.separator+orig.getName());
+            }
+            // ensure having an empty file in case it did not exist
+            file.delete();
+            if (file.createNewFile())
+            {
+                outStream = new FileOutputStream(file);
+                write2Stream(outStream, indent, bPreserveSpace);
+            }
+        }
+        catch (FileNotFoundException e)
+        {
+            System.out.println("Write2File: " + file.getAbsolutePath() + " : " + e);
+            fSuccess = false;
+        }
+        catch (IOException e)
+        {
+            System.out.println("Write2File: " + file.getAbsolutePath() + " : " + e);
+            fSuccess = false;
+        }
+        finally
+        {
+            if (outStream != null)
+            {
+                try
+                {
+                    outStream.close();
+                }
+                catch (IOException e1)
+                {
+                    e1.printStackTrace();
+                }
+            } 
+        }
+
+        return fSuccess;
+    }
 
     /**
      * @deprecated use write2Stream(outStream, indent, true);
@@ -459,7 +458,7 @@ public class XMLDoc
      * @throws IOException
      */
     @Deprecated
-	public void write2Stream(OutputStream outStream, int indent) throws IOException
+    public void write2Stream(OutputStream outStream, int indent) throws IOException
     {
         write2Stream(outStream, indent, indent==0);
     }
@@ -498,7 +497,7 @@ public class XMLDoc
      * @throws IOException
      */
     @Deprecated
-	public static void write2StreamStatic(Element elem, OutputStream outStream, int indent) throws IOException
+    public static void write2StreamStatic(Element elem, OutputStream outStream, int indent) throws IOException
     {
         write2StreamStatic(elem, outStream, indent, true);
     }
@@ -512,7 +511,7 @@ public class XMLDoc
      * @throws IOException
      */
     @Deprecated
-	public static void write2StreamStatic(Element elem, OutputStream outStream, int indent, boolean bPreserveSpace) throws IOException
+    public static void write2StreamStatic(Element elem, OutputStream outStream, int indent, boolean bPreserveSpace) throws IOException
     {
         final Document doc = elem.getOwnerDocument();
 
@@ -1306,7 +1305,7 @@ public class XMLDoc
      * @throws CloneNotSupportedException
      */
     @Override
-	public Object clone() 
+    public Object clone() 
     {
         XMLDoc clon=new XMLDoc();
         if(m_doc!=null)
@@ -1406,7 +1405,7 @@ public class XMLDoc
      * @return String
      */
     @Override
-	public String toString()
+    public String toString()
     {
         return write2String(2);
     }
@@ -1482,17 +1481,13 @@ public class XMLDoc
             }
             else
             {    
-                final URLConnection urlCon = url.openConnection();
-                urlCon.setDoOutput(true);
-                urlCon.setRequestProperty("Connection", "close");
-                urlCon.setRequestProperty("Content-Type", strContentType);
-
-                write2Stream(urlCon.getOutputStream(), 0, true);
+                URLConnection urlCon = write2HTTPURL(url, strContentType);
                 final JDFParser parser = new JDFParser();
                 final InputStream inStream = urlCon.getInputStream();
-               
+
                 parser.parseStream(inStream); 
                 docResponse = parser.getDocument()==null ? null : new XMLDoc(parser.getDocument());
+                return docResponse;
             }
         }
         catch (IOException ex)
@@ -1500,6 +1495,29 @@ public class XMLDoc
             ex=null;
         }
         return docResponse;
+    }
+
+    /**
+     * @param url
+     * @param strContentType
+     * @return
+     * @throws IOException
+     */
+    public HttpURLConnection write2HTTPURL(final URL url, String strContentType)
+    {
+        try
+        {
+            final HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
+            urlCon.setDoOutput(true);
+            urlCon.setRequestProperty("Connection", "close");
+            urlCon.setRequestProperty("Content-Type", strContentType);
+
+            write2Stream(urlCon.getOutputStream(), 0, true);
+            return urlCon;
+        } 
+        catch (IOException e) {
+            return null;
+        }
     }
 
     /**
@@ -1610,10 +1628,10 @@ public class XMLDoc
         if(_schemaLocation!=null && _schemaLocation.length()!=0)
         {
             final String fileToUrl = UrlUtil.fileToUrl(_schemaLocation, false);
-			String schemaLocation=nsURI+" " + fileToUrl;
-			final KElement root = getRoot();
-			if(root!=null)
-			    root.setAttribute("xs:"+AttributeName.SCHEMALOCATION, schemaLocation, AttributeName.XSI);
+            String schemaLocation=nsURI+" " + fileToUrl;
+            final KElement root = getRoot();
+            if(root!=null)
+                root.setAttribute("xs:"+AttributeName.SCHEMALOCATION, schemaLocation, AttributeName.XSI);
         }
     }
 

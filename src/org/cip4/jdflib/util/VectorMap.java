@@ -121,11 +121,11 @@ public class VectorMap<key,vectorObject> extends HashMap<key,Vector<vectorObject
      */
     public Object getOne(key key, vectorObject singleObject)
     {
-        Vector<vectorObject> c= get(key);
-        if(c==null)
+        Vector<vectorObject> keyVector= get(key);
+        if(keyVector==null)
             return null;
-        int i=c.indexOf(singleObject);
-        return i<0 ? null : c.get(i); 
+        int i=keyVector.indexOf(singleObject);
+        return i<0 ? null : keyVector.get(i); 
     }
     /**
      * get the size of the vector for key

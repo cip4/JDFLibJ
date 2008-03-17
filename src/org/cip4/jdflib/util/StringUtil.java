@@ -130,29 +130,47 @@ public class StringUtil
      * parts (c) Monty Python
      * @return
      */
+    private static String[] strings={
+        "Randomly inserted error",
+        "fooBar",
+        "Snafu",
+        "Bad Karma",
+        "What do you expect from a simulator",
+        "Paper Jam",
+        "Strawberry jam",
+        "Elderberry jam",
+        "Your mother was a hamster and your father smelt of elderberries!",
+        "I'm French! Why do think I have this outrageous accent, you silly king-a?!",
+        "You don't frighten us, English pig-dogs!",
+        "Go and boil your bottom, sons of a silly person.",
+        "I blow my nose at you, so-called Arthur King, you and all your silly English k-nnnnniggets. Thpppppt! Thppt! Thppt!",
+        "I don't wanna talk to you no more, you empty headed animal food trough wiper!",
+        "I fart in your general direction!",
+        "C'est un lapin, lapin de bois.",
+        "Quoi? Un cadeau. What? A present. Oh, un cadeau. Oui, oui. Hurry. What? Let's go. Oh. On y va. Bon magne. Over here...",
+        "Oh. Oh, I see. Running away, eh? You yellow bastards! Come back here and take what's coming to you. I'll bite your legs off!",
+        "You're using coconuts!",
+        "The swallow may fly south with the sun or the house martin or the plover may seek warmer climes in winter, yet these are not strangers to our land?",
+        "Are you suggesting coconuts migrate?",
+        "It's not a question of where he grips it! It's a simple question of weight ratios! A five ounce bird could not carry a one pound coconut.",
+        "Listen. In order to maintain air-speed velocity, a swallow needs to beat its wings forty-three times every second, right?",
+        "Oh, King, eh, very nice. And how d'you get that, eh? By exploiting the workers! By 'anging on to outdated imperialist dogma which perpetuates the economic and social differences in our society. If there's ever going to be any progress with the--",
+        "Oh! Come and see the violence inherent in the system! Help! Help! I'm being repressed!",
+        "Here I am, brain the size of a planet, and they ask me to take you to the bridge. Call that job satisfaction, 'cause I don't.",
+        "Ghastly, isn't it? All the doors on this spaceship have been programmed to have a cheery and sunny disposition.",
+        "whazzap?",
+        "Explain again how sheep's bladders may be employed to prevent earthquakes.",
+        "Pardon me for breathing, which I never do anyway so I don't know why I even bothered to say it. Oh god, I'm so depressed.",
+        "I've got this pain in all the diodes down my left side",
+        "I would like to say that it is a very great pleasure, honour and privilege for me to open this bridge, but I can't because my lying circuits are all out of commission",
+        "Do you want me to sit in the corner and rust, or just fall apart where I'm standing?"
+        
+};
+
     public static String getRandomString()
     {
-        String[] errors={
-                "Randomly inserted error",
-                "fooBar",
-                "Snafu",
-                "Bad Karma",
-                "What do you expect from a simulator",
-                "Paper Jam",
-                "Strawberry jam",
-                "Elderberry jam",
-                "Your mother was a hamster and your father smelt of elderberries!",
-                "I'm French! Why do think I have this outrageous accent, you silly king-a?!",
-                "You don't frighten us, English pig-dogs!",
-                "Go and boil your bottom, sons of a silly person.",
-                "I blow my nose at you, so-called Arthur King, you and all your silly English k-nnnnniggets. Thpppppt! Thppt! Thppt!",
-                "I don't wanna talk to you no more, you empty headed animal food trough wiper!",
-                "I fart in your general direction!",
-                "C'est un lapin, lapin de bois.",
-                "Quoi? Un cadeau. What? A present. Oh, un cadeau. Oui, oui. Hurry. What? Let's go. Oh. On y va. Bon magne. Over here..."
-        };
-        int pos=(int)(errors.length*Math.random()*0.99999);
-        return errors[pos];
+        int pos=(int)(strings.length*Math.random()*0.99999);
+        return strings[pos];
     }
     
     /**

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -663,7 +663,7 @@ Mark References (FoldMark, CIE, …)
         rm.setCenter(new JDFXYPair("0 0"));
         rm.setSeparations(new VString("Cyan Magent Yellow"," "));
         dm=jf.appendDeviceMark();
-        dm.setAttribute("Anchor", "CenterCenter");
+        dm.setAttribute("Anchor", "Center");
 
         doc.write2File(sm_dirTestDataTemp+"generatedObject.jdf", 2, false);
 

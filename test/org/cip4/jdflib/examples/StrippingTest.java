@@ -116,7 +116,7 @@ public class StrippingTest extends JDFTestCaseBase
             sm1_1.setMarkName("CutMark");
             sm1_1.setMarkSide(EnumMarkSide.TwoSidedBackToBack);
             sm1_1.setAttribute("Orientation", "Rotate0");
-            sm1_1.setAttribute("Anchor", "CenterCenter");
+            sm1_1.setAttribute("Anchor", "Center");
             setNextAnchor(sm1_1, null, "BottomRight", "-5 5", null,"Parent");
             sm1_1.appendElement(ElementName.CUTMARK).setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata");
         } 

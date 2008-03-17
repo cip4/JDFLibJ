@@ -135,8 +135,8 @@ public class ContentCreationTest extends PreflightTest
         positionObj=lePart.appendElement("PositionObject");
         positionObj.setAttribute("PageRange", "0");
         //TODO discuss individual positions
-        setNextAnchor(positionObj,null, "CenterCenter",null,null,"Parent",0);
-        positionObj.setAttribute("Anchor", "CenterCenter");
+        setNextAnchor(positionObj,null, "Center",null,null,"Parent",0);
+        positionObj.setAttribute("Anchor", "Center");
         positionObj.setAttribute("PositionPolicy", "Free");
         String id=lePart.appendAnchor(null);
 

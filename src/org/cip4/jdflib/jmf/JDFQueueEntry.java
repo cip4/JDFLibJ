@@ -333,6 +333,18 @@ public class JDFQueueEntry extends JDFAutoQueueEntry
         return ni;
     }
     /**
+     * gets the NodeIdetifier that matches this
+     * @return
+     */
+    public void setIdentifier(NodeIdentifier ni)
+    {
+        if(ni==null)
+            return;
+        setPartMapVector(ni.getPartMapVector());
+        setJobID(ni.getJobID());
+        setJobPartID(ni.getJobPartID());
+    }
+    /**
      * get the next sibling queueentry
      * @return
      */
