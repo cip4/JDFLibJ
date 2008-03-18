@@ -103,6 +103,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.ifaces.ICapabilityElement;
@@ -111,6 +112,7 @@ import org.cip4.jdflib.jmf.JDFMessageService;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
+import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap.EnumAvailability;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
@@ -1740,7 +1742,14 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
                 capMap.put(nam, state.getNamePath());
             }
         }
-        if(EnumValidationLevel.isRequired(level))
+        EnumValidationLevel l2=level;
+        if(e instanceof JDFResource)
+        {
+            if(EnumResStatus.Incomplete.equals(((JDFResource)e).getResStatus(false)))
+                l2 = EnumValidationLevel.incompleteLevel(level);
+        }
+
+        if(EnumValidationLevel.isRequired(l2))
         {
             VString missAts=e.getMissingAttributes(9999999);
             for(int i=0;i<missAts.size();i++)

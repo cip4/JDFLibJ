@@ -508,11 +508,7 @@ public class UrlUtil
      */
     public static boolean isFileOK(File f)
     {
-        if (f != null && !f.isDirectory() && f.canRead())
-        {
-            return true;
-        }
-        return false;
+        return f != null && !f.isDirectory() && f.canRead();
     }
     
     /**

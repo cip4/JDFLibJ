@@ -96,6 +96,14 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumType;
  */
 public class StringUtilTest extends JDFTestCaseBase
 {
+    public void testWipeInvalidXML10Chars()
+    {
+        char[] cs=new char[]{'a',0x7,0x3,'b',0x5};
+        assertEquals(StringUtil.wipeInvalidXML10Chars(new String(cs), null), "ab");
+        assertEquals(StringUtil.wipeInvalidXML10Chars(new String(cs), "_"), "a__b_");
+        assertEquals(StringUtil.wipeInvalidXML10Chars("abc",null),"abc");
+    }
+    
     public void testGetRelativePath()
     {
         File f=new File("./a");
@@ -294,8 +302,11 @@ public class StringUtilTest extends JDFTestCaseBase
         assertTrue(StringUtil.matches("abc",".+"));
         assertTrue(StringUtil.matches("abc",""));
         assertTrue(StringUtil.matches("הbc","..."));
+        assertFalse(StringUtil.matches("הbc","...."));
         assertTrue(StringUtil.matches("הbc",null));
         assertTrue(StringUtil.matches("ה","ה?"));
+        assertTrue(StringUtil.matches("הה","ה{0,2}"));
+        assertFalse(StringUtil.matches("ההה","ה{0,2}"));
         assertTrue(StringUtil.matches("","ה?"));
         assertTrue(StringUtil.matches("12de",JDFConstants.REGEXP_HEXBINARY));
         assertFalse(StringUtil.matches("12d",JDFConstants.REGEXP_HEXBINARY));
@@ -309,7 +320,11 @@ public class StringUtilTest extends JDFTestCaseBase
         assertTrue(StringUtil.matches("a b","a?(( )*b)?"));
         assertTrue(StringUtil.matches("a","a?(( )*b)?"));
         assertTrue(StringUtil.matches("b","a?(( )*b)?"));
+        assertTrue(StringUtil.matches("b a c","((.+ )*((a)|(b))( .+)*)+"));
+        assertTrue(StringUtil.matches("b a c","((.+ )*((a)|(b))( .+)*){1,1}"));
+        assertFalse(StringUtil.matches("d e c","((.+ )*((a)|(b))( .+)*)+"));
         assertFalse(StringUtil.matches("b b","a?(( )*b)?"));
+        assertTrue(StringUtil.matches("MIS_L2-1.3","((.+ )*((MIS_L2-1.3)|(MISCPS_L1-1.3))( .+)*)+"));
 
         assertTrue(StringUtil.matches("a-aB.3@b.c",JDFConstants.REGEXP_EMAIL));
         assertTrue(StringUtil.matches("a@b.c",JDFConstants.REGEXP_EMAIL ));

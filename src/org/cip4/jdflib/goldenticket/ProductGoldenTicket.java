@@ -326,7 +326,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
     {
         initCustomerInfo(null,null,"Art Point","Address Pocketbook");
         theNode.setDescriptiveName("7.5.2   A5 brochure 4c/4c, 4pg Cover, 32 pg Text");
-        JDFNode cover=theNode.addJDFNode(EnumType.Product);
+        JDFNode cover=addJDFNode(theNode,EnumType.Product);
         cover.setDescriptiveName("Address Book Cover");
 
         initMediaIntent(cover,200, EnumSpanCoatings.Glossy);
@@ -336,7 +336,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
         cCover.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
 
 
-        JDFNode body=theNode.addJDFNode(EnumType.Product);
+        JDFNode body=addJDFNode(theNode,EnumType.Product);
         body.setDescriptiveName("Address Book Body");
         body.linkResource(ci, EnumUsage.Input, null);
         initMediaIntent(body,135, EnumSpanCoatings.Coated);
@@ -354,7 +354,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
     {
         initCustomerInfo(null,null,"Heidelberger Druckmaschinen AG","Heidelberg A4 brochure");
         theNode.setDescriptiveName("7.5.5   A4 brochure with spot colors, 4pg Cover 6c/4c, 32 pg Text 4c/4c");
-        JDFNode cover=theNode.addJDFNode(EnumType.Product);
+        JDFNode cover=addJDFNode(theNode,EnumType.Product);
         cover.setDescriptiveName("HD Brochure Cover");
 
         initMediaIntent(cover,200, EnumSpanCoatings.Glossy);
@@ -364,7 +364,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
         cCover.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
 
 
-        JDFNode body=theNode.addJDFNode(EnumType.Product);
+        JDFNode body=addJDFNode(theNode,EnumType.Product);
         body.setDescriptiveName("HD Brochure Body");
     	initColorIntent(body,4,4,null);
         initMediaIntent(body,135, EnumSpanCoatings.Coated);
@@ -377,6 +377,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
         initOutputComponent(theNode,li);
         initDeliveryIntent(5000);
     }
+
 
     public void createWatches() throws Exception
     {

@@ -895,6 +895,60 @@ public class StringUtil
             return false;
         return true;
     }
+    
+    /**
+     * replaces all chars that are not compatible with xml1.0
+     * @param strText the text to check
+     * @param replace the single char string to replace non xml chars with; if null the non-xml char is simply omitted
+     * @return the clean string, may be the same string
+     */
+    public static String wipeInvalidXML10Chars(String strText, String replace)
+    {
+          char[] chars = strText.toCharArray();
+
+          boolean found = false;
+          int n=0;
+          for (int i = 0; i < chars.length; i++)
+          {
+              if(n>0)
+                  chars[i-n]=chars[i];
+              if (!isValidXML10Char(chars[i]))
+              {
+                  if(replace!=null)
+                      chars[i] = replace.charAt(0);
+                  else n++;
+                  
+                  found = true;
+              }
+          }
+
+          if (found)
+          {
+              
+              strText = new String(chars);
+              if(n>0)
+                  strText=strText.substring(0,chars.length-n);
+          }
+
+          return strText;
+    }
+
+    private static boolean isValidXML10Char(final char c)
+    {
+          if ((c >= 0x20) && (c <= 0xD7FF))
+          {
+                return true;
+          }
+          else if ((c == 0x9) || (c == 0xA) || (c == 0xD))
+          {
+                return true;
+          }
+          else if ((c >= 0xE000) && (c <= 0xFFFD))
+          {
+                return true;
+          }
+          return false;
+    }
 
     /**
      * find the last character in strwork that is not in strNotList

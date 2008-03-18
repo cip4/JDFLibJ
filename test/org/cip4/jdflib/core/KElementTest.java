@@ -411,6 +411,8 @@ public class KElementTest extends JDFTestCaseBase
         assertTrue(a3.matchesPath("/Test/a[3]", false));
         assertFalse(a3.matchesPath("/Test/a[@att=\"*\"]", false));
         assertTrue(a.matchesPath("/Test/a[@att=\"*\"]", false));
+        assertTrue(a.matchesPath("/Test/a[@att=\"42\"]", false));
+        assertFalse(a.matchesPath("/Test/a[@att=\"43\"]", false));
         assertTrue(c.matchesPath("/Test/ns:c", false));
         assertTrue(c.matchesPath("/Test/ns:c[1]", false));
         assertTrue(c.matchesPath("/Test/ns:c[@att=\"*\"]", false));

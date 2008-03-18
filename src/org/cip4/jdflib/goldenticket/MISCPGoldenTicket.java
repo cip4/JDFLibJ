@@ -80,7 +80,6 @@ import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoPreview.EnumPreviewFileType;
 import org.cip4.jdflib.auto.JDFAutoPreview.EnumPreviewUsage;
-import org.cip4.jdflib.auto.JDFAutoResourceAudit.EnumReason;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
@@ -369,6 +368,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         JDFComponent outComp=(JDFComponent) theNode.getCreateResource(ElementName.COMPONENT, EnumUsage.Output, 0);
         outComp.setComponentType(EnumComponentType.FinalProduct,EnumComponentType.Sheet);
         outComp.setProductType("Unknown");
+        
         JDFResourceLink rl=theNode.getLink(outComp, EnumUsage.Output);
         if(vParts!=null)
         {
@@ -376,12 +376,17 @@ public class MISCPGoldenTicket extends MISGoldenTicket
             for(int i=0;i<reducedMap.size();i++)
             {
                 final JDFAttributeMap part = reducedMap.elementAt(i);
-                outComp.getCreatePartition(part, partIDKeys);
+                JDFResource partComp=outComp.getCreatePartition(part, partIDKeys);
+                partComp.setDescriptiveName("Description for Component part# "+i);
                 JDFAttributeMap newMap=new JDFAttributeMap(part);
                 newMap.put(AttributeName.CONDITION, "Good");
                 rl.setAmount(sheetAmount, newMap);
                 rl.setMaxAmount(sheetAmount*1.1, newMap);
             }
+        }
+        else
+        {
+            outComp.setDescriptiveName("MIS-CP output Component");
         }
         outComp.appendLayout();
         JDFMedia inMedia=(JDFMedia) theNode.getResource(ElementName.MEDIA, EnumUsage.Input, 0);

@@ -2483,7 +2483,8 @@ public class JDFNode extends JDFElement
         if(ancPool!=null) {
             return ancPool.getPartMapVector();
         }
-        return null;
+        JDFNodeInfo ni=getNodeInfo();
+        return ni==null ? null : ni.getPartMapVector(false);
     }
     /**
      * getActivation

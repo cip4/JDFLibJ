@@ -80,12 +80,15 @@ import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.util.EnumUtil;
@@ -290,6 +293,40 @@ public class BaseGoldenTicket
      */
     public void init()
     {
+        initJDF();
+        initAuditPool(theNode);
+        VElement nodeLinks = getNodeLinks();
+        theStatusCounter.setActiveNode(theNode, null, nodeLinks);
+    }
+
+    /**
+     * 
+     */
+    public void initAuditPool(JDFNode node)
+    {
+        final JDFAuditPool auditPool = node.getCreateAuditPool();
+        JDFAudit a=auditPool.getAudit(-1, EnumAuditType.Created, null, null);
+        if(a==null)
+            a=auditPool.addAudit(EnumAuditType.Created, null);
+    }
+    /**
+     * @param theNode
+     * @param product
+     * @return
+     */
+    protected JDFNode addJDFNode(JDFNode node, EnumType t)
+    {
+        JDFNode newNode=node.addJDFNode(t);
+        newNode.setStatus(EnumNodeStatus.Waiting);
+        initAuditPool(newNode);
+        return newNode;
+    }
+
+    /**
+     * 
+     */
+    protected void initJDF()
+    {
         String icsTag="Base_L"+baseICSLevel+"-"+theVersion.getName();
         theNode.appendAttribute(AttributeName.ICSVERSIONS, icsTag, null, " ", true);
         theNode.setVersion(theVersion);
@@ -300,9 +337,6 @@ public class BaseGoldenTicket
 
         if(!theNode.hasAttribute(AttributeName.COMMENTURL))
             theNode.setCommentURL(UrlUtil.StringToURL("//MyHost/data/Comments.html").toExternalForm());
-        VElement nodeLinks = getNodeLinks();
-        theStatusCounter.setActiveNode(theNode, null, nodeLinks);
-
     }
 
     /**
