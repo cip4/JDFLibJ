@@ -140,6 +140,12 @@ public class StatusCounter
     private EnumDeviceStatus status=null;
     private String statusDetails=null;
     private JDFDate startDate;
+    
+    @Override
+    public String toString()
+    {
+         return "[StatusCounter - counter: "+m_deviceID+"Start date: "+startDate+" "+vLinkAmount+"]";
+    }
 
 
     /**
@@ -179,7 +185,7 @@ public class StatusCounter
         JDFAttributeMap wsMap=null;
         if(m_vPartMap==null && m_Node!=null)
         {
-            m_vPartMap = m_Node.getPartMapVector();
+            m_vPartMap = m_Node.getNodeInfoPartMapVector();
         }
         if(m_vPartMap!=null && m_vPartMap.size()>0)
             wsMap=m_vPartMap.elementAt(0);

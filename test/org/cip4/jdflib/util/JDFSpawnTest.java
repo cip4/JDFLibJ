@@ -816,7 +816,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
             JDFProcessRun pr=(JDFProcessRun) mergedNode.getAuditPool().getAudit(0, EnumAuditType.ProcessRun, null, partMapVector);
             JDFSpawned sp=(JDFSpawned) mergedNode.getAuditPool().getAudit(0, EnumAuditType.Spawned, null, partMapVector);
             JDFMerged me=(JDFMerged) mergedNode.getAuditPool().getAudit(0, EnumAuditType.Merged, null, partMapVector);
-            assertNotNull(pr);
+            assertNotNull("loop "+i,pr);
             assertEquals(sp.getTimeStampDate(), pr.getSubmissionTime());
             assertEquals(me.getTimeStampDate(), pr.getReturnTime());
 

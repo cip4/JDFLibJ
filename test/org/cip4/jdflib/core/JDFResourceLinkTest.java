@@ -272,6 +272,23 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
         rl.setActualAmount(33, null);
         assertEquals(rl.getActualAmount(null),33.,0.1);
      }
+    public void testGetAmountPoolSumDouble()
+    {
+        JDFNode d=new JDFDoc("JDF").getJDFRoot();
+        JDFResource m=d.addResource("Media", EnumUsage.Input);
+        m.addPartition(EnumPartIDKey.SignatureName, "1");
+        JDFResourceLink rl=d.getLink(m, EnumUsage.Input);
+        JDFAttributeMap map=new JDFAttributeMap("SignatureName","1");
+        map.put("Condition", "Good");
+
+        rl.setActualAmount(12,map);
+        map.put("Condition", "Waste");
+        rl.setActualAmount(14,map);
+        VJDFAttributeMap vMap=new VJDFAttributeMap();
+        vMap.add(new JDFAttributeMap("SignatureName","1"));
+        assertEquals(rl.getAmountPoolSumDouble(AttributeName.ACTUALAMOUNT,null),26.,0.1);
+        assertEquals(rl.getAmountPoolSumDouble(AttributeName.ACTUALAMOUNT,vMap),26.,0.1);
+       }
     
     public void testGetAmountPoolVector()
     {

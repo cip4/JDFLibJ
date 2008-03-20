@@ -1221,7 +1221,7 @@ public class JDFResourceLink extends JDFElement
     {
         String s = getProcessUsage();
         // 030502 RP modified to default tx xxx:Input / xxx:Output respectively
-        if (s == null || s.equals(JDFConstants.EMPTYSTRING))
+        if (isWildCard(s))
         {
             // 200602 RP need the string type - don't cycle to and from enum type...
             s = getAttribute(AttributeName.USAGE, null, JDFConstants.EMPTYSTRING);
@@ -1660,8 +1660,30 @@ public class JDFResourceLink extends JDFElement
 
     ////////////////////////////////////////////////////////////////////////////////
 
+    public double getAmountPoolSumDouble(final String attName, final VJDFAttributeMap vPart)
+    {
+
+        VJDFAttributeMap vm=vPart==null ? null : new VJDFAttributeMap(vPart);
+        final JDFResource linkRoot = getLinkRoot();
+        if(linkRoot!=null && vm!=null)
+            vm.reduceMap(linkRoot.getPartIDKeys().getSet());
+        if(vm==null)
+        {
+            vm=new VJDFAttributeMap();
+            vm.add((JDFAttributeMap)null);
+        }
+        double dd=0;
+        for(int j=0;j<vm.size();j++)
+        {
+            double d=getAmountPoolDouble(attName, vm.elementAt(j));
+            if(d>=0)
+                dd+=d;
+        }
+        return dd;
+    }
+
     /**
-     * get the first element AmountPool as a double 
+     * get the exactly matching AmountPool/PartAmount/@AttName as a double 
      * @param attName
      * @param vPart
      * @return double - 
@@ -1697,11 +1719,21 @@ public class JDFResourceLink extends JDFElement
     {
         double d = 0;
         int n = 0;
+        boolean bFound=false;
+        JDFAmountPool ap=getAmountPool();
         while (true) 
         {
-            final String w = getAmountPoolAttribute(attName, null, mPart, n++);
+            final String w = getAmountPoolAttribute(attName, null, mPart, n);
             if (w == null) {
-                return n == 1 ? -1 : d;
+                if(ap==null || ap.getPartAmount(mPart,n)==null)
+                {
+                    return bFound ? d : -1;
+                }
+                else
+                {
+                    n++;
+                    continue;
+                }
             }
             final double dd= StringUtil.parseDouble(w, -1.234567);
             if (dd == -1.234567) 
@@ -1709,6 +1741,8 @@ public class JDFResourceLink extends JDFElement
                 throw new JDFException("JDFResourceLink.getAmountPoolDouble: Attribute "+ attName + " has an invalid value");
             }
             d += dd;
+            bFound=true;
+            n++;
         }
     }
 
