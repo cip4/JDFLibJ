@@ -281,7 +281,10 @@ public class JDFPhaseTime extends JDFAutoPhaseTime
         JDFDate dEnd=getEnd();
         if(dStart==null || dEnd==null)
             return null;
-        return new JDFDuration((int)((dEnd.getTimeInMillis()-dStart.getTimeInMillis())/1000));
+        int dur = (int)((dEnd.getTimeInMillis()-dStart.getTimeInMillis())/1000);
+        if(dur<0)
+            dur=0;
+        return new JDFDuration(dur);
     }
 
     /**

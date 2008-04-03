@@ -152,7 +152,7 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
         fs0.setURL(StringUtil.uncToUrl(sm_dirTestData+File.separator+"test.icc",true));
         JDFRunList rl=(JDFRunList)n.addResource(ElementName.RUNLIST, null, EnumUsage.Input, null, null, null, null);
         rl.addPDF(StringUtil.uncToUrl(sm_dirTestData+File.separator+"url1.pdf",false), 0, -1);
-        Multipart m=MimeUtil.buildMimePackage(d1,doc);
+        Multipart m=MimeUtil.buildMimePackage(d1, doc, true);
         
         JDFDoc[] d2=MimeUtil.getJMFSubmission(m);
         assertNotNull(d2);

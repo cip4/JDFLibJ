@@ -128,6 +128,25 @@ public class MimeUtil
 {
 
     /**
+     * helper class to set mime details
+     * @author prosirai
+     *
+     */
+    public static class MIMEDetails
+    {
+        /**
+         * size of http chunks to be written, if <=0 no chunks
+         */
+        public int chunkSize=defaultChunkSize;
+        public static int defaultChunkSize=10000;
+        /**
+         * transfer encoding used when streaming body parts, 
+         * May be null to specify java default behavior
+         */
+        public static String defaultTransferEncoding=BINARY;
+        public String transferEncoding=defaultTransferEncoding;
+    }
+    /**
      * data source for binary files
      * 
      * @author prosirai
@@ -196,6 +215,10 @@ public class MimeUtil
     public static final String MULTIPART_RELATED = "multipart/related";
     public static final String POST = "POST";
     public static final String GET = "GET";
+    public static final String CONTENT_TRANSFER_ENCODING="Content-Transfer-Encoding"; 
+    public static final String BASE64= "base64";
+    public static final String BINARY= "binary";
+
     private static HashMap<String,String> extensionMap=null;
 
     //private static Logger log = Logger.getLogger(MimeUtil.class);
@@ -544,21 +567,21 @@ public class MimeUtil
         if(extensionMap==null)
         {
             extensionMap=new HashMap<String, String>();
-            
+
             extensionMap.put("jdf", VND_JDF);
-            
+
             extensionMap.put("jmf", VND_JMF);
- 
+
             extensionMap.put("xml", TEXT_XML);
             extensionMap.put("xsl", TEXT_XML);
             extensionMap.put("xsd", TEXT_XML);
-            
+
             extensionMap.put("txt", TEXT_PLAIN);
 
             extensionMap.put("mjm", MULTIPART_RELATED);
             extensionMap.put("mjd", MULTIPART_RELATED);
             extensionMap.put("mim", MULTIPART_RELATED);
-            
+
         }
     }
 
@@ -595,7 +618,13 @@ public class MimeUtil
 //  throws MessagingException {
 //  return message.isMimeType("multipart/*");		
 //  }
-
+    /**
+     * @deprecated use 3 parameter version
+     */
+    static public Multipart buildMimePackage(JDFDoc docJMF, JDFDoc docJDF)  
+    {
+        return buildMimePackage(docJMF, docJDF, true);
+    }
     /**
      * build a MIME package that contains all references in all FileSpecs of a given JDFDoc
      * the doc is modified so that all URLs are cids
@@ -603,10 +632,11 @@ public class MimeUtil
      * @param docJMF the JDFDoc representation of the JMF that references the jdf to package,
      * if null only the jdf is packaged note that the URL of docJDF must already be specified as a CID
      * @param docJDF the JDFDoc representation of the JDF to package
+     * @param extendReferenced if true, also package any further reeferenced files
      * 
      * @return a Message representing the resulting MIME package, null if an error occured
      */
-    static public Multipart buildMimePackage(JDFDoc docJMF, JDFDoc docJDF)  
+    static public Multipart buildMimePackage(JDFDoc docJMF, JDFDoc docJDF, boolean extendReferenced)  
     {
         // Create a MIME package
         Message message = new MimeMessage((Session)null);
@@ -615,13 +645,13 @@ public class MimeUtil
         String cid = null;
         if (docJDF != null)
         {
-			String originalFileName = docJDF.getOriginalFileName();
-			if (KElement.isWildCard(originalFileName))
-				originalFileName = "TheJDF.jdf";
+            String originalFileName = docJDF.getOriginalFileName();
+            if (KElement.isWildCard(originalFileName))
+                originalFileName = "TheJDF.jdf";
 
-			cid = urlToCid(originalFileName);
+            cid = urlToCid(originalFileName);
         }
-        
+
         if(docJMF!=null && cid!=null)
         {
             KElement e=docJMF.getRoot();
@@ -632,7 +662,12 @@ public class MimeUtil
             updateXMLMultipart(multipart,docJMF,null);
         }
 
-        extendMultipart(multipart, docJDF, cid);
+        if(extendReferenced)
+            extendMultipart(multipart, docJDF, cid);
+        else
+            updateXMLMultipart(multipart, docJDF, cid);
+
+
         // Put parts in message
         try
         {
@@ -813,8 +848,8 @@ public class MimeUtil
             final KElement root = xmlDoc.getRoot();
             cid="CID_"+((root instanceof JDFNode && root.hasAttribute(AttributeName.ID)) ? 
                     ((JDFNode)root).getID() : 
-                    JDFElement.uniqueID(0));
-           
+                        JDFElement.uniqueID(0));
+
         }
 
         BodyPart messageBodyPart=getCreatePartByCID(multipart, cid);
@@ -886,10 +921,32 @@ public class MimeUtil
      */
     public static HttpURLConnection writeToURL(Multipart mp, String strUrl) throws IOException, MessagingException 
     {
+        return writeToURL(mp, strUrl, null);
+    }
+
+    /**
+     * write a Multipart to an output URL 
+     * File: and http: are currently supported
+     * Use HttpURLConnection.getInputStream() to retrieve the http response
+     * 
+     * @param mp the mime MultiPart to write
+     * @param strUrl the URL to write to
+     * 
+     * @return {@link HttpURLConnection} the opened http connection, null in case of error or file
+     * 
+     * @throws IOException 
+     * @throws MessagingException 
+     */
+
+    public static HttpURLConnection writeToURL(Multipart mp, String strUrl, MIMEDetails ms) throws IOException, MessagingException 
+    {
+        if(ms==null)
+            ms=new MIMEDetails();
+
         URL url=new URL(strUrl);
         if("File".equalsIgnoreCase(url.getProtocol()))
         {
-            writeToFile(mp, UrlUtil.urlToFile(strUrl).getAbsolutePath());
+            writeToFile(mp, UrlUtil.urlToFile(strUrl).getAbsolutePath(),ms);
             return null;
         }
         else // assume http
@@ -902,16 +959,16 @@ public class MimeUtil
             contentType=StringUtil.token(contentType, 0, "\n");
             httpURLconnection.setRequestProperty(CONTENT_TYPE,contentType );
             httpURLconnection.setDoOutput(true);
-
-            httpURLconnection.setChunkedStreamingMode(10000);
+            if(ms.chunkSize>0)
+                httpURLconnection.setChunkedStreamingMode(ms.chunkSize);
             final OutputStream out= httpURLconnection.getOutputStream();
 
-            writeToStream(mp, out);
-            
+            writeToStream(mp, out,ms);
+
             return httpURLconnection;   
         }
     }    
-    
+
     /**
      * submit  a multipart file to a queue
      * @param mp
@@ -920,10 +977,10 @@ public class MimeUtil
      * @throws IOException
      * @throws MessagingException
      */
-    public static JDFDoc writeToQueue(JDFDoc docJMF, JDFDoc docJDF, String strUrl) throws IOException, MessagingException
+    public static JDFDoc writeToQueue(JDFDoc docJMF, JDFDoc docJDF, String strUrl, MIMEDetails urlDet) throws IOException, MessagingException
     {
-        Multipart mp=buildMimePackage(docJMF, docJDF);
-        HttpURLConnection uc=writeToURL(mp, strUrl);
+        Multipart mp=buildMimePackage(docJMF, docJDF, true);
+        HttpURLConnection uc=writeToURL(mp, strUrl, urlDet);
         if(uc==null)
             return null; // file
         int rc=uc.getResponseCode();
@@ -949,11 +1006,21 @@ public class MimeUtil
                 return d;
         }       
         JDFCommand c=docJMF.getJMFRoot().getCommand(0);
-       final JDFJMF respJMF = c.createResponse();
-       JDFResponse r=respJMF.getResponse(0);
-       r.setErrorText("Invalid http response - RC="+rc);
-       r.setReturnCode(3); // TODO correct rcs
-       return respJMF.getOwnerDocument_JDFElement();       
+        final JDFJMF respJMF = c.createResponse();
+        JDFResponse r=respJMF.getResponse(0);
+        r.setErrorText("Invalid http response - RC="+rc);
+        r.setReturnCode(3); // TODO correct rcs
+        return respJMF.getOwnerDocument_JDFElement();       
+    }
+    /**
+     * @deprecated
+     * @param m
+     * @param fileName
+     * @return
+     */
+    public static File writeToFile(Multipart m, String fileName) 
+    {
+        return writeToFile(m, fileName, null);
     }
     /**
      * write a Multipart to an output file
@@ -964,13 +1031,13 @@ public class MimeUtil
      * @throws IOException
      * @throws MessagingException
      */
-    public static File writeToFile(Multipart m, String fileName) 
+    public static File writeToFile(Multipart m, String fileName, MIMEDetails md) 
     {
         final File file = new File(fileName);
         try
         {
             FileOutputStream fos = new FileOutputStream(file);
-            writeToStream(m, fos);
+            writeToStream(m, fos, md);
             return file;
         }
         catch (FileNotFoundException e)
@@ -988,23 +1055,42 @@ public class MimeUtil
     }
 
     /**
-     * write a Multipart to a Stream
-     * 
-     * @param mp the mime MultiPart to write
-     * @param outStream the existing output stream, 
-     * note that a buffered output stream is created in case outStream is unbuffered
-     * 
+     * @deprecated
+     * @param m
+     * @param outStream
      * @throws IOException
      * @throws MessagingException
      */
     public static void writeToStream(Multipart m, OutputStream outStream) throws IOException, MessagingException 
     {
+        writeToStream(m, outStream, null);
+    }
+    /**
+     * write a Multipart to a Stream
+     * @param outStream the existing output stream, 
+     * note that a buffered output stream is created in case outStream is unbuffered
+     * @param md TODO
+     * @param mp the mime MultiPart to write
+     * 
+     * @throws IOException
+     * @throws MessagingException
+     */
+    public static void writeToStream(Multipart m, OutputStream outStream, MIMEDetails md) throws IOException, MessagingException 
+    {
         MimeMessage mm=new MimeMessage((Session)null);
         mm.setContent(m);
-        
         // buffers are good - the encoders decoders otherwise hit stream read/write once per byte...
         if(!(outStream instanceof BufferedOutputStream))
             outStream=new BufferedOutputStream(outStream);
+        if(md!=null && md.transferEncoding!=null)
+        {
+            BodyPart bp[]=getBodyParts(m);
+            int siz =bp==null ? 0 : bp.length;
+            for(int i=0;i<siz;i++)
+            {
+                bp[i].setHeader(CONTENT_TRANSFER_ENCODING, md.transferEncoding);
+            }
+        }
         mm.writeTo(outStream);
         outStream.flush();
         outStream.close();
