@@ -79,6 +79,7 @@ package org.cip4.jdflib.core;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
 
@@ -1601,7 +1602,7 @@ public class JDFResourceLink extends JDFElement
      * @throws JDFException when called directly on a PartAmount
      * @since 060630
      */
-    public void setAmountPoolAttribute(final String attrib, final String value, final String nameSpaceURI, final VJDFAttributeMap vPart)
+    public void setAmountPoolAttribute(final String attrib, final String value, final String nameSpaceURI, VJDFAttributeMap vPart)
     {
         // ideally the method would be hidden in PartAmount
         if ((vPart == null) || (vPart.isEmpty()) || vPart.size()==1&&vPart.elementAt(0).size()==0)
@@ -1660,13 +1661,20 @@ public class JDFResourceLink extends JDFElement
 
     ////////////////////////////////////////////////////////////////////////////////
 
-    public double getAmountPoolSumDouble(final String attName, final VJDFAttributeMap vPart)
+    public double getAmountPoolSumDouble(final String attName, VJDFAttributeMap vPart)
     {
-
+        if(vPart==null)
+            vPart=getPartMapVector();
+        if(hasAttribute(attName))
+            return getRealAttribute(attName,null,0);
         VJDFAttributeMap vm=vPart==null ? null : new VJDFAttributeMap(vPart);
         final JDFResource linkRoot = getLinkRoot();
         if(linkRoot!=null && vm!=null)
-            vm.reduceMap(linkRoot.getPartIDKeys().getSet());
+        {
+            final Set set = linkRoot.getPartIDKeys().getSet();
+            set.add(AttributeName.CONDITION); // retain good / waste
+            vm.reduceMap(set);
+        }
         if(vm==null)
         {
             vm=new VJDFAttributeMap();
@@ -1724,7 +1732,7 @@ public class JDFResourceLink extends JDFElement
         while (true) 
         {
             final String w = getAmountPoolAttribute(attName, null, mPart, n);
-            if (w == null) {
+            if (isWildCard(w)) {
                 if(ap==null || ap.getPartAmount(mPart,n)==null)
                 {
                     return bFound ? d : -1;
@@ -2531,6 +2539,16 @@ public class JDFResourceLink extends JDFElement
         bMatch = bMatch || namedResLink.equals(getNodeName());
         bMatch = bMatch || namedResLink.equals(getrRef());
         bMatch = bMatch || namedResLink.equals(getAttribute(AttributeName.USAGE));
+        if(!bMatch && StringUtil.token(namedResLink, 0, JDFConstants.COLON).equals(getLinkedResourceName()))
+        {
+            VElement v=getTargetVector(0);
+            int siz = v==null ? 0 : v.size();
+            for(int i=0;i<siz;i++)
+            {
+                if(((JDFResource)v.elementAt(i)).matchesString(namedResLink))
+                return true;
+            }
+        }
         return bMatch;
     }
 }

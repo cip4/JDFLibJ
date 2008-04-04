@@ -103,11 +103,13 @@ public class StatusCounterTest extends JDFTestCaseBase
     {
         d = creatXMDoc();
         n = d.getJDFRoot();
-        sc = new StatusCounter(n,null,null);
+        xpMedia = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", null, null, 0);
+        JDFResourceLink rlxp=n.getLink(xpMedia, null);
+       rlxp.setAmount(100, null);
+       sc = new StatusCounter(n,null,null);
         deviceID = "Status-counter-TestDevice";
         sc.setDeviceID(deviceID);
-        xpMedia = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", null, null, 0);
-        resID = xpMedia.getID();
+         resID = xpMedia.getID();
         sc.setFirstRefID(resID);
         sc.addPhase(resID, 200, 0);
 
@@ -144,11 +146,11 @@ public class StatusCounterTest extends JDFTestCaseBase
             jp=sig.getDeviceInfo(0).getJobPhase(0);
             assertEquals("multiple setPhase calls do not modify",jp.getAmount(), 200,0);
             assertEquals("multiple setPhase calls do not modify: "+loop,rlXM.getActualAmount(new JDFAttributeMap("Condition","Good")), 200,0);
+            assertEquals("% "+loop,jp.getPercentCompleted(),200.0,0);
             sc.addPhase(resID, 0, 100);
             assertEquals(""+loop,jp.getWaste(), loop*100,0);
             assertEquals("multiple setPhase calls do Stack: "+loop,rlXM.getActualAmount(new JDFAttributeMap("Condition","Waste")), 100*loop,0);
-            
-        }
+         }
         sc.setWorkType(EnumWorkType.Alteration);
         bChanged=sc.setPhase(EnumNodeStatus.InProgress, "ii", EnumDeviceStatus.Running, "r");
         assertTrue(bChanged);

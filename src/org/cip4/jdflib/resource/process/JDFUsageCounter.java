@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -38,7 +38,7 @@
  *
  * Usage of this software in commercial products is subject to restrictions. For
  * details please consult info@cip4.org.
-  *
+ *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -206,8 +206,8 @@ public class JDFUsageCounter extends JDFAutoUsageCounter
         public static final EnumCounterType Clicks = new EnumCounterType("Clicks");
         public static final EnumCounterType pt = new EnumCounterType("pt");
     }     
-    
-    
+
+
     /* ---------------------------------------------------------------------
     Methods for Attribute CounterTypes
     --------------------------------------------------------------------- */
@@ -215,30 +215,55 @@ public class JDFUsageCounter extends JDFAutoUsageCounter
      * (5) set attribute CounterTypes
      * @param enumVar: the enumVar to set the attribute to
      */
-   public void setCounterTypes(EnumCounterType enumVar)
-   {
-       setAttribute(AttributeName.COUNTERTYPES, enumVar.getName(), null);
-   }
-   
-   /**
-    * (5) set attribute CounterTypes
-    * @param enumVar: the enumVar to set the attribute to
-    */
-  public void setCounterTypes(Vector vVar)
-  {
-      final String s=StringUtil.setvString(vVar);
-      setAttribute(AttributeName.COUNTERTYPES, s, null);
-  }
+    public void setCounterTypes(EnumCounterType enumVar)
+    {
+        setAttribute(AttributeName.COUNTERTYPES, enumVar.getName(), null);
+    }
+
+    /**
+     * (5) set attribute CounterTypes
+     * @param enumVar: the enumVar to set the attribute to
+     */
+    public void setCounterTypes(Vector vVar)
+    {
+        final String s=StringUtil.setvString(vVar);
+        setAttribute(AttributeName.COUNTERTYPES, s, null);
+    }
 
 
 
     /**
-      * (9) get attribute Scope
-      * @return the value of the attribute
-      */
+     * (9) get attribute Scope
+     * @return the value of the attribute
+     */
     public Vector getEnumCounterTypes()
     {        
         return getEnumerationsAttribute(AttributeName.COUNTERTYPES, null, EnumCounterType.Auxiliary, false);
     }
-    
+
+
+    /**
+     * also checks for matchin counterID or CounteType mangled with "_", e.g. 
+     * UsageCounter:ID_CounterA
+     * UsageCounter:Black_SingleSided
+     * etc.
+     */
+    @Override
+    public boolean matchesString(String namedResLink)
+    {
+        if(namedResLink==null)
+            return false;
+        final String counterID = getCounterID();
+        if(!isWildCard(counterID))
+        {
+            String idString=getLocalName()+":"+counterID;
+            if(idString.equals(namedResLink))
+                return true;
+        }
+        String ct=StringUtil.setvString(getCounterTypes(), "_", null, null);
+        if(!isWildCard(ct) && namedResLink.equals(getLocalName()+":"+ct))
+            return true;
+        return super.matchesString(namedResLink);
+    }
+
 }

@@ -274,11 +274,12 @@ public class BaseGoldenTicket
      */
     protected void finalize()
     {
-        int siz =amountLinks==null ? 0 : amountLinks.size();
-        for(int i=0;i<siz;i++)
-        {
-            theStatusCounter.setResourceAudit(amountLinks.elementAt(i), EnumReason.ProcessResult);
-        }
+        // handled by statuscounter
+//        int siz =amountLinks==null ? 0 : amountLinks.size();
+//        for(int i=0;i<siz;i++)
+//        {
+//            theStatusCounter.setResourceAudit(amountLinks.elementAt(i), EnumReason.ProcessResult);
+//        }
     }
     protected void setVersion()
     {

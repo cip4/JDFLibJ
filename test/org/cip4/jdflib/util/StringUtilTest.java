@@ -103,7 +103,7 @@ public class StringUtilTest extends JDFTestCaseBase
         assertEquals(StringUtil.wipeInvalidXML10Chars(new String(cs), "_"), "a__b_");
         assertEquals(StringUtil.wipeInvalidXML10Chars("abc",null),"abc");
     }
-    
+
     public void testGetRelativePath()
     {
         File f=new File("./a");
@@ -433,6 +433,12 @@ public class StringUtilTest extends JDFTestCaseBase
         assertEquals(StringUtil.parseDouble(s,0),-123.450,0.);
         assertTrue(StringUtil.isNumber(s));
         s="-123.45a";
+        assertEquals(StringUtil.parseDouble(s,0.),0.,0.);
+        assertFalse(StringUtil.isNumber(s));
+        s="";
+        assertEquals(StringUtil.parseDouble(s,0.),0.,0.);
+        assertFalse(StringUtil.isNumber(s));
+        s=null;
         assertEquals(StringUtil.parseDouble(s,0.),0.,0.);
         assertFalse(StringUtil.isNumber(s));
     }

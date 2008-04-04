@@ -118,7 +118,7 @@ public class StringUtil
      * @deprecated use {@link UrlUtil}.m_URIEscape
      */
     @Deprecated
-	public static final String m_URIEscape = UrlUtil.m_URIEscape;
+    public static final String m_URIEscape = UrlUtil.m_URIEscape;
 
 
 //  ****************************************    Methods   ******************************************
@@ -164,15 +164,15 @@ public class StringUtil
         "I've got this pain in all the diodes down my left side",
         "I would like to say that it is a very great pleasure, honour and privilege for me to open this bridge, but I can't because my lying circuits are all out of commission",
         "Do you want me to sit in the corner and rust, or just fall apart where I'm standing?"
-        
-};
+
+    };
 
     public static String getRandomString()
     {
         int pos=(int)(strings.length*Math.random()*0.99999);
         return strings[pos];
     }
-    
+
     /**
      * Returns a string with deleted whitespaces near 'delim'
      * and from the both ends of the string (if they were there)<br>
@@ -239,7 +239,7 @@ public class StringUtil
         }
         return sprintf(format, vObj);
     }   
-    
+
 
 
     /**
@@ -534,16 +534,16 @@ public class StringUtil
             return null; // null bleibt null
         if(delim==null)
             delim=JDFConstants.BLANK;
-        
+
         final int pos=delim.length()==1 ? strWork.indexOf(delim) : 0;
         if(pos<0) // speed up incase we only have one entry
         {
             return (index==-1 || index==0) ? strWork : null;
         }
-        
+
         if(index<0)
         {
-             VString v = StringUtil.tokenize(strWork, delim, false);            
+            VString v = StringUtil.tokenize(strWork, delim, false);            
             index=v.size()+index;
             if(index<0)
                 return null;       
@@ -623,7 +623,7 @@ public class StringUtil
 
         return b.toString();
     }
- 
+
     /**
      * replace a string in a given String
      * <p>
@@ -672,7 +672,7 @@ public class StringUtil
      * @deprecated use URLUtil.extension
      */
     @Deprecated
-	public static String extension(String pathName)
+    public static String extension(String pathName)
     {
         return UrlUtil.extension(pathName);
     }
@@ -708,7 +708,7 @@ public class StringUtil
      * @return String
      */
     @Deprecated
-	public static String xmlNameSpace(String strWork)
+    public static String xmlNameSpace(String strWork)
     {
         return KElement.xmlnsPrefix(strWork);
     }
@@ -791,7 +791,7 @@ public class StringUtil
             return false;
         return isNMTOKEN(strWork);
     }
-    
+
     /**
      * return true if d1 and d2 are within a range of epsilon
      * or close enough to be serialized identically
@@ -807,7 +807,7 @@ public class StringUtil
             return true;
         if(d1!=0 && Math.abs((d2/d1)-1.0)<JDFBaseDataTypes.EPSILON)
             return true;
-        
+
         return false;
     }
     /**
@@ -832,7 +832,7 @@ public class StringUtil
      * @deprecated 060309 use isNMTOKENS(strWork,false)
      */    
     @Deprecated
-	public static boolean isNMTOKENS(String strWork)
+    public static boolean isNMTOKENS(String strWork)
     {
         return isNMTOKENS(strWork,false);
     }
@@ -895,7 +895,7 @@ public class StringUtil
             return false;
         return true;
     }
-    
+
     /**
      * replaces all chars that are not compatible with xml1.0
      * @param strText the text to check
@@ -904,50 +904,50 @@ public class StringUtil
      */
     public static String wipeInvalidXML10Chars(String strText, String replace)
     {
-          char[] chars = strText.toCharArray();
+        char[] chars = strText.toCharArray();
 
-          boolean found = false;
-          int n=0;
-          for (int i = 0; i < chars.length; i++)
-          {
-              if(n>0)
-                  chars[i-n]=chars[i];
-              if (!isValidXML10Char(chars[i]))
-              {
-                  if(replace!=null)
-                      chars[i] = replace.charAt(0);
-                  else n++;
-                  
-                  found = true;
-              }
-          }
+        boolean found = false;
+        int n=0;
+        for (int i = 0; i < chars.length; i++)
+        {
+            if(n>0)
+                chars[i-n]=chars[i];
+            if (!isValidXML10Char(chars[i]))
+            {
+                if(replace!=null)
+                    chars[i] = replace.charAt(0);
+                else n++;
 
-          if (found)
-          {
-              
-              strText = new String(chars);
-              if(n>0)
-                  strText=strText.substring(0,chars.length-n);
-          }
+                found = true;
+            }
+        }
 
-          return strText;
+        if (found)
+        {
+
+            strText = new String(chars);
+            if(n>0)
+                strText=strText.substring(0,chars.length-n);
+        }
+
+        return strText;
     }
 
     private static boolean isValidXML10Char(final char c)
     {
-          if ((c >= 0x20) && (c <= 0xD7FF))
-          {
-                return true;
-          }
-          else if ((c == 0x9) || (c == 0xA) || (c == 0xD))
-          {
-                return true;
-          }
-          else if ((c >= 0xE000) && (c <= 0xFFFD))
-          {
-                return true;
-          }
-          return false;
+        if ((c >= 0x20) && (c <= 0xD7FF))
+        {
+            return true;
+        }
+        else if ((c == 0x9) || (c == 0xA) || (c == 0xD))
+        {
+            return true;
+        }
+        else if ((c >= 0xE000) && (c <= 0xFFFD))
+        {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -1028,7 +1028,7 @@ public class StringUtil
      * @deprecated 060420 use hasToken(strWork, token, delim, 0)
      */
     @Deprecated
-	public static boolean hasToken(String strWork, String typ, String delim)
+    public static boolean hasToken(String strWork, String typ, String delim)
     {
         return hasToken(strWork,typ,delim,0);
     }
@@ -1568,7 +1568,7 @@ public class StringUtil
      * @return String - the unicode string representation of the utf8 bytes assigned to this, null if an error occurrred
      */
     @Deprecated
-	public static String vStringToString(VString vs)
+    public static String vStringToString(VString vs)
     {
         return StringUtil.setvString(vs," ",null,null);
     }
@@ -1578,9 +1578,10 @@ public class StringUtil
      * @param s the string to parse
      * @param def the default to return in case of error
      * @return the parsed double of s
+     * @since 080404 handles "" gracefully
      */
     public static double parseDouble(String s, double def){
-        if(s==null)
+        if(KElement.isWildCard(s))
             return def;
         double d=def;
         s=s.trim();
@@ -1603,9 +1604,10 @@ public class StringUtil
      * @param s the string to parse
      * @param def the default to return in case of error
      * @return the parsed double of s
+     * @since 080404 handles "" gracefully
      */
     public static boolean parseBoolean(String s, boolean def){
-        if(s==null)
+        if(KElement.isWildCard(s))
             return def;
         s=s.trim().toLowerCase();
         if("false".equals(s))
@@ -1620,10 +1622,11 @@ public class StringUtil
      * @param s the string to parse
      * @param def the default to return in case of error
      * @return the parsed double of s
+     * @since 080404 handles "" gracefully
      */
     public static int parseInt(String s, int def)
     {
-        if(s==null)
+        if(KElement.isWildCard(s))
             return def;
         int i=def;
         s=s.trim();
@@ -1675,7 +1678,7 @@ public class StringUtil
      * @deprecated use UrlUtil.isWindowsLocalPath(pathName);
      */
     @Deprecated
-	public static boolean isWindowsLocalPath(String pathName)
+    public static boolean isWindowsLocalPath(String pathName)
     {
         return UrlUtil.isWindowsLocalPath(pathName);
 
@@ -1686,7 +1689,7 @@ public class StringUtil
      * @deprecated use URLUtil.isUNC(pathName)
      */
     @Deprecated
-	public static boolean isUNC(String pathName)
+    public static boolean isUNC(String pathName)
     {
         return UrlUtil.isUNC(pathName);
     }
@@ -1961,7 +1964,7 @@ public class StringUtil
      * @deprecated use getRelativeURL(File f, File fCWD, boolean bEscape128)
      */
     @Deprecated
-	public static String getRelativeURL(File f, File baseDir)
+    public static String getRelativeURL(File f, File baseDir)
     {
         return UrlUtil.getRelativeURL(f, baseDir, true);
     }
@@ -1975,7 +1978,7 @@ public class StringUtil
      *@deprecated use URLUtil.getRelativeURL
      */
     @Deprecated
-	public static String getRelativeURL(File f, File baseDir, boolean bEscape128)
+    public static String getRelativeURL(File f, File baseDir, boolean bEscape128)
     {
         return UrlUtil.getRelativeURL(f, baseDir, bEscape128);
     }
@@ -1990,7 +1993,7 @@ public class StringUtil
      * @deprecated use URLUtil.getRelativePath(f, fCWD);
      */
     @Deprecated
-	public static String getRelativePath(File f, File fCWD)
+    public static String getRelativePath(File f, File fCWD)
     {
         return UrlUtil.getRelativePath(f, fCWD);        
     }
@@ -2039,7 +2042,7 @@ public class StringUtil
      * @deprecated use UrlUtil.fileToUrl(f, b);
      */
     @Deprecated
-	public static String fileToUrl(File f, boolean b)
+    public static String fileToUrl(File f, boolean b)
     {
         return UrlUtil.fileToUrl(f, b);
     }
@@ -2069,7 +2072,7 @@ public class StringUtil
         }
         return str;
     }
-    
+
     /**
      * returns a new string that has all characters stripped from work that are not in keepChars
      * @param work
@@ -2085,7 +2088,7 @@ public class StringUtil
         {
             if(keepChars.indexOf(work.charAt(i))>=0)
                 b.append(work.charAt(i));
-            
+
         }
         return b.length()>0 ? b.toString() : null;
     }

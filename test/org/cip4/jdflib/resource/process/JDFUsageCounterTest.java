@@ -4,7 +4,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -114,7 +114,7 @@ public class JDFUsageCounterTest extends JDFTestCaseBase
         JDFAuditPool ap=root.getCreateAuditPool();
         JDFResourceAudit ra=(JDFResourceAudit) ap.addAudit(EnumAuditType.ResourceAudit, null);
         ra.updateLink(rl);
-        
+
         JDFUsageCounter uc2=(JDFUsageCounter) root.appendMatchingResource(ElementName.USAGECOUNTER, EnumProcessUsage.AnyInput, null);
         uc2.setCounterID("c2");
         uc2.setScope(EnumScope.Job);
@@ -126,8 +126,8 @@ public class JDFUsageCounterTest extends JDFTestCaseBase
         ra=(JDFResourceAudit) ap.addAudit(EnumAuditType.ResourceAudit, null);
         ra.updateLink(rl);
 
-        
-        
+
+
         JDFUsageCounter uc3=(JDFUsageCounter) root.appendMatchingResource(ElementName.USAGECOUNTER, EnumProcessUsage.AnyInput, null);
         uc3.setCounterID("c3");
         uc3.setScope(EnumScope.Job);
@@ -149,12 +149,26 @@ public class JDFUsageCounterTest extends JDFTestCaseBase
         rl.setActualAmount(40, null); 
         ra=(JDFResourceAudit) ap.addAudit(EnumAuditType.ResourceAudit, null);
         ra.updateLink(rl);
-
-        
- 
         assertTrue(root.isValid(EnumValidationLevel.Incomplete));
-        
+
         doc.write2File(sm_dirTestDataTemp+"UCList.jdf", 2, false);
-        
+    }
+
+    /////////////////////////////////////////////////////////////////////////////
+    
+    public final void testMatchesString() throws Exception
+    {
+        JDFUsageCounter c=(JDFUsageCounter)new JDFDoc(ElementName.USAGECOUNTER).getRoot();
+        assertTrue(c.matchesString(ElementName.USAGECOUNTER));
+        assertFalse(c.matchesString(ElementName.USAGECOUNTER+":"));
+        c.setCounterTypes(new VString("Black SingleSided",null));
+        assertFalse(c.matchesString(ElementName.USAGECOUNTER+":Black"));
+        assertTrue(c.matchesString(ElementName.USAGECOUNTER+":Black_SingleSided"));
+        assertTrue(c.matchesString(ElementName.USAGECOUNTER));
+        c.setCounterID("CID");
+        assertTrue(c.matchesString(ElementName.USAGECOUNTER+":CID"));
+        assertFalse(c.matchesString(ElementName.USAGECOUNTER+":CID2"));
+        assertFalse(c.matchesString(ElementName.USAGECOUNTER+":CI"));
+        assertFalse(c.matchesString(ElementName.USAGECOUNTER+":cid"));
     }
 }

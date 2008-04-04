@@ -83,7 +83,6 @@ import java.io.File;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 
 import javax.mail.BodyPart;
 
@@ -173,7 +172,7 @@ public class JDFDoc extends XMLDoc
         {
             root = root.getChildByTagName(rootName, JDFElement.getSchemaURL(), 0, null, true, false);
         }
-        
+
         return root;
     }
 
@@ -184,22 +183,22 @@ public class JDFDoc extends XMLDoc
      * @throws CloneNotSupportedException
      */
     @Override
-	public Object clone() 
+    public Object clone() 
     {
         return new JDFDoc(((XMLDoc)super.clone()).getMemberDocument());
     }
-    
+
     /**
      * toString
      *
      * @return String
      */
     @Override
-	public String toString()
+    public String toString()
     {
         return "JDFDoc: " + super.toString();
     }
-    
+
     /**
      * CreateJDF
      *
@@ -208,7 +207,7 @@ public class JDFDoc extends XMLDoc
      * @return JDFDoc
      */
     @Deprecated
-	public static JDFDoc createJDF(String jdfPath)
+    public static JDFDoc createJDF(String jdfPath)
     {
         final JDFDoc new_doc = new JDFDoc();
         final JDFNode root = (JDFNode) new_doc.createElement(ElementName.JDF);
@@ -218,26 +217,26 @@ public class JDFDoc extends XMLDoc
         new_doc.appendChild(root);
 
         new_doc.write2File(jdfPath, 0, true);
-        
+
         return new_doc;
     }
 
- 
-   /**
-    * returns a JDFNode by its id attribute
-    *
-    * @param id the ID parameter of the JDF node
-    * @return JDFNode - the corresponding JDF Node, null if no such node exists
-    * @deprecated use getRoot().getTarget(id, AttributeName.ID) and cast.
-    *
-    */
+
+    /**
+     * returns a JDFNode by its id attribute
+     *
+     * @param id the ID parameter of the JDF node
+     * @return JDFNode - the corresponding JDF Node, null if no such node exists
+     * @deprecated use getRoot().getTarget(id, AttributeName.ID) and cast.
+     *
+     */
     @Deprecated
-	public JDFNode getJDFNodeByID(String id)
+    public JDFNode getJDFNodeByID(String id)
     {
-        
+
         return (JDFNode) getRoot().getTarget(id, AttributeName.ID);
     }
-    
+
     /**
      * removes all dangling resources and cleans up the rrefs attributes
      *
@@ -252,7 +251,7 @@ public class JDFDoc extends XMLDoc
         final VElement vProcs = getJDFRoot().getvJDFNode(null, null, false);
         VElement vResources       = new VElement();
         VElement vLinkedResources = new VElement();
-        
+
         // loop over all jdf nodes
         int i;
         for (i = 0; i < vProcs.size(); i++)
@@ -265,19 +264,19 @@ public class JDFDoc extends XMLDoc
             final VElement resources = 
                 rp.getPoolChildren(null,null,null);
             vResources.appendUnique(resources);
-            
+
             for (j = 0; j < resources.size(); j++)
             {
                 vResources.appendUnique(((JDFResource) resources.elementAt(j)).getvHRefRes(true,true));
             }
         }
-        
+
         VElement vr = new VElement();
         for (i = 0; i < vResources.size(); i++)
         {
             vr.appendUnique(((JDFResource)vResources.elementAt(i)).getResourceRoot());
         }
-        
+
         vResources = vr;
         vr.clear();
         for (i = 0; i < vLinkedResources.size(); i++)
@@ -299,12 +298,12 @@ public class JDFDoc extends XMLDoc
                 }
             }
         }
-// run gc a few times to really clean up
+//      run gc a few times to really clean up
         Runtime.getRuntime().gc();
         Runtime.getRuntime().gc();
         return nDeleted;
     }
-    
+
     /**
      * gets the content type
      * @return the content type, Text/XML if neither jdf nor jmf
@@ -313,7 +312,7 @@ public class JDFDoc extends XMLDoc
     {
         final KElement e=getRoot();
         final String strContentType;
-        
+
         if (e instanceof JDFNode){
             strContentType = JDFConstants.MIME_JDF;
         }else if (e instanceof JDFJMF){
@@ -333,8 +332,8 @@ public class JDFDoc extends XMLDoc
     {
         JDFParser p=new JDFParser();
         return p.parseFile(fileName);
-     }
-    
+    }
+
     /**
      * parse a given url
      * @param url the url to search
@@ -364,7 +363,7 @@ public class JDFDoc extends XMLDoc
      * @default setRoot(ElementName.JDF, null)
      */
     @Override
-	public KElement setRoot(String strDocType, String namespaceURI)
+    public KElement setRoot(String strDocType, String namespaceURI)
     {
         KElement root = super.setRoot(strDocType, namespaceURI);
         if (root != null)
@@ -383,7 +382,7 @@ public class JDFDoc extends XMLDoc
         }        
         return root;
     }
-    
+
     /**
      * This method sends the contents of this JDFDoc to the URL <code>strURL</code> 
      * and receives the response in the returned JDFDoc.
@@ -400,7 +399,7 @@ public class JDFDoc extends XMLDoc
         if(e==null)
             return null;
         String strContentType = getContentType(e);
-        
+
         XMLDoc d=super.write2URL(strURL, strContentType);
         return d==null ? null : new JDFDoc(d.getMemberDocument());
     }
@@ -410,7 +409,7 @@ public class JDFDoc extends XMLDoc
         if(e==null)
             return null;
         String strContentType = getContentType(e);
-        
+
         return super.write2HTTPURL(strURL, strContentType);
     }
 
@@ -429,85 +428,85 @@ public class JDFDoc extends XMLDoc
         return strContentType;
     }
 
-//    //////////////////////////////////////////////////////////////////////
-//
-//    JDFDoc write2URL(String strURL, String schemaLocation) {
-//
-//        return XMLDoc.write2URL(strURL,getContentType(),schemaLocation);
-//    }
-//    
-//    //////////////////////////////////////////////////////////////////////
-//
-//    boolean stringParse(String in, boolean bValidate, boolean bEraseEmpty,
-//        boolean bDoNamespaces, ErrorHandler pErrorHandler, String schemaLocation)
-//    {
-//        boolean b = XMLDoc.stringParse( in, bValidate,  bEraseEmpty, 
-//                                bDoNamespaces, pErrorHandler,schemaLocation);
-//        getJDFRoot().getMinID();
-//        return b;
-//    }
-//    
-//    //////////////////////////////////////////////////////////////////////
-//    
-//    boolean streamParse(InputStream in, boolean bValidate, boolean bEraseEmpty,
-//        boolean bDoNamespaces, ErrorHandler pErrorHandler, String schemaLocation)
-//    {
-//        boolean b = XMLDoc.streamParse( in, bValidate,  bEraseEmpty, 
-//                                bDoNamespaces, pErrorHandler,schemaLocation);
-//        getJDFRoot().getMinID();
-//        return b;
-//    }
-//    
-//    
-//    //////////////////////////////////////////////////////////////////////
-//    
-//    boolean parse(String inFile,boolean bValidate, boolean bEraseEmpty,
-//        boolean bDoNamespaces, ErrorHandler pErrorHandler, String schemaLocation)
-//    {
-//        boolean b = XMLDoc.parse( inFile, bValidate,  bEraseEmpty, 
-//                                bDoNamespaces, pErrorHandler,schemaLocation);
-//        getJDFRoot().getMinID();
-//        return b;
-//    }
-//    
-//    
-//    //////////////////////////////////////////////////////////////////////
-//    
-//    boolean parse(JDF.File inFile, boolean bValidate, boolean bEraseEmpty,
-//        boolean bDoNamespaces, ErrorHandler pErrorHandler, String schemaLocation)
-//    {
-//        boolean b = XMLDoc.parse(inFile, bValidate,  bEraseEmpty, 
-//                            bDoNamespaces, pErrorHandler,schemaLocation);
-//        getJDFRoot().getMinID();
-//        return b;
-//    }
-//    //////////////////////////////////////////////////////////////////////
-//
-//    MIMEMessage createMIMEMessage() {
-//
-//        JDF.MIMEBasicPart mbp = createMIMEBasicPart();
-//        MIMEMultiPart mmp = new JDF.MIMEMultiPart();
-//        mmp.addBodyPart(mbp, false); // false->don't clone it
-//        mmp.setContentSubType(L"related");
-//        
-//        
-//        // make a MIMEMessage out of it
-//        MIMEMessage mmsg = new JDF.MIMEMessage();
-//        mmsg.setBody(mmp,false);
-//        
-//        return mmsg;
-//    }
-//    //////////////////////////////////////////////////////////////////////
-//
-//    MIMEBasicPart createMIMEBasicPart() {
-//        JDF.MIMEBasicPart mbp = new JDF.MIMEBasicPart (MIMEBasicPart.APPLICATION);
-//        String docString;
-//        write2String(docString);
-//        mbp.setBodyData (docString);
-//        mbp.setContentSubType(GetContentType().substr(12));
-//
-//        return mbp;
-//    }
+//  //////////////////////////////////////////////////////////////////////
+
+//  JDFDoc write2URL(String strURL, String schemaLocation) {
+
+//  return XMLDoc.write2URL(strURL,getContentType(),schemaLocation);
+//  }
+
+//  //////////////////////////////////////////////////////////////////////
+
+//  boolean stringParse(String in, boolean bValidate, boolean bEraseEmpty,
+//  boolean bDoNamespaces, ErrorHandler pErrorHandler, String schemaLocation)
+//  {
+//  boolean b = XMLDoc.stringParse( in, bValidate,  bEraseEmpty, 
+//  bDoNamespaces, pErrorHandler,schemaLocation);
+//  getJDFRoot().getMinID();
+//  return b;
+//  }
+
+//  //////////////////////////////////////////////////////////////////////
+
+//  boolean streamParse(InputStream in, boolean bValidate, boolean bEraseEmpty,
+//  boolean bDoNamespaces, ErrorHandler pErrorHandler, String schemaLocation)
+//  {
+//  boolean b = XMLDoc.streamParse( in, bValidate,  bEraseEmpty, 
+//  bDoNamespaces, pErrorHandler,schemaLocation);
+//  getJDFRoot().getMinID();
+//  return b;
+//  }
+
+
+//  //////////////////////////////////////////////////////////////////////
+
+//  boolean parse(String inFile,boolean bValidate, boolean bEraseEmpty,
+//  boolean bDoNamespaces, ErrorHandler pErrorHandler, String schemaLocation)
+//  {
+//  boolean b = XMLDoc.parse( inFile, bValidate,  bEraseEmpty, 
+//  bDoNamespaces, pErrorHandler,schemaLocation);
+//  getJDFRoot().getMinID();
+//  return b;
+//  }
+
+
+//  //////////////////////////////////////////////////////////////////////
+
+//  boolean parse(JDF.File inFile, boolean bValidate, boolean bEraseEmpty,
+//  boolean bDoNamespaces, ErrorHandler pErrorHandler, String schemaLocation)
+//  {
+//  boolean b = XMLDoc.parse(inFile, bValidate,  bEraseEmpty, 
+//  bDoNamespaces, pErrorHandler,schemaLocation);
+//  getJDFRoot().getMinID();
+//  return b;
+//  }
+//  //////////////////////////////////////////////////////////////////////
+
+//  MIMEMessage createMIMEMessage() {
+
+//  JDF.MIMEBasicPart mbp = createMIMEBasicPart();
+//  MIMEMultiPart mmp = new JDF.MIMEMultiPart();
+//  mmp.addBodyPart(mbp, false); // false->don't clone it
+//  mmp.setContentSubType(L"related");
+
+
+//  // make a MIMEMessage out of it
+//  MIMEMessage mmsg = new JDF.MIMEMessage();
+//  mmsg.setBody(mmp,false);
+
+//  return mmsg;
+//  }
+//  //////////////////////////////////////////////////////////////////////
+
+//  MIMEBasicPart createMIMEBasicPart() {
+//  JDF.MIMEBasicPart mbp = new JDF.MIMEBasicPart (MIMEBasicPart.APPLICATION);
+//  String docString;
+//  write2String(docString);
+//  mbp.setBodyData (docString);
+//  mbp.setContentSubType(GetContentType().substr(12));
+
+//  return mbp;
+//  }
 
 }
 

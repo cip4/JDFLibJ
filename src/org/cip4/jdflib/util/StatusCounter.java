@@ -79,6 +79,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceOperationMode;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumWorkType;
 import org.cip4.jdflib.auto.JDFAutoResourceAudit.EnumReason;
@@ -110,6 +111,9 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
+import org.cip4.jdflib.resource.process.JDFComponent;
+import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.JDFUsageCounter;
 
 //TODO add time related metadata
 
@@ -134,6 +138,7 @@ public class StatusCounter
     private String firstRefID=null;
     private String queueEntryID;
     private String workStepID;
+    private EnumDeviceOperationMode operationMode=EnumDeviceOperationMode.Productive;
     private EnumWorkType workType=null;
     protected HashSet setTrackWaste=new HashSet();
     protected HashSet setCopyResInfo=new HashSet();
@@ -471,7 +476,7 @@ public class StatusCounter
         JDFJMF jmfStatus = createPhaseTimeJMF();
         JDFJMF jmfRes = createResourceJMF();
 
-        final LinkAmount la=getLinkAmount(getFirstRefID());
+        final LinkAmount mainLinkAmount=getLinkAmount(getFirstRefID());
 
         JDFAuditPool ap=m_Node.getCreateAuditPool();
         // TODO rethink when to send 2 phases
@@ -481,8 +486,10 @@ public class StatusCounter
         boolean bChanged=bEnd || lastPhase==null; // no previous audit or over and out
 
         nextPhase=ap.setPhase(nodeStatus,nodeStatusDetails,m_vPartMap);
+        
         if(bEnd )
         {
+            appendResourceAudits();
             appendProcessRun(nodeStatus, ap);
         }
 
@@ -494,7 +501,7 @@ public class StatusCounter
         if(lastPhase!=null && nextPhase!=lastPhase) // we explicitly added a new phasetime audit, thus we need to add a closing JMF for the original jobPhase
         {
             bChanged=true;
-            closeJobPhase(jmfStatus, la, lastPhase, nextPhase); // attention - resets la to 0 - all calls after this have the new amounts
+            closeJobPhase(jmfStatus, mainLinkAmount, lastPhase, nextPhase); // attention - resets la to 0 - all calls after this have the new amounts
             startDate=new JDFDate();
         }
 
@@ -508,13 +515,23 @@ public class StatusCounter
             }
             nextPhase.setModules(m_moduleID,m_moduleType);
 
-            updateCurrentJobPhase(nodeStatus, deviceStatus, deviceStatusDetails, jmfStatus, la, nextPhase, bEnd);
+            updateCurrentJobPhase(nodeStatus, deviceStatus, deviceStatusDetails, jmfStatus, mainLinkAmount, nextPhase, bEnd);
         }
 
         jmfStatus.eraseEmptyAttributes(true);
         jmfRes.eraseEmptyAttributes(true);
         return bChanged;
     }
+
+    /**
+     * @param ap
+     */
+    private void appendResourceAudits()
+    {
+       for(int i=0;i<vLinkAmount.length;i++)
+           setResourceAudit(vLinkAmount[i].refID, EnumReason.ProcessResult);        
+    }
+
 
     private JDFJMF createResourceJMF()
     {
@@ -553,6 +570,7 @@ public class StatusCounter
         newDevInfo.setDeviceStatus(deviceStatus);
         newDevInfo.setStatusDetails(deviceStatusDetails);
         newDevInfo.setIdleStartTime(startDate);
+        newDevInfo.setDeviceOperationMode(operationMode);
         return bChanged;
     }
 
@@ -564,11 +582,14 @@ public class StatusCounter
         {
             JDFJobPhase jp=deviceInfo.createJobPhaseFromPhaseTime(pt2);
             setJobPhaseAmounts(la, jp);
+            jp.setQueueEntryID(queueEntryID);
         }
 
         deviceInfo.setDeviceStatus(deviceStatus);
         deviceInfo.setStatusDetails(deviceStatusDetails);
         deviceInfo.setDeviceID(m_deviceID);
+        deviceInfo.setDeviceOperationMode(operationMode);
+        
         m_Node.setPartStatus(m_vPartMap,nodeStatus);
         getVResLink(2);// update the nodes links
 
@@ -587,6 +608,7 @@ public class StatusCounter
     {
         JDFResponse respStatus=(JDFResponse)jmf.appendMessageElement(JDFMessage.EnumFamily.Response,JDFMessage.EnumType.Status);
         JDFDeviceInfo deviceInfo = respStatus.appendDeviceInfo();
+        deviceInfo.setDeviceOperationMode(operationMode);
         JDFJobPhase jp=deviceInfo.createJobPhaseFromPhaseTime(pt1);
         jp.setJobID(m_Node.getJobID(true));
         jp.setJobPartID(m_Node.getJobPartID(false));
@@ -627,6 +649,7 @@ public class StatusCounter
         JDFResourceQuParams rqp=sig.appendResourceQuParams();
         rqp.setJDF(m_Node);
         rqp.setExact(false);
+        rqp.setQueueEntryID(queueEntryID);
         boolean bAllExact=true;
 
         if (vResResourceInfo != null) {
@@ -710,6 +733,9 @@ public class StatusCounter
             }
             if(n==3) {
                 vRet.add(la.getResourceInfoLink());
+            }
+            if(n==4) {
+                vRet.add(la.getResourceAuditLink());
             }
         }
         return vRet;
@@ -820,17 +846,24 @@ public class StatusCounter
         protected String refID;
         private final AmountBag lastBag;
         protected VJDFAttributeMap vResPartMap;
+        private boolean bInteger=false;
 
         protected LinkAmount(JDFResourceLink _rl)
         {
             JDFNode dump=new JDFDoc("JDF").getJDFRoot();
             dump.appendResourceLinkPool().copyElement(_rl, null);
             final JDFResource target = _rl.getTarget();
+            bInteger=isInteger(target);
             dump.appendResourcePool().copyElement(target, null);
             rl=(JDFResourceLink)dump.getResourceLinkPool().getElement(_rl.getNodeName(), null, 0);
+            
             lastBag=new AmountBag();
             refID=rl.getrRef();
-            vResPartMap=new VJDFAttributeMap(m_vPartMap);
+            if(m_vPartMap==null)
+                vResPartMap=rl.getPartMapVector();
+            else
+                vResPartMap=new VJDFAttributeMap(m_vPartMap);
+            
             JDFAttributeMap map=null;
             if(vResPartMap!=null)
             {
@@ -878,6 +911,15 @@ public class StatusCounter
 
 
         /**
+         * @param target
+         */
+        private boolean isInteger(final JDFResource target)
+        {
+           return (target instanceof JDFUsageCounter) ||(target instanceof JDFMedia) ||(target instanceof JDFComponent);
+        }
+
+
+        /**
          * @param lastBag
          * @return
          */
@@ -893,13 +935,13 @@ public class StatusCounter
                 if(isTrackWaste())
                 {
                     vMap.put(EnumPartIDKey.Condition, "Good");
-                    nodeLink.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(lastBag.totalAmount), null, vMap);
+                    nodeLink.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, formatAmount(lastBag.totalAmount), null, vMap);
                     vMap.put(EnumPartIDKey.Condition, "Waste");
-                    nodeLink.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(lastBag.totalWaste), null, vMap);
+                    nodeLink.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, formatAmount(lastBag.totalWaste), null, vMap);
                 }
                 else
                 {
-                    nodeLink.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(lastBag.totalAmount+lastBag.totalWaste), null, vMap);
+                    nodeLink.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, formatAmount(lastBag.totalAmount+lastBag.totalWaste), null, vMap);
                 }
                 // update output status
                 if(lastBag.totalAmount>0)
@@ -941,7 +983,7 @@ public class StatusCounter
         protected JDFResourceLink getResourceAuditLink()
         {
             cleanAmounts();
-            setPhaseAmounts();
+            setTotalAmounts();
             return rl;
         }
         /**
@@ -964,29 +1006,73 @@ public class StatusCounter
             {
                 vMap.put(EnumPartIDKey.Condition, "Good");
                 if(lastBag.totalAmount!=0) {
-                    rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(lastBag.phaseAmount), null, vMap);
+                    rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, formatAmount(lastBag.phaseAmount), null, vMap);
                 }
                 if(startAmount!=0) {
-                    rl.setAmountPoolAttribute(AttributeName.AMOUNT, StringUtil.formatDouble(startAmount), null, vMap);
+                    rl.setAmountPoolAttribute(AttributeName.AMOUNT, formatAmount(startAmount), null, vMap);
                 }
                 vMap.put(EnumPartIDKey.Condition, "Waste");
                 if(lastBag.totalWaste!=0) {
-                    rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(lastBag.phaseWaste), null, vMap);
+                    rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, formatAmount(lastBag.phaseWaste), null, vMap);
                 }
                 if(startWaste!=0) {
-                    rl.setAmountPoolAttribute(AttributeName.AMOUNT, StringUtil.formatDouble(startWaste), null, vMap);
+                    rl.setAmountPoolAttribute(AttributeName.AMOUNT, formatAmount(startWaste), null, vMap);
                 }
             }
             else
             {
                 if(lastBag.totalAmount + lastBag.totalWaste !=0) {
-                    rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(lastBag.phaseAmount+lastBag.phaseWaste), null, vMap);
+                    rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, formatAmount(lastBag.phaseAmount+lastBag.phaseWaste), null, vMap);
                 }
                 if(startAmount+startWaste!=0) {
-                    rl.setAmountPoolAttribute(AttributeName.AMOUNT, StringUtil.formatDouble(startAmount+startWaste), null, vMap);
+                    rl.setAmountPoolAttribute(AttributeName.AMOUNT, formatAmount(startAmount+startWaste), null, vMap);
                 }
             }
             return rl;
+        }       
+        
+        private JDFResourceLink setTotalAmounts()
+        {
+            VJDFAttributeMap vMap=new VJDFAttributeMap(vResPartMap);
+            if(vMap.size()==0) {
+                vMap.add(new JDFAttributeMap());
+            }
+            if(isTrackWaste())
+            {
+                vMap.put(EnumPartIDKey.Condition, "Good");
+                if(lastBag.totalAmount!=0) {
+                    rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, formatAmount(lastBag.totalAmount), null, vMap);
+                }
+                if(startAmount!=0) {
+                    rl.setAmountPoolAttribute(AttributeName.AMOUNT, formatAmount(startAmount), null, vMap);
+                }
+                vMap.put(EnumPartIDKey.Condition, "Waste");
+                if(lastBag.totalWaste!=0) {
+                    rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, formatAmount(lastBag.totalWaste), null, vMap);
+                }
+                if(startWaste!=0) {
+                    rl.setAmountPoolAttribute(AttributeName.AMOUNT, formatAmount(startWaste), null, vMap);
+                }
+            }
+            else
+            {
+                if(lastBag.totalAmount + lastBag.totalWaste !=0) {
+                    rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, formatAmount(lastBag.totalAmount+lastBag.totalWaste), null, vMap);
+                }
+                if(startAmount+startWaste!=0) {
+                    rl.setAmountPoolAttribute(AttributeName.AMOUNT, formatAmount(startAmount+startWaste), null, vMap);
+                }
+            }
+            return rl;
+        }
+
+
+        /**
+         * @return
+         */
+        private String formatAmount(double amount)
+        {
+            return bInteger ? StringUtil.formatInteger((int)amount) : StringUtil.formatDouble(amount);
         }
 
         /**
@@ -1218,6 +1304,12 @@ public class StatusCounter
     public JDFDate getStartDate()
     {
         return startDate;
+    }
+
+
+    public void setOperationMode(EnumDeviceOperationMode _operationMode)
+    {
+        operationMode = _operationMode;
     }
 
 }

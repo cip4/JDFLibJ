@@ -7197,4 +7197,17 @@ public class JDFResource extends JDFElement
         JDFResource.autoAgent = _autoAgent;
     }
 
+
+    /**
+     * check whether this resource matches a named resource string 
+     * @param namedResLink
+     * @return
+     */
+    public boolean matchesString(String namedResLink)
+    {
+        if(namedResLink==null)
+            return true;
+        return getLocalName().equals(namedResLink);
+    }
+
 }
