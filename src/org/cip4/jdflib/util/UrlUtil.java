@@ -84,6 +84,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -106,6 +107,33 @@ import org.cip4.jdflib.core.VString;
  */
 public class UrlUtil
 {
+    /**
+     * helper class to set mime details
+     * @author prosirai
+     *
+     */
+    public static class HTTPDetails
+    {
+        /**
+         * size of http chunks to be written, if <=0 no chunks
+         */
+        public int chunkSize=defaultChunkSize;
+        public static int defaultChunkSize=10000;
+
+        /**
+         * apply these details to the connection specified
+         * @param urlCon
+         */
+        public void applyTo(HttpURLConnection urlCon)
+        {
+            if(urlCon!=null)
+            {
+                if(chunkSize>0)
+                    urlCon.setChunkedStreamingMode(chunkSize);
+            }
+        }
+    }
+    
     /**
      * simple struct to contain the stream and type of a bodypart
      * @author prosirai
@@ -427,14 +455,14 @@ public class UrlUtil
         {
             s= StringUtil.escape(s,m_URIEscape,"%",16,2,0x21,0x7fffffff);           
         }
-//        if(s.length()>2 && s.charAt(1)==':' && File.separator.equals("\\"))
-//            s=s.charAt(0)+s.substring(2);
+//      if(s.length()>2 && s.charAt(1)==':' && File.separator.equals("\\"))
+//      s=s.charAt(0)+s.substring(2);
         if(s.charAt(0)!='/')
             s="///"+s;
 
         return "file:"+s;
     }
-    
+
     /**
      * Retrieve a file for a relative or absolute file url
      * @param urlString the file url to retrieve a file for
@@ -442,10 +470,10 @@ public class UrlUtil
      */
     public static File urlToFile(String urlString)
     {
-        
+
         if(urlString==null)
             return null;
-        
+
         if(isCID(urlString) || isHttp(urlString))
             return null;
 
@@ -464,13 +492,13 @@ public class UrlUtil
             else if(urlString.startsWith("///"))
                 urlString=urlString.substring(2);
         }
-        
+
         urlString= StringUtil.unEscape(urlString, "%", 16, 2);
         urlString=StringUtil.getUTF8String(urlString.getBytes());
 
         return new File(urlString);
     }
-    
+
 
     /**
      * Create a file for a relative or absolute file url
@@ -499,7 +527,7 @@ public class UrlUtil
         }
         return null;
     }
-    
+
     /**
      * checks whether there is a remote chance that the file is useful for reading
      * 
@@ -510,7 +538,7 @@ public class UrlUtil
     {
         return f != null && !f.isDirectory() && f.canRead();
     }
-    
+
     /**
      * test whether a given url is a cid
      * @param url the url to test
@@ -562,7 +590,7 @@ public class UrlUtil
      * @param file the FILE to check
      * @return true if the file is a MIME file
      */
-    
+
     public static boolean isMIME(File file)
     {
         String packageName;
@@ -590,7 +618,7 @@ public class UrlUtil
             return false;
         return lower.equalsIgnoreCase("mjm") || lower.equalsIgnoreCase("mjd") || lower.equalsIgnoreCase("mim");
     }
-    
+
     /**
      * @param val
      * @return
@@ -735,10 +763,10 @@ public class UrlUtil
                 }
             }
         }
-       
+
         return prefix + (vs.isEmpty() ? "." : StringUtil.setvString(vs ,"/",null,null));
     }
 
-//////////////////////////////////////////////////////////////////////////////////
+
 
 }

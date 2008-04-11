@@ -97,6 +97,7 @@ import org.apache.xml.serialize.XMLSerializer;
 import org.cip4.jdflib.util.HashUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
+import org.cip4.jdflib.util.UrlUtil.HTTPDetails;
 import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Comment;
@@ -1481,7 +1482,7 @@ public class XMLDoc
             }
             else
             {    
-                URLConnection urlCon = write2HTTPURL(url, strContentType);
+                URLConnection urlCon = write2HTTPURL(url, strContentType,null);
                 final JDFParser parser = new JDFParser();
                 final InputStream inStream = urlCon.getInputStream();
 
@@ -1503,7 +1504,7 @@ public class XMLDoc
      * @return
      * @throws IOException
      */
-    public HttpURLConnection write2HTTPURL(final URL url, String strContentType)
+    public HttpURLConnection write2HTTPURL(final URL url, String strContentType, HTTPDetails det)
     {
         try
         {
@@ -1511,7 +1512,11 @@ public class XMLDoc
             urlCon.setDoOutput(true);
             urlCon.setRequestProperty("Connection", "close");
             urlCon.setRequestProperty("Content-Type", strContentType);
+            if(det!=null)
+            {
+                det.applyTo(urlCon);
 
+            }
             write2Stream(urlCon.getOutputStream(), 0, true);
             return urlCon;
         } 

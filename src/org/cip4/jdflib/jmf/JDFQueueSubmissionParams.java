@@ -88,6 +88,7 @@ import org.cip4.jdflib.auto.JDFAutoQueueSubmissionParams;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.util.JDFDate;
 
 
 
@@ -190,7 +191,7 @@ import org.cip4.jdflib.core.JDFDoc;
 
         qe.setQueueEntryID("qe"+uniqueID(0));
         // TODO more attributes e.g prev. next...
-        
+        qe.setSubmissionTime(new JDFDate());
         
         resp.copyElement(theQueue, null);
         resp.copyElement(qe, null);

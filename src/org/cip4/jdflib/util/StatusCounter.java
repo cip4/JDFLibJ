@@ -127,6 +127,7 @@ public class StatusCounter
 {
 
     protected JDFNode m_Node;
+    private boolean bCompleted=false;
     private JDFDoc docJMFPhaseTime;
     private JDFDoc docJMFResource;
     protected VJDFAttributeMap m_vPartMap;
@@ -174,6 +175,7 @@ public class StatusCounter
     {
         if(node==null)
             setTrackWaste.clear();
+        bCompleted=false;
         m_Node=node;
         m_vPartMap=vPartMap;
         vLinkAmount=null;
@@ -347,7 +349,7 @@ public class StatusCounter
     public double getTotalAmount(String refID)
     { 
         final LinkAmount la=getLinkAmount(refID);
-        return la==null ? 0 : la.lastBag.totalAmount;
+        return la==null ? 0 : la.getAmount(la.lastBag.totalAmount);
     }
  
     /**
@@ -361,7 +363,7 @@ public class StatusCounter
             return null;
         double[] d=new double[vLinkAmount.length];
         for(int i=0;i<d.length;i++)
-            d[i]=vLinkAmount[i].lastBag.totalAmount;
+            d[i]=vLinkAmount[i].getAmount(vLinkAmount[i].lastBag.totalAmount);
         return d;
     }
     /**
@@ -390,7 +392,7 @@ public class StatusCounter
             return null;
         double[] d=new double[vLinkAmount.length];
         for(int i=0;i<d.length;i++)
-            d[i]=vLinkAmount[i].lastBag.phaseAmount;
+            d[i]=vLinkAmount[i].getAmount(vLinkAmount[i].lastBag.phaseAmount);
         return d;
     }
     /**
@@ -401,7 +403,7 @@ public class StatusCounter
     public double getPhaseAmount(String refID)
     { 
         final LinkAmount la=getLinkAmount(refID);
-        return la==null ? 0 : la.lastBag.phaseAmount;
+        return la==null ? 0 : la.getAmount(la.lastBag.phaseAmount);
     }
     /**
      * get the total the amount of the resource with id refID
@@ -411,7 +413,7 @@ public class StatusCounter
     public double getTotalWaste(String refID)
     { 
         final LinkAmount la=getLinkAmount(refID);
-        return la==null ? 0 : la.lastBag.totalWaste;
+        return la==null ? 0 : la.getAmount(la.lastBag.totalWaste);
     }
     /**
      * get all total amounts of all tracked resources
@@ -424,7 +426,7 @@ public class StatusCounter
             return null;
         double[] d=new double[vLinkAmount.length];
         for(int i=0;i<d.length;i++)
-            d[i]=vLinkAmount[i].lastBag.totalWaste;
+            d[i]=vLinkAmount[i].getAmount(vLinkAmount[i].lastBag.totalWaste);
         return d;
     }
    
@@ -439,7 +441,7 @@ public class StatusCounter
             return null;
         double[] d=new double[vLinkAmount.length];
         for(int i=0;i<d.length;i++)
-            d[i]=vLinkAmount[i].lastBag.phaseWaste;
+            d[i]=vLinkAmount[i].getAmount(vLinkAmount[i].lastBag.phaseWaste);
         return d;
     }
 
@@ -451,7 +453,7 @@ public class StatusCounter
     public double getPhaseWaste(String refID)
     { 
         final LinkAmount la=getLinkAmount(refID);
-        return la==null ? 0 : la.lastBag.phaseWaste;
+        return la==null ? 0 : la.getAmount(la.lastBag.phaseWaste);
     }
     /**
      * Set the Status and StatusDetails of this node
@@ -485,12 +487,17 @@ public class StatusCounter
         boolean bEnd=EnumNodeStatus.Completed.equals(nodeStatus) || EnumNodeStatus.Aborted.equals(nodeStatus);
         boolean bChanged=bEnd || lastPhase==null; // no previous audit or over and out
 
-        nextPhase=ap.setPhase(nodeStatus,nodeStatusDetails,m_vPartMap);
         
-        if(bEnd )
+        nextPhase=ap.setPhase(nodeStatus,nodeStatusDetails,m_vPartMap);
+        if(bEnd && !bCompleted)
         {
             appendResourceAudits();
             appendProcessRun(nodeStatus, ap);
+            bCompleted=true;
+        }
+        if(!bEnd) // we have been active again - need to rewrite processruns
+        {
+            bCompleted=false;
         }
 
         if(nextPhase!=null)
@@ -528,8 +535,11 @@ public class StatusCounter
      */
     private void appendResourceAudits()
     {
-       for(int i=0;i<vLinkAmount.length;i++)
-           setResourceAudit(vLinkAmount[i].refID, EnumReason.ProcessResult);        
+        if(vLinkAmount!=null)
+        {
+            for(int i=0;i<vLinkAmount.length;i++)
+                setResourceAudit(vLinkAmount[i].refID, EnumReason.ProcessResult);      
+        }
     }
 
 
@@ -612,6 +622,7 @@ public class StatusCounter
         JDFJobPhase jp=deviceInfo.createJobPhaseFromPhaseTime(pt1);
         jp.setJobID(m_Node.getJobID(true));
         jp.setJobPartID(m_Node.getJobPartID(false));
+        jp.setQueueEntryID(queueEntryID);
         setJobPhaseAmounts(la, jp);
         pt1.setLinks(getVResLink(1));
 
@@ -681,23 +692,22 @@ public class StatusCounter
         if(la==null) 
             return;
 
-        LinkAmount.AmountBag lastAb=la.lastBag;
         if(la.isTrackWaste())
         {
-            if(lastAb.totalAmount!=0) {
-                jp.setPhaseAmount(lastAb.phaseAmount);
-                jp.setAmount(lastAb.totalAmount);
+            if(la.getAmount(la.lastBag.phaseAmount)!=0) {
+                jp.setPhaseAmount(la.getAmount(la.lastBag.phaseAmount));
+                jp.setAmount(la.getAmount(la.lastBag.totalAmount));
             }
-            if(lastAb.totalWaste!=0) {
-                jp.setPhaseWaste(lastAb.phaseWaste);
-                jp.setWaste(lastAb.totalWaste);
+            if(la.getAmount(la.lastBag.totalWaste)!=0) {
+                jp.setPhaseWaste(la.getAmount(la.lastBag.phaseWaste));
+                jp.setWaste(la.getAmount(la.lastBag.totalWaste));
             }
         }
         else
         {
-            if((lastAb.totalAmount+lastAb.totalWaste)!=0) {
-                jp.setPhaseAmount(lastAb.phaseAmount+lastAb.phaseWaste);
-                jp.setAmount(lastAb.totalAmount+lastAb.totalWaste);
+            if((la.getAmount(la.lastBag.totalAmount)+la.getAmount(la.lastBag.totalWaste))!=0) {
+                jp.setPhaseAmount(la.getAmount(la.lastBag.phaseAmount)+la.getAmount(la.lastBag.phaseWaste));
+                jp.setAmount(la.getAmount(la.lastBag.totalAmount)+la.getAmount(la.lastBag.totalWaste));
             }
 
         }
@@ -707,7 +717,7 @@ public class StatusCounter
         if(total!=0)
         {
             jp.setTotalAmount(total);
-            jp.setPercentCompleted(lastAb.totalAmount/total*100.0);
+            jp.setPercentCompleted(la.getAmount(la.lastBag.totalAmount)/total*100.0);
         }
     }
 
@@ -1065,8 +1075,13 @@ public class StatusCounter
             }
             return rl;
         }
-
-
+        /**
+         * @return
+         */
+        private double getAmount(double amount)
+        {
+            return bInteger ? ((int)amount) : amount;
+        }
         /**
          * @return
          */

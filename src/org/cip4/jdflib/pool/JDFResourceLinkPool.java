@@ -269,7 +269,7 @@ public class JDFResourceLinkPool extends JDFPool
     /**
      * GetInOutLinks - get the links from the pool (input or output)
      * <p>
-     * default: GetInOutLinks(null, true, JDFConstants.STAR, JDFConstants.STAR)
+     * default: GetInOutLinks(null, true, null, null)
      *
      * @param usage     what kind of links you want to have (input, output). If null all are selected.
      * @param bLink     if true, return the resource links. if false return the resources
@@ -280,9 +280,7 @@ public class JDFResourceLinkPool extends JDFPool
      */
     public VElement getInOutLinks(EnumUsage usage,boolean bLink,String resName, EnumProcessUsage procUsage)
     {
-    	JDFAttributeMap mA = null;
-    	if(usage!=null)
-    		mA=new JDFAttributeMap(AttributeName.USAGE,usage.getName());
+    	final JDFAttributeMap mA = (usage!=null) ? new JDFAttributeMap(AttributeName.USAGE,usage.getName()) : null;
 
     	VElement v = getPoolChildren(null, mA, null);
     	final int size = (v==null) ? 0 : v.size();

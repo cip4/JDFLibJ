@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,6 +79,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.JDFComponent;
 
 /**
@@ -89,6 +90,25 @@ import org.cip4.jdflib.resource.process.JDFComponent;
 public class JDFResourceLinkPoolTest extends JDFTestCaseBase
 {
  
+    public void testGetLink() throws Exception
+    {
+        JDFDoc d=new JDFDoc("JDF");
+        JDFNode n=d.getJDFRoot();
+        JDFResource r=n.addResource("Component", null, null, null, null, null, null);
+        assertTrue(r instanceof JDFComponent);
+        assertFalse(n.hasChildElement("ResourceLinkPool",null));
+        JDFResourceLinkPool rlp=n.getCreateResourceLinkPool();
+        
+        JDFResourceLink rl=rlp.linkResource(r,EnumUsage.Input,EnumProcessUsage.BookBlock);
+        assertNotNull(rl);
+        assertEquals(rl, rlp.getLink(r, null, null));
+        
+        JDFResource r2=n.addResource("foo:bar", EnumResourceClass.Parameter, null, null, null, "www.foo.com", null);
+        rl=rlp.linkResource(r2,EnumUsage.Input,null);
+        assertEquals(rl, rlp.getLink(r2, null, null));
+
+     }
+    
     /**
      * Method testLinkResource.
      * @throws Exception
@@ -118,7 +138,12 @@ public class JDFResourceLinkPoolTest extends JDFTestCaseBase
         assertNotNull(rl);
         assertEquals(rl.getEnumProcessUsage(),EnumProcessUsage.Cover);
         assertEquals(rl.getUsage(),EnumUsage.Output);  
-        
+
+        JDFResource r2=n.addResource("foo:bar", EnumResourceClass.Parameter, null, null, null, "www.foo.com", null);
+        rl=rlp.linkResource(r2,EnumUsage.Input,null);
+        assertNotNull(rl);
+        assertEquals(rl.getUsage(),EnumUsage.Input);  
+
       }   
     /**
      * Method testLinkResource.

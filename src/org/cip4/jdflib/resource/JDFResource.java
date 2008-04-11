@@ -3716,7 +3716,8 @@ public class JDFResource extends JDFElement
                     m.put(strIds, r.getAttribute(strIds, null, JDFConstants.EMPTYSTRING));
                 }
             }
-            vReturn.appendUnique(m);
+            if(m.size()>0)
+                vReturn.appendUnique(m);
         }
 
         return vReturn;

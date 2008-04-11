@@ -93,6 +93,7 @@ import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.MimeUtil;
 import org.cip4.jdflib.util.UrlUtil;
+import org.cip4.jdflib.util.UrlUtil.HTTPDetails;
 import org.w3c.dom.Document;
 
 /**
@@ -403,14 +404,14 @@ public class JDFDoc extends XMLDoc
         XMLDoc d=super.write2URL(strURL, strContentType);
         return d==null ? null : new JDFDoc(d.getMemberDocument());
     }
-    public HttpURLConnection write2HTTPURL(URL strURL) 
+    public HttpURLConnection write2HTTPURL(URL strURL, HTTPDetails det) 
     {
         KElement e=getRoot();
         if(e==null)
             return null;
         String strContentType = getContentType(e);
 
-        return super.write2HTTPURL(strURL, strContentType);
+        return super.write2HTTPURL(strURL, strContentType,det);
     }
 
     /**

@@ -2486,8 +2486,8 @@ public class JDFNode extends JDFElement
         return null;
     }
     /**
-     * return the partMapVector defined in AncestorPool, 
-     * null if no AncestorPool exists, or AncestorPool has no Part elements
+     * return the partMapVector defined in AncestorPool or NodeInfo, 
+     * null if no NodeInfo exists, or NodeInfo has no Part elements
      * @return the vector of PartMaps
      */
     public VJDFAttributeMap getNodeInfoPartMapVector()
@@ -2498,7 +2498,7 @@ public class JDFNode extends JDFElement
             JDFNodeInfo ni=getNodeInfo();
             vm= ni==null ? null : ni.getPartMapVector(false);
         }
-        return vm;
+        return vm==null || vm.size()==0 ? null : vm;
     }
     /**
      * getActivation
@@ -6498,7 +6498,8 @@ public class JDFNode extends JDFElement
     public void setTypes(VString vCombiNodes)
     {
         EnumType type = EnumType.getEnum(getType());
-        if (EnumType.Combined.equals(type) || EnumType.ProcessGroup.equals(type))
+        // 080408 lets be gracefull in case we are building sequentially
+        if (type==null || EnumType.Combined.equals(type) || EnumType.ProcessGroup.equals(type))
         {
             setAttribute(AttributeName.TYPES, vCombiNodes, null);
         }
@@ -8587,5 +8588,31 @@ public class JDFNode extends JDFElement
     }
 
 
+
+    /**
+     * links all output resources of thePreviousNode as inputs to this
+     * @param thePreviousNode
+     */
+    public void linkOutputs(JDFNode thePreviousNode)
+    {
+        if(thePreviousNode==null)
+            return;
+        final JDFResourceLinkPool resourceLinkPool = thePreviousNode.getResourceLinkPool();
+        if(resourceLinkPool==null)
+            return;
+        VElement v=resourceLinkPool.getInOutLinks(EnumUsage.Output, true, null, null);
+        JDFResourceLinkPool rlp=getCreateResourceLinkPool();
+        for(int i=0;i<v.size();i++)
+        {
+            JDFResourceLink rl0=(JDFResourceLink) v.elementAt(i);
+            JDFResourceLink rl=(JDFResourceLink) rlp.getChildWithAttribute(null, AttributeName.RREF, null, rl0.getrRef(), 0, true);
+            if(rl==null)
+            {
+                JDFResource r=rl0.getLinkRoot();
+                rl=linkResource(r, EnumUsage.Input, rl0.getEnumProcessUsage());
+                rl.removeAttribute(AttributeName.COMBINEDPROCESSINDEX);
+            }
+        }
+    }
 
 }

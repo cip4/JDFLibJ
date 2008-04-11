@@ -108,16 +108,16 @@ public abstract class JDFTestCaseBase extends TestCase
      * @param good
      * @param waste
      */
-    protected void write3GTFiles(BaseGoldenTicket goldenTicket,String templateName,int good, int waste)
+    protected void write3GTFiles(BaseGoldenTicket goldenTicket,String templateName)
     {
         assertTrue(goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
         goldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_Manager_"+templateName+".jdf", 2);        
         
-        goldenTicket.makeReady();
+        goldenTicket.makeReadyAll();
         assertTrue(goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
         goldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_MakeReady_"+templateName+".jdf", 2);
 
-        goldenTicket.execute(null,true,true,good,waste);
+        goldenTicket.executeAll(null,true,true);
         assertTrue(goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
         goldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_Worker_"+templateName+".jdf", 2);
     }

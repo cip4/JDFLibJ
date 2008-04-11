@@ -2040,7 +2040,7 @@ public class KElement extends ElementNSImpl
      */
     public KElement getCreateElement(String nodeName)
     {
-        return getCreateElement_KElement(nodeName, null, 0);
+        return getCreateElement(nodeName, null, 0);
     }
 
     /**
@@ -2096,7 +2096,8 @@ public class KElement extends ElementNSImpl
      */
     public KElement getCreateElement(String nodeName, String nameSpaceURI, int iSkip)
     {
-        return getCreateElement_KElement(nodeName, nameSpaceURI, iSkip);
+        final KElement e=getElement(nodeName, nameSpaceURI, iSkip);
+        return e==null ? appendElement(nodeName, nameSpaceURI) : e;
     }
 
     /**

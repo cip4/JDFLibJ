@@ -70,6 +70,8 @@
  */
 package org.cip4.jdflib.goldenticket;
 
+import java.util.Vector;
+
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoResourceAudit.EnumReason;
 import org.cip4.jdflib.core.AttributeName;
@@ -117,16 +119,17 @@ public class BaseGoldenTicket
     protected StatusCounter theStatusCounter;
     protected static String misURL=null;
     protected static String deviceURL=null;
+    private Vector<BaseGoldenTicket> vKids=new Vector<BaseGoldenTicket>();
 
     /**
-     * percentage allowed maxamount waste to be used for audits
+     * good for execute
      */
-    public int wastePercent=150; 
+    public int good=0; 
 
     /**
-     * percentage of amount to be used as actual for audits
+     * pwaste for execute
      */
-    public int actualPercent=103; 
+    public int waste=0; 
 
     /**
      * create a BaseGoldenTicket
@@ -147,8 +150,10 @@ public class BaseGoldenTicket
      */
     public void assign(JDFNode node)
     {
+        vKids.clear();
+        vKids.add(this);
         theNode=node==null ? new JDFDoc("JDF").getJDFRoot() : node;
-        if(theParentNode==null && theNode.getParentJDF()!=null)
+        if(theNode.getParentJDF()!=null)
             theParentNode=theNode.getParentJDF();
         setVersion();
         init();
@@ -160,6 +165,23 @@ public class BaseGoldenTicket
     public void setPreviousNode(JDFNode node)
     {
         thePreviousNode=node;
+    }
+    /**
+     * add a kid to be makeready and executed
+     * @param node the node to assign, if null a new conforming node is generated from scratch
+     */
+    public void addKid(BaseGoldenTicket bt)
+    {
+        vKids.add(bt);
+    }
+    /**
+     * makeready for all kids
+     *
+     */
+    public void makeReadyAll()
+    {
+        for(int i=0;i<vKids.size();i++)
+            vKids.get(i).makeReady();
     }
     /**
      * simulate makeReady of this node
@@ -191,10 +213,19 @@ public class BaseGoldenTicket
     }
 
     /**
+     * execute for all kids
+     *
+     */
+    public void executeAll(VJDFAttributeMap vMap, boolean bOutAvail, boolean bFirst)
+    {
+        for(int i=0;i<vKids.size();i++)
+            vKids.get(i).execute(vMap, bOutAvail, bFirst);
+    }
+    /**
      * simulate execution of this node
      * the internal node will be modified to reflect the excution
      */
-    public void execute(VJDFAttributeMap vMap, boolean bOutAvail, boolean bFirst, int good, int waste)
+    public void execute(VJDFAttributeMap vMap, boolean bOutAvail, boolean bFirst)
     {
         theNode.setPartStatus(vMap, EnumNodeStatus.Completed);
         runphases(good, waste);
@@ -337,7 +368,7 @@ public class BaseGoldenTicket
             theNode.setDescriptiveName("Base Golden Ticket Example Job - version: "+JDFAudit.software());
 
         if(!theNode.hasAttribute(AttributeName.COMMENTURL))
-            theNode.setCommentURL(UrlUtil.StringToURL("//MyHost/data/Comments.html").toExternalForm());
+            theNode.setCommentURL(UrlUtil.StringToURL("http://www.example.com").toExternalForm());
     }
 
     /**

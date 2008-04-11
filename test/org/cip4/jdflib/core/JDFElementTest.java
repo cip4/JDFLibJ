@@ -468,6 +468,19 @@ public class JDFElementTest extends TestCase
      * Method testChildElementVector.
      * @throws Exception
      */
+    public void testGetCreateElement() throws Exception
+    {
+        JDFNode n=new JDFDoc("JDF").getJDFRoot();
+        JDFMedia m=(JDFMedia) n.addResource("Media", null);
+        JDFExposedMedia xm=(JDFExposedMedia) n.addResource("ExposedMedia", null);
+        xm.refMedia(m);
+        assertEquals(xm.getCreateElement("Media"), m);
+    }
+    
+    /**
+     * Method testChildElementVector.
+     * @throws Exception
+     */
     public void testGetCreateRefElement() throws Exception
     {
         JDFNode n=new JDFDoc("JDF").getJDFRoot();

@@ -113,8 +113,9 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
         assertTrue(node.getICSVersions(false).contains("MISCPS_L1-1.3"));
         assertTrue(node.isValid(EnumValidationLevel.Complete));
         
-        
-        cpGoldenTicket.execute(null,true,true,1000,90);
+        cpGoldenTicket.good=1000;
+        cpGoldenTicket.waste=90;
+        cpGoldenTicket.execute(null,true,true);
         node = cpGoldenTicket.getNode();
         cpGoldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_Worker_MISCPS_1_GB.jdf", 2);
         assertTrue(node.getICSVersions(false).contains("Base_L2-1.3"));
@@ -133,10 +134,12 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
         
         cpGoldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_Manager_MISCPS_1_GB_FrontBack.jdf", 2);
         map.put(EnumPartIDKey.Side,"Front");
-        cpGoldenTicket.execute(mapSingle,false,true,1000,90);
+        cpGoldenTicket.execute(mapSingle,false,true);
         cpGoldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_Manager_MISCPS_1_GB_FrontBack_xB.jdf", 2);
         map.put(EnumPartIDKey.Side,"Back");
-        cpGoldenTicket.execute(mapSingle,true,false,900,30);
+        cpGoldenTicket.good=900;
+        cpGoldenTicket.waste=30;
+        cpGoldenTicket.execute(mapSingle,true,false);
         cpGoldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_Manager_MISCPS_1_GB_FrontBack_xBF.jdf", 2);
     }
     
@@ -155,8 +158,10 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
         cpGoldenTicket.nCols=6;
         cpGoldenTicket.workStyle=EnumWorkStyle.Simplex;
         cpGoldenTicket.assign(null);
-        
-        write3GTFiles(cpGoldenTicket,"MISCPS_SimplexPoster",1000,90);
+        cpGoldenTicket.good=1000;
+        cpGoldenTicket.waste=90;
+       
+        write3GTFiles(cpGoldenTicket,"MISCPS_SimplexPoster");
     }
     /////////////////////////////////////////////////////////////////////////////
     
@@ -182,7 +187,10 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
         JDFNode nodeCP=node.addJDFNode(EnumType.ProcessGroup);
 
         cpGoldenTicket.assign(nodeCP);
-        write3GTFiles(cpGoldenTicket,"MISCPS_ProductGrayBox",1000,90);
+        cpGoldenTicket.good=1000;
+        cpGoldenTicket.waste=90;
+  
+        write3GTFiles(cpGoldenTicket,"MISCPS_ProductGrayBox");
     }
 
 
@@ -207,9 +215,12 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
         cpGoldenTicket.inks=vInk;
         cpGoldenTicket.inkProductIDs=vInkProd;
         
-        n.setType(JDFNode.EnumType.ConventionalPrinting);
+        //n.setType(JDFNode.EnumType.ConventionalPrinting);
+        
         cpGoldenTicket.assign(n);
-        write3GTFiles(cpGoldenTicket, "sameInk.jdf", 3000,200);
+        cpGoldenTicket.good=3000;
+        cpGoldenTicket.waste=200;
+        write3GTFiles(cpGoldenTicket, "sameInk.jdf");
      }
 
     /////////////////////////////////////////////////////////////////////////////

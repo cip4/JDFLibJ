@@ -255,7 +255,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
          }
          VJDFAttributeMap vMap=new VJDFAttributeMap(map);  
          bgt.makeReady();
-         bgt.execute(vMap, bLast, bFirst, good, waste);
+         bgt.execute(vMap, bLast, bFirst);
          JDFDoc jmfStatus=bgt.getStatusCounter().getDocJMFPhaseTime();
          jmfStatus.write2File(jmfFile+"_status.jmf", 2,false);
          JDFDoc jmfRes=bgt.getStatusCounter().getDocJMFResource();

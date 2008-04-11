@@ -38,7 +38,7 @@
  *
  * Usage of this software in commercial products is subject to restrictions. For
  * details please consult info@cip4.org.
-  *
+ *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -92,7 +92,7 @@ import org.w3c.dom.DOMException;
 public class JDFColorantControl extends JDFAutoColorantControl
 {
     private static final long serialVersionUID = 1L;
-    
+
     /**
      * Constructor for JDFColorantControl
      * @param ownerDocument
@@ -106,8 +106,8 @@ public class JDFColorantControl extends JDFAutoColorantControl
     {
         super(myOwnerDocument, qualifiedName);
     }
-    
-    
+
+
     /**
      * Constructor for JDFColorantControl
      * @param ownerDocument
@@ -123,7 +123,7 @@ public class JDFColorantControl extends JDFAutoColorantControl
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName);
     }
-    
+
     /**
      * Constructor for JDFColorantControl
      * @param ownerDocument
@@ -141,7 +141,7 @@ public class JDFColorantControl extends JDFAutoColorantControl
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
-    
+
     //**************************************** Methods *********************************************
     /**
      * toString
@@ -149,20 +149,20 @@ public class JDFColorantControl extends JDFAutoColorantControl
      * @return String
      */
     @Override
-	public String toString()
+    public String toString()
     {
         return "JDFColorantControl[  --> " + super.toString() + " ]";
     }
-    
+
     /** 
      * get a list of all partition keys that this resource may be implicitly partitioned by
      * e.g. RunIndex for RunList...
      *
      * @return vector of EnumPartIDKey
      */
-    
+
     @Override
-	public Vector getImplicitPartitions()
+    public Vector getImplicitPartitions()
     {
         Vector<ValuedEnum> v = super.getImplicitPartitions();
         if(v==null)
@@ -170,14 +170,14 @@ public class JDFColorantControl extends JDFAutoColorantControl
         v.add(EnumPartIDKey.Separation);
         return v;
     }
-    
+
     public VString getDeviceColorantOrderSeparations()
     {
         if(hasChildElement(ElementName.DEVICECOLORANTORDER,null))
             return super.getDeviceColorantOrder().getSeparations();
         return getColorantOrderSeparations();
     }
-    
+
     /**
      * 
      * @return
@@ -226,7 +226,7 @@ public class JDFColorantControl extends JDFAutoColorantControl
         {
             vName = getDeviceNSpace(0).getSeparations();
         }
-        
+
         JDFSeparationList colpar=getColorantParams();
         if(colpar!=null)
         {
@@ -234,5 +234,15 @@ public class JDFColorantControl extends JDFAutoColorantControl
         } 
         vName.unify();
         return vName;
+    }
+
+    /**
+     * always reuse a colorpool
+     */
+    @Override
+    public JDFColorPool getCreateColorPool()
+    {
+        JDFColorPool cp=getColorPool();
+        return cp==null ? super.getCreateColorPool() : cp;
     }   
 }

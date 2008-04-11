@@ -117,6 +117,7 @@ import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFResponse;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.util.UrlUtil.HTTPDetails;
 
 /**
  * MIME utilities for reading and writing MIME/MULTIPART/RELATED streams
@@ -135,11 +136,10 @@ public class MimeUtil
     public static class MIMEDetails
     {
         /**
-         * size of http chunks to be written, if <=0 no chunks
+         * http details
          */
-        public int chunkSize=defaultChunkSize;
-        public static int defaultChunkSize=10000;
-        /**
+        public HTTPDetails httpDetails=new HTTPDetails();
+         /**
          * transfer encoding used when streaming body parts, 
          * May be null to specify java default behavior
          */
@@ -959,8 +959,8 @@ public class MimeUtil
             contentType=StringUtil.token(contentType, 0, "\n");
             httpURLconnection.setRequestProperty(CONTENT_TYPE,contentType );
             httpURLconnection.setDoOutput(true);
-            if(ms.chunkSize>0)
-                httpURLconnection.setChunkedStreamingMode(ms.chunkSize);
+            if(ms.httpDetails!=null)
+                ms.httpDetails.applyTo(httpURLconnection);
             final OutputStream out= httpURLconnection.getOutputStream();
 
             writeToStream(mp, out,ms);

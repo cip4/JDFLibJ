@@ -340,6 +340,25 @@ public class JDFNodeTest extends JDFTestCaseBase
         JDFResourceLink rlfoPa=n.getLink(foPa,null);
         assertFalse(rlfoPa.hasAttribute(AttributeName.COMBINEDPROCESSINDEX));
     }
+    /**
+     * test whether combinedprocessIndex is automagically and correctly assigned
+     *
+     */
+    public void testLinkOutput() throws Exception
+    {
+        JDFDoc d=new JDFDoc("JDF");
+        JDFNode n=d.getJDFRoot();
+        n.setType(EnumType.ProcessGroup);
+        JDFNode n1=n.addJDFNode(EnumType.Interpreting);
+        JDFRunList rul1=(JDFRunList) n1.addResource("RunList", EnumUsage.Output);
+        JDFNode n2=n.addJDFNode(EnumType.Rendering);
+        n2.linkOutputs(n1);
+        assertEquals(n2.getResource("RunList", EnumUsage.Input, 0), rul1);
+        n2.linkOutputs(n1);
+        assertEquals(n2.getResource("RunList", EnumUsage.Input, 0), rul1);
+        assertNull(n2.getResource("RunList", null, 1));
+        
+    }
 
     /**
      * test whether combinedprocessIndex is automagically and correctly assigned
@@ -1903,7 +1922,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
         root.setType(EnumType.Combined);
         root.setTypes(new VString("Cutting Folding Cutting"," "));
-        for(int i=0;i<2;i++)
+        for(int i=0;i<1;i++)
         {
             EnumVersion v=i==0 ? EnumVersion.Version_1_1 : EnumVersion.Version_1_3;
             root.setVersion(v);

@@ -70,6 +70,9 @@
  */
 package org.cip4.jdflib.goldenticket;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -104,6 +107,8 @@ public class MISGoldenTicket extends BaseGoldenTicket
 {
     protected int misICSLevel;
     protected int jmfICSLevel;
+    protected Map<String,VString> catMap=new HashMap<String, VString>();
+    private String category=null;
     /**
      * seconds ago that this started
      */
@@ -124,7 +129,7 @@ public class MISGoldenTicket extends BaseGoldenTicket
         misICSLevel=icsLevel;
         jmfICSLevel=jmfLevel;
     }
-    
+
     /**
      * 
      */
@@ -140,17 +145,17 @@ public class MISGoldenTicket extends BaseGoldenTicket
     /**
      * simulate execution of this node
      * the internal node will be modified to reflect the excution
-      */
+     */
     @Override
-    public void execute(VJDFAttributeMap vNodeMap, boolean bOutAvail,boolean bFirst,int good, int waste)
+    public void execute(VJDFAttributeMap vNodeMap, boolean bOutAvail,boolean bFirst)
     {
         JDFComment c=theNode.appendComment();
         c.setName("OperatorText");
         c.setText(StringUtil.getRandomString());
-        
-        super.execute(vNodeMap,bOutAvail, bFirst, good,waste);
-        
-        
+
+        super.execute(vNodeMap,bOutAvail, bFirst);
+
+
     }
 
     /**
@@ -167,6 +172,13 @@ public class MISGoldenTicket extends BaseGoldenTicket
             theNode.setDescriptiveName("MIS Golden Ticket Example Job - version: "+JDFAudit.software());
         if(!theNode.hasAttribute(AttributeName.JOBID))
             theNode.setJobID("Job_"+JDFElement.uniqueID(0));
+        final VString types = getTypes();
+        if(types!=null)
+        {
+            theNode.setCategory(getCategory());
+            theNode.setTypes(types);
+            theNode.setType(org.cip4.jdflib.node.JDFNode.EnumType.ProcessGroup);
+        }
         initNodeInfo();
         initCustomerInfo();
     }
@@ -179,21 +191,24 @@ public class MISGoldenTicket extends BaseGoldenTicket
         JDFNodeInfo ni=theNode.getCreateNodeInfo();
         ni.setResStatus(EnumResStatus.Available, false);
 
-        JDFEmployee emp=ni.appendEmployee();
-        emp.setPersonalID("personalID1");
-        emp.setRoles(new VString("CSR",null));
-        if(jmfICSLevel>=1 && misICSLevel>=2)
+        if(theParentNode==null)
         {
-            JDFJMF jmf=ni.appendJMF();
-            jmf.setSenderID("MISGTSender");
-            JDFQuery q=jmf.appendQuery(EnumType.Status);
-            final JDFStatusQuParams statusQuParams = q.appendStatusQuParams();
-            statusQuParams.setJobID(theNode.getJobID(true));
-            statusQuParams.setJobPartID(theNode.getJobPartID(false));
-            statusQuParams.setJobDetails(EnumJobDetails.Brief);
-            final JDFSubscription subscription = q.appendSubscription();
-            subscription.setRepeatTime(600);
-            subscription.setURL(misURL==null?"http://MIS.printer.com/JMFSignal":misURL);
+            JDFEmployee emp=ni.appendEmployee();
+            emp.setPersonalID("personalID1");
+            emp.setRoles(new VString("CSR",null));
+            if(jmfICSLevel>=1 && misICSLevel>=2)
+            {
+                JDFJMF jmf=ni.appendJMF();
+                jmf.setSenderID("MISGTSender");
+                JDFQuery q=jmf.appendQuery(EnumType.Status);
+                final JDFStatusQuParams statusQuParams = q.appendStatusQuParams();
+                statusQuParams.setJobID(theNode.getJobID(true));
+                statusQuParams.setJobPartID(theNode.getJobPartID(false));
+                statusQuParams.setJobDetails(EnumJobDetails.Brief);
+                final JDFSubscription subscription = q.appendSubscription();
+                subscription.setRepeatTime(600);
+                subscription.setURL(misURL==null?"http://MIS.printer.com/JMFSignal":misURL);
+            }
         }
         return ni;
     }
@@ -202,9 +217,9 @@ public class MISGoldenTicket extends BaseGoldenTicket
      */
     protected JDFCustomerInfo initCustomerInfo()
     {
-        if(thePreviousNode!=null)
+        if(theParentNode!=null)
         {
-            final JDFCustomerInfo customerInfo = thePreviousNode.getCustomerInfo();
+            final JDFCustomerInfo customerInfo = theParentNode.getCustomerInfo();
             if(customerInfo!=null)
             {
                 theNode.linkResource(customerInfo, EnumUsage.Input, null);
@@ -228,18 +243,19 @@ public class MISGoldenTicket extends BaseGoldenTicket
         return ci;
     }
 
-    protected JDFDevice initDevice()
+    
+    protected JDFDevice initDevice(JDFNode reuseNode, String devID)
     {
         if(misICSLevel<2)
             return null;
-        if(thePreviousNode!=null)
-            theNode.linkResource(thePreviousNode.getResource(ElementName.DEVICE, EnumUsage.Input, 0),EnumUsage.Input,null);
+        if(reuseNode!=null)
+            theNode.linkResource(reuseNode.getResource(ElementName.DEVICE, EnumUsage.Input, 0),EnumUsage.Input,null);
         JDFDevice dev = (JDFDevice) theNode.getCreateResource(ElementName.DEVICE, EnumUsage.Input, 0);
         dev.setResStatus(EnumResStatus.Available, false);
-        dev.setDeviceID("deviceID");
+        dev.setDeviceID(devID);
         return dev;
     }
-    
+
     /**
      * add the type of amount link for resource audits etc
      * @param link
@@ -251,4 +267,24 @@ public class MISGoldenTicket extends BaseGoldenTicket
         amountLinks.appendUnique(link);
     }
 
+    public String getCategory()
+    {
+        return category;
+    }
+
+    public void setCategory(String _category)
+    {
+        category = _category;
+    }
+
+    /**
+     * get the correct Types from category
+     * @return
+     */
+    public VString getTypes()
+    {
+        if(category==null)
+            return null;
+        return catMap.get(category);
+    }
 }
