@@ -1721,7 +1721,9 @@ public class CheckJDF
         }
         else
         {
-            testElement.copyElement(testResult.getRoot(), null);
+            KElement jRoot=testElement.copyElement(testResult.getRoot(), null);
+            if(!jRoot.getBoolAttribute("IsValid", null, true))
+                testElement.setAttribute("IsValid", false,null);
             sysOut.println("\nResult of getBadJDFInfo: "+testResult.toString());
 
         }
@@ -2459,10 +2461,8 @@ public class CheckJDF
                     if (root == null)
                     { // no jdf, maybe jmf
                         if(jmf!=null) {
-                            printJMFDevCap(jmf, checkJDFxmlRoot);
                             printBad(jmf,  0, checkJDFxmlRoot, true);
-
-                            
+                            printJMFDevCap(jmf, checkJDFxmlRoot);
                         } else {
                             checkJDFxmlRoot.setAttribute("FoundJDF",false,null);
                         }

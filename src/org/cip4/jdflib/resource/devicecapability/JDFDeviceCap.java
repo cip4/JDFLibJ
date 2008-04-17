@@ -418,8 +418,8 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
             if(ms!=null)
             {
                 messageReport.setAttribute(FITS_TYPE, true, null);
-                invalidDevCaps(ms,m, testlists, level, parentRoot,ignoreExtensions);
-                actionPoolReport(ms, m, parentRoot);
+                invalidDevCaps(ms,m, testlists, level, messageReport,ignoreExtensions);
+                actionPoolReport(ms, m, messageReport);
             }
             else
             {
@@ -438,8 +438,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
                 nBad++;
             }
         }
-        if(nBad==0)
-            parentRoot.setAttribute("IsValid", "true");
+        parentRoot.setAttribute("IsValid", nBad==0,null);
         return bugReport;
     }
 
@@ -806,7 +805,10 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
         if (!irp.hasChildElements())
             irp.deleteNode();
-
+        if(!bRet)
+        {
+            
+        }
         return bRet;
     }
 
