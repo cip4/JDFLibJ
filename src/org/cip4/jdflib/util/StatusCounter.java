@@ -153,7 +153,13 @@ public class StatusCounter
          return "[StatusCounter - counter: "+m_deviceID+"Start date: "+startDate+" "+vLinkAmount+"]";
     }
 
-
+    public void writeAll()
+    {
+        if(m_Node!=null)
+        {
+            getVResLink(2); // write all reslinks to disk
+        }
+    }
     /**
      * construct a StatusUtil for a node n
      * @param node the JDFNode that is being processed
@@ -491,6 +497,7 @@ public class StatusCounter
         nextPhase=ap.setPhase(nodeStatus,nodeStatusDetails,m_vPartMap);
         if(bEnd && !bCompleted)
         {
+            writeAll();
             appendResourceAudits();
             appendProcessRun(nodeStatus, ap);
             bCompleted=true;
@@ -588,12 +595,12 @@ public class StatusCounter
     {
         JDFResponse respStatus=(JDFResponse)jmf.appendMessageElement(JDFMessage.EnumFamily.Response,JDFMessage.EnumType.Status);
         JDFDeviceInfo deviceInfo = respStatus.getCreateDeviceInfo(0);
-        if(!bEnd) // don't write a jobphase for an idle device
-        {
+//        if(!bEnd) // don't write a jobphase for an idle device
+//        {
             JDFJobPhase jp=deviceInfo.createJobPhaseFromPhaseTime(pt2);
             setJobPhaseAmounts(la, jp);
             jp.setQueueEntryID(queueEntryID);
-        }
+//        }
 
         deviceInfo.setDeviceStatus(deviceStatus);
         deviceInfo.setStatusDetails(deviceStatusDetails);
@@ -694,7 +701,7 @@ public class StatusCounter
 
         if(la.isTrackWaste())
         {
-            if(la.getAmount(la.lastBag.phaseAmount)!=0) {
+            if(la.getAmount(la.lastBag.totalAmount)!=0) {
                 jp.setPhaseAmount(la.getAmount(la.lastBag.phaseAmount));
                 jp.setAmount(la.getAmount(la.lastBag.totalAmount));
             }
@@ -729,7 +736,7 @@ public class StatusCounter
      */
     private VElement getVResLink(int n)
     {
-        if(vLinkAmount==null)
+        if(vLinkAmount==null || m_Node==null)
             return null;
         VElement vRet=new VElement();
         for(int i=0;i<vLinkAmount.length;i++)
@@ -1015,14 +1022,14 @@ public class StatusCounter
             if(isTrackWaste())
             {
                 vMap.put(EnumPartIDKey.Condition, "Good");
-                if(lastBag.totalAmount!=0) {
+                if(lastBag.totalAmount!=0 || startAmount>0) {
                     rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, formatAmount(lastBag.phaseAmount), null, vMap);
                 }
                 if(startAmount!=0) {
                     rl.setAmountPoolAttribute(AttributeName.AMOUNT, formatAmount(startAmount), null, vMap);
                 }
                 vMap.put(EnumPartIDKey.Condition, "Waste");
-                if(lastBag.totalWaste!=0) {
+                if(lastBag.totalWaste!=0 || startWaste>0) {
                     rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, formatAmount(lastBag.phaseWaste), null, vMap);
                 }
                 if(startWaste!=0) {
@@ -1031,7 +1038,7 @@ public class StatusCounter
             }
             else
             {
-                if(lastBag.totalAmount + lastBag.totalWaste !=0) {
+                if(lastBag.totalAmount + lastBag.totalWaste !=0 ||  startAmount+startWaste >0) {
                     rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, formatAmount(lastBag.phaseAmount+lastBag.phaseWaste), null, vMap);
                 }
                 if(startAmount+startWaste!=0) {
@@ -1325,6 +1332,25 @@ public class StatusCounter
     public void setOperationMode(EnumDeviceOperationMode _operationMode)
     {
         operationMode = _operationMode;
+    }
+
+    /**
+     * @param resID
+     * @return
+     */
+    public double getPlannedAmount(String refID)
+    {
+        final LinkAmount la=getLinkAmount(refID);
+        return la==null ? 0 : la.getAmount(la.startAmount);
+    }
+    /**
+     * @param resID
+     * @return
+     */
+    public double getPlannedWaste(String refID)
+    {
+        final LinkAmount la=getLinkAmount(refID);
+        return la==null ? 0 : la.getAmount(la.startWaste);
     }
 
 }

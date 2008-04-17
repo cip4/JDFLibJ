@@ -188,7 +188,19 @@ public class JDFQueueEntryTest extends TestCase
         assertEquals(q.getQueueEntryPos("qe1"), -1);
         assertNull(q.getQueueEntry("qe1"));
     }
-
+    public void testSortQueue()
+    {
+        q.setAutomated(true);
+        JDFQueue q2=(JDFQueue) new JDFDoc("Queue").getRoot();
+        JDFQueueEntry qe=q2.appendQueueEntry();
+        qe.setQueueEntryID("qeNew");
+        qe.setQueueEntryStatus(EnumQueueEntryStatus.Waiting);
+        qe.setPriority(42);
+        JDFQueueEntry qe2=(JDFQueueEntry) q.moveElement(qe, null);
+        q.getQueueEntry(-2).sortQueue(-1);
+        qe2.sortQueue(-1);
+        assertEquals(q.getQueueEntryPos("qeNew"), 3);
+    }
     /* (non-Javadoc)
      * @see junit.framework.TestCase#setUp()
      */

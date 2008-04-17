@@ -408,6 +408,13 @@ public class JDFQueue extends JDFAutoQueue
                 }
             }
         }
+        if(theEntry!=null)
+        {
+            if(deviceID!=null)
+                theEntry.setDeviceID(deviceID);
+            if(proxyFlag!=null)
+                theEntry.setAttribute(proxyFlag, "true");
+        }
         return theEntry; 
     }
 

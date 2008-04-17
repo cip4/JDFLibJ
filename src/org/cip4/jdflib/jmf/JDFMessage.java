@@ -2027,10 +2027,20 @@ public class JDFMessage extends JDFAutoMessage
      * get iSkip'th element <code>ResourceQuParams</code>
      * @param iSkip number of elements to skip
      * @return JDFResourceQuParams: the element
+     * @deprecated use null parameter version
      */
+    @Deprecated
     public JDFResourceQuParams getResourceQuParams(int iSkip)
     {
         return (JDFResourceQuParams) getValidElement(ElementName.RESOURCEQUPARAMS, null, iSkip);
+    }
+    /**
+     * get first element <code>ResourceQuParams</code>
+     * @return JDFResourceQuParams: the element
+     */
+    public JDFResourceQuParams getResourceQuParams()
+    {
+        return (JDFResourceQuParams) getValidElement(ElementName.RESOURCEQUPARAMS, null, 0);
     }
     //////////////////////////////////////////////////////////////////////
 

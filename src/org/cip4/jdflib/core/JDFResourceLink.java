@@ -1681,11 +1681,27 @@ public class JDFResourceLink extends JDFElement
             vm.add((JDFAttributeMap)null);
         }
         double dd=0;
-        for(int j=0;j<vm.size();j++)
+        JDFAmountPool ap=getAmountPool();
+        if(ap==null)
+            return getRealAttribute(attName, null, 0.0);
+        
+        VElement vParts=ap.getChildElementVector(ElementName.PARTAMOUNT, null);
+        
+        if(vParts.isEmpty())
+            return getRealAttribute(attName, null, 0.0);
+
+        
+        for(int j=0;j<vParts.size();j++)
         {
-            double d=getAmountPoolDouble(attName, vm.elementAt(j));
-            if(d>=0)
-                dd+=d;
+            final JDFPartAmount pa = (JDFPartAmount) vParts.elementAt(j);
+            if(!pa.getPartMapVector().subMap(vm))
+                    continue;
+            String ret=null;
+            ret= pa.getAttribute(attName, null, null);
+            if(ret==null)
+                ret=getAttribute(attName, null, null);
+
+            dd+=StringUtil.parseDouble(ret, 0.0);
         }
         return dd;
     }

@@ -282,10 +282,13 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
         map.put("Condition", "Good");
 
         rl.setActualAmount(12,map);
-        map.put("Condition", "Waste");
-        rl.setActualAmount(14,map);
         VJDFAttributeMap vMap=new VJDFAttributeMap();
         vMap.add(new JDFAttributeMap("SignatureName","1"));
+        vMap.add(new JDFAttributeMap("SignatureName","2"));
+
+        rl.getAmountPool().getPartAmount(map).setPartMapVector(vMap);
+        map.put("Condition", "Waste");
+        rl.setActualAmount(14,map);
         assertEquals(rl.getAmountPoolSumDouble(AttributeName.ACTUALAMOUNT,null),26.,0.1);
         assertEquals(rl.getAmountPoolSumDouble(AttributeName.ACTUALAMOUNT,vMap),26.,0.1);
        }

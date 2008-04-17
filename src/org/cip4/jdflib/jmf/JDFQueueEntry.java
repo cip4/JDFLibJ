@@ -233,9 +233,9 @@ public class JDFQueueEntry extends JDFAutoQueueEntry
     /**
      * sort this into the queue based on current values
      * assumes presorted queue
-     * @param oldVal - the previous sort value
+     * @param oldVal - the previous sort value, use -1 to sort from back
      */
-    private void sortQueue(int oldVal)
+    public void sortQueue(int oldVal)
     {
         int value=getSortPriority();
         final JDFQueue queue = (JDFQueue)getParentNode_KElement();
