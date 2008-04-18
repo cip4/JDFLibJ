@@ -481,6 +481,19 @@ public class KElementTest extends JDFTestCaseBase
 
     }
 
+    public void testMoveElement()
+    {
+        XMLDoc doc      = new XMLDoc("Test",null);
+        KElement root=doc.getRoot();
+        KElement a=root.appendElement("a");
+        KElement b=root.appendElement("b");
+        KElement c=b.appendElement("c");
+        KElement c2= b.removeChild("c", null, 0);
+        assertEquals(c,c2);
+        KElement c3=a.moveElement(c2, null);
+        assertEquals(c,c3);
+    }
+    
     public void testMoveAttribute()
     {
         XMLDoc doc      = new XMLDoc("Test","www.test.com");

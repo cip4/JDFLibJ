@@ -584,11 +584,23 @@ public class StatusCounter
 
         docJMFPhaseTime=new JDFDoc(ElementName.JMF);
         JDFDeviceInfo newDevInfo=docJMFPhaseTime.getJMFRoot().appendResponse(EnumType.Status).appendDeviceInfo();
+        fillDeviceInfo(deviceStatus, deviceStatusDetails, newDevInfo);
+        newDevInfo.setIdleStartTime(startDate);
+
+        return bChanged;
+    }
+
+    /**
+     * @param deviceStatus
+     * @param deviceStatusDetails
+     * @param newDevInfo
+     */
+    private void fillDeviceInfo(EnumDeviceStatus deviceStatus, String deviceStatusDetails, JDFDeviceInfo newDevInfo)
+    {
         newDevInfo.setDeviceStatus(deviceStatus);
         newDevInfo.setStatusDetails(deviceStatusDetails);
-        newDevInfo.setIdleStartTime(startDate);
         newDevInfo.setDeviceOperationMode(operationMode);
-        return bChanged;
+        newDevInfo.setDeviceID(m_deviceID);
     }
 
     private void updateCurrentJobPhase(EnumNodeStatus nodeStatus, EnumDeviceStatus deviceStatus, String deviceStatusDetails, JDFJMF jmf, final LinkAmount la, JDFPhaseTime pt2, boolean bEnd)
@@ -602,11 +614,8 @@ public class StatusCounter
             jp.setQueueEntryID(queueEntryID);
 //        }
 
-        deviceInfo.setDeviceStatus(deviceStatus);
-        deviceInfo.setStatusDetails(deviceStatusDetails);
-        deviceInfo.setDeviceID(m_deviceID);
-        deviceInfo.setDeviceOperationMode(operationMode);
-        
+            fillDeviceInfo(deviceStatus, deviceStatusDetails, deviceInfo);
+         
         m_Node.setPartStatus(m_vPartMap,nodeStatus);
         getVResLink(2);// update the nodes links
 
@@ -763,6 +772,8 @@ public class StatusCounter
      */
     public JDFDoc getDocJMFPhaseTime()
     {
+        if(docJMFPhaseTime==null)
+            setIdlePhase(EnumDeviceStatus.Idle, null);
         return docJMFPhaseTime;
     }
 

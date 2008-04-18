@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,6 +87,7 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
+import org.cip4.jdflib.util.MultiModuleStatusCounter.MultiType;
 
 
 public class StatusCounterTest extends JDFTestCaseBase
@@ -105,11 +106,11 @@ public class StatusCounterTest extends JDFTestCaseBase
         n = d.getJDFRoot();
         xpMedia = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", null, null, 0);
         JDFResourceLink rlxp=n.getLink(xpMedia, null);
-       rlxp.setAmount(100, null);
-       sc = new StatusCounter(n,null,null);
+        rlxp.setAmount(100, null);
+        sc = new StatusCounter(n,null,null);
         deviceID = "Status-counter-TestDevice";
         sc.setDeviceID(deviceID);
-         resID = xpMedia.getID();
+        resID = xpMedia.getID();
         sc.setFirstRefID(resID);
         sc.addPhase(resID, 200, 0);
 
@@ -150,7 +151,7 @@ public class StatusCounterTest extends JDFTestCaseBase
             sc.addPhase(resID, 0, 100);
             assertEquals(""+loop,jp.getWaste(), loop*100,0);
             assertEquals("multiple setPhase calls do Stack: "+loop,rlXM.getActualAmount(new JDFAttributeMap("Condition","Waste")), 100*loop,0);
-         }
+        }
         sc.setWorkType(EnumWorkType.Alteration);
         bChanged=sc.setPhase(EnumNodeStatus.InProgress, "ii", EnumDeviceStatus.Running, "r");
         assertTrue(bChanged);
@@ -176,8 +177,8 @@ public class StatusCounterTest extends JDFTestCaseBase
         assertEquals(jp.getMISDetails().getWorkType(),EnumWorkType.Alteration);
     }
 
-//////////////////////////////////////////////////////////////////////////////////////////
-    
+
+
     public void testIdle()
     {
         JDFExposedMedia m=(JDFExposedMedia) n.getMatchingResource("ExposedMedia", null, null, 0);
@@ -211,6 +212,28 @@ public class StatusCounterTest extends JDFTestCaseBase
         jp=deviceInfo.getJobPhase(0);
         assertNull(jp);
     }    
+
+    public void testMultiModuleJob()
+    {
+        MultiModuleStatusCounter msc=new MultiModuleStatusCounter(MultiType.JOB);
+        JDFResponse idlePhase=msc.getStatusResponse().getJMFRoot().getResponse(0);
+        assertEquals(idlePhase.numChildElements(ElementName.DEVICEINFO, null), 1);
+        StatusCounter scRIP=new StatusCounter(n,null,null);
+        scRIP.setDeviceID("d1");
+        msc.addModule(scRIP);
+        JDFExposedMedia m=(JDFExposedMedia) n.getMatchingResource("ExposedMedia", null, null, 0);
+        String resID=m.getID();
+        scRIP.setFirstRefID(resID);
+        scRIP.addPhase(resID, 200, 0);
+
+        JDFNode n2= creatXMDoc().getJDFRoot();
+        StatusCounter scRIP2=new StatusCounter(n2,null,null);
+        scRIP2.setDeviceID("d2");
+        msc.addModule(scRIP2);
+        JDFResponse idlePhase2=msc.getStatusResponse().getJMFRoot().getResponse(0);
+        assertEquals(idlePhase2.numChildElements(ElementName.DEVICEINFO, null), 2);
+        
+    }
     
     public void testMultiModule()
     {
@@ -218,11 +241,11 @@ public class StatusCounterTest extends JDFTestCaseBase
         scRIP.addModule("ID_RIP", "RIP");
         StatusCounter scSetter=new StatusCounter(n,null,null);
         scSetter.addModule("ID_Setter", "Platesetter");
-        
-        MultiModuleStatusCounter msc=new MultiModuleStatusCounter();
+
+        MultiModuleStatusCounter msc=new MultiModuleStatusCounter(MultiType.MODULE);
         msc.addModule(scRIP);
         msc.addModule(scSetter);
-        
+
         JDFExposedMedia m=(JDFExposedMedia) n.getMatchingResource("ExposedMedia", null, null, 0);
         String resID=m.getID();
         scRIP.setFirstRefID(resID);
@@ -245,8 +268,8 @@ public class StatusCounterTest extends JDFTestCaseBase
         scSetter.addPhase(resID, 400, 0);
         dJMFAll=msc.getStatusResponse();
         assertEquals("1 RIP, 1 setter",dJMFAll.getRoot().getChildrenByTagName(ElementName.JOBPHASE, null, null, false, true, -1).size(), 2);
-       
-  
+
+
         scRIP.setActiveNode(null, null, null);
         bChanged= scRIP.setPhase(null, null, EnumDeviceStatus.Idle, null);
         dJMFAll=msc.getStatusResponse();

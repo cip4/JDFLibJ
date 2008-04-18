@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -73,11 +73,14 @@ package org.cip4.jdflib.util;
 import java.util.Vector;
 
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFResponse;
 
 /**
  * @author prosirai
@@ -89,6 +92,18 @@ import org.cip4.jdflib.jmf.JDFJMF;
 public class MultiModuleStatusCounter
 {
     private Vector<StatusCounter> counters=new Vector<StatusCounter>();
+    public enum MultiType {MODULE, JOB}
+    private MultiType counterType;
+    private StatusCounter root=null;
+    public MultiModuleStatusCounter(MultiType _counterType)
+    {
+        super();
+        this.counterType = _counterType;
+        if(counterType==MultiType.JOB)
+        {
+            root=new StatusCounter(null,null,null);
+        }
+    }
 
     /**
      * add a statuscounter representing a set of modules to this device status counter
@@ -116,6 +131,17 @@ public class MultiModuleStatusCounter
      */
     public JDFDoc getStatusResponse()
     {
+        if(counterType==MultiType.MODULE)
+            return getStatusResponseModule();
+        else
+            return getStatusResponseJob();
+    }
+    /**
+     * return the jmf root of the status jmf that contains all modules, null if no modules are active
+     * @return
+     */
+   private JDFDoc getStatusResponseModule()
+    {
         if(counters.size()==0)
             return null;
 
@@ -138,7 +164,43 @@ public class MultiModuleStatusCounter
         }            
         return d;
     }
+   /**
+    * return the jmf root of the status jmf that contains all modules, null if no modules are active
+    * @return
+    */
+  private JDFDoc getStatusResponseJob()
+   {
+       if(counters.size()==0)
+           return root.getDocJMFPhaseTime();
 
+       JDFDoc d=counters.elementAt(0).getDocJMFPhaseTime();
+       final JDFJMF jmf = d.getJMFRoot();
+       d=new JDFDoc("JMF");
+       d.getJMFRoot().mergeElement(jmf, false);
+       final JDFResponse response = d.getJMFRoot().getResponse(0);
+      
+       for(int i=1;i<counters.size();i++)
+       {
+           StatusCounter counter=counters.elementAt(i);
+           final JDFDoc docJMFPhaseTime = counter.getDocJMFPhaseTime();
+           if(docJMFPhaseTime==null)
+               continue;
+           final JDFResponse response2 = docJMFPhaseTime.getJMFRoot().getResponse(0);
+           JDFDeviceInfo di2=response2.getDeviceInfo(0);
+           String devID=di2.getDeviceID();
+           JDFDeviceInfo di3=KElement.isWildCard(devID) ? null : (JDFDeviceInfo) response.getChildWithAttribute(ElementName.DEVICEINFO, AttributeName.DEVICEID, null, devID, 0, true);
+           if(di3!=null)
+           {
+               VElement phases=di2.getChildElementVector(ElementName.JOBPHASE, null, null, true, -1, false);
+               for(int j=0;j<phases.size();j++)
+                   di3.copyElement(phases.elementAt(j), null);
+
+           }
+           else
+               response.copyElement(di2, null);
+       }            
+       return d;
+   }
     /**
      * @return the amalgamated device status
      */
@@ -153,5 +215,10 @@ public class MultiModuleStatusCounter
             maxStatus=(EnumDeviceStatus) EnumUtil.max(maxStatus, counters.elementAt(i).getStatus());
         }
         return maxStatus;
+    }
+
+    public StatusCounter getRoot()
+    {
+        return root;
     }
 }

@@ -3734,7 +3734,8 @@ public class KElement extends ElementNSImpl
         {
             if(src.isAncestor(this))
                 return null; // snafu when moving a to b in a/b
-            Node srcElement = src.getParentNode().removeChild(src);
+            final Node parentNode = src.getParentNode();
+            Node srcElement = parentNode==null ? src : parentNode.removeChild(src);
 
             if (beforeChild != null && beforeChild.getParentNode() != this)
             {
