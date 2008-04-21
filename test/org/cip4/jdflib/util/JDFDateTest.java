@@ -241,9 +241,9 @@ public class JDFDateTest extends TestCase
         assertTrue("Bug "+strDate+" is not equal to 2004-11-26T11:43:10-03:00", 
                 strDate.equals("2004-11-26T11:43:10-03:00"));
         
-        date = new JDFDate("2004-11-26T11:43:10");
-        assertNotNull(date);
-        strDate = date.getDateTimeISO();
+//        date = new JDFDate("2004-11-26T11:43:10");
+//        assertNotNull(date);
+//        strDate = date.getDateTimeISO();
 
     }
 

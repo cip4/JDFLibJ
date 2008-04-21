@@ -622,7 +622,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
         {
             JDFDevCap dc=(JDFDevCap) devicecap.getChildWithAttribute(null, AttributeName.ID, null, "dc_Layout", 0, false);
             VString v=dc.getNamePathVector(true);
-            assertEquals(v.size(),1);
+            assertTrue(v.size()>1);
             assertEquals(v.stringAt(0),"JDF/ResourcePool/Layout");
         }
         {

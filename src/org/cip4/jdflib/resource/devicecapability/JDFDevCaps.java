@@ -359,7 +359,13 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
             }
             else if(cont.equals(EnumContext.Resource))
             {
+                String nam=result;
                 result=ElementName.JDF+"/"+ElementName.RESOURCEPOOL+"/"+result;
+                for(int i=0;i<6;i++)
+                {
+                    vResult.add(result);
+                    result=result+"/"+nam;                    
+                }
             }
 
             vResult.add(result);
