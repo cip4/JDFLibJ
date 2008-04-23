@@ -80,9 +80,12 @@
 package org.cip4.jdflib.util;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
+import java.util.Map.Entry;
 
 /**
  * class with utilities for containers, e.g. Vectors, sets etc.
@@ -134,6 +137,25 @@ public class ContainerUtil
         for(int i=0;i<l.length;i++)
             v.add(l[i]);
         return v;
+    }
+    /**
+     * create a Vector from an Array
+     * @param l
+     * @return
+     */
+    public static Vector toValueVector(Map m)
+    {
+       if(m==null)
+           return null;
+       final Set<Entry> entrySet = m.entrySet();
+       if(entrySet.size()==0)
+           return null;
+       Vector v=new Vector();
+       v.ensureCapacity(entrySet.size());
+       Iterator<Entry> it = entrySet.iterator();
+       while(it.hasNext())
+           v.add(it.next().getValue());
+       return v;
     }
 
     /**

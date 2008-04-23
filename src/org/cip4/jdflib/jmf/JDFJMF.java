@@ -623,6 +623,27 @@ public class JDFJMF extends JDFAutoJMF
     }
 
     /**
+     * get a vector of all messages in a JMF from a JDFDoc
+     * 
+     * @param doc the JDFDoc to search - only valid for root JMF
+     * @param family requested message family
+     * @param typ    requested message type
+     * @return VElement all message elements, null if no match found
+     * 
+     */
+    public static VElement getMessageVector (JDFDoc doc, JDFMessage.EnumFamily family, JDFMessage.EnumType typ)
+    {
+        if(doc==null)
+            return null;
+        JDFJMF jmf=doc.getJMFRoot();
+        if(jmf==null)
+            return null;
+
+        VElement vM=jmf.getMessageVector(family, typ);        
+        return vM.size()==0 ? null : vM;
+    }
+
+    /**
      * get a vector of all messages in this JMF
      * 
      * @param family requested message family
