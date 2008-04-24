@@ -104,7 +104,7 @@ public abstract class JDFAutoModuleStatus extends JDFElement
         atrInfoTable[0] = new AtrInfoTable(AttributeName.COMBINEDPROCESSINDEX, 0x33333333, AttributeInfo.EnumAttributeType.IntegerList, null, null);
         atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICESTATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, JDFDeviceInfo.EnumDeviceStatus.getEnum(0), null);
         atrInfoTable[2] = new AtrInfoTable(AttributeName.MODULEID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x22222222, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
         atrInfoTable[4] = new AtrInfoTable(AttributeName.MODULETYPE, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
         atrInfoTable[5] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
     }

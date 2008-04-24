@@ -160,7 +160,7 @@ public class JDFModuleStatus extends JDFAutoModuleStatus
         final VString v = super.getMissingAttributes(nMax);
         if(nMax<=0 || v.size()<=nMax )
         {
-            if(!hasAttribute(AttributeName.MODULEINDEX)&& !!hasAttribute(AttributeName.MODULEID))
+            if(!hasAttribute(AttributeName.MODULEINDEX)&& !hasAttribute(AttributeName.MODULEID))
             {
                 v.add(AttributeName.MODULEID);
                 v.add(AttributeName.MODULEINDEX);
