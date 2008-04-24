@@ -990,6 +990,10 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
         {
             return true;
         }
+        else if (listType.equals(EnumListType.Range))
+        {
+            return rangelist.size()==1;
+        }
         else if ( listType.equals(EnumListType.List) ||
                 listType.equals(EnumListType.CompleteList)  || // complete or not - tested in fitsValueList
                 listType.equals(EnumListType.CompleteOrderedList) || // tested in fitsValueList

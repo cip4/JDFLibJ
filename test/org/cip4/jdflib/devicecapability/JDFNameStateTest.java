@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -38,7 +38,7 @@
  *
  * Usage of this software in commercial products is subject to restrictions. For
  * details please consult info@cip4.org.
-  *
+ *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -90,87 +90,100 @@ import org.cip4.jdflib.resource.devicecapability.JDFNameState;
 public class JDFNameStateTest extends JDFTestCaseBase
 {
 
-    JDFNameState iState=null;
+    JDFNameState theState=null;
 
     public void setUp() throws Exception
     {
         super.setUp();
         JDFDoc doc=new JDFDoc("NameState");
-        iState=(JDFNameState)doc.getRoot();
-        
+        theState=(JDFNameState)doc.getRoot();
+        theState.setAllowedValueList(new VString("a b c d",null));
+
     }
     ////////////////////////////////////////////////////
-    
+
     public final void testFitsValue()
     {
         JDFParser p = new JDFParser();
         String strNode = 
             "<NameState Name=\"BitDepth\" DefaultValue=\"1\" AllowedValueList=\"a b c d\"/>";
-            
+
         JDFDoc jdfDoc = p.parseString(strNode);
         JDFNameState state = (JDFNameState) jdfDoc.getRoot();
 
         VString list = new VString("a b c",null);
-        
+
         state.setListType(EnumListType.RangeList);
         assertFalse("ListType=RangeList",state.fitsValue(list.toString(),JDFBaseDataTypes.EnumFitsValue.Allowed));
-        
+
         VString list2 = new VString();
         list2.add("d"); // 1~-2
-        
-        
-      }
+
+
+    }
+
+    ////////////////////////////////////////////////////
+
+    public final void testFitsValue_ListType()
+    {
+        theState.setListType(EnumListType.Range);
+        assertTrue("single values a re ranges too",theState.fitsValue("a", JDFBaseDataTypes.EnumFitsValue.Allowed));
+        assertFalse(theState.fitsValue("a b", JDFBaseDataTypes.EnumFitsValue.Allowed));
+        theState.setAllowedValueList(null);
+        assertTrue(theState.fitsValue("a ~ b", JDFBaseDataTypes.EnumFitsValue.Allowed));
+        assertFalse(theState.fitsValue("a  b", JDFBaseDataTypes.EnumFitsValue.Allowed));
+    }
 
     ////////////////////////////////////////////////////////////
-    
+
     public final void testSetCurrentValue() throws Exception
     {
-       final VString integerList = new VString("1 2 3",null);
-       iState.setCurrentValue(integerList);
-       assertEquals(iState.getCurrentValue(), integerList);
-       iState.setCurrentValue("1");
-       assertEquals(iState.getCurrentValue(), new VString("1",null));
+        final VString integerList = new VString("1 2 3",null);
+        theState.setCurrentValue(integerList);
+        assertEquals(theState.getCurrentValue(), integerList);
+        theState.setCurrentValue("1");
+        assertEquals(theState.getCurrentValue(), new VString("1",null));
 
     }
     ////////////////////////////////////////////////////////////
     public final void testSetDefaultValue() throws Exception
     {
-       final VString integerList = new VString("1 2 3",null);
-       iState.setDefaultValue(integerList);
-       assertEquals(iState.getDefaultValue(), integerList);
-       iState.setDefaultValue("1");
-       assertEquals(iState.getDefaultValue(), new VString("1",null));
+        final VString integerList = new VString("1 2 3",null);
+        theState.setDefaultValue(integerList);
+        assertEquals(theState.getDefaultValue(), integerList);
+        theState.setDefaultValue("1");
+        assertEquals(theState.getDefaultValue(), new VString("1",null));
 
     }
     ////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////
     public final void testSetAllowedValueList() throws Exception
     {
-       final VString integerList = new VString("1 2 3 4 44",null);
-       iState.setAllowedValueList(integerList);
-       assertEquals(iState.getPresentValueList(), integerList);
-       assertEquals(iState.getAllowedValueList(), integerList);
-       final VString integerList2 = new VString("1 2 3 7 77",null);
-       iState.setPresentValueList(integerList2);
-       assertEquals(iState.getPresentValueList(), integerList2);
-       assertEquals(iState.getAllowedValueList(), integerList);
+        final VString integerList = new VString("1 2 3 4 44",null);
+        theState.setAllowedValueList(integerList);
+        assertEquals(theState.getPresentValueList(), integerList);
+        assertEquals(theState.getAllowedValueList(), integerList);
+        final VString integerList2 = new VString("1 2 3 7 77",null);
+        theState.setPresentValueList(integerList2);
+        assertEquals(theState.getPresentValueList(), integerList2);
+        assertEquals(theState.getAllowedValueList(), integerList);
     }
     ////////////////////////////////////////////////////////////
     public final void testIsValid() throws Exception
     {
         final VString integerList = new VString("1 2 3",null);
-        iState.setDefaultValue(integerList);
-        iState.setCurrentValue(integerList);
-        assertFalse(iState.isValid(EnumValidationLevel.Complete));
-        iState.setListType(EnumListType.List);
-        assertTrue(iState.isValid(EnumValidationLevel.Complete));
+        theState.setDefaultValue(integerList);
+        theState.setCurrentValue(integerList);
+        assertFalse(theState.isValid(EnumValidationLevel.Complete));
+        theState.setListType(EnumListType.List);
+        assertTrue(theState.isValid(EnumValidationLevel.Complete));
         final VString integerRList = new VString("1 2 3 4 44",null);
-        iState.setAllowedValueList(integerRList);
-        assertTrue(iState.isValid(EnumValidationLevel.Complete));
+        theState.setAllowedValueList(integerRList);
+        assertTrue(theState.isValid(EnumValidationLevel.Complete));
         final VString integerList2 = new VString("1 2 3 7 77",null);
-        iState.setPresentValueList(integerList2);
-        assertTrue(iState.isValid(EnumValidationLevel.Complete));
+        theState.setPresentValueList(integerList2);
+        assertTrue(theState.isValid(EnumValidationLevel.Complete));
     }
-   ////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////
 
 }
