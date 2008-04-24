@@ -834,9 +834,13 @@ public class JDFSpawnTest extends JDFTestCaseBase
         JDFComponent c=(JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Output);
         JDFResourceLink rl=n.getLink(c, null);
         rl.setAttribute("foo:bar", "abc","www.foo.com");
+        final JDFAttributeMap mapSheet = new JDFAttributeMap(EnumPartIDKey.SheetName, "s1");
         final JDFAttributeMap mapGood = new JDFAttributeMap("Condition","Good");
+        final JDFAttributeMap mapWaste = new JDFAttributeMap("Condition","Waste");
         mapGood.put(EnumPartIDKey.SheetName, "s1");
+        mapWaste.put(EnumPartIDKey.SheetName, "s1");
         rl.setAmount(40, mapGood);
+        rl.setAmount(11, mapWaste);
         JDFSpawn spawn=new JDFSpawn(n);
         spawn.vSpawnParts=new VJDFAttributeMap();
         spawn.vSpawnParts.add(new JDFAttributeMap(EnumPartIDKey.SheetName,"s1"));
@@ -855,6 +859,10 @@ public class JDFSpawnTest extends JDFTestCaseBase
         assertTrue(rlmerge.hasAttribute("foo:bar"));
         assertEquals(rlmerge.getActualAmount(mapgf),22.,0.);
         assertEquals("the actualamount was spawned ro",rlmerge.getActualAmount(mapGood),44.+22.,0.);
+        JDFComponent comp=(JDFComponent) rlmerge.getTarget().getPartition(mapSheet, null);
+        assertEquals(comp.getAmount(), 66.0,0.0);
+        assertEquals(comp.getAmountProduced(), 66.0,0.0);
+        
 
     }
     ///////////////////////////////////////////////////////////

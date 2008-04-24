@@ -247,7 +247,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry
                 JDFQueueEntry qEPrev=getPreviousQueueEntry();
                 while(qEPrev!=null)
                 {
-                    if(qEPrev.getSortPriority()<=value)
+                    if(qEPrev.getSortPriority()<value)
                     {
                         qEBefore=qEPrev;
                         qEPrev= qEPrev.getPreviousQueueEntry();
@@ -263,7 +263,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry
                 JDFQueueEntry qENext=getNextQueueEntry();
                 while(qENext!=null)
                 {
-                      if(qENext.getSortPriority()>=value)
+                      if(qENext.getSortPriority()>value)
                       {
                         qEBefore=qENext;
                         qENext= qENext.getNextQueueEntry();

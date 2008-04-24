@@ -960,6 +960,7 @@ public class StatusCounter
             }
             if(nodeLink!=null)
             {
+                
                 if(isTrackWaste())
                 {
                     vMap.put(EnumPartIDKey.Condition, "Good");

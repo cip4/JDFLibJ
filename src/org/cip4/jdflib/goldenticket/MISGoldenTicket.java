@@ -253,6 +253,7 @@ public class MISGoldenTicket extends BaseGoldenTicket
         JDFDevice dev = (JDFDevice) theNode.getCreateResource(ElementName.DEVICE, EnumUsage.Input, 0);
         dev.setResStatus(EnumResStatus.Available, false);
         dev.setDeviceID(devID);
+        dev.setDescriptiveName("Device "+devID);
         return dev;
     }
 

@@ -71,6 +71,7 @@
 package org.cip4.jdflib.goldenticket;
 
 import java.io.File;
+import java.util.Vector;
 
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumPrintingType;
@@ -126,19 +127,17 @@ public class MISCPGoldenTicket extends MISGoldenTicket
      */
     public static final String MISCPS_PRINTING = "MISCPS.Printing";
     private boolean grayBox;
-    private VJDFAttributeMap vParts;
     public VString cols=new VString("Cyan,Magenta,Yellow,Black,Spot1,Spot2,Spot3,Spot4",",");
     public VString colsActual = new VString("Cyan,Magenta,Gelb,Schwarz,RIP 4711,RIP 4712,RIP 4713,RIP 4714",",");
     public VString inks=null;
     public VString inkProductIDs=null;
     public int nCols=0;
     public EnumWorkStyle workStyle=EnumWorkStyle.Simplex;
-    
     private final VString partIDKeys;
     protected int icsLevel;
     public boolean previewAvailable=false;
     public int sheetAmount=1000;
-    
+
     /**
      * create a BaseGoldenTicket
      * @param icsLevel the level to init to (1,2 or 3)
@@ -150,7 +149,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
     public MISCPGoldenTicket(int _icsLevel, EnumVersion jdfVersion, int _jmfLevel, int _misLevel, boolean isGrayBox, VJDFAttributeMap vPartMap)
     {
         super(_misLevel,jdfVersion,_jmfLevel);
-        
+
         grayBox=isGrayBox;
         catMap.put(MISCPS_PRINTING, new VString("InkZoneCalculation ConventionalPrinting",null));
         if(grayBox)
@@ -161,7 +160,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         theStatusCounter.addIgnorePart(EnumPartIDKey.Side);
         theStatusCounter.addIgnorePart(EnumPartIDKey.Separation);
     }
-    
+
     /**
      * initializes this node to a given ICS version
      * @param icsLevel the level to init to (1,2 or 3)
@@ -170,12 +169,12 @@ public class MISCPGoldenTicket extends MISGoldenTicket
     {
         initColsFromParent();
         initAmountsFromParent();
-        
+
         //put level methods?
-        
+
         while(cols.size()>nCols && nCols>0)
             cols.remove(nCols);
-     
+
         if(icsLevel<0)
             return;
         String icsTag="MISCPS_L"+icsLevel+"-"+theVersion.getName();
@@ -236,21 +235,9 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         if(bFirst)
             addAmountLink("Media:Input");
         addAmountLink("Component:Output");
-        theStatusCounter.setActiveNode(theNode, vp, getNodeLinks());
+        super.setActivePart(vp, bFirst);
     }
      /**
-     * simulate execution of this node
-     * the internal node will be modified to reflect the excution
-     */
-   @Override
-   public void execute(VJDFAttributeMap parts, boolean outputAvailable, boolean bFirst)
-   {
-
-       parts=parts==null ? vParts : parts;
-       setActivePart(parts, bFirst);
-       super.execute(parts,outputAvailable,bFirst);
-    }
-    /**
      * simulate execution of this node
      * the internal node will be modified to reflect the excution
      */
@@ -265,7 +252,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         d.addOffset(0,0,durationhours, 0);
         ni.setEnd(d);
     }
-    
+
     /**
      * @param icsLevel
      */
@@ -302,7 +289,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         xm.setPartUsage(EnumPartUsage.Explicit);
         JDFResourceLink rl=theNode.getLink(xm, null);
         rl.setProcessUsage(EnumProcessUsage.Plate);
-        
+
         JDFMedia m= xm.getCreateMedia();
         xm.setResStatus(EnumResStatus.Unavailable, false);
         m.setResStatus(EnumResStatus.Available, false);
@@ -322,8 +309,8 @@ public class MISCPGoldenTicket extends MISGoldenTicket
             }
         }
     }
-    
-    
+
+
     protected void initInk()
     {
         if(inks==null)
@@ -363,7 +350,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         JDFComponent outComp=(JDFComponent) theNode.getCreateResource(ElementName.COMPONENT, EnumUsage.Output, 0);
         outComp.setComponentType(EnumComponentType.FinalProduct,EnumComponentType.Sheet);
         outComp.setProductType("Unknown");
-        
+
         JDFResourceLink rl=theNode.getLink(outComp, EnumUsage.Output);
         if(vParts!=null)
         {
@@ -376,7 +363,9 @@ public class MISCPGoldenTicket extends MISGoldenTicket
                 JDFAttributeMap newMap=new JDFAttributeMap(part);
                 newMap.put(AttributeName.CONDITION, "Good");
                 rl.setAmount(sheetAmount, newMap);
-                rl.setMaxAmount(sheetAmount*1.1, newMap);
+                newMap.put(AttributeName.CONDITION, "Waste");
+                rl.setAmount(sheetAmount, newMap);
+                rl.setMaxAmount(sheetAmount*0.1, newMap);
             }
         }
         else
@@ -446,14 +435,14 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         cpp.setWorkStyle(workStyle);
         cpp.setResStatus(EnumResStatus.Available, false);
     }
-    
+
     @Override
     protected JDFDevice initDevice(JDFNode reuseNode, String devID)
     {
         if(misICSLevel<2)
             return null;
         super.initDevice(reuseNode,devID);
-        
+
         VJDFAttributeMap reducedMap = getReducedMap(new VString("Side Separation"," "));
 
         JDFDevice dev = (JDFDevice) theNode.getCreateResource(ElementName.DEVICE, EnumUsage.Input, 0);
@@ -490,7 +479,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         {
             String name=cols.stringAt(i);
             JDFColor c=cp.getCreateColorWithName(name, null);
-             if(i==0)
+            if(i==0)
                 c.setCMYK(new JDFCMYKColor(1,0,0,0));
             if(i==1)
                 c.setCMYK(new JDFCMYKColor(0,1,0,0));
@@ -525,8 +514,12 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         JDFExposedMedia xm=(JDFExposedMedia) theNode.getResource(ElementName.EXPOSEDMEDIA,EnumUsage.Input, 0);
         VElement v=xm.getLeaves(false);
         for(int i=0;i<v.size();i++)
-            ((JDFResource)v.elementAt(i)).setResStatus(EnumResStatus.Available,false);
-        
+        {
+            final JDFExposedMedia exposedMedia = (JDFExposedMedia)v.elementAt(i);
+            exposedMedia.setResStatus(EnumResStatus.Available,false);
+ //           exposedMedia.getMedia().setResStatus(EnumResStatus.Available,false);
+        }
+
         JDFPreview pv=(JDFPreview) theNode.getResource(ElementName.PREVIEW,EnumUsage.Input, 0);
         v=pv.getLeaves(false);
         for(int i=0;i<v.size();i++)
@@ -581,5 +574,5 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         super.assign(node);
         theNode.getCreateNodeInfo().setPartIDKeys(partIDKeys);
     }
-    
+
 }

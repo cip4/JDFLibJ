@@ -342,7 +342,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		assertTrue("late draft",pa.getMinLateStatus()==JDFResource.EnumResStatus.Draft);
 
 		rl.setMinAmount(42.,map1);
-		assertTrue("map1min",rl.getMinAmount(map1)==42.);
+		assertEquals("map1min",rl.getMinAmount(map1),42.,0.);
 		assertEquals("map1max",rl.getMaxAmount(map1),1.,0.);
         assertEquals("map2min",rl.getMinAmount(map2),2.,0.); // last default
         assertEquals("map0min",rl.getMaxAmount(null),2.,0.); // last default

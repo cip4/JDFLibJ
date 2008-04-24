@@ -119,6 +119,7 @@ public class BaseGoldenTicket
     protected static String misURL=null;
     protected static String deviceURL=null;
     private Vector<BaseGoldenTicket> vKids=new Vector<BaseGoldenTicket>();
+    protected  VJDFAttributeMap vParts=null;
 
     /**
      * good for execute
@@ -128,7 +129,8 @@ public class BaseGoldenTicket
     /**
      * pwaste for execute
      */
-    public int waste=0; 
+    public int waste=0;
+    public int partsAtOnce=0; // 0 = all 
 
     /**
      * create a BaseGoldenTicket
@@ -211,14 +213,50 @@ public class BaseGoldenTicket
         }
     }
 
+    public void setActivePart(VJDFAttributeMap vp, boolean bFirst)
+    {
+        theStatusCounter.setActiveNode(theNode, vp, getNodeLinks());
+    }
+
     /**
      * execute for all kids
      *
      */
-    public void executeAll(VJDFAttributeMap vMap, boolean bOutAvail, boolean bFirst)
+    public void executeAll(VJDFAttributeMap parts, boolean bOutAvail, boolean bFirst)
     {
-        for(int i=0;i<vKids.size();i++)
-            vKids.get(i).execute(vMap, bOutAvail, bFirst);
+        Vector<VJDFAttributeMap> vvMap=new Vector<VJDFAttributeMap>();
+
+        if(parts==null)
+        {
+            if(partsAtOnce>0)
+            {
+                final int size = vParts==null ? 0 : vParts.size();
+                VJDFAttributeMap vCurr=new VJDFAttributeMap();
+                for(int i=0;i<size;i++)
+                {
+                    if(i%partsAtOnce==0)
+                    {
+                        vCurr=new VJDFAttributeMap();
+                        vvMap.add(vCurr);
+                    }
+                    vCurr.add(vParts.elementAt(i));
+                }
+            }
+            else
+                vvMap.add(vParts);
+        }
+        else
+        {
+            vvMap.add(parts);
+        }
+        for(int i=0;i<vvMap.size();i++)
+        {
+            setActivePart(vvMap.get(i), bFirst);
+            for(int j=0;j<vKids.size();j++)
+            {
+                vKids.get(j).execute(vvMap.get(j), bOutAvail, bFirst);
+            }
+        }
     }
     /**
      * simulate execution of this node
@@ -228,7 +266,7 @@ public class BaseGoldenTicket
     {
         theNode.setPartStatus(vMap, EnumNodeStatus.Completed);
         runphases(good, waste);
-        
+
         VElement vResLinks=theNode.getResourceLinks(null);
         int siz= vResLinks!=null ? vResLinks.size() : 0;
         for(int i=0;i<siz;i++)
@@ -305,11 +343,11 @@ public class BaseGoldenTicket
     protected void finalize()
     {
         // handled by statuscounter
-//        int siz =amountLinks==null ? 0 : amountLinks.size();
-//        for(int i=0;i<siz;i++)
-//        {
-//            theStatusCounter.setResourceAudit(amountLinks.elementAt(i), EnumReason.ProcessResult);
-//        }
+//      int siz =amountLinks==null ? 0 : amountLinks.size();
+//      for(int i=0;i<siz;i++)
+//      {
+//      theStatusCounter.setResourceAudit(amountLinks.elementAt(i), EnumReason.ProcessResult);
+//      }
     }
     protected void setVersion()
     {

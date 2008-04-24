@@ -5612,8 +5612,18 @@ public class KElement extends ElementNSImpl
     {
         final String strSrcAttrib = (srcAttrib==null)       ||srcAttrib.equals(JDFConstants.EMPTYSTRING) ? attrib : srcAttrib;
         final String strNameSpace = (srcNameSpaceURI==null) ||srcNameSpaceURI.equals(JDFConstants.EMPTYSTRING) ? nameSpaceURI : srcNameSpaceURI;
-
-        setAttribute(attrib, src.getAttribute_KElement(strSrcAttrib, strNameSpace, null), nameSpaceURI);
+        if(strNameSpace!=null && KElement.xmlnsPrefix(attrib)==null)
+        {
+            Attr an=src.getDOMAttr(strSrcAttrib, srcNameSpaceURI,false);
+            if(an!=null)
+            {
+                String pre=an.getPrefix();
+                if(!isWildCard(pre))
+                    attrib=pre+":"+attrib;
+                
+            }
+        }
+        setAttribute(attrib, src.getAttribute_KElement(strSrcAttrib, srcNameSpaceURI, null), strNameSpace);
     }
 
     /**

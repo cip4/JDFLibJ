@@ -562,6 +562,22 @@ public class KElementTest extends JDFTestCaseBase
         assertEquals(a.getAttribute("foo"),"a");
         assertNull(a.getAttribute("bar", null, null));
         assertNull(b.getAttribute("foo", null, null));
+        
+        // ns copy tests
+        a.setAttribute("ns:aa", "A","www.ns.com");
+        a.setAttribute("ns:bb", "B","www.ns.com");
+        a.setAttribute("cc", "C",null);
+        b.copyAttribute("ns:aa", a, null, null, "www.ns.com");
+        assertEquals(b.getAttribute("ns:aa"),"A");
+        assertEquals(b.getAttribute("aa","www.ns.com",null),"A");
+        b.copyAttribute("bb", a, null, null, "www.ns.com");
+        assertEquals(b.getAttribute("ns:bb"),"B");
+        assertEquals(b.getAttribute("bb","www.ns.com",null),"B");
+        b.copyAttribute("ns:cc", a, "cc", "www.ns.com",null);
+        assertEquals(b.getAttribute("ns:cc"),"C");
+        assertEquals(b.getAttribute("cc","www.ns.com",null),"C");
+
+        
 
     }
 

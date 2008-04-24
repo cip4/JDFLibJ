@@ -633,11 +633,15 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertNull(ni);
         assertNull(root.getStatusPool());
         assertEquals(root.getStatus(), EnumNodeStatus.Waiting);
+        
+        ni=root.getCreateNodeInfo();
+        root.setPartStatus((JDFAttributeMap)null, EnumNodeStatus.Completed);
+        assertEquals(root.getStatus(), EnumNodeStatus.Completed);
+        assertEquals("redundantly blasted in new nodestatus",ni.getNodeStatus(), EnumNodeStatus.Completed);
 
         root.setVersion(JDFElement.EnumVersion.Version_1_2);
         root.setPartStatus((JDFAttributeMap)null, EnumNodeStatus.Completed);
         ni=root.getNodeInfo();
-        assertNull(ni);
         assertEquals(root.getStatus(), EnumNodeStatus.Completed);
         assertNull(root.getStatusPool());
     }

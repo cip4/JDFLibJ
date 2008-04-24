@@ -167,14 +167,19 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
     
     public void testMISCPProductGrayBoxBrochure() throws Exception
     {
+        
         VJDFAttributeMap vMap=new VJDFAttributeMap();
-        JDFAttributeMap map=new JDFAttributeMap();
-        map.put(EnumPartIDKey.SignatureName,"Sig1");
-        map.put(EnumPartIDKey.SheetName,"Cover");
-        map.put(EnumPartIDKey.Side,"Front");
-        vMap.add(new JDFAttributeMap(map));
-        map.put(EnumPartIDKey.Side,"Back");
-        vMap.add(new JDFAttributeMap(map));
+        for(int i=0;i<5;i++)
+        {
+            String sheetName=i==0?"Cover":"Body"+i;
+            JDFAttributeMap map=new JDFAttributeMap();
+            map.put(EnumPartIDKey.SignatureName,"Sig1");
+            map.put(EnumPartIDKey.SheetName,sheetName);
+            map.put(EnumPartIDKey.Side,"Front");
+            vMap.add(new JDFAttributeMap(map));
+            map.put(EnumPartIDKey.Side,"Back");
+            vMap.add(new JDFAttributeMap(map));
+        }
 
         MISCPGoldenTicket cpGoldenTicket=new MISCPGoldenTicket(1,null,2,2,true,vMap);
         cpGoldenTicket.nCols=6;
@@ -190,6 +195,7 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
         cpGoldenTicket.good=1000;
         cpGoldenTicket.waste=90;
   
+        cpGoldenTicket.partsAtOnce=2;
         write3GTFiles(cpGoldenTicket,"MISCPS_ProductGrayBox");
     }
 

@@ -1620,13 +1620,23 @@ public class JDFResourceLink extends JDFElement
             if(pa!=null)
             {
                 if(pa0!=null && pa!=pa0)
-                    throw new JDFException("inconsistent partamounts");
+                {
+                    VJDFAttributeMap v2=pa.getPartMapVector();
+                    for(int j=0;j<v2.size();j++)
+                    {
+                        if(!vPart.overlapsMap(v2.elementAt(j)))
+                            throw new JDFException("setAmountPoolAttribute - non overlapping snafu");
+                    }
+                }
+                pa.setAttribute(attrib, value, nameSpaceURI);
                 pa0=pa;
             }
         }
         if(pa0==null)
+        {
             pa0=ap.appendPartAmount(vPart);
-        pa0.setAttribute(attrib, value, nameSpaceURI);
+            pa0.setAttribute(attrib, value, nameSpaceURI);
+        }
     }
     /** 
      * sets  the  attribute occurence in the appropriate PartAmount when called for a resourceLink

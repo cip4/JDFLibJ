@@ -2306,7 +2306,16 @@ public class JDFNode extends JDFElement
         {
             setStatus(status);
             removeChild(ElementName.STATUSPOOL, null, 0);
-            //TODO          tbd kai, also clean up nodeinfo status leaves
+            if (getVersion(true).getValue() >= JDFElement.EnumVersion.Version_1_3.getValue())
+            {
+                JDFNodeInfo ni=getNodeInfo();
+                if(ni!=null)
+                {
+                    ni.removeAttributeFromLeaves(AttributeName.NODESTATUS,null);
+                    ni.setNodeStatus(status);
+                }
+
+            }
             return true;
         }
 
@@ -2338,6 +2347,7 @@ public class JDFNode extends JDFElement
             if(getStatus() != JDFElement.EnumNodeStatus.Part) 
             { //  set a decent default status for implicit
                 ni.setNodeStatus(getStatus());
+               
             }
 
             ni.getResourceRoot().setPartUsage(JDFResource.EnumPartUsage.Implicit);
