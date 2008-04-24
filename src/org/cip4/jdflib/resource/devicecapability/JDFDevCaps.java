@@ -110,7 +110,6 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap.EnumAvailability;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.cip4.jdflib.util.StringUtil;

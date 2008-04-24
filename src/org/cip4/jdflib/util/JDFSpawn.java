@@ -91,7 +91,6 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.core.XMLDocUserData;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;

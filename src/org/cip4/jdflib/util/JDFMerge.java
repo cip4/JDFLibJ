@@ -93,7 +93,6 @@ import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFSpawned;
 import org.cip4.jdflib.node.JDFNode.EnumCleanUpMerge;

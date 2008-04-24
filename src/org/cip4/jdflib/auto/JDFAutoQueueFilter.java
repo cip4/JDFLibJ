@@ -226,7 +226,6 @@ public abstract class JDFAutoQueueFilter extends JDFElement
             public static final EnumQueueEntryDetails Brief = new EnumQueueEntryDetails("Brief");
             public static final EnumQueueEntryDetails JobPhase = new EnumQueueEntryDetails("JobPhase");
             public static final EnumQueueEntryDetails JDF = new EnumQueueEntryDetails("JDF");
-            public static final EnumQueueEntryDetails Full = new EnumQueueEntryDetails("Full");
         }      
 
 

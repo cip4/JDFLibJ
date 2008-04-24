@@ -103,7 +103,6 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
-import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.ifaces.ICapabilityElement;

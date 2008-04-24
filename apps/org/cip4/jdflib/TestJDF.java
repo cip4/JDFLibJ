@@ -31,7 +31,7 @@ public class TestJDF
          for(int i=40;i<255;i++)
              s+=(char)i;
          n.setDescriptiveName(s);
-         jdfDoc.write2File("bad.jdf", 0);
+         jdfDoc.write2File("bad.jdf", 0, true);
           
         
   // mpart ist leer, warum ???

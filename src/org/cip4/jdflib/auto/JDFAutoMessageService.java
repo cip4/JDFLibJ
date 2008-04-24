@@ -90,13 +90,13 @@ import org.cip4.jdflib.resource.devicecapability.JDFActionPool;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCapPool;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCaps;
 import org.cip4.jdflib.resource.devicecapability.JDFModulePool;
+import org.cip4.jdflib.resource.devicecapability.JDFTestPool;
     /*
     *****************************************************************************
     class JDFAutoMessageService : public JDFElement
 
     *****************************************************************************
     */
-import org.cip4.jdflib.resource.devicecapability.JDFTestPool;
 
 public abstract class JDFAutoMessageService extends JDFElement
 {
@@ -578,7 +578,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 
     /**
      * (24) const get element TestPool
-     * @return JDFModulePool the element
+     * @return JDFTestPool the element
      */
     public JDFTestPool getTestPool()
     {
@@ -587,7 +587,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 
     /** (25) getCreateTestPool
      * 
-     * @return JDFModulePool the element
+     * @return JDFTestPool the element
      */
     public JDFTestPool getCreateTestPool()
     {

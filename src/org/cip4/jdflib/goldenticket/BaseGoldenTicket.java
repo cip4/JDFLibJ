@@ -73,7 +73,6 @@ package org.cip4.jdflib.goldenticket;
 import java.util.Vector;
 
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
-import org.cip4.jdflib.auto.JDFAutoResourceAudit.EnumReason;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFDoc;

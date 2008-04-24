@@ -371,8 +371,10 @@ public class MISPreGoldenTicket extends MISGoldenTicket
         m.setWeight(90);
         m.setThickness(90/0.8);
         VJDFAttributeMap reducedMap = getReducedMap(new VString("Side Separation"," "));
-        int n=reducedMap.size();
-        JDFResourceLink rl=theNode.getLink(m, EnumUsage.Input);
+//        int n=
+        	reducedMap.size();
+//        JDFResourceLink rl=
+        	theNode.getLink(m, EnumUsage.Input);
         return m;
 
 
