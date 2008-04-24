@@ -69,10 +69,10 @@ public class GeneratorUtil
 {
 
     /**
-     * This method is for further expansions. There are right now no known "invalid" elements (elements which are
-     * defindes, added or what ever, in other classes). To make the generator expandable this method was added and
-     * is already in use in method "getAllValidElements". Id there is an element which you dont want to be added in
-     * the autoclass. Add it here.
+     * This method is for further expansions. 
+     * There are right now no known "invalid" elements (elements which are defined, added or what ever, in other classes). 
+     * To make the generator expandable this method was added and is already in use in method "getAllValidElements". 
+     * If there is an element which you don't want to be added in the autoclass add it here.
      * @param   String strElementName - Name of the Element to validate
      *
      * @return  boolean - true if the Element is valid : NOTE returns TRUE always at the moment!
@@ -208,11 +208,6 @@ public class GeneratorUtil
                         || "WebSetup".equals (strAttributeName)
                    )
            )
-        {
-            isValid = false;
-        }
-
-        if (!"CutBlock".equals (strComplexTypeName) && "BlockName".equals (strAttributeName))
         {
             isValid = false;
         }
