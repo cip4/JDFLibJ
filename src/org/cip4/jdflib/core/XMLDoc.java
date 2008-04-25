@@ -464,6 +464,15 @@ public class XMLDoc
         write2Stream(outStream, indent, indent==0);
     }
 
+    /**
+     * write this to a stream
+     * 
+     * @param outStream
+     * @param indent
+     * @param bPreserveSpace
+     * @throws IOException
+     * @since 080425 synchronized 
+     */
     public void write2Stream(OutputStream outStream, int indent, boolean bPreserveSpace) throws IOException
     {        
         final OutputFormat format = new OutputFormat(m_doc);
@@ -486,8 +495,10 @@ public class XMLDoc
 //      serial.setNamespaces(false);    // ###DOM_1_nodes
         serial.setNamespaces(true);    
         serial.asDOMSerializer();
-
-        serial.serialize(m_doc);        
+        synchronized (m_doc)
+        {
+            serial.serialize(m_doc);        
+        }
     }
 
     /**
