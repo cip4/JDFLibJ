@@ -585,21 +585,21 @@ public class JDFSpawn
                 {
                     continue;
                 }
-
-                if(!isThereAlready)
-                {
+//080505 must always check existing resources, otherwise we can lose references
+//                if(!isThereAlready)
+//                {
                     // copy any missing linked resources, just in case
                     // the root is in the original jdf and can be used as a hook to the original document 
                     // get a list of all resources referenced by this link
                     // always do a copyresource in case some dangling rRefs are waiting
                     copySpawnedResource(rPool, rRoot, copyStatus, vSpawnParts, spawnID, vRWResources, vvRW, vvRO, allIDsCopied);
                     nSpawned += vvRO.size() + vvRW.size();
-                }
-                else
-                {
-                    if (bResRW)
+//                }
+//                else
+//                {
+                    if (isThereAlready && bResRW)
                         vvRW.add(rRoot.getID());
-                }
+//                }
                 VString rRefsRW=spawnAudit.getrRefsRWCopied();
                 VString rRefsRO=spawnAudit.getrRefsROCopied();
                 Iterator<String> iterRefs=vvRW.iterator();
@@ -1179,21 +1179,8 @@ public class JDFSpawn
      * vParts is the vector of part maps that are to be spawned,
      * defaults to no part, i.e. the whole thing
      *
-     * @param spawnURL: URL of the spawned JDF file
-     * @param vParts: vector of mAttributes that describe the parts to spawn
-     * @param bSpawnROPartsOnly if true, only the parts of RO resources that are specified in vParts are spawned, else the complete resource is spawned
-     * @param bCopyNodeInfo copy the NodeInfo elements into the Ancestors
-     * @param bCopyCustomerInfo copy the CustomerInfo elements into the Ancestors
-     * @param bCopyComments copy the Comment elements into the Ancestors
      * @return JDFDoc: The spawned node's owner document.
      * 
-     * @default spawnInformative(parentURL, 
-     *                           null, 
-     *                           null, 
-     *                           false, 
-     *                           false, 
-     *                           false, 
-     *                           false); 
      *
      */
     public JDFNode spawnInformative()
@@ -1208,21 +1195,11 @@ public class JDFSpawn
         node=copyOfThis;
         JDFNode nodeNew  = null;
         VString vRWTmp=vRWResources_in;
-        try
-        {
-            nodeNew    = spawn();
-            rootOut = nodeNew.getRoot();
-            rootOut.setActivation(EnumActivation.Informative);
-        }
-        catch (JDFException x)
-        {
-            // nop
-        }
-        finally
-        {
-            node=tmp;
-            vRWResources_in=vRWTmp;
-        }
+        nodeNew    = spawn();
+        rootOut = nodeNew.getRoot();
+        rootOut.setActivation(EnumActivation.Informative);
+        node=tmp;
+        vRWResources_in=vRWTmp;
 
         return nodeNew;
     }
