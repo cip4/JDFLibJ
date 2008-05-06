@@ -250,8 +250,8 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
     {
         boolean b=false;
         KElement attr=null;
-        String newPath=xPath;
-         
+        String newPath=null;
+
         final int posAt = xPath.lastIndexOf("@");
         int posAtI=posAt>0 ? xPath.lastIndexOf("[@") : -1;
         if(posAt<0 || posAt==posAtI+1) //element
@@ -271,48 +271,49 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
         }
         else // attribute
         {
-            final String attrVal=e.getXPathAttribute(xPath,null);
+            String attrVal=e.getXPathAttribute(xPath,null);
             b=fitsValue(attrVal);
-            if(reportRoot!=null)
-            {
-                final String attName = xPath.substring(posAt+1);
-                KElement pathElement = e.getXPathElement(xPath.substring(0,posAt));
+            final String attName = xPath.substring(posAt+1);
+            KElement pathElement = e.getXPathElement(xPath.substring(0,posAt));
 
-                if(pathElement!=null)
+                if(pathElement instanceof JDFResource)
                 {
-                    if(pathElement instanceof JDFResource)
+                    JDFResource r=(JDFResource)pathElement;
+                    JDFResource root=r.getResourceRoot();
+                    while(r!=root)
                     {
-                        JDFResource r=(JDFResource)pathElement;
-                        JDFResource root=r.getResourceRoot();
-                        while(r!=root)
+                        if(!r.hasAttribute_KElement(attName,null,false))
                         {
-                            if(!r.hasAttribute_KElement(attName,null,false))
-                            {
-                                r=(JDFResource) r.getParentNode_KElement();
-                            }
-                            else
-                            {
-                                break;
-                            }
+                            r=(JDFResource) r.getParentNode_KElement();
                         }
-                        pathElement=r;
+                        else
+                        {
+                            break;
+                        }
                     }
+                    pathElement=r;
                     newPath=pathElement.buildXPath(null,1)+"/@"+attName;
-                   
+
                 }
-                attr = reportRoot.appendElement("TestedAttribute");
-                attr.setAttribute("Name", attName);
-                attr.setAttribute("Value", attrVal);
-            }
+                if(newPath!=null)
+                    attrVal=e.getXPathAttribute(newPath,null);
+                b=fitsValue(attrVal);
+                if(reportRoot!=null)
+                {
+
+                    attr = reportRoot.appendElement("TestedAttribute");
+                    attr.setAttribute("Name", attName);
+                    attr.setAttribute("Value", attrVal);
+                }
         } 
-        
+
         if(attr!=null){
             attr.setAttribute("XPath", newPath);
         }
         return b;
     }
-    
-    
+
+
     /**
      * fitsValue - checks whether the <code>value</code> matches the testlists 
      * specified for this Evaluation
@@ -321,7 +322,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
      * @return boolean - true, if the value matches testlists or if testlists are not specified
      */
     abstract public boolean fitsValue(String value);
-    
+
     /**
      * fitsValue - checks whether <code>elem</code> matches the testlists 
      * specified for this Evaluation

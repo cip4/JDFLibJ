@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -90,6 +90,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFDevice;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.devicecapability.JDFAction;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCap;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCapPool;
@@ -157,7 +158,6 @@ public class JDFEvaluationTest extends JDFTestCaseBase
         ie.appendValueList(5);
         assertEquals(ie.getAttribute(AttributeName.VALUELIST),"1 3 ~ 5");
         ie.appendValueList(Integer.MAX_VALUE);
-        System.out.println(ie.getAttribute(AttributeName.VALUELIST));
         assertEquals(ie.getAttribute(AttributeName.VALUELIST),"1 3 ~ 5 INF");
         assertEquals(ie.getValueList(),new JDFIntegerRangeList("1 3 ~ 5 INF"));
     }
@@ -187,6 +187,32 @@ public class JDFEvaluationTest extends JDFTestCaseBase
     }
     
 //////////////////////////////////////////////////////////////////
+    public void testIsPresentPartition()
+    {
+        JDFAction act=devicecap.appendActionPool().appendActionTest(EnumTerm.IsPresentEvaluation, true);
+        JDFTest tst=act.getTest();
+        tst.setContext("//Component");
+        JDFIsPresentEvaluation ipe=(JDFIsPresentEvaluation) tst.getTerm();
+        ipe.setRefTarget(ptState);
+        assertEquals(ipe.getrRef(), ptState.getID());
+        
+       
+        JDFDoc doc=new JDFDoc("JDF");
+        JDFNode node=doc.getJDFRoot();
+        node.setType("fnarf", false);
+        JDFComponent comp=(JDFComponent) node.addResource("Component",null,EnumUsage.Input,null,null,null,null);
+        comp.setProductType("Cover");
+        
+        XMLDoc rep=new XMLDoc("root",null);
+        KElement eRep=rep.getRoot();
+        boolean fitsJDF = tst.fitsJDF(comp, eRep);
+        assertTrue(fitsJDF);
+        comp=(JDFComponent) comp.addPartition(EnumPartIDKey.SheetName, "s1");
+        fitsJDF = tst.fitsJDF(comp, eRep);
+        assertTrue("also partition leaves ",fitsJDF);
+ 
+    }
+    //////////////////////////////////////////////////////////////////
     public void testAction()
     {
         JDFAction act=devicecap.appendActionPool().appendActionTest(EnumTerm.or, false);

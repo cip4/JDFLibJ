@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -171,7 +171,7 @@ public class JDFElement extends KElement
         atrInfoTable[4] = new AtrInfoTable(AttributeName.MUSTHONOREXCEPTIONS,            0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
         atrInfoTable[5] = new AtrInfoTable(AttributeName.OPERATORINTERVENTIONEXCEPTIONS, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
     }
-    private static final SimpleDateFormat dateFormatter = new SimpleDateFormat ("yyMMdd_hhmmssSS");
+    private static final SimpleDateFormat dateFormatter = new SimpleDateFormat ("yyMMdd_kkmmssSS");
     @Override
     protected AttributeInfo getTheAttributeInfo()
     {
@@ -2993,9 +2993,7 @@ public class JDFElement extends KElement
     private static boolean bFixVersionIDFix=false;
 
     /**
-     * UniqueID - create a unique id with 12 digits<br>
-     *            6 digits are calculated via time,
-     *            the other 6 digits are taken from id
+     * UniqueID - create a unique id based on date and time + a counter - 6 digits are taken from id
      * Normally this should only be used internally, @see JDFElement.appendAnchor() for details.
      *
      * @param id the starting id of the ID - should normally be 0 in order to increment
@@ -3016,9 +3014,9 @@ public class JDFElement extends KElement
         if(bIDDate)
         {
             final String date = dateFormatter.format(new Date());
-            return date + "_" + s.substring(s.length()-6);
+            return "_"+date + "_" + s.substring(s.length()-6);
         }
-        return s.substring(s.length()-6);
+        return "_"+s.substring(s.length()-6);
     }
 
     /**

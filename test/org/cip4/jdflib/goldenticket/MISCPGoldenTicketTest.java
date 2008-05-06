@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -161,7 +161,7 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
         cpGoldenTicket.good=1000;
         cpGoldenTicket.waste=90;
        
-        write3GTFiles(cpGoldenTicket,"MISCPS_SimplexPoster");
+        BaseGoldenTicketTest.write3GTFiles(cpGoldenTicket, "MISCPS_SimplexPoster");
     }
     /////////////////////////////////////////////////////////////////////////////
     
@@ -196,7 +196,7 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
         cpGoldenTicket.waste=90;
   
         cpGoldenTicket.partsAtOnce=2;
-        write3GTFiles(cpGoldenTicket,"MISCPS_ProductGrayBox");
+        BaseGoldenTicketTest.write3GTFiles(cpGoldenTicket, "MISCPS_ProductGrayBox");
     }
 
 
@@ -226,7 +226,7 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
         cpGoldenTicket.assign(n);
         cpGoldenTicket.good=3000;
         cpGoldenTicket.waste=200;
-        write3GTFiles(cpGoldenTicket, "sameInk.jdf");
+        BaseGoldenTicketTest.write3GTFiles(cpGoldenTicket, "sameInk.jdf");
      }
 
     /////////////////////////////////////////////////////////////////////////////

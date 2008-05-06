@@ -68,104 +68,60 @@
  *  
  * 
  */
-package org.cip4.jdflib.util;
+package org.cip4.jdflib.goldenticket;
 
-import java.io.File;
-import java.util.Arrays;
+import junit.framework.Assert;
 
-/**
- *
- * @author  rainer
- *
- * very trivial temp file dump
- * 
- */
-public class DumpDir {
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 
-    private File baseDir=null;
-    private static int index=0;
-    private static Object mutexInc=new Object();
-    private static Object mutexDel=new Object();
-    private int maxKeep=500;
+
+public class BaseGoldenTicketTest extends JDFTestCaseBase
+{
+    String agentName;
+
+    /////////////////////////////////////////////////////////////////////////////
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+     */
+    protected void setUp() throws Exception
+    {
+        agentName=JDFAudit.getStaticAgentName();
+        JDFElement.setLongID(false);
+        JDFAudit.setStaticAgentName("JDF Base golden ticket generator");
+        super.setUp();
+    }
+    /////////////////////////////////////////////////////////////////////////////
+    /* (non-Javadoc)
+     * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
+     */
+    protected void tearDown() throws Exception
+    {
+        JDFAudit.setStaticAgentName(agentName);
+        JDFElement.setLongID(true);
+        super.tearDown();
+    }
     /**
-     * 
+     * create 3 files based on a gt
+     * @param goldenTicket
+     * @param templateName
+     * @param good
+     * @param waste
      */
-    private static final long serialVersionUID = -8902151736333089036L;
-
-    private static int increment()
+    protected static void write3GTFiles(BaseGoldenTicket goldenTicket,String templateName)
     {
-        synchronized (mutexInc)
-        {
-            return index++;            
-        }
+        goldenTicket.write2File(JDFTestCaseBase.sm_dirTestDataTemp+"GoldenTicket_Manager_"+templateName+".jdf", 2);        
+        Assert.assertTrue(goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
+
+        goldenTicket.makeReadyAll();
+        goldenTicket.write2File(JDFTestCaseBase.sm_dirTestDataTemp+"GoldenTicket_MakeReady_"+templateName+".jdf", 2);
+        Assert.assertTrue(JDFTestCaseBase.sm_dirTestDataTemp+"GoldenTicket_MakeReady_"+templateName+".jdf",goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
+
+        goldenTicket.executeAll(null,true,true);
+        goldenTicket.write2File(JDFTestCaseBase.sm_dirTestDataTemp+"GoldenTicket_Worker_"+templateName+".jdf", 2);
+        Assert.assertTrue(goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
     }
-
-    /**
-     * 
-     */
-    public DumpDir(File dir)
-    {
-        baseDir=dir;
-        baseDir.mkdirs();
-        synchronized (mutexDel)
-        {
-            String[] names=baseDir.list();
-            int max=0;
-            int l;
-            for(int i=0;i<names.length;i++)
-            {
-                if(names[i].length()>9)
-                    l=StringUtil.parseInt(names[i].substring(1, 9), 0);
-                else
-                    l=0;
-                if(l>max)
-                    max=l;
-            }
-            index=max;
-        }
-    }
-
-    
-    /** 
-     * Handles all HTTP <code>POST</code> methods.
-     * @param request servlet request
-     * @param response servlet response
-     */
-    public File newFile()
-    {
-        final int inc = increment();
-        if(inc%100==0)
-            System.out.println("jmf dump service "+index);
-
-        String s=StringUtil.sprintf("m%08i.tmp", ""+inc);
-        File f=FileUtil.getFileInDirectory(baseDir, new File(s));
-        cleanup(inc);
-        return f;
-    }
-
-    /**
-     * @param inc
-     */
-    private void cleanup(final int inc)
-    {
-        if(inc%100==0)
-        {
-            synchronized (mutexDel)
-            {
-                String[] names=baseDir.list();
-                if(names.length>maxKeep)
-                {
-                    Arrays.sort(names);
-                    for(int i=0;i<names.length-maxKeep;i++)
-                    {
-                        File f=new File(names[i]);
-                        f=FileUtil.getFileInDirectory(baseDir, f);
-                        f.delete();
-                    }
-                }
-            }
-        }
-    }
-
 
 }

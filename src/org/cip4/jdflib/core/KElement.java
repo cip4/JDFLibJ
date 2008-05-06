@@ -654,7 +654,7 @@ public class KElement extends ElementNSImpl
             if (a != null) {
                 return a;
             }
-            
+
             nameSpaceURI=null;
 
             final String attribPrefix = xmlnsPrefix(attrib);
@@ -2235,13 +2235,13 @@ public class KElement extends ElementNSImpl
         else if (depth > 0)
         {
             final KElement parentElement = getParentNode_KElement();
-          // last in chain or
-          // leaving structure
-          if ((parentElement != null) && (parentNode.equals(parentElement.getLocalName())))
-          {
-              return parentElement.getDeepParent(parentNode, depth - 1);
-          }
-       }
+            // last in chain or
+            // leaving structure
+            if ((parentElement != null) && (parentNode.equals(parentElement.getLocalName())))
+            {
+                return parentElement.getDeepParent(parentNode, depth - 1);
+            }
+        }
         return this;
     }
 
@@ -4262,7 +4262,7 @@ public class KElement extends ElementNSImpl
         KElement kRet = null;
         XMLDocUserData userData = null;
 
- 
+
         final boolean bID = attName.equals(AttributeName.ID);
         if(bID&&!isWildCard(attVal))
         {
@@ -4896,7 +4896,7 @@ public class KElement extends ElementNSImpl
      * @param def default value if it doesn't exist
      *
      * @return String the String value of the attribute
-     * 			     or null if the xpath element does not exist
+     *               or null if the xpath element does not exist
      *
      * @throws JDFException if the defined path is a bad attribute path
      * @default getXPathAttribute(path, null);
@@ -4911,6 +4911,39 @@ public class KElement extends ElementNSImpl
         final KElement kEle = getXPathElement(path.substring(0, pos));
         return kEle == null ? def // xpath element does not exist
                 : kEle.getAttribute_KElement(path.substring(pos + 1), null, def);
+    }   
+
+    /**
+     * Gets an attribute value as defined by XPath
+     * namespace prefixes are resolved <br>
+     * Attributes are searched for in partitioned resources if appropriate
+     *
+     * @tbd enhance the subsets of allowed XPaths,
+     *      now only .,..,/,@ are supported
+     * TODO fix bug for attribute searches where the att value contains xpath syntax      
+     *
+     * @param path XPath abbreviated syntax representation of the attribute,
+     *              <code>parentElement/thisElement/@thisAtt</code>
+     *              <code>parentElement/thisElement[2]/@thisAtt</code>
+     *              <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
+     * @param def default value if it doesn't exist
+     *
+     * @return String the String value of the attribute
+     *               or null if the xpath element does not exist
+     *
+     * @throws JDFException if the defined path is a bad attribute path
+     * @default getXPathAttribute(path, null);
+     */
+    public String getInheritedXPathAttribute(String path, String def)
+    {
+        final int pos = path.lastIndexOf(JDFConstants.AET);
+        if (pos == -1 || pos>0&&path.charAt(pos-1)=='[' )
+        {
+            throw new JDFException("GetXPathAttribute - bad attribute path: " + path);
+        }
+        final KElement kEle = getXPathElement(path.substring(0, pos));
+        return kEle == null ? def // xpath element does not exist
+                : kEle.getAttribute(path.substring(pos + 1), null, def);
     }
 
     /**
@@ -5620,7 +5653,7 @@ public class KElement extends ElementNSImpl
                 String pre=an.getPrefix();
                 if(!isWildCard(pre))
                     attrib=pre+":"+attrib;
-                
+
             }
         }
         setAttribute(attrib, src.getAttribute_KElement(strSrcAttrib, srcNameSpaceURI, null), strNameSpace);
@@ -6225,7 +6258,7 @@ public class KElement extends ElementNSImpl
      */
     protected XMLDocUserData getXMLDocUserData()
     {
-         return (ownerDocument==null) ? null : (XMLDocUserData) ownerDocument.getUserData();
+        return (ownerDocument==null) ? null : (XMLDocUserData) ownerDocument.getUserData();
     }
 
     private void clearTargets ()

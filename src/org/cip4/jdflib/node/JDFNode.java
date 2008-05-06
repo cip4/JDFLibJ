@@ -666,10 +666,11 @@ public class JDFNode extends JDFElement
         public static final EnumType Wrapping = new EnumType(JDFConstants.TYPE_WRAPPING);
 
         // prepress gray box types
+        public static final EnumType PlateSetting = new EnumType("PlateSetting");
+        public static final EnumType PlateMaking = new EnumType("PlateMaking");
         public static final EnumType ImpositionPreparation = new EnumType("ImpositionPreparation");
-        public static final EnumType PrepressPreparation = new EnumType("PrepressPreparation");
+        public static final EnumType PrepressPreparation = new EnumType("PrePressPreparation");
         public static final EnumType ProofImaging = new EnumType("ProofImaging");
-
     }
 
     /**
@@ -1642,6 +1643,23 @@ public class JDFNode extends JDFElement
                 //links
                 ",o_ i_,i_,i?"
         );
+        
+        mapPut(EnumType.PrepressPreparation.getName(),
+                ",RunList,*",
+                //links
+                ",i_Document o_Document,i* o*"
+        );
+        
+        mapPut(EnumType.ImpositionPreparation.getName(),
+                ",Layout,RunList,*",
+                //links
+                ",o_,i?Document o?Document o_Marks,,i* o*"
+        );
+        mapPut(EnumType.RIPing.getName(),
+                ",InterpretingParams,RenderingParams,RunList,*",
+                //links
+                ",i?,i?,o_ i_Document i?Marks,i* o*"
+        );
     }
 
 
@@ -2095,19 +2113,19 @@ public class JDFNode extends JDFElement
         for(int i=0;i<types.size();i++)
         {
             final String typ = types.stringAt(i);
-            if(typ.equals("RIPing"))
-            {
-                vNew.add(EnumType.Imposition.getName());
-                vNew.add(EnumType.Interpreting.getName());
-                vNew.add(EnumType.ColorSpaceConversion.getName());
-                vNew.add(EnumType.Trapping.getName());
-                vNew.add(EnumType.Rendering.getName());
-                vNew.add(EnumType.Screening.getName());
-            }
-            else
-            {
+//            if(typ.equals("RIPing"))
+//            {
+//                vNew.add(EnumType.Imposition.getName());
+//                vNew.add(EnumType.Interpreting.getName());
+//                vNew.add(EnumType.ColorSpaceConversion.getName());
+//                vNew.add(EnumType.Trapping.getName());
+//                vNew.add(EnumType.Rendering.getName());
+//                vNew.add(EnumType.Screening.getName());
+//            }
+//            else
+//            {
                 vNew.add(typ);
-            }
+//            }
         }
         return vNew;   
     }
@@ -5792,10 +5810,15 @@ public class JDFNode extends JDFElement
             }
         }
 
-        // continue search if not found
-        if(nici!=null && (xPath!=null) &&(!nici.hasXPathNode(xPath)))
+        KElement nici2=nici;
+        
+        // continue search if not found but retain nici
+        while(nici2!=null && (xPath!=null) &&(!nici2.hasXPathNode(xPath)))
         {
-            nici=null;
+            if((nici2 instanceof JDFResource) &&!((JDFResource)nici2).isResourceRoot())
+                nici2=nici2.getParentNode_KElement();
+            else
+                nici=nici2=null;
         }
 
         if(nici!=null || ! bInherit) {

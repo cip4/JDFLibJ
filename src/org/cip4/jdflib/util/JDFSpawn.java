@@ -1195,10 +1195,14 @@ public class JDFSpawn
         node=copyOfThis;
         JDFNode nodeNew  = null;
         VString vRWTmp=vRWResources_in;
+        boolean spawnMultKeep=bSpawnRWPartsMultiple;
+        bSpawnRWPartsMultiple=true; // never check multiple resources when spawning informative - who cares
         nodeNew    = spawn();
+        bSpawnRWPartsMultiple=spawnMultKeep;
         rootOut = nodeNew.getRoot();
         rootOut.setActivation(EnumActivation.Informative);
         node=tmp;
+        
         vRWResources_in=vRWTmp;
 
         return nodeNew;

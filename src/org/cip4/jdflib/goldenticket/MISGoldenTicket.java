@@ -149,7 +149,7 @@ public class MISGoldenTicket extends BaseGoldenTicket
     @Override
     public void execute(VJDFAttributeMap vNodeMap, boolean bOutAvail,boolean bFirst)
     {
-        JDFComment c=theNode.appendComment();
+        JDFComment c=theExpandedNode.appendComment();
         c.setName("OperatorText");
         c.setText(StringUtil.getRandomString());
 
@@ -170,8 +170,8 @@ public class MISGoldenTicket extends BaseGoldenTicket
         theNode.appendAttribute(AttributeName.ICSVERSIONS, icsTag, null, " ", true);
         if(!theNode.hasAttribute(AttributeName.DESCRIPTIVENAME))
             theNode.setDescriptiveName("MIS Golden Ticket Example Job - version: "+JDFAudit.software());
-        if(!theNode.hasAttribute(AttributeName.JOBID))
-            theNode.setJobID("Job_"+JDFElement.uniqueID(0));
+        if(!theNode.hasAncestorAttribute(AttributeName.JOBID,null))
+            theNode.setJobID("Job"+JDFElement.uniqueID(0));
         final VString types = getTypes();
         if(types!=null)
         {
@@ -244,7 +244,7 @@ public class MISGoldenTicket extends BaseGoldenTicket
     }
 
     
-    protected JDFDevice initDevice(JDFNode reuseNode, String devID)
+    protected JDFDevice initDevice(JDFNode reuseNode)
     {
         if(misICSLevel<2)
             return null;

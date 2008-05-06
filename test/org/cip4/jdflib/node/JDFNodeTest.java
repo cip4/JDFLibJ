@@ -128,6 +128,7 @@ import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.JDFSpawn;
 import org.cip4.jdflib.util.StatusCounter;
@@ -1248,6 +1249,17 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertEquals(node2.getInheritedNodeInfo(null),n);
         assertEquals(node3.getInheritedNodeInfo(null),n);
         assertEquals(node3.getInheritedCustomerInfo(null),ciAN);
+        JDFNodeInfo ni3=node3.appendNodeInfo();
+        final JDFNodeInfo sigNI = (JDFNodeInfo) ni3.addPartition(EnumPartIDKey.SignatureName, "Sig1");
+        sigNI.setStart(new JDFDate());
+        JDFNodeInfo niPart=(JDFNodeInfo) sigNI.addPartition(EnumPartIDKey.SheetName, "S1");
+        node3.getLink(ni3, null).setPartMap(niPart.getPartMap());
+        niPart.setEnd(new JDFDate());
+        assertEquals(node3.getInheritedNodeInfo(null), niPart);
+        assertEquals(node3.getInheritedNodeInfo("@End"), niPart);
+        assertEquals(node3.getInheritedNodeInfo("@Start"), niPart);
+        assertNull(node3.getInheritedNodeInfo("@FooBar"));
+        assertEquals(node3.getInheritedNodeInfo("JMF/@ICSVersions"), niAN);
 
     }
 

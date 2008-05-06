@@ -596,6 +596,28 @@ public class JDFSpawnTest extends JDFTestCaseBase
         spawn.spawn("thisUrl","newURL",null,vMap,true,true,true,true);
 
     }
+    /**
+     * test whether getpartition works for when inconsistently called
+     */
+    public void testSpawnNoPart()
+    {
+        for(int i=0;i<2;i++)
+        {
+        JDFDoc doc=new JDFDoc("JDF");
+        JDFNode n=doc.getJDFRoot();
+        n.setType(EnumType.ProcessGroup);
+        if(i==i)
+            n=n.addJDFNode(EnumType.ProcessGroup);
+        JDFNode n2=n.addJDFNode(EnumType.ImageSetting);
+        JDFResource xm=n2.addResource("ExposedMedia", EnumUsage.Input);
+        JDFResource m=n.addResource("Media", null);
+        xm.refElement(m);
+        JDFSpawn spawn=new JDFSpawn(i==1? n : n2);
+        JDFNode si=spawn.spawn();
+        assertNotNull(si.getResourcePool().getElement("Media"));
+        }
+      
+    }
     //////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////
 

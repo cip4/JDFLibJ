@@ -72,7 +72,6 @@ package org.cip4.jdflib.goldenticket;
 
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides;
-import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -138,29 +137,23 @@ public class ProductGoldenTicket extends MISGoldenTicket
         super.init();
     }
 
-
     /**
      * @param icsLevel
      */
-    protected void initPaperMedia()
-    {
-        mediaIntent=(JDFMediaIntent) theNode.getCreateResource(ElementName.MEDIAINTENT,EnumUsage.Input, 0);
-        mediaIntent.setDescriptiveName("the paper to print on");
-        mediaIntent.setResStatus(EnumResStatus.Available, false);
-        mediaIntent.appendMediaType().setPreferred(EnumMediaType.Paper);
-        mediaIntent.appendWeight().setPreferred(90);
-
-        mediaIntent.setResStatus(EnumResStatus.Available, false);
-        mediaIntent.preferredToActual();
-    }
-    /**
-     * @param icsLevel
-     */
-    protected JDFComponent initOutputComponent(JDFNode node, JDFLayoutIntent li)
+    protected JDFComponent initOutputComponent(JDFNode node, JDFLayoutIntent li, String productType)
     {
         JDFComponent outComp=(JDFComponent) node.getCreateResource(ElementName.COMPONENT, EnumUsage.Output, 0);
-        outComp.setComponentType(EnumComponentType.FinalProduct,EnumComponentType.Sheet);
-
+        if(productType==null)
+        {
+            outComp.setComponentType(EnumComponentType.FinalProduct,EnumComponentType.Sheet);
+            
+        }
+        else
+        {
+            outComp.setComponentType(EnumComponentType.PartialProduct,EnumComponentType.Sheet);
+            outComp.setProductType(productType);
+            
+        }
         theNode.getResource(ElementName.LAYOUTINTENT, null, 0);
         JDFShape s=li.getFinishedDimensions().getActual();
         outComp.setDimensions(s);
@@ -203,7 +196,9 @@ public class ProductGoldenTicket extends MISGoldenTicket
     {
         JDFCustomerInfo ci=theNode.getCreateCustomerInfo();
         ci.setCustomerJobName(jobName);
-        JDFContact c=ci.appendContact(EnumContactType.Customer);
+        JDFContact c=ci.getContactWithContactType(EnumContactType.Customer.getName(),0);
+        if(c==null)
+            c=ci.appendContact(EnumContactType.Customer);
         c.setPerson(firstame,lastame);
         if(companyName!=null)
             c.getCreateCompany().setOrganizationName(companyName);
@@ -227,7 +222,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
      */
     protected JDFColorIntent initColorIntent(JDFNode node, int front, int back, String coatings)
     {
-        VString colors=new VString("Cyan Magenta Yello Black Gray Blue Spot1 Spot2"," ");
+        VString colors=new VString("Cyan Magenta Yellow Black Gray Blue Spot1 Spot2"," ");
         JDFColorIntent ci=(JDFColorIntent) node.addResource(ElementName.COLORINTENT, EnumUsage.Input);
         VElement vci=new VElement();
         if(front!=back && back!=0)
@@ -286,7 +281,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
         initMediaIntent(theNode,300, EnumSpanCoatings.Coated);
         JDFLayoutIntent li=initLayoutIntent(theNode,14.8, 10.5, 16, 2);
         initColorIntent(theNode,4,4,null);
-        initOutputComponent(theNode,li);
+        initOutputComponent(theNode,li,null);
         initDeliveryIntent(5000);
     }
 
@@ -297,7 +292,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
         initMediaIntent(theNode,170, EnumSpanCoatings.Glossy);
         JDFLayoutIntent li=initLayoutIntent(theNode,43, 32.6, 1, 1);
         initColorIntent(theNode,4,0,null);
-        initOutputComponent(theNode,li);
+        initOutputComponent(theNode,li,null);
         initDeliveryIntent(5000);
     }
 
@@ -332,7 +327,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
         initMediaIntent(cover,200, EnumSpanCoatings.Glossy);
         JDFLayoutIntent li=initLayoutIntent(cover,14.8, 21, 4, 2);
         JDFColorIntent ci=initColorIntent(cover,4,4,null);
-        JDFComponent cCover=initOutputComponent(cover,li);
+        JDFComponent cCover=initOutputComponent(cover,li,"Cover");
         cCover.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
 
 
@@ -341,12 +336,12 @@ public class ProductGoldenTicket extends MISGoldenTicket
         body.linkResource(ci, EnumUsage.Input, null);
         initMediaIntent(body,135, EnumSpanCoatings.Coated);
         initLayoutIntent(body,14.8, 21, 32, 2);
-        JDFComponent cBody=initOutputComponent(body,li);
+        JDFComponent cBody=initOutputComponent(body,li,"Body");
         cBody.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
 
         initBindingIntent(cCover, cBody,2);
 
-        initOutputComponent(theNode,li);
+        initOutputComponent(theNode,li,null);
         initDeliveryIntent(5000);
     }
     
@@ -360,7 +355,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
         initMediaIntent(cover,200, EnumSpanCoatings.Glossy);
         JDFLayoutIntent li=initLayoutIntent(cover,21, 29.7, 4, 2);
     	initColorIntent(cover,6,4,null);
-        JDFComponent cCover=initOutputComponent(cover,li);
+        JDFComponent cCover=initOutputComponent(cover,li,"Cover");
         cCover.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
 
 
@@ -369,12 +364,12 @@ public class ProductGoldenTicket extends MISGoldenTicket
     	initColorIntent(body,4,4,null);
         initMediaIntent(body,135, EnumSpanCoatings.Coated);
         initLayoutIntent(body,21, 29.7, 32, 2);
-        JDFComponent cBody=initOutputComponent(body,li);
+        JDFComponent cBody=initOutputComponent(body,li,"Body");
         cBody.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
 
         initBindingIntent(cCover, cBody,2);
 
-        initOutputComponent(theNode,li);
+        initOutputComponent(theNode,li,null);
         initDeliveryIntent(5000);
     }
 
@@ -389,8 +384,14 @@ public class ProductGoldenTicket extends MISGoldenTicket
     	initColorIntent(theNode,4,4,null);
         JDFFoldingIntent fi=initFoldingIntent(theNode, "F6-3");
         fi.setDescriptiveName("F6-3 should be the gate fold");
-        initOutputComponent(theNode,li);
+        initOutputComponent(theNode,li,null);
         initDeliveryIntent(5000);
+    }
+
+    @Override
+    protected void runphases(int good, int waste)
+    {
+       //nop for products
     } 
     
     

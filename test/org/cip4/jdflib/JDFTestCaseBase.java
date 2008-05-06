@@ -70,6 +70,7 @@
 package org.cip4.jdflib;
 
 import java.io.File;
+import java.util.Vector;
 
 import junit.framework.TestCase;
 
@@ -97,30 +98,9 @@ import org.cip4.jdflib.resource.process.JDFMedia;
  */
 public abstract class JDFTestCaseBase extends TestCase
 {
-    static protected final String sm_dirTestSchema   = ".." + File.separator + "schema" + File.separator + "Version_1_3" + File.separator;
-    static protected final String sm_dirTestData     = "test" + File.separator + "data" + File.separator;
-    static protected final String sm_dirTestDataTemp = sm_dirTestData + "temp" + File.separator;
-    
-    /**
-     * create 3 files based on a gt
-     * @param goldenTicket
-     * @param templateName
-     * @param good
-     * @param waste
-     */
-    protected void write3GTFiles(BaseGoldenTicket goldenTicket,String templateName)
-    {
-        assertTrue(goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
-        goldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_Manager_"+templateName+".jdf", 2);        
-        
-        goldenTicket.makeReadyAll();
-        assertTrue(goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
-        goldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_MakeReady_"+templateName+".jdf", 2);
-
-        goldenTicket.executeAll(null,true,true);
-        assertTrue(goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
-        goldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_Worker_"+templateName+".jdf", 2);
-    }
+    static public final String sm_dirTestSchema   = ".." + File.separator + "schema" + File.separator + "Version_1_3" + File.separator;
+    static public final String sm_dirTestData     = "test" + File.separator + "data" + File.separator;
+    static public final String sm_dirTestDataTemp = sm_dirTestData + "temp" + File.separator;
     
     public static JDFDoc creatXMDoc()
     {

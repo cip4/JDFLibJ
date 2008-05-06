@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -70,16 +70,30 @@
  */
 package org.cip4.jdflib.goldenticket;
 
+import java.io.File;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import javax.mail.Multipart;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
+import org.cip4.jdflib.jmf.JDFCommand;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.util.MimeUtil;
+import org.cip4.jdflib.util.UrlUtil;
+import org.cip4.jdflib.util.MimeUtil.MIMEDetails;
 
 
 public class GoldenTicketTest extends JDFTestCaseBase
 {
+    ProductGoldenTicket pgt;
     String agentName;
     /////////////////////////////////////////////////////////////////////////////
     public void testBase()
@@ -133,7 +147,7 @@ public class GoldenTicketTest extends JDFTestCaseBase
     public void testProductCreateAddressBook() throws Exception
     {
 
-        ProductGoldenTicket pgt=new ProductGoldenTicket(0,EnumVersion.Version_1_3,0,0);
+        pgt=new ProductGoldenTicket(0,EnumVersion.Version_1_3,0,0);
         pgt.assign(null);
         pgt.createAddressBook();
         final JDFNode node = pgt.getNode();
@@ -145,7 +159,7 @@ public class GoldenTicketTest extends JDFTestCaseBase
     public void testProductCreateWatches() throws Exception
     {
 
-        ProductGoldenTicket pgt=new ProductGoldenTicket(0,EnumVersion.Version_1_3,0,0);
+        pgt=new ProductGoldenTicket(0,EnumVersion.Version_1_3,0,0);
         pgt.assign(null);
         pgt.createWatches();
         final JDFNode node = pgt.getNode();
@@ -157,7 +171,7 @@ public class GoldenTicketTest extends JDFTestCaseBase
     public void testProductCreateHarley() throws Exception
     {
         
-       ProductGoldenTicket pgt=new ProductGoldenTicket(0,EnumVersion.Version_1_3,0,0);
+        pgt=new ProductGoldenTicket(0,EnumVersion.Version_1_3,0,0);
         pgt.assign(null);
         pgt.createHarley();
         final JDFNode node = pgt.getNode();
@@ -168,7 +182,7 @@ public class GoldenTicketTest extends JDFTestCaseBase
     public void testProductCreateHDCity() throws Exception
     {
 
-        ProductGoldenTicket pgt=new ProductGoldenTicket(0,EnumVersion.Version_1_3,0,0);
+        pgt=new ProductGoldenTicket(0,EnumVersion.Version_1_3,0,0);
         pgt.assign(null);
         pgt.createHDCity();
         final JDFNode node = pgt.getNode();
@@ -176,7 +190,6 @@ public class GoldenTicketTest extends JDFTestCaseBase
         node.setJobID("6917");
         assertTrue(node.isValid(EnumValidationLevel.Complete));
     }
-
     /////////////////////////////////////////////////////////////////////////////
     /* (non-Javadoc)
      * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
@@ -197,6 +210,25 @@ public class GoldenTicketTest extends JDFTestCaseBase
         JDFAudit.setStaticAgentName(agentName);
         JDFElement.setLongID(true);
         super.tearDown();
+    }
+    public static void submitMimeToHDM(JDFNode n) {
+        // build SubmitQueueEntry
+        JDFDoc docJMF=new JDFDoc("JMF");
+        JDFJMF jmf=docJMF.getJMFRoot();
+        JDFCommand com = (JDFCommand)jmf.appendMessageElement(JDFMessage.EnumFamily.Command,JDFMessage.EnumType.SubmitQueueEntry);
+        com.appendQueueSubmissionParams().setURL("dummy");
+        Multipart mp = MimeUtil.buildMimePackage(docJMF, n.getOwnerDocument_JDFElement(), true);
+    
+        try {
+            MIMEDetails md=new MIMEDetails();
+            md.transferEncoding=MimeUtil.BASE64;
+            md.httpDetails.chunkSize=-1;
+            HttpURLConnection response = MimeUtil.writeToURL( mp,"http://192.168.40.71:8889/jmfportal",md );
+            assertEquals( 200,response.getResponseCode() );
+            MimeUtil.writeToURL( mp,UrlUtil.fileToUrl(new File("C:\\data\\test.mim"), false),md );
+        } catch (Exception e) {
+            fail( e.getMessage() ); // fail on exception
+        }
     }
 
 }
