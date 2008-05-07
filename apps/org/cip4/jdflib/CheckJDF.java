@@ -183,7 +183,7 @@ public class CheckJDF
 
     public  String devCapFile=null;
     public EnumFitsValue testlists=EnumFitsValue.Allowed;
-    private boolean bMultiID=false;
+    public boolean bMultiID=false;
     private boolean inOutputLoop=false;
 
     final private static String version =
@@ -251,7 +251,7 @@ public class CheckJDF
         }
         return checkOut.getAttribute("Message",null,null);
     }
-    
+
     /**
      * true if validDoc has no errors or warnings
      * @param validDoc
@@ -262,11 +262,11 @@ public class CheckJDF
         if(validDoc==null) {
             return true;
         }
-        
-        
+
+
         return true;
-        
-        
+
+
     }
 
     public void setDoc(JDFDoc d){
@@ -1115,10 +1115,10 @@ public class CheckJDF
     {
         boolean isValid = true;
         String jobPartID=jdfNode.getJobPartID(false);
-  
+
         VString vMissingLinks = EnumValidationLevel.isRequired(level) ? jdfNode.getMissingLinkVector(9999999) : null;
         VString vInvalidLinks= jdfNode.getInvalidLinks(level, 9999999);
-        
+
 
 
         boolean bValidJobPartID = !vBadJobPartID.contains(jobPartID);
@@ -1989,7 +1989,7 @@ public class CheckJDF
      * @param _schemaLocation
      */
     @Deprecated
-	public void setJDFSchemaLocation(String _schemaLocation)
+    public void setJDFSchemaLocation(String _schemaLocation)
     {
         setJDFSchemaLocation(new File(_schemaLocation));
     }
@@ -1999,7 +1999,7 @@ public class CheckJDF
         if(_schemaLocation!=null && _schemaLocation.length()!=0)
         {
             final String fileToUrl = UrlUtil.fileToUrl(_schemaLocation, false);
-			schemaLocation="http://www.CIP4.org/JDFSchema_1_1 " + fileToUrl;
+            schemaLocation="http://www.CIP4.org/JDFSchema_1_1 " + fileToUrl;
         }
     }
 
@@ -2286,7 +2286,7 @@ public class CheckJDF
      * @deprecated - use either processSingleDoc, processSingleStream or processSinglFile(String) this will be made private
      */
     @Deprecated
-	public XMLDoc processSingleFile(InputStream inStream, String url, String xmlFile)
+    public XMLDoc processSingleFile(InputStream inStream, String url, String xmlFile)
     {
         return processSingleFile(inStream, url, xmlFile, null);
     }
@@ -2461,6 +2461,8 @@ public class CheckJDF
                     if (root == null)
                     { // no jdf, maybe jmf
                         if(jmf!=null) {
+                            printMultipleIDs(url, xmlFile, jmf,checkJDFxmlRoot);
+
                             printBad(jmf,  0, checkJDFxmlRoot, true);
                             printJMFDevCap(jmf, checkJDFxmlRoot);
                         } else {
@@ -2469,7 +2471,7 @@ public class CheckJDF
                     }
                     else
                     { // we have a jdf
-                        printMultipleIDs(url, xmlFile, root);
+                        printMultipleIDs(url, xmlFile, root,checkJDFxmlRoot);
 
                         VElement allElms = root.getChildrenByTagName(null, null,null,false, true, 0);
                         allElms.add(root);
@@ -2608,12 +2610,10 @@ public class CheckJDF
         return lDevCapsTime;
     }
 
-    private void printMultipleIDs(String url, String xmlFile, JDFNode root)
+    private void printMultipleIDs(String url, String xmlFile, KElement root, KElement outRoot)
     {
         if(bMultiID)
         {
-            boolean bPrint=sysOut.wannaPrint;
-            sysOut.wannaPrint=true;
             if (bQuiet)
             {
                 sysOut.println("\n**********************************************************");
@@ -2627,6 +2627,12 @@ public class CheckJDF
             vMultiID=root.getMultipleIDs("ID");
             if(vMultiID!=null)
             {
+                if(outRoot!=null)
+                {
+                    outRoot=outRoot.appendElement("MultiIDs");
+                    outRoot.setAttribute("IsValid", false,null);
+                }
+
                 sysOut.println("Multiple ID elements:\n");
                 for(int i=0;i<vMultiID.size();i++)
                 {
@@ -2639,6 +2645,17 @@ public class CheckJDF
                     {
                         KElement e=v.item(ii);
                         sysOut.println(id+" \t:"+e.buildXPath(null, 2));
+                        if(outRoot!=null)
+                        {
+                            KElement idRoot=outRoot.getChildWithAttribute("MultiID", "ID", null, e.getAttribute("ID"), 0, true);
+                            if(idRoot==null)
+                                idRoot=outRoot.appendElement("MultiID");
+                            idRoot.setAttribute("ID", e.getAttribute("ID"));
+                            final KElement idInst = idRoot.appendElement("IDInstance");
+                            idInst.setAttribute("XPath", e.buildXPath(null, 2));
+                            idInst.setAttribute("Name", e.getNodeName());
+                            
+                        }
                     }
                 }
             }
@@ -2646,8 +2663,6 @@ public class CheckJDF
             {
                 sysOut.println("No Multiple ID elements!");
             }
-            sysOut.wannaPrint=bPrint;
-
         }
     }
 

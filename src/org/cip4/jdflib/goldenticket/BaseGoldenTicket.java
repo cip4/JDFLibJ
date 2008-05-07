@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFSeparationList;
@@ -108,6 +109,7 @@ import org.cip4.jdflib.resource.process.JDFColorantControl;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StatusCounter;
 import org.cip4.jdflib.util.UrlUtil;
 
@@ -202,7 +204,7 @@ public class BaseGoldenTicket
      * makeready for all kids
      *
      */
-    
+
     public void makeReadyAll()
     {
         for(int i=0;i<vKids.size();i++)
@@ -215,15 +217,15 @@ public class BaseGoldenTicket
      */
     public void makeReady()
     {
-        
+
         if(bExpandGrayBox && EnumType.ProcessGroup.equals(theNode.getEnumType()) && theNode.hasAttribute(AttributeName.TYPES))
         {
             theExpandedNode=theNode.addCombined(theNode.getTypes());
             VElement resLinks=theNode.getResourceLinks(null);
             final int size = resLinks==null ? 0 : resLinks.size();
             for(int i=0;i<size;i++)
-               ((JDFResourceLink) resLinks.get(i)).removeAttribute(AttributeName.COMBINEDPROCESSINDEX);
-            
+                ((JDFResourceLink) resLinks.get(i)).removeAttribute(AttributeName.COMBINEDPROCESSINDEX);
+
             initAuditPool(theExpandedNode);
             theExpandedNode.copyElement(theNode.getResourceLinkPool(), null);
         }
@@ -233,7 +235,7 @@ public class BaseGoldenTicket
         }
         VElement nodeLinks = getNodeLinks();
         theStatusCounter.setActiveNode(theExpandedNode, null, nodeLinks);
-        
+
         VElement vResLinks=theExpandedNode.getResourceLinks(null);
         int siz= vResLinks!=null ? vResLinks.size() : 0;
         for(int i=0;i<siz;i++)
@@ -369,7 +371,29 @@ public class BaseGoldenTicket
         finalize(); // prior to processRun
         theStatusCounter.setPhase(EnumNodeStatus.Completed, "NodeDetails", EnumDeviceStatus.Idle, "DeviceDetails");
     }
-
+    /**
+     * schedule this node
+     * the nodeinfo will be modified
+     */
+    public void schedule(VJDFAttributeMap nodesToCombine, int starthours, int durationhours)
+    {
+        theNode.setPartStatus(nodesToCombine, EnumNodeStatus.Waiting);
+        final JDFNodeInfo ni=theNode.getNodeInfo();
+        if(nodesToCombine==null)
+        {
+            nodesToCombine=new VJDFAttributeMap();
+            nodesToCombine.add(null);
+        }
+        for(int i=0;i<nodesToCombine.size();i++)
+        {
+            JDFNodeInfo nip=(JDFNodeInfo) ni.getCreatePartition(nodesToCombine.elementAt(i), null);
+            JDFDate d=new JDFDate();
+            d.addOffset(0,0,starthours, 0);
+            nip.setStart(d);
+            d.addOffset(0,0,durationhours, 0);
+            nip.setEnd(d);
+        }
+    }
     /**
      * @param good
      * @param waste
@@ -588,7 +612,7 @@ public class BaseGoldenTicket
                 c.setCMYK(new JDFCMYKColor(0,0,0,1));
         }
     } 
-    
+
     /**
      * @param icsLevel
      */
@@ -674,7 +698,7 @@ public class BaseGoldenTicket
         m.setDimensionCM(new JDFXYPair(70,102));
         return m;
     }
-    
+
     public int getNCols()
     {
         int ncols=nCols==0 ? cols.size() : nCols;

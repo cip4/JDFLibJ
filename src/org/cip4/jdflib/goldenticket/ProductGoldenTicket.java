@@ -96,9 +96,11 @@ import org.cip4.jdflib.resource.intent.JDFDropItemIntent;
 import org.cip4.jdflib.resource.intent.JDFFoldingIntent;
 import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
 import org.cip4.jdflib.resource.intent.JDFMediaIntent;
+import org.cip4.jdflib.resource.intent.JDFPackingIntent;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
+import org.cip4.jdflib.span.JDFShapeSpan;
 import org.cip4.jdflib.span.JDFSpanBindingType.EnumSpanBindingType;
 import org.cip4.jdflib.span.JDFSpanCoatings.EnumSpanCoatings;
 import org.cip4.jdflib.util.JDFDate;
@@ -115,6 +117,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
     public ProductGoldenTicket(int _icsLevel, EnumVersion jdfVersion, int _jmfLevel, int _misLevel)
     {
         super(_misLevel,jdfVersion,_jmfLevel);
+        cols.set(4, "Blue"); // want hd blue here
         icsLevel=_icsLevel;        
     }
 
@@ -123,7 +126,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
      * @param icsLevel the level to init to (1,2 or 3)
      */
     @Override
-	public void init()
+    public void init()
     {
 
         if(icsLevel<0)
@@ -146,13 +149,13 @@ public class ProductGoldenTicket extends MISGoldenTicket
         if(productType==null)
         {
             outComp.setComponentType(EnumComponentType.FinalProduct,EnumComponentType.Sheet);
-            
+
         }
         else
         {
             outComp.setComponentType(EnumComponentType.PartialProduct,EnumComponentType.Sheet);
             outComp.setProductType(productType);
-            
+
         }
         theNode.getResource(ElementName.LAYOUTINTENT, null, 0);
         JDFShape s=li.getFinishedDimensions().getActual();
@@ -176,14 +179,14 @@ public class ProductGoldenTicket extends MISGoldenTicket
         dit.setAmount(amount);
         JDFResourceLink rl=theNode.getLink(outComp, null);
         rl.setAmount(amount, null);
-        
+
         di.setResStatus(EnumResStatus.Available, false);
         di.preferredToActual();
     }
     /**
      */
     @Override
-	protected JDFNodeInfo initNodeInfo()
+    protected JDFNodeInfo initNodeInfo()
     {
         super.initNodeInfo();
         JDFNodeInfo ni=theNode.getCreateNodeInfo();
@@ -222,7 +225,6 @@ public class ProductGoldenTicket extends MISGoldenTicket
      */
     protected JDFColorIntent initColorIntent(JDFNode node, int front, int back, String coatings)
     {
-        VString colors=new VString("Cyan Magenta Yellow Black Gray Blue Spot1 Spot2"," ");
         JDFColorIntent ci=(JDFColorIntent) node.addResource(ElementName.COLORINTENT, EnumUsage.Input);
         VElement vci=new VElement();
         if(front!=back && back!=0)
@@ -237,10 +239,10 @@ public class ProductGoldenTicket extends MISGoldenTicket
 
         for(int i=0;i<vci.size();i++)
         {
-            int cols=i==0?front:back;
+            int colors=i==0?front:back;
             VString newCols=new VString();
-            for(int j=0;j<cols;j++)
-                newCols.add(colors.elementAt(j));
+            for(int j=0;j<colors;j++)
+                newCols.add(cols.elementAt(j));
             JDFColorIntent cip=(JDFColorIntent)vci.elementAt(i);
             cip.appendColorsUsed().setSeparations(newCols);
         }
@@ -344,7 +346,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
         initOutputComponent(theNode,li,null);
         initDeliveryIntent(5000);
     }
-    
+
     public void createHDCity() throws Exception
     {
         initCustomerInfo(null,null,"Heidelberger Druckmaschinen AG","Heidelberg A4 brochure");
@@ -354,14 +356,14 @@ public class ProductGoldenTicket extends MISGoldenTicket
 
         initMediaIntent(cover,200, EnumSpanCoatings.Glossy);
         JDFLayoutIntent li=initLayoutIntent(cover,21, 29.7, 4, 2);
-    	initColorIntent(cover,6,4,null);
+        initColorIntent(cover,6,4,null);
         JDFComponent cCover=initOutputComponent(cover,li,"Cover");
         cCover.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
 
 
         JDFNode body=addJDFNode(theNode,EnumType.Product);
         body.setDescriptiveName("HD Brochure Body");
-    	initColorIntent(body,4,4,null);
+        initColorIntent(body,4,4,null);
         initMediaIntent(body,135, EnumSpanCoatings.Coated);
         initLayoutIntent(body,21, 29.7, 32, 2);
         JDFComponent cBody=initOutputComponent(body,li,"Body");
@@ -377,23 +379,61 @@ public class ProductGoldenTicket extends MISGoldenTicket
     public void createWatches() throws Exception
     {
         initCustomerInfo(null,null,"ABC Promotions Company","Sinn watches double flap");
-         theNode.setDescriptiveName("7.5.3 Flyer with special fold 4c/4c");
+        theNode.setDescriptiveName("7.5.3 Flyer with special fold 4c/4c");
 
         initMediaIntent(theNode,170, EnumSpanCoatings.Coated);
         JDFLayoutIntent li=initLayoutIntent(theNode,21, 29.7, 6, 2);
-    	initColorIntent(theNode,4,4,null);
+        initColorIntent(theNode,4,4,null);
         JDFFoldingIntent fi=initFoldingIntent(theNode, "F6-3");
         fi.setDescriptiveName("F6-3 should be the gate fold");
         initOutputComponent(theNode,li,null);
         initDeliveryIntent(5000);
     }
 
+    /**
+     * product intent for the drupa flower job
+     * @throws Exception
+     */
+    public void createDrupaFlower() throws Exception
+    {
+        initCustomerInfo("Jane","Customer","Messe Düsseldorf","CIP4 Drupa Flower Demo Job");
+        theNode.setDescriptiveName("Drupa Flower Brochure, 4pg Cover 5c/5c, 48 pg Text 5c/5c");
+        
+        JDFNode cover=addJDFNode(theNode,EnumType.Product);
+        cover.setDescriptiveName("Drupa Flower Brochure Cover");
+
+        initMediaIntent(cover,200, EnumSpanCoatings.Glossy);
+        JDFLayoutIntent li=initLayoutIntent(cover,23.3, 21.6, 4, 2);
+        initColorIntent(cover,5,5,null);
+        JDFComponent cCover=initOutputComponent(cover,li,"Cover");
+        cCover.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
+
+
+        JDFNode body=addJDFNode(theNode,EnumType.Product);
+        body.setDescriptiveName("Drupa Flower Brochure Body");
+        initColorIntent(body,5,5,null);
+        initMediaIntent(body,150, EnumSpanCoatings.Glossy);
+        initLayoutIntent(body,23.3, 21.6, 48, 2);
+        JDFComponent cBody=initOutputComponent(body,li,"Body");
+        cBody.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
+
+        initBindingIntent(cCover, cBody,2);
+
+        initOutputComponent(theNode,li,null);
+        initDeliveryIntent(5000);
+        JDFPackingIntent pi=(JDFPackingIntent) theNode.getResource(ElementName.PACKINGINTENT, EnumUsage.Input, 0);
+        JDFShapeSpan ss=pi.appendBoxShape();
+        ss.addRange(24*72/2.54, 22*72/2.54, 10*72/2.54, 999, 999, 999);
+        
+        
+    }
+
     @Override
     protected void runphases(int good, int waste)
     {
-       //nop for products
+        //nop for products
     } 
-    
-    
-    
+
+
+
 }

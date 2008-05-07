@@ -91,7 +91,7 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
 
     /////////////////////////////////////////////////////////////////////////////
     
-    public void testMISCPGrayBox()
+    public void testMISCPGrayBoxFrontBack()
     {
         VJDFAttributeMap vMap=new VJDFAttributeMap();
         JDFAttributeMap map=new JDFAttributeMap();
@@ -116,6 +116,7 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
         cpGoldenTicket.good=1000;
         cpGoldenTicket.waste=90;
         cpGoldenTicket.execute(null,true,true);
+        cpGoldenTicket.makeReadyAll();
         node = cpGoldenTicket.getNode();
         cpGoldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_Worker_MISCPS_1_GB.jdf", 2);
         assertTrue(node.getICSVersions(false).contains("Base_L2-1.3"));
@@ -135,12 +136,12 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
         cpGoldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_Manager_MISCPS_1_GB_FrontBack.jdf", 2);
         map.put(EnumPartIDKey.Side,"Front");
         cpGoldenTicket.execute(mapSingle,false,true);
-        cpGoldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_Manager_MISCPS_1_GB_FrontBack_xB.jdf", 2);
+        cpGoldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_Worker_MISCPS_1_GB_FrontBack_xB.jdf", 2);
         map.put(EnumPartIDKey.Side,"Back");
         cpGoldenTicket.good=900;
         cpGoldenTicket.waste=30;
         cpGoldenTicket.execute(mapSingle,true,false);
-        cpGoldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_Manager_MISCPS_1_GB_FrontBack_xBF.jdf", 2);
+        cpGoldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_Worker_MISCPS_1_GB_FrontBack_xBF.jdf", 2);
     }
     
     /////////////////////////////////////////////////////////////////////////////

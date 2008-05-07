@@ -226,21 +226,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         addAmountLink("Component:Output");
         super.setActivePart(vp, bFirst);
     }
-     /**
-     * simulate execution of this node
-     * the internal node will be modified to reflect the excution
-     */
-    public void schedule(VJDFAttributeMap nodesToCombine, int starthours, int durationhours)
-    {
-        theNode.setPartStatus(nodesToCombine, EnumNodeStatus.Waiting);
-        JDFNodeInfo ni=theNode.getNodeInfo();
-        ni=(JDFNodeInfo) ni.getPartition(nodesToCombine.elementAt(0), null);
-        JDFDate d=new JDFDate();
-        d.addOffset(0,0,starthours, 0);
-        ni.setStart(d);
-        d.addOffset(0,0,durationhours, 0);
-        ni.setEnd(d);
-    }
+
 
     /**
      * @param icsLevel
@@ -252,8 +238,8 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         theNode.linkResource(m, EnumUsage.Input, null);
         return m;
     }
-    
- 
+
+
 
 
     protected void initInk()
@@ -273,7 +259,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         }
     }
 
- 
+
     /**
      * @param icsLevel
      */
@@ -393,7 +379,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         return dev;
     }
 
-     /**
+    /**
      * @param icsLevel
      */
     protected void makeReadyColorantControl()
@@ -415,7 +401,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
     public void makeReady()
     {
         super.makeReady();
-        
+
         JDFPreview pv=(JDFPreview) theNode.getResource(ElementName.PREVIEW,EnumUsage.Input, 0);
         VElement v=pv.getLeaves(false);
         for(int i=0;i<v.size();i++)
@@ -425,7 +411,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         }
         makeReadyColorantControl();
 
-   }
+    }
     /**
      * @param icsLevel
      * @return 
