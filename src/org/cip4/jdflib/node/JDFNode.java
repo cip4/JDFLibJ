@@ -668,7 +668,11 @@ public class JDFNode extends JDFElement
         // prepress gray box types
         public static final EnumType PlateSetting = new EnumType("PlateSetting");
         public static final EnumType PlateMaking = new EnumType("PlateMaking");
+        public static final EnumType ProofAndPlateMaking = new EnumType("ProofAndPlateMaking");
         public static final EnumType ImpositionPreparation = new EnumType("ImpositionPreparation");
+        public static final EnumType ImpositionProofing = new EnumType("ImpositionProofing");
+        public static final EnumType PageProofing = new EnumType("PageProofing");
+        public static final EnumType PageSoftProofing = new EnumType("PageSoftProofing");
         public static final EnumType PrepressPreparation = new EnumType("PrePressPreparation");
         public static final EnumType ProofImaging = new EnumType("ProofImaging");
     }
@@ -1202,7 +1206,7 @@ public class JDFNode extends JDFElement
         mapPut(EnumType.LayoutElementProduction.getName(),
                 ",LayoutElement,RunList,LayoutElementProductionParams",
                 // links
-                ",o? i*,o?,i?"
+                ",o? i*,i* o?,i?"
         );
 
         mapPut(EnumType.LayoutPreparation.getName(),
@@ -1643,13 +1647,13 @@ public class JDFNode extends JDFElement
                 //links
                 ",o_ i_,i_,i?"
         );
-        
+
         mapPut(EnumType.PrepressPreparation.getName(),
                 ",RunList,*",
                 //links
                 ",i_Document o_Document,i* o*"
         );
-        
+
         mapPut(EnumType.ImpositionPreparation.getName(),
                 ",Layout,RunList,*",
                 //links
@@ -1660,6 +1664,45 @@ public class JDFNode extends JDFElement
                 //links
                 ",i?,i?,o_ i_Document i?Marks,i* o*"
         );
+
+
+        mapPut(EnumType.PlateSetting.getName(),
+                ",*,ExposedMedia,Preview",
+                // links
+                ",i* o*,o_,o*"
+        );
+        mapPut(EnumType.PlateMaking.getName(),
+                ",*,RunList,ExposedMedia,Preview,Media",
+                // links
+                ",i* o*,i_Document i?Marks,o_,o*,i_"
+        );
+        mapPut(EnumType.ProofAndPlateMaking.getName(),
+                ",*,RunList,ExposedMedia,Preview,Media",
+                // links
+                ",i* o*,i_Document i?Marks,o+,o*,i_"
+        );
+        mapPut(EnumType.ImpositionProofing.getName(),
+                ",*,RunList,ExposedMedia,Media",
+                // links
+                ",i* o*,i_Document i?Marks,o+,i_"
+        );
+        mapPut(EnumType.PageProofing.getName(),
+                ",*,RunList,ExposedMedia,Media",
+                // links
+                ",i* o*,i_Document i?Marks,o+,i_"
+        );
+
+        mapPut(EnumType.PageSoftProofing.getName(),
+                ",*,RunList",
+                // links
+                ",i* o*,i_Document i?Marks"
+        );
+        mapPut(EnumType.ProofImaging.getName(),
+                ",InterpretingParams,RenderingParams,RunList,*",
+                //links
+                ",i?,i?,i? i?Document i?Marks,i* o*"
+        );
+
     }
 
 
@@ -2113,19 +2156,19 @@ public class JDFNode extends JDFElement
         for(int i=0;i<types.size();i++)
         {
             final String typ = types.stringAt(i);
-//            if(typ.equals("RIPing"))
-//            {
-//                vNew.add(EnumType.Imposition.getName());
-//                vNew.add(EnumType.Interpreting.getName());
-//                vNew.add(EnumType.ColorSpaceConversion.getName());
-//                vNew.add(EnumType.Trapping.getName());
-//                vNew.add(EnumType.Rendering.getName());
-//                vNew.add(EnumType.Screening.getName());
-//            }
-//            else
-//            {
-                vNew.add(typ);
-//            }
+//          if(typ.equals("RIPing"))
+//          {
+//          vNew.add(EnumType.Imposition.getName());
+//          vNew.add(EnumType.Interpreting.getName());
+//          vNew.add(EnumType.ColorSpaceConversion.getName());
+//          vNew.add(EnumType.Trapping.getName());
+//          vNew.add(EnumType.Rendering.getName());
+//          vNew.add(EnumType.Screening.getName());
+//          }
+//          else
+//          {
+            vNew.add(typ);
+//          }
         }
         return vNew;   
     }
@@ -2365,7 +2408,7 @@ public class JDFNode extends JDFElement
             if(getStatus() != JDFElement.EnumNodeStatus.Part) 
             { //  set a decent default status for implicit
                 ni.setNodeStatus(getStatus());
-               
+
             }
 
             ni.getResourceRoot().setPartUsage(JDFResource.EnumPartUsage.Implicit);
@@ -2620,13 +2663,29 @@ public class JDFNode extends JDFElement
      */
     public JDFResource getResource(String strName, EnumUsage usage, int i)
     {
+        return getResource(strName, usage, null, i);
+    }   
+    /**
+     * Get the linked resource with name=strName
+     * @param strName the resource name
+     * @param usage the ResourceLink Usage, if null either in or out are accepted
+     * @param processUsage the processUsage of the respective resource
+     * @param int i the nuber of matches to skip, if negative, count backwards
+     * @return the matching resource, null if none matches
+     */
+    public JDFResource getResource(String strName, EnumUsage usage, EnumProcessUsage processUsage, int i)
+    {
         VElement velem=null;
-
         final JDFResourceLinkPool rlp = getResourceLinkPool();
-
         if (rlp != null)
         {
-            final JDFAttributeMap mALink = usage==null ? null : new JDFAttributeMap(AttributeName.USAGE, usage);   // map of requesetd link attributes         
+            JDFAttributeMap mALink = new JDFAttributeMap();   // map of requesetd link attributes 
+            if(usage!=null)
+                mALink.put(AttributeName.USAGE, usage);
+            if(processUsage!=null)
+                mALink.put(AttributeName.PROCESSUSAGE, processUsage);
+            if(mALink.size()==0)
+                mALink=null;
 
             velem = rlp.getLinkedResources(strName, mALink, null, false);
         }
@@ -2826,7 +2885,33 @@ public class JDFNode extends JDFElement
         return resourceLink;
     }
 
-
+    /**
+     * ensureLink: if it does not yet exist, create a resourceLink in the resourceLinkPool that refers to 
+     * the resource jdfResource also sets the appropriate combined process index
+     * 
+     *
+     * @param jdfResource the resource or partition to link to
+     * @param usage Usage of the resource
+     * @param processUsage processUsage of the resource
+     *
+     * @return JDFResourceLink the link
+     * 
+     * @default LinkResource(r, usage, null)
+     */
+    public JDFResourceLink ensureLink(JDFResource jdfResource, EnumUsage usage, EnumProcessUsage processUsage)
+    {
+        if(jdfResource==null)
+            return null;
+        JDFAttributeMap m = new JDFAttributeMap();
+        if(usage!=null)
+            m.put(AttributeName.USAGE, usage);
+        if(processUsage!=null)
+            m.put(AttributeName.PROCESSUSAGE, processUsage);
+        JDFResourceLink rl=getLink(0,jdfResource.getNodeName(),m,null);
+        if(rl==null)
+            rl=linkResource(jdfResource, usage, processUsage);
+        return rl;
+    }
 
     /**
      * @param jdfResource
@@ -3933,21 +4018,21 @@ public class JDFNode extends JDFElement
         // the following code probably does more harm than hel in the standard case 
         // and only speeds up pathologically ordered JDF
         //
-//        if(vDoneRefs==null)
-//        {
-//            XMLDocUserData ud=getXMLDocUserData();
-//            if(ud!=null && ud.getIDCache())
-//            {
-//                //prefill cache!
-//                JDFNode root=getJDFRoot();
-//                VElement v=root.getChildrenByTagName(ElementName.RESOURCEPOOL, null, null, false, true, 0);
-//                for(int i=0;i<v.size();i++)
-//                {
-//                    JDFResourcePool rp=(JDFResourcePool)v.get(i);
-//                    rp.getResourceByID("1"); // invalid so that it will search all!
-//                }
-//            }
-//        }
+//      if(vDoneRefs==null)
+//      {
+//      XMLDocUserData ud=getXMLDocUserData();
+//      if(ud!=null && ud.getIDCache())
+//      {
+//      //prefill cache!
+//      JDFNode root=getJDFRoot();
+//      VElement v=root.getChildrenByTagName(ElementName.RESOURCEPOOL, null, null, false, true, 0);
+//      for(int i=0;i<v.size();i++)
+//      {
+//      JDFResourcePool rp=(JDFResourcePool)v.get(i);
+//      rp.getResourceByID("1"); // invalid so that it will search all!
+//      }
+//      }
+//      }
         JDFResourcePool rp = getResourcePool();
         if(rp != null && bRecurse) {
             v1 = rp.getAllRefs(v1, bRecurse);
@@ -5811,7 +5896,7 @@ public class JDFNode extends JDFElement
         }
 
         KElement nici2=nici;
-        
+
         // continue search if not found but retain nici
         while(nici2!=null && (xPath!=null) &&(!nici2.hasXPathNode(xPath)))
         {

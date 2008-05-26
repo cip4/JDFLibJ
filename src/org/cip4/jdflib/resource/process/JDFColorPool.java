@@ -228,7 +228,7 @@ public class JDFColorPool extends JDFAutoColorPool
         for(int i=0;i<siz;i++)
         {
             JDFColor c=(JDFColor) v.elementAt(i);
-            if(colorName.equals(c.getActualColorName()))
+            if(colorName.equals(c.getName()) || colorName.equals(c.getActualColorName()))
             {
                 if(pos<0) {
 					pos=i;

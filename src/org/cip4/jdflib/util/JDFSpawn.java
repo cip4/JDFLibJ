@@ -978,7 +978,8 @@ public class JDFSpawn
      */
     private boolean resFitsRWRes(JDFResource r, VString vRWResources)
     {
-
+        if(r==null)
+            return false;
         boolean bResRW = vRWResources.contains(r.getLocalName());
         // 200602 RP added fix
         if(!bResRW)
@@ -1458,8 +1459,8 @@ public class JDFSpawn
 
                 if (parts!=null)
                 {
-                    if (parent.getStatus().equals(JDFElement.EnumNodeStatus.Pool) ||
-                            parent.getStatus().equals(JDFElement.EnumNodeStatus.Part))
+                    final EnumNodeStatus parentStatus = parent.getStatus();
+                    if (JDFElement.EnumNodeStatus.Pool.equals(parentStatus) || JDFElement.EnumNodeStatus.Part.equals(parentStatus))
                     {
                         for (i = 0; i < parts.size(); i++)
                         {
@@ -1470,20 +1471,17 @@ public class JDFSpawn
                             }
                         }
                     }
-                    else
+                    else if (JDFElement.EnumNodeStatus.Spawned.equals(parentStatus) || 
+                            spawnAudit.hasAttribute(AttributeName.STATUS))
                     {
-                        if (parent.getStatus().equals(JDFElement.EnumNodeStatus.Spawned) || 
-                                spawnAudit.hasAttribute(AttributeName.STATUS))
-                        {
-                            parent.setStatus(status);
-                        }
+                        parent.setStatus(status);
                     }
                 }
                 else
                 {
                     // we either must overwrite because it is now definitely not spawned 
                     // or had an explicit correct status in the spawned audit
-                    if (localNode.getStatus().equals(JDFElement.EnumNodeStatus.Spawned) || 
+                    if (JDFElement.EnumNodeStatus.Spawned.equals(localNode.getStatus()) || 
                             spawnAudit.hasAttribute(AttributeName.STATUS))
                     {
                         localNode.setStatus(status);

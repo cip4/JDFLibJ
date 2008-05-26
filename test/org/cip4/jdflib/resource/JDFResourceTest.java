@@ -78,6 +78,8 @@ package org.cip4.jdflib.resource;
 
 import java.util.Vector;
 
+import net.gamsys.test.SparseForDummies.Elem;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoColorSpaceConversionOp.EnumSourceObjects;
@@ -1143,8 +1145,8 @@ public class JDFResourceTest extends JDFTestCaseBase
         xm.refElement(m);
         rl.deleteNode();
         assertFalse(m.deleteUnLinked());
-        xm.getElement_KElement("MediaRef",null,0).deleteNode();
-        assertTrue(m.deleteUnLinked());
+        n.removeResource(ElementName.EXPOSEDMEDIA, 0);
+        assertNull(m.getParentNode());
 
     }
     /////////////////////////////////////////////////////////////////////////////

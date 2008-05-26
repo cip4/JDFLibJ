@@ -7174,7 +7174,20 @@ public class JDFResource extends JDFElement
 
         if (vLinks==null)
         {
+            VElement vRefs=getRefElements();   
+            if(vRefs!=null)
+            {
+                VElement v2=new VElement();
+                for(int j=0;j<vRefs.size();j++)
+                    v2.add(((JDFRefElement)vRefs.get(j)).getTarget());
+                vRefs=v2;
+            }
             deleteNode();
+            if(vRefs!=null)
+            {
+                for(int j=0;j<vRefs.size();j++)
+                    ((JDFResource)vRefs.get(j)).deleteUnLinked();
+            }
             bRet=true;
         }
         return bRet;

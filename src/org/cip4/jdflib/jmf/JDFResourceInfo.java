@@ -240,7 +240,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo
             boolean bIgnorePrivate, int nMax)
     {
         VString s=getInvalidElements_JDFElement(level, bIgnorePrivate, nMax);
-        if(s.size()>nMax)
+        if(s.size()>nMax || hasAttribute(AttributeName.RESOURCENAME)) // multiple are allowed with resourcename set
             return s;
         
         VElement v=getChildElementVector(null, null, null, true, 0,false);

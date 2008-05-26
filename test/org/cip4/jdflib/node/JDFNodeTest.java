@@ -133,6 +133,8 @@ import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.JDFSpawn;
 import org.cip4.jdflib.util.StatusCounter;
 
+import sun.security.action.GetLongAction;
+
 
 public class JDFNodeTest extends JDFTestCaseBase
 {
@@ -275,6 +277,16 @@ public class JDFNodeTest extends JDFTestCaseBase
         JDFResourceLink rll=n.linkResource(rl,EnumUsage.Input ,null);
         assertEquals("res ns","www.ns.com",rll.getNamespaceURI());
         assertFalse(rll.hasAttribute(AttributeName.COMBINEDPROCESSINDEX));
+    }
+    public void testEnsureLink()
+    {
+        JDFDoc d=new JDFDoc("JDF");
+        JDFNode n=d.getJDFRoot();
+        JDFResource rl= n.addResource("RunList",null);
+        JDFResourceLink rl2=n.ensureLink(rl, EnumUsage.Input, null);
+        assertNotNull(rl2);
+        assertEquals(rl2, n.ensureLink(rl, EnumUsage.Input, null));
+        
     }
 
     /**
@@ -586,10 +598,27 @@ public class JDFNodeTest extends JDFTestCaseBase
 
     //////////////////////////////////////////////////////////
 
-    public void testResourceAudit()
+    public void testRemoveResource()
     {
         JDFDoc gd = new JDFDoc("JDF");
         JDFNode n=gd.getJDFRoot();
+        JDFResource r=n.addResource("Media", EnumUsage.Input);
+        JDFResource r2=n.addResource("Media", EnumUsage.Input);
+        assertNotNull(n.getLink(1, null, null, null));
+        n.removeResource("Media", 0);
+        assertNull(n.getLink(1, null, null, null));
+        assertNotNull(n.getLink(0, null, null, null));
+        n.removeResource("Media", 0);
+        assertNull(n.getLink(0, null, null, null));
+       
+    }
+    
+    ////////////////////////////
+
+        public void testResourceAudit()
+        {
+            JDFDoc gd = new JDFDoc("JDF");
+            JDFNode n=gd.getJDFRoot();
 
         JDFRunList rl=(JDFRunList)n.addResource("RunList", null, EnumUsage.Input, null, null, null, null);
         n.setType("Product",false);
@@ -1529,6 +1558,25 @@ public class JDFNodeTest extends JDFTestCaseBase
         r=n.getResource(ElementName.SADDLESTITCHINGPARAMS, null,-2);
         assertEquals(r,rAdd);
     }  
+    //////////////////////////////////////////////////////////////////////////
+
+    public void testGetResourceProcessUsage()
+    {
+        JDFDoc d=new JDFDoc("JDF");
+        JDFNode n=d.getJDFRoot();
+        n.setType(EnumType.ResourceDefinition);
+        JDFResource rAdd=n.addResource(ElementName.SADDLESTITCHINGPARAMS, EnumUsage.Input);
+        JDFResource rAdd2=n.addResource(ElementName.SADDLESTITCHINGPARAMS, EnumUsage.Input);
+        assertNotNull(rAdd2);
+        JDFResourceLink rl=n.getLink(rAdd, null);
+        rl.setProcessUsage(EnumProcessUsage.Application);
+        JDFResource r=n.getResource(ElementName.SADDLESTITCHINGPARAMS, EnumUsage.Input,EnumProcessUsage.Application,-1);
+        assertEquals(r,rAdd);
+        r=n.getResource(ElementName.SADDLESTITCHINGPARAMS, EnumUsage.Input,EnumProcessUsage.Application,0);
+        assertEquals(r,rAdd);
+        r=n.getResource(ElementName.SADDLESTITCHINGPARAMS, EnumUsage.Input,EnumProcessUsage.Application,1);
+        assertNull(r);
+     }  
 
     public void testGetCreateResource()
     {

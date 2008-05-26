@@ -307,7 +307,7 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
                     final JDFNodeInfo nodeInfo = node.getNodeInfo();
                     if (nodeInfo != null)
                     {
-                        if(nodeInfo.hasAttribute(AttributeName.ID)){
+                        if(nodeInfo.getParentNode_KElement() instanceof JDFResourcePool){
                             // add a low level refelement, the copying takes place inaddspawnedresources
                             JDFRefElement re=(JDFRefElement) ancestor.appendElement(ElementName.NODEINFO+JDFConstants.REF);
                             re.setrRef(nodeInfo.getID());
@@ -323,7 +323,7 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
                     final JDFCustomerInfo customerInfo = node.getCustomerInfo();
                     if (customerInfo != null)
                     {
-                        if(customerInfo.hasAttribute(AttributeName.ID)){
+                        if(customerInfo.getParentNode_KElement() instanceof JDFResourcePool){
                             // add a low level refelement, the copying takes place inaddspawnedresources
                             JDFRefElement re=(JDFRefElement) ancestor.appendElement(ElementName.CUSTOMERINFO+JDFConstants.REF);
                             re.setrRef(customerInfo.getID());

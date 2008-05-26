@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2005 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -409,7 +409,7 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 
             final JDFRefElement l = (JDFRefElement) vChild.elementAt(i);
             JDFResource   r = l.getTarget();
-            r = r.getResourceRoot();
+            r = r==null ? null : r.getResourceRoot();
             if (r != null && r.includesAttributes(mResAtt, true))
             {
                 vElem.addElement(r);    //vElem.push_back(r);

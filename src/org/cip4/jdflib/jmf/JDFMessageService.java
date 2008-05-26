@@ -243,17 +243,21 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
      */
     public void setFamilies(Vector fams)
     {
-        removeAttribute(EnumFamily.Command.getName());
-        removeAttribute(EnumFamily.Signal.getName());
-        removeAttribute(EnumFamily.Query.getName());
-        removeAttribute(EnumFamily.Registration.getName());
-        removeAttribute(EnumFamily.Acknowledge.getName());
+        setCommand(false);
+        setSignal(false);
+        setQuery(false);
+        setRegistration(false);
+        setAcknowledge(false);
 
         if(fams==null)
             return;
         for(int i=0;i<fams.size();i++)
         {
-            setFamily((EnumFamily) fams.elementAt(i));
+            try{
+                setFamily((EnumFamily) fams.elementAt(i));
+            }
+            catch (JDFException x)
+            { /* nop */}
         }
     }
 

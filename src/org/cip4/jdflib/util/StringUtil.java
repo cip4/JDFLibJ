@@ -626,8 +626,8 @@ public class StringUtil
 
     /**
      * replace a string in a given String
-     * <p>
-     * default: replaceChar(strWork, c, s)
+     * if the replacement string is contained by the string to replace, recursively replace until no ocurrences of the original remain
+     * thus  replaceString("a000000", "00", "0") will return "a0" rather than "a000"
      * 
      * @param strWork         String to work on
      * @param toReplace       String to match and replace
@@ -638,6 +638,7 @@ public class StringUtil
     {
         if(strWork==null)
             return strWork;
+        int lenIn=strWork.length();
         int indexOf = strWork.indexOf(toReplace);
         if( indexOf<0)
             return strWork;
@@ -655,7 +656,9 @@ public class StringUtil
         while(indexOf>=0);
         b.append(strWork);
 
-        return b.toString();
+        final String outString = b.toString();
+        int lenOut=outString.length();
+        return lenOut==lenIn ? outString : replaceString(outString, toReplace, replaceBy);
     }
 
     public static String xmlNameEscape(String strWork)

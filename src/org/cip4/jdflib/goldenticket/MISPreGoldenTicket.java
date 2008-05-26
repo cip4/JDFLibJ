@@ -70,8 +70,11 @@
  */
 package org.cip4.jdflib.goldenticket;
 
+import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
 import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
 import org.cip4.jdflib.auto.JDFAutoIdentificationField.EnumEncoding;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
+import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.auto.JDFAutoPreview.EnumPreviewFileType;
 import org.cip4.jdflib.auto.JDFAutoPreview.EnumPreviewUsage;
 import org.cip4.jdflib.core.AttributeName;
@@ -98,12 +101,14 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.intent.JDFColorIntent;
+import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFBarcodeProductionParams;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFLayoutElementProductionParams;
+import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.prepress.JDFPreviewGenerationParams;
@@ -116,6 +121,10 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class MISPreGoldenTicket extends MISGoldenTicket
 {
+    /**
+     * 
+     */
+    public String m_pdfFile = "file:///here/file.pdf";
     public static final String MISPRE_CONTENTCREATION = "MISPRE.ContentCreation";
     public static final String MISPRE_IMPOSITIONPREPARATION = "MISPRE.ImpositionPreparation";
     public static final String MISPRE_PREPRESSPREPARATION = "MISPRE.PrePressPreparation";
@@ -126,6 +135,7 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 
     protected int icsLevel;
     public boolean bStripping=false;
+    public boolean bSingleSided=false;
 
     /**
      * create a BaseGoldenTicket
@@ -147,6 +157,20 @@ public class MISPreGoldenTicket extends MISGoldenTicket
         thePreviousNode=previous.theNode;
         theParentNode=previous.theParentNode;
 
+        fillCatMaps();
+    }
+    /**
+     * create a BaseGoldenTicket
+     * @param icsLevel the level to init to (1,2 or 3)
+     * @param jdfVersion the version to generate a golden ticket for
+     * @param jmfLevel level of jmf ICS to support
+     * @param misLevel level of MIS ICS to support
+     * @param isGrayBox if true, write a grayBox
+     */
+    public MISPreGoldenTicket(MISPreGoldenTicket parent)
+    {
+        super(parent);
+        
         fillCatMaps();
     }
     /**
@@ -284,7 +308,7 @@ public class MISPreGoldenTicket extends MISGoldenTicket
     private void initPreviewGenerationParams()
     {
         // no requirements
-        
+
     }
     /**
      * 
@@ -312,9 +336,9 @@ public class MISPreGoldenTicket extends MISGoldenTicket
     /**
      * 
      */
-    private JDFBinderySignature initBinderySignature(int n, String catalog)
+    private JDFBinderySignature initBinderySignature(String catalog)
     {
-        JDFBinderySignature bs=(JDFBinderySignature) theNode.getCreateResource(ElementName.BINDERYSIGNATURE, EnumUsage.Input, n);
+        JDFBinderySignature bs=(JDFBinderySignature) theNode.addResource(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
         bs.setBinderySignatureType(EnumBinderySignatureType.Fold);
         bs.setFoldCatalog(catalog);
         int f=StringUtil.parseInt(StringUtil.token(catalog,0,"-").substring(1),0)/2;
@@ -357,6 +381,9 @@ public class MISPreGoldenTicket extends MISGoldenTicket
                 JDFResource partSP=sp.getCreatePartition(part, partIDKeys);
                 JDFBinderySignature bs=partSP.getSheetName().toLowerCase().contains("cover") ? bs0 : bs1;
                 partSP.refElement(bs);
+                JDFResourceLink rl=theNode.getLink(bs, null);
+                if(rl!=null)
+                    rl.deleteNode();
 
             }
         }
@@ -367,9 +394,9 @@ public class MISPreGoldenTicket extends MISGoldenTicket
         sp.appendDevice().setDeviceID("Press_ID");
         sp.appendPosition().setRelativeBox(new JDFRectangle(0,0,0.5,1));
         sp.appendPosition().setRelativeBox(new JDFRectangle(0.5,1,1,1));
-        
+
         sp.appendStripCellParams().setTrimSize(new JDFXYPair(8.5*72,11*72));
-        
+
         sp.refElement(initPaperMedia());
     }
 
@@ -382,9 +409,10 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 
         if(bStripping)
         {
-            initBinderySignature(0,"F4-1");
-            initBinderySignature(1,"F8-2");
+            initBinderySignature("F4-1");
+            initBinderySignature("F8-2");
             initStrippingParams();
+            initAssembly();
         }
 
         initOutputLayout();
@@ -396,11 +424,25 @@ public class MISPreGoldenTicket extends MISGoldenTicket
     /**
      * 
      */
+    private void initAssembly()
+    {
+       JDFAssembly assem=(JDFAssembly) theNode.getCreateResource(ElementName.ASSEMBLY, EnumUsage.Input, 0);
+       assem.setOrder(EnumOrder.Collecting);
+        
+    }
+    /**
+     * 
+     */
     private void initOutputLayout()
     {
         JDFLayout lo=(JDFLayout) theNode.getCreateResource(ElementName.LAYOUT, EnumUsage.Output, 0);
         lo.setResStatus(EnumResStatus.Unavailable, false);
-        lo.setPartIDKeys(new VString("SignatureName SheetName Side",null));       
+        final VString vSigSheetSide = new VString("SignatureName SheetName Side",null);
+        lo.setPartIDKeys(vSigSheetSide);   
+        for(int i=0;i<vParts.size();i++)
+        {
+            lo.getCreatePartition(vParts.elementAt(i), vSigSheetSide);
+        }
     }
 
     /**
@@ -409,7 +451,9 @@ public class MISPreGoldenTicket extends MISGoldenTicket
     private void initGBContentCreation()
     {
         theNode.setTypes(new VString(EnumType.LayoutElementProduction.getName(),null));
-        initDocumentRunList();   
+        JDFRunList ruli=initDocumentRunList();
+        JDFResourceLink rl=theNode.getLink(ruli, EnumUsage.Input);
+        rl.setProcessUsage((EnumProcessUsage)null);
         initLayoutElementProductionParams();
         initConduitRunListOut();
     }
@@ -440,7 +484,7 @@ public class MISPreGoldenTicket extends MISGoldenTicket
     /**
      * 
      */
-    private void initDocumentRunList()
+    private JDFRunList initDocumentRunList()
     {
         JDFRunList rl=(JDFRunList) theNode.getCreateResource(ElementName.RUNLIST, EnumUsage.Input, 0);
         JDFResourceLink rll=theNode.getLink(rl, null);
@@ -450,9 +494,10 @@ public class MISPreGoldenTicket extends MISGoldenTicket
             rll=theNode.getLink(rl, null);           
         }
         rll.setProcessUsage(EnumProcessUsage.Document);
-        rl.addPDF("file://foobar/here/file.pdf", 0, -1);
+        rl.addPDF(m_pdfFile, 0, -1);
         rl.setNPage(4);
         rl.setDescriptiveName("Description of this RunList");
+        return rl;
     }
 
     /**
@@ -494,7 +539,7 @@ public class MISPreGoldenTicket extends MISGoldenTicket
         executeLayout();   
         executeRunList(EnumUsage.Input);
         executeMarksRunList(EnumUsage.Output);
-        
+
     }
 
     /**
@@ -507,11 +552,11 @@ public class MISPreGoldenTicket extends MISGoldenTicket
             rl = (JDFRunList) theExpandedNode.getResource(ElementName.RUNLIST, usage, 1);
         if(!"Marks".equals(theExpandedNode.getLink(rl, usage).getProcessUsage()))
             rl=null;
-            
+
         if(rl!=null && !rl.hasChildElement(ElementName.LAYOUTELEMENT, null))
             rl.addPDF("./folder/TheMarks.pdf", 0, -1);
     }
-    
+
     /**
      * emulate execution of a runlist by making it available
      */
@@ -540,6 +585,8 @@ public class MISPreGoldenTicket extends MISGoldenTicket
             for(int i=0;i<size;i++)
             {
                 final JDFAttributeMap part = reducedMap.elementAt(i);
+                if(bSingleSided==true && "Back".equals(part.get("Side")))
+                    continue;
                 JDFLayout partLO=(JDFLayout) lo.getCreatePartition(part, partIDKeys);
                 for(int j=0;j<4;j++)
                 {
@@ -551,29 +598,6 @@ public class MISPreGoldenTicket extends MISGoldenTicket
         }
     }
 
-    /**
-     * simulate execution of this node
-     * the internal node will be modified to reflect the excution
-     */
-    public void schedule(VJDFAttributeMap nodesToCombine, int starthours, int durationhours)
-    {
-        theNode.setPartStatus(nodesToCombine, EnumNodeStatus.Waiting);
-        JDFNodeInfo ni=theNode.getNodeInfo();
-        ni=(JDFNodeInfo) ni.getPartition(nodesToCombine.elementAt(0), null);
-        JDFDate d=new JDFDate();
-        d.addOffset(0,0,starthours, 0);
-        ni.setStart(d);
-        d.addOffset(0,0,durationhours, 0);
-        ni.setEnd(d);
-    }
-
-    /**
-     * @param icsLevel
-     */
-    protected void initPlateMaking()
-    {
-
-    }
 
     public int getNCols()
     {
@@ -588,6 +612,8 @@ public class MISPreGoldenTicket extends MISGoldenTicket
      */
     protected void initPreviewSep()
     {
+        if(theParentNode!=null)
+            theNode.ensureLink(theParentNode.getResource(ElementName.PREVIEW,EnumUsage.Output, 0),EnumUsage.Output,null);
         JDFPreview pv=(JDFPreview) theNode.getCreateResource(ElementName.PREVIEW,EnumUsage.Output, 0);
         pv.setResStatus(EnumResStatus.Incomplete, false);
         pv.setPreviewUsage(EnumPreviewUsage.Separation);
@@ -602,7 +628,7 @@ public class MISPreGoldenTicket extends MISGoldenTicket
                 JDFPreview pvp=(JDFPreview) pv.getCreatePartition(part, partIDKeys);
                 for(int j=0;j<getNCols();j++)
                 {
-                    pvp.addPartition(EnumPartIDKey.Separation, cols.stringAt(j));
+                    pvp.getCreatePartition(EnumPartIDKey.Separation, cols.stringAt(j),partIDKeys);
                     pvp.setResStatus(EnumResStatus.Incomplete, false);
                 }
             }
@@ -613,6 +639,8 @@ public class MISPreGoldenTicket extends MISGoldenTicket
      */
     protected void initPreviewComp()
     {
+        if(theParentNode!=null)
+            theNode.ensureLink(theParentNode.getResource(ElementName.PREVIEW,EnumUsage.Output, 0),EnumUsage.Output,null);
         JDFPreview pv=(JDFPreview) theNode.getCreateResource(ElementName.PREVIEW,EnumUsage.Output, 0);
         pv.setResStatus(EnumResStatus.Incomplete, false);
         pv.setPreviewUsage(EnumPreviewUsage.Viewable);
@@ -627,7 +655,7 @@ public class MISPreGoldenTicket extends MISGoldenTicket
                 final JDFAttributeMap part = vParts.elementAt(i);
                 JDFPreview pvp=(JDFPreview) pv.getCreatePartition(part, partIDKeys);
                 pvp.setResStatus(EnumResStatus.Incomplete, false);
-              
+
             }
         }
     }
@@ -644,6 +672,10 @@ public class MISPreGoldenTicket extends MISGoldenTicket
     /**
      * 
      */
+   
+    /**
+     * 
+     */
     private void makeReadyPreviewGeneration()
     {
         VString v=theExpandedNode.getAllTypes();
@@ -652,6 +684,24 @@ public class MISPreGoldenTicket extends MISGoldenTicket
             JDFPreviewGenerationParams pgp=(JDFPreviewGenerationParams) theExpandedNode.getCreateResource(ElementName.PREVIEWGENERATIONPARAMS, EnumUsage.Input, 0);
             pgp.setPreviewUsage(JDFPreviewGenerationParams.EnumPreviewUsage.Separation);
         }
+    }
+    /**
+     * @return
+     */
+    public JDFMedia getPlateMedia()
+    {
+        if(theNode==null)
+            return null;
+        for(int i=0;i<10;i++)
+        {
+            JDFMedia plate=(JDFMedia) theNode.getResource(ElementName.MEDIA, EnumUsage.Input, i);
+            if(plate==null)
+                return null;
+            if(EnumMediaType.Plate.equals(plate.getMediaType()))
+                return plate;
+        }
+        return null;
+
     }
 
 }

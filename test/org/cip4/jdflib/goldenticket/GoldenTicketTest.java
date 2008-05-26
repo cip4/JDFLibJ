@@ -168,6 +168,17 @@ public class GoldenTicketTest extends JDFTestCaseBase
         assertTrue(node.isValid(EnumValidationLevel.Complete));
     }
     
+    public void testProductMultiLabel() throws Exception
+    {
+
+        pgt=new ProductGoldenTicket(0,EnumVersion.Version_1_3,0,0);
+        pgt.assign(null);
+        pgt.createMultiLabels();
+        final JDFNode node = pgt.getNode();
+        node.setJobID("6915");
+        node.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp+"multiLabel.jdf", 2, false);
+        assertTrue(node.isValid(EnumValidationLevel.Complete));
+    }
     public void testProductCreateHarley() throws Exception
     {
         

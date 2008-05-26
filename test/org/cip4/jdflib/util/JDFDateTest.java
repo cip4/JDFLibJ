@@ -92,9 +92,9 @@ public class JDFDateTest extends TestCase
         }
         catch(DataFormatException dfe)
         {
-        	//
+            //
         }
-        
+
         try
         {
             date = new JDFDate("1999");
@@ -102,9 +102,9 @@ public class JDFDateTest extends TestCase
         }
         catch(DataFormatException dfe)
         {
-        	//
+            //
         }
-        
+
         try
         {
             date = new JDFDate(null);
@@ -113,7 +113,7 @@ public class JDFDateTest extends TestCase
         {
             fail("date exception: ");
         }
-        
+
         try
         {
             date = new JDFDate("1975-01-01T20:00:10.5");
@@ -121,9 +121,9 @@ public class JDFDateTest extends TestCase
         }
         catch(DataFormatException dfe)
         {
-        	//
+            //
         }
-        
+
         try
         {
             date = new JDFDate("2004-11-26T11:43:10.33-03");
@@ -131,9 +131,9 @@ public class JDFDateTest extends TestCase
         }
         catch(DataFormatException dfe)
         {
-        	//
+            //
         }
-        
+
         try
         {
             date = new JDFDate("2004-11-26T11:43:10.-0300");
@@ -141,7 +141,7 @@ public class JDFDateTest extends TestCase
         }
         catch(DataFormatException dfe)
         {
-        	//
+            //
         }
 
     }
@@ -240,10 +240,10 @@ public class JDFDateTest extends TestCase
         strDate = date.getDateTimeISO();
         assertTrue("Bug "+strDate+" is not equal to 2004-11-26T11:43:10-03:00", 
                 strDate.equals("2004-11-26T11:43:10-03:00"));
-        
-//        date = new JDFDate("2004-11-26T11:43:10");
-//        assertNotNull(date);
-//        strDate = date.getDateTimeISO();
+
+//      date = new JDFDate("2004-11-26T11:43:10");
+//      assertNotNull(date);
+//      strDate = date.getDateTimeISO();
 
     }
 
@@ -324,18 +324,24 @@ public class JDFDateTest extends TestCase
         String strDate4 = date4.getDateTimeISO();
         assertEquals("Bug "+strDate+" is not equal to "+strDate4, date,date4);
     }
-    
+
     public void testGetFormattedDateTime() throws Exception
     {
-        JDFDate date = new JDFDate("2008-12-19T07:00:11.300+00:00");
+        final String dateString = "2008-12-19T07:00:11.300+00:00";
+        JDFDate date = new JDFDate(dateString);
         assertEquals("2008", date.getFormattedDateTime("yyyy"));
         assertEquals("12", date.getFormattedDateTime("MM"));
-  }   
+        assertEquals("300", date.getFormattedDateTime("SSS")); // test for milliseconds
+        assertEquals("300", date.getFormattedDateTime("S")); // test for milliseconds
+        assertEquals(dateString, date.getFormattedDateTime("yyyy'-'MM'-'dd'T'HH:mm:ss.SSSZZ"));
+
+
+    }   
     public void testGetDateTime() throws Exception
     {
         JDFDate date = new JDFDate("2008-12-19T07:00:11.300+00:00");
         assertEquals("20081219070011", date.getDateTime());
-  }   
+    }   
 
     ///////////////////////////////////////////////////////
     public void testMyDateTime() throws Exception
@@ -357,6 +363,6 @@ public class JDFDateTest extends TestCase
         TimeZone t=TimeZone.getDefault();        
         JDFDate d=new JDFDate();
         assertEquals(t.getOffset(System.currentTimeMillis()), d.getTimeZoneOffsetInMillis());
-        
-     }   
+
+    }   
 }

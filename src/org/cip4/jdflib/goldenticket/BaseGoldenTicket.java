@@ -75,6 +75,7 @@ import java.util.Vector;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
+import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
@@ -94,11 +95,17 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFCMYKColor;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFQuery;
+import org.cip4.jdflib.jmf.JDFStatusQuParams;
+import org.cip4.jdflib.jmf.JDFSubscription;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAuditPool;
+import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
@@ -106,7 +113,9 @@ import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
+import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
+import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFDate;
@@ -131,6 +140,7 @@ public class BaseGoldenTicket
     protected JDFNode theExpandedNode=null;
     protected JDFNode thePreviousNode=null;
     protected JDFNode theParentNode=null;
+    public JDFNode theParentProduct=null;
     protected EnumVersion theVersion=null;
     protected int baseICSLevel;
     protected StatusCounter theStatusCounter;
@@ -145,16 +155,22 @@ public class BaseGoldenTicket
     public EnumWorkStyle workStyle=EnumWorkStyle.Simplex;
     public String devID="DeviceID";
     /**
-     * good for execute
+     * good for plan and execute
      */
-    public int good=0; 
-
+    public int good=1000; 
     /**
-     * pwaste for execute
+     * pwaste for plan and execute
      */
-    public int waste=0;
+    public int waste=100;
     public int partsAtOnce=0; // 0 = all 
     public boolean bExpandGrayBox=true; 
+    public boolean bPartitionedPlateMedia=false;
+    public JDFMedia paperMedia;
+    /**
+     * if set, the returnURL will be initialized
+     */
+    public String returnURL=null;
+    public boolean getNIFromParent=false;
 
     /**
      * create a BaseGoldenTicket
@@ -170,6 +186,52 @@ public class BaseGoldenTicket
     }
 
     /**
+     * create a BaseGoldenTicket
+     * @param icsLevel the level to init to (1,2 or 3)
+     * @param jdfVersion the version to generate a golden ticket for
+     */
+    public BaseGoldenTicket(BaseGoldenTicket parent)
+    {
+        baseICSLevel=parent.baseICSLevel;
+        theVersion=parent.theVersion;
+        theStatusCounter=new StatusCounter(null,null,null);
+        bExpandGrayBox=parent.bExpandGrayBox;
+        bPartitionedPlateMedia=parent.bPartitionedPlateMedia;
+        cols=new VString(parent.cols);
+        colsActual=new VString(parent.colsActual);
+        nCols=parent.nCols;
+        devID=parent.devID;
+        good=parent.good;
+        waste=parent.waste;
+        paperMedia=parent.paperMedia;
+        partsAtOnce=parent.partsAtOnce;
+        theParentNode=parent.getNode();
+        vParts=new VJDFAttributeMap(parent.vParts);
+        partIDKeys=new VString(parent.partIDKeys);
+        workStyle=parent.workStyle;
+        JDFElement.setLongID(false);
+        parent.addKid(this);
+    }
+    /**
+     * @param icsLevel
+     */
+    protected JDFNodeInfo initNodeInfo()
+    {
+
+        JDFNodeInfo ni=getNIFromParent&&theParentNode!=null ? theParentNode.getNodeInfo():null;
+        if(ni==null)
+        {
+            ni=theNode.getCreateNodeInfo();
+            ni.setResStatus(EnumResStatus.Available, false);
+        }
+        else
+            theNode.linkResource(ni, EnumUsage.Input, null);
+
+        if(returnURL!=null)
+            ni.setTargetRoute(returnURL);
+        return ni;
+    }
+    /**
      * assign a node to this golden ticket instance
      * @param node the node to assign, if null a new conforming node is generated from scratch
      */
@@ -181,6 +243,9 @@ public class BaseGoldenTicket
         theExpandedNode=theNode;
         if(theNode.getParentJDF()!=null)
             theParentNode=theNode.getParentJDF();
+        theParentProduct=theParentNode;
+        while(theParentProduct!=null && !EnumType.Product.equals(theParentProduct.getEnumType()))
+            theParentProduct=theParentProduct.getParentJDF();
         setVersion();
         init();
     }
@@ -198,7 +263,8 @@ public class BaseGoldenTicket
      */
     public void addKid(BaseGoldenTicket bt)
     {
-        vKids.add(bt);
+        if(!vKids.contains(bt))
+            vKids.add(bt);
     }
     /**
      * makeready for all kids
@@ -437,7 +503,34 @@ public class BaseGoldenTicket
     {
         initJDF();
         initAuditPool(theNode);
+        initDevice(null);
 
+    }
+
+    /**
+     * 
+     */
+    protected JDFDevice initDevice(JDFNode previousNode)
+    {
+        JDFDevice dev=(JDFDevice) theNode.getResource(ElementName.DEVICE, EnumUsage.Input, 0);
+        if(dev==null && devID!=null)
+        {
+            JDFResourceLink rl=null;
+            dev=(JDFDevice) (theParentNode!=null ? theParentNode.getResource(ElementName.DEVICE, EnumUsage.Input, 0):null);
+            if(dev==null)
+            {
+                dev=(JDFDevice) theNode.getCreateResource(ElementName.DEVICE, EnumUsage.Input, 0);
+                dev.setDeviceID(devID);
+                rl=theNode.getLink(dev, EnumUsage.Input);
+            }
+            else
+            {
+                rl=theNode.getLink(dev, EnumUsage.Input);
+                if(rl==null)
+                    rl=theNode.linkResource(dev, EnumUsage.Input, null);
+            }
+        }
+        return dev;
     }
 
     /**
@@ -476,7 +569,7 @@ public class BaseGoldenTicket
         if(!theNode.hasAttribute(AttributeName.DESCRIPTIVENAME))
             theNode.setDescriptiveName("Base Golden Ticket Example Job - version: "+JDFAudit.software());
 
-        if(!theNode.hasAttribute(AttributeName.COMMENTURL))
+        if(theParentNode==null && !theNode.hasAttribute(AttributeName.COMMENTURL))
             theNode.setCommentURL(UrlUtil.StringToURL("http://www.example.com").toExternalForm());
     }
 
@@ -492,7 +585,8 @@ public class BaseGoldenTicket
             VElement resLinks=theExpandedNode.getResourceLinks(null);
             for(int i=0;i<amountLinks.size();i++)
             {
-                for(int j=0;j<resLinks.size();j++)
+                final int resLinkSize = resLinks==null ? 0 : resLinks.size();
+                for(int j=0;j<resLinkSize;j++)
                 {
                     JDFResourceLink rl=(JDFResourceLink) resLinks.elementAt(j);
                     if(rl.matchesString(amountLinks.elementAt(i)))
@@ -579,6 +673,8 @@ public class BaseGoldenTicket
         {
             ccLink=theNode.linkResource(thePreviousNode.getResource(ElementName.COLORANTCONTROL, EnumUsage.Input, 0),EnumUsage.Input,null);
         }
+        if(ccLink==null && theParentNode!=null)
+            ccLink=theNode.linkResource(theParentNode.getResource(ElementName.COLORANTCONTROL, EnumUsage.Input, 0),EnumUsage.Input,null);
 
         JDFColorantControl cc=(JDFColorantControl) (ccLink==null ? (JDFColorantControl) theNode.getCreateResource(ElementName.COLORANTCONTROL,EnumUsage.Input, 0) : ccLink.getTarget());
         cc.setResStatus(EnumResStatus.Available, false);
@@ -618,17 +714,70 @@ public class BaseGoldenTicket
      */
     protected JDFMedia initPaperMedia()
     {
+        JDFResourceLink rlM=null;
         if(thePreviousNode!=null)
-            theNode.linkResource(thePreviousNode.getResource(ElementName.MEDIA, EnumUsage.Input, 0),EnumUsage.Input,null);
+        {
+            JDFMedia media = (JDFMedia) thePreviousNode.getResource(ElementName.MEDIA, EnumUsage.Input, 0);
+            if(media!=null && !EnumMediaType.Paper.equals(media.getMediaType()))
+                media=(JDFMedia) thePreviousNode.getResource(ElementName.MEDIA, EnumUsage.Input, 1);
+            if(media!=null && !EnumMediaType.Paper.equals(media.getMediaType()))
+                media=null;
 
-        JDFMedia m=(JDFMedia) theNode.getCreateResource(ElementName.MEDIA,null, 0);
-        m.setDescriptiveName("the paper to print on");
-        m.setResStatus(EnumResStatus.Unavailable, false);
-        m.setMediaType(EnumMediaType.Paper);
-        m.setDimensionCM(new JDFXYPair(70,102));
-        m.setWeight(90);
-        m.setThickness(90/0.8);
-        return m;
+            if(media==null )
+            {
+                media = getMediaFromNode(thePreviousNode);
+                if(media==null)
+                {
+                    VElement v=thePreviousNode.getPredecessors(true, false);
+                    int siz=v==null ? 0 : v.size();
+                    for(int i=0;i<siz;i++)
+                    {
+                       media=getMediaFromNode((JDFNode) v.get(i));
+                       if(media!=null)
+                           break;
+                    }
+                }
+            }
+            rlM=theNode.linkResource(media,EnumUsage.Input,null);
+        }
+
+        if(rlM==null && theParentNode!=null)
+            rlM=theNode.linkResource(theParentNode.getResource(ElementName.MEDIA, EnumUsage.Input, 0),EnumUsage.Input,null);
+
+
+        paperMedia=(JDFMedia) theNode.getCreateResource(ElementName.MEDIA,null, 0);
+        paperMedia.setDescriptiveName("the paper to print on");
+        paperMedia.setResStatus(EnumResStatus.Unavailable, false);
+        paperMedia.setMediaType(EnumMediaType.Paper);
+        paperMedia.setDimensionCM(new JDFXYPair(70,102));
+        paperMedia.setWeight(90);
+        paperMedia.setThickness(90/0.8);
+        return paperMedia;
+    }
+
+    /**
+     * @param media
+     * @param sNode
+     * @return
+     */
+    private JDFMedia getMediaFromNode(JDFNode sNode)
+    {
+        if(sNode==null)
+            return null;
+        JDFLayout lo=(JDFLayout) sNode.getResource(ElementName.LAYOUT, EnumUsage.Input, 0);
+        if(lo!=null)
+        {
+           JDFMedia m= lo.getMedia(0);
+           if(m!=null)
+               return m;
+        }
+
+        JDFStrippingParams sp=(JDFStrippingParams) sNode.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
+        if(sp!=null)
+        {
+           return sp.getMedia(0);
+        }
+        return null;
     }
 
     /**
@@ -653,31 +802,63 @@ public class BaseGoldenTicket
      */
     protected void initPlateXM(EnumUsage usage)
     {
+        JDFResourceLink rl=null;
         if(thePreviousNode!=null) // either input (for cp, or output for plateset)
-            theNode.linkResource(thePreviousNode.getResource(ElementName.EXPOSEDMEDIA, null, 0),usage,null);
+            rl=theNode.linkResource(thePreviousNode.getResource(ElementName.EXPOSEDMEDIA, null, 0),usage,null);
+
+        if(rl==null && theParentNode!=null)
+            rl =theNode.ensureLink(theParentNode.getResource(ElementName.EXPOSEDMEDIA, null, 0),usage,null);
 
         JDFExposedMedia xm=(JDFExposedMedia) theNode.getCreateResource(ElementName.EXPOSEDMEDIA,usage, 0);
         xm.setPartUsage(EnumPartUsage.Explicit);
-        JDFResourceLink rl=theNode.getLink(xm, null);
+        rl=theNode.getLink(xm, null);
 
-        JDFMedia m=initPlateMedia();
+        JDFMedia m=((JDFExposedMedia) xm.getLeaves(false).elementAt(0)).getMedia();
+        if(m==null)
+            m=initPlateMedia();
+        else
+        {
+            m=(JDFMedia)m.getResourceRoot();
+            if(theParentNode!=null)
+                theNode.ensureLink(theParentNode.getResource("Media", EnumUsage.Input,0),EnumUsage.Input,null);
+        }
         xm.setResStatus(EnumResStatus.Unavailable, false);
-        xm.refElement(m);
+        if(!bPartitionedPlateMedia && xm.getMedia()==null)
+            xm.refElement(m);
         if(EnumUsage.Input.equals(usage))
         {
             rl.setProcessUsage(EnumProcessUsage.Plate);
-            theNode.getLink(m, null).deleteNode();
+            final JDFResourceLink link = theNode.getLink(m, null);
+            if(link!=null)
+                link.deleteNode();
         }
 
         if(vParts!=null)
         {
             for(int i=0;i<vParts.size();i++)
             {
-                JDFResource xmp=xm.getCreatePartition(vParts.elementAt(i), partIDKeys);
+                final JDFAttributeMap part = new JDFAttributeMap(vParts.elementAt(i));
+                JDFResource xmp=xm.getCreatePartition(part, partIDKeys);
                 int ncols = getNCols();
 
                 for(int j=0;j<ncols;j++)
-                    xmp.addPartition(EnumPartIDKey.Separation, cols.stringAt(j));
+                {
+                    part.put(EnumPartIDKey.Separation, cols.stringAt(j));
+                    xmp.getCreatePartition(part, partIDKeys);
+                }
+            }
+            if(bPartitionedPlateMedia)
+            {
+                VJDFAttributeMap vSheets=getReducedMap(new VString("Side Separation PartVersion",null));
+                for(int i=0;i<vSheets.size();i++)
+                {
+                    final JDFAttributeMap part = new JDFAttributeMap(vSheets.elementAt(i));
+                    JDFExposedMedia xmp=(JDFExposedMedia) xm.getCreatePartition(part, partIDKeys);
+                    if(xmp.getMedia()==null)
+                    {
+                        xmp.refMedia((JDFMedia) m.getCreatePartition(part, null));
+                    }
+                }
             }
         }
     }
@@ -688,14 +869,31 @@ public class BaseGoldenTicket
      */
     protected JDFMedia initPlateMedia()
     {
+        if(theParentNode!=null)
+            theNode.ensureLink(theParentNode.getResource(ElementName.MEDIA,EnumUsage.Input, 0),EnumUsage.Input,null);
         JDFMedia m= (JDFMedia) theNode.getCreateResource(ElementName.MEDIA, EnumUsage.Input, 0);
         if(EnumMediaType.Paper.equals(m.getMediaType()))
             m= (JDFMedia) theNode.getCreateResource(ElementName.MEDIA, EnumUsage.Input, 1);
         m.setResStatus(EnumResStatus.Available, false);
-        m.makeRootResource(null, null, true);
+        m.makeRootResource(null, theNode.getJDFRoot(), true);
+        theNode.getJDFRoot().getCreateResourcePool().moveElement(m, null);
         m.setDescriptiveName("the plates to use");
         m.setMediaType(EnumMediaType.Plate);
-        m.setDimensionCM(new JDFXYPair(70,102));
+        m.setPartUsage(EnumPartUsage.Implicit);
+        if(bPartitionedPlateMedia&&vParts!=null)
+        {
+            VJDFAttributeMap vSheets=getReducedMap(new VString("Side Separation PartVersion",null));
+            for(int i=0;i<vSheets.size();i++)
+            {
+                final JDFAttributeMap part = new JDFAttributeMap(vSheets.elementAt(i));
+                JDFResource mm=m.getCreatePartition(part, partIDKeys);
+            }
+
+        }
+        else
+        {
+            m.setDimensionCM(new JDFXYPair(70,102));
+        }
         return m;
     }
 

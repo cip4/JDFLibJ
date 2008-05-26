@@ -334,7 +334,7 @@ public class JDFDate implements Comparable
     /**
      * returns the date and time of this in nonean arbitrary pattern
      * @param format the format string using {@link FastDateFormat} formatting
-     * @return String - the date as specified by patter
+     * @return String - the date as specified by the pattern
      * @throws IllegalArgumentException
      */
     public String getFormattedDateTime(String format)
