@@ -166,43 +166,50 @@ public class JDFColorPool extends JDFAutoColorPool
      */
     public boolean isValid(EnumValidationLevel level)
     {
-
         boolean bValid = super.isValid(level);
         if(!bValid) {
 			return false;
 		}
 
-        bValid = !hasDuplicateColors();
+        bValid = getDuplicateColors()==null;
         return bValid;
     }
 
     /**
      * does this ColorPool have Color elements with identical Name or RawName eattributes
      * return false if no Color elements with identical Name or RawName tags exist
+     * @deprecated use getDuplicateColors()==null
      */
     public boolean hasDuplicateColors()
     {
+        return getDuplicateColors()!=null;
+    }
+    /**
+     * does this ColorPool have Color elements with identical Name or RawName eattributes
+     * return false if no Color elements with identical Name or RawName tags exist
+     */
+    public VString getDuplicateColors()
+    {
         VElement v       = getChildElementVector(ElementName.COLOR,null,null,true,0,false);
         HashSet<String> vName    = new HashSet<String>();
-        HashSet<String> vRawName = new HashSet<String>();
         int nCols        = v.size();
-
+        VString vRet=new VString();
         for(int i = 0 ; i < nCols; i++)
         {
             JDFColor color = (JDFColor)v.elementAt(i);
             String colorName = color.getName();
             if(vName.contains(colorName)) {
-				return true;
-			}
-            vName.add(colorName);
+                vRet.appendUnique(colorName);
+            }
             String rawName = color.get8BitName();
-            if(vRawName.contains(rawName)) {
-				return true;
-			}
-            vRawName.add(colorName);
+            if(vName.contains(rawName)) {
+                vRet.appendUnique(colorName);
+            }
+            vName.add(colorName);
+            vName.add(rawName);
         }
 
-        return false;
+        return vRet.size()==0 ? null : vRet;
     }
 
 
@@ -314,7 +321,7 @@ public class JDFColorPool extends JDFAutoColorPool
         }
         else
         {
-            throw new JDFException("JDFColorPool::AppendColorWithName color exists: " + colorName);
+            throw new JDFException("JDFColorPool::AppendColorWithName color exists: " + colorName+"/"+rawName);
         }
 
         return col;

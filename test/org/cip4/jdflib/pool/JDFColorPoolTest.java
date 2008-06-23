@@ -144,7 +144,21 @@ public class JDFColorPoolTest extends TestCase
            assertEquals("num",cp.numChildElements("Color",null),1);
            
     }    
+    public void testDuplicateColor() throws Exception
+    {
+           assertNull(cp.getDuplicateColors());     
+           JDFColor c=cp.appendColorWithName("grun","grun");
+           assertNull(cp.getDuplicateColors());     
+           c.set8BitNames("Grün".getBytes());
+           c.setName("grun");
+           assertTrue(cp.getDuplicateColors().contains("grun"));     
+
+    }    
     
-    
+    @Override
+    public String toString()
+    {
+        return cp==null ? null :cp.toString();
+    }
     
 }
