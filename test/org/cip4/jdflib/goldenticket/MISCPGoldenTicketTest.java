@@ -72,16 +72,19 @@ package org.cip4.jdflib.goldenticket;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 
 
@@ -102,7 +105,7 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
         map.put(EnumPartIDKey.Side,"Back");
         vMap.add(new JDFAttributeMap(map));
         MISCPGoldenTicket cpGoldenTicket=new MISCPGoldenTicket(1,null,2,2,true,vMap);
-        cpGoldenTicket.nCols=4;
+        cpGoldenTicket.nCols[0]=cpGoldenTicket.nCols[1]=4;
         
         cpGoldenTicket.assign(null);
         JDFNode node = cpGoldenTicket.getNode();
@@ -156,13 +159,46 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
         vMap.add(new JDFAttributeMap(map));
 
         MISCPGoldenTicket cpGoldenTicket=new MISCPGoldenTicket(1,null,2,2,true,vMap);
-        cpGoldenTicket.nCols=6;
+        cpGoldenTicket.nCols[0]=cpGoldenTicket.nCols[1]=6;
         cpGoldenTicket.workStyle=EnumWorkStyle.Simplex;
         cpGoldenTicket.assign(null);
         cpGoldenTicket.good=1000;
         cpGoldenTicket.waste=90;
        
         BaseGoldenTicketTest.write3GTFiles(cpGoldenTicket, "MISCPS_SimplexPoster");
+    }
+    /////////////////////////////////////////////////////////////////////////////
+    
+    public void testMISCPGrayBox41Poster()
+    {
+        VJDFAttributeMap vMap=new VJDFAttributeMap();
+        JDFAttributeMap map=new JDFAttributeMap();
+        map.put(EnumPartIDKey.SignatureName,"Sig1");
+        map.put(EnumPartIDKey.SheetName,"Sheet1");
+        map.put(EnumPartIDKey.Side,"Front");
+        vMap.add(new JDFAttributeMap(map));
+        map.put(EnumPartIDKey.Side,"Back");
+        vMap.add(new JDFAttributeMap(map));
+
+        MISCPGoldenTicket cpGoldenTicket=new MISCPGoldenTicket(1,null,2,2,true,vMap);
+        cpGoldenTicket.nCols[0]=4;
+        cpGoldenTicket.nCols[1]=1;
+        cpGoldenTicket.workStyle=EnumWorkStyle.WorkAndTurn;
+        cpGoldenTicket.assign(null);
+        cpGoldenTicket.good=1000;
+        cpGoldenTicket.waste=90;
+        cpGoldenTicket.partsAtOnce=1;
+        cpGoldenTicket.partsForAvailable=2;
+
+        JDFNode n=cpGoldenTicket.getNode();
+        JDFDevice dev=(JDFDevice) n.getResource("Device",EnumUsage.Input,0);
+        dev.removeAttribute(AttributeName.DEVICEID);
+        dev.getCreatePartition(map, null).setAttribute("DeviceID", "BackSidePress");
+        map.put(EnumPartIDKey.Side,"Front");
+        dev.getCreatePartition(map, null).setAttribute("DeviceID", "FrontSidePress");
+       
+        
+        BaseGoldenTicketTest.write3GTFiles(cpGoldenTicket, "MISCPS_4_1Poster");
     }
     /////////////////////////////////////////////////////////////////////////////
     
@@ -183,7 +219,7 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
         }
 
         MISCPGoldenTicket cpGoldenTicket=new MISCPGoldenTicket(1,null,2,2,true,vMap);
-        cpGoldenTicket.nCols=6;
+        cpGoldenTicket.nCols[0]=cpGoldenTicket.nCols[1]=6;
         cpGoldenTicket.workStyle=EnumWorkStyle.WorkAndTurn;
      
         ProductGoldenTicket pgt=new ProductGoldenTicket(0,EnumVersion.Version_1_3,0,0);

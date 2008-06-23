@@ -221,8 +221,9 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 
         //put level methods?
 
-        while(cols.size()>nCols && nCols>0)
-            cols.remove(nCols);
+        int ncols=getNCols();
+        while(cols.size()>ncols && ncols>0)
+            cols.remove(ncols);
 
         if(icsLevel<0)
             return;
@@ -512,7 +513,7 @@ public class MISPreGoldenTicket extends MISGoldenTicket
             return;
         int c=ci.getNumColors();
         if(c>0)
-            nCols=c;       
+            nCols[0]=nCols[1]=c;       
     }
 
     /**
@@ -599,14 +600,6 @@ public class MISPreGoldenTicket extends MISGoldenTicket
     }
 
 
-    public int getNCols()
-    {
-        int ncols=nCols==0 ? cols.size() : nCols;
-        return ncols;
-    }
-
-
-
     /**
      * @param icsLevel
      */
@@ -626,7 +619,9 @@ public class MISPreGoldenTicket extends MISGoldenTicket
             {
                 final JDFAttributeMap part = vParts.elementAt(i);
                 JDFPreview pvp=(JDFPreview) pv.getCreatePartition(part, partIDKeys);
-                for(int j=0;j<getNCols();j++)
+                int ncols = "Front".equals(part.get("Side")) ? nCols[0] : nCols[1];
+
+                for(int j=0;j<ncols;j++)
                 {
                     pvp.getCreatePartition(EnumPartIDKey.Separation, cols.stringAt(j),partIDKeys);
                     pvp.setResStatus(EnumResStatus.Incomplete, false);

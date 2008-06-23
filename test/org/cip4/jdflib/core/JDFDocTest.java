@@ -80,6 +80,7 @@ package org.cip4.jdflib.core;
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.node.JDFNode;
@@ -105,6 +106,17 @@ public class JDFDocTest extends JDFTestCaseBase
         assertNull("no jmf root",jdfDoc.getJMFRoot());
     }  
 
+    public void testFixBad()
+    {
+        JDFDoc d=JDFDoc.parseFile("C:\\data\\certification\\MISCPS\\cert1.1.worker.jdf");
+        if(d!=null)
+        {
+            d.fixBad(null, EnumValidationLevel.NoWarnComplete);
+            JDFNode n=d.getJDFRoot();
+            d.write2File(sm_dirTestDataTemp+"Fixbad.jdf", 2, false);
+            assertTrue(n.isValid(EnumValidationLevel.Complete));            
+        }
+    }
     public void testForeignRoot()
     {
         final XMLDoc doc = new XMLDoc("Foo","fooNS");
@@ -223,7 +235,7 @@ public class JDFDocTest extends JDFTestCaseBase
             System.out.println("Parse Without factory: "+(System.currentTimeMillis()-l));
         }
 
-    
+
         {
             JDFDoc doc=new JDFDoc("JDF");
             KElement root=doc.getRoot();

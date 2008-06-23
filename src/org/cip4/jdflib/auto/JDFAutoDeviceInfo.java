@@ -436,7 +436,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
           */
         public void setDeviceStatus(EnumDeviceStatus enumVar)
         {
-            setAttribute(AttributeName.DEVICESTATUS, enumVar.getName(), null);
+            setAttribute(AttributeName.DEVICESTATUS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

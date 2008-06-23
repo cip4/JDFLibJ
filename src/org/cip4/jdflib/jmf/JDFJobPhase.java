@@ -326,9 +326,9 @@ public class JDFJobPhase extends JDFAutoJobPhase
         if(mp==null)
             return null;
         JDFModuleStatus ms=appendModuleStatus();
-        ms.copyAttribute(AttributeName.MODULETYPE, mp, null, null, null);
-        ms.copyAttribute(AttributeName.MODULEINDEX, mp, null, null, null);
-        ms.copyAttribute(AttributeName.MODULEID, mp, null, null, null);
+        ms.copyAttribute(AttributeName.MODULETYPE, mp);
+        ms.copyAttribute(AttributeName.MODULEINDEX, mp);
+        ms.copyAttribute(AttributeName.MODULEID, mp);
 
         return ms;
     }

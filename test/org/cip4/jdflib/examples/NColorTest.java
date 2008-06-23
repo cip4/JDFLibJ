@@ -70,27 +70,27 @@
 package org.cip4.jdflib.examples;
 
  import java.io.File;
- import java.util.HashSet;
+import java.util.HashSet;
 
- import org.cip4.jdflib.JDFTestCaseBase;
- import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
- import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
- import org.cip4.jdflib.core.JDFDoc;
- import org.cip4.jdflib.core.JDFElement;
- import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
+import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
- import org.cip4.jdflib.datatypes.JDFAttributeMap;
- import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
- import org.cip4.jdflib.datatypes.VJDFAttributeMap;
- import org.cip4.jdflib.goldenticket.MISCPGoldenTicket;
- import org.cip4.jdflib.jmf.JDFDeviceInfo;
- import org.cip4.jdflib.jmf.JDFJMF;
- import org.cip4.jdflib.jmf.JDFJobPhase;
- import org.cip4.jdflib.jmf.JDFSignal;
- import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
- import org.cip4.jdflib.jmf.JDFMessage.EnumType;
- import org.cip4.jdflib.node.JDFNode;
- import org.cip4.jdflib.resource.JDFModuleStatus;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.goldenticket.MISCPGoldenTicket;
+import org.cip4.jdflib.jmf.JDFDeviceInfo;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFJobPhase;
+import org.cip4.jdflib.jmf.JDFSignal;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.JDFModuleStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 
 
@@ -285,7 +285,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
          {
              //TODO lower
          }
-         bgt.nCols=4;
+         bgt.nCols[0]=bgt.nCols[1]=4;
          bgt.assign(null);
          node = bgt.getNode();
      }

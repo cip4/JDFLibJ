@@ -116,18 +116,18 @@ public class JDFResourceLink extends JDFElement
         final VString v= super.getInvalidAttributes(level, bIgnorePrivate, nMax);
         if(!v.contains(AttributeName.COMBINEDPROCESSINDEX) && !validCombinedProcessIndex())
             v.add(AttributeName.COMBINEDPROCESSINDEX);
-//        if(!(this instanceof JDFPartAmount) && hasChildElement(ElementName.AMOUNTPOOL,null))
-//        {
-//            if(hasAttribute(AttributeName.AMOUNT))
-//                v.add(AttributeName.AMOUNT);
-//            if(hasAttribute(AttributeName.ACTUALAMOUNT))
-//                v.add(AttributeName.ACTUALAMOUNT);
-//            if(hasAttribute(AttributeName.MAXAMOUNT))
-//                v.add(AttributeName.MAXAMOUNT);
-//            if(hasAttribute(AttributeName.MINAMOUNT))
-//                v.add(AttributeName.MINAMOUNT);
-//            v.unify();
-//        }
+//      if(!(this instanceof JDFPartAmount) && hasChildElement(ElementName.AMOUNTPOOL,null))
+//      {
+//      if(hasAttribute(AttributeName.AMOUNT))
+//      v.add(AttributeName.AMOUNT);
+//      if(hasAttribute(AttributeName.ACTUALAMOUNT))
+//      v.add(AttributeName.ACTUALAMOUNT);
+//      if(hasAttribute(AttributeName.MAXAMOUNT))
+//      v.add(AttributeName.MAXAMOUNT);
+//      if(hasAttribute(AttributeName.MINAMOUNT))
+//      v.add(AttributeName.MINAMOUNT);
+//      v.unify();
+//      }
         return v;
     }
 
@@ -1694,18 +1694,18 @@ public class JDFResourceLink extends JDFElement
         JDFAmountPool ap=getAmountPool();
         if(ap==null)
             return getRealAttribute(attName, null, 0.0);
-        
+
         VElement vParts=ap.getChildElementVector(ElementName.PARTAMOUNT, null);
-        
+
         if(vParts.isEmpty())
             return getRealAttribute(attName, null, 0.0);
 
-        
+
         for(int j=0;j<vParts.size();j++)
         {
             final JDFPartAmount pa = (JDFPartAmount) vParts.elementAt(j);
             if(!pa.getPartMapVector().subMap(vm))
-                    continue;
+                continue;
             String ret=null;
             ret= pa.getAttribute(attName, null, null);
             if(ret==null)
@@ -2572,9 +2572,29 @@ public class JDFResourceLink extends JDFElement
             for(int i=0;i<siz;i++)
             {
                 if(((JDFResource)v.elementAt(i)).matchesString(namedResLink))
-                return true;
+                    return true;
             }
         }
         return bMatch;
+    }
+
+    @Override
+    public void fixBad(EnumVersion version, EnumValidationLevel level)
+    {
+        super.fixBad(version, level);
+        if(!(this instanceof JDFPartAmount))
+        {
+            JDFNode n=getParentJDF();
+            if(n!=null && !n.isValidLink(level, this, null, null))
+            {
+                this.deleteNode();
+                return;
+            }
+            if(getTarget()==null)
+            {
+                this.deleteNode();
+                return;
+            }   
+        }
     }
 }

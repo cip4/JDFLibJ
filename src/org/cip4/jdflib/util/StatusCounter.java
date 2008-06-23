@@ -509,7 +509,7 @@ public class StatusCounter
 
         if(nextPhase!=null)
         {
-            generateResourceSignal(jmfRes);
+            generateResourceResponse(jmfRes);
         }
 
         if(lastPhase!=null && nextPhase!=lastPhase) // we explicitly added a new phasetime audit, thus we need to add a closing JMF for the original jobPhase
@@ -669,7 +669,7 @@ public class StatusCounter
      * @param amounts
      * @param jmfRes
      */
-    private void generateResourceSignal(JDFJMF jmfRes)
+    private void generateResourceResponse(JDFJMF jmfRes)
     {
         VElement vResResourceInfo=getVResLink(3);
         JDFSignal sig=jmfRes.appendSignal(EnumType.Resource);

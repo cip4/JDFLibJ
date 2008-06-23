@@ -87,6 +87,8 @@ import java.net.URL;
 import javax.mail.BodyPart;
 
 import org.apache.xerces.dom.DocumentImpl;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
@@ -238,6 +240,28 @@ public class JDFDoc extends XMLDoc
         return (JDFNode) getRoot().getTarget(id, AttributeName.ID);
     }
 
+    public void fixBad(EnumVersion version, EnumValidationLevel level)
+    {
+        JDFNode n=getJDFRoot();
+        if(n!=null)
+        {
+            for(int i=0;i<3;i++)
+            {
+                n.eraseUnlinkedResources();
+                n.fixBad(version,level);
+            }
+            if(version==null)
+                version=n.getMaxVersion(true);
+            
+            n.fixVersion(version);
+        }
+        JDFJMF j=getJMFRoot();
+        if(j!=null)
+        {
+            j.fixBad(version,level);
+            j.fixVersion(version);
+        }
+    }
     /**
      * removes all dangling resources and cleans up the rrefs attributes
      *
@@ -247,7 +271,7 @@ public class JDFDoc extends XMLDoc
      */
     public int collectGarbageResources(VString nodeNames)
     {
-        final boolean bCollectAll = nodeNames.isEmpty();
+        final boolean bCollectAll = nodeNames==null || nodeNames.isEmpty();
 
         final VElement vProcs = getJDFRoot().getvJDFNode(null, null, false);
         VElement vResources       = new VElement();

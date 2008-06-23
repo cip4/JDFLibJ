@@ -1,15 +1,8 @@
-/**
- *
- * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- *
- * JDFAmountPool.java
- *
- * -------------------------------------------------------------------------------------------------
- *
- * The CIP4 Software License, Version 0.1
+/*
+ * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,6 +64,7 @@
  * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
+ *
  *
  */
 package org.cip4.jdflib.pool;
@@ -156,7 +150,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
      * @param mPart filter for the part to set the status
      * @return the PartAmount that fits
      */
-    public JDFPartAmount getPartAmount(JDFAttributeMap mPart)
+    public JDFPartAmount getMatchingPartAmount(JDFAttributeMap mPart)
     {
         final VElement vPartAmount = 
             getChildElementVector(ElementName.PARTAMOUNT, null,null, true, 0, false);
@@ -166,6 +160,27 @@ public class JDFAmountPool extends JDFAutoAmountPool
             final VJDFAttributeMap vMapPart = partAmount.getPartMapVector();
 
             if (vMapPart.contains(mPart))
+            {
+                return partAmount; // exact match
+            }
+        }
+        return null;
+    }
+    /**
+     * Get a PartAmount that exactly equals the filter defined by mPart
+     * @param mPart filter for the part to set the status
+     * @return the PartAmount that fits
+     */
+    public JDFPartAmount getPartAmount(JDFAttributeMap mPart)
+    {
+        final VElement vPartAmount = 
+            getChildElementVector(ElementName.PARTAMOUNT, null,null, true, 0, false);
+         for (int i = vPartAmount.size() - 1; i >= 0; i--)
+        {
+            final JDFPartAmount partAmount = (JDFPartAmount) vPartAmount.elementAt(i);
+            final VJDFAttributeMap vMapPart = partAmount.getPartMapVector();
+
+            if (vMapPart.size()==1 && vMapPart.elementAt(0).equals(mPart))
             {
                 return partAmount; // exact match
             }
@@ -319,6 +334,22 @@ public class JDFAmountPool extends JDFAutoAmountPool
         {
             p = (JDFPartAmount) appendElement(ElementName.PARTAMOUNT, null);
             p.setPartMap(mPart);
+        }
+        return p;
+    }
+    /**
+     * get JDFPartAmount specified by mPart, create a new one if it 
+     * doesn't exist
+     * @param vPart JDFPartAmount to get/create
+     * @return
+     */
+    public JDFPartAmount getCreatePartAmount(VJDFAttributeMap vPart)
+    {
+        JDFPartAmount p = getPartAmount(vPart);
+        if(p == null) 
+        {
+            p = (JDFPartAmount) appendElement(ElementName.PARTAMOUNT, null);
+            p.setPartMapVector(vPart);
         }
         return p;
     }

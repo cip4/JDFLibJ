@@ -863,8 +863,7 @@ public class JDFElementTest extends TestCase
             if (jdfDoc != null)
             {
                 e = jdfDoc.getRoot();
-                assertFalse("valid doc: " + file.getPath(), e
-                        .isValid(EnumValidationLevel.RecursiveComplete));
+                assertFalse("valid doc: " + file.getPath(), e.isValid(EnumValidationLevel.RecursiveComplete));
             }
 
             // now with schema validation
@@ -874,8 +873,7 @@ public class JDFElementTest extends TestCase
             if (jdfDoc != null)
             {
                 e = jdfDoc.getRoot();
-                assertFalse("valid doc: " + file.getPath(), e
-                        .isValid(EnumValidationLevel.RecursiveComplete));
+                assertFalse("valid doc: " + file.getPath(), e.isValid(EnumValidationLevel.RecursiveComplete));
             }
         }
     }

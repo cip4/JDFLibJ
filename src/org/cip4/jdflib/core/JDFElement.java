@@ -1222,6 +1222,46 @@ public class JDFElement extends KElement
         }
         return bRet;
     }
+    /**
+     * Mother of all version fixing routines
+     *
+     * uses heuristics to modify this element and its children to be compatible with a given version
+     * in general, it will be able to move from low to high versions but potentially fail
+     * when attempting to move from higher to lower versions
+     *
+     * @param version version the resulting element should correspond to
+     * @return true if successful
+     */
+    public void fixBad(EnumVersion version, EnumValidationLevel level)
+    {
+        VElement v=getChildElementVector_KElement(null,null,null,true,-1); // do not follow refelements
+        VString unknown=getUnknownAttributes(false, -1);
+        int uSiz=unknown==null ? 0 : unknown.size();
+        for(int i=0;i<uSiz;i++){
+            removeAttribute(unknown.stringAt(i));
+        }
+        unknown=getInvalidAttributes(EnumValidationLevel.NoWarnIncomplete,false,-1);
+        uSiz=unknown==null ? 0 : unknown.size();
+        for(int i=0;i<uSiz;i++){
+            removeAttribute(unknown.stringAt(i));
+        }        
+
+        final int size = v.size();
+        for(int i=0;i<size;i++){
+            KElement e=v.elementAt(i);
+            if (e instanceof JDFElement && JDFConstants.JDFNAMESPACE.equals(e.getNamespaceURI())) // remove stuff in unknown namespaces
+            {
+                JDFElement j = (JDFElement) e;
+                j.fixBad(version,level);
+//              if(!j.isValid(level))
+//              j.deleteNode();
+            }
+            else
+            {
+                e.deleteNode();
+            }
+        }
+    }
 
     /**
      * Check Existance of attribute SettingsPolicy
@@ -1947,7 +1987,7 @@ public class JDFElement extends KElement
         final String ns = kElem.getNamespaceURI();
         return isInJDFNameSpaceStatic(ns);
     }
-    
+
     /**
      * gets an inter resource link  to a target resource. if target is a partition, the refElement MUST point exactly to that partition
      * @param target - Target resource to link  to
@@ -1957,14 +1997,14 @@ public class JDFElement extends KElement
     {
         if(target==null)
             return null;
-        
+
         JDFAttributeMap map=target.getPartMap();
         if(map!=null && map.size()==0)
             map=null;
         String id=target.getID();
-        
+
         VElement v=getChildrenByTagName(target.getLocalName()+JDFConstants.REF, target.getNamespaceURI(), new JDFAttributeMap(AttributeName.RREF, id), false, true, 0);
-  
+
         int siz=v==null ? 0 : v.size();
         for(int i=0;i<siz;i++)
         {
@@ -4314,7 +4354,7 @@ public class JDFElement extends KElement
      * @param _name Comment/@Name
      * @param index number of elements to skip
      * @return JDFComment - the matching element
-      * 
+     * 
      */
     public JDFComment getComment(String _name, int index)
     {
@@ -4512,17 +4552,17 @@ public class JDFElement extends KElement
                     }
                 }
                 // xpath is xpath -lets try not to be too smart implicitly
-//                if(eLast!=null)
-//                {
-//                    if(eLast instanceof JDFResource)
-//                    {
-//                        if(locName.equals(eLast.getLocalName())){
-//                            e=e.getParentNode_KElement();
-//                            i++; // undo i--
-//                            continue;
-//                        }
-//                    }
-//                }
+//              if(eLast!=null)
+//              {
+//              if(eLast instanceof JDFResource)
+//              {
+//              if(locName.equals(eLast.getLocalName())){
+//              e=e.getParentNode_KElement();
+//              i++; // undo i--
+//              continue;
+//              }
+//              }
+//              }
                 return false;
             }
             eLast=e;

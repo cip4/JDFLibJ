@@ -79,6 +79,7 @@
  */
 package org.cip4.jdflib.util;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -100,11 +101,11 @@ public class ContainerUtil
      * @param l
      * @return
      */
-    public static Set toHashSet(List l)
+    public static<a> Set toHashSet(List<a> l)
     {
         if(l==null)
             return null;
-        Set s=new HashSet();
+        Set<a> s=new HashSet<a>();
         for(int i=0;i<l.size();i++)
             s.add(l.get(i));
         return s;
@@ -114,11 +115,11 @@ public class ContainerUtil
      * @param l
      * @return
      */
-    public static Set toHashSet(Object[] l)
+    public static<a> Set toHashSet(a[] l)
     {
         if(l==null)
             return null;
-        Set s=new HashSet();
+        Set<a> s=new HashSet<a>();
         for(int i=0;i<l.length;i++)
             s.add(l[i]);
         return s;
@@ -128,34 +129,54 @@ public class ContainerUtil
      * @param l
      * @return
      */
-    public static Vector toVector(Object[] l)
+    public static<a> Vector toVector(a[] l)
     {
         if(l==null)
             return null;
-        Vector v=new Vector();
+        Vector<a> v=new Vector<a>();
         v.ensureCapacity(l.length);
         for(int i=0;i<l.length;i++)
             v.add(l[i]);
         return v;
     }
     /**
-     * create a Vector from an Array
-     * @param l
-     * @return
+     * create a Vector of entry values from a map
+     * 
+     * @param m the map to dump to an array
+     * @param sortByKey, if true, sort the entries by key
+     * 
+     * @return the vector
      */
-    public static Vector toValueVector(Map m)
+    public static<a,b> Vector<b> toValueVector(Map<a,b> m, boolean sortByKey)
     {
-       if(m==null)
-           return null;
-       final Set<Entry> entrySet = m.entrySet();
-       if(entrySet.size()==0)
-           return null;
-       Vector v=new Vector();
-       v.ensureCapacity(entrySet.size());
-       Iterator<Entry> it = entrySet.iterator();
-       while(it.hasNext())
-           v.add(it.next().getValue());
-       return v;
+        if(m==null)
+            return null;
+        final Set<Entry<a,b>> entrySet = m.entrySet();
+        if(entrySet.size()==0)
+            return null;
+        Vector<b> v=new Vector<b>();
+        v.ensureCapacity(entrySet.size());
+        Iterator<Entry<a,b>> it = entrySet.iterator();
+        if(sortByKey)
+        {
+            Vector<a> keys=new Vector<a>();
+            keys.ensureCapacity(entrySet.size());
+            
+            while(it.hasNext())
+                keys.add(it.next().getKey());
+            
+            Collections.sort((Vector)keys);
+            for(int i=0;i<keys.size();i++)
+            {
+                v.add(m.get(keys.get(i)));
+            }
+        }
+        else
+        {
+            while(it.hasNext())
+                v.add(it.next().getValue());
+        }
+        return v;
     }
 
     /**

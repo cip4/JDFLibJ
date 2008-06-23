@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,6 +88,8 @@ import org.cip4.jdflib.auto.JDFAutoProcessRun;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.util.JDFDate;
@@ -268,23 +270,32 @@ public class JDFProcessRun extends JDFAutoProcessRun
 
         JDFDuration dur=pt.getDuration();
         addDuration(dur.getDuration());
-        
+
         JDFDate start=pt.getStart();
         if(start!=null)
         {
             if(start.before(getStart()))
                 setStart(start);
         }
-        
+
         JDFDate end=pt.getEnd();
         if(end!=null)
         {
             if(end.after(getEnd()))
                 setEnd(end);
         }
-            
-    }
 
+    }
+    /**
+     * cleans up missing durations in this
+     */
+    @Override
+    public void fixBad(EnumVersion version, EnumValidationLevel level)
+    {
+        if(!hasAttribute(AttributeName.DURATION))
+            setDuration(getDuration());
+        super.fixBad(version, level);
+    }
     //////////////////////////////////////////////////////////
 
     /**
@@ -303,71 +314,71 @@ public class JDFProcessRun extends JDFAutoProcessRun
      * @param value: the value to set the attribute to or null
      * if null, set to the current time
      */
-   public void setSubmissionTime(JDFDate value)
-   {
-       if (value == null) 
-           value = new JDFDate();
-       setAttribute(AttributeName.SUBMISSIONTIME, value.getDateTimeISO(), null);
-   }
+    public void setSubmissionTime(JDFDate value)
+    {
+        if (value == null) 
+            value = new JDFDate();
+        setAttribute(AttributeName.SUBMISSIONTIME, value.getDateTimeISO(), null);
+    }
 
-   /**
+    /**
      * (12) get JDFDate attribute SubmissionTime
      * @return JDFDate the value of the attribute
      */
-   public JDFDate getSubmissionTime()
-   {
-       final String str = getAttribute(AttributeName.SUBMISSIONTIME, null, null);
-       if (str==null)
-           return null;
-       try
-       {
-           return new JDFDate(str);
-       }
-       catch(DataFormatException dfe)
-       {
-           throw new JDFException("not a valid date string. Malformed JDF");
-       }
-   }    
-   
-   /**
-    * (11) set attribute ReturnTime
-    * @param value: the value to set the attribute to or null
-    * if null, set to the current time
-    */
-  public void setReturnTime(JDFDate value)
-  {
-      if (value == null) 
-          value = new JDFDate();
-      setAttribute(AttributeName.RETURNTIME, value.getDateTimeISO(), null);
-  }
+    public JDFDate getSubmissionTime()
+    {
+        final String str = getAttribute(AttributeName.SUBMISSIONTIME, null, null);
+        if (str==null)
+            return null;
+        try
+        {
+            return new JDFDate(str);
+        }
+        catch(DataFormatException dfe)
+        {
+            throw new JDFException("not a valid date string. Malformed JDF");
+        }
+    }    
 
-  /**
-    * (12) get JDFDate attribute ReturnTime
-    * @return JDFDate the value of the attribute
-    */
-  public JDFDate getReturnTime()
-  {
-      final String str = getAttribute(AttributeName.RETURNTIME, null, null);
-      if (str==null)
-          return null;
-      try
-      {
-          return new JDFDate(str);
-      }
-      catch(DataFormatException dfe)
-      {
-          throw new JDFException("not a valid date string. Malformed JDF");
-      }
-  }
+    /**
+     * (11) set attribute ReturnTime
+     * @param value: the value to set the attribute to or null
+     * if null, set to the current time
+     */
+    public void setReturnTime(JDFDate value)
+    {
+        if (value == null) 
+            value = new JDFDate();
+        setAttribute(AttributeName.RETURNTIME, value.getDateTimeISO(), null);
+    }
 
-@Override
-public boolean init()
-{
-    setEnd(null);
-    return super.init();
-}
+    /**
+     * (12) get JDFDate attribute ReturnTime
+     * @return JDFDate the value of the attribute
+     */
+    public JDFDate getReturnTime()
+    {
+        final String str = getAttribute(AttributeName.RETURNTIME, null, null);
+        if (str==null)
+            return null;
+        try
+        {
+            return new JDFDate(str);
+        }
+        catch(DataFormatException dfe)
+        {
+            throw new JDFException("not a valid date string. Malformed JDF");
+        }
+    }
+
+    @Override
+    public boolean init()
+    {
+        setEnd(null);
+        return super.init();
+    }
 
 } 
 
-// class JDFProcessRun
+//class JDFProcessRun
 //==========================================================================

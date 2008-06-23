@@ -2055,8 +2055,7 @@ public class JDFResource extends JDFElement
 
             if (!badChild)
             {
-                VElement dpv = resourceElement.getDeepPartVector(m, partUsage,
-                        hasMatchingAttribute ? matchingDepth + 1 : matchingDepth, partIDKeys);
+                VElement dpv = resourceElement.getDeepPartVector(m, partUsage, hasMatchingAttribute ? matchingDepth + 1 : matchingDepth, partIDKeys);
 
                 if (dpv.size() > 0)
                 {
@@ -3129,6 +3128,7 @@ public class JDFResource extends JDFElement
      *
      * @param resToMerge       the resource with potentially new spawnIDs
      * @param previousMergeIDs vector of already merged spawnIDs that may still be in a partition
+     * @deprecated use JDFMerge.mergeSpawnIDS
      */
     public void mergeSpawnIDs(JDFResource resToMerge, VString previousMergeIDs)
     {

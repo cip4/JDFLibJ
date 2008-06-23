@@ -103,7 +103,6 @@ import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 import org.cip4.jdflib.span.JDFIntegerSpan;
-import org.cip4.jdflib.span.JDFShapeSpan;
 import org.cip4.jdflib.span.JDFSpanBindingType.EnumSpanBindingType;
 import org.cip4.jdflib.span.JDFSpanCoatings.EnumSpanCoatings;
 import org.cip4.jdflib.util.JDFDate;
@@ -242,7 +241,8 @@ public class ProductGoldenTicket extends MISGoldenTicket
     {
         JDFColorIntent ci=(JDFColorIntent) node.addResource(ElementName.COLORINTENT, EnumUsage.Input);
         VElement vci=new VElement();
-        nCols=Math.max(front,back);
+        nCols[0]=front;
+        nCols[1]=back;
         if(front!=back && back!=0)
         {
             vci.add(ci.addPartition(EnumPartIDKey.Side, EnumSide.Front));
@@ -308,12 +308,12 @@ public class ProductGoldenTicket extends MISGoldenTicket
         theNode.setDescriptiveName("Multi Label Product");
         JDFDeliveryIntent diBig=initDeliveryIntent(0);
         theNode.removeResource(ElementName.CUSTOMERINFO, 0);
-        
+
         ProductGoldenTicket gtLabel1=new ProductGoldenTicket(0,EnumVersion.Version_1_3,0,0);
         JDFNode n1=theNode.addProduct();
         gtLabel1.assign(n1);
         addKid(gtLabel1);
-        
+
         gtLabel1.initCustomerInfo("Johann","ReweEinkäufer","Rewe","Mineralwasser label");
         initMediaIntent(n1,24.4, EnumSpanCoatings.Coated, "38DL247 38");
         JDFLayoutIntent li=initLayoutIntent(n1,92,28.3, 1, 1);
@@ -322,13 +322,13 @@ public class ProductGoldenTicket extends MISGoldenTicket
         JDFDeliveryIntent di=gtLabel1.initDeliveryIntent(5000);
         diBig.moveElement(di.getDropIntent(0), null);
         gtLabel1.getNode().removeResource("DeliveryIntent", 0);
-        
+
         ProductGoldenTicket gtLabel2=new ProductGoldenTicket(0,EnumVersion.Version_1_3,0,0);
-        
+
         JDFNode n2=theNode.addProduct();
         gtLabel2.assign(n2);
         addKid(gtLabel2);
-        
+
         gtLabel2.initCustomerInfo("Franzi","KulmbachEinkäufer","Kulmbach","Weissbier label");
         initMediaIntent(n2,24.4, EnumSpanCoatings.Coated, "38DL247 38");
         li=initLayoutIntent(n2,11.4,5, 1, 1);
@@ -451,7 +451,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
     {
         initCustomerInfo("Jane","Customer","Messe Düsseldorf","CIP4 Drupa Flower Demo Job");
         theNode.setDescriptiveName("Drupa Flower Brochure, 4pg Cover 5c5c, 48 pg Text 5c5c");
-        
+
         JDFNode cover=addJDFNode(theNode,EnumType.Product);
         cover.setDescriptiveName("Drupa Flower Brochure Cover");
 
@@ -481,11 +481,9 @@ public class ProductGoldenTicket extends MISGoldenTicket
     }
 
     @Override
-    protected void runphases(int good, int waste)
+    protected void runphases(int good, int waste,boolean bOutAvail, boolean bFirst)
     {
         //nop for products
-        if(good>0 && waste<0) // dummy
-            good=waste;
     } 
 
 

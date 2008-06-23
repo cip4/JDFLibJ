@@ -92,6 +92,7 @@ import org.cip4.jdflib.resource.process.JDFComponent;
 public class JDFAmountPoolTest extends JDFTestCaseBase
 {
 
+    JDFAmountPool ap;
     ///////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////
     /**
@@ -194,8 +195,8 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
      */
     protected void setUp() throws Exception
     {
-        // TODO Auto-generated method stub
         super.setUp();
+        ap=(JDFAmountPool) new JDFDoc(ElementName.AMOUNTPOOL).getRoot();
     }
 
     ///////////////////////////////////////////////////////
@@ -210,6 +211,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
         n.setType(EnumType.ConventionalPrinting);
         JDFComponent comp=(JDFComponent) n.addResource("Component", null, EnumUsage.Output, null, null, null, null);
         JDFAttributeMap map=new JDFAttributeMap(EnumPartIDKey.SignatureName,"Sig1");
+        JDFAttributeMap mapSig=new JDFAttributeMap(map);
         JDFAttributeMap map2=new JDFAttributeMap(EnumPartIDKey.SignatureName,"Sig1");
         JDFResourceLink rl=n.getLink(comp, null);
         map.put(EnumPartIDKey.SheetName, "Sheet");
@@ -223,8 +225,30 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
         JDFPartAmount pa=ap.appendPartAmount(vMap);
         assertEquals(pa.numChildElements_JDFElement(ElementName.PART, null), 2);
         rl.setActualAmount(42, map);
+        rl.setActualAmount(21, map2);
         assertEquals(pa.numChildElements_JDFElement(ElementName.PART, null), 2);
-        assertEquals("we made an equivalence of map 1 and map 2",rl.getActualAmount(map2), 42.,0.); 
+        assertEquals(rl.getActualAmount(map), 42.,0.); 
+        assertEquals(rl.getActualAmount(mapSig), 42.+21.,0.); 
         assertEquals(pa,ap.getPartAmount(vMap));
-     }
+    }    /**
+     * Method testGetMatchingPartAmountVector.
+     * @throws Exception
+     */
+    public void testGetCreatePartAmount() throws Exception
+    {
+        JDFAttributeMap map=new JDFAttributeMap("Separation","Black");
+        JDFAttributeMap map2=new JDFAttributeMap("Separation","Cyan");
+        VJDFAttributeMap vMap=new VJDFAttributeMap();
+        vMap.add(map);
+        vMap.add(map2);
+
+        JDFPartAmount pa1=ap.getCreatePartAmount(map);
+        assertEquals(pa1.getPartMap(), map);
+        JDFPartAmount pa3=ap.getCreatePartAmount(vMap);
+        assertEquals(pa3.getPartMapVector(), vMap);
+        JDFPartAmount pa4=ap.getCreatePartAmount(vMap);
+        assertEquals(pa3,pa4);
+        JDFPartAmount pa2=ap.getCreatePartAmount(map2);
+        assertEquals(pa2.getPartMap(), map2);
+    }
 }

@@ -43,7 +43,7 @@ public class VString extends Vector<String>
      *
      * @param m
      */
-    public VString (Vector m)
+    public VString (Vector<String> m)
     {
         super();
         if(m!=null)
@@ -382,9 +382,9 @@ public class VString extends Vector<String>
      * gets a set with all entries of the Vstring
      * @return
      */
-    public Set getSet()
+    public Set<String> getSet()
     {
-        HashSet set = new LinkedHashSet();
+        HashSet<String> set = new LinkedHashSet<String>();
         Iterator<String> it=iterator();
         while(it.hasNext())
             set.add(it.next());

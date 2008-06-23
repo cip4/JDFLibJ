@@ -72,7 +72,6 @@ package org.cip4.jdflib.goldenticket;
 
 import java.io.File;
 import java.net.HttpURLConnection;
-import java.net.URL;
 
 import javax.mail.Multipart;
 

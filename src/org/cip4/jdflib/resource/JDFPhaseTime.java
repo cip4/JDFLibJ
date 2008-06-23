@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -81,13 +81,20 @@ import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPhaseTime;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 
@@ -308,6 +315,55 @@ public class JDFPhaseTime extends JDFAutoPhaseTime
         }
         return v;
     }   
+    @Override
+    public void fixBad(EnumVersion version, EnumValidationLevel level)
+    {
+        JDFResourceLink cl=(JDFResourceLink) getChildByTagName( "ComponentLink", null, 0, new JDFAttributeMap(AttributeName.USAGE,EnumUsage.Output), true,true);
+        if(cl!=null)
+        {
+            JDFResourceLink ml=(JDFResourceLink) getChildByTagName( "MediaLink", null, 0, new JDFAttributeMap(AttributeName.USAGE,EnumUsage.Input), true,true);
+            if(ml==null)
+            {
+                ml=(JDFResourceLink) copyElement(getParentJDF().getResourceLinkPool().getElement("MediaLink"), null);
+                ml.removeChild(ElementName.AMOUNTPOOL, null, 0);
+                ml.appendAmountPool();
+            }
+            JDFAmountPool apm=ml.getAmountPool();
+            JDFAmountPool apc=cl.getAmountPool();
+
+            if(apm!=null && apc!=null)
+            {
+                JDFAttributeMap aMapW=new JDFAttributeMap(AttributeName.CONDITION,"Waste");
+                for(int i=0;i<99999;i++)
+                {
+                    JDFPartAmount pac=apc.getPartAmount(aMapW, i);
+                    if(pac==null)
+                        break;
+                    JDFAttributeMap m2=pac.getPartMap();
+                    JDFPartAmount pam=apm.getCreatePartAmount(m2);
+                    if(pac.hasAttribute(AttributeName.MAXAMOUNT)&&!pam.hasAttribute(AttributeName.MAXAMOUNT))
+                        pam.moveAttribute(AttributeName.MAXAMOUNT, pac, null, null, null);
+                    else if(pac.hasAttribute(AttributeName.AMOUNT)&&!pam.hasAttribute(AttributeName.MAXAMOUNT))
+                        pam.moveAttribute(AttributeName.MAXAMOUNT, pac, AttributeName.AMOUNT, null, null);
+                    if(pac.hasAttribute(AttributeName.ACTUALAMOUNT)&&!pam.hasAttribute(AttributeName.ACTUALAMOUNT))
+                        pam.moveAttribute(AttributeName.ACTUALAMOUNT, pac, null, null, null);
+                    pac.deleteNode();
+                }
+                JDFAttributeMap aMapG=new JDFAttributeMap(AttributeName.CONDITION,"Good");
+                for(int i=0;i<99999;i++)
+                {
+                    JDFPartAmount pam=apm.getPartAmount(aMapG, i);
+                    if(pam==null)
+                        break;
+                    JDFAttributeMap m2=pam.getPartMap();
+                    JDFPartAmount pac=apc.getCreatePartAmount(m2);
+                    if(pam.hasAttribute(AttributeName.MAXAMOUNT)&&!pac.hasAttribute(AttributeName.MAXAMOUNT))
+                        pac.moveAttribute(AttributeName.MAXAMOUNT, pam, null, null, null);
+                }
+            }
+        }
+        super.fixBad(version, level);
+    }
     
 } // class JDFPhaseTime
 // ==========================================================================

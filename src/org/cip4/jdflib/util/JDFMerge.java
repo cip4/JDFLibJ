@@ -121,8 +121,8 @@ public class JDFMerge
     private JDFSpawned spawnAudit       = null;
     private final JDFNode m_ParentNode;
     private JDFNode subJDFNode;
-    private Set vsRO;
-    private Set vsRW;
+    private Set<String> vsRO;
+    private Set<String> vsRW;
     private String spawnID              = null;
     private final VString previousMergeIDs    = new VString(); // list of merges in the ancestors
     private boolean bSnafu              = true;
@@ -213,6 +213,7 @@ public class JDFMerge
         // now burn it in!
         overWriteNode=(JDFNode)overWriteNode.replaceElement(subJDFNode);
         overWriteNode.eraseEmptyNodes(true);
+        overWriteNode.synchParentAmounts(); // add all actualamounts into the merged parent gray box
         // update all stati (generally in NodeInfo) of the merged node and of the parents of the merged node
         if(bUpdateStati)
             overWriteNode.updatePartStatus(parts, true, true);
@@ -624,7 +625,7 @@ public class JDFMerge
 
         if (res2 != null)
         {
-            res2.mergeSpawnIDs(res1, previousMergeIDs);
+            mergeSpawnIDs(res2,res1, false);
             res1=mergePartition(res1,res2, spawnID, amountPolicy, true); // esp. deletes res2 from subJDFNode node
         }
         // copy resource from orig to spawned node
@@ -973,6 +974,70 @@ public class JDFMerge
     }
 
     /**
+     * Merges the spawnIDs of the various partitions <br>
+     * also updates SpawnStatus, if necessary <br>
+     * this routine is needed to correctly handle nested spawning and merging
+     * @param mainres the resource in the main jdf to merge to
+     * @param resToMerge       the resource with potentially new spawnIDs
+     * @param bReadOnly     if true, don't add anything since it was RO
+     * 
+     */
+    private void mergeSpawnIDs(JDFResource mainRes, JDFResource resToMerge, boolean bReadOnly)
+    {
+        if (!mainRes.getID().equals(resToMerge.getID()))
+        {
+            throw new JDFException(
+                    "JDFResource.mergeSpawnIDs  merging incompatible resources ID = "
+                    + mainRes.getID()
+                    + " IDMerge = "
+                    + resToMerge.getID());
+        }
+
+        final VElement allLeaves = mainRes.getLeaves(true);
+        final VString partIDKeys=mainRes.getPartIDKeys();
+        for (int i = 0; i < allLeaves.size(); i++)
+        {
+            final JDFResource thisResNode = (JDFResource) allLeaves.elementAt(i);
+            final JDFResource mergeResNode =
+                resToMerge.getPartition(thisResNode.getPartMap(partIDKeys), EnumPartUsage.Explicit);
+
+            if (mergeResNode != null)
+            {
+                VString vSpawnIDs = thisResNode.getSpawnIDs(false);
+                int siz=vSpawnIDs==null ? 0 : vSpawnIDs.size();
+                if(!bReadOnly) // only append from rw resources, not from ro
+                {
+                    if(vSpawnIDs==null)
+                    {
+                        vSpawnIDs=mergeResNode.getSpawnIDs(false);
+                    }
+                    else 
+                    {
+                        vSpawnIDs.appendUnique(mergeResNode.getSpawnIDs(false));
+                    }
+                }
+                if(vSpawnIDs!=null)
+                    vSpawnIDs.removeStrings(previousMergeIDs,999999);
+
+                if (vSpawnIDs==null || vSpawnIDs.isEmpty())
+                {
+                    thisResNode.removeAttribute(AttributeName.SPAWNIDS);
+                    thisResNode.removeAttribute(AttributeName.SPAWNSTATUS);
+                }
+                else if (siz != vSpawnIDs.size())
+                {
+                    thisResNode.setSpawnIDs(vSpawnIDs);
+                    // one of the spawnstatus elements was rw, must also be valid here
+                    if (mergeResNode.getSpawnStatus() == EnumSpawnStatus.SpawnedRW)
+                    {
+                        thisResNode.setSpawnStatus(EnumSpawnStatus.SpawnedRW);
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
      * merge the RW resources of the main JDF
      * @param subJDFNode the source node of the status pool to merge into this
      * @param subJDFNode          the source node of the status pool to merge into this
@@ -1006,9 +1071,9 @@ public class JDFMerge
             final JDFResource newRes = subJDFNode.getTargetResource(s);
 
             // merge all potential new spawnIds from this to subJDFNode before merging them
-            oldRes.mergeSpawnIDs(newRes, previousMergeIDs);
+            mergeSpawnIDs(oldRes,newRes, false);
             // do both, since some leaves may be RO
-            newRes.mergeSpawnIDs(oldRes, previousMergeIDs);
+            mergeSpawnIDs(newRes,oldRes, false);
 
             try
             {
@@ -1117,7 +1182,7 @@ public class JDFMerge
                 continue; // snafu, lets just ignore the rest and limp along
 
             // merge all potential new spawnIds from subJDFNode to this
-            oldRes.mergeSpawnIDs(newRes, previousMergeIDs);
+            mergeSpawnIDs(oldRes,newRes, true);
             final VElement oldResLeafsSpawned = oldRes.getNodesWithSpawnID(spawnID);
             for (int leaf = 0; leaf < oldResLeafsSpawned.size(); leaf++)
             {

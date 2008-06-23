@@ -148,7 +148,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         partIDKeys = new VString("SignatureName,SheetName,Side,Separation",",");
         vParts=vPartMap;
         icsLevel=_icsLevel; 
-        theStatusCounter.addIgnorePart(EnumPartIDKey.Side);
+        //       theStatusCounter.addIgnorePart(EnumPartIDKey.Side);
         theStatusCounter.addIgnorePart(EnumPartIDKey.Separation);
     }
     /**
@@ -182,8 +182,9 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 
         //put level methods?
 
-        while(cols.size()>nCols && nCols>0)
-            cols.remove(nCols);
+        int ncols=getNCols();
+        while(cols.size()>ncols && ncols>0)
+            cols.remove(ncols);
 
         if(icsLevel<0)
             return;
@@ -225,7 +226,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
             return;
         int c=ci.getNumColors();
         if(c>0)
-            nCols=c;       
+            nCols[0]=nCols[1]=c;       
     }
     /**
      * recalculate ncols from parent color intent if it exists
@@ -246,11 +247,11 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         }
     }
 
+    @Override
     public void setActivePart(VJDFAttributeMap vp, boolean bFirst)
     {
         amountLinks=null;
-        if(bFirst)
-            addAmountLink("Media:Input");
+        addAmountLink("Media:Input");
         addAmountLink("Component:Output");
         super.setActivePart(vp, bFirst);
     }
@@ -497,10 +498,10 @@ public class MISCPGoldenTicket extends MISGoldenTicket
     }
 
     @Override
-    protected void runphases(int good, int waste)
+    protected void runphases(int good, int waste,boolean bOutAvail, boolean bFirst)
     {
         theStatusCounter.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, "Printing");
-        runSinglePhase(good, waste);
+        runSinglePhase(good, waste,bOutAvail,bFirst);
         finalize(); // prior to processRun
         theStatusCounter.setPhase(EnumNodeStatus.Completed, "Done", EnumDeviceStatus.Idle, "Waiting");
     }

@@ -71,7 +71,9 @@
  */
 package org.cip4.jdflib.util;
 
+import java.util.HashMap;
 import java.util.Set;
+import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 
@@ -100,5 +102,20 @@ public class ContainerUtilTest extends JDFTestCaseBase
        assertTrue(s.contains("b"));
        assertFalse(s.contains("c"));
        assertEquals(s.size(), a.length);
+    }
+    
+    public void testToValueVector()
+    {
+       HashMap<String,String> hm=new HashMap<String, String>();
+       for(int i=0;i<10;i++)
+           hm.put(""+i,"a"+i);
+       Vector<String> v=ContainerUtil.toValueVector(hm, false);
+       assertEquals(v.size(), 10);
+       Vector<String> vs=ContainerUtil.toValueVector(hm, true);
+       assertTrue(vs.containsAll(v));
+       assertTrue(v.containsAll(vs));
+       for(int i=1;i<10;i++)
+           assertTrue(vs.get(i-1).compareTo(vs.get(i))<0);
+        
     }
 }

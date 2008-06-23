@@ -464,6 +464,22 @@ public class VJDFAttributeMap
         }
         return false;
     }
+    /**
+     * Method overlapsMap.
+     * @param vMap the vector submaps to check against
+     * @return true if this has at least one entry that vMap contains at least a submap of
+     */
+    public boolean overlapsMap (VJDFAttributeMap vMap)
+    {
+        if(vMap==null)
+            return true;
+        for (int i=0; i<vMap.size(); i++)
+        {
+           if(!overlapsMap(vMap.elementAt(i)))
+               return false;
+        }
+        return true;
+    }
 
     /**
      * equals - Compares two map vectors, returns true if content equal regardless of element order, otherwise false.<br>

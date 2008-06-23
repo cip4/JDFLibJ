@@ -119,7 +119,7 @@ public class BaseGoldenTicketTest extends JDFTestCaseBase
         goldenTicket.write2File(JDFTestCaseBase.sm_dirTestDataTemp+"GoldenTicket_MakeReady_"+templateName+".jdf", 2);
         Assert.assertTrue(JDFTestCaseBase.sm_dirTestDataTemp+"GoldenTicket_MakeReady_"+templateName+".jdf",goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
 
-        goldenTicket.executeAll(null,true,true);
+        goldenTicket.executeAll(null);
         goldenTicket.write2File(JDFTestCaseBase.sm_dirTestDataTemp+"GoldenTicket_Worker_"+templateName+".jdf", 2);
         Assert.assertTrue(goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
     }

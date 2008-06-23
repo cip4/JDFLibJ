@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -94,10 +94,15 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFPartAmount;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
@@ -196,6 +201,33 @@ public class JDFAuditPool extends JDFPool
 	public String toString()
     {
         return "JDFAuditPool[ -->" + super.toString() + "]";
+    }
+    @Override
+    public void fixBad(EnumVersion version, EnumValidationLevel level)
+    {
+        if(!hasChildElement(ElementName.CREATED, null))
+        {
+            ensureCreated();
+        }
+        super.fixBad(version, level);
+    }
+
+    /**
+     * 
+     */
+    public void ensureCreated()
+    {
+        final JDFAudit created = getAudit(0, EnumAuditType.Created, null, null);
+        if(created==null)
+        {
+            JDFAudit a=getAudit(0, null, null, null);
+            JDFCreated c=addCreated(null, null);
+            if(a!=null)
+            {
+                c.setTimeStamp(a.getTimeStampDate());
+                moveElement(c, a);
+            }
+        }
     }
 
     /**

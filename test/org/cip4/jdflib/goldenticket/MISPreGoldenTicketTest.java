@@ -92,7 +92,7 @@ public class MISPreGoldenTicketTest extends JDFTestCaseBase
     public void testMISPreContentCreation() throws Exception
     {
         MISPreGoldenTicket goldenTicket=new MISPreGoldenTicket(1,null,2,2,vMap);
-        goldenTicket.nCols=4;
+        goldenTicket.nCols[0]=goldenTicket.nCols[1]=4;
         goldenTicket.workStyle=EnumWorkStyle.WorkAndTurn;
         goldenTicket.setCategory(MISPreGoldenTicket.MISPRE_CONTENTCREATION);
 
@@ -114,7 +114,7 @@ public class MISPreGoldenTicketTest extends JDFTestCaseBase
 
             MISPreGoldenTicket goldenTicket=new MISPreGoldenTicket(1,null,2,2,vMap);
             goldenTicket.bStripping=i%2==1;
-            goldenTicket.nCols=4;
+            goldenTicket.nCols[0]=goldenTicket.nCols[1]=4;
             goldenTicket.workStyle=EnumWorkStyle.WorkAndTurn;
             goldenTicket.setCategory(MISPreGoldenTicket.MISPRE_IMPOSITIONPREPARATION);
 
@@ -155,7 +155,7 @@ public class MISPreGoldenTicketTest extends JDFTestCaseBase
 
                 JDFNode nodePre=node.addJDFNode(EnumType.ProcessGroup);
                 MISPreGoldenTicket goldenTicket=new MISPreGoldenTicket(1,null,2,2,null);
-                goldenTicket.nCols=4;
+                goldenTicket.nCols[0]=goldenTicket.nCols[1]=4;
                 goldenTicket.workStyle=EnumWorkStyle.WorkAndTurn;
                 goldenTicket.bExpandGrayBox=bExpand;
 

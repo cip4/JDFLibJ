@@ -3021,6 +3021,8 @@ public class KElement extends ElementNSImpl
      */
     public VString getUnknownAttributeVector(Vector vKnownKeys, Vector vInNameSpace, int nMax)
     {
+        if(nMax<0)
+            nMax=Integer.MAX_VALUE;
         final VString vAtts = getAttributeVector_KElement();
         final VString vUnknown = new VString();
         if(vKnownKeys.contains("*")) {
@@ -4209,6 +4211,9 @@ public class KElement extends ElementNSImpl
      */
     public KElement mergeElement(KElement kElem, boolean bDelete)
     {
+        if(kElem==null)
+            return this;
+        
         final VElement v = kElem.getChildElementVector(null, null, null, true, 0,false);
 
         for (int i = 0; i < v.size(); i++)
@@ -5640,6 +5645,7 @@ public class KElement extends ElementNSImpl
      * @param nameSpaceURI    of the attribute in the destination
      * @param srcNameSpaceURI of the attribute in the source, defaults to the
      *                        value of nameSpaceURI
+     * @default copyAttribute(attrib,src,null,null,null);
      */
     public void copyAttribute(String attrib, KElement src, String srcAttrib, String nameSpaceURI, String srcNameSpaceURI)
     {
@@ -5658,7 +5664,22 @@ public class KElement extends ElementNSImpl
         }
         setAttribute(attrib, src.getAttribute_KElement(strSrcAttrib, srcNameSpaceURI, null), strNameSpace);
     }
+    /**
+     * copy an attribute from src to this - shorthand if no renaming or namespace handling is necessary
+     * <p>
+     * default: copyAttribute(attrib, src, null, null, null)
+     *
+     * @param attrib          the name of the attribute to copy
+     *                        (if source attribute is different only the
+     *                        value will be copied)
+     * @param src             source element where the attribute to be
+     *                        copied resides
+     */
+    public void copyAttribute(String attrib, KElement src)
+    {
 
+        copyAttribute(attrib,src,null,null,null);
+    }
     /**
      *  moves an attribute from src to this, the attribute will be removed
      *  from src and moved to this.
