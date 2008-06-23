@@ -1612,32 +1612,9 @@ public class JDFResourceLink extends JDFElement
         }
         removeAttribute(attrib, nameSpaceURI); // either in the pool or the link, not both
         final JDFAmountPool ap=getCreateAmountPool();
-        JDFPartAmount pa0=null;
-        for(int i=0;i<vPart.size();i++)
-        {
-            final JDFAttributeMap map = vPart.elementAt(i);
-            final JDFPartAmount pa=ap.getPartAmount(map);
-            if(pa!=null)
-            {
-                if(pa0!=null && pa!=pa0)
-                {
-                    VJDFAttributeMap v2=pa.getPartMapVector();
-                    for(int j=0;j<v2.size();j++)
-                    {
-                        if(!vPart.overlapsMap(v2.elementAt(j)))
-                            throw new JDFException("setAmountPoolAttribute - non overlapping snafu");
-                    }
-                }
-                pa.setAttribute(attrib, value, nameSpaceURI);
-                pa0=pa;
-            }
-        }
-        if(pa0==null)
-        {
-            pa0=ap.appendPartAmount(vPart);
-            pa0.setAttribute(attrib, value, nameSpaceURI);
-        }
-    }
+        JDFPartAmount pa0=ap.getCreatePartAmount(vPart);
+        pa0.setAttribute(attrib, value, nameSpaceURI);
+     }
     /** 
      * sets  the  attribute occurence in the appropriate PartAmount when called for a resourceLink
      * and creates the AmountPool and/or PartAmount if it is not yet there

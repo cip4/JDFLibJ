@@ -70,6 +70,8 @@
 
 package org.cip4.jdflib.resource.process;
 
+import java.util.HashSet;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoColorPool;
 import org.cip4.jdflib.core.AttributeName;
@@ -180,20 +182,15 @@ public class JDFColorPool extends JDFAutoColorPool
      */
     public boolean hasDuplicateColors()
     {
-        VElement v       = getChildElementVector(ElementName.COLOR,
-                null,
-                null,
-                true,
-                0,
-                false);
-        VString vName    = new VString();
-        VString vRawName = new VString();
+        VElement v       = getChildElementVector(ElementName.COLOR,null,null,true,0,false);
+        HashSet<String> vName    = new HashSet<String>();
+        HashSet<String> vRawName = new HashSet<String>();
         int nCols        = v.size();
 
         for(int i = 0 ; i < nCols; i++)
         {
             JDFColor color = (JDFColor)v.elementAt(i);
-            String colorName    = color.getName();
+            String colorName = color.getName();
             if(vName.contains(colorName)) {
 				return true;
 			}

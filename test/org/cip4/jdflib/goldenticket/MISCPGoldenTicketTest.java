@@ -243,6 +243,7 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
     public void testIdenticalInk()
     {
         VString v=new VString("Cyan,Magenta,Yellow,Black,Text",",");
+        VString vAct=new VString("Cyan,Magenta,Yellow,Black,Text",",");
         VString vInk=new VString("Cyan,Magenta,Yellow,Black,Black",",");
         VString vInkProd=new VString("MIS-Ink-4711,MIS-Ink-4712,MIS-Ink-4713,MIS-Ink-4714,MIS-Ink-4714",",");
         VJDFAttributeMap vMap=new VJDFAttributeMap();
@@ -255,6 +256,7 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
         JDFNode n=new JDFDoc("JDF").getJDFRoot();
         MISCPGoldenTicket cpGoldenTicket=new MISCPGoldenTicket(1,null,2,1,true,vMap);
         cpGoldenTicket.cols=v;
+        cpGoldenTicket.colsActual=vAct;
         cpGoldenTicket.inks=vInk;
         cpGoldenTicket.inkProductIDs=vInkProd;
         
@@ -263,7 +265,7 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
         cpGoldenTicket.assign(n);
         cpGoldenTicket.good=3000;
         cpGoldenTicket.waste=200;
-        BaseGoldenTicketTest.write3GTFiles(cpGoldenTicket, "sameInk.jdf");
+        BaseGoldenTicketTest.write3GTFiles(cpGoldenTicket, "sameInk");
      }
 
     /////////////////////////////////////////////////////////////////////////////

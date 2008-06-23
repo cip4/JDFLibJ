@@ -12,6 +12,7 @@ package org.cip4.jdflib;
 import java.io.File;
 
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.node.JDFNode;
 
 public class TestJDF
@@ -24,13 +25,10 @@ public class TestJDF
 
     public static void main(String[] argv)
     {         
-         JDFDoc jdfDoc = new JDFDoc("JDF");
+         JDFDoc jdfDoc = new JDFParser().parseFile("job.jdf");
 
-         JDFNode n=jdfDoc.getJDFRoot();
-         String s="";
-         for(int i=40;i<255;i++)
-             s+=(char)i;
-         n.setDescriptiveName(s);
+
+
          jdfDoc.write2File("bad.jdf", 0, true);
           
         
