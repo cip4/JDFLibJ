@@ -141,8 +141,8 @@ public class StatusCounter
     private String workStepID;
     private EnumDeviceOperationMode operationMode=EnumDeviceOperationMode.Productive;
     private EnumWorkType workType=null;
-    protected HashSet setTrackWaste=new HashSet();
-    protected HashSet setCopyResInfo=new HashSet();
+    protected HashSet<String> setTrackWaste=new HashSet<String>();
+    protected HashSet<String> setCopyResInfo=new HashSet<String>();
     private EnumDeviceStatus status=null;
     private String statusDetails=null;
     private JDFDate startDate;
@@ -872,7 +872,7 @@ public class StatusCounter
         protected double startWaste=0;
         protected JDFResourceLink rl;
         protected String refID;
-        private final AmountBag lastBag;
+        protected final AmountBag lastBag;
         protected VJDFAttributeMap vResPartMap;
         private boolean bInteger=false;
 
@@ -1097,14 +1097,14 @@ public class StatusCounter
         /**
          * @return
          */
-        private double getAmount(double amount)
+        protected double getAmount(double amount)
         {
             return bInteger ? ((int)amount) : amount;
         }
         /**
          * @return
          */
-        private String formatAmount(double amount)
+        protected String formatAmount(double amount)
         {
             return bInteger ? StringUtil.formatInteger((int)amount) : StringUtil.formatDouble(amount);
         }
