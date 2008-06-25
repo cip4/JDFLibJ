@@ -318,7 +318,7 @@ public abstract class JDFAutoMessageService extends JDFElement
           */
         public void setJMFRole(EnumJMFRole enumVar)
         {
-            setAttribute(AttributeName.JMFROLE, enumVar.getName(), null);
+            setAttribute(AttributeName.JMFROLE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

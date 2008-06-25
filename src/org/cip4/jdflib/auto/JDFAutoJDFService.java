@@ -267,7 +267,7 @@ public abstract class JDFAutoJDFService extends JDFElement
           */
         public void setCombinedMethod(EnumCombinedMethod enumVar)
         {
-            setAttribute(AttributeName.COMBINEDMETHOD, enumVar.getName(), null);
+            setAttribute(AttributeName.COMBINEDMETHOD, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -311,7 +311,7 @@ public abstract class JDFAutoJDFService extends JDFElement
           */
         public void setTypeOrder(EnumTypeOrder enumVar)
         {
-            setAttribute(AttributeName.TYPEORDER, enumVar.getName(), null);
+            setAttribute(AttributeName.TYPEORDER, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

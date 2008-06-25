@@ -283,7 +283,7 @@ public abstract class JDFAutoLot extends JDFElement
           */
         public void setConsumption(EnumConsumption enumVar)
         {
-            setAttribute(AttributeName.CONSUMPTION, enumVar.getName(), null);
+            setAttribute(AttributeName.CONSUMPTION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

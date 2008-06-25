@@ -309,7 +309,7 @@ public abstract class JDFAutoMISDetails extends JDFElement
           */
         public void setCostType(EnumCostType enumVar)
         {
-            setAttribute(AttributeName.COSTTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.COSTTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -331,7 +331,7 @@ public abstract class JDFAutoMISDetails extends JDFElement
           */
         public void setDeviceOperationMode(EnumDeviceOperationMode enumVar)
         {
-            setAttribute(AttributeName.DEVICEOPERATIONMODE, enumVar.getName(), null);
+            setAttribute(AttributeName.DEVICEOPERATIONMODE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -353,7 +353,7 @@ public abstract class JDFAutoMISDetails extends JDFElement
           */
         public void setWorkType(EnumWorkType enumVar)
         {
-            setAttribute(AttributeName.WORKTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.WORKTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

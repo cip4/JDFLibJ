@@ -477,7 +477,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
           */
         public void setMappingSelection(EnumMappingSelection enumVar)
         {
-            setAttribute(AttributeName.MAPPINGSELECTION, enumVar.getName(), null);
+            setAttribute(AttributeName.MAPPINGSELECTION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -499,7 +499,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
           */
         public void setMediaSide(EnumMediaSide enumVar)
         {
-            setAttribute(AttributeName.MEDIASIDE, enumVar.getName(), null);
+            setAttribute(AttributeName.MEDIASIDE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

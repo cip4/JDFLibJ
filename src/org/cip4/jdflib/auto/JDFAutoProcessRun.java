@@ -311,7 +311,7 @@ public abstract class JDFAutoProcessRun extends JDFAudit
           */
         public void setEndStatus(EnumNodeStatus enumVar)
         {
-            setAttribute(AttributeName.ENDSTATUS, enumVar.getName(), null);
+            setAttribute(AttributeName.ENDSTATUS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

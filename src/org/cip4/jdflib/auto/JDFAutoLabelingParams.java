@@ -292,7 +292,7 @@ public abstract class JDFAutoLabelingParams extends JDFResource
           */
         public void setPosition(EnumPosition enumVar)
         {
-            setAttribute(AttributeName.POSITION, enumVar.getName(), null);
+            setAttribute(AttributeName.POSITION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

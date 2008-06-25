@@ -328,7 +328,7 @@ public abstract class JDFAutoPageCell extends JDFElement
           */
         public void setRotate(EnumRotate enumVar)
         {
-            setAttribute(AttributeName.ROTATE, enumVar.getName(), null);
+            setAttribute(AttributeName.ROTATE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

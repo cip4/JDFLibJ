@@ -248,7 +248,7 @@ public abstract class JDFAutoJMF extends JDFPool
           */
         public void setMaxVersion(EnumVersion enumVar)
         {
-            setAttribute(AttributeName.MAXVERSION, enumVar.getName(), null);
+            setAttribute(AttributeName.MAXVERSION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

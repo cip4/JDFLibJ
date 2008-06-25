@@ -251,7 +251,7 @@ public abstract class JDFAutoPipeParams extends JDFElement
           */
         public void setUpdatedStatus(JDFResource.EnumResStatus enumVar)
         {
-            setAttribute(AttributeName.UPDATEDSTATUS, enumVar.getName(), null);
+            setAttribute(AttributeName.UPDATEDSTATUS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

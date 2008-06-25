@@ -387,7 +387,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
           */
         public void setFolioCount(EnumFolioCount enumVar)
         {
-            setAttribute(AttributeName.FOLIOCOUNT, enumVar.getName(), null);
+            setAttribute(AttributeName.FOLIOCOUNT, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -443,7 +443,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
           */
         public void setFinishedPageOrientation(EnumFinishedPageOrientation enumVar)
         {
-            setAttribute(AttributeName.FINISHEDPAGEORIENTATION, enumVar.getName(), null);
+            setAttribute(AttributeName.FINISHEDPAGEORIENTATION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -465,7 +465,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
           */
         public void setRotatePolicy(EnumRotatePolicy enumVar)
         {
-            setAttribute(AttributeName.ROTATEPOLICY, enumVar.getName(), null);
+            setAttribute(AttributeName.ROTATEPOLICY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -487,7 +487,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
           */
         public void setSides(EnumSides enumVar)
         {
-            setAttribute(AttributeName.SIDES, enumVar.getName(), null);
+            setAttribute(AttributeName.SIDES, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

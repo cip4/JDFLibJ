@@ -306,7 +306,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
           */
         public void setActivation(EnumActivation enumVar)
         {
-            setAttribute(AttributeName.ACTIVATION, enumVar.getName(), null);
+            setAttribute(AttributeName.ACTIVATION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -350,7 +350,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
           */
         public void setDeadLine(EnumDeadLine enumVar)
         {
-            setAttribute(AttributeName.DEADLINE, enumVar.getName(), null);
+            setAttribute(AttributeName.DEADLINE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

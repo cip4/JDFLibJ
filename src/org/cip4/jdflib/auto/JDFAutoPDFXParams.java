@@ -437,7 +437,7 @@ public abstract class JDFAutoPDFXParams extends JDFElement
           */
         public void setPDFXTrapped(EnumPDFXTrapped enumVar)
         {
-            setAttribute(AttributeName.PDFXTRAPPED, enumVar.getName(), null);
+            setAttribute(AttributeName.PDFXTRAPPED, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

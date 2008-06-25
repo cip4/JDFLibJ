@@ -218,7 +218,7 @@ public abstract class JDFAutoNewComment extends JDFElement
           */
         public void setAction(EnumAction enumVar)
         {
-            setAttribute(AttributeName.ACTION, enumVar.getName(), null);
+            setAttribute(AttributeName.ACTION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

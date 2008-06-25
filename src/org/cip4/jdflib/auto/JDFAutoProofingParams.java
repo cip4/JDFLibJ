@@ -438,7 +438,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
           */
         public void setProofRenderingIntent(EnumProofRenderingIntent enumVar)
         {
-            setAttribute(AttributeName.PROOFRENDERINGINTENT, enumVar.getName(), null);
+            setAttribute(AttributeName.PROOFRENDERINGINTENT, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -460,7 +460,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
           */
         public void setProofType(EnumProofType enumVar)
         {
-            setAttribute(AttributeName.PROOFTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.PROOFTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -482,7 +482,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
           */
         public void setColorType(EnumColorType enumVar)
         {
-            setAttribute(AttributeName.COLORTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.COLORTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

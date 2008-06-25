@@ -251,7 +251,7 @@ public abstract class JDFAutoModulePhase extends JDFElement
           */
         public void setDeviceStatus(JDFDeviceInfo.EnumDeviceStatus enumVar)
         {
-            setAttribute(AttributeName.DEVICESTATUS, enumVar.getName(), null);
+            setAttribute(AttributeName.DEVICESTATUS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

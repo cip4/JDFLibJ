@@ -353,7 +353,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
           */
         public void setElementType(EnumElementType enumVar)
         {
-            setAttribute(AttributeName.ELEMENTTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.ELEMENTTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

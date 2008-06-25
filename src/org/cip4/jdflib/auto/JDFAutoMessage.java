@@ -79,12 +79,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.util.JDFDate;
-    /*
-    *****************************************************************************
-    class JDFAutoMessage : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoMessage extends JDFElement
 {

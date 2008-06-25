@@ -251,7 +251,7 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
           */
         public void setDiffusion(EnumDiffusion enumVar)
         {
-            setAttribute(AttributeName.DIFFUSION, enumVar.getName(), null);
+            setAttribute(AttributeName.DIFFUSION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

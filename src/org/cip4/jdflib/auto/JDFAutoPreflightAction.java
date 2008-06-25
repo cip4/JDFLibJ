@@ -216,7 +216,7 @@ public abstract class JDFAutoPreflightAction extends JDFElement
           */
         public void setSetSplitBy(EnumSetSplitBy enumVar)
         {
-            setAttribute(AttributeName.SETSPLITBY, enumVar.getName(), null);
+            setAttribute(AttributeName.SETSPLITBY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

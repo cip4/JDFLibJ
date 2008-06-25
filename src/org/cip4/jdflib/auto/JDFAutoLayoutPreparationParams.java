@@ -483,7 +483,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
           */
         public void setFinishingOrder(EnumFinishingOrder enumVar)
         {
-            setAttribute(AttributeName.FINISHINGORDER, enumVar.getName(), null);
+            setAttribute(AttributeName.FINISHINGORDER, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -505,7 +505,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
           */
         public void setFoldCatalogOrientation(EnumFoldCatalogOrientation enumVar)
         {
-            setAttribute(AttributeName.FOLDCATALOGORIENTATION, enumVar.getName(), null);
+            setAttribute(AttributeName.FOLDCATALOGORIENTATION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -571,7 +571,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
           */
         public void setRotate(EnumRotate enumVar)
         {
-            setAttribute(AttributeName.ROTATE, enumVar.getName(), null);
+            setAttribute(AttributeName.ROTATE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -593,7 +593,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
           */
         public void setSides(EnumSides enumVar)
         {
-            setAttribute(AttributeName.SIDES, enumVar.getName(), null);
+            setAttribute(AttributeName.SIDES, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -615,7 +615,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
           */
         public void setBindingEdge(EnumBindingEdge enumVar)
         {
-            setAttribute(AttributeName.BINDINGEDGE, enumVar.getName(), null);
+            setAttribute(AttributeName.BINDINGEDGE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

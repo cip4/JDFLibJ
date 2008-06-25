@@ -332,7 +332,7 @@ public abstract class JDFAutoPreview extends JDFResource
           */
         public void setPreviewFileType(EnumPreviewFileType enumVar)
         {
-            setAttribute(AttributeName.PREVIEWFILETYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.PREVIEWFILETYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -354,7 +354,7 @@ public abstract class JDFAutoPreview extends JDFResource
           */
         public void setPreviewUsage(EnumPreviewUsage enumVar)
         {
-            setAttribute(AttributeName.PREVIEWUSAGE, enumVar.getName(), null);
+            setAttribute(AttributeName.PREVIEWUSAGE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -398,7 +398,7 @@ public abstract class JDFAutoPreview extends JDFResource
           */
         public void setCompensation(EnumCompensation enumVar)
         {
-            setAttribute(AttributeName.COMPENSATION, enumVar.getName(), null);
+            setAttribute(AttributeName.COMPENSATION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

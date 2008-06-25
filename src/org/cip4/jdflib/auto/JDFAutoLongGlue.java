@@ -244,7 +244,7 @@ public abstract class JDFAutoLongGlue extends JDFElement
           */
         public void setGlueType(EnumGlueType enumVar)
         {
-            setAttribute(AttributeName.GLUETYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.GLUETYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

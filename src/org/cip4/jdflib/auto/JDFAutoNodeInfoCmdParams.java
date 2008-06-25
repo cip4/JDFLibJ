@@ -302,7 +302,7 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
           */
         public void setUpdateMethod(EnumUpdateMethod enumVar)
         {
-            setAttribute(AttributeName.UPDATEMETHOD, enumVar.getName(), null);
+            setAttribute(AttributeName.UPDATEMETHOD, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

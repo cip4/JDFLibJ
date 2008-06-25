@@ -404,7 +404,7 @@ public abstract class JDFAutoLayout extends JDFResource
           */
         public void setSourceWorkStyle(EnumSourceWorkStyle enumVar)
         {
-            setAttribute(AttributeName.SOURCEWORKSTYLE, enumVar.getName(), null);
+            setAttribute(AttributeName.SOURCEWORKSTYLE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

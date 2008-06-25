@@ -291,7 +291,7 @@ public abstract class JDFAutoPackingParams extends JDFResource
           */
         public void setPalletWrapping(EnumPalletWrapping enumVar)
         {
-            setAttribute(AttributeName.PALLETWRAPPING, enumVar.getName(), null);
+            setAttribute(AttributeName.PALLETWRAPPING, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -591,7 +591,7 @@ public abstract class JDFAutoPackingParams extends JDFResource
           */
         public void setPalletType(EnumPalletType enumVar)
         {
-            setAttribute(AttributeName.PALLETTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.PALLETTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

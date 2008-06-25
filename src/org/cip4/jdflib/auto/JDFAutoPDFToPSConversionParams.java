@@ -1008,7 +1008,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
           */
         public void setIncludeBaseFonts(EnumIncludeBaseFonts enumVar)
         {
-            setAttribute(AttributeName.INCLUDEBASEFONTS, enumVar.getName(), null);
+            setAttribute(AttributeName.INCLUDEBASEFONTS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -1030,7 +1030,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
           */
         public void setIncludeCIDFonts(EnumIncludeCIDFonts enumVar)
         {
-            setAttribute(AttributeName.INCLUDECIDFONTS, enumVar.getName(), null);
+            setAttribute(AttributeName.INCLUDECIDFONTS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -1052,7 +1052,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
           */
         public void setIncludeEmbeddedFonts(EnumIncludeEmbeddedFonts enumVar)
         {
-            setAttribute(AttributeName.INCLUDEEMBEDDEDFONTS, enumVar.getName(), null);
+            setAttribute(AttributeName.INCLUDEEMBEDDEDFONTS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -1074,7 +1074,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
           */
         public void setIncludeOtherResources(EnumIncludeOtherResources enumVar)
         {
-            setAttribute(AttributeName.INCLUDEOTHERRESOURCES, enumVar.getName(), null);
+            setAttribute(AttributeName.INCLUDEOTHERRESOURCES, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -1096,7 +1096,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
           */
         public void setIncludeProcSets(EnumIncludeProcSets enumVar)
         {
-            setAttribute(AttributeName.INCLUDEPROCSETS, enumVar.getName(), null);
+            setAttribute(AttributeName.INCLUDEPROCSETS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -1118,7 +1118,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
           */
         public void setIncludeTrueTypeFonts(EnumIncludeTrueTypeFonts enumVar)
         {
-            setAttribute(AttributeName.INCLUDETRUETYPEFONTS, enumVar.getName(), null);
+            setAttribute(AttributeName.INCLUDETRUETYPEFONTS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -1140,7 +1140,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
           */
         public void setIncludeType1Fonts(EnumIncludeType1Fonts enumVar)
         {
-            setAttribute(AttributeName.INCLUDETYPE1FONTS, enumVar.getName(), null);
+            setAttribute(AttributeName.INCLUDETYPE1FONTS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -1162,7 +1162,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
           */
         public void setIncludeType3Fonts(EnumIncludeType3Fonts enumVar)
         {
-            setAttribute(AttributeName.INCLUDETYPE3FONTS, enumVar.getName(), null);
+            setAttribute(AttributeName.INCLUDETYPE3FONTS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -1184,7 +1184,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
           */
         public void setOutputType(EnumOutputType enumVar)
         {
-            setAttribute(AttributeName.OUTPUTTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.OUTPUTTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

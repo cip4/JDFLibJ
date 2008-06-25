@@ -325,7 +325,7 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
           */
         public void setProgressionOrder(EnumProgressionOrder enumVar)
         {
-            setAttribute(AttributeName.PROGRESSIONORDER, enumVar.getName(), null);
+            setAttribute(AttributeName.PROGRESSIONORDER, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

@@ -317,7 +317,7 @@ public abstract class JDFAutoMediaSource extends JDFResource
           */
         public void setSheetLay(EnumSheetLay enumVar)
         {
-            setAttribute(AttributeName.SHEETLAY, enumVar.getName(), null);
+            setAttribute(AttributeName.SHEETLAY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

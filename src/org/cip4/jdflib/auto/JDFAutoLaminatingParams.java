@@ -351,7 +351,7 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
           */
         public void setLaminatingMethod(EnumLaminatingMethod enumVar)
         {
-            setAttribute(AttributeName.LAMINATINGMETHOD, enumVar.getName(), null);
+            setAttribute(AttributeName.LAMINATINGMETHOD, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

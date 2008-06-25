@@ -422,7 +422,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
           */
         public void setOCGDefault(EnumOCGDefault enumVar)
         {
-            setAttribute(AttributeName.OCGDEFAULT, enumVar.getName(), null);
+            setAttribute(AttributeName.OCGDEFAULT, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -466,7 +466,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
           */
         public void setOCGProcess(EnumOCGProcess enumVar)
         {
-            setAttribute(AttributeName.OCGPROCESS, enumVar.getName(), null);
+            setAttribute(AttributeName.OCGPROCESS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

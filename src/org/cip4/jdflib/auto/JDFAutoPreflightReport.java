@@ -296,7 +296,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
           */
         public void setErrorState(EnumErrorState enumVar)
         {
-            setAttribute(AttributeName.ERRORSTATE, enumVar.getName(), null);
+            setAttribute(AttributeName.ERRORSTATE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

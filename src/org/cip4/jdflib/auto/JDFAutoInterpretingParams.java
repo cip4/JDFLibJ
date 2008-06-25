@@ -376,7 +376,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
           */
         public void setMirrorAround(EnumMirrorAround enumVar)
         {
-            setAttribute(AttributeName.MIRRORAROUND, enumVar.getName(), null);
+            setAttribute(AttributeName.MIRRORAROUND, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -398,7 +398,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
           */
         public void setPolarity(EnumPolarity enumVar)
         {
-            setAttribute(AttributeName.POLARITY, enumVar.getName(), null);
+            setAttribute(AttributeName.POLARITY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -420,7 +420,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
           */
         public void setPrintQuality(EnumPrintQuality enumVar)
         {
-            setAttribute(AttributeName.PRINTQUALITY, enumVar.getName(), null);
+            setAttribute(AttributeName.PRINTQUALITY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

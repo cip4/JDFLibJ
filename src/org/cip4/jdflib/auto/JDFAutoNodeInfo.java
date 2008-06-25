@@ -284,7 +284,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
           */
         public void setDueLevel(EnumDueLevel enumVar)
         {
-            setAttribute(AttributeName.DUELEVEL, enumVar.getName(), null);
+            setAttribute(AttributeName.DUELEVEL, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -547,7 +547,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
           */
         public void setNodeStatus(EnumNodeStatus enumVar)
         {
-            setAttribute(AttributeName.NODESTATUS, enumVar.getName(), null);
+            setAttribute(AttributeName.NODESTATUS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

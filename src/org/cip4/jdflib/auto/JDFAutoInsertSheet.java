@@ -362,7 +362,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
           */
         public void setSheetType(EnumSheetType enumVar)
         {
-            setAttribute(AttributeName.SHEETTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.SHEETTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -384,7 +384,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
           */
         public void setSheetUsage(EnumSheetUsage enumVar)
         {
-            setAttribute(AttributeName.SHEETUSAGE, enumVar.getName(), null);
+            setAttribute(AttributeName.SHEETUSAGE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -406,7 +406,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
           */
         public void setIncludeInBundleItem(EnumIncludeInBundleItem enumVar)
         {
-            setAttribute(AttributeName.INCLUDEINBUNDLEITEM, enumVar.getName(), null);
+            setAttribute(AttributeName.INCLUDEINBUNDLEITEM, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -497,7 +497,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
           */
         public void setUsage(EnumSheetUsage enumVar)
         {
-            setAttribute(AttributeName.USAGE, enumVar.getName(), null);
+            setAttribute(AttributeName.USAGE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

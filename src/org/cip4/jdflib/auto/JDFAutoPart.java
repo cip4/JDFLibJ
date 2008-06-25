@@ -1182,7 +1182,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public void setPreviewType(EnumPreviewType enumVar)
         {
-            setAttribute(AttributeName.PREVIEWTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.PREVIEWTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -1618,7 +1618,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public void setSide(EnumSide enumVar)
         {
-            setAttribute(AttributeName.SIDE, enumVar.getName(), null);
+            setAttribute(AttributeName.SIDE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

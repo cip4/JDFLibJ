@@ -241,7 +241,7 @@ public abstract class JDFAutoNotification extends JDFAudit
           */
         public void setClass(EnumClass enumVar)
         {
-            setAttribute(AttributeName.CLASS, enumVar.getName(), null);
+            setAttribute(AttributeName.CLASS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

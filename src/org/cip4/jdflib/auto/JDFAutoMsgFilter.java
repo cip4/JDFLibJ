@@ -364,7 +364,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
           */
         public void setFamily(EnumFamily enumVar)
         {
-            setAttribute(AttributeName.FAMILY, enumVar.getName(), null);
+            setAttribute(AttributeName.FAMILY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

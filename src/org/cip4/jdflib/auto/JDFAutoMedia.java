@@ -845,7 +845,7 @@ public abstract class JDFAutoMedia extends JDFResource
           */
         public void setMediaUnit(EnumMediaUnit enumVar)
         {
-            setAttribute(AttributeName.MEDIAUNIT, enumVar.getName(), null);
+            setAttribute(AttributeName.MEDIAUNIT, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -889,7 +889,7 @@ public abstract class JDFAutoMedia extends JDFResource
           */
         public void setBackCoatings(EnumBackCoatings enumVar)
         {
-            setAttribute(AttributeName.BACKCOATINGS, enumVar.getName(), null);
+            setAttribute(AttributeName.BACKCOATINGS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -1099,7 +1099,7 @@ public abstract class JDFAutoMedia extends JDFResource
           */
         public void setFluteDirection(EnumFluteDirection enumVar)
         {
-            setAttribute(AttributeName.FLUTEDIRECTION, enumVar.getName(), null);
+            setAttribute(AttributeName.FLUTEDIRECTION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -1121,7 +1121,7 @@ public abstract class JDFAutoMedia extends JDFResource
           */
         public void setFrontCoatings(EnumFrontCoatings enumVar)
         {
-            setAttribute(AttributeName.FRONTCOATINGS, enumVar.getName(), null);
+            setAttribute(AttributeName.FRONTCOATINGS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -1187,7 +1187,7 @@ public abstract class JDFAutoMedia extends JDFResource
           */
         public void setGrainDirection(EnumGrainDirection enumVar)
         {
-            setAttribute(AttributeName.GRAINDIRECTION, enumVar.getName(), null);
+            setAttribute(AttributeName.GRAINDIRECTION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -1231,7 +1231,7 @@ public abstract class JDFAutoMedia extends JDFResource
           */
         public void setImagableSide(EnumImagableSide enumVar)
         {
-            setAttribute(AttributeName.IMAGABLESIDE, enumVar.getName(), null);
+            setAttribute(AttributeName.IMAGABLESIDE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -1309,7 +1309,7 @@ public abstract class JDFAutoMedia extends JDFResource
           */
         public void setMediaColorName(EnumNamedColor value)
         {
-            setAttribute(AttributeName.MEDIACOLORNAME, value.getName(), null);
+            setAttribute(AttributeName.MEDIACOLORNAME, value==null ? null : value.getName(), null);
         }
 
         /**
@@ -1379,7 +1379,7 @@ public abstract class JDFAutoMedia extends JDFResource
           */
         public void setMediaType(EnumMediaType enumVar)
         {
-            setAttribute(AttributeName.MEDIATYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.MEDIATYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -1423,7 +1423,7 @@ public abstract class JDFAutoMedia extends JDFResource
           */
         public void setOpacity(EnumOpacity enumVar)
         {
-            setAttribute(AttributeName.OPACITY, enumVar.getName(), null);
+            setAttribute(AttributeName.OPACITY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -1511,7 +1511,7 @@ public abstract class JDFAutoMedia extends JDFResource
           */
         public void setPlateTechnology(EnumPlateTechnology enumVar)
         {
-            setAttribute(AttributeName.PLATETECHNOLOGY, enumVar.getName(), null);
+            setAttribute(AttributeName.PLATETECHNOLOGY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -1533,7 +1533,7 @@ public abstract class JDFAutoMedia extends JDFResource
           */
         public void setPolarity(EnumPolarity enumVar)
         {
-            setAttribute(AttributeName.POLARITY, enumVar.getName(), null);
+            setAttribute(AttributeName.POLARITY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

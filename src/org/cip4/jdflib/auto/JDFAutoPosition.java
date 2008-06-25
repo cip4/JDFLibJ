@@ -350,7 +350,7 @@ public abstract class JDFAutoPosition extends JDFElement
           */
         public void setOrientation(EnumOrientation enumVar)
         {
-            setAttribute(AttributeName.ORIENTATION, enumVar.getName(), null);
+            setAttribute(AttributeName.ORIENTATION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
