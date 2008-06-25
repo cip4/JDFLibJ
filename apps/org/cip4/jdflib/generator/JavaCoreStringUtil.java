@@ -921,7 +921,7 @@ public class JavaCoreStringUtil
                     .append("{").append(strLineEnd);
                 strbufResult.append(strDepth3)
                     .append("setAttribute(AttributeName.").append(attributeName.toUpperCase())
-                    .append(", enumVar.getName(), null);").append(strLineEnd);
+                    .append(", enumVar==null ? null : enumVar.getName(), null);").append(strLineEnd);
                 strbufResult.append(strDepth2)
                     .append("}").append(strLineEnd).append(strLineEnd);
             }
@@ -1276,7 +1276,7 @@ public class JavaCoreStringUtil
                 strbufResult.append(strDepth2).append("{").append(strLineEnd);
                 strbufResult.append(strDepth3).append("setAttribute(AttributeName.")
                         .append(modifiedAttributeName.toUpperCase()).append(
-                                ", value.getName(), null);").append(strLineEnd);
+                                ", value==null ? null : value.getName(), null);").append(strLineEnd);
                 strbufResult.append(strDepth2).append("}").append(strLineEnd).append(
                         strLineEnd);
             }

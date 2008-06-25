@@ -13,7 +13,6 @@ import java.io.File;
 
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
-import org.cip4.jdflib.node.JDFNode;
 
 public class TestJDF
 {
