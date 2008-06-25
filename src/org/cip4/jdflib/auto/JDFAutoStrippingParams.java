@@ -371,7 +371,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
           */
         public void setWorkStyle(EnumWorkStyle enumVar)
         {
-            setAttribute(AttributeName.WORKSTYLE, enumVar.getName(), null);
+            setAttribute(AttributeName.WORKSTYLE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

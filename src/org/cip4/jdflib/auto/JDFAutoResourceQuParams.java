@@ -415,7 +415,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
           */
         public void setUsage(JDFResourceLink.EnumUsage enumVar)
         {
-            setAttribute(AttributeName.USAGE, enumVar.getName(), null);
+            setAttribute(AttributeName.USAGE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

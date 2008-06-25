@@ -295,7 +295,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
           */
         public void setActivation(EnumActivation enumVar)
         {
-            setAttribute(AttributeName.ACTIVATION, enumVar.getName(), null);
+            setAttribute(AttributeName.ACTIVATION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -515,7 +515,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
           */
         public void setResStatus(JDFResource.EnumResStatus enumVar)
         {
-            setAttribute(AttributeName.STATUS, enumVar.getName(), null);
+            setAttribute(AttributeName.STATUS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -562,7 +562,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
           */
         public void setUpdateMethod(EnumUpdateMethod enumVar)
         {
-            setAttribute(AttributeName.UPDATEMETHOD, enumVar.getName(), null);
+            setAttribute(AttributeName.UPDATEMETHOD, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

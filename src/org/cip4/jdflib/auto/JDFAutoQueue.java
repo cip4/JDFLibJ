@@ -239,7 +239,7 @@ public abstract class JDFAutoQueue extends JDFElement
           */
         public void setQueueStatus(EnumQueueStatus enumVar)
         {
-            setAttribute(AttributeName.STATUS, enumVar.getName(), null);
+            setAttribute(AttributeName.STATUS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

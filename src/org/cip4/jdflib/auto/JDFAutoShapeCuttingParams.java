@@ -294,7 +294,7 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
           */
         public void setDeliveryMode(EnumDeliveryMode enumVar)
         {
-            setAttribute(AttributeName.DELIVERYMODE, enumVar.getName(), null);
+            setAttribute(AttributeName.DELIVERYMODE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -316,7 +316,7 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
           */
         public void setSheetLay(EnumSheetLay enumVar)
         {
-            setAttribute(AttributeName.SHEETLAY, enumVar.getName(), null);
+            setAttribute(AttributeName.SHEETLAY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

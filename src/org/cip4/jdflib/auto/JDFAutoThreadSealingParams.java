@@ -258,7 +258,7 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
           */
         public void setThreadMaterial(EnumThreadMaterial enumVar)
         {
-            setAttribute(AttributeName.THREADMATERIAL, enumVar.getName(), null);
+            setAttribute(AttributeName.THREADMATERIAL, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

@@ -247,7 +247,7 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
           */
         public void setDefaultPriority(EnumDefaultPriority enumVar)
         {
-            setAttribute(AttributeName.DEFAULTPRIORITY, enumVar.getName(), null);
+            setAttribute(AttributeName.DEFAULTPRIORITY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

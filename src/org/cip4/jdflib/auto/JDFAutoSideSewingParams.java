@@ -361,7 +361,7 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
           */
         public void setSewingPattern(EnumSewingPattern enumVar)
         {
-            setAttribute(AttributeName.SEWINGPATTERN, enumVar.getName(), null);
+            setAttribute(AttributeName.SEWINGPATTERN, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -383,7 +383,7 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
           */
         public void setThreadMaterial(EnumThreadMaterial enumVar)
         {
-            setAttribute(AttributeName.THREADMATERIAL, enumVar.getName(), null);
+            setAttribute(AttributeName.THREADMATERIAL, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

@@ -260,7 +260,7 @@ public abstract class JDFAutoResourceParam extends JDFElement
           */
         public void setDefaultPriority(EnumDefaultPriority enumVar)
         {
-            setAttribute(AttributeName.DEFAULTPRIORITY, enumVar.getName(), null);
+            setAttribute(AttributeName.DEFAULTPRIORITY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

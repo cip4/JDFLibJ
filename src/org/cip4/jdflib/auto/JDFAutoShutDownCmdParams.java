@@ -230,7 +230,7 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
           */
         public void setShutDownType(EnumShutDownType enumVar)
         {
-            setAttribute(AttributeName.SHUTDOWNTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.SHUTDOWNTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

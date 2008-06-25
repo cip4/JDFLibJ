@@ -232,7 +232,7 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
           */
         public void setShrinkingMethod(EnumShrinkingMethod enumVar)
         {
-            setAttribute(AttributeName.SHRINKINGMETHOD, enumVar.getName(), null);
+            setAttribute(AttributeName.SHRINKINGMETHOD, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

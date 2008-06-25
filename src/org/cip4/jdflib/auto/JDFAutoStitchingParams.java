@@ -402,7 +402,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
           */
         public void setReferenceEdge(EnumReferenceEdge enumVar)
         {
-            setAttribute(AttributeName.REFERENCEEDGE, enumVar.getName(), null);
+            setAttribute(AttributeName.REFERENCEEDGE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -424,7 +424,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
           */
         public void setStapleShape(EnumStapleShape enumVar)
         {
-            setAttribute(AttributeName.STAPLESHAPE, enumVar.getName(), null);
+            setAttribute(AttributeName.STAPLESHAPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -502,7 +502,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
           */
         public void setStitchType(EnumStitchType enumVar)
         {
-            setAttribute(AttributeName.STITCHTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.STITCHTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

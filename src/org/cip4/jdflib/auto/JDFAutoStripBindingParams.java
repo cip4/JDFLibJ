@@ -264,7 +264,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
           */
         public void setStripColor(EnumNamedColor value)
         {
-            setAttribute(AttributeName.STRIPCOLOR, value.getName(), null);
+            setAttribute(AttributeName.STRIPCOLOR, value==null ? null : value.getName(), null);
         }
 
         /**

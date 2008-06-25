@@ -363,7 +363,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
           */
         public void setBottleAxis(EnumBottleAxis enumVar)
         {
-            setAttribute(AttributeName.BOTTLEAXIS, enumVar.getName(), null);
+            setAttribute(AttributeName.BOTTLEAXIS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -453,7 +453,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
           */
         public void setOrientation(EnumOrientation enumVar)
         {
-            setAttribute(AttributeName.ORIENTATION, enumVar.getName(), null);
+            setAttribute(AttributeName.ORIENTATION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

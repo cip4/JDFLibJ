@@ -254,7 +254,7 @@ public abstract class JDFAutoUsageCounter extends JDFResource
           */
         public void setScope(EnumScope enumVar)
         {
-            setAttribute(AttributeName.SCOPE, enumVar.getName(), null);
+            setAttribute(AttributeName.SCOPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

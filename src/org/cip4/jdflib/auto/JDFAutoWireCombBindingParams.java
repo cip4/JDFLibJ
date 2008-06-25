@@ -320,7 +320,7 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
           */
         public void setShape(EnumShape enumVar)
         {
-            setAttribute(AttributeName.SHAPE, enumVar.getName(), null);
+            setAttribute(AttributeName.SHAPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -364,7 +364,7 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
           */
         public void setColor(EnumNamedColor value)
         {
-            setAttribute(AttributeName.COLOR, value.getName(), null);
+            setAttribute(AttributeName.COLOR, value==null ? null : value.getName(), null);
         }
 
         /**
@@ -434,7 +434,7 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
           */
         public void setMaterial(EnumMaterial enumVar)
         {
-            setAttribute(AttributeName.MATERIAL, enumVar.getName(), null);
+            setAttribute(AttributeName.MATERIAL, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

@@ -374,7 +374,7 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
           */
         public void setCastingMaterial(EnumCastingMaterial enumVar)
         {
-            setAttribute(AttributeName.CASTINGMATERIAL, enumVar.getName(), null);
+            setAttribute(AttributeName.CASTINGMATERIAL, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -396,7 +396,7 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
           */
         public void setCoreMaterial(EnumCoreMaterial enumVar)
         {
-            setAttribute(AttributeName.COREMATERIAL, enumVar.getName(), null);
+            setAttribute(AttributeName.COREMATERIAL, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -552,7 +552,7 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
           */
         public void setSewingPattern(EnumSewingPattern enumVar)
         {
-            setAttribute(AttributeName.SEWINGPATTERN, enumVar.getName(), null);
+            setAttribute(AttributeName.SEWINGPATTERN, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

@@ -416,7 +416,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
           */
         public void setQueueEntryDetails(EnumQueueEntryDetails enumVar)
         {
-            setAttribute(AttributeName.QUEUEENTRYDETAILS, enumVar.getName(), null);
+            setAttribute(AttributeName.QUEUEENTRYDETAILS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

@@ -249,7 +249,7 @@ public abstract class JDFAutoStrap extends JDFResource
           */
         public void setMaterial(EnumMaterial enumVar)
         {
-            setAttribute(AttributeName.MATERIAL, enumVar.getName(), null);
+            setAttribute(AttributeName.MATERIAL, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -271,7 +271,7 @@ public abstract class JDFAutoStrap extends JDFResource
           */
         public void setStrapColor(EnumNamedColor value)
         {
-            setAttribute(AttributeName.STRAPCOLOR, value.getName(), null);
+            setAttribute(AttributeName.STRAPCOLOR, value==null ? null : value.getName(), null);
         }
 
         /**

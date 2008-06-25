@@ -285,7 +285,7 @@ public abstract class JDFAutoRunList extends JDFResource
           */
         public void setComponentGranularity(EnumComponentGranularity enumVar)
         {
-            setAttribute(AttributeName.COMPONENTGRANULARITY, enumVar.getName(), null);
+            setAttribute(AttributeName.COMPONENTGRANULARITY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

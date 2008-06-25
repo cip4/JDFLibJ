@@ -267,7 +267,7 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
           */
         public void setRibbonColor(EnumNamedColor value)
         {
-            setAttribute(AttributeName.RIBBONCOLOR, value.getName(), null);
+            setAttribute(AttributeName.RIBBONCOLOR, value==null ? null : value.getName(), null);
         }
 
         /**

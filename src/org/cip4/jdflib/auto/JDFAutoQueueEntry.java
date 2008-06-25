@@ -421,7 +421,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
           */
         public void setQueueEntryStatus(EnumQueueEntryStatus enumVar)
         {
-            setAttribute(AttributeName.STATUS, enumVar.getName(), null);
+            setAttribute(AttributeName.STATUS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

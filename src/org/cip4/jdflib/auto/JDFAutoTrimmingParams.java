@@ -278,7 +278,7 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
           */
         public void setTrimCover(EnumTrimCover enumVar)
         {
-            setAttribute(AttributeName.TRIMCOVER, enumVar.getName(), null);
+            setAttribute(AttributeName.TRIMCOVER, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -366,7 +366,7 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
           */
         public void setTrimmingType(EnumTrimmingType enumVar)
         {
-            setAttribute(AttributeName.TRIMMINGTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.TRIMMINGTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

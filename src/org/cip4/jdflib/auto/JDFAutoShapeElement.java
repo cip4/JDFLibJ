@@ -371,7 +371,7 @@ public abstract class JDFAutoShapeElement extends JDFElement
           */
         public void setCutType(EnumCutType enumVar)
         {
-            setAttribute(AttributeName.CUTTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.CUTTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -415,7 +415,7 @@ public abstract class JDFAutoShapeElement extends JDFElement
           */
         public void setShapeType(EnumShapeType enumVar)
         {
-            setAttribute(AttributeName.SHAPETYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.SHAPETYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

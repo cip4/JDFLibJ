@@ -274,7 +274,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
           */
         public void setBandOrdering(EnumBandOrdering enumVar)
         {
-            setAttribute(AttributeName.BANDORDERING, enumVar.getName(), null);
+            setAttribute(AttributeName.BANDORDERING, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

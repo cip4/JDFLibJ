@@ -278,7 +278,7 @@ public abstract class JDFAutoValue extends JDFElement
           */
         public void setValueUsage(EnumValueUsage enumVar)
         {
-            setAttribute(AttributeName.VALUEUSAGE, enumVar.getName(), null);
+            setAttribute(AttributeName.VALUEUSAGE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

@@ -400,7 +400,7 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
           */
         public void setRepeatPolicy(EnumRepeatPolicy enumVar)
         {
-            setAttribute(AttributeName.REPEATPOLICY, enumVar.getName(), null);
+            setAttribute(AttributeName.REPEATPOLICY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

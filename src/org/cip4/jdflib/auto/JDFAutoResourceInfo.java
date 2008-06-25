@@ -322,7 +322,7 @@ public abstract class JDFAutoResourceInfo extends JDFElement
           */
         public void setLevel(EnumLevel enumVar)
         {
-            setAttribute(AttributeName.LEVEL, enumVar.getName(), null);
+            setAttribute(AttributeName.LEVEL, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -510,7 +510,7 @@ public abstract class JDFAutoResourceInfo extends JDFElement
           */
         public void setResStatus(JDFResource.EnumResStatus enumVar)
         {
-            setAttribute(AttributeName.STATUS, enumVar.getName(), null);
+            setAttribute(AttributeName.STATUS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -554,7 +554,7 @@ public abstract class JDFAutoResourceInfo extends JDFElement
           */
         public void setUsage(JDFResourceLink.EnumUsage enumVar)
         {
-            setAttribute(AttributeName.USAGE, enumVar.getName(), null);
+            setAttribute(AttributeName.USAGE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

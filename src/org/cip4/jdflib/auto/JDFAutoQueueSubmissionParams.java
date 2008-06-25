@@ -264,7 +264,7 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
           */
         public void setGangPolicy(EnumGangPolicy enumVar)
         {
-            setAttribute(AttributeName.GANGPOLICY, enumVar.getName(), null);
+            setAttribute(AttributeName.GANGPOLICY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

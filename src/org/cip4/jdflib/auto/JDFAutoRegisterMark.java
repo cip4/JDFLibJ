@@ -306,7 +306,7 @@ public abstract class JDFAutoRegisterMark extends JDFResource
           */
         public void setMarkUsage(EnumMarkUsage enumVar)
         {
-            setAttribute(AttributeName.MARKUSAGE, enumVar.getName(), null);
+            setAttribute(AttributeName.MARKUSAGE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

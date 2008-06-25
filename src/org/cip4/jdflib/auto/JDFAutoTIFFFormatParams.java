@@ -287,7 +287,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
           */
         public void setByteOrder(EnumByteOrder enumVar)
         {
-            setAttribute(AttributeName.BYTEORDER, enumVar.getName(), null);
+            setAttribute(AttributeName.BYTEORDER, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -353,7 +353,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
           */
         public void setSegmentation(EnumSegmentation enumVar)
         {
-            setAttribute(AttributeName.SEGMENTATION, enumVar.getName(), null);
+            setAttribute(AttributeName.SEGMENTATION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

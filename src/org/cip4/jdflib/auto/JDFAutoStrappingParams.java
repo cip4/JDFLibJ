@@ -233,7 +233,7 @@ public abstract class JDFAutoStrappingParams extends JDFResource
           */
         public void setStrappingType(EnumStrappingType enumVar)
         {
-            setAttribute(AttributeName.STRAPPINGTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.STRAPPINGTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

@@ -553,7 +553,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
           */
         public void setImageTrapPlacement(EnumImageTrapPlacement enumVar)
         {
-            setAttribute(AttributeName.IMAGETRAPPLACEMENT, enumVar.getName(), null);
+            setAttribute(AttributeName.IMAGETRAPPLACEMENT, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

@@ -288,7 +288,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
           */
         public void setDeviceDetails(EnumDeviceDetails enumVar)
         {
-            setAttribute(AttributeName.DEVICEDETAILS, enumVar.getName(), null);
+            setAttribute(AttributeName.DEVICEDETAILS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -332,7 +332,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
           */
         public void setJobDetails(EnumJobDetails enumVar)
         {
-            setAttribute(AttributeName.JOBDETAILS, enumVar.getName(), null);
+            setAttribute(AttributeName.JOBDETAILS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

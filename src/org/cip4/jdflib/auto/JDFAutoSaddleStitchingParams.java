@@ -294,7 +294,7 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
           */
         public void setStapleShape(EnumStapleShape enumVar)
         {
-            setAttribute(AttributeName.STAPLESHAPE, enumVar.getName(), null);
+            setAttribute(AttributeName.STAPLESHAPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

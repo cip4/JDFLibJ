@@ -257,7 +257,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
           */
         public void setNodeStatus(EnumNodeStatus enumVar)
         {
-            setAttribute(AttributeName.NODESTATUS, enumVar.getName(), null);
+            setAttribute(AttributeName.NODESTATUS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -279,7 +279,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
           */
         public void setReason(EnumReason enumVar)
         {
-            setAttribute(AttributeName.REASON, enumVar.getName(), null);
+            setAttribute(AttributeName.REASON, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

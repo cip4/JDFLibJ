@@ -232,7 +232,7 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
           */
         public void setType(EnumType enumVar)
         {
-            setAttribute(AttributeName.TYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.TYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

@@ -316,7 +316,7 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
           */
         public void setXYRelation(EnumXYRelation enumVar)
         {
-            setAttribute(AttributeName.XYRELATION, enumVar.getName(), null);
+            setAttribute(AttributeName.XYRELATION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

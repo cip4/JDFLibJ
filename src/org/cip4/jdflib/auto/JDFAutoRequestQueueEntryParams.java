@@ -303,7 +303,7 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
           */
         public void setSubmitPolicy(EnumSubmitPolicy enumVar)
         {
-            setAttribute(AttributeName.SUBMITPOLICY, enumVar.getName(), null);
+            setAttribute(AttributeName.SUBMITPOLICY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

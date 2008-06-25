@@ -640,7 +640,7 @@ public abstract class JDFAutoStripCellParams extends JDFElement
           */
         public void setSides(EnumSides enumVar)
         {
-            setAttribute(AttributeName.SIDES, enumVar.getName(), null);
+            setAttribute(AttributeName.SIDES, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -706,7 +706,7 @@ public abstract class JDFAutoStripCellParams extends JDFElement
           */
         public void setMask(EnumMask enumVar)
         {
-            setAttribute(AttributeName.MASK, enumVar.getName(), null);
+            setAttribute(AttributeName.MASK, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

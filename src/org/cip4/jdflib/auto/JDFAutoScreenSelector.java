@@ -389,7 +389,7 @@ public abstract class JDFAutoScreenSelector extends JDFElement
           */
         public void setScreeningType(EnumScreeningType enumVar)
         {
-            setAttribute(AttributeName.SCREENINGTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.SCREENINGTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

@@ -321,7 +321,7 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
           */
         public void setStripColor(EnumNamedColor value)
         {
-            setAttribute(AttributeName.STRIPCOLOR, value.getName(), null);
+            setAttribute(AttributeName.STRIPCOLOR, value==null ? null : value.getName(), null);
         }
 
         /**
@@ -369,7 +369,7 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
           */
         public void setStripMaterial(EnumStripMaterial enumVar)
         {
-            setAttribute(AttributeName.STRIPMATERIAL, enumVar.getName(), null);
+            setAttribute(AttributeName.STRIPMATERIAL, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

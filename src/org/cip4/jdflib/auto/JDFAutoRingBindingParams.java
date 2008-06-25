@@ -256,7 +256,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
           */
         public void setBinderColor(EnumNamedColor value)
         {
-            setAttribute(AttributeName.BINDERCOLOR, value.getName(), null);
+            setAttribute(AttributeName.BINDERCOLOR, value==null ? null : value.getName(), null);
         }
 
         /**
@@ -392,7 +392,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
           */
         public void setRingSystem(EnumRingSystem enumVar)
         {
-            setAttribute(AttributeName.RINGSYSTEM, enumVar.getName(), null);
+            setAttribute(AttributeName.RINGSYSTEM, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -436,7 +436,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
           */
         public void setSpineColor(EnumNamedColor value)
         {
-            setAttribute(AttributeName.SPINECOLOR, value.getName(), null);
+            setAttribute(AttributeName.SPINECOLOR, value==null ? null : value.getName(), null);
         }
 
         /**

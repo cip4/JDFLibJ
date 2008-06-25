@@ -259,7 +259,7 @@ public abstract class JDFAutoStripMark extends JDFElement
           */
         public void setMarkSide(EnumMarkSide enumVar)
         {
-            setAttribute(AttributeName.MARKSIDE, enumVar.getName(), null);
+            setAttribute(AttributeName.MARKSIDE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

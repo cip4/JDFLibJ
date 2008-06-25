@@ -245,7 +245,7 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
           */
         public void setTransferFunctionSource(EnumTransferFunctionSource enumVar)
         {
-            setAttribute(AttributeName.TRANSFERFUNCTIONSOURCE, enumVar.getName(), null);
+            setAttribute(AttributeName.TRANSFERFUNCTIONSOURCE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

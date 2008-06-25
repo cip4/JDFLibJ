@@ -411,7 +411,7 @@ public abstract class JDFAutoScanParams extends JDFResource
           */
         public void setOutputColorSpace(EnumOutputColorSpace enumVar)
         {
-            setAttribute(AttributeName.OUTPUTCOLORSPACE, enumVar.getName(), null);
+            setAttribute(AttributeName.OUTPUTCOLORSPACE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -433,7 +433,7 @@ public abstract class JDFAutoScanParams extends JDFResource
           */
         public void setCompressionFilter(EnumCompressionFilter enumVar)
         {
-            setAttribute(AttributeName.COMPRESSIONFILTER, enumVar.getName(), null);
+            setAttribute(AttributeName.COMPRESSIONFILTER, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -533,7 +533,7 @@ public abstract class JDFAutoScanParams extends JDFResource
           */
         public void setMounting(EnumMounting enumVar)
         {
-            setAttribute(AttributeName.MOUNTING, enumVar.getName(), null);
+            setAttribute(AttributeName.MOUNTING, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

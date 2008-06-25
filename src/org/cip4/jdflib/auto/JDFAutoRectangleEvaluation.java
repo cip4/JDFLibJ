@@ -248,7 +248,7 @@ public abstract class JDFAutoRectangleEvaluation extends JDFResource
           */
         public void setHWRelation(EnumHWRelation enumVar)
         {
-            setAttribute(AttributeName.HWRELATION, enumVar.getName(), null);
+            setAttribute(AttributeName.HWRELATION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

@@ -381,7 +381,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
           */
         public void setBinding(EnumBinding enumVar)
         {
-            setAttribute(AttributeName.BINDING, enumVar.getName(), null);
+            setAttribute(AttributeName.BINDING, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -469,7 +469,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
           */
         public void setAutoRotatePages(EnumAutoRotatePages enumVar)
         {
-            setAttribute(AttributeName.AUTOROTATEPAGES, enumVar.getName(), null);
+            setAttribute(AttributeName.AUTOROTATEPAGES, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -513,7 +513,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
           */
         public void setDefaultRenderingIntent(EnumDefaultRenderingIntent enumVar)
         {
-            setAttribute(AttributeName.DEFAULTRENDERINGINTENT, enumVar.getName(), null);
+            setAttribute(AttributeName.DEFAULTRENDERINGINTENT, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

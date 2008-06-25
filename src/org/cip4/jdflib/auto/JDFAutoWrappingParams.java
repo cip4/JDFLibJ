@@ -227,7 +227,7 @@ public abstract class JDFAutoWrappingParams extends JDFResource
           */
         public void setWrappingKind(EnumWrappingKind enumVar)
         {
-            setAttribute(AttributeName.WRAPPINGKIND, enumVar.getName(), null);
+            setAttribute(AttributeName.WRAPPINGKIND, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
