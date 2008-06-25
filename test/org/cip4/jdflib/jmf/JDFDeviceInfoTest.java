@@ -105,4 +105,22 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
         di.setDeviceID("da");
         assertEquals(di.getDeviceID(), "da");
     }
+
+    /*
+    public void setDeviceStatus(EnumDeviceStatus enumVar)
+    {
+        setAttribute(AttributeName.DEVICESTATUS, enumVar==null ? null : enumVar.getName(), null);
+    }
+*/
+  public void testNullDeviceStatus()
+  {
+       JDFDoc jmfDoc = new JDFDoc("JMF");
+       JDFJMF jmf=jmfDoc.getJMFRoot();
+       jmf.setDescriptiveName("Initial phase when the RIP starts up");
+       JDFSignal signal=jmf.appendSignal(JDFMessage.EnumType.Status);
+       JDFDeviceInfo di=signal.appendDeviceInfo();
+
+		di.setDeviceStatus(null);
+		System.out.println();
+  }
 }
