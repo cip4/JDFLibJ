@@ -415,7 +415,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
                 niSig.addPartition(EnumPartIDKey.SheetName, "S"+j);
                 xmSig.addPartition(EnumPartIDKey.SheetName, "S"+j);
             }
-            String spawnID=spawnedNode.getSpawnID(false);
+//            String spawnID=
+            	spawnedNode.getSpawnID(false);
             assertTrue("AncestorPool",spawnedNode.hasChildElement(ElementName.ANCESTORPOOL,null));
 
             map.put("SheetName","S1");
@@ -458,7 +459,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
                 System.out.println("Merge"+j);
                 final JDFNode nodeJ = nodes[j];
                 final EnumCleanUpMerge enumCleanUpMerge = EnumCleanUpMerge.getEnum(i);
-                JDFNode overwritten=new JDFMerge(nRoot).mergeJDF(nodeJ, null, enumCleanUpMerge, EnumAmountMerge.UpdateLink);
+//                JDFNode overwritten=
+                	new JDFMerge(nRoot).mergeJDF(nodeJ, null, enumCleanUpMerge, EnumAmountMerge.UpdateLink);
 
                 assertEquals(nRoot.getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.ID,xm.getID()), false, true, 99, false).size(), 1);
                 assertTrue(nRoot.isValid(EnumValidationLevel.Incomplete));

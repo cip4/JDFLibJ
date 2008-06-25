@@ -317,7 +317,8 @@ public class KElementTest extends JDFTestCaseBase
         KElement e=new XMLDoc("e","a.com").getRoot();
         final KElement b = e.appendElement("b","b.com");
         b.setAttribute("c:at", "cc","c.com");
-        KElement c=e.appendElement("c", "c.com");
+//        KElement c=
+        	e.appendElement("c", "c.com");
         assertNotNull(b.getAttribute("at", "c.com",null));
         assertNotNull(e.getElement("c", "c.com", 0));
         e.removeExtensions("c.com");

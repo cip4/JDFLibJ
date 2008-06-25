@@ -588,8 +588,10 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
         JDFMedia mediaCFemale=(JDFMedia) mediaC.addPartition(EnumPartIDKey.SetTags, "Female");
 
         JDFComponent insert=(JDFComponent) n.addResource("Component",null, EnumUsage.Input,EnumProcessUsage.Child, null,null, null);    
-        JDFComponent insertExist=(JDFComponent) insert.addPartition(EnumPartIDKey.DocTags, "Exist");
-        JDFComponent insertProspect=(JDFComponent) insert.addPartition(EnumPartIDKey.DocTags, "Prospect");
+//        JDFComponent insertExist=(JDFComponent) 
+        insert.addPartition(EnumPartIDKey.DocTags, "Exist");
+//        JDFComponent insertProspect=(JDFComponent) 
+        insert.addPartition(EnumPartIDKey.DocTags, "Prospect");
 
         JDFLayout cover=(JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "TheCover");
         cover.setAutomated(false);

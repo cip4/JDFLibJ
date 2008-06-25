@@ -78,8 +78,6 @@ package org.cip4.jdflib.resource;
 
 import java.util.Vector;
 
-import net.gamsys.test.SparseForDummies.Elem;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoColorSpaceConversionOp.EnumSourceObjects;

@@ -17,7 +17,6 @@ import org.cip4.jdflib.resource.devicecapability.JDFDevCap;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCaps;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 import org.cip4.jdflib.resource.devicecapability.JDFStringState;
-import org.cip4.jdflib.resource.devicecapability.JDFTerm;
 import org.cip4.jdflib.resource.devicecapability.JDFTest;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 
@@ -70,7 +69,8 @@ public class JMFKnownMessagesTest extends JDFTestCaseBase
         JDFActionPool ap=ms.appendActionPool();
         JDFAction a=ap.appendActionTest(EnumTerm.IsPresentEvaluation, true);
         JDFTest t=a.getTest();
-        JDFTerm term=t.getTerm();
+//        JDFTerm term=
+        	t.getTerm();
         //TODO
         JDFDoc docJMF=new JDFDoc("JMF");
         JDFJMF jmf=docJMF.getJMFRoot();

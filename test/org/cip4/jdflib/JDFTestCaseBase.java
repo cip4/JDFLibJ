@@ -70,7 +70,6 @@
 package org.cip4.jdflib;
 
 import java.io.File;
-import java.util.Vector;
 
 import junit.framework.TestCase;
 
@@ -80,10 +79,8 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
-import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
-import org.cip4.jdflib.goldenticket.BaseGoldenTicket;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.JDFComponent;
