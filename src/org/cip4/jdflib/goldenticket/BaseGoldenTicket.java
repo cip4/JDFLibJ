@@ -81,7 +81,6 @@ import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFNodeInfo;
-import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.VElement;
@@ -104,7 +103,6 @@ import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
-import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
@@ -901,7 +899,8 @@ public class BaseGoldenTicket
             for(int i=0;i<vSheets.size();i++)
             {
                 final JDFAttributeMap part = new JDFAttributeMap(vSheets.elementAt(i));
-                JDFResource mm=m.getCreatePartition(part, partIDKeys);
+//                JDFResource mm=
+                	m.getCreatePartition(part, partIDKeys);
             }
 
         }

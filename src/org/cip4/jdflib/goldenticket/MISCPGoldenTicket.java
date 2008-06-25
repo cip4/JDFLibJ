@@ -106,7 +106,6 @@ import org.cip4.jdflib.resource.process.JDFConventionalPrintingParams;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.resource.process.prepress.JDFInk;
-import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.UrlUtil;
 
 /**

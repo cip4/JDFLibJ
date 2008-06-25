@@ -74,17 +74,14 @@ import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
 import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
 import org.cip4.jdflib.auto.JDFAutoIdentificationField.EnumEncoding;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
-import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.auto.JDFAutoPreview.EnumPreviewFileType;
 import org.cip4.jdflib.auto.JDFAutoPreview.EnumPreviewUsage;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
-import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -112,7 +109,6 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.prepress.JDFPreviewGenerationParams;
-import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -366,7 +362,8 @@ public class MISPreGoldenTicket extends MISGoldenTicket
         JDFStrippingParams sp=(JDFStrippingParams) theNode.getCreateResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
         sp.setDescriptiveName("Impositioning for job "+theNode.getJobID(true));
         sp.setWorkStyle(org.cip4.jdflib.auto.JDFAutoStrippingParams.EnumWorkStyle.getEnum(workStyle.getValue()));
-        VJDFAttributeMap reduceMap=getReducedMap(new VString("Separation PartVersion",null));
+//        VJDFAttributeMap reduceMap=
+        	getReducedMap(new VString("Separation PartVersion",null));
         JDFBinderySignature bs0=(JDFBinderySignature) theNode.getResource(ElementName.BINDERYSIGNATURE, EnumUsage.Input, 0);
         JDFBinderySignature bs1=(JDFBinderySignature) theNode.getResource(ElementName.BINDERYSIGNATURE, EnumUsage.Input, 1);
         if(bs1==null)
