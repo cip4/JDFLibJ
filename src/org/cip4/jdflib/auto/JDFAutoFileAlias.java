@@ -258,7 +258,7 @@ public abstract class JDFAutoFileAlias extends JDFElement
           */
         public void setDisposition(EnumDisposition enumVar)
         {
-            setAttribute(AttributeName.DISPOSITION, enumVar.getName(), null);
+            setAttribute(AttributeName.DISPOSITION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

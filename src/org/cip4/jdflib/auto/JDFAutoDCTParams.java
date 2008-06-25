@@ -465,7 +465,7 @@ public abstract class JDFAutoDCTParams extends JDFElement
           */
         public void setColorTransform(EnumColorTransform enumVar)
         {
-            setAttribute(AttributeName.COLORTRANSFORM, enumVar.getName(), null);
+            setAttribute(AttributeName.COLORTRANSFORM, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

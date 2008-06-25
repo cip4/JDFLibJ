@@ -317,7 +317,7 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
           */
         public void setIncorrectComponentQuality(EnumIncorrectComponentQuality enumVar)
         {
-            setAttribute(AttributeName.INCORRECTCOMPONENTQUALITY, enumVar.getName(), null);
+            setAttribute(AttributeName.INCORRECTCOMPONENTQUALITY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -361,7 +361,7 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
           */
         public void setDoubleFeedQuality(EnumDoubleFeedQuality enumVar)
         {
-            setAttribute(AttributeName.DOUBLEFEEDQUALITY, enumVar.getName(), null);
+            setAttribute(AttributeName.DOUBLEFEEDQUALITY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -405,7 +405,7 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
           */
         public void setBadFeedQuality(EnumBadFeedQuality enumVar)
         {
-            setAttribute(AttributeName.BADFEEDQUALITY, enumVar.getName(), null);
+            setAttribute(AttributeName.BADFEEDQUALITY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

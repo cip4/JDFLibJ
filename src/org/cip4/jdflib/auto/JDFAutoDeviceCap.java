@@ -374,7 +374,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
           */
         public void setExecutionPolicy(EnumExecutionPolicy enumVar)
         {
-            setAttribute(AttributeName.EXECUTIONPOLICY, enumVar.getName(), null);
+            setAttribute(AttributeName.EXECUTIONPOLICY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -515,7 +515,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
           */
         public void setTypeOrder(EnumTypeOrder enumVar)
         {
-            setAttribute(AttributeName.TYPEORDER, enumVar.getName(), null);
+            setAttribute(AttributeName.TYPEORDER, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

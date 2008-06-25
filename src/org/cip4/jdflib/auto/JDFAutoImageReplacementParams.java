@@ -302,7 +302,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
           */
         public void setImageReplacementStrategy(EnumImageReplacementStrategy enumVar)
         {
-            setAttribute(AttributeName.IMAGEREPLACEMENTSTRATEGY, enumVar.getName(), null);
+            setAttribute(AttributeName.IMAGEREPLACEMENTSTRATEGY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -390,7 +390,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
           */
         public void setResolutionReductionStrategy(EnumResolutionReductionStrategy enumVar)
         {
-            setAttribute(AttributeName.RESOLUTIONREDUCTIONSTRATEGY, enumVar.getName(), null);
+            setAttribute(AttributeName.RESOLUTIONREDUCTIONSTRATEGY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

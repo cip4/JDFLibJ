@@ -249,7 +249,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
           */
         public void setICCProfileUsage(EnumICCProfileUsage enumVar)
         {
-            setAttribute(AttributeName.ICCPROFILEUSAGE, enumVar.getName(), null);
+            setAttribute(AttributeName.ICCPROFILEUSAGE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

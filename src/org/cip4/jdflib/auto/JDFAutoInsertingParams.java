@@ -299,7 +299,7 @@ public abstract class JDFAutoInsertingParams extends JDFResource
           */
         public void setInsertLocation(EnumInsertLocation enumVar)
         {
-            setAttribute(AttributeName.INSERTLOCATION, enumVar.getName(), null);
+            setAttribute(AttributeName.INSERTLOCATION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -321,7 +321,7 @@ public abstract class JDFAutoInsertingParams extends JDFResource
           */
         public void setMethod(EnumMethod enumVar)
         {
-            setAttribute(AttributeName.METHOD, enumVar.getName(), null);
+            setAttribute(AttributeName.METHOD, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

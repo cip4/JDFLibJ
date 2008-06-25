@@ -295,7 +295,7 @@ public abstract class JDFAutoFoldingParams extends JDFResource
           */
         public void setSheetLay(EnumSheetLay enumVar)
         {
-            setAttribute(AttributeName.SHEETLAY, enumVar.getName(), null);
+            setAttribute(AttributeName.SHEETLAY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -317,7 +317,7 @@ public abstract class JDFAutoFoldingParams extends JDFResource
           */
         public void setDescriptionType(EnumDescriptionType enumVar)
         {
-            setAttribute(AttributeName.DESCRIPTIONTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.DESCRIPTIONTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

@@ -228,7 +228,7 @@ public abstract class JDFAutoDBSchema extends JDFResource
           */
         public void setDBSchemaType(EnumDBSchemaType enumVar)
         {
-            setAttribute(AttributeName.DBSCHEMATYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.DBSCHEMATYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

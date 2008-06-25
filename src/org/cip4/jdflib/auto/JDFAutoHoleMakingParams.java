@@ -354,7 +354,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
           */
         public void setCenterReference(EnumCenterReference enumVar)
         {
-            setAttribute(AttributeName.CENTERREFERENCE, enumVar.getName(), null);
+            setAttribute(AttributeName.CENTERREFERENCE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -500,7 +500,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
           */
         public void setHoleReferenceEdge(EnumHoleReferenceEdge enumVar)
         {
-            setAttribute(AttributeName.HOLEREFERENCEEDGE, enumVar.getName(), null);
+            setAttribute(AttributeName.HOLEREFERENCEEDGE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -522,7 +522,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
           */
         public void setShape(EnumShape enumVar)
         {
-            setAttribute(AttributeName.SHAPE, enumVar.getName(), null);
+            setAttribute(AttributeName.SHAPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

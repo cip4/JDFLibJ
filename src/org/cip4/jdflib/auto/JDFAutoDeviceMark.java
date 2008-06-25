@@ -372,7 +372,7 @@ public abstract class JDFAutoDeviceMark extends JDFResource
           */
         public void setMarkJustification(EnumMarkJustification enumVar)
         {
-            setAttribute(AttributeName.MARKJUSTIFICATION, enumVar.getName(), null);
+            setAttribute(AttributeName.MARKJUSTIFICATION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -428,7 +428,7 @@ public abstract class JDFAutoDeviceMark extends JDFResource
           */
         public void setMarkOrientation(EnumMarkOrientation enumVar)
         {
-            setAttribute(AttributeName.MARKORIENTATION, enumVar.getName(), null);
+            setAttribute(AttributeName.MARKORIENTATION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -450,7 +450,7 @@ public abstract class JDFAutoDeviceMark extends JDFResource
           */
         public void setMarkPosition(EnumMarkPosition enumVar)
         {
-            setAttribute(AttributeName.MARKPOSITION, enumVar.getName(), null);
+            setAttribute(AttributeName.MARKPOSITION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

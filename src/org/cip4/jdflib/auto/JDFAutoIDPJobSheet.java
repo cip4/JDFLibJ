@@ -312,7 +312,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
           */
         public void setSheetOccurence(EnumSheetOccurence enumVar)
         {
-            setAttribute(AttributeName.SHEETOCCURENCE, enumVar.getName(), null);
+            setAttribute(AttributeName.SHEETOCCURENCE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -334,7 +334,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
           */
         public void setSheetType(EnumSheetType enumVar)
         {
-            setAttribute(AttributeName.SHEETTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.SHEETTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

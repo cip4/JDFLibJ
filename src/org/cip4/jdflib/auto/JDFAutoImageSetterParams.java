@@ -458,7 +458,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
           */
         public void setMirrorAround(EnumMirrorAround enumVar)
         {
-            setAttribute(AttributeName.MIRRORAROUND, enumVar.getName(), null);
+            setAttribute(AttributeName.MIRRORAROUND, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -480,7 +480,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
           */
         public void setPolarity(EnumPolarity enumVar)
         {
-            setAttribute(AttributeName.POLARITY, enumVar.getName(), null);
+            setAttribute(AttributeName.POLARITY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -502,7 +502,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
           */
         public void setSides(EnumSides enumVar)
         {
-            setAttribute(AttributeName.SIDES, enumVar.getName(), null);
+            setAttribute(AttributeName.SIDES, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -580,7 +580,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
           */
         public void setCenterAcross(EnumCenterAcross enumVar)
         {
-            setAttribute(AttributeName.CENTERACROSS, enumVar.getName(), null);
+            setAttribute(AttributeName.CENTERACROSS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -834,7 +834,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
           */
         public void setSourceWorkStyle(EnumSourceWorkStyle enumVar)
         {
-            setAttribute(AttributeName.SOURCEWORKSTYLE, enumVar.getName(), null);
+            setAttribute(AttributeName.SOURCEWORKSTYLE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

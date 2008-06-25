@@ -231,7 +231,7 @@ public abstract class JDFAutoContentObject extends JDFElement
           */
         public void setType(EnumType enumVar)
         {
-            setAttribute(AttributeName.TYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.TYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

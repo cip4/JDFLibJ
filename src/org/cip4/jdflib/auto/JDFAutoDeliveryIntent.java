@@ -305,7 +305,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
           */
         public void setOwnership(EnumOwnership enumVar)
         {
-            setAttribute(AttributeName.OWNERSHIP, enumVar.getName(), null);
+            setAttribute(AttributeName.OWNERSHIP, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

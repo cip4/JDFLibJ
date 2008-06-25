@@ -308,7 +308,7 @@ public abstract class JDFAutoIDPLayout extends JDFElement
           */
         public void setFinishedPageOrientation(EnumFinishedPageOrientation enumVar)
         {
-            setAttribute(AttributeName.FINISHEDPAGEORIENTATION, enumVar.getName(), null);
+            setAttribute(AttributeName.FINISHEDPAGEORIENTATION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -442,7 +442,7 @@ public abstract class JDFAutoIDPLayout extends JDFElement
           */
         public void setSides(EnumSides enumVar)
         {
-            setAttribute(AttributeName.SIDES, enumVar.getName(), null);
+            setAttribute(AttributeName.SIDES, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

@@ -255,7 +255,7 @@ public abstract class JDFAutoError extends JDFElement
           */
         public void setResend(EnumResend enumVar)
         {
-            setAttribute(AttributeName.RESEND, enumVar.getName(), null);
+            setAttribute(AttributeName.RESEND, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

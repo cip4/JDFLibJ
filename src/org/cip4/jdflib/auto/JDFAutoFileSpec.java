@@ -477,7 +477,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
           */
         public void setDisposition(EnumDisposition enumVar)
         {
-            setAttribute(AttributeName.DISPOSITION, enumVar.getName(), null);
+            setAttribute(AttributeName.DISPOSITION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -675,7 +675,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
           */
         public void setOverwritePolicy(EnumOverwritePolicy enumVar)
         {
-            setAttribute(AttributeName.OVERWRITEPOLICY, enumVar.getName(), null);
+            setAttribute(AttributeName.OVERWRITEPOLICY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -719,7 +719,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
           */
         public void setPageOrder(EnumPageOrder enumVar)
         {
-            setAttribute(AttributeName.PAGEORDER, enumVar.getName(), null);
+            setAttribute(AttributeName.PAGEORDER, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

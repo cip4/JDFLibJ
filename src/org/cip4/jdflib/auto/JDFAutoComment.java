@@ -80,12 +80,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.util.JDFDate;
-    /*
-    *****************************************************************************
-    class JDFAutoComment : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoComment extends JDFElement
 {

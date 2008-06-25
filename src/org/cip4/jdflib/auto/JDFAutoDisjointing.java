@@ -321,7 +321,7 @@ public abstract class JDFAutoDisjointing extends JDFElement
           */
         public void setOffsetDirection(EnumOffsetDirection enumVar)
         {
-            setAttribute(AttributeName.OFFSETDIRECTION, enumVar.getName(), null);
+            setAttribute(AttributeName.OFFSETDIRECTION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

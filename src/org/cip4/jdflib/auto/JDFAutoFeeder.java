@@ -347,7 +347,7 @@ public abstract class JDFAutoFeeder extends JDFElement
           */
         public void setFeederSynchronization(EnumFeederSynchronization enumVar)
         {
-            setAttribute(AttributeName.FEEDERSYNCHRONIZATION, enumVar.getName(), null);
+            setAttribute(AttributeName.FEEDERSYNCHRONIZATION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -413,7 +413,7 @@ public abstract class JDFAutoFeeder extends JDFElement
           */
         public void setOpening(EnumOpening enumVar)
         {
-            setAttribute(AttributeName.OPENING, enumVar.getName(), null);
+            setAttribute(AttributeName.OPENING, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

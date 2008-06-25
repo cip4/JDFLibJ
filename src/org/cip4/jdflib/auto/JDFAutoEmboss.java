@@ -365,7 +365,7 @@ public abstract class JDFAutoEmboss extends JDFElement
           */
         public void setDirection(EnumDirection enumVar)
         {
-            setAttribute(AttributeName.DIRECTION, enumVar.getName(), null);
+            setAttribute(AttributeName.DIRECTION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -409,7 +409,7 @@ public abstract class JDFAutoEmboss extends JDFElement
           */
         public void setEdgeShape(EnumEdgeShape enumVar)
         {
-            setAttribute(AttributeName.EDGESHAPE, enumVar.getName(), null);
+            setAttribute(AttributeName.EDGESHAPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -431,7 +431,7 @@ public abstract class JDFAutoEmboss extends JDFElement
           */
         public void setEmbossingType(EnumEmbossingType enumVar)
         {
-            setAttribute(AttributeName.EMBOSSINGTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.EMBOSSINGTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -509,7 +509,7 @@ public abstract class JDFAutoEmboss extends JDFElement
           */
         public void setLevel(EnumLevel enumVar)
         {
-            setAttribute(AttributeName.LEVEL, enumVar.getName(), null);
+            setAttribute(AttributeName.LEVEL, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

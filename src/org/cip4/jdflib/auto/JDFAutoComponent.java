@@ -516,7 +516,7 @@ public abstract class JDFAutoComponent extends JDFResource
           */
         public void setOverfoldSide(EnumOverfoldSide enumVar)
         {
-            setAttribute(AttributeName.OVERFOLDSIDE, enumVar.getName(), null);
+            setAttribute(AttributeName.OVERFOLDSIDE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

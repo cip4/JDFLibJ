@@ -279,7 +279,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
           */
         public void setBottomColor(EnumNamedColor value)
         {
-            setAttribute(AttributeName.BOTTOMCOLOR, value.getName(), null);
+            setAttribute(AttributeName.BOTTOMCOLOR, value==null ? null : value.getName(), null);
         }
 
         /**
@@ -349,7 +349,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
           */
         public void setTopColor(EnumNamedColor value)
         {
-            setAttribute(AttributeName.TOPCOLOR, value.getName(), null);
+            setAttribute(AttributeName.TOPCOLOR, value==null ? null : value.getName(), null);
         }
 
         /**
@@ -397,7 +397,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
           */
         public void setStripMaterial(EnumStripMaterial enumVar)
         {
-            setAttribute(AttributeName.STRIPMATERIAL, enumVar.getName(), null);
+            setAttribute(AttributeName.STRIPMATERIAL, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

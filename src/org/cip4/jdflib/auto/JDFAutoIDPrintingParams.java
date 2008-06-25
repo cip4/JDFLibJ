@@ -435,7 +435,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
           */
         public void setPageDelivery(EnumPageDelivery enumVar)
         {
-            setAttribute(AttributeName.PAGEDELIVERY, enumVar.getName(), null);
+            setAttribute(AttributeName.PAGEDELIVERY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -457,7 +457,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
           */
         public void setPrintQuality(EnumPrintQuality enumVar)
         {
-            setAttribute(AttributeName.PRINTQUALITY, enumVar.getName(), null);
+            setAttribute(AttributeName.PRINTQUALITY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

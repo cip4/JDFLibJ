@@ -260,7 +260,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
           */
         public void setCoverType(EnumCoverType enumVar)
         {
-            setAttribute(AttributeName.COVERTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.COVERTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

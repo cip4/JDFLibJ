@@ -261,7 +261,7 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
           */
         public void setUserDisplay(EnumUserDisplay enumVar)
         {
-            setAttribute(AttributeName.USERDISPLAY, enumVar.getName(), null);
+            setAttribute(AttributeName.USERDISPLAY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

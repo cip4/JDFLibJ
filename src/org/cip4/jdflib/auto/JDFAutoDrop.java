@@ -407,7 +407,7 @@ public abstract class JDFAutoDrop extends JDFElement
           */
         public void setTransfer(EnumTransfer enumVar)
         {
-            setAttribute(AttributeName.TRANSFER, enumVar.getName(), null);
+            setAttribute(AttributeName.TRANSFER, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

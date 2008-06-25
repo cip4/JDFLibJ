@@ -232,7 +232,7 @@ public abstract class JDFAutoGlue extends JDFElement
           */
         public void setWorkingDirection(EnumWorkingDirection enumVar)
         {
-            setAttribute(AttributeName.WORKINGDIRECTION, enumVar.getName(), null);
+            setAttribute(AttributeName.WORKINGDIRECTION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

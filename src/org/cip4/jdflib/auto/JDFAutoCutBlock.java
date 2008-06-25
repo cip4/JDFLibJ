@@ -387,7 +387,7 @@ public abstract class JDFAutoCutBlock extends JDFResource
           */
         public void setBlockType(EnumBlockType enumVar)
         {
-            setAttribute(AttributeName.BLOCKTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.BLOCKTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -468,7 +468,7 @@ public abstract class JDFAutoCutBlock extends JDFResource
           */
         public void setBlockElementType(EnumBlockElementType enumVar)
         {
-            setAttribute(AttributeName.BLOCKELEMENTTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.BLOCKELEMENTTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

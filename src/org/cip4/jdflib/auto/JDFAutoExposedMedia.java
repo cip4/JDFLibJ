@@ -427,7 +427,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
           */
         public void setColorType(EnumColorType enumVar)
         {
-            setAttribute(AttributeName.COLORTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.COLORTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -483,7 +483,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
           */
         public void setPlateType(EnumPlateType enumVar)
         {
-            setAttribute(AttributeName.PLATETYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.PLATETYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -527,7 +527,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
           */
         public void setProofQuality(EnumProofQuality enumVar)
         {
-            setAttribute(AttributeName.PROOFQUALITY, enumVar.getName(), null);
+            setAttribute(AttributeName.PROOFQUALITY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -549,7 +549,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
           */
         public void setProofType(EnumProofType enumVar)
         {
-            setAttribute(AttributeName.PROOFTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.PROOFTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

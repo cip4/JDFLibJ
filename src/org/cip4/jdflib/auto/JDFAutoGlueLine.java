@@ -340,7 +340,7 @@ public abstract class JDFAutoGlueLine extends JDFResource
           */
         public void setGlueType(EnumGlueType enumVar)
         {
-            setAttribute(AttributeName.GLUETYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.GLUETYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

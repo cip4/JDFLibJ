@@ -237,7 +237,7 @@ public abstract class JDFAutoComChannel extends JDFResource
           */
         public void setChannelType(EnumChannelType enumVar)
         {
-            setAttribute(AttributeName.CHANNELTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.CHANNELTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

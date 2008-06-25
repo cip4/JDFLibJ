@@ -191,7 +191,7 @@ public abstract class JDFAutoDevCap extends JDFElement
           */
         public void setAvailability(JDFDeviceCap.EnumAvailability enumVar)
         {
-            setAttribute(AttributeName.AVAILABILITY, enumVar.getName(), null);
+            setAttribute(AttributeName.AVAILABILITY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

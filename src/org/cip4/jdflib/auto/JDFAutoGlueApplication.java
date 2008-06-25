@@ -245,7 +245,7 @@ public abstract class JDFAutoGlueApplication extends JDFResource
           */
         public void setGluingTechnique(EnumGluingTechnique enumVar)
         {
-            setAttribute(AttributeName.GLUINGTECHNIQUE, enumVar.getName(), null);
+            setAttribute(AttributeName.GLUINGTECHNIQUE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

@@ -257,7 +257,7 @@ public abstract class JDFAutoCutMark extends JDFResource
           */
         public void setMarkType(EnumMarkType enumVar)
         {
-            setAttribute(AttributeName.MARKTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.MARKTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

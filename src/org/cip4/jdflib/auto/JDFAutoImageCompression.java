@@ -520,7 +520,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
           */
         public void setImageDownsampleType(EnumImageDownsampleType enumVar)
         {
-            setAttribute(AttributeName.IMAGEDOWNSAMPLETYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.IMAGEDOWNSAMPLETYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -586,7 +586,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
           */
         public void setImageType(EnumImageType enumVar)
         {
-            setAttribute(AttributeName.IMAGETYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.IMAGETYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

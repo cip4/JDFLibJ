@@ -370,7 +370,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
           */
         public void setDeviceCondition(EnumDeviceCondition enumVar)
         {
-            setAttribute(AttributeName.DEVICECONDITION, enumVar.getName(), null);
+            setAttribute(AttributeName.DEVICECONDITION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -414,7 +414,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
           */
         public void setDeviceOperationMode(EnumDeviceOperationMode enumVar)
         {
-            setAttribute(AttributeName.DEVICEOPERATIONMODE, enumVar.getName(), null);
+            setAttribute(AttributeName.DEVICEOPERATIONMODE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

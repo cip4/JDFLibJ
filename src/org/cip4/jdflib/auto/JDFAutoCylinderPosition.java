@@ -298,7 +298,7 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
           */
         public void setPlateType(EnumPlateType enumVar)
         {
-            setAttribute(AttributeName.PLATETYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.PLATETYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -320,7 +320,7 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
           */
         public void setPlateUsage(EnumPlateUsage enumVar)
         {
-            setAttribute(AttributeName.PLATEUSAGE, enumVar.getName(), null);
+            setAttribute(AttributeName.PLATEUSAGE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

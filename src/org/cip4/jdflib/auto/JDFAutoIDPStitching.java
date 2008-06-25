@@ -289,7 +289,7 @@ public abstract class JDFAutoIDPStitching extends JDFElement
           */
         public void setStitchingPosition(EnumStitchingPosition enumVar)
         {
-            setAttribute(AttributeName.STITCHINGPOSITION, enumVar.getName(), null);
+            setAttribute(AttributeName.STITCHINGPOSITION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -311,7 +311,7 @@ public abstract class JDFAutoIDPStitching extends JDFElement
           */
         public void setStitchingReferenceEdge(EnumStitchingReferenceEdge enumVar)
         {
-            setAttribute(AttributeName.STITCHINGREFERENCEEDGE, enumVar.getName(), null);
+            setAttribute(AttributeName.STITCHINGREFERENCEEDGE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

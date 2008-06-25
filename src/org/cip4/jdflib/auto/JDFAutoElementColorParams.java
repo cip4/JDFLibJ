@@ -275,7 +275,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
           */
         public void setICCOutputProfileUsage(EnumICCOutputProfileUsage enumVar)
         {
-            setAttribute(AttributeName.ICCOUTPUTPROFILEUSAGE, enumVar.getName(), null);
+            setAttribute(AttributeName.ICCOUTPUTPROFILEUSAGE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

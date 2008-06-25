@@ -239,7 +239,7 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
           */
         public void setHoleReferenceEdge(EnumHoleReferenceEdge enumVar)
         {
-            setAttribute(AttributeName.HOLEREFERENCEEDGE, enumVar.getName(), null);
+            setAttribute(AttributeName.HOLEREFERENCEEDGE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

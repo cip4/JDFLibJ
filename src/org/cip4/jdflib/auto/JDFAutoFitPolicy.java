@@ -329,7 +329,7 @@ public abstract class JDFAutoFitPolicy extends JDFResource
           */
         public void setGutterPolicy(EnumGutterPolicy enumVar)
         {
-            setAttribute(AttributeName.GUTTERPOLICY, enumVar.getName(), null);
+            setAttribute(AttributeName.GUTTERPOLICY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -419,7 +419,7 @@ public abstract class JDFAutoFitPolicy extends JDFResource
           */
         public void setRotatePolicy(EnumRotatePolicy enumVar)
         {
-            setAttribute(AttributeName.ROTATEPOLICY, enumVar.getName(), null);
+            setAttribute(AttributeName.ROTATEPOLICY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -441,7 +441,7 @@ public abstract class JDFAutoFitPolicy extends JDFResource
           */
         public void setSizePolicy(EnumSizePolicy enumVar)
         {
-            setAttribute(AttributeName.SIZEPOLICY, enumVar.getName(), null);
+            setAttribute(AttributeName.SIZEPOLICY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

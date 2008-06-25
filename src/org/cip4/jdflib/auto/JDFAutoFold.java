@@ -275,7 +275,7 @@ public abstract class JDFAutoFold extends JDFResource
           */
         public void setFrom(EnumFrom enumVar)
         {
-            setAttribute(AttributeName.FROM, enumVar.getName(), null);
+            setAttribute(AttributeName.FROM, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -297,7 +297,7 @@ public abstract class JDFAutoFold extends JDFResource
           */
         public void setTo(EnumTo enumVar)
         {
-            setAttribute(AttributeName.TO, enumVar.getName(), null);
+            setAttribute(AttributeName.TO, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

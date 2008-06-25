@@ -344,7 +344,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
           */
         public void setEncoding(EnumEncoding enumVar)
         {
-            setAttribute(AttributeName.ENCODING, enumVar.getName(), null);
+            setAttribute(AttributeName.ENCODING, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -500,7 +500,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
           */
         public void setPosition(EnumPosition enumVar)
         {
-            setAttribute(AttributeName.POSITION, enumVar.getName(), null);
+            setAttribute(AttributeName.POSITION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -522,7 +522,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
           */
         public void setPurpose(EnumPurpose enumVar)
         {
-            setAttribute(AttributeName.PURPOSE, enumVar.getName(), null);
+            setAttribute(AttributeName.PURPOSE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

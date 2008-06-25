@@ -269,7 +269,7 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
           */
         public void setPositionX(EnumPositionX enumVar)
         {
-            setAttribute(AttributeName.POSITIONX, enumVar.getName(), null);
+            setAttribute(AttributeName.POSITIONX, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -291,7 +291,7 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
           */
         public void setPositionY(EnumPositionY enumVar)
         {
-            setAttribute(AttributeName.POSITIONY, enumVar.getName(), null);
+            setAttribute(AttributeName.POSITIONY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

@@ -236,7 +236,7 @@ public abstract class JDFAutoFolderProduction extends JDFElement
           */
         public void setProductionType(EnumProductionType enumVar)
         {
-            setAttribute(AttributeName.PRODUCTIONTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.PRODUCTIONTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

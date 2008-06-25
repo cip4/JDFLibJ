@@ -552,7 +552,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
           */
         public void setCollate(EnumCollate enumVar)
         {
-            setAttribute(AttributeName.COLLATE, enumVar.getName(), null);
+            setAttribute(AttributeName.COLLATE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -596,7 +596,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
           */
         public void setPrintQuality(EnumPrintQuality enumVar)
         {
-            setAttribute(AttributeName.PRINTQUALITY, enumVar.getName(), null);
+            setAttribute(AttributeName.PRINTQUALITY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -706,7 +706,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
           */
         public void setPageDelivery(EnumPageDelivery enumVar)
         {
-            setAttribute(AttributeName.PAGEDELIVERY, enumVar.getName(), null);
+            setAttribute(AttributeName.PAGEDELIVERY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -728,7 +728,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
           */
         public void setPrintingType(EnumPrintingType enumVar)
         {
-            setAttribute(AttributeName.PRINTINGTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.PRINTINGTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -750,7 +750,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
           */
         public void setSheetLay(EnumSheetLay enumVar)
         {
-            setAttribute(AttributeName.SHEETLAY, enumVar.getName(), null);
+            setAttribute(AttributeName.SHEETLAY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -772,7 +772,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
           */
         public void setSides(EnumSides enumVar)
         {
-            setAttribute(AttributeName.SIDES, enumVar.getName(), null);
+            setAttribute(AttributeName.SIDES, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

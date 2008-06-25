@@ -257,7 +257,7 @@ public abstract class JDFAutoFontParams extends JDFResource
           */
         public void setCannotEmbedFontPolicy(EnumCannotEmbedFontPolicy enumVar)
         {
-            setAttribute(AttributeName.CANNOTEMBEDFONTPOLICY, enumVar.getName(), null);
+            setAttribute(AttributeName.CANNOTEMBEDFONTPOLICY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

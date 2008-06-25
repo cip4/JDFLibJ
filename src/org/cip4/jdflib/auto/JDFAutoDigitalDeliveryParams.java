@@ -247,7 +247,7 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
           */
         public void setDigitalDeliveryDirection(EnumDigitalDeliveryDirection enumVar)
         {
-            setAttribute(AttributeName.DIGITALDELIVERYDIRECTION, enumVar.getName(), null);
+            setAttribute(AttributeName.DIGITALDELIVERYDIRECTION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

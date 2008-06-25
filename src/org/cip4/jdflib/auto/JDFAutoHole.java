@@ -301,7 +301,7 @@ public abstract class JDFAutoHole extends JDFResource
           */
         public void setShape(EnumShape enumVar)
         {
-            setAttribute(AttributeName.SHAPE, enumVar.getName(), null);
+            setAttribute(AttributeName.SHAPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

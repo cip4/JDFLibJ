@@ -253,7 +253,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
           */
         public void setAvailability(JDFDeviceCap.EnumAvailability enumVar)
         {
-            setAttribute(AttributeName.AVAILABILITY, enumVar.getName(), null);
+            setAttribute(AttributeName.AVAILABILITY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -275,7 +275,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
           */
         public void setContext(EnumContext enumVar)
         {
-            setAttribute(AttributeName.CONTEXT, enumVar.getName(), null);
+            setAttribute(AttributeName.CONTEXT, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -366,7 +366,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
           */
         public void setLinkUsage(JDFResourceLink.EnumUsage enumVar)
         {
-            setAttribute(AttributeName.LINKUSAGE, enumVar.getName(), null);
+            setAttribute(AttributeName.LINKUSAGE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

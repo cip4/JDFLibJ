@@ -237,7 +237,7 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
           */
         public void setDeviceDetails(EnumDeviceDetails enumVar)
         {
-            setAttribute(AttributeName.DEVICEDETAILS, enumVar.getName(), null);
+            setAttribute(AttributeName.DEVICEDETAILS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

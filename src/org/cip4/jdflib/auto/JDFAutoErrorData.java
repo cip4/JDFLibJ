@@ -218,7 +218,7 @@ public abstract class JDFAutoErrorData extends JDFElement
           */
         public void setErrorType(EnumErrorType enumVar)
         {
-            setAttribute(AttributeName.ERRORTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.ERRORTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

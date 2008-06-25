@@ -231,7 +231,7 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
           */
         public void setFlushPolicy(EnumFlushPolicy enumVar)
         {
-            setAttribute(AttributeName.FLUSHPOLICY, enumVar.getName(), null);
+            setAttribute(AttributeName.FLUSHPOLICY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

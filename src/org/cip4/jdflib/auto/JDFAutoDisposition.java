@@ -84,12 +84,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
-    /*
-    *****************************************************************************
-    class JDFAutoDisposition : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoDisposition extends JDFElement
 {
@@ -267,7 +261,7 @@ public abstract class JDFAutoDisposition extends JDFElement
           */
         public void setDispositionAction(EnumDispositionAction enumVar)
         {
-            setAttribute(AttributeName.DISPOSITIONACTION, enumVar.getName(), null);
+            setAttribute(AttributeName.DISPOSITIONACTION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -311,7 +305,7 @@ public abstract class JDFAutoDisposition extends JDFElement
           */
         public void setDispositionUsage(EnumDispositionUsage enumVar)
         {
-            setAttribute(AttributeName.DISPOSITIONUSAGE, enumVar.getName(), null);
+            setAttribute(AttributeName.DISPOSITIONUSAGE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

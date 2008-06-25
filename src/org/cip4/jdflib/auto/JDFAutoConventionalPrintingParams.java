@@ -573,7 +573,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
           */
         public void setDrying(EnumDrying enumVar)
         {
-            setAttribute(AttributeName.DRYING, enumVar.getName(), null);
+            setAttribute(AttributeName.DRYING, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -595,7 +595,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
           */
         public void setFirstSurface(EnumFirstSurface enumVar)
         {
-            setAttribute(AttributeName.FIRSTSURFACE, enumVar.getName(), null);
+            setAttribute(AttributeName.FIRSTSURFACE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -617,7 +617,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
           */
         public void setFountainSolution(EnumFountainSolution enumVar)
         {
-            setAttribute(AttributeName.FOUNTAINSOLUTION, enumVar.getName(), null);
+            setAttribute(AttributeName.FOUNTAINSOLUTION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -695,7 +695,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
           */
         public void setModuleDrying(EnumModuleDrying enumVar)
         {
-            setAttribute(AttributeName.MODULEDRYING, enumVar.getName(), null);
+            setAttribute(AttributeName.MODULEDRYING, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -883,7 +883,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
           */
         public void setPrintingType(EnumPrintingType enumVar)
         {
-            setAttribute(AttributeName.PRINTINGTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.PRINTINGTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -905,7 +905,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
           */
         public void setSheetLay(EnumSheetLay enumVar)
         {
-            setAttribute(AttributeName.SHEETLAY, enumVar.getName(), null);
+            setAttribute(AttributeName.SHEETLAY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -949,7 +949,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
           */
         public void setWorkStyle(EnumWorkStyle enumVar)
         {
-            setAttribute(AttributeName.WORKSTYLE, enumVar.getName(), null);
+            setAttribute(AttributeName.WORKSTYLE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
