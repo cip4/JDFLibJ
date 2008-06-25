@@ -495,7 +495,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
           */
         public void setRenderingIntent(EnumRenderingIntent enumVar)
         {
-            setAttribute(AttributeName.RENDERINGINTENT, enumVar.getName(), null);
+            setAttribute(AttributeName.RENDERINGINTENT, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -583,7 +583,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
           */
         public void setOperation(EnumOperation enumVar)
         {
-            setAttribute(AttributeName.OPERATION, enumVar.getName(), null);
+            setAttribute(AttributeName.OPERATION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -605,7 +605,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
           */
         public void setSourceCS(EnumSourceCS enumVar)
         {
-            setAttribute(AttributeName.SOURCECS, enumVar.getName(), null);
+            setAttribute(AttributeName.SOURCECS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -627,7 +627,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
           */
         public void setSourceRenderingIntent(EnumSourceRenderingIntent enumVar)
         {
-            setAttribute(AttributeName.SOURCERENDERINGINTENT, enumVar.getName(), null);
+            setAttribute(AttributeName.SOURCERENDERINGINTENT, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

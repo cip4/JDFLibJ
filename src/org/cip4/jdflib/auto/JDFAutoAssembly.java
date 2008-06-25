@@ -355,7 +355,7 @@ public abstract class JDFAutoAssembly extends JDFResource
           */
         public void setJogSide(EnumJogSide enumVar)
         {
-            setAttribute(AttributeName.JOGSIDE, enumVar.getName(), null);
+            setAttribute(AttributeName.JOGSIDE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -377,7 +377,7 @@ public abstract class JDFAutoAssembly extends JDFResource
           */
         public void setOrder(EnumOrder enumVar)
         {
-            setAttribute(AttributeName.ORDER, enumVar.getName(), null);
+            setAttribute(AttributeName.ORDER, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -399,7 +399,7 @@ public abstract class JDFAutoAssembly extends JDFResource
           */
         public void setBindingSide(EnumBindingSide enumVar)
         {
-            setAttribute(AttributeName.BINDINGSIDE, enumVar.getName(), null);
+            setAttribute(AttributeName.BINDINGSIDE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

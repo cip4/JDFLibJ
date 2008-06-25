@@ -256,7 +256,7 @@ public abstract class JDFAutoAncestor extends JDFElement
           */
         public void setActivation(EnumActivation enumVar)
         {
-            setAttribute(AttributeName.ACTIVATION, enumVar.getName(), null);
+            setAttribute(AttributeName.ACTIVATION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -369,7 +369,7 @@ public abstract class JDFAutoAncestor extends JDFElement
           */
         public void setMaxVersion(EnumVersion enumVar)
         {
-            setAttribute(AttributeName.MAXVERSION, enumVar.getName(), null);
+            setAttribute(AttributeName.MAXVERSION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

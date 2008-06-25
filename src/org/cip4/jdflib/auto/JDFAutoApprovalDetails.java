@@ -235,7 +235,7 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
           */
         public void setApprovalState(EnumApprovalState enumVar)
         {
-            setAttribute(AttributeName.APPROVALSTATE, enumVar.getName(), null);
+            setAttribute(AttributeName.APPROVALSTATE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

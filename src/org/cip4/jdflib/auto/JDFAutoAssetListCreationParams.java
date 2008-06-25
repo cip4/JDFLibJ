@@ -246,7 +246,7 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
           */
         public void setListPolicy(EnumListPolicy enumVar)
         {
-            setAttribute(AttributeName.LISTPOLICY, enumVar.getName(), null);
+            setAttribute(AttributeName.LISTPOLICY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

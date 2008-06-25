@@ -240,7 +240,7 @@ public abstract class JDFAutoChangedPath extends JDFElement
           */
         public void setModification(EnumModification enumVar)
         {
-            setAttribute(AttributeName.MODIFICATION, enumVar.getName(), null);
+            setAttribute(AttributeName.MODIFICATION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

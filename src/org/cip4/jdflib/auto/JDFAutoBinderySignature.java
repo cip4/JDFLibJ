@@ -409,7 +409,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
           */
         public void setBinderySignatureType(EnumBinderySignatureType enumVar)
         {
-            setAttribute(AttributeName.BINDERYSIGNATURETYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.BINDERYSIGNATURETYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -431,7 +431,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
           */
         public void setBindingEdge(EnumBindingEdge enumVar)
         {
-            setAttribute(AttributeName.BINDINGEDGE, enumVar.getName(), null);
+            setAttribute(AttributeName.BINDINGEDGE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -453,7 +453,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
           */
         public void setJogEdge(EnumJogEdge enumVar)
         {
-            setAttribute(AttributeName.JOGEDGE, enumVar.getName(), null);
+            setAttribute(AttributeName.JOGEDGE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -531,7 +531,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
           */
         public void setBindingOrientation(EnumBindingOrientation enumVar)
         {
-            setAttribute(AttributeName.BINDINGORIENTATION, enumVar.getName(), null);
+            setAttribute(AttributeName.BINDINGORIENTATION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

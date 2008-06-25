@@ -269,7 +269,7 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
           */
         public void setFromBox(EnumFromBox enumVar)
         {
-            setAttribute(AttributeName.FROMBOX, enumVar.getName(), null);
+            setAttribute(AttributeName.FROMBOX, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -291,7 +291,7 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
           */
         public void setToBox(EnumToBox enumVar)
         {
-            setAttribute(AttributeName.TOBOX, enumVar.getName(), null);
+            setAttribute(AttributeName.TOBOX, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

@@ -236,7 +236,7 @@ public abstract class JDFAutoAction extends JDFElement
           */
         public void setSeverity(EnumSeverity enumVar)
         {
-            setAttribute(AttributeName.SEVERITY, enumVar.getName(), null);
+            setAttribute(AttributeName.SEVERITY, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

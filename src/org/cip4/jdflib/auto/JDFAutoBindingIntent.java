@@ -277,7 +277,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
           */
         public void setBindingOrder(EnumBindingOrder enumVar)
         {
-            setAttribute(AttributeName.BINDINGORDER, enumVar.getName(), null);
+            setAttribute(AttributeName.BINDINGORDER, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

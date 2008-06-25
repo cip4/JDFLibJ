@@ -414,7 +414,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
           */
         public void setPreflightStatus(EnumPreflightStatus enumVar)
         {
-            setAttribute(AttributeName.PREFLIGHTSTATUS, enumVar.getName(), null);
+            setAttribute(AttributeName.PREFLIGHTSTATUS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

@@ -257,7 +257,7 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
           */
         public void setApprovalRole(EnumApprovalRole enumVar)
         {
-            setAttribute(AttributeName.APPROVALROLE, enumVar.getName(), null);
+            setAttribute(AttributeName.APPROVALROLE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

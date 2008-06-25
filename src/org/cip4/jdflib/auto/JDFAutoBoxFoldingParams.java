@@ -330,7 +330,7 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
           */
         public void setBoxFoldingType(EnumBoxFoldingType enumVar)
         {
-            setAttribute(AttributeName.BOXFOLDINGTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.BOXFOLDINGTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

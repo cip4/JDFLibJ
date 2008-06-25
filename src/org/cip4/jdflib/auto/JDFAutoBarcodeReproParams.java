@@ -297,7 +297,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
           */
         public void setBearerBars(EnumBearerBars enumVar)
         {
-            setAttribute(AttributeName.BEARERBARS, enumVar.getName(), null);
+            setAttribute(AttributeName.BEARERBARS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -363,7 +363,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
           */
         public void setMasking(EnumMasking enumVar)
         {
-            setAttribute(AttributeName.MASKING, enumVar.getName(), null);
+            setAttribute(AttributeName.MASKING, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

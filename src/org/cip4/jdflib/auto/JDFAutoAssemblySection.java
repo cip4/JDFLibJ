@@ -304,7 +304,7 @@ public abstract class JDFAutoAssemblySection extends JDFElement
           */
         public void setOrder(EnumOrder enumVar)
         {
-            setAttribute(AttributeName.ORDER, enumVar.getName(), null);
+            setAttribute(AttributeName.ORDER, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

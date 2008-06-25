@@ -468,7 +468,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
           */
         public void setDensityStandard(EnumDensityStandard enumVar)
         {
-            setAttribute(AttributeName.DENSITYSTANDARD, enumVar.getName(), null);
+            setAttribute(AttributeName.DENSITYSTANDARD, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -490,7 +490,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
           */
         public void setIllumination(EnumIllumination enumVar)
         {
-            setAttribute(AttributeName.ILLUMINATION, enumVar.getName(), null);
+            setAttribute(AttributeName.ILLUMINATION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -556,7 +556,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
           */
         public void setInkState(EnumInkState enumVar)
         {
-            setAttribute(AttributeName.INKSTATE, enumVar.getName(), null);
+            setAttribute(AttributeName.INKSTATE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -578,7 +578,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
           */
         public void setMeasurementFilter(EnumMeasurementFilter enumVar)
         {
-            setAttribute(AttributeName.MEASUREMENTFILTER, enumVar.getName(), null);
+            setAttribute(AttributeName.MEASUREMENTFILTER, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -600,7 +600,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
           */
         public void setSampleBacking(EnumSampleBacking enumVar)
         {
-            setAttribute(AttributeName.SAMPLEBACKING, enumVar.getName(), null);
+            setAttribute(AttributeName.SAMPLEBACKING, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -622,7 +622,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
           */
         public void setWhiteBase(EnumWhiteBase enumVar)
         {
-            setAttribute(AttributeName.WHITEBASE, enumVar.getName(), null);
+            setAttribute(AttributeName.WHITEBASE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

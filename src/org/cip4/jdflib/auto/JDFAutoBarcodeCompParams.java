@@ -228,7 +228,7 @@ public abstract class JDFAutoBarcodeCompParams extends JDFResource
           */
         public void setCompensationProcess(EnumCompensationProcess enumVar)
         {
-            setAttribute(AttributeName.COMPENSATIONPROCESS, enumVar.getName(), null);
+            setAttribute(AttributeName.COMPENSATIONPROCESS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

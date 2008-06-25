@@ -292,7 +292,7 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
           */
         public void setTightBacking(EnumTightBacking enumVar)
         {
-            setAttribute(AttributeName.TIGHTBACKING, enumVar.getName(), null);
+            setAttribute(AttributeName.TIGHTBACKING, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

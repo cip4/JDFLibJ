@@ -261,7 +261,7 @@ public abstract class JDFAutoBundle extends JDFResource
           */
         public void setBundleType(EnumBundleType enumVar)
         {
-            setAttribute(AttributeName.BUNDLETYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.BUNDLETYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

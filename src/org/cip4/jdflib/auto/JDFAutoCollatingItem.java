@@ -335,7 +335,7 @@ public abstract class JDFAutoCollatingItem extends JDFElement
           */
         public void setOrientation(EnumOrientation enumVar)
         {
-            setAttribute(AttributeName.ORIENTATION, enumVar.getName(), null);
+            setAttribute(AttributeName.ORIENTATION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -391,7 +391,7 @@ public abstract class JDFAutoCollatingItem extends JDFElement
           */
         public void setTransformationContext(EnumTransformationContext enumVar)
         {
-            setAttribute(AttributeName.TRANSFORMATIONCONTEXT, enumVar.getName(), null);
+            setAttribute(AttributeName.TRANSFORMATIONCONTEXT, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

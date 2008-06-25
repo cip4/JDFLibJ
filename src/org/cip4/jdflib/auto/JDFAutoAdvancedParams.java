@@ -583,7 +583,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
           */
         public void setTransferFunctionInfo(EnumTransferFunctionInfo enumVar)
         {
-            setAttribute(AttributeName.TRANSFERFUNCTIONINFO, enumVar.getName(), null);
+            setAttribute(AttributeName.TRANSFERFUNCTIONINFO, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -605,7 +605,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
           */
         public void setUCRandBGInfo(EnumUCRandBGInfo enumVar)
         {
-            setAttribute(AttributeName.UCRANDBGINFO, enumVar.getName(), null);
+            setAttribute(AttributeName.UCRANDBGINFO, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

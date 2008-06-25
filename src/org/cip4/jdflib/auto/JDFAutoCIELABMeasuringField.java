@@ -331,7 +331,7 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
           */
         public void setDensityStandard(EnumDensityStandard enumVar)
         {
-            setAttribute(AttributeName.DENSITYSTANDARD, enumVar.getName(), null);
+            setAttribute(AttributeName.DENSITYSTANDARD, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

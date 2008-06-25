@@ -269,7 +269,7 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
           */
         public void setListType(EnumListType enumVar)
         {
-            setAttribute(AttributeName.LISTTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.LISTTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

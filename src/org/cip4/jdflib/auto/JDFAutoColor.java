@@ -322,7 +322,7 @@ public abstract class JDFAutoColor extends JDFResource
           */
         public void setMappingSelection(EnumMappingSelection enumVar)
         {
-            setAttribute(AttributeName.MAPPINGSELECTION, enumVar.getName(), null);
+            setAttribute(AttributeName.MAPPINGSELECTION, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -510,7 +510,7 @@ public abstract class JDFAutoColor extends JDFResource
           */
         public void setColorName(EnumNamedColor value)
         {
-            setAttribute(AttributeName.COLORNAME, value.getName(), null);
+            setAttribute(AttributeName.COLORNAME, value==null ? null : value.getName(), null);
         }
 
         /**
@@ -536,7 +536,7 @@ public abstract class JDFAutoColor extends JDFResource
           */
         public void setColorType(EnumColorType enumVar)
         {
-            setAttribute(AttributeName.COLORTYPE, enumVar.getName(), null);
+            setAttribute(AttributeName.COLORTYPE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**

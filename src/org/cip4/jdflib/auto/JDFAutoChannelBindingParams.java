@@ -229,7 +229,7 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
           */
         public void setClampColor(EnumNamedColor value)
         {
-            setAttribute(AttributeName.CLAMPCOLOR, value.getName(), null);
+            setAttribute(AttributeName.CLAMPCOLOR, value==null ? null : value.getName(), null);
         }
 
         /**

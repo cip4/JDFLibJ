@@ -269,7 +269,7 @@ public abstract class JDFAutoBoxArgument extends JDFElement
           */
         public void setBox(EnumBox enumVar)
         {
-            setAttribute(AttributeName.BOX, enumVar.getName(), null);
+            setAttribute(AttributeName.BOX, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
@@ -291,7 +291,7 @@ public abstract class JDFAutoBoxArgument extends JDFElement
           */
         public void setMirrorMargins(EnumMirrorMargins enumVar)
         {
-            setAttribute(AttributeName.MIRRORMARGINS, enumVar.getName(), null);
+            setAttribute(AttributeName.MIRRORMARGINS, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
