@@ -101,6 +101,17 @@ public class JDFQueue extends JDFAutoQueue
      */
     private int maxCompletedEntries=0;
     private boolean automated=false;
+    private CleanupCallback cleanupCallback=null;
+    /** 
+     * callback class definition for cleaning up in cleanup
+     * called once for every qe that is removed
+     * @author prosirai
+     *
+     */
+    public abstract static class CleanupCallback
+    {
+        public abstract void cleanEntry(JDFQueueEntry qe);
+    }
 
     /**
      * Constructor for JDFQueue
@@ -463,7 +474,9 @@ public class JDFQueue extends JDFAutoQueue
     /**
      * remove all entries with Status=Removed and any entries 
      * over maxCompleted that are either aborted or completed @see {@link JDFQueueEntry}.isCompleted()
+     * @return a vector of all removed elements
      */
+    
     public synchronized void cleanup()
     {
         VElement v=getQueueEntryVector();
@@ -474,14 +487,23 @@ public class JDFQueue extends JDFAutoQueue
             JDFQueueEntry qe=(JDFQueueEntry)v.elementAt(i);
             EnumQueueEntryStatus status=qe.getQueueEntryStatus();
             if(EnumQueueEntryStatus.Removed.equals(status))
+            {
+                if(cleanupCallback!=null)
+                    cleanupCallback.cleanEntry(qe);
                 qe.deleteNode();
+            }
             else if(qe.isCompleted())
             {
                 if(nBad++>=maxCompletedEntries)
+                {
+                    if(cleanupCallback!=null)
+                        cleanupCallback.cleanEntry(qe);
+     
                     qe.deleteNode();
+                }
             }
-        }         
-    }
+        } 
+     }
 
     /**
      * copies this to the JDF Response resp, applying the filters defined in filter
@@ -589,10 +611,12 @@ public class JDFQueue extends JDFAutoQueue
      * also call cleanup if we are automated
      * 
      * @param maxCompletedEntries the maxCompletedEntries to set
+     * @return {@link VElement} the list of removed entries due to cleanup
      */
     public void setMaxCompletedEntries(int _maxCompletedEntries)
     {
         this.maxCompletedEntries = _maxCompletedEntries;
+        VElement v=null;
         if(automated)
             cleanup();
     }
@@ -613,6 +637,14 @@ public class JDFQueue extends JDFAutoQueue
         this.maxRunningEntries = _maxRunningEntries;
         if(automated)
             setStatusFromEntries();
+    }
+
+    /**
+     * @param cleanupCallback the cleanupCallback to set
+     */
+    public void setCleanupCallback(CleanupCallback cleanupCallback)
+    {
+        this.cleanupCallback = cleanupCallback;
     }
 
 }

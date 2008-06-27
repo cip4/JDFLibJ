@@ -116,6 +116,7 @@ import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.JDFProcessRun;
 import org.cip4.jdflib.resource.JDFResourceAudit;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -684,29 +685,18 @@ public class JDFAuditPool extends JDFPool
         JDFPhaseTime pt = getLastPhase(vmParts,null);
         if("".equals(statusDetails))
             statusDetails=null;
+        
         if (pt == null)
         {
             pt = addPhaseTime(status, null ,vmParts);
+            pt.setStatusDetails(statusDetails);
         }
-        else if (!pt.getStatus().equals(status)
-                || (statusDetails!=null && !statusDetails.equals(pt.getStatusDetails()) ))
+        else if (!ContainerUtil.equals(pt.getStatus(), status) || !ContainerUtil.equals(statusDetails,pt.getAttribute(AttributeName.STATUSDETAILS, null, null))) 
         {
             pt.setEnd(new JDFDate());
             pt = addPhaseTime(status, null,vmParts);
-        }
-        else
-        {
-            // no change but keep stop time
-           // pt.setEnd(new JDFDate());
-            return pt;
-        }
-        if (statusDetails != null)
-        {
             pt.setStatusDetails(statusDetails);
         }
-
-        pt.setPartMapVector(vmParts);
-
         return pt;
     }
 

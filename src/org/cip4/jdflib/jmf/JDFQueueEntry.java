@@ -214,7 +214,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry
      */
     public void setPriority(int value)
     {
-        int oldVal=getPriority();
+        int oldVal=hasAttribute(AttributeName.PRIORITY)?getPriority():-1;
         if(isAutomated()&& value!=oldVal)
         {
             final JDFQueue queue = (JDFQueue)getParentNode_KElement();

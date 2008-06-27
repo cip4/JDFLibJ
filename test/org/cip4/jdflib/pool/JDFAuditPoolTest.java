@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -191,6 +191,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
         assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true).size(), 1);
         JDFPhaseTime p2=myAuditPool.setPhase(EnumNodeStatus.Setup, "foobar", null);
         assertNotNull(p2);
+        assertNotSame(p1,p2);
         assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true).size(), 2);
         p2=myAuditPool.setPhase(EnumNodeStatus.Setup, "foobar", null);
         assertNotNull(p2);
@@ -198,11 +199,12 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
         p2=myAuditPool.setPhase(EnumNodeStatus.Ready, "foobar", null);
         assertNotNull(p2);
         assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true).size(), 3);
-        p2=myAuditPool.setPhase(EnumNodeStatus.InProgress, null, null);
-        assertNotNull(p2);
+        p1=myAuditPool.setPhase(EnumNodeStatus.InProgress, null, null);
+        assertNotNull(p1);
         assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true).size(), 4);
         p2=myAuditPool.setPhase(EnumNodeStatus.InProgress, null, null);
         assertNotNull(p2);
+        assertEquals(p1,p2);
         assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true).size(), 4);
     }
     
@@ -294,5 +296,9 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
         assertEquals(myAuditPool.getAudit(0, EnumAuditType.Deleted, null, null), a1);
         assertEquals(myAuditPool.getAudit(-1, EnumAuditType.Created, null, null), a2);
     }
-    
+    @Override
+    public String toString()
+    {
+        return myAuditPool==null ? "null" : myAuditPool.toString();
+    }
 }

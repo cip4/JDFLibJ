@@ -70,8 +70,15 @@
  */
 package org.cip4.jdflib.util;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
+
+import org.apache.commons.io.IOUtils;
 
 /**
  *
@@ -127,9 +134,8 @@ public class DumpDir {
 
     
     /** 
-     * Handles all HTTP <code>POST</code> methods.
-     * @param request servlet request
-     * @param response servlet response
+     * create a new File in this dump
+     * 
      */
     public File newFile()
     {
@@ -142,6 +148,39 @@ public class DumpDir {
         cleanup(inc);
         return f;
     }
+    /** 
+     * create a new File in this dump and fill it from is
+     * @param is the input stream to fill
+     * 
+     */
+
+    public File newFileFromStream(InputStream is)
+    {
+        File dump=newFile();
+        FileOutputStream fs;
+        try
+        {
+            fs = new FileOutputStream(dump);
+            if(!(is instanceof BufferedInputStream))
+            {
+                is=new BufferedInputStream(is);
+                is.mark(100000);
+            }
+            IOUtils.copy(is, fs);
+            fs.flush();
+            fs.close();
+            is.reset();
+       }
+        catch (FileNotFoundException x)
+        {
+            //
+        }
+        catch (IOException x)
+        {
+            //
+        }
+        return dump;
+     }
 
     /**
      * @param inc
@@ -166,6 +205,10 @@ public class DumpDir {
             }
         }
     }
-
+    @Override
+    public String toString()
+    {
+        return "DumpDir "+baseDir;
+    }
 
 }

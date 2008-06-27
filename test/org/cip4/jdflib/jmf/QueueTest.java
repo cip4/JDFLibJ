@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.jmf.JDFQueue.CleanupCallback;
 import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StatusCounter;
@@ -110,6 +111,20 @@ public class QueueTest extends TestCase
         }
     }
 
+    private class MyClean extends CleanupCallback
+    {
+
+        public int i=0;
+        /* (non-Javadoc)
+         * @see org.cip4.jdflib.jmf.JDFQueue.CleanupCallback#cleanEntry(org.cip4.jdflib.jmf.JDFQueueEntry)
+         */
+        @Override
+        public void cleanEntry(JDFQueueEntry qe)
+        {
+            i++;
+         }
+        
+    }
     public String toString()
     {
         return q==null ? "null" : q.toString();
@@ -250,14 +265,21 @@ public class QueueTest extends TestCase
 
     public void testCleanup()
     {
+        
         JDFQueueEntry qe=q.appendQueueEntry();
+        MyClean myClean = new MyClean();
+        assertEquals(myClean.i, 0);
+        q.setCleanupCallback(myClean);
         qe.setQueueEntryStatus(EnumQueueEntryStatus.Removed);
+        q.setAutomated(true);
         q.setMaxCompletedEntries(1);
-        q.cleanup();
         assertFalse(q.getQueueEntryVector().contains(qe));
+        assertEquals(myClean.i, 1);
         assertEquals("removed completed and aborted",q.numEntries(null), 5);
         q.setMaxCompletedEntries(0);
         q.cleanup();
+        assertEquals(myClean.i, 2);
+
         assertEquals("removed completed and aborted",q.numEntries(null), 4);
     }
 /////////////////////////////////////////////////////////////////////////////

@@ -2542,6 +2542,8 @@ public class JDFResourceLink extends JDFElement
         bMatch = bMatch || namedResLink.equals(getNodeName());
         bMatch = bMatch || namedResLink.equals(getrRef());
         bMatch = bMatch || namedResLink.equals(getAttribute(AttributeName.USAGE));
+        bMatch = bMatch || namedResLink.equals(getLinkedResourceName()+JDFConstants.COLON+getAttribute(AttributeName.USAGE));
+
         if(!bMatch && StringUtil.token(namedResLink, 0, JDFConstants.COLON).equals(getLinkedResourceName()))
         {
             VElement v=getTargetVector(0);

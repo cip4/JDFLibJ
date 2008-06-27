@@ -139,6 +139,7 @@ public class ContainerUtil
             v.add(l[i]);
         return v;
     }
+ 
     /**
      * create a Vector of entry values from a map
      * 
@@ -163,7 +164,11 @@ public class ContainerUtil
             keys.ensureCapacity(entrySet.size());
             
             while(it.hasNext())
-                keys.add(it.next().getKey());
+            {
+                a key = it.next().getKey();
+                if(key!=null)
+                    keys.add(key);
+            }
             
             Collections.sort((Vector)keys);
             for(int i=0;i<keys.size();i++)

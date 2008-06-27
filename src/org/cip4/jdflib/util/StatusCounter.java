@@ -338,7 +338,7 @@ public class StatusCounter
      * @param amount
      * @param waste
      */
-    public void addPhase(String refID, double amount, double waste)
+    public synchronized void addPhase(String refID, double amount, double waste)
     { 
         if(refID==null)
             refID=getFirstRefID();
@@ -474,7 +474,7 @@ public class StatusCounter
      * @param vResLink the resourcelinks that are used to fill the various amount attributes in jobphase and phasetime
      *
      */
-    public boolean setPhase(EnumNodeStatus nodeStatus, String nodeStatusDetails, EnumDeviceStatus deviceStatus, String deviceStatusDetails)
+    public synchronized boolean setPhase(EnumNodeStatus nodeStatus, String nodeStatusDetails, EnumDeviceStatus deviceStatus, String deviceStatusDetails)
     {
         if(m_Node==null)
             return setIdlePhase(deviceStatus, deviceStatusDetails);
@@ -770,19 +770,21 @@ public class StatusCounter
     /**
      * @return the docJMFPhaseTime
      */
-    public JDFDoc getDocJMFPhaseTime()
+    public synchronized JDFDoc getDocJMFPhaseTime()
     {
         if(docJMFPhaseTime==null)
             setIdlePhase(EnumDeviceStatus.Idle, null);
-        return docJMFPhaseTime;
+        return (JDFDoc) docJMFPhaseTime.clone();
     }
 
     /**
      * @return the docJMFResource
      */
-    public JDFDoc getDocJMFResource()
+    public synchronized JDFDoc getDocJMFResource()
     {
-        return docJMFResource;
+        if(docJMFResource==null)
+            return null;
+        return (JDFDoc)docJMFResource.clone();
     }
 
     ///////////////////////////////////////////////////////////////////////
@@ -1255,7 +1257,7 @@ public class StatusCounter
      * reason for the audit
      * @return JDFResourceAudit the generated audit
      */
-    public JDFResourceAudit setResourceAudit(String resID, EnumReason reason)
+    public synchronized JDFResourceAudit setResourceAudit(String resID, EnumReason reason)
     {
         LinkAmount la=getLinkAmount(resID);
         if(la==null)

@@ -79,6 +79,7 @@
  */
 package org.cip4.jdflib.util;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -133,7 +134,7 @@ public class UrlUtil
             }
         }
     }
-    
+ 
     /**
      * simple struct to contain the stream and type of a bodypart
      * @author prosirai
@@ -370,48 +371,49 @@ public class UrlUtil
      */
     public static InputStream getURLInputStream(String urlString, BodyPart bodyPart)
     {
-        if(isCID(urlString))
+        InputStream retStream=null;
+        if(isCID(urlString)||bodyPart!=null)
         {
-            if(bodyPart==null)
-                return  null; // want a cid but have no body part
-
-            Multipart multipart=bodyPart.getParent();
-            return getCidURLStream(urlString, multipart);
+            if(bodyPart!=null)
+            {
+                Multipart multipart=bodyPart.getParent();            
+                retStream= getCidURLStream(urlString, multipart);
+            }
         }
-        else if(isHttp(urlString))
+        if(retStream==null && isHttp(urlString))
         {
             try
             {
                 URL url=new URL(urlString);
                 URLConnection urlConnection=url.openConnection();
-                return urlConnection.getInputStream();
+                retStream= urlConnection.getInputStream();
             }
             catch (MalformedURLException x)
             {
-                return null;
+                //
             }
             catch (IOException x)
             {
-                return null;
+                //
             }
         }
-        else // assume file
+        if(retStream==null) // assume file
         {
             File f=urlToFile(urlString);
-            if(f==null)
-                return null;
-            if(!f.canRead())
-                return null;
-            try
+            if((f!=null)&& f.canRead())
             {
-                return new FileInputStream(f);
-            }
-            catch (FileNotFoundException x)
-            {
-                return null;
+                try
+
+                {
+                    retStream= new FileInputStream(f);
+                }
+                catch (FileNotFoundException x)
+                {
+                    //
+                }
             }
         }
-
+        return retStream;
     }
 
     /**

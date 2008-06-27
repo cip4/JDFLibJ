@@ -1004,13 +1004,23 @@ public class MimeUtil
             JDFDoc d=new JDFParser().parseStream(bis);
             if(d!=null)
                 return d;
-        }       
-        JDFCommand c=docJMF.getJMFRoot().getCommand(0);
-        final JDFJMF respJMF = c.createResponse();
-        JDFResponse r=respJMF.getResponse(0);
-        r.setErrorText("Invalid http response - RC="+rc);
-        r.setReturnCode(3); // TODO correct rcs
-        return respJMF.getOwnerDocument_JDFElement();       
+            JDFCommand c=docJMF.getJMFRoot().getCommand(0);
+            final JDFJMF respJMF = c.createResponse();
+            JDFResponse r=respJMF.getResponse(0);
+            r.setErrorText("Invalid attached JDF");
+            r.setReturnCode(3); // TODO correct rcs
+            return respJMF.getOwnerDocument_JDFElement();                   
+        }      
+        else
+        {
+            JDFCommand c=docJMF.getJMFRoot().getCommand(0);
+            final JDFJMF respJMF = c.createResponse();
+            JDFResponse r=respJMF.getResponse(0);
+            r.setErrorText("Invalid http response - RC="+rc);
+            r.setReturnCode(3); // TODO correct rcs
+            return respJMF.getOwnerDocument_JDFElement();       
+            
+        }
     }
     /**
      * @deprecated
