@@ -227,6 +227,33 @@ public class JDFQueue extends JDFAutoQueue
     }
 
     /**
+     * flush this queue according to the rules defined in qf
+     * @param qf
+     * @return null if none were removed, else vector of removed queuentries
+     */
+    public synchronized VElement flushQueue(JDFQueueFilter qf)
+    {
+        VElement ve=getQueueEntryVector();
+        int siz=ve==null?0:ve.size();
+        for(int i=siz-1;i>=0;i--)
+        {
+            JDFQueueEntry qe=(JDFQueueEntry) ve.get(i);
+            if(qe.matchesQueueFilter(qf))
+            {
+                if(cleanupCallback!=null)
+                    cleanupCallback.cleanEntry(qe);
+                qe.deleteNode();
+            }
+            else
+            {
+                ve.remove(i);
+                siz--;
+            }
+        }
+        return siz==0 ? null : ve;
+        
+    }
+    /**
      * Method findQueueEntries
      * <p>
      * default: findQueueEntries(jobID, jobPartID, new VJDFAttributeMap(), null)

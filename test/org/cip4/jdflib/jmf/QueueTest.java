@@ -174,6 +174,16 @@ public class QueueTest extends TestCase
         d=qe.getEndTime();
         assertEquals("date",d.getTimeInMillis(),new JDFDate().getTimeInMillis(),30000);        
     }
+    public void testFlushQueue()
+    {
+        JDFQueueFilter qf=(JDFQueueFilter) new JDFDoc(ElementName.QUEUEFILTER).getRoot();  
+        qf.appendQueueEntryDef("qe5");
+        VElement v=q.flushQueue(qf);
+        assertEquals(v.size(),1);
+        assertEquals(((JDFQueueEntry)v.get(0)).getQueueEntryID(),"qe5");
+        assertEquals(q.numEntries(null), 4);
+
+    }
 
     public void testThreads()
     {

@@ -112,6 +112,11 @@ public class JDFPartAmount extends JDFResourceLink
     {
         elemInfoTable_ToRemove[0] = new ElemInfoTable(ElementName.AMOUNTPOOL, 0x66666661);        
     }
+    private static ElemInfoTable[] elemInfoTable_ToReplace = new ElemInfoTable[1];
+    static 
+    {
+        elemInfoTable_ToReplace[0] = new ElemInfoTable(ElementName.PART, 0x22222221);        
+    }
 
     @Override
     protected AttributeInfo getTheAttributeInfo() 
@@ -126,6 +131,7 @@ public class JDFPartAmount extends JDFResourceLink
     {
         ElementInfo eiRL=super.getTheElementInfo();
         eiRL.updateRemove(elemInfoTable_ToRemove);
+        eiRL.updateReplace(elemInfoTable_ToReplace);
         return eiRL;
         
     }

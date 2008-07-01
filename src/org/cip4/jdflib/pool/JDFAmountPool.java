@@ -77,6 +77,7 @@ import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.util.ContainerUtil;
 
 /**
  * This class represents a JDF-AuditPool
@@ -180,7 +181,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
             final JDFPartAmount partAmount = (JDFPartAmount) vPartAmount.elementAt(i);
             final VJDFAttributeMap vMapPart = partAmount.getPartMapVector();
 
-            if (vMapPart.size()==1 && vMapPart.elementAt(0).equals(mPart))
+            if (vMapPart!=null && vMapPart.size()==1 && vMapPart.elementAt(0).equals(mPart))
             {
                 return partAmount; // exact match
             }
@@ -200,7 +201,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
             final JDFPartAmount partAmount = (JDFPartAmount) vPartAmount.elementAt(i);
             final VJDFAttributeMap vMapPart = partAmount.getPartMapVector();
 
-            if (vMapPart.equals(vPart))
+            if (ContainerUtil.equals(vMapPart,vPart))
             {
                 return partAmount; // exact match
             }

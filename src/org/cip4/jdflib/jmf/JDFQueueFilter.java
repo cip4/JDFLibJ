@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,9 +82,11 @@ package org.cip4.jdflib.jmf;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoQueueFilter;
+import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
@@ -141,7 +143,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
     }
-    
+
     //**************************************** Methods *********************************************
     /**
      * toString
@@ -152,7 +154,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
     {
         return "JDFQueueFilter[  --> " + super.toString() + " ]";
     }
-    
+
     /**
      * GetPartMapVector returns a vector of partmaps, null if no parts are present
      *
@@ -162,7 +164,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
     {
         return super.getPartMapVector();
     }
-    
+
     /**
      * SetPartMapVector
      *
@@ -172,7 +174,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
     {
         super.setPartMapVector(vPart);
     }
-    
+
     /**
      * return true if the queuentry matches this filter
      * @return
@@ -181,24 +183,38 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
     {
         if(qe==null)
             return false;
-        
+
         if(EnumQueueEntryDetails.None.equals(getQueueEntryDetails()))
             return false;
-        
+
         Set qeDefs=getQueueEntryDefSet();
         if(qeDefs!=null && ! qeDefs.contains(qe.getQueueEntryID()))
             return false;
-        
+
         qeDefs=getDeviceIDSet();
         if(qeDefs!=null && ! qeDefs.contains(qe.getDeviceID()))
             return false;
-        
+
         if(hasAttribute(AttributeName.GANGNAMES) && !getGangNames().contains(qe.getGangName()))
             return false;
-       
+
+        if(hasAttribute(AttributeName.STATUSLIST) && !getStatusList().contains(qe.getQueueEntryStatus()))
+            return false;
+
         return true;
     }
-    
+
+    /**
+     * (9.2) get StatusList attribute StatusList
+     * @return Vector of the enumerations
+     * this version uses queueEntryStatus rather than an own enumeration
+     */
+    @Override
+    public Vector getStatusList()
+    {
+        return getEnumerationsAttribute(AttributeName.STATUSLIST, null, EnumQueueEntryStatus.getEnum(0), false);
+    }
+
     /**
      * get the list of QueueEntryDef/@QueueEntryIDs strings as a set
      * @return the set of QueueEntryIDs, null if no QueueEntryDef is specified
@@ -216,7 +232,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
         }
         return set!=null && set.size()>0 ? set : null;
     }
-    
+
     /**
      * get the list of Device/@DeviceIDs strings as a set
      * @return the set of DeviceIDs, null if no Device is specified
@@ -249,7 +265,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
         VElement v=theQueue.getQueueEntryVector();
         final int size = v==null ? 0 : v.size();
         theQueue.setQueueSize(size);
-        
+
         for(int i=0;i<size;i++)
         {
             JDFQueueEntry qe=(JDFQueueEntry)v.elementAt(i);
@@ -258,7 +274,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 
         for(int i=theQueue.numEntries(null)-1;i>=maxEntries;i--)
             theQueue.removeChild(ElementName.QUEUEENTRY, null, maxEntries); // always zapp first - it is faster to find
-        
+
     }
 
     /**
@@ -271,7 +287,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
     {
         if(qe==null)
             return;
-        
+
         if(!matches(qe))
             qe.deleteNode();
         EnumQueueEntryDetails qed=getQueueEntryDetails();
@@ -283,7 +299,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
         }
         if(EnumUtil.aLessEqualsThanB(EnumQueueEntryDetails.JobPhase,qed))
         {
-             qe.removeChildren(ElementName.JDF, null,null);
+            qe.removeChildren(ElementName.JDF, null,null);
         }
 
     }

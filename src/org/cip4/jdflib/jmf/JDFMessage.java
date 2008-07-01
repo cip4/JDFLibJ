@@ -538,6 +538,14 @@ public class JDFMessage extends JDFAutoMessage
             }
 
         }
+        else if (elementName.equals(ElementName.FLUSHQUEUEINFO))
+        {
+            if (iSkip == 0)
+            { // validation for cardinality '?' or '-', when no more than 1 element are allowed
+                validList.addElement(EnumType.FlushQueue);
+            }
+
+        }
         else if (elementName.equals(ElementName.FLUSHRESOURCEPARAMS))
         {
             if (iSkip == 0)
@@ -1059,6 +1067,7 @@ public class JDFMessage extends JDFAutoMessage
     {
         ElementName.DEVICELIST,
         ElementName.DEVICEINFO,
+        ElementName.FLUSHQUEUEINFO,
         ElementName.FLUSHEDRESOURCES,
         ElementName.IDINFO,
         ElementName.JDFCONTROLLER,
@@ -1088,6 +1097,7 @@ public class JDFMessage extends JDFAutoMessage
         ElementName.DEVICEINFO,
         ElementName.DEVICELIST,
         ElementName.FLUSHEDRESOURCES,
+        ElementName.FLUSHQUEUEINFO,
         ElementName.FLUSHQUEUEPARAMS,
         ElementName.FLUSHRESOURCEPARAMS,
         ElementName.IDINFO,
@@ -2331,10 +2341,22 @@ public class JDFMessage extends JDFAutoMessage
     {
         return (JDFFlushQueueParams)getCreateValidElement(ElementName.FLUSHQUEUEPARAMS, null, iSkip);
     }
+    public JDFFlushQueueInfo getCreateFlushQueueInfo(int iSkip)
+    {
+        return (JDFFlushQueueInfo)getCreateValidElement(ElementName.FLUSHQUEUEINFO, null, iSkip);
+    }
+    public JDFFlushQueueInfo getFlushQueueInfo(int iSkip)
+    {
+        return (JDFFlushQueueInfo)getValidElement(ElementName.FLUSHQUEUEINFO, null, iSkip);
+    }
 
     public JDFFlushQueueParams appendFlushQueueParams()
     {
         return (JDFFlushQueueParams)appendValidElement(ElementName.FLUSHQUEUEPARAMS, null);
+    }
+    public JDFFlushQueueInfo appendFlushQueueInfo()
+    {
+        return (JDFFlushQueueInfo)appendValidElement(ElementName.FLUSHQUEUEINFO, null);
     }
 
     public JDFFlushQueueParams getFlushQueueParams(int iSkip)

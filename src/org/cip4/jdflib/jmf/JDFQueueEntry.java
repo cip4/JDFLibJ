@@ -200,6 +200,18 @@ public class JDFQueueEntry extends JDFAutoQueueEntry
     }
 
     /**
+     * return true if this qe matches the input QueueFilter
+     * @param ni
+     * @return
+     */
+    public boolean matchesQueueFilter(JDFQueueFilter filter)
+    {
+        if(filter==null)
+            return true;
+        return filter.matches(this);
+    }
+
+    /**
      * check whether the part defined by mPart is included
      * @param mPart attribute map to look for
      * @return boolean - returns true if the part exists

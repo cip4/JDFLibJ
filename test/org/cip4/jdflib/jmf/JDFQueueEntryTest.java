@@ -70,6 +70,8 @@
  */
 package org.cip4.jdflib.jmf;
 
+import java.util.Vector;
+
 import junit.framework.TestCase;
 
 import org.cip4.jdflib.auto.JDFAutoQueue.EnumQueueStatus;
@@ -200,6 +202,23 @@ public class JDFQueueEntryTest extends TestCase
         q.getQueueEntry(-2).sortQueue(-1);
         qe2.sortQueue(-1);
         assertEquals(q.getQueueEntryPos("qeNew"), 3);
+    }
+    public void testMatchesFilter()
+    {
+        q.setAutomated(true);
+        JDFQueue q2=(JDFQueue) new JDFDoc("Queue").getRoot();
+        JDFQueueEntry qe=q2.appendQueueEntry();
+        qe.setQueueEntryID("qeNew");
+        qe.setQueueEntryStatus(EnumQueueEntryStatus.Waiting);
+        assertTrue(qe.matchesQueueFilter(null));
+        JDFQueueFilter filter=(JDFQueueFilter) q.appendElement(ElementName.QUEUEFILTER);
+        Vector v=new Vector();
+        v.add(EnumQueueEntryStatus.Completed);
+        filter.setStatusList(v);
+        assertFalse(qe.matchesQueueFilter(filter));
+        v.add(EnumQueueEntryStatus.Completed);
+        filter.setStatusList(v);
+        assertTrue(qe.matchesQueueFilter(filter));
     }
     /* (non-Javadoc)
      * @see junit.framework.TestCase#setUp()
