@@ -1,6 +1,461 @@
 ___________________________________________________________
 
 
+Label JDFLIBJ_2.1.3BLD500 (25.04.2008)
+
+Revision: 3260
+Author: prosi
+Date: 11:42:58, Freitag, 25. April 2008
+Message:
+
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/XMLDoc.java
+
+
+Revision: 3256
+Author: prosi
+Date: 10:20:17, Freitag, 25. April 2008
+Message:
+added dumpdir
+----
+Added : /trunk/JDFLibJ/src/org/cip4/jdflib/util/DumpDir.java
+
+
+Revision: 3255
+Author: prosi
+Date: 19:52:56, Donnerstag, 24. April 2008
+Message:
+DeviceCapabilities fix for ListType=Range
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/devicecapability/JDFAbstractState.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/devicecapability/JDFNameState.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/devicecapability/JDFNameStateTest.java
+
+
+Revision: 3254
+Author: prosi
+Date: 18:56:38, Donnerstag, 24. April 2008
+Message:
+KElement.copyAttribute with namespaces now works
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFResourceLink.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/KElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/BaseGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISCPGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFQueueEntry.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/node/JDFNode.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StatusCounter.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/JDFResourceLinkTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/KElementTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/goldenticket/MISCPGoldenTicketTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/node/JDFNodeTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/JDFSpawnTest.java
+
+
+Revision: 3253
+Author: mucha
+Date: 15:47:48, Donnerstag, 24. April 2008
+Message:
+fix for validation of ModuleIndex and ModuleID
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoModuleStatus.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFModuleStatus.java
+
+
+Revision: 3252
+Author: mucha
+Date: 14:50:07, Donnerstag, 24. April 2008
+Message:
+fix for JDFAutoPart.java (BlockName)
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPart.java
+
+
+Revision: 3251
+Author: mucha
+Date: 14:49:18, Donnerstag, 24. April 2008
+Message:
+fix for JDFAutoPart.java
+----
+Modified : /trunk/JDFLibJ/apps/org/cip4/jdflib/generator/GeneratorUtil.java
+
+
+Revision: 3240
+Author: prosi
+Date: 08:50:18, Mittwoch, 23. April 2008
+Message:
+bambi development, including proxy
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFResourceLink.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFJMF.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/ContainerUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StatusCounter.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/JDFResourceLinkTest.java
+
+
+Revision: 3238
+Author: prosi
+Date: 15:22:25, Montag, 21. April 2008
+Message:
+devcap fix for resources
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/devicecapability/JDFDevCaps.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/devicecapability/JDFDeviceCapTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/JDFDateTest.java
+
+
+Revision: 3235
+Author: prosi
+Date: 20:09:29, Freitag, 18. April 2008
+Message:
+proxy and bambi improvements
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/KElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/MultiModuleStatusCounter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StatusCounter.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/KElementTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/StatusCounterTest.java
+
+
+Revision: 3233
+Author: prosi
+Date: 17:08:24, Donnerstag, 17. April 2008
+Message:
+http://www.cip4.org/jira/browse/CHECK-40
+----
+Modified : /trunk/JDFLibJ/apps/org/cip4/jdflib/CheckJDF.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/devicecapability/JDFDeviceCap.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/CheckJDFTest.java
+
+
+Revision: 3232
+Author: prosi
+Date: 14:30:36, Donnerstag, 17. April 2008
+Message:
+Bambi simulator upgrades
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFResourceLink.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFMessage.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFQueue.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFQueueEntry.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StatusCounter.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/JDFResourceLinkTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/JDFQueueEntryTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/node/JDFNodeTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/JDFDateTest.java
+
+
+Revision: 3230
+Author: prosi
+Date: 20:42:53, Freitag, 11. April 2008
+Message:
+enhanced control when writing xmldoc to http
+----
+Modified : /trunk/JDFLibJ/apps/org/cip4/jdflib/TestJDF.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFDoc.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/KElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/XMLDoc.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/BaseGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISCPGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISGoldenTicket.java
+Added : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISPreGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFQueueSubmissionParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/node/JDFNode.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/pool/JDFResourceLinkPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFResource.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFColorantControl.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/MimeUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StatusCounter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/UrlUtil.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/JDFTestCaseBase.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/JDFElementTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/examples/NColorTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/goldenticket/MISCPGoldenTicketTest.java
+Added : /trunk/JDFLibJ/test/org/cip4/jdflib/goldenticket/MISPreGoldenTicketTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/node/JDFNodeTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/pool/JDFResourceLinkPoolTest.java
+
+
+Revision: 3224
+Author: prosi
+Date: 15:05:57, Montag, 7. April 2008
+Message:
+getLink fix for non-jdf namespace resources
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/pool/JDFResourceLinkPool.java
+
+
+Revision: 3223
+Author: prosi
+Date: 19:21:19, Freitag, 4. April 2008
+Message:
+bambi updates to write resource audits
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFDoc.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFResourceLink.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/BaseGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFResource.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFUsageCounter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StatusCounter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StringUtil.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/resource/process/JDFUsageCounterTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/StatusCounterTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/StringUtilTest.java
+
+
+Revision: 3221
+Author: prosi
+Date: 10:50:52, Donnerstag, 3. April 2008
+Message:
+add control of part encoding in mime
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFPhaseTime.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/MimeUtil.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/JDFQueueSubmissionParamsTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/MimeUtilTest.java
+
+
+Revision: 3205
+Author: prosi
+Date: 18:22:22, Donnerstag, 20. März 2008
+Message:
+Bambi update
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFResourceLink.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/node/JDFNode.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StatusCounter.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/JDFResourceLinkTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/JDFSpawnTest.java
+
+
+Revision: 3200
+Author: prosi
+Date: 17:04:47, Dienstag, 18. März 2008
+Message:
+fix devcap bug for schema required
+bambi upgrades
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/BaseGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISCPGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/ProductGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/node/JDFNode.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/devicecapability/JDFDevCap.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/devicecapability/JDFDevCaps.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StringUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/UrlUtil.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/KElementTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/StringUtilTest.java
+
+
+Revision: 3199
+Author: prosi
+Date: 15:14:32, Montag, 17. März 2008
+Message:
+checkjdf fixes from interop
+add new JDFDoc/XMLDoc.write2HTTPURL()
+----
+Modified : /trunk/JDFLibJ/apps/org/cip4/jdflib/CheckJDF.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFDoc.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFParser.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/XMLDoc.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFQueueEntry.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/node/JDFNode.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/pool/JDFStatusPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StringUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/VectorMap.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/CheckJDFTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/examples/ContentCreationTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/examples/StrippingTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/resource/JDFLayoutTest.java
+
+
+Revision: 3182
+Author: mucha
+Date: 11:42:36, Freitag, 7. März 2008
+Message:
+
+----
+Modified : /trunk/JDFLibJ/Readme.txt
+
+
+Revision: 3180
+Author: prosi
+Date: 08:10:02, Freitag, 7. März 2008
+Message:
+either / or for ModuleID ModuleIndex in ModuleStatus
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFModuleStatus.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/examples/NColorTest.java
+
+
+Revision: 3175
+Author: prosi
+Date: 14:03:02, Mittwoch, 5. März 2008
+Message:
+Added partition reduction to statuscounter (e.g. surface for components)
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/BaseGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISCPGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StatusCounter.java
+
+
+Revision: 3172
+Author: prosi
+Date: 10:12:19, Mittwoch, 5. März 2008
+Message:
+complete merge of manual and sim into sim
+minor devcap fix for action tests
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFAudit.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFResourceLink.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISCPGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/node/JDFNode.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFResource.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/devicecapability/JDFDeviceCap.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/devicecapability/JDFEvaluation.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/JDFResourceLinkTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/goldenticket/MISCPGoldenTicketTest.java
+
+
+Revision: 3169
+Author: prosi
+Date: 17:08:24, Montag, 3. März 2008
+Message:
+minor fix for addExecutablePartitions
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/node/JDFNode.java
+
+
+Revision: 3162
+Author: prosi
+Date: 17:59:18, Freitag, 29. Februar 2008
+Message:
+new http to file jmf servlet
+----
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/resource/JDFPartTest.java
+
+
+Revision: 3161
+Author: mucha
+Date: 17:52:03, Freitag, 29. Februar 2008
+Message:
+change version number to 49
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFAudit.java
+Modified : /trunk/JDFLibJ/version.properties
+
+
+Revision: 3160
+Author: prosi
+Date: 16:49:44, Freitag, 29. Februar 2008
+Message:
+npe fix in fitslisttype
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/devicecapability/JDFAbstractState.java
+
+
+Revision: 3159
+Author: prosi
+Date: 13:30:28, Freitag, 29. Februar 2008
+Message:
+General speedup, part consistency test
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFResourceLink.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/KElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/VString.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/XMLDocUserData.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISCPGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/node/JDFNode.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFResource.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/JDFMerge.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/JDFSpawn.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StringUtil.java
+
+
+Revision: 3151
+Author: mucha
+Date: 11:28:00, Donnerstag, 28. Februar 2008
+Message:
+replace call to deprecated function
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/devicecapability/JDFEvaluation.java
+
+
+Revision: 3150
+Author: mucha
+Date: 11:04:09, Donnerstag, 28. Februar 2008
+Message:
+cosmetics
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISCPGoldenTicket.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/examples/NColorTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/JDFDeviceInfoTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/JDFQueueEntryTest.java
+
+
+
+
+>ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD500) && !lbtype(JDFLIBJ_2.1.3BLD490)}" -print
+.\auto\JDFAutoMessageService.java@@\main\56
+.\auto\JDFAutoModuleStatus.java@@\main\55
+.\auto\JDFAutoPart.java@@\main\52
+.\auto\JDFAutoQueueFilter.java@@\main\34
+.\core\JDFAudit.java@@\main\92
+.\core\JDFDoc.java@@\main\78
+.\core\JDFElement.java@@\main\246
+.\core\JDFParser.java@@\main\48
+.\core\JDFResourceLink.java@@\main\142
+.\core\KElement.java@@\main\259
+.\core\VString.java@@\main\41
+.\core\XMLDoc.java@@\main\92
+.\core\XMLDocUserData.java@@\main\30
+.\goldenticket@@\main\3
+.\goldenticket\BaseGoldenTicket.java@@\main\7
+.\goldenticket\JMFGoldenTicket.java@@\main\3
+.\goldenticket\MISCPGoldenTicket.java@@\main\8
+.\goldenticket\MISGoldenTicket.java@@\main\8
+.\goldenticket\MISPreGoldenTicket.java@@\main\1
+.\goldenticket\ProductGoldenTicket.java@@\main\4
+.\jmf\JDFJMF.java@@\main\68
+.\jmf\JDFMessage.java@@\main\75
+.\jmf\JDFPipeParams.java@@\main\22
+.\jmf\JDFQueue.java@@\main\31
+.\jmf\JDFQueueEntry.java@@\main\27
+.\jmf\JDFQueueSubmissionParams.java@@\main\16
+.\node\JDFNode.java@@\main\267
+.\pool\JDFResourceLinkPool.java@@\main\80
+.\pool\JDFStatusPool.java@@\main\46
+.\resource\devicecapability\JDFAbstractState.java@@\main\57
+.\resource\devicecapability\JDFDevCap.java@@\main\57
+.\resource\devicecapability\JDFDevCaps.java@@\main\44
+.\resource\devicecapability\JDFDeviceCap.java@@\main\55
+.\resource\devicecapability\JDFEvaluation.java@@\main\28
+.\resource\devicecapability\JDFNameState.java@@\main\34
+.\resource\JDFModuleStatus.java@@\main\8
+.\resource\JDFPhaseTime.java@@\main\30
+.\resource\JDFResource.java@@\main\232
+.\resource\process\JDFAssemblySection.java@@\main\5
+.\resource\process\JDFColorantControl.java@@\main\24
+.\resource\process\JDFUsageCounter.java@@\main\4
+.\util@@\main\25
+.\util\ContainerUtil.java@@\main\4
+.\util\DumpDir.java@@\main\1
+.\util\JDFMerge.java@@\main\22
+.\util\JDFSpawn.java@@\main\24
+.\util\MimeUtil.java@@\main\19
+.\util\MultiModuleStatusCounter.java@@\main\3
+.\util\QueueHotFolderListener.java@@\main\2
+.\util\StatusCounter.java@@\main\13
+.\util\StringUtil.java@@\main\68
+.\util\UrlUtil.java@@\main\15
+.\util\VectorMap.java@@\main\3
+___________________________________________________________
+
+
 Label JDFLIBJ_2.1.3BLD490 (28.02.2008)
 
 Revision: 3151
