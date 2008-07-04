@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -97,6 +97,7 @@ import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFModulePhase;
 import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.JDFDate;
 
 
@@ -183,7 +184,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
      */
     public JDFDate getIdleStartTime()
     {
-        String str = getAttribute(AttributeName.IDLESTARTTIME, null, null);
+        final String str = getAttribute(AttributeName.IDLESTARTTIME, null, null);
         if (str!=null)
         {
             try
@@ -234,8 +235,8 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
         jp.eraseEmptyAttributes(true);
         return jp;
     }
-    
-    
+
+
     /**
      * gets the deviceID from @DeviceID if it exists, otherwise searches Device/@DeviceID
      * @return the appropriate deviceID for this deviceInfo
@@ -251,10 +252,62 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
             JDFMessage m=(JDFMessage) getParentNode_KElement();
             if(m!=null)
                 return m.getSenderID();
+
         }
-        return d.getDeviceID();
+        return d==null ? null : d.getDeviceID();
     }
 
+    /**
+     * returns true if this is the same phase, i.e. the 
+     * @param lastphase the phase to compare with
+     * @param bExact if true, use startTime as hook, else compare stati
+     * @return
+     */
+    public boolean isSamePhase(JDFDeviceInfo lastInfo, boolean bExact)
+    {
+        if(lastInfo==null)
+            return false;
+        if(!ContainerUtil.equals(getDeviceID(), lastInfo.getDeviceID()))
+            return false;
+        if(!ContainerUtil.equals(getDeviceOperationMode(), lastInfo.getDeviceOperationMode()))
+            return false;
+        if(!ContainerUtil.equals(getDeviceStatus(), lastInfo.getDeviceStatus()))
+            return false;
+        if(!ContainerUtil.equals(getStatusDetails(), lastInfo.getStatusDetails()))
+            return false;
+        int numEmployees = numChildElements(ElementName.EMPLOYEE, null);
+        if(numEmployees!=lastInfo.numChildElements(ElementName.EMPLOYEE, null))
+            return false;
+        boolean bGood=true;
+        for(int i=0;i<numEmployees;i++)
+            bGood=bGood || getEmployee(i).isSameEmployee(lastInfo.getEmployee(i));
+
+        int numJobPhases = numChildElements(ElementName.JOBPHASE, null);
+        if(numJobPhases!=lastInfo.numChildElements(ElementName.JOBPHASE, null))
+            return false;
+        bGood=true;
+
+        for(int i=0;i<numJobPhases;i++)
+            bGood=bGood || getJobPhase(i).isSamePhase(lastInfo.getJobPhase(i), bExact);
+        return bGood;
+    }
+
+    /**
+     * creates a new deviceInfo that spans lastphase and this phase
+     * @param lastphase the phase to merge 
+     * @return true if successful
+     */
+    public boolean mergeLastPhase(JDFDeviceInfo lastInfo)
+    {
+        if(!isSamePhase(lastInfo, false))
+            return false;
+
+        int numJobPhases = numChildElements(ElementName.JOBPHASE, null);
+        boolean bGood=true;
+        for(int i=0;i<numJobPhases;i++)
+            bGood= getJobPhase(i).mergeLastPhase(lastInfo.getJobPhase(i))||bGood;
+        return bGood;
+    }
 
 }
 

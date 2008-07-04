@@ -94,6 +94,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
 import org.cip4.jdflib.resource.JDFModulePhase;
 import org.cip4.jdflib.resource.JDFModuleStatus;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.JDFDate;
 
 //----------------------------------
@@ -289,7 +290,7 @@ public class JDFJobPhase extends JDFAutoJobPhase
         if(!(parent instanceof JDFMessage))
             return null;
         return ((JDFMessage)parent).getStatusQuParams();
-        
+
     }
     /**
      * gets the NodeIdetifier that matches this
@@ -301,7 +302,7 @@ public class JDFJobPhase extends JDFAutoJobPhase
         ni.setTo(getJobID(), getJobPartID(), getPartMapVector());
         return ni;
     }
-   
+
     private String getInheritedStatusQuParamsAttribute(String key,String nameSpaceURI)
     {
         String val=getAttribute(key, nameSpaceURI, null);
@@ -332,7 +333,7 @@ public class JDFJobPhase extends JDFAutoJobPhase
 
         return ms;
     }
-    
+
     /**
      * return the differential amount produced between this phase and lastphase
      * @param lastphase the phase
@@ -340,14 +341,9 @@ public class JDFJobPhase extends JDFAutoJobPhase
      */
     public double getAmountDifference(JDFJobPhase lastphase)
     {
-        if(lastphase!=null)
+        if(isSamePhase(lastphase,true))
         {
-            JDFDate startTime=getPhaseStartTime();
-            JDFDate lastStartTime=lastphase.getPhaseStartTime();
-            if(startTime!=null &&startTime.equals(lastStartTime))
-            {
-                return getPhaseAmount()-lastphase.getPhaseAmount();
-            }
+            return getPhaseAmount()-lastphase.getPhaseAmount();
         }
         return getPhaseAmount();
     }
@@ -358,16 +354,51 @@ public class JDFJobPhase extends JDFAutoJobPhase
      */
     public double getWasteDifference(JDFJobPhase lastphase)
     {
-        if(lastphase!=null)
+        if(isSamePhase(lastphase,true))
+        {
+            return getPhaseWaste()-lastphase.getPhaseWaste();
+        }
+        return getPhaseWaste();
+    }
+
+    /**
+     * returns true if this is the same phase, i.e. the 
+     * @param lastphase the phase to compare with
+     * @param bExact if true, use startTime as hook, else compare stati
+     * @return
+     */
+    public boolean isSamePhase(JDFJobPhase lastphase, boolean bExact)
+    {
+        if(lastphase==null)
+            return false;
+        if(bExact)
         {
             JDFDate startTime=getPhaseStartTime();
             JDFDate lastStartTime=lastphase.getPhaseStartTime();
-            if(startTime!=null &&startTime.equals(lastStartTime))
-            {
-                return getPhaseWaste()-lastphase.getPhaseWaste();
-            }
+            return startTime!=null &&startTime.equals(lastStartTime);
         }
-        return getPhaseWaste();
+        if(!ContainerUtil.equals(getStatus(),lastphase.getStatus()))
+            return false;
+        if(!ContainerUtil.equals(getStatusDetails(),lastphase.getStatusDetails()))
+            return false;
+        if(!ContainerUtil.equals(getIdentifier(),lastphase.getIdentifier()))
+            return false;
+        return true;
+    }
+    
+    /**
+     * creates a new phasetime that spans lastphase and this phase
+     * @param lastphase the phase to merge 
+     * @return true if successful
+     */
+    public boolean mergeLastPhase(JDFJobPhase lastphase)
+    {
+        if(!isSamePhase(lastphase, false))
+            return false;
+        setStartTime(lastphase.getStartTime());
+        setPhaseAmount(getPhaseAmount()+lastphase.getPhaseAmount());
+        setPhaseWaste(getPhaseWaste()+lastphase.getPhaseWaste());
+        return true;
     }
 
     /**
@@ -408,7 +439,7 @@ public class JDFJobPhase extends JDFAutoJobPhase
      */
     public EnumQueueEntryStatus getQueueEntryStatus()
     {
-       return EnumNodeStatus.getQueueEntryStatus(getStatus()); 
+        return EnumNodeStatus.getQueueEntryStatus(getStatus()); 
     }
 }
 

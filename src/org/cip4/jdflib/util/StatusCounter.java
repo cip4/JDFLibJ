@@ -104,6 +104,7 @@ import org.cip4.jdflib.jmf.JDFResponse;
 import org.cip4.jdflib.jmf.JDFSignal;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.JDFProcessRun;
@@ -138,7 +139,6 @@ public class StatusCounter
     private LinkAmount[] vLinkAmount=null;
     private String firstRefID=null;
     private String queueEntryID;
-    private String workStepID;
     private EnumDeviceOperationMode operationMode=EnumDeviceOperationMode.Productive;
     private EnumWorkType workType=null;
     protected HashSet<String> setTrackWaste=new HashSet<String>();
@@ -146,6 +146,7 @@ public class StatusCounter
     private EnumDeviceStatus status=null;
     private String statusDetails=null;
     private JDFDate startDate;
+    private NodeIdentifier nodeID=null;
 
     @Override
     public String toString()
@@ -185,25 +186,26 @@ public class StatusCounter
         m_Node=node;
         m_vPartMap=vPartMap;
         vLinkAmount=null;
-        workStepID=null;
         firstRefID=null;
         docJMFResource=null;
         docJMFPhaseTime=null;
         startDate=new JDFDate();
+        nodeID=null;
         if(node==null)
         {
             setPhase(null, null, EnumDeviceStatus.Idle, null);
         }
 
-        JDFAttributeMap wsMap=null;
-        if(m_vPartMap==null && m_Node!=null)
+         if(m_vPartMap==null && m_Node!=null)
         {
             m_vPartMap = m_Node.getNodeInfoPartMapVector();
         }
-        if(m_vPartMap!=null && m_vPartMap.size()>0)
-            wsMap=m_vPartMap.elementAt(0);
-
-        workStepID=node!=null ? node.getWorkStepID(wsMap) : null;
+ 
+        nodeID=node!=null ? node.getIdentifier() : null;
+        if(m_vPartMap!=null && nodeID!=null)
+        {
+            nodeID.setTo(node.getJobID(true), node.getJobPartID(false), m_vPartMap);
+        }
         if(vResLinks==null && m_Node!=null)
         {
             vResLinks=m_Node.getResourceLinks(null);            
@@ -1292,26 +1294,12 @@ public class StatusCounter
     {
         queueEntryID=_queueEntryID;        
     }
-    /**
-     * @param _workstepID
-     */
-    public void setWorkStepID(String _workstepID)
-    {
-        workStepID=_workstepID;        
-    }
-    /**
+      /**
      * @param queueEntryID
      */
     public String getQueueEntryID()
     {
         return queueEntryID;        
-    }
-    /**
-     * @param queueEntryID
-     */
-    public String getWorkStepID()
-    {
-        return workStepID;        
     }
 
     /**
@@ -1365,6 +1353,14 @@ public class StatusCounter
     {
         final LinkAmount la=getLinkAmount(refID);
         return la==null ? 0 : la.getAmount(la.startWaste);
+    }
+
+    /**
+     * @return the nodeID
+     */
+    public NodeIdentifier getNodeIDentifier()
+    {
+        return nodeID;
     }
 
 }

@@ -526,6 +526,8 @@ public class JDFMerge
         for (int i = 0; i < allChildren.size(); i++)
         {
             final JDFResource src = (JDFResource) allChildren.elementAt(i);
+            if(src.getIdentical()!=null)
+                continue; // no need to merge identical elements
             final JDFAttributeMap srcMap = src.getPartMap(mergeIDKeys);
             JDFResource trg = targetRes.getPartition(srcMap, EnumPartUsage.Implicit);
 

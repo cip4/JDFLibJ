@@ -174,7 +174,7 @@ public class MISGoldenTicket extends BaseGoldenTicket
             if(returnURL!=null)
                 ni.setTargetRoute(returnURL);
             
-            if(jmfICSLevel>=1 && misICSLevel>=2)
+            if(jmfICSLevel>=1 && misICSLevel>=2 || misURL!=null)
             {
                 JDFJMF jmf=ni.appendJMF();
                 jmf.setSenderID("MISGTSender");

@@ -85,6 +85,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoColorantControl;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFSeparationList;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.w3c.dom.DOMException;
 
@@ -188,7 +189,25 @@ public class JDFColorantControl extends JDFAutoColorantControl
             return super.getColorantOrder().getSeparations();
         return getSeparations();
     }
-
+    /**
+     * get the list of separations that this colorantcontrol describes
+     * adds the separations that are implied by ProcessColorModel
+     * 
+     * @return VString the complete list of process and spot colors
+     */
+    public VString getAllSeparations()
+    {
+        VElement e=getLeaves(false);
+        if(e==null)
+            return null;
+        VString allCols=new VString();
+        for(int i=0;i<e.size();i++)
+        {
+            allCols.addAll(((JDFColorantControl)e.get(i)).getSeparations());
+        }
+        allCols.unify();
+        return allCols;
+    }
     /**
      * get the list of separations that this colorantcontrol describes
      * adds the separations that are implied by ProcessColorModel

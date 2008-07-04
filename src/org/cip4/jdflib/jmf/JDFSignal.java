@@ -183,7 +183,7 @@ public class JDFSignal extends JDFAutoSignal
                 copyElement(item, null);
             }
         }
-        setType(response.getEnumType()); // also fix xsi:type
+        setType(response.getType()); // also fix xsi:type
         return true;
     }
 }

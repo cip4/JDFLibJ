@@ -77,6 +77,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import org.apache.commons.io.IOUtils;
 
@@ -89,21 +90,28 @@ import org.apache.commons.io.IOUtils;
  */
 public class DumpDir {
 
+    private class MyInt
+    {        
+        public int i=0;
+        public String toString()
+        {
+            return String.valueOf(i);
+        }
+    }
     private File baseDir=null;
-    private static int index=0;
-    private static Object mutexInc=new Object();
-    private static Object mutexDel=new Object();
+    private static HashMap<File,MyInt> listMap=new HashMap<File,MyInt>();
     private int maxKeep=500;
     /**
      * 
      */
     private static final long serialVersionUID = -8902151736333089036L;
 
-    private static int increment()
+    private int increment()
     {
-        synchronized (mutexInc)
+        synchronized (listMap)
         {
-            return index++;            
+            MyInt i=listMap.get(baseDir);
+            return i.i++;            
         }
     }
 
@@ -114,8 +122,14 @@ public class DumpDir {
     {
         baseDir=dir;
         baseDir.mkdirs();
-        synchronized (mutexDel)
+        synchronized (listMap)
         {
+            MyInt index=listMap.get(baseDir);
+            if(index==null)
+            {
+                index = new MyInt();
+                listMap.put(baseDir, index);
+            }
             String[] names=baseDir.list();
             int max=0;
             int l;
@@ -128,7 +142,7 @@ public class DumpDir {
                 if(l>max)
                     max=l;
             }
-            index=max;
+            index.i=max;
         }
     }
 
@@ -140,8 +154,8 @@ public class DumpDir {
     public File newFile()
     {
         final int inc = increment();
-        if(inc%100==0)
-            System.out.println("jmf dump service "+index);
+        if(inc%200==0)
+            System.out.println("jmf dump service "+baseDir+" - "+inc);
 
         String s=StringUtil.sprintf("m%08i.tmp", ""+inc);
         File f=FileUtil.getFileInDirectory(baseDir, new File(s));
@@ -189,7 +203,7 @@ public class DumpDir {
     {
         if(inc%100==0)
         {
-            synchronized (mutexDel)
+            synchronized (listMap.get(baseDir))
             {
                 String[] names=baseDir.list();
                 if(names.length>maxKeep)

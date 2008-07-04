@@ -125,7 +125,7 @@ import org.cip4.jdflib.util.UrlUtil.HTTPDetails;
  * @author Markus Nyman, (markus.cip4@myman.se)
  * 
  */
-public class MimeUtil 
+public class MimeUtil extends UrlUtil
 {
 
     /**
@@ -204,20 +204,9 @@ public class MimeUtil
     /**
      * commonly used strings
      */
-    public static final String CONTENT_TYPE = "Content-Type";
-    public static final String CONTENT_ID = "Content-ID";
-    public static final String TEXT_XML =JDFConstants.MIME_TEXTXML;
-    public static final String TEXT_HTML ="text/html";
-    public static final String TEXT_PLAIN ="text/plain";
-    public static final String TEXT_UNKNOWN =JDFConstants.MIME_TEXTUNKNOWN;
-    public static final String VND_JDF =JDFConstants.MIME_JDF;
-    public static final String VND_JMF =JDFConstants.MIME_JMF;
+   
     public static final String MULTIPART_RELATED = "multipart/related";
-    public static final String POST = "POST";
-    public static final String GET = "GET";
-    public static final String CONTENT_TRANSFER_ENCODING="Content-Transfer-Encoding"; 
-    public static final String BASE64= "base64";
-    public static final String BINARY= "binary";
+    
 
     private static HashMap<String,String> extensionMap=null;
 
@@ -1098,7 +1087,7 @@ public class MimeUtil
             int siz =bp==null ? 0 : bp.length;
             for(int i=0;i<siz;i++)
             {
-                bp[i].setHeader(CONTENT_TRANSFER_ENCODING, md.transferEncoding);
+                bp[i].setHeader(UrlUtil.CONTENT_TRANSFER_ENCODING, md.transferEncoding);
             }
         }
         mm.writeTo(outStream);
