@@ -74,7 +74,12 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.pool.JDFAuditPool;
+import org.cip4.jdflib.resource.JDFPhaseTime;
+import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.StatusCounter;
 
 /**
  * @author Rainer Prosi
@@ -90,7 +95,7 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
         JDFElement.setLongID(false);
         JDFDoc doc = new JDFDoc(ElementName.DEVICEINFO);
         di=(JDFDeviceInfo) doc.getRoot();
-        
+
     }
     /////////////////////////////////////////////////////////////////////
 
@@ -105,22 +110,39 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
         di.setDeviceID("da");
         assertEquals(di.getDeviceID(), "da");
     }
+    /////////////////////////////////////////////////////////////////////
 
-    /*
-    public void setDeviceStatus(EnumDeviceStatus enumVar)
+    
+    public void testNullDeviceStatus()
     {
-        setAttribute(AttributeName.DEVICESTATUS, enumVar==null ? null : enumVar.getName(), null);
+        di.setDeviceStatus(null);
+        assertNotNull("got here!",di);
     }
-*/
-  public void testNullDeviceStatus()
-  {
-       JDFDoc jmfDoc = new JDFDoc("JMF");
-       JDFJMF jmf=jmfDoc.getJMFRoot();
-       jmf.setDescriptiveName("Initial phase when the RIP starts up");
-       JDFSignal signal=jmf.appendSignal(JDFMessage.EnumType.Status);
-       JDFDeviceInfo di=signal.appendDeviceInfo();
+    /////////////////////////////////////////////////////////////////////
 
-		di.setDeviceStatus(null);
-		System.out.println();
-  }
+    public void testMergeLastPhase()
+    {
+        JDFDoc d=new JDFDoc("JDF");
+        JDFAuditPool ap=d.getJDFRoot().getCreateAuditPool();
+        JDFPhaseTime pt=ap.setPhase(EnumNodeStatus.InProgress,"dummy",null);
+        JDFJobPhase jp=di.createJobPhaseFromPhaseTime(pt);
+        jp.setPhaseAmount(200);
+        jp.setAmount(200);
+        jp.setPhaseWaste(100);
+        JDFDate d1=jp.getPhaseStartTime();
+        JDFDoc doc = new JDFDoc(ElementName.DEVICEINFO);
+        JDFDeviceInfo di2=(JDFDeviceInfo) doc.getRoot();
+
+        JDFJobPhase jp2=(JDFJobPhase) di2.copyElement(jp, null);
+        jp2.setPhaseStartTime(new JDFDate());
+        StatusCounter.sleep(1000);
+        jp2.setPhaseAmount(300);
+        jp2.setPhaseWaste(30);
+        jp2.setAmount(500);
+        assertTrue(di2.mergeLastPhase(di));
+        assertEquals(jp2.getPhaseStartTime(), d1);
+        assertEquals(jp2.getPhaseWaste(), 130.,0.);
+        assertEquals(jp2.getPhaseAmount(), 500.,0.);
+        assertEquals(jp2.getAmount(), 500.,0.);                    
+    }
 }

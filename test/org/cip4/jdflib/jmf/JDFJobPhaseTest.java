@@ -80,6 +80,8 @@ import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
+import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.StatusCounter;
 
 /**
  * @author Rainer Prosi
@@ -160,6 +162,26 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
         assertEquals(jp2.getWasteDifference(jp), 20.0,0.0);
              
     }
-
-  
+    public void testMergeLastPhase()
+    {
+        JDFDoc d=new JDFDoc("JDF");
+        JDFAuditPool ap=d.getJDFRoot().getCreateAuditPool();
+        JDFPhaseTime pt=ap.setPhase(EnumNodeStatus.InProgress,"dummy",null);
+        JDFJobPhase jp=di.createJobPhaseFromPhaseTime(pt);
+        jp.setPhaseAmount(200);
+        jp.setAmount(200);
+        jp.setPhaseWaste(100);
+        JDFDate d1=jp.getPhaseStartTime();
+        JDFJobPhase jp2=(JDFJobPhase) di.copyElement(jp, null);
+        jp2.setPhaseStartTime(new JDFDate());
+        StatusCounter.sleep(1000);
+        jp2.setPhaseAmount(300);
+        jp2.setPhaseWaste(30);
+        jp2.setAmount(500);
+        assertTrue(jp2.mergeLastPhase(jp));
+        assertEquals(jp2.getPhaseStartTime(), d1);
+        assertEquals(jp2.getPhaseWaste(), 130.,0.);
+        assertEquals(jp2.getPhaseAmount(), 500.,0.);
+        assertEquals(jp2.getAmount(), 500.,0.);                    
+    }
 }

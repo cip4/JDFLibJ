@@ -216,7 +216,7 @@ public class JDFQueueEntryTest extends TestCase
         v.add(EnumQueueEntryStatus.Completed);
         filter.setStatusList(v);
         assertFalse(qe.matchesQueueFilter(filter));
-        v.add(EnumQueueEntryStatus.Completed);
+        v.add(EnumQueueEntryStatus.Waiting);
         filter.setStatusList(v);
         assertTrue(qe.matchesQueueFilter(filter));
     }

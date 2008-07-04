@@ -197,7 +197,6 @@ public class RIPTest extends JDFTestCaseBase
         // TODO Auto-generated method stub
         super.tearDown();
         statCounter.setActiveNode(null, null, null);
-        statCounter.setWorkStepID(null);
         statCounter.setWorkType(null);
     }
 

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -106,6 +106,18 @@ public class VectorMapTest extends JDFTestCaseBase
         assertNull(m.getOne("a","b"));
         assertNull(m.get("a"));
     }
+    public void testSetOne()
+    {
+        m.setOne("a", "b1","b");
+        assertEquals(m.getOne("a", 0), "b1");
+        assertEquals(m.size("a"), 2);
+        m.setOne("a", "b2","b4");
+        assertEquals(m.getOne("a", 2), "b2");
+        assertEquals(m.size("a"), 3);
+        m.setOne("aaa", "bb","b4");
+        assertEquals(m.getOne("aaa", 0), "bb");
+        assertEquals(m.size("aaa"), 1);
+     }
 
     /* (non-Javadoc)
      * @see org.cip4.jdflib.JDFTestCaseBase#setUp()

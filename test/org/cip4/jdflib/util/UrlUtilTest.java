@@ -97,7 +97,11 @@ public class UrlUtilTest extends JDFTestCaseBase
     }
 
 
-
+    public void testWriteToURL() throws Exception
+    {
+      //  assertNotNull(UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null));
+    }
+ 
     ///////////////////////////////////////////////////////////////////////////
     public void testIsCid() throws Exception
     {

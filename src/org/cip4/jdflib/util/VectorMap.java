@@ -157,13 +157,33 @@ public class VectorMap<key,vectorObject> extends HashMap<key,Vector<vectorObject
      */
     public void removeOne(key key, vectorObject val)
     {
-        Vector v=get(key);
+        Vector<vectorObject> v=get(key);
         if(v!=null)
         {
             v.remove(val);
             if(v.size()==0)
                 remove(key);
         } 
+    }
+    /**
+     * replace the value for key, add if oldObj==null or is not there
+     */
+    public void setOne(key key, vectorObject newObj, vectorObject oldObj)
+    {
+        
+        Vector<vectorObject> v=get(key);
+        if(v!=null)
+        {
+            int i=v.indexOf(oldObj);
+            if(i<0)
+                putOne(key, newObj);
+            else
+                v.set(i, newObj);
+        } 
+        else
+        {
+            putOne(key, newObj);
+        }
     }
     
 

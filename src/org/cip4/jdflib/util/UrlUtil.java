@@ -79,12 +79,12 @@
  */
 package org.cip4.jdflib.util;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -96,6 +96,7 @@ import javax.mail.BodyPart;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
@@ -108,6 +109,10 @@ import org.cip4.jdflib.core.VString;
  */
 public class UrlUtil
 {
+    public static final String POST = "POST";
+    public static final String GET = "GET";
+    public static final String CONTENT_TRANSFER_ENCODING="Content-Transfer-Encoding"; 
+
     /**
      * helper class to set mime details
      * @author prosirai
@@ -134,7 +139,7 @@ public class UrlUtil
             }
         }
     }
- 
+
     /**
      * simple struct to contain the stream and type of a bodypart
      * @author prosirai
@@ -169,6 +174,19 @@ public class UrlUtil
     }
 //  public static final String m_URIEscape = "%?:@&=+$,[]";
     public static final String m_URIEscape = "%?@&=+$,[]";
+    public static final String TEXT_HTML = "text/html";
+    public static final String TEXT_PLAIN = "text/plain";
+    public static final String TEXT_UNKNOWN = JDFConstants.MIME_TEXTUNKNOWN;
+    public static final String TEXT_XML = JDFConstants.MIME_TEXTXML;
+    public static final String VND_JDF = JDFConstants.MIME_JDF;
+    public static final String VND_JMF = JDFConstants.MIME_JMF;
+    public static final String CONTENT_ID = "Content-ID";
+    /**
+     * commonly used strings
+     */
+    public static final String CONTENT_TYPE = "Content-Type";
+    public static final String BASE64 = "base64";
+    public static final String BINARY = "binary";
 
     /**
      * returns the relative URL of a file relative to the current working directory
@@ -769,6 +787,45 @@ public class UrlUtil
         return prefix + (vs.isEmpty() ? "." : StringUtil.setvString(vs ,"/",null,null));
     }
 
+    /**
+     * write a Stream to an output URL 
+     * File: and http: are currently supported
+     * Use HttpURLConnection.getInputStream() to retrieve the http response
+     * 
+     * @param strUrl the URL to write to
+     * @param sream the input stream to read from
+     * @param method GET or POST
+     * @param contentType the contenttype to set MUST BE SET!
+     * @return {@link UrlPart} the opened http connection, null in case of error
+     * 
+     */   
+    public static UrlPart writeToURL(String strUrl, InputStream stream, String method, String contentType, HTTPDetails details) 
+    {
+        try
+        {
+            URL url=new URL(strUrl);
+            HttpURLConnection httpURLconnection = (HttpURLConnection) url.openConnection();
+            httpURLconnection.setRequestMethod(method);
+            httpURLconnection.setRequestProperty("Connection", "close");
+            contentType=StringUtil.token(contentType, 0, "\r\n");
+            httpURLconnection.setRequestProperty(CONTENT_TYPE,contentType );
+            httpURLconnection.setDoOutput(true);
+            if(details!=null)
+                details.applyTo(httpURLconnection);
 
+            final OutputStream out= httpURLconnection.getOutputStream();
 
+            if(stream!=null)
+                IOUtils.copy(stream, out);
+
+            out.flush();
+            out.close();
+            return new UrlPart(httpURLconnection);   
+        }
+        catch (Exception x)
+        {
+            // System.out.print(x);
+        }
+        return null;
+    }
 }

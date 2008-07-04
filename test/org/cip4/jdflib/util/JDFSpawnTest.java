@@ -397,10 +397,10 @@ public class JDFSpawnTest extends JDFTestCaseBase
             Vector v=new Vector();
             v.add(ElementName.COMPONENT);
             JDFSpawn spawn=new JDFSpawn(n);
- 
+
             JDFNode spawnedNode=spawn.spawn("thisUrl","newURL",v,vMap,false,true,true,true);
             nRoot.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp+"chainSpawn_main0.jdf", 2, false);
-           JDFComponent coSig=(JDFComponent) spawnedNode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
+            JDFComponent coSig=(JDFComponent) spawnedNode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
             coSig=(JDFComponent) coSig.getPartition(map, null);
             assertNotNull(coSig);
             JDFNodeInfo niSig=(JDFNodeInfo) spawnedNode.getResource(ElementName.NODEINFO, EnumUsage.Input, 0);
@@ -415,8 +415,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
                 niSig.addPartition(EnumPartIDKey.SheetName, "S"+j);
                 xmSig.addPartition(EnumPartIDKey.SheetName, "S"+j);
             }
-//            String spawnID=
-            	spawnedNode.getSpawnID(false);
+//          String spawnID=
+            spawnedNode.getSpawnID(false);
             assertTrue("AncestorPool",spawnedNode.hasChildElement(ElementName.ANCESTORPOOL,null));
 
             map.put("SheetName","S1");
@@ -459,8 +459,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
                 System.out.println("Merge"+j);
                 final JDFNode nodeJ = nodes[j];
                 final EnumCleanUpMerge enumCleanUpMerge = EnumCleanUpMerge.getEnum(i);
-//                JDFNode overwritten=
-                	new JDFMerge(nRoot).mergeJDF(nodeJ, null, enumCleanUpMerge, EnumAmountMerge.UpdateLink);
+//              JDFNode overwritten=
+                new JDFMerge(nRoot).mergeJDF(nodeJ, null, enumCleanUpMerge, EnumAmountMerge.UpdateLink);
 
                 assertEquals(nRoot.getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.ID,xm.getID()), false, true, 99, false).size(), 1);
                 assertTrue(nRoot.isValid(EnumValidationLevel.Incomplete));
@@ -605,20 +605,20 @@ public class JDFSpawnTest extends JDFTestCaseBase
     {
         for(int i=0;i<2;i++)
         {
-        JDFDoc doc=new JDFDoc("JDF");
-        JDFNode n=doc.getJDFRoot();
-        n.setType(EnumType.ProcessGroup);
-        if(i==i)
-            n=n.addJDFNode(EnumType.ProcessGroup);
-        JDFNode n2=n.addJDFNode(EnumType.ImageSetting);
-        JDFResource xm=n2.addResource("ExposedMedia", EnumUsage.Input);
-        JDFResource m=n.addResource("Media", null);
-        xm.refElement(m);
-        JDFSpawn spawn=new JDFSpawn(i==1? n : n2);
-        JDFNode si=spawn.spawn();
-        assertNotNull(si.getResourcePool().getElement("Media"));
+            JDFDoc doc=new JDFDoc("JDF");
+            JDFNode n=doc.getJDFRoot();
+            n.setType(EnumType.ProcessGroup);
+            if(i==i)
+                n=n.addJDFNode(EnumType.ProcessGroup);
+            JDFNode n2=n.addJDFNode(EnumType.ImageSetting);
+            JDFResource xm=n2.addResource("ExposedMedia", EnumUsage.Input);
+            JDFResource m=n.addResource("Media", null);
+            xm.refElement(m);
+            JDFSpawn spawn=new JDFSpawn(i==1? n : n2);
+            JDFNode si=spawn.spawn();
+            assertNotNull(si.getResourcePool().getElement("Media"));
         }
-      
+
     }
     //////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////
@@ -886,7 +886,57 @@ public class JDFSpawnTest extends JDFTestCaseBase
         JDFComponent comp=(JDFComponent) rlmerge.getTarget().getPartition(mapSheet, null);
         assertEquals(comp.getAmount(), 66.0,0.0);
         assertEquals(comp.getAmountProduced(), 66.0,0.0);
-        
+
+
+    }
+    ///////////////////////////////////////////////////////////
+
+    public void testSpawnIdentical()
+    {
+        for(int i=0;i<2;i++)
+        {
+            JDFNode n=new JDFDoc("JDF").getJDFRoot();
+            n.setType(EnumType.ImageSetting);
+
+            for(int j=0;j<2;j++)
+            {
+                JDFResource r=j==0 ? n.addResource("ExposedMedia", EnumUsage.Output): n.addResource("Media", EnumUsage.Input);
+                if(i==1)
+                    r=r.addPartition(EnumPartIDKey.SheetName, "s1");
+                JDFResource rEN=r.addPartition(EnumPartIDKey.PartVersion, "EN");
+                JDFResource rDE=r.addPartition(EnumPartIDKey.PartVersion, "DE");
+                r.addPartition(EnumPartIDKey.PartVersion, "FR");
+                rEN.setIdentical(rDE);
+            }
+            VString vRWRes=new VString();
+            vRWRes.add(ElementName.EXPOSEDMEDIA);
+            VJDFAttributeMap vPartMap=new VJDFAttributeMap();
+            JDFAttributeMap map=new JDFAttributeMap();
+            map.put("PartVersion","EN");
+            vPartMap.add(map);
+            final JDFSpawn spawn=new JDFSpawn(n); // fudge to test output counting
+
+            JDFNode  spawnedNode=spawn.spawn("thisUrl","newURL",vRWRes,vPartMap,true,true,true,true);
+            for(int j=0;j<2;j++)
+            {
+                JDFResource rS=spawnedNode.getResource((j==0?"Exposed":"")+ElementName.MEDIA, null, 0);
+                JDFResource rs2 = rS.getPartition(map, null);
+                assertNotNull(rs2);
+                assertNull(rS.getPartition(new JDFAttributeMap(EnumPartIDKey.PartVersion, "FR"), null));
+            }
+
+            final JDFMerge merge = new JDFMerge(n);
+            merge.bAddMergeToProcessRun=true;
+
+            // merge here
+            JDFNode mergedNode=merge.mergeJDF(spawnedNode, "merged", JDFNode.EnumCleanUpMerge.None, EnumAmountMerge.UpdateLink);
+            for(int j=0;j<2;j++)
+            {
+                JDFResource rMerge=mergedNode.getResource((j==0?"Exposed":"")+ElementName.MEDIA, null, 0);
+                assertEquals(rMerge.toString().indexOf("Spawn"), -1);
+            }
+        }
+
 
     }
     ///////////////////////////////////////////////////////////
@@ -1869,59 +1919,59 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
     public void testSpawnSheetMix() throws Exception
     {
-       JDFNode nr=new JDFDoc("JDF").getJDFRoot();
-       nr.setType(EnumType.Product);
-       JDFNode n=nr.addJDFNode("Combined");
-       JDFNodeInfo ni=n.getCreateNodeInfo();
-       n.setCombined(new VString("Interpreting Rendering ImageSetting",null));
-       JDFRunList rl=(JDFRunList) n.addResource(ElementName.RUNLIST, null, EnumUsage.Output,null,nr,null,null);
-       rl.setPartUsage(EnumPartUsage.Implicit);
-       VString pik=new VString("SignatureName SheetName Side Separation PartVersion",null);
-       JDFAttributeMap map=new JDFAttributeMap(AttributeName.SIGNATURENAME,"Sig1");
-       map.put(AttributeName.PARTVERSION,"en");
-       map.put(AttributeName.SHEETNAME,"s1");
-       map.put(AttributeName.SIDE,"Front");
-       map.put(AttributeName.SEPARATION,"Black");
-       rl.getCreatePartition(map, pik);
-       ni.getCreatePartition(map, pik);
-       map.put(AttributeName.SEPARATION,"Cyan");
-       rl.getCreatePartition(map, pik);
-       ni.getCreatePartition(map, pik);
-       map.put(AttributeName.SEPARATION,"Yellow");
-       ni.getCreatePartition(map, pik);
-      
-       VJDFAttributeMap vm=new VJDFAttributeMap();
-       JDFAttributeMap ms=new JDFAttributeMap(AttributeName.SIGNATURENAME,"Sig1");
-       ms.put(AttributeName.PARTVERSION,"en");
-       ms.put(AttributeName.SEPARATION,"Black");
-       vm.add(ms);
-       JDFAttributeMap ms2=new JDFAttributeMap(ms);
-       ms2.put(AttributeName.SEPARATION,"Yellow"); // not there...
-       vm.add(ms2);
-       
-       JDFSpawn sp=new JDFSpawn(n);
-       sp.vSpawnParts=vm;
-       sp.vRWResources_in=new VString("Output",null);
-       sp.bFixResources=false;
-       
-       JDFNode spawned = sp.spawn();
-       
-       JDFRunList rlS=(JDFRunList) spawned.getResource(ElementName.RUNLIST, null, 0);
-       assertTrue(rlS.toString().indexOf("Cyan")>0);
-       map.put(AttributeName.SEPARATION,"Magenta");
-       rlS.getCreatePartition(map, pik);
-       
-       assertTrue(rl.toString().indexOf("SpawnedRW")>0);
-       assertEquals(rl.getPartition(ms2, null).getAttribute_KElement(AttributeName.SPAWNSTATUS),"SpawnedRW");
-  //     assertEquals(rl.getPartition(ms, null).getAttribute_KElement(AttributeName.SPAWNSTATUS),"");
-       
-       JDFMerge m=new JDFMerge(nr);
-       n=m.mergeJDF(spawned, null, EnumCleanUpMerge.RemoveAll, EnumAmountMerge.UpdateLink);
-       
-       assertTrue(rl.toString().indexOf("SpawnedRW")<0);
-       assertTrue(n.toString().indexOf("SpawnedRW")<0);
-       assertTrue(n.toString().indexOf("SpawnID")<0);
-       assertNotNull(rl.getPartition(map, null));
+        JDFNode nr=new JDFDoc("JDF").getJDFRoot();
+        nr.setType(EnumType.Product);
+        JDFNode n=nr.addJDFNode("Combined");
+        JDFNodeInfo ni=n.getCreateNodeInfo();
+        n.setCombined(new VString("Interpreting Rendering ImageSetting",null));
+        JDFRunList rl=(JDFRunList) n.addResource(ElementName.RUNLIST, null, EnumUsage.Output,null,nr,null,null);
+        rl.setPartUsage(EnumPartUsage.Implicit);
+        VString pik=new VString("SignatureName SheetName Side Separation PartVersion",null);
+        JDFAttributeMap map=new JDFAttributeMap(AttributeName.SIGNATURENAME,"Sig1");
+        map.put(AttributeName.PARTVERSION,"en");
+        map.put(AttributeName.SHEETNAME,"s1");
+        map.put(AttributeName.SIDE,"Front");
+        map.put(AttributeName.SEPARATION,"Black");
+        rl.getCreatePartition(map, pik);
+        ni.getCreatePartition(map, pik);
+        map.put(AttributeName.SEPARATION,"Cyan");
+        rl.getCreatePartition(map, pik);
+        ni.getCreatePartition(map, pik);
+        map.put(AttributeName.SEPARATION,"Yellow");
+        ni.getCreatePartition(map, pik);
+
+        VJDFAttributeMap vm=new VJDFAttributeMap();
+        JDFAttributeMap ms=new JDFAttributeMap(AttributeName.SIGNATURENAME,"Sig1");
+        ms.put(AttributeName.PARTVERSION,"en");
+        ms.put(AttributeName.SEPARATION,"Black");
+        vm.add(ms);
+        JDFAttributeMap ms2=new JDFAttributeMap(ms);
+        ms2.put(AttributeName.SEPARATION,"Yellow"); // not there...
+        vm.add(ms2);
+
+        JDFSpawn sp=new JDFSpawn(n);
+        sp.vSpawnParts=vm;
+        sp.vRWResources_in=new VString("Output",null);
+        sp.bFixResources=false;
+
+        JDFNode spawned = sp.spawn();
+
+        JDFRunList rlS=(JDFRunList) spawned.getResource(ElementName.RUNLIST, null, 0);
+//      why???      assertTrue(rlS.toString().indexOf("Cyan")>0);
+        map.put(AttributeName.SEPARATION,"Magenta");
+        rlS.getCreatePartition(map, pik);
+
+        assertTrue(rl.toString().indexOf("SpawnedRW")>0);
+        assertEquals(rl.getPartition(ms2, null).getAttribute_KElement(AttributeName.SPAWNSTATUS),"SpawnedRW");
+        //     assertEquals(rl.getPartition(ms, null).getAttribute_KElement(AttributeName.SPAWNSTATUS),"");
+
+        JDFMerge m=new JDFMerge(nr);
+        n=m.mergeJDF(spawned, null, EnumCleanUpMerge.RemoveAll, EnumAmountMerge.UpdateLink);
+
+        assertTrue(rl.toString().indexOf("SpawnedRW")<0);
+        assertTrue(n.toString().indexOf("SpawnedRW")<0);
+        assertTrue(n.toString().indexOf("SpawnID")<0);
+        assertNotNull(rl.getPartition(map, null));
     }
 
     //////////////////////////////////////////////////////////
