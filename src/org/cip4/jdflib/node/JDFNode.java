@@ -2923,7 +2923,7 @@ public class JDFNode extends JDFElement
      * @param resourceLink
      * @param types
      */
-    private void generateCombinedProcessIndex(JDFResource jdfResource, EnumUsage usage, EnumProcessUsage processUsage, JDFResourceLink resourceLink, final VString types)
+    public void generateCombinedProcessIndex(JDFResource jdfResource, EnumUsage usage, EnumProcessUsage processUsage, JDFResourceLink resourceLink, final VString types)
     {
         JDFIntegerList cpi=new JDFIntegerList();
         final String resName=jdfResource.getLocalName();

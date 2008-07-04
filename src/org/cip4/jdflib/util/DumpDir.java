@@ -90,6 +90,11 @@ import org.apache.commons.io.IOUtils;
  */
 public class DumpDir {
 
+    /**
+     * very simple and fast mutable integer class
+     * @author prosirai
+     *
+     */
     private class MyInt
     {        
         public int i=0;
@@ -98,6 +103,7 @@ public class DumpDir {
             return String.valueOf(i);
         }
     }
+    //////////////////////////////////////////////////////////////////////////
     private File baseDir=null;
     private static HashMap<File,MyInt> listMap=new HashMap<File,MyInt>();
     private int maxKeep=500;
@@ -116,7 +122,7 @@ public class DumpDir {
     }
 
     /**
-     * 
+     * create a dumpdir with dir as the root
      */
     public DumpDir(File dir)
     {
@@ -146,7 +152,15 @@ public class DumpDir {
         }
     }
 
-    
+
+    /**
+     * returns the base directory as a File
+     * @return
+     */
+    public File getDir()
+    {
+        return baseDir;
+    }
     /** 
      * create a new File in this dump
      * 

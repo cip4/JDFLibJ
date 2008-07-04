@@ -95,6 +95,7 @@ import org.apache.xerces.dom.ElementDefinitionImpl;
 import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
 import org.cip4.jdflib.util.HashUtil;
+import org.cip4.jdflib.util.StatusCounter;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.UrlUtil.HTTPDetails;
@@ -385,7 +386,8 @@ public class XMLDoc
     {
         if(oFilePath==null)
             oFilePath=m_doc.m_OriginalFileName;
-
+        if(oFilePath==null)
+            return false;
         return write2File(new File(oFilePath), indent, bPreserveSpace);
     }    
 
@@ -1517,23 +1519,28 @@ public class XMLDoc
      */
     public HttpURLConnection write2HTTPURL(final URL url, String strContentType, HTTPDetails det)
     {
-        try
+        for (int i=0;i<2;i++) //
         {
-            final HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
-            urlCon.setDoOutput(true);
-            urlCon.setRequestProperty("Connection", "close");
-            urlCon.setRequestProperty("Content-Type", strContentType);
-            if(det!=null)
+            try
             {
-                det.applyTo(urlCon);
+                final HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
+                urlCon.setDoOutput(true);
+                urlCon.setRequestProperty("Connection", "close");
+                urlCon.setRequestProperty("Content-Type", strContentType);
+                if(det!=null)
+                {
+                    det.applyTo(urlCon);
 
+                }
+                write2Stream(urlCon.getOutputStream(), 0, true);
+                return urlCon;
+            } 
+            catch (IOException e) 
+            {
+               StatusCounter.sleep(1000); // wait and retry once
             }
-            write2Stream(urlCon.getOutputStream(), 0, true);
-            return urlCon;
-        } 
-        catch (IOException e) {
-            return null;
         }
+        return null;
     }
 
     /**

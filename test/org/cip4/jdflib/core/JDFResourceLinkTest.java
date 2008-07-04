@@ -258,6 +258,22 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
         assertEquals(rl.getPipeProtocol(),"JDF");
 
     }
+    
+    public void testGenerateCPI() throws Exception
+    {
+        JDFDoc d=new JDFDoc(ElementName.JDF);
+        JDFNode n=d.getJDFRoot();
+        n.setVersion(JDFElement.EnumVersion.Version_1_3);
+        JDFResource r=n.addResource(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input);
+        JDFResourceLink rl=n.getLink(r, null);
+        assertNull(rl.getCombinedProcessIndex());
+        n.setCombined(new VString("ImageSetting ConventionalPrinting",null));
+        rl.generateCombinedProcessIndex();
+        assertEquals(rl.getCombinedProcessIndex(), new JDFIntegerList("1"));
+        n.setCombined(new VString("ImageSetting ConventionalPrinting ConventionalPrinting",null));
+        rl.generateCombinedProcessIndex();
+        assertEquals(rl.getCombinedProcessIndex(), new JDFIntegerList("1 2"));
+     }
 
     public void testGetAmountPoolDouble()
     {
