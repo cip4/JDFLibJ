@@ -326,16 +326,12 @@ public class XMLDoc
         try
         {
             outStream = new ByteArrayOutputStream(4096);
-            write2Stream(outStream, indent);
+            write2Stream(outStream, indent, indent==0);
             strResult = outStream.toString("UTF-8");
         }
         catch (IOException e)
         {
-            System.out.println("write2String: " + 
-                    ((outStream != null) 
-                            ? outStream.toString()
-                                    : "")
-                                    + " : " + e);
+            System.out.println("write2String: "+outStream + " : " + e);
         }
         finally
         {
@@ -347,7 +343,7 @@ public class XMLDoc
                 }
                 catch (IOException e1)
                 {
-                    e1.printStackTrace();
+                    //nop
                 }
             } 
         }

@@ -158,6 +158,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.ifaces.IMatches;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFQueueEntry;
 import org.cip4.jdflib.pool.JDFAmountPool;
@@ -1717,7 +1718,7 @@ public class JDFNode extends JDFElement
      * class to identify nodes even after parsing, e.g in hashmaps
      * uses JobID, JobPartID and the partMapVector as identifier
      */
-    public static final class NodeIdentifier
+    public static final class NodeIdentifier implements IMatches
     {
         private String _jobID;
         private String _jobPartID;
@@ -1803,13 +1804,18 @@ public class JDFNode extends JDFElement
         }
         /**
          * return true if the nodeIdentifier matches this, i.e. if all parameters match or mt has matching wildcards
+         * @see IMatches 
          * @param mt the nodeidentifier that this should match
          * @return
          */
-        public boolean matches(NodeIdentifier mt)
+        public boolean matches(Object o)
         {
-            if(mt==null)
+            
+            if(o==null)
                 return true;
+            if(!(o instanceof NodeIdentifier))
+                return false;
+            NodeIdentifier mt=(NodeIdentifier)o;
             boolean b= isWildCard(mt._jobID) || ContainerUtil.equals(mt._jobID,_jobID);
             b=b && (isWildCard(mt._jobID) || ContainerUtil.equals(mt._jobPartID,_jobPartID));
             return  b && ((_partMapVector==null) ||(_partMapVector!=null && _partMapVector.overlapsMap(mt._partMapVector)));
