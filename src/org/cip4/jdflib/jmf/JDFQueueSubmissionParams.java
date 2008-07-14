@@ -177,8 +177,8 @@ import org.cip4.jdflib.util.JDFDate;
             resp.copyElement(theQueue, null);
             return resp;
         }
-        JDFQueueEntry qe=theQueue.appendQueueEntry();
-        qe.setQueueEntryStatus(getHold() ? EnumQueueEntryStatus.Held : EnumQueueEntryStatus.Waiting);
+        JDFQueueEntry qe=theQueue.createQueueEntry(getHold());
+         
         final String copyAtts[]=new String[]{
                AttributeName.GANGNAME, AttributeName.GANGPOLICY};
         
@@ -186,12 +186,10 @@ import org.cip4.jdflib.util.JDFDate;
         if(hasAttribute(copyAtts[i]))
             qe.copyAttribute(copyAtts[i], this, null, null, null);
         
+        // TODO more attributes e.g prev. next...
         if(hasAttribute(AttributeName.PRIORITY))
             qe.setPriority(getPriority()); // calls the automated function, therfore not in the list above
 
-        qe.setQueueEntryID("qe"+uniqueID(0));
-        // TODO more attributes e.g prev. next...
-        qe.setSubmissionTime(new JDFDate());
         
         resp.copyElement(theQueue, null);
         resp.copyElement(qe, null);

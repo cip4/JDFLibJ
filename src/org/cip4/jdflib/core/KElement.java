@@ -1806,6 +1806,29 @@ public class KElement extends ElementNSImpl
         }
         return null;
     }
+    /**
+     * Gets the previous sibling named nodename from
+     * the namespace nameSpaceURI of 'this'.
+     *
+     * @param nodeName       the name of the sibling
+     * @param nameSpaceURI   the namespace of the sibling
+     *
+     * @return KElement      the next sibling element of 'this',
+     *                       null if none is found
+     */
+    public KElement getFirstChildElement(String nodeName, String nameSpaceURI)
+    {
+        KElement e = getFirstChildElement();
+        while (e != null)
+        {
+            if (e.fitsName(nodeName, nameSpaceURI))
+            {
+                return e;
+            }
+            e = e.getNextSiblingElement();
+        }
+        return null;
+    }
 
     /**
      * Gets the previous sibling named nodename from

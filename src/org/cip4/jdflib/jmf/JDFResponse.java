@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,6 +85,7 @@ import java.util.Map;
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoResponse;
+import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.resource.JDFNotification;
 
 
@@ -202,12 +203,17 @@ public class JDFResponse extends JDFAutoResponse //JDFMessage
      */
     public JDFNotification setErrorText(String errorText)
     {
-        final JDFNotification n=appendNotification();
+        final JDFNotification n=getCreateNotification();
         n.setType("Error");
         n.setClass(JDFNotification.EnumClass.Error);
         if(errorText!=null)
         {
-            n.appendComment().appendText(errorText);
+            JDFComment c=n.getComment(0);
+            if(c!=null)
+                c.appendText("\n");
+            else
+                c=n.appendComment();
+            c.appendText(errorText);
         }
         return n;
     }

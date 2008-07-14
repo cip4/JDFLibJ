@@ -122,8 +122,8 @@ public class QueueTest extends TestCase
         public void cleanEntry(JDFQueueEntry qe)
         {
             i++;
-         }
-        
+        }
+
     }
     public String toString()
     {
@@ -139,6 +139,80 @@ public class QueueTest extends TestCase
         assertEquals("qe6",-1,q.getQueueEntryPos("qe6"));
         assertEquals("qe2",1,q.getQueueEntryPos("qe2"));
     }
+    public void testCreateQueueEntry()
+    {
+        q.setAutomated(true);
+        q.setMaxRunningEntries(2);
+        q.setMaxWaitingEntries(3);
+        q.flushQueue(null);
+        JDFQueueEntry qe=q.createQueueEntry(false);
+        assertEquals(qe.getQueueEntryStatus(), EnumQueueEntryStatus.Waiting);
+        qe=q.createQueueEntry(true);
+        assertEquals(qe.getQueueEntryStatus(), EnumQueueEntryStatus.Held);
+        q.setMaxWaitingEntries(1);
+        qe=q.createQueueEntry(true);
+        assertNull(qe);
+    }
+
+    /////////////////////////////////////
+    public void testOpenClose()
+    {
+        q.setAutomated(true);
+        q.setMaxRunningEntries(2);
+        q.setMaxWaitingEntries(3);
+        q.flushQueue(null);
+        assertEquals(q.openQueue(),EnumQueueStatus.Waiting);
+        assertTrue(q.canAccept());
+        assertTrue(q.canExecute());
+        assertEquals(q.closeQueue(),EnumQueueStatus.Closed);
+        assertFalse(q.canAccept());
+        assertTrue(q.canExecute());
+        assertEquals(q.openQueue(),EnumQueueStatus.Waiting);
+        assertEquals(q.holdQueue(),EnumQueueStatus.Held);
+        assertTrue(q.canAccept());
+        assertFalse(q.canExecute());
+        assertEquals(q.resumeQueue(),EnumQueueStatus.Waiting);
+        assertEquals(q.holdQueue(),EnumQueueStatus.Held);
+        assertEquals(q.closeQueue(),EnumQueueStatus.Blocked);
+        assertFalse(q.canAccept());
+        assertFalse(q.canExecute());
+        assertEquals(q.resumeQueue(),EnumQueueStatus.Closed);
+        assertEquals(q.openQueue(),EnumQueueStatus.Waiting);
+        JDFQueueEntry qe=q.createQueueEntry(false);
+        qe=q.createQueueEntry(false);
+        assertTrue(q.canAccept());
+        assertEquals(q.getQueueStatus(),EnumQueueStatus.Waiting);
+        qe=q.createQueueEntry(false);
+        assertFalse("max 3 waiting - see above ",q.canAccept());
+        assertEquals(q.getQueueStatus(),EnumQueueStatus.Closed);
+        qe.setQueueEntryStatus(EnumQueueEntryStatus.Running);
+        assertTrue("max 3 waiting - see above ",q.canAccept());
+        assertTrue("max 3 waiting - see above ",q.canExecute());
+        assertEquals(q.getQueueStatus(),EnumQueueStatus.Waiting);
+        qe=q.createQueueEntry(false);
+        qe.setQueueEntryStatus(EnumQueueEntryStatus.Running);
+        assertEquals(q.getQueueStatus(),EnumQueueStatus.Running);
+        qe=q.createQueueEntry(false);
+        assertEquals(q.getQueueStatus(),EnumQueueStatus.Full);
+
+
+    }
+    public void testSetAutomated()
+    {
+        q.flush();
+        q.setAutomated(true);
+        assertEquals(q.isAutomated(),true);
+        assertEquals(q.getQueueStatus(),EnumQueueStatus.Waiting);
+    }
+    public void testFlushAutomated()
+    {
+        q.setAutomated(true);
+        q.setMaxWaitingEntries(1);
+        assertEquals(q.getQueueStatus(),EnumQueueStatus.Full);
+        q.flushQueue(null);
+        assertEquals(q.getQueueStatus(),EnumQueueStatus.Waiting);
+
+    }
     public void testGetQueueEntryByIdentifier()
     {
         q.getQueueEntry(1).setJobID("j7");
@@ -148,7 +222,7 @@ public class QueueTest extends TestCase
         assertNull(q.getQueueEntry(ni,-2));
         assertNull(q.getQueueEntry(ni,1));
         q.getQueueEntry(3).setJobID("j7");
-        
+
         assertEquals(q.getQueueEntry(ni,0), q.getQueueEntry(1));
         assertEquals(q.getQueueEntry(ni,-1), q.getQueueEntry(3));
         assertEquals(q.getQueueEntry(ni,1), q.getQueueEntry(3));
@@ -229,6 +303,11 @@ public class QueueTest extends TestCase
 
 /////////////////////////////////////////////////////////////////////////////
 
+    public void testNumEntries()
+    {
+        assertEquals(5,q.numEntries(null)); 
+        assertEquals(2,q.numEntries(EnumQueueEntryStatus.Waiting)); 
+    }
     public void testGetQueueEntryVector()
     {
         assertEquals(5,q.getQueueEntryVector().size()); 
@@ -275,7 +354,7 @@ public class QueueTest extends TestCase
 
     public void testCleanup()
     {
-        
+
         JDFQueueEntry qe=q.appendQueueEntry();
         MyClean myClean = new MyClean();
         assertEquals(myClean.i, 0);

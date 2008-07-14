@@ -213,7 +213,7 @@ public class JDFMerge
         // now burn it in!
         overWriteNode=(JDFNode)overWriteNode.replaceElement(subJDFNode);
         overWriteNode.eraseEmptyNodes(true);
-        overWriteNode.synchParentAmounts(); // add all actualamounts into the merged parent gray box
+        //overWriteNode.synchParentAmounts(); // add all actualamounts into the merged parent gray box
         // update all stati (generally in NodeInfo) of the merged node and of the parents of the merged node
         if(bUpdateStati)
             overWriteNode.updatePartStatus(parts, true, true);
@@ -655,10 +655,8 @@ public class JDFMerge
         final String resID=leafRes.getID();
         if(spawnIDs==null || spawnIDs.isEmpty())
         {
-            leafRes.removeAttribute(AttributeName.SPAWNIDS);
-            leafRes.removeAttribute(AttributeName.SPAWNSTATUS);
-            leafRes.removeAttribute(AttributeName.LOCKED);
-
+            removeSpawnAttributes(leafRes);
+            return;
         }
         else if(bLocal || vsRW.contains(resID))
         {
@@ -678,9 +676,19 @@ public class JDFMerge
                         bWrite=true;
                     }
                 }
-                else  // retain rw status of spawns that were initiated off line
+                else  //clean up spurious spawnids of spawns that were initiated off line
                 {
-                    bWrite=bWrite || EnumSpawnStatus.SpawnedRW.equals(leafRes.getSpawnStatus());
+                    String mainSpawnID=leafRes.getJDFRoot().getSpawnID(true);
+                    if(KElement.isWildCard(mainSpawnID)) // only remove unknown spawnids in a real main ticket Spawned spawnids may be specified in a spawn ancestor
+                    {
+                        leafRes.removeFromAttribute(AttributeName.SPAWNIDS, resSpawnID, null, null, -1);
+                        final VString spawnIDsNew=leafRes.getSpawnIDs(false);
+                        if(spawnIDsNew==null || spawnIDsNew.isEmpty())
+                        {
+                            removeSpawnAttributes(leafRes);
+                            return;
+                        }
+                    }
                 }
             }  
             if(bWrite)
@@ -692,13 +700,22 @@ public class JDFMerge
             {
                 leafRes.setSpawnStatus(EnumSpawnStatus.SpawnedRO);
                 leafRes.setLocked(false);
-
             }
         }
         else // this was ro
         {
             // nop
         }
+    }
+
+    /**
+     * @param leafRes
+     */
+    private void removeSpawnAttributes(final JDFResource leafRes)
+    {
+        leafRes.removeAttribute(AttributeName.SPAWNIDS);
+        leafRes.removeAttribute(AttributeName.SPAWNSTATUS);
+        leafRes.removeAttribute(AttributeName.LOCKED);
     }
     /**
      * 
@@ -1023,10 +1040,9 @@ public class JDFMerge
 
                 if (vSpawnIDs==null || vSpawnIDs.isEmpty())
                 {
-                    thisResNode.removeAttribute(AttributeName.SPAWNIDS);
-                    thisResNode.removeAttribute(AttributeName.SPAWNSTATUS);
+                    removeSpawnAttributes(thisResNode);
                 }
-                else if (siz != vSpawnIDs.size())
+                else if (siz < vSpawnIDs.size())
                 {
                     thisResNode.setSpawnIDs(vSpawnIDs);
                     // one of the spawnstatus elements was rw, must also be valid here

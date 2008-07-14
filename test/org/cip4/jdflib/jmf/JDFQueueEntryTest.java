@@ -154,7 +154,7 @@ public class JDFQueueEntryTest extends TestCase
         JDFQueueEntry qe=q.getQueueEntry("qe2");
         assertEquals(q.getQueueEntryPos("qe2"), 1);
         q.setAutomated(true);
-        assertNull(q.getQueueStatus());
+        assertEquals(q.getQueueStatus(),EnumQueueStatus.Running);
         q.setMaxRunningEntries(3);
         q.setMaxCompletedEntries(9999);
         int l=q.numEntries(null);

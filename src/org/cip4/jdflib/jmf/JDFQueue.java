@@ -87,6 +87,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
+import org.cip4.jdflib.util.JDFDate;
 
 
 public class JDFQueue extends JDFAutoQueue
@@ -97,10 +98,16 @@ public class JDFQueue extends JDFAutoQueue
      */
     private int maxRunningEntries=1;
     /**
+     * number of concurrent waiting entries 
+     */
+    private int maxWaitingEntries=1000000;
+    /**
      * max number of completed entries to retain 
      */
     private int maxCompletedEntries=0;
     private boolean automated=false;
+    private boolean bAccepting=true; // new entries may be added to the queue
+    private boolean bProcessing=true; // new entries may be processed by the queue processor
     private CleanupCallback cleanupCallback=null;
     /** 
      * callback class definition for cleaning up in cleanup
@@ -123,6 +130,50 @@ public class JDFQueue extends JDFAutoQueue
         super(myOwnerDocument, qualifiedName);
     }
 
+    /**
+     * set the status as if an OpenQueue command has been sent
+     * @return
+     */
+    public EnumQueueStatus openQueue()
+    {
+        if(bAccepting)
+            return getQueueStatus();
+        bAccepting=true;
+        return setStatusFromEntries();
+    }
+    /**
+     * set the status as if a CloseQueue command has been sent
+     * @return
+     */
+    public EnumQueueStatus closeQueue()
+    {
+        if(!bAccepting)
+            return getQueueStatus();
+        bAccepting=false;
+        return setStatusFromEntries();
+    }
+    /**
+     * set the status as if a HoldQueue command has been sent
+     * @return
+     */
+    public EnumQueueStatus holdQueue()
+    {
+        if(!bProcessing)
+            return getQueueStatus();
+        bProcessing=false;
+        return setStatusFromEntries();
+    }
+    /**
+     * set the status as if a HoldQueue command has been sent
+     * @return
+     */
+    public EnumQueueStatus resumeQueue()
+    {
+        if(bProcessing)
+            return getQueueStatus();
+        bProcessing=true;
+        return setStatusFromEntries();
+    }
     /**
      * Constructor for JDFQueue
      * @param myOwnerDocument
@@ -172,7 +223,7 @@ public class JDFQueue extends JDFAutoQueue
      */
     public VElement getQueueEntryVector()
     {
-        return getChildrenByTagName(ElementName.QUEUEENTRY,null,null, false, true,0);
+        return getChildElementVector(ElementName.QUEUEENTRY,null,null, true,-1, true);
     }
     /**
      * Get a vector of queueentry elements with a given set of attributes and part maps
@@ -180,7 +231,7 @@ public class JDFQueue extends JDFAutoQueue
      */
     public synchronized VElement getQueueEntryVector(JDFAttributeMap attMap, VJDFAttributeMap parts)
     {
-        VElement v=getChildrenByTagName(ElementName.QUEUEENTRY,null,attMap, true, true,0);
+        VElement v=getChildElementVector(ElementName.QUEUEENTRY,null,attMap, true,-1, true);
         if(parts!=null)
         {
             for(int i=v.size()-1;i>=0;i--)
@@ -227,6 +278,21 @@ public class JDFQueue extends JDFAutoQueue
     }
 
     /**
+     * create a queueEntry if this queue is accepting
+     * @param bHeld, if true, set the qe Status to Held
+     * @return the newly created queueEntry, null if failed
+     */
+    public JDFQueueEntry createQueueEntry(boolean bHeld)
+    {
+        if(!canAccept())
+            return null;
+        JDFQueueEntry qe=appendQueueEntry();
+        qe.setQueueEntryID("qe"+uniqueID(0));
+        qe.setSubmissionTime(new JDFDate());
+        qe.setQueueEntryStatus(bHeld ? EnumQueueEntryStatus.Held : EnumQueueEntryStatus.Waiting);
+        return qe;
+    }
+    /**
      * flush this queue according to the rules defined in qf
      * @param qf
      * @return null if none were removed, else vector of removed queuentries
@@ -250,6 +316,8 @@ public class JDFQueue extends JDFAutoQueue
                 siz--;
             }
         }
+        if(automated)
+            setStatusFromEntries();
         return siz==0 ? null : ve;
         
     }
@@ -487,7 +555,7 @@ public class JDFQueue extends JDFAutoQueue
         EnumQueueStatus status=getQueueStatus();
         if(EnumQueueStatus.Blocked.equals(status))
             return false;
-        if(EnumQueueStatus.Held.equals(status))
+        if(EnumQueueStatus.Closed.equals(status))
             return false;
         if(EnumQueueStatus.Full.equals(status))
             return false;
@@ -495,7 +563,7 @@ public class JDFQueue extends JDFAutoQueue
             return true;
         //if(EnumQueueStatus.Blocked.equals(status))
         // blocked or null(illegal)
-        return hasAttribute(AttributeName.QUEUESIZE)?numEntries(null)<getQueueSize():true;         
+        return hasAttribute(AttributeName.QUEUESIZE)?numEntries(null)<getQueueSize():!maxWaiting();         
     }
 
     /**
@@ -530,6 +598,7 @@ public class JDFQueue extends JDFAutoQueue
                 }
             }
         } 
+        setStatusFromEntries();
      }
 
     /**
@@ -560,8 +629,16 @@ public class JDFQueue extends JDFAutoQueue
      */
     public int numEntries(EnumQueueEntryStatus qeStatus)
     {
-        VElement v=getQueueEntryVector(qeStatus==null ? null : new JDFAttributeMap(AttributeName.STATUS,qeStatus),null);
-        return v==null ? 0 : v.size();
+        int n=0;
+        JDFQueueEntry qe=(JDFQueueEntry)getFirstChildElement(ElementName.QUEUEENTRY,null);
+        String stat=qeStatus==null ? null : qeStatus.getName();
+        while(qe!=null)
+        {
+            if(stat==null || stat.equals(qe.getAttribute(AttributeName.STATUS)))
+                n++;
+            qe=(JDFQueueEntry) qe.getNextSiblingElement(ElementName.QUEUEENTRY,null);
+        }
+        return n;
     }
 
     /**
@@ -569,9 +646,14 @@ public class JDFQueue extends JDFAutoQueue
       */
     private boolean maxRunning()
     {
-        VElement v=getChildrenByTagName(ElementName.QUEUEENTRY,null,new JDFAttributeMap(AttributeName.STATUS,"Running"), true, true,maxRunningEntries);
-        int n= v==null ? 0 : v.size();
-        return n==maxRunningEntries;
+         return numEntries(EnumQueueEntryStatus.Running)>=maxRunningEntries;
+    }
+    /**
+     * return true if the number of  entries running is exceeded - performance
+      */
+    private boolean maxWaiting()
+    {
+        return numEntries(EnumQueueEntryStatus.Waiting)>=maxWaitingEntries;
     }
     /**
      * make this a smart queue when modifying queueentries
@@ -579,7 +661,9 @@ public class JDFQueue extends JDFAutoQueue
      */
     public void setAutomated(boolean _automated)
     {
-        automated=_automated;        
+        automated=_automated;  
+        if(automated)
+            setStatusFromEntries();
     }
 
     /**
@@ -606,16 +690,45 @@ public class JDFQueue extends JDFAutoQueue
      * set the status of this queue based on the status values of the queueentries
      * @return the newly set Status, null if not modified
      */
-    public EnumQueueStatus setStatusFromEntries()
+    public synchronized EnumQueueStatus setStatusFromEntries()
     {
         EnumQueueStatus queueStatus = getQueueStatus();
         EnumQueueStatus newStatus = null;
-        if(queueStatus==null || EnumQueueStatus.Waiting.equals(queueStatus) || EnumQueueStatus.Running.equals(queueStatus))
+        if(bAccepting)
         {
-            if(!maxRunning())
-                newStatus=EnumQueueStatus.Waiting;
-            else 
-                newStatus=EnumQueueStatus.Running;
+            if(bProcessing)
+            {
+                boolean maxRunning = maxRunning();
+                boolean maxWaiting = maxWaiting();
+                if(!maxRunning)
+                {
+                    if(!maxWaiting)
+                        newStatus=EnumQueueStatus.Waiting;
+                    else
+                        newStatus=EnumQueueStatus.Closed;
+
+                }
+                else if(!maxWaiting)
+                    newStatus=EnumQueueStatus.Running;
+                else
+                    newStatus=EnumQueueStatus.Full;
+            }
+            else // accepting but not processing
+            {
+                newStatus=EnumQueueStatus.Held;
+            }
+        }
+        else // queue is closed
+        {
+            if(bProcessing)
+            {
+                newStatus=EnumQueueStatus.Closed;
+            }
+            else // accepting but not processing
+            {
+                newStatus=EnumQueueStatus.Blocked;
+            }
+            
         }
  
         if(newStatus!=null)
@@ -662,6 +775,15 @@ public class JDFQueue extends JDFAutoQueue
     public void setMaxRunningEntries(int _maxRunningEntries)
     {
         this.maxRunningEntries = _maxRunningEntries;
+        if(automated)
+            setStatusFromEntries();
+    }
+    /**
+     * @param _maxWaitingEntries the setMaxWaitingEntries to set, excluding held entries
+     */
+    public void setMaxWaitingEntries(int _maxWaitingEntries)
+    {
+        this.maxWaitingEntries = _maxWaitingEntries;
         if(automated)
             setStatusFromEntries();
     }

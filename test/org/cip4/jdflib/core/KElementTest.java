@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -167,6 +167,33 @@ public class KElementTest extends JDFTestCaseBase
         assertTrue(e1.getMultipleIDs("ID").contains("i2"));
 
     }
+    ///////////////////////////////////////////////////////////
+
+    public void testGetFirstChildElement()
+    {
+        XMLDoc d=new XMLDoc("e1",null);
+        KElement e1=d.getRoot();
+        KElement a=e1.appendElement("a");
+        KElement b=e1.appendElement("b");
+        KElement c=e1.appendElement("c:c","cc");
+        assertEquals(e1.getFirstChildElement("a", null), a);
+        assertEquals(e1.getFirstChildElement("b", null), b);
+        assertNull(e1.getFirstChildElement("d", null));
+        assertEquals(e1.getFirstChildElement("c", "cc"), c);
+    }
+///////////////////////////////////////////////////////////
+    public void testGetNextSibling()
+    {
+        XMLDoc d=new XMLDoc("e1",null);
+        KElement e1=d.getRoot();
+        KElement a=e1.appendElement("a");
+        KElement b=e1.appendElement("b");
+        KElement c=e1.appendElement("c:c","cc");
+        assertEquals(a.getNextSiblingElement("c", "cc"), c);
+        assertEquals(b.getNextSiblingElement("c", "cc"), c);
+        assertEquals(a.getNextSiblingElement("b", null), b);
+        assertNull(a.getNextSiblingElement("a", null));
+    }
 ///////////////////////////////////////////////////////////
 
     public void testGetElementById()
@@ -317,19 +344,19 @@ public class KElementTest extends JDFTestCaseBase
         KElement e=new XMLDoc("e","a.com").getRoot();
         final KElement b = e.appendElement("b","b.com");
         b.setAttribute("c:at", "cc","c.com");
-//        KElement c=
-        	e.appendElement("c", "c.com");
+//      KElement c=
+        e.appendElement("c", "c.com");
         assertNotNull(b.getAttribute("at", "c.com",null));
         assertNotNull(e.getElement("c", "c.com", 0));
         e.removeExtensions("c.com");
         assertNull(b.getAttribute("at", "c.com",null));
         assertNull(e.getElement("c", "c.com", 0));
-        
-    }
-        ////////////////////////////////////////////////////////////////
 
-        public void testRemoveEmptyAttributes()
-        {
+    }
+    ////////////////////////////////////////////////////////////////
+
+    public void testRemoveEmptyAttributes()
+    {
         JDFDoc d=new JDFDoc("JDF");
         KElement e=d.getJDFRoot();
 
@@ -494,7 +521,7 @@ public class KElementTest extends JDFTestCaseBase
         KElement c3=a.moveElement(c2, null);
         assertEquals(c,c3);
     }
-    
+
     public void testMoveAttribute()
     {
         XMLDoc doc      = new XMLDoc("Test","www.test.com");
@@ -556,14 +583,14 @@ public class KElementTest extends JDFTestCaseBase
         b.copyAttribute("noThereA", a, null, null, null);
         assertNull("the existing attribute was removed ",b.getAttribute("noThereA",null,null));
         assertNull(a.getAttribute("noThereA", null, null));
-        
+
         a.setAttribute("foo", "a");
         b.copyAttribute("bar", a, "foo", null, null);
         assertEquals(b.getAttribute("bar"),"a");
         assertEquals(a.getAttribute("foo"),"a");
         assertNull(a.getAttribute("bar", null, null));
         assertNull(b.getAttribute("foo", null, null));
-        
+
         // ns copy tests
         a.setAttribute("ns:aa", "A","www.ns.com");
         a.setAttribute("ns:bb", "B","www.ns.com");
@@ -578,7 +605,7 @@ public class KElementTest extends JDFTestCaseBase
         assertEquals(b.getAttribute("ns:cc"),"C");
         assertEquals(b.getAttribute("cc","www.ns.com",null),"C");
 
-        
+
 
     }
 
@@ -994,7 +1021,7 @@ public class KElementTest extends JDFTestCaseBase
         assertEquals(2,root.getXPathElementVector("/a/c/d", 0).size());
         assertEquals("d",root.getXPathElementVector("/a/c/d", 0).elementAt(0).getNodeName());
     }
-    
+
     ///////////////////////////////////////////////////////////////////
 
     public void testGetXPathElement()
@@ -1497,7 +1524,7 @@ public class KElementTest extends JDFTestCaseBase
         assertNull(root.getElement_KElement("c",null,-4));
         assertNull(root.getElement_KElement("c",null,3));
     }    
-    
+
     public void testGetElementsByTagName_KElement()
     {
         JDFDoc d=creatXMDoc();
