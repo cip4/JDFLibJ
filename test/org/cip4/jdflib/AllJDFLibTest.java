@@ -183,6 +183,7 @@ import org.cip4.jdflib.resource.process.JDFContactTest;
 import org.cip4.jdflib.resource.process.JDFContentDataTest;
 import org.cip4.jdflib.resource.process.JDFCutBlockTest;
 import org.cip4.jdflib.resource.process.JDFDieLayoutTest;
+import org.cip4.jdflib.resource.process.JDFEmployeeTest;
 import org.cip4.jdflib.resource.process.JDFMediaTest;
 import org.cip4.jdflib.resource.process.JDFPRItemTest;
 import org.cip4.jdflib.resource.process.JDFPageDataTest;
@@ -357,6 +358,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JDFCutBlockTest.class);
         suite.addTestSuite(JDFContactTest.class);
         suite.addTestSuite(JDFDieLayoutTest.class);
+        suite.addTestSuite(JDFEmployeeTest.class);
         suite.addTestSuite(JDFMediaTest.class);
         suite.addTestSuite(JDFPageDataTest.class);
         suite.addTestSuite(JDFPersonTest.class);

@@ -280,6 +280,10 @@ public class JDFJMFTest extends JDFTestCaseBase
         assertEquals(s2,jmf.getMessageElement(EnumFamily.Signal,EnumType.Status,0));
         assertEquals(s2,jmf.getMessageElement(EnumFamily.Signal,null,1));
         assertEquals(s2,jmf.getMessageElement(null,null,2));
+        assertEquals(s2,jmf.getMessageElement(null,null,-1));
+        assertEquals(s,jmf.getMessageElement(null,null,-2));
+        assertEquals(c,jmf.getMessageElement(null,null,-3));
+        assertNull(jmf.getMessageElement(null,null,-4));
     }
     /////////////////////////////////////////////////////////////////////
     

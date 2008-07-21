@@ -1222,7 +1222,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public JDFDevice getCreateDevice(int iSkip)
     {
-        JDFDevice e = (JDFDevice) getCreateValidElement(ElementName.DEVICE, JDFConstants.EMPTYSTRING, iSkip);
+        JDFDevice e = (JDFDevice) getCreateValidElement(ElementName.DEVICE, null, iSkip);
 
         return e;
     }
@@ -1245,7 +1245,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public JDFDevice getDevice(int iSkip)
     {
-        return (JDFDevice) getValidElement(ElementName.DEVICE, JDFConstants.EMPTYSTRING, iSkip);
+        return (JDFDevice) getValidElement(ElementName.DEVICE, null, iSkip);
     }
     //////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////
@@ -1258,7 +1258,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFDeviceFilter getCreateDeviceFilter(int iSkip)
     {
         JDFDeviceFilter e =
-            (JDFDeviceFilter) getCreateValidElement(ElementName.DEVICEFILTER, JDFConstants.EMPTYSTRING, iSkip);
+            (JDFDeviceFilter) getCreateValidElement(ElementName.DEVICEFILTER, null, iSkip);
 
         return e;
     }
@@ -1279,7 +1279,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public JDFDeviceFilter getDeviceFilter(int iSkip)
     {
-        return (JDFDeviceFilter) getValidElement(ElementName.DEVICEFILTER, JDFConstants.EMPTYSTRING, iSkip);
+        return (JDFDeviceFilter) getValidElement(ElementName.DEVICEFILTER, null, iSkip);
     }
     //////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////
@@ -1292,7 +1292,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFDeviceInfo getCreateDeviceInfo(int iSkip)
     {
         return (JDFDeviceInfo)
-        getCreateValidElement(ElementName.DEVICEINFO, JDFConstants.EMPTYSTRING, iSkip);
+        getCreateValidElement(ElementName.DEVICEINFO, null, iSkip);
     }
     /////////////////////////////////////////////////////////////////////
     /**
@@ -1312,7 +1312,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public JDFDeviceInfo getDeviceInfo(int iSkip)
     {
-        return (JDFDeviceInfo) getValidElement(ElementName.DEVICEINFO, JDFConstants.EMPTYSTRING, iSkip);
+        return (JDFDeviceInfo) getValidElement(ElementName.DEVICEINFO, null, iSkip);
     }
 
     //////////////////////////////////////////////////////////////////////
@@ -1324,7 +1324,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFDeviceList getCreateDeviceList(int iSkip)
     {
         return (JDFDeviceList)
-        getCreateValidElement(ElementName.DEVICELIST, JDFConstants.EMPTYSTRING, iSkip);
+        getCreateValidElement(ElementName.DEVICELIST, null, iSkip);
     }
 
     /////////////////////////////////////////////////////////////////////
@@ -1346,7 +1346,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public JDFDeviceList getDeviceList(int iSkip)
     {
-        return (JDFDeviceList) getValidElement(ElementName.DEVICELIST, JDFConstants.EMPTYSTRING, iSkip);
+        return (JDFDeviceList) getValidElement(ElementName.DEVICELIST, null, iSkip);
     }
 
     //////////////////////////////////////////////////////////////////////
@@ -1358,7 +1358,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFEmployeeDef getCreateEmployeeDef(int iSkip)
     {
         return (JDFEmployeeDef)
-        getCreateValidElement(ElementName.EMPLOYEEDEF, JDFConstants.EMPTYSTRING, iSkip);
+        getCreateValidElement(ElementName.EMPLOYEEDEF, null, iSkip);
     }
     /////////////////////////////////////////////////////////////////////
 
@@ -1379,7 +1379,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public JDFEmployeeDef getEmployeeDef(int iSkip)
     {
-        return (JDFEmployeeDef) getValidElement(ElementName.EMPLOYEEDEF, JDFConstants.EMPTYSTRING, iSkip);
+        return (JDFEmployeeDef) getValidElement(ElementName.EMPLOYEEDEF, null, iSkip);
     }
     //////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////
@@ -1392,7 +1392,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFJDFController getCreateJDFController(int iSkip)
     {
         return (JDFJDFController)
-        getCreateValidElement(ElementName.JDFCONTROLLER, JDFConstants.EMPTYSTRING, iSkip);
+        getCreateValidElement(ElementName.JDFCONTROLLER, null, iSkip);
     }
 
     /////////////////////////////////////////////////////////////////////
@@ -1413,7 +1413,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public JDFJDFController getJDFController(int iSkip)
     {
-        return (JDFJDFController) getValidElement(ElementName.JDFCONTROLLER, JDFConstants.EMPTYSTRING, iSkip);
+        return (JDFJDFController) getValidElement(ElementName.JDFCONTROLLER, null, iSkip);
     }
     //////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////
@@ -1426,7 +1426,7 @@ public class JDFMessage extends JDFAutoMessage
     public JDFJDFService getCreateJDFService(int iSkip)
     {
         return (JDFJDFService)
-        getCreateValidElement(ElementName.JDFSERVICE, JDFConstants.EMPTYSTRING, iSkip);
+        getCreateValidElement(ElementName.JDFSERVICE, null, iSkip);
     }
     /////////////////////////////////////////////////////////////////////
 
@@ -1447,7 +1447,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public JDFJDFService getJDFService(int iSkip)
     {
-        return (JDFJDFService) getValidElement(ElementName.JDFSERVICE, JDFConstants.EMPTYSTRING, iSkip);
+        return (JDFJDFService) getValidElement(ElementName.JDFSERVICE, null, iSkip);
     }
 
     //////////////////////////////////////////////////////////////////////
@@ -1460,7 +1460,7 @@ public class JDFMessage extends JDFAutoMessage
      */
     public JDFJobPhase getCreateJobPhase(int iSkip)
     {
-        return (JDFJobPhase) getValidElement(ElementName.JOBPHASE, JDFConstants.EMPTYSTRING, iSkip);
+        return (JDFJobPhase) getValidElement(ElementName.JOBPHASE, null, iSkip);
     }
     /////////////////////////////////////////////////////////////////////
 

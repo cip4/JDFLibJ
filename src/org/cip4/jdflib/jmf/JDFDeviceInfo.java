@@ -96,6 +96,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFModulePhase;
 import org.cip4.jdflib.resource.JDFPhaseTime;
+import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.JDFDate;
@@ -279,9 +280,16 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
         if(numEmployees!=lastInfo.numChildElements(ElementName.EMPLOYEE, null))
             return false;
         boolean bGood=true;
-        for(int i=0;i<numEmployees;i++)
-            bGood=bGood || getEmployee(i).isSameEmployee(lastInfo.getEmployee(i));
-
+        for(int i=0;i<numEmployees && bGood;i++)
+        {
+            JDFEmployee employee = lastInfo.getEmployee(i);
+            if(employee!=null)
+                bGood=bGood && getEmployee(i).matches(employee);
+            
+        }
+        if(!bGood)
+            return false;
+        
         int numJobPhases = numChildElements(ElementName.JOBPHASE, null);
         if(numJobPhases!=lastInfo.numChildElements(ElementName.JOBPHASE, null))
             return false;

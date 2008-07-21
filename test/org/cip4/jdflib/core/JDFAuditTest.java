@@ -133,8 +133,8 @@ public class JDFAuditTest extends JDFTestCaseBase
         n.setType("ConventionalPrinting",true);
         JDFAuditPool ap=n.getAuditPool();
         assertNotNull(ap);
-        JDFPhaseTime pt=ap.setPhase(EnumNodeStatus.Stopped, null, null);
-        JDFPhaseTime pt2=ap.setPhase(EnumNodeStatus.Aborted, null, null);
+        JDFPhaseTime pt=ap.setPhase(EnumNodeStatus.Stopped, null, null,null);
+        JDFPhaseTime pt2=ap.setPhase(EnumNodeStatus.Aborted, null, null,null);
         pt2.setRef(pt);
         assertEquals(pt.getID(), pt2.getrefID());
      }
@@ -146,7 +146,7 @@ public class JDFAuditTest extends JDFTestCaseBase
         n.setType("ConventionalPrinting",true);
         JDFAuditPool ap=n.getAuditPool();
         assertNotNull(ap);
-        JDFPhaseTime pt=ap.setPhase(EnumNodeStatus.Stopped, null, null);
+        JDFPhaseTime pt=ap.setPhase(EnumNodeStatus.Stopped, null, null,null);
         JDFPhaseTime pt2=(JDFPhaseTime) pt.createUpdateAudit();
         assertEquals(pt.getID(), pt2.getrefID());
         assertNotSame(pt.getID(), "");       

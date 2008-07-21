@@ -80,6 +80,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.util.Iterator;
@@ -109,6 +110,7 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
+import org.cip4.jdflib.util.MimeUtil.MIMEDetails;
 
 
 
@@ -442,6 +444,34 @@ public class MimeUtilTest extends JDFTestCaseBase
         final File f2 = new File(sm_dirTestDataTemp+File.separator+"testMimePackageDoc.mjm");
         assertTrue(f1.exists());
         assertEquals(f1.length(), f2.length(),100);
+        Multipart mp2=MimeUtil.getMultiPart(sm_dirTestDataTemp+File.separator+"testMimePackageDoc2.mjm");
+        assertNotNull(mp2);
+        assertEquals(mp.getCount(), mp2.getCount());
+
+    }
+    
+    ///////////////////////////////////////////////////////////////
+    
+    public void testWriteToFileMimeDetails() throws Exception
+    {
+        testBuildMimePackageDocJMF();
+
+        MIMEDetails md=new MIMEDetails();
+        md.modifyBoundarySemicolon=true;
+        Multipart mp=MimeUtil.getMultiPart(sm_dirTestDataTemp+File.separator+"testMimePackageDoc.mjm");
+        MimeUtil.writeToFile(mp, sm_dirTestDataTemp+File.separator+"testMimePackageDoc2.mjm", md);
+        final File f2 = new File(sm_dirTestDataTemp+File.separator+"testMimePackageDoc2.mjm");
+        final File f1 = new File(sm_dirTestDataTemp+File.separator+"testMimePackageDoc.mjm");
+        assertTrue(f2.exists());
+        assertEquals(f1.length(), f2.length(),100);
+        Multipart mp2=MimeUtil.getMultiPart(sm_dirTestDataTemp+File.separator+"testMimePackageDoc2.mjm");
+        assertNotNull(mp2);
+        assertEquals(mp.getCount(), mp2.getCount());
+        StringWriter sw=new StringWriter();
+        IOUtils.copy(new FileInputStream(f2), sw);
+        assertEquals(sw.getBuffer().toString().indexOf("related;"), -1);
+ 
+
     }
     //////////////////////////////////////////////////////////////////////////////////////////////
     public void testWriteToURLFile() throws Exception

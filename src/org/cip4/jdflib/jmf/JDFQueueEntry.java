@@ -79,6 +79,7 @@ Warning! very preliminary test version. Interface subject to change without prio
 Revision history:    ...
  **/
 package org.cip4.jdflib.jmf;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -93,10 +94,51 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.JDFDate;
 
 //----------------------------------
-public class JDFQueueEntry extends JDFAutoQueueEntry
+public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<JDFQueueEntry>
 {
+    public static class QueueEntryComparator implements Comparator<KElement>
+    {
+
+        /* (non-Javadoc)
+         * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+         */
+        public int compare(KElement o1, KElement o2)
+        {
+            int i=o1.getNodeName().compareTo(o2.getNodeName());
+            if(i!=0)
+                return i;
+            if((o1 instanceof JDFQueueEntry) && (o2 instanceof JDFQueueEntry))
+            {
+                JDFQueueEntry q1=(JDFQueueEntry)o1;
+                JDFQueueEntry q2=(JDFQueueEntry)o2;
+                EnumQueueEntryStatus status1=q1.getQueueEntryStatus();
+                EnumQueueEntryStatus status2=q2.getQueueEntryStatus();
+                int s1=(status1==null) ? 0 : status1.getValue();
+                int s2=(status2==null) ? 0 : status2.getValue();
+                if(s1!=s2)
+                    return s1-s2;
+                if(q1.isCompleted())
+                {
+                    JDFDate d1=q1.getEndTime();
+                    JDFDate d2=q1.getEndTime();
+                    if(d1!=null && d2!=null)
+                        return d1.compareTo(d2);
+                }
+                else
+                {
+                    s1=q1.getPriority();
+                    s2=q2.getPriority();
+                    if(s1!=s2)
+                        return s2-s1;
+                }
+            }
+            return 0;
+        }        
+    }
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -233,7 +275,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry
             synchronized(queue)
             {
                 super.setPriority(value);
-                sortQueue(getSortPriority(getQueueEntryStatus(),oldVal));
+                queue.sortChildren();
             }
         }
         else if(value!=oldVal) // non automated
@@ -246,50 +288,13 @@ public class JDFQueueEntry extends JDFAutoQueueEntry
      * sort this into the queue based on current values
      * assumes presorted queue
      * @param oldVal - the previous sort value, use -1 to sort from back
+     * @deprecated call JDFQueue.sortChildren()
      */
+    @Deprecated
     public void sortQueue(int oldVal)
     {
-        int value=getSortPriority();
         final JDFQueue queue = (JDFQueue)getParentNode_KElement();
-        synchronized(queue)
-        {
-            JDFQueueEntry qEBefore=null;
-            if(value>oldVal)
-            {
-                JDFQueueEntry qEPrev=getPreviousQueueEntry();
-                while(qEPrev!=null)
-                {
-                    if(qEPrev.getSortPriority()<value)
-                    {
-                        qEBefore=qEPrev;
-                        qEPrev= qEPrev.getPreviousQueueEntry();
-                    }
-                    else
-                        break;
-                }
-                if(qEBefore!=null)
-                    moveMe(qEBefore);
-            }
-            else
-            {
-                JDFQueueEntry qENext=getNextQueueEntry();
-                while(qENext!=null)
-                {
-                      if(qENext.getSortPriority()>value)
-                      {
-                        qEBefore=qENext;
-                        qENext= qENext.getNextQueueEntry();
-                      }
-                      else
-                          break;
-                }
-                if(qEBefore!=null)
-                {
-                    qEBefore = qEBefore.getNextQueueEntry();
-                    moveMe(qEBefore);
-                }
-            }
-        }
+        queue.sortChildren();
     }
 
     /**
@@ -309,6 +314,8 @@ public class JDFQueueEntry extends JDFAutoQueueEntry
      * sets the QueueEntry/@Status
      * if the queue is automated, also resorts the queue to reflect the new Status and sets the Queue/@Status based on
      * the maximum number of concurrently running jobs
+     * also sets StartTime and EndTime appropriately if the queue is automated
+     * 
      * @param value the queuentry status to set
      * 
      * @see org.cip4.jdflib.auto.JDFAutoQueueEntry#setQueueEntryStatus(org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus)
@@ -322,10 +329,21 @@ public class JDFQueueEntry extends JDFAutoQueueEntry
             synchronized(queue)
             {
                 super.setQueueEntryStatus(value);
-                sortQueue(getSortPriority(oldVal,getPriority()));
-                queue.setStatusFromEntries();
                 if(isCompleted())
+                {
+                    if(!hasAttribute(AttributeName.ENDTIME))
+                        super.setEndTime(new JDFDate());
                     queue.cleanup();
+                }
+                if(EnumQueueEntryStatus.Running.equals(value))
+                {
+                    if(!hasAttribute(AttributeName.STARTTIME))
+                          super.setStartTime(new JDFDate());
+                    removeAttribute(AttributeName.ENDTIME);
+                            
+                }
+                queue.sortChildren();
+                queue.setStatusFromEntries();
             }
         }
         else if(!ContainerUtil.equals(oldVal, value)) // non automated
@@ -463,6 +481,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry
      * return a value based on QueueEntryStatus and Priority to sort the queue
      * @return int a priority for sorting - low = back
      */
+    @Deprecated
     public int getSortPriority()
     {
        return getSortPriority(getQueueEntryStatus(),getPriority());
@@ -475,6 +494,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry
      *      low value = back of queue, 
      *      high value = front of queue
      */
+    @Deprecated
     public static int getSortPriority(EnumQueueEntryStatus status, int priority)
     {
         int sort=(status==null) ? 0 : 10000 - 1000 * status.getValue();
@@ -504,6 +524,16 @@ public class JDFQueueEntry extends JDFAutoQueueEntry
         }
          
         this.eraseEmptyAttributes(true);
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
+    public int compareTo(JDFQueueEntry arg0)
+    {       
+        if(arg0==null)
+            return 1;
+        return new QueueEntryComparator().compare(this, arg0);
     }
 
 }

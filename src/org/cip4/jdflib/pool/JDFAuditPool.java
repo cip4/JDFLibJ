@@ -655,7 +655,7 @@ public class JDFAuditPool extends JDFPool
                     if(!jobPartID.equals(getParentJDF().getJobPartID(true)))
                         continue;
 
-                    JDFPhaseTime pt=setPhase(phase.getStatus(), phase.getStatusDetails(), phase.getPartMapVector());
+                    JDFPhaseTime pt=setPhase(phase.getStatus(), phase.getStatusDetails(), phase.getPartMapVector(),devInfo.getChildElementVector(ElementName.EMPLOYEE, null));
                     pt.copyElement(phase.getMISDetails(), null);
                     pt.setEnd(jmf.getTimeStamp());
                     pt.setStart(phase.getPhaseStartTime());
@@ -667,6 +667,7 @@ public class JDFAuditPool extends JDFPool
         return vRet.size()==0 ? null : vRet;
 
     }
+    
     /**
      * Create or modify a PhaseTime Audit and fill it
      * If the phase is identical to the prior phase that has been set, the existing PhaseTime is modified
@@ -676,26 +677,54 @@ public class JDFAuditPool extends JDFPool
      * @param status        the node status at this time
      * @param statusDetails details of this status
      * @param vmParts       defines a vector of map of parts for which the PhaseTime is valid
+     * @param employees     Vector of employees that are currently registered for this job
      * @return JDFPhaseTime the newly created PhaseTime audit
      * 
-     * default: SetPhase(status, null,null)
+     * default: SetPhase(status, null,null,null)
+     * @deprecated  use the 4 parameter version
      */
+    @Deprecated
     public JDFPhaseTime setPhase( EnumNodeStatus status,String statusDetails, VJDFAttributeMap vmParts)
+    {
+        return setPhase(status, statusDetails, vmParts,null);
+    }
+    /**
+     * Create or modify a PhaseTime Audit and fill it
+     * If the phase is identical to the prior phase that has been set, the existing PhaseTime is modified
+     * otherwise an existing phaseTime is closed and a new phaseTime is appended
+     * Phasetime elements with different Parts are treated independantly
+     * 
+     * @param status        the node status at this time
+     * @param statusDetails details of this status
+     * @param vmParts       defines a vector of map of parts for which the PhaseTime is valid
+     * @param employees     Vector of employees that are currently registered for this job
+     * @return JDFPhaseTime the newly created PhaseTime audit
+     * 
+     * default: SetPhase(status, null,null,null)
+     */
+    public JDFPhaseTime setPhase( EnumNodeStatus status,String statusDetails, VJDFAttributeMap vmParts, VElement employees)
     {
         JDFPhaseTime pt = getLastPhase(vmParts,null);
         if("".equals(statusDetails))
             statusDetails=null;
-        
+        boolean bChanged=false;
+        VElement ptEmployees=pt==null ? new VElement() : pt.getChildElementVector(ElementName.EMPLOYEE, null);
         if (pt == null)
         {
-            pt = addPhaseTime(status, null ,vmParts);
-            pt.setStatusDetails(statusDetails);
+            bChanged=true;
         }
-        else if (!ContainerUtil.equals(pt.getStatus(), status) || !ContainerUtil.equals(statusDetails,pt.getAttribute(AttributeName.STATUSDETAILS, null, null))) 
+        else if (!ContainerUtil.equals(pt.getStatus(), status) || 
+                !ContainerUtil.equals(statusDetails,pt.getAttribute(AttributeName.STATUSDETAILS, null, null))||
+                !ptEmployees.isEqual(employees)) 
         {
             pt.setEnd(new JDFDate());
+            bChanged=true;
+        }
+        if(bChanged)
+        {
             pt = addPhaseTime(status, null,vmParts);
             pt.setStatusDetails(statusDetails);
+            pt.copyElements(employees,null);
         }
         return pt;
     }

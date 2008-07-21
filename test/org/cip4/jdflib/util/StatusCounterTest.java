@@ -86,6 +86,7 @@ import org.cip4.jdflib.jmf.JDFResponse;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.util.MultiModuleStatusCounter.MultiType;
 
@@ -98,6 +99,7 @@ public class StatusCounterTest extends JDFTestCaseBase
     private String deviceID;
     private String resID;
     private JDFExposedMedia xpMedia;
+    private JDFEmployee employee;
 
 
     public void setUp() throws Exception
@@ -113,7 +115,8 @@ public class StatusCounterTest extends JDFTestCaseBase
         resID = xpMedia.getID();
         sc.setFirstRefID(resID);
         sc.addPhase(resID, 200, 0);
-
+        employee=(JDFEmployee) new JDFDoc("Employee").getRoot();
+        employee.setPersonalID("P1");
     }
 
 
@@ -179,6 +182,24 @@ public class StatusCounterTest extends JDFTestCaseBase
 
 
 
+    public void testEmployee()
+    {
+        assertFalse(sc.removeEmployee(employee));
+        assertEquals(sc.addEmployee(employee),1);
+        assertTrue(sc.removeEmployee(employee));
+        assertEquals(sc.addEmployee(employee),1);
+        
+        JDFDoc docJMF=sc.getDocJMFPhaseTime();
+        JDFResponse sig=(JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, -1);
+        JDFDeviceInfo deviceInfo=sig.getDeviceInfo(0);
+        assertTrue(deviceInfo.getEmployee(0).isEqual(employee));
+        sc.removeEmployee(employee);
+        docJMF = sc.getDocJMFPhaseTime();
+        sig=(JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
+        deviceInfo=sig.getDeviceInfo(0);
+        assertNull(deviceInfo.getEmployee(0));
+        
+    }
     public void testIdle()
     {
         JDFExposedMedia m=(JDFExposedMedia) n.getMatchingResource("ExposedMedia", null, null, 0);

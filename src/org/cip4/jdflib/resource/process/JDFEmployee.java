@@ -80,11 +80,13 @@ package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoEmployee;
+import org.cip4.jdflib.ifaces.IMatches;
+import org.cip4.jdflib.jmf.JDFEmployeeDef;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.w3c.dom.DOMException;
 
 
-public class JDFEmployee extends JDFAutoEmployee
+public class JDFEmployee extends JDFAutoEmployee implements IMatches
 {
     private static final long serialVersionUID = 1L;
 
@@ -142,18 +144,37 @@ public class JDFEmployee extends JDFAutoEmployee
         return "JDFEmployee[  --> " + super.toString() + " ]";
     }
 
-
     /**
-     * is this the same employee?
-     * @param employee
-     * @return
+     * returns true if the input object is equivalent to this or null</br>
+     * valid object types are:<br/>
+     * Employee<br/>
+     * EmployeeDef<br/>
+     * String - must match @PersonalID <br/>
+     *  (non-Javadoc)
+     * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
      */
-    public boolean isSameEmployee(JDFEmployee employee)
+    public boolean matches(Object subset)
     {
-       if(employee==null)
-           return false;
-        return ContainerUtil.equals(getPersonalID(), employee.getPersonalID());
-        //TODO more criteria - person etc.
+        if(subset==null)
+            return true; //( matches contract requires true for null to allow wildcards
+        
+        if(subset instanceof JDFEmployee)
+        {
+            //TODO more criteria - person etc.
+            JDFEmployee employee=(JDFEmployee)subset;
+            return ContainerUtil.equals(getPersonalID(), employee.getPersonalID());
+        }
+        else if(subset instanceof JDFEmployeeDef)
+        {
+            JDFEmployeeDef ed=(JDFEmployeeDef)subset;
+            return ContainerUtil.equals(getPersonalID(), ed.getPersonalID());
+        }
+        else if(subset instanceof String)
+        {
+             return ContainerUtil.equals(getPersonalID(), subset);
+        }
+
+        return false;
     }
 } 
 //==========================================================================

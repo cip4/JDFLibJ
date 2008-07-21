@@ -95,7 +95,7 @@ public class DumpDir {
      * @author prosirai
      *
      */
-    private class MyInt
+    protected class MyInt
     {        
         public int i=0;
         public String toString()
@@ -163,9 +163,10 @@ public class DumpDir {
     }
     /** 
      * create a new File in this dump
+     * @param header TODO
      * 
      */
-    public File newFile()
+    public File newFile(String header)
     {
         final int inc = increment();
         if(inc%200==0)
@@ -173,42 +174,80 @@ public class DumpDir {
 
         String s=StringUtil.sprintf("m%08i.tmp", ""+inc);
         File f=FileUtil.getFileInDirectory(baseDir, new File(s));
+        if(header!=null)
+        {
+            newHeader(header, f, true);            
+        }
+ 
         cleanup(inc);
         return f;
     }
     /** 
      * create a new File in this dump and fill it from is
+     * @param header TODO
      * @param is the input stream to fill
      * 
      */
 
-    public File newFileFromStream(InputStream is)
+    public File newFileFromStream(String header, InputStream is)
     {
-        File dump=newFile();
-        FileOutputStream fs;
-        try
+        File dump=newFile(null);
+        if(!(is instanceof BufferedInputStream))
         {
-            fs = new FileOutputStream(dump);
-            if(!(is instanceof BufferedInputStream))
-            {
-                is=new BufferedInputStream(is);
-                is.mark(100000);
-            }
-            IOUtils.copy(is, fs);
-            fs.flush();
-            fs.close();
-            is.reset();
-       }
-        catch (FileNotFoundException x)
-        {
-            //
+            is=new BufferedInputStream(is);
+            is.mark(100000);
         }
-        catch (IOException x)
+        FileOutputStream fs=newHeader(header, dump, false);
+        if(fs!=null)
         {
-            //
+            try
+            {
+                IOUtils.copy(is, fs);
+                fs.flush();
+                fs.close();
+                is.reset();
+            }
+            catch (IOException x)
+            {
+                //nop
+            }
         }
         return dump;
      }
+
+    /**
+     * @param header
+     * @param fs
+     * @throws IOException
+     */
+    private FileOutputStream newHeader(String header, File f, boolean bClose) 
+    {
+        try
+        {
+            FileOutputStream fs = new FileOutputStream(f);
+            if(header!=null)
+            {
+                fs.write(header.getBytes());
+                fs.write("\n------ end of header ----!\n".getBytes());
+                if(bClose)
+                {
+                    fs.flush();
+                    fs.close();
+                }
+            }
+            return fs;
+        }
+        catch (FileNotFoundException x)
+        {
+            //nop
+        }
+        catch (IOException x)
+        {
+            // nop
+        }
+
+        return null;
+    }
 
     /**
      * @param inc

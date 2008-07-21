@@ -2027,8 +2027,8 @@ public class StringUtil
      */
     public static Vector getEnumsVector(Class e)
     {
-        final Vector v = new Vector();
-        final Iterator it = EnumUtils.iterator(e);
+        final Vector v = new Vector<ValuedEnum>();
+        final Iterator<ValuedEnum> it = EnumUtils.iterator(e);
         while (it.hasNext())
         {
             v.addElement(it.next());

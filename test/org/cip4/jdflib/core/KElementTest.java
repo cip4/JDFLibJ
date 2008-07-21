@@ -86,6 +86,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
+import org.cip4.jdflib.core.KElement.SimpleNodeComparator;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
@@ -303,6 +304,7 @@ public class KElementTest extends JDFTestCaseBase
         KElement e=d.getRoot();
         KElement b=e.appendElement("b");
         KElement a=e.appendElement("a");
+        a.setAttribute("ID", "a1");
         KElement c=e.appendElement("c");
         e.sortChildren();
         assertEquals(e.getFirstChildElement(), a);
@@ -311,7 +313,57 @@ public class KElementTest extends JDFTestCaseBase
         KElement a3=e.appendElement("a");
         a3.setAttribute("ID", "z1");
         KElement a2=e.appendElement("a");
-        a2.setAttribute("ID", "a1");
+        a2.setAttribute("ID", "a2");
+        e.sortChildren();
+        assertEquals(e.getFirstChildElement(), a);
+        assertEquals(a.getNextSiblingElement(), a2);
+        assertEquals(a2.getNextSiblingElement(), a3);
+        assertEquals(a3.getNextSiblingElement(), b);
+        assertEquals(b.getNextSiblingElement(), c);
+
+    }
+    ////////////////////////////////////////////////////////////////
+
+     
+    public void testSortChildrenCompPerformance()
+    {
+        XMLDoc d=new JDFDoc("parent");
+        KElement e=d.getRoot();
+
+        for(int i=0;i<10000;i++)
+            e.appendElement("b"+(int)(Math.random()*100));
+        System.out.println(System.currentTimeMillis());
+        e.sortChildren(new SimpleNodeComparator());
+        System.out.println(System.currentTimeMillis());
+        d=new JDFDoc("parent");
+        e=d.getRoot();
+        for(int i=0;i<10000;i++)
+            e.appendElement("b"+(int)(Math.random()*100));
+        System.out.println(System.currentTimeMillis());
+        e.sortChildren();
+        System.out.println(System.currentTimeMillis());
+        e.sortChildren();
+        System.out.println(System.currentTimeMillis());
+
+    }
+    public void testSortChildrenComp()
+    {
+        
+        XMLDoc d=new JDFDoc("parent");
+        KElement e=d.getRoot();
+        KElement b=e.appendElement("b");
+        KElement a=e.appendElement("a");
+        a.setAttribute("ID", "a1");
+
+        KElement c=e.appendElement("c");
+        e.sortChildren(new SimpleNodeComparator());
+        assertEquals(e.getFirstChildElement(), a);
+        assertEquals(a.getNextSiblingElement(), b);
+        assertEquals(b.getNextSiblingElement(), c);
+        KElement a3=e.appendElement("a");
+        a3.setAttribute("ID", "z1");
+        KElement a2=e.appendElement("a");
+        a2.setAttribute("ID", "a2");
         e.sortChildren();
         assertEquals(e.getFirstChildElement(), a);
         assertEquals(a.getNextSiblingElement(), a2);
@@ -551,6 +603,26 @@ public class KElementTest extends JDFTestCaseBase
         KElement e3=e.copyElement(e2,null);
         assertNull(e3.getNamespaceURI());
         assertFalse(d.toString().indexOf("xmlns=\"\"")>=0);
+
+    }
+    public void testCopyElements()
+    {
+        XMLDoc d=new XMLDoc("d1",null);
+        KElement e=d.getRoot();
+        
+        XMLDoc d2=new XMLDoc("d2",null);
+        KElement e2=d2.getRoot();
+        VElement v=new VElement();
+        v.add(e2.appendElement("a"));
+        v.add(e2.appendElement("b"));
+        e.copyElements(v,null);
+        assertEquals(e.getLastChild().getLocalName(), "b");
+        assertEquals(e.getFirstChild().getLocalName(), "a");
+        KElement last=e.appendElement("last");
+        e.copyElements(v,last);
+        assertEquals(e.getLastChild().getLocalName(), "last");
+        assertEquals(e.getLastChild().getPreviousSibling().getLocalName(), "b");
+        assertEquals(e.numChildElements(null, null), 5);
 
     }
     public void testCopyElementNS()

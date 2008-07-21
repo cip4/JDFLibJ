@@ -83,7 +83,7 @@ public class VElementTest extends TestCase
         s=v.getElementNameVector(true);
         assertEquals(s, new VString("a1 a2"," "));
     }
-    /////////////////////////////////////////////
+   /////////////////////////////////////////////
     
     public void testUnify()
     {
@@ -101,8 +101,47 @@ public class VElementTest extends TestCase
         v.unify();
         assertEquals(v.size(),2);
         v.unifyElement();
-        assertEquals(v.size(),1);
-       
+        assertEquals(v.size(),1);       
     } 
+  /////////////////////////////////////////////
+    
+    public void testSort()
+    {
+        XMLDoc d=new XMLDoc("doc",null);
+        KElement e=d.getRoot();
+        KElement e1=e.appendElement("e1");
+        e1.setAttribute("a","z");
+        KElement e2=e.appendElement("e1");
+        e2.setAttribute("a","c");
+        VElement v=new VElement();
+        v.add(e1);
+        v.add(e2);
+        v.sort();
+        assertEquals(v.get(0), e2);
+     } 
+  /////////////////////////////////////////////
+    
+    public void testIsEqual()
+    {
+        XMLDoc d=new XMLDoc("doc",null);
+        KElement e=d.getRoot();
+        KElement e1=e.appendElement("e1");
+        e1.setAttribute("a","b");
+        KElement e2=e.appendElement("e1");
+        e2.setAttribute("a","c");
+        KElement e3=e.appendElement("e1");
+        e3.setAttribute("a","c");
+        KElement e4=e.appendElement("e1");
+        e4.setAttribute("a","d");
+        VElement v=new VElement();
+        v.add(e1);
+        v.add(e2);
+        VElement v2=new VElement(v);
+        assertTrue(v.isEqual(v2));
+        v2.set(1, e3);
+        assertTrue(v.isEqual(v2));
+        v2.set(1, e4);
+        assertFalse(v.isEqual(v2));
+     } 
 
 }

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2005 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -78,9 +78,11 @@
  */
 package org.cip4.jdflib.core;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Vector;
 
+import org.cip4.jdflib.core.KElement.SimpleNodeComparator;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.JDFResource;
 import org.w3c.dom.Node;
@@ -242,13 +244,13 @@ public class VElement extends Vector<KElement>
         super.addAll(elem);
  
     }
-	/**
+    /**
      * does this contain an equivalent element 
      * similar to contains but uses isEqual() instead of equals()
      * @param v the element to look for
      * @return true, if v is contained in this
-	 */
-	public boolean containsElement(KElement elem)
+     */
+    public boolean containsElement(KElement elem)
     {
         final int size=size();
         for(int i=0;i<size;i++)
@@ -259,6 +261,28 @@ public class VElement extends Vector<KElement>
         return false;
             
      }
+    /**
+     * are the two vectors equivalent, i.e. do thay only contain elements that are isEqual() or if this is empty and the comparison is against null
+     * @param v the vector to compare
+     * @return true, if v is equal to this
+     */
+    public boolean isEqual(VElement v)
+    {
+        int size = size();
+        if(v==null)
+            return size==0;
+        if(size!=v.size())
+            return false;
+        VElement v0=new VElement(this);
+        VElement v1=new VElement(v);
+        v0.sort();
+        v1.sort();
+        for(int i=0;i<size;i++)
+            if(!v0.get(i).isEqual(v1.get(i)))
+                return false;
+        return true;
+
+    }
 
     /**
 	 * AppendUnique - append a vector but ignore multiple entries
@@ -298,6 +322,14 @@ public class VElement extends Vector<KElement>
             final KElement k = elementAt(i);
             k.setAttribute(key, (String)vValue.elementAt(i), nameSpaceURI);
         }
+    }
+    /**
+     * sorts the vector in canonical order using SimpleNodeComparator
+     *
+     */
+    public void sort()
+    {
+        Collections.sort(this,new SimpleNodeComparator());
     }
     
     /**

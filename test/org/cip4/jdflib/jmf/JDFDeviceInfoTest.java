@@ -112,7 +112,7 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
     }
     /////////////////////////////////////////////////////////////////////
 
-    
+
     public void testNullDeviceStatus()
     {
         di.setDeviceStatus(null);
@@ -124,7 +124,7 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
     {
         JDFDoc d=new JDFDoc("JDF");
         JDFAuditPool ap=d.getJDFRoot().getCreateAuditPool();
-        JDFPhaseTime pt=ap.setPhase(EnumNodeStatus.InProgress,"dummy",null);
+        JDFPhaseTime pt=ap.setPhase(EnumNodeStatus.InProgress, "dummy", null,null);
         JDFJobPhase jp=di.createJobPhaseFromPhaseTime(pt);
         jp.setPhaseAmount(200);
         jp.setAmount(200);
@@ -144,5 +144,24 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
         assertEquals(jp2.getPhaseWaste(), 130.,0.);
         assertEquals(jp2.getPhaseAmount(), 500.,0.);
         assertEquals(jp2.getAmount(), 500.,0.);                    
+    }
+    /////////////////////////////////////////////////////////////////////
+
+    public void testIsSamePhase()
+    {
+
+        JDFDeviceInfo di1=(JDFDeviceInfo) new JDFDoc(ElementName.DEVICEINFO).getRoot();
+        JDFDeviceInfo di2=(JDFDeviceInfo) new JDFDoc(ElementName.DEVICEINFO).getRoot();
+
+
+        assertTrue(di1.isSamePhase(di2, false));
+        di1.appendEmployee().setPersonalID("p1");
+        assertFalse(di1.isSamePhase(di2, false));
+        di2.appendEmployee().setPersonalID("p1");
+        assertTrue(di1.isSamePhase(di2, false));
+        di1.appendEmployee().setPersonalID("p2");
+        assertFalse(di1.isSamePhase(di2, false));
+        di2.appendEmployee().setPersonalID("p3");
+        assertFalse(di1.isSamePhase(di2, false));
     }
 }

@@ -117,7 +117,6 @@ import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFResponse;
 import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.util.UrlUtil.HTTPDetails;
 
 /**
  * MIME utilities for reading and writing MIME/MULTIPART/RELATED streams
@@ -145,7 +144,76 @@ public class MimeUtil extends UrlUtil
          */
         public static String defaultTransferEncoding=BINARY;
         public String transferEncoding=defaultTransferEncoding;
+        public boolean modifyBoundarySemicolon=false;
     }
+    
+    /**
+     * used for some after the fact cleanup - beware as it may hurt performance
+     * @author prosirai
+     *
+     */
+    private static class FixSemiColonStream extends BufferedOutputStream
+    {
+        private boolean done=false;
+        private int pos=0;
+        
+        private byte[] smallBuf=new byte[5000];
+        /**
+         * @param out
+         */
+        public FixSemiColonStream(OutputStream _out)
+        {
+            super(_out);            
+        }
+        /* (non-Javadoc)
+         * @see java.io.BufferedOutputStream#write(int)
+         */
+        @Override
+        public synchronized void write(int b) throws IOException
+        {
+            if(!done) // insert a ' ' where necessary...
+            {
+                if(pos==smallBuf.length)
+                {
+                    smallBuf=null;
+                    done=true;
+                }
+                else
+                {    
+                    smallBuf[pos++]=(byte)b;
+                    int first=Math.max(0, pos-50);
+                    if(b==';')
+                    {
+                        String s=new String(smallBuf,first,pos-1);
+                        if(s.toLowerCase().indexOf("content-type:")>0)
+                        {
+                            smallBuf=null;
+                            done=true;
+                            super.write('\n');
+                        }                            
+                    }
+                }
+            }
+            super.write(b);
+        }
+        /* (non-Javadoc)
+         * @see java.io.BufferedOutputStream#write(byte[], int, int)
+         */
+        @Override
+        public synchronized void write(byte[] b, int off, int len) throws IOException
+        {
+           if(done)
+           {
+               super.write(b, off, len);
+           }
+           else
+           {
+               for(int i=off;i<len;i++)
+                   write(b[i]);
+           }
+        }
+    }
+    
     /**
      * data source for binary files
      * 
@@ -1081,6 +1149,10 @@ public class MimeUtil extends UrlUtil
         // buffers are good - the encoders decoders otherwise hit stream read/write once per byte...
         if(!(outStream instanceof BufferedOutputStream))
             outStream=new BufferedOutputStream(outStream);
+        if(md!=null && md.modifyBoundarySemicolon)
+        {
+            outStream=new FixSemiColonStream(outStream);
+        }
         if(md!=null && md.transferEncoding!=null)
         {
             BodyPart bp[]=getBodyParts(m);
@@ -1093,6 +1165,7 @@ public class MimeUtil extends UrlUtil
         mm.writeTo(outStream);
         outStream.flush();
         outStream.close();
+        
     }
 
     /**

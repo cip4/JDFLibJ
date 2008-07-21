@@ -76,6 +76,7 @@ import java.util.Set;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.ifaces.IMatches;
 
 /**
  * general utilities for containers and objects
@@ -85,6 +86,33 @@ import org.cip4.jdflib.JDFTestCaseBase;
  */
 public class ContainerUtilTest extends JDFTestCaseBase
 {
+    private class SimpleMatch implements IMatches
+    {
+
+        private int i;
+        
+        public SimpleMatch(int i)
+        {
+            super();
+            this.i = i;
+        }
+        /* (non-Javadoc)
+         * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
+         */
+        public boolean matches(Object subset)
+        {
+            return ((SimpleMatch)subset).i==i;
+        }
+        /* (non-Javadoc)
+         * @see java.lang.Object#equals(java.lang.Object)
+         */
+        @Override
+        public boolean equals(Object obj)
+        {
+            return matches(obj);
+        }
+        
+    }
     public void testEquals()
     {
         assertTrue(ContainerUtil.equals(null, null));
@@ -93,6 +121,15 @@ public class ContainerUtilTest extends JDFTestCaseBase
         assertFalse(ContainerUtil.equals("", " "));
         assertTrue(ContainerUtil.equals("a", "a"));
     }
+    public void testGetMatch()
+    {
+        Vector<SimpleMatch>v=new Vector<SimpleMatch>();
+        for(int i=0;i<10;i++)
+            v.add(new SimpleMatch(i%2));
+        SimpleMatch simpleMatch1 = new SimpleMatch(1);
+        assertEquals(ContainerUtil.getMatches(v,simpleMatch1).size(),5);
+        assertEquals(ContainerUtil.getMatch(v,simpleMatch1,0),simpleMatch1);
+     }
 
     public void testToHashSetArray()
     {

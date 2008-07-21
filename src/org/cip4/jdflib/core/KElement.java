@@ -77,7 +77,8 @@ package org.cip4.jdflib.core;
 
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -1569,6 +1570,21 @@ public class KElement extends ElementNSImpl
     {
         return appendElement(elementName, null);
     }
+    /**
+     * append all children in a vector of elements in the order of the vector
+     *
+     * @param v  the vector of  elements to append
+     *
+     * @param beforeChild    the child before which to append the vector
+     */
+    public void copyElements(VElement v, KElement beforeChild)
+    {
+        if(v==null)
+            return;
+        int size = v.size();
+        for(int i=0;i<size;i++)
+             copyElement(v.get(i), beforeChild);
+    }
 
     /**
      * Deletes itself from its parent
@@ -2928,7 +2944,8 @@ public class KElement extends ElementNSImpl
     }
 
     /**
-     * Checks if this element is equal to element kElem
+     * Checks if the contents of this element are equal to element kElem<br/>
+     * differs from @see equals because nodes that are in different locations or documents but have the same name, attributes and elements are considered equal
      *
      * @param kElem     the element to compare
      *
@@ -4236,7 +4253,7 @@ public class KElement extends ElementNSImpl
     {
         if(kElem==null)
             return this;
-        
+
         final VElement v = kElem.getChildElementVector(null, null, null, true, 0,false);
 
         for (int i = 0; i < v.size(); i++)
@@ -4445,33 +4462,46 @@ public class KElement extends ElementNSImpl
     }
 
     /**
+     * sorts according to the lexical string representation of the xml objects
+     * @author prosirai
+     *
+     */
+    public static class SimpleNodeComparator implements Comparator<KElement>
+    {
+
+        /* (non-Javadoc)
+         * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+         */
+        public int compare(KElement o1, KElement o2)
+        {
+            int i=o1.getNodeName().compareTo(o2.getNodeName());
+            if(i!=0)
+                return i;
+            String i1=o1.toString();
+            String i2=o2.toString();
+            return i1.compareTo(i2);
+        }        
+    }
+    /**
      * sorts all child elements by alphabet
      *
      */
     public void sortChildren()
     {
+        sortChildren(new SimpleNodeComparator());
+    }
+    /**
+     * sorts all child elements by alphabet
+     *
+     */
+    public synchronized void sortChildren(Comparator<KElement>comparator)
+    {
         VElement v=getChildElementVector_KElement(null, null, null, true, -1);
-        if(v==null || v.size()==0) {
-            return;
-        }
-
-        String[] vs=new String[v.size()];
-        for(int i=0;i<v.size();i++)
+        Collections.sort(v,comparator);
+        int size = v.size();
+        for(int i=0;i<size;i++)
         {
-            KElement e=v.item(i);
-            String s=e.getNodeName();
-            String id=e.getAttribute("ID", null, null);
-            if(id!=null) {
-                s+="<"+id;
-            }
-            vs[i]=s;
-        }
-        Arrays.sort(vs);
-        for(int i=0;i<vs.length;i++)
-        {
-            String s=vs[i];
-            String id=StringUtil.token(s, 1, "<");
-            KElement e= id==null ? getElement(s, null, 0) : getChildWithAttribute(StringUtil.token(s, 0, "<"), "ID", null, id, 0, true);
+            KElement e=v.get(i);
             moveElement(e, null);
         }
     }

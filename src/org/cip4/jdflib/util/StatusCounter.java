@@ -78,6 +78,7 @@ package org.cip4.jdflib.util;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.Vector;
 
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceOperationMode;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
@@ -113,6 +114,7 @@ import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.process.JDFComponent;
+import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFUsageCounter;
 
@@ -147,7 +149,31 @@ public class StatusCounter
     private String statusDetails=null;
     private JDFDate startDate;
     private NodeIdentifier nodeID=null;
+    private Vector<JDFEmployee> vEmployees=new Vector<JDFEmployee>();
 
+    public int addEmployee(JDFEmployee employee)
+    {
+        JDFEmployee eOld=(JDFEmployee) ContainerUtil.getMatch(vEmployees, employee, 0);
+        if(eOld==null)
+        {
+            vEmployees.add(employee);
+            resetPhase();
+        }
+        return vEmployees.size();
+    }
+    public boolean removeEmployee(JDFEmployee employee)
+    {
+        JDFEmployee eOld=(JDFEmployee) ContainerUtil.getMatch(vEmployees, employee, 0);
+        if(eOld!=null)
+        {
+            boolean b= vEmployees.remove(employee);
+            if(b)
+                resetPhase();
+            return b;
+        }
+        return false;
+    }
+        
     @Override
     public String toString()
     {
@@ -463,6 +489,18 @@ public class StatusCounter
         final LinkAmount la=getLinkAmount(refID);
         return la==null ? 0 : la.getAmount(la.lastBag.phaseWaste);
     }
+    
+    private boolean resetPhase()
+    {
+        if(m_Node==null)
+            return setIdlePhase(status, statusDetails);
+        
+        JDFAuditPool ap=m_Node.getCreateAuditPool();
+        JDFPhaseTime lastPhase= ap.getLastPhase(m_vPartMap,m_moduleID==null ? null : m_moduleID.stringAt(0));
+        EnumNodeStatus ns=lastPhase!=null ? lastPhase.getStatus() : EnumNodeStatus.Waiting;
+        String nodeStatusDetails=lastPhase!=null ? lastPhase.getStatusDetails() : statusDetails;
+        return setPhase(ns, nodeStatusDetails, status, statusDetails);
+    }
     /**
      * Set the Status and StatusDetails of this node
      * update the PhaseTime audit or append a new phasetime as appropriate
@@ -496,7 +534,7 @@ public class StatusCounter
         boolean bChanged=bEnd || lastPhase==null; // no previous audit or over and out
 
 
-        nextPhase=ap.setPhase(nodeStatus,nodeStatusDetails,m_vPartMap);
+        nextPhase=ap.setPhase(nodeStatus, nodeStatusDetails, m_vPartMap,new VElement(vEmployees));
         if(bEnd && !bCompleted)
         {
             writeAll();
@@ -585,7 +623,8 @@ public class StatusCounter
         startDate = ( lastDevInfo==null || lastDevInfo.getIdleStartTime()==null || bChanged) ? new JDFDate() : lastDevInfo.getIdleStartTime();
 
         docJMFPhaseTime=new JDFDoc(ElementName.JMF);
-        JDFDeviceInfo newDevInfo=docJMFPhaseTime.getJMFRoot().appendResponse(EnumType.Status).appendDeviceInfo();
+        JDFResponse newResponse = docJMFPhaseTime.getJMFRoot().appendResponse(EnumType.Status);
+        JDFDeviceInfo newDevInfo=newResponse.getCreateDeviceInfo(0);
         fillDeviceInfo(deviceStatus, deviceStatusDetails, newDevInfo);
         newDevInfo.setIdleStartTime(startDate);
 
@@ -603,6 +642,11 @@ public class StatusCounter
         newDevInfo.setStatusDetails(deviceStatusDetails);
         newDevInfo.setDeviceOperationMode(operationMode);
         newDevInfo.setDeviceID(m_deviceID);
+        for(int i=0;i<vEmployees.size();i++)
+        {
+            newDevInfo.copyElement(vEmployees.get(i), null);
+        }
+
     }
 
     private void updateCurrentJobPhase(EnumNodeStatus nodeStatus, EnumDeviceStatus deviceStatus, String deviceStatusDetails, JDFJMF jmf, final LinkAmount la, JDFPhaseTime pt2, boolean bEnd)
@@ -631,7 +675,6 @@ public class StatusCounter
             pt2.eraseEmptyAttributes(true);
         }
     }
-
     private JDFResponse closeJobPhase(JDFJMF jmf, final LinkAmount la, JDFPhaseTime pt1, JDFPhaseTime pt2)
     {
         JDFResponse respStatus=(JDFResponse)jmf.appendMessageElement(JDFMessage.EnumFamily.Response,JDFMessage.EnumType.Status);

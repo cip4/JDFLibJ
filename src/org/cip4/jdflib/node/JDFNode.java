@@ -1714,6 +1714,133 @@ public class JDFNode extends JDFElement
     //**************************************** Constructors ****************************************
     //NEWWWW
 
+    public static class CombinedProcessIndexHelper
+    {
+        /**
+         * @param jdfResource
+         * @param usage
+         * @param processUsage
+         * @param resourceLink
+         * @param types
+         */
+        public static void generateCombinedProcessIndex(JDFResource jdfResource, EnumUsage usage, EnumProcessUsage processUsage, JDFResourceLink resourceLink, final VString types)
+        {
+            JDFIntegerList cpi=new JDFIntegerList();
+            final String resName=jdfResource.getLocalName();
+            final int typSize = types.size();
+            int lastGot=-2; // not -1!!!
+            String typeLinkNamesLast[]=null;
+            for(int i=0;i<typSize;i++)
+            {
+                boolean bAddCPI=false;
+                final EnumType t = EnumType.getEnum(types.stringAt(i));
+                final String[] typeLinkNames = typeLinkNames(t);
+                if(typeLinkNames!=null && ArrayUtils.contains(typeLinkNames,resName))
+                {
+                    // if we already added a cpi, but this is an exchange resource, only set cpi for the last one
+                    int iPos = ArrayUtils.indexOf(typeLinkNames,resName);
+                    final VString typeInfo = StringUtil.tokenize(typeLinkInfo(t)[iPos]," ",false);
+                    boolean bMatchUsage=false;
+                    String inOut=null;
+                    if(usage!=null) {
+                        inOut=usage==EnumUsage.Input ? "i" : "o";
+                    }
+
+                    for(int ti=0;ti<typeInfo.size();ti++)
+                    {
+                        String sti=typeInfo.stringAt(ti);
+                        if(inOut==null || sti.startsWith(inOut))
+                        {
+                            if(processUsage==null || processUsage.getName().equals(sti.substring(2)))
+                            {
+                                bMatchUsage=true;
+                                bAddCPI=true;
+                                break; // one match is enough!
+                            }
+                        }
+                    }
+                    if(bMatchUsage && lastGot==i-1)
+                    {
+                        bAddCPI = cleanCombinedProcessIndex(usage, types, cpi, resName, lastGot, typeLinkNamesLast, bAddCPI, typeInfo);
+                    }
+                    if(bAddCPI) {
+                        cpi.add(i);
+                    }
+                    lastGot=i;
+                    typeLinkNamesLast=typeLinkNames;
+                }                               
+            }
+            if(cpi.size()>0) 
+            {
+                resourceLink.setCombinedProcessIndex(cpi);
+            }
+        }
+
+
+        /**
+         * remove any duplicate combinedprocessusages
+         * @param usage
+         * @param types
+         * @param cpi
+         * @param resName
+         * @param lastGot
+         * @param typeLinkNamesLast
+         * @param bAddCPI
+         * @param typeInfo
+         * @return boolean
+         */
+        protected static boolean cleanCombinedProcessIndex(EnumUsage usage, final VString types, JDFIntegerList cpi, final String resName, int lastGot, String[] typeLinkNamesLast, boolean bAddCPI, final VString typeInfo)
+        {
+            int iPosLast = ArrayUtils.indexOf(typeLinkNamesLast,resName);
+            // the i* i?pu ... list of this
+            // the o* i?pu ... list of the previous type
+            final VString typeInfoLast = StringUtil.tokenize(typeLinkInfo(EnumType.getEnum(types.stringAt(lastGot)))[iPosLast]," ",false);
+            boolean bOut=false;
+
+            for(int ii=0;ii<typeInfoLast.size();ii++)
+            {
+                if(typeInfoLast.stringAt(ii).startsWith("o"))
+                {
+                    bOut=true; // we found a matching output
+                    break;
+                }
+            }
+            if(bOut)
+            {
+                boolean bIn=false;
+                bOut=false;
+                for(int ii=0;ii<typeInfo.size();ii++)
+                {
+                    if(!bIn && typeInfo.stringAt(ii).startsWith("i"))
+                    {
+                        bIn=true; // after finding a matching output in last, we find an input here
+                    }
+                    if(!bOut && typeInfo.stringAt(ii).startsWith("o"))
+                    {
+                        bOut=true; // after finding a matching output in last, we find an input here
+                    }
+                }
+                if(bIn && bOut)
+                { // remove the last output if we found a pass through
+                    if(EnumUsage.Input.equals(usage))
+                    {
+                        bAddCPI=false;
+                    }
+                    else
+                    {
+                        cpi.removeElementAt(-1);
+                        bAddCPI=true;
+                    }
+                }
+                else
+                {
+                    //not continuous - reset
+                    bAddCPI=true;
+                }
+            }
+            return bAddCPI;
+        }        
+    }
     /**
      * class to identify nodes even after parsing, e.g in hashmaps
      * uses JobID, JobPartID and the partMapVector as identifier
@@ -2302,7 +2429,7 @@ public class JDFNode extends JDFElement
      * definition of resource link names in the JDF namespace
      * @return String list of resource names that may be linked
      */
-    private static String[] typeLinkNames(EnumType typeNum)
+    protected static String[] typeLinkNames(EnumType typeNum)
     {
         if(typeNum==null) {
             return null;
@@ -2318,7 +2445,7 @@ public class JDFNode extends JDFElement
      * @param typeNum EnumType to get LinkInfo for
      * @return String list of resource information usages that may be linked for this EnumType
      */
-    private String[] typeLinkInfo(EnumType typeNum)
+    protected static String[] typeLinkInfo(EnumType typeNum)
     {
         final String[] strValueOfEnum = (String[]) m_LinkInfoMap.get(typeNum.getName());
         return (strValueOfEnum==null) ? m_GenericLinkInfo : strValueOfEnum;
@@ -2889,7 +3016,7 @@ public class JDFNode extends JDFElement
         // generate 
         if(types!=null && !EnumResourceClass.Implementation.equals(jdfResource.getResourceClass()) && !(jdfResource instanceof JDFNodeInfo)) 
         {
-            generateCombinedProcessIndex(jdfResource, usage, processUsage, resourceLink, types);
+            CombinedProcessIndexHelper.generateCombinedProcessIndex(jdfResource, usage, processUsage, resourceLink, types);
         }
         return resourceLink;
     }
@@ -2922,130 +3049,7 @@ public class JDFNode extends JDFElement
         return rl;
     }
 
-    /**
-     * @param jdfResource
-     * @param usage
-     * @param processUsage
-     * @param resourceLink
-     * @param types
-     */
-    public void generateCombinedProcessIndex(JDFResource jdfResource, EnumUsage usage, EnumProcessUsage processUsage, JDFResourceLink resourceLink, final VString types)
-    {
-        JDFIntegerList cpi=new JDFIntegerList();
-        final String resName=jdfResource.getLocalName();
-        final int typSize = types.size();
-        int lastGot=-2; // not -1!!!
-        String typeLinkNamesLast[]=null;
-        for(int i=0;i<typSize;i++)
-        {
-            boolean bAddCPI=false;
-            final EnumType t = EnumType.getEnum(types.stringAt(i));
-            final String[] typeLinkNames = typeLinkNames(t);
-            if(typeLinkNames!=null && ArrayUtils.contains(typeLinkNames,resName))
-            {
-                // if we already added a cpi, but this is an exchange resource, only set cpi for the last one
-                int iPos = ArrayUtils.indexOf(typeLinkNames,resName);
-                final VString typeInfo = StringUtil.tokenize(typeLinkInfo(t)[iPos]," ",false);
-                boolean bMatchUsage=false;
-                String inOut=null;
-                if(usage!=null) {
-                    inOut=usage==EnumUsage.Input ? "i" : "o";
-                }
 
-                for(int ti=0;ti<typeInfo.size();ti++)
-                {
-                    String sti=typeInfo.stringAt(ti);
-                    if(inOut==null || sti.startsWith(inOut))
-                    {
-                        if(processUsage==null || processUsage.getName().equals(sti.substring(2)))
-                        {
-                            bMatchUsage=true;
-                            bAddCPI=true;
-                            break; // one match is enough!
-                        }
-                    }
-                }
-                if(bMatchUsage && lastGot==i-1)
-                {
-                    bAddCPI = cleanCombinedProcessIndex(usage, types, cpi, resName, lastGot, typeLinkNamesLast, bAddCPI, typeInfo);
-                }
-                if(bAddCPI) {
-                    cpi.add(i);
-                }
-                lastGot=i;
-                typeLinkNamesLast=typeLinkNames;
-            }                               
-        }
-        if(cpi.size()>0) 
-        {
-            resourceLink.setCombinedProcessIndex(cpi);
-        }
-    }
-
-
-    /**
-     * remove any duplicate combinedprocessusages
-     * @param usage
-     * @param types
-     * @param cpi
-     * @param resName
-     * @param lastGot
-     * @param typeLinkNamesLast
-     * @param bAddCPI
-     * @param typeInfo
-     * @return boolean
-     */
-    private boolean cleanCombinedProcessIndex(EnumUsage usage, final VString types, JDFIntegerList cpi, final String resName, int lastGot, String[] typeLinkNamesLast, boolean bAddCPI, final VString typeInfo)
-    {
-        int iPosLast = ArrayUtils.indexOf(typeLinkNamesLast,resName);
-        // the i* i?pu ... list of this
-        // the o* i?pu ... list of the previous type
-        final VString typeInfoLast = StringUtil.tokenize(typeLinkInfo(EnumType.getEnum(types.stringAt(lastGot)))[iPosLast]," ",false);
-        boolean bOut=false;
-
-        for(int ii=0;ii<typeInfoLast.size();ii++)
-        {
-            if(typeInfoLast.stringAt(ii).startsWith("o"))
-            {
-                bOut=true; // we found a matching output
-                break;
-            }
-        }
-        if(bOut)
-        {
-            boolean bIn=false;
-            bOut=false;
-            for(int ii=0;ii<typeInfo.size();ii++)
-            {
-                if(!bIn && typeInfo.stringAt(ii).startsWith("i"))
-                {
-                    bIn=true; // after finding a matching output in last, we find an input here
-                }
-                if(!bOut && typeInfo.stringAt(ii).startsWith("o"))
-                {
-                    bOut=true; // after finding a matching output in last, we find an input here
-                }
-            }
-            if(bIn && bOut)
-            { // remove the last output if we found a pass through
-                if(EnumUsage.Input.equals(usage))
-                {
-                    bAddCPI=false;
-                }
-                else
-                {
-                    cpi.removeElementAt(-1);
-                    bAddCPI=true;
-                }
-            }
-            else
-            {
-                //not continuous - reset
-                bAddCPI=true;
-            }
-        }
-        return bAddCPI;
-    }
 
     /**
      * get the resourcelinks in the resourcepool of this node
@@ -3179,7 +3183,7 @@ public class JDFNode extends JDFElement
      */
     public VElement getPredecessors(boolean bPre, boolean bDirect)
     {
-        HashSet hashSet = new HashSet();
+        HashSet<KElement> hashSet = new HashSet<KElement>();
         getPredecessorImpl(bPre, bDirect,hashSet);
 
         VElement v=new VElement();
@@ -3190,7 +3194,7 @@ public class JDFNode extends JDFElement
         return v;
 
     }
-    private void getPredecessorImpl(boolean bPre, boolean bDirect, HashSet h)
+    private void getPredecessorImpl(boolean bPre, boolean bDirect, HashSet<KElement> h)
     {
         final JDFResourceLinkPool rlp = getResourceLinkPool();
 
@@ -6493,7 +6497,7 @@ public class JDFNode extends JDFElement
      * @return vector of enumerated types, null if extensions exist that hinder us from generating a complete vector<br>
      * e.g. extension types or gray box names
      */
-    public Vector getEnumTypes()
+    public Vector<EnumType> getEnumTypes()
     {
         Vector<EnumType> vs=null;
         VString types=getTypes();
@@ -8174,7 +8178,7 @@ public class JDFNode extends JDFElement
 
         return getExecutablePartitions(link, minStatus);
     }
-
+    
     /**
      * Method getExecutablePartitions
      * 
@@ -8184,7 +8188,7 @@ public class JDFNode extends JDFElement
      * @param minStatus
      * @return
      */
-    @Deprecated
+    
     public VJDFAttributeMap getExecutablePartitions (JDFResourceLink link,  JDFResource.EnumResStatus minStatus)
     {
         return (getExecutablePartitions (link, minStatus, true));
@@ -8203,7 +8207,8 @@ public class JDFNode extends JDFElement
      * @param bCheckNodeStatus check node status.
      *
      * @return VJDFAttributeMap - A part map vector containing the executable partitions.
-     */    
+     */
+    
     public VJDFAttributeMap getExecutablePartitions (JDFResourceLink link,  JDFResource.EnumResStatus minStatus, boolean bCheckNodeStatus)
     {
         final VJDFAttributeMap vp = new VJDFAttributeMap ();
@@ -8213,39 +8218,62 @@ public class JDFNode extends JDFElement
         for(int i=0;i<v.size();i++)
         {
             JDFResource res=(JDFResource) v.elementAt(i);
-            addExecutablePartitions (link, res, vp, minStatus, bCheckNodeStatus);
+            addExecutablePartitions (link, res, res.getPartIDKeys (), vp, minStatus, bCheckNodeStatus);
         }
         vp.unify();
         return vp;
     }
 
     private ExecPartFlags addExecutablePartitions(
-            JDFResourceLink link, JDFResource res, VJDFAttributeMap vamPartMaps, JDFResource.EnumResStatus minStatus, boolean bCheckNodeStatus)
+            JDFResourceLink link, JDFResource res, VString vsPartIDKeys, VJDFAttributeMap vamPartMaps, JDFResource.EnumResStatus minStatus, boolean bCheckNodeStatus)
     {
         final JDFAttributeMap amPartMap = res.getPartMap();
 
-        ////////////////////////////////////////////////////////
-        // Check the process status.
-        //
-
-        boolean isProcStatOK = false;
-
-        ////////////////////////////////////////////////////////
-        // Check if all child partitions are executable.
-        //
+            ////////////////////////////////////////////////////////
+            // Check if all child partitions are executable.
+            //
 
         final VElement veChildPartitions = res.getChildElementVector_JDFElement(
                 res.getNodeName (), null, null, false, 0, true);
 
         final int nChildPartitions = veChildPartitions.size ();
 
-        final JDFElement.EnumNodeStatus stat = getPartStatus (amPartMap);
+            ////////////////////////////////////////////////////////
+            // Check if this is a leaf partition.
+            //
 
+        boolean isLeaf = false;
+        
+        if (nChildPartitions == 0)
+        {
+            if (vsPartIDKeys != null)
+            {
+                final VString vsMapKeys = amPartMap.getKeys ();
+            
+                if (vsMapKeys != null)
+                {
+                    isLeaf = vsMapKeys.containsAll (vsPartIDKeys);
+                }
+            }
+            else
+            {
+                isLeaf = true;
+            }
+        }
+        
+            ////////////////////////////////////////////////////////
+            // Check the process status.
+            //
+
+        boolean isProcStatOK = false;
+    
+        final JDFElement.EnumNodeStatus stat = getPartStatus (amPartMap);
+        
         if (bCheckNodeStatus)
         {
-            if (((stat == null) && (nChildPartitions == 0))
-                    || (stat == JDFNode.EnumNodeStatus.Waiting)
-                    || (stat == JDFNode.EnumNodeStatus.Ready))
+            if (((stat == null) && (isLeaf))
+              || (stat == JDFNode.EnumNodeStatus.Waiting)
+              || (stat == JDFNode.EnumNodeStatus.Ready))
             {
                 isProcStatOK = true;
             }
@@ -8265,7 +8293,7 @@ public class JDFNode extends JDFElement
 
             if (link.overlapsResourcePartMap (amSub))
             {
-                final ExecPartFlags ExecChild = addExecutablePartitions (link, sub, vamPartMaps, minStatus, bCheckNodeStatus);
+                final ExecPartFlags ExecChild = addExecutablePartitions (link, sub, vsPartIDKeys, vamPartMaps, minStatus, bCheckNodeStatus);
                 if (!ExecChild.isAvailable ())
                 {
                     allChildsAvailable = false;
@@ -8317,7 +8345,7 @@ public class JDFNode extends JDFElement
 
         if (isExecutable)
         {
-            if ((nChildPartitions == 0) && (stat == null))  // leaf with unknown PartStatus
+            if ((isLeaf) && (stat == null))  // leaf with unknown PartStatus
             {
                 if (getStatus () == EnumNodeStatus.Part)
                 {
@@ -8338,7 +8366,7 @@ public class JDFNode extends JDFElement
                             final JDFElement.EnumNodeStatus statPart = niPart.getNodeStatus ();
 
                             if ((statPart == JDFNode.EnumNodeStatus.Waiting)
-                                    || (statPart == JDFNode.EnumNodeStatus.Ready))
+                             || (statPart == JDFNode.EnumNodeStatus.Ready))
                             {
                                 vamPartMaps.appendUnique (niPart.getPartMap ());
                             }

@@ -173,7 +173,7 @@ public class BaseGoldenTicket
     public BaseGoldenTicket(int icsLevel, EnumVersion jdfVersion)
     {
         baseICSLevel=icsLevel;
-        theVersion=jdfVersion;
+        theVersion=jdfVersion==null ? EnumVersion.Version_1_3 : jdfVersion;
         theStatusCounter=new StatusCounter(null,null,null);
         JDFElement.setLongID(false);
     }

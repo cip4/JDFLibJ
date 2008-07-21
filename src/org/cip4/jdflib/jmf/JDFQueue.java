@@ -75,6 +75,7 @@
 
 package org.cip4.jdflib.jmf;
 
+import java.util.Comparator;
 import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -82,10 +83,12 @@ import org.cip4.jdflib.auto.JDFAutoQueue;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.jmf.JDFQueueEntry.QueueEntryComparator;
 import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
 import org.cip4.jdflib.util.JDFDate;
 
@@ -109,6 +112,8 @@ public class JDFQueue extends JDFAutoQueue
     private boolean bAccepting=true; // new entries may be added to the queue
     private boolean bProcessing=true; // new entries may be processed by the queue processor
     private CleanupCallback cleanupCallback=null;
+    private Comparator<KElement> queueSorter=new QueueEntryComparator();
+
     /** 
      * callback class definition for cleaning up in cleanup
      * called once for every qe that is removed
@@ -737,6 +742,14 @@ public class JDFQueue extends JDFAutoQueue
         return newStatus;
     }
     ///////////////////////////////////////////////////////////////////////
+    /**
+     * sorts all child elements by alphabet
+     *
+     */
+    public void sortChildren()
+    {
+       sortChildren(queueSorter);
+    }
 
     /**
      * @return the maxCompletedEntries
@@ -794,6 +807,15 @@ public class JDFQueue extends JDFAutoQueue
     public void setCleanupCallback(CleanupCallback cleanupCallback)
     {
         this.cleanupCallback = cleanupCallback;
+    }
+
+    /**
+     * @param queueSorter the queueSorter to set
+     * sets the Comparator to sort this queuewith
+     */
+    public void setQueueSorter(Comparator<KElement> _queueSorter)
+    {
+        this.queueSorter = _queueSorter;
     }
 
 }

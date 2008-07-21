@@ -564,7 +564,9 @@ public class JDFDate implements Comparable
      * and a value greater than 0 if the argument is a Date before this Date.
      */
     public int compareTo(final Object arg0)
-    {        
+    {      
+        if(!(arg0 instanceof JDFDate))
+            return 1;
         return (int)(getTimeInMillis()/1000)-(int)(((JDFDate)arg0).getTimeInMillis()/1000);
     }
 

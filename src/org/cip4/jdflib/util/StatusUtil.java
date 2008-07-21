@@ -301,7 +301,7 @@ public class StatusUtil {
         JDFPhaseTime pt2=pt1;
         boolean bEnd=nodeStatus.equals(EnumNodeStatus.Completed) || nodeStatus.equals(EnumNodeStatus.Aborted);
 
-        pt2=ap.setPhase(nodeStatus,nodeStatusDetails,m_vPartMap);
+        pt2=ap.setPhase(nodeStatus, nodeStatusDetails, m_vPartMap,null);
         if(bEnd )
         {
             JDFProcessRun pr=(JDFProcessRun) ap.addAudit(EnumAuditType.ProcessRun, null);

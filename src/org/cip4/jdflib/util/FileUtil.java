@@ -235,17 +235,10 @@ public class FileUtil
         {
             return null;
         }
-        byte[] b=new byte[10000];
         try
         {
             FileOutputStream fos=new FileOutputStream(tmp);
-            while (true)
-            {
-                int i=fis.read(b);
-                if(i<=0)
-                    break;
-                fos.write(b,0,i);
-            }
+            IOUtils.copy(fis, fos);
             fos.flush();
             fos.close();
             fis.close();

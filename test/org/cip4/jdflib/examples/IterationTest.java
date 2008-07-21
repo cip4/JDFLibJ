@@ -106,7 +106,7 @@ public class IterationTest extends JDFTestCaseBase
     private void iterateFirst()
     {
         iterateRead(0);
-        JDFPhaseTime pt=iterNode.getAuditPool().setPhase(EnumNodeStatus.InProgress,"First Iteration Ongoing",null);
+        JDFPhaseTime pt=iterNode.getAuditPool().setPhase(EnumNodeStatus.InProgress, "First Iteration Ongoing", null,null);
         pt.setStart(new JDFDate(System.currentTimeMillis()-100000));
         pt.setEnd(new JDFDate(System.currentTimeMillis()));
         pt.appendEmployee().setPersonalID("Employee 1");
@@ -122,7 +122,7 @@ public class IterationTest extends JDFTestCaseBase
     private void iterateSecond()
     {
         iterateRead(1);
-        JDFPhaseTime pt=iterNode.getAuditPool().setPhase(EnumNodeStatus.InProgress,"First Approval Ongoing",null);
+        JDFPhaseTime pt=iterNode.getAuditPool().setPhase(EnumNodeStatus.InProgress, "First Approval Ongoing", null,null);
         pt.setStart(new JDFDate(System.currentTimeMillis()+1000000));
         pt.setEnd(new JDFDate(System.currentTimeMillis()+1100000));
         pt.appendEmployee().setPersonalID("Employee 2");
@@ -138,7 +138,7 @@ public class IterationTest extends JDFTestCaseBase
     private void iterateThird()
     {
         iterateRead(2);
-        JDFPhaseTime pt=iterNode.getAuditPool().setPhase(EnumNodeStatus.InProgress,"Second Iteration Ongoing",null);
+        JDFPhaseTime pt=iterNode.getAuditPool().setPhase(EnumNodeStatus.InProgress, "Second Iteration Ongoing", null,null);
         pt.setStart(new JDFDate(System.currentTimeMillis()+2000000));
         pt.setEnd(new JDFDate(System.currentTimeMillis()+2100000));
         pt.appendEmployee().setPersonalID("Employee 1");
@@ -159,7 +159,7 @@ public class IterationTest extends JDFTestCaseBase
     private void iterateForth()
     {
         iterateRead(3);
-        JDFPhaseTime pt=iterNode.getAuditPool().setPhase(EnumNodeStatus.InProgress,"Second Approval Ongoing",null);
+        JDFPhaseTime pt=iterNode.getAuditPool().setPhase(EnumNodeStatus.InProgress, "Second Approval Ongoing", null,null);
         pt.setStart(new JDFDate(System.currentTimeMillis()+3000000));
         pt.setEnd(new JDFDate(System.currentTimeMillis()+3100000));
         pt.appendEmployee().setPersonalID("Employee 3");
@@ -176,7 +176,7 @@ public class IterationTest extends JDFTestCaseBase
     private void iterateLast()
     {
         iterateRead(4);
-        JDFPhaseTime pt=iterNode.getAuditPool().setPhase(EnumNodeStatus.InProgress,"Final Iteration Ongoing - final output",null);
+        JDFPhaseTime pt=iterNode.getAuditPool().setPhase(EnumNodeStatus.InProgress, "Final Iteration Ongoing - final output", null,null);
         pt.setStart(new JDFDate(System.currentTimeMillis()+4000000));
         pt.setEnd(new JDFDate(System.currentTimeMillis()+4100000));
         pt.appendEmployee().setPersonalID("Employee 1");

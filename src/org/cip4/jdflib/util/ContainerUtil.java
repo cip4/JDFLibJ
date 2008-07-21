@@ -79,6 +79,7 @@
  */
 package org.cip4.jdflib.util;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -87,6 +88,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 import java.util.Map.Entry;
+
+import org.cip4.jdflib.ifaces.IMatches;
 
 /**
  * class with utilities for containers, e.g. Vectors, sets etc.
@@ -138,6 +141,56 @@ public class ContainerUtil
         for(int i=0;i<l.length;i++)
             v.add(l[i]);
         return v;
+    }
+    
+    /**
+     * return a matching element from a collection of Imatches
+     * @param c the collection to search
+     * @param obj the search key for matches
+     * @return
+     */
+    public static<a> IMatches getMatch(Collection<? extends IMatches> c ,a obj, int iSkip)
+    {
+        if(c==null)
+            return null;
+        if(iSkip<0)
+        {
+            Vector<IMatches> v=getMatches(c, obj);
+            if(v==null)
+                return null;
+            iSkip=v.size()+iSkip;
+            if(iSkip<0)
+                return null;
+            return v.get(iSkip);
+        }
+        Iterator<? extends IMatches> it=c.iterator();
+        while(it.hasNext())
+        {
+            IMatches m=it.next();
+            if(m.matches(obj) && iSkip--<=0)
+                return m;
+        }
+        return null;
+    }
+    /**
+     * return a matching element from a collection of Imatches
+     * @param c the collection to search
+     * @param obj the search key for matches
+     * @return
+     */
+    public static<a,aa> Vector<IMatches>getMatches(Collection<? extends IMatches> c ,a obj)
+    {
+        if(c==null)
+            return null;
+        Iterator<? extends IMatches> it=c.iterator();
+        Vector<IMatches>v=new Vector<IMatches>();
+        while(it.hasNext())
+        {
+            IMatches m=it.next();
+            if(m.matches(obj))
+                v.add(m);
+        }
+        return v.size()==0?null : v;
     }
  
     /**

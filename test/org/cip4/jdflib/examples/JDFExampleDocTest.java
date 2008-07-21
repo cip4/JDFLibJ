@@ -571,10 +571,10 @@ public class JDFExampleDocTest extends JDFTestCaseBase
         JDFAuditPool auditPool = root.getAuditPool();
         
         /// do something between these calls
-        auditPool.setPhase(JDFElement.EnumNodeStatus.Setup, null,null);
-        auditPool.setPhase(JDFElement.EnumNodeStatus.InProgress, null,null);
-        auditPool.setPhase(JDFElement.EnumNodeStatus.InProgress, null,null);
-        auditPool.setPhase(JDFElement.EnumNodeStatus.Cleanup, null,null);
+        auditPool.setPhase(JDFElement.EnumNodeStatus.Setup, null, null,null);
+        auditPool.setPhase(JDFElement.EnumNodeStatus.InProgress, null, null,null);
+        auditPool.setPhase(JDFElement.EnumNodeStatus.InProgress, null, null,null);
+        auditPool.setPhase(JDFElement.EnumNodeStatus.Cleanup, null, null,null);
         assertEquals(auditPool.getPoolChildren("PhaseTime",null).size(),3);
 
         // get the input runlist
@@ -587,7 +587,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
             JDFResourceAudit resourceAudit = auditPool.addResourceAudit("");
             resourceAudit.addNewOldLink(true, rl, EnumUsage.Input);
             resourceAudit.setContentsModified(true);
-            auditPool.setPhase(JDFElement.EnumNodeStatus.Completed, null, null);
+            auditPool.setPhase(JDFElement.EnumNodeStatus.Completed, null, null,null);
             
             /// fill the processrun
             auditPool.addProcessRun(JDFElement.EnumNodeStatus.Completed, null, null);

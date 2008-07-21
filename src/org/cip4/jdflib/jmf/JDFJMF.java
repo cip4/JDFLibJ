@@ -38,7 +38,7 @@
  *
  * Usage of this software in commercial products is subject to restrictions. For
  * details please consult info@cip4.org.
-  *
+ *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -185,7 +185,7 @@ public class JDFJMF extends JDFAutoJMF
 
         if(version==null)
             return getVersion(false);
-        
+
         return EnumVersion.getEnum(version);
     }
     /**
@@ -215,7 +215,7 @@ public class JDFJMF extends JDFAutoJMF
     {
         setAttribute(AttributeName.MAXVERSION, enumVer.getName(), null);
     }
-    
+
     // Appendix I - Supported Error Codes in JMF and Notification elements
     public static class EnumJMFReturnCode extends ValuedEnum
     {
@@ -256,25 +256,25 @@ public class JDFJMF extends JDFAutoJMF
 
         // 1..99 Protocol errors
         public static final EnumJMFReturnCode GENERAL_ERROR                    = new EnumJMFReturnCode (1,
-                                                                                       "General error");
+        "General error");
 
         public static final EnumJMFReturnCode INTERNAL_ERROR                   = new EnumJMFReturnCode (2,
-                                                                                       "Internal error");
+        "Internal error");
 
         public static final EnumJMFReturnCode XML_PARSER                       = new EnumJMFReturnCode (3,
-                                                                                       "XML parser error, e.g., if a MIME file is sent to an XML controller. ");
+        "XML parser error, e.g., if a MIME file is sent to an XML controller. ");
 
         public static final EnumJMFReturnCode XML_VALIDATION                   = new EnumJMFReturnCode (4,
-                                                                                       "XML validation error");
+        "XML validation error");
 
         public static final EnumJMFReturnCode MESSAGE_NOT_IMPLEMENTED          = new EnumJMFReturnCode (5,
-                                                                                       "Query/command not implemented");
+        "Query/command not implemented");
 
         public static final EnumJMFReturnCode INVALID_PARAMETER                = new EnumJMFReturnCode (6,
-                                                                                       "Invalid parameters");
+        "Invalid parameters");
 
         public static final EnumJMFReturnCode INSUFFICIENT_PARAMETER           = new EnumJMFReturnCode (7,
-                                                                                       "Insufficient parameters");
+        "Insufficient parameters");
 
         public static final EnumJMFReturnCode DEVICE_NOT_AVAILABLE             = new EnumJMFReturnCode (8, "Device not available (controller exists but not the device or queue)");
 
@@ -284,66 +284,66 @@ public class JDFJMF extends JDFAutoJMF
 
         // 100..199 Device and controller errors
         public static final EnumJMFReturnCode DEVICE_NOT_RUNNING               = new EnumJMFReturnCode (100,
-                                                                                       "Device not running");
+        "Device not running");
 
         public static final EnumJMFReturnCode INCAPABLE_REQUEST                = new EnumJMFReturnCode (101,
-                                                                                       "Device incapable of fulfilling request");
+        "Device incapable of fulfilling request");
 
         public static final EnumJMFReturnCode NO_EXCUTABLE_NODE                = new EnumJMFReturnCode (102,
-                                                                                       "No executable node exists in the JDF");
+        "No executable node exists in the JDF");
 
         public static final EnumJMFReturnCode UNKNOWN_JOB_ID                   = new EnumJMFReturnCode (103,
-                                                                                       "Job ID not known by controller");
+        "Job ID not known by controller");
 
         public static final EnumJMFReturnCode UNKNOWN_JOBPART_ID               = new EnumJMFReturnCode (104,
-                                                                                       "JobPartID not known by controller");
+        "JobPartID not known by controller");
 
         public static final EnumJMFReturnCode UNKNOWN_QUEUE_ENRTY              = new EnumJMFReturnCode (105,
-                                                                                       "Queue entry not in queue");
+        "Queue entry not in queue");
 
         public static final EnumJMFReturnCode QUEUE_ENRTY_ALREADY_EXECUTED     = new EnumJMFReturnCode (106,
-                                                                                       "Queue request failed because queue entry is already executing");
+        "Queue request failed because queue entry is already executing");
 
         public static final EnumJMFReturnCode NO_CHANGE_EXECUTING_QUEUE_ENRTY  = new EnumJMFReturnCode (107,
-                                                                                       "Queue entry is already executing. Late change is not accepted");
+        "Queue entry is already executing. Late change is not accepted");
 
         public static final EnumJMFReturnCode RESULT_SELECTION_EMPTY           = new EnumJMFReturnCode (108,
-                                                                                       "Selection or applied filter results in an empty list");
+        "Selection or applied filter results in an empty list");
 
         public static final EnumJMFReturnCode RESULT_SELECTION_INCOMPLETE      = new EnumJMFReturnCode (109,
-                                                                                       "Selection or applied filter results in an incomplete list. A buffer cannot provide the complete list queried for");
+        "Selection or applied filter results in an incomplete list. A buffer cannot provide the complete list queried for");
 
         public static final EnumJMFReturnCode REQUEST_FAILED_COMPLETION_TIME   = new EnumJMFReturnCode (110,
-                                                                                       "Queue request of a job submission failed because the requested completion time of the job can-not be fulfilled");
+        "Queue request of a job submission failed because the requested completion time of the job can-not be fulfilled");
 
         public static final EnumJMFReturnCode SUBSCRIPTION_REQUEST_DENIED      = new EnumJMFReturnCode (111,
-                                                                                       "Subscription request denied");
+        "Subscription request denied");
 
         public static final EnumJMFReturnCode QUEUE_CLOSED                     = new EnumJMFReturnCode (112,
-                                                                                       "Queue request failed because the Queue is closed and does not accept new entries");
+        "Queue request failed because the Queue is closed and does not accept new entries");
 
         public static final EnumJMFReturnCode QUEUE_ENTRY_ALREADY_IN_STATUS    = new EnumJMFReturnCode (113,
-                                                                                       "Queue entry is already in the resulting status");
+        "Queue entry is already in the resulting status");
 
         public static final EnumJMFReturnCode QUEUE_ENTRY_COMPLETED_OR_ABORTED = new EnumJMFReturnCode (114,
-                                                                                       "Queue entry is already completed or aborted and therefore does not accept changes");
+        "Queue entry is already completed or aborted and therefore does not accept changes");
 
         public static final EnumJMFReturnCode QUEUE_ENTRY_NOT_RUNNING          = new EnumJMFReturnCode (115,
-                                                                                       "Queue entry is not running");
+        "Queue entry is not running");
 
         // 200..299 Job and pipe specific errors
         public static final EnumJMFReturnCode INVALID_RESOURCE_PARAMETERS      = new EnumJMFReturnCode (200,
-                                                                                       "Invalid resource parameters");
+        "Invalid resource parameters");
 
         public static final EnumJMFReturnCode INSUFFICIENT_RESOURCE_PARAMETERS = new EnumJMFReturnCode (201,
-                                                                                       "Insufficient resource parameters");
+        "Insufficient resource parameters");
 
         public static final EnumJMFReturnCode PIPE_UNKNOWN                     = new EnumJMFReturnCode (202,
-                                                                                       "Pipe unknown");
+        "Pipe unknown");
 
         public static final EnumJMFReturnCode UNLINKED_RESOURCE_LINK           = new EnumJMFReturnCode (203,
         "Unlinked resource link");
-        
+
         public static final EnumJMFReturnCode 
         AUTHENTICATION_DENIED = new EnumJMFReturnCode (300, "Authentication Denied");
         public static final EnumJMFReturnCode 
@@ -507,7 +507,7 @@ public class JDFJMF extends JDFAutoJMF
      */
     public JDFMessage getCreateMessageElement (JDFMessage.EnumFamily family, int i)
     {
-       return getCreateMessageElement(family, null, i);
+        return getCreateMessageElement(family, null, i);
     }
 
     /**
@@ -536,7 +536,7 @@ public class JDFJMF extends JDFAutoJMF
         jmf.appendMessageElement(family, typ);
         return jmf;
     }
-    
+
     /**
      * append a message element to <code>this</code>
      * @param family the Message family - Query, Acknowledge, Command, Response, Registration or Signal
@@ -567,37 +567,44 @@ public class JDFJMF extends JDFAutoJMF
     {
         return getMessageElement(family,null,i);
     }
-    
+
     /**
      * get the ith message element of family type family
      * @param family the Message family - Query, Acknowledge, Command, Response, Registration or Signal
      * @param typ    the messages @Type value, null if unknown
-     * @param i      the i'th message element to get
+     * @param i      the i'th message element to get, if i<0, get from back
      * @return the matching message, null if none are found
      */
     public JDFMessage getMessageElement (JDFMessage.EnumFamily family, JDFMessage.EnumType typ, int i)
     {
-        JDFMessage resultMessage = null;
+        if(i<0) // search from back
+        {
+            VElement v=getMessageVector(family, typ);
+            int siz=v==null ? 0 : v.size();
+            i=siz+i;
+            return (JDFMessage) (i>=0 ? v.get(i) : null);                   
+        }
         final String typString = typ==null ? null : typ.getName();
         final String familyString = family==null ? null : family.getName();
-        
+
         KElement e = getElement (familyString,null,0);
         int n = 0;
+
         while (e != null)
         {
             if (e instanceof JDFMessage)
             {
                 if(typString==null || typString.equals(((JDFMessage)e).getType()))
                 {
-                         if (n++ >= i)
-                            return (JDFMessage) e;
+                    if (n++ >= i)
+                        return (JDFMessage) e;
                 }
             }
             e=e.getNextSiblingElement(familyString,null);
         }
-        
-        return resultMessage;
-}
+
+        return null;
+    }
 
     /**
      * get a vector of all messages in this JMF
@@ -609,7 +616,7 @@ public class JDFJMF extends JDFAutoJMF
     {
         return getMessageVector (null, null);
     }
-    
+
     /**
      * get a vector of all messages in this JMF
      * 
@@ -655,10 +662,10 @@ public class JDFJMF extends JDFAutoJMF
     {
         VElement vM;
         String sFamily = (family !=null) ? family.getName ()  : null;
-                            
+
         final JDFAttributeMap typMap = typ==null ? null : new JDFAttributeMap(AttributeName.TYPE, typ.getName ());
         vM = getChildrenByTagName(sFamily, null, typMap, true, true, 0);
-         
+
         if (family==null) // only needed if call was generic
         {
             // do reverse iteration because erase invalidates
@@ -670,7 +677,7 @@ public class JDFJMF extends JDFAutoJMF
                 }
             }
         }
-        
+
         return vM;
     }
 
@@ -791,7 +798,7 @@ public class JDFJMF extends JDFAutoJMF
      * if the message is any message except response
      * correctly fills refId, type etc.
      * 
-      * @return the newly created JMF with multiple responses
+     * @return the newly created JMF with multiple responses
      */    
     public JDFJMF createResponse()
     {
@@ -812,7 +819,7 @@ public class JDFJMF extends JDFAutoJMF
     /**
      * convert all responses that match the query q to signals
      * 
-      * @return the newly created JMF with multiple responses
+     * @return the newly created JMF with multiple responses
      */    
     public void convertResponses(JDFQuery q)
     {

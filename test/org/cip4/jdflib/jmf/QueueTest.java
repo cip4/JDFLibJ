@@ -282,14 +282,14 @@ public class QueueTest extends TestCase
         while(iThread>0)
             StatusCounter.sleep(100); // wait for threads to be over
         assertEquals(q.getQueueSize(), 1000);
-        int prio=999999;
         VElement v=q.getQueueEntryVector();
+        JDFQueueEntry qeLast=null;
         for(int i=0;i<v.size();i++)
         {
             JDFQueueEntry qe=(JDFQueueEntry)v.elementAt(i);
             System.out.println(qe.getPriority()+" "+qe.getQueueEntryID()+" "+qe.getQueueEntryStatus());
-            assertTrue(""+i,prio>=qe.getSortPriority());
-            prio=qe.getSortPriority();
+            assertTrue(qe.compareTo(qeLast)>=0);
+            qeLast=qe;
         }
         v=q.getQueueEntryVector(new JDFAttributeMap(AttributeName.STATUS,"Completed"),null);
         assertEquals(v.size(), 100);
