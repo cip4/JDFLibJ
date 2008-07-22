@@ -199,7 +199,8 @@ public class JDFQueueEntryTest extends TestCase
         qe.setQueueEntryID("qeNew");
         qe.setQueueEntryStatus(EnumQueueEntryStatus.Waiting);
         qe.setPriority(42);
-        JDFQueueEntry qe2=(JDFQueueEntry) q.moveElement(qe, null);
+//        JDFQueueEntry qe2=(JDFQueueEntry) 
+        q.moveElement(qe, null);
         q.sortChildren();
         assertEquals(q.getQueueEntryPos("qeNew"), 2);
     }

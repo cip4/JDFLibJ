@@ -85,10 +85,8 @@ import java.net.URL;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoQueueSubmissionParams;
-import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.util.JDFDate;
 
 
 

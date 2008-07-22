@@ -15,11 +15,9 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 
 public class TestJDF

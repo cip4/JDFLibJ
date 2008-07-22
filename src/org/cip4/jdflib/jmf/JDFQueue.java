@@ -697,7 +697,7 @@ public class JDFQueue extends JDFAutoQueue
      */
     public synchronized EnumQueueStatus setStatusFromEntries()
     {
-        EnumQueueStatus queueStatus = getQueueStatus();
+//        EnumQueueStatus queueStatus = getQueueStatus();
         EnumQueueStatus newStatus = null;
         if(bAccepting)
         {
@@ -769,7 +769,7 @@ public class JDFQueue extends JDFAutoQueue
     public void setMaxCompletedEntries(int _maxCompletedEntries)
     {
         this.maxCompletedEntries = _maxCompletedEntries;
-        VElement v=null;
+//        VElement v=null;
         if(automated)
             cleanup();
     }
