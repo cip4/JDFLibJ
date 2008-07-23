@@ -216,7 +216,7 @@ public class JDFJMF extends JDFAutoJMF
         setAttribute(AttributeName.MAXVERSION, enumVer.getName(), null);
     }
 
-    // Appendix I - Supported Error Codes in JMF and Notification elements
+    // Appendix D (JDF 1.3) - Supported Error Codes in JMF and Notification elements
     public static class EnumJMFReturnCode extends ValuedEnum
     {
         private static final long serialVersionUID = 1L;
@@ -357,7 +357,7 @@ public class JDFJMF extends JDFAutoJMF
     /**
      * GetMessage - get the ith message, regardless of type
      * 
-     * @param i messge index
+     * @param i message index
      * 
      * @return JDFMessage - the ith message
      * @deprecated use getMessageElement(null)
