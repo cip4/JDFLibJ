@@ -1,10 +1,9 @@
 /*
- *
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +11,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,21 +19,21 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
+ *    Alternately, this acknowledgment mrSubRefay appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
+ *    nor may "CIP4" appear in their name, without prior writtenrestartProcesses()
  *    permission of the CIP4 organization
  *
  * Usage of this software in commercial products is subject to restrictions. For
@@ -46,7 +45,7 @@
  * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
  * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
  * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT
  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
  * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
@@ -56,80 +55,67 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software restartProcesses()
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
  */
 /**
- *
- * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- *
- * KString.java
- *
- * Last changes
- *
+ * 
  */
-package org.cip4.jdflib.util;
+package org.cip4.jdflib.elementwalker;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.JDFResource;
 
 /**
- * Shared input / outputStream class
- * write once, read many...
- * 
- * @author rainer prosi
+ * @author prosirai
  *
  */
-public class ByteArrayIOStream extends ByteArrayOutputStream
+public class UnlinkFinderTest extends JDFTestCaseBase
 {
 
-
-    /**
-     * creates an empty input output stream class
-     */
-    public ByteArrayIOStream()
+    JDFNode n;
+    JDFResource rl;
+    JDFResource xm;
+    JDFResource m;
+   
+    public void testGetUlinked()
     {
-        super();
+        UnLinkFinder uf=new UnLinkFinder();
+        VElement v=uf.getUnlinkedResources(n);
+        assertEquals(v.size(), 1);
+        assertTrue(v.contains(rl));
+    }
+    public void testEraseUlinked()
+    {
+        UnLinkFinder uf=new UnLinkFinder();
+         uf.eraseUnlinkedResources(n);
+         VElement v=uf.getUnlinkedResources(n);
+         
+        assertNull(v);
     }
 
-    /**
-     * creates a sized input output stream class
-     * @param i the size of the stream
-     */
-    public ByteArrayIOStream(int i)
+    @Override
+    protected void setUp() throws Exception
     {
-        super(i);
+        // TODO Auto-generated method stub
+        super.setUp();
+        n=new JDFDoc("JDF").getJDFRoot();
+        rl=n.appendResourcePool().appendResource("RunList", null, null);
+        xm =n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
+        m=(JDFResource) xm.appendElement("Media");
+        m.makeRootResource(null, null, true);        
     }
-    /**
-     * creates a sized input output stream class
-     * @param b the buffer to use (is NOT copied)
-     */
-    public ByteArrayIOStream(byte[] b)
-    {
-        super();
-        buf=b;
-    }
-
-    /**
-     * gets an inputstream based on the current byte contents
-     * @return
-     */
-    public InputStream getInputStream()
-    {
-        ByteArrayInputStream is=new ByteArrayInputStream(buf,0,size());
-        return is;
-    }
-    //////////////////////////////////////////////////////////////////////////////////
-
 }

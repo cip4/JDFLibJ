@@ -72,7 +72,6 @@ package org.cip4.jdflib.goldenticket;
 
 import java.io.File;
 
-import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumPrintingType;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
@@ -93,7 +92,6 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFDevice;
-import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
@@ -118,8 +116,6 @@ public class MISCPGoldenTicket extends MISGoldenTicket
      * 
      */
     public static final String MISCPS_PRINTING = "MISCPS.Printing";
-    private boolean grayBox;
-
     public boolean splitSheets=false;
 
     public VString inks=null;
@@ -141,7 +137,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         super(_misLevel,jdfVersion,_jmfLevel);
 
         grayBox=isGrayBox;
-        catMap.put(MISCPS_PRINTING, new VString("InkZoneCalculation ConventionalPrinting",null));
+        fillCatMaps();
         if(grayBox)
             setCategory(MISCPS_PRINTING);
         partIDKeys = new VString("SignatureName,SheetName,Side,Separation",",");
@@ -149,6 +145,13 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         icsLevel=_icsLevel; 
         //       theStatusCounter.addIgnorePart(EnumPartIDKey.Side);
         theStatusCounter.addIgnorePart(EnumPartIDKey.Separation);
+    }
+    
+    @Override
+    protected void fillCatMaps()
+    {
+        super.fillCatMaps();
+        catMap.put(MISCPS_PRINTING, new VString("InkZoneCalculation ConventionalPrinting",null));
     }
     /**
      * create a BaseGoldenTicket
@@ -163,7 +166,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
         super(parent);
 
         grayBox=parent.grayBox;
-        catMap.put(MISCPS_PRINTING, new VString("InkZoneCalculation ConventionalPrinting",null));
+        fillCatMaps();
         if(grayBox)
             setCategory(MISCPS_PRINTING);
         theStatusCounter.addIgnorePart(EnumPartIDKey.Side);
@@ -305,54 +308,6 @@ public class MISCPGoldenTicket extends MISGoldenTicket
     }
 
 
-    /**
-     * @param icsLevel
-     */
-    protected JDFComponent initOutputComponent()
-    {
-        if(thePreviousNode!=null)
-        {
-            final JDFResource parentOutComp = thePreviousNode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
-            if(parentOutComp!=null)
-            {
-                theNode.linkResource(parentOutComp,EnumUsage.Input,null);
-            }
-        }
-        JDFComponent outComp=(JDFComponent) (theParentNode!=null ? theParentNode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0):null);
-        if(outComp==null)
-        {
-            outComp=(JDFComponent) theNode.getCreateResource(ElementName.COMPONENT, EnumUsage.Output, 0);
-            outComp.setComponentType(EnumComponentType.FinalProduct,EnumComponentType.Sheet);
-            outComp.setProductType("Unknown");
-        }
-        else
-            theNode.linkResource(outComp, EnumUsage.Output, null);
-
-        JDFResourceLink rl=theNode.getLink(outComp, EnumUsage.Output);
-        if(vParts!=null)
-        {
-            VJDFAttributeMap reducedMap = getReducedMap(new VString("Side Separation"," "));
-            final int size = reducedMap==null ? 0 : reducedMap.size();
-            for(int i=0;i<size;i++)
-            {
-                final JDFAttributeMap part = reducedMap.elementAt(i);
-                JDFResource partComp=outComp.getCreatePartition(part, partIDKeys);
-                partComp.setDescriptiveName("Description for Component part# "+i);
-                JDFAttributeMap newMap=new JDFAttributeMap(part);
-                newMap.put(AttributeName.CONDITION, "Good");
-                rl.setAmount(good, newMap);
-            }
-        }
-        else
-        {
-            outComp.setDescriptiveName("MIS-CP output Component");
-        }
-        //outComp.getCreateLayout();
-        JDFMedia inMedia=(JDFMedia) theNode.getResource(ElementName.MEDIA, EnumUsage.Input, 0);
-        outComp.setDimensions(inMedia.getDimension());
-        return outComp;
-
-    }
     /**
      * @param icsLevel
      */

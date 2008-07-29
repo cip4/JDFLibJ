@@ -1,10 +1,9 @@
-
 /*
  *
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -77,6 +76,7 @@ import java.util.Vector;
 import junit.framework.TestCase;
 
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumHoleType;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 
@@ -131,7 +132,27 @@ public class JDFMediaTest extends TestCase
         result = media.getDimensionInch();
         assertEquals(new JDFXYPair(1, 1), result);
     }
+    
+    ////////////////////////////////////////////////////////////////////
 
+    public final void testThicknessFromWeight()
+    {
+        JDFMedia m=(JDFMedia) new JDFDoc("Media").getRoot();
+        m.setThicknessFromWeight(true, false);
+        m.setMediaType(EnumMediaType.Paper);
+        assertFalse(m.hasAttribute(AttributeName.THICKNESS));
+        m.setWeight(80.);
+        m.setThicknessFromWeight(true, false);
+        assertEquals(m.getThickness(), 100.,1.);  
+        JDFMedia m2=(JDFMedia) m.addPartition(EnumPartIDKey.Run, "r1");
+        m2.setWeight(40.);
+        m.setThicknessFromWeight(true, true);
+        assertEquals(m2.getThickness(), 50.,1.);  
+        assertEquals(m.getThickness(), 100.,1.);  
+           }
+    
+    ////////////////////////////////////////////////////////////////////
+    
     public final void testHoleType()
     {
         JDFDoc doc = new JDFDoc("JDF");
@@ -143,14 +164,14 @@ public class JDFMediaTest extends TestCase
         assertTrue(kElem instanceof JDFMedia);
         JDFMedia media = ((JDFMedia) kElem);
         
-        Vector v = new Vector();
+        Vector<EnumHoleType> v = new Vector<EnumHoleType>();
         v.addElement(EnumHoleType.None);
         v.addElement(EnumHoleType.C9_5m_round_0t);
         assertEquals(EnumHoleType.C9_5m_round_0t.getName(), "C9.5m-round-0t");
         
         media.setHoleType(v);
         assertEquals(media.getHoleType(), v);
-        assertEquals(((EnumHoleType) media.getHoleType().elementAt(1)).getName(), ((EnumHoleType) v.elementAt(1)).getName());
+        assertEquals(((EnumHoleType) media.getHoleType().elementAt(1)).getName(), v.elementAt(1).getName());
         assertEquals(((EnumHoleType) media.getHoleType().elementAt(1)).getName(), "C9.5m-round-0t");
         
         // overwrite HoleType low level to check if conversion of DOT and HYPHEN to UNDERSCORE was successful
@@ -165,9 +186,8 @@ public class JDFMediaTest extends TestCase
         
         holeMakingParams.setHoleType(v);
         assertEquals(holeMakingParams.getHoleType(), v);
-        assertEquals(((EnumHoleType) holeMakingParams.getHoleType().elementAt(1)).getName(), ((EnumHoleType) v.elementAt(1)).getName());
+        assertEquals(((EnumHoleType) holeMakingParams.getHoleType().elementAt(1)).getName(), v.elementAt(1).getName());
         assertEquals(((EnumHoleType) holeMakingParams.getHoleType().elementAt(1)).getName(), "C9.5m-round-0t");
         
-        System.out.println();
     }
 }

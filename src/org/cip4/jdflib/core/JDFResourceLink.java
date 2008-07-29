@@ -2557,23 +2557,4 @@ public class JDFResourceLink extends JDFElement
         return bMatch;
     }
 
-    @Override
-    public void fixBad(EnumVersion version, EnumValidationLevel level)
-    {
-        super.fixBad(version, level);
-        if(!(this instanceof JDFPartAmount))
-        {
-            JDFNode n=getParentJDF();
-            if(n!=null && !n.isValidLink(level, this, null, null))
-            {
-                this.deleteNode();
-                return;
-            }
-            if(getTarget()==null)
-            {
-                this.deleteNode();
-                return;
-            }   
-        }
-    }
 }

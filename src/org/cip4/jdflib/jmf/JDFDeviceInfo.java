@@ -77,10 +77,6 @@ Warning! very preliminary test version. Interface subject to change without prio
 Revision history:    ...
  **/
 
-
-
-
-
 package org.cip4.jdflib.jmf;
 
 import java.util.zip.DataFormatException;
@@ -90,6 +86,7 @@ import org.cip4.jdflib.auto.JDFAutoDeviceInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
@@ -100,8 +97,6 @@ import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.JDFDate;
-
-
 
 //----------------------------------
 public class JDFDeviceInfo extends JDFAutoDeviceInfo
@@ -248,14 +243,14 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
         if(hasAttribute(AttributeName.DEVICEID))
             return super.getDeviceID();
         JDFDevice d=getDevice();
-        if(d==null)
+        String ret=d==null ? null : d.getDeviceID();
+        if(ret==null)
         {
-            JDFMessage m=(JDFMessage) getParentNode_KElement();
-            if(m!=null)
-                return m.getSenderID();
-
+            KElement km= getParentNode_KElement();
+            if(km instanceof JDFMessage)
+                ret= ((JDFMessage)km).getSenderID();
         }
-        return d==null ? null : d.getDeviceID();
+        return ret;
     }
 
     /**
@@ -285,11 +280,11 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
             JDFEmployee employee = lastInfo.getEmployee(i);
             if(employee!=null)
                 bGood=bGood && getEmployee(i).matches(employee);
-            
+
         }
         if(!bGood)
             return false;
-        
+
         int numJobPhases = numChildElements(ElementName.JOBPHASE, null);
         if(numJobPhases!=lastInfo.numChildElements(ElementName.JOBPHASE, null))
             return false;

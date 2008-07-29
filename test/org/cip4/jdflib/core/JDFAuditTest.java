@@ -91,7 +91,7 @@ import org.cip4.jdflib.util.JDFDate;
  */
 public class JDFAuditTest extends JDFTestCaseBase
 {
-    private boolean b;
+    private boolean bAutoAgent;
     public void testInit() throws Exception
     {
         JDFDoc d=new JDFDoc(ElementName.JDF);
@@ -108,10 +108,10 @@ public class JDFAuditTest extends JDFTestCaseBase
         n.setVersion(JDFElement.EnumVersion.Version_1_2);
         JDFModified mod=ap.addModified("me",n);
         assertFalse(mod.hasAttribute("ID"));        
-     }
-    
+     }   
  
     /////////////////////////////////////////////////////////////////////
+    
     public void testFixVersion() throws Exception
     {
         JDFDoc d=new JDFDoc(ElementName.JDF);
@@ -126,6 +126,7 @@ public class JDFAuditTest extends JDFTestCaseBase
      }
     
     /////////////////////////////////////////////////////////////////////
+    
     public void testSetRef() throws Exception
     {
         JDFDoc d=new JDFDoc(ElementName.JDF);
@@ -138,7 +139,9 @@ public class JDFAuditTest extends JDFTestCaseBase
         pt2.setRef(pt);
         assertEquals(pt.getID(), pt2.getrefID());
      }
+    
     /////////////////////////////////////////////////////////////////////
+    
     public void testCreateUpdate() throws Exception
     {
         JDFDoc d=new JDFDoc(ElementName.JDF);
@@ -155,6 +158,7 @@ public class JDFAuditTest extends JDFTestCaseBase
      }
 
     /////////////////////////////////////////////////////////////////////
+    
     public void testCreated() throws Exception
     {
         JDFDoc d=new JDFDoc(ElementName.JDF);
@@ -173,21 +177,21 @@ public class JDFAuditTest extends JDFTestCaseBase
         
     }    
     
-    
+    /////////////////////////////////////////////////////////////////////
+        
     public void testProcessRun() throws Exception
     {
-        JDFDoc d=new JDFDoc(ElementName.JDF);
-        JDFNode n=d.getJDFRoot();
+        JDFNode n=new JDFDoc(ElementName.JDF).getJDFRoot();
         n.setType(EnumType.ProcessGroup);
         JDFAuditPool ap=n.getAuditPool();
         assertNotNull(ap);
         JDFProcessRun p1=ap.addProcessRun(EnumNodeStatus.Completed, null, null);
         assertEquals(p1.getTimeStampDate(), new JDFDate());
-       
+    }  
     
-    }    
-    
+     
     /////////////////////////////////////////////////////////////////////
+    
     public void testSpawnID() throws Exception
     {
         JDFDoc d=new JDFDoc(ElementName.JDF);
@@ -202,10 +206,10 @@ public class JDFAuditTest extends JDFTestCaseBase
         JDFProcessRun p2=n.getCreateAuditPool().addProcessRun(EnumNodeStatus.Completed, null, null);
         assertEquals(p2.getSpawnID(), n2.getSpawnID(true));
         assertEquals(p2.getSpawnID(), n.getSpawnID(false));
-
     }    
     
     /////////////////////////////////////////////////////////////////////
+    
     public void testSetStaticAgentVersion() throws Exception
     {
         JDFDoc d=new JDFDoc(ElementName.JDF);
@@ -235,10 +239,10 @@ public class JDFAuditTest extends JDFTestCaseBase
         r=n.appendMatchingResource(ElementName.CONVENTIONALPRINTINGPARAMS, null, null);
         assertFalse(r.hasAttribute(AttributeName.AGENTNAME));
         assertFalse(r.hasAttribute(AttributeName.AGENTVERSION));
-        
-        
      }
 
+    /////////////////////////////////////////////////////////////////////
+    
 
     /* (non-Javadoc)
      * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
@@ -247,11 +251,12 @@ public class JDFAuditTest extends JDFTestCaseBase
     {
         // TODO Auto-generated method stub
         super.tearDown();
-        JDFResource.setAutoAgent(b);
+        JDFResource.setAutoAgent(bAutoAgent);
 
     }
 
-
+    /////////////////////////////////////////////////////////////////////
+    
     /* (non-Javadoc)
      * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
      */
@@ -259,12 +264,11 @@ public class JDFAuditTest extends JDFTestCaseBase
     {
         // TODO Auto-generated method stub
         super.setUp();
-        b=JDFResource.getAutoAgent();
+        bAutoAgent=JDFResource.getAutoAgent();
         JDFElement.setLongID(false);
 
     }
-    
-    
+     
     /////////////////////////////////////////////////////////////////////
 
 }

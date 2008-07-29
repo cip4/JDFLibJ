@@ -70,7 +70,6 @@
  */
 package org.cip4.jdflib.goldenticket;
 
-import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFAudit;
@@ -88,10 +87,8 @@ import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 
 
-public class MISCPGoldenTicketTest extends JDFTestCaseBase
+public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 {
-    String agentName;
-
     /////////////////////////////////////////////////////////////////////////////
     
     public void testMISCPGrayBoxFrontBack()
@@ -198,7 +195,7 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
         dev.getCreatePartition(map, null).setAttribute("DeviceID", "FrontSidePress");
        
         
-        BaseGoldenTicketTest.write3GTFiles(cpGoldenTicket, "MISCPS_4_1Poster");
+        write3GTFiles(cpGoldenTicket, "MISCPS_4_1Poster");
     }
     /////////////////////////////////////////////////////////////////////////////
     
@@ -265,7 +262,7 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
         cpGoldenTicket.assign(n);
         cpGoldenTicket.good=3000;
         cpGoldenTicket.waste=200;
-        BaseGoldenTicketTest.write3GTFiles(cpGoldenTicket, "sameInk");
+        write3GTFiles(cpGoldenTicket, "sameInk");
      }
 
     /////////////////////////////////////////////////////////////////////////////
@@ -274,20 +271,8 @@ public class MISCPGoldenTicketTest extends JDFTestCaseBase
      */
     protected void setUp() throws Exception
     {
-        agentName=JDFAudit.getStaticAgentName();
-        JDFElement.setLongID(false);
-        JDFAudit.setStaticAgentName("JDF MISCP golden ticket generator");
         super.setUp();
-    }
-    /////////////////////////////////////////////////////////////////////////////
-    /* (non-Javadoc)
-     * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
-     */
-    protected void tearDown() throws Exception
-    {
-        JDFAudit.setStaticAgentName(agentName);
-        JDFElement.setLongID(true);
-        super.tearDown();
+        JDFAudit.setStaticAgentName("JDF MISCP golden ticket generator");
     }
 
 }

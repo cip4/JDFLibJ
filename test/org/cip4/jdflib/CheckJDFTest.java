@@ -93,6 +93,10 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.util.StatusCounter;
+import org.cip4.jdflib.validate.JDFValidator;
+import org.cip4.jdflib.validate.ICheckValidator;
+import org.cip4.jdflib.validate.ICheckValidatorFactory;
 
 
 /**
@@ -111,6 +115,53 @@ public class CheckJDFTest extends JDFTestCaseBase
 
         CheckJDF checker = new CheckJDF();
         checker.validate(args, null);
+    }
+    
+    private class ValidFactory implements ICheckValidatorFactory
+    {
+        ICheckValidator cv=new MyValid();
+        private class MyValid implements ICheckValidator
+        {
+
+            /**
+             * very simple check for the string "snafu"
+             */
+            public boolean validate(KElement toCheck, KElement report)
+            {
+               boolean b=toCheck.toString().toUpperCase().indexOf("SNAFU")>=0;
+               if(b)
+               {
+                   report.setAttribute("IsValid", false,null);
+                   report.setAttribute("ErrorType", "PrivateValidation",null);
+                   report.setAttribute("Message", "MyValid: Element contains snafu!!!",null);    
+                   System.out.println( "MyValid: Element contains snafu!!! "+toCheck.getNodeName());
+               }
+               return !b;
+            }
+            
+        }
+        /* (non-Javadoc)
+         * @see org.cip4.jdflib.validate.ICheckValidatorFactory#getValidator(org.cip4.jdflib.core.KElement)
+         */
+        public ICheckValidator getValidator(KElement toCheck)
+        {
+            // always the snafu checker...
+            return cv;
+        }
+    }
+    public void testPrivateValidate() throws Exception
+    {
+        StatusCounter sc=new StatusCounter(null,null,null);
+        sc.setEvent("id1", "good", "blah");
+        JDFValidator c=new JDFValidator();
+        c.setValidatorFactory(new ValidFactory());
+        JDFDoc d=sc.getDocJMFNotification(true);
+        assertTrue(c.isValid(d));
+        sc.setEvent("id2", "oops", "Snafu");
+        d=sc.getDocJMFNotification(true);
+        XMLDoc report=c.processSingleDocument(d);
+                assertFalse(c.isValid(d));
+     
     }
 
     /**
@@ -157,7 +208,7 @@ public class CheckJDFTest extends JDFTestCaseBase
 
     private void processSingleFile(String fileName, boolean bShouldValidate, EnumValidationLevel level)
     {
-        CheckJDF checkJDF = new CheckJDF();
+        JDFValidator checkJDF = new JDFValidator();
         checkJDF.setPrint(false);
         checkJDF.bQuiet = true;
         checkJDF.level = level!=null ? level : EnumValidationLevel.Complete;
@@ -166,7 +217,7 @@ public class CheckJDFTest extends JDFTestCaseBase
         assertNotNull(root.getXPathElement("TestFile/SchemaValidationOutput"));
         assertNotNull(root.getXPathElement("TestFile/CheckJDFOutput"));
 
-        checkJDF = new CheckJDF();
+        checkJDF = new JDFValidator();
         checkJDF.setPrint(false);
         checkJDF.bQuiet = true;
         checkJDF.level = EnumValidationLevel.Complete;
@@ -199,7 +250,7 @@ public class CheckJDFTest extends JDFTestCaseBase
 
     public void testProcessAllFiles()
     {
-        CheckJDF checkJDF = new CheckJDF();
+        JDFValidator checkJDF = new JDFValidator();
         checkJDF.setPrint(false);
         checkJDF.bQuiet = true;
         checkJDF.level = EnumValidationLevel.Complete;
@@ -237,7 +288,7 @@ public class CheckJDFTest extends JDFTestCaseBase
         rl.setrRef("badLink");
         assertFalse(rl.isValid(EnumValidationLevel.Complete));
         assertFalse(n.isValid(EnumValidationLevel.Complete));
-        CheckJDF cj=new CheckJDF();
+        JDFValidator cj=new JDFValidator();
         XMLDoc res=cj.processSingleDocument(d);
         KElement root=res.getRoot();
         String s=root.toString();
@@ -249,7 +300,7 @@ public class CheckJDFTest extends JDFTestCaseBase
     {
    
         File zip=new File(sm_dirTestData+"checkjdf.zip");
-        CheckJDF checker = new CheckJDF();
+        JDFValidator checker = new JDFValidator();
         XMLDoc d=checker.processZipFile(zip);
         KElement root=d.getRoot();
         assertEquals("checkJDF.zip has 17 files",root.numChildElements("TestFile",null),17);
@@ -258,7 +309,7 @@ public class CheckJDFTest extends JDFTestCaseBase
     {
    
         File mim=new File(sm_dirTestData+"checkjdf.mjm");
-        CheckJDF checker = new CheckJDF();
+        JDFValidator checker = new JDFValidator();
         FileInputStream is=new FileInputStream(mim);
         XMLDoc d=checker.processMimeStream(is);
         KElement root=d.getRoot();
@@ -306,7 +357,7 @@ public class CheckJDFTest extends JDFTestCaseBase
         File reportFile = File.createTempFile("Queue-KnownDevices-report", ".xml");
         // reportFile.deleteOnExit();
 
-        // Run CheckJDF
+        // Run JDFValidator
         String[] args = { jmfFile.getAbsolutePath(), "-cq", "-x " + reportFile.getAbsolutePath() };
         CheckJDF checker = new CheckJDF();
         XMLDoc d=checker.validate(args, null);
@@ -324,7 +375,7 @@ public class CheckJDFTest extends JDFTestCaseBase
     public void testValidateExtensionschema() 
     {
         JDFDoc doc=new JDFDoc("JDF");
-        CheckJDF checkJDF=new CheckJDF();
+        JDFValidator checkJDF=new JDFValidator();
         checkJDF.setPrint(false);
         checkJDF.bQuiet = true;
         checkJDF.level = EnumValidationLevel.Incomplete;
@@ -369,7 +420,7 @@ public class CheckJDFTest extends JDFTestCaseBase
     public void testValidatePrivateDoc() 
     {
         JDFDoc doc=new JDFDoc("JDF");
-        CheckJDF checkJDF=new CheckJDF();
+        JDFValidator checkJDF=new JDFValidator();
         checkJDF.setPrint(false);
         checkJDF.bQuiet = true;
         checkJDF.level = EnumValidationLevel.Incomplete;
@@ -407,7 +458,7 @@ public class CheckJDFTest extends JDFTestCaseBase
     public void testValidateDoc() 
     {
         JDFDoc doc=new JDFDoc("JDF");
-        CheckJDF checkJDF=new CheckJDF();
+        JDFValidator checkJDF=new JDFValidator();
         checkJDF.setPrint(false);
         checkJDF.bQuiet = true;
         int v=0;
@@ -435,7 +486,9 @@ public class CheckJDFTest extends JDFTestCaseBase
     public void testIsValid() 
     {
         JDFDoc doc=new JDFDoc("JDF");
-        CheckJDF checkJDF=new CheckJDF();
+        JDFNode n=doc.getJDFRoot();
+        n.setType(EnumType.ProcessGroup);
+        JDFValidator checkJDF=new JDFValidator();
         checkJDF.setPrint(false);
         checkJDF.bQuiet = true;
         int v=0;
@@ -461,7 +514,7 @@ public class CheckJDFTest extends JDFTestCaseBase
     public void testValidateCombined() 
     {
         JDFDoc doc=new JDFDoc("JDF");
-        CheckJDF checkJDF=new CheckJDF();
+        JDFValidator checkJDF=new JDFValidator();
         checkJDF.setPrint(false);
         checkJDF.bQuiet = true;
         JDFNode n=doc.getJDFRoot();

@@ -17,7 +17,7 @@ import org.cip4.jdflib.resource.process.JDFLayout;
 public class AutoTest extends TestCase
 {
     // Beware! 
-    // These tests are for checking versioning and CheckJDF internal details
+    // These tests are for checking versioning and JDFValidator internal details
     public void testElementVersion ()
     {
         Vector vPrerelease = null;

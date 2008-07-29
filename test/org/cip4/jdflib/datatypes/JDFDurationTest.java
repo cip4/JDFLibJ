@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -78,6 +78,7 @@ package org.cip4.jdflib.datatypes;
 
 import junit.framework.TestCase;
 
+import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 
 
@@ -151,22 +152,49 @@ public class JDFDurationTest extends TestCase
         d = new JDFDuration("PT3600S");
         assertEquals(d.getDurationISO(),"PT1H");
     }
+    
+    /////////////////////////////////////////////////////////////////////
+    
     public final void testFractions() throws Exception
     {
         assertEquals(new JDFDuration(90.5).getDurationISO(),"PT1M30.5S");
         assertEquals(new JDFDuration(-90.5).getDurationISO(),"-PT1M30.5S");
         assertEquals(new JDFDuration("PT0.95S").getDurationISO(),"PT0.95S");
         assertEquals(new JDFDuration("PT5M30.45S").getDurationISO(),"PT5M30.45S");
-        assertEquals(new JDFDuration("PT5M90.95S").getDurationISO(),"PT6M30.95S");        
+        assertEquals(new JDFDuration("PT5M90.95S").getDurationISO(),"PT6M30.95S");           
     }
     
+    ////////////////////////////////////////////////////////////////////////
+    
+    public final void testCompareTo() throws Exception
+    {
+        assertEquals(new JDFDuration(90.5).compareTo(new JDFDuration(90.5)),0);
+        assertEquals(new JDFDuration(-90.5).compareTo(new JDFDuration(-90.5)),0);
+        assertEquals(new JDFDuration(-90.5).compareTo(new JDFDuration(0)),-1);
+        assertEquals(new JDFDuration(-90.5).compareTo(new JDFDuration(-20)),-1);
+        assertEquals(new JDFDuration(90.5).compareTo(new JDFDuration(0)),1);
+        assertEquals(new JDFDuration(90.5).compareTo(new JDFDuration(90)),1);
+        assertEquals(new JDFDuration(90.5).compareTo(new JDFDuration(900)),-1);
+    }
+
+    public final void testConstructFromDate() throws Exception
+    {
+        JDFDate start=new JDFDate();
+        JDFDate end=new JDFDate(start);
+        assertEquals(new JDFDuration(start,end), new JDFDuration(0));
+        end.addOffset(20, 0, 0, 0);
+        assertEquals(new JDFDuration(start,end), new JDFDuration(20));
+        start.addOffset(120, 0, 0, 0);
+        assertEquals(new JDFDuration(start,end), new JDFDuration(-100));
+    }
+
     public final void testAddSeconds() throws Exception
     {
         final JDFDuration duration = new JDFDuration();
         assertEquals(duration.addSeconds(5.234),5.234,0.0001);
         assertEquals(duration.getDurationISO(),"PT5.234S");       
     }
-    
+
     public final void testSetDuration() throws Exception
     {
         final JDFDuration duration = new JDFDuration();

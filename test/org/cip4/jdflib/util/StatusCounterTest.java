@@ -79,13 +79,16 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
+import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFJobPhase;
 import org.cip4.jdflib.jmf.JDFResponse;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.util.MultiModuleStatusCounter.MultiType;
@@ -180,7 +183,34 @@ public class StatusCounterTest extends JDFTestCaseBase
         assertEquals(jp.getMISDetails().getWorkType(),EnumWorkType.Alteration);
     }
 
-
+    public void testEvent()
+    {
+        assertNull(sc.getDocJMFNotification(false));
+        sc.setEvent("id", "value", "blah blah");
+        JDFDoc d=sc.getDocJMFNotification(false);
+        JDFDoc d2=sc.getDocJMFNotification(false);
+        assertTrue(d.getRoot().isEqual(d2.getRoot()));
+        d=sc.getDocJMFNotification(true);
+        d2=sc.getDocJMFNotification(false);
+        assertNull(d2);
+        JDFJMF jmf=d.getJMFRoot();
+        JDFNotification noti=jmf.getSignal(0).getNotification();
+        assertEquals(noti.getJobID(), n.getJobID(true));
+        assertNotNull(noti.getEvent());
+        d.write2File(sm_dirTestDataTemp+"jmfNotification.jmf", 2, false);        
+        assertTrue(jmf.isValid(EnumValidationLevel.Complete));
+        sc.setEvent("id1", "value", "blah blah");
+        sc.setEvent("id2", "value", "blah blah blah");
+        d=sc.getDocJMFNotification(false);
+        jmf=d.getJMFRoot();
+        assertEquals(jmf.numChildElements(ElementName.SIGNAL, null), 2)       ;
+        sc.setEvent("id2", "value", "blah blah blah");
+        d=sc.getDocJMFNotification(true);
+        jmf=d.getJMFRoot();
+        assertEquals(jmf.numChildElements(ElementName.SIGNAL, null), 3)       ;
+        d=sc.getDocJMFNotification(true);
+        assertNull(d);
+    }
 
     public void testEmployee()
     {
@@ -188,7 +218,7 @@ public class StatusCounterTest extends JDFTestCaseBase
         assertEquals(sc.addEmployee(employee),1);
         assertTrue(sc.removeEmployee(employee));
         assertEquals(sc.addEmployee(employee),1);
-        
+
         JDFDoc docJMF=sc.getDocJMFPhaseTime();
         JDFResponse sig=(JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, -1);
         JDFDeviceInfo deviceInfo=sig.getDeviceInfo(0);
@@ -198,7 +228,7 @@ public class StatusCounterTest extends JDFTestCaseBase
         sig=(JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
         deviceInfo=sig.getDeviceInfo(0);
         assertNull(deviceInfo.getEmployee(0));
-        
+
     }
     public void testIdle()
     {
@@ -253,9 +283,9 @@ public class StatusCounterTest extends JDFTestCaseBase
         msc.addModule(scRIP2);
         JDFResponse idlePhase2=msc.getStatusResponse().getJMFRoot().getResponse(0);
         assertEquals(idlePhase2.numChildElements(ElementName.DEVICEINFO, null), 2);
-        
+
     }
-    
+
     public void testMultiModule()
     {
         StatusCounter scRIP=new StatusCounter(n,null,null);

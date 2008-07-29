@@ -81,8 +81,6 @@ package org.cip4.jdflib.resource.process.prepress;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoInk;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.VString;
 import org.w3c.dom.DOMException;
 
 
@@ -137,21 +135,6 @@ public class JDFInk extends JDFAutoInk
     throws DOMException
     {
         super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-
-    @Override
-    public void fixBad(EnumVersion version, EnumValidationLevel level)
-    {
-        if(isResourceRoot())
-        {
-            VString v=getPartIDKeys();
-            if(v==null || !v.contains(ElementName.SEPARATION))
-            {
-                deleteNode();
-                return;
-            }
-         }
-        super.fixBad(version, level);
     }
 
 

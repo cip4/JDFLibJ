@@ -153,11 +153,13 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDocUserData;
+import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.elementwalker.UnLinkFinder;
 import org.cip4.jdflib.ifaces.IMatches;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFQueueEntry;
@@ -167,6 +169,7 @@ import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.pool.JDFStatusPool;
+import org.cip4.jdflib.resource.JDFCreated;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
@@ -1929,17 +1932,23 @@ public class JDFNode extends JDFElement
             return b && ContainerUtil.equals(mt._partMapVector,_partMapVector);
 
         }
+        
         /**
-         * return true if the nodeIdentifier matches this, i.e. if all parameters match or mt has matching wildcards
+         * return true if the nodeIdentifier matches this, i.e. if all parameters match or o has matching wildcards, or o==null
          * @see IMatches 
-         * @param mt the nodeidentifier that this should match
-         * @return
+         * @param o the nodeidentifier that this should match<br/>
+         * if o is a String, check for match with jobID
+         * 
+         * @return true, id this matches o
          */
         public boolean matches(Object o)
         {
             
             if(o==null)
                 return true;
+            if(o instanceof String) // check for JobID only
+                return ContainerUtil.equals(_jobID, o);
+            
             if(!(o instanceof NodeIdentifier))
                 return false;
             NodeIdentifier mt=(NodeIdentifier)o;
@@ -6147,15 +6156,17 @@ public class JDFNode extends JDFElement
      */
     public void eraseUnlinkedResources()
     {
-        VElement v=getUnlinkedResources(false);
-        while(v!=null)
-        {
-            for(int i=0;i<v.size();i++)
-            {
-                ((JDFResource)v.elementAt(i)).deleteNode();
-            }
-            v=getUnlinkedResources(false); // repeat until no unlinked are found
-        }
+ //       VElement v=getUnlinkedResources(false);
+//        while(v!=null)
+//        {
+//            for(int i=0;i<v.size();i++)
+//            {
+//                ((JDFResource)v.elementAt(i)).deleteNode();
+//            }
+//            v=getUnlinkedResources(false); // repeat until no unlinked are found
+//        }
+        UnLinkFinder uf=new UnLinkFinder();
+        uf.eraseUnlinkedResources(this);
     }
 
     /**
@@ -8770,36 +8781,6 @@ public class JDFNode extends JDFElement
         }
     }
 
-
-
-    @Override
-    public void fixBad(EnumVersion version, EnumValidationLevel level)
-    {
-        if("layout group".equals(getDescriptiveName()))
-        {
-            deleteNode();
-            return;
-        }
-        ensureCreated();
-        synchParentAmounts();
-        // remove any private types
-        VString types=getTypes();
-        if(types!=null)
-        {
-            int tSize=types.size();
-            for(int i=tSize-1;i>=0;i--)
-                if(types.stringAt(i).indexOf(":")>=0)
-                    types.remove(i);
-            if(types.size()==0)
-                types=null;
-            setTypes(types);
-        }
-
-        super.fixBad(version, level);
-    }
-
-
-
     /**
      * synchronize the amounts of a gray box parent with the expanded jdfnode
      */
@@ -8867,4 +8848,39 @@ public class JDFNode extends JDFElement
         ap.ensureCreated();
     }
 
+///////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * make any combined or single type process to a gray box
+     * @param bExpand if true, create a parent gray box that wraps this, else simply rename this
+     */
+    public void toGrayBox(boolean bExpand)
+    {
+        EnumType t=getEnumType();
+        String typeString = getType();
+
+        if(EnumType.ProcessGroup.equals(t) || EnumType.Product.equals(t))
+            return;
+        if(!EnumType.Combined.equals(t))
+        {
+            renameAttribute(AttributeName.TYPE, AttributeName.TYPES, null,null);
+        }
+
+        setType(EnumType.ProcessGroup);        
+        if(bExpand)
+        {
+           JDFNode child=addJDFNode(typeString);
+           String jobPart=getJobPartID(false);
+           child.setJobID(jobPart);
+           setJobPartID("pg."+jobPart);
+           child.copyElement(getResourceLinkPool(), null);
+           removeAttribute(AttributeName.TYPES);
+           JDFAuditPool ap = child.getCreateAuditPool();
+           ap.ensureCreated();
+           JDFCreated c=(JDFCreated) ap.getAudit(0, EnumAuditType.Created, null, null);
+           if(c==null)
+               c=ap.addCreated(null, null);
+           c.setDescriptiveName("automatically generated by toGrayBox");
+        }
+     }
 }

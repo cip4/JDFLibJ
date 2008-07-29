@@ -119,17 +119,7 @@ public class JDFDocTest extends JDFTestCaseBase
         assertNull(e2.getElement("foo"));
     }  
 
-    public void testFixBad()
-    {
-        JDFDoc d=JDFDoc.parseFile("C:\\data\\certification\\MISCPS\\cert1.1.worker.jdf");
-        if(d!=null)
-        {
-            d.fixBad(null, EnumValidationLevel.NoWarnComplete);
-            JDFNode n=d.getJDFRoot();
-            d.write2File(sm_dirTestDataTemp+"Fixbad.jdf", 2, false);
-            assertTrue(n.isValid(EnumValidationLevel.Complete));            
-        }
-    }
+  
     public void testForeignRoot()
     {
         final XMLDoc doc = new XMLDoc("Foo","fooNS");

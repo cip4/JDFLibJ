@@ -83,6 +83,7 @@ import java.util.Vector;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceOperationMode;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumWorkType;
+import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.auto.JDFAutoResourceAudit.EnumReason;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -107,6 +108,8 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
 import org.cip4.jdflib.pool.JDFAuditPool;
+import org.cip4.jdflib.resource.JDFEvent;
+import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.JDFProcessRun;
 import org.cip4.jdflib.resource.JDFResource;
@@ -133,6 +136,7 @@ public class StatusCounter
     private boolean bCompleted=false;
     private JDFDoc docJMFPhaseTime;
     private JDFDoc docJMFResource;
+    private JDFDoc docJMFNotification;
     protected VJDFAttributeMap m_vPartMap;
     protected VString m_ignoreParts=null;
     private String m_deviceID=null;
@@ -501,6 +505,56 @@ public class StatusCounter
         String nodeStatusDetails=lastPhase!=null ? lastPhase.getStatusDetails() : statusDetails;
         return setPhase(ns, nodeStatusDetails, status, statusDetails);
     }
+    
+    /**
+     * set  event, append the Event element and optionally the comment<br/>
+     * overwrites existing values
+     * @param eventID Event/@EventID to set
+     * @param eventValue Event/@EventValue to set
+     * @param comment the comment text, if null no comment is set
+     */
+    public synchronized JDFNotification setEvent(String eventID, String eventValue, String comment) 
+    {    
+        JDFNotification notif = createBaseNotification();
+        JDFJMF jmf=createNotificationJMF();
+        JDFSignal s=jmf.appendSignal(EnumType.Notification);
+        notif.setEvent(eventID, eventValue, comment);
+        s.copyElement(notif, null);       
+        return notif;
+    }
+    
+    private JDFNotification createBaseNotification()
+    {
+        JDFNotification notif;
+
+        if(m_Node!=null)
+        {
+            JDFAuditPool ap=m_Node.getCreateAuditPool();
+            notif=ap.addNotification(EnumClass.Event, null, m_vPartMap);
+        }
+        else
+        {
+            notif=(JDFNotification) new JDFDoc(ElementName.NOTIFICATION).getRoot();
+        }
+        for(int i=0;i<vEmployees.size();i++)
+        {
+            notif.copyElement(vEmployees.get(i), null);
+        }
+        notif.setNode(m_Node);
+        return notif;
+    }
+
+    /**
+     * @return
+     */
+    private synchronized JDFJMF createNotificationJMF()
+    {
+       if (docJMFNotification==null)
+       {
+          docJMFNotification=createJMFDoc();
+       }
+       return docJMFNotification.getJMFRoot();
+    }
     /**
      * Set the Status and StatusDetails of this node
      * update the PhaseTime audit or append a new phasetime as appropriate
@@ -590,20 +644,24 @@ public class StatusCounter
     }
 
 
-    private JDFJMF createResourceJMF()
+    private synchronized JDFJMF createResourceJMF()
     {
-        docJMFResource=new JDFDoc(ElementName.JMF);
-        JDFJMF jmfRes=docJMFResource.getJMFRoot();
-        jmfRes.setSenderID(m_deviceID);
-        return jmfRes;
+        docJMFResource= createJMFDoc();       
+        return docJMFResource.getJMFRoot();
     }
 
-    private JDFJMF createPhaseTimeJMF()
+    private synchronized JDFJMF createPhaseTimeJMF()
     {
-        docJMFPhaseTime=new JDFDoc(ElementName.JMF);
-        JDFJMF jmfStatus=docJMFPhaseTime.getJMFRoot();
-        jmfStatus.setSenderID(m_deviceID);
-        return jmfStatus;
+        docJMFPhaseTime =createJMFDoc();       
+        return docJMFPhaseTime.getJMFRoot();
+    }
+    
+    private JDFDoc createJMFDoc()
+    {
+        JDFDoc d=new JDFDoc(ElementName.JMF);
+        JDFJMF jmf=d.getJMFRoot();
+        jmf.setSenderID(m_deviceID);
+        return d;
     }
 
     /**
@@ -830,6 +888,26 @@ public class StatusCounter
         if(docJMFResource==null)
             return null;
         return (JDFDoc)docJMFResource.clone();
+    }
+    /**
+     * @return the docJMFNotification
+     */
+    public synchronized JDFDoc getDocJMFNotification(boolean bClean)
+    {
+        JDFDoc ret=null;
+        if(docJMFNotification!=null)
+        {
+            if(bClean)
+            {
+                ret=docJMFNotification;
+                docJMFNotification=null;
+            }
+            else
+            {
+                ret=(JDFDoc)docJMFNotification.clone();
+            }
+        }
+        return ret;
     }
 
     ///////////////////////////////////////////////////////////////////////

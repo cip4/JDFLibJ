@@ -108,6 +108,10 @@ public class DumpDir {
     private static HashMap<File,MyInt> listMap=new HashMap<File,MyInt>();
     private int maxKeep=500;
     /**
+     * if true, no printouts
+     */
+    public boolean quiet=true;
+    /**
      * 
      */
     private static final long serialVersionUID = -8902151736333089036L;
@@ -169,8 +173,8 @@ public class DumpDir {
     public File newFile(String header)
     {
         final int inc = increment();
-        if(inc%200==0)
-            System.out.println("jmf dump service "+baseDir+" - "+inc);
+        if(!quiet && (inc%200==0))
+            System.out.println("jmf dump service "+baseDir+" - "+inc+" "+new JDFDate().getDateTime());
 
         String s=StringUtil.sprintf("m%08i.tmp", ""+inc);
         File f=FileUtil.getFileInDirectory(baseDir, new File(s));
@@ -266,7 +270,8 @@ public class DumpDir {
                     {
                         File f=new File(names[i]);
                         f=FileUtil.getFileInDirectory(baseDir, f);
-                        f.delete();
+                        if(f!=null)
+                            f.delete();
                     }
                 }
             }
@@ -275,7 +280,7 @@ public class DumpDir {
     @Override
     public String toString()
     {
-        return "DumpDir "+baseDir;
+        return "DumpDir "+baseDir+ " i="+listMap.get(baseDir).i;
     }
 
 }

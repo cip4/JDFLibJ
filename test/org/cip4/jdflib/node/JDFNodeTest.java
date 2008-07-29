@@ -1068,6 +1068,8 @@ public class JDFNodeTest extends JDFTestCaseBase
         n.setJobPartID("p1");
         ni.setNode(n);
         assertTrue(ni.matches(ni2));
+        assertTrue("ok if jobID matches",ni.matches("j1"));
+        assertFalse(ni.matches("p1"));
         final JDFAncestorPool aPool = n.appendAncestorPool();
         aPool.appendPart().setPartMap(new JDFAttributeMap("a","b"));
         ni.setNode(n);
@@ -1992,10 +1994,38 @@ public class JDFNodeTest extends JDFTestCaseBase
 
     //////////////////////////////////////////////////////////////
 
-    public void testStatusPartMapVector()
+    public void testToGrayBox()
     {
-        JDFDoc doc= new JDFDoc("JDF");
-        JDFNode root = doc.getJDFRoot();
+        JDFNode root = new JDFDoc("JDF").getJDFRoot();
+
+        root.setType(EnumType.Combined);
+        VString vs = new VString("Cutting Folding Cutting"," ");
+        root.setTypes(vs);
+        root.toGrayBox(false);
+        assertEquals(root.getTypes(), vs);
+        assertEquals(root.getType(), "ProcessGroup");
+
+        root.removeAttribute(AttributeName.TYPES);
+        root.setType(EnumType.ConventionalPrinting);
+        root.toGrayBox(false);
+        assertEquals(root.getTypes(), new VString("ConventionalPrinting",null));
+        assertEquals(root.getType(), "ProcessGroup");
+
+        root.removeAttribute(AttributeName.TYPES);
+        root.setType(EnumType.ConventionalPrinting);
+        root.toGrayBox(true);
+        assertNull(root.getTypes());
+        assertEquals(root.getType(), "ProcessGroup");
+        JDFNode child = (JDFNode) root.getElement(ElementName.JDF,null,0);
+        assertNotNull(child);
+        assertEquals(child.getEnumType(), EnumType.ConventionalPrinting);
+     }
+    
+    //////////////////////////////////////////////////////////////
+
+    public void testStatusPartMapVector()
+        {
+        JDFNode root = new JDFDoc("JDF").getJDFRoot();
 
         root.setType(EnumType.Combined);
         root.setTypes(new VString("Cutting Folding Cutting"," "));

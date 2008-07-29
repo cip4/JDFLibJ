@@ -3179,15 +3179,27 @@ public class KElement extends ElementNSImpl
      */
     public boolean isAncestor(KElement child)
     {
+       return ancestorDistance(child)>=0;
+    }
+    
+    /**
+     * distance to ancestor (0=this)
+     *
+     * @param child     child to check
+     * @return int  distance to ancestor, -1 if no direct descendant
+     */
+    public int ancestorDistance(KElement child)
+    {
         if (child != null)
         {
             if (child==this)
             {
-                return true;
+                return 0;
             }
-            return isAncestor(child.getParentNode_KElement());
+            int ancestorDistance = ancestorDistance(child.getParentNode_KElement());
+            return ancestorDistance<0 ? ancestorDistance : 1+ancestorDistance;
         }
-        return false;
+        return -1;
     }
 
     /**
@@ -5747,6 +5759,8 @@ public class KElement extends ElementNSImpl
      */
     public void moveAttribute(String attrib, KElement src, String srcAttrib, String nameSpaceURI, String srcNameSpaceURI)
     {
+        if(src==null)
+            src=this;
         final String strSrcAttrib = (srcAttrib==null)|| srcAttrib.equals(JDFConstants.EMPTYSTRING)  ? attrib : srcAttrib;
         final String strNameSpace = (srcNameSpaceURI==null)|| srcNameSpaceURI.equals(JDFConstants.EMPTYSTRING) ? nameSpaceURI : srcNameSpaceURI;
         if(xmlnsPrefix(attrib)!=null && nameSpaceURI==null)
@@ -5762,11 +5776,11 @@ public class KElement extends ElementNSImpl
             }
         }
         final String attribute = src.getAttribute(strSrcAttrib, strNameSpace, null);
-        setAttribute(attrib, attribute);
         if(attribute!=null) 
         {
             src.removeAttribute(strSrcAttrib, strNameSpace);
         }
+        setAttribute(attrib, attribute);
     }
 
     /**

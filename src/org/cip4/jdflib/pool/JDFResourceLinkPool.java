@@ -313,57 +313,6 @@ public class JDFResourceLinkPool extends JDFPool
 
         return v;
     }
-    @Override
-    public void fixBad(EnumVersion version, EnumValidationLevel level)
-    {
-        JDFResourceLink ml=getPoolChild(0, "MediaLink", new JDFAttributeMap(AttributeName.USAGE,EnumUsage.Input), null);
-        JDFResourceLink cl=getPoolChild(0, "ComponentLink", new JDFAttributeMap(AttributeName.USAGE,EnumUsage.Output), null);
-        if(ml!=null && cl!=null)
-        {
-            JDFAmountPool amountPoolMedia=ml.getAmountPool();
-            JDFAmountPool amountPoolComponent=cl.getAmountPool();
-
-            if(amountPoolMedia!=null && amountPoolComponent!=null)
-            {
-                JDFAttributeMap aMapW=new JDFAttributeMap(AttributeName.CONDITION,"Waste");
-                for(int i=0;i<99999;i++)
-                {
-                    JDFPartAmount partAmountComponent=amountPoolComponent.getPartAmount(aMapW, i);
-                    if(partAmountComponent==null)
-                        break;
-                    JDFAttributeMap m2=partAmountComponent.getPartMap();
-                    JDFPartAmount partAmountMedia=amountPoolMedia.getCreatePartAmount(m2);
-                    if(partAmountComponent.hasAttribute(AttributeName.MAXAMOUNT)&&!partAmountMedia.hasAttribute(AttributeName.MAXAMOUNT))
-                        partAmountMedia.moveAttribute(AttributeName.MAXAMOUNT, partAmountComponent, null, null, null);
-                    else if(partAmountComponent.hasAttribute(AttributeName.AMOUNT)&&!partAmountMedia.hasAttribute(AttributeName.MAXAMOUNT))
-                        partAmountMedia.moveAttribute(AttributeName.MAXAMOUNT, partAmountComponent, AttributeName.AMOUNT, null, null);
-                    
-//                    if(partAmountComponent.hasAttribute(AttributeName.ACTUALAMOUNT)&&!partAmountMedia.hasAttribute(AttributeName.ACTUALAMOUNT))
-//                        partAmountMedia.moveAttribute(AttributeName.ACTUALAMOUNT, partAmountComponent, null, null, null);
-                    partAmountComponent.deleteNode();
-                }
-                
-                // Now the good fixes
-                JDFAttributeMap aMapG=new JDFAttributeMap(AttributeName.CONDITION,"Good");
-                for(int i=0;i<99999;i++)
-                {
-                    JDFPartAmount partAmountMedia=amountPoolMedia.getPartAmount(aMapG, i);
-                    if(partAmountMedia==null)
-                        break;
-                    JDFAttributeMap m2=partAmountMedia.getPartMap();
-                    JDFPartAmount partAmountComponent=amountPoolComponent.getCreatePartAmount(m2);
-                    if(partAmountMedia.hasAttribute(AttributeName.MAXAMOUNT)&&!partAmountComponent.hasAttribute(AttributeName.MAXAMOUNT))
-                        partAmountComponent.moveAttribute(AttributeName.MAXAMOUNT, partAmountMedia, null, null, null);
-                    if(partAmountComponent.hasAttribute(AttributeName.ACTUALAMOUNT)&&!partAmountMedia.hasAttribute(AttributeName.ACTUALAMOUNT))
-                        partAmountMedia.copyAttribute(AttributeName.ACTUALAMOUNT, partAmountComponent, null, null, null);
-                    if(partAmountMedia.hasAttribute(AttributeName.ACTUALAMOUNT)&&!partAmountComponent.hasAttribute(AttributeName.ACTUALAMOUNT))
-                        partAmountComponent.copyAttribute(AttributeName.ACTUALAMOUNT, partAmountMedia, null, null, null);
-                }
-
-            }
-        }
-        super.fixBad(version, level);
-    }
 
     /**
      * ResourceVector - convert a link vector to a resource vector

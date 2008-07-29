@@ -202,7 +202,7 @@ public class JDFProcessRun extends JDFAutoProcessRun
         JDFDate dEnd=getEnd();
         if(dStart==null || dEnd==null)
             return null;
-        dur=new JDFDuration((int)((dEnd.getTimeInMillis()-dStart.getTimeInMillis())/1000));
+        dur=new JDFDuration(dStart,dEnd);
         return dur;
     }
 
@@ -284,16 +284,25 @@ public class JDFProcessRun extends JDFAutoProcessRun
         }
 
     }
+  
+
     /**
-     * cleans up missing durations in this
+     * ensure that duration matches end-start, <br/>
+     * i.e. that duration is never longer than the full preiod between start and end
+     *
      */
-    @Override
-    public void fixBad(EnumVersion version, EnumValidationLevel level)
+    public void ensureNotLonger()
     {
-        if(!hasAttribute(AttributeName.DURATION))
-            setDuration(getDuration());
-        super.fixBad(version, level);
+        JDFDate start = getStart();
+        JDFDate end = getEnd();
+        if(start!=null && end!=null)
+        {
+            JDFDuration total=new JDFDuration(start,end);
+            if(total.compareTo(getDuration())<0)
+                setDuration(total);
+        }
     }
+    
     //////////////////////////////////////////////////////////
 
     /**
@@ -303,10 +312,12 @@ public class JDFProcessRun extends JDFAutoProcessRun
     public void addDuration(int seconds)
     {
         JDFDuration dur=getDuration();
-        if(dur==null)
-            dur=new JDFDuration();
-        setDurationSeconds(dur.getDuration()+seconds);
+        int l=dur==null ? 0 : dur.getDuration();
+        setDurationSeconds(l+seconds);
     }
+
+    /////////////////////////////////////////////////////////////////////
+    
     /**
      * (11) set attribute SubmissionTime
      * @param value: the value to set the attribute to or null

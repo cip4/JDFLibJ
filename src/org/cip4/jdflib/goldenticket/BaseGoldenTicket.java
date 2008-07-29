@@ -72,6 +72,7 @@ package org.cip4.jdflib.goldenticket;
 
 import java.util.Vector;
 
+import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
@@ -106,9 +107,11 @@ import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
+import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StatusCounter;
@@ -136,10 +139,10 @@ public class BaseGoldenTicket
     protected EnumVersion theVersion=null;
     protected int baseICSLevel;
     protected StatusCounter theStatusCounter;
-    protected static String misURL=null;
-    protected static String deviceURL=null;
+    public static String misURL=null;
+    public static String deviceURL=null;
     private Vector<BaseGoldenTicket> vKids=new Vector<BaseGoldenTicket>();
-    protected  VJDFAttributeMap vParts=null;
+    public  VJDFAttributeMap vParts=null;
     public VString cols=new VString("Black,Cyan,Magenta,Yellow,Spot1,Spot2,Spot3,Spot4",",");
     public VString colsActual = new VString("Schwarz,Cyan,Magenta,Gelb,RIP 4711,RIP 4712,RIP 4713,RIP 4714",",");
     public int[] nCols={0,0};
@@ -164,6 +167,10 @@ public class BaseGoldenTicket
      */
     public String returnURL=null;
     public boolean getNIFromParent=false;
+    /**
+     * 
+     */
+    public String m_pdfFile = "file:///here/file.pdf";
 
     /**
      * create a BaseGoldenTicket
@@ -914,6 +921,75 @@ public class BaseGoldenTicket
     public int getNCols()
     {
         return nCols[0]==0 ? cols.size() : Math.max(nCols[0],nCols[1]);
+    }
+
+    /**
+     * 
+     */
+    protected JDFRunList initDocumentRunList()
+    {
+        JDFRunList rl=(JDFRunList) theNode.getCreateResource(ElementName.RUNLIST, EnumUsage.Input, 0);
+        JDFResourceLink rll=theNode.getLink(rl, null);
+        if("Marks".equals(rll.getProcessUsage()))
+        {
+            rl=(JDFRunList) theNode.getCreateResource(ElementName.RUNLIST, EnumUsage.Input, 1);
+            rll=theNode.getLink(rl, null);           
+        }
+        rll.setProcessUsage(EnumProcessUsage.Document);
+        rl.addPDF(m_pdfFile, 0, -1);
+        rl.setNPage(4);
+        rl.setDescriptiveName("Description of this RunList");
+        return rl;
+    }
+
+    /**
+     * @param icsLevel
+     */
+    protected JDFComponent initOutputComponent()
+    {
+        if(thePreviousNode!=null)
+        {
+            final JDFResource parentOutComp = thePreviousNode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
+            if(parentOutComp!=null)
+            {
+                theNode.linkResource(parentOutComp,EnumUsage.Input,null);
+            }
+        }
+        JDFComponent outComp=(JDFComponent) (theParentNode!=null ? theParentNode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0):null);
+        if(outComp==null)
+        {
+            outComp=(JDFComponent) theNode.getCreateResource(ElementName.COMPONENT, EnumUsage.Output, 0);
+            outComp.setComponentType(EnumComponentType.FinalProduct,EnumComponentType.Sheet);
+            outComp.setProductType("Unknown");
+        }
+        else
+            theNode.linkResource(outComp, EnumUsage.Output, null);
+    
+        JDFResourceLink rl=theNode.getLink(outComp, EnumUsage.Output);
+        if(vParts!=null)
+        {
+            VJDFAttributeMap reducedMap = getReducedMap(new VString("Side Separation"," "));
+            final int size = reducedMap==null ? 0 : reducedMap.size();
+            for(int i=0;i<size;i++)
+            {
+                final JDFAttributeMap part = reducedMap.elementAt(i);
+                JDFResource partComp=outComp.getCreatePartition(part, partIDKeys);
+                partComp.setDescriptiveName("Description for Component part# "+i);
+                JDFAttributeMap newMap=new JDFAttributeMap(part);
+                newMap.put(AttributeName.CONDITION, "Good");
+                rl.setAmount(good, newMap);
+            }
+        }
+        else
+        {
+            outComp.setDescriptiveName("MIS-CP output Component");
+        }
+        //outComp.getCreateLayout();
+        JDFMedia inMedia=(JDFMedia) theNode.getResource(ElementName.MEDIA, EnumUsage.Input, 0);
+        if(inMedia!=null)
+            outComp.setDimensions(inMedia.getDimension());
+        return outComp;
+    
     }
 
 }

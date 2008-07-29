@@ -117,10 +117,6 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class MISPreGoldenTicket extends MISGoldenTicket
 {
-    /**
-     * 
-     */
-    public String m_pdfFile = "file:///here/file.pdf";
     public static final String MISPRE_CONTENTCREATION = "MISPRE.ContentCreation";
     public static final String MISPRE_IMPOSITIONPREPARATION = "MISPRE.ImpositionPreparation";
     public static final String MISPRE_PREPRESSPREPARATION = "MISPRE.PrePressPreparation";
@@ -152,8 +148,6 @@ public class MISPreGoldenTicket extends MISGoldenTicket
         workStyle=previous.workStyle;
         thePreviousNode=previous.theNode;
         theParentNode=previous.theParentNode;
-
-        fillCatMaps();
     }
     /**
      * create a BaseGoldenTicket
@@ -166,14 +160,14 @@ public class MISPreGoldenTicket extends MISGoldenTicket
     public MISPreGoldenTicket(MISPreGoldenTicket parent)
     {
         super(parent);
-        
-        fillCatMaps();
     }
     /**
      * 
      */
-    private void fillCatMaps()
+    @Override
+    protected void fillCatMaps()
     {
+        super.fillCatMaps();
         catMap.put(MISPRE_CONTENTCREATION, new VString(EnumType.LayoutElementProduction.getName(),null));
 
         catMap.put(MISPRE_IMPOSITIONPREPARATION, new VString("ImpositionPreparation",null));
@@ -202,7 +196,6 @@ public class MISPreGoldenTicket extends MISGoldenTicket
         partIDKeys = new VString("SignatureName,SheetName,Side,Separation",",");
         vParts=vPartMap;
         icsLevel=_icsLevel; 
-        fillCatMaps();
     }
 
     /**
@@ -477,25 +470,6 @@ public class MISPreGoldenTicket extends MISGoldenTicket
         idf.setEncoding(EnumEncoding.Barcode);
         idf.setEncodingDetails("EAN");
         idf.setValue("123456");
-    }
-
-    /**
-     * 
-     */
-    private JDFRunList initDocumentRunList()
-    {
-        JDFRunList rl=(JDFRunList) theNode.getCreateResource(ElementName.RUNLIST, EnumUsage.Input, 0);
-        JDFResourceLink rll=theNode.getLink(rl, null);
-        if("Marks".equals(rll.getProcessUsage()))
-        {
-            rl=(JDFRunList) theNode.getCreateResource(ElementName.RUNLIST, EnumUsage.Input, 1);
-            rll=theNode.getLink(rl, null);           
-        }
-        rll.setProcessUsage(EnumProcessUsage.Document);
-        rl.addPDF(m_pdfFile, 0, -1);
-        rl.setNPage(4);
-        rl.setDescriptiveName("Description of this RunList");
-        return rl;
     }
 
     /**

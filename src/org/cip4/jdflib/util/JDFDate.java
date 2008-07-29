@@ -93,7 +93,7 @@ import org.apache.commons.lang.time.FastDateFormat;
 import org.cip4.jdflib.core.JDFConstants;
 
 
-public class JDFDate implements Comparable
+public class JDFDate implements Comparable, Cloneable
 {
     private static final long serialVersionUID  = 1L;
     private long lTimeInMillis                  = 0;
@@ -124,6 +124,16 @@ public class JDFDate implements Comparable
         lTimeInMillis = iTime;
         TimeZone t=TimeZone.getDefault();
         m_TimeZoneOffsetInMillis=t.getOffset(lTimeInMillis);
+    }
+
+    public JDFDate(final JDFDate other)
+    {
+        this();
+        if(other!=null)
+        {
+            lTimeInMillis = other.lTimeInMillis;
+            m_TimeZoneOffsetInMillis=other.m_TimeZoneOffsetInMillis;
+        }
     }
 
 
@@ -278,7 +288,7 @@ public class JDFDate implements Comparable
                     setTimeZoneOffsetInMillis(- getTimeZoneOffsetInMillis());
                 }
             }
-     
+
 
             // interprete string
             final int iYear  = new Integer (strDateTime.substring( 0, 4)).intValue();
@@ -348,7 +358,6 @@ public class JDFDate implements Comparable
      */
     public String getDateTime()
     {
-
         return getFormattedDateTime("yyyyMMddHHmmss");
     }
 
@@ -564,7 +573,20 @@ public class JDFDate implements Comparable
      * and a value greater than 0 if the argument is a Date before this Date.
      */
     public int compareTo(final Object arg0)
-    {      
+    {    
+        if (arg0 instanceof String)
+        {
+            String s = (String) arg0;
+            try
+            {
+                return compareTo(new JDFDate(s));
+            }
+            catch (DataFormatException x)
+            {
+                return 1;
+            }
+
+        }
         if(!(arg0 instanceof JDFDate))
             return 1;
         return (int)(getTimeInMillis()/1000)-(int)(((JDFDate)arg0).getTimeInMillis()/1000);
@@ -584,6 +606,15 @@ public class JDFDate implements Comparable
     public int getTimeZoneOffsetInMillis()
     {
         return m_TimeZoneOffsetInMillis;
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#clone()
+     */
+    @Override
+    protected Object clone() 
+    {
+        return new JDFDate(this);
     }
 
 

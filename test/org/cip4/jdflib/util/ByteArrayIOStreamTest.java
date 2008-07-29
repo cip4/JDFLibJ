@@ -88,12 +88,15 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
     ///////////////////////////////////////////////////////////////////////////
     public void testSize() throws Exception
     {
-        ByteArrayIOStream ios=new ByteArrayIOStream();
-        for(int i=0;i<200000;i++)
+        ByteArrayIOStream ios=new ByteArrayIOStream(new byte[20000]);
+        for(int i=0;i<12345;i++)
+        {
             ios.write(i);
-        assertEquals(ios.size(), 200000);
+            assertEquals(ios.size(), 1+i);
+        }
     }
     
+     
     public void testInRead() throws Exception
     {
         ByteArrayIOStream ios=new ByteArrayIOStream();

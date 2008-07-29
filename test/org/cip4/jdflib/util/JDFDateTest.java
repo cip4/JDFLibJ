@@ -75,6 +75,7 @@
  */
 package org.cip4.jdflib.util;
 
+import java.util.Arrays;
 import java.util.TimeZone;
 import java.util.zip.DataFormatException;
 
@@ -82,7 +83,7 @@ import junit.framework.TestCase;
 
 public class JDFDateTest extends TestCase
 {
-    public void testBadDate()
+    public void testBadDate() throws Exception
     {
         JDFDate date;
         try
@@ -107,7 +108,7 @@ public class JDFDateTest extends TestCase
 
         try
         {
-            date = new JDFDate(null);
+            date = new JDFDate((String)null);
         }
         catch(DataFormatException dfe)
         {
@@ -252,13 +253,33 @@ public class JDFDateTest extends TestCase
     public void testEquals() throws Exception
     {
         JDFDate date1=new JDFDate();
-        JDFDate date2=new JDFDate();
+        JDFDate date2=new JDFDate(date1);
         assertEquals(date1, date2);
         assertTrue(date1.equals(date2));
     }    
+    
     //////////////////////////////////////////////////////////
 
-    public void testCompare2() throws Exception
+    public void testSort() throws Exception
+    {
+        JDFDate [] a=new JDFDate[10];
+        JDFDate date1=new JDFDate();
+        for(int i=0;i<10;i++)
+        {
+            JDFDate date2=new JDFDate(date1);
+            date2.addOffset(10*(i%3)+i, 0, 0, 0);
+            a[i]=date2;
+        }
+        Arrays.sort(a);
+        for(int i=0;i<9;i++)
+        {
+            assertTrue(a[i].compareTo(a[i+1])<0);
+        }       
+    }    
+    
+    //////////////////////////////////////////////////////////
+
+    public void testCompareTo() throws Exception
     {
         JDFDate date1=new JDFDate();
         JDFDate date2=new JDFDate();
@@ -266,6 +287,17 @@ public class JDFDateTest extends TestCase
         date2.addOffset(0,0,0,1); // it is now later
         assertTrue(date1.compareTo(date2)<0);
         assertTrue(date2.compareTo(date1)>0);
+        assertTrue(date2.compareTo(date2)==0);
+    }
+    
+    public void testCompareString() throws Exception
+    {
+        JDFDate date1=new JDFDate();
+        JDFDate date2=new JDFDate();
+        assertEquals(date1.compareTo(date2), 0);
+        date2.addOffset(0,0,0,1); // it is now later
+        assertTrue(date1.compareTo(date2.getDateTimeISO())<0);
+        assertTrue(date2.compareTo(date1.getDateTimeISO())>0);
     }    
 
     //////////////////////////////////////////////////////////
@@ -273,7 +305,7 @@ public class JDFDateTest extends TestCase
     public void testAddOffset() throws Exception
     {
         JDFDate date1=new JDFDate();
-        JDFDate date2=new JDFDate();
+        JDFDate date2=new JDFDate(date1);
         assertEquals(date1.compareTo(date2), 0);
         date2.addOffset(0,0,0,1); // it is now later
         assertEquals(date1.toString().compareTo(date2.toString()), -1);

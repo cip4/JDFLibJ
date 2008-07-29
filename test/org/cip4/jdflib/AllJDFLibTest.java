@@ -124,6 +124,8 @@ import org.cip4.jdflib.devicecapability.JDFNumberStateTest;
 import org.cip4.jdflib.devicecapability.JDFStateBaseTest;
 import org.cip4.jdflib.devicecapability.JDFStringStateTest;
 import org.cip4.jdflib.devicecapability.JDFTestTest;
+import org.cip4.jdflib.elementwalker.BaseWalkerTest;
+import org.cip4.jdflib.elementwalker.UnlinkFinderTest;
 import org.cip4.jdflib.examples.AmountTest;
 import org.cip4.jdflib.examples.AutomatedLayoutTest;
 import org.cip4.jdflib.examples.ContentCreationTest;
@@ -137,7 +139,9 @@ import org.cip4.jdflib.examples.StrippingTest;
 import org.cip4.jdflib.examples.VarnishTest;
 import org.cip4.jdflib.examples.WebTest;
 import org.cip4.jdflib.goldenticket.GoldenTicketTest;
+import org.cip4.jdflib.goldenticket.IDPGoldenTicketTest;
 import org.cip4.jdflib.goldenticket.MISCPGoldenTicketTest;
+import org.cip4.jdflib.goldenticket.MISPreGoldenTicketTest;
 import org.cip4.jdflib.jmf.JDFDeviceInfoTest;
 import org.cip4.jdflib.jmf.JDFJMFTest;
 import org.cip4.jdflib.jmf.JDFJobPhaseTest;
@@ -167,6 +171,7 @@ import org.cip4.jdflib.resource.JDFFilespecTest;
 import org.cip4.jdflib.resource.JDFLayerListTest;
 import org.cip4.jdflib.resource.JDFLayoutTest;
 import org.cip4.jdflib.resource.JDFMediaColorTest;
+import org.cip4.jdflib.resource.JDFNotificationTest;
 import org.cip4.jdflib.resource.JDFPageListTest;
 import org.cip4.jdflib.resource.JDFPartTest;
 import org.cip4.jdflib.resource.JDFResourceTest;
@@ -286,6 +291,10 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JDFStringStateTest.class);
         suite.addTestSuite(JDFTestTest.class);
 
+        //elementWalker
+        suite.addTestSuite(BaseWalkerTest.class);
+        suite.addTestSuite(UnlinkFinderTest.class);
+        
         //examples
         suite.addTestSuite(AmountTest.class);
         suite.addTestSuite(AutomatedLayoutTest.class);
@@ -303,6 +312,8 @@ public class AllJDFLibTest extends JDFTestCaseBase
         // Golden tickets
         suite.addTestSuite(GoldenTicketTest.class);
         suite.addTestSuite(MISCPGoldenTicketTest.class);
+        suite.addTestSuite(MISPreGoldenTicketTest.class);
+        suite.addTestSuite(IDPGoldenTicketTest.class);
 
         // JMF
         suite.addTestSuite(JDFDeviceInfoTest.class);
@@ -342,6 +353,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
         suite.addTestSuite(JDFLayerListTest.class);
         suite.addTestSuite(JDFLayoutTest.class);
         suite.addTestSuite(JDFMediaColorTest.class);
+        suite.addTestSuite(JDFNotificationTest.class);
         suite.addTestSuite(JDFPageListTest.class);
         suite.addTestSuite(JDFPartTest.class);
         suite.addTestSuite(JDFResourceTest.class);

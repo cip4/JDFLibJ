@@ -503,16 +503,7 @@ public class JDFRefElement extends JDFElement
         super.setPartMap(mPart);
     }
 
-    @Override
-    public void fixBad(EnumVersion version, EnumValidationLevel level)
-    {
-        if(getTarget()==null)
-        {
-            this.deleteNode();
-            return;
-        }
-        super.fixBad(version, level);
-    }
+ 
    /**
      * @deprecate 060310 - 
      * remove the part defined in mPart

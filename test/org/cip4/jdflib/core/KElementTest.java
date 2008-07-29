@@ -100,6 +100,17 @@ import org.w3c.dom.Element;
 public class KElementTest extends JDFTestCaseBase
 {
 
+    public void testAncestorDistance()
+    {
+        KElement e=new JDFDoc("a").getRoot();
+        assertEquals(e.ancestorDistance(e), 0);
+        KElement e1=e.appendElement("b");
+        assertEquals(e.ancestorDistance(e1), 1);
+        KElement e11=e1.appendElement("b");
+        assertEquals(e.ancestorDistance(e11), 2);
+        KElement e2=e.appendElement("b");
+        assertEquals(e1.ancestorDistance(e2), -1);
+    }
     public void testEnumValid()
     {
         EnumValidationLevel level=EnumValidationLevel.RecursiveComplete;
@@ -593,7 +604,17 @@ public class KElementTest extends JDFTestCaseBase
         assertNull(a.getAttribute("bar", null, null));
         assertNull(b.getAttribute("foo", null, null));
         assertNull(a.getAttribute("foo", null, null));
+        b.moveAttribute("bar", b, "bar", null, null);
+        assertEquals(b.getAttribute("bar"),"a");
+        b.moveAttribute("bar", null, "bar", null, null);
+        assertEquals(b.getAttribute("bar"),"a");
+        b.moveAttribute("bar", null, null, null, null);
+        assertEquals(b.getAttribute("bar"),"a");
+        b.moveAttribute("bar2", null, "bar", null, null);
+        assertEquals(b.getAttribute("bar2"),"a");
+        assertNull(b.getAttribute("bar", null, null));
     }
+    
     public void testCopyElement()
     {
         XMLDoc d=new XMLDoc("d1",null);

@@ -1222,46 +1222,6 @@ public class JDFElement extends KElement
         }
         return bRet;
     }
-    /**
-     * Mother of all version fixing routines
-     *
-     * uses heuristics to modify this element and its children to be compatible with a given version
-     * in general, it will be able to move from low to high versions but potentially fail
-     * when attempting to move from higher to lower versions
-     *
-     * @param version version the resulting element should correspond to
-     * @return true if successful
-     */
-    public void fixBad(EnumVersion version, EnumValidationLevel level)
-    {
-        VElement v=getChildElementVector_KElement(null,null,null,true,-1); // do not follow refelements
-        VString unknown=getUnknownAttributes(false, -1);
-        int uSiz=unknown==null ? 0 : unknown.size();
-        for(int i=0;i<uSiz;i++){
-            removeAttribute(unknown.stringAt(i));
-        }
-        unknown=getInvalidAttributes(EnumValidationLevel.NoWarnIncomplete,false,-1);
-        uSiz=unknown==null ? 0 : unknown.size();
-        for(int i=0;i<uSiz;i++){
-            removeAttribute(unknown.stringAt(i));
-        }        
-
-        final int size = v.size();
-        for(int i=0;i<size;i++){
-            KElement e=v.elementAt(i);
-            if (e instanceof JDFElement && JDFConstants.JDFNAMESPACE.equals(e.getNamespaceURI())) // remove stuff in unknown namespaces
-            {
-                JDFElement j = (JDFElement) e;
-                j.fixBad(version,level);
-//              if(!j.isValid(level))
-//              j.deleteNode();
-            }
-            else
-            {
-                e.deleteNode();
-            }
-        }
-    }
 
     /**
      * Check Existance of attribute SettingsPolicy

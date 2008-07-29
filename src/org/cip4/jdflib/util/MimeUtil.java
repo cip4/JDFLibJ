@@ -83,6 +83,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -1018,9 +1019,14 @@ public class MimeUtil extends UrlUtil
             httpURLconnection.setDoOutput(true);
             if(ms.httpDetails!=null)
                 ms.httpDetails.applyTo(httpURLconnection);
-            final OutputStream out= httpURLconnection.getOutputStream();
-
-            writeToStream(mp, out,ms);
+            try{
+                final OutputStream out= httpURLconnection.getOutputStream();
+                writeToStream(mp, out,ms);
+            }
+            catch(ConnectException x)
+            {
+                httpURLconnection=null;
+            }
 
             return httpURLconnection;   
         }

@@ -105,7 +105,7 @@ public class JDFClassInstantiationTest extends TestCase
                 if (pathname.isDirectory())
                 {
                     // ignore classes in directories "auto", "datatypes" and "util"
-                    acceptFile = !name.equals("auto") && !name.equals("datatypes") && !name.equals("util");
+                    acceptFile = !name.equals("auto") && !name.equals("datatypes") && !name.equals("util")&& !name.equals("validate");
                 }
                 else
                 {

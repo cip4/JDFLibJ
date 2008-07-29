@@ -240,28 +240,7 @@ public class JDFDoc extends XMLDoc
         return (JDFNode) getRoot().getTarget(id, AttributeName.ID);
     }
 
-    public void fixBad(EnumVersion version, EnumValidationLevel level)
-    {
-        JDFNode n=getJDFRoot();
-        if(n!=null)
-        {
-            for(int i=0;i<3;i++)
-            {
-                n.eraseUnlinkedResources();
-                n.fixBad(version,level);
-            }
-            if(version==null)
-                version=n.getMaxVersion(true);
-            
-            n.fixVersion(version);
-        }
-        JDFJMF j=getJMFRoot();
-        if(j!=null)
-        {
-            j.fixBad(version,level);
-            j.fixVersion(version);
-        }
-    }
+
     /**
      * removes all dangling resources and cleans up the rrefs attributes
      *

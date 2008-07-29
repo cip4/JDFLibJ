@@ -118,7 +118,7 @@ public class MISGoldenTicket extends BaseGoldenTicket
      * seconds this was active
      */
     public int duration=preStart/2;
-    
+    protected boolean grayBox=true;
     /**
      * create a BaseGoldenTicket
      * @param icsLevel the level to init to (1,2 or 3)
@@ -130,6 +130,7 @@ public class MISGoldenTicket extends BaseGoldenTicket
         super(2,jdfVersion); // mis always requires base 2
         misICSLevel=icsLevel;
         jmfICSLevel=jmfLevel;
+        fillCatMaps();
     }
 
     public MISGoldenTicket(MISGoldenTicket parent)
@@ -140,6 +141,8 @@ public class MISGoldenTicket extends BaseGoldenTicket
         getNIFromParent=parent.getNIFromParent;
         duration=parent.duration;
         category=parent.category;
+        fillCatMaps();
+        
     }
     /**
      * 
@@ -225,8 +228,9 @@ public class MISGoldenTicket extends BaseGoldenTicket
         if(types!=null)
         {
             theNode.setCategory(getCategory());
-            theNode.setTypes(types);
-            theNode.setType(org.cip4.jdflib.node.JDFNode.EnumType.ProcessGroup);
+            theNode.setCombined(types);
+            if(grayBox)
+                theNode.setType(org.cip4.jdflib.node.JDFNode.EnumType.ProcessGroup);
         }
         initNodeInfo();
         initCustomerInfo();
@@ -318,5 +322,22 @@ public class MISGoldenTicket extends BaseGoldenTicket
         if(category==null)
             return null;
         return catMap.get(category);
+    }
+
+    /**
+     * @param grayBox the grayBox to set
+     */
+    public void setGrayBox(boolean grayBox)
+    {
+        this.grayBox = grayBox;
+    }
+
+    /**
+     * 
+     */
+    protected void fillCatMaps()
+    {
+       // nop
+        
     }
 }

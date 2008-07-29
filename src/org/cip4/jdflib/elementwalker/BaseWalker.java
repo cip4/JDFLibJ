@@ -1,3 +1,10 @@
+/**
+ * 
+ */
+package org.cip4.jdflib.elementwalker;
+
+import org.cip4.jdflib.core.KElement;
+
 /*
  * The CIP4 Software License, Version 1.0
  *
@@ -42,8 +49,7 @@
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERN
- }ATIONAL COOPERATION FOR
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
  * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
  * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
  * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT
@@ -55,7 +61,6 @@
  * SUCH DAMAGE.
  * ====================================================================
  *
- }
  * This software consists of voluntary contributions made by many
  * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
@@ -69,80 +74,79 @@
  *
  */
 /**
- * ========================================================================== 
- * class JDFPrintCondition extends JDFResource
- * ==========================================================================
- * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * @Author: sabjon@topmail.de    using a code generator 
- * Warning! very preliminary test version. 
- * Interface subject to change without prior notice! 
+ * @author prosirai
+ *
  */
-package org.cip4.jdflib.resource.process.press;
-
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoPrintCondition;
-import org.cip4.jdflib.core.AttributeName;
-import org.w3c.dom.DOMException;
-
-
-public class JDFPrintCondition extends JDFAutoPrintCondition
+public abstract class BaseWalker implements IWalker, Comparable<BaseWalker>
 {
-    private static final long serialVersionUID = 1L;
-
+    // depth is calculated automatically from the class hierarchy and used to sort walkers from explicit to abstract
+    protected int depth;
+    
     /**
-     * Constructor for JDFPrintCondition
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
+     * the mother routine for walking....
+     *  (non-Javadoc)
+     * @see org.cip4.jdflib.elementwalker.IWalker#walk(java.lang.Object)
      */
-     public JDFPrintCondition(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-        throws DOMException
+    public boolean walk(KElement e)
     {
-        super(myOwnerDocument, qualifiedName);
+        return true;
     }
-
-
     /**
-     * Constructor for JDFPrintCondition
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
+     * 
+     * @param factory
      */
-    public JDFPrintCondition(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-         throws DOMException
+    public BaseWalker(BaseWalkerFactory factory)
     {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
+        depth=0;
+        addToFactory(factory);
     }
 
     /**
-     * Constructor for JDFPrintCondition
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
+     * this is the check whether or not to use this walker for a given element
+     * should be overwritten
+     * 
+     * @param e the element to check
+     * @return
      */
-    public JDFPrintCondition(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-        throws DOMException
+    public boolean matches(KElement e)
     {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+        return true;
     }
-
-    public String toString()
+    /**
+     * @param factory
+     */
+    private void addToFactory(BaseWalkerFactory factory)
     {
-        return "JDFPrintCondition[  --> " + super.toString() + " ]";
+        Class cBase=BaseWalker.class;
+        Class c=this.getClass().getSuperclass();
+        // calculate the nuber of intermediate classes
+        while(cBase.isAssignableFrom(c))
+        {
+            c=c.getSuperclass();
+            depth++;
+        }
+        factory.addWalker(this);        
+    }
+    /**
+     * @return
+     */
+    public int getDepth()
+    {
+        return depth;
     }
     
- 
-} // class JDFIDPLayout
-// ==========================================================================
+    /**
+     * note the reverse order - high depth means up in list so that abstract classes get checked later
+     *  (non-Javadoc)
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
+    public int compareTo(BaseWalker arg0)
+    {        
+        return  (arg0==null ? 0 : arg0.depth) -depth;
+    }
+    @Override
+    public String toString()
+    {
+        return "[ BaseWalker depth="+depth;
+    } 
+}

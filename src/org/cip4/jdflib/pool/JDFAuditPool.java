@@ -198,15 +198,7 @@ public class JDFAuditPool extends JDFPool
     {
         return "JDFAuditPool[ -->" + super.toString() + "]";
     }
-    @Override
-    public void fixBad(EnumVersion version, EnumValidationLevel level)
-    {
-        if(!hasChildElement(ElementName.CREATED, null))
-        {
-            ensureCreated();
-        }
-        super.fixBad(version, level);
-    }
+  
 
     /**
      * 

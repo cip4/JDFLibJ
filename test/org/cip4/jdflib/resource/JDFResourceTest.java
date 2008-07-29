@@ -677,7 +677,7 @@ public class JDFResourceTest extends JDFTestCaseBase
                 root.setType(JDFNode.EnumType.ConventionalPrinting.getName(),true);
             else
                 root.setType("fooBar",false); // check whether this works with non-enum types
-                
+
             JDFMedia media=(JDFMedia) root.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, null, null, null);
             media.setAmount(100);
             JDFComponent comp=(JDFComponent) root.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, null, null, null);
@@ -704,7 +704,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 
             m1.put(EnumPartIDKey.Condition, "Waste");
             rlComp.setActualAmount(10, m1);
-            
+
             m1.put(EnumPartIDKey.Condition, "OtherWaste");
             rlComp.setActualAmount(20, m1);
 
@@ -1508,7 +1508,62 @@ public class JDFResourceTest extends JDFTestCaseBase
         assertEquals(le.getSeparationSpec(0), ss1);
         assertEquals(le.getSeparationSpec(1), ss2);
     }       
+    /**
+     * test clonePartitions method
+     */
+    public void testClonePartions()
+    {
+        KElement pool = new JDFDoc("ResourcePool").getRoot();
+        JDFResource r0=(JDFResource) pool.appendElement("Preview");
+        JDFResource s1=r0.addPartition(EnumPartIDKey.SignatureName, "s1");
+        JDFResource sh1 = r0.addPartition(EnumPartIDKey.SignatureName, "s2").addPartition(EnumPartIDKey.SheetName, "sh1");
+        JDFResource r1=(JDFResource) pool.appendElement("Layout");
+        r1.clonePartitions(r0,null);
+        int size = r1.getLeaves(false).size();
+        assertEquals(size, r0.getLeaves(false).size());
+        for(int i=0;i<size;i++)
+        {
+            assertEquals(((JDFResource)r1.getLeaves(false).get(i)).getPartMap(), ((JDFResource)r0.getLeaves(false).get(i)).getPartMap());
+        }
+        r0.addPartition(EnumPartIDKey.SignatureName, "s3").addPartition(EnumPartIDKey.SheetName, "sh1");
+        r1.clonePartitions(r0,null);
+        size = r1.getLeaves(false).size();
+        assertEquals(" after second application ", size, r0.getLeaves(false).size());
+        for(int i=0;i<size;i++)
+        {
+            assertEquals(((JDFResource)r1.getLeaves(false).get(i)).getPartMap(), ((JDFResource)r0.getLeaves(false).get(i)).getPartMap());
+        }
+        JDFResource r2=(JDFResource) pool.appendElement("Layout");
+        r2.clonePartitions(r0,new VString("SignatureName",null));
+        size = r2.getLeaves(false).size();
+        assertEquals(" after third application - only signatureName", size, 3);
+        for(int i=0;i<size;i++)
+        {
+            assertEquals(((JDFResource)r2.getLeaves(false).get(i)).getPartMap().size(), 1);
+        }
 
+        JDFResource r3=(JDFResource) pool.appendElement("Layout");
+        r3.clonePartitions(s1,null);
+        size = r3.getLeaves(false).size();
+        assertEquals(" partial clone: after 4th application - only signatureName", size, 1);
+        for(int i=0;i<size;i++)
+        {
+            assertEquals(((JDFResource)r3.getLeaves(false).get(i)).getPartMap().size(), 1);
+        }
+
+        JDFResource r4=(JDFResource) pool.appendElement("Layout");
+        r4.clonePartitions(sh1,null);
+        size = r4.getLeaves(false).size();
+        assertEquals(" partial clone: after 5th application - only signatureName, sheetname 1", size, 1);
+        for(int i=0;i<size;i++)
+        {
+            assertEquals(((JDFResource)r4.getLeaves(false).get(i)).getPartMap().size(), 2);
+        }
+        r4.clonePartitions(s1,null);
+        size = r4.getLeaves(false).size();
+        assertEquals(" multiple partial clone: after 5th application - only signatureName, sheetname 1", size, 2);
+
+    }
     /**
      * test expand and collapse methods
      */

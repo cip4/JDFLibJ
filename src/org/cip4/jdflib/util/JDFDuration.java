@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -86,7 +86,7 @@ package org.cip4.jdflib.util;
 import java.util.zip.DataFormatException;
 
 
-public class JDFDuration 
+public class JDFDuration implements Comparable<JDFDuration>
 {
     private static final long serialVersionUID = 1L;
 
@@ -140,6 +140,20 @@ public class JDFDuration
     public JDFDuration(JDFDuration d)
     {
         m_lDuration = d.m_lDuration;
+    }
+    
+    /**
+     * creates a duration from two dates; may be negative if start later end
+     * 
+     * @param start the starting point
+     * @param end the end point
+     *
+     */
+    public JDFDuration(JDFDate start, JDFDate end)
+    {
+        if(start==null || end==null)
+            return;
+        m_lDuration =(end.getTimeInMillis()-start.getTimeInMillis())/1000.;
     }
 
     /**
@@ -534,6 +548,16 @@ public class JDFDuration
     public int hashCode()
     {
         return HashUtil.hashCode(0, m_lDuration);
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
+    public int compareTo(JDFDuration arg0)
+    {
+        double l=(arg0==null) ? 0 : arg0.m_lDuration;
+        l-=m_lDuration;
+        return (int)Math.signum(-l);
     }
 
 
