@@ -1877,6 +1877,7 @@ public class JDFNode extends JDFElement
         }
         /**
          * creates a NodeIdentifier from a given JDF node
+         * uses the AncestorPool or NodeInfo or output resource in that sequence to determine the partmap
          * @param n
          */
         public NodeIdentifier(JDFNode n)
@@ -1887,6 +1888,7 @@ public class JDFNode extends JDFElement
 
         /**
          * sets a NodeIdentifier to a given JDF node
+         * uses the AncestorPool or NodeInfo or output resource in that sequence to determine the partmap
          * @param n
          */
         public void setNode(JDFNode n)
@@ -1894,7 +1896,7 @@ public class JDFNode extends JDFElement
             if(n==null)
                 setTo(null,null,null);
             else
-                setTo(n.getJobID(true),n.getJobPartID(false),n.getPartMapVector());            
+                setTo(n.getJobID(true),n.getJobPartID(false),n.getNodeInfoPartMapVector());            
         }
 
         /**
@@ -2702,7 +2704,7 @@ public class JDFNode extends JDFElement
         return null;
     }
     /**
-     * return the partMapVector defined in AncestorPool or NodeInfo, 
+     * return the partMapVector defined in AncestorPool or NodeInfo or output resource in that sequence, 
      * null if no NodeInfo exists, or NodeInfo has no Part elements
      * @return the vector of PartMaps
      */
@@ -2713,6 +2715,12 @@ public class JDFNode extends JDFElement
         {
             JDFNodeInfo ni=getNodeInfo();
             vm= ni==null ? null : ni.getPartMapVector(false);
+            if(vm==null)
+            {
+                JDFResource output=getResource(null, EnumUsage.Output, null, 0);
+                vm= output==null ? null : output.getPartMapVector(false);
+            }
+
         }
         return vm==null || vm.size()==0 ? null : vm;
     }

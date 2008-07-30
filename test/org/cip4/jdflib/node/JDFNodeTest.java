@@ -1057,6 +1057,28 @@ public class JDFNodeTest extends JDFTestCaseBase
         ni2.setNode(n);
         assertEquals(ni,ni2);
     }
+    public void  testNodeIdentifierParts()
+    {
+        JDFNode n=new JDFDoc("JDF").getJDFRoot();
+        JDFResource c=n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+        VJDFAttributeMap v=new VJDFAttributeMap();
+       
+        for(int i=0;i<3;i++)
+        {
+            JDFAttributeMap m=new JDFAttributeMap();
+            m.put("SignatureName", "sig1");
+            m.put("SheetName", "S"+i);
+            v.add(m);
+            c.getCreatePartition(m, new VString("SignatureName SheetName",null));
+        }
+        NodeIdentifier ni=new NodeIdentifier(n);
+        NodeIdentifier ni2=new NodeIdentifier(n.getJobID(true),n.getJobPartID(true),v);
+        assertEquals(ni, ni2 );
+        n.setPartStatus(new JDFAttributeMap("SignatureName","Sig1"), EnumNodeStatus.InProgress);
+        ni.setNode(n);
+        assertNotSame(ni, ni2);
+        
+    }
     public void  testNodeIdentifierMatches()
     {
         NodeIdentifier ni=new NodeIdentifier();
@@ -1559,6 +1581,8 @@ public class JDFNodeTest extends JDFTestCaseBase
         assertEquals(r,rAdd2);
         r=n.getResource(ElementName.SADDLESTITCHINGPARAMS, null,-2);
         assertEquals(r,rAdd);
+        JDFResource out=n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+        assertEquals("null is valid wildcard", out, n.getResource(null, EnumUsage.Output, null, 0));
     }  
     //////////////////////////////////////////////////////////////////////////
 
