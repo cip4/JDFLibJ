@@ -87,8 +87,6 @@ import java.net.URL;
 import javax.mail.BodyPart;
 
 import org.apache.xerces.dom.DocumentImpl;
-import org.cip4.jdflib.core.JDFElement.EnumVersion;
-import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;

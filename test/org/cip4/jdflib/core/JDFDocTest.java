@@ -80,7 +80,6 @@ package org.cip4.jdflib.core;
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.node.JDFNode;

@@ -81,7 +81,6 @@ package org.cip4.jdflib.resource.process.press;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPrintCondition;
-import org.cip4.jdflib.core.AttributeName;
 import org.w3c.dom.DOMException;
 
 

@@ -159,8 +159,9 @@ public class CheckJDFTest extends JDFTestCaseBase
         assertTrue(c.isValid(d));
         sc.setEvent("id2", "oops", "Snafu");
         d=sc.getDocJMFNotification(true);
-        XMLDoc report=c.processSingleDocument(d);
-                assertFalse(c.isValid(d));
+//        XMLDoc report=
+    	c.processSingleDocument(d);
+        assertFalse(c.isValid(d));
      
     }
 
