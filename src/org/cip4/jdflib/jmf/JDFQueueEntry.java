@@ -97,16 +97,22 @@ import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.JDFDate;
 
 //----------------------------------
-public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<JDFQueueEntry>
+public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable
 {
-    public static class QueueEntryComparator implements Comparator<KElement>
+    public static class QueueEntryComparator implements Comparator
     {
 
         /* (non-Javadoc)
          * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
          */
-        public int compare(KElement o1, KElement o2)
+        public int compare(Object a1, Object a2)
         {
+            if(!(a1 instanceof KElement))
+                return -1;
+            if(!(a2 instanceof KElement))
+                return 1;
+            KElement o1=(KElement)a1;
+            KElement o2=(KElement)a2;
             int i=o1.getNodeName().compareTo(o2.getNodeName());
             if(i!=0)
                 return i;
@@ -529,10 +535,8 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<JDFQu
     /* (non-Javadoc)
      * @see java.lang.Comparable#compareTo(java.lang.Object)
      */
-    public int compareTo(JDFQueueEntry arg0)
+    public int compareTo(Object arg0)
     {       
-        if(arg0==null)
-            return 1;
         return new QueueEntryComparator().compare(this, arg0);
     }
 
