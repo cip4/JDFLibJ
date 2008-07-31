@@ -810,6 +810,8 @@ public class JDFJMF extends JDFAutoJMF
             final EnumFamily family = m.getFamily();
             if(family!=null && EnumFamily.Response!=family&& EnumFamily.Acknowledge!=family)
             {
+                if(!m.hasAttribute(AttributeName.ID)) // in case someone sends crappy requests...
+                    m.appendAnchor(null);
                 JDFResponse r=jmf.appendResponse();
                 r.setQuery(m);
             }

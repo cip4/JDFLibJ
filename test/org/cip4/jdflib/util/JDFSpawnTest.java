@@ -1109,7 +1109,9 @@ public class JDFSpawnTest extends JDFTestCaseBase
             // test spawning of referenced resources in parent nodes
             n.setType(EnumType.ProcessGroup);
             JDFNode n2=n.addJDFNode(EnumType.ConventionalPrinting);
+            
             n2.moveElement(n.getResourceLinkPool(), null);
+   //         JDFComponent c=(JDFComponent) n2.addResource(ElementName.COMPONENT, EnumUsage.Output);
             n2.getCreateAuditPool().addNotification(null, null, null).appendComment().setText("notification all pre");
             n2.removeNodeInfo();
             n2.appendNodeInfo();
@@ -1120,9 +1122,14 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
             String pid=n2.getJobPartID(false);
             assertNotSame(pid,"");
-            JDFNode spawnedNode=spawn.spawn("thisUrl","newURL",null,null,false,true,true,true);
+            
+            
+            JDFNode spawnedNode=spawn.spawn("thisUrl","newURL",new VString("Component",null),null,false,true,true,true);
             spawnedNode.getCreateAuditPool().addNotification(null, null, null).appendComment().setText("notification 3 sub");
             assertTrue("no spawnStatus",spawnedNode.toString().indexOf(AttributeName.SPAWNSTATUS)<0);
+            JDFResourceLink cLink=spawnedNode.getMatchingLink(ElementName.COMPONENT, null, 0);
+            assertNotNull(cLink);
+            cLink.setActualAmount(42,null);
 
             spawnedNode.setStatus(EnumNodeStatus.Part);
             spawnedNode.getNodeInfo().setNodeStatus(EnumNodeStatus.Aborted);
@@ -1132,8 +1139,10 @@ public class JDFSpawnTest extends JDFTestCaseBase
             auditPool.addProcessRun(EnumNodeStatus.Aborted, null, null);
             JDFNotification notif=(JDFNotification) auditPool.addAudit(EnumAuditType.Notification, null);
             notif.appendComment().setText("fooBar");
+            
             final JDFMerge merge = new JDFMerge(n);
             merge.bAddMergeToProcessRun=true;
+            
 
             JDFNode mergedNode=merge.mergeJDF(spawnedNode, "merged", cu[i], EnumAmountMerge.UpdateLink);
 
@@ -1149,6 +1158,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
             assertNotNull(auditPoolMerged.getAudit(3, EnumAuditType.Notification, null, null));
             assertNull(auditPoolMerged.getAudit(4, EnumAuditType.Notification, null, null));
             assertEquals("comment text correctly merged",auditPoolMerged.getAudit(-1, EnumAuditType.Notification, null, null).getComment(0).getText(),"fooBar");
+            assertEquals(((JDFComponent)jobPart.getResource(ElementName.COMPONENT, EnumUsage.Output,0)).getAmountProduced(), 42.,0.);
         }
 
     }

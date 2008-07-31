@@ -133,7 +133,7 @@ public class JDFMerge
      * set this to true if you want to update the stati of the relevant parent nodes based on the new Stati of the merged node
      */
     public boolean bUpdateStati=false;
-    
+
     /**
      * set this to true if you want to update the ProcessRun(s) timestamps for this merge
      */
@@ -664,9 +664,9 @@ public class JDFMerge
 
             for(int i=0;i<spawnIDs.size();i++) // check for multiple rw spawns
             {
-                 
+
                 final String resSpawnID=spawnIDs.stringAt(i);
- //               JDFSpawned spawnedAudit=(JDFSpawned) (m_ParentNode.getChildByTagName(ElementName.SPAWNED, null, 0, new JDFAttributeMap(AttributeName.NEWSPAWNID,resSpawnID), false, true));
+                //               JDFSpawned spawnedAudit=(JDFSpawned) (m_ParentNode.getChildByTagName(ElementName.SPAWNED, null, 0, new JDFAttributeMap(AttributeName.NEWSPAWNID,resSpawnID), false, true));
                 JDFSpawned spawnedAudit= newSpawnMap.get(resSpawnID);
                 if(spawnedAudit!=null)
                 {
@@ -845,13 +845,13 @@ public class JDFMerge
         final JDFResourceLinkPool resourceLinkPool = toMerge.getResourceLinkPool();
         expandLinkedResources(resourceLinkPool);
 
+        final JDFResourceLinkPool toMergeRLP   = resourceLinkPool;
+        if (toMergeRLP == null)
+            return; // nothing to do
+
+        final JDFResourceLinkPool overWriteRLP = mainNode.getCreateResourceLinkPool();
         if (parts!=null && !parts.isEmpty())
         {
-            final JDFResourceLinkPool toMergeRLP   = resourceLinkPool;
-            if (toMergeRLP == null)
-                return; // nothing to do
-
-            final JDFResourceLinkPool overWriteRLP = mainNode.getCreateResourceLinkPool();
             final VElement overWriteLinks = overWriteRLP.getPoolChildren(null, null, null);
             final VElement toMergeLinks   = toMergeRLP.getPoolChildren(null, null, null);
 
@@ -893,6 +893,11 @@ public class JDFMerge
             toMergeRLP.deleteNode();
             toMerge.copyElement(overWriteRLP, null);
         }
+        else // copy the rlp from sub to main so that amount recalc in mergerw finds all required links in main
+        {
+            overWriteRLP.deleteNode();
+            mainNode.copyElement(toMergeRLP, null);
+        }
     }
 
     /**
@@ -908,7 +913,7 @@ public class JDFMerge
         final int partSize = subLinkParts.size();
         for (int i = 0; i < partSize ; i++)
         {
-//            final boolean hasAP = mainLink.hasChildElement(ElementName.AMOUNTPOOL, null);
+//          final boolean hasAP = mainLink.hasChildElement(ElementName.AMOUNTPOOL, null);
             VElement vSubPartAmounts = null;
             if(subAmountPool!=null)
                 vSubPartAmounts=subAmountPool.getMatchingPartAmountVector(subLinkParts.elementAt(i));
@@ -1054,7 +1059,7 @@ public class JDFMerge
             }
         }
     }
-    
+
     /**
      * merge the RW resources of the main JDF
      * @param subJDFNode the source node of the status pool to merge into this
@@ -1142,7 +1147,7 @@ public class JDFMerge
             {
                 for (int i = 0; i < size; i++)
                 {
-                     // clean up the pool to overwrite
+                    // clean up the pool to overwrite
                     final VElement vpso = overWriteStatusPool.getMatchingPartStatusVector(parts.elementAt(i));
                     for (int j=0;j<vpso.size();j++)
                     {
@@ -1329,13 +1334,13 @@ public class JDFMerge
                 KElement doubleSpawn=pool.getChildWithAttribute(ElementName.SPAWNED, AttributeName.SPAWNID, null, mergeID, 0, true);
                 if(doubleSpawn!=null)
                     continue; // skip cleanup in case spawned audits rely on this
-                
+
                 for (int j = vSpawned.size() - 1; j >= 0; j--)
                 {
                     final JDFSpawned spawned = (JDFSpawned)vSpawned.elementAt(i);
                     if (spawned.getNewSpawnID().equals(mergeID))
                     {
-                        
+
                         if (cleanPolicy == JDFNode.EnumCleanUpMerge.RemoveAll)
                         {
                             spawned.deleteNode();
