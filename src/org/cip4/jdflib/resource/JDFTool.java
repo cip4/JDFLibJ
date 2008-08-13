@@ -83,91 +83,81 @@ import org.cip4.jdflib.auto.JDFAutoTool;
 import org.cip4.jdflib.core.AttributeName;
 import org.w3c.dom.DOMException;
 
-
 public class JDFTool extends JDFAutoTool
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFTool
-     * @param myOwnerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFTool(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-        throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFTool
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFTool(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFTool
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFTool(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-         throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFTool
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFTool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFTool
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     * @throws DOMException
-     */
-    public JDFTool(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-        throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * Constructor for JDFTool
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 * @throws DOMException
+	 */
+	public JDFTool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFTool[  --> " + super.toString() + " ]" ;
-    }
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFTool[  --> " + super.toString() + " ]";
+	}
 
-    ////////////////////////////////////////////////////////////////////////
-    
-    public boolean fixVersion(EnumVersion version){
-        if(version!=null && version.getValue()>=EnumVersion.Version_1_3.getValue())
-        {
-            if(hasAttribute(AttributeName.TOOLID)&&!hasAttribute(AttributeName.PRODUCTID)){
-                setProductID(getToolID());
-            }
-            removeAttribute(AttributeName.TOOLID,null);
-        }           
-        else if(version!=null && version.getValue()<EnumVersion.Version_1_3.getValue())
-        {
-            if(hasAttribute(AttributeName.PRODUCTID)&&!hasAttribute(AttributeName.TOOLID)){
-                setToolID(getProductID());
-            }
-        }           
-        return super.fixVersion(version);
-    }
-    ////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////
+
+	public boolean fixVersion(EnumVersion version)
+	{
+		if (version != null && version.getValue() >= EnumVersion.Version_1_3.getValue())
+		{
+			if (hasAttribute(AttributeName.TOOLID) && !hasAttribute(AttributeName.PRODUCTID))
+			{
+				setProductID(getToolID());
+			}
+			removeAttribute(AttributeName.TOOLID, null);
+		}
+		else if (version != null && version.getValue() < EnumVersion.Version_1_3.getValue())
+		{
+			if (hasAttribute(AttributeName.PRODUCTID) && !hasAttribute(AttributeName.TOOLID))
+			{
+				setToolID(getProductID());
+			}
+		}
+		return super.fixVersion(version);
+	}
+	// //////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////
 }
-
-
-

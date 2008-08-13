@@ -88,101 +88,97 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.ifaces.IPlacedObject;
 
-
 public class JDFMarkObject extends JDFAutoMarkObject implements IPlacedObject
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFMarkObject
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    public JDFMarkObject(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFMarkObject
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	public JDFMarkObject(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    public JDFMarkObject(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFMarkObject(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFMarkObject
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    public JDFMarkObject(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-    
-    /**
-     * toString()
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFMarkObject[  --> " + super.toString() + " ]";
-    }
-    
-    /**
-     * set attribute Ord
-     * 
-     * @param value the value to set the attribute to
-     * @throws JDFException with stack trace if value < 0
-     */
-    public void setOrd(int value)
-    {
-        
-        if (value < 0)
-        {
-            throw new JDFException ("Found invalid negative Ord : " + value);
-        }
-        
-        setAttribute(AttributeName.ORD, value, null);
-    }
-    
-    /**
-     * get int attribute Ord
-     * @return int: the value of the attribute
-     * @throws JDFException with stack trace if result < 0
-     */
-    public int getOrd()
-    {
-        int result = super.getOrd ();
-        
-        if (result < 0)
-        {
-            throw new JDFException ("Found invalid negative Ord : " + result);
-        }
-        
-        return result;
-    }
+	/**
+	 * Constructor for JDFMarkObject
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	public JDFMarkObject(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /* (non-Javadoc)
-     * @see org.cip4.jdflib.ifaces.IPlacedObject#setTrimCTM(double, double)
-     */
-    public void setTrimSize(double x, double y)
-    {
-        setTrimSize(new JDFXYPair(x,y));        
-    }
-    
+	/**
+	 * toString()
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFMarkObject[  --> " + super.toString() + " ]";
+	}
+
+	/**
+	 * set attribute Ord
+	 * 
+	 * @param value the value to set the attribute to
+	 * @throws JDFException with stack trace if value < 0
+	 */
+	public void setOrd(int value)
+	{
+
+		if (value < 0)
+		{
+			throw new JDFException("Found invalid negative Ord : " + value);
+		}
+
+		setAttribute(AttributeName.ORD, value, null);
+	}
+
+	/**
+	 * get int attribute Ord
+	 * 
+	 * @return int: the value of the attribute
+	 * @throws JDFException with stack trace if result < 0
+	 */
+	public int getOrd()
+	{
+		int result = super.getOrd();
+
+		if (result < 0)
+		{
+			throw new JDFException("Found invalid negative Ord : " + result);
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.cip4.jdflib.ifaces.IPlacedObject#setTrimCTM(double, double)
+	 */
+	public void setTrimSize(double x, double y)
+	{
+		setTrimSize(new JDFXYPair(x, y));
+	}
+
 }

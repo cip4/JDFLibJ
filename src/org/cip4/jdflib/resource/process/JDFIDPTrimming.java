@@ -14,63 +14,56 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoIDPTrimming;
 import org.w3c.dom.DOMException;
 
-
 public class JDFIDPTrimming extends JDFAutoIDPTrimming
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFIDPTrimming
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-     public JDFIDPTrimming(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-        throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFIDPTrimming
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFIDPTrimming(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+			throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFIDPTrimming
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFIDPTrimming(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFIDPTrimming
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFIDPTrimming(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-         throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFIDPTrimming
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFIDPTrimming(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName, String myLocalName)
+			throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFIDPTrimming
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFIDPTrimming(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-        throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-
-    public String toString()
-    {
-        return "JDFIDPTrimming[  --> " + super.toString() + " ]";
-    }
+	public String toString()
+	{
+		return "JDFIDPTrimming[  --> " + super.toString() + " ]";
+	}
 } // class JDFIDPLayout
 // ==========================================================================

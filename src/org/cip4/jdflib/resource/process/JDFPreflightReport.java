@@ -90,177 +90,176 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.devicecapability.JDFAction;
 import org.w3c.dom.DOMException;
 
-
 public class JDFPreflightReport extends JDFAutoPreflightReport
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFPreflightReport
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFPreflightReport(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFPreflightReport
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFPreflightReport(CoreDocumentImpl myOwnerDocument,
+			String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFPreflightReport
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFPreflightReport(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFPreflightReport
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFPreflightReport(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFPreflightReport
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFPreflightReport(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName, String myLocalName)
+			throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFPreflightReport
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFPreflightReport(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFPreflightReport[  --> " + super.toString() + " ]";
+	}
 
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFPreflightReport[  --> " + super.toString() + " ]";
-    }
+	public JDFPRItem setPR(JDFAction action, int pageSet,
+			JDFAttributeMap prMap, VString groupBy)
+	{
 
-    public JDFPRItem setPR(JDFAction action, int pageSet, JDFAttributeMap prMap, VString groupBy)
-    {
+		JDFAttributeMap groupMap = null;
+		JDFAttributeMap instanceMap = null;
+		if (prMap != null)
+		{
+			groupMap = new JDFAttributeMap(prMap);
+			final Set set = groupBy.getSet();
+			groupMap.reduceMap(set);
+			instanceMap = new JDFAttributeMap(prMap);
+			instanceMap.removeKeys(set);
+		}
+		JDFPRItem pi = getCreatePRItem(action, groupMap);
 
-        JDFAttributeMap groupMap=null;
-        JDFAttributeMap instanceMap = null;
-         if(prMap!=null)
-        {
-            groupMap= new JDFAttributeMap(prMap);
-            final Set set = groupBy.getSet();
-            groupMap.reduceMap(set);
-            instanceMap= new JDFAttributeMap(prMap);
-            instanceMap.removeKeys(set);
-        }
-        JDFPRItem pi=getCreatePRItem(action, groupMap);
+		JDFPRGroup pg = pi.getCreatePRGroup(groupMap);
+		JDFPROccurrence pgInstance = pg.getCreatePROccurrence(instanceMap);
+		pgInstance.addOccurrences(1, action.getSeverity());
+		pi.insertPageSet(pageSet);
+		return pi;
+	}
 
+	/**
+	 * increments the errorCount attribute by i
+	 * 
+	 * @param i
+	 *            the amount to increment by
+	 */
+	public int addErrorCount(int i)
+	{
+		return addAttribute(AttributeName.ERRORCOUNT, i, null);
+	}
 
-        JDFPRGroup pg=pi.getCreatePRGroup(groupMap);
-        JDFPROccurrence pgInstance=pg.getCreatePROccurrence(instanceMap);
-        pgInstance.addOccurrences(1, action.getSeverity());
-        pi.insertPageSet(pageSet);
-        return pi;
-    }
+	/**
+	 * increments the WarningCount attribute by i
+	 * 
+	 * @param i
+	 *            the amount to increment by
+	 */
+	public int addWarningCount(int i)
+	{
+		return addAttribute(AttributeName.WARNINGCOUNT, i, null);
+	}
 
+	/**
+	 * recursive call that sets errorcount and warning count according to the
+	 * value of severity
+	 * 
+	 * @param i
+	 *            the number of occurrences to add
+	 * @param sev
+	 *            the severity of the occurrences
+	 */
+	public void addOccurrences(int i, EnumSeverity sev)
+	{
+		if (EnumSeverity.Warning.equals(sev))
+			addWarningCount(i);
+		else if (EnumSeverity.Error.equals(sev))
+			addErrorCount(i);
 
-    /**
-     * increments the errorCount attribute by i
-     * @param i the amount to increment by
-     */
-    public int addErrorCount(int i)
-    {
-        return addAttribute(AttributeName.ERRORCOUNT,i,null);       
-    }
+	}
 
-    /**
-     * increments the WarningCount attribute by i
-     * @param i the amount to increment by
-     */
-    public int addWarningCount(int i)
-    {
-        return addAttribute(AttributeName.WARNINGCOUNT,i,null);
-    }
+	/**
+	 * @param action
+	 * @param groupMap
+	 * @return
+	 */
+	public JDFPRItem getCreatePRItem(JDFAction action, JDFAttributeMap groupMap)
+	{
+		JDFPRItem pi = getPRItem(action, null);
+		if (pi == null)
+		{
+			pi = appendPRItem();
+			pi.setActionRef(action.getID());
+		}
+		pi.getCreatePRGroup(groupMap);
+		return pi;
 
-    /**
-     * recursive call that sets errorcount and warning count according to the value of severity
-     * @param i the number of occurrences to add
-     * @param sev the severity of the occurrences
-     */
-    public void addOccurrences(int i, EnumSeverity sev)
-    {
-        if(EnumSeverity.Warning.equals(sev))
-            addWarningCount(i);
-        else if(EnumSeverity.Error.equals(sev))
-            addErrorCount(i);
+	}
 
-    }
+	/**
+	 * @param action
+	 * @return
+	 */
+	private JDFPRItem getPRItem(JDFAction action, JDFAttributeMap groupMap)
+	{
+		String id = action == null ? null : action.getID();
+		JDFAttributeMap map = (id == null) ? null : new JDFAttributeMap(
+				"ActionRef", id);
+		JDFPRItem pi = (JDFPRItem) getChildByTagName(ElementName.PRITEM, null,
+				0, map, true, true);
+		if (groupMap != null && pi != null)
+		{
+			JDFPRGroup pg = pi.getPRGroup(groupMap);
+			if (pg == null)
+				return null;
+		}
+		return pi;
+	}
 
-
-
-    /**
-     * @param action
-     * @param groupMap
-     * @return
-     */
-    public JDFPRItem getCreatePRItem(JDFAction action, JDFAttributeMap groupMap)
-    {
-        JDFPRItem pi=getPRItem(action, null);
-        if(pi==null)
-        {
-            pi=appendPRItem();
-            pi.setActionRef(action.getID());
-        }
-        pi.getCreatePRGroup(groupMap);
-        return pi;
-
-    }
-
-
-    /**
-     * @param action
-     * @return
-     */
-    private JDFPRItem getPRItem(JDFAction action,JDFAttributeMap groupMap)
-    {
-        String id=action==null ? null : action.getID();
-        JDFAttributeMap map=(id==null) ? null : new JDFAttributeMap("ActionRef",id);
-        JDFPRItem pi= (JDFPRItem) getChildByTagName(ElementName.PRITEM, null,0, map,true,true);
-        if(groupMap!=null && pi!=null)
-        {
-            JDFPRGroup pg=pi.getPRGroup(groupMap);
-            if(pg==null)
-                return null;
-        }
-        return pi;
-    }
-    
-    /**
-     * generic initialization routine - normally called automagically
-     * initializes required attributes to 0
-     */
-    public boolean init()
-    {
-        boolean b= super.init();
-        setWarningCount(0);
-        setErrorCount(0);
-        return b;
-    }
-
+	/**
+	 * generic initialization routine - normally called automagically
+	 * initializes required attributes to 0
+	 */
+	public boolean init()
+	{
+		boolean b = super.init();
+		setWarningCount(0);
+		setErrorCount(0);
+		return b;
+	}
 
 }

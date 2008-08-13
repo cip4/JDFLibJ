@@ -14,63 +14,56 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDynamicInput;
 import org.w3c.dom.DOMException;
 
-
 public class JDFDynamicInput extends JDFAutoDynamicInput
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFDynamicInput
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-     public JDFDynamicInput(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-        throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFDynamicInput
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFDynamicInput(CoreDocumentImpl myOwnerDocument,
+			String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFDynamicInput
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFDynamicInput(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFDynamicInput
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFDynamicInput(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-         throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFDynamicInput
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFDynamicInput(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName, String myLocalName)
+			throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFDynamicInput
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFDynamicInput(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-        throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-
-    public String toString()
-    {
-        return "JDFDynamicInput[  --> " + super.toString() + " ]";
-    }
+	public String toString()
+	{
+		return "JDFDynamicInput[  --> " + super.toString() + " ]";
+	}
 } // class JDFIDPLayout
 // ==========================================================================

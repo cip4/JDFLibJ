@@ -83,139 +83,136 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 
-
 public class JDFnot extends JDFNodeTerm
 {
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	/**
 	 * Constructor for JDFnot
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFnot(
-			CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFnot(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
-	
+
 	/**
 	 * Constructor for JDFnot
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFnot(
-			CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI,
+	public JDFnot(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
 			String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
-	
+
 	/**
 	 * Constructor for JDFnot
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFnot(
-			CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI,
-			String qualifiedName,
-			String myLocalName)
+	public JDFnot(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
+			String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
-	
-	
+
 	public String toString()
 	{
 		return " JDFnot[  --> " + super.toString() + " ]";
 	}
-	
-	
+
 	/**
-	 * Inverts the boolean state of a Term element 
-	 * (and, or, xor, not, Evaluation, TestRef).<br>
-	 * To determine the state of Term tests Evaluations that “not” consists of, 
-	 * it checks whether attribute map 'm' has a key, 
-	 * specified by Evaluation/BasicPreflightTest/@Name.
-	 * If 'm' has such key, it checks whether its value fits the testlists
-	 * specified for matching the Evaluation (uses FitsValue(value))
-	 *
-	 * @param m key-value pair attribute map
+	 * Inverts the boolean state of a Term element (and, or, xor, not,
+	 * Evaluation, TestRef).<br>
+	 * To determine the state of Term tests Evaluations that “not” consists of,
+	 * it checks whether attribute map 'm' has a key, specified by
+	 * Evaluation/BasicPreflightTest/@Name. If 'm' has such key, it checks
+	 * whether its value fits the testlists specified for matching the
+	 * Evaluation (uses FitsValue(value))
+	 * 
+	 * @param m
+	 *            key-value pair attribute map
 	 * @return boolean - true, if boolean “not” expression evaluates to “true”
 	 */
-	public boolean fitsMap(JDFAttributeMap m) 
+	public boolean fitsMap(JDFAttributeMap m)
 	{
-		JDFTerm t = getTerm(null,0);
-		if(t==null)
-            return false;
-		return !t.fitsMap(m); 
+		JDFTerm t = getTerm(null, 0);
+		if (t == null)
+			return false;
+		return !t.fitsMap(m);
 	}
-	
-	
-	
+
 	/**
-	 * Inverts the boolean state of a Term child element 
-	 * (and, or, xor, not, Evaluation, TestRef)
-	 *
-	 * @param jdf        JDFNode we test to know if the Device can accept it
-	 * @param reportRoot the report to generate. 
-	 *                   Set to <code>null</code> if no report is requested. 
+	 * Inverts the boolean state of a Term child element (and, or, xor, not,
+	 * Evaluation, TestRef)
+	 * 
+	 * @param jdf
+	 *            JDFNode we test to know if the Device can accept it
+	 * @param reportRoot
+	 *            the report to generate. Set to <code>null</code> if no report
+	 *            is requested.
 	 * @return boolean - true, if boolean “not” expression evaluates to “true”
 	 */
-	public boolean fitsJDF(KElement jdf,KElement reportRoot) 
+	public boolean fitsJDF(KElement jdf, KElement reportRoot)
 	{
-	    VElement v = getTermVector(null);
-	    int siz = v.size();
-	    boolean b=false;
-	    if(reportRoot!=null)
-	        reportRoot=reportRoot.appendElement("not");
-	    int count=0;
-	    for (int i=0; i<siz; i++)
-	    {
-	        final JDFTerm t = (JDFTerm)v.elementAt(i);
-	        b=!t.fitsJDF(jdf,reportRoot);
-	        count++;
-	        if(reportRoot!=null)
-	            reportRoot.setAttribute("Value",b,null);                
-	    }
-	    if(reportRoot!=null && count!=1)
-	        reportRoot.setAttribute("SyntaxWarning","Warning: not element with more than one term, count="+String.valueOf(count));
-	    
-	    return b; 
+		VElement v = getTermVector(null);
+		int siz = v.size();
+		boolean b = false;
+		if (reportRoot != null)
+			reportRoot = reportRoot.appendElement("not");
+		int count = 0;
+		for (int i = 0; i < siz; i++)
+		{
+			final JDFTerm t = (JDFTerm) v.elementAt(i);
+			b = !t.fitsJDF(jdf, reportRoot);
+			count++;
+			if (reportRoot != null)
+				reportRoot.setAttribute("Value", b, null);
+		}
+		if (reportRoot != null && count != 1)
+			reportRoot.setAttribute("SyntaxWarning",
+					"Warning: not element with more than one term, count="
+							+ String.valueOf(count));
+
+		return b;
 	}
-   ////////////////////////////////////////////////////
-    
-    public VString getInvalidElements(EnumValidationLevel level, boolean bIgnorePrivate,int nMax)
-    {
-        if(bIgnorePrivate)
-            bIgnorePrivate=false; // dummy to fool compiler
-        VString v=super.getInvalidElements(level, bIgnorePrivate, nMax);
-        if(v.size()>=nMax)
-            return v;
-            
-        v.appendUnique(getInvalidTerms(1));
-        return v;
-     }
-    
-    /////////////////////////////////////////////////////////
-    
-    public VString getMissingElements(int nMax)
-    {
-        VString v=super.getMissingElements(nMax);
-        if(v.size()>=nMax)
-            return v;
-        
-        v.appendUnique(getMissingTerms(1));
-        return v;        
-     }
-    
-    /////////////////////////////////////////////////////////
+
+	// //////////////////////////////////////////////////
+
+	public VString getInvalidElements(EnumValidationLevel level,
+			boolean bIgnorePrivate, int nMax)
+	{
+		if (bIgnorePrivate)
+			bIgnorePrivate = false; // dummy to fool compiler
+		VString v = super.getInvalidElements(level, bIgnorePrivate, nMax);
+		if (v.size() >= nMax)
+			return v;
+
+		v.appendUnique(getInvalidTerms(1));
+		return v;
+	}
+
+	// ///////////////////////////////////////////////////////
+
+	public VString getMissingElements(int nMax)
+	{
+		VString v = super.getMissingElements(nMax);
+		if (v.size() >= nMax)
+			return v;
+
+		v.appendUnique(getMissingTerms(1));
+		return v;
+	}
+
+	// ///////////////////////////////////////////////////////
 
 }

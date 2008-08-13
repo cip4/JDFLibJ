@@ -84,123 +84,117 @@ import org.cip4.jdflib.auto.JDFAutoApprovalDetails.EnumApprovalState;
 import org.cip4.jdflib.core.ElementName;
 import org.w3c.dom.DOMException;
 
-
 public class JDFApprovalSuccess extends JDFAutoApprovalSuccess
 {
-    private static final long serialVersionUID = 1L;
-    
-    /**
-     * Constructor for JDFApprovalSuccess
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFApprovalSuccess(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
-    
-    
-    /**
-     * Constructor for JDFApprovalSuccess
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFApprovalSuccess(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
-    
-    /**
-     * Constructor for JDFApprovalSuccess
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFApprovalSuccess(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-    
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFApprovalSuccess[  --> " + super.toString() + " ]" ;
-    }
-    
-    
-    /**
-     * fixes an ApprovalSuccess by moving the appropriate elements in and out of ApprovalDetails elements
-     * @see org.cip4.jdflib.resource.JDFResource#fixVersion(org.cip4.jdflib.core.JDFElement.EnumVersion)
-     */
-    public boolean fixVersion(EnumVersion version)
-    {
-        boolean bRet=true;
-        if(version!=null)
-        {
-            // create ApprovalDetails
-            if(version.getValue()>=EnumVersion.Version_1_3.getValue()){
-                if(hasChildElement(ElementName.CONTACT,null)||hasChildElement(ElementName.FILESPEC,null))
-                {
-                    JDFApprovalDetails ad=appendApprovalDetails();
-                    ad.setApprovalState(EnumApprovalState.Approved);
-                    ad.moveElement(getContact(),null);
-                    ad.moveElement(getFileSpec(),null);
-                }
-            }else{   // remove ApprovalDetails
-                for(int i=0;i<99999;i++)
-                {
-                    JDFApprovalDetails ad=getApprovalDetails(i);
-                    int iAccept=0;
-                    if(ad==null)
-                    {
-                        if(iAccept==0)
-                        {
-                            setResStatus(EnumResStatus.Rejected,false);
-                        }
-                        break; // none left
-                    }
-                    
-                    if(ad.getApprovalState()==EnumApprovalState.Rejected)
-                    {
-                        bRet=false;
-                        ad.deleteNode();               
-                        continue;  // semantics of reject are not available in 1.2 and below ignore
-                    }
-                    iAccept++;
-                    moveElement(ad.getContact(),null);
-                    moveElement(ad.getFileSpec(),null);
-                    ad.deleteNode();               
-                }
-            }
-        }
-        return super.fixVersion(version) && bRet;
-    }
-    
-    
-    
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Constructor for JDFApprovalSuccess
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFApprovalSuccess(CoreDocumentImpl myOwnerDocument,
+			String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFApprovalSuccess
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFApprovalSuccess(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFApprovalSuccess
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFApprovalSuccess(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName, String myLocalName)
+			throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFApprovalSuccess[  --> " + super.toString() + " ]";
+	}
+
+	/**
+	 * fixes an ApprovalSuccess by moving the appropriate elements in and out of
+	 * ApprovalDetails elements
+	 * 
+	 * @see org.cip4.jdflib.resource.JDFResource#fixVersion(org.cip4.jdflib.core.JDFElement.EnumVersion)
+	 */
+	public boolean fixVersion(EnumVersion version)
+	{
+		boolean bRet = true;
+		if (version != null)
+		{
+			// create ApprovalDetails
+			if (version.getValue() >= EnumVersion.Version_1_3.getValue())
+			{
+				if (hasChildElement(ElementName.CONTACT, null)
+						|| hasChildElement(ElementName.FILESPEC, null))
+				{
+					JDFApprovalDetails ad = appendApprovalDetails();
+					ad.setApprovalState(EnumApprovalState.Approved);
+					ad.moveElement(getContact(), null);
+					ad.moveElement(getFileSpec(), null);
+				}
+			} else
+			{ // remove ApprovalDetails
+				for (int i = 0; i < 99999; i++)
+				{
+					JDFApprovalDetails ad = getApprovalDetails(i);
+					int iAccept = 0;
+					if (ad == null)
+					{
+						if (iAccept == 0)
+						{
+							setResStatus(EnumResStatus.Rejected, false);
+						}
+						break; // none left
+					}
+
+					if (ad.getApprovalState() == EnumApprovalState.Rejected)
+					{
+						bRet = false;
+						ad.deleteNode();
+						continue; // semantics of reject are not available in
+									// 1.2 and below ignore
+					}
+					iAccept++;
+					moveElement(ad.getContact(), null);
+					moveElement(ad.getFileSpec(), null);
+					ad.deleteNode();
+				}
+			}
+		}
+		return super.fixVersion(version) && bRet;
+	}
+
 }
-
-
-

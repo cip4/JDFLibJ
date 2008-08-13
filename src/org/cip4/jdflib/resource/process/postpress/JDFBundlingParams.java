@@ -77,54 +77,58 @@ package org.cip4.jdflib.resource.process.postpress;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoBundlingParams;
 
-
 public class JDFBundlingParams extends JDFAutoBundlingParams
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * ructor for JDFBundlingParams
-     * @param ownerDocument
-     * @param qualifiedName
-     */
-    public JDFBundlingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * ructor for JDFBundlingParams
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 */
+	public JDFBundlingParams(CoreDocumentImpl myOwnerDocument,
+			String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * ructor for JDFBundlingParams
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     */
-    public JDFBundlingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * ructor for JDFBundlingParams
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFBundlingParams(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * ructor for JDFBundlingParams
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     */
-    public JDFBundlingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-            String qualifiedName, String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * ructor for JDFBundlingParams
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 */
+	public JDFBundlingParams(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFBundlingParams[  --> " + super.toString() + " ]";
-    }
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFBundlingParams[  --> " + super.toString() + " ]";
+	}
 }

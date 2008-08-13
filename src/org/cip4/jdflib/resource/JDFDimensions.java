@@ -13,63 +13,52 @@ package org.cip4.jdflib.resource;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.w3c.dom.DOMException;
 
-
 public class JDFDimensions extends JDFResource
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFDimensions
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-     public JDFDimensions(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-        throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFDimensions
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFDimensions(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFDimensions
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFDimensions(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFDimensions
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFDimensions(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-         throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFDimensions
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFDimensions(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFDimensions
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFDimensions(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-        throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-
-    public String toString()
-    {
-        return "JDFDimensions[  --> " + super.toString() + " ]";
-    }
+	public String toString()
+	{
+		return "JDFDimensions[  --> " + super.toString() + " ]";
+	}
 } // class JDFIDPLayout
 // ==========================================================================

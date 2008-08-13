@@ -98,93 +98,89 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.KElement;
 import org.w3c.dom.DOMException;
 
-
 public class JDFPROccurrence extends JDFAutoPROccurrence
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFPROccurrence
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFPROccurrence(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFPROccurrence
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFPROccurrence(CoreDocumentImpl myOwnerDocument,
+			String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFPROccurrence
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFPROccurrence(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFPROccurrence
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFPROccurrence(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFPROccurrence
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFPROccurrence(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName, String myLocalName)
+			throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFPROccurrence
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFPROccurrence(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(JDFConstants.STAR, 0x33333333,
+				AttributeInfo.EnumAttributeType.Any, null, null);
+	}
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static 
-    { 
-        atrInfoTable[0] = new AtrInfoTable(JDFConstants.STAR,0x33333333, AttributeInfo.EnumAttributeType.Any, null,null);
-    }
-    protected AttributeInfo getTheAttributeInfo() 
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFPROccurrence[  --> " + super.toString() + " ]";
-    }
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFPROccurrence[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * increment occurrences by i if this lives in a standard preflight report
+	 * tree, also increment the appropriate higher up counters
+	 * 
+	 * @param i
+	 */
+	public void addOccurrences(int i, EnumSeverity sev)
+	{
+		addAttribute(AttributeName.OCCURRENCES, i, null);
+		KElement e = getParentNode_KElement();
+		if (e instanceof JDFPRGroup)
+			((JDFPRGroup) e).addOccurrences(i, sev);
 
-    /**
-     * increment occurrences by i
-     * if this lives in a standard preflight report tree, also increment the appropriate higher up counters
-     * @param i
-     */
-    public void addOccurrences(int i, EnumSeverity sev)
-    {
-        addAttribute(AttributeName.OCCURRENCES, i, null);
-        KElement e=getParentNode_KElement();
-        if (e instanceof JDFPRGroup)
-            ((JDFPRGroup)e).addOccurrences(i,sev);
-
-    }
+	}
 }

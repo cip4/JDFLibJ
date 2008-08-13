@@ -38,7 +38,7 @@
  *
  * Usage of this software in commercial products is subject to restrictions. For
  * details please consult info@cip4.org.
-  *
+ *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -91,191 +91,196 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.w3c.dom.DOMException;
 
-
 public class JDFColorantAlias extends JDFAutoColorantAlias
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFColorantAlias
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFColorantAlias(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFColorantAlias
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFColorantAlias(CoreDocumentImpl myOwnerDocument,
+			String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFColorantAlias
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFColorantAlias(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFColorantAlias
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFColorantAlias(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFColorantAlias
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFColorantAlias(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName, String myLocalName)
+			throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFColorantAlias
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFColorantAlias(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(
+				AttributeName.REPLACEMENTCOLORANTNAME, 0x22222222,
+				AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.REPLACEMENTCOLORANTNAME, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-    }
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x22222222);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.SEPARATIONSPEC,
+				0x22222222);
+	}
 
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFColorantAlias[  --> " + super.toString() + " ]";
-    }
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
-    /* ---------------------------------------------------------------------
-    Methods for Attribute ReplacementColorantName
-    --------------------------------------------------------------------- */
-    /**
-     * (36) set attribute ReplacementColorantName
-     * @param value: the value to set the attribute to
-     */
-    public void setReplacementColorantName(String value)
-    {
-        setAttribute(AttributeName.REPLACEMENTCOLORANTNAME, value, null);
-    }
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFColorantAlias[  --> " + super.toString() + " ]";
+	}
 
+	/*
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ReplacementColorantName
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (36) set attribute ReplacementColorantName
+	 * 
+	 * @param value
+	 *            : the value to set the attribute to
+	 */
+	public void setReplacementColorantName(String value)
+	{
+		setAttribute(AttributeName.REPLACEMENTCOLORANTNAME, value, null);
+	}
 
+	/**
+	 * (23) get String attribute ReplacementColorantName
+	 * 
+	 * @return the value of the attribute
+	 */
+	public String getReplacementColorantName()
+	{
+		return getAttribute(AttributeName.REPLACEMENTCOLORANTNAME, null,
+				JDFConstants.EMPTYSTRING);
+	}
 
-    /**
-     * (23) get String attribute ReplacementColorantName
-     * @return the value of the attribute
-     */
-    public String getReplacementColorantName()
-    {
-        return getAttribute(AttributeName.REPLACEMENTCOLORANTNAME, null, JDFConstants.EMPTYSTRING);
-    }
+	/**
+	 * append a separationspec with a given name to this
+	 * 
+	 * @param sep
+	 *            the separation name
+	 */
+	public void appendSeparation(String sep)
+	{
+		appendSeparationSpec().setName(sep);
+	}
 
+	/**
+	 * Get the n'th separation name in the SeparationSpec elements
+	 * 
+	 * @param iSkip
+	 *            the index of the SeparationSpec
+	 * @return separation names, null if iSkip > nSeparations
+	 */
+	public String getSeparation(int iSkip)
+	{
+		JDFSeparationSpec ss = getSeparationSpec(iSkip);
+		if (ss == null)
+			return null;
+		return ss.getName();
+	}
 
-    /**
-     * append a separationspec with a given name to this
-     * @param sep the separation name
-     */
-    public void appendSeparation(String sep)
-    {
-        appendSeparationSpec().setName(sep);
-    }
+	/**
+	 * Get a list of all separation names in the SeparationSpec elements
+	 * 
+	 * @return the vector of separation names
+	 */
+	public VString getSeparations()
+	{
+		VString vName = new VString();
+		VElement v = getChildElementVector(ElementName.SEPARATIONSPEC, null,
+				null, false, 0, false);
+		int nSep = v.size();
+		for (int i = 0; i < nSep; i++)
+		{
+			JDFSeparationSpec sep = (JDFSeparationSpec) v.elementAt(i);
+			String sepName = sep.getName();
+			vName.appendUnique(sepName);
+		}
+		return vName;
+	}
 
+	/**
+	 * remove a separationspec with a given name from this
+	 * 
+	 * @param sep
+	 *            the separation name
+	 * @return int the index of the removed separation; -1 if none found
+	 */
+	public int removeSeparation(String sep)
+	{
+		VString vs = getSeparations();
+		final int index = vs.index(sep);
+		if (index >= 0)
+			getSeparationSpec(index).deleteNode();
+		return index;
+	}
 
-    /**
-     * Get the n'th separation name in the SeparationSpec elements
-     * @param iSkip the index of the SeparationSpec
-     * @return separation names, null if iSkip > nSeparations
-     */
-    public String getSeparation(int iSkip) 
-    {
-        JDFSeparationSpec ss=getSeparationSpec(iSkip);
-        if(ss==null)
-            return null;
-        return ss.getName();        
-    }
+	/**
+	 * set all separation names in the SeparationSpec elements, remove any prior
+	 * elements
+	 * 
+	 * @param vSeps
+	 *            the vector of separation names to set
+	 */
+	public void setSeparations(VString vSeps)
+	{
+		removeChildren(ElementName.SEPARATIONSPEC, null, null);
+		if (vSeps == null)
+			return;
 
-
-    /**
-     * Get a list of all separation names in the SeparationSpec elements
-     * @return the vector of separation names
-     */
-    public VString getSeparations() 
-    {
-        VString vName=new VString();
-        VElement v=getChildElementVector(ElementName.SEPARATIONSPEC,null,null,false,0,false);
-        int nSep=v.size();
-        for(int i=0;i<nSep;i++)
-        {
-            JDFSeparationSpec sep=(JDFSeparationSpec) v.elementAt(i);
-            String sepName=sep.getName();
-            vName.appendUnique(sepName);
-        }
-        return vName;
-    }
-
-
-    /**
-     * remove a separationspec with a given name from this
-     * 
-     * @param sep the separation name
-     * @return int the index of the removed separation; -1 if none found
-     */
-    public int removeSeparation(String sep)
-    {
-        VString vs=getSeparations();
-        final int index=vs.index(sep);
-        if (index>=0)
-            getSeparationSpec(index).deleteNode();
-        return index;
-    }
-
-
-    /**
-     * set all separation names in the SeparationSpec elements,
-     * remove any prior elements
-     * 
-     * @param vSeps the vector of separation names to set
-     */
-    public void setSeparations(VString vSeps) 
-    {
-        removeChildren(ElementName.SEPARATIONSPEC,null,null);
-        if(vSeps==null)
-            return;
-        
-        for(int i=0;i<vSeps.size();i++)
-        {
-            appendSeparation(vSeps.stringAt(i));
-        }
-    }
+		for (int i = 0; i < vSeps.size(); i++)
+		{
+			appendSeparation(vSeps.stringAt(i));
+		}
+	}
 
 }

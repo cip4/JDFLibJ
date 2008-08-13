@@ -74,96 +74,97 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoLayoutElement;
 import org.w3c.dom.DOMException;
 
-
 public class JDFLayoutElement extends JDFAutoLayoutElement
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFLayoutElement
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFLayoutElement(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFLayoutElement
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFLayoutElement(CoreDocumentImpl myOwnerDocument,
+			String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFLayoutElement
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFLayoutElement(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFLayoutElement
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFLayoutElement(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFLayoutElement
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFLayoutElement(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName, String myLocalName)
+			throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFLayoutElement
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFLayoutElement(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	// **************************************** Methods
+	// *********************************************
 
-    //**************************************** Methods *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFLayoutElement[ --> " + super.toString() + " ]";
+	}
 
-    /**
-     * toString
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFLayoutElement[ --> " + super.toString() + " ]";
-    }
+	/**
+	 * SetFileName set FileName and URL in the FileSpec
+	 * 
+	 * @param String
+	 *            fileName
+	 * @deprecated use setMimeURL
+	 */
+	public void setFileName(String fileName)
+	{
+		getCreateFileSpec().setURL(fileName);
+	}
 
-    /**
-     * SetFileName set FileName and URL in the FileSpec
-     * @param String fileName
-     * @deprecated use setMimeURL
-     */
-    public void setFileName(String fileName)
-    {
-        getCreateFileSpec().setURL(fileName);
-    }
-    /**
-     * SetFileName set FileName and URL in the FileSpec
-     * @param String fileName
-     */
-    public void setMimeURL(String fileName)
-    {
-         getCreateFileSpec().setMimeURL(fileName);
-    }
+	/**
+	 * SetFileName set FileName and URL in the FileSpec
+	 * 
+	 * @param String
+	 *            fileName
+	 */
+	public void setMimeURL(String fileName)
+	{
+		getCreateFileSpec().setMimeURL(fileName);
+	}
 
-    /**
-     * this is broken - needs to be a vector
-     * @deprecated 060907
-     */
-    public JDFPageData getPageListPageData()
-    {
-        //TODO lena - make vector
-        return getPageList().getPageData(0);
-    }
+	/**
+	 * this is broken - needs to be a vector
+	 * 
+	 * @deprecated 060907
+	 */
+	public JDFPageData getPageListPageData()
+	{
+		// TODO lena - make vector
+		return getPageList().getPageData(0);
+	}
 }

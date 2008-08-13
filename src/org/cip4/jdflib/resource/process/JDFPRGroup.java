@@ -96,117 +96,112 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.w3c.dom.DOMException;
 
-
 public class JDFPRGroup extends JDFAutoPRGroup
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFPRGroup
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-     public JDFPRGroup(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-        throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFPRGroup
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFPRGroup(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+			throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFPRGroup
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFPRGroup(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
+			String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFPRGroup
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFPRGroup(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-         throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFPRGroup
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFPRGroup(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
+			String qualifiedName, String myLocalName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFPRGroup
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFPRGroup(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-        throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFPRGroup[  --> " + super.toString() + " ]";
+	}
 
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFPRGroup[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return
+	 */
+	public JDFPRGroupOccurrence getPRGroupOccurrence()
+	{
+		// TODO Dietrich fix in autoFile
+		return getPRGroupOccurrence(0);
+	}
 
+	/**
+	 * @param groupMap
+	 * @return
+	 */
+	public JDFPROccurrence getCreatePROccurrence(JDFAttributeMap groupMap)
+	{
+		JDFPROccurrence po = getPROccurrence(groupMap);
+		if (po == null)
+		{
+			po = appendPROccurrence();
+			po.setAttributes(groupMap);
+		}
+		return po;
+	}
 
-    /**
-     * @return
-     */
-    public JDFPRGroupOccurrence getPRGroupOccurrence()
-    {
-        // TODO Dietrich fix in autoFile
-        return getPRGroupOccurrence(0);
-    }
-    
-    /**
-     * @param groupMap
-     * @return
-     */
-    public JDFPROccurrence getCreatePROccurrence(JDFAttributeMap groupMap)
-    {
-        JDFPROccurrence po=getPROccurrence(groupMap);
-        if(po==null)
-        {
-            po=appendPROccurrence();
-            po.setAttributes(groupMap);
-        }
-        return po;
-    }
-    /**
-     * @param groupMap
-     * @return
-     */
-    public JDFPROccurrence getPROccurrence(JDFAttributeMap groupMap)
-    {
-        return  (JDFPROccurrence)getChildByTagName(ElementName.PROCCURRENCE, null, 0, groupMap, true, true);
-    }
-    
-    /**
-     * increment occurrences by i
-     * if this lives in a standard preflight report tree, also increment the appropriate higher up counters
-     * @param i
-     */
-    public void addOccurrences(int i, EnumSeverity sev)
-    {
-        addAttribute(AttributeName.OCCURRENCES, i, null);
-        KElement e=getParentNode_KElement();
-        if (e instanceof JDFPRItem)
-            ((JDFPRItem)e).addOccurrences(i, sev);
-        else if (e instanceof JDFPROccurrence)
-            ((JDFPROccurrence)e).addOccurrences(i,sev);
+	/**
+	 * @param groupMap
+	 * @return
+	 */
+	public JDFPROccurrence getPROccurrence(JDFAttributeMap groupMap)
+	{
+		return (JDFPROccurrence) getChildByTagName(ElementName.PROCCURRENCE,
+				null, 0, groupMap, true, true);
+	}
 
-    }
+	/**
+	 * increment occurrences by i if this lives in a standard preflight report
+	 * tree, also increment the appropriate higher up counters
+	 * 
+	 * @param i
+	 */
+	public void addOccurrences(int i, EnumSeverity sev)
+	{
+		addAttribute(AttributeName.OCCURRENCES, i, null);
+		KElement e = getParentNode_KElement();
+		if (e instanceof JDFPRItem)
+			((JDFPRItem) e).addOccurrences(i, sev);
+		else if (e instanceof JDFPROccurrence)
+			((JDFPROccurrence) e).addOccurrences(i, sev);
+
+	}
 }

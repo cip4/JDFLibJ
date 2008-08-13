@@ -13,57 +13,52 @@ package org.cip4.jdflib.resource.process.postpress;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoHoleMakingParams;
 
-
 public class JDFHoleMakingParams extends JDFAutoHoleMakingParams
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFHoleMakingParams
-     * @param ownerDocument
-     * @param qualifiedName
-     */
-     public JDFHoleMakingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFHoleMakingParams
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 */
+	public JDFHoleMakingParams(CoreDocumentImpl myOwnerDocument,
+			String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFHoleMakingParams
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFHoleMakingParams(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFHoleMakingParams
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     */
-    public JDFHoleMakingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFHoleMakingParams
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 */
+	public JDFHoleMakingParams(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFHoleMakingParams
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     */
-    public JDFHoleMakingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-
-    public String toString()
-    {
-        return "JDFHoleMakingParams[  --> " + super.toString() + " ]";
-    }
+	public String toString()
+	{
+		return "JDFHoleMakingParams[  --> " + super.toString() + " ]";
+	}
 
 }

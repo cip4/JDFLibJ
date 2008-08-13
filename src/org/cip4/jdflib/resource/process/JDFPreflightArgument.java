@@ -83,81 +83,77 @@ import org.cip4.jdflib.auto.JDFAutoBoxArgument.EnumBox;
 import org.cip4.jdflib.core.ElementName;
 import org.w3c.dom.DOMException;
 
-
 public class JDFPreflightArgument extends JDFAutoPreflightArgument
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFPreflightArgument
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-     public JDFPreflightArgument(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-        throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFPreflightArgument
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFPreflightArgument(CoreDocumentImpl myOwnerDocument,
+			String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFPreflightArgument
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFPreflightArgument(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFPreflightArgument
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFPreflightArgument(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-         throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFPreflightArgument
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFPreflightArgument(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName, String myLocalName)
+			throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFPreflightArgument
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFPreflightArgument(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-        throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFPreflightArgument[  --> " + super.toString() + " ]";
+	}
 
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFPreflightArgument[  --> " + super.toString() + " ]";
-    }
-    
-    /**
-     * append a boxargument and set its box type to the value defined in box
-     * @param type
-     * @return
-     */
-    public JDFBoxArgument appendBoxArgument(EnumBox type)
-    {
-        JDFBoxArgument ba= (JDFBoxArgument) appendElementN(ElementName.BOXARGUMENT,1, null);
-        ba.setBox(type);
-        return ba;
-    }
-    
+	/**
+	 * append a boxargument and set its box type to the value defined in box
+	 * 
+	 * @param type
+	 * @return
+	 */
+	public JDFBoxArgument appendBoxArgument(EnumBox type)
+	{
+		JDFBoxArgument ba = (JDFBoxArgument) appendElementN(
+				ElementName.BOXARGUMENT, 1, null);
+		ba.setBox(type);
+		return ba;
+	}
+
 }

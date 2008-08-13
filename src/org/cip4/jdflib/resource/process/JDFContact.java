@@ -93,207 +93,220 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.VString;
 import org.w3c.dom.DOMException;
 
-
 public class JDFContact extends JDFAutoContact
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    public static final class EnumContactType extends ValuedEnum
-    {
-        private static final long serialVersionUID = 1L;
-        private static int m_startValue = 0;
+	public static final class EnumContactType extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
-        private EnumContactType(String name)
-        {
-            super(name, m_startValue++);
-        }
+		private EnumContactType(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-         * @param   enumName the name of the enum object to return
-         * @return  the enum object if enumName is valid. Otherwise null
-         */
-        public static EnumContactType getEnum(String enumName)
-        {
-            return (EnumContactType) getEnum(EnumContactType.class, enumName);
-        }
+		/**
+		 * @param enumName
+		 *            the name of the enum object to return
+		 * @return the enum object if enumName is valid. Otherwise null
+		 */
+		public static EnumContactType getEnum(String enumName)
+		{
+			return (EnumContactType) getEnum(EnumContactType.class, enumName);
+		}
 
-        /**
-         * @param  enumValue the value of the enum object to return
-         * @return the enum object if enumName is valid. Otherwise null
-         */
-        public static EnumContactType getEnum(int enumValue)
-        {
-            return (EnumContactType) getEnum(EnumContactType.class, enumValue);
-        }
+		/**
+		 * @param enumValue
+		 *            the value of the enum object to return
+		 * @return the enum object if enumName is valid. Otherwise null
+		 */
+		public static EnumContactType getEnum(int enumValue)
+		{
+			return (EnumContactType) getEnum(EnumContactType.class, enumValue);
+		}
 
-        /**
-         * @return a map of all EnumContactType enums
-         */
-        public static Map getEnumMap()
-        {
-            return getEnumMap(EnumContactType.class);
-        }
+		/**
+		 * @return a map of all EnumContactType enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumContactType.class);
+		}
 
-        /**
-         * @return a list of all EnumContactType enums
-         */
-        public static List getEnumList()
-        {
-            return getEnumList(EnumContactType.class);
-        }
+		/**
+		 * @return a list of all EnumContactType enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumContactType.class);
+		}
 
-        /**
-         * @return an iterator over the enum objects
-         */
-        public static Iterator iterator()
-        {
-            return iterator(EnumContactType.class);
-        }
-        public static final EnumContactType Accounting      = new EnumContactType("Accounting");
-        public static final EnumContactType Administrator   = new EnumContactType("Administrator");
-        public static final EnumContactType Approver        = new EnumContactType("Approver");
-        public static final EnumContactType ArtReturn       = new EnumContactType("ArtReturn");
-        public static final EnumContactType Billing         = new EnumContactType("Billing");
-        public static final EnumContactType Customer        = new EnumContactType("Customer");
-        public static final EnumContactType Delivery        = new EnumContactType("Delivery");
-        public static final EnumContactType DeliveryCharge  = new EnumContactType("DeliveryCharge");
-        public static final EnumContactType Owner           = new EnumContactType("Owner");
-        public static final EnumContactType Pickup          = new EnumContactType("Pickup");
-        public static final EnumContactType Sender          = new EnumContactType("Sender");
-        public static final EnumContactType Supplier        = new EnumContactType("Supplier");
-        public static final EnumContactType SurplusReturn   = new EnumContactType("SurplusReturn");
-    }
+		/**
+		 * @return an iterator over the enum objects
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumContactType.class);
+		}
 
-    /**
-     * Constructor for JDFContact
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFContact(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+		public static final EnumContactType Accounting = new EnumContactType(
+				"Accounting");
+		public static final EnumContactType Administrator = new EnumContactType(
+				"Administrator");
+		public static final EnumContactType Approver = new EnumContactType(
+				"Approver");
+		public static final EnumContactType ArtReturn = new EnumContactType(
+				"ArtReturn");
+		public static final EnumContactType Billing = new EnumContactType(
+				"Billing");
+		public static final EnumContactType Customer = new EnumContactType(
+				"Customer");
+		public static final EnumContactType Delivery = new EnumContactType(
+				"Delivery");
+		public static final EnumContactType DeliveryCharge = new EnumContactType(
+				"DeliveryCharge");
+		public static final EnumContactType Owner = new EnumContactType("Owner");
+		public static final EnumContactType Pickup = new EnumContactType(
+				"Pickup");
+		public static final EnumContactType Sender = new EnumContactType(
+				"Sender");
+		public static final EnumContactType Supplier = new EnumContactType(
+				"Supplier");
+		public static final EnumContactType SurplusReturn = new EnumContactType(
+				"SurplusReturn");
+	}
 
+	/**
+	 * Constructor for JDFContact
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFContact(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+			throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFContact
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFContact(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFContact
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFContact(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
+			String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFContact
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFContact(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * Constructor for JDFContact
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFContact(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
+			String qualifiedName, String myLocalName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFContact[  --> " + super.toString() + " ]";
-    }
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFContact[  --> " + super.toString() + " ]";
+	}
 
-    /**
-     * Set attribute ContactTypes
-     * @deprecated use getContactTypes
-     *@param vKString value: the value to set the attribute to
-     */
-    public void setExtendedContactTypes (VString value)
-    {
-        setContactTypes(value);
-    }
+	/**
+	 * Set attribute ContactTypes
+	 * 
+	 * @deprecated use getContactTypes
+	 *@param vKString
+	 *            value: the value to set the attribute to
+	 */
+	public void setExtendedContactTypes(VString value)
+	{
+		setContactTypes(value);
+	}
 
-    /**
-     * Get string attribute ContactTypes
-     * @deprecated use setContactTypes
-     * @return vKString the vaue of the attribute 
-     */
-    public VString getExtendedContactTypes()
-    {
-        return getContactTypes();
-    }
+	/**
+	 * Get string attribute ContactTypes
+	 * 
+	 * @deprecated use setContactTypes
+	 * @return vKString the vaue of the attribute
+	 */
+	public VString getExtendedContactTypes()
+	{
+		return getContactTypes();
+	}
 
+	/**
+	 * @param typ
+	 *            the single contacttype to set this contact to
+	 */
+	public void setContactTypes(EnumContactType typ)
+	{
+		if (typ == null)
+			removeAttribute(AttributeName.CONTACTTYPES);
+		else
+			setAttribute(AttributeName.CONTACTTYPES, typ.getName(), null);
 
-    /**
-     * @param typ the single contacttype to set this contact to
-     */
-    public void setContactTypes(EnumContactType typ)
-    {
-        if(typ==null)
-           removeAttribute(AttributeName.CONTACTTYPES);
-        else
-            setAttribute(AttributeName.CONTACTTYPES, typ.getName(),null);
-        
-    }
-    /**
-     * @param typ the single contacttype to set this contact to
-     */
-    public void addContactTypes(EnumContactType typ)
-    {
-        if(typ!=null)
-            appendAttribute(AttributeName.CONTACTTYPES, typ.getName(), null, " ", true);
-       
-    }
-    
-    /**
-     * append a comChannel with a given channelType
-     * @param channelType
-     * @return
-     */
-    public JDFComChannel appendComChannel(EnumChannelType channelType)
-    {
-        JDFComChannel comCh=appendComChannel();
-        comCh.setChannelType(channelType);
-        return comCh;
-    }
+	}
 
+	/**
+	 * @param typ
+	 *            the single contacttype to set this contact to
+	 */
+	public void addContactTypes(EnumContactType typ)
+	{
+		if (typ != null)
+			appendAttribute(AttributeName.CONTACTTYPES, typ.getName(), null,
+					" ", true);
 
-    /**
-     * @param firstName
-     * @param familyName
-     */
-    public JDFPerson setPerson(String firstName, String familyName)
-    {
-        JDFPerson p=null;
-        if(firstName!=null || familyName!=null)
-        {
-            p=getCreatePerson();
-            p.setFirstName(firstName);
-            p.setFamilyName(familyName);
-        }
-        return p;
-    }
+	}
 
-    
+	/**
+	 * append a comChannel with a given channelType
+	 * 
+	 * @param channelType
+	 * @return
+	 */
+	public JDFComChannel appendComChannel(EnumChannelType channelType)
+	{
+		JDFComChannel comCh = appendComChannel();
+		comCh.setChannelType(channelType);
+		return comCh;
+	}
+
+	/**
+	 * @param firstName
+	 * @param familyName
+	 */
+	public JDFPerson setPerson(String firstName, String familyName)
+	{
+		JDFPerson p = null;
+		if (firstName != null || familyName != null)
+		{
+			p = getCreatePerson();
+			p.setFirstName(firstName);
+			p.setFamilyName(familyName);
+		}
+		return p;
+	}
+
 }

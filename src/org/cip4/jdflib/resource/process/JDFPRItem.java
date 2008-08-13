@@ -90,143 +90,134 @@ import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.w3c.dom.DOMException;
 
-
 public class JDFPRItem extends JDFAutoPRItem
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFPRItem
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-     public JDFPRItem(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-        throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFPRItem
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFPRItem(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+			throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFPRItem
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFPRItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
+			String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFPRItem
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFPRItem(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-         throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFPRItem
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFPRItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
+			String qualifiedName, String myLocalName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFPRItem
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFPRItem(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-        throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFPRItem[  --> " + super.toString() + " ]";
+	}
 
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFPRItem[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @param groupMap
+	 * @return
+	 */
+	public JDFPRGroup getPRGroup(JDFAttributeMap groupMap)
+	{
+		VElement v = getChildElementVector(ElementName.PRGROUP, null, null,
+				true, -1, false);
+		for (int i = 0; i < v.size(); i++)
+		{
+			JDFPRGroup pg = (JDFPRGroup) v.elementAt(i);
+			JDFPRGroupOccurrence pgo = pg.getPRGroupOccurrence();
+			if (pgo == null)
+				continue;
+			JDFAttributeMap map = pgo.getAttributeMap();
+			if (map.subMap(groupMap))
+				return pg;
+		}
+		return null;
+	}
 
+	/**
+	 * @param groupMap
+	 * @return
+	 */
+	public JDFPRGroup getCreatePRGroup(JDFAttributeMap groupMap)
+	{
+		JDFPRGroup pg = getPRGroup(groupMap);
+		if (pg == null)
+		{
+			pg = appendPRGroup();
+			pg.appendPRGroupOccurrence().setAttributes(groupMap);
+		}
+		return pg;
+	}
 
-    /**
-     * @param groupMap
-     * @return
-     */
-    public JDFPRGroup getPRGroup(JDFAttributeMap groupMap)
-    {
-        VElement v= getChildElementVector(ElementName.PRGROUP, null, null, true, -1, false);
-        for(int i=0;i<v.size();i++)
-        {
-            JDFPRGroup pg=(JDFPRGroup)v.elementAt(i);
-            JDFPRGroupOccurrence pgo=pg.getPRGroupOccurrence();
-            if(pgo==null)
-                continue;
-            JDFAttributeMap map=pgo.getAttributeMap();
-            if(map.subMap(groupMap))
-                return pg;
-        }
-        return null;
-    }
+	/**
+	 * increment occurrences by i if this lives in a standard preflight report
+	 * tree, also increment the appropriate higher up counters
+	 * 
+	 * @param i
+	 */
+	public void addOccurrences(int i, EnumSeverity sev)
+	{
+		addAttribute(AttributeName.OCCURRENCES, i, null);
+		KElement e = getParentNode_KElement();
+		if (e instanceof JDFPreflightReport)
+		{
+			((JDFPreflightReport) e).addOccurrences(i, sev);
+		}
 
+	}
 
-    /**
-     * @param groupMap
-     * @return
-     */
-    public JDFPRGroup getCreatePRGroup(JDFAttributeMap groupMap)
-    {
-        JDFPRGroup pg=getPRGroup(groupMap);
-        if(pg==null)
-        {
-            pg=appendPRGroup();
-            pg.appendPRGroupOccurrence().setAttributes(groupMap);
-        }
-        return pg;
-    }
+	/**
+	 * insert pageSet into PageSet.
+	 * 
+	 * @param pageSet
+	 */
+	public void insertPageSet(int pageSet)
+	{
+		JDFIntegerRangeList irl = getPageSet();
+		if (irl == null)
+		{
+			setPageSet(new JDFIntegerRangeList(new JDFIntegerRange(pageSet)));
+		} else if (!irl.inRange(pageSet))
+		{
+			irl.append(pageSet);
+			irl.normalize(true);
+			setPageSet(irl);
+		}
 
-
-    /**
-     * increment occurrences by i
-     * if this lives in a standard preflight report tree, also increment the appropriate higher up counters
-     * @param i
-     */
-    public void addOccurrences(int i, EnumSeverity sev)
-    {
-        addAttribute(AttributeName.OCCURRENCES, i, null);
-        KElement e=getParentNode_KElement();
-        if (e instanceof JDFPreflightReport)
-        {
-            ((JDFPreflightReport)e).addOccurrences(i, sev);
-        }
-
-    }
-
-
-    /**
-     * insert pageSet into PageSet.
-     * @param pageSet
-     */
-    public void insertPageSet(int pageSet)
-    {
-        JDFIntegerRangeList irl=getPageSet();
-        if(irl==null)
-        {
-            setPageSet(new JDFIntegerRangeList(new JDFIntegerRange(pageSet)));
-        }
-        else if(!irl.inRange(pageSet))
-        {
-            irl.append(pageSet);
-            irl.normalize(true);
-            setPageSet(irl);
-        }
-        
-    }
+	}
 }

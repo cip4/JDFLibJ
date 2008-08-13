@@ -86,129 +86,122 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 
-
 public class JDFPerson extends JDFAutoPerson
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFPerson
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFPerson(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFPerson
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFPerson(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+			throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFPerson
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFPerson(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
+			String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFPerson
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFPerson(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFPerson
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFPerson(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
+			String qualifiedName, String myLocalName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFPerson
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFPerson(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	public String toString()
+	{
+		return "JDFPerson[  --> " + super.toString() + " ]";
+	}
 
-    public String toString()
-    {
-        return "JDFPerson[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * sets the familyname to value and also appends FamilyName to value in case
+	 * descriptivename is either FirstName or empty/null
+	 * 
+	 * @param familyName
+	 *            the family name to set
+	 */
+	public void setFamilyName(String familyName)
+	{
+		String oldName = getAttribute(AttributeName.FAMILYNAME, null, null);
+		super.setFamilyName(familyName);
+		if (familyName == null)
+			return;
+		String descName = getDescriptiveName();
+		if (descName == null || descName.equals(""))
+		{
+			setDescriptiveName(familyName);
+		} else if (descName.equals(getFirstName()))
+		{
+			setDescriptiveName(getFirstName() + " " + familyName);
+		} else if (oldName != null && descName.endsWith(oldName))
+		{
+			descName = StringUtil.replaceString(descName, oldName, familyName);
+			setDescriptiveName(descName);
+		}
 
+	}
 
-    /**
-     *  sets the familyname to value and also appends FamilyName to value in case descriptivename is either FirstName or empty/null
-     *  @param familyName the family name to set
-     */
-    public void setFamilyName(String familyName)
-    {
-        String oldName=getAttribute(AttributeName.FAMILYNAME, null, null);
-        super.setFamilyName(familyName);
-        if(familyName==null)
-            return;
-        String descName=getDescriptiveName();
-        if(descName==null || descName.equals(""))
-        {
-            setDescriptiveName(familyName);
-        }
-        else if(descName.equals(getFirstName()))
-        {
-            setDescriptiveName(getFirstName()+" "+familyName);
-        }
-        else if(oldName!=null && descName.endsWith(oldName))
-        {
-            descName=StringUtil.replaceString(descName, oldName, familyName);
-            setDescriptiveName(descName);
-        }
+	/**
+	 * sets the firstame to value and also prepends firstName to value in case
+	 * descriptivename is either FirstName or empty/null
+	 * 
+	 * @param firstName
+	 *            the family name to set
+	 */
+	public void setFirstName(String firstName)
+	{
+		String oldName = getAttribute(AttributeName.FIRSTNAME, null, null);
 
-    }
+		super.setFirstName(firstName);
+		if (firstName == null)
+			return;
+		String descName = getDescriptiveName();
+		if (descName == null || descName.equals(""))
+		{
+			setDescriptiveName(firstName);
+		} else if (descName.equals(getFamilyName()))
+		{
+			setDescriptiveName(firstName + " " + getFamilyName());
+		} else if (oldName != null && descName.startsWith(oldName))
+		{
+			descName = StringUtil.replaceString(descName, oldName, firstName);
+			setDescriptiveName(descName);
+		}
+	}
 
-
-    /**
-     *  sets the firstame to value and also prepends firstName to value in case descriptivename is either FirstName or empty/null
-     *  @param firstName the family name to set
-     */
-    public void setFirstName(String firstName)
-    {
-        String oldName=getAttribute(AttributeName.FIRSTNAME, null, null);
-
-        super.setFirstName(firstName);
-        if(firstName==null)
-            return;
-        String descName=getDescriptiveName();
-        if(descName==null || descName.equals(""))
-        {
-            setDescriptiveName(firstName);
-        }
-        else if(descName.equals(getFamilyName()))
-        {
-            setDescriptiveName(firstName+" "+getFamilyName());
-        }
-        else if(oldName!=null && descName.startsWith(oldName))
-        {
-            descName=StringUtil.replaceString(descName, oldName, firstName);
-            setDescriptiveName(descName);
-        }
-    }
-
-
-    /* (non-Javadoc)
-     * @see java.lang.Object#clone()
-     */
-    protected Object clone() throws CloneNotSupportedException
-    {
-        // TODO Auto-generated method stub
-        return super.clone();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#clone()
+	 */
+	protected Object clone() throws CloneNotSupportedException
+	{
+		// TODO Auto-generated method stub
+		return super.clone();
+	}
 } // class JDFPerson
-//==========================================================================
+// ==========================================================================

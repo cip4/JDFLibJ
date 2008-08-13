@@ -38,7 +38,7 @@
  *
  * Usage of this software in commercial products is subject to restrictions. For
  * details please consult info@cip4.org.
-  *
+ *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -91,223 +91,222 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 
-
 public class JDFPhaseTime extends JDFAutoPhaseTime
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFPhaseTime
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    public JDFPhaseTime(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFPhaseTime
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	public JDFPhaseTime(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFPhaseTime
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    public JDFPhaseTime(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFPhaseTime
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFPhaseTime(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFPhaseTime
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    public JDFPhaseTime(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * Constructor for JDFPhaseTime
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	public JDFPhaseTime(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * toString()
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFPhaseTime[  --> " + super.toString() + " ]";
-    }
-    
- 
-    /**
-     * set all parts to those defined in vParts
-     * @param vParts vector of attribute maps for the parts
-     */
-    public void setPartMapVector(VJDFAttributeMap vParts)
-    {
-        super.setPartMapVector(vParts);
-    }
+	/**
+	 * toString()
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFPhaseTime[  --> " + super.toString() + " ]";
+	}
 
-    /**
-     * set all parts to those defined by mPart
-     * @param mPart attribute map for the part to set
-     */
-    public void setPartMap(JDFAttributeMap mPart)
-    {
-        super.setPartMap(mPart);
-    }
+	/**
+	 * set all parts to those defined in vParts
+	 * 
+	 * @param vParts vector of attribute maps for the parts
+	 */
+	public void setPartMapVector(VJDFAttributeMap vParts)
+	{
+		super.setPartMapVector(vParts);
+	}
 
-    /**
-     * remove the part defined by mPart
-     * @param mPart attribute map for the part to remove
-     */
-    public void removePartMap(JDFAttributeMap mPart)
-    {
-        super.removePartMap(mPart);
-    }
+	/**
+	 * set all parts to those defined by mPart
+	 * 
+	 * @param mPart attribute map for the part to set
+	 */
+	public void setPartMap(JDFAttributeMap mPart)
+	{
+		super.setPartMap(mPart);
+	}
 
-    /**
-     * check whether the part defined in mPart is included
-     * @param mPart attribute map to look for
-     * @return boolean - returns true if the part exists
-     */
-    public boolean hasPartMap(JDFAttributeMap mPart)
-    {
-        return super.hasPartMap(mPart);
-    }
-    
-    /**
-     * return a vector of unknown element nodenames
-     * <p>
-     * default: GetInvalidElements(true, 999999)
-     * 
-     * @param bIgnorePrivate used by JDFElement during the validation
-     * @param nMax           maximum size of the returned vector
-     * @return Vector - vector of unknown element nodenames
-     * 
-     * !!! Do not change the signature of this method
-     */
-    public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
-    {
-        if(bIgnorePrivate)
-            bIgnorePrivate=false; // dummy to fool compiler
-        return getUnknownPoolElements(JDFElement.EnumPoolType.ResourceLinkPool, nMax);
-    }
+	/**
+	 * remove the part defined by mPart
+	 * 
+	 * @param mPart attribute map for the part to remove
+	 */
+	public void removePartMap(JDFAttributeMap mPart)
+	{
+		super.removePartMap(mPart);
+	}
 
+	/**
+	 * check whether the part defined in mPart is included
+	 * 
+	 * @param mPart attribute map to look for
+	 * @return boolean - returns true if the part exists
+	 */
+	public boolean hasPartMap(JDFAttributeMap mPart)
+	{
+		return super.hasPartMap(mPart);
+	}
 
-    /**
-     * copy a Vector of resourceLinks into this PhaseTime
-     * 
-     * @param vRL the Vector of resourceLinks to copy - the order is significant, because
-     * the first rl will be used to fill the Amount in Signal/DeviceInfo/JobPhase  
-     */
-    public void setLinks(VElement vRL)
-    {
-        if(vRL==null)
-            return;
-        final int size = vRL.size();
-        if(size==0)
-            return;
-        
-        for(int i=0;i<size;i++)
-        {        
-            JDFResourceLink rl=(JDFResourceLink)vRL.elementAt(i);
-            removeChildren(rl.getLocalName(), rl.getNamespaceURI(),null);
-        }
-        for(int i=0;i<size;i++)
-        {            
-            JDFResourceLink rl=(JDFResourceLink)vRL.elementAt(i);
-            copyElement(rl, null);
-        }
-    }
+	/**
+	 * return a vector of unknown element nodenames
+	 * <p>
+	 * default: GetInvalidElements(true, 999999)
+	 * 
+	 * @param bIgnorePrivate used by JDFElement during the validation
+	 * @param nMax maximum size of the returned vector
+	 * @return Vector - vector of unknown element nodenames
+	 * 
+	 *         !!! Do not change the signature of this method
+	 */
+	public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
+	{
+		if (bIgnorePrivate)
+			bIgnorePrivate = false; // dummy to fool compiler
+		return getUnknownPoolElements(JDFElement.EnumPoolType.ResourceLinkPool, nMax);
+	}
 
+	/**
+	 * copy a Vector of resourceLinks into this PhaseTime
+	 * 
+	 * @param vRL the Vector of resourceLinks to copy - the order is significant, because the first rl will be used to
+	 *            fill the Amount in Signal/DeviceInfo/JobPhase
+	 */
+	public void setLinks(VElement vRL)
+	{
+		if (vRL == null)
+			return;
+		final int size = vRL.size();
+		if (size == 0)
+			return;
 
-    /**
-     * return the ResourceLink in <code>this</code>, null if none exists
-     * @param iSkip the nTh resourceLink to retrieve
-     * @return JDFResourceLink - <code>this</code> phaseTimes ResourceLink
-     */
-    public JDFResourceLink getLink(int iSkip)
-    {
-        KElement e=getFirstChildElement();
-        int n=0;
-        while(e!=null)
-        {
-            if(e instanceof JDFResourceLink)
-            {
-                if(n++>=iSkip)
-                    return (JDFResourceLink)e;
-            }
-            e=e.getNextSiblingElement();
-        }
-        return null;
-    }
-    
-    /**
-     * return the ResourceLink in <code>this</code>, null if none exists
-     * @param iSkip the n'th resourceLink to retrieve
-     * @return JDFResourceLink - this phaseTimes ResourceLink
-     */
-    public VElement getLinkVector()
-    {
-        KElement e=getFirstChildElement();
-        VElement vRet=new VElement();
-        while(e!=null)
-        {
-            if(e instanceof JDFResourceLink)
-            {
-                vRet.add(e);
-            }
-            e=e.getNextSiblingElement();
-        }
-        return vRet.size()==0 ? null : vRet;
-    }
-    /**
-     * get the implied duration from Start and End
-     * @return JDFDuration the duration
-     */
-    public JDFDuration getDuration()
-    {
-        JDFDate dStart=getStart();
-        JDFDate dEnd=getEnd();
-        if(dStart==null || dEnd==null)
-            return null;
-        int dur = (int)((dEnd.getTimeInMillis()-dStart.getTimeInMillis())/1000);
-        if(dur<0)
-            dur=0;
-        return new JDFDuration(dur);
-    }
+		for (int i = 0; i < size; i++)
+		{
+			JDFResourceLink rl = (JDFResourceLink) vRL.elementAt(i);
+			removeChildren(rl.getLocalName(), rl.getNamespaceURI(), null);
+		}
+		for (int i = 0; i < size; i++)
+		{
+			JDFResourceLink rl = (JDFResourceLink) vRL.elementAt(i);
+			copyElement(rl, null);
+		}
+	}
 
-    /**
-     * @param m_moduleid the list of module ids to add, if null: nop
-     * @return the list of ModulePhase element
-     * @throws IllegalArgumentException if the vectors have different lengths
-     */
-    public VElement setModules(VString moduleIDs, VString moduleTypes)
-    {
-        if(moduleIDs==null || moduleIDs.size()==0)
-            return null;
-        if(moduleTypes==null || moduleTypes.size()==0 || moduleTypes.size()!=moduleIDs.size())
-            throw new IllegalArgumentException("Inconsistent vector lengths");
-        VElement v=new VElement();
-        for(int i=0;i<moduleIDs.size();i++)
-        {
-            final JDFModulePhase modulePhase = getCreateModulePhase(i);
-            v.add(modulePhase);
-            modulePhase.setModuleID(moduleIDs.stringAt(i));
-            modulePhase.setModuleType(moduleTypes.stringAt(i));
-        }
-        return v;
-    }   
-    
+	/**
+	 * return the ResourceLink in <code>this</code>, null if none exists
+	 * 
+	 * @param iSkip the nTh resourceLink to retrieve
+	 * @return JDFResourceLink - <code>this</code> phaseTimes ResourceLink
+	 */
+	public JDFResourceLink getLink(int iSkip)
+	{
+		KElement e = getFirstChildElement();
+		int n = 0;
+		while (e != null)
+		{
+			if (e instanceof JDFResourceLink)
+			{
+				if (n++ >= iSkip)
+					return (JDFResourceLink) e;
+			}
+			e = e.getNextSiblingElement();
+		}
+		return null;
+	}
+
+	/**
+	 * return the ResourceLink in <code>this</code>, null if none exists
+	 * 
+	 * @param iSkip the n'th resourceLink to retrieve
+	 * @return JDFResourceLink - this phaseTimes ResourceLink
+	 */
+	public VElement getLinkVector()
+	{
+		KElement e = getFirstChildElement();
+		VElement vRet = new VElement();
+		while (e != null)
+		{
+			if (e instanceof JDFResourceLink)
+			{
+				vRet.add(e);
+			}
+			e = e.getNextSiblingElement();
+		}
+		return vRet.size() == 0 ? null : vRet;
+	}
+
+	/**
+	 * get the implied duration from Start and End
+	 * 
+	 * @return JDFDuration the duration
+	 */
+	public JDFDuration getDuration()
+	{
+		JDFDate dStart = getStart();
+		JDFDate dEnd = getEnd();
+		if (dStart == null || dEnd == null)
+			return null;
+		int dur = (int) ((dEnd.getTimeInMillis() - dStart.getTimeInMillis()) / 1000);
+		if (dur < 0)
+			dur = 0;
+		return new JDFDuration(dur);
+	}
+
+	/**
+	 * @param m_moduleid the list of module ids to add, if null: nop
+	 * @return the list of ModulePhase element
+	 * @throws IllegalArgumentException if the vectors have different lengths
+	 */
+	public VElement setModules(VString moduleIDs, VString moduleTypes)
+	{
+		if (moduleIDs == null || moduleIDs.size() == 0)
+			return null;
+		if (moduleTypes == null || moduleTypes.size() == 0 || moduleTypes.size() != moduleIDs.size())
+			throw new IllegalArgumentException("Inconsistent vector lengths");
+		VElement v = new VElement();
+		for (int i = 0; i < moduleIDs.size(); i++)
+		{
+			final JDFModulePhase modulePhase = getCreateModulePhase(i);
+			v.add(modulePhase);
+			modulePhase.setModuleID(moduleIDs.stringAt(i));
+			modulePhase.setModuleType(moduleTypes.stringAt(i));
+		}
+		return v;
+	}
+
 } // class JDFPhaseTime
 // ==========================================================================

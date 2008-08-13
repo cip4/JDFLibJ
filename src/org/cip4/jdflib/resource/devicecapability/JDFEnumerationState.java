@@ -95,413 +95,447 @@ import org.cip4.jdflib.util.StringUtil;
 
 public class JDFEnumerationState extends JDFAbstractState
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
-    static 
-    {
-        atrInfoTable[0]  = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST,  0x33333331, AttributeInfo.EnumAttributeType.enumerations, null, null);
-        atrInfoTable[1]  = new AtrInfoTable(AttributeName.CURRENTVALUE,      0x33333331, AttributeInfo.EnumAttributeType.enumeration, null, null);
-        atrInfoTable[2]  = new AtrInfoTable(AttributeName.DEFAULTVALUE,      0x33333331, AttributeInfo.EnumAttributeType.enumeration, null, null);
-        atrInfoTable[3]  = new AtrInfoTable(AttributeName.PRESENTVALUELIST,  0x33333331, AttributeInfo.EnumAttributeType.enumerations, null, null);
-        atrInfoTable[4]  = new AtrInfoTable(AttributeName.ALLOWEDREGEXP,     0x33331111, AttributeInfo.EnumAttributeType.RegExp, null, null);
-        atrInfoTable[5]  = new AtrInfoTable(AttributeName.PRESENTREGEXP,     0x33331111, AttributeInfo.EnumAttributeType.RegExp, null, null);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST,
+				0x33333331, AttributeInfo.EnumAttributeType.enumerations, null,
+				null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CURRENTVALUE,
+				0x33333331, AttributeInfo.EnumAttributeType.enumeration, null,
+				null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEFAULTVALUE,
+				0x33333331, AttributeInfo.EnumAttributeType.enumeration, null,
+				null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PRESENTVALUELIST,
+				0x33333331, AttributeInfo.EnumAttributeType.enumerations, null,
+				null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.ALLOWEDREGEXP,
+				0x33331111, AttributeInfo.EnumAttributeType.RegExp, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.PRESENTREGEXP,
+				0x33331111, AttributeInfo.EnumAttributeType.RegExp, null, null);
+	}
 
-    @Override
-	protected AttributeInfo getTheAttributeInfo() 
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.VALUELOC, 0x33333311);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.VALUELOC, 0x33333311);
-    }
-
-    @Override
+	@Override
 	protected ElementInfo getTheElementInfo()
-    {
-        return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
-    }
+	{
+		return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
+	}
 
-    /**
-     * constructor for JDFEnumerationState
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    public JDFEnumerationState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * constructor for JDFEnumerationState
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	public JDFEnumerationState(CoreDocumentImpl myOwnerDocument,
+			String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * constructor for JDFEnumerationState
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    public JDFEnumerationState(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * constructor for JDFEnumerationState
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFEnumerationState(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * constructor for JDFEnumerationState
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    public JDFEnumerationState(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * constructor for JDFEnumerationState
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	public JDFEnumerationState(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    //**************************************** Methods *********************************************
+	// **************************************** Methods
+	// *********************************************
 
-    /**
-     * toString
-     * @return String
-     */
-    @Override
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	@Override
 	public String toString()
-    {
-        return "JDFEnumerationState[ --> " + super.toString() + " ]";
-    }
+	{
+		return "JDFEnumerationState[ --> " + super.toString() + " ]";
+	}
 
-    /* ******************************************************
-	// Attribute getter / setter
-     **************************************************************** */
+	/*
+	 * // Attribute getter / setter
+	 */
 
-    public void setCurrentValue(String value)
-    {
-        setAttribute(AttributeName.CURRENTVALUE, value);
-    }
+	public void setCurrentValue(String value)
+	{
+		setAttribute(AttributeName.CURRENTVALUE, value);
+	}
 
-    public String getCurrentValue()
-    {
-        return getAttribute(AttributeName.CURRENTVALUE, null, JDFConstants.EMPTYSTRING);
-    }
+	public String getCurrentValue()
+	{
+		return getAttribute(AttributeName.CURRENTVALUE, null,
+				JDFConstants.EMPTYSTRING);
+	}
 
-    public void setDefaultValue(String value)
-    {
-        setAttribute(AttributeName.DEFAULTVALUE, value);
-    }
+	public void setDefaultValue(String value)
+	{
+		setAttribute(AttributeName.DEFAULTVALUE, value);
+	}
 
-    public String getDefaultValue()
-    {
-        return getAttribute(AttributeName.DEFAULTVALUE, null, JDFConstants.EMPTYSTRING);
-    }
+	public String getDefaultValue()
+	{
+		return getAttribute(AttributeName.DEFAULTVALUE, null,
+				JDFConstants.EMPTYSTRING);
+	}
 
-    public VString getAllowedValueList()
-    {
-        final String attribute = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
-        return attribute==null ? null : new VString(attribute, null);
-    }
+	public VString getAllowedValueList()
+	{
+		final String attribute = getAttribute(AttributeName.ALLOWEDVALUELIST,
+				null, null);
+		return attribute == null ? null : new VString(attribute, null);
+	}
 
-    public void setAllowedValueList( VString vs)
-    {
-        setAttribute(AttributeName.ALLOWEDVALUELIST, StringUtil.setvString(vs," ",null,null), null);
-    }
+	public void setAllowedValueList(VString vs)
+	{
+		setAttribute(AttributeName.ALLOWEDVALUELIST, StringUtil.setvString(vs,
+				" ", null, null), null);
+	}
 
-    public VString getPresentValueList()
-    {
-        if (hasAttribute(AttributeName.PRESENTVALUELIST))
-        {
-            return new VString(getAttribute(AttributeName.PRESENTVALUELIST, null, JDFConstants.EMPTYSTRING), null);
-        }
-        return getAllowedValueList();
-    }
+	public VString getPresentValueList()
+	{
+		if (hasAttribute(AttributeName.PRESENTVALUELIST))
+		{
+			return new VString(getAttribute(AttributeName.PRESENTVALUELIST,
+					null, JDFConstants.EMPTYSTRING), null);
+		}
+		return getAllowedValueList();
+	}
 
-    public void setPresentValueList(VString vs)
-    {
-        String s = JDFConstants.EMPTYSTRING;
-        if(vs != null)
-        {
-            s = StringUtil.setvString(vs," ",null,null);
-        }
-        setAttribute(AttributeName.PRESENTVALUELIST, s);
-    }
+	public void setPresentValueList(VString vs)
+	{
+		String s = JDFConstants.EMPTYSTRING;
+		if (vs != null)
+		{
+			s = StringUtil.setvString(vs, " ", null, null);
+		}
+		setAttribute(AttributeName.PRESENTVALUELIST, s);
+	}
 
-    /* ******************************************************
-	// Element getter / setter
-     **************************************************************** */
+	/*
+	 * // Element getter / setter
+	 */
 
-    /* (non-Javadoc)
-     * @see org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java.lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
-     */
-    @Override
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java
+	 * .lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
+	 */
+	@Override
 	public void addValue(String value, EnumFitsValue testlists)
-    {
-        if(fitsValue(value, testlists))
-            return;
+	{
+		if (fitsValue(value, testlists))
+			return;
 
-        if(testlists==null || EnumFitsValue.Allowed.equals(testlists))
-        {
-            VString list=getAllowedValueList();
-            if(list==null)
-                list=new VString();
-            list.appendUnique(value);
-            setAllowedValueList(list);
-        }
-        if(testlists==null || EnumFitsValue.Present.equals(testlists))
-        {
-            VString list=getPresentValueList();
-            if(list==null || !hasAttribute(AttributeName.PRESENTVALUELIST))
-                list=new VString();
-            list.appendUnique(value);
-            setPresentValueList(list);
-        }        
-    }
-    /**
-     * fitsValue - tests whether <code>value</code> matches the Allowed test lists
-     * or Present test lists, specified for this State
-     *
-     * @param value    value to test
-     * @param testlist the test lists the value has to match.
-     *                 In this State there is only one test list - ValueList. <br>
-     *                 Choose one of two values: FitsValue_Allowed or FitsValue_Present (Defaults to Allowed).
-     * 
-     * @return boolean - true, if 'value' matches testlists or if AllowedValueList is not specified
-     */    
-    @Override
+		if (testlists == null || EnumFitsValue.Allowed.equals(testlists))
+		{
+			VString list = getAllowedValueList();
+			if (list == null)
+				list = new VString();
+			list.appendUnique(value);
+			setAllowedValueList(list);
+		}
+		if (testlists == null || EnumFitsValue.Present.equals(testlists))
+		{
+			VString list = getPresentValueList();
+			if (list == null || !hasAttribute(AttributeName.PRESENTVALUELIST))
+				list = new VString();
+			list.appendUnique(value);
+			setPresentValueList(list);
+		}
+	}
+
+	/**
+	 * fitsValue - tests whether <code>value</code> matches the Allowed test
+	 * lists or Present test lists, specified for this State
+	 * 
+	 * @param value
+	 *            value to test
+	 * @param testlist
+	 *            the test lists the value has to match. In this State there is
+	 *            only one test list - ValueList. <br>
+	 *            Choose one of two values: FitsValue_Allowed or
+	 *            FitsValue_Present (Defaults to Allowed).
+	 * 
+	 * @return boolean - true, if 'value' matches testlists or if
+	 *         AllowedValueList is not specified
+	 */
+	@Override
 	public boolean fitsValue(String value, EnumFitsValue testlists)
-    {
-        if (fitsListType(value))
-            return (fitsValueList(value,testlists) && fitsRegExp(value,testlists));
-        return false;
-    }
+	{
+		if (fitsListType(value))
+			return (fitsValueList(value, testlists) && fitsRegExp(value,
+					testlists));
+		return false;
+	}
 
-    /**
-     * fitsValueList - tests whether <code>value</code> matches 
-     * the AllowedValueList or the PresentValueList, specified for this State
-     *
-     * @param value     nmtokens to test
-     * @param valuelist switches between AllowedValueList and PresentValueList.
-     * @return boolean - true, if <code>value</code> matches valuelist or if AllowedValueList is not specified
-     */
-    private final boolean fitsValueList(String value, EnumFitsValue valuelist)
-    {
-        VString vs = new VString(value, null);
+	/**
+	 * fitsValueList - tests whether <code>value</code> matches the
+	 * AllowedValueList or the PresentValueList, specified for this State
+	 * 
+	 * @param value
+	 *            nmtokens to test
+	 * @param valuelist
+	 *            switches between AllowedValueList and PresentValueList.
+	 * @return boolean - true, if <code>value</code> matches valuelist or if
+	 *         AllowedValueList is not specified
+	 */
+	private final boolean fitsValueList(String value, EnumFitsValue valuelist)
+	{
+		VString vs = new VString(value, null);
 
-        VString list;
-        if (valuelist.equals(EnumFitsValue.Allowed)) 
-        {
-            list = getAllowedValueList();
-        } 
-        else  
-        {
-            list = getPresentValueList();
-        }
-        if (list==null)
-            return true;
+		VString list;
+		if (valuelist.equals(EnumFitsValue.Allowed))
+		{
+			list = getAllowedValueList();
+		} else
+		{
+			list = getPresentValueList();
+		}
+		if (list == null)
+			return true;
 
-        EnumListType listType = getListType();
-        if (listType.equals(EnumListType.CompleteList))
-        {
-            return fitsCompleteList(vs,list);
-        }
-        else if (listType.equals(EnumListType.CompleteOrderedList))
-        { 
-            return fitsCompleteOrderedList(vs,list);
-        }
-        else if (listType.equals(EnumListType.ContainedList))
-        {
-            return fitsContainedList(vs,list);
-        }
+		EnumListType listType = getListType();
+		if (listType.equals(EnumListType.CompleteList))
+		{
+			return fitsCompleteList(vs, list);
+		} else if (listType.equals(EnumListType.CompleteOrderedList))
+		{
+			return fitsCompleteOrderedList(vs, list);
+		} else if (listType.equals(EnumListType.ContainedList))
+		{
+			return fitsContainedList(vs, list);
+		}
 
-        int v_size = vs.size();
-        int l_size = list.size();
+		int v_size = vs.size();
+		int l_size = list.size();
 
-        for (int i=0; i<v_size; i++) // test every token, that 'value' consists of
-        {
-            boolean bFound = false;
-            for (int j=0; j<l_size; j++)
-            {
-                String ve = vs.elementAt(i);
-                String le = list.elementAt(j);
-                if (ve.compareTo(le)==0) 
-                {
-                    bFound = true;  
-                    break;
-                }
-            }
-            if (!bFound)
-                return false; // no such value in the 'list'
-        }
-        return true;
-    }
+		for (int i = 0; i < v_size; i++) // test every token, that 'value'
+											// consists of
+		{
+			boolean bFound = false;
+			for (int j = 0; j < l_size; j++)
+			{
+				String ve = vs.elementAt(i);
+				String le = list.elementAt(j);
+				if (ve.compareTo(le) == 0)
+				{
+					bFound = true;
+					break;
+				}
+			}
+			if (!bFound)
+				return false; // no such value in the 'list'
+		}
+		return true;
+	}
 
+	/**
+	 * fitsCompleteList - tests whether <code>value</code> matches
+	 * AllowedValueList or PresentValueList (ListType=CompleteList)
+	 * 
+	 * @param value
+	 *            value to test
+	 * @param list
+	 *            testlist, either AllowedValueList or PresentValueList.
+	 * 
+	 * @return boolean - true, if <code>value</code> matches testlist
+	 */
+	private final boolean fitsCompleteList(VString value, VString list)
+	{
+		int v_size = value.size();
+		int l_size = list.size();
 
-    /**
-     * fitsCompleteList - tests whether <code>value</code> matches AllowedValueList or PresentValueList
-     * (ListType=CompleteList)
-     *
-     * @param value value to test
-     * @param list testlist, either AllowedValueList or PresentValueList.
-     * 
-     * @return boolean - true, if <code>value</code> matches testlist
-     */
-    private final boolean fitsCompleteList(VString value, VString list)
-    {
-        int v_size=value.size();
-        int l_size=list.size();
+		if (v_size != l_size)
+			return false;
 
-        if (v_size!=l_size) 
-            return false; 
+		if (!isUnique(value))
+			return false;
 
-        if (!isUnique(value)) 
-            return false;
+		VString valueList = new VString(value);
 
-        VString valueList = new VString(value);
+		boolean bFound;
+		for (int i = l_size - 1; i >= 0; i--)
+		{
+			bFound = false;
+			for (int j = valueList.size() - 1; j >= 0; j--)
+			{
+				if (list.elementAt(i).equals(valueList.elementAt(j)))
+				{
+					valueList.remove(j);
+					bFound = true;
+					break;
+				}
+			}
+			if (!bFound)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
 
-        boolean bFound;
-        for (int i=l_size-1; i>=0; i--)
-        {
-            bFound = false;
-            for (int j=valueList.size()-1; j>=0; j--)       
-            {
-                if (list.elementAt(i).equals(valueList.elementAt(j)))
-                {
-                    valueList.remove(j);
-                    bFound = true;
-                    break;
-                }
-            }
-            if (!bFound) 
-            {
-                return false;
-            }
-        }
-        return true;
-    }
+	/**
+	 * fitsCompleteOrderedList - tests whether <code>value</code> matches
+	 * AllowedValueList or PresentValueList (ListType=CompleteOrderedList)
+	 * 
+	 * @param value
+	 *            value to test
+	 * @param list
+	 *            testlist, either AllowedValueList or PresentValueList.
+	 * 
+	 * @return boolean - true, if 'value' matches testlist
+	 */
+	private final boolean fitsCompleteOrderedList(VString value, VString list)
+	{
+		int v_size = value.size();
+		int l_size = list.size();
 
+		if (v_size != l_size)
+			return false;
 
-    /**
-     * fitsCompleteOrderedList - tests whether <code>value</code> matches AllowedValueList or PresentValueList
-     * (ListType=CompleteOrderedList)
-     *
-     * @param value value to test
-     * @param list  testlist, either AllowedValueList or PresentValueList.
-     * 
-     * @return boolean - true, if 'value' matches testlist
-     */
-    private final boolean fitsCompleteOrderedList(VString value, VString list)
-    {
-        int v_size = value.size();
-        int l_size = list.size();
+		if (!isUnique(value))
+			return false;
 
-        if ( v_size != l_size ) 
-            return false; 
+		for (int i = 0; i < l_size; i++)
+		{
+			if (!list.elementAt(i).equals(value.elementAt(i)))
+			{
+				return false;
+			}
+		}
+		return true;
+	}
 
-        if (!isUnique(value)) 
-            return false;
+	/**
+	 * fitsContainedList - tests whether <code>value</code> matches
+	 * AllowedValueList or PresentValueList (ListType=ContainedList)
+	 * 
+	 * @param value
+	 *            value to test
+	 * @param list
+	 *            testlist, either AllowedValueList or PresentValueList.
+	 * 
+	 * @return boolean - true, if 'value' matches testlist
+	 */
+	private final boolean fitsContainedList(VString value, VString list)
+	{
+		int v_size = value.size();
+		int l_size = list.size();
 
-        for (int i=0; i<l_size; i++)
-        {
-            if (!list.elementAt(i).equals(value.elementAt(i))) 
-            {
-                return false;
-            }
-        }
-        return true;        
-    }
+		for (int i = 0; i < v_size; i++)
+		{
+			for (int j = 0; j < l_size; j++)
+			{
+				if (value.elementAt(i).equals(list.elementAt(j)))
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
-    /**
-     * fitsContainedList - tests whether <code>value</code> matches AllowedValueList or PresentValueList
-     * (ListType=ContainedList)
-     *
-     * @param value value to test
-     * @param list  testlist, either AllowedValueList or PresentValueList.
-     * 
-     * @return boolean - true, if 'value' matches testlist
-     */
-    private final boolean fitsContainedList(VString value, VString list)
-    {
-        int v_size = value.size();
-        int l_size = list.size();
+	/**
+	 * isUnique - tests, if 'value' string has unique tokens only
+	 * 
+	 * @param value
+	 *            value to test
+	 * @return boolean - true, if <code>value</code> has unique tokens only
+	 */
+	private final boolean isUnique(VString v)
+	{
+		int size = v.size();
+		for (int i = 0; i < size; i++)
+		{
+			for (int j = 0; j < size; j++)
+			{
+				if (j != i)
+				{
+					String si = v.elementAt(i);
+					String sj = v.elementAt(j);
+					if (si.compareTo(sj) == 0)
+						return false;
+				}
+			}
+		}
+		return true;
+	}
 
-        for (int i=0; i<v_size; i++)
-        {
-            for (int j=0; j<l_size; j++)
-            {
-                if (value.elementAt(i).equals(list.elementAt(j))) 
-                {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
-     * isUnique - tests, if 'value' string has unique tokens only
-     *
-     * @param value value to test
-     * @return boolean - true, if <code>value</code> has unique tokens only
-     */ 
-    private final boolean isUnique(VString v)
-    {
-        int size = v.size();
-        for (int i=0; i<size; i++)
-        {
-            for (int j=0; j<size; j++)
-            {
-                if ( j!=i ) 
-                {
-                    String si =v.elementAt(i);
-                    String sj =v.elementAt(j);
-                    if (si.compareTo(sj)==0) 
-                        return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
+	@Override
 	public String getAllowedRegExp()
-    {
-        return getAttribute(AttributeName.ALLOWEDREGEXP, null, JDFConstants.EMPTYSTRING);
-    }
+	{
+		return getAttribute(AttributeName.ALLOWEDREGEXP, null,
+				JDFConstants.EMPTYSTRING);
+	}
 
-    @Override
+	@Override
 	public String getPresentRegExp()
-    {
-        if (hasAttribute(AttributeName.PRESENTREGEXP))
-        {
-            return getAttribute(AttributeName.PRESENTREGEXP);
-        }
-        return getAllowedRegExp();
-    }
+	{
+		if (hasAttribute(AttributeName.PRESENTREGEXP))
+		{
+			return getAttribute(AttributeName.PRESENTREGEXP);
+		}
+		return getAllowedRegExp();
+	}
 
-    public void setAllowedRegExp(String value)
-    {
-        setAttribute(AttributeName.ALLOWEDREGEXP, value);
-    }
+	public void setAllowedRegExp(String value)
+	{
+		setAttribute(AttributeName.ALLOWEDREGEXP, value);
+	}
 
-    public void setPresentRegExp(String value)
-    {
-        setAttribute(AttributeName.PRESENTREGEXP, value);
-    }
-    /* (non-Javadoc)
-     * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
-     */
-    @Override
+	public void setPresentRegExp(String value)
+	{
+		setAttribute(AttributeName.PRESENTREGEXP, value);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
+	 */
+	@Override
 	public EnumTerm getEvaluationType()
-    {
-        return EnumTerm.EnumerationEvaluation;
-    }
-
+	{
+		return EnumTerm.EnumerationEvaluation;
+	}
 
 }

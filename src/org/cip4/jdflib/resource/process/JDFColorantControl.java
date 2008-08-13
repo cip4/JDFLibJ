@@ -89,179 +89,171 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.w3c.dom.DOMException;
 
-
 public class JDFColorantControl extends JDFAutoColorantControl
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFColorantControl
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFColorantControl(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFColorantControl
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFColorantControl(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFColorantControl
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFColorantControl(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFColorantControl
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFColorantControl(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFColorantControl
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFColorantControl(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFColorantControl
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFColorantControl(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	@Override
+	public String toString()
+	{
+		return "JDFColorantControl[  --> " + super.toString() + " ]";
+	}
 
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    @Override
-    public String toString()
-    {
-        return "JDFColorantControl[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * get a list of all partition keys that this resource may be implicitly
+	 * partitioned by e.g. RunIndex for RunList...
+	 * 
+	 * @return vector of EnumPartIDKey
+	 */
 
-    /** 
-     * get a list of all partition keys that this resource may be implicitly partitioned by
-     * e.g. RunIndex for RunList...
-     *
-     * @return vector of EnumPartIDKey
-     */
+	@Override
+	public Vector getImplicitPartitions()
+	{
+		Vector<ValuedEnum> v = super.getImplicitPartitions();
+		if (v == null)
+			v = new Vector<ValuedEnum>();
+		v.add(EnumPartIDKey.Separation);
+		return v;
+	}
 
-    @Override
-    public Vector getImplicitPartitions()
-    {
-        Vector<ValuedEnum> v = super.getImplicitPartitions();
-        if(v==null)
-            v=new Vector<ValuedEnum>();
-        v.add(EnumPartIDKey.Separation);
-        return v;
-    }
+	public VString getDeviceColorantOrderSeparations()
+	{
+		if (hasChildElement(ElementName.DEVICECOLORANTORDER, null))
+			return super.getDeviceColorantOrder().getSeparations();
+		return getColorantOrderSeparations();
+	}
 
-    public VString getDeviceColorantOrderSeparations()
-    {
-        if(hasChildElement(ElementName.DEVICECOLORANTORDER,null))
-            return super.getDeviceColorantOrder().getSeparations();
-        return getColorantOrderSeparations();
-    }
+	/**
+	 * 
+	 * @return
+	 */
+	public VString getColorantOrderSeparations()
+	{
+		if (hasChildElement(ElementName.COLORANTORDER, null))
+			return super.getColorantOrder().getSeparations();
+		return getSeparations();
+	}
 
-    /**
-     * 
-     * @return
-     */
-    public VString getColorantOrderSeparations()
-    {
-        if(hasChildElement(ElementName.COLORANTORDER,null))
-            return super.getColorantOrder().getSeparations();
-        return getSeparations();
-    }
-    /**
-     * get the list of separations that this colorantcontrol describes
-     * adds the separations that are implied by ProcessColorModel
-     * 
-     * @return VString the complete list of process and spot colors
-     */
-    public VString getAllSeparations()
-    {
-        VElement e=getLeaves(false);
-        if(e==null)
-            return null;
-        VString allCols=new VString();
-        for(int i=0;i<e.size();i++)
-        {
-            allCols.addAll(((JDFColorantControl)e.get(i)).getSeparations());
-        }
-        allCols.unify();
-        return allCols;
-    }
-    /**
-     * get the list of separations that this colorantcontrol describes
-     * adds the separations that are implied by ProcessColorModel
-     * 
-     * @return VString the complete list of process and spot colors
-     */
-    public VString getSeparations()
-    {
-        VString vName = new VString();
-        String model = getProcessColorModel();
-        if ("DeviceCMY".equals(model))
-        { 
-            vName.add("Cyan");
-            vName.add("Magenta");
-            vName.add("Yellow");
-        }
-        else if ("DeviceCMYK".equals(model))
-        {
-            vName.add("Cyan");
-            vName.add("Magenta");
-            vName.add("Yellow");
-            vName.add("Black");
-        }
-        else if ("DeviceGray".equals(model))
-        {
-            vName.add("Black");
-        }
-        else if ("DeviceRGB".equals(model))
-        {
-            vName.add("Red");
-            vName.add("Green");
-            vName.add("Blue");
-        }
-        else if ("DeviceN".equals(model))
-        {
-            vName = getDeviceNSpace(0).getSeparations();
-        }
+	/**
+	 * get the list of separations that this colorantcontrol describes adds the
+	 * separations that are implied by ProcessColorModel
+	 * 
+	 * @return VString the complete list of process and spot colors
+	 */
+	public VString getAllSeparations()
+	{
+		VElement e = getLeaves(false);
+		if (e == null)
+			return null;
+		VString allCols = new VString();
+		for (int i = 0; i < e.size(); i++)
+		{
+			allCols.addAll(((JDFColorantControl) e.get(i)).getSeparations());
+		}
+		allCols.unify();
+		return allCols;
+	}
 
-        JDFSeparationList colpar=getColorantParams();
-        if(colpar!=null)
-        {
-            vName.appendUnique(colpar.getSeparations());
-        } 
-        vName.unify();
-        return vName;
-    }
+	/**
+	 * get the list of separations that this colorantcontrol describes adds the
+	 * separations that are implied by ProcessColorModel
+	 * 
+	 * @return VString the complete list of process and spot colors
+	 */
+	public VString getSeparations()
+	{
+		VString vName = new VString();
+		String model = getProcessColorModel();
+		if ("DeviceCMY".equals(model))
+		{
+			vName.add("Cyan");
+			vName.add("Magenta");
+			vName.add("Yellow");
+		}
+		else if ("DeviceCMYK".equals(model))
+		{
+			vName.add("Cyan");
+			vName.add("Magenta");
+			vName.add("Yellow");
+			vName.add("Black");
+		}
+		else if ("DeviceGray".equals(model))
+		{
+			vName.add("Black");
+		}
+		else if ("DeviceRGB".equals(model))
+		{
+			vName.add("Red");
+			vName.add("Green");
+			vName.add("Blue");
+		}
+		else if ("DeviceN".equals(model))
+		{
+			vName = getDeviceNSpace(0).getSeparations();
+		}
 
-    /**
-     * always reuse a colorpool
-     */
-    @Override
-    public JDFColorPool getCreateColorPool()
-    {
-        JDFColorPool cp=getColorPool();
-        return cp==null ? super.getCreateColorPool() : cp;
-    }   
+		JDFSeparationList colpar = getColorantParams();
+		if (colpar != null)
+		{
+			vName.appendUnique(colpar.getSeparations());
+		}
+		vName.unify();
+		return vName;
+	}
+
+	/**
+	 * always reuse a colorpool
+	 */
+	@Override
+	public JDFColorPool getCreateColorPool()
+	{
+		JDFColorPool cp = getColorPool();
+		return cp == null ? super.getCreateColorPool() : cp;
+	}
 }

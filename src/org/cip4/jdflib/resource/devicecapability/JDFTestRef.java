@@ -87,139 +87,132 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.w3c.dom.DOMException;
 
-
 public class JDFTestRef extends JDFTerm
 {
-    private static final long serialVersionUID = 1L;
-    
-    
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static 
-    {
-        atrInfoTable[0]  = new AtrInfoTable(AttributeName.RREF, 0x22222222, AttributeInfo.EnumAttributeType.IDREF, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo() 
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
-    
-    
-    /**
-     * Constructor for JDFTestRef
-     * @param myOwnerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFTestRef(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
-    
-    /**
-     * Constructor for JDFTestRef
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFTestRef(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
-    
-    /**
-     * Constructor for JDFTestRef
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     * @throws DOMException
-     */
-    public JDFTestRef(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-    
-    
-    public String toString()
-    {
-        return " JDFTestRef[  --> " + super.toString() + " ]";
-    }
-    
-    public void setrRef(String value)
-    {
-        setAttribute(AttributeName.RREF, value, null);
-    }
-    
-    
-    public String getrRef()
-    {
-        return getAttribute(AttributeName.RREF,  null, JDFConstants.EMPTYSTRING);
-    }
-    
-    
-    /**
-     * get the referenced TEST element
-     * @return the referenced test
-     */
-    public JDFTest getTest()
-    {
-        final JDFTestPool testPool = (JDFTestPool) getDeepParent(ElementName.TESTPOOL,0);
-        return  (JDFTest) testPool.getChildWithAttribute(ElementName.TEST,
-                AttributeName.ID, null,getrRef(),0, true);    
-    }
-    
-/////////////////////////////////////////////////////////////
-    
-    public boolean fitsJDF(KElement jdf, KElement reportRoot)
-    {
-        if(reportRoot!=null)
-            reportRoot=reportRoot.appendElement("TestRef");
-        final JDFTest testElm = getTest();
-        return testElm.fitsJDF(jdf, reportRoot);
-    } 
-    
-/////////////////////////////////////////////////////////////
-    
-    public boolean fitsContext(KElement jdf)
-    {
-        final JDFTest testElm = getTest();
-        return testElm.fitsContext(jdf);
-    } 
-/////////////////////////////////////////////////////////////
-    /**
-     * Tests whether this Term is compatible with the attribute map <code>m</code> 
-     * (and, or, xor, not, Evaluation, TestRef).<br>
-     * To determine the state of Term tests Evaluations that “not” consists of, 
-     * this method checks if attribute map <code>m</code> has a key. 
-     * specified by Evaluation/BasicPreflightTest/@Name
-     * If <code>m</code> has such key, it checks whether the value of <code>m#</code> 
-     * fits the testlists specified for matching Evaluation (uses FitsValue(value))
-     *
-     * @param m key-value pair attribute map
-     * @return boolean - true, if boolean “not” expression evaluates to “true”
-     */
-    public boolean fitsMap(JDFAttributeMap m) 
-    {
-        final JDFTest testElm = getTest();
-        if(testElm==null)
-            return false;
-        return testElm.fitsMap(m); 
-    }
-    
-    /////////////////////////////////////////////////////////////
-    
+	private static final long serialVersionUID = 1L;
+
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.RREF, 0x22222222,
+				AttributeInfo.EnumAttributeType.IDREF, null, null);
+	}
+
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
+
+	/**
+	 * Constructor for JDFTestRef
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFTestRef(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+			throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFTestRef
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFTestRef(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
+			String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFTestRef
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 * @throws DOMException
+	 */
+	public JDFTestRef(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
+			String qualifiedName, String myLocalName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	public String toString()
+	{
+		return " JDFTestRef[  --> " + super.toString() + " ]";
+	}
+
+	public void setrRef(String value)
+	{
+		setAttribute(AttributeName.RREF, value, null);
+	}
+
+	public String getrRef()
+	{
+		return getAttribute(AttributeName.RREF, null, JDFConstants.EMPTYSTRING);
+	}
+
+	/**
+	 * get the referenced TEST element
+	 * 
+	 * @return the referenced test
+	 */
+	public JDFTest getTest()
+	{
+		final JDFTestPool testPool = (JDFTestPool) getDeepParent(
+				ElementName.TESTPOOL, 0);
+		return (JDFTest) testPool.getChildWithAttribute(ElementName.TEST,
+				AttributeName.ID, null, getrRef(), 0, true);
+	}
+
+	// ///////////////////////////////////////////////////////////
+
+	public boolean fitsJDF(KElement jdf, KElement reportRoot)
+	{
+		if (reportRoot != null)
+			reportRoot = reportRoot.appendElement("TestRef");
+		final JDFTest testElm = getTest();
+		return testElm.fitsJDF(jdf, reportRoot);
+	}
+
+	// ///////////////////////////////////////////////////////////
+
+	public boolean fitsContext(KElement jdf)
+	{
+		final JDFTest testElm = getTest();
+		return testElm.fitsContext(jdf);
+	}
+
+	// ///////////////////////////////////////////////////////////
+	/**
+	 * Tests whether this Term is compatible with the attribute map
+	 * <code>m</code> (and, or, xor, not, Evaluation, TestRef).<br>
+	 * To determine the state of Term tests Evaluations that “not” consists of,
+	 * this method checks if attribute map <code>m</code> has a key. specified
+	 * by Evaluation/BasicPreflightTest/@Name If <code>m</code> has such key, it
+	 * checks whether the value of <code>m#</code> fits the testlists specified
+	 * for matching Evaluation (uses FitsValue(value))
+	 * 
+	 * @param m
+	 *            key-value pair attribute map
+	 * @return boolean - true, if boolean “not” expression evaluates to “true”
+	 */
+	public boolean fitsMap(JDFAttributeMap m)
+	{
+		final JDFTest testElm = getTest();
+		if (testElm == null)
+			return false;
+		return testElm.fitsMap(m);
+	}
+
+	// ///////////////////////////////////////////////////////////
+
 }

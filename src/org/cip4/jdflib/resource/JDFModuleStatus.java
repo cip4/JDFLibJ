@@ -68,15 +68,15 @@
  *
  */
 /**
-==========================================================================
-class JDFModuleStatus
-==========================================================================
-@COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001
-ALL RIGHTS RESERVED
-@Author: sabjon@topmail.de   using a code generator
-Warning! very preliminary test version. Interface subject to change without prior notice!
-Revision history:    ...
-**/
+ ==========================================================================
+ class JDFModuleStatus
+ ==========================================================================
+ @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001
+ ALL RIGHTS RESERVED
+ @Author: sabjon@topmail.de   using a code generator
+ Warning! very preliminary test version. Interface subject to change without prior notice!
+ Revision history:    ...
+ **/
 package org.cip4.jdflib.resource;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,89 +85,77 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.VString;
 import org.w3c.dom.DOMException;
 
-
 public class JDFModuleStatus extends JDFAutoModuleStatus
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFModuleStatus
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-     public JDFModuleStatus(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-        throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFModuleStatus
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFModuleStatus(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFModuleStatus
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFModuleStatus(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFModuleStatus
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFModuleStatus(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-         throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFModuleStatus
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFModuleStatus(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFModuleStatus
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFModuleStatus(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-        throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	public String toString()
+	{
+		return "JDFModuleStatus[  --> " + super.toString() + " ]";
+	}
 
-    public String toString()
-    {
-        return "JDFModuleStatus[  --> " + super.toString() + " ]";
-    }
-    
-    /**
-     * This function first, gets all required attributes and then compare
-     * them with the attributes present and returns a Vector with the missing
-     * attributes
-     *
-     * @param nMax       maximum size of the returned Vector
-     *
-     * @return VString vector with the missing attribute names
-     *
-     * @default getMissingAttributes(9999999)
-     */
-    public VString getMissingAttributes(int nMax)
-    {
-        final VString v = super.getMissingAttributes(nMax);
-        if(nMax<=0 || v.size()<=nMax )
-        {
-            if(!hasAttribute(AttributeName.MODULEINDEX)&& !hasAttribute(AttributeName.MODULEID))
-            {
-                v.add(AttributeName.MODULEID);
-                v.add(AttributeName.MODULEINDEX);
-            }
-        }
-        return v;
-        
-    }
+	/**
+	 * This function first, gets all required attributes and then compare them with the attributes present and returns a
+	 * Vector with the missing attributes
+	 * 
+	 * @param nMax maximum size of the returned Vector
+	 * 
+	 * @return VString vector with the missing attribute names
+	 * 
+	 * @default getMissingAttributes(9999999)
+	 */
+	public VString getMissingAttributes(int nMax)
+	{
+		final VString v = super.getMissingAttributes(nMax);
+		if (nMax <= 0 || v.size() <= nMax)
+		{
+			if (!hasAttribute(AttributeName.MODULEINDEX) && !hasAttribute(AttributeName.MODULEID))
+			{
+				v.add(AttributeName.MODULEID);
+				v.add(AttributeName.MODULEINDEX);
+			}
+		}
+		return v;
+
+	}
 
 }

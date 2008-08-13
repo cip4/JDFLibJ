@@ -86,213 +86,207 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.util.StringUtil;
 
-
 public class JDFColor extends JDFAutoColor
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Constructor for JDFColor
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 */
+	public JDFColor(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFColor
-     * @param ownerDocument
-     * @param qualifiedName
-     */
-    public JDFColor(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFColor
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFColor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
+			String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFColor
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 */
+	public JDFColor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
+			String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFColor
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     */
-    public JDFColor(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFColor[  --> " + super.toString() + " ]";
+	}
 
-    /**
-     * Constructor for JDFColor
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     */
-    public JDFColor(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * Set the Name and RawName attributes to the value given in pName The value
+	 * in Name uses the default encoding
+	 * 
+	 * @param char[] cName the 8 bit string to set the name to
+	 */
+	public void set8BitNames(byte[] cName)
+	{
+		String rawName = StringUtil.setHexBinaryBytes(cName, -1);
+		setRawName(rawName);
+		setName(new String(cName));
+	}
 
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFColor[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * Gets the ActualColorName or Name if no ActualColorName is set
+	 * 
+	 * @return String Name of the color extracted from RawName, or if this is
+	 *         missing from Name, using the default transcoder
+	 */
+	public String getActualColorName()
+	{
+		final String strName = getAttribute(AttributeName.ACTUALCOLORNAME,
+				null, null);
+		return strName == null ? getName() : strName;
+	}
 
+	/**
+	 * Gets the 16 bit representation of the 8 bit color name Use String
+	 * GetRawBytes() to extract the 8 bit representation
+	 * 
+	 * @return String Name of the color extracted from RawName, or if this is
+	 *         missing from Name, using the default transcoder
+	 */
+	public String get8BitName()
+	{
+		String strName = getAttribute(AttributeName.RAWNAME, null, null);
+		if (strName != null)
+		{
+			byte[] rawName = strName.getBytes();
+			byte[] foundName = StringUtil.getHexBinaryBytes(rawName);
 
-    /**
-     * Set the Name and RawName attributes to the value given in pName
-     * The value in Name uses the default encoding
-     * @param char[] cName the 8 bit string to set the name to
-     */
-    public void set8BitNames(byte[] cName)
-    {
-        String rawName =  StringUtil.setHexBinaryBytes(cName, -1);
-        setRawName(rawName);
-        setName(new String(cName));
-    }
+			return new String(foundName);
+		}
+		return getActualColorName();
+	}
 
-    /**
-     * Gets the ActualColorName or Name if no ActualColorName is set
-     * @return String Name of the color extracted from RawName,
-     *         or if this is missing from Name, using the default transcoder
-     */
-    public String getActualColorName()
-    {
-        final String strName = getAttribute(AttributeName.ACTUALCOLORNAME, null, null);
-        return strName==null ? getName() : strName;
-    }
+	// //////////////////////////////////////////////////////////////
 
-    /**
-     * Gets the 16 bit representation of the 8 bit color name
-     * Use String GetRawBytes() to extract the 8 bit representation
-     * @return String Name of the color extracted from RawName,
-     *         or if this is missing from Name, using the default transcoder
-     */
-    public String get8BitName()
-    {
-        String strName = getAttribute(AttributeName.RAWNAME, null, null);
-        if (strName!=null)
-        {
-            byte[] rawName   = strName.getBytes();
-            byte[] foundName = StringUtil.getHexBinaryBytes(rawName);
+	public JDFFileSpec getColorProfile()
+	{
+		VElement v = getChildElementVector(ElementName.FILESPEC, null, null,
+				true, 0, false);
+		int siz = v == null ? 0 : v.size();
+		for (int i = 0; i < siz; i++)
+		{
+			JDFFileSpec res = (JDFFileSpec) v.elementAt(i);
+			if (res.hasAttribute(AttributeName.RESOURCEUSAGE))
+			{
+				if (res.getResourceUsage().equals("ColorProfile"))
+				{
+					return res;
+				}
+			}
+		}
+		return null;
+	}
 
-            return new String(foundName);
-        }
-        return getActualColorName();
-    }
+	// /////////////////////////////////////////////////////////////////
 
-    ////////////////////////////////////////////////////////////////
+	public JDFFileSpec getCreateColorProfile()
+	{
+		JDFFileSpec res = getColorProfile();
+		if (res == null)
+		{
+			res = appendColorProfile();
+		}
+		return res;
+	}
 
-    public JDFFileSpec getColorProfile()
-    {
-        VElement v = getChildElementVector(ElementName.FILESPEC, null, null, true, 0, false);
-        int siz    = v==null ? 0 : v.size();
-        for (int i = 0; i < siz; i++)
-        {
-            JDFFileSpec res = (JDFFileSpec)v.elementAt(i);
-            if (res.hasAttribute(AttributeName.RESOURCEUSAGE))
-            {
-                if (res.getResourceUsage().equals("ColorProfile"))
-                {
-                    return res;
-                }
-            }
-        }
-        return null;
-    }
+	// /////////////////////////////////////////////////////////////////
 
-    ///////////////////////////////////////////////////////////////////
+	public JDFFileSpec appendColorProfile()
+	{
+		JDFFileSpec res = appendFileSpec();
+		res.setResourceUsage("ColorProfile");
 
-    public JDFFileSpec getCreateColorProfile()
-    {
-        JDFFileSpec res = getColorProfile();
-        if (res == null)
-        {
-            res = appendColorProfile();
-        }
-        return res;
-    }
+		return res;
+	}
 
-    ///////////////////////////////////////////////////////////////////
+	// /////////////////////////////////////////////////////////////////
+	// /////////////////////////////////////////////////////////////////
 
-    public JDFFileSpec appendColorProfile()
-    {
-        JDFFileSpec res = appendFileSpec();
-        res.setResourceUsage("ColorProfile");
+	public JDFFileSpec getTargetProfile()
+	{
+		VElement v = getChildElementVector(ElementName.FILESPEC, null, null,
+				true, 0, false);
 
-        return res;
-    }
+		int siz = v.size();
+		for (int i = 0; i < siz; i++)
+		{
+			JDFFileSpec res = (JDFFileSpec) v.elementAt(i);
+			if (res.hasAttribute(AttributeName.RESOURCEUSAGE))
+			{
+				if (res.getResourceUsage().equals("TargetProfile"))
+				{
+					return res;
+				}
+			}
+		}
+		return null;
+	}
 
-    ///////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////
+	// /////////////////////////////////////////////////////////////////
 
-    public JDFFileSpec getTargetProfile()
-    {
-        VElement v = getChildElementVector(ElementName.FILESPEC,
-                null,
-                null,
-                true,
-                0,
-                false);
+	public JDFFileSpec getCreateTargetProfile()
+	{
+		JDFFileSpec res = getTargetProfile();
+		if (res == null)
+		{
+			res = appendTargetProfile();
+		}
+		return res;
+	}
 
-        int siz = v.size();
-        for(int i = 0; i < siz; i++)
-        {
-            JDFFileSpec res = (JDFFileSpec)v.elementAt(i);
-            if (res.hasAttribute(AttributeName.RESOURCEUSAGE))
-            {
-                if (res.getResourceUsage().equals("TargetProfile"))
-                {
-                    return res;
-                }
-            }
-        }
-        return null;
-    }
+	// /////////////////////////////////////////////////////////////////
 
-    ///////////////////////////////////////////////////////////////////
+	JDFFileSpec appendTargetProfile()
+	{
+		JDFFileSpec res = appendFileSpec();
+		res.setResourceUsage("TargetProfile");
 
-    public JDFFileSpec getCreateTargetProfile()
-    {
-        JDFFileSpec res = getTargetProfile();
-        if (res == null)
-        {
-            res = appendTargetProfile();
-        }
-        return res;
-    }
+		return res;
+	}
 
-    ///////////////////////////////////////////////////////////////////
-
-    JDFFileSpec appendTargetProfile()
-    {
-        JDFFileSpec res = appendFileSpec();
-        res.setResourceUsage("TargetProfile");
-
-        return res;
-    }
-
-
-    @Override
-    public boolean fixVersion(EnumVersion version)
-    {
-        if(hasAttribute(AttributeName.USEPDLALTERNATECS))
-        {
-            if(!hasAttribute(AttributeName.MAPPINGSELECTION))
-            {
-                setMappingSelection(getUsePDLAlternateCS() ? EnumMappingSelection.UsePDLValues : EnumMappingSelection.UseProcessColorValues);
-            }
-            removeAttribute(AttributeName.USEPDLALTERNATECS);
-        }
-        return super.fixVersion(version);
-    }
+	@Override
+	public boolean fixVersion(EnumVersion version)
+	{
+		if (hasAttribute(AttributeName.USEPDLALTERNATECS))
+		{
+			if (!hasAttribute(AttributeName.MAPPINGSELECTION))
+			{
+				setMappingSelection(getUsePDLAlternateCS() ? EnumMappingSelection.UsePDLValues
+						: EnumMappingSelection.UseProcessColorValues);
+			}
+			removeAttribute(AttributeName.USEPDLALTERNATECS);
+		}
+		return super.fixVersion(version);
+	}
 
 }

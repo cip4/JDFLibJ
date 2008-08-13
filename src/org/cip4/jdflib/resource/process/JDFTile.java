@@ -89,107 +89,110 @@ import org.w3c.dom.DOMException;
 
 /**
  * JDFTile provides utilities for the Tile resource
+ * 
  * @author prosirai
- *
+ * 
  */
 public class JDFTile extends JDFAutoTile
 {
-    private static final long serialVersionUID = 1L;
-    
-    /**
-     * Constructor for JDFTile
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFTile( CoreDocumentImpl myOwnerDocument, String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
-    
-    
-    /**
-     * Constructor for JDFTile
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFTile(  CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
-    
-    /**
-     * Constructor for JDFTile
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFTile(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-    
-    public String toString()
-    {
-        return "JDFTile[  --> " + super.toString() + " ]";
-    }
-    
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.MARKOBJECT, 0x33331111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }   
-    
-    /** (26) getCreateMarkObject
-     * note that this is prerelease for JDF1.4
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFMarkObject the element
-     */
-    //TODO remove when in auto files
-    public JDFMarkObject getCreateMarkObject(int iSkip)
-    {
-        return (JDFMarkObject)getCreateElement_KElement(ElementName.MARKOBJECT, null, iSkip);
-    }
-    
-    
-    
-    /**
-     * (27) const get element MarkObject
-     * @param iSkip number of elements to skip
-     * @return JDFMarkObject the element
-     * default is getMarkObject(0)
-     * note that this is prerelease for JDF1.4
-     */
-    public JDFMarkObject getMarkObject(int iSkip)
-    {
-        return (JDFMarkObject) getElement(ElementName.MARKOBJECT, null, iSkip);
-    }
-    
-    
-    
-    /**
-     *  const append element MarkObject
-     * @param iSkip number of elements to skip
-     * @return JDFMarkObject the element
-     * default is getMarkObject(0)
-     * note that this is prerelease for JDF1.4
-     */
-    public JDFMarkObject appendMarkObject()
-    {
-        return (JDFMarkObject) appendElement(ElementName.MARKOBJECT, null);
-    }
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Constructor for JDFTile
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFTile(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+			throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFTile
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFTile(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
+			String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFTile
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFTile(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
+			String qualifiedName, String myLocalName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	public String toString()
+	{
+		return "JDFTile[  --> " + super.toString() + " ]";
+	}
+
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.MARKOBJECT, 0x33331111);
+	}
+
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
+
+	/**
+	 * (26) getCreateMarkObject note that this is prerelease for JDF1.4
+	 * 
+	 * @param iSkip
+	 *            number of elements to skip
+	 * @return JDFMarkObject the element
+	 */
+	// TODO remove when in auto files
+	public JDFMarkObject getCreateMarkObject(int iSkip)
+	{
+		return (JDFMarkObject) getCreateElement_KElement(
+				ElementName.MARKOBJECT, null, iSkip);
+	}
+
+	/**
+	 * (27) const get element MarkObject
+	 * 
+	 * @param iSkip
+	 *            number of elements to skip
+	 * @return JDFMarkObject the element default is getMarkObject(0) note that
+	 *         this is prerelease for JDF1.4
+	 */
+	public JDFMarkObject getMarkObject(int iSkip)
+	{
+		return (JDFMarkObject) getElement(ElementName.MARKOBJECT, null, iSkip);
+	}
+
+	/**
+	 * const append element MarkObject
+	 * 
+	 * @param iSkip
+	 *            number of elements to skip
+	 * @return JDFMarkObject the element default is getMarkObject(0) note that
+	 *         this is prerelease for JDF1.4
+	 */
+	public JDFMarkObject appendMarkObject()
+	{
+		return (JDFMarkObject) appendElement(ElementName.MARKOBJECT, null);
+	}
 } // class JDFIDPLayout
-//==========================================================================
+// ==========================================================================

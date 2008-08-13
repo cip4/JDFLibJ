@@ -97,515 +97,631 @@ import org.w3c.dom.DOMException;
 
 public class JDFIntentResource extends JDFResource
 {
-    private static final long serialVersionUID = 1L;
-    
-    /**
-     * Constructor for JDFIntentResource
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFIntentResource(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
-    
-    /**
-     * Constructor for JDFIntentResource
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFIntentResource(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
-    
-    /**
-     * Constructor for JDFIntentResource
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFIntentResource(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-    
-    @Override
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Constructor for JDFIntentResource
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFIntentResource(CoreDocumentImpl myOwnerDocument,
+			String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFIntentResource
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFIntentResource(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFIntentResource
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFIntentResource(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName, String myLocalName)
+			throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	@Override
 	public String toString()
-    {
-        return "JDFInsertingIntent[  --> " + super.toString() + " ]";
-    }
-    
-    /**
-     * set all actual values to the preset defined in preferred
-     * @return number of elements modified
-     */
-    public int preferredToActual()
-    {
-        return this.preferredToActual(null);
-    }
-    
-    /**
-     * set actual values to the preset defined in preferred
-     * @param String key the key of the span resource to modify, if null do all
-     * @return number of elements modified
-     */
-    public int preferredToActual(String key)
-    {
-        int nDone = 0;
-        if (!isLeaf())
-        {
-            VElement leaves = getLeaves(false);
-            for (int i = 0; i < leaves.size(); i++)
-            {
-                JDFIntentResource ri = (JDFIntentResource)leaves.elementAt(i);
-                nDone += ri.preferredToActual(key);
-            }
-            return nDone;
-        }
-        VString vKeys = new VString();
-        if (KElement.isWildCard(key))
-        {
-            VElement v = getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.DATATYPE, (String)null), 
-            true, true, 0);
-            for (int i = 0; i < v.size(); i++)
-            {
-                vKeys.add(v.elementAt(i).getNodeName());
-            }
-        }
-        else
-        {
-            vKeys.add(key);
-        }
-        for (int i = 0; i < vKeys.size(); i++)
-        {
-            JDFSpanBase base = (JDFSpanBase) getElement(vKeys.elementAt(i), JDFConstants.EMPTYSTRING, 0);
-            if (base.preferredToActual())
-            {
-                nDone++;
-            }
-        }
-        return nDone;
-    }
-    
-    /**
-     * get a list of all span resources
-     * @return VElement all Span elements of this
-     */
-    public VElement getSpans()
-    {
-        VElement v = getChildElementVector(null, null, null, true, 0, false);
-        
-        for (int i = v.size() - 1; i >= 0; i--)
-        {
-            JDFElement e = (JDFElement) v.elementAt(i);
-            if (e instanceof JDFComment)
-            {
-                v.remove(i);
-            }
-        }
-        return v;
-    }
-    
-    /** 
-     * Typesafe attribute validation of Class
-     * @return true if class is valid
-     */
-    @Override
+	{
+		return "JDFInsertingIntent[  --> " + super.toString() + " ]";
+	}
+
+	/**
+	 * set all actual values to the preset defined in preferred
+	 * 
+	 * @return number of elements modified
+	 */
+	public int preferredToActual()
+	{
+		return this.preferredToActual(null);
+	}
+
+	/**
+	 * set actual values to the preset defined in preferred
+	 * 
+	 * @param String
+	 *            key the key of the span resource to modify, if null do all
+	 * @return number of elements modified
+	 */
+	public int preferredToActual(String key)
+	{
+		int nDone = 0;
+		if (!isLeaf())
+		{
+			VElement leaves = getLeaves(false);
+			for (int i = 0; i < leaves.size(); i++)
+			{
+				JDFIntentResource ri = (JDFIntentResource) leaves.elementAt(i);
+				nDone += ri.preferredToActual(key);
+			}
+			return nDone;
+		}
+		VString vKeys = new VString();
+		if (KElement.isWildCard(key))
+		{
+			VElement v = getChildrenByTagName(null, null, new JDFAttributeMap(
+					AttributeName.DATATYPE, (String) null), true, true, 0);
+			for (int i = 0; i < v.size(); i++)
+			{
+				vKeys.add(v.elementAt(i).getNodeName());
+			}
+		} else
+		{
+			vKeys.add(key);
+		}
+		for (int i = 0; i < vKeys.size(); i++)
+		{
+			JDFSpanBase base = (JDFSpanBase) getElement(vKeys.elementAt(i),
+					JDFConstants.EMPTYSTRING, 0);
+			if (base.preferredToActual())
+			{
+				nDone++;
+			}
+		}
+		return nDone;
+	}
+
+	/**
+	 * get a list of all span resources
+	 * 
+	 * @return VElement all Span elements of this
+	 */
+	public VElement getSpans()
+	{
+		VElement v = getChildElementVector(null, null, null, true, 0, false);
+
+		for (int i = v.size() - 1; i >= 0; i--)
+		{
+			JDFElement e = (JDFElement) v.elementAt(i);
+			if (e instanceof JDFComment)
+			{
+				v.remove(i);
+			}
+		}
+		return v;
+	}
+
+	/**
+	 * Typesafe attribute validation of Class
+	 * 
+	 * @return true if class is valid
+	 */
+	@Override
 	public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Intent;
-    }
-    
-    /** 
-     * default initialization
-     * @return true if successful
-     */
-    @Override
+	{
+		return JDFResource.EnumResourceClass.Intent;
+	}
+
+	/**
+	 * default initialization
+	 * 
+	 * @return true if successful
+	 */
+	@Override
 	public boolean init()
-    {
-        boolean b = super.init();
-        this.setResourceClass(EnumResourceClass.Intent);
-        return b;
-    }
-    
-    
-    /**
-     * get a number span
-     * @param String strName name of the span element
-     * @param bool bCreate if true create a new JDFNumberSpan if it does not yet exist
-     * @return JDFNumberSpan the JDFNumberSpan
-     */
-    public JDFNumberSpan getCreateNumberSpan(String strName)
-    {
-        return (JDFNumberSpan) getCreateSpan(
-                strName,
-                JDFSpanBase.EnumDataType.NumberSpan);
-    }
-    
-    /**
-     * get an option (boolean)  span
-     * @param String strName name of the span element
-     * @param bool bCreate if true create a new JDFNumberSpan if it does not yet exist
-     * @return JDFOptionSpan the JDFOptionSpan
-     */
-    public JDFOptionSpan getCreateOptionSpan(String strName)
-    {
-        return (JDFOptionSpan) getCreateSpan(strName, JDFSpanBase.EnumDataType.OptionSpan);
-    }
-    
-    /**
-     * get an integer  span
-     * @param String strName name of the span element
-     * @param bool bCreate if true create a new JDFNumberSpan if it does not yet exist
-     * @return JDFIntegerSpan the JDFIntegerSpan
-     */
-    public JDFIntegerSpan getCreateIntegerSpan(String strName)
-    {
-        return (JDFIntegerSpan) getCreateSpan(strName, JDFSpanBase.EnumDataType.IntegerSpan);
-    }
-    
-    /**
-     * get a namespan
-     * @param String strName name of the span element
-     * @param bool bCreate if true create a new JDFNumberSpan if it does not yet exist
-     * @return JDFNameSpan the JDFNameSpan
-     */
-    public JDFNameSpan getCreateNameSpan(String strName)
-    {
-        return (JDFNameSpan) getCreateSpan(strName, JDFSpanBase.EnumDataType.NameSpan);
-    }
-    
-    /**
-     * get an Enumeration  span
-     * @param String strName name of the span element
-     * @param bool bCreate if true create a new JDFNumberSpan if it does not yet exist
-     * @return JDFEnumerationSpan the JDFEnumerationSpan
-     */
-    public JDFEnumerationSpan getCreateEnumerationSpan(String strName)
-    {
-        return (JDFEnumerationSpan) getCreateSpan(strName, JDFSpanBase.EnumDataType.EnumerationSpan);
-    }
-    
-    /**
-     * get a string span
-     * @param String strName name of the span element
-     * @param bool bCreate if true create a new JDFNumberSpan if it does not yet exist
-     * @return JDFStringSpan the JDFStringSpan
-     */
-    public JDFStringSpan getCreateStringSpan(String strName)
-    {
-        return (JDFStringSpan) getCreateSpan(strName, JDFSpanBase.EnumDataType.StringSpan);
-    }
-    
-    /**
-     * get a duration span
-     * @param String strName name of the span element
-     * @param bool bCreate if true create a new getDurationSpan
-     * @return getDurationSpan the getDurationSpan
-     */
-    public JDFDurationSpan getCreateDurationSpan(String strName)
-    {
-        return (JDFDurationSpan) getCreateSpan(strName, JDFSpanBase.EnumDataType.DurationSpan);
-    }
-    
-    /**
-     * get a time span
-     * @param String strName name of the span element
-     * @param bool bCreate if true create a new getTimeSpan
-     * @return getTimeSpan the getTimeSpan
-     */
-    public JDFTimeSpan getCreateTimeSpan(String strName)
-    {
-        return (JDFTimeSpan) getCreateSpan(strName, JDFSpanBase.EnumDataType.TimeSpan);
-    }
-    
-    /**
-     * get a XYPair span
-     * @param String strName name of the span element
-     * @param bool bCreate if true create a new JDFXYPairSpan
-     * @return JDFOptionSpan the JDFOptionSpan
-     */
-    public JDFXYPairSpan getCreateCreateXYPairSpan(String strName)
-    {
-        return (JDFXYPairSpan) getCreateSpan(strName,JDFSpanBase.EnumDataType.XYPairSpan);
-    }
-    
-    /**
-     * get a Shape span
-     * @param String strName name of the span element
-     * @param bool bCreate if true create a new JDFShapeSpan
-     * @return JDFOptionSpan the JDFOptionSpan
-     */
-    public JDFShapeSpan getCreateCreateShapeSpan(String strName)
-    {
-        return (JDFShapeSpan) getCreateSpan(strName, JDFSpanBase.EnumDataType.ShapeSpan);
-    }
-    
-    /**
-     * get a number span
-     * @param String strName name of the span element
-     * @return JDFNumberSpan the JDFNumberSpan
-     */
-    public JDFNumberSpan getNumberSpan(String strName)
-    {
-        return (JDFNumberSpan) getSpan(strName, EnumDataType.NumberSpan);
-    }
-    
-    /**
-     * get an option (boolean)  span
-     * @param String strName name of the span element
-     * @return JDFOptionSpan the JDFOptionSpan
-     */
-    public JDFOptionSpan getOptionSpan(String strName)
-    {
-        return (JDFOptionSpan) getSpan(strName, EnumDataType.OptionSpan);
-    }
-    
-    /**
-     * get an integer  span
-     * @param String strName name of the span element
-     * @return getIntegerSpan the getIntegerSpan
-     */
-    public JDFIntegerSpan getIntegerSpan(String strName)
-    {
-        return (JDFIntegerSpan) getSpan(strName, EnumDataType.IntegerSpan);
-    }
-    
-    /**
-     * get a namespan
-     * @param String strName name of the span element
-     * @return JDFNameSpan the JDFNameSpan
-     */
-    public JDFNameSpan getNameSpan(String strName)
-    {
-        return (JDFNameSpan) getSpan(strName, EnumDataType.NameSpan);
-    }
-    
-    /**
-     * get an Enumeration  span
-     * @param String strName name of the span element
-     * @return getEnumerationSpan the getEnumerationSpan
-     */
-    public JDFEnumerationSpan getEnumerationSpan(String strName)
-    {
-        return (JDFEnumerationSpan) getSpan(strName, EnumDataType.EnumerationSpan);
-    }
-    
-    /**
-     * get a string span
-     * @param String strName name of the span element
-     * @return JDFStringSpan the JDFStringSpan
-     */
-    public JDFStringSpan getStringSpan(String strName)
-    {
-        return (JDFStringSpan) getSpan(strName, EnumDataType.StringSpan);
-    }
-    
-    /**
-     * get a duration span
-     * @param String strName name of the span element
-     * @return getDurationSpan the getDurationSpan
-     */
-    public JDFDurationSpan getDurationSpan(String strName)
-    {
-        return (JDFDurationSpan) getSpan(strName, EnumDataType.DurationSpan);
-    }
-    
-    /**
-     * get a time span
-     * @param String strName name of the span element
-     * @return getTimeSpan the getTimeSpan
-     */
-    public JDFTimeSpan getTimeSpan(String strName)
-    {
-        return (JDFTimeSpan) getSpan(strName, EnumDataType.TimeSpan);
-    }
-    
-    /**
-     * get a XYPair span
-     * @param String strName name of the span element
-     * @return JDFXYPairSpan the JDFXYPairSpan
-     */
-    public JDFXYPairSpan getXYPairSpan(String strName)
-    {
-        return (JDFXYPairSpan) getSpan(strName, EnumDataType.XYPairSpan);
-    }
-    
-    /**
-     * get a Shape span
-     * @param String strName name of the span element
-     * @return JDFShapeSpan the JDFShapeSpan
-     */
-    public JDFShapeSpan getShapeSpan(String strName)
-    {
-        return (JDFShapeSpan) getSpan(strName, EnumDataType.ShapeSpan);
-    }
-    
-    /**
-     * Append a number span if it does not yet exist, else return the existing element
-     * @param String strName name of the span element
-     * @return JDFNumberSpan the JDFNumberSpan
-     */
-    public JDFNumberSpan appendNumberSpan(String strName)
-    {
-        return (JDFNumberSpan) appendSpan(strName, JDFSpanBase.EnumDataType.NumberSpan);
-    }
-    
-    /**
-     * Append an option (boolean)  span
-     * @param String strName name of the span element
-     * @return JDFOptionSpan the JDFOptionSpan
-     */
-    public JDFOptionSpan appendOptionSpan(String strName)
-    {
-        return (JDFOptionSpan) appendSpan(strName, JDFSpanBase.EnumDataType.OptionSpan);
-    }
-    
-    /**
-     * Append an integer   span if it does not yet exist, else return the existing element
-     * @param String strName name of the span element
-     * @return JDFIntegerSpan the JDFIntegerSpan
-     */
-    public JDFIntegerSpan appendIntegerSpan(String strName)
-    {
-        return (JDFIntegerSpan) appendSpan(strName, JDFSpanBase.EnumDataType.IntegerSpan);
-    }
-    
-    /**
-     * Append a name span if it does not yet exist, else return the existing element
-     * @param String strName name of the span element
-     * @return JDFNameSpan the JDFNameSpan
-     */
-    public JDFNameSpan appendNameSpan(String strName)
-    {
-        return (JDFNameSpan) appendSpan(strName, JDFSpanBase.EnumDataType.NameSpan);
-    }
-    
-    /**
-     * Append an Enumeration   span if it does not yet exist, else return the existing element
-     * @param String strName name of the span element
-     * @return JDFEnumerationSpan the JDFEnumerationSpan
-     */
-    public JDFEnumerationSpan appendEnumerationSpan(String strName)
-    {
-        return (JDFEnumerationSpan) appendSpan(strName, JDFSpanBase.EnumDataType.EnumerationSpan);
-    }
-    
-    /**
-     * Append a string  span if it does not yet exist, else return the existing element
-     * @param String strName name of the span element
-     * @return JDFStringSpan the JDFStringSpan
-     */
-    public JDFStringSpan appendStringSpan(String strName)
-    {
-        return (JDFStringSpan) appendSpan(strName, JDFSpanBase.EnumDataType.StringSpan);
-    }
-    
-    /**
-     * Append a  duration span if it does not yet exist, else return the existing element
-     * @param String strName name of the span element
-     * @return JDFDurationSpan the JDFDurationSpan
-     */
-    public JDFDurationSpan appendDurationSpan(String strName)
-    {
-        return (JDFDurationSpan) appendSpan(strName, JDFSpanBase.EnumDataType.DurationSpan);
-    }
-    
-    /**
-     * Append a time  span if it does not yet exist, else return the existing element
-     * @param String strName name of the span element
-     * @return JDFTimeSpan the JDFTimeSpan
-     */
-    public JDFTimeSpan appendTimeSpan(String strName)
-    {
-        return (JDFTimeSpan) appendSpan(strName, JDFSpanBase.EnumDataType.TimeSpan);
-    }
-    
-    /**
-     * Append a XYPair  span if it does not yet exist, else return the existing element
-     * @param String strName name of the span element
-     * @return JDFXYPairSpan the JDFXYPairSpan
-     */
-    public JDFXYPairSpan appendXYPairSpan(String strName)
-    {
-        return (JDFXYPairSpan) appendSpan(strName, JDFSpanBase.EnumDataType.XYPairSpan);
-    }
-    
-    /**
-     * Append a Shape  span if it does not yet exist, else return the existing element
-     * @param String strName name of the span element
-     * @return JDFShapeSpan the JDFShapeSpan
-     */
-    public JDFShapeSpan appendShapeSpan(String strName)
-    {
-        return (JDFShapeSpan) appendSpan(strName, JDFSpanBase.EnumDataType.ShapeSpan);
-    }
-    
-    /**
-     * get a span, create it if it does not exist
-     * @param String strName name of the span element
-     * @param JDFSpanBase::EnumDataType nType datatype of the new span
-     * @return JDFSpanBase the JDFSpanBase
-     */
-    JDFSpanBase getCreateSpan(String strName, JDFSpanBase.EnumDataType nType)
-    {
-        /// note that this is the inherited version from JDFResource!
-        JDFSpanBase e = (JDFSpanBase) this.getCreateElement_JDFResource(strName, JDFConstants.EMPTYSTRING, 0);
-        e.setDataType(nType);
-        return e;
-    }
-    
-    /**
-     * get a span
-     * @param String strName name of the span element
-     * @return JDFSpanBase the JDFSpanBase
-     */
-    public JDFSpanBase getSpan(String strName, JDFSpanBase.EnumDataType nType)
-    {
-        /// note that this is the inherited version from JDFResource!
-        JDFSpanBase e = (JDFSpanBase) getElement(strName, JDFConstants.EMPTYSTRING, 0);
-        if (e != null && nType!=null) 
-        {
-            JDFSpanBase.EnumDataType dataType = e.getDataType();
-            if (!dataType.equals(nType))
-            {
-                throw new JDFException(
-                        "JDFIntentResource.getSpan incompatible datatypes" + e.getAttribute(AttributeName.DATATYPE));
-            }
-        }
-        return e;
-    }
-    
-    /**
-     * Append a span if it does not yet exist, else return the existing element
-     * @param String strName name of the span element
-     * @param JDFSpanBase.EnumDataType nType datatype of the new span
-     * @return JDFSpanBase the JDFSpanBase
-     */
-    public JDFSpanBase appendSpan(String strName, JDFSpanBase.EnumDataType nType)
-    {
-        /// note that this is the inherited version from JDFResource!
-        JDFSpanBase e = (JDFSpanBase) appendElement(strName, JDFConstants.EMPTYSTRING);
-        if(nType!=null)
-            e.setDataType(nType);
-        return e;
-    }
+	{
+		boolean b = super.init();
+		this.setResourceClass(EnumResourceClass.Intent);
+		return b;
+	}
+
+	/**
+	 * get a number span
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @param bool
+	 *            bCreate if true create a new JDFNumberSpan if it does not yet
+	 *            exist
+	 * @return JDFNumberSpan the JDFNumberSpan
+	 */
+	public JDFNumberSpan getCreateNumberSpan(String strName)
+	{
+		return (JDFNumberSpan) getCreateSpan(strName,
+				JDFSpanBase.EnumDataType.NumberSpan);
+	}
+
+	/**
+	 * get an option (boolean) span
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @param bool
+	 *            bCreate if true create a new JDFNumberSpan if it does not yet
+	 *            exist
+	 * @return JDFOptionSpan the JDFOptionSpan
+	 */
+	public JDFOptionSpan getCreateOptionSpan(String strName)
+	{
+		return (JDFOptionSpan) getCreateSpan(strName,
+				JDFSpanBase.EnumDataType.OptionSpan);
+	}
+
+	/**
+	 * get an integer span
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @param bool
+	 *            bCreate if true create a new JDFNumberSpan if it does not yet
+	 *            exist
+	 * @return JDFIntegerSpan the JDFIntegerSpan
+	 */
+	public JDFIntegerSpan getCreateIntegerSpan(String strName)
+	{
+		return (JDFIntegerSpan) getCreateSpan(strName,
+				JDFSpanBase.EnumDataType.IntegerSpan);
+	}
+
+	/**
+	 * get a namespan
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @param bool
+	 *            bCreate if true create a new JDFNumberSpan if it does not yet
+	 *            exist
+	 * @return JDFNameSpan the JDFNameSpan
+	 */
+	public JDFNameSpan getCreateNameSpan(String strName)
+	{
+		return (JDFNameSpan) getCreateSpan(strName,
+				JDFSpanBase.EnumDataType.NameSpan);
+	}
+
+	/**
+	 * get an Enumeration span
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @param bool
+	 *            bCreate if true create a new JDFNumberSpan if it does not yet
+	 *            exist
+	 * @return JDFEnumerationSpan the JDFEnumerationSpan
+	 */
+	public JDFEnumerationSpan getCreateEnumerationSpan(String strName)
+	{
+		return (JDFEnumerationSpan) getCreateSpan(strName,
+				JDFSpanBase.EnumDataType.EnumerationSpan);
+	}
+
+	/**
+	 * get a string span
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @param bool
+	 *            bCreate if true create a new JDFNumberSpan if it does not yet
+	 *            exist
+	 * @return JDFStringSpan the JDFStringSpan
+	 */
+	public JDFStringSpan getCreateStringSpan(String strName)
+	{
+		return (JDFStringSpan) getCreateSpan(strName,
+				JDFSpanBase.EnumDataType.StringSpan);
+	}
+
+	/**
+	 * get a duration span
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @param bool
+	 *            bCreate if true create a new getDurationSpan
+	 * @return getDurationSpan the getDurationSpan
+	 */
+	public JDFDurationSpan getCreateDurationSpan(String strName)
+	{
+		return (JDFDurationSpan) getCreateSpan(strName,
+				JDFSpanBase.EnumDataType.DurationSpan);
+	}
+
+	/**
+	 * get a time span
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @param bool
+	 *            bCreate if true create a new getTimeSpan
+	 * @return getTimeSpan the getTimeSpan
+	 */
+	public JDFTimeSpan getCreateTimeSpan(String strName)
+	{
+		return (JDFTimeSpan) getCreateSpan(strName,
+				JDFSpanBase.EnumDataType.TimeSpan);
+	}
+
+	/**
+	 * get a XYPair span
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @param bool
+	 *            bCreate if true create a new JDFXYPairSpan
+	 * @return JDFOptionSpan the JDFOptionSpan
+	 */
+	public JDFXYPairSpan getCreateCreateXYPairSpan(String strName)
+	{
+		return (JDFXYPairSpan) getCreateSpan(strName,
+				JDFSpanBase.EnumDataType.XYPairSpan);
+	}
+
+	/**
+	 * get a Shape span
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @param bool
+	 *            bCreate if true create a new JDFShapeSpan
+	 * @return JDFOptionSpan the JDFOptionSpan
+	 */
+	public JDFShapeSpan getCreateCreateShapeSpan(String strName)
+	{
+		return (JDFShapeSpan) getCreateSpan(strName,
+				JDFSpanBase.EnumDataType.ShapeSpan);
+	}
+
+	/**
+	 * get a number span
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @return JDFNumberSpan the JDFNumberSpan
+	 */
+	public JDFNumberSpan getNumberSpan(String strName)
+	{
+		return (JDFNumberSpan) getSpan(strName, EnumDataType.NumberSpan);
+	}
+
+	/**
+	 * get an option (boolean) span
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @return JDFOptionSpan the JDFOptionSpan
+	 */
+	public JDFOptionSpan getOptionSpan(String strName)
+	{
+		return (JDFOptionSpan) getSpan(strName, EnumDataType.OptionSpan);
+	}
+
+	/**
+	 * get an integer span
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @return getIntegerSpan the getIntegerSpan
+	 */
+	public JDFIntegerSpan getIntegerSpan(String strName)
+	{
+		return (JDFIntegerSpan) getSpan(strName, EnumDataType.IntegerSpan);
+	}
+
+	/**
+	 * get a namespan
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @return JDFNameSpan the JDFNameSpan
+	 */
+	public JDFNameSpan getNameSpan(String strName)
+	{
+		return (JDFNameSpan) getSpan(strName, EnumDataType.NameSpan);
+	}
+
+	/**
+	 * get an Enumeration span
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @return getEnumerationSpan the getEnumerationSpan
+	 */
+	public JDFEnumerationSpan getEnumerationSpan(String strName)
+	{
+		return (JDFEnumerationSpan) getSpan(strName,
+				EnumDataType.EnumerationSpan);
+	}
+
+	/**
+	 * get a string span
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @return JDFStringSpan the JDFStringSpan
+	 */
+	public JDFStringSpan getStringSpan(String strName)
+	{
+		return (JDFStringSpan) getSpan(strName, EnumDataType.StringSpan);
+	}
+
+	/**
+	 * get a duration span
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @return getDurationSpan the getDurationSpan
+	 */
+	public JDFDurationSpan getDurationSpan(String strName)
+	{
+		return (JDFDurationSpan) getSpan(strName, EnumDataType.DurationSpan);
+	}
+
+	/**
+	 * get a time span
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @return getTimeSpan the getTimeSpan
+	 */
+	public JDFTimeSpan getTimeSpan(String strName)
+	{
+		return (JDFTimeSpan) getSpan(strName, EnumDataType.TimeSpan);
+	}
+
+	/**
+	 * get a XYPair span
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @return JDFXYPairSpan the JDFXYPairSpan
+	 */
+	public JDFXYPairSpan getXYPairSpan(String strName)
+	{
+		return (JDFXYPairSpan) getSpan(strName, EnumDataType.XYPairSpan);
+	}
+
+	/**
+	 * get a Shape span
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @return JDFShapeSpan the JDFShapeSpan
+	 */
+	public JDFShapeSpan getShapeSpan(String strName)
+	{
+		return (JDFShapeSpan) getSpan(strName, EnumDataType.ShapeSpan);
+	}
+
+	/**
+	 * Append a number span if it does not yet exist, else return the existing
+	 * element
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @return JDFNumberSpan the JDFNumberSpan
+	 */
+	public JDFNumberSpan appendNumberSpan(String strName)
+	{
+		return (JDFNumberSpan) appendSpan(strName,
+				JDFSpanBase.EnumDataType.NumberSpan);
+	}
+
+	/**
+	 * Append an option (boolean) span
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @return JDFOptionSpan the JDFOptionSpan
+	 */
+	public JDFOptionSpan appendOptionSpan(String strName)
+	{
+		return (JDFOptionSpan) appendSpan(strName,
+				JDFSpanBase.EnumDataType.OptionSpan);
+	}
+
+	/**
+	 * Append an integer span if it does not yet exist, else return the existing
+	 * element
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @return JDFIntegerSpan the JDFIntegerSpan
+	 */
+	public JDFIntegerSpan appendIntegerSpan(String strName)
+	{
+		return (JDFIntegerSpan) appendSpan(strName,
+				JDFSpanBase.EnumDataType.IntegerSpan);
+	}
+
+	/**
+	 * Append a name span if it does not yet exist, else return the existing
+	 * element
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @return JDFNameSpan the JDFNameSpan
+	 */
+	public JDFNameSpan appendNameSpan(String strName)
+	{
+		return (JDFNameSpan) appendSpan(strName,
+				JDFSpanBase.EnumDataType.NameSpan);
+	}
+
+	/**
+	 * Append an Enumeration span if it does not yet exist, else return the
+	 * existing element
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @return JDFEnumerationSpan the JDFEnumerationSpan
+	 */
+	public JDFEnumerationSpan appendEnumerationSpan(String strName)
+	{
+		return (JDFEnumerationSpan) appendSpan(strName,
+				JDFSpanBase.EnumDataType.EnumerationSpan);
+	}
+
+	/**
+	 * Append a string span if it does not yet exist, else return the existing
+	 * element
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @return JDFStringSpan the JDFStringSpan
+	 */
+	public JDFStringSpan appendStringSpan(String strName)
+	{
+		return (JDFStringSpan) appendSpan(strName,
+				JDFSpanBase.EnumDataType.StringSpan);
+	}
+
+	/**
+	 * Append a duration span if it does not yet exist, else return the existing
+	 * element
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @return JDFDurationSpan the JDFDurationSpan
+	 */
+	public JDFDurationSpan appendDurationSpan(String strName)
+	{
+		return (JDFDurationSpan) appendSpan(strName,
+				JDFSpanBase.EnumDataType.DurationSpan);
+	}
+
+	/**
+	 * Append a time span if it does not yet exist, else return the existing
+	 * element
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @return JDFTimeSpan the JDFTimeSpan
+	 */
+	public JDFTimeSpan appendTimeSpan(String strName)
+	{
+		return (JDFTimeSpan) appendSpan(strName,
+				JDFSpanBase.EnumDataType.TimeSpan);
+	}
+
+	/**
+	 * Append a XYPair span if it does not yet exist, else return the existing
+	 * element
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @return JDFXYPairSpan the JDFXYPairSpan
+	 */
+	public JDFXYPairSpan appendXYPairSpan(String strName)
+	{
+		return (JDFXYPairSpan) appendSpan(strName,
+				JDFSpanBase.EnumDataType.XYPairSpan);
+	}
+
+	/**
+	 * Append a Shape span if it does not yet exist, else return the existing
+	 * element
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @return JDFShapeSpan the JDFShapeSpan
+	 */
+	public JDFShapeSpan appendShapeSpan(String strName)
+	{
+		return (JDFShapeSpan) appendSpan(strName,
+				JDFSpanBase.EnumDataType.ShapeSpan);
+	}
+
+	/**
+	 * get a span, create it if it does not exist
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @param JDFSpanBase
+	 *            ::EnumDataType nType datatype of the new span
+	 * @return JDFSpanBase the JDFSpanBase
+	 */
+	JDFSpanBase getCreateSpan(String strName, JDFSpanBase.EnumDataType nType)
+	{
+		// / note that this is the inherited version from JDFResource!
+		JDFSpanBase e = (JDFSpanBase) this.getCreateElement_JDFResource(
+				strName, JDFConstants.EMPTYSTRING, 0);
+		e.setDataType(nType);
+		return e;
+	}
+
+	/**
+	 * get a span
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @return JDFSpanBase the JDFSpanBase
+	 */
+	public JDFSpanBase getSpan(String strName, JDFSpanBase.EnumDataType nType)
+	{
+		// / note that this is the inherited version from JDFResource!
+		JDFSpanBase e = (JDFSpanBase) getElement(strName,
+				JDFConstants.EMPTYSTRING, 0);
+		if (e != null && nType != null)
+		{
+			JDFSpanBase.EnumDataType dataType = e.getDataType();
+			if (!dataType.equals(nType))
+			{
+				throw new JDFException(
+						"JDFIntentResource.getSpan incompatible datatypes"
+								+ e.getAttribute(AttributeName.DATATYPE));
+			}
+		}
+		return e;
+	}
+
+	/**
+	 * Append a span if it does not yet exist, else return the existing element
+	 * 
+	 * @param String
+	 *            strName name of the span element
+	 * @param JDFSpanBase
+	 *            .EnumDataType nType datatype of the new span
+	 * @return JDFSpanBase the JDFSpanBase
+	 */
+	public JDFSpanBase appendSpan(String strName, JDFSpanBase.EnumDataType nType)
+	{
+		// / note that this is the inherited version from JDFResource!
+		JDFSpanBase e = (JDFSpanBase) appendElement(strName,
+				JDFConstants.EMPTYSTRING);
+		if (nType != null)
+			e.setDataType(nType);
+		return e;
+	}
 } // class JDFIntentResource

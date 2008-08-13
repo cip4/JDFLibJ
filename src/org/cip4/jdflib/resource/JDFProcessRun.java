@@ -94,300 +94,295 @@ import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.w3c.dom.DOMException;
 
-
 public class JDFProcessRun extends JDFAutoProcessRun
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFProcessRun
-     * @param myOwnerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFProcessRun(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFProcessRun
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFProcessRun(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFProcessRun
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFProcessRun(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFProcessRun
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFProcessRun(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFProcessRun
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     * @throws DOMException
-     */
-    public JDFProcessRun(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * Constructor for JDFProcessRun
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 * @throws DOMException
+	 */
+	public JDFProcessRun(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * toString()
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFProcessRun[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * toString()
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFProcessRun[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * set the duration in seconds
+	 * 
+	 * @param seconds the value to set
+	 * @throws JDFException
+	 */
+	public void setDurationSeconds(int seconds) throws JDFException
+	{
+		if (seconds < 0)
+		{
+			throw new JDFException("parameter must be >= 0");
+		}
+		JDFDuration d = new JDFDuration();
+		d.setDuration(seconds);
+		setAttribute("Duration", d.getDurationISO(), JDFConstants.EMPTYSTRING);
+	}
 
-    /**
-     * set the duration in seconds
-     * @param seconds the value to set
-     * @throws JDFException
-     */
-    public void setDurationSeconds(int seconds) throws JDFException
-    {
-        if(seconds < 0)
-        {
-            throw new JDFException("parameter must be >= 0");
-        }
-        JDFDuration d = new JDFDuration();
-        d.setDuration(seconds);
-        setAttribute("Duration", d.getDurationISO(), JDFConstants.EMPTYSTRING);
-    }
+	// //////////////////////////////////////////////////////////////////////////
+	/**
+	 * get the duration in seconds
+	 * 
+	 * @return int: the duration value in seconds, 0 if duration does not exist
+	 */
+	public int getDurationSeconds()
+	{
+		JDFDuration d = getDuration();
+		if (d == null)
+			return 0;
+		return d.getDuration();
+	}
 
-    ////////////////////////////////////////////////////////////////////////////
-    /**
-     * get the duration in seconds
-     * @return int: the duration value in seconds, 0 if duration does not exist
-     */
-    public int getDurationSeconds() 
-    {
-        JDFDuration d = getDuration();
-        if(d==null)
-            return 0;
-        return d.getDuration();
-    }
+	// //////////////////////////////////////////////////////////////////////////
 
-    ////////////////////////////////////////////////////////////////////////////
+	/**
+	 * get the explicit or implied duration specified by Start and End
+	 * 
+	 * @return JDFDuration the duration
+	 */
+	public JDFDuration getDuration()
+	{
+		JDFDuration dur = super.getDuration();
+		if (dur != null)
+			return dur;
 
-    /**
-     * get the explicit or implied duration specified by Start and End
-     * @return JDFDuration the duration
-     */
-    public JDFDuration getDuration()
-    {
-        JDFDuration dur=super.getDuration();
-        if(dur!=null)
-            return dur;
+		JDFDate dStart = getStart();
+		JDFDate dEnd = getEnd();
+		if (dStart == null || dEnd == null)
+			return null;
+		dur = new JDFDuration(dStart, dEnd);
+		return dur;
+	}
 
-        JDFDate dStart=getStart();
-        JDFDate dEnd=getEnd();
-        if(dStart==null || dEnd==null)
-            return null;
-        dur=new JDFDuration(dStart,dEnd);
-        return dur;
-    }
+	/**
+	 * set all parts to those defined in vParts
+	 * 
+	 * @param vParts vector of attribute maps for the parts
+	 */
+	public void setPartMapVector(VJDFAttributeMap vParts)
+	{
+		super.setPartMapVector(vParts);
+	}
 
+	/**
+	 * set all parts to those defined by mPart
+	 * 
+	 * @param mPart attribute map for the part to set
+	 */
+	public void setPartMap(JDFAttributeMap mPart)
+	{
+		super.setPartMap(mPart);
+	}
 
-    /**
-     * set all parts to those defined in vParts
-     * @param vParts vector of attribute maps for the parts
-     */
-    public void setPartMapVector(VJDFAttributeMap vParts)
-    {
-        super.setPartMapVector(vParts);
-    }
+	/**
+	 * remove the part defined by mPart
+	 * 
+	 * @param mPart attribute map for the part to remove
+	 */
+	public void removePartMap(JDFAttributeMap mPart)
+	{
+		super.removePartMap(mPart);
+	}
 
-    /**
-     * set all parts to those defined by mPart
-     * @param mPart attribute map for the part to set
-     */
-    public void setPartMap(JDFAttributeMap mPart)
-    {
-        super.setPartMap(mPart);
-    }
+	/**
+	 * check whether the part defined by mPart is included
+	 * 
+	 * @param mPart attribute map to look for
+	 * @return boolean - returns true if the part exists
+	 */
+	public boolean hasPartMap(JDFAttributeMap mPart)
+	{
+		return super.hasPartMap(mPart);
+	}
 
-    /**
-     * remove the part defined by mPart
-     * @param mPart attribute map for the part to remove
-     */
-    public void removePartMap(JDFAttributeMap mPart)
-    {
-        super.removePartMap(mPart);
-    }
+	// ////////////////////////////////////////////////////////
 
-    /**
-     * check whether the part defined by mPart is included
-     * @param mPart attribute map to look for
-     * @return boolean - returns true if the part exists
-     */
-    public boolean hasPartMap(JDFAttributeMap mPart)
-    {
-        return super.hasPartMap(mPart);
-    }
+	/**
+	 * add the active times in the PhaseTime pt to this processrun
+	 * 
+	 * @param pt the PhaseTimes to add
+	 */
+	public void addPhase(JDFPhaseTime pt)
+	{
+		if (pt == null)
+			return;
 
-    //////////////////////////////////////////////////////////
+		EnumNodeStatus status = pt.getStatus();
+		if (status == null || status.equals(EnumNodeStatus.Ready) || status.equals(EnumNodeStatus.Completed)
+				|| status.equals(EnumNodeStatus.FailedTestRun) || status.equals(EnumNodeStatus.Spawned)
+				|| status.equals(EnumNodeStatus.Stopped) || status.equals(EnumNodeStatus.Suspended)
+				|| status.equals(EnumNodeStatus.Waiting))
+			return;
 
-    /**
-     * add the active times in the PhaseTime pt to this processrun
-     * @param pt the PhaseTimes to add
-     */
-    public void addPhase(JDFPhaseTime pt)
-    {
-        if (pt==null)
-            return;
+		JDFDuration dur = pt.getDuration();
+		addDuration(dur.getDuration());
 
-        EnumNodeStatus status=pt.getStatus();
-        if(status==null || 
-                status.equals(EnumNodeStatus.Ready) ||
-                status.equals(EnumNodeStatus.Completed) ||
-                status.equals(EnumNodeStatus.FailedTestRun) ||
-                status.equals(EnumNodeStatus.Spawned) ||
-                status.equals(EnumNodeStatus.Stopped) ||
-                status.equals(EnumNodeStatus.Suspended) ||
-                status.equals(EnumNodeStatus.Waiting) )
-            return;
+		JDFDate start = pt.getStart();
+		if (start != null)
+		{
+			if (start.before(getStart()))
+				setStart(start);
+		}
 
-        JDFDuration dur=pt.getDuration();
-        addDuration(dur.getDuration());
+		JDFDate end = pt.getEnd();
+		if (end != null)
+		{
+			if (end.after(getEnd()))
+				setEnd(end);
+		}
 
-        JDFDate start=pt.getStart();
-        if(start!=null)
-        {
-            if(start.before(getStart()))
-                setStart(start);
-        }
+	}
 
-        JDFDate end=pt.getEnd();
-        if(end!=null)
-        {
-            if(end.after(getEnd()))
-                setEnd(end);
-        }
+	/**
+	 * ensure that duration matches end-start, <br/> i.e. that duration is never longer than the full preiod between
+	 * start and end
+	 * 
+	 */
+	public void ensureNotLonger()
+	{
+		JDFDate start = getStart();
+		JDFDate end = getEnd();
+		if (start != null && end != null)
+		{
+			JDFDuration total = new JDFDuration(start, end);
+			if (total.compareTo(getDuration()) < 0)
+				setDuration(total);
+		}
+	}
 
-    }
-  
+	// ////////////////////////////////////////////////////////
 
-    /**
-     * ensure that duration matches end-start, <br/>
-     * i.e. that duration is never longer than the full preiod between start and end
-     *
-     */
-    public void ensureNotLonger()
-    {
-        JDFDate start = getStart();
-        JDFDate end = getEnd();
-        if(start!=null && end!=null)
-        {
-            JDFDuration total=new JDFDuration(start,end);
-            if(total.compareTo(getDuration())<0)
-                setDuration(total);
-        }
-    }
-    
-    //////////////////////////////////////////////////////////
+	/**
+	 * add delta seconds to duration and set the updated attribute value
+	 * 
+	 * @param seconds duration to add in seconds
+	 */
+	public void addDuration(int seconds)
+	{
+		JDFDuration dur = getDuration();
+		int l = dur == null ? 0 : dur.getDuration();
+		setDurationSeconds(l + seconds);
+	}
 
-    /**
-     * add delta seconds to duration and set the updated attribute value
-     * @param seconds duration to add in seconds
-     */
-    public void addDuration(int seconds)
-    {
-        JDFDuration dur=getDuration();
-        int l=dur==null ? 0 : dur.getDuration();
-        setDurationSeconds(l+seconds);
-    }
+	// ///////////////////////////////////////////////////////////////////
 
-    /////////////////////////////////////////////////////////////////////
-    
-    /**
-     * (11) set attribute SubmissionTime
-     * @param value: the value to set the attribute to or null
-     * if null, set to the current time
-     */
-    public void setSubmissionTime(JDFDate value)
-    {
-        if (value == null) 
-            value = new JDFDate();
-        setAttribute(AttributeName.SUBMISSIONTIME, value.getDateTimeISO(), null);
-    }
+	/**
+	 * (11) set attribute SubmissionTime
+	 * 
+	 * @param value : the value to set the attribute to or null if null, set to the current time
+	 */
+	public void setSubmissionTime(JDFDate value)
+	{
+		if (value == null)
+			value = new JDFDate();
+		setAttribute(AttributeName.SUBMISSIONTIME, value.getDateTimeISO(), null);
+	}
 
-    /**
-     * (12) get JDFDate attribute SubmissionTime
-     * @return JDFDate the value of the attribute
-     */
-    public JDFDate getSubmissionTime()
-    {
-        final String str = getAttribute(AttributeName.SUBMISSIONTIME, null, null);
-        if (str==null)
-            return null;
-        try
-        {
-            return new JDFDate(str);
-        }
-        catch(DataFormatException dfe)
-        {
-            throw new JDFException("not a valid date string. Malformed JDF");
-        }
-    }    
+	/**
+	 * (12) get JDFDate attribute SubmissionTime
+	 * 
+	 * @return JDFDate the value of the attribute
+	 */
+	public JDFDate getSubmissionTime()
+	{
+		final String str = getAttribute(AttributeName.SUBMISSIONTIME, null, null);
+		if (str == null)
+			return null;
+		try
+		{
+			return new JDFDate(str);
+		}
+		catch (DataFormatException dfe)
+		{
+			throw new JDFException("not a valid date string. Malformed JDF");
+		}
+	}
 
-    /**
-     * (11) set attribute ReturnTime
-     * @param value: the value to set the attribute to or null
-     * if null, set to the current time
-     */
-    public void setReturnTime(JDFDate value)
-    {
-        if (value == null) 
-            value = new JDFDate();
-        setAttribute(AttributeName.RETURNTIME, value.getDateTimeISO(), null);
-    }
+	/**
+	 * (11) set attribute ReturnTime
+	 * 
+	 * @param value : the value to set the attribute to or null if null, set to the current time
+	 */
+	public void setReturnTime(JDFDate value)
+	{
+		if (value == null)
+			value = new JDFDate();
+		setAttribute(AttributeName.RETURNTIME, value.getDateTimeISO(), null);
+	}
 
-    /**
-     * (12) get JDFDate attribute ReturnTime
-     * @return JDFDate the value of the attribute
-     */
-    public JDFDate getReturnTime()
-    {
-        final String str = getAttribute(AttributeName.RETURNTIME, null, null);
-        if (str==null)
-            return null;
-        try
-        {
-            return new JDFDate(str);
-        }
-        catch(DataFormatException dfe)
-        {
-            throw new JDFException("not a valid date string. Malformed JDF");
-        }
-    }
+	/**
+	 * (12) get JDFDate attribute ReturnTime
+	 * 
+	 * @return JDFDate the value of the attribute
+	 */
+	public JDFDate getReturnTime()
+	{
+		final String str = getAttribute(AttributeName.RETURNTIME, null, null);
+		if (str == null)
+			return null;
+		try
+		{
+			return new JDFDate(str);
+		}
+		catch (DataFormatException dfe)
+		{
+			throw new JDFException("not a valid date string. Malformed JDF");
+		}
+	}
 
-    @Override
-    public boolean init()
-    {
-        setEnd(null);
-        return super.init();
-    }
+	@Override
+	public boolean init()
+	{
+		setEnd(null);
+		return super.init();
+	}
 
-} 
+}
 
-//class JDFProcessRun
-//==========================================================================
+// class JDFProcessRun
+// ==========================================================================

@@ -85,96 +85,86 @@ import org.cip4.jdflib.jmf.JDFEmployeeDef;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.w3c.dom.DOMException;
 
-
 public class JDFEmployee extends JDFAutoEmployee implements IMatches
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFEmployee
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFEmployee(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFEmployee
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFEmployee(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+			throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFEmployee
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFEmployee(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
+			String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFEmployee
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFEmployee(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFEmployee
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFEmployee(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
+			String qualifiedName, String myLocalName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFEmployee
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFEmployee(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	public String toString()
+	{
+		return "JDFEmployee[  --> " + super.toString() + " ]";
+	}
 
-    public String toString()
-    {
-        return "JDFEmployee[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * returns true if the input object is equivalent to this or null</br> valid
+	 * object types are:<br/> Employee<br/> EmployeeDef<br/> String - must match @PersonalID
+	 * <br/> (non-Javadoc)
+	 * 
+	 * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
+	 */
+	public boolean matches(Object subset)
+	{
+		if (subset == null)
+			return true; // ( matches contract requires true for null to allow
+							// wildcards
 
-    /**
-     * returns true if the input object is equivalent to this or null</br>
-     * valid object types are:<br/>
-     * Employee<br/>
-     * EmployeeDef<br/>
-     * String - must match @PersonalID <br/>
-     *  (non-Javadoc)
-     * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
-     */
-    public boolean matches(Object subset)
-    {
-        if(subset==null)
-            return true; //( matches contract requires true for null to allow wildcards
-        
-        if(subset instanceof JDFEmployee)
-        {
-            //TODO more criteria - person etc.
-            JDFEmployee employee=(JDFEmployee)subset;
-            return ContainerUtil.equals(getPersonalID(), employee.getPersonalID());
-        }
-        else if(subset instanceof JDFEmployeeDef)
-        {
-            JDFEmployeeDef ed=(JDFEmployeeDef)subset;
-            return ContainerUtil.equals(getPersonalID(), ed.getPersonalID());
-        }
-        else if(subset instanceof String)
-        {
-             return ContainerUtil.equals(getPersonalID(), subset);
-        }
+		if (subset instanceof JDFEmployee)
+		{
+			// TODO more criteria - person etc.
+			JDFEmployee employee = (JDFEmployee) subset;
+			return ContainerUtil.equals(getPersonalID(), employee
+					.getPersonalID());
+		} else if (subset instanceof JDFEmployeeDef)
+		{
+			JDFEmployeeDef ed = (JDFEmployeeDef) subset;
+			return ContainerUtil.equals(getPersonalID(), ed.getPersonalID());
+		} else if (subset instanceof String)
+		{
+			return ContainerUtil.equals(getPersonalID(), subset);
+		}
 
-        return false;
-    }
-} 
-//==========================================================================
+		return false;
+	}
+}
+// ==========================================================================

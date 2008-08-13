@@ -86,75 +86,69 @@ import org.cip4.jdflib.auto.JDFAutoColorIntent;
 import org.cip4.jdflib.core.JDFSeparationList;
 import org.w3c.dom.DOMException;
 
-
 public class JDFColorIntent extends JDFAutoColorIntent
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFColorIntent
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-     public JDFColorIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-        throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFColorIntent
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFColorIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+			throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFColorIntent
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFColorIntent(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFColorIntent
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFColorIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-         throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFColorIntent
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFColorIntent(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName, String myLocalName)
+			throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFColorIntent
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFColorIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-        throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	public String toString()
+	{
+		return "JDFColorIntent[  --> " + super.toString() + " ]";
+	}
 
-    public String toString()
-    {
-        return "JDFColorIntent[  --> " + super.toString() + " ]";
-    }
-    
-    /**
-     * returns the number of colors defined inColorsUsed
-     * @return
-     */
-    public int getNumColors()
-    {
-        JDFSeparationList sl=getColorsUsed();
-        if(sl==null)
-            return 0;
-        return sl.getSeparations().size();
-    }
+	/**
+	 * returns the number of colors defined inColorsUsed
+	 * 
+	 * @return
+	 */
+	public int getNumColors()
+	{
+		JDFSeparationList sl = getColorsUsed();
+		if (sl == null)
+			return 0;
+		return sl.getSeparations().size();
+	}
 } // class JDFIDPLayout
 // ==========================================================================

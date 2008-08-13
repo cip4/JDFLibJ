@@ -82,129 +82,134 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 
-
 public class JDFAssetListCreationParams extends JDFAutoAssetListCreationParams
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * ructor for JDFAssetListCreationParams
-     * @param ownerDocument
-     * @param qualifiedName
-     */
-    public JDFAssetListCreationParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * ructor for JDFAssetListCreationParams
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 */
+	public JDFAssetListCreationParams(CoreDocumentImpl myOwnerDocument,
+			String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * ructor for JDFAssetListCreationParams
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     */
-    public JDFAssetListCreationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * ructor for JDFAssetListCreationParams
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFAssetListCreationParams(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * ructor for JDFAssetListCreationParams
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     */
-    public JDFAssetListCreationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-            String qualifiedName, String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * ructor for JDFAssetListCreationParams
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 */
+	public JDFAssetListCreationParams(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFAssetListCreationParams[  --> " + super.toString() + " ]";
-    }
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFAssetListCreationParams[  --> " + super.toString() + " ]";
+	}
 
-    
-    
-    public JDFFileSpec getSearchPath(int iSkip)
-    {
-        JDFFileSpec res = null;
-        VElement v = getChildElementVector(ElementName.FILESPEC, null, null, true, 0, false);
-        int siz = v.size();
-        
-        for (int i = 0; i < siz; i++)
-        {
-            res = (JDFFileSpec) v.elementAt(i);
-            if (res.hasAttribute(AttributeName.RESOURCEUSAGE))
-            {
-                if (res.getResourceUsage() == "SearchPath")
-                {
-                    if (iSkip >= 0)
-                    {
-                        iSkip--;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-            }
-        }
-        
-        return res;
-    }
+	public JDFFileSpec getSearchPath(int iSkip)
+	{
+		JDFFileSpec res = null;
+		VElement v = getChildElementVector(ElementName.FILESPEC, null, null,
+				true, 0, false);
+		int siz = v.size();
 
-    public JDFFileSpec getCreateSearchPath(int iSkip)
-    {
+		for (int i = 0; i < siz; i++)
+		{
+			res = (JDFFileSpec) v.elementAt(i);
+			if (res.hasAttribute(AttributeName.RESOURCEUSAGE))
+			{
+				if (res.getResourceUsage() == "SearchPath")
+				{
+					if (iSkip >= 0)
+					{
+						iSkip--;
+					} else
+					{
+						break;
+					}
+				}
+			}
+		}
 
-        JDFFileSpec res = getSearchPath(iSkip);
-        if (res == null)
-        {
-            res = appendSearchPath();
-        }
+		return res;
+	}
 
-        return res;
-    }
+	public JDFFileSpec getCreateSearchPath(int iSkip)
+	{
 
-    public JDFFileSpec appendSearchPath()
-    {
+		JDFFileSpec res = getSearchPath(iSkip);
+		if (res == null)
+		{
+			res = appendSearchPath();
+		}
 
-        JDFFileSpec res = appendFileSpec();
-        res.setResourceUsage("SearchPath");
+		return res;
+	}
 
-        return res;
-    }
+	public JDFFileSpec appendSearchPath()
+	{
 
-    public VString getInvalidElements(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
-    {
+		JDFFileSpec res = appendFileSpec();
+		res.setResourceUsage("SearchPath");
 
-        VString vElem = new VString();
-        int n = 0;
-        int nElem = numChildElements(ElementName.FILESPEC, null);
+		return res;
+	}
 
-        for (int i = 0; i < nElem; i++)
-        {
+	public VString getInvalidElements(EnumValidationLevel level,
+			boolean bIgnorePrivate, int nMax)
+	{
 
-            String ru = getFileSpec(i).getResourceUsage();
-            if (!ru.equals("SearchPath"))
-            {
-                vElem.appendUnique(ElementName.FILESPEC);
-                if (++n >= nMax)
-                    return vElem;
-                break;
-            }
-        }
-        vElem.appendUnique(getInvalidElements(level, bIgnorePrivate, (nMax - n)));
+		VString vElem = new VString();
+		int n = 0;
+		int nElem = numChildElements(ElementName.FILESPEC, null);
 
-        return vElem;
-    }
+		for (int i = 0; i < nElem; i++)
+		{
+
+			String ru = getFileSpec(i).getResourceUsage();
+			if (!ru.equals("SearchPath"))
+			{
+				vElem.appendUnique(ElementName.FILESPEC);
+				if (++n >= nMax)
+					return vElem;
+				break;
+			}
+		}
+		vElem
+				.appendUnique(getInvalidElements(level, bIgnorePrivate,
+						(nMax - n)));
+
+		return vElem;
+	}
 }

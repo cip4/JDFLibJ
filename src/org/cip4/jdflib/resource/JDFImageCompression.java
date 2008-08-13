@@ -22,151 +22,142 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.w3c.dom.DOMException;
 
-
 public class JDFImageCompression extends JDFAutoImageCompression
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFImageCompression
-     * @param myOwnerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFImageCompression(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-        throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFImageCompression
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFImageCompression(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFImageCompression
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFImageCompression(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-         throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFImageCompression
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFImageCompression(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFImageCompression
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     * @throws DOMException
-     */
-    public JDFImageCompression(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-        throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * Constructor for JDFImageCompression
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 * @throws DOMException
+	 */
+	public JDFImageCompression(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * toString()
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFImageCompression[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * toString()
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFImageCompression[  --> " + super.toString() + " ]";
+	}
 
+	public static class EnumImageFilter extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
-    public static class EnumImageFilter extends ValuedEnum
-    {
-        private static final long serialVersionUID = 1L;
-        private static int m_startValue = 0;
+		private EnumImageFilter(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        private EnumImageFilter(String name)
-        {
-            super(name, m_startValue++);
-        }
+		/**
+		 * @param enumName
+		 * @return
+		 */
+		public static EnumImageFilter getEnum(String enumName)
+		{
+			return (EnumImageFilter) getEnum(EnumImageFilter.class, enumName);
+		}
 
-        /**
-         * @param enumName
-         * @return
-         */
-        public static EnumImageFilter getEnum(String enumName)
-        {
-            return (EnumImageFilter) getEnum(EnumImageFilter.class, enumName);
-        }
+		/**
+		 * @param enumValue
+		 * @return
+		 */
+		public static EnumImageFilter getEnum(int enumValue)
+		{
+			return (EnumImageFilter) getEnum(EnumImageFilter.class, enumValue);
+		}
 
-        /**
-         * @param enumValue
-         * @return
-         */
-        public static EnumImageFilter getEnum(int enumValue)
-        {
-            return (EnumImageFilter) getEnum(EnumImageFilter.class, enumValue);
-        }
+		/**
+		 * @return
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumImageFilter.class);
+		}
 
-        /**
-         * @return
-         */
-        public static Map getEnumMap()
-        {
-            return getEnumMap(EnumImageFilter.class);
-        }
+		/**
+		 * @return
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumImageFilter.class);
+		}
 
-        /**
-         * @return
-         */
-        public static List getEnumList()
-        {
-            return getEnumList(EnumImageFilter.class);
-        }
+		/**
+		 * @return
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumImageFilter.class);
+		}
 
-        /**
-         * @return
-         */
-        public static Iterator iterator()
-        {
-            return iterator(EnumImageFilter.class);
-        }
+		/**
+		 * @return
+		 */
 
-        /**
-         * @return
-         */
+		// enums accordng to JDF spec 3.1.2, Table 3-3 Status
+		public static final EnumImageFilter Unknown = new EnumImageFilter(JDFConstants.IMAGEFILTER_UNKNOWN);
+		public static final EnumImageFilter CCITTFaxEncode = new EnumImageFilter(JDFConstants.IMAGEFILTER_CCITTFAXENCODE);
+		public static final EnumImageFilter DCTEncode = new EnumImageFilter(JDFConstants.IMAGEFILTER_DCTENCODE);
+		public static final EnumImageFilter FlateEncode = new EnumImageFilter(JDFConstants.IMAGEFILTER_FLATENCODE);
+	}
 
-        // enums accordng to JDF spec 3.1.2, Table 3-3 Status
-        public static final EnumImageFilter Unknown         = new EnumImageFilter(JDFConstants.IMAGEFILTER_UNKNOWN);
-        public static final EnumImageFilter CCITTFaxEncode  = new EnumImageFilter(JDFConstants.IMAGEFILTER_CCITTFAXENCODE);
-        public static final EnumImageFilter DCTEncode       = new EnumImageFilter(JDFConstants.IMAGEFILTER_DCTENCODE);
-        public static final EnumImageFilter FlateEncode     = new EnumImageFilter(JDFConstants.IMAGEFILTER_FLATENCODE);
-    }
+	/**
+	 * set attribute ImageFilter
+	 * 
+	 * @param value enum value to set the attribute to
+	 */
+	public void setEnumImageFilter(EnumImageFilter value)
+	{
+		setAttribute(AttributeName.IMAGEFILTER, value.getName(), null);
+	}
 
-    
-    /**
-     * set attribute ImageFilter
-     * @param value enum value to set the attribute to
-     */
-    public void setEnumImageFilter(EnumImageFilter value)
-    {
-        setAttribute(AttributeName.IMAGEFILTER, value.getName(),null);
-    }
-
-    //    /////////////////////////////////////////////////////////////////////
-    /**
-     * get enum attribute ImageFilter
-     * @return the enum value
-     */
-    public EnumImageFilter getEnumImageFilter() 
-    {
-        return EnumImageFilter.getEnum(getAttribute(AttributeName.IMAGEFILTER, null, null));
-    }
+	// /////////////////////////////////////////////////////////////////////
+	/**
+	 * get enum attribute ImageFilter
+	 * 
+	 * @return the enum value
+	 */
+	public EnumImageFilter getEnumImageFilter()
+	{
+		return EnumImageFilter.getEnum(getAttribute(AttributeName.IMAGEFILTER, null, null));
+	}
 
 } // class JDFIDPLayout
-    // ==========================================================================
+// ==========================================================================

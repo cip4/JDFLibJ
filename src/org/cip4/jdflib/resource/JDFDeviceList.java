@@ -86,103 +86,93 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.w3c.dom.DOMException;
 
-
 public class JDFDeviceList extends JDFAutoDeviceList
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFDeviceList
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-     public JDFDeviceList(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-        throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFDeviceList
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFDeviceList(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFDeviceList
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFDeviceList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 
-    /**
-     * Constructor for JDFDeviceList
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFDeviceList(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-     
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFDeviceList
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFDeviceList(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-        throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * Constructor for JDFDeviceList
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFDeviceList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFDeviceList[  --> " + super.toString() + " ]" ;
-    }
-    
-    /**
-     * get a matching device for a given DeviceID
-     * @param deviceID the deviceID of the device to get
-     */
-    public JDFDeviceInfo getDeviceInfo(String deviceID)
-    {
-        JDFDeviceInfo d=(JDFDeviceInfo)getChildWithAttribute(ElementName.DEVICEINFO, AttributeName.DEVICEID, null, deviceID, 0, true);
-        if(d==null)
-        {
-            JDFDevice dev=(JDFDevice)getChildWithAttribute(ElementName.DEVICE, AttributeName.DEVICEID, null, deviceID, 0, false);
-            if(dev!=null)
-            {
-                d=(JDFDeviceInfo)dev.getParentNode_KElement();
-            }
-        }
-        return d;
-    }
-    /**
-     * get a matching device for a given DeviceID, create it if it does not exist
-     * @param deviceID the deviceID of the device to get
-     */
-    public JDFDeviceInfo getCreateDeviceInfo(String deviceID)
-    {
-        JDFDeviceInfo d=getDeviceInfo(deviceID);
-        if(d==null)
-        {
-            d=appendDeviceInfo();
-            d.setDeviceID(deviceID);
-        }
-        return d;
-    }
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFDeviceList[  --> " + super.toString() + " ]";
+	}
+
+	/**
+	 * get a matching device for a given DeviceID
+	 * 
+	 * @param deviceID the deviceID of the device to get
+	 */
+	public JDFDeviceInfo getDeviceInfo(String deviceID)
+	{
+		JDFDeviceInfo d = (JDFDeviceInfo) getChildWithAttribute(ElementName.DEVICEINFO, AttributeName.DEVICEID, null, deviceID, 0, true);
+		if (d == null)
+		{
+			JDFDevice dev = (JDFDevice) getChildWithAttribute(ElementName.DEVICE, AttributeName.DEVICEID, null, deviceID, 0, false);
+			if (dev != null)
+			{
+				d = (JDFDeviceInfo) dev.getParentNode_KElement();
+			}
+		}
+		return d;
+	}
+
+	/**
+	 * get a matching device for a given DeviceID, create it if it does not exist
+	 * 
+	 * @param deviceID the deviceID of the device to get
+	 */
+	public JDFDeviceInfo getCreateDeviceInfo(String deviceID)
+	{
+		JDFDeviceInfo d = getDeviceInfo(deviceID);
+		if (d == null)
+		{
+			d = appendDeviceInfo();
+			d.setDeviceID(deviceID);
+		}
+		return d;
+	}
 }
-
-
-

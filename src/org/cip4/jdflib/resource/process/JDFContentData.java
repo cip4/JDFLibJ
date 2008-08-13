@@ -83,85 +83,81 @@ import org.cip4.jdflib.auto.JDFAutoContentData;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 
-
 public class JDFContentData extends JDFAutoContentData
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFContentData
-     * @param ownerDocument
-     * @param qualifiedName
-     */
-    public JDFContentData(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFContentData
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 */
+	public JDFContentData(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFContentData
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFContentData(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFContentData
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     */
-    public JDFContentData(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFContentData
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 */
+	public JDFContentData(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFContentData
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     */
-    public JDFContentData(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFContentData[  --> " + super.toString() + " ]";
+	}
 
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFContentData[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the index of this in the parent contentList, -1 if this is not in
+	 *         a cl
+	 */
+	public int getIndex()
+	{
+		KElement parent = getParentNode_KElement();
+		if (parent == null || !(parent instanceof JDFContentList))
+			return -1;
+		JDFContentList cl = (JDFContentList) parent;
+		int n = 0;
+		JDFContentData cd = cl.getContentData(0);
+		while (cd != null)
+		{
+			if (cd == this)
+				return n;
+			n++;
+			cd = (JDFContentData) cd.getNextSiblingElement(
+					ElementName.CONTENTDATA, null);
+		}
+		return -1;
 
-
-    /**
-     * @return the index of this in the parent contentList, -1 if this is not in a cl
-     */
-    public int getIndex()
-    {
-        KElement parent=getParentNode_KElement();
-        if(parent==null || !(parent instanceof JDFContentList))
-            return -1;
-        JDFContentList cl=(JDFContentList) parent;
-        int n=0;
-        JDFContentData cd=cl.getContentData(0);
-        while (cd!=null)
-        {
-            if(cd==this)
-                return n;
-            n++;
-            cd=(JDFContentData) cd.getNextSiblingElement(ElementName.CONTENTDATA, null);
-        }
-        return -1;
-
-    }
+	}
 }

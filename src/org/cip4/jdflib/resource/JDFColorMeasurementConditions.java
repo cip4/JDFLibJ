@@ -82,69 +82,59 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoColorMeasurementConditions;
 import org.w3c.dom.DOMException;
 
-
 public class JDFColorMeasurementConditions extends JDFAutoColorMeasurementConditions
 {
-    private static final long serialVersionUID = 1L;
-    
-    /**
-     * Constructor for JDFColorMeasurementConditions
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFColorMeasurementConditions(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
-    
-    
-    /**
-     * Constructor for JDFColorMeasurementConditions
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFColorMeasurementConditions(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
-    
-    /**
-     * Constructor for JDFColorMeasurementConditions
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFColorMeasurementConditions(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-    
-    //**************************************** Methods *********************************************
-    /**
-     * toString - StringRepresentation of JDFNode
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFColorMeasurementConditions[  --> " + super.toString() + " ]";
-    }
-    
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Constructor for JDFColorMeasurementConditions
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFColorMeasurementConditions(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFColorMeasurementConditions
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFColorMeasurementConditions(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFColorMeasurementConditions
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFColorMeasurementConditions(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString - StringRepresentation of JDFNode
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFColorMeasurementConditions[  --> " + super.toString() + " ]";
+	}
+
 }

@@ -85,144 +85,141 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 
-
 public class JDFxor extends JDFNodeTerm
 {
-    private static final long serialVersionUID = 1L;
-    
-    
-    /**
-     * Constructor for JDFxor
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    public JDFxor(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
-    
-    /**
-     * Constructor for JDFxor
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    public JDFxor(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
-    
-    /**
-     * Constructor for JDFxor
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    public JDFxor(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-    
-    
-    public String toString()
-    {
-        return " JDFxor[  --> " + super.toString() + " ]";
-    }
-    
-    public JDFBooleanEvaluation getBooleanEvaluation(int iSkip) 
-    {
-        JDFBooleanEvaluation e = (JDFBooleanEvaluation)getElement(ElementName.BOOLEANEVALUATION, JDFConstants.EMPTYSTRING, iSkip);
-        return e;
-    }
-    
-    /**
-     * Evaluates two or more Term elements (and, or, xor, not, Evaluation, TestRef) 
-     * to determine if, as a set, they evaluate to “true” 
-     * when combined in a boolean “xor” function.
-     * ! For more than two arguments, exactly one Term must evaluate to “true” 
-     * for the “xor” to evaluate to “true”.<br>
-     * 
-     * Looks for Evaluations that “xor” consists of, and tests the status of every Evaluation, 
-     * until the result of a whole boolean expression is determinated. Tests whether attribute map 'm' has a key
-     * specified by Evaluation/BasicPreflightTest/@Name. If 'm' has such key, checks
-     * if its value fits the testlists, specified for matching Evaluation (uses FitsValue(value))
-     *
-     * @param m key-value pair attribute map
-     * @return boolean - true, if boolean “xor” expression evaluates to “true”
-     */
-    public boolean fitsMap(JDFAttributeMap m) 
-    {
-        VElement v = getChildElementVector(null, null, null, true, 0, false);
-        int siz = v.size();
-        int count = 0;
-        for (int i=0; i<siz; i++)
-        {
-            JDFTerm t = (JDFTerm)v.elementAt(i);
-            if(t.fitsMap(m))
-                count++; 
-            if(count>1)
-                return false;
-        }
-        
-        return (count==1);
-    }
-    
-    
-    
-    /**
-     * Evaluates two or more Term elements (and, or, xor, not, Evaluation, TestRef) 
-     * to determine if, as a set, they evaluate to “true” 
-     * when combined in a boolean “xor” function.
-     *
-     * @param  jdf    JDFNode to test to know if the Device can accept it 
-     * @param reportRoot the report to generate; set to <code>null</code> if no report is requested
-     * @return boolean - true, if boolean “xor” expression evaluates to “true”
-     */
-    public boolean fitsJDF(KElement jdf, KElement reportRoot) 
-    {
-        VElement v = getTermVector(null);
-        if(reportRoot!=null)
-            reportRoot=reportRoot.appendElement("xor");
-        int siz = v.size();
-        
-        int count=0;
-        for (int i=0; i<siz; i++)
-        {
-            JDFTerm t = (JDFTerm) v.elementAt(i);
-            if (t.fitsJDF(jdf, reportRoot))
-                count++;
-            if (count>1 && reportRoot==null)
-                break;
-        }
-        
-        boolean b=(count==1);
-        if(reportRoot!=null)
-            reportRoot.setAttribute("Value",b,null);
-        return b;
-    }
-    
-    /////////////////////////////////////////////////////////
-    
-    public VString getMissingElements(int nMax)
-    {
-        VString v=super.getMissingElements(nMax);
-        if(v.size()>=nMax)
-            return v;
-        
-        v.appendUnique(getMissingTerms(2));
-        return v;        
-    }
-    
-    /////////////////////////////////////////////////////////
-    
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Constructor for JDFxor
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	public JDFxor(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFxor
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFxor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
+			String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFxor
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	public JDFxor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
+			String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	public String toString()
+	{
+		return " JDFxor[  --> " + super.toString() + " ]";
+	}
+
+	public JDFBooleanEvaluation getBooleanEvaluation(int iSkip)
+	{
+		JDFBooleanEvaluation e = (JDFBooleanEvaluation) getElement(
+				ElementName.BOOLEANEVALUATION, JDFConstants.EMPTYSTRING, iSkip);
+		return e;
+	}
+
+	/**
+	 * Evaluates two or more Term elements (and, or, xor, not, Evaluation,
+	 * TestRef) to determine if, as a set, they evaluate to “true” when combined
+	 * in a boolean “xor” function. ! For more than two arguments, exactly one
+	 * Term must evaluate to “true” for the “xor” to evaluate to “true”.<br>
+	 * 
+	 * Looks for Evaluations that “xor” consists of, and tests the status of
+	 * every Evaluation, until the result of a whole boolean expression is
+	 * determinated. Tests whether attribute map 'm' has a key specified by
+	 * Evaluation/BasicPreflightTest/@Name. If 'm' has such key, checks if its
+	 * value fits the testlists, specified for matching Evaluation (uses
+	 * FitsValue(value))
+	 * 
+	 * @param m
+	 *            key-value pair attribute map
+	 * @return boolean - true, if boolean “xor” expression evaluates to “true”
+	 */
+	public boolean fitsMap(JDFAttributeMap m)
+	{
+		VElement v = getChildElementVector(null, null, null, true, 0, false);
+		int siz = v.size();
+		int count = 0;
+		for (int i = 0; i < siz; i++)
+		{
+			JDFTerm t = (JDFTerm) v.elementAt(i);
+			if (t.fitsMap(m))
+				count++;
+			if (count > 1)
+				return false;
+		}
+
+		return (count == 1);
+	}
+
+	/**
+	 * Evaluates two or more Term elements (and, or, xor, not, Evaluation,
+	 * TestRef) to determine if, as a set, they evaluate to “true” when combined
+	 * in a boolean “xor” function.
+	 * 
+	 * @param jdf
+	 *            JDFNode to test to know if the Device can accept it
+	 * @param reportRoot
+	 *            the report to generate; set to <code>null</code> if no report
+	 *            is requested
+	 * @return boolean - true, if boolean “xor” expression evaluates to “true”
+	 */
+	public boolean fitsJDF(KElement jdf, KElement reportRoot)
+	{
+		VElement v = getTermVector(null);
+		if (reportRoot != null)
+			reportRoot = reportRoot.appendElement("xor");
+		int siz = v.size();
+
+		int count = 0;
+		for (int i = 0; i < siz; i++)
+		{
+			JDFTerm t = (JDFTerm) v.elementAt(i);
+			if (t.fitsJDF(jdf, reportRoot))
+				count++;
+			if (count > 1 && reportRoot == null)
+				break;
+		}
+
+		boolean b = (count == 1);
+		if (reportRoot != null)
+			reportRoot.setAttribute("Value", b, null);
+		return b;
+	}
+
+	// ///////////////////////////////////////////////////////
+
+	public VString getMissingElements(int nMax)
+	{
+		VString v = super.getMissingElements(nMax);
+		if (v.size() >= nMax)
+			return v;
+
+		v.appendUnique(getMissingTerms(2));
+		return v;
+	}
+
+	// ///////////////////////////////////////////////////////
+
 }

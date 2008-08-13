@@ -38,7 +38,7 @@
  *
  * Usage of this software in commercial products is subject to restrictions. For
  * details please consult info@cip4.org.
-  *
+ *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -88,113 +88,109 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.w3c.dom.DOMException;
 
-
 public class JDFMerged extends JDFAutoMerged
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFMerged
-     * @param myOwnerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFMerged(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-        throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFMerged
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFMerged(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFMerged
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFMerged(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-         throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFMerged
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFMerged(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFMerged
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     * @throws DOMException
-     */
-    public JDFMerged(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-        throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * Constructor for JDFMerged
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 * @throws DOMException
+	 */
+	public JDFMerged(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * toString()
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFMerged[  --> " + super.toString() + " ]";
-    }
-    
-    /**
-     * get part map vector
-     * @return VJDFAttributeMap: vector of attribute maps, one for each part
-     */
-    public VJDFAttributeMap getPartMapVector()
-    {
-        return super.getPartMapVector();
-    }
+	/**
+	 * toString()
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFMerged[  --> " + super.toString() + " ]";
+	}
 
-    /**
-     * set all parts to those defined in vParts
-     * @param vParts vector of attribute maps for the parts
-     */
-    public void setPartMapVector(VJDFAttributeMap vParts)
-    {
-        super.setPartMapVector(vParts);
-    }
+	/**
+	 * get part map vector
+	 * 
+	 * @return VJDFAttributeMap: vector of attribute maps, one for each part
+	 */
+	public VJDFAttributeMap getPartMapVector()
+	{
+		return super.getPartMapVector();
+	}
 
-    /**
-     * set all parts to those define in vParts
-     * @param JDFAttributeMap mPart: attribute map for the part to set
-     */
-    public void setPartMap(JDFAttributeMap mPart)
-    {
-        super.setPartMap(mPart);
-    }
+	/**
+	 * set all parts to those defined in vParts
+	 * 
+	 * @param vParts vector of attribute maps for the parts
+	 */
+	public void setPartMapVector(VJDFAttributeMap vParts)
+	{
+		super.setPartMapVector(vParts);
+	}
 
-    /**
-     * remove the part defined by mPart
-     * @param mPart attribute map for the part to remove
-     */
-    public void removePartMap(JDFAttributeMap mPart)
-    {
-        super.removePartMap(mPart);
-    }
+	/**
+	 * set all parts to those define in vParts
+	 * 
+	 * @param JDFAttributeMap mPart: attribute map for the part to set
+	 */
+	public void setPartMap(JDFAttributeMap mPart)
+	{
+		super.setPartMap(mPart);
+	}
 
-    /**
-     * check whether the part defined in mPart is included
-     * @param mPart attribute map to look for
-     * @return boolean - returns true if the part exists
-     */
-    public boolean hasPartMap(JDFAttributeMap mPart)
-    {
-        return super.hasPartMap(mPart);
-    }
-    
+	/**
+	 * remove the part defined by mPart
+	 * 
+	 * @param mPart attribute map for the part to remove
+	 */
+	public void removePartMap(JDFAttributeMap mPart)
+	{
+		super.removePartMap(mPart);
+	}
+
+	/**
+	 * check whether the part defined in mPart is included
+	 * 
+	 * @param mPart attribute map to look for
+	 * @return boolean - returns true if the part exists
+	 */
+	public boolean hasPartMap(JDFAttributeMap mPart)
+	{
+		return super.hasPartMap(mPart);
+	}
+
 } // class JDFMerged
 // ==========================================================================

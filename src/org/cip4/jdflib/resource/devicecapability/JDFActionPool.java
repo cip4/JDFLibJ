@@ -87,153 +87,159 @@ import org.cip4.jdflib.ifaces.IDeviceCapable;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.w3c.dom.DOMException;
 
-
 public class JDFActionPool extends JDFAutoActionPool
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFActionPool
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFActionPool(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFActionPool
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFActionPool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+			throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFActionPool
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFActionPool(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFActionPool
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFActionPool(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFActionPool
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFActionPool(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName, String myLocalName)
+			throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFActionPool
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFActionPool(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFActionPool[  --> " + super.toString() + " ]";
+	}
 
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFActionPool[  --> " + super.toString() + " ]" ;
-    }
+	/**
+	 * 
+	 * @return the deviceCap or MessageService that <this> resides in
+	 */
+	public IDeviceCapable getDeviceCap()
+	{
+		return (IDeviceCapable) getParentNode_KElement();
+	}
 
+	/**
+	 * append an action to this that references a Test with a term of type term
+	 * in the parallel TestPool
+	 * 
+	 * @param term
+	 *            the type of term in the test
+	 * @param bActionFailsOnTestTrue
+	 *            if true the term is linked directly, if false a the term is
+	 *            inverted by enclosing it in a <not> term
+	 */
+	public JDFAction appendActionTest(EnumTerm term,
+			boolean bActionFailsOnTestTrue)
+	{
+		JDFAction action = appendAction();
+		JDFTestPool testPool = (JDFTestPool) getParentNode_KElement()
+				.getCreateElement(ElementName.TESTPOOL);
+		JDFTest test = null;
+		if (bActionFailsOnTestTrue)
+		{
+			test = testPool.appendTestTerm(term);
+		} else
+		{
+			test = testPool.appendTest();
+			((JDFnot) test.appendTerm(EnumTerm.not)).appendTerm(term);
+		}
+		action.setTest(test);
+		return action;
+	}
 
-    /**
-     * 
-     * @return the deviceCap or MessageService that <this> resides in
-     */
-    public IDeviceCapable getDeviceCap()
-    {
-        return (IDeviceCapable) getParentNode_KElement();
-    }
-    /**
-     * append an action to this that references a Test with a term of type term in the parallel TestPool
-     * @param term the type of term in the test
-     * @param bActionFailsOnTestTrue if true the term is linked directly, 
-     * if false a the term is inverted by enclosing it in a <not> term 
-     */
-    public JDFAction appendActionTest(EnumTerm term,boolean bActionFailsOnTestTrue)
-    {
-        JDFAction action=appendAction();
-        JDFTestPool testPool=(JDFTestPool)getParentNode_KElement().getCreateElement(ElementName.TESTPOOL);
-        JDFTest test=null;
-        if(bActionFailsOnTestTrue)
-        {
-            test=testPool.appendTestTerm(term);
-        }
-        else
-        {
-            test=testPool.appendTest();
-            ((JDFnot)test.appendTerm(EnumTerm.not)).appendTerm(term);
-        }
-        action.setTest(test);
-        return action;
-    }
+	/**
+	 * append an action to this that references a Test with a term of type term
+	 * in the parallel TestPool
+	 * 
+	 * @param term
+	 *            the type of term in the test
+	 * @param setTerm
+	 *            the term referenced by PreflightAction@SetRef
+	 * @param bActionFailsOnTestTrue
+	 *            if true the term is linked directly, if false a the term is
+	 *            inverted by enclosing it in a <not> term note that the setTest
+	 *            always MUST be true to evaluate.
+	 * 
+	 * @return the newly created action
+	 */
+	public JDFAction appendActionSetTest(EnumTerm term, EnumTerm setTerm,
+			boolean bActionFailsOnTestTrue)
+	{
+		JDFAction action = appendActionTest(term, bActionFailsOnTestTrue);
+		JDFTestPool testPool = (JDFTestPool) getParentNode_KElement()
+				.getCreateElement(ElementName.TESTPOOL);
+		JDFTest setTest = testPool.appendTestTerm(setTerm);
+		action.setPreflightActionSetRef(setTest);
+		return action;
+	}
 
-    /**
-     * append an action to this that references a Test with a term of type term in the parallel TestPool
-     * @param term the type of term in the test
-     * @param setTerm the term referenced by PreflightAction@SetRef
-     * @param bActionFailsOnTestTrue if true the term is linked directly, 
-     * if false a the term is inverted by enclosing it in a <not> term 
-     * note that the setTest always MUST be true to evaluate.
-     * 
-     * @return the newly created action
-     */
-    public JDFAction appendActionSetTest(EnumTerm term, EnumTerm setTerm, boolean bActionFailsOnTestTrue)
-    {
-        JDFAction action=appendActionTest(term,bActionFailsOnTestTrue);
-        JDFTestPool testPool=(JDFTestPool)getParentNode_KElement().getCreateElement(ElementName.TESTPOOL);
-        JDFTest setTest =testPool.appendTestTerm(setTerm);
-        action.setPreflightActionSetRef(setTest);
-        return action;
-    }
+	/**
+	 * append an action to this that references a Test that defines an exclusion
+	 * of two values
+	 * 
+	 * @param id1
+	 *            the id of the first state or devcap to reference
+	 * @param id2
+	 *            the id of the 2nd state or devcap to reference
+	 * 
+	 * @return the newly created action
+	 */
+	public JDFAction appendExcludeTest(ICapabilityElement t1,
+			ICapabilityElement t2)
+	{
+		if (t1 == null || t2 == null)
+			return null; // snafu - cant find elements to match
 
-    /**
-     * append an action to this that references a Test that defines an exclusion of two values
-     * 
-     * @param id1 the id of the first state or devcap to reference
-     * @param id2 the id of the 2nd state or devcap to reference
-     * 
-     * @return the newly created action
-     */
-    public JDFAction appendExcludeTest(ICapabilityElement t1, ICapabilityElement t2)
-    {
-        if(t1==null || t2==null)
-            return null; // snafu - cant find elements to match
+		String id1 = ((JDFElement) t1).appendAnchor(null);
+		String id2 = ((JDFElement) t2).appendAnchor(null);
 
-        String id1=((JDFElement)t1).appendAnchor(null);
-        String id2=((JDFElement)t2).appendAnchor(null);
+		JDFAction action = appendActionTest(EnumTerm.and, true); // fail if a &&
+																	// b
+		JDFand and = (JDFand) action.getTestTerm();
 
- 
-        JDFAction action=appendActionTest(EnumTerm.and,true); // fail if a && b
-        JDFand and=(JDFand) action.getTestTerm();
+		JDFEvaluation ev1 = (JDFEvaluation) and.appendTerm(t1
+				.getEvaluationType());
+		ev1.setrRef(id1);
+		JDFEvaluation ev2 = (JDFEvaluation) and.appendTerm(t2
+				.getEvaluationType());
+		ev2.setrRef(id2);
 
-        JDFEvaluation ev1=(JDFEvaluation)and.appendTerm(t1.getEvaluationType());
-        ev1.setrRef(id1);
-        JDFEvaluation ev2=(JDFEvaluation)and.appendTerm(t2.getEvaluationType());
-        ev2.setrRef(id2);
-
-        return action;
-    }
-
-
+		return action;
+	}
 
 }
-
-
-

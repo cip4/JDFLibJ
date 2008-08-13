@@ -69,14 +69,14 @@
  * 
  */
 /**
-==========================================================================
-class JDFDevice
-==========================================================================
-@COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001
-ALL RIGHTS RESERVED
-@Author: sabjon@topmail.de   using a code generator
-Warning! very preliminary test version. Interface subject to change without prior notice!
-Revision history:    ...
+ ==========================================================================
+ class JDFDevice
+ ==========================================================================
+ @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001
+ ALL RIGHTS RESERVED
+ @Author: sabjon@topmail.de   using a code generator
+ Warning! very preliminary test version. Interface subject to change without prior notice!
+ Revision history:    ...
  **/
 package org.cip4.jdflib.resource;
 
@@ -92,223 +92,205 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 import org.w3c.dom.DOMException;
 
-
 public class JDFDevice extends JDFAutoDevice
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFDevice
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFDevice(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFDevice
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFDevice(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFDevice
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFDevice(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFDevice
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFDevice(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFDevice
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFDevice(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFDevice
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFDevice(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	public String toString()
+	{
+		return "JDFDevice[  --> " + super.toString() + " ]";
+	}
 
-    public String toString()
-    {
-        return "JDFDevice[  --> " + super.toString() + " ]";
-    }
-    /**
-     * test whether a given node has the corect Types and Type Attribute
-     * 
-     * @param testRoot the JDF or JMF to test
-     * 
-     * @return VElement - the list of matching JDF nodes, null if none found
-     * 
-     */
-    public VElement getMatchingTypeNodeVector(JDFNode testRoot)
-    {
-        VElement vDeviceCap=getChildElementVector(ElementName.DEVICECAP, null, null, false, -1, false);
-        if(vDeviceCap==null || vDeviceCap.isEmpty())
-            return null;
-        VElement vRet=new VElement();
-        for(int i=0;i<vDeviceCap.size();i++)
-        {
-            VElement vMatch=((JDFDeviceCap)vDeviceCap.elementAt(i)).getMatchingTypeNodeVector(testRoot);
-            if(vMatch!=null)
-            {
-                vRet.addAll(vMatch);
-            }
-        }
-        vRet.unify();
-        return vRet.isEmpty() ? null : vRet;
-    }
+	/**
+	 * test whether a given node has the corect Types and Type Attribute
+	 * 
+	 * @param testRoot the JDF or JMF to test
+	 * 
+	 * @return VElement - the list of matching JDF nodes, null if none found
+	 * 
+	 */
+	public VElement getMatchingTypeNodeVector(JDFNode testRoot)
+	{
+		VElement vDeviceCap = getChildElementVector(ElementName.DEVICECAP, null, null, false, -1, false);
+		if (vDeviceCap == null || vDeviceCap.isEmpty())
+			return null;
+		VElement vRet = new VElement();
+		for (int i = 0; i < vDeviceCap.size(); i++)
+		{
+			VElement vMatch = ((JDFDeviceCap) vDeviceCap.elementAt(i)).getMatchingTypeNodeVector(testRoot);
+			if (vMatch != null)
+			{
+				vRet.addAll(vMatch);
+			}
+		}
+		vRet.unify();
+		return vRet.isEmpty() ? null : vRet;
+	}
 
+	/**
+	 * return all deviceCap elements that correspond to testRoot
+	 * 
+	 * @param testRoot the JDF or JMF to test
+	 * 
+	 * @return VElement - the list of matching devicecap nodes, null if none found
+	 * 
+	 */
+	public VElement getMatchingDeviceCapVector(JDFNode testRoot, boolean bLocal)
+	{
+		VElement vDeviceCap = getChildElementVector(ElementName.DEVICECAP, null, null, false, -1, false);
+		if (vDeviceCap == null || vDeviceCap.isEmpty())
+			return null;
+		VElement vRet = new VElement();
+		for (int i = 0; i < vDeviceCap.size(); i++)
+		{
+			final JDFDeviceCap dc = (JDFDeviceCap) vDeviceCap.elementAt(i);
+			if (dc.matchesType(testRoot, bLocal))
+			{
+				vRet.add(dc);
+			}
+		}
+		return vRet.isEmpty() ? null : vRet;
+	}
 
-    /**
-     * return all deviceCap elements that correspond to testRoot
-     * 
-     * @param testRoot the JDF or JMF to test
-     * 
-     * @return VElement - the list of matching devicecap nodes, null if none found
-     * 
-     */
-    public VElement getMatchingDeviceCapVector(JDFNode testRoot, boolean bLocal)
-    {
-        VElement vDeviceCap=getChildElementVector(ElementName.DEVICECAP, null, null, false, -1, false);
-        if(vDeviceCap==null || vDeviceCap.isEmpty())
-            return null;
-        VElement vRet=new VElement();
-        for(int i=0;i<vDeviceCap.size();i++)
-        {
-            final JDFDeviceCap dc = (JDFDeviceCap)vDeviceCap.elementAt(i);
-            if(dc.matchesType(testRoot, bLocal))
-            {
-                vRet.add(dc);
-            }
-        }
-        return vRet.isEmpty() ? null : vRet;
-    }
-    /**
-     * test whether a given node has the corect Types and Type Attribute
-     * 
-     * @param testRoot the JDF or JMF to test
-     * @param bLocal   if true, only check the root of this, else check children as well
-     * 
-     * @return boolean - true if this DeviceCaps TypeExpression fits testRoot/@Type and testRoot/@Types
-     * 
-     */
-    public boolean matchesType(JDFNode testRoot, boolean bLocal)
-    {
-        VElement v=getMatchingTypeNodeVector(testRoot);
-        if(v==null)
-            return false;
-        if(bLocal)
-            return v.contains(testRoot);
-        return true;        
-    }
+	/**
+	 * test whether a given node has the corect Types and Type Attribute
+	 * 
+	 * @param testRoot the JDF or JMF to test
+	 * @param bLocal if true, only check the root of this, else check children as well
+	 * 
+	 * @return boolean - true if this DeviceCaps TypeExpression fits testRoot/@Type and testRoot/@Types
+	 * 
+	 */
+	public boolean matchesType(JDFNode testRoot, boolean bLocal)
+	{
+		VElement v = getMatchingTypeNodeVector(testRoot);
+		if (v == null)
+			return false;
+		if (bLocal)
+			return v.contains(testRoot);
+		return true;
+	}
 
+	/**
+	 * Gets of jdfRoot a vector of all executable nodes (jdf root or children nodes that this Device may execute)
+	 * 
+	 * @param jdfRoot the node we test
+	 * @param testlists testlists that are specified for the State elements (FitsValue_Allowed or FitsValue_Present)<br>
+	 *            Will be used in fitsValue method of the State class.
+	 * @param level validation level
+	 * @return VElement - vector of executable JDFNodes
+	 */
+	public VElement getExecutableJDF(JDFNode docRoot, EnumFitsValue testlists, EnumValidationLevel validationLevel)
+	{
+		VElement vDC = getChildElementVector(ElementName.DEVICECAP, null, null, true, -1, false);
+		if (vDC == null || vDC.isEmpty())
+			return null;
 
-    /**
-     * Gets of jdfRoot a vector of all executable nodes  
-     * (jdf root or children nodes that this Device may execute)
-     *
-     * @param jdfRoot   the node we test
-     * @param testlists testlists that are specified for the State elements 
-     *                  (FitsValue_Allowed or FitsValue_Present)<br>
-     *                  Will be used in fitsValue method of the State class.
-     * @param level     validation level
-     * @return VElement - vector of executable JDFNodes
-     */
-    public VElement getExecutableJDF(JDFNode docRoot, EnumFitsValue testlists, EnumValidationLevel validationLevel)
-    {
-        VElement vDC=getChildElementVector(ElementName.DEVICECAP, null, null, true, -1,false);
-        if(vDC==null || vDC.isEmpty())
-            return null;
+		VElement vn = new VElement();
+		for (int i = 0; i < vDC.size(); i++)
+		{
+			JDFDeviceCap dc = (JDFDeviceCap) vDC.elementAt(i);
+			final VElement executableJDF = dc.getExecutableJDF(docRoot, testlists, validationLevel);
+			if (executableJDF != null)
+				vn.addAll(executableJDF);
+		}
+		vn.unify();
+		return vn.isEmpty() ? null : vn;
+	}
 
-        VElement vn=new VElement();
-        for(int i=0;i<vDC.size();i++)
-        {
-            JDFDeviceCap dc=(JDFDeviceCap)vDC.elementAt(i);
-            final VElement executableJDF = dc.getExecutableJDF(docRoot, testlists, validationLevel);
-            if(executableJDF!=null)
-                vn.addAll(executableJDF);
-        }
-        vn.unify();
-        return vn.isEmpty() ? null : vn;
-    }
+	/**
+	 * Composes a BugReport in XML form for the given JDFNode 'jdfRoot'. Gives a list of error messages for 'jdfRoot'
+	 * and every child rejected Node.<br>
+	 * Returns <code>null</code> if there are no errors.
+	 * 
+	 * @param jdfRoot the node to test
+	 * @param testlists testlists that are specified for the State elements (FitsValue_Allowed or FitsValue_Present)<br>
+	 *            Will be used in fitsValue method of the State class.
+	 * @param level validation level
+	 * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc is null there are no errors.
+	 */
+	public final XMLDoc getBadJDFInfo(final JDFNode jdfRoot, final EnumFitsValue testlists, final EnumValidationLevel level)
+	{
+		VElement vDC = getChildElementVector(ElementName.DEVICECAP, null, null, true, -1, false);
+		if (vDC == null || vDC.isEmpty())
+			return null;
 
-    
-    /**
-     * Composes a BugReport in XML form for the given JDFNode 'jdfRoot'. 
-     * Gives a list of error messages for 'jdfRoot' and every child rejected Node.<br> 
-     * Returns <code>null</code> if there are no errors.
-     *
-     * @param jdfRoot   the node to test
-     * @param testlists testlists that are specified for the State elements 
-     *                  (FitsValue_Allowed or FitsValue_Present)<br>
-     *                  Will be used in fitsValue method of the State class.
-     * @param level     validation level
-     * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc is null there are no errors.
-     */
-    public final XMLDoc getBadJDFInfo(final JDFNode jdfRoot, final EnumFitsValue testlists, final EnumValidationLevel level)
-    {
-        VElement vDC=getChildElementVector(ElementName.DEVICECAP, null, null, true, -1,false);
-        if(vDC==null || vDC.isEmpty())
-            return null;
+		VElement vn = new VElement();
+		for (int i = 0; i < vDC.size(); i++)
+		{
+			JDFDeviceCap dc = (JDFDeviceCap) vDC.elementAt(i);
+			XMLDoc bugReport = dc.getBadJDFInfo(jdfRoot, testlists, level);
+			if (bugReport == null)
+				return null;
+			vn.addAll(bugReport.getRoot().getChildElementVector(null, null, null, true, -1, false));
+		}
 
-        VElement vn=new VElement();
-        for(int i=0;i<vDC.size();i++)
-        {
-            JDFDeviceCap dc=(JDFDeviceCap)vDC.elementAt(i);
-            XMLDoc bugReport = dc.getBadJDFInfo(jdfRoot, testlists, level);
-            if(bugReport==null)
-                return null;
-            vn.addAll(bugReport.getRoot().getChildElementVector(null, null, null, true, -1,false));
-        }
-            
-        final int vnSize = vn.size();
-        if(vnSize==0)
-            return null;
+		final int vnSize = vn.size();
+		if (vnSize == 0)
+			return null;
 
-        XMLDoc bugReport = new XMLDoc("BugReport", null);
-        KElement root=bugReport.getRoot();
-        boolean bFit=false;
-        for(int i=0;i<vnSize;i++)
-        {
-            KElement e=vn.elementAt(i);
-            if(JDFConstants.TRUE.equals(e.getAttribute(JDFDeviceCap.FITS_TYPE)))
-                bFit=true;
-        }  
-        if(bFit)
-        {
-            for(int i=0;i<vnSize;i++)
-            {
-                KElement e=vn.elementAt(i);
-                if(JDFConstants.FALSE.equals(e.getAttribute(JDFDeviceCap.FITS_TYPE)))
-                    vn.set(i, null);
-            }      
-        }
-        for(int i=0;i<vnSize;i++)
-        {
-            if(vn.elementAt(i)!=null)
-                root.moveElement(vn.item(i), null);
-        }       
-        return bugReport;
-    } 
+		XMLDoc bugReport = new XMLDoc("BugReport", null);
+		KElement root = bugReport.getRoot();
+		boolean bFit = false;
+		for (int i = 0; i < vnSize; i++)
+		{
+			KElement e = vn.elementAt(i);
+			if (JDFConstants.TRUE.equals(e.getAttribute(JDFDeviceCap.FITS_TYPE)))
+				bFit = true;
+		}
+		if (bFit)
+		{
+			for (int i = 0; i < vnSize; i++)
+			{
+				KElement e = vn.elementAt(i);
+				if (JDFConstants.FALSE.equals(e.getAttribute(JDFDeviceCap.FITS_TYPE)))
+					vn.set(i, null);
+			}
+		}
+		for (int i = 0; i < vnSize; i++)
+		{
+			if (vn.elementAt(i) != null)
+				root.moveElement(vn.item(i), null);
+		}
+		return bugReport;
+	}
 }
-
-
-

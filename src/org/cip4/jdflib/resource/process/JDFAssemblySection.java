@@ -38,7 +38,7 @@
  *
  * Usage of this software in commercial products is subject to restrictions. For
  * details please consult info@cip4.org.
-  *
+ *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -78,113 +78,110 @@ import org.w3c.dom.DOMException;
 
 public class JDFAssemblySection extends JDFAutoAssemblySection
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.ASSEMBLYSECTION, 0x33333311);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.ASSEMBLYSECTION,
+				0x33333311);
+	}
 
-    /**
-     * Constructor for JDFAssemblySection
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-     public JDFAssemblySection(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-        throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAssemblySection
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFAssemblySection(CoreDocumentImpl myOwnerDocument,
+			String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAssemblySection
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFAssemblySection(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-         throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAssemblySection
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFAssemblySection(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAssemblySection
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFAssemblySection(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-        throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * Constructor for JDFAssemblySection
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFAssemblySection(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName, String myLocalName)
+			throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFAssemblySection[  --> " + super.toString() + " ]" ;
-    }
-    
-    /** (26) getCreateAssemblySection
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFAssemblySection the element
-     */
-    public JDFAssemblySection getCreateAssemblySection(int iSkip)
-    {
-        return (JDFAssemblySection)getCreateElement_KElement(ElementName.ASSEMBLYSECTION, null, iSkip);
-    }
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFAssemblySection[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * (26) getCreateAssemblySection
+	 * 
+	 * @param iSkip
+	 *            number of elements to skip
+	 * @return JDFAssemblySection the element
+	 */
+	public JDFAssemblySection getCreateAssemblySection(int iSkip)
+	{
+		return (JDFAssemblySection) getCreateElement_KElement(
+				ElementName.ASSEMBLYSECTION, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element AssemblySection
+	 * 
+	 * @param iSkip
+	 *            number of elements to skip
+	 * @return JDFAssemblySection the element default is getAssemblySection(0)
+	 */
+	public JDFAssemblySection getAssemblySection(int iSkip)
+	{
+		return (JDFAssemblySection) getElement(ElementName.ASSEMBLYSECTION,
+				null, iSkip);
+	}
 
-    /**
-     * (27) const get element AssemblySection
-     * @param iSkip number of elements to skip
-     * @return JDFAssemblySection the element
-     * default is getAssemblySection(0)     */
-    public JDFAssemblySection getAssemblySection(int iSkip)
-    {
-        return (JDFAssemblySection) getElement(ElementName.ASSEMBLYSECTION, null, iSkip);
-    }
+	/**
+	 * appends a new assemblysection to this
+	 * 
+	 * @return
+	 */
+	public JDFAssemblySection appendAssemblySection()
+	{
+		return (JDFAssemblySection) appendElement(ElementName.ASSEMBLYSECTION,
+				null);
+	}
 
-
-
-    /**
-     * appends a new assemblysection to this
-     * @return
-     */
-    public JDFAssemblySection appendAssemblySection()
-    {
-        return (JDFAssemblySection) appendElement(ElementName.ASSEMBLYSECTION, null);
-    }
-    
 }
-
-
-

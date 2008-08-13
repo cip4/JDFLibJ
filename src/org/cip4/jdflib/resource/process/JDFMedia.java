@@ -89,133 +89,138 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 
-
 public class JDFMedia extends JDFAutoMedia
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Constructor for JDFMedia
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 */
+	public JDFMedia(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFMedia
-     * @param ownerDocument
-     * @param qualifiedName
-     */
-    public JDFMedia(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFMedia
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFMedia(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
+			String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFMedia
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 */
+	public JDFMedia(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
+			String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFMedia
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     */
-    public JDFMedia(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	public String toString()
+	{
+		return "JDFMedia[  --> " + super.toString() + " ]";
+	}
 
-    /**
-     * Constructor for JDFMedia
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     */
-    public JDFMedia(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * calculates paper thickness from weight, if and only if weight exists but
+	 * not thickness
+	 * 
+	 * @param bLocal
+	 *            if true, only evaluate locally set attributes in this
+	 *            partition, else check inherited attributes
+	 * @param bRecurse
+	 *            if true, do for all children, grandchildren rtc, else only
+	 *            local
+	 */
+	public void setThicknessFromWeight(boolean bLocal, boolean bRecurse)
+	{
+		EnumMediaType mT = getMediaType();
+		if (!EnumMediaType.Paper.equals(mT))
+			return; // only useful for paper
+		if (bRecurse)
+		{
+			VElement v = getLeaves(true);
+			int size = v.size();
+			for (int i = 0; i < size; i++)
+				((JDFMedia) v.get(i)).setThicknessFromWeight(bLocal, false);
+		} else
+		{
+			String w = bLocal ? getAttribute_KElement(AttributeName.WEIGHT)
+					: getAttribute(AttributeName.WEIGHT);
+			if (isWildCard(w))
+				return; // no weight to use
+			String t = bLocal ? getAttribute_KElement(AttributeName.THICKNESS)
+					: getAttribute(AttributeName.THICKNESS);
+			if (!isWildCard(t))
+				return; // no weight to use
+			setThickness(getWeight() * 1.25); // assume average density of 0.8
+												// g/cm^3
+			// TODO improve calculation based on grade etc.
+		}
+	}
 
-    public String toString()
-    {
-        return "JDFMedia[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * Set attribute Dimension (in point)
+	 * 
+	 * @param JDFXYPair
+	 *            value: the value (in centimeter) to set the dimension to
+	 */
+	public void setDimensionCM(JDFXYPair value)
+	{
+		JDFXYPair xyp = new JDFXYPair(value); // don't change the original
+		xyp.scale(72.0 / 2.54);
+		setDimension(xyp);
+	}
 
+	/**
+	 * Get attribute Dimension in centimeter
+	 * 
+	 * @return JDFXYPair the dimension in centimeter
+	 */
+	public JDFXYPair getDimensionCM()
+	{
+		JDFXYPair xyp = getDimension();
+		xyp.scale(2.54 / 72.0);
+		return xyp;
+	}
 
-    /**
-     * calculates paper thickness from weight, if and only if weight exists but not thickness
-     * 
-     * @param bLocal if true, only evaluate locally set attributes in this partition, else check inherited attributes
-     * @param bRecurse if true, do for all children, grandchildren rtc, else only local
-     */
-    public void setThicknessFromWeight (boolean bLocal, boolean bRecurse)
-    {
-        EnumMediaType mT=getMediaType();
-        if(!EnumMediaType.Paper.equals(mT))
-            return; // only useful for paper
-        if(bRecurse)
-        {
-            VElement v=getLeaves(true);
-            int size = v.size();
-            for(int i=0;i<size;i++)
-                ((JDFMedia)v.get(i)).setThicknessFromWeight(bLocal,false);
-        }
-        else
-        {
-            String w=bLocal ? getAttribute_KElement(AttributeName.WEIGHT) : getAttribute(AttributeName.WEIGHT);
-            if(isWildCard(w))
-                return; // no weight to use
-            String t=bLocal ? getAttribute_KElement(AttributeName.THICKNESS) : getAttribute(AttributeName.THICKNESS);
-            if(!isWildCard(t))
-                return; // no weight to use
-            setThickness(getWeight()*1.25); // assume average density of 0.8 g/cm^3
-            //TODO improve calculation based on grade etc.         
-        }
-    }
-    /**
-     * Set attribute Dimension (in point)
-     * @param JDFXYPair value: the value (in centimeter) to set the dimension to
-     */
-    public void setDimensionCM (JDFXYPair value)
-    {
-        JDFXYPair xyp = new JDFXYPair(value);  // don't change the original
-        xyp.scale(72.0/2.54);
-        setDimension(xyp);
-    }
+	/**
+	 * Set attribute Dimension (in point)
+	 * 
+	 * @param JDFXYPair
+	 *            value: the value (in inch) to set the dimension to
+	 */
+	public void setDimensionInch(JDFXYPair value)
+	{
+		JDFXYPair xyp = new JDFXYPair(value); // don't change the original
+		xyp.scale(72.0);
+		setDimension(xyp);
+	}
 
-    /**
-     * Get attribute Dimension in centimeter
-     * @return JDFXYPair the dimension in centimeter 
-     */
-    public JDFXYPair getDimensionCM()
-    {
-        JDFXYPair xyp = getDimension();
-        xyp.scale(2.54/72.0);
-        return xyp;
-    }
-
-
-    /**
-     * Set attribute Dimension (in point)
-     * @param JDFXYPair value: the value (in inch) to set the dimension to
-     */
-    public void setDimensionInch (JDFXYPair value)
-    {
-        JDFXYPair xyp = new JDFXYPair(value);  // don't change the original
-        xyp.scale(72.0);
-        setDimension(xyp);
-    }
-
-    /**
-     * Get attribute Dimension in inch
-     * @return JDFXYPair the dimension in inch 
-     */
-    public JDFXYPair getDimensionInch()
-    {
-        JDFXYPair xyp = getDimension();
-        xyp.scale(1.0/72.0);
-        return xyp;
-    }
+	/**
+	 * Get attribute Dimension in inch
+	 * 
+	 * @return JDFXYPair the dimension in inch
+	 */
+	public JDFXYPair getDimensionInch()
+	{
+		JDFXYPair xyp = getDimension();
+		xyp.scale(1.0 / 72.0);
+		return xyp;
+	}
 }

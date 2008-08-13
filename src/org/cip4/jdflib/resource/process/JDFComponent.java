@@ -91,145 +91,152 @@ import org.cip4.jdflib.datatypes.JDFShape;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.w3c.dom.DOMException;
 
-
 public class JDFComponent extends JDFAutoComponent
 {
-    private static final long serialVersionUID = 1L;
-    
-    /**
-     * Constructor for JDFComponent
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFComponent(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
-    
-    
-    /**
-     * Constructor for JDFComponent
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFComponent(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
-    
-    /**
-     * Constructor for JDFComponent
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFComponent(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-    
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    @Override
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Constructor for JDFComponent
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFComponent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+			throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFComponent
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFComponent(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFComponent
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFComponent(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName, String myLocalName)
+			throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	@Override
 	public String toString()
-    {
-        return "JDFComponent[  --> " + super.toString() + " ]";
-    }
-    /**
-     * version fixing routine for JDF
-     *
-     * uses heuristics to modify this element and its children to be compatible with a given version
-     * in general, it will be able to move from low to high versions but potentially fail 
-     * when attempting to move from higher to lower versions
-     *
-     * @param version: version that the resulting element should correspond to
-     * @return true if successful
-     */
-    @Override
+	{
+		return "JDFComponent[  --> " + super.toString() + " ]";
+	}
+
+	/**
+	 * version fixing routine for JDF
+	 * 
+	 * uses heuristics to modify this element and its children to be compatible
+	 * with a given version in general, it will be able to move from low to high
+	 * versions but potentially fail when attempting to move from higher to
+	 * lower versions
+	 * 
+	 * @param version
+	 *            : version that the resulting element should correspond to
+	 * @return true if successful
+	 */
+	@Override
 	public boolean fixVersion(EnumVersion version)
-    {
-        boolean bRet=true;
-        if(version!=null)
-        {
-            if(version.getValue()>=EnumVersion.Version_1_3.getValue()){
-                if(hasAttribute(AttributeName.SOURCESHEET)){
-                    String sourceSheet=getSourceSheet();
-                    
-                    JDFRefElement layoutRef=(JDFRefElement)getElement_KElement("LayoutRef",null,0);
-                    if(layoutRef!=null){
-                        JDFLayout lo=(JDFLayout)layoutRef.getLinkRoot(layoutRef.getrRef());
-                        if(lo!=null)
-                            lo.fixVersion(version);
-                        
-                        layoutRef.setPartMap(new JDFAttributeMap(AttributeName.SHEETNAME,sourceSheet));
-                        lo=(JDFLayout)layoutRef.getTarget();
-                        layoutRef.setPartMap(lo.getPartMap());
-                    }
-                    removeAttribute(AttributeName.SOURCESHEET);
-                }
-            }else{
-                JDFLayout layout=getLayout();
-                if(layout!=null){
-                    String sourcesheet=layout.getSheetName();
-                    setSourceSheet(sourcesheet);
-                    JDFRefElement layoutRef=(JDFRefElement) getElement_KElement("LayoutRef",null,0);
-                    // JDF 1.2 layout should be unpartitioned
-                    if(layoutRef!=null)
-                    {
-                        // JDF 1.2 layout should be unpartitioned
-                        layoutRef.removeChild(ElementName.PART,null,0);
-                    }
-                }
-            }
-        }
-        return super.fixVersion(version) && bRet;
-    }
+	{
+		boolean bRet = true;
+		if (version != null)
+		{
+			if (version.getValue() >= EnumVersion.Version_1_3.getValue())
+			{
+				if (hasAttribute(AttributeName.SOURCESHEET))
+				{
+					String sourceSheet = getSourceSheet();
 
+					JDFRefElement layoutRef = (JDFRefElement) getElement_KElement(
+							"LayoutRef", null, 0);
+					if (layoutRef != null)
+					{
+						JDFLayout lo = (JDFLayout) layoutRef
+								.getLinkRoot(layoutRef.getrRef());
+						if (lo != null)
+							lo.fixVersion(version);
 
-    /**
-     * sets the Dimension to X Y 0
-     * convenience method to copy media dimension to component
-     * @param dimension
-     */
-    public void setDimensions(JDFXYPair dimension)
-    {
-       if(dimension!=null)
-       {
-           JDFShape s=new JDFShape(dimension.getX(),dimension.getY());
-           super.setDimensions(s);
-       }       
-    }
-    
-    public void setComponentType(EnumComponentType partialFinal, EnumComponentType sheetWebProof)
-    {
-        Vector<ValuedEnum> v=new Vector<ValuedEnum>();
-        if(partialFinal!=null)
-            v.add(partialFinal);
-        if(sheetWebProof!=null)
-            v.add(sheetWebProof);
-        if(v.size()==0)
-            v=null;
-        setComponentType(v);
-    }
+						layoutRef.setPartMap(new JDFAttributeMap(
+								AttributeName.SHEETNAME, sourceSheet));
+						lo = (JDFLayout) layoutRef.getTarget();
+						layoutRef.setPartMap(lo.getPartMap());
+					}
+					removeAttribute(AttributeName.SOURCESHEET);
+				}
+			} else
+			{
+				JDFLayout layout = getLayout();
+				if (layout != null)
+				{
+					String sourcesheet = layout.getSheetName();
+					setSourceSheet(sourcesheet);
+					JDFRefElement layoutRef = (JDFRefElement) getElement_KElement(
+							"LayoutRef", null, 0);
+					// JDF 1.2 layout should be unpartitioned
+					if (layoutRef != null)
+					{
+						// JDF 1.2 layout should be unpartitioned
+						layoutRef.removeChild(ElementName.PART, null, 0);
+					}
+				}
+			}
+		}
+		return super.fixVersion(version) && bRet;
+	}
+
+	/**
+	 * sets the Dimension to X Y 0 convenience method to copy media dimension to
+	 * component
+	 * 
+	 * @param dimension
+	 */
+	public void setDimensions(JDFXYPair dimension)
+	{
+		if (dimension != null)
+		{
+			JDFShape s = new JDFShape(dimension.getX(), dimension.getY());
+			super.setDimensions(s);
+		}
+	}
+
+	public void setComponentType(EnumComponentType partialFinal,
+			EnumComponentType sheetWebProof)
+	{
+		Vector<ValuedEnum> v = new Vector<ValuedEnum>();
+		if (partialFinal != null)
+			v.add(partialFinal);
+		if (sheetWebProof != null)
+			v.add(sheetWebProof);
+		if (v.size() == 0)
+			v = null;
+		setComponentType(v);
+	}
 }

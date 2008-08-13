@@ -93,137 +93,133 @@ import org.cip4.jdflib.ifaces.IPlacedObject;
 import org.cip4.jdflib.resource.process.postpress.JDFSheet;
 import org.w3c.dom.Node;
 
-
-
 public class JDFSurface extends JDFSheet
 {
-    private static final long serialVersionUID = 1L;
-    
-    /**
-     * Constructor for JDFSurface
-     * @param ownerDocument
-     * @param qualifiedName
-     */
-    public JDFSurface(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
-    
-    
-    /**
-     * Constructor for JDFSurface
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     */
-    public JDFSurface(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
-    
-    /**
-     * Constructor for JDFSurface
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     */
-    public JDFSurface(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-    
-    
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.SIDE, 0x44444333, AttributeInfo.EnumAttributeType.enumeration, EnumSide.getEnum(0),null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.SURFACECONTENTSBOX, 0x44444333, AttributeInfo.EnumAttributeType.rectangle, null, null);        
-    }
-    
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
-    {
-        AttributeInfo ai=super.getTheAttributeInfo();
-        if(getLocalName().equals(ElementName.SURFACE))
-            ai.updateReplace(atrInfoTable);
-        return ai;
-    }
-    
-    @Override
-	public String toString()
-    {
-        return "JDFSurface[  --> " + super.toString() + " ]";
-    }
-    
-    
-    /**
-     * Get the placed object (Content or Mark)
-     * @param int iSkip number of objects to skip
-     * @return JDFElement the placed object
-     */
-    /**
-     * gets the vector of all placed objects that reside directly in this partition
-     * retains the order of marks and content
-     * 
-     * @return the placedobject, null if none were found
-     */
-    public IPlacedObject getPlacedObject(int nSkip)
-    {
-        if(nSkip<0)
-        {
-            VElement v=getPlacedObjectVector();
-            if(v==null)
-                return null;
-            nSkip=nSkip+v.size();
-            if(nSkip<0)
-                return null;
-            return (IPlacedObject)v.elementAt(nSkip);
-        }
-        
-        int nFound=0;
-        Node n=getFirstChild();
-        while(n!=null)
-        {
-            if(n instanceof IPlacedObject)
-            {
-                if(nFound>=nSkip)
-                    return(IPlacedObject)n;
-                nFound++;
-            }
-            n=n.getNextSibling();
-        }
-        return null;
-     }
-    /**
-     * gets the vector of all placed objects that reside directly in this partition
-     * retains the order of marks and content
-     * 
-     * @return the vector of placedobjects, null if none were found
-     */
-    public VElement getPlacedObjectVector()
-    {
-        VElement v=new VElement();
-        Node n=getFirstChild();
-        while(n!=null)
-        {
-            if(n instanceof IPlacedObject)
-            {
-                v.add((KElement) n);
-            }
-            n=n.getNextSibling();
-        }
-        return v.isEmpty() ? null : v;
-     }
-   
-}
+	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Constructor for JDFSurface
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 */
+	public JDFSurface(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFSurface
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFSurface(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
+			String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFSurface
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 */
+	public JDFSurface(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
+			String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SIDE, 0x44444333,
+				AttributeInfo.EnumAttributeType.enumeration, EnumSide
+						.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SURFACECONTENTSBOX,
+				0x44444333, AttributeInfo.EnumAttributeType.rectangle, null,
+				null);
+	}
+
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		AttributeInfo ai = super.getTheAttributeInfo();
+		if (getLocalName().equals(ElementName.SURFACE))
+			ai.updateReplace(atrInfoTable);
+		return ai;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "JDFSurface[  --> " + super.toString() + " ]";
+	}
+
+	/**
+	 * Get the placed object (Content or Mark)
+	 * 
+	 * @param int iSkip number of objects to skip
+	 * @return JDFElement the placed object
+	 */
+	/**
+	 * gets the vector of all placed objects that reside directly in this
+	 * partition retains the order of marks and content
+	 * 
+	 * @return the placedobject, null if none were found
+	 */
+	public IPlacedObject getPlacedObject(int nSkip)
+	{
+		if (nSkip < 0)
+		{
+			VElement v = getPlacedObjectVector();
+			if (v == null)
+				return null;
+			nSkip = nSkip + v.size();
+			if (nSkip < 0)
+				return null;
+			return (IPlacedObject) v.elementAt(nSkip);
+		}
+
+		int nFound = 0;
+		Node n = getFirstChild();
+		while (n != null)
+		{
+			if (n instanceof IPlacedObject)
+			{
+				if (nFound >= nSkip)
+					return (IPlacedObject) n;
+				nFound++;
+			}
+			n = n.getNextSibling();
+		}
+		return null;
+	}
+
+	/**
+	 * gets the vector of all placed objects that reside directly in this
+	 * partition retains the order of marks and content
+	 * 
+	 * @return the vector of placedobjects, null if none were found
+	 */
+	public VElement getPlacedObjectVector()
+	{
+		VElement v = new VElement();
+		Node n = getFirstChild();
+		while (n != null)
+		{
+			if (n instanceof IPlacedObject)
+			{
+				v.add((KElement) n);
+			}
+			n = n.getNextSibling();
+		}
+		return v.isEmpty() ? null : v;
+	}
+
+}

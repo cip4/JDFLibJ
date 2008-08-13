@@ -38,7 +38,7 @@
  *
  * Usage of this software in commercial products is subject to restrictions. For
  * details please consult info@cip4.org.
-  *
+ *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -85,94 +85,89 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.w3c.dom.DOMException;
 
-
 public class JDFTestPool extends JDFAutoTestPool
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFTestPool
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-     public JDFTestPool(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-        throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFTestPool
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFTestPool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+			throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFTestPool
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFTestPool(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-         throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFTestPool
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFTestPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
+			String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFTestPool
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     * @throws DOMException
-     */
-    public JDFTestPool(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-        throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * Constructor for JDFTestPool
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 * @throws DOMException
+	 */
+	public JDFTestPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
+			String qualifiedName, String myLocalName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFTestPool[  --> " + super.toString() + " ]" ;
-    }
-    
-    /**
-     * get element <code>Test</code> with ID idTest
-     * @param idTest ID attribute of the test element
-     * @return JDFTest - the element
-     * 
-    */
-    public JDFTest getTest(String idTest)
-    {
-        return (JDFTest) getChildWithAttribute(ElementName.TEST,AttributeName.ID, null,idTest, 0, true);
-    }
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFTestPool[  --> " + super.toString() + " ]";
+	}
 
-    /**
-     * append element <code>Test</code>
-     * @param term type of term to append to this test
-     * @return JDFTest - the appended element
-     * 
-    */
-    public JDFTest appendTestTerm(EnumTerm term)
-    {
-        JDFTest test=appendTest();
-        test.appendTerm(term);
-        return test;
-    }
- 
+	/**
+	 * get element <code>Test</code> with ID idTest
+	 * 
+	 * @param idTest
+	 *            ID attribute of the test element
+	 * @return JDFTest - the element
+	 * 
+	 */
+	public JDFTest getTest(String idTest)
+	{
+		return (JDFTest) getChildWithAttribute(ElementName.TEST,
+				AttributeName.ID, null, idTest, 0, true);
+	}
+
+	/**
+	 * append element <code>Test</code>
+	 * 
+	 * @param term
+	 *            type of term to append to this test
+	 * @return JDFTest - the appended element
+	 * 
+	 */
+	public JDFTest appendTestTerm(EnumTerm term)
+	{
+		JDFTest test = appendTest();
+		test.appendTerm(term);
+		return test;
+	}
+
 }
-
-
-

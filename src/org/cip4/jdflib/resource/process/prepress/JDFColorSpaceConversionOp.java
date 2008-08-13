@@ -85,147 +85,139 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 
-
 public class JDFColorSpaceConversionOp extends JDFAutoColorSpaceConversionOp
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFColorSpaceConversionOp
-     * @param ownerDocument
-     * @param qualifiedName
-     */
-     public JDFColorSpaceConversionOp(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFColorSpaceConversionOp
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 */
+	public JDFColorSpaceConversionOp(CoreDocumentImpl myOwnerDocument,
+			String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFColorSpaceConversionOp
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFColorSpaceConversionOp(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFColorSpaceConversionOp
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     */
-    public JDFColorSpaceConversionOp(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFColorSpaceConversionOp
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 */
+	public JDFColorSpaceConversionOp(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFColorSpaceConversionOp
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     */
-    public JDFColorSpaceConversionOp(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFColorSpaceConversionOp[  --> " + super.toString() + " ]";
+	}
 
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFColorSpaceConversionOp[  --> " + super.toString() + " ]";
-    }
-    
-    
-    /**
-    * Gets of 'this' an existing child FileSpec(AbstractProfile) element  
-    *
-    * @return JDFFileSpec the matching AbstractProfile element
-    */
-    public JDFFileSpec getAbstractProfile() 
-    {
-        return (JDFFileSpec) getChildWithAttribute(ElementName.FILESPEC, AttributeName.RESOURCEUSAGE, null, "AbstractProfile", 0, true);
-    }
+	/**
+	 * Gets of 'this' an existing child FileSpec(AbstractProfile) element
+	 * 
+	 * @return JDFFileSpec the matching AbstractProfile element
+	 */
+	public JDFFileSpec getAbstractProfile()
+	{
+		return (JDFFileSpec) getChildWithAttribute(ElementName.FILESPEC,
+				AttributeName.RESOURCEUSAGE, null, "AbstractProfile", 0, true);
+	}
 
-    
-    /** 
-    * Gets of 'this' child FileSpec(AbstractProfile) element, 
-    * optionally creates it, if it doesn't exist.
-    * 
-    * @return JDFFileSpec the matching AbstractProfile element
-    */
-    public JDFFileSpec getCreateAbstractProfile() 
-    {
-        JDFFileSpec res = getAbstractProfile();
-        if (res == null) 
-        {
-            res = appendAbstractProfile();
-        }
-        return res;
-    }
+	/**
+	 * Gets of 'this' child FileSpec(AbstractProfile) element, optionally
+	 * creates it, if it doesn't exist.
+	 * 
+	 * @return JDFFileSpec the matching AbstractProfile element
+	 */
+	public JDFFileSpec getCreateAbstractProfile()
+	{
+		JDFFileSpec res = getAbstractProfile();
+		if (res == null)
+		{
+			res = appendAbstractProfile();
+		}
+		return res;
+	}
 
+	/**
+	 * Appends new FileSpec(AbstractProfile) element to the end of 'this'
+	 * 
+	 * @return JDFFileSpec newly created child AbstractProfile element
+	 */
+	public JDFFileSpec appendAbstractProfile()
+	{
+		JDFFileSpec res = appendFileSpec();
+		res.setResourceUsage("AbstractProfile");
 
-    /**
-    * Appends new FileSpec(AbstractProfile) element to the end of 'this'  
-    *
-    * @return JDFFileSpec newly created child AbstractProfile element
-    */
-    public JDFFileSpec appendAbstractProfile()
-    {
-        JDFFileSpec res = appendFileSpec();
-        res.setResourceUsage("AbstractProfile");
+		return res;
+	}
 
-        return res;
-    }
+	/**
+	 * Gets of 'this' an existing child FileSpec(SourceProfile) element
+	 * 
+	 * @return JDFFileSpec the matching SourceProfile element
+	 */
+	public JDFFileSpec getSourceProfile()
+	{
+		return (JDFFileSpec) getChildWithAttribute(ElementName.FILESPEC,
+				AttributeName.RESOURCEUSAGE, null, "SourceProfile", 0, true);
+	}
 
+	/**
+	 * Gets of 'this' child FileSpec(SourceProfile) element, optionally creates
+	 * it, if it doesn't exist.
+	 * 
+	 * @return JDFFileSpec the matching SourceProfile element
+	 */
+	public JDFFileSpec getCreateSourceProfile()
+	{
+		JDFFileSpec res = getSourceProfile();
+		if (res == null)
+		{
+			res = appendSourceProfile();
+		}
+		return res;
+	}
 
-    /**
-    * Gets of 'this' an existing child FileSpec(SourceProfile) element  
-    *
-    * @return JDFFileSpec the matching SourceProfile element
-    */
-    public JDFFileSpec getSourceProfile() 
-    {
-        return (JDFFileSpec) getChildWithAttribute(ElementName.FILESPEC, AttributeName.RESOURCEUSAGE, null, "SourceProfile", 0, true);
-    }
+	/**
+	 * Appends new FileSpec(SourceProfile) element to the end of 'this'
+	 * 
+	 * @return JDFFileSpec newly created child SourceProfile element
+	 */
+	public JDFFileSpec appendSourceProfile()
+	{
+		JDFFileSpec res = appendFileSpec();
+		res.setResourceUsage("SourceProfile");
 
-
-    /** 
-    * Gets of 'this' child FileSpec(SourceProfile) element, 
-    * optionally creates it, if it doesn't exist.
-    * 
-    * @return JDFFileSpec the matching SourceProfile element
-    */
-    public JDFFileSpec getCreateSourceProfile() 
-    {
-        JDFFileSpec res = getSourceProfile();
-        if (res == null) 
-        {
-            res = appendSourceProfile();
-        }
-        return res;
-    }
-
-    
-    /**
-    * Appends new FileSpec(SourceProfile) element to the end of 'this'  
-    *
-    * @return JDFFileSpec newly created child SourceProfile element
-    */
-    public JDFFileSpec appendSourceProfile()
-    {
-        JDFFileSpec res = appendFileSpec();
-        res.setResourceUsage("SourceProfile");
-
-        return res;
-    }
+		return res;
+	}
 
 }

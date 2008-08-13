@@ -89,181 +89,190 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 
-
 public class JDFUsageCounter extends JDFAutoUsageCounter
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFUsageCounter
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFUsageCounter(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFUsageCounter
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFUsageCounter(CoreDocumentImpl myOwnerDocument,
+			String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFUsageCounter
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFUsageCounter(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFUsageCounter
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFUsageCounter(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFUsageCounter
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFUsageCounter(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName, String myLocalName)
+			throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFUsageCounter
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFUsageCounter(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFUsageCounter[  --> " + super.toString() + " ]";
+	}
 
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFUsageCounter[  --> " + super.toString() + " ]";
-    }
-    public static class EnumCounterType extends ValuedEnum
-    {
-        private static final long serialVersionUID = 1L;
-        private static int m_startValue = 0;
+	public static class EnumCounterType extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
-        private EnumCounterType(String name)
-        {
-            super(name, m_startValue++);
-        }
+		private EnumCounterType(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        public static EnumCounterType getEnum(String enumName)
-        {
-            return (EnumCounterType) getEnum(EnumCounterType.class, enumName);
-        }
+		public static EnumCounterType getEnum(String enumName)
+		{
+			return (EnumCounterType) getEnum(EnumCounterType.class, enumName);
+		}
 
-        public static EnumCounterType getEnum(int enumValue)
-        {
-            return (EnumCounterType) getEnum(EnumCounterType.class, enumValue);
-        }
+		public static EnumCounterType getEnum(int enumValue)
+		{
+			return (EnumCounterType) getEnum(EnumCounterType.class, enumValue);
+		}
 
-        public static Map getEnumMap()
-        {
-            return getEnumMap(EnumCounterType.class);
-        }
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumCounterType.class);
+		}
 
-        public static List getEnumList()
-        {
-            return getEnumList(EnumCounterType.class);
-        }
+		public static List getEnumList()
+		{
+			return getEnumList(EnumCounterType.class);
+		}
 
-        public static Iterator iterator()
-        {
-            return iterator(EnumCounterType.class);
-        }
+		public static Iterator iterator()
+		{
+			return iterator(EnumCounterType.class);
+		}
 
-        public static final EnumCounterType Blank = new EnumCounterType("Blank");
-        public static final EnumCounterType Insert = new EnumCounterType("Insert");
-        public static final EnumCounterType InsertPrefuser = new EnumCounterType("InsertPrefuser");
-        public static final EnumCounterType OneSided = new EnumCounterType("OneSided");
-        public static final EnumCounterType TwoSided = new EnumCounterType("TwoSided");
-        public static final EnumCounterType NormalSize = new EnumCounterType("NormalSize");
-        public static final EnumCounterType LargeSize = new EnumCounterType("LargeSize");
-        public static final EnumCounterType Black = new EnumCounterType("Black");
-        public static final EnumCounterType HighlightColor = new EnumCounterType("HighlightColor");
-        public static final EnumCounterType Color = new EnumCounterType("Color");
-        public static final EnumCounterType Separation = new EnumCounterType("Separation");
-        public static final EnumCounterType Varnish = new EnumCounterType("Varnish");
-        public static final EnumCounterType User = new EnumCounterType("User");
-        public static final EnumCounterType Auxiliary = new EnumCounterType("Auxiliary");
-        public static final EnumCounterType Impressions = new EnumCounterType("Impressions");
-        public static final EnumCounterType Clicks = new EnumCounterType("Clicks");
-        public static final EnumCounterType pt = new EnumCounterType("pt");
-    }     
+		public static final EnumCounterType Blank = new EnumCounterType("Blank");
+		public static final EnumCounterType Insert = new EnumCounterType(
+				"Insert");
+		public static final EnumCounterType InsertPrefuser = new EnumCounterType(
+				"InsertPrefuser");
+		public static final EnumCounterType OneSided = new EnumCounterType(
+				"OneSided");
+		public static final EnumCounterType TwoSided = new EnumCounterType(
+				"TwoSided");
+		public static final EnumCounterType NormalSize = new EnumCounterType(
+				"NormalSize");
+		public static final EnumCounterType LargeSize = new EnumCounterType(
+				"LargeSize");
+		public static final EnumCounterType Black = new EnumCounterType("Black");
+		public static final EnumCounterType HighlightColor = new EnumCounterType(
+				"HighlightColor");
+		public static final EnumCounterType Color = new EnumCounterType("Color");
+		public static final EnumCounterType Separation = new EnumCounterType(
+				"Separation");
+		public static final EnumCounterType Varnish = new EnumCounterType(
+				"Varnish");
+		public static final EnumCounterType User = new EnumCounterType("User");
+		public static final EnumCounterType Auxiliary = new EnumCounterType(
+				"Auxiliary");
+		public static final EnumCounterType Impressions = new EnumCounterType(
+				"Impressions");
+		public static final EnumCounterType Clicks = new EnumCounterType(
+				"Clicks");
+		public static final EnumCounterType pt = new EnumCounterType("pt");
+	}
 
+	/*
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CounterTypes
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute CounterTypes
+	 * 
+	 * @param enumVar
+	 *            : the enumVar to set the attribute to
+	 */
+	public void setCounterTypes(EnumCounterType enumVar)
+	{
+		setAttribute(AttributeName.COUNTERTYPES, enumVar.getName(), null);
+	}
 
-    /* ---------------------------------------------------------------------
-    Methods for Attribute CounterTypes
-    --------------------------------------------------------------------- */
-    /**
-     * (5) set attribute CounterTypes
-     * @param enumVar: the enumVar to set the attribute to
-     */
-    public void setCounterTypes(EnumCounterType enumVar)
-    {
-        setAttribute(AttributeName.COUNTERTYPES, enumVar.getName(), null);
-    }
+	/**
+	 * (5) set attribute CounterTypes
+	 * 
+	 * @param enumVar
+	 *            : the enumVar to set the attribute to
+	 */
+	public void setCounterTypes(Vector vVar)
+	{
+		final String s = StringUtil.setvString(vVar);
+		setAttribute(AttributeName.COUNTERTYPES, s, null);
+	}
 
-    /**
-     * (5) set attribute CounterTypes
-     * @param enumVar: the enumVar to set the attribute to
-     */
-    public void setCounterTypes(Vector vVar)
-    {
-        final String s=StringUtil.setvString(vVar);
-        setAttribute(AttributeName.COUNTERTYPES, s, null);
-    }
+	/**
+	 * (9) get attribute Scope
+	 * 
+	 * @return the value of the attribute
+	 */
+	public Vector getEnumCounterTypes()
+	{
+		return getEnumerationsAttribute(AttributeName.COUNTERTYPES, null,
+				EnumCounterType.Auxiliary, false);
+	}
 
-
-
-    /**
-     * (9) get attribute Scope
-     * @return the value of the attribute
-     */
-    public Vector getEnumCounterTypes()
-    {        
-        return getEnumerationsAttribute(AttributeName.COUNTERTYPES, null, EnumCounterType.Auxiliary, false);
-    }
-
-
-    /**
-     * also checks for matchin counterID or CounteType mangled with "_", e.g. 
-     * UsageCounter:ID_CounterA
-     * UsageCounter:Black_SingleSided
-     * etc.
-     */
-    @Override
-    public boolean matchesString(String namedResLink)
-    {
-        if(namedResLink==null)
-            return false;
-        final String counterID = getCounterID();
-        if(!isWildCard(counterID))
-        {
-            String idString=getLocalName()+":"+counterID;
-            if(idString.equals(namedResLink))
-                return true;
-        }
-        String ct=StringUtil.setvString(getCounterTypes(), "_", null, null);
-        if(!isWildCard(ct) && namedResLink.equals(getLocalName()+":"+ct))
-            return true;
-        return super.matchesString(namedResLink);
-    }
+	/**
+	 * also checks for matchin counterID or CounteType mangled with "_", e.g.
+	 * UsageCounter:ID_CounterA UsageCounter:Black_SingleSided etc.
+	 */
+	@Override
+	public boolean matchesString(String namedResLink)
+	{
+		if (namedResLink == null)
+			return false;
+		final String counterID = getCounterID();
+		if (!isWildCard(counterID))
+		{
+			String idString = getLocalName() + ":" + counterID;
+			if (idString.equals(namedResLink))
+				return true;
+		}
+		String ct = StringUtil.setvString(getCounterTypes(), "_", null, null);
+		if (!isWildCard(ct) && namedResLink.equals(getLocalName() + ":" + ct))
+			return true;
+		return super.matchesString(namedResLink);
+	}
 
 }
