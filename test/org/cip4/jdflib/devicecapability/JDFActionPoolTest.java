@@ -85,50 +85,49 @@ import org.cip4.jdflib.resource.devicecapability.JDFand;
 import org.cip4.jdflib.resource.devicecapability.JDFnot;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 
-
 public class JDFActionPoolTest extends JDFTestCaseBase
 {
-    public void testAppendActionTest()
-    {
-        JDFDoc d=new JDFDoc(ElementName.PREFLIGHTPARAMS);
-        JDFActionPool ap=(JDFActionPool)d.getRoot().appendElement(ElementName.ACTIONPOOL);
-        JDFAction a=ap.appendActionTest(EnumTerm.and,true);
-        JDFTest test = a.getTest();
-        assertNotNull(test);
-        assertNotNull(test.getTerm());
-        assertTrue(test.getTerm() instanceof JDFand);
+	public void testAppendActionTest()
+	{
+		JDFDoc d = new JDFDoc(ElementName.PREFLIGHTPARAMS);
+		JDFActionPool ap = (JDFActionPool) d.getRoot().appendElement(
+				ElementName.ACTIONPOOL);
+		JDFAction a = ap.appendActionTest(EnumTerm.and, true);
+		JDFTest test = a.getTest();
+		assertNotNull(test);
+		assertNotNull(test.getTerm());
+		assertTrue(test.getTerm() instanceof JDFand);
 
-        a=ap.appendActionTest(EnumTerm.and,false);
-        test = a.getTest();
-        assertNotNull(test);
-        assertNotNull(test.getTerm());
-        assertTrue(test.getTerm() instanceof JDFnot);
-        assertTrue(((JDFnot)test.getTerm()).getTerm(null, 0) instanceof JDFand);
-    }
+		a = ap.appendActionTest(EnumTerm.and, false);
+		test = a.getTest();
+		assertNotNull(test);
+		assertNotNull(test.getTerm());
+		assertTrue(test.getTerm() instanceof JDFnot);
+		assertTrue(((JDFnot) test.getTerm()).getTerm(null, 0) instanceof JDFand);
+	}
 
-    ////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////
 
-    public void testAppendExcludeTest()
-    {
-        JDFDoc d=new JDFDoc(ElementName.DEVICECAP);
-        JDFDeviceCap dc=(JDFDeviceCap)d.getRoot();
-        
-        JDFActionPool ap=(JDFActionPool)d.getRoot().appendElement(ElementName.ACTIONPOOL);
-        JDFDevCaps dcs=dc.appendDevCaps();
-        JDFStringState stst=dcs.appendDevCap().appendStringState("stbar");
-        JDFIntegerState ist=dcs.appendDevCap().appendIntegerState("ibar");
-        
-        JDFAction ac=ap.appendExcludeTest(stst, ist);
-        assertNotNull(ac);
-        JDFTest t=ac.getTest();
-        assertNotNull(t);
-        JDFand a=(JDFand) t.getTerm() ;
-        assertNotNull(a);
-        assertNotNull(a.getTerm(EnumTerm.StringEvaluation, 0));
-        assertNotNull(a.getTerm(EnumTerm.IntegerEvaluation, 0));
+	public void testAppendExcludeTest()
+	{
+		JDFDoc d = new JDFDoc(ElementName.DEVICECAP);
+		JDFDeviceCap dc = (JDFDeviceCap) d.getRoot();
 
-    }
+		JDFActionPool ap = (JDFActionPool) d.getRoot().appendElement(
+				ElementName.ACTIONPOOL);
+		JDFDevCaps dcs = dc.appendDevCaps();
+		JDFStringState stst = dcs.appendDevCap().appendStringState("stbar");
+		JDFIntegerState ist = dcs.appendDevCap().appendIntegerState("ibar");
 
+		JDFAction ac = ap.appendExcludeTest(stst, ist);
+		assertNotNull(ac);
+		JDFTest t = ac.getTest();
+		assertNotNull(t);
+		JDFand a = (JDFand) t.getTerm();
+		assertNotNull(a);
+		assertNotNull(a.getTerm(EnumTerm.StringEvaluation, 0));
+		assertNotNull(a.getTerm(EnumTerm.IntegerEvaluation, 0));
 
+	}
 
 }

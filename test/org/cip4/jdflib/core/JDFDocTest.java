@@ -87,234 +87,255 @@ import org.cip4.jdflib.node.JDFNode;
 public class JDFDocTest extends JDFTestCaseBase
 {
 
-    /**
-     * just a minor test. It only checks the precessgroup count and also the class casts in GetProcessGroups
-     */
-    public void testRoots()
-    {
-        String xmlFile = "job.jdf";
+	/**
+	 * just a minor test. It only checks the precessgroup count and also the
+	 * class casts in GetProcessGroups
+	 */
+	public void testRoots()
+	{
+		String xmlFile = "job.jdf";
 
-        JDFParser p = new JDFParser();
-        JDFDoc jdfDoc = p.parseFile(sm_dirTestData+xmlFile);
+		JDFParser p = new JDFParser();
+		JDFDoc jdfDoc = p.parseFile(sm_dirTestData + xmlFile);
 
-        assertTrue(xmlFile + ": Parse Error", jdfDoc!= null);
-        if (jdfDoc == null) 
-            return;     // soothe findbugs ;)
+		assertTrue(xmlFile + ": Parse Error", jdfDoc != null);
+		if (jdfDoc == null)
+			return; // soothe findbugs ;)
 
-        assertNotNull("jdf root",jdfDoc.getJDFRoot());
-        assertNull("no jmf root",jdfDoc.getJMFRoot());
-    }  
-    /**
-     * just a minor test. It only checks that cloned docs are actually different
-     */
-    public void testClone()
-    {
-        JDFDoc d=new JDFDoc("JDF");
-        JDFDoc d2=(JDFDoc) d.clone();
-        KElement e1=d.getRoot();
-        KElement e2=d2.getRoot();
-        assertNotSame(e1, e2);
-        e1.appendElement("foo");
-        assertNull(e2.getElement("foo"));
-    }  
+		assertNotNull("jdf root", jdfDoc.getJDFRoot());
+		assertNull("no jmf root", jdfDoc.getJMFRoot());
+	}
 
-  
-    public void testForeignRoot()
-    {
-        final XMLDoc doc = new XMLDoc("Foo","fooNS");
-        KElement r=doc.getRoot();
-        JDFNode n=new JDFDoc("JDF").getJDFRoot();
-        r.copyElement(n, null);
-        String s=doc.write2String(0);
-        JDFParser p=new JDFParser();
-        JDFDoc d=p.parseString(s);
-        assertNotNull(d.getJDFRoot());
-        assertNotNull(d.getRoot());
-        assertNotSame(d.getRoot(),d.getJDFRoot());
+	/**
+	 * just a minor test. It only checks that cloned docs are actually different
+	 */
+	public void testClone()
+	{
+		JDFDoc d = new JDFDoc("JDF");
+		JDFDoc d2 = (JDFDoc) d.clone();
+		KElement e1 = d.getRoot();
+		KElement e2 = d2.getRoot();
+		assertNotSame(e1, e2);
+		e1.appendElement("foo");
+		assertNull(e2.getElement("foo"));
+	}
 
+	public void testForeignRoot()
+	{
+		final XMLDoc doc = new XMLDoc("Foo", "fooNS");
+		KElement r = doc.getRoot();
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		r.copyElement(n, null);
+		String s = doc.write2String(0);
+		JDFParser p = new JDFParser();
+		JDFDoc d = p.parseString(s);
+		assertNotNull(d.getJDFRoot());
+		assertNotNull(d.getRoot());
+		assertNotSame(d.getRoot(), d.getJDFRoot());
 
-    }
-    /////////////////////////////////////////////////////
+	}
 
-    /**
-     * just a minor test. It only checks the precessgroup count and also the class casts in GetProcessGroups
-     */
-    public void testNull()
-    {
-        JDFDoc doc=null;
-        String foo="wehflkh";
-        JDFParser p=new JDFParser();
+	// ///////////////////////////////////////////////////
 
-        doc=p.parseString(foo);
-        assertNull(doc);
-        doc=new JDFDoc("JDF");
-        assertNotNull(doc.getNodeName());
-    }  
+	/**
+	 * just a minor test. It only checks the precessgroup count and also the
+	 * class casts in GetProcessGroups
+	 */
+	public void testNull()
+	{
+		JDFDoc doc = null;
+		String foo = "wehflkh";
+		JDFParser p = new JDFParser();
 
-    /////////////////////////////////////////////////////
-    public void testGetContentType()
-    {
-        JDFDoc d=new JDFDoc("JDF");
-        assertEquals(d.getContentType(),"application/vnd.cip4-jdf+xml");
-        JDFDoc dm=new JDFDoc("JMF");
-        assertEquals(dm.getContentType(),"application/vnd.cip4-jmf+xml");
-        JDFDoc db=new JDFDoc("JMF_");
-        assertEquals( db.getContentType(),"text/xml");
-    }   
+		doc = p.parseString(foo);
+		assertNull(doc);
+		doc = new JDFDoc("JDF");
+		assertNotNull(doc.getNodeName());
+	}
 
-    public void testSchemaDefault() throws Exception
-    {
-        for(int i=0;i<3;i++)
-        {
-            JDFDoc doc=new JDFDoc("JDF");
-            JDFNode n=(JDFNode) doc.getRoot();
-            assertFalse("no schema - no default",n.hasAttribute(AttributeName.TEMPLATE));
-            String s=doc.write2String(2);
-            final JDFParser parser = new JDFParser();
-            JDFDoc docNoSchema=parser.parseString(s);
-            JDFNode as2=(JDFNode) docNoSchema.getRoot();
-            assertFalse("no schema - no default",as2.hasAttribute(AttributeName.TEMPLATE));
-            parser.m_SchemaLocation=sm_dirTestSchema+File.separator+"JDF.xsd";
-            JDFDoc docSchema=parser.parseString(s);
-            JDFNode as3=(JDFNode) docSchema.getRoot();
-            assertTrue("schema parse - default is set",as3.hasAttribute(AttributeName.TEMPLATE));
-            assertFalse("schema parse - default is set",as3.getTemplate());
-        }
-    }
+	// ///////////////////////////////////////////////////
+	public void testGetContentType()
+	{
+		JDFDoc d = new JDFDoc("JDF");
+		assertEquals(d.getContentType(), "application/vnd.cip4-jdf+xml");
+		JDFDoc dm = new JDFDoc("JMF");
+		assertEquals(dm.getContentType(), "application/vnd.cip4-jmf+xml");
+		JDFDoc db = new JDFDoc("JMF_");
+		assertEquals(db.getContentType(), "text/xml");
+	}
 
-    public void testNS()
-    {
-        JDFDoc doc=new JDFDoc("foo:bar");
-        String s=doc.write2String(2);
-        assertTrue(s.indexOf(JDFConstants.JDFNAMESPACE)>0);        
-        XMLDoc doc2=new XMLDoc("abc",null);
-        String s2=doc2.write2String(2);
-        assertTrue(s2.indexOf(JDFConstants.JDFNAMESPACE)<0);        
-        doc2.getRoot().copyElement(doc.getRoot(), null);
-        s2=doc2.write2String(2);
-        assertTrue(s2.indexOf(JDFConstants.JDFNAMESPACE)>0);        
+	public void testSchemaDefault() throws Exception
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			JDFDoc doc = new JDFDoc("JDF");
+			JDFNode n = (JDFNode) doc.getRoot();
+			assertFalse("no schema - no default", n
+					.hasAttribute(AttributeName.TEMPLATE));
+			String s = doc.write2String(2);
+			final JDFParser parser = new JDFParser();
+			JDFDoc docNoSchema = parser.parseString(s);
+			JDFNode as2 = (JDFNode) docNoSchema.getRoot();
+			assertFalse("no schema - no default", as2
+					.hasAttribute(AttributeName.TEMPLATE));
+			parser.m_SchemaLocation = sm_dirTestSchema + File.separator
+					+ "JDF.xsd";
+			JDFDoc docSchema = parser.parseString(s);
+			JDFNode as3 = (JDFNode) docSchema.getRoot();
+			assertTrue("schema parse - default is set", as3
+					.hasAttribute(AttributeName.TEMPLATE));
+			assertFalse("schema parse - default is set", as3.getTemplate());
+		}
+	}
 
-    }
-    public void testPerformance()
-    {
-        {
-            JDFDoc doc=new JDFDoc("JDF");
-            KElement root=doc.getRoot();
-            long l=System.currentTimeMillis();
-            for(int i=0;i<10000;i++)
-            {
-                root.appendElement("Elem00");
-            }
-            System.out.println("Append With factory: "+(System.currentTimeMillis()-l));
-            l=System.currentTimeMillis();
-            String s=doc.write2String(0);
-            System.out.println("Write With factory: "+(System.currentTimeMillis()-l));
-            l=System.currentTimeMillis();
-            JDFParser p=new JDFParser();
-            System.out.println("Parser With factory: "+(System.currentTimeMillis()-l));
-            l=System.currentTimeMillis();
-            p.parseString(s);
-            System.out.println("Parse With factory: "+(System.currentTimeMillis()-l));
-        }
-        {
-            JDFDoc doc=new JDFDoc("JDF");
-            KElement root=doc.getRoot();
-            ((DocumentJDFImpl)root.getOwnerDocument()).bKElementOnly=true;
-            long l=System.currentTimeMillis();
-            for(int i=0;i<10000;i++)
-            {
-                root.appendElement("Elem00");
-            }
-            System.out.println("Append Without factory: "+(System.currentTimeMillis()-l));
-            l=System.currentTimeMillis();
-            String s=doc.write2String(0);
-            System.out.println("Write Without factory: "+(System.currentTimeMillis()-l)+ " "+s.length());
-            l=System.currentTimeMillis();
-            JDFParser p=new JDFParser();
-            System.out.println("Parser Without factory: "+(System.currentTimeMillis()-l));
-            l=System.currentTimeMillis();
-            p.parseString(s);
-            System.out.println("Parse Without factory: "+(System.currentTimeMillis()-l));
-        }
+	public void testNS()
+	{
+		JDFDoc doc = new JDFDoc("foo:bar");
+		String s = doc.write2String(2);
+		assertTrue(s.indexOf(JDFConstants.JDFNAMESPACE) > 0);
+		XMLDoc doc2 = new XMLDoc("abc", null);
+		String s2 = doc2.write2String(2);
+		assertTrue(s2.indexOf(JDFConstants.JDFNAMESPACE) < 0);
+		doc2.getRoot().copyElement(doc.getRoot(), null);
+		s2 = doc2.write2String(2);
+		assertTrue(s2.indexOf(JDFConstants.JDFNAMESPACE) > 0);
 
+	}
 
-        {
-            JDFDoc doc=new JDFDoc("JDF");
-            KElement root=doc.getRoot();
-            ((DocumentJDFImpl)root.getOwnerDocument()).bKElementOnly=true;
-            long l=System.currentTimeMillis();
-            for(int i=0;i<10000;i++)
-            {
-                root.appendElement("Elem00");
-            }
-            System.out.println("Append00 Without factory: "+(System.currentTimeMillis()-l));
-            l=System.currentTimeMillis();
-            String s=doc.write2String(0);
-            System.out.println("Write00 Without factory: "+(System.currentTimeMillis()-l));
-            l=System.currentTimeMillis();
-            JDFParser p=new JDFParser();
-            System.out.println("Parser00 Without factory: "+(System.currentTimeMillis()-l));
-            l=System.currentTimeMillis();
-            p.parseString(s);
-            System.out.println("Parse00 Without factory: "+(System.currentTimeMillis()-l));
-        }
+	public void testPerformance()
+	{
+		{
+			JDFDoc doc = new JDFDoc("JDF");
+			KElement root = doc.getRoot();
+			long l = System.currentTimeMillis();
+			for (int i = 0; i < 10000; i++)
+			{
+				root.appendElement("Elem00");
+			}
+			System.out.println("Append With factory: "
+					+ (System.currentTimeMillis() - l));
+			l = System.currentTimeMillis();
+			String s = doc.write2String(0);
+			System.out.println("Write With factory: "
+					+ (System.currentTimeMillis() - l));
+			l = System.currentTimeMillis();
+			JDFParser p = new JDFParser();
+			System.out.println("Parser With factory: "
+					+ (System.currentTimeMillis() - l));
+			l = System.currentTimeMillis();
+			p.parseString(s);
+			System.out.println("Parse With factory: "
+					+ (System.currentTimeMillis() - l));
+		}
+		{
+			JDFDoc doc = new JDFDoc("JDF");
+			KElement root = doc.getRoot();
+			((DocumentJDFImpl) root.getOwnerDocument()).bKElementOnly = true;
+			long l = System.currentTimeMillis();
+			for (int i = 0; i < 10000; i++)
+			{
+				root.appendElement("Elem00");
+			}
+			System.out.println("Append Without factory: "
+					+ (System.currentTimeMillis() - l));
+			l = System.currentTimeMillis();
+			String s = doc.write2String(0);
+			System.out.println("Write Without factory: "
+					+ (System.currentTimeMillis() - l) + " " + s.length());
+			l = System.currentTimeMillis();
+			JDFParser p = new JDFParser();
+			System.out.println("Parser Without factory: "
+					+ (System.currentTimeMillis() - l));
+			l = System.currentTimeMillis();
+			p.parseString(s);
+			System.out.println("Parse Without factory: "
+					+ (System.currentTimeMillis() - l));
+		}
 
+		{
+			JDFDoc doc = new JDFDoc("JDF");
+			KElement root = doc.getRoot();
+			((DocumentJDFImpl) root.getOwnerDocument()).bKElementOnly = true;
+			long l = System.currentTimeMillis();
+			for (int i = 0; i < 10000; i++)
+			{
+				root.appendElement("Elem00");
+			}
+			System.out.println("Append00 Without factory: "
+					+ (System.currentTimeMillis() - l));
+			l = System.currentTimeMillis();
+			String s = doc.write2String(0);
+			System.out.println("Write00 Without factory: "
+					+ (System.currentTimeMillis() - l));
+			l = System.currentTimeMillis();
+			JDFParser p = new JDFParser();
+			System.out.println("Parser00 Without factory: "
+					+ (System.currentTimeMillis() - l));
+			l = System.currentTimeMillis();
+			p.parseString(s);
+			System.out.println("Parse00 Without factory: "
+					+ (System.currentTimeMillis() - l));
+		}
 
+		{
+			JDFDoc doc = new JDFDoc("JDF");
+			KElement root = doc.getRoot();
+			long l = System.currentTimeMillis();
+			for (int i = 0; i < 10000; i++)
+			{
+				root.appendElement("Elem00");
+			}
+			System.out.println("Append With factory: "
+					+ (System.currentTimeMillis() - l));
+			l = System.currentTimeMillis();
+			String s = doc.write2String(0);
+			System.out.println("Write With factory: "
+					+ (System.currentTimeMillis() - l));
+			l = System.currentTimeMillis();
+			JDFParser p = new JDFParser();
+			System.out.println("Parser With factory: "
+					+ (System.currentTimeMillis() - l));
+			l = System.currentTimeMillis();
+			p.parseString(s);
+			System.out.println("Parse With factory: "
+					+ (System.currentTimeMillis() - l));
+		}
 
-        {
-            JDFDoc doc=new JDFDoc("JDF");
-            KElement root=doc.getRoot();
-            long l=System.currentTimeMillis();
-            for(int i=0;i<10000;i++)
-            {
-                root.appendElement("Elem00");
-            }
-            System.out.println("Append With factory: "+(System.currentTimeMillis()-l));
-            l=System.currentTimeMillis();
-            String s=doc.write2String(0);
-            System.out.println("Write With factory: "+(System.currentTimeMillis()-l));
-            l=System.currentTimeMillis();
-            JDFParser p=new JDFParser();
-            System.out.println("Parser With factory: "+(System.currentTimeMillis()-l));
-            l=System.currentTimeMillis();
-            p.parseString(s);
-            System.out.println("Parse With factory: "+(System.currentTimeMillis()-l));
-        }
+	}
 
-    }
+	/**
+	 * make sure that corrupt files always return a null document
+	 * 
+	 */
+	public void testCorrupt()
+	{
+		JDFDoc doc = null;
+		String foo = "wehflkh";
+		JDFParser p = new JDFParser();
+		doc = p.parseString(foo);
+		assertNull(doc);
+		foo = "<xxx><yyy><zzz></yyy></xxx>";
+		doc = p.parseString(foo);
+		assertNull(doc);
 
-    /**
-     * make sure that corrupt files always return a null document
-     *
-     */
-    public void testCorrupt()
-    {
-        JDFDoc doc=null;
-        String foo="wehflkh";
-        JDFParser p=new JDFParser();
-        doc=p.parseString(foo);
-        assertNull(doc);
-        foo="<xxx><yyy><zzz></yyy></xxx>";
-        doc=p.parseString(foo);
-        assertNull(doc);
+		doc = p.parseFile(sm_dirTestData + "corrupt.jdf");
+		assertNull(doc);
+		doc = new JDFDoc("JDF");
+		assertNotNull(doc.getNodeName());
+	}
 
-        doc=p.parseFile(sm_dirTestData+"corrupt.jdf");
-        assertNull(doc);
-        doc=new JDFDoc("JDF");
-        assertNotNull(doc.getNodeName());
-    }  
-    /**
+	/**
      * 
      *
      */
-    public void testEmptyString()
-    {
-        JDFDoc inMessageDoc = new JDFDoc(ElementName.JMF);
-        JDFJMF jmfIn = inMessageDoc.getJMFRoot();
+	public void testEmptyString()
+	{
+		JDFDoc inMessageDoc = new JDFDoc(ElementName.JMF);
+		JDFJMF jmfIn = inMessageDoc.getJMFRoot();
 
-        jmfIn.appendMessageElement (JDFMessage.EnumFamily.Response, null);
-        String s = inMessageDoc.write2String(0);
-        assertNotNull(s);
-    }
+		jmfIn.appendMessageElement(JDFMessage.EnumFamily.Response, null);
+		String s = inMessageDoc.write2String(0);
+		assertNotNull(s);
+	}
 
 }

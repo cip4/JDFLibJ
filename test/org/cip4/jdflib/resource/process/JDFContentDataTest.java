@@ -1,4 +1,3 @@
-
 /*
  *
  * The CIP4 Software License, Version 1.0
@@ -81,30 +80,32 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 public class JDFContentDataTest extends JDFTestCaseBase
 {
 
-    JDFContentList cl;
- 
-    /* (non-Javadoc)
-     * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
-     */
-    protected void setUp() throws Exception
-    {
-        // TODO Auto-generated method stub
-        super.setUp();
-        JDFDoc doc=new JDFDoc("JDF");
-        JDFNode n=doc.getJDFRoot();
-        n.setType(EnumType.Imposition);
-        cl=(JDFContentList) n.addResource(ElementName.CONTENTLIST, null);
-    }
+	JDFContentList cl;
 
-    /////////////////////////////////////////////////////////////////////////
-    
-    public void testGetIndex()
-    {
-        for(int i=0;i<10;i++)
-            assertEquals(cl.appendContentData().getIndex(),i);
-        JDFContentData cd=cl.appendContentData();
-        cd.deleteNode();
-        assertEquals(cd.getIndex(), -1);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	protected void setUp() throws Exception
+	{
+		// TODO Auto-generated method stub
+		super.setUp();
+		JDFDoc doc = new JDFDoc("JDF");
+		JDFNode n = doc.getJDFRoot();
+		n.setType(EnumType.Imposition);
+		cl = (JDFContentList) n.addResource(ElementName.CONTENTLIST, null);
+	}
+
+	// ///////////////////////////////////////////////////////////////////////
+
+	public void testGetIndex()
+	{
+		for (int i = 0; i < 10; i++)
+			assertEquals(cl.appendContentData().getIndex(), i);
+		JDFContentData cd = cl.appendContentData();
+		cd.deleteNode();
+		assertEquals(cd.getIndex(), -1);
+	}
 
 }

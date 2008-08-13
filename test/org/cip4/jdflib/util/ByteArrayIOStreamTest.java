@@ -80,60 +80,55 @@ import java.io.InputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 
-
-
 public class ByteArrayIOStreamTest extends JDFTestCaseBase
 {
 
-    ///////////////////////////////////////////////////////////////////////////
-    public void testSize() throws Exception
-    {
-        ByteArrayIOStream ios=new ByteArrayIOStream(new byte[20000]);
-        for(int i=0;i<12345;i++)
-        {
-            ios.write(i);
-            assertEquals(ios.size(), 1+i);
-        }
-    }
-    
-     
-    public void testInRead() throws Exception
-    {
-        ByteArrayIOStream ios=new ByteArrayIOStream();
-        for(int i=0;i<200000;i++)
-            ios.write(i);
-        InputStream is=ios.getInputStream();
-        int n=0;
-        int i;
-        while((i=is.read())>=0)
-        {            
-            assertEquals(""+n,i, n%256);
-            n++;
-        }
-        assertEquals(n, 200000);
-        
-    }
-    
-    public void testInReadMulti() throws Exception
-    {
-        ByteArrayIOStream ios=new ByteArrayIOStream();
-        for(int i=0;i<50000;i++)
-            ios.write(i);
-        InputStream is=ios.getInputStream();
-        InputStream is2=ios.getInputStream();
-        int n=0;
-        int i;
-        while((i=is.read())>=0)
-        {   
-            int jj=is2.read();
-            assertEquals(""+n,i, n%256);
-            assertEquals(jj, i);
-            n++;
-        }
-        assertEquals(n, 50000);
-        
-    }
+	// /////////////////////////////////////////////////////////////////////////
+	public void testSize() throws Exception
+	{
+		ByteArrayIOStream ios = new ByteArrayIOStream(new byte[20000]);
+		for (int i = 0; i < 12345; i++)
+		{
+			ios.write(i);
+			assertEquals(ios.size(), 1 + i);
+		}
+	}
 
+	public void testInRead() throws Exception
+	{
+		ByteArrayIOStream ios = new ByteArrayIOStream();
+		for (int i = 0; i < 200000; i++)
+			ios.write(i);
+		InputStream is = ios.getInputStream();
+		int n = 0;
+		int i;
+		while ((i = is.read()) >= 0)
+		{
+			assertEquals("" + n, i, n % 256);
+			n++;
+		}
+		assertEquals(n, 200000);
 
+	}
+
+	public void testInReadMulti() throws Exception
+	{
+		ByteArrayIOStream ios = new ByteArrayIOStream();
+		for (int i = 0; i < 50000; i++)
+			ios.write(i);
+		InputStream is = ios.getInputStream();
+		InputStream is2 = ios.getInputStream();
+		int n = 0;
+		int i;
+		while ((i = is.read()) >= 0)
+		{
+			int jj = is2.read();
+			assertEquals("" + n, i, n % 256);
+			assertEquals(jj, i);
+			n++;
+		}
+		assertEquals(n, 50000);
+
+	}
 
 }

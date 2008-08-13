@@ -78,29 +78,40 @@ import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
  * general utilities for containers and objects
  * 
  * @author prosirai
- *
+ * 
  */
 public class EnumUtilTest extends JDFTestCaseBase
 {
-    public void testMin()
-    {
-        assertEquals(EnumUtil.min(EnumResStatus.Incomplete, EnumResStatus.Available),EnumResStatus.Incomplete);
-    }
-    public void testMax()
-    {
-        assertEquals(EnumUtil.max(EnumResStatus.Incomplete, EnumResStatus.Available),EnumResStatus.Available);
-    }
-    public void testLessEq()
-    {
-        assertTrue(EnumUtil.aLessEqualsThanB(EnumResStatus.Incomplete, EnumResStatus.Incomplete));
-        assertTrue(EnumUtil.aLessEqualsThanB(EnumResStatus.Incomplete, EnumResStatus.Available));
-        assertFalse(EnumUtil.aLessEqualsThanB(EnumResStatus.Available, EnumResStatus.Incomplete));
-    }
-    public void testLess()
-    {
-        assertFalse(EnumUtil.aLessThanB(EnumResStatus.Incomplete, EnumResStatus.Incomplete));
-        assertTrue(EnumUtil.aLessThanB(EnumResStatus.Incomplete, EnumResStatus.Available));
-        assertFalse(EnumUtil.aLessThanB(EnumResStatus.Available, EnumResStatus.Incomplete));
-    }
+	public void testMin()
+	{
+		assertEquals(EnumUtil.min(EnumResStatus.Incomplete,
+				EnumResStatus.Available), EnumResStatus.Incomplete);
+	}
+
+	public void testMax()
+	{
+		assertEquals(EnumUtil.max(EnumResStatus.Incomplete,
+				EnumResStatus.Available), EnumResStatus.Available);
+	}
+
+	public void testLessEq()
+	{
+		assertTrue(EnumUtil.aLessEqualsThanB(EnumResStatus.Incomplete,
+				EnumResStatus.Incomplete));
+		assertTrue(EnumUtil.aLessEqualsThanB(EnumResStatus.Incomplete,
+				EnumResStatus.Available));
+		assertFalse(EnumUtil.aLessEqualsThanB(EnumResStatus.Available,
+				EnumResStatus.Incomplete));
+	}
+
+	public void testLess()
+	{
+		assertFalse(EnumUtil.aLessThanB(EnumResStatus.Incomplete,
+				EnumResStatus.Incomplete));
+		assertTrue(EnumUtil.aLessThanB(EnumResStatus.Incomplete,
+				EnumResStatus.Available));
+		assertFalse(EnumUtil.aLessThanB(EnumResStatus.Available,
+				EnumResStatus.Incomplete));
+	}
 
 }

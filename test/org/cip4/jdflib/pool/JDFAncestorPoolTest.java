@@ -78,40 +78,42 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 
 /**
  * @author RP
- *
- * This implements the first fixture with unit tests for class JDFAmountPool.
+ * 
+ *         This implements the first fixture with unit tests for class
+ *         JDFAmountPool.
  */
 public class JDFAncestorPoolTest extends JDFTestCaseBase
 {
-     
-    ///////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////
-    /**
-     * Method testVirtualAmounts.
-     * @throws Exception
-     */
-    public void testCopyNodeData() throws Exception
-    {
-        JDFDoc d=new JDFDoc("JDF");
-        JDFNode n=d.getJDFRoot();
-        n.setType(EnumType.Product);
-        JDFNode n1=n=n.addJDFNode(EnumType.BlockPreparation);
-        n1.setAttribute("foo:bar", "fnarf","www.foobar.com");
-        
-        JDFDoc dA=new JDFDoc("JDF");
-        JDFAncestorPool ap=dA.getJDFRoot().appendAncestorPool();
-        ap.appendAncestor().setNodeID(n1.getID());
-        ap.copyNodeData(n, true, true, false);
-        JDFAncestor a0=ap.getAncestor(0);
-        assertEquals(a0.getAttribute("foo:bar"),"fnarf");
-        assertEquals(a0.getNodeID(), n1.getID());
-        String s=dA.write2String(2);
-        JDFParser p=new JDFParser();
-        JDFDoc test=p.parseString(s);
-        assertNotNull( test);
-     
-    }
-    
-    ///////////////////////////////////////////////////////
-    
+
+	// /////////////////////////////////////////////////////
+	// /////////////////////////////////////////////////////
+	/**
+	 * Method testVirtualAmounts.
+	 * 
+	 * @throws Exception
+	 */
+	public void testCopyNodeData() throws Exception
+	{
+		JDFDoc d = new JDFDoc("JDF");
+		JDFNode n = d.getJDFRoot();
+		n.setType(EnumType.Product);
+		JDFNode n1 = n = n.addJDFNode(EnumType.BlockPreparation);
+		n1.setAttribute("foo:bar", "fnarf", "www.foobar.com");
+
+		JDFDoc dA = new JDFDoc("JDF");
+		JDFAncestorPool ap = dA.getJDFRoot().appendAncestorPool();
+		ap.appendAncestor().setNodeID(n1.getID());
+		ap.copyNodeData(n, true, true, false);
+		JDFAncestor a0 = ap.getAncestor(0);
+		assertEquals(a0.getAttribute("foo:bar"), "fnarf");
+		assertEquals(a0.getNodeID(), n1.getID());
+		String s = dA.write2String(2);
+		JDFParser p = new JDFParser();
+		JDFDoc test = p.parseString(s);
+		assertNotNull(test);
+
+	}
+
+	// /////////////////////////////////////////////////////
+
 }

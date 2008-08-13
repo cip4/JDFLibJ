@@ -81,73 +81,81 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 
 /**
  * @author MuchaD
- *
- * This implements the first fixture with unit tests for class JDFElement.
+ * 
+ *         This implements the first fixture with unit tests for class
+ *         JDFElement.
  */
 public class JDFRefElementTest extends TestCase
 {
 
+	/**
+	 * Method testGetLinkRootJMF
+	 * 
+	 * @throws Exception
+	 */
+	public void testGetTarget() throws Exception
+	{
+		JDFDoc d = JDFTestCaseBase.creatXMDoc();
+		JDFNode n = d.getJDFRoot();
+		JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource(
+				"ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
+		JDFAttributeMap mPart = new JDFAttributeMap("SignatureName", "Sig1");
+		mPart.put("SignatureName", "S12234");
+		mPart.put("SheetName", "S12");
+		mPart.put("Side", "Front");
+		JDFExposedMedia xmPart = (JDFExposedMedia) xm.getCreatePartition(mPart,
+				null);
+		JDFMedia m = xm.getMedia();
+		m = (JDFMedia) m.makeRootResource(null, null, true);
+		xmPart.refElement(m);
+		assertEquals(xmPart.getMedia(), m);
+		mPart.put("Side", "Back");
+		xmPart = (JDFExposedMedia) xm.getCreatePartition(mPart, null);
+		JDFMedia medPart = (JDFMedia) m.getCreatePartition(mPart, xm
+				.getPartIDKeys());
+		xmPart.refElement(medPart);
+		assertEquals(xmPart.getMedia(), medPart);
+		JDFRefElement re = (JDFRefElement) xmPart.getElement("MediaRef");
+		assertEquals(re.getPartMap(), mPart);
 
-     /**
-     * Method testGetLinkRootJMF
-     * @throws Exception
-     */
-    public void testGetTarget() throws Exception
-    {
-        JDFDoc d=JDFTestCaseBase.creatXMDoc();
-        JDFNode n=d.getJDFRoot();
-        JDFExposedMedia xm=(JDFExposedMedia)n.getMatchingResource("ExposedMedia",JDFNode.EnumProcessUsage.AnyInput,null,0);
-        JDFAttributeMap mPart=new JDFAttributeMap("SignatureName","Sig1");
-        mPart.put("SignatureName","S12234");
-        mPart.put("SheetName","S12");
-        mPart.put("Side","Front");
-        JDFExposedMedia xmPart=(JDFExposedMedia) xm.getCreatePartition(mPart,null);
-        JDFMedia m=xm.getMedia();
-        m=(JDFMedia) m.makeRootResource(null,null,true);
-        xmPart.refElement(m);
-        assertEquals(xmPart.getMedia(),m);
-        mPart.put("Side","Back");
-        xmPart=(JDFExposedMedia) xm.getCreatePartition(mPart,null);
-        JDFMedia medPart=(JDFMedia) m.getCreatePartition(mPart,xm.getPartIDKeys());
-        xmPart.refElement(medPart);
-        assertEquals(xmPart.getMedia(),medPart);
-        JDFRefElement re=(JDFRefElement) xmPart.getElement("MediaRef");
-        assertEquals(re.getPartMap(),mPart);
+	}
 
-     }
+	// ///////////////////////////////////////////////////////////////////
+	/**
+	 * Method testGetLinkRootJMF
+	 * 
+	 * @throws Exception
+	 */
+	public void testInlineRefelement() throws Exception
+	{
+		JDFDoc d = JDFTestCaseBase.creatXMDoc();
+		JDFNode n = d.getJDFRoot();
+		JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource(
+				"ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
+		JDFAttributeMap mPart = new JDFAttributeMap("SignatureName", "Sig1");
+		mPart.put("SignatureName", "S12234");
+		mPart.put("SheetName", "S12");
+		mPart.put("Side", "Front");
+		JDFExposedMedia xmPart = (JDFExposedMedia) xm.getCreatePartition(mPart,
+				null);
+		JDFMedia m = xm.getMedia();
+		m = (JDFMedia) m.makeRootResource(null, null, true);
+		m.setGrainDirection(EnumGrainDirection.XDirection);
+		xmPart.refElement(m);
+		assertEquals(xmPart.getMedia(), m);
+		mPart.put("Side", "Back");
+		xmPart = (JDFExposedMedia) xm.getCreatePartition(mPart, null);
+		JDFMedia medPart = (JDFMedia) m.getCreatePartition(mPart, xm
+				.getPartIDKeys());
+		xmPart.refElement(medPart);
+		assertEquals(xmPart.getMedia(), medPart);
+		JDFRefElement re = (JDFRefElement) xmPart.getElement("MediaRef");
+		JDFMedia inlineMedia = (JDFMedia) re.inlineRef();
+		assertNull(xmPart.getElement_KElement("MediaRef", null, 0));
+		assertEquals(inlineMedia.getGrainDirection(),
+				EnumGrainDirection.XDirection);
+		assertEquals(inlineMedia, xmPart.getMedia());
+		assertFalse(inlineMedia.hasAttribute("ID"));
 
-
-     /////////////////////////////////////////////////////////////////////
-    /**
-     * Method testGetLinkRootJMF
-     * @throws Exception
-     */
-    public void testInlineRefelement() throws Exception
-    {
-        JDFDoc d=JDFTestCaseBase.creatXMDoc();
-        JDFNode n=d.getJDFRoot();
-        JDFExposedMedia xm=(JDFExposedMedia)n.getMatchingResource("ExposedMedia",JDFNode.EnumProcessUsage.AnyInput,null,0);
-        JDFAttributeMap mPart=new JDFAttributeMap("SignatureName","Sig1");
-        mPart.put("SignatureName","S12234");
-        mPart.put("SheetName","S12");
-        mPart.put("Side","Front");
-        JDFExposedMedia xmPart=(JDFExposedMedia) xm.getCreatePartition(mPart,null);
-        JDFMedia m=xm.getMedia();
-        m=(JDFMedia) m.makeRootResource(null,null,true);
-        m.setGrainDirection(EnumGrainDirection.XDirection);
-        xmPart.refElement(m);
-        assertEquals(xmPart.getMedia(),m);
-        mPart.put("Side","Back");
-        xmPart=(JDFExposedMedia) xm.getCreatePartition(mPart,null);
-        JDFMedia medPart=(JDFMedia) m.getCreatePartition(mPart,xm.getPartIDKeys());
-        xmPart.refElement(medPart);
-        assertEquals(xmPart.getMedia(),medPart);
-        JDFRefElement re=(JDFRefElement) xmPart.getElement("MediaRef");
-        JDFMedia inlineMedia=(JDFMedia) re.inlineRef();
-        assertNull(xmPart.getElement_KElement("MediaRef",null,0));
-        assertEquals(inlineMedia.getGrainDirection(), EnumGrainDirection.XDirection);
-        assertEquals(inlineMedia, xmPart.getMedia());
-        assertFalse(inlineMedia.hasAttribute("ID"));
-
-     }
+	}
 }

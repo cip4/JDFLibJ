@@ -38,7 +38,7 @@
  *
  * Usage of this software in commercial products is subject to restrictions. For
  * details please consult info@cip4.org.
-  *
+ *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -74,66 +74,76 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.resource.JDFNotification.EnumNotificationDetails;
 
-
 public class JDFNotificationTest extends JDFTestCaseBase
 {
-    
-    JDFNotification n;
-    
-    public void testappendNotificationDetails() throws Exception
-    {
-       JDFMilestone ms=n.appendMilestone();
-       assertEquals(n.getNotificationDetailsType(), EnumNotificationDetails.Milestone);
-       assertNotNull(ms);
-       assertEquals(ms.getLocalName(), ElementName.MILESTONE);
-       assertNull(n.appendBarcode());
-       assertNull(n.getCreateBarcode());
-    }
-    
-    public void testgetNotificationDetails() throws Exception
-    {
-       JDFBarcode ms=n.appendBarcode();
-       assertEquals(n.getNotificationDetailsType(), EnumNotificationDetails.Barcode);
-       assertNotNull(ms);
-       assertEquals(ms.getLocalName(), ElementName.BARCODE);
-       assertEquals(n.getNotificationDetails(), ms);
-    }
-    public void testgetCreateNotificationDetails() throws Exception
-    {
-       JDFSystemTimeSet ms=n.getCreateSystemTimeSet();
-       assertEquals(n.getNotificationDetailsType(), EnumNotificationDetails.SystemTimeSet);
-       assertNotNull(ms);
-       assertEquals(ms.getLocalName(), ElementName.SYSTEMTIMESET);
-       assertEquals(n.getNotificationDetails(), ms);
-       assertNull(n.getCreateBarcode());
-    }
 
-    public void testsetEvent() throws Exception
-    {
-       JDFEvent e=n.setEvent("id", "value", "bullshit");
-       assertEquals(e.getEventID(),"id");
-       assertEquals(e.getEventValue(),"value");
-       assertEquals(n.getComment(0).getText(),"bullshit");
-       JDFEvent ee=n.setEvent("id2", "value2", "bullshit2");
-       assertEquals(ee,e);
-       e=(JDFEvent) n.getNotificationDetails();
-       assertEquals(e.getEventID(),"id2");
-       assertEquals(e.getEventValue(),"value2");
-       assertEquals(n.getComment(0).getText(),"bullshit2");
-       e=n.getCreateEvent();
-       assertEquals(e.getEventID(),"id2");
-       assertEquals(e.getEventValue(),"value2");
-       assertEquals(n.getComment(0).getText(),"bullshit2");
-    }
+	JDFNotification n;
 
-    /* (non-Javadoc)
-     * @see junit.framework.TestCase#setUp()
-     */
-    @Override
-    protected void setUp() throws Exception
-    {
-        // TODO Auto-generated method stub
-        super.setUp();
-        n=(JDFNotification) new JDFDoc("Notification").getRoot();
-    }
+	public void testappendNotificationDetails() throws Exception
+	{
+		JDFMilestone ms = n.appendMilestone();
+		assertEquals(n.getNotificationDetailsType(), EnumNotificationDetails.Milestone);
+		assertNotNull(ms);
+		assertEquals(ms.getLocalName(), ElementName.MILESTONE);
+		assertNull(n.appendBarcode());
+		assertNull(n.getCreateBarcode());
+	}
+
+	public void testgetNotificationDetails() throws Exception
+	{
+		JDFBarcode ms = n.appendBarcode();
+		assertEquals(n.getNotificationDetailsType(), EnumNotificationDetails.Barcode);
+		assertNotNull(ms);
+		assertEquals(ms.getLocalName(), ElementName.BARCODE);
+		assertEquals(n.getNotificationDetails(), ms);
+	}
+
+	public void testgetCreateNotificationDetails() throws Exception
+	{
+		JDFSystemTimeSet ms = n.getCreateSystemTimeSet();
+		assertEquals(n.getNotificationDetailsType(), EnumNotificationDetails.SystemTimeSet);
+		assertNotNull(ms);
+		assertEquals(ms.getLocalName(), ElementName.SYSTEMTIMESET);
+		assertEquals(n.getNotificationDetails(), ms);
+		assertNull(n.getCreateBarcode());
+	}
+
+	public void testSetCommentText() throws Exception
+	{
+		n.setCommentText("fooBar");
+		assertEquals(n.getCommentText(), "fooBar");
+		n.setCommentText("fooBar");
+		assertEquals(n.getCommentText(), "fooBar");
+	}
+
+	public void testsetEvent() throws Exception
+	{
+		JDFEvent e = n.setEvent("id", "value", "bullshit");
+		assertEquals(e.getEventID(), "id");
+		assertEquals(e.getEventValue(), "value");
+		assertEquals(n.getComment(0).getText(), "bullshit");
+		JDFEvent ee = n.setEvent("id2", "value2", "bullshit2");
+		assertEquals(ee, e);
+		e = (JDFEvent) n.getNotificationDetails();
+		assertEquals(e.getEventID(), "id2");
+		assertEquals(e.getEventValue(), "value2");
+		assertEquals(n.getComment(0).getText(), "bullshit2");
+		e = n.getCreateEvent();
+		assertEquals(e.getEventID(), "id2");
+		assertEquals(e.getEventValue(), "value2");
+		assertEquals(n.getComment(0).getText(), "bullshit2");
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see junit.framework.TestCase#setUp()
+	 */
+	@Override
+	protected void setUp() throws Exception
+	{
+		// TODO Auto-generated method stub
+		super.setUp();
+		n = (JDFNotification) new JDFDoc("Notification").getRoot();
+	}
 }

@@ -76,50 +76,52 @@ import org.cip4.jdflib.jmf.JDFEmployeeDef;
 
 public class JDFEmployeeTest extends JDFTestCaseBase
 {
-    /**
-     * tests the separationlist class
-     *
-     */
-    public final void testMatchesEmployee()
-    {
-        JDFEmployee emp = (JDFEmployee) new JDFDoc("Employee").getRoot();
-        JDFEmployee emp2 = (JDFEmployee) new JDFDoc("Employee").getRoot();
-        assertTrue(emp.matches(null));
-        emp.setPersonalID("p1");
-        assertFalse(emp.matches(emp2));
-        emp2.setPersonalID("p1");
-        assertTrue(emp.matches(emp2));
-        emp2.setPersonalID("p2");
-        assertFalse(emp.matches(emp2));
-    }
-    
-    /**
-     * tests the separationlist class
-     *
-     */
-    public final void testMatchesPersonalID()
-    {
-        JDFEmployee emp = (JDFEmployee) new JDFDoc("Employee").getRoot();
-        assertTrue(emp.matches(null));
-        assertFalse(emp.matches("p2"));
-        emp.setPersonalID("p1");
-        assertFalse(emp.matches("p2"));
-        assertTrue(emp.matches("p1"));
-    }
-    /**
-     * tests the separationlist class
-     *
-     */
-    public final void testMatchesEmployeeDef()
-    {
-        JDFEmployee emp = (JDFEmployee) new JDFDoc("Employee").getRoot();
-        JDFEmployeeDef emp2 = (JDFEmployeeDef) new JDFDoc("EmployeeDef").getRoot();
-        assertTrue(emp.matches(null));
-        emp.setPersonalID("p1");
-        assertFalse(emp.matches(emp2));
-        emp2.setPersonalID("p1");
-        assertTrue(emp.matches(emp2));
-        emp2.setPersonalID("p2");
-        assertFalse(emp.matches(emp2));
-    }
+	/**
+	 * tests the separationlist class
+	 * 
+	 */
+	public final void testMatchesEmployee()
+	{
+		JDFEmployee emp = (JDFEmployee) new JDFDoc("Employee").getRoot();
+		JDFEmployee emp2 = (JDFEmployee) new JDFDoc("Employee").getRoot();
+		assertTrue(emp.matches(null));
+		emp.setPersonalID("p1");
+		assertFalse(emp.matches(emp2));
+		emp2.setPersonalID("p1");
+		assertTrue(emp.matches(emp2));
+		emp2.setPersonalID("p2");
+		assertFalse(emp.matches(emp2));
+	}
+
+	/**
+	 * tests the separationlist class
+	 * 
+	 */
+	public final void testMatchesPersonalID()
+	{
+		JDFEmployee emp = (JDFEmployee) new JDFDoc("Employee").getRoot();
+		assertTrue(emp.matches(null));
+		assertFalse(emp.matches("p2"));
+		emp.setPersonalID("p1");
+		assertFalse(emp.matches("p2"));
+		assertTrue(emp.matches("p1"));
+	}
+
+	/**
+	 * tests the separationlist class
+	 * 
+	 */
+	public final void testMatchesEmployeeDef()
+	{
+		JDFEmployee emp = (JDFEmployee) new JDFDoc("Employee").getRoot();
+		JDFEmployeeDef emp2 = (JDFEmployeeDef) new JDFDoc("EmployeeDef")
+				.getRoot();
+		assertTrue(emp.matches(null));
+		emp.setPersonalID("p1");
+		assertFalse(emp.matches(emp2));
+		emp2.setPersonalID("p1");
+		assertTrue(emp.matches(emp2));
+		emp2.setPersonalID("p2");
+		assertFalse(emp.matches(emp2));
+	}
 }

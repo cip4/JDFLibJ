@@ -81,41 +81,42 @@ import org.cip4.jdflib.resource.JDFResource;
 
 /**
  * @author prosirai
- *
+ * 
  */
 public class UnlinkFinderTest extends JDFTestCaseBase
 {
 
-    JDFNode n;
-    JDFResource rl;
-    JDFResource xm;
-    JDFResource m;
-   
-    public void testGetUlinked()
-    {
-        UnLinkFinder uf=new UnLinkFinder();
-        VElement v=uf.getUnlinkedResources(n);
-        assertEquals(v.size(), 1);
-        assertTrue(v.contains(rl));
-    }
-    public void testEraseUlinked()
-    {
-        UnLinkFinder uf=new UnLinkFinder();
-         uf.eraseUnlinkedResources(n);
-         VElement v=uf.getUnlinkedResources(n);
-         
-        assertNull(v);
-    }
+	JDFNode n;
+	JDFResource rl;
+	JDFResource xm;
+	JDFResource m;
 
-    @Override
-    protected void setUp() throws Exception
-    {
-        // TODO Auto-generated method stub
-        super.setUp();
-        n=new JDFDoc("JDF").getJDFRoot();
-        rl=n.appendResourcePool().appendResource("RunList", null, null);
-        xm =n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
-        m=(JDFResource) xm.appendElement("Media");
-        m.makeRootResource(null, null, true);        
-    }
+	public void testGetUlinked()
+	{
+		UnLinkFinder uf = new UnLinkFinder();
+		VElement v = uf.getUnlinkedResources(n);
+		assertEquals(v.size(), 1);
+		assertTrue(v.contains(rl));
+	}
+
+	public void testEraseUlinked()
+	{
+		UnLinkFinder uf = new UnLinkFinder();
+		uf.eraseUnlinkedResources(n);
+		VElement v = uf.getUnlinkedResources(n);
+
+		assertNull(v);
+	}
+
+	@Override
+	protected void setUp() throws Exception
+	{
+		// TODO Auto-generated method stub
+		super.setUp();
+		n = new JDFDoc("JDF").getJDFRoot();
+		rl = n.appendResourcePool().appendResource("RunList", null, null);
+		xm = n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
+		m = (JDFResource) xm.appendElement("Media");
+		m.makeRootResource(null, null, true);
+	}
 }

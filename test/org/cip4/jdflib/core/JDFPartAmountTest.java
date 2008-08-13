@@ -80,50 +80,58 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 
 /**
  * @author MuchaD
- *
- * This implements the first fixture with unit tests for class JDFAudit.
+ * 
+ *         This implements the first fixture with unit tests for class JDFAudit.
  */
 public class JDFPartAmountTest extends JDFTestCaseBase
 {
-    
-    private JDFResourceLink rl;
-    private JDFPartAmount pa;
 
-    /* (non-Javadoc)
-     * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
-     */
-    protected void setUp() throws Exception
-    {
-        // TODO Auto-generated method stub
-        super.setUp();
-        JDFElement.setLongID(false);
-        JDFNode n = new JDFDoc("JDF").getJDFRoot();
-        JDFResource r=n.addResource(ElementName.COMPONENT, EnumUsage.Output);
-        rl=n.getLink(r, null);
-        final JDFAttributeMap s1Map = new JDFAttributeMap(EnumPartIDKey.SheetName,"S1");
-        rl.setAmount(10, s1Map);
-        pa=rl.getAmountPool().getPartAmount(s1Map);
-     }
+	private JDFResourceLink rl;
+	private JDFPartAmount pa;
 
-    public void testGetInvalidAttributes(){
-        assertEquals(pa.getInvalidAttributes(EnumValidationLevel.Incomplete, true, 0).size(), 0);
-        rl.setAttribute("Amount", 20,null);
-        assertTrue(pa.getInvalidAttributes(EnumValidationLevel.Incomplete, true, 0).contains("Amount"));
-        
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	protected void setUp() throws Exception
+	{
+		// TODO Auto-generated method stub
+		super.setUp();
+		JDFElement.setLongID(false);
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		JDFResource r = n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		rl = n.getLink(r, null);
+		final JDFAttributeMap s1Map = new JDFAttributeMap(
+				EnumPartIDKey.SheetName, "S1");
+		rl.setAmount(10, s1Map);
+		pa = rl.getAmountPool().getPartAmount(s1Map);
+	}
 
-    public void testLot()
-    {
-        pa.appendLot();
-        assertTrue(pa.isValid(EnumValidationLevel.Incomplete));
-        assertFalse(pa.getUnknownElements(false, 999).contains(ElementName.LOT));
-    }
-    /////////////////////////////////////////////////////////////////////
-    public void testPartAmount()
-    {
-        pa.appendElement("AmountPool");
-        assertTrue(pa.getUnknownElements(false, 999).contains(ElementName.AMOUNTPOOL));
-    }
-    /////////////////////////////////////////////////////////////////////
+	public void testGetInvalidAttributes()
+	{
+		assertEquals(pa.getInvalidAttributes(EnumValidationLevel.Incomplete,
+				true, 0).size(), 0);
+		rl.setAttribute("Amount", 20, null);
+		assertTrue(pa.getInvalidAttributes(EnumValidationLevel.Incomplete,
+				true, 0).contains("Amount"));
+
+	}
+
+	public void testLot()
+	{
+		pa.appendLot();
+		assertTrue(pa.isValid(EnumValidationLevel.Incomplete));
+		assertFalse(pa.getUnknownElements(false, 999).contains(ElementName.LOT));
+	}
+
+	// ///////////////////////////////////////////////////////////////////
+	public void testPartAmount()
+	{
+		pa.appendElement("AmountPool");
+		assertTrue(pa.getUnknownElements(false, 999).contains(
+				ElementName.AMOUNTPOOL));
+	}
+	// ///////////////////////////////////////////////////////////////////
 
 }

@@ -82,174 +82,195 @@ import java.io.FileInputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 
-
-
 public class FileUtilTest extends JDFTestCaseBase
 {
 
-    ///////////////////////////////////////////////////////////////////////////
-    public void testListFiles() throws Exception
-    {
-        File f=new File(sm_dirTestDataTemp+"/foo");
-        f.mkdir(); // make sure we have one
-        assertTrue(FileUtil.deleteAll(f));
-        assertTrue(f.mkdir());
-        assertNull(FileUtil.listFiles(null, null));
+	// /////////////////////////////////////////////////////////////////////////
+	public void testListFiles() throws Exception
+	{
+		File f = new File(sm_dirTestDataTemp + "/foo");
+		f.mkdir(); // make sure we have one
+		assertTrue(FileUtil.deleteAll(f));
+		assertTrue(f.mkdir());
+		assertNull(FileUtil.listFiles(null, null));
 
-        for(char c='a';c<'g';c++)
-        {
-            for(int i=0;i<3;i++)
-            {
-                File f2=new File(f.getAbsolutePath()+File.separator+i+"."+c);
-                assertTrue(f2.createNewFile());
-            }
-        }
-        assertEquals(FileUtil.listFiles(f, "a").length,3);
-        assertEquals(FileUtil.listFiles(f, "C")[0].getName(),"0.c");
-        assertEquals(FileUtil.listFiles(f, "a,b,.c")[0].getName(),"0.a");
-        assertEquals(FileUtil.listFiles(f, "a,b,.c")[8].getName(),"2.c");
-        assertEquals(FileUtil.listFiles(f, null).length,18);
-        assertNull(FileUtil.listFiles(f, "CC"));
-        assertNull(FileUtil.listFiles(f, ".CC,.dd"));
-        new File(f.getAbsolutePath()+File.separator+"a").createNewFile();
-        assertEquals(FileUtil.listFiles(f, null).length,19);
-        assertEquals(FileUtil.listFiles(f, ".").length,1);
-        new File(f.getAbsolutePath()+File.separator+"b.").createNewFile();
-        assertEquals(FileUtil.listFiles(f, ".").length,2);
+		for (char c = 'a'; c < 'g'; c++)
+		{
+			for (int i = 0; i < 3; i++)
+			{
+				File f2 = new File(f.getAbsolutePath() + File.separator + i
+						+ "." + c);
+				assertTrue(f2.createNewFile());
+			}
+		}
+		assertEquals(FileUtil.listFiles(f, "a").length, 3);
+		assertEquals(FileUtil.listFiles(f, "C")[0].getName(), "0.c");
+		assertEquals(FileUtil.listFiles(f, "a,b,.c")[0].getName(), "0.a");
+		assertEquals(FileUtil.listFiles(f, "a,b,.c")[8].getName(), "2.c");
+		assertEquals(FileUtil.listFiles(f, null).length, 18);
+		assertNull(FileUtil.listFiles(f, "CC"));
+		assertNull(FileUtil.listFiles(f, ".CC,.dd"));
+		new File(f.getAbsolutePath() + File.separator + "a").createNewFile();
+		assertEquals(FileUtil.listFiles(f, null).length, 19);
+		assertEquals(FileUtil.listFiles(f, ".").length, 1);
+		new File(f.getAbsolutePath() + File.separator + "b.").createNewFile();
+		assertEquals(FileUtil.listFiles(f, ".").length, 2);
 
+	}
 
-    }
-    ///////////////////////////////////////////////////////////////////////////
-    public void testListDirectories() throws Exception
-    {
-        File f=new File(sm_dirTestDataTemp+File.separator+"foo");
-        f.mkdir(); // make sure we have one
-        assertTrue(FileUtil.deleteAll(f));
-        assertTrue(f.mkdir());
-        assertNull(FileUtil.listDirectories(null));
-        assertNull(FileUtil.listDirectories(f));
-        File f1=new File(sm_dirTestDataTemp+File.separator+"foo"+File.separator+"bar1");
-        assertTrue(f1.mkdir());
-        File f2=new File(sm_dirTestDataTemp+File.separator+"foo"+File.separator+"bar2");
-        assertTrue(f2.createNewFile());
-        assertEquals(FileUtil.listDirectories(f).length,1);
-        assertEquals("skipping bar2 - not a directory",FileUtil.listDirectories(f)[0],f1);
+	// /////////////////////////////////////////////////////////////////////////
+	public void testListDirectories() throws Exception
+	{
+		File f = new File(sm_dirTestDataTemp + File.separator + "foo");
+		f.mkdir(); // make sure we have one
+		assertTrue(FileUtil.deleteAll(f));
+		assertTrue(f.mkdir());
+		assertNull(FileUtil.listDirectories(null));
+		assertNull(FileUtil.listDirectories(f));
+		File f1 = new File(sm_dirTestDataTemp + File.separator + "foo"
+				+ File.separator + "bar1");
+		assertTrue(f1.mkdir());
+		File f2 = new File(sm_dirTestDataTemp + File.separator + "foo"
+				+ File.separator + "bar2");
+		assertTrue(f2.createNewFile());
+		assertEquals(FileUtil.listDirectories(f).length, 1);
+		assertEquals("skipping bar2 - not a directory", FileUtil
+				.listDirectories(f)[0], f1);
 
+	}
 
+	// /////////////////////////////////////////////////////////////////////////
+	public void testMoveFile() throws Exception
+	{
+		byte[] b = new byte[55555];
+		for (int i = 0; i < 55555; i++)
+		{
+			b[i] = (byte) (i % 256);
+		}
+		ByteArrayInputStream is = new ByteArrayInputStream(b);
+		is.close();
+		File f = new File(sm_dirTestDataTemp + "streamMove.dat");
+		if (f.exists())
+		{
+			f.delete();
+		}
+		FileUtil.streamToFile(is, f.getPath());
+		File f2 = new File(sm_dirTestDataTemp + "streamMove2.dat");
 
-    }
+		assertTrue(FileUtil.moveFile(f, f2));
+		assertFalse(f.exists());
+		assertTrue(f2.length() > 50000);
+		final String newdir = sm_dirTestDataTemp + File.separator + "newDir";
+		File fd = new File(newdir);
+		FileUtil.deleteAll(fd);
+		assertFalse(fd.exists());
+		fd.mkdirs();
+		File f3 = new File(newdir + File.separator + "streamMove3.dat");
+		assertTrue(FileUtil.moveFile(f2, f3));
+		assertFalse(f2.exists());
+		assertTrue(f3.length() > 50000);
 
-    ///////////////////////////////////////////////////////////////////////////
-    public void testMoveFile() throws Exception
-    {
-        byte[] b=new byte[55555];
-        for(int i=0;i<55555;i++) {
-            b[i]=(byte)(i%256);
-        }
-        ByteArrayInputStream is=new ByteArrayInputStream(b);
-        is.close();
-        File f=new File(sm_dirTestDataTemp+"streamMove.dat");
-        if(f.exists()) {
-            f.delete();
-        }
-        FileUtil.streamToFile(is, f.getPath());
-        File f2=new File(sm_dirTestDataTemp+"streamMove2.dat");
+	}
 
-        assertTrue(FileUtil.moveFile(f, f2));
-        assertFalse(f.exists());
-        assertTrue(f2.length()>50000);
-        final String newdir = sm_dirTestDataTemp+File.separator+"newDir";
-        File fd=new File(newdir);
-        FileUtil.deleteAll(fd);
-        assertFalse(fd.exists());
-        fd.mkdirs();
-        File f3=new File(newdir+File.separator+"streamMove3.dat");
-        assertTrue(FileUtil.moveFile(f2, f3));
-        assertFalse(f2.exists());
-        assertTrue(f3.length()>50000);
+	// /////////////////////////////////////////////////////////////////////////
 
+	public void testMoveFileToDir() throws Exception
+	{
+		byte[] b = new byte[55555];
+		for (int i = 0; i < 55555; i++)
+		{
+			b[i] = (byte) (i % 256);
+		}
+		ByteArrayInputStream is = new ByteArrayInputStream(b);
+		is.close();
+		File f = new File(sm_dirTestDataTemp + "streamMove.dat");
+		if (f.exists())
+		{
+			f.delete();
+		}
+		FileUtil.streamToFile(is, f.getPath());
+		final String newdir = sm_dirTestDataTemp + File.separator + "newDir2";
+		File fd = new File(newdir);
+		FileUtil.deleteAll(fd);
+		assertFalse(fd.exists());
+		fd.mkdirs();
+		File nf = FileUtil.moveFileToDir(f, fd);
+		assertNotNull(nf);
+		assertEquals(nf.getParentFile(), fd);
+		assertEquals(nf.getName(), f.getName());
+	}
 
-    }
-    ///////////////////////////////////////////////////////////////////////////
+	// /////////////////////////////////////////////////////////////////////////
+	public void testStreamToFile() throws Exception
+	{
+		byte[] b = new byte[55555];
+		for (int i = 0; i < 55555; i++)
+		{
+			b[i] = (byte) (i % 256);
+		}
+		ByteArrayInputStream is = new ByteArrayInputStream(b);
+		is.close();
+		File f = new File(sm_dirTestDataTemp + "stream.dat");
+		if (f.exists())
+		{
+			f.delete();
+		}
 
-    public void testMoveFileToDir() throws Exception
-    {
-        byte[] b=new byte[55555];
-        for(int i=0;i<55555;i++) {
-            b[i]=(byte)(i%256);
-        }
-        ByteArrayInputStream is=new ByteArrayInputStream(b);
-        is.close();
-        File f=new File(sm_dirTestDataTemp+"streamMove.dat");
-        if(f.exists()) {
-            f.delete();
-        }
-        FileUtil.streamToFile(is, f.getPath());
-        final String newdir = sm_dirTestDataTemp+File.separator+"newDir2";
-        File fd=new File(newdir);
-        FileUtil.deleteAll(fd);
-        assertFalse(fd.exists());
-        fd.mkdirs();
-        File nf=FileUtil.moveFileToDir(f, fd);
-        assertNotNull(nf);
-        assertEquals(nf.getParentFile(), fd);
-        assertEquals(nf.getName(), f.getName());
-    }
+		FileUtil.streamToFile(is, sm_dirTestDataTemp + "stream.dat");
+		assertTrue(f.exists());
 
-     ///////////////////////////////////////////////////////////////////////////
-    public void testStreamToFile() throws Exception
-    {
-        byte[] b=new byte[55555];
-        for(int i=0;i<55555;i++) {
-            b[i]=(byte)(i%256);
-        }
-        ByteArrayInputStream is=new ByteArrayInputStream(b);
-        is.close();
-        File f=new File(sm_dirTestDataTemp+"stream.dat");
-        if(f.exists()) {
-            f.delete();
-        }
+		FileInputStream fis = new FileInputStream(f);
+		for (int i = 0; i < 55555; i++)
+		{
+			b[i] = (byte) fis.read();
+			if (i % 287 == 0)
+			{
+				assertEquals((256 + b[i]) % 256, i % 256);
+			}
+		}
 
-        FileUtil.streamToFile(is, sm_dirTestDataTemp+"stream.dat");
-        assertTrue(f.exists());
+		int j = fis.read();
+		assertEquals("eof reached", j, -1);
+		fis.close();
 
-        FileInputStream fis=new FileInputStream(f);
-        for(int i=0;i<55555;i++)
-        {
-            b[i]=(byte)fis.read();
-            if(i%287==0) {
-                assertEquals((256+b[i])%256, i%256);
-            }
-        }
+		FileInputStream fis2 = new FileInputStream(f);
+		File f2 = FileUtil.streamToFile(fis2, sm_dirTestDataTemp
+				+ "stream2.dat");
+		assertTrue(f2.canRead());
+		assertTrue(f.delete());
+		assertTrue(f2.delete());
 
-        int j=fis.read();
-        assertEquals("eof reached",j, -1);
-        fis.close();
+	}
 
-        FileInputStream fis2=new FileInputStream(f);
-        File f2=FileUtil.streamToFile(fis2, sm_dirTestDataTemp+"stream2.dat");
-        assertTrue(f2.canRead());
-        assertTrue(f.delete());
-        assertTrue(f2.delete());
+	// ////////////////////////////////////////////////////////////////
+	public void testGetFileInDirectory() throws Exception
+	{
+		assertEquals(new File("a/b"), FileUtil.getFileInDirectory(
+				new File("a"), new File("b")));
+		assertEquals(new File("a/b"), FileUtil.getFileInDirectory(
+				new File("a/"), new File("b")));
+		assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File(
+				"a\\"), new File("b")));
+		assertEquals(new File("a/b"), FileUtil.getFileInDirectory(
+				new File("a/"), new File("/b")));
+		assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File(
+				"a\\"), new File("\\b")));
+		assertEquals(new File("a/c/b"), FileUtil.getFileInDirectory(new File(
+				"a"), new File("c/b")));
+		assertEquals(new File("a/aa/c/b"), FileUtil.getFileInDirectory(
+				new File("a/aa"), new File("c/b")));
+		assertEquals(FileUtil
+				.getFileInDirectory(new File("a/b"), new File("c")), new File(
+				"a/b/c"));
+		assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File(
+				"c/d")), new File("a/b/c/d"));
+		assertEquals(FileUtil.getFileInDirectory(new File("a/b"),
+				new File("/c")), new File("a/b/c"));
+		assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File(
+				"/c/d")), new File("a/b/c/d"));
+		assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File(
+				"/c/d/")), new File("a/b/c/d"));
 
-    }
-
-    //////////////////////////////////////////////////////////////////
-    public void testGetFileInDirectory() throws Exception
-    {
-        assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a"), new File("b")));
-        assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a/"), new File("b")));
-        assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a\\"), new File("b")));
-        assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a/"), new File("/b")));
-        assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a\\"), new File("\\b")));
-        assertEquals(new File("a/c/b"), FileUtil.getFileInDirectory(new File("a"), new File("c/b")));
-        assertEquals(new File("a/aa/c/b"), FileUtil.getFileInDirectory(new File("a/aa"), new File("c/b")));
-        assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("c")), new File("a/b/c"));
-        assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("c/d")), new File("a/b/c/d"));
-        assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("/c")), new File("a/b/c"));
-        assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("/c/d")), new File("a/b/c/d"));
-        assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("/c/d/")), new File("a/b/c/d"));
-
-    }
+	}
 
 }

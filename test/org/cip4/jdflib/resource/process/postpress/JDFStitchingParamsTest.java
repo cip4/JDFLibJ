@@ -81,23 +81,24 @@ import org.cip4.jdflib.pool.JDFResourcePool;
 
 public class JDFStitchingParamsTest extends JDFTestCaseBase
 {
-    /**
-     * tests the separationlist class
-     *
-     */
-    public final void testStitchType()
-    {
-        JDFDoc doc = new JDFDoc("JDF");
-        JDFNode root = doc.getJDFRoot();
-        JDFResourcePool resPool = root.getCreateResourcePool();
-        KElement kElem = resPool.appendResource(ElementName.STITCHINGPARAMS, null, null);
-        assertTrue(kElem instanceof JDFStitchingParams);
-        JDFStitchingParams sp=(JDFStitchingParams)kElem;
-        sp.setStitchType(EnumStitchType.Saddle);
-        final String write2String = doc.write2String(0);
-        assertTrue(write2String.indexOf("StitchType=\"Saddle\"")>22);
-        JDFParser p2=new JDFParser();
-        JDFDoc d2=p2.parseString(write2String);
-        assertTrue(d2.write2String(0).indexOf("StitchType=\"Saddle\"")>22);
-    }
+	/**
+	 * tests the separationlist class
+	 * 
+	 */
+	public final void testStitchType()
+	{
+		JDFDoc doc = new JDFDoc("JDF");
+		JDFNode root = doc.getJDFRoot();
+		JDFResourcePool resPool = root.getCreateResourcePool();
+		KElement kElem = resPool.appendResource(ElementName.STITCHINGPARAMS,
+				null, null);
+		assertTrue(kElem instanceof JDFStitchingParams);
+		JDFStitchingParams sp = (JDFStitchingParams) kElem;
+		sp.setStitchType(EnumStitchType.Saddle);
+		final String write2String = doc.write2String(0);
+		assertTrue(write2String.indexOf("StitchType=\"Saddle\"") > 22);
+		JDFParser p2 = new JDFParser();
+		JDFDoc d2 = p2.parseString(write2String);
+		assertTrue(d2.write2String(0).indexOf("StitchType=\"Saddle\"") > 22);
+	}
 }

@@ -1,4 +1,3 @@
-
 /*
  *
  * The CIP4 Software License, Version 1.0
@@ -83,44 +82,47 @@ import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 public class JDFContactTest extends JDFTestCaseBase
 {
 
-    JDFContact co;
+	JDFContact co;
 
-    /* (non-Javadoc)
-     * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
-     */
-    protected void setUp() throws Exception
-    {
-        // TODO Auto-generated method stub
-        super.setUp();
-        JDFDoc doc=new JDFDoc("JDF");
-        JDFNode n=doc.getJDFRoot();
-        n.setType(EnumType.Imposition);
-        co=(JDFContact) n.addResource(ElementName.CONTACT, null);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	protected void setUp() throws Exception
+	{
+		// TODO Auto-generated method stub
+		super.setUp();
+		JDFDoc doc = new JDFDoc("JDF");
+		JDFNode n = doc.getJDFRoot();
+		n.setType(EnumType.Imposition);
+		co = (JDFContact) n.addResource(ElementName.CONTACT, null);
+	}
 
-    public void testsetContactType() throws Exception
-    {
-        co.setContactTypes(EnumContactType.Accounting);
-        assertEquals(co.getAttribute(AttributeName.CONTACTTYPES), "Accounting");
-    }
-    public void testaddContactType() throws Exception
-    {
-        co.addContactTypes(null);
-        assertTrue(co.getContactTypes().isEmpty());
-        co.addContactTypes(EnumContactType.Accounting);
-        assertEquals(co.getAttribute(AttributeName.CONTACTTYPES), "Accounting");
-    }
+	public void testsetContactType() throws Exception
+	{
+		co.setContactTypes(EnumContactType.Accounting);
+		assertEquals(co.getAttribute(AttributeName.CONTACTTYPES), "Accounting");
+	}
 
-    public void testsetPerson() throws Exception
-    {
-        assertNull(co.setPerson(null,null));
+	public void testaddContactType() throws Exception
+	{
+		co.addContactTypes(null);
+		assertTrue(co.getContactTypes().isEmpty());
+		co.addContactTypes(EnumContactType.Accounting);
+		assertEquals(co.getAttribute(AttributeName.CONTACTTYPES), "Accounting");
+	}
 
-        co.setPerson("foo","bar");
-        assertEquals(co.getPerson().getFirstName(),"foo");
-        assertEquals(co.getPerson().getFamilyName(),"bar");
-        
-        co.setPerson("foo",null);
-        assertEquals(co.getPerson().getFirstName(),"foo");
-        assertEquals(co.getPerson().getFamilyName(),"");
-    }
- }
+	public void testsetPerson() throws Exception
+	{
+		assertNull(co.setPerson(null, null));
+
+		co.setPerson("foo", "bar");
+		assertEquals(co.getPerson().getFirstName(), "foo");
+		assertEquals(co.getPerson().getFamilyName(), "bar");
+
+		co.setPerson("foo", null);
+		assertEquals(co.getPerson().getFirstName(), "foo");
+		assertEquals(co.getPerson().getFamilyName(), "");
+	}
+}

@@ -17,28 +17,29 @@ import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
 
 public class JDFNodeProductTest extends TestCase
 {
-    public void testBugBuild058()
-    {
-        // get the JDF document root element
-        JDFDoc jdfDoc       = new JDFDoc(ElementName.JDF);
-        JDFNode productNode    = jdfDoc.getJDFRoot();
-        
-        productNode.setType(JDFNode.EnumType.Product.getName(), false);
+	public void testBugBuild058()
+	{
+		// get the JDF document root element
+		JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
+		JDFNode productNode = jdfDoc.getJDFRoot();
 
-        // Add an intent resource
-        JDFLayoutIntent layoutIntent = (JDFLayoutIntent) productNode.appendMatchingResource(
-                                        "LayoutIntent", JDFNode.EnumProcessUsage.AnyInput, null);
+		productNode.setType(JDFNode.EnumType.Product.getName(), false);
 
-        // set the type attribute
-        JDFResourceLink rli = 
-            productNode.getMatchingLink("LayoutIntent", JDFNode.EnumProcessUsage.AnyInput, 0);
-            
-        boolean bValid = rli.isValid(KElement.EnumValidationLevel.Complete);
-        assertTrue (bValid);
+		// Add an intent resource
+		JDFLayoutIntent layoutIntent = (JDFLayoutIntent) productNode
+				.appendMatchingResource("LayoutIntent",
+						JDFNode.EnumProcessUsage.AnyInput, null);
 
-        JDFLayoutIntent layoutIntent2 = (JDFLayoutIntent) rli.getTarget();
-        bValid = bValid && (layoutIntent2.equals(layoutIntent));
-        assertTrue (bValid);
-    }
+		// set the type attribute
+		JDFResourceLink rli = productNode.getMatchingLink("LayoutIntent",
+				JDFNode.EnumProcessUsage.AnyInput, 0);
+
+		boolean bValid = rli.isValid(KElement.EnumValidationLevel.Complete);
+		assertTrue(bValid);
+
+		JDFLayoutIntent layoutIntent2 = (JDFLayoutIntent) rli.getTarget();
+		bValid = bValid && (layoutIntent2.equals(layoutIntent));
+		assertTrue(bValid);
+	}
 
 }

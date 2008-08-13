@@ -82,54 +82,59 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.util.JDFDate;
 
-
-
 public class ProcessRunTest extends JDFTestCaseBase
 {
-    public void testGetDuration() throws Exception
-    {
-        JDFDoc doc=new JDFDoc("JDF");
-        JDFNode n=doc.getJDFRoot();
-        JDFAuditPool ap=n.getCreateAuditPool();
-        JDFProcessRun pt=ap.addProcessRun(EnumNodeStatus.Completed,null,null);
-        pt.setStart(new JDFDate());
-        JDFDate end=new JDFDate();
-        end.setTimeInMillis(end.getTimeInMillis()+100*1000);
-        pt.setEnd(end);
-        assertEquals("",pt.getDuration().getDuration(), 100.,1.);
-        pt.setDurationSeconds(50);
-        assertEquals("",pt.getDuration().getDuration(), 50.,1.);
+	public void testGetDuration() throws Exception
+	{
+		JDFDoc doc = new JDFDoc("JDF");
+		JDFNode n = doc.getJDFRoot();
+		JDFAuditPool ap = n.getCreateAuditPool();
+		JDFProcessRun pt = ap.addProcessRun(EnumNodeStatus.Completed, null,
+				null);
+		pt.setStart(new JDFDate());
+		JDFDate end = new JDFDate();
+		end.setTimeInMillis(end.getTimeInMillis() + 100 * 1000);
+		pt.setEnd(end);
+		assertEquals("", pt.getDuration().getDuration(), 100., 1.);
+		pt.setDurationSeconds(50);
+		assertEquals("", pt.getDuration().getDuration(), 50., 1.);
 
-    }
-    public void testAddPhaseTime() throws Exception
-    {
-        JDFDoc doc=new JDFDoc("JDF");
-        JDFNode n=doc.getJDFRoot();
-        JDFAuditPool ap=n.getCreateAuditPool();
-        JDFProcessRun pr=ap.addProcessRun(EnumNodeStatus.Completed,null,null);
-        JDFPhaseTime pt0=null;
-        for(int i=0;i<10;i++)
-        {
-            JDFPhaseTime pt=ap.addPhaseTime(EnumNodeStatus.InProgress,null,null);
-            if(i==0) {
-				pt0=pt;
+	}
+
+	public void testAddPhaseTime() throws Exception
+	{
+		JDFDoc doc = new JDFDoc("JDF");
+		JDFNode n = doc.getJDFRoot();
+		JDFAuditPool ap = n.getCreateAuditPool();
+		JDFProcessRun pr = ap.addProcessRun(EnumNodeStatus.Completed, null,
+				null);
+		JDFPhaseTime pt0 = null;
+		for (int i = 0; i < 10; i++)
+		{
+			JDFPhaseTime pt = ap.addPhaseTime(EnumNodeStatus.InProgress, null,
+					null);
+			if (i == 0)
+			{
+				pt0 = pt;
 			}
 
-            final JDFDate start = new JDFDate();
-            start.setTimeInMillis(start.getTimeInMillis()+i*1000*1000);
-            pt.setStart(start);
-            JDFDate end=new JDFDate();
-            end.setTimeInMillis(end.getTimeInMillis()+100*1000+i*1000*1000);
-            pt.setEnd(end);
-            assertEquals("",pt.getDuration().getDuration(), 100, 1.);
+			final JDFDate start = new JDFDate();
+			start.setTimeInMillis(start.getTimeInMillis() + i * 1000 * 1000);
+			pt.setStart(start);
+			JDFDate end = new JDFDate();
+			end.setTimeInMillis(end.getTimeInMillis() + 100 * 1000 + i * 1000
+					* 1000);
+			pt.setEnd(end);
+			assertEquals("", pt.getDuration().getDuration(), 100, 1.);
 
-            pr.addPhase(pt);
-            assertEquals("",pr.getDuration().getDuration(), (i+1)*100, 1.);
-            if (pt0 != null) {
-				assertEquals("", pr.getStart(),pt0.getStart());
+			pr.addPhase(pt);
+			assertEquals("", pr.getDuration().getDuration(), (i + 1) * 100, 1.);
+			if (pt0 != null)
+			{
+				assertEquals("", pr.getStart(), pt0.getStart());
 			}
-            assertEquals("", pr.getEnd(),pt.getEnd());
-        }
-    }
+			assertEquals("", pr.getEnd(), pt.getEnd());
+		}
+	}
 
 }

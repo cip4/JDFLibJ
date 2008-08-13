@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -72,6 +72,7 @@ package org.cip4.jdflib.core;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
@@ -79,70 +80,80 @@ import org.cip4.jdflib.util.JDFDuration;
 
 /**
  * @author MuchaD
- *
- * This implements the first fixture with unit tests for class JDFAudit.
+ * 
+ *         This implements the first fixture with unit tests for class JDFAudit.
  */
 public class JDFNodeInfoTest extends JDFTestCaseBase
 {
-    public void testDuration() throws Exception
-    {
-        JDFDoc d=new JDFDoc(ElementName.JDF);
-        JDFNode n=d.getJDFRoot();
-        n.setType("ConventionalPrinting",true);
-        JDFNodeInfo ni=n.getCreateNodeInfo();    
-        final JDFDuration duration = new JDFDuration("PT1H20M30S");
-        ni.setTotalDuration(duration);
-        assertEquals(ni.getTotalDuration(), duration);
-        try
-        {
-            ni.setCleanupDuration(new JDFDuration("PS1L20M30S"));
-            fail("bad duration");
-        }
-        catch (Exception x)
-        {
-            // nop
-        }
-    }
-    /////////////////////////////////////////////////////////////////////
-    public void testPartUsage() throws Exception
-    {
-        JDFDoc d=new JDFDoc(ElementName.JDF);
-        JDFNode n=d.getJDFRoot();
-        n.setType("ConventionalPrinting",true);
-        JDFNodeInfo ni=n.getCreateNodeInfo();   
-        final JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.Separation,"Cyan");
-        n.setPartStatus(map, EnumNodeStatus.Ready);
-        JDFNodeInfo niPart=(JDFNodeInfo)ni.getPartition(map, null);
-        assertNotNull(niPart);
-        assertNull(niPart.getAttribute_KElement(AttributeName.PARTUSAGE,null,null));
-    }
-    /////////////////////////////////////////////////////////////////////
-    public void testWorkstepID() throws Exception
-    {
-        JDFDoc d=new JDFDoc(ElementName.JDF);
-        JDFNode n=d.getJDFRoot();
-        n.setType("ConventionalPrinting",true);
-        JDFNodeInfo.setDefaultWorkStepID(true);
-        JDFNodeInfo ni=n.getCreateNodeInfo(); 
-        assertTrue(ni.hasAttribute("WorkStepID"));
-        final JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.Separation,"Cyan");
-        n.setPartStatus(map, EnumNodeStatus.Ready);
-        JDFNodeInfo niPart=(JDFNodeInfo)ni.getPartition(map, null);
-        assertNotNull(niPart);
-        assertTrue(niPart.hasAttribute("WorkStepID"));
-    }
-    /////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////
-    public void testCPI() throws Exception
-    {
-        JDFDoc d=new JDFDoc(ElementName.JDF);
-        JDFNode n=d.getJDFRoot();
-        n.setType("Combined",true);
-        n.setTypes(new VString("ConventionalPrinting Folding"," "));
-        
-        JDFNodeInfo ni=n.getCreateNodeInfo(); 
-        JDFResourceLink rl=n.getLink(ni, null);
-        assertFalse(rl.hasAttribute(AttributeName.COMBINEDPROCESSINDEX));
-    }
+	public void testDuration() throws Exception
+	{
+		JDFDoc d = new JDFDoc(ElementName.JDF);
+		JDFNode n = d.getJDFRoot();
+		n.setType("ConventionalPrinting", true);
+		JDFNodeInfo ni = n.getCreateNodeInfo();
+		final JDFDuration duration = new JDFDuration("PT1H20M30S");
+		ni.setTotalDuration(duration);
+		assertEquals(ni.getTotalDuration(), duration);
+		try
+		{
+			ni.setCleanupDuration(new JDFDuration("PS1L20M30S"));
+			fail("bad duration");
+		} catch (Exception x)
+		{
+			// nop
+		}
+	}
+
+	// ///////////////////////////////////////////////////////////////////
+	public void testPartUsage() throws Exception
+	{
+		JDFDoc d = new JDFDoc(ElementName.JDF);
+		JDFNode n = d.getJDFRoot();
+		n.setType("ConventionalPrinting", true);
+		JDFNodeInfo ni = n.getCreateNodeInfo();
+		final JDFAttributeMap map = new JDFAttributeMap(
+				EnumPartIDKey.Separation, "Cyan");
+		n.setPartStatus(map, EnumNodeStatus.Ready);
+		JDFNodeInfo niPart = (JDFNodeInfo) ni.getPartition(map, null);
+		assertNotNull(niPart);
+		assertNull(niPart.getAttribute_KElement(AttributeName.PARTUSAGE, null,
+				null));
+	}
+
+	// ///////////////////////////////////////////////////////////////////
+	public void testWorkstepID() throws Exception
+	{
+		JDFDoc d = new JDFDoc(ElementName.JDF);
+		JDFNode n = d.getJDFRoot();
+		n.setType("ConventionalPrinting", true);
+		JDFNodeInfo.setDefaultWorkStepID(true);
+		JDFNodeInfo ni = n.getCreateNodeInfo();
+		assertTrue(ni.hasAttribute("WorkStepID"));
+		final JDFAttributeMap map = new JDFAttributeMap(
+				EnumPartIDKey.Separation, "Cyan");
+		n.setPartStatus(map, EnumNodeStatus.Ready);
+		JDFNodeInfo niPart = (JDFNodeInfo) ni.getPartition(map, null);
+		assertNotNull(niPart);
+		assertTrue(niPart.hasAttribute("WorkStepID"));
+		d.write2File(sm_dirTestDataTemp + "workstepidtest.jdf", 2, false);
+		VString v = ni.getInvalidAttributes(EnumValidationLevel.Incomplete,
+				true, -1);
+		assertTrue(ni.isValid(EnumValidationLevel.Incomplete));
+
+	}
+
+	// ///////////////////////////////////////////////////////////////////
+	// ///////////////////////////////////////////////////////////////////
+	public void testCPI() throws Exception
+	{
+		JDFDoc d = new JDFDoc(ElementName.JDF);
+		JDFNode n = d.getJDFRoot();
+		n.setType("Combined", true);
+		n.setTypes(new VString("ConventionalPrinting Folding", " "));
+
+		JDFNodeInfo ni = n.getCreateNodeInfo();
+		JDFResourceLink rl = n.getLink(ni, null);
+		assertFalse(rl.hasAttribute(AttributeName.COMBINEDPROCESSINDEX));
+	}
 
 }

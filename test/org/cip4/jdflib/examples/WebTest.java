@@ -33,105 +33,120 @@ import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFRunList;
 
-
 public class WebTest extends JDFTestCaseBase
 {
-    private JDFNode node;
-    private JDFNodeInfo nodeInfo;
-    private JDFDoc doc;
+	private JDFNode node;
+	private JDFNodeInfo nodeInfo;
+	private JDFDoc doc;
 
-    /**
-     * test WebGrowth Compensation
-     */
-    public void testWebGrowthCompensation()
-    {
+	/**
+	 * test WebGrowth Compensation
+	 */
+	public void testWebGrowthCompensation()
+	{
 
-        JDFElement.setLongID(false);
-        doc = new JDFDoc("JDF");
-        JDFNode n=doc.getJDFRoot();
-        final JDFResourcePool rp = n.getCreateResourcePool();
-        JDFResource lo=n.addResource("Layout", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
-        JDFLayout losh=(JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Sheet1");
-        JDFLayout lofr=(JDFLayout) losh.addPartition(EnumPartIDKey.Side, EnumSide.Front.getName());
+		JDFElement.setLongID(false);
+		doc = new JDFDoc("JDF");
+		JDFNode n = doc.getJDFRoot();
+		final JDFResourcePool rp = n.getCreateResourcePool();
+		JDFResource lo = n.addResource("Layout", EnumResourceClass.Parameter,
+				EnumUsage.Input, null, null, null, null);
+		JDFLayout losh = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName,
+				"Sheet1");
+		JDFLayout lofr = (JDFLayout) losh.addPartition(EnumPartIDKey.Side,
+				EnumSide.Front.getName());
 
-        rp.appendXMLComment("LayoutShift SHOULD be partitioned: at least Side and Separation will make sense", null);
+		rp
+				.appendXMLComment(
+						"LayoutShift SHOULD be partitioned: at least Side and Separation will make sense",
+						null);
 
-        JDFResource los=n.addResource("LayoutShift", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
-        los.appendXMLComment("Note that the interpolation algorithm between positions is implementation dependent", null);
-        los=los.addPartition(EnumPartIDKey.Side, "Front");
-        VString vSep=new VString("Cyan Magenta Yellow Black"," ");
+		JDFResource los = n.addResource("LayoutShift",
+				EnumResourceClass.Parameter, EnumUsage.Input, null, null, null,
+				null);
+		los
+				.appendXMLComment(
+						"Note that the interpolation algorithm between positions is implementation dependent",
+						null);
+		los = los.addPartition(EnumPartIDKey.Side, "Front");
+		VString vSep = new VString("Cyan Magenta Yellow Black", " ");
 
-        for(int i=0;i<16;i++)
-        {
-            int x=720*(i%4);
-            int y=1000*(i/4);
-            int ord=i%8;
-            JDFContentObject co=lofr.appendContentObject();
-            co.setOrd(ord);
-            co.setOrdID(i);
-            co.setCTM(new JDFMatrix(1,0,0,1,x,y));
-            JDFMarkObject mo=lofr.appendMarkObject();
-            mo.setOrd(ord);
-            mo.setOrdID(i+100);
-            mo.setCTM(new JDFMatrix(1,0,0,1,x+700,y+900));
-        }
-        for(int j=0;j<vSep.size();j++)
-        {
-            final KElement sepShift = los.addPartition(EnumPartIDKey.Separation, vSep.stringAt(j));
-            for(int i=0;i<16;i+=2)
-            {
+		for (int i = 0; i < 16; i++)
+		{
+			int x = 720 * (i % 4);
+			int y = 1000 * (i / 4);
+			int ord = i % 8;
+			JDFContentObject co = lofr.appendContentObject();
+			co.setOrd(ord);
+			co.setOrdID(i);
+			co.setCTM(new JDFMatrix(1, 0, 0, 1, x, y));
+			JDFMarkObject mo = lofr.appendMarkObject();
+			mo.setOrd(ord);
+			mo.setOrdID(i + 100);
+			mo.setCTM(new JDFMatrix(1, 0, 0, 1, x + 700, y + 900));
+		}
+		for (int j = 0; j < vSep.size(); j++)
+		{
+			final KElement sepShift = los.addPartition(
+					EnumPartIDKey.Separation, vSep.stringAt(j));
+			for (int i = 0; i < 16; i += 2)
+			{
 
-                int x=720*(i%4);
-                int y=1000*(i/4);
-                KElement shiftObject=sepShift.appendElement("ShiftPoint");
+				int x = 720 * (i % 4);
+				int y = 1000 * (i / 4);
+				KElement shiftObject = sepShift.appendElement("ShiftPoint");
 
-                shiftObject.setAttribute("Position", new JDFXYPair(x+360,y+500).toString());
-                shiftObject.setAttribute("CTM", new JDFMatrix(1,0,0,1,j+i/4,j+i%4).toString());
-            }
-        }
-        doc.write2File(sm_dirTestDataTemp+"WebgrowthPartition.jdf", 2, false);
+				shiftObject.setAttribute("Position", new JDFXYPair(x + 360,
+						y + 500).toString());
+				shiftObject.setAttribute("CTM", new JDFMatrix(1, 0, 0, 1, j + i
+						/ 4, j + i % 4).toString());
+			}
+		}
+		doc.write2File(sm_dirTestDataTemp + "WebgrowthPartition.jdf", 2, false);
 
-    }    
+	}
 
-/**
- * test direct imaging
-     */
-    public void testDirectImage()
-    {
+	/**
+	 * test direct imaging
+	 */
+	public void testDirectImage()
+	{
 
-        JDFElement.setLongID(false);
-        doc = new JDFDoc("JDF");
-        node = doc.getJDFRoot();
-        node.setType(EnumType.Combined);
-        VString vTypes=new VString("ImageSetting ConventionalPrinting"," ");
-        node.setTypes(vTypes);
-        nodeInfo = node.appendNodeInfo();
-        nodeInfo.setResStatus(EnumResStatus.Available,true);
-        JDFRunList rl=(JDFRunList) node.appendMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyInput, null);
-        JDFByteMap bm= rl.appendByteMap();
-        bm.appendFileSpec().setURL("File:///foo.tif");
-        JDFExposedMedia xm=(JDFExposedMedia) node.appendMatchingResource(ElementName.EXPOSEDMEDIA, EnumProcessUsage.Plate, null);
-        xm.setDescriptiveName("Real Plate");
-        xm.appendMedia();
-        JDFExposedMedia xmCyl=(JDFExposedMedia) node.appendMatchingResource(ElementName.EXPOSEDMEDIA, EnumProcessUsage.Cylinder, null);
-        xmCyl.setDescriptiveName("Optional cylinder");
-        node.linkMatchingResource(xmCyl, EnumProcessUsage.AnyOutput, null);
-        assertEquals("2 for cylinder one for plate",node.getResourceLinkPool().numChildElements("ExposedMediaLink", null), 3);
-        doc.write2File(sm_dirTestDataTemp+File.separator+"webDirect.jdf", 2,false);
+		JDFElement.setLongID(false);
+		doc = new JDFDoc("JDF");
+		node = doc.getJDFRoot();
+		node.setType(EnumType.Combined);
+		VString vTypes = new VString("ImageSetting ConventionalPrinting", " ");
+		node.setTypes(vTypes);
+		nodeInfo = node.appendNodeInfo();
+		nodeInfo.setResStatus(EnumResStatus.Available, true);
+		JDFRunList rl = (JDFRunList) node.appendMatchingResource(
+				ElementName.RUNLIST, EnumProcessUsage.AnyInput, null);
+		JDFByteMap bm = rl.appendByteMap();
+		bm.appendFileSpec().setURL("File:///foo.tif");
+		JDFExposedMedia xm = (JDFExposedMedia) node.appendMatchingResource(
+				ElementName.EXPOSEDMEDIA, EnumProcessUsage.Plate, null);
+		xm.setDescriptiveName("Real Plate");
+		xm.appendMedia();
+		JDFExposedMedia xmCyl = (JDFExposedMedia) node.appendMatchingResource(
+				ElementName.EXPOSEDMEDIA, EnumProcessUsage.Cylinder, null);
+		xmCyl.setDescriptiveName("Optional cylinder");
+		node.linkMatchingResource(xmCyl, EnumProcessUsage.AnyOutput, null);
+		assertEquals("2 for cylinder one for plate", node.getResourceLinkPool()
+				.numChildElements("ExposedMediaLink", null), 3);
+		doc.write2File(sm_dirTestDataTemp + File.separator + "webDirect.jdf",
+				2, false);
 
+	}
 
-    }
+	// /////////////////////////////////////////////////////////////////
+	public void testSplitDuct()
+	{
+		// TODO
+	}
 
+	// /////////////////////////////////////////////////////////////////
 
-    ///////////////////////////////////////////////////////////////////
-    public void testSplitDuct()
-    {
-//      TODO
-    }
-
-
-    ///////////////////////////////////////////////////////////////////
-
-    ///////////////////////////////////////////////////////////////////
+	// /////////////////////////////////////////////////////////////////
 
 }

@@ -13,28 +13,28 @@ import org.cip4.jdflib.pool.JDFResourcePool;
 
 public class JDFCutBlockTest extends TestCase
 {
-    /**
-     * tests the separationlist class
-     *
-     */
-    public final void testBlockName()
-    {
-        JDFDoc doc = new JDFDoc("JDF");
-        JDFNode root = doc.getJDFRoot();
-        JDFResourcePool resPool = root.getCreateResourcePool();
-        KElement kElem = resPool.appendResource(ElementName.CUTBLOCK, null, null);
-        assertTrue(kElem instanceof JDFCutBlock);
-        JDFCutBlock block=(JDFCutBlock)kElem;
-        block.setBlockName("Foo");
-        block.setBlockSize(new JDFXYPair(10,10));
-        block.setBlockType(EnumBlockType.CutBlock);
-        assertTrue(block.isValid(EnumValidationLevel.Complete));
+	/**
+	 * tests the separationlist class
+	 * 
+	 */
+	public final void testBlockName()
+	{
+		JDFDoc doc = new JDFDoc("JDF");
+		JDFNode root = doc.getJDFRoot();
+		JDFResourcePool resPool = root.getCreateResourcePool();
+		KElement kElem = resPool.appendResource(ElementName.CUTBLOCK, null,
+				null);
+		assertTrue(kElem instanceof JDFCutBlock);
+		JDFCutBlock block = (JDFCutBlock) kElem;
+		block.setBlockName("Foo");
+		block.setBlockSize(new JDFXYPair(10, 10));
+		block.setBlockType(EnumBlockType.CutBlock);
+		assertTrue(block.isValid(EnumValidationLevel.Complete));
 
-    }
-    
+	}
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////
 }

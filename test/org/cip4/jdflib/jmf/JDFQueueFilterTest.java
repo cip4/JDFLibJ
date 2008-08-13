@@ -76,77 +76,81 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 
-
 public class JDFQueueFilterTest extends JDFTestCaseBase
 {
-    JDFQueue theQueue;
-    JDFJMF theJMF;
-    JDFQueueFilter filter;
+	JDFQueue theQueue;
+	JDFJMF theJMF;
+	JDFQueueFilter filter;
 
-    public void setUp() throws Exception
-    {
-        JDFDoc d=new JDFDoc(ElementName.QUEUE);
-        theQueue=(JDFQueue) d.getRoot();
-        d=new JDFDoc(ElementName.JMF);
-        theJMF=d.getJMFRoot();
-        filter=theJMF.appendCommand(EnumType.AbortQueueEntry).appendQueueFilter();
-    }
+	public void setUp() throws Exception
+	{
+		JDFDoc d = new JDFDoc(ElementName.QUEUE);
+		theQueue = (JDFQueue) d.getRoot();
+		d = new JDFDoc(ElementName.JMF);
+		theJMF = d.getJMFRoot();
+		filter = theJMF.appendCommand(EnumType.AbortQueueEntry)
+				.appendQueueFilter();
+	}
 
-    /////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////
+	// /////////////////
 
-    public void testMatches() throws Exception
-    {
-        JDFQueueEntry qe=theQueue.appendQueueEntry();
-        assertTrue("both empty ",filter.matches(qe));
-        qe.setDeviceID("d1");
-        qe.setQueueEntryID("qe1");
-        
-        filter.appendDevice("qe1");
-        assertFalse("no device ",filter.matches(qe));
-        filter.appendDevice("d1");
-        assertTrue(" device ",filter.matches(qe));
-         
-        filter.appendQueueEntryDef("qe2");
-        assertFalse("no qentryID ",filter.matches(qe));
-        filter.appendQueueEntryDef("qe1");
-        assertTrue("qentryID ",filter.matches(qe));
-        filter.setQueueEntryDetails(EnumQueueEntryDetails.None);
-        assertFalse("details=none never matches ",filter.matches(qe));
-   }
-    /////////////////////////////////////////////////////////////////////////////////////////////
+	public void testMatches() throws Exception
+	{
+		JDFQueueEntry qe = theQueue.appendQueueEntry();
+		assertTrue("both empty ", filter.matches(qe));
+		qe.setDeviceID("d1");
+		qe.setQueueEntryID("qe1");
 
-    public void testMatch() throws Exception
-    {
-        for(int i=0;i<100;i++)
-        {
-            JDFQueueEntry qe=theQueue.appendQueueEntry();
-            qe.setQueueEntryID("q"+i);
-        }
-        
-        filter.setMaxEntries(10);
-        filter.match(theQueue);
-        assertEquals(10, theQueue.numEntries(null));
-        filter.setQueueEntryDetails(EnumQueueEntryDetails.None);
-        filter.match(theQueue);
-        assertEquals(0, theQueue.numEntries(null));
-    }
-    
-    public void testGetQueueEntrySet() throws Exception
-    {
-        filter.appendQueueEntryDef("qe1");
-        filter.appendQueueEntryDef("qe2");
-        assertEquals(filter.getQueueEntryDefSet().size(), 2);
-        assertTrue(filter.getQueueEntryDefSet().contains("qe1"));
-        assertTrue(filter.getQueueEntryDefSet().contains("qe2"));
-        assertFalse(filter.getQueueEntryDefSet().contains("qe3"));
-    }
-    public void testGetDeviceSet() throws Exception
-    {
-        filter.appendDevice("qe1");
-        filter.appendDevice("qe2");
-        assertEquals(filter.getDeviceIDSet().size(), 2);
-        assertTrue(filter.getDeviceIDSet().contains("qe1"));
-        assertTrue(filter.getDeviceIDSet().contains("qe2"));
-        assertFalse(filter.getDeviceIDSet().contains("qe3"));
-    }
+		filter.appendDevice("qe1");
+		assertFalse("no device ", filter.matches(qe));
+		filter.appendDevice("d1");
+		assertTrue(" device ", filter.matches(qe));
+
+		filter.appendQueueEntryDef("qe2");
+		assertFalse("no qentryID ", filter.matches(qe));
+		filter.appendQueueEntryDef("qe1");
+		assertTrue("qentryID ", filter.matches(qe));
+		filter.setQueueEntryDetails(EnumQueueEntryDetails.None);
+		assertFalse("details=none never matches ", filter.matches(qe));
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	// /////////////////
+
+	public void testMatch() throws Exception
+	{
+		for (int i = 0; i < 100; i++)
+		{
+			JDFQueueEntry qe = theQueue.appendQueueEntry();
+			qe.setQueueEntryID("q" + i);
+		}
+
+		filter.setMaxEntries(10);
+		filter.match(theQueue);
+		assertEquals(10, theQueue.numEntries(null));
+		filter.setQueueEntryDetails(EnumQueueEntryDetails.None);
+		filter.match(theQueue);
+		assertEquals(0, theQueue.numEntries(null));
+	}
+
+	public void testGetQueueEntrySet() throws Exception
+	{
+		filter.appendQueueEntryDef("qe1");
+		filter.appendQueueEntryDef("qe2");
+		assertEquals(filter.getQueueEntryDefSet().size(), 2);
+		assertTrue(filter.getQueueEntryDefSet().contains("qe1"));
+		assertTrue(filter.getQueueEntryDefSet().contains("qe2"));
+		assertFalse(filter.getQueueEntryDefSet().contains("qe3"));
+	}
+
+	public void testGetDeviceSet() throws Exception
+	{
+		filter.appendDevice("qe1");
+		filter.appendDevice("qe2");
+		assertEquals(filter.getDeviceIDSet().size(), 2);
+		assertTrue(filter.getDeviceIDSet().contains("qe1"));
+		assertTrue(filter.getDeviceIDSet().contains("qe2"));
+		assertFalse(filter.getDeviceIDSet().contains("qe3"));
+	}
 }

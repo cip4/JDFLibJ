@@ -86,25 +86,25 @@ import org.cip4.jdflib.span.JDFSpanBindingLength.EnumSpanBindingLength;
 
 public class JDFEnumerationSpanTest extends JDFTestCaseBase
 {
-     
-     /**
-     * make sure that corrupt files always return a null document
-     *
-     */
-    public void testRange()
-    {
-        JDFDoc doc=new JDFDoc("BindingLength");
-        KElement e=doc.getRoot();
-        assertTrue(e instanceof JDFSpanBindingLength);
-        JDFSpanBindingLength bl=(JDFSpanBindingLength)e;
-        bl.setActual(EnumSpanBindingLength.Long);
-        EnumSpanBindingLength ebl=(EnumSpanBindingLength)bl.getActual();
-        assertEquals(ebl,EnumSpanBindingLength.Long);
-        Vector v=new Vector();
-        v.add(EnumSpanBindingLength.Long);
-        v.add(EnumSpanBindingLength.Short);
-        bl.setRange(v);
-        Vector v2=bl.getRange();
-        assertEquals("Range",v,v2);
-     }  
+
+	/**
+	 * make sure that corrupt files always return a null document
+	 * 
+	 */
+	public void testRange()
+	{
+		JDFDoc doc = new JDFDoc("BindingLength");
+		KElement e = doc.getRoot();
+		assertTrue(e instanceof JDFSpanBindingLength);
+		JDFSpanBindingLength bl = (JDFSpanBindingLength) e;
+		bl.setActual(EnumSpanBindingLength.Long);
+		EnumSpanBindingLength ebl = (EnumSpanBindingLength) bl.getActual();
+		assertEquals(ebl, EnumSpanBindingLength.Long);
+		Vector v = new Vector();
+		v.add(EnumSpanBindingLength.Long);
+		v.add(EnumSpanBindingLength.Short);
+		bl.setRange(v);
+		Vector v2 = bl.getRange();
+		assertEquals("Range", v, v2);
+	}
 }

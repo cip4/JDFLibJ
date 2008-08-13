@@ -89,93 +89,111 @@ import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.MimeUtil;
 import org.cip4.jdflib.util.StringUtil;
 
-
 public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 {
-    JDFQueue theQueue;
-    JDFJMF theJMF;
-    JDFQueueSubmissionParams qsp;
+	JDFQueue theQueue;
+	JDFJMF theJMF;
+	JDFQueueSubmissionParams qsp;
 
-    public void setUp() throws Exception
-    {
-        JDFDoc d=new JDFDoc(ElementName.QUEUE);
-        theQueue=(JDFQueue) d.getRoot();
-        d=new JDFDoc(ElementName.JMF);
-        theJMF=d.getJMFRoot();
-        qsp=theJMF.appendCommand(EnumType.SubmitQueueEntry).appendQueueSubmissionParams();
-    }
+	public void setUp() throws Exception
+	{
+		JDFDoc d = new JDFDoc(ElementName.QUEUE);
+		theQueue = (JDFQueue) d.getRoot();
+		d = new JDFDoc(ElementName.JMF);
+		theJMF = d.getJMFRoot();
+		qsp = theJMF.appendCommand(EnumType.SubmitQueueEntry)
+				.appendQueueSubmissionParams();
+	}
 
-    /////////////////////////////////////////////////////////////////////////////////////////////
-    public void testAddNull() throws Exception
-    {
-        JDFResponse resp=qsp.addEntry(null,null);
-        assertEquals(2,resp.getReturnCode());
-    }
-    /////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////
+	// /////////////////
+	public void testAddNull() throws Exception
+	{
+		JDFResponse resp = qsp.addEntry(null, null);
+		assertEquals(2, resp.getReturnCode());
+	}
 
-    public void testAddEntry() throws Exception
-    {
-        JDFResponse resp=qsp.addEntry(theQueue,null);
-        assertEquals(0,resp.getReturnCode());
-        theQueue = resp.getQueue(0);
-        assertEquals(theQueue.getQueueEntry(0).getQueueEntryStatus(), resp.getQueueEntry(0).getQueueEntryStatus());
-        assertEquals(theQueue.getQueueEntry(0).getQueueEntryID(), resp.getQueueEntry(0).getQueueEntryID());
-        assertNotSame(theQueue.getQueueEntry(0).getQueueEntryID(),"");
-        assertEquals(theQueue.numEntries(null),1);
-        assertEquals(theQueue.numEntries(EnumQueueEntryStatus.Waiting),1);
-        qsp.setHold(true);
-        JDFJMF jmfNew=new JDFDoc("JMF").getJMFRoot();
-        resp=qsp.addEntry(theQueue,jmfNew);
-        assertEquals(resp, jmfNew.getResponse(0));
-        assertEquals(theQueue.numEntries(null),2);
-        assertEquals(theQueue.numEntries(EnumQueueEntryStatus.Waiting),1);
-        assertEquals(theQueue.numEntries(EnumQueueEntryStatus.Held),1);
-        assertNotSame(theQueue.getQueueEntry(0).getQueueEntryID(),theQueue.getQueueEntry(1).getQueueEntryID());
-    }
+	////////////////////////////////////////////////////////////////////////////
+	// /////////////////
 
-    /////////////////////////////////////////////////////////////////////////////////////////////
-    public void testGetMimeURL() throws Exception
-    {
-        JDFDoc d1=new JDFDoc("JMF");
-        d1.setOriginalFileName("JMF.jmf");
-        JDFJMF jmf=d1.getJMFRoot();
-        JDFCommand com=(JDFCommand) jmf.appendMessageElement(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.SubmitQueueEntry);
-      
-        com.appendQueueSubmissionParams().setURL("cid:TheJDF");
-        
-        JDFDoc doc=new JDFDoc("JDF");
-        doc.setOriginalFileName("JDF.jdf");  
-        JDFNode n=doc.getJDFRoot();
-        n.setType(JDFNode.EnumType.ColorSpaceConversion);
-        JDFColorSpaceConversionParams cscp=(JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input, null, null, null, null);
-        JDFFileSpec fs0=cscp.appendFinalTargetDevice();
-        fs0.setURL(StringUtil.uncToUrl(sm_dirTestData+File.separator+"test.icc",true));
-        JDFRunList rl=(JDFRunList)n.addResource(ElementName.RUNLIST, null, EnumUsage.Input, null, null, null, null);
-        rl.addPDF(StringUtil.uncToUrl(sm_dirTestData+File.separator+"url1.pdf",false), 0, -1);
-        Multipart m=MimeUtil.buildMimePackage(d1, doc, true);
-        
-        JDFDoc[] d2=MimeUtil.getJMFSubmission(m);
-        assertNotNull(d2);
-        final JDFQueueSubmissionParams queueSubmissionParams = d2[0].getJMFRoot().getCommand(0).getQueueSubmissionParams(0);
-        assertEquals(queueSubmissionParams.getURL(), "cid:JDF.jdf");
-        assertEquals(d2[1].getJDFRoot().getEnumType(),JDFNode.EnumType.ColorSpaceConversion);
-        JDFDoc d3=queueSubmissionParams.getURLDoc();
-        assertNotNull(d3);
-        assertEquals(d3.getJDFRoot().getEnumType(),JDFNode.EnumType.ColorSpaceConversion);
-    }
+	public void testAddEntry() throws Exception
+	{
+		JDFResponse resp = qsp.addEntry(theQueue, null);
+		assertEquals(0, resp.getReturnCode());
+		theQueue = resp.getQueue(0);
+		assertEquals(theQueue.getQueueEntry(0).getQueueEntryStatus(), resp
+				.getQueueEntry(0).getQueueEntryStatus());
+		assertEquals(theQueue.getQueueEntry(0).getQueueEntryID(), resp
+				.getQueueEntry(0).getQueueEntryID());
+		assertNotSame(theQueue.getQueueEntry(0).getQueueEntryID(), "");
+		assertEquals(theQueue.numEntries(null), 1);
+		assertEquals(theQueue.numEntries(EnumQueueEntryStatus.Waiting), 1);
+		qsp.setHold(true);
+		JDFJMF jmfNew = new JDFDoc("JMF").getJMFRoot();
+		resp = qsp.addEntry(theQueue, jmfNew);
+		assertEquals(resp, jmfNew.getResponse(0));
+		assertEquals(theQueue.numEntries(null), 2);
+		assertEquals(theQueue.numEntries(EnumQueueEntryStatus.Waiting), 1);
+		assertEquals(theQueue.numEntries(EnumQueueEntryStatus.Held), 1);
+		assertNotSame(theQueue.getQueueEntry(0).getQueueEntryID(), theQueue
+				.getQueueEntry(1).getQueueEntryID());
+	}
 
-    public void testSetReturnURL() throws Exception
-    {
-        qsp.setReturnURL((URL)null);
-        assertFalse(qsp.hasAttribute(AttributeName.RETURNURL));
-        qsp.setReturnURL(new URL("http://localhost"));
-        assertEquals(qsp.getReturnURL(),"http://localhost");        
-    }
-    public void testSetReturnJMFL() throws Exception
-    {
-        qsp.setReturnJMF((URL)null);
-        assertFalse(qsp.hasAttribute(AttributeName.RETURNJMF));
-        qsp.setReturnJMF(new URL("http://localhost"));
-        assertEquals(qsp.getReturnJMF(),"http://localhost");        
-    }
+	////////////////////////////////////////////////////////////////////////////
+	// /////////////////
+	public void testGetMimeURL() throws Exception
+	{
+		JDFDoc d1 = new JDFDoc("JMF");
+		d1.setOriginalFileName("JMF.jmf");
+		JDFJMF jmf = d1.getJMFRoot();
+		JDFCommand com = (JDFCommand) jmf.appendMessageElement(
+				JDFMessage.EnumFamily.Command,
+				JDFMessage.EnumType.SubmitQueueEntry);
+
+		com.appendQueueSubmissionParams().setURL("cid:TheJDF");
+
+		JDFDoc doc = new JDFDoc("JDF");
+		doc.setOriginalFileName("JDF.jdf");
+		JDFNode n = doc.getJDFRoot();
+		n.setType(JDFNode.EnumType.ColorSpaceConversion);
+		JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n
+				.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null,
+						EnumUsage.Input, null, null, null, null);
+		JDFFileSpec fs0 = cscp.appendFinalTargetDevice();
+		fs0.setURL(StringUtil.uncToUrl(sm_dirTestData + File.separator
+				+ "test.icc", true));
+		JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, null,
+				EnumUsage.Input, null, null, null, null);
+		rl.addPDF(StringUtil.uncToUrl(sm_dirTestData + File.separator
+				+ "url1.pdf", false), 0, -1);
+		Multipart m = MimeUtil.buildMimePackage(d1, doc, true);
+
+		JDFDoc[] d2 = MimeUtil.getJMFSubmission(m);
+		assertNotNull(d2);
+		final JDFQueueSubmissionParams queueSubmissionParams = d2[0]
+				.getJMFRoot().getCommand(0).getQueueSubmissionParams(0);
+		assertEquals(queueSubmissionParams.getURL(), "cid:JDF.jdf");
+		assertEquals(d2[1].getJDFRoot().getEnumType(),
+				JDFNode.EnumType.ColorSpaceConversion);
+		JDFDoc d3 = queueSubmissionParams.getURLDoc();
+		assertNotNull(d3);
+		assertEquals(d3.getJDFRoot().getEnumType(),
+				JDFNode.EnumType.ColorSpaceConversion);
+	}
+
+	public void testSetReturnURL() throws Exception
+	{
+		qsp.setReturnURL((URL) null);
+		assertFalse(qsp.hasAttribute(AttributeName.RETURNURL));
+		qsp.setReturnURL(new URL("http://localhost"));
+		assertEquals(qsp.getReturnURL(), "http://localhost");
+	}
+
+	public void testSetReturnJMFL() throws Exception
+	{
+		qsp.setReturnJMF((URL) null);
+		assertFalse(qsp.hasAttribute(AttributeName.RETURNJMF));
+		qsp.setReturnJMF(new URL("http://localhost"));
+		assertEquals(qsp.getReturnJMF(), "http://localhost");
+	}
 }

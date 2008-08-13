@@ -91,103 +91,110 @@ import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 public class JDFMediaTest extends TestCase
 {
 
-    public JDFMediaTest (String arg0)
-    {
-        super(arg0);
-    }
+	public JDFMediaTest(String arg0)
+	{
+		super(arg0);
+	}
 
-    /*
-     * Test method for 'org.cip4.jdflib.resource.process.JDFMedia.setDimensionCM(JDFXYPair)'
-     */
-    public final void testSetGetDimension()
-    {
-        JDFDoc doc = new JDFDoc("JDF");
-        JDFNode root = doc.getJDFRoot();
-        JDFResourcePool resPool = root.getCreateResourcePool();
-        KElement kElem = resPool.appendResource(ElementName.MEDIA, EnumResourceClass.Consumable, null);
-        assertTrue(kElem instanceof JDFMedia);
-        JDFMedia media = ((JDFMedia) kElem);
-        
-        
-        media.setDimensionCM(new JDFXYPair(2.54, 2.54));
-        
-        JDFXYPair result = media.getDimension();
-        assertEquals(new JDFXYPair(72, 72), result);
-        
-        result = media.getDimensionCM();
-        assertEquals(new JDFXYPair(2.54, 2.54), result);
+	/*
+	 * Test method for
+	 * 'org.cip4.jdflib.resource.process.JDFMedia.setDimensionCM(JDFXYPair)'
+	 */
+	public final void testSetGetDimension()
+	{
+		JDFDoc doc = new JDFDoc("JDF");
+		JDFNode root = doc.getJDFRoot();
+		JDFResourcePool resPool = root.getCreateResourcePool();
+		KElement kElem = resPool.appendResource(ElementName.MEDIA,
+				EnumResourceClass.Consumable, null);
+		assertTrue(kElem instanceof JDFMedia);
+		JDFMedia media = ((JDFMedia) kElem);
 
-        result = media.getDimensionInch();
-        assertEquals(new JDFXYPair(1, 1), result);
-        
-        
-        media.setDimensionInch(new JDFXYPair(1, 1));
-        
-        result = media.getDimension();
-        assertEquals(new JDFXYPair(72, 72), result);
-        
-        result = media.getDimensionCM();
-        assertEquals(new JDFXYPair(2.54, 2.54), result);
+		media.setDimensionCM(new JDFXYPair(2.54, 2.54));
 
-        result = media.getDimensionInch();
-        assertEquals(new JDFXYPair(1, 1), result);
-    }
-    
-    ////////////////////////////////////////////////////////////////////
+		JDFXYPair result = media.getDimension();
+		assertEquals(new JDFXYPair(72, 72), result);
 
-    public final void testThicknessFromWeight()
-    {
-        JDFMedia m=(JDFMedia) new JDFDoc("Media").getRoot();
-        m.setThicknessFromWeight(true, false);
-        m.setMediaType(EnumMediaType.Paper);
-        assertFalse(m.hasAttribute(AttributeName.THICKNESS));
-        m.setWeight(80.);
-        m.setThicknessFromWeight(true, false);
-        assertEquals(m.getThickness(), 100.,1.);  
-        JDFMedia m2=(JDFMedia) m.addPartition(EnumPartIDKey.Run, "r1");
-        m2.setWeight(40.);
-        m.setThicknessFromWeight(true, true);
-        assertEquals(m2.getThickness(), 50.,1.);  
-        assertEquals(m.getThickness(), 100.,1.);  
-           }
-    
-    ////////////////////////////////////////////////////////////////////
-    
-    public final void testHoleType()
-    {
-        JDFDoc doc = new JDFDoc("JDF");
-        JDFNode root = doc.getJDFRoot();
-        JDFResourcePool resPool = root.getCreateResourcePool();
-        
-        // check HoleType for JDFMedia
-        KElement kElem = resPool.appendResource(ElementName.MEDIA, EnumResourceClass.Consumable, null);
-        assertTrue(kElem instanceof JDFMedia);
-        JDFMedia media = ((JDFMedia) kElem);
-        
-        Vector<EnumHoleType> v = new Vector<EnumHoleType>();
-        v.addElement(EnumHoleType.None);
-        v.addElement(EnumHoleType.C9_5m_round_0t);
-        assertEquals(EnumHoleType.C9_5m_round_0t.getName(), "C9.5m-round-0t");
-        
-        media.setHoleType(v);
-        assertEquals(media.getHoleType(), v);
-        assertEquals(((EnumHoleType) media.getHoleType().elementAt(1)).getName(), v.elementAt(1).getName());
-        assertEquals(((EnumHoleType) media.getHoleType().elementAt(1)).getName(), "C9.5m-round-0t");
-        
-        // overwrite HoleType low level to check if conversion of DOT and HYPHEN to UNDERSCORE was successful
-        media.setAttribute(AttributeName.HOLETYPE, "C9.5m-round-0t");
-        assertEquals(( media.getHoleType().elementAt(0)), EnumHoleType.C9_5m_round_0t);
-        
-        
-        // now check the same with JDFHoleMakingParams
-        kElem = resPool.appendResource(ElementName.HOLEMAKINGPARAMS, EnumResourceClass.Consumable, null);
-        assertTrue(kElem instanceof JDFHoleMakingParams);
-        JDFHoleMakingParams holeMakingParams = ((JDFHoleMakingParams) kElem);
-        
-        holeMakingParams.setHoleType(v);
-        assertEquals(holeMakingParams.getHoleType(), v);
-        assertEquals(((EnumHoleType) holeMakingParams.getHoleType().elementAt(1)).getName(), v.elementAt(1).getName());
-        assertEquals(((EnumHoleType) holeMakingParams.getHoleType().elementAt(1)).getName(), "C9.5m-round-0t");
-        
-    }
+		result = media.getDimensionCM();
+		assertEquals(new JDFXYPair(2.54, 2.54), result);
+
+		result = media.getDimensionInch();
+		assertEquals(new JDFXYPair(1, 1), result);
+
+		media.setDimensionInch(new JDFXYPair(1, 1));
+
+		result = media.getDimension();
+		assertEquals(new JDFXYPair(72, 72), result);
+
+		result = media.getDimensionCM();
+		assertEquals(new JDFXYPair(2.54, 2.54), result);
+
+		result = media.getDimensionInch();
+		assertEquals(new JDFXYPair(1, 1), result);
+	}
+
+	// //////////////////////////////////////////////////////////////////
+
+	public final void testThicknessFromWeight()
+	{
+		JDFMedia m = (JDFMedia) new JDFDoc("Media").getRoot();
+		m.setThicknessFromWeight(true, false);
+		m.setMediaType(EnumMediaType.Paper);
+		assertFalse(m.hasAttribute(AttributeName.THICKNESS));
+		m.setWeight(80.);
+		m.setThicknessFromWeight(true, false);
+		assertEquals(m.getThickness(), 100., 1.);
+		JDFMedia m2 = (JDFMedia) m.addPartition(EnumPartIDKey.Run, "r1");
+		m2.setWeight(40.);
+		m.setThicknessFromWeight(true, true);
+		assertEquals(m2.getThickness(), 50., 1.);
+		assertEquals(m.getThickness(), 100., 1.);
+	}
+
+	// //////////////////////////////////////////////////////////////////
+
+	public final void testHoleType()
+	{
+		JDFDoc doc = new JDFDoc("JDF");
+		JDFNode root = doc.getJDFRoot();
+		JDFResourcePool resPool = root.getCreateResourcePool();
+
+		// check HoleType for JDFMedia
+		KElement kElem = resPool.appendResource(ElementName.MEDIA,
+				EnumResourceClass.Consumable, null);
+		assertTrue(kElem instanceof JDFMedia);
+		JDFMedia media = ((JDFMedia) kElem);
+
+		Vector<EnumHoleType> v = new Vector<EnumHoleType>();
+		v.addElement(EnumHoleType.None);
+		v.addElement(EnumHoleType.C9_5m_round_0t);
+		assertEquals(EnumHoleType.C9_5m_round_0t.getName(), "C9.5m-round-0t");
+
+		media.setHoleType(v);
+		assertEquals(media.getHoleType(), v);
+		assertEquals(((EnumHoleType) media.getHoleType().elementAt(1))
+				.getName(), v.elementAt(1).getName());
+		assertEquals(((EnumHoleType) media.getHoleType().elementAt(1))
+				.getName(), "C9.5m-round-0t");
+
+		// overwrite HoleType low level to check if conversion of DOT and HYPHEN
+		// to UNDERSCORE was successful
+		media.setAttribute(AttributeName.HOLETYPE, "C9.5m-round-0t");
+		assertEquals((media.getHoleType().elementAt(0)),
+				EnumHoleType.C9_5m_round_0t);
+
+		// now check the same with JDFHoleMakingParams
+		kElem = resPool.appendResource(ElementName.HOLEMAKINGPARAMS,
+				EnumResourceClass.Consumable, null);
+		assertTrue(kElem instanceof JDFHoleMakingParams);
+		JDFHoleMakingParams holeMakingParams = ((JDFHoleMakingParams) kElem);
+
+		holeMakingParams.setHoleType(v);
+		assertEquals(holeMakingParams.getHoleType(), v);
+		assertEquals(((EnumHoleType) holeMakingParams.getHoleType()
+				.elementAt(1)).getName(), v.elementAt(1).getName());
+		assertEquals(((EnumHoleType) holeMakingParams.getHoleType()
+				.elementAt(1)).getName(), "C9.5m-round-0t");
+
+	}
 }

@@ -77,66 +77,80 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.node.JDFNode;
 import org.w3c.dom.DOMException;
 
-
 public class AutoClassInstantiateVisitor implements DirectoryVisitor
 {
-    boolean totalResult = true;
-    
-    public void enterDirectory(File dir)
-    { totalResult = true; }
+	boolean totalResult = true;
 
-    public void leaveDirectory(File dir)
-    { 
-        if (!totalResult)
-        {
-            totalResult = true;
-            throw new DOMException(DOMException.NOT_FOUND_ERR, 
-                    "Error!!! There were classes, which could not be instantiated");
-        }
-    }
+	public void enterDirectory(File dir)
+	{
+		totalResult = true;
+	}
 
-    public void visitFile(File file)
-    {
-        testJDFClass(file.getName());
-    }
+	public void leaveDirectory(File dir)
+	{
+		if (!totalResult)
+		{
+			totalResult = true;
+			throw new DOMException(DOMException.NOT_FOUND_ERR,
+					"Error!!! There were classes, which could not be instantiated");
+		}
+	}
 
-    private void testJDFClass(final String fileName)
-    {
-        boolean result = false;
+	public void visitFile(File file)
+	{
+		testJDFClass(file.getName());
+	}
 
-        String elementName = fileName;
-        String prefix = elementName.startsWith("JDFAuto") ? "JDFAuto" : "JDF";
+	private void testJDFClass(final String fileName)
+	{
+		boolean result = false;
 
-        elementName = elementName.substring(prefix.length(), elementName.length()-".java".length());
+		String elementName = fileName;
+		String prefix = elementName.startsWith("JDFAuto") ? "JDFAuto" : "JDF";
 
-        // adjust the element name
-        if (elementName.startsWith("Span"))
-            elementName = elementName.substring("Span".length());
-        else if (elementName.equals("ShapeElement"))
-            elementName = "Shape";
-        else if (elementName.equals("Node"))
-            elementName = "JDF";
+		elementName = elementName.substring(prefix.length(), elementName
+				.length()
+				- ".java".length());
 
-        final JDFDoc jdfDoc   = new JDFDoc(ElementName.JDF);
-        final JDFNode jdfRoot = (JDFNode) jdfDoc.getRoot();
+		// adjust the element name
+		if (elementName.startsWith("Span"))
+			elementName = elementName.substring("Span".length());
+		else if (elementName.equals("ShapeElement"))
+			elementName = "Shape";
+		else if (elementName.equals("Node"))
+			elementName = "JDF";
 
-        KElement kElem = jdfRoot.appendElement(elementName); // create a class for elementName
-        
-        String createdClass = kElem.getClass().toString();
-        createdClass = createdClass.substring(createdClass.lastIndexOf(".") + 1);
+		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
+		final JDFNode jdfRoot = (JDFNode) jdfDoc.getRoot();
 
-        result = elementName.equals(createdClass.substring("JDF".length()))
-                    || (elementName.equals(ElementName.COLORSUSED) && createdClass.equals("JDFSeparationList"))
-                    || (elementName.equals(ElementName.SHAPE) && createdClass.equals("JDFShapeElement"))
-                    || (elementName.endsWith(JDFConstants.LINK) && createdClass.substring("JDF".length()).equals(ElementName.RESOURCELINK))
-                    ;
+		KElement kElem = jdfRoot.appendElement(elementName); // create a class
+																// for
+																// elementName
 
-        if (!result)
-        {
-            totalResult = false;
-            throw new DOMException(DOMException.NOT_FOUND_ERR, 
-                "Error!!! Class " + elementName + " (" + fileName + ") could not be instantiated!" +
-                " --> missing entry in DocumentJDFImpl.sm_PackageNames ???");
-        }
-    }
+		String createdClass = kElem.getClass().toString();
+		createdClass = createdClass
+				.substring(createdClass.lastIndexOf(".") + 1);
+
+		result = elementName.equals(createdClass.substring("JDF".length()))
+				|| (elementName.equals(ElementName.COLORSUSED) && createdClass
+						.equals("JDFSeparationList"))
+				|| (elementName.equals(ElementName.SHAPE) && createdClass
+						.equals("JDFShapeElement"))
+				|| (elementName.endsWith(JDFConstants.LINK) && createdClass
+						.substring("JDF".length()).equals(
+								ElementName.RESOURCELINK));
+
+		if (!result)
+		{
+			totalResult = false;
+			throw new DOMException(
+					DOMException.NOT_FOUND_ERR,
+					"Error!!! Class "
+							+ elementName
+							+ " ("
+							+ fileName
+							+ ") could not be instantiated!"
+							+ " --> missing entry in DocumentJDFImpl.sm_PackageNames ???");
+		}
+	}
 }

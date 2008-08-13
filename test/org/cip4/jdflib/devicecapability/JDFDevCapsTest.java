@@ -84,46 +84,45 @@ import org.cip4.jdflib.resource.devicecapability.JDFDevCap;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCaps;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 
-
 public class JDFDevCapsTest extends TestCase
 {
-    public void testGetContextName() throws Exception
-    {
-        JDFDoc d=new JDFDoc("DevCaps");
-        JDFDevCaps dcs=(JDFDevCaps) d.getRoot();
-        dcs.setName("foo");
-        assertEquals(dcs.getContextName(), "foo");
-        dcs.setContext(EnumContext.Link);
-        assertEquals(dcs.getContextName(), "fooLink");
-        dcs.setContext(EnumContext.Element);
-        assertEquals(dcs.getContextName(), "foo");
-        dcs.setContext(EnumContext.JMF);
-        assertEquals(dcs.getContextName(), "foo");
-        dcs.setContext(EnumContext.Resource);
-        assertEquals(dcs.getContextName(), "foo");
-    }
-    
-    public void testAppendDevCapInPool_DeviceCap()
-    {
-        
-        JDFDoc doc=new JDFDoc("DeviceCap");
-        JDFDeviceCap ms=(JDFDeviceCap)doc.getRoot();
-        JDFDevCaps dcs=ms.appendDevCaps();
-        dcs.setName("foo");
-        JDFDevCap dc=dcs.appendDevCapInPool();
-        assertEquals(dc,dcs.getDevCap());
-        assertEquals(dc.getName(),dcs.getName());
-    }
-    
-    public void testAppendDevCapInPool_JMF()
-    {
-        
-        JDFDoc doc=new JDFDoc("MessageService");
-        JDFMessageService ms=(JDFMessageService)doc.getRoot();
-        JDFDevCaps dcs=ms.appendDevCaps();
-        dcs.setName("foo");
-        JDFDevCap dc=dcs.appendDevCapInPool();
-        assertEquals(dc,dcs.getDevCap());
-        assertEquals(dc.getName(),dcs.getName());
-    }
+	public void testGetContextName() throws Exception
+	{
+		JDFDoc d = new JDFDoc("DevCaps");
+		JDFDevCaps dcs = (JDFDevCaps) d.getRoot();
+		dcs.setName("foo");
+		assertEquals(dcs.getContextName(), "foo");
+		dcs.setContext(EnumContext.Link);
+		assertEquals(dcs.getContextName(), "fooLink");
+		dcs.setContext(EnumContext.Element);
+		assertEquals(dcs.getContextName(), "foo");
+		dcs.setContext(EnumContext.JMF);
+		assertEquals(dcs.getContextName(), "foo");
+		dcs.setContext(EnumContext.Resource);
+		assertEquals(dcs.getContextName(), "foo");
+	}
+
+	public void testAppendDevCapInPool_DeviceCap()
+	{
+
+		JDFDoc doc = new JDFDoc("DeviceCap");
+		JDFDeviceCap ms = (JDFDeviceCap) doc.getRoot();
+		JDFDevCaps dcs = ms.appendDevCaps();
+		dcs.setName("foo");
+		JDFDevCap dc = dcs.appendDevCapInPool();
+		assertEquals(dc, dcs.getDevCap());
+		assertEquals(dc.getName(), dcs.getName());
+	}
+
+	public void testAppendDevCapInPool_JMF()
+	{
+
+		JDFDoc doc = new JDFDoc("MessageService");
+		JDFMessageService ms = (JDFMessageService) doc.getRoot();
+		JDFDevCaps dcs = ms.appendDevCaps();
+		dcs.setName("foo");
+		JDFDevCap dc = dcs.appendDevCapInPool();
+		assertEquals(dc, dcs.getDevCap());
+		assertEquals(dc.getName(), dcs.getName());
+	}
 }

@@ -82,19 +82,21 @@ import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 public class JDFColorConversionParamsTest extends JDFTestCaseBase
 {
 
-    public void testAbstractProfile()
-    {
-        JDFDoc doc=new JDFDoc("JDF");
-        doc.setOriginalFileName("JDF.jdf");  
-        JDFNode n=doc.getJDFRoot();
-        n.setType(EnumType.ColorSpaceConversion);
-        JDFColorSpaceConversionParams cscp=(JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input, null, null, null, null);
-        JDFFileSpec fs0=cscp.appendFinalTargetDevice();
-        JDFFileSpec fs1=cscp.getFinalTargetDevice();
-        assertEquals(fs1, fs0);
-        fs0=(JDFFileSpec) fs0.makeRootResource(null, null, true);
-        fs1=cscp.getFinalTargetDevice();
-        assertEquals(fs1, fs0);
-    }
- 
+	public void testAbstractProfile()
+	{
+		JDFDoc doc = new JDFDoc("JDF");
+		doc.setOriginalFileName("JDF.jdf");
+		JDFNode n = doc.getJDFRoot();
+		n.setType(EnumType.ColorSpaceConversion);
+		JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n
+				.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null,
+						EnumUsage.Input, null, null, null, null);
+		JDFFileSpec fs0 = cscp.appendFinalTargetDevice();
+		JDFFileSpec fs1 = cscp.getFinalTargetDevice();
+		assertEquals(fs1, fs0);
+		fs0 = (JDFFileSpec) fs0.makeRootResource(null, null, true);
+		fs1 = cscp.getFinalTargetDevice();
+		assertEquals(fs1, fs0);
+	}
+
 }

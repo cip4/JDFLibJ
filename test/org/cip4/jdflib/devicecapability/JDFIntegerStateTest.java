@@ -38,7 +38,7 @@
  *
  * Usage of this software in commercial products is subject to restrictions. For
  * details please consult info@cip4.org.
-  *
+ *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -90,121 +90,134 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.resource.devicecapability.JDFIntegerState;
 
-
 public class JDFIntegerStateTest extends JDFTestCaseBase
 {
 
-    JDFIntegerState iState=null;
-    public final void testAddValue() throws Exception
-    {
-       final JDFIntegerRangeList integerList = new JDFIntegerRangeList("1 2 3 4 ~ 44");
-       iState.setAllowedValueList(integerList);
-       iState.addValue("24", EnumFitsValue.Allowed);
-       assertEquals(iState.getAllowedValueList(), integerList);
-       iState.addValue("45", EnumFitsValue.Allowed);
-       assertEquals(iState.getAllowedValueList(), new JDFIntegerRangeList("1 ~ 45"));
-       iState.addValue("48", EnumFitsValue.Allowed);
-       assertEquals(iState.getAllowedValueList(), new JDFIntegerRangeList("1 ~ 45 48"));
-       iState.addValue("49", EnumFitsValue.Present);
-       assertEquals(iState.getPresentValueList(), new JDFIntegerRangeList("49"));
-     }
+	JDFIntegerState iState = null;
 
-    public void setUp() throws Exception
-    {
-        super.setUp();
-        JDFDoc doc=new JDFDoc("IntegerState");
-        iState=(JDFIntegerState)doc.getRoot();
-        
-    }
-    ////////////////////////////////////////////////////
-    
-    public final void testFitsValue()
-    {
-        JDFParser p = new JDFParser();
-        String strNode = 
-            "<IntegerState Name=\"BitDepth\" DefaultValue=\"1\" AllowedValueList=\"1 8 12\"/>";
-            
-        JDFDoc jdfDoc = p.parseString(strNode);
-        JDFIntegerState state = (JDFIntegerState) jdfDoc.getRoot();
+	public final void testAddValue() throws Exception
+	{
+		final JDFIntegerRangeList integerList = new JDFIntegerRangeList(
+				"1 2 3 4 ~ 44");
+		iState.setAllowedValueList(integerList);
+		iState.addValue("24", EnumFitsValue.Allowed);
+		assertEquals(iState.getAllowedValueList(), integerList);
+		iState.addValue("45", EnumFitsValue.Allowed);
+		assertEquals(iState.getAllowedValueList(), new JDFIntegerRangeList(
+				"1 ~ 45"));
+		iState.addValue("48", EnumFitsValue.Allowed);
+		assertEquals(iState.getAllowedValueList(), new JDFIntegerRangeList(
+				"1 ~ 45 48"));
+		iState.addValue("49", EnumFitsValue.Present);
+		assertEquals(iState.getPresentValueList(),
+				new JDFIntegerRangeList("49"));
+	}
 
-        JDFIntegerRangeList list = new JDFIntegerRangeList();
-        list.append(new JDFIntegerRange(1,12)); // 1~12
-        //list.append(12);
-        
-        state.setListType(EnumListType.RangeList);
-        assertFalse("ListType=RangeList",state.fitsValue(list.toString(),JDFBaseDataTypes.EnumFitsValue.Allowed));
-        
-        JDFIntegerRangeList list2 = new JDFIntegerRangeList();
-        list2.append(new JDFIntegerRange(1,-2)); // 1~-2
-        
-        JDFIntegerRangeList allowedVL= new JDFIntegerRangeList();
-        allowedVL.append(new JDFIntegerRange(1,32)); // 1~32
-        
-        state.setAllowedValueList(allowedVL); // new AllowedVlaueList
-        
-        assertTrue("xDef is wrong", state.fitsValue(list2.toString(),JDFBaseDataTypes.EnumFitsValue.Allowed));
-        
-        
-        list.erase(list.size()-1); // erase "1~12"
-        list.append(2);
-        list.append(12);
-        list.append(22);
-        state.setListType(EnumListType.List);
-        state.setAllowedValueMod(new JDFXYPair(10,2));
-        assertTrue("ListType=List, ValueMod="+state.getAllowedValueMod(),
-                   state.fitsValue(list.toString(),JDFBaseDataTypes.EnumFitsValue.Allowed));
-     }
+	public void setUp() throws Exception
+	{
+		super.setUp();
+		JDFDoc doc = new JDFDoc("IntegerState");
+		iState = (JDFIntegerState) doc.getRoot();
 
-    ////////////////////////////////////////////////////////////
-    
-    public final void testSetCurrentValue() throws Exception
-    {
-       final JDFIntegerList integerList = new JDFIntegerList("1 2 3");
-       iState.setCurrentValue(integerList);
-       assertEquals(iState.getCurrentValue(), integerList);
-       iState.setCurrentValue(1);
-       assertEquals(iState.getCurrentValue(), new JDFIntegerList("1"));
+	}
 
-    }
-    ////////////////////////////////////////////////////////////
-    public final void testSetDefaultValue() throws Exception
-    {
-       final JDFIntegerList integerList = new JDFIntegerList("1 2 3");
-       iState.setDefaultValue(integerList);
-       assertEquals(iState.getDefaultValue(), integerList);
-       iState.setDefaultValue(1);
-       assertEquals(iState.getDefaultValue(), new JDFIntegerList("1"));
+	// //////////////////////////////////////////////////
 
-    }
-    ////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////
-    public final void testSetAllowedValueList() throws Exception
-    {
-       final JDFIntegerRangeList integerList = new JDFIntegerRangeList("1 2 3 4 ~ 44");
-       iState.setAllowedValueList(integerList);
-       assertEquals(iState.getPresentValueList(), integerList);
-       assertEquals(iState.getAllowedValueList(), integerList);
-       final JDFIntegerRangeList integerList2 = new JDFIntegerRangeList("1 2 3 7~77");
-       iState.setPresentValueList(integerList2);
-       assertEquals(iState.getPresentValueList(), integerList2);
-       assertEquals(iState.getAllowedValueList(), integerList);
-    }
-    ////////////////////////////////////////////////////////////
-    public final void testIsValid() throws Exception
-    {
-        final JDFIntegerList integerList = new JDFIntegerList("1 2 3");
-        iState.setDefaultValue(integerList);
-        iState.setCurrentValue(integerList);
-        assertFalse(iState.isValid(EnumValidationLevel.Complete));
-        iState.setListType(EnumListType.List);
-        assertTrue(iState.isValid(EnumValidationLevel.Complete));
-        final JDFIntegerRangeList integerRList = new JDFIntegerRangeList("1 2 3 4 ~ 44");
-        iState.setAllowedValueList(integerRList);
-        assertTrue(iState.isValid(EnumValidationLevel.Complete));
-        final JDFIntegerRangeList integerList2 = new JDFIntegerRangeList("1 2 3 7~77");
-        iState.setPresentValueList(integerList2);
-        assertTrue(iState.isValid(EnumValidationLevel.Complete));
-    }
-   ////////////////////////////////////////////////////////////
+	public final void testFitsValue()
+	{
+		JDFParser p = new JDFParser();
+		String strNode = "<IntegerState Name=\"BitDepth\" DefaultValue=\"1\" AllowedValueList=\"1 8 12\"/>";
+
+		JDFDoc jdfDoc = p.parseString(strNode);
+		JDFIntegerState state = (JDFIntegerState) jdfDoc.getRoot();
+
+		JDFIntegerRangeList list = new JDFIntegerRangeList();
+		list.append(new JDFIntegerRange(1, 12)); // 1~12
+		// list.append(12);
+
+		state.setListType(EnumListType.RangeList);
+		assertFalse("ListType=RangeList", state.fitsValue(list.toString(),
+				JDFBaseDataTypes.EnumFitsValue.Allowed));
+
+		JDFIntegerRangeList list2 = new JDFIntegerRangeList();
+		list2.append(new JDFIntegerRange(1, -2)); // 1~-2
+
+		JDFIntegerRangeList allowedVL = new JDFIntegerRangeList();
+		allowedVL.append(new JDFIntegerRange(1, 32)); // 1~32
+
+		state.setAllowedValueList(allowedVL); // new AllowedVlaueList
+
+		assertTrue("xDef is wrong", state.fitsValue(list2.toString(),
+				JDFBaseDataTypes.EnumFitsValue.Allowed));
+
+		list.erase(list.size() - 1); // erase "1~12"
+		list.append(2);
+		list.append(12);
+		list.append(22);
+		state.setListType(EnumListType.List);
+		state.setAllowedValueMod(new JDFXYPair(10, 2));
+		assertTrue("ListType=List, ValueMod=" + state.getAllowedValueMod(),
+				state.fitsValue(list.toString(),
+						JDFBaseDataTypes.EnumFitsValue.Allowed));
+	}
+
+	// //////////////////////////////////////////////////////////
+
+	public final void testSetCurrentValue() throws Exception
+	{
+		final JDFIntegerList integerList = new JDFIntegerList("1 2 3");
+		iState.setCurrentValue(integerList);
+		assertEquals(iState.getCurrentValue(), integerList);
+		iState.setCurrentValue(1);
+		assertEquals(iState.getCurrentValue(), new JDFIntegerList("1"));
+
+	}
+
+	// //////////////////////////////////////////////////////////
+	public final void testSetDefaultValue() throws Exception
+	{
+		final JDFIntegerList integerList = new JDFIntegerList("1 2 3");
+		iState.setDefaultValue(integerList);
+		assertEquals(iState.getDefaultValue(), integerList);
+		iState.setDefaultValue(1);
+		assertEquals(iState.getDefaultValue(), new JDFIntegerList("1"));
+
+	}
+
+	// //////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////
+	public final void testSetAllowedValueList() throws Exception
+	{
+		final JDFIntegerRangeList integerList = new JDFIntegerRangeList(
+				"1 2 3 4 ~ 44");
+		iState.setAllowedValueList(integerList);
+		assertEquals(iState.getPresentValueList(), integerList);
+		assertEquals(iState.getAllowedValueList(), integerList);
+		final JDFIntegerRangeList integerList2 = new JDFIntegerRangeList(
+				"1 2 3 7~77");
+		iState.setPresentValueList(integerList2);
+		assertEquals(iState.getPresentValueList(), integerList2);
+		assertEquals(iState.getAllowedValueList(), integerList);
+	}
+
+	// //////////////////////////////////////////////////////////
+	public final void testIsValid() throws Exception
+	{
+		final JDFIntegerList integerList = new JDFIntegerList("1 2 3");
+		iState.setDefaultValue(integerList);
+		iState.setCurrentValue(integerList);
+		assertFalse(iState.isValid(EnumValidationLevel.Complete));
+		iState.setListType(EnumListType.List);
+		assertTrue(iState.isValid(EnumValidationLevel.Complete));
+		final JDFIntegerRangeList integerRList = new JDFIntegerRangeList(
+				"1 2 3 4 ~ 44");
+		iState.setAllowedValueList(integerRList);
+		assertTrue(iState.isValid(EnumValidationLevel.Complete));
+		final JDFIntegerRangeList integerList2 = new JDFIntegerRangeList(
+				"1 2 3 7~77");
+		iState.setPresentValueList(integerList2);
+		assertTrue(iState.isValid(EnumValidationLevel.Complete));
+	}
+	// //////////////////////////////////////////////////////////
 
 }

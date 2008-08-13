@@ -72,40 +72,39 @@ package org.cip4.jdflib.auto;
 
 import java.io.File;
 
-
-public class DirectorySizeVisitor
-implements DirectoryVisitor
+public class DirectorySizeVisitor implements DirectoryVisitor
 {
-  int  files = 0;
-  int  dirs  = 0;
-  long size  = 0;
+	int files = 0;
+	int dirs = 0;
+	long size = 0;
 
-  public void enterDirectory(File dir)
-  {
-    ++dirs;
-  }
+	public void enterDirectory(File dir)
+	{
+		++dirs;
+	}
 
-  public void leaveDirectory(File dir)
-  { /**/ }
+	public void leaveDirectory(File dir)
+	{ /**/
+	}
 
-  public void visitFile(File file)
-  {
-    ++files;
-    size += file.length();
-  }
+	public void visitFile(File file)
+	{
+		++files;
+		size += file.length();
+	}
 
-  public int getDirs()
-  {
-    return dirs;
-  }
+	public int getDirs()
+	{
+		return dirs;
+	}
 
-  public int getFiles()
-  {
-    return files;
-  }
+	public int getFiles()
+	{
+		return files;
+	}
 
-  public long getSize()
-  {
-    return size;
-  }
+	public long getSize()
+	{
+		return size;
+	}
 }

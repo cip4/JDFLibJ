@@ -72,43 +72,45 @@ package org.cip4.jdflib.resource;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFDoc;
 
-
 public class JDFDeviceListTest extends JDFTestCaseBase
 {
-    private JDFDeviceList d;
-    /**
-     * @return
-     */
-    public void testgetDeviceInfo() throws Exception
-    {
-        assertNull(d.getDeviceInfo("abc"));
-        assertNotNull(d.getDeviceInfo("d1"));
-        assertNotNull(d.getDeviceInfo("d2"));
-        assertNull(d.getDeviceInfo("d3"));
-    }
-    /**
-     * @return
-     */
-    public void testgetCreateDeviceInfo() throws Exception
-    {
-        assertNotNull(d.getCreateDeviceInfo("d3"));
-        assertEquals(d.getCreateDeviceInfo("d3").getDeviceID(),"d3");
-    }
-    /**
+	private JDFDeviceList d;
+
+	/**
+	 * @return
+	 */
+	public void testgetDeviceInfo() throws Exception
+	{
+		assertNull(d.getDeviceInfo("abc"));
+		assertNotNull(d.getDeviceInfo("d1"));
+		assertNotNull(d.getDeviceInfo("d2"));
+		assertNull(d.getDeviceInfo("d3"));
+	}
+
+	/**
+	 * @return
+	 */
+	public void testgetCreateDeviceInfo() throws Exception
+	{
+		assertNotNull(d.getCreateDeviceInfo("d3"));
+		assertEquals(d.getCreateDeviceInfo("d3").getDeviceID(), "d3");
+	}
+
+	/**
      * 
      */
-    @Override
-    public void setUp() throws Exception
-    {
-        d=(JDFDeviceList) new JDFDoc("DeviceList").getRoot();
-        d.appendDeviceInfo().appendDevice().setDeviceID("d1");
-        d.appendDeviceInfo().setDeviceID("d2");
-    }
+	@Override
+	public void setUp() throws Exception
+	{
+		d = (JDFDeviceList) new JDFDoc("DeviceList").getRoot();
+		d.appendDeviceInfo().appendDevice().setDeviceID("d1");
+		d.appendDeviceInfo().setDeviceID("d2");
+	}
 
-    @Override
-    public String toString()
-    {
-        return d.toString();
-    }
-    /////////////////////////////////////////////////////////////////////////
+	@Override
+	public String toString()
+	{
+		return d.toString();
+	}
+	// ///////////////////////////////////////////////////////////////////////
 }

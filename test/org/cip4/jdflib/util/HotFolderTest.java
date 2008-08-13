@@ -81,173 +81,180 @@ import java.io.FileOutputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 
-
 /**
  * @author Rainer
- *
- * To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Generation - Code and Comments
+ * 
+ *         To change the template for this generated type comment go to Window -
+ *         Preferences - Java - Code Generation - Code and Comments
  */
 public class HotFolderTest extends JDFTestCaseBase
 {
-    private File theHF;
-    HotFolder hf;
-    protected class MyListener implements HotFolderListener
-    {
-        protected boolean bZapp;
-        protected MyListener(boolean _bZapp)
-        {
-            bZapp=_bZapp;
-        }
-        /* (non-Javadoc)
-         * @see org.cip4.jdflib.util.HotFolderListener#hotFile(java.io.File)
-         */
-        public void hotFile(File hotFile)
-        {
-            boolean zapp=false;
-            if(bZapp)
-                zapp=hotFile.delete();
-            System.out.println(System.currentTimeMillis()+" "+hotFile.getPath()+","+bZapp+","+zapp);
+	private File theHF;
+	HotFolder hf;
 
-        }
+	protected class MyListener implements HotFolderListener
+	{
+		protected boolean bZapp;
 
-    }
-    @Override
+		protected MyListener(boolean _bZapp)
+		{
+			bZapp = _bZapp;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.cip4.jdflib.util.HotFolderListener#hotFile(java.io.File)
+		 */
+		public void hotFile(File hotFile)
+		{
+			boolean zapp = false;
+			if (bZapp)
+				zapp = hotFile.delete();
+			System.out.println(System.currentTimeMillis() + " "
+					+ hotFile.getPath() + "," + bZapp + "," + zapp);
+
+		}
+
+	}
+
+	@Override
 	protected void setUp() throws Exception
-    {
-        super.setUp();
-        theHF=new File(sm_dirTestDataTemp+File.separator+"HFTest");
-        theHF.mkdirs();
-    }
+	{
+		super.setUp();
+		theHF = new File(sm_dirTestDataTemp + File.separator + "HFTest");
+		theHF.mkdirs();
+	}
 
-    public void testStartNull() throws Exception
-    {
-        hf=new HotFolder(theHF,null,new MyListener(false));
-        final File file = new File(theHF+File.separator+"f1.txt");
-        file.createNewFile();
-        assertTrue(file.exists());
-        StatusCounter.sleep(3000);
-        assertTrue(file.exists());
-    }
-    public void testRestartMany() throws Exception
-    {
-        hf=new HotFolder(theHF,null,new MyListener(true));
-        for(int i=0;i<10;i++)
-        {
-            assertEquals(Thread.activeCount(),3);
-            hf.restart();
-        }
-        for(int i=0;i<3;i++)
-        {
-            Thread.sleep(1);
-            hf.stop();
-            assertEquals(Thread.activeCount(),2);
-        }
-    }
+	public void testStartNull() throws Exception
+	{
+		hf = new HotFolder(theHF, null, new MyListener(false));
+		final File file = new File(theHF + File.separator + "f1.txt");
+		file.createNewFile();
+		assertTrue(file.exists());
+		StatusCounter.sleep(3000);
+		assertTrue(file.exists());
+	}
 
+	public void testRestartMany() throws Exception
+	{
+		hf = new HotFolder(theHF, null, new MyListener(true));
+		for (int i = 0; i < 10; i++)
+		{
+			assertEquals(Thread.activeCount(), 3);
+			hf.restart();
+		}
+		for (int i = 0; i < 3; i++)
+		{
+			Thread.sleep(1);
+			hf.stop();
+			assertEquals(Thread.activeCount(), 2);
+		}
+	}
 
-    public void testStopStart() throws Exception
-    {
-        hf=new HotFolder(theHF,null,new MyListener(true));
-        final File file = new File(theHF+File.separator+"f1.txt");
-        file.createNewFile();
-        assertTrue(file.exists());
-        StatusCounter.sleep(3000);
-        assertFalse(file.exists());
-        hf.stop();
-        hf.stop();
-        file.createNewFile();
-        assertTrue(file.exists());
-        StatusCounter.sleep(3000);
-        assertTrue(file.exists());
-        hf.restart();
-        hf.restart();
-        hf.restart();
-        StatusCounter.sleep(3000);
-        assertFalse(file.exists());
-    }
+	public void testStopStart() throws Exception
+	{
+		hf = new HotFolder(theHF, null, new MyListener(true));
+		final File file = new File(theHF + File.separator + "f1.txt");
+		file.createNewFile();
+		assertTrue(file.exists());
+		StatusCounter.sleep(3000);
+		assertFalse(file.exists());
+		hf.stop();
+		hf.stop();
+		file.createNewFile();
+		assertTrue(file.exists());
+		StatusCounter.sleep(3000);
+		assertTrue(file.exists());
+		hf.restart();
+		hf.restart();
+		hf.restart();
+		StatusCounter.sleep(3000);
+		assertFalse(file.exists());
+	}
 
-    public void testExtension() throws Exception
-    {
-        hf=new HotFolder(theHF,".txt,.xml",new MyListener(true));
-        StatusCounter.sleep(1000); // time to start up
-        final File file = new File(theHF+File.separator+"f1.txt");
-        final File file1 = new File(theHF+File.separator+"f1.xml");
-        final File file2 = new File(theHF+File.separator+"f1.foo");
-        file.createNewFile();
-        assertTrue(file.exists());
-        file1.createNewFile();
-        assertTrue(file1.exists());
-        file2.createNewFile();
-        assertTrue(file2.exists());
-        StatusCounter.sleep(4000);
-        assertFalse(file.exists());
-        assertFalse(file1.exists());
-        assertTrue(file2.exists());
-    }
-    public void testDir() throws Exception
-    {
-        hf=new HotFolder(theHF,".txt,.xml",new MyListener(true));
-        final File file = new File(theHF+File.separator+"f1.txt");
-        final File file1 = new File(theHF+File.separator+"f2.xml"+File.separator+"f1.xml");
-        final File file2 = new File(theHF+File.separator+"f2.xml");
-        file.createNewFile();
-        file2.mkdir();
-        file1.createNewFile();
-        assertTrue(file.exists());
-        StatusCounter.sleep(3000);
-        assertFalse(file.exists());
-        assertTrue("in subdir",file1.exists());
-        assertTrue(file2.exists());
-    }
+	public void testExtension() throws Exception
+	{
+		hf = new HotFolder(theHF, ".txt,.xml", new MyListener(true));
+		StatusCounter.sleep(1000); // time to start up
+		final File file = new File(theHF + File.separator + "f1.txt");
+		final File file1 = new File(theHF + File.separator + "f1.xml");
+		final File file2 = new File(theHF + File.separator + "f1.foo");
+		file.createNewFile();
+		assertTrue(file.exists());
+		file1.createNewFile();
+		assertTrue(file1.exists());
+		file2.createNewFile();
+		assertTrue(file2.exists());
+		StatusCounter.sleep(4000);
+		assertFalse(file.exists());
+		assertFalse(file1.exists());
+		assertTrue(file2.exists());
+	}
 
+	public void testDir() throws Exception
+	{
+		hf = new HotFolder(theHF, ".txt,.xml", new MyListener(true));
+		final File file = new File(theHF + File.separator + "f1.txt");
+		final File file1 = new File(theHF + File.separator + "f2.xml"
+				+ File.separator + "f1.xml");
+		final File file2 = new File(theHF + File.separator + "f2.xml");
+		file.createNewFile();
+		file2.mkdir();
+		file1.createNewFile();
+		assertTrue(file.exists());
+		StatusCounter.sleep(3000);
+		assertFalse(file.exists());
+		assertTrue("in subdir", file1.exists());
+		assertTrue(file2.exists());
+	}
 
-    public void testStartNullDelete() throws Exception
-    {
-        hf=new HotFolder(theHF,null,new MyListener(true));
-        final File file = new File(theHF+File.separator+"f1.txt");
-        file.createNewFile();
-        assertTrue(file.exists());
-        StatusCounter.sleep(3000);
-        assertFalse(file.exists());
-    }
+	public void testStartNullDelete() throws Exception
+	{
+		hf = new HotFolder(theHF, null, new MyListener(true));
+		final File file = new File(theHF + File.separator + "f1.txt");
+		file.createNewFile();
+		assertTrue(file.exists());
+		StatusCounter.sleep(3000);
+		assertFalse(file.exists());
+	}
 
+	public void testBig() throws Exception
+	{
+		hf = new HotFolder(theHF, null, new MyListener(true));
+		final File file = new File(theHF + File.separator + "f1.txt");
+		file.createNewFile();
+		assertTrue(file.exists());
 
-    public void testBig() throws Exception
-    {
-        hf=new HotFolder(theHF,null,new MyListener(true));
-        final File file = new File(theHF+File.separator+"f1.txt");
-        file.createNewFile();
-        assertTrue(file.exists());
+		FileOutputStream fos = new FileOutputStream(file);
+		for (int i = 0; i < 20; i++) // incrementally fill file
+		{
+			fos.write(i);
+			fos.flush();
 
-        FileOutputStream fos=new FileOutputStream(file);
-        for(int i=0;i<20;i++) // incrementally fill file
-        {
-            fos.write(i);
-            fos.flush();
+			StatusCounter.sleep(10);
 
-            StatusCounter.sleep(10);
+		}
+		assertTrue(file.exists());
+		fos.close();
 
-        }
-        assertTrue(file.exists());
-        fos.close();
+		StatusCounter.sleep(3000);
+		assertFalse(file.exists());
 
-        StatusCounter.sleep(3000);
-        assertFalse(file.exists());
+	}
 
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
+	 */
+	@Override
+	protected void tearDown() throws Exception
+	{
+		hf.stop();
+		super.tearDown();
+	}
 
-    /* (non-Javadoc)
-     * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
-     */
-    @Override
-    protected void tearDown() throws Exception
-    {
-        hf.stop();
-        super.tearDown();
-    }
+	// /////////////////////////////////////////////////////////////////////////
 
-
-    ///////////////////////////////////////////////////////////////////////////
-
-}   
+}

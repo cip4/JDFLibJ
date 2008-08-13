@@ -86,189 +86,205 @@ import org.cip4.jdflib.util.JDFDate;
 
 /**
  * @author MuchaD
- *
- * This implements the first fixture with unit tests for class JDFAudit.
+ * 
+ *         This implements the first fixture with unit tests for class JDFAudit.
  */
 public class JDFAuditTest extends JDFTestCaseBase
 {
-    private boolean bAutoAgent;
-    public void testInit() throws Exception
-    {
-        JDFDoc d=new JDFDoc(ElementName.JDF);
-        JDFNode n=d.getJDFRoot();
-        n.setType("ConventionalPrinting",true);
-        JDFAuditPool ap=n.getAuditPool();
-        assertNotNull(ap);
-        JDFCreated crea=(JDFCreated) ap.getAudit(0, EnumAuditType.Created, null,null);
-        assertTrue(crea.hasAttribute("ID"));
-        assertTrue(crea.getID().startsWith("a"));
-        JDFProcessRun pr=ap.addProcessRun(EnumNodeStatus.Completed,"me",null);
-        assertTrue(pr.hasAttribute("End"));        
-        assertTrue(pr.hasAttribute("ID"));        
-        n.setVersion(JDFElement.EnumVersion.Version_1_2);
-        JDFModified mod=ap.addModified("me",n);
-        assertFalse(mod.hasAttribute("ID"));        
-     }   
- 
-    /////////////////////////////////////////////////////////////////////
-    
-    public void testFixVersion() throws Exception
-    {
-        JDFDoc d=new JDFDoc(ElementName.JDF);
-        JDFNode n=d.getJDFRoot();
-        n.setType("ConventionalPrinting",true);
-        JDFAuditPool ap=n.getAuditPool();
-        assertNotNull(ap);
-        JDFCreated crea=(JDFCreated) ap.getAudit(0, EnumAuditType.Created, null,null);
-        assertTrue(crea.hasAttribute("ID"));
-        n.fixVersion(JDFElement.EnumVersion.Version_1_2);
-        assertFalse(crea.hasAttribute("ID"));        
-     }
-    
-    /////////////////////////////////////////////////////////////////////
-    
-    public void testSetRef() throws Exception
-    {
-        JDFDoc d=new JDFDoc(ElementName.JDF);
-        JDFNode n=d.getJDFRoot();
-        n.setType("ConventionalPrinting",true);
-        JDFAuditPool ap=n.getAuditPool();
-        assertNotNull(ap);
-        JDFPhaseTime pt=ap.setPhase(EnumNodeStatus.Stopped, null, null,null);
-        JDFPhaseTime pt2=ap.setPhase(EnumNodeStatus.Aborted, null, null,null);
-        pt2.setRef(pt);
-        assertEquals(pt.getID(), pt2.getrefID());
-     }
-    
-    /////////////////////////////////////////////////////////////////////
-    
-    public void testCreateUpdate() throws Exception
-    {
-        JDFDoc d=new JDFDoc(ElementName.JDF);
-        JDFNode n=d.getJDFRoot();
-        n.setType("ConventionalPrinting",true);
-        JDFAuditPool ap=n.getAuditPool();
-        assertNotNull(ap);
-        JDFPhaseTime pt=ap.setPhase(EnumNodeStatus.Stopped, null, null,null);
-        JDFPhaseTime pt2=(JDFPhaseTime) pt.createUpdateAudit();
-        assertEquals(pt.getID(), pt2.getrefID());
-        assertNotSame(pt.getID(), "");       
-        assertNotSame(pt2.getID(), "");       
-        assertNotSame(pt2.getID(), pt.getID());       
-     }
+	private boolean bAutoAgent;
 
-    /////////////////////////////////////////////////////////////////////
-    
-    public void testCreated() throws Exception
-    {
-        JDFDoc d=new JDFDoc(ElementName.JDF);
-        JDFNode n=d.getJDFRoot();
-        n.setType(EnumType.ProcessGroup);
-        JDFAuditPool ap=n.getAuditPool();
-        assertNotNull(ap);
-        JDFNode n2=n.addJDFNode(EnumType.CaseMaking);
-        JDFCreated c1=ap.addCreated("foo", n2);
-        assertEquals(n2.buildXPath(ap.getParentJDF().buildXPath(null,1),1), c1.getXPath());
-        JDFResource r=n2.addResource("CaseMakingParams", null, EnumUsage.Input, null, null, null, null);
-        JDFCreated c2=ap.addCreated("foo", r);
-        assertEquals(r.buildXPath(ap.getParentJDF().buildXPath(null,1),1), c2.getXPath());
-        
-        d.write2File(sm_dirTestDataTemp+"createdTest.jdf", 0, false);
-        
-    }    
-    
-    /////////////////////////////////////////////////////////////////////
-        
-    public void testProcessRun() throws Exception
-    {
-        JDFNode n=new JDFDoc(ElementName.JDF).getJDFRoot();
-        n.setType(EnumType.ProcessGroup);
-        JDFAuditPool ap=n.getAuditPool();
-        assertNotNull(ap);
-        JDFProcessRun p1=ap.addProcessRun(EnumNodeStatus.Completed, null, null);
-        assertEquals(p1.getTimeStampDate(), new JDFDate());
-    }  
-    
-     
-    /////////////////////////////////////////////////////////////////////
-    
-    public void testSpawnID() throws Exception
-    {
-        JDFDoc d=new JDFDoc(ElementName.JDF);
-        JDFNode n=d.getJDFRoot();
-        n.setSpawnID("spawn");
-        n.setType(EnumType.ProcessGroup);
-        JDFAuditPool ap=n.getAuditPool();
-        assertNotNull(ap);
-        JDFProcessRun p1=ap.addProcessRun(EnumNodeStatus.Completed, null, null);
-        assertEquals(p1.getSpawnID(), n.getSpawnID(false));
-        JDFNode n2=n.addJDFNode(EnumType.CaseMaking);
-        JDFProcessRun p2=n.getCreateAuditPool().addProcessRun(EnumNodeStatus.Completed, null, null);
-        assertEquals(p2.getSpawnID(), n2.getSpawnID(true));
-        assertEquals(p2.getSpawnID(), n.getSpawnID(false));
-    }    
-    
-    /////////////////////////////////////////////////////////////////////
-    
-    public void testSetStaticAgentVersion() throws Exception
-    {
-        JDFDoc d=new JDFDoc(ElementName.JDF);
-        JDFNode n=d.getJDFRoot();
-        n.setType("ConventionalPrinting",true);
-        JDFAuditPool ap=n.getAuditPool();
-        assertNotNull(ap);
-        JDFCreated crea=(JDFCreated) ap.getAudit(0, EnumAuditType.Created, null,null);
-        assertEquals(crea.getAgentName(),JDFAudit.getStaticAgentName());
+	public void testInit() throws Exception
+	{
+		JDFDoc d = new JDFDoc(ElementName.JDF);
+		JDFNode n = d.getJDFRoot();
+		n.setType("ConventionalPrinting", true);
+		JDFAuditPool ap = n.getAuditPool();
+		assertNotNull(ap);
+		JDFCreated crea = (JDFCreated) ap.getAudit(0, EnumAuditType.Created,
+				null, null);
+		assertTrue(crea.hasAttribute("ID"));
+		assertTrue(crea.getID().startsWith("a"));
+		JDFProcessRun pr = ap.addProcessRun(EnumNodeStatus.Completed, "me",
+				null);
+		assertTrue(pr.hasAttribute("End"));
+		assertTrue(pr.hasAttribute("ID"));
+		n.setVersion(JDFElement.EnumVersion.Version_1_2);
+		JDFModified mod = ap.addModified("me", n);
+		assertFalse(mod.hasAttribute("ID"));
+	}
 
-        JDFResource.setAutoAgent(true);
-        JDFResource r=n.appendMatchingResource(ElementName.CONVENTIONALPRINTINGPARAMS, null, null);
-        assertEquals(r.getAgentName(), JDFAudit.getStaticAgentName());
-        assertEquals(r.getAgentVersion(), JDFAudit.getStaticAgentVersion());
-        JDFAudit.setStaticAgentName(null);
-        JDFAudit.setStaticAgentVersion(null);
-        JDFAudit.setStaticAuthor(null);
-        d=new JDFDoc(ElementName.JDF);
-        n=d.getJDFRoot();
-        n.setType("ConventionalPrinting",true);
-        ap=n.getAuditPool();
-        assertNotNull(ap);
-        crea=(JDFCreated) ap.getAudit(0, EnumAuditType.Created, null,null);
-        assertEquals(crea.getAgentName(),"");
-        assertEquals(crea.getAgentVersion(),"");
-        assertEquals(crea.getAuthor(),"");
-        r=n.appendMatchingResource(ElementName.CONVENTIONALPRINTINGPARAMS, null, null);
-        assertFalse(r.hasAttribute(AttributeName.AGENTNAME));
-        assertFalse(r.hasAttribute(AttributeName.AGENTVERSION));
-     }
+	// ///////////////////////////////////////////////////////////////////
 
-    /////////////////////////////////////////////////////////////////////
-    
+	public void testFixVersion() throws Exception
+	{
+		JDFDoc d = new JDFDoc(ElementName.JDF);
+		JDFNode n = d.getJDFRoot();
+		n.setType("ConventionalPrinting", true);
+		JDFAuditPool ap = n.getAuditPool();
+		assertNotNull(ap);
+		JDFCreated crea = (JDFCreated) ap.getAudit(0, EnumAuditType.Created,
+				null, null);
+		assertTrue(crea.hasAttribute("ID"));
+		n.fixVersion(JDFElement.EnumVersion.Version_1_2);
+		assertFalse(crea.hasAttribute("ID"));
+	}
 
-    /* (non-Javadoc)
-     * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
-     */
-    protected void tearDown() throws Exception
-    {
-        // TODO Auto-generated method stub
-        super.tearDown();
-        JDFResource.setAutoAgent(bAutoAgent);
+	// ///////////////////////////////////////////////////////////////////
 
-    }
+	public void testSetRef() throws Exception
+	{
+		JDFDoc d = new JDFDoc(ElementName.JDF);
+		JDFNode n = d.getJDFRoot();
+		n.setType("ConventionalPrinting", true);
+		JDFAuditPool ap = n.getAuditPool();
+		assertNotNull(ap);
+		JDFPhaseTime pt = ap.setPhase(EnumNodeStatus.Stopped, null, null, null);
+		JDFPhaseTime pt2 = ap
+				.setPhase(EnumNodeStatus.Aborted, null, null, null);
+		pt2.setRef(pt);
+		assertEquals(pt.getID(), pt2.getrefID());
+	}
 
-    /////////////////////////////////////////////////////////////////////
-    
-    /* (non-Javadoc)
-     * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
-     */
-    protected void setUp() throws Exception
-    {
-        // TODO Auto-generated method stub
-        super.setUp();
-        bAutoAgent=JDFResource.getAutoAgent();
-        JDFElement.setLongID(false);
+	// ///////////////////////////////////////////////////////////////////
 
-    }
-     
-    /////////////////////////////////////////////////////////////////////
+	public void testCreateUpdate() throws Exception
+	{
+		JDFDoc d = new JDFDoc(ElementName.JDF);
+		JDFNode n = d.getJDFRoot();
+		n.setType("ConventionalPrinting", true);
+		JDFAuditPool ap = n.getAuditPool();
+		assertNotNull(ap);
+		JDFPhaseTime pt = ap.setPhase(EnumNodeStatus.Stopped, null, null, null);
+		JDFPhaseTime pt2 = (JDFPhaseTime) pt.createUpdateAudit();
+		assertEquals(pt.getID(), pt2.getrefID());
+		assertNotSame(pt.getID(), "");
+		assertNotSame(pt2.getID(), "");
+		assertNotSame(pt2.getID(), pt.getID());
+	}
+
+	// ///////////////////////////////////////////////////////////////////
+
+	public void testCreated() throws Exception
+	{
+		JDFDoc d = new JDFDoc(ElementName.JDF);
+		JDFNode n = d.getJDFRoot();
+		n.setType(EnumType.ProcessGroup);
+		JDFAuditPool ap = n.getAuditPool();
+		assertNotNull(ap);
+		JDFNode n2 = n.addJDFNode(EnumType.CaseMaking);
+		JDFCreated c1 = ap.addCreated("foo", n2);
+		assertEquals(n2.buildXPath(ap.getParentJDF().buildXPath(null, 1), 1),
+				c1.getXPath());
+		JDFResource r = n2.addResource("CaseMakingParams", null,
+				EnumUsage.Input, null, null, null, null);
+		JDFCreated c2 = ap.addCreated("foo", r);
+		assertEquals(r.buildXPath(ap.getParentJDF().buildXPath(null, 1), 1), c2
+				.getXPath());
+
+		d.write2File(sm_dirTestDataTemp + "createdTest.jdf", 0, false);
+
+	}
+
+	// ///////////////////////////////////////////////////////////////////
+
+	public void testProcessRun() throws Exception
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.ProcessGroup);
+		JDFAuditPool ap = n.getAuditPool();
+		assertNotNull(ap);
+		JDFProcessRun p1 = ap.addProcessRun(EnumNodeStatus.Completed, null,
+				null);
+		assertEquals(p1.getTimeStampDate(), new JDFDate());
+	}
+
+	// ///////////////////////////////////////////////////////////////////
+
+	public void testSpawnID() throws Exception
+	{
+		JDFDoc d = new JDFDoc(ElementName.JDF);
+		JDFNode n = d.getJDFRoot();
+		n.setSpawnID("spawn");
+		n.setType(EnumType.ProcessGroup);
+		JDFAuditPool ap = n.getAuditPool();
+		assertNotNull(ap);
+		JDFProcessRun p1 = ap.addProcessRun(EnumNodeStatus.Completed, null,
+				null);
+		assertEquals(p1.getSpawnID(), n.getSpawnID(false));
+		JDFNode n2 = n.addJDFNode(EnumType.CaseMaking);
+		JDFProcessRun p2 = n.getCreateAuditPool().addProcessRun(
+				EnumNodeStatus.Completed, null, null);
+		assertEquals(p2.getSpawnID(), n2.getSpawnID(true));
+		assertEquals(p2.getSpawnID(), n.getSpawnID(false));
+	}
+
+	// ///////////////////////////////////////////////////////////////////
+
+	public void testSetStaticAgentVersion() throws Exception
+	{
+		JDFDoc d = new JDFDoc(ElementName.JDF);
+		JDFNode n = d.getJDFRoot();
+		n.setType("ConventionalPrinting", true);
+		JDFAuditPool ap = n.getAuditPool();
+		assertNotNull(ap);
+		JDFCreated crea = (JDFCreated) ap.getAudit(0, EnumAuditType.Created,
+				null, null);
+		assertEquals(crea.getAgentName(), JDFAudit.getStaticAgentName());
+
+		JDFResource.setAutoAgent(true);
+		JDFResource r = n.appendMatchingResource(
+				ElementName.CONVENTIONALPRINTINGPARAMS, null, null);
+		assertEquals(r.getAgentName(), JDFAudit.getStaticAgentName());
+		assertEquals(r.getAgentVersion(), JDFAudit.getStaticAgentVersion());
+		JDFAudit.setStaticAgentName(null);
+		JDFAudit.setStaticAgentVersion(null);
+		JDFAudit.setStaticAuthor(null);
+		d = new JDFDoc(ElementName.JDF);
+		n = d.getJDFRoot();
+		n.setType("ConventionalPrinting", true);
+		ap = n.getAuditPool();
+		assertNotNull(ap);
+		crea = (JDFCreated) ap.getAudit(0, EnumAuditType.Created, null, null);
+		assertEquals(crea.getAgentName(), "");
+		assertEquals(crea.getAgentVersion(), "");
+		assertEquals(crea.getAuthor(), "");
+		r = n.appendMatchingResource(ElementName.CONVENTIONALPRINTINGPARAMS,
+				null, null);
+		assertFalse(r.hasAttribute(AttributeName.AGENTNAME));
+		assertFalse(r.hasAttribute(AttributeName.AGENTVERSION));
+	}
+
+	// ///////////////////////////////////////////////////////////////////
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
+	 */
+	protected void tearDown() throws Exception
+	{
+		// TODO Auto-generated method stub
+		super.tearDown();
+		JDFResource.setAutoAgent(bAutoAgent);
+
+	}
+
+	// ///////////////////////////////////////////////////////////////////
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	protected void setUp() throws Exception
+	{
+		// TODO Auto-generated method stub
+		super.setUp();
+		bAutoAgent = JDFResource.getAutoAgent();
+		JDFElement.setLongID(false);
+
+	}
+
+	// ///////////////////////////////////////////////////////////////////
 
 }

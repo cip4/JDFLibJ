@@ -78,48 +78,49 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 
-
 public class JDFMessageServiceTest extends TestCase
 {
-     
-    public void testgetFamilies() throws Exception
-    {
-        JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
-        JDFMessageService ms=(JDFMessageService)doc.getRoot();
-        ms.setQuery(true);
-        assertEquals(ms.getFamilies().elementAt(0),EnumFamily.Query);
-        assertEquals(ms.getFamilies().size(),1);
-        assertFalse(ms.getFamilies().contains(EnumFamily.Command));
-        ms.setCommand(true);
-        assertTrue(ms.getFamilies().contains(EnumFamily.Query));
-        assertTrue(ms.getFamilies().contains(EnumFamily.Command));
-        assertEquals(ms.getFamilies().size(),2);
-    }
-    
-    /////////////////////////////////////////////////////////////////////////////////////////////
-    public void testsetFamily() throws Exception
-    {
-        JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
-        JDFMessageService ms=(JDFMessageService)doc.getRoot();
-        ms.setFamily(EnumFamily.Query);
-        assertTrue(ms.getQuery());
-    }
-    /////////////////////////////////////////////////////////////////////////////////////////////
-    public void testsetFamilies() throws Exception
-    {
-        JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
-        JDFMessageService ms=(JDFMessageService)doc.getRoot();
-        Vector v=new Vector();
-        v.add(EnumFamily.Query);
-        v.add(EnumFamily.Command);
-        ms.setFamilies(v);
-        assertTrue(ms.getQuery());
-        assertTrue(ms.getCommand());
-        assertFalse(ms.getRegistration());
-    }
-    
-    /////////////////////////////////////////////////////////////////////////////////////////////
-    
- 
-    
+
+	public void testgetFamilies() throws Exception
+	{
+		JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
+		JDFMessageService ms = (JDFMessageService) doc.getRoot();
+		ms.setQuery(true);
+		assertEquals(ms.getFamilies().elementAt(0), EnumFamily.Query);
+		assertEquals(ms.getFamilies().size(), 1);
+		assertFalse(ms.getFamilies().contains(EnumFamily.Command));
+		ms.setCommand(true);
+		assertTrue(ms.getFamilies().contains(EnumFamily.Query));
+		assertTrue(ms.getFamilies().contains(EnumFamily.Command));
+		assertEquals(ms.getFamilies().size(), 2);
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	// /////////////////
+	public void testsetFamily() throws Exception
+	{
+		JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
+		JDFMessageService ms = (JDFMessageService) doc.getRoot();
+		ms.setFamily(EnumFamily.Query);
+		assertTrue(ms.getQuery());
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	// /////////////////
+	public void testsetFamilies() throws Exception
+	{
+		JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
+		JDFMessageService ms = (JDFMessageService) doc.getRoot();
+		Vector v = new Vector();
+		v.add(EnumFamily.Query);
+		v.add(EnumFamily.Command);
+		ms.setFamilies(v);
+		assertTrue(ms.getQuery());
+		assertTrue(ms.getCommand());
+		assertFalse(ms.getRegistration());
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	// /////////////////
+
 }

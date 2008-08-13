@@ -75,19 +75,17 @@ import org.cip4.jdflib.core.JDFElement.EnumVersion;
 
 public class ElemInfoTest extends TestCase
 {
-    
-    
-    public void testgetFirstLastVersion()
-    {
-        ElemInfo ai=new ElemInfo(0x44433211);
-        assertEquals("",ai.getFirstVersion(),EnumVersion.Version_1_2);
-        assertEquals("",ai.getLastVersion(),EnumVersion.Version_1_4);
-        
-        ai=new ElemInfo(0x33333222);
-        assertEquals("",ai.getFirstVersion(),EnumVersion.Version_1_0);
-        assertEquals("",ai.getLastVersion(),EnumVersion.Version_1_7);
-        
-    }
-    
-    
+
+	public void testgetFirstLastVersion()
+	{
+		ElemInfo ai = new ElemInfo(0x44433211);
+		assertEquals("", ai.getFirstVersion(), EnumVersion.Version_1_2);
+		assertEquals("", ai.getLastVersion(), EnumVersion.Version_1_4);
+
+		ai = new ElemInfo(0x33333222);
+		assertEquals("", ai.getFirstVersion(), EnumVersion.Version_1_0);
+		assertEquals("", ai.getLastVersion(), EnumVersion.Version_1_7);
+
+	}
+
 }

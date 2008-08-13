@@ -83,51 +83,65 @@ import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.resource.devicecapability.JDFMatrixState;
 
-
 public class JDFMatrixStateTest extends JDFTestCaseBase
 {
 
-    JDFMatrixState sState=null;
+	JDFMatrixState sState = null;
 
-    public void setUp() throws Exception
-    {
-        super.setUp();
-        JDFDoc doc=new JDFDoc("MatrixState");
-        sState=(JDFMatrixState)doc.getRoot();
+	public void setUp() throws Exception
+	{
+		super.setUp();
+		JDFDoc doc = new JDFDoc("MatrixState");
+		sState = (JDFMatrixState) doc.getRoot();
 
-    }
-    ////////////////////////////////////////////////////
+	}
 
-    ////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////
-    public final void testAddValue() throws Exception
-    {
-        sState.appendValue(new JDFMatrix("1 2 3 4 5 6"),null);
-        sState.addValue("6 5 4 3 2 1", EnumFitsValue.Allowed);
-        assertEquals(sState.getValueAllowedValue(1),new JDFMatrix("6 5 4 3 2 1"));
-    }
-    public final void testAppendValue() throws Exception
-    {
-        sState.appendValue(new JDFMatrix("10 2 3 4 5 6"),null);
-        assertEquals(sState.getValueAllowedValue(0),new JDFMatrix("10 2 3 4 5 6"));
-        sState.appendValue(new JDFMatrix("20 2 3 4 5 6"),EnumFitsValue.Present);
-        assertEquals(sState.getValueAllowedValue(1),new JDFMatrix("20 2 3 4 5 6"));
-        sState.appendValue(new JDFMatrix("30 2 3 4 5 6"),EnumFitsValue.Allowed);
-        assertEquals(sState.getValueAllowedValue(2),new JDFMatrix("30 2 3 4 5 6"));
-    }
-    public final void testFitsValue() throws Exception
-    {
-        sState.appendValue(new JDFMatrix("10 2 3 4 5 6"),null);
-        sState.appendValue(new JDFMatrix("20 2 3 4 5 6"),EnumFitsValue.Present);
-        sState.appendValue(new JDFMatrix("30 2 3 4 5 6"),EnumFitsValue.Allowed);
-        assertTrue(sState.fitsValue("30 2 3 4 5 6",EnumFitsValue.Allowed));
-        assertFalse(sState.fitsValue("30 2 3 4 5 6",EnumFitsValue.Present));
-        assertFalse(sState.fitsValue("20 2 3 4 5 6",EnumFitsValue.Allowed));
-        assertTrue(sState.fitsValue("20 2 3 4 5 6",EnumFitsValue.Present));
-        assertTrue(sState.fitsValue("10 2 3 4 5 6",EnumFitsValue.Present));
-        assertFalse(sState.fitsValue("40 2 3 4 5 6",EnumFitsValue.Present));
-        assertTrue(sState.fitsValue("10 2 3 4 5 6",EnumFitsValue.Allowed));
-        assertFalse(sState.fitsValue("40 2 3 4 5 6",EnumFitsValue.Allowed));
-    }
+	// //////////////////////////////////////////////////
+
+	// //////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////
+	public final void testAddValue() throws Exception
+	{
+		sState.appendValue(new JDFMatrix("1 2 3 4 5 6"), null);
+		sState.addValue("6 5 4 3 2 1", EnumFitsValue.Allowed);
+		assertEquals(sState.getValueAllowedValue(1), new JDFMatrix(
+				"6 5 4 3 2 1"));
+	}
+
+	public final void testAppendValue() throws Exception
+	{
+		sState.appendValue(new JDFMatrix("10 2 3 4 5 6"), null);
+		assertEquals(sState.getValueAllowedValue(0), new JDFMatrix(
+				"10 2 3 4 5 6"));
+		sState
+				.appendValue(new JDFMatrix("20 2 3 4 5 6"),
+						EnumFitsValue.Present);
+		assertEquals(sState.getValueAllowedValue(1), new JDFMatrix(
+				"20 2 3 4 5 6"));
+		sState
+				.appendValue(new JDFMatrix("30 2 3 4 5 6"),
+						EnumFitsValue.Allowed);
+		assertEquals(sState.getValueAllowedValue(2), new JDFMatrix(
+				"30 2 3 4 5 6"));
+	}
+
+	public final void testFitsValue() throws Exception
+	{
+		sState.appendValue(new JDFMatrix("10 2 3 4 5 6"), null);
+		sState
+				.appendValue(new JDFMatrix("20 2 3 4 5 6"),
+						EnumFitsValue.Present);
+		sState
+				.appendValue(new JDFMatrix("30 2 3 4 5 6"),
+						EnumFitsValue.Allowed);
+		assertTrue(sState.fitsValue("30 2 3 4 5 6", EnumFitsValue.Allowed));
+		assertFalse(sState.fitsValue("30 2 3 4 5 6", EnumFitsValue.Present));
+		assertFalse(sState.fitsValue("20 2 3 4 5 6", EnumFitsValue.Allowed));
+		assertTrue(sState.fitsValue("20 2 3 4 5 6", EnumFitsValue.Present));
+		assertTrue(sState.fitsValue("10 2 3 4 5 6", EnumFitsValue.Present));
+		assertFalse(sState.fitsValue("40 2 3 4 5 6", EnumFitsValue.Present));
+		assertTrue(sState.fitsValue("10 2 3 4 5 6", EnumFitsValue.Allowed));
+		assertFalse(sState.fitsValue("40 2 3 4 5 6", EnumFitsValue.Allowed));
+	}
 
 }

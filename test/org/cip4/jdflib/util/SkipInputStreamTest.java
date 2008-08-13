@@ -66,77 +66,44 @@
  * <http://www.cip4.org/>.
  *
  *
+ * 04022005 VF initial version
  */
 
-package org.cip4.jdflib.jmf;
+package org.cip4.jdflib.util;
 
-import java.io.File;
+import java.io.ByteArrayInputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceCondition;
-import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.KElement.EnumValidationLevel;
-import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 
-/**
- * @author Rainer Prosi
- * 
- *         Test of the Status JMF
- */
-public class JMFStatusTest extends JDFTestCaseBase
+public class SkipInputStreamTest extends JDFTestCaseBase
 {
-	private JDFDoc doc;
-	private JDFJMF jmf;
-	private JDFSignal signal;
-	private JDFStatusQuParams sqp;
 
-	public void setUp()
+	// /////////////////////////////////////////////////////////////////////////
+	public void testRead() throws Exception
 	{
-		JDFElement.setLongID(false);
-		doc = new JDFDoc(ElementName.JMF);
-		jmf = doc.getJMFRoot();
-		signal = jmf.appendSignal();
-		jmf.setSenderID("DeviceSenderID");
-
-		signal.setType(EnumType.Status);
-		sqp = signal.appendStatusQuParams();
-		sqp.setJobID("JobID");
-		sqp.setJobPartID("JobPartID");
+		SkipInputStream pis = new SkipInputStream("abc",
+				new ByteArrayInputStream("123ab456abc123".getBytes()), false);
+		assertEquals(pis.read(), 'a');
+		assertEquals(pis.read(), 'b');
+		assertEquals(pis.read(), 'c');
+		assertEquals(pis.read(), '1');
+		assertEquals(pis.read(), '2');
+		assertEquals(pis.read(), '3');
+		assertEquals(pis.read(), -1);
 	}
 
-	// ///////////////////////////////////////////////////////////////////
-
-	public void testStatusDetails()
+	// /////////////////////////////////////////////////////////////////////////
+	public void testIgnoreCase() throws Exception
 	{
-
-		JDFDeviceInfo di = signal.appendDeviceInfo();
-		di.setDeviceCondition(EnumDeviceCondition.NeedsAttention);
-		di.setDeviceStatus(EnumDeviceStatus.Stopped);
-		di.setStatusDetails("OutputAreaFull PaperJam Repair");
-
-		doc.write2File(sm_dirTestDataTemp + File.separator
-				+ "JMFStatusSignal.jmf", 2, false);
-		assertTrue(jmf.isValid(EnumValidationLevel.Complete));
-	}
-
-	// ///////////////////////////////////////////////////////////////////
-
-	public void testInheritedPhase()
-	{
-
-		JDFDeviceInfo di = signal.appendDeviceInfo();
-		di.setDeviceCondition(EnumDeviceCondition.NeedsAttention);
-		di.setDeviceStatus(EnumDeviceStatus.Stopped);
-		di.setStatusDetails("OutputAreaFull PaperJam Repair");
-
-		JDFJobPhase jp = di.appendJobPhase();
-		assertEquals(jp.getJobID(), sqp.getJobID());
-		assertEquals(jp.getJobPartID(), sqp.getJobPartID());
-		jp.setJobID("foo");
-		assertEquals(jp.getJobID(), "foo");
+		SkipInputStream pis = new SkipInputStream("ABC",
+				new ByteArrayInputStream("123ab456abc123".getBytes()), true);
+		assertEquals(pis.read(), 'a');
+		assertEquals(pis.read(), 'b');
+		assertEquals(pis.read(), 'c');
+		assertEquals(pis.read(), '1');
+		assertEquals(pis.read(), '2');
+		assertEquals(pis.read(), '3');
+		assertEquals(pis.read(), -1);
 	}
 
 }

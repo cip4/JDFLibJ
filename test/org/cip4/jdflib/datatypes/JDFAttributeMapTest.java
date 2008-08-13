@@ -85,167 +85,171 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 
-
 public class JDFAttributeMapTest extends JDFTestCaseBase
 {
-    public void testClone()
-    {
-        JDFAttributeMap m1=new JDFAttributeMap("a1","v1");
-        m1.put("a2","v2");
-        JDFAttributeMap m2=new JDFAttributeMap(m1);
-        assertEquals(m1,m2);
-        m2.put("a2","v3");
-        assertNotSame(m1,m2);
-        assertEquals(m1.get("a2"), "v2");
-        assertEquals(m2.get("a2"), "v3");
-    }
+	public void testClone()
+	{
+		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		m1.put("a2", "v2");
+		JDFAttributeMap m2 = new JDFAttributeMap(m1);
+		assertEquals(m1, m2);
+		m2.put("a2", "v3");
+		assertNotSame(m1, m2);
+		assertEquals(m1.get("a2"), "v2");
+		assertEquals(m2.get("a2"), "v3");
+	}
 
-    public void testCloneNull()
-    {
-        JDFAttributeMap m1=new JDFAttributeMap(null);
-        m1.put("a2","v2");
-        JDFAttributeMap m2=new JDFAttributeMap(m1);
-        assertEquals(m1,m2);
-        m2.put("a2","v3");
-        assertNotSame(m1,m2);
-        assertEquals(m1.get("a2"), "v2");
-        assertEquals(m2.get("a2"), "v3");
-    }
+	public void testCloneNull()
+	{
+		JDFAttributeMap m1 = new JDFAttributeMap(null);
+		m1.put("a2", "v2");
+		JDFAttributeMap m2 = new JDFAttributeMap(m1);
+		assertEquals(m1, m2);
+		m2.put("a2", "v3");
+		assertNotSame(m1, m2);
+		assertEquals(m1.get("a2"), "v2");
+		assertEquals(m2.get("a2"), "v3");
+	}
 
-    public void testEquals()
-    {
-        JDFAttributeMap m1=new JDFAttributeMap("a1","v1");
-        m1.put("a2","v2");
-        JDFAttributeMap m2=new JDFAttributeMap("a1","v1");
-        assertNotSame(m1,m2);
-        m2.put("a2","v2");
-        assertEquals(m1,m2);
-        m1.put("a2",null);
-        assertNotSame(m1,m2);
-        m2.put("a2",null);
-        assertEquals(m1,m2);
-        assertNotSame(m1,null);
-    }
+	public void testEquals()
+	{
+		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		m1.put("a2", "v2");
+		JDFAttributeMap m2 = new JDFAttributeMap("a1", "v1");
+		assertNotSame(m1, m2);
+		m2.put("a2", "v2");
+		assertEquals(m1, m2);
+		m1.put("a2", null);
+		assertNotSame(m1, m2);
+		m2.put("a2", null);
+		assertEquals(m1, m2);
+		assertNotSame(m1, null);
+	}
 
-    //////////////////////////////////////////////////////////////////////
+	// ////////////////////////////////////////////////////////////////////
 
-    public void testPut()
-    {
-        JDFAttributeMap m1=new JDFAttributeMap(EnumPartIDKey.SignatureName,"v1");
-        assertEquals(m1.get("SignatureName"), "v1");
-        m1.put(EnumPartIDKey.SheetName, "s1");
-        assertEquals(m1.get("SheetName"), "s1");
-        m1.put(EnumPartIDKey.Side, EnumSide.Front);
-        assertEquals(m1.get("Side"), "Front");
-        m1.put("Usage",EnumUsage.Input);
-        assertEquals(m1.get("Usage"), "Input");
-    }
-    //////////////////////////////////////////////////////////////////////
+	public void testPut()
+	{
+		JDFAttributeMap m1 = new JDFAttributeMap(EnumPartIDKey.SignatureName,
+				"v1");
+		assertEquals(m1.get("SignatureName"), "v1");
+		m1.put(EnumPartIDKey.SheetName, "s1");
+		assertEquals(m1.get("SheetName"), "s1");
+		m1.put(EnumPartIDKey.Side, EnumSide.Front);
+		assertEquals(m1.get("Side"), "Front");
+		m1.put("Usage", EnumUsage.Input);
+		assertEquals(m1.get("Usage"), "Input");
+	}
 
-    public void testGet()
-    {
-        JDFAttributeMap m1=new JDFAttributeMap(EnumPartIDKey.SignatureName,"v1");
-        assertEquals(m1.get("SignatureName"), "v1");
-        m1.put(EnumPartIDKey.SheetName, "s1");
-        assertEquals(m1.get(EnumPartIDKey.SignatureName), "v1");
-    }
+	// ////////////////////////////////////////////////////////////////////
 
-    //////////////////////////////////////////////////////////////////////
+	public void testGet()
+	{
+		JDFAttributeMap m1 = new JDFAttributeMap(EnumPartIDKey.SignatureName,
+				"v1");
+		assertEquals(m1.get("SignatureName"), "v1");
+		m1.put(EnumPartIDKey.SheetName, "s1");
+		assertEquals(m1.get(EnumPartIDKey.SignatureName), "v1");
+	}
 
-    public void testSubMap()
-    {
-        JDFAttributeMap m1=new JDFAttributeMap("a1","v1");
-        m1.put("a2","v2");
-        assertTrue(m1.subMap((JDFAttributeMap)null));
-        JDFAttributeMap m2=new JDFAttributeMap("a1","v1");
-        JDFAttributeMap mStar=new JDFAttributeMap("a1",(String)null);
-        assertTrue(m1.subMap(m2));
-        assertTrue(m1.subMap(mStar));
-        m2.put("a2","v2");
-        mStar=new JDFAttributeMap("a1","*");
-        assertTrue(m1.subMap(m2));
-        assertTrue(m1.subMap(mStar));
-        m2.put("a2","v3");
-        assertFalse(m1.subMap(m2));
-        m2.put("a2","v2");
-        assertTrue(m1.subMap(m2));
-        m2.put("a3","v3");
-        assertFalse(m1.subMap(m2));
-        assertTrue(m1.subMap((JDFAttributeMap)null));
-    }
+	// ////////////////////////////////////////////////////////////////////
 
-    ///////////////////////////////////////////////////////////////////
+	public void testSubMap()
+	{
+		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		m1.put("a2", "v2");
+		assertTrue(m1.subMap((JDFAttributeMap) null));
+		JDFAttributeMap m2 = new JDFAttributeMap("a1", "v1");
+		JDFAttributeMap mStar = new JDFAttributeMap("a1", (String) null);
+		assertTrue(m1.subMap(m2));
+		assertTrue(m1.subMap(mStar));
+		m2.put("a2", "v2");
+		mStar = new JDFAttributeMap("a1", "*");
+		assertTrue(m1.subMap(m2));
+		assertTrue(m1.subMap(mStar));
+		m2.put("a2", "v3");
+		assertFalse(m1.subMap(m2));
+		m2.put("a2", "v2");
+		assertTrue(m1.subMap(m2));
+		m2.put("a3", "v3");
+		assertFalse(m1.subMap(m2));
+		assertTrue(m1.subMap((JDFAttributeMap) null));
+	}
 
-    public void testOverlapMap()
-    {
-        JDFAttributeMap m1=new JDFAttributeMap("a1","v1");
-        m1.put("a2","v2");
-        assertTrue(m1.overlapMap((JDFAttributeMap)null));
-        JDFAttributeMap m2=new JDFAttributeMap("a1","v1");
-        assertTrue(m1.overlapMap(m2));
-        m2.put("a2","v2");
-        assertTrue(m1.overlapMap(m2));
-        m2.put("a2","v3");
-        assertFalse(m1.overlapMap(m2));
-        m2.put("a2","v2");
-        assertTrue(m1.overlapMap(m2));
-        m2.put("a2","*");
-        assertTrue(m1.overlapMap(m2));
-        m2.put("a3","v3");
-        assertTrue(m1.overlapMap(m2));
-        m2.put("a4",null);
-        assertTrue(m1.overlapMap(m2));
-        m2.put("a4",null);
-        assertTrue(m1.overlapMap(m2));
-        m1.put("a4",null);
-        assertTrue(m1.overlapMap(m2));
-        assertTrue(m1.overlapMap((JDFAttributeMap)null));
-    }
+	// /////////////////////////////////////////////////////////////////
 
-    ///////////////////////////////////////////////////////////////
+	public void testOverlapMap()
+	{
+		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		m1.put("a2", "v2");
+		assertTrue(m1.overlapMap((JDFAttributeMap) null));
+		JDFAttributeMap m2 = new JDFAttributeMap("a1", "v1");
+		assertTrue(m1.overlapMap(m2));
+		m2.put("a2", "v2");
+		assertTrue(m1.overlapMap(m2));
+		m2.put("a2", "v3");
+		assertFalse(m1.overlapMap(m2));
+		m2.put("a2", "v2");
+		assertTrue(m1.overlapMap(m2));
+		m2.put("a2", "*");
+		assertTrue(m1.overlapMap(m2));
+		m2.put("a3", "v3");
+		assertTrue(m1.overlapMap(m2));
+		m2.put("a4", null);
+		assertTrue(m1.overlapMap(m2));
+		m2.put("a4", null);
+		assertTrue(m1.overlapMap(m2));
+		m1.put("a4", null);
+		assertTrue(m1.overlapMap(m2));
+		assertTrue(m1.overlapMap((JDFAttributeMap) null));
+	}
 
-    /**
-     * @deprecated
-     */
-    public void testReduceMap()
-    {
-        JDFAttributeMap m1=new JDFAttributeMap("a1","v1");
-        m1.put("a2","v2");
-        JDFAttributeMap m2=new JDFAttributeMap("a1","v1");
-        VString keys=new VString();
-        keys.add("a1");
-        m1.reduceMap(keys);
-        assertEquals(m1,m2);
-    }
-    ///////////////////////////////////////////////////////////////
-    public void testReduceMapSet()
-    {
-        JDFAttributeMap m1=new JDFAttributeMap("a1","v1");
-        m1.put("a2","v2");
-        JDFAttributeMap m2=new JDFAttributeMap("a1","v1");
-        HashSet<String> keys=new HashSet<String>();
-        keys.add("a1");
-        m1.reduceMap(keys);
-        assertEquals(m1,m2);
-    }
-    ///////////////////////////////////////////////////////////////
+	// /////////////////////////////////////////////////////////////
 
-    public void testRemoveKeys()
-    {
-        JDFAttributeMap m1=new JDFAttributeMap("a1","v1");
-        m1.put("a2","v2");
-        JDFAttributeMap m2=new JDFAttributeMap("a1","v1");
-        HashSet<String> keys=new HashSet<String>();
-        keys.add("a2");
-        m1.removeKeys(keys);
-        assertEquals(m1,m2);
-        m1.put("a2",null);
-        assertNotSame(m1,m2);
-        m1.removeKeys(keys);
-        assertEquals(m1,m2);
-    }
-    ///////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////
+	/**
+	 * @deprecated
+	 */
+	public void testReduceMap()
+	{
+		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		m1.put("a2", "v2");
+		JDFAttributeMap m2 = new JDFAttributeMap("a1", "v1");
+		VString keys = new VString();
+		keys.add("a1");
+		m1.reduceMap(keys);
+		assertEquals(m1, m2);
+	}
+
+	// /////////////////////////////////////////////////////////////
+	public void testReduceMapSet()
+	{
+		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		m1.put("a2", "v2");
+		JDFAttributeMap m2 = new JDFAttributeMap("a1", "v1");
+		HashSet<String> keys = new HashSet<String>();
+		keys.add("a1");
+		m1.reduceMap(keys);
+		assertEquals(m1, m2);
+	}
+
+	// /////////////////////////////////////////////////////////////
+
+	public void testRemoveKeys()
+	{
+		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		m1.put("a2", "v2");
+		JDFAttributeMap m2 = new JDFAttributeMap("a1", "v1");
+		HashSet<String> keys = new HashSet<String>();
+		keys.add("a2");
+		m1.removeKeys(keys);
+		assertEquals(m1, m2);
+		m1.put("a2", null);
+		assertNotSame(m1, m2);
+		m1.removeKeys(keys);
+		assertEquals(m1, m2);
+	}
+	// /////////////////////////////////////////////////////////////
+	// /////////////////////////////////////////////////////////////
+	// /////////////////////////////////////////////////////////////
 
 }

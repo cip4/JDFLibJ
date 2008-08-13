@@ -83,100 +83,101 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFContact;
 
-
 public class JDFCustomerInfoTest extends JDFTestCaseBase
 {
-    public void testgetContactVector()
-    {
-        JDFDoc doc = new JDFDoc("JDF");
-        JDFCustomerInfo info=prepareInfo(doc);
+	public void testgetContactVector()
+	{
+		JDFDoc doc = new JDFDoc("JDF");
+		JDFCustomerInfo info = prepareInfo(doc);
 
-        Vector v = null;
-        info = doc.getJDFRoot().getCustomerInfo();
-        if (info != null)
-        {
-            v = info.getChildElementVector(ElementName.CONTACT, null, null, true, 0, false);
-            assertEquals("v does not contain 4 contact", v.size() , 4);
-        }
+		Vector v = null;
+		info = doc.getJDFRoot().getCustomerInfo();
+		if (info != null)
+		{
+			v = info.getChildElementVector(ElementName.CONTACT, null, null,
+					true, 0, false);
+			assertEquals("v does not contain 4 contact", v.size(), 4);
+		}
 
+		v = null;
+		info = doc.getJDFRoot().getCustomerInfo();
+		if (info != null)
+		{
+			v = info.getChildElementVector(ElementName.CONTACT, null, null,
+					true, 0, false);
+			assertTrue("v does not contain 4 contacts", v.size() == 4);
+		}
+	}
 
-        v = null;
-        info = doc.getJDFRoot().getCustomerInfo();
-        if (info != null)
-        {
-            v = info.getChildElementVector(ElementName.CONTACT, null,null, true, 0, false);
-            assertTrue("v does not contain 4 contacts", v.size() == 4);
-        }        
-    }    
+	// ///////////////////////////////////////////////////////////////////////
 
-    /////////////////////////////////////////////////////////////////////////
+	public void testGetContactWithContactType()
+	{
+		JDFDoc doc = new JDFDoc("JDF");
+		JDFCustomerInfo info = prepareInfo(doc);
 
-    public void testGetContactWithContactType()
-    {
-        JDFDoc doc = new JDFDoc("JDF");
-        JDFCustomerInfo info=prepareInfo(doc);
+		JDFContact cc = info.getContactWithContactType("Customer", 0);
+		assertNotNull("cc", cc);
+		cc = info.getContactWithContactType("Customer", 2);
+		assertNotNull("cc", cc);
+		cc = info.getContactWithContactType("Customer", 1);
+		assertNotNull("cc", cc);
+		JDFContact cc2 = info.getContactWithContactType("Administrator", 0);
+		assertNotNull("cc2", cc2);
+		assertEquals("cc2", cc, cc2);
+		cc = info.getContactWithContactType("Delivery", 0);
+		assertNotNull("cc", cc);
+		cc = info.getContactWithContactType("fnarf", 0);
+		assertNull("cc", cc);
+	}
 
-        JDFContact cc = info.getContactWithContactType("Customer", 0);
-        assertNotNull("cc", cc);
-        cc = info.getContactWithContactType("Customer", 2);
-        assertNotNull("cc", cc);
-        cc = info.getContactWithContactType("Customer", 1);
-        assertNotNull("cc", cc);
-        JDFContact cc2 = info.getContactWithContactType("Administrator", 0);
-        assertNotNull("cc2", cc2);
-        assertEquals("cc2", cc, cc2);
-        cc = info.getContactWithContactType("Delivery", 0);
-        assertNotNull("cc", cc);
-        cc = info.getContactWithContactType("fnarf", 0);
-        assertNull("cc", cc);
-    }
+	// ///////////////////////////////////////////////////////////////////////
 
-    /////////////////////////////////////////////////////////////////////////
+	public void testGetContactVectorWithContactType()
+	{
+		JDFDoc doc = new JDFDoc("JDF");
+		JDFCustomerInfo info = prepareInfo(doc);
 
-    public void testGetContactVectorWithContactType()
-    {
-        JDFDoc doc = new JDFDoc("JDF");
-        JDFCustomerInfo info=prepareInfo(doc);
+		VElement v = info.getContactVectorWithContactType("Customer");
+		assertNotNull(v);
+		assertEquals(v.size(), 3);
+		v = info.getContactVectorWithContactType("Administrator");
+		assertNotNull(v);
+		assertEquals(v.size(), 1);
+		v = info.getContactVectorWithContactType("beagle");
+		assertNull(v);
+	}
 
-        VElement v = info.getContactVectorWithContactType("Customer");
-        assertNotNull(v);
-        assertEquals(v.size(),3);
-        v = info.getContactVectorWithContactType("Administrator");
-        assertNotNull(v);
-        assertEquals(v.size(),1);
-        v = info.getContactVectorWithContactType("beagle");
-        assertNull(v);
-    }
-    /////////////////////////////////////////////////////////////////////////
+	// ///////////////////////////////////////////////////////////////////////
 
-    private JDFCustomerInfo prepareInfo(JDFDoc doc)
-    {
-        JDFNode n=doc.getJDFRoot();
-        JDFCustomerInfo info = n.appendCustomerInfo();
-        VString vct = new VString();
-        vct.add("Customer");
-        info.appendContact().setContactTypes(vct);
-        vct.add("Administrator");
-        info.appendContact().setContactTypes(vct);
-        JDFContact c=info.appendContact();
-        vct = new VString();
-        vct.add("Delivery");
-        c.setContactTypes(vct);
-        c.makeRootResource(null,null,true);
-        vct.add("Customer");
-        info.appendContact().setContactTypes(vct);
-        return info;
-    }
+	private JDFCustomerInfo prepareInfo(JDFDoc doc)
+	{
+		JDFNode n = doc.getJDFRoot();
+		JDFCustomerInfo info = n.appendCustomerInfo();
+		VString vct = new VString();
+		vct.add("Customer");
+		info.appendContact().setContactTypes(vct);
+		vct.add("Administrator");
+		info.appendContact().setContactTypes(vct);
+		JDFContact c = info.appendContact();
+		vct = new VString();
+		vct.add("Delivery");
+		c.setContactTypes(vct);
+		c.makeRootResource(null, null, true);
+		vct.add("Customer");
+		info.appendContact().setContactTypes(vct);
+		return info;
+	}
 
-    /////////////////////////////////////////////////////////////////////////
+	// ///////////////////////////////////////////////////////////////////////
 
-    public void testGetContact()
-    {
-        JDFDoc doc = new JDFDoc("JDF");
-        JDFNode n=doc.getJDFRoot();
-        JDFCustomerInfo info = n.appendCustomerInfo();
-        info.appendContact().setContactTypes(new VString("foo",null));
-        assertNotNull(info.getContact(0));
-    }
+	public void testGetContact()
+	{
+		JDFDoc doc = new JDFDoc("JDF");
+		JDFNode n = doc.getJDFRoot();
+		JDFCustomerInfo info = n.appendCustomerInfo();
+		info.appendContact().setContactTypes(new VString("foo", null));
+		assertNotNull(info.getContact(0));
+	}
 
 }

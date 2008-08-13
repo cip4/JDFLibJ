@@ -81,84 +81,90 @@ import org.cip4.jdflib.resource.process.JDFColorPool;
 
 /**
  * @author MuchaD
- *
- * This implements the first fixture with unit tests for class JDFElement.
+ * 
+ *         This implements the first fixture with unit tests for class
+ *         JDFElement.
  */
 public class JDFColorPoolTest extends TestCase
 {
-    JDFColorPool cp;
-    
-    public void setUp()
-    {
-        try
-        {
-            super.setUp();
-        }
-        catch (Exception e)
-        {
-            //
-        }
-        JDFDoc d=new JDFDoc("JDF");
-        JDFNode n=d.getJDFRoot();
-        n.setType("Interpreting",false);
-        cp=(JDFColorPool) n.addResource("ColorPool", null, EnumUsage.Input, null, null, null, null);
-        cp.appendColorWithName("Cyan","true");
-        cp.appendColorWithName("Grün","Grün");
-        ((JDFColor)cp.appendElement("jdf:Color",JDFElement.getSchemaURL())).setName("foo");
-    }
-    /**
-     * Method testIncludesAttribute.
-     * @throws Exception
-     */
-    public void testGetColorWithName() throws Exception
-    {
-            assertNotNull("grün",cp.getColorWithName("Grün"));
-           boolean caught =false;
-           try
-           {
-           cp.appendColorWithName("Grün","Grün");
-           }
-           catch(JDFException e)
-           {
-               caught=true;
-           }
-           assertTrue("noappend",caught);
-    } 
-    /**
-     * Method testIncludesAttribute.
-     * @throws Exception
-     */
-    public void testGetCreateColorWithName() throws Exception
-    {
-        assertNotNull("grün",cp.getCreateColorWithName("Grün",null));
-    } 
-    
-    public void testRemoveColor() throws Exception
-    {
-           assertEquals("num",cp.numChildElements("Color",null),3);
-           cp.removeColor("bar");
-           assertEquals("num",cp.numChildElements("Color",null),3);
-           cp.removeColor("Grün");
-           assertEquals("num",cp.numChildElements("Color",null),2);
-           cp.removeColor("foo");
-           assertEquals("num",cp.numChildElements("Color",null),1);
-           
-    }    
-    public void testDuplicateColor() throws Exception
-    {
-           assertNull(cp.getDuplicateColors());     
-           JDFColor c=cp.appendColorWithName("grun","grun");
-           assertNull(cp.getDuplicateColors());     
-           c.set8BitNames("Grün".getBytes());
-           c.setName("grun");
-           assertTrue(cp.getDuplicateColors().contains("grun"));     
+	JDFColorPool cp;
 
-    }    
-    
-    @Override
-    public String toString()
-    {
-        return cp==null ? null :cp.toString();
-    }
-    
+	public void setUp()
+	{
+		try
+		{
+			super.setUp();
+		} catch (Exception e)
+		{
+			//
+		}
+		JDFDoc d = new JDFDoc("JDF");
+		JDFNode n = d.getJDFRoot();
+		n.setType("Interpreting", false);
+		cp = (JDFColorPool) n.addResource("ColorPool", null, EnumUsage.Input,
+				null, null, null, null);
+		cp.appendColorWithName("Cyan", "true");
+		cp.appendColorWithName("Grün", "Grün");
+		((JDFColor) cp.appendElement("jdf:Color", JDFElement.getSchemaURL()))
+				.setName("foo");
+	}
+
+	/**
+	 * Method testIncludesAttribute.
+	 * 
+	 * @throws Exception
+	 */
+	public void testGetColorWithName() throws Exception
+	{
+		assertNotNull("grün", cp.getColorWithName("Grün"));
+		boolean caught = false;
+		try
+		{
+			cp.appendColorWithName("Grün", "Grün");
+		} catch (JDFException e)
+		{
+			caught = true;
+		}
+		assertTrue("noappend", caught);
+	}
+
+	/**
+	 * Method testIncludesAttribute.
+	 * 
+	 * @throws Exception
+	 */
+	public void testGetCreateColorWithName() throws Exception
+	{
+		assertNotNull("grün", cp.getCreateColorWithName("Grün", null));
+	}
+
+	public void testRemoveColor() throws Exception
+	{
+		assertEquals("num", cp.numChildElements("Color", null), 3);
+		cp.removeColor("bar");
+		assertEquals("num", cp.numChildElements("Color", null), 3);
+		cp.removeColor("Grün");
+		assertEquals("num", cp.numChildElements("Color", null), 2);
+		cp.removeColor("foo");
+		assertEquals("num", cp.numChildElements("Color", null), 1);
+
+	}
+
+	public void testDuplicateColor() throws Exception
+	{
+		assertNull(cp.getDuplicateColors());
+		JDFColor c = cp.appendColorWithName("grun", "grun");
+		assertNull(cp.getDuplicateColors());
+		c.set8BitNames("Grün".getBytes());
+		c.setName("grun");
+		assertTrue(cp.getDuplicateColors().contains("grun"));
+
+	}
+
+	@Override
+	public String toString()
+	{
+		return cp == null ? null : cp.toString();
+	}
+
 }

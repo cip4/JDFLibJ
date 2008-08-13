@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -83,59 +83,113 @@ import org.cip4.jdflib.node.JDFNode;
 
 public class JDFParserTest extends JDFTestCaseBase
 {
-    String s;
-    /**
-     * check speed of the parser
-     *
-     */
-    public void testSpeed() throws Exception
-    {
-        long l1=System.nanoTime();
-        for (int i=0;i<1000;i++)
-        {
-            new JDFParser().parseString(s);
-        }
-        System.out.println("new  p: "+(System.nanoTime()-l1)/1000000);
-    }
-    /**
-     * check speed of the parser
-     *
-     */
-    public void testSpeed1() throws Exception
-    {
-        long l1=System.nanoTime();
-        for (int i=0;i<1000;i++)
-        {
-            new JDFParser();
-        }
-        System.out.println("new:   "+(System.nanoTime()-l1)/1000000);
-    }
-    /**
-     * check speed of the parser
-     *
-     */
-    public void testSpeed2() throws Exception
-    {
-        long l1=System.nanoTime();
-        JDFParser p=new JDFParser();
-        for (int i=0;i<1000;i++)
-        {
-            p.parseString(s);
-        }
-        System.out.println("reuse: "+(System.nanoTime()-l1)/1000000);
-    }
-    /* (non-Javadoc)
-     * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
-     */
-    @Override
-    protected void setUp() throws Exception
-    {
-        super.setUp();
-        JDFDoc d=new JDFDoc("JDF");
-        JDFNode n=d.getJDFRoot();
-        n.addResource("RunList", EnumUsage.Input);
-        s=d.write2String(2);
+	String s;
+	boolean bSearch;
 
-    }
+	/**
+	 * check speed of the parser
+	 * 
+	 */
+	public void testSpeed() throws Exception
+	{
+		long l1 = System.nanoTime();
+		for (int i = 0; i < 1000; i++)
+		{
+			new JDFParser().parseString(s);
+		}
+		System.out.println("new  p: " + (System.nanoTime() - l1) / 1000000);
+	}
+
+	/**
+	 * check speed of the parser
+	 * 
+	 */
+	public void testSpeed1() throws Exception
+	{
+		long l1 = System.nanoTime();
+		for (int i = 0; i < 1000; i++)
+		{
+			new JDFParser();
+		}
+		System.out.println("new:   " + (System.nanoTime() - l1) / 1000000);
+	}
+
+	/**
+	 * check speed of the parser
+	 * 
+	 */
+	public void testParseSpeed() throws Exception
+	{
+		JDFParser parser = new JDFParser();
+		System.gc();
+		long l1 = System.nanoTime();
+		JDFDoc d = parser.parseFile(sm_dirTestData + "bigWhite.jdf");
+		assertNotNull(d);
+		System.out
+				.println("big parse:   " + (System.nanoTime() - l1) / 1000000);
+	}
+
+	/**
+	 * check speed of the parser
+	 * 
+	 */
+	public void testBadNS() throws Exception
+	{
+		String s2 = "<JMF/>";
+		assertEquals(new JDFParser().parseString(s2).getRoot().getLocalName(),
+				"JMF");
+	}
+
+	/**
+	 * check speed of the parser
+	 * 
+	 */
+	public void testSpeed2() throws Exception
+	{
+		long l1 = System.nanoTime();
+		JDFParser p = new JDFParser();
+		for (int i = 0; i < 1000; i++)
+		{
+			p.parseString(s);
+		}
+		System.out.println("reuse: " + (System.nanoTime() - l1) / 1000000);
+	}
+
+	/**
+	 * parse a string with guck up front
+	 * 
+	 * @throws Exception
+	 */
+	public void testSkipParse() throws Exception
+	{
+		JDFParser.searchStream = true;
+		String s2 = "        ------ end of header ----!\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n <JMF/>";
+		JDFParser.searchStream = false;
+		assertNull(new JDFParser().parseString(s2));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	@Override
+	protected void setUp() throws Exception
+	{
+		super.setUp();
+		JDFDoc d = new JDFDoc("JDF");
+		JDFNode n = d.getJDFRoot();
+		n.addResource("RunList", EnumUsage.Input);
+		s = d.write2String(2);
+		bSearch = JDFParser.searchStream;
+	}
+
+	@Override
+	protected void tearDown() throws Exception
+	{
+		// TODO Auto-generated method stub
+		super.tearDown();
+		JDFParser.searchStream = bSearch;
+	}
 
 }

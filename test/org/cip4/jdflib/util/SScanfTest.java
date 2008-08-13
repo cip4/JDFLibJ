@@ -80,76 +80,77 @@ import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 
-
 /**
  * @author MatternK
- *
- * To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Generation - Code and Comments
+ * 
+ *         To change the template for this generated type comment go to Window -
+ *         Preferences - Java - Code Generation - Code and Comments
  */
 public class SScanfTest extends JDFTestCaseBase
 {
-    public void testSScanfInt() throws Exception
-    {
-        Vector o=SScanf.sscanf("4", "%i");
-        Integer i2=(Integer)o.elementAt(0);
-        assertEquals(i2.intValue(), 4);
-        o=SScanf.sscanf("abc4", "abc%i");
-        i2=(Integer)o.elementAt(0);
-        assertEquals(i2.intValue(), 4);
-        o=SScanf.sscanf("abc6%", "abc%i%%");
-        i2=(Integer)o.elementAt(0);
-        assertEquals(i2.intValue(), 6);
-        o=SScanf.sscanf("abccv", "abc%xv");
-        i2=(Integer)o.elementAt(0);
-        assertEquals(i2.intValue(), 12); 
-        o=SScanf.sscanf("abc55", "abc%o");
-        i2=(Integer)o.elementAt(0);
-        assertEquals(i2.intValue(), 055); 
-    }
-    public void testSScanfDouble() throws Exception
-    {
-        Vector o=SScanf.sscanf("4", "%f");
-        Double d2=(Double)o.elementAt(0);
-        assertEquals(d2.intValue(), 4);
-   }
-    public void testSScanfString() throws Exception
-    {
-        Vector o=SScanf.sscanf("4", "%s");
-        String s2=(String)o.elementAt(0);
-        assertEquals(s2, "4");
-        o=SScanf.sscanf("abc4", "abc%s");
-        s2=(String)o.elementAt(0);
-        assertEquals(s2, "4");
-        o=SScanf.sscanf("abc4", "abc%s");
-        s2=(String)o.elementAt(0);
-        assertEquals(s2, "4");
-        o=SScanf.sscanf("abc6%", "abc%1s%%");
-        s2=(String)o.elementAt(0);
-        assertEquals(s2, "6");
-        o=SScanf.sscanf("abc7%", "abc%2c");
-        s2=(String)o.elementAt(0);
-        assertEquals(s2, "7%");
-    }
-    
-    public void testSScanfMulti() throws Exception
-    {
-        Vector o=SScanf.sscanf("abc 4", "%s %i");
-        String s2=(String)o.elementAt(0);
-        Integer i2=(Integer)o.elementAt(1);
-        assertEquals(s2, "abc");
-        assertEquals(i2.intValue(), 4);
-        o=SScanf.sscanf("abc 4", "a%s %i");
-        s2=(String)o.elementAt(0);
-        i2=(Integer)o.elementAt(1);
-        assertEquals(s2, "bc");
-        assertEquals(i2.intValue(), 4);
-    }   
+	public void testSScanfInt() throws Exception
+	{
+		Vector o = SScanf.sscanf("4", "%i");
+		Integer i2 = (Integer) o.elementAt(0);
+		assertEquals(i2.intValue(), 4);
+		o = SScanf.sscanf("abc4", "abc%i");
+		i2 = (Integer) o.elementAt(0);
+		assertEquals(i2.intValue(), 4);
+		o = SScanf.sscanf("abc6%", "abc%i%%");
+		i2 = (Integer) o.elementAt(0);
+		assertEquals(i2.intValue(), 6);
+		o = SScanf.sscanf("abccv", "abc%xv");
+		i2 = (Integer) o.elementAt(0);
+		assertEquals(i2.intValue(), 12);
+		o = SScanf.sscanf("abc55", "abc%o");
+		i2 = (Integer) o.elementAt(0);
+		assertEquals(i2.intValue(), 055);
+	}
 
-    ///////////////////////////////////////////////////////////////////////////
+	public void testSScanfDouble() throws Exception
+	{
+		Vector o = SScanf.sscanf("4", "%f");
+		Double d2 = (Double) o.elementAt(0);
+		assertEquals(d2.intValue(), 4);
+	}
 
-    ///////////////////////////////////////////////////////////////////////////
+	public void testSScanfString() throws Exception
+	{
+		Vector o = SScanf.sscanf("4", "%s");
+		String s2 = (String) o.elementAt(0);
+		assertEquals(s2, "4");
+		o = SScanf.sscanf("abc4", "abc%s");
+		s2 = (String) o.elementAt(0);
+		assertEquals(s2, "4");
+		o = SScanf.sscanf("abc4", "abc%s");
+		s2 = (String) o.elementAt(0);
+		assertEquals(s2, "4");
+		o = SScanf.sscanf("abc6%", "abc%1s%%");
+		s2 = (String) o.elementAt(0);
+		assertEquals(s2, "6");
+		o = SScanf.sscanf("abc7%", "abc%2c");
+		s2 = (String) o.elementAt(0);
+		assertEquals(s2, "7%");
+	}
 
-    ///////////////////////////////////////////////////////////////////////////
+	public void testSScanfMulti() throws Exception
+	{
+		Vector o = SScanf.sscanf("abc 4", "%s %i");
+		String s2 = (String) o.elementAt(0);
+		Integer i2 = (Integer) o.elementAt(1);
+		assertEquals(s2, "abc");
+		assertEquals(i2.intValue(), 4);
+		o = SScanf.sscanf("abc 4", "a%s %i");
+		s2 = (String) o.elementAt(0);
+		i2 = (Integer) o.elementAt(1);
+		assertEquals(s2, "bc");
+		assertEquals(i2.intValue(), 4);
+	}
 
-}   
+	// /////////////////////////////////////////////////////////////////////////
+
+	// /////////////////////////////////////////////////////////////////////////
+
+	// /////////////////////////////////////////////////////////////////////////
+
+}

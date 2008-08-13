@@ -83,95 +83,105 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 
-
 /**
  * @author Rainer
- *
- * To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Generation - Code and Comments
+ * 
+ *         To change the template for this generated type comment go to Window -
+ *         Preferences - Java - Code Generation - Code and Comments
  */
 public class QueueHotFolderTest extends JDFTestCaseBase
 {
-    private File theHF;
-    private File theStorage;
-    QueueHotFolder hf;
-    protected class MyListener implements QueueHotFolderListener
-    {
-        protected VElement vJMF=new VElement();
-        /* (non-Javadoc)
-         * @see org.cip4.jdflib.util.QueueHotFolderListener#submitted(org.cip4.jdflib.jmf.JDFJMF)
-         */
-        public void submitted(JDFJMF submissionJMF)
-        {
-            vJMF.add(submissionJMF);
-        }
-    }
-    @Override
+	private File theHF;
+	private File theStorage;
+	QueueHotFolder hf;
+
+	protected class MyListener implements QueueHotFolderListener
+	{
+		protected VElement vJMF = new VElement();
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * org.cip4.jdflib.util.QueueHotFolderListener#submitted(org.cip4.jdflib
+		 * .jmf.JDFJMF)
+		 */
+		public void submitted(JDFJMF submissionJMF)
+		{
+			vJMF.add(submissionJMF);
+		}
+	}
+
+	@Override
 	protected void setUp() throws Exception
-    {
-        super.setUp();
-        theHF=new File(sm_dirTestDataTemp+File.separator+"QHFTest");
-        theStorage=new File(sm_dirTestDataTemp+File.separator+"QHFStore");
-        theHF.mkdirs();
-        FileUtil.deleteAll(theStorage);
-        theStorage.mkdirs();
-        
-    }
+	{
+		super.setUp();
+		theHF = new File(sm_dirTestDataTemp + File.separator + "QHFTest");
+		theStorage = new File(sm_dirTestDataTemp + File.separator + "QHFStore");
+		theHF.mkdirs();
+		FileUtil.deleteAll(theStorage);
+		theStorage.mkdirs();
 
-    public void testSubmitSingleFile() throws Exception
-    {
-        final MyListener myListener = new MyListener();
-        final File file = new File(theHF+File.separator+"f1.txt");
-        final File stFile = new File(theStorage+File.separator+"f1.txt");
-        file.createNewFile();
-        assertTrue(file.exists());
-        assertFalse(stFile.exists());
-        hf=new QueueHotFolder(theHF,theStorage,null,myListener,null);
-        StatusCounter.sleep(3000);
-        assertFalse(file.exists());
-        assertTrue(stFile.exists());
-        assertEquals(myListener.vJMF.size(), 1);
-        final JDFJMF elementAt = (JDFJMF) myListener.vJMF.elementAt(0);
-        assertEquals(elementAt.getCommand(0).getEnumType(), JDFMessage.EnumType.SubmitQueueEntry);
-        assertEquals(elementAt.getCommand(0).getQueueSubmissionParams(0).getURL(), UrlUtil.fileToUrl(stFile, false));
-    }
+	}
 
+	public void testSubmitSingleFile() throws Exception
+	{
+		final MyListener myListener = new MyListener();
+		final File file = new File(theHF + File.separator + "f1.txt");
+		final File stFile = new File(theStorage + File.separator + "f1.txt");
+		file.createNewFile();
+		assertTrue(file.exists());
+		assertFalse(stFile.exists());
+		hf = new QueueHotFolder(theHF, theStorage, null, myListener, null);
+		StatusCounter.sleep(3000);
+		assertFalse(file.exists());
+		assertTrue(stFile.exists());
+		assertEquals(myListener.vJMF.size(), 1);
+		final JDFJMF elementAt = (JDFJMF) myListener.vJMF.elementAt(0);
+		assertEquals(elementAt.getCommand(0).getEnumType(),
+				JDFMessage.EnumType.SubmitQueueEntry);
+		assertEquals(elementAt.getCommand(0).getQueueSubmissionParams(0)
+				.getURL(), UrlUtil.fileToUrl(stFile, false));
+	}
 
-    public void teststopStart() throws Exception
-    {
-        final MyListener myListener = new MyListener();
-        final File file = new File(theHF+File.separator+"f1.txt");
-        final File stFile = new File(theStorage+File.separator+"f1.txt");
-        file.createNewFile();
-        assertTrue(file.exists());
-        assertFalse(stFile.exists());
-        hf=new QueueHotFolder(theHF,theStorage,null,myListener,null);
-        hf.stop();
-        StatusCounter.sleep(3000);
-        assertTrue(file.exists());
-        assertFalse("File is still there after stop",stFile.exists());
-        assertEquals(myListener.vJMF.size(), 0);
-        hf.restart();
-        StatusCounter.sleep(3000);
-        assertFalse("File is gone after stop",file.exists());
-        assertTrue(stFile.exists());
-        assertEquals(myListener.vJMF.size(), 1);
-        final JDFJMF elementAt = (JDFJMF) myListener.vJMF.elementAt(0);
-        assertEquals(elementAt.getCommand(0).getEnumType(), JDFMessage.EnumType.SubmitQueueEntry);
-        assertEquals(elementAt.getCommand(0).getQueueSubmissionParams(0).getURL(), UrlUtil.fileToUrl(stFile, false));        
-    }
-    
-    /* (non-Javadoc)
-     * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
-     */
-    @Override
-    protected void tearDown() throws Exception
-    {
-        super.tearDown();
-        hf.stop();
-    }
+	public void teststopStart() throws Exception
+	{
+		final MyListener myListener = new MyListener();
+		final File file = new File(theHF + File.separator + "f1.txt");
+		final File stFile = new File(theStorage + File.separator + "f1.txt");
+		file.createNewFile();
+		assertTrue(file.exists());
+		assertFalse(stFile.exists());
+		hf = new QueueHotFolder(theHF, theStorage, null, myListener, null);
+		hf.stop();
+		StatusCounter.sleep(3000);
+		assertTrue(file.exists());
+		assertFalse("File is still there after stop", stFile.exists());
+		assertEquals(myListener.vJMF.size(), 0);
+		hf.restart();
+		StatusCounter.sleep(3000);
+		assertFalse("File is gone after stop", file.exists());
+		assertTrue(stFile.exists());
+		assertEquals(myListener.vJMF.size(), 1);
+		final JDFJMF elementAt = (JDFJMF) myListener.vJMF.elementAt(0);
+		assertEquals(elementAt.getCommand(0).getEnumType(),
+				JDFMessage.EnumType.SubmitQueueEntry);
+		assertEquals(elementAt.getCommand(0).getQueueSubmissionParams(0)
+				.getURL(), UrlUtil.fileToUrl(stFile, false));
+	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
+	 */
+	@Override
+	protected void tearDown() throws Exception
+	{
+		super.tearDown();
+		hf.stop();
+	}
 
-    ///////////////////////////////////////////////////////////////////////////
+	// /////////////////////////////////////////////////////////////////////////
 
-}   
+}

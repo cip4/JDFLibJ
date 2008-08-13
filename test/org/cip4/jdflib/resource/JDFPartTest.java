@@ -85,35 +85,36 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 
 ////////////////////////////////////////////////////////////////
 
-
 public class JDFPartTest extends JDFTestCaseBase
 {
-    public void testSetPartMap()
-    {
-        JDFDoc doc=new JDFDoc("Part");
-        JDFPart part=(JDFPart) doc.getRoot();
-        JDFAttributeMap map=new JDFAttributeMap("Side","Front");
-        part.setPartMap(map);
-        assertEquals(part.getPartMap(), map);
-        map.put("Side", "Back");
-        map.put("Run", "1");
-        part.setPartMap(map);
-        assertEquals(part.getPartMap(), map);
-        part.setPartMap(null);
-        assertEquals(part.getPartMap(),new JDFAttributeMap());        
-     }
-    ////////////////////////////////////////////////////////////////
-    public void testPartIDConsistency()
-    {
-        JDFDoc doc=new JDFDoc("Part");
-        JDFPart p=(JDFPart) doc.getRoot();     
-        VString knownAtts=p.knownAttributes();
-        Iterator it=EnumPartIDKey.iterator();
-        while(it.hasNext())
-        {
-            final String name = ((EnumPartIDKey)it.next()).getName();
-            assertTrue("name missing in Part: "+name,knownAtts.contains(name));
-        }
-     }
-    ////////////////////////////////////////////////////////////////
+	public void testSetPartMap()
+	{
+		JDFDoc doc = new JDFDoc("Part");
+		JDFPart part = (JDFPart) doc.getRoot();
+		JDFAttributeMap map = new JDFAttributeMap("Side", "Front");
+		part.setPartMap(map);
+		assertEquals(part.getPartMap(), map);
+		map.put("Side", "Back");
+		map.put("Run", "1");
+		part.setPartMap(map);
+		assertEquals(part.getPartMap(), map);
+		part.setPartMap(null);
+		assertEquals(part.getPartMap(), new JDFAttributeMap());
+	}
+
+	// //////////////////////////////////////////////////////////////
+	public void testPartIDConsistency()
+	{
+		JDFDoc doc = new JDFDoc("Part");
+		JDFPart p = (JDFPart) doc.getRoot();
+		VString knownAtts = p.knownAttributes();
+		Iterator it = EnumPartIDKey.iterator();
+		while (it.hasNext())
+		{
+			final String name = ((EnumPartIDKey) it.next()).getName();
+			assertTrue("name missing in Part: " + name, knownAtts
+					.contains(name));
+		}
+	}
+	// //////////////////////////////////////////////////////////////
 }

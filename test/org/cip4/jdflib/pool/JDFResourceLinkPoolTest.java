@@ -84,111 +84,126 @@ import org.cip4.jdflib.resource.process.JDFComponent;
 
 /**
  * @author MuchaD
- *
- * This implements the first fixture with unit tests for class JDFElement.
+ * 
+ *         This implements the first fixture with unit tests for class
+ *         JDFElement.
  */
 public class JDFResourceLinkPoolTest extends JDFTestCaseBase
 {
- 
-    public void testGetLink() throws Exception
-    {
-        JDFDoc d=new JDFDoc("JDF");
-        JDFNode n=d.getJDFRoot();
-        JDFResource r=n.addResource("Component", null, null, null, null, null, null);
-        assertTrue(r instanceof JDFComponent);
-        assertFalse(n.hasChildElement("ResourceLinkPool",null));
-        JDFResourceLinkPool rlp=n.getCreateResourceLinkPool();
-        
-        JDFResourceLink rl=rlp.linkResource(r,EnumUsage.Input,EnumProcessUsage.BookBlock);
-        assertNotNull(rl);
-        assertEquals(rl, rlp.getLink(r, null, null));
-        
-        JDFResource r2=n.addResource("foo:bar", EnumResourceClass.Parameter, null, null, null, "www.foo.com", null);
-        rl=rlp.linkResource(r2,EnumUsage.Input,null);
-        assertEquals(rl, rlp.getLink(r2, null, null));
 
-     }
-    
-    /**
-     * Method testLinkResource.
-     * @throws Exception
-     */
-    public void testLinkResource() throws Exception
-    {
-        JDFDoc d=new JDFDoc("JDF");
-        JDFNode n=d.getJDFRoot();
-        JDFResource r=n.addResource("Component", null, null, null, null, null, null);
-        assertTrue(r instanceof JDFComponent);
-        assertFalse(n.hasChildElement("ResourceLinkPool",null));
-        JDFResourceLinkPool rlp=n.getCreateResourceLinkPool();
-        
-        JDFResourceLink rl=rlp.linkResource(r,EnumUsage.Input,EnumProcessUsage.BookBlock);
-        assertNotNull(rl);
-        assertEquals(rl.getEnumProcessUsage(),EnumProcessUsage.BookBlock);
-        assertEquals(rl.getUsage(),EnumUsage.Input);
-        rl=rlp.linkResource(r,EnumUsage.Input,EnumProcessUsage.BookBlock);
-        assertNotNull("no two",rl);
-        
-        rl=rlp.linkResource(r,EnumUsage.Input,EnumProcessUsage.Cover);
-        assertNotNull(rl);
-        assertEquals(rl.getEnumProcessUsage(),EnumProcessUsage.Cover);
-        assertEquals(rl.getUsage(),EnumUsage.Input);
-        
-        rl=rlp.linkResource(r,EnumUsage.Output,EnumProcessUsage.Cover);
-        assertNotNull(rl);
-        assertEquals(rl.getEnumProcessUsage(),EnumProcessUsage.Cover);
-        assertEquals(rl.getUsage(),EnumUsage.Output);  
+	public void testGetLink() throws Exception
+	{
+		JDFDoc d = new JDFDoc("JDF");
+		JDFNode n = d.getJDFRoot();
+		JDFResource r = n.addResource("Component", null, null, null, null,
+				null, null);
+		assertTrue(r instanceof JDFComponent);
+		assertFalse(n.hasChildElement("ResourceLinkPool", null));
+		JDFResourceLinkPool rlp = n.getCreateResourceLinkPool();
 
-        JDFResource r2=n.addResource("foo:bar", EnumResourceClass.Parameter, null, null, null, "www.foo.com", null);
-        rl=rlp.linkResource(r2,EnumUsage.Input,null);
-        assertNotNull(rl);
-        assertEquals(rl.getUsage(),EnumUsage.Input);  
+		JDFResourceLink rl = rlp.linkResource(r, EnumUsage.Input,
+				EnumProcessUsage.BookBlock);
+		assertNotNull(rl);
+		assertEquals(rl, rlp.getLink(r, null, null));
 
-      }   
-    /**
-     * Method testLinkResource.
-     * @throws Exception
-     */
-    public void testLinkResourcePartition() throws Exception
-    {
-        JDFDoc d=new JDFDoc("JDF");
-        JDFNode n=d.getJDFRoot();
-        JDFResource r=n.addResource("Component", null, null, null, null, null, null);
-        assertTrue(r instanceof JDFComponent);
-        r=r.addPartition(EnumPartIDKey.SignatureName, "Sig1");
-        r.addPartition(EnumPartIDKey.SheetName, "S1");
-        assertFalse(n.hasChildElement("ResourceLinkPool",null));
-        JDFResourceLinkPool rlp=n.getCreateResourceLinkPool();
-        
-        JDFResourceLink rl=rlp.linkResource(r,EnumUsage.Input,EnumProcessUsage.BookBlock);
-        assertNotNull(rl);
-        assertEquals(rl.getEnumProcessUsage(),EnumProcessUsage.BookBlock);
-        assertEquals(rl.getUsage(),EnumUsage.Input);
-        VJDFAttributeMap v=new VJDFAttributeMap();
-        v.add(new JDFAttributeMap(EnumPartIDKey.SignatureName, "Sig1"));
-        assertEquals(rl.getPartMapVector(), v);
-  
-        
-      }   
-    
-    ////////////////////////////////////////////////////////////////////
-    
-    /**
+		JDFResource r2 = n.addResource("foo:bar", EnumResourceClass.Parameter,
+				null, null, null, "www.foo.com", null);
+		rl = rlp.linkResource(r2, EnumUsage.Input, null);
+		assertEquals(rl, rlp.getLink(r2, null, null));
+
+	}
+
+	/**
+	 * Method testLinkResource.
+	 * 
+	 * @throws Exception
+	 */
+	public void testLinkResource() throws Exception
+	{
+		JDFDoc d = new JDFDoc("JDF");
+		JDFNode n = d.getJDFRoot();
+		JDFResource r = n.addResource("Component", null, null, null, null,
+				null, null);
+		assertTrue(r instanceof JDFComponent);
+		assertFalse(n.hasChildElement("ResourceLinkPool", null));
+		JDFResourceLinkPool rlp = n.getCreateResourceLinkPool();
+
+		JDFResourceLink rl = rlp.linkResource(r, EnumUsage.Input,
+				EnumProcessUsage.BookBlock);
+		assertNotNull(rl);
+		assertEquals(rl.getEnumProcessUsage(), EnumProcessUsage.BookBlock);
+		assertEquals(rl.getUsage(), EnumUsage.Input);
+		rl = rlp.linkResource(r, EnumUsage.Input, EnumProcessUsage.BookBlock);
+		assertNotNull("no two", rl);
+
+		rl = rlp.linkResource(r, EnumUsage.Input, EnumProcessUsage.Cover);
+		assertNotNull(rl);
+		assertEquals(rl.getEnumProcessUsage(), EnumProcessUsage.Cover);
+		assertEquals(rl.getUsage(), EnumUsage.Input);
+
+		rl = rlp.linkResource(r, EnumUsage.Output, EnumProcessUsage.Cover);
+		assertNotNull(rl);
+		assertEquals(rl.getEnumProcessUsage(), EnumProcessUsage.Cover);
+		assertEquals(rl.getUsage(), EnumUsage.Output);
+
+		JDFResource r2 = n.addResource("foo:bar", EnumResourceClass.Parameter,
+				null, null, null, "www.foo.com", null);
+		rl = rlp.linkResource(r2, EnumUsage.Input, null);
+		assertNotNull(rl);
+		assertEquals(rl.getUsage(), EnumUsage.Input);
+
+	}
+
+	/**
+	 * Method testLinkResource.
+	 * 
+	 * @throws Exception
+	 */
+	public void testLinkResourcePartition() throws Exception
+	{
+		JDFDoc d = new JDFDoc("JDF");
+		JDFNode n = d.getJDFRoot();
+		JDFResource r = n.addResource("Component", null, null, null, null,
+				null, null);
+		assertTrue(r instanceof JDFComponent);
+		r = r.addPartition(EnumPartIDKey.SignatureName, "Sig1");
+		r.addPartition(EnumPartIDKey.SheetName, "S1");
+		assertFalse(n.hasChildElement("ResourceLinkPool", null));
+		JDFResourceLinkPool rlp = n.getCreateResourceLinkPool();
+
+		JDFResourceLink rl = rlp.linkResource(r, EnumUsage.Input,
+				EnumProcessUsage.BookBlock);
+		assertNotNull(rl);
+		assertEquals(rl.getEnumProcessUsage(), EnumProcessUsage.BookBlock);
+		assertEquals(rl.getUsage(), EnumUsage.Input);
+		VJDFAttributeMap v = new VJDFAttributeMap();
+		v.add(new JDFAttributeMap(EnumPartIDKey.SignatureName, "Sig1"));
+		assertEquals(rl.getPartMapVector(), v);
+
+	}
+
+	// //////////////////////////////////////////////////////////////////
+
+	/**
      * 
      */
-    public void testGetLinkedResources()
-    {
-        JDFDoc d=new JDFDoc("JDF");
-        JDFNode n=d.getJDFRoot();
-        JDFResource r=n.addResource("Component", null, EnumUsage.Input, null, null, null, null);
-        JDFResourceLinkPool rlp=n.getResourceLinkPool();
-        assertNotNull(rlp);
-        assertEquals(rlp.getLinkedResources(null,null,null,false).elementAt(0),r);
-        assertEquals(rlp.getLinkedResources("Component",null,null,false).elementAt(0),r);
-        assertEquals(rlp.getLinkedResources("ComponentLink",null,null,false).elementAt(0),r);
-    }
-    ////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////
-    
+	public void testGetLinkedResources()
+	{
+		JDFDoc d = new JDFDoc("JDF");
+		JDFNode n = d.getJDFRoot();
+		JDFResource r = n.addResource("Component", null, EnumUsage.Input, null,
+				null, null, null);
+		JDFResourceLinkPool rlp = n.getResourceLinkPool();
+		assertNotNull(rlp);
+		assertEquals(rlp.getLinkedResources(null, null, null, false).elementAt(
+				0), r);
+		assertEquals(rlp.getLinkedResources("Component", null, null, false)
+				.elementAt(0), r);
+		assertEquals(rlp.getLinkedResources("ComponentLink", null, null, false)
+				.elementAt(0), r);
+	}
+	// //////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////
+
 }

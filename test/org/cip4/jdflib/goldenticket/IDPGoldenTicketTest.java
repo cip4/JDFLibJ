@@ -73,40 +73,44 @@ package org.cip4.jdflib.goldenticket;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.node.JDFNode;
 
-
 public class IDPGoldenTicketTest extends BaseGoldenTicketTest
 {
 
-    /////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////
+	// /
 
-    public void testIDPSimple()
-    {
+	public void testIDPSimple()
+	{
 
-        IDPGoldenTicket idpGoldenTicket=new IDPGoldenTicket(1);
+		IDPGoldenTicket idpGoldenTicket = new IDPGoldenTicket(1);
 
-        idpGoldenTicket.assign(null);
-        JDFNode node = idpGoldenTicket.getNode();
-        assertTrue(node.getICSVersions(false).contains("Base_L2-1.3"));
-        assertTrue(node.getICSVersions(false).contains("JMF_L2-1.3"));
-        assertTrue(node.getICSVersions(false).contains("MIS_L1-1.3"));
-        assertTrue(node.getICSVersions(false).contains("IDP_L1-1.3"));
+		idpGoldenTicket.assign(null);
+		JDFNode node = idpGoldenTicket.getNode();
+		assertTrue(node.getICSVersions(false).contains("Base_L2-1.3"));
+		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.3"));
+		assertTrue(node.getICSVersions(false).contains("MIS_L1-1.3"));
+		assertTrue(node.getICSVersions(false).contains("IDP_L1-1.3"));
 
-        idpGoldenTicket.good=1000;
-        idpGoldenTicket.waste=90;
-        write3GTFiles(idpGoldenTicket, "IDP_Simple");
+		idpGoldenTicket.good = 1000;
+		idpGoldenTicket.waste = 90;
+		write3GTFiles(idpGoldenTicket, "IDP_Simple");
 
-    }
+	}
 
-    /////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////
+	// /
 
-    /////////////////////////////////////////////////////////////////////////////
-    /* (non-Javadoc)
-     * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
-     */
-    protected void setUp() throws Exception
-    {
-        super.setUp();
-        JDFAudit.setStaticAgentName("JDF IDP golden ticket generator");
-    }
+	////////////////////////////////////////////////////////////////////////////
+	// /
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	protected void setUp() throws Exception
+	{
+		super.setUp();
+		JDFAudit.setStaticAgentName("JDF IDP golden ticket generator");
+	}
 
 }

@@ -38,7 +38,7 @@
  *
  * Usage of this software in commercial products is subject to restrictions. For
  * details please consult info@cip4.org.
-  *
+ *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -89,116 +89,126 @@ import org.cip4.jdflib.util.StringUtil;
 
 public class FixVersionTest extends TestCase
 {
-    private JDFDoc mDoc;
-    private JDFNode n;
-    
-    
-    /* (non-Javadoc)
-     * @see junit.framework.TestCase#setUp()
-     */
-    protected void setUp() throws Exception
-    {
-        super.setUp();
-        mDoc=new JDFDoc("JDF");
-        n=mDoc.getJDFRoot();
-        
-    }
+	private JDFDoc mDoc;
+	private JDFNode n;
 
-    ///////////////////////////////////////////////////////////////////////
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see junit.framework.TestCase#setUp()
+	 */
+	protected void setUp() throws Exception
+	{
+		super.setUp();
+		mDoc = new JDFDoc("JDF");
+		n = mDoc.getJDFRoot();
 
-    public void testApprovalSuccess()
-    {
-        n.setType("Approval",true);
-        JDFApprovalSuccess as=(JDFApprovalSuccess) n.appendMatchingResource(ElementName.APPROVALSUCCESS,EnumProcessUsage.AnyOutput,null);
-        n.setVersion(EnumVersion.Version_1_2);
-        as.appendContact();
-        as.appendFileSpec();
-        boolean bRet=n.fixVersion(EnumVersion.Version_1_3);
-        assertTrue("fix ok",bRet);
-        assertNotNull("approvaldetails",as.getApprovalDetails(0));
-        bRet=n.fixVersion(EnumVersion.Version_1_2);
-        assertTrue("fix ok",bRet);
-        assertNull("approvaldetails",as.getApprovalDetails(0));
-        bRet=n.fixVersion(EnumVersion.Version_1_3);
-        assertTrue("fix ok",bRet);
-        as=(JDFApprovalSuccess)n.getMatchingResource(ElementName.APPROVALSUCCESS,EnumProcessUsage.AnyOutput,null,0);
-        JDFApprovalDetails ad=as.getApprovalDetails(0);
-        ad.setApprovalState(EnumApprovalState.Rejected);
-        bRet=n.fixVersion(EnumVersion.Version_1_2);
-        assertFalse("fix not ok",bRet);
-     }
- 
-    ////////////////////////////////////////////////////////////////////////
-    
-    public void testRRefs()
-    {
-        JDFResourcePool rp=n.appendResourcePool();
-        rp.setAttribute(AttributeName.RREFS,"a b",null);
-        n.fixVersion(null);
-        assertFalse(rp.hasAttribute(AttributeName.RREFS));
-        
-    }
-    ////////////////////////////////////////////////////////////////////////
-    
-    public void testAudit()
-    {
-        JDFAuditPool ap=n.getAuditPool();
-        assertNotNull(ap);
-        JDFCreated crea=(JDFCreated) ap.getAudit(0, EnumAuditType.Created, null,null);
-        String agent=crea.getAgentName();
-        assertNotNull(agent);
-        String author=crea.getAuthor();
-        assertNotNull(author);
-        
-        n.fixVersion(EnumVersion.Version_1_1);
-        author=crea.getAuthor();
-        assertEquals(StringUtil.token(author,1,"_|_"),agent);
-        assertTrue(author.startsWith(agent));
-        String agent2=crea.getAgentName();
-        assertEquals(agent2,"");
-        
-        n.fixVersion(EnumVersion.Version_1_3);
-        author=crea.getAuthor();
-        assertEquals(author.indexOf("_|_"),-1);
-        agent2=crea.getAgentName();
-        assertEquals(agent,agent2);
-        
-        n.fixVersion(EnumVersion.Version_1_2);
-        author=crea.getAuthor();
-        assertEquals(author.indexOf("_|_"),-1);
-        agent2=crea.getAgentName();
-        assertEquals(agent,agent2);
-        
-    }
-    ////////////////////////////////////////////////////////////////////////
-   ////////////////////////////////////////////////////////////////////////
-    
-    public void testResourceStatus()
-    {
-        JDFMedia m=(JDFMedia)n.addResource("Media", null, EnumUsage.Input, null, null, null, null);
-        m.setResStatus(EnumResStatus.Available,true);
-        assertEquals(m.getResStatus(true),EnumResStatus.Available);
-        assertTrue(m.fixVersion(EnumVersion.Version_1_1));
-        assertEquals(m.getResStatus(true),EnumResStatus.Available);
-        assertTrue(m.fixVersion(EnumVersion.Version_1_3));
-        assertEquals(m.getResStatus(true),EnumResStatus.Available);
-    }
-    ////////////////////////////////////////////////////////////////////////
-    public void testTool()
-    {
-        JDFTool t=(JDFTool)n.addResource("Tool", null, EnumUsage.Input, null, null, null, null);
-        t.setResStatus(EnumResStatus.Available,true);
-        t.setProductID("toolID");
-        assertTrue(t.fixVersion(EnumVersion.Version_1_1));
-        assertEquals(t.getToolID(),"toolID");
-        assertEquals(t.getProductID(),"toolID");
-        assertTrue(t.fixVersion(EnumVersion.Version_1_3));
-        assertEquals(t.getToolID(),"");
-        assertEquals(t.getProductID(),"toolID");
-    }
-    ////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////
-       
+	}
+
+	// /////////////////////////////////////////////////////////////////////
+
+	public void testApprovalSuccess()
+	{
+		n.setType("Approval", true);
+		JDFApprovalSuccess as = (JDFApprovalSuccess) n.appendMatchingResource(
+				ElementName.APPROVALSUCCESS, EnumProcessUsage.AnyOutput, null);
+		n.setVersion(EnumVersion.Version_1_2);
+		as.appendContact();
+		as.appendFileSpec();
+		boolean bRet = n.fixVersion(EnumVersion.Version_1_3);
+		assertTrue("fix ok", bRet);
+		assertNotNull("approvaldetails", as.getApprovalDetails(0));
+		bRet = n.fixVersion(EnumVersion.Version_1_2);
+		assertTrue("fix ok", bRet);
+		assertNull("approvaldetails", as.getApprovalDetails(0));
+		bRet = n.fixVersion(EnumVersion.Version_1_3);
+		assertTrue("fix ok", bRet);
+		as = (JDFApprovalSuccess) n.getMatchingResource(
+				ElementName.APPROVALSUCCESS, EnumProcessUsage.AnyOutput, null,
+				0);
+		JDFApprovalDetails ad = as.getApprovalDetails(0);
+		ad.setApprovalState(EnumApprovalState.Rejected);
+		bRet = n.fixVersion(EnumVersion.Version_1_2);
+		assertFalse("fix not ok", bRet);
+	}
+
+	// //////////////////////////////////////////////////////////////////////
+
+	public void testRRefs()
+	{
+		JDFResourcePool rp = n.appendResourcePool();
+		rp.setAttribute(AttributeName.RREFS, "a b", null);
+		n.fixVersion(null);
+		assertFalse(rp.hasAttribute(AttributeName.RREFS));
+
+	}
+
+	// //////////////////////////////////////////////////////////////////////
+
+	public void testAudit()
+	{
+		JDFAuditPool ap = n.getAuditPool();
+		assertNotNull(ap);
+		JDFCreated crea = (JDFCreated) ap.getAudit(0, EnumAuditType.Created,
+				null, null);
+		String agent = crea.getAgentName();
+		assertNotNull(agent);
+		String author = crea.getAuthor();
+		assertNotNull(author);
+
+		n.fixVersion(EnumVersion.Version_1_1);
+		author = crea.getAuthor();
+		assertEquals(StringUtil.token(author, 1, "_|_"), agent);
+		assertTrue(author.startsWith(agent));
+		String agent2 = crea.getAgentName();
+		assertEquals(agent2, "");
+
+		n.fixVersion(EnumVersion.Version_1_3);
+		author = crea.getAuthor();
+		assertEquals(author.indexOf("_|_"), -1);
+		agent2 = crea.getAgentName();
+		assertEquals(agent, agent2);
+
+		n.fixVersion(EnumVersion.Version_1_2);
+		author = crea.getAuthor();
+		assertEquals(author.indexOf("_|_"), -1);
+		agent2 = crea.getAgentName();
+		assertEquals(agent, agent2);
+
+	}
+
+	// //////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////
+
+	public void testResourceStatus()
+	{
+		JDFMedia m = (JDFMedia) n.addResource("Media", null, EnumUsage.Input,
+				null, null, null, null);
+		m.setResStatus(EnumResStatus.Available, true);
+		assertEquals(m.getResStatus(true), EnumResStatus.Available);
+		assertTrue(m.fixVersion(EnumVersion.Version_1_1));
+		assertEquals(m.getResStatus(true), EnumResStatus.Available);
+		assertTrue(m.fixVersion(EnumVersion.Version_1_3));
+		assertEquals(m.getResStatus(true), EnumResStatus.Available);
+	}
+
+	// //////////////////////////////////////////////////////////////////////
+	public void testTool()
+	{
+		JDFTool t = (JDFTool) n.addResource("Tool", null, EnumUsage.Input,
+				null, null, null, null);
+		t.setResStatus(EnumResStatus.Available, true);
+		t.setProductID("toolID");
+		assertTrue(t.fixVersion(EnumVersion.Version_1_1));
+		assertEquals(t.getToolID(), "toolID");
+		assertEquals(t.getProductID(), "toolID");
+		assertTrue(t.fixVersion(EnumVersion.Version_1_3));
+		assertEquals(t.getToolID(), "");
+		assertEquals(t.getProductID(), "toolID");
+	}
+	// //////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////
+
 }

@@ -85,193 +85,216 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 
-
 public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 {
-    /////////////////////////////////////////////////////////////////////////////
-    
-    public void testMISCPGrayBoxFrontBack()
-    {
-        VJDFAttributeMap vMap=new VJDFAttributeMap();
-        JDFAttributeMap map=new JDFAttributeMap();
-        map.put(EnumPartIDKey.SignatureName,"Sig1");
-        map.put(EnumPartIDKey.SheetName,"Sheet1");
-        map.put(EnumPartIDKey.Side,"Front");
-        vMap.add(new JDFAttributeMap(map));
-        map.put(EnumPartIDKey.Side,"Back");
-        vMap.add(new JDFAttributeMap(map));
-        MISCPGoldenTicket cpGoldenTicket=new MISCPGoldenTicket(1,null,2,2,true,vMap);
-        cpGoldenTicket.nCols[0]=cpGoldenTicket.nCols[1]=4;
-        
-        cpGoldenTicket.assign(null);
-        JDFNode node = cpGoldenTicket.getNode();
-        cpGoldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_Manager_MISCPS_1_GB.jdf", 2);
-        assertTrue(node.getICSVersions(false).contains("Base_L2-1.3"));
-        assertTrue(node.getICSVersions(false).contains("JMF_L2-1.3"));
-        assertTrue(node.getICSVersions(false).contains("MIS_L2-1.3"));
-        assertTrue(node.getICSVersions(false).contains("MISCPS_L1-1.3"));
-        assertTrue(node.isValid(EnumValidationLevel.Complete));
-        
-        cpGoldenTicket.good=1000;
-        cpGoldenTicket.waste=90;
-        cpGoldenTicket.execute(null,true,true);
-        cpGoldenTicket.makeReadyAll();
-        node = cpGoldenTicket.getNode();
-        cpGoldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_Worker_MISCPS_1_GB.jdf", 2);
-        assertTrue(node.getICSVersions(false).contains("Base_L2-1.3"));
-        assertTrue(node.getICSVersions(false).contains("JMF_L2-1.3"));
-        assertTrue(node.getICSVersions(false).contains("MIS_L2-1.3"));
-        assertTrue(node.getICSVersions(false).contains("MISCPS_L1-1.3"));
-        assertTrue(node.isValid(EnumValidationLevel.Complete));
-        
-        cpGoldenTicket.assign(null);
-        VJDFAttributeMap mapSingle=new VJDFAttributeMap();
-        map.put(EnumPartIDKey.Side,"Front");
-        mapSingle.add(map);
-        cpGoldenTicket.schedule(mapSingle, 6,2);
-        map.put(EnumPartIDKey.Side,"Back");
-        cpGoldenTicket.schedule(mapSingle, 8,2);
-        
-        cpGoldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_Manager_MISCPS_1_GB_FrontBack.jdf", 2);
-        map.put(EnumPartIDKey.Side,"Front");
-        cpGoldenTicket.execute(mapSingle,false,true);
-        cpGoldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_Worker_MISCPS_1_GB_FrontBack_xB.jdf", 2);
-        map.put(EnumPartIDKey.Side,"Back");
-        cpGoldenTicket.good=900;
-        cpGoldenTicket.waste=30;
-        cpGoldenTicket.execute(mapSingle,true,false);
-        cpGoldenTicket.write2File(sm_dirTestDataTemp+"GoldenTicket_Worker_MISCPS_1_GB_FrontBack_xBF.jdf", 2);
-    }
-    
-    /////////////////////////////////////////////////////////////////////////////
-    
-    public void testMISCPGrayBoxSimplexPoster()
-    {
-        VJDFAttributeMap vMap=new VJDFAttributeMap();
-        JDFAttributeMap map=new JDFAttributeMap();
-        map.put(EnumPartIDKey.SignatureName,"Sig1");
-        map.put(EnumPartIDKey.SheetName,"Sheet1");
-        map.put(EnumPartIDKey.Side,"Front");
-        vMap.add(new JDFAttributeMap(map));
+	////////////////////////////////////////////////////////////////////////////
+	// /
 
-        MISCPGoldenTicket cpGoldenTicket=new MISCPGoldenTicket(1,null,2,2,true,vMap);
-        cpGoldenTicket.nCols[0]=cpGoldenTicket.nCols[1]=6;
-        cpGoldenTicket.workStyle=EnumWorkStyle.Simplex;
-        cpGoldenTicket.assign(null);
-        cpGoldenTicket.good=1000;
-        cpGoldenTicket.waste=90;
-       
-        BaseGoldenTicketTest.write3GTFiles(cpGoldenTicket, "MISCPS_SimplexPoster");
-    }
-    /////////////////////////////////////////////////////////////////////////////
-    
-    public void testMISCPGrayBox41Poster()
-    {
-        VJDFAttributeMap vMap=new VJDFAttributeMap();
-        JDFAttributeMap map=new JDFAttributeMap();
-        map.put(EnumPartIDKey.SignatureName,"Sig1");
-        map.put(EnumPartIDKey.SheetName,"Sheet1");
-        map.put(EnumPartIDKey.Side,"Front");
-        vMap.add(new JDFAttributeMap(map));
-        map.put(EnumPartIDKey.Side,"Back");
-        vMap.add(new JDFAttributeMap(map));
+	public void testMISCPGrayBoxFrontBack()
+	{
+		VJDFAttributeMap vMap = new VJDFAttributeMap();
+		JDFAttributeMap map = new JDFAttributeMap();
+		map.put(EnumPartIDKey.SignatureName, "Sig1");
+		map.put(EnumPartIDKey.SheetName, "Sheet1");
+		map.put(EnumPartIDKey.Side, "Front");
+		vMap.add(new JDFAttributeMap(map));
+		map.put(EnumPartIDKey.Side, "Back");
+		vMap.add(new JDFAttributeMap(map));
+		MISCPGoldenTicket cpGoldenTicket = new MISCPGoldenTicket(1, null, 2, 2,
+				true, vMap);
+		cpGoldenTicket.nCols[0] = cpGoldenTicket.nCols[1] = 4;
 
-        MISCPGoldenTicket cpGoldenTicket=new MISCPGoldenTicket(1,null,2,2,true,vMap);
-        cpGoldenTicket.nCols[0]=4;
-        cpGoldenTicket.nCols[1]=1;
-        cpGoldenTicket.workStyle=EnumWorkStyle.WorkAndTurn;
-        cpGoldenTicket.assign(null);
-        cpGoldenTicket.good=1000;
-        cpGoldenTicket.waste=90;
-        cpGoldenTicket.partsAtOnce=1;
-        cpGoldenTicket.partsForAvailable=2;
+		cpGoldenTicket.assign(null);
+		JDFNode node = cpGoldenTicket.getNode();
+		cpGoldenTicket.write2File(sm_dirTestDataTemp
+				+ "GoldenTicket_Manager_MISCPS_1_GB.jdf", 2);
+		assertTrue(node.getICSVersions(false).contains("Base_L2-1.3"));
+		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.3"));
+		assertTrue(node.getICSVersions(false).contains("MIS_L2-1.3"));
+		assertTrue(node.getICSVersions(false).contains("MISCPS_L1-1.3"));
+		assertTrue(node.isValid(EnumValidationLevel.Complete));
 
-        JDFNode n=cpGoldenTicket.getNode();
-        JDFDevice dev=(JDFDevice) n.getResource("Device",EnumUsage.Input,0);
-        dev.removeAttribute(AttributeName.DEVICEID);
-        dev.getCreatePartition(map, null).setAttribute("DeviceID", "BackSidePress");
-        map.put(EnumPartIDKey.Side,"Front");
-        dev.getCreatePartition(map, null).setAttribute("DeviceID", "FrontSidePress");
-       
-        
-        write3GTFiles(cpGoldenTicket, "MISCPS_4_1Poster");
-    }
-    /////////////////////////////////////////////////////////////////////////////
-    
-    public void testMISCPProductGrayBoxBrochure() throws Exception
-    {
-        
-        VJDFAttributeMap vMap=new VJDFAttributeMap();
-        for(int i=0;i<5;i++)
-        {
-            String sheetName=i==0?"Cover":"Body"+i;
-            JDFAttributeMap map=new JDFAttributeMap();
-            map.put(EnumPartIDKey.SignatureName,"Sig1");
-            map.put(EnumPartIDKey.SheetName,sheetName);
-            map.put(EnumPartIDKey.Side,"Front");
-            vMap.add(new JDFAttributeMap(map));
-            map.put(EnumPartIDKey.Side,"Back");
-            vMap.add(new JDFAttributeMap(map));
-        }
+		cpGoldenTicket.good = 1000;
+		cpGoldenTicket.waste = 90;
+		cpGoldenTicket.execute(null, true, true);
+		cpGoldenTicket.makeReadyAll();
+		node = cpGoldenTicket.getNode();
+		cpGoldenTicket.write2File(sm_dirTestDataTemp
+				+ "GoldenTicket_Worker_MISCPS_1_GB.jdf", 2);
+		assertTrue(node.getICSVersions(false).contains("Base_L2-1.3"));
+		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.3"));
+		assertTrue(node.getICSVersions(false).contains("MIS_L2-1.3"));
+		assertTrue(node.getICSVersions(false).contains("MISCPS_L1-1.3"));
+		assertTrue(node.isValid(EnumValidationLevel.Complete));
 
-        MISCPGoldenTicket cpGoldenTicket=new MISCPGoldenTicket(1,null,2,2,true,vMap);
-        cpGoldenTicket.nCols[0]=cpGoldenTicket.nCols[1]=6;
-        cpGoldenTicket.workStyle=EnumWorkStyle.WorkAndTurn;
-     
-        ProductGoldenTicket pgt=new ProductGoldenTicket(0,EnumVersion.Version_1_3,0,0);
-        pgt.assign(null);
-        pgt.createHDCity();
-        JDFNode node = pgt.getNode();
-        JDFNode nodeCP=node.addJDFNode(EnumType.ProcessGroup);
+		cpGoldenTicket.assign(null);
+		VJDFAttributeMap mapSingle = new VJDFAttributeMap();
+		map.put(EnumPartIDKey.Side, "Front");
+		mapSingle.add(map);
+		cpGoldenTicket.schedule(mapSingle, 6, 2);
+		map.put(EnumPartIDKey.Side, "Back");
+		cpGoldenTicket.schedule(mapSingle, 8, 2);
 
-        cpGoldenTicket.assign(nodeCP);
-        cpGoldenTicket.good=1000;
-        cpGoldenTicket.waste=90;
-  
-        cpGoldenTicket.partsAtOnce=2;
-        BaseGoldenTicketTest.write3GTFiles(cpGoldenTicket, "MISCPS_ProductGrayBox");
-    }
+		cpGoldenTicket.write2File(sm_dirTestDataTemp
+				+ "GoldenTicket_Manager_MISCPS_1_GB_FrontBack.jdf", 2);
+		map.put(EnumPartIDKey.Side, "Front");
+		cpGoldenTicket.execute(mapSingle, false, true);
+		cpGoldenTicket.write2File(sm_dirTestDataTemp
+				+ "GoldenTicket_Worker_MISCPS_1_GB_FrontBack_xB.jdf", 2);
+		map.put(EnumPartIDKey.Side, "Back");
+		cpGoldenTicket.good = 900;
+		cpGoldenTicket.waste = 30;
+		cpGoldenTicket.execute(mapSingle, true, false);
+		cpGoldenTicket.write2File(sm_dirTestDataTemp
+				+ "GoldenTicket_Worker_MISCPS_1_GB_FrontBack_xBF.jdf", 2);
+	}
 
+	////////////////////////////////////////////////////////////////////////////
+	// /
 
-    /**
-     * test identical inks using black + text 
-     */
-    public void testIdenticalInk()
-    {
-        VString v=new VString("Cyan,Magenta,Yellow,Black,Text",",");
-        VString vAct=new VString("Cyan,Magenta,Yellow,Black,Text",",");
-        VString vInk=new VString("Cyan,Magenta,Yellow,Black,Black",",");
-        VString vInkProd=new VString("MIS-Ink-4711,MIS-Ink-4712,MIS-Ink-4713,MIS-Ink-4714,MIS-Ink-4714",",");
-        VJDFAttributeMap vMap=new VJDFAttributeMap();
-        JDFAttributeMap map=new JDFAttributeMap();
-        map.put(EnumPartIDKey.SignatureName,"Sig1");
-        map.put(EnumPartIDKey.SheetName,"Sheet1");
-        map.put(EnumPartIDKey.Side,"Front");
-        vMap.add(new JDFAttributeMap(map));
+	public void testMISCPGrayBoxSimplexPoster()
+	{
+		VJDFAttributeMap vMap = new VJDFAttributeMap();
+		JDFAttributeMap map = new JDFAttributeMap();
+		map.put(EnumPartIDKey.SignatureName, "Sig1");
+		map.put(EnumPartIDKey.SheetName, "Sheet1");
+		map.put(EnumPartIDKey.Side, "Front");
+		vMap.add(new JDFAttributeMap(map));
 
-        JDFNode n=new JDFDoc("JDF").getJDFRoot();
-        MISCPGoldenTicket cpGoldenTicket=new MISCPGoldenTicket(1,null,2,1,true,vMap);
-        cpGoldenTicket.cols=v;
-        cpGoldenTicket.colsActual=vAct;
-        cpGoldenTicket.inks=vInk;
-        cpGoldenTicket.inkProductIDs=vInkProd;
-        
-        //n.setType(JDFNode.EnumType.ConventionalPrinting);
-        
-        cpGoldenTicket.assign(n);
-        cpGoldenTicket.good=3000;
-        cpGoldenTicket.waste=200;
-        write3GTFiles(cpGoldenTicket, "sameInk");
-     }
+		MISCPGoldenTicket cpGoldenTicket = new MISCPGoldenTicket(1, null, 2, 2,
+				true, vMap);
+		cpGoldenTicket.nCols[0] = cpGoldenTicket.nCols[1] = 6;
+		cpGoldenTicket.workStyle = EnumWorkStyle.Simplex;
+		cpGoldenTicket.assign(null);
+		cpGoldenTicket.good = 1000;
+		cpGoldenTicket.waste = 90;
 
-    /////////////////////////////////////////////////////////////////////////////
-    /* (non-Javadoc)
-     * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
-     */
-    protected void setUp() throws Exception
-    {
-        super.setUp();
-        JDFAudit.setStaticAgentName("JDF MISCP golden ticket generator");
-    }
+		BaseGoldenTicketTest.write3GTFiles(cpGoldenTicket,
+				"MISCPS_SimplexPoster");
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	// /
+
+	public void testMISCPGrayBox41Poster()
+	{
+		VJDFAttributeMap vMap = new VJDFAttributeMap();
+		JDFAttributeMap map = new JDFAttributeMap();
+		map.put(EnumPartIDKey.SignatureName, "Sig1");
+		map.put(EnumPartIDKey.SheetName, "Sheet1");
+		map.put(EnumPartIDKey.Side, "Front");
+		vMap.add(new JDFAttributeMap(map));
+		map.put(EnumPartIDKey.Side, "Back");
+		vMap.add(new JDFAttributeMap(map));
+
+		MISCPGoldenTicket cpGoldenTicket = new MISCPGoldenTicket(1, null, 2, 2,
+				true, vMap);
+		cpGoldenTicket.nCols[0] = 4;
+		cpGoldenTicket.nCols[1] = 1;
+		cpGoldenTicket.workStyle = EnumWorkStyle.WorkAndTurn;
+		cpGoldenTicket.assign(null);
+		cpGoldenTicket.good = 1000;
+		cpGoldenTicket.waste = 90;
+		cpGoldenTicket.partsAtOnce = 1;
+		cpGoldenTicket.partsForAvailable = 2;
+
+		JDFNode n = cpGoldenTicket.getNode();
+		JDFDevice dev = (JDFDevice) n.getResource("Device", EnumUsage.Input, 0);
+		dev.removeAttribute(AttributeName.DEVICEID);
+		dev.getCreatePartition(map, null).setAttribute("DeviceID",
+				"BackSidePress");
+		map.put(EnumPartIDKey.Side, "Front");
+		dev.getCreatePartition(map, null).setAttribute("DeviceID",
+				"FrontSidePress");
+
+		write3GTFiles(cpGoldenTicket, "MISCPS_4_1Poster");
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	// /
+
+	public void testMISCPProductGrayBoxBrochure() throws Exception
+	{
+
+		VJDFAttributeMap vMap = new VJDFAttributeMap();
+		for (int i = 0; i < 5; i++)
+		{
+			String sheetName = i == 0 ? "Cover" : "Body" + i;
+			JDFAttributeMap map = new JDFAttributeMap();
+			map.put(EnumPartIDKey.SignatureName, "Sig1");
+			map.put(EnumPartIDKey.SheetName, sheetName);
+			map.put(EnumPartIDKey.Side, "Front");
+			vMap.add(new JDFAttributeMap(map));
+			map.put(EnumPartIDKey.Side, "Back");
+			vMap.add(new JDFAttributeMap(map));
+		}
+
+		MISCPGoldenTicket cpGoldenTicket = new MISCPGoldenTicket(1, null, 2, 2,
+				true, vMap);
+		cpGoldenTicket.nCols[0] = cpGoldenTicket.nCols[1] = 6;
+		cpGoldenTicket.workStyle = EnumWorkStyle.WorkAndTurn;
+
+		ProductGoldenTicket pgt = new ProductGoldenTicket(0,
+				EnumVersion.Version_1_3, 0, 0);
+		pgt.assign(null);
+		pgt.createHDCity();
+		JDFNode node = pgt.getNode();
+		JDFNode nodeCP = node.addJDFNode(EnumType.ProcessGroup);
+
+		cpGoldenTicket.assign(nodeCP);
+		cpGoldenTicket.good = 1000;
+		cpGoldenTicket.waste = 90;
+
+		cpGoldenTicket.partsAtOnce = 2;
+		BaseGoldenTicketTest.write3GTFiles(cpGoldenTicket,
+				"MISCPS_ProductGrayBox");
+	}
+
+	/**
+	 * test identical inks using black + text
+	 */
+	public void testIdenticalInk()
+	{
+		VString v = new VString("Cyan,Magenta,Yellow,Black,Text", ",");
+		VString vAct = new VString("Cyan,Magenta,Yellow,Black,Text", ",");
+		VString vInk = new VString("Cyan,Magenta,Yellow,Black,Black", ",");
+		VString vInkProd = new VString(
+				"MIS-Ink-4711,MIS-Ink-4712,MIS-Ink-4713,MIS-Ink-4714,MIS-Ink-4714",
+				",");
+		VJDFAttributeMap vMap = new VJDFAttributeMap();
+		JDFAttributeMap map = new JDFAttributeMap();
+		map.put(EnumPartIDKey.SignatureName, "Sig1");
+		map.put(EnumPartIDKey.SheetName, "Sheet1");
+		map.put(EnumPartIDKey.Side, "Front");
+		vMap.add(new JDFAttributeMap(map));
+
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		MISCPGoldenTicket cpGoldenTicket = new MISCPGoldenTicket(1, null, 2, 1,
+				true, vMap);
+		cpGoldenTicket.cols = v;
+		cpGoldenTicket.colsActual = vAct;
+		cpGoldenTicket.inks = vInk;
+		cpGoldenTicket.inkProductIDs = vInkProd;
+
+		// n.setType(JDFNode.EnumType.ConventionalPrinting);
+
+		cpGoldenTicket.assign(n);
+		cpGoldenTicket.good = 3000;
+		cpGoldenTicket.waste = 200;
+		write3GTFiles(cpGoldenTicket, "sameInk");
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	// /
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	protected void setUp() throws Exception
+	{
+		super.setUp();
+		JDFAudit.setStaticAgentName("JDF MISCP golden ticket generator");
+	}
 
 }

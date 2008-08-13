@@ -82,93 +82,100 @@ import junit.framework.TestCase;
 
 import org.cip4.jdflib.util.JDFDuration;
 
-
 public class JDFDurationRangeTest extends TestCase
 {
 
-    /*
-     * Constructors JDFDurationRange(JDFDuration) and JDFDurationRange(JDFDuration, JDFDuration)
-     */
-    public final void testJDFDurationRangeJDFDuration() throws Exception
-    {
-        JDFDurationRange r = new JDFDurationRange(new JDFDuration("PT5M"), new JDFDuration("PT15M"));
-        JDFDurationRange  r2 = new JDFDurationRange(new JDFDuration("PT5M"));
+	/*
+	 * Constructors JDFDurationRange(JDFDuration) and
+	 * JDFDurationRange(JDFDuration, JDFDuration)
+	 */
+	public final void testJDFDurationRangeJDFDuration() throws Exception
+	{
+		JDFDurationRange r = new JDFDurationRange(new JDFDuration("PT5M"),
+				new JDFDuration("PT15M"));
+		JDFDurationRange r2 = new JDFDurationRange(new JDFDuration("PT5M"));
 
-        assertTrue("Bad Constructor ", r.toString().equals("PT5M ~ PT15M"));
-        assertTrue("Bad Constructor ", r2.toString().equals("PT5M"));
-    }
+		assertTrue("Bad Constructor ", r.toString().equals("PT5M ~ PT15M"));
+		assertTrue("Bad Constructor ", r2.toString().equals("PT5M"));
+	}
 
-    /*
-     * Class under test for void JDFDurationRange(JDFDurationRange)
-     */
-    public final void testJDFDurationRangeJDFDurationRange() throws Exception
-    {
-        JDFDurationRange r = new JDFDurationRange(new JDFDuration("PT5M"), new JDFDuration("PT25M"));
-        JDFDurationRange r2 = new JDFDurationRange(new JDFDuration("PT15M"));
-        JDFDurationRange r3 = new JDFDurationRange(r2);
-        r3.setRight(new JDFDuration("PT25M"));
-        assertTrue("Bad Constructor"+r.toString(), r.toString().equals("PT5M ~ PT25M"));
-        assertTrue("Bad Constructor"+r2.toString(), r2.toString().equals("PT15M"));
-        assertTrue("Bad CopyConstructor"+r3.toString(), r3.toString().equals("PT15M ~ PT25M"));
-    }
+	/*
+	 * Class under test for void JDFDurationRange(JDFDurationRange)
+	 */
+	public final void testJDFDurationRangeJDFDurationRange() throws Exception
+	{
+		JDFDurationRange r = new JDFDurationRange(new JDFDuration("PT5M"),
+				new JDFDuration("PT25M"));
+		JDFDurationRange r2 = new JDFDurationRange(new JDFDuration("PT15M"));
+		JDFDurationRange r3 = new JDFDurationRange(r2);
+		r3.setRight(new JDFDuration("PT25M"));
+		assertTrue("Bad Constructor" + r.toString(), r.toString().equals(
+				"PT5M ~ PT25M"));
+		assertTrue("Bad Constructor" + r2.toString(), r2.toString().equals(
+				"PT15M"));
+		assertTrue("Bad CopyConstructor" + r3.toString(), r3.toString().equals(
+				"PT15M ~ PT25M"));
+	}
 
+	public final void testJDFDurationRangeString() throws Exception
+	{
+		JDFDurationRange r = new JDFDurationRange(" PT5M ~ PT15M ");
 
-    public final void testJDFDurationRangeString() throws Exception
-    {
-        JDFDurationRange r = new JDFDurationRange(" PT5M ~ PT15M ");
+		assertTrue("Bad Constructor" + r.toString(), r.toString().equals(
+				"PT5M ~ PT15M"));
+	}
 
-        assertTrue("Bad Constructor"+r.toString(), r.toString().equals("PT5M ~ PT15M"));
-    }
+	public final void testInRange() throws Exception
+	{
+		JDFDurationRangeList rangelist = new JDFDurationRangeList(
+				"PT5M ~ PT15M  PT1H5M ~ PT1H15M");
 
-    public final void testInRange() throws Exception
-    {
-        JDFDurationRangeList rangelist = 
-            new JDFDurationRangeList("PT5M ~ PT15M  PT1H5M ~ PT1H15M");
+		assertTrue("InRange: ", rangelist.inRange(new JDFDuration("PT15M")));
+		assertTrue("InRange: ", rangelist.inRange(new JDFDuration("PT1H15M")));
+		assertFalse("NOT InRange: ", rangelist.inRange(new JDFDuration(
+				"PT1H25M")));
+		assertFalse("NOT InRange: ", rangelist
+				.inRange(new JDFDuration("PT55S")));
 
-        assertTrue("InRange: ", rangelist.inRange(new JDFDuration("PT15M")));
-        assertTrue("InRange: ", rangelist.inRange(new JDFDuration("PT1H15M")));
-        assertFalse("NOT InRange: ", rangelist.inRange(new JDFDuration("PT1H25M")));
-        assertFalse("NOT InRange: ", rangelist.inRange(new JDFDuration("PT55S")));
+	}
 
-    }
+	public final void testJDFDuration() throws Exception
+	{
 
-    public final void testJDFDuration() throws Exception
-    {
+		JDFDuration d = new JDFDuration("PT5M");
+		JDFDuration d1 = new JDFDuration("PT50M");
 
-        JDFDuration    d = new JDFDuration("PT5M");
-        JDFDuration    d1 = new JDFDuration("PT50M");
+		try
+		{
+			new JDFDuration("P0T5M");
+			fail("invalid duration String");
 
-        try
-        {
-            new JDFDuration("P0T5M");
-            fail("invalid duration String");
+		} catch (DataFormatException dfe)
+		{
+			//
+		}
 
-        }
-        catch (DataFormatException dfe)
-        {
-            //
-        }
+		try
+		{
+			new JDFDuration("PT5MS");
+			fail("invalid duration String");
 
-        try
-        {
-            new JDFDuration("PT5MS");
-            fail("invalid duration String");
+		} catch (DataFormatException dfe)
+		{
+			//
+		}
+		JDFDuration p1 = new JDFDuration("P1Y2M3DT50M");
+		JDFDuration p11 = new JDFDuration("P01Y02M03DT50M");
+		assertEquals(p1, p11);
+		JDFDuration p2 = new JDFDuration("P01Y02M03D");
+		JDFDuration p3 = new JDFDuration("P1Y2M3DT10H30M");
+		assertTrue("Bad Constructor d", d.getDuration() == 300);
+		assertTrue("Bad Constructor d1", d1.getDuration() == 3000);
+		assertTrue("Bad Constructor p1", p1.getDurationISO().equals(
+				"P1Y2M3DT50M"));
+		assertTrue("Bad Constructor p2", p2.getDurationISO().equals("P1Y2M3D"));
+		assertTrue("Bad Constructor p2", p3.getDurationISO().equals(
+				"P1Y2M3DT10H30M"));
 
-        }
-        catch (DataFormatException dfe)
-        {
-//
-        }
-        JDFDuration p1 = new JDFDuration("P1Y2M3DT50M");
-        JDFDuration  p11 = new JDFDuration("P01Y02M03DT50M");
-        assertEquals(p1, p11);
-        JDFDuration p2 = new JDFDuration("P01Y02M03D");
-        JDFDuration p3 = new JDFDuration("P1Y2M3DT10H30M");
-        assertTrue("Bad Constructor d", d.getDuration()==300);
-        assertTrue("Bad Constructor d1", d1.getDuration()==3000);
-        assertTrue("Bad Constructor p1", p1.getDurationISO().equals("P1Y2M3DT50M"));
-        assertTrue("Bad Constructor p2", p2.getDurationISO().equals("P1Y2M3D"));
-        assertTrue("Bad Constructor p2", p3.getDurationISO().equals("P1Y2M3DT10H30M"));
-
-    }
+	}
 }

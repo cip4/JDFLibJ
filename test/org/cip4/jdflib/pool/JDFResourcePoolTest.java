@@ -83,48 +83,53 @@ import org.cip4.jdflib.resource.process.JDFContact;
 
 /**
  * @author MuchaD
- *
- * This implements the first fixture with unit tests for class JDFElement.
+ * 
+ *         This implements the first fixture with unit tests for class
+ *         JDFElement.
  */
 public class JDFResourcePoolTest extends JDFTestCaseBase
 {
 
-    /**
-     * Method testLinkResource.
-     * @throws Exception
-     */
-    public void testgetUnlinkedResources() throws Exception
-    {
-        JDFDoc d=new JDFDoc("JDF");
-        JDFNode n=d.getJDFRoot();
-        JDFResource r=n.addResource("Component", null, null, null, null, null, null);
-        JDFResourcePool rp=n.getResourcePool();
-        assertTrue(r instanceof JDFComponent);
-        assertFalse(n.hasChildElement("ResourceLinkPool",null));
-        JDFResourceLinkPool rlp=n.getCreateResourceLinkPool();
-        assertEquals(rp.getUnlinkedResources().elementAt(0), r);
+	/**
+	 * Method testLinkResource.
+	 * 
+	 * @throws Exception
+	 */
+	public void testgetUnlinkedResources() throws Exception
+	{
+		JDFDoc d = new JDFDoc("JDF");
+		JDFNode n = d.getJDFRoot();
+		JDFResource r = n.addResource("Component", null, null, null, null,
+				null, null);
+		JDFResourcePool rp = n.getResourcePool();
+		assertTrue(r instanceof JDFComponent);
+		assertFalse(n.hasChildElement("ResourceLinkPool", null));
+		JDFResourceLinkPool rlp = n.getCreateResourceLinkPool();
+		assertEquals(rp.getUnlinkedResources().elementAt(0), r);
 
-        JDFResourceLink rl=rlp.linkResource(r,EnumUsage.Input,EnumProcessUsage.BookBlock);
-        assertNotNull(rl);
-        assertNull(rp.getUnlinkedResources());
-        JDFResource rx=n.addResource("ExposedMedia", null, null, null, null, null, null);
-        assertEquals(rp.getUnlinkedResources().elementAt(0), rx);
-        
-        n.setVersion(EnumVersion.Version_1_2);
-        JDFCustomerInfo ci=n.appendCustomerInfo();
-        JDFContact co=ci.appendContact();
-        co=(JDFContact)co.makeRootResource(null, null, true);
-        assertEquals(rp.getUnlinkedResources().elementAt(0), rx);
-        assertEquals(rp.getUnlinkedResources().size(), 1);
-        
-        ci.deleteNode();
-        assertEquals(rp.getUnlinkedResources().elementAt(1), co);
-        assertEquals(rp.getUnlinkedResources().size(), 2);
-        
-    }   
+		JDFResourceLink rl = rlp.linkResource(r, EnumUsage.Input,
+				EnumProcessUsage.BookBlock);
+		assertNotNull(rl);
+		assertNull(rp.getUnlinkedResources());
+		JDFResource rx = n.addResource("ExposedMedia", null, null, null, null,
+				null, null);
+		assertEquals(rp.getUnlinkedResources().elementAt(0), rx);
 
-    ////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////
+		n.setVersion(EnumVersion.Version_1_2);
+		JDFCustomerInfo ci = n.appendCustomerInfo();
+		JDFContact co = ci.appendContact();
+		co = (JDFContact) co.makeRootResource(null, null, true);
+		assertEquals(rp.getUnlinkedResources().elementAt(0), rx);
+		assertEquals(rp.getUnlinkedResources().size(), 1);
+
+		ci.deleteNode();
+		assertEquals(rp.getUnlinkedResources().elementAt(1), co);
+		assertEquals(rp.getUnlinkedResources().size(), 2);
+
+	}
+
+	// //////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////
 
 }

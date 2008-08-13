@@ -75,38 +75,40 @@ import org.cip4.jdflib.core.JDFDoc;
 
 /**
  * @author prosirai
- *
+ * 
  */
 public class JDFComChannelTest extends JDFTestCaseBase
 {
-    JDFComChannel cc;
-    
-    public void testSetEMailLocator() throws Exception
-    {
-        cc.setEMailLocator(" test@cip4.org");
-        assertEquals(JDFComChannel.MAILTO+"test@cip4.org", cc.getLocator());
-        assertEquals("test@cip4.org", cc.getEMailAddress());
-        cc.setLocator("test@cip4.org");
-        assertEquals("test@cip4.org", cc.getEMailAddress());
-        cc.setLocator("test.2@cip4.org");
-        assertEquals("test.2@cip4.org", cc.getEMailAddress());
-    }
+	JDFComChannel cc;
 
-    public void testSetPhoneNumber() throws Exception
-    {
-        cc.setPhoneNumber(" +49 431 123456 ",".",EnumChannelType.Phone);
-        assertEquals(JDFComChannel.TEL+"+49.431.123456", cc.getLocator());
-        assertEquals("+49431123456", cc.getPhoneNumber(true));
-    }
+	public void testSetEMailLocator() throws Exception
+	{
+		cc.setEMailLocator(" test@cip4.org");
+		assertEquals(JDFComChannel.MAILTO + "test@cip4.org", cc.getLocator());
+		assertEquals("test@cip4.org", cc.getEMailAddress());
+		cc.setLocator("test@cip4.org");
+		assertEquals("test@cip4.org", cc.getEMailAddress());
+		cc.setLocator("test.2@cip4.org");
+		assertEquals("test.2@cip4.org", cc.getEMailAddress());
+	}
 
-    /* (non-Javadoc)
-     * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
-     */
-    protected void setUp() throws Exception
-    {
-        // TODO Auto-generated method stub
-        super.setUp();
-        JDFDoc d=new JDFDoc("ComChannel");
-        cc=(JDFComChannel) d.getRoot();       
-    }
+	public void testSetPhoneNumber() throws Exception
+	{
+		cc.setPhoneNumber(" +49 431 123456 ", ".", EnumChannelType.Phone);
+		assertEquals(JDFComChannel.TEL + "+49.431.123456", cc.getLocator());
+		assertEquals("+49431123456", cc.getPhoneNumber(true));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	protected void setUp() throws Exception
+	{
+		// TODO Auto-generated method stub
+		super.setUp();
+		JDFDoc d = new JDFDoc("ComChannel");
+		cc = (JDFComChannel) d.getRoot();
+	}
 }

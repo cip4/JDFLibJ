@@ -26,31 +26,30 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
  * Test for JDFURL.
  * 
  * @author <a href="mailto:Michael.Kohn@heidelberg.com">Michael Kohn</a>,
- * Heidelberger Druckmaschinen AG, Tel. 3538
- *
+ *         Heidelberger Druckmaschinen AG, Tel. 3538
+ * 
  */
 public class JDFURLTest extends TestCase
 {
-    
-    
-    public final void testAmpersand()
-    {
-        JDFDoc d=new JDFDoc("JDF");
-        JDFNode n=d.getJDFRoot();
-        n.setType("Interpreting",true);
-        JDFFileSpec fs=(JDFFileSpec) n.addResource(ElementName.FILESPEC, null, EnumUsage.Input, null, null, null, null);
-        String url="File:///a&b.pdf";
-        fs.setURL(url);
-        String s=d.write2String(2);
-        
-        JDFParser p = new JDFParser();
-        JDFDoc dNew=p.parseString(s);
-        String newUrl=((JDFFileSpec)dNew.getJDFRoot().getResourcePool().getElement(ElementName.FILESPEC,null,0)).getURL();
-        
-        assertEquals("url=url",url,newUrl);
-        
-        
-        
-    }
-    
+
+	public final void testAmpersand()
+	{
+		JDFDoc d = new JDFDoc("JDF");
+		JDFNode n = d.getJDFRoot();
+		n.setType("Interpreting", true);
+		JDFFileSpec fs = (JDFFileSpec) n.addResource(ElementName.FILESPEC,
+				null, EnumUsage.Input, null, null, null, null);
+		String url = "File:///a&b.pdf";
+		fs.setURL(url);
+		String s = d.write2String(2);
+
+		JDFParser p = new JDFParser();
+		JDFDoc dNew = p.parseString(s);
+		String newUrl = ((JDFFileSpec) dNew.getJDFRoot().getResourcePool()
+				.getElement(ElementName.FILESPEC, null, 0)).getURL();
+
+		assertEquals("url=url", url, newUrl);
+
+	}
+
 }

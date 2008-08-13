@@ -106,223 +106,225 @@ import org.cip4.jdflib.resource.devicecapability.JDFMatrixState;
 import org.cip4.jdflib.resource.devicecapability.JDFStringState;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap.EnumAvailability;
 
-
 public class JDFStateBaseTest extends JDFTestCaseBase
 {
 
-    private JDFDeviceCap deviceCap; 
-    @Override
-    protected void setUp() throws Exception
-    {
-        super.setUp();
-        JDFDoc doc = new JDFDoc("JMF");
-        JDFJMF jmf=doc.getJMFRoot();
-        JDFResponse resp =(JDFResponse) jmf.appendMessageElement(EnumFamily.Response,JDFMessage.EnumType.KnownDevices);
-        deviceCap=resp.appendDeviceList().appendDeviceInfo().appendDevice().appendDeviceCap();
-        deviceCap.appendBooleanState("Template");
+	private JDFDeviceCap deviceCap;
 
-    }
+	@Override
+	protected void setUp() throws Exception
+	{
+		super.setUp();
+		JDFDoc doc = new JDFDoc("JMF");
+		JDFJMF jmf = doc.getJMFRoot();
+		JDFResponse resp = (JDFResponse) jmf.appendMessageElement(
+				EnumFamily.Response, JDFMessage.EnumType.KnownDevices);
+		deviceCap = resp.appendDeviceList().appendDeviceInfo().appendDevice()
+				.appendDeviceCap();
+		deviceCap.appendBooleanState("Template");
 
-    ////////////////////////////////////////////////////
+	}
 
-    public final void testGetNamePath()
-    {
-        JDFParser p = new JDFParser();
-        String strNode =
-            "<DevCaps xmlns=\"http://www.CIP4.org/JDFSchema_1_1\" Name=\"RenderingParams\" LinkUsage=\"Input\">" +
-            "<DevCap>"+
-            "<DevCap Name=\"AutomatedOverprintParams\">" +
-            "<BooleanState Name=\"OverPrintBlackText\" DefaultValue=\"true\" AllowedValueList=\"true false\"/>" +
-            "<BooleanState Name=\"OverPrintBlackLineArt\" DefaultValue=\"true\" AllowedValueList=\"true false\"/>" +
-            "</DevCap>" +
-            "</DevCap>" +
-            "</DevCaps>";
+	// //////////////////////////////////////////////////
 
-        JDFDoc jdfDoc = p.parseString(strNode);
+	public final void testGetNamePath()
+	{
+		JDFParser p = new JDFParser();
+		String strNode = "<DevCaps xmlns=\"http://www.CIP4.org/JDFSchema_1_1\" Name=\"RenderingParams\" LinkUsage=\"Input\">"
+				+ "<DevCap>"
+				+ "<DevCap Name=\"AutomatedOverprintParams\">"
+				+ "<BooleanState Name=\"OverPrintBlackText\" DefaultValue=\"true\" AllowedValueList=\"true false\"/>"
+				+ "<BooleanState Name=\"OverPrintBlackLineArt\" DefaultValue=\"true\" AllowedValueList=\"true false\"/>"
+				+ "</DevCap>" + "</DevCap>" + "</DevCaps>";
 
-        JDFDevCaps devCaps = (JDFDevCaps) jdfDoc.getRoot();
+		JDFDoc jdfDoc = p.parseString(strNode);
 
-        JDFBooleanState  state = (JDFBooleanState) devCaps.getChildByTagName(ElementName.BOOLEANSTATE, null, 0, null, false, true);
-        System.out.println(state.getNamePath());
-        assertEquals("", state.getNamePath(),"JDF/ResourcePool/RenderingParams/AutomatedOverprintParams/@OverPrintBlackText");
-    }
+		JDFDevCaps devCaps = (JDFDevCaps) jdfDoc.getRoot();
 
-    public final void testFitsListType_IntegerState()
-    {
-        JDFIntegerRangeList list = new JDFIntegerRangeList();
-        list.append(1);
-        list.append(8);
-        list.append(12);
+		JDFBooleanState state = (JDFBooleanState) devCaps.getChildByTagName(
+				ElementName.BOOLEANSTATE, null, 0, null, false, true);
+		System.out.println(state.getNamePath());
+		assertEquals("", state.getNamePath(),
+				"JDF/ResourcePool/RenderingParams/AutomatedOverprintParams/@OverPrintBlackText");
+	}
 
+	public final void testFitsListType_IntegerState()
+	{
+		JDFIntegerRangeList list = new JDFIntegerRangeList();
+		list.append(1);
+		list.append(8);
+		list.append(12);
 
-        //System.out.println(state.fitsCompleteList(value, list));
-        //System.out.println(state.fitsCompleteOrderedList(value, list));
-        //System.out.println(state.fitsContainedList(value, list));
+		// System.out.println(state.fitsCompleteList(value, list));
+		// System.out.println(state.fitsCompleteOrderedList(value, list));
+		// System.out.println(state.fitsContainedList(value, list));
 
-        //state.setListType(EnumListType.List);
-        //System.out.println(state.fitsListType(list.toString()));
-        //System.out.println(state.getListType());
+		// state.setListType(EnumListType.List);
+		// System.out.println(state.fitsListType(list.toString()));
+		// System.out.println(state.getListType());
 
-    }
+	}
 
-    public final void testFitsValue_StringState() throws Exception
-    {
-        JDFDoc jdfDoc = new JDFDoc(ElementName.STRINGSTATE); 
-        JDFStringState root = (JDFStringState)jdfDoc.getRoot();
-        root.appendValueAllowedValue("foo");
-        assertTrue(root.fitsValue("foo", EnumFitsValue.Allowed));
-        assertFalse(root.fitsValue("bar", EnumFitsValue.Allowed));
+	public final void testFitsValue_StringState() throws Exception
+	{
+		JDFDoc jdfDoc = new JDFDoc(ElementName.STRINGSTATE);
+		JDFStringState root = (JDFStringState) jdfDoc.getRoot();
+		root.appendValueAllowedValue("foo");
+		assertTrue(root.fitsValue("foo", EnumFitsValue.Allowed));
+		assertFalse(root.fitsValue("bar", EnumFitsValue.Allowed));
 
-    }
+	}
 
+	public final void testFitsValue_MatrixState() throws Exception
+	{
+		JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
+		JDFNode root = jdfDoc.getJDFRoot();
 
-    public final void testFitsValue_MatrixState() throws Exception
-    {
-        JDFDoc jdfDoc = new JDFDoc(ElementName.JDF); 
-        JDFNode root = jdfDoc.getJDFRoot();
+		JDFMatrix matrix1 = new JDFMatrix("1 0 0 1 3.14 21631.3");
+		JDFMatrix matrix2 = new JDFMatrix("0 1 1 0 2 21000");
 
-        JDFMatrix matrix1 = new JDFMatrix("1 0 0 1 3.14 21631.3");
-        JDFMatrix matrix2 = new JDFMatrix("0 1 1 0 2 21000");
+		Vector<EnumOrientation> transforms = new Vector<EnumOrientation>();
+		transforms.add(EnumOrientation.Rotate0);
+		transforms.add(EnumOrientation.Rotate270);
+		transforms.add(EnumOrientation.Flip0);
+		JDFRectangle shift = new JDFRectangle("2 4 20000 23000");
 
-        Vector<EnumOrientation> transforms = new Vector<EnumOrientation>();
-        transforms.add(EnumOrientation.Rotate0);
-        transforms.add(EnumOrientation.Rotate270);
-        transforms.add(EnumOrientation.Flip0);
-        JDFRectangle shift = new JDFRectangle("2 4 20000 23000");
+		String value1 = "1 0 0 1 3.14 21631.3";
 
-        String value1 = "1 0 0 1 3.14 21631.3";
+		JDFMatrixState k = (JDFMatrixState) root.appendElement("MatrixState");
+		k.appendValue();
+		// k.setValueValueUsage(0, EnumFitsValue.Allowed);
+		k.setValueAllowedValue(0, matrix2);
 
-        JDFMatrixState k = (JDFMatrixState) root.appendElement("MatrixState"); 
-        k.appendValue();
-        //k.setValueValueUsage(0, EnumFitsValue.Allowed);
-        k.setValueAllowedValue(0, matrix2);
+		k.appendValue();
+		// k.setValueValueUsage(1, EnumFitsValue.Present);
+		k.setValueAllowedValue(1, matrix1);
 
-        k.appendValue();
-        //k.setValueValueUsage(1, EnumFitsValue.Present);
-        k.setValueAllowedValue(1, matrix1);
+		k.setAllowedTransforms(transforms);
+		k.setAllowedShift(shift);
+		k.setAllowedRotateMod(15);
 
+		EnumListType lt = EnumListType.UniqueList;
+		// JDFAbstractState.EnumListType lt = EnumListType.ListType.Unknown;
+		// JDFAbstractState.EnumListType lt = EnumListType.ListType.List;
+		k.setListType(lt);
+		// EnumListType listType = k.getListType();
 
-        k.setAllowedTransforms(transforms);
-        k.setAllowedShift(shift);
-        k.setAllowedRotateMod(15); 
+		assertTrue("Matrix OK", k.fitsValue(value1, EnumFitsValue.Allowed));
 
+		String value = "1 2 3 4 5 6 7 8 9 10 11 12 3 4 5 6 7 8";
 
-        EnumListType lt = EnumListType.UniqueList; 
-        //JDFAbstractState.EnumListType lt = EnumListType.ListType.Unknown; 
-        //JDFAbstractState.EnumListType lt = EnumListType.ListType.List; 
-        k.setListType(lt);
-        //               EnumListType listType = k.getListType();
+		VString vs = new VString(value, JDFConstants.BLANK);
+		int siz = vs.size();
+		assertEquals("It is not a Matrix", siz % 6, 0);
+		VString matrixList = new VString();
+		int i = 0;
+		StringBuffer sb = new StringBuffer(250);
+		sb.append(vs.elementAt(i));
+		while ((i + 1) < siz)
+		{
+			do
+			{
+				sb.append(JDFConstants.BLANK);
+				i++;
+				sb.append(vs.elementAt(i));
+			} while ((i + 1) % 6 != 0);
+			matrixList.add(sb.toString());
+			if ((i + 1) < siz)
+			{
+				i++;
+				sb = new StringBuffer(250);
+				sb.append(vs.elementAt(i));
+			}
+		}
+		for (int z = 0; z < matrixList.size(); z++)
+		{
+			JDFMatrix matrix3 = new JDFMatrix(matrixList.stringAt(z));
+			matrix3.getA();
+		}
 
-        assertTrue("Matrix OK",k.fitsValue(value1,EnumFitsValue.Allowed));
+	}
 
+	// //////////////////////////////////////////////////////////
 
-        String value="1 2 3 4 5 6 7 8 9 10 11 12 3 4 5 6 7 8";
+	/**
+	 * tests defaults and handling of "unbounded"
+	 */
+	public final void testFixVersion()
+	{
+		JDFDevCap dc = deviceCap.appendDevCaps().appendDevCap();
+		JDFIntegerState is = dc.appendIntegerState();
+		assertNull(is.getAttribute(AttributeName.MAXOCCURS, null, null));
+		is.fixVersion(null);
+		assertNull(is.getAttribute(AttributeName.MAXOCCURS, null, null));
+		is.setAttribute(AttributeName.MAXOCCURS, "unbounded");
+		is.fixVersion(null);
+		assertEquals(is.getAttribute(AttributeName.MAXOCCURS),
+				JDFConstants.POSINF);
+		is.setAttribute(AttributeName.MAXOCCURS, "3");
+		is.fixVersion(null);
+		assertEquals(is.getAttribute(AttributeName.MAXOCCURS), "3");
+	}
 
-        VString vs = new VString(value, JDFConstants.BLANK);
-        int siz = vs.size();
-        assertEquals("It is not a Matrix",siz%6,0);
-        VString matrixList = new VString();
-        int i=0;
-        StringBuffer sb = new StringBuffer(250);
-        sb.append(vs.elementAt(i));
-        while ((i+1)<siz)
-        {
-            do  {
-                sb.append(JDFConstants.BLANK);
-                i++;
-                sb.append(vs.elementAt(i));
-            }
-            while ((i+1)%6!=0);
-            matrixList.add(sb.toString());
-            if ((i+1)<siz)
-            { 
-                i++;
-                sb = new StringBuffer(250);
-                sb.append(vs.elementAt(i));
-            }
-        }
-        for (int z=0; z<matrixList.size(); z++)
-        {
-            JDFMatrix matrix3 = new JDFMatrix(matrixList.stringAt(z));
-            matrix3.getA();
-        }
+	// //////////////////////////////////////////////////////////
 
-    }
+	/**
+	 * tests defaults and handling of "unbounded"
+	 */
+	public final void testMaxOccurs()
+	{
+		JDFDevCap dc = deviceCap.appendDevCaps().appendDevCap();
+		JDFIntegerState is = dc.appendIntegerState();
+		assertEquals(is.getMaxOccurs(), 1);
+		is.setMaxOccurs(Integer.MAX_VALUE);
+		assertEquals(is.getAttribute(AttributeName.MAXOCCURS, null, null),
+				JDFConstants.POSINF);
+		assertTrue(is.getMaxOccurs() > 999);
+		is.setAttribute(AttributeName.MAXOCCURS, "unbounded");
+		assertTrue("correctly parsed unbounded for legacy support", is
+				.getMaxOccurs() > 999);
+	}
 
-    ////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////
 
-    /**
-     * tests defaults and handling of "unbounded"
-     */
-    public final void testFixVersion()
-    { 
-        JDFDevCap dc=deviceCap.appendDevCaps().appendDevCap();
-        JDFIntegerState is=dc.appendIntegerState();
-        assertNull(is.getAttribute(AttributeName.MAXOCCURS,null,null));
-        is.fixVersion(null);
-        assertNull(is.getAttribute(AttributeName.MAXOCCURS,null,null));
-        is.setAttribute(AttributeName.MAXOCCURS, "unbounded");
-        is.fixVersion(null);
-        assertEquals(is.getAttribute(AttributeName.MAXOCCURS),JDFConstants.POSINF);
-        is.setAttribute(AttributeName.MAXOCCURS, "3");
-        is.fixVersion(null);
-        assertEquals(is.getAttribute(AttributeName.MAXOCCURS),"3");
-    }
-    ////////////////////////////////////////////////////////////
+	public void testGetNamePathVector()
+	{
 
-    /**
-     * tests defaults and handling of "unbounded"
-     */
-    public final void testMaxOccurs()
-    { 
-        JDFDevCap dc=deviceCap.appendDevCaps().appendDevCap();
-        JDFIntegerState is=dc.appendIntegerState();
-        assertEquals(is.getMaxOccurs(),1);
-        is.setMaxOccurs(Integer.MAX_VALUE);
-        assertEquals(is.getAttribute(AttributeName.MAXOCCURS,null,null),JDFConstants.POSINF);
-        assertTrue(is.getMaxOccurs()>999);
-        is.setAttribute(AttributeName.MAXOCCURS, "unbounded");
-        assertTrue("correctly parsed unbounded for legacy support",is.getMaxOccurs()>999);
-    }
-    ////////////////////////////////////////////////////////////
+		JDFBooleanState b = deviceCap.getBooleanState("Template");
+		VString v = b.getNamePathVector(true);
+		assertEquals(v.size(), 1);
+		assertEquals(v.stringAt(0), "JDF/@Template");
+	}
 
-    public void testGetNamePathVector ()
-    {
+	/**
+	 * tests defaults
+	 */
+	public final void testMinOccurs()
+	{
+		JDFDevCap dc = deviceCap.appendDevCaps().appendDevCap();
+		JDFIntegerState is = dc.appendIntegerState();
+		assertEquals("default=1", is.getMinOccurs(), 1);
+	}
 
-        JDFBooleanState b= deviceCap.getBooleanState("Template");
-        VString v=b.getNamePathVector(true);
-        assertEquals(v.size(),1);
-        assertEquals(v.stringAt(0),"JDF/@Template");
-    } 
-    
-    /**
-     * tests defaults 
-     */
-    public final void testMinOccurs()
-    { 
-        JDFDevCap dc=deviceCap.appendDevCaps().appendDevCap();
-        JDFIntegerState is=dc.appendIntegerState();
-        assertEquals("default=1",is.getMinOccurs(),1);
-    }
-    /**
-     * tests defaults for availability 
-     */
-    public final void testGetAvailability()
-    { 
-        JDFDevCap dc=deviceCap.appendDevCaps().appendDevCap();
-        JDFIntegerState is=dc.appendIntegerState();
+	/**
+	 * tests defaults for availability
+	 */
+	public final void testGetAvailability()
+	{
+		JDFDevCap dc = deviceCap.appendDevCaps().appendDevCap();
+		JDFIntegerState is = dc.appendIntegerState();
 
-        assertEquals(EnumAvailability.Installed,dc.getAvailability());
-        assertEquals(EnumAvailability.Installed,is.getAvailability());
+		assertEquals(EnumAvailability.Installed, dc.getAvailability());
+		assertEquals(EnumAvailability.Installed, is.getAvailability());
 
-        dc.setAvailability(EnumAvailability.NotLicensed);
-        assertEquals(EnumAvailability.NotLicensed,dc.getAvailability());
-        assertEquals(EnumAvailability.NotLicensed,is.getAvailability());
+		dc.setAvailability(EnumAvailability.NotLicensed);
+		assertEquals(EnumAvailability.NotLicensed, dc.getAvailability());
+		assertEquals(EnumAvailability.NotLicensed, is.getAvailability());
 
-    }
+	}
 
-    ////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////
 
 }

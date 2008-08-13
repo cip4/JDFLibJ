@@ -88,53 +88,55 @@ import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.util.JDFDate;
 
-
-
 public class PhaseTimeTest extends JDFTestCaseBase
 {
-    public void testGetLink() throws Exception
-    {
-        JDFDoc doc=new JDFDoc("JDF");
-        JDFNode n=doc.getJDFRoot();
-        JDFResource r=n.addResource("www.foo", EnumResourceClass.Parameter, EnumUsage.Input, null, null, "www.www.com", null);
-        JDFResourceLink rl=n.getLink(r, null);
-        VElement vRL=new VElement();
-        vRL.add(rl);
-        
-        JDFAuditPool ap=n.getCreateAuditPool();
-        JDFPhaseTime pt=ap.addPhaseTime(EnumNodeStatus.InProgress,null,null);
-        pt.appendComment().setText("foo");
-        pt.setLinks(vRL);
-        pt.setStart(new JDFDate());
-        assertEquals(rl.toString(), pt.getLink(0).toString());
-    }
-    public void testGetDuration() throws Exception
-    {
-        JDFDoc doc=new JDFDoc("JDF");
-        JDFNode n=doc.getJDFRoot();
-        JDFAuditPool ap=n.getCreateAuditPool();
-        JDFPhaseTime pt=ap.addPhaseTime(EnumNodeStatus.InProgress,null,null);
-        pt.setStart(new JDFDate());
-        JDFDate end=new JDFDate();
-        end.setTimeInMillis(end.getTimeInMillis()+100*1000);
-        pt.setEnd(end);
-        assertEquals("",pt.getDuration().getDuration(), 100.,1.);
-        
-    }
-    
-    public void testModuleIDs() throws Exception
-    {
-        JDFDoc doc=new JDFDoc("JDF");
-        JDFNode n=doc.getJDFRoot();
-        JDFAuditPool ap=n.getCreateAuditPool();
-        JDFPhaseTime pt=ap.addPhaseTime(EnumNodeStatus.InProgress,null,null);
-        pt.setModules(new VString("m1 m2"," "),new VString("RIP Press"," "));
-        assertEquals(pt.numChildElements(ElementName.MODULEPHASE, null),2);
-        assertEquals(pt.getModulePhase(0).getModuleID(), "m1");
-        assertEquals(pt.getModulePhase(1).getModuleID(), "m2");
-        assertEquals(pt.getModulePhase(1).getModuleType(), "Press");
-//        assertTrue(pt.isValid(EnumValidationLevel.Complete));
-    }
-    
- 
+	public void testGetLink() throws Exception
+	{
+		JDFDoc doc = new JDFDoc("JDF");
+		JDFNode n = doc.getJDFRoot();
+		JDFResource r = n.addResource("www.foo", EnumResourceClass.Parameter,
+				EnumUsage.Input, null, null, "www.www.com", null);
+		JDFResourceLink rl = n.getLink(r, null);
+		VElement vRL = new VElement();
+		vRL.add(rl);
+
+		JDFAuditPool ap = n.getCreateAuditPool();
+		JDFPhaseTime pt = ap
+				.addPhaseTime(EnumNodeStatus.InProgress, null, null);
+		pt.appendComment().setText("foo");
+		pt.setLinks(vRL);
+		pt.setStart(new JDFDate());
+		assertEquals(rl.toString(), pt.getLink(0).toString());
+	}
+
+	public void testGetDuration() throws Exception
+	{
+		JDFDoc doc = new JDFDoc("JDF");
+		JDFNode n = doc.getJDFRoot();
+		JDFAuditPool ap = n.getCreateAuditPool();
+		JDFPhaseTime pt = ap
+				.addPhaseTime(EnumNodeStatus.InProgress, null, null);
+		pt.setStart(new JDFDate());
+		JDFDate end = new JDFDate();
+		end.setTimeInMillis(end.getTimeInMillis() + 100 * 1000);
+		pt.setEnd(end);
+		assertEquals("", pt.getDuration().getDuration(), 100., 1.);
+
+	}
+
+	public void testModuleIDs() throws Exception
+	{
+		JDFDoc doc = new JDFDoc("JDF");
+		JDFNode n = doc.getJDFRoot();
+		JDFAuditPool ap = n.getCreateAuditPool();
+		JDFPhaseTime pt = ap
+				.addPhaseTime(EnumNodeStatus.InProgress, null, null);
+		pt.setModules(new VString("m1 m2", " "), new VString("RIP Press", " "));
+		assertEquals(pt.numChildElements(ElementName.MODULEPHASE, null), 2);
+		assertEquals(pt.getModulePhase(0).getModuleID(), "m1");
+		assertEquals(pt.getModulePhase(1).getModuleID(), "m2");
+		assertEquals(pt.getModulePhase(1).getModuleType(), "Press");
+		// assertTrue(pt.isValid(EnumValidationLevel.Complete));
+	}
+
 }

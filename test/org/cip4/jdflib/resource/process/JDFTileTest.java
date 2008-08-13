@@ -1,4 +1,3 @@
-
 /*
  *
  * The CIP4 Software License, Version 1.0
@@ -90,40 +89,39 @@ import org.cip4.jdflib.resource.JDFMarkObject;
 public class JDFTileTest extends JDFTestCaseBase
 {
 
+	/*
+	 * Test method for
+	 * 'org.cip4.jdflib.resource.process.JDFMedia.setDimensionCM(JDFXYPair)'
+	 */
+	public final void testMarkObject()
+	{
+		JDFDoc doc = new JDFDoc("JDF");
+		JDFNode root = doc.getJDFRoot();
+		root.setVersion(EnumVersion.Version_1_4);
+		root.setType(EnumType.Tiling);
+		JDFResourcePool resPool = root.getCreateResourcePool();
+		KElement kElem = resPool.appendResource(ElementName.TILE, null, null);
+		assertTrue(kElem instanceof JDFTile);
+		JDFTile tile = ((JDFTile) kElem);
+		try
+		{
+			tile.setClipBox(new JDFRectangle("0 0 123 123"));
+			tile.setCTM(new JDFMatrix("1 0 0 1 0 0"));
+			JDFMarkObject m = tile.appendMarkObject();
+			m.setOrd(0);
+			m.setCTM(new JDFMatrix("1.2 0 0 1.4 1 444."));
+			assertTrue(m.isValid(EnumValidationLevel.Complete));
+			JDFMarkObject m2 = tile.appendMarkObject();
+			m2.setOrd(0);
+			m2.setCTM(new JDFMatrix("1.234 0 0 1.4 1 444."));
+			assertTrue(m2.isValid(EnumValidationLevel.Complete));
+			assertEquals(m2, tile.getMarkObject(1));
+			assertEquals(m2, tile.getCreateMarkObject(1));
+			assertTrue(tile.isValid(EnumValidationLevel.Complete));
+		} catch (DataFormatException e)
+		{
+			fail("bad unit matrix");
+		}
 
-    /*
-     * Test method for 'org.cip4.jdflib.resource.process.JDFMedia.setDimensionCM(JDFXYPair)'
-     */
-    public final void testMarkObject()
-    {
-        JDFDoc doc = new JDFDoc("JDF");
-        JDFNode root = doc.getJDFRoot();
-        root.setVersion(EnumVersion.Version_1_4);
-        root.setType(EnumType.Tiling);
-        JDFResourcePool resPool = root.getCreateResourcePool();
-        KElement kElem = resPool.appendResource(ElementName.TILE, null, null);
-        assertTrue(kElem instanceof JDFTile);
-        JDFTile tile = ((JDFTile) kElem);
-        try
-        {
-            tile.setClipBox(new JDFRectangle("0 0 123 123"));
-            tile.setCTM(new JDFMatrix("1 0 0 1 0 0"));
-            JDFMarkObject m=tile.appendMarkObject();
-            m.setOrd(0);
-            m.setCTM(new JDFMatrix("1.2 0 0 1.4 1 444."));
-            assertTrue(m.isValid(EnumValidationLevel.Complete));
-            JDFMarkObject m2=tile.appendMarkObject();
-            m2.setOrd(0);
-            m2.setCTM(new JDFMatrix("1.234 0 0 1.4 1 444."));
-            assertTrue(m2.isValid(EnumValidationLevel.Complete));
-            assertEquals(m2,tile.getMarkObject(1));
-            assertEquals(m2,tile.getCreateMarkObject(1));
-            assertTrue(tile.isValid(EnumValidationLevel.Complete));
-        }
-        catch (DataFormatException e)
-        {
-            fail("bad unit matrix");
-        }
-
-    }
+	}
 }

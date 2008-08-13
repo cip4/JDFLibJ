@@ -84,64 +84,64 @@ import org.cip4.jdflib.resource.devicecapability.JDFTest;
 import org.cip4.jdflib.resource.devicecapability.JDFor;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 
-
 public class JDFTestTest extends JDFTestCaseBase
 {
-     public void testValidTest1()
-    {
-        JDFDoc d=new JDFDoc(ElementName.TEST);
-        JDFTest t=(JDFTest)d.getRoot();
-        t.init();
-        t.appendTerm(EnumTerm.IsPresentEvaluation);
-        assertTrue(t.isValid(EnumValidationLevel.Complete));
-        t.appendTerm(EnumTerm.BooleanEvaluation); // no two are allowed
-        assertFalse(t.isValid(EnumValidationLevel.Complete));
-    }
-    
-//////////////////////////////////////////////////////////////////
-     
-     public void testValidTest2()
-     {
-         JDFDoc d=new JDFDoc(ElementName.TEST);
-         JDFTest t=(JDFTest)d.getRoot();
-         t.init();
-         JDFor or=(JDFor)t.appendTerm(EnumTerm.or);
-         assertFalse(t.isValid(EnumValidationLevel.Complete));
-         or.appendTerm(EnumTerm.BooleanEvaluation); // no two are allowed
-         assertFalse(t.isValid(EnumValidationLevel.Complete));
-         assertFalse(or.isValid(EnumValidationLevel.Complete));
-         or.appendTerm(EnumTerm.BooleanEvaluation); // no two are allowed
-         assertTrue(t.isValid(EnumValidationLevel.Complete));
-         or.appendTerm(EnumTerm.IntegerEvaluation); // no two are allowed
-         assertTrue(t.isValid(EnumValidationLevel.Complete));
-         assertTrue(or.isValid(EnumValidationLevel.Complete));
-     }
+	public void testValidTest1()
+	{
+		JDFDoc d = new JDFDoc(ElementName.TEST);
+		JDFTest t = (JDFTest) d.getRoot();
+		t.init();
+		t.appendTerm(EnumTerm.IsPresentEvaluation);
+		assertTrue(t.isValid(EnumValidationLevel.Complete));
+		t.appendTerm(EnumTerm.BooleanEvaluation); // no two are allowed
+		assertFalse(t.isValid(EnumValidationLevel.Complete));
+	}
 
-//////////////////////////////////////////////////////////////////
-     
-     public void testFitsContext()
-     {
-         JDFDoc d=new JDFDoc(ElementName.TEST);
-         JDFTest t=(JDFTest)d.getRoot();
-         t.init();
-         t.setContext("//JDF");
-         JDFDoc jdf=new JDFDoc(ElementName.JDF);
-         JDFNode node=jdf.getJDFRoot();
-         node.setType(EnumType.ProcessGroup);
-         JDFNode node2=node.addJDFNode("foobar");
-         JDFResource r2=node.addResource("res", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
-         assertTrue(t.fitsContext(node));
-         assertTrue(t.fitsContext(node2));
-         t.setContext("JDF");
-         assertTrue(t.fitsContext(node));
-         assertTrue(t.fitsContext(node2));
-         t.setContext("/JDF");
-         assertTrue(t.fitsContext(node));
-         assertFalse(t.fitsContext(node2));
-         t.setContext("res");
-         assertTrue(t.fitsContext(r2));
-         t.setContext("/res");
-         assertFalse(t.fitsContext(r2));
-     }
+	// ////////////////////////////////////////////////////////////////
+
+	public void testValidTest2()
+	{
+		JDFDoc d = new JDFDoc(ElementName.TEST);
+		JDFTest t = (JDFTest) d.getRoot();
+		t.init();
+		JDFor or = (JDFor) t.appendTerm(EnumTerm.or);
+		assertFalse(t.isValid(EnumValidationLevel.Complete));
+		or.appendTerm(EnumTerm.BooleanEvaluation); // no two are allowed
+		assertFalse(t.isValid(EnumValidationLevel.Complete));
+		assertFalse(or.isValid(EnumValidationLevel.Complete));
+		or.appendTerm(EnumTerm.BooleanEvaluation); // no two are allowed
+		assertTrue(t.isValid(EnumValidationLevel.Complete));
+		or.appendTerm(EnumTerm.IntegerEvaluation); // no two are allowed
+		assertTrue(t.isValid(EnumValidationLevel.Complete));
+		assertTrue(or.isValid(EnumValidationLevel.Complete));
+	}
+
+	// ////////////////////////////////////////////////////////////////
+
+	public void testFitsContext()
+	{
+		JDFDoc d = new JDFDoc(ElementName.TEST);
+		JDFTest t = (JDFTest) d.getRoot();
+		t.init();
+		t.setContext("//JDF");
+		JDFDoc jdf = new JDFDoc(ElementName.JDF);
+		JDFNode node = jdf.getJDFRoot();
+		node.setType(EnumType.ProcessGroup);
+		JDFNode node2 = node.addJDFNode("foobar");
+		JDFResource r2 = node.addResource("res", EnumResourceClass.Parameter,
+				EnumUsage.Input, null, null, null, null);
+		assertTrue(t.fitsContext(node));
+		assertTrue(t.fitsContext(node2));
+		t.setContext("JDF");
+		assertTrue(t.fitsContext(node));
+		assertTrue(t.fitsContext(node2));
+		t.setContext("/JDF");
+		assertTrue(t.fitsContext(node));
+		assertFalse(t.fitsContext(node2));
+		t.setContext("res");
+		assertTrue(t.fitsContext(r2));
+		t.setContext("/res");
+		assertFalse(t.fitsContext(r2));
+	}
 
 }

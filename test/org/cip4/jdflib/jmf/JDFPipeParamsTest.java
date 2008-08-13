@@ -85,88 +85,96 @@ import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
 
-
 public class JDFPipeParamsTest extends TestCase
 {
-     
-    public void testAppendResourceLink() throws Exception
-    {
-        JDFDoc doc = new JDFDoc(ElementName.PIPEPARAMS);
-        JDFPipeParams pp=(JDFPipeParams)doc.getRoot();
-        JDFResourceLink rl=pp.appendResourceLink("Dummy",true);
-        assertEquals(rl.getUsage(), EnumUsage.Input);
-        try
-        {
-            rl=pp.appendResourceLink("Dummy2",true);
-            fail("max 1 rl");
-        }
-        catch (Exception e) {
-            // nop
-        }        
-    }
-    
-    /////////////////////////////////////////////////////////////////////////////////////////////
-    
-    public void testAppendResource() throws Exception
-    {
-        JDFDoc doc = new JDFDoc(ElementName.PIPEPARAMS);
-        JDFPipeParams pp=(JDFPipeParams)doc.getRoot();
-        JDFCoilBindingParams cbp=(JDFCoilBindingParams) pp.appendResource(ElementName.COILBINDINGPARAMS);
-        assertEquals(cbp.getResourceClass(), EnumResourceClass.Parameter);
-        JDFHeadBandApplicationParams hap=(JDFHeadBandApplicationParams) pp.appendResource(ElementName.HEADBANDAPPLICATIONPARAMS);
-        assertEquals(hap.getResourceClass(), EnumResourceClass.Parameter);
-    }
-    /////////////////////////////////////////////////////////////////////////////////////////////
-    
-    public void testGetResourceLink() throws Exception
-    {
-        JDFDoc doc = new JDFDoc(ElementName.JMF);
-        JDFJMF jmf=doc.getJMFRoot();
-        JDFCommand c=jmf.appendCommand(EnumType.PipePull);        
-        JDFPipeParams pp=c.appendPipeParams();
-        JDFExposedMedia xm=(JDFExposedMedia) pp.appendResource(ElementName.EXPOSEDMEDIA);
-        assertEquals(xm.getResourceClass(), EnumResourceClass.Handling);
-        JDFMedia m=(JDFMedia) pp.appendResource(ElementName.MEDIA);
-        assertEquals(m.getResourceClass(), EnumResourceClass.Consumable);
-        JDFRefElement rm=xm.refElement(m);
-        assertEquals(rm.getTarget(), m);
-        JDFResourceLink rl=pp.appendResourceLink(ElementName.EXPOSEDMEDIA, true);
-        rl.setrRef(xm.getID());
-        assertEquals(rl.getTarget(), xm);
-        assertEquals(rl, pp.getResourceLink());       
-    }
-    
-    /////////////////////////////////////////////////////////////////////////////////////////////
-    
-    public void testGetResource() throws Exception
-    {
-        JDFDoc doc = new JDFDoc(ElementName.JMF);
-        JDFJMF jmf=doc.getJMFRoot();
-        JDFCommand c=jmf.appendCommand(EnumType.PipePull);        
-        JDFPipeParams pp=c.appendPipeParams();
-        JDFExposedMedia xm=(JDFExposedMedia) pp.appendResource(ElementName.EXPOSEDMEDIA);
-        assertEquals(xm.getResourceClass(), EnumResourceClass.Handling);
-        JDFMedia m=(JDFMedia) pp.appendResource(ElementName.MEDIA);
-        assertEquals(m.getResourceClass(), EnumResourceClass.Consumable);
-        JDFRefElement rm=xm.refElement(m);
-        assertEquals(rm.getTarget(), m);
-        assertEquals(pp.getResource(ElementName.EXPOSEDMEDIA), xm);
-        assertEquals(pp.getResource(null), xm);
-        assertEquals(pp.getResource(ElementName.MEDIA), m);
-        try
-        {
-            assertNull(pp.getResource("MediaLink"));
-            fail();
-        }
-        catch (JDFException e) 
-        {
-            // nop
-        }
-        
-        JDFResourceLink rl=pp.appendResourceLink(ElementName.EXPOSEDMEDIA, true);
-        rl.setrRef(xm.getID());
-        assertEquals(xm, pp.getResource(null));       
-        assertEquals(rl.getTarget(), pp.getResource(null));       
-    }
-    
+
+	public void testAppendResourceLink() throws Exception
+	{
+		JDFDoc doc = new JDFDoc(ElementName.PIPEPARAMS);
+		JDFPipeParams pp = (JDFPipeParams) doc.getRoot();
+		JDFResourceLink rl = pp.appendResourceLink("Dummy", true);
+		assertEquals(rl.getUsage(), EnumUsage.Input);
+		try
+		{
+			rl = pp.appendResourceLink("Dummy2", true);
+			fail("max 1 rl");
+		} catch (Exception e)
+		{
+			// nop
+		}
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	// /////////////////
+
+	public void testAppendResource() throws Exception
+	{
+		JDFDoc doc = new JDFDoc(ElementName.PIPEPARAMS);
+		JDFPipeParams pp = (JDFPipeParams) doc.getRoot();
+		JDFCoilBindingParams cbp = (JDFCoilBindingParams) pp
+				.appendResource(ElementName.COILBINDINGPARAMS);
+		assertEquals(cbp.getResourceClass(), EnumResourceClass.Parameter);
+		JDFHeadBandApplicationParams hap = (JDFHeadBandApplicationParams) pp
+				.appendResource(ElementName.HEADBANDAPPLICATIONPARAMS);
+		assertEquals(hap.getResourceClass(), EnumResourceClass.Parameter);
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	// /////////////////
+
+	public void testGetResourceLink() throws Exception
+	{
+		JDFDoc doc = new JDFDoc(ElementName.JMF);
+		JDFJMF jmf = doc.getJMFRoot();
+		JDFCommand c = jmf.appendCommand(EnumType.PipePull);
+		JDFPipeParams pp = c.appendPipeParams();
+		JDFExposedMedia xm = (JDFExposedMedia) pp
+				.appendResource(ElementName.EXPOSEDMEDIA);
+		assertEquals(xm.getResourceClass(), EnumResourceClass.Handling);
+		JDFMedia m = (JDFMedia) pp.appendResource(ElementName.MEDIA);
+		assertEquals(m.getResourceClass(), EnumResourceClass.Consumable);
+		JDFRefElement rm = xm.refElement(m);
+		assertEquals(rm.getTarget(), m);
+		JDFResourceLink rl = pp.appendResourceLink(ElementName.EXPOSEDMEDIA,
+				true);
+		rl.setrRef(xm.getID());
+		assertEquals(rl.getTarget(), xm);
+		assertEquals(rl, pp.getResourceLink());
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	// /////////////////
+
+	public void testGetResource() throws Exception
+	{
+		JDFDoc doc = new JDFDoc(ElementName.JMF);
+		JDFJMF jmf = doc.getJMFRoot();
+		JDFCommand c = jmf.appendCommand(EnumType.PipePull);
+		JDFPipeParams pp = c.appendPipeParams();
+		JDFExposedMedia xm = (JDFExposedMedia) pp
+				.appendResource(ElementName.EXPOSEDMEDIA);
+		assertEquals(xm.getResourceClass(), EnumResourceClass.Handling);
+		JDFMedia m = (JDFMedia) pp.appendResource(ElementName.MEDIA);
+		assertEquals(m.getResourceClass(), EnumResourceClass.Consumable);
+		JDFRefElement rm = xm.refElement(m);
+		assertEquals(rm.getTarget(), m);
+		assertEquals(pp.getResource(ElementName.EXPOSEDMEDIA), xm);
+		assertEquals(pp.getResource(null), xm);
+		assertEquals(pp.getResource(ElementName.MEDIA), m);
+		try
+		{
+			assertNull(pp.getResource("MediaLink"));
+			fail();
+		} catch (JDFException e)
+		{
+			// nop
+		}
+
+		JDFResourceLink rl = pp.appendResourceLink(ElementName.EXPOSEDMEDIA,
+				true);
+		rl.setrRef(xm.getID());
+		assertEquals(xm, pp.getResource(null));
+		assertEquals(rl.getTarget(), pp.getResource(null));
+	}
+
 }

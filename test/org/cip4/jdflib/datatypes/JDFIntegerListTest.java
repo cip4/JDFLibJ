@@ -80,17 +80,16 @@ package org.cip4.jdflib.datatypes;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 
-
 public class JDFIntegerListTest extends JDFTestCaseBase
 {
 
-    ///////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////
-    public void testConstruct()
-    {
-        JDFIntegerList l=new JDFIntegerList(3);
-        assertEquals(l.size(), 1);
-        assertEquals(l.getInt(0), 3);
-    }
+	// /////////////////////////////////////////////////////////////////
+	// /////////////////////////////////////////////////////////////////
+	public void testConstruct()
+	{
+		JDFIntegerList l = new JDFIntegerList(3);
+		assertEquals(l.size(), 1);
+		assertEquals(l.getInt(0), 3);
+	}
 
 }

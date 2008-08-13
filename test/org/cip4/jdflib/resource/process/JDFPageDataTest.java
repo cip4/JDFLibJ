@@ -81,34 +81,36 @@ import org.cip4.jdflib.resource.JDFPageList;
 public class JDFPageDataTest extends JDFTestCaseBase
 {
 
-    JDFContentList cl;
-    JDFPageList pl;
- 
-    /* (non-Javadoc)
-     * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
-     */
-    protected void setUp() throws Exception
-    {
-        // TODO Auto-generated method stub
-        super.setUp();
-        JDFDoc doc=new JDFDoc("JDF");
-        JDFNode n=doc.getJDFRoot();
-        n.setType(EnumType.Imposition);
-        cl=(JDFContentList) n.addResource(ElementName.CONTENTLIST, null);
-        pl=(JDFPageList) n.addResource(ElementName.PAGELIST, null);
-    }
+	JDFContentList cl;
+	JDFPageList pl;
 
-    /////////////////////////////////////////////////////////////////////////
-    
-    public void testRefContentData()
-    {
-        for(int i=0;i<10;i++)
-            assertEquals(cl.appendContentData().getIndex(),i);
-        JDFContentData cd=cl.appendContentData();
-        JDFPageData pd=pl.appendPageData();
-        pd.refContentData(cd);
-        assertEquals(pd.getPageElement(0).getContentListIndex(), 10);
-        
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	protected void setUp() throws Exception
+	{
+		// TODO Auto-generated method stub
+		super.setUp();
+		JDFDoc doc = new JDFDoc("JDF");
+		JDFNode n = doc.getJDFRoot();
+		n.setType(EnumType.Imposition);
+		cl = (JDFContentList) n.addResource(ElementName.CONTENTLIST, null);
+		pl = (JDFPageList) n.addResource(ElementName.PAGELIST, null);
+	}
+
+	// ///////////////////////////////////////////////////////////////////////
+
+	public void testRefContentData()
+	{
+		for (int i = 0; i < 10; i++)
+			assertEquals(cl.appendContentData().getIndex(), i);
+		JDFContentData cd = cl.appendContentData();
+		JDFPageData pd = pl.appendPageData();
+		pd.refContentData(cd);
+		assertEquals(pd.getPageElement(0).getContentListIndex(), 10);
+
+	}
 
 }

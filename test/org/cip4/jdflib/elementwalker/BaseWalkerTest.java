@@ -77,49 +77,48 @@ import org.cip4.jdflib.core.XMLDoc;
 
 /**
  * @author prosirai
- *
+ * 
  */
 public class BaseWalkerTest extends JDFTestCaseBase
 {
 
-    ////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////
 
+	static class TestWalker extends BaseWalker
+	{
+		/**
+		 * @param factory
+		 *            this call adds the testwalker to the factory
+		 */
+		public TestWalker(BaseWalkerFactory factory)
+		{
+			super(factory);
+		}
 
-    static class TestWalker extends BaseWalker
-    {
-        /**
-         * @param factory
-         * this call adds the testwalker to the factory
-         */
-        public TestWalker(BaseWalkerFactory factory)
-        {
-            super(factory);
-        }
+	}
 
-    }
+	// //////////////////////////////////////////////////////////////////////
 
-    ////////////////////////////////////////////////////////////////////////
+	public void testDepth()
+	{
+		BaseWalkerFactory bf = new BaseWalkerFactory();
+		BaseWalker b = new TestWalker(bf);
+		assertEquals(b.getDepth(), 1);
+	}
 
-    public void testDepth()
-    {
-        BaseWalkerFactory bf=new BaseWalkerFactory();
-        BaseWalker b=new TestWalker(bf);
-        assertEquals(b.getDepth(), 1);
-    }
+	// //////////////////////////////////////////////////////////////////////
 
-    ////////////////////////////////////////////////////////////////////////
+	public void testDepthWalk()
+	{
+		BaseWalkerFactory bf = new BaseWalkerFactory();
+		new TestWalker(bf);
+		XMLDoc d = new XMLDoc("a", null);
+		ElementWalker ew = new ElementWalker(bf);
+		KElement root = d.getRoot();
+		assertEquals(ew.walk(root), 1);
+		for (int i = 1; i <= 10; i++)
+			root.getCreateXPathElement("b/c/d[" + i + "]");
+		assertEquals("a,b,c+10*d=13", ew.walk(root), 13);
 
-    public void testDepthWalk()
-    {
-        BaseWalkerFactory bf=new BaseWalkerFactory();
-        new TestWalker(bf);
-        XMLDoc d=new XMLDoc("a",null);
-        ElementWalker ew=new ElementWalker(bf);
-        KElement root = d.getRoot();
-        assertEquals(ew.walk(root),1);
-        for(int i=1;i<=10;i++)
-            root.getCreateXPathElement("b/c/d["+i+"]");
-        assertEquals("a,b,c+10*d=13",ew.walk(root),13);
-
-    }
+	}
 }

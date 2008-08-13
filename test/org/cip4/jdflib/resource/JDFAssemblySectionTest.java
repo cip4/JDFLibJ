@@ -38,7 +38,7 @@
  *
  * Usage of this software in commercial products is subject to restrictions. For
  * details please consult info@cip4.org.
-  *
+ *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -82,31 +82,32 @@ import org.cip4.jdflib.resource.process.JDFAssemblySection;
 
 /**
  * all kinds of fun tests around JDF 1.2 vs JDF 1.3 Layouts
- *
+ * 
  */
 public class JDFAssemblySectionTest extends JDFTestCaseBase
 {
-    
-    private JDFDoc doc=null;
-    private JDFNode n=null;
-    private JDFAssembly as=null;
-    
-    public void setUp() throws Exception
-    {
-        super.setUp();
-        doc=new JDFDoc("JDF");
-        n=doc.getJDFRoot();
-        n.setType("Stripping",true);
-        as=(JDFAssembly) n.appendMatchingResource(ElementName.ASSEMBLY,EnumProcessUsage.AnyInput,null);
-    }
-    
-    public void testSubAssemblySection()
-    {
-        JDFAssemblySection ass=as.appendAssemblySection();
-        JDFAssemblySection asss=ass.appendAssemblySection();
-        asss.setAssemblyIDs(new VString("a b c"," "));
-        assertTrue(as.isValid(EnumValidationLevel.Incomplete));
-        doc.write2File(sm_dirTestDataTemp+"AssemblySection.jdf", 2, false);
-    }
-    
+
+	private JDFDoc doc = null;
+	private JDFNode n = null;
+	private JDFAssembly as = null;
+
+	public void setUp() throws Exception
+	{
+		super.setUp();
+		doc = new JDFDoc("JDF");
+		n = doc.getJDFRoot();
+		n.setType("Stripping", true);
+		as = (JDFAssembly) n.appendMatchingResource(ElementName.ASSEMBLY,
+				EnumProcessUsage.AnyInput, null);
+	}
+
+	public void testSubAssemblySection()
+	{
+		JDFAssemblySection ass = as.appendAssemblySection();
+		JDFAssemblySection asss = ass.appendAssemblySection();
+		asss.setAssemblyIDs(new VString("a b c", " "));
+		assertTrue(as.isValid(EnumValidationLevel.Incomplete));
+		doc.write2File(sm_dirTestDataTemp + "AssemblySection.jdf", 2, false);
+	}
+
 }

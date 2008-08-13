@@ -104,120 +104,132 @@ import org.cip4.jdflib.resource.process.postpress.JDFScore;
 import org.cip4.jdflib.resource.process.postpress.JDFScore.EnumScoreSide;
 import org.cip4.jdflib.span.JDFStringSpan;
 
-
 public class JDFAutoResourceTest extends TestCase
 {
-    public void testRunList()
-    {
-        JDFDoc d=new JDFDoc(ElementName.JDF);
-        JDFNode r=d.getJDFRoot();
-        JDFRunList rl=(JDFRunList) r.addResource("RunList", null, EnumUsage.Input, null, null, null, null);
-        JDFInsertSheet is1=rl.appendInsertSheet();
-        is1.setSheetType(EnumSheetType.SeparatorSheet);
-        is1.setSheetUsage(EnumSheetUsage.Slip);
-        JDFInsertSheet is2=rl.appendInsertSheet();
-        is2.setSheetType(EnumSheetType.SeparatorSheet);
-        is2.setSheetUsage(EnumSheetUsage.Slip);
-        assertNotSame("two insert sheets",is1,is2);
-        
-        rl.appendLayoutElement(); //1
-        assertTrue("runlist valid",rl.isValid(EnumValidationLevel.Complete));
-        boolean b1=false;
-        try{
-            rl.appendLayoutElement();
-        }
-        catch(JDFException e){
-            b1=true;
-        }
-        assertTrue("only one layoutelement possible",b1);
-    }
-    
-    public void testEnumerations()
-    {
-        JDFDoc d=new JDFDoc(ElementName.JDF);
-        JDFNode r=d.getJDFRoot();
-        JDFColorPool cp=(JDFColorPool) r.addResource("ColorPool", null, EnumUsage.Input, null, null, null, null);
-        JDFColor col=cp.appendColor();
-        col.setColorName(EnumNamedColor.Red);
-        assertTrue("named color get",col.getColorName()==EnumNamedColor.Red);
-        assertTrue("named color get raw",col.getAttribute(AttributeName.COLORNAME)=="Red"); 
-    }
-    
-    public void testBinderySignature()
-    {
-        JDFDoc d=new JDFDoc(ElementName.JDF);
-        JDFNode n=d.getJDFRoot();
-        JDFResource bs = n.addResource(ElementName.BINDERYSIGNATURE, null, null, null, null, null, null); 
-        assertEquals("bs class",bs.getResourceClass(),EnumResourceClass.Parameter);
-        bs=n.addResource(ElementName.BINDERYSIGNATURE, JDFResource.EnumResourceClass.Parameter, null, null, n, null, null);
-        assertEquals("bs class old style",bs.getResourceClass(),EnumResourceClass.Parameter);
-        assertTrue(bs.validClass());
-    }
-    
-    public void testMediaIntent()
-    {
-        JDFDoc d=new JDFDoc(ElementName.JDF);
-        JDFNode n=d.getJDFRoot();
-        n.setType("Product",true);
-        
-        JDFMediaIntent mi = (JDFMediaIntent) n.appendMatchingResource(ElementName.MEDIAINTENT,EnumProcessUsage.AnyInput,null);
-        JDFStringSpan sb=mi.appendStockBrand();
-        sb.setActual("abc foo");
-        sb.setPreferred("abc foo");
-        assertTrue("valid StockBrand",sb.isValid(EnumValidationLevel.Complete));
-        assertEquals(mi.getValidClass(),EnumResourceClass.Intent);
-        assertTrue(mi.validClass());
-    }
-    
-    public void testDevice()
-    {
-        JDFDoc d=new JDFDoc(ElementName.JDF);
-        JDFNode n=d.getJDFRoot();
-        n.setType("Stitching",true);
-        JDFDevice dev=(JDFDevice) n.appendMatchingResource(ElementName.DEVICE,EnumProcessUsage.AnyInput,null);
-        dev.setResStatus(EnumResStatus.Available,true);
-        dev.setKnownLocalizations(new VString("De", null));
-        dev.setSerialNumber("12345");
-        dev.setSecureJMFURL("http://fififi");
-        JDFModule m=dev.appendModule();
-//      m.setModuleIndex(0);
-        m.setModelDescription("1234");
-        JDFIconList il=dev.appendIconList();
-        assertFalse("empty iconlist",il.isValid(EnumValidationLevel.Complete));
-        assertTrue("empty iconlist",il.isValid(EnumValidationLevel.Incomplete));
-        JDFIcon ic=il.appendIcon();
-        ic.setSize(new JDFXYPair(200,200));
-        ic.setBitDepth(8);
-        JDFFileSpec fs=ic.appendFileSpec();
-        fs.setURL("file:///this.ico");
-        
-        assertTrue("icon valid",ic.isValid(EnumValidationLevel.Complete));
-        assertTrue("iconlist valid",il.isValid(EnumValidationLevel.Complete));
-        assertTrue("mod valid",m.isValid(EnumValidationLevel.Complete));
-        assertTrue("dev valid",dev.isValid(EnumValidationLevel.Complete));
-        assertTrue(dev.validClass());
+	public void testRunList()
+	{
+		JDFDoc d = new JDFDoc(ElementName.JDF);
+		JDFNode r = d.getJDFRoot();
+		JDFRunList rl = (JDFRunList) r.addResource("RunList", null,
+				EnumUsage.Input, null, null, null, null);
+		JDFInsertSheet is1 = rl.appendInsertSheet();
+		is1.setSheetType(EnumSheetType.SeparatorSheet);
+		is1.setSheetUsage(EnumSheetUsage.Slip);
+		JDFInsertSheet is2 = rl.appendInsertSheet();
+		is2.setSheetType(EnumSheetType.SeparatorSheet);
+		is2.setSheetUsage(EnumSheetUsage.Slip);
+		assertNotSame("two insert sheets", is1, is2);
 
-    }
-    
-    // test coverapplication and score
-    public void testScore()
-    {
-        
-        JDFDoc d=new JDFDoc(ElementName.JDF);
-        JDFNode n=d.getJDFRoot();
-        n.setType("CoverApplication",true);
-        JDFCoverApplicationParams cap=(JDFCoverApplicationParams) n.appendMatchingResource(ElementName.COVERAPPLICATIONPARAMS,EnumProcessUsage.AnyInput,null);
-        JDFScore score=cap.appendScore();
-        score.setSide(EnumScoreSide.FromInside);
-        score.setOffset(1234.5);
-        assertTrue("score 1",score.isValid(EnumValidationLevel.Complete));
-        score=cap.appendScore();
-        score.setSide(EnumScoreSide.FromOutside);
-        assertTrue("score 2",score.isValid(EnumValidationLevel.Complete));
-        assertTrue("cap",cap.isValid(EnumValidationLevel.Complete));
-        // we know that we are incomplete since we have missing resources
-        assertTrue("n",n.isValid(EnumValidationLevel.Incomplete));
-        
-    }
-    
+		rl.appendLayoutElement(); // 1
+		assertTrue("runlist valid", rl.isValid(EnumValidationLevel.Complete));
+		boolean b1 = false;
+		try
+		{
+			rl.appendLayoutElement();
+		} catch (JDFException e)
+		{
+			b1 = true;
+		}
+		assertTrue("only one layoutelement possible", b1);
+	}
+
+	public void testEnumerations()
+	{
+		JDFDoc d = new JDFDoc(ElementName.JDF);
+		JDFNode r = d.getJDFRoot();
+		JDFColorPool cp = (JDFColorPool) r.addResource("ColorPool", null,
+				EnumUsage.Input, null, null, null, null);
+		JDFColor col = cp.appendColor();
+		col.setColorName(EnumNamedColor.Red);
+		assertTrue("named color get", col.getColorName() == EnumNamedColor.Red);
+		assertTrue("named color get raw", col
+				.getAttribute(AttributeName.COLORNAME) == "Red");
+	}
+
+	public void testBinderySignature()
+	{
+		JDFDoc d = new JDFDoc(ElementName.JDF);
+		JDFNode n = d.getJDFRoot();
+		JDFResource bs = n.addResource(ElementName.BINDERYSIGNATURE, null,
+				null, null, null, null, null);
+		assertEquals("bs class", bs.getResourceClass(),
+				EnumResourceClass.Parameter);
+		bs = n.addResource(ElementName.BINDERYSIGNATURE,
+				JDFResource.EnumResourceClass.Parameter, null, null, n, null,
+				null);
+		assertEquals("bs class old style", bs.getResourceClass(),
+				EnumResourceClass.Parameter);
+		assertTrue(bs.validClass());
+	}
+
+	public void testMediaIntent()
+	{
+		JDFDoc d = new JDFDoc(ElementName.JDF);
+		JDFNode n = d.getJDFRoot();
+		n.setType("Product", true);
+
+		JDFMediaIntent mi = (JDFMediaIntent) n.appendMatchingResource(
+				ElementName.MEDIAINTENT, EnumProcessUsage.AnyInput, null);
+		JDFStringSpan sb = mi.appendStockBrand();
+		sb.setActual("abc foo");
+		sb.setPreferred("abc foo");
+		assertTrue("valid StockBrand", sb.isValid(EnumValidationLevel.Complete));
+		assertEquals(mi.getValidClass(), EnumResourceClass.Intent);
+		assertTrue(mi.validClass());
+	}
+
+	public void testDevice()
+	{
+		JDFDoc d = new JDFDoc(ElementName.JDF);
+		JDFNode n = d.getJDFRoot();
+		n.setType("Stitching", true);
+		JDFDevice dev = (JDFDevice) n.appendMatchingResource(
+				ElementName.DEVICE, EnumProcessUsage.AnyInput, null);
+		dev.setResStatus(EnumResStatus.Available, true);
+		dev.setKnownLocalizations(new VString("De", null));
+		dev.setSerialNumber("12345");
+		dev.setSecureJMFURL("http://fififi");
+		JDFModule m = dev.appendModule();
+		// m.setModuleIndex(0);
+		m.setModelDescription("1234");
+		JDFIconList il = dev.appendIconList();
+		assertFalse("empty iconlist", il.isValid(EnumValidationLevel.Complete));
+		assertTrue("empty iconlist", il.isValid(EnumValidationLevel.Incomplete));
+		JDFIcon ic = il.appendIcon();
+		ic.setSize(new JDFXYPair(200, 200));
+		ic.setBitDepth(8);
+		JDFFileSpec fs = ic.appendFileSpec();
+		fs.setURL("file:///this.ico");
+
+		assertTrue("icon valid", ic.isValid(EnumValidationLevel.Complete));
+		assertTrue("iconlist valid", il.isValid(EnumValidationLevel.Complete));
+		assertTrue("mod valid", m.isValid(EnumValidationLevel.Complete));
+		assertTrue("dev valid", dev.isValid(EnumValidationLevel.Complete));
+		assertTrue(dev.validClass());
+
+	}
+
+	// test coverapplication and score
+	public void testScore()
+	{
+
+		JDFDoc d = new JDFDoc(ElementName.JDF);
+		JDFNode n = d.getJDFRoot();
+		n.setType("CoverApplication", true);
+		JDFCoverApplicationParams cap = (JDFCoverApplicationParams) n
+				.appendMatchingResource(ElementName.COVERAPPLICATIONPARAMS,
+						EnumProcessUsage.AnyInput, null);
+		JDFScore score = cap.appendScore();
+		score.setSide(EnumScoreSide.FromInside);
+		score.setOffset(1234.5);
+		assertTrue("score 1", score.isValid(EnumValidationLevel.Complete));
+		score = cap.appendScore();
+		score.setSide(EnumScoreSide.FromOutside);
+		assertTrue("score 2", score.isValid(EnumValidationLevel.Complete));
+		assertTrue("cap", cap.isValid(EnumValidationLevel.Complete));
+		// we know that we are incomplete since we have missing resources
+		assertTrue("n", n.isValid(EnumValidationLevel.Incomplete));
+
+	}
+
 }

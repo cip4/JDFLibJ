@@ -38,7 +38,7 @@
  *
  * Usage of this software in commercial products is subject to restrictions. For
  * details please consult info@cip4.org.
-  *
+ *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -78,18 +78,17 @@ import org.cip4.jdflib.auto.JDFAutoStitchingParams.EnumStapleShape;
  * Test for JDFURL.
  * 
  * @author <a href="mailto:Michael.Kohn@heidelberg.com">Michael Kohn</a>,
- * Heidelberger Druckmaschinen AG, Tel. 3538
- *
+ *         Heidelberger Druckmaschinen AG, Tel. 3538
+ * 
  */
 public class JDFEnumerationTest extends JDFTestCaseBase
 {
-    
-    
-    public final void testtoString()
-    {
-        assertEquals(EnumStapleShape.Crown.getName(), "Crown");
-        assertEquals(EnumQueueStatus.Blocked.getName(), "Blocked");
-       
-    }
-    
+
+	public final void testtoString()
+	{
+		assertEquals(EnumStapleShape.Crown.getName(), "Crown");
+		assertEquals(EnumQueueStatus.Blocked.getName(), "Blocked");
+
+	}
+
 }

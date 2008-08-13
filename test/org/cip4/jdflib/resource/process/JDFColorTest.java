@@ -1,4 +1,3 @@
-
 /*
  *
  * The CIP4 Software License, Version 1.0
@@ -81,26 +80,29 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 public class JDFColorTest extends JDFTestCaseBase
 {
 
-    private JDFColorPool cp;
-    public void testSetRawName()
-    {
-        JDFColor c=cp.appendColor();
-        byte[] b="grün".getBytes();
-        c.set8BitNames(b);
-        assertEquals(c.get8BitName(), "grün");
-    }
+	private JDFColorPool cp;
 
-    /* (non-Javadoc)
-     * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
-     */
-    protected void setUp() throws Exception
-    {
-        // TODO Auto-generated method stub
-        super.setUp();
-        JDFDoc doc=new JDFDoc("JDF");
-        JDFNode n=doc.getJDFRoot();
-        n.setType(EnumType.ColorSpaceConversion);
-        cp=(JDFColorPool) n.addResource(ElementName.COLORPOOL, null);
-    }
- 
+	public void testSetRawName()
+	{
+		JDFColor c = cp.appendColor();
+		byte[] b = "grün".getBytes();
+		c.set8BitNames(b);
+		assertEquals(c.get8BitName(), "grün");
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	protected void setUp() throws Exception
+	{
+		// TODO Auto-generated method stub
+		super.setUp();
+		JDFDoc doc = new JDFDoc("JDF");
+		JDFNode n = doc.getJDFRoot();
+		n.setType(EnumType.ColorSpaceConversion);
+		cp = (JDFColorPool) n.addResource(ElementName.COLORPOOL, null);
+	}
+
 }

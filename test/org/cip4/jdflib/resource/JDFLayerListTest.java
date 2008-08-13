@@ -1,4 +1,3 @@
-
 /*
  * The CIP4 Software License, Version 1.0
  *
@@ -93,274 +92,319 @@ import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFRunList;
 
-
 public class JDFLayerListTest extends JDFTestCaseBase
 {
-    private JDFRunList rlIn;
-    private JDFRunList rlOut;
-    private JDFNode n;
-    private JDFDoc d;
-    /**
-     * test layer runlist
-     * @return
-     */
-    public void testLayerRunList() throws Exception
-    {
-        JDFElement.setLongID(false);
-        setUpDoc();
-        final JDFIntegerRangeList pageRange = new JDFIntegerRangeList(new JDFIntegerRange(0,-1,16));
-        rlIn.setDescriptiveName("Layers are just another partversion layer selection in the link is achieved using multiple partversions");
+	private JDFRunList rlIn;
+	private JDFRunList rlOut;
+	private JDFNode n;
+	private JDFDoc d;
 
-        JDFRunList rlAll=(JDFRunList) rlIn.addPartition(EnumPartIDKey.PartVersion, "CMYK");
-        rlAll.setFileURL("background.pdf");
-        rlAll.setPages(pageRange);
+	/**
+	 * test layer runlist
+	 * 
+	 * @return
+	 */
+	public void testLayerRunList() throws Exception
+	{
+		JDFElement.setLongID(false);
+		setUpDoc();
+		final JDFIntegerRangeList pageRange = new JDFIntegerRangeList(
+				new JDFIntegerRange(0, -1, 16));
+		rlIn
+				.setDescriptiveName("Layers are just another partversion layer selection in the link is achieved using multiple partversions");
 
-        JDFRunList rlEn=(JDFRunList) rlIn.addPartition(EnumPartIDKey.PartVersion, "FR");
-        rlEn.setFileURL("Francais.pdf");
-        rlEn.setPages(pageRange);
-        rlEn.setLogicalPage(16);
+		JDFRunList rlAll = (JDFRunList) rlIn.addPartition(
+				EnumPartIDKey.PartVersion, "CMYK");
+		rlAll.setFileURL("background.pdf");
+		rlAll.setPages(pageRange);
 
-        JDFRunList rlDe=(JDFRunList) rlIn.addPartition(EnumPartIDKey.PartVersion, "De");
-        rlDe.setFileURL("deutsch.pdf");
-        rlDe.setPages(pageRange);
-        rlDe.setLogicalPage(16);
+		JDFRunList rlEn = (JDFRunList) rlIn.addPartition(
+				EnumPartIDKey.PartVersion, "FR");
+		rlEn.setFileURL("Francais.pdf");
+		rlEn.setPages(pageRange);
+		rlEn.setLogicalPage(16);
 
-        setupLayout(false);
+		JDFRunList rlDe = (JDFRunList) rlIn.addPartition(
+				EnumPartIDKey.PartVersion, "De");
+		rlDe.setFileURL("deutsch.pdf");
+		rlDe.setPages(pageRange);
+		rlDe.setLogicalPage(16);
 
-        n.setPartStatus(new JDFAttributeMap(EnumPartIDKey.PartVersion,"De"),EnumNodeStatus.Completed);
-        JDFResourceLink rl=n.getLink(rlIn,null);
-        rl.setPartition(EnumPartIDKey.PartVersion, "CMYK De");
-        d.write2File(sm_dirTestDataTemp+File.separator+"LayerList.jdf",2,false);
-        rl.setPartition(EnumPartIDKey.PartVersion, "De");
-        rl.setDescriptiveName("Only DE, no bkg partversion is selected");
-        d.write2File(sm_dirTestDataTemp+File.separator+"LayerList_BKG.jdf",2,false);
-    }
-    /**
-     * test layer runlist
-     * @return
-     */
-    public void testLayerRunListWithLL() throws Exception
-    {
-        JDFElement.setLongID(false);
-        setUpDoc();
-        setupRunList(0);
+		setupLayout(false);
 
-        setupLayout(false);
+		n.setPartStatus(new JDFAttributeMap(EnumPartIDKey.PartVersion, "De"),
+				EnumNodeStatus.Completed);
+		JDFResourceLink rl = n.getLink(rlIn, null);
+		rl.setPartition(EnumPartIDKey.PartVersion, "CMYK De");
+		d.write2File(sm_dirTestDataTemp + File.separator + "LayerList.jdf", 2,
+				false);
+		rl.setPartition(EnumPartIDKey.PartVersion, "De");
+		rl.setDescriptiveName("Only DE, no bkg partversion is selected");
+		d.write2File(sm_dirTestDataTemp + File.separator + "LayerList_BKG.jdf",
+				2, false);
+	}
 
-        n.setPartStatus(new JDFAttributeMap(EnumPartIDKey.PartVersion,"De"),EnumNodeStatus.Completed);
-        JDFResourceLink rl=n.getLink(rlIn,null);
-        rl.setPartition(EnumPartIDKey.PartVersion, "De");
-        d.write2File(sm_dirTestDataTemp+File.separator+"LayerListWithLL.jdf",2,false);
-        JDFAttributeMap map=new JDFAttributeMap();
-        map.put(EnumPartIDKey.PartVersion, "De");
-        map.put(EnumPartIDKey.LayerIDs, "1");
-        rl.setPartMap(map);
-        rl.setDescriptiveName("Only DE, no bkg partversion is selected");
-        d.write2File(sm_dirTestDataTemp+File.separator+"LayerListWithLL_BKG.jdf",2,false);
-    }
-    
-    /**
-     * test layer runlist
-     * @return
-     */
-    public void testLayerRunListComplex() throws Exception
-    {
-        JDFElement.setLongID(false);
-        setUpDoc();
-        setupRunList(1);
-        setupLayout(true);
+	/**
+	 * test layer runlist
+	 * 
+	 * @return
+	 */
+	public void testLayerRunListWithLL() throws Exception
+	{
+		JDFElement.setLongID(false);
+		setUpDoc();
+		setupRunList(0);
 
-        n.setPartStatus(new JDFAttributeMap(EnumPartIDKey.PartVersion,"De"),EnumNodeStatus.Completed);
-        JDFResourceLink rl=n.getLink(rlIn,null);
-        rl.setPartition(EnumPartIDKey.PartVersion, "De Euro");
-        d.write2File(sm_dirTestDataTemp+File.separator+"LayerListDeEuro.jdf",2,false);
-        
-        VJDFAttributeMap vMap=new VJDFAttributeMap();
-        JDFAttributeMap map=new JDFAttributeMap();
-        map.put(EnumPartIDKey.PartVersion, "De");
-        map.put(EnumPartIDKey.LayerIDs, "1");
-        vMap.add(map);
+		setupLayout(false);
 
-        map=new JDFAttributeMap();
-        map.put(EnumPartIDKey.PartVersion, "Euro");
-        map.put(EnumPartIDKey.LayerIDs, "2");
-        vMap.add(map);
-        rl.setPartMapVector(vMap);
+		n.setPartStatus(new JDFAttributeMap(EnumPartIDKey.PartVersion, "De"),
+				EnumNodeStatus.Completed);
+		JDFResourceLink rl = n.getLink(rlIn, null);
+		rl.setPartition(EnumPartIDKey.PartVersion, "De");
+		d.write2File(sm_dirTestDataTemp + File.separator
+				+ "LayerListWithLL.jdf", 2, false);
+		JDFAttributeMap map = new JDFAttributeMap();
+		map.put(EnumPartIDKey.PartVersion, "De");
+		map.put(EnumPartIDKey.LayerIDs, "1");
+		rl.setPartMap(map);
+		rl.setDescriptiveName("Only DE, no bkg partversion is selected");
+		d.write2File(sm_dirTestDataTemp + File.separator
+				+ "LayerListWithLL_BKG.jdf", 2, false);
+	}
 
-        rl.setDescriptiveName("Only DE + Euro, no bkg partversion is selected");
-        d.write2File(sm_dirTestDataTemp+File.separator+"LayerListDeEuro_BKG.jdf",2,false);
-    }
+	/**
+	 * test layer runlist
+	 * 
+	 * @return
+	 */
+	public void testLayerRunListComplex() throws Exception
+	{
+		JDFElement.setLongID(false);
+		setUpDoc();
+		setupRunList(1);
+		setupLayout(true);
 
-    /**
-     * test layer runlist
-     * @return
-     */
-    public void testLayerRunListIdentical() throws Exception
-    {
-        JDFElement.setLongID(false);
-        setUpDoc();
-        setupRunList(2);
-        setupLayout(true);
+		n.setPartStatus(new JDFAttributeMap(EnumPartIDKey.PartVersion, "De"),
+				EnumNodeStatus.Completed);
+		JDFResourceLink rl = n.getLink(rlIn, null);
+		rl.setPartition(EnumPartIDKey.PartVersion, "De Euro");
+		d.write2File(sm_dirTestDataTemp + File.separator
+				+ "LayerListDeEuro.jdf", 2, false);
 
-        n.setPartStatus(new JDFAttributeMap(EnumPartIDKey.PartVersion,"De"),EnumNodeStatus.Completed);
-        JDFResourceLink rl=n.getLink(rlIn,null);
-        rl.setPartition(EnumPartIDKey.PartVersion, "De");
-        d.write2File(sm_dirTestDataTemp+File.separator+"LayerListDeEuroIdentical.jdf",2,false);
-        
-        JDFAttributeMap map=new JDFAttributeMap();
-        map.put(EnumPartIDKey.PartVersion, "De");
-        map.put(EnumPartIDKey.LayerIDs, "1 2");
+		VJDFAttributeMap vMap = new VJDFAttributeMap();
+		JDFAttributeMap map = new JDFAttributeMap();
+		map.put(EnumPartIDKey.PartVersion, "De");
+		map.put(EnumPartIDKey.LayerIDs, "1");
+		vMap.add(map);
 
-        rl.setPartMap(map);
+		map = new JDFAttributeMap();
+		map.put(EnumPartIDKey.PartVersion, "Euro");
+		map.put(EnumPartIDKey.LayerIDs, "2");
+		vMap.add(map);
+		rl.setPartMapVector(vMap);
 
-        rl.setDescriptiveName("Only Language + Currency, no bkg partversion is selected");
-        d.write2File(sm_dirTestDataTemp+File.separator+"LayerListDeEuroIdentical_BKG.jdf",2,false);
-    }
-    
-    
-    /**
+		rl.setDescriptiveName("Only DE + Euro, no bkg partversion is selected");
+		d.write2File(sm_dirTestDataTemp + File.separator
+				+ "LayerListDeEuro_BKG.jdf", 2, false);
+	}
+
+	/**
+	 * test layer runlist
+	 * 
+	 * @return
+	 */
+	public void testLayerRunListIdentical() throws Exception
+	{
+		JDFElement.setLongID(false);
+		setUpDoc();
+		setupRunList(2);
+		setupLayout(true);
+
+		n.setPartStatus(new JDFAttributeMap(EnumPartIDKey.PartVersion, "De"),
+				EnumNodeStatus.Completed);
+		JDFResourceLink rl = n.getLink(rlIn, null);
+		rl.setPartition(EnumPartIDKey.PartVersion, "De");
+		d.write2File(sm_dirTestDataTemp + File.separator
+				+ "LayerListDeEuroIdentical.jdf", 2, false);
+
+		JDFAttributeMap map = new JDFAttributeMap();
+		map.put(EnumPartIDKey.PartVersion, "De");
+		map.put(EnumPartIDKey.LayerIDs, "1 2");
+
+		rl.setPartMap(map);
+
+		rl
+				.setDescriptiveName("Only Language + Currency, no bkg partversion is selected");
+		d.write2File(sm_dirTestDataTemp + File.separator
+				+ "LayerListDeEuroIdentical_BKG.jdf", 2, false);
+	}
+
+	/**
      * 
      */
-    private void setupRunList(int type)
-    {
-        final JDFIntegerRangeList pageRange = new JDFIntegerRangeList(new JDFIntegerRange(0,-1,16));
+	private void setupRunList(int type)
+	{
+		final JDFIntegerRangeList pageRange = new JDFIntegerRangeList(
+				new JDFIntegerRange(0, -1, 16));
 
-        rlIn.setPartUsage(EnumPartUsage.Sparse);
-        rlIn.setDescriptiveName("Explicitly partitioned by LayerIDs to enable layer selextion in the link");
-        JDFRunList rlAll=(JDFRunList) rlIn.addPartition(EnumPartIDKey.LayerIDs, "0");
-        rlAll.setFileURL("background.pdf");
-        rlAll.setPages(pageRange);
+		rlIn.setPartUsage(EnumPartUsage.Sparse);
+		rlIn
+				.setDescriptiveName("Explicitly partitioned by LayerIDs to enable layer selextion in the link");
+		JDFRunList rlAll = (JDFRunList) rlIn.addPartition(
+				EnumPartIDKey.LayerIDs, "0");
+		rlAll.setFileURL("background.pdf");
+		rlAll.setPages(pageRange);
 
-        JDFRunList rlLanguage=(JDFRunList) rlIn.addPartition(EnumPartIDKey.LayerIDs, "1");
-        JDFRunList rlEn=(JDFRunList) rlLanguage.addPartition(EnumPartIDKey.PartVersion, "FR");
-        rlEn.setFileURL("francais.pdf");
-        rlEn.setPages(pageRange);
-        rlEn.setLogicalPage(16);
+		JDFRunList rlLanguage = (JDFRunList) rlIn.addPartition(
+				EnumPartIDKey.LayerIDs, "1");
+		JDFRunList rlEn = (JDFRunList) rlLanguage.addPartition(
+				EnumPartIDKey.PartVersion, "FR");
+		rlEn.setFileURL("francais.pdf");
+		rlEn.setPages(pageRange);
+		rlEn.setLogicalPage(16);
 
-        JDFRunList rlDe=(JDFRunList) rlLanguage.addPartition(EnumPartIDKey.PartVersion, "De");
-        rlDe.setFileURL("deutsch.pdf");
-        rlDe.setPages(pageRange);
-        rlDe.setLogicalPage(16);
+		JDFRunList rlDe = (JDFRunList) rlLanguage.addPartition(
+				EnumPartIDKey.PartVersion, "De");
+		rlDe.setFileURL("deutsch.pdf");
+		rlDe.setPages(pageRange);
+		rlDe.setLogicalPage(16);
 
-        
-        if(type==1)
-        {
-            JDFRunList rlCurrency=(JDFRunList) rlIn.addPartition(EnumPartIDKey.LayerIDs, "2");
-            JDFRunList rlEur=(JDFRunList) rlCurrency.addPartition(EnumPartIDKey.PartVersion, "Euro");
-            rlEur.setFileURL("€.pdf");
-            rlEur.setPages(pageRange);
-            rlEur.setLogicalPage(32);
-            JDFRunList rlCHF=(JDFRunList) rlCurrency.addPartition(EnumPartIDKey.PartVersion, "CHF");
-            rlCHF.setFileURL("Fränkli.pdf");
-            rlCHF.setPages(pageRange);
-            rlCHF.setLogicalPage(32);
-        }
-        else if (type==2)
-        {
-            JDFRunList rlCurrency=(JDFRunList) rlIn.addPartition(EnumPartIDKey.LayerIDs, "2");
-            JDFRunList rlEur=(JDFRunList) rlCurrency.addPartition(EnumPartIDKey.PartVersion, "De");
-            rlEur.setFileURL("€.pdf");
-            rlEur.setPages(pageRange);
-            rlEur.setLogicalPage(32);
-            
-            JDFRunList rlEur2=(JDFRunList) rlCurrency.addPartition(EnumPartIDKey.PartVersion, "Fr");
-            rlEur2.setIdentical(rlEur);
+		if (type == 1)
+		{
+			JDFRunList rlCurrency = (JDFRunList) rlIn.addPartition(
+					EnumPartIDKey.LayerIDs, "2");
+			JDFRunList rlEur = (JDFRunList) rlCurrency.addPartition(
+					EnumPartIDKey.PartVersion, "Euro");
+			rlEur.setFileURL("€.pdf");
+			rlEur.setPages(pageRange);
+			rlEur.setLogicalPage(32);
+			JDFRunList rlCHF = (JDFRunList) rlCurrency.addPartition(
+					EnumPartIDKey.PartVersion, "CHF");
+			rlCHF.setFileURL("Fränkli.pdf");
+			rlCHF.setPages(pageRange);
+			rlCHF.setLogicalPage(32);
+		} else if (type == 2)
+		{
+			JDFRunList rlCurrency = (JDFRunList) rlIn.addPartition(
+					EnumPartIDKey.LayerIDs, "2");
+			JDFRunList rlEur = (JDFRunList) rlCurrency.addPartition(
+					EnumPartIDKey.PartVersion, "De");
+			rlEur.setFileURL("€.pdf");
+			rlEur.setPages(pageRange);
+			rlEur.setLogicalPage(32);
 
-            JDFRunList rlCHF=(JDFRunList) rlCurrency.addPartition(EnumPartIDKey.PartVersion, "Ch");
-            rlCHF.setFileURL("Fränkli.pdf");
-            rlCHF.setPages(pageRange);
-            rlCHF.setLogicalPage(32);
-            
-            JDFRunList rlCh=(JDFRunList) rlLanguage.addPartition(EnumPartIDKey.PartVersion, "Ch");
-            rlCh.setIdentical(rlDe);
-        }
-    }
+			JDFRunList rlEur2 = (JDFRunList) rlCurrency.addPartition(
+					EnumPartIDKey.PartVersion, "Fr");
+			rlEur2.setIdentical(rlEur);
 
-    /**
+			JDFRunList rlCHF = (JDFRunList) rlCurrency.addPartition(
+					EnumPartIDKey.PartVersion, "Ch");
+			rlCHF.setFileURL("Fränkli.pdf");
+			rlCHF.setPages(pageRange);
+			rlCHF.setLogicalPage(32);
+
+			JDFRunList rlCh = (JDFRunList) rlLanguage.addPartition(
+					EnumPartIDKey.PartVersion, "Ch");
+			rlCh.setIdentical(rlDe);
+		}
+	}
+
+	/**
      * 
      */
-    private void setUpDoc()
-    {
-        d=new JDFDoc("JDF");
-        n=d.getJDFRoot();
-        n.setJobID("JobID");
-        n.setType(EnumType.Imposition);
-        rlIn=(JDFRunList) n.appendMatchingResource("RunList", EnumProcessUsage.AnyInput, null);
-        rlIn.setResStatus(EnumResStatus.Available, false);
-        rlOut=(JDFRunList) n.appendMatchingResource("RunList", EnumProcessUsage.AnyOutput, null);
-    }
+	private void setUpDoc()
+	{
+		d = new JDFDoc("JDF");
+		n = d.getJDFRoot();
+		n.setJobID("JobID");
+		n.setType(EnumType.Imposition);
+		rlIn = (JDFRunList) n.appendMatchingResource("RunList",
+				EnumProcessUsage.AnyInput, null);
+		rlIn.setResStatus(EnumResStatus.Available, false);
+		rlOut = (JDFRunList) n.appendMatchingResource("RunList",
+				EnumProcessUsage.AnyOutput, null);
+	}
 
-    /**
-     * @param n
-     * @param rlOut
-     */
-    private void setupLayout(boolean complex)
-    {
-        JDFLayout lo=(JDFLayout) n.appendMatchingResource("Layout", EnumProcessUsage.AnyInput, null);
-        JDFLayerList ll=lo.appendLayerList();
-        final String layerNames = "BackGround Language";
+	/**
+	 * @param n
+	 * @param rlOut
+	 */
+	private void setupLayout(boolean complex)
+	{
+		JDFLayout lo = (JDFLayout) n.appendMatchingResource("Layout",
+				EnumProcessUsage.AnyInput, null);
+		JDFLayerList ll = lo.appendLayerList();
+		final String layerNames = "BackGround Language";
 
-        VString layers=new VString(layerNames," ");
-        if(complex)
-            layers.add("Currency");
+		VString layers = new VString(layerNames, " ");
+		if (complex)
+			layers.add("Currency");
 
-        for(int i=0;i<layers.size();i++)
-        {
-            ll.appendLayerDetails().setName(layers.stringAt(i));
-        }
+		for (int i = 0; i < layers.size(); i++)
+		{
+			ll.appendLayerDetails().setName(layers.stringAt(i));
+		}
 
-        JDFRunList rlOutDe=(JDFRunList) rlOut.addPartition(EnumPartIDKey.PartVersion, "De");
-        rlOutDe.setResStatus(EnumResStatus.Available, true);
-        JDFRunList rlOutEn=(JDFRunList) rlOut.addPartition(EnumPartIDKey.PartVersion, "Fr");
-        rlOutEn.setResStatus(EnumResStatus.Unavailable, true);
-        if(complex)
-        {
-            JDFRunList rlOutSwiss=(JDFRunList) rlOut.addPartition(EnumPartIDKey.PartVersion, "Ch");
-            rlOutSwiss.setResStatus(EnumResStatus.Unavailable, true);
-        }
+		JDFRunList rlOutDe = (JDFRunList) rlOut.addPartition(
+				EnumPartIDKey.PartVersion, "De");
+		rlOutDe.setResStatus(EnumResStatus.Available, true);
+		JDFRunList rlOutEn = (JDFRunList) rlOut.addPartition(
+				EnumPartIDKey.PartVersion, "Fr");
+		rlOutEn.setResStatus(EnumResStatus.Unavailable, true);
+		if (complex)
+		{
+			JDFRunList rlOutSwiss = (JDFRunList) rlOut.addPartition(
+					EnumPartIDKey.PartVersion, "Ch");
+			rlOutSwiss.setResStatus(EnumResStatus.Unavailable, true);
+		}
 
+		for (int i = 0; i < 2; i++)
+		{
+			String sheetName = "Sheet" + i;
+			JDFLayout lSheet = (JDFLayout) lo.addPartition(
+					EnumPartIDKey.SheetName, sheetName);
+			JDFRunList rlSheet = (JDFRunList) rlOutDe.addPartition(
+					EnumPartIDKey.SheetName, sheetName);
+			for (int j = 0; j < 2; j++)
+			{
+				String side = j == 0 ? "Front" : "Back";
+				JDFLayout lSide = (JDFLayout) lSheet.addPartition(
+						EnumPartIDKey.Side, side);
+				JDFRunList rlSide = (JDFRunList) rlSheet.addPartition(
+						EnumPartIDKey.Side, side);
+				rlSide.setFileURL("file://out/De/" + sheetName + "_" + side
+						+ ".tif");
+				for (int k = 0; k < 4; k++)
+				{
+					JDFContentObject poBkg = lSide.appendContentObject();
+					final int ord = i * 8 + j * 4 + k;
+					poBkg.setOrd(ord);
+					poBkg.setOrdID(ord);
 
-        for(int i=0;i<2;i++)
-        {
-            String sheetName="Sheet"+i;
-            JDFLayout lSheet=(JDFLayout)lo.addPartition(EnumPartIDKey.SheetName, sheetName);
-            JDFRunList rlSheet=(JDFRunList)rlOutDe.addPartition(EnumPartIDKey.SheetName, sheetName);
-            for(int j=0;j<2;j++)
-            {
-                String side = j==0 ?"Front":"Back";
-                JDFLayout lSide=(JDFLayout)lSheet.addPartition(EnumPartIDKey.Side, side);
-                JDFRunList rlSide=(JDFRunList)rlSheet.addPartition(EnumPartIDKey.Side, side);
-                rlSide.setFileURL("file://out/De/"+sheetName+"_"+side+".tif");
-                for(int k=0;k<4;k++)
-                {
-                    JDFContentObject poBkg=lSide.appendContentObject();
-                    final int ord = i*8 + j*4 + k;
-                    poBkg.setOrd(ord);
-                    poBkg.setOrdID(ord);
+					final JDFMatrix matrix = new JDFMatrix(1., 0., 0., 1., 0.,
+							0.);
+					matrix.shift((k % 2) * 200, (k / 2) * 300);
+					poBkg.setCTM(matrix);
+					poBkg.setLayerID(0);
 
-                    final JDFMatrix matrix = new JDFMatrix(1.,0.,0.,1.,0.,0.);
-                    matrix.shift((k%2)*200,(k/2)*300);
-                    poBkg.setCTM(matrix);
-                    poBkg.setLayerID(0);
+					JDFContentObject poLang = lSide.appendContentObject();
+					poLang.setOrd(ord + 16);
+					poLang.setOrdID(ord);
+					poLang.setCTM(matrix);
+					poLang.setLayerID(1);
 
-                    JDFContentObject poLang=lSide.appendContentObject();
-                    poLang.setOrd(ord+16);
-                    poLang.setOrdID(ord);
-                    poLang.setCTM(matrix);
-                    poLang.setLayerID(1);
+					if (complex)
+					{
+						JDFContentObject pOCurr = lSide.appendContentObject();
+						pOCurr.setOrd(ord + 32);
+						pOCurr.setOrdID(ord);
+						pOCurr.setCTM(matrix);
+						pOCurr.setLayerID(2);
+					}
+				}
+			}
+		}
+	}
 
-                    if(complex)
-                    {
-                        JDFContentObject pOCurr=lSide.appendContentObject();
-                        pOCurr.setOrd(ord+32);
-                        pOCurr.setOrdID(ord);
-                        pOCurr.setCTM(matrix);
-                        pOCurr.setLayerID(2);
-                    }
-                }
-            }
-        }
-    }
-
-    /////////////////////////////////////////////////////////////////////////
+	// ///////////////////////////////////////////////////////////////////////
 }

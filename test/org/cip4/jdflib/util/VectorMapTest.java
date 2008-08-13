@@ -73,62 +73,67 @@ package org.cip4.jdflib.util;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 
-
 public class VectorMapTest extends JDFTestCaseBase
 {
-    private VectorMap<String,String> m;
+	private VectorMap<String, String> m;
 
-    public void testSize()
-    {
-        assertEquals(m.size("a"), 2);
-    }
-    public void testGetOne()
-    {
-        assertEquals(m.getOne("a", 0), "b");
-        assertEquals(m.getOne("a","b"), "b");
-    }
-    public void testPutOne()
-    {
-        assertEquals(m.size("a"), 2);
-        m.putOne("a", "b");
-        assertEquals(m.getOne("a", 0), "b");
-        assertEquals(m.getOne("a","b"), "b");
-    }
-    public void testRemoveOne()
-    {
-        m.removeOne("a", "b");
-        assertEquals(m.getOne("a", 0), "c");
-        assertEquals(m.size("a"), 1);
-        m.removeOne("a", "c");
-        assertNull(m.getOne("a","b"));
-        assertNull(m.get("a"));
-        m.removeOne("a", "c");
-        assertNull(m.getOne("a","b"));
-        assertNull(m.get("a"));
-    }
-    public void testSetOne()
-    {
-        m.setOne("a", "b1","b");
-        assertEquals(m.getOne("a", 0), "b1");
-        assertEquals(m.size("a"), 2);
-        m.setOne("a", "b2","b4");
-        assertEquals(m.getOne("a", 2), "b2");
-        assertEquals(m.size("a"), 3);
-        m.setOne("aaa", "bb","b4");
-        assertEquals(m.getOne("aaa", 0), "bb");
-        assertEquals(m.size("aaa"), 1);
-     }
+	public void testSize()
+	{
+		assertEquals(m.size("a"), 2);
+	}
 
-    /* (non-Javadoc)
-     * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
-     */
-    protected void setUp() throws Exception
-    {
-        // TODO Auto-generated method stub
-        super.setUp();
-        m=new VectorMap<String,String>();
-        m.putOne("a", "b");
-        m.putOne("a", "c");
-        m.putOne("a2", "c");
-    }
+	public void testGetOne()
+	{
+		assertEquals(m.getOne("a", 0), "b");
+		assertEquals(m.getOne("a", "b"), "b");
+	}
+
+	public void testPutOne()
+	{
+		assertEquals(m.size("a"), 2);
+		m.putOne("a", "b");
+		assertEquals(m.getOne("a", 0), "b");
+		assertEquals(m.getOne("a", "b"), "b");
+	}
+
+	public void testRemoveOne()
+	{
+		m.removeOne("a", "b");
+		assertEquals(m.getOne("a", 0), "c");
+		assertEquals(m.size("a"), 1);
+		m.removeOne("a", "c");
+		assertNull(m.getOne("a", "b"));
+		assertNull(m.get("a"));
+		m.removeOne("a", "c");
+		assertNull(m.getOne("a", "b"));
+		assertNull(m.get("a"));
+	}
+
+	public void testSetOne()
+	{
+		m.setOne("a", "b1", "b");
+		assertEquals(m.getOne("a", 0), "b1");
+		assertEquals(m.size("a"), 2);
+		m.setOne("a", "b2", "b4");
+		assertEquals(m.getOne("a", 2), "b2");
+		assertEquals(m.size("a"), 3);
+		m.setOne("aaa", "bb", "b4");
+		assertEquals(m.getOne("aaa", 0), "bb");
+		assertEquals(m.size("aaa"), 1);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	protected void setUp() throws Exception
+	{
+		// TODO Auto-generated method stub
+		super.setUp();
+		m = new VectorMap<String, String>();
+		m.putOne("a", "b");
+		m.putOne("a", "c");
+		m.putOne("a2", "c");
+	}
 }

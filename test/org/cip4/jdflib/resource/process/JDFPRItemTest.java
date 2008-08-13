@@ -38,7 +38,7 @@
  *
  * Usage of this software in commercial products is subject to restrictions. For
  * details please consult info@cip4.org.
-  *
+ *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -76,33 +76,31 @@ import org.cip4.jdflib.core.JDFDoc;
 
 /**
  * all kinds of fun tests around JDF 1.2 vs JDF 1.3 Layouts
- *
+ * 
  */
 public class JDFPRItemTest extends JDFTestCaseBase
 {
-    
-  
-    //////////////////////////////////////////////////////////////////////////
-    
-    public void testInsertPageSet()
-    {
-        JDFDoc d=new JDFDoc("PRItem");
-        JDFPRItem pi=(JDFPRItem)d.getRoot();
-        
-        pi.insertPageSet(3);
-        assertEquals(pi.getAttribute(AttributeName.PAGESET), "3");
-        pi.insertPageSet(3);
-        assertEquals(pi.getAttribute(AttributeName.PAGESET), "3");
-        pi.insertPageSet(5);
-        assertEquals(pi.getAttribute(AttributeName.PAGESET), "3 5");
-        pi.insertPageSet(2);
-        assertEquals(pi.getAttribute(AttributeName.PAGESET), "2 ~ 3 5");
-        pi.insertPageSet(4);
-        assertEquals(pi.getAttribute(AttributeName.PAGESET), "2 ~ 5");
-    }    
-    
-  
-    /////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////
-    
+
+	// ////////////////////////////////////////////////////////////////////////
+
+	public void testInsertPageSet()
+	{
+		JDFDoc d = new JDFDoc("PRItem");
+		JDFPRItem pi = (JDFPRItem) d.getRoot();
+
+		pi.insertPageSet(3);
+		assertEquals(pi.getAttribute(AttributeName.PAGESET), "3");
+		pi.insertPageSet(3);
+		assertEquals(pi.getAttribute(AttributeName.PAGESET), "3");
+		pi.insertPageSet(5);
+		assertEquals(pi.getAttribute(AttributeName.PAGESET), "3 5");
+		pi.insertPageSet(2);
+		assertEquals(pi.getAttribute(AttributeName.PAGESET), "2 ~ 3 5");
+		pi.insertPageSet(4);
+		assertEquals(pi.getAttribute(AttributeName.PAGESET), "2 ~ 5");
+	}
+
+	// ///////////////////////////////////////////////////
+	// ///////////////////////////////////////////////////
+
 }

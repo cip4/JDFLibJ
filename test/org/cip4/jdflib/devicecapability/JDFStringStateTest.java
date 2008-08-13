@@ -82,35 +82,35 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.resource.devicecapability.JDFStringState;
 
-
 public class JDFStringStateTest extends JDFTestCaseBase
 {
 
-    JDFStringState sState=null;
+	JDFStringState sState = null;
 
-    public void setUp() throws Exception
-    {
-        super.setUp();
-        JDFDoc doc=new JDFDoc("StringState");
-        sState=(JDFStringState)doc.getRoot();
+	public void setUp() throws Exception
+	{
+		super.setUp();
+		JDFDoc doc = new JDFDoc("StringState");
+		sState = (JDFStringState) doc.getRoot();
 
-    }
-    ////////////////////////////////////////////////////
+	}
 
-    ////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////
-    public final void testAddValue() throws Exception
-    {
-        sState.appendValueAllowedValue("20");
-        sState.addValue("24", EnumFitsValue.Allowed);
-        assertEquals(sState.getValueAllowedValue(1),"24");
-        sState.addValue("26", EnumFitsValue.Allowed);
-        assertEquals(sState.getValueAllowedValue(1),"24");
-        assertEquals(sState.getValueAllowedValue(2),"26");
-        sState.addValue("24", EnumFitsValue.Allowed);
-        assertEquals(sState.getValueAllowedValue(1),"24");
-        assertEquals(sState.getValueAllowedValue(2),"26");
-        assertNull(sState.getValueAllowedValue(3));
-    }
+	// //////////////////////////////////////////////////
+
+	// //////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////
+	public final void testAddValue() throws Exception
+	{
+		sState.appendValueAllowedValue("20");
+		sState.addValue("24", EnumFitsValue.Allowed);
+		assertEquals(sState.getValueAllowedValue(1), "24");
+		sState.addValue("26", EnumFitsValue.Allowed);
+		assertEquals(sState.getValueAllowedValue(1), "24");
+		assertEquals(sState.getValueAllowedValue(2), "26");
+		sState.addValue("24", EnumFitsValue.Allowed);
+		assertEquals(sState.getValueAllowedValue(1), "24");
+		assertEquals(sState.getValueAllowedValue(2), "26");
+		assertNull(sState.getValueAllowedValue(3));
+	}
 
 }

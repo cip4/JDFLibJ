@@ -73,26 +73,24 @@ package org.cip4.jdflib.util;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 
-
-
 public class BiHashMapTest extends JDFTestCaseBase
-{   
+{
 
-    ///////////////////////////////////////////////////////////////////////////
-    public void testPut() throws Exception
-    {
-        BiHashMap hm=new BiHashMap();
-        hm.put("a", "b");
-        assertEquals(hm.getValue("a"), "b");
-        assertEquals(hm.getKey("b"), "a");
-        hm.put("a", "c");
-        assertEquals(hm.getValue("a"), "c");
-        assertEquals(hm.getKey("c"), "a");
-        assertNull(hm.getKey("b"));
-        hm.clear();
-        assertEquals(hm.getKeyMap().size(), 0);
-        assertEquals(hm.getValMap().size(), 0);
-    }
-    ///////////////////////////////////////////////////////////////////////////
- 
-}   
+	// /////////////////////////////////////////////////////////////////////////
+	public void testPut() throws Exception
+	{
+		BiHashMap hm = new BiHashMap();
+		hm.put("a", "b");
+		assertEquals(hm.getValue("a"), "b");
+		assertEquals(hm.getKey("b"), "a");
+		hm.put("a", "c");
+		assertEquals(hm.getValue("a"), "c");
+		assertEquals(hm.getKey("c"), "a");
+		assertNull(hm.getKey("b"));
+		hm.clear();
+		assertEquals(hm.getKeyMap().size(), 0);
+		assertEquals(hm.getValMap().size(), 0);
+	}
+	// /////////////////////////////////////////////////////////////////////////
+
+}

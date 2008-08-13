@@ -81,174 +81,183 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.util.JDFDate;
 
-
 /**
  * @author MuchaD
- *
- * This implements the first fixture with unit tests for class JDFQueue.
+ * 
+ *         This implements the first fixture with unit tests for class JDFQueue.
  */
 public class JDFQueueEntryTest extends TestCase
 {
-    private JDFQueue q;
-    public String toString()
-    {
-        return q==null ? "null" : q.toString();
-    }
- 
+	private JDFQueue q;
 
-    public void testEndTime()
-    {
-        JDFQueueEntry _qe = (JDFQueueEntry) new JDFDoc(ElementName.QUEUEENTRY).getRoot();
-        JDFDate d=_qe.getEndTime();
-        assertNull(d);
-    }
+	public String toString()
+	{
+		return q == null ? "null" : q.toString();
+	}
 
-    public void testGetNextStatusVector()
-    {
-        JDFQueueEntry qe = (JDFQueueEntry) new JDFDoc(ElementName.QUEUEENTRY).getRoot();
-        qe.setQueueEntryStatus(EnumQueueEntryStatus.Aborted);
-        assertTrue(qe.getNextStatusVector().contains(EnumQueueEntryStatus.PendingReturn));
-        assertTrue(qe.getNextStatusVector().contains(EnumQueueEntryStatus.Aborted));
-        assertFalse(qe.getNextStatusVector().contains(EnumQueueEntryStatus.Running));
-    }
+	public void testEndTime()
+	{
+		JDFQueueEntry _qe = (JDFQueueEntry) new JDFDoc(ElementName.QUEUEENTRY)
+				.getRoot();
+		JDFDate d = _qe.getEndTime();
+		assertNull(d);
+	}
 
-  
+	public void testGetNextStatusVector()
+	{
+		JDFQueueEntry qe = (JDFQueueEntry) new JDFDoc(ElementName.QUEUEENTRY)
+				.getRoot();
+		qe.setQueueEntryStatus(EnumQueueEntryStatus.Aborted);
+		assertTrue(qe.getNextStatusVector().contains(
+				EnumQueueEntryStatus.PendingReturn));
+		assertTrue(qe.getNextStatusVector().contains(
+				EnumQueueEntryStatus.Aborted));
+		assertFalse(qe.getNextStatusVector().contains(
+				EnumQueueEntryStatus.Running));
+	}
 
-/////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////
+	// /
 
-    public void testSetPriority()
-    {
-        JDFQueueEntry qe=q.getQueueEntry("qe2");
-        assertEquals(q.getQueueEntryPos("qe2"), 1);
-        q.setAutomated(true);
-        int l=q.numEntries(null);
-        qe.setPriority(99);
-        assertEquals(q.numEntries(null), l);
-        assertEquals(q.getQueueEntryPos("qe2"), 1);
+	public void testSetPriority()
+	{
+		JDFQueueEntry qe = q.getQueueEntry("qe2");
+		assertEquals(q.getQueueEntryPos("qe2"), 1);
+		q.setAutomated(true);
+		int l = q.numEntries(null);
+		qe.setPriority(99);
+		assertEquals(q.numEntries(null), l);
+		assertEquals(q.getQueueEntryPos("qe2"), 1);
 
-        qe.setPriority(0);
-        assertEquals(q.numEntries(null), l);
-        assertEquals(q.getQueueEntryPos("qe2"), 2);
-        q.removeChildren(ElementName.QUEUEENTRY, null,null);
-        for(int i=0;i<1000;i++)
-        {
-            qe = q.appendQueueEntry();
-            qe.setQueueEntryID("q"+i);
-            qe.setPriority((i*7)%100);
-            qe.setQueueEntryStatus((i%3!=0) ? EnumQueueEntryStatus.Waiting : EnumQueueEntryStatus.Running);
-        }
-        JDFQueueEntry qeLast=null;
-        for(int i=0;i<1000;i++)
-        {
-            qe=q.getQueueEntry(i);           
-            assertTrue("queue is sorted: "+i,qe.compareTo(qeLast)>=0);
-            qeLast=qe;
-        }
-    }
+		qe.setPriority(0);
+		assertEquals(q.numEntries(null), l);
+		assertEquals(q.getQueueEntryPos("qe2"), 2);
+		q.removeChildren(ElementName.QUEUEENTRY, null, null);
+		for (int i = 0; i < 1000; i++)
+		{
+			qe = q.appendQueueEntry();
+			qe.setQueueEntryID("q" + i);
+			qe.setPriority((i * 7) % 100);
+			qe.setQueueEntryStatus((i % 3 != 0) ? EnumQueueEntryStatus.Waiting
+					: EnumQueueEntryStatus.Running);
+		}
+		JDFQueueEntry qeLast = null;
+		for (int i = 0; i < 1000; i++)
+		{
+			qe = q.getQueueEntry(i);
+			assertTrue("queue is sorted: " + i, qe.compareTo(qeLast) >= 0);
+			qeLast = qe;
+		}
+	}
 
+	////////////////////////////////////////////////////////////////////////////
+	// /
 
-/////////////////////////////////////////////////////////////////////////////
+	public void testSetQueueEntryStatus()
+	{
+		JDFQueueEntry qe = q.getQueueEntry("qe2");
+		assertEquals(q.getQueueEntryPos("qe2"), 1);
+		q.setAutomated(true);
+		assertEquals(q.getQueueStatus(), EnumQueueStatus.Running);
+		q.setMaxRunningEntries(3);
+		q.setMaxCompletedEntries(9999);
+		int l = q.numEntries(null);
+		qe.setQueueEntryStatus(EnumQueueEntryStatus.Completed);
+		assertEquals(q.numEntries(null), l);
+		assertTrue(qe.hasAttribute(AttributeName.ENDTIME));
+		assertEquals(q.getQueueEntryPos("qe2"), 3);
+		assertEquals("3 is max", EnumQueueStatus.Waiting, q.getQueueStatus());
+		qe.setQueueEntryStatus(EnumQueueEntryStatus.Running);
+		assertEquals("3 is max", EnumQueueStatus.Waiting, q.getQueueStatus());
+		assertEquals(q.numEntries(null), l);
+		assertEquals(q.getQueueEntryPos("qe2"), 0);
+		qe = q.getQueueEntry("qe1");
+		qe.setQueueEntryStatus(EnumQueueEntryStatus.Running);
+		assertEquals("3 is max", EnumQueueStatus.Running, q.getQueueStatus());
+		assertEquals(q.numEntries(null), l);
+		assertEquals(q.getQueueEntryPos("qe1"), 1);
 
-    public void testSetQueueEntryStatus()
-    {
-        JDFQueueEntry qe=q.getQueueEntry("qe2");
-        assertEquals(q.getQueueEntryPos("qe2"), 1);
-        q.setAutomated(true);
-        assertEquals(q.getQueueStatus(),EnumQueueStatus.Running);
-        q.setMaxRunningEntries(3);
-        q.setMaxCompletedEntries(9999);
-        int l=q.numEntries(null);
-        qe.setQueueEntryStatus(EnumQueueEntryStatus.Completed);
-        assertEquals(q.numEntries(null), l);
-        assertTrue(qe.hasAttribute(AttributeName.ENDTIME));
-        assertEquals(q.getQueueEntryPos("qe2"), 3);
-        assertEquals("3 is max", EnumQueueStatus.Waiting,q.getQueueStatus());
-        qe.setQueueEntryStatus(EnumQueueEntryStatus.Running);
-        assertEquals("3 is max", EnumQueueStatus.Waiting,q.getQueueStatus());
-        assertEquals(q.numEntries(null), l);
-        assertEquals(q.getQueueEntryPos("qe2"), 0);
-        qe=q.getQueueEntry("qe1");
-        qe.setQueueEntryStatus(EnumQueueEntryStatus.Running);
-        assertEquals("3 is max", EnumQueueStatus.Running,q.getQueueStatus());
-        assertEquals(q.numEntries(null), l);
-        assertEquals(q.getQueueEntryPos("qe1"), 1);
+		qe = q.getQueueEntry("qe5");
+		qe.setQueueEntryStatus(EnumQueueEntryStatus.Aborted);
+		assertEquals("3 is max", EnumQueueStatus.Waiting, q.getQueueStatus());
+		assertEquals(q.numEntries(null), l);
+		assertEquals(q.getQueueEntryPos("qe5"), 4);
 
-        qe=q.getQueueEntry("qe5");
-        qe.setQueueEntryStatus(EnumQueueEntryStatus.Aborted);
-        assertEquals("3 is max", EnumQueueStatus.Waiting,q.getQueueStatus());
-        assertEquals(q.numEntries(null), l);
-        assertEquals(q.getQueueEntryPos("qe5"), 4);
+		qe = q.getQueueEntry("qe1");
+		qe.setQueueEntryStatus(EnumQueueEntryStatus.Aborted);
+		assertEquals("3 is max", EnumQueueStatus.Waiting, q.getQueueStatus());
+		assertEquals(q.numEntries(null), l);
+		assertEquals(q.getQueueEntryPos("qe1"), 3);
 
-        qe=q.getQueueEntry("qe1");
-        qe.setQueueEntryStatus(EnumQueueEntryStatus.Aborted);
-        assertEquals("3 is max", EnumQueueStatus.Waiting,q.getQueueStatus());
-        assertEquals(q.numEntries(null), l);
-        assertEquals(q.getQueueEntryPos("qe1"), 3);
-        
-        qe.setQueueEntryStatus(EnumQueueEntryStatus.Removed);
-        assertEquals("3 is max", EnumQueueStatus.Waiting,q.getQueueStatus());
-        assertEquals(q.numEntries(null), l-1);
-        assertEquals(q.getQueueEntryPos("qe1"), -1);
-        assertNull(q.getQueueEntry("qe1"));
-    }
-    public void testSortQueue()
-    {
-        q.setAutomated(true);
-        JDFQueue q2=(JDFQueue) new JDFDoc("Queue").getRoot();
-        JDFQueueEntry qe=q2.appendQueueEntry();
-        qe.setQueueEntryID("qeNew");
-        qe.setQueueEntryStatus(EnumQueueEntryStatus.Waiting);
-        qe.setPriority(42);
-//        JDFQueueEntry qe2=(JDFQueueEntry) 
-        q.moveElement(qe, null);
-        q.sortChildren();
-        assertEquals(q.getQueueEntryPos("qeNew"), 2);
-    }
-    public void testMatchesFilter()
-    {
-        q.setAutomated(true);
-        JDFQueue q2=(JDFQueue) new JDFDoc("Queue").getRoot();
-        JDFQueueEntry qe=q2.appendQueueEntry();
-        qe.setQueueEntryID("qeNew");
-        qe.setQueueEntryStatus(EnumQueueEntryStatus.Waiting);
-        assertTrue(qe.matchesQueueFilter(null));
-        JDFQueueFilter filter=(JDFQueueFilter) q.appendElement(ElementName.QUEUEFILTER);
-        Vector<EnumQueueEntryStatus> v=new Vector<EnumQueueEntryStatus>();
-        v.add(EnumQueueEntryStatus.Completed);
-        filter.setStatusList(v);
-        assertFalse(qe.matchesQueueFilter(filter));
-        v.add(EnumQueueEntryStatus.Waiting);
-        filter.setStatusList(v);
-        assertTrue(qe.matchesQueueFilter(filter));
-    }
-    /* (non-Javadoc)
-     * @see junit.framework.TestCase#setUp()
-     */
-    protected void setUp() throws Exception
-    {
-        // TODO Auto-generated method stub
-        super.setUp();
-        JDFDoc doc = new JDFDoc(ElementName.QUEUE);
-        q=(JDFQueue) doc.getRoot();
-        JDFQueueEntry qe=q.appendQueueEntry();
-        qe.setQueueEntryID("qe1");
-        qe.setQueueEntryStatus(EnumQueueEntryStatus.Waiting);
-        qe.setPriority(5);
-        qe=q.appendQueueEntry();
-        qe.setQueueEntryStatus(EnumQueueEntryStatus.Waiting);
-        qe.setPriority(55);
-        qe.setQueueEntryID("qe2");
-        qe=q.appendQueueEntry();
-        qe.setQueueEntryStatus(EnumQueueEntryStatus.Held);
-        qe.setPriority(99);
-        qe.setQueueEntryID("qe3");
-        qe=q.appendQueueEntry();
-        qe.setQueueEntryStatus(EnumQueueEntryStatus.Completed);
-        qe.setQueueEntryID("qe4");
-        qe=q.appendQueueEntry();
-        qe.setQueueEntryStatus(EnumQueueEntryStatus.Running);
-        qe.setQueueEntryID("qe5");
-   }
+		qe.setQueueEntryStatus(EnumQueueEntryStatus.Removed);
+		assertEquals("3 is max", EnumQueueStatus.Waiting, q.getQueueStatus());
+		assertEquals(q.numEntries(null), l - 1);
+		assertEquals(q.getQueueEntryPos("qe1"), -1);
+		assertNull(q.getQueueEntry("qe1"));
+	}
 
- 
+	public void testSortQueue()
+	{
+		q.setAutomated(true);
+		JDFQueue q2 = (JDFQueue) new JDFDoc("Queue").getRoot();
+		JDFQueueEntry qe = q2.appendQueueEntry();
+		qe.setQueueEntryID("qeNew");
+		qe.setQueueEntryStatus(EnumQueueEntryStatus.Waiting);
+		qe.setPriority(42);
+		// JDFQueueEntry qe2=(JDFQueueEntry)
+		q.moveElement(qe, null);
+		q.sortChildren();
+		assertEquals(q.getQueueEntryPos("qeNew"), 2);
+	}
+
+	public void testMatchesFilter()
+	{
+		q.setAutomated(true);
+		JDFQueue q2 = (JDFQueue) new JDFDoc("Queue").getRoot();
+		JDFQueueEntry qe = q2.appendQueueEntry();
+		qe.setQueueEntryID("qeNew");
+		qe.setQueueEntryStatus(EnumQueueEntryStatus.Waiting);
+		assertTrue(qe.matchesQueueFilter(null));
+		JDFQueueFilter filter = (JDFQueueFilter) q
+				.appendElement(ElementName.QUEUEFILTER);
+		Vector<EnumQueueEntryStatus> v = new Vector<EnumQueueEntryStatus>();
+		v.add(EnumQueueEntryStatus.Completed);
+		filter.setStatusList(v);
+		assertFalse(qe.matchesQueueFilter(filter));
+		v.add(EnumQueueEntryStatus.Waiting);
+		filter.setStatusList(v);
+		assertTrue(qe.matchesQueueFilter(filter));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see junit.framework.TestCase#setUp()
+	 */
+	protected void setUp() throws Exception
+	{
+		// TODO Auto-generated method stub
+		super.setUp();
+		JDFDoc doc = new JDFDoc(ElementName.QUEUE);
+		q = (JDFQueue) doc.getRoot();
+		JDFQueueEntry qe = q.appendQueueEntry();
+		qe.setQueueEntryID("qe1");
+		qe.setQueueEntryStatus(EnumQueueEntryStatus.Waiting);
+		qe.setPriority(5);
+		qe = q.appendQueueEntry();
+		qe.setQueueEntryStatus(EnumQueueEntryStatus.Waiting);
+		qe.setPriority(55);
+		qe.setQueueEntryID("qe2");
+		qe = q.appendQueueEntry();
+		qe.setQueueEntryStatus(EnumQueueEntryStatus.Held);
+		qe.setPriority(99);
+		qe.setQueueEntryID("qe3");
+		qe = q.appendQueueEntry();
+		qe.setQueueEntryStatus(EnumQueueEntryStatus.Completed);
+		qe.setQueueEntryID("qe4");
+		qe = q.appendQueueEntry();
+		qe.setQueueEntryStatus(EnumQueueEntryStatus.Running);
+		qe.setQueueEntryID("qe5");
+	}
+
 }

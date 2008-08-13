@@ -10,16 +10,17 @@ package org.cip4.jdflib.datatypes;
 
 import junit.framework.TestCase;
 
+public class JDFRectangleRangeTest extends TestCase
+{
 
-public class JDFRectangleRangeTest extends TestCase {
+	public final void testIsPartOfRange()
+	{
+		JDFRectangleRange range = new JDFRectangleRange(new JDFRectangle(0, 0,
+				2, 2), new JDFRectangle(0, 0, 4, 4));
 
-    public final void testIsPartOfRange() {
-        JDFRectangleRange range = 
-            new JDFRectangleRange(new JDFRectangle(0,0,2,2), 
-                                  new JDFRectangle(0,0,4,4));
-        
-        assertTrue("inRange falsch", range.isPartOfRange(new JDFRectangleRange(new JDFRectangle(0,0,3,3),new JDFRectangle(0,0,3.5,3.5))));
-    }
-
+		assertTrue("inRange falsch", range
+				.isPartOfRange(new JDFRectangleRange(new JDFRectangle(0, 0, 3,
+						3), new JDFRectangle(0, 0, 3.5, 3.5))));
+	}
 
 }

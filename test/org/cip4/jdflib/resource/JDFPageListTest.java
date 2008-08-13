@@ -85,42 +85,44 @@ import org.cip4.jdflib.resource.process.JDFContentList;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFRunList;
 
-
 public class JDFPageListTest extends JDFTestCaseBase
 {
-    public void testContentData()
-    {
-        JDFDoc d=new JDFDoc("JDF");
-        JDFNode n=d.getJDFRoot();
-        n.setType(EnumType.Approval);
-        JDFRunList rl=(JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
-        JDFPageList pl=rl.appendPageList();
-        pl.makeRootResource("PageList", null, true);
-        JDFContentList cl=pl.appendContentList();
-        cl.makeRootResource("ContentList", null, true);
-        JDFContentData cd0=cl.appendContentData();
-        cd0.setAttribute(AttributeName.CONTENTLISTINDEX, "1 2 3");
-        KElement book=cd0.appendElement("ContentMetaData");
-        book.setAttribute("ISBN", "0123456789");
-        JDFComment abstrakt=(JDFComment) book.appendElement("Comment");
-        abstrakt.setName("Abstract");
-        abstrakt.setText("Abstract of the book\nin english");
-        JDFEmployee editor=(JDFEmployee) book.appendElement(ElementName.EMPLOYEE);
-        editor.appendPerson().setFamilyName("authorName");
-        editor.setRoles(new VString("Editor",null));
-        book.setAttribute("Title", "book thing");
-        for(int i=1;i<4;i++)
-        {
-            JDFContentData cd=cl.appendContentData();
-            KElement chap=cd.appendElement("ContentMetaData");
-            chap.setAttribute("Title", "Chapter "+i);
-            JDFEmployee author=(JDFEmployee) chap.appendElement(ElementName.EMPLOYEE);
-            author.appendPerson().setFamilyName("authorName"+i);
-            author.setRoles(new VString("Author",null));
-        }
-        
-        d.write2File(sm_dirTestDataTemp+"ContentMetaData.jdf", 2, false);
-        
-    }
-    ////////////////////////////////////////////////////////////////
+	public void testContentData()
+	{
+		JDFDoc d = new JDFDoc("JDF");
+		JDFNode n = d.getJDFRoot();
+		n.setType(EnumType.Approval);
+		JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST,
+				EnumUsage.Input);
+		JDFPageList pl = rl.appendPageList();
+		pl.makeRootResource("PageList", null, true);
+		JDFContentList cl = pl.appendContentList();
+		cl.makeRootResource("ContentList", null, true);
+		JDFContentData cd0 = cl.appendContentData();
+		cd0.setAttribute(AttributeName.CONTENTLISTINDEX, "1 2 3");
+		KElement book = cd0.appendElement("ContentMetaData");
+		book.setAttribute("ISBN", "0123456789");
+		JDFComment abstrakt = (JDFComment) book.appendElement("Comment");
+		abstrakt.setName("Abstract");
+		abstrakt.setText("Abstract of the book\nin english");
+		JDFEmployee editor = (JDFEmployee) book
+				.appendElement(ElementName.EMPLOYEE);
+		editor.appendPerson().setFamilyName("authorName");
+		editor.setRoles(new VString("Editor", null));
+		book.setAttribute("Title", "book thing");
+		for (int i = 1; i < 4; i++)
+		{
+			JDFContentData cd = cl.appendContentData();
+			KElement chap = cd.appendElement("ContentMetaData");
+			chap.setAttribute("Title", "Chapter " + i);
+			JDFEmployee author = (JDFEmployee) chap
+					.appendElement(ElementName.EMPLOYEE);
+			author.appendPerson().setFamilyName("authorName" + i);
+			author.setRoles(new VString("Author", null));
+		}
+
+		d.write2File(sm_dirTestDataTemp + "ContentMetaData.jdf", 2, false);
+
+	}
+	// //////////////////////////////////////////////////////////////
 }

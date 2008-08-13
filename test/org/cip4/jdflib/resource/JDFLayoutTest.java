@@ -104,571 +104,647 @@ import org.cip4.jdflib.resource.process.JDFSurface;
 import org.cip4.jdflib.resource.process.postpress.JDFSheet;
 
 /**
- * all kinds of fun tests around JDF 1.2 vs JDF 1.3 Layouts
- * also some tests for automated layout
+ * all kinds of fun tests around JDF 1.2 vs JDF 1.3 Layouts also some tests for
+ * automated layout
  * 
  */
 public class JDFLayoutTest extends JDFTestCaseBase
 {
 
-    private JDFDoc doc=null;
-    private JDFNode n=null;
-    private JDFRunList rl=null;
+	private JDFDoc doc = null;
+	private JDFNode n = null;
+	private JDFRunList rl = null;
 
-    public void setUp() throws Exception
-    {
-        super.setUp();
-        JDFElement.setLongID(false);       
-        doc=new JDFDoc("JDF");
-        n=doc.getJDFRoot();
-        n.setType(EnumType.Imposition);
-        rl=(JDFRunList) n.appendMatchingResource(ElementName.RUNLIST,EnumProcessUsage.AnyInput,null);
-    }
+	public void setUp() throws Exception
+	{
+		super.setUp();
+		JDFElement.setLongID(false);
+		doc = new JDFDoc("JDF");
+		n = doc.getJDFRoot();
+		n.setType(EnumType.Imposition);
+		rl = (JDFRunList) n.appendMatchingResource(ElementName.RUNLIST,
+				EnumProcessUsage.AnyInput, null);
+	}
 
-    //////////////////////////////////////////////////////////////////////////
+	// ////////////////////////////////////////////////////////////////////////
 
-    public void testIsNewLayout()
-    {
-        assertEquals("version ok",n.getVersion(false),EnumVersion.Version_1_3);
-        JDFLayout lo=(JDFLayout) n.appendMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null);
-        assertTrue("lo 1.3",JDFLayout.isNewLayout(lo));
-        n.setVersion(EnumVersion.Version_1_2);
-        assertFalse("lo 1.3",JDFLayout.isNewLayout(lo));
-        lo.addPartition(EnumPartIDKey.SheetName,"Sheet1");
-        assertTrue("lo 1.3",JDFLayout.isNewLayout(lo));  
-        assertFalse("l no layout",JDFLayout.isNewLayout(rl));
-    }    
-    //////////////////////////////////////////////////////////////////////////
+	public void testIsNewLayout()
+	{
+		assertEquals("version ok", n.getVersion(false), EnumVersion.Version_1_3);
+		JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT,
+				EnumProcessUsage.AnyInput, null);
+		assertTrue("lo 1.3", JDFLayout.isNewLayout(lo));
+		n.setVersion(EnumVersion.Version_1_2);
+		assertFalse("lo 1.3", JDFLayout.isNewLayout(lo));
+		lo.addPartition(EnumPartIDKey.SheetName, "Sheet1");
+		assertTrue("lo 1.3", JDFLayout.isNewLayout(lo));
+		assertFalse("l no layout", JDFLayout.isNewLayout(rl));
+	}
 
-    public void testAutoRegister()
-    {
-        assertEquals("version ok",n.getVersion(false),EnumVersion.Version_1_3);
-        JDFLayout lo=(JDFLayout) n.appendMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null);
-        JDFColorControlStrip autoReg=lo.appendMarkObject().appendColorControlStrip();
-        autoReg.setStripType("AutoRegister");
-        autoReg.appendElement("SeparationSpec").setAttribute("Name", "Black");
-        autoReg.appendElement("SeparationSpec").setAttribute("Name", "Cyan");
-        autoReg.appendElement("SeparationSpec").setAttribute("Name", "Yellow");
-        autoReg.appendElement("SeparationSpec").setAttribute("Name", "Magenta");
-        autoReg.appendElement("SeparationSpec").setAttribute("Name", "Spot1");
-        autoReg.appendElement("SeparationSpec").setAttribute("Name", "Spot2");
-        JDFColorControlStrip fms=lo.getMarkObject(0).appendColorControlStrip();
-        fms.setStripType("FMS");
-        fms.appendElement("SeparationSpec").setAttribute("Name", "Black");
-        fms.appendElement("SeparationSpec").setAttribute("Name", "Yellow");
-        fms.appendElement("SeparationSpec").setAttribute("Name", "Magenta");
-        fms.appendElement("SeparationSpec").setAttribute("Name", "Cyan");
-        
-        fms=lo.getMarkObject(0).appendColorControlStrip();
-        fms.setStripType("FMS");
-        fms.appendElement("SeparationSpec").setAttribute("Name", "Spot1");
-        fms.appendElement("SeparationSpec").setAttribute("Name", "Spot2");
-         doc.write2File(sm_dirTestDataTemp+"autoregister.jdf", 2, false);
-    }    
-    //////////////////////////////////////////////////////////////////////////
+	// ////////////////////////////////////////////////////////////////////////
 
-    public void testMedia()
-    {
-        JDFLayout lo=(JDFLayout) n.appendMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null);
-        lo.appendMedia();
-        JDFMedia m2=lo.appendMedia();
-        assertNotNull("2. Media ok",m2);
-        assertEquals(m2, lo.getMedia(1));
-        assertEquals(m2, lo.getCreateMedia(1));
-    }    
-    //////////////////////////////////////////////////////////////////////////
+	public void testAutoRegister()
+	{
+		assertEquals("version ok", n.getVersion(false), EnumVersion.Version_1_3);
+		JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT,
+				EnumProcessUsage.AnyInput, null);
+		JDFColorControlStrip autoReg = lo.appendMarkObject()
+				.appendColorControlStrip();
+		autoReg.setStripType("AutoRegister");
+		autoReg.appendElement("SeparationSpec").setAttribute("Name", "Black");
+		autoReg.appendElement("SeparationSpec").setAttribute("Name", "Cyan");
+		autoReg.appendElement("SeparationSpec").setAttribute("Name", "Yellow");
+		autoReg.appendElement("SeparationSpec").setAttribute("Name", "Magenta");
+		autoReg.appendElement("SeparationSpec").setAttribute("Name", "Spot1");
+		autoReg.appendElement("SeparationSpec").setAttribute("Name", "Spot2");
+		JDFColorControlStrip fms = lo.getMarkObject(0)
+				.appendColorControlStrip();
+		fms.setStripType("FMS");
+		fms.appendElement("SeparationSpec").setAttribute("Name", "Black");
+		fms.appendElement("SeparationSpec").setAttribute("Name", "Yellow");
+		fms.appendElement("SeparationSpec").setAttribute("Name", "Magenta");
+		fms.appendElement("SeparationSpec").setAttribute("Name", "Cyan");
 
-    public void testDynamicMarks() throws Exception
-    {
-        JDFElement.setLongID(false);
-        JDFLayout lo=(JDFLayout) n.appendMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null);
-        lo.setXMLComment("Layout that illustrates dynamic mark placement - all margins are 25 points (gutter=2*25)");
-        lo.setSurfaceContentsBox(new JDFRectangle(0,0,500,350));
-        JDFSheet s=lo.appendSheet();
-        JDFSurface su=s.appendFrontSurface();
-        
-        JDFContentObject co0=su.appendContentObject();
-        co0.setOrd(0);
-        JDFMatrix m1=(JDFMatrix) JDFMatrix.unitMatrix.clone();
-        m1.shift(25, 25);
-        co0.setCTM(JDFMatrix.unitMatrix);
-        co0.setTrimSize(new JDFXYPair(200,300));
-        String[] id=new String[2];
-        id[0]=co0.appendAnchor(null);
-        JDFContentObject co1=su.appendContentObject();
-        m1=(JDFMatrix) JDFMatrix.unitMatrix.clone();
-        m1.shift(275, 25);
-        co1.setCTM(m1);
-        co1.setTrimSize(200,300);
-        id[1]=co1.appendAnchor(null);
+		fms = lo.getMarkObject(0).appendColorControlStrip();
+		fms.setStripType("FMS");
+		fms.appendElement("SeparationSpec").setAttribute("Name", "Spot1");
+		fms.appendElement("SeparationSpec").setAttribute("Name", "Spot2");
+		doc.write2File(sm_dirTestDataTemp + "autoregister.jdf", 2, false);
+	}
 
-        {
-            JDFMarkObject mark0=su.appendMarkObject();
-            mark0.setXMLComment("Register Mark on the top right of the sheet - assumed size is 20*30, assumed sheet size is 500*350");
-            mark0.setTrimSize(20,30);
-            mark0.setCTM(new JDFMatrix(1,0,0,1,500-20,350-30));
-            mark0.appendDeviceMark().setAttribute("Anchor", "TopRight");
-            mark0.appendRegisterMark().setXMLComment("mark metadata goes here");
-            appendRefAnchor(mark0, "TopRight", "Parent", null);
-        }
+	// ////////////////////////////////////////////////////////////////////////
 
-        {
-            JDFMarkObject mark0=su.appendMarkObject();
-            mark0.setXMLComment("Vertical Slug Line beginning at the top of the bottom margin of of the sheet between the 2 pages"+
-            "\nnote that no TrimSize need be specified and therefore TrimCTM / CTM place the point defined by @Anchor"+
-            "\nnote also that the anchor points to centerleft which is in the unrotated (horizontal) cs of the slug line");
-            JDFMatrix m0=new JDFMatrix(1,0,0,1,0,0);
-            m0.rotate(90);
-            m0.shift(250,25);
-            mark0.setCTM(m0);
-            JDFDeviceMark dm=mark0.appendDeviceMark();
-            dm.setAttribute("Anchor", "CenterLeft");
-            dm.setFontSize(10);
-            dm.setFont("GhostCrypt");
-            JDFJobField jf=mark0.appendJobField();
-            jf.setXMLComment("Result: Sheet Printed by Dracula at the moonphase FullMoon");
-            jf.setAttribute("JobFormat", "Sheet Printed by %s at the moonphase %s");
-            jf.setAttribute("JobTemplate", "Operator,MoonPhase");
-            appendRefAnchor(mark0, "BottomCenter", "Parent", null);
-        }
+	public void testMedia()
+	{
+		JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT,
+				EnumProcessUsage.AnyInput, null);
+		lo.appendMedia();
+		JDFMedia m2 = lo.appendMedia();
+		assertNotNull("2. Media ok", m2);
+		assertEquals(m2, lo.getMedia(1));
+		assertEquals(m2, lo.getCreateMedia(1));
+	}
 
-        for(int i=0;i<2;i++)
-        {
-            JDFMarkObject mark0=su.appendMarkObject();
-            mark0.setXMLComment("Horizonzal Slug Line, centered 5 points over the top of page "+i+
-            "\nnote that page is not yet a predefined token\n");
-            JDFMatrix m0=new JDFMatrix(1,0,0,1,0,0);
-            m0.rotate(90);
-            m0.shift(25+100,300+25+5);
-            if(i==1)
-                m0.shift(250, 0);
-            mark0.setCTM(m0);
-            JDFDeviceMark dm=mark0.appendDeviceMark();
-            dm.setAttribute("Anchor", "BottomCenter");
-            dm.setFontSize(8);
-            JDFJobField jf=mark0.appendJobField();
-            jf.setXMLComment("Result: Page # "+i+" for Customer, Polanski - Job: J11");
-            jf.setAttribute("JobFormat", "Page # %i for Customer, %s - Job: %s");
-            jf.setAttribute("JobTemplate", "Page,JobRecipientName,JobID");
-            appendRefAnchor(mark0, "BottomCenter", "Sibling", id[i]);
-        }
-        doc.write2File(sm_dirTestDataTemp+"LayoutDynamicMarks.jdf", 2,false);
-        
-    }
+	// ////////////////////////////////////////////////////////////////////////
 
-    public static KElement appendRefAnchor(JDFMarkObject mark0, String anchor, String anchorType, String rRef)
-    {
-        KElement refAnchor=mark0.getCreateElement("RefAnchor",null,0);
-        refAnchor.setAttribute("Anchor", anchor);
-        refAnchor.setAttribute("AnchorType", anchorType);
-        refAnchor.setAttribute("rRef", rRef);
-        return refAnchor;
-    }    
+	public void testDynamicMarks() throws Exception
+	{
+		JDFElement.setLongID(false);
+		JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT,
+				EnumProcessUsage.AnyInput, null);
+		lo
+				.setXMLComment("Layout that illustrates dynamic mark placement - all margins are 25 points (gutter=2*25)");
+		lo.setSurfaceContentsBox(new JDFRectangle(0, 0, 500, 350));
+		JDFSheet s = lo.appendSheet();
+		JDFSurface su = s.appendFrontSurface();
 
-    /**
-     * build a 1.2 layout using appendsignature etc
-     *
-     */
-    public void testBuildOldLayout()
-    {
-        n.setVersion(EnumVersion.Version_1_2);
-        JDFLayout lo=(JDFLayout) n.appendMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null);
-        assertFalse("lo 1.3",JDFLayout.isNewLayout(lo));
-        JDFSignature si=lo.appendSignature();
-        si.setName("Sig1");
-        assertEquals("signature name",si.getLocalName(),ElementName.SIGNATURE);
-        assertFalse(si.hasAttribute(AttributeName.CLASS));
-        si=lo.appendSignature();
-        si.setName("Sig2");
-        assertEquals("num sigs",2,lo.numSignatures());
-        assertEquals("signature name",si.getLocalName(),ElementName.SIGNATURE);
+		JDFContentObject co0 = su.appendContentObject();
+		co0.setOrd(0);
+		JDFMatrix m1 = (JDFMatrix) JDFMatrix.unitMatrix.clone();
+		m1.shift(25, 25);
+		co0.setCTM(JDFMatrix.unitMatrix);
+		co0.setTrimSize(new JDFXYPair(200, 300));
+		String[] id = new String[2];
+		id[0] = co0.appendAnchor(null);
+		JDFContentObject co1 = su.appendContentObject();
+		m1 = (JDFMatrix) JDFMatrix.unitMatrix.clone();
+		m1.shift(275, 25);
+		co1.setCTM(m1);
+		co1.setTrimSize(200, 300);
+		id[1] = co1.appendAnchor(null);
 
-        JDFSheet sh=si.appendSheet();
-        sh.setName("Sheet2_1");
-        sh.makeRootResource(null,null,true); // see what happens with refelements
-        sh=si.appendSheet();
-        sh.setName("Sheet2_2");
-        assertEquals("num sheets",2,si.numSheets());
-        assertEquals("sheet name",sh.getLocalName(),ElementName.SHEET);
-        sh=si.getCreateSheet(4);
-        assertEquals("num sheets",3,si.numSheets());
-        assertEquals("sheet name",sh.getLocalName(),ElementName.SHEET);
-        sh=si.getSheet(2);
-        assertEquals("num sheets",3,si.numSheets());
-        assertEquals("sheet name",sh.getLocalName(),ElementName.SHEET);
+		{
+			JDFMarkObject mark0 = su.appendMarkObject();
+			mark0
+					.setXMLComment("Register Mark on the top right of the sheet - assumed size is 20*30, assumed sheet size is 500*350");
+			mark0.setTrimSize(20, 30);
+			mark0.setCTM(new JDFMatrix(1, 0, 0, 1, 500 - 20, 350 - 30));
+			mark0.appendDeviceMark().setAttribute("Anchor", "TopRight");
+			mark0.appendRegisterMark().setXMLComment("mark metadata goes here");
+			appendRefAnchor(mark0, "TopRight", "Parent", null);
+		}
 
-        JDFSurface su=sh.appendFrontSurface();
-        assertEquals("num surfaces",1,sh.numSurfaces());
-        assertEquals("sheet name",su.getLocalName(),ElementName.SURFACE);
-        assertTrue("hasfrontSurface",sh.hasFrontSurface());
-        su.appendContentObject();
-        su.appendMarkObject();
-        su.appendContentObject();
-        su.appendContentObject();
+		{
+			JDFMarkObject mark0 = su.appendMarkObject();
+			mark0
+					.setXMLComment("Vertical Slug Line beginning at the top of the bottom margin of of the sheet between the 2 pages"
+							+ "\nnote that no TrimSize need be specified and therefore TrimCTM / CTM place the point defined by @Anchor"
+							+ "\nnote also that the anchor points to centerleft which is in the unrotated (horizontal) cs of the slug line");
+			JDFMatrix m0 = new JDFMatrix(1, 0, 0, 1, 0, 0);
+			m0.rotate(90);
+			m0.shift(250, 25);
+			mark0.setCTM(m0);
+			JDFDeviceMark dm = mark0.appendDeviceMark();
+			dm.setAttribute("Anchor", "CenterLeft");
+			dm.setFontSize(10);
+			dm.setFont("GhostCrypt");
+			JDFJobField jf = mark0.appendJobField();
+			jf
+					.setXMLComment("Result: Sheet Printed by Dracula at the moonphase FullMoon");
+			jf.setAttribute("JobFormat",
+					"Sheet Printed by %s at the moonphase %s");
+			jf.setAttribute("JobTemplate", "Operator,MoonPhase");
+			appendRefAnchor(mark0, "BottomCenter", "Parent", null);
+		}
 
-        su=sh.appendBackSurface();
-        su.makeRootResource(null,null,true);
-        su.appendContentObject();
-        su.appendMarkObject();
-        su.appendContentObject();
-        su.appendContentObject();
-        su.appendMarkObject();
-        assertEquals("num surfaces",2,sh.numSurfaces());
-        assertEquals("sheet name",su.getLocalName(),ElementName.SURFACE);
-        assertTrue("hasBackSurface",sh.hasBackSurface());
+		for (int i = 0; i < 2; i++)
+		{
+			JDFMarkObject mark0 = su.appendMarkObject();
+			mark0
+					.setXMLComment("Horizonzal Slug Line, centered 5 points over the top of page "
+							+ i
+							+ "\nnote that page is not yet a predefined token\n");
+			JDFMatrix m0 = new JDFMatrix(1, 0, 0, 1, 0, 0);
+			m0.rotate(90);
+			m0.shift(25 + 100, 300 + 25 + 5);
+			if (i == 1)
+				m0.shift(250, 0);
+			mark0.setCTM(m0);
+			JDFDeviceMark dm = mark0.appendDeviceMark();
+			dm.setAttribute("Anchor", "BottomCenter");
+			dm.setFontSize(8);
+			JDFJobField jf = mark0.appendJobField();
+			jf.setXMLComment("Result: Page # " + i
+					+ " for Customer, Polanski - Job: J11");
+			jf
+					.setAttribute("JobFormat",
+							"Page # %i for Customer, %s - Job: %s");
+			jf.setAttribute("JobTemplate", "Page,JobRecipientName,JobID");
+			appendRefAnchor(mark0, "BottomCenter", "Sibling", id[i]);
+		}
+		doc.write2File(sm_dirTestDataTemp + "LayoutDynamicMarks.jdf", 2, false);
 
-        try{
-            sh.appendBackSurface();  
-            fail("append second surface");
-        }
-        catch (JDFException e)
-        {/* nop */}
+	}
 
-        si=lo.getCreateSignature(4);
-        assertEquals("num sigs",3,lo.numSignatures());
-        assertEquals("signature name",si.getLocalName(),ElementName.SIGNATURE);
-        si=lo.getSignature(2);
-        assertEquals("num sigs",3,lo.numSignatures());
-        assertEquals("signature name",si.getLocalName(),ElementName.SIGNATURE);
-        si=lo.getSignature(5);
-        assertNull("si null",si);
-        assertEquals(lo.numSignatures(), lo.getSignatureVector().size());
+	public static KElement appendRefAnchor(JDFMarkObject mark0, String anchor,
+			String anchorType, String rRef)
+	{
+		KElement refAnchor = mark0.getCreateElement("RefAnchor", null, 0);
+		refAnchor.setAttribute("Anchor", anchor);
+		refAnchor.setAttribute("AnchorType", anchorType);
+		refAnchor.setAttribute("rRef", rRef);
+		return refAnchor;
+	}
 
-    }    
+	/**
+	 * build a 1.2 layout using appendsignature etc
+	 * 
+	 */
+	public void testBuildOldLayout()
+	{
+		n.setVersion(EnumVersion.Version_1_2);
+		JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT,
+				EnumProcessUsage.AnyInput, null);
+		assertFalse("lo 1.3", JDFLayout.isNewLayout(lo));
+		JDFSignature si = lo.appendSignature();
+		si.setName("Sig1");
+		assertEquals("signature name", si.getLocalName(), ElementName.SIGNATURE);
+		assertFalse(si.hasAttribute(AttributeName.CLASS));
+		si = lo.appendSignature();
+		si.setName("Sig2");
+		assertEquals("num sigs", 2, lo.numSignatures());
+		assertEquals("signature name", si.getLocalName(), ElementName.SIGNATURE);
 
-    /**
-     * build a 1.3 layout using appendsignature etc
-     *
-     */
-    public void testBuildNewLayout()
-    {
-        JDFLayout lo=(JDFLayout) n.appendMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null);
-        assertTrue("lo 1.3",JDFLayout.isNewLayout(lo));
-        JDFSignature si=lo.appendSignature();
-        assertEquals("signature name",si.getLocalName(),ElementName.LAYOUT);
-        si=lo.appendSignature();
-        assertEquals("num sigs",2,lo.numSignatures());
-        assertEquals("signature name",si.getLocalName(),ElementName.LAYOUT);
+		JDFSheet sh = si.appendSheet();
+		sh.setName("Sheet2_1");
+		sh.makeRootResource(null, null, true); // see what happens with
+												// refelements
+		sh = si.appendSheet();
+		sh.setName("Sheet2_2");
+		assertEquals("num sheets", 2, si.numSheets());
+		assertEquals("sheet name", sh.getLocalName(), ElementName.SHEET);
+		sh = si.getCreateSheet(4);
+		assertEquals("num sheets", 3, si.numSheets());
+		assertEquals("sheet name", sh.getLocalName(), ElementName.SHEET);
+		sh = si.getSheet(2);
+		assertEquals("num sheets", 3, si.numSheets());
+		assertEquals("sheet name", sh.getLocalName(), ElementName.SHEET);
 
-        JDFSheet sh=si.appendSheet();
-        sh=si.appendSheet();
-        assertEquals("num sheets",2,si.numSheets());
-        assertEquals("sheet name",sh.getLocalName(),ElementName.LAYOUT);
-        sh=si.getCreateSheet(4);
-        assertEquals("num sheets",3,si.numSheets());
-        assertEquals("sheet name",sh.getLocalName(),ElementName.LAYOUT);
-        sh=si.getSheet(2);
-        assertEquals("num sheets",3,si.numSheets());
-        assertEquals("sheet name",sh.getLocalName(),ElementName.LAYOUT);
+		JDFSurface su = sh.appendFrontSurface();
+		assertEquals("num surfaces", 1, sh.numSurfaces());
+		assertEquals("sheet name", su.getLocalName(), ElementName.SURFACE);
+		assertTrue("hasfrontSurface", sh.hasFrontSurface());
+		su.appendContentObject();
+		su.appendMarkObject();
+		su.appendContentObject();
+		su.appendContentObject();
 
-        JDFSurface su=sh.appendFrontSurface();
-        assertEquals("num surfaces",1,sh.numSurfaces());
-        assertEquals("sheet name",su.getLocalName(),ElementName.LAYOUT);
-        assertTrue("hasfrontSurface",sh.hasFrontSurface());
+		su = sh.appendBackSurface();
+		su.makeRootResource(null, null, true);
+		su.appendContentObject();
+		su.appendMarkObject();
+		su.appendContentObject();
+		su.appendContentObject();
+		su.appendMarkObject();
+		assertEquals("num surfaces", 2, sh.numSurfaces());
+		assertEquals("sheet name", su.getLocalName(), ElementName.SURFACE);
+		assertTrue("hasBackSurface", sh.hasBackSurface());
 
-        su=sh.appendBackSurface();
-        assertEquals("num surfaces",2,sh.numSurfaces());
-        assertEquals("sheet name",su.getLocalName(),ElementName.LAYOUT);
+		try
+		{
+			sh.appendBackSurface();
+			fail("append second surface");
+		} catch (JDFException e)
+		{/* nop */
+		}
 
-        try{
-            sh.appendBackSurface();   
-            fail("no two back surfaces");
-        }
-        catch (JDFException e)
-        {/* nop */}
+		si = lo.getCreateSignature(4);
+		assertEquals("num sigs", 3, lo.numSignatures());
+		assertEquals("signature name", si.getLocalName(), ElementName.SIGNATURE);
+		si = lo.getSignature(2);
+		assertEquals("num sigs", 3, lo.numSignatures());
+		assertEquals("signature name", si.getLocalName(), ElementName.SIGNATURE);
+		si = lo.getSignature(5);
+		assertNull("si null", si);
+		assertEquals(lo.numSignatures(), lo.getSignatureVector().size());
 
-        si=lo.getCreateSignature(4);
-        assertEquals("num sigs",3,lo.numSignatures());
-        assertEquals("signature name",si.getLocalName(),ElementName.LAYOUT);
-        si=lo.getSignature(2);
-        assertEquals("num sigs",3,lo.numSignatures());
-        assertEquals("signature name",si.getLocalName(),ElementName.LAYOUT);
-        si=lo.getSignature(5);
-        assertNull("si null",si);
-        assertTrue("layout valid",lo.isValid(EnumValidationLevel.Complete));
-        assertEquals(lo.numSignatures(), lo.getSignatureVector().size());
-    }   
+	}
 
-    /////////////////////////////////////////////////////
+	/**
+	 * build a 1.3 layout using appendsignature etc
+	 * 
+	 */
+	public void testBuildNewLayout()
+	{
+		JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT,
+				EnumProcessUsage.AnyInput, null);
+		assertTrue("lo 1.3", JDFLayout.isNewLayout(lo));
+		JDFSignature si = lo.appendSignature();
+		assertEquals("signature name", si.getLocalName(), ElementName.LAYOUT);
+		si = lo.appendSignature();
+		assertEquals("num sigs", 2, lo.numSignatures());
+		assertEquals("signature name", si.getLocalName(), ElementName.LAYOUT);
 
-    public void testFixToNewLayout()
-    {
-        testBuildOldLayout();
-        n.fixVersion(EnumVersion.Version_1_3);
-        JDFLayout lo=(JDFLayout) n.getMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null,0);
-        assertTrue(JDFLayout.isNewLayout(lo));
-        JDFSignature si=lo.getSignature(0);
-        assertEquals(si.getSignatureName(), "Sig1");
-        assertFalse(si.hasAttribute(AttributeName.CLASS));
-    }
-    /////////////////////////////////////////////////////
+		JDFSheet sh = si.appendSheet();
+		sh = si.appendSheet();
+		assertEquals("num sheets", 2, si.numSheets());
+		assertEquals("sheet name", sh.getLocalName(), ElementName.LAYOUT);
+		sh = si.getCreateSheet(4);
+		assertEquals("num sheets", 3, si.numSheets());
+		assertEquals("sheet name", sh.getLocalName(), ElementName.LAYOUT);
+		sh = si.getSheet(2);
+		assertEquals("num sheets", 3, si.numSheets());
+		assertEquals("sheet name", sh.getLocalName(), ElementName.LAYOUT);
 
-    public void testFixFromNewLayout()
-    {
-        testBuildNewLayout();
-        n.fixVersion(EnumVersion.Version_1_2);
-        JDFLayout lo=(JDFLayout) n.getMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null,0);
-        assertFalse(JDFLayout.isNewLayout(lo));
-        JDFSignature si=lo.getSignature(0);
-        assertEquals(si.getLocalName(),ElementName.SIGNATURE);
-    }
-    /////////////////////////////////////////////////////
-    public void testFixFromFlatNewLayout()
-    {
-        n.setVersion(EnumVersion.Version_1_3);
-        JDFLayout loNew=(JDFLayout) n.appendMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null);
-        JDFContentObject co1=loNew.appendContentObject();
+		JDFSurface su = sh.appendFrontSurface();
+		assertEquals("num surfaces", 1, sh.numSurfaces());
+		assertEquals("sheet name", su.getLocalName(), ElementName.LAYOUT);
+		assertTrue("hasfrontSurface", sh.hasFrontSurface());
 
-        n.fixVersion(EnumVersion.Version_1_2);
-        JDFLayout lo=(JDFLayout) n.getMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null,0);
-        assertFalse(JDFLayout.isNewLayout(lo));
-        JDFSignature si=lo.getSignature(0);
-        assertEquals(si.getLocalName(),ElementName.SIGNATURE);
-        JDFSheet sh=si.getSheet(0);
-        JDFSurface su=sh.getSurface(EnumSide.Front);
-        assertEquals(co1,su.getContentObject(0));
-    }
-    /////////////////////////////////////////////////////
-    public void testFixFromSheetNewLayout()
-    {
-        n.setVersion(EnumVersion.Version_1_3);
-        JDFLayout loNew=(JDFLayout) n.appendMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null);
-        loNew=(JDFLayout) loNew.addPartition(EnumPartIDKey.SheetName,"s1");
-        JDFContentObject co1=loNew.appendContentObject();
+		su = sh.appendBackSurface();
+		assertEquals("num surfaces", 2, sh.numSurfaces());
+		assertEquals("sheet name", su.getLocalName(), ElementName.LAYOUT);
 
-        n.fixVersion(EnumVersion.Version_1_2);
-        JDFLayout lo=(JDFLayout) n.getMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null,0);
-        assertFalse(JDFLayout.isNewLayout(lo));
-        JDFSignature si=lo.getSignature(0);
-        assertEquals(si.getLocalName(),ElementName.SIGNATURE);
-        JDFSheet sh=si.getSheet(0);
-        JDFSurface su=sh.getSurface(EnumSide.Front);
-        assertEquals(co1,su.getContentObject(0));
-    }
-    /////////////////////////////////////////////////////
-    public void testFixFromSurfaceNewLayout()
-    {
-        n.setVersion(EnumVersion.Version_1_3);
-        JDFLayout loNew=(JDFLayout) n.appendMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null);
-        loNew=(JDFLayout) loNew.addPartition(EnumPartIDKey.Side,"Back");
-        JDFContentObject co1=loNew.appendContentObject();
+		try
+		{
+			sh.appendBackSurface();
+			fail("no two back surfaces");
+		} catch (JDFException e)
+		{/* nop */
+		}
 
-        n.fixVersion(EnumVersion.Version_1_2);
-        JDFLayout lo=(JDFLayout) n.getMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null,0);
-        assertFalse(JDFLayout.isNewLayout(lo));
-        JDFSignature si=lo.getSignature(0);
-        assertEquals(si.getLocalName(),ElementName.SIGNATURE);
-        JDFSheet sh=si.getSheet(0);
-        JDFSurface su=sh.getSurface(EnumSide.Front);
-        assertNull(su);
-        su=sh.getSurface(EnumSide.Back);
-        assertEquals(co1,su.getContentObject(0));
-    }
-    /////////////////////////////////////////////////////
+		si = lo.getCreateSignature(4);
+		assertEquals("num sigs", 3, lo.numSignatures());
+		assertEquals("signature name", si.getLocalName(), ElementName.LAYOUT);
+		si = lo.getSignature(2);
+		assertEquals("num sigs", 3, lo.numSignatures());
+		assertEquals("signature name", si.getLocalName(), ElementName.LAYOUT);
+		si = lo.getSignature(5);
+		assertNull("si null", si);
+		assertTrue("layout valid", lo.isValid(EnumValidationLevel.Complete));
+		assertEquals(lo.numSignatures(), lo.getSignatureVector().size());
+	}
 
-    public void testGetPlacedObjectVector()
-    {
-        testBuildOldLayout();
-        JDFLayout lo=(JDFLayout) n.getMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null,0);
-        JDFSurface su=lo.getSignature(1).getSheet(2).getSurface(EnumSide.Front);
-        VElement v=su.getPlacedObjectVector();
-        assertEquals(v.size(),4);
-        assertTrue(v.elementAt(0) instanceof JDFContentObject);
-        assertTrue(v.elementAt(1) instanceof JDFMarkObject);
-        assertTrue(v.elementAt(2) instanceof JDFContentObject);
-        assertTrue(v.elementAt(3) instanceof JDFContentObject);
+	// ///////////////////////////////////////////////////
 
-    }
-    /////////////////////////////////////////////////////
-    public void testGetLayoutLeavesOld() throws Exception
-    {
-        testBuildOldLayout();
+	public void testFixToNewLayout()
+	{
+		testBuildOldLayout();
+		n.fixVersion(EnumVersion.Version_1_3);
+		JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT,
+				EnumProcessUsage.AnyInput, null, 0);
+		assertTrue(JDFLayout.isNewLayout(lo));
+		JDFSignature si = lo.getSignature(0);
+		assertEquals(si.getSignatureName(), "Sig1");
+		assertFalse(si.hasAttribute(AttributeName.CLASS));
+	}
 
-        JDFLayout lo=(JDFLayout) n.getMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null,0);
-        VElement leaves=lo.getLayoutLeaves(false);
-        assertEquals(leaves.size(), 2);
-        JDFSignature si=lo.getSignature(1);
-        leaves=si.getLayoutLeaves(false);
-        assertEquals(leaves.size(), 2);
-        JDFSheet sh=si.getSheet(2);
-        leaves=sh.getLayoutLeaves(false);
-        assertEquals(leaves.size(), 2);
+	// ///////////////////////////////////////////////////
 
-    }
-    /////////////////////////////////////////////////////
-    public void testGetLayoutLeavesNew() throws Exception
-    {
-        testBuildNewLayout();
+	public void testFixFromNewLayout()
+	{
+		testBuildNewLayout();
+		n.fixVersion(EnumVersion.Version_1_2);
+		JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT,
+				EnumProcessUsage.AnyInput, null, 0);
+		assertFalse(JDFLayout.isNewLayout(lo));
+		JDFSignature si = lo.getSignature(0);
+		assertEquals(si.getLocalName(), ElementName.SIGNATURE);
+	}
 
-        JDFLayout lo=(JDFLayout) n.getMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null,0);
-        VElement leaves=lo.getLayoutLeaves(false);
-        assertEquals("2 Sigs, 2 sheets, 2 surfaces",leaves.size(), 6);
-        JDFSignature si=lo.getSignature(1);
-        leaves=si.getLayoutLeaves(false);
-        assertEquals("2 sheets, 2 surfaces",leaves.size(), 4);
-        JDFSheet sh=si.getSheet(2);
-        leaves=sh.getLayoutLeaves(false);
-        assertEquals("2 surfaces",leaves.size(), 2);
+	// ///////////////////////////////////////////////////
+	public void testFixFromFlatNewLayout()
+	{
+		n.setVersion(EnumVersion.Version_1_3);
+		JDFLayout loNew = (JDFLayout) n.appendMatchingResource(
+				ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
+		JDFContentObject co1 = loNew.appendContentObject();
 
-    }
-    /////////////////////////////////////////////////////
-    public void testGetSignatureVector_Old()
-    {
-        testBuildOldLayout();
-        JDFLayout lo=(JDFLayout) n.getMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null,0);
-        VElement v=lo.getSignatureVector();
-        JDFSignature sig=(JDFSignature) v.elementAt(0);
-        assertEquals(sig.getSignatureName(), sig.getName());
-        assertEquals(sig.getSignatureName(), "Sig1");
-        JDFSignature sig2=(JDFSignature) v.elementAt(1);
-        assertEquals(sig2.getSignatureName(), sig2.getName());
-        assertEquals(sig2.getSignatureName(), "Sig2");
-        VElement vSheet=sig2.getSheetVector();
-        JDFSheet s1=(JDFSheet) vSheet.elementAt(1); // don't try 0 it will fail because it is referenced...
-        assertEquals(s1.getSignatureName(), "Sig2");
-        assertEquals(s1.getSheetName(), "Sheet2_2");
-        JDFSurface su=s1.getCreateBackSurface();
-        assertEquals(su.getSignatureName(), "Sig2");
-        assertEquals(su.getSheetName(), "Sheet2_2");
-        assertEquals(s1.getSurfaceVector().elementAt(0), su);
+		n.fixVersion(EnumVersion.Version_1_2);
+		JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT,
+				EnumProcessUsage.AnyInput, null, 0);
+		assertFalse(JDFLayout.isNewLayout(lo));
+		JDFSignature si = lo.getSignature(0);
+		assertEquals(si.getLocalName(), ElementName.SIGNATURE);
+		JDFSheet sh = si.getSheet(0);
+		JDFSurface su = sh.getSurface(EnumSide.Front);
+		assertEquals(co1, su.getContentObject(0));
+	}
 
-    }
-    /////////////////////////////////////////////////////
-    public void testGetSignatureName_Old()
-    {
-        testBuildOldLayout();
-        JDFLayout lo=(JDFLayout) n.getMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null,0);
-        JDFSignature sig=lo.getSignature(0);
-        assertEquals(sig.getSignatureName(), sig.getName());
-        assertEquals(sig.getSignatureName(), "Sig1");
-        JDFSignature sig2=lo.getSignature(1);
-        assertEquals(sig2.getSignatureName(), sig2.getName());
-        assertEquals(sig2.getSignatureName(), "Sig2");
-        JDFSheet s1=sig2.getSheet(1); // don't try 0 it will fail because it is referenced...
-        assertEquals(s1.getSignatureName(), "Sig2");
-        assertEquals(s1.getSheetName(), "Sheet2_2");
-        JDFSurface su=s1.getCreateBackSurface();
-        assertEquals(su.getSignatureName(), "Sig2");
-        assertEquals(su.getSheetName(), "Sheet2_2");
+	// ///////////////////////////////////////////////////
+	public void testFixFromSheetNewLayout()
+	{
+		n.setVersion(EnumVersion.Version_1_3);
+		JDFLayout loNew = (JDFLayout) n.appendMatchingResource(
+				ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
+		loNew = (JDFLayout) loNew.addPartition(EnumPartIDKey.SheetName, "s1");
+		JDFContentObject co1 = loNew.appendContentObject();
 
-    }
-    /////////////////////////////////////////////////////
-    public void testGetSignatureName_New()
-    {
-        testBuildNewLayout();
-        JDFLayout lo=(JDFLayout) n.getMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null,0);
-        JDFSignature sig=lo.getSignature(0);
-        assertEquals(sig.getSignatureName(), "SignatureName1");
-        JDFSignature sig2=lo.getSignature(1);
-        assertEquals(sig2.getSignatureName(), "SignatureName2");
-        JDFSheet s1=sig2.getSheet(1); // don't try 0 it will fail because it is referenced...
-        assertEquals(s1.getSignatureName(), "SignatureName2");
-        assertEquals(s1.getSheetName(), "SheetName2");
-        JDFSurface su=s1.getCreateBackSurface();
-        assertEquals(su.getSignatureName(), "SignatureName2");
-        assertEquals(su.getSheetName(), "SheetName2");        
-    }
+		n.fixVersion(EnumVersion.Version_1_2);
+		JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT,
+				EnumProcessUsage.AnyInput, null, 0);
+		assertFalse(JDFLayout.isNewLayout(lo));
+		JDFSignature si = lo.getSignature(0);
+		assertEquals(si.getLocalName(), ElementName.SIGNATURE);
+		JDFSheet sh = si.getSheet(0);
+		JDFSurface su = sh.getSurface(EnumSide.Front);
+		assertEquals(co1, su.getContentObject(0));
+	}
 
-    /////////////////////////////////////////////////////
-    public void testGetSignatureVector_New()
-    {
-        testBuildNewLayout();
-        JDFLayout lo=(JDFLayout) n.getMatchingResource(ElementName.LAYOUT,EnumProcessUsage.AnyInput,null,0);
-        VElement v=lo.getSignatureVector();
-        JDFSignature sig=(JDFSignature) v.elementAt(0);
-        assertEquals(sig.getSignatureName(), "SignatureName1");
-        JDFSignature sig2=(JDFSignature) v.elementAt(1);
-        assertEquals(sig2.getSignatureName(), "SignatureName2");
-        VElement vSheet=sig2.getSheetVector();
-        JDFSheet s1=(JDFSheet) vSheet.elementAt(1); // don't try 0 it will fail because it is referenced...
-        assertEquals(s1.getSignatureName(), "SignatureName2");
-        assertEquals(s1.getSheetName(), "SheetName2");
-        JDFSurface su=s1.getCreateBackSurface();
-        assertEquals(su.getSignatureName(), "SignatureName2");
-        assertEquals(su.getSheetName(), "SheetName2");        
-        assertEquals(s1.getSurfaceVector().elementAt(0), su);
-    }
+	// ///////////////////////////////////////////////////
+	public void testFixFromSurfaceNewLayout()
+	{
+		n.setVersion(EnumVersion.Version_1_3);
+		JDFLayout loNew = (JDFLayout) n.appendMatchingResource(
+				ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
+		loNew = (JDFLayout) loNew.addPartition(EnumPartIDKey.Side, "Back");
+		JDFContentObject co1 = loNew.appendContentObject();
 
-    /////////////////////////////////////////////////////
+		n.fixVersion(EnumVersion.Version_1_2);
+		JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT,
+				EnumProcessUsage.AnyInput, null, 0);
+		assertFalse(JDFLayout.isNewLayout(lo));
+		JDFSignature si = lo.getSignature(0);
+		assertEquals(si.getLocalName(), ElementName.SIGNATURE);
+		JDFSheet sh = si.getSheet(0);
+		JDFSurface su = sh.getSurface(EnumSide.Front);
+		assertNull(su);
+		su = sh.getSurface(EnumSide.Back);
+		assertEquals(co1, su.getContentObject(0));
+	}
 
-    public void testFixVersionProblem()
-    {
-        JDFParser p=new JDFParser();
-        JDFDoc d=p.parseFile(sm_dirTestData+File.separator+"FixVersionProblem.jdf");
-        assertNotNull("FixVersionProblem exists",d);
-        n=d.getJDFRoot();
-        n.fixVersion(EnumVersion.Version_1_2);
-        JDFLayout lo=(JDFLayout) n.getResourcePool().getElement(ElementName.LAYOUT, null, 0);
-        assertEquals(lo.numChildElements("Signature",null),1);       
-    }
-    /////////////////////////////////////////////////////
+	// ///////////////////////////////////////////////////
 
+	public void testGetPlacedObjectVector()
+	{
+		testBuildOldLayout();
+		JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT,
+				EnumProcessUsage.AnyInput, null, 0);
+		JDFSurface su = lo.getSignature(1).getSheet(2).getSurface(
+				EnumSide.Front);
+		VElement v = su.getPlacedObjectVector();
+		assertEquals(v.size(), 4);
+		assertTrue(v.elementAt(0) instanceof JDFContentObject);
+		assertTrue(v.elementAt(1) instanceof JDFMarkObject);
+		assertTrue(v.elementAt(2) instanceof JDFContentObject);
+		assertTrue(v.elementAt(3) instanceof JDFContentObject);
 
-    /*
-     * GeneratedObject
+	}
 
-CTM or Position
-Position: See ImageShift PositionX and PositionY, Shift (Margins) – See ShiftFront RelativeShift?
+	// ///////////////////////////////////////////////////
+	public void testGetLayoutLeavesOld() throws Exception
+	{
+		testBuildOldLayout();
 
-Anchor Point (same as position ll, ul, cc, spine…) (if CTM is given)
-Orientation (rotation, matrix or ll, ul, …)
-Contents  Format/Template
-JobField (Replace, DynamicField?)
-SeparationList
-Mark References (FoldMark, CIE, …)
+		JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT,
+				EnumProcessUsage.AnyInput, null, 0);
+		VElement leaves = lo.getLayoutLeaves(false);
+		assertEquals(leaves.size(), 2);
+		JDFSignature si = lo.getSignature(1);
+		leaves = si.getLayoutLeaves(false);
+		assertEquals(leaves.size(), 2);
+		JDFSheet sh = si.getSheet(2);
+		leaves = sh.getLayoutLeaves(false);
+		assertEquals(leaves.size(), 2);
 
-     */
-    public void testGeneratedObject() throws Exception
-    {
-        n=doc.getJDFRoot();
-        JDFLayout lo=(JDFLayout) n.addResource("Layout",null,EnumUsage.Input, null, null, null,null);
-        JDFRunList rlo=(JDFRunList) n.addResource("RunList",null,EnumUsage.Output, null, null, null,null);
-        rlo.setFileURL("output.pdf");
+	}
 
-        lo.appendXMLComment("This is a simple horizontal slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes error and endtime in the lower left corner of the scb", null);
-        JDFMarkObject mark=lo.appendMarkObject();
-        mark.setCTM(new JDFMatrix("1 0 0 1 0 0"));
-        JDFJobField jf=mark.appendJobField();
-        jf.setShowList(new VString("Error EndTime"," "));
+	// ///////////////////////////////////////////////////
+	public void testGetLayoutLeavesNew() throws Exception
+	{
+		testBuildNewLayout();
 
-        lo.appendXMLComment("This is a simple vertical slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes the operator name along the right side of the sheet text from top to bottom\nthe slug line (top right of the slug cs) is anchored in the bottom right of the sheet.\nNote that the coordinates in the ctm are guess work. the real coordinates are left as an exercise for the reader;-)", null);
-        mark=lo.appendMarkObject();
-        mark.setCTM(new JDFMatrix("0 1 -1 0 555 444"));
-        jf=mark.appendJobField();
-        jf.setShowList(new VString("Operator"," "));
-        JDFDeviceMark dm=jf.appendDeviceMark();
-        dm.setAttribute("Anchor", "TopRight");
-        dm.setFont("Arial");
-        dm.setFontSize(10);
+		JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT,
+				EnumProcessUsage.AnyInput, null, 0);
+		VElement leaves = lo.getLayoutLeaves(false);
+		assertEquals("2 Sigs, 2 sheets, 2 surfaces", leaves.size(), 6);
+		JDFSignature si = lo.getSignature(1);
+		leaves = si.getLayoutLeaves(false);
+		assertEquals("2 sheets, 2 surfaces", leaves.size(), 4);
+		JDFSheet sh = si.getSheet(2);
+		leaves = sh.getLayoutLeaves(false);
+		assertEquals("2 surfaces", leaves.size(), 2);
 
-        lo.appendXMLComment("This is a formatted vertical slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes a formatted line along the left side of the sheet text from top to bottom\nthe slug line (top left) is anchored in the bottom left of the sheet.\nThe text is defined in @Format with the sequence in ShowList defining the 5 placeholders marked by %s or %i\nAn example instance would be: \"This Cyan plate of Sheet1 was proudly produced by Joe Cool! Resolution: 600 x 600\"\nNote that the coordinates in the ctm are guess work. the real coordinates are left as an exercise for the reader;-)", null);
-        mark=lo.appendMarkObject();
-        mark.setCTM(new JDFMatrix("0 1 -1 0 0 0"));
-        jf=mark.appendJobField();
-        jf.setShowList(new VString("Separation SheetName Operator ResolutionX ResolutionY"," "));
-        jf.setAttribute("Format", "This %s plate of %s was proudly produced by %s!\nResolution: %i x %i");
-        dm=jf.appendDeviceMark();
-        dm.setAttribute("Anchor", "TopLeft");
-        dm.setFont("Arial");
-        dm.setFontSize(10);
+	}
 
-        lo.appendXMLComment("This is a positioned registermark\nthe center of the mark is translated by 666 999\n the JobField is empty and serves aa a Marker that no external Content is requested", null);
-        mark=lo.appendMarkObject();
-        mark.setCTM(new JDFMatrix("1 0 0 1 666 999"));
-        jf=mark.appendJobField();
-        mark.appendXMLComment("The coordinate system origin is defined by the anchor in the center, i.e. 0 0\n the separartions are excluding black", null);
-        JDFRegisterMark rm=mark.appendRegisterMark();
-        rm.setMarkType("Arc Cross");
-        rm.setMarkUsage(EnumMarkUsage.Color);
-        rm.setCenter(new JDFXYPair("0 0"));
-        rm.setSeparations(new VString("Cyan Magent Yellow"," "));
-        dm=jf.appendDeviceMark();
-        dm.setAttribute("Anchor", "Center");
+	// ///////////////////////////////////////////////////
+	public void testGetSignatureVector_Old()
+	{
+		testBuildOldLayout();
+		JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT,
+				EnumProcessUsage.AnyInput, null, 0);
+		VElement v = lo.getSignatureVector();
+		JDFSignature sig = (JDFSignature) v.elementAt(0);
+		assertEquals(sig.getSignatureName(), sig.getName());
+		assertEquals(sig.getSignatureName(), "Sig1");
+		JDFSignature sig2 = (JDFSignature) v.elementAt(1);
+		assertEquals(sig2.getSignatureName(), sig2.getName());
+		assertEquals(sig2.getSignatureName(), "Sig2");
+		VElement vSheet = sig2.getSheetVector();
+		JDFSheet s1 = (JDFSheet) vSheet.elementAt(1); // don't try 0 it will
+														// fail because it is
+														// referenced...
+		assertEquals(s1.getSignatureName(), "Sig2");
+		assertEquals(s1.getSheetName(), "Sheet2_2");
+		JDFSurface su = s1.getCreateBackSurface();
+		assertEquals(su.getSignatureName(), "Sig2");
+		assertEquals(su.getSheetName(), "Sheet2_2");
+		assertEquals(s1.getSurfaceVector().elementAt(0), su);
 
-        doc.write2File(sm_dirTestDataTemp+"generatedObject.jdf", 2, false);
+	}
 
-    }
-    /////////////////////////////////////////////////////
+	// ///////////////////////////////////////////////////
+	public void testGetSignatureName_Old()
+	{
+		testBuildOldLayout();
+		JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT,
+				EnumProcessUsage.AnyInput, null, 0);
+		JDFSignature sig = lo.getSignature(0);
+		assertEquals(sig.getSignatureName(), sig.getName());
+		assertEquals(sig.getSignatureName(), "Sig1");
+		JDFSignature sig2 = lo.getSignature(1);
+		assertEquals(sig2.getSignatureName(), sig2.getName());
+		assertEquals(sig2.getSignatureName(), "Sig2");
+		JDFSheet s1 = sig2.getSheet(1); // don't try 0 it will fail because it
+										// is referenced...
+		assertEquals(s1.getSignatureName(), "Sig2");
+		assertEquals(s1.getSheetName(), "Sheet2_2");
+		JDFSurface su = s1.getCreateBackSurface();
+		assertEquals(su.getSignatureName(), "Sig2");
+		assertEquals(su.getSheetName(), "Sheet2_2");
 
+	}
+
+	// ///////////////////////////////////////////////////
+	public void testGetSignatureName_New()
+	{
+		testBuildNewLayout();
+		JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT,
+				EnumProcessUsage.AnyInput, null, 0);
+		JDFSignature sig = lo.getSignature(0);
+		assertEquals(sig.getSignatureName(), "SignatureName1");
+		JDFSignature sig2 = lo.getSignature(1);
+		assertEquals(sig2.getSignatureName(), "SignatureName2");
+		JDFSheet s1 = sig2.getSheet(1); // don't try 0 it will fail because it
+										// is referenced...
+		assertEquals(s1.getSignatureName(), "SignatureName2");
+		assertEquals(s1.getSheetName(), "SheetName2");
+		JDFSurface su = s1.getCreateBackSurface();
+		assertEquals(su.getSignatureName(), "SignatureName2");
+		assertEquals(su.getSheetName(), "SheetName2");
+	}
+
+	// ///////////////////////////////////////////////////
+	public void testGetSignatureVector_New()
+	{
+		testBuildNewLayout();
+		JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT,
+				EnumProcessUsage.AnyInput, null, 0);
+		VElement v = lo.getSignatureVector();
+		JDFSignature sig = (JDFSignature) v.elementAt(0);
+		assertEquals(sig.getSignatureName(), "SignatureName1");
+		JDFSignature sig2 = (JDFSignature) v.elementAt(1);
+		assertEquals(sig2.getSignatureName(), "SignatureName2");
+		VElement vSheet = sig2.getSheetVector();
+		JDFSheet s1 = (JDFSheet) vSheet.elementAt(1); // don't try 0 it will
+														// fail because it is
+														// referenced...
+		assertEquals(s1.getSignatureName(), "SignatureName2");
+		assertEquals(s1.getSheetName(), "SheetName2");
+		JDFSurface su = s1.getCreateBackSurface();
+		assertEquals(su.getSignatureName(), "SignatureName2");
+		assertEquals(su.getSheetName(), "SheetName2");
+		assertEquals(s1.getSurfaceVector().elementAt(0), su);
+	}
+
+	// ///////////////////////////////////////////////////
+
+	public void testFixVersionProblem()
+	{
+		JDFParser p = new JDFParser();
+		JDFDoc d = p.parseFile(sm_dirTestData + File.separator
+				+ "FixVersionProblem.jdf");
+		assertNotNull("FixVersionProblem exists", d);
+		n = d.getJDFRoot();
+		n.fixVersion(EnumVersion.Version_1_2);
+		JDFLayout lo = (JDFLayout) n.getResourcePool().getElement(
+				ElementName.LAYOUT, null, 0);
+		assertEquals(lo.numChildElements("Signature", null), 1);
+	}
+
+	// ///////////////////////////////////////////////////
+
+	/*
+	 * GeneratedObject
+	 * 
+	 * CTM or Position Position: See ImageShift PositionX and PositionY, Shift
+	 * (Margins) – See ShiftFront RelativeShift?
+	 * 
+	 * Anchor Point (same as position ll, ul, cc, spine…) (if CTM is given)
+	 * Orientation (rotation, matrix or ll, ul, …) Contents Format/Template
+	 * JobField (Replace, DynamicField?) SeparationList Mark References
+	 * (FoldMark, CIE, …)
+	 */
+	public void testGeneratedObject() throws Exception
+	{
+		n = doc.getJDFRoot();
+		JDFLayout lo = (JDFLayout) n.addResource("Layout", null,
+				EnumUsage.Input, null, null, null, null);
+		JDFRunList rlo = (JDFRunList) n.addResource("RunList", null,
+				EnumUsage.Output, null, null, null, null);
+		rlo.setFileURL("output.pdf");
+
+		lo
+				.appendXMLComment(
+						"This is a simple horizontal slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes error and endtime in the lower left corner of the scb",
+						null);
+		JDFMarkObject mark = lo.appendMarkObject();
+		mark.setCTM(new JDFMatrix("1 0 0 1 0 0"));
+		JDFJobField jf = mark.appendJobField();
+		jf.setShowList(new VString("Error EndTime", " "));
+
+		lo
+				.appendXMLComment(
+						"This is a simple vertical slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes the operator name along the right side of the sheet text from top to bottom\nthe slug line (top right of the slug cs) is anchored in the bottom right of the sheet.\nNote that the coordinates in the ctm are guess work. the real coordinates are left as an exercise for the reader;-)",
+						null);
+		mark = lo.appendMarkObject();
+		mark.setCTM(new JDFMatrix("0 1 -1 0 555 444"));
+		jf = mark.appendJobField();
+		jf.setShowList(new VString("Operator", " "));
+		JDFDeviceMark dm = jf.appendDeviceMark();
+		dm.setAttribute("Anchor", "TopRight");
+		dm.setFont("Arial");
+		dm.setFontSize(10);
+
+		lo
+				.appendXMLComment(
+						"This is a formatted vertical slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes a formatted line along the left side of the sheet text from top to bottom\nthe slug line (top left) is anchored in the bottom left of the sheet.\nThe text is defined in @Format with the sequence in ShowList defining the 5 placeholders marked by %s or %i\nAn example instance would be: \"This Cyan plate of Sheet1 was proudly produced by Joe Cool! Resolution: 600 x 600\"\nNote that the coordinates in the ctm are guess work. the real coordinates are left as an exercise for the reader;-)",
+						null);
+		mark = lo.appendMarkObject();
+		mark.setCTM(new JDFMatrix("0 1 -1 0 0 0"));
+		jf = mark.appendJobField();
+		jf.setShowList(new VString(
+				"Separation SheetName Operator ResolutionX ResolutionY", " "));
+		jf
+				.setAttribute("Format",
+						"This %s plate of %s was proudly produced by %s!\nResolution: %i x %i");
+		dm = jf.appendDeviceMark();
+		dm.setAttribute("Anchor", "TopLeft");
+		dm.setFont("Arial");
+		dm.setFontSize(10);
+
+		lo
+				.appendXMLComment(
+						"This is a positioned registermark\nthe center of the mark is translated by 666 999\n the JobField is empty and serves aa a Marker that no external Content is requested",
+						null);
+		mark = lo.appendMarkObject();
+		mark.setCTM(new JDFMatrix("1 0 0 1 666 999"));
+		jf = mark.appendJobField();
+		mark
+				.appendXMLComment(
+						"The coordinate system origin is defined by the anchor in the center, i.e. 0 0\n the separartions are excluding black",
+						null);
+		JDFRegisterMark rm = mark.appendRegisterMark();
+		rm.setMarkType("Arc Cross");
+		rm.setMarkUsage(EnumMarkUsage.Color);
+		rm.setCenter(new JDFXYPair("0 0"));
+		rm.setSeparations(new VString("Cyan Magent Yellow", " "));
+		dm = jf.appendDeviceMark();
+		dm.setAttribute("Anchor", "Center");
+
+		doc.write2File(sm_dirTestDataTemp + "generatedObject.jdf", 2, false);
+
+	}
+	// ///////////////////////////////////////////////////
 
 }

@@ -82,77 +82,85 @@ import org.cip4.jdflib.ifaces.IMatches;
  * general utilities for containers and objects
  * 
  * @author prosirai
- *
+ * 
  */
 public class ContainerUtilTest extends JDFTestCaseBase
 {
-    private class SimpleMatch implements IMatches
-    {
+	private class SimpleMatch implements IMatches
+	{
 
-        private int i;
-        
-        public SimpleMatch(int i)
-        {
-            super();
-            this.i = i;
-        }
-        /* (non-Javadoc)
-         * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
-         */
-        public boolean matches(Object subset)
-        {
-            return ((SimpleMatch)subset).i==i;
-        }
-        /* (non-Javadoc)
-         * @see java.lang.Object#equals(java.lang.Object)
-         */
-        @Override
-        public boolean equals(Object obj)
-        {
-            return matches(obj);
-        }
-        
-    }
-    public void testEquals()
-    {
-        assertTrue(ContainerUtil.equals(null, null));
-        assertFalse(ContainerUtil.equals(null, ""));
-        assertFalse(ContainerUtil.equals("", null));
-        assertFalse(ContainerUtil.equals("", " "));
-        assertTrue(ContainerUtil.equals("a", "a"));
-    }
-    public void testGetMatch()
-    {
-        Vector<SimpleMatch>v=new Vector<SimpleMatch>();
-        for(int i=0;i<10;i++)
-            v.add(new SimpleMatch(i%2));
-        SimpleMatch simpleMatch1 = new SimpleMatch(1);
-        assertEquals(ContainerUtil.getMatches(v,simpleMatch1).size(),5);
-        assertEquals(ContainerUtil.getMatch(v,simpleMatch1,0),simpleMatch1);
-     }
+		private int i;
 
-    public void testToHashSetArray()
-    {
-       String[] a={"a","b"};
-       Set s=ContainerUtil.toHashSet(a);
-       assertTrue(s.contains("a"));
-       assertTrue(s.contains("b"));
-       assertFalse(s.contains("c"));
-       assertEquals(s.size(), a.length);
-    }
-    
-    public void testToValueVector()
-    {
-       HashMap<String,String> hm=new HashMap<String, String>();
-       for(int i=0;i<10;i++)
-           hm.put(""+i,"a"+i);
-       Vector<String> v=ContainerUtil.toValueVector(hm, false);
-       assertEquals(v.size(), 10);
-       Vector<String> vs=ContainerUtil.toValueVector(hm, true);
-       assertTrue(vs.containsAll(v));
-       assertTrue(v.containsAll(vs));
-       for(int i=1;i<10;i++)
-           assertTrue(vs.get(i-1).compareTo(vs.get(i))<0);
-        
-    }
+		public SimpleMatch(int i)
+		{
+			super();
+			this.i = i;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
+		 */
+		public boolean matches(Object subset)
+		{
+			return ((SimpleMatch) subset).i == i;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see java.lang.Object#equals(java.lang.Object)
+		 */
+		@Override
+		public boolean equals(Object obj)
+		{
+			return matches(obj);
+		}
+
+	}
+
+	public void testEquals()
+	{
+		assertTrue(ContainerUtil.equals(null, null));
+		assertFalse(ContainerUtil.equals(null, ""));
+		assertFalse(ContainerUtil.equals("", null));
+		assertFalse(ContainerUtil.equals("", " "));
+		assertTrue(ContainerUtil.equals("a", "a"));
+	}
+
+	public void testGetMatch()
+	{
+		Vector<SimpleMatch> v = new Vector<SimpleMatch>();
+		for (int i = 0; i < 10; i++)
+			v.add(new SimpleMatch(i % 2));
+		SimpleMatch simpleMatch1 = new SimpleMatch(1);
+		assertEquals(ContainerUtil.getMatches(v, simpleMatch1).size(), 5);
+		assertEquals(ContainerUtil.getMatch(v, simpleMatch1, 0), simpleMatch1);
+	}
+
+	public void testToHashSetArray()
+	{
+		String[] a = { "a", "b" };
+		Set s = ContainerUtil.toHashSet(a);
+		assertTrue(s.contains("a"));
+		assertTrue(s.contains("b"));
+		assertFalse(s.contains("c"));
+		assertEquals(s.size(), a.length);
+	}
+
+	public void testToValueVector()
+	{
+		HashMap<String, String> hm = new HashMap<String, String>();
+		for (int i = 0; i < 10; i++)
+			hm.put("" + i, "a" + i);
+		Vector<String> v = ContainerUtil.toValueVector(hm, false);
+		assertEquals(v.size(), 10);
+		Vector<String> vs = ContainerUtil.toValueVector(hm, true);
+		assertTrue(vs.containsAll(v));
+		assertTrue(v.containsAll(vs));
+		for (int i = 1; i < 10; i++)
+			assertTrue(vs.get(i - 1).compareTo(vs.get(i)) < 0);
+
+	}
 }

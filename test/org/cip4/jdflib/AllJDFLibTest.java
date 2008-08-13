@@ -211,6 +211,7 @@ import org.cip4.jdflib.util.MimeUtilTest;
 import org.cip4.jdflib.util.PrefixInputStreamTest;
 import org.cip4.jdflib.util.QueueHotFolderTest;
 import org.cip4.jdflib.util.SScanfTest;
+import org.cip4.jdflib.util.SkipInputStreamTest;
 import org.cip4.jdflib.util.StatusCounterTest;
 import org.cip4.jdflib.util.StringUtilTest;
 import org.cip4.jdflib.util.UrlUtilTest;
@@ -218,191 +219,192 @@ import org.cip4.jdflib.util.VectorMapTest;
 
 /**
  * @author MuchaD
- *
+ * 
  */
 public class AllJDFLibTest extends JDFTestCaseBase
 {
-    public static TestSuite suite()
-    {
-        TestSuite suite = new TestSuite("Tests for org.cip4.jdflib.*");
+	public static TestSuite suite()
+	{
+		TestSuite suite = new TestSuite("Tests for org.cip4.jdflib.*");
 
-        suite.addTestSuite(JDFClassInstantiationTest.class);
+		suite.addTestSuite(JDFClassInstantiationTest.class);
 
-        suite.addTestSuite(CheckJDFTest.class);
-        suite.addTestSuite(EmptyNamespace.class);
+		suite.addTestSuite(CheckJDFTest.class);
+		suite.addTestSuite(EmptyNamespace.class);
 
-        suite.addTestSuite(AutoTest.class);
+		suite.addTestSuite(AutoTest.class);
 
-        // core
-        suite.addTestSuite(AttrInfoTest.class);
-        suite.addTestSuite(ElemInfoTest.class);
-        suite.addTestSuite(FactoryTest.class);
-        suite.addTestSuite(FixVersionTest.class);
-        suite.addTestSuite(JDFAuditTest.class);
-        suite.addTestSuite(JDFCustomerInfoTest.class);
-        suite.addTestSuite(JDFDocTest.class);
-        suite.addTestSuite(JDFElementTest.class);
-        suite.addTestSuite(JDFNodeInfoTest.class);
-        suite.addTestSuite(JDFPartAmountTest.class);
-        suite.addTestSuite(JDFResourceLinkTest.class);
-        suite.addTestSuite(JDFRefElementTest.class);
-        suite.addTestSuite(JDFSourceResourceTest.class);
-        suite.addTestSuite(KElementTest.class);
-        suite.addTestSuite(VElementTest.class);
-        suite.addTestSuite(VStringTest.class);
-        suite.addTestSuite(XMLDocTest.class);
-        // cformat
-        suite.addTestSuite(PrintfFormatTest.class);
+		// core
+		suite.addTestSuite(AttrInfoTest.class);
+		suite.addTestSuite(ElemInfoTest.class);
+		suite.addTestSuite(FactoryTest.class);
+		suite.addTestSuite(FixVersionTest.class);
+		suite.addTestSuite(JDFAuditTest.class);
+		suite.addTestSuite(JDFCustomerInfoTest.class);
+		suite.addTestSuite(JDFDocTest.class);
+		suite.addTestSuite(JDFElementTest.class);
+		suite.addTestSuite(JDFNodeInfoTest.class);
+		suite.addTestSuite(JDFPartAmountTest.class);
+		suite.addTestSuite(JDFResourceLinkTest.class);
+		suite.addTestSuite(JDFRefElementTest.class);
+		suite.addTestSuite(JDFSourceResourceTest.class);
+		suite.addTestSuite(KElementTest.class);
+		suite.addTestSuite(VElementTest.class);
+		suite.addTestSuite(VStringTest.class);
+		suite.addTestSuite(XMLDocTest.class);
+		// cformat
+		suite.addTestSuite(PrintfFormatTest.class);
 
-        // datatype
-        suite.addTestSuite(JDFAttributeMapTest.class);
-        suite.addTestSuite(JDFDateTimeRangeTest.class);
-        suite.addTestSuite(JDFDurationTest.class);
-        suite.addTestSuite(JDFDurationRangeTest.class);
-        suite.addTestSuite(JDFEnumerationTest.class);
-        suite.addTestSuite(JDFIntegerListTest.class);      
-        suite.addTestSuite(JDFIntegerRangeTest.class);
-        suite.addTestSuite(JDFIntegerRangeListTest.class);
-        suite.addTestSuite(JDFMatrixTest.class);
-        suite.addTestSuite(JDFNumberRangeListTest.class);
-        suite.addTestSuite(JDFNumListTest.class);
-        suite.addTestSuite(JDFPathTest.class);
-        suite.addTestSuite(JDFURLTest.class);
-        suite.addTestSuite(JDFRectangleRangeListTest.class);
-        suite.addTestSuite(JDFRectangleRangeTest.class);
-        suite.addTestSuite(JDFRectangleTest.class);
-        suite.addTestSuite(JDFShapeRangeListTest.class);
-        suite.addTestSuite(JDFXYPairRangeListTest.class);
-        suite.addTestSuite(JDFXYPairTest.class);
-        suite.addTestSuite(VJDFAttributeMapTest.class);
+		// datatype
+		suite.addTestSuite(JDFAttributeMapTest.class);
+		suite.addTestSuite(JDFDateTimeRangeTest.class);
+		suite.addTestSuite(JDFDurationTest.class);
+		suite.addTestSuite(JDFDurationRangeTest.class);
+		suite.addTestSuite(JDFEnumerationTest.class);
+		suite.addTestSuite(JDFIntegerListTest.class);
+		suite.addTestSuite(JDFIntegerRangeTest.class);
+		suite.addTestSuite(JDFIntegerRangeListTest.class);
+		suite.addTestSuite(JDFMatrixTest.class);
+		suite.addTestSuite(JDFNumberRangeListTest.class);
+		suite.addTestSuite(JDFNumListTest.class);
+		suite.addTestSuite(JDFPathTest.class);
+		suite.addTestSuite(JDFURLTest.class);
+		suite.addTestSuite(JDFRectangleRangeListTest.class);
+		suite.addTestSuite(JDFRectangleRangeTest.class);
+		suite.addTestSuite(JDFRectangleTest.class);
+		suite.addTestSuite(JDFShapeRangeListTest.class);
+		suite.addTestSuite(JDFXYPairRangeListTest.class);
+		suite.addTestSuite(JDFXYPairTest.class);
+		suite.addTestSuite(VJDFAttributeMapTest.class);
 
-        // capabilities and preflight
-        suite.addTestSuite(JDFActionPoolTest.class);
-        suite.addTestSuite(JDFDeviceCapTest.class);
-        suite.addTestSuite(JDFDevCapTest.class);
-        suite.addTestSuite(JDFDevCapsTest.class);
-        suite.addTestSuite(JDFDurationStateTest.class);
-        suite.addTestSuite(JDFEvaluationTest.class);
-        suite.addTestSuite(JDFIntegerStateTest.class);
-        suite.addTestSuite(JDFModulePoolTest.class);
-        suite.addTestSuite(JDFNameStateTest.class);
-        suite.addTestSuite(JDFNumberStateTest.class);
-        suite.addTestSuite(JDFStateBaseTest.class);
-        suite.addTestSuite(JDFStringStateTest.class);
-        suite.addTestSuite(JDFTestTest.class);
+		// capabilities and preflight
+		suite.addTestSuite(JDFActionPoolTest.class);
+		suite.addTestSuite(JDFDeviceCapTest.class);
+		suite.addTestSuite(JDFDevCapTest.class);
+		suite.addTestSuite(JDFDevCapsTest.class);
+		suite.addTestSuite(JDFDurationStateTest.class);
+		suite.addTestSuite(JDFEvaluationTest.class);
+		suite.addTestSuite(JDFIntegerStateTest.class);
+		suite.addTestSuite(JDFModulePoolTest.class);
+		suite.addTestSuite(JDFNameStateTest.class);
+		suite.addTestSuite(JDFNumberStateTest.class);
+		suite.addTestSuite(JDFStateBaseTest.class);
+		suite.addTestSuite(JDFStringStateTest.class);
+		suite.addTestSuite(JDFTestTest.class);
 
-        //elementWalker
-        suite.addTestSuite(BaseWalkerTest.class);
-        suite.addTestSuite(UnlinkFinderTest.class);
-        
-        //examples
-        suite.addTestSuite(AmountTest.class);
-        suite.addTestSuite(AutomatedLayoutTest.class);
-        suite.addTestSuite(ContentCreationTest.class);
-        suite.addTestSuite(DigiPrintTest.class);
-        suite.addTestSuite(IterationTest.class);
-        suite.addTestSuite(JDFExampleDocTest.class);
-        suite.addTestSuite(MISFinTest.class);
-        suite.addTestSuite(NColorTest.class);        
-        suite.addTestSuite(RIPTest.class);        
-        suite.addTestSuite(StrippingTest.class);
-        suite.addTestSuite(VarnishTest.class);
-        suite.addTestSuite(WebTest.class);
+		// elementWalker
+		suite.addTestSuite(BaseWalkerTest.class);
+		suite.addTestSuite(UnlinkFinderTest.class);
 
-        // Golden tickets
-        suite.addTestSuite(GoldenTicketTest.class);
-        suite.addTestSuite(MISCPGoldenTicketTest.class);
-        suite.addTestSuite(MISPreGoldenTicketTest.class);
-        suite.addTestSuite(IDPGoldenTicketTest.class);
+		// examples
+		suite.addTestSuite(AmountTest.class);
+		suite.addTestSuite(AutomatedLayoutTest.class);
+		suite.addTestSuite(ContentCreationTest.class);
+		suite.addTestSuite(DigiPrintTest.class);
+		suite.addTestSuite(IterationTest.class);
+		suite.addTestSuite(JDFExampleDocTest.class);
+		suite.addTestSuite(MISFinTest.class);
+		suite.addTestSuite(NColorTest.class);
+		suite.addTestSuite(RIPTest.class);
+		suite.addTestSuite(StrippingTest.class);
+		suite.addTestSuite(VarnishTest.class);
+		suite.addTestSuite(WebTest.class);
 
-        // JMF
-        suite.addTestSuite(JDFDeviceInfoTest.class);
-        suite.addTestSuite(JDFJMFTest.class);
-        suite.addTestSuite(JDFJobPhaseTest.class);
-        suite.addTestSuite(JDFMessageTest.class);
-        suite.addTestSuite(JDFMessageServiceTest.class);
-        suite.addTestSuite(JDFPipeParamsTest.class);
-        suite.addTestSuite(JDFQueueEntryTest.class);
-        suite.addTestSuite(JDFQueueFilterTest.class);
-        suite.addTestSuite(JMFKnownMessagesTest.class);
-        suite.addTestSuite(JDFQueueSubmissionParamsTest.class);
-        suite.addTestSuite(JMFResourceTest.class);
-        suite.addTestSuite(JMFResourceInfoTest.class);
-        suite.addTestSuite(JMFStatusTest.class);
-        suite.addTestSuite(QueueTest.class);
+		// Golden tickets
+		suite.addTestSuite(GoldenTicketTest.class);
+		suite.addTestSuite(MISCPGoldenTicketTest.class);
+		suite.addTestSuite(MISPreGoldenTicketTest.class);
+		suite.addTestSuite(IDPGoldenTicketTest.class);
 
-        // Node
-        suite.addTestSuite(JDFNodeProductTest.class);
-        suite.addTestSuite(JDFNodeTest.class);
+		// JMF
+		suite.addTestSuite(JDFDeviceInfoTest.class);
+		suite.addTestSuite(JDFJMFTest.class);
+		suite.addTestSuite(JDFJobPhaseTest.class);
+		suite.addTestSuite(JDFMessageTest.class);
+		suite.addTestSuite(JDFMessageServiceTest.class);
+		suite.addTestSuite(JDFPipeParamsTest.class);
+		suite.addTestSuite(JDFQueueEntryTest.class);
+		suite.addTestSuite(JDFQueueFilterTest.class);
+		suite.addTestSuite(JMFKnownMessagesTest.class);
+		suite.addTestSuite(JDFQueueSubmissionParamsTest.class);
+		suite.addTestSuite(JMFResourceTest.class);
+		suite.addTestSuite(JMFResourceInfoTest.class);
+		suite.addTestSuite(JMFStatusTest.class);
+		suite.addTestSuite(QueueTest.class);
 
-        // pool
-        suite.addTestSuite(JDFAmountPoolTest.class);
-        suite.addTestSuite(JDFAncestorPoolTest.class);
-        suite.addTestSuite(JDFAuditPoolTest.class);
-        suite.addTestSuite(JDFColorPoolTest.class);
-        suite.addTestSuite(JDFResourceLinkPoolTest.class);
-        suite.addTestSuite(JDFResourcePoolTest.class);
+		// Node
+		suite.addTestSuite(JDFNodeProductTest.class);
+		suite.addTestSuite(JDFNodeTest.class);
 
-        //resource
-        suite.addTestSuite(ProcessRunTest.class);
-        suite.addTestSuite(PhaseTimeTest.class);
-        suite.addTestSuite(JDFAutoResourceTest.class);
-        suite.addTestSuite(JDFDeviceListTest.class);
-        suite.addTestSuite(JDFFilespecTest.class);
-        suite.addTestSuite(JDFAssemblySectionTest.class);
-        suite.addTestSuite(JDFLayerListTest.class);
-        suite.addTestSuite(JDFLayoutTest.class);
-        suite.addTestSuite(JDFMediaColorTest.class);
-        suite.addTestSuite(JDFNotificationTest.class);
-        suite.addTestSuite(JDFPageListTest.class);
-        suite.addTestSuite(JDFPartTest.class);
-        suite.addTestSuite(JDFResourceTest.class);
-        suite.addTestSuite(JDFStrippingTest.class);
+		// pool
+		suite.addTestSuite(JDFAmountPoolTest.class);
+		suite.addTestSuite(JDFAncestorPoolTest.class);
+		suite.addTestSuite(JDFAuditPoolTest.class);
+		suite.addTestSuite(JDFColorPoolTest.class);
+		suite.addTestSuite(JDFResourceLinkPoolTest.class);
+		suite.addTestSuite(JDFResourcePoolTest.class);
 
-        // resource.process
-        suite.addTestSuite(JDFAddressTest.class);
-        suite.addTestSuite(JDFColorTest.class);
-        suite.addTestSuite(JDFColorantControlTest.class);
-        suite.addTestSuite(JDFColorConversionParamsTest.class);
-        suite.addTestSuite(JDFComChannelTest.class);
-        suite.addTestSuite(JDFComponentTest.class);
-        suite.addTestSuite(JDFContentDataTest.class);
-        suite.addTestSuite(JDFCutBlockTest.class);
-        suite.addTestSuite(JDFContactTest.class);
-        suite.addTestSuite(JDFDieLayoutTest.class);
-        suite.addTestSuite(JDFEmployeeTest.class);
-        suite.addTestSuite(JDFMediaTest.class);
-        suite.addTestSuite(JDFPageDataTest.class);
-        suite.addTestSuite(JDFPersonTest.class);
-        suite.addTestSuite(JDFPRItemTest.class);
-        suite.addTestSuite(JDFRunListTest.class);
-        suite.addTestSuite(JDFTileTest.class);
-        suite.addTestSuite(JDFUsageCounterTest.class);
+		// resource
+		suite.addTestSuite(ProcessRunTest.class);
+		suite.addTestSuite(PhaseTimeTest.class);
+		suite.addTestSuite(JDFAutoResourceTest.class);
+		suite.addTestSuite(JDFDeviceListTest.class);
+		suite.addTestSuite(JDFFilespecTest.class);
+		suite.addTestSuite(JDFAssemblySectionTest.class);
+		suite.addTestSuite(JDFLayerListTest.class);
+		suite.addTestSuite(JDFLayoutTest.class);
+		suite.addTestSuite(JDFMediaColorTest.class);
+		suite.addTestSuite(JDFNotificationTest.class);
+		suite.addTestSuite(JDFPageListTest.class);
+		suite.addTestSuite(JDFPartTest.class);
+		suite.addTestSuite(JDFResourceTest.class);
+		suite.addTestSuite(JDFStrippingTest.class);
 
-        // resource.process.postpress
-        suite.addTestSuite(JDFStitchingParamsTest.class);
+		// resource.process
+		suite.addTestSuite(JDFAddressTest.class);
+		suite.addTestSuite(JDFColorTest.class);
+		suite.addTestSuite(JDFColorantControlTest.class);
+		suite.addTestSuite(JDFColorConversionParamsTest.class);
+		suite.addTestSuite(JDFComChannelTest.class);
+		suite.addTestSuite(JDFComponentTest.class);
+		suite.addTestSuite(JDFContentDataTest.class);
+		suite.addTestSuite(JDFCutBlockTest.class);
+		suite.addTestSuite(JDFContactTest.class);
+		suite.addTestSuite(JDFDieLayoutTest.class);
+		suite.addTestSuite(JDFEmployeeTest.class);
+		suite.addTestSuite(JDFMediaTest.class);
+		suite.addTestSuite(JDFPageDataTest.class);
+		suite.addTestSuite(JDFPersonTest.class);
+		suite.addTestSuite(JDFPRItemTest.class);
+		suite.addTestSuite(JDFRunListTest.class);
+		suite.addTestSuite(JDFTileTest.class);
+		suite.addTestSuite(JDFUsageCounterTest.class);
 
-        // util
-        suite.addTestSuite(BiHashMapTest.class);
-        suite.addTestSuite(ByteArrayIOStreamTest.class);
-        suite.addTestSuite(ContainerUtilTest.class);
-        suite.addTestSuite(EnumUtilTest.class);
-        suite.addTestSuite(FileUtilTest.class);
-        suite.addTestSuite(HashUtilTest.class);
-        suite.addTestSuite(HotFolderTest.class);
-        suite.addTestSuite(JDFDateTest.class);
-        suite.addTestSuite(JDFSpawnTest.class);
-        suite.addTestSuite(MimeUtilTest.class);
-        suite.addTestSuite(PrefixInputStreamTest.class);
-        suite.addTestSuite(QueueHotFolderTest.class);
-        suite.addTestSuite(SScanfTest.class);
-        suite.addTestSuite(StatusCounterTest.class);
-        suite.addTestSuite(StringUtilTest.class);
-        suite.addTestSuite(UrlUtilTest.class);
-        suite.addTestSuite(VectorMapTest.class);
+		// resource.process.postpress
+		suite.addTestSuite(JDFStitchingParamsTest.class);
 
-        suite.addTestSuite(JDFEnumerationSpanTest.class);
+		// util
+		suite.addTestSuite(BiHashMapTest.class);
+		suite.addTestSuite(ByteArrayIOStreamTest.class);
+		suite.addTestSuite(ContainerUtilTest.class);
+		suite.addTestSuite(EnumUtilTest.class);
+		suite.addTestSuite(FileUtilTest.class);
+		suite.addTestSuite(HashUtilTest.class);
+		suite.addTestSuite(HotFolderTest.class);
+		suite.addTestSuite(JDFDateTest.class);
+		suite.addTestSuite(JDFSpawnTest.class);
+		suite.addTestSuite(MimeUtilTest.class);
+		suite.addTestSuite(PrefixInputStreamTest.class);
+		suite.addTestSuite(QueueHotFolderTest.class);
+		suite.addTestSuite(SkipInputStreamTest.class);
+		suite.addTestSuite(SScanfTest.class);
+		suite.addTestSuite(StatusCounterTest.class);
+		suite.addTestSuite(StringUtilTest.class);
+		suite.addTestSuite(UrlUtilTest.class);
+		suite.addTestSuite(VectorMapTest.class);
 
-        return suite;
-    }
+		suite.addTestSuite(JDFEnumerationSpanTest.class);
+
+		return suite;
+	}
 }

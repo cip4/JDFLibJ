@@ -74,84 +74,89 @@ import org.cip4.jdflib.core.JDFDoc;
 
 /**
  * @author prosirai
- *
+ * 
  */
 public class JDFPersonTest extends JDFTestCaseBase
 {
-    JDFPerson person;
+	JDFPerson person;
 
-    public void testFamilyName() throws Exception
-    {
-        person.setFamilyName("Müller");
-        assertEquals(person.getFamilyName(), "Müller");
-        assertEquals(person.getDescriptiveName(), "Müller");
-        person.setFamilyName("Meyer");
-        assertEquals(person.getFamilyName(), "Meyer");
-        assertEquals(person.getDescriptiveName(), "Meyer");
-        person.setFamilyName("Müller");
-        assertEquals(person.getFamilyName(), "Müller");
-        assertEquals(person.getDescriptiveName(), "Müller");
-    }
-    public void testFirstName() throws Exception
-    {
-        person.setFirstName("Joe");
-        assertEquals(person.getFirstName(), "Joe");
-        assertEquals(person.getDescriptiveName(), "Joe");
-        person.setFirstName("Mary");
-        assertEquals(person.getFirstName(), "Mary");
-        assertEquals(person.getDescriptiveName(), "Mary");
-        person.setFirstName("Joe");
-        assertEquals(person.getFirstName(), "Joe");
-        assertEquals(person.getDescriptiveName(), "Joe");
-    }
-    public void testFirstLastName() throws Exception
-    {
-        testFirstName();
-        person.setFamilyName("Müller");
-        assertEquals(person.getFamilyName(), "Müller");
-        assertEquals(person.getDescriptiveName(), "Joe Müller");
-        person.setFirstName("Mary");
-        assertEquals(person.getFirstName(), "Mary");
-        assertEquals(person.getDescriptiveName(), "Mary Müller");
-        person.setFamilyName("Meyer");
-        assertEquals(person.getFamilyName(), "Meyer");
-        assertEquals(person.getDescriptiveName(), "Mary Meyer");
-        person.setFamilyName("Meyer");
-        assertEquals(person.getFamilyName(), "Meyer");
-        assertEquals(person.getDescriptiveName(), "Mary Meyer");
-        person.setFamilyName("Schmidt");
-        assertEquals(person.getFamilyName(), "Schmidt");
-        assertEquals(person.getDescriptiveName(), "Mary Schmidt");
-        person.setFamilyName(null);
-        assertFalse(person.hasAttribute("FamilyName"));
-        assertEquals(person.getDescriptiveName(), "Mary Schmidt");
-    }
-    
-    public void testLastFirstName() throws Exception
-    {
-        testFamilyName();
-        person.setFirstName("Joe");
-        assertEquals(person.getFirstName(), "Joe");
-        assertEquals(person.getDescriptiveName(), "Joe Müller");
-    }
-    
-    public void testKeepDescName() throws Exception
-    {
-        person.setDescriptiveName("foo");
-        person.setFirstName("Joe");
-        assertEquals(person.getFirstName(), "Joe");
-        assertEquals("no overwrite of non-matching name",person.getDescriptiveName(), "foo");
+	public void testFamilyName() throws Exception
+	{
+		person.setFamilyName("Müller");
+		assertEquals(person.getFamilyName(), "Müller");
+		assertEquals(person.getDescriptiveName(), "Müller");
+		person.setFamilyName("Meyer");
+		assertEquals(person.getFamilyName(), "Meyer");
+		assertEquals(person.getDescriptiveName(), "Meyer");
+		person.setFamilyName("Müller");
+		assertEquals(person.getFamilyName(), "Müller");
+		assertEquals(person.getDescriptiveName(), "Müller");
+	}
 
-    }
+	public void testFirstName() throws Exception
+	{
+		person.setFirstName("Joe");
+		assertEquals(person.getFirstName(), "Joe");
+		assertEquals(person.getDescriptiveName(), "Joe");
+		person.setFirstName("Mary");
+		assertEquals(person.getFirstName(), "Mary");
+		assertEquals(person.getDescriptiveName(), "Mary");
+		person.setFirstName("Joe");
+		assertEquals(person.getFirstName(), "Joe");
+		assertEquals(person.getDescriptiveName(), "Joe");
+	}
 
-    /* (non-Javadoc)
-     * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
-     */
-    protected void setUp() throws Exception
-    {
-        // TODO Auto-generated method stub
-        super.setUp();
-        JDFDoc d=new JDFDoc("Person");
-        person=(JDFPerson) d.getRoot();       
-    }
+	public void testFirstLastName() throws Exception
+	{
+		testFirstName();
+		person.setFamilyName("Müller");
+		assertEquals(person.getFamilyName(), "Müller");
+		assertEquals(person.getDescriptiveName(), "Joe Müller");
+		person.setFirstName("Mary");
+		assertEquals(person.getFirstName(), "Mary");
+		assertEquals(person.getDescriptiveName(), "Mary Müller");
+		person.setFamilyName("Meyer");
+		assertEquals(person.getFamilyName(), "Meyer");
+		assertEquals(person.getDescriptiveName(), "Mary Meyer");
+		person.setFamilyName("Meyer");
+		assertEquals(person.getFamilyName(), "Meyer");
+		assertEquals(person.getDescriptiveName(), "Mary Meyer");
+		person.setFamilyName("Schmidt");
+		assertEquals(person.getFamilyName(), "Schmidt");
+		assertEquals(person.getDescriptiveName(), "Mary Schmidt");
+		person.setFamilyName(null);
+		assertFalse(person.hasAttribute("FamilyName"));
+		assertEquals(person.getDescriptiveName(), "Mary Schmidt");
+	}
+
+	public void testLastFirstName() throws Exception
+	{
+		testFamilyName();
+		person.setFirstName("Joe");
+		assertEquals(person.getFirstName(), "Joe");
+		assertEquals(person.getDescriptiveName(), "Joe Müller");
+	}
+
+	public void testKeepDescName() throws Exception
+	{
+		person.setDescriptiveName("foo");
+		person.setFirstName("Joe");
+		assertEquals(person.getFirstName(), "Joe");
+		assertEquals("no overwrite of non-matching name", person
+				.getDescriptiveName(), "foo");
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	protected void setUp() throws Exception
+	{
+		// TODO Auto-generated method stub
+		super.setUp();
+		JDFDoc d = new JDFDoc("Person");
+		person = (JDFPerson) d.getRoot();
+	}
 }

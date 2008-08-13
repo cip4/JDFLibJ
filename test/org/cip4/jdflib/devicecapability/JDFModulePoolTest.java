@@ -79,27 +79,26 @@ import org.cip4.jdflib.resource.devicecapability.JDFModuleCap;
 import org.cip4.jdflib.resource.devicecapability.JDFModulePool;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap.EnumAvailability;
 
-
 public class JDFModulePoolTest extends JDFTestCaseBase
 {
-     public void testGetMinAvailability()
-    {
-        JDFDoc d=new JDFDoc(ElementName.MODULEPOOL);
-        JDFModulePool mp=(JDFModulePool) d.getRoot();
-        for(int i=0;i<4;i++)
-        {
-            JDFModuleCap mc=mp.appendModuleCap();
-            mc.setID("I"+i);
-            mc.setAvailability(EnumAvailability.getEnum(i));
-        }
-        VString s=new VString();
-        for(int i=3;i>=0;i--)
-        {
-            s.add("I"+i);
-            assertEquals(mp.getMinAvailability(s), EnumAvailability.getEnum(i));
-        }
-    }
-    
-//////////////////////////////////////////////////////////////////
-     
-  }
+	public void testGetMinAvailability()
+	{
+		JDFDoc d = new JDFDoc(ElementName.MODULEPOOL);
+		JDFModulePool mp = (JDFModulePool) d.getRoot();
+		for (int i = 0; i < 4; i++)
+		{
+			JDFModuleCap mc = mp.appendModuleCap();
+			mc.setID("I" + i);
+			mc.setAvailability(EnumAvailability.getEnum(i));
+		}
+		VString s = new VString();
+		for (int i = 3; i >= 0; i--)
+		{
+			s.add("I" + i);
+			assertEquals(mp.getMinAvailability(s), EnumAvailability.getEnum(i));
+		}
+	}
+
+	// ////////////////////////////////////////////////////////////////
+
+}

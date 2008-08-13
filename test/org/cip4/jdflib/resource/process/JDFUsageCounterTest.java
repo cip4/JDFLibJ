@@ -1,4 +1,3 @@
-
 /*
  *
  * The CIP4 Software License, Version 1.0
@@ -91,84 +90,98 @@ import org.cip4.jdflib.util.StringUtil;
 public class JDFUsageCounterTest extends JDFTestCaseBase
 {
 
+	/*
+	 * Test method for
+	 * 'org.cip4.jdflib.resource.process.JDFMedia.setDimensionCM(JDFXYPair)'
+	 */
+	public final void testUsageCounter() throws Exception
+	{
+		JDFElement.setLongID(false);
+		JDFDoc doc = new JDFDoc("JDF");
+		JDFNode root = doc.getJDFRoot();
+		root.setType(EnumType.DigitalPrinting);
+		JDFUsageCounter uc = (JDFUsageCounter) root.appendMatchingResource(
+				ElementName.USAGECOUNTER, EnumProcessUsage.AnyInput, null);
+		assertTrue(uc.isValid(EnumValidationLevel.Incomplete));
+		assertFalse(uc.isValid(EnumValidationLevel.Complete));
+		uc.setCounterID("c1");
+		uc.setScope(EnumScope.Job);
+		uc.setCounterTypes(new VString(
+				"NormalSize Black OneSided TwoSided Impressions", " "));
+		assertTrue(uc.isValid(EnumValidationLevel.Complete));
+		assertEquals(StringUtil.setvString(uc.getEnumCounterTypes()),
+				StringUtil.setvString(uc.getCounterTypes()));
+		JDFResourceLink rl = root.getLink(uc, null);
+		rl.setActualAmount(10, null);
+		JDFAuditPool ap = root.getCreateAuditPool();
+		JDFResourceAudit ra = (JDFResourceAudit) ap.addAudit(
+				EnumAuditType.ResourceAudit, null);
+		ra.updateLink(rl);
 
-    /*
-     * Test method for 'org.cip4.jdflib.resource.process.JDFMedia.setDimensionCM(JDFXYPair)'
-     */
-    public final void testUsageCounter() throws Exception
-    {
-        JDFElement.setLongID(false);
-        JDFDoc doc = new JDFDoc("JDF");
-        JDFNode root = doc.getJDFRoot();
-        root.setType(EnumType.DigitalPrinting);
-        JDFUsageCounter uc=(JDFUsageCounter) root.appendMatchingResource(ElementName.USAGECOUNTER, EnumProcessUsage.AnyInput, null);
-        assertTrue(uc.isValid(EnumValidationLevel.Incomplete));
-        assertFalse(uc.isValid(EnumValidationLevel.Complete));
-        uc.setCounterID("c1");
-        uc.setScope(EnumScope.Job);
-        uc.setCounterTypes(new VString("NormalSize Black OneSided TwoSided Impressions"," "));
-        assertTrue(uc.isValid(EnumValidationLevel.Complete));
-        assertEquals(StringUtil.setvString(uc.getEnumCounterTypes()), StringUtil.setvString(uc.getCounterTypes()));
-        JDFResourceLink rl=root.getLink(uc, null);
-        rl.setActualAmount(10, null);
-        JDFAuditPool ap=root.getCreateAuditPool();
-        JDFResourceAudit ra=(JDFResourceAudit) ap.addAudit(EnumAuditType.ResourceAudit, null);
-        ra.updateLink(rl);
+		JDFUsageCounter uc2 = (JDFUsageCounter) root.appendMatchingResource(
+				ElementName.USAGECOUNTER, EnumProcessUsage.AnyInput, null);
+		uc2.setCounterID("c2");
+		uc2.setScope(EnumScope.Job);
+		uc2.setCounterTypes(new VString(
+				"NormalSize Color OneSided TwoSided Impressions", " "));
+		assertTrue(uc2.isValid(EnumValidationLevel.Complete));
+		assertEquals(StringUtil.setvString(uc2.getEnumCounterTypes()),
+				StringUtil.setvString(uc2.getCounterTypes()));
+		rl = root.getLink(uc2, null);
+		rl.setActualAmount(20, null);
+		ra = (JDFResourceAudit) ap.addAudit(EnumAuditType.ResourceAudit, null);
+		ra.updateLink(rl);
 
-        JDFUsageCounter uc2=(JDFUsageCounter) root.appendMatchingResource(ElementName.USAGECOUNTER, EnumProcessUsage.AnyInput, null);
-        uc2.setCounterID("c2");
-        uc2.setScope(EnumScope.Job);
-        uc2.setCounterTypes(new VString("NormalSize Color OneSided TwoSided Impressions"," "));
-        assertTrue(uc2.isValid(EnumValidationLevel.Complete));        
-        assertEquals(StringUtil.setvString(uc2.getEnumCounterTypes()), StringUtil.setvString(uc2.getCounterTypes()));
-        rl=root.getLink(uc2, null);
-        rl.setActualAmount(20, null);         
-        ra=(JDFResourceAudit) ap.addAudit(EnumAuditType.ResourceAudit, null);
-        ra.updateLink(rl);
+		JDFUsageCounter uc3 = (JDFUsageCounter) root.appendMatchingResource(
+				ElementName.USAGECOUNTER, EnumProcessUsage.AnyInput, null);
+		uc3.setCounterID("c3");
+		uc3.setScope(EnumScope.Job);
+		uc3.setCounterTypes(new VString(
+				"LargeSize Black OneSided TwoSided Impressions", " "));
+		assertTrue(uc3.isValid(EnumValidationLevel.Complete));
+		assertEquals(StringUtil.setvString(uc3.getEnumCounterTypes()),
+				StringUtil.setvString(uc3.getCounterTypes()));
+		rl = root.getLink(uc3, null);
+		rl.setActualAmount(30, null);
+		ra = (JDFResourceAudit) ap.addAudit(EnumAuditType.ResourceAudit, null);
+		ra.updateLink(rl);
 
+		JDFUsageCounter uc4 = (JDFUsageCounter) root.appendMatchingResource(
+				ElementName.USAGECOUNTER, EnumProcessUsage.AnyInput, null);
+		uc4.setCounterID("c4");
+		uc4.setScope(EnumScope.Job);
+		uc4.setCounterTypes(new VString(
+				"LargeSize Color OneSided TwoSided Impressions", " "));
+		assertTrue(uc4.isValid(EnumValidationLevel.Complete));
+		assertEquals(StringUtil.setvString(uc4.getEnumCounterTypes()),
+				StringUtil.setvString(uc4.getCounterTypes()));
+		rl = root.getLink(uc4, null);
+		rl.setActualAmount(40, null);
+		ra = (JDFResourceAudit) ap.addAudit(EnumAuditType.ResourceAudit, null);
+		ra.updateLink(rl);
+		assertTrue(root.isValid(EnumValidationLevel.Incomplete));
 
+		doc.write2File(sm_dirTestDataTemp + "UCList.jdf", 2, false);
+	}
 
-        JDFUsageCounter uc3=(JDFUsageCounter) root.appendMatchingResource(ElementName.USAGECOUNTER, EnumProcessUsage.AnyInput, null);
-        uc3.setCounterID("c3");
-        uc3.setScope(EnumScope.Job);
-        uc3.setCounterTypes(new VString("LargeSize Black OneSided TwoSided Impressions"," "));
-        assertTrue(uc3.isValid(EnumValidationLevel.Complete));
-        assertEquals(StringUtil.setvString(uc3.getEnumCounterTypes()), StringUtil.setvString(uc3.getCounterTypes()));
-        rl=root.getLink(uc3, null);
-        rl.setActualAmount(30, null);   
-        ra=(JDFResourceAudit) ap.addAudit(EnumAuditType.ResourceAudit, null);
-        ra.updateLink(rl);
+	////////////////////////////////////////////////////////////////////////////
+	// /
 
-        JDFUsageCounter uc4=(JDFUsageCounter) root.appendMatchingResource(ElementName.USAGECOUNTER, EnumProcessUsage.AnyInput, null);
-        uc4.setCounterID("c4");
-        uc4.setScope(EnumScope.Job);
-        uc4.setCounterTypes(new VString("LargeSize Color OneSided TwoSided Impressions"," "));
-        assertTrue(uc4.isValid(EnumValidationLevel.Complete));
-        assertEquals(StringUtil.setvString(uc4.getEnumCounterTypes()), StringUtil.setvString(uc4.getCounterTypes()));
-        rl=root.getLink(uc4, null);
-        rl.setActualAmount(40, null); 
-        ra=(JDFResourceAudit) ap.addAudit(EnumAuditType.ResourceAudit, null);
-        ra.updateLink(rl);
-        assertTrue(root.isValid(EnumValidationLevel.Incomplete));
-
-        doc.write2File(sm_dirTestDataTemp+"UCList.jdf", 2, false);
-    }
-
-    /////////////////////////////////////////////////////////////////////////////
-    
-    public final void testMatchesString() throws Exception
-    {
-        JDFUsageCounter c=(JDFUsageCounter)new JDFDoc(ElementName.USAGECOUNTER).getRoot();
-        assertTrue(c.matchesString(ElementName.USAGECOUNTER));
-        assertFalse(c.matchesString(ElementName.USAGECOUNTER+":"));
-        c.setCounterTypes(new VString("Black SingleSided",null));
-        assertFalse(c.matchesString(ElementName.USAGECOUNTER+":Black"));
-        assertTrue(c.matchesString(ElementName.USAGECOUNTER+":Black_SingleSided"));
-        assertTrue(c.matchesString(ElementName.USAGECOUNTER));
-        c.setCounterID("CID");
-        assertTrue(c.matchesString(ElementName.USAGECOUNTER+":CID"));
-        assertFalse(c.matchesString(ElementName.USAGECOUNTER+":CID2"));
-        assertFalse(c.matchesString(ElementName.USAGECOUNTER+":CI"));
-        assertFalse(c.matchesString(ElementName.USAGECOUNTER+":cid"));
-    }
+	public final void testMatchesString() throws Exception
+	{
+		JDFUsageCounter c = (JDFUsageCounter) new JDFDoc(
+				ElementName.USAGECOUNTER).getRoot();
+		assertTrue(c.matchesString(ElementName.USAGECOUNTER));
+		assertFalse(c.matchesString(ElementName.USAGECOUNTER + ":"));
+		c.setCounterTypes(new VString("Black SingleSided", null));
+		assertFalse(c.matchesString(ElementName.USAGECOUNTER + ":Black"));
+		assertTrue(c.matchesString(ElementName.USAGECOUNTER
+				+ ":Black_SingleSided"));
+		assertTrue(c.matchesString(ElementName.USAGECOUNTER));
+		c.setCounterID("CID");
+		assertTrue(c.matchesString(ElementName.USAGECOUNTER + ":CID"));
+		assertFalse(c.matchesString(ElementName.USAGECOUNTER + ":CID2"));
+		assertFalse(c.matchesString(ElementName.USAGECOUNTER + ":CI"));
+		assertFalse(c.matchesString(ElementName.USAGECOUNTER + ":cid"));
+	}
 }

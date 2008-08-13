@@ -95,225 +95,283 @@ import org.cip4.jdflib.resource.process.JDFLayoutElementProductionParams;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.StatusUtil;
 
-
 public class ContentCreationTest extends PreflightTest
 {
-    /**
-     * test iteration
-     * @return
-     */
-    public void testLayoutElementPositioning() throws Exception
-    {
-        // TBD: Fuzzy, Sizes, literal text via comments
-        JDFElement.setLongID(false);
-        JDFDoc d=new JDFDoc("JDF");
-        n=d.getJDFRoot();
-        n.setType(EnumType.LayoutElementProduction);
+	/**
+	 * test iteration
+	 * 
+	 * @return
+	 */
+	public void testLayoutElementPositioning() throws Exception
+	{
+		// TBD: Fuzzy, Sizes, literal text via comments
+		JDFElement.setLongID(false);
+		JDFDoc d = new JDFDoc("JDF");
+		n = d.getJDFRoot();
+		n.setType(EnumType.LayoutElementProduction);
 
-        JDFRunList outRun=(JDFRunList)n.appendMatchingResource(ElementName.RUNLIST,EnumProcessUsage.AnyOutput,null);
-        outRun.setFileURL("output.pdf");
+		JDFRunList outRun = (JDFRunList) n.appendMatchingResource(
+				ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null);
+		outRun.setFileURL("output.pdf");
 
-        JDFLayoutElementProductionParams lep=(JDFLayoutElementProductionParams) n.appendMatchingResource(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS,EnumProcessUsage.AnyInput,null);
-        lep.appendXMLComment("This is a \"well placed\" CTM defined mark\nThe anchor defines the 0,0 point to be transformed\nThe element to be placed is referenced by LayoutElement/FileSpec/URL", null);
-        
-        JDFContentList cl=(JDFContentList) lep.appendElement(ElementName.CONTENTLIST);
-        cl=(JDFContentList) cl.makeRootResource(null, null, true);
-        cl.setXMLComment("this is an optional metadatapool for the content");
+		JDFLayoutElementProductionParams lep = (JDFLayoutElementProductionParams) n
+				.appendMatchingResource(
+						ElementName.LAYOUTELEMENTPRODUCTIONPARAMS,
+						EnumProcessUsage.AnyInput, null);
+		lep
+				.appendXMLComment(
+						"This is a \"well placed\" CTM defined mark\nThe anchor defines the 0,0 point to be transformed\nThe element to be placed is referenced by LayoutElement/FileSpec/URL",
+						null);
 
-        JDFLayoutElementPart lePart = addLayoutElementPart(lep, cl);
-        KElement positionObj=lePart.appendElement("PositionObject");
-        positionObj.setAttribute("PageRange", "0");
-        setNextAnchor(positionObj,null, "LowLeft","0 0",null,"Parent",0);
-        positionObj.setAttribute("Anchor", "LowLeft");
-        positionObj.setAttribute("PositionPolicy", "Exact");
-        final JDFLayoutElement bkg = (JDFLayoutElement)lePart.appendElement("LayoutElement");
-        bkg.setMimeURL("bkg.pdf");
+		JDFContentList cl = (JDFContentList) lep
+				.appendElement(ElementName.CONTENTLIST);
+		cl = (JDFContentList) cl.makeRootResource(null, null, true);
+		cl.setXMLComment("this is an optional metadatapool for the content");
 
-        
-        lep.appendXMLComment("This is a \"roughly placed\" reservation in the middle of the page", null);
-        lePart = addLayoutElementPart(lep, cl);
-        positionObj=lePart.appendElement("PositionObject");
-        positionObj.setAttribute("PageRange", "0");
-        //TODO discuss individual positions
-        setNextAnchor(positionObj,null, "Center",null,null,"Parent",0);
-        positionObj.setAttribute("Anchor", "Center");
-        positionObj.setAttribute("PositionPolicy", "Free");
-        String id=lePart.appendAnchor(null);
+		JDFLayoutElementPart lePart = addLayoutElementPart(lep, cl);
+		KElement positionObj = lePart.appendElement("PositionObject");
+		positionObj.setAttribute("PageRange", "0");
+		setNextAnchor(positionObj, null, "LowLeft", "0 0", null, "Parent", 0);
+		positionObj.setAttribute("Anchor", "LowLeft");
+		positionObj.setAttribute("PositionPolicy", "Exact");
+		final JDFLayoutElement bkg = (JDFLayoutElement) lePart
+				.appendElement("LayoutElement");
+		bkg.setMimeURL("bkg.pdf");
 
-        JDFLayoutElement image = (JDFLayoutElement)lePart.appendElement("LayoutElement");
-        image.setElementType(EnumElementType.Image);
-        image.appendComment().setText("Please add an image of a palm tree on a beach here!");
+		lep
+				.appendXMLComment(
+						"This is a \"roughly placed\" reservation in the middle of the page",
+						null);
+		lePart = addLayoutElementPart(lep, cl);
+		positionObj = lePart.appendElement("PositionObject");
+		positionObj.setAttribute("PageRange", "0");
+		// TODO discuss individual positions
+		setNextAnchor(positionObj, null, "Center", null, null, "Parent", 0);
+		positionObj.setAttribute("Anchor", "Center");
+		positionObj.setAttribute("PositionPolicy", "Free");
+		String id = lePart.appendAnchor(null);
 
-        lep.appendXMLComment("This is a \"roughly placed\" reservation 36 points below the previous image;\n NextPosition points from Anchor on this to NextAnchor on next,\n i.e. a positive vector specifies that next is shifted in the positive direction in the parent (in this case page) coordinate system", null);
-        lePart = addLayoutElementPart(lep, cl);
-        positionObj=lePart.appendElement("PositionObject");
-        positionObj.setAttribute("PageRange", "0");
-        positionObj.setAttribute("Anchor", "TopCenter");
-        positionObj.setAttribute("PositionPolicy", "Free");
-        setNextAnchor(positionObj,id, "BottomCenter","0 36",null,"Sibling",0);
-    
-        image = (JDFLayoutElement)lePart.appendElement("LayoutElement");
-        image.setElementType(EnumElementType.Image);
-        image.appendComment().setText("Please add an image of a beach ball below the palm tree!");
+		JDFLayoutElement image = (JDFLayoutElement) lePart
+				.appendElement("LayoutElement");
+		image.setElementType(EnumElementType.Image);
+		image.appendComment().setText(
+				"Please add an image of a palm tree on a beach here!");
 
+		lep
+				.appendXMLComment(
+						"This is a \"roughly placed\" reservation 36 points below the previous image;\n NextPosition points from Anchor on this to NextAnchor on next,\n i.e. a positive vector specifies that next is shifted in the positive direction in the parent (in this case page) coordinate system",
+						null);
+		lePart = addLayoutElementPart(lep, cl);
+		positionObj = lePart.appendElement("PositionObject");
+		positionObj.setAttribute("PageRange", "0");
+		positionObj.setAttribute("Anchor", "TopCenter");
+		positionObj.setAttribute("PositionPolicy", "Free");
+		setNextAnchor(positionObj, id, "BottomCenter", "0 36", null, "Sibling",
+				0);
 
+		image = (JDFLayoutElement) lePart.appendElement("LayoutElement");
+		image.setElementType(EnumElementType.Image);
+		image.appendComment().setText(
+				"Please add an image of a beach ball below the palm tree!");
 
-        lep.appendXMLComment("This is a \"well placed\" CTM defined mark\nThe anchor defines the 0,0 point to be transformed", null);
-        lePart = addLayoutElementPart(lep, cl);
-        positionObj=lePart.appendElement("PositionObject");
-        positionObj.setAttribute("PageRange", "0");
-        setNextAnchor(positionObj,null, "BottomLeft","2 3",null,"Parent",0);
-        positionObj.setAttribute("Anchor", "LowLeft");
-        positionObj.setAttribute("PositionPolicy", "Exact");
-        lePart.appendBarcodeProductionParams().appendXMLComment("barcode details here", null);
+		lep
+				.appendXMLComment(
+						"This is a \"well placed\" CTM defined mark\nThe anchor defines the 0,0 point to be transformed",
+						null);
+		lePart = addLayoutElementPart(lep, cl);
+		positionObj = lePart.appendElement("PositionObject");
+		positionObj.setAttribute("PageRange", "0");
+		setNextAnchor(positionObj, null, "BottomLeft", "2 3", null, "Parent", 0);
+		positionObj.setAttribute("Anchor", "LowLeft");
+		positionObj.setAttribute("PositionPolicy", "Exact");
+		lePart.appendBarcodeProductionParams().appendXMLComment(
+				"barcode details here", null);
 
-        lePart = addLayoutElementPart(lep, cl);
-        positionObj=lePart.appendElement("PositionObject");
-        positionObj.setAttribute("PageRange", "0");
-        setNextAnchor(positionObj,null, "TopRight",null,null,"Parent",0);
-        positionObj.setAttribute("Anchor", "TopRight");
-        positionObj.appendXMLComment("This is a \"roughly placed\"  mark\nThe anchor at top right is placed at the right (=1.0) top(=1.0) position of the page.\nNo rotation is specified", null);
-        positionObj.setAttribute("PositionPolicy", "Exact");
-        lePart.appendBarcodeProductionParams().appendXMLComment("barcode details here", null);
-        lep.appendXMLComment("This is a \"roughly placed\"  container for marks\nThe anchor at top left is defined in the !Unrotated! orientation.\n It is placed at the left (=0.0) bottom(=0.0) position of the page.\nThe text flows bottom to top (=Rotate 90 = counterclockwise)\n do we need margins?", null);
-        
-        lePart = addLayoutElementPart(lep, cl);
-        String idParent=lePart.appendAnchor(null);
-        positionObj=lePart.appendElement("PositionObject");
-        positionObj.setAttribute("PageRange", "1");
-        positionObj.setAttribute("Anchor", "TopLeft");
-        positionObj.setAttribute("PositionPolicy", "Free");
-        setNextAnchor(positionObj,null, "BottomCenter","0 0",null,"Parent",90);
-        lep.appendXMLComment("This is a  barcode inside the previous container\nThe anchor at bottom left is defined in the !Unrotated! orientation.\n It is placed at the left (=0.0) bottom(=0.0) position of the container.", null);
-        
-        lePart = addLayoutElementPart(lep, cl);
-        id=lePart.appendAnchor(null);
-        positionObj=lePart.appendElement("PositionObject");
-        positionObj.setAttribute("Anchor", "BottomLeft");
-        setNextAnchor(positionObj,idParent, "BottomLeft","0 0",null,"Parent",0);
-        lePart.appendBarcodeProductionParams().appendXMLComment("barcode details here", null);
-        lep.appendXMLComment("This is a disclaimer text inside the previous container\nThe anchor at top left is defined in the !Unrotated! orientation.\n The barcode and text are justified with their top margins and spaced by 72 points\n which corresponds to the left of the page because the container is rotated 90°\n"+
-                "AbsoluteSize specifies the size of the object in points", null);
-        
-        lePart = addLayoutElementPart(lep, cl);
-        positionObj=lePart.appendElement("PositionObject");
-        setNextAnchor(positionObj,id, "TopRight","-72 0",null,"Sibling",0);
-  
-        positionObj.setAttribute("Anchor", "TopLeft");
-//        positionObj.setAttribute("ParentRef", idParent);
-        positionObj.setAttribute("AbsoluteSize", "300 200");
-        JDFLayoutElement text = (JDFLayoutElement)lePart.appendElement("LayoutElement");
-        text.setElementType(EnumElementType.Text);
-        text.setMimeURL("file://myServer/disclaimers/de/aspirin.txt");
-        lep.appendXMLComment("This is a \"VERY roughly placed\" piece of text somewhere on pages 2-3\n"+
-                "RelativeSize specifies the size of the object as a ratio of the size of the container", null);
-        
-        lePart = addLayoutElementPart(lep, cl);
-        positionObj=lePart.appendElement("PositionObject");
-        positionObj.setAttribute("PageRange", "1 ~ 2");
-        positionObj.setAttribute("RelativeSize", "0.8 0.5");
-        text = (JDFLayoutElement)lePart.appendElement("LayoutElement");
-        text.setElementType(EnumElementType.Text);
-        final JDFComment instructionComment = text.appendComment();
-        instructionComment.setName("Instructions");
-        instructionComment.setText("Please add some text about the image of a palm tree on a beach here!");
-        lep.appendXMLComment("This is another \"VERY roughly placed\" piece of text somewhere on pages 2-3; the text source is the JDF", null);
-        
-        lePart = addLayoutElementPart(lep, cl);
-        positionObj=lePart.appendElement("PositionObject");
-        positionObj.setAttribute("PageRange", "1 ~ 2");
-        text = (JDFLayoutElement)lePart.appendElement("LayoutElement");
-        text.setElementType(EnumElementType.Text);
+		lePart = addLayoutElementPart(lep, cl);
+		positionObj = lePart.appendElement("PositionObject");
+		positionObj.setAttribute("PageRange", "0");
+		setNextAnchor(positionObj, null, "TopRight", null, null, "Parent", 0);
+		positionObj.setAttribute("Anchor", "TopRight");
+		positionObj
+				.appendXMLComment(
+						"This is a \"roughly placed\"  mark\nThe anchor at top right is placed at the right (=1.0) top(=1.0) position of the page.\nNo rotation is specified",
+						null);
+		positionObj.setAttribute("PositionPolicy", "Exact");
+		lePart.appendBarcodeProductionParams().appendXMLComment(
+				"barcode details here", null);
+		lep
+				.appendXMLComment(
+						"This is a \"roughly placed\"  container for marks\nThe anchor at top left is defined in the !Unrotated! orientation.\n It is placed at the left (=0.0) bottom(=0.0) position of the page.\nThe text flows bottom to top (=Rotate 90 = counterclockwise)\n do we need margins?",
+						null);
 
-        JDFComment textSrc=text.appendComment();
-        textSrc.setName("TextInput");
-        textSrc.setText("Laurum Ipsum Blah blah blah!\n btw. this is unformatted plain text and nothing else!");
+		lePart = addLayoutElementPart(lep, cl);
+		String idParent = lePart.appendAnchor(null);
+		positionObj = lePart.appendElement("PositionObject");
+		positionObj.setAttribute("PageRange", "1");
+		positionObj.setAttribute("Anchor", "TopLeft");
+		positionObj.setAttribute("PositionPolicy", "Free");
+		setNextAnchor(positionObj, null, "BottomCenter", "0 0", null, "Parent",
+				90);
+		lep
+				.appendXMLComment(
+						"This is a  barcode inside the previous container\nThe anchor at bottom left is defined in the !Unrotated! orientation.\n It is placed at the left (=0.0) bottom(=0.0) position of the container.",
+						null);
 
+		lePart = addLayoutElementPart(lep, cl);
+		id = lePart.appendAnchor(null);
+		positionObj = lePart.appendElement("PositionObject");
+		positionObj.setAttribute("Anchor", "BottomLeft");
+		setNextAnchor(positionObj, idParent, "BottomLeft", "0 0", null,
+				"Parent", 0);
+		lePart.appendBarcodeProductionParams().appendXMLComment(
+				"barcode details here", null);
+		lep
+				.appendXMLComment(
+						"This is a disclaimer text inside the previous container\nThe anchor at top left is defined in the !Unrotated! orientation.\n The barcode and text are justified with their top margins and spaced by 72 points\n which corresponds to the left of the page because the container is rotated 90°\n"
+								+ "AbsoluteSize specifies the size of the object in points",
+						null);
 
-        d.write2File(sm_dirTestDataTemp+File.separator+"LayoutPositionObj.jdf",2,false);
-    }
+		lePart = addLayoutElementPart(lep, cl);
+		positionObj = lePart.appendElement("PositionObject");
+		setNextAnchor(positionObj, id, "TopRight", "-72 0", null, "Sibling", 0);
 
-    private JDFLayoutElementPart addLayoutElementPart(JDFLayoutElementProductionParams lep, JDFContentList cl)
-    {
-        JDFLayoutElementPart lePart=lep.appendLayoutElementPart();
-        addMetaData(cl,lePart);
-        return lePart;
-    }
+		positionObj.setAttribute("Anchor", "TopLeft");
+		// positionObj.setAttribute("ParentRef", idParent);
+		positionObj.setAttribute("AbsoluteSize", "300 200");
+		JDFLayoutElement text = (JDFLayoutElement) lePart
+				.appendElement("LayoutElement");
+		text.setElementType(EnumElementType.Text);
+		text.setMimeURL("file://myServer/disclaimers/de/aspirin.txt");
+		lep
+				.appendXMLComment(
+						"This is a \"VERY roughly placed\" piece of text somewhere on pages 2-3\n"
+								+ "RelativeSize specifies the size of the object as a ratio of the size of the container",
+						null);
 
-    /**
-     * @param cl
-     * @param lePart
-     */
-    private JDFContentData addMetaData(JDFContentList cl, JDFLayoutElementPart lePart)
-    {
-        JDFContentData cd=cl.appendContentData();
-        lePart.setAttribute("ContentDataIndex",cd.getIndex(),null);
-        return cd;
-    }
+		lePart = addLayoutElementPart(lep, cl);
+		positionObj = lePart.appendElement("PositionObject");
+		positionObj.setAttribute("PageRange", "1 ~ 2");
+		positionObj.setAttribute("RelativeSize", "0.8 0.5");
+		text = (JDFLayoutElement) lePart.appendElement("LayoutElement");
+		text.setElementType(EnumElementType.Text);
+		final JDFComment instructionComment = text.appendComment();
+		instructionComment.setName("Instructions");
+		instructionComment
+				.setText("Please add some text about the image of a palm tree on a beach here!");
+		lep
+				.appendXMLComment(
+						"This is another \"VERY roughly placed\" piece of text somewhere on pages 2-3; the text source is the JDF",
+						null);
 
-    /**
-     * @param sm2_2
-     * @param idAnchor
-     * @throws DataFormatException 
-     */
-    private static void setNextAnchor(KElement sm2_2, String idAnchor, String anchor, String absolutePosition,String xmlComment, String anchorType, double rotation) throws DataFormatException
-    {
-        KElement nextAnchor=sm2_2.appendElement("RefAnchor");
-        nextAnchor.setAttribute("Anchor",anchor);
-        JDFMatrix m=new JDFMatrix("1 0 0 1 0 0");
-        JDFXYPair xy=absolutePosition==null ? null : new JDFXYPair(absolutePosition);
-        m.shift(xy);
-        m.rotate(rotation);
-        if(xy!=null || rotation!=0)
-            sm2_2.setAttribute("CTM", m.toString());
-        nextAnchor.setAttribute("rRef",idAnchor);  
-        nextAnchor.setAttribute("AnchorType",anchorType);  
-        nextAnchor.setXMLComment(xmlComment);
-    }
+		lePart = addLayoutElementPart(lep, cl);
+		positionObj = lePart.appendElement("PositionObject");
+		positionObj.setAttribute("PageRange", "1 ~ 2");
+		text = (JDFLayoutElement) lePart.appendElement("LayoutElement");
+		text.setElementType(EnumElementType.Text);
 
-    /**
-     * test preflight concepts in layoutelementproduction
-     * @throws Exception
-     */
-    @SuppressWarnings("deprecation")
+		JDFComment textSrc = text.appendComment();
+		textSrc.setName("TextInput");
+		textSrc
+				.setText("Laurum Ipsum Blah blah blah!\n btw. this is unformatted plain text and nothing else!");
+
+		d.write2File(sm_dirTestDataTemp + File.separator
+				+ "LayoutPositionObj.jdf", 2, false);
+	}
+
+	private JDFLayoutElementPart addLayoutElementPart(
+			JDFLayoutElementProductionParams lep, JDFContentList cl)
+	{
+		JDFLayoutElementPart lePart = lep.appendLayoutElementPart();
+		addMetaData(cl, lePart);
+		return lePart;
+	}
+
+	/**
+	 * @param cl
+	 * @param lePart
+	 */
+	private JDFContentData addMetaData(JDFContentList cl,
+			JDFLayoutElementPart lePart)
+	{
+		JDFContentData cd = cl.appendContentData();
+		lePart.setAttribute("ContentDataIndex", cd.getIndex(), null);
+		return cd;
+	}
+
+	/**
+	 * @param sm2_2
+	 * @param idAnchor
+	 * @throws DataFormatException
+	 */
+	private static void setNextAnchor(KElement sm2_2, String idAnchor,
+			String anchor, String absolutePosition, String xmlComment,
+			String anchorType, double rotation) throws DataFormatException
+	{
+		KElement nextAnchor = sm2_2.appendElement("RefAnchor");
+		nextAnchor.setAttribute("Anchor", anchor);
+		JDFMatrix m = new JDFMatrix("1 0 0 1 0 0");
+		JDFXYPair xy = absolutePosition == null ? null : new JDFXYPair(
+				absolutePosition);
+		m.shift(xy);
+		m.rotate(rotation);
+		if (xy != null || rotation != 0)
+			sm2_2.setAttribute("CTM", m.toString());
+		nextAnchor.setAttribute("rRef", idAnchor);
+		nextAnchor.setAttribute("AnchorType", anchorType);
+		nextAnchor.setXMLComment(xmlComment);
+	}
+
+	/**
+	 * test preflight concepts in layoutelementproduction
+	 * 
+	 * @throws Exception
+	 */
+	@SuppressWarnings("deprecation")
 	public void testLayoutPreflight() throws Exception
-    {
-        JDFElement.setLongID(false);
-        JDFDoc d=new JDFDoc("JDF");
-        n=d.getJDFRoot();
-        n.setType(EnumType.LayoutElementProduction);
+	{
+		JDFElement.setLongID(false);
+		JDFDoc d = new JDFDoc("JDF");
+		n = d.getJDFRoot();
+		n.setType(EnumType.LayoutElementProduction);
 
-        JDFRunList outRun=(JDFRunList)n.appendMatchingResource(ElementName.RUNLIST,EnumProcessUsage.AnyOutput,null);
-        outRun.setFileURL("output.pdf");
+		JDFRunList outRun = (JDFRunList) n.appendMatchingResource(
+				ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null);
+		outRun.setFileURL("output.pdf");
 
-        JDFLayoutElementProductionParams lep=(JDFLayoutElementProductionParams) n.appendMatchingResource(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS,EnumProcessUsage.AnyInput,null);
-        JDFComment com=lep.appendComment();
-        com.setName("Instruction");
-        com.setText("Add any human readable instructions here");
+		JDFLayoutElementProductionParams lep = (JDFLayoutElementProductionParams) n
+				.appendMatchingResource(
+						ElementName.LAYOUTELEMENTPRODUCTIONPARAMS,
+						EnumProcessUsage.AnyInput, null);
+		JDFComment com = lep.appendComment();
+		com.setName("Instruction");
+		com.setText("Add any human readable instructions here");
 
-        // new
-        aPool=(JDFActionPool) lep.appendElement(ElementName.ACTIONPOOL);
+		// new
+		aPool = (JDFActionPool) lep.appendElement(ElementName.ACTIONPOOL);
 
-        // now some simple tests...
-        appendNumPagesAction();
-        appendSeparationAction();
-        appendBWSeparationAction();
-        appendTrimBoxAction();
-        appendResolutionAction();
-		StatusUtil su=new StatusUtil(n,null,null);
-		su.setPhase(EnumNodeStatus.InProgress, "Creative Work", EnumDeviceStatus.Running, null,null);
+		// now some simple tests...
+		appendNumPagesAction();
+		appendSeparationAction();
+		appendBWSeparationAction();
+		appendTrimBoxAction();
+		appendResolutionAction();
+		StatusUtil su = new StatusUtil(n, null, null);
+		su.setPhase(EnumNodeStatus.InProgress, "Creative Work",
+				EnumDeviceStatus.Running, null, null);
 
-        su.getDocJMFPhaseTime();
-        Thread.sleep(1000);
-		su=new StatusUtil(n,null,null);
-		su.setPhase(EnumNodeStatus.InProgress, "Creative Work", EnumDeviceStatus.Running, null,null);
-        su.getDocJMFPhaseTime();
-        Thread.sleep(1000);
-		su=new StatusUtil(n,null,null);
-		su.setPhase(EnumNodeStatus.Completed, "done", EnumDeviceStatus.Idle, null,null);
-        su.getDocJMFPhaseTime();
-        d.write2File(sm_dirTestDataTemp+File.separator+"LayoutPreflight.jdf",2,false);
+		su.getDocJMFPhaseTime();
+		Thread.sleep(1000);
+		su = new StatusUtil(n, null, null);
+		su.setPhase(EnumNodeStatus.InProgress, "Creative Work",
+				EnumDeviceStatus.Running, null, null);
+		su.getDocJMFPhaseTime();
+		Thread.sleep(1000);
+		su = new StatusUtil(n, null, null);
+		su.setPhase(EnumNodeStatus.Completed, "done", EnumDeviceStatus.Idle,
+				null, null);
+		su.getDocJMFPhaseTime();
+		d.write2File(sm_dirTestDataTemp + File.separator
+				+ "LayoutPreflight.jdf", 2, false);
 
-
-    }
+	}
 }

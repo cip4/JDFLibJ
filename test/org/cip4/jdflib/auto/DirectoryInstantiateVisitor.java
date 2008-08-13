@@ -77,55 +77,63 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.node.JDFNode;
 import org.w3c.dom.DOMException;
 
-
 public class DirectoryInstantiateVisitor implements DirectoryVisitor
 {
-    public void enterDirectory(File dir)
-    { /**/ }
+	public void enterDirectory(File dir)
+	{ /**/
+	}
 
-    public void leaveDirectory(File dir)
-    { /**/ }
+	public void leaveDirectory(File dir)
+	{ /**/
+	}
 
-    public void visitFile(File file)
-    {
-        testJDFClass(file.getName());
-    }
+	public void visitFile(File file)
+	{
+		testJDFClass(file.getName());
+	}
 
-    private void testJDFClass(final String fileName)
-    {
-        boolean result = false;
+	private void testJDFClass(final String fileName)
+	{
+		boolean result = false;
 
-        String elementName = fileName;
-        String prefix = elementName.startsWith("JDFAuto") ? "JDFAuto" : "JDF";
+		String elementName = fileName;
+		String prefix = elementName.startsWith("JDFAuto") ? "JDFAuto" : "JDF";
 
-        elementName = elementName.substring(prefix.length(), elementName.length()-".java".length());
+		elementName = elementName.substring(prefix.length(), elementName
+				.length()
+				- ".java".length());
 
-        // adjust the element name
-        if (elementName.startsWith("Span"))
-            elementName = elementName.substring("Span".length());
-        else if (elementName.equals("ShapeElement"))
-            elementName = "Shape";
-        else if (elementName.equals("Node"))
-            elementName = "JDF";
+		// adjust the element name
+		if (elementName.startsWith("Span"))
+			elementName = elementName.substring("Span".length());
+		else if (elementName.equals("ShapeElement"))
+			elementName = "Shape";
+		else if (elementName.equals("Node"))
+			elementName = "JDF";
 
-        final JDFDoc jdfDoc   = new JDFDoc(ElementName.JDF);
-        final JDFNode jdfRoot = (JDFNode) jdfDoc.getRoot();
+		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
+		final JDFNode jdfRoot = (JDFNode) jdfDoc.getRoot();
 
-        KElement kElem = jdfRoot.appendElement(elementName); // create a class for elementName
-        
-        String createdClass = kElem.getClass().toString();
-        createdClass = createdClass.substring(createdClass.lastIndexOf(".") + 1);
+		KElement kElem = jdfRoot.appendElement(elementName); // create a class
+																// for
+																// elementName
 
-        result = fileName.equals(createdClass + ".java")
-                || (fileName.startsWith("JDFAuto") && createdClass.equals(JDFConstants.JDFELEMENT))
-                || fileName.equals(JDFConstants.JDFNODE)
-                || !createdClass.equals(JDFConstants.JDFELEMENT);
+		String createdClass = kElem.getClass().toString();
+		createdClass = createdClass
+				.substring(createdClass.lastIndexOf(".") + 1);
 
-        if (!result)
-        {
-            throw new DOMException(DOMException.NOT_FOUND_ERR, 
-                    "Class " + elementName + " (" + fileName + ") could not be instantiated!" +
-                    " --> missing entry in DocumentJDFImpl ???");
-        }
-    }
+		result = fileName.equals(createdClass + ".java")
+				|| (fileName.startsWith("JDFAuto") && createdClass
+						.equals(JDFConstants.JDFELEMENT))
+				|| fileName.equals(JDFConstants.JDFNODE)
+				|| !createdClass.equals(JDFConstants.JDFELEMENT);
+
+		if (!result)
+		{
+			throw new DOMException(DOMException.NOT_FOUND_ERR, "Class "
+					+ elementName + " (" + fileName
+					+ ") could not be instantiated!"
+					+ " --> missing entry in DocumentJDFImpl ???");
+		}
+	}
 }

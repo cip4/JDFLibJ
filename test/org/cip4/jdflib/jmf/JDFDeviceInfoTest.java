@@ -83,85 +83,90 @@ import org.cip4.jdflib.util.StatusCounter;
 
 /**
  * @author Rainer Prosi
- *
- * Test of the Status JMF
+ * 
+ *         Test of the Status JMF
  */
 public class JDFDeviceInfoTest extends JDFTestCaseBase
 {
-    private  JDFDeviceInfo di;
+	private JDFDeviceInfo di;
 
-    public void setUp()
-    {
-        JDFElement.setLongID(false);
-        JDFDoc doc = new JDFDoc(ElementName.DEVICEINFO);
-        di=(JDFDeviceInfo) doc.getRoot();
+	public void setUp()
+	{
+		JDFElement.setLongID(false);
+		JDFDoc doc = new JDFDoc(ElementName.DEVICEINFO);
+		di = (JDFDeviceInfo) doc.getRoot();
 
-    }
-    /////////////////////////////////////////////////////////////////////
+	}
 
-    public void testGetDeviceID()
-    {
-        JDFJMF jmf=(JDFJMF) new JDFDoc("JMF").getRoot();
-        jmf.setSenderID("S1");
-        di=jmf.appendSignal(EnumType.Status).appendDeviceInfo();
-        assertEquals(jmf.getSenderID(),di.getDeviceID());
-        di.appendDevice().setDeviceID("dd");
-        assertEquals(di.getDeviceID(), "dd");
-        di.setDeviceID("da");
-        assertEquals(di.getDeviceID(), "da");
-    }
-    /////////////////////////////////////////////////////////////////////
+	// ///////////////////////////////////////////////////////////////////
 
+	public void testGetDeviceID()
+	{
+		JDFJMF jmf = (JDFJMF) new JDFDoc("JMF").getRoot();
+		jmf.setSenderID("S1");
+		di = jmf.appendSignal(EnumType.Status).appendDeviceInfo();
+		assertEquals(jmf.getSenderID(), di.getDeviceID());
+		di.appendDevice().setDeviceID("dd");
+		assertEquals(di.getDeviceID(), "dd");
+		di.setDeviceID("da");
+		assertEquals(di.getDeviceID(), "da");
+	}
 
-    public void testNullDeviceStatus()
-    {
-        di.setDeviceStatus(null);
-        assertNotNull("got here!",di);
-    }
-    /////////////////////////////////////////////////////////////////////
+	// ///////////////////////////////////////////////////////////////////
 
-    public void testMergeLastPhase()
-    {
-        JDFDoc d=new JDFDoc("JDF");
-        JDFAuditPool ap=d.getJDFRoot().getCreateAuditPool();
-        JDFPhaseTime pt=ap.setPhase(EnumNodeStatus.InProgress, "dummy", null,null);
-        JDFJobPhase jp=di.createJobPhaseFromPhaseTime(pt);
-        jp.setPhaseAmount(200);
-        jp.setAmount(200);
-        jp.setPhaseWaste(100);
-        JDFDate d1=jp.getPhaseStartTime();
-        JDFDoc doc = new JDFDoc(ElementName.DEVICEINFO);
-        JDFDeviceInfo di2=(JDFDeviceInfo) doc.getRoot();
+	public void testNullDeviceStatus()
+	{
+		di.setDeviceStatus(null);
+		assertNotNull("got here!", di);
+	}
 
-        JDFJobPhase jp2=(JDFJobPhase) di2.copyElement(jp, null);
-        jp2.setPhaseStartTime(new JDFDate());
-        StatusCounter.sleep(1000);
-        jp2.setPhaseAmount(300);
-        jp2.setPhaseWaste(30);
-        jp2.setAmount(500);
-        assertTrue(di2.mergeLastPhase(di));
-        assertEquals(jp2.getPhaseStartTime(), d1);
-        assertEquals(jp2.getPhaseWaste(), 130.,0.);
-        assertEquals(jp2.getPhaseAmount(), 500.,0.);
-        assertEquals(jp2.getAmount(), 500.,0.);                    
-    }
-    /////////////////////////////////////////////////////////////////////
+	// ///////////////////////////////////////////////////////////////////
 
-    public void testIsSamePhase()
-    {
+	public void testMergeLastPhase()
+	{
+		JDFDoc d = new JDFDoc("JDF");
+		JDFAuditPool ap = d.getJDFRoot().getCreateAuditPool();
+		JDFPhaseTime pt = ap.setPhase(EnumNodeStatus.InProgress, "dummy", null,
+				null);
+		JDFJobPhase jp = di.createJobPhaseFromPhaseTime(pt);
+		jp.setPhaseAmount(200);
+		jp.setAmount(200);
+		jp.setPhaseWaste(100);
+		JDFDate d1 = jp.getPhaseStartTime();
+		JDFDoc doc = new JDFDoc(ElementName.DEVICEINFO);
+		JDFDeviceInfo di2 = (JDFDeviceInfo) doc.getRoot();
 
-        JDFDeviceInfo di1=(JDFDeviceInfo) new JDFDoc(ElementName.DEVICEINFO).getRoot();
-        JDFDeviceInfo di2=(JDFDeviceInfo) new JDFDoc(ElementName.DEVICEINFO).getRoot();
+		JDFJobPhase jp2 = (JDFJobPhase) di2.copyElement(jp, null);
+		jp2.setPhaseStartTime(new JDFDate());
+		StatusCounter.sleep(1000);
+		jp2.setPhaseAmount(300);
+		jp2.setPhaseWaste(30);
+		jp2.setAmount(500);
+		assertTrue(di2.mergeLastPhase(di));
+		assertEquals(jp2.getPhaseStartTime(), d1);
+		assertEquals(jp2.getPhaseWaste(), 130., 0.);
+		assertEquals(jp2.getPhaseAmount(), 500., 0.);
+		assertEquals(jp2.getAmount(), 500., 0.);
+	}
 
+	// ///////////////////////////////////////////////////////////////////
 
-        assertTrue(di1.isSamePhase(di2, false));
-        di1.appendEmployee().setPersonalID("p1");
-        assertFalse(di1.isSamePhase(di2, false));
-        di2.appendEmployee().setPersonalID("p1");
-        assertTrue(di1.isSamePhase(di2, false));
-        di1.appendEmployee().setPersonalID("p2");
-        assertFalse(di1.isSamePhase(di2, false));
-        di2.appendEmployee().setPersonalID("p3");
-        assertFalse(di1.isSamePhase(di2, false));
-    }
+	public void testIsSamePhase()
+	{
+
+		JDFDeviceInfo di1 = (JDFDeviceInfo) new JDFDoc(ElementName.DEVICEINFO)
+				.getRoot();
+		JDFDeviceInfo di2 = (JDFDeviceInfo) new JDFDoc(ElementName.DEVICEINFO)
+				.getRoot();
+
+		assertTrue(di1.isSamePhase(di2, false));
+		di1.appendEmployee().setPersonalID("p1");
+		assertFalse(di1.isSamePhase(di2, false));
+		di2.appendEmployee().setPersonalID("p1");
+		assertTrue(di1.isSamePhase(di2, false));
+		di1.appendEmployee().setPersonalID("p2");
+		assertFalse(di1.isSamePhase(di2, false));
+		di2.appendEmployee().setPersonalID("p3");
+		assertFalse(di1.isSamePhase(di2, false));
+	}
 }

@@ -1,4 +1,3 @@
-
 /*
  *
  * The CIP4 Software License, Version 1.0
@@ -81,39 +80,41 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 public class JDFContentObjectTest extends JDFTestCaseBase
 {
 
-    JDFLayout lo;
- 
-    /* (non-Javadoc)
-     * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
-     */
-    protected void setUp() throws Exception
-    {
-        // TODO Auto-generated method stub
-        super.setUp();
-        JDFDoc doc=new JDFDoc("JDF");
-        JDFNode n=doc.getJDFRoot();
-        n.setType(EnumType.Imposition);
-        lo=(JDFLayout) n.addResource(ElementName.LAYOUT, null);
-    }
+	JDFLayout lo;
 
-    public void testcalcOrd()
-    {
-        for(int i=0;i<4;i++)
-        {
-            assertEquals(JDFContentObject.calcOrd(0, 10, 0, 2, 2, i), 0+i);
-            assertEquals(JDFContentObject.calcOrd(-1, 10, 0, 2, 2, i), -1);
-            assertEquals(JDFContentObject.calcOrd(-1, 12, 0, 2, 2, i), 11+i);
-            assertEquals(JDFContentObject.calcOrd(-1, 12, 1, 2, 2, i), 9+i);
-            assertEquals(JDFContentObject.calcOrd(-2, 10, 2, 2, 2, i), 6+i);
-            assertEquals(JDFContentObject.calcOrd(-2, 10, 3, 2, 2, i), -1);
-            assertEquals(JDFContentObject.calcOrd(0, 13, 3, 2, 2, i), 6+i);
-            assertEquals(JDFContentObject.calcOrd(0, 12, 3, 2, 2, i), -1);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	protected void setUp() throws Exception
+	{
+		// TODO Auto-generated method stub
+		super.setUp();
+		JDFDoc doc = new JDFDoc("JDF");
+		JDFNode n = doc.getJDFRoot();
+		n.setType(EnumType.Imposition);
+		lo = (JDFLayout) n.addResource(ElementName.LAYOUT, null);
+	}
 
-            assertEquals(JDFContentObject.calcOrd(-2, 13, 3, 2, 2, i), 8+i);
-            assertEquals(JDFContentObject.calcOrd(-2, 12, 3, 2, 2, i), -1);
-            assertEquals(JDFContentObject.calcOrd(-2, 12, 3, 2, 2, i), -1);
-            assertEquals(JDFContentObject.calcOrd(-1, 10, 1, 2, 2, i), 9+i);
-        }
-    }
+	public void testcalcOrd()
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			assertEquals(JDFContentObject.calcOrd(0, 10, 0, 2, 2, i), 0 + i);
+			assertEquals(JDFContentObject.calcOrd(-1, 10, 0, 2, 2, i), -1);
+			assertEquals(JDFContentObject.calcOrd(-1, 12, 0, 2, 2, i), 11 + i);
+			assertEquals(JDFContentObject.calcOrd(-1, 12, 1, 2, 2, i), 9 + i);
+			assertEquals(JDFContentObject.calcOrd(-2, 10, 2, 2, 2, i), 6 + i);
+			assertEquals(JDFContentObject.calcOrd(-2, 10, 3, 2, 2, i), -1);
+			assertEquals(JDFContentObject.calcOrd(0, 13, 3, 2, 2, i), 6 + i);
+			assertEquals(JDFContentObject.calcOrd(0, 12, 3, 2, 2, i), -1);
+
+			assertEquals(JDFContentObject.calcOrd(-2, 13, 3, 2, 2, i), 8 + i);
+			assertEquals(JDFContentObject.calcOrd(-2, 12, 3, 2, 2, i), -1);
+			assertEquals(JDFContentObject.calcOrd(-2, 12, 3, 2, 2, i), -1);
+			assertEquals(JDFContentObject.calcOrd(-1, 10, 1, 2, 2, i), 9 + i);
+		}
+	}
 
 }
