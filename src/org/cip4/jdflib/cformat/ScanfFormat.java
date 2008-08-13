@@ -14,51 +14,51 @@
 package org.cip4.jdflib.cformat;
 
 /**
-  * Format object for scanning input in the same way as the
-  * C <tt>scanf</tt> methodName.
-  *
-  * <p>
-  * A <tt>scanf</tt> style format string is specified in the
-  * constructor. Once instantiated, objects of this class may
-  * be passed as arguments to the <tt>scan</tt> methods
-  * of the <tt>ScanfReader</tt> class.
-  *
-  * @see ScanfReader
-  * @.author John E. Lloyd
-  */
+ * Format object for scanning input in the same way as the C <tt>scanf</tt> methodName.
+ * 
+ * <p>
+ * A <tt>scanf</tt> style format string is specified in the constructor. Once instantiated, objects of this class may be
+ * passed as arguments to the <tt>scan</tt> methods of the <tt>ScanfReader</tt> class.
+ * 
+ * @see ScanfReader
+ * @.author John E. Lloyd
+ */
 public class ScanfFormat
 {
-    //~ Static fields/initializers /////////////////////////////////////////////
+	// ~ Static fields/initializers
+	// /////////////////////////////////////////////
 
-    private static String validTypes = "dioxfsc[";
+	private static String validTypes = "dioxfsc[";
 
-    //~ Instance fields ////////////////////////////////////////////////////////
+	// ~ Instance fields
+	// ////////////////////////////////////////////////////////
 
-    String cmatch;
-    String prefix;
-    String suffix;
-    public int type;
-    int width;
+	String cmatch;
+	String prefix;
+	String suffix;
+	public int type;
+	int width;
 
-    //~ Constructors ///////////////////////////////////////////////////////////
+	// ~ Constructors
+	// ///////////////////////////////////////////////////////////
 
-    /**
-      * Constructs a ScanfFormat class from a format string.
-      * The structure of the format string is described
-      * in the documentation for the <tt>set</tt> method.
-      *
-      * @param fmt        Format string
-      * @throws IllegalArgumentException Malformed format string
-      * @see ScanfReader
-      */
-    public ScanfFormat(String fmt)
-    {
-        set(fmt);
-    }
+	/**
+	 * Constructs a ScanfFormat class from a format string. The structure of the format string is described in the
+	 * documentation for the <tt>set</tt> method.
+	 * 
+	 * @param fmt Format string
+	 * @throws IllegalArgumentException Malformed format string
+	 * @see ScanfReader
+	 */
+	public ScanfFormat(String fmt)
+	{
+		set(fmt);
+	}
 
-    //~ Methods ////////////////////////////////////////////////////////////////
+	// ~ Methods
+	// ////////////////////////////////////////////////////////////////
 
-    /**
+/**
       * Sets the contents of the object according to
       * the information provided in the format string.
       *
@@ -128,245 +128,236 @@ public class ScanfFormat
       * @throws IllegalArgumentException Malformed format string
       * @see ScanfReader
       */
-    public void set(String fmt)
-    {
-        type = -1;
-        width = -1;
-        prefix = null;
-        suffix = null;
-        cmatch = null;
+	public void set(String fmt)
+	{
+		type = -1;
+		width = -1;
+		prefix = null;
+		suffix = null;
+		cmatch = null;
 
-        char[] buf = new char[fmt.length()];
-        int i;
-        int n;
-        int c = 0;
+		char[] buf = new char[fmt.length()];
+		int i;
+		int n;
+		int c = 0;
 
-        if (fmt.length() == 0)
-        {
-            return;
-        }
+		if (fmt.length() == 0)
+		{
+			return;
+		}
 
-        n = 0;
+		n = 0;
 
-        for (i = 0; i < fmt.length(); i++)
-        {
-            if ((c = fmt.charAt(i)) == '%')
-            {
-                i++;
+		for (i = 0; i < fmt.length(); i++)
+		{
+			if ((c = fmt.charAt(i)) == '%')
+			{
+				i++;
 
-                if (i == fmt.length())
-                {
-                    throw new IllegalArgumentException(
-                        "Format string terminates with '%'");
-                }
+				if (i == fmt.length())
+				{
+					throw new IllegalArgumentException("Format string terminates with '%'");
+				}
 
-                if ((c = fmt.charAt(i)) != '%')
-                {
-                    break;
-                }
-            }
+				if ((c = fmt.charAt(i)) != '%')
+				{
+					break;
+				}
+			}
 
-            buf[n++] = (char) c;
-        }
+			buf[n++] = (char) c;
+		}
 
-        if (n > 0)
-        {
-            prefix = new String(buf, 0, n);
-        }
+		if (n > 0)
+		{
+			prefix = new String(buf, 0, n);
+		}
 
-        if (i == fmt.length())
-        {
-            return;
-        }
+		if (i == fmt.length())
+		{
+			return;
+		}
 
-        if (Character.isDigit((char) c))
-        {
-            int w = c - '0';
+		if (Character.isDigit((char) c))
+		{
+			int w = c - '0';
 
-            for (i++; i < fmt.length(); i++)
-            {
-                if (Character.isDigit((char) (c = fmt.charAt(i))))
-                {
-                    w = ((w * 10) + c) - '0';
-                }
-                else
-                {
-                    break;
-                }
-            }
+			for (i++; i < fmt.length(); i++)
+			{
+				if (Character.isDigit((char) (c = fmt.charAt(i))))
+				{
+					w = ((w * 10) + c) - '0';
+				}
+				else
+				{
+					break;
+				}
+			}
 
-            if (i == fmt.length())
-            {
-                throw new IllegalArgumentException(
-                    "Premature end of format string");
-            }
+			if (i == fmt.length())
+			{
+				throw new IllegalArgumentException("Premature end of format string");
+			}
 
-            if (w == 0)
-            {
-                throw new IllegalArgumentException(
-                    "Zero field width specified");
-            }
+			if (w == 0)
+			{
+				throw new IllegalArgumentException("Zero field width specified");
+			}
 
-            width = w;
-        }
+			width = w;
+		}
 
-        if (validTypes.indexOf(c) == -1)
-        {
-            throw new IllegalArgumentException(
-                "Illegal conversion character '" + (char) c + "'");
-        }
+		if (validTypes.indexOf(c) == -1)
+		{
+			throw new IllegalArgumentException("Illegal conversion character '" + (char) c + "'");
+		}
 
-        type = c;
+		type = c;
 
-        if (type == '[')
-        {
-            n = 0;
+		if (type == '[')
+		{
+			n = 0;
 
-            // first scan the cmatch string ...
-            for (i++; i < fmt.length(); i++)
-            {
-                if (((c = fmt.charAt(i)) == ']') && (n != 0) &&
-                        !((buf[0] == '^') && (n == 1)))
-                {
-                    break;
-                }
+			// first scan the cmatch string ...
+			for (i++; i < fmt.length(); i++)
+			{
+				if (((c = fmt.charAt(i)) == ']') && (n != 0) && !((buf[0] == '^') && (n == 1)))
+				{
+					break;
+				}
 
-                buf[n++] = (char) c;
-            }
+				buf[n++] = (char) c;
+			}
 
-            if (i == fmt.length())
-            {
-                throw new IllegalArgumentException(
-                    "Premature end of format string");
-            }
+			if (i == fmt.length())
+			{
+				throw new IllegalArgumentException("Premature end of format string");
+			}
 
-            // and now make sure it's legal ....
-            for (int k = 0; k < n; k++)
-            {
-                if (buf[k] == '-')
-                {
-                    if ((k < (n - 1)) && (buf[k + 1] == '-'))
-                    {
-                        throw new IllegalArgumentException(
-                            "Misplaced '-' in character match spec '[" +
-                            new String(buf, 0, n) + "]'");
-                    }
-                }
-            }
+			// and now make sure it's legal ....
+			for (int k = 0; k < n; k++)
+			{
+				if (buf[k] == '-')
+				{
+					if ((k < (n - 1)) && (buf[k + 1] == '-'))
+					{
+						throw new IllegalArgumentException("Misplaced '-' in character match spec '["
+								+ new String(buf, 0, n) + "]'");
+					}
+				}
+			}
 
-            cmatch = new String(buf, 0, n);
-        }
+			cmatch = new String(buf, 0, n);
+		}
 
-        n = 0;
+		n = 0;
 
-        for (i++; i < fmt.length(); i++)
-        {
-            if ((c = fmt.charAt(i)) == '%')
-            {
-                i++;
+		for (i++; i < fmt.length(); i++)
+		{
+			if ((c = fmt.charAt(i)) == '%')
+			{
+				i++;
 
-                if ((i < fmt.length()) && (fmt.charAt(i) == '%'))
-                {
-                    buf[n++] = '%';
-                }
-                else
-                {
-                    throw new IllegalArgumentException(
-                        "Extra '%' in format string");
-                }
-            }
-            else
-            {
-                buf[n++] = (char) c;
-            }
-        }
+				if ((i < fmt.length()) && (fmt.charAt(i) == '%'))
+				{
+					buf[n++] = '%';
+				}
+				else
+				{
+					throw new IllegalArgumentException("Extra '%' in format string");
+				}
+			}
+			else
+			{
+				buf[n++] = (char) c;
+			}
+		}
 
-        if (n > 0)
-        {
-            suffix = new String(buf, 0, n);
-        }
-    }
+		if (n > 0)
+		{
+			suffix = new String(buf, 0, n);
+		}
+	}
 
-    /**
-      * Checks to see if a character matches the sequence specified by
-      * the character set cmatch.
-      *
-      * @param c Character to test
-      * @return True if c is a member of the character set specified by
-      * the string cmatch (or not a member, if the string begins with
-      * a '^').
-      */
-    boolean matchChar(char c)
-    {
-        int i0 = 0;
-        int len;
-        boolean negate = false;
-        char c0;
-        char c1;
+	/**
+	 * Checks to see if a character matches the sequence specified by the character set cmatch.
+	 * 
+	 * @param c Character to test
+	 * @return True if c is a member of the character set specified by the string cmatch (or not a member, if the string
+	 *         begins with a '^').
+	 */
+	boolean matchChar(char c)
+	{
+		int i0 = 0;
+		int len;
+		boolean negate = false;
+		char c0;
+		char c1;
 
-        if (cmatch == null)
-        {
-            return false;
-        }
+		if (cmatch == null)
+		{
+			return false;
+		}
 
-        len = cmatch.length();
+		len = cmatch.length();
 
-        if (cmatch.charAt(0) == '^')
-        {
-            negate = true;
-            i0 = 1;
-        }
+		if (cmatch.charAt(0) == '^')
+		{
+			negate = true;
+			i0 = 1;
+		}
 
-        for (int i = i0; i < len; i++)
-        {
-            c0 = cmatch.charAt(i);
+		for (int i = i0; i < len; i++)
+		{
+			c0 = cmatch.charAt(i);
 
-            if ((i < (len - 2)) && (cmatch.charAt(i + 1) == '-'))
-            {
-                c1 = cmatch.charAt(i + 2);
+			if ((i < (len - 2)) && (cmatch.charAt(i + 1) == '-'))
+			{
+				c1 = cmatch.charAt(i + 2);
 
-                if (c0 < c1)
-                {
-                    if ((c0 <= c) && (c <= c1))
-                    {
-                        return !negate;
-                    }
-                }
-                else
-                {
-                    if ((c1 <= c) && (c <= c0))
-                    {
-                        return !negate;
-                    }
-                }
+				if (c0 < c1)
+				{
+					if ((c0 <= c) && (c <= c1))
+					{
+						return !negate;
+					}
+				}
+				else
+				{
+					if ((c1 <= c) && (c <= c0))
+					{
+						return !negate;
+					}
+				}
 
-                i++;
-            }
-            else
-            {
-                if (c == c0)
-                {
-                    return !negate;
-                }
-            }
-        }
+				i++;
+			}
+			else
+			{
+				if (c == c0)
+				{
+					return !negate;
+				}
+			}
+		}
 
-        return negate;
-    }
+		return negate;
+	}
 
-    //~ Inner Classes //////////////////////////////////////////////////////////
+	// ~ Inner Classes
+	// //////////////////////////////////////////////////////////
 
-    class Cmatch
-    {
-        char clower;
-        char cupper;
-    }
+	class Cmatch
+	{
+		char clower;
+		char cupper;
+	}
 }
 
-///////////////////////////////////////////////////////////////////////////////
-//  END OF FILE.
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
+// END OF FILE.
+// /////////////////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////////////////////////
-//  END OF FILE.
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
+// END OF FILE.
+// /////////////////////////////////////////////////////////////////////////////

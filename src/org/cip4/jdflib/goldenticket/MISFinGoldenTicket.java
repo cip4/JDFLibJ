@@ -82,136 +82,173 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFMedia;
 
 /**
- * @author Rainer Prosi
- * class that generates golden tickets based on ICS levels etc
+ * @author Rainer Prosi class that generates golden tickets based on ICS levels etc
  */
 public class MISFinGoldenTicket extends MISGoldenTicket
 {
-    /**
+	/**
      * 
      */
-    public static final String MISFIN_SHEETFIN = "MISFIN.SheetFin";
-    protected int icsLevel;
- 
-    /**
-     * create a BaseGoldenTicket
-     * @param icsLevel the level to init to (1,2 or 3)
-     * @param jdfVersion the version to generate a golden ticket for
-     * @param jmfLevel level of jmf ICS to support
-     * @param misLevel level of MIS ICS to support
-     * @param isGrayBox if true, write a grayBox
+	public static final String MISFIN_SHEETFIN = "MISFIN.SheetFin";
+	/**
+	 * MIS FIN GB Type
+	 */
+	public static final String MISFIN_BOXMAKING = "MISFIN.BoxMaking";
+	/**
+	 * MIS FIN GB Type
+	 */
+	public static final String MISFIN_INSERTFIN = "MISFIN.InsertFin";
+	/**
+	 * MIS FIN GB Type
+	 */
+	public static final String MISFIN_STITCHFIN = "MISFIN.StitchFin";
+	/**
+	 * MIS FIN GB Type
+	 */
+	public static final String MISFIN_SOFTCOVERFIN = "MISFIN.SoftcoverFin";
+	/**
+	 * MIS FIN GB Type
+	 */
+	public static final String MISFIN_HARDCOVERFIN = "MISFIN.HardcoverFin";
+
+	protected int icsLevel;
+
+	/**
+	 * create a BaseGoldenTicket
+	 * 
+	 * @param icsLevel the level to init to (1,2 or 3)
+	 * @param jdfVersion the version to generate a golden ticket for
+	 * @param jmfLevel level of jmf ICS to support
+	 * @param misLevel level of MIS ICS to support
+	 * @param isGrayBox if true, write a grayBox
+	 */
+	public MISFinGoldenTicket(int _icsLevel, EnumVersion jdfVersion, int _jmfLevel, int _misLevel, boolean isGrayBox, VJDFAttributeMap vPartMap)
+	{
+		super(_misLevel, jdfVersion, _jmfLevel);
+
+		catMap.put(MISFIN_SHEETFIN, new VString("Cutting Folding", null));
+		partIDKeys = new VString("SignatureName,SheetName", ",");
+		vParts = vPartMap;
+		icsLevel = _icsLevel;
+	}
+
+	/**
+     * 
      */
-    public MISFinGoldenTicket(int _icsLevel, EnumVersion jdfVersion, int _jmfLevel, int _misLevel, boolean isGrayBox, VJDFAttributeMap vPartMap)
-    {
-        super(_misLevel,jdfVersion,_jmfLevel);
+	@Override
+	protected void fillCatMaps()
+	{
+		super.fillCatMaps();
+		catMap.put(MISFIN_BOXMAKING, new VString(EnumType.BoxFolding.getName(), null));
 
-        catMap.put(MISFIN_SHEETFIN, new VString("Cutting Folding",null));
-        partIDKeys = new VString("SignatureName,SheetName",",");
-        vParts=vPartMap;
-        icsLevel=_icsLevel; 
-    }
-    /**
-     * create a BaseGoldenTicket
-     * @param icsLevel the level to init to (1,2 or 3)
-     * @param jdfVersion the version to generate a golden ticket for
-     * @param jmfLevel level of jmf ICS to support
-     * @param misLevel level of MIS ICS to support
-     * @param isGrayBox if true, write a grayBox
-     */
-    public MISFinGoldenTicket(MISFinGoldenTicket parent)
-    {
-        super(parent);
+		catMap.put(MISFIN_HARDCOVERFIN, new VString("BlockPreparation CaseMaking CasingIn", null));
 
-        catMap.put(MISFIN_SHEETFIN, new VString("Cutting Folding",null));
-    }
+		catMap.put(MISFIN_INSERTFIN, new VString("Inserting Trimming", null));
+		catMap.put(MISFIN_SHEETFIN, new VString("Folding", null));
+		catMap.put(MISFIN_SOFTCOVERFIN, new VString("Gathering CoverApplication Trimming", null));
+		catMap.put(MISFIN_STITCHFIN, new VString("Stitching Trimming", null));
+	}
 
-    /**
-     * initializes this node to a given ICS version
-     * @param icsLevel the level to init to (1,2 or 3)
-     */
-    public void init()
-    {
-        super.init();
-     }
+	/**
+	 * create a BaseGoldenTicket
+	 * 
+	 * @param parent the previous node, may be null
+	 */
+	public MISFinGoldenTicket(MISFinGoldenTicket parent)
+	{
+		super(parent);
+	}
 
+	/**
+	 * initializes this node to a given ICS version
+	 * 
+	 * @param icsLevel the level to init to (1,2 or 3)
+	 */
+	@Override
+	public void init()
+	{
+		super.init();
+	}
 
-    public void setActivePart(VJDFAttributeMap vp, boolean bFirst)
-    {
-        amountLinks=null;
-        if(bFirst)
-            addAmountLink("Componenet:Input");
-        addAmountLink("Component:Output");
-        super.setActivePart(vp, bFirst);
-    }
+	@Override
+	public void setActivePart(VJDFAttributeMap vp, boolean bFirst)
+	{
+		amountLinks = null;
+		if (bFirst)
+			addAmountLink("Componenet:Input");
+		addAmountLink("Component:Output");
+		super.setActivePart(vp, bFirst);
+	}
 
+	/**
+	 * 
+	 */
+	@Override
+	protected JDFComponent initOutputComponent()
+	{
+		if (thePreviousNode != null)
+		{
+			final JDFResource parentOutComp = thePreviousNode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
+			if (parentOutComp != null)
+			{
+				theNode.linkResource(parentOutComp, EnumUsage.Input, null);
+			}
+		}
+		JDFComponent outComp = (JDFComponent) (theParentNode != null ? theParentNode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0) : null);
+		if (outComp == null)
+		{
+			outComp = (JDFComponent) theNode.getCreateResource(ElementName.COMPONENT, EnumUsage.Output, 0);
+			outComp.setComponentType(EnumComponentType.FinalProduct, EnumComponentType.Sheet);
+			outComp.setProductType("Unknown");
+		}
+		else
+			theNode.linkResource(outComp, EnumUsage.Output, null);
 
-    /**
-     * @param icsLevel
-     */
-    protected JDFComponent initOutputComponent()
-    {
-        if(thePreviousNode!=null)
-        {
-            final JDFResource parentOutComp = thePreviousNode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
-            if(parentOutComp!=null)
-            {
-                theNode.linkResource(parentOutComp,EnumUsage.Input,null);
-            }
-        }
-        JDFComponent outComp=(JDFComponent) (theParentNode!=null ? theParentNode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0):null);
-        if(outComp==null)
-        {
-            outComp=(JDFComponent) theNode.getCreateResource(ElementName.COMPONENT, EnumUsage.Output, 0);
-            outComp.setComponentType(EnumComponentType.FinalProduct,EnumComponentType.Sheet);
-            outComp.setProductType("Unknown");
-        }
-        else
-            theNode.linkResource(outComp, EnumUsage.Output, null);
+		JDFResourceLink rl = theNode.getLink(outComp, EnumUsage.Output);
+		if (vParts != null)
+		{
+			VJDFAttributeMap reducedMap = getReducedMap(new VString("Side Separation", " "));
+			final int size = reducedMap == null ? 0 : reducedMap.size();
+			for (int i = 0; i < size; i++)
+			{
+				final JDFAttributeMap part = reducedMap.elementAt(i);
+				JDFResource partComp = outComp.getCreatePartition(part, partIDKeys);
+				partComp.setDescriptiveName("Description for Component part# " + i);
+				JDFAttributeMap newMap = new JDFAttributeMap(part);
+				newMap.put(AttributeName.CONDITION, "Good");
+				rl.setAmount(good, newMap);
+			}
+		}
+		else
+		{
+			outComp.setDescriptiveName("MIS-Fin output Component");
+		}
+		// outComp.getCreateLayout();
+		JDFMedia inMedia = (JDFMedia) theNode.getResource(ElementName.MEDIA, EnumUsage.Input, 0);
+		outComp.setDimensions(inMedia.getDimension());
+		return outComp;
 
-        JDFResourceLink rl=theNode.getLink(outComp, EnumUsage.Output);
-        if(vParts!=null)
-        {
-            VJDFAttributeMap reducedMap = getReducedMap(new VString("Side Separation"," "));
-            final int size = reducedMap==null ? 0 : reducedMap.size();
-            for(int i=0;i<size;i++)
-            {
-                final JDFAttributeMap part = reducedMap.elementAt(i);
-                JDFResource partComp=outComp.getCreatePartition(part, partIDKeys);
-                partComp.setDescriptiveName("Description for Component part# "+i);
-                JDFAttributeMap newMap=new JDFAttributeMap(part);
-                newMap.put(AttributeName.CONDITION, "Good");
-                rl.setAmount(good, newMap);
-            }
-        }
-        else
-        {
-            outComp.setDescriptiveName("MIS-CP output Component");
-        }
-        //outComp.getCreateLayout();
-        JDFMedia inMedia=(JDFMedia) theNode.getResource(ElementName.MEDIA, EnumUsage.Input, 0);
-        outComp.setDimensions(inMedia.getDimension());
-        return outComp;
+	}
 
-    }
-    @Override
-    protected void runphases(int good, int waste,boolean bOutAvail, boolean bFirst)
-    {
-        theStatusCounter.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, "Printing");
-        runSinglePhase(good, waste,bOutAvail,bFirst);
-        finalize(); // prior to processRun
-        theStatusCounter.setPhase(EnumNodeStatus.Completed, "Done", EnumDeviceStatus.Idle, "Waiting");
-    }
+	@Override
+	protected void runphases(int good, int waste, boolean bOutAvail, boolean bFirst)
+	{
+		theStatusCounter.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, "Printing");
+		runSinglePhase(good, waste, bOutAvail, bFirst);
+		finalize(); // prior to processRun
+		theStatusCounter.setPhase(EnumNodeStatus.Completed, "Done", EnumDeviceStatus.Idle, "Waiting");
+	}
 
-    @Override
-    public void assign(JDFNode node)
-    {
-
-        super.assign(node);
-        theNode.getCreateNodeInfo().setPartIDKeys(partIDKeys);
-    }
+	@Override
+	public void assign(JDFNode node)
+	{
+		super.assign(node);
+		theNode.getCreateNodeInfo().setPartIDKeys(partIDKeys);
+	}
 }

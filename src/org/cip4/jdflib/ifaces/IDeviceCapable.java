@@ -74,35 +74,33 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.devicecapability.JDFActionPool;
 import org.cip4.jdflib.resource.devicecapability.JDFTestPool;
 
-
-
 /**
- * interface that connects the Devicecapability roots
- * i.e. DeviceCap and MessageService
+ * interface that connects the Devicecapability roots i.e. DeviceCap and MessageService
+ * 
  * @author prosirai
- *
+ * 
  */
 public interface IDeviceCapable
 {
-    /**
-     * get the target JDFTerm referenced by id
-     * @param id the @ID of the term
-     * 
-     * @return ICapabilityElement the referenced term, null if it doesn't exist
-     */
-    ICapabilityElement getTargetCap(String id);
+	/**
+	 * get the target JDFTerm referenced by id
+	 * 
+	 * @param id the @ID of the term
+	 * 
+	 * @return ICapabilityElement the referenced term, null if it doesn't exist
+	 */
+	ICapabilityElement getTargetCap(String id);
 
-    /**
-     * @return
-     */
-    JDFActionPool getActionPool();
+	/**
+	 * @return
+	 */
+	JDFActionPool getActionPool();
 
-    /**
-     * @return
-     */
-    JDFTestPool getTestPool();
-    
-    VString getNamePathVector();             
+	/**
+	 * @return
+	 */
+	JDFTestPool getTestPool();
 
+	VString getNamePathVector();
 
 }

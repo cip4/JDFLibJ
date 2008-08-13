@@ -73,11 +73,12 @@
  */
 package org.cip4.jdflib.core;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringReader;
 
 import org.apache.xerces.parsers.DOMParser;
 import org.apache.xerces.xni.Augmentations;
@@ -85,6 +86,7 @@ import org.apache.xerces.xni.NamespaceContext;
 import org.apache.xerces.xni.QName;
 import org.apache.xerces.xni.XMLLocator;
 import org.apache.xerces.xni.XNIException;
+import org.cip4.jdflib.util.SkipInputStream;
 import org.cip4.jdflib.util.UrlUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -98,405 +100,447 @@ import org.xml.sax.SAXNotSupportedException;
  */
 public class JDFParser extends DOMParser
 {
-    public XMLErrorHandler m_ErrorHandler = null;
-    public String m_SchemaLocation=null;
-    public String m_DocumentClass=DocumentJDFImpl.class.getName();
-    public Exception lastExcept=null;
-    
-    /**
-     * set bKElementOnly=true if you want the output ojects all to be instatnces of KElement
-     * rather than instantiated JDF instances
-     */
-    public boolean bKElementOnly=false;
-    /**
-     * set ignoreNSDefault=true if you do not want any heuristics to be performed regarding DOM level 1 / 2 
-     * namespace associations
-     */
-    public boolean ignoreNSDefault=false;
+	/**
+	 * simple search stream that will find a valid xml wherever it starts
+	 * 
+	 * @author prosirai
+	 * 
+	 */
+	private class XMLReaderStream extends SkipInputStream
+	{
+		protected boolean allowClose = false;
 
-    /**
-     * if true, empty pools and whitespace are removed when parsing
-     */
-    public boolean m_eraseEmpty=true;
+		/**
+		 * @param searchTag
+		 * @param stream2
+		 * @param ignorecase
+		 */
+		public XMLReaderStream(boolean searchXML, InputStream stream)
+		{
+			super(searchXML ? "<?xml" : null, stream, searchXML);
+		}
 
-    public JDFParser()
-    {
-        super();
-    }
+		/**
+		 * the parser closes on error - something we do not want especially for the underlying stream
+		 * 
+		 * @throws IOException
+		 */
+		@Override
+		public void close()
+		{
+			try
+			{
+				if (allowClose)
+					super.close();
+			}
+			catch (Exception x)
+			{
+				// nop
+			}
+		}
 
-    /**
-     * @deprecated - use default constructor
-     * @param strDocType
-     */
-    public JDFParser(String strDocType)
-    {
-        this();
-        if(strDocType!=null) // dummy to fool compiler
-            strDocType=null;
-    }
+	}
 
-    /**
-     * @param parser
-     */
-    public JDFParser(JDFParser parser)
-    {
-        this();
-        bKElementOnly=parser.bKElementOnly;
-        m_eraseEmpty=parser.m_eraseEmpty;
-        initParser(m_SchemaLocation, m_DocumentClass, (XMLErrorHandler) parser.getErrorHandler());
-    }
+	public XMLErrorHandler m_ErrorHandler = null;
+	public String m_SchemaLocation = null;
+	public String m_DocumentClass = DocumentJDFImpl.class.getName();
+	public Exception lastExcept = null;
+	public static boolean searchStream = false;
 
-    public Element createElementNode(QName element)
-    {
-        if (fCurrentNode.getLocalName() != null)
-        {
-            ((DocumentJDFImpl) (this.fDocument)).setParentNode(fCurrentNode);
-        }
+	/**
+	 * set bKElementOnly=true if you want the output ojects all to be instatnces of KElement rather than instantiated
+	 * JDF instances
+	 */
+	public boolean bKElementOnly = false;
+	/**
+	 * set ignoreNSDefault=true if you do not want any heuristics to be performed regarding DOM level 1 / 2 namespace
+	 * associations
+	 */
+	public boolean ignoreNSDefault = false;
 
-        Element e= super.createElementNode(element);
-        ((DocumentJDFImpl) (this.fDocument)).setParentNode(null);
-        return e;
-        
-    }
+	/**
+	 * if true, empty pools and whitespace are removed when parsing
+	 */
+	public boolean m_eraseEmpty = true;
 
-    /**
-     * parseFile - parse a file specified by strFile
-     * @param strFile link to the document to parse, may be either a file path or a url
-     * @return JDFDoc or null if File not found
-     */
-    public JDFDoc parseFile(String strFile)
-    {
-        final File file = UrlUtil.urlToFile(strFile);
-        return parseFile(file);
-    }
+	public JDFParser()
+	{
+		super();
+	}
 
-    /**
-     * @param file
-     * @return
-     */
-    public JDFDoc parseFile(final File file)
-    {
-        if (file == null)
-            return null;
-         
-        JDFDoc doc = null;
-        if (file.canRead())
-        {
-            try
-            {
-                InputSource inSource = new InputSource(new FileInputStream(file));
-                doc = parseInputSource(inSource);
-                if (doc != null)
-                {
-                    doc.setOriginalFileName(file.getAbsolutePath());
-                }
-                else
-                {            
-                    setIgnoreNamespace();
-                    inSource = new InputSource(new FileInputStream(file));
-                    doc= parseInputSource(inSource);
-                }
-                return doc;
+	/**
+	 * @deprecated - use default constructor
+	 * @param strDocType
+	 */
+	public JDFParser(String strDocType)
+	{
+		this();
+		if (strDocType != null) // dummy to fool compiler
+			strDocType = null;
+	}
 
-            }
-            catch (FileNotFoundException e)
-            {
-                return null;
-            }
-        }
+	/**
+	 * @param parser
+	 */
+	public JDFParser(JDFParser parser)
+	{
+		this();
+		bKElementOnly = parser.bKElementOnly;
+		m_eraseEmpty = parser.m_eraseEmpty;
+		initParser(m_SchemaLocation, m_DocumentClass, (XMLErrorHandler) parser.getErrorHandler());
+		searchStream = parser.searchStream;
+	}
 
-        return doc;
-    }
+	public Element createElementNode(QName element)
+	{
+		if (fCurrentNode.getLocalName() != null)
+		{
+			((DocumentJDFImpl) (this.fDocument)).setParentNode(fCurrentNode);
+		}
 
-    /**
-     * parseFile - parse a file specified by strFile
-     * 
-     * @param strFile        link to the document to parse
-     * @param schemaLocation link to the schema to use, null if no validation required
-     * @return JDFDoc or null if File not found
-     * default: parseFile(strFile,null)
-     * @deprecated set the parser members instead
-     */
-    public JDFDoc parseFile(String strFile, String schemaLocation)
-    {
-        m_SchemaLocation=schemaLocation;
-        return parseFile(strFile);
-    }
+		Element e = super.createElementNode(element);
+		((DocumentJDFImpl) (this.fDocument)).setParentNode(null);
+		return e;
 
-    
-    /**
-     * parseString - parse a string specified by stringInput
-     * @param stringInput string to parse
-     * @return JDFDoc or null if parse failed
-     * default: parseString(stringInput)
-     */
-    public JDFDoc parseString(String stringInput)
-    {
-        InputSource inSource = new InputSource(new StringReader(stringInput));
+	}
 
-        JDFDoc doc= parseInputSource(inSource);
-        if(doc==null)
-        {            
-            setIgnoreNamespace();
-            inSource = new InputSource(new StringReader(stringInput));
-            doc= parseInputSource(inSource);
-        }
-        return doc;
-    }
+	/**
+	 * parseFile - parse a file specified by strFile
+	 * 
+	 * @param strFile link to the document to parse, may be either a file path or a url
+	 * @return JDFDoc or null if File not found
+	 */
+	public JDFDoc parseFile(String strFile)
+	{
+		final File file = UrlUtil.urlToFile(strFile);
+		return parseFile(file);
+	}
 
-    /**
-     * parseStream - parse a stream specified by inStream
-     * @param inStream stream to parse
-     * @return JDFDoc or null if parse failed
-     * default: parseStream(inStream)
-     */
-    public JDFDoc parseStream(InputStream inStream)
-    {
-        if(inStream==null)
-            return null;
+	/**
+	 * @param file
+	 * @return
+	 */
+	public JDFDoc parseFile(final File file)
+	{
+		if (file == null)
+			return null;
 
-        final InputSource inSource = new InputSource(inStream);        
-        return parseInputSource(inSource);
-    }
-    
-    /**
-     * parse an input source
-     * @param inSource the InputSource to parse
-     */
-    public void parse(InputSource inSource)
-    {
-        parseInputSource(inSource);
-    }
+		JDFDoc doc = null;
+		if (file.canRead())
+		{
+			try
+			{
+				doc = parseStream(new FileInputStream(file));
+				if (doc != null)
+				{
+					doc.setOriginalFileName(file.getAbsolutePath());
+				}
+				return doc;
 
-    /**
-     * parse an input source
-     * @param inSource the InputSource to parse
-     * @return JDFDoc the newly parsed doc
-     */
-    public JDFDoc parseInputSource(InputSource inSource)
-    {
-        JDFDoc jdfDoc = null;        
-        if (inSource != null)
-        {
-            initParser(m_SchemaLocation, m_DocumentClass, m_ErrorHandler);
-            jdfDoc = runParser(inSource, m_eraseEmpty);
-        }
-        
-        return jdfDoc;
-    }
-    
-    /**
-     * This is the sophisticated parse function, 
-     * where validation, error handlers et al. can be set
-     * 
-     * @param inSource
-     * @param schemaLocation schema location, null if no validation required
-     * @param documentClassName
-     * @param errorHandler
-     * @param bEraseEmpty   if true empty nodes are erased after parsing
-     * @param bDoNamespaces if false a second parse is done, 
-     *                      	where namespaces are ignored
-     * 
-     * @return JDFDoc
-     * 
-     * default: parseInputSource(inSource, 
-     *              null, DocumentJDFImpl.class.getName(), null, true, true);
-     * @deprecated set the parser members instead
-     */
-    public JDFDoc parseInputSource(
-            InputSource inSource,
-            String schemaLocation,
-            String documentClassName,
-            ErrorHandler errorHandler,
-            boolean bEraseEmpty,
-            boolean bDoNamespaces)
-    {
-        JDFDoc doc = null;
-        if(errorHandler instanceof XMLErrorHandler)
-        {
-            initParser(schemaLocation, documentClassName, (XMLErrorHandler)errorHandler);
-        }
-        else
-        {
-            initParser(schemaLocation, documentClassName, null);
-        }
+			}
+			catch (FileNotFoundException e)
+			{
+				return null;
+			}
+		}
+		return doc;
+	}
 
-        doc = runParser(inSource, bEraseEmpty);
-        if (doc == null)
-        { // this is the error case:
-            if (!bDoNamespaces)
-            {
-                // try again, ignoring name spaces
-                setIgnoreNamespace();
-                doc = runParser(inSource, bEraseEmpty);
-            }
-        }
+	/**
+	 * parseFile - parse a file specified by strFile
+	 * 
+	 * @param strFile link to the document to parse
+	 * @param schemaLocation link to the schema to use, null if no validation required
+	 * @return JDFDoc or null if File not found default: parseFile(strFile,null)
+	 * @deprecated set the parser members instead
+	 */
+	public JDFDoc parseFile(String strFile, String schemaLocation)
+	{
+		m_SchemaLocation = schemaLocation;
+		return parseFile(strFile);
+	}
 
-        return doc;
-    }
+	/**
+	 * parseString - parse a string specified by stringInput
+	 * 
+	 * @param stringInput string to parse
+	 * @return JDFDoc or null if parse failed default: parseString(stringInput)
+	 */
+	public JDFDoc parseString(String stringInput)
+	{
+		if (stringInput == null)
+			return null;
+		ByteArrayInputStream is = new ByteArrayInputStream(stringInput.getBytes());
+		return parseStream(is);
+	}
 
-    /**
-     * @param schemaLocation
-     * @param documentClassName
-     * @param ErrorHandler
-     * 
-     * default: initParser(null, DocumentJDFImpl.class.getName(), null);
-     */
-    private void initParser( String schemaLocation, 
-            String documentClassName,
-            XMLErrorHandler errorHandler)
-    {
-        m_SchemaLocation=schemaLocation;
-        m_ErrorHandler=errorHandler;
-        m_DocumentClass=documentClassName;
+	/**
+	 * parseStream - parse a stream specified by inStream
+	 * 
+	 * @param inStream stream to parse
+	 * @return JDFDoc or null if parse failed default: parseStream(inStream)
+	 */
+	public JDFDoc parseStream(InputStream inStream)
+	{
+		if (inStream == null)
+			return null;
+		XMLReaderStream bis = new XMLReaderStream(false, inStream);
+		bis.mark(0);
 
-        try
-        {
-            if (schemaLocation == null || schemaLocation.equals(JDFConstants.EMPTYSTRING))
-            {
-                this.setFeature("http://xml.org/sax/features/validation", false);
-                this.setFeature("http://apache.org/xml/features/validation/schema", false);
-            }
-            else
-            {
-                if(!schemaLocation.startsWith(JDFElement.getSchemaURL()))
-                    schemaLocation=JDFElement.getSchemaURL()+" "+schemaLocation;
-                this.setFeature("http://xml.org/sax/features/validation", true);
-                this.setFeature("http://apache.org/xml/features/validation/schema", true);
-//              this.setFeature("http://apache.org/xml/features/validation/schema/element-default", false);
-//              this.setFeature("http://apache.org/xml/features/validation/schema/normalized-value", false);
-                this.setProperty("http://apache.org/xml/properties/schema/external-schemaLocation", schemaLocation);
-            }
+		InputSource inSource = new InputSource(bis);
+		JDFDoc d = parseInputSource(inSource);
 
-            // use our own JDF document for creating JDF elements
-            this.setProperty("http://apache.org/xml/properties/dom/document-class-name", documentClassName);
+		if (d == null && searchStream)
+		{
+			try
+			{
+				bis.reset();
+			}
+			catch (IOException x)
+			{
+				bis.allowClose = true;
+				bis.close();
+				return null;
+			}
 
-            this.setFeature("http://apache.org/xml/features/dom/defer-node-expansion", false);
-            this.setFeature("http://xml.org/sax/features/namespaces", true);
+			inSource = new InputSource(new XMLReaderStream(true, bis));
+			d = parseInputSource(inSource);
+		}
+		bis.allowClose = true;
+		bis.close();
+		return d;
+	}
 
-            this.setErrorHandler(errorHandler);
-        }
-        catch (SAXNotRecognizedException e)
-        {
-            lastExcept=e;
-        }
-        catch (SAXNotSupportedException e)
-        {
-            lastExcept=e;
-        }
-    }
+	/**
+	 * parse an input source
+	 * 
+	 * @param inSource the InputSource to parse
+	 */
+	public void parse(InputSource inSource)
+	{
+		parseInputSource(inSource);
+	}
 
-    public void setErrorHandler(ErrorHandler handler)
-    {
-        m_ErrorHandler = handler!= null && (handler instanceof XMLErrorHandler) ? 
-                (XMLErrorHandler) handler : new XMLErrorHandler();
-                super.setErrorHandler(m_ErrorHandler);
-    }
-    /**
-     * @param parser
-     * @param inSource
-     * @param bEraseEmpty
-     * @return
-     */
-    private JDFDoc runParser(InputSource inSource, boolean bEraseEmpty)
-    {
-        JDFDoc doc = new JDFDoc();        
-        try
-        {
-            super.parse(inSource);
-            doc.setMemberDoc((DocumentJDFImpl) getDocument());
-            if (bEraseEmpty)
-            {
-                doc.getRoot().eraseEmptyNodes(true); // cleanup the XML
-            }
-        }
-        catch (Exception e)
-        {
-            lastExcept = e;
-            doc = null;
-        }
-        catch (StackOverflowError e)
-        {
-            lastExcept = null;
-            doc = null;
-        } 
-        
+	/**
+	 * parse an input source
+	 * 
+	 * @param inSource the InputSource to parse
+	 * @return JDFDoc the newly parsed doc
+	 */
+	public JDFDoc parseInputSource(InputSource inSource)
+	{
+		JDFDoc jdfDoc = null;
+		if (inSource != null)
+		{
+			initParser(m_SchemaLocation, m_DocumentClass, m_ErrorHandler);
+			jdfDoc = runParser(inSource, m_eraseEmpty);
+		}
 
-        if (doc != null && m_ErrorHandler != null)
-        {
-            doc.setValidationResult(m_ErrorHandler.getXMLOutput());
-            m_ErrorHandler.cleanXML(m_SchemaLocation);
-        }
+		return jdfDoc;
+	}
 
-        if(doc!=null)
-        {
-            KElement root=doc.getRoot();
-            final DocumentJDFImpl memberDocument = doc.getMemberDocument();
-            final String namespaceURI = root.getNamespaceURI();
-            if(namespaceURI==null || ! namespaceURI.toLowerCase().contains(JDFConstants.CIP4ORG))
-            {
-                memberDocument.bKElementOnly=true;
-                memberDocument.setIgnoreNSDefault(true);    
-            }
-            else
-            {
-                memberDocument.setIgnoreNSDefault(ignoreNSDefault);    
-            }
-        }
-        return doc;
-    }
+	/**
+	 * This is the sophisticated parse function, where validation, error handlers et al. can be set
+	 * 
+	 * @param inSource
+	 * @param schemaLocation schema location, null if no validation required
+	 * @param documentClassName
+	 * @param errorHandler
+	 * @param bEraseEmpty if true empty nodes are erased after parsing
+	 * @param bDoNamespaces if false a second parse is done, where namespaces are ignored
+	 * 
+	 * @return JDFDoc
+	 * 
+	 *         default: parseInputSource(inSource, null, DocumentJDFImpl.class.getName(), null, true, true);
+	 * @deprecated set the parser members instead
+	 */
+	public JDFDoc parseInputSource(InputSource inSource, String schemaLocation, String documentClassName, ErrorHandler errorHandler, boolean bEraseEmpty, boolean bDoNamespaces)
+	{
+		JDFDoc doc = null;
+		if (errorHandler instanceof XMLErrorHandler)
+		{
+			initParser(schemaLocation, documentClassName, (XMLErrorHandler) errorHandler);
+		}
+		else
+		{
+			initParser(schemaLocation, documentClassName, null);
+		}
 
+		doc = runParser(inSource, bEraseEmpty);
+		if (doc == null)
+		{ // this is the error case:
+			if (!bDoNamespaces)
+			{
+				// try again, ignoring name spaces
+				setIgnoreNamespace(false);
+				doc = runParser(inSource, bEraseEmpty);
+			}
+		}
 
-    private void setIgnoreNamespace()
-    {
-        try
-        {
-            setFeature("http://xml.org/sax/features/namespaces", false);
-            setFeature("http://xml.org/sax/features/validation", false);
-        }
-        catch (SAXNotRecognizedException e)
-        {
-            lastExcept=e;
-        }
-        catch (SAXNotSupportedException e)
-        {
-            lastExcept=e;
-        }
-    }
-    
-    /**
-     * @see org.apache.xerces.parsers.AbstractDOMParser#startDocument(org.apache.xerces.xni.XMLLocator, java.lang.String, org.apache.xerces.xni.NamespaceContext, org.apache.xerces.xni.Augmentations)
-     */
-    @Override
-    public void startDocument(XMLLocator locator, String encoding, NamespaceContext namespaceContext, Augmentations augs)
-            throws XNIException
-    {
-        super.startDocument(locator, encoding, namespaceContext, augs);
-        
-        final Document document = getDocument();
-        
-        if (document instanceof DocumentJDFImpl)
-        {
-            final DocumentJDFImpl memberDocument = (DocumentJDFImpl) document;
+		return doc;
+	}
 
-            memberDocument.bKElementOnly=bKElementOnly;
-            memberDocument.setIgnoreNSDefault(ignoreNSDefault);
-        }        
-    }
+	/**
+	 * @param schemaLocation
+	 * @param documentClassName
+	 * @param ErrorHandler default: initParser(null, DocumentJDFImpl.class.getName(), null);
+	 */
+	private void initParser(String schemaLocation, String documentClassName, XMLErrorHandler errorHandler)
+	{
+		m_SchemaLocation = schemaLocation;
+		m_ErrorHandler = errorHandler;
+		m_DocumentClass = documentClassName;
 
-    /** (non-Javadoc)
-     * reset all internal variables to a reasonable default
-     * @see org.apache.xerces.parsers.AbstractDOMParser#reset()
-     */
-    public void cleanup()  
-    {
-        bKElementOnly=false;
-        lastExcept=null;
-        ignoreNSDefault=false;
-        m_eraseEmpty=true;
-        m_ErrorHandler=null;
-        m_SchemaLocation=null;
-        m_DocumentClass=DocumentJDFImpl.class.getName();
-    }
+		try
+		{
+			if (schemaLocation == null || schemaLocation.equals(JDFConstants.EMPTYSTRING))
+			{
+				this.setFeature("http://xml.org/sax/features/validation", false);
+				this.setFeature("http://apache.org/xml/features/validation/schema", false);
+			}
+			else
+			{
+				if (!schemaLocation.startsWith(JDFElement.getSchemaURL()))
+					schemaLocation = JDFElement.getSchemaURL() + " " + schemaLocation;
+				this.setFeature("http://xml.org/sax/features/validation", true);
+				this.setFeature("http://apache.org/xml/features/validation/schema", true);
+				// this.setFeature(
+				// "http://apache.org/xml/features/validation/schema/element-default"
+				// , false);
+				// this.setFeature(
+				// "http://apache.org/xml/features/validation/schema/normalized-value"
+				// , false);
+				this.setProperty("http://apache.org/xml/properties/schema/external-schemaLocation", schemaLocation);
+			}
+
+			// use our own JDF document for creating JDF elements
+			this.setProperty("http://apache.org/xml/properties/dom/document-class-name", documentClassName);
+
+			this.setFeature("http://apache.org/xml/features/dom/defer-node-expansion", false);
+			this.setFeature("http://xml.org/sax/features/namespaces", true);
+
+			this.setErrorHandler(errorHandler);
+		}
+		catch (SAXNotRecognizedException e)
+		{
+			lastExcept = e;
+		}
+		catch (SAXNotSupportedException e)
+		{
+			lastExcept = e;
+		}
+	}
+
+	public void setErrorHandler(ErrorHandler handler)
+	{
+		m_ErrorHandler = handler != null && (handler instanceof XMLErrorHandler) ? (XMLErrorHandler) handler : new XMLErrorHandler();
+		super.setErrorHandler(m_ErrorHandler);
+	}
+
+	/**
+	 * @param parser
+	 * @param inSource
+	 * @param bEraseEmpty
+	 * @return
+	 */
+	private JDFDoc runParser(InputSource inSource, boolean bEraseEmpty)
+	{
+		JDFDoc doc = new JDFDoc();
+		try
+		{
+			super.parse(inSource);
+			doc.setMemberDoc((DocumentJDFImpl) getDocument());
+			if (bEraseEmpty)
+			{
+				doc.getRoot().eraseEmptyNodes(true); // cleanup the XML
+			}
+		}
+		catch (Exception e)
+		{
+			lastExcept = e;
+			doc = null;
+		}
+		catch (StackOverflowError e)
+		{
+			lastExcept = null;
+			doc = null;
+		}
+
+		if (doc != null && m_ErrorHandler != null)
+		{
+			doc.setValidationResult(m_ErrorHandler.getXMLOutput());
+			m_ErrorHandler.cleanXML(m_SchemaLocation);
+		}
+
+		if (doc != null)
+		{
+			KElement root = doc.getRoot();
+			final DocumentJDFImpl memberDocument = doc.getMemberDocument();
+			final String namespaceURI = root.getNamespaceURI();
+			if (namespaceURI == null || !namespaceURI.toLowerCase().contains(JDFConstants.CIP4ORG))
+			{
+				memberDocument.bKElementOnly = true;
+				memberDocument.setIgnoreNSDefault(true);
+			}
+			else
+			{
+				memberDocument.setIgnoreNSDefault(ignoreNSDefault);
+			}
+		}
+		return doc;
+	}
+
+	private void setIgnoreNamespace(boolean toSet)
+	{
+		try
+		{
+			setFeature("http://xml.org/sax/features/namespaces", toSet);
+			setFeature("http://xml.org/sax/features/validation", toSet);
+		}
+		catch (SAXNotRecognizedException e)
+		{
+			lastExcept = e;
+		}
+		catch (SAXNotSupportedException e)
+		{
+			lastExcept = e;
+		}
+	}
+
+	/**
+	 * @see org.apache.xerces.parsers.AbstractDOMParser#startDocument(org.apache.xerces.xni.XMLLocator,
+	 *      java.lang.String, org.apache.xerces.xni.NamespaceContext, org.apache.xerces.xni.Augmentations)
+	 */
+	@Override
+	public void startDocument(XMLLocator locator, String encoding, NamespaceContext namespaceContext, Augmentations augs) throws XNIException
+	{
+		super.startDocument(locator, encoding, namespaceContext, augs);
+
+		final Document document = getDocument();
+
+		if (document instanceof DocumentJDFImpl)
+		{
+			final DocumentJDFImpl memberDocument = (DocumentJDFImpl) document;
+
+			memberDocument.bKElementOnly = bKElementOnly;
+			memberDocument.setIgnoreNSDefault(ignoreNSDefault);
+		}
+	}
+
+	/**
+	 * (non-Javadoc) reset all internal variables to a reasonable default
+	 * 
+	 * @see org.apache.xerces.parsers.AbstractDOMParser#reset()
+	 */
+	public void cleanup()
+	{
+		bKElementOnly = false;
+		lastExcept = null;
+		ignoreNSDefault = false;
+		m_eraseEmpty = true;
+		m_ErrorHandler = null;
+		m_SchemaLocation = null;
+		m_DocumentClass = DocumentJDFImpl.class.getName();
+	}
 
 }

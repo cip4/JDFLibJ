@@ -85,225 +85,223 @@ import java.util.zip.DataFormatException;
 import org.cip4.jdflib.util.HashUtil;
 
 /**
- * This class represents a x y pair (JDFXYPair). 
- * It is a whitespace separated list of 2 numbers.
+ * This class represents a x y pair (JDFXYPair). It is a whitespace separated list of 2 numbers.
  */
 public class JDFXYPair extends JDFNumList
 {
-    //**************************************** Constructors ****************************************
-    /**
-     * constructs a xy pair with all values set to 0.0 Double
-     */
-    public JDFXYPair()
-    {
-        super(MAX_XY_DIMENSION);
-    }
+	// **************************************** Constructors
+	// ****************************************
+	/**
+	 * constructs a xy pair with all values set to 0.0 Double
+	 */
+	public JDFXYPair()
+	{
+		super(MAX_XY_DIMENSION);
+	}
 
-    /**
-     * constructs a xy pair with all values set via a Vector of Double objects
-     *
-     * @param v Vector of Double
-     *
-     * @throws DataFormatException - if the Vector has not a valid format
-     */
-    public JDFXYPair(Vector v) throws DataFormatException
-    {
-        super(v);
-    }
+	/**
+	 * constructs a xy pair with all values set via a Vector of Double objects
+	 * 
+	 * @param v Vector of Double
+	 * 
+	 * @throws DataFormatException - if the Vector has not a valid format
+	 */
+	public JDFXYPair(Vector v) throws DataFormatException
+	{
+		super(v);
+	}
 
-    /**
-     * constructs a xy pair with all values set via a String
-     *
-     * @param s the given String
-     *
-     * @throws DataFormatException - if the String has not a valid format
-     */
-    public JDFXYPair(String s) throws DataFormatException
-    {
-        super(s);
-    }
+	/**
+	 * constructs a xy pair with all values set via a String
+	 * 
+	 * @param s the given String
+	 * 
+	 * @throws DataFormatException - if the String has not a valid format
+	 */
+	public JDFXYPair(String s) throws DataFormatException
+	{
+		super(s);
+	}
 
-    /**
-     * constructs a xy pair with all values set via a JDFXYPair
-     *
-     * @param xy the given xy pair
-     *
-     */
-    public JDFXYPair(JDFXYPair xy)
-    {
-        super(MAX_XY_DIMENSION);
-        setX(xy.getX());
-        setY(xy.getY());
-    }
+	/**
+	 * constructs a xy pair with all values set via a JDFXYPair
+	 * 
+	 * @param xy the given xy pair
+	 * 
+	 */
+	public JDFXYPair(JDFXYPair xy)
+	{
+		super(MAX_XY_DIMENSION);
+		setX(xy.getX());
+		setY(xy.getY());
+	}
 
-    /**
-     * constructs a xy pair with all values set via a JDFNumberList
-     *
-     * @param nl the given number list
-     *
-     * @throws DataFormatException - if the JDFNumberList has not a valid format
-     */
-    public JDFXYPair(JDFNumberList nl) throws DataFormatException
-    {
-        super(MAX_XY_DIMENSION);
-        if (nl.size()!=MAX_XY_DIMENSION)
-            throw new DataFormatException("JDFXYPair: can't construct JDFXYPair from this JDFNuberList value");
-        m_numList.set(0, nl.m_numList.get(0));
-        m_numList.set(1, nl.m_numList.get(1));
-    }
+	/**
+	 * constructs a xy pair with all values set via a JDFNumberList
+	 * 
+	 * @param nl the given number list
+	 * 
+	 * @throws DataFormatException - if the JDFNumberList has not a valid format
+	 */
+	public JDFXYPair(JDFNumberList nl) throws DataFormatException
+	{
+		super(MAX_XY_DIMENSION);
+		if (nl.size() != MAX_XY_DIMENSION)
+			throw new DataFormatException("JDFXYPair: can't construct JDFXYPair from this JDFNuberList value");
+		m_numList.set(0, nl.m_numList.get(0));
+		m_numList.set(1, nl.m_numList.get(1));
+	}
 
-    /**
-     * constructs a new JDFXYPair with the given double values
-     *
-     * @param x the x coordinate
-     * @param y the y coordinate
-     */
-    public JDFXYPair(double x, double y)
-    {
-        super(MAX_XY_DIMENSION);
-        m_numList.set(0, new Double(x));
-        m_numList.set(1, new Double(y));
-    }
+	/**
+	 * constructs a new JDFXYPair with the given double values
+	 * 
+	 * @param x the x coordinate
+	 * @param y the y coordinate
+	 */
+	public JDFXYPair(double x, double y)
+	{
+		super(MAX_XY_DIMENSION);
+		m_numList.set(0, new Double(x));
+		m_numList.set(1, new Double(y));
+	}
 
-    //**************************************** Methods *********************************************
-    /**
-     * isValid - valid if the size of the vector is 2 and all instances are Double types
-     *
-     * @throws DataFormatException - if the Vector has not a valid format
-     */
-    public void isValid() throws DataFormatException
-    {
-        if (m_numList.size() != MAX_XY_DIMENSION)
-        {
-            throw new DataFormatException("Data format exception!");
-        }
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * isValid - valid if the size of the vector is 2 and all instances are Double types
+	 * 
+	 * @throws DataFormatException - if the Vector has not a valid format
+	 */
+	public void isValid() throws DataFormatException
+	{
+		if (m_numList.size() != MAX_XY_DIMENSION)
+		{
+			throw new DataFormatException("Data format exception!");
+		}
 
-        for (int i = 0; i < m_numList.size(); i++)
-        {
-            if (!(m_numList.elementAt(i) instanceof Double))
-            {
-                throw new DataFormatException("Data format exception!");
-            }
-        }
-    }
+		for (int i = 0; i < m_numList.size(); i++)
+		{
+			if (!(m_numList.elementAt(i) instanceof Double))
+			{
+				throw new DataFormatException("Data format exception!");
+			}
+		}
+	}
 
-    /**
-     * getX - returns the x coordinate
-     *
-     * @return double - the x coordinate
-     */
-    public double getX()
-    {
-        return ((Double)m_numList.get(0)).doubleValue();
-    }
+	/**
+	 * getX - returns the x coordinate
+	 * 
+	 * @return double - the x coordinate
+	 */
+	public double getX()
+	{
+		return ((Double) m_numList.get(0)).doubleValue();
+	}
 
-    /**
-     * setX - sets the x coordinate
-     *
-     * @param x the x coordinate
-     */
-    public void setX(double x)
-    {
-        m_numList.set(0, new Double(x));
-    }
+	/**
+	 * setX - sets the x coordinate
+	 * 
+	 * @param x the x coordinate
+	 */
+	public void setX(double x)
+	{
+		m_numList.set(0, new Double(x));
+	}
 
-    /**
-     * getY - returns the y coordinate
-     *
-     * @return double - the y coordinate
-     */
-    public double getY()
-    {
-        return ((Double)m_numList.get(1)).doubleValue();
-    }
+	/**
+	 * getY - returns the y coordinate
+	 * 
+	 * @return double - the y coordinate
+	 */
+	public double getY()
+	{
+		return ((Double) m_numList.get(1)).doubleValue();
+	}
 
-    /**
-     * setY - sets the y coordinate
-     *
-     * @param y the y coordinate
-     */
-    public void setY(double y)
-    {
-        m_numList.set(1, new Double(y));
-    }
-    
-   
-    /**
-     * equals - returns true if both JDFShapes are equal, otherwise false
-     *
-     * @return boolean - true if equal otherwise false
-     */
-    public boolean equals(Object other)
-    {
-        if (this == other)
-        {
-            return true;
-        }
-        if (other == null)
-        {
-            return false;
-        }
-        if (!other.getClass().equals(getClass()))
-        {
-            return false;
-        }
-            
-        JDFXYPair xyPair = (JDFXYPair) other;
-        
-        return  (Math.abs(this.getX() - xyPair.getX()) <= EPSILON) &&
-                (Math.abs(this.getY() - xyPair.getY()) <= EPSILON);
-    }
-    
-    /**
-     * hashCode complements equals() to fulfill the equals/hashCode contract
-     */
-    public int hashCode()
-    {
-        return HashUtil.hashCode(super.hashCode(), this.toString());
-    }
-    
-    
-   /**
-   * isGreaterOrEqual - equality operator >=
-   * 
-   * @param x the JDFXYPair object to compare to
-   * @return boolean - true if this >= x  
-   */
-   public boolean isGreaterOrEqual(JDFXYPair x)
-   {
-       return (equals(x) || ((getX()>=x.getX()) && (getY()>=x.getY())));
-   }
+	/**
+	 * setY - sets the y coordinate
+	 * 
+	 * @param y the y coordinate
+	 */
+	public void setY(double y)
+	{
+		m_numList.set(1, new Double(y));
+	}
 
-   /**
-   * isLessOrEqual - equality operator <=
-   * 
-   * @param x the JDFXYPair object to compare to
-   * @return boolean - true if this <= x  
-   */
-   public boolean isLessOrEqual(JDFXYPair x)
-   {
-       return (equals(x) || ((getX()<=x.getX()) && (getY()<=x.getY())));
-   }
-    
-   /**
-   * isGreater - equality operator >
-   * 
-   * @param x the JDFXYPair object to compare to
-   * @return boolean - true if this > x  
-   */
-   public boolean isGreater(JDFXYPair x)
-   {
-       return (!isLessOrEqual(x));   
-   }
+	/**
+	 * equals - returns true if both JDFShapes are equal, otherwise false
+	 * 
+	 * @return boolean - true if equal otherwise false
+	 */
+	public boolean equals(Object other)
+	{
+		if (this == other)
+		{
+			return true;
+		}
+		if (other == null)
+		{
+			return false;
+		}
+		if (!other.getClass().equals(getClass()))
+		{
+			return false;
+		}
 
-   /**
-   * isLess - equality operator <
-   * 
-   * @param x the JDFXYPair object to compare to
-   * @return boolean - true if this < x  
-   */
-   public boolean isLess(JDFXYPair x)
-   {
-       return (!isGreaterOrEqual(x));
-   }
+		JDFXYPair xyPair = (JDFXYPair) other;
+
+		return (Math.abs(this.getX() - xyPair.getX()) <= EPSILON) && (Math.abs(this.getY() - xyPair.getY()) <= EPSILON);
+	}
+
+	/**
+	 * hashCode complements equals() to fulfill the equals/hashCode contract
+	 */
+	public int hashCode()
+	{
+		return HashUtil.hashCode(super.hashCode(), this.toString());
+	}
+
+	/**
+	 * isGreaterOrEqual - equality operator >=
+	 * 
+	 * @param x the JDFXYPair object to compare to
+	 * @return boolean - true if this >= x
+	 */
+	public boolean isGreaterOrEqual(JDFXYPair x)
+	{
+		return (equals(x) || ((getX() >= x.getX()) && (getY() >= x.getY())));
+	}
+
+	/**
+	 * isLessOrEqual - equality operator <=
+	 * 
+	 * @param x the JDFXYPair object to compare to
+	 * @return boolean - true if this <= x
+	 */
+	public boolean isLessOrEqual(JDFXYPair x)
+	{
+		return (equals(x) || ((getX() <= x.getX()) && (getY() <= x.getY())));
+	}
+
+	/**
+	 * isGreater - equality operator >
+	 * 
+	 * @param x the JDFXYPair object to compare to
+	 * @return boolean - true if this > x
+	 */
+	public boolean isGreater(JDFXYPair x)
+	{
+		return (!isLessOrEqual(x));
+	}
+
+	/**
+	 * isLess - equality operator <
+	 * 
+	 * @param x the JDFXYPair object to compare to
+	 * @return boolean - true if this < x
+	 */
+	public boolean isLess(JDFXYPair x)
+	{
+		return (!isGreaterOrEqual(x));
+	}
 }

@@ -85,202 +85,195 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFShape;
 import org.cip4.jdflib.datatypes.JDFShapeRangeList;
 
-
 public class JDFShapeSpan extends JDFSpanBase
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFShapeSpan
-     * @param ownerDocument
-     * @param qualifiedName
-     */
-     public JDFShapeSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFShapeSpan
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 */
+	public JDFShapeSpan(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFShapeSpan
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFShapeSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFShapeSpan
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     */
-    public JDFShapeSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFShapeSpan
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 */
+	public JDFShapeSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFShapeSpan
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     */
-    public JDFShapeSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFShapeSpan[ --> " + super.toString() + " ]";
+	}
 
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFShapeSpan[ --> " + super.toString() + " ]" ;
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUAL, 0x33333333, AttributeInfo.EnumAttributeType.shape, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREFERRED, 0x33333333, AttributeInfo.EnumAttributeType.shape, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.RANGE, 0x33333333, AttributeInfo.EnumAttributeType.shape, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFERRANGE, 0x33333111, AttributeInfo.EnumAttributeType.shape, null, null);
+	}
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static 
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUAL,                        0x33333333, AttributeInfo.EnumAttributeType.shape, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.PREFERRED,                     0x33333333, AttributeInfo.EnumAttributeType.shape, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.RANGE,                         0x33333333, AttributeInfo.EnumAttributeType.shape, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFERRANGE,                       0x33333111, AttributeInfo.EnumAttributeType.shape, null, null);
-     }
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    protected AttributeInfo getTheAttributeInfo() 
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
-    
-    public void setActual(JDFShape value)
-    {
-        setAttribute(AttributeName.ACTUAL, value.toString(), null);
-    }
+	public void setActual(JDFShape value)
+	{
+		setAttribute(AttributeName.ACTUAL, value.toString(), null);
+	}
 
+	public JDFShape getActual()
+	{
+		try
+		{
+			return new JDFShape(getAttribute(AttributeName.ACTUAL));
+		}
+		catch (DataFormatException e)
+		{
+			throw new JDFException("JDFShapeState.getActual: Attribute Actual is not capable to create JDFShape");
+		}
+	}
 
-    public JDFShape getActual()
-    {
-        try
-        {
-            return new JDFShape(getAttribute(AttributeName.ACTUAL));
-        }
-        catch (DataFormatException e)
-        {
-            throw new JDFException("JDFShapeState.getActual: Attribute Actual is not capable to create JDFShape");
-        }
-    }
-    
-    public void setPreferred(JDFShape value)
-    {
-        setAttribute(AttributeName.PREFERRED, value.toString(), null);
-    }
+	public void setPreferred(JDFShape value)
+	{
+		setAttribute(AttributeName.PREFERRED, value.toString(), null);
+	}
 
+	public JDFShape getPreferred()
+	{
+		try
+		{
+			return new JDFShape(getAttribute(AttributeName.PREFERRED));
+		}
+		catch (DataFormatException e)
+		{
+			throw new JDFException("JDFShapeState.getPreferred: Attribute Preferred is not capable to create JDFShape");
+		}
+	}
 
-    public JDFShape getPreferred()
-    {
-        try
-        {
-            return new JDFShape(getAttribute(AttributeName.PREFERRED));
-        }
-        catch (DataFormatException e)
-        {
-            throw new JDFException("JDFShapeState.getPreferred: Attribute Preferred is not capable to create JDFShape");
-        }
-    }
-    
-    public void setRange(JDFShapeRangeList  value)
-    {
-        setAttribute(AttributeName.RANGE, value.toString());
-    }
+	public void setRange(JDFShapeRangeList value)
+	{
+		setAttribute(AttributeName.RANGE, value.toString());
+	}
 
+	public JDFShapeRangeList getRange()
+	{
+		try
+		{
+			return new JDFShapeRangeList(getAttribute(AttributeName.RANGE));
+		}
+		catch (DataFormatException e)
+		{
+			throw new JDFException("JDFShapeState.getRange: Attribute Range is not capable to create JDFShapeRangeList");
+		}
+	}
 
-    public JDFShapeRangeList getRange()
-    {
-        try
-        {
-            return new JDFShapeRangeList(getAttribute(AttributeName.RANGE));
-        }
-        catch (DataFormatException e)
-        {
-            throw new JDFException("JDFShapeState.getRange: Attribute Range is not capable to create JDFShapeRangeList");
-        }
-    }
+	public boolean init()
+	{
+		boolean b = super.init();
+		setDataType(EnumDataType.ShapeSpan);
+		return b;
+	}
 
-     public boolean init()
-    {
-        boolean b = super.init();
-        setDataType(EnumDataType.ShapeSpan);
-        return b;
-    }
-    
-    
-    /**
-    * set the Preferred attribute
-    * @param double x the preferred width
-    * @param double y the preferred height
-    * @param double z the preferred depth
-    */
-    public void setPreferred(double x,double y, double z)
-    {
-        setPreferred(new JDFShape(x,y,z));
-    }
-    
-    
-    /**
-    * add an element shape to the Range attribute as a JDFRange
-    * @param JDFShape shape the Range  value
-    */
-    public void addRange(JDFShape shape)
-    {
-        JDFShapeRangeList srl = getRange();
-        srl.append(shape);
-        setRange(srl);
-    }
-    
-    /**
-    * add an element x y to the Range attribute as a JDFRange
-    * @param JDFShape shape1 the Range  value
-    * @param JDFShape shape2 the Range  value
-    */
-    public void addRange(JDFShape shape1,JDFShape shape2)
-    {
-        JDFShapeRangeList srl = getRange();
-        srl.append(shape1, shape2);
-        setRange(srl);
-    }
+	/**
+	 * set the Preferred attribute
+	 * 
+	 * @param double x the preferred width
+	 * @param double y the preferred height
+	 * @param double z the preferred depth
+	 */
+	public void setPreferred(double x, double y, double z)
+	{
+		setPreferred(new JDFShape(x, y, z));
+	}
 
-    /**
-    * add an element x y zto the Range attribute as a JDFRange
-    * @param double x the width
-    * @param double y the height
-    * @param double z the depth
-    */
-    public void addRange(double x,double y,double z)
-    {
-        JDFShapeRangeList srl = getRange();
-        srl.append(new JDFShape(x,y,z));
-        setRange(srl);
-    }
-    
-    /**
-    * add an element x1 y1 z1~ x2 y2 z2to the Range attribute as a JDFRange
-    * @param double x1 the 1. width
-    * @param double y1 the 1. height
-    * @param double z1 the 1. depth
-    * @param double x2 the 2. width
-    * @param double y2 the 2. height
-    * @param double z2 the 2. depth
-    */
-    public void addRange(double x1,double y1,double z1,double x2,double y2, double z2)
-    {
-        JDFShapeRangeList srl = getRange();
-        srl.append(new JDFShape(x1,y1,z1), new JDFShape(x2,y2,z2));
-        setRange(srl);
-    }
- }
+	/**
+	 * add an element shape to the Range attribute as a JDFRange
+	 * 
+	 * @param JDFShape shape the Range value
+	 */
+	public void addRange(JDFShape shape)
+	{
+		JDFShapeRangeList srl = getRange();
+		srl.append(shape);
+		setRange(srl);
+	}
+
+	/**
+	 * add an element x y to the Range attribute as a JDFRange
+	 * 
+	 * @param JDFShape shape1 the Range value
+	 * @param JDFShape shape2 the Range value
+	 */
+	public void addRange(JDFShape shape1, JDFShape shape2)
+	{
+		JDFShapeRangeList srl = getRange();
+		srl.append(shape1, shape2);
+		setRange(srl);
+	}
+
+	/**
+	 * add an element x y zto the Range attribute as a JDFRange
+	 * 
+	 * @param double x the width
+	 * @param double y the height
+	 * @param double z the depth
+	 */
+	public void addRange(double x, double y, double z)
+	{
+		JDFShapeRangeList srl = getRange();
+		srl.append(new JDFShape(x, y, z));
+		setRange(srl);
+	}
+
+	/**
+	 * add an element x1 y1 z1~ x2 y2 z2to the Range attribute as a JDFRange
+	 * 
+	 * @param double x1 the 1. width
+	 * @param double y1 the 1. height
+	 * @param double z1 the 1. depth
+	 * @param double x2 the 2. width
+	 * @param double y2 the 2. height
+	 * @param double z2 the 2. depth
+	 */
+	public void addRange(double x1, double y1, double z1, double x2, double y2, double z2)
+	{
+		JDFShapeRangeList srl = getRange();
+		srl.append(new JDFShape(x1, y1, z1), new JDFShape(x2, y2, z2));
+		setRange(srl);
+	}
+}

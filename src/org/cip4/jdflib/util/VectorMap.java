@@ -82,111 +82,115 @@ package org.cip4.jdflib.util;
 import java.util.HashMap;
 import java.util.Vector;
 
-
 /**
  * Bidirectional HashMap utility class
+ * 
  * @author prosirai
- *
+ * 
  */
-public class VectorMap<key,vectorObject> extends HashMap<key,Vector<vectorObject>>
+public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObject>>
 {
 
-    /**
+	/**
      * 
      */
-    private static final long serialVersionUID = -2180413692846276265L;
+	private static final long serialVersionUID = -2180413692846276265L;
 
-    public VectorMap()
-    {
-        super();
-    }
-    
-    /**
-     * get the value for key
-     */
-    public vectorObject getOne(Object key, int i)
-    {
-        Vector<vectorObject> c= get(key);
-        if(c==null)
-            return null;
-        int n=c.size();
-        if(i<0)
-            i=n+i;
-        if(i<0 || i>=n)
-            return null;
-        return c.get(i);
-    }
-    /**
-     * get the value for key
-     */
-    public Object getOne(key key, vectorObject singleObject)
-    {
-        Vector<vectorObject> keyVector= get(key);
-        if(keyVector==null)
-            return null;
-        int i=keyVector.indexOf(singleObject);
-        return i<0 ? null : keyVector.get(i); 
-    }
-    /**
-     * get the size of the vector for key
-     */
-    public int size(key key)
-    {
-        Vector<vectorObject> c= get(key);
-        if(c==null)
-            return 0;
-        return c.size();
-    }
-     
-    /**
-     * put the value for key, ensuring uniqueness
-     */
-    public void putOne(key key, vectorObject val)
-    {
-        Vector<vectorObject> v= get(key);
-        if(v==null)
-        {
-            v=new Vector<vectorObject>();
-            put(key,v);
-        }
-        if(!v.contains(val))
-            v.add(val);        
-    }
-    /**
-     * remove the value for key,also remove key if the vector is empty
-     */
-    public void removeOne(key key, vectorObject val)
-    {
-        Vector<vectorObject> v=get(key);
-        if(v!=null)
-        {
-            v.remove(val);
-            if(v.size()==0)
-                remove(key);
-        } 
-    }
-    /**
-     * replace the value for key, add if oldObj==null or is not there
-     */
-    public void setOne(key key, vectorObject newObj, vectorObject oldObj)
-    {
-        
-        Vector<vectorObject> v=get(key);
-        if(v!=null)
-        {
-            int i=v.indexOf(oldObj);
-            if(i<0)
-                putOne(key, newObj);
-            else
-                v.set(i, newObj);
-        } 
-        else
-        {
-            putOne(key, newObj);
-        }
-    }
-    
+	public VectorMap()
+	{
+		super();
+	}
 
-//////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * get the value for key
+	 */
+	public vectorObject getOne(Object key, int i)
+	{
+		Vector<vectorObject> c = get(key);
+		if (c == null)
+			return null;
+		int n = c.size();
+		if (i < 0)
+			i = n + i;
+		if (i < 0 || i >= n)
+			return null;
+		return c.get(i);
+	}
+
+	/**
+	 * get the value for key
+	 */
+	public Object getOne(key key, vectorObject singleObject)
+	{
+		Vector<vectorObject> keyVector = get(key);
+		if (keyVector == null)
+			return null;
+		int i = keyVector.indexOf(singleObject);
+		return i < 0 ? null : keyVector.get(i);
+	}
+
+	/**
+	 * get the size of the vector for key
+	 */
+	public int size(key key)
+	{
+		Vector<vectorObject> c = get(key);
+		if (c == null)
+			return 0;
+		return c.size();
+	}
+
+	/**
+	 * put the value for key, ensuring uniqueness
+	 */
+	public void putOne(key key, vectorObject val)
+	{
+		Vector<vectorObject> v = get(key);
+		if (v == null)
+		{
+			v = new Vector<vectorObject>();
+			put(key, v);
+		}
+		if (!v.contains(val))
+			v.add(val);
+	}
+
+	/**
+	 * remove the value for key,also remove key if the vector is empty
+	 */
+	public void removeOne(key key, vectorObject val)
+	{
+		Vector<vectorObject> v = get(key);
+		if (v != null)
+		{
+			v.remove(val);
+			if (v.size() == 0)
+				remove(key);
+		}
+	}
+
+	/**
+	 * replace the value for key, add if oldObj==null or is not there
+	 */
+	public void setOne(key key, vectorObject newObj, vectorObject oldObj)
+	{
+
+		Vector<vectorObject> v = get(key);
+		if (v != null)
+		{
+			int i = v.indexOf(oldObj);
+			if (i < 0)
+				putOne(key, newObj);
+			else
+				v.set(i, newObj);
+		}
+		else
+		{
+			putOne(key, newObj);
+		}
+	}
+
+	// //////////////////////////////////////////////////////////////////////////
+	// //////
 
 }

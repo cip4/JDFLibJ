@@ -73,152 +73,91 @@ package org.cip4.jdflib.util;
 import java.util.Vector;
 
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
-import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
-import org.cip4.jdflib.jmf.JDFResponse;
 
 /**
- * @author prosirai
- * module combining statuscounter
- * simply update the child status counters regularly. call getStatusResponse to generate a new Response
- * based on the data in the statuscounters
+ * @author prosirai module combining statuscounter simply update the child status counters regularly. call
+ *         getStatusResponse to generate a new Response based on the data in the statuscounters
  * 
  */
 public class MultiModuleStatusCounter
 {
-    private Vector<StatusCounter> counters=new Vector<StatusCounter>();
-    public enum MultiType {MODULE, JOB}
-    private MultiType counterType;
-    private StatusCounter root=null;
-    public MultiModuleStatusCounter(MultiType _counterType)
-    {
-        super();
-        this.counterType = _counterType;
-        if(counterType==MultiType.JOB)
-        {
-            root=new StatusCounter(null,null,null);
-        }
-    }
+	private final Vector<StatusCounter> counters = new Vector<StatusCounter>();
 
-    /**
-     * add a statuscounter representing a set of modules to this device status counter
-     * @param theStatusCounter the statuscounter to add
-     */
-    public void addModule(StatusCounter sc)
-    {
-        if(sc!=null)
-            counters.add(sc);
-    }
+	public MultiModuleStatusCounter()
+	{
+		super();
+	}
 
-    /**
-     * remove a statuscounter representing a set of modules to this device status counter
-     * @param theStatusCounter the statuscounter to add
-     */
-    public void removeModule(StatusCounter sc)
-    {
-        if(sc!=null)
-            counters.remove(sc);
-    }
+	/**
+	 * add a statuscounter representing a set of modules to this device status counter
+	 * 
+	 * @param theStatusCounter the statuscounter to add
+	 */
+	public void addModule(StatusCounter sc)
+	{
+		if (sc != null)
+			counters.add(sc);
+	}
 
-    /**
-     * return the jmf root of the status jmf that contains all modules, null if no modules are active
-     * @return
-     */
-    public JDFDoc getStatusResponse()
-    {
-        if(counterType==MultiType.MODULE)
-            return getStatusResponseModule();
-        else
-            return getStatusResponseJob();
-    }
-    /**
-     * return the jmf root of the status jmf that contains all modules, null if no modules are active
-     * @return
-     */
-   private JDFDoc getStatusResponseModule()
-    {
-        if(counters.size()==0)
-            return null;
+	/**
+	 * remove a statuscounter representing a set of modules to this device status counter
+	 * 
+	 * @param theStatusCounter the statuscounter to add
+	 */
+	public void removeModule(StatusCounter sc)
+	{
+		if (sc != null)
+			counters.remove(sc);
+	}
 
-        StatusCounter root=counters.elementAt(0);
-        JDFDoc d=new JDFDoc("JMF");
-        final JDFJMF jmf = d.getJMFRoot();
-        jmf.mergeElement(root.getDocJMFPhaseTime().getJMFRoot(),false);
-        JDFDeviceInfo di=jmf.getResponse(0).getDeviceInfo(0);
-        for(int i=1;i<counters.size();i++)
-        {
-            StatusCounter counter=counters.elementAt(i);
-            final JDFDoc docJMFPhaseTime = counter.getDocJMFPhaseTime();
-            if(docJMFPhaseTime==null)
-                continue;
-            JDFDeviceInfo di2=docJMFPhaseTime.getJMFRoot().getResponse(0).getDeviceInfo(0);
-            VElement phases=di2.getChildElementVector(ElementName.JOBPHASE, null, null, true, -1, false);
-            for(int j=0;j<phases.size();j++)
-                di.copyElement(phases.elementAt(j), null);
-            di.setDeviceStatus(getDeviceStatus());
-        }            
-        return d;
-    }
-   /**
-    * return the jmf root of the status jmf that contains all modules, null if no modules are active
-    * @return
-    */
-  private JDFDoc getStatusResponseJob()
-   {
-       if(counters.size()==0)
-           return root.getDocJMFPhaseTime();
+	/**
+	 * return the jmf root of the status jmf that contains all modules, null if no modules are active
+	 * 
+	 * @return
+	 */
+	public JDFDoc getStatusResponse()
+	{
+		if (counters.size() == 0)
+			return null;
 
-       JDFDoc d=counters.elementAt(0).getDocJMFPhaseTime();
-       final JDFJMF jmf = d.getJMFRoot();
-       d=new JDFDoc("JMF");
-       d.getJMFRoot().mergeElement(jmf, false);
-       final JDFResponse response = d.getJMFRoot().getResponse(0);
-      
-       for(int i=1;i<counters.size();i++)
-       {
-           StatusCounter counter=counters.elementAt(i);
-           final JDFDoc docJMFPhaseTime = counter.getDocJMFPhaseTime();
-           if(docJMFPhaseTime==null)
-               continue;
-           final JDFResponse response2 = docJMFPhaseTime.getJMFRoot().getResponse(0);
-           JDFDeviceInfo di2=response2.getDeviceInfo(0);
-           String devID=di2.getDeviceID();
-           JDFDeviceInfo di3=KElement.isWildCard(devID) ? null : (JDFDeviceInfo) response.getChildWithAttribute(ElementName.DEVICEINFO, AttributeName.DEVICEID, null, devID, 0, true);
-           if(di3!=null)
-           {
-               VElement phases=di2.getChildElementVector(ElementName.JOBPHASE, null, null, true, -1, false);
-               for(int j=0;j<phases.size();j++)
-                   di3.copyElement(phases.elementAt(j), null);
+		StatusCounter root = counters.elementAt(0);
+		JDFDoc d = new JDFDoc("JMF");
+		final JDFJMF jmf = d.getJMFRoot();
+		jmf.mergeElement(root.getDocJMFPhaseTime().getJMFRoot(), false);
+		JDFDeviceInfo di = jmf.getResponse(0).getDeviceInfo(0);
+		for (int i = 1; i < counters.size(); i++)
+		{
+			StatusCounter counter = counters.elementAt(i);
+			final JDFDoc docJMFPhaseTime = counter.getDocJMFPhaseTime();
+			if (docJMFPhaseTime == null)
+				continue;
+			JDFDeviceInfo di2 = docJMFPhaseTime.getJMFRoot().getResponse(0).getDeviceInfo(0);
+			VElement phases = di2.getChildElementVector(ElementName.JOBPHASE, null, null, true, -1, false);
+			for (int j = 0; j < phases.size(); j++)
+				di.copyElement(phases.elementAt(j), null);
+			di.setDeviceStatus(getDeviceStatus());
+		}
+		return d;
+	}
 
-           }
-           else
-               response.copyElement(di2, null);
-       }            
-       return d;
-   }
-    /**
-     * @return the amalgamated device status
-     */
-    public EnumDeviceStatus getDeviceStatus()
-    {
-        final int counterSize = counters.size();
-        if(counterSize==0)
-            return EnumDeviceStatus.Idle;
-        EnumDeviceStatus maxStatus=null;
-        for(int i=0;i<counterSize;i++)
-        {
-            maxStatus=(EnumDeviceStatus) EnumUtil.max(maxStatus, counters.elementAt(i).getStatus());
-        }
-        return maxStatus;
-    }
-
-    public StatusCounter getRoot()
-    {
-        return root;
-    }
+	/**
+	 * @return the amalgamated device status
+	 */
+	public EnumDeviceStatus getDeviceStatus()
+	{
+		final int counterSize = counters.size();
+		if (counterSize == 0)
+			return EnumDeviceStatus.Idle;
+		EnumDeviceStatus maxStatus = null;
+		for (int i = 0; i < counterSize; i++)
+		{
+			maxStatus = (EnumDeviceStatus) EnumUtil.max(maxStatus, counters.elementAt(i).getStatus());
+		}
+		return maxStatus;
+	}
 }

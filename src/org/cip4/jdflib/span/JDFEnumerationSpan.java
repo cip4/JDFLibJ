@@ -87,200 +87,197 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 
-
 public abstract class JDFEnumerationSpan extends JDFSpanBase
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Constructor for JDFEnumerationSpan
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 */
+	public JDFEnumerationSpan(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFEnumerationSpan
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFEnumerationSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFEnumerationSpan
-     * @param ownerDocument
-     * @param qualifiedName
-     */
-     public JDFEnumerationSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFEnumerationSpan
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 */
+	public JDFEnumerationSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+		{
+			atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUAL, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, getEnumType(), null);
+			atrInfoTable[1] = new AtrInfoTable(AttributeName.PREFERRED, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, getEnumType(), null);
+			atrInfoTable[2] = new AtrInfoTable(AttributeName.RANGE, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, getEnumType(), null);
+			atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFERRANGE, 0x33333111, AttributeInfo.EnumAttributeType.enumerations, getEnumType(), null);
+		}
 
-    /**
-     * Constructor for JDFEnumerationSpan
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     */
-    public JDFEnumerationSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-     {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    /**
-     * Constructor for JDFEnumerationSpan
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     */
-    public JDFEnumerationSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo() 
-    {          
-        AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-        {
-            atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUAL,                        0x33333333, AttributeInfo.EnumAttributeType.enumeration, getEnumType(), null);
-            atrInfoTable[1] = new AtrInfoTable(AttributeName.PREFERRED,                     0x33333333, AttributeInfo.EnumAttributeType.enumeration, getEnumType(), null);
-            atrInfoTable[2] = new AtrInfoTable(AttributeName.RANGE,                         0x33333333, AttributeInfo.EnumAttributeType.enumerations, getEnumType(), null);
-            atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFERRANGE,                    0x33333111, AttributeInfo.EnumAttributeType.enumerations, getEnumType(), null);
-        }
-        
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString - StringRepresentation of JDFNode
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFEnumerationSpan[  --> " + super.toString() + " ]";
+	}
 
-     
-     //**************************************** Methods *********************************************
-    /**
-     * toString - StringRepresentation of JDFNode
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFEnumerationSpan[  --> " + super.toString() + " ]";
-    }
-    
-    /**
-    * AllowedValues - will be defined in every particular EnumerationSpan
-    *
-    * @return Vector - vector representation of the allowed values
-    */
-    public abstract ValuedEnum getEnumType();
-    
- 
+	/**
+	 * AllowedValues - will be defined in every particular EnumerationSpan
+	 * 
+	 * @return Vector - vector representation of the allowed values
+	 */
+	public abstract ValuedEnum getEnumType();
 
-    public ValuedEnum getEnum(String value){
-        try {
-            Class methodArgs[] = {String.class};
-            Method m = getEnumType().getClass().getMethod("getEnum",methodArgs);
-            Object args[]={value};                        
-            ValuedEnum ve =(ValuedEnum) m.invoke(null,args);
-            return ve;
-        } catch (SecurityException e1) {
-            // in case of exceptions, simply apply NMTOKENS rule
-        } catch (NoSuchMethodException e1) {
-            // in case of exceptions, simply apply NMTOKENS rule
-        } catch (IllegalArgumentException e) {
-            // in case of exceptions, simply apply NMTOKENS rule
-        } catch (IllegalAccessException e) {
-            // in case of exceptions, simply apply NMTOKENS rule
-        } catch (InvocationTargetException e) {
-            // in case of exceptions, simply apply NMTOKENS rule
-        }
-        return null;
-    }
-    
-    /**
-     * Set attribute Actual
-     *
-     * @param int value - the value to set
-     */
-    public void setActual(ValuedEnum value)
-    {
-        setAttribute(AttributeName.ACTUAL, value.getName(), null);
-    }
+	public ValuedEnum getEnum(String value)
+	{
+		try
+		{
+			Class methodArgs[] = { String.class };
+			Method m = getEnumType().getClass().getMethod("getEnum", methodArgs);
+			Object args[] = { value };
+			ValuedEnum ve = (ValuedEnum) m.invoke(null, args);
+			return ve;
+		}
+		catch (SecurityException e1)
+		{
+			// in case of exceptions, simply apply NMTOKENS rule
+		}
+		catch (NoSuchMethodException e1)
+		{
+			// in case of exceptions, simply apply NMTOKENS rule
+		}
+		catch (IllegalArgumentException e)
+		{
+			// in case of exceptions, simply apply NMTOKENS rule
+		}
+		catch (IllegalAccessException e)
+		{
+			// in case of exceptions, simply apply NMTOKENS rule
+		}
+		catch (InvocationTargetException e)
+		{
+			// in case of exceptions, simply apply NMTOKENS rule
+		}
+		return null;
+	}
 
-    /**
-     * Get attribute Actual value
-     *
-     * @return  int - the enumeration equivalent of the attribute
-     */
-    public ValuedEnum getActual()
-    {
-        return getEnum(getAttribute(AttributeName.ACTUAL, null, null));
-    }
-    
-    /**
-     * Set attribute Preferred
-     *
-     * @param int value - the enumeration equivalent of value to set
-     */
-    public void setPreferred(ValuedEnum value)
-    {
-        setAttribute(AttributeName.PREFERRED, value.getName(), null);
-    }
+	/**
+	 * Set attribute Actual
+	 * 
+	 * @param int value - the value to set
+	 */
+	public void setActual(ValuedEnum value)
+	{
+		setAttribute(AttributeName.ACTUAL, value.getName(), null);
+	}
 
-    /**
-     * Get attribute Preferred value
-     *
-     * @return  int - the enumeration equivalent of the attribute
-     */
-    public ValuedEnum getPreferred()
-    {
-        return getEnum(getAttribute(AttributeName.PREFERRED, null, null));
-    }
-    
+	/**
+	 * Get attribute Actual value
+	 * 
+	 * @return int - the enumeration equivalent of the attribute
+	 */
+	public ValuedEnum getActual()
+	{
+		return getEnum(getAttribute(AttributeName.ACTUAL, null, null));
+	}
 
-    
-    /**
-     * Get attribute Range value
-     *
-     * @return Vector - the enumerations equivalent of attribute Range value
-     */
-    public Vector getRange()
-    {
-        return getEnumerationsAttribute(AttributeName.RANGE,null,getEnumType(),false);
-    }
-    
-    /**
-     * Set attribute Range as Enumerations
-     *
-     * @param Vector value - the enumerations equivalent of value to set
-     */
-    public void setRange(Vector value)
-    {
-         setEnumerationsAttribute(AttributeName.RANGE, value, null);
-    }
-    /**
-     * Get attribute Range value
-     *
-     * @return Vector - the enumerations equivalent of attribute Range value
-     */
-    
-    public Vector getOfferRange()
-    {
-        return getEnumerationsAttribute(AttributeName.OFFERRANGE,null,getEnumType(),false);
-    }
-    
-    /**
-     * Set attribute Range as Enumerations
-     *
-     * @param Vector value - the enumerations equivalent of value to set
-     */
-    public void setOfferRange(Vector value)
-    {
-        setEnumerationsAttribute(AttributeName.OFFERRANGE, value, null);
-    }
-        
-    public boolean init()
-    {
-        boolean b = super.init();
-        this.setDataType(EnumDataType.EnumerationSpan);
-        return b;
-    }
-    
+	/**
+	 * Set attribute Preferred
+	 * 
+	 * @param int value - the enumeration equivalent of value to set
+	 */
+	public void setPreferred(ValuedEnum value)
+	{
+		setAttribute(AttributeName.PREFERRED, value.getName(), null);
+	}
 
-    
+	/**
+	 * Get attribute Preferred value
+	 * 
+	 * @return int - the enumeration equivalent of the attribute
+	 */
+	public ValuedEnum getPreferred()
+	{
+		return getEnum(getAttribute(AttributeName.PREFERRED, null, null));
+	}
+
+	/**
+	 * Get attribute Range value
+	 * 
+	 * @return Vector - the enumerations equivalent of attribute Range value
+	 */
+	public Vector getRange()
+	{
+		return getEnumerationsAttribute(AttributeName.RANGE, null, getEnumType(), false);
+	}
+
+	/**
+	 * Set attribute Range as Enumerations
+	 * 
+	 * @param Vector value - the enumerations equivalent of value to set
+	 */
+	public void setRange(Vector value)
+	{
+		setEnumerationsAttribute(AttributeName.RANGE, value, null);
+	}
+
+	/**
+	 * Get attribute Range value
+	 * 
+	 * @return Vector - the enumerations equivalent of attribute Range value
+	 */
+
+	public Vector getOfferRange()
+	{
+		return getEnumerationsAttribute(AttributeName.OFFERRANGE, null, getEnumType(), false);
+	}
+
+	/**
+	 * Set attribute Range as Enumerations
+	 * 
+	 * @param Vector value - the enumerations equivalent of value to set
+	 */
+	public void setOfferRange(Vector value)
+	{
+		setEnumerationsAttribute(AttributeName.OFFERRANGE, value, null);
+	}
+
+	public boolean init()
+	{
+		boolean b = super.init();
+		this.setDataType(EnumDataType.EnumerationSpan);
+		return b;
+	}
+
 }

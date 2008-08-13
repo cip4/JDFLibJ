@@ -73,18 +73,21 @@
 package org.cip4.jdflib.validate;
 
 import org.cip4.jdflib.core.KElement;
+
 /**
-* additional validator for checkJDF / JDFValidator
-* this interface is called once for each element as checkJDF walks through the tree
-* @author Rainer Prosi
-*/
+ * additional validator for checkJDF / JDFValidator this interface is called once for each element as checkJDF walks
+ * through the tree
+ * 
+ * @author Rainer Prosi
+ */
 public interface ICheckValidatorFactory
 {
-    /**
-     * get a validatore a given element
-     * @param toCheck the element to check
-     * @return {@link ICheckValidator} the validator object, may be null if no furthe validation is required
-     */
-    public ICheckValidator getValidator(KElement toCheck);
-    
+	/**
+	 * get a validatore a given element
+	 * 
+	 * @param toCheck the element to check
+	 * @return {@link ICheckValidator} the validator object, may be null if no furthe validation is required
+	 */
+	public ICheckValidator getValidator(KElement toCheck);
+
 }

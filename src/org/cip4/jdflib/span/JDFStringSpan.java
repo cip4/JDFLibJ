@@ -90,235 +90,225 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.w3c.dom.DOMException;
 
-
 public class JDFStringSpan extends JDFSpanBase
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Constructor for JDFStringSpan
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFStringSpan(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFStringSpan
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFStringSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFStringSpan
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-     public JDFStringSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-        throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFStringSpan
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFStringSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    /**
-     * Constructor for JDFStringSpan
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFStringSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-         throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUAL, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREFERRED, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
-    /**
-     * Constructor for JDFStringSpan
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFStringSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-        throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-    @Override
-	protected AttributeInfo getTheAttributeInfo() 
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.RANGE, 0x33333333);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.OFFERRANGE, 0x33333111);
+	}
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static 
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUAL,                        0x33333333, AttributeInfo.EnumAttributeType.string, null,null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.PREFERRED,                     0x33333333, AttributeInfo.EnumAttributeType.string, null,null);
-    }
-    
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static 
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.RANGE,                        0x33333333);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.OFFERRANGE,                     0x33333111);
-    }
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
+	}
 
-     @Override
-	protected ElementInfo getTheElementInfo() 
-    {
-        return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
-    }
-
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    @Override
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	@Override
 	public String toString()
-    {
-        return "JDFStringSpan[ --> " + super.toString() + " ]";
-    }
+	{
+		return "JDFStringSpan[ --> " + super.toString() + " ]";
+	}
 
-    /**
-     * Set attribute Actual
-     *
-     * @param String value - the value to set
-     */
-    public void setActual(String value)
-    {
-        setAttribute(AttributeName.ACTUAL, value);
-    }
+	/**
+	 * Set attribute Actual
+	 * 
+	 * @param String value - the value to set
+	 */
+	public void setActual(String value)
+	{
+		setAttribute(AttributeName.ACTUAL, value);
+	}
 
-    /**
-     * Get attribute Actual value
-     *
-     * @return String - the value of attribute Actual
-     */
-    public String getActual()
-    {
-        return getAttribute(AttributeName.ACTUAL, null, JDFConstants.EMPTYSTRING);
-    }
-    
-    /**
-     * Set attribute Preferred
-     *
-     * @param String value - the value to set
-     */
-    public void setPreferred(String value)
-    {
-        setAttribute(AttributeName.PREFERRED, value);
-    }
+	/**
+	 * Get attribute Actual value
+	 * 
+	 * @return String - the value of attribute Actual
+	 */
+	public String getActual()
+	{
+		return getAttribute(AttributeName.ACTUAL, null, JDFConstants.EMPTYSTRING);
+	}
 
-    /**
-     * Get attribute Preferred value
-     *
-     * @return String - the value of attribute Preferred
-     */
-    public String getPreferred()
-    {
-        return getAttribute(AttributeName.PREFERRED, null, JDFConstants.EMPTYSTRING);
-    }
-    
-        
-    /**
-     * GetRange
-     *
-     * @return Vector of strings in Range
-     */
-    private VString getRangeOfferRange(String elementName)
-    {
-        VString vL = new VString();
-        VElement v = getChildrenByTagName(elementName, null, null, true, true, 0);
-        for(int i=0; i < v.size(); i++)
-        {
-            KElement e = v.elementAt(i);
-            vL.addElement(e.getText(0));
-        }
-        return vL;       
-    }    /**
-     * GetRange
-     *
-     * @return Vector of strings in Range
-     */
-    public VString getRange()
-    {
-        return getRangeOfferRange(ElementName.RANGE);
-    }
+	/**
+	 * Set attribute Preferred
+	 * 
+	 * @param String value - the value to set
+	 */
+	public void setPreferred(String value)
+	{
+		setAttribute(AttributeName.PREFERRED, value);
+	}
 
-    /**
-     * SetRange
-     *
-     * @param VString s - the vector of strings to set Range to
-     */
-    public void setRange(VString s)
-    {
-        setRangeOfferRange(ElementName.RANGE,s);
-    }
+	/**
+	 * Get attribute Preferred value
+	 * 
+	 * @return String - the value of attribute Preferred
+	 */
+	public String getPreferred()
+	{
+		return getAttribute(AttributeName.PREFERRED, null, JDFConstants.EMPTYSTRING);
+	}
 
-    /**
-     * addRange
-     *
-     * @param String s - string to append as a new text element
-     */
-    public void addRange(String s)
-    {
-        appendTextElement(ElementName.RANGE, s);
-    }
-    
-    /**
-     * GetRange
-     *
-     * @return Vector of strings in Range
-     */
-    public VString getOfferRange()
-    {
-        return getRangeOfferRange(ElementName.OFFERRANGE);
-    }
+	/**
+	 * GetRange
+	 * 
+	 * @return Vector of strings in Range
+	 */
+	private VString getRangeOfferRange(String elementName)
+	{
+		VString vL = new VString();
+		VElement v = getChildrenByTagName(elementName, null, null, true, true, 0);
+		for (int i = 0; i < v.size(); i++)
+		{
+			KElement e = v.elementAt(i);
+			vL.addElement(e.getText(0));
+		}
+		return vL;
+	}
 
-    /**
-     * SetRange
-     *
-     * @param VString s - the vector of strings to set Range to
-     */
-    private void setRangeOfferRange(String elementName, VString s)
-    {
-        removeChildren(elementName,null, null);
-        final int size = s.size();
-        for (int i=0; i<size; i++)
-        {
-            appendTextElement(elementName,s.stringAt(i));
-        }
-    }
-    /**
-     * SetRange
-     *
-     * @param VString s - the vector of strings to set Range to
-     */
-    public void setOfferRange(VString s)
-    {
-        setRangeOfferRange(ElementName.OFFERRANGE,s);
-    }
+	/**
+	 * GetRange
+	 * 
+	 * @return Vector of strings in Range
+	 */
+	public VString getRange()
+	{
+		return getRangeOfferRange(ElementName.RANGE);
+	}
 
-    /**
-     * addRange
-     *
-     * @param String s - string to append as a new text element
-     */
-    public void addOfferRange(String s)
-    {
-        appendTextElement(ElementName.OFFERRANGE, s);
-    }
-    
-    
-    @Override
+	/**
+	 * SetRange
+	 * 
+	 * @param VString s - the vector of strings to set Range to
+	 */
+	public void setRange(VString s)
+	{
+		setRangeOfferRange(ElementName.RANGE, s);
+	}
+
+	/**
+	 * addRange
+	 * 
+	 * @param String s - string to append as a new text element
+	 */
+	public void addRange(String s)
+	{
+		appendTextElement(ElementName.RANGE, s);
+	}
+
+	/**
+	 * GetRange
+	 * 
+	 * @return Vector of strings in Range
+	 */
+	public VString getOfferRange()
+	{
+		return getRangeOfferRange(ElementName.OFFERRANGE);
+	}
+
+	/**
+	 * SetRange
+	 * 
+	 * @param VString s - the vector of strings to set Range to
+	 */
+	private void setRangeOfferRange(String elementName, VString s)
+	{
+		removeChildren(elementName, null, null);
+		final int size = s.size();
+		for (int i = 0; i < size; i++)
+		{
+			appendTextElement(elementName, s.stringAt(i));
+		}
+	}
+
+	/**
+	 * SetRange
+	 * 
+	 * @param VString s - the vector of strings to set Range to
+	 */
+	public void setOfferRange(VString s)
+	{
+		setRangeOfferRange(ElementName.OFFERRANGE, s);
+	}
+
+	/**
+	 * addRange
+	 * 
+	 * @param String s - string to append as a new text element
+	 */
+	public void addOfferRange(String s)
+	{
+		appendTextElement(ElementName.OFFERRANGE, s);
+	}
+
+	@Override
 	public boolean init()
-    {
-        boolean b = super.init();
-        setDataType(EnumDataType.StringSpan);
-        return b;
-    }
+	{
+		boolean b = super.init();
+		setDataType(EnumDataType.StringSpan);
+		return b;
+	}
 }

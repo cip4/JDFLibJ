@@ -81,121 +81,129 @@ import org.cip4.jdflib.core.JDFElement.EnumVersion;
 
 /**
  * @author funkevol
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * 
+ *         TODO To change the template for this generated type comment go to Window - Preferences - Java - Code Style -
+ *         Code Templates
  */
-public class JDFVersions {
-    
-    
-    private static boolean forceVersion = false; // if true,  force all checks to defaultversion
-    private static JDFVersion[] jdfVersions = new JDFVersion[6];
-       
-    static
-    {
-        jdfVersions[0] = new JDFVersion(EnumVersion.Version_1_0, 0x0000000FL, 0L);
-        jdfVersions[1] = new JDFVersion(EnumVersion.Version_1_1, 0x000000F0L, 4L);
-        jdfVersions[2] = new JDFVersion(EnumVersion.Version_1_2, 0x00000F00L, 8L);
-        jdfVersions[3] = new JDFVersion(EnumVersion.Version_1_3, 0x0000F000L, 12L);
-        jdfVersions[4] = new JDFVersion(EnumVersion.Version_1_4, 0x000F0000L, 16L);
-        jdfVersions[5] = new JDFVersion(EnumVersion.Version_1_5, 0x00F00000L, 20L);
-    }	
-        
-    /**
-     * Returns the default JDF version.
-     * @deprecated use JDFElement.getDefaultJDFVersion()
-     * @return String: JDF version string
-     */
-    public static int getDefaultVersion()
-    {
-        return JDFElement.getDefaultJDFVersion().getValue()-1;
-    }
-    /**
-     * Sets the default JDF version.
-     * @deprecated use JDFElement.setDefaultJDFVersion(v);
-     * @return String: JDF version string
-     */
-    public static void setDefaultVersion(EnumVersion v)
-    {
-        JDFElement.setDefaultJDFVersion(v);
-    }
-    
-    /**
-     * Returns the JDF version that all checks are forced to.
-     *
-     * @return String: JDF version string
-     */
-    public static boolean getForceVersion()
-    {
-        return forceVersion;
-    }
-    
-    /**
-     * sets the JDF version that all checks are forced to.
-     *
-     * @param b 
-     * @return String: JDF version string
-     */
-    public static void setForceVersion(boolean b)
-    {
-        forceVersion=b;
-    }
-    
-    /**
-     * getTheMask
-     * @param v the version to look for
-     * @return Returns the bit mask for isolating the appropriate
-     * validity bits.
-     */
-    public static long getTheMask(EnumVersion v) 
-    {
-        return jdfVersions[getIndexFromVersion(v)].validityMask;
-    }
-    
-    /**
-     * getTheOffset
-     * @param v
-     * @return Returns the theOffset.
-     */
-    public static long getTheOffset(EnumVersion v) 
-    {
-        return jdfVersions[getIndexFromVersion(v)].validityOffset;
-    }
-    
-    /**
-     * getIndexFromVersion
-     * @param v
-     * @return
-     */
-    private static int getIndexFromVersion(EnumVersion v){
-        int i=v.getValue();
-        if(forceVersion || (i<=0) || (i>jdfVersions.length))
-            i=JDFElement.getDefaultJDFVersion().getValue();
-        
-        i--; // must be removed if unknown is removed 
-        return i;
-    }
-    
-    private static class JDFVersion
-    {
-        public EnumVersion version;
-        public long   validityMask;
-        public long   validityOffset;
-        
-        protected JDFVersion(EnumVersion v, long m, long o)
-        {
-            version        = v;
-            validityMask   = m;
-            validityOffset = o;
-        }
-        public String toString(){
-            String s="Version: "+version.getName();
-            s+="; ValidityMask: "+Long.toHexString(validityMask);
-            s+="; ValidityOffset: "+validityOffset;
-            
-            return s;
-        }   
-    }
-    
-    
+public class JDFVersions
+{
+
+	private static boolean forceVersion = false; // if true, force all checks to
+	// defaultversion
+	private static JDFVersion[] jdfVersions = new JDFVersion[6];
+
+	static
+	{
+		jdfVersions[0] = new JDFVersion(EnumVersion.Version_1_0, 0x0000000FL, 0L);
+		jdfVersions[1] = new JDFVersion(EnumVersion.Version_1_1, 0x000000F0L, 4L);
+		jdfVersions[2] = new JDFVersion(EnumVersion.Version_1_2, 0x00000F00L, 8L);
+		jdfVersions[3] = new JDFVersion(EnumVersion.Version_1_3, 0x0000F000L, 12L);
+		jdfVersions[4] = new JDFVersion(EnumVersion.Version_1_4, 0x000F0000L, 16L);
+		jdfVersions[5] = new JDFVersion(EnumVersion.Version_1_5, 0x00F00000L, 20L);
+	}
+
+	/**
+	 * Returns the default JDF version.
+	 * 
+	 * @deprecated use JDFElement.getDefaultJDFVersion()
+	 * @return String: JDF version string
+	 */
+	public static int getDefaultVersion()
+	{
+		return JDFElement.getDefaultJDFVersion().getValue() - 1;
+	}
+
+	/**
+	 * Sets the default JDF version.
+	 * 
+	 * @deprecated use JDFElement.setDefaultJDFVersion(v);
+	 * @return String: JDF version string
+	 */
+	public static void setDefaultVersion(EnumVersion v)
+	{
+		JDFElement.setDefaultJDFVersion(v);
+	}
+
+	/**
+	 * Returns the JDF version that all checks are forced to.
+	 * 
+	 * @return String: JDF version string
+	 */
+	public static boolean getForceVersion()
+	{
+		return forceVersion;
+	}
+
+	/**
+	 * sets the JDF version that all checks are forced to.
+	 * 
+	 * @param b
+	 * @return String: JDF version string
+	 */
+	public static void setForceVersion(boolean b)
+	{
+		forceVersion = b;
+	}
+
+	/**
+	 * getTheMask
+	 * 
+	 * @param v the version to look for
+	 * @return Returns the bit mask for isolating the appropriate validity bits.
+	 */
+	public static long getTheMask(EnumVersion v)
+	{
+		return jdfVersions[getIndexFromVersion(v)].validityMask;
+	}
+
+	/**
+	 * getTheOffset
+	 * 
+	 * @param v
+	 * @return Returns the theOffset.
+	 */
+	public static long getTheOffset(EnumVersion v)
+	{
+		return jdfVersions[getIndexFromVersion(v)].validityOffset;
+	}
+
+	/**
+	 * getIndexFromVersion
+	 * 
+	 * @param v
+	 * @return
+	 */
+	private static int getIndexFromVersion(EnumVersion v)
+	{
+		int i = v.getValue();
+		if (forceVersion || (i <= 0) || (i > jdfVersions.length))
+			i = JDFElement.getDefaultJDFVersion().getValue();
+
+		i--; // must be removed if unknown is removed
+		return i;
+	}
+
+	private static class JDFVersion
+	{
+		public EnumVersion version;
+		public long validityMask;
+		public long validityOffset;
+
+		protected JDFVersion(EnumVersion v, long m, long o)
+		{
+			version = v;
+			validityMask = m;
+			validityOffset = o;
+		}
+
+		public String toString()
+		{
+			String s = "Version: " + version.getName();
+			s += "; ValidityMask: " + Long.toHexString(validityMask);
+			s += "; ValidityOffset: " + validityOffset;
+
+			return s;
+		}
+	}
+
 }

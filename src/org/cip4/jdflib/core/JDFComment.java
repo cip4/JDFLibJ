@@ -81,136 +81,130 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoComment;
 
 /**
- * this is the class for all text elements, obviously including <Comment>
- * but also others, e.g ExtendedAddress
+ * this is the class for all text elements, obviously including <Comment> but also others, e.g ExtendedAddress
  * 
  * @author prosirai
- *
+ * 
  */
 public class JDFComment extends JDFAutoComment
 {
-    private static final long serialVersionUID = 1L;
-    
-    /**
-     * Constructor for JDFComment
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    public JDFComment(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
-    
-    
-    /**
-     * getIDPrefix
-     *
-     * @return the ID prefix of JDFNode
-     */
-    public String getIDPrefix()
-    {
-        return "c";
-    }
-    
-    /**
-     * Constructor for JDFComment
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    public JDFComment(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
-    
-    /**
-     * Constructor for JDFComment
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    public JDFComment(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-    
-    //**************************************** Methods *********************************************
-    /**
-     * toString - StringRepresentation of JDFNode
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFComment[  --> " + super.toString() + " ]";
-    }
-    
-    /**
-     * init this comment by adding agentname, agentversion and id
-     *
-     * @return boolean
-     */
-    public boolean init()
-    {
-        EnumVersion v=getVersion(true);
-        if(v.getValue()>=EnumVersion.Version_1_3.getValue()&&getLocalName().equals(ElementName.COMMENT))
-        {
-            appendAnchor(null);
-            setAgentName(JDFAudit.getStaticAgentName());
-            setAgentVersion(JDFAudit.getStaticAgentVersion());
-        }
-        return super.init();
-    }
-    
-    /**
-     * version fixing routine for JDF
-     *
-     * uses heuristics to modify this element and its children to be compatible with a given version<br>
-     * in general, it will be able to move from low to high versions but potentially fail 
-     * when attempting to move from higher to lower versions
-     *
-     * @param version version that the resulting element should correspond to
-     * @return true if successful
-     */
-    public boolean fixVersion(EnumVersion version)
-    {
-        if(version!=null)
-        {
-            if(version.getValue()>=EnumVersion.Version_1_3.getValue()&&getLocalName().equals(ElementName.COMMENT))
-            {
-                appendAnchor(null);
-            }
-            else
-            {
-                removeAttribute(AttributeName.ID);
-                removeAttribute(AttributeName.AGENTNAME);
-                removeAttribute(AttributeName.AGENTVERSION);
-                removeAttribute(AttributeName.AUTHOR);
-                removeAttribute(AttributeName.TIMESTAMP);
-            }
-        }
-        return super.fixVersion(version);
-    }
-    /**
-     * Erases all empty text nodes in 'this' and its subelements 
-     * If there any empty text nodes removes them.
-     * Does nothing in text nodes so that whitespace in comments, addresses etc. is always preserved
-     *
-     * @param bTrimWhite trims whitespace of text, default = true
-     * @return int       the number of removed nodes  
-     */
-    public int eraseEmptyNodes(boolean bTrimWhite)
-    {
-        return bTrimWhite ? 0 : 0; //NOP to fool compiler. also retain whitespace in comments
-    }    
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Constructor for JDFComment
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	public JDFComment(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
+
+	/**
+	 * getIDPrefix
+	 * 
+	 * @return the ID prefix of JDFNode
+	 */
+	public String getIDPrefix()
+	{
+		return "c";
+	}
+
+	/**
+	 * Constructor for JDFComment
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFComment(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFComment
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	public JDFComment(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString - StringRepresentation of JDFNode
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFComment[  --> " + super.toString() + " ]";
+	}
+
+	/**
+	 * init this comment by adding agentname, agentversion and id
+	 * 
+	 * @return boolean
+	 */
+	public boolean init()
+	{
+		EnumVersion v = getVersion(true);
+		if (v.getValue() >= EnumVersion.Version_1_3.getValue() && getLocalName().equals(ElementName.COMMENT))
+		{
+			appendAnchor(null);
+			setAgentName(JDFAudit.getStaticAgentName());
+			setAgentVersion(JDFAudit.getStaticAgentVersion());
+		}
+		return super.init();
+	}
+
+	/**
+	 * version fixing routine for JDF
+	 * 
+	 * uses heuristics to modify this element and its children to be compatible with a given version<br>
+	 * in general, it will be able to move from low to high versions but potentially fail when attempting to move from
+	 * higher to lower versions
+	 * 
+	 * @param version version that the resulting element should correspond to
+	 * @return true if successful
+	 */
+	public boolean fixVersion(EnumVersion version)
+	{
+		if (version != null)
+		{
+			if (version.getValue() >= EnumVersion.Version_1_3.getValue() && getLocalName().equals(ElementName.COMMENT))
+			{
+				appendAnchor(null);
+			}
+			else
+			{
+				removeAttribute(AttributeName.ID);
+				removeAttribute(AttributeName.AGENTNAME);
+				removeAttribute(AttributeName.AGENTVERSION);
+				removeAttribute(AttributeName.AUTHOR);
+				removeAttribute(AttributeName.TIMESTAMP);
+			}
+		}
+		return super.fixVersion(version);
+	}
+
+	/**
+	 * Erases all empty text nodes in 'this' and its subelements If there any empty text nodes removes them. Does
+	 * nothing in text nodes so that whitespace in comments, addresses etc. is always preserved
+	 * 
+	 * @param bTrimWhite trims whitespace of text, default = true
+	 * @return int the number of removed nodes
+	 */
+	public int eraseEmptyNodes(boolean bTrimWhite)
+	{
+		return bTrimWhite ? 0 : 0; // NOP to fool compiler. also retain
+		// whitespace in comments
+	}
 }

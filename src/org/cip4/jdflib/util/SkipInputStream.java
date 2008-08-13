@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -72,121 +72,81 @@
  *
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
  *
- * JDFBaseDataTypes.java
+ * KString.java
  *
  * Last changes
  *
  */
-package org.cip4.jdflib.datatypes;
+package org.cip4.jdflib.util;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
-import org.cip4.jdflib.core.JDFConstants;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
- * all constants of the JDF library
+ * stream class that allows allows skipping a
+ * 
+ * @author prosirai
+ * 
  */
-public interface JDFBaseDataTypes
+public class SkipInputStream extends BufferedInputStream
 {
-	/**
-	 * max number of Lab color
-	 */
-	public static final int MAX_LAB_COLOR = 3;
 
-	/**
-	 * max number of RGB color
-	 */
-	public static final int MAX_RGB_COLOR = 3;
+	private int searchSize;
+	private boolean ignoreCase = false;
 
-	/**
-	 * max number of CMYK color
-	 */
-	public static final int MAX_CMYK_COLOR = 4;
-
-	/**
-	 * max dimensions of a shape width, height, lenght
-	 */
-	public static final int MAX_SHAPE_DIMENSION = 3;
-
-	/**
-	 * max positions of rectangle coordinates lower left x, lower left y, upper right x, upper right y
-	 */
-	public static final int MAX_RECTANGLE_DIMENSION = 4;
-
-	/**
-	 * max dimensions of a matrix a, b, c, d tx, ty
-	 */
-	public static final int MAX_MATRIX_DIMENSION = 6;
-
-	/**
-	 * max dimensions of a xy pair
-	 */
-	public static final int MAX_XY_DIMENSION = 2;
-
-	/**
-	 * max difference between two double values to be equal
-	 */
-	public static final double EPSILON = 0.000001;
-
-	/**
-	 * Enumeration for FitsValue method, switches between Allowed and Present testlists
-	 */
-	public static class EnumFitsValue extends ValuedEnum
+	public SkipInputStream(String searchTag, InputStream stream2, boolean ignorecase)
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		super(stream2);
+		ignoreCase = ignorecase;
 
-		private EnumFitsValue(String name)
+		searchSize = searchTag == null ? 0 : searchTag.length();
+		if (searchSize == 0)
+			return;
+
+		mark(searchSize + 10);
+		try
 		{
-			super(name, m_startValue++);
+			readToTag(searchTag);
 		}
-
-		/**
-		 * @param enumName the name of the enum object to return
-		 * @return the enum object if enumName is valid. Otherwise null
-		 */
-		public static EnumFitsValue getEnum(String enumName)
+		catch (IOException x)
 		{
-			return (EnumFitsValue) getEnum(EnumFitsValue.class, enumName);
+			// nop
 		}
-
-		/**
-		 * @param enumValue the value of the enum object to return
-		 * @return the enum object if enumName is valid. Otherwise null
-		 */
-		public static EnumFitsValue getEnum(int enumValue)
-		{
-			return (EnumFitsValue) getEnum(EnumFitsValue.class, enumValue);
-		}
-
-		/**
-		 * @return a map of all orientation enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumFitsValue.class);
-		}
-
-		/**
-		 * @return a list of all orientation enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumFitsValue.class);
-		}
-
-		/**
-		 * @return an iterator over the enum objects
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumFitsValue.class);
-		}
-
-		public static final EnumFitsValue Present = new EnumFitsValue(JDFConstants.FITSVALUE_PRESENT);
-		public static final EnumFitsValue Allowed = new EnumFitsValue(JDFConstants.FITSVALUE_ALLOWED);
 	}
+
+	/**
+	 * @throws IOException
+	 * 
+	 */
+	private void readToTag(String searchTag) throws IOException
+	{
+		if (searchTag == null)
+			return;
+		byte[] bytes = searchTag.getBytes();
+		byte[] lowerBytes = searchTag.toLowerCase().getBytes();
+		int tagPos = 0;
+		while (true)
+		{
+			if (tagPos == 0)
+				mark(searchSize + 10);
+			int c = read();
+			if (c == -1)
+				break;
+			if (c == bytes[tagPos] || ignoreCase && Character.toLowerCase(c) == lowerBytes[tagPos])
+			{
+				tagPos++;
+				if (tagPos >= searchSize) // heureka
+				{
+					reset();
+					return;
+				}
+			}
+			else
+			{
+				tagPos = 0;
+			}
+		}
+	}
+
 }

@@ -67,19 +67,15 @@
  *
  */
 /**
-==========================================================================
-class JDFStopPersChParams extends JDFResource
-==========================================================================
-@COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001
-ALL RIGHTS RESERVED
-@Author: sabjon@topmail.de   using a code generator
-Warning! very preliminary test version. Interface subject to change without prior notice!
-Revision history:    ...
-**/
-
-
-
-
+ ==========================================================================
+ class JDFStopPersChParams extends JDFResource
+ ==========================================================================
+ @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001
+ ALL RIGHTS RESERVED
+ @Author: sabjon@topmail.de   using a code generator
+ Warning! very preliminary test version. Interface subject to change without prior notice!
+ Revision history:    ...
+ **/
 
 package org.cip4.jdflib.jmf;
 
@@ -88,109 +84,103 @@ import org.cip4.jdflib.auto.JDFAutoStopPersChParams;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 
-
-
 //----------------------------------
-    public class JDFStopPersChParams extends JDFAutoStopPersChParams
+public class JDFStopPersChParams extends JDFAutoStopPersChParams
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFStopPersChParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    public JDFStopPersChParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFStopPersChParams
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	public JDFStopPersChParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFStopPersChParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    public JDFStopPersChParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFStopPersChParams
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFStopPersChParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    public JDFStopPersChParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	public JDFStopPersChParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * toString()
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFStopPersChParams[  --> " + super.toString() + " ]";
-    }
-    
-    /**
-    * get part map vector
-    * @return VJDFAttributeMap: vector of attribute maps, one for each part
-    */
-   public VJDFAttributeMap getPartMapVector()
-   {
-       return super.getPartMapVector();
-   }
+	/**
+	 * toString()
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFStopPersChParams[  --> " + super.toString() + " ]";
+	}
 
-   /**
-    * set all parts to those defined in vParts
-    * @param vParts vector of attribute maps for the parts
-    */
-   public void setPartMapVector(VJDFAttributeMap vParts)
-   {
-       super.setPartMapVector(vParts);
-   }
+	/**
+	 * get part map vector
+	 * 
+	 * @return VJDFAttributeMap: vector of attribute maps, one for each part
+	 */
+	public VJDFAttributeMap getPartMapVector()
+	{
+		return super.getPartMapVector();
+	}
 
-   /**
-    * set all parts to those defined by mPart
-    * @param mPart attribute map for the part to set
-    */
-   public void setPartMap(JDFAttributeMap mPart)
-   {
-       super.setPartMap(mPart);
-   }
+	/**
+	 * set all parts to those defined in vParts
+	 * 
+	 * @param vParts vector of attribute maps for the parts
+	 */
+	public void setPartMapVector(VJDFAttributeMap vParts)
+	{
+		super.setPartMapVector(vParts);
+	}
 
-   /**
-    * remove the part defined by mPart
-    * @param mPart attribute map for the part to remove
-    */
-   public void removePartMap(JDFAttributeMap mPart)
-   {
-       super.removePartMap(mPart);
-   }
+	/**
+	 * set all parts to those defined by mPart
+	 * 
+	 * @param mPart attribute map for the part to set
+	 */
+	public void setPartMap(JDFAttributeMap mPart)
+	{
+		super.setPartMap(mPart);
+	}
 
-   /**
-    * check whether the part defined in mPart is included
-    * @param mPart attribute map to look for
-    * @return boolean - returns true if the part exists
-    */
-   public boolean hasPartMap(JDFAttributeMap mPart)
-   {
-       return super.hasPartMap(mPart);
-   }
+	/**
+	 * remove the part defined by mPart
+	 * 
+	 * @param mPart attribute map for the part to remove
+	 */
+	public void removePartMap(JDFAttributeMap mPart)
+	{
+		super.removePartMap(mPart);
+	}
+
+	/**
+	 * check whether the part defined in mPart is included
+	 * 
+	 * @param mPart attribute map to look for
+	 * @return boolean - returns true if the part exists
+	 */
+	public boolean hasPartMap(JDFAttributeMap mPart)
+	{
+		return super.hasPartMap(mPart);
+	}
 }
-
-
-

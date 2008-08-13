@@ -72,21 +72,20 @@ package org.cip4.jdflib.util;
 
 import java.io.File;
 
-
 /**
  * a hotfolder watcher Listener callback
+ * 
  * @author prosirai
- *
+ * 
  */
 public interface HotFolderListener
 {
 
-    /**
-     * this interface function is called whenever a new or modified file has stabilized
-     * in the hotFolder
-     * 
-     * @param hotFile the File that has appeared in the hot folder
-     */
-    public void hotFile(File hotFile);
+	/**
+	 * this interface function is called whenever a new or modified file has stabilized in the hotFolder
+	 * 
+	 * @param hotFile the File that has appeared in the hot folder
+	 */
+	public void hotFile(File hotFile);
 
 }

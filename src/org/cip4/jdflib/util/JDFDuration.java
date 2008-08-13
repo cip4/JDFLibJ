@@ -82,483 +82,484 @@
 
 package org.cip4.jdflib.util;
 
-
 import java.util.zip.DataFormatException;
-
 
 public class JDFDuration implements Comparable<JDFDuration>
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private double m_lDuration                     = 0;                            // in seconds
+	private double m_lDuration = 0; // in seconds
 
-    // private static final String REGEX_DURATION_RESTRICTED is a RegularExpression
-    // for a validation of incoming duration Strings, where is important that 
-    // values of seconds, minutes do not exceed 59, hours do not exceed 23...
-    // It's a restricted form of a REGEX_DURATION 
-    //
-    // Formatted string looks like "PyYmMdDThHmMsS"
-    //
-    // date Part "yYmMdD"
-    // year  (0?[0-9]|[1-9][0-9])               --  0(00) - 99 are valid years
-    // month (0?[0-9]|1[01])                    --  0(00) - 11 are valid months 
-    // day   (0?[0-9]|[12][0-9]|3[0])           --  0(00) - 30 are valid days
-    // 
-    // time Part "hHmMsS"
-    // hour  (0?[0-9]|1[0-9]|2[0123]|)          --  0(00) - 23 are valid hours
-    // min   (0?[0-9]|[1-5][0-9])               --  0(00) - 59 are valid seconds
-    // sec   (0?[0-9]|[1-5][0-9])               --  0(00) - 59 are valid minutes
-    //regual expressions to validate incoming duration Strings
+	// private static final String REGEX_DURATION_RESTRICTED is a
+	// RegularExpression
+	// for a validation of incoming duration Strings, where is important that
+	// values of seconds, minutes do not exceed 59, hours do not exceed 23...
+	// It's a restricted form of a REGEX_DURATION
+	//
+	// Formatted string looks like "PyYmMdDThHmMsS"
+	//
+	// date Part "yYmMdD"
+	// year (0?[0-9]|[1-9][0-9]) -- 0(00) - 99 are valid years
+	// month (0?[0-9]|1[01]) -- 0(00) - 11 are valid months
+	// day (0?[0-9]|[12][0-9]|3[0]) -- 0(00) - 30 are valid days
+	// 
+	// time Part "hHmMsS"
+	// hour (0?[0-9]|1[0-9]|2[0123]|) -- 0(00) - 23 are valid hours
+	// min (0?[0-9]|[1-5][0-9]) -- 0(00) - 59 are valid seconds
+	// sec (0?[0-9]|[1-5][0-9]) -- 0(00) - 59 are valid minutes
+	// regual expressions to validate incoming duration Strings
 
+	// private static final String REGEX_DURATION_RESTRICTED =
+	// "[P]((0?[0-9]|[1-9][0-9])[Y])?((0?[0-9]|1[01])[M])?((0?[0-9]|[12][0-9]|3[0])[D])?"
+	// +
+	// "([T]((0?[0-9]|1[0-9]|2[0123])[H])?((0?[0-9]|[1-5][0-9])[M])?((0?[0-9]|[1-5][0-9])[S])?)?"
+	// ;
 
-    //private static final String REGEX_DURATION_RESTRICTED = "[P]((0?[0-9]|[1-9][0-9])[Y])?((0?[0-9]|1[01])[M])?((0?[0-9]|[12][0-9]|3[0])[D])?" +
-    //                                             "([T]((0?[0-9]|1[0-9]|2[0123])[H])?((0?[0-9]|[1-5][0-9])[M])?((0?[0-9]|[1-5][0-9])[S])?)?";
+	// private static final String REGEX_DURATION is a RegularExpression
+	// for a validation of incoming duration Strings
+	// Formatted string looks like "PyYmMdDThHmMsS"
+	// y,m,d,h,m,s are any int values.
+	// E.g. expressions "P60D" that is equal 60 days or "PT68H" that is equal
+	// 68hours are allowed
 
+	private static final String REGEX_DURATION = "([-])?[P](((\\d)+)[Y])?((\\d)+[M])?((\\d)+[D])?"
+			+ "([T]((\\d)+[H])?((\\d)+[M])?((\\d)+([.](\\d)+)?[S])?)?";
 
-    // private static final String REGEX_DURATION is a RegularExpression
-    // for a validation of incoming duration Strings
-    // Formatted string looks like "PyYmMdDThHmMsS"
-    // y,m,d,h,m,s are any int values. 
-    // E.g. expressions "P60D" that is equal 60 days or "PT68H" that is equal 68hours are allowed
+	/**
+	 * Allocates a <code>JDFDuration</code> object and initializes it with 0
+	 */
+	public JDFDuration()
+	{
+		m_lDuration = 0;
+	}
 
+	/**
+	 * Makes a copy of the<code>JDFDuration</code> object 'd'
+	 */
+	public JDFDuration(JDFDuration d)
+	{
+		m_lDuration = d.m_lDuration;
+	}
 
-    private static final String REGEX_DURATION = "([-])?[P](((\\d)+)[Y])?((\\d)+[M])?((\\d)+[D])?" +
-    "([T]((\\d)+[H])?((\\d)+[M])?((\\d)+([.](\\d)+)?[S])?)?";
+	/**
+	 * creates a duration from two dates; may be negative if start later end
+	 * 
+	 * @param start the starting point
+	 * @param end the end point
+	 * 
+	 */
+	public JDFDuration(JDFDate start, JDFDate end)
+	{
+		if (start == null || end == null)
+			return;
+		m_lDuration = (end.getTimeInMillis() - start.getTimeInMillis()) / 1000.;
+	}
 
+	/**
+	 * Allocates a <code>JDFDuration</code> object and initializes it with 's'
+	 * 
+	 * @param s duration in seconds s may be fractional
+	 */
+	public JDFDuration(double s)
+	{
+		m_lDuration = s;
+	}
 
-    /**
-     * Allocates a <code>JDFDuration</code> object and initializes it with 0
-     */
-    public JDFDuration()
-    {
-        m_lDuration = 0;
-    }
+	/**
+	 * Allocates a <code>JDFDuration</code> object and initializes it with 's'
+	 * 
+	 * @param s duration in seconds s may be fractional
+	 */
+	public JDFDuration(int s)
+	{
+		m_lDuration = s;
+	}
 
-    /**
-     * Makes a copy of the<code>JDFDuration</code> object 'd'
-     */
-    public JDFDuration(JDFDuration d)
-    {
-        m_lDuration = d.m_lDuration;
-    }
-    
-    /**
-     * creates a duration from two dates; may be negative if start later end
-     * 
-     * @param start the starting point
-     * @param end the end point
-     *
-     */
-    public JDFDuration(JDFDate start, JDFDate end)
-    {
-        if(start==null || end==null)
-            return;
-        m_lDuration =(end.getTimeInMillis()-start.getTimeInMillis())/1000.;
-    }
+	/**
+	 * Allocates a <code>JDFDuration</code> object and initializes it with a value of <code>strDuration</code>,
+	 * represented as a formatted duration string. <br>
+	 * Duration examples: <li>"P1Y2M3DT10H30M"</li> <li>"P8MT12M"</li> Durations with overflows, e.g. P13M (13 Months)
+	 * are also handled and correctly output, in this case P1Y1M
+	 * 
+	 * @param strDuration - formatted duration
+	 * @throws DataFormatException if strDuration is not a valid string representation of JDFDuration
+	 */
+	public JDFDuration(String strDuration) throws DataFormatException
+	{
+		init(strDuration);
+	}
 
-    /**
-     * Allocates a <code>JDFDuration</code> object and initializes it with 's'
-     * @param s duration in seconds
-     * s may be fractional
-     */
-    public JDFDuration(double s)
-    {
-        m_lDuration = s;
-    }
-    /**
-     * Allocates a <code>JDFDuration</code> object and initializes it with 's'
-     * @param s duration in seconds
-     * s may be fractional
-     */
-    public JDFDuration(int s)
-    {
-        m_lDuration = s;
-    }
+	/**
+	 * add seconds to a duration
+	 * 
+	 * @param seconds number of seconds to add
+	 */
+	public double addSeconds(double seconds)
+	{
+		m_lDuration += seconds;
+		return m_lDuration;
+	}
 
-    /**
-     * Allocates a <code>JDFDuration</code> object and initializes it with a
-     * value of <code>strDuration</code>, represented as a formatted duration string. <br>
-     * Duration examples: 
-     * <li>"P1Y2M3DT10H30M"</li>
-     * <li>"P8MT12M"</li>
-     * Durations with overflows, e.g. P13M (13 Months) are also handled and correctly output, in this case P1Y1M
-     *
-     * @param strDuration - formatted duration
-     * @throws DataFormatException if strDuration is not a valid string 
-     * representation of JDFDuration
-     */
-    public JDFDuration(String strDuration) throws DataFormatException
-    {
-        init(strDuration);
-    }
+	/**
+	 * for debug purposes
+	 * 
+	 * @return Object informations
+	 */
+	public String toString()
+	{
+		return "JDFDuration[ m_lDuration=(" + m_lDuration + ")  --> " + super.toString() + " ]";
+	}
 
-    /**
-     * add seconds to a duration
-     * @param seconds number of seconds to add
-     */   
-    public double addSeconds(double seconds)
-    {
-        m_lDuration+=seconds;
-        return m_lDuration;
-    }
+	/**
+	 * Method init handles Strings of type: <br>
+	 * <li>"P1Y2M3DT10H30M"</li> <li>"PM8T12M"</li> <li>"PT30M"</li> <li>
+	 * "PT30M40S"</li> <li>"PT30M40.3333S"</li>
+	 * 
+	 * @param strDuration
+	 * @throws DataFormatException
+	 */
+	private void init(String strDuration) throws DataFormatException
+	{
+		strDuration = StringUtil.zappTokenWS(strDuration, " ");
 
-    /** for debug purposes
-     * 
-     * @return  Object informations
-     */
-    public String toString()
-    {
-        return "JDFDuration[ m_lDuration=(" + m_lDuration + ")  --> " + super.toString() + " ]";
-    }
+		boolean bComplete = strDuration.matches(REGEX_DURATION);
+		m_lDuration = 0;
 
+		if (bComplete)
+		{
+			bComplete = setDurationISO(strDuration);
+		}
+		if (!bComplete)
+		{
+			// its not a DateTime nor a Duration
+			throw new DataFormatException("JDFDuration.init: invalid duration String " + strDuration);
+		}
+	}
 
-    /**
-     * Method init handles Strings of type: <br>
-     * <li>"P1Y2M3DT10H30M"</li>
-     * <li>"PM8T12M"</li>
-     * <li>"PT30M"</li>
-     * <li>"PT30M40S"</li>
-     * <li>"PT30M40.3333S"</li>
-     * 
-     * @param strDuration 
-     * @throws DataFormatException
-     */
-    private void init(String strDuration) throws DataFormatException
-    {
-        strDuration=StringUtil.zappTokenWS(strDuration, " ");
+	/**
+	 * Format and return the duration set by 'setDuration(int i)' or 'setDurationString(String a_aDuration)' as an ISO
+	 * conforming String.<br>
+	 * For example: 'P1Y2M3DT10H30M'
+	 * 
+	 * @return String - the duration formatted as an ISO 8601 conforming String if duration is '0' return value is
+	 *         'PT00M'
+	 */
+	public String getDurationISO()
+	{
+		if (m_lDuration == 0)
+			return "PT00M";
 
-        boolean bComplete      = strDuration.matches(REGEX_DURATION);
-        m_lDuration            = 0;
+		int temp = Math.abs((int) m_lDuration);
+		double abs = Math.abs(m_lDuration);
+		StringBuffer iso = new StringBuffer(32);
+		if (m_lDuration < 0)
+			iso.append("-");
+		iso.append("P"); // P is the indicator that 'iso' is a duration
 
-        if (bComplete)
-        {
-            bComplete=setDurationISO(strDuration);
-        }
-        if(!bComplete)
-        {
-            //its not a DateTime nor a Duration
-            throw new DataFormatException("JDFDuration.init: invalid duration String " +  strDuration);
-        }
-    }
+		int i = (int) abs / (60 * 60 * 24 * 365);
+		if (i != 0)
+		{
+			iso.append(i).append("Y"); // string with years
+			temp = (int) abs - (i * 60 * 60 * 24 * 365);
+		}
+		i = temp;
+		i = i / (60 * 60 * 24 * 30);
+		if (i != 0)
+		{
+			iso.append(i).append("M"); // string with months
+			temp = temp - (i * 60 * 60 * 24 * 30);
+		}
+		i = temp % (60 * 60 * 24 * 30);
+		i = i / (60 * 60 * 24);
+		if (i != 0)
+		{
+			iso.append(i).append("D"); // string with days
+		}
+		iso.append("T");
 
+		i = (int) abs % (60 * 60 * 24);
+		i = i / (60 * 60);
+		if (i != 0)
+		{
+			iso.append(i).append("H"); // string with hours
+		}
+		i = (int) abs % (60 * 60);
+		i = i / (60);
+		if (i != 0)
+		{
+			iso.append(i).append("M"); // string with minutes
+		}
+		i = (int) abs % (60);
+		boolean bSec = false;
+		if (i != 0)
+		{
+			iso.append(i); // string with seconds
+			bSec = true;
+		}
+		double deltaS = abs - ((int) (abs));
+		if (deltaS > 0)
+		{
 
-    /**
-     * Format and return the duration set by 'setDuration(int i)' or
-     * 'setDurationString(String a_aDuration)' as an ISO conforming String.<br>
-     * For example: 'P1Y2M3DT10H30M'
-     * 
-     * @return String - the duration formatted as an ISO 8601 conforming String
-     *                  if duration is '0' return value is 'PT00M'
-     */
-    public String getDurationISO()
-    {
-        if (m_lDuration == 0)
-            return "PT00M";
+			String s = StringUtil.formatDouble(deltaS);
+			if (!bSec)
+				iso.append("0"); // add missing 0
+			iso.append(s.substring(1));
+			bSec = true;
+		}
+		if (bSec)
+			iso.append("S");
 
-        int temp = Math.abs((int)m_lDuration);
-        double abs = Math.abs(m_lDuration);
-        StringBuffer iso = new StringBuffer(32);
-        if(m_lDuration<0)
-            iso.append("-");
-        iso.append("P"); //P is the indicator that 'iso' is a duration
+		int lastIndex = iso.length() - 1;
+		if (iso.charAt(lastIndex) == 'T')
+			iso.deleteCharAt(lastIndex);
 
-        int i = (int)abs/(60*60*24*365);
-        if(i!=0) 
-        {
-            iso.append(i).append("Y"); // string with years
-            temp = (int)abs - (i*60*60*24*365);
-        }
-        i = temp;
-        i = i/(60*60*24*30);
-        if(i!=0) 
-        {
-            iso.append(i).append("M"); // string with months
-            temp = temp -(i*60*60*24*30);
-        }
-        i = temp%(60*60*24*30);
-        i = i/(60*60*24);
-        if(i!=0) 
-        {
-            iso.append(i).append("D"); // string with days
-        }
-        iso.append("T");
+		return iso.toString();
+	}
 
-        i=(int)abs%(60*60*24);
-        i=i/(60*60);
-        if(i!=0) 
-        {
-            iso.append(i).append("H"); // string with hours
-        }
-        i = (int)abs%(60*60);
-        i = i/(60);
-        if(i!=0) 
-        {
-            iso.append(i).append("M"); // string with minutes
-        }
-        i = (int)abs%(60); 
-        boolean bSec=false;
-        if(i!=0) 
-        {
-            iso.append(i); // string with seconds
-            bSec=true;
-        }
-        double deltaS = abs-((int)(abs));
-        if(deltaS>0)
-        {
+	/**
+	 * Set a duration. Durations are not bound to time or date and can be set independently
+	 * 
+	 * @return true - the duration was set<br>
+	 *         false - the duration was not set, because a NumberFormatException was thrown (-> parseInt())
+	 * 
+	 * @param a_aDuration formatted duration string 'P1Y2M3DT10H30M'
+	 */
+	public boolean setDurationISO(String a_aDuration)
+	{
+		boolean result = true;
 
-            String s=StringUtil.formatDouble(deltaS);
-            if(!bSec)
-                iso.append("0"); // add missing 0 
-            iso.append(s.substring(1));
-            bSec=true;
-        }
-        if(bSec)
-            iso.append("S");
+		String strDate = null;
+		String strTime = null;
+		int iYears = 0;
+		int iMonths = 0;
+		int iDays = 0;
+		int iHours = 0;
+		int iMinutes = 0;
+		int iSeconds = 0;
+		int iduration = 0;
+		int iTimeLastPos = 0;
+		int iDateLastPos = 0;
+		int factor = 1; // the factor for negative durations
 
-        int lastIndex=iso.length()-1;
-        if (iso.charAt(lastIndex)=='T')
-            iso.deleteCharAt(lastIndex);
+		int iPPos = a_aDuration.indexOf("P");
+		if (iPPos > 0) // check for negative duration
+		{
+			char c = a_aDuration.charAt(iPPos - 1);
+			if (c == '-')
+				factor = -1;
+		}
 
-        return iso.toString();
-    }
+		String strPeriod = a_aDuration.substring(++iPPos, a_aDuration.length());
 
+		// devide periodInstant into date and time part, which are separated by
+		// 'T'
+		int iTPos = strPeriod.indexOf("T");
 
-    /**
-     * Set a duration. Durations are not bound to time or date and can be set independently
-     * 
-     * @return true  - the duration was set<br>
-     *         false - the duration was not set, because a NumberFormatException was thrown (-> parseInt())
-     *  
-     * @param a_aDuration formatted duration string 'P1Y2M3DT10H30M' 
-     */
-    public boolean setDurationISO(String a_aDuration)
-    {
-        boolean result      = true;
+		if (iTPos >= 0)
+		{
+			if (iTPos == 0)
+			{ // e.g. if durationInstant looks like "PT10H30M" - without date
+				// part
+				strTime = strPeriod.substring(1, strPeriod.length());
+			}
+			else
+			{ // e.g. if durationInstant looks like "P1Y2M3DT10H30M"
+				strDate = strPeriod.substring(0, iTPos);
+				strTime = strPeriod.substring(++iTPos, strPeriod.length());
+			}
+		}
+		else
+		{ // e.g. if durationInstant looks like "P1Y2M3D" - without time part
+			strDate = strPeriod;
+		}
+		double fracSecs = 0;
+		try
+		{
+			if (strDate != null)
+			{
+				int iYPos = strDate.indexOf("Y");
+				if (iYPos > 0)
+				{
+					iYears = Integer.parseInt(strDate.substring(0, iYPos));
+					iduration += iYears * 365 * 24 * 60 * 60;
+					iDateLastPos = ++iYPos;
+				}
 
-        String strDate      = null;
-        String strTime      = null;
-        int iYears          = 0;
-        int iMonths         = 0;
-        int iDays           = 0;
-        int iHours          = 0;
-        int iMinutes        = 0;
-        int iSeconds        = 0;
-        int iduration       = 0;
-        int iTimeLastPos    = 0;
-        int iDateLastPos    = 0;
-        int factor          = 1; // the factor for negative durations
+				int iMPos = strDate.indexOf("M");
+				if (iMPos > 0)
+				{
+					iMonths = Integer.parseInt(strDate.substring(iDateLastPos, iMPos));
+					int nYears = iMonths / 12;
+					iduration += (iMonths * 30 + nYears * 5) * 24 * 60 * 60; // add
+					// 5
+					// days
+					// for
+					// each
+					// complete
+					// year
+					// (
+					// 360
+					// --
+					// >
+					// 365
+					// )
+					iDateLastPos = ++iMPos;
+				}
 
-        int iPPos = a_aDuration.indexOf("P");
-        if(iPPos>0) // check for negative duration
-        {
-            char c=a_aDuration.charAt(iPPos-1);
-            if(c=='-')
-                factor=-1;            
-        }
+				int iDPos = strDate.indexOf("D");
+				if (iDPos > 0)
+				{
+					iDays = Integer.parseInt(strDate.substring(iDateLastPos, iDPos));
+					iduration += iDays * 24 * 60 * 60;
+				}
+			}
 
-        String strPeriod = a_aDuration.substring(++iPPos, a_aDuration.length());
+			if (strTime != null)
+			{
+				int iHPos = strTime.indexOf("H");
+				if (iHPos > 0)
+				{
+					iHours = Integer.parseInt(strTime.substring(0, iHPos));
+					iduration += iHours * 60 * 60;
+					iTimeLastPos = ++iHPos;
+				}
+				int iMPos = strTime.indexOf("M");
+				if (iMPos > 0)
+				{
+					iMinutes = Integer.parseInt(strTime.substring(iTimeLastPos, iMPos));
+					iduration += iMinutes * 60;
+					iTimeLastPos = ++iMPos;
+				}
 
-        // devide periodInstant into date and time part, which are separated by 'T'
-        int iTPos = strPeriod.indexOf("T");
+				int iSPos = strTime.indexOf("S");
+				if (iSPos > 0)
+				{
+					int iDotPos = strTime.indexOf(".");
+					if (iDotPos > 0)
+					{
+						iSeconds = Integer.parseInt(strTime.substring(iTimeLastPos, iDotPos));
+						iDotPos++;
+						int mLen = iSPos - iDotPos;
+						if (mLen > 0)
+						{
+							String sMilli = "0." + strTime.substring(iDotPos, iSPos);
+							fracSecs = Double.parseDouble(sMilli);
+						}
+						iduration += iSeconds;
 
-        if (iTPos >= 0) 
-        {
-            if (iTPos == 0) 
-            { // e.g. if durationInstant looks like "PT10H30M" - without date part
-                strTime = strPeriod.substring(1, strPeriod.length());
-            } 
-            else 
-            { // e.g. if durationInstant looks like "P1Y2M3DT10H30M"
-                strDate = strPeriod.substring(0, iTPos);
-                strTime = strPeriod.substring(++iTPos, strPeriod.length());
-            }
-        }
-        else 
-        { // e.g. if durationInstant looks like "P1Y2M3D" - without time part
-            strDate = strPeriod;
-        }
-        double fracSecs=0;
-        try
-        {
-            if (strDate!=null)
-            {
-                int iYPos = strDate.indexOf("Y");
-                if (iYPos > 0)
-                {
-                    iYears = Integer.parseInt(strDate.substring(0, iYPos));
-                    iduration += iYears * 365 * 24 * 60 * 60;
-                    iDateLastPos = ++iYPos;
-                }
+					}
+					else
+					{
+						iSeconds = Integer.parseInt(strTime.substring(iTimeLastPos, iSPos));
+						iduration += iSeconds;
+					}
+				}
+			}
 
-                int iMPos = strDate.indexOf("M");
-                if (iMPos > 0)
-                {
-                    iMonths = Integer.parseInt(strDate.substring(iDateLastPos, iMPos));
-                    int nYears=iMonths/12;
-                    iduration += (iMonths * 30 +nYears * 5)* 24 * 60 * 60 ; // add 5 days for each complete year (360 --> 365)
-                    iDateLastPos = ++iMPos;
-                }
+			m_lDuration = iduration;
+			if (fracSecs != 0)
+				m_lDuration += fracSecs;
+			m_lDuration *= factor;
+		}
+		catch (NumberFormatException e)
+		{
+			result = false;
+		}
+		return result;
+	}
 
-                int iDPos = strDate.indexOf("D");
-                if (iDPos > 0)
-                {
-                    iDays = Integer.parseInt(strDate.substring(iDateLastPos, iDPos));
-                    iduration += iDays * 24 * 60 * 60;
-                }
-            }
+	/**
+	 * setDuration: sets a duration for <code>this</code> in seconds. This duration is used in multiple classes of the
+	 * JDF (e.g. Heating time).
+	 * 
+	 * @param seconds the duration in seconds.
+	 */
+	public void setDuration(int seconds)
+	{
+		m_lDuration = seconds;
+	}
 
-            if (strTime!=null)
-            {
-                int iHPos = strTime.indexOf("H");
-                if (iHPos > 0)
-                {
-                    iHours = Integer.parseInt(strTime.substring(0, iHPos));
-                    iduration += iHours * 60 * 60;
-                    iTimeLastPos = ++iHPos;
-                }
-                int iMPos = strTime.indexOf("M");
-                if (iMPos > 0)
-                {
-                    iMinutes = Integer.parseInt(strTime.substring(iTimeLastPos, iMPos));
-                    iduration += iMinutes * 60;
-                    iTimeLastPos = ++iMPos;
-                }
+	/**
+	 * setDuration: sets a duration for <code>this</code> in seconds, including fractions. This duration is used in
+	 * multiple classes of the JDF (e.g. Heating time).
+	 * 
+	 * @param seconds the duration in seconds.
+	 */
+	public void setDuration(double seconds)
+	{
+		m_lDuration = seconds;
+	}
 
-                int iSPos = strTime.indexOf("S");
-                if (iSPos > 0)
-                {
-                    int iDotPos = strTime.indexOf(".");
-                    if(iDotPos>0)
-                    {
-                        iSeconds = Integer.parseInt(strTime.substring(iTimeLastPos, iDotPos));
-                        iDotPos++;
-                        int mLen=iSPos-iDotPos;
-                        if(mLen>0)
-                        {
-                            String sMilli="0."+strTime.substring(iDotPos, iSPos);
-                            fracSecs = Double.parseDouble(sMilli);
-                        }
-                        iduration += iSeconds;
+	/**
+	 * the duration in seconds
+	 * 
+	 * @return int - the duration in seconds; '0' default
+	 */
+	public int getDuration()
+	{
+		return (int) m_lDuration;
+	}
 
-                    }
-                    else
-                    {
-                        iSeconds = Integer.parseInt(strTime.substring(iTimeLastPos, iSPos));
-                        iduration += iSeconds;
-                    }
-                }
-            }
+	/**
+	 * isLess - tests if the duration of this JDFDuration is longer than the duration of the specified JDFDuration.
+	 * Compares the integer durations, thus -PT15S is shorter than -PT5S
+	 * 
+	 * @param x the JDFDuration object to compare to <code>this</code>
+	 * @return boolean - true if the duration of this JDFDuration is longer than the duration of the JDFDuration 'x'.
+	 */
+	public boolean isLonger(JDFDuration x)
+	{
+		return this.getDuration() > x.getDuration();
+	}
 
-            m_lDuration = iduration;
-            if(fracSecs!=0)
-                m_lDuration+=fracSecs;
-            m_lDuration*=factor;
-        }
-        catch (NumberFormatException e)
-        {
-            result = false;
-        }
-        return result;
-    }
+	/**
+	 * isShorter - tests if the duration of this JDFDuration is less than the duration of the specified JDFDuration.
+	 * Compares the integer durations, thus -PT15S is shorter than -PT5S
+	 * 
+	 * @param x the JDFDuration object to compare to <code>this</code>
+	 * @return boolean - true if the duration of this JDFDuration is shorter than the duration of the JDFDuration 'x'.
+	 */
+	public boolean isShorter(JDFDuration x)
+	{
+		return this.getDuration() < x.getDuration();
+	}
 
-    /**
-     * setDuration: sets a duration for <code>this</code> in seconds. 
-     * This duration is used in multiple classes of the JDF (e.g. Heating time).  
-     * 
-     * @param seconds the duration in seconds. 
-     */
-    public void setDuration(int seconds)
-    {
-        m_lDuration = seconds;
-    }
-    /**
-     * setDuration: sets a duration for <code>this</code> in seconds, including fractions. 
-     * This duration is used in multiple classes of the JDF (e.g. Heating time).  
-     * 
-     * @param seconds the duration in seconds. 
-     */
-    public void setDuration(double seconds)
-    {
-        m_lDuration = seconds;
-    }
+	/**
+	 * Compares two JDFDuration objects for equality.<br>
+	 * The result is <code>true</code> if and only if the argument is not <code>null</code> and is a
+	 * <code>JDFDuration</code> object that represents the same duration, as this object.
+	 * <p>
+	 */
+	public boolean equals(Object other)
+	{
+		if (this == other)
+			return true;
+		if (other == null)
+			return false;
+		if (!(other instanceof JDFDuration))
+			return false;
 
+		return (this.m_lDuration == ((JDFDuration) other).m_lDuration);
+	}
 
-    /**
-     * the duration in seconds
-     * 
-     * @return int - the duration in seconds; '0' default
-     */
-    public int getDuration()
-    {
-        return (int)m_lDuration;
-    }
+	/**
+	 * hashCode: complements equals() to fulfill the equals/hashCode contract
+	 */
+	public int hashCode()
+	{
+		return HashUtil.hashCode(0, m_lDuration);
+	}
 
-    /**
-     * isLess - tests if the duration of this JDFDuration is longer than
-     * the duration of the specified JDFDuration. 
-     * Compares the integer durations, thus -PT15S is shorter than -PT5S
-     * 
-     * @param x the JDFDuration object to compare to <code>this</code>
-     * @return boolean - true if the duration of this JDFDuration is longer than
-     * the duration of the JDFDuration 'x'. 
-     */
-    public boolean isLonger(JDFDuration x)
-    {
-        return this.getDuration() > x.getDuration();
-    }
-
-
-    /**
-     * isShorter - tests if the duration of this JDFDuration is less than
-     * the duration of the specified JDFDuration. 
-     * Compares the integer durations, thus -PT15S is shorter than -PT5S
-     * 
-     * @param x the JDFDuration object to compare to <code>this</code>
-     * @return boolean - true if the duration of this JDFDuration is shorter than
-     * the duration of the JDFDuration 'x'. 
-     */
-    public boolean isShorter(JDFDuration x)
-    {
-        return this.getDuration() < x.getDuration();
-    }
-
-
-    /**
-     * Compares two JDFDuration objects for equality.<br>
-     * The result is <code>true</code> if and only if the argument is 
-     * not <code>null</code> and is a <code>JDFDuration</code> object that 
-     * represents the same duration, as this object.
-     * <p>
-     */ 
-    public boolean equals(Object other)
-    {
-        if (this == other)
-            return true;
-        if (other == null)
-            return false;
-        if (!(other instanceof JDFDuration))
-            return false;
-
-        return (this.m_lDuration == ((JDFDuration) other).m_lDuration);
-    }
-
-    /**
-     * hashCode: complements equals() to fulfill the equals/hashCode contract
-     */
-    public int hashCode()
-    {
-        return HashUtil.hashCode(0, m_lDuration);
-    }
-
-    /* (non-Javadoc)
-     * @see java.lang.Comparable#compareTo(java.lang.Object)
-     */
-    public int compareTo(JDFDuration arg0)
-    {
-        double l=(arg0==null) ? 0 : arg0.m_lDuration;
-        l-=m_lDuration;
-        return (int)Math.signum(-l);
-    }
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	public int compareTo(JDFDuration arg0)
+	{
+		double l = (arg0 == null) ? 0 : arg0.m_lDuration;
+		l -= m_lDuration;
+		return (int) Math.signum(-l);
+	}
 
 }

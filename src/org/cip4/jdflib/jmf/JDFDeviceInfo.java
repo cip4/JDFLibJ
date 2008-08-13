@@ -67,14 +67,14 @@
  *
  */
 /**
-==========================================================================
-class JDFDeviceInfo extends JDFResource
-==========================================================================
-@COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001
-ALL RIGHTS RESERVED
-@Author: sabjon@topmail.de   using a code generator
-Warning! very preliminary test version. Interface subject to change without prior notice!
-Revision history:    ...
+ ==========================================================================
+ class JDFDeviceInfo extends JDFResource
+ ==========================================================================
+ @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001
+ ALL RIGHTS RESERVED
+ @Author: sabjon@topmail.de   using a code generator
+ Warning! very preliminary test version. Interface subject to change without prior notice!
+ Revision history:    ...
  **/
 
 package org.cip4.jdflib.jmf;
@@ -101,218 +101,217 @@ import org.cip4.jdflib.util.JDFDate;
 //----------------------------------
 public class JDFDeviceInfo extends JDFAutoDeviceInfo
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFDeviceInfo
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    public JDFDeviceInfo(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFDeviceInfo
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	public JDFDeviceInfo(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFDeviceInfo
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    public JDFDeviceInfo(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFDeviceInfo
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFDeviceInfo(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFDeviceInfo
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    public JDFDeviceInfo(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * Constructor for JDFDeviceInfo
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	public JDFDeviceInfo(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * toString()
-     * @see org.cip4.jdflib.auto.JDFAutoDeviceInfo#toString()
-     */
-    public String toString()
-    {
-        return "JDFDeviceInfo[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * toString()
+	 * 
+	 * @see org.cip4.jdflib.auto.JDFAutoDeviceInfo#toString()
+	 */
+	public String toString()
+	{
+		return "JDFDeviceInfo[  --> " + super.toString() + " ]";
+	}
 
-    /**
-     * Method getJobCount.
-     * @return int
-     * @deprecated use numChildElements(ElementName.JOBPHASE,null)
-     */
-    public int getJobCount()
-    {
-        return getChildrenByTagName(ElementName.JOBPHASE,null,null, false, true,0).size();
-    }   
+	/**
+	 * Method getJobCount.
+	 * 
+	 * @return int
+	 * @deprecated use numChildElements(ElementName.JOBPHASE,null)
+	 */
+	public int getJobCount()
+	{
+		return getChildrenByTagName(ElementName.JOBPHASE, null, null, false, true, 0).size();
+	}
 
-    /**
-     * (11) set attribute IdleStartTime
-     * @param value: the value to set the attribute to or null
-     */
-    public void setIdleStartTime(JDFDate value)
-    {
-        if (value == null) value = new JDFDate();
-        setAttribute(AttributeName.IDLESTARTTIME, value.getDateTimeISO(), null);
-    }
+	/**
+	 * (11) set attribute IdleStartTime
+	 * 
+	 * @param value : the value to set the attribute to or null
+	 */
+	public void setIdleStartTime(JDFDate value)
+	{
+		if (value == null)
+			value = new JDFDate();
+		setAttribute(AttributeName.IDLESTARTTIME, value.getDateTimeISO(), null);
+	}
 
-    /**
-     * (12) get JDFDate attribute IdleStartTime
-     * @return JDFDate the value of the attribute
-     */
-    public JDFDate getIdleStartTime()
-    {
-        final String str = getAttribute(AttributeName.IDLESTARTTIME, null, null);
-        if (str!=null)
-        {
-            try
-            {
-                return new JDFDate(str);
-            }
-            catch(DataFormatException dfe)
-            {
-                // nop
-            }
-        }
-        return null;
-    }
+	/**
+	 * (12) get JDFDate attribute IdleStartTime
+	 * 
+	 * @return JDFDate the value of the attribute
+	 */
+	public JDFDate getIdleStartTime()
+	{
+		final String str = getAttribute(AttributeName.IDLESTARTTIME, null, null);
+		if (str != null)
+		{
+			try
+			{
+				return new JDFDate(str);
+			}
+			catch (DataFormatException dfe)
+			{
+				// nop
+			}
+		}
+		return null;
+	}
 
-    /**
-     * create a JobPhase message from a phaseTime Audit
-     * @param pt the phasetime audit
-     * @return JDFJobPhase: the jobphase element that has been filled by the phaseTime
-     */
-    public JDFJobPhase createJobPhaseFromPhaseTime(final JDFPhaseTime pt)
-    {
-        JDFJobPhase jp=appendJobPhase();
-        JDFNode node=pt.getParentJDF();
+	/**
+	 * create a JobPhase message from a phaseTime Audit
+	 * 
+	 * @param pt the phasetime audit
+	 * @return JDFJobPhase: the jobphase element that has been filled by the phaseTime
+	 */
+	public JDFJobPhase createJobPhaseFromPhaseTime(final JDFPhaseTime pt)
+	{
+		JDFJobPhase jp = appendJobPhase();
+		JDFNode node = pt.getParentJDF();
 
-        jp.setJobID(node.getJobID(true));
-        jp.setJobPartID(node.getJobPartID(true));
-        final VJDFAttributeMap partMapVector = pt.getPartMapVector();
-        jp.setPartMapVector(partMapVector);
-        jp.setStatus(pt.getStatus());
-        final String statusDetails = pt.getStatusDetails();
-        jp.setStatusDetails(statusDetails);
-        jp.setPhaseStartTime(pt.getStart());
-        JDFResourceLink rl=pt.getLink(0);
-        if(rl!=null)
-        {
-            if(rl.getAmountPoolAttribute(AttributeName.ACTUALAMOUNT, null, null, 0)!=null)
-                jp.setPhaseAmount(rl.getActualAmount(null));
-        }
-        JDFMISDetails md=pt.getMISDetails();
-        jp.copyElement(md,null);
-        VElement modules=pt.getChildElementVector(ElementName.MODULEPHASE, null);
-        int mLen=modules==null ? 0 : modules.size();
-        for(int i=0;i<mLen;i++)
-        {
-            jp.createModuleStatusFromModulePhase((JDFModulePhase)modules.elementAt(i));
-        }
-        //TODO set more
-        jp.eraseEmptyAttributes(true);
-        return jp;
-    }
+		jp.setJobID(node.getJobID(true));
+		jp.setJobPartID(node.getJobPartID(true));
+		final VJDFAttributeMap partMapVector = pt.getPartMapVector();
+		jp.setPartMapVector(partMapVector);
+		jp.setStatus(pt.getStatus());
+		final String statusDetails = pt.getStatusDetails();
+		jp.setStatusDetails(statusDetails);
+		jp.setPhaseStartTime(pt.getStart());
+		JDFResourceLink rl = pt.getLink(0);
+		if (rl != null)
+		{
+			if (rl.getAmountPoolAttribute(AttributeName.ACTUALAMOUNT, null, null, 0) != null)
+				jp.setPhaseAmount(rl.getActualAmount(null));
+		}
+		JDFMISDetails md = pt.getMISDetails();
+		jp.copyElement(md, null);
+		VElement modules = pt.getChildElementVector(ElementName.MODULEPHASE, null);
+		int mLen = modules == null ? 0 : modules.size();
+		for (int i = 0; i < mLen; i++)
+		{
+			jp.createModuleStatusFromModulePhase((JDFModulePhase) modules.elementAt(i));
+		}
+		// TODO set more
+		jp.eraseEmptyAttributes(true);
+		return jp;
+	}
 
+	/**
+	 * gets the deviceID from @DeviceID if it exists, otherwise searches Device/@DeviceID
+	 * 
+	 * @return the appropriate deviceID for this deviceInfo
+	 */
+	@Override
+	public String getDeviceID()
+	{
+		if (hasAttribute(AttributeName.DEVICEID))
+			return super.getDeviceID();
+		JDFDevice d = getDevice();
+		String ret = d == null ? null : d.getDeviceID();
+		if (ret == null)
+		{
+			KElement km = getParentNode_KElement();
+			if (km instanceof JDFMessage)
+				ret = ((JDFMessage) km).getSenderID();
+		}
+		return ret;
+	}
 
-    /**
-     * gets the deviceID from @DeviceID if it exists, otherwise searches Device/@DeviceID
-     * @return the appropriate deviceID for this deviceInfo
-     */
-    @Override
-    public String getDeviceID()
-    {
-        if(hasAttribute(AttributeName.DEVICEID))
-            return super.getDeviceID();
-        JDFDevice d=getDevice();
-        String ret=d==null ? null : d.getDeviceID();
-        if(ret==null)
-        {
-            KElement km= getParentNode_KElement();
-            if(km instanceof JDFMessage)
-                ret= ((JDFMessage)km).getSenderID();
-        }
-        return ret;
-    }
+	/**
+	 * returns true if this is the same phase, i.e. the
+	 * 
+	 * @param lastphase the phase to compare with
+	 * @param bExact if true, use startTime as hook, else compare stati
+	 * @return
+	 */
+	public boolean isSamePhase(JDFDeviceInfo lastInfo, boolean bExact)
+	{
+		if (lastInfo == null)
+			return false;
+		if (!ContainerUtil.equals(getDeviceID(), lastInfo.getDeviceID()))
+			return false;
+		if (!ContainerUtil.equals(getDeviceOperationMode(), lastInfo.getDeviceOperationMode()))
+			return false;
+		if (!ContainerUtil.equals(getDeviceStatus(), lastInfo.getDeviceStatus()))
+			return false;
+		if (!ContainerUtil.equals(getStatusDetails(), lastInfo.getStatusDetails()))
+			return false;
+		int numEmployees = numChildElements(ElementName.EMPLOYEE, null);
+		if (numEmployees != lastInfo.numChildElements(ElementName.EMPLOYEE, null))
+			return false;
+		boolean bGood = true;
+		for (int i = 0; i < numEmployees && bGood; i++)
+		{
+			JDFEmployee employee = lastInfo.getEmployee(i);
+			if (employee != null)
+				bGood = bGood && getEmployee(i).matches(employee);
 
-    /**
-     * returns true if this is the same phase, i.e. the 
-     * @param lastphase the phase to compare with
-     * @param bExact if true, use startTime as hook, else compare stati
-     * @return
-     */
-    public boolean isSamePhase(JDFDeviceInfo lastInfo, boolean bExact)
-    {
-        if(lastInfo==null)
-            return false;
-        if(!ContainerUtil.equals(getDeviceID(), lastInfo.getDeviceID()))
-            return false;
-        if(!ContainerUtil.equals(getDeviceOperationMode(), lastInfo.getDeviceOperationMode()))
-            return false;
-        if(!ContainerUtil.equals(getDeviceStatus(), lastInfo.getDeviceStatus()))
-            return false;
-        if(!ContainerUtil.equals(getStatusDetails(), lastInfo.getStatusDetails()))
-            return false;
-        int numEmployees = numChildElements(ElementName.EMPLOYEE, null);
-        if(numEmployees!=lastInfo.numChildElements(ElementName.EMPLOYEE, null))
-            return false;
-        boolean bGood=true;
-        for(int i=0;i<numEmployees && bGood;i++)
-        {
-            JDFEmployee employee = lastInfo.getEmployee(i);
-            if(employee!=null)
-                bGood=bGood && getEmployee(i).matches(employee);
+		}
+		if (!bGood)
+			return false;
 
-        }
-        if(!bGood)
-            return false;
+		int numJobPhases = numChildElements(ElementName.JOBPHASE, null);
+		if (numJobPhases != lastInfo.numChildElements(ElementName.JOBPHASE, null))
+			return false;
+		bGood = true;
 
-        int numJobPhases = numChildElements(ElementName.JOBPHASE, null);
-        if(numJobPhases!=lastInfo.numChildElements(ElementName.JOBPHASE, null))
-            return false;
-        bGood=true;
+		for (int i = 0; i < numJobPhases; i++)
+			bGood = bGood || getJobPhase(i).isSamePhase(lastInfo.getJobPhase(i), bExact);
+		return bGood;
+	}
 
-        for(int i=0;i<numJobPhases;i++)
-            bGood=bGood || getJobPhase(i).isSamePhase(lastInfo.getJobPhase(i), bExact);
-        return bGood;
-    }
+	/**
+	 * creates a new deviceInfo that spans lastphase and this phase
+	 * 
+	 * @param lastphase the phase to merge
+	 * @return true if successful
+	 */
+	public boolean mergeLastPhase(JDFDeviceInfo lastInfo)
+	{
+		if (!isSamePhase(lastInfo, false))
+			return false;
 
-    /**
-     * creates a new deviceInfo that spans lastphase and this phase
-     * @param lastphase the phase to merge 
-     * @return true if successful
-     */
-    public boolean mergeLastPhase(JDFDeviceInfo lastInfo)
-    {
-        if(!isSamePhase(lastInfo, false))
-            return false;
-
-        int numJobPhases = numChildElements(ElementName.JOBPHASE, null);
-        boolean bGood=true;
-        for(int i=0;i<numJobPhases;i++)
-            bGood= getJobPhase(i).mergeLastPhase(lastInfo.getJobPhase(i))||bGood;
-        return bGood;
-    }
+		int numJobPhases = numChildElements(ElementName.JOBPHASE, null);
+		boolean bGood = true;
+		for (int i = 0; i < numJobPhases; i++)
+			bGood = getJobPhase(i).mergeLastPhase(lastInfo.getJobPhase(i)) || bGood;
+		return bGood;
+	}
 
 }
-
-
-

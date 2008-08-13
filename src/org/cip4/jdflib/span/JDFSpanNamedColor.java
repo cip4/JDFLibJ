@@ -77,88 +77,73 @@
  */
 package org.cip4.jdflib.span;
 
-
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.w3c.dom.DOMException;
 
-
 public class JDFSpanNamedColor extends JDFEnumerationSpan
 {
-    private static final long serialVersionUID = 1L;
-    
-    /**
-     * Constructor for JDFSpanNamedColor
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFSpanNamedColor(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
-    
-    
-    /**
-     * Constructor for JDFSpanNamedColor
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFSpanNamedColor(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
-    
-    /**
-     * Constructor for JDFSpanNamedColor
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFSpanNamedColor(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-    
-    //**************************************** Methods *********************************************
-    
-    /**
-     * AllowedValues - vector of allowed values for this EnumerationSpan
-     *
-     * @return Vector - vector representation of the allowed values
-     */
-    public ValuedEnum getEnumType()
-    {
-        return EnumNamedColor.getEnum(0);
-    }
-    
-    
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFSpanNamedColor[  --> " + super.toString() + " ]" ;
-    }
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Constructor for JDFSpanNamedColor
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFSpanNamedColor(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFSpanNamedColor
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFSpanNamedColor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFSpanNamedColor
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFSpanNamedColor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	// **************************************** Methods
+	// *********************************************
+
+	/**
+	 * AllowedValues - vector of allowed values for this EnumerationSpan
+	 * 
+	 * @return Vector - vector representation of the allowed values
+	 */
+	public ValuedEnum getEnumType()
+	{
+		return EnumNamedColor.getEnum(0);
+	}
+
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFSpanNamedColor[  --> " + super.toString() + " ]";
+	}
 }
-
-
-

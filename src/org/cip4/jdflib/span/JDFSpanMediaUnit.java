@@ -17,131 +17,114 @@ import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.w3c.dom.DOMException;
 
-
 public class JDFSpanMediaUnit extends JDFEnumerationSpan
 {
-    private static final long serialVersionUID = 1L;
-    
-    /**
-     * Constructor for JDFSpanMediaUnit
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFSpanMediaUnit(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
-    
-    
-    /**
-     * Constructor for JDFSpanMediaUnit
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFSpanMediaUnit(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
-    
-    /**
-     * Constructor for JDFSpanMediaUnit
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFSpanMediaUnit(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-    
- 
-    
-    /**
-     * Enumeration strings for EnumSpanMediaUnit
-     */
-    public static class EnumSpanMediaUnit extends ValuedEnum
-    {
-        private static final long serialVersionUID = 1L;
-        private static int m_startValue = 0;
-        
-        private EnumSpanMediaUnit(String name)
-        {
-            super(name, m_startValue++);
-        }
-        
-        public static EnumSpanMediaUnit getEnum(String enumName)
-        {
-            return (EnumSpanMediaUnit) getEnum(EnumSpanMediaUnit.class, enumName);
-        }
-        
-        public static EnumSpanMediaUnit getEnum(int enumValue)
-        {
-            return (EnumSpanMediaUnit) getEnum(EnumSpanMediaUnit.class, enumValue);
-        }
-        
-        public static Map getEnumMap()
-        {
-            return getEnumMap(EnumSpanMediaUnit.class);
-        }
-        
-        public static List getEnumList()
-        {
-            return getEnumList(EnumSpanMediaUnit.class);
-        }
-        
-        public static Iterator iterator()
-        {
-            return iterator(EnumSpanMediaUnit.class);
-        }
-        
-        public static final EnumSpanMediaUnit Roll     = new EnumSpanMediaUnit("Roll");
-        public static final EnumSpanMediaUnit Sheet    = new EnumSpanMediaUnit("Sheet");
-        
-    }      
-    
-    
-    //**************************************** Methods *********************************************
-    
-    /**
-     * AllowedValues - vector of allowed values for this EnumerationSpan
-     *
-     * @return Vector - vector representation of the allowed values
-     */
-    @Override
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Constructor for JDFSpanMediaUnit
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFSpanMediaUnit(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFSpanMediaUnit
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFSpanMediaUnit(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFSpanMediaUnit
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFSpanMediaUnit(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for EnumSpanMediaUnit
+	 */
+	public static class EnumSpanMediaUnit extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumSpanMediaUnit(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		public static EnumSpanMediaUnit getEnum(String enumName)
+		{
+			return (EnumSpanMediaUnit) getEnum(EnumSpanMediaUnit.class, enumName);
+		}
+
+		public static EnumSpanMediaUnit getEnum(int enumValue)
+		{
+			return (EnumSpanMediaUnit) getEnum(EnumSpanMediaUnit.class, enumValue);
+		}
+
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumSpanMediaUnit.class);
+		}
+
+		public static List getEnumList()
+		{
+			return getEnumList(EnumSpanMediaUnit.class);
+		}
+
+		public static Iterator iterator()
+		{
+			return iterator(EnumSpanMediaUnit.class);
+		}
+
+		public static final EnumSpanMediaUnit Roll = new EnumSpanMediaUnit("Roll");
+		public static final EnumSpanMediaUnit Sheet = new EnumSpanMediaUnit("Sheet");
+
+	}
+
+	// **************************************** Methods
+	// *********************************************
+
+	/**
+	 * AllowedValues - vector of allowed values for this EnumerationSpan
+	 * 
+	 * @return Vector - vector representation of the allowed values
+	 */
+	@Override
 	public ValuedEnum getEnumType()
-    {
-        return EnumSpanMediaUnit.getEnum(0);
-    }
-    
-    
-    /**
-     * toString
-     *
-     * @return String
-     */
-    @Override
+	{
+		return EnumSpanMediaUnit.getEnum(0);
+	}
+
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	@Override
 	public String toString()
-    {
-        return "JDFSpanMediaUnit[  --> " + super.toString() + " ]" ;
-    }
+	{
+		return "JDFSpanMediaUnit[  --> " + super.toString() + " ]";
+	}
 }
-
-
-

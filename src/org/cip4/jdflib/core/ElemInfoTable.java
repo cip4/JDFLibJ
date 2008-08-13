@@ -74,42 +74,42 @@ package org.cip4.jdflib.core;
 
 /**
  * @author MatternK
- *      @See EnumElementValidity below for current list of validity value
- *      
- * 0 Unknown          UNKNOWN);           
- * 1 None             NONE);              
- * 2 Required         REQUIRED);          
- * 3 Optional         OPTIONAL);          
- * 4 Deprecated       DEPRECATED);        
- * 5 SingleRequired   SINGLEREQUIRED);   
- * 6 SingleOptional   SINGLEOPTIONAL);   
- * 7 SingleDeprecated SINGLEDEPRECATED);        
- * 8 Dummy            DUMMY);        
+ * @See EnumElementValidity below for current list of validity value
+ * 
+ *      0 Unknown UNKNOWN); 1 None NONE); 2 Required REQUIRED); 3 Optional OPTIONAL); 4 Deprecated DEPRECATED); 5
+ *      SingleRequired SINGLEREQUIRED); 6 SingleOptional SINGLEOPTIONAL); 7 SingleDeprecated SINGLEDEPRECATED); 8 Dummy
+ *      DUMMY);
  */
-public class ElemInfoTable {
-    
-    private String                          elementName     = JDFConstants.EMPTYSTRING;
-    private long                            validityStatus  = 0;
-    
-    public ElemInfoTable(String n, long s)
-    {
-        elementName  = n;
-        validityStatus = s;
-    }
-    
-    /**
-     * @return Returns the elementName.
-     */
-    public String getElementName() {
-        return elementName;
-    }
-    /**
-     * @return Returns the validityStatus.
-     */
-    public long getValidityStatus() {
-        return validityStatus;
-    }
-    public String toString(){
-        return elementName+": "+Long.toHexString(validityStatus);
-    }
+public class ElemInfoTable
+{
+
+	private String elementName = JDFConstants.EMPTYSTRING;
+	private long validityStatus = 0;
+
+	public ElemInfoTable(String n, long s)
+	{
+		elementName = n;
+		validityStatus = s;
+	}
+
+	/**
+	 * @return Returns the elementName.
+	 */
+	public String getElementName()
+	{
+		return elementName;
+	}
+
+	/**
+	 * @return Returns the validityStatus.
+	 */
+	public long getValidityStatus()
+	{
+		return validityStatus;
+	}
+
+	public String toString()
+	{
+		return elementName + ": " + Long.toHexString(validityStatus);
+	}
 }

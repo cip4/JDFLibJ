@@ -125,732 +125,735 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class JDFAuditPool extends JDFPool
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFAuditPool
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    public JDFAuditPool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAuditPool
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	public JDFAuditPool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAuditPool
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    public JDFAuditPool(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAuditPool
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFAuditPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAuditPool
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    public JDFAuditPool(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * Constructor for JDFAuditPool
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	public JDFAuditPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[9];
-    static 
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.CREATED,          0x33333333);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.DELETED,          0x33333333); // TODO add JDFDeleted
-        elemInfoTable[2] = new ElemInfoTable(ElementName.MODIFIED,         0x33333333);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.NOTIFICATION,     0x33333333);
-        elemInfoTable[4] = new ElemInfoTable(ElementName.RESOURCEAUDIT,    0x33333333);
-        elemInfoTable[5] = new ElemInfoTable(ElementName.SPAWNED,          0x33333333);
-        elemInfoTable[6] = new ElemInfoTable(ElementName.MERGED,           0x33333333);
-        elemInfoTable[7] = new ElemInfoTable(ElementName.PHASETIME,        0x33333333);
-        elemInfoTable[8] = new ElemInfoTable(ElementName.PROCESSRUN,       0x33333333);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[9];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CREATED, 0x33333333);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.DELETED, 0x33333333);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.MODIFIED, 0x33333333);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.NOTIFICATION, 0x33333333);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.RESOURCEAUDIT, 0x33333333);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.SPAWNED, 0x33333333);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.MERGED, 0x33333333);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.PHASETIME, 0x33333333);
+		elemInfoTable[8] = new ElemInfoTable(ElementName.PROCESSRUN, 0x33333333);
+	}
 
-    @Override
-	protected ElementInfo getTheElementInfo() 
-    {
-        return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
-    }
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
+	}
 
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    @Override
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	@Override
 	public String toString()
-    {
-        return "JDFAuditPool[ -->" + super.toString() + "]";
-    }
-  
+	{
+		return "JDFAuditPool[ -->" + super.toString() + "]";
+	}
 
-    /**
+	/**
      * 
      */
-    public void ensureCreated()
-    {
-        final JDFAudit created = getAudit(0, EnumAuditType.Created, null, null);
-        if(created==null)
-        {
-            JDFAudit a=getAudit(0, null, null, null);
-            JDFCreated c=addCreated(null, null);
-            if(a!=null)
-            {
-                c.setTimeStamp(a.getTimeStampDate());
-                moveElement(c, a);
-            }
-        }
-    }
+	public void ensureCreated()
+	{
+		final JDFAudit created = getAudit(0, EnumAuditType.Created, null, null);
+		if (created == null)
+		{
+			JDFAudit a = getAudit(0, null, null, null);
+			JDFCreated c = addCreated(null, null);
+			if (a != null)
+			{
+				c.setTimeStamp(a.getTimeStampDate());
+				moveElement(c, a);
+			}
+		}
+	}
 
-    /**
-     * Add a ProcessRun Audit
-     * @param s   the  node status at this time
-     * @param by  the author keyword
-     * @return JDFProcessRun the newly created ProcessRun audit
-     * 
-     * default: addProcessRun(s, JDFConstants.EMPTYSTRING)
-     * @deprecated use addProcessRun(JDFElement.EnumNodeStatus s, JDFConstants.EMPTYSTRING, new VJDFAttributeMap())
-     */
-    @Deprecated
+	/**
+	 * Add a ProcessRun Audit
+	 * 
+	 * @param s the node status at this time
+	 * @param by the author keyword
+	 * @return JDFProcessRun the newly created ProcessRun audit
+	 * 
+	 *         default: addProcessRun(s, JDFConstants.EMPTYSTRING)
+	 * @deprecated use addProcessRun(JDFElement.EnumNodeStatus s, JDFConstants.EMPTYSTRING, new VJDFAttributeMap())
+	 */
+	@Deprecated
 	public JDFProcessRun addProcessRun(JDFElement.EnumNodeStatus s, String by)
-    {
-        return addProcessRun(s,by,null);
-    }
+	{
+		return addProcessRun(s, by, null);
+	}
 
-    /**
-     * Add a ProcessRun Audit
-     * @param s  the node status at this time
-     * @param by the author keyword
-     * @return the newly created ProcessRun audit
-     * 
-     * default: AddProcessRun(s, JDFConstants.EMPTYSTRING)
-     */
-    public JDFProcessRun addProcessRun(JDFElement.EnumNodeStatus s,String by, VJDFAttributeMap vmParts)
-    {
-        JDFProcessRun pr = (JDFProcessRun)addAudit(JDFAudit.EnumAuditType.ProcessRun, by);
-        pr.setStart(null);
-        pr.setEnd(null);
-        pr.setEndStatus(s);
-        pr.setPartMapVector(vmParts);
+	/**
+	 * Add a ProcessRun Audit
+	 * 
+	 * @param s the node status at this time
+	 * @param by the author keyword
+	 * @return the newly created ProcessRun audit
+	 * 
+	 *         default: AddProcessRun(s, JDFConstants.EMPTYSTRING)
+	 */
+	public JDFProcessRun addProcessRun(JDFElement.EnumNodeStatus s, String by, VJDFAttributeMap vmParts)
+	{
+		JDFProcessRun pr = (JDFProcessRun) addAudit(JDFAudit.EnumAuditType.ProcessRun, by);
+		pr.setStart(null);
+		pr.setEnd(null);
+		pr.setEndStatus(s);
+		pr.setPartMapVector(vmParts);
 
-        return pr;
-    }
+		return pr;
+	}
 
-    /**
-     * add an audit, called internally by the specialized functions
-     * @param typ audit type
-     * @param by  the author keyword
-     * @return JDFAudit
-     * 
-     * default: AddAudit(typ, JDFConstants.EMPTYSTRING)
-     */
-    public JDFAudit addAudit(JDFAudit.EnumAuditType typ, String by)
-    {
-        final JDFAudit l = (JDFAudit) appendElement(typ.getName(), null);
-        if(by!=null)
-            l.setAuthor(by);
+	/**
+	 * add an audit, called internally by the specialized functions
+	 * 
+	 * @param typ audit type
+	 * @param by the author keyword
+	 * @return JDFAudit
+	 * 
+	 *         default: AddAudit(typ, JDFConstants.EMPTYSTRING)
+	 */
+	public JDFAudit addAudit(JDFAudit.EnumAuditType typ, String by)
+	{
+		final JDFAudit l = (JDFAudit) appendElement(typ.getName(), null);
+		if (by != null)
+			l.setAuthor(by);
 
-        final JDFNode r = getJDFRoot();
-        if (r.hasAttribute(AttributeName.SPAWNID))
-        {
-            l.setSpawnID(r.getSpawnID(false));
-        }
+		final JDFNode r = getJDFRoot();
+		if (r.hasAttribute(AttributeName.SPAWNID))
+		{
+			l.setSpawnID(r.getSpawnID(false));
+		}
 
-        return l;
-    }
+		return l;
+	}
 
-    /**
-     * Append a Created audit element, 
-     * if createdElem==null only add if it is not yet there
-     * @param by          the author keyword
-     * @param createdElem the created element
-     * @return the newly created Created audit
-     * 
-     * default: AddCreated(by, null)
-     */
-    public JDFCreated addCreated(String by, KElement createdElem)
-    {
+	/**
+	 * Append a Created audit element, if createdElem==null only add if it is not yet there
+	 * 
+	 * @param by the author keyword
+	 * @param createdElem the created element
+	 * @return the newly created Created audit
+	 * 
+	 *         default: AddCreated(by, null)
+	 */
+	public JDFCreated addCreated(String by, KElement createdElem)
+	{
 
-        final JDFCreated created = (JDFCreated) addAudit(JDFAudit.EnumAuditType.Created, by);
+		final JDFCreated created = (JDFCreated) addAudit(JDFAudit.EnumAuditType.Created, by);
 
-        if (createdElem != null)
-        {
-            final String xpath=createdElem.buildXPath(getParentJDF().buildXPath(null,1),1);
-            created.setXPath(xpath);
-        }
+		if (createdElem != null)
+		{
+			final String xpath = createdElem.buildXPath(getParentJDF().buildXPath(null, 1), 1);
+			created.setXPath(xpath);
+		}
 
-        return created;
-    }
+		return created;
+	}
 
-    /**
-     * Append a Modified audit element
-     * @param by the author keyword
-     * @param modifiedElem the modified element
-     * 
-     * default: AddModified(by, null)
-     */
-    public JDFModified addModified(String by, KElement modifiedElem)
-    {
-        final JDFModified modified = (JDFModified) addAudit(JDFAudit.EnumAuditType.Modified, by);
-        if (modifiedElem != null)
-        {
-            final String xpath=modifiedElem.buildXPath(getParentJDF().buildXPath(null,1),1);
-            modified.setXPath(xpath);
-        }
+	/**
+	 * Append a Modified audit element
+	 * 
+	 * @param by the author keyword
+	 * @param modifiedElem the modified element
+	 * 
+	 *            default: AddModified(by, null)
+	 */
+	public JDFModified addModified(String by, KElement modifiedElem)
+	{
+		final JDFModified modified = (JDFModified) addAudit(JDFAudit.EnumAuditType.Modified, by);
+		if (modifiedElem != null)
+		{
+			final String xpath = modifiedElem.buildXPath(getParentJDF().buildXPath(null, 1), 1);
+			modified.setXPath(xpath);
+		}
 
-        return modified;
-    }  /**
-     * Append a Deleted audit element
-     * @param by the author keyword
-     * @param modifiedElem the modified element
-     * @return JDFDeleted  the newly created Modified audit
-     * 
-     * default: AddDeleted(null, null)
-     */
-    public JDFDeleted addDeleted(String by, KElement deletedElem)
-    {
-        final JDFDeleted deleted = (JDFDeleted) addAudit(JDFAudit.EnumAuditType.Deleted, by);
-        if (deletedElem != null)
-        {
-            final String xpath=deletedElem.buildXPath(getParentJDF().buildXPath(null,1),1);
-            deleted.setXPath(xpath);
-        }
+		return modified;
+	}
 
-        return deleted;
-    }
+	/**
+	 * Append a Deleted audit element
+	 * 
+	 * @param by the author keyword
+	 * @param modifiedElem the modified element
+	 * @return JDFDeleted the newly created Modified audit
+	 * 
+	 *         default: AddDeleted(null, null)
+	 */
+	public JDFDeleted addDeleted(String by, KElement deletedElem)
+	{
+		final JDFDeleted deleted = (JDFDeleted) addAudit(JDFAudit.EnumAuditType.Deleted, by);
+		if (deletedElem != null)
+		{
+			final String xpath = deletedElem.buildXPath(getParentJDF().buildXPath(null, 1), 1);
+			deleted.setXPath(xpath);
+		}
 
-    /**
-     * append a ResourceAudit audit element
-     *
-     * @param by the author keyword
-     *
-     * @return JDFResourceAudit - the newly created ResourceAudit audit, null if an error occured
-     */
-    public JDFResourceAudit addResourceAudit(String by)
-    {
-        return (JDFResourceAudit) addAudit(JDFAudit.EnumAuditType.ResourceAudit, by);
-    }
+		return deleted;
+	}
 
-    /**
-     * add a Notification Audit
-     *
-     * @param by the author keyword
-     * @param s  severity of the event
-     *
-     * @return JDFAudit - the newly created Notification Audit
-     * TODO replace with addNotification
-     */
-    public JDFAudit addEvent(String by, JDFAudit.EnumSeverity s)
-    {
-        final JDFAudit l = addAudit(JDFAudit.EnumAuditType.Notification, by);
-        l.setSeverity(s);
-        return l;
-    }
+	/**
+	 * append a ResourceAudit audit element
+	 * 
+	 * @param by the author keyword
+	 * 
+	 * @return JDFResourceAudit - the newly created ResourceAudit audit, null if an error occured
+	 */
+	public JDFResourceAudit addResourceAudit(String by)
+	{
+		return (JDFResourceAudit) addAudit(JDFAudit.EnumAuditType.ResourceAudit, by);
+	}
 
-    /**
-     * Append a PhaseTime audit element
-     * @param phase   the node status at this time
-     * @param by      the author keyword
-     * @param vmParts defines a vector of map of parts for which the Spawned is valid
-     * @return the newly created PhaseTime audit
-     * 
-     * default: AddPhaseTime(phase, JDFConstants.EMPTYSTRING, new VJDFAttributeMap())
-     */
-    public JDFPhaseTime addPhaseTime(
-            EnumNodeStatus phase,
-            String by,
-            VJDFAttributeMap vmParts)
-    {
-        JDFPhaseTime myAudit = (JDFPhaseTime) addAudit(JDFAudit.EnumAuditType.PhaseTime, by);
-        myAudit.setStatus(phase);
-        myAudit.setStart(new JDFDate());
-        myAudit.setEnd(new JDFDate());
-        myAudit.setPartMapVector(vmParts);
+	/**
+	 * add a Notification Audit
+	 * 
+	 * @param by the author keyword
+	 * @param s severity of the event
+	 * 
+	 * @return JDFAudit - the newly created Notification Audit TODO replace with addNotification
+	 */
+	public JDFAudit addEvent(String by, JDFAudit.EnumSeverity s)
+	{
+		final JDFAudit l = addAudit(JDFAudit.EnumAuditType.Notification, by);
+		l.setSeverity(s);
+		return l;
+	}
 
-        return myAudit;
-    }
+	/**
+	 * Append a PhaseTime audit element
+	 * 
+	 * @param phase the node status at this time
+	 * @param by the author keyword
+	 * @param vmParts defines a vector of map of parts for which the Spawned is valid
+	 * @return the newly created PhaseTime audit
+	 * 
+	 *         default: AddPhaseTime(phase, JDFConstants.EMPTYSTRING, new VJDFAttributeMap())
+	 */
+	public JDFPhaseTime addPhaseTime(EnumNodeStatus phase, String by, VJDFAttributeMap vmParts)
+	{
+		JDFPhaseTime myAudit = (JDFPhaseTime) addAudit(JDFAudit.EnumAuditType.PhaseTime, by);
+		myAudit.setStatus(phase);
+		myAudit.setStart(new JDFDate());
+		myAudit.setEnd(new JDFDate());
+		myAudit.setPartMapVector(vmParts);
 
-    /**
-     * Append a Spawned audit element
-     *
-     * @param spawned the spawned node
-     * @param rRefsRO a vector of rRefs that are spawned read-only
-     * @param rRefsRW a vector of rRefs that are spawned read-write
-     * @param by      the author keyword
-     * @param vmParts
-     *
-     * @return JDFAudit - the newly created Spawned audit
-     * 
-     * default: AddSpawned(spawned, new Vector(), new Vector(), JDFConstants.EMPTYSTRING, new VJDFAttributeMap())
-     */
-    public JDFSpawned addSpawned( JDFNode spawned, VString rRefsRO, VString rRefsRW,
-            String by, VJDFAttributeMap vmParts)
-    {
-        final JDFSpawned a = (JDFSpawned) addAudit(JDFAudit.EnumAuditType.Spawned, by);
-        a.setAttribute(JDFConstants.JREF, spawned.getID(), null);
-        String ms = null;
-        if (rRefsRO!=null && !rRefsRO.isEmpty())
-        {
-            ms = StringUtil.setvString(rRefsRO);
-            a.setAttribute(AttributeName.RREFSROCOPIED, ms, null);
-        }
+		return myAudit;
+	}
 
-        if (rRefsRW!=null && !rRefsRW.isEmpty())
-        {
-            ms = StringUtil.setvString(rRefsRW);
-            a.setAttribute(AttributeName.RREFSRWCOPIED, ms, null);
-        }
+	/**
+	 * Append a Spawned audit element
+	 * 
+	 * @param spawned the spawned node
+	 * @param rRefsRO a vector of rRefs that are spawned read-only
+	 * @param rRefsRW a vector of rRefs that are spawned read-write
+	 * @param by the author keyword
+	 * @param vmParts
+	 * 
+	 * @return JDFAudit - the newly created Spawned audit
+	 * 
+	 *         default: AddSpawned(spawned, new Vector(), new Vector(), JDFConstants.EMPTYSTRING, new
+	 *         VJDFAttributeMap())
+	 */
+	public JDFSpawned addSpawned(JDFNode spawned, VString rRefsRO, VString rRefsRW, String by, VJDFAttributeMap vmParts)
+	{
+		final JDFSpawned a = (JDFSpawned) addAudit(JDFAudit.EnumAuditType.Spawned, by);
+		a.setAttribute(JDFConstants.JREF, spawned.getID(), null);
+		String ms = null;
+		if (rRefsRO != null && !rRefsRO.isEmpty())
+		{
+			ms = StringUtil.setvString(rRefsRO);
+			a.setAttribute(AttributeName.RREFSROCOPIED, ms, null);
+		}
 
-        a.setPartMapVector(vmParts);
+		if (rRefsRW != null && !rRefsRW.isEmpty())
+		{
+			ms = StringUtil.setvString(rRefsRW);
+			a.setAttribute(AttributeName.RREFSRWCOPIED, ms, null);
+		}
 
-        return a;
-    }
+		a.setPartMapVector(vmParts);
 
-    /**
-     * Append a Merged audit element
-     *
-     * @param merged           the merged node
-     * @param rRefsOverwritten a vector of rRefs that are overwritten
-     * @param by               the author keyword
-     *
-     * @return JDFMerged - the newly created Merged audit
-     * 
-     * default: AddMerged(merged, rRefsOverwritten, JDFConstants.EMPTYSTRING, null)
-     */
-    public JDFMerged addMerged( JDFNode merged,VString rRefsOverwritten, String by,VJDFAttributeMap vmParts)
-    {
-        final JDFMerged mergedAudit = (JDFMerged)addAudit(JDFAudit.EnumAuditType.Merged, by);
-        mergedAudit.setjRef(merged.getID());
-        if(rRefsOverwritten!=null && rRefsOverwritten.isEmpty())
-            rRefsOverwritten=null;
-        mergedAudit.setrRefsOverwritten(rRefsOverwritten);
+		return a;
+	}
 
-        mergedAudit.setPartMapVector(vmParts);
-        return mergedAudit;
-    }
+	/**
+	 * Append a Merged audit element
+	 * 
+	 * @param merged the merged node
+	 * @param rRefsOverwritten a vector of rRefs that are overwritten
+	 * @param by the author keyword
+	 * 
+	 * @return JDFMerged - the newly created Merged audit
+	 * 
+	 *         default: AddMerged(merged, rRefsOverwritten, JDFConstants.EMPTYSTRING, null)
+	 */
+	public JDFMerged addMerged(JDFNode merged, VString rRefsOverwritten, String by, VJDFAttributeMap vmParts)
+	{
+		final JDFMerged mergedAudit = (JDFMerged) addAudit(JDFAudit.EnumAuditType.Merged, by);
+		mergedAudit.setjRef(merged.getID());
+		if (rRefsOverwritten != null && rRefsOverwritten.isEmpty())
+			rRefsOverwritten = null;
+		mergedAudit.setrRefsOverwritten(rRefsOverwritten);
 
-    /**
-     * Append a Notification audit element with a Class attribute of Severity
-     *
-     * @param by the author keyword
-     * @param s  the severity
-     *
-     * @return JDFAudit - the newly created Notification audit
-     */
-    public JDFNotification addNotification(
-            JDFNotification.EnumClass severity,
-            String by,
-            VJDFAttributeMap vmParts)
-    {
-        final JDFNotification l = (JDFNotification) addAudit(JDFAudit.EnumAuditType.Notification, by);
-        if (l != null)
-        {
-            if(severity!=null)
-                l.setClass(severity);
-            l.setPartMapVector(vmParts);
-        }
-        return l;
-    }
+		mergedAudit.setPartMapVector(vmParts);
+		return mergedAudit;
+	}
 
-    /**
-     * getLastPhase - get the most recent PhaseTime audit in this pool
-     * @deprecated use getLastPhase(VJDFAttributeMap)
-     * @return JDFAudit - the last PhaseTime audit
-     */
-    @Deprecated
+	/**
+	 * Append a Notification audit element with a Class attribute of Severity
+	 * 
+	 * @param by the author keyword
+	 * @param s the severity
+	 * 
+	 * @return JDFAudit - the newly created Notification audit
+	 */
+	public JDFNotification addNotification(JDFNotification.EnumClass severity, String by, VJDFAttributeMap vmParts)
+	{
+		final JDFNotification l = (JDFNotification) addAudit(JDFAudit.EnumAuditType.Notification, by);
+		if (l != null)
+		{
+			if (severity != null)
+				l.setClass(severity);
+			l.setPartMapVector(vmParts);
+		}
+		return l;
+	}
+
+	/**
+	 * getLastPhase - get the most recent PhaseTime audit in this pool
+	 * 
+	 * @deprecated use getLastPhase(VJDFAttributeMap)
+	 * @return JDFAudit - the last PhaseTime audit
+	 */
+	@Deprecated
 	public JDFPhaseTime getLastPhase()
-    {
-        return getLastPhase(null,null);
-    }
+	{
+		return getLastPhase(null, null);
+	}
 
-    /**
-     * getLastPhase - get the most recent PhaseTime audit in this pool
-     * @param vPartMap the list of matching partMaps
-     * @return JDFAudit - the last PhaseTime audit
-     * @deprecated use  getLastPhase(vPartMap, null)
-     */
-    public JDFPhaseTime getLastPhase(VJDFAttributeMap vPartMap)
-    {
-        return getLastPhase(vPartMap,null);
-    }
-    /**
-     * getLastPhase - get the most recent PhaseTime audit in this pool
-     * @param vPartMap the list of matching partMaps
-     * @return JDFAudit - the last PhaseTime audit
-     */
-    public JDFPhaseTime getLastPhase(VJDFAttributeMap vPartMap, String moduleID)
-    {
-        if(KElement.isWildCard(moduleID))
-            return (JDFPhaseTime)getAudit(-1, EnumAuditType.PhaseTime, null,vPartMap);
-        VElement e=getAudits(EnumAuditType.PhaseTime, null,vPartMap);
-        for(int i= (e==null ? -1 : e.size()-1); i>=0; i--)
-        {
-            JDFPhaseTime pt = (JDFPhaseTime)e.elementAt(i);
-            if(pt.getChildWithAttribute(ElementName.MODULEPHASE, AttributeName.MODULEID, null, moduleID, 0, true)!=null)
-                return pt;
-        }
-        return null;
-    }
+	/**
+	 * getLastPhase - get the most recent PhaseTime audit in this pool
+	 * 
+	 * @param vPartMap the list of matching partMaps
+	 * @return JDFAudit - the last PhaseTime audit
+	 * @deprecated use getLastPhase(vPartMap, null)
+	 */
+	@Deprecated
+	public JDFPhaseTime getLastPhase(VJDFAttributeMap vPartMap)
+	{
+		return getLastPhase(vPartMap, null);
+	}
 
-    /**
-     * getAudits - get all audits with attributes and partMap
-     *
-     * @param  typ        type of the audit to take
-     * @param mAttributes attribute map to filter the audits
-     *
-     * @return VElement - all elements, that matches the filter
-     * 
-     * default: getAudits(null, null)
-     * @deprecated use getAudits(null, null, null)
-     */
-    @Deprecated
-	public VElement getAudits(
-            JDFAudit.EnumAuditType typ,
-            JDFAttributeMap mAttributes)
-    {
-        return getAudits(typ, mAttributes,null);
-    }
-    /**
-    }
-     * getAudits - get all audits with attributes and partMap
-     *
-     * @param typ         type of the audit to take
-     * @param mAttributes attribute map to filter the audits
-     * @param vParts      the partmap vector - note that not all audits legally have parts
-     * @return VElement - all elements, that matches the filter
-     * 
-     * default: getAudits(null, null, null)
-     */
-    public VElement getAudits(JDFAudit.EnumAuditType typ, JDFAttributeMap mAttributes, VJDFAttributeMap vParts)
-    {
-        String strAuditType = null;
-        if (typ!=null)
-        {
-            strAuditType = typ.getName();
-        }
+	/**
+	 * getLastPhase - get the most recent PhaseTime audit in this pool
+	 * 
+	 * @param vPartMap the list of matching partMaps
+	 * @return JDFAudit - the last PhaseTime audit
+	 */
+	public JDFPhaseTime getLastPhase(VJDFAttributeMap vPartMap, String moduleID)
+	{
+		if (KElement.isWildCard(moduleID))
+			return (JDFPhaseTime) getAudit(-1, EnumAuditType.PhaseTime, null, vPartMap);
+		VElement e = getAudits(EnumAuditType.PhaseTime, null, vPartMap);
+		for (int i = (e == null ? -1 : e.size() - 1); i >= 0; i--)
+		{
+			JDFPhaseTime pt = (JDFPhaseTime) e.elementAt(i);
+			if (pt.getChildWithAttribute(ElementName.MODULEPHASE, AttributeName.MODULEID, null, moduleID, 0, true) != null)
+				return pt;
+		}
+		return null;
+	}
 
-        final VElement vElem = getPoolChildrenGeneric(strAuditType, mAttributes, null);
-        if(vParts!=null && vParts.size()==0)
-            vParts=null;
+	/**
+	 * getAudits - get all audits with attributes and partMap
+	 * 
+	 * @param typ type of the audit to take
+	 * @param mAttributes attribute map to filter the audits
+	 * 
+	 * @return VElement - all elements, that matches the filter
+	 * 
+	 *         default: getAudits(null, null)
+	 * @deprecated use getAudits(null, null, null)
+	 */
+	@Deprecated
+	public VElement getAudits(JDFAudit.EnumAuditType typ, JDFAttributeMap mAttributes)
+	{
+		return getAudits(typ, mAttributes, null);
+	}
 
-        for (int i = vElem.size() - 1; i >= 0; i--)
-        { // remove known comments - this would be aught in the next check but we avoid the exception
-            if (!(vElem.elementAt(i) instanceof JDFAudit))
-            {
-                vElem.removeElementAt(i);
-                continue; // look at next element
-            }
+	/**
+	 * } getAudits - get all audits with attributes and partMap
+	 * 
+	 * @param typ type of the audit to take
+	 * @param mAttributes attribute map to filter the audits
+	 * @param vParts the partmap vector - note that not all audits legally have parts
+	 * @return VElement - all elements, that matches the filter
+	 * 
+	 *         default: getAudits(null, null, null)
+	 */
+	public VElement getAudits(JDFAudit.EnumAuditType typ, JDFAttributeMap mAttributes, VJDFAttributeMap vParts)
+	{
+		String strAuditType = null;
+		if (typ != null)
+		{
+			strAuditType = typ.getName();
+		}
 
-            final JDFAudit audit = (JDFAudit) vElem.elementAt(i);
-            if(vParts!=null && !vParts.equals(audit.getPartMapVector()))
-            {
-                vElem.removeElementAt(i);
-                continue; // look at next element
-            }
-        }
-        return vElem;
-    }
-    /**
-     * get the index'th audit of the given typ
-     * 
-     * @param index index of the audit negativ values are possible and will 
-     * be substracted from the vector size. For example, your given Filter returns a 
-     * Vector of 10 Posible Elements and your index is -7 you will get 10 - 7 = Element 
-     * Number 3 
-     * @param typ type of the audit to take
-     * @param mAttributes attribute map to filter the audits
-     * @return an Audit that matches the filers
-     * 
-     * default: getAudit(index, typ, null)
-     * @deprecated use 4 parameter version
-     */
-    @Deprecated
-	public JDFAudit getAudit(
-            int index,
-            JDFAudit.EnumAuditType typ,
-            JDFAttributeMap mAttributes)
-    {
-        return getAudit(index, typ, mAttributes,null);
-    }
+		final VElement vElem = getPoolChildrenGeneric(strAuditType, mAttributes, null);
+		if (vParts != null && vParts.size() == 0)
+			vParts = null;
 
-    /**
-     * get the index'th audit of the given typ
-     * 
-     * @param index index of the audit negativ values are possible and will 
-     * be substracted from the vector size. For example,your given Filter returns a 
-     * Vector of 10 Posible Elements and your index is -7 you will get 10 - 7 = Element 
-     * Number 3 
-     * @param typ         type of the audit to take
-     * @param mAttributes attribute map to filter the audits
-     * @param vParts      the partmap vector - note that not all audits legally have parts
-     * @return an Audit that matches the filers
-     * 
-     * default: getAudit(index, typ, null)
-     */
-    public JDFAudit getAudit(int index, JDFAudit.EnumAuditType typ, JDFAttributeMap mAttributes,VJDFAttributeMap vParts)
-    {
-        final VElement v = getAudits(typ, mAttributes,vParts);
-        if (index < 0)
-        {
-            index = v.size() + index;
-        }
-        if (index >= v.size() || index < 0)
-        {
-            return null;
-        }
+		for (int i = vElem.size() - 1; i >= 0; i--)
+		{ // remove known comments - this would be aught in the next check but
+			// we avoid the exception
+			if (!(vElem.elementAt(i) instanceof JDFAudit))
+			{
+				vElem.removeElementAt(i);
+				continue; // look at next element
+			}
 
-        return (JDFAudit) v.elementAt(index);
-    }
+			final JDFAudit audit = (JDFAudit) vElem.elementAt(i);
+			if (vParts != null && !vParts.equals(audit.getPartMapVector()))
+			{
+				vElem.removeElementAt(i);
+				continue; // look at next element
+			}
+		}
+		return vElem;
+	}
 
-    /**
-     * finds all status messages in a jmf and fills the phaseTime with the appropriate data
-     * @param jmf
-     * @return vector the vector of all modified phasetime elements
-     */
-    public VElement setPhase(JDFJMF jmf)
-    {
-        VElement vMessages=jmf.getMessageVector(null, EnumType.Status);
-        if(vMessages==null)
-            return null;
-        VElement vRet=new VElement();
-        for(int i=0;i<vMessages.size();i++)
-        {
-            final JDFMessage status=(JDFMessage)vMessages.elementAt(i);
-            final VElement devInfos=status.getChildElementVector(ElementName.DEVICEINFO, null, null, true, 0,true);
-            for(int j=0;j<devInfos.size();j++)
-            {
-                final JDFDeviceInfo devInfo=(JDFDeviceInfo)devInfos.elementAt(j);
-                final VElement phases=devInfo.getChildElementVector(ElementName.JOBPHASE, null, null, true, 0,true);
-                for(int k=0;k<phases.size();k++)
-                {
-                    final JDFJobPhase phase=(JDFJobPhase)phases.elementAt(k);
-                    final String jobID=phase.getJobID();
-                    if(!jobID.equals(getParentJDF().getJobID(true)))
-                        continue;
-                    final String jobPartID=phase.getJobPartID();
-                    if(!jobPartID.equals(getParentJDF().getJobPartID(true)))
-                        continue;
+	/**
+	 * get the index'th audit of the given typ
+	 * 
+	 * @param index index of the audit negativ values are possible and will be substracted from the vector size. For
+	 *            example, your given Filter returns a Vector of 10 Posible Elements and your index is -7 you will get
+	 *            10 - 7 = Element Number 3
+	 * @param typ type of the audit to take
+	 * @param mAttributes attribute map to filter the audits
+	 * @return an Audit that matches the filers
+	 * 
+	 *         default: getAudit(index, typ, null)
+	 * @deprecated use 4 parameter version
+	 */
+	@Deprecated
+	public JDFAudit getAudit(int index, JDFAudit.EnumAuditType typ, JDFAttributeMap mAttributes)
+	{
+		return getAudit(index, typ, mAttributes, null);
+	}
 
-                    JDFPhaseTime pt=setPhase(phase.getStatus(), phase.getStatusDetails(), phase.getPartMapVector(),devInfo.getChildElementVector(ElementName.EMPLOYEE, null));
-                    pt.copyElement(phase.getMISDetails(), null);
-                    pt.setEnd(jmf.getTimeStamp());
-                    pt.setStart(phase.getPhaseStartTime());
-                    vRet.add(pt);
-                }
-            }
-        }
-        vRet.unify();
-        return vRet.size()==0 ? null : vRet;
+	/**
+	 * get the index'th audit of the given typ
+	 * 
+	 * @param index index of the audit negativ values are possible and will be substracted from the vector size. For
+	 *            example,your given Filter returns a Vector of 10 Posible Elements and your index is -7 you will get 10
+	 *            - 7 = Element Number 3
+	 * @param typ type of the audit to take
+	 * @param mAttributes attribute map to filter the audits
+	 * @param vParts the partmap vector - note that not all audits legally have parts
+	 * @return an Audit that matches the filers
+	 * 
+	 *         default: getAudit(index, typ, null)
+	 */
+	public JDFAudit getAudit(int index, JDFAudit.EnumAuditType typ, JDFAttributeMap mAttributes, VJDFAttributeMap vParts)
+	{
+		final VElement v = getAudits(typ, mAttributes, vParts);
+		if (index < 0)
+		{
+			index = v.size() + index;
+		}
+		if (index >= v.size() || index < 0)
+		{
+			return null;
+		}
 
-    }
-    
-    /**
-     * Create or modify a PhaseTime Audit and fill it
-     * If the phase is identical to the prior phase that has been set, the existing PhaseTime is modified
-     * otherwise an existing phaseTime is closed and a new phaseTime is appended
-     * Phasetime elements with different Parts are treated independantly
-     * 
-     * @param status        the node status at this time
-     * @param statusDetails details of this status
-     * @param vmParts       defines a vector of map of parts for which the PhaseTime is valid
-     * @param employees     Vector of employees that are currently registered for this job
-     * @return JDFPhaseTime the newly created PhaseTime audit
-     * 
-     * default: SetPhase(status, null,null,null)
-     * @deprecated  use the 4 parameter version
-     */
-    @Deprecated
-    public JDFPhaseTime setPhase( EnumNodeStatus status,String statusDetails, VJDFAttributeMap vmParts)
-    {
-        return setPhase(status, statusDetails, vmParts,null);
-    }
-    /**
-     * Create or modify a PhaseTime Audit and fill it
-     * If the phase is identical to the prior phase that has been set, the existing PhaseTime is modified
-     * otherwise an existing phaseTime is closed and a new phaseTime is appended
-     * Phasetime elements with different Parts are treated independantly
-     * 
-     * @param status        the node status at this time
-     * @param statusDetails details of this status
-     * @param vmParts       defines a vector of map of parts for which the PhaseTime is valid
-     * @param employees     Vector of employees that are currently registered for this job
-     * @return JDFPhaseTime the newly created PhaseTime audit
-     * 
-     * default: SetPhase(status, null,null,null)
-     */
-    public JDFPhaseTime setPhase( EnumNodeStatus status,String statusDetails, VJDFAttributeMap vmParts, VElement employees)
-    {
-        JDFPhaseTime pt = getLastPhase(vmParts,null);
-        if("".equals(statusDetails))
-            statusDetails=null;
-        boolean bChanged=false;
-        VElement ptEmployees=pt==null ? new VElement() : pt.getChildElementVector(ElementName.EMPLOYEE, null);
-        if (pt == null)
-        {
-            bChanged=true;
-        }
-        else if (!ContainerUtil.equals(pt.getStatus(), status) || 
-                !ContainerUtil.equals(statusDetails,pt.getAttribute(AttributeName.STATUSDETAILS, null, null))||
-                !ptEmployees.isEqual(employees)) 
-        {
-            pt.setEnd(new JDFDate());
-            bChanged=true;
-        }
-        if(bChanged)
-        {
-            pt = addPhaseTime(status, null,vmParts);
-            pt.setStatusDetails(statusDetails);
-            pt.copyElements(employees,null);
-        }
-        return pt;
-    }
+		return (JDFAudit) v.elementAt(index);
+	}
 
-    /**
-     * get the linked resources matching some conditions
-     * @param mResAtt     map of Resource attributes to search for
-     * @param bFollowRefs true if internal references shall be followed
-     * @return VElement   vector with all elements matching the conditions
-     * 
-     * default: getLinkedResources(null, true)
-     */
-    public VElement getLinkedResources(JDFAttributeMap mResAtt, boolean bFollowRefs)
-    {
-        final VString refs = getHRefs(null,false,true);
-        refs.unify();
-        final VElement v = new VElement();
+	/**
+	 * finds all status messages in a jmf and fills the phaseTime with the appropriate data
+	 * 
+	 * @param jmf
+	 * @return vector the vector of all modified phasetime elements
+	 */
+	public VElement setPhase(JDFJMF jmf)
+	{
+		VElement vMessages = jmf.getMessageVector(null, EnumType.Status);
+		if (vMessages == null)
+			return null;
+		VElement vRet = new VElement();
+		for (int i = 0; i < vMessages.size(); i++)
+		{
+			final JDFMessage status = (JDFMessage) vMessages.elementAt(i);
+			final VElement devInfos = status.getChildElementVector(ElementName.DEVICEINFO, null, null, true, 0, true);
+			for (int j = 0; j < devInfos.size(); j++)
+			{
+				final JDFDeviceInfo devInfo = (JDFDeviceInfo) devInfos.elementAt(j);
+				final VElement phases = devInfo.getChildElementVector(ElementName.JOBPHASE, null, null, true, 0, true);
+				for (int k = 0; k < phases.size(); k++)
+				{
+					final JDFJobPhase phase = (JDFJobPhase) phases.elementAt(k);
+					final String jobID = phase.getJobID();
+					if (!jobID.equals(getParentJDF().getJobID(true)))
+						continue;
+					final String jobPartID = phase.getJobPartID();
+					if (!jobPartID.equals(getParentJDF().getJobPartID(true)))
+						continue;
 
-        for (int i = 0; i < refs.size(); i++)
-        {
-            final KElement e  =  getTarget(refs.elementAt(i), AttributeName.ID);            
-            if(e!=null && e.includesAttributes(mResAtt, true)) 
-            {
-                v.addElement(e);
-                if(bFollowRefs && (e instanceof JDFElement))
-                {
-                    v.appendUnique(((JDFElement)e).getvHRefRes(bFollowRefs,true));
-                }
-            }            
-        }
-        return v;
-    }
+					JDFPhaseTime pt = setPhase(phase.getStatus(), phase.getStatusDetails(), phase.getPartMapVector(), devInfo.getChildElementVector(ElementName.EMPLOYEE, null));
+					pt.copyElement(phase.getMISDetails(), null);
+					pt.setEnd(jmf.getTimeStamp());
+					pt.setStart(phase.getPhaseStartTime());
+					vRet.add(pt);
+				}
+			}
+		}
+		vRet.unify();
+		return vRet.size() == 0 ? null : vRet;
 
-    /**
-     * getLinks - get the links matching mLinkAtt out of the resource pool
-     *
-     * @param mLinkAtt the attribute to search for
-     *
-     * @return VElement - vector all all elements matching the condition mLinkAtt
-     * @deprecated 060216 - this seams to have accidentally been added
-     * default: getLinks(null)
-     */
-    @Deprecated
+	}
+
+	/**
+	 * Create or modify a PhaseTime Audit and fill it If the phase is identical to the prior phase that has been set,
+	 * the existing PhaseTime is modified otherwise an existing phaseTime is closed and a new phaseTime is appended
+	 * Phasetime elements with different Parts are treated independantly
+	 * 
+	 * @param status the node status at this time
+	 * @param statusDetails details of this status
+	 * @param vmParts defines a vector of map of parts for which the PhaseTime is valid
+	 * @param employees Vector of employees that are currently registered for this job
+	 * @return JDFPhaseTime the newly created PhaseTime audit
+	 * 
+	 *         default: SetPhase(status, null,null,null)
+	 * @deprecated use the 4 parameter version
+	 */
+	@Deprecated
+	public JDFPhaseTime setPhase(EnumNodeStatus status, String statusDetails, VJDFAttributeMap vmParts)
+	{
+		return setPhase(status, statusDetails, vmParts, null);
+	}
+
+	/**
+	 * Create or modify a PhaseTime Audit and fill it If the phase is identical to the prior phase that has been set,
+	 * the existing PhaseTime is modified otherwise an existing phaseTime is closed and a new phaseTime is appended
+	 * Phasetime elements with different Parts are treated independantly
+	 * 
+	 * @param status the node status at this time
+	 * @param statusDetails details of this status
+	 * @param vmParts defines a vector of map of parts for which the PhaseTime is valid
+	 * @param employees Vector of employees that are currently registered for this job
+	 * @return JDFPhaseTime the newly created PhaseTime audit
+	 * 
+	 *         default: SetPhase(status, null,null,null)
+	 */
+	public JDFPhaseTime setPhase(EnumNodeStatus status, String statusDetails, VJDFAttributeMap vmParts, VElement employees)
+	{
+		JDFPhaseTime pt = getLastPhase(vmParts, null);
+		if ("".equals(statusDetails))
+			statusDetails = null;
+		boolean bChanged = false;
+		VElement ptEmployees = pt == null ? new VElement() : pt.getChildElementVector(ElementName.EMPLOYEE, null);
+		if (pt == null)
+		{
+			bChanged = true;
+		}
+		else if (!ContainerUtil.equals(pt.getStatus(), status)
+				|| !ContainerUtil.equals(statusDetails, pt.getAttribute(AttributeName.STATUSDETAILS, null, null))
+				|| !ptEmployees.isEqual(employees))
+		{
+			pt.setEnd(new JDFDate());
+			bChanged = true;
+		}
+		if (bChanged)
+		{
+			pt = addPhaseTime(status, null, vmParts);
+			pt.setStatusDetails(statusDetails);
+			pt.copyElements(employees, null);
+		}
+		return pt;
+	}
+
+	/**
+	 * get the linked resources matching some conditions
+	 * 
+	 * @param mResAtt map of Resource attributes to search for
+	 * @param bFollowRefs true if internal references shall be followed
+	 * @return VElement vector with all elements matching the conditions
+	 * 
+	 *         default: getLinkedResources(null, true)
+	 */
+	public VElement getLinkedResources(JDFAttributeMap mResAtt, boolean bFollowRefs)
+	{
+		final VString refs = getHRefs(null, false, true);
+		refs.unify();
+		final VElement v = new VElement();
+
+		for (int i = 0; i < refs.size(); i++)
+		{
+			final KElement e = getTarget(refs.elementAt(i), AttributeName.ID);
+			if (e != null && e.includesAttributes(mResAtt, true))
+			{
+				v.addElement(e);
+				if (bFollowRefs && (e instanceof JDFElement))
+				{
+					v.appendUnique(((JDFElement) e).getvHRefRes(bFollowRefs, true));
+				}
+			}
+		}
+		return v;
+	}
+
+	/**
+	 * getLinks - get the links matching mLinkAtt out of the resource pool
+	 * 
+	 * @param mLinkAtt the attribute to search for
+	 * 
+	 * @return VElement - vector all all elements matching the condition mLinkAtt
+	 * @deprecated 060216 - this seams to have accidentally been added default: getLinks(null)
+	 */
+	@Deprecated
 	public VElement getLinks(JDFAttributeMap mLinkAtt)
-    {
-        return getPoolChildrenGeneric(JDFConstants.EMPTYSTRING, mLinkAtt, JDFConstants.EMPTYSTRING);
-    }
+	{
+		return getPoolChildrenGeneric(JDFConstants.EMPTYSTRING, mLinkAtt, JDFConstants.EMPTYSTRING);
+	}
 
-    /**
-     * Append a new child if no identical child exists
-     * @param p the Child to add to the element
-     */
-    public void appendUnique(JDFAudit p)
-    {
-        appendUniqueGeneric(p);
-    }
+	/**
+	 * Append a new child if no identical child exists
+	 * 
+	 * @param p the Child to add to the element
+	 */
+	public void appendUnique(JDFAudit p)
+	{
+		appendUniqueGeneric(p);
+	}
 
-    /**
-     * Append all children of p for which no identical child exists
-     * @param p the Child to add to the element
-     */
-    public void appendUnique(JDFAuditPool p)
-    {
-        appendUniqueGeneric(p);
-    }
+	/**
+	 * Append all children of p for which no identical child exists
+	 * 
+	 * @param p the Child to add to the element
+	 */
+	public void appendUnique(JDFAuditPool p)
+	{
+		appendUniqueGeneric(p);
+	}
 
-    /**
-     * gets all children with the attribute name,mAttrib, nameSpaceURI out of the pool
-     * @param strName name of the Child
-     * @param mAttrib an attribute to search for
-     * @return VElement: a vector with all elements in the pool matching the conditions
-     * 
-     * default: getPoolChildren(null,null)
-     */
-    public VElement getPoolChildren(String strName, JDFAttributeMap mAttrib)
-    {
-        return getPoolChildrenGeneric(strName, mAttrib, JDFConstants.EMPTYSTRING);
-    }
+	/**
+	 * gets all children with the attribute name,mAttrib, nameSpaceURI out of the pool
+	 * 
+	 * @param strName name of the Child
+	 * @param mAttrib an attribute to search for
+	 * @return VElement: a vector with all elements in the pool matching the conditions
+	 * 
+	 *         default: getPoolChildren(null,null)
+	 */
+	public VElement getPoolChildren(String strName, JDFAttributeMap mAttrib)
+	{
+		return getPoolChildrenGeneric(strName, mAttrib, JDFConstants.EMPTYSTRING);
+	}
 
-    /**
-     * @param cleanPolicy
-     * @param spawnID
-     * @deprecated use JDFMerge.cleanUpMerge
-     */
-    @Deprecated
+	/**
+	 * @param cleanPolicy
+	 * @param spawnID
+	 * @deprecated use JDFMerge.cleanUpMerge
+	 */
+	@Deprecated
 	public void cleanUpMerge(JDFNode.EnumCleanUpMerge cleanPolicy, String spawnID) throws NoSuchMethodException
-    {
-        throw new NoSuchMethodException("use JDFMerge.cleanUpMergeAudits");
-        //JDFMerge.cleanUpMergeAudits(this, cleanPolicy, spawnID);
-    }
+	{
+		throw new NoSuchMethodException("use JDFMerge.cleanUpMergeAudits");
+		// JDFMerge.cleanUpMergeAudits(this, cleanPolicy, spawnID);
+	}
 
-    //////////////////////////////////////////////////////////////////////
+	// ////////////////////////////////////////////////////////////////////
 
-    /**
-     * Mother of all version fixing routines
-     *
-     * uses heuristics to modify this element and its children to be compatible with a given version
-     * in general, it will be able to move from low to high versions but potentially fail 
-     * when attempting to move from higher to lower versions
-     *
-     * @param version version that the resulting element should correspond to
-     * @return true if successful
-     */
-    @Override
-	public boolean fixVersion(EnumVersion version){
-        if(hasAttribute(AttributeName.RREFS))
-            removeAttribute(AttributeName.RREFS);
-        return super.fixVersion(version);
-    }
-    //////////////////////////////////////////////////////////////////////
+	/**
+	 * Mother of all version fixing routines
+	 * 
+	 * uses heuristics to modify this element and its children to be compatible with a given version in general, it will
+	 * be able to move from low to high versions but potentially fail when attempting to move from higher to lower
+	 * versions
+	 * 
+	 * @param version version that the resulting element should correspond to
+	 * @return true if successful
+	 */
+	@Override
+	public boolean fixVersion(EnumVersion version)
+	{
+		if (hasAttribute(AttributeName.RREFS))
+			removeAttribute(AttributeName.RREFS);
+		return super.fixVersion(version);
+	}
 
-    /**
-     * creates a ProcessRun when this is submitted
-     * should be called by the receiving device when it initially receives and enqueues the JDF
-     * @param qe the queuentry element to copy information from, if null parameters will be genrated on the fly
-     * @return the newly created processRun
-     */
-    public JDFProcessRun createSubmitProcessRun(JDFQueueEntry qe)
-    {
-        JDFProcessRun pr=(JDFProcessRun) addAudit(EnumAuditType.ProcessRun, null);
-        pr.setSubmissionTime(new JDFDate());
-        if(qe!=null)
-        {
-            pr.setPartMapVector(qe.getPartMapVector());
-            pr.copyAttribute(AttributeName.QUEUEENTRYID, qe, null, null, null);
-            if(qe.hasAttribute(AttributeName.SUBMISSIONTIME))
-                pr.copyAttribute(AttributeName.SUBMISSIONTIME, qe, null, null, null);
-        }
-        if(!pr.hasAttribute(AttributeName.SUBMISSIONTIME))
-            pr.setSubmissionTime(new JDFDate());
-        if(!pr.hasAttribute(AttributeName.QUEUEENTRYID))
-            pr.setAttribute("QueueEntryID","qe_"+JDFElement.uniqueID(0));
-        return pr;
-         
-    }
+	// ////////////////////////////////////////////////////////////////////
+
+	/**
+	 * creates a ProcessRun when this is submitted should be called by the receiving device when it initially receives
+	 * and enqueues the JDF
+	 * 
+	 * @param qe the queuentry element to copy information from, if null parameters will be genrated on the fly
+	 * @return the newly created processRun
+	 */
+	public JDFProcessRun createSubmitProcessRun(JDFQueueEntry qe)
+	{
+		JDFProcessRun pr = (JDFProcessRun) addAudit(EnumAuditType.ProcessRun, null);
+		pr.setSubmissionTime(new JDFDate());
+		if (qe != null)
+		{
+			pr.setPartMapVector(qe.getPartMapVector());
+			pr.copyAttribute(AttributeName.QUEUEENTRYID, qe, null, null, null);
+			if (qe.hasAttribute(AttributeName.SUBMISSIONTIME))
+				pr.copyAttribute(AttributeName.SUBMISSIONTIME, qe, null, null, null);
+		}
+		if (!pr.hasAttribute(AttributeName.SUBMISSIONTIME))
+			pr.setSubmissionTime(new JDFDate());
+		if (!pr.hasAttribute(AttributeName.QUEUEENTRYID))
+			pr.setAttribute("QueueEntryID", "qe_" + JDFElement.uniqueID(0));
+		return pr;
+
+	}
 
 }

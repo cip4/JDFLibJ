@@ -9,16 +9,10 @@
  Revision history:    ...
  **/
 
-
-
-
-
 package org.cip4.jdflib.jmf;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoUpdateJDFCmdParams;
-
-
 
 //----------------------------------
 public class JDFUpdateJDFCmdParams extends JDFAutoUpdateJDFCmdParams
@@ -27,48 +21,43 @@ public class JDFUpdateJDFCmdParams extends JDFAutoUpdateJDFCmdParams
 
 	/**
 	 * Constructor for JDFUpdateJDFCmdParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFUpdateJDFCmdParams(
-			CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFUpdateJDFCmdParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFUpdateJDFCmdParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFUpdateJDFCmdParams(
-			CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI,
-			String qualifiedName)
+	public JDFUpdateJDFCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFUpdateJDFCmdParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFUpdateJDFCmdParams(
-			CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI,
-			String qualifiedName,
-			String myLocalName)
+	public JDFUpdateJDFCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
-	
+
 	/**
 	 * toString()
+	 * 
 	 * @return String
 	 */
 	public String toString()
@@ -76,6 +65,3 @@ public class JDFUpdateJDFCmdParams extends JDFAutoUpdateJDFCmdParams
 		return "JDFUpdateJDFCmdParams[  --> " + super.toString() + " ]";
 	}
 }
-
-
-

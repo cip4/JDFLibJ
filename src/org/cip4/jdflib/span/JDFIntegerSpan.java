@@ -85,157 +85,144 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 
-
 public class JDFIntegerSpan extends JDFSpanBase
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFIntegerSpan
-     * @param ownerDocument
-     * @param qualifiedName
-     */
-     public JDFIntegerSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFIntegerSpan
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 */
+	public JDFIntegerSpan(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFIntegerSpan
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFIntegerSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFIntegerSpan
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     */
-    public JDFIntegerSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFIntegerSpan
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 */
+	public JDFIntegerSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFIntegerSpan
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     */
-    public JDFIntegerSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-    
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static 
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUAL,                        0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.PREFERRED,                     0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.RANGE,                         0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFERRANGE,                    0x33333111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-     }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUAL, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREFERRED, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.RANGE, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFERRANGE, 0x33333111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+	}
 
-    protected AttributeInfo getTheAttributeInfo() 
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFIntegerSpan[ --> " + super.toString() + " ]" ;
-    }
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFIntegerSpan[ --> " + super.toString() + " ]";
+	}
 
-    /**
-     * Set attribute Actual
-     *
-     * @param int value - the value to set
-     */
-    public void setActual(int value)
-    {
-        setAttribute (AttributeName.ACTUAL, value, null);
-    }
-    
-    
-    /**
-     * Get attribute Actual value
-     *
-     * @return int - the value of attribute Actual
-     */
-    public int getActual()  
-    {
-        return getIntAttribute(AttributeName.ACTUAL, null, 0);
-    }
-    
-    /**
-     * Set attribute Preferred
-     *
-     * @param int value - the value to set
-     */
-    public void setPreferred(int value)
-    {
-        setAttribute (AttributeName.PREFERRED, value, null);
-    }
+	/**
+	 * Set attribute Actual
+	 * 
+	 * @param int value - the value to set
+	 */
+	public void setActual(int value)
+	{
+		setAttribute(AttributeName.ACTUAL, value, null);
+	}
 
-    /**
-     * Get attribute Preferred value
-     *
-     * @return int - the value of attribute Preferred
-     */
-    public int getPreferred()  
-    {
-        return getIntAttribute(AttributeName.PREFERRED, null, 0);
-    }
-    
-    /**
-     * Set attribute Range as a IntegerRangeList
-     *
-     * @param JDFIntegerRangeList value - the value to set
-     */
-    public void setRange(JDFIntegerRangeList value)
-    {
+	/**
+	 * Get attribute Actual value
+	 * 
+	 * @return int - the value of attribute Actual
+	 */
+	public int getActual()
+	{
+		return getIntAttribute(AttributeName.ACTUAL, null, 0);
+	}
+
+	/**
+	 * Set attribute Preferred
+	 * 
+	 * @param int value - the value to set
+	 */
+	public void setPreferred(int value)
+	{
+		setAttribute(AttributeName.PREFERRED, value, null);
+	}
+
+	/**
+	 * Get attribute Preferred value
+	 * 
+	 * @return int - the value of attribute Preferred
+	 */
+	public int getPreferred()
+	{
+		return getIntAttribute(AttributeName.PREFERRED, null, 0);
+	}
+
+	/**
+	 * Set attribute Range as a IntegerRangeList
+	 * 
+	 * @param JDFIntegerRangeList value - the value to set
+	 */
+	public void setRange(JDFIntegerRangeList value)
+	{
 		setAttribute(AttributeName.RANGE, value.toString(), null);
 	}
-    
-    /**
-     * Get attribute Range value
-     *
-     * @return JDFIntegerRangeList - the value of attribute Range
-     */
-    public JDFIntegerRangeList getRange()  
-    {
-        try
-        {
-            return new JDFIntegerRangeList(getAttribute(AttributeName.RANGE, null, JDFConstants.EMPTYSTRING));
-        }
-        catch (DataFormatException e)
-        {
-            throw new JDFException("JDFIntegerState.getRange: Unable to create JDFIntegerRangeList from Attribute value \"Range\"");
-        }
-	}
-    
-    
 
-    
-    
-    public boolean init()
-    {
-        boolean b = super.init();
-        setDataType(EnumDataType.IntegerSpan);
-        return b;
-    }
-    
-    
+	/**
+	 * Get attribute Range value
+	 * 
+	 * @return JDFIntegerRangeList - the value of attribute Range
+	 */
+	public JDFIntegerRangeList getRange()
+	{
+		try
+		{
+			return new JDFIntegerRangeList(getAttribute(AttributeName.RANGE, null, JDFConstants.EMPTYSTRING));
+		}
+		catch (DataFormatException e)
+		{
+			throw new JDFException("JDFIntegerState.getRange: Unable to create JDFIntegerRangeList from Attribute value \"Range\"");
+		}
+	}
+
+	public boolean init()
+	{
+		boolean b = super.init();
+		setDataType(EnumDataType.IntegerSpan);
+		return b;
+	}
+
 }

@@ -87,151 +87,143 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFNumberRangeList;
 
-
 public class JDFNumberSpan extends JDFSpanBase
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFNumberSpan
-     * @param ownerDocument
-     * @param qualifiedName
-     */
-     public JDFNumberSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFNumberSpan
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 */
+	public JDFNumberSpan(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFNumberSpan
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFNumberSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFNumberSpan
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     */
-    public JDFNumberSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFNumberSpan
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 */
+	public JDFNumberSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFNumberSpan
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     */
-    public JDFNumberSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static 
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUAL,                        0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.PREFERRED,                     0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.RANGE,                         0x33333333, AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFERRANGE,                    0x33333111, AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
-     }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUAL, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREFERRED, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.RANGE, 0x33333333, AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFERRANGE, 0x33333111, AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
+	}
 
-    protected AttributeInfo getTheAttributeInfo() 
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFNumberSpan[ --> " + super.toString() + " ]";
-    }
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFNumberSpan[ --> " + super.toString() + " ]";
+	}
 
-    /**
-     * Set attribute Actual
-     *
-     * @param double value - the value to set
-     */
-    public void setActual(double value)
-    {
-        setAttribute (AttributeName.ACTUAL, value, null);
-    }
-    
-    
-    /**
-     * Get attribute Actual value
-     *
-     * @return double - the value of attribute Actual
-     */
-    public double getActual()  
-    {
-        return getRealAttribute(AttributeName.ACTUAL, null, 0.0);
-    }
-    
-    /**
-     * Set attribute Preferred
-     *
-     * @param double value - the value to set
-     */
-    public void setPreferred(double value)
-    {
-        setAttribute (AttributeName.PREFERRED, value, null);
-    }
+	/**
+	 * Set attribute Actual
+	 * 
+	 * @param double value - the value to set
+	 */
+	public void setActual(double value)
+	{
+		setAttribute(AttributeName.ACTUAL, value, null);
+	}
 
-    /**
-     * Get attribute Preferred value
-     *
-     * @return double - the value of attribute Preferred
-     */
-    public double getPreferred()  
-    {
-        return getRealAttribute(AttributeName.PREFERRED, null, 0.0);
-    }
-    
-    /**
-     * Set attribute Range as a JDFNumberRangeList
-     *
-     * @param JDFNumberRangeList value - the value to set
-     */
-    public void setRange(JDFNumberRangeList value)
-    {
+	/**
+	 * Get attribute Actual value
+	 * 
+	 * @return double - the value of attribute Actual
+	 */
+	public double getActual()
+	{
+		return getRealAttribute(AttributeName.ACTUAL, null, 0.0);
+	}
+
+	/**
+	 * Set attribute Preferred
+	 * 
+	 * @param double value - the value to set
+	 */
+	public void setPreferred(double value)
+	{
+		setAttribute(AttributeName.PREFERRED, value, null);
+	}
+
+	/**
+	 * Get attribute Preferred value
+	 * 
+	 * @return double - the value of attribute Preferred
+	 */
+	public double getPreferred()
+	{
+		return getRealAttribute(AttributeName.PREFERRED, null, 0.0);
+	}
+
+	/**
+	 * Set attribute Range as a JDFNumberRangeList
+	 * 
+	 * @param JDFNumberRangeList value - the value to set
+	 */
+	public void setRange(JDFNumberRangeList value)
+	{
 		setAttribute(AttributeName.RANGE, value.toString(), null);
 	}
-    
-    /**
-     * Get attribute Range value
-     *
-     * @return JDFNumberRangeList - the value of attribute Range
-     */
-    public JDFNumberRangeList getRange()  
-    {
-        try
-        {
-            return new JDFNumberRangeList(getAttribute(AttributeName.RANGE, null, JDFConstants.EMPTYSTRING));
-        }
-        catch (DataFormatException e)
-        {
-            throw new JDFException("JDFNumberSpan.getRange: Unable to create JDFdoubleegerRangeList from Attribute value \"Range\"");
-        }
+
+	/**
+	 * Get attribute Range value
+	 * 
+	 * @return JDFNumberRangeList - the value of attribute Range
+	 */
+	public JDFNumberRangeList getRange()
+	{
+		try
+		{
+			return new JDFNumberRangeList(getAttribute(AttributeName.RANGE, null, JDFConstants.EMPTYSTRING));
+		}
+		catch (DataFormatException e)
+		{
+			throw new JDFException("JDFNumberSpan.getRange: Unable to create JDFdoubleegerRangeList from Attribute value \"Range\"");
+		}
 	}
-    
-       
-    public boolean init()
-    {
-        boolean b = super.init();
-        setDataType(EnumDataType.NumberSpan);
-        return b;
-    }
+
+	public boolean init()
+	{
+		boolean b = super.init();
+		setDataType(EnumDataType.NumberSpan);
+		return b;
+	}
 }

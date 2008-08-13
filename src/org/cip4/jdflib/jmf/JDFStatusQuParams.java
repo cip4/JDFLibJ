@@ -38,7 +38,7 @@
  *
  * Usage of this software in commercial products is subject to restrictions. For
  * details please consult info@cip4.org.
-  *
+ *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -68,137 +68,140 @@
  *
  */
 /**
-==========================================================================
-class JDFStatusQuParams extends JDFResource
-==========================================================================
-@COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001
-ALL RIGHTS RESERVED
-@Author: sabjon@topmail.de   using a code generator
-Warning! very preliminary test version. Interface subject to change without prior notice!
-Revision history:    ...
-**/
-
+ ==========================================================================
+ class JDFStatusQuParams extends JDFResource
+ ==========================================================================
+ @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001
+ ALL RIGHTS RESERVED
+ **/
 
 package org.cip4.jdflib.jmf;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.ifaces.INodeIdentifiable;
 import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
 
 //----------------------------------
-    public class JDFStatusQuParams extends JDFAutoStatusQuParams
+/**
+ * @author Rainer Prosi <br/> Wrapper for StatusQuParams message element
+ */
+public class JDFStatusQuParams extends JDFAutoStatusQuParams implements INodeIdentifiable
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFStatusQuParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    public JDFStatusQuParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFStatusQuParams
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	public JDFStatusQuParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFStatusQuParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    public JDFStatusQuParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFStatusQuParams
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFStatusQuParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFStatusQuParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    public JDFStatusQuParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * Constructor for JDFStatusQuParams
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	public JDFStatusQuParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * toString()
-     * return String
-     */
-    public String toString()
-    {
-        return "JDFStatusQuParams[  --> " + super.toString() + " ]";
-    }
-    /**
-     * gets the NodeIdetifier that matches this
-     * @return
-     */
-    public NodeIdentifier getIdentifier()
-    {
-        NodeIdentifier ni= new NodeIdentifier();
-        ni.setTo(getJobID(), getJobPartID(), getPartMapVector());
-        return ni;
-    }
-    
-   
-   /**
-    * get part map vector
-    * @return VJDFAttributeMap: vector of attribute maps, one for each part
-    */
-   public VJDFAttributeMap getPartMapVector()
-   {
-       return super.getPartMapVector();
-   }
+	/**
+	 * toString() return String
+	 */
+	@Override
+	public String toString()
+	{
+		return "JDFStatusQuParams[  --> " + super.toString() + " ]";
+	}
 
-   /**
-    * set all parts to those defined in vParts
-    * @param vParts vector of attribute maps for the parts
-    */
-   public void setPartMapVector(VJDFAttributeMap vParts)
-   {
-       super.setPartMapVector(vParts);
-   }
+	/**
+	 * gets the NodeIdetifier that matches this
+	 * 
+	 * @return {@link NodeIdentifier} the matching nodeidentifier
+	 */
+	public NodeIdentifier getIdentifier()
+	{
+		NodeIdentifier ni = new NodeIdentifier();
+		ni.setTo(getJobID(), getJobPartID(), getPartMapVector());
+		return ni;
+	}
 
-   /**
-    * set all parts to those defined by mPart
-    * @param mPart attribute map for the part to set
-    */
-   public void setPartMap(JDFAttributeMap mPart)
-   {
-       super.setPartMap(mPart);
-   }
+	/**
+	 * get part map vector
+	 * 
+	 * @return VJDFAttributeMap: vector of attribute maps, one for each part
+	 */
+	@Override
+	public VJDFAttributeMap getPartMapVector()
+	{
+		return super.getPartMapVector();
+	}
 
-   /**
-    * remove the part defined by mPart
-    * @param mPart attribute map for the part to remove
-    */
-   public void removePartMap(JDFAttributeMap mPart)
-   {
-       super.removePartMap(mPart);
-   }
+	/**
+	 * set all parts to those defined in vParts
+	 * 
+	 * @param vParts vector of attribute maps for the parts
+	 */
+	@Override
+	public void setPartMapVector(VJDFAttributeMap vParts)
+	{
+		super.setPartMapVector(vParts);
+	}
 
-   /**
-    * check whether the part defined by mPart is included
-    * @param mPart attribute map for the part to remove
-    * @return boolean - returns true if the part exists
-    */
-   public boolean hasPartMap(JDFAttributeMap mPart)
-   {
-       return super.hasPartMap(mPart);
-   }
+	/**
+	 * set all parts to those defined by mPart
+	 * 
+	 * @param mPart attribute map for the part to set
+	 */
+	@Override
+	public void setPartMap(JDFAttributeMap mPart)
+	{
+		super.setPartMap(mPart);
+	}
+
+	/**
+	 * remove the part defined by mPart
+	 * 
+	 * @param mPart attribute map for the part to remove
+	 */
+	@Override
+	public void removePartMap(JDFAttributeMap mPart)
+	{
+		super.removePartMap(mPart);
+	}
+
+	/**
+	 * check whether the part defined by mPart is included
+	 * 
+	 * @param mPart attribute map for the part to remove
+	 * @return boolean - returns true if the part exists
+	 */
+	@Override
+	public boolean hasPartMap(JDFAttributeMap mPart)
+	{
+		return super.hasPartMap(mPart);
+	}
 }
-
-
-

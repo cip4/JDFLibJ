@@ -85,160 +85,164 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.ContainerUtil;
 
 /**
- * @author prosirai
- * finds unlinked resources - example usage of the walker class
+ * @author prosirai finds unlinked resources - example usage of the walker classes
  */
-public class UnLinkFinder extends ElementWalker
+public class UnLinkFinder extends BaseElementWalker
 {
-    /**
-     * @param _theFactory
-     * @param _callBack
-     */
-    protected LinkData ld;
+	/**
+	 * @param _theFactory
+	 * @param _callBack
+	 */
+	protected LinkData ld;
 
-    public UnLinkFinder()
-    {
-        super(new BaseWalkerFactory());
-        this.new UnlinkRes(); // add to factory
-        this.new UnlinkRef(); // add to factory
-        ld=this.new LinkData();
-    }
-    
-    /**
-     * get a vector of all unlinked resources of n and its children
-     * @param n the node to walk
-     * @return
-     */
-    public VElement getUnlinkedResources(JDFNode n)
-    {
-        ld.clear();
-        walk(n);
-        Vector<KElement> toValueVector = ContainerUtil.toValueVector(ld.resMap, false);
-        return toValueVector==null ? null : new VElement(toValueVector);        
-    }
-    
-    /**
-     * erase all unlinked resources that are in n
-     * @param n the node to clean
-     */
-    public void eraseUnlinkedResources(JDFNode n)
-    {
-        VElement v=getUnlinkedResources(n); 
-        int siz=v==null ? 0 : v.size();
-        for(int i=0;i<siz;i++)
-            v.get(i).deleteNode();
-        if(siz>0)
-            eraseUnlinkedResources(n);
-    }
-    
-    protected BaseWalkerFactory getFactory()
-    {
-        return (BaseWalkerFactory)theFactory;
-    }
+	public UnLinkFinder()
+	{
+		super(new BaseWalkerFactory());
+		ld = this.new LinkData();
+	}
 
-    /**
-     * collection of maps
-     * @author prosirai
-     *
-     */
-    protected class LinkData
-    {
-        HashMap<String,KElement> resMap=new HashMap<String, KElement>();
-        HashSet<String> refSet=new HashSet<String>();
-        HashSet<String> doneSet=new HashSet<String>();
-        protected void clear()
-        {
-            resMap.clear();
-            refSet.clear();
-            doneSet.clear();
-        }
-    }
+	/**
+	 * get a vector of all unlinked resources of n and its children
+	 * 
+	 * @param n the node to walk
+	 * @return
+	 */
+	public VElement getUnlinkedResources(JDFNode n)
+	{
+		ld.clear();
+		walk(n);
+		Vector<KElement> toValueVector = ContainerUtil.toValueVector(ld.resMap, false);
+		return toValueVector == null ? null : new VElement(toValueVector);
+	}
 
-    /**
-     * the resource walker
-     * @author prosirai
-     *
-     */
-    protected class UnlinkRes extends BaseWalker
-    {
+	/**
+	 * erase all unlinked resources that are in n
+	 * 
+	 * @param n the node to clean
+	 */
+	public void eraseUnlinkedResources(JDFNode n)
+	{
+		VElement v = getUnlinkedResources(n);
+		int siz = v == null ? 0 : v.size();
+		for (int i = 0; i < siz; i++)
+			v.get(i).deleteNode();
+		if (siz > 0)
+			eraseUnlinkedResources(n);
+	}
 
-        /**
-         * fills this into the factory
-         */
-        public UnlinkRes()
-        {
-            super(getFactory());
-        }
+	protected BaseWalkerFactory getFactory()
+	{
+		return (BaseWalkerFactory) theFactory;
+	}
 
-        @Override
-        public boolean walk(KElement e)
-        {
-            JDFResource r=(JDFResource)e;
-            String id=r.getID();
-            if(ld.doneSet.contains(id))
-                return true;
-            if(ld.refSet.contains(id))
-            {
-                ld.doneSet.add(id);
-                ld.refSet.remove(id);
-                return true;
-            }
-            ld.resMap.put(id, r);
-            return true;
-        }
+	/**
+	 * collection of maps
+	 * 
+	 * @author prosirai
+	 * 
+	 */
+	protected class LinkData
+	{
+		HashMap<String, KElement> resMap = new HashMap<String, KElement>();
+		HashSet<String> refSet = new HashSet<String>();
+		HashSet<String> doneSet = new HashSet<String>();
 
-        @Override
-        public boolean matches(KElement toCheck)
-        {
-            boolean b= super.matches(toCheck);
-            if(!b)
-                return false;
-            return (toCheck instanceof JDFResource) && ((JDFResource)toCheck).isResourceRoot();
-        }   
-    }
-    
-    /**
-     * the link and ref walker
-     * @author prosirai
-     *
-     */
-    protected class UnlinkRef extends BaseWalker
-    {
-        /**
-         * fills this into the factory
-         */
-        public UnlinkRef()
-        {
-            super(getFactory());
-        }
+		protected void clear()
+		{
+			resMap.clear();
+			refSet.clear();
+			doneSet.clear();
+		}
+	}
 
-        @Override
-        public boolean walk(KElement e)
-        {
-            String id=e.getAttribute(AttributeName.RREF, null, null);
-            if(id==null)
-                return true;
-            if(ld.doneSet.contains(id))
-                return true;
-            
-            if(ld.resMap.containsKey(id))
-            {
-                ld.doneSet.add(id);
-                ld.resMap.remove(id);                
-                return true;
-            }
-            ld.refSet.add(id);
-            return true;
-        }
+	/**
+	 * the resource walker note the naming convention Walkxxx so that it is automagically instantiated by the super
+	 * classes
+	 * 
+	 * @author prosirai
+	 * 
+	 */
+	public class WalkRes extends BaseWalker
+	{
 
-        @Override
-        public boolean matches(KElement toCheck)
-        {
-            boolean b= super.matches(toCheck);
-            if(!b)
-                return false;
-            return (toCheck instanceof JDFResourceLink) ||(toCheck instanceof JDFRefElement);
-        }   
+		/**
+		 * fills this into the factory
+		 */
+		public WalkRes()
+		{
+			super(getFactory());
+		}
 
-    }
+		@Override
+		public boolean walk(KElement e)
+		{
+			JDFResource r = (JDFResource) e;
+			String id = r.getID();
+			if (ld.doneSet.contains(id))
+				return true;
+			if (ld.refSet.contains(id))
+			{
+				ld.doneSet.add(id);
+				ld.refSet.remove(id);
+				return true;
+			}
+			ld.resMap.put(id, r);
+			return true;
+		}
+
+		@Override
+		public boolean matches(KElement toCheck)
+		{
+			boolean b = super.matches(toCheck);
+			if (!b)
+				return false;
+			return (toCheck instanceof JDFResource) && ((JDFResource) toCheck).isResourceRoot();
+		}
+	}
+
+	/**
+	 * the link and ref walker
+	 * 
+	 * @author prosirai
+	 * 
+	 */
+	public class WalkRef extends BaseWalker
+	{
+		/**
+		 * fills this into the factory
+		 */
+		public WalkRef()
+		{
+			super(getFactory());
+		}
+
+		@Override
+		public boolean walk(KElement e)
+		{
+			String id = e.getAttribute(AttributeName.RREF, null, null);
+			if (id == null)
+				return true;
+			if (ld.doneSet.contains(id))
+				return true;
+
+			if (ld.resMap.containsKey(id))
+			{
+				ld.doneSet.add(id);
+				ld.resMap.remove(id);
+				return true;
+			}
+			ld.refSet.add(id);
+			return true;
+		}
+
+		@Override
+		public boolean matches(KElement toCheck)
+		{
+			boolean b = super.matches(toCheck);
+			if (!b)
+				return false;
+			return (toCheck instanceof JDFResourceLink) || (toCheck instanceof JDFRefElement);
+		}
+
+	}
 }

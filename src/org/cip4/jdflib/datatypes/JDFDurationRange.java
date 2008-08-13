@@ -84,242 +84,236 @@ import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.util.JDFDuration;
 
-
 public class JDFDurationRange extends JDFRange
 {
-    //**************************************** Attributes ******************************************
-    /**
-     * first, left element
-     */
-    private JDFDuration m_left = null;
-    
-    /**
-     * second, right element
-     */
-    private JDFDuration m_right = null;
-    
-    //**************************************** Constructors ****************************************
-    /**
-     * Empty range constructor
-     */
-    public JDFDurationRange()
-    {
-        init(new JDFDuration(0), new JDFDuration(0));
-    }
-    
-    /**
-     * Constructor - creates a Duration range defined by x
-     */
-    public JDFDurationRange(JDFDuration x)
-    {
-        init(x, x);
-    }
-    
-    /**
-     * Constructor - creates a Duration range defined by xmin to xmax
-     */
-    public JDFDurationRange(JDFDuration xmin, JDFDuration xmax)
-    {
-        init(xmin, xmax);
-    }
-    
-    /**
-     * copy constructor
-     */
-    public JDFDurationRange(JDFDurationRange r)
-    {
-        init(r.getLeft(), r.getRight());
-    }
-    
-    /**
-     * Initialization 
-     */
-    protected void init(JDFDuration xmin, JDFDuration xmax)
-    {
-        setLeft(xmin);
-        setRight(xmax);
-    }
-    
-    /** 
-     * Construct a JDFDurationRange from a string
-     * 
-     * @throws DataFormatException - if the String has not a valid format
-     */
-    public JDFDurationRange(String s) throws DataFormatException
-    {
-        String[] strArray = s.split("~");
-        if (strArray.length <= 0 || strArray.length > 2)
-        {
-            throw new DataFormatException("JDFDurationRange illegal string: " + s);
-        }
-        try
-        {
-            // the min and the max values are equal
-            if (strArray.length == 1)
-            {
-                m_left = new JDFDuration(strArray[0].trim());
-                m_right = new JDFDuration(strArray[0].trim());
-            }
-            // two different values
-            else
-            {
-                m_left = new JDFDuration(strArray[0].trim());
-                m_right = new JDFDuration(strArray[1].trim());
-            }
-        }
-        catch (DataFormatException e)
-        {
-            throw new DataFormatException("JDFDurationRange illegal string: " + s);
-        }
-    }
-    
-    //**************************************** Methods *********************************************
-    
-     
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        if (m_left.equals(m_right)) 
-        {
-            return m_left.getDurationISO();
-        }
-        return m_left.getDurationISO() + " ~ " + m_right.getDurationISO();
-    }
-    
-    
-    /**
-     * isValid - validate the given String
-     *
-     * @param s the given string
-     *
-     * @return boolean - false if the String has not a valid format 
-     */
-    public boolean isValid(String s)
-    {
-        try 
-        {
-            new JDFDurationRange(s);
-        }
-        catch (DataFormatException e)
-        {
-            return false;
-        }
-        return true;
-    }
-    
-    
-     
-    /**
-     * inRange - returns true if 'x' is within the range defined by 'this'
-     * 
-     * @param x JDFDuration that is to be compared with 'this'
-     * @return boolean - true if 'x' is within the range defined by 'this'
-     */
-    public boolean inRange(JDFDuration x)
-    {
-        JDFDuration min=this.getLowerValue();
-        JDFDuration max=this.getUpperValue();
-        return ( ( x.isLonger(min)   || x.equals(min) )  && 
-                ( x.isShorter(max) || x.equals(max) ) );
-    }
-    
-    
-    /**
-     * isPartOfRange - is range 'r' within this range?
-     * 
-     * @param r the range to test
-     * 
-     * @return boolean - true if range 'r' is within this range, else false
-     */
-    public boolean isPartOfRange(JDFRange ra)
-    {
-        JDFDurationRange r=(JDFDurationRange)ra;
-        JDFDuration min=this.getLowerValue();
-        JDFDuration r_min=r.getLowerValue();
-        JDFDuration max=this.getUpperValue();
-        JDFDuration r_max=r.getUpperValue();
-        return ( ( r_min.isLonger(min)   || r_min.equals(min) )  && 
-                ( r_max.isShorter(max) || r_max.equals(max) ) );
-    } 
-    
-    
-    /**
-     * getLeft - get the left of the two range deliminators xmin ~ xmax
-     * 
-     * @return JDFDuration - the left value
-     */
-    public JDFDuration getLeft()
-    {
-        return m_left;
-    }
-    
-    /**
-     * getRight - get the right of the two range deliminators xmin ~ xmax
-     * 
-     * @return JDFDuration - the right value
-     */
-    public JDFDuration getRight()
-    {
-        return m_right;
-    }
-    
-    /**
-     * setLeft - sets the left JDFDuration object of the range
-     *
-     * @param x the left JDFDuration object of the range
-     */
-    public void setLeft(JDFDuration x) 
-    {
-        m_left = x;
-    }
-    
-    /**
-     * setRight - sets the right JDFDuration object of the range
-     *
-     * @param x the right JDFDuration object of the range
-     */
-    public void setRight(JDFDuration x) 
-    {
-        m_right = x;
-    }
-    
-    /**
-     * getUpperValue - returns the upper value of the bounds
-     *
-     * @return JDFDuration - the upper value of the range
-     */
-    public JDFDuration getUpperValue()
-    {
-        return (m_left.isShorter(m_right)||(m_left.equals(m_right)) ? m_right : m_left);
-    }
-    
-    /**
-     * getLowerValue - returns the lower value of the bounds
-     *
-     * @return JDFDuration - the lower value of the range
-     */
-    public JDFDuration getLowerValue()
-    {
-        return (m_left.isShorter(m_right) ? m_left : m_right);
-    }
+	// **************************************** Attributes
+	// ******************************************
+	/**
+	 * first, left element
+	 */
+	private JDFDuration m_left = null;
 
-    protected Object getRightObject()
-    {
-        return m_right;
-    }
+	/**
+	 * second, right element
+	 */
+	private JDFDuration m_right = null;
 
-    protected Object getLeftObject()
-    {
-        return m_left;
-    }
-    protected boolean inObjectRange(Object other)
-    {
-       return inRange((JDFDuration) other);
-    }
+	// **************************************** Constructors
+	// ****************************************
+	/**
+	 * Empty range constructor
+	 */
+	public JDFDurationRange()
+	{
+		init(new JDFDuration(0), new JDFDuration(0));
+	}
 
-    
+	/**
+	 * Constructor - creates a Duration range defined by x
+	 */
+	public JDFDurationRange(JDFDuration x)
+	{
+		init(x, x);
+	}
+
+	/**
+	 * Constructor - creates a Duration range defined by xmin to xmax
+	 */
+	public JDFDurationRange(JDFDuration xmin, JDFDuration xmax)
+	{
+		init(xmin, xmax);
+	}
+
+	/**
+	 * copy constructor
+	 */
+	public JDFDurationRange(JDFDurationRange r)
+	{
+		init(r.getLeft(), r.getRight());
+	}
+
+	/**
+	 * Initialization
+	 */
+	protected void init(JDFDuration xmin, JDFDuration xmax)
+	{
+		setLeft(xmin);
+		setRight(xmax);
+	}
+
+	/**
+	 * Construct a JDFDurationRange from a string
+	 * 
+	 * @throws DataFormatException - if the String has not a valid format
+	 */
+	public JDFDurationRange(String s) throws DataFormatException
+	{
+		String[] strArray = s.split("~");
+		if (strArray.length <= 0 || strArray.length > 2)
+		{
+			throw new DataFormatException("JDFDurationRange illegal string: " + s);
+		}
+		try
+		{
+			// the min and the max values are equal
+			if (strArray.length == 1)
+			{
+				m_left = new JDFDuration(strArray[0].trim());
+				m_right = new JDFDuration(strArray[0].trim());
+			}
+			// two different values
+			else
+			{
+				m_left = new JDFDuration(strArray[0].trim());
+				m_right = new JDFDuration(strArray[1].trim());
+			}
+		}
+		catch (DataFormatException e)
+		{
+			throw new DataFormatException("JDFDurationRange illegal string: " + s);
+		}
+	}
+
+	// **************************************** Methods
+	// *********************************************
+
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		if (m_left.equals(m_right))
+		{
+			return m_left.getDurationISO();
+		}
+		return m_left.getDurationISO() + " ~ " + m_right.getDurationISO();
+	}
+
+	/**
+	 * isValid - validate the given String
+	 * 
+	 * @param s the given string
+	 * 
+	 * @return boolean - false if the String has not a valid format
+	 */
+	public boolean isValid(String s)
+	{
+		try
+		{
+			new JDFDurationRange(s);
+		}
+		catch (DataFormatException e)
+		{
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * inRange - returns true if 'x' is within the range defined by 'this'
+	 * 
+	 * @param x JDFDuration that is to be compared with 'this'
+	 * @return boolean - true if 'x' is within the range defined by 'this'
+	 */
+	public boolean inRange(JDFDuration x)
+	{
+		JDFDuration min = this.getLowerValue();
+		JDFDuration max = this.getUpperValue();
+		return ((x.isLonger(min) || x.equals(min)) && (x.isShorter(max) || x.equals(max)));
+	}
+
+	/**
+	 * isPartOfRange - is range 'r' within this range?
+	 * 
+	 * @param r the range to test
+	 * 
+	 * @return boolean - true if range 'r' is within this range, else false
+	 */
+	public boolean isPartOfRange(JDFRange ra)
+	{
+		JDFDurationRange r = (JDFDurationRange) ra;
+		JDFDuration min = this.getLowerValue();
+		JDFDuration r_min = r.getLowerValue();
+		JDFDuration max = this.getUpperValue();
+		JDFDuration r_max = r.getUpperValue();
+		return ((r_min.isLonger(min) || r_min.equals(min)) && (r_max.isShorter(max) || r_max.equals(max)));
+	}
+
+	/**
+	 * getLeft - get the left of the two range deliminators xmin ~ xmax
+	 * 
+	 * @return JDFDuration - the left value
+	 */
+	public JDFDuration getLeft()
+	{
+		return m_left;
+	}
+
+	/**
+	 * getRight - get the right of the two range deliminators xmin ~ xmax
+	 * 
+	 * @return JDFDuration - the right value
+	 */
+	public JDFDuration getRight()
+	{
+		return m_right;
+	}
+
+	/**
+	 * setLeft - sets the left JDFDuration object of the range
+	 * 
+	 * @param x the left JDFDuration object of the range
+	 */
+	public void setLeft(JDFDuration x)
+	{
+		m_left = x;
+	}
+
+	/**
+	 * setRight - sets the right JDFDuration object of the range
+	 * 
+	 * @param x the right JDFDuration object of the range
+	 */
+	public void setRight(JDFDuration x)
+	{
+		m_right = x;
+	}
+
+	/**
+	 * getUpperValue - returns the upper value of the bounds
+	 * 
+	 * @return JDFDuration - the upper value of the range
+	 */
+	public JDFDuration getUpperValue()
+	{
+		return (m_left.isShorter(m_right) || (m_left.equals(m_right)) ? m_right : m_left);
+	}
+
+	/**
+	 * getLowerValue - returns the lower value of the bounds
+	 * 
+	 * @return JDFDuration - the lower value of the range
+	 */
+	public JDFDuration getLowerValue()
+	{
+		return (m_left.isShorter(m_right) ? m_left : m_right);
+	}
+
+	protected Object getRightObject()
+	{
+		return m_right;
+	}
+
+	protected Object getLeftObject()
+	{
+		return m_left;
+	}
+
+	protected boolean inObjectRange(Object other)
+	{
+		return inRange((JDFDuration) other);
+	}
+
 }

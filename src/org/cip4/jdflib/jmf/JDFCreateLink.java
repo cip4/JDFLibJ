@@ -75,12 +75,10 @@
  @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2006. ALL RIGHTS RESERVED
  **/
 
-
 package org.cip4.jdflib.jmf;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoCreateLink;
-
 
 public class JDFCreateLink extends JDFAutoCreateLink
 {
@@ -88,48 +86,43 @@ public class JDFCreateLink extends JDFAutoCreateLink
 
 	/**
 	 * Constructor for JDFCreateLink
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFCreateLink(
-			CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFCreateLink(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFCreateLink
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFCreateLink(
-			CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI,
-			String qualifiedName)
+	public JDFCreateLink(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFCreateLink
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFCreateLink(
-			CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI,
-			String qualifiedName,
-			String myLocalName)
+	public JDFCreateLink(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
-	
+
 	/**
 	 * toString()
+	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoCreateLink#toString()
 	 */
 	public String toString()
@@ -137,6 +130,3 @@ public class JDFCreateLink extends JDFAutoCreateLink
 		return "JDFCreateLink[  --> " + super.toString() + " ]";
 	}
 }
-
-
-

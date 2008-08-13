@@ -84,77 +84,82 @@ import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-
 /**
- * Bidirectional HashMap utility class
+ * stream class that allows allows prefixing of a stream without requiring a copy
+ * 
  * @author prosirai
- *
+ * 
  */
 public class PrefixInputStream extends FilterInputStream
 {
 
-    private InputStream streamPre;
-    private boolean bDone;
-     
-    public PrefixInputStream(InputStream stream1, InputStream stream2)
-    {
-        super(stream2);
-        bDone=false;
-        streamPre=stream1;
-    }
-    
-    public PrefixInputStream(String prefix, InputStream stream2)
-    {
-        super(stream2);
-        bDone=false;
-        streamPre=new ByteArrayInputStream(prefix.getBytes());
-    }
+	private InputStream streamPre;
+	private boolean bDone;
 
-    /* (non-Javadoc)
-     * @see java.io.FilterInputStream#read()
-     */
-    public int read() throws IOException
-    {
-        if(!bDone)
-        {
-            final int read = streamPre.read();
-            if(read!=-1)
-                return read;
-            bDone=true;
-        }
+	public PrefixInputStream(InputStream stream1, InputStream stream2)
+	{
+		super(stream2);
+		bDone = false;
+		streamPre = stream1;
+	}
 
-         return super.read();
-    }
+	public PrefixInputStream(String prefix, InputStream stream2)
+	{
+		super(stream2);
+		bDone = false;
+		streamPre = new ByteArrayInputStream(prefix.getBytes());
+	}
 
-    /* (non-Javadoc)
-     * @see java.io.FilterInputStream#read(byte[], int, int)
-     */
-    public int read(byte[] b, int off, int len) throws IOException
-    {
-        if(!bDone)
-        {
-            final int read = streamPre.read(b,off,len);
-            if(read!=-1)
-                return read;
-            bDone=true;
-        }
-       return super.read(b, off, len);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.io.FilterInputStream#read()
+	 */
+	public int read() throws IOException
+	{
+		if (!bDone)
+		{
+			final int read = streamPre.read();
+			if (read != -1)
+				return read;
+			bDone = true;
+		}
 
-    /* (non-Javadoc)
-     * @see java.io.FilterInputStream#read(byte[])
-     */
-    public int read(byte[] b) throws IOException
-    {
-        if(!bDone)
-        {
-            final int read = streamPre.read(b);
-            if(read!=-1)
-                return read;
-            bDone=true;
-        }
-       return super.read(b);
-    }
+		return super.read();
+	}
 
-   
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.io.FilterInputStream#read(byte[], int, int)
+	 */
+	public int read(byte[] b, int off, int len) throws IOException
+	{
+		if (!bDone)
+		{
+			final int read = streamPre.read(b, off, len);
+			if (read != -1)
+				return read;
+			bDone = true;
+		}
+		return super.read(b, off, len);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.io.FilterInputStream#read(byte[])
+	 */
+	public int read(byte[] b) throws IOException
+	{
+		if (!bDone)
+		{
+			final int read = streamPre.read(b);
+			if (read != -1)
+				return read;
+			bDone = true;
+		}
+		return super.read(b);
+	}
+
 }

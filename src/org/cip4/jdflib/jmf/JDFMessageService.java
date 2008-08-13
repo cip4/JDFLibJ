@@ -70,14 +70,14 @@
  */
 
 /**
-==========================================================================
-class JDFMessageService extends JDFResource
-==========================================================================
-@COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001
-ALL RIGHTS RESERVED
-@Author: sabjon@topmail.de   using a code generator
-Warning! very preliminary test version. Interface subject to change without prior notice!
-Revision history:    ...
+ ==========================================================================
+ class JDFMessageService extends JDFResource
+ ==========================================================================
+ @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001
+ ALL RIGHTS RESERVED
+ @Author: sabjon@topmail.de   using a code generator
+ Warning! very preliminary test version. Interface subject to change without prior notice!
+ Revision history:    ...
  **/
 package org.cip4.jdflib.jmf;
 
@@ -96,194 +96,194 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCaps;
 
-
-
 //----------------------------------
 public class JDFMessageService extends JDFAutoMessageService implements IDeviceCapable
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFMessageService
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    public JDFMessageService(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFMessageService
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	public JDFMessageService(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFMessageService
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    public JDFMessageService(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFMessageService
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFMessageService(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFMessageService
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    public JDFMessageService(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * Constructor for JDFMessageService
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	public JDFMessageService(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /* (non-Javadoc)
-     * @see org.cip4.jdflib.auto.JDFAutoMessageService#toString()
-     */
-    @Override
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.cip4.jdflib.auto.JDFAutoMessageService#toString()
+	 */
+	@Override
 	public String toString()
-    {
-        return "JDFMessageService[  --> " + super.toString() + " ]";
-    }
+	{
+		return "JDFMessageService[  --> " + super.toString() + " ]";
+	}
 
-    /**
-     * Typesafe enumerated attribute Type
-     * @return EnumType: the enumeration value of the attribute
-     */
-    public EnumType getEnumType()
-    {
-        return EnumType.getEnum(getAttribute(AttributeName.TYPE, null, null));
-    }
-    /**
-     * Set attribute Type
-     * @param value the value to set the attribute to
-     */
-    public void setType(EnumType value)
-    {
-        final String typeName = value==null ? null : value.getName();
-        setType(typeName);
-    }
+	/**
+	 * Typesafe enumerated attribute Type
+	 * 
+	 * @return EnumType: the enumeration value of the attribute
+	 */
+	public EnumType getEnumType()
+	{
+		return EnumType.getEnum(getAttribute(AttributeName.TYPE, null, null));
+	}
 
-    /**
-     * Method isCommand.
-     * @return boolean
-     * @deprecated use getCommand
-     */
-    @Deprecated
+	/**
+	 * Set attribute Type
+	 * 
+	 * @param value the value to set the attribute to
+	 */
+	public void setType(EnumType value)
+	{
+		final String typeName = value == null ? null : value.getName();
+		setType(typeName);
+	}
+
+	/**
+	 * Method isCommand.
+	 * 
+	 * @return boolean
+	 * @deprecated use getCommand
+	 */
+	@Deprecated
 	public boolean isCommand()
-    {
-        return getCommand();
-    }
+	{
+		return getCommand();
+	}
 
-    /**
-     * Method isQuery.
-     * @return boolean
-     * @deprecated use getQuery
-     */
-    @Deprecated
+	/**
+	 * Method isQuery.
+	 * 
+	 * @return boolean
+	 * @deprecated use getQuery
+	 */
+	@Deprecated
 	public boolean isQuery()
-    {
-        return getQuery();
-    }
+	{
+		return getQuery();
+	}
 
-    /**
-     * append a devcaps for this and set its context to JMF
-     */
-    @Override
+	/**
+	 * append a devcaps for this and set its context to JMF
+	 */
+	@Override
 	public JDFDevCaps appendDevCaps()
-    {
-        JDFDevCaps dcs=super.appendDevCaps();
-        dcs.setContext(EnumContext.JMF);
-        return dcs;
-    }
-    
-    public final VString getNamePathVector()
-    {
-        VString vResult=new VString();
-        Vector<EnumFamily> families=getFamilies();
-        int siz=families==null ? 0 : families.size();
-        for(int i=0;i<siz;i++)
-            vResult.add(families.get(i).getName());
+	{
+		JDFDevCaps dcs = super.appendDevCaps();
+		dcs.setContext(EnumContext.JMF);
+		return dcs;
+	}
 
-        return vResult;
-    }      
-    
-    /**
-     * get the list of supported families
-     * 
-     * @return EnumFamily[] the list of supported families
-     */
-    public Vector getFamilies()
-    {
-        Vector<EnumFamily> fams=new Vector<EnumFamily>();
-        if(getCommand())
-            fams.add(EnumFamily.Command);
-        if(getSignal())
-            fams.add(EnumFamily.Signal);
-        if(getQuery())
-            fams.add(EnumFamily.Query);
-        if(getRegistration())
-            fams.add(EnumFamily.Registration);
-        if(getAcknowledge())
-            fams.add(EnumFamily.Acknowledge);
-        return fams.size()==0 ? null : fams;                                         
-    }
-    /**
-     * set the list of supported families
-     * 
-     * @param fams the Vector of EnumFamily of supported families
-     */
-    public void setFamilies(Vector fams)
-    {
-        setCommand(false);
-        setSignal(false);
-        setQuery(false);
-        setRegistration(false);
-        setAcknowledge(false);
+	public final VString getNamePathVector()
+	{
+		VString vResult = new VString();
+		Vector<EnumFamily> families = getFamilies();
+		int siz = families == null ? 0 : families.size();
+		for (int i = 0; i < siz; i++)
+			vResult.add(families.get(i).getName());
 
-        if(fams==null)
-            return;
-        for(int i=0;i<fams.size();i++)
-        {
-            try{
-                setFamily((EnumFamily) fams.elementAt(i));
-            }
-            catch (JDFException x)
-            { /* nop */}
-        }
-    }
+		return vResult;
+	}
 
-    /**
-     * set the value of the family name to true
-     * @param family
-     */
-    public void setFamily(EnumFamily family)
-    {
-        if(family==null || EnumFamily.Response.equals(family))
-            throw new JDFException("setFamily: illegal family:"+family);
-        setAttribute(family.getName(), true,null);        
-    }
-    
-    /**
+	/**
+	 * get the list of supported families
+	 * 
+	 * @return EnumFamily[] the list of supported families
+	 */
+	public Vector getFamilies()
+	{
+		Vector<EnumFamily> fams = new Vector<EnumFamily>();
+		if (getCommand())
+			fams.add(EnumFamily.Command);
+		if (getSignal())
+			fams.add(EnumFamily.Signal);
+		if (getQuery())
+			fams.add(EnumFamily.Query);
+		if (getRegistration())
+			fams.add(EnumFamily.Registration);
+		if (getAcknowledge())
+			fams.add(EnumFamily.Acknowledge);
+		return fams.size() == 0 ? null : fams;
+	}
+
+	/**
+	 * set the list of supported families
+	 * 
+	 * @param fams the Vector of EnumFamily of supported families
+	 */
+	public void setFamilies(Vector fams)
+	{
+		setCommand(false);
+		setSignal(false);
+		setQuery(false);
+		setRegistration(false);
+		setAcknowledge(false);
+
+		if (fams == null)
+			return;
+		for (int i = 0; i < fams.size(); i++)
+		{
+			try
+			{
+				setFamily((EnumFamily) fams.elementAt(i));
+			}
+			catch (JDFException x)
+			{ /* nop */
+			}
+		}
+	}
+
+	/**
+	 * set the value of the family name to true
+	 * 
+	 * @param family
+	 */
+	public void setFamily(EnumFamily family)
+	{
+		if (family == null || EnumFamily.Response.equals(family))
+			throw new JDFException("setFamily: illegal family:" + family);
+		setAttribute(family.getName(), true, null);
+	}
+
+	/**
      * 
      */
-    public ICapabilityElement getTargetCap(String id)
-    {
-        KElement e = getTarget(id, null);
-        if(e instanceof ICapabilityElement)
-            return (ICapabilityElement)e;
-        return null;
-    }
+	public ICapabilityElement getTargetCap(String id)
+	{
+		KElement e = getTarget(id, null);
+		if (e instanceof ICapabilityElement)
+			return (ICapabilityElement) e;
+		return null;
+	}
 
 }
-
-
-

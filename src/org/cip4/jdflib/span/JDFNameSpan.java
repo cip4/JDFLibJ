@@ -85,154 +85,148 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.StringUtil;
 
-
 public class JDFNameSpan extends JDFSpanBase
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFNameSpan
-     * @param ownerDocument
-     * @param qualifiedName
-     */
-     public JDFNameSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
-
-
-    /**
-     * Constructor for JDFNameSpan
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     */
-    public JDFNameSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
-
-    /**
-     * Constructor for JDFNameSpan
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     */
-    public JDFNameSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static 
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUAL,                        0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.PREFERRED,                     0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.RANGE,                         0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFERRANGE,                    0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-     }
-
-    protected AttributeInfo getTheAttributeInfo() 
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
-
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFNameSpan[ --> " + super.toString() + " ]";
-    }
-
-    /**
-     * Set attribute Actual
-     *
-     * @param String value - the value to set
-     */
-    public void setActual(String value)
-    {
-        setAttribute(AttributeName.ACTUAL, value);
-    }
-
-    /**
-     * Get attribute Actual value
-     *
-     * @return String - the value of attribute Actual
-     */
-    public String getActual()
-    {
-        return getAttribute(AttributeName.ACTUAL, null, JDFConstants.EMPTYSTRING);
-    }
-    
-    /**
-     * Set attribute Preferred
-     *
-     * @param String value - the value to set
-     */
-    public void setPreferred(String value)
-    {
-        setAttribute(AttributeName.PREFERRED, value);
-    }
-
-    /**
-     * Get attribute Preferred value
-     *
-     * @return String - the value of attribute Preferred
-     */
-    public String getPreferred()
-    {
-        return getAttribute(AttributeName.PREFERRED, null, JDFConstants.EMPTYSTRING);
-    }
-    
-    /**
-     * Get attribute Range value
-     *
-     * @return VString - the value of attribute Range
-     */
-    public VString getRange()
-    {
-		return new VString(getAttribute(AttributeName.RANGE),null);
+	/**
+	 * Constructor for JDFNameSpan
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 */
+	public JDFNameSpan(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
 	}
-	
-    /**
-     * Set attribute Range as Enumerations
-     *
-     * @param VString value - the value to set
-     */
-    public void setRange( VString vs)
-    {
-		setAttribute(AttributeName.RANGE, StringUtil.setvString(vs," ",null,null), null);
+
+	/**
+	 * Constructor for JDFNameSpan
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFNameSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
-    
-    /**
-     * add an element 's' to the Range attribute
-     * @param String s - the value to add
-     */
-     public void addRange(String s)
-     {
-         VString v = getRange();
-         v.add(s);
-         setRange(v);
-     }
-    
-     
-    public boolean init()
-    {
-        boolean b = super.init();
-        setDataType(EnumDataType.NameSpan);
-        return b;
-    }
+
+	/**
+	 * Constructor for JDFNameSpan
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 */
+	public JDFNameSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUAL, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREFERRED, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.RANGE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFERRANGE, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+	}
+
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
+
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFNameSpan[ --> " + super.toString() + " ]";
+	}
+
+	/**
+	 * Set attribute Actual
+	 * 
+	 * @param String value - the value to set
+	 */
+	public void setActual(String value)
+	{
+		setAttribute(AttributeName.ACTUAL, value);
+	}
+
+	/**
+	 * Get attribute Actual value
+	 * 
+	 * @return String - the value of attribute Actual
+	 */
+	public String getActual()
+	{
+		return getAttribute(AttributeName.ACTUAL, null, JDFConstants.EMPTYSTRING);
+	}
+
+	/**
+	 * Set attribute Preferred
+	 * 
+	 * @param String value - the value to set
+	 */
+	public void setPreferred(String value)
+	{
+		setAttribute(AttributeName.PREFERRED, value);
+	}
+
+	/**
+	 * Get attribute Preferred value
+	 * 
+	 * @return String - the value of attribute Preferred
+	 */
+	public String getPreferred()
+	{
+		return getAttribute(AttributeName.PREFERRED, null, JDFConstants.EMPTYSTRING);
+	}
+
+	/**
+	 * Get attribute Range value
+	 * 
+	 * @return VString - the value of attribute Range
+	 */
+	public VString getRange()
+	{
+		return new VString(getAttribute(AttributeName.RANGE), null);
+	}
+
+	/**
+	 * Set attribute Range as Enumerations
+	 * 
+	 * @param VString value - the value to set
+	 */
+	public void setRange(VString vs)
+	{
+		setAttribute(AttributeName.RANGE, StringUtil.setvString(vs, " ", null, null), null);
+	}
+
+	/**
+	 * add an element 's' to the Range attribute
+	 * 
+	 * @param String s - the value to add
+	 */
+	public void addRange(String s)
+	{
+		VString v = getRange();
+		v.add(s);
+		setRange(v);
+	}
+
+	public boolean init()
+	{
+		boolean b = super.init();
+		setDataType(EnumDataType.NameSpan);
+		return b;
+	}
 }

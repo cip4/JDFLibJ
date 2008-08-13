@@ -38,7 +38,7 @@
  *
  * Usage of this software in commercial products is subject to restrictions. For
  * details please consult info@cip4.org.
-  *
+ *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -74,12 +74,10 @@
  @COPYRIGHT Heidelberger Druckmaschinen AG, 2006. ALL RIGHTS RESERVED
  **/
 
-
 package org.cip4.jdflib.jmf;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoRemoveLink;
-
 
 public class JDFRemoveLink extends JDFAutoRemoveLink
 {
@@ -87,48 +85,43 @@ public class JDFRemoveLink extends JDFAutoRemoveLink
 
 	/**
 	 * Constructor for JDFRemoveLink
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFRemoveLink(
-			CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFRemoveLink(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFRemoveLink
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFRemoveLink(
-			CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI,
-			String qualifiedName)
+	public JDFRemoveLink(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFRemoveLink
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFRemoveLink(
-			CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI,
-			String qualifiedName,
-			String myLocalName)
+	public JDFRemoveLink(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
-	
+
 	/**
 	 * toString()
+	 * 
 	 * @return String
 	 */
 	public String toString()
@@ -136,6 +129,3 @@ public class JDFRemoveLink extends JDFAutoRemoveLink
 		return "JDFRemoveLink[  --> " + super.toString() + " ]";
 	}
 }
-
-
-

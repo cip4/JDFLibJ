@@ -69,16 +69,17 @@
  * 
  */
 /**
-==========================================================================
-class JDFQueueEntry extends JDFResource
-==========================================================================
-@COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001
-ALL RIGHTS RESERVED
-@Author: sabjon@topmail.de   using a code generator
-Warning! very preliminary test version. Interface subject to change without prior notice!
-Revision history:    ...
+ ==========================================================================
+ class JDFQueueEntry extends JDFResource
+ ==========================================================================
+ @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001
+ ALL RIGHTS RESERVED
+ @Author sabjontopmail.de   using a code generator
+ Warning! very preliminary test version. Interface subject to change without prior notice!
+ Revision history:    ...
  **/
 package org.cip4.jdflib.jmf;
+
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Vector;
@@ -97,450 +98,485 @@ import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.JDFDate;
 
 //----------------------------------
+/**
+ * @author prosirai
+ *
+ */
 public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable
 {
-    public static class QueueEntryComparator implements Comparator
-    {
+	public static class QueueEntryComparator implements Comparator
+	{
 
-        /* (non-Javadoc)
-         * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
-         */
-        public int compare(Object a1, Object a2)
-        {
-            if(!(a1 instanceof KElement))
-                return -1;
-            if(!(a2 instanceof KElement))
-                return 1;
-            KElement o1=(KElement)a1;
-            KElement o2=(KElement)a2;
-            int i=o1.getNodeName().compareTo(o2.getNodeName());
-            if(i!=0)
-                return i;
-            if((o1 instanceof JDFQueueEntry) && (o2 instanceof JDFQueueEntry))
-            {
-                JDFQueueEntry q1=(JDFQueueEntry)o1;
-                JDFQueueEntry q2=(JDFQueueEntry)o2;
-                EnumQueueEntryStatus status1=q1.getQueueEntryStatus();
-                EnumQueueEntryStatus status2=q2.getQueueEntryStatus();
-                int s1=(status1==null) ? 0 : status1.getValue();
-                int s2=(status2==null) ? 0 : status2.getValue();
-                if(s1!=s2)
-                    return s1-s2;
-                if(q1.isCompleted())
-                {
-                    JDFDate d1=q1.getEndTime();
-                    JDFDate d2=q1.getEndTime();
-                    if(d1!=null && d2!=null)
-                        return d1.compareTo(d2);
-                }
-                else
-                {
-                    s1=q1.getPriority();
-                    s2=q2.getPriority();
-                    if(s1!=s2)
-                        return s2-s1;
-                }
-            }
-            return 0;
-        }        
-    }
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+		 */
+		public int compare(Object a1, Object a2)
+		{
+			if (!(a1 instanceof KElement))
+				return -1;
+			if (!(a2 instanceof KElement))
+				return 1;
+			KElement o1 = (KElement) a1;
+			KElement o2 = (KElement) a2;
+			int i = o1.getNodeName().compareTo(o2.getNodeName());
+			if (i != 0)
+				return i;
+			if ((o1 instanceof JDFQueueEntry) && (o2 instanceof JDFQueueEntry))
+			{
+				JDFQueueEntry q1 = (JDFQueueEntry) o1;
+				JDFQueueEntry q2 = (JDFQueueEntry) o2;
+				EnumQueueEntryStatus status1 = q1.getQueueEntryStatus();
+				EnumQueueEntryStatus status2 = q2.getQueueEntryStatus();
+				int s1 = (status1 == null) ? 0 : status1.getValue();
+				int s2 = (status2 == null) ? 0 : status2.getValue();
+				if (s1 != s2)
+					return s1 - s2;
+				if (q1.isCompleted())
+				{
+					JDFDate d1 = q1.getEndTime();
+					JDFDate d2 = q1.getEndTime();
+					if (d1 != null && d2 != null)
+						return d1.compareTo(d2);
+				}
+				else
+				{
+					s1 = q1.getPriority();
+					s2 = q2.getPriority();
+					if (s1 != s2)
+						return s2 - s1;
+				}
 
-    private static final long serialVersionUID = 1L;
+				JDFDate d1 = q1.getStartTime();
+				JDFDate d2 = q2.getStartTime();
+				int d = ContainerUtil.compare(d1, d2);
+				if (d != 0)
+					return d;
 
-    /**
-     * Constructor for JDFQueueEntry
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    public JDFQueueEntry(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+				d1 = q1.getSubmissionTime();
+				d2 = q2.getSubmissionTime();
+				d = ContainerUtil.compare(d1, d2);
+				if (d != 0)
+					return d;
+			}
+			return 0;
+		}
+	}
 
-    /**
-     * Constructor for JDFQueueEntry
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    public JDFQueueEntry(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFQueueEntry
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    public JDFQueueEntry(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * Constructor for JDFQueueEntry
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	public JDFQueueEntry(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * toString()
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFQueueEntry[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * Constructor for JDFQueueEntry
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFQueueEntry(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * get part map vector
-     * @return VJDFAttributeMap: vector of attribute maps, one for each part
-     */
-    public VJDFAttributeMap getPartMapVector()
-    {
-        return super.getPartMapVector();
-    }
+	/**
+	 * Constructor for JDFQueueEntry
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	public JDFQueueEntry(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * set all parts to those define in vParts
-     * @param vParts vector of attribute maps for the parts
-     */
-    public void setPartMapVector(VJDFAttributeMap vParts)
-    {
-        super.setPartMapVector(vParts);
-    }
+	/**
+	 * toString()
+	 * 
+	 * @return String
+	 */
+	@Override
+	public String toString()
+	{
+		return "JDFQueueEntry[  --> " + super.toString() + " ]";
+	}
 
-    /**
-     * set all parts to those defined by mPart
-     * @param mPart attribute map for the part to set
-     */
-    public void setPartMap(JDFAttributeMap mPart)
-    {
-        super.setPartMap(mPart);
-    }
+	/**
+	 * get part map vector
+	 * 
+	 * @return VJDFAttributeMap: vector of attribute maps, one for each part
+	 */
+	@Override
+	public VJDFAttributeMap getPartMapVector()
+	{
+		return super.getPartMapVector();
+	}
 
-    /**
-     * remove the part defined in mPart
-     * @param mPart attribute map for the part to remove
-     */
-    public void removePartMap(JDFAttributeMap mPart)
-    {
-        super.removePartMap(mPart);
-    }
+	/**
+	 * set all parts to those define in vParts
+	 * 
+	 * @param vParts vector of attribute maps for the parts
+	 */
+	@Override
+	public void setPartMapVector(VJDFAttributeMap vParts)
+	{
+		super.setPartMapVector(vParts);
+	}
 
-    /**
-     * return true if this qe matches the input node identifier
-     * @param ni
-     * @return
-     */
-    public boolean matchesNodeIdentifier(NodeIdentifier ni)
-    {
-        if(ni==null)
-            return false;
-        NodeIdentifier niThis= new NodeIdentifier(this);
-        return niThis.equals(ni);
-    }
+	/**
+	 * set all parts to those defined by mPart
+	 * 
+	 * @param mPart attribute map for the part to set
+	 */
+	@Override
+	public void setPartMap(JDFAttributeMap mPart)
+	{
+		super.setPartMap(mPart);
+	}
 
-    /**
-     * return true if this qe matches the input QueueFilter
-     * @param ni
-     * @return
-     */
-    public boolean matchesQueueFilter(JDFQueueFilter filter)
-    {
-        if(filter==null)
-            return true;
-        return filter.matches(this);
-    }
+	/**
+	 * remove the part defined in mPart
+	 * 
+	 * @param mPart attribute map for the part to remove
+	 */
+	@Override
+	public void removePartMap(JDFAttributeMap mPart)
+	{
+		super.removePartMap(mPart);
+	}
 
-    /**
-     * check whether the part defined by mPart is included
-     * @param mPart attribute map to look for
-     * @return boolean - returns true if the part exists
-     */
-    public boolean hasPartMap(JDFAttributeMap mPart)
-    {
-        return super.hasPartMap(mPart);
-    }
+	/**
+	 * return true if this qe matches the input node identifier
+	 * 
+	 * @param ni
+	 * @return
+	 */
+	public boolean matchesNodeIdentifier(NodeIdentifier ni)
+	{
+		if (ni == null)
+			return false;
+		NodeIdentifier niThis = new NodeIdentifier(this);
+		return niThis.equals(ni);
+	}
 
-    /* (non-Javadoc)
-     * @see org.cip4.jdflib.auto.JDFAutoQueueEntry#setPriority(int)
-     */
-    public void setPriority(int value)
-    {
-        int oldVal=hasAttribute(AttributeName.PRIORITY)?getPriority():-1;
-        if(isAutomated()&& value!=oldVal)
-        {
-            final JDFQueue queue = (JDFQueue)getParentNode_KElement();
-            synchronized(queue)
-            {
-                super.setPriority(value);
-                queue.sortChildren();
-            }
-        }
-        else if(value!=oldVal) // non automated
-        {
-            super.setPriority(value);
-        }
-    }
+	/**
+	 * return true if this qe matches the input QueueFilter
+	 * 
+	 * @param ni
+	 * @return
+	 */
+	public boolean matchesQueueFilter(JDFQueueFilter filter)
+	{
+		if (filter == null)
+			return true;
+		return filter.matches(this);
+	}
 
-    /**
-     * sort this into the queue based on current values
-     * assumes presorted queue
-     * @param oldVal - the previous sort value, use -1 to sort from back
-     * @deprecated call JDFQueue.sortChildren()
-     */
-    @Deprecated
-    public void sortQueue(int oldVal)
-    {
-        final JDFQueue queue = (JDFQueue)getParentNode_KElement();
-        queue.sortChildren();
-    }
+	/**
+	 * check whether the part defined by mPart is included
+	 * 
+	 * @param mPart attribute map to look for
+	 * @return boolean - returns true if the part exists
+	 */
+	@Override
+	public boolean hasPartMap(JDFAttributeMap mPart)
+	{
+		return super.hasPartMap(mPart);
+	}
 
-    /**
-     * @return true if the parent queue is automated
-     */
-    private boolean isAutomated()
-    {
-        KElement e=getParentNode_KElement();
-        if(e instanceof JDFQueue)
-        {
-            return ((JDFQueue)e).isAutomated();
-        }
-        return false;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.cip4.jdflib.auto.JDFAutoQueueEntry#setPriority(int)
+	 */
+	@Override
+	public void setPriority(int value)
+	{
+		int oldVal = hasAttribute(AttributeName.PRIORITY) ? getPriority() : -1;
+		if (isAutomated() && value != oldVal)
+		{
+			final JDFQueue queue = (JDFQueue) getParentNode_KElement();
+			synchronized (queue)
+			{
+				super.setPriority(value);
+				queue.sortChildren();
+			}
+		}
+		else if (value != oldVal) // non automated
+		{
+			super.setPriority(value);
+		}
+	}
 
-    /**
-     * sets the QueueEntry/@Status
-     * if the queue is automated, also resorts the queue to reflect the new Status and sets the Queue/@Status based on
-     * the maximum number of concurrently running jobs
-     * also sets StartTime and EndTime appropriately if the queue is automated
-     * 
-     * @param value the queuentry status to set
-     * 
-     * @see org.cip4.jdflib.auto.JDFAutoQueueEntry#setQueueEntryStatus(org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus)
-     */
-    public void setQueueEntryStatus(EnumQueueEntryStatus value)
-    {
-        EnumQueueEntryStatus oldVal=getQueueEntryStatus();
-        if(isAutomated() &&!ContainerUtil.equals(oldVal, value))
-        {
-            final JDFQueue queue = (JDFQueue)getParentNode_KElement();
-            synchronized(queue)
-            {
-                super.setQueueEntryStatus(value);
-                if(isCompleted())
-                {
-                    if(!hasAttribute(AttributeName.ENDTIME))
-                        super.setEndTime(new JDFDate());
-                    queue.cleanup();
-                }
-                if(EnumQueueEntryStatus.Running.equals(value))
-                {
-                    if(!hasAttribute(AttributeName.STARTTIME))
-                          super.setStartTime(new JDFDate());
-                    removeAttribute(AttributeName.ENDTIME);
-                            
-                }
-                queue.sortChildren();
-                queue.setStatusFromEntries();
-            }
-        }
-        else if(!ContainerUtil.equals(oldVal, value)) // non automated
-        {
-            super.setQueueEntryStatus(value);
-        }
-    }
+	/**
+	 * sort this into the queue based on current values assumes presorted queue
+	 * 
+	 * @param oldVal - the previous sort value, use -1 to sort from back
+	 * @deprecated call JDFQueue.sortChildren()
+	 */
+	@Deprecated
+	public void sortQueue(int oldVal)
+	{
+		final JDFQueue queue = (JDFQueue) getParentNode_KElement();
+		queue.sortChildren();
+	}
 
-    /**
-     * gets the NodeIdetifier that matches this
-     * @return
-     */
-    public NodeIdentifier getIdentifier()
-    {
-        NodeIdentifier ni= new NodeIdentifier();
-        ni.setTo(getJobID(), getJobPartID(), getPartMapVector());
-        return ni;
-    }
-    /**
-     * gets the NodeIdetifier that matches this
-     * @return
-     */
-    public void setIdentifier(NodeIdentifier ni)
-    {
-        if(ni==null)
-            return;
-        setPartMapVector(ni.getPartMapVector());
-        setJobID(ni.getJobID());
-        setJobPartID(ni.getJobPartID());
-    }
-    /**
-     * get the next sibling queueentry
-     * @return
-     */
-   public JDFQueueEntry getNextQueueEntry()
-    {
-        return (JDFQueueEntry)getNextSiblingElement(ElementName.QUEUEENTRY,null);
-    }
-   /**
-    * get the previous sibling queueentry
-    * @return
-    */
-   public JDFQueueEntry getPreviousQueueEntry()
-   {
-       return (JDFQueueEntry)getPreviousSiblingElement(ElementName.QUEUEENTRY,null);
-   }
-   /**
-    * get the vector of valid next @Status values for this queue entry based on the current staus
-    * based on the table of valid queue entry transitions
-    * 
-    * @return  Vector<EnumQueueEntryStatus> the vector of valid new stati
-    */
-   public Vector<EnumQueueEntryStatus> getNextStatusVector()
-   {
-       Vector<EnumQueueEntryStatus> v=new Vector<EnumQueueEntryStatus>();
-       
-       final EnumQueueEntryStatus qesThis=getQueueEntryStatus();
-       if(qesThis==null)
-       {
-           Iterator<EnumQueueEntryStatus>it=EnumQueueEntryStatus.iterator();
-           while(it.hasNext())
-               v.add(it.next());
-       }
-       else if(EnumQueueEntryStatus.Running.equals(qesThis))
-       {
-           v.add(EnumQueueEntryStatus.Running);
-           v.add(EnumQueueEntryStatus.PendingReturn);
-           v.add(EnumQueueEntryStatus.Completed);
-           v.add(EnumQueueEntryStatus.Aborted);
-                 }
-       else if(EnumQueueEntryStatus.Waiting.equals(qesThis))
-       {
-           v.add(EnumQueueEntryStatus.Running);
-           v.add(EnumQueueEntryStatus.Waiting);
-           v.add(EnumQueueEntryStatus.Held);
-           v.add(EnumQueueEntryStatus.Removed);
-           v.add(EnumQueueEntryStatus.PendingReturn);
-           v.add(EnumQueueEntryStatus.Aborted);
-       }
-       else if(EnumQueueEntryStatus.Held.equals(qesThis))
-       {
-           v.add(EnumQueueEntryStatus.Waiting);
-           v.add(EnumQueueEntryStatus.Held);
-           v.add(EnumQueueEntryStatus.Removed);
-           v.add(EnumQueueEntryStatus.PendingReturn);
-           v.add(EnumQueueEntryStatus.Aborted);
-       }
-       else if(EnumQueueEntryStatus.Removed.equals(qesThis))
-       {
-           v.add(EnumQueueEntryStatus.Removed);
-       }
-       else if(EnumQueueEntryStatus.Suspended.equals(qesThis))
-       {
-           v.add(EnumQueueEntryStatus.Running);
-           v.add(EnumQueueEntryStatus.Suspended);
-           v.add(EnumQueueEntryStatus.Aborted);
-       }
-       else if(EnumQueueEntryStatus.PendingReturn.equals(qesThis))
-       {
-           v.add(EnumQueueEntryStatus.PendingReturn);
-           v.add(EnumQueueEntryStatus.Completed);
-           v.add(EnumQueueEntryStatus.Aborted);
-       }
-       else if(EnumQueueEntryStatus.Completed.equals(qesThis))
-       {
-           v.add(EnumQueueEntryStatus.Waiting);
-           v.add(EnumQueueEntryStatus.Removed);
-           v.add(EnumQueueEntryStatus.PendingReturn);
-           v.add(EnumQueueEntryStatus.Completed);
-           v.add(EnumQueueEntryStatus.Aborted);
-       }
-       else if(EnumQueueEntryStatus.Aborted.equals(qesThis))
-       {
-           v.add(EnumQueueEntryStatus.Waiting);
-           v.add(EnumQueueEntryStatus.Removed);
-           v.add(EnumQueueEntryStatus.PendingReturn);
-           v.add(EnumQueueEntryStatus.Aborted);
-       }
+	/**
+	 * @return true if the parent queue is automated
+	 */
+	private boolean isAutomated()
+	{
+		KElement e = getParentNode_KElement();
+		if (e instanceof JDFQueue)
+		{
+			return ((JDFQueue) e).isAutomated();
+		}
+		return false;
+	}
 
-       return v;
-   }
+	/**
+	 * sets the QueueEntry/@Status if the queue is automated, also resorts the queue to reflect the new Status and sets
+	 * the Queue/@Status based on the maximum number of concurrently running jobs also sets StartTime and EndTime
+	 * appropriately if the queue is automated
+	 * 
+	 * @param value the queuentry status to set
+	 * 
+	 * @see org.cip4.jdflib.auto.JDFAutoQueueEntry#setQueueEntryStatus(org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus)
+	 */
+	@Override
+	public void setQueueEntryStatus(EnumQueueEntryStatus value)
+	{
+		EnumQueueEntryStatus oldVal = getQueueEntryStatus();
+		if (isAutomated() && !ContainerUtil.equals(oldVal, value))
+		{
+			final JDFQueue queue = (JDFQueue) getParentNode_KElement();
+			synchronized (queue)
+			{
+				super.setQueueEntryStatus(value);
+				if (isCompleted())
+				{
+					if (!hasAttribute(AttributeName.ENDTIME))
+						super.setEndTime(new JDFDate());
+					queue.cleanup();
+				}
+				if (EnumQueueEntryStatus.Running.equals(value))
+				{
+					if (!hasAttribute(AttributeName.STARTTIME))
+						super.setStartTime(new JDFDate());
+					removeAttribute(AttributeName.ENDTIME);
 
-    /**
-     * @return true if this entry is completed
-     */
-    public boolean isCompleted()
-    {
-       EnumQueueEntryStatus status=getQueueEntryStatus();
-       return // (status==null) || 
-       EnumQueueEntryStatus.Completed.equals(status) || 
-       EnumQueueEntryStatus.Removed.equals(status) || 
-       EnumQueueEntryStatus.Aborted.equals(status);
-    }
-    /**
-     * return a value based on QueueEntryStatus and Priority to sort the queue
-     * @return int a priority for sorting - low = back
-     */
-    @Deprecated
-    public int getSortPriority()
-    {
-       return getSortPriority(getQueueEntryStatus(),getPriority());
-    }
-    /**
-     * return a value based on QueueEntryStatus and Priority to sort the queue
-     * the status is the major order whereas the priority is used to order within regions of identical status
-     * 
-     * @return int a priority for sorting - 
-     *      low value = back of queue, 
-     *      high value = front of queue
-     */
-    @Deprecated
-    public static int getSortPriority(EnumQueueEntryStatus status, int priority)
-    {
-        int sort=(status==null) ? 0 : 10000 - 1000 * status.getValue();
-        sort+=priority;
-        return sort;
-    }
-    
-    /**
-     * populates this queuentry with the relevant parameters extracted from a JDF
-     * jobid, partmap, jobpartid etc.
-     * 
-     * @param jdf
-     */
-    public void setFromJDF(JDFNode jdf)
-    {
-        if(jdf==null)
-            return;
-        setJobID(jdf.getJobID(true));
-        setJobPartID(jdf.getJobPartID(false));
-        setPartMapVector(jdf.getPartMapVector());
-        
-        if(!hasAttribute(AttributeName.PRIORITY))
-        {
-            JDFNodeInfo ni=jdf.getInheritedNodeInfo("@"+AttributeName.PRIORITY);
-            if(ni!=null)
-                copyAttribute(AttributeName.PRIORITY, ni, null, null, null);
-        }
-         
-        this.eraseEmptyAttributes(true);
-    }
+				}
+				queue.sortChildren();
+				queue.setStatusFromEntries();
+			}
+		}
+		else if (!ContainerUtil.equals(oldVal, value)) // non automated
+		{
+			super.setQueueEntryStatus(value);
+		}
+	}
 
-    /* (non-Javadoc)
-     * @see java.lang.Comparable#compareTo(java.lang.Object)
-     */
-    public int compareTo(Object arg0)
-    {       
-        return new QueueEntryComparator().compare(this, arg0);
-    }
+	/**
+	 * gets the NodeIdetifier that matches this
+	 * 
+	 * @return
+	 */
+	public NodeIdentifier getIdentifier()
+	{
+		NodeIdentifier ni = new NodeIdentifier();
+		ni.setTo(getJobID(), getJobPartID(), getPartMapVector());
+		return ni;
+	}
+
+	/**
+	 * gets the NodeIdetifier that matches this
+	 * 
+	 * @return
+	 */
+	public void setIdentifier(NodeIdentifier ni)
+	{
+		if (ni == null)
+			return;
+		setPartMapVector(ni.getPartMapVector());
+		setJobID(ni.getJobID());
+		setJobPartID(ni.getJobPartID());
+	}
+
+	/**
+	 * get the next sibling queueentry
+	 * 
+	 * @return
+	 */
+	public JDFQueueEntry getNextQueueEntry()
+	{
+		return (JDFQueueEntry) getNextSiblingElement(ElementName.QUEUEENTRY, null);
+	}
+
+	/**
+	 * get the previous sibling queueentry
+	 * 
+	 * @return
+	 */
+	public JDFQueueEntry getPreviousQueueEntry()
+	{
+		return (JDFQueueEntry) getPreviousSiblingElement(ElementName.QUEUEENTRY, null);
+	}
+
+	/**
+	 * get the vector of valid next @Status values for this queue entry based on the current staus based on the table of
+	 * valid queue entry transitions
+	 * 
+	 * @return Vector<EnumQueueEntryStatus> the vector of valid new stati
+	 */
+	public Vector<EnumQueueEntryStatus> getNextStatusVector()
+	{
+		Vector<EnumQueueEntryStatus> v = new Vector<EnumQueueEntryStatus>();
+
+		final EnumQueueEntryStatus qesThis = getQueueEntryStatus();
+		if (qesThis == null)
+		{
+			Iterator<EnumQueueEntryStatus> it = EnumQueueEntryStatus.iterator();
+			while (it.hasNext())
+				v.add(it.next());
+		}
+		else if (EnumQueueEntryStatus.Running.equals(qesThis))
+		{
+			v.add(EnumQueueEntryStatus.Running);
+			v.add(EnumQueueEntryStatus.PendingReturn);
+			v.add(EnumQueueEntryStatus.Completed);
+			v.add(EnumQueueEntryStatus.Aborted);
+		}
+		else if (EnumQueueEntryStatus.Waiting.equals(qesThis))
+		{
+			v.add(EnumQueueEntryStatus.Running);
+			v.add(EnumQueueEntryStatus.Waiting);
+			v.add(EnumQueueEntryStatus.Held);
+			v.add(EnumQueueEntryStatus.Removed);
+			v.add(EnumQueueEntryStatus.PendingReturn);
+			v.add(EnumQueueEntryStatus.Aborted);
+		}
+		else if (EnumQueueEntryStatus.Held.equals(qesThis))
+		{
+			v.add(EnumQueueEntryStatus.Waiting);
+			v.add(EnumQueueEntryStatus.Held);
+			v.add(EnumQueueEntryStatus.Removed);
+			v.add(EnumQueueEntryStatus.PendingReturn);
+			v.add(EnumQueueEntryStatus.Aborted);
+		}
+		else if (EnumQueueEntryStatus.Removed.equals(qesThis))
+		{
+			v.add(EnumQueueEntryStatus.Removed);
+		}
+		else if (EnumQueueEntryStatus.Suspended.equals(qesThis))
+		{
+			v.add(EnumQueueEntryStatus.Running);
+			v.add(EnumQueueEntryStatus.Suspended);
+			v.add(EnumQueueEntryStatus.Aborted);
+		}
+		else if (EnumQueueEntryStatus.PendingReturn.equals(qesThis))
+		{
+			v.add(EnumQueueEntryStatus.PendingReturn);
+			v.add(EnumQueueEntryStatus.Completed);
+			v.add(EnumQueueEntryStatus.Aborted);
+		}
+		else if (EnumQueueEntryStatus.Completed.equals(qesThis))
+		{
+			v.add(EnumQueueEntryStatus.Waiting);
+			v.add(EnumQueueEntryStatus.Removed);
+			v.add(EnumQueueEntryStatus.PendingReturn);
+			v.add(EnumQueueEntryStatus.Completed);
+			v.add(EnumQueueEntryStatus.Aborted);
+		}
+		else if (EnumQueueEntryStatus.Aborted.equals(qesThis))
+		{
+			v.add(EnumQueueEntryStatus.Waiting);
+			v.add(EnumQueueEntryStatus.Removed);
+			v.add(EnumQueueEntryStatus.PendingReturn);
+			v.add(EnumQueueEntryStatus.Aborted);
+		}
+
+		return v;
+	}
+
+	/**
+	 * @return true if this entry is completed
+	 */
+	public boolean isCompleted()
+	{
+		EnumQueueEntryStatus status = getQueueEntryStatus();
+		return // (status==null) ||
+		EnumQueueEntryStatus.Completed.equals(status) || EnumQueueEntryStatus.Removed.equals(status)
+				|| EnumQueueEntryStatus.Aborted.equals(status);
+	}
+
+	/**
+	 * return a value based on QueueEntryStatus and Priority to sort the queue
+	 * 
+	 * @return int a priority for sorting - low = back
+	 */
+	@Deprecated
+	public int getSortPriority()
+	{
+		return getSortPriority(getQueueEntryStatus(), getPriority());
+	}
+
+	/**
+	 * return a value based on QueueEntryStatus and Priority to sort the queue the status is the major order whereas the
+	 * priority is used to order within regions of identical status
+	 * 
+	 * @return int a priority for sorting - low value = back of queue, high value = front of queue
+	 */
+	@Deprecated
+	public static int getSortPriority(EnumQueueEntryStatus status, int priority)
+	{
+		int sort = (status == null) ? 0 : 10000 - 1000 * status.getValue();
+		sort += priority;
+		return sort;
+	}
+
+	/**
+	 * populates this queuentry with the relevant parameters extracted from a JDF jobid, partmap, jobpartid etc.
+	 * 
+	 * @param jdf
+	 */
+	public void setFromJDF(JDFNode jdf)
+	{
+		if (jdf == null)
+			return;
+		setJobID(jdf.getJobID(true));
+		setJobPartID(jdf.getJobPartID(false));
+		setPartMapVector(jdf.getPartMapVector());
+
+		if (!hasAttribute(AttributeName.PRIORITY))
+		{
+			JDFNodeInfo ni = jdf.getInheritedNodeInfo("@" + AttributeName.PRIORITY);
+			if (ni != null)
+				copyAttribute(AttributeName.PRIORITY, ni, null, null, null);
+		}
+
+		this.eraseEmptyAttributes(true);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	public int compareTo(Object arg0)
+	{
+		return new QueueEntryComparator().compare(this, arg0);
+	}
 
 }
-
-
-

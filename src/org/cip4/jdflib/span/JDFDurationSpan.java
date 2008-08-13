@@ -86,160 +86,147 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFDurationRange;
 import org.cip4.jdflib.util.JDFDuration;
 
-
 public class JDFDurationSpan extends JDFSpanBase
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Constructor for JDFDurationSpan
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 */
+	public JDFDurationSpan(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFDurationSpan
-     * @param ownerDocument
-     * @param qualifiedName
-     */
-     public JDFDurationSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFDurationSpan
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFDurationSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFDurationSpan
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 */
+	public JDFDurationSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFDurationSpan
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     */
-    public JDFDurationSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-     {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUAL, 0x33333333, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREFERRED, 0x33333333, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.RANGE, 0x33333333, AttributeInfo.EnumAttributeType.DurationRange, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFERRANGE, 0x33333111, AttributeInfo.EnumAttributeType.DurationRange, null, null);
+	}
 
-    /**
-     * Constructor for JDFDurationSpan
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     */
-    public JDFDurationSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static 
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUAL,                        0x33333333, AttributeInfo.EnumAttributeType.duration, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.PREFERRED,                     0x33333333, AttributeInfo.EnumAttributeType.duration, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.RANGE,                         0x33333333, AttributeInfo.EnumAttributeType.DurationRange, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFERRANGE,                    0x33333111, AttributeInfo.EnumAttributeType.DurationRange, null, null);
-     }
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFDurationSpan[ --> " + super.toString() + " ]";
+	}
 
-    protected AttributeInfo getTheAttributeInfo() 
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	public void setActual(JDFDuration value)
+	{
+		setAttribute(AttributeName.ACTUAL, value.getDurationISO(), JDFConstants.EMPTYSTRING);
+	}
 
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFDurationSpan[ --> " + super.toString() + " ]" ;
-    }
+	public JDFDuration getActual()
+	{
+		try
+		{
+			return new JDFDuration(getAttribute(AttributeName.ACTUAL, null, JDFConstants.EMPTYSTRING));
+		}
+		catch (DataFormatException dfe)
+		{
+			throw new JDFException("not a valid date string. Malformed JDF");
+		}
+	}
 
-    
-    
-    public void setActual(JDFDuration value)
-    {
-        setAttribute(AttributeName.ACTUAL, value.getDurationISO(), JDFConstants.EMPTYSTRING);
-    }
+	public void setPreferred(JDFDuration value)
+	{
+		setAttribute(AttributeName.PREFERRED, value.getDurationISO(), JDFConstants.EMPTYSTRING);
+	}
 
-    public JDFDuration getActual()
-    {
-        try
-        {
-            return new JDFDuration(getAttribute(AttributeName.ACTUAL, null, JDFConstants.EMPTYSTRING));
-        }
-        catch(DataFormatException dfe)
-        {
-            throw new JDFException("not a valid date string. Malformed JDF");
-        }
-    }
-    
-    public void setPreferred(JDFDuration value)
-    {
-        setAttribute(AttributeName.PREFERRED, value.getDurationISO(), JDFConstants.EMPTYSTRING);
-    }
+	public JDFDuration getPreferred()
+	{
+		try
+		{
+			return new JDFDuration(getAttribute(AttributeName.PREFERRED, null, JDFConstants.EMPTYSTRING));
+		}
+		catch (DataFormatException dfe)
+		{
+			throw new JDFException("not a valid date string. Malformed JDF");
+		}
+	}
 
-    public JDFDuration getPreferred()
-    {
-        try
-        {
-            return new JDFDuration(getAttribute(AttributeName.PREFERRED, null, JDFConstants.EMPTYSTRING));
-        }
-        catch(DataFormatException dfe)
-        {
-            throw new JDFException("not a valid date string. Malformed JDF");
-        }
-    }
-    
-    
-    public void setRange( JDFDurationRange value)
-    {
+	public void setRange(JDFDurationRange value)
+	{
 		setAttribute(AttributeName.RANGE, value.toString());
 	}
-    
- 
-    public JDFDurationRange getRange()
-    {
-        try
-        {
-        	return new JDFDurationRange(getAttribute(AttributeName.RANGE));
-        }
-        catch(DataFormatException dfe)
-        {
-            throw new JDFException("not a valid DurationRange string. Malformed JDF");  
-        }
-	}   
-    
-    public void setOfferRange( JDFDurationRange value)
-    {
-        setAttribute(AttributeName.OFFERRANGE, value.toString());
-    }
-    
- 
-    public JDFDurationRange getOfferRange()
-    {
-        try
-        {
-            return new JDFDurationRange(getAttribute(AttributeName.OFFERRANGE));
-        }
-        catch(DataFormatException dfe)
-        {
-            throw new JDFException("not a valid DurationRange string. Malformed JDF");  
-        }
-    }   
-    
-    public boolean init()
-    {
-        boolean b = super.init();
-        setDataType(EnumDataType.DurationSpan);
-        return b;
-    }
-   
-///////////////////////////////////////////////////////////////
-     
+
+	public JDFDurationRange getRange()
+	{
+		try
+		{
+			return new JDFDurationRange(getAttribute(AttributeName.RANGE));
+		}
+		catch (DataFormatException dfe)
+		{
+			throw new JDFException("not a valid DurationRange string. Malformed JDF");
+		}
+	}
+
+	public void setOfferRange(JDFDurationRange value)
+	{
+		setAttribute(AttributeName.OFFERRANGE, value.toString());
+	}
+
+	public JDFDurationRange getOfferRange()
+	{
+		try
+		{
+			return new JDFDurationRange(getAttribute(AttributeName.OFFERRANGE));
+		}
+		catch (DataFormatException dfe)
+		{
+			throw new JDFException("not a valid DurationRange string. Malformed JDF");
+		}
+	}
+
+	public boolean init()
+	{
+		boolean b = super.init();
+		setDataType(EnumDataType.DurationSpan);
+		return b;
+	}
+
+	// /////////////////////////////////////////////////////////////
+
 }

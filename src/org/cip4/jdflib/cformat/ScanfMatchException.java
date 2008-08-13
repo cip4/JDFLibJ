@@ -15,32 +15,32 @@ package org.cip4.jdflib.cformat;
 
 import java.io.IOException;
 
-
 /**
-  * Exception class used by the <tt>scan</tt> methods within
-  * ScanfReader when the input does not match the specified format.
-  *
-  * @.author John E. Lloyd
-  * @see ScanfReader
-  */
+ * Exception class used by the <tt>scan</tt> methods within ScanfReader when the input does not match the specified
+ * format.
+ * 
+ * @.author John E. Lloyd
+ * @see ScanfReader
+ */
 public class ScanfMatchException extends IOException
 {
 	private static final long serialVersionUID = -5732069796015243165L;
-	
-    //~ Constructors ///////////////////////////////////////////////////////////
+
+	// ~ Constructors
+	// ///////////////////////////////////////////////////////////
 
 	/**
-      * Creates a new ScanfMatchException with the given message.
-      *
-      * @param msg Error message
-      * @see ScanfReader
-      */
-    public ScanfMatchException(String msg)
-    {
-        super(msg);
-    }
+	 * Creates a new ScanfMatchException with the given message.
+	 * 
+	 * @param msg Error message
+	 * @see ScanfReader
+	 */
+	public ScanfMatchException(String msg)
+	{
+		super(msg);
+	}
 }
 
-///////////////////////////////////////////////////////////////////////////////
-//  END OF FILE.
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
+// END OF FILE.
+// /////////////////////////////////////////////////////////////////////////////

@@ -38,7 +38,7 @@
  *
  * Usage of this software in commercial products is subject to restrictions. For
  * details please consult info@cip4.org.
-  *
+ *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -68,94 +68,109 @@
  *
  */
 /**
-*
-* Copyright (c) 2005 Heidelberger Druckmaschinen AG, All Rights Reserved.
-*
-* AtrInfo.java
-* 04022005 VF initial version
-*/
+ *
+ * Copyright (c) 2005 Heidelberger Druckmaschinen AG, All Rights Reserved.
+ *
+ * AtrInfo.java
+ * 04022005 VF initial version
+ */
 package org.cip4.jdflib.core;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 
+public class AtrInfo
+{
+	private long atrValidityStatus;
+	private AttributeInfo.EnumAttributeType atrType;
+	private ValuedEnum enumEnum = null;
+	private String atrDefault = null;
 
-public class AtrInfo {
-    private long atrValidityStatus;
-    private AttributeInfo.EnumAttributeType atrType;
-    private ValuedEnum			enumEnum	   = null;
-    private String atrDefault = null;
+	public AtrInfo(long s, AttributeInfo.EnumAttributeType t, ValuedEnum e, String _atrDefault)
+	{
+		atrValidityStatus = s;
+		atrType = t;
+		enumEnum = e;
+		atrDefault = _atrDefault;
+	}
 
-    public AtrInfo(long s, AttributeInfo.EnumAttributeType t, ValuedEnum e, String _atrDefault) {
-        atrValidityStatus = s;
-        atrType = t;
-        enumEnum =e;
-        atrDefault=_atrDefault;
-    }
-    
-    public AtrInfo(long s, AttributeInfo.EnumAttributeType t, ValuedEnum e) {
-        atrValidityStatus = s;
-        atrType = t;
-        enumEnum =e;
-        atrDefault=null;
-    }
+	public AtrInfo(long s, AttributeInfo.EnumAttributeType t, ValuedEnum e)
+	{
+		atrValidityStatus = s;
+		atrType = t;
+		enumEnum = e;
+		atrDefault = null;
+	}
 
-    /**
-     * @return Returns the atrType.
-     */
-    public AttributeInfo.EnumAttributeType getAtrType() {
-        return atrType;
-    }
-    /**
-     * @return Returns the atrValidityStatus.
-     */
-    public long getAtrValidityStatus() {
-        return atrValidityStatus;
-    }
-    
-    public ValuedEnum getEnumEnum() {
-        return enumEnum;
-    }
-    
-    public String getAtrDefault() {
-        return atrDefault;
-    }
-    
-    public String toString(){
-        String s="Type: "+atrType.toString();
-        s+="; Validity: "+Long.toHexString(atrValidityStatus);
-        if(enumEnum!=null)
-            s+="; Enum: "+enumEnum.toString();
-        if(atrDefault!=null)
-            s+="; default: "+atrDefault;
-        
-        return s;
-    }
-    
-    /**
-     * get the first jdf version where an attribute of this type is valid
-     * @return
-     */
-    public EnumVersion getFirstVersion(){
-        for(int i=0;i<8;i++){
-            long masked= atrValidityStatus & (0xFl<<(4*i));
-            masked=masked>>(4*i);
-            if(masked==2 || masked==3)
-                return EnumVersion.getEnum(i+1);
-        }
-        return null;
-    }
-    /**
-     * get the last jdf version where an attribute of this type is valid
-     * @return
-     */
-    public EnumVersion getLastVersion(){
-        for(int i=7;i>=0;i--){
-            long masked= atrValidityStatus & 0xFl<<(4*i);
-            masked=masked>>(4*i);
-            if(masked==2 || masked==3)
-                return EnumVersion.getEnum(i+1);
-        }
-        return null;
-    }
+	/**
+	 * @return Returns the atrType.
+	 */
+	public AttributeInfo.EnumAttributeType getAtrType()
+	{
+		return atrType;
+	}
+
+	/**
+	 * @return Returns the atrValidityStatus.
+	 */
+	public long getAtrValidityStatus()
+	{
+		return atrValidityStatus;
+	}
+
+	public ValuedEnum getEnumEnum()
+	{
+		return enumEnum;
+	}
+
+	public String getAtrDefault()
+	{
+		return atrDefault;
+	}
+
+	public String toString()
+	{
+		String s = "Type: " + atrType.toString();
+		s += "; Validity: " + Long.toHexString(atrValidityStatus);
+		if (enumEnum != null)
+			s += "; Enum: " + enumEnum.toString();
+		if (atrDefault != null)
+			s += "; default: " + atrDefault;
+
+		return s;
+	}
+
+	/**
+	 * get the first jdf version where an attribute of this type is valid
+	 * 
+	 * @return
+	 */
+	public EnumVersion getFirstVersion()
+	{
+		for (int i = 0; i < 8; i++)
+		{
+			long masked = atrValidityStatus & (0xFl << (4 * i));
+			masked = masked >> (4 * i);
+			if (masked == 2 || masked == 3)
+				return EnumVersion.getEnum(i + 1);
+		}
+		return null;
+	}
+
+	/**
+	 * get the last jdf version where an attribute of this type is valid
+	 * 
+	 * @return
+	 */
+	public EnumVersion getLastVersion()
+	{
+		for (int i = 7; i >= 0; i--)
+		{
+			long masked = atrValidityStatus & 0xFl << (4 * i);
+			masked = masked >> (4 * i);
+			if (masked == 2 || masked == 3)
+				return EnumVersion.getEnum(i + 1);
+		}
+		return null;
+	}
 }

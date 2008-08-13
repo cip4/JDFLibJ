@@ -21,104 +21,104 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
  */
 public class JDFNodeInfoCmdParams extends JDFAutoNodeInfoCmdParams
 {
-    private static final long serialVersionUID = 1L;
-    /**
-     * Constructor for JDFNodeInfoCmdParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    public JDFNodeInfoCmdParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFNodeInfoCmdParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    public JDFNodeInfoCmdParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFNodeInfoCmdParams
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	public JDFNodeInfoCmdParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFNodeInfoCmdParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    public JDFNodeInfoCmdParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * Constructor for JDFNodeInfoCmdParams
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFNodeInfoCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFNodeInfoCmdParams[  --> " + super.toString() + " ]";
-    }
-    
-   
-   /**
-    * get part map vector
-    * @return VJDFAttributeMap: vector of attribute maps, one for each part
-    */
-   public VJDFAttributeMap getPartMapVector()
-   {
-       return super.getPartMapVector();
-   }
+	/**
+	 * Constructor for JDFNodeInfoCmdParams
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	public JDFNodeInfoCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-   /**
-    * set all parts to those defined in vParts
-    * @param vParts vector of attribute maps for the parts
-    */
-   public void setPartMapVector(VJDFAttributeMap vParts)
-   {
-       super.setPartMapVector(vParts);
-   }
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFNodeInfoCmdParams[  --> " + super.toString() + " ]";
+	}
 
-   /**
-    * set all parts to those defined in vParts
-    * @param mPart attribute map for the part to set
-    */
-   public void setPartMap(JDFAttributeMap mPart)
-   {
-       super.setPartMap(mPart);
-   }
+	/**
+	 * get part map vector
+	 * 
+	 * @return VJDFAttributeMap: vector of attribute maps, one for each part
+	 */
+	public VJDFAttributeMap getPartMapVector()
+	{
+		return super.getPartMapVector();
+	}
 
-   /**
-    * remove the part defined in mPart
-    * @param mPart attribute map for the part to remove
-    */
-   public void removePartMap(JDFAttributeMap mPart)
-   {
-       super.removePartMap(mPart);
-   }
+	/**
+	 * set all parts to those defined in vParts
+	 * 
+	 * @param vParts vector of attribute maps for the parts
+	 */
+	public void setPartMapVector(VJDFAttributeMap vParts)
+	{
+		super.setPartMapVector(vParts);
+	}
 
-   /**
-    * check whether the part defined in mPart is included
-    * @param mPart attribute map to check for
-    * @return boolean - returns true if the part exists
-    */
-   public boolean hasPartMap(JDFAttributeMap mPart)
-   {
-       return super.hasPartMap(mPart);
-   }
+	/**
+	 * set all parts to those defined in vParts
+	 * 
+	 * @param mPart attribute map for the part to set
+	 */
+	public void setPartMap(JDFAttributeMap mPart)
+	{
+		super.setPartMap(mPart);
+	}
+
+	/**
+	 * remove the part defined in mPart
+	 * 
+	 * @param mPart attribute map for the part to remove
+	 */
+	public void removePartMap(JDFAttributeMap mPart)
+	{
+		super.removePartMap(mPart);
+	}
+
+	/**
+	 * check whether the part defined in mPart is included
+	 * 
+	 * @param mPart attribute map to check for
+	 * @return boolean - returns true if the part exists
+	 */
+	public boolean hasPartMap(JDFAttributeMap mPart)
+	{
+		return super.hasPartMap(mPart);
+	}
 }

@@ -78,73 +78,71 @@
  */
 package org.cip4.jdflib.core;
 
-
 public class JDFException extends RuntimeException
 {
-    private static final long serialVersionUID = 1L;
-    private int id=0;
+	private static final long serialVersionUID = 1L;
+	private int id = 0;
 
-    //**************************************** Constructors ****************************************
-    /**
-     * constructor
-     * the id is calculated as a hash code
-     *
-     * @param message the message to print out
-     */
-    public JDFException (String message)
-    {
-        super(message);
-    }
+	// **************************************** Constructors
+	// ****************************************
+	/**
+	 * constructor the id is calculated as a hash code
+	 * 
+	 * @param message the message to print out
+	 */
+	public JDFException(String message)
+	{
+		super(message);
+	}
 
-    /**
-     * constructor
-     * if a stack trace is needed
-     * use JDFException (String message, boolean bPrintStack)
-     *
-     * @param message
-     * @param _id id of the exception - never use id=0, since this is the flag to use the has code as id
-     */
-    public JDFException (String message, int _id)
-    {
-        super(message);
-        id=_id;
-    }
-    
-    /**
-     * constructor
-     *
-     * @param String message
-     * @param boolean bPrintStack print Stacktrace if true
-     * @deprecated print the stack trace in the application
-     */
-    public JDFException (String message, boolean bPrintStack)
-    {
-        super(message);
-        id=hashCode();
-        if (bPrintStack == true)
-        {
-            printStackTrace();
-        }
-    }
+	/**
+	 * constructor if a stack trace is needed use JDFException (String message, boolean bPrintStack)
+	 * 
+	 * @param message
+	 * @param _id id of the exception - never use id=0, since this is the flag to use the has code as id
+	 */
+	public JDFException(String message, int _id)
+	{
+		super(message);
+		id = _id;
+	}
 
-    //**************************************** Methods *********************************************
-    /**
-     * toString - StringRepresentation of JDFNode
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFException[  --> " + super.toString() + " ]";
-    }
-    
-    /**
-     * return a unique identifier of this exception
-     * if id was not explicitley set, a hash code is returned
-     * @return int the id 
-     */
-    int getID()
-    {       
-        return id == 0 ? hashCode() : id;
-    }
+	/**
+	 * constructor
+	 * 
+	 * @param String message
+	 * @param boolean bPrintStack print Stacktrace if true
+	 * @deprecated print the stack trace in the application
+	 */
+	public JDFException(String message, boolean bPrintStack)
+	{
+		super(message);
+		id = hashCode();
+		if (bPrintStack == true)
+		{
+			printStackTrace();
+		}
+	}
+
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString - StringRepresentation of JDFNode
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFException[  --> " + super.toString() + " ]";
+	}
+
+	/**
+	 * return a unique identifier of this exception if id was not explicitley set, a hash code is returned
+	 * 
+	 * @return int the id
+	 */
+	int getID()
+	{
+		return id == 0 ? hashCode() : id;
+	}
 }

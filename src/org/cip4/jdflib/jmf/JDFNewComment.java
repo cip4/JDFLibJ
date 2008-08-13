@@ -9,16 +9,10 @@
  Revision history:    ...
  **/
 
-
-
-
-
 package org.cip4.jdflib.jmf;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoNewComment;
-
-
 
 //----------------------------------
 public class JDFNewComment extends JDFAutoNewComment
@@ -27,51 +21,42 @@ public class JDFNewComment extends JDFAutoNewComment
 
 	/**
 	 * Constructor for JDFNewComment
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFNewComment(
-			CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFNewComment(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFNewComment
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFNewComment(
-			CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI,
-			String qualifiedName)
+	public JDFNewComment(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFNewComment
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFNewComment(
-			CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI,
-			String qualifiedName,
-			String myLocalName)
+	public JDFNewComment(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
-	
+
 	public String toString()
 	{
 		return "JDFNewComment[  --> " + super.toString() + " ]";
 	}
 }
-
-
-

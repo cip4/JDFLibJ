@@ -80,87 +80,87 @@ package org.cip4.jdflib.core;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXParseException;
 
+public class XMLErrorHandler implements ErrorHandler
+{
 
-public class XMLErrorHandler implements ErrorHandler {
-    
-    private XMLDoc xmlOutput = null;
-    private KElement root;
-    
-    public XMLErrorHandler() 
-    {
-        super();
-        xmlOutput = new XMLDoc("SchemaValidationOutput",null);
-        root = xmlOutput.getRoot();
-    }
-    
-    public void warning(final SAXParseException exception)
-    {
-        String warn = exception.getMessage();
-        KElement kEl = root.appendElement("Warning");
-        kEl.setAttribute("Message", warn);
-    }
-    
-    public void error(final SAXParseException exception)
-    {
-        // print out all parser errors except undefined variables for non-JDF stuff
-        String er = exception.getMessage();
-        
-        if ((er.indexOf("http://www.CIP4.org/JDFSchema") != -1) ||
-                (er.indexOf("is not declared for") == -1))
-        {
-            KElement kEl = root.appendElement("Error");
-            kEl.setAttribute("Message", er);
-        }
-    }
-    
-    /**
-     * @param exception SAXParseException
-     * @throws JDFException - if fatal error occurs
-     */
-    public void fatalError(final SAXParseException exception)
-    {
-        String er = exception.getMessage();
-        KElement kEl = root.appendElement("FatalError");
-        kEl.setAttribute("Message", er);
-        
-        throw new JDFException("Fatal error in the Parser:" + er);
-    }
-    
-    public XMLDoc getXMLOutput() 
-    {
-        return xmlOutput;
-    }
-    
-    /**
-     * remove duplicate warnings from the list and set schemaloction
-     * @param schemaLocation
-     */
-    public void cleanXML(String schemaLocation)
-    {
-        VElement v=root.getChildElementVector(null,null,null,true,0,false);
-        v.unifyElement();
-        root.removeChildren(null,null,null);
-        final int size = v.size();
-        for(int i=0;i<size;i++)
-            root.appendChild(v.item(i));
-        if(schemaLocation==null)
-        {
-            root.setAttribute("ValidationResult","NotPerformed");
-        }
-        else
-        {
-            root.setAttribute("SchemaLocation",schemaLocation);
-            if(root.hasChildElement("FatalError",null))
-                root.setAttribute("ValidationResult","FatalError");
-            else if(root.hasChildElement("Error",null))
-                root.setAttribute("ValidationResult","Error");
-            else if(root.hasChildElement("Warning",null))
-                root.setAttribute("ValidationResult","Warning");
-            else
-                root.setAttribute("ValidationResult","Valid");
-        }            
-    }
- //////////////////////////////////////////////////////////////////////////////////////   
+	private XMLDoc xmlOutput = null;
+	private KElement root;
+
+	public XMLErrorHandler()
+	{
+		super();
+		xmlOutput = new XMLDoc("SchemaValidationOutput", null);
+		root = xmlOutput.getRoot();
+	}
+
+	public void warning(final SAXParseException exception)
+	{
+		String warn = exception.getMessage();
+		KElement kEl = root.appendElement("Warning");
+		kEl.setAttribute("Message", warn);
+	}
+
+	public void error(final SAXParseException exception)
+	{
+		// print out all parser errors except undefined variables for non-JDF
+		// stuff
+		String er = exception.getMessage();
+
+		if ((er.indexOf("http://www.CIP4.org/JDFSchema") != -1) || (er.indexOf("is not declared for") == -1))
+		{
+			KElement kEl = root.appendElement("Error");
+			kEl.setAttribute("Message", er);
+		}
+	}
+
+	/**
+	 * @param exception SAXParseException
+	 * @throws JDFException - if fatal error occurs
+	 */
+	public void fatalError(final SAXParseException exception)
+	{
+		String er = exception.getMessage();
+		KElement kEl = root.appendElement("FatalError");
+		kEl.setAttribute("Message", er);
+
+		throw new JDFException("Fatal error in the Parser:" + er);
+	}
+
+	public XMLDoc getXMLOutput()
+	{
+		return xmlOutput;
+	}
+
+	/**
+	 * remove duplicate warnings from the list and set schemaloction
+	 * 
+	 * @param schemaLocation
+	 */
+	public void cleanXML(String schemaLocation)
+	{
+		VElement v = root.getChildElementVector(null, null, null, true, 0, false);
+		v.unifyElement();
+		root.removeChildren(null, null, null);
+		final int size = v.size();
+		for (int i = 0; i < size; i++)
+			root.appendChild(v.item(i));
+		if (schemaLocation == null)
+		{
+			root.setAttribute("ValidationResult", "NotPerformed");
+		}
+		else
+		{
+			root.setAttribute("SchemaLocation", schemaLocation);
+			if (root.hasChildElement("FatalError", null))
+				root.setAttribute("ValidationResult", "FatalError");
+			else if (root.hasChildElement("Error", null))
+				root.setAttribute("ValidationResult", "Error");
+			else if (root.hasChildElement("Warning", null))
+				root.setAttribute("ValidationResult", "Warning");
+			else
+				root.setAttribute("ValidationResult", "Valid");
+		}
+	}
+	// //////////////////////////////////////////////////////////////////////////
+	// //////////
 }
-
-

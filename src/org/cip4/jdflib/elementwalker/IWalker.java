@@ -76,15 +76,15 @@ import org.cip4.jdflib.core.KElement;
 
 /**
  * @author prosirai
- *
+ * 
  */
 public interface IWalker
 {
-    /**
-     * called for every IWalker that the factory returns
-     * 
-     * @return true if this element remains after walking, <br/>
-     * false if it was deleted and therefor the walker should skip this and allits descendants
-     */
-    public boolean walk(KElement e);
+	/**
+	 * called for every IWalker that the factory returns
+	 * 
+	 * @return true if this element remains after walking, <br/> false if it was deleted and therefor the walker should
+	 *         skip this and allits descendants
+	 */
+	public boolean walk(KElement e);
 }

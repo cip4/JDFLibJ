@@ -82,153 +82,172 @@ package org.cip4.jdflib.util;
 import java.io.File;
 import java.util.Vector;
 
-
 /**
- * a very simple hotfolder watcher
- * subdirectories are ignored
+ * a very simple hotfolder watcher subdirectories are ignored
+ * 
  * @author prosirai
- *
+ * 
  */
 public class HotFolder implements Runnable
 {
-    public int stabilizeTime=1000; // time between reads in milliseconds - also minimum lenght of non-modification
-    private boolean interrupt=false; // if set to true, the watcher interupted and the thread ends
-    private static int nThread=0;
-    
-    private File dir;
-    private long lastModified=-1;
-    private Vector<FileTime> lastFileTime;
-    private HotFolderListener hfl;
-    private String extension;
-    private Thread runThread;
+	public int stabilizeTime = 1000; // time between reads in milliseconds -
+	// also minimum lenght of
+	// non-modification
+	private boolean interrupt = false; // if set to true, the watcher interupted
+	// and the thread ends
+	private static int nThread = 0;
 
-    /**
-     * constructor for a simple hotfolder watcher that is automagically started in its own thread
-     * 
-     * @param _dir the Directory to watch
-     * @param ext the extension filter - case is ignored and lists of extensions may be specified as a comma separated list
-     * e.g. ".txt,.xml"
-     * @param _hfl
-     */
-    public HotFolder(File _dir, String ext, HotFolderListener _hfl)
-    {
-        dir=_dir;
-        extension=ext;
-        lastFileTime=new Vector<FileTime>();
-        hfl=_hfl;
-        runThread=null;
-        restart();
-    }
+	private File dir;
+	private long lastModified = -1;
+	private Vector<FileTime> lastFileTime;
+	private HotFolderListener hfl;
+	private String extension;
+	private Thread runThread;
 
+	/**
+	 * constructor for a simple hotfolder watcher that is automagically started in its own thread
+	 * 
+	 * @param _dir the Directory to watch
+	 * @param ext the extension filter - case is ignored and lists of extensions may be specified as a comma separated
+	 *            list e.g. ".txt,.xml"
+	 * @param _hfl
+	 */
+	public HotFolder(File _dir, String ext, HotFolderListener _hfl)
+	{
+		dir = _dir;
+		extension = ext;
+		lastFileTime = new Vector<FileTime>();
+		hfl = _hfl;
+		runThread = null;
+		restart();
+	}
 
-    public synchronized void restart()
-    {
-        if(runThread!=null)
-            stop();
-        runThread=new Thread(this,"HotFolder_"+nThread++);
-        interrupt=false;
-        runThread.start();
-    }
+	public synchronized void restart()
+	{
+		if (runThread != null)
+			stop();
+		runThread = new Thread(this, "HotFolder_" + nThread++);
+		interrupt = false;
+		runThread.start();
+	}
 
+	/**
+	 * stop this thread;
+	 * 
+	 */
+	public void stop()
+	{
+		interrupt = true;
+		if (runThread != null)
+		{
+			synchronized (runThread)
+			{
+				runThread.notifyAll();
 
-    /**
-     * stop this thread;
-     *
-     */
-    public void stop()
-    {
-        interrupt=true;
-        if(runThread!=null)
-        {
-            synchronized (runThread)
-            {
-                runThread.notifyAll();  
+				try
+				{
+					runThread.join(); // kill the old thread with extreme
+					// prejudice -
+					// otherwise we may have multiple concurring hf watcher
+					// threads
+				}
+				catch (InterruptedException x)
+				{
+					// nop
+				}
+			}
+			runThread = null;
+		}
+	}
 
-                try
-                {
-                    runThread.join(); // kill the old thread with extreme prejudice - 
-                    //otherwise we may have multiple concurring hf watcher threads
-                }
-                catch (InterruptedException x)
-                {
-//                  nop
-                }
-            }
-            runThread=null;
-        }
-    }
-    /* (non-Javadoc)
-     * @see java.lang.Runnable#run()
-     */
-    public void run()
-    {
-        while(!interrupt)
-        {
-            long lastMod=dir.lastModified();
-            if(lastMod>lastModified || lastFileTime.size()>0) // has the directory been touched?
-            {
-                lastModified=lastMod;
-                File[] files=FileUtil.listFiles(dir, extension);
-                int fileListLength=files!=null? files.length : 0;
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Runnable#run()
+	 */
+	public void run()
+	{
+		while (!interrupt)
+		{
+			long lastMod = dir.lastModified();
+			if (lastMod > lastModified || lastFileTime.size() > 0) // has the
+			// directory
+			// been
+			// touched?
+			{
+				lastModified = lastMod;
+				File[] files = FileUtil.listFiles(dir, extension);
+				int fileListLength = files != null ? files.length : 0;
 
-                for(int i=lastFileTime.size()-1;i>=0;i--)
-                {
-                    boolean found=false;
-                    for(int j=0;j<fileListLength;j++) // loop over all matching files in the directory
-                    {
-                        final FileTime lftAt = lastFileTime.elementAt(i);
-                        if(files[j]!=null && files[j].equals(lftAt.f))
-                        {
-                            found=true;
-                            if(files[j].lastModified()==lftAt.modified)
-                            {
-                                if(files[j].exists())
-                                {
-                                    hfl.hotFile(files[j]); // exists and stabilized - call callback
-                                }
-                                else
-                                {
-                                    found=false;
-                                }
-                            }
-                            else
-                            {
-                                lftAt.modified=files[j].lastModified();
-                            }
-                            files[j]=null; // this file has been processed, remove from list for performance
-                        }
-                    }
-                    if(!found)
-                    {
-                        lastFileTime.remove(i); // not there anymore
-                    }
-                }
-                for(int i=0;i<fileListLength;i++) // the file is new - add to list for nextr check
-                {
-                    if(files[i]!=null)
-                        lastFileTime.add(new FileTime(files[i]));
-                }
-            }
-            StatusCounter.sleep(stabilizeTime);
-        }  
-        Thread.currentThread().interrupt();
+				for (int i = lastFileTime.size() - 1; i >= 0; i--)
+				{
+					boolean found = false;
+					for (int j = 0; j < fileListLength; j++) // loop over all
+					// matching
+					// files in the
+					// directory
+					{
+						final FileTime lftAt = lastFileTime.elementAt(i);
+						if (files[j] != null && files[j].equals(lftAt.f))
+						{
+							found = true;
+							if (files[j].lastModified() == lftAt.modified)
+							{
+								if (files[j].exists())
+								{
+									hfl.hotFile(files[j]); // exists and
+									// stabilized - call
+									// callback
+								}
+								else
+								{
+									found = false;
+								}
+							}
+							else
+							{
+								lftAt.modified = files[j].lastModified();
+							}
+							files[j] = null; // this file has been processed,
+							// remove from list for
+							// performance
+						}
+					}
+					if (!found)
+					{
+						lastFileTime.remove(i); // not there anymore
+					}
+				}
+				for (int i = 0; i < fileListLength; i++) // the file is new -
+				// add to list for
+				// nextr check
+				{
+					if (files[i] != null)
+						lastFileTime.add(new FileTime(files[i]));
+				}
+			}
+			StatusCounter.sleep(stabilizeTime);
+		}
+		Thread.currentThread().interrupt();
 
-    }
+	}
 
-    /**
-     * simple container class that retains the last known mod date of a file 
-     * @author prosirai
-     *
-     */
-    protected class FileTime
-    {
-        protected File f;
-        protected long modified;
-        protected FileTime(File _f)
-        {
-            f=_f;
-            modified=-1;
-        }
-    }
+	/**
+	 * simple container class that retains the last known mod date of a file
+	 * 
+	 * @author prosirai
+	 * 
+	 */
+	protected class FileTime
+	{
+		protected File f;
+		protected long modified;
+
+		protected FileTime(File _f)
+		{
+			f = _f;
+			modified = -1;
+		}
+	}
 
 }

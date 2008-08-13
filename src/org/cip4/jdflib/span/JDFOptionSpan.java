@@ -83,145 +83,139 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 
-
 public class JDFOptionSpan extends JDFSpanBase
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFOptionSpan
-     * @param ownerDocument
-     * @param qualifiedName
-     */
-     public JDFOptionSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFOptionSpan
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 */
+	public JDFOptionSpan(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFOptionSpan
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFOptionSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFOptionSpan
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     */
-    public JDFOptionSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFOptionSpan
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 */
+	public JDFOptionSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFOptionSpan
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     */
-    public JDFOptionSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUAL, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREFERRED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.RANGE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null); // TODO
+		// true
+		// false
+		// only
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFERRANGE, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+	}
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static 
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUAL,                        0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.PREFERRED,                     0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.RANGE,                         0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null); // TODO true false only
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFERRANGE,                    0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-     }
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    protected AttributeInfo getTheAttributeInfo() 
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFOptionSpan[ --> " + super.toString() + " ]";
+	}
 
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFOptionSpan[ --> " + super.toString() + " ]";
-    }
-    
-    
-    /**
-     * Set attribute Actual
-     *
-     * @param boolean value - the value to set
-     */
-    public void setActual(boolean value)
-    {
-        setAttribute (AttributeName.ACTUAL, value, null);
-    }
-    
-    
-    /**
-     * Get attribute Actual value
-     *
-     * @return boolean - the value of attribute Actual
-     */
-    public boolean getActual()  
-    {
-        return getBoolAttribute(AttributeName.ACTUAL, null, false);
-    }
-    
-    /**
-     * Set attribute Preferred
-     *
-     * @param boolean value - the value to set
-     */
-    public void setPreferred(boolean value)
-    {
-        setAttribute (AttributeName.PREFERRED, value, null);
-    }
+	/**
+	 * Set attribute Actual
+	 * 
+	 * @param boolean value - the value to set
+	 */
+	public void setActual(boolean value)
+	{
+		setAttribute(AttributeName.ACTUAL, value, null);
+	}
 
-    /**
-     * Get attribute Preferred value
-     *
-     * @return boolean - the value of attribute Preferred
-     */
-    public boolean getPreferred()  
-    {
-        return getBoolAttribute(AttributeName.PREFERRED, null, false);
-    }
-    
-    /**
-     * Set attribute Range as a String
-     *
-     * @param String value - the value to set
-     */
-    public void setRange(String value)
-    {
+	/**
+	 * Get attribute Actual value
+	 * 
+	 * @return boolean - the value of attribute Actual
+	 */
+	public boolean getActual()
+	{
+		return getBoolAttribute(AttributeName.ACTUAL, null, false);
+	}
+
+	/**
+	 * Set attribute Preferred
+	 * 
+	 * @param boolean value - the value to set
+	 */
+	public void setPreferred(boolean value)
+	{
+		setAttribute(AttributeName.PREFERRED, value, null);
+	}
+
+	/**
+	 * Get attribute Preferred value
+	 * 
+	 * @return boolean - the value of attribute Preferred
+	 */
+	public boolean getPreferred()
+	{
+		return getBoolAttribute(AttributeName.PREFERRED, null, false);
+	}
+
+	/**
+	 * Set attribute Range as a String
+	 * 
+	 * @param String value - the value to set
+	 */
+	public void setRange(String value)
+	{
 		setAttribute(AttributeName.RANGE, value, null);
 	}
-    
-    /**
-     * Get attribute Range value
-     *
-     * @return String - the value of attribute Range
-     */
-    public String getRange()  
-    {
-        return getAttribute(AttributeName.RANGE, null, JDFConstants.EMPTYSTRING);
-  	}
-        
-    public boolean init()
-    {
-        boolean b = super.init();
-        setDataType(EnumDataType.OptionSpan);
-        return b;
-    }
+
+	/**
+	 * Get attribute Range value
+	 * 
+	 * @return String - the value of attribute Range
+	 */
+	public String getRange()
+	{
+		return getAttribute(AttributeName.RANGE, null, JDFConstants.EMPTYSTRING);
+	}
+
+	public boolean init()
+	{
+		boolean b = super.init();
+		setDataType(EnumDataType.OptionSpan);
+		return b;
+	}
 }

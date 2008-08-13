@@ -31,7 +31,7 @@
 
 		<!-- Sets class path -->
 		<path id="project.class.path">
-			<pathelement path="${java.class.path}" />
+			<!--  <pathelement path="${java.class.path}" /> -->
 			<fileset dir="${lib.dir}">
 				<include name="**/*.jar" />
 			</fileset>
@@ -66,7 +66,7 @@
 
 	<target name="compile" depends="-init" description="Compiles the JDFLibJ source code.">
 		<echo>Compiling...</echo>
-		<javac destdir="${bin.dir}" debug="${build.debug}" optimize="${build.optimize}" target="1.5" source="1.5">
+		<javac encoding="Cp1252" destdir="${bin.dir}" debug="${build.debug}" optimize="${build.optimize}" target="1.5" source="1.5" failonerror="false">
 			<src path="${jdflib.src.dir}" />
 			<src path="${apps.src.dir}" />
 			<classpath refid="project.class.path" />

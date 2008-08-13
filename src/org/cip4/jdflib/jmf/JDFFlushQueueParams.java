@@ -88,59 +88,55 @@ import org.cip4.jdflib.auto.JDFAutoFlushQueueParams;
  */
 public class JDFFlushQueueParams extends JDFAutoFlushQueueParams
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * JDFFlushQueueParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    public JDFFlushQueueParams(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * JDFFlushQueueParams
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	public JDFFlushQueueParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * JDFFlushQueueParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    public JDFFlushQueueParams(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * JDFFlushQueueParams
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFFlushQueueParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * JDFFlushQueueParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    public JDFFlushQueueParams(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-    
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     * @see org.cip4.jdflib.auto.JDFAutoFlushQueueParams#toString()
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFFlushQueueParams[  --> " + super.toString() + " ]";
-    }
-    
+	/**
+	 * JDFFlushQueueParams
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	public JDFFlushQueueParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @see org.cip4.jdflib.auto.JDFAutoFlushQueueParams#toString()
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFFlushQueueParams[  --> " + super.toString() + " ]";
+	}
+
 }

@@ -72,34 +72,40 @@ package org.cip4.jdflib.ifaces;
 
 import org.cip4.jdflib.jmf.JDFSubscription;
 
-
 /**
- * interface that connects the JMF message classes that implement subscriptions,
- * i.e. Query and Registration
+ * interface that connects the JMF message classes that implement subscriptions, i.e. Query and Registration
+ * 
  * @author prosirai
- *
+ * 
  */
 public interface IJMFSubscribable
 {
-    /**
-     * get the subscription
-     * @return
-     */
-    public JDFSubscription getSubscription();
-    /**
-     * get the subscription, create if it doesn't exist
-     * @return
-     */
-    public JDFSubscription getCreateSubscription();
-    /**
-     * append the subscription
-     * @return
-     */
-    public JDFSubscription appendSubscription();
-    /**
-     * get the ID of the message
-     * @return
-     */
-    public String getID();
+	/**
+	 * get the subscription
+	 * 
+	 * @return
+	 */
+	public JDFSubscription getSubscription();
+
+	/**
+	 * get the subscription, create if it doesn't exist
+	 * 
+	 * @return
+	 */
+	public JDFSubscription getCreateSubscription();
+
+	/**
+	 * append the subscription
+	 * 
+	 * @return
+	 */
+	public JDFSubscription appendSubscription();
+
+	/**
+	 * get the ID of the message
+	 * 
+	 * @return
+	 */
+	public String getID();
 
 }

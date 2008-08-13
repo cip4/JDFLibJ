@@ -75,35 +75,38 @@ import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 
 /**
- * @author prosirai
- * class that generates golden tickets based on ICS levels etc
+ * @author prosirai class that generates golden tickets based on ICS levels etc
  */
 public class JMFGoldenTicket extends BaseGoldenTicket
 {
-    protected int jmfICSLevel;
-    /**
-     * create a BaseGoldenTicket
-     * @param icsLevel the level to init to (1,2 or 3)
-     * @param jdfVersion the version to generate a golden ticket for
-     */
-    public JMFGoldenTicket(int icsLevel, EnumVersion jdfVersion)
-    {
-        super(2,jdfVersion);
-        jmfICSLevel=icsLevel;
-    }
-    /**
-     * initializes this node to a given ICS version
-     * @param icsLevel the level to init to (1,2 or 3)
-     */
-    public void init()
-    {
-        if(jmfICSLevel>0)
-        {
-        String icsTag="JMF_L"+jmfICSLevel+"-"+theVersion.getName();
-        theNode.appendAttribute(AttributeName.ICSVERSIONS, icsTag, null, " ", true);
-        if(!theNode.hasAttribute(AttributeName.DESCRIPTIVENAME))
-            theNode.setDescriptiveName("JMF Golden Ticket Example Job - version: "+JDFAudit.software());
-        }
-        super.init();
-    }
+	protected int jmfICSLevel;
+
+	/**
+	 * create a BaseGoldenTicket
+	 * 
+	 * @param icsLevel the level to init to (1,2 or 3)
+	 * @param jdfVersion the version to generate a golden ticket for
+	 */
+	public JMFGoldenTicket(int icsLevel, EnumVersion jdfVersion)
+	{
+		super(2, jdfVersion);
+		jmfICSLevel = icsLevel;
+	}
+
+	/**
+	 * initializes this node to a given ICS version
+	 * 
+	 * @param icsLevel the level to init to (1,2 or 3)
+	 */
+	public void init()
+	{
+		if (jmfICSLevel > 0)
+		{
+			String icsTag = "JMF_L" + jmfICSLevel + "-" + theVersion.getName();
+			theNode.appendAttribute(AttributeName.ICSVERSIONS, icsTag, null, " ", true);
+			if (!theNode.hasAttribute(AttributeName.DESCRIPTIVENAME))
+				theNode.setDescriptiveName("JMF Golden Ticket Example Job - version: " + JDFAudit.software());
+		}
+		super.init();
+	}
 }

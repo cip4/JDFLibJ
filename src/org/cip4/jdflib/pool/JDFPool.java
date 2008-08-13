@@ -89,149 +89,143 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 
 /**
- * This class represents a JDF-Pool which provides functionality for "network" containers and
- * is the base class for JDFResourcePool and GarStepNetwork
+ * This class represents a JDF-Pool which provides functionality for "network" containers and is the base class for
+ * JDFResourcePool and GarStepNetwork
  */
 public abstract class JDFPool extends JDFElement
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFPool
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    public JDFPool(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFPool
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	public JDFPool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFPool
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    public JDFPool(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFPool
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFPool
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    public JDFPool(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * Constructor for JDFPool
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	public JDFPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    @Override
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	@Override
 	public String toString()
-    {
-        return "JDFPool[ --> " + super.toString() + " ]";
-    }
+	{
+		return "JDFPool[ --> " + super.toString() + " ]";
+	}
 
-  /**
-    * Gets all children with the attributes <code>name, mAttrib, nameSpaceURI</code> from the pool
-    * <p>
-    * default: GetPoolChildrenGeneric (JDFConstants.EMPTYSTRING, new JDFAttributeMap(), JDFConstants.EMPTYSTRING)
-    * 
-    * @param name         name of the Child
-    * @param mAttrib      the attribute to search for
-    * @param nameSpaceURI nameSpaceURI to search in
-    * @return VElement: a vector with all elements in the pool matching the conditions
-    */
-    protected VElement getPoolChildrenGeneric (String strName, JDFAttributeMap mAttrib, String nameSpaceURI)
-    {
-        final VElement v = getChildElementVector(strName, nameSpaceURI, mAttrib, true, 0, false);
-        for(int i=v.size()-1;i>=0;i--)
-        {
-            if (v.elementAt(i) instanceof JDFComment)
-            {
-                v.removeElementAt(i);
-            }
-        }
-        return v;
-    }
+	/**
+	 * Gets all children with the attributes <code>name, mAttrib, nameSpaceURI</code> from the pool
+	 * <p>
+	 * default: GetPoolChildrenGeneric (JDFConstants.EMPTYSTRING, new JDFAttributeMap(), JDFConstants.EMPTYSTRING)
+	 * 
+	 * @param name name of the Child
+	 * @param mAttrib the attribute to search for
+	 * @param nameSpaceURI nameSpaceURI to search in
+	 * @return VElement: a vector with all elements in the pool matching the conditions
+	 */
+	protected VElement getPoolChildrenGeneric(String strName, JDFAttributeMap mAttrib, String nameSpaceURI)
+	{
+		final VElement v = getChildElementVector(strName, nameSpaceURI, mAttrib, true, 0, false);
+		for (int i = v.size() - 1; i >= 0; i--)
+		{
+			if (v.elementAt(i) instanceof JDFComment)
+			{
+				v.removeElementAt(i);
+			}
+		}
+		return v;
+	}
 
+	/**
+	 * get a child from the pool matching the parameters
+	 * 
+	 * @param i the index of the child, or -1 to make a new one.
+	 * @param name the name of the element
+	 * @param mAttrib the attribute of the element
+	 * @param nameSpaceURI the namespace to search in
+	 * @return JDFElement: the pool child matching the above conditions
+	 * 
+	 *         default: GetPoolChildGeneric (i, JDFConstants.EMPTYSTRING, null, JDFConstants.EMPTYSTRING)
+	 */
+	protected JDFElement getPoolChildGeneric(int i, String strName, JDFAttributeMap mAttrib, String nameSpaceURI)
+	{
+		final VElement v = getPoolChildrenGeneric(strName, mAttrib, nameSpaceURI);
+		if (i < 0)
+		{
+			i = v.size() + i;
+			if (i < 0)
+			{
+				return null;
+			}
+		}
+		if (v.size() <= i)
+		{
+			return null;
+		}
+		return (JDFElement) v.elementAt(i);
+	}
 
+	/**
+	 * Append a new child if no identical child exists
+	 * 
+	 * @param p the Child to add to the element
+	 */
+	protected void appendUniqueGeneric(JDFElement p)
+	{
+		if (!((getPoolChildrenGeneric(null, null, null).index(p) >= 0)))
+		{
+			copyElement(p, null);
+		}
+	}
 
-   /**
-    * get a child from the pool matching the parameters
-    *
-    * @param i            the index of the child, or -1 to make a new one.
-    * @param name         the name of the element
-    * @param mAttrib      the attribute of the element
-    * @param nameSpaceURI the namespace to search in
-    * @return JDFElement: the pool child matching the above conditions
-    * 
-    * default: GetPoolChildGeneric (i, JDFConstants.EMPTYSTRING, null, JDFConstants.EMPTYSTRING)
-    */      
-    protected JDFElement getPoolChildGeneric (int i, String strName, JDFAttributeMap mAttrib, String nameSpaceURI)
-    {
-        final VElement v = getPoolChildrenGeneric(strName,mAttrib,nameSpaceURI);
-        if(i<0)
-        {
-            i=v.size()+i;
-            if(i<0)
-            {
-                return null;
-            }
-        }
-        if (v.size()<=i) 
-        {
-            return null;
-        }            
-        return (JDFElement) v.elementAt(i);
-    }
-        
-    /**
-    * Append a new child if no identical child exists
-    * @param p the Child to add to the element
-    */
-    protected void appendUniqueGeneric(JDFElement p)
-    {
-        if(!((getPoolChildrenGeneric(null, null, null).index(p) >= 0)))
-        { 
-            copyElement(p, null);
-        }
-    }
+	/**
+	 * Append all children of p for which no identical child exists
+	 * 
+	 * @param p the Child to add to the element
+	 */
+	protected void appendUniqueGeneric(JDFPool p)
+	{
+		final VElement vp = p.getPoolChildrenGeneric(null, null, null);
 
-   /**
-    * Append all children of p for which no identical child exists
-    * @param p the Child to add to the element
-    */
-    protected void appendUniqueGeneric(JDFPool p)
-    {
-        final VElement vp = p.getPoolChildrenGeneric(null, null, null);
-        
-        final VElement v=getPoolChildrenGeneric(null, null, null);
-        for(int i=0;i<vp.size();i++)
-        {
-            if(!v.containsElement(vp.elementAt(i)))
-            {
-                copyElement(vp.elementAt(i), null);                
-            }
-        }
-    }
+		final VElement v = getPoolChildrenGeneric(null, null, null);
+		for (int i = 0; i < vp.size(); i++)
+		{
+			if (!v.containsElement(vp.elementAt(i)))
+			{
+				copyElement(vp.elementAt(i), null);
+			}
+		}
+	}
 }

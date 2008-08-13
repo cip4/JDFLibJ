@@ -88,133 +88,126 @@ import org.cip4.jdflib.auto.JDFAutoResponse;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.resource.JDFNotification;
 
-
-public class JDFResponse extends JDFAutoResponse //JDFMessage
+public class JDFResponse extends JDFAutoResponse // JDFMessage
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFResponse
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    public JDFResponse(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFResponse
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	public JDFResponse(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFResponse
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    public JDFResponse(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFResponse
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFResponse(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFResponse
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    public JDFResponse(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * Constructor for JDFResponse
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	public JDFResponse(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * inner class EnumClass
-     */
-    public static final class EnumError extends ValuedEnum
-    {
-        private static final long serialVersionUID = 1L;
-        private static int m_startValue = 0;
+	/**
+	 * inner class EnumClass
+	 */
+	public static final class EnumError extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
-        private EnumError(String status) 
-        {
-            super(status, m_startValue++);
-        }
+		private EnumError(String status)
+		{
+			super(status, m_startValue++);
+		}
 
-        public static EnumError getEnum(String status) 
-        {
-            return (EnumError) getEnum(EnumError.class, status);
-        }
+		public static EnumError getEnum(String status)
+		{
+			return (EnumError) getEnum(EnumError.class, status);
+		}
 
-        public static EnumError getEnum(int value) 
-        {
-            return (EnumError) getEnum(EnumError.class, value);
-        }
+		public static EnumError getEnum(int value)
+		{
+			return (EnumError) getEnum(EnumError.class, value);
+		}
 
-        public static Map getEnumMap() 
-        {
-            return getEnumMap(EnumError.class);
-        }
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumError.class);
+		}
 
-        public static List getEnumList() 
-        {
-            return getEnumList(EnumError.class);
-        }
+		public static List getEnumList()
+		{
+			return getEnumList(EnumError.class);
+		}
 
-        public static Iterator iterator() 
-        {
-            return iterator(EnumError.class);
-        }
+		public static Iterator iterator()
+		{
+			return iterator(EnumError.class);
+		}
 
-        /**
-         * constants EnumError
-         */
-        public static final EnumError ErrorUnknown      = new EnumError("ErrorUnknown");
-        public static final EnumError ErrorUnknownQuery = new EnumError("ErrorUnknownQuery");
+		/**
+		 * constants EnumError
+		 */
+		public static final EnumError ErrorUnknown = new EnumError("ErrorUnknown");
+		public static final EnumError ErrorUnknownQuery = new EnumError("ErrorUnknownQuery");
 
-    }
+	}
 
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    @Override
-    public String toString()
-    {
-        return "JDFResponse[  --> " + super.toString() + " ]";
-    }
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	@Override
+	public String toString()
+	{
+		return "JDFResponse[  --> " + super.toString() + " ]";
+	}
 
-    /**
-     * Set ErrorText, (Notification/Comment/#text)
-     * also sets Notification/@Type=Error and Notification/@Class=Error
-     * doesn't create a notification if ErroerText=null
-     *
-     * @param errorText new error text
-     * @return JDFNotification the newly created Notification element
-     */
-    public JDFNotification setErrorText(String errorText)
-    {
-        final JDFNotification n=getCreateNotification();
-        n.setType("Error");
-        n.setClass(JDFNotification.EnumClass.Error);
-        if(errorText!=null)
-        {
-            JDFComment c=n.getComment(0);
-            if(c!=null)
-                c.appendText("\n");
-            else
-                c=n.appendComment();
-            c.appendText(errorText);
-        }
-        return n;
-    }
+	/**
+	 * Set ErrorText, (Notification/Comment/#text) also sets Notification/@Type=Error and Notification/@Class=Error
+	 * doesn't create a notification if ErroerText=null
+	 * 
+	 * @param errorText new error text
+	 * @return JDFNotification the newly created Notification element
+	 */
+	public JDFNotification setErrorText(String errorText)
+	{
+		final JDFNotification n = getCreateNotification();
+		n.setType("Error");
+		n.setClass(JDFNotification.EnumClass.Error);
+		if (errorText != null)
+		{
+			JDFComment c = n.getComment(0);
+			if (c != null)
+				c.appendText("\n");
+			else
+				c = n.appendComment();
+			c.appendText(errorText);
+		}
+		return n;
+	}
 }

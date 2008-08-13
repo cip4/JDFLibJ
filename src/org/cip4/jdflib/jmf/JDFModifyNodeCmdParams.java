@@ -9,16 +9,10 @@
  Revision history:    ...
  **/
 
-
-
-
-
 package org.cip4.jdflib.jmf;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoModifyNodeCmdParams;
-
-
 
 //----------------------------------
 public class JDFModifyNodeCmdParams extends JDFAutoModifyNodeCmdParams
@@ -27,47 +21,43 @@ public class JDFModifyNodeCmdParams extends JDFAutoModifyNodeCmdParams
 
 	/**
 	 * Constructor for JDFModifyNodeCmdParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFModifyNodeCmdParams(
-			CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFModifyNodeCmdParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFModifyNodeCmdParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFModifyNodeCmdParams(
-			CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI,
-			String qualifiedName)
+	public JDFModifyNodeCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFModifyNodeCmdParams
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFModifyNodeCmdParams(
-			CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI,
-			String qualifiedName,
-			String myLocalName)
+	public JDFModifyNodeCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoModifyNodeCmdParams#toString()
 	 */
 	public String toString()
@@ -75,6 +65,3 @@ public class JDFModifyNodeCmdParams extends JDFAutoModifyNodeCmdParams
 		return "JDFModifyNodeCmdParams[  --> " + super.toString() + " ]";
 	}
 }
-
-
-

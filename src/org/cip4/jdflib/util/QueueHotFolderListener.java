@@ -72,22 +72,20 @@ package org.cip4.jdflib.util;
 
 import org.cip4.jdflib.jmf.JDFJMF;
 
-
 /**
  * a queue hotfolder watcher Listener callback
+ * 
  * @author prosirai
- *
+ * 
  */
 public interface QueueHotFolderListener
 {
 
-    /**
-     * this interface function is called whenever a new or modified file has stabilized
-     * in the hotFolder
-     * 
-     * @param submissionJMF the JMF (in general a returnqueueentry or submitqueuentry) that references th
-     * jdf file
-     */
-    public void submitted(JDFJMF submissionJMF);
+	/**
+	 * this interface function is called whenever a new or modified file has stabilized in the hotFolder
+	 * 
+	 * @param submissionJMF the JMF (in general a returnqueueentry or submitqueuentry) that references th jdf file
+	 */
+	public void submitted(JDFJMF submissionJMF);
 
 }

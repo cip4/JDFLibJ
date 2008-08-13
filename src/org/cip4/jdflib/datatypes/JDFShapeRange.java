@@ -85,282 +85,285 @@ import java.util.zip.DataFormatException;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.util.HashUtil;
 
-
 public class JDFShapeRange extends JDFRange
 {
-    //**************************************** Attributes ******************************************
-    private JDFShape m_left = null;
-    private JDFShape m_right = null;
-    
-    //**************************************** Constructors ****************************************
-    /**
-     * constructs a shape pair range with all values set to 0.0 Double
-     */
-    public JDFShapeRange()
-    {
-        init(null, null);
-    }
-    
-    /**
-     * constructs a JDFShapeRange, both values are equal ("from x to x")
-     *
-     * @param x the given JDFShape
-     */
-    public JDFShapeRange(JDFShape x) 
-    {
-        init(x, x);
-    }
-    
-    /**
-     * constructor a JDFShapeRange with two JDFShape values ("from xmin to xmax")
-     *
-     * @param xmin the given min value
-     * @param xmax the given max value
-     */
-    public JDFShapeRange(JDFShape xmin, JDFShape xmax)  
-    {
-        init(xmin, xmax);
-    }
-    
-    /**
-     * copy constructor<br>
-     * constructs a JDFShapeRange with the given JDFShapeRange
-     *
-     * @param r
-     */
-    public JDFShapeRange(JDFShapeRange r)
-    {
-        init(r.getLeft(), r.getRight());
-    }
-    
-    /**
-     * Initialization
-     * @param x left boundary
-     * @param y right boundary
-     */
-    protected void init(JDFShape x, JDFShape y)
-    {
-        m_left = x;
-        m_right = y;
-    }
-    
-    /**
-     * constructs a JDFShapeRange with the values of the given String
-     *
-     * @param s the given string representation of the range
-     *
-     * @throws DataFormatException - if the String has not a valid format
-     */
-    public JDFShapeRange(String s) throws DataFormatException
-    {
-        String[] strArray = s.split("~");
-        if((strArray.length <= 0) || (strArray.length > 2))
-        {
-            throw new DataFormatException("JDFShapeRange illegal string: " + s);
-        }
-        try
-        {
-            // the min and the max values are equal
-            if (strArray.length == 1)
-            {
-                m_left  = new JDFShape(strArray[0].trim());
-                m_right = new JDFShape(strArray[0].trim());
-            }
-            //two different values
-            else
-            {
-                m_left  = new JDFShape(strArray[0].trim());
-                m_right = new JDFShape(strArray[1].trim());
-            }
-        }
-        catch (DataFormatException e)
-        {
-            throw new DataFormatException("JDFShapeRange illegal string: " + s);
-        }
-    }
-    
-    //**************************************** Methods *********************************************
-    
-    /**
-     * getString - returns the range as a String
-     *
-     * @return String - the range as a String
-     */
-    @Override
+	// **************************************** Attributes
+	// ******************************************
+	private JDFShape m_left = null;
+	private JDFShape m_right = null;
+
+	// **************************************** Constructors
+	// ****************************************
+	/**
+	 * constructs a shape pair range with all values set to 0.0 Double
+	 */
+	public JDFShapeRange()
+	{
+		init(null, null);
+	}
+
+	/**
+	 * constructs a JDFShapeRange, both values are equal ("from x to x")
+	 * 
+	 * @param x the given JDFShape
+	 */
+	public JDFShapeRange(JDFShape x)
+	{
+		init(x, x);
+	}
+
+	/**
+	 * constructor a JDFShapeRange with two JDFShape values ("from xmin to xmax")
+	 * 
+	 * @param xmin the given min value
+	 * @param xmax the given max value
+	 */
+	public JDFShapeRange(JDFShape xmin, JDFShape xmax)
+	{
+		init(xmin, xmax);
+	}
+
+	/**
+	 * copy constructor<br>
+	 * constructs a JDFShapeRange with the given JDFShapeRange
+	 * 
+	 * @param r
+	 */
+	public JDFShapeRange(JDFShapeRange r)
+	{
+		init(r.getLeft(), r.getRight());
+	}
+
+	/**
+	 * Initialization
+	 * 
+	 * @param x left boundary
+	 * @param y right boundary
+	 */
+	protected void init(JDFShape x, JDFShape y)
+	{
+		m_left = x;
+		m_right = y;
+	}
+
+	/**
+	 * constructs a JDFShapeRange with the values of the given String
+	 * 
+	 * @param s the given string representation of the range
+	 * 
+	 * @throws DataFormatException - if the String has not a valid format
+	 */
+	public JDFShapeRange(String s) throws DataFormatException
+	{
+		String[] strArray = s.split("~");
+		if ((strArray.length <= 0) || (strArray.length > 2))
+		{
+			throw new DataFormatException("JDFShapeRange illegal string: " + s);
+		}
+		try
+		{
+			// the min and the max values are equal
+			if (strArray.length == 1)
+			{
+				m_left = new JDFShape(strArray[0].trim());
+				m_right = new JDFShape(strArray[0].trim());
+			}
+			// two different values
+			else
+			{
+				m_left = new JDFShape(strArray[0].trim());
+				m_right = new JDFShape(strArray[1].trim());
+			}
+		}
+		catch (DataFormatException e)
+		{
+			throw new DataFormatException("JDFShapeRange illegal string: " + s);
+		}
+	}
+
+	// **************************************** Methods
+	// *********************************************
+
+	/**
+	 * getString - returns the range as a String
+	 * 
+	 * @return String - the range as a String
+	 */
+	@Override
 	public String toString()
-    {
-        if (m_left.equals(m_right)) 
-        {
-            return JDFConstants.EMPTYSTRING + getLeft();
-        }
-        return getLeft() + " ~ " + getRight();
-    }
-    
-    /**
-     * isValid - validate the given String
-     *
-     * @param s the given string
-     *
-     * @return boolean - false if the String has not a valid format 
-     */
-    public boolean isValid(String s) 
-    {
-        try 
-        {
-            new JDFShapeRange(s);
-        }
-        catch (DataFormatException e)
-        {
-            return false;
-        }
-        return true;
-    }
-    
-    /**
-     * equals - returns true if both JDFShapeRanges are equal otherwise false
-     *
-     * @return boolean - true if equal otherwise false
-     */
-    @Override
+	{
+		if (m_left.equals(m_right))
+		{
+			return JDFConstants.EMPTYSTRING + getLeft();
+		}
+		return getLeft() + " ~ " + getRight();
+	}
+
+	/**
+	 * isValid - validate the given String
+	 * 
+	 * @param s the given string
+	 * 
+	 * @return boolean - false if the String has not a valid format
+	 */
+	public boolean isValid(String s)
+	{
+		try
+		{
+			new JDFShapeRange(s);
+		}
+		catch (DataFormatException e)
+		{
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * equals - returns true if both JDFShapeRanges are equal otherwise false
+	 * 
+	 * @return boolean - true if equal otherwise false
+	 */
+	@Override
 	public boolean equals(Object other)
-    {
-        if (this == other)
-        {
-            return true;
-        }
-        if (other == null)
-        {
-            return false;
-        }
-        if (!other.getClass().equals(getClass()))
-        {
-            return false;
-        }
-        
-        JDFShapeRange range = (JDFShapeRange) other;
-        
-        return  this.getLeft().equals(range.getLeft()) &&
-        this.getRight().equals(range.getRight());
-    }
-    
-    /**
-     * hashCode complements equals() to fulfill the equals/hashCode contract
-     * @return int
-     */
-    @Override
+	{
+		if (this == other)
+		{
+			return true;
+		}
+		if (other == null)
+		{
+			return false;
+		}
+		if (!other.getClass().equals(getClass()))
+		{
+			return false;
+		}
+
+		JDFShapeRange range = (JDFShapeRange) other;
+
+		return this.getLeft().equals(range.getLeft()) && this.getRight().equals(range.getRight());
+	}
+
+	/**
+	 * hashCode complements equals() to fulfill the equals/hashCode contract
+	 * 
+	 * @return int
+	 */
+	@Override
 	public int hashCode()
-    {
-        return HashUtil.hashCode(0, this.toString());
-    }
-    
-    /**
-     * inRange - tests if the given x inside of this range 
-     *
-     * @param x comparison value
-     *
-     * @return boolean - true if x in range
-     */
-    public boolean inRange(JDFShape x)
-    {
-        JDFShape min=this.getLowerValue();
-        JDFShape max=this.getUpperValue();
-        return x.isGreaterOrEqual(min) && x.isLessOrEqual(max);
-    }
-    
-    /**
-     * isPartOfRange - is range 'r' within this range?
-     * 
-     * @param r the range to test
-     * 
-     * @return boolean - true if range 'r' is within this range, else false
-     */
-    @Override
+	{
+		return HashUtil.hashCode(0, this.toString());
+	}
+
+	/**
+	 * inRange - tests if the given x inside of this range
+	 * 
+	 * @param x comparison value
+	 * 
+	 * @return boolean - true if x in range
+	 */
+	public boolean inRange(JDFShape x)
+	{
+		JDFShape min = this.getLowerValue();
+		JDFShape max = this.getUpperValue();
+		return x.isGreaterOrEqual(min) && x.isLessOrEqual(max);
+	}
+
+	/**
+	 * isPartOfRange - is range 'r' within this range?
+	 * 
+	 * @param r the range to test
+	 * 
+	 * @return boolean - true if range 'r' is within this range, else false
+	 */
+	@Override
 	public boolean isPartOfRange(JDFRange ra)
-    {
-        JDFShapeRange r=(JDFShapeRange)ra;
-        JDFShape min=this.getLowerValue();
-        JDFShape r_min=r.getLowerValue();
-        JDFShape max=this.getUpperValue();
-        JDFShape r_max=r.getUpperValue();
-        return r_min.isGreaterOrEqual(min) && r_max.isLessOrEqual(max);
-    }
-    
-    /**
-     * getLeft - gets the left JDFShape object of the range
-     *
-     * @return JDFShape x - the left JDFShape object of the range
-     */
-    public JDFShape getLeft()
-    {
-        return m_left;
-    }
-    
-    /**
-     * getRight - gets the right JDFShape object of the range
-     *
-     * @return JDFShape x - the right JDFShape object of the range
-     */
-    public JDFShape getRight()
-    {
-        return m_right;
-    }
-    
-    /**
-     * sets the left JDFShape object of the range
-     *
-     * @param x the left JDFShape object of the range
-     */
-    public void setLeft(JDFShape x) 
-    {
-        m_left = x;
-    }
-    
-    /**
-     * sets the right JDFShape object of the range
-     *
-     * @param x the right JDFShape object of the range
-     */
-    public void setRight(JDFShape x) 
-    {
-        m_right = x;
-    }
-    
-    /**
-     * getUpperValue - returns the upper value of the bounds
-     *
-     * @return JDFShape - the upper value of the range
-     */
-    public JDFShape getUpperValue()
-    {
-        return (m_left.isLessOrEqual(m_right) ? m_right : m_left);
-    }
-    
-    /**
-     * getLowerValue - returns the lower value of the bounds
-     *
-     * @return JDFShape - the lower value of the range
-     */
-    public JDFShape getLowerValue()
-    {
-        return (m_left.isLess(m_right) ? m_left : m_right);
-    }
-    @Override
+	{
+		JDFShapeRange r = (JDFShapeRange) ra;
+		JDFShape min = this.getLowerValue();
+		JDFShape r_min = r.getLowerValue();
+		JDFShape max = this.getUpperValue();
+		JDFShape r_max = r.getUpperValue();
+		return r_min.isGreaterOrEqual(min) && r_max.isLessOrEqual(max);
+	}
+
+	/**
+	 * getLeft - gets the left JDFShape object of the range
+	 * 
+	 * @return JDFShape x - the left JDFShape object of the range
+	 */
+	public JDFShape getLeft()
+	{
+		return m_left;
+	}
+
+	/**
+	 * getRight - gets the right JDFShape object of the range
+	 * 
+	 * @return JDFShape x - the right JDFShape object of the range
+	 */
+	public JDFShape getRight()
+	{
+		return m_right;
+	}
+
+	/**
+	 * sets the left JDFShape object of the range
+	 * 
+	 * @param x the left JDFShape object of the range
+	 */
+	public void setLeft(JDFShape x)
+	{
+		m_left = x;
+	}
+
+	/**
+	 * sets the right JDFShape object of the range
+	 * 
+	 * @param x the right JDFShape object of the range
+	 */
+	public void setRight(JDFShape x)
+	{
+		m_right = x;
+	}
+
+	/**
+	 * getUpperValue - returns the upper value of the bounds
+	 * 
+	 * @return JDFShape - the upper value of the range
+	 */
+	public JDFShape getUpperValue()
+	{
+		return (m_left.isLessOrEqual(m_right) ? m_right : m_left);
+	}
+
+	/**
+	 * getLowerValue - returns the lower value of the bounds
+	 * 
+	 * @return JDFShape - the lower value of the range
+	 */
+	public JDFShape getLowerValue()
+	{
+		return (m_left.isLess(m_right) ? m_left : m_right);
+	}
+
+	@Override
 	protected Object getRightObject()
-    {       
-        return m_right;
-    }
+	{
+		return m_right;
+	}
 
-    @Override
+	@Override
 	protected Object getLeftObject()
-    {
-         return m_left;
-    }
-    
-    @Override
-	protected boolean inObjectRange(Object other)
-    {
-       return inRange((JDFShape) other);
-    }
+	{
+		return m_left;
+	}
 
-    
+	@Override
+	protected boolean inObjectRange(Object other)
+	{
+		return inRange((JDFShape) other);
+	}
+
 }

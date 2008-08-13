@@ -92,164 +92,225 @@ import java.util.Map.Entry;
 import org.cip4.jdflib.ifaces.IMatches;
 
 /**
- * class with utilities for containers, e.g. Vectors, sets etc.
- * also simple object utils
+ * class with utilities for containers, e.g. Vectors, sets etc. also simple object utils
+ * 
  * @author prosirai
- *
+ * 
  */
 public class ContainerUtil
 {
-    /**
-     * create a HashSet from a List (Vector...)
-     * @param l
-     * @return
-     */
-    public static<a> Set toHashSet(List<a> l)
-    {
-        if(l==null)
-            return null;
-        Set<a> s=new HashSet<a>();
-        for(int i=0;i<l.size();i++)
-            s.add(l.get(i));
-        return s;
-    }
-    /**
-     * create a HashSet from an Array
-     * @param l
-     * @return
-     */
-    public static<a> Set toHashSet(a[] l)
-    {
-        if(l==null)
-            return null;
-        Set<a> s=new HashSet<a>();
-        for(int i=0;i<l.length;i++)
-            s.add(l[i]);
-        return s;
-    }
-    /**
-     * create a Vector from an Array
-     * @param l
-     * @return
-     */
-    public static<a> Vector toVector(a[] l)
-    {
-        if(l==null)
-            return null;
-        Vector<a> v=new Vector<a>();
-        v.ensureCapacity(l.length);
-        for(int i=0;i<l.length;i++)
-            v.add(l[i]);
-        return v;
-    }
-    
-    /**
-     * return a matching element from a collection of Imatches
-     * @param c the collection to search
-     * @param obj the search key for matches
-     * @return
-     */
-    public static<a> IMatches getMatch(Collection<? extends IMatches> c ,a obj, int iSkip)
-    {
-        if(c==null)
-            return null;
-        if(iSkip<0)
-        {
-            Vector<IMatches> v=getMatches(c, obj);
-            if(v==null)
-                return null;
-            iSkip=v.size()+iSkip;
-            if(iSkip<0)
-                return null;
-            return v.get(iSkip);
-        }
-        Iterator<? extends IMatches> it=c.iterator();
-        while(it.hasNext())
-        {
-            IMatches m=it.next();
-            if(m.matches(obj) && iSkip--<=0)
-                return m;
-        }
-        return null;
-    }
-    /**
-     * return a matching element from a collection of Imatches
-     * @param c the collection to search
-     * @param obj the search key for matches
-     * @return
-     */
-    public static<a,aa> Vector<IMatches>getMatches(Collection<? extends IMatches> c ,a obj)
-    {
-        if(c==null)
-            return null;
-        Iterator<? extends IMatches> it=c.iterator();
-        Vector<IMatches>v=new Vector<IMatches>();
-        while(it.hasNext())
-        {
-            IMatches m=it.next();
-            if(m.matches(obj))
-                v.add(m);
-        }
-        return v.size()==0?null : v;
-    }
- 
-    /**
-     * create a Vector of entry values from a map
-     * 
-     * @param m the map to dump to an array
-     * @param sortByKey, if true, sort the entries by key
-     * 
-     * @return the vector
-     */
-    public static<a,b> Vector<b> toValueVector(Map<a,b> m, boolean sortByKey)
-    {
-        if(m==null)
-            return null;
-        final Set<Entry<a,b>> entrySet = m.entrySet();
-        if(entrySet.size()==0)
-            return null;
-        Vector<b> v=new Vector<b>();
-        v.ensureCapacity(entrySet.size());
-        Iterator<Entry<a,b>> it = entrySet.iterator();
-        if(sortByKey)
-        {
-            Vector<a> keys=new Vector<a>();
-            keys.ensureCapacity(entrySet.size());
-            
-            while(it.hasNext())
-            {
-                a key = it.next().getKey();
-                if(key!=null)
-                    keys.add(key);
-            }
-            
-            Collections.sort((Vector)keys);
-            for(int i=0;i<keys.size();i++)
-            {
-                v.add(m.get(keys.get(i)));
-            }
-        }
-        else
-        {
-            while(it.hasNext())
-                v.add(it.next().getValue());
-        }
-        return v;
-    }
+	/**
+	 * create a HashSet from a List (Vector...)
+	 * @param <a> the data typeof the sets
+	 * 
+	 * @param list
+	 * @return a Set created from list
+	 */
+	public static <a> Set<a> toHashSet(List<a> list)
+	{
+		if (list == null)
+			return null;
+		Set<a> s = new HashSet<a>();
+		for (int i = 0; i < list.size(); i++)
+			s.add(list.get(i));
+		return s;
+	}
 
-    /**
-     * return true if a equals b or both are null
-     * 
-     * @param a Object to compare
-     * @param b Object to compare
-     * @return boolean true if a equals b or both are null
-     */
-    public static boolean equals(Object a, Object b)
-    {
-        if(a==null)
-            return b==null;
-        if(b==null)
-            return false;
-        return a.equals(b);
-    }
+	/**
+	 * create a HashSet from an Array
+	 * @param <a> the data typeof the sets
+	 * 
+	 * @param l
+	 * @return a Set created from list
+	 */
+	public static <a> Set<a> toHashSet(a[] l)
+	{
+		if (l == null)
+			return null;
+		Set<a> s = new HashSet<a>();
+		for (int i = 0; i < l.length; i++)
+			s.add(l[i]);
+		return s;
+	}
+
+	/**
+	 * create a Vector from an Array
+	 * @param <a> 
+	 * 
+	 * @param l
+	 * @return a Vector<a>
+	 */
+	public static <a> Vector<a> toVector(a[] l)
+	{
+		if (l == null)
+			return null;
+		Vector<a> v = new Vector<a>();
+		v.ensureCapacity(l.length);
+		for (int i = 0; i < l.length; i++)
+			v.add(l[i]);
+		return v;
+	}
+
+	/**
+	 * return a matching element from a collection of Imatches
+	 * @param <a> the data type
+	 * 
+	 * @param c the collection to search
+	 * @param obj the search key for matches
+	 * @param iSkip which one to grab, may be negative in which case we count -1=last, -2=second last...
+	 * @return the matching <a>
+	 */
+	public static <a> IMatches getMatch(Collection<? extends IMatches> c, a obj, int iSkip)
+	{
+		if (c == null)
+			return null;
+		if (iSkip < 0)
+		{
+			Vector<IMatches> v = getMatches(c, obj);
+			if (v == null)
+				return null;
+			iSkip = v.size() + iSkip;
+			if (iSkip < 0)
+				return null;
+			return v.get(iSkip);
+		}
+		Iterator<? extends IMatches> it = c.iterator();
+		while (it.hasNext())
+		{
+			IMatches m = it.next();
+			if (m.matches(obj) && iSkip-- <= 0)
+				return m;
+		}
+		return null;
+	}
+
+	/**
+	 * return a matching element from a collection of IMatches
+	 * @param <a> the data type
+	 * 
+	 * @param c the collection to search
+	 * @param obj the search key for matches
+	 * @return Vector of matching a
+	 */
+	public static <a> Vector<IMatches> getMatches(Collection<? extends IMatches> c, a obj)
+	{
+		if (c == null)
+			return null;
+		Iterator<? extends IMatches> it = c.iterator();
+		Vector<IMatches> v = new Vector<IMatches>();
+		while (it.hasNext())
+		{
+			IMatches m = it.next();
+			if (m.matches(obj))
+				v.add(m);
+		}
+		return v.size() == 0 ? null : v;
+	}
+
+	/**
+	 * create a Vector of entry values from a map
+	 * 
+	 * @param m the map to dump to an array 
+	 * @param sortByKey , if true, sort the entries by key
+	 * 
+	 * @return the vector
+	 */
+	public static <a extends Comparable<? super a>, b> Vector<b> toValueVector(Map<a, b> m, boolean sortByKey)
+	{
+		if (!sortByKey)
+			return toValueVector(m);
+
+		if (m == null)
+			return null;
+
+		synchronized (m)
+		{
+			final Set<Entry<a, b>> entrySet = m.entrySet();
+			if (entrySet.size() == 0)
+				return null;
+
+			Vector<b> v = new Vector<b>();
+			v.ensureCapacity(entrySet.size());
+			Iterator<Entry<a, b>> it = entrySet.iterator();
+			Vector<a> keys = new Vector<a>();
+			keys.ensureCapacity(entrySet.size());
+
+			while (it.hasNext())
+			{
+				a key = it.next().getKey();
+				if (key != null)
+					keys.add(key);
+			}
+
+			Collections.sort(keys);
+			for (int i = 0; i < keys.size(); i++)
+			{
+				v.add(m.get(keys.get(i)));
+			}
+			return v;
+		}
+	}
+
+	/**
+	 * create a Vector of entry values from a map
+	 * @param <a> data type of the map key
+	 * @param <b> data type of the map value
+	 * 
+	 * @param m the map to dump to an array 
+	 * 
+	 * @return the vector
+	 */
+	public static <a, b> Vector<b> toValueVector(Map<a, b> m)
+	{
+		if (m == null)
+			return null;
+
+		synchronized (m)
+		{
+			final Set<Entry<a, b>> entrySet = m.entrySet();
+			if (entrySet.size() == 0)
+				return null;
+			Vector<b> v = new Vector<b>();
+			v.ensureCapacity(entrySet.size());
+			Iterator<Entry<a, b>> it = entrySet.iterator();
+
+			while (it.hasNext())
+				v.add(it.next().getValue());
+
+			return v;
+		}
+	}
+
+	/**
+	 * return true if a equals b or both are null
+	 * 
+	 * @param a Object to compare
+	 * @param b Object to compare
+	 * @return boolean true if a equals b or both are null
+	 */
+	public static boolean equals(Object a, Object b)
+	{
+		if (a == null)
+			return b == null;
+		if (b == null)
+			return false;
+		return a.equals(b);
+	}
+
+	/**
+	 * static implementation of compare for any comparable object that gracefully handles null
+	 * null is always the smallest
+	 * @param c0 
+	 * @param c1
+	 * @return -1 if c0<c1, 0 if equal, 1 if c0>c1
+	 */
+	public static int compare(Comparable c0, Comparable c1)
+	{
+		if (c0 == null)
+			return c1 == null ? 0 : 1;
+		if (c1 == null)
+			return -1;
+		return c0.compareTo(c1);
+	}
+
 }

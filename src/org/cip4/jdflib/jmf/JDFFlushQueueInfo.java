@@ -78,17 +78,11 @@
  Revision history:    ...
  **/
 
-
-
-
-
 package org.cip4.jdflib.jmf;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoFlushQueueInfo;
 import org.cip4.jdflib.core.VElement;
-
-
 
 //----------------------------------
 public class JDFFlushQueueInfo extends JDFAutoFlushQueueInfo
@@ -97,48 +91,43 @@ public class JDFFlushQueueInfo extends JDFAutoFlushQueueInfo
 
 	/**
 	 * Constructor for JDFFlushQueueInfo
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFFlushQueueInfo(
-			CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFFlushQueueInfo(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFFlushQueueInfo
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFFlushQueueInfo(
-			CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI,
-			String qualifiedName)
+	public JDFFlushQueueInfo(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFFlushQueueInfo
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFFlushQueueInfo(
-			CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI,
-			String qualifiedName,
-			String myLocalName)
+	public JDFFlushQueueInfo(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
-	
+
 	/**
 	 * toString
+	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoFlushQueueInfo#toString()
 	 * @return String
 	 */
@@ -147,18 +136,16 @@ public class JDFFlushQueueInfo extends JDFAutoFlushQueueInfo
 		return "JDFFlushQueueInfo[  --> " + super.toString() + " ]";
 	}
 
-    /**
-     * create a queuefilter from the zapped queuentries
-     * @param zapped vector of {@link JDFQueueEntry}
-     */
-    public void setQueueEntryDefsFromQE(VElement zapped)
-    {
-       int zs=zapped==null ? 0 : zapped.size();
-       JDFQueueFilter qf=appendQueueFilter();
-       for(int i=0;i<zs;i++)
-           qf.appendQueueEntryDef(((JDFQueueEntry)zapped.get(i)).getQueueEntryID());        
-    }
+	/**
+	 * create a queuefilter from the zapped queuentries
+	 * 
+	 * @param zapped vector of {@link JDFQueueEntry}
+	 */
+	public void setQueueEntryDefsFromQE(VElement zapped)
+	{
+		int zs = zapped == null ? 0 : zapped.size();
+		JDFQueueFilter qf = appendQueueFilter();
+		for (int i = 0; i < zs; i++)
+			qf.appendQueueEntryDef(((JDFQueueEntry) zapped.get(i)).getQueueEntryID());
+	}
 }
-
-
-

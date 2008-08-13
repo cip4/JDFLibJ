@@ -95,38 +95,38 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 
-
 public class JDFRefElement extends JDFElement
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-	static 
+	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.RSUBREF,  0x44444433, AttributeInfo.EnumAttributeType.IDREF, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.RREF,     0x22222222, AttributeInfo.EnumAttributeType.IDREF, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.RSUBREF, 0x44444433, AttributeInfo.EnumAttributeType.IDREF, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.RREF, 0x22222222, AttributeInfo.EnumAttributeType.IDREF, null, null);
 	}
-	
+
 	@Override
-	protected AttributeInfo getTheAttributeInfo() 
+	protected AttributeInfo getTheAttributeInfo()
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
 	}
-	
+
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-	static 
+	static
 	{
 		elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x33333331);
 	}
-	
+
 	@Override
-	protected ElementInfo getTheElementInfo() 
+	protected ElementInfo getTheElementInfo()
 	{
 		return super.getTheElementInfo().updateReplace(elemInfoTable);
 	}
-	
+
 	/**
 	 * Constructor for JDFRefElement
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -137,36 +137,32 @@ public class JDFRefElement extends JDFElement
 
 	/**
 	 * Constructor for JDFRefElement
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFRefElement(
-			CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI,
-			String qualifiedName)
+	public JDFRefElement(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFRefElement
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFRefElement(
-			CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI,
-			String qualifiedName,
-			String myLocalName)
+	public JDFRefElement(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
-	
+
 	/**
-	 * test Part element existence 
+	 * test Part element existence
+	 * 
 	 * @deprecated 060310 use inline hasChildElement(ElementName.PART, null);
 	 */
 	@Deprecated
@@ -174,57 +170,60 @@ public class JDFRefElement extends JDFElement
 	{
 		return this.hasChildElement(ElementName.PART, null);
 	}
-	
-	
+
 	/**
 	 * Set attribute rRef
-	 *@param value the value to set the attribute to
+	 * 
+	 * @param value the value to set the attribute to
 	 */
 	public void setrRef(String value)
 	{
 		setAttribute(JDFConstants.RREF, value, JDFConstants.EMPTYSTRING);
 	}
-	
-    /**
-     * returns true if the name specified fits the node name of this
-     * @param nodeName     the name of the node to test. may be either local or qualified
-     * @param nameSpaceURI the namespace of the node to test.
-     * @return true if ok
-     */
-    @Override
+
+	/**
+	 * returns true if the name specified fits the node name of this
+	 * 
+	 * @param nodeName the name of the node to test. may be either local or qualified
+	 * @param nameSpaceURI the namespace of the node to test.
+	 * @return true if ok
+	 */
+	@Override
 	public boolean fitsName(String nodeName, String nameSpaceURI)
-    {
-        if(nodeName==null || nodeName.endsWith(JDFConstants.REF))
-        {
-            if (super.fitsName_KElement(nodeName, nameSpaceURI))
-            {
-                return true;
-            }
-        }
-        else
-        {
-            // if this is a valid ResourceRef, it also fits
-            if (super.fitsName_KElement(nodeName + JDFConstants.REF, nameSpaceURI))
-            {
-                return true;
-            }
-        }
-        
-        return false;
-    }
-    
-    /**
+	{
+		if (nodeName == null || nodeName.endsWith(JDFConstants.REF))
+		{
+			if (super.fitsName_KElement(nodeName, nameSpaceURI))
+			{
+				return true;
+			}
+		}
+		else
+		{
+			// if this is a valid ResourceRef, it also fits
+			if (super.fitsName_KElement(nodeName + JDFConstants.REF, nameSpaceURI))
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
 	 * Get string attribute rRef
+	 * 
 	 * @return String - the vaue of the attribute
 	 */
 	public String getrRef()
 	{
 		return getAttribute(JDFConstants.RREF, JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING);
 	}
-		
+
 	/**
 	 * Set attribute rSubRef
-	 *@param value the value to set the attribute to
+	 * 
+	 * @param value the value to set the attribute to
 	 *@deprecated in JDF 1.2
 	 */
 	@Deprecated
@@ -232,16 +231,17 @@ public class JDFRefElement extends JDFElement
 	{
 		setAttribute(JDFConstants.RSUBREF, value, JDFConstants.EMPTYSTRING);
 	}
-	
+
 	/**
 	 * Get string attribute rSubRef
+	 * 
 	 * @return String - the vaue of the attribute
 	 */
 	public String getrSubRef()
 	{
 		return getAttribute(JDFConstants.RSUBREF, JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING);
 	}
-	
+
 	@Override
 	public boolean isValid(EnumValidationLevel level)
 	{
@@ -250,218 +250,227 @@ public class JDFRefElement extends JDFElement
 		{
 			return false;
 		}
-				
-        JDFResource r = getTarget();
-		
+
+		JDFResource r = getTarget();
+
 		if (r == null)
 		{
 			return false;
 		}
-		
+
 		if (!getNodeName().equals(r.getRefString()))
 		{
 			return false;
 		}
-		
-		if(!validResourcePosition())
+
+		if (!validResourcePosition())
 		{
 			return false;
 		}
-		
-		// RunLists and physical resources may be referenced at the root or intermediate nodes¬
-//		if((r.getPartUsage() != JDFResource.EnumPartUsage.Explicit) && !r.isLeaf())
-//		{
-//			return false;
-//		}
-		
+
+		// RunLists and physical resources may be referenced at the root or
+		// intermediate nodes
+		// if((r.getPartUsage() != JDFResource.EnumPartUsage.Explicit) &&
+		// !r.isLeaf())
+		// {
+		// return false;
+		// }
+
 		return true;
 	}
 
-    ///////////////////////////////////////////////////////////////
-	
+	// /////////////////////////////////////////////////////////////
+
 	public boolean validResourcePosition()
 	{
-        return validResourcePosition(getTarget());
-	}
-	
-    /**
-     * get the referenced target resource
-     * The resource's PartUsage is evaluated to correctly retrieve implicit or explicit partitions<br>
-     * may return null
-     * 
-     * @return JDFResource - the reference target partition
-     */
-	public JDFResource getTargetRoot()
-	{
-	    if (hasAttribute(AttributeName.RSUBREF))
-	    {
-	        final String s = getrSubRef();
-	        final KElement subRef = getTarget_KElement(s, AttributeName.ID);
-	        
-	        if (subRef != null)
-	        {
-	            return (JDFResource) subRef;
-	        }
-	        return null;
-	    }
-	    return getLinkRoot(null);
+		return validResourcePosition(getTarget());
 	}
 
-    /**
-	 * get the referenced target resource
-     * The resource's PartUsage is evaluated to correctly retrieve implicit or explicit partitions<br>
-     * may return null
-     * 
-     * @return JDFResource - the reference target partition
+	/**
+	 * get the referenced target resource The resource's PartUsage is evaluated to correctly retrieve implicit or
+	 * explicit partitions<br>
+	 * may return null
+	 * 
+	 * @return JDFResource - the reference target partition
+	 */
+	public JDFResource getTargetRoot()
+	{
+		if (hasAttribute(AttributeName.RSUBREF))
+		{
+			final String s = getrSubRef();
+			final KElement subRef = getTarget_KElement(s, AttributeName.ID);
+
+			if (subRef != null)
+			{
+				return (JDFResource) subRef;
+			}
+			return null;
+		}
+		return getLinkRoot(null);
+	}
+
+	/**
+	 * get the referenced target resource The resource's PartUsage is evaluated to correctly retrieve implicit or
+	 * explicit partitions<br>
+	 * may return null
+	 * 
+	 * @return JDFResource - the reference target partition
 	 */
 	public JDFResource getTarget()
 	{
-	    JDFResource targetRoot = getTargetRoot();
-        if(targetRoot==null)
-            return null;
+		JDFResource targetRoot = getTargetRoot();
+		if (targetRoot == null)
+			return null;
 
-	    final JDFAttributeMap partMap = getPartMap();
-        if(partMap==null)
-            return targetRoot;
-	    return targetRoot.getPartition(partMap, null);
+		final JDFAttributeMap partMap = getPartMap();
+		if (partMap == null)
+			return targetRoot;
+		return targetRoot.getPartition(partMap, null);
 	}
-	
-	/** 
+
+	/**
 	 * Get element Part
+	 * 
 	 * @return JDFPart - the element
 	 */
 	public JDFPart getPart()
 	{
 		return (JDFPart) getElement(ElementName.PART, JDFConstants.EMPTYSTRING, 0);
 	}
-	
-    /**
-     * return the NodeName of the referenced resource
-     * @return the nodename of the referenced resource
-     */
+
+	/**
+	 * return the NodeName of the referenced resource
+	 * 
+	 * @return the nodename of the referenced resource
+	 */
 	public String getRefNodeName()
 	{
-	    final KElement target =getTargetRoot();	    
-	    if (target != null)
-	    {
-	        return target.getNodeName();
-	    }
-	    
-	    String nn = getNodeName();	    
-	    if (nn.endsWith(JDFConstants.REF))
-	    {
-	        nn = nn.substring(0, nn.length() - JDFConstants.REF.length());
-	        return nn;
-	    }
-	    
-	    return null;
+		final KElement target = getTargetRoot();
+		if (target != null)
+		{
+			return target.getNodeName();
+		}
+
+		String nn = getNodeName();
+		if (nn.endsWith(JDFConstants.REF))
+		{
+			nn = nn.substring(0, nn.length() - JDFConstants.REF.length());
+			return nn;
+		}
+
+		return null;
 	}
-	
-    /**
-     * return the Localname of the target 
-     * @return
-     */
-    public String getRefLocalName()
-    {
-        final KElement target =getTargetRoot();     
-        if (target != null)
-        {
-            return target.getLocalName();
-        }
-        
-        String nn = getLocalName();      
-        if (nn.endsWith(JDFConstants.REF))
-        {
-            nn = nn.substring(0, nn.length() - JDFConstants.REF.length());
-            return nn;
-        }
-        
-        return null;
-    }
-	
+
+	/**
+	 * return the Localname of the target
+	 * 
+	 * @return
+	 */
+	public String getRefLocalName()
+	{
+		final KElement target = getTargetRoot();
+		if (target != null)
+		{
+			return target.getLocalName();
+		}
+
+		String nn = getLocalName();
+		if (nn.endsWith(JDFConstants.REF))
+		{
+			nn = nn.substring(0, nn.length() - JDFConstants.REF.length());
+			return nn;
+		}
+
+		return null;
+	}
+
 	/**
 	 * inline this refElement by replacing it with a copy of its target
+	 * 
 	 * @return JDFElement - the newly created element
-     */
+	 */
 	public JDFElement inlineRef()
-    {
+	{
 		int i;
-		final JDFResource targetRes =  getTarget();
-        if(targetRes==null)
-        {
-            throw new JDFException("inlineRef: inlining null refElement rRef="+getrRef());            
-        }
-		final JDFResource newInline   = (JDFResource) appendElement(targetRes.getNodeName(), null);
-				
-		// copy elements and attributes¬
+		final JDFResource targetRes = getTarget();
+		if (targetRes == null)
+		{
+			throw new JDFException("inlineRef: inlining null refElement rRef=" + getrRef());
+		}
+		final JDFResource newInline = (JDFResource) appendElement(targetRes.getNodeName(), null);
+
+		// copy elements and attributes
 		newInline.setAttributes(targetRes);
 		final VElement v = targetRes.getChildElementVector(null, null, null, true, 0, false);
-		
-		for(i = 0; i < v.size(); i++)
+
+		for (i = 0; i < v.size(); i++)
 		{
 			newInline.copyElement(v.item(i), null);
 		}
-		
+
 		newInline.cleanResourceAttributes();
 		final VString partNames = targetRes.getPartIDKeys();
-		
-		for(i = 0; i < partNames.size(); i++)
+
+		for (i = 0; i < partNames.size(); i++)
 		{
 			newInline.removeAttribute(partNames.elementAt(i), null);
 		}
-		
-		// replace this (the refElement) with newInline. 
-		// This effectively repositions newInline from the back to the original position of this
+
+		// replace this (the refElement) with newInline.
+		// This effectively repositions newInline from the back to the original
+		// position of this
 		replaceElement(newInline);
 
-        targetRes.deleteUnLinked();
+		targetRes.deleteUnLinked();
 		return newInline;
 	}
-	
-	
+
 	/**
 	 * delete this refElement and it's target
+	 * 
 	 * @param bCheckRefCount if true, check that no other element refers to the target before deleting<br>
-	 *   if bCheckRefCount=false, the target is force deleted
+	 *            if bCheckRefCount=false, the target is force deleted
 	 * @return JDFElement the deleted targeelement
 	 * @since 290502
 	 */
 	public JDFElement deleteRef(boolean bCheckRefCount)
 	{
-	    final JDFResource e =  getTarget();
-	    if(e!=null)
-	    {
-	        if (bCheckRefCount)
-	        {
-	            e.deleteUnLinked();
-	        }
-	        else
-	        {
-	            e.deleteNode();
-	        }
-	    }
-	    // now zapp myself
-	    return (JDFElement) deleteNode();
+		final JDFResource e = getTarget();
+		if (e != null)
+		{
+			if (bCheckRefCount)
+			{
+				e.deleteUnLinked();
+			}
+			else
+			{
+				e.deleteNode();
+			}
+		}
+		// now zapp myself
+		return (JDFElement) deleteNode();
 	}
-	
+
 	/**
 	 * Method AppendPart.
+	 * 
 	 * @return JDFPart
 	 */
 	public JDFPart appendPart()
 	{
-		return (JDFPart) appendElementN(ElementName.PART,1,null);
+		return (JDFPart) appendElementN(ElementName.PART, 1, null);
 	}
-	
+
 	/**
 	 * get element JDFPart, create one if it doesn't exist
+	 * 
 	 * @return JDFPart
 	 */
 	public JDFPart getCreatePart()
 	{
 		return (JDFPart) getCreateElement_KElement(ElementName.PART, null, 0);
 	}
-	
+
 	/**
 	 * @deprecated
 	 */
@@ -470,59 +479,61 @@ public class JDFRefElement extends JDFElement
 	{
 		removeChild(ElementName.PART, null, 0);
 	}
-	
-    /**
-     * get part map vector
-     * @deprecated 060310 not more than one is allowed - use getPartMap
-     * @return VJDFAttributeMap: vector of attribute maps, one for each part
-     */
-    @Deprecated
+
+	/**
+	 * get part map vector
+	 * 
+	 * @deprecated 060310 not more than one is allowed - use getPartMap
+	 * @return VJDFAttributeMap: vector of attribute maps, one for each part
+	 */
+	@Deprecated
 	@Override
 	public VJDFAttributeMap getPartMapVector()
-    {
-        return getPartMapVector();
-    }
-    
-    /**
-     * get part map 
-     * @return JDFAttributeMap: the attribute maps, one for each part
-     */
-    @Override
+	{
+		return getPartMapVector();
+	}
+
+	/**
+	 * get part map
+	 * 
+	 * @return JDFAttributeMap: the attribute maps, one for each part
+	 */
+	@Override
 	public JDFAttributeMap getPartMap()
-    {
-        return super.getPartMap();
-    }
+	{
+		return super.getPartMap();
+	}
 
-     /**
-     * set all parts to those define in vParts
-     * @param mPart attribute map for the part to set
-     */
-    @Override
+	/**
+	 * set all parts to those define in vParts
+	 * 
+	 * @param mPart attribute map for the part to set
+	 */
+	@Override
 	public void setPartMap(JDFAttributeMap mPart)
-    {
-        super.setPartMap(mPart);
-    }
+	{
+		super.setPartMap(mPart);
+	}
 
- 
-   /**
-     * @deprecate 060310 - 
-     * remove the part defined in mPart
-     * @param mPart attribute map for the part to remove
-     */
-    @Override
+	/**
+	 * @deprecate 060310 - remove the part defined in mPart
+	 * @param mPart attribute map for the part to remove
+	 */
+	@Override
 	public void removePartMap(JDFAttributeMap mPart)
-    {
-        super.removePartMap(mPart);
-    }
+	{
+		super.removePartMap(mPart);
+	}
 
-    /**
-     * check whether the part defined in mPart is included
-     * @param mPart attribute map for the part to remove
-     * @return boolean - returns true if the part exists
-     */
-    @Override
+	/**
+	 * check whether the part defined in mPart is included
+	 * 
+	 * @param mPart attribute map for the part to remove
+	 * @return boolean - returns true if the part exists
+	 */
+	@Override
 	public boolean hasPartMap(JDFAttributeMap mPart)
-    {
-        return super.hasPartMap(mPart);
-    }	
+	{
+		return super.hasPartMap(mPart);
+	}
 }

@@ -85,141 +85,134 @@ import org.cip4.jdflib.auto.JDFAutoSeparationList;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 
 /**
- * This class represents a list of SeparationSpec elements 
- * it allows high level string manipulation of the separation names 
- * by hiding the fact that the separations are written in SeparationSpec/@Name
+ * This class represents a list of SeparationSpec elements it allows high level string manipulation of the separation
+ * names by hiding the fact that the separations are written in SeparationSpec/@Name
  */
 public class JDFSeparationList extends JDFAutoSeparationList
 {
-    private static final long serialVersionUID = 1L;
-    
-    /**
-     * Constructor for JDFSeparationList
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    public JDFSeparationList(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFSeparationList
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    public JDFSeparationList(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFSeparationList
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	public JDFSeparationList(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFSeparationList
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    public JDFSeparationList(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-    
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFSeparationList[ -->" + super.toString() + "]";
-    }
-    
-    
-    
-    /**
-     * Get a list of all separation names in the SeparationSpec elements
-     * @return the vector of separation names
-     */
-    public VString getSeparations() 
-    {
-        VString vName=new VString();
-        VElement v=getChildElementVector(ElementName.SEPARATIONSPEC,null,null,false,0,false);
-        int nSep=v.size();
-        for(int i=0;i<nSep;i++)
-        {
-            JDFSeparationSpec sep=(JDFSeparationSpec) v.elementAt(i);
-            String sepName=sep.getName();
-            vName.appendUnique(sepName);
-        }
-        return vName;
-    }  
-    
-    /**
-     * set all separation names in the SeparationSpec elements,
-     * remove any prior elements
-     * 
-     * @param vSeps the vector of separation names to set
-     */
-    public void setSeparations(VString vSeps) 
-    {
-        removeChildren(ElementName.SEPARATIONSPEC,null,null);
-        if(vSeps==null)
-            return;
-        
-        for(int i=0;i<vSeps.size();i++)
-        {
-            appendSeparation(vSeps.stringAt(i));
-        }
-    }
-    
-    /**
-     * append a separationspec with a given name to this
-     * @param sep the separation name
-     */
-    public void appendSeparation(String sep)
-    {
-        appendSeparationSpec().setName(sep);
-    }   
-    
-    /**
-     * remove a separationspec with a given name from this
-     * 
-     * @param sep the separation name
-     * @return int the index of the removed separation; -1 if none found
-     */
-    public int removeSeparation(String sep)
-    {
-        VString vs=getSeparations();
-        final int index=vs.index(sep);
-        if (index>=0)
-            getSeparationSpec(index).deleteNode();
-        return index;
-    }   
-    
-    /**
-     * Get the n'th separation name in the SeparationSpec elements
-     * @param iSkip the index of the SeparationSpec
-     * @return separation names, null if iSkip > nSeparations
-     */
-    public String getSeparation(int iSkip) 
-    {
-        JDFSeparationSpec ss=getSeparationSpec(iSkip);
-        if(ss==null)
-            return null;
-        return ss.getName();        
-    }  
-    
-    
+	/**
+	 * Constructor for JDFSeparationList
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFSeparationList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFSeparationList
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	public JDFSeparationList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFSeparationList[ -->" + super.toString() + "]";
+	}
+
+	/**
+	 * Get a list of all separation names in the SeparationSpec elements
+	 * 
+	 * @return the vector of separation names
+	 */
+	public VString getSeparations()
+	{
+		VString vName = new VString();
+		VElement v = getChildElementVector(ElementName.SEPARATIONSPEC, null, null, false, 0, false);
+		int nSep = v.size();
+		for (int i = 0; i < nSep; i++)
+		{
+			JDFSeparationSpec sep = (JDFSeparationSpec) v.elementAt(i);
+			String sepName = sep.getName();
+			vName.appendUnique(sepName);
+		}
+		return vName;
+	}
+
+	/**
+	 * set all separation names in the SeparationSpec elements, remove any prior elements
+	 * 
+	 * @param vSeps the vector of separation names to set
+	 */
+	public void setSeparations(VString vSeps)
+	{
+		removeChildren(ElementName.SEPARATIONSPEC, null, null);
+		if (vSeps == null)
+			return;
+
+		for (int i = 0; i < vSeps.size(); i++)
+		{
+			appendSeparation(vSeps.stringAt(i));
+		}
+	}
+
+	/**
+	 * append a separationspec with a given name to this
+	 * 
+	 * @param sep the separation name
+	 */
+	public void appendSeparation(String sep)
+	{
+		appendSeparationSpec().setName(sep);
+	}
+
+	/**
+	 * remove a separationspec with a given name from this
+	 * 
+	 * @param sep the separation name
+	 * @return int the index of the removed separation; -1 if none found
+	 */
+	public int removeSeparation(String sep)
+	{
+		VString vs = getSeparations();
+		final int index = vs.index(sep);
+		if (index >= 0)
+			getSeparationSpec(index).deleteNode();
+		return index;
+	}
+
+	/**
+	 * Get the n'th separation name in the SeparationSpec elements
+	 * 
+	 * @param iSkip the index of the SeparationSpec
+	 * @return separation names, null if iSkip > nSeparations
+	 */
+	public String getSeparation(int iSkip)
+	{
+		JDFSeparationSpec ss = getSeparationSpec(iSkip);
+		if (ss == null)
+			return null;
+		return ss.getName();
+	}
+
 }

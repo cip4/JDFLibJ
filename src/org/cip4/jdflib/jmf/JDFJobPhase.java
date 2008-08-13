@@ -68,14 +68,14 @@
  *
  */
 /**
-==========================================================================
-class JDFJobPhase extends JDFResource
-==========================================================================
-@COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001
-ALL RIGHTS RESERVED
-@Author: sabjon@topmail.de   using a code generator
-Warning! very preliminary test version. Interface subject to change without prior notice!
-Revision history:    ...
+ ==========================================================================
+ class JDFJobPhase extends JDFResource
+ ==========================================================================
+ @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001
+ ALL RIGHTS RESERVED
+ @Author: sabjon@topmail.de   using a code generator
+ Warning! very preliminary test version. Interface subject to change without prior notice!
+ Revision history:    ...
  **/
 
 package org.cip4.jdflib.jmf;
@@ -105,342 +105,356 @@ import org.cip4.jdflib.util.JDFDate;
  */
 public class JDFJobPhase extends JDFAutoJobPhase
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFJobPhase
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    public JDFJobPhase(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFJobPhase
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	public JDFJobPhase(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFJobPhase
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    public JDFJobPhase(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFJobPhase
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFJobPhase(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFJobPhase
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    public JDFJobPhase(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * Constructor for JDFJobPhase
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	public JDFJobPhase(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * toString()
-     * @see org.cip4.jdflib.auto.JDFAutoJobPhase#toString()
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFJobPhase[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * toString()
+	 * 
+	 * @see org.cip4.jdflib.auto.JDFAutoJobPhase#toString()
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFJobPhase[  --> " + super.toString() + " ]";
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.JDF, 0x33333333);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.JDF, 0x33333333);
+	}
 
-    protected ElementInfo getTheElementInfo()
-    {
-        return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
-    }
+	protected ElementInfo getTheElementInfo()
+	{
+		return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
+	}
 
-    /**
-     * Returns detailed status information.
-     * @return String
-     */
-    public String getStatusDetails()
-    {
-        return getAttribute(AttributeName.STATUSDETAILS);
-    }
+	/**
+	 * Returns detailed status information.
+	 * 
+	 * @return String
+	 */
+	public String getStatusDetails()
+	{
+		return getAttribute(AttributeName.STATUSDETAILS);
+	}
 
-    /**
-     * Method getQueueEntryID.
-     * @return String
-     */
-    public String getQueueEntryID()
-    {
-        return getInheritedStatusQuParamsAttribute(AttributeName.QUEUEENTRYID,null);
-    }
+	/**
+	 * Method getQueueEntryID.
+	 * 
+	 * @return String
+	 */
+	public String getQueueEntryID()
+	{
+		return getInheritedStatusQuParamsAttribute(AttributeName.QUEUEENTRYID, null);
+	}
 
-    /**
-     * Method getJobID.
-     * @return String
-     */
-    public String getJobID()
-    {
-        return getInheritedStatusQuParamsAttribute(AttributeName.JOBID,null);
-    }
-    /**
-     * Method getJobID.
-     * @return String
-     */
-    public String getJobPartID()
-    {
-        return getInheritedStatusQuParamsAttribute(AttributeName.JOBPARTID,null);
-    }
+	/**
+	 * Method getJobID.
+	 * 
+	 * @return String
+	 */
+	public String getJobID()
+	{
+		return getInheritedStatusQuParamsAttribute(AttributeName.JOBID, null);
+	}
 
-    /**
-     * get part map vector
-     * @return VJDFAttributeMap: vector of attribute maps, one for each part
-     */
-    public VJDFAttributeMap getPartMapVector()
-    {
-        return super.getPartMapVector();
-    }
+	/**
+	 * Method getJobID.
+	 * 
+	 * @return String
+	 */
+	public String getJobPartID()
+	{
+		return getInheritedStatusQuParamsAttribute(AttributeName.JOBPARTID, null);
+	}
 
-    /**
-     * set all parts to those defined in vParts
-     * @param vParts vector of attribute maps for the parts
-     */
-    public void setPartMapVector(VJDFAttributeMap vParts)
-    {
-        super.setPartMapVector(vParts);
-    }
+	/**
+	 * get part map vector
+	 * 
+	 * @return VJDFAttributeMap: vector of attribute maps, one for each part
+	 */
+	public VJDFAttributeMap getPartMapVector()
+	{
+		return super.getPartMapVector();
+	}
 
-    /**
-     * set part to the one defined in mPart
-     * @param mPart attribute map for the part to set
-     */
-    public void setPartMap(JDFAttributeMap mPart)
-    {
-        super.setPartMap(mPart);
-    }
+	/**
+	 * set all parts to those defined in vParts
+	 * 
+	 * @param vParts vector of attribute maps for the parts
+	 */
+	public void setPartMapVector(VJDFAttributeMap vParts)
+	{
+		super.setPartMapVector(vParts);
+	}
 
-    /**
-     * remove the part defined in mPart
-     * @param mPart attribute map for the part to remove
-     */
-    public void removePartMap(JDFAttributeMap mPart)
-    {
-        super.removePartMap(mPart);
-    }
+	/**
+	 * set part to the one defined in mPart
+	 * 
+	 * @param mPart attribute map for the part to set
+	 */
+	public void setPartMap(JDFAttributeMap mPart)
+	{
+		super.setPartMap(mPart);
+	}
 
-    /**
-     * check whether the part defined in mPart is included
-     * @param mPart attribute map for the part to remove
-     * @return boolean - returns true if the part exists
-     */
-    public boolean hasPartMap(JDFAttributeMap mPart)
-    {
-        return super.hasPartMap(mPart);
-    }
+	/**
+	 * remove the part defined in mPart
+	 * 
+	 * @param mPart attribute map for the part to remove
+	 */
+	public void removePartMap(JDFAttributeMap mPart)
+	{
+		super.removePartMap(mPart);
+	}
 
-    /**
-     * get a node, create if it doesn't exist
-     * @return the node
-     */
-    public JDFNode getCreateNode() 
-    {
-        return (JDFNode) getCreateElement_KElement(ElementName.JDF, null, 0);
-    }
+	/**
+	 * check whether the part defined in mPart is included
+	 * 
+	 * @param mPart attribute map for the part to remove
+	 * @return boolean - returns true if the part exists
+	 */
+	public boolean hasPartMap(JDFAttributeMap mPart)
+	{
+		return super.hasPartMap(mPart);
+	}
 
-    /**
-     * append a node
-     * @return the appended node
-     */
-    public JDFNode appendNode() 
-    {
-        return (JDFNode) appendElementN(ElementName.JDF, 1, null);
-    }
+	/**
+	 * get a node, create if it doesn't exist
+	 * 
+	 * @return the node
+	 */
+	public JDFNode getCreateNode()
+	{
+		return (JDFNode) getCreateElement_KElement(ElementName.JDF, null, 0);
+	}
 
-    /**
-     * get node
-     * @return the node
-     */
-    public JDFNode getNode() {
-        return (JDFNode) getElement(ElementName.JDF, null, 0);
-    }
+	/**
+	 * append a node
+	 * 
+	 * @return the appended node
+	 */
+	public JDFNode appendNode()
+	{
+		return (JDFNode) appendElementN(ElementName.JDF, 1, null);
+	}
 
-    /**
-     * get the {@link JDFStatusQuParams} that apply to the jobphase
-     * @return
-     */
-    public JDFStatusQuParams getStatusQuParams()
-    {
-        KElement parent=getParentNode_KElement();
-        if(!(parent instanceof JDFDeviceInfo))
-            return null;
-        parent=parent.getParentNode_KElement();
-        if(!(parent instanceof JDFMessage))
-            return null;
-        return ((JDFMessage)parent).getStatusQuParams();
+	/**
+	 * get node
+	 * 
+	 * @return the node
+	 */
+	public JDFNode getNode()
+	{
+		return (JDFNode) getElement(ElementName.JDF, null, 0);
+	}
 
-    }
-    /**
-     * gets the NodeIdetifier that matches this
-     * @return
-     */
-    public NodeIdentifier getIdentifier()
-    {
-        NodeIdentifier ni= new NodeIdentifier();
-        ni.setTo(getJobID(), getJobPartID(), getPartMapVector());
-        return ni;
-    }
+	/**
+	 * get the {@link JDFStatusQuParams} that apply to the jobphase
+	 * 
+	 * @return
+	 */
+	public JDFStatusQuParams getStatusQuParams()
+	{
+		KElement parent = getParentNode_KElement();
+		if (!(parent instanceof JDFDeviceInfo))
+			return null;
+		parent = parent.getParentNode_KElement();
+		if (!(parent instanceof JDFMessage))
+			return null;
+		return ((JDFMessage) parent).getStatusQuParams();
 
-    private String getInheritedStatusQuParamsAttribute(String key,String nameSpaceURI)
-    {
-        String val=getAttribute(key, nameSpaceURI, null);
-        if(val!=null)
-            return val;
-        JDFStatusQuParams sqp=getStatusQuParams();
-        if(sqp==null)
-            return null;
-        return sqp.getAttribute(key, nameSpaceURI, null);
-    }
+	}
 
-    /**
-     * creates a new ModuleStatus in this based on the values in mp
-     * generally used to create messages from audits
-     * 
-     * @param mp the modulephase to copy
-     * @return the new ModuleStatus element
-     * 
-     */
-    public JDFModuleStatus createModuleStatusFromModulePhase(JDFModulePhase mp)
-    {
-        if(mp==null)
-            return null;
-        JDFModuleStatus ms=appendModuleStatus();
-        ms.copyAttribute(AttributeName.MODULETYPE, mp);
-        ms.copyAttribute(AttributeName.MODULEINDEX, mp);
-        ms.copyAttribute(AttributeName.MODULEID, mp);
+	/**
+	 * gets the NodeIdetifier that matches this
+	 * 
+	 * @return
+	 */
+	public NodeIdentifier getIdentifier()
+	{
+		NodeIdentifier ni = new NodeIdentifier();
+		ni.setTo(getJobID(), getJobPartID(), getPartMapVector());
+		return ni;
+	}
 
-        return ms;
-    }
+	private String getInheritedStatusQuParamsAttribute(String key, String nameSpaceURI)
+	{
+		String val = getAttribute(key, nameSpaceURI, null);
+		if (val != null)
+			return val;
+		JDFStatusQuParams sqp = getStatusQuParams();
+		if (sqp == null)
+			return null;
+		return sqp.getAttribute(key, nameSpaceURI, null);
+	}
 
-    /**
-     * return the differential amount produced between this phase and lastphase
-     * @param lastphase the phase
-     * @return
-     */
-    public double getAmountDifference(JDFJobPhase lastphase)
-    {
-        if(isSamePhase(lastphase,true))
-        {
-            return getPhaseAmount()-lastphase.getPhaseAmount();
-        }
-        return getPhaseAmount();
-    }
-    /**
-     * return the differential waste amount produced between this phase and lastphase
-     * @param lastphase
-     * @return
-     */
-    public double getWasteDifference(JDFJobPhase lastphase)
-    {
-        if(isSamePhase(lastphase,true))
-        {
-            return getPhaseWaste()-lastphase.getPhaseWaste();
-        }
-        return getPhaseWaste();
-    }
+	/**
+	 * creates a new ModuleStatus in this based on the values in mp generally used to create messages from audits
+	 * 
+	 * @param mp the modulephase to copy
+	 * @return the new ModuleStatus element
+	 * 
+	 */
+	public JDFModuleStatus createModuleStatusFromModulePhase(JDFModulePhase mp)
+	{
+		if (mp == null)
+			return null;
+		JDFModuleStatus ms = appendModuleStatus();
+		ms.copyAttribute(AttributeName.MODULETYPE, mp);
+		ms.copyAttribute(AttributeName.MODULEINDEX, mp);
+		ms.copyAttribute(AttributeName.MODULEID, mp);
 
-    /**
-     * returns true if this is the same phase, i.e. the 
-     * @param lastphase the phase to compare with
-     * @param bExact if true, use startTime as hook, else compare stati
-     * @return
-     */
-    public boolean isSamePhase(JDFJobPhase lastphase, boolean bExact)
-    {
-        if(lastphase==null)
-            return false;
-        if(bExact)
-        {
-            JDFDate startTime=getPhaseStartTime();
-            JDFDate lastStartTime=lastphase.getPhaseStartTime();
-            return startTime!=null &&startTime.equals(lastStartTime);
-        }
-        if(!ContainerUtil.equals(getStatus(),lastphase.getStatus()))
-            return false;
-        if(!ContainerUtil.equals(getStatusDetails(),lastphase.getStatusDetails()))
-            return false;
-        if(!ContainerUtil.equals(getIdentifier(),lastphase.getIdentifier()))
-            return false;
-        return true;
-    }
-    
-    /**
-     * creates a new phasetime that spans lastphase and this phase
-     * @param lastphase the phase to merge 
-     * @return true if successful
-     */
-    public boolean mergeLastPhase(JDFJobPhase lastphase)
-    {
-        if(!isSamePhase(lastphase, false))
-            return false;
-        setStartTime(lastphase.getStartTime());
-        setPhaseAmount(getPhaseAmount()+lastphase.getPhaseAmount());
-        setPhaseWaste(getPhaseWaste()+lastphase.getPhaseWaste());
-        return true;
-    }
+		return ms;
+	}
 
-    /**
-     * returns the phase amount, defaults to amount if not specified
-     */
-    @Override
-    public double getPhaseAmount()
-    {
-        if(hasAttribute(AttributeName.PHASEAMOUNT))
-            return super.getPhaseAmount();
-        return super.getAmount();
-    }
+	/**
+	 * return the differential amount produced between this phase and lastphase
+	 * 
+	 * @param lastphase the phase
+	 * @return
+	 */
+	public double getAmountDifference(JDFJobPhase lastphase)
+	{
+		if (isSamePhase(lastphase, true))
+		{
+			return getPhaseAmount() - lastphase.getPhaseAmount();
+		}
+		return getPhaseAmount();
+	}
 
-    /**
-     * returns the phase starttime, defaults to starttime if not specified
-     */
-    @Override
-    public JDFDate getPhaseStartTime()
-    {
-        if(hasAttribute(AttributeName.PHASESTARTTIME))
-            return super.getPhaseStartTime();
-        return super.getStartTime();
-    }
+	/**
+	 * return the differential waste amount produced between this phase and lastphase
+	 * 
+	 * @param lastphase
+	 * @return
+	 */
+	public double getWasteDifference(JDFJobPhase lastphase)
+	{
+		if (isSamePhase(lastphase, true))
+		{
+			return getPhaseWaste() - lastphase.getPhaseWaste();
+		}
+		return getPhaseWaste();
+	}
 
-    /**
-     * returns the phase waste amount, defaults to waste if not specified
-     */
-    @Override
-    public double getPhaseWaste()
-    {
-        if(hasAttribute(AttributeName.PHASEWASTE))
-            return super.getPhaseWaste();
-        return super.getWaste();
-    }
+	/**
+	 * returns true if this is the same phase, i.e. the
+	 * 
+	 * @param lastphase the phase to compare with
+	 * @param bExact if true, use startTime as hook, else compare stati
+	 * @return
+	 */
+	public boolean isSamePhase(JDFJobPhase lastphase, boolean bExact)
+	{
+		if (lastphase == null)
+			return false;
+		if (bExact)
+		{
+			JDFDate startTime = getPhaseStartTime();
+			JDFDate lastStartTime = lastphase.getPhaseStartTime();
+			return startTime != null && startTime.equals(lastStartTime);
+		}
+		if (!ContainerUtil.equals(getStatus(), lastphase.getStatus()))
+			return false;
+		if (!ContainerUtil.equals(getStatusDetails(), lastphase.getStatusDetails()))
+			return false;
+		if (!ContainerUtil.equals(getIdentifier(), lastphase.getIdentifier()))
+			return false;
+		return true;
+	}
 
-    /**
-     * @return the queueentry status that corresponds to the status of this
-     */
-    public EnumQueueEntryStatus getQueueEntryStatus()
-    {
-        return EnumNodeStatus.getQueueEntryStatus(getStatus()); 
-    }
+	/**
+	 * creates a new phasetime that spans lastphase and this phase
+	 * 
+	 * @param lastphase the phase to merge
+	 * @return true if successful
+	 */
+	public boolean mergeLastPhase(JDFJobPhase lastphase)
+	{
+		if (!isSamePhase(lastphase, false))
+			return false;
+		setStartTime(lastphase.getStartTime());
+		setPhaseAmount(getPhaseAmount() + lastphase.getPhaseAmount());
+		setPhaseWaste(getPhaseWaste() + lastphase.getPhaseWaste());
+		return true;
+	}
+
+	/**
+	 * returns the phase amount, defaults to amount if not specified
+	 */
+	@Override
+	public double getPhaseAmount()
+	{
+		if (hasAttribute(AttributeName.PHASEAMOUNT))
+			return super.getPhaseAmount();
+		return super.getAmount();
+	}
+
+	/**
+	 * returns the phase starttime, defaults to starttime if not specified
+	 */
+	@Override
+	public JDFDate getPhaseStartTime()
+	{
+		if (hasAttribute(AttributeName.PHASESTARTTIME))
+			return super.getPhaseStartTime();
+		return super.getStartTime();
+	}
+
+	/**
+	 * returns the phase waste amount, defaults to waste if not specified
+	 */
+	@Override
+	public double getPhaseWaste()
+	{
+		if (hasAttribute(AttributeName.PHASEWASTE))
+			return super.getPhaseWaste();
+		return super.getWaste();
+	}
+
+	/**
+	 * @return the queueentry status that corresponds to the status of this
+	 */
+	public EnumQueueEntryStatus getQueueEntryStatus()
+	{
+		return EnumNodeStatus.getQueueEntryStatus(getStatus());
+	}
 }
-
-

@@ -78,43 +78,47 @@ import org.cip4.jdflib.core.KElement;
 
 /**
  * simple implementation of the IWalkerFactory
+ * 
  * @author prosirai
- *
+ * 
  */
 public class BaseWalkerFactory implements IWalkerFactory
 {
 
-    protected int maxDepth=0;
-    protected Vector<BaseWalker> v=new Vector<BaseWalker>();
-    /* (non-Javadoc)
-     * @see org.cip4.jdflib.elementwalker.IWalkerFactory#getWalkers(org.cip4.jdflib.core.KElement)
-     */
-    public IWalker getWalker(KElement toCheck)
-    {
-        int vs=v.size();
-        for(int j=0;j<vs;j++)
-        {
-            BaseWalker w=v.get(j);
-            if(w.matches(toCheck))
-            {
-                return w;
-            }
-        }
+	protected int maxDepth = 0;
+	protected Vector<BaseWalker> v = new Vector<BaseWalker>();
 
-        return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.cip4.jdflib.elementwalker.IWalkerFactory#getWalkers(org.cip4.jdflib .core.KElement)
+	 */
+	public IWalker getWalker(KElement toCheck)
+	{
+		int vs = v.size();
+		for (int j = 0; j < vs; j++)
+		{
+			BaseWalker w = v.get(j);
+			if (w.matches(toCheck))
+			{
+				return w;
+			}
+		}
 
-    /**
-     * add a walker to this and make sure that abstract walkers are sorted at the end of the list
-     * so that superclass walkers are always found first
-     * called by BaseWorker so no need for external calls
-     * @param w the walker to add
-     */
-    void addWalker(BaseWalker w)
-    {
-        int d=w.getDepth();
-        maxDepth=d>maxDepth ? d : maxDepth;
-        v.add(w);
-        Collections.sort(v);
-    }
+		return null;
+	}
+
+	/**
+	 * add a walker to this and make sure that abstract walkers are sorted at the end of the list so that superclass
+	 * walkers are always found first called by BaseWorker so no need for external calls
+	 * 
+	 * @param w the walker to add
+	 */
+	void addWalker(BaseWalker w)
+	{
+		int d = w.getDepth();
+		maxDepth = d > maxDepth ? d : maxDepth;
+		v.add(w);
+		Collections.sort(v);
+	}
 }

@@ -82,205 +82,214 @@ import java.util.HashMap;
 import org.apache.commons.io.IOUtils;
 
 /**
- *
- * @author  rainer
- *
- * very trivial temp file dump
+ * 
+ * @author rainer
+ * 
+ *         very trivial temp file dump
  * 
  */
-public class DumpDir {
+public class DumpDir
+{
 
-    /**
-     * very simple and fast mutable integer class
-     * @author prosirai
-     *
-     */
-    protected class MyInt
-    {        
-        public int i=0;
-        public String toString()
-        {
-            return String.valueOf(i);
-        }
-    }
-    //////////////////////////////////////////////////////////////////////////
-    private File baseDir=null;
-    private static HashMap<File,MyInt> listMap=new HashMap<File,MyInt>();
-    private int maxKeep=500;
-    /**
-     * if true, no printouts
-     */
-    public boolean quiet=true;
-    /**
+	/**
+	 * very simple and fast mutable integer class
+	 * 
+	 * @author prosirai
+	 * 
+	 */
+	protected class MyInt
+	{
+		public int i = 0;
+
+		public String toString()
+		{
+			return String.valueOf(i);
+		}
+	}
+
+	// ////////////////////////////////////////////////////////////////////////
+	private File baseDir = null;
+	private static HashMap<File, MyInt> listMap = new HashMap<File, MyInt>();
+	private int maxKeep = 500;
+	/**
+	 * if true, no printouts
+	 */
+	public boolean quiet = true;
+	/**
      * 
      */
-    private static final long serialVersionUID = -8902151736333089036L;
+	private static final long serialVersionUID = -8902151736333089036L;
 
-    private int increment()
-    {
-        synchronized (listMap)
-        {
-            MyInt i=listMap.get(baseDir);
-            return i.i++;            
-        }
-    }
+	private int increment()
+	{
+		synchronized (listMap)
+		{
+			MyInt i = listMap.get(baseDir);
+			return i.i++;
+		}
+	}
 
-    /**
-     * create a dumpdir with dir as the root
-     */
-    public DumpDir(File dir)
-    {
-        baseDir=dir;
-        baseDir.mkdirs();
-        synchronized (listMap)
-        {
-            MyInt index=listMap.get(baseDir);
-            if(index==null)
-            {
-                index = new MyInt();
-                listMap.put(baseDir, index);
-            }
-            String[] names=baseDir.list();
-            int max=0;
-            int l;
-            for(int i=0;i<names.length;i++)
-            {
-                if(names[i].length()>9)
-                    l=StringUtil.parseInt(names[i].substring(1, 9), 0);
-                else
-                    l=0;
-                if(l>max)
-                    max=l;
-            }
-            index.i=max;
-        }
-    }
+	/**
+	 * create a dumpdir with dir as the root
+	 */
+	public DumpDir(File dir)
+	{
+		baseDir = dir;
+		baseDir.mkdirs();
+		synchronized (listMap)
+		{
+			MyInt index = listMap.get(baseDir);
+			if (index == null)
+			{
+				index = new MyInt();
+				listMap.put(baseDir, index);
+			}
+			String[] names = baseDir.list();
+			int max = 0;
+			int l;
+			for (int i = 0; i < names.length; i++)
+			{
+				if (names[i].length() > 9)
+					l = StringUtil.parseInt(names[i].substring(1, 9), 0);
+				else
+					l = 0;
+				if (l > max)
+					max = l;
+			}
+			index.i = max;
+		}
+	}
 
+	/**
+	 * returns the base directory as a File
+	 * 
+	 * @return
+	 */
+	public File getDir()
+	{
+		return baseDir;
+	}
 
-    /**
-     * returns the base directory as a File
-     * @return
-     */
-    public File getDir()
-    {
-        return baseDir;
-    }
-    /** 
-     * create a new File in this dump
-     * @param header TODO
-     * 
-     */
-    public File newFile(String header)
-    {
-        final int inc = increment();
-        if(!quiet && (inc%200==0))
-            System.out.println("jmf dump service "+baseDir+" - "+inc+" "+new JDFDate().getDateTime());
+	/**
+	 * create a new File in this dump
+	 * 
+	 * @param header TODO
+	 * 
+	 */
+	public File newFile(String header)
+	{
+		final int inc = increment();
+		if (!quiet && (inc % 200 == 0))
+			System.out.println("jmf dump service " + baseDir + " - " + inc + " " + new JDFDate().getDateTime());
 
-        String s=StringUtil.sprintf("m%08i.tmp", ""+inc);
-        File f=FileUtil.getFileInDirectory(baseDir, new File(s));
-        if(header!=null)
-        {
-            newHeader(header, f, true);            
-        }
- 
-        cleanup(inc);
-        return f;
-    }
-    /** 
-     * create a new File in this dump and fill it from is
-     * @param header TODO
-     * @param is the input stream to fill
-     * 
-     */
+		String s = StringUtil.sprintf("m%08i.tmp", "" + inc);
+		File f = FileUtil.getFileInDirectory(baseDir, new File(s));
+		if (header != null)
+		{
+			newHeader(header, f, true);
+		}
 
-    public File newFileFromStream(String header, InputStream is)
-    {
-        File dump=newFile(null);
-        if(!(is instanceof BufferedInputStream))
-        {
-            is=new BufferedInputStream(is);
-            is.mark(100000);
-        }
-        FileOutputStream fs=newHeader(header, dump, false);
-        if(fs!=null)
-        {
-            try
-            {
-                IOUtils.copy(is, fs);
-                fs.flush();
-                fs.close();
-                is.reset();
-            }
-            catch (IOException x)
-            {
-                //nop
-            }
-        }
-        return dump;
-     }
+		cleanup(inc);
+		return f;
+	}
 
-    /**
-     * @param header
-     * @param fs
-     * @throws IOException
-     */
-    private FileOutputStream newHeader(String header, File f, boolean bClose) 
-    {
-        try
-        {
-            FileOutputStream fs = new FileOutputStream(f);
-            if(header!=null)
-            {
-                fs.write(header.getBytes());
-                fs.write("\n------ end of header ----!\n".getBytes());
-                if(bClose)
-                {
-                    fs.flush();
-                    fs.close();
-                }
-            }
-            return fs;
-        }
-        catch (FileNotFoundException x)
-        {
-            //nop
-        }
-        catch (IOException x)
-        {
-            // nop
-        }
+	/**
+	 * create a new File in this dump and fill it from is
+	 * 
+	 * @param header TODO
+	 * @param is the input stream to fill
+	 * 
+	 */
 
-        return null;
-    }
+	public File newFileFromStream(String header, InputStream is)
+	{
+		File dump = newFile(null);
+		if (!(is instanceof BufferedInputStream))
+		{
+			is = new BufferedInputStream(is);
+			is.mark(100000);
+		}
+		FileOutputStream fs = newHeader(header, dump, false);
+		if (fs != null)
+		{
+			try
+			{
+				IOUtils.copy(is, fs);
+				fs.flush();
+				fs.close();
+				is.reset();
+			}
+			catch (IOException x)
+			{
+				// nop
+			}
+		}
+		return dump;
+	}
 
-    /**
-     * @param inc
-     */
-    private void cleanup(final int inc)
-    {
-        if(inc%100==0)
-        {
-            synchronized (listMap.get(baseDir))
-            {
-                String[] names=baseDir.list();
-                if(names.length>maxKeep)
-                {
-                    Arrays.sort(names);
-                    for(int i=0;i<names.length-maxKeep;i++)
-                    {
-                        File f=new File(names[i]);
-                        f=FileUtil.getFileInDirectory(baseDir, f);
-                        if(f!=null)
-                            f.delete();
-                    }
-                }
-            }
-        }
-    }
-    @Override
-    public String toString()
-    {
-        return "DumpDir "+baseDir+ " i="+listMap.get(baseDir).i;
-    }
+	/**
+	 * @param header
+	 * @param fs
+	 * @throws IOException
+	 */
+	private FileOutputStream newHeader(String header, File f, boolean bClose)
+	{
+		try
+		{
+			FileOutputStream fs = new FileOutputStream(f);
+			if (header != null)
+			{
+				fs.write(header.getBytes());
+				fs.write("\n------ end of header ----!\n".getBytes());
+				if (bClose)
+				{
+					fs.flush();
+					fs.close();
+				}
+			}
+			return fs;
+		}
+		catch (FileNotFoundException x)
+		{
+			// nop
+		}
+		catch (IOException x)
+		{
+			// nop
+		}
+
+		return null;
+	}
+
+	/**
+	 * @param inc
+	 */
+	private void cleanup(final int inc)
+	{
+		if (inc % 100 == 0)
+		{
+			synchronized (listMap.get(baseDir))
+			{
+				String[] names = baseDir.list();
+				if (names.length > maxKeep)
+				{
+					Arrays.sort(names);
+					for (int i = 0; i < names.length - maxKeep; i++)
+					{
+						File f = new File(names[i]);
+						f = FileUtil.getFileInDirectory(baseDir, f);
+						if (f != null)
+							f.delete();
+					}
+				}
+			}
+		}
+	}
+
+	@Override
+	public String toString()
+	{
+		return "DumpDir " + baseDir + " i=" + listMap.get(baseDir).i;
+	}
 
 }

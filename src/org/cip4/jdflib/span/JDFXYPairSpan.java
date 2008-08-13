@@ -93,167 +93,154 @@ import org.w3c.dom.DOMException;
  */
 public class JDFXYPairSpan extends JDFSpanBase
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFXYPairSpan
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-     public JDFXYPairSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-        throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFXYPairSpan
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFXYPairSpan(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFXYPairSpan
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFXYPairSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFXYPairSpan
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFXYPairSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-         throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFXYPairSpan
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFXYPairSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFXYPairSpan
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFXYPairSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-        throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static 
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUAL,                        0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.PREFERRED,                     0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.RANGE,                         0x33333333, AttributeInfo.EnumAttributeType.XYPairRangeList, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFERRANGE,                    0x33333111, AttributeInfo.EnumAttributeType.XYPairRangeList, null, null);
-     }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUAL, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREFERRED, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.RANGE, 0x33333333, AttributeInfo.EnumAttributeType.XYPairRangeList, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFERRANGE, 0x33333111, AttributeInfo.EnumAttributeType.XYPairRangeList, null, null);
+	}
 
-    protected AttributeInfo getTheAttributeInfo() 
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFXYPairSpan[ --> " + super.toString() + " ]";
-    }
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFXYPairSpan[ --> " + super.toString() + " ]";
+	}
 
-    public void setActual(JDFXYPair value)
-    {
-        setAttribute(AttributeName.ACTUAL, value.toString(), null);
-    }
+	public void setActual(JDFXYPair value)
+	{
+		setAttribute(AttributeName.ACTUAL, value.toString(), null);
+	}
 
+	public JDFXYPair getActual()
+	{
+		try
+		{
+			return new JDFXYPair(getAttribute(AttributeName.ACTUAL));
+		}
+		catch (DataFormatException e)
+		{
+			throw new JDFException("JDFXYPairState.getActual: Attribute Actual is not capable to create JDFXYPair");
+		}
+	}
 
-    public JDFXYPair getActual()
-    {
-        try
-        {
-            return new JDFXYPair(getAttribute(AttributeName.ACTUAL));
-        }
-        catch (DataFormatException e)
-        {
-            throw new JDFException("JDFXYPairState.getActual: Attribute Actual is not capable to create JDFXYPair");
-        }
-    }
-    
-    public void setPreferred(JDFXYPair value)
-    {
-        setAttribute(AttributeName.PREFERRED, value.toString(), null);
-    }
+	public void setPreferred(JDFXYPair value)
+	{
+		setAttribute(AttributeName.PREFERRED, value.toString(), null);
+	}
 
+	public JDFXYPair getPreferred()
+	{
+		try
+		{
+			return new JDFXYPair(getAttribute(AttributeName.PREFERRED));
+		}
+		catch (DataFormatException e)
+		{
+			throw new JDFException("JDFXYPairState.getPreferred: Attribute Preferred is not capable to create JDFXYPair");
+		}
+	}
 
-    public JDFXYPair getPreferred()
-    {
-        try
-        {
-            return new JDFXYPair(getAttribute(AttributeName.PREFERRED));
-        }
-        catch (DataFormatException e)
-        {
-            throw new JDFException("JDFXYPairState.getPreferred: Attribute Preferred is not capable to create JDFXYPair");
-        }
-    }
-    
-    public void setRange(JDFXYPairRangeList  value)
-    {
-        setAttribute(AttributeName.RANGE, value.toString());
-    }
+	public void setRange(JDFXYPairRangeList value)
+	{
+		setAttribute(AttributeName.RANGE, value.toString());
+	}
 
+	public JDFXYPairRangeList getRange()
+	{
+		try
+		{
+			return new JDFXYPairRangeList(getAttribute(AttributeName.RANGE));
+		}
+		catch (DataFormatException e)
+		{
+			throw new JDFException("JDFXYPairState.getRange: Attribute Range is not capable to create JDFXYPairRangeList");
+		}
+	}
 
-    public JDFXYPairRangeList getRange()
-    {
-        try
-        {
-            return new JDFXYPairRangeList(getAttribute(AttributeName.RANGE));
-        }
-        catch (DataFormatException e)
-        {
-            throw new JDFException("JDFXYPairState.getRange: Attribute Range is not capable to create JDFXYPairRangeList");
-        }
-    }
+	public boolean init()
+	{
+		boolean b = super.init();
+		setDataType(JDFSpanBase.EnumDataType.XYPairSpan);
+		return b;
+	}
 
-    
-    public boolean init()
-    {
-        boolean b = super.init();
-        setDataType(JDFSpanBase.EnumDataType.XYPairSpan);
-        return b;
-    }
-    
-    /**
-     * SetPreferred
-     *
-     * @param double x
-     * @param double y
-     */
-    public void setPreferred(double x, double y)
-    {
-        setPreferred(new JDFXYPair(x,y));
-    }
-    
-    
-    /**
+	/**
+	 * SetPreferred
+	 * 
+	 * @param double x
+	 * @param double y
+	 */
+	public void setPreferred(double x, double y)
+	{
+		setPreferred(new JDFXYPair(x, y));
+	}
+
+	/**
 	 * add an element xy to the Range attribute
 	 * 
 	 * @param double x - x value of the JDFXYPair value to add
 	 * @param double y - y value of the JDFXYPair value to add
 	 */
-    public void addRange(double x, double y)
-    {
-        addRange(new JDFXYPair(x, y));
-    }
+	public void addRange(double x, double y)
+	{
+		addRange(new JDFXYPair(x, y));
+	}
 
-    /**
+	/**
 	 * add an element xy to the Range attribute
 	 * 
 	 * @param double x1 - x value of the left JDFXYPairRange value to add
@@ -261,34 +248,33 @@ public class JDFXYPairSpan extends JDFSpanBase
 	 * @param double x2 - x value of the right JDFXYPairRange value to add
 	 * @param double y2 - y value of the right JDFXYPairRange value to add
 	 */
-    public void addRange(double x1, double y1, double x2, double y2)
-    {
-        addRange(new JDFXYPair(x1, y1), new JDFXYPair(x2, y2));
-    }
-    
-   
-    /**
+	public void addRange(double x1, double y1, double x2, double y2)
+	{
+		addRange(new JDFXYPair(x1, y1), new JDFXYPair(x2, y2));
+	}
+
+	/**
 	 * add an element xy to the Range attribute as a JDFRange
 	 * 
 	 * @param JDFXYPair xy - the Range value to add
 	 */
-    public void addRange(JDFXYPair xy)
-    {
-        JDFXYPairRangeList rl = getRange();
-        rl.append(xy);
-        setRange(rl);
-    }
-    
-    /**
+	public void addRange(JDFXYPair xy)
+	{
+		JDFXYPairRangeList rl = getRange();
+		rl.append(xy);
+		setRange(rl);
+	}
+
+	/**
 	 * add an element xy to the Range attribute as a JDFRange
 	 * 
 	 * @param JDFXYPair xy1 - left JDFXYPairRange value to add
 	 * @param JDFXYPair xy2 - right JDFXYPairRange value to add
 	 */
-    public void addRange(JDFXYPair xy1, JDFXYPair xy2)
-    {
-        JDFXYPairRangeList rl = getRange();
-        rl.append(xy1, xy2);
-        setRange(rl);
-    }
+	public void addRange(JDFXYPair xy1, JDFXYPair xy2)
+	{
+		JDFXYPairRangeList rl = getRange();
+		rl.append(xy1, xy2);
+		setRange(rl);
+	}
 }

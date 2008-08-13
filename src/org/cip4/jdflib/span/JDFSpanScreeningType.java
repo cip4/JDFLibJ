@@ -22,126 +22,113 @@ import org.w3c.dom.DOMException;
  */
 public class JDFSpanScreeningType extends JDFEnumerationSpan
 {
-    private static final long serialVersionUID = 1L;
-    
-    
-    
-    /**
-     * Constructor for JDFSpanScreeningType
-     * @param ownerDocument
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFSpanScreeningType(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
-    
-    
-    /**
-     * Constructor for JDFSpanScreeningType
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @throws DOMException
-     */
-    public JDFSpanScreeningType(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
-    
-    /**
-     * Constructor for JDFSpanScreeningType
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     * @throws DOMException
-     */
-    public JDFSpanScreeningType(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    throws DOMException
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-    
-    
-    /**
-     * Enumeration strings for EnumSpanScreeningType
-     */
-    public static class EnumSpanScreeningType extends ValuedEnum
-    {
-        private static final long serialVersionUID = 1L;
-        private static int m_startValue = 0;
-        
-        private EnumSpanScreeningType(String name)
-        {
-            super(name, m_startValue++);
-        }
-        
-        public static EnumSpanScreeningType getEnum(String enumName)
-        {
-            return (EnumSpanScreeningType) getEnum(EnumSpanScreeningType.class, enumName);
-        }
-        
-        public static EnumSpanScreeningType getEnum(int enumValue)
-        {
-            return (EnumSpanScreeningType) getEnum(EnumSpanScreeningType.class, enumValue);
-        }
-        
-        public static Map getEnumMap()
-        {
-            return getEnumMap(EnumSpanScreeningType.class);
-        }
-        
-        public static List getEnumList()
-        {
-            return getEnumList(EnumSpanScreeningType.class);
-        }
-        
-        public static Iterator iterator()
-        {
-            return iterator(EnumSpanScreeningType.class);
-        }
-        
-        public static final EnumSpanScreeningType AM       = new EnumSpanScreeningType("AM");
-        public static final EnumSpanScreeningType FM       = new EnumSpanScreeningType("FM");
-        
-    }      
-    
-    
-    //**************************************** Methods *********************************************
-    
-    /**
-     * AllowedValues - vector of allowed values for this EnumerationSpan
-     *
-     * @return Vector - vector representation of the allowed values
-     */
-    @Override
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Constructor for JDFSpanScreeningType
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFSpanScreeningType(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFSpanScreeningType
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
+	 */
+	public JDFSpanScreeningType(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFSpanScreeningType
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 * @throws DOMException
+	 */
+	public JDFSpanScreeningType(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for EnumSpanScreeningType
+	 */
+	public static class EnumSpanScreeningType extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumSpanScreeningType(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		public static EnumSpanScreeningType getEnum(String enumName)
+		{
+			return (EnumSpanScreeningType) getEnum(EnumSpanScreeningType.class, enumName);
+		}
+
+		public static EnumSpanScreeningType getEnum(int enumValue)
+		{
+			return (EnumSpanScreeningType) getEnum(EnumSpanScreeningType.class, enumValue);
+		}
+
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumSpanScreeningType.class);
+		}
+
+		public static List getEnumList()
+		{
+			return getEnumList(EnumSpanScreeningType.class);
+		}
+
+		public static Iterator iterator()
+		{
+			return iterator(EnumSpanScreeningType.class);
+		}
+
+		public static final EnumSpanScreeningType AM = new EnumSpanScreeningType("AM");
+		public static final EnumSpanScreeningType FM = new EnumSpanScreeningType("FM");
+
+	}
+
+	// **************************************** Methods
+	// *********************************************
+
+	/**
+	 * AllowedValues - vector of allowed values for this EnumerationSpan
+	 * 
+	 * @return Vector - vector representation of the allowed values
+	 */
+	@Override
 	public ValuedEnum getEnumType()
-    {
-        return EnumSpanScreeningType.getEnum(0);
-    }
-    
-    /**
-     * toString
-     *
-     * @return String
-     */
-    @Override
+	{
+		return EnumSpanScreeningType.getEnum(0);
+	}
+
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	@Override
 	public String toString()
-    {
-        return "JDFSpanScreeningType[ --> " + super.toString() + " ]";
-    }
-    
- }
+	{
+		return "JDFSpanScreeningType[ --> " + super.toString() + " ]";
+	}
+
+}

@@ -77,16 +77,16 @@ import org.cip4.jdflib.validate.ICheckValidator;
 
 /**
  * @author prosirai
- *
+ * 
  */
 public interface IWalkerFactory
 {
-    /**
-     * get a Vector of walkers for a given element
-     * @param toCheck the element to check
-     * @return {@link ICheckValidator} the validator object, may be null if no furthe validation is required
-     */
-    public IWalker getWalker(KElement toCheck);
+	/**
+	 * get a Vector of walkers for a given element
+	 * 
+	 * @param toCheck the element to check
+	 * @return {@link ICheckValidator} the validator object, may be null if no furthe validation is required
+	 */
+	public IWalker getWalker(KElement toCheck);
 
 }
-

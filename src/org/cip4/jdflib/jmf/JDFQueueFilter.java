@@ -100,231 +100,239 @@ import org.cip4.jdflib.util.EnumUtil;
  */
 public class JDFQueueFilter extends JDFAutoQueueFilter
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFQueueFilter
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    public JDFQueueFilter(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFQueueFilter
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	public JDFQueueFilter(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFQueueFilter
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    public JDFQueueFilter(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFQueueFilter
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFQueueFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFQueueFilter
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    public JDFQueueFilter(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * Constructor for JDFQueueFilter
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	public JDFQueueFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFQueueFilter[  --> " + super.toString() + " ]";
-    }
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFQueueFilter[  --> " + super.toString() + " ]";
+	}
 
-    /**
-     * GetPartMapVector returns a vector of partmaps, null if no parts are present
-     *
-     * @return VJDFAttributeMap
-     */
-    public VJDFAttributeMap getPartMapVector()
-    {
-        return super.getPartMapVector();
-    }
+	/**
+	 * GetPartMapVector returns a vector of partmaps, null if no parts are present
+	 * 
+	 * @return VJDFAttributeMap
+	 */
+	public VJDFAttributeMap getPartMapVector()
+	{
+		return super.getPartMapVector();
+	}
 
-    /**
-     * SetPartMapVector
-     *
-     * @param vPart
-     */
-    public void setPartMapVector(VJDFAttributeMap vPart)
-    {
-        super.setPartMapVector(vPart);
-    }
+	/**
+	 * SetPartMapVector
+	 * 
+	 * @param vPart
+	 */
+	public void setPartMapVector(VJDFAttributeMap vPart)
+	{
+		super.setPartMapVector(vPart);
+	}
 
-    /**
-     * return true if the queuentry matches this filter
-     * @return
-     */
-    public boolean matches(JDFQueueEntry qe)
-    {
-        if(qe==null)
-            return false;
+	/**
+	 * return true if the queuentry matches this filter
+	 * 
+	 * @return
+	 */
+	public boolean matches(JDFQueueEntry qe)
+	{
+		if (qe == null)
+			return false;
 
-        if(EnumQueueEntryDetails.None.equals(getQueueEntryDetails()))
-            return false;
+		if (EnumQueueEntryDetails.None.equals(getQueueEntryDetails()))
+			return false;
 
-        Set qeDefs=getQueueEntryDefSet();
-        if(qeDefs!=null && ! qeDefs.contains(qe.getQueueEntryID()))
-            return false;
+		Set qeDefs = getQueueEntryDefSet();
+		if (qeDefs != null && !qeDefs.contains(qe.getQueueEntryID()))
+			return false;
 
-        qeDefs=getDeviceIDSet();
-        if(qeDefs!=null && ! qeDefs.contains(qe.getDeviceID()))
-            return false;
+		qeDefs = getDeviceIDSet();
+		if (qeDefs != null && !qeDefs.contains(qe.getDeviceID()))
+			return false;
 
-        if(hasAttribute(AttributeName.GANGNAMES) && !getGangNames().contains(qe.getGangName()))
-            return false;
+		if (hasAttribute(AttributeName.GANGNAMES) && !getGangNames().contains(qe.getGangName()))
+			return false;
 
-        if(hasAttribute(AttributeName.STATUSLIST) && !getStatusList().contains(qe.getQueueEntryStatus()))
-            return false;
+		if (hasAttribute(AttributeName.STATUSLIST) && !getStatusList().contains(qe.getQueueEntryStatus()))
+			return false;
 
-        return true;
-    }
+		return true;
+	}
 
-    /**
-     * (9.2) get StatusList attribute StatusList
-     * @return Vector of the enumerations
-     * this version uses queueEntryStatus rather than an own enumeration
-     */
-    @Override
-    public Vector getStatusList()
-    {
-        return getEnumerationsAttribute(AttributeName.STATUSLIST, null, EnumQueueEntryStatus.getEnum(0), false);
-    }
+	/**
+	 * (9.2) get StatusList attribute StatusList
+	 * 
+	 * @return Vector of the enumerations this version uses queueEntryStatus rather than an own enumeration
+	 */
+	@Override
+	public Vector getStatusList()
+	{
+		return getEnumerationsAttribute(AttributeName.STATUSLIST, null, EnumQueueEntryStatus.getEnum(0), false);
+	}
 
-    /**
-     * get the list of QueueEntryDef/@QueueEntryIDs strings as a set
-     * @return the set of QueueEntryIDs, null if no QueueEntryDef is specified
-     */
-    public Set<String> getQueueEntryDefSet()
-    {
-        VElement v=getChildElementVector(ElementName.QUEUEENTRYDEF, null);
-        final int siz = v==null ? 0 : v.size();
-        HashSet<String> set= siz==0 ? null : new HashSet<String>();
-        for(int i=0;i<siz;i++)
-        {
-            String qeid=((JDFQueueEntryDef)v.elementAt(i)).getQueueEntryID();
-            if(!isWildCard(qeid))
-                set.add(qeid);
-        }
-        return set!=null && set.size()>0 ? set : null;
-    }
+	/**
+	 * get the list of QueueEntryDef/@QueueEntryIDs strings as a set
+	 * 
+	 * @return the set of QueueEntryIDs, null if no QueueEntryDef is specified
+	 */
+	public Set<String> getQueueEntryDefSet()
+	{
+		VElement v = getChildElementVector(ElementName.QUEUEENTRYDEF, null);
+		final int siz = v == null ? 0 : v.size();
+		HashSet<String> set = siz == 0 ? null : new HashSet<String>();
+		for (int i = 0; i < siz; i++)
+		{
+			String qeid = ((JDFQueueEntryDef) v.elementAt(i)).getQueueEntryID();
+			if (!isWildCard(qeid))
+				set.add(qeid);
+		}
+		return set != null && set.size() > 0 ? set : null;
+	}
 
-    /**
-     * get the list of Device/@DeviceIDs strings as a set
-     * @return the set of DeviceIDs, null if no Device is specified
-     */
-    public Set getDeviceIDSet()
-    {
-        VElement v=getChildElementVector(ElementName.DEVICE, null);
-        final int siz = v==null ? 0 : v.size();
-        HashSet set= siz==0 ? null : new HashSet();
-        for(int i=0;i<siz;i++)
-        {
-            String qeid=((JDFDevice)v.elementAt(i)).getDeviceID();
-            if(!isWildCard(qeid))
-                set.add(qeid);
-        }
-        return set!=null && set.size()>0 ? set : null;
-    }
+	/**
+	 * get the list of Device/@DeviceIDs strings as a set
+	 * 
+	 * @return the set of DeviceIDs, null if no Device is specified
+	 */
+	public Set getDeviceIDSet()
+	{
+		VElement v = getChildElementVector(ElementName.DEVICE, null);
+		final int siz = v == null ? 0 : v.size();
+		HashSet set = siz == 0 ? null : new HashSet();
+		for (int i = 0; i < siz; i++)
+		{
+			String qeid = ((JDFDevice) v.elementAt(i)).getDeviceID();
+			if (!isWildCard(qeid))
+				set.add(qeid);
+		}
+		return set != null && set.size() > 0 ? set : null;
+	}
 
-    /**
-     * modifies queue to match this filter by removing all non-matching entries
-     * 
-     * make sure that this is a copy of any original queue as the incoming queue itself is not cloned
-     * 
-     * @param theQueue the queue to modify
-     */
-    public void match(JDFQueue theQueue)
-    {
-        int maxEntries=hasAttribute(AttributeName.MAXENTRIES) ? getMaxEntries() : 999999;
+	/**
+	 * modifies queue to match this filter by removing all non-matching entries
+	 * 
+	 * make sure that this is a copy of any original queue as the incoming queue itself is not cloned
+	 * 
+	 * @param theQueue the queue to modify
+	 */
+	public void match(JDFQueue theQueue)
+	{
+		int maxEntries = hasAttribute(AttributeName.MAXENTRIES) ? getMaxEntries() : 999999;
 
-        VElement v=theQueue.getQueueEntryVector();
-        final int size = v==null ? 0 : v.size();
-        theQueue.setQueueSize(size);
+		VElement v = theQueue.getQueueEntryVector();
+		final int size = v == null ? 0 : v.size();
+		theQueue.setQueueSize(size);
 
-        for(int i=0;i<size;i++)
-        {
-            JDFQueueEntry qe=(JDFQueueEntry)v.elementAt(i);
-            match(qe);
-        }
+		for (int i = 0; i < size; i++)
+		{
+			JDFQueueEntry qe = (JDFQueueEntry) v.elementAt(i);
+			match(qe);
+		}
 
-        for(int i=theQueue.numEntries(null)-1;i>=maxEntries;i--)
-            theQueue.removeChild(ElementName.QUEUEENTRY, null, maxEntries); // always zapp first - it is faster to find
+		for (int i = theQueue.numEntries(null) - 1; i >= maxEntries; i--)
+			theQueue.removeChild(ElementName.QUEUEENTRY, null, maxEntries); // always
+		// zapp
+		// first
+		// -
+		// it
+		// is
+		// faster
+		// to
+		// find
 
-    }
+	}
 
-    /**
-     * modifies queueEntry to match this filter by removing all non-matching attributes and elements
-     * 
-     * make sure that this is a copy of any original queue as the incoming queue itself is not cloned
-     * @param qe
-     */
-    public void match(JDFQueueEntry qe)
-    {
-        if(qe==null)
-            return;
+	/**
+	 * modifies queueEntry to match this filter by removing all non-matching attributes and elements
+	 * 
+	 * make sure that this is a copy of any original queue as the incoming queue itself is not cloned
+	 * 
+	 * @param qe
+	 */
+	public void match(JDFQueueEntry qe)
+	{
+		if (qe == null)
+			return;
 
-        if(!matches(qe))
-            qe.deleteNode();
-        EnumQueueEntryDetails qed=getQueueEntryDetails();
-        if(qed==null)
-            qed=EnumQueueEntryDetails.Brief;
-        if(EnumUtil.aLessEqualsThanB(EnumQueueEntryDetails.Brief,qed))
-        {
-            qe.removeChildren(ElementName.JOBPHASE, null,null);
-        }
-        if(EnumUtil.aLessEqualsThanB(EnumQueueEntryDetails.JobPhase,qed))
-        {
-            qe.removeChildren(ElementName.JDF, null,null);
-        }
+		if (!matches(qe))
+			qe.deleteNode();
+		EnumQueueEntryDetails qed = getQueueEntryDetails();
+		if (qed == null)
+			qed = EnumQueueEntryDetails.Brief;
+		if (EnumUtil.aLessEqualsThanB(EnumQueueEntryDetails.Brief, qed))
+		{
+			qe.removeChildren(ElementName.JOBPHASE, null, null);
+		}
+		if (EnumUtil.aLessEqualsThanB(EnumQueueEntryDetails.JobPhase, qed))
+		{
+			qe.removeChildren(ElementName.JDF, null, null);
+		}
 
-    }
+	}
 
-    /**
-     * append a Device element with @DeviceID
-     * @param deviceID the deviceID to set
-     * @see org.cip4.jdflib.auto.JDFAutoQueueFilter#appendDevice()
-     */
-    public JDFDevice appendDevice(String deviceID) throws JDFException
-    {
-        final JDFDevice device = super.appendDevice();
-        device.setDeviceID(deviceID);
-        return device;
-    }
+	/**
+	 * append a Device element with @DeviceID
+	 * 
+	 * @param deviceID the deviceID to set
+	 * @see org.cip4.jdflib.auto.JDFAutoQueueFilter#appendDevice()
+	 */
+	public JDFDevice appendDevice(String deviceID) throws JDFException
+	{
+		final JDFDevice device = super.appendDevice();
+		device.setDeviceID(deviceID);
+		return device;
+	}
 
-    /**
-     * @param queueEntryID the queueEntryID to set
-     * @see org.cip4.jdflib.auto.JDFAutoQueueFilter#appendQueueEntryDef()
-     */
-    public JDFQueueEntryDef appendQueueEntryDef(String queueEntryID) throws JDFException
-    {
-        final JDFQueueEntryDef queueEntryDef = super.appendQueueEntryDef();
-        queueEntryDef.setQueueEntryID(queueEntryID);
-        return queueEntryDef;
-    }
+	/**
+	 * @param queueEntryID the queueEntryID to set
+	 * @see org.cip4.jdflib.auto.JDFAutoQueueFilter#appendQueueEntryDef()
+	 */
+	public JDFQueueEntryDef appendQueueEntryDef(String queueEntryID) throws JDFException
+	{
+		final JDFQueueEntryDef queueEntryDef = super.appendQueueEntryDef();
+		queueEntryDef.setQueueEntryID(queueEntryID);
+		return queueEntryDef;
+	}
 
 }

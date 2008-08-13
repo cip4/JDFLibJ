@@ -87,170 +87,169 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 
 /**
- * This class represents a JDF-ResourceLink/AmountPool/PartAmount element
- * it inherits may methods fro ResourceLink, since PartAmount specifies ResourceLink properties of a partition
+ * This class represents a JDF-ResourceLink/AmountPool/PartAmount element it inherits may methods fro ResourceLink,
+ * since PartAmount specifies ResourceLink properties of a partition
  */
 public class JDFPartAmount extends JDFResourceLink
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable_ToRemove = new AtrInfoTable[8];
-    static 
-    {
-        atrInfoTable_ToRemove[0] = new AtrInfoTable(AttributeName.COMBINEDPROCESSINDEX, 0x33333331, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-        atrInfoTable_ToRemove[1] = new AtrInfoTable(AttributeName.COMBINEDPROCESSTYPE,  0x44444443, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable_ToRemove[2] = new AtrInfoTable(AttributeName.PIPEPROTOCOL,         0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable_ToRemove[3] = new AtrInfoTable(AttributeName.PROCESSUSAGE,         0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable_ToRemove[4] = new AtrInfoTable(AttributeName.RSUBREF,              0x44444433, AttributeInfo.EnumAttributeType.IDREF, null, null);
-        atrInfoTable_ToRemove[5] = new AtrInfoTable(AttributeName.PIPEPARTIDKEYS,       0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumPartIDKey.getEnum(0),null);
-        atrInfoTable_ToRemove[6] = new AtrInfoTable(AttributeName.RREF,                 0x22222222, AttributeInfo.EnumAttributeType.IDREF ,null, null);
-        atrInfoTable_ToRemove[7] = new AtrInfoTable(AttributeName.USAGE,                0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumUsage.getEnum(0), null);
-    }
-    private static ElemInfoTable[] elemInfoTable_ToRemove = new ElemInfoTable[1];
-    static 
-    {
-        elemInfoTable_ToRemove[0] = new ElemInfoTable(ElementName.AMOUNTPOOL, 0x66666661);        
-    }
-    private static ElemInfoTable[] elemInfoTable_ToReplace = new ElemInfoTable[1];
-    static 
-    {
-        elemInfoTable_ToReplace[0] = new ElemInfoTable(ElementName.PART, 0x22222221);        
-    }
+	private static AtrInfoTable[] atrInfoTable_ToRemove = new AtrInfoTable[8];
+	static
+	{
+		atrInfoTable_ToRemove[0] = new AtrInfoTable(AttributeName.COMBINEDPROCESSINDEX, 0x33333331, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable_ToRemove[1] = new AtrInfoTable(AttributeName.COMBINEDPROCESSTYPE, 0x44444443, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable_ToRemove[2] = new AtrInfoTable(AttributeName.PIPEPROTOCOL, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable_ToRemove[3] = new AtrInfoTable(AttributeName.PROCESSUSAGE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable_ToRemove[4] = new AtrInfoTable(AttributeName.RSUBREF, 0x44444433, AttributeInfo.EnumAttributeType.IDREF, null, null);
+		atrInfoTable_ToRemove[5] = new AtrInfoTable(AttributeName.PIPEPARTIDKEYS, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumPartIDKey.getEnum(0), null);
+		atrInfoTable_ToRemove[6] = new AtrInfoTable(AttributeName.RREF, 0x22222222, AttributeInfo.EnumAttributeType.IDREF, null, null);
+		atrInfoTable_ToRemove[7] = new AtrInfoTable(AttributeName.USAGE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumUsage.getEnum(0), null);
+	}
+	private static ElemInfoTable[] elemInfoTable_ToRemove = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable_ToRemove[0] = new ElemInfoTable(ElementName.AMOUNTPOOL, 0x66666661);
+	}
+	private static ElemInfoTable[] elemInfoTable_ToReplace = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable_ToReplace[0] = new ElemInfoTable(ElementName.PART, 0x22222221);
+	}
 
-    @Override
-    protected AttributeInfo getTheAttributeInfo() 
-    {     
-        AttributeInfo ai = super.getTheAttributeInfo().updateReplace((AtrInfoTable) null);
-        ai.updateRemove(atrInfoTable_ToRemove);
-        return ai;
-    }
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		AttributeInfo ai = super.getTheAttributeInfo().updateReplace((AtrInfoTable) null);
+		ai.updateRemove(atrInfoTable_ToRemove);
+		return ai;
+	}
 
-    @Override
-    protected ElementInfo getTheElementInfo() 
-    {
-        ElementInfo eiRL=super.getTheElementInfo();
-        eiRL.updateRemove(elemInfoTable_ToRemove);
-        eiRL.updateReplace(elemInfoTable_ToReplace);
-        return eiRL;
-        
-    }
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		ElementInfo eiRL = super.getTheElementInfo();
+		eiRL.updateRemove(elemInfoTable_ToRemove);
+		eiRL.updateReplace(elemInfoTable_ToReplace);
+		return eiRL;
 
-    /**
-     * Constructor for JDFPartAmount
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    public JDFPartAmount(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	}
 
-    /**
-     * Constructor for JDFPartAmount
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    public JDFPartAmount(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFPartAmount
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	public JDFPartAmount(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFPartAmount
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    public JDFPartAmount(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * Constructor for JDFPartAmount
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFPartAmount(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    @Override
-    public String toString()
-    {
-        return "JDFPartAmount[ -->" + super.toString() + "]";
-    }
-    /* (non-Javadoc)
-     * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib.core.KElement.EnumValidationLevel, boolean, int)
-     */
-    @Override
-    public VString getInvalidAttributes(final EnumValidationLevel level, final boolean bIgnorePrivate, final int nMax)
-    {
-        final VString v= super.getInvalidAttributes(level, bIgnorePrivate, nMax);
-        JDFResourceLink rl=(JDFResourceLink) getDeepParentChild(ElementName.RESOURCELINKPOOL);
-        if(rl!=null)
-        {
-            JDFAttributeMap rlMap=rl.getAttributeMap();
+	/**
+	 * Constructor for JDFPartAmount
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	public JDFPartAmount(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-            JDFAttributeMap map=rlMap==null ? null : getAttributeMap();
-            if(map!=null)
-            {
-                Iterator<String> it=map.getKeyIterator();
-                while(it.hasNext())
-                {
-                    String s=it.next();
-                    if(rlMap.containsKey(s))
-                    {
-                        v.add(s);
-                    }
-                }      
-            }
-        }
-        return v;
-    }
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	@Override
+	public String toString()
+	{
+		return "JDFPartAmount[ -->" + super.toString() + "]";
+	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib. core.KElement.EnumValidationLevel,
+	 * boolean, int)
+	 */
+	@Override
+	public VString getInvalidAttributes(final EnumValidationLevel level, final boolean bIgnorePrivate, final int nMax)
+	{
+		final VString v = super.getInvalidAttributes(level, bIgnorePrivate, nMax);
+		JDFResourceLink rl = (JDFResourceLink) getDeepParentChild(ElementName.RESOURCELINKPOOL);
+		if (rl != null)
+		{
+			JDFAttributeMap rlMap = rl.getAttributeMap();
 
-    /**
-     * gets part map 
-     *
-     * @return JDFAttributeMap, of the part element
-     */
-    @Override
-    public JDFAttributeMap getPartMap()
-    {
-        return super.getPartMap();
-    }
+			JDFAttributeMap map = rlMap == null ? null : getAttributeMap();
+			if (map != null)
+			{
+				Iterator<String> it = map.getKeyIterator();
+				while (it.hasNext())
+				{
+					String s = it.next();
+					if (rlMap.containsKey(s))
+					{
+						v.add(s);
+					}
+				}
+			}
+		}
+		return v;
+	}
 
-    /**
-     * gets part map vector
-     *
-     * @return JDFAttributeMap, of the part element
-     */
-    @Override
-    public VJDFAttributeMap getPartMapVector()
-    {
-        return super.getPartMapVector();
-    }
-    
-    /**
-     * returns the parent resourcelink root resource
-     */
-    @Override
-    public JDFResource getLinkRoot()
-    {
-        KElement rl=getParentNode_KElement();
-        if(rl!=null)
-            rl=rl.getParentNode_KElement();
-        return (rl instanceof JDFResourceLink) ? ((JDFResourceLink)rl).getLinkRoot() : null;
-       
-    }
+	/**
+	 * gets part map
+	 * 
+	 * @return JDFAttributeMap, of the part element
+	 */
+	@Override
+	public JDFAttributeMap getPartMap()
+	{
+		return super.getPartMap();
+	}
 
+	/**
+	 * gets part map vector
+	 * 
+	 * @return JDFAttributeMap, of the part element
+	 */
+	@Override
+	public VJDFAttributeMap getPartMapVector()
+	{
+		return super.getPartMapVector();
+	}
+
+	/**
+	 * returns the parent resourcelink root resource
+	 */
+	@Override
+	public JDFResource getLinkRoot()
+	{
+		KElement rl = getParentNode_KElement();
+		if (rl != null)
+			rl = rl.getParentNode_KElement();
+		return (rl instanceof JDFResourceLink) ? ((JDFResourceLink) rl).getLinkRoot() : null;
+
+	}
 
 }

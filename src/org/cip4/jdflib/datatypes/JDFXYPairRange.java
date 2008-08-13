@@ -85,342 +85,339 @@ import java.util.zip.DataFormatException;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.util.HashUtil;
 
-
 /**
- * This class represents a x y pair range (JDFXYPairRange). 
- * It is a whitespace separated list of 2 xy pairs separated 
- * by a tilde "~", for example "1.23 3.24 ~ 2.34 7.12"
+ * This class represents a x y pair range (JDFXYPairRange). It is a whitespace separated list of 2 xy pairs separated by
+ * a tilde "~", for example "1.23 3.24 ~ 2.34 7.12"
  */
 public class JDFXYPairRange extends JDFRange
 {
-    //**************************************** Attributes ******************************************
-    private JDFXYPair m_left  = null; // the left value of the range
-    private JDFXYPair m_right = null; // the right value of the range
-    
-    //**************************************** Constructors ****************************************
-    /**
-     * constructs a xy pair range with all values set to 0.0 Double
-     */
-    public JDFXYPairRange()
-    {
-        this(null, null);
-    }
-    
-    /**
-     * constructs a xy pair range with both values equal ("from x to x")
-     *
-     * @param x left/right pair
-     */
-    public JDFXYPairRange(JDFXYPair x)
-    {
-        this(x, x);
-    }
-    
-    /**
-     * constructs a xy pair range with the given left and right xy pair
-     *
-     * @param min the given left xy pair
-     * @param max the given right xy pair
-     */
-    public JDFXYPairRange(JDFXYPair min, JDFXYPair max)
-    {
-        init(min, max);
-    }
-    
-    /**
-     * constructs a xy pair range with the given xy pair range
-     *
-     * @param JDFXYPairRange r - the given xy pair range
-     */
-    public JDFXYPairRange(JDFXYPairRange r)
-    {
-        init(r.getLeft(), r.getRight());
-    }
-    
-    /**
-     * Initialization
-     * @param min
-     * @param max 
-     */
-    protected void init(JDFXYPair min, JDFXYPair max)
-    {
-        m_left = min;
-        m_right = max;
-    }
-    
-    /**
-     * constructs a xy pair range with all values set via a string
-     *
-     * @param s the given string
-     *
-     * @throws DataFormatException - if the String has not a valid format
-     */
-    public JDFXYPairRange(String s) throws DataFormatException
-    {
-        String[] strArray = s.split("~");
-        if(strArray.length > 2)
-        {
-            throw new DataFormatException("JDFXYPairRange illegal string: " + s);
-        }
-        try
-        {
-            // the min and the max values are equal
-            if (strArray.length == 1)
-            {
-                m_left  = new JDFXYPair(strArray[0].trim());
-                m_right = new JDFXYPair(strArray[0].trim());
-            }
-            //two different values
-            else if (strArray.length == 2)
-            {
-                m_left  = new JDFXYPair(strArray[0].trim());
-                m_right = new JDFXYPair(strArray[1].trim());
-            }
-        }
-        catch (DataFormatException e)
-        {
-            throw new DataFormatException("JDFXYPairRange illegal string: " + s);
-        }
-    } 
-    
-    //**************************************** Methods *********************************************
-    
-    /**
-     * toString - returns the range as a String
-     *
-     * @return String - the range as a String
-     */
-    @Override
+	// **************************************** Attributes
+	// ******************************************
+	private JDFXYPair m_left = null; // the left value of the range
+	private JDFXYPair m_right = null; // the right value of the range
+
+	// **************************************** Constructors
+	// ****************************************
+	/**
+	 * constructs a xy pair range with all values set to 0.0 Double
+	 */
+	public JDFXYPairRange()
+	{
+		this(null, null);
+	}
+
+	/**
+	 * constructs a xy pair range with both values equal ("from x to x")
+	 * 
+	 * @param x left/right pair
+	 */
+	public JDFXYPairRange(JDFXYPair x)
+	{
+		this(x, x);
+	}
+
+	/**
+	 * constructs a xy pair range with the given left and right xy pair
+	 * 
+	 * @param min the given left xy pair
+	 * @param max the given right xy pair
+	 */
+	public JDFXYPairRange(JDFXYPair min, JDFXYPair max)
+	{
+		init(min, max);
+	}
+
+	/**
+	 * constructs a xy pair range with the given xy pair range
+	 * 
+	 * @param JDFXYPairRange r - the given xy pair range
+	 */
+	public JDFXYPairRange(JDFXYPairRange r)
+	{
+		init(r.getLeft(), r.getRight());
+	}
+
+	/**
+	 * Initialization
+	 * 
+	 * @param min
+	 * @param max
+	 */
+	protected void init(JDFXYPair min, JDFXYPair max)
+	{
+		m_left = min;
+		m_right = max;
+	}
+
+	/**
+	 * constructs a xy pair range with all values set via a string
+	 * 
+	 * @param s the given string
+	 * 
+	 * @throws DataFormatException - if the String has not a valid format
+	 */
+	public JDFXYPairRange(String s) throws DataFormatException
+	{
+		String[] strArray = s.split("~");
+		if (strArray.length > 2)
+		{
+			throw new DataFormatException("JDFXYPairRange illegal string: " + s);
+		}
+		try
+		{
+			// the min and the max values are equal
+			if (strArray.length == 1)
+			{
+				m_left = new JDFXYPair(strArray[0].trim());
+				m_right = new JDFXYPair(strArray[0].trim());
+			}
+			// two different values
+			else if (strArray.length == 2)
+			{
+				m_left = new JDFXYPair(strArray[0].trim());
+				m_right = new JDFXYPair(strArray[1].trim());
+			}
+		}
+		catch (DataFormatException e)
+		{
+			throw new DataFormatException("JDFXYPairRange illegal string: " + s);
+		}
+	}
+
+	// **************************************** Methods
+	// *********************************************
+
+	/**
+	 * toString - returns the range as a String
+	 * 
+	 * @return String - the range as a String
+	 */
+	@Override
 	public String toString()
-    {
-        if (m_left.equals(m_right)) 
-        {
-            return JDFConstants.EMPTYSTRING + getLeft();
-        }
-        return getLeft().toString() + " ~ " + getRight().toString();
-    }
-    
-    /**
-     * isValid - validate the given String
-     *
-     * @param s the given string
-     *
-     * @return boolean - false if the String has not a valid format 
-     */
-    public boolean isValid(String s) 
-    {
-        try 
-        {
-            new JDFXYPairRange(s);
-        }
-        catch (DataFormatException e)
-        {
-            return false;
-        }
-        return true;
-    }
-    
-    /**
-     * equals - returns true if both JDFXYPaiRanges are equal otherwise false
-     *
-     * @return boolean - true if equal otherwise false
-     */
-    @Override
+	{
+		if (m_left.equals(m_right))
+		{
+			return JDFConstants.EMPTYSTRING + getLeft();
+		}
+		return getLeft().toString() + " ~ " + getRight().toString();
+	}
+
+	/**
+	 * isValid - validate the given String
+	 * 
+	 * @param s the given string
+	 * 
+	 * @return boolean - false if the String has not a valid format
+	 */
+	public boolean isValid(String s)
+	{
+		try
+		{
+			new JDFXYPairRange(s);
+		}
+		catch (DataFormatException e)
+		{
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * equals - returns true if both JDFXYPaiRanges are equal otherwise false
+	 * 
+	 * @return boolean - true if equal otherwise false
+	 */
+	@Override
 	public boolean equals(Object other)
-    {
-        if (this == other)
-        {
-            return true;
-        }
-        if (other == null)
-        {
-            return false;
-        }
-        if (!other.getClass().equals(getClass()))
-        {
-            return false;
-        }
-        
-        JDFXYPairRange range = (JDFXYPairRange) other;
-        
-        return  this.getLeft().equals(range.getLeft()) &&
-        this.getRight().equals(range.getRight()); 
-    }
-    
-    /**
-     * hashCode complements equals() to fulfill the equals/hashCode contract
-     * @return int
-     */
-    @Override
+	{
+		if (this == other)
+		{
+			return true;
+		}
+		if (other == null)
+		{
+			return false;
+		}
+		if (!other.getClass().equals(getClass()))
+		{
+			return false;
+		}
+
+		JDFXYPairRange range = (JDFXYPairRange) other;
+
+		return this.getLeft().equals(range.getLeft()) && this.getRight().equals(range.getRight());
+	}
+
+	/**
+	 * hashCode complements equals() to fulfill the equals/hashCode contract
+	 * 
+	 * @return int
+	 */
+	@Override
 	public int hashCode()
-    {
-        return HashUtil.hashCode(0, this.toString());
-    }
-    
-    /**
-     * getLeft - returns the left JDFXYPair object
-     *
-     * @return JDFXYPair - the left JDFXYPair object
-     */
-    public JDFXYPair getLeft()
-    {
-        return m_left;
-    }
-    
-    /**
-     * getRight - returns the right JDFXYPair object
-     *
-     * @return JDFXYPair - the right JDFXYPair object
-     */
-    public JDFXYPair getRight()
-    {
-        return m_right;
-    }
-    
-    /**
-     * sets the left JDFXYPair object of the range
-     *
-     * @param xy the left JDFXYPair object of the range
-     */
-    public void setLeft(JDFXYPair xy) 
-    {
-        m_left = xy;
-    }
-    
-    /**
-     * sets the right JDFXYPair object of the range
-     *
-     * @param xy the right JDFXYPair object of the range
-     */
-    public void setRight(JDFXYPair xy) 
-    {
-        m_right = xy;
-    }
-    
-    /**
-     * getLowerXValue - returns the lower x value of the bounds
-     * for example 2.9 4.5~6.3 7.9 return 2.9
-     *
-     * @return double - the lower x value of the range
-     */
-    public double getLowerXValue()
-    {
-        return (getLeft().getX() < getRight().getX()) ? getLeft().getX() : getRight().getX();
-    }
-    
-    /**
-     * getUpperXValue - return the upper x value of the bounds
-     * for example 2.9 4.5~6.3 7.9 return 6.3
-     *
-     * @return double - the upper x value of the range
-     */
-    public double getUpperXValue()
-    {
-        return (getLeft().getX() < getRight().getX()) ? getRight().getX() : getLeft().getX();
-    }
-    
-    /**
-     * getLowerYValue - returns the lower y value of the bounds
-     * for example 2.9 4.5~6.3 7.9 return 4.5
-     *
-     * @return double - the lower y value of the range
-     */
-    public double getLowerYValue()
-    {
-        return (getLeft().getY() < getRight().getY()) ? getLeft().getY() : getRight().getY();
-    }
-    
-    /**
-     * getUpperYValue - return the upper y value of the bounds
-     * for example 2.9 4.5~6.3 7.9 return 7.9
-     *
-     * @return double - the upper y value of the range
-     */
-    public double getUpperYValue()
-    {
-        return (getLeft().getY() < getRight().getY()) ? getRight().getY() : getLeft().getY();
-    }
-    
-    
-    /**
-     * getUpperValue - returns the upper value of the bounds
-     *
-     * @return JDFXYPair - the upper value of the range
-     */
-    public JDFXYPair getUpperValue()
-    {
-        return (m_left.isLessOrEqual(m_right) ? m_right : m_left);
-    }
-    
-    /**
-     * getLowerValue - returns the lower value of the bounds
-     *
-     * @return JDFXYPair - the lower value of the range
-     */
-    public JDFXYPair getLowerValue()
-    {
-        return (m_left.isLess(m_right) ? m_left : m_right);
-    }
-    
-    
-    /**
-     * isEqual - boolean equivalence
-     * 
-     * @return boolean - true if the ranges are equivalent
-     */
-    public boolean isEqual(JDFXYPairRange g)
-    {
-        return (m_left.equals(g.m_left)) && (m_right.equals(g.m_right));
-    }
-    
-    /**
-     * inRange - returns true if <code>this</code> contains <code>xypair</code>
-     *
-     * @param xypair comparison pair
-     *
-     * @return boolean - true if xy in range
-     */
-    public boolean inRange(JDFXYPair xypair)
-    {
-        JDFXYPair min=this.getLowerValue();
-        JDFXYPair max=this.getUpperValue();
-        return xypair.isGreaterOrEqual(min) && xypair.isLessOrEqual(max);
-    }
-    
-    /**
-     * isPartOfRange - is range 'r' within this range?
-     * 
-     * @param ra the range to test
-     * 
-     * @return boolean - true if range 'r' is within this range, else false
-     */
-    @Override
+	{
+		return HashUtil.hashCode(0, this.toString());
+	}
+
+	/**
+	 * getLeft - returns the left JDFXYPair object
+	 * 
+	 * @return JDFXYPair - the left JDFXYPair object
+	 */
+	public JDFXYPair getLeft()
+	{
+		return m_left;
+	}
+
+	/**
+	 * getRight - returns the right JDFXYPair object
+	 * 
+	 * @return JDFXYPair - the right JDFXYPair object
+	 */
+	public JDFXYPair getRight()
+	{
+		return m_right;
+	}
+
+	/**
+	 * sets the left JDFXYPair object of the range
+	 * 
+	 * @param xy the left JDFXYPair object of the range
+	 */
+	public void setLeft(JDFXYPair xy)
+	{
+		m_left = xy;
+	}
+
+	/**
+	 * sets the right JDFXYPair object of the range
+	 * 
+	 * @param xy the right JDFXYPair object of the range
+	 */
+	public void setRight(JDFXYPair xy)
+	{
+		m_right = xy;
+	}
+
+	/**
+	 * getLowerXValue - returns the lower x value of the bounds for example 2.9 4.5~6.3 7.9 return 2.9
+	 * 
+	 * @return double - the lower x value of the range
+	 */
+	public double getLowerXValue()
+	{
+		return (getLeft().getX() < getRight().getX()) ? getLeft().getX() : getRight().getX();
+	}
+
+	/**
+	 * getUpperXValue - return the upper x value of the bounds for example 2.9 4.5~6.3 7.9 return 6.3
+	 * 
+	 * @return double - the upper x value of the range
+	 */
+	public double getUpperXValue()
+	{
+		return (getLeft().getX() < getRight().getX()) ? getRight().getX() : getLeft().getX();
+	}
+
+	/**
+	 * getLowerYValue - returns the lower y value of the bounds for example 2.9 4.5~6.3 7.9 return 4.5
+	 * 
+	 * @return double - the lower y value of the range
+	 */
+	public double getLowerYValue()
+	{
+		return (getLeft().getY() < getRight().getY()) ? getLeft().getY() : getRight().getY();
+	}
+
+	/**
+	 * getUpperYValue - return the upper y value of the bounds for example 2.9 4.5~6.3 7.9 return 7.9
+	 * 
+	 * @return double - the upper y value of the range
+	 */
+	public double getUpperYValue()
+	{
+		return (getLeft().getY() < getRight().getY()) ? getRight().getY() : getLeft().getY();
+	}
+
+	/**
+	 * getUpperValue - returns the upper value of the bounds
+	 * 
+	 * @return JDFXYPair - the upper value of the range
+	 */
+	public JDFXYPair getUpperValue()
+	{
+		return (m_left.isLessOrEqual(m_right) ? m_right : m_left);
+	}
+
+	/**
+	 * getLowerValue - returns the lower value of the bounds
+	 * 
+	 * @return JDFXYPair - the lower value of the range
+	 */
+	public JDFXYPair getLowerValue()
+	{
+		return (m_left.isLess(m_right) ? m_left : m_right);
+	}
+
+	/**
+	 * isEqual - boolean equivalence
+	 * 
+	 * @return boolean - true if the ranges are equivalent
+	 */
+	public boolean isEqual(JDFXYPairRange g)
+	{
+		return (m_left.equals(g.m_left)) && (m_right.equals(g.m_right));
+	}
+
+	/**
+	 * inRange - returns true if <code>this</code> contains <code>xypair</code>
+	 * 
+	 * @param xypair comparison pair
+	 * 
+	 * @return boolean - true if xy in range
+	 */
+	public boolean inRange(JDFXYPair xypair)
+	{
+		JDFXYPair min = this.getLowerValue();
+		JDFXYPair max = this.getUpperValue();
+		return xypair.isGreaterOrEqual(min) && xypair.isLessOrEqual(max);
+	}
+
+	/**
+	 * isPartOfRange - is range 'r' within this range?
+	 * 
+	 * @param ra the range to test
+	 * 
+	 * @return boolean - true if range 'r' is within this range, else false
+	 */
+	@Override
 	public boolean isPartOfRange(JDFRange ra)
-    {
-        JDFXYPairRange r=(JDFXYPairRange) ra;
-        
-        JDFXYPair min=this.getLowerValue();
-        JDFXYPair r_min=r.getLowerValue();
-        JDFXYPair max=this.getUpperValue();
-        JDFXYPair r_max=r.getUpperValue();
-        return r_min.isGreaterOrEqual(min) && r_max.isLessOrEqual(max);
-    }
-    @Override
+	{
+		JDFXYPairRange r = (JDFXYPairRange) ra;
+
+		JDFXYPair min = this.getLowerValue();
+		JDFXYPair r_min = r.getLowerValue();
+		JDFXYPair max = this.getUpperValue();
+		JDFXYPair r_max = r.getUpperValue();
+		return r_min.isGreaterOrEqual(min) && r_max.isLessOrEqual(max);
+	}
+
+	@Override
 	protected Object getRightObject()
-    {       
-        return m_right;
-    }
+	{
+		return m_right;
+	}
 
-    @Override
+	@Override
 	protected Object getLeftObject()
-    {
-         return m_left;
-    }
-    @Override
-	protected boolean inObjectRange(Object other)
-    {
-       return inRange((JDFXYPair) other);
-    }
+	{
+		return m_left;
+	}
 
-    
+	@Override
+	protected boolean inObjectRange(Object other)
+	{
+		return inRange((JDFXYPair) other);
+	}
+
 }

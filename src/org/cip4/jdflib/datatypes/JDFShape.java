@@ -83,333 +83,342 @@ import java.util.zip.DataFormatException;
 import org.cip4.jdflib.util.HashUtil;
 
 /**
- * This class is a representation of a JDFShape. It is a blank separated list of double values
- * consisting of a width(x), a height(y) and a depth(z) value.
- * this spans a standard right-handed xyz coordinate system
+ * This class is a representation of a JDFShape. It is a blank separated list of double values consisting of a width(x),
+ * a height(y) and a depth(z) value. this spans a standard right-handed xyz coordinate system
  */
 public class JDFShape extends JDFNumList
 {
-    //**************************************** Constructors ****************************************
+	// **************************************** Constructors
+	// ****************************************
 
-    /**
-     * constructor - constructs a shape with all values set to 0.0 Double
-     */
-    public JDFShape()
-    {
-        super(MAX_SHAPE_DIMENSION);
-    }
+	/**
+	 * constructor - constructs a shape with all values set to 0.0 Double
+	 */
+	public JDFShape()
+	{
+		super(MAX_SHAPE_DIMENSION);
+	}
 
-    /**
-     * constructor - constructs a shape with all values set via a Vector of Double objects
-     *
-     * @param v the given vector
-     *
-     * @throws DataFormatException - if the Vector has not a valid format
-     */
-    public JDFShape(Vector v) throws DataFormatException
-    {
-        super(v);
-    }
+	/**
+	 * constructor - constructs a shape with all values set via a Vector of Double objects
+	 * 
+	 * @param v the given vector
+	 * 
+	 * @throws DataFormatException - if the Vector has not a valid format
+	 */
+	public JDFShape(Vector v) throws DataFormatException
+	{
+		super(v);
+	}
 
-    /**
-     * constructor - constructs a shape with all values set via a String
-     *
-     * @param s the given String
-     *
-     * @throws DataFormatException - if the String has not a valid format
-     */
-    public JDFShape(String s) throws DataFormatException
-    {
-        super(s);
-    }
+	/**
+	 * constructor - constructs a shape with all values set via a String
+	 * 
+	 * @param s the given String
+	 * 
+	 * @throws DataFormatException - if the String has not a valid format
+	 */
+	public JDFShape(String s) throws DataFormatException
+	{
+		super(s);
+	}
 
-    /**
-     * constructor - constructs a shape with all values set via a JDFShape
-     *
-     * @param shape the given shape
-     *
-     * @throws DataFormatException - if the JDFShape has not a valid format
-     */
-    public JDFShape(JDFShape shape)
-    {
-        super(MAX_SHAPE_DIMENSION);
-        setY(shape.getY());
-        setX(shape.getX());
-        setZ(shape.getZ());
-    }
+	/**
+	 * constructor - constructs a shape with all values set via a JDFShape
+	 * 
+	 * @param shape the given shape
+	 * 
+	 * @throws DataFormatException - if the JDFShape has not a valid format
+	 */
+	public JDFShape(JDFShape shape)
+	{
+		super(MAX_SHAPE_DIMENSION);
+		setY(shape.getY());
+		setX(shape.getX());
+		setZ(shape.getZ());
+	}
 
-    /**
-     * constructor - constructs a shape with all values set via a JDFNumberList
-     *
-     * @param nl the given number list
-     *
-     * @throws DataFormatException - if the JDFNumberList has not a valid format
-     */
-    public JDFShape(JDFNumberList nl) throws DataFormatException
-    {
-        super(MAX_SHAPE_DIMENSION);
-        if (nl.size()!=MAX_SHAPE_DIMENSION)
-            throw new DataFormatException("JDFShape: can't construct JDFShape from this JDFNuberList value");
-        m_numList.set(0, nl.m_numList.get(0));
-        m_numList.set(1, nl.m_numList.get(1));
-        m_numList.set(2, nl.m_numList.get(2));
-    }
+	/**
+	 * constructor - constructs a shape with all values set via a JDFNumberList
+	 * 
+	 * @param nl the given number list
+	 * 
+	 * @throws DataFormatException - if the JDFNumberList has not a valid format
+	 */
+	public JDFShape(JDFNumberList nl) throws DataFormatException
+	{
+		super(MAX_SHAPE_DIMENSION);
+		if (nl.size() != MAX_SHAPE_DIMENSION)
+			throw new DataFormatException("JDFShape: can't construct JDFShape from this JDFNuberList value");
+		m_numList.set(0, nl.m_numList.get(0));
+		m_numList.set(1, nl.m_numList.get(1));
+		m_numList.set(2, nl.m_numList.get(2));
+	}
 
-    /**
-     * constructor - constructs a new JDFShape with the given double values
-     *
-     * @param x the x value
-     * @param y  the y value
-     * @param z the z value
-     */
-    public JDFShape(double x, double y, double z)
-    {
-        super(MAX_SHAPE_DIMENSION);
-        setY(y);
-        setX(x);
-        setZ(z);
-    }
+	/**
+	 * constructor - constructs a new JDFShape with the given double values
+	 * 
+	 * @param x the x value
+	 * @param y the y value
+	 * @param z the z value
+	 */
+	public JDFShape(double x, double y, double z)
+	{
+		super(MAX_SHAPE_DIMENSION);
+		setY(y);
+		setX(x);
+		setZ(z);
+	}
 
-    /**
-     * constructor - constructs a new JDFShape with the given 2 double values
-     * third is default = 0. 
-     *
-     * @param height the height
-     * @param width  the width
-     * @param length the length  = 0.0
-     */
-    public JDFShape(double x, double y)
-    {
-        super(MAX_SHAPE_DIMENSION);
-        setY(y);
-        setX(x);
-        setZ(0.0);
-    }
-    
-    //**************************************** Methods *********************************************
-    /**
-     * isValid - true if the size of the vector is 3 and all instances are Double types
-     *
-     * @throws DataFormatException - if the Vector has not a valid format
-     */
-    public void isValid() throws DataFormatException
-    {
-        if (m_numList.size() != MAX_SHAPE_DIMENSION 
-           && m_numList.size() != MAX_SHAPE_DIMENSION - 1) // Shape with default length = 0.0
-        {
-            throw new DataFormatException("Data format exception!");
-        }
+	/**
+	 * constructor - constructs a new JDFShape with the given 2 double values third is default = 0.
+	 * 
+	 * @param height the height
+	 * @param width the width
+	 * @param length the length = 0.0
+	 */
+	public JDFShape(double x, double y)
+	{
+		super(MAX_SHAPE_DIMENSION);
+		setY(y);
+		setX(x);
+		setZ(0.0);
+	}
 
-        for (int i = 0; i < m_numList.size(); i++)
-        {
-            if (!(m_numList.elementAt(i) instanceof Double))
-            {
-                throw new DataFormatException("Data format exception!");
-            }
-        }
-        if (m_numList.size()==2) 
-            m_numList.addElement(new Double(0.0));
-    }
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * isValid - true if the size of the vector is 3 and all instances are Double types
+	 * 
+	 * @throws DataFormatException - if the Vector has not a valid format
+	 */
+	public void isValid() throws DataFormatException
+	{
+		if (m_numList.size() != MAX_SHAPE_DIMENSION && m_numList.size() != MAX_SHAPE_DIMENSION - 1) // Shape
+		// with
+		// default
+		// length = 0.0
+		{
+			throw new DataFormatException("Data format exception!");
+		}
 
-    /**
-     * equals - returns true if both JDFShapes are equal, otherwise false
-     *
-     * @return boolean - true if equal otherwise false
-     */
-    public boolean equals(Object other)
-    {
-        if (this == other)
-        {
-            return true;
-        }
-        if (other == null)
-        {
-            return false;
-        }
-        if (!other.getClass().equals(getClass()))
-        {
-            return false;
-        }
-            
-        JDFShape shape = (JDFShape) other;
-        
-        return  (Math.abs(this.getY() - shape.getY())  <= EPSILON) &&
-                (Math.abs(this.getX()  - shape.getX())   <= EPSILON) &&
-                (Math.abs(this.getZ() - shape.getZ())  <= EPSILON) ;
-    }
-    
-    /**
-     * hashCode complements equals() to fulfill the equals/hashCode contract
-     */
-    public int hashCode()
-    {
-        return HashUtil.hashCode(super.hashCode(), this.toString());
-    }
-    
-    /**
-    * isGreaterOrEqual - equality operator >=
-    * 
-    * @param x the JDFShape object to compare to
-    * @return boolean - true if this >= x  
-    */
-    public boolean isGreaterOrEqual(JDFShape x)
-    {
-        return ((getY()>=x.getY())&&(getX()>=x.getX())&&(getZ()>=x.getZ()));   
-    }
+		for (int i = 0; i < m_numList.size(); i++)
+		{
+			if (!(m_numList.elementAt(i) instanceof Double))
+			{
+				throw new DataFormatException("Data format exception!");
+			}
+		}
+		if (m_numList.size() == 2)
+			m_numList.addElement(new Double(0.0));
+	}
 
-    /**
-    * isLessOrEqual - equality operator <=
-    * 
-    * @param x the JDFShape object to compare to
-    * @return boolean - true if this <= x  
-    */
-    public boolean isLessOrEqual(JDFShape x)
-    {
-        return ((getY()<=x.getY())&&(getX()<=x.getX())&&(getZ()<=x.getZ()));
-    }
-        
-    /**
-    * isGreater - equality operator >
-    * 
-    * @param x the JDFShape object to compare to
-    * @return boolean - true if this > x  
-    */
-    public boolean isGreater(JDFShape x)
-    {
-        return (!equals(x)&&(getY()>=x.getY())&&(getX()>=x.getX())&&(getZ()>=x.getZ()));   
-    }
-    
-    /**
-    * isLess - equality operator <
-    * 
-    * @param x the JDFShape object to compare to
-    * @return boolean - true if this < x  
-    */
-    public boolean isLess(JDFShape x)
-    {
-        return (!equals(x)&&(getY()<=x.getY())&&(getX()<=x.getX())&&(getZ()<=x.getZ()));
-    }
-       
-       
-    /**
-     * getHeight - returns the height
-     * @deprecated use getY - attention height and width were accidentally exchanged
-     * 
-     * @return double - the height
-     */
-    public double getHeight()
-    {
-        return getY();
-    }
-    
-    /**
-     * getY - returns the width
-     *
-     * @return double - the width
-     * 
-     */
-    public double getY()
-    {
-        return ((Double)m_numList.elementAt(1)).doubleValue();
-    }
-   
-    /**
-     * setHeight - sets the height
-     * @deprecated attention height and width were accidentally exchanged
-     * @param height the height
-     */
-    public void setHeight(double height)
-    {
-       setY(height);
-    }
-    /**
-     * setY - sets the height
-     *
-     * @param height the height
-     */
-    public void setY(double y)
-    {
-        m_numList.set(1, new Double(y));
-    }
+	/**
+	 * equals - returns true if both JDFShapes are equal, otherwise false
+	 * 
+	 * @return boolean - true if equal otherwise false
+	 */
+	public boolean equals(Object other)
+	{
+		if (this == other)
+		{
+			return true;
+		}
+		if (other == null)
+		{
+			return false;
+		}
+		if (!other.getClass().equals(getClass()))
+		{
+			return false;
+		}
 
-    /**
-     * getWidth - returns the width 
-     * @deprecated use getX - attention height and width were accidentally exchanged
-     * @return double - the width
-     * 
-     */
-    public double getWidth()
-    {
-        return getX();
-    }
-    /**
-     * getX - returns the width
-     *
-     * @return double - the width
-     * 
-     */
-    public double getX()
-    {
-        return ((Double)m_numList.elementAt(0)).doubleValue();
-    }
+		JDFShape shape = (JDFShape) other;
 
-    /**
-     * setWidth - sets the x value
-     *
-     * @param x the width
-     */
-    public void setX(double x)
-    {
-        m_numList.set(0, new Double(x));
-    }
-    /**
-     * setWidth - sets the width
-     * @deprecated attention height and width were accidentally exchanged
-     * @param width the width
-     */
-    public void setWidth(double width)
-    {
-        setX(width);
-    }
+		return (Math.abs(this.getY() - shape.getY()) <= EPSILON) && (Math.abs(this.getX() - shape.getX()) <= EPSILON)
+				&& (Math.abs(this.getZ() - shape.getZ()) <= EPSILON);
+	}
 
-    /**
-     * getLength - returns the length
-     * @deprecated use getZ
-     * @return double - the length
-     */
-    public double getLength()
-    {
-        return getZ();
-    }
-    /**
-     * getZ - returns the z value
-     *
-     * @return double - the length
-     */
-    public double getZ()
-    {
-        return ((Double)m_numList.elementAt(2)).doubleValue();
-    }
+	/**
+	 * hashCode complements equals() to fulfill the equals/hashCode contract
+	 */
+	public int hashCode()
+	{
+		return HashUtil.hashCode(super.hashCode(), this.toString());
+	}
 
-    /**
-     * setLength - sets the length
-     * @deprecated
-     * @param length the length
-     */
-    public void setLength(double length)
-    {
-        setZ(length);
-    }
+	/**
+	 * isGreaterOrEqual - equality operator >=
+	 * 
+	 * @param x the JDFShape object to compare to
+	 * @return boolean - true if this >= x
+	 */
+	public boolean isGreaterOrEqual(JDFShape x)
+	{
+		return ((getY() >= x.getY()) && (getX() >= x.getX()) && (getZ() >= x.getZ()));
+	}
 
-    /**
-     * set the z value
-     * @param z
-     */
-    public void setZ(double z)
-    {
-        m_numList.set(2, new Double(z));
-    }
+	/**
+	 * isLessOrEqual - equality operator <=
+	 * 
+	 * @param x the JDFShape object to compare to
+	 * @return boolean - true if this <= x
+	 */
+	public boolean isLessOrEqual(JDFShape x)
+	{
+		return ((getY() <= x.getY()) && (getX() <= x.getX()) && (getZ() <= x.getZ()));
+	}
+
+	/**
+	 * isGreater - equality operator >
+	 * 
+	 * @param x the JDFShape object to compare to
+	 * @return boolean - true if this > x
+	 */
+	public boolean isGreater(JDFShape x)
+	{
+		return (!equals(x) && (getY() >= x.getY()) && (getX() >= x.getX()) && (getZ() >= x.getZ()));
+	}
+
+	/**
+	 * isLess - equality operator <
+	 * 
+	 * @param x the JDFShape object to compare to
+	 * @return boolean - true if this < x
+	 */
+	public boolean isLess(JDFShape x)
+	{
+		return (!equals(x) && (getY() <= x.getY()) && (getX() <= x.getX()) && (getZ() <= x.getZ()));
+	}
+
+	/**
+	 * getHeight - returns the height
+	 * 
+	 * @deprecated use getY - attention height and width were accidentally exchanged
+	 * 
+	 * @return double - the height
+	 */
+	public double getHeight()
+	{
+		return getY();
+	}
+
+	/**
+	 * getY - returns the width
+	 * 
+	 * @return double - the width
+	 * 
+	 */
+	public double getY()
+	{
+		return ((Double) m_numList.elementAt(1)).doubleValue();
+	}
+
+	/**
+	 * setHeight - sets the height
+	 * 
+	 * @deprecated attention height and width were accidentally exchanged
+	 * @param height the height
+	 */
+	public void setHeight(double height)
+	{
+		setY(height);
+	}
+
+	/**
+	 * setY - sets the height
+	 * 
+	 * @param height the height
+	 */
+	public void setY(double y)
+	{
+		m_numList.set(1, new Double(y));
+	}
+
+	/**
+	 * getWidth - returns the width
+	 * 
+	 * @deprecated use getX - attention height and width were accidentally exchanged
+	 * @return double - the width
+	 * 
+	 */
+	public double getWidth()
+	{
+		return getX();
+	}
+
+	/**
+	 * getX - returns the width
+	 * 
+	 * @return double - the width
+	 * 
+	 */
+	public double getX()
+	{
+		return ((Double) m_numList.elementAt(0)).doubleValue();
+	}
+
+	/**
+	 * setWidth - sets the x value
+	 * 
+	 * @param x the width
+	 */
+	public void setX(double x)
+	{
+		m_numList.set(0, new Double(x));
+	}
+
+	/**
+	 * setWidth - sets the width
+	 * 
+	 * @deprecated attention height and width were accidentally exchanged
+	 * @param width the width
+	 */
+	public void setWidth(double width)
+	{
+		setX(width);
+	}
+
+	/**
+	 * getLength - returns the length
+	 * 
+	 * @deprecated use getZ
+	 * @return double - the length
+	 */
+	public double getLength()
+	{
+		return getZ();
+	}
+
+	/**
+	 * getZ - returns the z value
+	 * 
+	 * @return double - the length
+	 */
+	public double getZ()
+	{
+		return ((Double) m_numList.elementAt(2)).doubleValue();
+	}
+
+	/**
+	 * setLength - sets the length
+	 * 
+	 * @deprecated
+	 * @param length the length
+	 */
+	public void setLength(double length)
+	{
+		setZ(length);
+	}
+
+	/**
+	 * set the z value
+	 * 
+	 * @param z
+	 */
+	public void setZ(double z)
+	{
+		m_numList.set(2, new Double(z));
+	}
 
 }
-
-

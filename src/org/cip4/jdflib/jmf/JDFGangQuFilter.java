@@ -9,16 +9,10 @@
  Revision history:    ...
  **/
 
-
-
-
-
 package org.cip4.jdflib.jmf;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoGangQuFilter;
-
-
 
 //----------------------------------
 public class JDFGangQuFilter extends JDFAutoGangQuFilter
@@ -27,48 +21,43 @@ public class JDFGangQuFilter extends JDFAutoGangQuFilter
 
 	/**
 	 * Constructor for JDFGangQuFilter
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFGangQuFilter(
-			CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFGangQuFilter(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFGangQuFilter
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFGangQuFilter(
-			CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI,
-			String qualifiedName)
+	public JDFGangQuFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFGangQuFilter
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFGangQuFilter(
-			CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI,
-			String qualifiedName,
-			String myLocalName)
+	public JDFGangQuFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
-	
+
 	/**
 	 * toString()
+	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoGangQuFilter#toString()
 	 * @return String
 	 */
@@ -77,6 +66,3 @@ public class JDFGangQuFilter extends JDFAutoGangQuFilter
 		return "JDFGangQuFilter[  --> " + super.toString() + " ]";
 	}
 }
-
-
-

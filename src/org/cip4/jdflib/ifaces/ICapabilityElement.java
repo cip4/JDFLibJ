@@ -77,61 +77,62 @@ import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap.EnumAvailability;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 
 /**
- * interface that connects the devcap classes that implement vapabilities, i.e. 
- * state and devcap
+ * interface that connects the devcap classes that implement vapabilities, i.e. state and devcap
+ * 
  * @author prosirai
- *
+ * 
  */
 public interface ICapabilityElement
 {
-    /**
-     * get the ModulePool that contains ModuleCap elements referenced by this
-     * @return JDFModulePool the pool
-     */    
-    public JDFModulePool getModulePool();
-    /**
-     * get the ModulePool that contains ModuleCap elements referenced by this
-     * create one, if it does not exist
-     * 
-     * @return JDFModulePool the pool
-     */    
-    public JDFModulePool getCreateModulePool();
+	/**
+	 * get the ModulePool that contains ModuleCap elements referenced by this
+	 * 
+	 * @return JDFModulePool the pool
+	 */
+	public JDFModulePool getModulePool();
 
-    /**
-     * get VString attribute ModuleRefs
-     * @return VString the value of the attribute
-     */
-    public VString getModuleRefs();
+	/**
+	 * get the ModulePool that contains ModuleCap elements referenced by this create one, if it does not exist
+	 * 
+	 * @return JDFModulePool the pool
+	 */
+	public JDFModulePool getCreateModulePool();
 
-    /**
-     * getAvailability - gets typesafe enumerated attribute <code>Availability</code>
-     *
-     * @return EnumAvailability: the enumeration value of the attribute
-     */
-    public EnumAvailability getAvailability();
-    
-    /**
-     * append moduleRef to moduleRefs, if it does not exist, set the availability to
-     * module and ensure that the appropriate modulecap exists
-     * @return {@link JDFModuleCap} the Modulecap that id refers tp
-     * @return EnumAvailability: the enumeration value of the attribute
-     */
-    public JDFModuleCap appendModuleRef(String id);
-    
-    /**
-     * @param module
-     */
-    public void setAvailability(EnumAvailability module);
-    
-    /**
-     * get the type of evaluation that is appropriate for this ICapabilityElement
-     * @return EnumTerm the type of evaluation
-     */
-    public abstract EnumTerm getEvaluationType();
-    
-    public VString getNamePathVector();
-    
+	/**
+	 * get VString attribute ModuleRefs
+	 * 
+	 * @return VString the value of the attribute
+	 */
+	public VString getModuleRefs();
 
+	/**
+	 * getAvailability - gets typesafe enumerated attribute <code>Availability</code>
+	 * 
+	 * @return EnumAvailability: the enumeration value of the attribute
+	 */
+	public EnumAvailability getAvailability();
 
+	/**
+	 * append moduleRef to moduleRefs, if it does not exist, set the availability to module and ensure that the
+	 * appropriate modulecap exists
+	 * 
+	 * @return {@link JDFModuleCap} the Modulecap that id refers tp
+	 * @return EnumAvailability: the enumeration value of the attribute
+	 */
+	public JDFModuleCap appendModuleRef(String id);
+
+	/**
+	 * @param module
+	 */
+	public void setAvailability(EnumAvailability module);
+
+	/**
+	 * get the type of evaluation that is appropriate for this ICapabilityElement
+	 * 
+	 * @return EnumTerm the type of evaluation
+	 */
+	public abstract EnumTerm getEvaluationType();
+
+	public VString getNamePathVector();
 
 }

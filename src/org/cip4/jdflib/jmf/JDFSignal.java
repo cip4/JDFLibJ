@@ -91,99 +91,97 @@ import org.cip4.jdflib.core.VElement;
  */
 public class JDFSignal extends JDFAutoSignal
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFSignal
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    public JDFSignal(
-            CoreDocumentImpl myOwnerDocument,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFSignal
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	public JDFSignal(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFSignal
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    public JDFSignal(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFSignal
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFSignal(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFSignal
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    public JDFSignal(
-            CoreDocumentImpl myOwnerDocument,
-            String myNamespaceURI,
-            String qualifiedName,
-            String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-    
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFSignal[  --> " + super.toString() + " ]";
-    }
-    
-    /**
-     * converts a response to a signal that can be sent individually
-     * 
-     * @param response the response to convert
-     * @return true if successful
-     * @deprecated use the two parameter varianz
-     */
-    public boolean convertResponse(JDFResponse response)
-    {
-       return convertResponse(response, null);
-    }
-    /**
-     * converts a response to a signal that can be sent individually
-     * 
-     * @param response the response to convert
-     * @return true if successful
-     */
-    public boolean convertResponse(JDFResponse response, JDFQuery q){
-        if(response==null) 
-            return false;
-        setAttributes(response);
-        VElement elements = response.getChildElementVector(null,null,null, true, 0,true);
-        for(int i=0;i<elements.size();i++){
-            JDFElement element=(JDFElement) elements.elementAt(i);
-            copyElement(element,null);
-        }
-        if(q!=null)
-        {
-            VElement v=q.getChildElementVector(null, null, null, true, 0,true);
-            for(int i=0;i<v.size();i++)
-            {
-                final KElement item = v.item(i);
-                if(item instanceof JDFSubscription)
-                    continue;
-                copyElement(item, null);
-            }
-        }
-        setType(response.getType()); // also fix xsi:type
-        return true;
-    }
+	/**
+	 * Constructor for JDFSignal
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	public JDFSignal(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFSignal[  --> " + super.toString() + " ]";
+	}
+
+	/**
+	 * converts a response to a signal that can be sent individually
+	 * 
+	 * @param response the response to convert
+	 * @return true if successful
+	 * @deprecated use the two parameter varianz
+	 */
+	public boolean convertResponse(JDFResponse response)
+	{
+		return convertResponse(response, null);
+	}
+
+	/**
+	 * converts a response to a signal that can be sent individually
+	 * 
+	 * @param response the response to convert
+	 * @return true if successful
+	 */
+	public boolean convertResponse(JDFResponse response, JDFQuery q)
+	{
+		if (response == null)
+			return false;
+		setAttributes(response);
+		VElement elements = response.getChildElementVector(null, null, null, true, 0, true);
+		for (int i = 0; i < elements.size(); i++)
+		{
+			JDFElement element = (JDFElement) elements.elementAt(i);
+			copyElement(element, null);
+		}
+		if (q != null)
+		{
+			VElement v = q.getChildElementVector(null, null, null, true, 0, true);
+			for (int i = 0; i < v.size(); i++)
+			{
+				final KElement item = v.item(i);
+				if (item instanceof JDFSubscription)
+					continue;
+				copyElement(item, null);
+			}
+		}
+		setType(response.getType()); // also fix xsi:type
+		return true;
+	}
 }

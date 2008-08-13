@@ -38,7 +38,7 @@
  *
  * Usage of this software in commercial products is subject to restrictions. For
  * details please consult info@cip4.org.
-  *
+ *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -74,12 +74,10 @@
  @COPYRIGHT Heidelberger Druckmaschinen AG, 2006. ALL RIGHTS RESERVED
  **/
 
-
 package org.cip4.jdflib.jmf;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoGangCmdFilter;
-
 
 public class JDFGangCmdFilter extends JDFAutoGangCmdFilter
 {
@@ -87,48 +85,43 @@ public class JDFGangCmdFilter extends JDFAutoGangCmdFilter
 
 	/**
 	 * Constructor for JDFGangCmdFilter
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFGangCmdFilter(
-			CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFGangCmdFilter(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFGangCmdFilter
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFGangCmdFilter(
-			CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI,
-			String qualifiedName)
+	public JDFGangCmdFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
-	
+
 	/**
 	 * Constructor for JDFGangCmdFilter
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFGangCmdFilter(
-			CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI,
-			String qualifiedName,
-			String myLocalName)
+	public JDFGangCmdFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
-	
+
 	/**
 	 * toString()
+	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoGangCmdFilter#toString()
 	 * @return String
 	 */
@@ -137,6 +130,3 @@ public class JDFGangCmdFilter extends JDFAutoGangCmdFilter
 		return "JDFGangCmdFilter[  --> " + super.toString() + " ]";
 	}
 }
-
-
-

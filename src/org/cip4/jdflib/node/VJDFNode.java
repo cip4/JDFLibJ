@@ -12,63 +12,68 @@ package org.cip4.jdflib.node;
 import java.util.Vector;
 
 /**
- *
- * Description:      This class represents a vector of JDFNode
- *
- * @author          Torsten Kaehlert
- *
- * @version 1.0     2002-01-24
+ * 
+ * Description: This class represents a vector of JDFNode
+ * 
+ * @author Torsten Kaehlert
+ * 
+ * @version 1.0 2002-01-24
  * @deprecated use Vector instead
- *
+ * 
  */
 public class VJDFNode
 {
-    //**************************************** Attributes ******************************************
-    private Vector m_vec = new Vector();
+	// **************************************** Attributes
+	// ******************************************
+	private Vector m_vec = new Vector();
 
-    /**
-     * constructor
-     */
-    public VJDFNode()
-    {
-        //default super constructor
-    }
-    
-    /**
-     * constructor
-     * @param v
-     */
-    public VJDFNode(Vector v)
-    {
-        m_vec = v;
-    }
+	/**
+	 * constructor
+	 */
+	public VJDFNode()
+	{
+		// default super constructor
+	}
 
-    /**
-     * Method size.
-     * @return int
-     */
-    public int size()
-    {
-        return m_vec.size();
-    }
+	/**
+	 * constructor
+	 * 
+	 * @param v
+	 */
+	public VJDFNode(Vector v)
+	{
+		m_vec = v;
+	}
 
-    /**
-     * Method elementAt: get JDFNode at <code>index</code>
-     * @param index the index
-     * @return JDFNode: the JDFNode
-     */
-    public JDFNode elementAt(int index)
-    {
-        return (JDFNode) m_vec.elementAt(index);
-    }
+	/**
+	 * Method size.
+	 * 
+	 * @return int
+	 */
+	public int size()
+	{
+		return m_vec.size();
+	}
 
-    /**
-     * add a JDFNode
-     * @param node the node to add
-     */
-    public void addElement(JDFNode node)
-    {
-        m_vec.addElement(node);
-    }
-	
+	/**
+	 * Method elementAt: get JDFNode at <code>index</code>
+	 * 
+	 * @param index the index
+	 * @return JDFNode: the JDFNode
+	 */
+	public JDFNode elementAt(int index)
+	{
+		return (JDFNode) m_vec.elementAt(index);
+	}
+
+	/**
+	 * add a JDFNode
+	 * 
+	 * @param node the node to add
+	 */
+	public void addElement(JDFNode node)
+	{
+		m_vec.addElement(node);
+	}
+
 }

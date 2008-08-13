@@ -68,16 +68,15 @@
  *
  */
 /**
-==========================================================================
-class JDFQueueSubmissionParams extends JDFResource
-==========================================================================
-@COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001
-ALL RIGHTS RESERVED
-@Author: sabjon@topmail.de   using a code generator
-Warning! very preliminary test version. Interface subject to change without prior notice!
-Revision history:    ...
-**/
-
+ ==========================================================================
+ class JDFQueueSubmissionParams extends JDFResource
+ ==========================================================================
+ @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001
+ ALL RIGHTS RESERVED
+ @Author: sabjon@topmail.de   using a code generator
+ Warning! very preliminary test version. Interface subject to change without prior notice!
+ Revision history:    ...
+ **/
 
 package org.cip4.jdflib.jmf;
 
@@ -88,140 +87,129 @@ import org.cip4.jdflib.auto.JDFAutoQueueSubmissionParams;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFDoc;
 
-
-
 //----------------------------------
-    public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams
+public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructor for JDFQueueSubmissionParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    public JDFQueueSubmissionParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFQueueSubmissionParams
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	public JDFQueueSubmissionParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    public JDFQueueSubmissionParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFQueueSubmissionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    public JDFQueueSubmissionParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	public JDFQueueSubmissionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * toString()
-     * return String
-     */
-    public String toString()
-    {
-        return "JDFQueueSubmissionParams[  --> " + super.toString() + " ]";
-    }
-    
-    /**
-     * add a queueentry to a queue based on the parameters of this
-     * you can get the new queueentry by {@link}getQueueEntry(0) on the response
-     * 
-     * @param theQueue the queue to submit to, note that the queue IS modified by this call
-     * @param responseIn the jmf that serves as a container for the new response
-     * 
-     * @return the response jmf to the submission message
-     */
-    public JDFResponse addEntry(JDFQueue theQueue, JDFJMF responseIn)
-    {
-        JDFCommand command=(JDFCommand)getParentNode_KElement();
-        JDFJMF jmf=command.createResponse();
-        JDFResponse resp=jmf.getResponse(0);
-        if(responseIn!=null)
-        {
-            resp = (JDFResponse) responseIn.copyElement(resp, null);
-        }
-        if(theQueue==null)
-        {
-            resp.setErrorText("No Queue specified");
-            resp.setReturnCode(2); // 
-            return resp;
-        } 
-        
-        if(!theQueue.canAccept())
-        {
-            resp.setReturnCode(112); //  
-            resp.copyElement(theQueue, null);
-            return resp;
-        }
-        JDFQueueEntry qe=theQueue.createQueueEntry(getHold());
-         
-        final String copyAtts[]=new String[]{
-               AttributeName.GANGNAME, AttributeName.GANGPOLICY};
-        
-        for(int i=0;i<copyAtts.length;i++)
-        if(hasAttribute(copyAtts[i]))
-            qe.copyAttribute(copyAtts[i], this, null, null, null);
-        
-        // TODO more attributes e.g prev. next...
-        if(hasAttribute(AttributeName.PRIORITY))
-            qe.setPriority(getPriority()); // calls the automated function, therfore not in the list above
+	/**
+	 * toString() return String
+	 */
+	public String toString()
+	{
+		return "JDFQueueSubmissionParams[  --> " + super.toString() + " ]";
+	}
 
-        
-        resp.copyElement(theQueue, null);
-        resp.copyElement(qe, null);
-        
-        return resp;
-    }
-    
-    /**
-     * returns the jdf doc referenced by url
-     * @return the document
-     */
-    public JDFDoc getURLDoc()
-    {
-        return super.getURLDoc();
-    }
-    
-    /**
-     * sets ReturnURL to the value of url
-     * @param url
-     */
-    public void setReturnURL(URL url)
-    {
-        super.setReturnURL(url==null ? null : url.toExternalForm());
-    }
-    /**
-     * sets ReturnURL to the value of url
-     * @param url
-     */
-    public void setReturnJMF(URL url)
-    {
-        super.setReturnJMF(url==null ? null : url.toExternalForm());
-    }
+	/**
+	 * add a queueentry to a queue based on the parameters of this you can get the new queueentry by {@link}
+	 * getQueueEntry(0) on the response
+	 * 
+	 * @param theQueue the queue to submit to, note that the queue IS modified by this call
+	 * @param responseIn the jmf that serves as a container for the new response
+	 * 
+	 * @return the response jmf to the submission message
+	 */
+	public JDFResponse addEntry(JDFQueue theQueue, JDFJMF responseIn)
+	{
+		JDFCommand command = (JDFCommand) getParentNode_KElement();
+		JDFJMF jmf = command.createResponse();
+		JDFResponse resp = jmf.getResponse(0);
+		if (responseIn != null)
+		{
+			resp = (JDFResponse) responseIn.copyElement(resp, null);
+		}
+		if (theQueue == null)
+		{
+			resp.setErrorText("No Queue specified");
+			resp.setReturnCode(2); // 
+			return resp;
+		}
+
+		if (!theQueue.canAccept())
+		{
+			resp.setReturnCode(112); //  
+			resp.copyElement(theQueue, null);
+			return resp;
+		}
+		JDFQueueEntry qe = theQueue.createQueueEntry(getHold());
+
+		final String copyAtts[] = new String[] { AttributeName.GANGNAME, AttributeName.GANGPOLICY };
+
+		for (int i = 0; i < copyAtts.length; i++)
+			if (hasAttribute(copyAtts[i]))
+				qe.copyAttribute(copyAtts[i], this, null, null, null);
+
+		// TODO more attributes e.g prev. next...
+		if (hasAttribute(AttributeName.PRIORITY))
+			qe.setPriority(getPriority()); // calls the automated function,
+		// therfore not in the list above
+
+		resp.copyElement(theQueue, null);
+		resp.copyElement(qe, null);
+
+		return resp;
+	}
+
+	/**
+	 * returns the jdf doc referenced by url
+	 * 
+	 * @return the document
+	 */
+	public JDFDoc getURLDoc()
+	{
+		return super.getURLDoc();
+	}
+
+	/**
+	 * sets ReturnURL to the value of url
+	 * 
+	 * @param url
+	 */
+	public void setReturnURL(URL url)
+	{
+		super.setReturnURL(url == null ? null : url.toExternalForm());
+	}
+
+	/**
+	 * sets ReturnURL to the value of url
+	 * 
+	 * @param url
+	 */
+	public void setReturnJMF(URL url)
+	{
+		super.setReturnJMF(url == null ? null : url.toExternalForm());
+	}
 
 }
-
-
-

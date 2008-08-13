@@ -82,74 +82,80 @@ package org.cip4.jdflib.util;
 import org.apache.commons.lang.enums.ValuedEnum;
 
 /**
- * class with utilities for enums
- * also simple object utils
+ * class with utilities for enums also simple object utils
+ * 
  * @author prosirai
- *
+ * 
  */
 public class EnumUtil
 {
-    /**
-     * get the lower of two enum values, null is lowest
-     * @param e1
-     * @param e2
-     * @return the lower of the two values
-     */
-    public static ValuedEnum min(ValuedEnum e1, ValuedEnum e2)
-    {
-        if(e1==null || e2==null)
-            return null;
-        return e1.getValue()<e2.getValue() ? e1 : e2;
-    }
-    /**
-     * get the higher of two enum values, null is lowest
-     * @param e1
-     * @param e2
-     * @return the higher of the two values
-     */
-    public static ValuedEnum max(ValuedEnum e1, ValuedEnum e2)
-    {
-        if(e1==null) 
-            return e2;
-        if(e2==null) 
-            return e1;
-        return e1.getValue()>e2.getValue() ? e1 : e2;
-    }
-    /**
-     * null save convenience name getter
-     * @param en the enum to get the name
-     * @return
-     */
-    public static String getName(ValuedEnum en)
-    {
-        return en==null ? "null" : en.getName();
-    }
-    /**
-     * checks whether the value of an enum is less than another
-     * 
-     * @param a the first enum; if this is smaller we return true
-     * @param b the second enum
-     * @return boolean a is < b
-     */
-    public static boolean aLessThanB(ValuedEnum a, ValuedEnum b)
-    {
-        int aa=a==null?-1 : a.getValue();
-        int bb=b==null?-1 : b.getValue();
-        return aa<bb;
-    }
-    /**
-     * checks whether the value of an enum is less or equal to another
-     * 
-     * @param a the first enum; if this is smaller we return true
-     * @param b the second enum
-     * @return boolean a is < b
-     */
-    public static boolean aLessEqualsThanB(ValuedEnum a, ValuedEnum b)
-    {
-        int aa=a==null?-1 : a.getValue();
-        int bb=b==null?-1 : b.getValue();
-        return aa<=bb;
-    }
-    
- 
+	/**
+	 * get the lower of two enum values, null is lowest
+	 * 
+	 * @param e1
+	 * @param e2
+	 * @return the lower of the two values
+	 */
+	public static ValuedEnum min(ValuedEnum e1, ValuedEnum e2)
+	{
+		if (e1 == null || e2 == null)
+			return null;
+		return e1.getValue() < e2.getValue() ? e1 : e2;
+	}
+
+	/**
+	 * get the higher of two enum values, null is lowest
+	 * 
+	 * @param e1
+	 * @param e2
+	 * @return the higher of the two values
+	 */
+	public static ValuedEnum max(ValuedEnum e1, ValuedEnum e2)
+	{
+		if (e1 == null)
+			return e2;
+		if (e2 == null)
+			return e1;
+		return e1.getValue() > e2.getValue() ? e1 : e2;
+	}
+
+	/**
+	 * null save convenience name getter
+	 * 
+	 * @param en the enum to get the name
+	 * @return
+	 */
+	public static String getName(ValuedEnum en)
+	{
+		return en == null ? "null" : en.getName();
+	}
+
+	/**
+	 * checks whether the value of an enum is less than another
+	 * 
+	 * @param a the first enum; if this is smaller we return true
+	 * @param b the second enum
+	 * @return boolean a is < b
+	 */
+	public static boolean aLessThanB(ValuedEnum a, ValuedEnum b)
+	{
+		int aa = a == null ? -1 : a.getValue();
+		int bb = b == null ? -1 : b.getValue();
+		return aa < bb;
+	}
+
+	/**
+	 * checks whether the value of an enum is less or equal to another
+	 * 
+	 * @param a the first enum; if this is smaller we return true
+	 * @param b the second enum
+	 * @return boolean a is < b
+	 */
+	public static boolean aLessEqualsThanB(ValuedEnum a, ValuedEnum b)
+	{
+		int aa = a == null ? -1 : a.getValue();
+		int bb = b == null ? -1 : b.getValue();
+		return aa <= bb;
+	}
+
 }

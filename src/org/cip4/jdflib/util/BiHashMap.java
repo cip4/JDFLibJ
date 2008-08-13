@@ -82,90 +82,95 @@ package org.cip4.jdflib.util;
 import java.util.HashMap;
 import java.util.Map;
 
-
 /**
  * Bidirectional HashMap utility class
+ * 
  * @author prosirai
- *
+ * 
  */
 public class BiHashMap
 {
 
-    private HashMap mapKey;
-    private HashMap mapVal;
-    
-    public BiHashMap()
-    {
-        mapKey=new HashMap();
-        mapVal=new HashMap();
-    }
-    
-    /**
-     * get the value for key
-     */
-    public Object getValue(Object key)
-    {
-        return mapKey.get(key);
-    }
-    /**
-     * get the value for key
-     */
-    public Object getKey(Object val)
-    {
-        return mapVal.get(val);
-    }
-    
-    /**
-     * remove key and its associated value
-     */
-    public void remove(Object key)
-    {
-        Object val=mapKey.get(key);
-        mapVal.remove(val);
-        mapKey.remove(key);
-    }
-    /**
-     * get the value for key
-     */
-    public void put(Object key, Object val)
-    {
-        Object o=mapKey.get(key);
-        if(o!=null)
-            mapVal.remove(o);
-        o=mapVal.get(val);
-        if(o!=null)
-            mapKey.remove(o);
+	private HashMap mapKey;
+	private HashMap mapVal;
 
-        mapVal.put(val,key);
-        mapKey.put(key,val);
-    }
-    
-    /**
-     * get the value for key
-     */
-    public void clear()
-    {
-        mapVal.clear();
-        mapKey.clear();
-    }
+	public BiHashMap()
+	{
+		mapKey = new HashMap();
+		mapVal = new HashMap();
+	}
 
-    /**
-     * get a reference to the internal key map
-     * @return
-     */
-    public Map getKeyMap()
-    {
-        return mapKey;
-    }
-    
-    /**
-     * get a reference to the internal value map
-     * @return
-     */
-    public Map getValMap()
-    {
-        return mapVal;
-    }
-//////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * get the value for key
+	 */
+	public Object getValue(Object key)
+	{
+		return mapKey.get(key);
+	}
+
+	/**
+	 * get the value for key
+	 */
+	public Object getKey(Object val)
+	{
+		return mapVal.get(val);
+	}
+
+	/**
+	 * remove key and its associated value
+	 */
+	public void remove(Object key)
+	{
+		Object val = mapKey.get(key);
+		mapVal.remove(val);
+		mapKey.remove(key);
+	}
+
+	/**
+	 * get the value for key
+	 */
+	public void put(Object key, Object val)
+	{
+		Object o = mapKey.get(key);
+		if (o != null)
+			mapVal.remove(o);
+		o = mapVal.get(val);
+		if (o != null)
+			mapKey.remove(o);
+
+		mapVal.put(val, key);
+		mapKey.put(key, val);
+	}
+
+	/**
+	 * get the value for key
+	 */
+	public void clear()
+	{
+		mapVal.clear();
+		mapKey.clear();
+	}
+
+	/**
+	 * get a reference to the internal key map
+	 * 
+	 * @return
+	 */
+	public Map getKeyMap()
+	{
+		return mapKey;
+	}
+
+	/**
+	 * get a reference to the internal value map
+	 * 
+	 * @return
+	 */
+	public Map getValMap()
+	{
+		return mapVal;
+	}
+	// //////////////////////////////////////////////////////////////////////////
+	// //////
 
 }

@@ -9,16 +9,10 @@
  Revision history:    ...
  **/
 
-
-
-
-
 package org.cip4.jdflib.jmf;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoNotificationDef;
-
-
 
 //----------------------------------
 public class JDFNotificationDef extends JDFAutoNotificationDef
@@ -27,48 +21,43 @@ public class JDFNotificationDef extends JDFAutoNotificationDef
 
 	/**
 	 * Constructor for JDFNotificationDef
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFNotificationDef(
-			CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFNotificationDef(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFNotificationDef
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFNotificationDef(
-			CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI,
-			String qualifiedName)
+	public JDFNotificationDef(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFNotificationDef
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFNotificationDef(
-			CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI,
-			String qualifiedName,
-			String myLocalName)
+	public JDFNotificationDef(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
-	
+
 	/**
 	 * toString()
+	 * 
 	 * @return String
 	 */
 	public String toString()
@@ -76,6 +65,3 @@ public class JDFNotificationDef extends JDFAutoNotificationDef
 		return "JDFNotificationDef[  --> " + super.toString() + " ]";
 	}
 }
-
-
-

@@ -86,368 +86,371 @@ import org.cip4.jdflib.util.HashUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- * This abstract class is the representation of a number list (Integer and Double object). Intern
- * these objects are collected in a vector and there are several methods to provide an access to
- * the data.
+ * This abstract class is the representation of a number list (Integer and Double object). Intern these objects are
+ * collected in a vector and there are several methods to provide an access to the data.
  */
 public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 {
-    //**************************************** Constructors ****************************************
-    protected Vector m_numList = new Vector();
-    
-    //**************************************** Constructors ****************************************
-    /**
-     * constructs an empty number list
-     */
-    public JDFNumList()
-    {
-        //default super constructor
-    }
-    
-    /**
-     * constructor - constructs a number list with the given size and sets all values set to
-     * 0.0 Double
-     *
-     * @param size the given size
-     */
-    public JDFNumList(int size)
-    {
-        for (int i = 0; i < size; i++)
-        {
-            m_numList.addElement(new Double(0.0));
-        }
-    }
-    
-    /**
-     * same as Vector.clear()
-     *
-     */
-    public void clear()
-    {
-        m_numList.clear();
-    }
-    
-    /**
-     * constructor - constructs a number list with the given vector
-     *
-     * @param v a vector with number list objects
-     *
-     * @throws DataFormatException - if the Vector has not a valid format
-     */
-    public JDFNumList(Vector v) throws DataFormatException
-    {
-        this.m_numList = v;
-        isValid();
-    }
-    
-    /**
-     * constructor - constructs a number list with the given String; if the sub class is of type
-     * JDFIntegerList all object will be Integer in all other cases the object will be a Double
-     *
-     * @param sl the given String
-     *
-     * @throws DataFormatException - if the String has not a valid format
-     */
-    public JDFNumList(String sl) throws DataFormatException
-    {
-        VString v=StringUtil.tokenize(sl, null, false);
-        final int size = v.size();
-        for(int i=0;i<size;i++)
-        {
-            String s=v.stringAt(i);
-            if(!StringUtil.isNumber(s))
-                throw new DataFormatException("JDFNumList: bad numeric value: "+s);
-            if (this instanceof JDFIntegerList)
-            {
-                m_numList.addElement(new Integer(StringUtil.parseInt(s,0)));
-            }
-            else
-            {
-                m_numList.addElement(new Double(StringUtil.parseDouble(s,0)));
-            }
-        }
-        isValid();
-    }
+	// **************************************** Constructors
+	// ****************************************
+	protected Vector m_numList = new Vector();
 
-    /**
-     * constructor - constructs a number list with a given JDFNumList
-     *
-     * @param nl the given number list
-     *
-     * @throws DataFormatException - if the String has not a valid format
-     */
-    public JDFNumList(JDFNumList nl) throws DataFormatException
-    {
-        this(nl.copyNumList());
-    }
-    
-    //**************************************** Methods *********************************************
-    /**
-     * getString - returns all values whitespace separated in a String
-     *
-     * @return String
-     * @deprecated 060418 - use toString
-     */
-    public String getString()
-    {
-        return toString();
-    }
-    
-    /**
-     * toString - returns the JDFNumList as a String
-     *
-     * @return String - the JDFNumList as a String
-     */
-    public String toString()
-    {
-        StringBuffer sb = new StringBuffer();
-        
-        for (int i = 0; i < m_numList.size(); i++)
-        {
-            if(i>0)
-            {
-                sb.append(JDFConstants.BLANK);
-            }
-            
-            Object o=m_numList.elementAt(i);
-            if(o instanceof Double)
-            {                
-                sb.append(StringUtil.formatDouble(((Double) o).doubleValue()));
-            }
-            else if(o instanceof Integer)
-            {                
-                sb.append(StringUtil.formatInteger(((Integer) o).intValue()));
-            }
-            else
-            {
-                sb.append(o.toString());
-            }
-        }
-        
-        return sb.toString();
-    }
-    
-    /**
-     * getNumberList - returns the object in a JDFNumberList format
-     *
-     * @return JDFNumberList - the object in JDFNumberList format
-     */
-    protected JDFNumberList getNumberList()
-    {
-        JDFNumberList nl = null;
-        
-        try
-        {
-            nl = new JDFNumberList(m_numList);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        
-        return nl;
-    }
-    
-    /**
-     * equals - compares two JDFNumList elements
-     *
-     * @return boolean - true if equal otherwise false
-     */
-    public boolean equals(Object other)
-    {
-        if (this == other)
-        {
-            return true;
-        }
-        if (other == null)
-        {
-            return false;
-        }
-        if (!other.getClass().equals(getClass()))
-        {
-            return false;
-        }
-        
-        boolean retVal = false;
-        
-        JDFNumList jdfNumList = (JDFNumList) other;        
-        final int size = size();
-        if (size == jdfNumList.size())
-        {
-            retVal = true;            
-            for (int i = 0; i < size && retVal == true; i++)
-            {
-                double d1 =doubleAt(i);
-                double d2 = jdfNumList.doubleAt(i);
-                retVal = StringUtil.isEqual(d1 ,d2);
-            }
-        }
-        
-        return retVal;
-    }
-    
-    /**
-     * hashCode complements equals() to fulfill the equals/hashCode contract
-     */
-    public int hashCode()
-    {
-        return HashUtil.hashCode(0, this.m_numList);
-    }
-    
-    /**
-     * size - returns the size of the list
-     *
-     * @return int - the size of the list
-     */
-    public int size()
-    {
-        return m_numList.size();
-    }
-    
-    /**
-     * getElementAt - returns the element at the ith position
-     * @param i the index
-     * @return Object - the range object at the given position, null if i is out of range
-     */
-    public Object elementAt(int i)
-    {
-        final Vector numList = m_numList;
-        if(i<0)
-            i=numList.size()+i;
-        
-        if(i<0 || i>=numList.size())
-            return null;
-        return numList.elementAt(i);
-    }
-    /**
-     * getElementAt - returns the element at the ith position
-     *
-     * @param i the index
-     * @return double - the double value given position, 0.0 if out of range
-     */
-    public double doubleAt(int i)
-    {
-        Object o=elementAt(i);
-        if(o instanceof Integer)
-            return ((Integer)o).doubleValue();
-        if(o instanceof Double)
-            return ((Double)o).doubleValue();
-        return 0;
-    }
-    
-    /**
-     * copyNumList - returns a clone of the numList vector
-     *
-     * @return Vector - the clone of the numList vector
-     */
-    public Vector copyNumList()
-    {
-        return (Vector)m_numList.clone();
-    }
-    
-    /**
-     * clone - Returns a clone of this instance
-     *
-     * @return Object - the clone
-     * @throws CloneNotSupportedException 
-     */
-    public Object clone() throws CloneNotSupportedException 
-    {
-        JDFNumList num = (JDFNumList) super.clone();
-        num.m_numList = ((Vector   )(m_numList.clone()));
-        return num;
-    }
-    
-    
-    /**
-     * removeElementAt - removes the element at the given position
-     * 
-     * @param i the position from where to remove the element
-     *
-     * @return boolean - true if successfull otherwise false
-     */
-    public boolean removeElementAt( int i)
-    {
-        if(i<0)
-            i=i+size();
-        
-        if ((i < size()) && (i >= 0))
-        {
-            m_numList.removeElementAt(i);
-            return true;
-        }
-        
-        return false;
-    }
-    
-    /**
-     * replaceElementAt - replaces the element at the given position with the given object
-     *
-     * @param obj the object
-     * @param i   the given position
-     * @return boolean - true if successfull otherwise false
-     */
-    public boolean replaceElementAt(Object obj, int i)
-    {
-        if(i<0)
-            i=i+size();
-        if ((i < m_numList.size()) && (i > -1))
-        {
-            m_numList.removeElementAt(i);
-            m_numList.insertElementAt(obj, i);
-            return true;
-        }
-        
-        return false;
-    }    
-    
-    /**
-     * isValid - true if all instances are Double or Integer types
-     *
-     * @return boolean - true if all instances are Double or Integer types
-     */
-    public abstract void isValid() throws DataFormatException;
-    
-    
-    /**
-     * scale all values of this by factor
-     * @param factor
-     */
-    public void scale (double factor)
-    {
-        for (int i = 0; i < m_numList.size(); i++)
-        {
-            double number = doubleAt(i)* factor;
-            m_numList.setElementAt(new Double(number), i);
-        }
-    }
+	// **************************************** Constructors
+	// ****************************************
+	/**
+	 * constructs an empty number list
+	 */
+	public JDFNumList()
+	{
+		// default super constructor
+	}
 
-    /**
-     * return true if this contains the Double or Integer object o
-     * @param o
-     * @return
-     */
-    public boolean contains (Object o)
-    {
-        return m_numList.contains(o);
-     }
-    
-    /**
-     * return true if this contains the Double or Integer object o
-     * @param o
-     * @return
-     */
-    public boolean contains (JDFNumList l)
-    {
-        if(l==null)
-            return false;
-        for(int i=0;i<l.size();i++)
-        {
-            if(contains(l.elementAt(i)))
-                return true;
-        }
-        return false;
-     }
-    
-    
+	/**
+	 * constructor - constructs a number list with the given size and sets all values set to 0.0 Double
+	 * 
+	 * @param size the given size
+	 */
+	public JDFNumList(int size)
+	{
+		for (int i = 0; i < size; i++)
+		{
+			m_numList.addElement(new Double(0.0));
+		}
+	}
+
+	/**
+	 * same as Vector.clear()
+	 * 
+	 */
+	public void clear()
+	{
+		m_numList.clear();
+	}
+
+	/**
+	 * constructor - constructs a number list with the given vector
+	 * 
+	 * @param v a vector with number list objects
+	 * 
+	 * @throws DataFormatException - if the Vector has not a valid format
+	 */
+	public JDFNumList(Vector v) throws DataFormatException
+	{
+		this.m_numList = v;
+		isValid();
+	}
+
+	/**
+	 * constructor - constructs a number list with the given String; if the sub class is of type JDFIntegerList all
+	 * object will be Integer in all other cases the object will be a Double
+	 * 
+	 * @param sl the given String
+	 * 
+	 * @throws DataFormatException - if the String has not a valid format
+	 */
+	public JDFNumList(String sl) throws DataFormatException
+	{
+		VString v = StringUtil.tokenize(sl, null, false);
+		final int size = v.size();
+		for (int i = 0; i < size; i++)
+		{
+			String s = v.stringAt(i);
+			if (!StringUtil.isNumber(s))
+				throw new DataFormatException("JDFNumList: bad numeric value: " + s);
+			if (this instanceof JDFIntegerList)
+			{
+				m_numList.addElement(new Integer(StringUtil.parseInt(s, 0)));
+			}
+			else
+			{
+				m_numList.addElement(new Double(StringUtil.parseDouble(s, 0)));
+			}
+		}
+		isValid();
+	}
+
+	/**
+	 * constructor - constructs a number list with a given JDFNumList
+	 * 
+	 * @param nl the given number list
+	 * 
+	 * @throws DataFormatException - if the String has not a valid format
+	 */
+	public JDFNumList(JDFNumList nl) throws DataFormatException
+	{
+		this(nl.copyNumList());
+	}
+
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * getString - returns all values whitespace separated in a String
+	 * 
+	 * @return String
+	 * @deprecated 060418 - use toString
+	 */
+	public String getString()
+	{
+		return toString();
+	}
+
+	/**
+	 * toString - returns the JDFNumList as a String
+	 * 
+	 * @return String - the JDFNumList as a String
+	 */
+	public String toString()
+	{
+		StringBuffer sb = new StringBuffer();
+
+		for (int i = 0; i < m_numList.size(); i++)
+		{
+			if (i > 0)
+			{
+				sb.append(JDFConstants.BLANK);
+			}
+
+			Object o = m_numList.elementAt(i);
+			if (o instanceof Double)
+			{
+				sb.append(StringUtil.formatDouble(((Double) o).doubleValue()));
+			}
+			else if (o instanceof Integer)
+			{
+				sb.append(StringUtil.formatInteger(((Integer) o).intValue()));
+			}
+			else
+			{
+				sb.append(o.toString());
+			}
+		}
+
+		return sb.toString();
+	}
+
+	/**
+	 * getNumberList - returns the object in a JDFNumberList format
+	 * 
+	 * @return JDFNumberList - the object in JDFNumberList format
+	 */
+	protected JDFNumberList getNumberList()
+	{
+		JDFNumberList nl = null;
+
+		try
+		{
+			nl = new JDFNumberList(m_numList);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		return nl;
+	}
+
+	/**
+	 * equals - compares two JDFNumList elements
+	 * 
+	 * @return boolean - true if equal otherwise false
+	 */
+	public boolean equals(Object other)
+	{
+		if (this == other)
+		{
+			return true;
+		}
+		if (other == null)
+		{
+			return false;
+		}
+		if (!other.getClass().equals(getClass()))
+		{
+			return false;
+		}
+
+		boolean retVal = false;
+
+		JDFNumList jdfNumList = (JDFNumList) other;
+		final int size = size();
+		if (size == jdfNumList.size())
+		{
+			retVal = true;
+			for (int i = 0; i < size && retVal == true; i++)
+			{
+				double d1 = doubleAt(i);
+				double d2 = jdfNumList.doubleAt(i);
+				retVal = StringUtil.isEqual(d1, d2);
+			}
+		}
+
+		return retVal;
+	}
+
+	/**
+	 * hashCode complements equals() to fulfill the equals/hashCode contract
+	 */
+	public int hashCode()
+	{
+		return HashUtil.hashCode(0, this.m_numList);
+	}
+
+	/**
+	 * size - returns the size of the list
+	 * 
+	 * @return int - the size of the list
+	 */
+	public int size()
+	{
+		return m_numList.size();
+	}
+
+	/**
+	 * getElementAt - returns the element at the ith position
+	 * 
+	 * @param i the index
+	 * @return Object - the range object at the given position, null if i is out of range
+	 */
+	public Object elementAt(int i)
+	{
+		final Vector numList = m_numList;
+		if (i < 0)
+			i = numList.size() + i;
+
+		if (i < 0 || i >= numList.size())
+			return null;
+		return numList.elementAt(i);
+	}
+
+	/**
+	 * getElementAt - returns the element at the ith position
+	 * 
+	 * @param i the index
+	 * @return double - the double value given position, 0.0 if out of range
+	 */
+	public double doubleAt(int i)
+	{
+		Object o = elementAt(i);
+		if (o instanceof Integer)
+			return ((Integer) o).doubleValue();
+		if (o instanceof Double)
+			return ((Double) o).doubleValue();
+		return 0;
+	}
+
+	/**
+	 * copyNumList - returns a clone of the numList vector
+	 * 
+	 * @return Vector - the clone of the numList vector
+	 */
+	public Vector copyNumList()
+	{
+		return (Vector) m_numList.clone();
+	}
+
+	/**
+	 * clone - Returns a clone of this instance
+	 * 
+	 * @return Object - the clone
+	 * @throws CloneNotSupportedException
+	 */
+	public Object clone() throws CloneNotSupportedException
+	{
+		JDFNumList num = (JDFNumList) super.clone();
+		num.m_numList = ((Vector) (m_numList.clone()));
+		return num;
+	}
+
+	/**
+	 * removeElementAt - removes the element at the given position
+	 * 
+	 * @param i the position from where to remove the element
+	 * 
+	 * @return boolean - true if successfull otherwise false
+	 */
+	public boolean removeElementAt(int i)
+	{
+		if (i < 0)
+			i = i + size();
+
+		if ((i < size()) && (i >= 0))
+		{
+			m_numList.removeElementAt(i);
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * replaceElementAt - replaces the element at the given position with the given object
+	 * 
+	 * @param obj the object
+	 * @param i the given position
+	 * @return boolean - true if successfull otherwise false
+	 */
+	public boolean replaceElementAt(Object obj, int i)
+	{
+		if (i < 0)
+			i = i + size();
+		if ((i < m_numList.size()) && (i > -1))
+		{
+			m_numList.removeElementAt(i);
+			m_numList.insertElementAt(obj, i);
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * isValid - true if all instances are Double or Integer types
+	 * 
+	 * @return boolean - true if all instances are Double or Integer types
+	 */
+	public abstract void isValid() throws DataFormatException;
+
+	/**
+	 * scale all values of this by factor
+	 * 
+	 * @param factor
+	 */
+	public void scale(double factor)
+	{
+		for (int i = 0; i < m_numList.size(); i++)
+		{
+			double number = doubleAt(i) * factor;
+			m_numList.setElementAt(new Double(number), i);
+		}
+	}
+
+	/**
+	 * return true if this contains the Double or Integer object o
+	 * 
+	 * @param o
+	 * @return
+	 */
+	public boolean contains(Object o)
+	{
+		return m_numList.contains(o);
+	}
+
+	/**
+	 * return true if this contains the Double or Integer object o
+	 * 
+	 * @param o
+	 * @return
+	 */
+	public boolean contains(JDFNumList l)
+	{
+		if (l == null)
+			return false;
+		for (int i = 0; i < l.size(); i++)
+		{
+			if (contains(l.elementAt(i)))
+				return true;
+		}
+		return false;
+	}
+
 }

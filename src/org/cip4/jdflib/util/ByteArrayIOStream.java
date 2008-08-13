@@ -83,53 +83,55 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
-
 /**
- * Shared input / outputStream class
- * write once, read many...
+ * Shared input / outputStream class write once, read many...
  * 
  * @author rainer prosi
- *
+ * 
  */
 public class ByteArrayIOStream extends ByteArrayOutputStream
 {
 
+	/**
+	 * creates an empty input output stream class
+	 */
+	public ByteArrayIOStream()
+	{
+		super();
+	}
 
-    /**
-     * creates an empty input output stream class
-     */
-    public ByteArrayIOStream()
-    {
-        super();
-    }
+	/**
+	 * creates a sized input output stream class
+	 * 
+	 * @param i the size of the stream
+	 */
+	public ByteArrayIOStream(int i)
+	{
+		super(i);
+	}
 
-    /**
-     * creates a sized input output stream class
-     * @param i the size of the stream
-     */
-    public ByteArrayIOStream(int i)
-    {
-        super(i);
-    }
-    /**
-     * creates a sized input output stream class
-     * @param b the buffer to use (is NOT copied)
-     */
-    public ByteArrayIOStream(byte[] b)
-    {
-        super();
-        buf=b;
-    }
+	/**
+	 * creates a sized input output stream class
+	 * 
+	 * @param b the buffer to use (is NOT copied)
+	 */
+	public ByteArrayIOStream(byte[] b)
+	{
+		super();
+		buf = b;
+	}
 
-    /**
-     * gets an inputstream based on the current byte contents
-     * @return
-     */
-    public InputStream getInputStream()
-    {
-        ByteArrayInputStream is=new ByteArrayInputStream(buf,0,size());
-        return is;
-    }
-    //////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * gets an inputstream based on the current byte contents
+	 * 
+	 * @return
+	 */
+	public InputStream getInputStream()
+	{
+		ByteArrayInputStream is = new ByteArrayInputStream(buf, 0, size());
+		return is;
+	}
+	// //////////////////////////////////////////////////////////////////////////
+	// //////
 
 }

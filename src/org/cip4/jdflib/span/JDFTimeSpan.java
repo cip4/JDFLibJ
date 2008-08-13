@@ -92,146 +92,134 @@ import org.cip4.jdflib.util.JDFDate;
  */
 public class JDFTimeSpan extends JDFSpanBase
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Constructor for JDFTimeSpan
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 */
+	public JDFTimeSpan(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFTimeSpan
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFTimeSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFTimeSpan
-     * @param ownerDocument
-     * @param qualifiedName
-     */
-     public JDFTimeSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFTimeSpan
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 */
+	public JDFTimeSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUAL, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREFERRED, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.RANGE, 0x33333333, AttributeInfo.EnumAttributeType.DateTimeRange, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFERRANGE, 0x33333111, AttributeInfo.EnumAttributeType.DateTimeRange, null, null);
+	}
 
-    /**
-     * Constructor for JDFTimeSpan
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     */
-    public JDFTimeSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    /**
-     * Constructor for JDFTimeSpan
-     * @param ownerDocument
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param localName
-     */
-    public JDFTimeSpan(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static 
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUAL,                        0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.PREFERRED,                     0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.RANGE,                         0x33333333, AttributeInfo.EnumAttributeType.DateTimeRange, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFERRANGE,                    0x33333111, AttributeInfo.EnumAttributeType.DateTimeRange, null, null);
-     }
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		return "JDFTimeSpan[ --> " + super.toString() + " ]";
+	}
 
-    protected AttributeInfo getTheAttributeInfo() 
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	public void setActual(JDFDate value)
+	{
+		setAttribute(AttributeName.ACTUAL, value.getDateTimeISO(), JDFConstants.EMPTYSTRING);
+	}
 
-    //**************************************** Methods *********************************************
-    /**
-     * toString
-     *
-     * @return String
-     */
-    public String toString()
-    {
-        return "JDFTimeSpan[ --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return null if no Actual Attribute or data format error
+	 */
+	public JDFDate getActual()
+	{
+		try
+		{
+			return new JDFDate(getAttribute(AttributeName.ACTUAL, null, JDFConstants.EMPTYSTRING));
+		}
+		catch (DataFormatException dfe)
+		{
+			return null;
+		}
+	}
 
-    
-    public void setActual(JDFDate value)
-    {
-        setAttribute(AttributeName.ACTUAL, value.getDateTimeISO(), JDFConstants.EMPTYSTRING);
-    }
+	public void setPreferred(JDFDate value)
+	{
+		setAttribute(AttributeName.PREFERRED, value.getDateTimeISO(), JDFConstants.EMPTYSTRING);
+	}
 
-    /**
-     * @return null if no Actual Attribute or data format error
-     */
-    public JDFDate getActual()
-    {
-        try
-        {
-            return new JDFDate(getAttribute(AttributeName.ACTUAL, null, JDFConstants.EMPTYSTRING));
-        }
-        catch(DataFormatException dfe)
-        {
-            return null;
-        }
-    }
-    
-    public void setPreferred(JDFDate value)
-    {
-        setAttribute(AttributeName.PREFERRED, value.getDateTimeISO(), JDFConstants.EMPTYSTRING);
-    }
+	/**
+	 * @return null if no Preferred Attribute or data format error
+	 */
+	public JDFDate getPreferred()
+	{
+		try
+		{
+			return new JDFDate(getAttribute(AttributeName.PREFERRED, null, JDFConstants.EMPTYSTRING));
+		}
+		catch (DataFormatException dfe)
+		{
+			return null;
+		}
+	}
 
-    /**
-     * @return null if no Preferred Attribute or data format error
-     */
-    public JDFDate getPreferred()
-    {
-        try
-        {
-            return new JDFDate(getAttribute(AttributeName.PREFERRED, null, JDFConstants.EMPTYSTRING));
-        }
-        catch(DataFormatException dfe)
-        {
-            return null;
-        }
-    }
-    
-    
-    public void setRange( JDFDateTimeRange value)
-    {
+	public void setRange(JDFDateTimeRange value)
+	{
 		setAttribute(AttributeName.RANGE, value.toString());
 	}
-    
- 
-    /**
-     * @return null if no Range Attribute or data format error
-     */
-    public JDFDateTimeRange getRange()
-    {
-        try
-        {
-        	return new JDFDateTimeRange(getAttribute(AttributeName.RANGE));
-        }
-        catch(DataFormatException dfe)
-        {
-            return null;
-        }
+
+	/**
+	 * @return null if no Range Attribute or data format error
+	 */
+	public JDFDateTimeRange getRange()
+	{
+		try
+		{
+			return new JDFDateTimeRange(getAttribute(AttributeName.RANGE));
+		}
+		catch (DataFormatException dfe)
+		{
+			return null;
+		}
 	}
-       
-    
-    
-    public boolean init()
-    {
-        boolean b = super.init();
-        setDataType(EnumDataType.TimeSpan);
-        return b;
-    }
+
+	public boolean init()
+	{
+		boolean b = super.init();
+		setDataType(EnumDataType.TimeSpan);
+		return b;
+	}
 }

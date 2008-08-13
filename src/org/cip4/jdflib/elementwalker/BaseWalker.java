@@ -75,78 +75,82 @@ import org.cip4.jdflib.core.KElement;
  */
 /**
  * @author prosirai
- *
+ * 
  */
 public abstract class BaseWalker implements IWalker, Comparable<BaseWalker>
 {
-    // depth is calculated automatically from the class hierarchy and used to sort walkers from explicit to abstract
-    protected int depth;
-    
-    /**
-     * the mother routine for walking....
-     *  (non-Javadoc)
-     * @see org.cip4.jdflib.elementwalker.IWalker#walk(java.lang.Object)
-     */
-    public boolean walk(KElement e)
-    {
-        return true;
-    }
-    /**
-     * 
-     * @param factory
-     */
-    public BaseWalker(BaseWalkerFactory factory)
-    {
-        depth=0;
-        addToFactory(factory);
-    }
+	// depth is calculated automatically from the class hierarchy and used to
+	// sort walkers from explicit to abstract
+	protected int depth;
 
-    /**
-     * this is the check whether or not to use this walker for a given element
-     * should be overwritten
-     * 
-     * @param e the element to check
-     * @return
-     */
-    public boolean matches(KElement e)
-    {
-        return true;
-    }
-    /**
-     * @param factory
-     */
-    private void addToFactory(BaseWalkerFactory factory)
-    {
-        Class cBase=BaseWalker.class;
-        Class c=this.getClass().getSuperclass();
-        // calculate the nuber of intermediate classes
-        while(cBase.isAssignableFrom(c))
-        {
-            c=c.getSuperclass();
-            depth++;
-        }
-        factory.addWalker(this);        
-    }
-    /**
-     * @return
-     */
-    public int getDepth()
-    {
-        return depth;
-    }
-    
-    /**
-     * note the reverse order - high depth means up in list so that abstract classes get checked later
-     *  (non-Javadoc)
-     * @see java.lang.Comparable#compareTo(java.lang.Object)
-     */
-    public int compareTo(BaseWalker arg0)
-    {        
-        return  (arg0==null ? 0 : arg0.depth) -depth;
-    }
-    @Override
-    public String toString()
-    {
-        return "[ BaseWalker depth="+depth;
-    } 
+	/**
+	 * the mother routine for walking.... (non-Javadoc)
+	 * 
+	 * @see org.cip4.jdflib.elementwalker.IWalker#walk(java.lang.Object)
+	 */
+	public boolean walk(KElement e)
+	{
+		return true;
+	}
+
+	/**
+	 * 
+	 * @param factory
+	 */
+	public BaseWalker(BaseWalkerFactory factory)
+	{
+		depth = 0;
+		addToFactory(factory);
+	}
+
+	/**
+	 * this is the check whether or not to use this walker for a given element should be overwritten
+	 * 
+	 * @param e the element to check
+	 * @return
+	 */
+	public boolean matches(KElement e)
+	{
+		return true;
+	}
+
+	/**
+	 * @param factory
+	 */
+	private void addToFactory(BaseWalkerFactory factory)
+	{
+		Class cBase = BaseWalker.class;
+		Class c = this.getClass().getSuperclass();
+		// calculate the nuber of intermediate classes
+		while (cBase.isAssignableFrom(c))
+		{
+			c = c.getSuperclass();
+			depth++;
+		}
+		factory.addWalker(this);
+	}
+
+	/**
+	 * @return
+	 */
+	public int getDepth()
+	{
+		return depth;
+	}
+
+	/**
+	 * note the reverse order - high depth means up in list so that abstract classes get checked later (non-Javadoc)
+	 * 
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	public int compareTo(BaseWalker arg0)
+	{
+		return (arg0 == null ? 0 : arg0.depth) - depth;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "[ BaseWalker depth=" + depth;
+	}
 }

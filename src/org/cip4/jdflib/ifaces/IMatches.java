@@ -71,17 +71,17 @@
 package org.cip4.jdflib.ifaces;
 
 /**
- * @author prosirai
- *
+ * @author Rainer Prosi
+ * 
  */
 public interface IMatches
 {
-    /**
-     * returns true if subset is a subset of this
-     * i.e. subset contains either equivalent elements or null and no non-matching elemenets
-     * matches(null) allways returns true
-     * @param subset
-     * @return
-     */
-    public boolean matches(Object subset);
+	/**
+	 * returns true if subset is a subset of this i.e. subset contains either equivalent elements or null and no
+	 * non-matching elemenets matches(null) always returns true
+	 * 
+	 * @param subset
+	 * @return true if it matches
+	 */
+	public boolean matches(Object subset);
 }

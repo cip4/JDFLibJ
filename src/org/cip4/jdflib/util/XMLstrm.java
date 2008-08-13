@@ -1,20 +1,19 @@
-
 /**
-==========================================================================
-class XMLstrm.java
-    created 2001-03-14
-==========================================================================
+ ==========================================================================
+ class XMLstrm.java
+ created 2001-03-14
+ ==========================================================================
 
-            COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001
-                ALL RIGHTS RESERVED
+ COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001
+ ALL RIGHTS RESERVED
 
-                Author: sabjon@topmail.de
+ Author: sabjon@topmail.de
 
-            Warning! very preliminary test version. Interface subject to change without prior notice!
+ Warning! very preliminary test version. Interface subject to change without prior notice!
 
-        Revision history:
+ Revision history:
 
-**/
+ **/
 
 package org.cip4.jdflib.util;
 
@@ -53,66 +52,65 @@ import org.cip4.jdflib.core.JDFConstants;
 public class XMLstrm
 {
 
-    public String toString()
-    {
-        return "XMLstrm[ ]";
-    }
+	public String toString()
+	{
+		return "XMLstrm[ ]";
+	}
 
-    //static boolean doEscapes;
+	// static boolean doEscapes;
 
-    /**
-     * the routines defined here serialize dom to xml<br>
-     * mainly copied from xerces
-     */
+	/**
+	 * the routines defined here serialize dom to xml<br>
+	 * mainly copied from xerces
+	 */
 
-    //  public KString DOM2String(/*DOM*/String name){ return new KString( name.rawBuffer(),name.length());};
+	// public KString DOM2String(/*DOM*/String name){ return new KString(
+	// name.rawBuffer(),name.length());};
+	// //////////////////////////////////////////////////////////////////////////
+	// /
+	// note that the following routine is NOT thread-safe!!!
+	// this is private and must be recreated
+	// routine to indent xml output, called by the << operators. intitialize
+	// with a call of bSet=true.
+	private static char sm_buf[];
+	private static int sm_ifirst = 0;
+	private static int sm_indent = 0;
+	private static boolean sm_doNext = true;
 
-    /////////////////////////////////////////////////////////////////////////////
-    // note that the following routine is NOT thread-safe!!!
+	/**
+	 * @param iInc
+	 * @param bSet
+	 * @return default: XMLIndent(iInc, false)
+	 */
+	public static String xmlIndent(int iInc, boolean bSet)
+	{
+		if (bSet)
+		{
+			if (iInc < 0)
+			{
+				sm_doNext = true;
+			}
+			else
+			{
+				sm_indent = iInc;
+			}
+			return "0";
+		}
 
-    // this is private and must be recreated
-    // routine to indent xml output, called by the << operators. intitialize with a call of bSet=true.
+		sm_ifirst = Math.max(sm_ifirst + sm_indent * iInc, 0);
+		if (!sm_doNext)
+		{
+			return JDFConstants.EMPTYSTRING;
+		}
 
-    private static char sm_buf[];
-    private static int sm_ifirst = 0;
-    private static int sm_indent = 0;
-    private static boolean sm_doNext = true;
+		for (int i = 1; i <= sm_ifirst; i++)
+		{
+			sm_buf[i - 1] = ' '; // if(ifirst>0) memset(buf,' ',ifirst);
+			// //?????????
+		}
 
-    /**
-     * @param iInc
-     * @param bSet
-     * @return
-     * 
-     * default: XMLIndent(iInc, false)
-     */
-    public static String xmlIndent(int iInc, boolean bSet)
-    {
-        if (bSet)
-        {
-            if (iInc < 0)
-            {
-                sm_doNext = true;
-            }
-            else
-            {
-                sm_indent = iInc;
-            }
-            return "0";
-        }
-        
-        sm_ifirst = Math.max(sm_ifirst + sm_indent * iInc, 0);
-        if (!sm_doNext)
-        {
-            return JDFConstants.EMPTYSTRING;
-        }
-        
-        for (int i = 1; i <= sm_ifirst; i++)
-        {
-            sm_buf[i - 1] = ' '; //if(ifirst>0) memset(buf,' ',ifirst);    //?????????
-        }
-        
-        sm_buf[sm_ifirst] = 0;
-        sm_doNext = false;
-        return new String(sm_buf);
-    }
+		sm_buf[sm_ifirst] = 0;
+		sm_doNext = false;
+		return new String(sm_buf);
+	}
 }
