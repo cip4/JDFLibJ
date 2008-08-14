@@ -100,7 +100,7 @@ public class JDFAttributeMap implements Map
 {
 	// **************************************** Attributes
 	// ******************************************
-	private Hashtable m_hashTable = new Hashtable();
+	private Hashtable<String, String> m_hashTable = new Hashtable<String, String>();
 
 	// **************************************** Constructors
 	// ****************************************
@@ -212,7 +212,7 @@ public class JDFAttributeMap implements Map
 	 */
 	public String get(String key)
 	{
-		return (String) m_hashTable.get(key);
+		return m_hashTable.get(key);
 	}
 
 	/**
@@ -347,25 +347,21 @@ public class JDFAttributeMap implements Map
 	 */
 	public boolean overlapMap(JDFAttributeMap subMap)
 	{
-		if (subMap == null)
+		if (subMap == null || subMap.size() == 0)
 			return true;
 
-		final Enumeration subMapEnum = subMap.keys();
+		final Enumeration<String> subMapEnum = subMap.keys();
 
 		while (subMapEnum.hasMoreElements())
 		{
-			final String subMapKey = (String) subMapEnum.nextElement();
+			final String subMapKey = subMapEnum.nextElement();
 			final String subMapVal = subMap.get(subMapKey);
 			if (KElement.isWildCard(subMapVal))
 				continue;
 
-			final String hashTableVal = this.get(subMapKey);
-			if (hashTableVal != null && !hashTableVal.equals(subMapVal))
-			{
+			if (!subMapVal.equals(get(subMapKey)))
 				return false;
-			}
 		}
-
 		return true;
 	}
 
@@ -622,7 +618,7 @@ public class JDFAttributeMap implements Map
 			key = ((ValuedEnum) key).getName();
 		if (value instanceof ValuedEnum)
 			value = ((ValuedEnum) value).getName();
-		return m_hashTable.put(key, value);
+		return m_hashTable.put((String) key, (String) value);
 	}
 
 	/**

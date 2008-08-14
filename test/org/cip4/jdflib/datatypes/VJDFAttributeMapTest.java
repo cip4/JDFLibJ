@@ -80,8 +80,15 @@ package org.cip4.jdflib.datatypes;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.VString;
 
+/**
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
+ */
 public class VJDFAttributeMapTest extends JDFTestCaseBase
 {
+	/**
+	 * tests clone
+	 */
 	public void testClone()
 	{
 		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
@@ -95,9 +102,11 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 		assertEquals(v, v2);
 		m1.put("a3", "a4");
 		assertNotSame("modification did not migrate!", v, v2);
-
 	}
 
+	/**
+	 * tests subMap()
+	 */
 	public void testSubMap()
 	{
 		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
@@ -114,9 +123,51 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 		assertTrue(v.subMap(m3));
 		m3.put("a3", "v5");
 		assertFalse(v.subMap(m3));
-
 	}
 
+	/**
+	 * tests OvelapsMap for individual maps
+	 */
+	public void testOverlapsMap()
+	{
+		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		m1.put("a2", "v2");
+		JDFAttributeMap m2 = new JDFAttributeMap(m1);
+		m2.put("a2", "v3");
+		VJDFAttributeMap v = new VJDFAttributeMap();
+		v.add(m1);
+		v.add(m2);
+		assertTrue(v.overlapsMap(m1));
+		assertFalse(v.overlapsMap(new JDFAttributeMap("a2", "v4")));
+	}
+
+	/**
+	 * tests OvelapsMap for vectors of maps
+	 */
+	public void testOverlapsMapVector()
+	{
+		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		m1.put("a2", "v2");
+		JDFAttributeMap m2 = new JDFAttributeMap(m1);
+		m2.put("a2", "v3");
+		VJDFAttributeMap v = new VJDFAttributeMap();
+		v.add(m1);
+		v.add(m2);
+		VJDFAttributeMap v2 = new VJDFAttributeMap();
+		assertTrue(v.overlapsMap(v2));
+		v2.add(new JDFAttributeMap(m1));
+		assertTrue(v.overlapsMap(v2));
+		v2.add(new JDFAttributeMap("a2", "v4"));
+		assertTrue(v.overlapsMap(v2));
+		v.put("foo", "bar");
+		assertTrue(v.overlapsMap(v2));
+		v2.put("foo", "notbar");
+		assertFalse(v.overlapsMap(v2));
+	}
+
+	/**
+	 * tests addAll
+	 */
 	public void testAddAll()
 	{
 		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
@@ -139,6 +190,9 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * test Unify
+	 */
 	public void testUnify()
 	{
 		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
@@ -178,6 +232,9 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * test Equals()
+	 */
 	public void testEquals()
 	{
 		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
@@ -227,6 +284,9 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 	}
 
 	// /////////////////////////////////////////////////////////////
+	/**
+	 * test reduceMap()
+	 */
 	public void testReduceMap()
 	{
 		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
@@ -244,6 +304,9 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 	}
 
 	// /////////////////////////////////////////////////////////////
+	/**
+	 * test removeKeys()
+	 */
 	public void testRemoveKeys()
 	{
 		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");

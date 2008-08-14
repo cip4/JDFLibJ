@@ -94,6 +94,7 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
@@ -117,6 +118,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFEmployee;
+import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFUsageCounter;
 
@@ -131,6 +133,7 @@ import org.cip4.jdflib.resource.process.JDFUsageCounter;
 public class StatusCounter
 {
 
+	private double percentComplete = 0;
 	protected JDFNode m_Node;
 	private boolean bCompleted = false;
 	private JDFDoc docJMFPhaseTime;
@@ -224,6 +227,7 @@ public class StatusCounter
 		docJMFPhaseTime = null;
 		startDate = new JDFDate();
 		nodeID = null;
+		percentComplete = 0;
 		if (node == null)
 		{
 			setPhase(null, null, EnumDeviceStatus.Idle, null);
@@ -290,6 +294,31 @@ public class StatusCounter
 			if (vLinkAmount[i].linkFitsKey(refID))
 			{
 				return vLinkAmount[i];
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * get the matching LinkAmount out of this
+	 * 
+	 * @param refID the refID, name or usage of the resource of the bag - this MUST match the refID of a ResourceLink
+	 * @return the actual refID of the matching resLink, null if none found or bags is null
+	 */
+	public String getLinkID(String refID)
+	{
+		if (vLinkAmount == null || vLinkAmount.length == 0)
+		{
+			return null;
+		}
+		if (refID == null)
+			refID = getFirstRefID();
+
+		for (int i = 0; i < vLinkAmount.length; i++)
+		{
+			if (vLinkAmount[i].linkFitsKey(refID))
+			{
+				return vLinkAmount[i].rl.getrRef();
 			}
 		}
 		return null;
@@ -393,6 +422,20 @@ public class StatusCounter
 		if (la == null)
 			return;
 		la.addPhase(amount, waste, false);
+		if (amount >= 0)
+			updatePercentComplete(la);
+
+	}
+
+	/**
+	 * updates percentcomplete based on la
+	 * @param la
+	 */
+	private void updatePercentComplete(LinkAmount la)
+	{
+		if (la == null || la.startAmount <= 0 || !la.rl.getrRef().equals(getFirstRefID()))
+			return;
+		percentComplete = la.lastBag.totalAmount / la.startAmount * 100.0;
 	}
 
 	/**
@@ -409,9 +452,14 @@ public class StatusCounter
 		if (la == null)
 			return;
 		if (bWaste)
+		{
 			la.lastBag.totalWaste = amount;
+		}
 		else
+		{
 			la.lastBag.totalAmount = amount;
+			updatePercentComplete(la);
+		}
 	}
 
 	/**
@@ -468,6 +516,14 @@ public class StatusCounter
 		for (int i = 0; i < d.length; i++)
 			d[i] = vLinkAmount[i].getAmount(vLinkAmount[i].lastBag.phaseAmount);
 		return d;
+	}
+
+	/**
+	 * @return the percent completed of the current node
+	 */
+	public double getPercentComplete()
+	{
+		return percentComplete;
 	}
 
 	/**
@@ -584,7 +640,7 @@ public class StatusCounter
 	}
 
 	/**
-	 * @return
+	 * @return JDFJMF the newly created Notification JMF
 	 */
 	private synchronized JDFJMF createNotificationJMF()
 	{
@@ -674,14 +730,17 @@ public class StatusCounter
 	}
 
 	/**
-	 * @param ap
+	 * append resource audits and set output resource to available, if necessary
 	 */
 	private void appendResourceAudits()
 	{
 		if (vLinkAmount != null)
 		{
 			for (int i = 0; i < vLinkAmount.length; i++)
+			{
 				setResourceAudit(vLinkAmount[i].refID, EnumReason.ProcessResult);
+				vLinkAmount[i].updateNodeResource();
+			}
 		}
 	}
 
@@ -847,11 +906,18 @@ public class StatusCounter
 	}
 
 	/**
-	 * @param lastAb
+	 * update all status relevant data in jobphase
+	 * also update percentComplete if we don't have amounts
+	 * 
+	 * @param la
 	 * @param jp
 	 */
 	private void setJobPhaseAmounts(final LinkAmount la, JDFJobPhase jp)
 	{
+		if (jp == null)
+			return;
+		jp.setPercentCompleted(percentComplete);
+
 		if (la == null)
 			return;
 
@@ -883,14 +949,13 @@ public class StatusCounter
 		if (total != 0)
 		{
 			jp.setTotalAmount(total);
-			jp.setPercentCompleted(la.getAmount(la.lastBag.totalAmount) / total * 100.0);
 		}
 	}
 
 	/**
 	 * @param resLink
 	 * @param n : 1=phaseTime, 2=node, 3=resourceinfo
-	 * @return
+	 * @return VElement a vector of resourcelinks
 	 */
 	private VElement getVResLink(int n)
 	{
@@ -1101,17 +1166,18 @@ public class StatusCounter
 		}
 
 		/**
+		 * should the resource be displayed as an integer?
 		 * @param target
+		 * @return true if the resource is an integer type
 		 */
 		private boolean isInteger(final JDFResource target)
 		{
 			return (target instanceof JDFUsageCounter) || (target instanceof JDFMedia)
-					|| (target instanceof JDFComponent);
+					|| (target instanceof JDFExposedMedia) || (target instanceof JDFComponent);
 		}
 
 		/**
-		 * @param lastBag
-		 * @return
+		 * @return the updated reslink
 		 */
 		protected JDFResourceLink updateNodeLink()
 		{
@@ -1157,11 +1223,36 @@ public class StatusCounter
 				}
 			}
 			return nodeLink;
-
 		}
 
 		/**
-		 * @return
+		 * update the output resource to be available
+		 */
+		void updateNodeResource()
+		{
+			final JDFResourceLink nodeLink = m_Node.getLink(0, null, new JDFAttributeMap(AttributeName.RREF, rl.getrRef()), null);
+			if (nodeLink != null && EnumUsage.Output.equals(nodeLink.getUsage()))
+			{
+
+				VElement vRes = nodeLink.getTargetVector(-1);
+				int size = vRes == null ? 0 : vRes.size();
+				for (int i = 0; i < size; i++)
+				{
+					JDFResource r = (JDFResource) vRes.get(i);
+					VElement leaves = r.getLeaves(false);
+					for (int j = 0; j < leaves.size(); j++)
+					{
+						JDFResource rr = (JDFResource) leaves.get(j);
+						VJDFAttributeMap vMap = rr.getPartMapVector(false);
+						if (m_vPartMap != null && m_vPartMap.overlapsMap(vMap))
+							rr.setResStatus(EnumResStatus.Available, true);
+					}
+				}
+			}
+		}
+
+		/**
+		 * @return get a link to dump into a paseTime audit
 		 */
 		protected JDFResourceLink getPhaseTimeLink()
 		{
@@ -1171,7 +1262,7 @@ public class StatusCounter
 		}
 
 		/**
-		 * @return
+		 * @return JDFResourceLink the resource link for a resource audit
 		 */
 		protected JDFResourceLink getResourceAuditLink()
 		{
@@ -1181,7 +1272,7 @@ public class StatusCounter
 		}
 
 		/**
-		 * @return
+		 * @return JDFResourceLink the resource link for a resourceInfo
 		 */
 		protected JDFResourceLink getResourceInfoLink()
 		{
@@ -1276,7 +1367,8 @@ public class StatusCounter
 		}
 
 		/**
-		 * @return
+		 * change the value to integer, if required 
+		 * @return the formatted amount, either as integer or double
 		 */
 		protected double getAmount(double amount)
 		{
@@ -1284,7 +1376,7 @@ public class StatusCounter
 		}
 
 		/**
-		 * @return
+		 * @return the formatted amount, either as integer or double
 		 */
 		protected String formatAmount(double amount)
 		{
@@ -1292,7 +1384,7 @@ public class StatusCounter
 		}
 
 		/**
-		 * @param rl2
+		 * 
 		 */
 		private void cleanAmounts()
 		{
@@ -1517,8 +1609,8 @@ public class StatusCounter
 	}
 
 	/**
-	 * @param resID
-	 * @return
+	 * @param refID the resource ID or name
+	 * @return the planned amount for the resource
 	 */
 	public double getPlannedAmount(String refID)
 	{
@@ -1527,8 +1619,8 @@ public class StatusCounter
 	}
 
 	/**
-	 * @param resID
-	 * @return
+	 * @param refID the resource ID or name
+	 * @return the planned waste for the resource
 	 */
 	public double getPlannedWaste(String refID)
 	{
@@ -1542,6 +1634,24 @@ public class StatusCounter
 	public NodeIdentifier getNodeIDentifier()
 	{
 		return nodeID;
+	}
+
+	/**
+	 * set percentComplete to percent
+	 * @param percent the percentage to set
+	 */
+	public void setPercentComplete(double percent)
+	{
+		percentComplete = percent;
+	}
+
+	/**
+	 * update percentComplete by percent
+	 * @param percent the percentage to increment
+	 */
+	public void updatePercentComplete(double percent)
+	{
+		percentComplete += percent;
 	}
 
 }

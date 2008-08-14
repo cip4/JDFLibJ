@@ -91,11 +91,15 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class JDFAmountPool extends JDFAutoAmountPool
 {
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * static helper class that can be delegated from AmountPool containg classes, e.g. ResourceLink
+	 */
 	public static class AmountPoolHelper
 	{
 
 		/**
-		 * returns the attribute occurence in PartAmount, or the default in the ResourceLink
+		 * returns the attribute occurrence in PartAmount, or the default in the ResourceLink
 		 * 
 		 * @param attrib the attribute name
 		 * @param nameSpaceURI the XML-namespace

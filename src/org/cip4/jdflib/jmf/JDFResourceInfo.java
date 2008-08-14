@@ -74,7 +74,7 @@
  ==========================================================================
  @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001
  ALL RIGHTS RESERVED
- @Author: sabjon@topmail.de   using a code generator
+ @Author sabjon@topmail.de   using a code generator
  Warning! very preliminary test version. Interface subject to change without prior notice!
  Revision history:    ...
  **/
@@ -104,6 +104,10 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.util.StringUtil;
 
+/**
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ * ResourceInfo element class
+ */
 public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolContainer
 {
 	private static final long serialVersionUID = 1L;

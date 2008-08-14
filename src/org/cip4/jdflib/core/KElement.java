@@ -283,6 +283,7 @@ public class KElement extends ElementNSImpl
 
 	/**
 	 * Set this element as dirty
+	 * @param bAttribute if true, only attributes are dirty, else also sub-elements
 	 */
 	public void setDirty(boolean bAttribute)
 	{
@@ -5394,7 +5395,7 @@ public class KElement extends ElementNSImpl
 	/**
 	 * checks wether this has node childs of the stated node type
 	 * 
-	 * @param int nodeType <blockquote>
+	 * @param  nodeType <blockquote>
 	 *        <ul>
 	 *        <li>ELEMENT_NODE = 1 <li>ATTRIBUTE_NODE = 2 <li>TEXT_NODE = 3 <li> CDATA_SECTION_NODE = 4 <li>
 	 *        ENTITY_REFERENCE_NODE = 5 <li> ENTITY_NODE = 6 <li>PROCESSING_INSTRUCTION_NODE = 7 <li> COMMENT_NODE = 8
@@ -5967,7 +5968,7 @@ public class KElement extends ElementNSImpl
 	/**
 	 * gets the n'th child node of nodetype <code>nodeType</code> with n = iPos
 	 * 
-	 * @param int nodeType: the DOM node type to get <blockquote>
+	 * @param nodeType the DOM node type to get <blockquote>
 	 *        <ul>
 	 *        <li>ELEMENT_NODE = 1 <li>ATTRIBUTE_NODE = 2 <li>TEXT_NODE = 3 <li> CDATA_SECTION_NODE = 4 <li>
 	 *        ENTITY_REFERENCE_NODE = 5 <li> ENTITY_NODE = 6 <li>PROCESSING_INSTRUCTION_NODE = 7 <li> COMMENT_NODE = 8
@@ -5975,7 +5976,7 @@ public class KElement extends ElementNSImpl
 	 *        <li> XML_DECL_NODE = 13 </blockquote>
 	 *        </ul>
 	 * 
-	 * @param int iPos: the index of the node with default 0 for the first occurance
+	 * @param  iPos the index of the node with default 0 for the first occurance
 	 * @return KElement: a node that matches the filter, null if iPos is higher then the number of child nodes
 	 */
 	protected Node getChildNode(int nodeType, int iPos)

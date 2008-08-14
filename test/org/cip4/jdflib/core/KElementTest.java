@@ -97,6 +97,11 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.Element;
 
+/**
+ * test class for KElement
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
+ */
 public class KElementTest extends JDFTestCaseBase
 {
 
@@ -115,15 +120,11 @@ public class KElementTest extends JDFTestCaseBase
 	public void testEnumValid()
 	{
 		EnumValidationLevel level = EnumValidationLevel.RecursiveComplete;
-		assertEquals(EnumValidationLevel.NoWarnComplete, EnumValidationLevel
-				.setNoWarning(level, true));
-		assertEquals(EnumValidationLevel.RecursiveComplete, EnumValidationLevel
-				.setNoWarning(level, false));
+		assertEquals(EnumValidationLevel.NoWarnComplete, EnumValidationLevel.setNoWarning(level, true));
+		assertEquals(EnumValidationLevel.RecursiveComplete, EnumValidationLevel.setNoWarning(level, false));
 		level = EnumValidationLevel.RecursiveIncomplete;
-		assertEquals(EnumValidationLevel.NoWarnIncomplete, EnumValidationLevel
-				.setNoWarning(level, true));
-		assertEquals(EnumValidationLevel.RecursiveIncomplete,
-				EnumValidationLevel.setNoWarning(level, false));
+		assertEquals(EnumValidationLevel.NoWarnIncomplete, EnumValidationLevel.setNoWarning(level, true));
+		assertEquals(EnumValidationLevel.RecursiveIncomplete, EnumValidationLevel.setNoWarning(level, false));
 	}
 
 	/*
@@ -132,12 +133,10 @@ public class KElementTest extends JDFTestCaseBase
 	public void testRemoveAttributeStringString()
 	{
 		JDFParser p = new JDFParser();
-		JDFDoc jdfDoc = p
-				.parseFile(sm_dirTestData + "emptyAuthorAttribute.jdf");
+		JDFDoc jdfDoc = p.parseFile(sm_dirTestData + "emptyAuthorAttribute.jdf");
 
 		JDFNode root = (JDFNode) jdfDoc.getRoot();
-		KElement kElem = root.getChildByTagName("Created", null, 0, null,
-				false, true);
+		KElement kElem = root.getChildByTagName("Created", null, 0, null, false, true);
 
 		boolean before = kElem.hasAttribute("Author", null, false);
 		assertTrue("The Attribute 'Author' does not exist", before);
@@ -221,17 +220,14 @@ public class KElementTest extends JDFTestCaseBase
 
 	public void testGetElementById()
 	{
-		String xmlString = "<JDF ID=\"Link20704459_000351\">"
-				+ "<ELEM2 ID=\"Link20704459_000352\">"
-				+ "<ELEM3 ID=\"Link20704459_000353\">" + "<Comment/>"
-				+ "</ELEM3>" + "</ELEM2>" + "</JDF>";
+		String xmlString = "<JDF ID=\"Link20704459_000351\">" + "<ELEM2 ID=\"Link20704459_000352\">"
+				+ "<ELEM3 ID=\"Link20704459_000353\">" + "<Comment/>" + "</ELEM3>" + "</ELEM2>" + "</JDF>";
 
 		for (int i = 0; i < 2; i++)
 		{
 			final JDFParser parser = new JDFParser();
 			if (i == 1) // test both with and withot schema
-				parser.m_SchemaLocation = new File(sm_dirTestSchema + "JDF.xsd")
-						.toURI().toString();
+				parser.m_SchemaLocation = new File(sm_dirTestSchema + "JDF.xsd").toURI().toString();
 			JDFDoc jdfDoc = parser.parseString(xmlString);
 			KElement root = jdfDoc.getRoot();
 
@@ -279,6 +275,27 @@ public class KElementTest extends JDFTestCaseBase
 		assertTrue("same contents", e2.isEqualNode(e));
 	}
 
+	/**
+	 * test memory leaks in replaceElement
+	 */
+	public void testReplaceElementMem()
+	{
+		XMLDoc d = new XMLDoc("root", "www.root.com");
+		KElement e = d.getRoot();
+		KElement ec1 = e.appendElement("c1");
+		long l = d.getDocMemoryUsed();
+		for (int i = 0; i < 100000; i++)
+		{
+			ec1.replaceElement(((XMLDoc) d.clone()).getRoot().getFirstChildElement());
+		}
+		System.gc();
+		long l2 = d.getDocMemoryUsed();
+		assertEquals("memory nice and low", l2, l, 100000);
+	}
+
+	/**
+		 * 
+		 */
 	public void testReplaceElement()
 	{
 		XMLDoc d = new XMLDoc("root", "www.root.com");
@@ -471,9 +488,9 @@ public class KElementTest extends JDFTestCaseBase
 		assertFalse("has foo", e.hasAttribute("foo", null, false));
 		e.removeAttribute("foo", null);
 		e.removeAttribute("foo"); // make sure we have no npe for removing non
-									// existing attrbutes
+		// existing attrbutes
 		e.removeAttribute(""); // make sure we have no npe for removing non
-								// existing attrbutes
+		// existing attrbutes
 
 		e.setAttribute("foo", "bar", "");
 		assertTrue("has foo", e.hasAttribute("foo"));
@@ -484,21 +501,17 @@ public class KElementTest extends JDFTestCaseBase
 
 		e.setAttribute("foo", "bar", JDFConstants.JDFNAMESPACE);
 		assertTrue("has foo", e.hasAttribute("foo"));
-		assertTrue("has foo", e.hasAttribute("foo", JDFConstants.JDFNAMESPACE,
-				false));
+		assertTrue("has foo", e.hasAttribute("foo", JDFConstants.JDFNAMESPACE, false));
 		e.removeAttribute("foo", JDFConstants.JDFNAMESPACE);
 		assertFalse("has foo", e.hasAttribute("foo"));
-		assertFalse("has foo", e.hasAttribute("foo", JDFConstants.JDFNAMESPACE,
-				false));
+		assertFalse("has foo", e.hasAttribute("foo", JDFConstants.JDFNAMESPACE, false));
 
 		e.setAttribute("JDF:foo", "bar", JDFConstants.JDFNAMESPACE);
 		assertTrue("has foo", e.hasAttribute("JDF:foo"));
-		assertTrue("has foo", e.hasAttribute("foo", JDFConstants.JDFNAMESPACE,
-				false));
+		assertTrue("has foo", e.hasAttribute("foo", JDFConstants.JDFNAMESPACE, false));
 		e.removeAttribute("foo", JDFConstants.JDFNAMESPACE);
 		assertFalse("has foo", e.hasAttribute("JDF:foo"));
-		assertFalse("has foo", e.hasAttribute("foo", JDFConstants.JDFNAMESPACE,
-				false));
+		assertFalse("has foo", e.hasAttribute("foo", JDFConstants.JDFNAMESPACE, false));
 
 	}
 
@@ -635,6 +648,9 @@ public class KElementTest extends JDFTestCaseBase
 		assertNull(b.getAttribute("bar", null, null));
 	}
 
+	/**
+	 * test for copyElement
+	 */
 	public void testCopyElement()
 	{
 		XMLDoc d = new XMLDoc("d1", null);
@@ -644,9 +660,27 @@ public class KElementTest extends JDFTestCaseBase
 		KElement e3 = e.copyElement(e2, null);
 		assertNull(e3.getNamespaceURI());
 		assertFalse(d.toString().indexOf("xmlns=\"\"") >= 0);
-
 	}
 
+	/**
+	 * test for copyElement after clone
+	 * check for spurious npes here
+	 */
+	public void testCopyElementClone()
+	{
+		XMLDoc d = new XMLDoc("d1", null);
+		KElement e = d.getRoot();
+		XMLDoc d2 = new XMLDoc("d2", null);
+		for (int i = 0; i < 10000; i++)
+		{
+			KElement e3 = e.copyElement(((XMLDoc) d2.clone()).getRoot(), null);
+			assertNull(e3.getNamespaceURI());
+		}
+	}
+
+	/**
+	 * test
+	 */
 	public void testCopyElements()
 	{
 		XMLDoc d = new XMLDoc("d1", null);
@@ -668,6 +702,9 @@ public class KElementTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * test
+	 */
 	public void testCopyElementNS()
 	{
 		XMLDoc d = new XMLDoc("d1", null);
@@ -696,8 +733,7 @@ public class KElementTest extends JDFTestCaseBase
 		assertNull(a.getAttribute("noThere", null, null));
 		b.setAttribute("noThereA", "b");
 		b.copyAttribute("noThereA", a, null, null, null);
-		assertNull("the existing attribute was removed ", b.getAttribute(
-				"noThereA", null, null));
+		assertNull("the existing attribute was removed ", b.getAttribute("noThereA", null, null));
 		assertNull(a.getAttribute("noThereA", null, null));
 
 		a.setAttribute("foo", "a");
@@ -738,8 +774,7 @@ public class KElementTest extends JDFTestCaseBase
 		root.addNameSpace(myPrefix, docNS);
 
 		// add an element with a (predefined) prefix and no namespace
-		KElement kElem9 = root.appendElement(myPrefix + JDFConstants.COLON
-				+ "MyElementLevel_2", "");
+		KElement kElem9 = root.appendElement(myPrefix + JDFConstants.COLON + "MyElementLevel_2", "");
 		assertTrue(kElem9.getNamespaceURI().equals(docNS));
 		assertTrue(kElem9.getPrefix().equals(myPrefix));
 
@@ -750,47 +785,39 @@ public class KElementTest extends JDFTestCaseBase
 		kElem1.setAttributeNS(docNS, "att1", "attval1");
 
 		// add an element in a namespace
-		KElement kElem = root.appendElement(myPrefix + JDFConstants.COLON
-				+ "MyElement", docNS);
+		KElement kElem = root.appendElement(myPrefix + JDFConstants.COLON + "MyElement", docNS);
 		assertTrue(kElem.getNamespaceURI().equals(docNS));
 		assertTrue(kElem.getPrefix().equals(myPrefix));
 
 		// add an attribute and its value in a namespace
-		kElem.setAttributeNS(docNS, myPrefix + JDFConstants.COLON
-				+ "MyAttribute", "MyValue");
+		kElem.setAttributeNS(docNS, myPrefix + JDFConstants.COLON + "MyAttribute", "MyValue");
 
 		// How to get the element, Version 1
 		KElement kElem2 = root.getElement_KElement("MyElement", docNS, 0);
 
-		String attr = kElem2.getAttribute_KElement("MyAttribute", docNS,
-				"MyDefault");
+		String attr = kElem2.getAttribute_KElement("MyAttribute", docNS, "MyDefault");
 		assertTrue(attr.equals("MyValue"));
 
 		// this is pretty invalid but the ns url takes precedence
-		attr = kElem2.getAttribute_KElement(myPrefix + JDFConstants.COLON
-				+ "MyAttribute", docNS, "MyDefault");
+		attr = kElem2.getAttribute_KElement(myPrefix + JDFConstants.COLON + "MyAttribute", docNS, "MyDefault");
 		assertTrue(attr.equals("MyValue"));
 
 		// this is even more invalid but the ns url takes precedence
-		attr = kElem2.getAttribute_KElement("fnarf" + JDFConstants.COLON
-				+ "MyAttribute", docNS, "MyDefault");
+		attr = kElem2.getAttribute_KElement("fnarf" + JDFConstants.COLON + "MyAttribute", docNS, "MyDefault");
 		assertTrue(attr.equals("MyValue"));
 
 		// How to get the element, Version 2
-		KElement kElem3 = root.getElement_KElement(myPrefix
-				+ JDFConstants.COLON + "MyElement", docNS, 0);
+		KElement kElem3 = root.getElement_KElement(myPrefix + JDFConstants.COLON + "MyElement", docNS, 0);
 
 		attr = kElem3.getAttribute_KElement("MyAttribute", docNS, "MyDefault");
 		assertTrue(attr.equals("MyValue"));
 
-		attr = kElem3.getAttribute_KElement(myPrefix + JDFConstants.COLON
-				+ "MyAttribute", docNS, "MyDefault");
+		attr = kElem3.getAttribute_KElement(myPrefix + JDFConstants.COLON + "MyAttribute", docNS, "MyDefault");
 		assertTrue(attr.equals("MyValue"));
 
 		DocumentJDFImpl doc0 = (DocumentJDFImpl) root.getOwnerDocument();
 
-		Element newChild = doc0.createElementNS(docNS, myPrefix
-				+ JDFConstants.COLON + ElementName.RESOURCELINKPOOL);
+		Element newChild = doc0.createElementNS(docNS, myPrefix + JDFConstants.COLON + ElementName.RESOURCELINKPOOL);
 		root.appendChild(newChild);
 
 		doc.write2File(sm_dirTestDataTemp + "NameSpace.jdf", 0, true);
@@ -802,7 +829,7 @@ public class KElementTest extends JDFTestCaseBase
 		KElement root = doc.getRoot();
 
 		String cip4NameSpaceURI = root.getNamespaceURI(); // "http://www.CIP4.org/JDFSchema_1_1"
-															// ;
+		// ;
 		assertEquals(cip4NameSpaceURI, JDFConstants.JDFNAMESPACE);
 
 		// adding cip4NameSpaceURI a second time as default namespace is ignored
@@ -821,15 +848,9 @@ public class KElementTest extends JDFTestCaseBase
 
 		// adding cip4NameSpaceURI with different prefixes using setAttribute is
 		// allowed
-		root.setAttribute(
-				JDFConstants.XMLNS + JDFConstants.COLON + cip4Prefix1,
-				cip4NameSpaceURI);
-		root.setAttribute(
-				JDFConstants.XMLNS + JDFConstants.COLON + cip4Prefix2,
-				cip4NameSpaceURI);
-		root.setAttribute(
-				JDFConstants.XMLNS + JDFConstants.COLON + cip4Prefix3,
-				cip4NameSpaceURI);
+		root.setAttribute(JDFConstants.XMLNS + JDFConstants.COLON + cip4Prefix1, cip4NameSpaceURI);
+		root.setAttribute(JDFConstants.XMLNS + JDFConstants.COLON + cip4Prefix2, cip4NameSpaceURI);
+		root.setAttribute(JDFConstants.XMLNS + JDFConstants.COLON + cip4Prefix3, cip4NameSpaceURI);
 
 		// append an element without prefix with null NameSpaceURI or
 		// cip4NameSpaceURI
@@ -843,25 +864,19 @@ public class KElementTest extends JDFTestCaseBase
 
 		// append an element with prefix with null NameSpaceURI or
 		// cip4NameSpaceURI
-		KElement kElement2 = root.appendElement(cip4Prefix1
-				+ JDFConstants.COLON + "kElement2", null);
+		KElement kElement2 = root.appendElement(cip4Prefix1 + JDFConstants.COLON + "kElement2", null);
 		assertTrue(kElement2.getNamespaceURI().equals(cip4NameSpaceURI));
 		assertTrue(kElement2.getPrefix().equals(cip4Prefix1));
 
-		KElement kElement3 = root.appendElement(cip4Prefix1
-				+ JDFConstants.COLON + "kElement3", cip4NameSpaceURI);
+		KElement kElement3 = root.appendElement(cip4Prefix1 + JDFConstants.COLON + "kElement3", cip4NameSpaceURI);
 		assertTrue(kElement3.getNamespaceURI().equals(cip4NameSpaceURI));
 		assertTrue(kElement3.getPrefix().equals(cip4Prefix1));
 
 		String jdfDocString = "<JDF ID=\"n051221_021145422_000005\" Version=\"1.3\" "
-				+ "xmlns=\"http://www.CIP4.org/JDFSchema_1_1\" "
-				+ "xmlns:JDF=\"http://www.CIP4.org/JDFSchema_1_1\" "
+				+ "xmlns=\"http://www.CIP4.org/JDFSchema_1_1\" " + "xmlns:JDF=\"http://www.CIP4.org/JDFSchema_1_1\" "
 				+ "xmlns:JDFS=\"http://www.CIP4.org/JDFSchema_1_1\" "
-				+ "xmlns:jdf=\"http://www.CIP4.org/JDFSchema_1_1\">"
-				+ "<kElement0/>"
-				+ "<JDF:kElement1/>"
-				+ "<JDFS:kElement2/>"
-				+ "<jdf:kElement3/>" + "</JDF>";
+				+ "xmlns:jdf=\"http://www.CIP4.org/JDFSchema_1_1\">" + "<kElement0/>" + "<JDF:kElement1/>"
+				+ "<JDFS:kElement2/>" + "<jdf:kElement3/>" + "</JDF>";
 
 		JDFParser p = new JDFParser();
 		JDFDoc jdfDoc = p.parseString(jdfDocString);
@@ -875,18 +890,14 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals(kElemGet1, kElemGet2);
 
 		// correct prefix is ok
-		KElement kElemGet3 = root1.getElement(cip4Prefix1 + JDFConstants.COLON
-				+ "kElement1", null, 0);
-		KElement kElemGet4 = root1.getElement(cip4Prefix1 + JDFConstants.COLON
-				+ "kElement1", cip4NameSpaceURI, 0);
+		KElement kElemGet3 = root1.getElement(cip4Prefix1 + JDFConstants.COLON + "kElement1", null, 0);
+		KElement kElemGet4 = root1.getElement(cip4Prefix1 + JDFConstants.COLON + "kElement1", cip4NameSpaceURI, 0);
 		assertEquals(kElemGet3, kElemGet4);
 		assertEquals(kElemGet2, kElemGet4);
 
 		// wrong prefix
-		KElement kElemGet5 = root1.getElement(cip4Prefix2 + JDFConstants.COLON
-				+ "kElement1", null, 0);
-		KElement kElemGet6 = root1.getElement(cip4Prefix2 + JDFConstants.COLON
-				+ "kElement1", cip4NameSpaceURI, 0);
+		KElement kElemGet5 = root1.getElement(cip4Prefix2 + JDFConstants.COLON + "kElement1", null, 0);
+		KElement kElemGet6 = root1.getElement(cip4Prefix2 + JDFConstants.COLON + "kElement1", cip4NameSpaceURI, 0);
 		assertNull(kElemGet5);
 		assertNull(kElemGet6);
 	}
@@ -903,22 +914,18 @@ public class KElementTest extends JDFTestCaseBase
 		try
 		{
 			// add an element in a namespace
-			KElement kElem1 = root.appendElement(myPrefix + JDFConstants.COLON
-					+ "Foo_1", docNS1);
+			KElement kElem1 = root.appendElement(myPrefix + JDFConstants.COLON + "Foo_1", docNS1);
 			assertTrue(kElem1.getNamespaceURI().equals(docNS1));
 			assertTrue(kElem1.getPrefix().equals(myPrefix));
 
-			kElem1.setAttribute(myPrefix + JDFConstants.COLON + "Foo_1",
-					"attval1", docNS1);
-			kElem1.setAttribute(myPrefix + JDFConstants.COLON + "Foo_2",
-					"attval2", docNS2);
+			kElem1.setAttribute(myPrefix + JDFConstants.COLON + "Foo_1", "attval1", docNS1);
+			kElem1.setAttribute(myPrefix + JDFConstants.COLON + "Foo_2", "attval2", docNS2);
 			fail("Called KElement.setAttribute with same prefix but different namespaces ?!");
-		} catch (JDFException expected)
+		}
+		catch (JDFException expected)
 		{
 			String partOfErrorMessage = "KElement.setAttribute:";
-			assertTrue("Exception message doesn't even mention '"
-					+ partOfErrorMessage + "'?!", expected.getMessage()
-					.indexOf(partOfErrorMessage) >= 0);
+			assertTrue("Exception message doesn't even mention '" + partOfErrorMessage + "'?!", expected.getMessage().indexOf(partOfErrorMessage) >= 0);
 		}
 	}
 
@@ -937,24 +944,19 @@ public class KElementTest extends JDFTestCaseBase
 		child.setAttribute("foo:bar", "a2", "www.foo.com");
 		child.setAttribute("foo:barNs", "ns", "www.foo.com");
 		assertEquals("dom1", child.getAttribute("foo:bar"), "a2");
-		assertEquals("dom2", child.getAttribute("bar", "www.foo.com", null),
-				"a2");
+		assertEquals("dom2", child.getAttribute("bar", "www.foo.com", null), "a2");
 		child.setAttribute("foo:bar", "a3");
 		assertEquals("dom1", child.getAttribute("foo:bar"), "a3");
-		assertEquals("dom2", child.getAttribute("bar", "www.foo.com", null),
-				"a3");
+		assertEquals("dom2", child.getAttribute("bar", "www.foo.com", null), "a3");
 		child.setAttribute("bar:bar", "b3", "www.bar.com");
 		assertEquals("dom1", child.getAttribute("bar:bar"), "b3");
-		assertEquals("dom2", child.getAttribute("bar", "www.bar.com", null),
-				"b3");
+		assertEquals("dom2", child.getAttribute("bar", "www.bar.com", null), "b3");
 		child.setAttribute("bar:bar", "b2");
 		assertEquals("dom1", child.getAttribute("bar:bar"), "b2");
-		assertEquals("dom2", child.getAttribute("bar", "www.bar.com", null),
-				"b2");
+		assertEquals("dom2", child.getAttribute("bar", "www.bar.com", null), "b2");
 		child.setAttribute("bar:bar", "b4", "www.bar.com");
 		assertEquals("dom1", child.getAttribute("bar:bar"), "b4");
-		assertEquals("dom2", child.getAttribute("bar", "www.bar.com", null),
-				"b4");
+		assertEquals("dom2", child.getAttribute("bar", "www.bar.com", null), "b4");
 	}
 
 	// /////////////////////////////////////////////////////////////////////
@@ -987,8 +989,7 @@ public class KElementTest extends JDFTestCaseBase
 		// test your method on this element
 		String s = k.getLocalName();
 		// gotcha First test ready
-		assertEquals("LocalName 'Foo' is not equal the original written name",
-				s, "Foo");
+		assertEquals("LocalName 'Foo' is not equal the original written name", s, "Foo");
 
 		// add the namespace, this is mandatory for java xerces (contrary to c++
 		// xerces )
@@ -1003,11 +1004,9 @@ public class KElementTest extends JDFTestCaseBase
 		// there...otherwise test failed
 		s = k.getLocalName();
 		//
-		assertEquals("LocalName 'Faa' is not equal the original written name",
-				s, "Faa");
+		assertEquals("LocalName 'Faa' is not equal the original written name", s, "Faa");
 
-		jdfDoc.write2File(sm_dirTestDataTemp + "GetLocalNameStatic.jdf", 0,
-				true);
+		jdfDoc.write2File(sm_dirTestDataTemp + "GetLocalNameStatic.jdf", 0, true);
 	}
 
 	// /////////////////////////////////////////////////////////////////
@@ -1021,17 +1020,12 @@ public class KElementTest extends JDFTestCaseBase
 		JDFDoc doc = new JDFDoc(ElementName.JDF);
 		JDFNode root = doc.getJDFRoot();
 		root.setType(JDFNode.EnumType.Imposition.getName(), false);
-		JDFRunList rl = (JDFRunList) root.appendMatchingResource(
-				ElementName.RUNLIST, JDFNode.EnumProcessUsage.Document, null);
+		JDFRunList rl = (JDFRunList) root.appendMatchingResource(ElementName.RUNLIST, JDFNode.EnumProcessUsage.Document, null);
 		rl.appendLayoutElement();
-		JDFRunList leaf = (JDFRunList) rl.getCreatePartition(
-				JDFResource.EnumPartIDKey.Run, "Run1", new VString(
-						JDFResource.EnumPartIDKey.Run.getName(), " "));
+		JDFRunList leaf = (JDFRunList) rl.getCreatePartition(JDFResource.EnumPartIDKey.Run, "Run1", new VString(JDFResource.EnumPartIDKey.Run.getName(), " "));
 
-		KElement el1 = rl.getCreateElement_KElement(ElementName.LAYOUTELEMENT,
-				null, 0);
-		KElement el2 = leaf.getCreateElement_KElement(
-				ElementName.LAYOUTELEMENT, null, 0);
+		KElement el1 = rl.getCreateElement_KElement(ElementName.LAYOUTELEMENT, null, 0);
+		KElement el2 = leaf.getCreateElement_KElement(ElementName.LAYOUTELEMENT, null, 0);
 		assertNotSame(el1, el2);
 	}
 
@@ -1069,8 +1063,7 @@ public class KElementTest extends JDFTestCaseBase
 		root.setTemplate(false);
 		assertTrue(root.hasAttribute(AttributeName.TEMPLATE));
 		root.eraseDefaultAttributes(true);
-		assertFalse("Template is defaulted", root
-				.hasAttribute(AttributeName.TEMPLATE));
+		assertFalse("Template is defaulted", root.hasAttribute(AttributeName.TEMPLATE));
 		assertTrue("ID is not defaulted", root.hasAttribute(AttributeName.ID));
 	}
 
@@ -1081,8 +1074,7 @@ public class KElementTest extends JDFTestCaseBase
 	{
 		JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 		JDFNode root = (JDFNode) jdfDoc.getRoot();
-		assertFalse("Template is defaulted", root.getAttributeMap()
-				.containsKey("Template"));
+		assertFalse("Template is defaulted", root.getAttributeMap().containsKey("Template"));
 	}
 
 	// /////////////////////////////////////////////////////////////////
@@ -1094,8 +1086,7 @@ public class KElementTest extends JDFTestCaseBase
 		JDFDoc jdfDoc = p.parseFile(inFile);
 		JDFNode root = (JDFNode) jdfDoc.getRoot();
 		root.eraseEmptyNodes(true);
-		final String outFile = sm_dirTestDataTemp + File.separator
-				+ "SmallWhite.jdf";
+		final String outFile = sm_dirTestDataTemp + File.separator + "SmallWhite.jdf";
 		jdfDoc.write2File(outFile, 0, false);
 		File f = new File(inFile);
 		File f2 = new File(outFile);
@@ -1109,8 +1100,7 @@ public class KElementTest extends JDFTestCaseBase
 		KElement root = d.getRoot();
 		root.setXPathAttribute("a/b[2]/@att", "foo");
 		assertEquals(root.getXPathAttribute("a/b[2]/@att", null), "foo");
-		assertEquals(root.getXPathAttribute("a/b[@att=\"foo\"]/@att", null),
-				"foo");
+		assertEquals(root.getXPathAttribute("a/b[@att=\"foo\"]/@att", null), "foo");
 		assertTrue(root.hasXPathNode("a/b[@att=\"foo\"]/@att"));
 		assertTrue(root.hasXPathNode("a/b[@att=\"foo\"]"));
 		root.removeXPathAttribute("a/b[2]/@att");
@@ -1166,16 +1156,13 @@ public class KElementTest extends JDFTestCaseBase
 		root.getCreateXPathElement("./c/d");
 		assertEquals(va, root.getXPathElementVector("//c", 0));
 		assertEquals(1, root.getXPathElementVector("//d", 0).size());
-		assertEquals(root.getXPathElementVector("//d", 0), root
-				.getXPathElementVector("//c/d", 0));
-		assertTrue(root.getXPathElementVector("//*", 0).contains(
-				va.elementAt(0)));
+		assertEquals(root.getXPathElementVector("//d", 0), root.getXPathElementVector("//c/d", 0));
+		assertTrue(root.getXPathElementVector("//*", 0).contains(va.elementAt(0)));
 		assertTrue(root.getXPathElementVector("//*", 0).contains(root));
 		root.getCreateXPathElement("./c/d[2]");
 		assertEquals(2, root.getXPathElementVector("//d", 0).size());
 		assertEquals(2, root.getXPathElementVector("/a/c/d", 0).size());
-		assertEquals("d", root.getXPathElementVector("/a/c/d", 0).elementAt(0)
-				.getNodeName());
+		assertEquals("d", root.getXPathElementVector("/a/c/d", 0).elementAt(0).getNodeName());
 	}
 
 	// /////////////////////////////////////////////////////////////////
@@ -1187,10 +1174,8 @@ public class KElementTest extends JDFTestCaseBase
 
 		root.setXPathAttribute("/JDF/a[2]/@foo", "v2");
 		root.setXPathAttribute("/JDF/a[3]/@foo", "v3");
-		assertEquals(root.getXPathElement("/JDF/a[2]"), root
-				.getXPathElement("/JDF/a[@foo=\"v2\"]"));
-		assertEquals(root.getXPathElement("/JDF/a[3]"), root
-				.getXPathElement("/JDF/a[@foo=\"v3\"]"));
+		assertEquals(root.getXPathElement("/JDF/a[2]"), root.getXPathElement("/JDF/a[@foo=\"v2\"]"));
+		assertEquals(root.getXPathElement("/JDF/a[3]"), root.getXPathElement("/JDF/a[@foo=\"v3\"]"));
 
 		String nodeName = "Created";
 		KElement kElem = root.getXPathElement("AuditPool/" + nodeName);
@@ -1221,8 +1206,7 @@ public class KElementTest extends JDFTestCaseBase
 		root.setXPathAttribute("/JDF/ee[1]/@a", "2");
 		root.setXPathAttribute("/JDF/ee[2]/ff/@b", "3");
 		assertEquals(root.getXPathAttribute("/JDF/ee/ff/@b", null), "3");
-		assertEquals(root.getXPathAttribute("/JDF/ee[@a=\"2\"]/ff/@b", null),
-				"3");
+		assertEquals(root.getXPathAttribute("/JDF/ee[@a=\"2\"]/ff/@b", null), "3");
 		assertEquals(root.getXPathAttribute("//ee[@a=\"2\"]/ff/@b", null), "3");
 		assertNull(root.getXPathAttribute("/JDF/ee[1]/ff/@b", null));
 
@@ -1269,32 +1253,22 @@ public class KElementTest extends JDFTestCaseBase
 
 		assertEquals("1 foo", root.numChildElements("foo", null), 1);
 		assertNotNull("get", root.getXPathElement("./foo/bar[2]/fnarf[3]"));
-		assertEquals("", root.getElement("foo").numChildElements("bar", null),
-				2);
-		assertEquals("", root.getElement("foo").getElement("bar")
-				.numChildElements("fnarf", null), 0);
-		assertEquals("", root.getElement("foo").getElement("bar")
-				.getNextSiblingElement("bar", null).numChildElements("fnarf",
-						null), 3);
+		assertEquals("", root.getElement("foo").numChildElements("bar", null), 2);
+		assertEquals("", root.getElement("foo").getElement("bar").numChildElements("fnarf", null), 0);
+		assertEquals("", root.getElement("foo").getElement("bar").getNextSiblingElement("bar", null).numChildElements("fnarf", null), 3);
 		assertEquals("", root.getCreateXPathElement("."), root);
 
-		assertEquals("", e, root
-				.getXPathElement("./foo/bar[@blub=\"b1\"]/fnarf[3]"));
-		assertEquals("", e, root
-				.getCreateXPathElement("./foo/bar[@blub=\"b1\"]/fnarf[3]"));
-		assertNotSame("", e, root
-				.getCreateXPathElement("./foo/bar[@blub=\"b1\"]/fnarf[5]"));
-		assertEquals("", root.getElement("foo").getElement("bar")
-				.numChildElements("fnarf", null), 0);
-		assertEquals("", root.getElement("foo").getElement("bar")
-				.getNextSiblingElement("bar", null).numChildElements("fnarf",
-						null), 5);
+		assertEquals("", e, root.getXPathElement("./foo/bar[@blub=\"b1\"]/fnarf[3]"));
+		assertEquals("", e, root.getCreateXPathElement("./foo/bar[@blub=\"b1\"]/fnarf[3]"));
+		assertNotSame("", e, root.getCreateXPathElement("./foo/bar[@blub=\"b1\"]/fnarf[5]"));
+		assertEquals("", root.getElement("foo").getElement("bar").numChildElements("fnarf", null), 0);
+		assertEquals("", root.getElement("foo").getElement("bar").getNextSiblingElement("bar", null).numChildElements("fnarf", null), 5);
 		try
 		{
-			root
-					.getCreateXPathElement("./foo/bar[@blub=\"b1\"]/fnarf[@a=\"b\"]");
+			root.getCreateXPathElement("./foo/bar[@blub=\"b1\"]/fnarf[@a=\"b\"]");
 			fail("cannot create by attribute value");
-		} catch (IllegalArgumentException x)
+		}
+		catch (IllegalArgumentException x)
 		{
 			/* */
 		}
@@ -1332,25 +1306,22 @@ public class KElementTest extends JDFTestCaseBase
 
 		String nodeName = "Created";
 		String attribute = "Author";
-		String attValue = root.getXPathAttribute("AuditPool/" + nodeName + "@"
-				+ attribute, "dummydefault");
+		String attValue = root.getXPathAttribute("AuditPool/" + nodeName + "@" + attribute, "dummydefault");
 		assertEquals(attValue, JDFAudit.software());
 
 		attribute = "notExistingAttribute";
-		attValue = root.getXPathAttribute("AuditPool/" + nodeName + "@"
-				+ attribute, "dummydefault");
+		attValue = root.getXPathAttribute("AuditPool/" + nodeName + "@" + attribute, "dummydefault");
 		assertEquals(attValue, "dummydefault");
-		assertNull(root.getXPathAttribute("AuditPool/" + nodeName + "@"
-				+ attribute, null));
+		assertNull(root.getXPathAttribute("AuditPool/" + nodeName + "@" + attribute, null));
 		root.setXPathAttribute("foo/bar[2]/@a", "b2");
 		root.setXPathAttribute("foo/bar[2]/sub/@c", "d2");
-		assertEquals(root.getXPathAttribute("foo/bar[@a=\"b2\"]/sub/@c", null),
-				"d2");
+		assertEquals(root.getXPathAttribute("foo/bar[@a=\"b2\"]/sub/@c", null), "d2");
 		try
 		{
 			root.getXPathAttribute("foo/bar[0]/sub/@c", null);
 			fail("index must be >0");
-		} catch (IllegalArgumentException x)
+		}
+		catch (IllegalArgumentException x)
 		{
 			// nop
 		}
@@ -1362,8 +1333,7 @@ public class KElementTest extends JDFTestCaseBase
 		XMLDoc xd = new XMLDoc("a", null);
 		KElement root = xd.getRoot();
 		root.setAttribute("at", "b");
-		assertEquals("", root.getAttribute("at"), root.getDOMAttr("at", null,
-				false).getNodeValue());
+		assertEquals("", root.getAttribute("at"), root.getDOMAttr("at", null, false).getNodeValue());
 		KElement child = root.appendElement("child");
 		assertNull("", child.getDOMAttr("at", null, false));
 		assertNull("", child.getDOMAttr("at_notther", null, true));
@@ -1378,14 +1348,12 @@ public class KElementTest extends JDFTestCaseBase
 		String nodeName = "Created";
 		String attribute = "Author";
 		root.removeXPathAttribute("AuditPool/" + nodeName + "@" + attribute);
-		String attValue = root.getXPathAttribute("AuditPool/" + nodeName + "@"
-				+ attribute, null);
+		String attValue = root.getXPathAttribute("AuditPool/" + nodeName + "@" + attribute, null);
 		assertNull("", attValue);
 
 		attribute = "notExistingAttribute";
 		root.removeXPathAttribute("AuditPool/" + nodeName + "@" + attribute);
-		attValue = root.getXPathAttribute("AuditPool/" + nodeName + "@"
-				+ attribute, "dummydefault");
+		attValue = root.getXPathAttribute("AuditPool/" + nodeName + "@" + attribute, "dummydefault");
 		assertTrue("", attValue.equals("dummydefault"));
 	}
 
@@ -1396,16 +1364,14 @@ public class KElementTest extends JDFTestCaseBase
 
 		String nodeName = "Created";
 		String attribute = "Author";
-		root.setXPathAttribute("AuditPool/" + nodeName + "@" + attribute,
-				"newAttributeValue");
+		root.setXPathAttribute("AuditPool/" + nodeName + "@" + attribute, "newAttributeValue");
 		root.setXPathAttribute("new/@foo", "bar");
 		assertEquals("", root.getXPathAttribute("new/@foo", null), "bar");
 		assertEquals("", root.getXPathAttribute("new@foo", null), "bar");
 		root.setXPathAttribute("new@foo2", "bar2");
 		assertEquals("", root.getXPathAttribute("new/@foo2", null), "bar2");
 		assertEquals("", root.getXPathAttribute("new@foo2", null), "bar2");
-		String attValue = root.getXPathAttribute("AuditPool/" + nodeName + "@"
-				+ attribute, "dummydefault");
+		String attValue = root.getXPathAttribute("AuditPool/" + nodeName + "@" + attribute, "dummydefault");
 		assertEquals("", attValue, "newAttributeValue");
 	}
 
@@ -1471,8 +1437,7 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals("id", kelem1.getAttribute("ID"), "n0006");
 
 		// second try
-		KElement kelem2 = jdfRoot.getDeepElementByID("Preferred", "198", null,
-				null);
+		KElement kelem2 = jdfRoot.getDeepElementByID("Preferred", "198", null, null);
 		assertTrue("kelem2==null", kelem2 != null);
 		if (kelem2 == null)
 			return; // soothe findbugs ;)
@@ -1512,25 +1477,17 @@ public class KElementTest extends JDFTestCaseBase
 		KElement e = jdfDoc.getRoot();
 		e.setAttribute("inf", Integer.MAX_VALUE, null);
 		e.setAttribute("minf", Integer.MIN_VALUE, null);
-		assertEquals("inf", e.getAttribute("inf", null, null),
-				JDFConstants.POSINF);
-		assertEquals("minf", e.getAttribute("minf", null, null),
-				JDFConstants.NEGINF);
-		assertEquals("inf", e.getIntAttribute("inf", null, 0),
-				Integer.MAX_VALUE);
-		assertEquals("minf", e.getIntAttribute("minf", null, 0),
-				Integer.MIN_VALUE);
+		assertEquals("inf", e.getAttribute("inf", null, null), JDFConstants.POSINF);
+		assertEquals("minf", e.getAttribute("minf", null, null), JDFConstants.NEGINF);
+		assertEquals("inf", e.getIntAttribute("inf", null, 0), Integer.MAX_VALUE);
+		assertEquals("minf", e.getIntAttribute("minf", null, 0), Integer.MIN_VALUE);
 		// now double
 		e.setAttribute("inf", Double.MAX_VALUE, null);
 		e.setAttribute("minf", -Double.MAX_VALUE, null);
-		assertEquals("inf", e.getAttribute("inf", null, null),
-				JDFConstants.POSINF);
-		assertEquals("minf", e.getAttribute("minf", null, null),
-				JDFConstants.NEGINF);
-		assertEquals("inf", e.getRealAttribute("inf", null, 0),
-				Double.MAX_VALUE, 0.0);
-		assertEquals("minf", e.getRealAttribute("minf", null, 0),
-				-Double.MAX_VALUE, 0.0);
+		assertEquals("inf", e.getAttribute("inf", null, null), JDFConstants.POSINF);
+		assertEquals("minf", e.getAttribute("minf", null, null), JDFConstants.NEGINF);
+		assertEquals("inf", e.getRealAttribute("inf", null, 0), Double.MAX_VALUE, 0.0);
+		assertEquals("minf", e.getRealAttribute("minf", null, 0), -Double.MAX_VALUE, 0.0);
 	}
 
 	public void testSetAttribute_LongAttValue()
@@ -1575,17 +1532,13 @@ public class KElementTest extends JDFTestCaseBase
 	{
 		JDFDoc doc = new JDFDoc("JDF");
 		JDFNode n = doc.getJDFRoot();
-		JDFExposedMedia x = (JDFExposedMedia) n.addResource("ExposedMedia",
-				EnumUsage.Input);
+		JDFExposedMedia x = (JDFExposedMedia) n.addResource("ExposedMedia", EnumUsage.Input);
 		x.setAgentName("a1");
-		JDFExposedMedia x2 = (JDFExposedMedia) x.addPartition(
-				EnumPartIDKey.SignatureName, "S1");
+		JDFExposedMedia x2 = (JDFExposedMedia) x.addPartition(EnumPartIDKey.SignatureName, "S1");
 		KElement e2 = n.appendElement("foo");
 		e2.setAttributes(x2);
-		assertEquals("root resource attributes not copied", e2
-				.getAttribute("AgentName"), "a1");
-		assertEquals("leaf resource attributes not copied", e2
-				.getAttribute("SignatureName"), "S1");
+		assertEquals("root resource attributes not copied", e2.getAttribute("AgentName"), "a1");
+		assertEquals("leaf resource attributes not copied", e2.getAttribute("SignatureName"), "S1");
 
 	}
 
@@ -1607,11 +1560,9 @@ public class KElementTest extends JDFTestCaseBase
 
 		kElem.setAttribute("Author", "", AttributeName.XMLNSURI);
 		kElem.setAttribute("NewAttribute", "");
-		assertTrue("", kElem.getAttribute("NewAttribute", null, null)
-				.equals(""));
+		assertTrue("", kElem.getAttribute("NewAttribute", null, null).equals(""));
 		kElem.setAttribute("foo", "הצü\"\'");
-		assertEquals("special characters", kElem
-				.getAttribute("foo", null, null), "הצü\"\'");
+		assertEquals("special characters", kElem.getAttribute("foo", null, null), "הצü\"\'");
 	}
 
 	public void testSetAttributeNS() throws Exception
@@ -1639,10 +1590,8 @@ public class KElementTest extends JDFTestCaseBase
 		KElement e2 = d2.getRoot();
 		for (int i = 0; i < 4; i++)
 		{
-			e1.setXPathAttribute("e2/e3" + String.valueOf(i) + "/@ID", "i1"
-					+ String.valueOf(i));
-			e2.setXPathAttribute("e2/e3" + String.valueOf(i) + "/@ID", "i2"
-					+ String.valueOf(i));
+			e1.setXPathAttribute("e2/e3" + String.valueOf(i) + "/@ID", "i1" + String.valueOf(i));
+			e2.setXPathAttribute("e2/e3" + String.valueOf(i) + "/@ID", "i2" + String.valueOf(i));
 		}
 		KElement e13 = e2.getTarget("i13", "ID");
 		assertNull(e13);
@@ -1673,9 +1622,9 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-     * 
-     *
-     */
+	 * 
+	 *
+	 */
 	public void testGetElementHashMap()
 	{
 		XMLDoc d = new XMLDoc("root", null);
@@ -1689,18 +1638,14 @@ public class KElementTest extends JDFTestCaseBase
 			c.setAttribute("ID", "id2_" + JDFElement.uniqueID(0));
 		}
 		assertEquals("", root.getElementHashMap(null, null, "ID").size(), 2000);
-		assertEquals("", root.getElementHashMap(null, "myns", "ID").size(),
-				1000);
-		assertEquals("",
-				root.getElementHashMap(null, null, "ID").get("id1_50"),
-				root.getChildByTagName("child1", null, 0, new JDFAttributeMap(
-						"ID", "id1_50"), true, true));
+		assertEquals("", root.getElementHashMap(null, "myns", "ID").size(), 1000);
+		assertEquals("", root.getElementHashMap(null, null, "ID").get("id1_50"), root.getChildByTagName("child1", null, 0, new JDFAttributeMap("ID", "id1_50"), true, true));
 	}
 
 	/**
-     * 
-     *
-     */
+	 * 
+	 *
+	 */
 	public void testGetElement_KElement()
 	{
 		XMLDoc d = new XMLDoc("JDF", null);
@@ -1751,11 +1696,9 @@ public class KElementTest extends JDFTestCaseBase
 
 		JDFNode jdfRoot = (JDFNode) jdfDoc.getRoot();
 		JDFResourcePool jdfPool = jdfRoot.getResourcePool();
-		VElement v = jdfPool.getChildrenByTagName("RunList", null, null, false,
-				true, 0);
+		VElement v = jdfPool.getChildrenByTagName("RunList", null, null, false, true, 0);
 		assertEquals("Wrong number of child elements found", v.size(), 10);
-		v = jdfPool
-				.getChildrenByTagName("RunList", null, null, false, true, -1);
+		v = jdfPool.getChildrenByTagName("RunList", null, null, false, true, -1);
 		assertEquals("Wrong number of child elements found", v.size(), 10);
 		v = jdfPool.getChildrenByTagName("RunList", null, null, false, true, 5);
 		assertEquals("Wrong number of child elements found", v.size(), 5);
@@ -1771,14 +1714,10 @@ public class KElementTest extends JDFTestCaseBase
 		KElement a = root.appendElement("a");
 		KElement b = a.appendElement("b");
 		KElement b2 = a.appendElement("b:b", "s");
-		assertTrue(root.getChildrenFromList(new VString("b", " "), null, false,
-				null).contains(b));
-		assertTrue(root.getChildrenFromList(new VString("b", " "), null, false,
-				null).contains(b2));
-		assertTrue(root.getChildrenFromList(new VString("b:b", " "), null,
-				false, null).contains(b2));
-		assertFalse(root.getChildrenFromList(new VString("b:b", " "), null,
-				false, null).contains(b));
+		assertTrue(root.getChildrenFromList(new VString("b", " "), null, false, null).contains(b));
+		assertTrue(root.getChildrenFromList(new VString("b", " "), null, false, null).contains(b2));
+		assertTrue(root.getChildrenFromList(new VString("b:b", " "), null, false, null).contains(b2));
+		assertFalse(root.getChildrenFromList(new VString("b:b", " "), null, false, null).contains(b));
 	}
 
 	////////////////////////////////////////////////////////////////////////////
@@ -1797,31 +1736,22 @@ public class KElementTest extends JDFTestCaseBase
 		bar3.setAttribute("foo", "1");
 		bar3.setAttribute("foo2", "2");
 		bar3.setAttribute("ID", "id3");
-		assertEquals(root.getChildWithAttribute(null, "foo2", null, null, 0,
-				false), bar3);
-		assertEquals(root.getChildWithAttribute(null, "foo", null, null, 0,
-				false), bar2);
-		assertEquals(root.getChildWithAttribute(null, "foo", null, null, 1,
-				false), bar3);
-		assertEquals(root.getChildWithAttribute(null, "foo", null, null, 0,
-				true), bar2);
-		assertEquals(root
-				.getChildWithAttribute(null, "foo", null, "1", 0, true), bar2);
-		assertEquals(root.getChildWithAttribute(null, "ID", null, "id2", 0,
-				true), bar2);
+		assertEquals(root.getChildWithAttribute(null, "foo2", null, null, 0, false), bar3);
+		assertEquals(root.getChildWithAttribute(null, "foo", null, null, 0, false), bar2);
+		assertEquals(root.getChildWithAttribute(null, "foo", null, null, 1, false), bar3);
+		assertEquals(root.getChildWithAttribute(null, "foo", null, null, 0, true), bar2);
+		assertEquals(root.getChildWithAttribute(null, "foo", null, "1", 0, true), bar2);
+		assertEquals(root.getChildWithAttribute(null, "ID", null, "id2", 0, true), bar2);
 		assertNull(root.getChildWithAttribute(null, "ID", null, "id3", 0, true));
 
 		XMLDoc doc2 = new XMLDoc("Foo", null);
 		KElement root2 = doc2.getRoot();
 		KElement bar22 = root2.appendElement("bar2");
 		bar22.setAttribute("ID", "id22");
-		assertEquals(root2.getChildWithAttribute(null, "ID", null, "id22", 0,
-				true), bar22);
-		assertNull(root
-				.getChildWithAttribute(null, "ID", null, "id22", 0, true));
+		assertEquals(root2.getChildWithAttribute(null, "ID", null, "id22", 0, true), bar22);
+		assertNull(root.getChildWithAttribute(null, "ID", null, "id22", 0, true));
 		bar3.moveElement(bar22, null);
-		assertNull(root2.getChildWithAttribute(null, "ID", null, "id22", 0,
-				true));
+		assertNull(root2.getChildWithAttribute(null, "ID", null, "id22", 0, true));
 
 	}
 
@@ -1829,23 +1759,18 @@ public class KElementTest extends JDFTestCaseBase
 	{
 		JDFDoc doc = new JDFDoc("JDF");
 		JDFNode n = doc.getJDFRoot();
-		JDFResource r = n.addResource(ElementName.EXPOSEDMEDIA, null, null,
-				null, null, null, null);
-		JDFResource rp = r.addPartition(EnumPartIDKey.Side, EnumSide.Front
-				.getName());
-		VElement v = r.getChildElementVector_KElement(ElementName.EXPOSEDMEDIA,
-				null, null, true, 0);
+		JDFResource r = n.addResource(ElementName.EXPOSEDMEDIA, null, null, null, null, null, null);
+		JDFResource rp = r.addPartition(EnumPartIDKey.Side, EnumSide.Front.getName());
+		VElement v = r.getChildElementVector_KElement(ElementName.EXPOSEDMEDIA, null, null, true, 0);
 		assertEquals(v.elementAt(0), rp);
 		assertEquals(v.size(), 1);
 		JDFResource r2 = rp.addPartition(EnumPartIDKey.SheetName, "s2");
-		v = r.getChildElementVector_KElement(ElementName.EXPOSEDMEDIA, null,
-				null, true, 0);
+		v = r.getChildElementVector_KElement(ElementName.EXPOSEDMEDIA, null, null, true, 0);
 		assertEquals(v.elementAt(0), rp);
 		assertEquals(v.size(), 1);
 		JDFResource r3 = rp.addPartition(EnumPartIDKey.SheetName, "s3");
 		JDFAttributeMap map = new JDFAttributeMap(AttributeName.SHEETNAME, "s2");
-		v = rp.getChildElementVector_KElement(ElementName.EXPOSEDMEDIA, null,
-				map, true, 0);
+		v = rp.getChildElementVector_KElement(ElementName.EXPOSEDMEDIA, null, map, true, 0);
 		assertTrue(v.contains(r2));
 		assertFalse(v.contains(r3));
 	}
@@ -1886,8 +1811,7 @@ public class KElementTest extends JDFTestCaseBase
 			}
 			e.pushUp("Test1");
 			KElement k = root.getXPathElement("Test0/Test1");
-			VElement v = k.getChildElementVector("Test4", null,
-					new JDFAttributeMap(), true, 99999, false);
+			VElement v = k.getChildElementVector("Test4", null, new JDFAttributeMap(), true, 99999, false);
 			assertTrue("pushUp does not work", v.size() == 1);
 		}
 
@@ -1902,8 +1826,7 @@ public class KElementTest extends JDFTestCaseBase
 			}
 			e.pushUp("");
 			KElement k = root.getXPathElement("Test0/Test1/Test2");
-			VElement v = k.getChildElementVector("Test4", null,
-					new JDFAttributeMap(), true, 99999, false);
+			VElement v = k.getChildElementVector("Test4", null, new JDFAttributeMap(), true, 99999, false);
 			assertTrue("pushUp does not work", v.size() == 1);
 		}
 
@@ -1979,14 +1902,11 @@ public class KElementTest extends JDFTestCaseBase
 			assertTrue(root.hasAttribute("aa"));
 
 			KElement c = root.appendElement("Comment", null);
-			assertTrue("ns append ok", c.getNamespaceURI().equals(
-					root.getNamespaceURI()));
+			assertTrue("ns append ok", c.getNamespaceURI().equals(root.getNamespaceURI()));
 			KElement f = root.insertBefore("fnarf", c, null);
-			assertTrue("ns insert ok", f.getNamespaceURI().equals(
-					root.getNamespaceURI()));
+			assertTrue("ns insert ok", f.getNamespaceURI().equals(root.getNamespaceURI()));
 			assertTrue("ns  ok", f.getNamespaceURI() != null);
-			assertTrue("ns  ok", f.getNamespaceURI().equals(
-					JDFConstants.JDFNAMESPACE));
+			assertTrue("ns  ok", f.getNamespaceURI().equals(JDFConstants.JDFNAMESPACE));
 			KElement f2 = root.insertBefore("fnarf:fnarf", c, "www.fnarf");
 			assertTrue("ns  ok", f2.getNamespaceURI().equals("www.fnarf"));
 
@@ -1995,7 +1915,8 @@ public class KElementTest extends JDFTestCaseBase
 			{
 				e.appendElement("Kai:Test1");
 				// assume that the namespace will be added later fail("snafu");
-			} catch (JDFException jdfe)
+			}
+			catch (JDFException jdfe)
 			{
 				// do nothing
 			}
@@ -2007,13 +1928,11 @@ public class KElementTest extends JDFTestCaseBase
 			// root.setAttribute("aa","cc");
 			root.setAttribute("aa", "nsns", root.getNamespaceURI());
 			assertFalse("no ns1", root.hasAttribute("ns1:aa"));
-			assertEquals("no ns1", root.getAttribute("aa", root
-					.getNamespaceURI(), null), "nsns");
+			assertEquals("no ns1", root.getAttribute("aa", root.getNamespaceURI(), null), "nsns");
 			root.setAttribute("bb:aa", "nsnt", root.getNamespaceURI());
 			assertTrue("ns1 default", root.hasAttribute("aa"));
 			assertTrue("no ns1", root.hasAttribute("bb:aa"));
-			assertEquals("no ns1", root.getAttribute("aa", root
-					.getNamespaceURI(), null), "nsnt");
+			assertEquals("no ns1", root.getAttribute("aa", root.getNamespaceURI(), null), "nsnt");
 			assertEquals("no ns1", root.getAttribute("aa", null, null), "nsnt");
 		}
 	}
@@ -2084,11 +2003,9 @@ public class KElementTest extends JDFTestCaseBase
 		XMLDoc d = new XMLDoc("e", null);
 		KElement root = d.getRoot();
 		root.setXMLComment("foo");
-		assertEquals(d.getDocumentElement().getParentNode().getFirstChild()
-				.getNodeValue(), "foo");
+		assertEquals(d.getDocumentElement().getParentNode().getFirstChild().getNodeValue(), "foo");
 		root.setXMLComment("bar");
-		assertEquals(d.getDocumentElement().getParentNode().getFirstChild()
-				.getNodeValue(), "bar");
+		assertEquals(d.getDocumentElement().getParentNode().getFirstChild().getNodeValue(), "bar");
 		KElement e2 = root.appendElement("e2");
 		e2.setXMLComment("foobar");
 		assertEquals(root.getFirstChild().getNodeValue(), "foobar");
@@ -2159,10 +2076,10 @@ public class KElementTest extends JDFTestCaseBase
 		JDFParser p = new JDFParser();
 		int pos = s.indexOf(url);
 		s = s.substring(0, pos - 7) + s.substring(pos + url.length() + 1); //+/-
-																			// for
-																			// xmlns
-																			// =
-																			// " and "
+		// for
+		// xmlns
+		// =
+		// " and "
 		d = p.parseString(s);
 		d.getMemberDocument().setIgnoreNSDefault(true);
 		{
@@ -2245,8 +2162,7 @@ public class KElementTest extends JDFTestCaseBase
 			String s = v.stringAt(i);
 			e.appendXMLComment(s, null);
 			d.write2File(sm_dirTestDataTemp + "xmlComment.jdf", 2, false);
-			XMLDoc d2 = new JDFParser().parseFile(sm_dirTestDataTemp
-					+ "xmlComment.jdf");
+			XMLDoc d2 = new JDFParser().parseFile(sm_dirTestDataTemp + "xmlComment.jdf");
 			KElement e2 = d2.getRoot();
 			s = StringUtil.replaceString(s, "--", "__");
 			assertEquals(e.getXMLComment(i), s);
@@ -2273,8 +2189,7 @@ public class KElementTest extends JDFTestCaseBase
 		e.appendAttribute("ns:key", "nb", null, " ", true);
 		assertEquals("ns a", e.getAttribute("ns:key"), "na nb");
 		e.appendAttribute("ns:key", "nc", "www.ns.com", " ", true);
-		assertEquals("ns a", e.getAttribute("key", "www.ns.com", ""),
-				"na nb nc");
+		assertEquals("ns a", e.getAttribute("key", "www.ns.com", ""), "na nb nc");
 		assertEquals("ns a", e.getAttribute("ns:key"), "na nb nc");
 
 	}
@@ -2282,7 +2197,7 @@ public class KElementTest extends JDFTestCaseBase
 	////////////////////////////////////////////////////////////////////////////
 
 	public void testTypeInfo() // commented out due to Java 1.4 1.5 package
-								// incompatibilities
+	// incompatibilities
 	{
 		// XMLDoc d = new XMLDoc("doc", null);
 		// KElement root = d.getRoot();

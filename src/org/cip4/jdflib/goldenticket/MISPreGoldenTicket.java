@@ -164,8 +164,8 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	@Override
 	protected void fillCatMaps()
 	{
@@ -187,11 +187,11 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	/**
 	 * create a BaseGoldenTicket
 	 * 
-	 * @param icsLevel the level to init to (1,2 or 3)
+	 * @param _icsLevel the level to init to (1,2 or 3)
 	 * @param jdfVersion the version to generate a golden ticket for
-	 * @param jmfLevel level of jmf ICS to support
-	 * @param misLevel level of MIS ICS to support
-	 * @param isGrayBox if true, write a grayBox
+	 * @param _jmfLevel level of jmf ICS to support
+	 * @param _misLevel level of MIS ICS to support
+	 * @param vPartMap list of parts to process
 	 */
 	public MISPreGoldenTicket(int _icsLevel, EnumVersion jdfVersion, int _jmfLevel, int _misLevel, VJDFAttributeMap vPartMap)
 	{
@@ -207,6 +207,7 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	 * 
 	 * @param icsLevel the level to init to (1,2 or 3)
 	 */
+	@Override
 	public void init()
 	{
 		theNode.setType(EnumType.ProcessGroup);
@@ -256,8 +257,8 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	private void initGBImpositionRIPing()
 	{
 		linkPrepressPrepRunLists();
@@ -269,8 +270,8 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	private void linkPrepressPrepRunLists()
 	{
 		VElement vprepreviousNode = theNode.getJDFRoot().getvJDFNode(null, null, false);
@@ -287,8 +288,8 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	private void initGBPlateMaking()
 	{
 		linkPrepressPrepRunLists();
@@ -301,8 +302,8 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	private void initPreviewGenerationParams()
 	{
 		// no requirements
@@ -310,8 +311,8 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	private void initGBPlateSetting()
 	{
 		initColorantControl();
@@ -320,8 +321,8 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	private void initGBPrePressPreparation()
 	{
 		if (thePreviousNode != null)
@@ -333,8 +334,8 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	private JDFBinderySignature initBinderySignature(String catalog)
 	{
 		JDFBinderySignature bs = (JDFBinderySignature) theNode.addResource(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
@@ -357,8 +358,8 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	private void initStrippingParams()
 	{
 		JDFStrippingParams sp = (JDFStrippingParams) theNode.getCreateResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
@@ -401,8 +402,8 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	private void initGBImpositionPreparation()
 	{
 		theNode.setTypes(new VString(bStripping ? "Stripping" : "ImpositionPreparation", null));
@@ -422,8 +423,8 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	private void initAssembly()
 	{
 		JDFAssembly assem = (JDFAssembly) theNode.getCreateResource(ElementName.ASSEMBLY, EnumUsage.Input, 0);
@@ -432,8 +433,8 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	private void initOutputLayout()
 	{
 		JDFLayout lo = (JDFLayout) theNode.getCreateResource(ElementName.LAYOUT, EnumUsage.Output, 0);
@@ -447,8 +448,8 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	private void initGBContentCreation()
 	{
 		theNode.setTypes(new VString(EnumType.LayoutElementProduction.getName(), null));
@@ -460,8 +461,8 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	private JDFRunList initConduitRunListOut()
 	{
 		JDFRunList rl = (JDFRunList) theNode.getCreateResource(ElementName.RUNLIST, EnumUsage.Output, 0);
@@ -470,8 +471,8 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	private void initLayoutElementProductionParams()
 	{
 		JDFLayoutElementProductionParams lep = (JDFLayoutElementProductionParams) theNode.getCreateResource(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumUsage.Input, 0);
@@ -514,8 +515,8 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	private void executeGBImpositionPreparation()
 	{
 		executeLayout();
@@ -525,8 +526,8 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	private void executeMarksRunList(EnumUsage usage)
 	{
 		JDFRunList rl = (JDFRunList) theExpandedNode.getResource(ElementName.RUNLIST, usage, 0);
@@ -554,8 +555,8 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	private void executeLayout()
 	{
 		JDFLayout lo = (JDFLayout) theExpandedNode.getResource(ElementName.LAYOUT, EnumUsage.Output, 0);
@@ -640,6 +641,7 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	 * prepare an mis fuzzy node and make it runnable by the device
 	 * 
 	 */
+	@Override
 	public void makeReady()
 	{
 		super.makeReady();
@@ -647,12 +649,12 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	private void makeReadyPreviewGeneration()
 	{
 		VString v = theExpandedNode.getAllTypes();
