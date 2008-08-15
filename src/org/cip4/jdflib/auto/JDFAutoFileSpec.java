@@ -891,7 +891,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
  */
 
     /**
-     * (24) const get element Container
+     * (28) const get element Container
      * @param iSkip number of elements to skip
      * @return JDFContainer the element
      * default is getContainer(0)     */
@@ -918,7 +918,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
     }
 
     /**
-     * (24) const get element Disposition
+     * (28) const get element Disposition
      * @param iSkip number of elements to skip
      * @return JDFDisposition the element
      * default is getDisposition(0)     */

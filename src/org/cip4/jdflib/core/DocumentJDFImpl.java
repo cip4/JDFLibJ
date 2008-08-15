@@ -10,7 +10,6 @@
 
 package org.cip4.jdflib.core;
 
-import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -30,7 +29,7 @@ import org.w3c.dom.Node;
  * @author prosirai
  *
  */
-public class DocumentJDFImpl extends DocumentImpl implements Serializable
+public class DocumentJDFImpl extends DocumentImpl
 {
 
 	private static final long serialVersionUID = 1L;

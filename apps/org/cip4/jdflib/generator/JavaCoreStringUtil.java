@@ -1308,7 +1308,7 @@ public class JavaCoreStringUtil
 						// 2. element FileSpec.Container, as there already exists
 						//    a different method org.apache.xerces.dom.NodeImpl.getContainer()
 						strbufResult.append(strDepth1).append("/**").append(strLineEnd);
-						strbufResult.append(strDepth1).append(" * (24) const get element ").append(strElementName).append(strLineEnd);
+						strbufResult.append(strDepth1).append(" * (28) const get element ").append(strElementName).append(strLineEnd);
 						strbufResult.append(strDepth1).append(" * @param iSkip number of elements to skip").append(strLineEnd);
 						strbufResult.append(strDepth1).append(" * @return ").append(strReturnType).append(" the element").append(strLineEnd);
 						strbufResult.append(strDepth1).append(" * default is get").append(strElementName).append("(0)");

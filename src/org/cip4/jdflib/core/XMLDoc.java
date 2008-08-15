@@ -1450,7 +1450,7 @@ public class XMLDoc
 			if (protocol.equalsIgnoreCase("File"))
 			{
 				write2File(UrlUtil.urlToFile(strURL), 0, true);
-				return new XMLDoc();
+				docResponse =  new XMLDoc();
 			}
 			else
 			{
@@ -1460,13 +1460,15 @@ public class XMLDoc
 
 				parser.parseStream(inStream);
 				docResponse = parser.getDocument() == null ? null : new XMLDoc(parser.getDocument());
-				return docResponse;
 			}
+
+			return docResponse;
 		}
 		catch (IOException ex)
 		{
 			ex = null;
 		}
+		
 		return docResponse;
 	}
 

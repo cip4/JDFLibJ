@@ -296,6 +296,7 @@ public class JDFQueue extends JDFAutoQueue
 		VElement v = getQueueEntryVector();
 		if (nid == null || v == null)
 			return v;
+		
 		for (int i = v.size() - 1; i >= 0; i--)
 		{
 			JDFQueueEntry qe = (JDFQueueEntry) v.elementAt(i);
@@ -304,7 +305,8 @@ public class JDFQueue extends JDFAutoQueue
 				v.remove(i);
 			}
 		}
-		return (v == null || v.size() == 0) ? null : v;
+		
+		return (v.size() == 0) ? null : v;
 	}
 
 	/**
