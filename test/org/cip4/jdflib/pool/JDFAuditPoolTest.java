@@ -113,7 +113,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	 * 
 	 * @throws Exception
 	 */
-	public void testAddCreated() throws Exception
+	public void testAddCreated()
 	{
 		// Test AddCreated with one parameter
 		myAuditPool.addCreated("A_Test_Author", null);
@@ -147,6 +147,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
+	@Override
 	protected void setUp() throws Exception
 	{
 		// TODO Auto-generated method stub
@@ -160,7 +161,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 
 	}
 
-	public void testAddMerged() throws Exception
+	public void testAddMerged()
 	{
 		// Test AddCreated with one parameter
 		JDFDoc doc2 = new JDFDoc("JDF");
@@ -176,7 +177,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 		assertNotNull(m1);
 	}
 
-	public void testAddSpawned() throws Exception
+	public void testAddSpawned()
 	{
 		// Test AddCreated with one parameter
 		JDFDoc doc2 = new JDFDoc("JDF");
@@ -192,7 +193,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 		assertNull(myAuditPool.getElement(ElementName.PART));
 	}
 
-	public void testSetPhase() throws Exception
+	public void testSetPhase()
 	{
 		JDFPhaseTime p1 = myAuditPool.setPhase(EnumNodeStatus.Setup, null,
 				null, null);
@@ -239,7 +240,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 
 	}
 
-	public void testGetLastPhase() throws Exception
+	public void testGetLastPhase()
 	{
 		JDFPhaseTime p1 = myAuditPool.setPhase(EnumNodeStatus.Setup, null,
 				null, null);
@@ -266,7 +267,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 
 	}
 
-	public void testCreateSubmitProcessRun() throws Exception
+	public void testCreateSubmitProcessRun()
 	{
 
 		JDFProcessRun pr = myAuditPool.createSubmitProcessRun(null);

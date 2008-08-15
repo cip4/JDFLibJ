@@ -165,7 +165,7 @@ public class JDFStateBaseTest extends JDFTestCaseBase
 
 	}
 
-	public final void testFitsValue_StringState() throws Exception
+	public final void testFitsValue_StringState()
 	{
 		JDFDoc jdfDoc = new JDFDoc(ElementName.STRINGSTATE);
 		JDFStringState root = (JDFStringState) jdfDoc.getRoot();

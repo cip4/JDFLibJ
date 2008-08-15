@@ -93,7 +93,7 @@ public class JDFRefElementTest extends TestCase
 	 * 
 	 * @throws Exception
 	 */
-	public void testGetTarget() throws Exception
+	public void testGetTarget()
 	{
 		JDFDoc d = JDFTestCaseBase.creatXMDoc();
 		JDFNode n = d.getJDFRoot();
@@ -126,7 +126,7 @@ public class JDFRefElementTest extends TestCase
 	 * 
 	 * @throws Exception
 	 */
-	public void testInlineRefelement() throws Exception
+	public void testInlineRefelement()
 	{
 		JDFDoc d = JDFTestCaseBase.creatXMDoc();
 		JDFNode n = d.getJDFRoot();

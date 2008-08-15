@@ -164,7 +164,7 @@ public class JDFDocTest extends JDFTestCaseBase
 		assertEquals(db.getContentType(), "text/xml");
 	}
 
-	public void testSchemaDefault() throws Exception
+	public void testSchemaDefault()
 	{
 		for (int i = 0; i < 3; i++)
 		{

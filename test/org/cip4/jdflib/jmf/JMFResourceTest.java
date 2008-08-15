@@ -284,7 +284,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 
-	public void testResourceCommand() throws Exception
+	public void testResourceCommand()
 	{
 		JDFDoc jdfDoc = JDFDoc.parseFile(sm_dirTestData + "ResourceCommandTest.jdf");
 		JDFNode root = jdfDoc.getJDFRoot();
@@ -339,7 +339,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 	 * 
 	 * @return
 	 */
-	public void testResourceCommandPartIDKeys() throws Exception
+	public void testResourceCommandPartIDKeys()
 	{
 		JDFDoc jdfDoc = JDFDoc.parseFile(sm_dirTestData + "ResourceCmd.jdf");
 		JDFDoc jdfDocJMF = JDFDoc.parseFile(sm_dirTestData + "ResourceCmd.jmf");

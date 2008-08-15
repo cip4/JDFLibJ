@@ -94,7 +94,7 @@ public class JDFUsageCounterTest extends JDFTestCaseBase
 	 * Test method for
 	 * 'org.cip4.jdflib.resource.process.JDFMedia.setDimensionCM(JDFXYPair)'
 	 */
-	public final void testUsageCounter() throws Exception
+	public final void testUsageCounter()
 	{
 		JDFElement.setLongID(false);
 		JDFDoc doc = new JDFDoc("JDF");
@@ -167,7 +167,7 @@ public class JDFUsageCounterTest extends JDFTestCaseBase
 	////////////////////////////////////////////////////////////////////////////
 	// /
 
-	public final void testMatchesString() throws Exception
+	public final void testMatchesString()
 	{
 		JDFUsageCounter c = (JDFUsageCounter) new JDFDoc(
 				ElementName.USAGECOUNTER).getRoot();

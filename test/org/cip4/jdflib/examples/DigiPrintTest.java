@@ -418,7 +418,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 	 * 
 	 * @return
 	 */
-	public void testDirectProof() throws Exception
+	public void testDirectProof()
 	{
 		n
 				.setXMLComment("Example workflow with initioal warmup phase, one direct proof and 100 copies of 10 sheets each.\n"

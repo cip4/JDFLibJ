@@ -228,7 +228,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	}
 
 	// ////////////////////////////////////////////////////////////
-	public void testShape2() throws Exception
+	public void testShape2()
 	{
 		JDFShape nl = new JDFShape(1, 2);
 		assertEquals(nl.doubleAt(0), 1, 0.0);

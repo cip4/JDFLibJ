@@ -89,7 +89,7 @@ public class MISPreGoldenTicketTest extends JDFTestCaseBase
 	////////////////////////////////////////////////////////////////////////////
 	// /
 
-	public void testMISPreContentCreation() throws Exception
+	public void testMISPreContentCreation()
 	{
 		MISPreGoldenTicket goldenTicket = new MISPreGoldenTicket(1, null, 2, 2,
 				vMap);
@@ -112,7 +112,7 @@ public class MISPreGoldenTicketTest extends JDFTestCaseBase
 	////////////////////////////////////////////////////////////////////////////
 	// /
 
-	public void testMISPreImpositionPreparation() throws Exception
+	public void testMISPreImpositionPreparation()
 	{
 		for (int i = 0; i < 4; i++)
 		{
@@ -151,7 +151,7 @@ public class MISPreGoldenTicketTest extends JDFTestCaseBase
 	 * 
 	 * @throws Exception
 	 */
-	public void testMIPreComplex() throws Exception
+	public void testMIPreComplex()
 	{
 
 		for (int i = 0; i < 4; i++)
@@ -225,6 +225,7 @@ public class MISPreGoldenTicketTest extends JDFTestCaseBase
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
+	@Override
 	protected void setUp() throws Exception
 	{
 		agentName = JDFAudit.getStaticAgentName();
@@ -253,6 +254,7 @@ public class MISPreGoldenTicketTest extends JDFTestCaseBase
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
+	@Override
 	protected void tearDown() throws Exception
 	{
 		JDFAudit.setStaticAgentName(agentName);

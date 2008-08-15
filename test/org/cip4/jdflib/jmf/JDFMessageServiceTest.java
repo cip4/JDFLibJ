@@ -81,7 +81,7 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 public class JDFMessageServiceTest extends TestCase
 {
 
-	public void testgetFamilies() throws Exception
+	public void testgetFamilies()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
 		JDFMessageService ms = (JDFMessageService) doc.getRoot();
@@ -97,7 +97,7 @@ public class JDFMessageServiceTest extends TestCase
 
 	////////////////////////////////////////////////////////////////////////////
 	// /////////////////
-	public void testsetFamily() throws Exception
+	public void testsetFamily()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
 		JDFMessageService ms = (JDFMessageService) doc.getRoot();
@@ -107,7 +107,7 @@ public class JDFMessageServiceTest extends TestCase
 
 	////////////////////////////////////////////////////////////////////////////
 	// /////////////////
-	public void testsetFamilies() throws Exception
+	public void testsetFamilies()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
 		JDFMessageService ms = (JDFMessageService) doc.getRoot();

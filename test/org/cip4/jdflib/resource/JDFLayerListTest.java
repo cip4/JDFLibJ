@@ -104,7 +104,7 @@ public class JDFLayerListTest extends JDFTestCaseBase
 	 * 
 	 * @return
 	 */
-	public void testLayerRunList() throws Exception
+	public void testLayerRunList()
 	{
 		JDFElement.setLongID(false);
 		setUpDoc();
@@ -149,7 +149,7 @@ public class JDFLayerListTest extends JDFTestCaseBase
 	 * 
 	 * @return
 	 */
-	public void testLayerRunListWithLL() throws Exception
+	public void testLayerRunListWithLL()
 	{
 		JDFElement.setLongID(false);
 		setUpDoc();
@@ -177,7 +177,7 @@ public class JDFLayerListTest extends JDFTestCaseBase
 	 * 
 	 * @return
 	 */
-	public void testLayerRunListComplex() throws Exception
+	public void testLayerRunListComplex()
 	{
 		JDFElement.setLongID(false);
 		setUpDoc();
@@ -213,7 +213,7 @@ public class JDFLayerListTest extends JDFTestCaseBase
 	 * 
 	 * @return
 	 */
-	public void testLayerRunListIdentical() throws Exception
+	public void testLayerRunListIdentical()
 	{
 		JDFElement.setLongID(false);
 		setUpDoc();

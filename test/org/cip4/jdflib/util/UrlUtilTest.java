@@ -84,7 +84,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 public class UrlUtilTest extends JDFTestCaseBase
 {
 	// /////////////////////////////////////////////////////////////////////////
-	public void testGetLocalURL() throws Exception
+	public void testGetLocalURL()
 	{
 		assertNull(UrlUtil.getLocalURL("foo", "foo"));
 		assertNull(UrlUtil.getLocalURL("foo", null));
@@ -94,14 +94,14 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals(UrlUtil.getLocalURL("", "foo/bar"), "foo/bar");
 	}
 
-	public void testWriteToURL() throws Exception
+	public void testWriteToURL()
 	{
 		// assertNotNull(UrlUtil.writeToURL("http://www.example.com", null,
 		// UrlUtil.GET, UrlUtil.TEXT_PLAIN, null));
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
-	public void testIsCid() throws Exception
+	public void testIsCid()
 	{
 		assertTrue(UrlUtil.isCID("cid:foo"));
 		assertTrue(UrlUtil.isCID("<cid:foo>"));
@@ -111,7 +111,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
-	public void testIsHTTP() throws Exception
+	public void testIsHTTP()
 	{
 		assertTrue(UrlUtil.isHttp("http://foo.bar.com"));
 		assertFalse(UrlUtil.isHttp(null));
@@ -119,7 +119,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
-	public void testIsIRL() throws Exception
+	public void testIsIRL()
 	{
 		assertTrue(UrlUtil.isIRL("file://blöd€.txt"));
 		assertTrue(UrlUtil.isIRL("http://foo.com/blöd€.txt"));
@@ -133,7 +133,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertTrue(UrlUtil.isIRL("file:///C:/Documents%20and%20Settings/Israel/My%20Documents/Vio%20Production/Results/TIME_H8789/TIME_H8789.pdf"));
 	}
 
-	public void testIsURL() throws Exception
+	public void testIsURL()
 	{
 		assertTrue(UrlUtil.isURL("file://bl.txt"));
 		assertTrue(UrlUtil.isURL("http://foo.com/bl.txt"));
@@ -181,7 +181,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
-	public void testIsEscaped() throws Exception
+	public void testIsEscaped()
 	{
 		assertTrue(UrlUtil.isEscaped("http%3A%2F%2FDRU-CIP4HD1%3A6331"));
 		assertFalse(UrlUtil.isEscaped("file:http%3A%2F%2FDRU-CIP4HD1%3A6331"));
@@ -190,7 +190,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 
-	public void testFileToURL() throws Exception
+	public void testFileToURL()
 	{
 		File f = new File("C:\\IO.SYS");
 		String s = UrlUtil.fileToUrl(f, false);

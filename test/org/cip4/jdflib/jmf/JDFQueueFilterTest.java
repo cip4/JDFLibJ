@@ -82,7 +82,8 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	JDFJMF theJMF;
 	JDFQueueFilter filter;
 
-	public void setUp() throws Exception
+	@Override
+	public void setUp()
 	{
 		JDFDoc d = new JDFDoc(ElementName.QUEUE);
 		theQueue = (JDFQueue) d.getRoot();

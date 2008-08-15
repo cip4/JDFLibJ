@@ -1510,7 +1510,7 @@ public class KElementTest extends JDFTestCaseBase
 	////////////////////////////////////////////////////////////////////////////
 	// //
 
-	public void testSetAttributes() throws Exception
+	public void testSetAttributes()
 	{
 		XMLDoc jdfDoc = new XMLDoc("Foo", null);
 		KElement root = jdfDoc.getRoot();
@@ -1528,7 +1528,7 @@ public class KElementTest extends JDFTestCaseBase
 	////////////////////////////////////////////////////////////////////////////
 	// /////////
 
-	public void testSetAttributesResource() throws Exception
+	public void testSetAttributesResource()
 	{
 		JDFDoc doc = new JDFDoc("JDF");
 		JDFNode n = doc.getJDFRoot();
@@ -1542,7 +1542,7 @@ public class KElementTest extends JDFTestCaseBase
 
 	}
 
-	public void testSetAttribute() throws Exception
+	public void testSetAttribute()
 	{
 		JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 		JDFNode root = (JDFNode) jdfDoc.getRoot();
@@ -1565,7 +1565,7 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals("special characters", kElem.getAttribute("foo", null, null), "הצü\"\'");
 	}
 
-	public void testSetAttributeNS() throws Exception
+	public void testSetAttributeNS()
 	{
 		XMLDoc doc = new XMLDoc("a", null);
 		KElement root = doc.getRoot();
@@ -1962,7 +1962,7 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals(e3.getNamespaceURI(), "www.foo.com");
 	}
 
-	public void testAppendCData() throws Exception
+	public void testAppendCData()
 	{
 		XMLDoc d = new XMLDoc("e", null);
 		KElement e = d.getRoot();

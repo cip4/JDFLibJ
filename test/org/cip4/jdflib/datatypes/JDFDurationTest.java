@@ -170,7 +170,7 @@ public class JDFDurationTest extends TestCase
 
 	// //////////////////////////////////////////////////////////////////////
 
-	public final void testCompareTo() throws Exception
+	public final void testCompareTo()
 	{
 		assertEquals(new JDFDuration(90.5).compareTo(new JDFDuration(90.5)), 0);
 		assertEquals(new JDFDuration(-90.5).compareTo(new JDFDuration(-90.5)),
@@ -182,7 +182,7 @@ public class JDFDurationTest extends TestCase
 		assertEquals(new JDFDuration(90.5).compareTo(new JDFDuration(900)), -1);
 	}
 
-	public final void testConstructFromDate() throws Exception
+	public final void testConstructFromDate()
 	{
 		JDFDate start = new JDFDate();
 		JDFDate end = new JDFDate(start);
@@ -193,14 +193,14 @@ public class JDFDurationTest extends TestCase
 		assertEquals(new JDFDuration(start, end), new JDFDuration(-100));
 	}
 
-	public final void testAddSeconds() throws Exception
+	public final void testAddSeconds()
 	{
 		final JDFDuration duration = new JDFDuration();
 		assertEquals(duration.addSeconds(5.234), 5.234, 0.0001);
 		assertEquals(duration.getDurationISO(), "PT5.234S");
 	}
 
-	public final void testSetDuration() throws Exception
+	public final void testSetDuration()
 	{
 		final JDFDuration duration = new JDFDuration();
 		duration.setDuration(65);

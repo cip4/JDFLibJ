@@ -130,6 +130,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 	private JDFDeviceCap devicecapProduct;
 	private JDFDevice device;
 
+	@Override
 	protected void setUp() throws Exception
 	{
 		JDFDoc doc = new JDFDoc("Device");
@@ -279,7 +280,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////////////////
 
-	public void testGetBadJDFInfo() throws Exception
+	public void testGetBadJDFInfo()
 	{
 		JDFDoc d = JDFDoc.parseFile(sm_dirTestData
 				+ "Device_Elk_ConventionalPrinting2.xml");
@@ -404,7 +405,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////
 
-	public void testGetExecutableJDF() throws Exception
+	public void testGetExecutableJDF()
 	{
 
 		String docTest = "MISPrepress_ICS_Minimal.jdf";
@@ -631,7 +632,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 	}
 
 	// ///////////////////////////////////////////////////////////////
-	public void testCreateModuleCaps() throws Exception
+	public void testCreateModuleCaps()
 	{
 		devicecap.createModuleCaps(null);
 		assertNotNull(devicecap.getModulePool());

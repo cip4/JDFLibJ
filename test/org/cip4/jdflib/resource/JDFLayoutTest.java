@@ -529,7 +529,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	// ///////////////////////////////////////////////////
-	public void testGetLayoutLeavesOld() throws Exception
+	public void testGetLayoutLeavesOld()
 	{
 		testBuildOldLayout();
 
@@ -546,7 +546,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	}
 
 	// ///////////////////////////////////////////////////
-	public void testGetLayoutLeavesNew() throws Exception
+	public void testGetLayoutLeavesNew()
 	{
 		testBuildNewLayout();
 

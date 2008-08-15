@@ -80,7 +80,7 @@ public class JDFPersonTest extends JDFTestCaseBase
 {
 	JDFPerson person;
 
-	public void testFamilyName() throws Exception
+	public void testFamilyName()
 	{
 		person.setFamilyName("Müller");
 		assertEquals(person.getFamilyName(), "Müller");
@@ -93,7 +93,7 @@ public class JDFPersonTest extends JDFTestCaseBase
 		assertEquals(person.getDescriptiveName(), "Müller");
 	}
 
-	public void testFirstName() throws Exception
+	public void testFirstName()
 	{
 		person.setFirstName("Joe");
 		assertEquals(person.getFirstName(), "Joe");
@@ -106,7 +106,7 @@ public class JDFPersonTest extends JDFTestCaseBase
 		assertEquals(person.getDescriptiveName(), "Joe");
 	}
 
-	public void testFirstLastName() throws Exception
+	public void testFirstLastName()
 	{
 		testFirstName();
 		person.setFamilyName("Müller");
@@ -129,7 +129,7 @@ public class JDFPersonTest extends JDFTestCaseBase
 		assertEquals(person.getDescriptiveName(), "Mary Schmidt");
 	}
 
-	public void testLastFirstName() throws Exception
+	public void testLastFirstName()
 	{
 		testFamilyName();
 		person.setFirstName("Joe");
@@ -137,7 +137,7 @@ public class JDFPersonTest extends JDFTestCaseBase
 		assertEquals(person.getDescriptiveName(), "Joe Müller");
 	}
 
-	public void testKeepDescName() throws Exception
+	public void testKeepDescName()
 	{
 		person.setDescriptiveName("foo");
 		person.setFirstName("Joe");
@@ -152,6 +152,7 @@ public class JDFPersonTest extends JDFTestCaseBase
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
+	@Override
 	protected void setUp() throws Exception
 	{
 		// TODO Auto-generated method stub

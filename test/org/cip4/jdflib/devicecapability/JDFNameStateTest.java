@@ -91,6 +91,7 @@ public class JDFNameStateTest extends JDFTestCaseBase
 
 	JDFNameState theState = null;
 
+	@Override
 	public void setUp() throws Exception
 	{
 		super.setUp();
@@ -139,7 +140,7 @@ public class JDFNameStateTest extends JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////////
 
-	public final void testSetCurrentValue() throws Exception
+	public final void testSetCurrentValue()
 	{
 		final VString integerList = new VString("1 2 3", null);
 		theState.setCurrentValue(integerList);
@@ -150,7 +151,7 @@ public class JDFNameStateTest extends JDFTestCaseBase
 	}
 
 	// //////////////////////////////////////////////////////////
-	public final void testSetDefaultValue() throws Exception
+	public final void testSetDefaultValue()
 	{
 		final VString integerList = new VString("1 2 3", null);
 		theState.setDefaultValue(integerList);
@@ -162,7 +163,7 @@ public class JDFNameStateTest extends JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////////
 	// //////////////////////////////////////////////////////////
-	public final void testSetAllowedValueList() throws Exception
+	public final void testSetAllowedValueList()
 	{
 		final VString integerList = new VString("1 2 3 4 44", null);
 		theState.setAllowedValueList(integerList);
@@ -175,7 +176,7 @@ public class JDFNameStateTest extends JDFTestCaseBase
 	}
 
 	// //////////////////////////////////////////////////////////
-	public final void testIsValid() throws Exception
+	public final void testIsValid()
 	{
 		final VString integerList = new VString("1 2 3", null);
 		theState.setDefaultValue(integerList);

@@ -90,7 +90,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 * check speed of the parser
 	 * 
 	 */
-	public void testSpeed() throws Exception
+	public void testSpeed()
 	{
 		long l1 = System.nanoTime();
 		for (int i = 0; i < 1000; i++)
@@ -104,7 +104,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 * check speed of the parser
 	 * 
 	 */
-	public void testSpeed1() throws Exception
+	public void testSpeed1()
 	{
 		long l1 = System.nanoTime();
 		for (int i = 0; i < 1000; i++)
@@ -118,7 +118,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 * check speed of the parser
 	 * 
 	 */
-	public void testParseSpeed() throws Exception
+	public void testParseSpeed()
 	{
 		JDFParser parser = new JDFParser();
 		System.gc();
@@ -133,7 +133,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 * check speed of the parser
 	 * 
 	 */
-	public void testBadNS() throws Exception
+	public void testBadNS()
 	{
 		String s2 = "<JMF/>";
 		assertEquals(new JDFParser().parseString(s2).getRoot().getLocalName(),
@@ -144,7 +144,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 * check speed of the parser
 	 * 
 	 */
-	public void testSpeed2() throws Exception
+	public void testSpeed2()
 	{
 		long l1 = System.nanoTime();
 		JDFParser p = new JDFParser();
@@ -160,7 +160,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 * 
 	 * @throws Exception
 	 */
-	public void testSkipParse() throws Exception
+	public void testSkipParse()
 	{
 		JDFParser.m_searchStream = true;
 		String s2 = "        ------ end of header ----!\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n <JMF/>";

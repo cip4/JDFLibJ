@@ -91,7 +91,7 @@ import org.cip4.jdflib.resource.process.JDFComponent;
 public class JDFResourceLinkPoolTest extends JDFTestCaseBase
 {
 
-	public void testGetLink() throws Exception
+	public void testGetLink()
 	{
 		JDFDoc d = new JDFDoc("JDF");
 		JDFNode n = d.getJDFRoot();
@@ -118,7 +118,7 @@ public class JDFResourceLinkPoolTest extends JDFTestCaseBase
 	 * 
 	 * @throws Exception
 	 */
-	public void testLinkResource() throws Exception
+	public void testLinkResource()
 	{
 		JDFDoc d = new JDFDoc("JDF");
 		JDFNode n = d.getJDFRoot();
@@ -159,7 +159,7 @@ public class JDFResourceLinkPoolTest extends JDFTestCaseBase
 	 * 
 	 * @throws Exception
 	 */
-	public void testLinkResourcePartition() throws Exception
+	public void testLinkResourcePartition()
 	{
 		JDFDoc d = new JDFDoc("JDF");
 		JDFNode n = d.getJDFRoot();

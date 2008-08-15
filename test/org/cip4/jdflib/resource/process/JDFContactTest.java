@@ -89,6 +89,7 @@ public class JDFContactTest extends JDFTestCaseBase
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
+	@Override
 	protected void setUp() throws Exception
 	{
 		// TODO Auto-generated method stub
@@ -99,13 +100,13 @@ public class JDFContactTest extends JDFTestCaseBase
 		co = (JDFContact) n.addResource(ElementName.CONTACT, null);
 	}
 
-	public void testsetContactType() throws Exception
+	public void testsetContactType()
 	{
 		co.setContactTypes(EnumContactType.Accounting);
 		assertEquals(co.getAttribute(AttributeName.CONTACTTYPES), "Accounting");
 	}
 
-	public void testaddContactType() throws Exception
+	public void testaddContactType()
 	{
 		co.addContactTypes(null);
 		assertTrue(co.getContactTypes().isEmpty());
@@ -113,7 +114,7 @@ public class JDFContactTest extends JDFTestCaseBase
 		assertEquals(co.getAttribute(AttributeName.CONTACTTYPES), "Accounting");
 	}
 
-	public void testsetPerson() throws Exception
+	public void testsetPerson()
 	{
 		assertNull(co.setPerson(null, null));
 

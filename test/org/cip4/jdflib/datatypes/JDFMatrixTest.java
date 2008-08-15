@@ -85,7 +85,7 @@ import org.cip4.jdflib.node.JDFNode;
 
 public class JDFMatrixTest extends JDFTestCaseBase
 {
-	public void testCreate() throws Exception
+	public void testCreate()
 	{
 		JDFMatrix m = new JDFMatrix(90, 20, 20);
 		JDFMatrix m2 = new JDFMatrix(EnumOrientation.Rotate90, 0, 0);
@@ -105,7 +105,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	}
 
 	// ////////////////////////////////////////////////////////////
-	public void testOrientation() throws Exception
+	public void testOrientation()
 	{
 
 		JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate0, 0, 0);
@@ -113,7 +113,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	}
 
 	// ////////////////////////////////////////////////////////////
-	public void testRotate() throws Exception
+	public void testRotate()
 	{
 
 		JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate0, 0, 0);
@@ -155,7 +155,7 @@ public class JDFMatrixTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////
 	// ////////////////////////////////////////////////////////////
-	public void testConcat() throws Exception
+	public void testConcat()
 	{
 
 		JDFMatrix m = new JDFMatrix(EnumOrientation.Rotate90, 0, 0);

@@ -101,7 +101,7 @@ public class ProcessRunTest extends JDFTestCaseBase
 
 	}
 
-	public void testAddPhaseTime() throws Exception
+	public void testAddPhaseTime()
 	{
 		JDFDoc doc = new JDFDoc("JDF");
 		JDFNode n = doc.getJDFRoot();

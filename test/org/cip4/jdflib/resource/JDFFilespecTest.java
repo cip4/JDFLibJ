@@ -95,7 +95,7 @@ import org.cip4.jdflib.util.MimeUtilTest;
 
 public class JDFFilespecTest extends JDFTestCaseBase
 {
-	public void testSetAbsoluteURL() throws Exception
+	public void testSetAbsoluteURL()
 	{
 		JDFDoc doc = new JDFDoc("JDF");
 		JDFNode n = doc.getJDFRoot();
@@ -137,7 +137,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////////////
 
-	public void testGetMimeTypeFromURL() throws Exception
+	public void testGetMimeTypeFromURL()
 	{
 		assertNull(JDFFileSpec.getMimeTypeFromURL(null));
 		assertNull(JDFFileSpec.getMimeTypeFromURL("burp"));
@@ -148,7 +148,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	}
 
 	// //////////////////////////////////////////////////////////////
-	public void testSetMimeURL() throws Exception
+	public void testSetMimeURL()
 	{
 		JDFDoc d = new JDFDoc("FileSpec");
 		JDFFileSpec fs = (JDFFileSpec) d.getRoot();

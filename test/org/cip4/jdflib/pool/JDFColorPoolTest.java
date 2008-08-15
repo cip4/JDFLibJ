@@ -89,6 +89,7 @@ public class JDFColorPoolTest extends TestCase
 {
 	JDFColorPool cp;
 
+	@Override
 	public void setUp()
 	{
 		try
@@ -114,7 +115,7 @@ public class JDFColorPoolTest extends TestCase
 	 * 
 	 * @throws Exception
 	 */
-	public void testGetColorWithName() throws Exception
+	public void testGetColorWithName()
 	{
 		assertNotNull("grün", cp.getColorWithName("Grün"));
 		boolean caught = false;
@@ -133,12 +134,12 @@ public class JDFColorPoolTest extends TestCase
 	 * 
 	 * @throws Exception
 	 */
-	public void testGetCreateColorWithName() throws Exception
+	public void testGetCreateColorWithName()
 	{
 		assertNotNull("grün", cp.getCreateColorWithName("Grün", null));
 	}
 
-	public void testRemoveColor() throws Exception
+	public void testRemoveColor()
 	{
 		assertEquals("num", cp.numChildElements("Color", null), 3);
 		cp.removeColor("bar");
@@ -150,7 +151,7 @@ public class JDFColorPoolTest extends TestCase
 
 	}
 
-	public void testDuplicateColor() throws Exception
+	public void testDuplicateColor()
 	{
 		assertNull(cp.getDuplicateColors());
 		JDFColor c = cp.appendColorWithName("grun", "grun");

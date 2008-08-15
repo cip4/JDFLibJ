@@ -90,7 +90,7 @@ import org.cip4.jdflib.util.JDFDate;
 
 public class PhaseTimeTest extends JDFTestCaseBase
 {
-	public void testGetLink() throws Exception
+	public void testGetLink()
 	{
 		JDFDoc doc = new JDFDoc("JDF");
 		JDFNode n = doc.getJDFRoot();
@@ -109,7 +109,7 @@ public class PhaseTimeTest extends JDFTestCaseBase
 		assertEquals(rl.toString(), pt.getLink(0).toString());
 	}
 
-	public void testGetDuration() throws Exception
+	public void testGetDuration()
 	{
 		JDFDoc doc = new JDFDoc("JDF");
 		JDFNode n = doc.getJDFRoot();
@@ -124,7 +124,7 @@ public class PhaseTimeTest extends JDFTestCaseBase
 
 	}
 
-	public void testModuleIDs() throws Exception
+	public void testModuleIDs()
 	{
 		JDFDoc doc = new JDFDoc("JDF");
 		JDFNode n = doc.getJDFRoot();

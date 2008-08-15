@@ -118,6 +118,7 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 	private JDFEnumerationState compState;
 
 	// TODO add some more fitsvalue tests
+	@Override
 	protected void setUp() throws Exception
 	{
 		super.setUp();
@@ -161,7 +162,7 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 	}
 
 	// ////////////////////////////////////////////////////////////////
-	public void testEnumerationEvaluation() throws Exception
+	public void testEnumerationEvaluation()
 	{
 		JDFDoc d = new JDFDoc(ElementName.ENUMERATIONEVALUATION);
 		JDFEnumerationEvaluation ee = (JDFEnumerationEvaluation) d.getRoot();

@@ -83,7 +83,7 @@ import junit.framework.TestCase;
 
 public class JDFDateTest extends TestCase
 {
-	public void testBadDate() throws Exception
+	public void testBadDate()
 	{
 		JDFDate date;
 		try
@@ -245,7 +245,7 @@ public class JDFDateTest extends TestCase
 
 	// ////////////////////////////////////////////////////////
 
-	public void testEquals() throws Exception
+	public void testEquals()
 	{
 		JDFDate date1 = new JDFDate();
 		JDFDate date2 = new JDFDate(date1);
@@ -255,7 +255,7 @@ public class JDFDateTest extends TestCase
 
 	// ////////////////////////////////////////////////////////
 
-	public void testSort() throws Exception
+	public void testSort()
 	{
 		JDFDate[] a = new JDFDate[10];
 		JDFDate date1 = new JDFDate();
@@ -274,7 +274,7 @@ public class JDFDateTest extends TestCase
 
 	// ////////////////////////////////////////////////////////
 
-	public void testCompareTo() throws Exception
+	public void testCompareTo()
 	{
 		JDFDate date1 = new JDFDate();
 		JDFDate date2 = new JDFDate();
@@ -285,7 +285,7 @@ public class JDFDateTest extends TestCase
 		assertTrue(date2.compareTo(date2) == 0);
 	}
 
-	public void testCompare() throws Exception
+	public void testCompare()
 	{
 		JDFDate date1 = new JDFDate();
 		JDFDate date2 = new JDFDate();
@@ -296,7 +296,7 @@ public class JDFDateTest extends TestCase
 		assertTrue(new JDFDate().compare(date2, date2) == 0);
 	}
 
-	public void testCompareString() throws Exception
+	public void testCompareString()
 	{
 		JDFDate date1 = new JDFDate();
 		JDFDate date2 = new JDFDate();
@@ -400,7 +400,7 @@ public class JDFDateTest extends TestCase
 	}
 
 	// /////////////////////////////////////////////////////
-	public void testTimeZone() throws Exception
+	public void testTimeZone()
 	{
 		TimeZone t = TimeZone.getDefault();
 		JDFDate d = new JDFDate();

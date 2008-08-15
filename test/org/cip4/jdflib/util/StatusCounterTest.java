@@ -103,7 +103,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 	private JDFEmployee employee;
 
 	@Override
-	public void setUp() throws Exception
+	public void setUp()
 	{
 		d = creatXMDoc();
 		n = d.getJDFRoot();

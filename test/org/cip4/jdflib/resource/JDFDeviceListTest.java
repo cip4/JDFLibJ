@@ -79,7 +79,7 @@ public class JDFDeviceListTest extends JDFTestCaseBase
 	/**
 	 * @return
 	 */
-	public void testgetDeviceInfo() throws Exception
+	public void testgetDeviceInfo()
 	{
 		assertNull(d.getDeviceInfo("abc"));
 		assertNotNull(d.getDeviceInfo("d1"));
@@ -90,7 +90,7 @@ public class JDFDeviceListTest extends JDFTestCaseBase
 	/**
 	 * @return
 	 */
-	public void testgetCreateDeviceInfo() throws Exception
+	public void testgetCreateDeviceInfo()
 	{
 		assertNotNull(d.getCreateDeviceInfo("d3"));
 		assertEquals(d.getCreateDeviceInfo("d3").getDeviceID(), "d3");

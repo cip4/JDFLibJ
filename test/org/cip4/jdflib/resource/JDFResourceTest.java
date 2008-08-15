@@ -2173,7 +2173,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	////////////////////////////////////////////////////////////////////////////
 	// /
 
-	public void testAddpartitionEnum() throws Exception
+	public void testAddpartitionEnum()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.JDF);
 		JDFNode n = doc.getJDFRoot();
@@ -2186,7 +2186,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	////////////////////////////////////////////////////////////////////////////
 	// /
 
-	public void testAddpartition() throws Exception
+	public void testAddpartition()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.JDF);
 		JDFNode n = doc.getJDFRoot();
@@ -2340,6 +2340,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
+	@Override
 	protected void tearDown() throws Exception
 	{
 		// TODO Auto-generated method stub
@@ -2353,6 +2354,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
+	@Override
 	protected void setUp() throws Exception
 	{
 		// TODO Auto-generated method stub

@@ -166,7 +166,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 		n3.getPredecessors(true, true);
 	}
 
-	public void testGetRefPartition() throws Throwable
+	public void testGetRefPartition()
 	{
 		JDFDoc jdfDoc = JDFDoc.parseFile(sm_dirTestData
 				+ "GetReferencedPartition.jdf");
@@ -328,7 +328,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	 * test whether combinedprocessIndex is automagically and correctly assigned
 	 * 
 	 */
-	public void testLinkNamesCombined() throws Exception
+	public void testLinkNamesCombined()
 	{
 		JDFDoc d = new JDFDoc("JDF");
 		JDFNode n = d.getJDFRoot();
@@ -342,7 +342,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	 * test whether combinedprocessIndex is automagically and correctly assigned
 	 * 
 	 */
-	public void testLinkNamesProduct() throws Exception
+	public void testLinkNamesProduct()
 	{
 		JDFDoc d = new JDFDoc("JDF");
 		JDFNode n = d.getJDFRoot();
@@ -357,7 +357,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	 * test whether combinedprocessIndex is automagically and correctly assigned
 	 * 
 	 */
-	public void testLinkResourceSimple() throws Exception
+	public void testLinkResourceSimple()
 	{
 		JDFDoc d = new JDFDoc("JDF");
 		JDFNode n = d.getJDFRoot();
@@ -372,7 +372,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	 * test whether combinedprocessIndex is automagically and correctly assigned
 	 * 
 	 */
-	public void testLinkOutput() throws Exception
+	public void testLinkOutput()
 	{
 		JDFDoc d = new JDFDoc("JDF");
 		JDFNode n = d.getJDFRoot();
@@ -593,7 +593,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertNotNull(n.getResourceLinkPool());
 	}
 
-	public void testFixVersion() throws Exception
+	public void testFixVersion()
 	{
 		JDFDoc doc = new JDFDoc("JDF");
 		JDFNode node = doc.getJDFRoot();
@@ -724,7 +724,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	 * test setPartStatus with null maps
 	 * 
 	 */
-	public void testSetPartStatusNull() throws Exception
+	public void testSetPartStatusNull()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.JDF);
 		JDFNode root = doc.getJDFRoot();
@@ -752,7 +752,7 @@ public class JDFNodeTest extends JDFTestCaseBase
      *
      *
      */
-	public void testSetPartStatusNotNull() throws Exception
+	public void testSetPartStatusNotNull()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.JDF);
 		JDFNode root = doc.getJDFRoot();
@@ -978,7 +978,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 
-	public void testGetExecutablePartitionsPreflightImport() throws Exception
+	public void testGetExecutablePartitionsPreflightImport()
 	{
 		String strJDFName = "PreflightImport1.jdf";
 
@@ -1018,7 +1018,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 
-	public void testGetExecutablePartitionsNormalizer() throws Exception
+	public void testGetExecutablePartitionsNormalizer()
 	{
 		String strJDFName = "Normalizer.jdf";
 		JDFParser parser = new JDFParser();
@@ -1046,7 +1046,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 
-	public void testIsExecutableZones() throws Exception
+	public void testIsExecutableZones()
 	{
 		String strJDFName = "ZoneTest.jdf";
 		JDFParser parser = new JDFParser();
@@ -1503,7 +1503,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	////////////////////////////////////////////////////////////////////////////
 	// ///////////
 
-	public void testGetPartStatusImplicit() throws Exception
+	public void testGetPartStatusImplicit()
 	{
 		JDFNode createJDF = new JDFDoc("JDF").getJDFRoot();
 		createJDF.getCreateResourcePool();
@@ -1851,7 +1851,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////
 
-	public void testCheckSpawnedResources() throws Exception
+	public void testCheckSpawnedResources()
 	{
 		final String strJDFName = "000023_Test_PR3.0.jdf";
 		String strJDFPath = sm_dirTestData + strJDFName;

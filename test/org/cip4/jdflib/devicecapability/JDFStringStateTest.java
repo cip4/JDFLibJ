@@ -87,6 +87,7 @@ public class JDFStringStateTest extends JDFTestCaseBase
 
 	JDFStringState sState = null;
 
+	@Override
 	public void setUp() throws Exception
 	{
 		super.setUp();
@@ -99,7 +100,7 @@ public class JDFStringStateTest extends JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////////
 	// //////////////////////////////////////////////////////////
-	public final void testAddValue() throws Exception
+	public final void testAddValue()
 	{
 		sState.appendValueAllowedValue("20");
 		sState.addValue("24", EnumFitsValue.Allowed);

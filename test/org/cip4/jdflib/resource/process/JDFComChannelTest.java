@@ -81,7 +81,7 @@ public class JDFComChannelTest extends JDFTestCaseBase
 {
 	JDFComChannel cc;
 
-	public void testSetEMailLocator() throws Exception
+	public void testSetEMailLocator()
 	{
 		cc.setEMailLocator(" test@cip4.org");
 		assertEquals(JDFComChannel.MAILTO + "test@cip4.org", cc.getLocator());
@@ -92,7 +92,7 @@ public class JDFComChannelTest extends JDFTestCaseBase
 		assertEquals("test.2@cip4.org", cc.getEMailAddress());
 	}
 
-	public void testSetPhoneNumber() throws Exception
+	public void testSetPhoneNumber()
 	{
 		cc.setPhoneNumber(" +49 431 123456 ", ".", EnumChannelType.Phone);
 		assertEquals(JDFComChannel.TEL + "+49.431.123456", cc.getLocator());
@@ -104,6 +104,7 @@ public class JDFComChannelTest extends JDFTestCaseBase
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
+	@Override
 	protected void setUp() throws Exception
 	{
 		// TODO Auto-generated method stub

@@ -269,7 +269,7 @@ public class JDFDevCapTest extends TestCase
 		}
 	}
 
-	public void testNameState() throws Exception
+	public void testNameState()
 	{
 		JDFDoc d = new JDFDoc("NameState");
 		JDFNameState ns = (JDFNameState) d.getRoot();
@@ -583,7 +583,7 @@ public class JDFDevCapTest extends TestCase
 		assertEquals(rs.getName(), "bar");
 	}
 
-	public void testStateReportRequired() throws Exception
+	public void testStateReportRequired()
 	{
 		JDFDoc d = new JDFDoc("DevCap");
 		JDFDevCap dc = (JDFDevCap) d.getRoot();

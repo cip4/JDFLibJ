@@ -88,7 +88,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 public class JDFPipeParamsTest extends TestCase
 {
 
-	public void testAppendResourceLink() throws Exception
+	public void testAppendResourceLink()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.PIPEPARAMS);
 		JDFPipeParams pp = (JDFPipeParams) doc.getRoot();
@@ -107,7 +107,7 @@ public class JDFPipeParamsTest extends TestCase
 	////////////////////////////////////////////////////////////////////////////
 	// /////////////////
 
-	public void testAppendResource() throws Exception
+	public void testAppendResource()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.PIPEPARAMS);
 		JDFPipeParams pp = (JDFPipeParams) doc.getRoot();
@@ -122,7 +122,7 @@ public class JDFPipeParamsTest extends TestCase
 	////////////////////////////////////////////////////////////////////////////
 	// /////////////////
 
-	public void testGetResourceLink() throws Exception
+	public void testGetResourceLink()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.JMF);
 		JDFJMF jmf = doc.getJMFRoot();
@@ -145,7 +145,7 @@ public class JDFPipeParamsTest extends TestCase
 	////////////////////////////////////////////////////////////////////////////
 	// /////////////////
 
-	public void testGetResource() throws Exception
+	public void testGetResource()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.JMF);
 		JDFJMF jmf = doc.getJMFRoot();

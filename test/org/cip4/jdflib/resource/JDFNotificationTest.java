@@ -79,7 +79,7 @@ public class JDFNotificationTest extends JDFTestCaseBase
 
 	JDFNotification n;
 
-	public void testappendNotificationDetails() throws Exception
+	public void testappendNotificationDetails()
 	{
 		JDFMilestone ms = n.appendMilestone();
 		assertEquals(n.getNotificationDetailsType(), EnumNotificationDetails.Milestone);
@@ -89,7 +89,7 @@ public class JDFNotificationTest extends JDFTestCaseBase
 		assertNull(n.getCreateBarcode());
 	}
 
-	public void testgetNotificationDetails() throws Exception
+	public void testgetNotificationDetails()
 	{
 		JDFBarcode ms = n.appendBarcode();
 		assertEquals(n.getNotificationDetailsType(), EnumNotificationDetails.Barcode);
@@ -98,7 +98,7 @@ public class JDFNotificationTest extends JDFTestCaseBase
 		assertEquals(n.getNotificationDetails(), ms);
 	}
 
-	public void testgetCreateNotificationDetails() throws Exception
+	public void testgetCreateNotificationDetails()
 	{
 		JDFSystemTimeSet ms = n.getCreateSystemTimeSet();
 		assertEquals(n.getNotificationDetailsType(), EnumNotificationDetails.SystemTimeSet);
@@ -108,7 +108,7 @@ public class JDFNotificationTest extends JDFTestCaseBase
 		assertNull(n.getCreateBarcode());
 	}
 
-	public void testSetCommentText() throws Exception
+	public void testSetCommentText()
 	{
 		n.setCommentText("fooBar");
 		assertEquals(n.getCommentText(), "fooBar");
@@ -116,7 +116,7 @@ public class JDFNotificationTest extends JDFTestCaseBase
 		assertEquals(n.getCommentText(), "fooBar");
 	}
 
-	public void testsetEvent() throws Exception
+	public void testsetEvent()
 	{
 		JDFEvent e = n.setEvent("id", "value", "bullshit");
 		assertEquals(e.getEventID(), "id");

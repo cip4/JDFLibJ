@@ -105,7 +105,7 @@ public class JDFNodeInfoTest extends JDFTestCaseBase
 	}
 
 	// ///////////////////////////////////////////////////////////////////
-	public void testPartUsage() throws Exception
+	public void testPartUsage()
 	{
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFNode n = d.getJDFRoot();
@@ -121,7 +121,7 @@ public class JDFNodeInfoTest extends JDFTestCaseBase
 	}
 
 	// ///////////////////////////////////////////////////////////////////
-	public void testWorkstepID() throws Exception
+	public void testWorkstepID()
 	{
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFNode n = d.getJDFRoot();
@@ -144,7 +144,7 @@ public class JDFNodeInfoTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////////////////////
 	// ///////////////////////////////////////////////////////////////////
-	public void testCPI() throws Exception
+	public void testCPI()
 	{
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFNode n = d.getJDFRoot();

@@ -1050,7 +1050,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		}
 	}
 
-	public void testSpawnPartAmount() throws Exception
+	public void testSpawnPartAmount()
 	{
 		JDFDoc d = new JDFDoc("JDF");
 		JDFNode n = d.getJDFRoot();
@@ -2014,7 +2014,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 
-	public void testBigSpawn() throws Exception
+	public void testBigSpawn()
 	{
 		final String strJDFName = "000023_Test_PR3.0.jdf";
 		// final String strJDFName = "biginline.jdf";
@@ -2060,7 +2060,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	} //////////////////////////////////////////////////////////////////////////
 		// /
 
-	public void testManySpawn() throws Exception
+	public void testManySpawn()
 	{
 		final String strJDFName = "000023_Test_PR3.0.jdf";
 		// final String strJDFName = "biginline.jdf";
@@ -2112,7 +2112,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////
 
-	public void testMergeUpdateNI() throws Exception
+	public void testMergeUpdateNI()
 	{
 		JDFDoc doc = new JDFDoc("JDF");
 		JDFNode root = doc.getJDFRoot();
@@ -2160,7 +2160,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////
 
-	public void testBigMerge() throws Exception
+	public void testBigMerge()
 	{
 		// testBigSpawn();
 		JDFParser parser = new JDFParser();
@@ -2187,7 +2187,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////
 
-	public void testCheckSpawnedResources() throws Exception
+	public void testCheckSpawnedResources()
 	{
 		final String strJDFName = "000023_Test_PR3.0.jdf";
 		String strJDFPath = sm_dirTestData + strJDFName;
@@ -2322,7 +2322,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////
 
-	public void testSpawnSheetMix() throws Exception
+	public void testSpawnSheetMix()
 	{
 		JDFNode nr = new JDFDoc("JDF").getJDFRoot();
 		nr.setType(EnumType.Product);
@@ -2389,7 +2389,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////
 
-	public void testSpawnSheetNeedsSide() throws Exception
+	public void testSpawnSheetNeedsSide()
 	{
 		final JDFDoc readJDF = JDFDoc.parseFile(sm_dirTestData + "pdyv5.jdf");
 		assertNotNull(readJDF);
@@ -2417,7 +2417,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////
 
-	public void testSpawnNameSpace() throws Exception
+	public void testSpawnNameSpace()
 	{
 		for (int i = 0; i < 3; i++)
 		{
@@ -2716,6 +2716,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
+	@Override
 	protected void setUp() throws Exception
 	{
 		super.setUp();

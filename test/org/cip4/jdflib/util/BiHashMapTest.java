@@ -77,7 +77,7 @@ public class BiHashMapTest extends JDFTestCaseBase
 {
 
 	// /////////////////////////////////////////////////////////////////////////
-	public void testPut() throws Exception
+	public void testPut()
 	{
 		BiHashMap hm = new BiHashMap();
 		hm.put("a", "b");

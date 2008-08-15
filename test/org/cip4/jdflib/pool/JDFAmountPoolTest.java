@@ -102,7 +102,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 * 
 	 * @throws Exception
 	 */
-	public void testReducePartAmounts() throws Exception
+	public void testReducePartAmounts()
 	{
 		JDFDoc d = new JDFDoc("JDF");
 		JDFNode n = d.getJDFRoot();
@@ -145,7 +145,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 * 
 	 * @throws Exception
 	 */
-	public void testVirtualAmounts() throws Exception
+	public void testVirtualAmounts()
 	{
 		JDFDoc d = new JDFDoc("JDF");
 		JDFNode n = d.getJDFRoot();
@@ -181,7 +181,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 * 
 	 * @throws Exception
 	 */
-	public void testGetMatchingPartAmountVector() throws Exception
+	public void testGetMatchingPartAmountVector()
 	{
 		JDFDoc d = JDFTestCaseBase.creatXMDoc();
 		JDFNode n = d.getJDFRoot();
@@ -212,6 +212,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
+	@Override
 	protected void setUp() throws Exception
 	{
 		super.setUp();
@@ -224,7 +225,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 * 
 	 * @throws Exception
 	 */
-	public void testGetPartAmountMulti() throws Exception
+	public void testGetPartAmountMulti()
 	{
 		JDFDoc d = new JDFDoc("JDF");
 		JDFNode n = d.getJDFRoot();
@@ -261,7 +262,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 * 
 	 * @throws Exception
 	 */
-	public void testGetCreatePartAmount() throws Exception
+	public void testGetCreatePartAmount()
 	{
 		JDFAttributeMap map = new JDFAttributeMap("Separation", "Black");
 		JDFAttributeMap map2 = new JDFAttributeMap("Separation", "Cyan");

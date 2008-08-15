@@ -243,7 +243,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	}
 
 	// ////////////////////////////////////////////////////////////////
-	public void testGetFileInDirectory() throws Exception
+	public void testGetFileInDirectory()
 	{
 		assertEquals(new File("a/b"), FileUtil.getFileInDirectory(
 				new File("a"), new File("b")));

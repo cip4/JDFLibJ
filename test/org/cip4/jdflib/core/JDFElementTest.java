@@ -399,7 +399,7 @@ public class JDFElementTest extends TestCase
 	 * 
 	 * @throws Exception
 	 */
-	public void testGenerateDotID() throws Exception
+	public void testGenerateDotID()
 	{
 		JDFDoc doc = new JDFDoc("JDF");
 		JDFNode e = doc.getJDFRoot();
@@ -440,7 +440,7 @@ public class JDFElementTest extends TestCase
 	 * 
 	 * @throws Exception
 	 */
-	public void testIncludesMatchingAttribute() throws Exception
+	public void testIncludesMatchingAttribute()
 	{
 		_setUp();
 
@@ -480,7 +480,7 @@ public class JDFElementTest extends TestCase
 	 * 
 	 * @throws Exception
 	 */
-	public void testGetRefElement() throws Exception
+	public void testGetRefElement()
 	{
 		JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		JDFMedia m = (JDFMedia) n.addResource("Media", null);
@@ -503,7 +503,7 @@ public class JDFElementTest extends TestCase
 	 * 
 	 * @throws Exception
 	 */
-	public void testGetCreateElement() throws Exception
+	public void testGetCreateElement()
 	{
 		JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		JDFMedia m = (JDFMedia) n.addResource("Media", null);
@@ -518,7 +518,7 @@ public class JDFElementTest extends TestCase
 	 * 
 	 * @throws Exception
 	 */
-	public void testGetCreateRefElement() throws Exception
+	public void testGetCreateRefElement()
 	{
 		JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		JDFMedia m = (JDFMedia) n.addResource("Media", null);
@@ -554,7 +554,7 @@ public class JDFElementTest extends TestCase
 	 * 
 	 * @throws Exception
 	 */
-	public void testGetChildElementVector() throws Exception
+	public void testGetChildElementVector()
 	{
 		_setUp();
 		VElement velem = m_jdfRoot.getChildElementVector(null, null, null,
@@ -599,7 +599,7 @@ public class JDFElementTest extends TestCase
 	 * 
 	 * @throws Exception
 	 */
-	public void testGetParentJDFStatic() throws Exception
+	public void testGetParentJDFStatic()
 	{
 		JDFDoc d = new JDFDoc("JDF");
 		JDFElement root = d.getJDFRoot();
@@ -654,7 +654,7 @@ public class JDFElementTest extends TestCase
 	 * 
 	 * @throws Exception
 	 */
-	public void testGetElementByID() throws Exception
+	public void testGetElementByID()
 	{
 		_setUp();
 		KElement kelem = m_jdfRoot.getChildWithAttribute("*", "ID", "*",

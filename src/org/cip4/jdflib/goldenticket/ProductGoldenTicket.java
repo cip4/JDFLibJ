@@ -301,7 +301,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
 		return fi;
 	}
 
-	public void createPostCards() throws Exception
+	public void createPostCards()
 	{
 		initCustomerInfo(null, null, "Volkswagen AG", "Freeway postcards");
 		theNode.setDescriptiveName("7.5.1   Postcards 4c/4c");
@@ -312,7 +312,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
 		initDeliveryIntent(5000);
 	}
 
-	public void createMultiLabels() throws Exception
+	public void createMultiLabels()
 	{
 		theNode.setDescriptiveName("Multi Label Product");
 		JDFDeliveryIntent diBig = initDeliveryIntent(0);
@@ -349,7 +349,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
 		gtLabel2.getNode().removeResource("DeliveryIntent", 0);
 	}
 
-	public void createHarley() throws Exception
+	public void createHarley()
 	{
 		initCustomerInfo(null, null, "ABC Promotions Company", "Speed-Point Harley Poster");
 		theNode.setDescriptiveName("7.5.4   Poster 4c/0c");
@@ -381,7 +381,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
 
 	}
 
-	public void createAddressBook() throws Exception
+	public void createAddressBook()
 	{
 		initCustomerInfo(null, null, "Art Point", "Address Pocketbook");
 		theNode.setDescriptiveName("7.5.2   A5 brochure 4c/4c, 4pg Cover, 32 pg Text");
@@ -408,7 +408,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
 		initDeliveryIntent(5000);
 	}
 
-	public void createHDCity() throws Exception
+	public void createHDCity()
 	{
 		initCustomerInfo(null, null, "Heidelberger Druckmaschinen AG", "Heidelberg A4 brochure");
 		theNode.setDescriptiveName("7.5.5   A4 brochure with spot colors, 4pg Cover 6c/4c, 32 pg Text 4c/4c");
@@ -435,7 +435,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
 		initDeliveryIntent(5000);
 	}
 
-	public void createWatches() throws Exception
+	public void createWatches()
 	{
 		initCustomerInfo(null, null, "ABC Promotions Company", "Sinn watches double flap");
 		theNode.setDescriptiveName("7.5.3 Flyer with special fold 4c/4c");

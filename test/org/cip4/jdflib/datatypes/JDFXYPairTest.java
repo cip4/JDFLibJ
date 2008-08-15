@@ -52,7 +52,7 @@ public class JDFXYPairTest extends TestCase
 		assertTrue(ab.isGreaterOrEqual(xy));
 	}
 
-	public final void testClone() throws Exception
+	public final void testClone()
 	{
 
 		JDFXYPair ab = new JDFXYPair(1.0, 2.0);

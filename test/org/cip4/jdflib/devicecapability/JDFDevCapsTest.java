@@ -86,7 +86,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 
 public class JDFDevCapsTest extends TestCase
 {
-	public void testGetContextName() throws Exception
+	public void testGetContextName()
 	{
 		JDFDoc d = new JDFDoc("DevCaps");
 		JDFDevCaps dcs = (JDFDevCaps) d.getRoot();

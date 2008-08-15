@@ -251,7 +251,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 	 * Test method for
 	 * 'org.cip4.jdflib.resource.process.JDFMedia.setDimensionCM(JDFXYPair)'
 	 */
-	public final void testGetPageLeaves() throws Exception
+	public final void testGetPageLeaves()
 	{
 		JDFRunList rlp = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r1");
 		JDFRunList rlp2 = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r2");
@@ -366,7 +366,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 	/**
 	 * experimental mapping of tags to partition keys
 	 */
-	public void testTagMapTiff() throws Exception
+	public void testTagMapTiff()
 	{
 		KElement tagMap = rl.appendElement(METADATA_MAP);
 		tagMap.setAttribute("BoundaryKey", "EndOfDocument");
@@ -496,6 +496,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 	 * 
 	 * @see junit.framework.TestCase#setUp()
 	 */
+	@Override
 	protected void setUp() throws Exception
 	{
 		JDFElement.setLongID(false);

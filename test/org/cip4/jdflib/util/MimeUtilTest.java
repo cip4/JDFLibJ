@@ -115,7 +115,7 @@ import org.cip4.jdflib.util.MimeUtil.MIMEDetails;
 public class MimeUtilTest extends JDFTestCaseBase
 {
 
-	public void testGetMimeTypeFromExt() throws Exception
+	public void testGetMimeTypeFromExt()
 	{
 		assertEquals(UrlUtil.TEXT_UNKNOWN, MimeUtil
 				.getMimeTypeFromExt("www.foobar.com"));
@@ -129,7 +129,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 				.getMimeTypeFromExt("http://fobar.con/snarf.xml"));
 	}
 
-	public void testBuildMimePackageDocJMF() throws Exception
+	public void testBuildMimePackageDocJMF()
 	{
 		JDFDoc docJMF = new JDFDoc("JMF");
 		docJMF.setOriginalFileName("JMF.jmf");
@@ -162,7 +162,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 
 	}
 
-	public void testGetJMFSubmission() throws Exception
+	public void testGetJMFSubmission()
 	{
 		JDFDoc d1 = new JDFDoc("JMF");
 		d1.setOriginalFileName("JMF.jmf");
@@ -239,7 +239,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 		assertEquals(MimeUtil.getContentID(bp), "TheJDF");
 	}
 
-	public void testGetMultiPart() throws Exception
+	public void testGetMultiPart()
 	{
 		testBuildMimePackageDocJMF();
 		Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp

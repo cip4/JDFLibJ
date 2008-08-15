@@ -88,7 +88,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
  */
 public class SScanfTest extends JDFTestCaseBase
 {
-	public void testSScanfInt() throws Exception
+	public void testSScanfInt()
 	{
 		Vector o = SScanf.sscanf("4", "%i");
 		Integer i2 = (Integer) o.elementAt(0);
@@ -107,14 +107,14 @@ public class SScanfTest extends JDFTestCaseBase
 		assertEquals(i2.intValue(), 055);
 	}
 
-	public void testSScanfDouble() throws Exception
+	public void testSScanfDouble()
 	{
 		Vector o = SScanf.sscanf("4", "%f");
 		Double d2 = (Double) o.elementAt(0);
 		assertEquals(d2.intValue(), 4);
 	}
 
-	public void testSScanfString() throws Exception
+	public void testSScanfString()
 	{
 		Vector o = SScanf.sscanf("4", "%s");
 		String s2 = (String) o.elementAt(0);
@@ -133,7 +133,7 @@ public class SScanfTest extends JDFTestCaseBase
 		assertEquals(s2, "7%");
 	}
 
-	public void testSScanfMulti() throws Exception
+	public void testSScanfMulti()
 	{
 		Vector o = SScanf.sscanf("abc 4", "%s %i");
 		String s2 = (String) o.elementAt(0);

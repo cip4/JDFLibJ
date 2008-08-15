@@ -95,7 +95,8 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 	JDFJMF theJMF;
 	JDFQueueSubmissionParams qsp;
 
-	public void setUp() throws Exception
+	@Override
+	public void setUp()
 	{
 		JDFDoc d = new JDFDoc(ElementName.QUEUE);
 		theQueue = (JDFQueue) d.getRoot();
@@ -107,7 +108,7 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 
 	////////////////////////////////////////////////////////////////////////////
 	// /////////////////
-	public void testAddNull() throws Exception
+	public void testAddNull()
 	{
 		JDFResponse resp = qsp.addEntry(null, null);
 		assertEquals(2, resp.getReturnCode());
@@ -116,7 +117,7 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 	////////////////////////////////////////////////////////////////////////////
 	// /////////////////
 
-	public void testAddEntry() throws Exception
+	public void testAddEntry()
 	{
 		JDFResponse resp = qsp.addEntry(theQueue, null);
 		assertEquals(0, resp.getReturnCode());
@@ -141,7 +142,7 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 
 	////////////////////////////////////////////////////////////////////////////
 	// /////////////////
-	public void testGetMimeURL() throws Exception
+	public void testGetMimeURL()
 	{
 		JDFDoc d1 = new JDFDoc("JMF");
 		d1.setOriginalFileName("JMF.jmf");

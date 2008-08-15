@@ -93,7 +93,7 @@ public class JDFAuditTest extends JDFTestCaseBase
 {
 	private boolean bAutoAgent;
 
-	public void testInit() throws Exception
+	public void testInit()
 	{
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFNode n = d.getJDFRoot();
@@ -115,7 +115,7 @@ public class JDFAuditTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////////////////////
 
-	public void testFixVersion() throws Exception
+	public void testFixVersion()
 	{
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFNode n = d.getJDFRoot();
@@ -131,7 +131,7 @@ public class JDFAuditTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////////////////////
 
-	public void testSetRef() throws Exception
+	public void testSetRef()
 	{
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFNode n = d.getJDFRoot();
@@ -147,7 +147,7 @@ public class JDFAuditTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////////////////////
 
-	public void testCreateUpdate() throws Exception
+	public void testCreateUpdate()
 	{
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFNode n = d.getJDFRoot();
@@ -164,7 +164,7 @@ public class JDFAuditTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////////////////////
 
-	public void testCreated() throws Exception
+	public void testCreated()
 	{
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFNode n = d.getJDFRoot();
@@ -187,7 +187,7 @@ public class JDFAuditTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////////////////////
 
-	public void testProcessRun() throws Exception
+	public void testProcessRun()
 	{
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ProcessGroup);
@@ -200,7 +200,7 @@ public class JDFAuditTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////////////////////
 
-	public void testSpawnID() throws Exception
+	public void testSpawnID()
 	{
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFNode n = d.getJDFRoot();
@@ -220,7 +220,7 @@ public class JDFAuditTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////////////////////
 
-	public void testSetStaticAgentVersion() throws Exception
+	public void testSetStaticAgentVersion()
 	{
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFNode n = d.getJDFRoot();
@@ -261,6 +261,7 @@ public class JDFAuditTest extends JDFTestCaseBase
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
+	@Override
 	protected void tearDown() throws Exception
 	{
 		// TODO Auto-generated method stub
@@ -276,6 +277,7 @@ public class JDFAuditTest extends JDFTestCaseBase
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
+	@Override
 	protected void setUp() throws Exception
 	{
 		// TODO Auto-generated method stub

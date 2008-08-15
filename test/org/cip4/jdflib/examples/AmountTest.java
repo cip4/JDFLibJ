@@ -46,7 +46,7 @@ public class AmountTest extends JDFTestCaseBase
 	 * 
 	 * @return
 	 */
-	public void testPlannedWaste() throws Exception
+	public void testPlannedWaste()
 	{
 		JDFElement.setLongID(false);
 		d = new JDFDoc("JDF");
@@ -102,7 +102,7 @@ public class AmountTest extends JDFTestCaseBase
 	 * 
 	 * @return
 	 */
-	public void testPlannedWasteICS() throws Exception
+	public void testPlannedWasteICS()
 	{
 		JDFAmountPool ap = rlOut.getCreateAmountPool();
 		JDFAmountPool apIn = rlMediaIn.getCreateAmountPool();
@@ -174,6 +174,7 @@ public class AmountTest extends JDFTestCaseBase
 	/**
 	 * @return
 	 */
+	@Override
 	protected void setUp() throws Exception
 	{
 		super.setUp();
@@ -197,7 +198,7 @@ public class AmountTest extends JDFTestCaseBase
 	////////////////////////////////////////////////////////////////////////////
 	// //////
 
-	public void testAudits() throws Exception
+	public void testAudits()
 	{
 		testPlannedWasteICS();
 		VString vs = new VString("Cover Sheet1 Sheet2", " ");

@@ -104,7 +104,7 @@ import org.cip4.jdflib.validate.JDFValidator;
 public class CheckJDFTest extends JDFTestCaseBase
 {
 
-	public void testValidate() throws Exception
+	public void testValidate()
 	{
 		File jdfFile = new File(sm_dirTestData + "job.jdf");
 		System.out.println("Checking JDF: " + jdfFile.getAbsolutePath());
@@ -155,7 +155,7 @@ public class CheckJDFTest extends JDFTestCaseBase
 		}
 	}
 
-	public void testPrivateValidate() throws Exception
+	public void testPrivateValidate()
 	{
 		StatusCounter sc = new StatusCounter(null, null, null);
 		sc.setEvent("id1", "good", "blah");
@@ -284,7 +284,7 @@ public class CheckJDFTest extends JDFTestCaseBase
 		checker.validate(args, ins);
 	}
 
-	public void testBadResLink() throws Exception
+	public void testBadResLink()
 	{
 		JDFDoc d = new JDFDoc("JDF");
 		JDFNode n = d.getJDFRoot();
@@ -304,7 +304,7 @@ public class CheckJDFTest extends JDFTestCaseBase
 
 	}
 
-	public void testValidateZip() throws Exception
+	public void testValidateZip()
 	{
 
 		File zip = new File(sm_dirTestData + "checkjdf.zip");
@@ -325,7 +325,7 @@ public class CheckJDFTest extends JDFTestCaseBase
 		assertEquals("checkJDF.mjm has 2 files", root.numChildElements("TestFile", null), 2);
 	}
 
-	public void testMainQuietComplete() throws Exception
+	public void testMainQuietComplete()
 	{
 		File jdfFile = new File(sm_dirTestData + "job.jdf");
 		System.out.println("Checking JDF: " + jdfFile.getAbsolutePath());
@@ -336,7 +336,7 @@ public class CheckJDFTest extends JDFTestCaseBase
 
 	}
 
-	public void testMainQuietCompleteXMLReport() throws Exception
+	public void testMainQuietCompleteXMLReport()
 	{
 		File jdfFile = new File(sm_dirTestData + "job.jdf");
 		System.out.println("Checking JDF: " + jdfFile.getAbsolutePath());

@@ -141,7 +141,7 @@ public class GoldenTicketTest extends JDFTestCaseBase
 		assertTrue(node.isValid(EnumValidationLevel.Complete));
 	}
 
-	public void testProductCreatePostCards() throws Exception
+	public void testProductCreatePostCards()
 	{
 
 		ProductGoldenTicket pgt = new ProductGoldenTicket(0,
@@ -156,7 +156,7 @@ public class GoldenTicketTest extends JDFTestCaseBase
 
 	}
 
-	public void testProductCreateAddressBook() throws Exception
+	public void testProductCreateAddressBook()
 	{
 
 		pgt = new ProductGoldenTicket(0, EnumVersion.Version_1_3, 0, 0);
@@ -170,7 +170,7 @@ public class GoldenTicketTest extends JDFTestCaseBase
 
 	}
 
-	public void testProductCreateWatches() throws Exception
+	public void testProductCreateWatches()
 	{
 
 		pgt = new ProductGoldenTicket(0, EnumVersion.Version_1_3, 0, 0);
@@ -183,7 +183,7 @@ public class GoldenTicketTest extends JDFTestCaseBase
 		assertTrue(node.isValid(EnumValidationLevel.Complete));
 	}
 
-	public void testProductMultiLabel() throws Exception
+	public void testProductMultiLabel()
 	{
 
 		pgt = new ProductGoldenTicket(0, EnumVersion.Version_1_3, 0, 0);
@@ -196,7 +196,7 @@ public class GoldenTicketTest extends JDFTestCaseBase
 		assertTrue(node.isValid(EnumValidationLevel.Complete));
 	}
 
-	public void testProductCreateHarley() throws Exception
+	public void testProductCreateHarley()
 	{
 
 		pgt = new ProductGoldenTicket(0, EnumVersion.Version_1_3, 0, 0);
@@ -209,7 +209,7 @@ public class GoldenTicketTest extends JDFTestCaseBase
 		assertTrue(node.isValid(EnumValidationLevel.Complete));
 	}
 
-	public void testProductCreateHDCity() throws Exception
+	public void testProductCreateHDCity()
 	{
 
 		pgt = new ProductGoldenTicket(0, EnumVersion.Version_1_3, 0, 0);

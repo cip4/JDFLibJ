@@ -213,7 +213,7 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 	////////////////////////////////////////////////////////////////////////////
 	// /
 
-	public void testMISCPProductGrayBoxBrochure() throws Exception
+	public void testMISCPProductGrayBoxBrochure()
 	{
 
 		VJDFAttributeMap vMap = new VJDFAttributeMap();
@@ -291,6 +291,7 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
+	@Override
 	protected void setUp() throws Exception
 	{
 		super.setUp();
