@@ -179,6 +179,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
  * @author prosirai
  * @deprecated - use StatusCounter
  */
+@Deprecated
 public class StatusUtil
 {
 
@@ -540,6 +541,7 @@ public class StatusUtil
 		public double totalWaste;
 		public double phaseWaste;
 
+		@Override
 		public String toString()
 		{
 			return "[AmountBag refID=" + refID + " totalAmount=" + totalAmount + " phaseAmount=" + phaseAmount

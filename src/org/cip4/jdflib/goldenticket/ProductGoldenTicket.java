@@ -244,7 +244,8 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	/**
      * 
      */
-	protected JDFColorIntent initColorIntent(JDFNode node, int front, int back, String coatings)
+	protected JDFColorIntent initColorIntent(JDFNode node, int front, int back, 
+			@SuppressWarnings("unused") String coatings)
 	{
 		JDFColorIntent ci = (JDFColorIntent) node.addResource(ElementName.COLORINTENT, EnumUsage.Input);
 		VElement vci = new VElement();

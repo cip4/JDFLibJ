@@ -904,10 +904,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 		if (!irp.hasChildElements())
 			irp.deleteNode();
-		if (!bRet)
-		{
 
-		}
 		return bRet;
 	}
 

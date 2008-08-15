@@ -192,6 +192,7 @@ public class JDFShape extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
+	@Override
 	public void isValid() throws DataFormatException
 	{
 		if (m_numList.size() != MAX_SHAPE_DIMENSION && m_numList.size() != MAX_SHAPE_DIMENSION - 1) // Shape
@@ -218,6 +219,7 @@ public class JDFShape extends JDFNumList
 	 * 
 	 * @return boolean - true if equal otherwise false
 	 */
+	@Override
 	public boolean equals(Object other)
 	{
 		if (this == other)
@@ -242,6 +244,7 @@ public class JDFShape extends JDFNumList
 	/**
 	 * hashCode complements equals() to fulfill the equals/hashCode contract
 	 */
+	@Override
 	public int hashCode()
 	{
 		return HashUtil.hashCode(super.hashCode(), this.toString());
@@ -298,7 +301,8 @@ public class JDFShape extends JDFNumList
 	 * 
 	 * @return double - the height
 	 */
-	public double getHeight()
+	@Deprecated
+	public double getHeight() 
 	{
 		return getY();
 	}
@@ -320,6 +324,7 @@ public class JDFShape extends JDFNumList
 	 * @deprecated attention height and width were accidentally exchanged
 	 * @param height the height
 	 */
+	@Deprecated
 	public void setHeight(double height)
 	{
 		setY(height);
@@ -342,6 +347,7 @@ public class JDFShape extends JDFNumList
 	 * @return double - the width
 	 * 
 	 */
+	@Deprecated
 	public double getWidth()
 	{
 		return getX();
@@ -374,6 +380,7 @@ public class JDFShape extends JDFNumList
 	 * @deprecated attention height and width were accidentally exchanged
 	 * @param width the width
 	 */
+	@Deprecated
 	public void setWidth(double width)
 	{
 		setX(width);
@@ -385,6 +392,7 @@ public class JDFShape extends JDFNumList
 	 * @deprecated use getZ
 	 * @return double - the length
 	 */
+	@Deprecated
 	public double getLength()
 	{
 		return getZ();
@@ -406,6 +414,7 @@ public class JDFShape extends JDFNumList
 	 * @deprecated
 	 * @param length the length
 	 */
+	@Deprecated
 	public void setLength(double length)
 	{
 		setZ(length);

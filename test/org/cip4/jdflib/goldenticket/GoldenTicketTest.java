@@ -229,6 +229,7 @@ public class GoldenTicketTest extends JDFTestCaseBase
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
+	@Override
 	protected void setUp() throws Exception
 	{
 		agentName = JDFAudit.getStaticAgentName();
@@ -244,6 +245,7 @@ public class GoldenTicketTest extends JDFTestCaseBase
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
+	@Override
 	protected void tearDown() throws Exception
 	{
 		JDFAudit.setStaticAgentName(agentName);
@@ -266,7 +268,7 @@ public class GoldenTicketTest extends JDFTestCaseBase
 		try
 		{
 			MIMEDetails md = new MIMEDetails();
-			md.transferEncoding = MimeUtil.BASE64;
+			md.transferEncoding = UrlUtil.BASE64;
 			md.httpDetails.chunkSize = -1;
 			HttpURLConnection response = MimeUtil.writeToURL(mp,
 					"http://192.168.40.71:8889/jmfportal", md);

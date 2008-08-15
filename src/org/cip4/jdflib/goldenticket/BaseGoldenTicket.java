@@ -139,7 +139,7 @@ public class BaseGoldenTicket
 	protected StatusCounter theStatusCounter;
 	public static String misURL = null;
 	public static String deviceURL = null;
-	private Vector<BaseGoldenTicket> vKids = new Vector<BaseGoldenTicket>();
+	private final Vector<BaseGoldenTicket> vKids = new Vector<BaseGoldenTicket>();
 	public VJDFAttributeMap vParts = null;
 	public VString cols = new VString("Black,Cyan,Magenta,Yellow,Spot1,Spot2,Spot3,Spot4", ",");
 	public VString colsActual = new VString("Schwarz,Cyan,Magenta,Gelb,RIP 4711,RIP 4712,RIP 4713,RIP 4714", ",");
@@ -333,7 +333,7 @@ public class BaseGoldenTicket
 		}
 	}
 
-	public void setActivePart(VJDFAttributeMap vp, boolean bFirst)
+	public void setActivePart(VJDFAttributeMap vp, @SuppressWarnings("unused") boolean bFirst)
 	{
 		theStatusCounter.setActiveNode(theExpandedNode, vp, getNodeLinks());
 	}
@@ -481,7 +481,7 @@ public class BaseGoldenTicket
 	 * @param good
 	 * @param waste
 	 */
-	final protected void runSinglePhase(int good, int waste, boolean bOutAvail, boolean bFirst)
+	final protected void runSinglePhase(int good, int waste, @SuppressWarnings("unused") boolean bOutAvail, boolean bFirst)
 	{
 		VElement vResLinks = theExpandedNode.getResourceLinks(null);
 		int siz = vResLinks != null ? vResLinks.size() : 0;
@@ -499,6 +499,7 @@ public class BaseGoldenTicket
 	/**
 	 * do the last steps prior to processrun
 	 */
+	@Override
 	protected void finalize()
 	{
 		// handled by statuscounter
@@ -534,7 +535,7 @@ public class BaseGoldenTicket
 	/**
      * 
      */
-	protected JDFDevice initDevice(JDFNode previousNode)
+	protected JDFDevice initDevice(@SuppressWarnings("unused") JDFNode previousNode)
 	{
 		JDFDevice dev = (JDFDevice) theNode.getResource(ElementName.DEVICE, EnumUsage.Input, 0);
 		if (dev == null && devID != null)
@@ -637,6 +638,7 @@ public class BaseGoldenTicket
 	 * 
 	 * @see java.lang.Object#toString()
 	 */
+	@Override
 	public String toString()
 	{
 		String s = "[" + this.getClass().getName() + " Version: " + EnumUtil.getName(theVersion) + "]";

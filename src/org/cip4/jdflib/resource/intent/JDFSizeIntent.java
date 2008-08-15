@@ -20,7 +20,8 @@ import org.w3c.dom.DOMException;
  * @author prosirai
  * 
  */
-public class JDFSizeIntent extends JDFAutoSizeIntent
+@Deprecated
+public class JDFSizeIntent extends JDFAutoSizeIntent 
 {
 	private static final long serialVersionUID = 1L;
 
@@ -67,6 +68,7 @@ public class JDFSizeIntent extends JDFAutoSizeIntent
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFSizeIntent[  --> " + super.toString() + " ]";

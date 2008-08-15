@@ -114,6 +114,7 @@ public class JDFException extends RuntimeException
 	 * @param boolean bPrintStack print Stacktrace if true
 	 * @deprecated print the stack trace in the application
 	 */
+	@Deprecated
 	public JDFException(String message, boolean bPrintStack)
 	{
 		super(message);
@@ -131,6 +132,7 @@ public class JDFException extends RuntimeException
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFException[  --> " + super.toString() + " ]";

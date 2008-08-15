@@ -49,9 +49,11 @@ import org.cip4.jdflib.core.JDFConstants;
 /**
  * @deprecated
  */
-public class XMLstrm
+@Deprecated
+public class XMLstrm 
 {
 
+	@Override
 	public String toString()
 	{
 		return "XMLstrm[ ]";

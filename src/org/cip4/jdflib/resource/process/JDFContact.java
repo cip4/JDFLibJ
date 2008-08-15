@@ -227,6 +227,7 @@ public class JDFContact extends JDFAutoContact
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFContact[  --> " + super.toString() + " ]";
@@ -239,6 +240,7 @@ public class JDFContact extends JDFAutoContact
 	 *@param vKString
 	 *            value: the value to set the attribute to
 	 */
+	@Deprecated
 	public void setExtendedContactTypes(VString value)
 	{
 		setContactTypes(value);
@@ -250,7 +252,8 @@ public class JDFContact extends JDFAutoContact
 	 * @deprecated use setContactTypes
 	 * @return vKString the vaue of the attribute
 	 */
-	public VString getExtendedContactTypes()
+	@Deprecated
+	public VString getExtendedContactTypes() 
 	{
 		return getContactTypes();
 	}

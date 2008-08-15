@@ -802,7 +802,9 @@ public class JDFAuditPool extends JDFPool
 	 * @deprecated use JDFMerge.cleanUpMerge
 	 */
 	@Deprecated
-	public void cleanUpMerge(JDFNode.EnumCleanUpMerge cleanPolicy, String spawnID) throws NoSuchMethodException
+	public void cleanUpMerge(
+			@SuppressWarnings("unused") JDFNode.EnumCleanUpMerge cleanPolicy, 
+			@SuppressWarnings("unused") String spawnID) throws NoSuchMethodException
 	{
 		throw new NoSuchMethodException("use JDFMerge.cleanUpMergeAudits");
 		// JDFMerge.cleanUpMergeAudits(this, cleanPolicy, spawnID);

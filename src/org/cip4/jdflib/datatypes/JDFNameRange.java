@@ -8,7 +8,6 @@
 package org.cip4.jdflib.datatypes;
 
 import java.util.StringTokenizer;
-import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;

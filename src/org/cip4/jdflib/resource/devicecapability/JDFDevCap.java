@@ -692,7 +692,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
 	 * @return JDFEnumerationState: the existing EnumerationState
 	 * @deprecated
 	 */
-	public JDFEnumerationState getCreateEnumerationState(int iSkip)
+	@Deprecated
+	public JDFEnumerationState getCreateEnumerationState(int iSkip) 
 	{
 		return (JDFEnumerationState) getCreateElement(
 				ElementName.ENUMERATIONSTATE, null, iSkip);

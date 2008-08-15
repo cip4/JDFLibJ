@@ -144,8 +144,8 @@ public class JDFParser extends DOMParser
 	public XMLErrorHandler m_ErrorHandler = null;
 	public String m_SchemaLocation = null;
 	public String m_DocumentClass = DocumentJDFImpl.class.getName();
-	public Exception lastExcept = null;
-	public static boolean searchStream = false;
+	public Exception m_lastExcept = null;
+	public static boolean m_searchStream = false;
 
 	/**
 	 * set bKElementOnly=true if you want the output ojects all to be instatnces of KElement rather than instantiated
@@ -172,6 +172,7 @@ public class JDFParser extends DOMParser
 	 * @deprecated - use default constructor
 	 * @param strDocType
 	 */
+	@Deprecated
 	public JDFParser(String strDocType)
 	{
 		this();
@@ -188,9 +189,9 @@ public class JDFParser extends DOMParser
 		bKElementOnly = parser.bKElementOnly;
 		m_eraseEmpty = parser.m_eraseEmpty;
 		initParser(m_SchemaLocation, m_DocumentClass, (XMLErrorHandler) parser.getErrorHandler());
-		searchStream = parser.searchStream;
 	}
 
+	@Override
 	public Element createElementNode(QName element)
 	{
 		if (fCurrentNode.getLocalName() != null)
@@ -254,6 +255,7 @@ public class JDFParser extends DOMParser
 	 * @return JDFDoc or null if File not found default: parseFile(strFile,null)
 	 * @deprecated set the parser members instead
 	 */
+	@Deprecated
 	public JDFDoc parseFile(String strFile, String schemaLocation)
 	{
 		m_SchemaLocation = schemaLocation;
@@ -290,7 +292,7 @@ public class JDFParser extends DOMParser
 		InputSource inSource = new InputSource(bis);
 		JDFDoc d = parseInputSource(inSource);
 
-		if (d == null && searchStream)
+		if (d == null && m_searchStream)
 		{
 			try
 			{
@@ -316,6 +318,7 @@ public class JDFParser extends DOMParser
 	 * 
 	 * @param inSource the InputSource to parse
 	 */
+	@Override
 	public void parse(InputSource inSource)
 	{
 		parseInputSource(inSource);
@@ -354,6 +357,7 @@ public class JDFParser extends DOMParser
 	 *         default: parseInputSource(inSource, null, DocumentJDFImpl.class.getName(), null, true, true);
 	 * @deprecated set the parser members instead
 	 */
+	@Deprecated
 	public JDFDoc parseInputSource(InputSource inSource, String schemaLocation, String documentClassName, ErrorHandler errorHandler, boolean bEraseEmpty, boolean bDoNamespaces)
 	{
 		JDFDoc doc = null;
@@ -423,14 +427,15 @@ public class JDFParser extends DOMParser
 		}
 		catch (SAXNotRecognizedException e)
 		{
-			lastExcept = e;
+			m_lastExcept = e;
 		}
 		catch (SAXNotSupportedException e)
 		{
-			lastExcept = e;
+			m_lastExcept = e;
 		}
 	}
 
+	@Override
 	public void setErrorHandler(ErrorHandler handler)
 	{
 		m_ErrorHandler = handler != null && (handler instanceof XMLErrorHandler) ? (XMLErrorHandler) handler : new XMLErrorHandler();
@@ -457,12 +462,12 @@ public class JDFParser extends DOMParser
 		}
 		catch (Exception e)
 		{
-			lastExcept = e;
+			m_lastExcept = e;
 			doc = null;
 		}
 		catch (StackOverflowError e)
 		{
-			lastExcept = null;
+			m_lastExcept = null;
 			doc = null;
 		}
 
@@ -499,11 +504,11 @@ public class JDFParser extends DOMParser
 		}
 		catch (SAXNotRecognizedException e)
 		{
-			lastExcept = e;
+			m_lastExcept = e;
 		}
 		catch (SAXNotSupportedException e)
 		{
-			lastExcept = e;
+			m_lastExcept = e;
 		}
 	}
 
@@ -535,7 +540,7 @@ public class JDFParser extends DOMParser
 	public void cleanup()
 	{
 		bKElementOnly = false;
-		lastExcept = null;
+		m_lastExcept = null;
 		ignoreNSDefault = false;
 		m_eraseEmpty = true;
 		m_ErrorHandler = null;

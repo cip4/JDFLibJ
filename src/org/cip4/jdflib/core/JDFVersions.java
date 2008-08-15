@@ -108,7 +108,8 @@ public class JDFVersions
 	 * @deprecated use JDFElement.getDefaultJDFVersion()
 	 * @return String: JDF version string
 	 */
-	public static int getDefaultVersion()
+	@Deprecated
+	public static int getDefaultVersion() 
 	{
 		return JDFElement.getDefaultJDFVersion().getValue() - 1;
 	}
@@ -119,6 +120,7 @@ public class JDFVersions
 	 * @deprecated use JDFElement.setDefaultJDFVersion(v);
 	 * @return String: JDF version string
 	 */
+	@Deprecated
 	public static void setDefaultVersion(EnumVersion v)
 	{
 		JDFElement.setDefaultJDFVersion(v);
@@ -196,6 +198,7 @@ public class JDFVersions
 			validityOffset = o;
 		}
 
+		@Override
 		public String toString()
 		{
 			String s = "Version: " + version.getName();

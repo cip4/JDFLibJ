@@ -120,6 +120,7 @@ public class JDFSheet extends JDFSignature
 				null);
 	}
 
+	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		AttributeInfo ai = super.getTheAttributeInfo();
@@ -136,6 +137,7 @@ public class JDFSheet extends JDFSignature
 				0x33333333);
 	}
 
+	@Override
 	protected ElementInfo getTheElementInfo()
 	{
 		return new ElementInfo(super.getTheElementInfo(), elemInfoTable_Surface);
@@ -179,6 +181,7 @@ public class JDFSheet extends JDFSignature
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFSheet[  --> " + super.toString() + " ]";
@@ -223,6 +226,7 @@ public class JDFSheet extends JDFSignature
 	 * 
 	 * @deprecated use getSurface(EnumSide side)
 	 */
+	@Deprecated
 	public JDFSurface getFrontSurface()
 	{
 		return getSurface(EnumSide.Front);
@@ -259,6 +263,7 @@ public class JDFSheet extends JDFSignature
 	 * 
 	 * @return the name of the signature
 	 */
+	@Override
 	public String getSheetName()
 	{
 		if (getLocalName().equals(ElementName.SHEET))
@@ -314,7 +319,8 @@ public class JDFSheet extends JDFSignature
 	 * 
 	 * @deprecated use getSurface(EnumSide side)
 	 */
-	public JDFSurface getBackSurface()
+	@Deprecated
+	public JDFSurface getBackSurface() 
 	{
 		return getSurface(EnumSide.Back);
 	}
@@ -430,6 +436,7 @@ public class JDFSheet extends JDFSignature
 	 *        they are OR'ed
 	 * @deprecated use getChildElementVector() instead
 	 */
+	@Deprecated
 	public VElement getSurfaceVector(JDFAttributeMap mAttrib, boolean bAnd)
 	{
 		VElement myResource = new VElement();

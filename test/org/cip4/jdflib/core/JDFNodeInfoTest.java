@@ -136,8 +136,8 @@ public class JDFNodeInfoTest extends JDFTestCaseBase
 		assertNotNull(niPart);
 		assertTrue(niPart.hasAttribute("WorkStepID"));
 		d.write2File(sm_dirTestDataTemp + "workstepidtest.jdf", 2, false);
-		VString v = ni.getInvalidAttributes(EnumValidationLevel.Incomplete,
-				true, -1);
+//		VString v = 
+			ni.getInvalidAttributes(EnumValidationLevel.Incomplete, true, -1);
 		assertTrue(ni.isValid(EnumValidationLevel.Incomplete));
 
 	}

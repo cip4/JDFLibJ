@@ -258,6 +258,7 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 		 * @return the <code>String Vector of</code> names
 		 * @deprecated
 		 */
+		@Deprecated
 		public static Vector getNamesVector()
 		{
 			final Vector namesVector = new Vector();

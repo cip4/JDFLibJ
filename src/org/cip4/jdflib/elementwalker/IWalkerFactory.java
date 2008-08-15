@@ -73,7 +73,6 @@
 package org.cip4.jdflib.elementwalker;
 
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.validate.ICheckValidator;
 
 /**
  * @author prosirai

@@ -213,6 +213,7 @@ public final class ElementName
 	public static final String COLORPOOL = "ColorPool";
 	public static final String COLORSCONSTRAINTSPOOL = "ColorsConstraintsPool";
 	/** @deprecated */
+	@Deprecated
 	public static final String COLORSPACECONVERSION = "ColorSpaceConversion";
 	public static final String COLORSPACECONVERSIONOP = "ColorSpaceConversionOp";
 	public static final String COLORSPACECONVERSIONPARAMS = "ColorSpaceConversionParams";
@@ -223,8 +224,10 @@ public final class ElementName
 	public static final String COLORTYPE = "ColorType";
 	public static final String COMBBRAND = "CombBrand";
 	/** @deprecated use EnumType.xxx.getName() */
+	@Deprecated
 	public static final String COMBINE = "Combine";
 	/** @deprecated use EnumType.xxx.getName() */
+	@Deprecated
 	public static final String COMBINED = "Combined";
 	public static final String COMCHANNEL = "ComChannel";
 	public static final String COMMAND = "Command";
@@ -234,6 +237,7 @@ public final class ElementName
 	public static final String CONSTRAINTVALUE = "ConstraintValue";
 	public static final String CONTACT = "Contact";
 	/** @deprecated use EnumType.xxx.getName() */
+	@Deprecated
 	public static final String CONTACTCOPYING = "ContactCopying";
 	public static final String CONTACTCOPYPARAMS = "ContactCopyParams";
 	public static final String CONTAINER = "Container";
@@ -242,6 +246,7 @@ public final class ElementName
 	public static final String CONTENTOBJECT = "ContentObject";
 	public static final String CONTONECALIBRATION = "ContoneCalibration";
 	/** @deprecated */
+	@Deprecated
 	public static final String CONVENTIONALPRINTING = "ConventionalPrinting";
 	public static final String CONVENTIONALPRINTINGPARAMS = "ConventionalPrintingParams";
 	public static final String COSTCENTER = "CostCenter";
@@ -249,6 +254,7 @@ public final class ElementName
 	public static final String COVER = "Cover";
 	public static final String COVERAGE = "Coverage";
 	/** @deprecated */
+	@Deprecated
 	public static final String COVERAPPLICATION = "CoverApplication";
 	public static final String COVERAPPLICATIONPARAMS = "CoverApplicationParams";
 	public static final String COVERCOLOR = "CoverColor";
@@ -305,12 +311,14 @@ public final class ElementName
 	/**
 	 * @deprecated use EnumType.Delivery.getName();
 	 */
+	@Deprecated
 	public static final String DIGITALDELIVERY = "DigitalDelivery";
 	public static final String DIGITALDELIVERYPARAMS = "DigitalDeliveryParams";
 	public static final String DIGITALMEDIA = "DigitalMedia";
 	/**
 	 * @deprecated use EnumType.DigitalPrinting.getName();
 	 */
+	@Deprecated
 	public static final String DIGITALPRINTING = "DigitalPrinting";
 	public static final String DIGITALPRINTINGPARAMS = "DigitalPrintingParams";
 	public static final String DIMENSIONS = "Dimensions";
@@ -681,10 +689,12 @@ public final class ElementName
 	public static final String PRITEM = "PRItem";
 	public static final String PROCCURRENCE = "PROccurrence";
 	/** @deprecated use EnumType.xxx.getName() */
+	@Deprecated
 	public static final String PROCESSGROUP = "ProcessGroup";
 	public static final String PROCESSRUN = "ProcessRun";
 	public static final String PROCESSTYPE_UNKNOWN = "Unknown";
 	/** @deprecated use EnumType.xxx.getName() */
+	@Deprecated
 	public static final String PRODUCT = "Product";
 	public static final String PRODUCTIONINTENT = "ProductionIntent";
 	public static final String PRODUCTIONPATH = "ProductionPath";

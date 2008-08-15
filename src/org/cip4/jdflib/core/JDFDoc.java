@@ -90,7 +90,6 @@ import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.util.MimeUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.UrlUtil.HTTPDetails;
 import org.w3c.dom.Document;
@@ -429,11 +428,11 @@ public class JDFDoc extends XMLDoc
 	 */
 	public static String getContentType(KElement e)
 	{
-		String strContentType = MimeUtil.TEXT_XML;
+		String strContentType = UrlUtil.TEXT_XML;
 		if (e instanceof JDFNode)
-			strContentType = MimeUtil.VND_JDF;
+			strContentType = UrlUtil.VND_JDF;
 		else if (e instanceof JDFJMF)
-			strContentType = MimeUtil.VND_JMF;
+			strContentType = UrlUtil.VND_JMF;
 		return strContentType;
 	}
 

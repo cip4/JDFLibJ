@@ -97,7 +97,7 @@ public class NColorTest extends JDFTestCaseBase
 {
 	private JDFNode node;
 	private MISCPGoldenTicket bgt;
-	private HashSet<String> doneSheets = new HashSet<String>();
+	private final HashSet<String> doneSheets = new HashSet<String>();
 
 	// /////////////////////////////////////////////////////////////////
 
@@ -274,9 +274,16 @@ public class NColorTest extends JDFTestCaseBase
 	 * @param bLast
 	 *            TODO
 	 */
-	private void run2Seps(String sheet, EnumSide side, String sep1,
-			String sep2, int good, int waste, String deviceID,
-			EnumNodeStatus endStatus, boolean bLast)
+	private void run2Seps(
+			String sheet, 
+			EnumSide side, 
+			String sep1,
+			String sep2, 
+			@SuppressWarnings("unused") int good, 
+			@SuppressWarnings("unused") int waste, 
+			@SuppressWarnings("unused") String deviceID,
+			@SuppressWarnings("unused") EnumNodeStatus endStatus, 
+			boolean bLast)
 	{
 		String jmfFile = sm_dirTestDataTemp + File.separator + "NColorStatus";
 		JDFAttributeMap[] map = new JDFAttributeMap[sep1 == null ? 1 : 2];

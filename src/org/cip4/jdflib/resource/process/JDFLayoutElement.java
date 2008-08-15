@@ -129,6 +129,7 @@ public class JDFLayoutElement extends JDFAutoLayoutElement
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFLayoutElement[ --> " + super.toString() + " ]";
@@ -141,6 +142,7 @@ public class JDFLayoutElement extends JDFAutoLayoutElement
 	 *            fileName
 	 * @deprecated use setMimeURL
 	 */
+	@Deprecated
 	public void setFileName(String fileName)
 	{
 		getCreateFileSpec().setURL(fileName);
@@ -162,7 +164,8 @@ public class JDFLayoutElement extends JDFAutoLayoutElement
 	 * 
 	 * @deprecated 060907
 	 */
-	public JDFPageData getPageListPageData()
+	@Deprecated
+	public JDFPageData getPageListPageData() 
 	{
 		// TODO lena - make vector
 		return getPageList().getPageData(0);

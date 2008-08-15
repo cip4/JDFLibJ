@@ -136,6 +136,7 @@ public class JDFSignal extends JDFAutoSignal
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFSignal[  --> " + super.toString() + " ]";
@@ -148,7 +149,8 @@ public class JDFSignal extends JDFAutoSignal
 	 * @return true if successful
 	 * @deprecated use the two parameter varianz
 	 */
-	public boolean convertResponse(JDFResponse response)
+	@Deprecated
+	public boolean convertResponse(JDFResponse response) 
 	{
 		return convertResponse(response, null);
 	}

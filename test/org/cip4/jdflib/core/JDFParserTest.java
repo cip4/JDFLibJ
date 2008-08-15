@@ -162,9 +162,9 @@ public class JDFParserTest extends JDFTestCaseBase
 	 */
 	public void testSkipParse() throws Exception
 	{
-		JDFParser.searchStream = true;
+		JDFParser.m_searchStream = true;
 		String s2 = "        ------ end of header ----!\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n <JMF/>";
-		JDFParser.searchStream = false;
+		JDFParser.m_searchStream = false;
 		assertNull(new JDFParser().parseString(s2));
 	}
 
@@ -181,7 +181,7 @@ public class JDFParserTest extends JDFTestCaseBase
 		JDFNode n = d.getJDFRoot();
 		n.addResource("RunList", EnumUsage.Input);
 		s = d.write2String(2);
-		bSearch = JDFParser.searchStream;
+		bSearch = JDFParser.m_searchStream;
 	}
 
 	@Override
@@ -189,7 +189,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	{
 		// TODO Auto-generated method stub
 		super.tearDown();
-		JDFParser.searchStream = bSearch;
+		JDFParser.m_searchStream = bSearch;
 	}
 
 }

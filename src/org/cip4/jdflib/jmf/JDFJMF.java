@@ -150,6 +150,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFJMF[ --> " + super.toString() + " ]";
@@ -160,6 +161,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * 
 	 * @return boolean
 	 */
+	@Override
 	public boolean init()
 	{
 		super.init();
@@ -182,6 +184,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * 
 	 *         default - getMaxVersion(false)
 	 */
+	@Override
 	public EnumVersion getMaxVersion()
 	{
 		String version = getAttribute(AttributeName.MAXVERSION, null, null);
@@ -202,6 +205,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @param version version that the resulting element should correspond to
 	 * @return true if successful
 	 */
+	@Override
 	public boolean fixVersion(EnumVersion version)
 	{
 		if (version != null)
@@ -217,6 +221,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * 
 	 * @param enumVer the EnumVersion to set
 	 */
+	@Override
 	public void setMaxVersion(EnumVersion enumVer)
 	{
 		setAttribute(AttributeName.MAXVERSION, enumVer.getName(), null);
@@ -337,6 +342,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @return JDFMessage - the ith message
 	 * @deprecated use getMessageElement(null)
 	 */
+	@Deprecated
 	public JDFMessage getMessage(int i)
 	{
 		return getMessageElement(null, null, i);
@@ -351,6 +357,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @deprecated use getMessageElement
 	 */
 	// JDFCommand GetCommand(int i=0,bool bCreate=false);
+	@Deprecated
 	public JDFCommand getCommand()
 	{
 		return getCommand(0, false);
@@ -363,6 +370,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @return
 	 * @deprecated use getMessageElement or getCreateMessageElement
 	 */
+	@Deprecated
 	public JDFCommand getCommand(int i, boolean bCreate)
 	{
 		if (bCreate)
@@ -380,6 +388,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @deprecated use getMessageElement
 	 */
 	// JDFQuery GetQuery(int i=0,bool bCreate=false);
+	@Deprecated
 	public JDFQuery getQuery()
 	{
 		return getQuery(0, false);
@@ -392,6 +401,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @return
 	 * @deprecated use getMessageElement or getCreateMessageElement
 	 */
+	@Deprecated
 	public JDFQuery getQuery(int i, boolean bCreate)
 	{
 		if (bCreate)
@@ -407,6 +417,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @deprecated use getMessageElement
 	 */
 	// JDFResponse GetResponse(int i=0,bool bCreate=false);
+	@Deprecated
 	public JDFResponse getResponse()
 	{
 		return getResponse(0, false);
@@ -420,6 +431,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @return
 	 * @deprecated use getMessageElement or getCreateMessageElement
 	 */
+	@Deprecated
 	public JDFResponse getResponse(int i, boolean bCreate)
 	{
 		if (bCreate)
@@ -436,6 +448,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @deprecated use getMessageElement
 	 */
 	// JDFSignal GetSignal(int i=0,bool bCreate=false);
+	@Deprecated
 	public JDFSignal getSignal()
 	{
 		return getSignal(0, false);
@@ -448,6 +461,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @return
 	 * @deprecated use getMessageElement
 	 */
+	@Deprecated
 	public JDFSignal getSignal(int i, boolean bCreate)
 	{
 		if (bCreate)
@@ -485,6 +499,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @return the newly created message
 	 * @deprecated use getCreateMessageElement(family, null, i);
 	 */
+	@Deprecated
 	public JDFMessage getCreateMessageElement(JDFMessage.EnumFamily family, int i)
 	{
 		return getCreateMessageElement(family, null, i);
@@ -496,7 +511,8 @@ public class JDFJMF extends JDFAutoJMF
 	 * @param family
 	 * @return
 	 * @deprecated use appendMessageElement (family, null);
-	 */
+	 */ 
+	@Deprecated
 	public JDFMessage appendMessageElement(JDFMessage.EnumFamily family)
 	{
 		return appendMessageElement(family, null);
@@ -547,6 +563,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @return
 	 * @deprecated since 060619, use getMessageElement (JDFMessage.EnumFamily family, JDFMessage.EnumType typ, int i)
 	 */
+	@Deprecated
 	public JDFMessage getMessageElement(JDFMessage.EnumFamily family, int i)
 	{
 		return getMessageElement(family, null, i);
@@ -597,6 +614,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @return VElement all message elements
 	 * @deprecated use getMessageVector (null, null)
 	 */
+	@Deprecated
 	public VElement getMessageVector()
 	{
 		return getMessageVector(null, null);
@@ -609,6 +627,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @return VElement all message elements
 	 * @deprecated use getMessageVector (family, null)
 	 */
+	@Deprecated
 	public VElement getMessageVector(JDFMessage.EnumFamily family)
 	{
 		return getMessageVector(family, null);
@@ -674,6 +693,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @return JDFAcknowledge: the message element
 	 * @deprecated use getMessageElement
 	 */
+	@Deprecated
 	public JDFAcknowledge getAcknowledge()
 	{
 		return getAcknowledge(0, false);
@@ -686,6 +706,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @return
 	 * @deprecated use getMessageElement or appendMessageElement
 	 */
+	@Deprecated
 	public JDFAcknowledge getAcknowledge(int i, boolean bCreate)
 	{
 		if (bCreate)

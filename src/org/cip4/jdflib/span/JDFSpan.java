@@ -25,6 +25,7 @@ import org.w3c.dom.DOMException;
 /**
  * @deprecated defines the data type dependent parts of a ranged Span resource
  */
+@Deprecated
 public abstract class JDFSpan extends JDFSpanBase
 {
 	private static final long serialVersionUID = 1L;
@@ -92,6 +93,7 @@ public abstract class JDFSpan extends JDFSpanBase
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFSpan[ --> " + super.toString() + " ]";
@@ -203,7 +205,8 @@ public abstract class JDFSpan extends JDFSpanBase
 	 * @param JDFRangeList rl
 	 * @deprecated use specialized routines
 	 */
-	public void setRange(JDFRangeList rl)
+	@Deprecated
+	public void setRange(JDFRangeList rl) 
 	{
 		setAttribute("Range", rl.toString(), JDFConstants.EMPTYSTRING);
 	}

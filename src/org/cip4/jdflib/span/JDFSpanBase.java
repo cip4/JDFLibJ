@@ -103,6 +103,7 @@ public abstract class JDFSpanBase extends JDFElement
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.PRIORITY, 0x44444433, AttributeInfo.EnumAttributeType.enumeration, EnumPriority.getEnum(0), null);
 	}
 
+	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
@@ -238,6 +239,7 @@ public abstract class JDFSpanBase extends JDFElement
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFSpanBase[ --> " + super.toString() + " ]";
@@ -250,6 +252,7 @@ public abstract class JDFSpanBase extends JDFElement
 	 * 
 	 * @return String - value as a String
 	 */
+	@Deprecated
 	public final String getValue()
 	{
 		return null;
@@ -301,7 +304,8 @@ public abstract class JDFSpanBase extends JDFElement
 	 *@deprecated 060301 use getNodeName or getLocalName
 	 * @return String
 	 */
-	public String getName()
+	@Deprecated
+	public String getName() 
 	{
 		return getNodeName();
 	}
@@ -333,6 +337,7 @@ public abstract class JDFSpanBase extends JDFElement
 	 * @param version : version that the resulting element should correspond to
 	 * @return true if successful
 	 */
+	@Override
 	public boolean fixVersion(EnumVersion version)
 	{
 		boolean bRet = true;

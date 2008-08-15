@@ -144,6 +144,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoDeviceInfo#toString()
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFDeviceInfo[  --> " + super.toString() + " ]";
@@ -155,7 +156,8 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	 * @return int
 	 * @deprecated use numChildElements(ElementName.JOBPHASE,null)
 	 */
-	public int getJobCount()
+	@Deprecated
+	public int getJobCount() 
 	{
 		return getChildrenByTagName(ElementName.JOBPHASE, null, null, false, true, 0).size();
 	}

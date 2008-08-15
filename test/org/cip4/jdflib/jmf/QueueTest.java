@@ -94,7 +94,7 @@ import org.cip4.jdflib.util.StatusCounter;
  */
 public class QueueTest extends TestCase
 {
-	private JDFQueue q;
+	JDFQueue q;
 	protected static int iThread = 0;
 
 	protected class QueueTestThread implements Runnable

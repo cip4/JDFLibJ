@@ -835,7 +835,8 @@ public class StatusCounter
 		}
 	}
 
-	private JDFResponse closeJobPhase(JDFJMF jmf, final LinkAmount la, JDFPhaseTime pt1, JDFPhaseTime pt2)
+	private JDFResponse closeJobPhase(JDFJMF jmf, final LinkAmount la, JDFPhaseTime pt1, 
+			@SuppressWarnings("unused") JDFPhaseTime pt2)
 	{
 		JDFResponse respStatus = (JDFResponse) jmf.appendMessageElement(JDFMessage.EnumFamily.Response, JDFMessage.EnumType.Status);
 		JDFDeviceInfo deviceInfo = respStatus.appendDeviceInfo();
@@ -1550,7 +1551,7 @@ public class StatusCounter
 	/**
 	 *
 	 */
-	public JDFProcessRun setProcessResult(EnumNodeStatus endStatus)
+	public JDFProcessRun setProcessResult(@SuppressWarnings("unused") EnumNodeStatus endStatus)
 	{
 		setPhase(EnumNodeStatus.Completed, null, EnumDeviceStatus.Idle, null);
 		JDFAuditPool ap = m_Node.getCreateAuditPool();

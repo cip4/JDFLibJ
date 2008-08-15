@@ -3187,7 +3187,8 @@ public class JDFResource extends JDFElement
 	 * @param previousMergeIDs vector of already merged spawnIDs that may still be in a partition
 	 * @deprecated use JDFMerge.mergeSpawnIDS
 	 */
-	public void mergeSpawnIDs(JDFResource resToMerge, VString previousMergeIDs)
+	@Deprecated
+	public void mergeSpawnIDs(JDFResource resToMerge, VString previousMergeIDs) 
 	{
 		if (!getID().equals(resToMerge.getID()))
 		{

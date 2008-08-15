@@ -189,7 +189,8 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	 * @return String
 	 * @deprecated 060418 - use toString
 	 */
-	public String getString()
+	@Deprecated
+	public String getString() 
 	{
 		return toString();
 	}
@@ -199,6 +200,7 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	 * 
 	 * @return String - the JDFNumList as a String
 	 */
+	@Override
 	public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
@@ -254,6 +256,7 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	 * 
 	 * @return boolean - true if equal otherwise false
 	 */
+	@Override
 	public boolean equals(Object other)
 	{
 		if (this == other)
@@ -290,6 +293,7 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	/**
 	 * hashCode complements equals() to fulfill the equals/hashCode contract
 	 */
+	@Override
 	public int hashCode()
 	{
 		return HashUtil.hashCode(0, this.m_numList);
@@ -354,6 +358,7 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	 * @return Object - the clone
 	 * @throws CloneNotSupportedException
 	 */
+	@Override
 	public Object clone() throws CloneNotSupportedException
 	{
 		JDFNumList num = (JDFNumList) super.clone();

@@ -512,7 +512,8 @@ public class XMLDocTest extends JDFTestCaseBase
 		s = bos.toString();
 		assertTrue(s.indexOf(text) > 0);
 		JDFParser p = new JDFParser();
-		JDFDoc dd = p.parseStream(bos.getInputStream());
+//		JDFDoc dd = 
+			p.parseStream(bos.getInputStream());
 		bos = new ByteArrayIOStream();
 		d.write2Stream(bos, 2, false);
 		s = bos.toString();

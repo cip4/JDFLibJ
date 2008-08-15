@@ -137,6 +137,7 @@ public class JDFColorPool extends JDFAutoColorPool
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFColorPool[  --> " + super.toString() + " ]";
@@ -164,6 +165,7 @@ public class JDFColorPool extends JDFAutoColorPool
 	 *            level validation level
 	 * @return boolean true if this is valid
 	 */
+	@Override
 	public boolean isValid(EnumValidationLevel level)
 	{
 		boolean bValid = super.isValid(level);
@@ -183,7 +185,8 @@ public class JDFColorPool extends JDFAutoColorPool
 	 * 
 	 * @deprecated use getDuplicateColors()==null
 	 */
-	public boolean hasDuplicateColors()
+	@Deprecated
+	public boolean hasDuplicateColors() 
 	{
 		return getDuplicateColors() != null;
 	}

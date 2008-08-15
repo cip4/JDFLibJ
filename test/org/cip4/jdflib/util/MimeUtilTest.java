@@ -117,15 +117,15 @@ public class MimeUtilTest extends JDFTestCaseBase
 
 	public void testGetMimeTypeFromExt() throws Exception
 	{
-		assertEquals(MimeUtil.TEXT_UNKNOWN, MimeUtil
+		assertEquals(UrlUtil.TEXT_UNKNOWN, MimeUtil
 				.getMimeTypeFromExt("www.foobar.com"));
-		assertEquals(MimeUtil.VND_JDF, MimeUtil.getMimeTypeFromExt(".JDF"));
-		assertEquals(MimeUtil.VND_JDF, MimeUtil.getMimeTypeFromExt(".jdf"));
-		assertEquals(MimeUtil.VND_JDF, MimeUtil
+		assertEquals(UrlUtil.VND_JDF, MimeUtil.getMimeTypeFromExt(".JDF"));
+		assertEquals(UrlUtil.VND_JDF, MimeUtil.getMimeTypeFromExt(".jdf"));
+		assertEquals(UrlUtil.VND_JDF, MimeUtil
 				.getMimeTypeFromExt("http://fobar.con/snarf.jdf"));
-		assertEquals(MimeUtil.VND_JMF, MimeUtil
+		assertEquals(UrlUtil.VND_JMF, MimeUtil
 				.getMimeTypeFromExt("http://fobar.con/snarf.JMF"));
-		assertEquals(MimeUtil.TEXT_XML, MimeUtil
+		assertEquals(UrlUtil.TEXT_XML, MimeUtil
 				.getMimeTypeFromExt("http://fobar.con/snarf.xml"));
 	}
 
@@ -331,7 +331,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 		Multipart multiparsed = MimeUtil.getMultiPart(mimeFile + "0.mjm");
 		BodyPart bp = multiparsed.getBodyPart(0);
 		assertTrue("cid >cid_",
-				bp.getHeader(MimeUtil.CONTENT_ID)[0].length() > 5);
+				bp.getHeader(UrlUtil.CONTENT_ID)[0].length() > 5);
 
 		JDFDoc jDoc1 = new JDFDoc("JDF");
 		jDoc1.setOriginalFileName("jdf1.jdf");
@@ -342,7 +342,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 		multiparsed = MimeUtil.getMultiPart(mimeFile + "1.mjm");
 		bp = multiparsed.getBodyPart(0);
 		assertTrue("cid >cid_",
-				bp.getHeader(MimeUtil.CONTENT_ID)[0].length() > 5);
+				bp.getHeader(UrlUtil.CONTENT_ID)[0].length() > 5);
 
 		JDFDoc jDoc2 = new JDFDoc("JDF");
 		jDoc2.setOriginalFileName("jdf1.jdf");

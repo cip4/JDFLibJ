@@ -691,7 +691,8 @@ public class MimeUtil extends UrlUtil
 	/**
 	 * @deprecated use 3 parameter version
 	 */
-	static public Multipart buildMimePackage(JDFDoc docJMF, JDFDoc docJDF)
+	@Deprecated
+	static public Multipart buildMimePackage(JDFDoc docJMF, JDFDoc docJDF) 
 	{
 		return buildMimePackage(docJMF, docJDF, true);
 	}
@@ -1145,6 +1146,7 @@ public class MimeUtil extends UrlUtil
 	 * @param fileName
 	 * @return
 	 */
+	@Deprecated
 	public static File writeToFile(Multipart m, String fileName)
 	{
 		return writeToFile(m, fileName, null);
@@ -1189,6 +1191,7 @@ public class MimeUtil extends UrlUtil
 	 * @throws IOException
 	 * @throws MessagingException
 	 */
+	@Deprecated
 	public static void writeToStream(Multipart m, OutputStream outStream) throws IOException, MessagingException
 	{
 		writeToStream(m, outStream, null);

@@ -327,7 +327,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable
 	 * @deprecated call JDFQueue.sortChildren()
 	 */
 	@Deprecated
-	public void sortQueue(int oldVal)
+	public void sortQueue(@SuppressWarnings("unused") int oldVal)
 	{
 		final JDFQueue queue = (JDFQueue) getParentNode_KElement();
 		queue.sortChildren();

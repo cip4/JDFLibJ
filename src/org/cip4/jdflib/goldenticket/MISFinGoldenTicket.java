@@ -128,7 +128,8 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 	 * @param misLevel level of MIS ICS to support
 	 * @param isGrayBox if true, write a grayBox
 	 */
-	public MISFinGoldenTicket(int _icsLevel, EnumVersion jdfVersion, int _jmfLevel, int _misLevel, boolean isGrayBox, VJDFAttributeMap vPartMap)
+	public MISFinGoldenTicket(int _icsLevel, EnumVersion jdfVersion, int _jmfLevel, int _misLevel, 
+			@SuppressWarnings("unused") boolean isGrayBox, VJDFAttributeMap vPartMap)
 	{
 		super(_misLevel, jdfVersion, _jmfLevel);
 

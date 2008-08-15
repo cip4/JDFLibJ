@@ -83,6 +83,7 @@ public class JDFValue extends JDFElement // ignore JDFAutoValue
 		atrInfoTable_stringEval[0] = new AtrInfoTable(AttributeName.VALUE, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
+	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		AttributeInfo ai = super.getTheAttributeInfo();
@@ -128,6 +129,7 @@ public class JDFValue extends JDFElement // ignore JDFAutoValue
 		elemInfoTable[0] = new ElemInfoTable(ElementName.LOC, 0x33333311);
 	}
 
+	@Override
 	protected ElementInfo getTheElementInfo()
 	{
 		ElementInfo ei = super.getTheElementInfo();
@@ -176,6 +178,7 @@ public class JDFValue extends JDFElement // ignore JDFAutoValue
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFValue[  --> " + super.toString() + " ]";
@@ -186,6 +189,7 @@ public class JDFValue extends JDFElement // ignore JDFAutoValue
 	 * @param enumName
 	 * @return
 	 */
+	@Deprecated
 	public static EnumValueUsage stringToValueUsage(String enumName)
 	{
 		return EnumValueUsage.getEnum(enumName);
@@ -309,6 +313,7 @@ public class JDFValue extends JDFElement // ignore JDFAutoValue
 	 * @param boolean bAnd if true all attributes in the map are AND'ed, else they are OR'ed
 	 * @deprecated use getChildElementVector() instead
 	 */
+	@Deprecated
 	public VElement getLocVector(JDFAttributeMap mAttrib, boolean bAnd)
 	{
 		VElement myResource = new VElement();
@@ -325,7 +330,8 @@ public class JDFValue extends JDFElement // ignore JDFAutoValue
 	/**
 	 * @deprecated use getChildElementVector() instead
 	 */
-	public VElement getLocVector()
+	@Deprecated
+	public VElement getLocVector() 
 	{
 		return getLocVector(new JDFAttributeMap(), true);
 	}
