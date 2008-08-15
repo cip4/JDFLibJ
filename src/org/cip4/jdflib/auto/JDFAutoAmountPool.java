@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -77,12 +80,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.pool.JDFPool;
-    /*
-    *****************************************************************************
-    class JDFAutoAmountPool : public JDFPool
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoAmountPool extends JDFPool
 {
@@ -174,6 +171,27 @@ public abstract class JDFAutoAmountPool extends JDFPool
     public JDFPartAmount getPartAmount(int iSkip)
     {
         return (JDFPartAmount) getElement(ElementName.PARTAMOUNT, null, iSkip);
+    }
+
+    /**
+     * Get all PartAmount from the current element
+     * 
+     * @return Collection<JDFPartAmount>
+     */
+    public Collection<JDFPartAmount> getAllPartAmount()
+    {
+        Vector<JDFPartAmount> v = new Vector<JDFPartAmount>();
+
+        JDFPartAmount kElem = (JDFPartAmount) getFirstChildElement(ElementName.PARTAMOUNT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFPartAmount) kElem.getNextSiblingElement(ElementName.PARTAMOUNT, null);
+        }
+
+        return v;
     }
 
     /**

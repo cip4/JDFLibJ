@@ -79,12 +79,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.span.JDFOptionSpan;
 import org.cip4.jdflib.span.JDFSpanGlue;
 import org.cip4.jdflib.span.JDFSpanScoring;
-    /*
-    *****************************************************************************
-    class JDFAutoAdhesiveBinding : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoAdhesiveBinding extends JDFElement
 {

@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -83,12 +86,6 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFSpinePreparationParams;
 import org.cip4.jdflib.resource.JDFSpineTapingParams;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueApplication;
-    /*
-    *****************************************************************************
-    class JDFAutoAdhesiveBindingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 {
@@ -261,6 +258,27 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
     }
 
     /**
+     * Get all SpinePreparationParams from the current element
+     * 
+     * @return Collection<JDFSpinePreparationParams>
+     */
+    public Collection<JDFSpinePreparationParams> getAllSpinePreparationParams()
+    {
+        Vector<JDFSpinePreparationParams> v = new Vector<JDFSpinePreparationParams>();
+
+        JDFSpinePreparationParams kElem = (JDFSpinePreparationParams) getFirstChildElement(ElementName.SPINEPREPARATIONPARAMS, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFSpinePreparationParams) kElem.getNextSiblingElement(ElementName.SPINEPREPARATIONPARAMS, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element SpinePreparationParams
      */
     public JDFSpinePreparationParams appendSpinePreparationParams() throws JDFException
@@ -286,6 +304,27 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
     public JDFGlueApplication getGlueApplication(int iSkip)
     {
         return (JDFGlueApplication) getElement(ElementName.GLUEAPPLICATION, null, iSkip);
+    }
+
+    /**
+     * Get all GlueApplication from the current element
+     * 
+     * @return Collection<JDFGlueApplication>
+     */
+    public Collection<JDFGlueApplication> getAllGlueApplication()
+    {
+        Vector<JDFGlueApplication> v = new Vector<JDFGlueApplication>();
+
+        JDFGlueApplication kElem = (JDFGlueApplication) getFirstChildElement(ElementName.GLUEAPPLICATION, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFGlueApplication) kElem.getNextSiblingElement(ElementName.GLUEAPPLICATION, null);
+        }
+
+        return v;
     }
 
     /**
@@ -317,6 +356,27 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
     }
 
     /**
+     * Get all SpineTapingParams from the current element
+     * 
+     * @return Collection<JDFSpineTapingParams>
+     */
+    public Collection<JDFSpineTapingParams> getAllSpineTapingParams()
+    {
+        Vector<JDFSpineTapingParams> v = new Vector<JDFSpineTapingParams>();
+
+        JDFSpineTapingParams kElem = (JDFSpineTapingParams) getFirstChildElement(ElementName.SPINETAPINGPARAMS, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFSpineTapingParams) kElem.getNextSiblingElement(ElementName.SPINETAPINGPARAMS, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element SpineTapingParams
      */
     public JDFSpineTapingParams appendSpineTapingParams() throws JDFException
@@ -342,6 +402,27 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
     public JDFCoverApplicationParams getCoverApplicationParams(int iSkip)
     {
         return (JDFCoverApplicationParams) getElement(ElementName.COVERAPPLICATIONPARAMS, null, iSkip);
+    }
+
+    /**
+     * Get all CoverApplicationParams from the current element
+     * 
+     * @return Collection<JDFCoverApplicationParams>
+     */
+    public Collection<JDFCoverApplicationParams> getAllCoverApplicationParams()
+    {
+        Vector<JDFCoverApplicationParams> v = new Vector<JDFCoverApplicationParams>();
+
+        JDFCoverApplicationParams kElem = (JDFCoverApplicationParams) getFirstChildElement(ElementName.COVERAPPLICATIONPARAMS, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFCoverApplicationParams) kElem.getNextSiblingElement(ElementName.COVERAPPLICATIONPARAMS, null);
+        }
+
+        return v;
     }
 
     /**

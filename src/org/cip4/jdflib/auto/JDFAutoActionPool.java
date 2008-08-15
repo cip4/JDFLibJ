@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -77,12 +80,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.devicecapability.JDFAction;
-    /*
-    *****************************************************************************
-    class JDFAutoActionPool : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoActionPool extends JDFElement
 {
@@ -174,6 +171,27 @@ public abstract class JDFAutoActionPool extends JDFElement
     public JDFAction getAction(int iSkip)
     {
         return (JDFAction) getElement(ElementName.ACTION, null, iSkip);
+    }
+
+    /**
+     * Get all Action from the current element
+     * 
+     * @return Collection<JDFAction>
+     */
+    public Collection<JDFAction> getAllAction()
+    {
+        Vector<JDFAction> v = new Vector<JDFAction>();
+
+        JDFAction kElem = (JDFAction) getFirstChildElement(ElementName.ACTION, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFAction) kElem.getNextSiblingElement(ElementName.ACTION, null);
+        }
+
+        return v;
     }
 
     /**

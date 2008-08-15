@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -87,12 +89,6 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.devicecapability.JDFLoc;
 import org.cip4.jdflib.resource.process.JDFPreflightAction;
-    /*
-    *****************************************************************************
-    class JDFAutoAction : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoAction extends JDFElement
 {
@@ -318,6 +314,27 @@ public abstract class JDFAutoAction extends JDFElement
     }
 
     /**
+     * Get all Loc from the current element
+     * 
+     * @return Collection<JDFLoc>
+     */
+    public Collection<JDFLoc> getAllLoc()
+    {
+        Vector<JDFLoc> v = new Vector<JDFLoc>();
+
+        JDFLoc kElem = (JDFLoc) getFirstChildElement(ElementName.LOC, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFLoc) kElem.getNextSiblingElement(ElementName.LOC, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element Loc
      */
     public JDFLoc appendLoc() throws JDFException
@@ -343,6 +360,27 @@ public abstract class JDFAutoAction extends JDFElement
     public JDFPreflightAction getPreflightAction(int iSkip)
     {
         return (JDFPreflightAction) getElement(ElementName.PREFLIGHTACTION, null, iSkip);
+    }
+
+    /**
+     * Get all PreflightAction from the current element
+     * 
+     * @return Collection<JDFPreflightAction>
+     */
+    public Collection<JDFPreflightAction> getAllPreflightAction()
+    {
+        Vector<JDFPreflightAction> v = new Vector<JDFPreflightAction>();
+
+        JDFPreflightAction kElem = (JDFPreflightAction) getFirstChildElement(ElementName.PREFLIGHTACTION, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFPreflightAction) kElem.getNextSiblingElement(ElementName.PREFLIGHTACTION, null);
+        }
+
+        return v;
     }
 
     /**
