@@ -187,8 +187,9 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
           */
         public void setEnd(JDFDate value)
         {
-            if (value == null) value = new JDFDate();
-            setAttribute(AttributeName.END, value.getDateTimeISO(), null);
+            JDFDate date = value;
+            if (date == null) date = new JDFDate();
+            setAttribute(AttributeName.END, date.getDateTimeISO(), null);
         }
 
         /**
@@ -268,8 +269,9 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
           */
         public void setStart(JDFDate value)
         {
-            if (value == null) value = new JDFDate();
-            setAttribute(AttributeName.START, value.getDateTimeISO(), null);
+            JDFDate date = value;
+            if (date == null) date = new JDFDate();
+            setAttribute(AttributeName.START, date.getDateTimeISO(), null);
         }
 
         /**

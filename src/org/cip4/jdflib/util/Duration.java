@@ -81,6 +81,7 @@ package org.cip4.jdflib.util;
  * @author prosirai
  * 
  */
+@Deprecated
 public interface Duration
 {
 

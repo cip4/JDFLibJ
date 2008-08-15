@@ -492,8 +492,9 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
           */
         public void setPowerOnTime(JDFDate value)
         {
-            if (value == null) value = new JDFDate();
-            setAttribute(AttributeName.POWERONTIME, value.getDateTimeISO(), null);
+            JDFDate date = value;
+            if (date == null) date = new JDFDate();
+            setAttribute(AttributeName.POWERONTIME, date.getDateTimeISO(), null);
         }
 
         /**

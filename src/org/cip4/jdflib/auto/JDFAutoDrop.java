@@ -245,8 +245,9 @@ public abstract class JDFAutoDrop extends JDFElement
           */
         public void setEarliest(JDFDate value)
         {
-            if (value == null) value = new JDFDate();
-            setAttribute(AttributeName.EARLIEST, value.getDateTimeISO(), null);
+            JDFDate date = value;
+            if (date == null) date = new JDFDate();
+            setAttribute(AttributeName.EARLIEST, date.getDateTimeISO(), null);
         }
 
         /**
@@ -326,8 +327,9 @@ public abstract class JDFAutoDrop extends JDFElement
           */
         public void setRequired(JDFDate value)
         {
-            if (value == null) value = new JDFDate();
-            setAttribute(AttributeName.REQUIRED, value.getDateTimeISO(), null);
+            JDFDate date = value;
+            if (date == null) date = new JDFDate();
+            setAttribute(AttributeName.REQUIRED, date.getDateTimeISO(), null);
         }
 
         /**

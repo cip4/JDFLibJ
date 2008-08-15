@@ -342,8 +342,9 @@ public abstract class JDFAutoQueueFilter extends JDFElement
           */
         public void setOlderThan(JDFDate value)
         {
-            if (value == null) value = new JDFDate();
-            setAttribute(AttributeName.OLDERTHAN, value.getDateTimeISO(), null);
+            JDFDate date = value;
+            if (date == null) date = new JDFDate();
+            setAttribute(AttributeName.OLDERTHAN, date.getDateTimeISO(), null);
         }
 
         /**
@@ -379,8 +380,9 @@ public abstract class JDFAutoQueueFilter extends JDFElement
           */
         public void setNewerThan(JDFDate value)
         {
-            if (value == null) value = new JDFDate();
-            setAttribute(AttributeName.NEWERTHAN, value.getDateTimeISO(), null);
+            JDFDate date = value;
+            if (date == null) date = new JDFDate();
+            setAttribute(AttributeName.NEWERTHAN, date.getDateTimeISO(), null);
         }
 
         /**

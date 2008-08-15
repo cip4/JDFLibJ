@@ -460,8 +460,9 @@ public abstract class JDFAutoJobPhase extends JDFElement
           */
         public void setPhaseStartTime(JDFDate value)
         {
-            if (value == null) value = new JDFDate();
-            setAttribute(AttributeName.PHASESTARTTIME, value.getDateTimeISO(), null);
+            JDFDate date = value;
+            if (date == null) date = new JDFDate();
+            setAttribute(AttributeName.PHASESTARTTIME, date.getDateTimeISO(), null);
         }
 
         /**
@@ -597,8 +598,9 @@ public abstract class JDFAutoJobPhase extends JDFElement
           */
         public void setStartTime(JDFDate value)
         {
-            if (value == null) value = new JDFDate();
-            setAttribute(AttributeName.STARTTIME, value.getDateTimeISO(), null);
+            JDFDate date = value;
+            if (date == null) date = new JDFDate();
+            setAttribute(AttributeName.STARTTIME, date.getDateTimeISO(), null);
         }
 
         /**

@@ -274,8 +274,9 @@ public abstract class JDFAutoQueueEntry extends JDFElement
           */
         public void setEndTime(JDFDate value)
         {
-            if (value == null) value = new JDFDate();
-            setAttribute(AttributeName.ENDTIME, value.getDateTimeISO(), null);
+            JDFDate date = value;
+            if (date == null) date = new JDFDate();
+            setAttribute(AttributeName.ENDTIME, date.getDateTimeISO(), null);
         }
 
         /**
@@ -443,8 +444,9 @@ public abstract class JDFAutoQueueEntry extends JDFElement
           */
         public void setStartTime(JDFDate value)
         {
-            if (value == null) value = new JDFDate();
-            setAttribute(AttributeName.STARTTIME, value.getDateTimeISO(), null);
+            JDFDate date = value;
+            if (date == null) date = new JDFDate();
+            setAttribute(AttributeName.STARTTIME, date.getDateTimeISO(), null);
         }
 
         /**
@@ -480,8 +482,9 @@ public abstract class JDFAutoQueueEntry extends JDFElement
           */
         public void setSubmissionTime(JDFDate value)
         {
-            if (value == null) value = new JDFDate();
-            setAttribute(AttributeName.SUBMISSIONTIME, value.getDateTimeISO(), null);
+            JDFDate date = value;
+            if (date == null) date = new JDFDate();
+            setAttribute(AttributeName.SUBMISSIONTIME, date.getDateTimeISO(), null);
         }
 
         /**

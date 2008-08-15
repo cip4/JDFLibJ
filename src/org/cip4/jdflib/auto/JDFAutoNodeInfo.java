@@ -306,8 +306,9 @@ public abstract class JDFAutoNodeInfo extends JDFResource
           */
         public void setEnd(JDFDate value)
         {
-            if (value == null) value = new JDFDate();
-            setAttribute(AttributeName.END, value.getDateTimeISO(), null);
+            JDFDate date = value;
+            if (date == null) date = new JDFDate();
+            setAttribute(AttributeName.END, date.getDateTimeISO(), null);
         }
 
         /**
@@ -343,8 +344,9 @@ public abstract class JDFAutoNodeInfo extends JDFResource
           */
         public void setFirstEnd(JDFDate value)
         {
-            if (value == null) value = new JDFDate();
-            setAttribute(AttributeName.FIRSTEND, value.getDateTimeISO(), null);
+            JDFDate date = value;
+            if (date == null) date = new JDFDate();
+            setAttribute(AttributeName.FIRSTEND, date.getDateTimeISO(), null);
         }
 
         /**
@@ -380,8 +382,9 @@ public abstract class JDFAutoNodeInfo extends JDFResource
           */
         public void setFirstStart(JDFDate value)
         {
-            if (value == null) value = new JDFDate();
-            setAttribute(AttributeName.FIRSTSTART, value.getDateTimeISO(), null);
+            JDFDate date = value;
+            if (date == null) date = new JDFDate();
+            setAttribute(AttributeName.FIRSTSTART, date.getDateTimeISO(), null);
         }
 
         /**
@@ -451,8 +454,9 @@ public abstract class JDFAutoNodeInfo extends JDFResource
           */
         public void setLastEnd(JDFDate value)
         {
-            if (value == null) value = new JDFDate();
-            setAttribute(AttributeName.LASTEND, value.getDateTimeISO(), null);
+            JDFDate date = value;
+            if (date == null) date = new JDFDate();
+            setAttribute(AttributeName.LASTEND, date.getDateTimeISO(), null);
         }
 
         /**
@@ -488,8 +492,9 @@ public abstract class JDFAutoNodeInfo extends JDFResource
           */
         public void setLastStart(JDFDate value)
         {
-            if (value == null) value = new JDFDate();
-            setAttribute(AttributeName.LASTSTART, value.getDateTimeISO(), null);
+            JDFDate date = value;
+            if (date == null) date = new JDFDate();
+            setAttribute(AttributeName.LASTSTART, date.getDateTimeISO(), null);
         }
 
         /**
@@ -669,8 +674,9 @@ public abstract class JDFAutoNodeInfo extends JDFResource
           */
         public void setStart(JDFDate value)
         {
-            if (value == null) value = new JDFDate();
-            setAttribute(AttributeName.START, value.getDateTimeISO(), null);
+            JDFDate date = value;
+            if (date == null) date = new JDFDate();
+            setAttribute(AttributeName.START, date.getDateTimeISO(), null);
         }
 
         /**

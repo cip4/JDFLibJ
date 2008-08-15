@@ -314,8 +314,9 @@ public abstract class JDFAutoJMF extends JDFPool
           */
         public void setTimeStamp(JDFDate value)
         {
-            if (value == null) value = new JDFDate();
-            setAttribute(AttributeName.TIMESTAMP, value.getDateTimeISO(), null);
+            JDFDate date = value;
+            if (date == null) date = new JDFDate();
+            setAttribute(AttributeName.TIMESTAMP, date.getDateTimeISO(), null);
         }
 
         /**

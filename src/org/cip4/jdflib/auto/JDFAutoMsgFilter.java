@@ -246,8 +246,9 @@ public abstract class JDFAutoMsgFilter extends JDFElement
           */
         public void setAfter(JDFDate value)
         {
-            if (value == null) value = new JDFDate();
-            setAttribute(AttributeName.AFTER, value.getDateTimeISO(), null);
+            JDFDate date = value;
+            if (date == null) date = new JDFDate();
+            setAttribute(AttributeName.AFTER, date.getDateTimeISO(), null);
         }
 
         /**
@@ -283,8 +284,9 @@ public abstract class JDFAutoMsgFilter extends JDFElement
           */
         public void setBefore(JDFDate value)
         {
-            if (value == null) value = new JDFDate();
-            setAttribute(AttributeName.BEFORE, value.getDateTimeISO(), null);
+            JDFDate date = value;
+            if (date == null) date = new JDFDate();
+            setAttribute(AttributeName.BEFORE, date.getDateTimeISO(), null);
         }
 
         /**
